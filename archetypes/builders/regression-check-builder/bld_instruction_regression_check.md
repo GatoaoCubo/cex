@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for regression_check
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.0
+title: "Instruction Regression Check"
+version: "1.0.0"
+author: n03_builder
+tags: [regression_check, builder, examples]
+tldr: "Golden and anti-examples for regression check construction, demonstrating ideal structure and common pitfalls."
+domain: "regression check construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a regression_check
@@ -13,7 +23,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. Determine the baseline_ref: find the experiment ID, version tag, or named snapshot to compare against — confirm it is resolvable in the target tool
 3. Select metrics to compare: enumerate all dimensions that matter (accuracy, latency_p95, cost_per_call, hallucination_rate, pass_rate, etc.)
 4. Determine threshold per metric: consult historical variance data; start at 5% relative deviation if no prior data
-5. Select the comparison tool: Braintrust, Promptfoo, LangSmith, DeepEval, or custom framework
+5. Select the comparison tool: Braintrust, Promptfoo, LangSmith, DeepEval, or costm framework
 6. Define fail_action: block (gate deployment), warn (notify but allow), or log (record only)
 7. Define cadence: on_pr, on_deploy, daily, on_demand — align with deployment frequency
 8. Check for existing regression_check artifacts to avoid duplicates or conflicts with same baseline_ref

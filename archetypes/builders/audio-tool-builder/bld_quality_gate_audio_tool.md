@@ -8,7 +8,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "audio processing tool — STT, TTS, and audio analysis with declared direction, models, formats, and language coverage"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, audio-tool, P04, speech, stt, tts, direction, formats, languages]
 tldr: "Pass/fail gate for audio_tool artifacts: direction declaration, model validity, format enum compliance, BCP-47 language codes, streaming declaration."
 density_score: 0.91
@@ -45,7 +45,7 @@ Weights sum to 100%.
 | Format compatibility | 1.0 | ## Formats section shows input/output matrix; formats match frontmatter list |
 | Language coverage | 1.0 | ## Languages section lists BCP-47 codes with quality tier per model |
 | Streaming declaration | 0.5 | streaming: true/false declared; if true, streaming protocol described |
-| Sample rate specificity | 0.5 | sample_rate declared with Hz value appropriate to direction |
+| Sample rate specificity | 0.5 | sample_rate declared with Hz value apownte to direction |
 | Max duration declared | 0.5 | max_duration (seconds) declared; affects caller integration |
 | Word timestamps (STT) | 0.5 | word_timestamps declared for direction: input tools |
 | Voice identity (TTS) | 0.5 | voice_id declared for direction: output tools |

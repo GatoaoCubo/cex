@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for hook
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Hook"
+version: "1.0.0"
+author: n03_builder
+tags: [hook, builder, examples]
+tldr: "Golden and anti-examples for hook construction, demonstrating ideal structure and common pitfalls."
+domain: "hook construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: hook
@@ -18,7 +28,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
-| trigger_event | enum [pre_tool_use, post_tool_use, session_start, session_end, user_prompt_submit, stop, subagent_stop, pre_compact, permission_request, notification, custom] | YES | - | Which event fires this hook |
+| trigger_event | enum [pre_tool_use, post_tool_use, session_start, session_end, user_prompt_submit, stop, subagent_stop, pre_compact, permission_request, notification, costm] | YES | - | Which event fires this hook |
 | script_path | string | YES | - | Path to executable script |
 | execution | enum [pre, post, both] | YES | - | When hook runs relative to event |
 | blocking | boolean | YES | - | Whether hook blocks event processing |

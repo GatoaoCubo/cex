@@ -4,6 +4,16 @@ id: bld_architecture_vision_tool
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of vision_tool — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Vision Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [vision_tool, builder, examples]
+tldr: "Golden and anti-examples for vision tool construction, demonstrating ideal structure and common pitfalls."
+domain: "vision tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -48,7 +58,7 @@ parser              --consumes-->   output_format
 | Processes static visual payload (base64, url, file) | A screen controller that moves cursor or clicks (computer_use) |
 | Calls a vision API or local OCR engine | A document loader that ingests files without visual analysis |
 | Returns json, text, or table from image content | A web search tool that finds images (search_tool) |
-| Spec-only: no implementation code | A streaming video processor (different artifact kind) |
+| Spec-only: no implementation code | A streaming video processr (different artifact kind) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|-----------|---------|

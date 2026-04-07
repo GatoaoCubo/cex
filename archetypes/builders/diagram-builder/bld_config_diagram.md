@@ -14,15 +14,24 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Diagram"
+author: n03_builder
+tags: [diagram, builder, examples]
+tldr: "Golden and anti-examples for diagram construction, demonstrating ideal structure and common pitfalls."
+domain: "diagram construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # diagram-builder — CONFIG
 ## Naming Conventions
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Artifact files | `p08_diag_{scope_slug}.md` | `p08_diag_agent_node_orchestration.md` |
+| Artifact files | `p08_diag_{scope_slug}.md` | `p08_diag_agent_group_orchestration.md` |
 | Builder directory | kebab-case | `diagram-builder/` |
 | Frontmatter fields | snake_case | `zoom_level`, `notation` |
-| Scope slug | lowercase + underscores only | `agent_node_orchestration` |
+| Scope slug | lowercase + underscores only | `agent_group_orchestration` |
 | Tags | lowercase, no spaces | `[diagram, orchestration, ascii]` |
 ## File Paths
 | Purpose | Path |

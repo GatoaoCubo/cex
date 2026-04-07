@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-cex_auto.py — Autonomous CEX Flywheel
+cex_auto.py -- Autonomous CEX Flywheel
 
-The self-driving loop: diagnose → plan → execute → validate → learn → repeat.
+The self-driving loop: diagnose -> plan -> execute -> validate -> learn -> repeat.
 
 Modes:
-  scan     — Diagnose system, find gaps, suggest actions (read-only)
-  plan     — Generate an execution plan from gaps
-  execute  — Run the plan (build artifacts, fix issues)
-  cycle    — Full loop: scan → plan → execute → validate (autonomous)
+  scan     -- Diagnose system, find gaps, suggest actions (read-only)
+  plan     -- Generate an execution plan from gaps
+  execute  -- Run the plan (build artifacts, fix issues)
+  cycle    -- Full loop: scan -> plan -> execute -> validate (autonomous)
 
 Usage:
   python _tools/cex_auto.py scan              # what needs work?
@@ -35,7 +36,7 @@ os.chdir(str(CEX_ROOT))
 
 
 # ============================================================
-# SCAN — Diagnose gaps
+# SCAN -- Diagnose gaps
 # ============================================================
 
 def scan_system() -> dict:
@@ -57,8 +58,9 @@ def scan_system() -> dict:
                          "action": f"Evolve+score: python _tools/cex_evolve.py single {f} --target 8.5"})
 
     # 2. Check doctor
-    r = subprocess.run([sys.executable, "_tools/cex_doctor.py"], capture_output=True, text=True, timeout=30)
-    full = r.stdout + r.stderr
+    r = subprocess.run([sys.executable, "_tools/cex_doctor.py"], capture_output=True, text=True, timeout=30,
+                       encoding="utf-8", errors="replace")
+    full = (r.stdout or "") + (r.stderr or "")
     m = re.search(r"(\d+) PASS \| (\d+) WARN \| (\d+) FAIL", full)
     if m:
         stats["doctor_pass"] = int(m.group(1))
@@ -73,8 +75,9 @@ def scan_system() -> dict:
 
     # 3. Check hooks validation
     r = subprocess.run([sys.executable, "_tools/cex_hooks.py", "validate-all"],
-                       capture_output=True, text=True, timeout=30)
-    full = r.stdout + r.stderr
+                       capture_output=True, text=True, timeout=30,
+                       encoding="utf-8", errors="replace")
+    full = (r.stdout or "") + (r.stderr or "")
     m = re.search(r"Errors:\s+(\d+)", full)
     hook_errors = int(m.group(1)) if m else 0
     stats["hook_errors"] = hook_errors
@@ -118,8 +121,9 @@ def scan_system() -> dict:
 
     # 6. Check compile
     r = subprocess.run([sys.executable, "_tools/cex_compile.py", "--all"],
-                       capture_output=True, text=True, timeout=60)
-    full = r.stdout + r.stderr
+                       capture_output=True, text=True, timeout=60,
+                       encoding="utf-8", errors="replace")
+    full = (r.stdout or "") + (r.stderr or "")
     m = re.search(r"(\d+)/(\d+) compiled", full)
     if m:
         stats["compile_ok"] = int(m.group(1))
@@ -170,11 +174,26 @@ def scan_system() -> dict:
     dirty = len([l for l in r.stdout.strip().split("\n") if l.strip()])
     stats["git_dirty"] = dirty
 
+    # 10. Model staleness check
+    try:
+        from cex_model_updater import check_staleness
+        stale = check_staleness()
+        stats["stale_models"] = len(stale)
+        if stale:
+            models_list = ", ".join(f"{s['nucleus']}={s['current']}" for s in stale)
+            gaps.append({
+                "type": "stale_models", "priority": "high",
+                "action": f"Update {len(stale)} stale model(s): {models_list}. "
+                          f"Run: python _tools/cex_model_updater.py --full"
+            })
+    except Exception:
+        stats["stale_models"] = -1  # updater not available
+
     return {"stats": stats, "gaps": gaps, "timestamp": datetime.datetime.now().isoformat()}
 
 
 # ============================================================
-# PLAN — Generate actions from gaps
+# PLAN -- Generate actions from gaps
 # ============================================================
 
 def generate_plan(scan_result: dict) -> list[dict]:
@@ -199,7 +218,7 @@ def generate_plan(scan_result: dict) -> list[dict]:
 
 
 # ============================================================
-# EXECUTE — Run plan steps
+# EXECUTE -- Run plan steps
 # ============================================================
 
 def execute_step(step: dict, dry_run: bool = False) -> dict:
@@ -219,7 +238,7 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
             capture_output=True, text=True, timeout=60
         )
         result["success"] = r.returncode == 0
-        result["output"] = (r.stdout + r.stderr).strip()[-200:]
+        result["output"] = ((r.stdout or "") + (r.stderr or "")).strip()[-200:]
 
     elif step["type"] == "low_quality" and step.get("path"):
         # AutoResearch: evolve the artifact until it improves
@@ -228,7 +247,7 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
              "--target", "8.5", "--max-rounds", "3"],
             capture_output=True, text=True, timeout=60
         )
-        result["output"] = (r.stdout + r.stderr).strip()[-200:]
+        result["output"] = ((r.stdout or "") + (r.stderr or "")).strip()[-200:]
         result["success"] = "KEEP" in r.stdout or "Target" in r.stdout
         result["note"] = f"Evolved: {step['path']}" if result["success"] else f"Could not improve: {step['path']}"
 
@@ -244,7 +263,7 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
             ]
             try:
                 r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-                full = r.stdout + r.stderr
+                full = (r.stdout or "") + (r.stderr or "")
                 result["success"] = "PASS" in full
                 result["output"] = full[-200:]
                 result["note"] = f"Built {kind} for {nucleus}" if result["success"] else f"FAIL: {kind} for {nucleus}"
@@ -266,36 +285,36 @@ def execute_step(step: dict, dry_run: bool = False) -> dict:
 
 
 # ============================================================
-# CYCLE — Full autonomous loop
+# CYCLE -- Full autonomous loop
 # ============================================================
 
 def run_cycle(max_actions: int = 10, dry_run: bool = False) -> dict:
-    """Full autonomous cycle: scan → plan → execute → validate."""
+    """Full autonomous cycle: scan -> plan -> execute -> validate."""
     print(f"\n{'='*60}")
-    print(f"  CEX AUTO CYCLE — {'DRY-RUN' if dry_run else 'EXECUTE'}")
+    print(f"  CEX AUTO CYCLE -- {'DRY-RUN' if dry_run else 'EXECUTE'}")
     print(f"{'='*60}\n")
 
     # SCAN
-    print("📡 Scanning system...")
+    print("[>>] Scanning system...")
     scan = scan_system()
     stats = scan["stats"]
     print(f"   Stats: {json.dumps(stats, indent=2)}")
     print(f"   Gaps found: {len(scan['gaps'])}")
 
     if not scan["gaps"]:
-        print("\n✅ System is healthy. No gaps found.")
+        print("\n[OK] System is healthy. No gaps found.")
         return {"status": "healthy", "actions": 0, "scan": scan}
 
     # PLAN
-    print("\n📋 Generating plan...")
+    print("\n[>>] Generating plan...")
     plan = generate_plan(scan)
     plan = plan[:max_actions]
     for step in plan:
-        symbol = {"critical": "🔴", "high": "🟠", "medium": "🟡", "low": "🟢"}.get(step["priority"], "⚪")
+        symbol = {"critical": "[!!]", "high": "[!!]", "medium": "[..]", "low": "[OK]"}.get(step["priority"], "[--]")
         print(f"   {symbol} [{step['step']}] {step['action'][:80]}")
 
     # EXECUTE
-    print(f"\n🚀 Executing {len(plan)} actions...")
+    print(f"\n[>>] Executing {len(plan)} actions...")
     results = []
     passed = 0
     for step in plan:
@@ -303,17 +322,17 @@ def run_cycle(max_actions: int = 10, dry_run: bool = False) -> dict:
         results.append(r)
         if r["success"]:
             passed += 1
-            print(f"   ✅ [{step['step']}] {r.get('note', 'done')[:60]}")
+            print(f"   [OK] [{step['step']}] {r.get('note', 'done')[:60]}")
         else:
-            print(f"   ❌ [{step['step']}] {r.get('note', r.get('output', 'failed'))[:60]}")
+            print(f"   [FAIL] [{step['step']}] {r.get('note', r.get('output', 'failed'))[:60]}")
 
     # VALIDATE
-    print("\n🔍 Post-cycle validation...")
+    print("\n[?] Post-cycle validation...")
     post_scan = scan_system()
     post_gaps = len(post_scan["gaps"])
     pre_gaps = len(scan["gaps"])
     delta = pre_gaps - post_gaps
-    print(f"   Gaps: {pre_gaps} → {post_gaps} (Δ{delta:+d})")
+    print(f"   Gaps: {pre_gaps} -> {post_gaps} (delta{delta:+d})")
 
     # COMMIT
     if not dry_run and passed > 0:
@@ -322,12 +341,12 @@ def run_cycle(max_actions: int = 10, dry_run: bool = False) -> dict:
             ["git", "commit", "-m", f"[AUTO] cycle: {passed}/{len(plan)} actions, {post_gaps} gaps remaining"],
             capture_output=True
         )
-        print("   📦 Changes committed")
+        print("   [>>] Changes committed")
 
     # Summary
     print(f"\n{'='*60}")
     print(f"  CYCLE COMPLETE: {passed}/{len(plan)} actions succeeded")
-    print(f"  Gaps: {pre_gaps} → {post_gaps}")
+    print(f"  Gaps: {pre_gaps} -> {post_gaps}")
     print(f"{'='*60}")
 
     cycle_result = {
@@ -376,7 +395,7 @@ def main():
         plan = json.loads(Path(args.plan_file).read_text(encoding="utf-8"))
         for step in plan:
             r = execute_step(step, args.dry_run)
-            status = "✅" if r["success"] else "❌"
+            status = "[OK]" if r["success"] else "[FAIL]"
             print(f"{status} [{step['step']}] {r.get('note', '')[:80]}")
 
     elif args.mode == "cycle":

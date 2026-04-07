@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Memory Manager — persistent build context + entity memory.
+# -*- coding: utf-8 -*-
+"""CEX Memory Manager -- persistent build context + entity memory.
 
 Tracks builder performance per kind, aggregates learning records,
 provides build-time memory injection, and maintains entity memory
@@ -57,7 +58,7 @@ class MemoryHeader:
 
 
 # ---------------------------------------------------------------------------
-# Builder Memory Scanner (Phase 1A — Runtime Evolution)
+# Builder Memory Scanner (Phase 1A -- Runtime Evolution)
 # ---------------------------------------------------------------------------
 
 
@@ -338,7 +339,7 @@ def get_injection_context(kind: str) -> str:
     entity = entities.get(kind)
 
     if not entity:
-        return f"No build history for kind '{kind}'. First build — follow instruction closely."
+        return f"No build history for kind '{kind}'. First build -- follow instruction closely."
 
     parts = [f"## Build Memory: {kind}"]
     parts.append(f"- Builds: {entity['builds']} total, {entity['pass_rate']:.0%} pass rate")
@@ -390,10 +391,10 @@ def prune_records(before: str, dry_run: bool = False) -> int:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Memory Manager — persistent build context")
+    parser = argparse.ArgumentParser(description="CEX Memory Manager -- persistent build context")
     parser.add_argument("--status", action="store_true", help="Show memory overview")
     parser.add_argument("--kind", "-k", help="Show memory for specific kind")
-    parser.add_argument("--aggregate", action="store_true", help="Aggregate learning records → entity memory")
+    parser.add_argument("--aggregate", action="store_true", help="Aggregate learning records -> entity memory")
     parser.add_argument("--inject", help="Get injection context for a kind")
     parser.add_argument("--scan", help="Scan builder memories (builder-id or 'all')")
     parser.add_argument("--prune", action="store_true", help="Prune old learning records")

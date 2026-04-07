@@ -13,7 +13,7 @@ kinds:
     constraints:
       max_bytes: 3072
     llm_function: INJECT
-  brain_index:
+  knowledge_index:
     description: Indice de busca (BM25, FAISS config)
     boundary: Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).
     layer: runtime
@@ -74,3 +74,23 @@ kinds:
     - entity_type
     - attributes
     llm_function: INJECT
+  prompt_cache:
+    description: TTL, eviction, and invalidation config for cached LLM prompt/completion pairs
+    boundary: Cache config. NAO eh session_state (contexto efemero), memory_summary (historico), nem runtime_state (variaveis runtime).
+    layer: runtime
+    core: false
+    machine_format: yaml
+    naming: p10_pc_{{name}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - ttl_seconds
+    - eviction_strategy
+    - max_entries
+    - cache_key_method
+    - invalidation_trigger
+    - storage_backend
+    llm_function: GOVERN

@@ -16,7 +16,7 @@ prerequisites:
   - Tier thresholds are defined or can be derived (e.g. master >= 9.5, skilled >= 8.0)
 validation_method: checklist
 domain: scoring_rubric
-quality: 8.8
+quality: 9.0
 tags: [instruction, scoring-rubric, evaluation, governance, P07]
 idempotent: true
 atomic: false
@@ -42,7 +42,7 @@ scale point, and an automation status for each dimension.
 **Output contract**: A single `scoring_rubric` Markdown file with YAML frontmatter,
 weighted dimension table, per-dimension scoring scales, tier thresholds, and calibration notes.
 **Boundaries**:
-- Handles evaluation criteria design only.
+- Handles evaluation criteria ofsign only.
 - Reference examples for calibration belong in golden_test artifacts.
 - Binary pass/fail barriers belong in quality_gate artifacts.
 - Performance benchmarks (throughput, latency) belong in benchmark artifacts.

@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: 8.7
+quality: 9.0
 tags: [self-healing, error-recovery, retry, resilience]
 tldr: "LLM detects own errors, retries with corrections, learns from failures. Generate → validate → fix → retry (max N)."
 when_to_use: "Building autonomous agents that must recover from errors without human intervention"
 keywords: [self-healing, auto-fix, retry, error-correction, validation-loop]
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # Self-Healing Patterns
@@ -46,7 +47,7 @@ GENERATE → VALIDATE → [PASS] → DONE
 | Escalate | Ask user | Max retries exhausted |
 
 ## CEX Integration
-- 8F F7→F6 loop = validation + retry (max 2)
-- `wf_auto_debug.md` = error diagnosis workflow
-- `cex_compile.py` = YAML validation
-- `cex_doctor.py` = builder integrity check
+1. 8F F7→F6 loop = validation + retry (max 2)
+2. `wf_auto_debug.md` = error diagnosis workflow
+3. `cex_compile.py` = YAML validation
+4. `cex_doctor.py` = builder integrity check

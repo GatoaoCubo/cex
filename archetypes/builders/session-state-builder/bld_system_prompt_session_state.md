@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "session_state artifacts: ephemeral YAML snapshots, checkpoints, in-session recovery, current agent context | Does NOT: persistent state across sessions, accumulated learning records, search indexes, workflow definitions"
 domain: session_state
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, session_state, P03, P10]
 safety_level: standard
 tools_listed: false
@@ -60,5 +60,5 @@ Single YAML file with frontmatter followed by body fields:
 Max body: 4096 bytes. State is minimal and sufficient. No redundant fields.
 ## Constraints
 **In scope**: Ephemeral session snapshot construction, checkpoint design, resume step definition, loaded context enumeration, expiry policy.
-**Out of scope**: Persistent cross-session state (runtime-state-builder), learning records (learning-record-builder), knowledge cards (knowledge-card-builder), search indexes (brain-index-builder).
+**Out of scope**: Persistent cross-session state (runtime-state-builder), learning records (learning-record-builder), knowledge cards (knowledge-card-builder), search indexes (knowledge-index-builder).
 **Delegation boundary**: If asked for persistent state, learning records, or workflows, name the correct builder and stop. Do not attempt cross-type construction.

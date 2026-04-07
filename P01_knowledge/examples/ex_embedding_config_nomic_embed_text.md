@@ -8,7 +8,7 @@ dimensions: 768
 chunk_size: 2048
 tags: [embedding, nomic, ollama, local, vector]
 tldr: "Local embedding config using nomic-embed-text via Ollama. 768 dimensions, 2048 token chunks, 128 overlap. Runs on localhost, ~24ms per text."
-quality: 8.8
+quality: 9.0
 ---
 
 # Embedding Config: nomic-embed-text

@@ -4,6 +4,16 @@ id: bld_architecture_smoke_eval
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of smoke_eval — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Smoke Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [smoke_eval, builder, examples]
+tldr: "Golden and anti-examples for smoke eval construction, demonstrating ideal structure and common pitfalls."
+domain: "smoke eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: smoke_eval in the CEX

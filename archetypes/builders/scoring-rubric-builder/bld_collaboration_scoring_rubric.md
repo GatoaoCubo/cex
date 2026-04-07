@@ -5,6 +5,16 @@ pillar: P07
 llm_function: COLLABORATE
 purpose: How scoring-rubric-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Scoring Rubric"
+version: "1.0.0"
+author: n03_builder
+tags: [scoring_rubric, builder, examples]
+tldr: "Golden and anti-examples for scoring rubric construction, demonstrating ideal structure and common pitfalls."
+domain: "scoring rubric construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: scoring-rubric-builder
@@ -32,7 +42,7 @@ I design evaluation frameworks with weighted dimensions, tier thresholds, and ca
 ```
 ## Handoff Protocol
 ### I Receive
-- seeds: artifact kind name, quality criteria description, target audience, automation preference
+- seeds: artifact kind name, quality criteria ofscription, target audience, automation preference
 - optional: existing scoring examples, inter-rater reliability target, tier names (e.g. gold/silver/bronze)
 ### I Produce
 - scoring_rubric artifact (YAML + Markdown, dimensions with weights summing to 100%, max 250 lines)

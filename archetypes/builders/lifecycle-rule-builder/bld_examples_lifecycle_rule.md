@@ -2,6 +2,16 @@
 kind: examples
 id: bld_examples_lifecycle_rule
 pillar: P00
+quality: 9.1
+title: "Examples Lifecycle Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [lifecycle_rule, builder, examples]
+tldr: "Golden and anti-examples for lifecycle rule construction, demonstrating ideal structure and common pitfalls."
+domain: "lifecycle rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ```yaml
@@ -36,7 +46,7 @@ automation: "semi"
 density_score: 0.93
 linked_artifacts:
   primary: "p11_qg_kc_publish"
-  related: [p01_kc_schema, p10_brain_index]
+  related: [p01_kc_schema, p10_knowledge_index]
 ## Definition
 Knowledge cards lose accuracy as domains evolve. LLM pricing changes monthly,
 framework APIs break quarterly, and research findings get superseded. A KC
@@ -66,7 +76,7 @@ ensures KCs are reviewed before staleness degrades downstream decisions.
 ## Review Protocol
 | Aspect | Value |
 |--------|-------|
-| Reviewer | knowledge-engine (knowledge agent_node) |
+| Reviewer | knowledge-engine (knowledge agent_group) |
 | Cycle | quarterly (every 90 days) |
 | Checklist | facts still accurate, sources still valid, density >= 0.80 |
 | Outcome | refresh (update + re-validate) or archive (remove from index) |

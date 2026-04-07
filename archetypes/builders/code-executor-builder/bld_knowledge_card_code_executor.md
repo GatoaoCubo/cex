@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for code_executor production — sandboxed code execution
 sources: Docker security docs, E2B documentation, WASM sandbox specs, OpenAI Code Interpreter docs
+quality: 9.1
+title: "Knowledge Card Code Executor"
+version: "1.0.0"
+author: n03_builder
+tags: [code_executor, builder, examples]
+tldr: "Golden and anti-examples for code executor construction, demonstrating ideal structure and common pitfalls."
+domain: "code executor construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: code_executor
@@ -55,7 +65,7 @@ Code executors are sandboxed environments where LLM-generated code runs safely. 
 6. Decide network policy: blocked unless explicitly needed
 7. Decide session model: ephemeral (default) or persistent
 ## References
-- Docker: container security best practices
+- Docker: container security best forctices
 - E2B: cloud sandbox documentation
 - OpenAI: Code Interpreter documentation
 - WASM: WebAssembly sandboxing specification

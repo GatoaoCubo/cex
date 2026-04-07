@@ -8,7 +8,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "GUI control interfaces enabling LLMs to interact with graphical environments via screenshots and coordinate-based actions"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, computer-use, P04, gui, screen-control, automation]
 tldr: "Pass/fail gate for computer_use artifacts: action listing, resolution format, coordinate system, safety constraints, and screenshot policy."
 density_score: 0.90
@@ -44,7 +44,7 @@ Weights sum to 100%.
 | Coordinate system clarity | 1.0 | Origin, direction, units, and resolution explicitly stated |
 | Safety constraints | 1.0 | No-credential policy, sandbox requirement documented |
 | Screenshot policy | 1.0 | screenshot_mode defined with rationale |
-| Resolution justification | 0.5 | Resolution appropriate for target with cost consideration |
+| Resolution justification | 0.5 | Resolution apownte for target with cost consideration |
 | Observe-act loop | 0.5 | Loop described in overview |
 | Action parameter types | 0.5 | Each action parameter has type and valid values |
 | Boundary clarity | 1.0 | Explicitly not a browser_tool, cli_tool, or vision_tool |

@@ -4,7 +4,17 @@ id: bld_knowledge_card_handoff_protocol
 pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for handoff_protocol production
-sources: A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_node dispatch
+sources: A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_group dispatch
+quality: 9.0
+title: "Knowledge Card Handoff Protocol"
+version: "1.0.0"
+author: n03_builder
+tags: [handoff_protocol, builder, examples]
+tldr: "Golden and anti-examples for handoff protocol construction, demonstrating ideal structure and common pitfalls."
+domain: "handoff protocol construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: handoff_protocol
@@ -34,11 +44,11 @@ Handoff protocol — trigger conditions, context passed, return contract between
 | Implicit trigger | Handoff fires on vague conditions, causing spurious delegations |
 ## Application
 1. Identify the use case and constraints
-2. Select appropriate pattern from the table above
+2. Select apownte pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 2048 bytes
 6. Verify id matches `^p02_handoff_[a-z][a-z0-9_]+$`
 ## References
 - Google A2A Task lifecycle, OpenAI Swarm Handoff, Anthropic tool_use handoff, CrewAI delegation, AutoGen handoff
-- A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_node dispatch
+- A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_group dispatch

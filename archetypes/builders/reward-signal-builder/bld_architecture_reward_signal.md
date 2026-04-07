@@ -4,6 +4,16 @@ id: bld_architecture_reward_signal
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of reward_signal — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Reward Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [reward_signal, builder, examples]
+tldr: "Golden and anti-examples for reward signal construction, demonstrating ideal structure and common pitfalls."
+domain: "reward signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -16,7 +26,7 @@ purpose: Component map of reward_signal — inventory, dependencies, and archite
 | baseline | Minimum acceptable score within scale range | reward_signal | required |
 | frequency | Cadence at which the signal is evaluated | reward_signal | required |
 | aggregation | Method for combining multi-criteria scores | reward_signal | required |
-| scoring_rubric | Static criteria taxonomy that informs criteria design | P11 | upstream |
+| scoring_rubric | Static criteria taxonomy that informs criteria ofsign | P11 | upstream |
 | quality_gate | Binary pass/fail consumer of reward scores | P11 | downstream |
 | training_pipeline | RLHF/DPO consumer that ingests reward scores | P02 | consumer |
 | monitoring_pipeline | Production consumer tracking rolling average vs baseline | P09 | consumer |

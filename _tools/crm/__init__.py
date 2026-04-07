@@ -1,4 +1,4 @@
-"""CRM Automation Suite for GATO³ — ABC Paulista pet market."""
+"""CRM Automation Suite for GATO\u00b3 -- ABC Paulista pet market."""
 
 from _tools.crm.crm_parser import CRMBusiness, CRMParser
 

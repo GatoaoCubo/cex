@@ -1,4 +1,4 @@
-"""Tests for cex_materialize.py — Sub-agent generation."""
+"""Tests for cex_materialize.py -- Sub-agent generation."""
 
 import sys
 from pathlib import Path

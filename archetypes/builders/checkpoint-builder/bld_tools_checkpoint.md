@@ -4,6 +4,16 @@ id: bld_tools_checkpoint
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for checkpoint production
+quality: 9.1
+title: "Tools Checkpoint"
+version: "1.0.0"
+author: n03_builder
+tags: [checkpoint, builder, examples]
+tldr: "Golden and anti-examples for checkpoint construction, demonstrating ideal structure and common pitfalls."
+domain: "checkpoint construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: checkpoint-builder

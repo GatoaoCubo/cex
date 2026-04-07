@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: plugin_distribution
-quality: 9.0
+quality: 9.1
 tags: [claude-plugin, marketplace, distribution, plugin-json, skill-packaging]
 tldr: ".claude-plugin/ com marketplace.json (registry) e plugin.json (manifest) define distribuicao de skills via Claude Code Marketplace"
 when_to_use: "Empacotar skills para distribuicao publica ou instalar plugins de terceiros via Claude Code"

@@ -46,7 +46,7 @@ These are a **pipeline** (sequential), not categories.
 - **P07 Evals** — unit_eval, smoke_eval, e2e_eval, benchmark, golden_test, scoring_rubric
 - **P08 Architecture** — agent_card, pattern, law, diagram, component_map
 - **P09 Config** — env_config, path_config, permission, feature_flag, runtime_rule
-- **P10 Memory** — runtime_state, brain_index, learning_record, session_state
+- **P10 Memory** — runtime_state, knowledge_index, learning_record, session_state
 - **P11 Feedback** — quality_gate, bugloop, lifecycle_rule, guardrail, optimizer
 - **P12 Orchestration** — workflow, dag, spawn_config, signal, handoff, dispatch_rule, crew
 

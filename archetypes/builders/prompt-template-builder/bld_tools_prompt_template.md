@@ -9,6 +9,10 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [tools, prompt-template, P03, data-sources]
+quality: 9.1
+title: "Tools Prompt Template"
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 
 # Tools — prompt-template-builder

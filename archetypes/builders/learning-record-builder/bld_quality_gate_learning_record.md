@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: learning_record
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, learning-record, experience-capture, P10, retrospective]
 tldr: "Quality gate for learning_record artifacts: enforces outcome classification, impact score, and reproducible context."
 density_score: 0.85
@@ -26,7 +26,7 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H03 | `id` equals filename stem exactly | Brain search failure — id/file mismatch |
 | H04 | `kind` == literal string `"learning_record"` | Type integrity failure |
 | H05 | `quality` == `null` | Self-scoring violation — pool metric corruption |
-| H06 | All required fields present and non-empty (`id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `topic`, `outcome`, `impact`, `agent_node`, `tags`, `tldr`) | Incomplete artifact |
+| H06 | All required fields present and non-empty (`id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `topic`, `outcome`, `impact`, `agent_group`, `tags`, `tldr`) | Incomplete artifact |
 | H07 | `outcome` is one of: `SUCCESS`, `PARTIAL`, `FAILURE` | Enum violation — unclassifiable record |
 | H08 | Pattern or Anti-Pattern classification present in body | Record lacks directional finding |
 | H09 | `impact` field is a float between 0.0 and 10.0 | Impact unscored — not comparable to other records |
@@ -41,7 +41,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S04 | Anti-pattern failure specific | 1.0 | Anti-Pattern section names exact failure mode, not category |
 | S05 | Impact score justification clear | 1.0 | Score justified with measurable delta (time, errors, quality) |
 | S06 | Actionable takeaway present | 1.0 | Closes with a single directive another agent can act on immediately |
-| S07 | Satellite/domain tagged | 0.5 | `agent_node` field non-empty and matches known agent_node or `GENERAL` |
+| S07 | Agent_group/domain tagged | 0.5 | `agent_group` field non-empty and matches known agent_group or `GENERAL` |
 | S08 | `tags` includes record kind | 0.5 | At least one tag matches `outcome` value in lowercase |
 | S09 | Density >= 0.80 | 1.0 | No filler phrases: "it is important to note", "generally speaking", "in summary" |
 | S10 | Timestamps accurate | 0.5 | `created` and `updated` in ISO 8601 format, `updated` >= `created` |

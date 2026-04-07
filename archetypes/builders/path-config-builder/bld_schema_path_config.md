@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for path_config
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Path Config"
+version: "1.0.0"
+author: n03_builder
+tags: [path_config, builder, examples]
+tldr: "Golden and anti-examples for path config construction, demonstrating ideal structure and common pitfalls."
+domain: "path config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: path_config
@@ -18,7 +28,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
-| scope | string | YES | - | Config scope: global, agent_node, service |
+| scope | string | YES | - | Config scope: global, agent_group, service |
 | paths | list[string], len >= 1 | YES | - | Path names defined |
 | platform | enum: windows, unix, all | YES | all | Target platform |
 | quality | null | YES | null | Never self-score |

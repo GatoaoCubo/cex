@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: diagram
-quality: 8.9
+quality: 9.1
 tags: [diagram, P08, INJECT, kind-kc, architecture]
 tldr: "diagram is a versioned visual representation of architecture in ASCII or Mermaid — terminal-safe, diff-friendly, and auto-decaying-resistant unlike binary image formats."
 when_to_use: "Building, reviewing, or reasoning about diagram artifacts"
 keywords: [architecture_diagram, mermaid, ASCII_art]
 feeds_kinds: [diagram]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Diagram
@@ -48,14 +51,14 @@ A diagram is a visual architecture representation in ASCII or Mermaid syntax —
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
 | format | enum | ascii | ascii (always renders) vs mermaid (needs renderer) |
-| scope | string | required | system/agent_node/flow — tighter scope = clearer diagram |
+| scope | string | required | system/agent_group/flow — tighter scope = clearer diagram |
 | direction | enum | LR | LR (left-right) for flows; TB (top-bottom) for hierarchy |
 | detail_level | enum | medium | low (overview) / medium (standard) / high (all edges) |
 
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| System overview | Top-level agent_node interconnect | ASCII boxes + labeled arrows between orchestrator/research_agent/operations_agent |
+| System overview | Top-level agent_group interconnect | ASCII boxes + labeled arrows between orchestrator/research_agent/operations_agent |
 | Flow diagram | Step-by-step execution path | Mermaid flowchart LR for spawn → execute → signal |
 | Sequence diagram | Time-ordered message exchange | Mermaid sequenceDiagram for TSP handshake |
 

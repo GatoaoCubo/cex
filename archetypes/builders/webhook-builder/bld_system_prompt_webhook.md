@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Webhooks, HTTP callbacks, event payloads, HMAC signatures, retry policies | NOT api_client (request-response), notifier (push delivery), mcp_server (protocol)"
 domain: webhook
-quality: null
+quality: 9.1
 tags: [system_prompt, webhook, event_driven, HTTP, signature]
 safety_level: standard
 tools_listed: false
@@ -49,3 +49,18 @@ SCHEMA.md is the source of truth. Artifact id must match `^p04_webhook_[a-z][a-z
 10. ALWAYS redirect: request-response -> api-client-builder, push notifications -> notifier-builder, protocol servers -> mcp-server-builder.
 ## Output Format
 Produce Markdown with YAML frontmatter. Body sections: Overview, Events, Verification, Retry & Delivery. Body under 1024 bytes. quality: null always.
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind webhook --execute
+```
+
+```yaml
+# Agent config reference
+agent: webhook-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

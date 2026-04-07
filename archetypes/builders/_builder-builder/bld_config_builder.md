@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: global
+quality: 9.1
+title: "Config Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: _builder-builder Production Rules
 
@@ -30,18 +40,44 @@ Rule: id MUST equal filename stem.
 Rule: Every builder directory MUST contain exactly 13 builder spec files.
 
 ## File Paths
-- Output: `archetypes/builders/{kind}-builder/bld_{iso}_{kind}.md`
-- Meta-templates: `archetypes/builders/_builder-builder/bld_meta_{iso}_builder.md`
+1. Output: `archetypes/builders/{kind}-builder/bld_{iso}_{kind}.md`
+2. Meta-templates: `archetypes/builders/_builder-builder/bld_meta_{iso}_builder.md`
 
 ## Size Limits
-- Standard ISOs: max 4096 bytes
-- Instruction ISOs: max 6144 bytes
-- Meta-templates: max 6144 bytes (include comments/examples)
-- Density: >= 0.85
+1. Standard ISOs: max 4096 bytes
+2. Instruction ISOs: max 6144 bytes
+3. Meta-templates: max 6144 bytes (include comments/examples)
+4. Density: >= 0.85
 
 ## Builder Generation Constraints
-- MUST generate all 13 builder specs per builder (manifest, instruction, config, memory, tools, collaboration, architecture, schema, output_template, examples, quality_gate, knowledge_card, system_prompt)
-- MUST include universal fields in generated ISOs (keywords, triggers, geo_description in manifest; memory_scope, observation_types in memory; effort, max_turns, hooks, permission_scope in config; Tool Permissions in tools)
-- MUST respect non-default overrides table for specific builders
-- NEVER generate ISOs that exceed size limits
-- ALWAYS validate generated builder with cex_doctor.py before commit
+1. MUST generate all 13 builder specs per builder (manifest, instruction, config, memory, tools, collaboration, architecture, schema, output_template, examples, quality_gate, knowledge_card, system_prompt)
+2. MUST include universal fields in generated ISOs (keywords, triggers, capability_summary in manifest; memory_scope, observation_types in memory; effort, max_turns, hooks, permission_scope in config; Tool Permissions in tools)
+3. MUST respect non-default overrides table for specific builders
+4. NEVER generate ISOs that exceed size limits
+5. ALWAYS validate generated builder with cex_doctor.py before commit
+
+## Metadata
+
+```yaml
+id: bld_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | _builder construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

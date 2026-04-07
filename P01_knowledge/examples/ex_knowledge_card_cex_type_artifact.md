@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.1
 tags: [cex, type, artifact, contract, boundary, schema, naming]
 tldr: "78 tipos CEX sao contratos atomicos: cada um tem funcao, LP, camada, tamanho maximo e naming padronizado"
 when_to_use: "Consultar o vocabulario completo de tipos CEX e seus contratos"

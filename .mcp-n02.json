@@ -1,19 +1,24 @@
 {
   "mcpServers": {
-    "fetch": {
-      "command": "uvx",
-      "args": ["mcp-server-fetch", "--ignore-robots-txt"]
+    "markitdown": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "markitdown-mcp"]
     },
-    "firecrawl": {
+    "browser": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-server-puppeteer"]
+    },
+    "canva": {
       "command": "npx",
-      "args": ["-y", "firecrawl-mcp"],
+      "args": ["-y", "@mcp_factory/canva-mcp-server"],
       "env": {
-        "FIRECRAWL_API_KEY": "fc-4d0c587df3c44038bbf9f39e175fffd0"
+        "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
+        "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"
       }
     },
-    "playwright": {
+    "notebooklm": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp", "--headless"]
+      "args": ["-y", "notebooklm-mcp@latest"]
     }
   }
 }

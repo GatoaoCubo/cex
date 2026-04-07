@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of rate_limit_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Rate Limit Config"
+version: "1.0.0"
+author: n03_builder
+tags: [rate_limit_config, builder, examples]
+tldr: "Golden and anti-examples for rate limit config construction, demonstrating ideal structure and common pitfalls."
+domain: "rate limit config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: rate-limit-config-builder
@@ -54,7 +64,7 @@ activated after $5 cumulative spend. Used by all Claude API integrations at this
 ## Tier
 **Tier**: build
 Standard production tier. Requires $5 cumulative API spend to activate.
-Includes all Claude models. Upgrade to Scale tier requires custom agreement with Anthropic sales.
+Includes all Claude models. Upgrade to Scale tier requires costm agreement with Anthropic sales.
 ## Budget
 Monthly cap: $100.00
 Alert threshold: 80% — trigger notification at $80 spend

@@ -1,8 +1,11 @@
 ---
 id: n02_competitive_positioning
 kind: competitive_analysis
+pillar: P02
+title: "Analise de Posicionamento Competitivo CEX — 2026"
 quality: 9.0
 density_score: 1.0
+tags: [competitive-analysis, positioning, marketing, n02]
 ---
 
 # Análise de Posicionamento Competitivo CEX — 2026

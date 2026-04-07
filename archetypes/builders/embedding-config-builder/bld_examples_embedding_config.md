@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of embedding_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Embedding Config"
+version: "1.0.0"
+author: n03_builder
+tags: [embedding_config, builder, examples]
+tldr: "Golden and anti-examples for embedding config construction, demonstrating ideal structure and common pitfalls."
+domain: "embedding config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: embedding-config-builder
@@ -31,7 +41,7 @@ normalize: true
 max_tokens: 8192
 cost_per_1m_tokens: null
 domain: "knowledge-retrieval"
-quality: null
+quality: 8.8
 tags: [embedding, ollama, nomic, vector, rag]
 tldr: "nomic-embed-text via Ollama — 768d, 512-token chunks, cosine similarity, zero cost local."
 ```

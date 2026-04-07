@@ -14,6 +14,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Context Doc"
+version: "1.0.0"
+author: n03_builder
+tags: [context_doc, builder, examples]
+tldr: "Golden and anti-examples for context doc construction, demonstrating ideal structure and common pitfalls."
+domain: "context doc construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: context_doc
 ## Naming Rules

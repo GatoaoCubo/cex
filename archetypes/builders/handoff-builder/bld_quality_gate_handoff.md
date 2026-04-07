@@ -7,8 +7,8 @@ version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
-domain: "handoff — task delegation packages for agent_node execution"
-quality: 8.8
+domain: "handoff — task delegation packages for agent_group execution"
+quality: 9.0
 tags: [quality-gate, handoff, delegation, orchestration, scope-fence]
 tldr: "Gates ensuring handoff artifacts carry complete delegation context: task, scope fence, commit instructions, and size discipline."
 density_score: 0.88
@@ -44,7 +44,7 @@ Total weights sum to 100%.
 | S02 | Context completeness | 1.0 | Background, motivation, and prior state all present | Partial context (2/3) | Context absent |
 | S03 | Scope fence precision | 1.0 | Exact paths listed in both allowed and prohibited | Paths listed for one side only | Vague scope description |
 | S04 | Commit instruction quality | 0.5 | Stage command + message template + signal command present | Only commit message present | No commit guidance |
-| S05 | Signal instruction | 0.5 | Signal call with agent_node, status, and score specified | Signal mentioned without params | Signal absent |
+| S05 | Signal instruction | 0.5 | Signal call with agent_group, status, and score specified | Signal mentioned without params | Signal absent |
 | S06 | Step ordering | 1.0 | Dependencies between steps are explicit | Steps ordered but implicit deps | Steps unordered |
 | S07 | Open variable marking | 0.5 | All decision points marked `[OPEN_VARIABLE]` | Some decision points unmarked | No open variables marked |
 | S08 | Size discipline | 1.0 | Body 1000-3000 bytes (dense, complete) | Body 3001-4096 bytes (verbose) | Body < 500 bytes (too sparse) |

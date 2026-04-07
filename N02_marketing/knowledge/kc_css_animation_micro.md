@@ -5,7 +5,7 @@ pillar: P01
 title: CSS Animation & Micro-interactions
 domain: N02_marketing / Frontend
 tags: [css, animation, transitions, framer-motion, accessibility, micro-interactions, gpu]
-quality: 9.0
+quality: 9.1
 source: motion.dev, joshwcomeau.com, web.dev
 created: 2026-04-01
 ---

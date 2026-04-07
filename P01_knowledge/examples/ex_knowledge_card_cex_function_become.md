@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.1
 tags: [cex, llm-function, become, identity, system-prompt, persona]
 tldr: "BECOME configura identidade do LLM (persona, regras, limites) via 6 tipos de artefato antes de qualquer input"
 when_to_use: "Entender como LLMs assumem papeis e por que identidade precede contexto"

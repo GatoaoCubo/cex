@@ -1,5 +1,5 @@
 """
-CRM Campaign Manager — outreach tracking + follow-up scheduling for GATO³.
+CRM Campaign Manager -- outreach tracking + follow-up scheduling for GATO\u00b3.
 
 Tracks multi-channel outreach (WhatsApp, phone, email, social) per business.
 Manages campaign state in a JSON file alongside the CRM.
@@ -351,25 +351,25 @@ def _suggest_channel(state: BusinessCampaignState) -> str:
 def _suggest_next_action(activity_type: str, status: str) -> str:
     """Suggest next action based on current state."""
     if status in ("interested", "responded"):
-        return "Agendar reunião presencial ou call para apresentação."
+        return "Agendar reuniao presencial ou call para apresentacao."
     if status == "read":
         return "Enviar follow-up personalizado com case relevante."
     if activity_type == "initial_contact":
-        return "Follow-up: verificar recebimento e reforçar proposta de valor."
+        return "Follow-up: verificar recebimento e reforcar proposta de valor."
     if activity_type == "follow_up":
-        return "Terceiro toque: oferecer amostra grátis ou visita técnica."
+        return "Terceiro toque: oferecer amostra gratis ou visita tecnica."
     if activity_type == "meeting":
         return "Enviar proposta comercial formal."
     if activity_type == "proposal":
-        return "Follow-up da proposta: esclarecer dúvidas, negociar condições."
-    return "Avaliar próximo passo baseado no histórico."
+        return "Follow-up da proposta: esclarecer duvidas, negociar condicoes."
+    return "Avaliar proximo passo baseado no historico."
 
 
 # --- CLI ---
 if __name__ == "__main__":
     import argparse
 
-    ap = argparse.ArgumentParser(description="CRM Campaign Manager for GATO³")
+    ap = argparse.ArgumentParser(description="CRM Campaign Manager for GATO\u00b3")
     ap.add_argument("--crm", default=str(DEFAULT_CRM), help="Path to CRM .md file")
     ap.add_argument("--init", action="store_true", help="Initialize campaign DB from CRM")
     ap.add_argument("--stats", action="store_true", help="Show campaign statistics")

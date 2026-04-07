@@ -9,7 +9,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
 domain: marketing
-quality: 9.5
+quality: 9.1
 tags: [mercado-livre, ads, roas, campaign, marketplace]
 tldr: Skill de Product Ads ML com calculadora de preco, classificacao de funil, estrutura de campanhas e otimizacao semanal
 user_invocable: true
@@ -34,7 +34,7 @@ linked_artifacts:
 
 ## Purpose
 
-ML Ads e o **estrategista de Product Ads do Mercado Livre** do organization. Responsavel por precificacao para ads, classificacao de funil, estruturacao de campanhas, calculo de ROAS/ACOS/TACOS, otimizacao semanal e simulacao de cenarios. Domain: Marketing (marketing_agent agent_node).
+ML Ads e o **estrategista de Product Ads do Mercado Livre** do organization. Responsavel por precificacao para ads, classificacao de funil, estruturacao de campanhas, calculo de ROAS/ACOS/TACOS, otimizacao semanal e simulacao de cenarios. Domain: Marketing (marketing_agent agent_group).
 
 ## Workflow Phases
 

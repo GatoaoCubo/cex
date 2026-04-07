@@ -4,7 +4,14 @@ kind: chain_of_thought
 pillar: P03
 title: Chain-of-Thought Competitor Analysis with Metacognitive Stages
 reasoning_type: metacognitive_5stage
-quality: 9.0
+quality: 9.2
+updated: "2026-04-07"
+domain: "prompt engineering"
+version: "1.0.0"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.92
+tldr: "Defines chain of thought for chain-of-thought competitor analysis with metacognitive stages, with validation gates and integration points."
 ---
 
 # Chain-of-Thought: Competitor Analysis
@@ -76,11 +83,11 @@ Premissa mais fragil: [qual suposicao pode estar errada]
 
 ## Final Answer
 ### Perfil do Concorrente
-- Posicionamento: [resumo]
-- Publico-alvo: [segmento]
-- Faixa de preco: [range]
-- Pontos fortes: [top 3]
-- Pontos fracos: [top 3]
+1. Posicionamento: [resumo]
+2. Publico-alvo: [segmento]
+3. Faixa de preco: [range]
+4. Pontos fortes: [top 3]
+5. Pontos fracos: [top 3]
 
 ### Estrategia Recomendada
 1. [Acao 1 — curto prazo (1-2 semanas)]
@@ -88,8 +95,8 @@ Premissa mais fragil: [qual suposicao pode estar errada]
 3. [Acao 3 — longo prazo (3-6 meses)]
 
 ### Metricas de Sucesso
-- [KPI 1]: [meta]
-- [KPI 2]: [meta]
+1. [KPI 1]: [meta]
+2. [KPI 2]: [meta]
 
 ### Confianca
 Score: [0.0-1.0] | Premissa mais fragil: [qual]
@@ -99,6 +106,20 @@ Score: [0.0-1.0] | Premissa mais fragil: [qual]
 A resposta final (apos "## Final Answer") deve ser autonoma — legivel sem os estagios de raciocinio. O trace existe para auditoria e debug, nao para o consumidor final da analise.
 
 ## Research Base
-- Metacognitive 5-stage CoT: +26.9% task performance (KC_builder_agent_024)
-- Separar reasoning de answer_extract previne "reasoning leak" na resposta final
-- XML tags permitem parsing automatico dos estagios
+1. Metacognitive 5-stage CoT: +26.9% task performance (KC_builder_agent_024)
+2. Separar reasoning de answer_extract previne "reasoning leak" na resposta final
+3. XML tags permitem parsing automatico dos estagios
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `chain_of_thought` |
+| Pillar | P03 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

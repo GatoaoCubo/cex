@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Api Client"
+version: "1.0.0"
+author: n03_builder
+tags: [api_client, builder, examples]
+tldr: "Golden and anti-examples for api client construction, demonstrating ideal structure and common pitfalls."
+domain: "api client construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: client Production Rules
 ## Naming Convention
@@ -49,6 +59,6 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 ## Pagination Enum
 | Value | When to use |
 |-------|-------------|
-| cursor | Token-based pagination (Stripe, Shopify style) |
+| cursor | Token-based pagetion (Stripe, Shopify style) |
 | offset | Numeric offset/limit (SQL-style) |
 | none | API returns all results or no list endpoints |

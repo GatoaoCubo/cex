@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "hook — pre/post event interceptors for system lifecycle events"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, hook, event, lifecycle, trigger, intercept]
 tldr: "Gates ensuring hook artifacts define safe, scoped event interceptors with trigger configs, timeout, and error strategies."
 density_score: 0.91
@@ -42,7 +42,7 @@ Total weights sum to 100%.
 |-----|-----------|--------|--------|-------|-------|
 | S01 | Trigger specificity | 1.0 | Event + matcher condition both defined (e.g., tool name pattern) | Event only, no matcher | No trigger config |
 | S02 | Blocking behavior justified | 1.0 | `blocking: true/false` stated with rationale in description | Blocking stated, no rationale | Blocking field absent |
-| S03 | Timeout appropriateness | 1.0 | Timeout fits event type (PreToolUse < 5000ms, PostToolUse < 30000ms) | Timeout present but oversized | No timeout or zero |
+| S03 | Timeout apownteness | 1.0 | Timeout fits event type (PreToolUse < 5000ms, PostToolUse < 30000ms) | Timeout present but oversized | No timeout or zero |
 | S04 | Script path resolvable | 1.0 | Path exists or clearly references known convention | Path plausibly correct | Path invented or ambiguous |
 | S05 | Error strategy completeness | 0.5 | Strategy + fallback behavior + log target all specified | Strategy only | None |
 | S06 | Condition guard | 1.0 | `conditions` field narrows hook scope (env var, file exists, etc.) | Condition present but vague | No condition — fires always |

@@ -1,4 +1,4 @@
-# CEX Spawn Grid v1.0 — Launch multiple nucleus builders
+﻿# CEX Spawn Grid v1.0 -- Launch multiple nucleus builders
 # Usage:
 #   powershell -File _spawn/spawn_grid.ps1 -mission NAME -interactive
 #   powershell -File _spawn/spawn_grid.ps1 -mission NAME -mode continuous
@@ -29,10 +29,18 @@ $pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 
 New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\runtime\pids" | Out-Null
 
+# Dynamic grid: detect screen size, calculate 3x2 layout
+Add-Type -AssemblyName System.Windows.Forms
+$scr = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
+$gCols = 3; $gRows = 2
+$gW = [math]::Floor($scr.Width / $gCols)
+$gH = [math]::Floor($scr.Height / $gRows)
+$gOx = $scr.X; $gOy = $scr.Y
+
 $gridPos = @{
-    n01 = @{x=0;    y=0};    n02 = @{x=640;  y=0}
-    n03 = @{x=1280; y=0};    n04 = @{x=0;    y=520}
-    n05 = @{x=640;  y=520};  n06 = @{x=1280; y=520}
+    n01 = @{x=$gOx;           y=$gOy};            n02 = @{x=$gOx+$gW;     y=$gOy}
+    n03 = @{x=$gOx+2*$gW;     y=$gOy};            n04 = @{x=$gOx;           y=$gOy+$gH}
+    n05 = @{x=$gOx+$gW;       y=$gOy+$gH};        n06 = @{x=$gOx+2*$gW;     y=$gOy+$gH}
 }
 
 # Discover handoffs for mission
@@ -69,22 +77,40 @@ function Launch-Nucleus($handoff) {
     $pos = $gridPos[$nucleus]
     if (-not $pos) { $pos = @{x=0; y=0} }
 
-    $bootScript = "$root\boot\$nucleus.cmd"
-    if (-not (Test-Path $bootScript)) {
+    # Prefer PS1 (sin-aware UX) over CMD (legacy)
+    $bootPs1 = "$root\boot\$nucleus.ps1"
+    $bootCmd = "$root\boot\$nucleus.cmd"
+    if (Test-Path $bootPs1) {
+        $bootScript = $bootPs1
+        $bootType = "ps1"
+    } elseif (Test-Path $bootCmd) {
+        $bootScript = $bootCmd
+        $bootType = "cmd"
+    } else {
         Write-Output "[$upper] SKIP: no boot script"
         return $null
+    }
+
+    # Sin identity log (read from sins.yaml if available)
+    $sinFile = "$root\.cex\config\nucleus_sins.yaml"
+    if (Test-Path $sinFile) {
+        Write-Output "[$upper] Sin-aware boot ($bootType)"
     }
 
     # Write per-nucleus handoff pointer so boot script picks it up
     $nucleusHandoff = "$handoffDir\${nucleus}_task.md"
     Copy-Item $handoff.FullName -Destination $nucleusHandoff -Force
 
-    # ALWAYS boot interactive — task comes from handoff, never CLI args (avoids nested-quote hell)
-    $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`"" -WorkingDirectory $root -PassThru
+    # ALWAYS boot interactive -- task comes from handoff, never CLI args (avoids nested-quote hell)
+    if ($bootType -eq "ps1") {
+        $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bootScript`"" -WorkingDirectory $root -PassThru
+    } else {
+        $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`"" -WorkingDirectory $root -PassThru
+    }
     Start-Sleep -Seconds 3
 
     if ($proc) {
-        [Win32Grid]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, 640, 520, $true) | Out-Null
+        [Win32Grid]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
         "$($proc.Id) $nucleus" | Add-Content $pidFile
         Write-Output "[$upper] Spawned PID:$($proc.Id) handoff:$($handoff.Name)"
     }

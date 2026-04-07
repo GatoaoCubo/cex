@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 9.0
+quality: 9.2
 tags: [supabase, cli, migrations, seed, diff, inspect, deploy, platform]
 tldr: "CLI completo: init/link/start para dev local, migration new/push para schema, db diff/inspect para auditoria, functions deploy para edge, e branching para staging"
 when_to_use: "Quando gerenciar Supabase via terminal (dev local, migrations, deploys)"

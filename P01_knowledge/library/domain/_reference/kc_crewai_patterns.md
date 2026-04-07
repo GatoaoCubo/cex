@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: crewai
 origin: src_framework_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [crewai, agent, task, crew, process, delegation, multi-agent]
 tldr: "CrewAI orchestrates multi-agent collaboration via Crew(agents, tasks, process) with scoped memory, delegation, and guardrails"
 when_to_use: "Building or mapping CrewAI constructs to CEX kinds"

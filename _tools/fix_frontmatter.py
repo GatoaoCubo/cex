@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Fix frontmatter: add kind+id to all builder .md files missing them.
 
 Usage:

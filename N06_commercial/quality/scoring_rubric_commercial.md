@@ -11,10 +11,17 @@ domain: brand-identity-monetization
 max_score: 10.0
 min_pass: 8.0
 golden: 9.0
-quality: 8.9
+quality: 9.1
+updated: 2026-04-07
 tags: [scoring_rubric, commercial, N06, brand, monetization, dual]
 tldr: "Dual scoring: BRAND (archetype 0-3, voice 0-2, positioning 0-2, visual 0-2, narrative 0-1) + MONETIZATION (pricing 0-3, funnel 0-2, conversion 0-2, revenue 0-2, market 0-1). Average to 10. Min 8.0, golden 9.0."
 density_score: 0.94
+axioms:
+  - "NEVER self-score — peer nucleus reviews only. quality: null until reviewed."
+  - "Min 8.0 to publish, 9.0 is golden. Below 8.0 = rejected, re-work required."
+linked_artifacts:
+  primary: p07_qg_commercial
+  related: [p02_agent_commercial_nucleus, n06_schema_brand_audit, n06_schema_brand_book]
 ---
 
 # N06 Scoring Rubric — Brand + Monetization

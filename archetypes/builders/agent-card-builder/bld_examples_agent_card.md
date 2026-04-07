@@ -1,15 +1,25 @@
 ---
 kind: examples
-id: bld_examples_director
+id: bld_examples_agent_card
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of agent_card artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Agent Card"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_card, builder, examples]
+tldr: "Golden and anti-examples for agent card construction, demonstrating ideal structure and common pitfalls."
+domain: "agent card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: agent-card-builder
 ## Golden Example
-INPUT: "Especifica o satelite researcher para pesquisa de mercado"
+INPUT: "Especifica o agent_group researcher for research de mercado"
 OUTPUT:
 ```yaml
 id: p08_ac_shaka
@@ -20,7 +30,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
 name: "researcher"
-role: "Research agent_node — market intelligence, competitor analysis, web scraping"
+role: "Research agent_group — market intelligence, competitor analysis, web scraping"
 model: "sonnet"
 mcps: [firecrawl, brain]
 domain_area: "research"
@@ -34,7 +44,7 @@ constraints:
   - "Max 10 credits per research session (firecrawl budget)"
   - "No code generation — delegate to builder"
   - "Results must include source URLs"
-dispatch_keywords: [pesquisar, mercado, concorrente, scrape, analise, research]
+dispatch_keywords: [researchr, market, competitor, scrape, analysis, research]
 tools: [firecrawl_scrape, firecrawl_extract, brain_query, web_search]
 dependencies: [brain_mcp, firecrawl_api]
 scaling:
@@ -50,11 +60,11 @@ mcp_config_file: ".mcp-shaka.json"
 flags: ["--no-chrome", "-p"]
 domain: "research-intelligence"
 quality: null
-tags: [agent_node, research, shaka, market-intelligence, scraping]
-tldr: "researcher agent_node spec — research domain, sonnet model, firecrawl+brain MCPs, market intelligence."
+tags: [agent_group, research, shaka, market-intelligence, scraping]
+tldr: "researcher agent_group spec — research domain, sonnet model, firecrawl+brain MCPs, market intelligence."
 ```
 ## Role
-Research agent_node focused on market intelligence, competitor analysis, and web data extraction.
+Research agent_group focused on market intelligence, competitor analysis, and web data extraction.
 Primary function: gather, structure, and deliver research findings as knowledge cards or reports.
 Does not generate code or modify production systems.
 ## Model & MCPs
@@ -67,9 +77,9 @@ Does not generate code or modify production systems.
 3. Initialize brain MCP (verify Ollama running, index freshness)
 4. Check dispatch queue (.claude/handoffs/shaka_*.md)
 ## Dispatch
-Keywords: pesquisar, mercado, concorrente, scrape, analise, research
+Keywords: researchr, market, competitor, scrape, analysis, research
 Routing: orchestrator matches keywords against dispatch_keywords list.
-Priority: research tasks routed to researcher before any other agent_node.
+Priority: research tasks routed to researcher before any other agent_group.
 ## Constraints
 - Read-only: never modify production data or commit to main
 - Budget: max 10 firecrawl credits per research session
@@ -78,7 +88,7 @@ Priority: research tasks routed to researcher before any other agent_node.
 ## Dependencies
 - brain MCP server (Ollama + FAISS index)
 - firecrawl API ($19/month tier)
-- No sibling agent_node dependencies (fully independent)
+- No sibling agent_group dependencies (fully independent)
 ## Scaling & Monitoring
 - Max 1 concurrent instance (avoid firecrawl rate limits)
 - 30-minute timeout per session
@@ -99,14 +109,42 @@ WHY THIS IS GOLDEN:
 - tags list len >= 3 (S02 pass)
 - All 7 body sections present (S03-S09 pass)
 ## Anti-Example
-INPUT: "Define researcher agent_node"
+INPUT: "Define researcher agent_group"
 BAD OUTPUT:
 ```yaml
-id: shaka_agent_node
-kind: agent_node
+id: shaka_agent_group
+kind: agent_group
 pillar: Architecture
 name: Shaka
 model: Claude Sonnet 4
 mcps: firecrawl
-role: This agent_node is responsible for doing various types of research including market research, competitor analysis, web scraping, and many other research-related activities
+role: Research agent_group — market research, competitor analysis, web scraping
 quality: 9.0
+
+## Golden Example 2 (Production — OpenClaude Verification Agent Card)
+INPUT: "Create agent card for adversarial verification agent"
+OUTPUT: Reference artifact `P08_architecture/compiled/p08_ac_verification.yaml`
+
+| Pattern | Value | Why golden |
+|---------|-------|-----------|
+| Tool allowlist/denylist | Explicit allowed + disallowed | Not vague "read-only" |
+| background: true | Runs independently | Concurrent execution |
+| model: inherit | Uses caller's model | Flexible deployment |
+| omit_project_rules | Interprets independently | No implementer bias |
+| input/output contract | Typed VERDICT enum | Not prose |
+| dispatch command | Exact CLI invocation | Copy-pasteable |
+
+## Golden Example 3 (Production — Explore Agent Card)
+
+| Pattern | Value | Why |
+|---------|-------|-----|
+| model | haiku (not inherit) | Speed over depth |
+| thoroughness_levels | quick/medium/very_thorough | Caller controls depth |
+| when_not_to_use | "Simple directed search" | Prevents over-engineering |
+
+## Anti-Example 2 (Bad — No tool restrictions)
+```yaml
+agent_type: reviewer
+tools: all
+```
+FAIL: No denylist. Reviewer with write access can modify what it reviews.

@@ -1,0 +1,1410 @@
+[22:12:08,91] PHASE 1: H1 GAPS 
+[22:12:08,91] G1.1 n03 rule 
+The file `.claude/rules/n03-builder.md` already exists and contains everything you requested:
+
+- **N03 identity**: Role (Builder Architect), Sin (Soberba Inventiva), CLI (claude), Domain
+- **8F enforcement**: Full F1-F8 breakdown section
+- **Quality floor 9.0**: "Below that, you rebuild"
+- **Never skip frontmatter**: "All artifacts MUST have complete YAML frontmatter"
+- **Format**: Matches n05-operations.md (frontmatter with `glob`/`description`, Identity, When You Are N03, Build Rules, Routing)
+
+It's already tracked in git with no pending changes. Nothing to commit — the file is already in place and up to date.
+[22:12:37,09] G1.1 done (exit: 0) 
+[22:12:37,09] G2.1 kill-before-spawn 
+The kill-before-spawn logic is already present at lines 85-103. It does exactly what you described: checks `spawn_pids.txt` for existing entries matching the nucleus, kills them with `taskkill /F /PID /T`, and removes old entries. The comment `# Kill-before-spawn (roadmap principle 6)` is already there on line 85.
+
+This is already implemented. No changes needed.
+[22:12:47,01] G2.1 done (exit: 0) 
+[22:12:47,02] G2.4 boots -p mode 
+All 6 boot files already have every change you requested:
+
+1. **`-p` mode**: All use `claude -p %FLAGS% %MODEL% %MCP% %SETTINGS% --name ...` (line 28 in each)
+2. **`--name` flag**: N01-Research, N02-Marketing, N03-Builder, N04-Knowledge, N05-Operations, N06-Commercial
+3. **Exit lines**: All have `echo.` + `echo [N0X COMPLETE]` + `echo Press any key to close...` + `pause >nul` (lines 30-33)
+
+Nothing to change — these files are already in the target state. No commit needed.
+[22:13:04,30] G2.4 done (exit: 0) 
+[22:13:04,31] G1.2+G1.3 naming 
+Done. Committed as `548c751`.
+
+**What was fixed:** 20 kinds had static singleton naming patterns (no `{{variable}}` template). Each now has a parameterized pattern matching its pillar convention:
+
+| Kind | Before | After |
+|------|--------|-------|
+| checkpoint | `p12_ckpt.md` | `p12_ckpt_{{name}}.md` |
+| chunk_strategy | `p01_chunk.md` | `p01_chunk_{{strategy}}.md` |
+| constraint_spec | `p03_constraint.md` | `p03_constraint_{{scope}}.md` |
+| decision_record | `p08_adr.md` | `p08_adr_{{decision}}.md` |
+| entity_memory | `p10_entity.md` | `p10_entity_{{name}}.md` |
+| enum_def | `p06_enum.md` | `p06_enum_{{name}}.md` |
+| eval_dataset | `p07_dataset.md` | `p07_dataset_{{name}}.md` |
+| handoff_protocol | `p02_handoff.md` | `p02_handoff_{{protocol}}.md` |
+| llm_judge | `p07_judge.md` | `p07_judge_{{name}}.md` |
+| memory_scope | `p02_memscope.md` | `p02_memscope_{{agent}}.md` |
+| memory_summary | `p10_summary.md` | `p10_summary_{{scope}}.md` |
+| output_validator | `p05_oval.md` | `p05_oval_{{target}}.md` |
+| prompt_version | `p03_pv.md` | `p03_pv_{{version}}.md` |
+| rate_limit_config | `p09_ratelimit.md` | `p09_ratelimit_{{scope}}.md` |
+| red_team_eval | `p07_redteam.md` | `p07_redteam_{{target}}.md` |
+| regression_check | `p07_regcheck.md` | `p07_regcheck_{{target}}.md` |
+| retriever_config | `p01_retr_cfg.md` | `p01_retr_cfg_{{store}}.md` |
+| reward_signal | `p11_reward.md` | `p11_reward_{{metric}}.md` |
+| schedule | `p12_sched.md` | `p12_sched_{{name}}.md` |
+| secret_config | `p09_secret.md` | `p09_secret_{{scope}}.md` |
+
+**Re: pillar mismatches** -- axiom already has pillar=P02 with naming=`p02_ax_{{rule}}.md`, and naming_rule already has pillar=P08 with naming=`p08_nr_{{scope}}.md`. Both are consistent; no mismatch to fix. There were no literal "NONE" values in the file -- the 20 singletons above are what needed the fix.
+[22:18:36,99] G1.3 done (exit: 0) 
+[22:18:37,00] G2.2+G2.3+G2.5 spawn fixes 
+Committed as `3b8b706`. Pre-commit hooks passed (encoding + PS parse checks).
+
+**What was fixed:**
+
+1. **spawn_stop.ps1** — Orphan scan section had direct `taskkill` calls that bypassed `Kill-Tree`, so killed PIDs weren't tracked in `$killedPids`. Now routes through `Kill-Tree` for consistent PID tracking and DryRun support.
+
+2. **spawn_monitor.ps1** — Two bugs causing RUNNING for completed processes:
+   - `$signalDir` had mixed slashes (`\.cex/runtime/signals`)
+   - Timestamp parse failed silently because `spawn_solo` writes `yyyy-MM-dd_HH:mm:ss` (underscore), but `[datetime]::Parse()` doesn't handle underscores. Fix: `-replace '_', ' '` before parsing. Without this, spawn time fell back to PID file mtime, filtering out valid signals.
+
+3. **flywheel_monitor.ps1** — Double `Split-Path -Parent` went up 2 levels (to `Documents/GitHub/` instead of repo root). Every other script uses single `Split-Path`. Also removed `--no-verify` on the git commit line (violates CEX rules).
+
+**Note on the colon parse error:** PowerShell's AST parser reports 0 errors on this file, and I found no `$var:` invalid reference patterns. The double `Split-Path` was the root cause of runtime failures — it set `$CEX_ROOT` to the wrong directory, causing all subsequent operations to fail.
+[22:33:47,40] G2.X done (exit: 0) 
+[22:33:47,41] G4.4 sanitize hook 
+`cex_sanitize.py` is **already wired into the pre-commit hook**. Specifically:
+
+- `check_sanitize()` function at `_tools/cex_hooks.py:409-443` runs `cex_sanitize.py --check --scope _tools/` when staged `.py` files exist under `_tools/`.
+- It's called as check #5 in `run_pre_commit()` at line 537: `errors += check_sanitize(all_staged)`.
+- Returns 1 (FAIL) if non-ASCII is found, 0 (PASS) otherwise.
+- The docstring at line 493 also documents it.
+
+Nothing to add — the integration is already complete and correct.
+[22:34:04,17] G4.4 done (exit: 0) 
+[22:34:04,19] H1 GATE CHECK 
+========================================================================
+CEX Doctor v2.0 -- Naming v2.0 + Density + 13-File Completeness
+Root: C:\Users\PC\Documents\GitHub\cex
+Mode: DIAGNOSE ONLY
+========================================================================
+
+Found 119 builder directories
+
+Builder                              Name  Dens  Size  13ok  YAML   ALL
+-----------------------------------------------------------------------
+action-prompt-builder                  ok    ok    ok    ok    ok    ok
+agent-builder                          ok    ok    ok    ok    ok    ok
+agent-card-builder                     ok    ok    ok    ok    ok    ok
+agent-package-builder                  ok    ok    ok    ok    ok    ok
+api-client-builder                     ok    ok    ok    ok    ok    ok
+audio-tool-builder                     ok    ok    ok    ok    ok    ok
+axiom-builder                          ok    ok    ok    ok    ok    ok
+benchmark-builder                      ok    ok    ok    ok    ok    ok
+boot-config-builder                    ok    ok    ok    ok    ok    ok
+brain-index-builder                    ok    ok    ok    ok    ok    ok
+browser-tool-builder                   ok    ok    ok    ok    ok    ok
+bugloop-builder                        ok    ok    ok    ok    ok    ok
+chain-builder                          ok    ok    ok    ok    ok    ok
+checkpoint-builder                     ok    ok    ok    ok    ok    ok
+chunk-strategy-builder                 ok    ok    ok    ok    ok    ok
+cli-tool-builder                       ok    ok    ok    ok    ok    ok
+code-executor-builder                  ok    ok    ok    ok    ok    ok
+component-map-builder                  ok    ok    ok    ok    ok    ok
+compression-config-builder             ok    ok    ok    ok    ok    ok
+computer-use-builder                   ok    ok    ok    ok    ok    ok
+constraint-spec-builder                ok    ok    ok    ok    ok    ok
+content-monetization-builder           ok    ok    ok    ok    ok    ok
+context-doc-builder                    ok    ok    ok    ok    ok    ok
+daemon-builder                         ok    ok    ok    ok    ok    ok
+dag-builder                            ok    ok    ok    ok    ok    ok
+db-connector-builder                   ok    ok    ok    ok    ok    ok
+decision-record-builder                ok    ok    ok    ok    ok    ok
+diagram-builder                        ok    ok    ok    ok    ok    ok
+director-builder                       ok    ok    ok    ok    ok    ok
+dispatch-rule-builder                  ok    ok    ok    ok    ok    ok
+document-loader-builder                ok    ok    ok    ok    ok    ok
+e2e-eval-builder                       ok    ok    ok    ok    ok    ok
+effort-profile-builder                 ok    ok    ok    ok    ok    ok
+embedder-provider-builder              ok    ok    ok    ok    ok    ok
+embedding-config-builder               ok    ok    ok    ok    ok    ok
+entity-memory-builder                  ok    ok    ok    ok    ok    ok
+enum-def-builder                       ok    ok    ok    ok    ok    ok
+env-config-builder                     ok    ok    ok    ok    ok    ok
+eval-dataset-builder                   ok    ok    ok    ok    ok    ok
+fallback-chain-builder                 ok    ok    ok    ok    ok    ok
+feature-flag-builder                   ok    ok    ok    ok    ok    ok
+few-shot-example-builder               ok    ok    ok    ok    ok    ok
+formatter-builder                      ok    ok    ok    ok    ok    ok
+function-def-builder                   ok    ok    ok    ok    ok    ok
+glossary-entry-builder                 ok    ok    ok    ok    ok    ok
+golden-test-builder                    ok    ok    ok    ok    ok    ok
+guardrail-builder                      ok    ok    ok    ok    ok    ok
+handoff-builder                        ok    ok    ok    ok    ok    ok
+handoff-protocol-builder               ok    ok    ok    ok    ok    ok
+hook-builder                           ok    ok    ok    ok    ok    ok
+hook-config-builder                    ok    ok    ok    ok    ok    ok
+input-schema-builder                   ok    ok    ok    ok    ok    ok
+instruction-builder                    ok    ok    ok    ok    ok    ok
+interface-builder                      ok    ok    ok    ok    ok    ok
+knowledge-card-builder                 ok    ok    ok    ok    ok    ok
+landing-page-builder                   ok    ok    ok    ok    ok    ok
+law-builder                            ok    ok    ok    ok    ok    ok
+learning-record-builder                ok    ok    ok    ok    ok    ok
+lens-builder                           ok    ok    ok    ok    ok    ok
+lifecycle-rule-builder                 ok    ok    ok    ok    ok    ok
+llm-judge-builder                      ok    ok    ok    ok    ok    ok
+mcp-server-builder                     ok    ok    ok    ok    ok    ok
+memory-scope-builder                   ok    ok    ok    ok    ok    ok
+memory-summary-builder                 ok    ok    ok    ok    ok    ok
+memory-type-builder                    ok    ok    ok    ok    ok    ok
+mental-model-builder                   ok    ok    ok    ok    ok    ok
+model-card-builder                     ok    ok    ok    ok    ok    ok
+model-provider-builder                 ok    ok    ok    ok    ok    ok
+naming-rule-builder                    ok    ok    ok    ok    ok    ok
+notifier-builder                       ok    ok    ok    ok    ok    ok
+optimizer-builder                      ok    ok    ok    ok    ok    ok
+output-validator-builder               ok    ok    ok    ok    ok    ok
+parser-builder                         ok    ok    ok    ok    ok    ok
+path-config-builder                    ok    ok    ok    ok    ok    ok
+pattern-builder                        ok    ok    ok    ok    ok    ok
+permission-builder                     ok    ok    ok    ok    ok    ok
+plugin-builder                         ok    ok    ok    ok    ok    ok
+prompt-template-builder                ok    ok    ok    ok    ok    ok
+prompt-version-builder                 ok    ok    ok    ok    ok    ok
+quality-gate-builder                   ok    ok    ok    ok    ok    ok
+rag-source-builder                     ok    ok    ok    ok    ok    ok
+rate-limit-config-builder              ok    ok    ok    ok    ok    ok
+reasoning-trace-builder                ok    ok    ok    ok    ok    ok
+red-team-eval-builder                  ok    ok    ok    ok    ok    ok
+regression-check-builder               ok    ok    ok    ok    ok    ok
+research-pipeline-builder              ok    ok    ok    ok    ok    ok
+response-format-builder                ok    ok    ok    ok    ok    ok
+retriever-builder                      ok    ok    ok    ok    ok    ok
+retriever-config-builder               ok    ok    ok    ok    ok    ok
+reward-signal-builder                  ok    ok    ok    ok    ok    ok
+router-builder                         ok    ok    ok    ok    ok    ok
+runtime-rule-builder                   ok    ok    ok    ok    ok    ok
+runtime-state-builder                  ok    ok    ok    ok    ok    ok
+schedule-builder                       ok    ok    ok    ok    ok    ok
+scoring-rubric-builder                 ok    ok    ok    ok    ok    ok
+search-tool-builder                    ok    ok    ok    ok    ok    ok
+secret-config-builder                  ok    ok    ok    ok    ok    ok
+session-backend-builder                ok    ok    ok    ok    ok    ok
+session-state-builder                  ok    ok    ok    ok    ok    ok
+signal-builder                         ok    ok    ok    ok    ok    ok
+skill-builder                          ok    ok    ok    ok    ok    ok
+smoke-eval-builder                     ok    ok    ok    ok    ok    ok
+social-publisher-builder               ok    ok    ok    ok    ok    ok
+software-project-builder               ok    ok    ok    ok    ok    ok
+spawn-config-builder                   ok    ok    ok    ok    ok    ok
+supabase-data-layer-builder            ok    ok    ok    ok    ok    ok
+system-prompt-builder                  ok    ok    ok    ok    ok    ok
+tagline-builder                        ok    ~~    ok    ok    ok    ~~
+toolkit-builder                        ok    ok    ok    ok    ok    ok
+trace-config-builder                   ok    ok    ok    ok    ok    ok
+type-def-builder                       ok    ok    ok    ok    ok    ok
+unit-eval-builder                      ok    ok    ok    ok    ok    ok
+validation-schema-builder              ok    ok    ok    ok    ok    ok
+validator-builder                      ok    ok    ok    ok    ok    ok
+vectordb-backend-builder               ok    ok    ok    ok    ok    ok
+vision-tool-builder                    ok    ok    ok    ok    ok    ok
+webhook-builder                        ok    ok    ok    ok    ok    ok
+workflow-builder                       ok    ok    ok    ok    ok    ok
+workflow-primitive-builder             ok    ok    ok    ok    ok    ok
+-----------------------------------------------------------------------
+TOTAL                               118 ok    1 ~~    0 XX
+
+DETAILS (non-PASS builders):
+
+[WARN] tagline-builder:
+  density: bld_output_template_tagline.md = 0.76 (min 0.78)
+
+========================================================================
+Builders:       119
+Total files:    1547 (expected 1547)
+Total size:     4446.9 KB
+Avg density:    0.98
+Oversized:      0 files (>6144B std, >8192B instructions)
+No frontmatter: 0 files
+Result:         118 PASS | 1 WARN | 0 FAIL
+========================================================================
+
+KC Library: 3 sources, 28 domains, 98/98 kinds covered
+========================================================================
+
+=== L0: Genesis & Config ===
+  [OK] L0/kinds_meta.json: WIRED  117 kinds
+  [OK] L0/router_config.yaml: WIRED  
+  [OK] L0/boot_scripts: WIRED  21 scripts
+  [OK] L0/dispatch.sh: WIRED  
+  [OK] L0/runtime/decisions: WIRED  
+  [OK] L0/runtime/handoffs: WIRED  
+  [OK] L0/runtime/signals: WIRED  
+  [OK] L0/runtime/pids: WIRED  
+  [OK] L0/runtime/locks: WIRED  
+  [OK] L0/runtime/plans: WIRED  
+  [OK] L0/runtime/outputs: WIRED  
+  [OK] L0/runtime/archive: WIRED  
+
+=== L1: Pillars (P01-P12) ===
+  [OK] L1/P01_knowledge/_schema: WIRED  
+  [OK] L1/P01_knowledge/compiled: WIRED  197 files
+  [OK] L1/P02_model/_schema: WIRED  
+  [OK] L1/P02_model/compiled: WIRED  21 files
+  [OK] L1/P03_prompt/_schema: WIRED  
+  [OK] L1/P03_prompt/compiled: WIRED  25 files
+  [OK] L1/P04_tools/_schema: WIRED  
+  [OK] L1/P04_tools/compiled: WIRED  61 files
+  [OK] L1/P05_output/_schema: WIRED  
+  [OK] L1/P05_output/compiled: WIRED  6 files
+  [OK] L1/P06_schema/_schema: WIRED  
+  [OK] L1/P06_schema/compiled: WIRED  11 files
+  [OK] L1/P07_evals/_schema: WIRED  
+  [OK] L1/P07_evals/compiled: WIRED  13 files
+  [OK] L1/P08_architecture/_schema: WIRED  
+  [OK] L1/P08_architecture/compiled: WIRED  14 files
+  [OK] L1/P09_config/_schema: WIRED  
+  [OK] L1/P09_config/compiled: WIRED  8 files
+  [OK] L1/P10_memory/_schema: WIRED  
+  [OK] L1/P10_memory/compiled: WIRED  14 files
+  [OK] L1/P11_feedback/_schema: WIRED  
+  [OK] L1/P11_feedback/compiled: WIRED  11 files
+  [OK] L1/P12_orchestration/_schema: WIRED  
+  [OK] L1/P12_orchestration/compiled: WIRED  15 files
+
+=== L2: Nuclei (N01-N07) ===
+  [OK] L2/N01_intelligence/structure: WIRED  12 subdirs
+  [OK] L2/N01_intelligence/compiled: WIRED  37 artifacts
+  [OK] L2/N02_marketing/structure: WIRED  14 subdirs
+  [OK] L2/N02_marketing/compiled: WIRED  40 artifacts
+  [OK] L2/N03_engineering/structure: WIRED  13 subdirs
+  [OK] L2/N03_engineering/compiled: WIRED  43 artifacts
+  [OK] L2/N04_knowledge/structure: WIRED  12 subdirs
+  [OK] L2/N04_knowledge/compiled: WIRED  41 artifacts
+  [OK] L2/N05_operations/structure: WIRED  10 subdirs
+  [OK] L2/N05_operations/compiled: WIRED  19 artifacts
+  [OK] L2/N06_commercial/structure: WIRED  12 subdirs
+  [OK] L2/N06_commercial/compiled: WIRED  17 artifacts
+  [OK] L2/N07_admin/structure: WIRED  10 subdirs
+  [OK] L2/N07_admin/compiled: WIRED  18 artifacts
+  [OK] L2/N01_rule: WIRED  n01-intelligence.md
+  [OK] L2/N02_rule: WIRED  n02-marketing.md
+  [OK] L2/N03_rule: WIRED  n03-builder.md
+  [OK] L2/N04_rule: WIRED  n04-knowledge.md
+  [OK] L2/N05_rule: WIRED  n05-operations.md
+  [OK] L2/N06_rule: WIRED  n06-commercial.md
+  [OK] L2/N07_rule: WIRED  n07-autonomous-lifecycle.md
+
+=== L3: Archetypes ===
+  [OK] L3/builder_count: WIRED  120 builders
+  [OK] L3/action-prompt-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-card-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-package-builder/ISOs: WIRED  13/13
+  [OK] L3/api-client-builder/ISOs: WIRED  13/13
+  [OK] L3/shared_skills: WIRED  3 shared
+  [OK] L3/sub_agents: WIRED  121 agents
+
+=== L4: Knowledge Library ===
+  [OK] L4/kind_KCs: WIRED  119 KCs
+  [OK] L4/domain_KCs: WIRED  82 domain KCs
+  [OK] L4/KC_coverage: WIRED  117/117 covered, missing: []
+
+=== L5: Tools ===
+  [OK] L5/cex_tools: WIRED  58 tools
+  [OK] L5/import:cex_prompt_layers: WIRED  
+  [OK] L5/import:cex_skill_loader: WIRED  
+  [OK] L5/import:cex_router: WIRED  
+  [OK] L5/import:cex_token_budget: WIRED  
+  [OK] L5/import:cex_gdp: WIRED  
+  [OK] L5/import:cex_memory_types: WIRED  
+  [OK] L5/import:cex_memory_age: WIRED  
+  [OK] L5/import:cex_agent_spawn: WIRED  
+  [OK] L5/import:cex_coordinator: WIRED  
+  [OK] L5/prompt_layers_load: WIRED  15 artifacts
+  [OK] L5/skill_loader_ISOs: WIRED  1933 ISOs
+  [OK] L5/cex_sdk_modules: WIRED  56 modules
+
+=== WIRES: 7 OpenClaude Integrations ===
+  [OK] WIRE/W1_identity: WIRED  
+  [OK] WIRE/W2_doing_tasks: WIRED  
+  [OK] WIRE/W3_action_protocol: WIRED  
+  [OK] WIRE/W4_guardrails: WIRED  PRODUCE should have guardrails
+  [OK] WIRE/W4b_no_guard_REASON: WIRED  REASON excluded
+  [OK] WIRE/W5_verification: WIRED  
+  [OK] WIRE/W5b_no_verify_agent_PRODUCE: WIRED  verification_agent excluded from PRODUCE
+  [OK] WIRE/W6_compaction: WIRED  ratio=0.98
+  [OK] WIRE/W7_memory_extract: WIRED  counter=5
+  [OK] WIRE/T01_skill_loader_wired: WIRED  SkillLoader in crew_runner
+  [OK] WIRE/T02_router_wired: WIRED  CexRouter in crew_runner
+  [OK] WIRE/T03_gdp_wired: WIRED  GDP in 8f_runner
+  [OK] WIRE/T04_budget_wired: WIRED  TokenBudget in 8f_runner
+  [OK] WIRE/T05_memtype_wired: WIRED  MemoryType in update
+  [OK] WIRE/T06_memage_wired: WIRED  MemoryAge in select
+  [OK] WIRE/T08_coordinator_wired: WIRED  Coordinator in mission_runner
+  [OK] WIRE/T10_reverse_compiler: WIRED  Reverse compiler exists
+  [OK] WIRE/artifacts_loadable: WIRED  14/14
+
+=== L6: Governance ===
+  [OK] L6/rules: WIRED  12
+  [OK] L6/commands: WIRED  13
+  [OK] L6/learning_records: WIRED  75
+
+=== CASCADES: 7 Dependency Chains ===
+  [OK] CASCADE/C1_build: WIRED  verb=cria obj=None
+  [OK] CASCADE/C2_quality: WIRED  
+  [OK] CASCADE/C3_knowledge: WIRED  
+  [OK] CASCADE/C4_decision: WIRED  
+  [OK] CASCADE/C5_memory: WIRED  types=4 age_module=ok
+  [OK] CASCADE/C6_evolution: WIRED  
+  [OK] CASCADE/C7_dispatch: WIRED  runner=True watch=True dispatch=True
+
+============================================================
+CEX FLYWHEEL AUDIT -- Doc vs Practice
+============================================================
+  WIRED:   109  (documented AND working)
+  BROKEN:    0  (documented but broken)
+  PHANTOM:   0  (documented but missing)
+  ORPHAN:    0  (exists but undocumented)
+  TOTAL:   109  checks
+  HEALTH:  100%  (109/109)
+============================================================
+  Report:  C:\Users\PC\Documents\GitHub\cex\.cex\quality\audit_20260406_223451.json
+
+
+============================================================
+  Scanned: 116 files
+  Clean:   116
+  Dirty:   0
+  Issues:  0 non-ASCII chars
+============================================================
+[22:34:53,42] H1 gate logged 
+[22:34:53,44] PHASE 2: EVOLVE 
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO]   CEX OVERNIGHT FLYWHEEL
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO] Started: 2026-04-06T22:34:53.8611785-03:00
+[2026-04-06 22:34:53] [INFO] Budget:  200000 tokens
+[2026-04-06 22:34:53] [INFO] Target:  9
+[2026-04-06 22:34:53] [INFO] Thresh:  8.5
+[2026-04-06 22:34:53] [INFO] Cycles:  max 50
+[2026-04-06 22:34:53] [INFO] Phase:   evolve
+[2026-04-06 22:34:53] [INFO] DryRun:  False
+[2026-04-06 22:34:53] [INFO] Log:     C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260406_223453.log
+[2026-04-06 22:34:53] [INFO] 
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO]   FLYWHEEL CYCLE 1 / 50
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:34:54] [INFO] ============================================================
+[2026-04-06 22:34:55] [INFO] Found 20 artifacts below target 9
+[2026-04-06 22:34:55] [INFO]   Evolving: N02_marketing\output\output_sdk_validation_self_audit.md (current: 0)
+[2026-04-06 22:34:56] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:34:56] [OK]   OK N02_marketing\output\output_sdk_validation_self_audit.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:34:56] [METRIC]   Mode: heuristic
+[2026-04-06 22:34:56] [INFO]   Evolving: N02_marketing\output\output_cf_actions_and_distribution.md (current: 0)
+[2026-04-06 22:34:57] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:34:57] [OK]   OK N02_marketing\output\output_cf_actions_and_distribution.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:34:57] [METRIC]   Mode: heuristic
+[2026-04-06 22:34:58] [INFO]   Evolving: N04_knowledge\output\output_cf_integration_kcs.md (current: 0)
+[2026-04-06 22:34:59] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:34:59] [OK]   OK N04_knowledge\output\output_cf_integration_kcs.md: 0 -> 9 (+9)
+[2026-04-06 22:34:59] [METRIC]   Mode: heuristic
+[2026-04-06 22:34:59] [INFO]   Evolving: N04_knowledge\output\output_sdk_validation_knowledge_audit.md (current: 0)
+[2026-04-06 22:35:00] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:00] [OK]   OK N04_knowledge\output\output_sdk_validation_knowledge_audit.md: 0 -> 8.9 (+8.9)
+[2026-04-06 22:35:00] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:00] [INFO]   Evolving: N04_knowledge\output\output_content_factory_internal_audit.md (current: 0)
+[2026-04-06 22:35:01] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:01] [OK]   OK N04_knowledge\output\output_content_factory_internal_audit.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:35:01] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:02] [INFO]   Evolving: N01_intelligence\output\output_sdk_validation_self_audit.md (current: 0)
+[2026-04-06 22:35:03] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:03] [OK]   OK N01_intelligence\output\output_sdk_validation_self_audit.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:35:03] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:03] [INFO]   Evolving: N01_intelligence\output\output_cf_dags_and_specs.md (current: 0)
+[2026-04-06 22:35:04] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:04] [OK]   OK N01_intelligence\output\output_cf_dags_and_specs.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:35:04] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:04] [INFO]   Evolving: N01_intelligence\output\output_content_factory_landscape.md (current: 0)
+[2026-04-06 22:35:05] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:05] [OK]   OK N01_intelligence\output\output_content_factory_landscape.md: 0 -> 8.9 (+8.9)
+[2026-04-06 22:35:05] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:06] [INFO]   Evolving: N01_intelligence\output\output_readme_comparison.md (current: 8.4)
+[2026-04-06 22:35:07] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:07] [OK]   OK N01_intelligence\output\output_readme_comparison.md: 8.4 -> 8.7 (+0.3)
+[2026-04-06 22:35:07] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:07] [INFO]   Evolving: N02_marketing\output\output_readme_hero.md (current: 8.6)
+[2026-04-06 22:35:07] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:07] [SKIP]   SKIP N02_marketing\output\output_readme_hero.md: no improvement (8.6)
+[2026-04-06 22:35:07] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:08] [INFO]   Evolving: N04_knowledge\output\output_readme_curriculum.md (current: 8.7)
+[2026-04-06 22:35:08] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:08] [SKIP]   SKIP N04_knowledge\output\output_readme_curriculum.md: no improvement (8.7)
+[2026-04-06 22:35:08] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:08] [INFO]   Evolving: N01_intelligence\output\output_competitive_landscape.md (current: 8.8)
+[2026-04-06 22:35:09] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:09] [SKIP]   SKIP N01_intelligence\output\output_competitive_landscape.md: no improvement (8.8)
+[2026-04-06 22:35:09] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:09] [INFO]   Evolving: N01_intelligence\output\self_review_2026-04-02.md (current: 8.8)
+[2026-04-06 22:35:09] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:09] [SKIP]   SKIP N01_intelligence\output\self_review_2026-04-02.md: no improvement (8.8)
+[2026-04-06 22:35:09] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:10] [INFO]   Evolving: N04_knowledge\memory\knowledge_memory_index.md (current: 8.8)
+[2026-04-06 22:35:10] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:10] [SKIP]   SKIP N04_knowledge\memory\knowledge_memory_index.md: no improvement (8.8)
+[2026-04-06 22:35:10] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:10] [INFO]   Evolving: N04_knowledge\output\self_review_2026-04-02.md (current: 8.9)
+[2026-04-06 22:35:11] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:11] [SKIP]   SKIP N04_knowledge\output\self_review_2026-04-02.md: no improvement (8.9)
+[2026-04-06 22:35:11] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:11] [INFO]   Evolving: N04_knowledge\schemas\naming_convention_mapping.md (current: 8.9)
+[2026-04-06 22:35:11] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:11] [SKIP]   SKIP N04_knowledge\schemas\naming_convention_mapping.md: no improvement (8.9)
+[2026-04-06 22:35:11] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:12] [INFO]   Evolving: N04_knowledge\quality\quality_gate_knowledge.md (current: 8.9)
+[2026-04-06 22:35:12] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:12] [SKIP]   SKIP N04_knowledge\quality\quality_gate_knowledge.md: no improvement (8.9)
+[2026-04-06 22:35:12] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:12] [INFO]   Evolving: N04_knowledge\output\output_competitive_knowledge.md (current: 8.9)
+[2026-04-06 22:35:12] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:12] [SKIP]   SKIP N04_knowledge\output\output_competitive_knowledge.md: no improvement (8.9)
+[2026-04-06 22:35:13] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:13] [INFO]   Evolving: N04_knowledge\memory\rag_pipeline_memory.md (current: 8.9)
+[2026-04-06 22:35:13] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:13] [SKIP]   SKIP N04_knowledge\memory\rag_pipeline_memory.md: no improvement (8.9)
+[2026-04-06 22:35:13] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:14] [INFO]   Evolving: N01_intelligence\quality\quality_gate_intelligence.md (current: 8.9)
+[2026-04-06 22:35:14] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:14] [SKIP]   SKIP N01_intelligence\quality\quality_gate_intelligence.md: no improvement (8.9)
+[2026-04-06 22:35:14] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:14] [INFO] Evolve complete. 20 processed, 9 improved.
+[2026-04-06 22:35:16] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:16] [INFO] 
+[2026-04-06 22:35:21] [INFO] ============================================================
+[2026-04-06 22:35:21] [INFO]   FLYWHEEL CYCLE 2 / 50
+[2026-04-06 22:35:21] [INFO] ============================================================
+[2026-04-06 22:35:21] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:21] [INFO] ============================================================
+[2026-04-06 22:35:21] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:21] [INFO] ============================================================
+[2026-04-06 22:35:21] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:21] [INFO]   Evolving: N01_intelligence\output\output_readme_comparison.md (current: 8.7)
+[2026-04-06 22:35:21] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:21] [SKIP]   SKIP N01_intelligence\output\output_readme_comparison.md: no improvement (8.7)
+[2026-04-06 22:35:21] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:22] [INFO]   Evolving: N04_knowledge\output\output_sdk_validation_knowledge_audit.md (current: 8.9)
+[2026-04-06 22:35:22] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:22] [SKIP]   SKIP N04_knowledge\output\output_sdk_validation_knowledge_audit.md: no improvement (8.9)
+[2026-04-06 22:35:22] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:22] [INFO]   Evolving: N01_intelligence\output\output_content_factory_landscape.md (current: 8.9)
+[2026-04-06 22:35:22] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:22] [SKIP]   SKIP N01_intelligence\output\output_content_factory_landscape.md: no improvement (8.9)
+[2026-04-06 22:35:22] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:23] [INFO] Evolve complete. 3 processed, 0 improved.
+[2026-04-06 22:35:23] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:23] [INFO] 
+[2026-04-06 22:35:28] [INFO] ============================================================
+[2026-04-06 22:35:28] [INFO]   FLYWHEEL CYCLE 3 / 50
+[2026-04-06 22:35:28] [INFO] ============================================================
+[2026-04-06 22:35:28] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:28] [INFO] ============================================================
+[2026-04-06 22:35:28] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:28] [INFO] ============================================================
+[2026-04-06 22:35:28] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:28] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:28] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:28] [INFO] 
+[2026-04-06 22:35:33] [INFO] ============================================================
+[2026-04-06 22:35:33] [INFO]   FLYWHEEL CYCLE 4 / 50
+[2026-04-06 22:35:33] [INFO] ============================================================
+[2026-04-06 22:35:33] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:33] [INFO] ============================================================
+[2026-04-06 22:35:33] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:33] [INFO] ============================================================
+[2026-04-06 22:35:33] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:34] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:34] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:34] [INFO] 
+[2026-04-06 22:35:39] [INFO] ============================================================
+[2026-04-06 22:35:39] [INFO]   FLYWHEEL CYCLE 5 / 50
+[2026-04-06 22:35:39] [INFO] ============================================================
+[2026-04-06 22:35:39] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:39] [INFO] ============================================================
+[2026-04-06 22:35:39] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:39] [INFO] ============================================================
+[2026-04-06 22:35:39] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:39] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:39] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:39] [INFO] 
+[2026-04-06 22:35:44] [INFO] ============================================================
+[2026-04-06 22:35:44] [INFO]   FLYWHEEL CYCLE 6 / 50
+[2026-04-06 22:35:44] [INFO] ============================================================
+[2026-04-06 22:35:44] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:44] [INFO] ============================================================
+[2026-04-06 22:35:44] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:44] [INFO] ============================================================
+[2026-04-06 22:35:44] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:44] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:44] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:44] [INFO] 
+[2026-04-06 22:35:49] [INFO] ============================================================
+[2026-04-06 22:35:49] [INFO]   FLYWHEEL CYCLE 7 / 50
+[2026-04-06 22:35:49] [INFO] ============================================================
+[2026-04-06 22:35:49] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:49] [INFO] ============================================================
+[2026-04-06 22:35:49] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:49] [INFO] ============================================================
+[2026-04-06 22:35:49] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:49] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:49] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:49] [INFO] 
+[2026-04-06 22:35:54] [INFO] ============================================================
+[2026-04-06 22:35:54] [INFO]   FLYWHEEL CYCLE 8 / 50
+[2026-04-06 22:35:54] [INFO] ============================================================
+[2026-04-06 22:35:54] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:54] [INFO] ============================================================
+[2026-04-06 22:35:54] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:54] [INFO] ============================================================
+[2026-04-06 22:35:55] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:55] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:55] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:55] [INFO] 
+[2026-04-06 22:36:00] [INFO] ============================================================
+[2026-04-06 22:36:00] [INFO]   FLYWHEEL CYCLE 9 / 50
+[2026-04-06 22:36:00] [INFO] ============================================================
+[2026-04-06 22:36:00] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:00] [INFO] ============================================================
+[2026-04-06 22:36:00] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:00] [INFO] ============================================================
+[2026-04-06 22:36:00] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:00] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:00] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:00] [INFO] 
+[2026-04-06 22:36:05] [INFO] ============================================================
+[2026-04-06 22:36:05] [INFO]   FLYWHEEL CYCLE 10 / 50
+[2026-04-06 22:36:05] [INFO] ============================================================
+[2026-04-06 22:36:05] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:05] [INFO] ============================================================
+[2026-04-06 22:36:05] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:05] [INFO] ============================================================
+[2026-04-06 22:36:05] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:05] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:05] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:05] [INFO] 
+[2026-04-06 22:36:10] [INFO] ============================================================
+[2026-04-06 22:36:10] [INFO]   FLYWHEEL CYCLE 11 / 50
+[2026-04-06 22:36:10] [INFO] ============================================================
+[2026-04-06 22:36:10] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:10] [INFO] ============================================================
+[2026-04-06 22:36:10] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:10] [INFO] ============================================================
+[2026-04-06 22:36:10] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:10] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:10] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:10] [INFO] 
+[2026-04-06 22:36:15] [INFO] ============================================================
+[2026-04-06 22:36:15] [INFO]   FLYWHEEL CYCLE 12 / 50
+[2026-04-06 22:36:16] [INFO] ============================================================
+[2026-04-06 22:36:16] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:16] [INFO] ============================================================
+[2026-04-06 22:36:16] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:16] [INFO] ============================================================
+[2026-04-06 22:36:16] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:16] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:16] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:16] [INFO] 
+[2026-04-06 22:36:21] [INFO] ============================================================
+[2026-04-06 22:36:21] [INFO]   FLYWHEEL CYCLE 13 / 50
+[2026-04-06 22:36:21] [INFO] ============================================================
+[2026-04-06 22:36:21] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:21] [INFO] ============================================================
+[2026-04-06 22:36:21] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:21] [INFO] ============================================================
+[2026-04-06 22:36:21] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:21] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:21] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:21] [INFO] 
+[2026-04-06 22:36:26] [INFO] ============================================================
+[2026-04-06 22:36:26] [INFO]   FLYWHEEL CYCLE 14 / 50
+[2026-04-06 22:36:26] [INFO] ============================================================
+[2026-04-06 22:36:26] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:26] [INFO] ============================================================
+[2026-04-06 22:36:26] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:26] [INFO] ============================================================
+[2026-04-06 22:36:26] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:26] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:26] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:26] [INFO] 
+[2026-04-06 22:36:31] [INFO] ============================================================
+[2026-04-06 22:36:31] [INFO]   FLYWHEEL CYCLE 15 / 50
+[2026-04-06 22:36:31] [INFO] ============================================================
+[2026-04-06 22:36:31] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:31] [INFO] ============================================================
+[2026-04-06 22:36:31] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:31] [INFO] ============================================================
+[2026-04-06 22:36:31] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:31] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:32] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:32] [INFO] 
+[2026-04-06 22:36:37] [INFO] ============================================================
+[2026-04-06 22:36:37] [INFO]   FLYWHEEL CYCLE 16 / 50
+[2026-04-06 22:36:37] [INFO] ============================================================
+[2026-04-06 22:36:37] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:37] [INFO] ============================================================
+[2026-04-06 22:36:37] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:37] [INFO] ============================================================
+[2026-04-06 22:36:37] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:37] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:37] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:37] [INFO] 
+[2026-04-06 22:36:42] [INFO] ============================================================
+[2026-04-06 22:36:42] [INFO]   FLYWHEEL CYCLE 17 / 50
+[2026-04-06 22:36:42] [INFO] ============================================================
+[2026-04-06 22:36:42] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:42] [INFO] ============================================================
+[2026-04-06 22:36:42] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:42] [INFO] ============================================================
+[2026-04-06 22:36:42] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:42] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:42] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:42] [INFO] 
+[2026-04-06 22:36:47] [INFO] ============================================================
+[2026-04-06 22:36:47] [INFO]   FLYWHEEL CYCLE 18 / 50
+[2026-04-06 22:36:47] [INFO] ============================================================
+[2026-04-06 22:36:47] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:47] [INFO] ============================================================
+[2026-04-06 22:36:47] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:47] [INFO] ============================================================
+[2026-04-06 22:36:47] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:47] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:47] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:47] [INFO] 
+[2026-04-06 22:36:52] [INFO] ============================================================
+[2026-04-06 22:36:52] [INFO]   FLYWHEEL CYCLE 19 / 50
+[2026-04-06 22:36:52] [INFO] ============================================================
+[2026-04-06 22:36:52] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:52] [INFO] ============================================================
+[2026-04-06 22:36:52] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:52] [INFO] ============================================================
+[2026-04-06 22:36:53] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:53] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:53] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:53] [INFO] 
+[2026-04-06 22:36:58] [INFO] ============================================================
+[2026-04-06 22:36:58] [INFO]   FLYWHEEL CYCLE 20 / 50
+[2026-04-06 22:36:58] [INFO] ============================================================
+[2026-04-06 22:36:58] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:58] [INFO] ============================================================
+[2026-04-06 22:36:58] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:58] [INFO] ============================================================
+[2026-04-06 22:36:58] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:58] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:58] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:58] [INFO] 
+[2026-04-06 22:37:03] [INFO] ============================================================
+[2026-04-06 22:37:03] [INFO]   FLYWHEEL CYCLE 21 / 50
+[2026-04-06 22:37:03] [INFO] ============================================================
+[2026-04-06 22:37:03] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:03] [INFO] ============================================================
+[2026-04-06 22:37:03] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:03] [INFO] ============================================================
+[2026-04-06 22:37:03] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:03] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:03] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:03] [INFO] 
+[2026-04-06 22:37:08] [INFO] ============================================================
+[2026-04-06 22:37:08] [INFO]   FLYWHEEL CYCLE 22 / 50
+[2026-04-06 22:37:08] [INFO] ============================================================
+[2026-04-06 22:37:08] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:08] [INFO] ============================================================
+[2026-04-06 22:37:08] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:08] [INFO] ============================================================
+[2026-04-06 22:37:08] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:08] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:08] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:09] [INFO] 
+[2026-04-06 22:37:14] [INFO] ============================================================
+[2026-04-06 22:37:14] [INFO]   FLYWHEEL CYCLE 23 / 50
+[2026-04-06 22:37:14] [INFO] ============================================================
+[2026-04-06 22:37:14] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:14] [INFO] ============================================================
+[2026-04-06 22:37:14] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:14] [INFO] ============================================================
+[2026-04-06 22:37:14] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:14] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:14] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:14] [INFO] 
+[2026-04-06 22:37:19] [INFO] ============================================================
+[2026-04-06 22:37:19] [INFO]   FLYWHEEL CYCLE 24 / 50
+[2026-04-06 22:37:19] [INFO] ============================================================
+[2026-04-06 22:37:19] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:19] [INFO] ============================================================
+[2026-04-06 22:37:19] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:19] [INFO] ============================================================
+[2026-04-06 22:37:19] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:19] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:19] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:19] [INFO] 
+[2026-04-06 22:37:24] [INFO] ============================================================
+[2026-04-06 22:37:24] [INFO]   FLYWHEEL CYCLE 25 / 50
+[2026-04-06 22:37:24] [INFO] ============================================================
+[2026-04-06 22:37:24] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:24] [INFO] ============================================================
+[2026-04-06 22:37:24] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:24] [INFO] ============================================================
+[2026-04-06 22:37:24] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:24] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:24] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:24] [INFO] 
+[2026-04-06 22:37:29] [INFO] ============================================================
+[2026-04-06 22:37:29] [INFO]   FLYWHEEL CYCLE 26 / 50
+[2026-04-06 22:37:29] [INFO] ============================================================
+[2026-04-06 22:37:29] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:29] [INFO] ============================================================
+[2026-04-06 22:37:29] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:29] [INFO] ============================================================
+[2026-04-06 22:37:29] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:29] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:30] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:30] [INFO] 
+[2026-04-06 22:37:35] [INFO] ============================================================
+[2026-04-06 22:37:35] [INFO]   FLYWHEEL CYCLE 27 / 50
+[2026-04-06 22:37:35] [INFO] ============================================================
+[2026-04-06 22:37:35] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:35] [INFO] ============================================================
+[2026-04-06 22:37:35] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:35] [INFO] ============================================================
+[2026-04-06 22:37:35] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:35] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:35] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:35] [INFO] 
+[2026-04-06 22:37:40] [INFO] ============================================================
+[2026-04-06 22:37:40] [INFO]   FLYWHEEL CYCLE 28 / 50
+[2026-04-06 22:37:40] [INFO] ============================================================
+[2026-04-06 22:37:40] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:40] [INFO] ============================================================
+[2026-04-06 22:37:40] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:40] [INFO] ============================================================
+[2026-04-06 22:37:40] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:40] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:40] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:40] [INFO] 
+[2026-04-06 22:37:45] [INFO] ============================================================
+[2026-04-06 22:37:45] [INFO]   FLYWHEEL CYCLE 29 / 50
+[2026-04-06 22:37:45] [INFO] ============================================================
+[2026-04-06 22:37:45] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:45] [INFO] ============================================================
+[2026-04-06 22:37:45] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:45] [INFO] ============================================================
+[2026-04-06 22:37:45] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:45] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:45] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:45] [INFO] 
+[2026-04-06 22:37:50] [INFO] ============================================================
+[2026-04-06 22:37:50] [INFO]   FLYWHEEL CYCLE 30 / 50
+[2026-04-06 22:37:50] [INFO] ============================================================
+[2026-04-06 22:37:50] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:50] [INFO] ============================================================
+[2026-04-06 22:37:50] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:50] [INFO] ============================================================
+[2026-04-06 22:37:51] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:51] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:51] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:51] [INFO] 
+[2026-04-06 22:37:56] [INFO] ============================================================
+[2026-04-06 22:37:56] [INFO]   FLYWHEEL CYCLE 31 / 50
+[2026-04-06 22:37:56] [INFO] ============================================================
+[2026-04-06 22:37:56] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:56] [INFO] ============================================================
+[2026-04-06 22:37:56] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:56] [INFO] ============================================================
+[2026-04-06 22:37:56] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:56] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:56] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:56] [INFO] 
+[2026-04-06 22:38:01] [INFO] ============================================================
+[2026-04-06 22:38:01] [INFO]   FLYWHEEL CYCLE 32 / 50
+[2026-04-06 22:38:01] [INFO] ============================================================
+[2026-04-06 22:38:01] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:01] [INFO] ============================================================
+[2026-04-06 22:38:01] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:01] [INFO] ============================================================
+[2026-04-06 22:38:01] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:01] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:01] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:01] [INFO] 
+[2026-04-06 22:38:06] [INFO] ============================================================
+[2026-04-06 22:38:06] [INFO]   FLYWHEEL CYCLE 33 / 50
+[2026-04-06 22:38:06] [INFO] ============================================================
+[2026-04-06 22:38:06] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:06] [INFO] ============================================================
+[2026-04-06 22:38:06] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:06] [INFO] ============================================================
+[2026-04-06 22:38:06] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:06] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:06] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:06] [INFO] 
+[2026-04-06 22:38:11] [INFO] ============================================================
+[2026-04-06 22:38:11] [INFO]   FLYWHEEL CYCLE 34 / 50
+[2026-04-06 22:38:11] [INFO] ============================================================
+[2026-04-06 22:38:11] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:11] [INFO] ============================================================
+[2026-04-06 22:38:11] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:11] [INFO] ============================================================
+[2026-04-06 22:38:12] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:12] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:12] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:12] [INFO] 
+[2026-04-06 22:38:17] [INFO] ============================================================
+[2026-04-06 22:38:17] [INFO]   FLYWHEEL CYCLE 35 / 50
+[2026-04-06 22:38:17] [INFO] ============================================================
+[2026-04-06 22:38:17] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:17] [INFO] ============================================================
+[2026-04-06 22:38:17] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:17] [INFO] ============================================================
+[2026-04-06 22:38:17] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:17] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:17] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:17] [INFO] 
+[2026-04-06 22:38:22] [INFO] ============================================================
+[2026-04-06 22:38:22] [INFO]   FLYWHEEL CYCLE 36 / 50
+[2026-04-06 22:38:22] [INFO] ============================================================
+[2026-04-06 22:38:22] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:22] [INFO] ============================================================
+[2026-04-06 22:38:22] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:22] [INFO] ============================================================
+[2026-04-06 22:38:22] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:22] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:22] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:22] [INFO] 
+[2026-04-06 22:38:27] [INFO] ============================================================
+[2026-04-06 22:38:27] [INFO]   FLYWHEEL CYCLE 37 / 50
+[2026-04-06 22:38:27] [INFO] ============================================================
+[2026-04-06 22:38:27] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:27] [INFO] ============================================================
+[2026-04-06 22:38:27] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:27] [INFO] ============================================================
+[2026-04-06 22:38:27] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:27] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:27] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:27] [INFO] 
+[2026-04-06 22:38:33] [INFO] ============================================================
+[2026-04-06 22:38:33] [INFO]   FLYWHEEL CYCLE 38 / 50
+[2026-04-06 22:38:33] [INFO] ============================================================
+[2026-04-06 22:38:33] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:33] [INFO] ============================================================
+[2026-04-06 22:38:33] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:33] [INFO] ============================================================
+[2026-04-06 22:38:33] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:33] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:33] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:33] [INFO] 
+[2026-04-06 22:38:38] [INFO] ============================================================
+[2026-04-06 22:38:38] [INFO]   FLYWHEEL CYCLE 39 / 50
+[2026-04-06 22:38:38] [INFO] ============================================================
+[2026-04-06 22:38:38] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:38] [INFO] ============================================================
+[2026-04-06 22:38:38] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:38] [INFO] ============================================================
+[2026-04-06 22:38:38] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:38] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:38] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:38] [INFO] 
+[2026-04-06 22:38:43] [INFO] ============================================================
+[2026-04-06 22:38:43] [INFO]   FLYWHEEL CYCLE 40 / 50
+[2026-04-06 22:38:43] [INFO] ============================================================
+[2026-04-06 22:38:43] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:43] [INFO] ============================================================
+[2026-04-06 22:38:43] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:43] [INFO] ============================================================
+[2026-04-06 22:38:43] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:43] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:43] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:43] [INFO] 
+[2026-04-06 22:38:48] [INFO] ============================================================
+[2026-04-06 22:38:48] [INFO]   FLYWHEEL CYCLE 41 / 50
+[2026-04-06 22:38:48] [INFO] ============================================================
+[2026-04-06 22:38:48] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:48] [INFO] ============================================================
+[2026-04-06 22:38:48] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:48] [INFO] ============================================================
+[2026-04-06 22:38:48] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:48] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:49] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:49] [INFO] 
+[2026-04-06 22:38:54] [INFO] ============================================================
+[2026-04-06 22:38:54] [INFO]   FLYWHEEL CYCLE 42 / 50
+[2026-04-06 22:38:54] [INFO] ============================================================
+[2026-04-06 22:38:54] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:54] [INFO] ============================================================
+[2026-04-06 22:38:54] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:54] [INFO] ============================================================
+[2026-04-06 22:38:54] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:54] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:54] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:54] [INFO] 
+[2026-04-06 22:38:59] [INFO] ============================================================
+[2026-04-06 22:38:59] [INFO]   FLYWHEEL CYCLE 43 / 50
+[2026-04-06 22:38:59] [INFO] ============================================================
+[2026-04-06 22:38:59] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:59] [INFO] ============================================================
+[2026-04-06 22:38:59] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:59] [INFO] ============================================================
+[2026-04-06 22:38:59] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:59] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:59] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:59] [INFO] 
+[2026-04-06 22:39:04] [INFO] ============================================================
+[2026-04-06 22:39:04] [INFO]   FLYWHEEL CYCLE 44 / 50
+[2026-04-06 22:39:04] [INFO] ============================================================
+[2026-04-06 22:39:04] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:04] [INFO] ============================================================
+[2026-04-06 22:39:04] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:04] [INFO] ============================================================
+[2026-04-06 22:39:04] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:04] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:04] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:04] [INFO] 
+[2026-04-06 22:39:09] [INFO] ============================================================
+[2026-04-06 22:39:09] [INFO]   FLYWHEEL CYCLE 45 / 50
+[2026-04-06 22:39:09] [INFO] ============================================================
+[2026-04-06 22:39:09] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:09] [INFO] ============================================================
+[2026-04-06 22:39:09] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:09] [INFO] ============================================================
+[2026-04-06 22:39:09] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:09] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:10] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:10] [INFO] 
+[2026-04-06 22:39:15] [INFO] ============================================================
+[2026-04-06 22:39:15] [INFO]   FLYWHEEL CYCLE 46 / 50
+[2026-04-06 22:39:15] [INFO] ============================================================
+[2026-04-06 22:39:15] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:15] [INFO] ============================================================
+[2026-04-06 22:39:15] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:15] [INFO] ============================================================
+[2026-04-06 22:39:15] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:15] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:15] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:15] [INFO] 
+[2026-04-06 22:39:20] [INFO] ============================================================
+[2026-04-06 22:39:20] [INFO]   FLYWHEEL CYCLE 47 / 50
+[2026-04-06 22:39:20] [INFO] ============================================================
+[2026-04-06 22:39:20] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:20] [INFO] ============================================================
+[2026-04-06 22:39:20] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:20] [INFO] ============================================================
+[2026-04-06 22:39:20] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:20] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:20] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:20] [INFO] 
+[2026-04-06 22:39:25] [INFO] ============================================================
+[2026-04-06 22:39:25] [INFO]   FLYWHEEL CYCLE 48 / 50
+[2026-04-06 22:39:25] [INFO] ============================================================
+[2026-04-06 22:39:25] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:25] [INFO] ============================================================
+[2026-04-06 22:39:25] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:25] [INFO] ============================================================
+[2026-04-06 22:39:25] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:25] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:25] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:25] [INFO] 
+[2026-04-06 22:39:30] [INFO] ============================================================
+[2026-04-06 22:39:30] [INFO]   FLYWHEEL CYCLE 49 / 50
+[2026-04-06 22:39:30] [INFO] ============================================================
+[2026-04-06 22:39:30] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:30] [INFO] ============================================================
+[2026-04-06 22:39:30] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:30] [INFO] ============================================================
+[2026-04-06 22:39:31] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:31] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:31] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:31] [INFO] 
+[2026-04-06 22:39:36] [INFO] ============================================================
+[2026-04-06 22:39:36] [INFO]   FLYWHEEL CYCLE 50 / 50
+[2026-04-06 22:39:36] [INFO] ============================================================
+[2026-04-06 22:39:36] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:36] [INFO] ============================================================
+[2026-04-06 22:39:36] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:36] [INFO] ============================================================
+[2026-04-06 22:39:36] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:36] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:36] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:36] [INFO] 
+[main c0ea16f] [OVERNIGHT] 50 cycles, 100 created, 144 evolved, 0 tokens
+ 18 files changed, 4618 insertions(+), 121 deletions(-)
+ create mode 100644 .cex/overnight/.lock
+ create mode 100644 .cex/overnight/h1_20260406_2212.log
+ create mode 100644 .cex/overnight/overnight_20260406_223453.log
+ create mode 100644 .cex/quality/audit_20260406_215434.json
+ create mode 100644 .cex/quality/audit_20260406_221117.json
+ create mode 100644 .cex/quality/audit_20260406_221157.json
+ create mode 100644 .cex/quality/audit_20260406_223451.json
+ create mode 100644 N01_intelligence/compiled/output_cf_dags_and_specs.yaml
+ create mode 100644 N02_marketing/compiled/output_cf_actions_and_distribution.yaml
+ create mode 100644 N02_marketing/compiled/output_sdk_validation_self_audit.yaml
+ create mode 100644 N04_knowledge/compiled/output_cf_integration_kcs.yaml
+ create mode 100644 N04_knowledge/compiled/output_sdk_validation_knowledge_audit.yaml
+[SIGNAL] n07 -> overnight_complete (score: 9.0)
+[2026-04-06 22:39:42] [INFO] ============================================================
+[2026-04-06 22:39:42] [INFO]   OVERNIGHT COMPLETE
+[2026-04-06 22:39:42] [INFO] ============================================================
+[2026-04-06 22:39:42] [INFO] Cycles:    50
+[2026-04-06 22:39:42] [INFO] Created:   100
+[2026-04-06 22:39:42] [INFO] Evolved:   144
+[2026-04-06 22:39:42] [INFO] Tokens:    0 / 200000
+[2026-04-06 22:39:42] [INFO] Duration:  105.3h
+[2026-04-06 22:39:42] [INFO] Log:       C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260406_223453.log
+[22:39:42,11] PHASE 2 COMPLETE 
+[22:39:42,13] PHASE 3: FINAL AUDIT 
+========================================================================
+CEX Doctor v2.0 -- Naming v2.0 + Density + 13-File Completeness
+Root: C:\Users\PC\Documents\GitHub\cex
+Mode: DIAGNOSE ONLY
+========================================================================
+
+Found 119 builder directories
+
+Builder                              Name  Dens  Size  13ok  YAML   ALL
+-----------------------------------------------------------------------
+action-prompt-builder                  ok    ok    ok    ok    ok    ok
+agent-builder                          ok    ok    ok    ok    ok    ok
+agent-card-builder                     ok    ok    ok    ok    ok    ok
+agent-package-builder                  ok    ok    ok    ok    ok    ok
+api-client-builder                     ok    ok    ok    ok    ok    ok
+audio-tool-builder                     ok    ok    ok    ok    ok    ok
+axiom-builder                          ok    ok    ok    ok    ok    ok
+benchmark-builder                      ok    ok    ok    ok    ok    ok
+boot-config-builder                    ok    ok    ok    ok    ok    ok
+brain-index-builder                    ok    ok    ok    ok    ok    ok
+browser-tool-builder                   ok    ok    ok    ok    ok    ok
+bugloop-builder                        ok    ok    ok    ok    ok    ok
+chain-builder                          ok    ok    ok    ok    ok    ok
+checkpoint-builder                     ok    ok    ok    ok    ok    ok
+chunk-strategy-builder                 ok    ok    ok    ok    ok    ok
+cli-tool-builder                       ok    ok    ok    ok    ok    ok
+code-executor-builder                  ok    ok    ok    ok    ok    ok
+component-map-builder                  ok    ok    ok    ok    ok    ok
+compression-config-builder             ok    ok    ok    ok    ok    ok
+computer-use-builder                   ok    ok    ok    ok    ok    ok
+constraint-spec-builder                ok    ok    ok    ok    ok    ok
+content-monetization-builder           ok    ok    ok    ok    ok    ok
+context-doc-builder                    ok    ok    ok    ok    ok    ok
+daemon-builder                         ok    ok    ok    ok    ok    ok
+dag-builder                            ok    ok    ok    ok    ok    ok
+db-connector-builder                   ok    ok    ok    ok    ok    ok
+decision-record-builder                ok    ok    ok    ok    ok    ok
+diagram-builder                        ok    ok    ok    ok    ok    ok
+director-builder                       ok    ok    ok    ok    ok    ok
+dispatch-rule-builder                  ok    ok    ok    ok    ok    ok
+document-loader-builder                ok    ok    ok    ok    ok    ok
+e2e-eval-builder                       ok    ok    ok    ok    ok    ok
+effort-profile-builder                 ok    ok    ok    ok    ok    ok
+embedder-provider-builder              ok    ok    ok    ok    ok    ok
+embedding-config-builder               ok    ok    ok    ok    ok    ok
+entity-memory-builder                  ok    ok    ok    ok    ok    ok
+enum-def-builder                       ok    ok    ok    ok    ok    ok
+env-config-builder                     ok    ok    ok    ok    ok    ok
+eval-dataset-builder                   ok    ok    ok    ok    ok    ok
+fallback-chain-builder                 ok    ok    ok    ok    ok    ok
+feature-flag-builder                   ok    ok    ok    ok    ok    ok
+few-shot-example-builder               ok    ok    ok    ok    ok    ok
+formatter-builder                      ok    ok    ok    ok    ok    ok
+function-def-builder                   ok    ok    ok    ok    ok    ok
+glossary-entry-builder                 ok    ok    ok    ok    ok    ok
+golden-test-builder                    ok    ok    ok    ok    ok    ok
+guardrail-builder                      ok    ok    ok    ok    ok    ok
+handoff-builder                        ok    ok    ok    ok    ok    ok
+handoff-protocol-builder               ok    ok    ok    ok    ok    ok
+hook-builder                           ok    ok    ok    ok    ok    ok
+hook-config-builder                    ok    ok    ok    ok    ok    ok
+input-schema-builder                   ok    ok    ok    ok    ok    ok
+instruction-builder                    ok    ok    ok    ok    ok    ok
+interface-builder                      ok    ok    ok    ok    ok    ok
+knowledge-card-builder                 ok    ok    ok    ok    ok    ok
+landing-page-builder                   ok    ok    ok    ok    ok    ok
+law-builder                            ok    ok    ok    ok    ok    ok
+learning-record-builder                ok    ok    ok    ok    ok    ok
+lens-builder                           ok    ok    ok    ok    ok    ok
+lifecycle-rule-builder                 ok    ok    ok    ok    ok    ok
+llm-judge-builder                      ok    ok    ok    ok    ok    ok
+mcp-server-builder                     ok    ok    ok    ok    ok    ok
+memory-scope-builder                   ok    ok    ok    ok    ok    ok
+memory-summary-builder                 ok    ok    ok    ok    ok    ok
+memory-type-builder                    ok    ok    ok    ok    ok    ok
+mental-model-builder                   ok    ok    ok    ok    ok    ok
+model-card-builder                     ok    ok    ok    ok    ok    ok
+model-provider-builder                 ok    ok    ok    ok    ok    ok
+naming-rule-builder                    ok    ok    ok    ok    ok    ok
+notifier-builder                       ok    ok    ok    ok    ok    ok
+optimizer-builder                      ok    ok    ok    ok    ok    ok
+output-validator-builder               ok    ok    ok    ok    ok    ok
+parser-builder                         ok    ok    ok    ok    ok    ok
+path-config-builder                    ok    ok    ok    ok    ok    ok
+pattern-builder                        ok    ok    ok    ok    ok    ok
+permission-builder                     ok    ok    ok    ok    ok    ok
+plugin-builder                         ok    ok    ok    ok    ok    ok
+prompt-template-builder                ok    ok    ok    ok    ok    ok
+prompt-version-builder                 ok    ok    ok    ok    ok    ok
+quality-gate-builder                   ok    ok    ok    ok    ok    ok
+rag-source-builder                     ok    ok    ok    ok    ok    ok
+rate-limit-config-builder              ok    ok    ok    ok    ok    ok
+reasoning-trace-builder                ok    ok    ok    ok    ok    ok
+red-team-eval-builder                  ok    ok    ok    ok    ok    ok
+regression-check-builder               ok    ok    ok    ok    ok    ok
+research-pipeline-builder              ok    ok    ok    ok    ok    ok
+response-format-builder                ok    ok    ok    ok    ok    ok
+retriever-builder                      ok    ok    ok    ok    ok    ok
+retriever-config-builder               ok    ok    ok    ok    ok    ok
+reward-signal-builder                  ok    ok    ok    ok    ok    ok
+router-builder                         ok    ok    ok    ok    ok    ok
+runtime-rule-builder                   ok    ok    ok    ok    ok    ok
+runtime-state-builder                  ok    ok    ok    ok    ok    ok
+schedule-builder                       ok    ok    ok    ok    ok    ok
+scoring-rubric-builder                 ok    ok    ok    ok    ok    ok
+search-tool-builder                    ok    ok    ok    ok    ok    ok
+secret-config-builder                  ok    ok    ok    ok    ok    ok
+session-backend-builder                ok    ok    ok    ok    ok    ok
+session-state-builder                  ok    ok    ok    ok    ok    ok
+signal-builder                         ok    ok    ok    ok    ok    ok
+skill-builder                          ok    ok    ok    ok    ok    ok
+smoke-eval-builder                     ok    ok    ok    ok    ok    ok
+social-publisher-builder               ok    ok    ok    ok    ok    ok
+software-project-builder               ok    ok    ok    ok    ok    ok
+spawn-config-builder                   ok    ok    ok    ok    ok    ok
+supabase-data-layer-builder            ok    ok    ok    ok    ok    ok
+system-prompt-builder                  ok    ok    ok    ok    ok    ok
+tagline-builder                        ok    ~~    ok    ok    ok    ~~
+toolkit-builder                        ok    ok    ok    ok    ok    ok
+trace-config-builder                   ok    ok    ok    ok    ok    ok
+type-def-builder                       ok    ok    ok    ok    ok    ok
+unit-eval-builder                      ok    ok    ok    ok    ok    ok
+validation-schema-builder              ok    ok    ok    ok    ok    ok
+validator-builder                      ok    ok    ok    ok    ok    ok
+vectordb-backend-builder               ok    ok    ok    ok    ok    ok
+vision-tool-builder                    ok    ok    ok    ok    ok    ok
+webhook-builder                        ok    ok    ok    ok    ok    ok
+workflow-builder                       ok    ok    ok    ok    ok    ok
+workflow-primitive-builder             ok    ok    ok    ok    ok    ok
+-----------------------------------------------------------------------
+TOTAL                               118 ok    1 ~~    0 XX
+
+DETAILS (non-PASS builders):
+
+[WARN] tagline-builder:
+  density: bld_output_template_tagline.md = 0.76 (min 0.78)
+
+========================================================================
+Builders:       119
+Total files:    1547 (expected 1547)
+Total size:     4446.9 KB
+Avg density:    0.98
+Oversized:      0 files (>6144B std, >8192B instructions)
+No frontmatter: 0 files
+Result:         118 PASS | 1 WARN | 0 FAIL
+========================================================================
+
+KC Library: 3 sources, 28 domains, 98/98 kinds covered
+========================================================================
+
+=== L0: Genesis & Config ===
+  [OK] L0/kinds_meta.json: WIRED  117 kinds
+  [OK] L0/router_config.yaml: WIRED  
+  [OK] L0/boot_scripts: WIRED  21 scripts
+  [OK] L0/dispatch.sh: WIRED  
+  [OK] L0/runtime/decisions: WIRED  
+  [OK] L0/runtime/handoffs: WIRED  
+  [OK] L0/runtime/signals: WIRED  
+  [OK] L0/runtime/pids: WIRED  
+  [OK] L0/runtime/locks: WIRED  
+  [OK] L0/runtime/plans: WIRED  
+  [OK] L0/runtime/outputs: WIRED  
+  [OK] L0/runtime/archive: WIRED  
+
+=== L1: Pillars (P01-P12) ===
+  [OK] L1/P01_knowledge/_schema: WIRED  
+  [OK] L1/P01_knowledge/compiled: WIRED  197 files
+  [OK] L1/P02_model/_schema: WIRED  
+  [OK] L1/P02_model/compiled: WIRED  21 files
+  [OK] L1/P03_prompt/_schema: WIRED  
+  [OK] L1/P03_prompt/compiled: WIRED  25 files
+  [OK] L1/P04_tools/_schema: WIRED  
+  [OK] L1/P04_tools/compiled: WIRED  61 files
+  [OK] L1/P05_output/_schema: WIRED  
+  [OK] L1/P05_output/compiled: WIRED  6 files
+  [OK] L1/P06_schema/_schema: WIRED  
+  [OK] L1/P06_schema/compiled: WIRED  11 files
+  [OK] L1/P07_evals/_schema: WIRED  
+  [OK] L1/P07_evals/compiled: WIRED  13 files
+  [OK] L1/P08_architecture/_schema: WIRED  
+  [OK] L1/P08_architecture/compiled: WIRED  14 files
+  [OK] L1/P09_config/_schema: WIRED  
+  [OK] L1/P09_config/compiled: WIRED  8 files
+  [OK] L1/P10_memory/_schema: WIRED  
+  [OK] L1/P10_memory/compiled: WIRED  14 files
+  [OK] L1/P11_feedback/_schema: WIRED  
+  [OK] L1/P11_feedback/compiled: WIRED  11 files
+  [OK] L1/P12_orchestration/_schema: WIRED  
+  [OK] L1/P12_orchestration/compiled: WIRED  15 files
+
+=== L2: Nuclei (N01-N07) ===
+  [OK] L2/N01_intelligence/structure: WIRED  12 subdirs
+  [OK] L2/N01_intelligence/compiled: WIRED  38 artifacts
+  [OK] L2/N02_marketing/structure: WIRED  14 subdirs
+  [OK] L2/N02_marketing/compiled: WIRED  42 artifacts
+  [OK] L2/N03_engineering/structure: WIRED  13 subdirs
+  [OK] L2/N03_engineering/compiled: WIRED  43 artifacts
+  [OK] L2/N04_knowledge/structure: WIRED  12 subdirs
+  [OK] L2/N04_knowledge/compiled: WIRED  43 artifacts
+  [OK] L2/N05_operations/structure: WIRED  10 subdirs
+  [OK] L2/N05_operations/compiled: WIRED  19 artifacts
+  [OK] L2/N06_commercial/structure: WIRED  12 subdirs
+  [OK] L2/N06_commercial/compiled: WIRED  17 artifacts
+  [OK] L2/N07_admin/structure: WIRED  10 subdirs
+  [OK] L2/N07_admin/compiled: WIRED  18 artifacts
+  [OK] L2/N01_rule: WIRED  n01-intelligence.md
+  [OK] L2/N02_rule: WIRED  n02-marketing.md
+  [OK] L2/N03_rule: WIRED  n03-builder.md
+  [OK] L2/N04_rule: WIRED  n04-knowledge.md
+  [OK] L2/N05_rule: WIRED  n05-operations.md
+  [OK] L2/N06_rule: WIRED  n06-commercial.md
+  [OK] L2/N07_rule: WIRED  n07-autonomous-lifecycle.md
+
+=== L3: Archetypes ===
+  [OK] L3/builder_count: WIRED  120 builders
+  [OK] L3/action-prompt-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-card-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-package-builder/ISOs: WIRED  13/13
+  [OK] L3/api-client-builder/ISOs: WIRED  13/13
+  [OK] L3/shared_skills: WIRED  3 shared
+  [OK] L3/sub_agents: WIRED  121 agents
+
+=== L4: Knowledge Library ===
+  [OK] L4/kind_KCs: WIRED  119 KCs
+  [OK] L4/domain_KCs: WIRED  82 domain KCs
+  [OK] L4/KC_coverage: WIRED  117/117 covered, missing: []
+
+=== L5: Tools ===
+  [OK] L5/cex_tools: WIRED  58 tools
+  [OK] L5/import:cex_prompt_layers: WIRED  
+  [OK] L5/import:cex_skill_loader: WIRED  
+  [OK] L5/import:cex_router: WIRED  
+  [OK] L5/import:cex_token_budget: WIRED  
+  [OK] L5/import:cex_gdp: WIRED  
+  [OK] L5/import:cex_memory_types: WIRED  
+  [OK] L5/import:cex_memory_age: WIRED  
+  [OK] L5/import:cex_agent_spawn: WIRED  
+  [OK] L5/import:cex_coordinator: WIRED  
+  [OK] L5/prompt_layers_load: WIRED  15 artifacts
+  [OK] L5/skill_loader_ISOs: WIRED  1933 ISOs
+  [OK] L5/cex_sdk_modules: WIRED  56 modules
+
+=== WIRES: 7 OpenClaude Integrations ===
+  [OK] WIRE/W1_identity: WIRED  
+  [OK] WIRE/W2_doing_tasks: WIRED  
+  [OK] WIRE/W3_action_protocol: WIRED  
+  [OK] WIRE/W4_guardrails: WIRED  PRODUCE should have guardrails
+  [OK] WIRE/W4b_no_guard_REASON: WIRED  REASON excluded
+  [OK] WIRE/W5_verification: WIRED  
+  [OK] WIRE/W5b_no_verify_agent_PRODUCE: WIRED  verification_agent excluded from PRODUCE
+  [OK] WIRE/W6_compaction: WIRED  ratio=0.98
+  [OK] WIRE/W7_memory_extract: WIRED  counter=5
+  [OK] WIRE/T01_skill_loader_wired: WIRED  SkillLoader in crew_runner
+  [OK] WIRE/T02_router_wired: WIRED  CexRouter in crew_runner
+  [OK] WIRE/T03_gdp_wired: WIRED  GDP in 8f_runner
+  [OK] WIRE/T04_budget_wired: WIRED  TokenBudget in 8f_runner
+  [OK] WIRE/T05_memtype_wired: WIRED  MemoryType in update
+  [OK] WIRE/T06_memage_wired: WIRED  MemoryAge in select
+  [OK] WIRE/T08_coordinator_wired: WIRED  Coordinator in mission_runner
+  [OK] WIRE/T10_reverse_compiler: WIRED  Reverse compiler exists
+  [OK] WIRE/artifacts_loadable: WIRED  14/14
+
+=== L6: Governance ===
+  [OK] L6/rules: WIRED  12
+  [OK] L6/commands: WIRED  13
+  [OK] L6/learning_records: WIRED  75
+
+=== CASCADES: 7 Dependency Chains ===
+  [OK] CASCADE/C1_build: WIRED  verb=cria obj=None
+  [OK] CASCADE/C2_quality: WIRED  
+  [OK] CASCADE/C3_knowledge: WIRED  
+  [OK] CASCADE/C4_decision: WIRED  
+  [OK] CASCADE/C5_memory: WIRED  types=4 age_module=ok
+  [OK] CASCADE/C6_evolution: WIRED  
+  [OK] CASCADE/C7_dispatch: WIRED  runner=True watch=True dispatch=True
+
+============================================================
+CEX FLYWHEEL AUDIT -- Doc vs Practice
+============================================================
+  WIRED:   109  (documented AND working)
+  BROKEN:    0  (documented but broken)
+  PHANTOM:   0  (documented but missing)
+  ORPHAN:    0  (exists but undocumented)
+  TOTAL:   109  checks
+  HEALTH:  100%  (109/109)
+============================================================
+  Report:  C:\Users\PC\Documents\GitHub\cex\.cex\quality\audit_20260406_224012.json
+
+
+=== CEX RELEASE CHECK ===
+
+--- Files ---
+  [PASS] file:README.md
+  [PASS] file:QUICKSTART.md
+  [PASS] file:CLAUDE.md
+  [PASS] file:LICENSE
+  [PASS] file:CONTRIBUTING.md
+  [PASS] file:.env.example
+  [PASS] file:requirements.txt
+  [PASS] file:requirements-llm.txt
+  [PASS] file:pyproject.toml
+
+--- README accuracy ---
+  [PASS] readme:kinds
+  [FAIL] readme:builders: README should mention 121 builders
+  [FAIL] readme:tools: README should mention 58 tools
+
+--- Model freshness ---
+  [PASS] model:no_claude-opus-4-202505
+  [PASS] model:no_claude-sonnet-4-2025
+  [PASS] model:no_claude-opus-4-0
+
+--- Dependencies ---
+  [PASS] deps:requirements.txt
+  [PASS] deps:requirements-llm.txt
+  [PASS] deps:import_yaml
+  [PASS] deps:import_tiktoken
+
+--- CI/CD ---
+  [PASS] ci:workflow
+  [PASS] ci:quality
+
+--- System health ---
+  [PASS] health:doctor_zero_fail
+  [PASS] health:hooks_zero_errors
+  [PASS] health:compile_100pct
+  [PASS] health:flywheel_100pct
+
+--- Security ---
+  [PASS] security:env_ignored
+  [PASS] security:no_tracked_secrets
+
+--- Version ---
+  [PASS] version:sync
+
+==================================================
+  2 FAIL / 26 PASS / 28 total
+  Fix the FAILs above before releasing.
+==================================================
+
+warning: in the working copy of '.cex/overnight/h1_20260406_2212.log', LF will be replaced by CRLF the next time Git touches it
+
+pre-commit: PASS -- 4 file(s) checked.
+[main ceccfba] [OVERNIGHT-H1] 06/04/2026 -- gaps + evolve + audit
+ 5 files changed, 2159 insertions(+), 1 deletion(-)
+ delete mode 100644 .cex/overnight/.lock
+ create mode 100644 .cex/quality/audit_20260406_224012.json
+ create mode 100644 .cex/quality/audit_20260406_224106.json
+[22:41:07,67] OVERNIGHT COMPLETE 

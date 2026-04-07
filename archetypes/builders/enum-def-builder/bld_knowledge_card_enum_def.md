@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for enum_def production — enumeration specification
 sources: JSON Schema draft-07, Pydantic v2, Zod v3, GraphQL spec June 2018, TypeScript 5.x
+quality: 9.1
+title: "Knowledge Card Enum Def"
+version: "1.0.0"
+author: n03_builder
+tags: [enum_def, builder, examples]
+tldr: "Golden and anti-examples for enum def construction, demonstrating ideal structure and common pitfalls."
+domain: "enum def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: enum_def

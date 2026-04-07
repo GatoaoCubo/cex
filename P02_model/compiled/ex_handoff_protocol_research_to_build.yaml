@@ -14,14 +14,14 @@ tags:
 - edison
 - research
 - build
-- agent_node
+- agent_group
 - a2a
 tldr: Protocolo de handoff entre research_agent (pesquisa) e builder_agent (build) — research_agent entrega findings+sources+quality_score
   via arquivo .md, builder_agent consome e produz build artifacts
 when_to_use: Quando pesquisa research_agent deve alimentar implementacao builder_agent sem intervencao manual de orchestrator
-overview: Define o contrato de transferencia de contexto entre research_agent (satelite de pesquisa) e builder_agent (satelite
+overview: Define o contrato de transferencia de contexto entre research_agent (agent_group de pesquisa) e builder_agent (agent_group
   de build). research_agent produz findings estruturados como knowledge cards ou research reports; builder_agent consome esses
-  artifacts para implementar agentes, skills, ou componentes. O handoff e assincrono via filesystem — nao requer ambos satelites
+  artifacts para implementar agentes, skills, ou componentes. O handoff e assincrono via filesystem — nao requer ambos agent_groups
   ativos simultaneamente.
 trigger: '| Field | Value |
 
@@ -29,9 +29,9 @@ trigger: '| Field | Value |
 
   | event | `research_complete` |
 
-  | source_agent_node | research_agent |
+  | source_agent_group | research_agent |
 
-  | target_agent_node | builder_agent |
+  | target_agent_group | builder_agent |
 
   | trigger_mechanism | Signal file: `.claude/signals/shaka_complete_*.json` |
 

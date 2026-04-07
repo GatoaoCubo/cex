@@ -15,7 +15,7 @@ prerequisites:
   - The purpose of each directory or file path is known (what will be stored there)
 validation_method: checklist
 domain: path_config
-quality: 8.8
+quality: 9.0
 tags:
   - instruction
   - path-config
@@ -43,7 +43,7 @@ The path-config-builder receives a **system scope** and produces a `path_config`
 ## Phases
 ### Phase 1: RESEARCH
 **Goal**: Enumerate every path needed by the scope and classify each one before writing anything.
-1. Identify the scope: confirm it is one of `global`, `agent_node name`, or `service name`. Record as a snake_case lowercase slug with no hyphens.
+1. Identify the scope: confirm it is one of `global`, `agent_group name`, or `service name`. Record as a snake_case lowercase slug with no hyphens.
 2. List every filesystem path from `{{path_purposes}}`. For each, determine:
    - **Type**: `dir` (container) or `file` (specific file, include extension)
    - **Platform**: `windows`, `unix`, or `all`

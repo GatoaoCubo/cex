@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: plugin
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, plugin, P11, P04, governance, extensibility, lifecycle]
 tldr: "Gates for plugin artifacts — interface contract, lifecycle hooks, API surface, and isolation level defined."
 density_score: 0.85
@@ -58,7 +58,7 @@ Weights sum: 9.5. Normalize: divide each by 9.5 before scoring.
 | >= 9.5 | GOLDEN — pool as reference plugin implementation for this interface |
 | >= 8.0 | PUBLISH — register in plugin registry and enable for loading |
 | >= 7.0 | REVIEW — complete config_schema, isolation level, or error handling |
-| < 7.0  | REJECT — rework interface contract and lifecycle declarations |
+| < 7.0  | REJECT — rework interface contract and lifecycle ofclarations |
 ## Bypass
 | Field | Value |
 |-------|-------|

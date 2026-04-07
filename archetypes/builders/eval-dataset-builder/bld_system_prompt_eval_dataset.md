@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Dataset schema, splits, test case fields, framework integration (Braintrust/LangSmith/DeepEval/HuggingFace), versioning | NOT golden_test (single reference), benchmark (performance measurement), scoring_rubric (evaluation criteria)"
 domain: "eval_dataset"
-quality: 8.9
+quality: 9.1
 tags: ["system_prompt", "eval_dataset", "evals", "test-cases", "dataset"]
 safety_level: standard
 tools_listed: false
@@ -67,7 +67,7 @@ size: {integer}
 splits:
   test: 1.0
 schema_fields: [input, expected_output, metadata]
-framework: braintrust | langsmith | deepeval | huggingface | custom
+framework: braintrust | langsmith | deepeval | huggingface | costm
 ```
 ```markdown
 ## Schema

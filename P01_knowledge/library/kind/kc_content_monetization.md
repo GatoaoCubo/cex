@@ -2,14 +2,14 @@
 id: p01_kc_content_monetization
 kind: knowledge_card
 type: kind
-pillar: P04
+pillar: P11
 title: "Content Monetization — Deep Knowledge for content_monetization"
 version: 1.0.0
 created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: content_monetization
-quality: 9.0
+quality: 9.1
 tags: [content_monetization, P04, PRODUCE, kind-kc, monetization, pipeline]
 tldr: "Config-driven 9-stage pipeline (PARSE>PRICING>CREDITS>CHECKOUT>COURSES>ADS>EMAILS>VALIDATE>DEPLOY) that wires billing, credits, checkout, courses, ads, and emails into a single declarative artifact"
 when_to_use: "Building, reviewing, or reasoning about content_monetization artifacts"
@@ -23,7 +23,7 @@ density_score: null
 ## Spec
 ```yaml
 kind: content_monetization
-pillar: P04
+pillar: P11
 llm_function: PRODUCE
 max_bytes: 5120
 naming: p04_cm_{{name}}.md

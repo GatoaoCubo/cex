@@ -76,7 +76,7 @@
 ## SCALE (peso 0.6)
 
 ### P08 Architecture (5 tipos)
-- agent_card: especificacao de satelite
+- agent_card: especificacao de agent_group
 - pattern: pattern reutilizavel
 - law: lei operacional
 - diagram: diagrama de arquitetura
@@ -91,7 +91,7 @@
 
 ### P10 Memory (5 tipos)
 - mental_model: modelo mental persistente
-- brain_index: indice de busca
+- knowledge_index: indice de busca
 - learning_record: registro de aprendizado
 - session_state: estado de sessao
 - axiom: regra fundamental

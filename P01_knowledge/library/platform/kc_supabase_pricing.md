@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 9.0
+quality: 9.1
 tags: [supabase, pricing, tiers, free, pro, team, enterprise, cost, platform]
 tldr: "4 tiers: Free (USD 0, 500MB DB, 2 projetos), Pro (USD 25/mo, 8GB DB), Team (USD 599/mo, SOC2+SSO), Enterprise (custom). Overage billing no Pro+."
 when_to_use: "Quando decidir tier Supabase ou otimizar custos de projeto existente"

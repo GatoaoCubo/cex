@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Llm Judge"
+version: "1.0.0"
+author: n03_builder
+tags: [llm_judge, builder, examples]
+tldr: "Golden and anti-examples for llm judge construction, demonstrating ideal structure and common pitfalls."
+domain: "llm judge construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: llm_judge Production Rules
 ## Naming Convention

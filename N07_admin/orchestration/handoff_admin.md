@@ -7,12 +7,12 @@ version: 2.0.0
 created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
-agent_node: orchestrator
+agent_group: orchestrator
 mission: admin_operations
 autonomy: full
 quality_target: 9.0
 domain: orchestration
-quality: 9.0
+quality: 9.2
 tags: [handoff, orchestration, N07, template, dispatch]
 tldr: "Handoff template and protocol for N07 — required fields, structure, commit convention, and signal instructions."
 dependencies: []

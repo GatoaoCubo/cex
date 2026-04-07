@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template - Search Tool"
 tags: [template, search, api, web, query]
 tldr: "Configures a search tool for web or knowledge base queries. Defines provider, result format, rate limits, and dedup strategy."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "tool integration"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.98
 ---
 
 # Search Tool: [NAME]
@@ -34,13 +39,27 @@ region: [us | br | auto]
 | Tavily | 1000 | Free tier | AI-optimized snippets |
 
 ## Error Handling
-- **No results**: Rephrase query, retry with broader terms
-- **Rate limited**: Queue + backoff (60s)
-- **Provider down**: Fallback to alternate provider
-- **Invalid query**: Return empty + validation error
+1. **No results**: Rephrase query, retry with broader terms
+2. **Rate limited**: Queue + backoff (60s)
+3. **Provider down**: Fallback to alternate provider
+4. **Invalid query**: Return empty + validation error
 
 ## Quality Gate
-- [ ] Provider and API key configured
-- [ ] Rate limits defined
-- [ ] Result format includes title + url + snippet
-- [ ] Fallback provider configured
+1. [ ] Provider and API key configured
+2. [ ] Rate limits defined
+3. [ ] Result format includes title + url + snippet
+4. [ ] Fallback provider configured
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `search_tool` |
+| Pillar | P04 |
+| Domain | tool integration |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: 8.7
+quality: 9.1
 tags: [autonomy, agent, react, plan-execute, reflexion]
 tldr: "Autonomy levels L0-L4. ReAct (reason+act), plan-execute, reflexion. CEX maps: /guide=L2, /grid=L3, auto-workflows=L4."
 when_to_use: "Designing agent systems with varying degrees of human oversight"
 keywords: [autonomy, react, agent-loop, plan-execute, reflexion, levels]
 density_score: 0.93
+updated: "2026-04-07"
 ---
 
 # LLM Agent Autonomy Patterns
@@ -55,3 +56,13 @@ Self-critique and improvement between attempts.
 - Auto-workflows = L4 autonomous (hydrate, review, evolve)
 - Decision Manifest = bridge from L2 to L3/L4
 - GDP = the protocol that manages level transitions
+
+## Quality Criteria
+
+| Dimension | Requirement | Weight |
+|-----------|------------|--------|
+| Factual accuracy | Verifiable claims only | 0.25 |
+| Atomicity | One concept per card | 0.20 |
+| Actionability | Reader knows next steps | 0.20 |
+| Density | No filler sentences | 0.20 |
+| Searchability | Tags enable retrieval | 0.15 |

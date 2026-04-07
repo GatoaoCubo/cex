@@ -1,4 +1,4 @@
-"""Tests for cex_index.py — file indexing and SQLite cache."""
+"""Tests for cex_index.py -- file indexing and SQLite cache."""
 import sys
 from pathlib import Path
 import pytest

@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.2
 tags: [cex, lp04, tools, call, skill, mcp, hook, plugin]
 tldr: "P04 Tools agrupa 10 tipos de ferramenta que estendem o LLM alem de texto via funcao CALL"
 when_to_use: "Classificar artefatos de tooling ou entender como P04 conecta o LLM ao mundo externo"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp03_prompt
   related: [p01_kc_cex_lp02_model, p01_kc_cex_lp01_knowledge]
-density_score: null
+density_score: 1.0
 data_source: "https://arxiv.org/abs/2305.16504"
 ---
 
@@ -104,3 +104,10 @@ analogia: caixa de ferramentas
 - source: https://arxiv.org/abs/2307.16789
 - deepens: p01_kc_cex_lp03_prompt
 - related: p01_kc_cex_lp02_model
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

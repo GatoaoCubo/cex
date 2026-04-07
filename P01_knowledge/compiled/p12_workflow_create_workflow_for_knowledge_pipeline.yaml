@@ -8,7 +8,7 @@ author: workflow-builder
 title: Knowledge Pipeline
 steps_count: 4
 execution: sequential
-agent_nodes:
+agent_groups:
 - research_agent
 - builder_agent
 - validator_agent

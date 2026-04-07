@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How regression-check-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Regression Check"
+version: "1.0.0"
+author: n03_builder
+tags: [regression_check, builder, examples]
+tldr: "Golden and anti-examples for regression check construction, demonstrating ideal structure and common pitfalls."
+domain: "regression check construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: regression-check-builder

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
-quality: 8.9
+quality: 9.1
 tags:
 - blueprint
 - model-card
@@ -50,7 +50,7 @@ frontmatter: "Schema layered: Identity > Model Spec > Capabilities > Economics >
   pillar: P02\nversion: \"{{semver}}\"\ncreated: \"{{YYYY-MM-DD}}\"\nupdated: \"{{YYYY-MM-DD}}\"\nauthor: \"{{quem PRODUZIU}}\"\
   \             # quem escreveu, NAO quem roteou\n\n# MODEL IDENTITY (6) — REQUIRED\n# Sources: Mitchell 2019 (model name,\
   \ developers), HF (model_name, pipeline_tag),\n#          LiteLLM (litellm_provider, mode), Anthropic SDK (id, display_name,\
-  \ created_at)\nmodel_name: \"{{id oficial do provider}}\"         # ex: claude-opus-4-0520, gpt-4o-2024-08-06\nprovider:\
+  \ created_at)\nmodel_name: \"{{id oficial do provider}}\"         # ex: claude-opus-4-6520, gpt-4o-2024-08-06\nprovider:\
   \ \"{{anthropic|openai|google|meta|mistral|cohere|deepseek|other}}\"\nmodel_type: \"{{text-generation|embedding|image-generation|audio|multimodal}}\"\
   \  # HF pipeline_tag\nstatus: \"{{active|deprecated|sunset}}\"           # CEX-extension: lifecycle tracking (justified\
   \ by 90d freshness)\nrelease_date: \"{{YYYY-MM-DD or null}}\"           # HF, Meta, Google DeepMind (8/10 providers)\nknowledge_cutoff:\
@@ -209,7 +209,7 @@ cross_references_grafo_de_conhecimento: "linked_artifacts:\n  primary: \"{{boot_
   \ (selecao), router (custo/capacidade), fallback_chain (priorizacao), agent_package (deploy bundle). Eh o unico tipo P02\
   \ puramente descritivo."
 exemplo_minimo_valido: "---\nid: p02_mc_anthropic_sonnet_4\nkind: model_card\npillar: P02\nversion: 1.0.0\ncreated: 2026-03-26\n\
-  updated: 2026-03-26\nauthor: builder_agent\nmodel_name: claude-sonnet-4-20250514\nprovider: anthropic\nmodel_type: text-generation\n\
+  updated: 2026-03-26\nauthor: builder_agent\nmodel_name: claude-sonnet-4-6\nprovider: anthropic\nmodel_type: text-generation\n\
   status: active\nrelease_date: 2025-05-14\nknowledge_cutoff: 2025-04\ncontext_window: 200000\nmax_output: 16000\nmodalities:\n\
   \  text_input: true\n  text_output: true\n  image_input: true\n  audio_input: false\n  pdf_input: true\nfeatures:\n  tool_calling:\
   \ true\n  structured_output: true\n  reasoning: true\n  prompt_caching: true\n  code_execution: true\n  web_search: false\n\
@@ -220,9 +220,9 @@ exemplo_minimo_valido: "---\nid: p02_mc_anthropic_sonnet_4\nkind: model_card\npi
   \ claude-sonnet-4, sonnet, balanced]\nlinked_artifacts:\n  primary: null\n  related: [p02_mc_anthropic_opus_4, p02_mc_anthropic_haiku_4]\n\
   data_source: \"https://docs.anthropic.com/en/docs/about-claude/models\"\n---\n\n## Boundary\nmodel_card EH: spec tecnica\
   \ do Claude Sonnet 4 (capacidades, custos, limites).\nmodel_card NAO EH: boot_config, agent, benchmark.\n\n## Specifications\n\
-  | Spec | Value | Source |\n|------|-------|--------|\n| Model | claude-sonnet-4-20250514 | Anthropic docs |\n| Provider\
-  \ | Anthropic | — |\n| Context Window | 200K tokens | Anthropic docs |\n| Max Output | 16K tokens | Anthropic docs |\n|\
-  \ Architecture | Transformer (dense) | Anthropic system card |\n| Knowledge Cutoff | Apr 2025 | Anthropic docs |\n\n## Capabilities\n\
+  | Spec | Value | Source |\n|------|-------|--------|\n| Model | claude-sonnet-4-6 | Anthropic docs |\n| Provider | Anthropic\
+  \ | — |\n| Context Window | 200K tokens | Anthropic docs |\n| Max Output | 16K tokens | Anthropic docs |\n| Architecture\
+  \ | Transformer (dense) | Anthropic system card |\n| Knowledge Cutoff | Apr 2025 | Anthropic docs |\n\n## Capabilities\n\
   | Capability | Supported | Notes |\n|------------|-----------|-------|\n| Tool Calling | yes | Parallel tool use supported\
   \ |\n| Structured Output | yes | JSON mode, schema enforcement |\n| Extended Thinking | yes | Budget-controlled reasoning\
   \ |\n| Prompt Caching | yes | 0.1x read cost, 1.25x write |\n| Vision | yes | Image + PDF input |\n| Code Execution | yes\

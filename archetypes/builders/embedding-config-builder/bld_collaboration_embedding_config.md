@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How embedding-config-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Embedding Config"
+version: "1.0.0"
+author: n03_builder
+tags: [embedding_config, builder, examples]
+tldr: "Golden and anti-examples for embedding config construction, demonstrating ideal structure and common pitfalls."
+domain: "embedding config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: embedding-config-builder
@@ -16,13 +26,13 @@ I configure embedding models so vector search systems produce accurate represent
 ### Crew: "RAG Pipeline Setup"
 ```
   1. embedding-config-builder -> "embedding model parameters (dimensions, chunk, distance)"
-  2. brain-index-builder -> "search index configuration"
+  2. knowledge-index-builder -> "search index configuration"
   3. knowledge-card-builder -> "content to embed and index"
 ```
 ### Crew: "Vector Infrastructure"
 ```
   1. embedding-config-builder -> "model config (provider, dimensions, tokenizer)"
-  2. brain-index-builder -> "FAISS/BM25 index using embedding config"
+  2. knowledge-index-builder -> "FAISS/BM25 index using embedding config"
   3. benchmark-builder -> "retrieval quality measurement"
 ```
 ## Handoff Protocol
@@ -40,5 +50,5 @@ None — independent builder (layer 0). Embedding configs are defined from requi
 ## Builders That Depend On Me
 | Builder | Why |
 |---------|-----|
-| brain-index-builder | Needs embedding dimensions and distance metric for index config |
+| knowledge-index-builder | Needs embedding dimensions and distance metric for index config |
 | benchmark-builder | Measures retrieval quality using configured embeddings |

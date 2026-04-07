@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Smoke Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [smoke_eval, builder, examples]
+tldr: "Golden and anti-examples for smoke eval construction, demonstrating ideal structure and common pitfalls."
+domain: "smoke eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: smoke_eval Production Rules
 ## Naming
@@ -27,10 +37,36 @@ Rule: id MUST equal filename stem.
 ## File Paths
 - Output: cex/P07_evals/p07_se_{scope_slug}.md
 ## Size Limits (aligned with SCHEMA)
-- Body: max 3072 bytes (smaller than unit_eval)
-- Density: >= 0.80
-- Timeout: MUST be <= 30 seconds (non-negotiable)
+1. Body: max 3072 bytes (smaller than unit_eval)
+2. Density: >= 0.80
+3. Timeout: MUST be <= 30 seconds (non-negotiable)
 ## Fast-Fail Policy
-- fast_fail: always true (smoke tests abort on first failure)
-- No partial pass — either all checks pass or test fails
-- On failure: log which check failed, suggest remediation
+1. fast_fail: always true (smoke tests abort on first failure)
+2. No partial pass — either all checks pass or test fails
+3. On failure: log which check failed, suggest remediation
+
+## Metadata
+
+```yaml
+id: bld_config_smoke_eval
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-smoke-eval.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | smoke eval construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

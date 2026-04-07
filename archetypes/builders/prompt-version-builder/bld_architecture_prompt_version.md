@@ -4,6 +4,16 @@ id: bld_architecture_prompt_version
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of prompt_version — inventory, dependencies, and architectural position
+quality: 9.2
+title: "Architecture Prompt Version"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_version, builder, examples]
+tldr: "Golden and anti-examples for prompt version construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt version construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -44,3 +54,23 @@ purpose: Component map of prompt_version — inventory, dependencies, and archit
 | spec | prompt_ref, version, author | Define the artifact's core parameters |
 | optional | metrics, ab_group, parent_version | Extend with recommended fields |
 | external | prompt_template, eval | Upstream/downstream connections |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_architecture_prompt_version
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-architecture-prompt-version.md
+```

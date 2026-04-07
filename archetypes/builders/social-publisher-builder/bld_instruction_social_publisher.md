@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for social publisher artifacts
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.1
+title: "Instruction Social Publisher"
+version: "1.0.0"
+author: n03_builder
+tags: [social_publisher, builder, examples]
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+domain: "social publisher construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a social_publisher
@@ -41,3 +51,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Verify posting times are timezone-aware
 7. Check body <= 4096 bytes per file
 8. Cross-check: does any hardcoded value exist that should be in config?
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify social
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | social publisher construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for retriever_config production
 sources: LangChain retriever module, LlamaIndex query engines, vector DB documentation, hybrid search research (BM25+dense), reranking (Cohere, cross-encoder)
+quality: 9.0
+title: "Knowledge Card Retriever Config"
+version: "1.0.0"
+author: n03_builder
+tags: [retriever_config, builder, examples]
+tldr: "Golden and anti-examples for retriever config construction, demonstrating ideal structure and common pitfalls."
+domain: "retriever config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: retriever_config
@@ -34,7 +44,7 @@ Retrieval parameters — how to search and rank chunks from a vector/hybrid stor
 | No reranker on large top_k | Returns many results but wrong order |
 ## Application
 1. Identify the use case and constraints
-2. Select appropriate pattern from the table above
+2. Select apownte pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 2048 bytes

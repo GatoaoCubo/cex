@@ -29,7 +29,7 @@ Regras: lowercase, snake_case, ASCII, max 50 chars
 
 ## 4. PASTAS
 Brain: P01-P12 (cada com _schema.yaml, _generator.md, templates/, examples/)
-Satellites: satellites/{name}/P01-P12 (instances reais)
+Agent_groups: agent_groups/{name}/P01-P12 (instances reais)
 Meta: archetypes/ (CODEX, GLOSSARY, MANDAMENTOS, ROADMAP, META_TEMPLATE)
 
 ## 5. SCHEMAS = _schema.yaml por pillar

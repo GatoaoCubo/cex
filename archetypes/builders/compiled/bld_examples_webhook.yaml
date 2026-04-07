@@ -1,0 +1,83 @@
+kind: examples
+id: bld_examples_webhook
+pillar: P04
+llm_function: DEMONSTRATE
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+quality: 8.9
+tags:
+- examples
+- webhook
+- P04
+- golden
+- anti-pattern
+tldr: 'Golden: Stripe payment.completed inbound webhook. Anti: minimal broken artifact with annotated gate failures.'
+density_score: 1.0
+golden_stripe_payment_completed_inbound: "Prompt: \"Create webhook for Stripe payment.completed inbound\"\nOutput:\n---\n\
+  id: p04_webhook_payment_completed\nkind: webhook\npillar: P04\nversion: 1.0.0\ncreated: 2026-03-28\nupdated: 2026-03-28\n\
+  author: builder_agent\nname: \"Stripe Payment Completed\"\ndirection: inbound\nevent_type: \"payment_intent.succeeded\"\n\
+  event_types:\n  - \"payment_intent.succeeded\"\n  - \"payment_intent.payment_failed\"\npayload_schema:\n  type: object\n\
+  \  required: [id, type, data]\n  properties:\n    id: {type: string, description: \"Stripe event ID (evt_...)\"}\n    type:\
+  \ {type: string, description: \"Event type string\"}\n    data: {type: object, description: \"PaymentIntent object\"}\n\
+  signature_method: hmac_sha256\nsignature_header: \"Stripe-Signature\"\nretry_policy: {max_attempts: 5, backoff: exponential,\
+  \ backoff_base_ms: 1000}\nidempotency_key: \"data.object.id\"\ntimeout_ms: 30000\nquality: null\ntags: [webhook, payment_completed,\
+  \ stripe, P04]\ntldr: \"Inbound Stripe webhook for payment_intent events with HMAC-SHA256 verification.\"\n---\n## Overview\n\
+  Inbound webhook receiving Stripe PaymentIntent events. HMAC-SHA256 signature verified via Stripe-Signature header before\
+  \ payload processing.\n## Events\n### payment_intent.succeeded\nTrigger: Charge captured, funds confirmed.\nPayload: `{\"\
+  id\":\"evt_01\",\"type\":\"payment_intent.succeeded\",\"data\":{\"object\":{\"id\":\"pi_01\",\"amount\":4999,\"currency\"\
+  :\"usd\"}}}`\n### payment_intent.payment_failed\nTrigger: Charge declined or auth failed.\nPayload: `{\"id\":\"evt_02\"\
+  ,\"type\":\"payment_intent.payment_failed\",\"data\":{\"object\":{\"id\":\"pi_02\",\"last_payment_error\":{\"code\":\"card_declined\"\
+  }}}}`\n## Verification\n- Method: hmac_sha256 via `Stripe-Signature` header\n- Secret: env var `STRIPE_WEBHOOK_SECRET`\n\
+  - Algorithm: `t=timestamp,v1=signature` — verify before parse\n## Retry & Delivery\n- Max attempts: 5 over 3 days (Stripe\
+  \ managed)\n- Timeout: 30000ms — respond 2xx within 30s\n- Idempotency: `data.object.id` — deduplicate on PaymentIntent\
+  \ ID\n- Dead-letter: `webhook_failures` table after 5 retries\nGate result: PASS — H01-H10 pass, soft_score ~8.8"
+anti_pattern_broken_minimal_artifact: 'Prompt: "Create webhook" (no direction, no event, no schema)
+
+  Bad output (annotated):
+
+  ---
+
+  id: my_webhook          # FAIL H02: missing p04_webhook_ prefix
+
+  kind: webhook
+
+  direction: receive      # FAIL H06: must be "inbound" not "receive"
+
+  event_type: ""          # FAIL H07: empty string
+
+  payload_schema: {}      # FAIL H08: empty schema
+
+  quality: 8.5            # FAIL H04: must be null
+
+  tags: [webhook]
+
+  tldr: "My webhook"
+
+  ---
+
+  ## Overview
+
+  This webhook receives events.
+
+  Gate failures:
+
+  - H02: id `my_webhook` — missing `p04_webhook_` prefix
+
+  - H04: quality must be null, not 8.5
+
+  - H06: direction "receive" not in enum {inbound, outbound}
+
+  - H07: event_type empty string
+
+  - H08: payload_schema empty object
+
+  - S03: no signature_method (security failure for inbound)
+
+  - S04: no retry_policy
+
+  Corrective: Ask for direction, event source, event name, payload fields before producing.'
+checklist:
+- 'Direction: inbound/outbound? 2. Event type named? 3. Payload JSON Schema?'
+- Signature (hmac_sha256 default)? 5. Retry+backoff? 6. Idempotency key?

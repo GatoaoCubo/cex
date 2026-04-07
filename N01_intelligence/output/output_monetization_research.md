@@ -3,7 +3,7 @@ id: n01_output_monetization_research
 kind: output_template
 pillar: P05
 domain: research
-quality: 9.1
+quality: 9.0
 tags: [monetization, research, market, competition, pricing]
 ---
 

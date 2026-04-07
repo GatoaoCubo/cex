@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Secret Config"
 tags: [template, secret, config, security, credentials]
 tldr: "Manages sensitive credentials: API keys, tokens, database URLs. Defines storage method, rotation policy, access control, and leak prevention."
-quality: 8.8
+quality: 9.0
+updated: "2026-04-07"
+domain: "configuration management"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.94
 ---
 
 # Secret Config: [SERVICE_NAME]

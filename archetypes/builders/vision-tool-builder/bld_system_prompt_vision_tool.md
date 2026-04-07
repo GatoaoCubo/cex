@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "image analysis, OCR, screenshot interpretation, object detection, scene description, classification, face detection, document parsing | NOT browser_tool (DOM interaction), computer_use (screen control), document_loader (file ingestion without visual analysis)"
 domain: "vision_tool"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "vision_tool", "image", "ocr", "tools"]
 safety_level: standard
 tools_listed: false

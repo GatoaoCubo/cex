@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [workflow, code-review, n03, github, pull-request]
 tldr: "5-step code review workflow: fetch PR → analyze diff → apply 7D rubric → write inline comments → submit review decision. Uses GitHub MCP for all operations."
 density_score: 0.89

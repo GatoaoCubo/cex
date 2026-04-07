@@ -5,6 +5,16 @@ pillar: P07
 llm_function: COLLABORATE
 purpose: How unit-eval-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Unit Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [unit_eval, builder, examples]
+tldr: "Golden and anti-examples for unit eval construction, demonstrating ideal structure and common pitfalls."
+domain: "unit eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: unit-eval-builder

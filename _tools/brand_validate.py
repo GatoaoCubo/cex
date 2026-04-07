@@ -1,4 +1,5 @@
-"""brand_validate.py — Validate brand_config.yaml against schema.
+# -*- coding: utf-8 -*-
+"""brand_validate.py -- Validate brand_config.yaml against schema.
 
 Checks required fields, enum values, format constraints (HEX, language code),
 and value quality (non-placeholder, non-empty).
@@ -95,6 +96,12 @@ def validate(config: dict, strict: bool = False) -> dict:
         lang = config["voice"].get("BRAND_LANGUAGE")
         if lang and not is_placeholder(lang) and not LANG_PATTERN.match(str(lang)):
             warnings.append(f"BRAND_LANGUAGE '{lang}' doesn't match pattern xx-XX")
+        person = config["voice"].get("BRAND_PERSON")
+        if person and not is_placeholder(person) and str(person) not in ("1st", "2nd", "3rd"):
+            warnings.append(f"BRAND_PERSON should be '1st', '2nd', or '3rd', got '{person}'")
+        energy = config["voice"].get("BRAND_ENERGY")
+        if energy and not is_placeholder(energy) and str(energy) not in ("calm", "moderate", "energetic", "bold"):
+            warnings.append(f"BRAND_ENERGY should be calm|moderate|energetic|bold, got '{energy}'")
 
     # Section: audience
     validate_section(config, "audience", ["BRAND_ICP", "BRAND_TRANSFORMATION"], errors, warnings)
@@ -152,14 +159,14 @@ def main():
 
     config_path = Path(args.config)
     if not config_path.exists():
-        print(f"❌ brand_config not found: {config_path}")
+        print(f"[FAIL] brand_config not found: {config_path}")
         sys.exit(1)
 
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f) or {}
 
     if args.check:
-        print(f"✅ brand_config exists: {config_path}")
+        print(f"[OK] brand_config exists: {config_path}")
         sys.exit(0)
 
     result = validate(config, strict=args.strict)
@@ -168,15 +175,15 @@ def main():
         import json
         print(json.dumps(result, indent=2))
     else:
-        status = "✅ VALID" if result["valid"] else "❌ INVALID"
-        print(f"{status} — {result['required_fields_filled']}/13 required fields")
+        status = "[OK] VALID" if result["valid"] else "[FAIL] INVALID"
+        print(f"{status} -- {result['required_fields_filled']}/13 required fields")
         print(f"Sections: {', '.join(result['sections_present'])}")
         if result["errors"]:
-            print(f"\n❌ Errors ({len(result['errors'])}):")
+            print(f"\n[FAIL] Errors ({len(result['errors'])}):")
             for e in result["errors"]:
                 print(f"  - {e}")
         if result["warnings"]:
-            print(f"\n⚠️  Warnings ({len(result['warnings'])}):")
+            print(f"\n[WARN] Warnings ({len(result['warnings'])}):")
             for w in result["warnings"]:
                 print(f"  - {w}")
 

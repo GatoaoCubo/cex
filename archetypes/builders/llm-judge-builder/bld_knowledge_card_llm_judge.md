@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for llm_judge production — LLM-as-Judge configuration
 sources: Braintrust scorer, DeepEval LLMTestCase, RAGAS metrics, Promptfoo llm-rubric, OpenAI Evals, Zheng et al. 2023 (MT-Bench)
+quality: 9.2
+title: "Knowledge Card Llm Judge"
+version: "1.0.0"
+author: n03_builder
+tags: [llm_judge, builder, examples]
+tldr: "Golden and anti-examples for llm judge construction, demonstrating ideal structure and common pitfalls."
+domain: "llm judge construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: llm_judge

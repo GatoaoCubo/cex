@@ -4,6 +4,16 @@ id: bld_architecture_guardrail
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of guardrail — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Guardrail"
+version: "1.0.0"
+author: n03_builder
+tags: [guardrail, builder, examples]
+tldr: "Golden and anti-examples for guardrail construction, demonstrating ideal structure and common pitfalls."
+domain: "guardrail construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

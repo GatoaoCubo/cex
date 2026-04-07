@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "Content lifecycle management, freshness policies, state machines, transition criteria | Does NOT: define runtime behavior, executable hooks, quality scoring, or safety boundaries"
 domain: lifecycle_rule
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, lifecycle_rule, P03]
 safety_level: standard
 tools_listed: false

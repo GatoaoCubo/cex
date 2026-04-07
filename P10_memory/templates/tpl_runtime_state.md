@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Runtime State"
 tags: [template, runtime, state, session, checkpoint]
 tldr: "Captures the ephemeral state of a running agent or pipeline. Includes current step, accumulated context, timing, errors, and checkpoint data for pause/resume."
-quality: 8.8
+quality: 9.0
 ---
 
 # Runtime State: [SESSION_ID]

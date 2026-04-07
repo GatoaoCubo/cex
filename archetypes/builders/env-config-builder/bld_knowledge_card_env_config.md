@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for env_config production — environment variable specification
 sources: 12-Factor App (Factor III), dotenv conventions, Kubernetes ConfigMap/Secret, OWASP
+quality: 9.1
+title: "Knowledge Card Env Config"
+version: "1.0.0"
+author: n03_builder
+tags: [env_config, builder, examples]
+tldr: "Golden and anti-examples for env config construction, demonstrating ideal structure and common pitfalls."
+domain: "env config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: env_config
@@ -18,7 +28,7 @@ Env configs define the variable contract for a system scope — every environmen
 | Frontmatter fields | 15+ |
 | Quality gates | 8 HARD + 11 SOFT |
 | Override precedence | env var > config file > default |
-| Scope hierarchy | global > agent_node > service |
+| Scope hierarchy | global > agent_group > service |
 | Naming | UPPER_SNAKE_CASE, optional prefix per scope |
 ## Patterns
 - **Variable type system**: every variable has an explicit type with validation
@@ -29,7 +39,7 @@ Env configs define the variable contract for a system scope — every environmen
 | boolean | true/false only | DEBUG, FEATURE_ENABLED |
 | url | URL format check | API_BASE_URL, WEBHOOK_URL |
 | secret | non-empty, masked | API_KEY, JWT_SECRET |
-- **Scope hierarchy**: narrower scope wins — service config overrides agent_node, agent_node overrides global
+- **Scope hierarchy**: narrower scope wins — service config overrides agent_group, agent_group overrides global
 - **Sensitivity handling**: sensitive vars (secrets, keys) NEVER logged, NEVER committed, ALWAYS masked in output
 - **Required vs optional**: required vars block startup if missing; optional vars use defaults
 - **Naming convention**: UPPER_SNAKE_CASE with optional prefix (CEX_, researcher_) for scope clarity
@@ -52,11 +62,11 @@ Env configs define the variable contract for a system scope — every environmen
 1. Catalog variables: name, type, required/optional, default, description
 2. Classify sensitivity: public (ConfigMap) vs sensitive (Secret)
 3. Define validation: regex, range, enum per variable
-4. Set scope: global, agent_node, or service with appropriate prefix
+4. Set scope: global, agent_group, or service with apownte prefix
 5. Document precedence: env var > config file > default
 6. Validate: required vars have no defaults; secrets are marked sensitive
 ## References
 - 12factor.net/config: Factor III — Config in environment
 - dotenv: local development variable convention
 - OWASP: Secret Management Cheat Sheet
-- Kubernetes: ConfigMap and Secret best practices
+- Kubernetes: ConfigMap and Secret best forctices

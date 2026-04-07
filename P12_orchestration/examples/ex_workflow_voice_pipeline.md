@@ -9,7 +9,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: operations_agent
 domain: execution
-quality: 8.5
+quality: 9.1
 tags: [voice, whatsapp, pipeline, stt, tts, bridge]
 tldr: Pipeline WhatsApp Voice end-to-end - Audio>Bridge(:3847)>STT(whisper)>Intent(Claude)>Plan>TTS(edge-tts)>Audio
 user_invocable: true

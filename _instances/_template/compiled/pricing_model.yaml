@@ -1,0 +1,64 @@
+id: tpl_pricing_model
+kind: env_config
+pillar: P09
+version: 1.0.0
+created: 2026-03-31
+author: content-monetization-builder
+domain: pricing_strategy
+quality: null
+tldr: Pricing strategy template — value ladder, PPP, coupons, metrics for any content business
+tags:
+- template
+- pricing
+- ladder
+- ppp
+- monetization
+- hotmart
+- digistore24
+density_score: 1.0
+value_ladder: "value_ladder:\n  # Stage 0: Lead Magnet (free — captures email)\n  freebie:\n    nome: \"[FREEBIE_NOME — e.g.\
+  \ 'Guia Gratuito de X']\"\n    tipo: \"[ebook|checklist|mini_curso|template|webinar_replay]\"\n    entrega: \"[email|landing_page|hotmart_club|ds24_member]\"\
+  \n    objetivo: \"captura de email → nurture → low-ticket\"\n\n  # Stage 1: Low-Ticket (impulse buy, qualifies buyer)\n\
+  \  low_ticket:\n    nome: \"[PRODUTO_LOW — e.g. 'Workshop Intensivo']\"\n    preco_brl: \"[PRECO_CENTAVOS — e.g. 4700]\"\
+  \n    preco_eur: \"[PRECO_CENTS — e.g. 970]\"\n    preco_usd: \"[PRECO_CENTS — e.g. 970]\"\n    checkout_br: \"[hotmart|kiwify]\"\
+  \n    checkout_int: \"[digistore24]\"\n    margem_minima_pct: 0.60\n    objetivo: \"converter lead frio → buyer, cobrir\
+  \ CAC\"\n\n  # Stage 2: Mid-Ticket (core offer, main revenue)\n  mid_ticket:\n    nome: \"[PRODUTO_MID — e.g. 'Curso Completo\
+  \ de X']\"\n    preco_brl: \"[PRECO_CENTAVOS — e.g. 49700]\"\n    preco_eur: \"[PRECO_CENTS — e.g. 9970]\"\n    preco_usd:\
+  \ \"[PRECO_CENTS — e.g. 9970]\"\n    checkout_br: \"[hotmart|kiwify]\"\n    checkout_int: \"[digistore24]\"\n    margem_minima_pct:\
+  \ 0.50\n    parcelamento_br: \"[max_parcelas — e.g. 12]\"\n    objetivo: \"receita principal, LTV builder\"\n\n  # Stage\
+  \ 3: High-Ticket (premium, high-touch)\n  high_ticket:\n    nome: \"[PRODUTO_HIGH — e.g. 'Mentoria Premium']\"\n    preco_brl:\
+  \ \"[PRECO_CENTAVOS — e.g. 297000]\"\n    preco_eur: \"[PRECO_CENTS — e.g. 59700]\"\n    preco_usd: \"[PRECO_CENTS — e.g.\
+  \ 59700]\"\n    checkout_br: \"[hotmart|kiwify|manual_invoice]\"\n    checkout_int: \"[digistore24|manual_invoice]\"\n \
+  \   margem_minima_pct: 0.70\n    vagas_limitadas: \"[NUMERO|unlimited]\"\n    objetivo: \"margem alta, relacionamento, caso\
+  \ de sucesso\"\n\n  # Stage 4: Recurrence (subscription, predictable revenue)\n  recorrencia:\n    nome: \"[PRODUTO_RECORRENTE\
+  \ — e.g. 'Comunidade Premium']\"\n    preco_mensal_brl: \"[PRECO_CENTAVOS — e.g. 9990]\"\n    preco_mensal_eur: \"[PRECO_CENTS\
+  \ — e.g. 1990]\"\n    preco_mensal_usd: \"[PRECO_CENTS — e.g. 1990]\"\n    preco_anual_brl: \"[PRECO_CENTAVOS — e.g. 99900\
+  \ (2 meses gratis)]\"\n    preco_anual_eur: \"[PRECO_CENTS — e.g. 19900]\"\n    checkout_br: \"[hotmart|kiwify]\"\n    checkout_int:\
+  \ \"[digistore24]\"\n    margem_minima_pct: 0.40\n    trial_days: \"[DIAS — e.g. 7]\"\n    objetivo: \"receita previsivel,\
+  \ retenção, comunidade\""
+purchasing_power_parity_ppp: "ppp:\n  strategy: \"[auto_discount|regional_pricing|single_price]\"\n  regions:\n    tier_1_high:\n\
+  \      countries: [US, UK, DE, CH, NO, SE, DK, AU, CA]\n      multiplier: 1.0\n      currency: \"[USD|EUR]\"\n    tier_2_medium:\n\
+  \      countries: [BR, MX, AR, CO, PL, PT, ES, IT]\n      multiplier: \"[0.50-0.70]\"\n      currency: \"[BRL|EUR|USD]\"\
+  \n    tier_3_low:\n      countries: [IN, NG, PH, VN, EG, BD]\n      multiplier: \"[0.25-0.40]\"\n      currency: \"[USD]\"\
+  \n  implementation:\n    hotmart: \"manual — create separate offer links per region\"\n    digistore24: \"built-in PPP via\
+  \ coupon codes per country\"\n    stripe: \"use Stripe Pricing Tables with geo-detection\""
+coupons_promotions: "coupons:\n  launch:\n    code: \"[CUPOM_LANCAMENTO — e.g. LAUNCH50]\"\n    discount_pct: \"[PERCENTUAL\
+  \ — e.g. 0.50]\"\n    valid_from: \"[YYYY-MM-DD]\"\n    valid_until: \"[YYYY-MM-DD]\"\n    max_uses: \"[NUMERO|unlimited]\"\
+  \n    platforms: [hotmart, digistore24]\n\n  evergreen:\n    code: \"[CUPOM_EVERGREEN — e.g. WELCOME20]\"\n    discount_pct:\
+  \ \"[PERCENTUAL — e.g. 0.20]\"\n    trigger: \"[exit_intent|email_sequence_day_5|abandoned_cart]\"\n    platforms: [hotmart,\
+  \ digistore24]\n\n  seasonal:\n    black_friday:\n      code: \"[CUPOM_BF]\"\n      discount_pct: \"[PERCENTUAL — e.g. 0.40]\"\
+  \n      valid_from: \"[YYYY-MM-DD]\"\n      valid_until: \"[YYYY-MM-DD]\"\n    back_to_school:\n      code: \"[CUPOM_BTS]\"\
+  \n      discount_pct: \"[PERCENTUAL — e.g. 0.30]\"\n\n  rules:\n    stackable: \"[true|false]\"\n    min_purchase: \"[VALOR_CENTAVOS|none]\"\
+  \n    floor_margin_after_discount: 0.30"
+metrics_targets: "metrics:\n  acquisition:\n    cac_target_brl: \"[VALOR_CENTAVOS — e.g. 5000]\"\n    cac_target_eur: \"[VALOR_CENTS\
+  \ — e.g. 1000]\"\n    cac_channels:\n      organic: \"[PERCENTUAL — e.g. 0.40]\"\n      paid_meta: \"[PERCENTUAL — e.g.\
+  \ 0.30]\"\n      paid_google: \"[PERCENTUAL — e.g. 0.15]\"\n      affiliates: \"[PERCENTUAL — e.g. 0.15]\"\n\n  retention:\n\
+  \    ltv_target_brl: \"[VALOR_CENTAVOS — e.g. 50000]\"\n    ltv_target_eur: \"[VALOR_CENTS — e.g. 10000]\"\n    churn_max_monthly_pct:\
+  \ \"[PERCENTUAL — e.g. 0.05]\"\n    ltv_to_cac_ratio_min: 3.0\n\n  conversion:\n    landing_page_conversion_pct: \"[PERCENTUAL\
+  \ — e.g. 0.03]\"\n    email_open_rate_target: \"[PERCENTUAL — e.g. 0.25]\"\n    email_click_rate_target: \"[PERCENTUAL —\
+  \ e.g. 0.04]\"\n    checkout_completion_rate: \"[PERCENTUAL — e.g. 0.60]\"\n\n  revenue:\n    mrr_target: \"[VALOR_CENTAVOS\
+  \ — monthly recurring]\"\n    arr_target: \"[VALOR_CENTAVOS — annual recurring]\"\n    floor_margin_pct: 0.30\n    break_even_months:\
+  \ \"[MESES — e.g. 6]\""
+pricing_review_cadence: "review:\n  frequency: \"[monthly|quarterly]\"\n  triggers:\n    - \"churn > [THRESHOLD] for 2 consecutive\
+  \ months\"\n    - \"CAC > LTV/3 for 30 days\"\n    - \"competitor price change > 20%\"\n    - \"new platform launch (e.g.\
+  \ Kiwify feature parity)\"\n  owner: \"[ROLE — e.g. Head of Product]\""

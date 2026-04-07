@@ -4,6 +4,16 @@ id: bld_architecture_decision_record
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of decision_record — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Decision Record"
+version: "1.0.0"
+author: n03_builder
+tags: [decision_record, builder, examples]
+tldr: "Golden and anti-examples for decision record construction, demonstrating ideal structure and common pitfalls."
+domain: "decision record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -40,7 +50,7 @@ decision      --constrains--> agent
 ## Boundary Table
 | decision_record IS | decision_record IS NOT |
 |-------------------|----------------------|
-| Permanent record of a single significant architectural choice | A law (inviolable — use law-builder) |
+| Permanent record of a single significant architectural choice | A law (inviolable — use invariant-builder) |
 | Documents context, options, rationale, and consequences | A pattern (reusable prescription — use pattern-builder) |
 | Has lifecycle: proposed -> accepted -> deprecated/superseded | A diagram (use diagram-builder) |
 | Revisable: future teams can create superseding ADRs | A knowledge card (use knowledge-card-builder) |

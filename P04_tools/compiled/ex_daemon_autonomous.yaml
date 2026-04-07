@@ -20,7 +20,7 @@ runtime:
 - 'Owner: system-level (runs outside Claude session)'
 loop:
 - Read task queue from `.claude/inbox/*.json`
-- Route task to agent_node via spawn_solo.ps1
+- Route task to agent_group via spawn_solo.ps1
 - Emit completion signal to `.claude/signals/`
 safety:
 - 'Healthcheck: PID file exists + process responsive'

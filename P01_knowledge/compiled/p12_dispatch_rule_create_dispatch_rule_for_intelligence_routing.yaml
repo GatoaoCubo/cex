@@ -32,7 +32,7 @@ keywords:
 - intel
 - investigation
 - investigacao
-agent_node: n01_intelligence
+agent_group: n01_intelligence
 model: gemini
 priority: 8
 confidence_threshold: 0.75

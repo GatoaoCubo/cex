@@ -4,6 +4,16 @@ id: bld_architecture_boot_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of boot_config — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Boot Config"
+version: "1.0.0"
+author: n03_builder
+tags: [boot_config, builder, examples]
+tldr: "Golden and anti-examples for boot config construction, demonstrating ideal structure and common pitfalls."
+domain: "boot config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: boot_config in the CEX
@@ -12,7 +22,7 @@ purpose: Component map of boot_config — inventory, dependencies, and architect
 |------|------|-------|--------|
 | frontmatter block | 15 required + 7 recommended fields (id, kind, pillar, provider, model, version, etc.) | boot-config-builder | required |
 | provider_block | Target runtime identifier (claude, cursor, codex, openai, etc.) | author | required |
-| identity_block | Agent name, role, and agent_node assignment for this initialization | author | required |
+| identity_block | Agent name, role, and agent_group assignment for this initialization | author | required |
 | model_selection | Specific model ID and version to load (references model_card) | model_card | required |
 | constraints_block | Token limits, context window, timeout, retries, max_turns | author | required |
 | tools_block | Ordered list of tools and MCPs available on this provider runtime | author | required |
@@ -30,7 +40,7 @@ boot_config  --depends-->   provider_runtime (must exist before boot)
 | From | To | Type | Data |
 |------|----|------|------|
 | model_card (P02) | boot_config | data_flow | LLM ID, capabilities, context window, cost per token |
-| agent (P02) | boot_config | data_flow | identity to initialize (name, role, agent_node) |
+| agent (P02) | boot_config | data_flow | identity to initialize (name, role, agent_group) |
 | system_prompt (P03) | boot_config | depends | persona reference loaded during initialization sequence |
 | boot_config | spawn_config (P12) | produces | runtime parameters consumed by orchestration spawner |
 | boot_config | workflow (P12) | data_flow | initialization step in orchestrated agent lifecycle |

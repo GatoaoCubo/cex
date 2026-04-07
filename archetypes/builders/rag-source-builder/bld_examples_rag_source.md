@@ -4,6 +4,15 @@ id: bld_examples_rag_source
 pillar: P07
 llm_function: GOVERN
 version: 1.0.0
+quality: 9.1
+title: "Examples Rag Source"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: rag_source
@@ -20,7 +29,7 @@ author: builder
 url: "https://docs.anthropic.com/en/api/getting-started"
 domain: llm_providers
 last_checked: "2026-03-26"
-quality: null
+quality: 8.9
 tags: [rag-source, llm_providers, html]
 tldr: "Official Anthropic Claude API reference covering authentication, models, messages API, and rate limits."
 keywords: [anthropic, claude, api, llm, documentation]

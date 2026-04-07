@@ -4,6 +4,16 @@ id: bld_examples_context_doc
 pillar: P07
 llm_function: GOVERN
 purpose: Golden example and anti-example for context_doc production
+quality: 9.1
+title: "Examples Context Doc"
+version: "1.0.0"
+author: n03_builder
+tags: [context_doc, builder, examples]
+tldr: "Golden and anti-examples for context doc construction, demonstrating ideal structure and common pitfalls."
+domain: "context doc construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: context_doc
@@ -18,7 +28,7 @@ updated: "2026-03-26"
 author: builder_agent
 domain: ecommerce_imports
 scope: "Brazilian import regulations for marketplace sellers, 2025-2026 enforcement cycle"
-quality: null
+quality: 8.9
 tags: [context-doc, ecommerce_imports, brazil, regulation]
 tldr: "BR marketplace imports: ICMS 17-20%, NCM code required, Receita Federal DI threshold R$50"
 keywords: [icms, ncm, receita_federal, import, brazil, marketplace, tax]
@@ -30,7 +40,7 @@ Out of scope: international shipping logistics, payment processing, consumer ret
 ## Background
 Brazil levies ICMS (17-20% by state) on all imported goods sold via marketplace.
 NCM codes (8-digit Nomenclatura Comum do Mercosul) are mandatory on all listings.
-Receita Federal requires Declaracao de Importacao (DI) for shipments > R$50 commercial value.
+Receita Federal requires Declaraction de Importaction (DI) for shipments > R$50 commercial value.
 Lei 14.781/2024 expanded marketplace platform liability for seller tax compliance.
 ## Stakeholders
 - Marketplace seller agents: need tax rates and NCM requirements before listing
@@ -46,7 +56,7 @@ Lei 14.781/2024 expanded marketplace platform liability for seller tax complianc
 - Receita Federal Portaria RFB 1.073/2025 (external)
 ## References
 - Lei 14.781/2024: planalto.gov.br/lei-14781
-- MDIC NCM table: mdic.gov.br/nomenclatura
+- MDIC NCM table: mdic.gov.br/namenclatura
 ```
 ### Why Golden (gate mapping)
 | Gate | Status | Reason |

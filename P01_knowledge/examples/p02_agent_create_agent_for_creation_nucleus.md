@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "agent-builder"
-agent_node: "builder"
+agent_group: "builder"
 domain: "artifact_creation"
 llm_function: BECOME
 capabilities_count: 6
@@ -44,11 +44,11 @@ Applies template-first construction with quality gate enforcement before every c
 | 3 | cex_query.py | TF-IDF builder discovery and kind/pillar classification at F1 |
 | 4 | cex_doctor.py | Validate builder health and ISO freshness before dispatch |
 
-### Satellite Position
-- Satellite: builder
+### Agent_group Position
+- Agent_group: builder
 - Peers: agent-package-builder, boot-config-builder, instruction-builder
 - Upstream: orchestrator (N07 dispatch via handoff), direct /build intent
-- Downstream: validator, brain-index-builder, routing registry
+- Downstream: validator, knowledge-index-builder, routing registry
 
 ## File Structure
 ```
@@ -82,11 +82,11 @@ NOT when: orchestrating multi-nucleus missions (route to N07), deep research or 
 
 ## Integration
 Receives from: N07 handoff file (`.cex/runtime/handoffs/`), direct `/build` command, `cex_8f_motor.py` fan-out
-Emits to: validator (quality check), brain-index-builder (indexing after commit), routing registry (agent registration), git (commit via F8)
+Emits to: validator (quality check), knowledge-index-builder (indexing after commit), routing registry (agent registration), git (commit via F8)
 Signal: `write_signal('n03', 'complete', score)` on successful F8 — orchestrator monitors `.cex/runtime/signals/`
 
 ## Quality Gates
-HARD: id matches `^p02_agent_[a-z][a-z0-9_]+$`, kind == "agent", quality == null, all 10 required fields present, agent_package >= 10 files, llm_function == BECOME, agent_node assigned and non-blank.
+HARD: id matches `^p02_agent_[a-z][a-z0-9_]+$`, kind == "agent", quality == null, all 10 required fields present, agent_package >= 10 files, llm_function == BECOME, agent_group assigned and non-blank.
 SOFT: tldr <= 160ch (158ch), tags >= 3 with "agent" (5 tags), capabilities_count == 6 matches body, density_score >= 0.80 (0.88), domain == "artifact_creation" (specific), ## When to Use includes NOT-when exclusions, no filler phrases.
 
 ## Common Issues
@@ -110,9 +110,9 @@ bash _spawn/dispatch.sh solo n03 "create agent for X"
 
 ## Related Agents
 - **p02_agent_n07_orchestrator**: Upstream dispatcher — writes handoffs, triggers creation via dispatch.sh
-- **p02_agent_knowledge_card_builder**: Peer builder satellite — supplies domain knowledge at F3 INJECT
+- **p02_agent_knowledge_card_builder**: Peer builder agent_group — supplies domain knowledge at F3 INJECT
 - **p02_agent_validator**: Downstream consumer — receives F7 gate results for peer scoring
-- **p02_agent_brain_index_builder**: Downstream — indexes committed artifacts for retrieval after F8
+- **p02_agent_knowledge_index_builder**: Downstream — indexes committed artifacts for retrieval after F8
 
 ## Footer
 version: 1.0.0 | author: agent-builder | quality: null

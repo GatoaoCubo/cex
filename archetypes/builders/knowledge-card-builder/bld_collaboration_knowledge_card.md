@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How knowledge-card-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Knowledge Card"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_card, builder, examples]
+tldr: "Golden and anti-examples for knowledge card construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: knowledge-card-builder
@@ -32,7 +42,7 @@ I distill knowledge into atomic facts so agents and builders have factual contex
 ```
   1. knowledge-card-builder -> "content to embed and index"
   2. embedding-config-builder -> "embedding model parameters"
-  3. brain-index-builder -> "search index configuration"
+  3. knowledge-index-builder -> "search index configuration"
 ```
 ## Handoff Protocol
 ### I Receive
@@ -52,5 +62,5 @@ None — independent builder (layer 0). Knowledge cards are distilled from sourc
 | agent-builder | Agent expertise is grounded in knowledge cards |
 | axiom-builder | Axioms are formalized from distilled facts |
 | context-doc-builder | Domain docs reference knowledge card facts |
-| brain-index-builder | Knowledge cards are primary content for indexing |
+| knowledge-index-builder | Knowledge cards are primary content for indexing |
 | instruction-builder | Recipes reference factual knowledge for accuracy |

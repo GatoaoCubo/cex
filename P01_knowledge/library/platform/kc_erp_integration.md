@@ -2,9 +2,15 @@
 id: kc_erp_integration
 kind: knowledge_card
 pillar: P01
-quality: 8.9
+quality: 9.1
 tldr: "Integration patterns for ERP/marketplace connectors — BaseLinker, Bling v3, order sync, inventory management, webhook-driven data flow, and OAuth2 token rotation."
 tags: ["ERP", "BaseLinker", "Bling", "integration", "orders", "inventory", "OAuth2"]
+when_to_use: "Apply when integration patterns for erp/marketplace connectors — baselinker, bling v3, order sync, inventory..."
+keywords: [knowledge-card, pattern, baselinker, patterns, connector]
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 1.0
 ---
 
 # ERP Integration Patterns
@@ -229,3 +235,10 @@ def get_connector(provider: str, mode: str = "LIVE") -> ERPConnector:
 4. **Reserve at cart, confirm at payment** — prevents overselling.
 5. **Dead letter queue** — failed syncs must be recoverable, not silently dropped.
 6. **Provider registry** — business logic never imports a specific ERP connector directly.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

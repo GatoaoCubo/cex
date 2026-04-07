@@ -16,10 +16,13 @@ tags: [audio-tool, direction, language-codes, model-naming, format-enum, sample-
 tldr: "Direction is load-bearing for audio routing. BCP-47 codes mandatory. Model ids must match provider docs. sample_rate affects STT accuracy."
 impact_score: 8.0
 decay_rate: 0.04
-agent_node: edison
+agent_group: edison
 keywords: [audio tool, STT, TTS, direction, language codes, BCP-47, model naming, format, sample rate, streaming]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Audio Tool"
+density_score: 0.90
 ---
 ## Summary
 Audio tools are consumed by voice interfaces, content pipelines, and agents that select STT or TTS paths at runtime. The difference between a tool that routes correctly and one that causes silent format mismatches comes down to three decisions made at spec time: direction declaration, BCP-47 language codes, and explicit model identifiers matching provider documentation.
@@ -27,29 +30,55 @@ A tool that omits direction (or uses a non-enum value), lists languages as free 
 ## Pattern
 **Explicit direction, BCP-47 languages, exact model identifiers.**
 Direction schema (enum):
-- input: STT — audio bytes in, text out
-- output: TTS — text in, audio bytes out
-- analysis: feature extraction — audio in, JSON features out
-- bidirectional: both STT and TTS supported
+1. input: STT — audio bytes in, text out
+2. output: TTS — text in, audio bytes out
+3. analysis: feature extraction — audio in, JSON features out
+4. bidirectional: both STT and TTS supported
 Language code rules:
-- Always BCP-47: `en`, `pt-BR`, `es`, `fr-CA`, `zh`, `ja`
-- Never free text: "English", "Portuguese", "Chinese" — breaks lookup
-- Include quality tier per model when coverage varies (high/medium/low)
+1. Always BCP-47: `en`, `pt-BR`, `es`, `fr-CA`, `zh`, `ja`
+2. Never free text: "English", "Portuguese", "Chinese" — breaks lookup
+3. Include quality tier per model when coverage varies (high/medium/low)
 Model naming rules:
-- Use exact provider API identifiers: `whisper_large_v3`, `deepgram_nova_2`, `eleven_multilingual_v2`
-- Never use marketing names: "Whisper Large", "ElevenLabs Multilingual" — spec drift
-- Mirror frontmatter `models` list exactly to ## Models table entries
+1. Use exact provider API identifiers: `whisper_large_v3`, `deepgram_nova_2`, `eleven_multilingual_v2`
+2. Never use marketing names: "Whisper Large", "ElevenLabs Multilingual" — spec drift
+3. Mirror frontmatter `models` list exactly to ## Models table entries
 Sample rate rules:
-- Declare `sample_rate: 16000` for all STT tools — models assume 16kHz input
-- Declare `sample_rate: 22050` or `44100` for TTS output quality contract
+1. Declare `sample_rate: 16000` for all STT tools — models assume 16kHz input
+2. Declare `sample_rate: 22050` or `44100` for TTS output quality contract
 Body budget (2048 bytes max): Overview (150) + Direction (200) + Models (400) + Formats (300) + Languages (400) = ~1450.
 ## Anti-Pattern
-- Omitting direction field entirely (caller cannot determine STT vs TTS path).
-- Using "English" instead of "en" for language codes (BCP-47 compliance failure).
-- Model names like "Whisper" or "ElevenLabs" instead of exact API identifiers.
-- Claiming streaming support without declaring `streaming: true` in frontmatter.
-- Including formats not in the allowed enum (e.g., "audio/mpeg" mime type notation).
-- Conflating audio_tool with notifier: audio_tool processes signals; notifier delivers messages.
-- Conflating audio_tool with vision_tool: audio processes sound; vision processes images/video.
+1. Omitting direction field entirely (caller cannot determine STT vs TTS path).
+2. Using "English" instead of "en" for language codes (BCP-47 compliance failure).
+3. Model names like "Whisper" or "ElevenLabs" instead of exact API identifiers.
+4. Claiming streaming support without declaring `streaming: true` in frontmatter.
+5. Including formats not in the allowed enum (e.g., "audio/mpeg" mime type notation).
+6. Conflating audio_tool with notifier: audio_tool processes signals; notifier delivers messages.
+7. Conflating audio_tool with vision_tool: audio processes sound; vision processes images/video.
 ## Context
 Body limit 2048B (larger than cli_tool 1024B). Write direction+models in frontmatter first. BCP-47 codes mandatory — map to provider API params.
+
+## Metadata
+
+```yaml
+id: p10_lr_audio_tool_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-audio-tool-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | audio_tool |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

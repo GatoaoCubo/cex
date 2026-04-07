@@ -8,7 +8,7 @@ created: "2026-04-01"
 updated: "2026-04-01" 
 author: "N04_knowledge"
 domain: infrastructure
-quality: 8.9
+quality: 9.1
 tags: [api_monitoring, health_checks, infrastructure, uptime, observability]
 tldr: "API health monitoring ensures service availability through status endpoints, uptime tracking, and dependency validation with structured response formats."
 when_to_use: "Implement when building APIs requiring availability monitoring, SLA tracking, or dependency health validation."
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: null
   related: []
-density_score: 0.88
+density_score: 1.0
 data_source: "Infrastructure monitoring best practices"
 ---
 
@@ -72,3 +72,9 @@ criticality: high
 ## References
 - Related pattern: Circuit breaker implementation for dependency isolation
 - Source: https://microservices.io/patterns/observability/health-check-api.html
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

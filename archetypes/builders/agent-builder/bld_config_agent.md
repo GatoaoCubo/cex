@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: pillar
+quality: 9.0
+title: "Config Agent"
+version: "1.0.0"
+author: n03_builder
+tags: [agent, builder, examples]
+tldr: "Golden and anti-examples for agent construction, demonstrating ideal structure and common pitfalls."
+domain: "agent construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: agent Production Rules
 ## Naming Convention
@@ -22,7 +32,7 @@ permission_scope: pillar
 |-------|-----------|---------|
 | Artifact files | `p02_agent_{slug}.md` + `.yaml` | `p02_agent_knowledge_card_builder.md` |
 | Builder directory | kebab-case | `agent-builder/` |
-| Frontmatter fields | snake_case | `agent_node`, `capabilities_count` |
+| Frontmatter fields | snake_case | `agent_group`, `capabilities_count` |
 | Agent slug | snake_case, lowercase | `knowledge_card_builder`, `scout_agent` |
 | builder specs | `SPEC_{AGENT_UPPER}_{NNN}_{TYPE}.md` | `ISO_SCOUT_AGENT_004_INSTRUCTIONS.md` |
 | Agent upper | SCREAMING_SNAKE_CASE | `KNOWLEDGE_CARD_BUILDER` |
@@ -37,7 +47,7 @@ Rule: builder spec NNN starts at 001 and increments without gaps.
 - Total (frontmatter + body): ~6500 bytes
 - Density: >= 0.80
 - Per builder spec: max 4096 bytes
-## Satellite Enum
+## Agent_group Enum
 | Value | When to use |
 |-------|-------------|
 | orchestrator | Orchestration agents |
@@ -47,7 +57,7 @@ Rule: builder spec NNN starts at 001 and increments without gaps.
 | knowledge-engine | Knowledge and documentation agents |
 | executor | Execution, deploy, and infra agents |
 | monetizer | Monetization and product agents |
-| agnostic | Cross-agent_node utility agents |
+| agnostic | Cross-agent_group utility agents |
 ## Spec File Type Enum
 | NNN | TYPE | Pillar |
 |-----|------|--------|
@@ -62,8 +72,8 @@ Rule: builder spec NNN starts at 001 and increments without gaps.
 | 009 | UPLOAD_KIT | P04 |
 | 010 | SYSTEM_INSTRUCTION | P03 |
 ## Body Requirements
-- Overview: 2-3 sentences, must name agent_node and domain
-- Architecture: capabilities (4-8 bullets) + tools table + agent_node position
+- Overview: 2-3 sentences, must name agent_group and domain
+- Architecture: capabilities (4-8 bullets) + tools table + agent_group position
 - File Structure: full agent_package listing with correct spec naming
 - When to Use: triggers + keywords + NOT when exclusions (mandatory)
 - Common Issues: 3-5 failure modes, each with one-line remediation

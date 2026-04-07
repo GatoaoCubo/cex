@@ -1,5 +1,5 @@
 # CEX Flywheel Monitor v1.0
-# Lightweight status checker — run in separate terminal
+# Lightweight status checker -- run in separate terminal
 #
 # Usage:
 #   powershell -File _tools/cex_flywheel_monitor.ps1

@@ -1,5 +1,15 @@
 ---
 description: "Execute a spec — dispatch nuclei autonomously. Usage: /grid [spec_name]"
+quality: 9.0
+title: "Grid"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # /grid — Autonomous Execution
@@ -83,16 +93,30 @@ When all waves done → suggest: "All nuclei complete. Type `/consolidate` to ve
 ## In-session mode
 
 If no spawn/grid infrastructure (single session), execute waves sequentially yourself:
-- Wave 1: build artifacts for nucleus A
-- Wave 2: build artifacts for nuclei B+C
-- Wave 3: build artifacts for nucleus D
-- After each wave: compile + doctor + commit
+1. Wave 1: build artifacts for nucleus A
+2. Wave 2: build artifacts for nuclei B+C
+3. Wave 3: build artifacts for nucleus D
+4. After each wave: compile + doctor + commit
 
 ## Grid is AUTONOMOUS
 
 Once dispatched:
-- Nuclei read the spec + manifest
-- They follow 8F pipeline
-- They do NOT ask the user anything
-- They commit and signal when done
-- N07 monitors but does NOT intervene unless failure
+1. Nuclei read the spec + manifest
+2. They follow 8F pipeline
+3. They do NOT ask the user anything
+4. They commit and signal when done
+5. N07 monitors but does NOT intervene unless failure
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

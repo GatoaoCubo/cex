@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
-quality: 8.7
+quality: 9.1
 tags: [memory, consolidation, learning, long-term, knowledge-management]
 tldr: "Short-term (session) → working (handoff) → long-term (KC/learning record). Consolidate learnings across sessions into persistent knowledge."
 when_to_use: "Designing agent memory systems that persist across sessions"
 keywords: [memory, consolidation, learning, persistence, session-to-permanent]
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # Memory Consolidation
@@ -47,3 +48,13 @@ SESSION (ephemeral + short-term)
 - Pattern discovered (create KC)
 - Error fixed (learning record)
 - Process improved (update workflow)
+
+## Quality Criteria
+
+| Dimension | Requirement | Weight |
+|-----------|------------|--------|
+| Factual accuracy | Verifiable claims only | 0.25 |
+| Atomicity | One concept per card | 0.20 |
+| Actionability | Reader knows next steps | 0.20 |
+| Density | No filler sentences | 0.20 |
+| Searchability | Tags enable retrieval | 0.15 |

@@ -1,0 +1,74 @@
+id: e2e_gold_quality_rubric
+kind: golden_test
+type: rubric
+pillar: P01
+title: Quality Rubric — E2E Gold Standard Evaluation
+version: 1.0.0
+created: 2026-04-06
+author: n02_marketing
+quality: null
+tags:
+- e2e
+- gold-standard
+- rubric
+- quality
+- marketing
+- stress-test
+density_score: 0.97
+s1_pet_shop_crm_petshop_marketing_md: ''
+must_have_all_5_pass_miss_1_fail: "s3_must_have:\n  M1_readme_structure:\n    check: \"README template has all core sections\"\
+  \n    grep: \"Problem|Solution|Quickstart|Features|Install|Usage\"\n    fail_if: \"missing any of the 6 core sections\"\n\
+  \n  M2_quickstart_max_5_steps:\n    check: \"Quickstart template has 5 or fewer steps\"\n    grep: \"Step [1-5]\"\n    fail_if:\
+  \ \"more than 5 steps\"\n\n  M3_quickstart_shows_output:\n    check: \"Quickstart includes expected output block\"\n   \
+  \ grep: \"Expected Output\"\n    fail_if: \"no expected output section\"\n\n  M4_kc_template_frontmatter:\n    check: \"\
+  KC template includes required frontmatter fields\"\n    grep: \"id:|kind:|type:|pillar:|title:|version:|tldr:|when_to_use:\"\
+  \n    fail_if: \"missing any of the 8 required fields\"\n\n  M5_benefits_not_specs:\n    check: \"Features guidance shows\
+  \ benefit framing with examples\"\n    grep: \"benefit|BAD|GOOD\"\n    fail_if: \"no concrete examples of benefit vs spec\
+  \ framing\""
+nice_to_have_bonus_quality_not_gate: "s3_nice_to_have:\n  N1_anti_patterns:\n    check: \"Anti-patterns section exists (what\
+  \ NOT to do)\"\n    bonus: \"Learning from negatives is faster than positives\"\n\n  N2_tone_table:\n    check: \"Tone rules\
+  \ with concrete examples per section\"\n    bonus: \"Actionable voice guidance for each doc section\"\n\n  N3_time_estimate:\n\
+  \    check: \"Quickstart includes time estimate\"\n    bonus: \"Sets expectations, builds confidence\"\n\n  N4_docs_as_marketing:\n\
+  \    check: \"Explicit framing of docs-as-marketing with comparison table\"\n    bonus: \"Changes mindset from 'docs are\
+  \ chore' to 'docs are growth'\"\n\n  N5_prerequisites_first:\n    check: \"Quickstart lists prerequisites before first command\"\
+  \n    bonus: \"Prevents step-3 failure from missing dependency\"\n\n---"
+s2_instagram_content_instagram_marketing_md: ''
+s3_project_documentation_docs_marketing_md: ''
+cross_scenario_checks: "cross_scenario:\n  X1_brand_voice_consistency:\n    check: \"All 3 gold standards use consistent quality\
+  \ language\"\n    method: \"Compare tone across S1/S2/S3 — no jarring shifts\"\n    fail_if: \"S1 is formal but S2 is slang,\
+  \ or S3 contradicts S1 guidelines\"\n\n  X2_cta_in_every_artifact:\n    check: \"Every marketing artifact includes at least\
+  \ 1 CTA\"\n    method: \"Grep for CTA, 'action', imperative verbs across all 3 files\"\n    fail_if: \"any file has zero\
+  \ calls to action\"\n\n  X3_pt_br_consistency:\n    check: \"All copy content is in pt-BR (matching original input language)\"\
+  \n    method: \"No English-only sections in marketing copy (templates/structure in English OK)\"\n    fail_if: \"marketing\
+  \ copy switches to English without reason\"\n\n  X4_measurable_criteria:\n    check: \"Every gold standard has validation\
+  \ criteria section\"\n    method: \"Grep for 'Validation Criteria' in each file\"\n    fail_if: \"any file missing its validation\
+  \ criteria block\"\n\n  X5_frontmatter_complete:\n    check: \"All 4 files have complete YAML frontmatter\"\n    method:\
+  \ \"Parse frontmatter: id, kind, type, pillar, title, version, created, author, quality\"\n    fail_if: \"any required field\
+  \ missing in any file\"\n\n---"
+scoring_summary: '| Gate | Weight | Method |
+
+  |------|--------|--------|
+
+  | MUST-HAVE (per scenario) | 60% | 5/5 = PASS, <5 = FAIL |
+
+  | NICE-TO-HAVE (per scenario) | 20% | Each adds 0.4 to score |
+
+  | Cross-scenario checks | 20% | 5/5 = PASS, <3 = FAIL |'
+score_calculation: 'base = 6.0 (if all MUST-HAVEs pass across all scenarios)
+
+  + nice_to_have_count  0.4 (max 15  0.4 = 6.0, capped at 2.0)
+
+  + cross_scenario_pass  0.4 (max 5  0.4 = 2.0)
+
+  = max 10.0
+
+
+  FAIL conditions (override score to 0):
+
+  - ANY must-have fails in ANY scenario
+
+  - Fewer than 3 cross-scenario checks pass
+
+  - Any file missing frontmatter'
+pass_threshold: '>= 8.0 — Gold standard accepted for E2E test harness. < 8.0 — Revise and resubmit. Identify which MUST-HAVEs
+  failed.'

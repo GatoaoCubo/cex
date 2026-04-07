@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "agent memory configuration and scope"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, memory-scope, P02]
 tldr: "Pass/fail gate for memory_scope artifacts: required fields, id pattern, body sections, parameter completeness."
 density_score: 0.90

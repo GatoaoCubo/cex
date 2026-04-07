@@ -33,6 +33,11 @@ inputs: ["builder directory path(s)"]
 outputs: ["validation report: pass/fail per kind, density scores, size checks"]
 dependencies: ["pyyaml"]
 category: governance
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

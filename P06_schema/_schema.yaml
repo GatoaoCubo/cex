@@ -1,10 +1,10 @@
 pillar: P06
 name: Schema
-description: CONTRATOS de validacao
+description: Validation CONTRACTS
 kinds:
   input_schema:
-    description: Contrato de entrada
-    boundary: Contrato de entrada que define dados requeridos. NAO eh validation_schema (saida) nem type_def (definicao abstrata).
+    description: Input contract
+    boundary: Input contract defining required data. NOT a validation_schema (output) nor type_def (abstract definition).
     layer: spec
     core: true
     machine_format: json
@@ -13,9 +13,8 @@ kinds:
       max_bytes: 3072
     llm_function: CONSTRAIN
   type_def:
-    description: Definicao de tipo customizado
-    boundary: Definicao de tipo customizado no sistema. NAO eh input_schema (contrato de entrada) nem interface (contrato
-      bilateral).
+    description: Custom type definition
+    boundary: Custom type definition in the system. NOT an input_schema (input contract) nor interface (bilateral contract).
     layer: spec
     core: true
     machine_format: yaml
@@ -24,8 +23,8 @@ kinds:
       max_bytes: 3072
     llm_function: GOVERN
   validator:
-    description: Regra de validacao (pre-commit, quality gate)
-    boundary: Regra de validacao tecnica pass/fail. NAO eh quality_gate (P11, score numerico) nem scoring_rubric (P07, criterios).
+    description: Validation rule (pre-commit, quality gate)
+    boundary: Technical pass/fail validation rule. NOT a quality_gate (P11, numeric score) nor scoring_rubric (P07, criteria).
     layer: governance
     core: true
     machine_format: yaml
@@ -34,8 +33,8 @@ kinds:
       max_bytes: 3072
     llm_function: GOVERN
   interface:
-    description: Contrato de integracao entre agentes
-    boundary: Contrato bilateral de integracao entre agentes. NAO eh input_schema (unilateral) nem signal (P12, evento simples).
+    description: Inter-agent integration contract
+    boundary: Bilateral integration contract between agents. NOT an input_schema (unilateral) nor signal (P12, simple event).
     layer: spec
     core: false
     machine_format: json
@@ -44,8 +43,8 @@ kinds:
       max_bytes: 3072
     llm_function: CONSTRAIN
   validation_schema:
-    description: Contrato de validacao pos-geracao (o sistema aplica, LLM nao ve)
-    boundary: Contrato formal aplicado pelo SISTEMA apos geracao. NAO eh response_format P05 (injetado no prompt, LLM ve).
+    description: Post-generation validation contract (system applies, LLM does not see)
+    boundary: Formal contract applied by the SYSTEM after generation. NOT a response_format P05 (injected in prompt, LLM sees).
     layer: spec
     core: false
     machine_format: json
@@ -54,8 +53,8 @@ kinds:
       max_bytes: 3072
     llm_function: GOVERN
   enum_def:
-    description: Enumeracao reutilizavel
-    boundary: Lista finita. NAO eh type_def.
+    description: Reusable enumeration
+    boundary: Finite list. NOT a type_def.
     layer: runtime
     core: true
     machine_format: yaml

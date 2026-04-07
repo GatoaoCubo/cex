@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: anti_patterns
-quality: 8.6
+quality: 9.0
 tags: [anti-pattern, catalog, llm, agent, pitfalls]
 tldr: "Catalog of common LLM agent mistakes: over-autonomy, prompt bloat, jargon dependency, self-scoring, single-point-of-failure."
 when_to_use: "Reviewing agent system design for common pitfalls"
 keywords: [anti-pattern, catalog, pitfalls, design-review]
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # LLM Agent Anti-Patterns
@@ -32,3 +33,18 @@ density_score: 0.92
 | **Template rigidity** | All output forced into one format | Multiple output templates per nucleus |
 | **Sequential bottleneck** | Everything waits for one agent | Fan-out/fan-in via `/grid` |
 | **Knowledge amnesia** | Learnings not persisted | Learning records + memory files + KCs |
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_anti_patterns_general`
+- **Tags**: [anti-pattern, catalog, llm, agent, pitfalls]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

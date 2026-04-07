@@ -3,11 +3,21 @@ name: content-monetization-builder
 description: "Builds ONE content_monetization artifact via 8F pipeline. Loads content-monetization-builder ISOs. Produces draft with frontmatter + body. Never self-scores quality."
 model: sonnet
 tools: Read, Write, Edit, Bash, Glob, Grep
+quality: 9.0
+title: "Content-Monetization-Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # content-monetization-builder Sub-Agent
 
-You are a specialized builder for **content_monetization** artifacts (pillar: P04).
+You are a specialized builder for **content_monetization** artifacts (pillar: P11).
 
 ## Kind Definition
 

@@ -50,7 +50,7 @@ domain: {type}
 llm_function: {BECOME|COLLABORATE|GOVERN}
 version: "2.0.0"
 created/updated: date
-author: satellite
+author: agent_group
 tags: list
 
 # Sections (identical structure)
@@ -439,7 +439,7 @@ Interim: manual check against this file
 | 21 | permission | P09 | governance | 0 | 3072 | yaml | No | Access rule |
 | 22 | session_state | P10 | runtime | 0 | 3072 | yaml | Yes | Ephemeral state |
 | 23 | spawn_config | P12 | runtime | 0 | 3072 | yaml | No | Spawn parameters |
-| 24 | dispatch_rule | P12 | runtime | 0 | 3072 | yaml | No | Keyword-to-satellite map |
+| 24 | dispatch_rule | P12 | runtime | 0 | 3072 | yaml | No | Keyword-to-agent_group map |
 | 25 | learning_record | P10 | content | 0 | 3072 | yaml | Yes | Learning entry |
 
 ### MEDIUM Tier (27 types)
@@ -466,7 +466,7 @@ Interim: manual check against this file
 | 18 | component_map | P08 | spec | 0 | 3072 | yaml | No | Component mapping |
 | 19 | diagram | P08 | spec | 0 | 4096 | yaml | No | Architecture diagram |
 | 20 | env_config | P09 | runtime | 0 | 4096 | yaml | Yes | Environment vars |
-| 21 | brain_index | P10 | runtime | 0 | 3072 | yaml | No | Search index config |
+| 21 | knowledge_index | P10 | runtime | 0 | 3072 | yaml | No | Search index config |
 | 22 | mental_model_P10 | P10 | runtime | 0 | 3072 | yaml | Yes | Runtime state model |
 | 23 | bugloop | P11 | runtime | 0 | 4096 | yaml | Yes | Fix-verify cycle |
 | 24 | lifecycle_rule | P11 | governance | 0 | 4096 | yaml | No | Lifecycle policy |
@@ -480,7 +480,7 @@ Interim: manual check against this file
 |---|------|----|-------|----------------|-----------|--------|--------------|-----------|
 | 1 | agent | P02 | runtime | 8 | 5120 | yaml | Yes | 10 body sections, most complex type |
 | 2 | agent_package | P02 | spec | 0 | 4096 | yaml | Yes | Multi-file manifest, self-contained |
-| 3 | agent_card | P08 | spec | 0 | 4096 | yaml | Yes | Complete satellite definition |
+| 3 | agent_card | P08 | spec | 0 | 4096 | yaml | Yes | Complete agent_group definition |
 | 4 | system_prompt | P03 | prompt | 6 | 4096 | yaml | Yes | Persona engineering, 4+ body sections |
 | 5 | action_prompt | P03 | prompt | 0 | 2048* | yaml | No | No template, task decomposition |
 | 6 | prompt_template | P03 | prompt | 5 | 8192 | yaml | Yes | 5 body sections, largest format |

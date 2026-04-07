@@ -1,5 +1,5 @@
 """
-E2E Evolution Tests — Validates the full CEX evolution cycle.
+E2E Evolution Tests -- Validates the full CEX evolution cycle.
 
 Tests cover: kind registration, skeleton builders, schema integrity,
 motor resolution, memory fields, config fields, and index operations.

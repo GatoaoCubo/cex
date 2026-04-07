@@ -9,7 +9,7 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.0
 tags: [schema, retriever, P04, P06, vector-search, RAG]
 density_score: 1.0
 ---
@@ -46,7 +46,7 @@ Rule: id MUST equal filename stem.
 Examples: `p04_retr_chroma`, `p04_retr_pinecone_hybrid`, `p04_retr_faiss_local`
 
 ## Enum: store_type
-`chroma | pinecone | faiss | qdrant | weaviate | milvus | elasticsearch | custom`
+`chroma | pinecone | faiss | qdrant | weaviate | milvus | elasticsearch | costm`
 
 ## Enum: similarity_metric
 `cosine | dot_product | euclidean | manhattan`

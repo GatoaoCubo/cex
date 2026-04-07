@@ -8,12 +8,12 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: 8.9
+quality: 9.1
 tags: [dispatch-rule, orchestration, N07, routing, multi-cli]
 tldr: "Routes tasks to 6 nuclei by domain keywords — build to N03, research to N01, marketing to N02, knowledge to N04, ops to N05, commercial to N06."
 scope: admin_orchestration
 keywords: [build, research, marketing, knowledge, operations, commercial, scaffold, analyze, write, deploy, index, price]
-agent_node: orchestrator
+agent_group: orchestrator
 model: opus
 priority: 9
 confidence_threshold: 0.70
@@ -22,7 +22,7 @@ conditions:
   quality_min: 8.0
   signal_required: true
 routing_strategy: keyword_match
-density_score: 0.91
+density_score: 1.0
 ---
 
 # Admin Orchestration Dispatch Rules

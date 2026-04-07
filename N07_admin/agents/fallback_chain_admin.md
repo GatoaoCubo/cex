@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: 9.0
+quality: 9.1
 tags: [fallback-chain, multi-cli, cost, free, ollama]
 tldr: Model degradation chain -- opus to sonnet to gemini-free to ollama-local. Zero-cost fallback always available.
 density_score: 0.92

@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [response-format, builder, N03]
 tldr: Output format for all artifacts -- YAML frontmatter + Markdown body with open variables.
 density_score: 0.88
@@ -52,3 +52,34 @@ Every artifact follows:
 
 File: {pillar_lower}_{kind}_{topic}.md
 Compiled: {kind}_{topic}.yaml
+
+
+## Response Format Constraints
+
+Engineering outputs follow strict formatting rules to enable automated parsing:
+
+- **Frontmatter mandatory**: every output starts with YAML frontmatter block
+- **Machine-parseable sections**: key data in tables or YAML blocks, not prose
+- **Deterministic structure**: heading hierarchy matches template exactly
+- **Size bounds**: outputs stay within 1KB-50KB range; outliers trigger review
+
+### Format Validation Pipeline
+
+```yaml
+# Post-generation validation
+validation:
+  frontmatter_check: strict
+  heading_hierarchy: ordered
+  table_parse: all_valid
+  code_block_syntax: highlighted
+  max_size_kb: 50
+  min_size_kb: 1
+```
+
+| Format Element | Requirement | Failure Action |
+|---------------|------------|----------------|
+| YAML frontmatter | Valid YAML, required fields present | Block publication |
+| Markdown headings | H2 > H3 ordering, no skips | Auto-fix if possible |
+| Tables | Parseable, aligned pipes | Warn and flag |
+| Code blocks | Language tag present | Auto-detect language |
+

@@ -8,7 +8,7 @@ created: 2026-03-24
 updated: 2026-03-24
 author: builder_agent
 domain: build
-quality: 9.0
+quality: 9.1
 tags: [tdd, testing, quality-gate, red-green-refactor, build-discipline]
 tldr: "Enforces test-first development: RED verified before code, YAGNI compliance, no RED commits merged"
 when_to_use: "Before merging any code commit in builder_agent or operations_agent build pipelines"
@@ -31,7 +31,7 @@ density_score: 0.91
 | Metric | tdd_compliance_score |
 | Threshold | 1.0 (all 7 checks pass) |
 | Operator | == |
-| Scope | builder_agent and operations_agent build agent_nodes |
+| Scope | builder_agent and operations_agent build agent_groups |
 | Trigger | Pre-merge on any branch with code changes |
 
 ## Actions
@@ -40,7 +40,7 @@ density_score: 0.91
 |--------|--------|------------|
 | Pass (7/7) | Approve merge, proceed to deploy pipeline | None |
 | Partial (5-6/7) | Block merge, return specific failing checks | Author fixes within same PR |
-| Fail (<5/7) | Block merge, flag for process review | Notify agent_node owner + orchestrator |
+| Fail (<5/7) | Block merge, flag for process review | Notify agent_group owner + orchestrator |
 
 ## Checklist
 

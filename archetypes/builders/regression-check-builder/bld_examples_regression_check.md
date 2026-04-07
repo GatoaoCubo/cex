@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of regression_check artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Regression Check"
+version: "1.0.0"
+author: n03_builder
+tags: [regression_check, builder, examples]
+tldr: "Golden and anti-examples for regression check construction, demonstrating ideal structure and common pitfalls."
+domain: "regression check construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: regression-check-builder
@@ -27,7 +37,7 @@ metrics:
   - faithfulness
   - latency_p95
   - cost_per_call
-quality: null
+quality: 8.9
 tags: [regression_check, summarization, production, P07]
 tldr: "Weekly regression check for summarization pipeline vs prod baseline. 5% threshold. Blocks deploy on accuracy/faithfulness drop."
 description: "Compares current summarization pipeline against last production experiment on accuracy, faithfulness, latency, and cost"

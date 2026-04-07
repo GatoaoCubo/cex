@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Audio Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [audio_tool, builder, examples]
+tldr: "Golden and anti-examples for audio tool construction, demonstrating ideal structure and common pitfalls."
+domain: "audio tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: audio_tool Production Rules
 ## Naming Convention

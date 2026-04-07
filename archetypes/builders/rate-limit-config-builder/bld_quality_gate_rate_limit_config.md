@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "rate limiting configuration — RPM, TPM, budget, and tier management for LLM API providers"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, rate-limit-config, P09, rpm, tpm, budget, tier]
 tldr: "Pass/fail gate for rate_limit_config artifacts: numeric limit completeness, tier validity, budget cap presence, and provider identification."
 density_score: 0.90

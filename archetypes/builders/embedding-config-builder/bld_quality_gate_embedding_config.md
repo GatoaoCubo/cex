@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "embedding_config — vector model configuration for RAG pipelines including dimensions, chunking, and distance metrics"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, embedding-config, vector, rag, chunking, P11]
 tldr: "Gates for embedding_config artifacts: validates model spec, dimension accuracy, chunk size sanity, distance metric validity, and normalization settings."
 density_score: 0.90
@@ -45,7 +45,7 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Normalization setting | 1.0 | `normalize` flag specified; rationale given for cosine vs dot_product |
 | Batch size documented | 0.5 | Recommended batch size for indexing performance stated |
 | Provider and cost | 1.0 | Provider (Ollama, OpenAI, etc.) and per-token cost documented |
-| Boundary clarity | 0.5 | Explicitly not brain_index (search index) or rag_source (data source) |
+| Boundary clarity | 0.5 | Explicitly not knowledge_index (search index) or rag_source (data source) |
 | Fallback model | 0.5 | Alternative model listed for when primary is unavailable |
 | Performance notes | 1.0 | Latency, throughput, or memory footprint characteristics noted |
 | Documentation | 0.5 | tldr captures model + key parameters in <= 160 characters |

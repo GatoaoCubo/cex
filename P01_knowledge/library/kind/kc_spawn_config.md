@@ -9,11 +9,11 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: spawn_config
-quality: 9.0
+quality: 9.1
 tags: [spawn_config, P12, GOVERN, kind-kc]
-tldr: "Satellite launch configuration specifying model, mode (solo/grid/continuous), MCP profile, and prompt constraints"
+tldr: "Agent_group launch configuration specifying model, mode (solo/grid/continuous), MCP profile, and prompt constraints"
 when_to_use: "Building, reviewing, or reasoning about spawn_config artifacts"
-keywords: [spawn, agent_node, launch]
+keywords: [spawn, agent_group, launch]
 feeds_kinds: [spawn_config]
 density_score: null
 ---
@@ -31,7 +31,7 @@ core: true
 ```
 
 ## What It Is
-A spawn configuration defines how a agent node is launched — which model, CLI flags, MCP tool profile, prompt size limit, and handoff file to load. It is the declarative specification that spawn scripts (solo/grid/continuous) read to start agent_node sessions. It is NOT boot_config (P02 — per-provider model configuration, model parameters; spawn_config is about CLI launch mechanics) nor env_config (P09 — environment variables for runtime; spawn_config is launch-time orchestration config).
+A spawn configuration defines how a agent node is launched — which model, CLI flags, MCP tool profile, prompt size limit, and handoff file to load. It is the declarative specification that spawn scripts (solo/grid/continuous) read to start agent_group sessions. It is NOT boot_config (P02 — per-provider model configuration, model parameters; spawn_config is about CLI launch mechanics) nor env_config (P09 — environment variables for runtime; spawn_config is launch-time orchestration config).
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -62,13 +62,13 @@ A spawn configuration defines how a agent node is launched — which model, CLI 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |
 |-------------|-------------|-----|
-| >4 simultaneous agent_nodes | BSOD risk on Windows (RAM + terminal limit) | Max 3 sats + orchestrator; stagger spawns 5s apart |
+| >4 simultaneous agent_groups | BSOD risk on Windows (RAM + terminal limit) | Max 3 sats + orchestrator; stagger spawns 5s apart |
 | Inline prompt >200 chars with -p flag | TSP hangs waiting for user input | Write handoff file; prompt = "Read [file] and execute" |
 | --mcp-config absolute path in PS chain | Path resolution fails in PowerShell→cmd chain | Use relative path or .mcp-{sat}.json in cwd |
 
 ## Integration Graph
 ```
-[handoff] --> [spawn_config] --> [agent_node session]
+[handoff] --> [spawn_config] --> [agent_group session]
 [dag] ---------^           |
                       [signal: spawned]
 ```
@@ -82,5 +82,5 @@ A spawn configuration defines how a agent node is launched — which model, CLI 
 
 ## Quality Criteria
 - GOOD: Has mode, model, mcp_profile (or null), prompt_max_chars, handoff_file; YAML parseable
-- GREAT: Satellite count within limits (<=3+orchestrator); spawn delay documented; continuous batch_size set
+- GREAT: Agent_group count within limits (<=3+orchestrator); spawn delay documented; continuous batch_size set
 - FAIL: >4 simultaneous sats; prompt >200 chars inline; missing model; --mcp-config absolute path

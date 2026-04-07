@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: langchain
 origin: src_framework_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [langchain, lcel, runnable, retriever, output-parser, agent, chain]
 tldr: "LangChain composes LLM pipelines via LCEL Runnables, unifying agents, retrievers, tools, and output parsers into streamable chains"
 when_to_use: "Building or mapping LangChain constructs to CEX kinds"

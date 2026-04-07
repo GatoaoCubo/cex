@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: 8.8
+quality: 9.0
 tags: [experiment, development, ab-testing, metric, autonomous, optimization]
 tldr: "Generalization of AutoResearch: any domain with a clear metric can be improved through autonomous experiment loops — marketing, code, prompts, pricing."
 when_to_use: "Generalizing AutoResearch beyond ML training to any measurable domain"

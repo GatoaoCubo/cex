@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_intent.py -- The Steering Wheel
 Natural language intent -> governed artifact prompt.
@@ -148,12 +149,12 @@ def compose_prompt(
     """Compose a GOVERNED PROMPT from builder specs + KC-Domain + intent.
 
     Order:
-      1. bld_system_prompt  — identity and role
-      2. bld_instruction    — step-by-step production process
-      3. KC-Domain content  — domain knowledge injection
-      4. bld_schema         — output schema/contract
-      5. bld_output_template — expected output format
-      6. User intent        — the actual request
+      1. bld_system_prompt  -- identity and role
+      2. bld_instruction    -- step-by-step production process
+      3. KC-Domain content  -- domain knowledge injection
+      4. bld_schema         -- output schema/contract
+      5. bld_output_template -- expected output format
+      6. User intent        -- the actual request
     """
     sections = []
 
@@ -258,11 +259,11 @@ def execute_prompt(prompt: str) -> str:
     Priority: SUBSCRIPTION > LOCAL > API (pay-per-token is LAST resort).
 
     Tries (in order):
-      1. Claude CLI  — uses Max/Pro subscription, zero extra cost
-      2. Ollama SDK  — local, free
-      3. Ollama HTTP — local fallback, free
-      4. Anthropic API — only if CEX_USE_API=1, pay-per-token
-      5. OpenAI API   — only if CEX_USE_API=1, pay-per-token
+      1. Claude CLI  -- uses Max/Pro subscription, zero extra cost
+      2. Ollama SDK  -- local, free
+      3. Ollama HTTP -- local fallback, free
+      4. Anthropic API -- only if CEX_USE_API=1, pay-per-token
+      5. OpenAI API   -- only if CEX_USE_API=1, pay-per-token
 
     Set CEX_USE_API=1 to allow paid API calls as last resort.
     Returns the LLM response text.
@@ -270,11 +271,11 @@ def execute_prompt(prompt: str) -> str:
     errors = {}
     allow_paid_api = os.environ.get("CEX_USE_API", "0") == "1"
 
-    # --- [1] Claude CLI (subscription — included in Max/Pro plan) ---
+    # --- [1] Claude CLI (subscription -- included in Max/Pro plan) ---
     try:
         import subprocess
         result = subprocess.run(
-            ["claude", "-p", "--model", "claude-sonnet-4-20250514", "--no-chrome"],
+            ["pi", "-p", "--model", "anthropic/claude-sonnet-4-6"],
             input=prompt, capture_output=True, text=True,
             timeout=120, encoding="utf-8",
         )
@@ -282,7 +283,7 @@ def execute_prompt(prompt: str) -> str:
             return result.stdout
         errors["CLI-Claude"] = f"exit {result.returncode}: {result.stderr[:200]}"
     except FileNotFoundError:
-        errors["CLI-Claude"] = "claude CLI not in PATH"
+        errors["CLI-Pi"] = "pi CLI not in PATH"
     except Exception as e:
         errors["CLI-Claude"] = str(e)[:120]
 
@@ -331,7 +332,7 @@ def execute_prompt(prompt: str) -> str:
             # [4] Anthropic API
             try:
                 from cex_sdk.models.providers.anthropic import Claude
-                model = Claude(id="claude-sonnet-4-20250514", max_tokens=8000)
+                model = Claude(id="claude-sonnet-4-6", max_tokens=8000)
                 response = model.invoke([SDKMessage(role="user", content=prompt)])
                 if response.content:
                     _log_sdk_metrics(response, "Anthropic-API")
@@ -352,7 +353,7 @@ def execute_prompt(prompt: str) -> str:
         except ImportError:
             errors["SDK"] = "cex_sdk not available"
 
-    print("ERRO: Nenhum LLM provider disponivel.", file=sys.stderr)
+    print("ERROR: No LLM provider available.", file=sys.stderr)
     for provider, err in errors.items():
         print(f"  {provider}: {err}", file=sys.stderr)
     sys.exit(1)
@@ -383,7 +384,7 @@ def run_intent(
 ) -> dict:
     """Full pipeline: intent -> Motor 8F -> builder specs -> governed prompt."""
 
-    # Step 1: Motor 8F — parse + classify
+    # Step 1: Motor 8F -- parse + classify
     parsed = parse_intent(intent, quality_override=quality)
 
     if kind_override:
@@ -412,7 +413,7 @@ def run_intent(
     builder_dir = find_builder_dir(primary_kind)
 
     if not builder_dir:
-        print(f"AVISO: Builder nao encontrado para kind '{primary_kind}'", file=sys.stderr)
+        print(f"WARNING: Builder not found for kind '{primary_kind}'", file=sys.stderr)
         print("  Tentando fallback: knowledge-card-builder", file=sys.stderr)
         builder_dir = find_builder_dir("knowledge_card")
 

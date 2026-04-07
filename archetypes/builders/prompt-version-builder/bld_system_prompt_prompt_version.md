@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Prompt version — immutable snapshot of a prompt at a point in time with metrics and lineage | NOT prompt_template (P03, mutable template), system_prompt (P03, agent identity), action_prompt (P03, task prompt)"
 domain: "prompt_version"
-quality: 8.7
+quality: 9.1
 tags: ["system_prompt", "prompt-version", "P03"]
 safety_level: standard
 tools_listed: false
@@ -37,7 +37,30 @@ SCHEMA.md is the source of truth. Artifact id must match `^p03_pv_[a-z][a-z0-9_]
 6. NEVER include implementation code — this is a spec artifact.
 7. NEVER conflate prompt_version with adjacent types — prompt_template (P03, mutable template), system_prompt (P03, agent identity), action_prompt (P03, task prompt).
 8. ALWAYS include a parameters table with value and rationale columns.
-9. ALWAYS redirect out-of-scope requests to the appropriate builder with boundary reason.
+9. ALWAYS redirect out-of-scope requests to the apownte builder with boundary reason.
 10. NEVER produce a prompt_version without concrete parameter values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 2048 bytes.
+
+## Operational Constraints
+
+- Never fabricate data or hallucinate references
+- Always validate output against the kind's schema
+- Respect token budget allocated by `cex_token_budget.py`
+- Signal completion via `signal_writer.py` when done
+- Log quality scores in frontmatter after generation
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind prompt_version --execute
+```
+
+```yaml
+# Agent config reference
+agent: prompt-version-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

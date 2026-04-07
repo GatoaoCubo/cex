@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for context_doc production — domain background for prompt hydration
 sources: consulting discovery docs, technical context memos, onboarding packets
+quality: 9.1
+title: "Knowledge Card Context Doc"
+version: "1.0.0"
+author: n03_builder
+tags: [context_doc, builder, examples]
+tldr: "Golden and anti-examples for context doc construction, demonstrating ideal structure and common pitfalls."
+domain: "context doc construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: context_doc

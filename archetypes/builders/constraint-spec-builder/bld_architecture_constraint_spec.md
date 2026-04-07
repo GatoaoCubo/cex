@@ -4,6 +4,16 @@ id: bld_architecture_constraint_spec
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of constraint_spec — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Constraint Spec"
+version: "1.0.0"
+author: n03_builder
+tags: [constraint_spec, builder, examples]
+tldr: "Golden and anti-examples for constraint spec construction, demonstrating ideal structure and common pitfalls."
+domain: "constraint spec construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -40,3 +50,23 @@ purpose: Component map of constraint_spec — inventory, dependencies, and archi
 | spec | constraint_type, pattern | Define the artifact's core parameters |
 | optional | provider_compat, fallback | Extend with recommended fields |
 | external | prompt_template, output_validator | Upstream/downstream connections |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_architecture_constraint_spec
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-architecture-constraint-spec.md
+```

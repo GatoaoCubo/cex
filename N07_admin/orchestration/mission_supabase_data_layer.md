@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: n07_orchestrator
 pipeline: domain_builder
 domain: orchestration
-quality: 8.8
+quality: 9.1
 tags: [mission, supabase, data-layer, database, auth, storage, realtime, vectors, edge-functions, N04, multi-tenant]
 tldr: "36-artifact mission owned by N04: Supabase builder + 12 module KCs + template + 4 vertical examples + nucleus artifacts. Generic for any company."
 node_count: 36

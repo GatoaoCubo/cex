@@ -47,8 +47,8 @@ guardrails:
 ```yaml
 worktree:
   enabled: {{true|false}}
-  strategy: {{per_satellite|per_mission}}
-  # per_satellite: each sat gets own branch (sat/mission-name)
+  strategy: {{per_agent_group|per_mission}}
+  # per_agent_group: each sat gets own branch (sat/mission-name)
   # per_mission: one branch per mission, all sats share
   lifecycle:
     setup: "git worktree add .worktrees/{{sat}} -b {{branch}}"

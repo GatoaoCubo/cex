@@ -13,6 +13,11 @@ inputs: ["all P*/_schema.yaml files (auto-scanned)"]
 outputs: ["pass/fail report per schema: required fields, type structure, LP consistency"]
 dependencies: ["pyyaml"]
 category: qa
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose
@@ -32,6 +37,20 @@ No arguments. Scans all P*/_schema.yaml files automatically.
 **Stage**: Infrastructure validation. Run after modifying any _schema.yaml. Upstream of cex_forge, cex_pipeline, and cex_compile which all read schemas.
 
 ## Dependencies
-- `P*/_schema.yaml` files in each LP directory
-- Required top-level fields: lp, name, description
-- Required per-type fields: description, naming, constraints
+1. `P*/_schema.yaml` files in each LP directory
+2. Required top-level fields: lp, name, description
+3. Required per-type fields: description, naming, constraints
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `cli_tool` |
+| Pillar | P04 |
+| Domain | tool integration |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

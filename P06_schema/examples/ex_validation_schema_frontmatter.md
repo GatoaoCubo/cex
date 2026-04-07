@@ -13,7 +13,7 @@ fields_count: 8
 on_failure: "reject"
 strict: true
 domain: "frontmatter_validation"
-quality: 8.7
+quality: 9.0
 tags: [validation-schema, frontmatter, yaml, all-kinds]
 tldr: "Validates YAML frontmatter common fields: id, kind, pillar, version, quality, tags, tldr. Rejects on parse error or missing required."
 coercion: false
@@ -47,3 +47,18 @@ Validates the common YAML frontmatter fields present in every organization artif
 - **Applied by**: cex_doctor.py and publish pipeline validator
 - **Input**: raw YAML frontmatter block (between `---` markers)
 - **Output**: validated frontmatter dict or list of field-level errors
+
+## Cross-References
+
+- **Pillar**: P06 (Schema)
+- **Kind**: `validation schema`
+- **Artifact ID**: `p06_vs_frontmatter`
+- **Tags**: [validation-schema, frontmatter, yaml, all-kinds]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P06 | Schema domain |
+| Kind `validation schema` | Artifact type |
+| Pipeline | 8F (F1→F8) |

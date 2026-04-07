@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-voice-validation
-quality: 8.9
+quality: 9.2
+updated: 2026-04-07
 tags: [schema, brand, voice, contract, consistency, n06]
 tldr: "Validates voice consistency across channels. 5D scores within ±1 tolerance of brand_config. Tone matrix per channel. Do/Don't hard constraints."
 density_score: 0.93
+axioms:
+  - "5D scores must stay within ±1 of brand_config values — larger deviation = brand drift."
+  - "Do/Don't constraints are HARD — violating a Don't is an automatic quality failure."
+linked_artifacts:
+  primary: p01_kc_brand_voice_systems
+  related: [n06_output_brand_voice_guide, n06_schema_brand_audit, p03_sp_commercial_nucleus]
 ---
 
 # Brand Voice Contract

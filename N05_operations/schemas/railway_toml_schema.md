@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
 domain: railway-backend-operations
-quality: 8.7
+quality: 9.1
 tags: [schema, railway, toml, nixpacks, deployment]
 tldr: Schema for railway.toml configuration validation covering buildCommand, startCommand, healthcheckPath, and nixpacks settings.
 schema_type: toml_config
@@ -91,3 +91,40 @@ healthcheckTimeout = 30
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
 ```
+
+
+## Railway Deployment Configuration
+
+The Railway TOML schema defines deployment parameters with validation:
+
+- **Build configuration**: specify builder, build command, and environment variables
+- **Service routing**: configure custom domains, ports, and health check paths
+- **Scaling rules**: define min/max instances and auto-scaling triggers
+- **Environment separation**: distinct configs per environment (dev/staging/prod)
+
+### Full Configuration Example
+
+```toml
+# railway.toml - production configuration
+[build]
+builder = "nixpacks"
+buildCommand = "pip install -r requirements.txt"
+
+[deploy]
+startCommand = "python main.py"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "on-failure"
+restartPolicyMaxRetries = 3
+
+[service]
+internalPort = 8080
+```
+
+| Field | Required | Default | Validation |
+|-------|----------|---------|-----------|
+| builder | No | nixpacks | Enum: nixpacks, dockerfile |
+| startCommand | Yes | - | Non-empty string |
+| healthcheckPath | No | / | Valid URL path |
+| internalPort | No | 8080 | 1-65535 |
+

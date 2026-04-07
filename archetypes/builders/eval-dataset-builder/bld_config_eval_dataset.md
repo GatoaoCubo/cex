@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Eval Dataset"
+version: "1.0.0"
+author: n03_builder
+tags: [eval_dataset, builder, examples]
+tldr: "Golden and anti-examples for eval dataset construction, demonstrating ideal structure and common pitfalls."
+domain: "eval dataset construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: eval_dataset Production Rules
 ## Naming Convention
@@ -73,4 +83,4 @@ Rule: all present split values must sum to exactly 1.0. Use 3 decimal places max
 | langsmith | pip install langsmith | smith.langchain.com |
 | deepeval | pip install deepeval | confident-ai.com |
 | huggingface | pip install datasets | huggingface.co/datasets |
-| custom | project-specific | internal registry |
+| costm | project-specific | internal registry |

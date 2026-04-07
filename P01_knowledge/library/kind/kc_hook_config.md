@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: hook_config
-quality: 9.0
+quality: 9.1
 tags: [hook_config, P04, CONSTRAIN, kind-kc, hooks, lifecycle]
 tldr: "Declarative manifest that lists WHICH hooks fire at WHICH lifecycle events — the registry, not the implementation. Hook artifacts implement; hook_config declares when they activate."
 when_to_use: "Building, reviewing, or reasoning about hook_config artifacts"

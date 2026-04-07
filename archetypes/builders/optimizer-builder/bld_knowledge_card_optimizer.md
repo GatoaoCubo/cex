@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for optimizer production — atomic searchable facts
 sources: optimizer-builder MANIFEST.md + SCHEMA.md, Google SRE, control theory, DORA metrics
+quality: 9.1
+title: "Knowledge Card Optimizer"
+version: "1.0.0"
+author: n03_builder
+tags: [optimizer, builder, examples]
+tldr: "Golden and anti-examples for optimizer construction, demonstrating ideal structure and common pitfalls."
+domain: "optimizer construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: optimizer

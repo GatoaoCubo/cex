@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.1
 tags: [cex, taxonomy, llm-artifacts, standardization, interoperability]
 tldr: "CEX classifica 78 tipos de artefatos LLM em 8 funcoes e 12 LPs, cobrindo 91% de 12 frameworks -- o TCP/IP cognitivo"
 when_to_use: "Entender a estrutura completa do CEX e por que padronizar artefatos LLM"

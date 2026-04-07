@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: model_card
-quality: 8.9
+quality: 9.1
 tags: [model_card, P02, GOVERN, kind-kc]
 tldr: "Structured spec of an LLM's capabilities, pricing, context window, and operational constraints for routing decisions"
 when_to_use: "Building, reviewing, or reasoning about model_card artifacts"
 keywords: [llm-spec, pricing, context-window]
 feeds_kinds: [model_card]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Model Card
@@ -76,7 +79,7 @@ A model card is a structured specification of an LLM's capabilities, pricing tie
 - IF task requires vision THEN select model_card with `modalities: [text, vision]`
 - IF budget is constrained THEN select model_card with lowest cost_per_1k_input meeting quality threshold
 - IF task is complex reasoning THEN select model_card with highest benchmark scores
-- DEFAULT: Use the model_card matching the agent_node's default model assignment
+- DEFAULT: Use the model_card matching the agent_group's default model assignment
 
 ## Quality Criteria
 - GOOD: Has model ID, context window, pricing, and modalities documented

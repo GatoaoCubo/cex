@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of handoff artifacts
 pattern: few-shot learning for delegation instruction packaging
+quality: 9.0
+title: "Examples Handoff"
+version: "1.0.0"
+author: n03_builder
+tags: [handoff, builder, examples]
+tldr: "Golden and anti-examples for handoff construction, demonstrating ideal structure and common pitfalls."
+domain: "handoff construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: handoff-builder
@@ -19,7 +29,7 @@ version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
 author: "stella"
-agent_node: "edison"
+agent_group: "edison"
 mission: "wave19"
 autonomy: "full"
 quality_target: 9.0
@@ -39,7 +49,7 @@ linked_artifacts:
 ```
 # builder_agent — WAVE19: Build 3 Builders
 **Full Autonomy** | **Quality 9.0+**
-**REGRA: Commit e signal ANTES de qualquer pausa.**
+**REGRA: Commit and signal ANTES de qualquer pausa.**
 ## Context
 Wave 19 requires 3 new archetype builders for types session_state (P10),
 dag (P12), and handoff (P12). Each builder follows the 13-ISO pattern
@@ -94,7 +104,7 @@ FAILURES:
 3. wrong id prefix: `p03_ap_` instead of `p12_ho_` (H01)
 4. contains `persona`: prompt engineering -> action_prompt drift (H08)
 5. contains `response_format`: prompt constraint -> action_prompt drift (H08)
-6. missing required fields: `agent_node`, `mission`, `autonomy`, `quality_target`, `quality`, `tags`, `tldr` (H03)
+6. missing required fields: `agent_group`, `mission`, `autonomy`, `quality_target`, `quality`, `tags`, `tldr` (H03)
 7. vague tasks: "Build some archetype builders" is not specific (H09)
 8. no scope fence section: missing SOMENTE/NAO TOQUE (H10)
 9. no commit section: missing exact git commands (H10)

@@ -46,14 +46,14 @@ repos:
 
 ```yaml
 key_paths:
-  agent_node_primes: records/agent_nodes/{name}/PRIME_{NAME}.md
+  agent_group_primes: records/agent_groups/{name}/PRIME_{NAME}.md
   agents: records/agents/{name}/
   skills: records/skills/{name}/SKILL.md
   pool_index: records/pool/POOL_INDEX.md
   handoffs: .claude/handoffs/
   signals: .claude/signals/
   spawn_scripts: records/framework/powershell/spawn_*.ps1
-  brain_index: records/core/brain/mcp-organization-brain/
+  knowledge_index: records/core/brain/mcp-organization-brain/
   learning: records/core/learning/memory/
   mental_models: .claude/mental_models/
 ```

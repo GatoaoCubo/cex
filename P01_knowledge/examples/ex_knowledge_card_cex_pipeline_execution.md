@@ -8,27 +8,27 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.0
 tags: [cex, pipeline, execution, 8-functions, boot-sequence, llm-processing]
 tldr: "Pipeline de 8 funcoes (BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE) eh o processamento real de todo sistema LLM"
-when_to_use: "Entender a sequencia completa de execucao de um agente ou agent_node LLM do input ao output"
+when_to_use: "Entender a sequencia completa de execucao de um agente ou agent_group LLM do input ao output"
 keywords: [pipeline, execution, 8-functions, boot-sequence, processing]
 long_tails:
   - "Qual a sequencia de execucao de um agente LLM do input ao output"
-  - "Como funciona o boot sequence de um agent_node organization"
+  - "Como funciona o boot sequence de um agent_group organization"
 axioms:
   - "SEMPRE executar funcoes na ordem BECOME-INJECT-REASON-CALL-PRODUCE-CONSTRAIN-GOVERN-COLLABORATE"
   - "NUNCA pular BECOME (identidade precede tudo)"
 linked_artifacts:
   primary: p01_kc_cex_function_become
-  related: [p01_kc_cex_agent_node_concept, p01_kc_cex_cortex_enterprise]
+  related: [p01_kc_cex_agent_group_concept, p01_kc_cex_cortex_enterprise]
 density_score: null
 data_source: "https://arxiv.org/abs/2308.00352"
 ---
 
 ## Summary
 
-Todo sistema LLM executa as mesmas 8 funcoes na mesma ordem logica. Um prompt simples executa 1-2 (BECOME implicito + PRODUCE). Um agente executa 4-5. Um agent_node com lifecycle completo executa todas as 8. A diferenca entre prompt e agent_node nao eh de natureza — eh de completude. A boot sequence de um Cortex Enterprise eh ela mesma uma instanciacao dessas 8 funcoes.
+Todo sistema LLM executa as mesmas 8 funcoes na mesma ordem logica. Um prompt simples executa 1-2 (BECOME implicito + PRODUCE). Um agente executa 4-5. Um agent_group com lifecycle completo executa todas as 8. A diferenca entre prompt e agent_group nao eh de natureza — eh de completude. A boot sequence de um Cortex Enterprise eh ela mesma uma instanciacao dessas 8 funcoes.
 
 ## Spec
 
@@ -38,7 +38,7 @@ Todo sistema LLM executa as mesmas 8 funcoes na mesma ordem logica. Um prompt si
 | 2 | INJECT | Fornece contexto, dados, conhecimento | Indexar pool de KCs via Brain MCP |
 | 3 | REASON | Planeja, decompoe, decide estrategia | Ler tarefa, decompor em sub-tarefas |
 | 4 | CALL | Usa ferramentas externas, APIs, MCPs | brain_query() + conectar MCPs |
-| 5 | PRODUCE | Gera output: codigo, KCs, copy, deploy | Executar agent teams por agent_node |
+| 5 | PRODUCE | Gera output: codigo, KCs, copy, deploy | Executar agent teams por agent_group |
 | 6 | CONSTRAIN | Valida contra schemas, formata output | Validar tipos, aplicar templates |
 | 7 | GOVERN | Avalia qualidade, testa, benchmarka | Quality gate >= 7.0, pre-commit hooks |
 | 8 | COLLABORATE | Sinaliza, commita, despacha proximo | Signal file + git commit + next task |
@@ -49,7 +49,7 @@ Todo sistema LLM executa as mesmas 8 funcoes na mesma ordem logica. Um prompt si
 |---------|--------|
 | Prompt simples sem agente | Executa BECOME (implicito) + PRODUCE |
 | Agente com tools | Adiciona INJECT + REASON + CALL ao pipeline |
-| Satellite completo | Executa todas as 8 funcoes em sequencia |
+| Agent_group completo | Executa todas as 8 funcoes em sequencia |
 | Boot de Cortex Enterprise | Instancia as 8 funcoes como boot sequence |
 | Falha em GOVERN (score < 7.0) | Loop de retry: REASON-PRODUCE-CONSTRAIN-GOVERN |
 
@@ -80,7 +80,7 @@ for name, *steps in pipeline:
         step()  # each function executes in order
 # Prompt: executes BECOME(implicit) + PRODUCE only
 # Agent: adds INJECT + REASON + CALL
-# Satellite: all 8 functions, full lifecycle
+# Agent_group: all 8 functions, full lifecycle
 ```
 
 ## References
@@ -88,5 +88,5 @@ for name, *steps in pipeline:
 - source: https://arxiv.org/abs/2308.00352
 - source: https://arxiv.org/abs/2303.17760
 - related: p01_kc_cex_function_become
-- related: p01_kc_cex_agent_node_concept
+- related: p01_kc_cex_agent_group_concept
 - related: p01_kc_cex_cortex_enterprise

@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How glossary-entry-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Glossary Entry"
+version: "1.0.0"
+author: n03_builder
+tags: [glossary_entry, builder, examples]
+tldr: "Golden and anti-examples for glossary entry construction, demonstrating ideal structure and common pitfalls."
+domain: "glossary entry construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: glossary-entry-builder
@@ -43,4 +53,4 @@ None — independent builder (layer 0). Terms can be defined standalone.
 | context-doc-builder | References glossary terms in domain documentation |
 | knowledge-card-builder | Uses terms as search keywords for discoverability |
 | axiom-builder | References precise term definitions in axiom statements |
-| brain-index-builder | Uses glossary terms for query expansion in search |
+| knowledge-index-builder | Uses glossary terms for query expansion in search |

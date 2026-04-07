@@ -8,13 +8,13 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [builder, manifest, software-project, capabilities]
 tldr: "Capability manifest: 8 verticals (scaffold, implement, test, lint, docker, ci, deploy, review), 12 platform KCs consumed, 23 CEX tools available, 3 output modes (CLI, API, pipeline)."
 density_score: 0.89
 keywords: [software-engineering, manifest, software-project, builder, capabilities]
 triggers: ["create software-engineering", "build software-engineering artifact"]
-geo_description: >
+capability_summary: >
   L1: | Vertical | What It Does | Depends On |. L2: Max project complexity: 20 files. L3: When user needs to create, build, or scaffold software engineering.
 ---
 # Software Project Builder — Manifest
@@ -47,7 +47,7 @@ geo_description: >
 | kc_git_hooks_ci | P01/platform | ✅ |
 | kc_code_review | P01/platform | ✅ |
 | kc_error_handling_python | P01/platform | ✅ |
-| kc_security_practices | P01/platform | ✅ |
+| kc_security_forctices | P01/platform | ✅ |
 
 ## Output Modes
 

@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: input_schema
-quality: 8.9
+quality: 9.1
 tags: [input_schema, P06, CONSTRAIN, kind-kc]
 tldr: "Unilateral entry contract defining required fields, types, and constraints for agent or tool inputs."
 when_to_use: "Building, reviewing, or reasoning about input_schema artifacts"
 keywords: [input, schema, contract, required-fields]
 feeds_kinds: [input_schema]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Input Schema

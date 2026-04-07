@@ -5,7 +5,7 @@ pillar: P01
 title: Nixpacks & Railpack — Auto-detection, Build Config, Python
 domain: N05_operations
 tags: [nixpacks, railpack, buildpack, python, build, deploy]
-quality: 9.0
+quality: 9.1
 sources:
   - https://nixpacks.com/docs
   - https://nixpacks.com/docs/providers/python

@@ -1,0 +1,128 @@
+id: p03_ins_workflow
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Workflow Builder Instructions
+target: workflow-builder agent
+phases_count: 5
+prerequisites:
+- Mission goal is defined in one sentence
+- At least 2 agents or steps are identified
+- 'Execution mode is known: sequential, parallel, or mixed'
+- Completion signals are specified or can be derived from step outputs
+validation_method: checklist
+domain: workflow
+quality: null
+tags:
+- instruction
+- workflow
+- orchestration
+- multi-step
+- P12
+idempotent: true
+atomic: false
+rollback: Delete generated workflow YAML file; revert any spawn_configs created for this workflow
+dependencies: []
+logging: true
+tldr: Build a workflow YAML that orchestrates agents in sequential, parallel, or mixed waves with dependency resolution, signals,
+  and error recovery.
+density_score: 0.93
+context: 'The workflow-builder produces a `workflow` artifact -- a structured YAML that defines how agents are orchestrated
+  at runtime. A workflow decomposes a mission into steps, assigns agents to each step, maps dependencies between steps, specifies
+  completion signals, and defines error recovery strategy.
+
+  Critical distinction: a `workflow` is runtime orchestration with execution semantics (waves, signals, dependencies). It
+  is NOT a prompt chain (`chain` -- sequential prompt calls without agent coordination), NOT a static dependency graph (`dag`
+  -- structure only, no execution), and NOT a routing rule (`dispatch_rule` -- keyword-to-agent routing). Confusing these
+  produces orchestration that cannot be executed.
+
+  Input contract:
+
+  - `mission_name`: string -- kebab-case mission identifier (e.g. `onboard-new-agent`, `research-and-publish`)
+
+  - `goal`: string -- one sentence describing the end-to-end outcome
+
+  - `steps`: list of step definition objects (see Phase 2)
+
+  - `execution_mode`: enum -- `sequential` | `parallel` | `mixed`
+
+  - `error_recovery`: enum -- `abort` | `skip_failed` | `retry`
+
+  - `max_retries`: integer -- retry attempts per step (default 2)
+
+  - `timeout_ms`: integer -- total workflow timeout (default 600000)
+
+  Output contract: a single `workflow` YAML with all required fields, stored at `records/workflows/{mission_name}.yaml`.
+
+  Variables:
+
+  - `{{mission_name}}` -- kebab-case mission identifier
+
+  - `{{goal}}` -- mission outcome sentence
+
+  - `{{step_N_id}}` -- Nth step identifier
+
+  - `{{step_N_agent}}` -- agent assigned to Nth step
+
+  - `{{step_N_signal}}` -- completion signal for Nth step'
+phases: ''
+phase_1_decompose_mission_into_steps: "Action: Break the mission goal into discrete, assignable steps.\nFOR the given mission_goal:\n\
+  \    1. Identify distinct deliverables (each deliverable = one step)\n    2. Assign one agent per step (steps are not shared\
+  \ between agents)\n    3. Name each step as: verb_noun (e.g. research_competitors, build_component)\nStep granularity rules:\n\
+  \    - One step = one agent = one deliverable\n    - Steps that can run independently -> parallel candidates\n    - Steps\
+  \ that need prior output -> sequential, add depends_on\n    - Max 12 steps per workflow; split into sub-workflows if larger\n\
+  steps_count = len(steps)\nASSERT steps_count >= 2\nVerifiable exit: each step has a name, an assigned agent, and one deliverable;\
+  \ steps_count >= 2."
+phase_2_define_each_step_object: "Action: Build a complete step definition for each step.\nStep object schema:\n{\n  id: string\
+  \ -- snake_case step identifier\n  agent: string -- agent id responsible for this step\n  action: string -- one-sentence\
+  \ description of what the agent does\n  input: string or object -- what the agent receives as input\n  output: string --\
+  \ the deliverable produced (file path, signal, or artifact id)\n  signal: string -- completion signal name emitted when\
+  \ step finishes\n  depends_on: list of step ids or [] -- steps that must complete first\n  timeout_ms: integer -- step-level\
+  \ timeout (overrides workflow default)\n  on_failure: enum -- abort | skip | retry (overrides workflow error_recovery)\n\
+  }\nDependency rules:\nIF step B needs step A's output:\n    step_B.depends_on = [step_A.id]\nIF steps A and B are independent:\n\
+  \    both have depends_on = []\n    both can run in parallel (if execution_mode != sequential)\nIF execution_mode == \"\
+  sequential\":\n    each step implicitly depends on the previous step (no explicit depends_on needed)\nCycle detection: depends_on\
+  \ must form a DAG (no circular dependencies)\nVerifiable exit: each step has all 9 fields; depends_on forms a valid DAG\
+  \ (no cycles)."
+phase_3_plan_wave_ordering: "Action: Group steps into execution waves based on dependency resolution.\nwave_0 = steps with\
+  \ depends_on == []\nwave_1 = steps whose depends_on are all in wave_0\nwave_N = steps whose depends_on are all in wave_0..wave_(N-1)\n\
+  IF execution_mode == \"sequential\":\n    each wave has exactly 1 step\nIF execution_mode == \"parallel\":\n    all steps\
+  \ with no dependencies are in wave_0\n    all remaining steps form subsequent waves\nIF execution_mode == \"mixed\":\n \
+  \   apply dependency resolution; group independent steps per wave\nWave planning rules:\n- Steps in the same wave run concurrently\n\
+  - A step can only start when all its depends_on steps have emitted their signals\n- spawn_delay_ms=5000 is applied between\
+  \ wave launches (prevents terminal race conditions)\nVerifiable exit: all steps are assigned to a wave; no step appears\
+  \ in a wave before its dependencies."
+phase_4_compose_workflow_yaml: 'Action: Assemble all resolved values into the 20-field YAML structure.
+
+  Required fields:
+
+  1. `id` -- `workflow_{{mission_name}}`
+
+  2. `kind` -- `workflow`
+
+  3. `pillar` -- `P12`
+
+  4. `version` -- `1.0.0`
+
+  5. `mission_name` -- `{{mission_name}}`
+
+  6. `goal` -- `{{goal}}`
+
+  7. `execution_mode` -- `{{execution_mode}}`
+
+  8. `steps_count` -- integer matching actual steps list length
+
+  9. `steps` -- list of step objects from Phase 2
+
+  10. `waves` -- wave groupings from Phase 3
+
+  11. `error_recovery` -- `{{error_recovery}}`
+
+  12. `max_retries` -- integer
+
+  13. `timeout_ms` -- integer
+
+  14. `spawn_delay_ms` -- `5000` (always)'

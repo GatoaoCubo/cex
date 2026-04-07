@@ -9,7 +9,7 @@ set CEX_NUCLEUS=N07
 set CLAUDECODE=
 cd /d "%CEX_ROOT%"
 
-:: ── Bootstrap Check ──
+:: -- Bootstrap Check --
 if not exist "%CEX_ROOT%\.cex\brand\.bootstrapped" (
     echo.
     echo  ============================================================
@@ -46,7 +46,7 @@ call boot\n06.cmd
 goto :eof
 
 :start_orchestrator
-:: ── Load Brand Name for Title ──
+:: -- Load Brand Name for Title --
 for /f "tokens=2 delims=: " %%a in ('findstr /C:"BRAND_NAME" "%CEX_ROOT%\.cex\brand\brand_config.yaml" 2^>nul') do (
     set BRAND_NAME=%%a
 )
@@ -56,5 +56,5 @@ if defined BRAND_NAME (
     title CEX-N07-ORCHESTRATOR
 )
 
-:: ALWAYS interactive — N07 orchestrates, never receives task args
+:: ALWAYS interactive -- N07 orchestrates, never receives task args
 pi --model anthropic/claude-opus-4-6 --thinking xhigh

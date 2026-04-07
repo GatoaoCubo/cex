@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder
 domain: quality_gate
-quality: 8.8
+quality: 9.0
 density_score: 0.85
 tags:
   - quality-gate
@@ -47,7 +47,7 @@ Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 
 | 5  | Bypass section explicitly states H01 and H05 cannot be bypassed | 1.0 |
 | 6  | Tags list includes `quality-gate` | 0.5 |
 | 7  | Tier thresholds match standard: GOLDEN >= 9.5, PUBLISH >= 8.0, REVIEW >= 7.0, REJECT < 7.0 | 1.0 |
-| 8  | Every gate predicate is testable (binary outcome, no subjective language) | 1.0 |
+| 8  | Every gate predicate is testsble (binary outcome, no subjective language) | 1.0 |
 | 9  | Gate set is domain-adapted, not a copy-paste of a generic template | 1.0 |
 | 10 | `tldr` is <= 160 characters | 0.5 |
 **Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`

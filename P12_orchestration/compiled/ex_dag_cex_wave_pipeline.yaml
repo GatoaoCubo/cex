@@ -31,7 +31,7 @@ pipeline: '[W5.1 P01 KCs] ──────────────────
   [W5.5 P08-P12 Infra] ─ depends on W5.1+W5.4 ─────────┤
 
   [W5.6 INVESTIGATE] ──── depends on W5.1-W5.5 ─────────┘'
-node_definitions: '| Node | Satellite | Volume | Input | Output |
+node_definitions: '| Node | Agent_group | Volume | Input | Output |
 
   |------|-----------|--------|-------|--------|
 
@@ -51,7 +51,7 @@ node_definitions: '| Node | Satellite | Volume | Input | Output |
 dependencies: "dependencies:\n  W5.4_agents:\n    requires: [W5.1_kcs]  # agents reference KCs for domain context\n  W5.5_infra:\n\
   \    requires: [W5.1_kcs, W5.4_agents]  # infra docs reference both\n  W5.6_investigate:\n    requires: [W5.1, W5.2, W5.3,\
   \ W5.4, W5.5]  # classify what's left\n  W5.7_archive:\n    requires: [W5.6_investigate]  # archive only after full classification"
-execution_mode: '| Wave | Mode | Satellites | Estimated Batches |
+execution_mode: '| Wave | Mode | Agent_groups | Estimated Batches |
 
   |------|------|-----------|-------------------|
 

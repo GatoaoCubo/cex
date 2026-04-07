@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.8
+quality: 9.1
 tags: [example, supabase, data-layer, content, platform, config]
 tldr: "Content platform config: posts, comments, media, feeds, moderation, busca semantica de conteudo, real-time comments e likes"
 density_score: 0.89

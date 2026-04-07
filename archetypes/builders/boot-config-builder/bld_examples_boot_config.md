@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of boot_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Boot Config"
+version: "1.0.0"
+author: n03_builder
+tags: [boot_config, builder, examples]
+tldr: "Golden and anti-examples for boot config construction, demonstrating ideal structure and common pitfalls."
+domain: "boot config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: boot-config-builder
@@ -23,7 +33,7 @@ provider: "claude_code"
 identity:
   name: "Research Agent"
   role: "Deep web research and knowledge extraction"
-  agent_node: "agnostic"
+  agent_group: "agnostic"
 constraints:
   max_tokens: 16384
   context_window: 200000
@@ -43,7 +53,7 @@ permissions:
   execute: [python, git]
 system_prompt_ref: "p03_sp_research_agent"
 domain: "research"
-quality: null
+quality: 8.9
 tags: [boot-config, research, claude-code, P02]
 tldr: "Claude Code boot config for research agent with brain+firecrawl MCPs and 200K context"
 density_score: 0.89
@@ -54,7 +64,7 @@ Supports MCP servers, 200K context window, file system access.
 ## Identity Block
 Name: Research Agent
 Role: Deep web research and knowledge extraction
-Satellite: agnostic (cross-agent_node utility)
+Agent_group: agnostic (cross-agent_group utility)
 ## Constraints
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|

@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-04-01
 author: builder
 domain: frontend
-quality: 8.8
+quality: 9.1
 tags: [knowledge, frontend]
 tldr: "Typography Web patterns and best practices"
 density_score: 0.88
+updated: "2026-04-07"
 ---
 
 # Typography Web
@@ -86,3 +87,18 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
 - Variable Fonts Guide: web.dev/variable-fonts
 - Font Loading: developer.mozilla.org/en-US/docs/Web/CSS/@font-face
 - Type Scale Calculator: type-scale.com
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_typography_web`
+- **Tags**: [knowledge, frontend]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

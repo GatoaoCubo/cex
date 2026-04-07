@@ -5,6 +5,16 @@ pillar: P04
 llm_function: INJECT
 purpose: Domain knowledge for skill production — atomic searchable facts
 sources: skill-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Skill"
+version: "1.0.0"
+author: n03_builder
+tags: [skill, builder, examples]
+tldr: "Golden and anti-examples for skill construction, demonstrating ideal structure and common pitfalls."
+domain: "skill construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: skill

@@ -16,10 +16,13 @@ tags: [output-validator, P05, type-builder]
 tldr: "Concrete values with rationale. Validate against schema. Stay under 2048 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [output validator, schema validation, regex check, llm-as-judge, fix-and-retry]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Output Validator"
+density_score: 0.90
 ---
 ## Summary
 Output validator — checks and corrective actions applied to LLM output AFTER generation. The difference between a useful output_validator and a useless one is concrete values
@@ -30,10 +33,36 @@ Every parameter must have: name, value, and why that value was chosen.
 Required body sections: Overview, Checks, Failure Actions, Integration.
 Body budget: 2048 bytes max.
 ## Anti-Pattern
-- No on_fail action: Validation detects error but pipeline continues with bad output
-- Infinite retry: Fix-and-retry without max attempts loops forever on unfixable errors
-- Validator too strict: Rejects acceptable outputs, wastes tokens on unnecessary retries
-- No error context in retry: Retry prompt doesn't explain what failed — LLM repeats same mistake
+1. No on_fail action: Validation detects error but pipeline continues with bad output
+2. Infinite retry: Fix-and-retry without max attempts loops forever on unfixable errors
+3. Validator too strict: Rejects acceptable outputs, wastes tokens on unnecessary retries
+4. No error context in retry: Retry prompt doesn't explain what failed — LLM repeats same mistake
 ## Context
 The 2048-byte body limit keeps output_validator artifacts focused. Fill required fields first,
 then add recommended fields if space permits. Always set quality: null.
+
+## Metadata
+
+```yaml
+id: p10_lr_output_validator_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-output-validator-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | output_validator |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

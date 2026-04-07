@@ -6,12 +6,22 @@ file_position: 8/13
 pillar: P07
 llm_function: GOVERN
 purpose: Meta-template for generating EXAMPLES.md of any kind-builder
+quality: 9.1
+title: "Meta Examples Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: {{builder_name}}
-<!-- Este meta-file gera o EXAMPLES.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: SCHEMA.md + OUTPUT_TEMPLATE.md + QUALITY_GATES.md ja gerados -->
-<!-- INPUT RECOMENDADO: exemplos reais do tipo se existirem em {{lp_dir}}/examples/ -->
+<!-- This meta-file generates the EXAMPLES.md of any builder -->
+<!-- REQUIRED INPUT: SCHEMA.md + OUTPUT_TEMPLATE.md + QUALITY_GATES.md ja gerados -->
+<!-- INPUT RECOMENDADO: examples reais do type se existirem em {{lp_dir}}/examples/ -->
 
 ```yaml
 ---
@@ -25,35 +35,35 @@ pattern: few-shot learning — LLM reads these before producing
 ## Golden Example
 
 INPUT: "{{natural_language_request}}"
-<!-- NOTA: {{natural_language_request}} = frase que um user diria para pedir este tipo -->
+<!-- NOTE: {{natural_language_request}} = frase that um user diria for pedir this type -->
 <!-- Exemplos observados: -->
-<!-- - model_card: "Documenta o Claude Sonnet 4 pra decidir roteamento" -->
-<!-- - KC: "Destila conhecimento sobre prompt caching para otimizar custos LLM" -->
+<!-- - model_card: "Documenta o Claude Sonnet 4 for decidir routing" -->
+<!-- - KC: "Destila knowledge about prompt caching for optimize costs LLM" -->
 <!-- - signal: "Emit completion signal for codex after finishing signal-builder" -->
-<!-- - quality_gate: "Define gate pra knowledge_cards antes de publicar no pool" -->
+<!-- - quality_gate: "Define gate for knowledge_cards antes de publicar no pool" -->
 
 OUTPUT:
-<!-- NOTA: Produzir um artifact COMPLETO usando OUTPUT_TEMPLATE.md -->
-<!-- O exemplo DEVE passar TODOS os HARD gates e >= 95% dos SOFT gates -->
-<!-- Usar dados REAIS (nao inventados) sempre que possivel -->
+<!-- NOTE: Produce um artifact COMPLETO usando OUTPUT_TEMPLATE.md -->
+<!-- O example DEVE passar TODOS os HARD gates e >= 95% dos SOFT gates -->
+<!-- Usar data REAIS (nao inventados) sempre that possivel -->
 
 ```{{machine_format}}
 {{complete_artifact_following_output_template}}
 ```
-<!-- NOTA: {{machine_format}} = yaml (para md kinds) ou json (para signal) -->
-<!-- Preencher TODOS os campos do template com valores concretos -->
-<!-- Incluir body completo com todas as secoes obrigatorias -->
+<!-- NOTE: {{machine_format}} = yaml (para md kinds) or json (para signal) -->
+<!-- Preencher TODOS os fields do template with values concrete -->
+<!-- Incluir body complete with todas as sections obrigatorias -->
 
 WHY THIS IS GOLDEN:
-<!-- NOTA: Listar 6-10 razoes mapeadas para gates especificos -->
-<!-- Padrao UNIVERSAL observado em todos os 4 builders: -->
+<!-- NOTE: Listar 6-10 razoes mapeadas for specific gates -->
+<!-- Padrao UNIVERSAL observado em all os 4 builders: -->
 - quality: null ({{hard_gate_quality}} pass)
 - id matches {{id_prefix}} pattern ({{hard_gate_id}} pass)
 - kind: {{type_name}} ({{hard_gate_type}} pass)
 - {{required_fields_count}} required fields present ({{hard_gate_fields}} pass)
 - {{soft_gate_check_1}} ({{soft_gate_id_1}} pass)
 - {{soft_gate_check_2}} ({{soft_gate_id_2}} pass)
-<!-- NOTA: Referenciar gate IDs (H01, S03, etc.) de QUALITY_GATES.md -->
+<!-- NOTE: Referencesr gate IDs (H01, S03, etc.) de QUALITY_GATES.md -->
 
 ## Anti-Example
 
@@ -63,22 +73,22 @@ BAD OUTPUT:
 ```{{machine_format}}
 {{deliberately_bad_artifact}}
 ```
-<!-- NOTA: Incluir 6-10 erros comuns para este tipo -->
+<!-- NOTE: Incluir 6-10 erros comuns for this type -->
 <!-- Padrao UNIVERSAL observado: -->
-<!-- 1. id sem prefixo correto -->
+<!-- 1. id without prefixo correct -->
 <!-- 2. lp ausente -->
-<!-- 3. quality com valor (nao null) -->
-<!-- 4. tipo do campo errado (string vs integer, string vs list) -->
-<!-- 5. body com filler/prose ao inves de dados concretos -->
-<!-- 6. secoes obrigatorias ausentes -->
+<!-- 3. quality with value (nao null) -->
+<!-- 4. type do field errado (string vs integer, string vs list) -->
+<!-- 5. body with filler/prose ao inves de data concrete -->
+<!-- 6. sections obrigatorias ausentes -->
 
 FAILURES:
-<!-- NOTA: Lista numerada com gate ID e descricao da falha -->
+<!-- NOTE: Lista numerada with gate ID e description da fails -->
 1. id: no `{{id_prefix}}` prefix -> {{hard_gate_id}} FAIL
 2. lp: missing -> {{hard_gate_lp}} FAIL
 3. quality: self-assigned -> {{hard_gate_quality}} FAIL
 4. {{failure_4}} -> {{gate_4}} FAIL
 5. {{failure_5}} -> {{gate_5}} FAIL
 6. {{failure_6}} -> {{gate_6}} FAIL
-<!-- NOTA: Mapear CADA falha para o gate exato (H01-H10, S01-S20) -->
-<!-- Incluir falhas tanto HARD (bloqueiam) quanto SOFT (reduzem score) -->
+<!-- NOTE: Map CADA fails for o gate exato (H01-H10, S01-S20) -->
+<!-- Incluir failss tanto HARD (bloqueiam) quanto SOFT (reduzem score) -->

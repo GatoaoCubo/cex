@@ -102,4 +102,4 @@ phase_3_validate: "Goal: Verify all quality gates before writing the final artif
   \ (no automated validator for patterns).\n22. Verify all HARD gates pass: YAML parses, `id` matches pattern, `kind = pattern`,\
   \ `quality = null`, all required fields present, `name` present, Problem section describes recurrence explicitly.\n23. Cross-check:\
   \ is this truly a pattern (recurring, reusable)? Confirm it is NOT drifting into:\n    - law (inviolable rule) — route to\
-  \ law-builder\n    - workflow (executable multi-step procedure) — route to workflow-builder"
+  \ invariant-builder\n    - workflow (executable multi-step procedure) — route to workflow-builder"

@@ -44,7 +44,7 @@ P09 centraliza toda configuracao do CEX em 5 tipos de artefato YAML. Env configs
 - Path config centraliza caminhos — agents nao hardcodam paths
 - Permission com 3 niveis: read, write, execute per scope
 - Feature flag com gradual rollout: 0% > 10% > 50% > 100%
-- Runtime rule com defaults + overrides por satelite
+- Runtime rule com defaults + overrides por agent_group
 
 ## Anti-Patterns
 - Hardcoded paths em agentes: quebra ao mudar ambiente

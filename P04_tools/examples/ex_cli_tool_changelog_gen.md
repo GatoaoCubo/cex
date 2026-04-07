@@ -21,6 +21,11 @@ inputs: ["git log history", "_meta/VERSION.yaml"]
 outputs: ["formatted changelog entry grouped by LP", "appended to _meta/CHANGELOG.md"]
 dependencies: ["pyyaml", "git"]
 category: product
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of effort_profile artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.2
+title: "Examples Effort Profile"
+version: "1.0.0"
+author: n03_builder
+tags: [effort_profile, builder, examples]
+tldr: "Golden and anti-examples for effort profile construction, demonstrating ideal structure and common pitfalls."
+domain: "effort profile construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: effort-profile-builder

@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template - Webhook"
 tags: [template, webhook, callback, http, integration]
 tldr: "Defines an HTTP webhook endpoint or callback URL. Configures method, headers, payload schema, retry policy, and signature verification."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "tool integration"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.95
 ---
 
 # Webhook: [NAME]
@@ -36,13 +41,27 @@ retry_backoff_ms: [1000 | 2000]
 | doctor_alert | {pass, warn, fail} | Doctor finds issues |
 
 ## Error Handling
-- **Endpoint unreachable**: Queue payload, retry with backoff
-- **Auth failed (401)**: Log error, do NOT retry
-- **Payload too large**: Truncate to 64KB
-- **Timeout**: Retry once, then log as failed delivery
+1. **Endpoint unreachable**: Queue payload, retry with backoff
+2. **Auth failed (401)**: Log error, do NOT retry
+3. **Payload too large**: Truncate to 64KB
+4. **Timeout**: Retry once, then log as failed delivery
 
 ## Quality Gate
-- [ ] URL is HTTPS (security)
-- [ ] Authentication configured
-- [ ] Retry policy defined
-- [ ] Payload schema documented
+1. [ ] URL is HTTPS (security)
+2. [ ] Authentication configured
+3. [ ] Retry policy defined
+4. [ ] Payload schema documented
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `webhook` |
+| Pillar | P04 |
+| Domain | tool integration |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

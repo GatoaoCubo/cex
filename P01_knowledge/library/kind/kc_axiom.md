@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: axiom
-quality: 9.0
+quality: 9.1
 tags: [axiom, p02, BECOME, kind-kc]
 tldr: "Immutable fundamental principle — part of the entity's deep identity that never changes regardless of context"
 when_to_use: "Building, reviewing, or reasoning about axiom artifacts"
@@ -58,7 +58,7 @@ An axiom is a fundamental, immutable principle that forms part of an entity's de
 | Safety axiom | Prevent harmful outputs | "NEVER generate content that enables physical harm" |
 | Identity axiom | Maintain consistent persona | "ALWAYS identify as organization, never claim to be human" |
 | Quality axiom | Non-negotiable output standards | "NEVER output with quality < 7.0 without explicit flag" |
-| Boundary axiom | Prevent scope creep | "NEVER execute code — only dispatch to agent_nodes" (orchestrator) |
+| Boundary axiom | Prevent scope creep | "NEVER execute code — only dispatch to agent_groups" (orchestrator) |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |

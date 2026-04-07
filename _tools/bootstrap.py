@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Bootstrap — creates a new CEX project from selected Leverage Points."""
+# -*- coding: utf-8 -*-
+"""CEX Bootstrap -- creates a new CEX project from selected Leverage Points."""
 
 import sys
 if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
@@ -105,7 +106,7 @@ def generate_codex(dest: Path, project_name: str, lp_names: list[str]) -> None:
         desc = LP_DESCRIPTIONS.get(code, "")
         lp_table.append(f"| {code} | {lp.split('_', 1)[1].title()} | {desc} |")
 
-    content = f"""# {project_name} — CODEX
+    content = f"""# {project_name} -- CODEX
 ## Gerado via CEX Bootstrap | LIVING
 
 ---
@@ -122,7 +123,7 @@ Hierarquia: CODEX > _schema > _generator > templates > instances
 ## ANATOMIA UNIVERSAL
 YAML front: id, type, lp, quality, keywords(3+), long_tails(2+), bullets(3+), axioms(1+)
 MD body: title, summary 1-line, secoes por tipo
-Density >= 0.8 obrigatorio. Max 4KB.
+Density >= 0.8 required. Max 4KB.
 Prosa > 3 linhas proibida. Bullets com max 80 chars.
 
 ## NAMING
@@ -137,7 +138,7 @@ Regras: lowercase, snake_case, ASCII, max 50 chars
 
 ## WORKFLOW
 1. Escolher LP + tipo (consultar _schema.yaml)
-2. Ler _generator.md (instrucoes passo-a-passo)
+2. Read _generator.md (step-by-step instructions)
 3. Usar template/ como base
 4. Preencher variaveis e conteudo
 5. Validar contra schema (density >= 0.8)
@@ -151,7 +152,7 @@ Regras: lowercase, snake_case, ASCII, max 50 chars
 
 def generate_roadmap(dest: Path, project_name: str, lp_names: list[str]) -> None:
     """Generate a project-specific ROADMAP.md in archetypes/."""
-    content = f"""# {project_name} — ROADMAP
+    content = f"""# {project_name} -- ROADMAP
 
 ---
 
@@ -196,7 +197,7 @@ Knowledge base construido com [CEX](https://github.com/sniff-group/cex).
 # 1. Escolher LP e tipo
 cat P01_knowledge/_schema.yaml   # ver tipos disponiveis
 
-# 2. Ler instrucoes
+# 2. Read instructions
 cat P01_knowledge/_generator.md  # passo-a-passo
 
 # 3. Usar template
@@ -241,7 +242,7 @@ cp P01_knowledge/templates/tpl_knowledge_card_domain.md meu_kc.md
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Bootstrap — create a new CEX project",
+        description="CEX Bootstrap -- create a new CEX project",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="Examples:\n"
         "  python bootstrap.py --name MeuProjeto\n"

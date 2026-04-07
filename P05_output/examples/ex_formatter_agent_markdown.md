@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
 format: markdown
-quality: 9.0
+quality: 9.1
 tags: [formatter, markdown, agent, output]
 tldr: "Canonical markdown formatter for agent responses — structured sections, tables, code blocks, quality score footer"
 max_bytes: 4096

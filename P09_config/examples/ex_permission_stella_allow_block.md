@@ -9,6 +9,11 @@ created: 2026-03-24
 author: builder_agent
 quality: 9.0
 tags: [permission, stella, allow, block, orchestration]
+updated: "2026-04-07"
+domain: "config"
+title: "Permission Stella Allow Block"
+density_score: 0.92
+tldr: "Defines permission for permission stella allow block, with validation gates and integration points."
 ---
 
 # Permission: orchestrator Allow/Block
@@ -23,7 +28,7 @@ tags: [permission, stella, allow, block, orchestration]
 | Maintenance | del, rm, mkdir, copy, move |
 | Signals | read .claude/signals/, write completion signals |
 
-## Block List (route to agent_nodes)
+## Block List (route to agent_groups)
 | Domain | Route To |
 |--------|----------|
 | Research, market analysis | research_agent |
@@ -38,3 +43,23 @@ Delete files, force push, production deploy, API key changes, payment operations
 
 ## Principle
 orchestrator orchestrates, NEVER executes. If a task produces artifacts, it must be dispatched.
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: p09_perm_stella_allow_block
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p09-perm-stella-allow-block.md
+```

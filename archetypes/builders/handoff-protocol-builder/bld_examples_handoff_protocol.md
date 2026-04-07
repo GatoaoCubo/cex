@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of handoff_protocol artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Handoff Protocol"
+version: "1.0.0"
+author: n03_builder
+tags: [handoff_protocol, builder, examples]
+tldr: "Golden and anti-examples for handoff protocol construction, demonstrating ideal structure and common pitfalls."
+domain: "handoff protocol construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: handoff-protocol-builder
@@ -25,7 +35,7 @@ tags: [handoff_protocol, P02, handoff]
 tldr: "orchestrator-to-research_agent Research Delegation — production-ready handoff_protocol configuration"
 ```
 ## Overview
-Handoff protocol for delegating research tasks from orchestrator (orchestrator) to research_agent (research agent_node).
+Handoff protocol for delegating research tasks from orchestrator (orchestrator) to research_agent (research agent_group).
 orchestrator detects research intent, composes context, and dispatches via handoff file.
 
 ## Trigger

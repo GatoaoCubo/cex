@@ -5,6 +5,16 @@ pillar: P02
 llm_function: COLLABORATE
 purpose: How lens-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Lens"
+version: "1.0.0"
+author: n03_builder
+tags: [lens, builder, examples]
+tldr: "Golden and anti-examples for lens construction, demonstrating ideal structure and common pitfalls."
+domain: "lens construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: lens-builder

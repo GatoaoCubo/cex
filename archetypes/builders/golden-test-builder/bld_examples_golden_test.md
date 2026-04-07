@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of golden_test artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Golden Test"
+version: "1.0.0"
+author: n03_builder
+tags: [golden_test, builder, examples]
+tldr: "Golden and anti-examples for golden test construction, demonstrating ideal structure and common pitfalls."
+domain: "golden test construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: golden-test-builder
 ## Golden Example
-INPUT: "Cria golden test de knowledge_card sobre prompt caching"
+INPUT: "Create golden test from knowledge_card about prompt caching"
 OUTPUT:
 ```yaml
 id: p07_gt_kc_prompt_caching
@@ -21,7 +31,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
 target_kind: "knowledge_card"
-input: "Destila conhecimento sobre prompt caching para otimizar custos LLM"
+input: "Destila knowledge about prompt caching for optimize costs LLM"
 golden_output_ref: "inline"
 quality_threshold: 9.5
 rationale: "H01-H10 pass, S01-S18 pass. All HARD gates clear. Density 0.93, actionable, sourced."
@@ -37,8 +47,8 @@ linked_artifacts:
   primary: "quality-gate-builder"
   related: [p11_qg_kc_publish]
 ## Input Scenario
-Destila conhecimento sobre prompt caching para otimizar custos LLM.
-Foco: como funciona, quando usar, economia esperada, limitacoes.
+Destila knowledge about prompt caching for optimize costs LLM.
+Foco: as funciona, quando usar, economia esperada, limitactions.
 ## Golden Output
 id: p01_kc_prompt_caching
 kind: knowledge_card
@@ -66,7 +76,7 @@ density_score: 0.93
 - Anthropic: 90% cost reduction on cached tokens, 85% latency reduction
 - OpenAI: 50% cost reduction on cached tokens
 - Break-even: 2+ requests with same prefix within TTL window
-## Limitacoes
+## Limitactions
 - Prefix must be identical byte-for-byte (no variation allowed)
 - Cache eviction after TTL — no persistence guarantee
 - Only prefix caching (beginning of prompt, not middle/end)

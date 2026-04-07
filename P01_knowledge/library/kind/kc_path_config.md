@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: path_config
-quality: 8.9
+quality: 9.1
 tags: [path_config, P09, GOVERN, kind-kc]
 tldr: "path_config is the versioned YAML map of named filesystem paths for a bounded scope — anchored to a base_dir, with explicit readonly declarations to prevent accidental overwrites."
 when_to_use: "Building, reviewing, or reasoning about path_config artifacts"
 keywords: [filesystem_paths, path_aliases, directory_config]
 feeds_kinds: [path_config]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Path Config
@@ -47,7 +50,7 @@ A path_config is an authoritative YAML map of named filesystem paths within a bo
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| scope | string | required | system/agent_node/service — tighter = clearer ownership |
+| scope | string | required | system/agent_group/service — tighter = clearer ownership |
 | base_dir | path | required | Root anchor — all other paths relative to this |
 | paths | map[key, path] | required | Named aliases — more = easier reference, more maintenance |
 | readonly | list[str] | [] | Explicit read-only paths — missing = accidental overwrites |
@@ -64,7 +67,7 @@ A path_config is an authoritative YAML map of named filesystem paths within a bo
 |-------------|-------------|-----|
 | Hardcoded absolute paths | `C:/Users/PC/` breaks on any other machine | Always use `base_dir` + relative paths |
 | No readonly declaration | All paths writable = accidental template overwrites | Explicitly mark all source/template paths readonly |
-| God path config | One config for all 7 agent_nodes + system | Scope per agent_node or service; system config for shared dirs |
+| God path config | One config for all 7 agent_groups + system | Scope per agent_group or service; system config for shared dirs |
 
 ## Integration Graph
 ```
@@ -76,8 +79,8 @@ env_config, permission --> [path_config] --> agent_card, law, runtime_rule
 ## Decision Tree
 - IF path points to a credential file THEN secret_config handles it
 - IF path availability determines feature THEN feature_flag + path_config
-- IF path used by exactly 1 agent_node THEN agent_node-scoped path config
-- DEFAULT: system path_config for shared directories, agent_node path_config for local
+- IF path used by exactly 1 agent_group THEN agent_group-scoped path config
+- DEFAULT: system path_config for shared directories, agent_group path_config for local
 
 ## Quality Criteria
 - GOOD: scope, base_dir, paths map, readonly list all present

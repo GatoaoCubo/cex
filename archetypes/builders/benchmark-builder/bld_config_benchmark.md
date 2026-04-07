@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Benchmark"
+version: "1.0.0"
+author: n03_builder
+tags: [benchmark, builder, examples]
+tldr: "Golden and anti-examples for benchmark construction, demonstrating ideal structure and common pitfalls."
+domain: "benchmark construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: benchmark Production Rules
 ## Naming
@@ -26,15 +36,41 @@ permission_scope: nucleus
 | Metric slugs | lowercase_underscores | ttft, tps, cost_per_1m_input |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: cex/P07_evals/examples/p07_bm_{metric_slug}.md
-- Compiled: cex/P07_evals/compiled/p07_bm_{metric_slug}.yaml
+1. Output: cex/P07_evals/examples/p07_bm_{metric_slug}.md
+2. Compiled: cex/P07_evals/compiled/p07_bm_{metric_slug}.yaml
 ## Size Limits (aligned with SCHEMA)
-- Body: max 4096 bytes
-- Density: >= 0.80
-- Metrics table: >= 1 row (no upper limit)
+1. Body: max 4096 bytes
+2. Density: >= 0.80
+3. Metrics table: >= 1 row (no upper limit)
 ## Measurement Policy
-- iterations >= 10 (prefer >= 30 for statistical significance)
-- warmup >= 1 (prefer >= 5 for JIT/caching warmup)
-- Percentiles MUST include p50 + p95 (p75 and p99 recommended)
-- No dimension below p50 (median is minimum granularity)
-- Baseline MUST be measured, not estimated or assumed
+1. iterations >= 10 (prefer >= 30 for statistical significance)
+2. warmup >= 1 (prefer >= 5 for JIT/caching warmup)
+3. Percentiles MUST include p50 + p95 (p75 and p99 recommended)
+4. No dimension below p50 (median is minimum granularity)
+5. Baseline MUST be measured, not estimated or assumed
+
+## Metadata
+
+```yaml
+id: bld_config_benchmark
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-benchmark.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | benchmark construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: routing
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [router, fallback, dispatch, resilience, intent, routing, priority, cascade, cost-aware]
 tldr: "Routing and resilience patterns ensure agent requests reach the right handler via intent classification, fallback cascades, and cost-aware dispatch rules"
 when_to_use: "Building or classifying components that route requests, handle failures, or manage dispatch priorities"
@@ -29,7 +29,7 @@ linked_artifacts:
 feeds_kinds:
   - router           # Intent classifiers, semantic routers, keyword matchers
   - fallback_chain   # Cascading failure handlers, retry strategies, degraded modes
-  - dispatch_rule    # Priority queues, cost-aware routing, satellite assignment rules
+  - dispatch_rule    # Priority queues, cost-aware routing, agent_group assignment rules
 density_score: 0.85
 ---
 
@@ -57,7 +57,7 @@ criticality: high
 | Circuit Breaker | Failure | fallback_chain | Stop calling failing service after N consecutive errors |
 | Priority Queue | Dispatch | dispatch_rule | Ordered task execution by urgency/importance |
 | Cost-Aware Router | Dispatch | dispatch_rule | Route to cheapest model that meets quality threshold |
-| Satellite Assignment | Dispatch | dispatch_rule | Map task domain to satellite (research_agent=research, builder_agent=build) |
+| Agent_group Assignment | Dispatch | dispatch_rule | Map task domain to agent_group (research_agent=research, builder_agent=build) |
 | Rate Limiter | Dispatch | dispatch_rule | Token/request budget enforcement per time window |
 | Load Balancer | Dispatch | dispatch_rule | Distribute requests across equivalent handlers |
 | Dependency Resolver | Dispatch | dispatch_rule | Topological sort of tasks before dispatch |
@@ -71,7 +71,7 @@ criticality: high
 | Handle transient failure | Retry with exponential backoff (base=1s, max=30s, jitter=random) |
 | Cascade across models | Try primary model -> on failure/timeout, try secondary -> then tertiary |
 | Enforce budget | Track cumulative cost -> if approaching limit, downgrade model tier |
-| Dispatch to satellite | Match keywords against routing table -> assign to satellite -> write handoff |
+| Dispatch to agent_group | Match keywords against routing table -> assign to agent_group -> write handoff |
 | Break circuit | After 5 consecutive failures, open circuit for 60s -> half-open probe -> close if success |
 
 ## Anti-Patterns

@@ -8,7 +8,7 @@ created: 2026-03-24
 updated: 2026-03-24
 author: builder_agent
 domain: knowledge
-quality: 9.0
+quality: 9.1
 tags: [codebase, mapping, stack-detection, mental-model]
 tldr: "Stack detection via config files, imports, entry points"
 density_score: 0.92

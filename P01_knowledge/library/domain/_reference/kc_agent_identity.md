@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: identity
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [agent, identity, lens, mental-model, model-card, boot, iso, axiom, persona, config]
 tldr: "Agent identity defines WHO an agent is — its cognitive lens, mental model, model selection, boot sequence, ISO packaging, and invariant axioms"
 when_to_use: "Building or classifying components that define agent persona, configuration, packaging, or foundational rules"
@@ -42,7 +42,7 @@ density_score: 0.88
 ```yaml
 topic: Agent Identity & Configuration Patterns
 scope: Lenses, mental models, model cards, boot configs, ISO packages, axioms
-source: organization framework (records/agents/, records/satellites/)
+source: organization framework (records/agents/, records/agent_groups/)
 criticality: high
 ```
 
@@ -99,5 +99,5 @@ criticality: high
 
 ## References
 
-- source: organization records/agents/ structure, records/satellites/ PRIMEs
+- source: organization records/agents/ structure, records/agent_groups/ PRIMEs
 - related: p01_kc_routing_resilience, p01_kc_prompt_engineering

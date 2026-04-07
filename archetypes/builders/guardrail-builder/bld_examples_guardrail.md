@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of guardrail artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.2
+title: "Examples Guardrail"
+version: "1.0.0"
+author: n03_builder
+tags: [guardrail, builder, examples]
+tldr: "Golden and anti-examples for guardrail construction, demonstrating ideal structure and common pitfalls."
+domain: "guardrail construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: guardrail-builder
 ## Golden Example
-INPUT: "Cria guardrail para prevenir que agentes executem comandos destrutivos no filesystem"
+INPUT: "Create guardrail para prevenir que agents executem comandos destrutivos no filesystem"
 OUTPUT:
 ```yaml
 id: p11_gr_destructive_commands
@@ -25,7 +35,7 @@ severity: "critical"
 enforcement: "block"
 applies_to: [agent, skill, hook, daemon]
 domain: "safety"
-quality: null
+quality: 9.0
 tags: [guardrail, filesystem, destructive, safety, critical]
 tldr: "Blocks rm -rf, format, DROP TABLE, and other destructive commands in agent execution"
 density_score: 0.91
@@ -103,3 +113,24 @@ FAILURES:
 3. quality: self-scored 8.0 instead of null -> H06 FAIL
 4. severity: "important" not valid enum (must be critical/high/medium/low) -> H07 FAIL
 5. enforcement: "stop" not valid enum (must be block/warn/log) -> H09 FAIL
+
+## Golden Example 2 (Production — OpenClaude Action Reversibility)
+INPUT: "Create guardrail that blocks irreversible actions without authorization"
+OUTPUT: Reference artifact `P11_feedback/compiled/p11_gr_action_reversibility.yaml`
+
+Key patterns:
+1. **5-point blast radius checklist**: reversible? local? visible? destructive? authorized?
+   Binary checklist — any "no" triggers block. No subjective judgment needed.
+2. **Scope-limited authorization**: "Approving once does NOT authorize in all contexts."
+   Prevents authorization creep.
+3. **Root cause over shortcut**: "Do not use destructive actions as shortcuts. Fix root causes."
+   Prevents agents from rm -rf'ing their way out of build errors.
+4. **Enforcement: block** (not warn): Irreversible actions are blocked entirely, not just flagged.
+5. **GDP integration**: Routes blocked actions to USER-scope decision in decision_manifest.yaml.
+
+WHY THIS IS GOLDEN:
+- Checklist is binary (yes/no), not subjective
+- Severity is justified (HIGH because irreversible)
+- Enforcement is the strongest available (block)
+- Violations are concrete (rm -rf, force-push, DROP TABLE)
+- Bypass policy requires explicit authorization + audit trail

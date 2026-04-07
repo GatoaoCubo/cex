@@ -5,7 +5,14 @@ pillar: P03
 title: Few-Shot Product Data Extraction from Marketplace Listings
 task: extract_product_data
 examples_count: 3
-quality: 9.0
+quality: 9.2
+updated: "2026-04-07"
+domain: "prompt engineering"
+version: "1.0.0"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.92
+tldr: "Defines few shot for few-shot product data extraction from marketplace listings, with validation gates and integration points."
 ---
 
 # Few-Shot: Product Data Extraction
@@ -22,10 +29,10 @@ Kit 3 Lampada LED Bulbo 9W Bivolt E27 Branco Frio 6500K - Economia de 80% energi
 Marca: GALAXY LED | Modelo: GL-9W-BF
 De R$ 45,90 por R$ 29,99
 Frete gratis para SP capital
-- Equivale a lampada incandescente de 60W
-- Durabilidade de 25.000 horas
-- Certificacao INMETRO
-- Base padrao E27, encaixa em qualquer lustre
+1. Equivale a lampada incandescente de 60W
+2. Durabilidade de 25.000 horas
+3. Certificacao INMETRO
+4. Base padrao E27, encaixa em qualquer lustre
 ```
 
 **Output:**
@@ -92,11 +99,11 @@ Material cabo: Aco revestido PVC 2,5mm
 Material manopla: Aluminio anodizado
 
 Sobre este item:
-* Rolamento de esferas duplo para giro livre sem embaracar
-* Cabo de aco com revestimento PVC — duravel e leve (apenas 180g)
-* Manoplas ergonomicas em aluminio — antiderrapante
-* Ajustavel de 1,5m a 3,0m — corte no tamanho ideal
-* Ideal para: CrossFit, Double Unders, HIIT, boxe
+1. Rolamento de esferas duplo para giro livre sem embaracar
+2. Cabo de aco com revestimento PVC — duravel e leve (apenas 180g)
+3. Manoplas ergonomicas em aluminio — antiderrapante
+4. Ajustavel de 1,5m a 3,0m — corte no tamanho ideal
+5. Ideal para: CrossFit, Double Unders, HIIT, boxe
 Inclui: 1 corda + 1 bag de transporte + manual de ajuste
 ```
 
@@ -121,7 +128,21 @@ Inclui: 1 corda + 1 bag de transporte + manual de ajuste
 ```
 
 ## Selection Criteria
-- **Diversity**: 3 marketplaces brasileiros distintos (Mercado Livre, Shopee, Amazon BR) com formatacoes diferentes
-- **Complexity gradient**: Example 1 tem preco promocional (de/por), Example 2 tem emojis e parcelamento, Example 3 tem especificacoes tecnicas densas
-- **Edge cases cobertos**: preco_original null quando nao ha promocao, marca null quando nao informada, bullets com caracteres especiais (✅, *, -)
-- **Research base**: 2-3 few-shot examples ideal para task adherence (+0.91), conforme arxiv 2504.02052
+1. **Diversity**: 3 marketplaces brasileiros distintos (Mercado Livre, Shopee, Amazon BR) com formatacoes diferentes
+2. **Complexity gradient**: Example 1 tem preco promocional (de/por), Example 2 tem emojis e parcelamento, Example 3 tem especificacoes tecnicas densas
+3. **Edge cases cobertos**: preco_original null quando nao ha promocao, marca null quando nao informada, bullets com caracteres especiais (✅, *, -)
+4. **Research base**: 2-3 few-shot examples ideal para task adherence (+0.91), conforme arxiv 2504.02052
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `few_shot` |
+| Pillar | P03 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

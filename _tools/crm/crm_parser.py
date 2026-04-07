@@ -1,5 +1,5 @@
 """
-CRM Markdown Parser — shared foundation for all CRM tools.
+CRM Markdown Parser -- shared foundation for all CRM tools.
 Parses the pipe-delimited CRM table from N01_research output into structured records.
 """
 
@@ -16,11 +16,11 @@ DEFAULT_CRM = Path(__file__).parent.parent.parent / "N01_research" / "output" / 
 # Column mapping: header name -> CRMBusiness field
 COLUMN_MAP = {
     "cnpj": "cnpj",
-    "razão social": "razao_social",
+    "razao social": "razao_social",
     "nome fantasia": "nome_fantasia",
     "segmento": "segmento",
     "sub-segmento": "sub_segmento",
-    "endereço": "endereco",
+    "endereco": "endereco",
     "cidade": "cidade",
     "ring": "ring",
     "telefone": "telefone",

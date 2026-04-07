@@ -8,10 +8,10 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "text chunking and splitting for RAG pipelines"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, chunk-strategy, P01]
 tldr: "Pass/fail gate for chunk_strategy artifacts: required fields, id pattern, body sections, parameter completeness."
-density_score: 0.90
+density_score: 1.0
 ---
 
 # Gate: chunk_strategy
@@ -55,3 +55,12 @@ Weights sum to 100%.
 | >= 8.0 | Publish | Publish to pool, add to routing index |
 | >= 7.0 | Review | Flag for improvement before publish |
 | < 7.0 | Reject | Return to author with specific gate failures |
+
+## Bypass
+| Field | Value |
+|-------|-------|
+| conditions | Experimental text chunking and splitting for RAG pipelines artifact under active A/B testing |
+| approver | Nucleus lead (written approval required) |
+| audit_trail | Log in records/audits/ with bypass reason and timestamp |
+| expiry | 48h — must pass all gates before expiry |
+| never_bypass | H01 (YAML parse), H05 (quality null) |

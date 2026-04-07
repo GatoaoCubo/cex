@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: knowledge_retrieval
-quality: 9.0
+quality: 9.1
 tags: [retriever-config, hybrid-search, bm25, faiss, cohere, reranker, rag]
 tldr: Retriever hibrido que combina BM25 keyword search (0.3) com FAISS dense search (0.7) e reranker Cohere v3 para top_k=5 final — usado no organization Brain MCP
 when_to_use: Qualquer busca no Brain MCP que precise alta recall em corpus tecnico misto (knowledge cards, agents, skills)

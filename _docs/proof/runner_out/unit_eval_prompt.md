@@ -261,7 +261,7 @@ teardown: "Discard generated artifact"
 edge_case: false
 coverage_scope: "HARD gates H01-H05 + SOFT gate S02"
 domain: "knowledge"
-quality: null
+quality: 8.0
 tags: [unit-eval, knowledge-card, yaml-parse, HARD-gates]
 tldr: "Tests KC builder YAML parse and frontmatter HARD gates H01-H05 + S02"
 density_score: 0.91

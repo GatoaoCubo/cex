@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of learning_record artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Learning Record"
+version: "1.0.0"
+author: n03_builder
+tags: [learning_record, builder, examples]
+tldr: "Golden and anti-examples for learning record construction, demonstrating ideal structure and common pitfalls."
+domain: "learning record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: learning-record-builder
 ## Golden Example
-INPUT: "Document the learning from continuous batching achieving 1.6x speedup with 3 agent_nodes"
+INPUT: "Document the learning from continuous batching achieving 1.6x speedup with 3 agent_groups"
 OUTPUT:
 ```yaml
 id: p10_lr_continuous_batching_speedup
@@ -20,16 +30,16 @@ created: "2026-03-05"
 updated: "2026-03-05"
 author: "builder"
 domain: "orchestration"
-quality: null
-tags: [learning, continuous-batching, speedup, orchestration, multi-agent_node]
+quality: 8.8
+tags: [learning, continuous-batching, speedup, orchestration, multi-agent_group]
 tldr: "Continuous batching with 3 sats achieved 1.6x speedup; task complexity drives speed, not model tier"
-topic: "Continuous batching multi-agent_node performance"
+topic: "Continuous batching multi-agent_group performance"
 outcome: SUCCESS
 score: 9.0
 context: "ISOFIX mission, 7 batches across researcher+builder+knowledge-engine, 2026-03-05"
-agent_node: "orchestrator"
+agent_group: "orchestrator"
 reproducibility: HIGH
-impact: "1.6x throughput increase, zero git lock contention at 3 agent_nodes"
+impact: "1.6x throughput increase, zero git lock contention at 3 agent_groups"
 timestamp: "2026-03-05T14:30:00Z"
 dependencies: []
 keywords: [batching, parallel, throughput, spawn, grid]
@@ -38,27 +48,27 @@ linked_artifacts:
   related: [p12_spawn_grid, p08_pat_continuous_batching]
 ```
 ## Summary
-Continuous batching with 3 agent_nodes (researcher+builder+knowledge-engine) achieved 1.6x speedup over sequential execution. Speed was driven by task complexity, not model tier — opus finished faster than sonnet on simpler tasks. Zero git lock contention observed.
+Continuous batching with 3 agent_groups (researcher+builder+knowledge-engine) achieved 1.6x speedup over sequential execution. Speed was driven by task complexity, not model tier — opus finished faster than sonnet on simpler tasks. Zero git lock contention observed.
 ## Pattern
 - Use spawn_grid.ps1 with -mode continuous for >6 tasks
 - Name handoffs as {MISSION}_batch_{N}_{DOMAIN}.md for queue management
-- Limit to 3 concurrent agent_nodes (RAM ceiling at 4+)
-- Let queue auto-refill slots as agent_nodes complete
+- Limit to 3 concurrent agent_groups (RAM ceiling at 4+)
+- Let queue auto-refill slots as agent_groups complete
 ## Anti-Pattern
-- Running >3 agent_nodes causes BSOD risk (RAM exhaustion)
+- Running >3 agent_groups causes BSOD risk (RAM exhaustion)
 - Assuming opus is slower than sonnet — speed depends on task, not model
 - Manual slot management instead of auto-refill wastes idle time
 ## Context
 - Environment: Windows 10 Pro, 32GB RAM, 3 Claude Code terminals
-- Satellite: orchestrator orchestrating researcher+builder+knowledge-engine
+- Agent_group: orchestrator orchestrating researcher+builder+knowledge-engine
 - Timing: 2026-03-05, ISOFIX mission, 7 sequential batches
 - Constraints: max 3 terminals (BSOD prevention), 5s spawn delay
 ## Impact
-- 1.6x throughput vs sequential single-agent_node execution
+- 1.6x throughput vs sequential single-agent_group execution
 - Zero git lock contention across 3 concurrent committers
 - Queue auto-refill eliminated idle time between waves
 ## Reproducibility
-- Conditions: 3 agent_nodes, >6 tasks, independent work units
+- Conditions: 3 agent_groups, >6 tasks, independent work units
 - Confidence: HIGH (tested on ISOFIX 7/7 and CBTEST mixed)
 - Caveats: tasks must be independent; shared file edits cause conflicts
 ## References

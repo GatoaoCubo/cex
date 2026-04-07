@@ -30,7 +30,7 @@ keywords:
 - montar
 - produzir
 - implementar
-agent_node: builder
+agent_group: builder
 model: opus
 priority: 8
 confidence_threshold: 0.75

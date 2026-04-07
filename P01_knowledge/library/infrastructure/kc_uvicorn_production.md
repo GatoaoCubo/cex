@@ -1,5 +1,15 @@
 ---
 ```yaml
+updated: "2026-04-07"
+domain: "knowledge management"
+title: "Uvicorn Production"
+version: "1.0.0"
+author: n04_knowledge
+created: "2026-04-07"
+density_score: 0.94
+tldr: "Defines the artifact specification for uvicorn production, with structural rules, validation gates, and integration points."
+quality: 9.0
+tags: [artifact, builder, examples]
 ---
 id: p01_kc_uvicorn_production
 kind: knowledge_card
@@ -12,7 +22,7 @@ updated: 2026-04-01
 author: builder_agent
 domain: infrastructure
 origin: manual
-quality: 8.7
+quality: 9.0
 tags: [uvicorn, production, workers, asgi, fastapi, deployment, proxy, environment]
 tldr: "Production uvicorn configuration with optimal worker counts, host binding, environment integration, proxy header handling, and graceful shutdown patterns"
 when_to_use: "Deploying FastAPI/ASGI apps to production with proper scaling, load balancing, and reliability patterns"

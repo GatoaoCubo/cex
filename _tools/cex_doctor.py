@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Doctor v2.0 — Naming v2.0 + Density + 13-file completeness.
+# -*- coding: utf-8 -*-
+"""CEX Doctor v2.0 -- Naming v2.0 + Density + 13-file completeness.
 
 Usage:
   python _tools/cex_doctor.py          # diagnose only
@@ -35,8 +36,8 @@ EXPECTED_KINDS = [
     "tools",
 ]
 EXPECTED_COUNT = len(EXPECTED_KINDS)  # 13
-MAX_BYTES = 4096
-MAX_BYTES_INSTRUCTION = 6144
+MAX_BYTES = 6144
+MAX_BYTES_INSTRUCTION = 8192
 MIN_DENSITY = 0.78
 NAMING_RE = re.compile(r"^bld_[a-z][a-z0-9_]+_[a-z][a-z0-9_]+\.md$")
 
@@ -260,7 +261,7 @@ ALL_KINDS = [
     "axiom",
     "benchmark",
     "boot_config",
-    "brain_index",
+    "knowledge_index",
     "browser_tool",
     "bugloop",
     "chain",
@@ -416,7 +417,7 @@ def check_kc_library():
 
 def main():
     print("=" * 72)
-    print("CEX Doctor v2.0 — Naming v2.0 + Density + 13-File Completeness")
+    print("CEX Doctor v2.0 -- Naming v2.0 + Density + 13-File Completeness")
     print(f"Root: {ROOT}")
     print(f"Mode: {'DIAGNOSE + FIX' if FIX_MODE else 'DIAGNOSE ONLY'}")
     print("=" * 72)

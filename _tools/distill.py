@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -5,7 +6,7 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 """
-CEX Distill — Transforms raw input into template-compliant artifacts.
+CEX Distill -- Transforms raw input into template-compliant artifacts.
 
 The template IS the prompt. Not optional. Not a reference.
 
@@ -21,14 +22,14 @@ from pathlib import Path
 
 import yaml
 
-# Map artifact type → template file
+# Map artifact type -> template file
 TYPE_TO_TEMPLATE = {
     "knowledge_card": "P01_knowledge/templates/tpl_knowledge_card_domain.md",
     "knowledge_card_meta": "P01_knowledge/templates/tpl_knowledge_card_meta.md",
     "knowledge_card_test": "P01_knowledge/templates/tpl_knowledge_card_test.md",
 }
 
-CEX_ROOT = Path(__file__).parent.parent  # _tools/ → CEX/
+CEX_ROOT = Path(__file__).parent.parent  # _tools/ -> CEX/
 LIBRARY_DIR = CEX_ROOT / "P01_knowledge" / "library"
 INDEX_PATH = LIBRARY_DIR / "index.yaml"
 
@@ -47,19 +48,19 @@ def build_distill_prompt(template: str, raw_content: str, source_name: str) -> s
     """Build the prompt that forces template compliance."""
     return f"""## TAREFA: Distill Knowledge
 
-Voce recebeu um insumo RAW e um TEMPLATE obrigatorio.
+You received a RAW input and a REQUIRED TEMPLATE.
 Seu trabalho: PREENCHER o template com conhecimento EXTRAIDO + EXPANDIDO do insumo.
 
 ### REGRAS:
-1. TODOS os campos {{{{PLACEHOLDER}}}} devem ser preenchidos — nenhum pode ficar vazio
-2. NAO copie verbatim do insumo — TRANSFORME em conhecimento acionavel
-3. EXPANDA alem do insumo — use seu conhecimento para enriquecer
-4. O insumo eh SEMENTE, nao limite — se o insumo eh basico, o output deve ser avancado
+1. TODOS os campos {{{{PLACEHOLDER}}}} devem ser preenchidos -- nenhum pode ficar vazio
+2. NAO copie verbatim do insumo -- TRANSFORME em conhecimento acionavel
+3. EXPANDA alem do insumo -- use seu conhecimento para enriquecer
+4. O insumo eh SEMENTE, nao limite -- se o insumo eh basico, o output deve ser avancado
 5. Preencha 'when_to_use' pensando: "uma LLM com ZERO contexto, quando carregaria isso?"
 6. Preencha 'axioms' com regras IMPERATIVAS que mudam comportamento
 7. Preencha 'Anti-Patterns' com erros que uma LLM cometeria sem esse knowledge
 8. Preencha 'Application' com uso CONCRETO no contexto de AI agent systems
-9. density_score >= 0.85 — cada frase deve carregar informacao, zero filler
+9. density_score >= 0.85 -- cada frase deve carregar informacao, zero filler
 
 ### TEMPLATE (preencha TODOS os campos):
 
@@ -169,7 +170,7 @@ def update_domain_index(kc_name: str, kc_type: str, origin: str, feeds_kinds: li
 
 
 def main():
-    p = argparse.ArgumentParser(description="CEX Distill — Template-driven knowledge extraction")
+    p = argparse.ArgumentParser(description="CEX Distill -- Template-driven knowledge extraction")
     p.add_argument("--input", type=str, help="Path to raw input file")
     p.add_argument("--type", type=str, default="knowledge_card", help="Artifact type")
     p.add_argument("--output", type=str, help="Output path (default: stdout)")
@@ -190,7 +191,7 @@ def main():
         print("Available artifact types:")
         for t, path in TYPE_TO_TEMPLATE.items():
             exists = "OK" if (CEX_ROOT / path).exists() else "MISSING"
-            print(f"  {t:25s} → {path} [{exists}]")
+            print(f"  {t:25s} -> {path} [{exists}]")
         return
 
     if a.validate:
@@ -200,7 +201,7 @@ def main():
         if issues:
             print(f"[FAIL] {len(issues)} issues:")
             for i in issues:
-                print(f"  ❌ {i}")
+                print(f"  [FAIL] {i}")
             sys.exit(1)
         else:
             print("[PASS] All template fields present")

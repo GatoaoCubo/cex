@@ -1,0 +1,98 @@
+id: p03_ins_validation_schema
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Validation Schema Builder Instructions
+target: validation-schema-builder agent
+phases_count: 4
+prerequisites:
+- Target artifact kind is identified (e.g. system_prompt, workflow, validator)
+- At least one field requiring post-generation validation is known
+- 'On-failure strategy is determined: reject, warn, or auto_fix'
+- The schema is system-applied (not injected into the LLM prompt)
+validation_method: checklist
+domain: validation_schema
+quality: null
+tags:
+- instruction
+- validation-schema
+- post-generation
+- contract
+- P06
+idempotent: true
+atomic: true
+rollback: Delete generated validation_schema YAML file
+dependencies: []
+logging: true
+tldr: Build a validation_schema YAML that the system applies after generation to enforce field types, constraints, and on-failure
+  behavior -- the LLM never sees it.
+density_score: 0.92
+context: 'The validation-schema-builder produces a `validation_schema` artifact -- a structured YAML that defines the formal
+  contract the system enforces on generated output after an LLM call completes. This contract runs automatically; the LLM
+  does not see it.
+
+  Critical distinction: a `validation_schema` is a system-side post-generation contract. It is NOT a prompt instruction for
+  the LLM (`response_format` -- injected into the prompt), NOT an individual pass/fail rule (`validator` -- single rule, not
+  a schema), and NOT an input contract (`input_schema` -- governs inputs before generation). Confusing these produces contracts
+  applied at the wrong layer.
+
+  Input contract:
+
+  - `target_kind`: string -- the artifact kind this schema validates (e.g. `system_prompt`, `workflow`)
+
+  - `fields`: list of field definition objects (see Phase 2)
+
+  - `on_failure`: enum -- `reject` | `warn` | `auto_fix`
+
+  - `format`: enum -- `yaml` | `json` | `markdown`
+
+  - `applied_at`: string -- pipeline stage where validation runs (e.g. `post_generation`, `pre_commit`)
+
+  - `strict_mode`: boolean -- whether unknown fields cause failure
+
+  Output contract: a single `validation_schema` YAML with all required fields, stored at `records/validation_schemas/{target_kind}_schema.yaml`.
+
+  Variables:
+
+  - `{{target_kind}}` -- artifact kind being validated
+
+  - `{{field_N_name}}` -- Nth field name
+
+  - `{{field_N_type}}` -- Nth field type
+
+  - `{{on_failure}}` -- failure behavior enum value
+
+  - `{{applied_at}}` -- pipeline stage'
+phases: ''
+phase_1_identify_target_contract_scope: "Action: Determine which fields of the target artifact require system-side enforcement.\n\
+  FOR the given target_kind:\n    1. List all fields that appear in the target artifact's SCHEMA.md\n    2. Classify each\
+  \ field:\n       - REQUIRED: must be present and non-null\n       - TYPED: must match a specific type\n       - CONSTRAINED:\
+  \ must satisfy a value constraint (regex, enum, range)\n       - OPTIONAL: validated if present, ignored if absent\n   \
+  \ 3. Determine on_failure behavior:\n       reject   -> generation is discarded, error returned to caller\n       warn \
+  \    -> generation proceeds with warning logged\n       auto_fix -> system attempts correction (only for formatting/casing\
+  \ issues)\n    4. Determine strict_mode:\n       true  -> unknown fields fail validation\n       false -> unknown fields\
+  \ are ignored (default for extensible schemas)\nVerifiable exit: all fields classified; on_failure is set; strict_mode is\
+  \ set."
+phase_2_define_field_validation_rules: "Action: Convert each field classification into a structured field definition object.\n\
+  Field definition object schema:\n{\n  name: string -- field name as it appears in the artifact\n  type: enum [string, integer,\
+  \ number, boolean, object, array, null, any]\n  required: boolean\n  constraints: {\n    pattern: regex string (for string\
+  \ fields)\n    enum: list of allowed values\n    min: numeric minimum\n    max: numeric maximum\n    min_length: integer\
+  \ (for strings/arrays)\n    max_length: integer (for strings/arrays)\n  }\n  on_failure_override: enum or null -- overrides\
+  \ top-level on_failure for this field\n  error_message: string -- human-readable message when this field fails\n}\nRules:\n\
+  - `required: true` fields must appear in the output; absence is a hard failure\n- Type `any` disables type checking for\
+  \ that field (use sparingly)\n- `on_failure_override` allows critical fields to `reject` even if top-level is `warn`\nASSERT\
+  \ len(fields) >= 1\nFOR each field:\n    ASSERT field.name is non-empty\n    ASSERT field.type is a valid enum value\n \
+  \   ASSERT field.error_message is non-empty\nVerifiable exit: fields list is non-empty; each field has name, type, required,\
+  \ and error_message."
+phase_3_specify_integration_point: "Action: Define where in the pipeline this schema is applied and how failures surface.\n\
+  applied_at options:\n  post_generation  -> runs immediately after LLM returns output\n  pre_commit       -> runs before\
+  \ artifact is written to storage\n  on_read          -> runs when artifact is loaded by a consumer\nfailure_surface = {\n\
+  \  reject:   return error to caller with field_name + error_message\n  warn:     log warning with field_name + error_message,\
+  \ continue\n  auto_fix: attempt fix, log fix applied, continue; fail if fix fails\n}\nauto_fix is only valid for:\n  - string\
+  \ casing normalization (e.g. uppercase -> lowercase)\n  - whitespace trimming\n  - enum value coercion (e.g. \"True\" ->\
+  \ true)\n  NOT valid for: missing required fields, invalid logic, structural errors\nVerifiable exit: applied_at is set;\
+  \ auto_fix scope is bounded to safe transformations only."
+phase_4_validate_against_quality_gates: 'Action: Run 9 HARD gates before emitting; log 9 SOFT gates as warnings.'

@@ -15,15 +15,25 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Router"
+version: "1.0.0"
+author: n03_builder
+tags: [router, builder, examples]
+tldr: "Golden and anti-examples for router construction, demonstrating ideal structure and common pitfalls."
+domain: "router construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: router Production Rules
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Artifact files | `p02_router_{slug}.md` | `p02_router_agent_node_task.md` |
+| Artifact files | `p02_router_{slug}.md` | `p02_router_agent_group_task.md` |
 | Builder directory | kebab-case | `router-builder/` |
 | Frontmatter fields | snake_case | `routes_count`, `fallback_route` |
-| Router slug | snake_case, lowercase | `agent_node_task`, `api_gateway` |
+| Router slug | snake_case, lowercase | `agent_group_task`, `api_gateway` |
 Rule: id MUST equal filename stem.
 ## File Paths
 - Output: `cex/P02_model/examples/p02_router_{slug}.md`

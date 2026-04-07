@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: operations
-quality: 8.7
+quality: 9.0
 tags: [quality-gate, validation, checkpoint, cicd, governance]
 tldr: "Automated checkpoints that block progression if quality criteria aren't met. Compile gate, doctor gate, test gate, review gate."
 when_to_use: "Implementing quality enforcement in artifact production or deployment pipelines"
 keywords: [quality-gate, checkpoint, governance, pass-fail, blocking]
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # Quality Gates
@@ -40,3 +41,11 @@ PRODUCE → GATE 1 (schema) → GATE 2 (tests) → GATE 3 (review) → SHIP
 ## Anti-Pattern: Self-Scoring
 Never let the producing LLM score its own output. Always peer-review.
 CEX rule: `quality: null` on creation → peer scores later.
+
+## Key Principles
+
+- Domain-specific knowledge must be verifiable and traceable
+- Artifacts reference this card via `tags` matching
+- Updates trigger re-scoring of dependent artifacts
+- Card freshness tracked via `created`/`updated` timestamps
+- Cross-references validated by `cex_compile.py`

@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: boot_config
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, boot-config, P11, P02, governance, initialization, provider]
 tldr: "Gates for boot_config artifacts — provider-specific agent initialization parameters and constraints."
 density_score: 0.88
@@ -32,7 +32,7 @@ All must pass. Failure on any = final score 0.
 | H04 | kind == "boot_config" | Type integrity |
 | H05 | quality == null | Never self-score |
 | H06 | All 15 required fields present: id, kind, pillar, version, created, updated, author, provider, identity, constraints, tools, domain, quality, tags, tldr | Completeness |
-| H07 | identity object has name, role, agent_node | Identity block completeness |
+| H07 | identity object has name, role, agent_group | Identity block completeness |
 | H08 | constraints object has max_tokens, context_window, timeout_seconds | Runtime constraints completeness |
 | H09 | tools is non-empty list | Agent requires at least one tool to function |
 ## SOFT Scoring

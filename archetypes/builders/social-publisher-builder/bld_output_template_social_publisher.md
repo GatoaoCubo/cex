@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for social publisher config production
 pattern: derives from SCHEMA — no extra fields
+quality: 9.0
+title: "Output Template Social Publisher"
+version: "1.0.0"
+author: n03_builder
+tags: [social_publisher, builder, examples]
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+domain: "social publisher construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: social_publisher

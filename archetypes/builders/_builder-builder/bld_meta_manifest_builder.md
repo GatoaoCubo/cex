@@ -4,19 +4,29 @@ file_position: 1/13
 pillar: P02
 llm_function: BECOME
 purpose: Meta-template for generating MANIFEST.md of any kind-builder
+quality: 9.1
+title: "Meta Manifest Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # {{builder_name}}
-<!-- Este meta-file gera o MANIFEST.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: _schema.yaml do tipo-alvo, TAXONOMY_LAYERS.yaml, SEED_BANK.yaml -->
+<!-- This meta-file generates the MANIFEST.md of any builder -->
+<!-- REQUIRED INPUT: _schema.yaml do type-target, TAXONOMY_LAYERS.yaml, SEED_BANK.yaml -->
 
-<!-- NOTA: {{builder_name}} = kebab-case do tipo. Ex: model-card-builder, signal-builder -->
-<!-- NOTA: {{type_name}} = snake_case do tipo. Ex: model_card, signal, quality_gate -->
-<!-- NOTA: {{lp}} = Pillar do tipo-alvo (P01-P12). Buscar em TAXONOMY_LAYERS.yaml -->
-<!-- NOTA: {{lp_chief}} = {lp}-chief. Ex: p02-chief, p01-chief -->
-<!-- NOTA: {{domain}} = geralmente igual a {{type_name}}, mas pode variar -->
-<!-- NOTA: {{type_name_kebab}} = kebab-case do tipo. Ex: model-card, knowledge-card -->
-<!-- NOTA: {{tags}} = [kind-builder, {{type_name_kebab}}, {{lp}}, specialist, ...extras] -->
+<!-- NOTE: {{builder_name}} = kebab-case of the type. Ex: model-card-builder, signal-builder -->
+<!-- NOTE: {{type_name}} = snake_case of the type. Ex: model_card, signal, quality_gate -->
+<!-- NOTE: {{lp}} = Pillar of the target type (P01-P12). Look up in TAXONOMY_LAYERS.yaml -->
+<!-- NOTE: {{lp_chief}} = {lp}-chief. Ex: p02-chief, p01-chief -->
+<!-- NOTE: {{domain}} = usually same as {{type_name}}, but may vary -->
+<!-- NOTE: {{type_name_kebab}} = kebab-case of the type. Ex: model-card, knowledge-card -->
+<!-- NOTE: {{tags}} = [kind-builder, {{type_name_kebab}}, {{lp}}, specialist, ...extras] -->
 
 ```yaml
 ---
@@ -33,43 +43,57 @@ author: {{author}}
 tags: [kind-builder, {{type_name_kebab}}, {{lp}}, specialist]
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 triggers: ["{{trigger_phrase_1}}", "{{trigger_phrase_2}}"]
-geo_description: >
+capability_summary: >
   L1: {{what_it_does}}. L2: {{how_it_does_it}}. L3: {{when_to_use_it}}.
 ---
 ```
 
-<!-- NOTA: keywords = 4-8 termos de routing/search. Extrair do ## Routing body existente -->
-<!-- NOTA: triggers = 2-4 frases naturais que ativam este builder -->
-<!-- NOTA: geo_description = 3 camadas semanticas (L1=o que, L2=como, L3=quando). Min 50 chars -->
+<!-- NOTE: keywords = 4-8 routing/search terms. Extract from ## Routing body existente -->
+<!-- NOTE: triggers = 2-4 frases naturais that ativam this builder -->
+<!-- NOTE: capability_summary = 3 semantic layers (L1=o que, L2=como, L3=quando). Min 50 chars -->
 
 ## Identity
-Especialista em construir `{{type_name}}` — {{one_line_description}}.
-<!-- NOTA: {{one_line_description}} = extrair de TAXONOMY_LAYERS.yaml kinds[].description ou _schema.yaml purpose -->
-<!-- Acrescente 1-2 frases sobre dominio, ferramentas, e o que produz -->
+Specialist in building `{{type_name}}` — {{one_line_description}}.
+<!-- NOTE: {{one_line_description}} = extract from TAXONOMY_LAYERS.yaml kinds[].description or _schema.yaml purpose -->
+<!-- Add 1-2 frases about domain, tools, and o that produz -->
 
 ## Capabilities
-<!-- NOTA: 4-6 bullets descrevendo o que o builder PODE fazer -->
-<!-- Padrao observado nos 4 builders existentes: -->
-- Pesquisar/analisar {{domain_knowledge}} para produzir {{type_name}}
-- Produzir {{type_name}} com frontmatter completo ({{field_count}} campos)
-- Validar artifact contra quality gates ({{hard_count}} HARD + {{soft_count}} SOFT)
-- {{capability_extra_1}}
-<!-- NOTA: {{field_count}} = contar campos em _schema.yaml -->
-<!-- NOTA: {{hard_count}}/{{soft_count}} = definir em QUALITY_GATES.md -->
+<!-- NOTE: 4-6 bullets descrevendo o that the builder PODE fazer -->
+<!-- Pattern observed in the 4 existing builders: -->
+1. Research/analisar {{domain_knowledge}} for produzir {{type_name}}
+2. Produce {{type_name}} with frontmatter complete ({{field_count}} fields)
+3. Validate artifact against quality gates ({{hard_count}} HARD + {{soft_count}} SOFT)
+4. {{capability_extra_1}}
+<!-- NOTE: {{field_count}} = count fields in _schema.yaml -->
+<!-- NOTE: {{hard_count}}/{{soft_count}} = define in QUALITY_GATES.md -->
 
 ## Routing
-<!-- CANONICAL SOURCE: frontmatter keywords + triggers + geo_description -->
+<!-- CANONICAL SOURCE: frontmatter keywords + triggers + capability_summary -->
 <!-- Body section below is DERIVED from frontmatter for human readability -->
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 triggers: "{{trigger_phrase_1}}", "{{trigger_phrase_2}}", "{{trigger_phrase_3}}"
-<!-- NOTA: keywords = 4-8 termos que ativam este builder via brain_query -->
-<!-- NOTA: triggers = 2-3 frases naturais que um user diria -->
-<!-- NOTA: Manter body sincronizado com frontmatter. Frontmatter = source of truth -->
+<!-- NOTE: keywords = 4-8 termos that ativam this builder via brain_query -->
+<!-- NOTE: triggers = 2-3 frases naturais that um user diria -->
+<!-- NOTE: Manter body sincronizado with frontmatter. Frontmatter = source of truth -->
 
 ## Crew Role
 In a crew, I handle {{ROLE_CAPS}}.
 I answer: "{{one_question_this_builder_answers}}"
 I do NOT handle: {{exclusion_1}}, {{exclusion_2}}, {{exclusion_3}}.
-<!-- NOTA: {{ROLE_CAPS}} = papel em CAPS. Ex: MODEL DOCUMENTATION, KNOWLEDGE DISTILLATION -->
-<!-- NOTA: {{exclusions}} = tipos vizinhos no mesmo Pillar ou frequentemente confundidos -->
-<!-- Buscar confusoes em TAXONOMY_LAYERS.yaml overlaps e na _schema.yaml do Pillar -->
+<!-- NOTE: {{ROLE_CAPS}} = role in CAPS. Ex: MODEL DOCUMENTATION, KNOWLEDGE DISTILLATION -->
+<!-- NOTE: {{exclusions}} = types vizinhos no mesmo Pillar or frequentemente confundidos -->
+<!-- Look up confusions in TAXONOMY_LAYERS.yaml overlaps e na _schema.yaml do Pillar -->
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar | P02 |
+| Domain | _builder construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -8,18 +8,19 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.7
+quality: 9.1
 tags: [builder, supabase, data-layer, examples, few-shot]
 density_score: 0.88
+tldr: "Defines the few shot example specification for examples — supabase data layer builder, with structural rules, validation gates, and integration points."
 ---
 
 # Examples
 
 ## Golden Example — E-commerce (Pro Tier)
-INPUT: "Configure Supabase para e-commerce com catalogo, pedidos, reviews, e busca semântica"
+INPUT: "Configure Supabase for e-commerce with catalogo, pedidos, reviews, and search semântica"
 OUTPUT:
 ```yaml
-identidade:
+identity:
   vertical: ecommerce
   tier: pro
 database:
@@ -37,17 +38,17 @@ database:
       columns: [id UUID PK, product_id UUID FK, user_id UUID FK, rating INT, content TEXT]
 auth:
   providers: [email, google, apple]
-  custom_claims: [org_id, role]
+  costm_claims: [org_id, role]
 rls:
   multi_tenant_column: org_id
   patterns:
-    - nome: org_member
+    - name: org_member
       policy: "org_id = (auth.jwt()->'app_metadata'->>'org_id')::uuid"
-    - nome: owner
+    - name: owner
       policy: "user_id = auth.uid()"
 storage:
   buckets:
-    - nome: product-images
+    - name: product-images
       publico: true
       max_file_size: 10485760
       allowed_mime_types: [image/jpeg, image/png, image/webp]
@@ -58,13 +59,13 @@ vectors:
   dimensions: 1536
   search_function: match_products
 ```
-WHY GOLDEN: RLS on every table, multi-tenant via org_id, pgvector for search, tier-appropriate features, no hardcoded data.
+WHY GOLDEN: RLS on every table, multi-tenant via org_id, pgvector for search, tier-apownte features, no hardcoded data.
 
 ## Anti-Example — Hardcoded + No RLS
-INPUT: "Configure Supabase para minha loja ACME"
+INPUT: "Configure Supabase for minha loja ACME"
 BAD OUTPUT:
 ```yaml
-identidade:
+identity:
   empresa: "ACME Store"
   tier: enterprise
 database:
@@ -76,7 +77,7 @@ auth:
   service_role_key: "eyJhbGciOiJIUzI1NiIs..."
 storage:
   buckets:
-    - nome: uploads
+    - name: uploads
       publico: true
       allowed_mime_types: ["*/*"]
 ```
@@ -89,5 +90,13 @@ FAILURES:
 6. No multi-tenant column
 
 ## Edge Case — Free Tier Minimal
-INPUT: "MVP com Supabase Free — auth + basic CRUD"
+INPUT: "MVP with Supabase Free — auth + basic CRUD"
 OUTPUT: Config with only Free-tier features, no CDN, no PITR, no SSO, 500MB DB limit noted, 2 project limit noted. RLS still mandatory.
+
+## Lifecycle
+
+- Created via 8F pipeline (F1-Focus through F8-Furnish)
+- Scored by `cex_score.py` (3-layer: structural + rubric + semantic)
+- Compiled by `cex_compile.py` for validation
+- Retrieved by `cex_retriever.py` for context injection
+- Evolved by `cex_evolve.py` when quality drops below threshold

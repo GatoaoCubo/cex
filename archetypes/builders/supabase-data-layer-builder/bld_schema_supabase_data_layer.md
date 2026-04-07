@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 9.0
 tags: [builder, supabase, data-layer, schema, validation]
 density_score: 0.90
 ---
@@ -18,8 +18,8 @@ density_score: 0.90
 ## Required Sections
 | Section | Required | Validation |
 |---------|----------|------------|
-| identidade | Yes | vertical ∈ {ecommerce,saas,marketplace,content,custom}, tier ∈ {free,pro,team,enterprise} |
-| projeto | Yes | project_ref matches `^[a-z]{12}$`, url matches `https://*.supabase.co` |
+| identity | Yes | vertical ∈ {ecommerce,saas,marketplace,content,costm}, tier ∈ {free,pro,team,enterprise} |
+| project | Yes | project_ref matches `^[a-z]{12}$`, url matches `https://*.supabase.co` |
 | database | Yes | schemas is list, extensions is list |
 | auth | Yes | providers is list with ≥1 entry |
 | rls | Yes | multi_tenant_column is string |
@@ -27,8 +27,8 @@ density_score: 0.90
 | realtime | No | habilitado is boolean if present |
 | vectors | No | habilitado is boolean, dimensions is int if present |
 | edge_functions | No | functions is list if present |
-| integracao_cex | No | mcp_habilitado is boolean if present |
-| budget | No | tier matches identidade.tier if present |
+| integration_cex | No | mcp_habilitado is boolean if present |
+| budget | No | tier matches identity.tier if present |
 
 ## Tier Constraints
 | Constraint | Free | Pro | Team | Enterprise |
@@ -61,6 +61,6 @@ density_score: 0.90
 - `secrets` list must not contain actual values (only key names)
 
 ## Cross-Reference Validation
-- `auth.custom_claims` must include `rls.multi_tenant_column` value
-- `integracao_cex.nuclei_consumers` must reference valid N01-N07
-- `budget.tier` must equal `identidade.tier`
+- `auth.costm_claims` must include `rls.multi_tenant_column` value
+- `integration_cex.nuclei_consumers` must reference valid N01-N07
+- `budget.tier` must equal `identity.tier`

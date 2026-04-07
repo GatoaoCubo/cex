@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Eval Dataset"
 tags: [template, eval, dataset, benchmark, testing]
 tldr: "A curated set of input-output pairs for evaluating LLM performance. Defines test cases, expected outputs, scoring rubric, and pass/fail thresholds."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "evaluation and testing"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.97
 ---
 
 # Eval Dataset: [DATASET_NAME]

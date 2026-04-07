@@ -5,6 +5,16 @@ pillar: P11
 llm_function: INJECT
 purpose: Domain knowledge for quality_gate production — atomic searchable facts
 sources: quality-gate-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Quality Gate"
+version: "1.0.0"
+author: n03_builder
+tags: [quality_gate, builder, examples]
+tldr: "Golden and anti-examples for quality gate construction, demonstrating ideal structure and common pitfalls."
+domain: "quality gate construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: quality_gate

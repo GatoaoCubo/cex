@@ -9,14 +9,19 @@ created: 2026-03-24
 author: builder_agent
 quality: 9.0
 tags: [hook, pre-commit, quality, scoring]
+updated: "2026-04-07"
+domain: "tool integration"
+title: "Hook Pre Commit Qa"
+density_score: 0.92
+tldr: "Defines pre for hook pre commit qa, with validation gates and integration points."
 ---
 
 # Hook: pre_commit_qa
 
 ## Trigger
-- Type: pre
-- Event: pre_commit (git hook)
-- Script: `python records/core/python/quality_gate.py --staged-only`
+1. Type: pre
+2. Event: pre_commit (git hook)
+3. Script: `python records/core/python/quality_gate.py --staged-only`
 
 ## Behavior
 1. Collect staged files via `git diff --cached --name-only`
@@ -24,7 +29,33 @@ tags: [hook, pre-commit, quality, scoring]
 3. Block commit if weighted score < 7.0; warn if < 9.0; pass if >= 9.0
 
 ## Safety
-- Fail mode: block (score < 7.0 = exit 2, rollback recommended)
-- Idempotent: yes (read-only analysis, no file mutations)
-- Timeout: 30s
-- Escalation: >=3 consecutive fails triggers architecture review alert
+1. Fail mode: block (score < 7.0 = exit 2, rollback recommended)
+2. Idempotent: yes (read-only analysis, no file mutations)
+3. Timeout: 30s
+4. Escalation: >=3 consecutive fails triggers architecture review alert
+
+## Metadata
+
+```yaml
+id: p04_hook_pre_commit_qa
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p04-hook-pre-commit-qa.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `pre` |
+| Pillar | P04 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

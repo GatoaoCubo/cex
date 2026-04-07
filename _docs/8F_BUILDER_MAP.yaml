@@ -40,8 +40,8 @@ boot_config:
   description: Configuracao de inicializacao por provider
   llm_function: GOVERN
   pillar: P02_model
-brain_index:
-  builder: archetypes/builders/brain-index-builder
+knowledge_index:
+  builder: archetypes/builders/knowledge-index-builder
   core: true
   description: Indice de busca (BM25, FAISS config)
   llm_function: INJECT
@@ -143,7 +143,7 @@ diagram:
   llm_function: INJECT
   pillar: P08_architecture
 director:
-  builder: archetypes/builders/director-builder
+  builder: archetypes/builders/supervisor-builder
   core: true
   description: Crew orchestrator that composes and coordinates multiple builders
   llm_function: PRODUCE
@@ -151,7 +151,7 @@ director:
 dispatch_rule:
   builder: archetypes/builders/dispatch-rule-builder
   core: false
-  description: Regra de despacho (keyword > satellite)
+  description: Regra de despacho (keyword > agent_group)
   llm_function: REASON
   pillar: P12_orchestration
 document_loader:
@@ -293,7 +293,7 @@ knowledge_card:
   llm_function: INJECT
   pillar: P01_knowledge
 law:
-  builder: archetypes/builders/law-builder
+  builder: archetypes/builders/invariant-builder
   core: true
   description: Lei operacional (inviolavel)
   llm_function: CONSTRAIN
@@ -475,7 +475,7 @@ reward_signal:
 router:
   builder: archetypes/builders/router-builder
   core: true
-  description: Regra de roteamento (task > satellite)
+  description: Regra de roteamento (task > agent_group)
   llm_function: REASON
   pillar: P02_model
 runtime_rule:

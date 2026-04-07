@@ -16,10 +16,13 @@ tags: [cli-tool, exit-codes, flag-naming, composability, command-structure]
 tldr: "Semantic exit codes are load-bearing for composability. Kebab-case flags. Mirror commands list in frontmatter to body. Stay under 1024 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [cli tool, exit codes, flag naming, command structure, composability, output format, config override]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Cli Tool"
+density_score: 0.90
 ---
 ## Summary
 CLI tools are consumed programmatically as often as interactively. The difference between a tool that composes well in a pipeline and one that does not comes down to two decisions made at spec time: exit code semantics and flag naming convention. Both are invisible during happy-path use and catastrophic on failure if undefined.
@@ -27,26 +30,52 @@ A tool that returns exit code 0 on both success and partial success, or that nam
 ## Pattern
 **Semantic exit codes and consistent flag naming.**
 Exit code schema (standard):
-- 0: success, operation completed normally
-- 1: user error (bad input, invalid flag, missing required argument)
-- 2: system error (file not found, network unavailable, permission denied)
-- 3: partial success (some operations succeeded, some failed — only use when the tool processes multiple items)
+1. 0: success, operation completed normally
+2. 1: user error (bad input, invalid flag, missing required argument)
+3. 2: system error (file not found, network unavailable, permission denied)
+4. 3: partial success (some operations succeeded, some failed — only use when the tool processes multiple items)
 Flag naming rules:
-- Always kebab-case with `--` prefix: `--output-format`, `--dry-run`, `--strict-mode`
-- Never underscores: `--output_format` breaks shell completion and parser conventions
-- Boolean flags: no value, presence = true (`--dry-run`, not `--dry-run=true`)
-- Value flags: always accept `=` form (`--output-format=json`)
+1. Always kebab-case with `--` prefix: `--output-format`, `--dry-run`, `--strict-mode`
+2. Never underscores: `--output_format` breaks shell completion and parser conventions
+3. Boolean flags: no value, presence = true (`--dry-run`, not `--dry-run=true`)
+4. Value flags: always accept `=` form (`--output-format=json`)
 Command structure:
-- Write the commands list in frontmatter first
-- Each frontmatter command name must exactly match a `## Commands > {name}` section in the body
-- Each command entry in the body must include: syntax, flags, example, and exit behavior
+1. Write the commands list in frontmatter first
+2. Each frontmatter command name must exactly match a `## Commands > {name}` section in the body
+3. Each command entry in the body must include: syntax, flags, example, and exit behavior
 Body budget (1024 bytes max): Overview (80) + Commands (600) + Output (150) + Config (150) = ~980.
 ## Anti-Pattern
-- Omitting exit_codes field entirely (caller cannot distinguish success from failure without stdout parsing).
-- Using the same exit code for different failure modes (1 for both bad input and system errors conflates user-fixable vs. ops-fixable failures).
-- Flag names with underscores (`--output_format`) — breaks shell completion and differs from ecosystem convention.
-- Commands list in frontmatter not matching body section names (spec drift; validation catches it but it wastes a build cycle).
-- Including implementation code in the spec body (this is a contract document, not source).
-- Confusing cli_tool with daemon: a cli_tool terminates; a daemon persists. If the tool runs continuously, it is a daemon.
+1. Omitting exit_codes field entirely (caller cannot distinguish success from failure without stdout parsing).
+2. Using the same exit code for different failure modes (1 for both bad input and system errors conflates user-fixable vs. ops-fixable failures).
+3. Flag names with underscores (`--output_format`) — breaks shell completion and differs from ecosystem convention.
+4. Commands list in frontmatter not matching body section names (spec drift; validation catches it but it wastes a build cycle).
+5. Including implementation code in the spec body (this is a contract document, not source).
+6. Confusing cli_tool with daemon: a cli_tool terminates; a daemon persists. If the tool runs continuously, it is a daemon.
 ## Context
 The 1024-byte body limit for cli_tool is the tightest in P04. Write the commands list in frontmatter first (forces scope decision before prose), then allocate body bytes from a fixed budget. Output format field is required so automated consumers know whether to parse JSON or plain text; default to `text` with `--output-format=json` as the machine-readable override.
+
+## Metadata
+
+```yaml
+id: p10_lr_cli_tool_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-cli-tool-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | cli_tool |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

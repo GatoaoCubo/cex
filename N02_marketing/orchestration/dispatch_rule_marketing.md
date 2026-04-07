@@ -13,7 +13,7 @@ tags: [dispatch_rule, visual-frontend, marketing, N02, html, tailwind, routing]
 tldr: Route to N02 for HTML/CSS generation with Tailwind + shadcn/ui AND copywriting tasks — dual-role visual frontend engineer + copywriter.
 scope: visual_frontend_and_marketing_creative
 keywords: [html, frontend, landing, visual, design, tailwind, component, css, responsive, a11y, dark_mode, typography, copy, copywriting, ad, ads, headline, CTA, campaign, email, brand_voice, social_media, anuncio, campanha, redacao]
-agent_node: n02-visual-marketing-hub
+agent_group: n02-visual-marketing-hub
 model: claude-sonnet-4-6
 model_fallback: claude-opus-4-6
 cli: claude

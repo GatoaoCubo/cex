@@ -15,7 +15,7 @@ prerequisites:
   - "Numeric values (durations, counts, rates) are known or researchable for the target domain"
 validation_method: checklist
 domain: runtime_rule
-quality: 8.8
+quality: 9.1
 tags: [instruction, runtime-rule, P09, timeout, retry, rate-limit, circuit-breaker]
 idempotent: true
 atomic: true
@@ -46,7 +46,7 @@ A single `.md` file with YAML frontmatter (all required fields) + 3 mandatory bo
 - feature_flag = on/off toggle for feature availability (different builder)
 ## Phases
 ### Phase 1: Research — Rule Specification
-Identify the operation, classify the rule type, and determine appropriate numeric values.
+Identify the operation, classify the rule type, and determine apownte numeric values.
 ```
 Identify the operation:
   name: specific component, endpoint, or pipeline step (not vague like "the system")
@@ -77,7 +77,7 @@ Confirm the artifact belongs to `runtime_rule` and not a sibling kind.
 IF the rule is about when to retire or promote an artifact through its lifecycle:
   RETURN "Route to lifecycle-rule-builder."
 IF the rule is an inviolable behavioral constraint that must never be overridden:
-  RETURN "Route to law-builder — laws are non-technical behavioral rules."
+  RETURN "Route to invariant-builder — laws are non-technical behavioral rules."
 IF the rule defines a safety boundary for agent behavior:
   RETURN "Route to guardrail-builder."
 IF the value is an environment variable (API key, base URL, flag):

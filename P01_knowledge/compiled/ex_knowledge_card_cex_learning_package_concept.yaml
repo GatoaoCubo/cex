@@ -14,7 +14,7 @@ tags:
 - dimensions
 - lp
 - entity-model
-tldr: 12 LPs sao dimensoes (nao categorias) que definem qualquer entidade LLM -- de prompt (1 LP) a agent_node (12 LPs)
+tldr: 12 LPs sao dimensoes (nao categorias) que definem qualquer entidade LLM -- de prompt (1 LP) a agent_group (12 LPs)
 when_to_use: Entender as 12 dimensoes de uma entidade LLM e como LPs se cruzam com funcoes
 keywords:
 - learning-package
@@ -37,7 +37,7 @@ density_score: null
 data_source: https://arxiv.org/abs/2308.00352
 summary: 'Learning Packages (LPs) sao as 12 dimensoes que definem qualquer entidade LLM. Nao sao categorias de artefatos --
   sao PERGUNTAS. P01 pergunta "o que sabe?", P02 "quem e?", P03 "como fala?". Um prompt preenche 1 LP (P03). Um agente preenche
-  3-4. Um agent_node preenche todos os 12. A diferenca entre entidades eh dimensionalidade, nao natureza. LPs sao ortogonais
+  3-4. Um agent_group preenche todos os 12. A diferenca entre entidades eh dimensionalidade, nao natureza. LPs sao ortogonais
   as funcoes: LP = o que a entidade TEM, funcao = o que o LLM FAZ.'
 spec: '| LP | Nome | Pergunta | Funcao Dominante |
 
@@ -82,11 +82,11 @@ patterns: '| Trigger | Action |
 
   | Novo agente criado | Preencher P02 (Model) + P03 (Prompt) minimo |
 
-  | Satellite completo necessario | Garantir todos 12 LPs preenchidos |'
+  | Agent_group completo necessario | Garantir todos 12 LPs preenchidos |'
 code: "<!-- lang: python | purpose: LP dimensionality of an entity -->\nENTITY_LPS = {\n    \"prompt\":    {\"P03\": True},\
   \                    # 1 LP\n    \"agent\":     {\"P02\": True, \"P03\": True,\n                  \"P04\": True, \"P10\"\
-  : True},       # 4 LPs\n    \"agent_node\": {f\"P{i:02d}\": True\n                  for i in range(1, 13)},          # 12\
-  \ LPs\n}\n# completude = len(filled_lps) / 12\n# prompt = 8%, agente = 33%, agent_node = 100%"
+  : True},       # 4 LPs\n    \"agent_group\": {f\"P{i:02d}\": True\n                  for i in range(1, 13)},          #\
+  \ 12 LPs\n}\n# completude = len(filled_lps) / 12\n# prompt = 8%, agente = 33%, agent_group = 100%"
 anti_patterns:
 - Tratar LPs como pastas de filesystem (sao dimensoes)
 - Confundir LP com funcao (TEM vs FAZ)

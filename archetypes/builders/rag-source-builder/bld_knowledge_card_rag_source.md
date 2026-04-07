@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for rag_source production — atomic searchable facts
 sources: rag-source-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Rag Source"
+version: "1.0.0"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: rag_source
@@ -47,7 +57,7 @@ A rag_source is a pointer-only artifact that catalogs an external indexable URL 
 3. Add recommended fields: `reliability` (high/medium/low), `format`, `extraction_method`, `keywords` (3–8 terms)
 4. Write `## Source Description` — what the source is, who maintains it, why it is authoritative
 5. Write `## Freshness Policy` — re-check cadence + staleness threshold
-6. Write `## Extraction Notes` — method, auth requirements, pagination quirks
+6. Write `## Extraction Notes` — method, auth requirements, pagetion quirks
 7. Verify body <= 1024 bytes; create `.yaml` machine twin with identical `id`
 ## References
 - rag-source-builder MANIFEST.md v1.0.0

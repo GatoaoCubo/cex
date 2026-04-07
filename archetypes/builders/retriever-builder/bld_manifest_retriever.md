@@ -12,8 +12,12 @@ author: builder_agent
 tags: [kind-builder, retriever, P04, tools, vector-search, RAG, embedding, hybrid-search]
 keywords: [retriever, vector, embedding, similarity, RAG, search, hybrid, BM25]
 triggers: ["create retriever", "build retriever artifact"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building retriever artifacts — vector/keyword/hybrid search over l. L2: Define vector store connection with embedding model and similarity metric. L3: When user needs to create, build, or scaffold retriever.
+quality: 9.1
+title: "Manifest Retriever"
+tldr: "Golden and anti-examples for retriever construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # retriever-builder
 
@@ -24,12 +28,12 @@ BaseRetriever, LlamaIndex QueryEngine, Haystack, ColBERT. Produces retriever art
 store_type, embedding_model, similarity_metric, top_k, and reranking config.
 
 ## Capabilities
-- Define vector store connection with embedding model and similarity metric
-- Specify hybrid search combining vector + keyword (BM25) strategies
-- Configure top_k, reranking, and filtering parameters
-- Map metadata filters and namespace scoping
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish retriever from search_tool (web) and document_loader (ingestion)
+1. Define vector store connection with embedding model and similarity metric
+2. Specify hybrid search combining vector + keyword (BM25) strategies
+3. Configure top_k, reranking, and filtering parameters
+4. Map metadata filters and namespace scoping
+5. Validate artifact against quality gates (HARD + SOFT)
+6. Distinguish retriever from search_tool (web) and document_loader (ingestion)
 
 ## Routing
 keywords: [retriever, vector, embedding, similarity, RAG, search, hybrid, BM25, top_k, rerank,
@@ -47,7 +51,33 @@ I answer: "how does this system search its local knowledge store, with what embe
 and similarity metric?"
 
 I do NOT handle:
-- search_tool: web search via external APIs (SerpAPI, Bing, Brave)
-- document_loader: file ingestion, chunking, embedding storage
-- db_connector: SQL/GraphQL queries against relational databases
-- api_client: REST/GraphQL calls to external services
+1. search_tool: web search via external APIs (SerpAPI, Bing, Brave)
+2. document_loader: file ingestion, chunking, embedding storage
+3. db_connector: SQL/GraphQL queries against relational databases
+4. api_client: REST/GraphQL calls to external services
+
+## Metadata
+
+```yaml
+id: retriever-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply retriever-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P04 |
+| Domain | retriever |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

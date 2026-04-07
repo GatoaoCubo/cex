@@ -1,8 +1,17 @@
 ---
 id: n04_readme_curriculum
 kind: output_template
-quality: 8.7
+pillar: P01
+quality: 9.0
 density_score: 1.0
+title: "Output Readme Curriculum"
+version: 1.0.0
+author: N04
+tags: [output_template, knowledge, output]
+tldr: "Explore the CEX learning path, from foundations to mastering autonomous AI engineering."
+domain: knowledge
+created: 2026-04-06
+updated: 2026-04-07
 ---
 
 # What You'll Learn
@@ -37,3 +46,20 @@ Explore the CEX learning path, from foundations to mastering autonomous AI engin
 - **Python**: Basic knowledge of syntax and environment management.
 - **Git**: Fundamental understanding of version control (clone, commit, push).
 - **CLI**: Comfort using the terminal/command line interface.
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | knowledge | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Knowledge artifacts follow CEX 8F pipeline from intent to publication
+- Quality gates enforce minimum 8.0 threshold for all published artifacts
+- Cross-nucleus references use explicit id-based linking, not path-based
+- Version tracking enables rollback to any previous artifact state
+

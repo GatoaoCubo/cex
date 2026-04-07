@@ -5,6 +5,14 @@ llm_function: CONSTRAIN
 kind: schema
 domain: naming_rule
 version: 1.0.0
+quality: 9.1
+title: "Schema Naming Rule"
+author: n03_builder
+tags: [naming_rule, builder, examples]
+tldr: "Golden and anti-examples for naming rule construction, demonstrating ideal structure and common pitfalls."
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema — Naming Rule (SOURCE OF TRUTH)
@@ -23,7 +31,7 @@ Examples of invalid IDs: `p05_nr_KnowledgeCard` (uppercase), `p05_nr_-signal` (h
 | version | string | yes | Semver: `{major}.{minor}.{patch}` |
 | created | string | yes | ISO date: `"YYYY-MM-DD"` |
 | updated | string | yes | ISO date: `"YYYY-MM-DD"`, >= created |
-| author | string | yes | Satellite ID or human handle |
+| author | string | yes | Agent_group ID or human handle |
 | scope | string | yes | One sentence, max 120 chars, describes what is named |
 | pattern | string | yes | Valid regex, must match all valid examples |
 | prefix | string | yes | Fixed prefix string; may be empty string `""` if none |

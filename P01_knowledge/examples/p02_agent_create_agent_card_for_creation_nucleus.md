@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "agent-builder"
-agent_node: "builder"
+agent_group: "builder"
 domain: "artifact_creation"
 llm_function: BECOME
 capabilities_count: 6
@@ -23,7 +23,7 @@ linked_artifacts:
   related: [p03_system_prompt_create_system_prompt_for_creation_nucleus, p02_agent_card_builder_nucleus]
 ---
 ## Overview
-creation_nucleus_agent is the builder satellite's primary specialist in artifact_creation.
+creation_nucleus_agent is the builder agent_group's primary specialist in artifact_creation.
 Transforms user intents into complete CEX artifacts across all 114 kinds via the mandatory 8F pipeline (F1 CONSTRAIN → F8 COLLABORATE).
 Operates as N03 — dispatched by N07, never autonomous; reads builder ISOs before every build; blocks publish when F7 score < 8.0.
 
@@ -47,11 +47,11 @@ Operates as N03 — dispatched by N07, never autonomous; reads builder ISOs befo
 | 5 | cex_doctor.py | Builder health check (105 PASS baseline) |
 | 6 | signal_writer.py | Inter-nucleus completion signals |
 
-### Satellite Position
-- Satellite: builder
+### Agent_group Position
+- Agent_group: builder
 - Peers: agent-package-builder, dispatch-rule-builder, interface-builder
 - Upstream: N07 (orchestrator, dispatch source)
-- Downstream: N05 (post-build testing), brain-index-builder (registration)
+- Downstream: N05 (post-build testing), knowledge-index-builder (registration)
 
 ## File Structure
 ```
@@ -83,7 +83,7 @@ agents/creation_nucleus/agent_package/
 - Secondary: git commit, completion signal to N07, cex_doctor health report
 
 ## Integration
-Receives dispatch from N07 via `.cex/runtime/handoffs/`. Reads `decision_manifest.yaml` before F4 — never re-asks user for decisions already recorded. After F8, emits signal via signal_writer.py and commits autonomously. N07 consolidates only when git is blocked (Gemini sessions). Registers built artifacts to brain-index-builder; triggers N05 for post-build test coverage.
+Receives dispatch from N07 via `.cex/runtime/handoffs/`. Reads `decision_manifest.yaml` before F4 — never re-asks user for decisions already recorded. After F8, emits signal via signal_writer.py and commits autonomously. N07 consolidates only when git is blocked (Gemini sessions). Registers built artifacts to knowledge-index-builder; triggers N05 for post-build test coverage.
 
 ## Quality Gates
 | Gate | Type | Check |
@@ -92,7 +92,7 @@ Receives dispatch from N07 via `.cex/runtime/handoffs/`. Reads `decision_manifes
 | H02 | HARD | id matches `^p02_agent_[a-z][a-z0-9_]+$` |
 | H05 | HARD | quality == null |
 | H07 | HARD | llm_function == BECOME |
-| H08 | HARD | agent_node set and non-blank |
+| H08 | HARD | agent_group set and non-blank |
 | S03 | SOFT | agent_package lists >= 10 spec files |
 | S06 | SOFT | capabilities_count matches actual bullets |
 | S09 | SOFT | density_score >= 0.80 |

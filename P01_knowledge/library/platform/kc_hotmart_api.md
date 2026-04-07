@@ -6,10 +6,15 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: payment_platform
-quality: 8.9
+quality: 9.1
 tldr: "Hotmart REST API integration — OAuth2 auth, sales endpoints, webhook sha256 HMAC verification, sandbox testing, and affiliate management."
 tags: [hotmart, api, payment, webhook, oauth2, brazil, infoproduct]
-density_score: 0.90
+density_score: 1.0
+when_to_use: "Apply when hotmart rest api integration — oauth2 auth, sales endpoints, webhook sha256 hmac verification, sa..."
+keywords: [knowledge-card, core, client, oauth2, endpoints]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Hotmart REST API Integration Patterns
@@ -191,3 +196,10 @@ async def handle_hotmart_webhook(event: dict) -> bool:
 3. **Transaction ID is your anchor** — idempotency key for all webhook events.
 4. **Centavos internally** — convert float prices to int immediately at the boundary.
 5. **Sandbox in CI** — never use production credentials outside production.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

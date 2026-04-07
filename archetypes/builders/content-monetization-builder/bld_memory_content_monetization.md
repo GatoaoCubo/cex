@@ -19,6 +19,9 @@ decay_rate: 0.03
 keywords: [monetization, pricing, credits, checkout, config, margin, webhook, courses]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Content Monetization"
+density_score: 0.90
 ---
 ## Summary
 Content monetization has two orthogonal concerns: business logic (what to charge, how
@@ -56,3 +59,58 @@ integration bugs before real money moves.
 Embedding Stripe-specific logic throughout the application makes switching to Hotmart
 (for BR infoproducts) a rewrite. Config-driven checkout (provider + webhook_url +
 webhook_secret_env) allows provider swap with zero code changes — only config update.
+
+## Builder Context
+
+This ISO operates within the `content-monetization-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_content-monetization-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_content-monetization-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | content_monetization |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

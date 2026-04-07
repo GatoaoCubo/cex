@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Weekly Fashion Content Publisher"
 steps_count: 6
 execution: mixed
-agent_nodes: [fashion_trends, content_creator, visual_designer]
+agent_groups: [fashion_trends, content_creator, visual_designer]
 timeout: 7200
 retry_policy: per_step
 depends_on: []

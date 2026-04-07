@@ -11,9 +11,7 @@
     "stripe": {
       "command": "npx",
       "args": ["-y", "@anthropic/mcp-stripe"],
-      "env": {
-        "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}"
-      }
+      "env": { "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}" }
     },
     "hotmart": {
       "command": "npx",
@@ -23,6 +21,18 @@
         "HOTMART_CLIENT_SECRET": "${HOTMART_CLIENT_SECRET}",
         "HOTMART_BASIC_AUTH": "${HOTMART_BASIC_AUTH}"
       }
+    },
+    "canva": {
+      "command": "npx",
+      "args": ["-y", "@mcp_factory/canva-mcp-server"],
+      "env": {
+        "CANVA_CLIENT_ID": "${CANVA_CLIENT_ID}",
+        "CANVA_CLIENT_SECRET": "${CANVA_CLIENT_SECRET}"
+      }
+    },
+    "notebooklm": {
+      "command": "npx",
+      "args": ["-y", "notebooklm-mcp@latest"]
     }
   }
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_8f_runner.py -- 8F Runner: Stateful artifact production pipeline.
 
@@ -24,8 +25,12 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 import argparse
+import json
 import re
+import subprocess
 import time
+
+import yaml
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -34,7 +39,7 @@ try:
     if importlib.util.find_spec("yaml") is None:
         raise ImportError
 except ImportError:
-    print("ERRO: PyYAML necessario. pip install pyyaml", file=sys.stderr)
+    print("ERROR: PyYAML required. pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
 # --- Imports from Motor + Intent ---
@@ -63,6 +68,7 @@ from cex_shared import write_learning_record as _shared_write_learning_record
 try:
     from cex_retriever import (
         find_examples_for_kind,
+        find_similar as _find_similar,
     )
     from cex_retriever import (
         load_index as load_retriever_index,
@@ -72,10 +78,17 @@ except ImportError:
     _RETRIEVER_AVAILABLE = False
 
 try:
-    from cex_token_budget import count_tokens
+    from cex_token_budget import count_tokens, TokenBudget as _TokenBudget
     _TOKEN_BUDGET_AVAILABLE = True
 except ImportError:
     _TOKEN_BUDGET_AVAILABLE = False
+
+try:
+    from cex_gdp import GDPEnforcer as _GDPEnforcer
+    from cex_gdp import NeedsUserDecision as _NeedsUserDecision
+    _GDP_AVAILABLE = True
+except ImportError:
+    _GDP_AVAILABLE = False
 
 try:
     from cex_memory import get_injection_context as _memory_inject
@@ -102,6 +115,43 @@ try:
     _MONITOR_AVAILABLE = True
 except ImportError:
     _MONITOR_AVAILABLE = False
+
+try:
+    from cex_query import query_builders as _query_builders
+    _QUERY_AVAILABLE = True
+except ImportError:
+    _QUERY_AVAILABLE = False
+
+try:
+    from cex_provider_discovery import discover_providers as _discover_providers
+    _PROVIDER_AVAILABLE = True
+except ImportError:
+    _PROVIDER_AVAILABLE = False
+
+try:
+    from cex_theme import get_sin as _get_sin
+    _THEME_AVAILABLE = True
+except ImportError:
+    _THEME_AVAILABLE = False
+
+try:
+    from cex_prompt_layers import get_layers as _get_prompt_layers
+    _LAYERS_AVAILABLE = True
+except ImportError:
+    _LAYERS_AVAILABLE = False
+
+try:
+    from cex_skill_loader import get_skill_loader as _get_skill_loader
+    _SKILL_LOADER_AVAILABLE = True
+except ImportError:
+    _SKILL_LOADER_AVAILABLE = False
+
+try:
+    from brand_inject import load_brand_config as _load_brand_config
+    from brand_inject import flatten as _flatten_brand
+    _BRAND_INJECT_AVAILABLE = True
+except ImportError:
+    _BRAND_INJECT_AVAILABLE = False
 
 # Load .env for API keys
 for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
@@ -288,7 +338,7 @@ class EightFRunner:
             "F2": lambda: f"identity: {len(s.identity)} keys ({', '.join(list(s.identity)[:3])})",
             "F3": lambda: f"ISOs: {sum(1 for x in k.values() if x)}, KCs injected: {len(k.get('kc_domains', []))}",
             "F4": lambda: f"plan: {len(s.reasoning.get('plan', '').split())} words (model={s.reasoning.get('model_used', '?')})",
-            "F5": lambda: f"tools: {len(s.tool_results.get('tools_available', []))}, existing: {len(s.tool_results.get('existing_artifacts', []))}",
+            "F5": lambda: f"tools: {len(s.tool_results.get('tools_available', []))}, existing: {len(s.tool_results.get('existing_artifacts', []))}, executed: {len(s.tool_results.get('tool_outputs', {}))}",
             "F6": lambda: f"artifact: {len(s.artifact.split()) if s.artifact else 0} words",
             "F7": lambda: (f"gates: {sum(1 for g in v.get('hard_gates', []) if g.get('passed'))}/{len(v.get('hard_gates', []))}, retries: {v.get('retries', 0)}" if v else "pending"),
             "F8": lambda: f"mode: {s.result.get('mode', '?')}, path: {s.result.get('path', 'none')}",
@@ -318,7 +368,21 @@ class EightFRunner:
     # -- F1 CONSTRAIN -------------------------------------------------------
 
     def f1_constrain(self) -> None:
-        """Load _schema.yaml + bld_schema + bld_config -> state.constraints."""
+        """Load _schema.yaml + bld_schema + bld_config -> state.constraints.
+
+        T04: Token budget allocation at pipeline start.
+        """
+        # --- T04: Token budget ---
+        if _TOKEN_BUDGET_AVAILABLE:
+            try:
+                budget = _TokenBudget()
+                self.state.token_budget = budget
+                self._log("F1", f"token budget: input={budget.input_limit} output={budget.output_limit}")
+            except Exception:
+                self.state.token_budget = None
+        else:
+            self.state.token_budget = None
+
         bdir = self.state.builder_dir
         kind = self.state.kind
         pillar = self.state.pillar
@@ -402,9 +466,26 @@ class EightFRunner:
     # -- F3 INJECT ----------------------------------------------------------
 
     def f3_inject(self) -> None:
-        """Load KC library + builder KCs + examples + memory + architecture -> state.knowledge."""
+        """Assemble ALL context from files -- pure Python, zero subprocess.
+
+        Single source of truth for context injection. Loads 14 source types:
+          1. Builder knowledge card (ISO)
+          2. Dedicated kind KC (1:1 per kind)
+          3. Cluster domain KCs (supplementary, max 2)
+          4. Few-shot examples (ISO)
+          5. Memory / persistent learnings (ISO)
+          6. Architecture / patterns (ISO)
+          7. Domain context (--context flag)
+          8. Build memory (past performance via cex_memory)
+          9. Semantic retrieval (TF-IDF via cex_retriever)
+         10. Prompt layers (compiled pillar artifacts)
+         11. Brand context (brand_config.yaml variables)
+         12. Sin lens (nucleus identity from nucleus_sins.yaml)
+         13. Skill loader ISOs (multi-source, priority-ordered)
+         14. Shared skills (cross-builder skills from _shared/)
+        """
         bdir = self.state.builder_dir
-        knowledge = {}
+        knowledge: dict = {}
 
         # 1. Builder knowledge card
         if bdir:
@@ -413,7 +494,7 @@ class EightFRunner:
                 knowledge["kc_builder"] = strip_frontmatter(kc_text)
                 self._log("F3", "bld_knowledge_card loaded")
 
-        # 2. Dedicated kind KC (primary — 1:1 per kind)
+        # 2. Dedicated kind KC (primary -- 1:1 per kind)
         kind_kc_path = CEX_ROOT / "P01_knowledge" / "library" / "kind" / f"kc_{self.kind_slug}.md"
         if kind_kc_path.exists():
             text = kind_kc_path.read_text(encoding="utf-8")
@@ -425,7 +506,7 @@ class EightFRunner:
         # 3. Cluster domain KCs from library (supplementary, max 2)
         kc_matches = lookup_kcs_for_kind(self.kc_library, self.state.kind, self.state.pillar)
         kc_domains = []
-        for kc in kc_matches[:2]:  # Reduced from 3 to 2 (dedicated KC is primary now)
+        for kc in kc_matches[:2]:
             kc_path = CEX_ROOT / kc["path"]
             if kc_path.exists():
                 text = kc_path.read_text(encoding="utf-8")
@@ -496,13 +577,152 @@ class EightFRunner:
             except Exception as e:
                 self._log("F3", f"retriever unavailable: {e}")
 
+        # 10. Prompt layers (compiled pillar artifacts -- identity, guardrails, skills)
+        if _LAYERS_AVAILABLE:
+            try:
+                layers = _get_prompt_layers()
+                layer_data: dict = {}
+
+                # Wire 1: Core identity
+                identity_body = layers.get("p03_sp_cex_core_identity")
+                if identity_body:
+                    # Resolve {{INCLUDE}} directives
+                    for inc_id in ["p03_ins_doing_tasks", "p03_ins_action_protocol"]:
+                        inc_body = layers.get(inc_id)
+                        if inc_body:
+                            identity_body = identity_body.replace(
+                                "{{INCLUDE " + inc_id + "}}", inc_body
+                            )
+                    identity_body = re.sub(
+                        r"\{\{[A-Z_]+\}\}", "[runtime]", identity_body
+                    )
+                    layer_data["identity"] = identity_body
+
+                # Wire 4: Guardrails
+                guardrail_ids = layers.by_kind("guardrail")
+                if guardrail_ids:
+                    guardrail_parts = []
+                    for gid in guardrail_ids:
+                        g_body = layers.get(gid)
+                        g_meta = layers.get_meta(gid)
+                        if g_body:
+                            title = g_meta.get("title", gid)
+                            severity = g_meta.get("severity", "?")
+                            guardrail_parts.append(
+                                f"### {title} [severity={severity}]\n{g_body}"
+                            )
+                    if guardrail_parts:
+                        layer_data["guardrails"] = "\n\n".join(guardrail_parts)
+
+                # Wire 5: Verification protocol
+                verify_body = layers.get("p03_sp_verification_agent")
+                if verify_body:
+                    layer_data["verification"] = verify_body
+
+                # Wire 2-3: Behavioral + action skills
+                skill_ids = layers.by_kind("skill")
+                if skill_ids:
+                    skill_parts = []
+                    for sid in skill_ids:
+                        s_body = layers.get(sid)
+                        s_meta = layers.get_meta(sid)
+                        if s_body:
+                            title = s_meta.get("title", sid)
+                            skill_parts.append(f"### {title}\n{s_body}")
+                    if skill_parts:
+                        layer_data["skills"] = "\n\n".join(skill_parts)
+
+                if layer_data:
+                    knowledge["prompt_layers"] = layer_data
+                    self._log(
+                        "F3",
+                        f"prompt layers loaded: {list(layer_data.keys())}",
+                    )
+            except Exception as e:
+                self._log("F3", f"prompt layers unavailable: {e}")
+
+        # 11. Brand context (brand_config.yaml -- pure Python, no subprocess)
+        if _BRAND_INJECT_AVAILABLE:
+            try:
+                brand_config_path = CEX_ROOT / ".cex" / "brand" / "brand_config.yaml"
+                if brand_config_path.exists():
+                    brand_cfg = _load_brand_config(brand_config_path)
+                    if brand_cfg:
+                        flat = _flatten_brand(brand_cfg)
+                        real = {
+                            k: v
+                            for k, v in flat.items()
+                            if v and not str(v).startswith("{{")
+                        }
+                        if real:
+                            knowledge["brand_context"] = real
+                            self._log("F3", f"brand context: {len(real)} variables")
+            except Exception as e:
+                self._log("F3", f"brand context unavailable: {e}")
+
+        # 12. Sin lens (nucleus identity from nucleus_sins.yaml)
+        if _THEME_AVAILABLE:
+            try:
+                nucleus = os.environ.get("CEX_NUCLEUS", "n03").lower()
+                sin = _get_sin(nucleus)
+                if sin:
+                    knowledge["sin_lens"] = sin
+                    self._log("F3", f"sin lens: {sin.get('virtue', '?')}")
+            except Exception as e:
+                self._log("F3", f"sin lens unavailable: {e}")
+
+        # 13. Skill loader ISOs (multi-source, priority-ordered, dedup'd)
+        if _SKILL_LOADER_AVAILABLE:
+            try:
+                loader = _get_skill_loader()
+                isos = loader.load_builder(self.state.kind.replace("_", "-"))
+                if isos:
+                    # Count by source for logging
+                    by_source = {}
+                    for iso in isos:
+                        by_source[iso.source] = by_source.get(iso.source, 0) + 1
+                    knowledge["skill_loader_sources"] = by_source
+                    self._log(
+                        "F3",
+                        f"skill loader: {len(isos)} ISOs from {dict(by_source)}",
+                    )
+
+                    # 14. Shared skills (cross-builder, from _shared/)
+                    shared = [i for i in isos if i.source == "shared"]
+                    if shared:
+                        shared_parts = []
+                        for s in shared:
+                            shared_parts.append(f"### {s.name}\n{s.content[:2000]}")
+                        knowledge["shared_skills"] = "\n\n".join(shared_parts)
+                        self._log("F3", f"shared skills: {len(shared)}")
+            except Exception as e:
+                self._log("F3", f"skill loader unavailable: {e}")
+
         self.state.knowledge = knowledge
         self._log("F3", f"knowledge: {list(knowledge.keys())}")
 
     # -- F4 REASON ----------------------------------------------------------
 
     def f4_reason(self) -> None:
-        """LLM plans the artifact: fields, decisions, tradeoffs -> state.reasoning."""
+        """LLM plans the artifact: fields, decisions, tradeoffs -> state.reasoning.
+
+        T03: GDP gate -- if unresolved USER-scope decisions exist for this kind,
+        raises NeedsUserDecision instead of proceeding (D2: raise = halt pipeline).
+        """
+        # --- T03: GDP gate ---
+        if _GDP_AVAILABLE:
+            try:
+                gdp = _GDPEnforcer()
+                pending = gdp.get_pending()
+                for d in pending:
+                    if d.kind == self.state.kind or d.scope.value == "GLOBAL":
+                        self._log("F4", f"GDP BLOCKED: unresolved decision '{d.id}' ({d.scope.value})")
+                        raise _NeedsUserDecision(d)
+            except _NeedsUserDecision:
+                raise
+            except Exception as e:
+                self._log("F4", f"GDP check skipped: {e}")
+
         # Compose reasoning prompt from accumulated state
         parts = []
         parts.append("You are planning what artifact to produce. Think step-by-step.")
@@ -560,16 +780,20 @@ class EightFRunner:
     # -- F5 CALL ------------------------------------------------------------
 
     def f5_call(self) -> None:
-        """Load bld_tools spec, scan existing artifacts -> state.tool_results."""
+        """Load bld_tools spec, scan existing artifacts, EXECUTE active tools -> state.tool_results."""
         bdir = self.state.builder_dir
-        tool_results = {"existing_artifacts": [], "tools_available": []}
+        tool_results = {
+            "existing_artifacts": [],
+            "tools_available": [],
+            "tool_outputs": {},
+            "enrichment_text": "",
+        }
 
-        # 1. Load bld_tools spec and parse tools table
+        # --- Phase 1: Parse bld_tools spec (backwards compat) ---
         if bdir:
             tools_text = load_iso(bdir, "bld_tools", self.kind_slug)
             if tools_text:
                 body = strip_frontmatter(tools_text)
-                # Parse markdown table rows for tool entries
                 for line in body.split("\n"):
                     line = line.strip()
                     if (
@@ -592,7 +816,7 @@ class EightFRunner:
                     f"bld_tools loaded, {len(tool_results['tools_available'])} tools parsed",
                 )
 
-        # 2. Scan existing artifacts in pillar examples dir
+        # --- Phase 2: Scan existing artifacts in pillar examples dir ---
         pillar_dir_name = PILLAR_DIRS.get(self.state.pillar)
         if pillar_dir_name:
             examples_dir = CEX_ROOT / pillar_dir_name / "examples"
@@ -601,18 +825,134 @@ class EightFRunner:
                 for f in sorted(examples_dir.glob(f"ex_{kind_slug}*.md")):
                     tool_results["existing_artifacts"].append(f.name)
 
-        # 3. Warn on similar artifacts in verbose
         existing = tool_results["existing_artifacts"]
         if existing:
             self._log(
                 "F5",
-                f"WARNING: {len(existing)} similar artifact(s) exist: " + ", ".join(existing[:5]),
+                f"WARNING: {len(existing)} similar artifact(s) exist: "
+                + ", ".join(existing[:5]),
             )
+
+        # --- Phase 3: Auto-execute tools for context enrichment ---
+        intent = self.state.intent
+        executed = 0
+
+        # 3a. Retriever: find similar artifacts by TF-IDF
+        if _RETRIEVER_AVAILABLE:
+            try:
+                idx = load_retriever_index()
+                if idx:
+                    results = _find_similar(intent, index=idx, top_k=3)
+                    if results:
+                        tool_results["tool_outputs"]["retriever"] = results
+                        executed += 1
+                        self._log("F5", f"retriever: {len(results)} similar artifacts found")
+            except Exception as e:
+                self._log("F5", f"retriever failed: {e} (non-blocking)")
+
+        # 3b. Query: discover related builders by TF-IDF
+        if _QUERY_AVAILABLE:
+            try:
+                builders = _query_builders(intent, top_k=3)
+                if builders:
+                    tool_results["tool_outputs"]["query"] = builders
+                    executed += 1
+                    self._log("F5", f"query: {len(builders)} related builders discovered")
+            except Exception as e:
+                self._log("F5", f"query failed: {e} (non-blocking)")
+
+        # 3c. Memory: recall relevant build memories
+        if _MEMORY_AVAILABLE:
+            try:
+                kind = self.state.kind
+                memory_ctx = _memory_inject(kind)
+                if memory_ctx and memory_ctx.strip():
+                    tool_results["tool_outputs"]["memory"] = memory_ctx
+                    executed += 1
+                    self._log("F5", f"memory: context loaded for kind={kind}")
+            except Exception as e:
+                self._log("F5", f"memory failed: {e} (non-blocking)")
+
+        # 3d. Provider discovery: check health
+        if _PROVIDER_AVAILABLE:
+            try:
+                providers = _discover_providers(use_cache=True)
+                if providers:
+                    alive = sum(1 for p in providers.values() if p.get("status") == "OK")
+                    tool_results["tool_outputs"]["providers"] = {
+                        "alive": alive,
+                        "total": len(providers),
+                        "detail": {k: v.get("status", "?") for k, v in providers.items()},
+                    }
+                    executed += 1
+                    self._log("F5", f"providers: {alive}/{len(providers)} alive")
+            except Exception as e:
+                self._log("F5", f"provider discovery failed: {e} (non-blocking)")
+
+        # 3e. Brand config -- MOVED to F3 INJECT (pure Python, single source of truth)
+        # F5 reads from F3 state if needed:
+        if self.state.knowledge.get("brand_context"):
+            tool_results["tool_outputs"]["brand"] = self.state.knowledge["brand_context"]
+            executed += 1
+            self._log("F5", "brand context: from F3 (already loaded)")
+
+        # 3f. Sin lens -- MOVED to F3 INJECT (pure Python, single source of truth)
+        if self.state.knowledge.get("sin_lens"):
+            tool_results["tool_outputs"]["sin"] = self.state.knowledge["sin_lens"]
+            executed += 1
+            self._log("F5", "sin lens: from F3 (already loaded)")
+
+        # --- Phase 4: Build enrichment text for F6 injection ---
+        if tool_results["tool_outputs"]:
+            enrichments = []
+            for tool_name, output in tool_results["tool_outputs"].items():
+                if tool_name == "retriever" and isinstance(output, list):
+                    lines = [f"### Similar Artifacts ({len(output)} matches)"]
+                    for item in output[:3]:
+                        lines.append(
+                            f"- **{item.get('id', '?')}** ({item.get('kind', '?')}) "
+                            f"score={item.get('score', 0):.2f} -- {item.get('tldr', '')[:120]}"
+                        )
+                    enrichments.append("\n".join(lines))
+                elif tool_name == "query" and isinstance(output, list):
+                    lines = [f"### Related Builders ({len(output)} discovered)"]
+                    for item in output[:3]:
+                        lines.append(
+                            f"- **{item.get('builder_id', item.get('id', '?'))}** "
+                            f"score={item.get('score', 0):.2f}"
+                        )
+                    enrichments.append("\n".join(lines))
+                elif tool_name == "memory" and isinstance(output, str):
+                    enrichments.append(f"### Build Memory\n{output[:2000]}")
+                elif tool_name == "providers" and isinstance(output, dict):
+                    enrichments.append(
+                        f"### Provider Health\n"
+                        f"{output.get('alive', 0)}/{output.get('total', 0)} providers alive"
+                    )
+                elif tool_name == "brand" and isinstance(output, dict):
+                    brand_name = output.get("identity", {}).get("name", "?")
+                    enrichments.append(f"### Brand Context\nBrand: {brand_name}")
+                elif tool_name == "sin" and isinstance(output, dict):
+                    enrichments.append(
+                        f"### Sin Lens\n"
+                        f"Virtue: {output.get('virtue', '?')} | "
+                        f"Tagline: {output.get('tagline', '?')}"
+                    )
+                else:
+                    # Generic fallback
+                    enrichments.append(
+                        f"### {tool_name}\n{json.dumps(output, indent=2, default=str)[:2000]}"
+                    )
+
+            tool_results["enrichment_text"] = "\n\n".join(enrichments)
 
         self.state.tool_results = tool_results
         self._log(
             "F5",
-            f"tools: {len(tool_results['tools_available'])}, existing: {len(existing)}",
+            f"tools: {len(tool_results['tools_available'])}, "
+            f"existing: {len(existing)}, "
+            f"executed: {executed}, "
+            f"enrichments: {len(tool_results['tool_outputs'])}",
         )
 
     # -- F6 PRODUCE ---------------------------------------------------------
@@ -620,6 +960,35 @@ class EightFRunner:
     def f6_produce(self, retry_feedback: str = "") -> None:
         """Compose STRUCTURED prompt with labeled sections -> state.artifact."""
         sections = []
+
+        # 0. PROMPT LAYERS (from F3 -- injected FIRST, before everything)
+        k = self.state.knowledge
+        pl = k.get("prompt_layers", {})
+        if pl.get("identity"):
+            sections.append(f"# CEX AGENT IDENTITY\n\n{pl['identity']}")
+        if k.get("sin_lens"):
+            sin = k["sin_lens"]
+            sections.append(
+                f"# IDENTITY LENS\n\n"
+                f"Virtue: {sin.get('virtue', '?')} | "
+                f"Tagline: {sin.get('tagline', '?')}"
+            )
+        if pl.get("guardrails"):
+            sections.append(f"# GUARDRAILS\n\n{pl['guardrails']}")
+
+        # 0b. BRAND CONTEXT (from F3)
+        brand = k.get("brand_context")
+        if brand and isinstance(brand, dict):
+            brand_lines = [f"- {bk}: {bv}" for bk, bv in sorted(brand.items())
+                           if not bk.startswith(("identity.", "archetype.", "voice.",
+                                                 "audience.", "visual.", "positioning.",
+                                                 "monetization."))]
+            if brand_lines:
+                sections.append("# BRAND CONTEXT\n\n" + "\n".join(brand_lines))
+
+        # 0c. SHARED SKILLS (from F3)
+        if k.get("shared_skills"):
+            sections.append(f"# SHARED SKILLS\n\n{k['shared_skills']}")
 
         # 1. IDENTITY (from F2)
         sp = self.state.identity.get("system_prompt", "")
@@ -697,6 +1066,11 @@ class EightFRunner:
                 )
             sections.append("# TOOLS\n\n" + "\n".join(tool_lines))
 
+        # 5b-extra. F5 AUTO-RETRIEVED CONTEXT (tool execution outputs)
+        enrichment = tr.get("enrichment_text", "")
+        if enrichment:
+            sections.append("# AUTO-RETRIEVED CONTEXT (F5 CALL)\n\n" + enrichment)
+
         # 5c. OPTIMIZER HINTS (from F2 prompt_optimizer)
         hints = self.state.identity.get("optimizer_hints", [])
         if hints:
@@ -763,6 +1137,16 @@ class EightFRunner:
             response = execute_prompt(prompt)
             self.state.artifact = response
             self._log("F6", f"LLM response received ({len(response)} chars)")
+
+            # --- T04b: Token budget output check ---
+            if getattr(self.state, "token_budget", None):
+                try:
+                    out_tokens = count_tokens(response) if _TOKEN_BUDGET_AVAILABLE else len(response.split())
+                    limit = self.state.token_budget.output_limit
+                    if limit and out_tokens > limit:
+                        self._log("F6", f"WARN: output {out_tokens} tokens exceeds budget {limit}")
+                except Exception:
+                    pass
 
     # -- helpers: clean LLM output ------------------------------------------
 
@@ -845,7 +1229,7 @@ class EightFRunner:
             _gate("H06", "body <= max_bytes", body_size <= int(max_bytes) if max_bytes else True,
                   f"H06: Body {body_size} bytes > max {max_bytes} bytes")
 
-            # Output formatter validation (jsonschema-based, soft — non-blocking)
+            # Output formatter validation (jsonschema-based, soft -- non-blocking)
             soft_warnings: list[str] = []
             if _FORMATTER_AVAILABLE and fm:
                 try:
@@ -951,7 +1335,7 @@ class EightFRunner:
                 filename = f"{self.state.pillar.lower()}_{self.state.kind}_{slug}.md"
             out_path = out_dir / filename
 
-            # Clean code fences from LLM output (safety net — F7 already cleans)
+            # Clean code fences from LLM output (safety net -- F7 already cleans)
             art = self._clean_llm_output(self.state.artifact)
             self.state.artifact = art
             out_path.write_text(art, encoding="utf-8")
@@ -962,8 +1346,6 @@ class EightFRunner:
             try:
                 compile_script = CEX_ROOT / "_tools" / "cex_compile.py"
                 if compile_script.exists():
-                    import subprocess
-
                     subprocess.run(
                         [sys.executable, str(compile_script), str(out_path)],
                         capture_output=True,
@@ -1028,12 +1410,42 @@ class EightFRunner:
                 except Exception as e:
                     self._log("F8", f"quality monitor skipped: {e}")
 
+            # NotebookLM auto-upload for knowledge_card artifacts
+            notebooklm_uploaded = False
+            if committed and self.state.kind == "knowledge_card":
+                try:
+                    nlm_config_path = CEX_ROOT / ".cex" / "config" / "notebooklm_notebooks.yaml"
+                    if nlm_config_path.exists():
+                        nlm_cfg = yaml.safe_load(
+                            nlm_config_path.read_text(encoding="utf-8")
+                        ) or {}
+                        if nlm_cfg.get("publish_mode") == "auto":
+                            nlm_tool = CEX_ROOT / "_tools" / "cex_notebooklm.py"
+                            if nlm_tool.exists():
+                                nlm_result = subprocess.run(
+                                    [sys.executable, str(nlm_tool),
+                                     "--upload", str(out_path)],
+                                    capture_output=True, text=True, timeout=120,
+                                )
+                                if nlm_result.returncode == 0:
+                                    notebooklm_uploaded = True
+                                    self._log("F8", "NotebookLM auto-upload OK")
+                                else:
+                                    self._log(
+                                        "F8",
+                                        "NotebookLM upload failed: "
+                                        + nlm_result.stderr[:200],
+                                    )
+                except Exception as e:
+                    self._log("F8", f"NotebookLM upload skipped: {e}")
+
             self.state.result = {
                 "path": str(out_path),
                 "compiled": compiled,
                 "indexed": indexed,
                 "committed": committed,
                 "monitored": monitored,
+                "notebooklm": notebooklm_uploaded,
                 "mode": "execute",
             }
 

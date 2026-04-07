@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for mental_model (P02)
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Mental Model"
+version: "1.0.0"
+author: n03_builder
+tags: [mental_model, builder, examples]
+tldr: "Golden and anti-examples for mental model construction, demonstrating ideal structure and common pitfalls."
+domain: "mental model construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: mental_model

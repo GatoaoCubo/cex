@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, llm-function, produce, chain, workflow, dag, meta-prompt, completion]
 tldr: "PRODUCE gera output final (texto, codigo, dados) via 5 tipos — a funcao de EXECUCAO do pipeline LLM"
 when_to_use: "Entender como LLMs materializam output e a fronteira entre PRODUCE (output externo) e REASON (pensamento interno)"

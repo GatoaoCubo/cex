@@ -8,11 +8,11 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.1
 tags: [cex, lp08, architecture, patterns, laws, multi-agent, scaling]
 tldr: "P08 define 5 meta-artefatos que governam estrutura: agent_card, pattern, law, diagram, component_map"
 when_to_use: "Entender como sistemas LLM escalam via arquitetura formal e meta-artefatos"
-keywords: [architecture, agent_node, pattern, law, diagram, component-map]
+keywords: [architecture, agent_group, pattern, law, diagram, component-map]
 long_tails:
   - "Como escalar sistema multi-agente LLM com arquitetura"
   - "Qual a diferenca entre pattern e law no CEX"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp07_evals
   related: [p01_kc_cex_lp06_schema]
-density_score: null
+density_score: 1.0
 data_source: "https://arxiv.org/abs/2308.08155"
 ---
 
@@ -63,7 +63,7 @@ types: 5 | function: BECOME + GOVERN | layer: spec + governance
 ## Regras de Ouro
 
 - SEMPRE documentar WHY de cada law (nao so WHAT)
-- NUNCA criar agent_node sem agent_card formal
+- NUNCA criar agent_group sem agent_card formal
 - SEMPRE atualizar component_map ao adicionar componente
 - NUNCA tratar pattern como lei (pattern eh recomendacao)
 - SEMPRE separar diagram (visual) de component_map (dados)
@@ -108,3 +108,10 @@ types: 5 | function: BECOME + GOVERN | layer: spec + governance
 - source: https://arxiv.org/abs/2303.17760
 - related: p01_kc_cex_lp07_evals
 - related: p01_kc_cex_lp06_schema
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

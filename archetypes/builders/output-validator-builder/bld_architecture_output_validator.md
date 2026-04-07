@@ -4,6 +4,16 @@ id: bld_architecture_output_validator
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of output_validator — inventory, dependencies, and architectural position
+quality: 9.2
+title: "Architecture Output Validator"
+version: "1.0.0"
+author: n03_builder
+tags: [output_validator, builder, examples]
+tldr: "Golden and anti-examples for output validator construction, demonstrating ideal structure and common pitfalls."
+domain: "output validator construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -44,3 +54,23 @@ purpose: Component map of output_validator — inventory, dependencies, and arch
 | spec | checks, on_fail | Define the artifact's core parameters |
 | optional | retry_count, fix_prompt | Extend with recommended fields |
 | external | constraint_spec, validation_schema, quality_gate | Upstream/downstream connections |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_architecture_output_validator
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-architecture-output-validator.md
+```

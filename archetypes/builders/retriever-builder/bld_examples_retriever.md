@@ -7,9 +7,11 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.1
 tags: [examples, retriever, P07, RAG, vector-search, hybrid-search]
 density_score: 1.0
+domain: "examples artifact construction"
+title: "Examples Retriever"
 ---
 # Examples: retriever-builder
 
@@ -100,3 +102,18 @@ Searches documents using vectors.
 - H08: similarity_metric absent
 - S01-S12: ~1.2/10 — no strategy, no config, no integration
 - Body 1 line — missing Overview, Search Strategy, Configuration, Integration
+
+## Cross-References
+
+- **Pillar**: P07 (Evals)
+- **Kind**: `examples`
+- **Artifact ID**: `bld_examples_retriever`
+- **Tags**: [examples, retriever, P07, RAG, vector-search, hybrid-search]
+
+## Example Registry
+
+| Aspect | Detail |
+|--------|--------|
+| Purpose | Few-shot exemplar for builder prompts |
+| Injection | Loaded by `cex_skill_loader.py` at F3 |
+| Quality | Must score 9.0+ to serve as exemplar |

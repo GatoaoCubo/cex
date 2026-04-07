@@ -14,6 +14,8 @@ depends_on: spec_n02_visual_frontend_engineer
 tags: [spec, n02, schemas, output, quality-gates, html, tailwind, a11y]
 tldr: Waves 3-4 do N02 -- schemas visuais, output templates HTML, quality gates, orchestration.
 density_score: 0.95
+quality: 9.0
+updated: "2026-04-07"
 ---
 
 # Spec N02 Part 2 -- Schemas, Output, Quality, Orchestration

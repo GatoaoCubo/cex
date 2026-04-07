@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: instruction
-quality: 8.9
+quality: 9.1
 tags: [instruction, P03, INJECT, kind-kc]
 tldr: "Step-by-step execution recipe for agents or pipelines, bridging intent and action"
 when_to_use: "Building, reviewing, or reasoning about instruction artifacts"
 keywords: [steps, execution-recipe, how-to]
 feeds_kinds: [instruction]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Instruction

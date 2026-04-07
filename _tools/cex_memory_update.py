@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""CEX Memory Update — Dynamic builder memory with decay, prune, and append.
+# -*- coding: utf-8 -*-
+"""CEX Memory Update -- Dynamic builder memory with decay, prune, and append.
 
 Called AFTER builder execution to record new observations and maintain
 memory hygiene (decay old observations, prune low-confidence entries).
 
 Decay rates by type:
-  feedback:  0.00 (permanent — corrective knowledge)
+  feedback:  0.00 (permanent -- corrective knowledge)
   user:      0.02 (slow decay)
   reference: 0.03 (moderate decay)
-  project:   0.05 (fast decay — project context changes)
+  project:   0.05 (fast decay -- project context changes)
 
 Usage:
     python cex_memory_update.py \
@@ -39,12 +40,24 @@ from cex_shared import parse_frontmatter
 CEX_ROOT = Path(__file__).resolve().parent.parent
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
 
+# --- T05: MemoryType integration ---
+try:
+    from cex_memory_types import MemoryType, should_save, parse_memory_type
+    _HAS_MEMORY_TYPES = True
+except ImportError:
+    _HAS_MEMORY_TYPES = False
+
 # Decay rates per observation type (applied per update cycle)
+# T05: aligned with MemoryType enum decay rates
 DECAY_RATES = {
-    "feedback": 0.00,   # permanent
+    "feedback": 0.00,   # permanent (= MemoryType.CORRECTION)
+    "correction": 0.00, # T05: alias
     "user": 0.02,
+    "preference": 0.01, # T05: from MemoryType
     "reference": 0.03,
+    "convention": 0.02, # T05: from MemoryType
     "project": 0.05,
+    "context": 0.05,    # T05: from MemoryType
 }
 
 # Thresholds
@@ -116,8 +129,19 @@ def append_observation(
 ) -> tuple[str, dict]:
     """Append a new observation to the memory file.
 
-    Updates frontmatter metadata and appends to body.
+    T05: Uses MemoryType classifier to auto-categorize and filter duplicates.
     """
+    # --- T05: Auto-classify + dedup ---
+    if _HAS_MEMORY_TYPES:
+        try:
+            save_ok, classified = should_save(observation, content)
+            if not save_ok and "duplicate" in classified.lower():
+                return content, fm  # skip only true duplicates
+            # Auto-classify type if not explicitly set
+            if save_ok and (not obs_type or obs_type == "project"):
+                obs_type = classified  # auto-classified type
+        except Exception:
+            pass  # fallback to raw obs_type
     timestamp = time.strftime("%Y-%m-%dT%H:%M:%S")
 
     # Update frontmatter metadata
@@ -273,7 +297,7 @@ def update_builder_memory(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Memory Update — dynamic builder memory")
+    parser = argparse.ArgumentParser(description="CEX Memory Update -- dynamic builder memory")
     parser.add_argument("--builder", "-b", required=True, help="Builder ID (e.g. agent-builder)")
     parser.add_argument("--type", "-t", required=True,
                         choices=["feedback", "user", "reference", "project"],

@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-audit
-quality: 8.9
+quality: 9.1
+updated: 2026-04-07
 tags: [prompt, brand, audit, consistency, n06]
 tldr: "Scores brand consistency across 6 dimensions: archetype alignment (0.25), voice consistency (0.20), visual coherence (0.20), positioning clarity (0.15), narrative integrity (0.10), config completeness (0.10). Pass = 0.85."
 density_score: 0.93
+axioms:
+  - "ALWAYS run after brand propagation — audit measures coherence AFTER distribution."
+  - "Pass = 0.85. Below 0.70 requires full brand re-alignment."
+linked_artifacts:
+  primary: n06_schema_brand_audit
+  related: [n06_output_brand_config, p01_kc_brand_voice_systems, p07_qg_commercial]
 ---
 
 # Brand Audit Prompt

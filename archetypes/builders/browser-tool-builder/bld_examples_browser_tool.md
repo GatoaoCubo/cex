@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of browser_tool artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Browser Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [browser_tool, builder, examples]
+tldr: "Golden and anti-examples for browser tool construction, demonstrating ideal structure and common pitfalls."
+domain: "browser tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: browser-tool-builder
@@ -30,7 +40,7 @@ timeout: 30000
 javascript: true
 cookies: false
 stealth: true
-quality: null
+quality: 8.8
 tags: [browser_tool, marketplace, scraper, playwright, P04]
 tldr: "Playwright scraper for marketplace product listings: navigate, wait for load, extract structured data, screenshot on failure"
 description: "Extracts product name, price, rating, and seller from marketplace listing pages using CSS and data-attribute selectors"

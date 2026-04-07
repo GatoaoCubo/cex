@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for output_validator
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Output Validator"
+version: "1.0.0"
+author: n03_builder
+tags: [output_validator, builder, examples]
+tldr: "Golden and anti-examples for output validator construction, demonstrating ideal structure and common pitfalls."
+domain: "output validator construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: output_validator

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for runtime_state production — atomic searchable facts
 sources: runtime-state-builder MANIFEST.md + SCHEMA.md, state machine theory, BDI architecture
+quality: 9.1
+title: "Knowledge Card Runtime State"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_state, builder, examples]
+tldr: "Golden and anti-examples for runtime state construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: runtime_state

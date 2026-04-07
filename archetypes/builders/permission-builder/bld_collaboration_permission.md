@@ -5,12 +5,22 @@ pillar: P09
 llm_function: COLLABORATE
 purpose: How permission-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Permission"
+version: "1.0.0"
+author: n03_builder
+tags: [permission, builder, examples]
+tldr: "Golden and anti-examples for permission construction, demonstrating ideal structure and common pitfalls."
+domain: "permission construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: permission-builder
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "who can read/write/execute what, and how is access inherited?"
-I define RBAC/ABAC/ACL rules, role hierarchies, allow/deny lists, and audit trails. I do NOT define safety boundaries (guardrail-builder), operational laws (law-builder), or on/off feature toggles (feature-flag-builder).
+I define RBAC/ABAC/ACL rules, role hierarchies, allow/deny lists, and audit trails. I do NOT define safety boundaries (guardrail-builder), operational laws (invariant-builder), or on/off feature toggles (feature-flag-builder).
 ## Crew Compositions
 ### Crew: "System Configuration Bootstrap"
 ```
@@ -28,7 +38,7 @@ I define RBAC/ABAC/ACL rules, role hierarchies, allow/deny lists, and audit trai
 ```
   1. plugin-builder       -> "defines plugin API surface and required permissions"
   2. permission-builder   -> "grants minimum necessary access per plugin role"
-  3. law-builder          -> "encodes non-negotiable access rules that override all grants"
+  3. invariant-builder          -> "encodes non-negotiable access rules that override all grants"
 ```
 ## Handoff Protocol
 ### I Receive
@@ -47,6 +57,6 @@ I define RBAC/ABAC/ACL rules, role hierarchies, allow/deny lists, and audit trai
 | Builder | Why |
 |---------|-----|
 | guardrail-builder | adds safety boundaries on top of permission grants |
-| law-builder | may encode permission rules as inviolable system laws |
+| invariant-builder | may encode permission rules as inviolable system laws |
 | hook-builder | implements permission enforcement in event interception |
 | env-config-builder | references permission rules for sensitive variable access |

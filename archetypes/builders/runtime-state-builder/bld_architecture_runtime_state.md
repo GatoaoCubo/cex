@@ -4,6 +4,16 @@ id: bld_architecture_runtime_state
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of runtime_state — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Runtime State"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_state, builder, examples]
+tldr: "Golden and anti-examples for runtime state construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: runtime_state in the CEX
@@ -38,7 +48,7 @@ runtime_state   --signals-->      state_update
 | Contains routing rules, priorities, and heuristics that evolve | An ephemeral snapshot discarded after session (session_state P10) |
 | Persists within or across sessions based on scope | A permanent record of past experience (learning_record P10) |
 | Updated by state transitions triggered at runtime | A static configuration loaded once at boot |
-| Scoped to one agent with specific update conditions | A search index or vector store (brain_index P01) |
+| Scoped to one agent with specific update conditions | A search index or vector store (knowledge_index P01) |
 | Reflects current operational intelligence | A historical changelog |
 ## Layer Map
 | Layer | Components | Purpose |

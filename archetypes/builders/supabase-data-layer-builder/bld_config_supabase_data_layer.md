@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.8
+quality: 9.0
 tags: [builder, supabase, data-layer, config, defaults]
 density_score: 0.89
 effort: high
@@ -75,7 +75,7 @@ defaults:
 | saas | pg_cron | users, orgs, subscriptions, features | documents | feature flags |
 | marketplace | pgvector, pg_cron, pg_net | sellers, listings, transactions | listing-images | bid updates |
 | content | pgvector | posts, comments, media, feeds | content-media | live comments |
-| custom | (per config) | (per config) | (per config) | (per config) |
+| costm | (per config) | (per config) | (per config) | (per config) |
 
 ## Environment Config
 ```yaml

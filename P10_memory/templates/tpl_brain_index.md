@@ -1,10 +1,10 @@
 ---
 # TEMPLATE: Brain Index (P10 Memory)
-# Valide contra P10_memory/_schema.yaml (types.brain_index)
+# Valide contra P10_memory/_schema.yaml (types.knowledge_index)
 # Max 3072 bytes
 
 id: p10_bi_{{INDEX_SLUG}}
-kind: brain_index
+kind: knowledge_index
 pillar: P10
 title: "Brain Index: {{INDEX_NAME}}"
 quality: {{QUALITY_8_TO_10}}

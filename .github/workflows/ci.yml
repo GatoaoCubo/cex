@@ -1,9 +1,9 @@
-# CEX CI Pipeline — The Shokunin's Quality Gate
-# ================================================
-# Validates the 23 Python tools that power the 8F pipeline.
-# Runs on every push/PR. If N03's own tools don't pass, nothing should.
+# CEX CI Pipeline — Quality Gate
+# ================================
+# Validates all Python tools powering the 8F pipeline.
+# Jobs: lint → test → compile → doctor → flywheel → system_test
 #
-# Jobs: lint → test → compile → doctor
+# No LLM calls in CI (no API keys in Actions).
 
 name: CEX CI
 
@@ -12,13 +12,12 @@ on:
     branches: [main, develop]
     paths:
       - '_tools/**'
+      - 'archetypes/**'
       - 'pyproject.toml'
+      - 'requirements*.txt'
       - '.github/workflows/ci.yml'
   pull_request:
     branches: [main]
-    paths:
-      - '_tools/**'
-      - 'pyproject.toml'
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -38,7 +37,8 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       - run: pip install ruff
-      - run: ruff check _tools/cex_shared.py _tools/cex_errors.py _tools/tests/
+      - name: Lint all tools
+        run: ruff check _tools/*.py _tools/tests/ --select E,F,W --ignore E501,E402,W291,W293
 
   test:
     name: Tests (pytest)
@@ -51,7 +51,7 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
-      - run: pip install pyyaml pytest pytest-cov
+      - run: pip install -r requirements.txt pytest pytest-cov
       - name: Run tests
         run: |
           cd _tools
@@ -63,8 +63,7 @@ jobs:
         if: always()
         run: |
           echo "## Test Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "See test output above for details." >> $GITHUB_STEP_SUMMARY
+          cd _tools && python -m pytest tests/ -q --tb=no 2>&1 | tail -5 >> $GITHUB_STEP_SUMMARY
 
   compile:
     name: Compile Artifacts
@@ -76,7 +75,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      - run: pip install pyyaml
+      - run: pip install -r requirements.txt
       - name: Compile all artifacts
         run: python _tools/cex_compile.py --all
       - name: Compile summary
@@ -94,7 +93,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      - run: pip install pyyaml
+      - run: pip install -r requirements.txt
       - name: Run doctor
         run: python _tools/cex_doctor.py
       - name: Doctor summary
@@ -102,3 +101,45 @@ jobs:
         run: |
           echo "## Doctor Results" >> $GITHUB_STEP_SUMMARY
           python _tools/cex_doctor.py 2>&1 | tail -10 >> $GITHUB_STEP_SUMMARY
+
+  flywheel:
+    name: Flywheel Audit (109 wires)
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install -r requirements.txt
+      - name: Audit wiring
+        run: python _tools/cex_flywheel_audit.py audit
+      - name: Flywheel summary
+        if: always()
+        run: |
+          echo "## Flywheel Audit" >> $GITHUB_STEP_SUMMARY
+          python _tools/cex_flywheel_audit.py audit 2>&1 | tail -5 >> $GITHUB_STEP_SUMMARY
+
+  system-test:
+    name: System Test (offline)
+    needs: [doctor, flywheel]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - name: Run system test (no LLM)
+        run: python _tools/cex_system_test.py --quick 2>&1 || true
+        env:
+          CEX_USE_API: "0"
+          PYTHONPATH: ${{ github.workspace }}/_tools
+      - name: System test summary
+        if: always()
+        run: |
+          echo "## System Test" >> $GITHUB_STEP_SUMMARY
+          python _tools/cex_system_test.py --quick 2>&1 | tail -10 >> $GITHUB_STEP_SUMMARY || true

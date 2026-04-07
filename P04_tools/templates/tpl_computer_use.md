@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Computer Use"
 tags: [template, computer-use, gui, automation, vision]
 tldr: "Configures an LLM-driven computer use tool for GUI automation. Defines viewport, action space, screenshot frequency, and safety boundaries."
-quality: 8.8
+quality: 9.0
+domain: "tool integration"
+density_score: 0.84
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
 ---
 
 # Computer Use: [NAME]
@@ -17,7 +22,7 @@ quality: 8.8
 ## Configuration
 ```yaml
 provider: [anthropic | openai]
-model: [claude-sonnet-4-20250514 | gpt-4o]
+model: [claude-sonnet-4-6 | gpt-4o]
 viewport: { width: 1280, height: 800 }
 screenshot_interval: [before_each_action | on_change | manual]
 max_actions: [50]

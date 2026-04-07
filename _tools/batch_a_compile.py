@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BATCH_A_DIRETORIOS — compile scraped directory data into CRM JSON."""
+"""BATCH_A_DIRETORIOS -- compile scraped directory data into CRM JSON."""
 import json
 import re
 from collections import Counter
@@ -32,7 +32,7 @@ def classify_segment(name, category=''):
         return 'hotel_pet'
     if any(w in combined for w in ['adestram', 'dog walk']):
         return 'adestramento'
-    if any(w in combined for w in ['avicultura', 'agro', 'rural', 'racao', 'racoes', 'ração', 'rações']):
+    if any(w in combined for w in ['avicultura', 'agro', 'rural', 'racao', 'racoes', 'racao', 'racoes']):
         return 'agropecuaria'
     if any(w in combined for w in ['ong', 'cidadania animal', 'apaa']):
         return 'ong'

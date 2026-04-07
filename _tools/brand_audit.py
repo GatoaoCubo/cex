@@ -1,4 +1,5 @@
-"""brand_audit.py — Score brand consistency across CEX artifacts.
+# -*- coding: utf-8 -*-
+"""brand_audit.py -- Score brand consistency across CEX artifacts.
 
 Scans all artifacts referencing brand variables and scores consistency
 across 6 dimensions. Uses brand_config.yaml as reference.
@@ -280,7 +281,7 @@ def main():
 
     config = load_brand_config(Path(args.config))
     if not config:
-        print(f"❌ No brand_config at {args.config}")
+        print(f"[FAIL] No brand_config at {args.config}")
         sys.exit(1)
 
     result = audit(config)
@@ -292,20 +293,20 @@ def main():
             result.pop("references", None)
         print(json.dumps(result, indent=2))
     else:
-        print(f"🔍 Brand Audit: {result['brand']}")
-        print(f"   Overall: {result['overall_score']:.3f} — {result['rating']}")
+        print(f"[AUDIT] Brand Audit: {result['brand']}")
+        print(f"   Overall: {result['overall_score']:.3f} -- {result['rating']}")
         print()
         for dim, info in result["dimensions"].items():
             w = WEIGHTS[dim]
-            emoji = "✅" if info["score"] >= 0.85 else ("⚠️" if info["score"] >= 0.5 else "❌")
-            print(f"  {emoji} {dim} (×{w}): {info['score']:.2f}")
+            emoji = "[OK]" if info["score"] >= 0.85 else ("[WARN]" if info["score"] >= 0.5 else "[FAIL]")
+            print(f"  {emoji} {dim} (x{w}): {info['score']:.2f}")
             if args.verbose and info["issues"]:
                 for issue in info["issues"]:
-                    print(f"     → {issue}")
+                    print(f"     -> {issue}")
 
         refs = result.get("references", {})
         if refs:
-            print(f"\n  📁 {len(refs)} files reference {{{{BRAND_*}}}} variables")
+            print(f"\n  [REF] {len(refs)} files reference {{{{BRAND_*}}}} variables")
 
 
 if __name__ == "__main__":

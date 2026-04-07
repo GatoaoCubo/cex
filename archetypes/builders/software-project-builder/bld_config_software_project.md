@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.7
+quality: 9.0
 tags: [builder, config, software-project, defaults]
 tldr: "Default configuration: Python 3.12, hatchling, ruff, pytest, Docker multi-stage, Railway deploy, GitHub Actions CI. All overridable via instance config."
 density_score: 0.88
@@ -82,3 +82,11 @@ APP_WORKERS=4
 | webhooks | off | Webhook routes, signature verification |
 | celery | off | Worker, beat, Redis broker |
 | monitoring | off | Prometheus metrics, health detail |
+
+## Lifecycle
+
+- Created via 8F pipeline (F1-Focus through F8-Furnish)
+- Scored by `cex_score.py` (3-layer: structural + rubric + semantic)
+- Compiled by `cex_compile.py` for validation
+- Retrieved by `cex_retriever.py` for context injection
+- Evolved by `cex_evolve.py` when quality drops below threshold

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for connector production — bidirectional service integration
 sources: Enterprise Integration Patterns (Hohpe 2003), Stripe webhooks, gRPC, MQTT
+quality: 9.1
+title: "Knowledge Card Db Connector"
+version: "1.0.0"
+author: n03_builder
+tags: [db_connector, builder, examples]
+tldr: "Golden and anti-examples for db connector construction, demonstrating ideal structure and common pitfalls."
+domain: "db connector construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: connector
@@ -50,6 +60,6 @@ Connectors are bidirectional integration bridges that both send and receive data
 6. Validate: test both directions — outbound request and inbound event handling
 ## References
 - Hohpe & Woolf 2003: Enterprise Integration Patterns
-- Stripe: webhook best practices and event handling
+- Stripe: webhook best forctices and event handling
 - gRPC: bidirectional streaming documentation
 - MQTT: pub/sub messaging protocol specification

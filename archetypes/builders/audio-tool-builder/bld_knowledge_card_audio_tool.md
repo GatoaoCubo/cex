@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for audio_tool production — audio processing tool specification
 sources: OpenAI Whisper docs, ElevenLabs API, Google Speech-to-Text, Azure Cognitive Speech, Deepgram docs, AssemblyAI docs
+quality: 9.1
+title: "Knowledge Card Audio Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [audio_tool, builder, examples]
+tldr: "Golden and anti-examples for audio tool construction, demonstrating ideal structure and common pitfalls."
+domain: "audio tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: audio_tool

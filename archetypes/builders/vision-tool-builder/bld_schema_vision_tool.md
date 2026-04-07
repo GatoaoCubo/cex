@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for vision_tool
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Vision Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [vision_tool, builder, examples]
+tldr: "Golden and anti-examples for vision tool construction, demonstrating ideal structure and common pitfalls."
+domain: "vision tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: vision_tool

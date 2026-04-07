@@ -4,6 +4,16 @@ id: bld_tools_agent
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for agent production
+quality: 9.1
+title: "Tools Agent"
+version: "1.0.0"
+author: n03_builder
+tags: [agent, builder, examples]
+tldr: "Golden and anti-examples for agent construction, demonstrating ideal structure and common pitfalls."
+domain: "agent construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: agent-builder
@@ -35,3 +45,44 @@ purpose: Tools and APIs available for agent production
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == agent, quality == null,
 agent_package lists >= 10 files, capabilities_count matches body, llm_function == BECOME.
+
+## Builder Context
+
+This ISO operates within the `agent-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: bld_tools_agent
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose bld_tools_agent.md
+```

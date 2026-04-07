@@ -17,7 +17,7 @@ capabilities:
 output_format: json
 providers:
   - openai_vision
-quality: 8.6
+quality: 9.0
 tags: [vision_tool, gpt4v, ocr, image_analysis]
 tldr: "GPT-4V vision tool for image description, OCR, and object detection via OpenAI API"
 description: "Analyzes images using GPT-4V to extract text, describe content, and detect objects"
@@ -26,6 +26,9 @@ supported_formats: [png, jpg, jpeg, webp, gif]
 confidence_threshold: 0.8
 batch_support: false
 max_bytes_per_image: 20971520
+domain: "tool integration"
+title: "Vision Tool Gpt4V"
+density_score: 0.9
 ---
 
 # GPT-4V Image Analyzer
@@ -56,3 +59,28 @@ Output: `{"objects": [{"label": "string", "bbox": [x,y,w,h], "confidence": float
 
 ## Output Format
 JSON envelope: `{"capability": "string", "results": {...}, "model": "gpt-4-vision-preview"}`
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `vision tool`
+- **Artifact ID**: `p04_vision_gpt4v`
+- **Tags**: [vision_tool, gpt4v, ocr, image_analysis]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `vision tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: vision_tool
+pillar: P04
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

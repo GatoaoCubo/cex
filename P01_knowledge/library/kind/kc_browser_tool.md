@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: browser_tool
-quality: 9.0
+quality: 9.1
 tags: [browser_tool, P04, CALL, kind-kc]
 tldr: "DOM-level browser automation for navigation, interaction, scraping, and screenshot capture via Playwright or CDP"
 when_to_use: "Building, reviewing, or reasoning about browser_tool artifacts"

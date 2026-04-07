@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How few-shot-example-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Few Shot Example"
+version: "1.0.0"
+author: n03_builder
+tags: [few_shot_example, builder, examples]
+tldr: "Golden and anti-examples for few shot example construction, demonstrating ideal structure and common pitfalls."
+domain: "few shot example construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: few-shot-example-builder

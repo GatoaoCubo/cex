@@ -1,0 +1,16 @@
+# CEX LLM Provider Dependencies (optional)
+# Install: pip install -r requirements-llm.txt
+# Only needed if you want to run --execute mode (actual LLM calls).
+# Without these, --dry-run and all non-LLM tools work fine.
+
+# Anthropic (Claude) — N02, N03, N05, N06, N07
+anthropic>=0.39.0
+
+# OpenAI (GPT) — fallback provider
+openai>=1.0
+
+# Google (Gemini) — N01, N04
+google-genai>=1.0
+
+# Local models (Ollama) — fallback, zero cost
+# No pip package needed. Install Ollama: https://ollama.ai

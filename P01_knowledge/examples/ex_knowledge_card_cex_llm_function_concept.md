@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.1
 tags: [cex, llm-function, pipeline, execution-sequence, become-collaborate]
 tldr: "8 funcoes LLM (BECOME a COLLABORATE) descrevem o pipeline real de execucao -- sequencia, nao categorias"
 when_to_use: "Entender como LLMs processam artefatos e por que a sequencia importa"
@@ -28,7 +28,7 @@ data_source: "https://arxiv.org/abs/2308.00352"
 
 ## Summary
 
-Funcao LLM eh o que o modelo FAZ com um artefato, nao o que o artefato EH. As 8 funcoes (BECOME, INJECT, REASON, CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE) formam o pipeline real de execucao de qualquer sistema LLM. Um prompt simples executa 1-2 funcoes. Um agente executa 4-5. Um agent_node com lifecycle completo executa todas as 8. A diferenca eh de completude, nao de natureza.
+Funcao LLM eh o que o modelo FAZ com um artefato, nao o que o artefato EH. As 8 funcoes (BECOME, INJECT, REASON, CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE) formam o pipeline real de execucao de qualquer sistema LLM. Um prompt simples executa 1-2 funcoes. Um agente executa 4-5. Um agent_group com lifecycle completo executa todas as 8. A diferenca eh de completude, nao de natureza.
 
 ## Spec
 
@@ -73,7 +73,7 @@ PIPELINE = [
 ]
 # prompt simples: BECOME(implicit) + PRODUCE
 # agente: BECOME + INJECT + REASON + CALL + PRODUCE
-# agent_node: todas as 8 funcoes
+# agent_group: todas as 8 funcoes
 ```
 
 ## Anti-Patterns

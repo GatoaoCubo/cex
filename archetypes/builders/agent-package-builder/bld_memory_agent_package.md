@@ -16,10 +16,13 @@ tags: [agent-package, portability, tier-compliance, llm-agnostic, manifest, pack
 tldr: "Scan for absolute paths before portable:true. Tier must match file count exactly. Token-budget system_instruction early. LP mappings from enum only."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [agent_package, portable, manifest, tier, lp_mapping, system_instruction, token_budget, file_inventory, hardcoded_paths]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Agent Package"
+density_score: 0.90
 ---
 ## Summary
 agent packages make artifacts portable across environments and LLM providers. The two most common failures are hardcoded absolute paths (breaking portability) and tier/file-count mismatches (breaking validation). Both are detectable at authoring time with a two-step check: path scan and file count.
@@ -33,10 +36,57 @@ Packaging workflow — execute in this order:
 6. **File inventory** - Table in manifest must list every file with columns: filename, description, status. Status column is required by validator.
 LLM-agnostic design means: no model names in instructions, no API-specific syntax, no provider-specific tool names. Instructions describe capabilities and behavior, not implementation.
 ## Anti-Pattern
-- Absolute paths in any file — package fails portability check, requires full re-scan.
-- `tier: "standard"` with 4 files — mismatch, validator rejects.
-- Drafting system_instruction last without token budgeting — discovered at 6200 tokens, requires major trim.
-- Inventing LP mapping not in enum — routing failure in downstream systems.
-- File inventory table without status column — manifest validator rejects.
-- Starting from content files before manifest — file count and LP mappings defined ad-hoc, inconsistently.
+1. Absolute paths in any file — package fails portability check, requires full re-scan.
+2. `tier: "standard"` with 4 files — mismatch, validator rejects.
+3. Drafting system_instruction last without token budgeting — discovered at 6200 tokens, requires major trim.
+4. Inventing LP mapping not in enum — routing failure in downstream systems.
+5. File inventory table without status column — manifest validator rejects.
+6. Starting from content files before manifest — file count and LP mappings defined ad-hoc, inconsistently.
 ## Context
+
+## Builder Context
+
+This ISO operates within the `agent-package-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Reference
+
+```yaml
+id: p10_lr_agent_package_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_agent_package_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | agent_package |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

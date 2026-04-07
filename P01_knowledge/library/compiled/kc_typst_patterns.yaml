@@ -1,0 +1,124 @@
+id: p01_kc_typst_patterns
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Typst Patterns — PDF Generation for Content Factory
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: n04_knowledge
+domain: typst
+quality: 9.0
+tags:
+- typst
+- pdf
+- ebook
+- report
+- typesetting
+- content-factory
+- integration
+- INJECT
+tldr: Modern markup → professional PDF with templates, functions, data loading, and programmatic layout — the LaTeX replacement
+when_to_use: When any nucleus needs to generate professional PDFs — ebooks, reports, whitepapers, certificates
+keywords:
+- typst
+- pdf
+- typesetting
+- ebook
+- report
+- template
+- programmatic-layout
+feeds_kinds:
+- cli_tool
+- workflow
+- dag
+- formatter
+linked_artifacts:
+- kc_pandoc_pipeline
+- kc_marp_cli
+density_score: null
+quick_reference: 'install: winget install Typst.Typst   # or cargo install typst-cli
+
+  binary: typst
+
+  version_check: typst --version
+
+  compile: typst compile input.typ output.pdf
+
+  watch: typst watch input.typ output.pdf  # auto-recompile on save
+
+  file_extension: .typ
+
+  output: PDF (native), PNG, SVG'
+document_structure: "// document metadata\n#set document(title: \"Guia Completo de IA\", author: \"Brand Name\", date: auto)\n\
+  \n// page setup\n#set page(\n  paper: \"a4\",\n  margin: (top: 2.5cm, bottom: 2.5cm, left: 3cm, right: 2.5cm),\n  header:\
+  \ align(right)[Content Factory — v1.0],\n  footer: context [\n    #align(center)[#counter(page).display(\"1 / 1\", both:\
+  \ true)]\n  ],\n  numbering: \"1\",\n)\n\n// typography\n#set text(font: \"Inter\", size: 11pt, lang: \"pt\")\n#set par(justify:\
+  \ true, leading: 0.65em)\n#set heading(numbering: \"1.1\")\n\n// title page\n#align(center + horizon)[\n  #text(size: 28pt,\
+  \ weight: \"bold\", fill: rgb(\"#2563eb\"))[Guia Completo de IA]\n  #v(1em)\n  #text(size: 14pt, fill: gray)[Para Criadores\
+  \ de Conteúdo]\n  #v(2em)\n  #text(size: 12pt)[Brand Name — 2026]\n]\n\n#pagebreak()\n\n// table of contents\n#outline(indent:\
+  \ auto, depth: 3)\n\n#pagebreak()\n\n= Introdução\n\nEste guia apresenta as melhores práticas...\n\n== Conceitos Fundamentais\n\
+  \nTexto do capítulo aqui.\n\n=== Subseção\n\nMais detalhes..."
+headings_and_formatting: "= Heading 1 (chapter)\n== Heading 2 (section)\n=== Heading 3 (subsection)\n\nbold text\nitalic text\n\
+  `inline code`\n#link(\"https://example.com\")[link text]\n#highlight[highlighted text]\n#strike[strikethrough]\n#underline[underlined]\n\
+  \n- Bullet list item\n- Another item\n  - Nested item\n\n+ Numbered list\n+ Second item\n\n/ Term: Definition list item"
+functions_and_variables: "// Define reusable function\n#let tip(body) = block(\n  fill: rgb(\"#f0f9ff\"),\n  stroke: rgb(\"\
+  #2563eb\"),\n  inset: 12pt,\n  radius: 4pt,\n  width: 100%,\n)[\n  #text(weight: \"bold\", fill: rgb(\"#2563eb\"))[\U0001F4A1\
+  \ Dica: ]\n  #body\n]\n\n// Use it\n#tip[Sempre valide seus dados antes de publicar.]\n\n// Variables\n#let brand_color\
+  \ = rgb(\"#2563eb\")\n#let version = \"1.0.0\"\n\nO sistema está na versão #version."
+data_loading_from_external_files: "// Load YAML data\n#let config = yaml(\"brand_config.yaml\")\nMarca: #config.brand_name\n\
+  \n// Load CSV data → table\n#let data = csv(\"metrics.csv\")\n#table(\n  columns: 4,\n  ..data.flatten()\n)\n\n// Load JSON\n\
+  #let tools = json(\"tools.json\")\n#for tool in tools.items [\n  - #tool.name: #tool.description\n]\n\n// Load and embed\
+  \ image\n#figure(\n  image(\"chart.png\", width: 80%),\n  caption: [Crescimento mensal de receita]\n)"
+template_pattern_reusable_across_documents: "// template.typ — shared template\n#let ebook(title: \"\", author: \"\", date:\
+  \ \"\", body) = {\n  set document(title: title, author: author)\n  set page(paper: \"a4\", margin: 2.5cm)\n  set text(font:\
+  \ \"Inter\", size: 11pt, lang: \"pt\")\n  set heading(numbering: \"1.1\")\n  set par(justify: true)\n\n  // Title page\n\
+  \  align(center + horizon)[\n    #text(size: 28pt, weight: \"bold\")[#title]\n    #v(1em)\n    #text(size: 14pt)[#author\
+  \ — #date]\n  ]\n  pagebreak()\n  outline(indent: auto)\n  pagebreak()\n\n  body\n}\n\n// chapter.typ — use the template\n\
+  #import \"template.typ\": ebook\n\n#show: ebook.with(\n  title: \"Guia de Produtividade\",\n  author: \"Brand Name\",\n\
+  \  date: \"Abril 2026\",\n)\n\n= Primeiro Capítulo\nConteúdo aqui..."
+tables: "#table(\n  columns: (1fr, 2fr, auto),\n  align: (left, left, center),\n  stroke: 0.5pt + gray,\n  inset: 8pt,\n \
+  \ fill: (x, y) => if y == 0 { rgb(\"#2563eb\").lighten(80%) },\n  [Ferramenta], [Descrição], [Custo],\n  [Canva], [Design\
+  \ de imagens e posts], [Free],\n  [ElevenLabs], [Narração por IA], [\\$22/mês],\n  [Runway], [Geração de vídeo], [\\$28/mês],\n\
+  )"
+cli_commands: '# Compile to PDF
+
+  typst compile ebook.typ ebook.pdf
+
+
+  # Watch mode (auto-recompile)
+
+  typst watch ebook.typ ebook.pdf
+
+
+  # Specify font paths
+
+  typst compile --font-path ./fonts/ ebook.typ ebook.pdf
+
+
+  # Compile to PNG (one per page)
+
+  typst compile ebook.typ page_{n}.png
+
+
+  # Compile specific pages
+
+  typst compile --pages 1-5 ebook.typ preview.pdf
+
+
+  # List available fonts
+
+  typst fonts'
+gotchas:
+- Typst is NOT Markdown. Headings use `=` not `#`. Bold is `text` not `text`. Italic is `text` not `text`.
+- '`#` is the function/code prefix in Typst. `#text()`, `#set`, `#let`, `#for` — everything programmatic starts with `#`.'
+- No native EPUB output. Typst outputs PDF, PNG, SVG only. For EPUB, use Pandoc.
+- Custom fonts must be installed or `--font-path` specified. Typst does not download fonts from the internet.
+- '`context` keyword required for counter/state access in headers/footers. Without it, counters show nothing.'
+- Images paths are relative to the `.typ` file, not the working directory. Use absolute paths in automated pipelines.
+- Large documents (500+ pages) compile in seconds — Typst is incremental. LaTeX equivalent would take minutes.
+- 'PT-BR hyphenation works automatically with `#set text(lang: "pt")`. Don''t skip the lang setting.'
+docs:
+- 'Reference: https://typst.app/docs/reference/'
+- 'Tutorial: https://typst.app/docs/tutorial/'
+- 'Packages: https://typst.app/universe/ (community templates)'

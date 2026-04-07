@@ -101,7 +101,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: visual_frontend_engineering_and_copywriting
-quality: 9.0
+quality: 9.2
 tags: [prompt_template, visual-frontend, marketing, html, tailwind, copy, N02, P03]
 tldr: Dual-mode template — generates production HTML/CSS with Tailwind + shadcn/ui OR persuasive copy with formulas, based on mode selection.
 keywords: [html, frontend, tailwind, component, responsive, a11y, copy, ad, headline, CTA, funnel, formula, AIDA, PAS, landing_page]

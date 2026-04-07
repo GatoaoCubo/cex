@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "env_config — environment variable specifications with scope, validation rules, and sensitive var handling"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, env-config, environment-variables, secrets, configuration, P11]
 tldr: "Gates for env_config artifacts: validates variable catalog completeness, sensitive masking, default correctness, override precedence, and scope accuracy."
 density_score: 0.92
@@ -43,8 +43,8 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Validation rules completeness | 1.0 | Each variable has regex, enum, or range validation defined |
 | Sensitive variable masking | 1.0 | All sensitive vars have masking_rule (partial/full redaction) specified |
 | Default value quality | 1.0 | Non-sensitive defaults are safe, functional, and documented |
-| Scope accuracy | 1.0 | Scope (global/agent_node/service) correctly categorizes all variables |
-| Type specificity | 0.5 | Types beyond string used where appropriate (int, bool, url, path) |
+| Scope accuracy | 1.0 | Scope (global/agent_group/service) correctly categorizes all variables |
+| Type specificity | 0.5 | Types beyond string used where apownte (int, bool, url, path) |
 | Boundary clarity | 0.5 | Explicitly not boot_config (provider startup), feature_flag (toggle), path_config |
 | Variable naming convention | 1.0 | All names follow UPPER_SNAKE_CASE, no ambiguous abbreviations |
 | Required vs optional clarity | 1.0 | Required field accurate; optional vars have meaningful defaults |

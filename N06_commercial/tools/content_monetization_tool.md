@@ -3,10 +3,17 @@ id: p04_fn_content_monetization
 title: "Content Monetization Tool"
 kind: function_def
 pillar: P04
-version: 1.0.0
+version: 1.1.0
 created: 2026-03-31
-updated: 2026-03-31
+updated: 2026-04-07
 author: n06_commercial
+quality: 9.1
+tags: [tool, function, content-monetization, billing, checkout, credits, N06]
+tldr: "Full content monetization pipeline: pricing resolution, credit gating, PIX/Stripe/Hotmart checkout, LLM course generation, ad validation, email dispatch."
+density_score: 0.93
+linked_artifacts:
+  primary: p12_wf_content_monetization
+  related: [p12_dr_content_monetization, p01_kc_brand_monetization_models, n06_output_pricing_page]
 name: monetize_content
 description: "Execute the full content monetization pipeline: resolve pricing, configure credits, setup checkout, generate course content, validate ads, and send email sequences."
 parameters:

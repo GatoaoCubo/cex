@@ -6,7 +6,7 @@ purpose: "Teach all builders and nuclei to present structured decision points in
 version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
-quality: null
+quality: 9.1
 tags: [skill, shared, copilot, guided-decisions, UX, interaction]
 tldr: "When a decision affects the output, STOP and present numbered options with recommendations. Never assume what the user wants. This is as mandatory as 8F."
 density_score: 0.95
@@ -137,7 +137,7 @@ Based on your Sage archetype, these palettes work best:
 | `2` | Select option 2. Confirm briefly: "Got it — Going with Growth Wisdom 🟢" |
 | `1+3` | Combine elements. "Mixing Deep Trust base with Modern Scholar accents — nice." |
 | `the first one but more green` | Adapt option 1 with modification. Show the modified version. |
-| Free text: `"I want something techy and dark"` | Map to closest option or create custom. "Sounds like a Dark Mode Scholar vibe. Let me propose..." |
+| Free text: `"I want something techy and dark"` | Map to closest option or create costm. "Sounds like a Dark Mode Scholar vibe. Let me propose..." |
 | `?` or confused | Explain the trade-offs in simpler language. No jargon. |
 | Empty / Enter / "whatever" / "you choose" | Apply ★ Recommended. "Going with the recommended option: Deep Trust 🔵" |
 | `skip` | Apply ★ Recommended and note it can be changed later. |

@@ -34,7 +34,7 @@ kinds:
     llm_function: INJECT
   component_map:
     description: Mapa de componentes (what connects to what)
-    boundary: Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 satelite).
+    boundary: Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 agent_group).
     layer: spec
     core: false
     machine_format: yaml
@@ -71,6 +71,7 @@ kinds:
     - Docker Compose service
   director:
     description: Crew orchestrator that composes and coordinates multiple builders
+    llm_function: REASON
     naming: ex_director_{topic}.md
   decision_record:
     description: 'ADR: contexto, decisao, consequencias'

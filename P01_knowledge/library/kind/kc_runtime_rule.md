@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: runtime_rule
-quality: 9.0
+quality: 9.1
 tags: [runtime_rule, P09, GOVERN, kind-kc]
 tldr: "runtime_rule is a per-operation technical constraint governing timeouts, retry limits, and degradation behavior — scoped to specific operation types rather than provider-level rate limits."
 when_to_use: "Building, reviewing, or reasoning about runtime_rule artifacts"
@@ -50,19 +50,19 @@ A runtime_rule is a technical constraint governing per-operation execution: time
 | timeout_s | int | 120 | Lower = faster fail; higher = handles slow LLM calls |
 | max_retries | int | 3 | Higher = more resilient; uncapped = runaway retries |
 | retry_delay_s | float | 1.0 | Base delay — multiplied by strategy (exponential doubles) |
-| on_timeout | enum | skip | skip/fail/fallback — skip keeps agent_node moving; fail is safer |
+| on_timeout | enum | skip | skip/fail/fallback — skip keeps agent_group moving; fail is safer |
 
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | Retry with backoff | External API calls that may transiently fail | 3 attempts, 1s/2s/4s delays, exponential |
 | Hard timeout | Long LLM generation calls | `timeout_s: 300` for complex generation tasks |
-| Graceful degradation | Non-critical operations that can be skipped | `on_timeout: skip` — agent_node continues without result |
+| Graceful degradation | Non-critical operations that can be skipped | `on_timeout: skip` — agent_group continues without result |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |
 |-------------|-------------|-----|
-| No timeout | Stalled operations block entire agent_node indefinitely | Always set `timeout_s` — even generous 300s beats infinite |
+| No timeout | Stalled operations block entire agent_group indefinitely | Always set `timeout_s` — even generous 300s beats infinite |
 | Infinite retry | `max_retries: -1` causes runaway token spend | Always cap at 3-5 retries |
 | Retry on 400 errors | 400 = bad request; retrying wastes tokens with same result | Only retry 429 (rate limit), 500, 503 (transient) |
 

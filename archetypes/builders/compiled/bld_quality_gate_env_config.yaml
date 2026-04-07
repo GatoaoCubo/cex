@@ -69,7 +69,7 @@ soft_scoring: 'Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 
   | Default value quality | 1.0 | Non-sensitive defaults are safe, functional, and documented |
 
-  | Scope accuracy | 1.0 | Scope (global/agent_node/service) correctly categorizes all variables |
+  | Scope accuracy | 1.0 | Scope (global/agent_group/service) correctly categorizes all variables |
 
   | Type specificity | 0.5 | Types beyond string used where appropriate (int, bool, url, path) |
 

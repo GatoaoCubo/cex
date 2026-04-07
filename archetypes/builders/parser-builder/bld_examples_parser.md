@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of parser artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Parser"
+version: "1.0.0"
+author: n03_builder
+tags: [parser, builder, examples]
+tldr: "Golden and anti-examples for parser construction, demonstrating ideal structure and common pitfalls."
+domain: "parser construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: parser-builder
@@ -47,7 +57,7 @@ Format: html
 Structure: standard marketplace product page with semantic CSS classes.
 Example:
 ```html
-<h1 class="product-title">Kit Decoracao Sala</h1>
+<h1 class="product-title">Kit Decoraction Sala</h1>
 <span class="price-current">R$ 149,90</span>
 <span class="rating-value">4.7</span>
 ```

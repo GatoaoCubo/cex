@@ -4,6 +4,16 @@ id: bld_tools_session_state
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to session_state production
+quality: 9.0
+title: "Tools Session State"
+version: "1.0.0"
+author: n03_builder
+tags: [session_state, builder, examples]
+tldr: "Golden and anti-examples for session state construction, demonstrating ideal structure and common pitfalls."
+domain: "session state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: session-state-builder
@@ -28,9 +38,21 @@ purpose: Tools and runtime surfaces relevant to session_state production
 
 ## Interim Validation
 Until a generic validator exists, validate manually:
-- filename matches `p10_ss_{session}.yaml`
-- YAML parses
-- required fields present
-- status in enum
-- started_at is ISO 8601
-- payload fits `session_state`, not `runtime_state` or `learning_record`
+1. filename matches `p10_ss_{session}.yaml`
+2. YAML parses
+3. required fields present
+4. status in enum
+5. started_at is ISO 8601
+6. payload fits `session_state`, not `runtime_state` or `learning_record`
+
+## Metadata
+
+```yaml
+id: bld_tools_session_state
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-session-state.md
+```

@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "entity memory — structured facts about named entities (people, tools, concepts, organizations, projects, services)"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, entity-memory, P10, memory, entity, attributes]
 tldr: "Pass/fail gate for entity_memory artifacts: entity_type validity, non-empty attributes, update_policy, confidence scoring, and relationship integrity."
 density_score: 0.90
@@ -45,7 +45,7 @@ Weights sum to 100%.
 | Entity type precision | 1.0 | entity_type matches actual nature of entity; not "concept" for a concrete tool |
 | Relationship mapping | 1.0 | relationships field present with at least 1 link; relation type is a meaningful verb |
 | Confidence scoring | 0.5 | confidence float present and in 0.0-1.0 range with plausible value |
-| Update policy | 1.0 | update_policy declared and appropriate for entity volatility |
+| Update policy | 1.0 | update_policy declared and apownte for entity volatility |
 | Source attribution | 0.5 | source field present; identifies where attributes came from |
 | Expiry/staleness | 0.5 | expiry set for volatile entities (tools, services); null acceptable for stable concepts |
 | Boundary clarity | 1.0 | Not a learning_record (no outcome/lesson), not session_state (no ephemeral runtime data) |

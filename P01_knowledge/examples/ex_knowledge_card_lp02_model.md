@@ -42,7 +42,7 @@ P02 eh o dominio de identidade do CEX, com 8 tipos de artefato que definem quem 
 ## Patterns
 - Agent body segue 11 secoes fixas: overview > architecture > file_structure > when_to_use > I/O > integration > quality_gates > common_issues > invocation > related_agents > footer
 - ISO package mapeia files para LPs: manifest=P02, system_instruction=P03, architecture=P08, output_template=P05
-- Router type permite keyword > agent_node routing em YAML puro
+- Router type permite keyword > agent_group routing em YAML puro
 - Fallback chain garante resiliencia: model A > B > C com timeout por step
 
 ## Anti-Patterns

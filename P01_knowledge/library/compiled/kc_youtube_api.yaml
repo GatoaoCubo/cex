@@ -1,0 +1,140 @@
+id: p01_kc_youtube_api
+kind: knowledge_card
+type: domain
+pillar: P01
+title: YouTube Data API — Video Publishing for Content Factory
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: n04_knowledge
+domain: youtube_api
+quality: 9.0
+tags:
+- youtube
+- api
+- video
+- upload
+- publishing
+- content-factory
+- integration
+- INJECT
+tldr: OAuth 2.0 + REST API for uploading videos, setting metadata, managing playlists, and reading basic analytics
+when_to_use: When any nucleus needs to publish video content to YouTube or manage channel playlists
+keywords:
+- youtube
+- data-api
+- upload
+- playlist
+- metadata
+- oauth
+- video-publishing
+feeds_kinds:
+- api_client
+- workflow
+- dag
+linked_artifacts:
+- kc_runway_api
+- kc_ffmpeg_patterns
+- kc_elevenlabs_tts
+- kc_ayrshare_api
+density_score: null
+quick_reference: "base_url: https://www.googleapis.com/youtube/v3\nupload_url: https://www.googleapis.com/upload/youtube/v3/videos\n\
+  auth: OAuth 2.0 (installed app or web server flow)\napi_key: YOUTUBE_API_KEY (for read-only public data)\nscopes:\n  - https://www.googleapis.com/auth/youtube.upload\
+  \        # Upload videos\n  - https://www.googleapis.com/auth/youtube               # Full channel management\n  - https://www.googleapis.com/auth/youtube.readonly\
+  \       # Read-only data\n  - https://www.googleapis.com/auth/youtube.force-ssl      # Required for captions\nquota: 10,000\
+  \ units/day (default). Upload = 1,600 units. List = 1 unit.\nrate_limit: ~5 requests/second per user"
+authentication_oauth_2_0_for_uploads: "from google_auth_oauthlib.flow import InstalledAppFlow\nfrom googleapiclient.discovery\
+  \ import build\nfrom google.auth.transport.requests import Request\nimport pickle, os\n\nSCOPES = [\"https://www.googleapis.com/auth/youtube.upload\"\
+  ,\n          \"https://www.googleapis.com/auth/youtube\"]\n\ndef get_youtube_service():\n    creds = None\n    if os.path.exists(\"\
+  token.pickle\"):\n        with open(\"token.pickle\", \"rb\") as f:\n            creds = pickle.load(f)\n    if not creds\
+  \ or not creds.valid:\n        if creds and creds.expired and creds.refresh_token:\n            creds.refresh(Request())\n\
+  \        else:\n            flow = InstalledAppFlow.from_client_secrets_file(\"client_secrets.json\", SCOPES)\n        \
+  \    creds = flow.run_local_server(port=8080)\n        with open(\"token.pickle\", \"wb\") as f:\n            pickle.dump(creds,\
+  \ f)\n    return build(\"youtube\", \"v3\", credentials=creds)"
+upload_video_with_metadata: "from googleapiclient.http import MediaFileUpload\n\nyoutube = get_youtube_service()\n\n# 1. Upload\
+  \ with resumable (handles large files + network interruptions)\nbody = {\n    \"snippet\": {\n        \"title\": \"5 Dicas\
+  \ de Produtividade com IA\",\n        \"description\": \"\"\"Neste vídeo, você vai aprender:\n✅ Como usar IA para criar\
+  \ conteúdo 10x mais rápido\n✅ Ferramentas que todo criador precisa conhecer\n✅ Workflow completo: da ideia ao vídeo publicado\n\
+  \n\U0001F517 Links mencionados:\n- Ferramenta 1: https://example.com\n- Ferramenta 2: https://example.com\n\n\U0001F4E7\
+  \ Contato: email@brand.com\n\n#ia #produtividade #contentcreator\"\"\",\n        \"tags\": [\"inteligência artificial\"\
+  , \"produtividade\", \"criação de conteúdo\",\n                 \"content creator\", \"IA\", \"automação\"],\n        \"\
+  categoryId\": \"28\",  # 28=Science & Technology, 22=People & Blogs, 27=Education\n        \"defaultLanguage\": \"pt-BR\"\
+  ,\n        \"defaultAudioLanguage\": \"pt-BR\"\n    },\n    \"status\": {\n        \"privacyStatus\": \"private\",     \
+  \    # private → review → public\n        \"publishAt\": \"2026-04-07T10:00:00.000Z\",  # Schedule (requires private status)\n\
+  \        \"selfDeclaredMadeForKids\": False,\n        \"embeddable\": True,\n        \"license\": \"youtube\"          \
+  \      # or \"creativeCommon\"\n    }\n}\n\nmedia = MediaFileUpload(\"final_video.mp4\",\n    mimetype=\"video/mp4\",\n\
+  \    resumable=True,\n    chunksize=10*1024*1024   # 10MB chunks\n)\n\nrequest = youtube.videos().insert(part=\"snippet,status\"\
+  , body=body, media_body=media)\n\n# Resumable upload with progress\nresponse = None\nwhile response is None:\n    status,\
+  \ response = request.next_chunk()\n    if status:\n        print(f\"Upload {int(status.progress() * 100)}%\")\n\nvideo_id\
+  \ = response[\"id\"]\nprint(f\"Uploaded: https://youtube.com/watch?v={video_id}\")"
+set_custom_thumbnail: "youtube.thumbnails().set(\n    videoId=video_id,\n    media_body=MediaFileUpload(\"thumbnail.jpg\"\
+  , mimetype=\"image/jpeg\")\n).execute()\n# Requires channel to be verified (phone verification)\n# Thumbnail: 1280x720px,\
+  \ <2MB, JPG/PNG"
+playlist_management: "# Create playlist\nplaylist = youtube.playlists().insert(\n    part=\"snippet,status\",\n    body={\n\
+  \        \"snippet\": {\n            \"title\": \"Série IA para Criadores\",\n            \"description\": \"Curso completo\
+  \ de IA aplicada à criação de conteúdo\"\n        },\n        \"status\": {\"privacyStatus\": \"public\"}\n    }\n).execute()\n\
+  playlist_id = playlist[\"id\"]\n\n# Add video to playlist\nyoutube.playlistItems().insert(\n    part=\"snippet\",\n    body={\n\
+  \        \"snippet\": {\n            \"playlistId\": playlist_id,\n            \"resourceId\": {\"kind\": \"youtube#video\"\
+  , \"videoId\": video_id},\n            \"position\": 0   # First position\n        }\n    }\n).execute()"
+read_analytics_basic_via_data_api: "# Get video statistics\nstats = youtube.videos().list(\n    part=\"statistics,snippet\"\
+  ,\n    id=video_id\n).execute()\n\nitem = stats[\"items\"][0]\nprint(f\"Views: {item['statistics']['viewCount']}\")\nprint(f\"\
+  Likes: {item['statistics']['likeCount']}\")\nprint(f\"Comments: {item['statistics']['commentCount']}\")\n\nFor advanced\
+  \ analytics (watch time, demographics, traffic sources), use YouTube Analytics API with scope `https://www.googleapis.com/auth/yt-analytics.readonly`."
+category_ids_common: '| ID | Category |
+
+  |----|----------|
+
+  | 1 | Film & Animation |
+
+  | 10 | Music |
+
+  | 15 | Pets & Animals |
+
+  | 22 | People & Blogs |
+
+  | 24 | Entertainment |
+
+  | 25 | News & Politics |
+
+  | 26 | Howto & Style |
+
+  | 27 | Education |
+
+  | 28 | Science & Technology |'
+quota_costs: '| Operation | Units |
+
+  |-----------|-------|
+
+  | videos.insert (upload) | 1,600 |
+
+  | videos.list | 1 |
+
+  | videos.update | 50 |
+
+  | thumbnails.set | 50 |
+
+  | playlists.insert | 50 |
+
+  | playlistItems.insert | 50 |
+
+  | search.list | 100 |
+
+
+  Default quota: 10,000 units/day. That''s ~6 uploads/day. Request quota increase via Google Cloud Console if needed (can
+  take weeks).'
+gotchas:
+- Quota is 10K units/day. Each upload costs 1,600 units = max 6 uploads/day on default quota. Plan batch uploads.
+- '`publishAt` requires `privacyStatus: "private"`. Set to private first, schedule the publish time, then YouTube auto-publishes.'
+- Custom thumbnails require channel verification. Verify via phone at https://www.youtube.com/verify. Without it, `thumbnails().set()`
+  returns 403.
+- Resumable upload is mandatory for files >5MB. Use `chunksize` for progress tracking and network resilience.
+- '`client_secrets.json` must NOT be committed to git. It contains OAuth credentials. Store in `.cex/brand/` or env vars.'
+- 'Description max: 5,000 chars. Title max: 100 chars. Tags total: 500 chars.'
+- 'Scheduling timezone: `publishAt` must be UTC ISO 8601. Convert from BRT (UTC-3) before sending.'
+- 'Rate limiting: burst of uploads in sequence may trigger 403 `quotaExceeded`. Space uploads 5+ seconds apart.'
+- 'Made For Kids flag is legally binding. If `selfDeclaredMadeForKids: true`, comments are disabled and ads are restricted
+  (COPPA). Set `false` for general content.'
+docs:
+- 'Data API Reference: https://developers.google.com/youtube/v3/docs'
+- 'Upload guide: https://developers.google.com/youtube/v3/guides/uploading_a_video'
+- 'Python quickstart: https://developers.google.com/youtube/v3/quickstart/python'

@@ -7,7 +7,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "quality"
-quality: 8.7
+quality: 9.0
 tags: [axiom, shokunin, quality, immutable]
 tldr: "All artifacts must pass quality gate >= 7.0 before pool admission. No exceptions, no manual overrides."
 rule: "No artifact enters the pool with quality score below 7.0"
@@ -22,12 +22,13 @@ linked_artifacts:
   primary: quality-gate-builder
   related: [scoring-rubric-builder, validator-builder]
 density_score: 0.92
+title: "Axiom Shokunin Quality"
 ---
 ## Rule Statement
 No artifact enters the pool with quality score below 7.0 — the Shokunin quality floor is non-negotiable.
 ## Rationale
 - Quality floor prevents accumulation of low-value artifacts that erode trust in pool search results
-- Downstream consumers (agents, skills, agent_nodes) depend on pool artifacts being production-ready
+- Downstream consumers (agents, skills, agent_groups) depend on pool artifacts being production-ready
 - Without enforcement, Gresham's Law applies: bad artifacts drive out good ones as noise drowns signal
 ## Scope
 - Domain: all artifact kinds (P01-P12)
@@ -43,3 +44,14 @@ No artifact enters the pool with quality score below 7.0 — the Shokunin qualit
 1. Manual pool insertion bypassing quality gate
    - Impact: unreliable artifacts pollute search results, agents consume bad context
    - Resolution: remove artifact, run gate retroactively, re-admit only if >= 7.0
+
+## Artifact Metadata
+
+```yaml
+kind: axiom
+pillar: P10
+pipeline: 8F
+scoring: hybrid_3_layer
+
+compilation: cex_compile
+```

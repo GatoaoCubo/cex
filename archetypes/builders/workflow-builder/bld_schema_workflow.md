@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for workflow
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Workflow"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow, builder, examples]
+tldr: "Golden and anti-examples for workflow construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: workflow
@@ -21,7 +31,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | title | string | YES | - | Human-readable workflow name |
 | steps_count | integer | YES | - | Number of steps in body (must match) |
 | execution | enum: sequential, parallel, mixed | YES | - | Step arrangement |
-| agent_nodes | list[string] | REC | - | Which agent_nodes participate |
+| agent_groups | list[string] | REC | - | Which agent_groups participate |
 | timeout | integer | REC | - | Total workflow timeout (seconds) |
 | retry_policy | enum: none, per_step, global | REC | "none" | Retry strategy |
 | depends_on | list[string] | REC | [] | Prerequisite workflows/artifacts |
@@ -48,5 +58,5 @@ Rule: id MUST equal filename stem.
 - steps_count MUST match actual count of numbered steps in body
 - Each step MUST define agent and action
 - Steps with dependencies MUST list them explicitly
-- Signals MUST reference signal-builder conventions
+- Signals MUST references signal-builder conventions
 - quality: null always

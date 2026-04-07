@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: plugin
-quality: 8.9
+quality: 9.1
 tags: [plugin, P04, CALL, kind-kc, extensibility]
 tldr: "Discoverable, versioned, independently loadable extension that adds capabilities to the agent system at runtime via a declared interface contract"
 when_to_use: "Building, reviewing, or reasoning about plugin artifacts"
 keywords: [plugin, extension, pluggable, runtime, interface]
 feeds_kinds: [plugin]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Plugin

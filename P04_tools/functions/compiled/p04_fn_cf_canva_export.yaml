@@ -1,0 +1,60 @@
+id: p04_fn_cf_canva_export
+kind: function_def
+pillar: P04
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: builder_agent
+name: canva_export_design
+description: Export a Canva design to a downloadable file. Call after canva_create_design to produce PDF, PPTX, PNG, or MP4
+  output. Requires design_id and format.
+parameters: ''
+returns: 'Type: object with `export_id`, `status`, `download_url` (valid 24h), `file_size_bytes`.'
+provider_compat:
+- openai
+- anthropic
+- gemini
+strict: false
+domain: content_factory
+quality: 'Type: string (enum) | Required: no | Default: standard
+
+  Export quality: draft (fast, lower res), standard (balanced), high (print-ready, slower).'
+tags:
+- function_def
+- canva
+- export
+- pdf
+- pptx
+- content_factory
+tldr: LLM-callable function to export Canva designs as PDF, PPTX, PNG, MP4 files
+examples: ''
+error_types:
+- design_not_found
+- export_in_progress
+- unsupported_format
+- auth_expired
+density_score: 0.91
+overview: Exports a Canva design to a downloadable file format. The LLM calls this after creating or editing a design to produce
+  deliverable output — PDF handouts, PPTX presentations, PNG social graphics, or MP4 videos. Export is asynchronous; poll
+  status until completed.
+design_id: 'Type: string | Required: yes
+
+  The Canva design ID returned by `canva_create_design`. Must reference an existing design.'
+format: 'Type: string (enum) | Required: yes
+
+  One of: pdf, pptx, png, jpg, mp4, gif, svg. Choose based on deliverable type: pdf for documents, pptx for editable slides,
+  png for social, mp4 for video.'
+pages: 'Type: array of integers | Required: no
+
+  Zero-based page indices. Omit to export all. Use for multi-page designs when only specific slides are needed.'
+width: 'Type: integer | Required: no
+
+  Custom output width in pixels. Maintains aspect ratio. Use for platform-specific image sizes.'
+lossless: 'Type: boolean | Required: no | Default: false
+
+  Lossless PNG compression. Increases file size but preserves quality for print.'
+example_1_export_presentation_as_pptx: '{"design_id": "DAG_m3deck", "format": "pptx", "quality": "high"}
+
+  → `{"export_id": "EXP_deck01", "status": "completed", "download_url": "https://export.canva.com/deck01.pptx", "file_size_bytes":
+  5242880}`'
+example_2_export_specific_slides_as_png: '{"design_id": "DAG_m3deck", "format": "png", "pages": [0, 5, 11], "width": 1200}'

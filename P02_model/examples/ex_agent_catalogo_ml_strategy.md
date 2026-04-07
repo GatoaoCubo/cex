@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 domain: marketplace
-quality: 9.0
+quality: 9.2
 tags: [mercado-livre, catalogo, buy-box, estrategia, marketplace]
 tldr: Especialista em estrategia de catalogo ML - analise, aquecimento, criacao proprio, migracao ranking, defesa contra invasores
 when_to_use: Entrar em catalogo competitivo, criar catalogo proprio, migrar ranking, defender catalogo

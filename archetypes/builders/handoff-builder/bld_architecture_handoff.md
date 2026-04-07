@@ -4,6 +4,16 @@ id: bld_architecture_handoff
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of handoff — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Handoff"
+version: "1.0.0"
+author: n03_builder
+tags: [handoff, builder, examples]
+tldr: "Golden and anti-examples for handoff construction, demonstrating ideal structure and common pitfalls."
+domain: "handoff construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -28,25 +38,25 @@ handoff       --referenced_by--> workflow
 ```
 | From | To | Type | Data |
 |------|----|------|------|
-| dispatch_rule | handoff | data_flow | agent_node selection, mission name |
+| dispatch_rule | handoff | data_flow | agent_group selection, mission name |
 | dag | handoff | data_flow | task node context, dependency order |
 | handoff | execution | data_flow | task, context, scope fence, commit rules |
 | execution | signal | data_flow | status (complete/error), score |
-| handoff | spawn_config | data_flow | agent_node id, model params |
+| handoff | spawn_config | data_flow | agent_group id, model params |
 | handoff | workflow | data_flow | step instructions within larger orchestration |
 ## Boundary Table
 | handoff IS | handoff IS NOT |
 |------------|----------------|
 | Complete delegation package for one receiver | Conversational prompt with persona |
 | Carries task + context + scope + commit rules | Status or event report |
-| One handoff per agent_node per mission | Routing policy (who receives what type) |
+| One handoff per agent_group per mission | Routing policy (who receives what type) |
 | Pre-execution artifact (written before spawn) | Dependency graph of tasks |
 | Scoped to a single execution unit | Multi-agent orchestration runtime |
 | Source of truth for what to do and how to commit | Boot configuration (model, flags, MCPs) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|------------|---------|
-| Routing | dispatch_rule, dag | Decide which agent_node and in what order |
+| Routing | dispatch_rule, dag | Decide which agent_group and in what order |
 | Delegation | task_description, context_block, seed_keywords | Define the work and its background |
 | Boundary | scope_fence, dependency_refs | Constrain what may be touched |
 | Commit | commit_rules, signal_instruction | Enforce artifact persistence and status reporting |

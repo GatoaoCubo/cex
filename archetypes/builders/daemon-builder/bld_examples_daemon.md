@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of daemon artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Daemon"
+version: "1.0.0"
+author: n03_builder
+tags: [daemon, builder, examples]
+tldr: "Golden and anti-examples for daemon construction, demonstrating ideal structure and common pitfalls."
+domain: "daemon construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: daemon-builder
@@ -12,7 +22,7 @@ pattern: few-shot learning — LLM reads these before producing
 INPUT: "Create daemon for a brain index rebuilder that runs every 6 hours"
 OUTPUT:
 ```yaml
-id: p04_daemon_brain_index_rebuilder
+id: p04_daemon_knowledge_index_rebuilder
 kind: daemon
 pillar: P04
 version: "1.0.0"
@@ -23,7 +33,7 @@ name: "Brain Index Rebuilder"
 schedule: "0 */6 * * *"
 restart_policy: on_failure
 signal_handling: "SIGTERM: finish current index batch, flush to disk, exit 0"
-quality: null
+quality: 8.9
 tags: [daemon, brain, index, P04, background, scheduled]
 tldr: "Brain index rebuilder: cron every 6h, on_failure restart, structured logging, 512MB limit"
 description: "Periodic daemon that rebuilds BM25+FAISS brain indexes from pool artifacts every 6 hours"

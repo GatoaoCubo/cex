@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.1
 tags: [cex, lp09, config, env-config, feature-flag, permission, runtime-rule]
 tldr: "P09 define 5 tipos de configuracao operacional: env_config, path_config, permission, feature_flag, runtime_rule"
 when_to_use: "Entender como sistemas LLM separam configuracao de identidade e arquitetura"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp08_architecture
   related: [p01_kc_cex_lp10_memory]
-density_score: null
+density_score: 1.0
 data_source: "https://12factor.net/config"
 ---
 
@@ -74,7 +74,7 @@ types: 5 | function: GOVERN | layer: runtime + governance
 |------|-------|--------|-----------|---------|
 | env_config | runtime | yaml | 4096 | API keys, URLs, secrets |
 | path_config | runtime | yaml | 3072 | Dirs de agents, pool, output |
-| permission | governance | yaml | 3072 | Satellite write access |
+| permission | governance | yaml | 3072 | Agent_group write access |
 | feature_flag | runtime | json | 1536 | Enable firecrawl enrichment |
 | runtime_rule | runtime | yaml | 3072 | Timeout 30s, max 3 retries |
 
@@ -108,3 +108,10 @@ types: 5 | function: GOVERN | layer: runtime + governance
 - source: https://arxiv.org/abs/2308.00352
 - related: p01_kc_cex_lp08_architecture
 - related: p01_kc_cex_lp10_memory
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

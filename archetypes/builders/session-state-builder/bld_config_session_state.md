@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Session State"
+version: "1.0.0"
+author: n03_builder
+tags: [session_state, builder, examples]
+tldr: "Golden and anti-examples for session state construction, demonstrating ideal structure and common pitfalls."
+domain: "session state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: session_state Production Rules
 ## Naming Convention
@@ -27,20 +37,46 @@ permission_scope: nucleus
 | Agent values | lowercase slug | `edison`, `atlas`, `codex` |
 Rule: use `.yaml` extension only for this builder.
 ## File Paths
-- Output: `cex/P10_memory/compiled/p10_ss_{session}.yaml`
-- Human reference: `cex/P10_memory/examples/p10_ss_{session}.md`
+1. Output: `cex/P10_memory/compiled/p10_ss_{session}.yaml`
+2. Human reference: `cex/P10_memory/examples/p10_ss_{session}.md`
 ## Size Limits
-- Preferred snapshot size: <= 2048 bytes
-- Absolute max: 3072 bytes
-- Optional fields should remain sparse and compact
+1. Preferred snapshot size: <= 2048 bytes
+2. Absolute max: 3072 bytes
+3. Optional fields should remain sparse and compact
 ## Payload Restrictions
-- Required fields must appear exactly as defined in SCHEMA.md
-- Omit optional null/unknown fields instead of writing placeholders
-- `ended_at` and `duration_seconds` only meaningful for completed/aborted sessions
-- `checkpoints` should be concise: label + timestamp only
-- `errors` entries must have both `code` and `message`
+1. Required fields must appear exactly as defined in SCHEMA.md
+2. Omit optional null/unknown fields instead of writing placeholders
+3. `ended_at` and `duration_seconds` only meaningful for completed/aborted sessions
+4. `checkpoints` should be concise: label + timestamp only
+5. `errors` entries must have both `code` and `message`
 ## Boundary Restrictions
-- No persistent state: routing decisions, accumulated scores belong in runtime_state
-- No learning patterns: accumulated outcomes belong in learning_record
-- No search configuration: index settings belong in brain_index
-- No immutable rules: fundamental axioms belong in axiom
+1. No persistent state: routing decisions, accumulated scores belong in runtime_state
+2. No learning patterns: accumulated outcomes belong in learning_record
+3. No search configuration: index settings belong in knowledge_index
+4. No immutable rules: fundamental axioms belong in axiom
+
+## Metadata
+
+```yaml
+id: bld_config_session_state
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-session-state.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | session state construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

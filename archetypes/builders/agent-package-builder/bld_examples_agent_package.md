@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of agent_package artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Agent Package"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_package, builder, examples]
+tldr: "Golden and anti-examples for agent package construction, demonstrating ideal structure and common pitfalls."
+domain: "agent package construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: agent-package-builder

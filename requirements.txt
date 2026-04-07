@@ -1,0 +1,6 @@
+# CEX Core Dependencies
+# Install: pip install -r requirements.txt
+# These are needed for ALL cex_*.py tools to work.
+
+pyyaml>=6.0
+tiktoken>=0.7.0

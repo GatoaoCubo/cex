@@ -5,6 +5,16 @@ pillar: P09
 llm_function: COLLABORATE
 purpose: How runtime-rule-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Runtime Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_rule, builder, examples]
+tldr: "Golden and anti-examples for runtime rule construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: runtime-rule-builder
@@ -27,7 +37,7 @@ I produce technical operational parameters — timeouts, retry strategies, rate 
 ```
 ### Crew: "Governance Stack"
 ```
-  1. law-builder              -> "inviolable rules that cannot be overridden"
+  1. invariant-builder              -> "inviolable rules that cannot be overridden"
   2. guardrail-builder        -> "safety boundaries on agent behavior"
   3. runtime-rule-builder     -> "technical operational limits (timeouts, retries, throttle)"
   4. lifecycle-rule-builder   -> "artifact lifecycle transition rules"
@@ -50,6 +60,6 @@ I produce technical operational parameters — timeouts, retry strategies, rate 
 |---------|-----|
 | feature-flag-builder | Feature flags may need timeout and fallback rules during rollout |
 | env-config-builder | Env config may reference runtime rule values for service limits |
-| spawn-config-builder | Uses my concurrency and timeout limits to configure agent_node spawn parameters |
+| spawn-config-builder | Uses my concurrency and timeout limits to configure agent_group spawn parameters |
 | fallback-chain-builder | Triggers fallback chain when I define circuit breaker trip conditions |
 | daemon-builder | Applies my retry and rate limit rules to long-running daemon operations |

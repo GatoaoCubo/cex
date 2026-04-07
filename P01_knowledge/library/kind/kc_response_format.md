@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: response_format
-quality: 9.0
+quality: 9.1
 tags: [response_format, P05, CONSTRAIN, kind-kc, structured-output]
 tldr: "Defines the output structure injected into the LLM's generation context — JSON schema, Pydantic model, or format instruction that constrains generation before it happens"
 when_to_use: "Building, reviewing, or reasoning about response_format artifacts"

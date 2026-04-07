@@ -4,11 +4,21 @@ id: bld_examples_bugloop
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of bugloop artifacts
+quality: 9.0
+title: "Examples Bugloop"
+version: "1.0.0"
+author: n03_builder
+tags: [bugloop, builder, examples]
+tldr: "Golden and anti-examples for bugloop construction, demonstrating ideal structure and common pitfalls."
+domain: "bugloop construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: bugloop-builder
 ## Golden Example
-INPUT: "Cria bugloop pra detectar e corrigir falhas de validacao no KC pipeline automaticamente"
+INPUT: "Create bugloop for detectar e corrigir failss de validation no KC pipeline automaticamente"
 OUTPUT:
 ```yaml
 id: p11_bl_kc_pipeline
@@ -21,7 +31,7 @@ author: "orchestrator"
 domain: "knowledge_card_pipeline"
 quality: null
 tags: [bugloop, knowledge-card, test-failure, auto-fix]
-tldr: "Auto-corrects KC validation failures: detect test failure > patch frontmatter > re-run suite"
+tldr: "Auto-correct KC validation failures: detect test failure > patch frontmatter > re-run suite"
 scope: "KC pipeline — validate_kc.py execution on pre-commit and scheduled runs"
 detect:
   method: "test_failure"

@@ -10,7 +10,7 @@ title: [snapshot_da_sessao]
 version: 1.0.0
 created: [yyyy-mm-dd]
 updated: [yyyy-mm-dd]
-author: [satellite_name]
+author: [agent_group_name]
 quality: [7.0_to_10.0]
 tags: [[tag1], [tag2], session, memory]
 tldr: [estado_atual_da_sessao_em_uma_frase]

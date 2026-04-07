@@ -4,6 +4,16 @@ id: bld_architecture_quality_gate
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of quality_gate — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Quality Gate"
+version: "1.0.0"
+author: n03_builder
+tags: [quality_gate, builder, examples]
+tldr: "Golden and anti-examples for quality gate construction, demonstrating ideal structure and common pitfalls."
+domain: "quality gate construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: quality_gate in the CEX

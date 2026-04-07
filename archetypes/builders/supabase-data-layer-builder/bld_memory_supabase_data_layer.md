@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 9.0
 tags: [builder, supabase, data-layer, memory, learnings]
 density_score: 0.85
 memory_scope: project

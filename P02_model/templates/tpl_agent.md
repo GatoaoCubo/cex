@@ -11,8 +11,8 @@ title: [titulo_descritivo]
 version: 1.0.0
 created: [yyyy-mm-dd]
 updated: [yyyy-mm-dd]
-author: [satellite_name]
-satellite: [satellite_que_opera]
+author: [agent_group_name]
+agent_group: [agent_group_que_opera]
 role: [planner|plan_checker|verifier|executor|researcher|orchestrator]
 domain: [domain]
 quality: [7.0_to_10.0]
@@ -102,5 +102,5 @@ output:
 - [agente_relacionado_2]: [como_interage]
 
 ## Footer
-<!-- INSTRUCAO: repetir satelite e score final para leitura rapida. -->
-Satellite: [satellite_name] | Quality: [quality] | Domain: [domain]
+<!-- INSTRUCAO: repetir agent_group e score final para leitura rapida. -->
+Agent_group: [agent_group_name] | Quality: [quality] | Domain: [domain]

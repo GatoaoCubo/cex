@@ -8,10 +8,10 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: research_pipeline
-quality: 8.9
+quality: 9.1
 tags: [quality-gate, research-pipeline, P11, STORM, CRAG, CRITIC, governance]
 tldr: "Gates for research pipeline artifacts — 7-stage completeness, source diversity, CRAG thresholds, CRITIC verification, budget controls."
-density_score: 0.92
+density_score: 1.0
 ---
 
 # Gate: research_pipeline
@@ -68,3 +68,20 @@ score = (HARD_pass / 8) * 6.0 + (SOFT_weighted / max_weight) * 4.0
 | REJECT | < 8.0 | Missing stages, no quality gates, or security violation |
 | PUBLISH | 8.0-8.9 | Pipeline complete, CRAG+CRITIC defined, budget controlled |
 | EXEMPLARY | 9.0+ | Full source catalog, fallback chains, Gartner scoring |
+
+## Actions
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish as exemplar |
+| >= 8.0 | PUBLISH | Ready for runtime |
+| >= 7.0 | REVIEW | Flag for review |
+| < 7.0  | REJECT | Rework required |
+
+## Bypass
+| Field | Value |
+|-------|-------|
+| conditions | Experimental research_pipeline artifact under active A/B testing |
+| approver | Nucleus lead (written approval required) |
+| audit_trail | Log in records/audits/ with bypass reason and timestamp |
+| expiry | 48h — must pass all gates before expiry |
+| never_bypass | H01 (YAML parse), H05 (quality null) |

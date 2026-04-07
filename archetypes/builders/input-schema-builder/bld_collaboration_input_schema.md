@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How input-schema-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Input Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [input_schema, builder, examples]
+tldr: "Golden and anti-examples for input schema construction, demonstrating ideal structure and common pitfalls."
+domain: "input schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: input-schema-builder

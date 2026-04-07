@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for fallback_chain production — graceful model degradation
 sources: Nygard 2007 "Release It!", Netflix Hystrix, LiteLLM fallbacks, AWS Route 53
+quality: 9.1
+title: "Knowledge Card Fallback Chain"
+version: "1.0.0"
+author: n03_builder
+tags: [fallback_chain, builder, examples]
+tldr: "Golden and anti-examples for fallback chain construction, demonstrating ideal structure and common pitfalls."
+domain: "fallback chain construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: fallback_chain

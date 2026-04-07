@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an eval_dataset artifact
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Eval Dataset"
+version: "1.0.0"
+author: n03_builder
+tags: [eval_dataset, builder, examples]
+tldr: "Golden and anti-examples for eval dataset construction, demonstrating ideal structure and common pitfalls."
+domain: "eval dataset construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: eval_dataset
@@ -31,7 +41,7 @@ tags: [eval_dataset, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 description: "{{what_dataset_covers_max_200ch}}"
 source: "{{human|synthetic|scraped|adversarial|hybrid}}"
-framework: "{{braintrust|langsmith|deepeval|huggingface|custom}}"
+framework: "{{braintrust|langsmith|deepeval|huggingface|costm}}"
 task_type: "{{classification|qa|summarization|tool_use|reasoning|other}}"
 language: "{{en|pt|es|...}}"
 license: "{{MIT|CC-BY-4.0|proprietary|...}}"
@@ -67,7 +77,7 @@ Total: 100% ({{total_cases}} cases)
 Split rationale: {{why_these_percentages_were_chosen}}
 
 ## Integration
-Framework: {{braintrust|langsmith|deepeval|huggingface|custom}}
+Framework: {{braintrust|langsmith|deepeval|huggingface|costm}}
 Loading:
 ```python
 {{framework_loading_snippet_5_to_10_lines}}

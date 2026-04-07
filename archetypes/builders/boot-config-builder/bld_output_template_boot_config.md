@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a boot_config artifact
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Boot Config"
+version: "1.0.0"
+author: n03_builder
+tags: [boot_config, builder, examples]
+tldr: "Golden and anti-examples for boot config construction, demonstrating ideal structure and common pitfalls."
+domain: "boot config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: boot_config
@@ -20,7 +30,7 @@ provider: "{{provider_name}}"
 identity:
   name: "{{agent_display_name}}"
   role: "{{primary_role}}"
-  agent_node: "{{agent_node_or_agnostic}}"
+  agent_group: "{{agent_group_or_agnostic}}"
 constraints:
   max_tokens: {{integer}}
   context_window: {{integer}}
@@ -50,7 +60,7 @@ density_score: {{0.80-1.00}}
 ## Identity Block
 Name: {{agent_display_name}}
 Role: {{primary_role}}
-Satellite: {{agent_node_name}}
+Agent_group: {{agent_group_name}}
 ## Constraints
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|

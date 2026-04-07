@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for agent artifact production
 sources: CEX P02 schema, agent_package pattern, agentic AI literature (Anthropic, OpenAI, LangChain)
+quality: 9.1
+title: "Knowledge Card Agent"
+version: "1.0.0"
+author: n03_builder
+tags: [agent, builder, examples]
+tldr: "Golden and anti-examples for agent construction, demonstrating ideal structure and common pitfalls."
+domain: "agent construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: agent
@@ -52,7 +62,7 @@ An agent is the core runtime identity in an agentic AI system — a persistent p
 3. Map boundaries: 3-5 sibling types this agent does NOT handle
 4. Generate agent_package skeleton (10 files minimum)
 5. Write routing keywords for semantic discovery
-6. Validate: every capability is testable, every boundary names a real sibling
+6. Validate: every capability is testsble, every boundary names a real sibling
 ## References
 - Anthropic: System prompt and identity design patterns
 - OpenAI: Assistant API — agent definition and tool assignment

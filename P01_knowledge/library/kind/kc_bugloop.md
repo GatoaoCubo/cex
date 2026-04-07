@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: bugloop
-quality: 9.0
+quality: 9.1
 tags: [bugloop, P11, GOVERN, kind-kc]
 tldr: "Automated detect-fix-verify cycle with confidence-calibrated fix strategies and escalation on max attempts"
 when_to_use: "Building, reviewing, or reasoning about bugloop artifacts"
@@ -50,7 +50,7 @@ A bugloop is a declarative specification for an automated detect→fix→verify�
 | confidence | float [0,1] | 0.75 | Higher = less conservative fixes; calibrate to domain risk |
 | max_attempts | int | 3 | More attempts = higher recovery rate; longer MTTR |
 | fix_strategy | enum | patch_and_retry | patch_and_retry/rollback_first/isolate_then_fix |
-| escalation_target | string | human | human/queue/agent_node — depends on urgency |
+| escalation_target | string | human | human/queue/agent_group — depends on urgency |
 
 ## Patterns
 | Pattern | When to Use | Example |

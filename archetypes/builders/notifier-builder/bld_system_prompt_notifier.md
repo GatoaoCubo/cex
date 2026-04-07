@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Notification channels, email/SMS/Slack/Discord/push, templates, priority levels, rate limiting, delivery guarantees | NOT webhook (event HTTP), api_client (request-response), mcp_server (protocol)"
 domain: notifier
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, notifier, notification, push, delivery]
 safety_level: standard
 tools_listed: false

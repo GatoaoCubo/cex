@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: workflow
-quality: 9.0
+quality: 9.1
 tags: [workflow, P12, PRODUCE, kind-kc]
 tldr: "Executable specification of sequential and parallel agent+tool steps that transforms inputs to outputs with defined agents, tools, and quality gates"
 when_to_use: "Building, reviewing, or reasoning about workflow artifacts"

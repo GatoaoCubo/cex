@@ -5,11 +5,21 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How red-team-eval-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Red Team Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [red_team_eval, builder, examples]
+tldr: "Golden and anti-examples for red team eval construction, demonstrating ideal structure and common pitfalls."
+domain: "red team eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: red-team-eval-builder
 ## My Role in Crews
-I am a SPECIALIST. I answer ONE question: "what attack types target this agent, what is the target, and what criteria define safe behavior?"
+I am a SPECIALIST. I answer ONE question: "what attack types target this agent, what is the target, and what criteria offine safe behavior?"
 I do not build runtime enforcement. I do not define functional test suites.
 I configure adversarial evaluations so security teams can probe LLM systems for safety vulnerabilities before deployment.
 ## Crew Compositions

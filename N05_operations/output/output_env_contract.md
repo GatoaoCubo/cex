@@ -7,10 +7,10 @@ version: 1.0.0
 created: 2026-04-01
 author: n05_railway_superintendent
 domain: infrastructure
-quality: 8.9
+quality: 9.1
 tags: [output, template, env, railway, config]
 tldr: "63-var .env.example — categorized, with defaults, mock behavior, and boot validation."
-density_score: 0.93
+density_score: 1.0
 ---
 
 # Environment Variable Contract — .env.example

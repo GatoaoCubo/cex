@@ -41,7 +41,7 @@ mcp_config_file: ".mcp-brand.json"
 flags: ["--no-chrome", "-p"]
 domain: "brand-identity-monetization"
 quality: 9.1
-tags: [agent_node, brand, monetization, N06, brand-identity, revenue]
+tags: [agent_group, brand, monetization, N06, brand-identity, revenue]
 tldr: "Brand nucleus spec — N06, sonnet model, fetch+brain MCPs, brand identity discovery + revenue engineering."
 density_score: 1.0
 ---

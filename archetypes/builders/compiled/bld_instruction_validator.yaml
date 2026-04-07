@@ -1,0 +1,103 @@
+id: p03_ins_validator
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-03-27
+updated: 2026-03-27
+author: instruction-builder
+title: Validator Builder Instructions
+target: validator-builder agent
+phases_count: 4
+prerequisites:
+- Target artifact kind is identified
+- The specific field or property to check is named
+- 'Severity level is determined: error, warning, or info'
+- The check is binary pass/fail (not a score or range)
+validation_method: checklist
+domain: validator
+quality: null
+tags:
+- instruction
+- validator
+- pre-commit
+- pass-fail
+- P06
+idempotent: true
+atomic: true
+rollback: Delete generated validator YAML file
+dependencies: []
+logging: true
+tldr: Build a validator YAML that encodes one binary pass/fail rule with structured conditions, severity, auto-fix policy,
+  and bypass audit trail.
+density_score: 0.93
+context: 'The validator-builder produces a `validator` artifact -- a structured YAML that encodes a single binary pass/fail
+  technical check. Validators run at defined pipeline checkpoints (pre-commit, post-generation, or on-demand) and either block,
+  warn, or inform based on severity.
+
+  Critical distinction: a `validator` is a single binary rule. It is NOT a collection of field rules in a schema (`validation_schema`
+  -- system applies multiple rules together), NOT a quality score with thresholds (`quality_gate` -- P11, produces a score),
+  and NOT an input contract (`input_schema` -- governs what inputs are accepted). Confusing these produces checks at the wrong
+  granularity.
+
+  Input contract:
+
+  - `rule_name`: string -- kebab-case rule identifier (e.g. `require-quality-null`, `id-matches-pattern`)
+
+  - `target_kind`: string -- the artifact kind this rule applies to
+
+  - `scope`: enum -- `pre_commit` | `post_generation` | `on_demand`
+
+  - `severity`: enum -- `error` | `warning` | `info`
+
+  - `conditions`: list of condition objects (see Phase 2)
+
+  - `auto_fix`: boolean -- whether the system can automatically correct violations
+
+  - `auto_fix_action`: string or null -- description of the correction applied if auto_fix is true
+
+  - `bypass_policy`: object or null -- conditions under which the rule can be bypassed
+
+  - `error_message`: string -- actionable message shown when the rule fails
+
+  - `remediation`: string -- steps the author can take to fix the violation
+
+  Output contract: a single `validator` YAML with all required fields, stored at `records/validators/{rule_name}.yaml`.
+
+  Variables:
+
+  - `{{rule_name}}` -- kebab-case rule identifier
+
+  - `{{target_kind}}` -- artifact kind the rule targets
+
+  - `{{condition_N}}` -- Nth condition object
+
+  - `{{error_message}}` -- violation message
+
+  - `{{remediation}}` -- fix instructions'
+phases: ''
+phase_1_define_the_rule_and_determine_severity: "Action: Translate the check requirement into a single focused rule with a\
+  \ severity assignment.\nA valid validator encodes EXACTLY ONE check. If you have two checks, build two validators.\nrule_name\
+  \ must describe the check, not the target:\n  good: \"require-quality-null\"\n  bad:  \"system-prompt-validator\"\nseverity\
+  \ assignment:\n  error   -> failure blocks the pipeline; artifact is rejected\n  warning -> failure logged; pipeline continues;\
+  \ author notified\n  info    -> failure logged silently; no author notification\nauto_fix eligibility:\n  YES: string casing,\
+  \ whitespace, enum normalization, date format\n  NO:  missing required fields, logic errors, structural violations,\n  \
+  \     any change that alters semantic meaning\nVerifiable exit: rule_name describes the check; severity is assigned; auto_fix\
+  \ eligibility is determined."
+phase_2_define_conditions: "Action: Encode the check logic as a list of structured condition objects.\nCondition object schema:\n\
+  {\n  field: string -- dot-notation path to the field being checked (e.g. \"frontmatter.quality\")\n  operator: enum [equals,\
+  \ not_equals, exists, not_exists, matches, not_matches,\n                  greater_than, less_than, contains, not_contains,\
+  \ in, not_in]\n  value: the expected value or pattern\n  negate: boolean -- if true, the condition passes when the check\
+  \ fails (logical NOT)\n}\nComposition rules:\n- Multiple conditions default to AND (all must pass for the rule to pass)\n\
+  - To express OR: use separate validators and a dispatch rule\n- `matches` / `not_matches` require a valid regex in `value`\n\
+  - `in` / `not_in` require a list in `value`\nASSERT len(conditions) >= 1\nFOR each condition:\n    ASSERT condition.field\
+  \ is a dot-notation path\n    ASSERT condition.operator is a valid enum value\n    ASSERT condition.value is defined (unless\
+  \ operator is exists/not_exists)\nVerifiable exit: conditions list is non-empty; each condition has field, operator, and\
+  \ value where required."
+phase_3_define_error_handling_and_bypass_policy: "Action: Write the user-facing error message and optional bypass rules.\n\
+  error_message format:\n  \"[field] [violation description]. Expected: [expected]. Got: [actual].\"\n  example: \"frontmatter.quality\
+  \ must be null. Expected: null. Got: 8.5.\"\nremediation format:\n  Numbered steps the author takes to fix the violation.\n\
+  \  Max 3 steps. First step is always the most direct fix.\nbypass_policy (optional):\n  {\n    allowed: boolean\n    conditions:\
+  \ string -- when bypass is permitted\n    approver: string -- who can approve a bypass\n    audit_required: boolean -- whether\
+  \ bypass must be logged\n  }\nIF bypass_policy is null:\n    the rule has no bypass -- all violations must be fixed\nVerifiable\
+  \ exit: error_message names the field and states the expectation; remediation has >= 1 step."
+phase_4_validate_against_quality_gates: 'Action: Run 9 HARD gates before emitting; log 10 SOFT gates as warnings.'

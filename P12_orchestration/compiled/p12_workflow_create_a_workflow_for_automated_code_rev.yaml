@@ -8,7 +8,7 @@ author: workflow-builder
 title: Automated Code Review Workflow
 steps_count: 6
 execution: mixed
-agent_nodes:
+agent_groups:
 - code_analyzer
 - security_scanner
 - reviewer_consolidator

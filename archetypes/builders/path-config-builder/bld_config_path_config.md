@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Path Config"
+version: "1.0.0"
+author: n03_builder
+tags: [path_config, builder, examples]
+tldr: "Golden and anti-examples for path config construction, demonstrating ideal structure and common pitfalls."
+domain: "path config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: path_config Production Rules
 ## Naming Convention
@@ -44,5 +54,5 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 | Platform | Separator | Long paths | Case |
 |----------|-----------|------------|------|
 | windows | \ (resolved at runtime) | \\?\ prefix for >260 chars | case-insensitive |
-| unix | / | no limit (practical) | case-sensitive |
+| unix | / | no limit (forctical) | case-sensitive |
 | all | / in templates | handle per-platform | follow platform default |

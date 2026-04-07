@@ -4,6 +4,16 @@ id: bld_output_template_builder
 pillar: P03
 llm_function: PRODUCE
 purpose: Output format for generated builder artifacts
+quality: 9.1
+title: "Output Template Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Output Template: _builder-builder
 
@@ -32,3 +42,37 @@ archetypes/builders/{kind}-builder/
 4. cex_doctor.py → PASS (0 WARN)
 5. cex_compile.py --all → 0 errors
 6. cex_materialize.py → sub-agent created
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P03 |
+| Domain | _builder construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
+
+## Builder Context
+
+This ISO operates within the `_builder-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |

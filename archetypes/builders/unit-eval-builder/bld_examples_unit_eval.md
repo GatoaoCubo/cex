@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of unit_eval artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Unit Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [unit_eval, builder, examples]
+tldr: "Golden and anti-examples for unit eval construction, demonstrating ideal structure and common pitfalls."
+domain: "unit eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: unit-eval-builder
@@ -22,7 +32,7 @@ updated: "2026-03-26"
 author: "builder"
 target: "knowledge-card-builder"
 target_kind: "knowledge_card"
-input: "Destila conhecimento sobre rate limiting para APIs REST"
+input: "Destila knowledge about rate limiting for APIs REST"
 expected_output: "Valid YAML with id, kind, pillar, quality: null, tags >= 3, tldr <= 160ch"
 assertions:
   - gate_ref: "H01"
@@ -51,13 +61,13 @@ teardown: "Discard generated artifact"
 edge_case: false
 coverage_scope: "HARD gates H01-H05 + SOFT gate S02"
 domain: "knowledge"
-quality: null
+quality: 8.8
 tags: [unit-eval, knowledge-card, yaml-parse, HARD-gates]
 tldr: "Tests KC builder YAML parse and frontmatter HARD gates H01-H05 + S02"
 density_score: 0.91
 ## Input
-Destila conhecimento sobre rate limiting para APIs REST.
-Foco: algoritmos (token bucket, sliding window), headers padrao, HTTP 429 handling.
+Destila knowledge about rate limiting for APIs REST.
+Foco: algoritmos (token bucket, sliding window), headers standard, HTTP 429 handling.
 ## Expected Output
 Valid knowledge_card YAML artifact with:
 - id matching p01_kc_ prefix

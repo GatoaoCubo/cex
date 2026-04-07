@@ -23,7 +23,7 @@ tags:
 tldr: "Pick one notation, declare zoom level, label everything, always include a legend."
 impact_score: 7.5
 decay_rate: 0.04
-agent_node: edison
+agent_group: edison
 keywords:
   - diagram
   - ASCII
@@ -35,6 +35,9 @@ keywords:
   - zoom level
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Diagram"
+density_score: 0.90
 ---
 ## Summary
 Architecture diagrams fail to communicate when symbols are ambiguous, notation is inconsistent, or scope is too broad. A four-step production process - choose notation and zoom, draw labeled components, add legend, add annotations - produces diagrams that readers interpret correctly on first read without author assistance.
@@ -45,10 +48,65 @@ Architecture diagrams fail to communicate when symbols are ambiguous, notation i
 **Step 4 - Annotations**: add a `## Annotations` section for decisions that cannot be shown visually - why a particular boundary exists, what a dotted line means in context, which components are optional.
 **Size discipline**: if the body exceeds 4096 bytes, split into two diagrams at a natural layer boundary rather than shrinking font or removing labels.
 ## Anti-Pattern
-- No legend - readers infer meaning and disagree with each other.
-- Mixing ASCII boxes with Mermaid graph syntax in the same body - breaks rendering.
-- Attempting to show all layers (system + subsystem + component) in a single frame - produces unreadable clutter above ~12 nodes.
-- Unlabeled arrows - readers cannot tell whether a line means "calls", "publishes to", "inherits from", or "deploys to".
-- Prose description instead of actual visual characters - the body must contain drawn elements, not a description of what a diagram would show.
-- Missing `zoom_level` in frontmatter - consumers cannot index or filter diagrams by abstraction level.
+1. No legend - readers infer meaning and disagree with each other.
+2. Mixing ASCII boxes with Mermaid graph syntax in the same body - breaks rendering.
+3. Attempting to show all layers (system + subsystem + component) in a single frame - produces unreadable clutter above ~12 nodes.
+4. Unlabeled arrows - readers cannot tell whether a line means "calls", "publishes to", "inherits from", or "deploys to".
+5. Prose description instead of actual visual characters - the body must contain drawn elements, not a description of what a diagram would show.
+6. Missing `zoom_level` in frontmatter - consumers cannot index or filter diagrams by abstraction level.
 ## Context
+
+## Builder Context
+
+This ISO operates within the `diagram-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_diagram_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_diagram_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | diagram |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

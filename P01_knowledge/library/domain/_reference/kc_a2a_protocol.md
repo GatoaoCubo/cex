@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: agent_interoperability
 origin: src_standards_global
-quality: 9.0
+quality: 9.1
 tags:
 - a2a
 - google

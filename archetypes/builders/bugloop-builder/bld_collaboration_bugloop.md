@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How bugloop-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Bugloop"
+version: "1.0.0"
+author: n03_builder
+tags: [bugloop, builder, examples]
+tldr: "Golden and anti-examples for bugloop construction, demonstrating ideal structure and common pitfalls."
+domain: "bugloop construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: bugloop-builder

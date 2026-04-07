@@ -45,7 +45,7 @@ keywords:
 - anuncio
 - campanha
 - redacao
-agent_node: n02-visual-marketing-hub
+agent_group: n02-visual-marketing-hub
 model: claude-sonnet-4-6
 model_fallback: claude-opus-4-6
 cli: claude

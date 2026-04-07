@@ -24,7 +24,7 @@ classification:
   type: knowledge_card | research | benchmark | data | spec | code
   lp: P01-P12
   destination: pool/{category}/
-  satellite: pytha | shaka | lily | york | edison
+  agent_group: pytha | shaka | lily | york | edison
   confidence: 0.0-1.0
   suggested_name: "KC_DOMAIN_NNN.md"
 ```
@@ -57,13 +57,13 @@ sources:
 ## Batch Processing
 
 ```bash
-# Process entire inbox (orchestrator dispatches satellites)
+# Process entire inbox (orchestrator dispatches agent_groups)
 "processa inbox"
 
 # Process specific file
 "processa inbox/raw/competitor_analysis.pdf"
 
-# Process with specific satellite
+# Process with specific agent_group
 "research_agent processa inbox/raw/arxiv_paper.pdf"
 ```
 

@@ -8,6 +8,16 @@ name: [nome_do_servidor]
 transport: [stdio|sse|http]
 tools_provided: [[tool_1], [tool_2]]
 resources_provided: [[resource_1], [resource_2]]
+quality: 9.0
+title: "Tpl Mcp Server"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # MCP Server: [nome_do_servidor]

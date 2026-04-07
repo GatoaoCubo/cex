@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for context_doc
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Context Doc"
+version: "1.0.0"
+author: n03_builder
+tags: [context_doc, builder, examples]
+tldr: "Golden and anti-examples for context doc construction, demonstrating ideal structure and common pitfalls."
+domain: "context doc construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: context_doc

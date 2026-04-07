@@ -4,12 +4,22 @@ id: bld_architecture_env_config
 pillar: P08
 llm_function: GOVERN
 purpose: Component map of env_config — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Env Config"
+version: "1.0.0"
+author: n03_builder
+tags: [env_config, builder, examples]
+tldr: "Golden and anti-examples for env config construction, demonstrating ideal structure and common pitfalls."
+domain: "env config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
-| scope | The system boundary this config covers: global, agent_node, service | env-config-builder | required |
+| scope | The system boundary this config covers: global, agent_group, service | env-config-builder | required |
 | variables | Catalog of env vars: name, type, default, description, sensitivity | env-config-builder | required |
 | validation_rules | Per-variable constraints: regex, range, enum, required flag | env-config-builder | required |
 | sensitive_vars | List of secret/key vars with masking rules (never log, never expose) | env-config-builder | required |

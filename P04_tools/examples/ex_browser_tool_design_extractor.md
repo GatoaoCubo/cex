@@ -9,7 +9,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 domain: building
-quality: 8.5
+quality: 9.1
 tags: [design-tokens, tailwind, css, extraction, visual-design]
 tldr: Pipeline URL-to-tokens - Discover(Chrome)>Extract(parser)>Transform(Style Dictionary)>Build(components)>Validate(ODiff)
 user_invocable: true
@@ -29,6 +29,7 @@ examples:
 density_score: 0.86
 linked_artifacts:
   agent: records/agents/design-extractor/README.md
+title: "Example: Browser Tool Design Extractor"
 ---
 
 # Design Extractor Skill

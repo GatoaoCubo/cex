@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Embedding Config"
+version: "1.0.0"
+author: n03_builder
+tags: [embedding_config, builder, examples]
+tldr: "Golden and anti-examples for embedding config construction, demonstrating ideal structure and common pitfalls."
+domain: "embedding config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: embedding_config Production Rules
 ## Naming Convention
@@ -26,12 +36,12 @@ permission_scope: nucleus
 | Model slugs | snake_case, lowercase | `nomic_embed_text`, `text_embedding_3_small` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `cex/P01_knowledge/examples/p01_emb_{model_slug}.yaml`
-- Compiled: `cex/P01_knowledge/compiled/p01_emb_{model_slug}.yaml`
+1. Output: `cex/P01_knowledge/examples/p01_emb_{model_slug}.yaml`
+2. Compiled: `cex/P01_knowledge/compiled/p01_emb_{model_slug}.yaml`
 ## Size Limits (aligned with SCHEMA)
-- Body: max 512 bytes
-- Total: ~1000 bytes including frontmatter
-- Density: >= 0.80
+1. Body: max 512 bytes
+2. Total: ~1000 bytes including frontmatter
+3. Density: >= 0.80
 ## Distance Metric Enum
 | Metric | When to use | Normalize |
 |--------|-------------|-----------|
@@ -46,3 +56,15 @@ Rule: id MUST equal filename stem.
 | text-embedding-3-small | openai | 1536 | 8191 |
 | text-embedding-3-large | openai | 3072 | 8191 |
 | embed-english-v3.0 | cohere | 1024 | 512 |
+
+## Metadata
+
+```yaml
+id: bld_config_embedding_config
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-embedding-config.md
+```

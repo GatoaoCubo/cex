@@ -1,4 +1,4 @@
-"""Tests for cex_compile.py — Markdown to YAML compilation."""
+"""Tests for cex_compile.py -- Markdown to YAML compilation."""
 
 import sys
 from pathlib import Path

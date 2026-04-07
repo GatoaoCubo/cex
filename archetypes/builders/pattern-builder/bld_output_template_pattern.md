@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a pattern
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Pattern"
+version: "1.0.0"
+author: n03_builder
+tags: [pattern, builder, examples]
+tldr: "Golden and anti-examples for pattern construction, demonstrating ideal structure and common pitfalls."
+domain: "pattern construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: pattern
@@ -12,35 +22,40 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 id: p08_pat_{{slug}}
 kind: pattern
 pillar: P08
+
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
+
 domain: "{{domain}}"
 quality: null
 tags: [{{tag_1}}, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
+
 name: "{{pattern_name_2_5_words}}"
 problem: "{{recurring_problem_one_sentence}}"
 solution: "{{core_solution_approach}}"
 context: "{{when_where_pattern_applies}}"
+
 forces: [{{force_1}}, {{force_2}}]
 consequences: [{{consequence_1}}, {{consequence_2}}]
 related_patterns: [{{related_1}}]
 anti_patterns: [{{anti_1}}]
+
 applicability: "{{when_to_use_and_when_not}}"
 keywords: [{{kw_1}}, {{kw_2}}, {{kw_3}}]
 ```
 ## Problem
 {{recurring_problem_in_concrete_terms}}
 ## Context
-- Environment: {{where_problem_occurs}}
-- Frequency: {{how_often_encountered}}
-- Severity: {{impact_if_unsolved}}
+1. Environment: {{where_problem_occurs}}
+2. Frequency: {{how_often_encountered}}
+3. Severity: {{impact_if_unsolved}}
 ## Forces
-- {{tension_1}}: {{why_hard_1}}
-- {{tension_2}}: {{why_hard_2}}
-- {{tension_3}}: {{why_hard_3}}
+1. {{tension_1}}: {{why_hard_1}}
+2. {{tension_2}}: {{why_hard_2}}
+3. {{tension_3}}: {{why_hard_3}}
 ## Solution
 {{reusable_approach_concrete_steps}}
 ```text
@@ -48,20 +63,34 @@ keywords: [{{kw_1}}, {{kw_2}}, {{kw_3}}]
 ```
 ## Consequences
 Benefits:
-- {{benefit_1}}
-- {{benefit_2}}
+1. {{benefit_1}}
+2. {{benefit_2}}
 Costs:
-- {{cost_1}}
-- {{cost_2}}
+1. {{cost_1}}
+2. {{cost_2}}
 ## Examples
 1. **{{example_name_1}}**: {{concrete_application_1}}
 2. **{{example_name_2}}**: {{concrete_application_2}}
 ## Anti-Patterns
-- **{{anti_name_1}}**: {{why_wrong_1}}
-- **{{anti_name_2}}**: {{why_wrong_2}}
+1. **{{anti_name_1}}**: {{why_wrong_1}}
+2. **{{anti_name_2}}**: {{why_wrong_2}}
 ## Related Patterns
-- {{related_pattern_1}}: {{relationship_description_1}}
-- {{related_pattern_2}}: {{relationship_description_2}}
+1. {{related_pattern_1}}: {{relationship_description_1}}
+2. {{related_pattern_2}}: {{relationship_description_2}}
 ## References
-- {{reference_1}}
-- {{reference_2}}
+1. {{reference_1}}
+2. {{reference_2}}
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

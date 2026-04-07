@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for secret_config
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.2
+title: "Instruction Secret Config"
+version: "1.0.0"
+author: n03_builder
+tags: [secret_config, builder, examples]
+tldr: "Golden and anti-examples for secret config construction, demonstrating ideal structure and common pitfalls."
+domain: "secret config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a secret_config
@@ -43,3 +53,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 11. SOFT gates: score against QUALITY_GATES.md
 12. Cross-check: is this a SECRET (sensitive credential with rotation)? Not a generic env var (env_config)? Not an access rule (permission)? Not a toggle (feature_flag)?
 13. Revise if score < 8.0 before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify secret
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | secret config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

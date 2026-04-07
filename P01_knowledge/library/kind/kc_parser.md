@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: parser
-quality: 9.0
+quality: 9.1
 tags: [parser, P05, GOVERN, kind-kc, extraction]
 tldr: "Extracts structured semantic data from raw LLM output using regex, JSON extraction, or Pydantic models — the bridge from unstructured generation to typed downstream data"
 when_to_use: "Building, reviewing, or reasoning about parser artifacts"

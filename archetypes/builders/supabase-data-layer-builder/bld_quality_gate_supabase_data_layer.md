@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: null
+quality: 9.0
 tags: [builder, supabase, data-layer, quality-gate, validation]
 density_score: 0.92
 ---
@@ -21,7 +21,7 @@ density_score: 0.92
 | H01 | RLS everywhere | Every table with user data has `ENABLE ROW LEVEL SECURITY` | Block — add RLS |
 | H02 | No hardcode | Zero company names, API keys, project_refs, URLs reais | Block — replace with [PLACEHOLDER] |
 | H03 | Multi-tenant ready | `org_id` column + RLS policy on all shared tables | Block — add org isolation |
-| H04 | Tier-appropriate | No features above declared tier | Block — downgrade or upgrade tier |
+| H04 | Tier-apownte | No features above declared tier | Block — downgrade or upgrade tier |
 | H05 | Migration SQL | All schema changes as versioned migration files | Block — convert to migration |
 | H06 | Config completeness | All required sections present in YAML | Block — add missing sections |
 | H07 | Index coverage | Every FK, RLS column, and sort column has index | Block — add indexes |
@@ -54,6 +54,6 @@ BLOCK: any hard gate fail = score 0 until fixed
 - [ ] H03: org_id + JWT claim policy
 - [ ] H04: Features ⊆ tier capabilities
 - [ ] H05: Only migration SQL, no manual DDL
-- [ ] H06: identidade + projeto + database + auth + rls present
+- [ ] H06: identity + project + database + auth + rls present
 - [ ] H07: Indexes on FK + RLS + ORDER BY columns
 - [ ] H08: service_role_key only in server/.env, never in client

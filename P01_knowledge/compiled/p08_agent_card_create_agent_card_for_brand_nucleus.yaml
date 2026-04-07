@@ -106,7 +106,7 @@ flags:
 domain: brand-identity-monetization
 quality: 9.1
 tags:
-- agent_node
+- agent_group
 - brand
 - monetization
 - N06

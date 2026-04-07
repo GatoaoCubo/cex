@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: model_card
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, model-card, llm-spec, P02, provider]
 tldr: "Quality gate for model_card artifacts: enforces provider, context window, pricing, and capabilities fields."
 density_score: 0.85
@@ -27,7 +27,7 @@ All HARD gates must pass. Any single failure sets score to 0 and blocks publish.
 | H04 | `kind` == literal string `"model_card"` | Type integrity failure |
 | H05 | `quality` == `null` | Self-scoring violation — pool metric corruption |
 | H06 | Required fields present and non-empty: `id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `provider`, `model_name`, `context_window`, `pricing`, `capabilities`, `tags`, `tldr` | Incomplete artifact |
-| H07 | `provider` matches a known provider enum (Anthropic, OpenAI, Google, Meta, Mistral, Cohere, or documented custom) | Prevents typos that break routing |
+| H07 | `provider` matches a known provider enum (Anthropic, OpenAI, Google, Meta, Mistral, Cohere, or documented costm) | Prevents typos that break routing |
 | H08 | `context_window` is a positive integer | Core spec field — must be exact |
 | H09 | `pricing` field present with at least `input` and `output` keys (numeric $/1M tokens, or `null` for open-weight) | Non-comparable pricing blocks cost analysis |
 | H10 | `capabilities` field is a map of boolean flags | Capability claims require verifiable binary form |

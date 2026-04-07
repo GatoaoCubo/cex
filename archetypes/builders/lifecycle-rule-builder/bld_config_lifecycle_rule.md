@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Lifecycle Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [lifecycle_rule, builder, examples]
+tldr: "Golden and anti-examples for lifecycle rule construction, demonstrating ideal structure and common pitfalls."
+domain: "lifecycle rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: lifecycle_rule Production Rules
 ## Naming
@@ -25,11 +35,11 @@ permission_scope: nucleus
 | Fields | snake_case | freshness_days, review_cycle |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: cex/P11_feedback/examples/p11_lc_{rule_slug}.yaml
-- Compiled: cex/P11_feedback/compiled/p11_lc_{rule_slug}.yaml
+1. Output: cex/P11_feedback/examples/p11_lc_{rule_slug}.yaml
+2. Compiled: cex/P11_feedback/compiled/p11_lc_{rule_slug}.yaml
 ## Size Limits (aligned with SCHEMA)
-- Body: max 4096 bytes
-- Density: >= 0.80
+1. Body: max 4096 bytes
+2. Density: >= 0.80
 ## Freshness Ranges by Domain Volatility
 | Volatility | freshness_days | Example domains |
 |------------|---------------|-----------------|
@@ -44,3 +54,15 @@ Rule: id MUST equal filename stem.
 | Weekly updates | monthly |
 | Monthly updates | quarterly |
 | Rarely changes | yearly |
+
+## Metadata
+
+```yaml
+id: bld_config_lifecycle_rule
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-lifecycle-rule.md
+```

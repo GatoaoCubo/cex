@@ -14,6 +14,8 @@ depends_on: null
 tags: [spec, n01, n04, research, knowledge, verticalization]
 tldr: "N01 evolves to Research Analyst (inveja analítica). N04 evolves to Knowledge Engineer (gula por conhecimento + database layer). FULL scope: 6 schemas + 8 outputs each."
 density_score: 0.95
+quality: 9.1
+updated: "2026-04-07"
 ---
 
 # Spec N01+N04 Verticalization

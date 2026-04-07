@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.1
 tags: [builder, instruction, software-project, pipeline]
 tldr: "9-step build pipeline: PARSE→SCAFFOLD→IMPLEMENT→TEST→LINT→DOCKER→CI→DEPLOY→REVIEW. Each step has inputs, outputs, and validation gates."
 density_score: 0.92
@@ -54,3 +54,18 @@ Apply kc_code_review. Each dimension: ✅/⚠️/❌ with 1-line rationale.
 PARSE→SCAFFOLD→IMPLEMENT→TEST→LINT→DOCKER→CI→DEPLOY→REVIEW
  F1      F2       F3       F4   F5    F6    F7   F8    F8b
 ```
+
+## Cross-References
+
+- **Pillar**: P03 (Prompt)
+- **Kind**: `instruction`
+- **Artifact ID**: `bld_sp_instruction_software_project`
+- **Tags**: [builder, instruction, software-project, pipeline]
+
+## Builder Integration
+
+| Aspect | Detail |
+|--------|--------|
+| ISO | 1 of 13 builder ISOs |
+| Loader | `cex_skill_loader.py` |
+| Pipeline | Injected at F3 (Compose) |

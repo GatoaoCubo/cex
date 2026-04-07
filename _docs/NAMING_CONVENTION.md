@@ -23,7 +23,7 @@ Do not rename during migration — only normalize on new package creation.
 ## ISO File Names (Canonical)
 
 The canonical ISO Package spec uses human-readable filenames. Legacy agents used
-`ISO_{SATELLITE}_{NNN}_{TYPE}.md` — this table maps old to new.
+`ISO_{AGENT_GROUP}_{NNN}_{TYPE}.md` — this table maps old to new.
 
 ### Conversion Table: OLD → NEW
 

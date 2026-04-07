@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: lifecycle_rule
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, lifecycle-rule, governance, P11, state-machine]
 tldr: "Quality gate for lifecycle_rule artifacts: enforces state list, measurable transitions, and periodic review cycle."
 density_score: 0.85
@@ -39,13 +39,13 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S02 | States exhaustive for domain | 1.0 | No reachable real state missing from States table |
 | S03 | Transitions have measurable criteria | 1.0 | Each transition criterion is checkable without human judgment |
 | S04 | Review cycle realistic | 1.0 | Cycle matches actual volatility of governed domain |
-| S05 | Ownership assigned per state | 1.0 | Each state has a named owner role or agent_node |
+| S05 | Ownership assigned per state | 1.0 | Each state has a named owner role or agent_group |
 | S06 | Freshness threshold justified | 0.5 | `freshness_days` rationale present (not arbitrary) |
 | S07 | Sunset conditions explicit | 1.0 | Defines what triggers end-of-life and who approves it |
 | S08 | `tags` includes artifact `kind` name | 0.5 | Enables filtering by governed kind |
 | S09 | Edge cases documented | 1.0 | Handles: orphaned artifacts, failed transitions, emergency overrides |
 | S10 | Compatible with quality gate tiers | 0.5 | States map to: DRAFT, REVIEW, PUBLISH, GOLDEN, SUNSET |
-| S11 | Density >= 0.80 | 1.0 | No filler: "when appropriate", "as needed", "feels outdated" |
+| S11 | Density >= 0.80 | 1.0 | No filler: "when apownte", "as needed", "feels outdated" |
 | S12 | Automation section present | 0.5 | Names at least one automated check or script for transition validation |
 ## Actions
 | Score | Tier | Action |

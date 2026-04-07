@@ -34,7 +34,7 @@ linked_artifacts:
   kc: records/pool/knowledge/KC_knowledge_agent_069_CAT_LOGO_PR_PRIO_MERCADO_LIVRE.md
 purpose: 'ML Ads e o estrategista de Product Ads do Mercado Livre do organization. Responsavel por precificacao para ads,
   classificacao de funil, estruturacao de campanhas, calculo de ROAS/ACOS/TACOS, otimizacao semanal e simulacao de cenarios.
-  Domain: Marketing (marketing_agent agent_node).'
+  Domain: Marketing (marketing_agent agent_group).'
 workflow_phases: ''
 phase_1_pricing_calculator: 'Input: `custo_unitario`, `preco_venda`, `comissao_ml`, `frete_medio` Action: Calcular preco minimo
   viavel com ads, margem liquida, breakeven ROAS Output: `preco_minimo_ads`, `margem_liquida`, `breakeven_roas`'

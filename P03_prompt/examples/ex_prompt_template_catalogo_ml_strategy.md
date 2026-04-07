@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: marketing_agent
 domain: marketplace
-quality: 9.0
+quality: 9.1
 tags: [mercado-livre, catalogo, strategy, buy-box, prompt-template]
 tldr: System prompt para estrategista de catalogo ML - 5 fases (aquecer>negar>criar>migrar>defender), Buy Box factors, regras de ouro
 when_to_use: Chat com usuario sobre estrategia de catalogo no Mercado Livre

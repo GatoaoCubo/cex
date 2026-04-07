@@ -4,6 +4,16 @@ id: bld_architecture_lifecycle_rule
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of lifecycle_rule — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Lifecycle Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [lifecycle_rule, builder, examples]
+tldr: "Golden and anti-examples for lifecycle rule construction, demonstrating ideal structure and common pitfalls."
+domain: "lifecycle rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: lifecycle_rule in the CEX

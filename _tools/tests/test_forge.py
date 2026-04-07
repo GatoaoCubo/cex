@@ -1,4 +1,4 @@
-"""Tests for cex_forge.py — prompt composition and builder loading."""
+"""Tests for cex_forge.py -- prompt composition and builder loading."""
 import sys
 from pathlib import Path
 import pytest

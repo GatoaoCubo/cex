@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Init v1.0 — Scaffold a new CEX project in 5 questions.
+# -*- coding: utf-8 -*-
+"""CEX Init v1.0 -- Scaffold a new CEX project in 5 questions.
 
 Interactive:
   python _tools/cex_init.py
@@ -111,7 +112,7 @@ QUALITY_THRESHOLDS = {
 COPY_TOOLS = ["cex_doctor.py", "validate_builder.py", "cex_compile.py"]
 
 VALID_DOMAINS = ["marketing", "engineering", "research", "ops", "custom"]
-VALID_LLMS = ["claude", "openai", "gemini", "multi"]
+VALID_LLMS = ["pi", "claude", "openai", "gemini", "multi"]
 VALID_QUALITIES = ["strict", "standard", "relaxed"]
 
 
@@ -140,7 +141,7 @@ def interactive_flow() -> dict:
     """Run 5-question interactive scaffold wizard."""
     print()
     print("=" * 60)
-    print("  CEX Init — Scaffold a new CEX project")
+    print("  CEX Init -- Scaffold a new CEX project")
     print("=" * 60)
     print()
 
@@ -287,8 +288,8 @@ def generate_codex(dest: Path, name: str, domain: str, quality: str) -> None:
         qmin = QUALITY_THRESHOLDS[quality]["min"]
         dmin = QUALITY_THRESHOLDS[quality]["density"]
         content = content.replace(
-            "Density >= 0.8 obrigatorio.",
-            f"Density >= {dmin} obrigatorio. Quality min: {qmin}.",
+            "Density >= 0.8 required.",
+            f"Density >= {dmin} required. Quality min: {qmin}.",
         )
         (codex_dest / "CODEX.md").write_text(content, encoding="utf-8")
     else:
@@ -311,7 +312,7 @@ Hierarquia: CODEX > _schema > _generator > templates > instances
 ## ANATOMIA UNIVERSAL
 YAML front: id, type, lp, quality, keywords(3+), long_tails(2+), bullets(3+), axioms(1+)
 MD body: title, summary 1-line, secoes por tipo
-Density >= {q["density"]} obrigatorio. Quality min: {q["min"]}.
+Density >= {q["density"]} required. Quality min: {q["min"]}.
 Max 4KB. Prosa > 3 linhas proibida. Bullets com max 80 chars.
 
 ## NAMING
@@ -511,7 +512,7 @@ def generate_pre_commit(dest: Path) -> None:
     hooks_dir = dest / ".githooks"
     hooks_dir.mkdir(parents=True, exist_ok=True)
     content = """#!/usr/bin/env bash
-# CEX pre-commit hook — runs governance checks before commit.
+# CEX pre-commit hook -- runs governance checks before commit.
 # Install: git config core.hooksPath .githooks
 
 set -euo pipefail
@@ -655,7 +656,7 @@ def scaffold(cfg: dict) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Init v1.0 — scaffold a new CEX project in 5 questions",
+        description="CEX Init v1.0 -- scaffold a new CEX project in 5 questions",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Examples:\n"

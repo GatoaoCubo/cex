@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Mcp Server"
+version: "1.0.0"
+author: n03_builder
+tags: [mcp_server, builder, examples]
+tldr: "Golden and anti-examples for mcp server construction, demonstrating ideal structure and common pitfalls."
+domain: "mcp server construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: mcp_server Production Rules
 ## Naming Convention

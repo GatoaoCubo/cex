@@ -12,10 +12,17 @@ keywords: [brand, marca, identidade, brand-book, persona, arquetipo, voz, naming
 model: sonnet
 model_escalation: opus
 mcps: [fetch, stripe, hotmart]
-quality: 8.9
+quality: 9.1
+updated: 2026-04-07
 tags: [dispatch_rule, commercial, N06, brand, monetization, routing]
 tldr: "N06 routes brand discovery + identity + monetization. 25 keywords, dual-model (sonnet default, opus for brand-from-scratch). N06 runs FIRST on new CEX instances."
 density_score: 0.94
+axioms:
+  - "N06 ALWAYS runs first on new instances — brand identity precedes all other nucleus work."
+  - "ALWAYS escalate to Opus for brand-from-scratch — Sonnet handles incremental updates."
+linked_artifacts:
+  primary: p02_agent_commercial_nucleus
+  related: [p12_wf_commercial, p03_sp_commercial_nucleus, p08_ac_commercial_nucleus]
 ---
 
 # N06 Dispatch Rule — Brand + Monetization

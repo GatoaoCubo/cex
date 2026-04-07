@@ -1,0 +1,77 @@
+kind: collaboration
+id: bld_collaboration_webhook
+pillar: P04
+llm_function: CONTEXT
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+quality: null
+tags:
+- collaboration
+- webhook
+- P04
+- crew
+- integration
+- dependency
+tldr: 'webhook-builder crew role: EVENT-DRIVEN HTTP SPECIALIST. Integration Pipeline, Event System, Dual-Direction crew patterns.'
+density_score: 1.0
+crew_role: 'Title: EVENT-DRIVEN HTTP SPECIALIST Primary question: "What events does this endpoint handle, what is the payload
+  schema, and how is it verified and delivered reliably?" Produces: webhook artifact (P04) — event endpoint spec with direction,
+  event types, payload schema, signature verification, retry policy. Does NOT produce: HTTP client calls (api_client), user
+  notifications (notifier), protocol servers (mcp_server), background jobs (daemon).'
+crew_patterns: ''
+integration_pipeline: 'Combines event-driven inbound with synchronous outbound and notification delivery.
+
+  webhook-builder     -> inbound event spec (what we receive)
+
+  api-client-builder  -> outbound API call spec (what we call in response)
+
+  notifier-builder    -> delivery spec (how we notify end-user of outcome)
+
+  Example: Stripe payment.completed (webhook) -> fetch order details (api_client) -> send receipt email (notifier).
+
+  Handoff: webhook passes event_type + payload_schema to api_client as trigger context. api_client result feeds notifier as
+  content.'
+event_system: 'Full event infrastructure: inbound capture, internal routing, outbound dispatch.
+
+  webhook-builder  -> inbound event receiver spec
+
+  hook-builder     -> internal lifecycle hook spec (pre/post processing)
+
+  daemon-builder   -> persistent event processor spec (consumer loop)
+
+  Example: GitHub push (webhook) -> pre-commit checks (hook) -> CI runner (daemon).
+
+  Handoff: webhook defines payload schema; hook consumes it as trigger input; daemon receives processed events from hook output
+  queue.'
+dual_direction_integration: 'When a system both receives and sends webhooks to the same provider.
+
+  webhook-builder (inbound)   -> receive provider events
+
+  webhook-builder (outbound)  -> send events to provider
+
+  api-client-builder          -> synchronous registration/config calls
+
+  Example: Slack app — receives Events API (inbound webhook), sends to Incoming Webhooks URL (outbound webhook), calls Slack
+  REST API (api_client).'
+dependency_map: "Depends on: NONE — webhook is a base artifact\nDepended on by:\n  notifier-builder    (webhook event triggers\
+  \ notification)\n  hook-builder        (webhook event_type as hook trigger)\n  daemon-builder      (webhook payload as queue\
+  \ message format)\n  api-client-builder  (webhook event triggers outbound API call)"
+handoff_contract: "When passing context TO another builder:\nfrom: webhook-builder\nto: [notifier-builder | api-client-builder\
+  \ | hook-builder]\nprovides:\n  event_type: string\n  payload_schema: JSON Schema\n  idempotency_key: string\nWhen receiving\
+  \ context FROM another builder:\nfrom: [api-client-builder | hook-builder]\nto: webhook-builder\nprovides:\n  target_url:\
+  \ string\n  expected_events: list"
+escalation_paths: '| Situation | Action |
+
+  |-----------|--------|
+
+  | Request-response, not event-driven | Redirect to api-client-builder |
+
+  | End-user push notification | Redirect to notifier-builder |
+
+  | Persistent background processing | Redirect to daemon-builder |
+
+  | MCP protocol server | Redirect to mcp-server-builder |
+
+  | "Send notification when payment completes" | Clarify: webhook (receive event) + notifier (send to user) |'

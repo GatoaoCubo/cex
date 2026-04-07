@@ -6,7 +6,7 @@ quality: 8.7
 source: gdrive://organization Conhecimento/Mapeando_o_Universo_do_Machine_Learning.pdf
 contributor: CEO (root folder)
 domain: conhecimento
-agent_node: knowledge_agent
+agent_group: knowledge_agent
 tags:
 - machine-learning
 - algoritmos
@@ -142,7 +142,7 @@ aplicabilidade_organization: '| Conceito ML | Uso em organization |
 
   | Regressao | Prever quality score de artefatos |
 
-  | Decision Trees | Routing de tarefas para satelites |
+  | Decision Trees | Routing de tarefas para agent_groups |
 
   | PCA | Reduzir dimensionalidade de embeddings do brain |
 

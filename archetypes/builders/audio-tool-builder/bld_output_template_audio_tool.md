@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an audio_tool artifact
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Audio Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [audio_tool, builder, examples]
+tldr: "Golden and anti-examples for audio tool construction, demonstrating ideal structure and common pitfalls."
+domain: "audio tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: audio_tool

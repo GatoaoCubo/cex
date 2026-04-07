@@ -7,12 +7,12 @@ Leia `.cex/runtime/handoffs/mission_schema_evolution.md` por COMPLETO.
 Execute Phase 1 (Schema Definitions), Phase 2 (Hydrate 104 Builders), Phase 3 (Validate + Reindex) em sequência.
 
 ### Resumo das 3 Phases:
-1. **Phase 1** (1.5h): Evoluir 4 meta-templates (_builder-builder/bld_meta_*) com 8 patterns universais (keywords, triggers, geo_description, memory_scope, observation_types, effort, hooks, permissions)
+1. **Phase 1** (1.5h): Evoluir 4 meta-templates (_builder-builder/bld_meta_*) com 8 patterns universais (keywords, triggers, capability_summary, memory_scope, observation_types, effort, hooks, permissions)
 2. **Phase 2** (3-4h): Criar `_tools/cex_schema_hydrate.py`, executar --dry-run, depois --apply em 104 builders. Atualizar bld_norms.md com 11 regras novas.
 3. **Phase 3** (1h): Criar `_tools/tests/test_schema_evolution.py` (15 tests), rebuild index, update README.
 
 ### Critérios de Aceite:
-- 103 manifests com keywords + triggers + geo_description
+- 103 manifests com keywords + triggers + capability_summary
 - 104 memories com memory_scope + observation_types
 - 103 configs com effort + max_turns + disallowed_tools + hooks + permission_scope
 - 103 tools com ## Tool Permissions

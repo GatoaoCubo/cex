@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a chain
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Chain"
+version: "1.0.0"
+author: n03_builder
+tags: [chain, builder, examples]
+tldr: "Golden and anti-examples for chain construction, demonstrating ideal structure and common pitfalls."
+domain: "chain construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: chain
@@ -12,18 +22,22 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 id: p03_ch_{{pipeline_slug}}
 kind: chain
 pillar: P03
+
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
+
 title: "{{human_readable_title}}"
 steps_count: {{integer_matching_body}}
 flow: {{sequential|branching|parallel|mixed}}
 input_format: "{{what_first_step_receives}}"
+
 output_format: "{{what_last_step_produces}}"
 context_passing: {{full|filtered|summary}}
 error_strategy: {{fail_fast|skip|retry|fallback}}
 domain: "{{domain_value}}"
+
 quality: null
 tags: [chain, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
@@ -33,13 +47,13 @@ density_score: {{0.80-1.00}}
 {{why_this_chain_exists_2_to_4_sentences}}
 ## Steps
 ### Step 1: {{step_name}}
-- **Input**: {{input_type_and_description}}
-- **Prompt**: {{what_this_step_does}}
-- **Output**: {{output_type_and_description}}
+1. **Input**: {{input_type_and_description}}
+2. **Prompt**: {{what_this_step_does}}
+3. **Output**: {{output_type_and_description}}
 ### Step 2: {{step_name}}
-- **Input**: {{receives_from_step_1}}
-- **Prompt**: {{what_this_step_does}}
-- **Output**: {{output_type_and_description}}
+1. **Input**: {{receives_from_step_1}}
+2. **Prompt**: {{what_this_step_does}}
+3. **Output**: {{output_type_and_description}}
 {{...repeat for steps_count steps}}
 ## Data Flow
 ```text
@@ -47,9 +61,23 @@ density_score: {{0.80-1.00}}
 ```
 Context passing: {{context_passing_strategy_description}}
 ## Error Handling
-- **Strategy**: {{error_strategy}}
-- **On failure at step N**: {{failure_behavior}}
-- **Retry policy**: {{retry_details_if_applicable}}
+1. **Strategy**: {{error_strategy}}
+2. **On failure at step N**: {{failure_behavior}}
+3. **Retry policy**: {{retry_details_if_applicable}}
 ## References
-- {{reference_1}}
-- {{reference_2}}
+1. {{reference_1}}
+2. {{reference_2}}
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | chain construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

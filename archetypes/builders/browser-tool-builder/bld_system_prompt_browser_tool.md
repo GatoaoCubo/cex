@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Browser engines (Playwright/Puppeteer/Selenium/browser-use/Browserbase/Stagehand), DOM actions, CSS/XPath/ARIA selectors, output formats, headless config | NOT computer_use (generic screen), search_tool (search APIs), vision_tool (image analysis), cli_tool (terminal utilities)"
 domain: "browser_tool"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "browser_tool", "dom", "playwright", "automation", "scraper"]
 safety_level: standard
 tools_listed: false

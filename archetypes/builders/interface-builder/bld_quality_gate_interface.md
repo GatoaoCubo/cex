@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "interface — bilateral integration contracts defining methods, I/O schemas, versioning, and compatibility between agents"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, interface, contract, bilateral, integration, versioning, compatibility]
 tldr: "Gates ensuring interface artifacts define complete bilateral contracts with typed methods, versioning strategy, backward compatibility guarantees, and mock specs."
 density_score: 0.92

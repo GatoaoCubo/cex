@@ -50,3 +50,30 @@ Temperature: 0.0 | Max tokens: 500 | Model: haiku
     Revise to fix specific issues. Keep what passed.
 
 Temperature: 0.5 | Max tokens: 4000
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Prompt templates use {{VARIABLE}} syntax for parameter injection
+- Chain steps pass context via {previous} placeholder in task field
+- Token budget allocated per step to prevent context overflow
+- System prompts loaded from nucleus config, not hardcoded in chains
+
+### Usage Reference
+
+```yaml
+# chain integration
+artifact: chain_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

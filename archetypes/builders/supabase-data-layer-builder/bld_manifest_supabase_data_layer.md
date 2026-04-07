@@ -8,12 +8,12 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.9
+quality: 9.1
 tags: [builder, supabase, data-layer, manifest, capabilities]
-density_score: 0.90
+density_score: 1.0
 keywords: ["data platform", data-layer, builder, capabilities, supabase, manifest]
 triggers: ["create data platform", "build data platform artifact"]
-geo_description: >
+capability_summary: >
   L1: | Field | Value |. L2: RLS on every table with user data. L3: When user needs to create, build, or scaffold data platform.
 ---
 # Builder Manifest
@@ -72,6 +72,6 @@ OUTPUT: Migration SQL + RLS policies + Storage config + Edge Functions
 - RLS on every table with user data
 - No hardcoded company data anywhere
 - Multi-tenant ready (org_id + JWT claims)
-- Tier-appropriate features only
+- Tier-apownte features only
 - Migration SQL, not manual Dashboard changes
 - All 12 modules addressed in config

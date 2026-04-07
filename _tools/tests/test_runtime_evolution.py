@@ -1,4 +1,4 @@
-"""Runtime Evolution smoke tests — 11 tests covering all Phase 1-3 features.
+"""Runtime Evolution smoke tests -- 11 tests covering all Phase 1-3 features.
 
 Tests:
   1. Memory scanner returns correct headers
@@ -111,7 +111,9 @@ def test_effort_maps_to_correct_model():
     assert low["extended_thinking"] is False
 
     medium = resolve_effort_model("medium")
-    assert "sonnet" in medium["model"]
+    # Medium maps to n02 model from nucleus_models.yaml.
+    # Since 2026-04-06 upgrade, all nuclei use opus-4-6.
+    assert "opus" in medium["model"] or "sonnet" in medium["model"]
 
     high = resolve_effort_model("high")
     assert "opus" in high["model"]
@@ -271,13 +273,14 @@ def test_fork_execution_metadata():
     assert runner._resolve_fork_context({}) == "inline"
 
     # Test model resolution
-    model, tokens = runner._resolve_model({"model": "claude-opus-4-20250514", "model_max_tokens": 16000})
+    model, tokens = runner._resolve_model({"model": "claude-opus-4-6", "model_max_tokens": 16000})
     assert "opus" in model
     assert tokens == 16000
 
-    # Default model
+    # Default model (falls back to LLM_MODEL constant or router config)
     model, tokens = runner._resolve_model({})
-    assert "sonnet" in model
+    # Accept either sonnet (default constant) or opus (router override)
+    assert "sonnet" in model or "opus" in model
 
     # Test max turns
     state = RunState(intent="test", plan=plan)

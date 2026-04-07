@@ -4,6 +4,16 @@ id: bld_architecture_few_shot_example
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of few_shot_example — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Few Shot Example"
+version: "1.0.0"
+author: n03_builder
+tags: [few_shot_example, builder, examples]
+tldr: "Golden and anti-examples for few shot example construction, demonstrating ideal structure and common pitfalls."
+domain: "few shot example construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

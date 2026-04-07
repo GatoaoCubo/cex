@@ -2,9 +2,16 @@
 id: kc_stripe_patterns
 kind: knowledge_card
 pillar: P01
-quality: 8.6
+quality: 9.1
 tldr: "Design patterns for integrating Stripe, including environment modes, webhook handling, and subscription management."
 tags: ["stripe", "payment", "webhook", "subscription", "billing"]
+updated: "2026-04-07"
+domain: "knowledge management"
+title: "Stripe Patterns"
+version: "1.0.0"
+author: n04_knowledge
+created: "2026-04-07"
+density_score: 0.77
 ---
 
 # Stripe Integration Patterns
@@ -50,3 +57,18 @@ The system needs functions to manage the full lifecycle of a customer's subscrip
 -   **Create**: Initiate a subscription through a checkout session.
 -   **Retrieve**: Fetch subscription status (`get_subscription`) using the subscription ID to check if it's active, past_due, or canceled.
 -   **Update/Cancel**: Provide methods to change plans or cancel subscriptions.
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `kc_stripe_patterns`
+- **Tags**: ["stripe", "payment", "webhook", "subscription", "billing"]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

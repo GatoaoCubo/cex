@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of mental_model artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Mental Model"
+version: "1.0.0"
+author: n03_builder
+tags: [mental_model, builder, examples]
+tldr: "Golden and anti-examples for mental model construction, demonstrating ideal structure and common pitfalls."
+domain: "mental model construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: mental-model-builder

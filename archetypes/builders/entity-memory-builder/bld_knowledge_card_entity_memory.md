@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for entity_memory production — entity memory specification
 sources: LangChain EntityMemory, Zep entity graphs, Mem0 graph memory, cognitive science entity models
+quality: 9.2
+title: "Knowledge Card Entity Memory"
+version: "1.0.0"
+author: n03_builder
+tags: [entity_memory, builder, examples]
+tldr: "Golden and anti-examples for entity memory construction, demonstrating ideal structure and common pitfalls."
+domain: "entity memory construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: entity_memory

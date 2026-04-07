@@ -4,6 +4,16 @@ id: bld_tools_social_publisher
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for social publisher production and runtime
+quality: 9.0
+title: "Tools Social Publisher"
+version: "1.0.0"
+author: n03_builder
+tags: [social_publisher, builder, examples]
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+domain: "social publisher construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: social-publisher-builder
@@ -26,7 +36,7 @@ purpose: Tools and APIs available for social publisher production and runtime
 ## LLM for Caption Generation
 | Provider | Model | Usage | Cost |
 |----------|-------|-------|------|
-| Anthropic | claude-sonnet-4-20250514 | Caption + hashtag generation | ~$0.003/caption |
+| Anthropic | claude-sonnet-4-6 | Caption + hashtag generation | ~$0.003/caption |
 | OpenAI | gpt-4o-mini | Caption generation (budget) | ~$0.001/caption |
 | Ollama | llama3 | Local caption generation | Free |
 
@@ -50,7 +60,7 @@ purpose: Tools and APIs available for social publisher production and runtime
 |--------|------|------|
 | P04 schema | P04_tools/_schema.yaml | Field definitions for cli_tool |
 | Social KC | P01_knowledge/library/kind/kc_cli_tool.md | cli_tool knowledge |
-| Platform docs | External | API limits, formats, best practices |
+| Platform docs | External | API limits, formats, best forctices |
 
 ## Tool Permissions
 

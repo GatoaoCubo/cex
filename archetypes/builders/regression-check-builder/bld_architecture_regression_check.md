@@ -4,6 +4,16 @@ id: bld_architecture_regression_check
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of regression_check — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Regression Check"
+version: "1.0.0"
+author: n03_builder
+tags: [regression_check, builder, examples]
+tldr: "Golden and anti-examples for regression check construction, demonstrating ideal structure and common pitfalls."
+domain: "regression check construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

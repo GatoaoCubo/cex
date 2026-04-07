@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of interface artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Interface"
+version: "1.0.0"
+author: n03_builder
+tags: [interface, builder, examples]
+tldr: "Golden and anti-examples for interface construction, demonstrating ideal structure and common pitfalls."
+domain: "interface construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: interface-builder
 ## Golden Example
-INPUT: "Define o contrato entre researcher (pesquisa) e marketer (marketing) para entrega de research results"
+INPUT: "Define o contrato between researcher (research) e marketer (marketing) for entrega de research results"
 OUTPUT:
 ```yaml
 id: p06_iface_research_to_marketing
@@ -37,16 +47,16 @@ mock:
   enabled: true
   example_payloads:
     - method: "get_research_summary"
-      input: {topic: "decoracao minimalista", max_sources: 5}
+      input: {topic: "decoraction minimalist", max_sources: 5}
       output: {summary: "Tendencia crescente em 2026...", sources: ["url1", "url2"], confidence: 0.87}
-domain: "agent_node-integration"
+domain: "agent_group-integration"
 quality: null
-tags: [interface, shaka, lily, research, marketing, agent_node-integration]
+tags: [interface, shaka, lily, research, marketing, agent_group-integration]
 tldr: "Bilateral contract for researcher to deliver research results to marketer marketing workflows."
 density_score: 0.91
 ```
 ## Contract Definition
-researcher (research agent_node) provides structured research data to marketer (marketing agent_node).
+researcher (research agent_group) provides structured research data to marketer (marketing agent_group).
 marketer calls methods to get research summaries and competitor data for marketing campaigns.
 ## Methods
 | # | Name | Input | Output | Description |
@@ -62,7 +72,7 @@ marketer calls methods to get research summaries and competitor data for marketi
 ```json
 {
   "method": "get_research_summary",
-  "input": {"topic": "decoracao minimalista", "max_sources": 5},
+  "input": {"topic": "decoraction minimalist", "max_sources": 5},
   "output": {"summary": "Tendencia crescente em 2026...", "sources": ["url1", "url2"], "confidence": 0.87}
 }
 ```
@@ -78,7 +88,7 @@ WHY THIS IS GOLDEN:
 - tags list len >= 3, includes "interface" (S02 pass)
 - YAML parses cleanly (H01 pass)
 ## Anti-Example
-INPUT: "Interface entre researcher e marketer"
+INPUT: "Interface between researcher e marketer"
 BAD OUTPUT:
 ```yaml
 id: shaka_lily_interface

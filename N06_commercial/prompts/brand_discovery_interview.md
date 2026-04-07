@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n06_commercial
 domain: brand-discovery
-quality: 9.0
+quality: 9.2
 tags: [prompt, brand, discovery, interview, n06]
 tldr: "15 questions in 3 phases: Essence (who), Audience (for whom), Expression (how). Structured extraction with JSON intermediate, validation checklists, and archetype scoring matrix. Absorbed from legacy marca prompts."
 density_score: 0.96

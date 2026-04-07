@@ -35,7 +35,7 @@ linked_artifacts:
 density_score: null
 data_source: null
 summary: 'O principio fractal do CEX estabelece que a mesma estrutura de 12 LPs se repete em toda escala: prompt, chain, agente,
-  runtime, satelite e sistema. A diferenca entre um prompt simples e um sistema multi-agente nao eh de tipo — eh de completude.
+  runtime, agent_group e sistema. A diferenca entre um prompt simples e um sistema multi-agente nao eh de tipo — eh de completude.
   Um prompt preenche 1/12 LPs. Um agente, 3-4/12. Um sistema, 12/12. Voce aprende UMA estrutura e escala gradualmente.'
 spec: '| Escala | LPs | Funcoes Ativas | Equivalente Industria |
 
@@ -49,16 +49,16 @@ spec: '| Escala | LPs | Funcoes Ativas | Equivalente Industria |
 
   | L3 Runtime | 6/12 | +CALL, CONSTRAIN | Claude Code com tools e hooks |
 
-  | L4 Satellite | 9/12 | +LEARN, EVOLVE | Departamento autonomo com memoria |
+  | L4 Agent_group | 9/12 | +LEARN, EVOLVE | Departamento autonomo com memoria |
 
   | L5 System | 12/12 | Todas 8 funcoes | Multi-agente coordenado completo |
 
 
-  Analogia musical: nota (prompt) → acorde (chain) → frase (agent) → secao (agent_node) → sinfonia (system). Cada nivel adiciona
+  Analogia musical: nota (prompt) → acorde (chain) → frase (agent) → secao (agent_group) → sinfonia (system). Cada nivel adiciona
   dimensoes, nao substitui.
 
 
-  Analogia biologica: celula (prompt) → tecido (chain) → orgao (agent) → sistema (agent_node) → organismo (system). Propriedades
+  Analogia biologica: celula (prompt) → tecido (chain) → orgao (agent) → sistema (agent_group) → organismo (system). Propriedades
   emergentes surgem da composicao, nao da soma.
 
 

@@ -6,6 +6,15 @@ llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for system_prompt
 pattern: TEMPLATE derives from this. CONFIG restricts this.
 version: 2.0.0
+quality: 9.1
+title: "Schema System Prompt"
+author: n03_builder
+tags: [system_prompt, builder, examples]
+tldr: "Golden and anti-examples for system prompt construction, demonstrating ideal structure and common pitfalls."
+domain: "system prompt construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: system_prompt (v2)

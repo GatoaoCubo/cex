@@ -9,9 +9,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [collaboration, notifier, P04, crew, dependencies]
-quality: 8.7
+quality: 9.1
 tldr: "notifier-builder is PUSH DELIVERY SPECIALIST. Depends on: webhook-builder (events trigger notifications). Used by: instruction-builder, agent-builder, code-gen."
 density_score: 1.0
+domain: "collaboration artifact construction"
+title: "Collaboration Notifier"
 ---
 # Collaboration: notifier-builder
 
@@ -80,3 +82,18 @@ Use case: Re-engagement campaign with multi-channel fallback
 - If task involves full API auth flow: delegate to api-client-builder
 - If task involves background polling: delegate to daemon-builder
 - If task involves protocol server: delegate to mcp-server-builder
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `collaboration`
+- **Artifact ID**: `bld_collaboration_notifier`
+- **Tags**: [collaboration, notifier, P04, crew, dependencies]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `collaboration` | Artifact type |
+| Pipeline | 8F (F1→F8) |

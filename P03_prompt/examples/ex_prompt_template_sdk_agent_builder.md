@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 domain: building
-quality: 9.0
+quality: 9.2
 tags: [sdk, agent-builder, code-generation, meta-construction, tool-definition]
 tldr: Template para gerar MASTER_INSTRUCTIONS.md + AGENT_CONFIGURATION.json a partir de descricao natural language
 when_to_use: Ao criar novo agente SDK, gerar artifacts de agente, meta-construcao automatizada

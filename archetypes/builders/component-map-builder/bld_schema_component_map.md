@@ -4,6 +4,15 @@ id: component-map-builder-schema
 kind: schema
 parent: component-map-builder
 version: 2.0.0
+quality: 9.1
+title: "Schema Component Map"
+author: n03_builder
+tags: [component_map, builder, examples]
+tldr: "Golden and anti-examples for component map construction, demonstrating ideal structure and common pitfalls."
+domain: "component map construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema — component-map-builder
@@ -25,7 +34,7 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from this. CONFIG restricts from this.
 | version | semver X.Y.Z | YES | "1.0.0" | Quoted string |
 | created | date YYYY-MM-DD | YES | — | Quoted string |
 | updated | date YYYY-MM-DD | YES | — | Quoted string |
-| author | string | YES | — | Satellite or human |
+| author | string | YES | — | Agent_group or human |
 | domain | string | YES | — | Architecture domain |
 | quality | null | YES | null | NEVER a number |
 | tags | list[string], len >= 3 | YES | — | Searchability |
@@ -42,12 +51,12 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from this. CONFIG restricts from this.
 ```
 ^p08_cmap_[a-z][a-z0-9_]+$
 ```
-Examples: `p08_cmap_brain_infrastructure`, `p08_cmap_agent_node_network`, `p08_cmap_api_layer`
+Examples: `p08_cmap_brain_infrastructure`, `p08_cmap_agent_group_network`, `p08_cmap_api_layer`
 ## Component Object Schema
 ```yaml
 name: string        # component identifier
 role: string        # what it does
-owner: string       # agent_node, team, or "system"
+owner: string       # agent_group, team, or "system"
 status: enum        # active | deprecated | planned
 ```
 ## Connection Object Schema

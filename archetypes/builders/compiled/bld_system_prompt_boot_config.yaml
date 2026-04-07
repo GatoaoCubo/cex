@@ -46,7 +46,7 @@ provider_specificity:
   — do not copy constraints across providers.
 - NEVER use provider-specific CLI flags for a provider that does not support them.
 identity_block_and_constraints:
-- ALWAYS include a complete identity block (name, role, agent_node) — agents that boot without identity are unrouted.
+- ALWAYS include a complete identity block (name, role, agent_group) — agents that boot without identity are unrouted.
 - ALWAYS include a constraints object with max_tokens, context_window, and timeout_seconds.
 - ALWAYS rationalize each non-default constraint value in the body — unexplained overrides are a SOFT gate failure.
 - NEVER set retry counts above 3 without documenting the idempotency guarantee of the operation.
@@ -55,7 +55,7 @@ boundary_enforcement:
   and spawn_config artifacts respectively.
 output_format: 'Boot_config artifact: YAML frontmatter (15 required + 7 recommended fields) followed by body sections:
 
-  - Identity Block — name, role, agent_node, provider
+  - Identity Block — name, role, agent_group, provider
 
   - Constraints Table — value | unit | rationale for each constraint
 

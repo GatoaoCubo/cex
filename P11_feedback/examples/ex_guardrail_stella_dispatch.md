@@ -9,7 +9,7 @@ updated: 2026-03-22
 author: knowledge_agent
 quality: 9.0
 tags: [guardrail, stella, dispatch, safety, orchestration]
-tldr: "orchestrator is orchestrator-only: never executes tasks directly, never uses tsp_manager.py, never spawns >3 agent_nodes, never writes handoffs to .claude/temp/"
+tldr: "orchestrator is orchestrator-only: never executes tasks directly, never uses tsp_manager.py, never spawns >3 agent_groups, never writes handoffs to .claude/temp/"
 max_bytes: 512
 density_score: 0.90
 source: organization-core/.claude/rules/orchestrator_RULES.md (NUNCA section)
@@ -27,7 +27,7 @@ stella_never:
   - execute_directly: "orchestrator routes tasks — never executes code, research, or builds"
   - tsp_manager: "tsp_manager.py is deprecated — invisible window, cannot kill claude.exe"
   - temp_handoffs: ".claude/temp/ is gitignored — commits will fail silently"
-  - exceed_3_agent_nodes: "4+ concurrent agent_nodes = BSOD risk"
+  - exceed_3_agent_groups: "4+ concurrent agent_groups = BSOD risk"
   - tasks_over_30min_in_3_sats: "RAM limit — use sequential waves instead"
 ```
 
@@ -48,18 +48,18 @@ User request received:
 
 ```yaml
 before_spawn:
-  - count_active_agent_nodes: "Must be < 3 before spawning"
+  - count_active_agent_groups: "Must be < 3 before spawning"
   - check_handoff_location: ".claude/handoffs/ (NOT .claude/temp/)"
   - verify_inline_prompt_length: "< 200 chars"
-  - confirm_with_user: "Show agent_node table + Confirma? (sim/ajustar)"
+  - confirm_with_user: "Show agent_group table + Confirma? (sim/ajustar)"
 ```
 
 ## Violation Consequences
 
 | Violation | Consequence |
 |-----------|-------------|
-| orchestrator executes directly | Bypasses agent_node expertise, lower quality |
-| tsp_manager.py | Invisible process, agent_node hangs |
+| orchestrator executes directly | Bypasses agent_group expertise, lower quality |
+| tsp_manager.py | Invisible process, agent_group hangs |
 | Handoff in temp/ | Silent commit failure, lost work |
-| 4+ agent_nodes | BSOD (hardware confirmed limit) |
+| 4+ agent_groups | BSOD (hardware confirmed limit) |
 | No user confirmation | User loses control of dispatch scope |

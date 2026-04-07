@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Engineering Pipeline"
 steps_count: 4
 execution: mixed
-agent_nodes: [edison, tesla, reviewer, deployer]
+agent_groups: [edison, tesla, reviewer, deployer]
 timeout: 3600
 retry_policy: per_step
 depends_on: []

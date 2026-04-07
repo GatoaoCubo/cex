@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How code-executor-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Code Executor"
+version: "1.0.0"
+author: n03_builder
+tags: [code_executor, builder, examples]
+tldr: "Golden and anti-examples for code executor construction, demonstrating ideal structure and common pitfalls."
+domain: "code executor construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: code-executor-builder

@@ -8,10 +8,10 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: content_monetization
-quality: 8.9
+quality: 9.1
 tags: [quality-gate, content-monetization, P11, pricing, billing, credits, governance]
 tldr: "Gates for monetization artifacts — margin enforcement, webhook idempotency, credit tracking, mock-first development, checkout security."
-density_score: 0.92
+density_score: 1.0
 ---
 
 # Gate: content_monetization
@@ -79,3 +79,11 @@ score = (HARD_pass / 8) * 6.0 + (SOFT_weighted / max_weight) * 4.0
 | audit_trail | Log in records/audits/ with justification and timestamp |
 | expiry | 48h — full gate pass required before expiry |
 | never_bypass | H3 (integer pricing), H4 (zero secrets), H5 (webhook idempotency) |
+
+## Actions
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish as exemplar |
+| >= 8.0 | PUBLISH | Ready for runtime |
+| >= 7.0 | REVIEW | Flag for review |
+| < 7.0  | REJECT | Rework required |

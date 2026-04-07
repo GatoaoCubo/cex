@@ -14,6 +14,15 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Rag Source"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: rag_source
 ## File Naming

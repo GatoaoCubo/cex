@@ -1,0 +1,68 @@
+kind: instruction
+id: bld_instruction_webhook
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for webhook artifacts
+pattern: 3-phase pipeline (Research -> Compose -> Validate)
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+tags:
+- instruction
+- webhook
+- P03
+- pipeline
+quality: 8.9
+density_score: 0.91
+phase_1_research:
+- Identify the event source or destination (Stripe, GitHub, Slack, Twilio, custom)
+- 'Determine direction: inbound (your endpoint receives events) or outbound (you push events)'
+- List all event types with trigger conditions (e.g., "payment.completed — charge succeeds")
+- Define payload schema for each event type (fields, types, required)
+- 'Identify signature verification method: HMAC-SHA256 is standard; note the secret header name'
+- 'For outbound: define retry policy (max attempts, backoff multiplier, dead-letter)'
+- 'For inbound: identify idempotency key field to prevent double-processing'
+- Search for existing webhook artifacts — avoid duplicates (grep p04_webhook_)
+- 'Confirm event slug: lowercase, underscores, no hyphens (e.g., payment_completed)'
+phase_2_compose:
+- Read `bld_schema_webhook.md` — verify all required fields
+- Read `bld_output_template_webhook.md` — fill every `{{var}}`
+- 'Write frontmatter: id matches `p04_webhook_{event_slug}`, quality: null'
+- 'Write `## Overview`: direction, source/destination, use case in 2-3 sentences'
+- 'Write `## Events`: for each event_type — trigger condition + minimal payload example'
+- 'Write `## Verification`: method name, header, how secret is stored (env var)'
+- 'Write `## Retry & Delivery`: attempts, backoff formula, timeout_ms, idempotency key'
+- Count body bytes — must be <= 1024
+- Verify id matches filename stem exactly
+phase_3_validate: 'Run gates in order — stop at first HARD failure:
+
+
+  1. YAML frontmatter parses without error
+
+  2. id matches regex `^p04_webhook_[a-z][a-z0-9_]+$`
+
+  3. kind == "webhook"
+
+  4. quality == null
+
+  5. All required fields present: id, name, direction, event_type, payload_schema
+
+  6. direction is "inbound" or "outbound" (no other values)
+
+  7. event_type is a non-empty string
+
+  8. payload_schema is a defined object (not empty `{}`)
+
+  9. body <= 1024 bytes
+
+  10. No persistent lifecycle language (no "server", "daemon", "listen forever")
+
+  11. Inbound: signature_method present and != "none" (security gate)
+
+  12. Outbound: retry_policy present with max_attempts > 0'
+escalation:
+- 'Ambiguous direction: ask "Does your system receive this event or send it?"'
+- 'Unknown payload schema: use `additionalProperties: true` with known fields only'
+- 'Exceeds 1024 bytes: compress Overview to 1 sentence, merge small event examples'
+- 'No signature info available: use hmac_sha256 as default, flag for secret setup'

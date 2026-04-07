@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How agent-package-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Agent Package"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_package, builder, examples]
+tldr: "Golden and anti-examples for agent package construction, demonstrating ideal structure and common pitfalls."
+domain: "agent package construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: agent-package-builder
@@ -33,7 +43,7 @@ I package agent artifacts so they can be distributed and deployed on any compati
 - seeds: agent name, target tier (minimal/standard/complete/whitelabel)
 - optional: file inventory, LP mapping overrides, token budget constraints
 ### I Produce
-- agent_package artifact (manifest.yaml + tier-appropriate files)
+- agent_package artifact (manifest.yaml + tier-apownte files)
 - committed to: `cex/P02/examples/p02_iso_{agent}/`
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)

@@ -3,10 +3,18 @@ id: self_review_2026-04-02
 kind: context-doc
 nucleus: N04
 pillar: P09
-quality: 8.9
+quality: 9.0
 date: 2026-04-02
 type: self-review
 density_score: 1.0
+title: "Self Review 2026 04 02"
+version: 1.0.0
+author: N04
+tags: [context-doc, knowledge, output]
+tldr: "1. **Missing 8 Knowledge Cards**: 106 KCs found vs 114 kinds in system"
+domain: knowledge
+created: 2026-04-06
+updated: 2026-04-07
 ---
 # N04 Self-Review — 2026-04-02
 

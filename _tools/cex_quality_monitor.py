@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Quality Monitor — continuous quality tracking + regression detection.
+# -*- coding: utf-8 -*-
+"""CEX Quality Monitor -- continuous quality tracking + regression detection.
 
 Scores all artifacts, tracks trends over time, identifies regressions,
 and auto-queues rebuilds for artifacts that fall below threshold.
@@ -255,7 +256,7 @@ def quality_report(artifacts: list[dict]) -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Quality Monitor — tracking + regression detection")
+    parser = argparse.ArgumentParser(description="CEX Quality Monitor -- tracking + regression detection")
     parser.add_argument("--scan", action="store_true", help="Score all artifacts and save snapshot")
     parser.add_argument("--nucleus", "-n", help="Filter by nucleus (e.g. N03)")
     parser.add_argument("--trend", action="store_true", help="Show quality trend over time")
@@ -313,7 +314,7 @@ def main():
 
         print(f"\n=== Regressions ({len(regressions)}) ===\n")
         for r in regressions:
-            print(f"  {r['delta']:+.1f}  {r['prev_score']:.1f} → {r['score']:.1f}  {r['kind']:20s}  {r['path']}")
+            print(f"  {r['delta']:+.1f}  {r['prev_score']:.1f} -> {r['score']:.1f}  {r['kind']:20s}  {r['path']}")
         return
 
     if args.below is not None:
@@ -341,7 +342,7 @@ def main():
         print("\n=== Quality Report ===\n")
         print(f"  Total artifacts:  {report['total']}")
         print(f"  Average score:    {report['avg_score']}")
-        print(f"  Score range:      {report['min_score']} — {report['max_score']}")
+        print(f"  Score range:      {report['min_score']} -- {report['max_score']}")
 
         print(f"\n  Distribution:")
         for bucket, count in sorted(report["distribution"].items()):

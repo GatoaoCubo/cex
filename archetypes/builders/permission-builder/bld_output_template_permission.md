@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for permission production
 pattern: derives from SCHEMA.md — no extra fields
+quality: 9.0
+title: "Output Template Permission"
+version: "1.0.0"
+author: n03_builder
+tags: [permission, builder, examples]
+tldr: "Golden and anti-examples for permission construction, demonstrating ideal structure and common pitfalls."
+domain: "permission construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: permission

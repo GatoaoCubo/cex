@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: rate_limit_config
-quality: 8.9
+quality: 9.1
 tags: [rate_limit_config, P09, CONSTRAIN, kind-kc]
-tldr: "rate_limit_config defines RPM, TPM, and daily budget caps per model or agent_node — with backoff strategy — to prevent runaway spend and provider throttling."
+tldr: "rate_limit_config defines RPM, TPM, and daily budget caps per model or agent_group — with backoff strategy — to prevent runaway spend and provider throttling."
 when_to_use: "Building, reviewing, or reasoning about rate_limit_config artifacts"
 keywords: [rate_limiting, RPM, budget_cap]
 feeds_kinds: [rate_limit_config]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Rate Limit Config
@@ -64,7 +67,7 @@ A rate_limit_config defines hard ceilings on requests per minute (RPM), tokens p
 |-------------|-------------|-----|
 | No budget cap in production | Runaway agents generate unbounded spend | Always set `daily_budget_usd` in production |
 | Linear backoff | Linear retry floods provider on sustained outage | Use exponential backoff with jitter |
-| Shared limits across agent_nodes | One agent_node's burst starves others | Isolate rate limit config per agent_node |
+| Shared limits across agent_groups | One agent_group's burst starves others | Isolate rate limit config per agent_group |
 
 ## Integration Graph
 ```
@@ -82,4 +85,4 @@ env_config, secret_config --> [rate_limit_config] --> runtime_rule, agent_card
 ## Quality Criteria
 - GOOD: rpm, tpm, backoff_strategy all present
 - GREAT: per-model limits, daily_budget_usd set, conservation mode threshold defined
-- FAIL: no budget cap in production, linear backoff, single shared config for all agent_nodes
+- FAIL: no budget cap in production, linear backoff, single shared config for all agent_groups

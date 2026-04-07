@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: research_pipeline
-quality: 9.0
+quality: 9.1
 tags: [research_pipeline, P04, PRODUCE, kind-kc, research, STORM, CRAG]
 tldr: "7-stage autonomous research motor (INTENT>PLAN>RETRIEVE>RESOLVE>SCORE>SYNTHESIZE>VERIFY) using STORM multi-perspective + CRAG corrective retrieval + CRITIC self-verification patterns"
 when_to_use: "Building, reviewing, or reasoning about research_pipeline artifacts"

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for scoring_rubric production — atomic searchable facts
 sources: scoring-rubric-builder MANIFEST.md + SCHEMA.md, AAC&U VALUE Rubrics, Bloom taxonomy
+quality: 9.1
+title: "Knowledge Card Scoring Rubric"
+version: "1.0.0"
+author: n03_builder
+tags: [scoring_rubric, builder, examples]
+tldr: "Golden and anti-examples for scoring rubric construction, demonstrating ideal structure and common pitfalls."
+domain: "scoring rubric construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: scoring_rubric
@@ -29,7 +39,7 @@ Scoring rubrics are multi-dimensional weighted evaluation frameworks that define
 |---------|-------------|
 | Orthogonal dimensions | Each dimension measures ONE thing; no overlap between dimensions |
 | Explicit weights | Sum to exactly 100%; higher weight = more impact on final score |
-| Concrete criteria | Specify what counts at each level, not "good" or "appropriate" |
+| Concrete criteria | Specify what counts at each level, not "good" or "apownte" |
 | Consistent scales | All dimensions use same scale (0-10) for comparability |
 | Golden test calibration | Anchor rubric with known-good examples at 9.5+ |
 | Automation status | Declare per dimension: manual, semi-automated, or automated |

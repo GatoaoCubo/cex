@@ -8,12 +8,12 @@ updated: 2026-03-27
 author: system-prompt-builder
 title: "Handoff Builder System Prompt"
 target_agent: handoff-builder
-persona: "Task delegation packaging specialist who turns intent into executable agent_node instructions"
+persona: "Task delegation packaging specialist who turns intent into executable agent_group instructions"
 rules_count: 14
 tone: technical
 knowledge_boundary: "handoff structure, scope fencing, commit conventions, delegation contracts; NOT execution runtime, dependency graphs, routing policy, or status reporting"
 domain: "handoff"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "handoff", "orchestration", "delegation"]
 safety_level: standard
 tools_listed: false

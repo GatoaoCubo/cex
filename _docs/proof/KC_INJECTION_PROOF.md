@@ -3,7 +3,13 @@ id: proof_kc_injection_reward_signal
 title: KC Library Full Cycle Proof -- reward_signal
 date: 2026-03-29
 author: builder_agent
-quality: 9.0
+quality: 9.1
+updated: "2026-04-07"
+domain: "CEX system"
+version: "1.0.0"
+created: "2026-04-07"
+density_score: 0.92
+tldr: "Defines artifact for kc library full cycle proof -- reward_signal, with validation gates and integration points."
 ---
 
 # KC Library Injection Proof: reward_signal
@@ -86,15 +92,15 @@ create a reward signal for RAG answer quality
 
 The KC Library does NOT change WHICH builders activate (that's kind-based classification). It changes WHAT KNOWLEDGE those builders receive during execution. Without KC injection:
 
-- `signal-builder` would generate a generic signal with no awareness of A2A protocol patterns or CrewAI handoff conventions
-- The builder has no reference material about reward modeling (RLHF, DPO, Constitutional AI vocabulary)
-- Output quality degrades because the builder operates in a vacuum
+1. `signal-builder` would generate a generic signal with no awareness of A2A protocol patterns or CrewAI handoff conventions
+2. The builder has no reference material about reward modeling (RLHF, DPO, Constitutional AI vocabulary)
+3. Output quality degrades because the builder operates in a vacuum
 
 With KC injection:
 
-- `signal-builder` receives 2 domain KCs as context
-- Builder can reference A2A signal patterns and CrewAI signal/handoff conventions
-- The `kc_reward_and_alignment` KC (which feeds `reward_signal` kind) provides RLHF/DPO/Constitutional AI vocabulary for grounding
+1. `signal-builder` receives 2 domain KCs as context
+2. Builder can reference A2A signal patterns and CrewAI signal/handoff conventions
+3. The `kc_reward_and_alignment` KC (which feeds `reward_signal` kind) provides RLHF/DPO/Constitutional AI vocabulary for grounding
 
 ### Why `kc_reward_and_alignment` Did NOT Match Directly
 
@@ -115,10 +121,10 @@ Result:         85 PASS | 13 WARN | 0 FAIL
 KC Library: 3 sources, 15 domains, 44/98 kinds covered
 ```
 
-- 0 FAIL across all 98 builders
-- 13 WARN (all size-related, no naming or completeness issues)
-- KC Library healthy: 15 domain KCs covering 44 of 98 CEX kinds (45% coverage)
-- `kc_reward_and_alignment` present with `feeds_kinds: [reward_signal, quality_gate, llm_judge, scoring_rubric, eval_dataset, golden_test]`
+1. 0 FAIL across all 98 builders
+2. 13 WARN (all size-related, no naming or completeness issues)
+3. KC Library healthy: 15 domain KCs covering 44 of 98 CEX kinds (45% coverage)
+4. `kc_reward_and_alignment` present with `feeds_kinds: [reward_signal, quality_gate, llm_judge, scoring_rubric, eval_dataset, golden_test]`
 
 ---
 
@@ -133,3 +139,17 @@ The KC Library injection pipeline is **fully operational**:
 5. The `kc_reward_and_alignment` KC exists and correctly declares `reward_signal` in its `feeds_kinds`
 
 **Cycle proven. Delta documented. System healthy.**
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar |  |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

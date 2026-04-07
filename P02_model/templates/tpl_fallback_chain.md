@@ -8,7 +8,12 @@ tags: [template, fallback, resilience, retry, chain]
 tldr: "Ordered list of strategies from strongest to most resilient. Each step has a trigger condition, timeout, and abort criteria. Ensures graceful degradation."
 chain: ["[STEP_1]", "[STEP_2]", "[STEP_3]"]
 timeout_per_step: 30
-quality: 8.8
+quality: 9.0
+domain: "model configuration"
+density_score: 0.84
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
 ---
 
 # Fallback Chain: [CHAIN_SLUG]

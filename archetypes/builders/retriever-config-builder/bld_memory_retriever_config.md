@@ -16,10 +16,13 @@ tags: [retriever-config, P01, type-builder]
 tldr: "Concrete values with rationale. Validate against schema. Stay under 2048 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [retriever config, dense-only, sparse-only, hybrid, reranked]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Retriever Config"
+density_score: 0.90
 ---
 ## Summary
 Retrieval parameters — how to search and rank chunks from a vector/hybrid store. The difference between a useful retriever_config and a useless one is concrete values
@@ -30,10 +33,36 @@ Every parameter must have: name, value, and why that value was chosen.
 Required body sections: Overview, Search Strategy, Parameters, Integration.
 Body budget: 2048 bytes max.
 ## Anti-Pattern
-- top_k too low: Misses relevant chunks, especially with imprecise queries
-- No score threshold: Returns irrelevant results when no good match exists
-- Dense-only for keyword queries: Semantic search fails on exact terms, codes, IDs
-- No reranker on large top_k: Returns many results but wrong order
+1. top_k too low: Misses relevant chunks, especially with imprecise queries
+2. No score threshold: Returns irrelevant results when no good match exists
+3. Dense-only for keyword queries: Semantic search fails on exact terms, codes, IDs
+4. No reranker on large top_k: Returns many results but wrong order
 ## Context
 The 2048-byte body limit keeps retriever_config artifacts focused. Fill required fields first,
 then add recommended fields if space permits. Always set quality: null.
+
+## Metadata
+
+```yaml
+id: p10_lr_retriever_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-retriever-config-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | retriever_config |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -15,7 +15,7 @@ prerequisites:
   - The lens has a distinct focus not already covered by an existing lens
 validation_method: checklist
 domain: lens
-quality: 8.9
+quality: 9.2
 tags: [instruction, lens, perspective, P02, filter, analysis]
 idempotent: true
 atomic: true
@@ -23,7 +23,7 @@ rollback: "Discard generated artifact; no system state is modified"
 dependencies: []
 logging: true
 tldr: Define a specialized analytical perspective as a lens artifact with declared focus, filters, bias, applies_to scope, and interpretation guidance.
-density_score: 0.87
+density_score: 0.94
 ---
 
 ## Context
@@ -108,3 +108,15 @@ filters_highlight: [{{attribute_list}}]
 filters_suppress: [{{attribute_list}}]
 limitations: "{{known_blind_spots}}"
 status: active
+
+
+## Validation
+- Verify output matches expected schema before delivery
+- Check all required fields are present and non-empty
+- Confirm no template placeholders remain in output
+
+
+## Edge Cases
+- Empty input: return structured error with guidance
+- Partial input: fill defaults, flag missing fields
+- Oversized input: truncate with warning, preserve structure

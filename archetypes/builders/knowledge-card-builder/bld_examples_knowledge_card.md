@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of knowledge_card artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Knowledge Card"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_card, builder, examples]
+tldr: "Golden and anti-examples for knowledge card construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: knowledge-card-builder
 ## Golden Example
-INPUT: "Destila conhecimento sobre prompt caching para otimizar custos LLM"
+INPUT: "Destila knowledge about prompt caching for optimize costs LLM"
 OUTPUT:
 ```yaml
 id: p01_kc_prompt_caching
@@ -23,15 +33,15 @@ author: "builder"
 domain: llm_engineering
 quality: null
 tags: [prompt-caching, cost-optimization, latency, anthropic, openai, knowledge]
-tldr: "Prompt caching reutiliza prefixos pre-processados entre chamadas LLM, reduzindo custo em ate 90% e latencia em 85%"
-when_to_use: "Quando sistema LLM repete contexto longo entre chamadas"
+tldr: "Prompt caching reutiliza prefixos pre-processesdos between chamadas LLM, reduzindo cost em ate 90% e latency em 85%"
+when_to_use: "Quanof the system LLM repete context longo between chamadas"
 keywords: [prompt-caching, cache-control, context-reuse]
 long_tails:
   - Como configurar prompt caching na API da Anthropic
-  - Tamanho minimo de prefixo para ativar cache em LLMs
+  - Tamanho minimal de prefixo for ativar cache em LLMs
 axioms:
   - SEMPRE coloque conteudo estatico ANTES do dinamico
-  - NUNCA cache contexto que muda a cada request
+  - NUNCA cache context that muda a each request
 linked_artifacts:
   primary: null
   related: [p01_kc_rag_fundamentals]
@@ -60,7 +70,7 @@ criticality: high
 - ORDENE: static first, dynamic last (always)
 - AGRUPE: few large cacheable blocks > many small ones
 - METRIZE: hit_rate = read / (read + creation + uncached)
-- INVALIDE com cuidado: 1 byte diff = full cache miss
+- INVALIDE with cuidata: 1 byte diff = full cache miss
 ## Flow
 ```text
 [Request] -> [Hash Prefix] -> [Cache Lookup]

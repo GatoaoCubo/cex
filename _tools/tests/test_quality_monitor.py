@@ -1,4 +1,4 @@
-"""Tests for cex_quality_monitor.py — quality tracking + regression detection."""
+"""Tests for cex_quality_monitor.py -- quality tracking + regression detection."""
 
 import json
 import sys

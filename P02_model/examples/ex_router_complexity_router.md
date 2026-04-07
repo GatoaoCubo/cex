@@ -11,7 +11,13 @@ fallback: cloud
 scoring_factors: 6
 tags: [router, complexity, scoring, cost-optimization]
 tldr: "Routes requests by complexity score (6 weighted factors) to local/hybrid/cloud tiers for cost-optimal inference."
-quality: 8.8
+quality: 9.1
+domain: "model configuration"
+density_score: 0.82
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
+version: "1.0.0"
 ---
 
 # Router: Complexity

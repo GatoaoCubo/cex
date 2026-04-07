@@ -9,7 +9,13 @@ references:
   - tpl_response_format
   - ex_agent_copywriter
   - ex_quality_gate_copy
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "output formatting"
+version: "1.0.0"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.96
 ---
 
 # Ad Copy Output Format

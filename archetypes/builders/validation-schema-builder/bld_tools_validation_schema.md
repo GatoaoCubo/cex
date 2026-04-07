@@ -4,6 +4,16 @@ id: bld_tools_validation_schema
 pillar: P04
 llm_function: CALL
 purpose: Tools available for validation_schema production
+quality: 9.1
+title: "Tools Validation Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [validation_schema, builder, examples]
+tldr: "Golden and anti-examples for validation schema construction, demonstrating ideal structure and common pitfalls."
+domain: "validation schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: validation-schema-builder
@@ -32,9 +42,21 @@ purpose: Tools available for validation_schema production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p06_vs_ prefix
-- [ ] fields_count >= 1
-- [ ] on_failure in [reject, warn, auto_fix]
-- [ ] format in [json, yaml]
-- [ ] target_kind non-empty
+1. [ ] YAML parses
+2. [ ] id matches p06_vs_ prefix
+3. [ ] fields_count >= 1
+4. [ ] on_failure in [reject, warn, auto_fix]
+5. [ ] format in [json, yaml]
+6. [ ] target_kind non-empty
+
+## Metadata
+
+```yaml
+id: bld_tools_validation_schema
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-validation-schema.md
+```

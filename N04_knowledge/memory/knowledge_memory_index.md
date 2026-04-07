@@ -4,11 +4,17 @@ kind: memory_summary
 nucleus: N04
 pillar: P10
 domain: knowledge_management
-quality: 8.8
+quality: 9.1
 created: 2026-04-02
 type: persistent_memory
 scope: knowledge_nucleus
 density_score: 1.0
+title: "Knowledge Memory Index"
+version: 1.0.0
+author: N04
+tags: [memory_summary, knowledge]
+tldr: "1. Implement semantic embeddings alongside TF-IDF"
+updated: 2026-04-07
 ---
 
 # N04 Knowledge Memory Index
@@ -50,3 +56,35 @@ density_score: 1.0
 3. Fix memory selection and injection tools
 4. Establish memory decay and refresh protocols
 5. Create knowledge graph relationships between KCs
+
+
+## Memory Index Architecture
+
+The knowledge memory index enables fast retrieval with these design decisions:
+
+- **Inverted index**: tags map to document lists for O(1) lookup by keyword
+- **Recency weighting**: entries decay linearly over 365 days unless explicitly refreshed
+- **Type partitioning**: four memory types stored in separate index segments
+- **Pruning schedule**: entries below 0.3 relevance threshold purged on weekly cycle
+
+### Index Configuration
+
+```yaml
+# Memory index settings
+index:
+  backend: filesystem
+  format: json
+  max_entries: 10000
+  prune_threshold: 0.3
+  prune_schedule: weekly
+  decay_model: linear_365d
+  partitions: [correction, preference, convention, context]
+```
+
+| Metric | Value | Update Frequency |
+|--------|-------|-----------------|
+| Total entries | Tracked | Per-write |
+| Average relevance | Computed | Per-query |
+| Partition balance | Monitored | Weekly |
+| Stale entry ratio | Alerting | Daily |
+

@@ -6,7 +6,12 @@ version: 1.0.0
 title: Template - Smoke Eval
 tags: [template, smoke, eval, sanity, quick]
 tldr: Fast sanity check (<30s) that catches obvious regressions. Syntax, import, basic function, output format.
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "evaluation and testing"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.95
 ---
 
 # Smoke Eval: [NAME]
@@ -25,12 +30,26 @@ quality: 8.6
 python -m pytest tests/ -m smoke --timeout=30 --fail-fast
 ```
 ## When to Run
-- Before every commit (pre-commit)
-- First CI step
-- After dependency update
-- After config change
+1. Before every commit (pre-commit)
+2. First CI step
+3. After dependency update
+4. After config change
 ## Quality Gate
-- [ ] Total < 30s
-- [ ] No external deps (DB, API)
-- [ ] Catches syntax + import + format
-- [ ] fail_fast=true
+1. [ ] Total < 30s
+2. [ ] No external deps (DB, API)
+3. [ ] Catches syntax + import + format
+4. [ ] fail_fast=true
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `smoke_eval` |
+| Pillar | P07 |
+| Domain | evaluation and testing |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

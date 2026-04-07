@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of validator artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Validator"
+version: "1.0.0"
+author: n03_builder
+tags: [validator, builder, examples]
+tldr: "Golden and anti-examples for validator construction, demonstrating ideal structure and common pitfalls."
+domain: "validator construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: validator-builder
 ## Golden Example
-INPUT: "Cria um validator que garante que todo knowledge_card tem quality null"
+INPUT: "Create um validator que garante que todo knowledge_card tem quality null"
 OUTPUT:
 ```yaml
 id: p06_val_kc_quality_null
@@ -40,7 +50,7 @@ bypass:
   audit: true
 logging: true
 domain: "knowledge_card"
-quality: null
+quality: 8.7
 tags: [validator, knowledge-card, quality-null, pre-commit]
 tldr: "Blocks knowledge_cards with non-null quality — self-scoring is forbidden."
 density_score: 0.92

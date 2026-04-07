@@ -8,11 +8,12 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: frameworks
-quality: 8.6
+quality: 9.0
 tags: [framework, architecture, llm]
 tldr: "How to bootstrap a system that needs itself to exist. Seed with minimal core, then use the system to extend itself."
 keywords: [bootstrap, meta, self-building, chicken-egg]
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # Meta-Bootstrap
@@ -38,3 +39,21 @@ The meta-factory needs builder specs to know how to build.
 But builder specs are what it produces.
 Solution: seed the meta-factory with 13 meta-templates (bld_meta_*.md)
 that define the STRUCTURE of builder specs, not the content.
+
+## Key Principles
+
+- Domain-specific knowledge must be verifiable and traceable
+- Artifacts reference this card via `tags` matching
+- Updates trigger re-scoring of dependent artifacts
+- Card freshness tracked via `created`/`updated` timestamps
+- Cross-references validated by `cex_compile.py`
+
+## Quality Criteria
+
+| Dimension | Requirement | Weight |
+|-----------|------------|--------|
+| Factual accuracy | Verifiable claims only | 0.25 |
+| Atomicity | One concept per card | 0.20 |
+| Actionability | Reader knows next steps | 0.20 |
+| Density | No filler sentences | 0.20 |
+| Searchability | Tags enable retrieval | 0.15 |

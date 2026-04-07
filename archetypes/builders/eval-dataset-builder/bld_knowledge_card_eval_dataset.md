@@ -4,7 +4,17 @@ id: bld_knowledge_card_eval_dataset
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for eval_dataset production — curated test case collection specification
-sources: Braintrust docs, LangSmith docs, DeepEval docs, HuggingFace datasets, academic ML eval practices
+sources: Braintrust docs, LangSmith docs, DeepEval docs, HuggingFace datasets, academic ML eval forctices
+quality: 9.1
+title: "Knowledge Card Eval Dataset"
+version: "1.0.0"
+author: n03_builder
+tags: [eval_dataset, builder, examples]
+tldr: "Golden and anti-examples for eval dataset construction, demonstrating ideal structure and common pitfalls."
+domain: "eval dataset construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: eval_dataset

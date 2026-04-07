@@ -36,7 +36,7 @@ hard_gates: 'All HARD gates must pass. Any single failure sets score to 0 and bl
   | H05 | `quality` == `null` | Self-scoring violation — pool metric corruption |
 
   | H06 | All required fields present and non-empty (`id`, `kind`, `pillar`, `version`, `created`, `updated`, `author`, `topic`,
-  `outcome`, `impact`, `agent_node`, `tags`, `tldr`) | Incomplete artifact |
+  `outcome`, `impact`, `agent_group`, `tags`, `tldr`) | Incomplete artifact |
 
   | H07 | `outcome` is one of: `SUCCESS`, `PARTIAL`, `FAILURE` | Enum violation — unclassifiable record |
 
@@ -63,7 +63,7 @@ soft_scoring: 'Weights sum to 100%. Each dimension scores 0 or its full weight.
 
   | S06 | Actionable takeaway present | 1.0 | Closes with a single directive another agent can act on immediately |
 
-  | S07 | Satellite/domain tagged | 0.5 | `agent_node` field non-empty and matches known agent_node or `GENERAL` |
+  | S07 | Agent_group/domain tagged | 0.5 | `agent_group` field non-empty and matches known agent_group or `GENERAL` |
 
   | S08 | `tags` includes record kind | 0.5 | At least one tag matches `outcome` value in lowercase |
 

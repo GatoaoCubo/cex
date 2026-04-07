@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for fallback_chain
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.0
+title: "Instruction Fallback Chain"
+version: "1.0.0"
+author: n03_builder
+tags: [fallback_chain, builder, examples]
+tldr: "Golden and anti-examples for fallback chain construction, demonstrating ideal structure and common pitfalls."
+domain: "fallback chain construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a fallback_chain
@@ -34,5 +44,5 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Confirm `steps_count` matches the actual number of rows in the Chain Steps table
 5. Confirm steps are ordered by decreasing capability (most capable first)
 6. Confirm all timeout values are greater than zero
-7. Cross-check: is this a model degradation sequence? If it chains prompt transformations it belongs in a `chain` artifact (P03). If it routes by task type it belongs in a `router`. If it sequences agent_node tasks it belongs in a workflow (P12). This artifact degrades model quality gracefully, nothing more.
+7. Cross-check: is this a model degradation sequence? If it chains prompt transformations it belongs in a `chain` artifact (P03). If it routes by task type it belongs in a `router`. If it sequences agent_group tasks it belongs in a workflow (P12). This artifact degrades model quality gracefully, nothing more.
 8. If score < 8.0: revise in the same pass before outputting

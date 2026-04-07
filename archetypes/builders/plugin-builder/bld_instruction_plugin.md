@@ -15,7 +15,7 @@ prerequisites:
   - At least one API method or tool the plugin must expose is identified
 validation_method: checklist
 domain: plugin
-quality: 8.8
+quality: 9.0
 tags:
   - instruction
   - plugin

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-cex_forge.py — O Forjador Universal CEX
+cex_forge.py -- O Forjador Universal CEX
 Gera prompts prontos para LLM que produzem artefatos CEX validos.
 
 Fluxo:
@@ -29,7 +30,7 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    print("ERRO: PyYAML necessario. Instale com: pip install pyyaml", file=sys.stderr)
+    print("ERROR: PyYAML required. Install with: pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
@@ -64,18 +65,18 @@ def load_yaml(path: Path) -> dict:
 def load_schema(lp: str) -> dict:
     lp_dir = LP_DIRS.get(lp.upper())
     if not lp_dir:
-        print(f"ERRO: LP '{lp}' nao encontrado. Use P01-P12.", file=sys.stderr)
+        print(f"ERROR: LP not found. Use P01-P12.", file=sys.stderr)
         sys.exit(1)
     schema_path = CEX_ROOT / lp_dir / "_schema.yaml"
     if not schema_path.exists():
-        print(f"ERRO: Schema nao encontrado: {schema_path}", file=sys.stderr)
+        print(f"ERROR: Schema not found: {schema_path}", file=sys.stderr)
         sys.exit(1)
     return load_yaml(schema_path)
 
 
 def load_type_map() -> dict:
     if not TYPE_MAP_PATH.exists():
-        print(f"ERRO: TYPE_TO_TEMPLATE.yaml nao encontrado: {TYPE_MAP_PATH}", file=sys.stderr)
+        print(f"ERROR: TYPE_TO_TEMPLATE.yaml not found: {TYPE_MAP_PATH}", file=sys.stderr)
         sys.exit(1)
     raw = load_yaml(TYPE_MAP_PATH)
     # Filter out comment-only keys (yaml loads them as key: None)
@@ -201,11 +202,11 @@ def build_prompt(
     sections = []
 
     # Header
-    sections.append(f"# CEX FORGE — Gere um artefato `{type_name}` (LP: {lp})")
+    sections.append(f"# CEX FORGE -- Gere um artefato `{type_name}` (LP: {lp})")
     sections.append("")
 
     # Role
-    sections.append("## Voce eh")
+    sections.append("## You are")
     sections.append(
         f"Um gerador de artefatos CEX especializado em `{type_name}` "
         f"do dominio {lp} ({lp_name}: {lp_desc})."
@@ -328,7 +329,7 @@ def build_prompt(
     # Output instructions
     sections.append("## Instrucoes de Output")
     sections.append("1. Gere o artefato COMPLETO (frontmatter YAML + body Markdown)")
-    sections.append("2. Preencha TODOS os campos obrigatorios do frontmatter")
+    sections.append("2. Preencha TODOS os campos requireds do frontmatter")
     sections.append("3. NAO deixe {{VARIAVEIS}} sem preencher")
     sections.append(f"4. Respeite o limite de {rules.get('max_bytes', 'N/A')} bytes")
     if rules.get("density_min"):
@@ -397,7 +398,7 @@ def list_all_types(filter_lp: str | None = None) -> list[dict]:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Forge — Gerador Universal de Prompts para Artefatos CEX",
+        description="CEX Forge -- Gerador Universal de Prompts para Artefatos CEX",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Exemplos:
@@ -443,14 +444,14 @@ Exemplos:
         return
 
     if not args.lp or not args.type_name or not args.seeds:
-        parser.error("--lp, --type e --seeds sao obrigatorios (ou use --list-types)")
+        parser.error("--lp, --type e --seeds sao requireds (ou use --list-types)")
 
     # Load context
     context = args.context
     if args.context_file:
         ctx_path = Path(args.context_file)
         if not ctx_path.exists():
-            print(f"ERRO: Arquivo de contexto nao encontrado: {ctx_path}", file=sys.stderr)
+            print(f"ERROR: Context file not found: {ctx_path}", file=sys.stderr)
             sys.exit(1)
         with open(ctx_path, "r", encoding="utf-8") as f:
             context = f.read()
@@ -463,8 +464,8 @@ Exemplos:
     if not rules:
         available = list(schema.get("kinds", {}).keys())
         print(
-            f"ERRO: Tipo '{args.type_name}' nao encontrado em {args.lp}. "
-            f"Disponiveis: {', '.join(available)}",
+            f"ERROR: Type '{args.type_name}' not found in {args.lp}. "
+            f"Available: {', '.join(available)}",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -490,7 +491,7 @@ Exemplos:
         else:
             builder_dir = kind_to_builder_dir(args.type_name)
             print(
-                f"WARN: Builder nao encontrado: {builder_dir}",
+                f"WARN: Builder not found: {builder_dir}",
                 file=sys.stderr,
             )
 

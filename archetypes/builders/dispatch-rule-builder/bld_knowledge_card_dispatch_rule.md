@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for dispatch_rule production — routing policy specification
 sources: gateway routing systems, multi-agent collaboration protocols, API gateway patterns
+quality: 9.1
+title: "Knowledge Card Dispatch Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [dispatch_rule, builder, examples]
+tldr: "Golden and anti-examples for dispatch rule construction, demonstrating ideal structure and common pitfalls."
+domain: "dispatch rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: dispatch_rule
@@ -28,7 +38,7 @@ Dispatch rules are routing policy records that map keywords to targets with prio
 |-----------|---------|-----|
 | Synonyms | [build, create, implement] | Same intent, different words |
 | Abbreviations | [docs, documentation] | Short forms common in queries |
-| Bilingual | [pesquisar, research] | Multi-language systems |
+| Bilingual | [researchr, research] | Multi-language systems |
 | Verb forms | [deploy, deploying] | Intent expressed as actions |
 - **Priority and threshold calibration**:
 | Priority | Meaning | Threshold | Behavior |

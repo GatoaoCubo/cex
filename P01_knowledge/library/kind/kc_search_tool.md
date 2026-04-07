@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: search_tool
-quality: 9.0
+quality: 9.1
 tags: [search_tool, P04, CALL, kind-kc, web-search]
 tldr: "Queries external search engines (Tavily, Serper, Perplexity, Brave) and returns ranked results with URLs and snippets — the web grounding layer for LLM agents"
 when_to_use: "Building, reviewing, or reasoning about search_tool artifacts"

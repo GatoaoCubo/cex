@@ -1,9 +1,19 @@
 ---
 kind: tools
 id: bld_tools_content_monetization
-pillar: P04
+pillar: P11
 llm_function: CALL
 purpose: Tools, APIs, and data sources for content monetization pipeline
+quality: 9.1
+title: "Tools Content Monetization"
+version: "1.0.0"
+author: n03_builder
+tags: [content_monetization, builder, examples]
+tldr: "Golden and anti-examples for content monetization construction, demonstrating ideal structure and common pitfalls."
+domain: "content monetization construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: content-monetization-builder
@@ -80,7 +90,7 @@ Hotmart Club (native), Teachable, Thinkific, DS24 member area, Custom LMS.
 |--------|------|------|
 | Schema | P06/_schema.yaml | Field definitions |
 | Kind KC | P01_knowledge/library/kind/ | Domain knowledge |
-| Examples | P04_tools/examples/ | Reference configs |
+| Examples | P11_feedback/examples/ | Reference configs |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Builder seeds |
 
 ## Tool Permissions

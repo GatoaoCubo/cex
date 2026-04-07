@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Instruction"
 tags: [template, instruction, builder, pipeline, steps]
 tldr: "Step-by-step build instructions for a builder ISO. Maps each step to an 8F function, defines inputs/outputs/gates, and provides the execution order."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "prompt engineering"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.95
 ---
 
 # Instruction: [BUILDER_NAME]
@@ -58,3 +63,18 @@ quality: 8.7
 - [ ] Steps map to 8F functions
 - [ ] Execution order is explicit (numbered)
 - [ ] Retry strategy documented
+
+## Cross-References
+
+- **Pillar**: P03 (Prompt)
+- **Kind**: `instruction`
+- **Artifact ID**: `tpl_instruction`
+- **Tags**: [template, instruction, builder, pipeline, steps]
+
+## Builder Integration
+
+| Aspect | Detail |
+|--------|--------|
+| ISO | 1 of 13 builder ISOs |
+| Loader | `cex_skill_loader.py` |
+| Pipeline | Injected at F3 (Compose) |

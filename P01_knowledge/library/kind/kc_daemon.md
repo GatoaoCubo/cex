@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: daemon
-quality: 8.9
+quality: 9.1
 tags: [daemon, P04, GOVERN, kind-kc]
 tldr: "Persistent background process that runs continuously, monitoring events or serving requests without direct agent invocation"
 when_to_use: "Building, reviewing, or reasoning about daemon artifacts"
 keywords: [background-process, service, persistent-runner]
 feeds_kinds: [daemon]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Daemon
@@ -54,7 +57,7 @@ A daemon is a persistent background process that runs continuously — monitorin
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| File watcher | React to filesystem changes | Watch `.claude/signals/` for agent_node completion signals |
+| File watcher | React to filesystem changes | Watch `.claude/signals/` for agent_group completion signals |
 | API server | Serve LLM capabilities over HTTP | FastAPI daemon serving RAG pipeline on Railway |
 | Poll-and-act | Monitor external state changes | Poll marketplace API every 5min for price changes |
 

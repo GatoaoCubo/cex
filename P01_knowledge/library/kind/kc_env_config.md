@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: env_config
-quality: 9.0
+quality: 9.1
 tags: [env_config, P09, GOVERN, kind-kc]
 tldr: "env_config is the versioned YAML spec of environment variables for a bounded scope — separating required from optional, documenting defaults, and pointing to secret_config rather than inlining credentials."
 when_to_use: "Building, reviewing, or reasoning about env_config artifacts"
@@ -47,7 +47,7 @@ An env_config is the authoritative YAML spec of environment variables for a boun
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| scope | string | required | system/agent_node/service — tighter = clearer ownership |
+| scope | string | required | system/agent_group/service — tighter = clearer ownership |
 | required | list[EnvVar] | required | System fails without these — zero defaults allowed |
 | optional | list[EnvVar] | [] | System degrades gracefully — always document default |
 | secret_refs | list[str] | [] | Names pointing to secret_config, never actual values |
@@ -64,7 +64,7 @@ An env_config is the authoritative YAML spec of environment variables for a boun
 |-------------|-------------|-----|
 | Inline secrets | API key values committed to YAML/git | Always use `secret_refs` pointer to secret_config |
 | Undocumented defaults | Optional vars without defaults cause silent degradation | Document every optional var's default value |
-| God env config | 50+ vars in one config with mixed scopes | Split by service scope; one file per agent_node/service |
+| God env config | 50+ vars in one config with mixed scopes | Split by service scope; one file per agent_group/service |
 
 ## Integration Graph
 ```

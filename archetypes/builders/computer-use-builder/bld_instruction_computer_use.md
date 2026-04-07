@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for computer_use
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.1
+title: "Instruction Computer Use"
+version: "1.0.0"
+author: n03_builder
+tags: [computer_use, builder, examples]
+tldr: "Golden and anti-examples for computer use construction, demonstrating ideal structure and common pitfalls."
+domain: "computer use construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a computer_use
@@ -39,3 +49,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 8. HARD gates: frontmatter valid, id pattern, actions listed, resolution defined
 9. SOFT gates: score against QUALITY_GATES.md
 10. Cross-check: is this GUI control (not DOM manipulation)? Not a CLI? Not just vision?
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify computer
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | computer use construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

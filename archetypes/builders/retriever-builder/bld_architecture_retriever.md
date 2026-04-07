@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.9
+quality: 9.1
 tags: [architecture, retriever, P10, RAG, vector-search, component-map]
 density_score: 1.0
 ---
@@ -101,4 +101,4 @@ Stateless at query time — reads, never writes.
 |---|---|---|---|
 | Source | Local index | External API | retriever is self-hosted |
 | Latency | <100ms | 200-2000ms | Local is faster |
-| Control | Full (index, model) | Provider-dependent | retriever is customizable |
+| Control | Full (index, model) | Provider-dependent | retriever is costmizable |

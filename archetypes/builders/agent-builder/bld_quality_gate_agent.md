@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: agent
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, agent, P11, P02, governance, identity, agent-package]
 tldr: "Gates for agent artifacts — persona + capabilities + agent_package packages ready for deploy."
 density_score: 0.90
@@ -31,9 +31,9 @@ All must pass. Failure on any = final score 0.
 | H03 | id == filename stem | Brain search relies on this |
 | H04 | kind == "agent" | Type integrity |
 | H05 | quality == null | Never self-score |
-| H06 | All 10 required fields present: id, kind, pillar, title, version, agent_node, domain, quality, tags, tldr | Completeness |
+| H06 | All 10 required fields present: id, kind, pillar, title, version, agent_group, domain, quality, tags, tldr | Completeness |
 | H07 | llm_function == "BECOME" | Agent is identity construct, not callable |
-| H08 | agent_node field is set (not blank or null) | Every agent belongs to a agent_node |
+| H08 | agent_group field is set (not blank or null) | Every agent belongs to a agent_group |
 ## SOFT Scoring
 | Gate | Check | Weight |
 |------|-------|--------|
@@ -58,7 +58,7 @@ Weights sum: 7.5. Normalize: divide each by 7.5 before scoring.
 ## Bypass
 | Field | Value |
 |-------|-------|
-| conditions | Critical agent_node gap requiring immediate agent deploy |
+| conditions | Critical agent_group gap requiring immediate agent deploy |
 | approver | p02-chief |
 | audit_trail | Log in records/audits/ with justification and timestamp |
 | expiry | 72h — full gate pass required before expiry |

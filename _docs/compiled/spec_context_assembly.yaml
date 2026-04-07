@@ -1,0 +1,136 @@
+id: spec_context_assembly
+kind: context_doc
+title: Context Assembly Specification
+version: 1.0.0
+quality: null
+created: 2026-04-07
+density_score: 1.0
+what_this_solves: An LLM with no context produces generic output. The same LLM with the right artifacts pre-loaded produces
+  specialized output. CEX assembles context automatically so the user inputs nothing beyond intent.
+architecture: "BASE LAYER (read-only molds)\n  archetypes/builders/{kind}-builder/    13 components per kind\n  P{01-12}_*/_schema.yaml\
+  \               structure contracts\n  P{01-12}_*/templates/                  output patterns\n  P01_knowledge/library/\
+  \                 knowledge base\n  .claude/rules/                         behavioral constraints\n\nINSTANCE LAYER (filled\
+  \ per agent)\n  N{01-06}_*/                            domain-specific artifacts\n    agents/                          \
+  \    identity\n    prompts/                             system + action prompts\n    knowledge/                        \
+  \   domain KCs\n    schemas/                             data contracts\n    output/                              produced\
+  \ artifacts\n    orchestration/                       workflows + dispatch rules\n    quality/                         \
+  \    gates + rubrics\n    ...                                  (mirrors 12 categories)\n\nRUNTIME LAYER (assembled per task)\n\
+  \  .cex/runtime/handoffs/                 task + references\n  .cex/runtime/decisions/                user preferences (GDP)\n\
+  \  .cex/runtime/signals/                  completion signals\n  .cex/config/                           model routing, themes"
+two_phase_assembly: ''
+phase_1_boot_agent_self_assembles_base_context: 'On startup, each agent loads its own artifacts automatically:
+
+
+  | Source | What loads | How |
+
+  |--------|-----------|-----|
+
+  | CLAUDE.md | System overview, commands, constraints | pi reads on startup |
+
+  | deck_{id}.md | Agent''s own capability manifest | --append-system-prompt |
+
+  | .claude/rules/{id}*.md | Behavioral rules for this agent | pi reads on startup |
+
+  | Sin identity | Role personality via system prompt | --append-system-prompt |
+
+
+  The agent starts knowing: what it has, what it can build, what rules apply. Zero discovery needed.'
+phase_2_task_orchestrator_assembles_mission_context: 'When N07 dispatches a task, the handoff includes:
+
+
+  | Section | Content | Purpose |
+
+  |---------|---------|---------|
+
+  | Task | What to produce | Intent |
+
+  | Decisions | User preferences from GDP | Constraints |
+
+  | Relevant artifacts | Paths to builders, KCs, templates | Pre-selected references |
+
+  | Expected output | File path, kind, format | Target |
+
+
+  The agent reads the handoff, reads the referenced artifacts, and produces. No wandering, no discovery loops.'
+how_context_gets_selected: ''
+orchestrator_selection_phase_2: "Intent: \"create landing page for pet shop\"\n  |\n  F1 CONSTRAIN: kind=landing_page, pillar=P05\n\
+  \  |\n  Select from base layer:\n    archetypes/builders/landing-page-builder/   (13 components)\n    P01_knowledge/library/kind/kc_landing_page.md\n\
+  \    P05_output/templates/tpl_landing_page.md\n    P06_schema/contracts/landing_page_schema.yaml\n  |\n  Select from instance\
+  \ layer (if target agent = N02):\n    N02_marketing/knowledge/kc_*.md (relevant domain KCs)\n    N02_marketing/output/ (examples\
+  \ of prior output)\n  |\n  Assemble handoff with all references\n  |\n  Dispatch to agent"
+agent_self_selection_phase_1_during_task: "Agent boots with deck (knows capabilities)\n  |\n  Reads handoff (knows task +\
+  \ references)\n  |\n  Pipeline step F3 INJECT:\n    Load referenced builder components (13 files)\n    Load referenced KCs\n\
+  \    Load template\n    Load brand_config (if bootstrapped, fills {{BRAND_*}} variables)\n    Load memory (past corrections,\
+  \ preferences)\n  |\n  All context assembled. Agent produces with full hand."
+template_variables_autonomous_freedom: 'Artifacts contain intentionally open fields:
+
+
+  | Variable | Filled by | When |
+
+  |----------|-----------|------|
+
+  | {{BRAND_NAME}} | /init bootstrap | Once, permanent |
+
+  | {{BRAND_TONE}} | /init bootstrap | Once, permanent |
+
+  | {{TARGET_AUDIENCE}} | LLM decision | Per task, contextual |
+
+  | {{PRICING_MODEL}} | LLM or GDP | Per task or user choice |
+
+  | {{CTA_TEXT}} | LLM decision | Per output, contextual |
+
+
+  Variables the user filled at /init are permanent context. Variables the LLM fills are autonomous decisions based on task
+  context. The user never needs to input beyond initial brand setup.'
+why_this_works_on_any_model: '| Component | What it provides | Model-independent? |
+
+  |-----------|-----------------|-------------------|
+
+  | Builder components | Structure, examples, quality gates | YES -- just .md files |
+
+  | KCs | Domain knowledge in tables | YES -- structured data |
+
+  | Templates | Output patterns with variables | YES -- fill-in-the-blank |
+
+  | Schemas | Data contracts | YES -- YAML validation |
+
+  | Rules | Behavioral constraints | YES -- natural language |
+
+  | Brand config | Identity variables | YES -- key-value pairs |
+
+
+  The context does the specialization. The model does the generation. A smaller model with full context outperforms a larger
+  model with no context.'
+fractal_structure: 'The base layer and instance layer share the same 12-category structure:
+
+
+  | Category | Base layer (mold) | Instance layer (filled) |
+
+  |----------|------------------|------------------------|
+
+  | Knowledge | KC templates + library | Domain-specific KCs |
+
+  | Model | Agent definitions | Configured agents |
+
+  | Prompt | Prompt templates | Domain prompts |
+
+  | Tools | Tool definitions | Configured tools |
+
+  | Output | Output templates | Produced artifacts |
+
+  | Schema | Contract definitions | Domain schemas |
+
+  | Evaluation | Quality gate templates | Domain gates |
+
+  | Architecture | Component maps | Agent cards |
+
+  | Config | Config templates | Active configs |
+
+  | Memory | Memory type definitions | Domain memories |
+
+  | Feedback | Feedback templates | Quality records |
+
+  | Orchestration | Workflow templates | Domain workflows |
+
+
+  Each agent is a filled instance of the universal mold. The mold guarantees structure. The fill guarantees specialization.'

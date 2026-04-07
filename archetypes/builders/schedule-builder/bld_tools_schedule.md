@@ -4,6 +4,16 @@ id: bld_tools_schedule
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for schedule production
+quality: 9.0
+title: "Tools Schedule"
+version: "1.0.0"
+author: n03_builder
+tags: [schedule, builder, examples]
+tldr: "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls."
+domain: "schedule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: schedule-builder

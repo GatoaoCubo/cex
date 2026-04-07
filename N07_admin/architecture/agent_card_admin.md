@@ -38,7 +38,7 @@ runtime: "pi + claude opus xhigh"
 mcp_config_file: null
 flags: [xhigh-thinking, interactive]
 domain: orchestration
-quality: 9.0
+quality: 9.2
 tags: [agent_card, orchestrator, N07, multi-cli, dispatch]
 tldr: "N07 deployment spec — pi + opus xhigh, dispatch-only orchestrator with 7 tools and 6 downstream nuclei."
 density_score: 0.91
@@ -79,7 +79,7 @@ directly — it coordinates the work of N01-N06.
 | Solo | `bash _spawn/dispatch.sh solo {nucleus} "task"` | Single task, one nucleus |
 | Grid | `bash _spawn/dispatch.sh grid {mission}` | Parallel tasks, multiple nuclei |
 | Status | `bash _spawn/dispatch.sh status` | Check active builders |
-| Stop | `bash _spawn/dispatch.sh stop` | Terminate all builders |
+| Stop | `bash _spawn/dispatch.sh stop` | Stop MY session's builders (session-aware v4.0) |
 
 ## Constraints
 

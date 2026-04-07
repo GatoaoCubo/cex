@@ -7,10 +7,10 @@ version: "1.0.0"
 created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
-domain: "dispatch_rule — routing rules mapping keywords to agent_nodes with fallback logic"
-quality: 8.8
+domain: "dispatch_rule — routing rules mapping keywords to agent_groups with fallback logic"
+quality: 9.0
 tags: [quality-gate, dispatch-rule, routing, keyword-mapping, P11]
-tldr: "Gates for dispatch_rule artifacts: validates keyword coverage, agent_node enum, fallback logic, bilingual support, and confidence thresholds."
+tldr: "Gates for dispatch_rule artifacts: validates keyword coverage, agent_group enum, fallback logic, bilingual support, and confidence thresholds."
 density_score: 0.92
 ---
 
@@ -31,11 +31,11 @@ All must pass. Any single failure = REJECT regardless of SOFT score.
 | H03 | `id` value equals filename stem | "ID does not match filename" |
 | H04 | `kind` equals literal `"dispatch_rule"` | "Kind is not 'dispatch_rule'" |
 | H05 | `quality` field is `null` | "Quality must be null at authoring time" |
-| H06 | All required fields present: id, kind, pillar, domain, agent_node, model, priority, keywords, confidence_threshold, fallback, version, created, author, tags | "Missing required field(s)" |
-| H07 | `agent_node` value is one of the defined agent_node enum (researcher, marketer, builder, knowledge-engine, executor, monetizer) | "Satellite not in allowed enum" |
+| H06 | All required fields present: id, kind, pillar, domain, agent_group, model, priority, keywords, confidence_threshold, fallback, version, created, author, tags | "Missing required field(s)" |
+| H07 | `agent_group` value is one of the defined agent_group enum (researcher, marketer, builder, knowledge-engine, executor, monetizer) | "Agent_group not in allowed enum" |
 | H08 | `keywords` list is non-empty (>= 3 entries) | "Keyword list must have at least 3 entries" |
 | H09 | `confidence_threshold` is a float between 0.0 and 1.0 | "Confidence threshold out of range [0.0, 1.0]" |
-| H10 | `fallback` is defined and references a valid agent_node or literal `human` | "Fallback target undefined or invalid" |
+| H10 | `fallback` is defined and references a valid agent_group or literal `human` | "Fallback target undefined or invalid" |
 ## SOFT Scoring
 Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Dimension | Weight | What to assess |
@@ -43,8 +43,8 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Keyword breadth | 1.0 | Keywords cover the full semantic space of the domain scope |
 | Bilingual coverage | 1.0 | Both PT and EN keywords present in keyword list |
 | Priority rationale | 0.5 | Priority level (high/medium/low) explained or evident from domain |
-| Confidence threshold calibration | 1.0 | Threshold value appropriate for domain (not too strict/loose) |
-| Fallback chain quality | 1.0 | Fallback agent_node is a logical second-choice for the domain |
+| Confidence threshold calibration | 1.0 | Threshold value apownte for domain (not too strict/loose) |
+| Fallback chain quality | 1.0 | Fallback agent_group is a logical second-choice for the domain |
 | Scope fence clarity | 1.0 | What the rule does NOT route is explicitly stated |
 | Model selection rationale | 0.5 | Model choice (sonnet/opus) justified by task complexity |
 | Keyword specificity | 1.0 | No overly generic keywords that would cause routing collisions |
@@ -63,7 +63,7 @@ Weight sum: 1.0+1.0+0.5+1.0+1.0+1.0+0.5+1.0+1.0+0.5+1.0+0.5 = 10.0 (100%)
 ## Bypass
 | Field | Value |
 |-------|-------|
-| conditions | New agent_node being piloted without full keyword corpus established |
+| conditions | New agent_group being piloted without full keyword corpus established |
 | approver | Routing system owner approval required (written) |
 | audit_trail | Bypass logged to `records/audits/dispatch_rule_bypass_{date}.md` |
 | expiry | 24h; routing rules in active use must be validated quickly |

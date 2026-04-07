@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: lens
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, lens, perspective, P02, filter]
 tldr: "Quality gate for lens artifacts: enforces declared bias, scoped focus, and explicit applies_to list."
 density_score: 0.85
@@ -58,7 +58,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 Bypasses are logged and expire automatically.
 | Field | Value |
 |-------|-------|
-| condition | Lens is experimental — `applies_to` scope cannot be confirmed until integration testing completes |
+| condition | Lens is experimental — `applies_to` scope cannot be confirmed until integration testing complete |
 | approver | P02 domain owner |
 | audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, lens id, and test plan reference |
 | expiry | 7 days — `applies_to` must be confirmed or lens moves to DRAFT state |

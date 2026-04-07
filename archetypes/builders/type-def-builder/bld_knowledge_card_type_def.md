@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for type_def production — atomic searchable facts
 sources: type-def-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Type Def"
+version: "1.0.0"
+author: n03_builder
+tags: [type_def, builder, examples]
+tldr: "Golden and anti-examples for type def construction, demonstrating ideal structure and common pitfalls."
+domain: "type def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: type_def

@@ -13,11 +13,11 @@ quality: {{QUALITY_8_TO_10}}
 # Dispatch Rule: {{SCOPE_NAME}}
 
 ## Routing Table
-| Condition | Satellite | Confidence |
+| Condition | Agent_group | Confidence |
 |-----------|-----------|------------|
-| {{KEYWORD_OR_SIGNAL_1}} | {{SATELLITE_1}} | {{0.0_TO_1.0}} |
-| {{KEYWORD_OR_SIGNAL_2}} | {{SATELLITE_2}} | {{0.0_TO_1.0}} |
-| {{KEYWORD_OR_SIGNAL_3}} | {{SATELLITE_3}} | {{0.0_TO_1.0}} |
+| {{KEYWORD_OR_SIGNAL_1}} | {{AGENT_GROUP_1}} | {{0.0_TO_1.0}} |
+| {{KEYWORD_OR_SIGNAL_2}} | {{AGENT_GROUP_2}} | {{0.0_TO_1.0}} |
+| {{KEYWORD_OR_SIGNAL_3}} | {{AGENT_GROUP_3}} | {{0.0_TO_1.0}} |
 
 ## Review Chain
 <!-- 3-tier review: each tier reads code independently, does NOT trust prior tier's report -->

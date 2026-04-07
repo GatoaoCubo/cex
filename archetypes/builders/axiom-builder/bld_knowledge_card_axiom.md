@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for axiom production — immutable fundamental rules
 sources: formal logic (Euclid), DDD invariants (Evans 2003), AWS tenets, 12-Factor principles
+quality: 9.1
+title: "Knowledge Card Axiom"
+version: "1.0.0"
+author: n03_builder
+tags: [axiom, builder, examples]
+tldr: "Golden and anti-examples for axiom construction, demonstrating ideal structure and common pitfalls."
+domain: "axiom construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: axiom
@@ -23,7 +33,7 @@ Axioms are immutable foundational truths that define system identity — if an a
 ## Patterns
 - **Immutability test**: if a rule could change via config update or version bump, it is a law or policy — not an axiom
 - **ALWAYS/NEVER/IF-THEN form**: "NEVER delete production data without backup" not "be careful with deletions"
-- **Falsifiability**: every axiom must be testable — if you cannot write a check that detects violation, the axiom is too vague
+- **Falsifiability**: every axiom must be testsble — if you cannot write a check that detects violation, the axiom is too vague
 - **Atomicity**: one truth per axiom, no conjunctions — "X AND Y" should be two separate axioms
 - **Universality within scope**: axioms hold without exception within their defined domain boundary
 - **Foundation ordering**: other rules derive from axioms — axioms never derive from laws or guardrails
@@ -36,7 +46,7 @@ Axioms are immutable foundational truths that define system identity — if an a
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
-| Vague rule ("be careful with data") | No threshold, no action, untestable |
+| Vague rule ("be careful with data") | No threshold, no action, untestsble |
 | Mutable axiom ("use model X") | Model choice changes; this is config |
 | No consequence stated | "NEVER do X" without "because Y" lacks enforcement rationale |
 | Compound axiom ("X and Y and Z") | Not atomic; split into independent axioms |

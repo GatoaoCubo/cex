@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.9
+quality: 9.0
 tags: [supabase, mcp, ai-agent, tools, schema, rls, migrations, platform]
 tldr: "@supabase/mcp-server-supabase: 20+ tools para AI agents gerenciarem Supabase — list tables, execute SQL, manage RLS, deploy functions, tudo via MCP protocol"
 when_to_use: "Quando conectar AI agents (Claude, Cursor, pi) ao Supabase via MCP"

@@ -7,10 +7,15 @@ version: 1.0.0
 created: 2026-04-01
 author: builder
 domain: frontend
-quality: 8.9
+quality: 9.1
 tags: [css, animation, framer-motion, micro-interactions, performance, accessibility]
 tldr: Modern CSS animations and Framer Motion patterns for smooth micro-interactions with GPU acceleration and accessibility support
-density_score: 0.88
+density_score: 1.0
+when_to_use: "Apply when modern css animations and framer motion patterns for smooth micro-interactions with gpu accelerat..."
+keywords: [knowledge-card, reference, frontend, quick, animation]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # CSS Animation & Micro-interactions
@@ -115,3 +120,9 @@ const container = {
 - Performance: GPU compositing layers, transform vs position properties
 - Accessibility: prefers-reduced-motion, reduced-motion: reduce media query
 - Loading UX: Skeleton screens, shimmer effects, progressive enhancement
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

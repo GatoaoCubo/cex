@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Regression Check"
+version: "1.0.0"
+author: n03_builder
+tags: [regression_check, builder, examples]
+tldr: "Golden and anti-examples for regression check construction, demonstrating ideal structure and common pitfalls."
+domain: "regression check construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: regression_check Production Rules
 ## Naming Convention
@@ -64,7 +74,7 @@ Rule: ALWAYS document which convention is used in the artifact body. Mixed conve
 | Promptfoo | `promptfoo eval --compare <baseline_file>` |
 | LangSmith | UI comparison or SDK `compare_runs(baseline_id, current_id)` |
 | DeepEval | `deepeval test run --compare-to <baseline_file>` |
-| custom | Document invocation command in ## Baseline section |
+| costm | Document invocation command in ## Baseline section |
 
 ## Cadence Values
 | Value | Meaning |

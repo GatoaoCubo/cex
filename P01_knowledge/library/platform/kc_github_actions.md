@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.2
 tags: [github-actions, ci-cd, workflows, automation, deploy]
 tldr: "11 production workflows distilled from codexa-core: CI (lint+test+build), quality gate (5D validation), security (5 scanners), deploy (Railway+Docker), release (PyPI), PR validation, self-hydrate cron."
 density_score: 0.92

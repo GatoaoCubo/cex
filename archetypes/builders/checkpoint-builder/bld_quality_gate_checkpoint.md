@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "workflow checkpoint — saved state snapshot enabling resumable, auditable workflow execution"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, checkpoint, P12, workflow, resume, state]
 tldr: "Pass/fail gate for checkpoint artifacts: workflow_ref presence, state schema, TTL declaration, resume protocol, and lifecycle policy."
 density_score: 0.90

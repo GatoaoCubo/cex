@@ -5,6 +5,16 @@ pillar: P01
 llm_function: COLLABORATE
 purpose: How rag-source-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Rag Source"
+version: "1.0.0"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: rag-source-builder
@@ -16,7 +26,7 @@ I catalog external URLs with freshness policies and reliability scores — point
 ```
   1. rag-source-builder       -> "pointer to external URL with freshness policy and reliability score"
   2. knowledge-card-builder   -> "distilled content extracted from the indexed source"
-  3. brain-index-builder      -> "search index built over the knowledge cards"
+  3. knowledge-index-builder      -> "search index built over the knowledge cards"
 ```
 ### Crew: "RAG-Augmented Agent Stack"
 ```
@@ -49,4 +59,4 @@ I catalog external URLs with freshness policies and reliability scores — point
 | knowledge-card-builder | Uses my source pointers to know where to retrieve and distill content |
 | embedding-config-builder | Configures embeddings scoped to the sources I catalog |
 | scraper-builder | Targets the URLs I register for scheduled crawling |
-| brain-index-builder | Indexes content retrieved from my registered sources |
+| knowledge-index-builder | Indexes content retrieved from my registered sources |

@@ -4,6 +4,16 @@ id: bld_architecture_e2e_eval
 pillar: P08
 llm_function: BECOME
 purpose: Component map of e2e_eval — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture E2E Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [e2e_eval, builder, examples]
+tldr: "Golden and anti-examples for e2e eval construction, demonstrating ideal structure and common pitfalls."
+domain: "e2e eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

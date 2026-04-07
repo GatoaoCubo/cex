@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for guardrail production — safety boundary specification
 sources: NIST AI RMF, OWASP LLM Top 10, Anthropic Usage Policy, AWS Bedrock Guardrails
+quality: 9.1
+title: "Knowledge Card Guardrail"
+version: "1.0.0"
+author: n03_builder
+tags: [guardrail, builder, examples]
+tldr: "Golden and anti-examples for guardrail construction, demonstrating ideal structure and common pitfalls."
+domain: "guardrail construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: guardrail

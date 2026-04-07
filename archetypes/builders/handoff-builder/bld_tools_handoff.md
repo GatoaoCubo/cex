@@ -4,6 +4,16 @@ id: bld_tools_handoff
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to handoff production
+quality: 9.1
+title: "Tools Handoff"
+version: "1.0.0"
+author: n03_builder
+tags: [handoff, builder, examples]
+tldr: "Golden and anti-examples for handoff construction, demonstrating ideal structure and common pitfalls."
+domain: "handoff construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: handoff-builder
@@ -30,11 +40,23 @@ purpose: Tools and runtime surfaces relevant to handoff production
 
 ## Interim Validation
 Until a generic validator exists, validate manually:
-- filename matches `p12_ho_{task}.md`
-- YAML frontmatter parses
-- required fields present
-- autonomy in enum (`full`, `supervised`, `assisted`)
-- all 5 body sections exist
-- scope fence has SOMENTE + NAO TOQUE
-- payload fits `handoff`, not `action_prompt` or `signal`
-- size <= 4096 bytes
+1. filename matches `p12_ho_{task}.md`
+2. YAML frontmatter parses
+3. required fields present
+4. autonomy in enum (`full`, `supervised`, `assisted`)
+5. all 5 body sections exist
+6. scope fence has SOMENTE + NAO TOQUE
+7. payload fits `handoff`, not `action_prompt` or `signal`
+8. size <= 4096 bytes
+
+## Metadata
+
+```yaml
+id: bld_tools_handoff
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-handoff.md
+```

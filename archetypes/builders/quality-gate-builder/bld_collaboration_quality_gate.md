@@ -5,6 +5,16 @@ pillar: P11
 llm_function: COLLABORATE
 purpose: How quality-gate-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Quality Gate"
+version: "1.0.0"
+author: n03_builder
+tags: [quality_gate, builder, examples]
+tldr: "Golden and anti-examples for quality gate construction, demonstrating ideal structure and common pitfalls."
+domain: "quality gate construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: quality-gate-builder
@@ -20,7 +30,7 @@ I define HARD gates (block on fail) and SOFT gates (score contribution) with num
 ```
 ### Crew: "Agent Governance Layer"
 ```
-  1. law-builder              -> "inviolable rules that override all other decisions"
+  1. invariant-builder              -> "inviolable rules that override all other decisions"
   2. guardrail-builder        -> "safety boundaries on agent behavior"
   3. quality-gate-builder     -> "quality thresholds artifacts must clear before acceptance"
   4. lifecycle-rule-builder   -> "rules governing artifact lifecycle transitions"
@@ -44,7 +54,7 @@ I define HARD gates (block on fail) and SOFT gates (score contribution) with num
 - if quality < 8.0: signal retry with failure reasons
 ## Builders I Depend On
 - scoring-rubric-builder: provides evaluation dimensions that map to SOFT gate contributions
-- law-builder: inviolable laws become mandatory HARD gates with no bypass
+- invariant-builder: inviolable laws become mandatory HARD gates with no bypass
 ## Builders That Depend On Me
 | Builder | Why |
 |---------|-----|

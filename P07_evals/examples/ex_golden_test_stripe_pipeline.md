@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 target: p08_pat_stripe_pipeline
-quality: 9.5
+quality: 9.1
 tags: [stripe, pipeline, golden, e2e]
 tldr: "Complete pipeline validation proving handoff_builder, quality_gate, spawn_pool_manager, and blueprint_compiler all pass stress tests"
 source: organization-core/records/pool/reports/stripe_final_validation.md
@@ -46,7 +46,7 @@ targets:
 | Check                              | Result |
 |------------------------------------|--------|
 | Generates handoff file             | PASS   |
-| Correct agent_node routing (knowledge_agent)  | PASS   |
+| Correct agent_group routing (knowledge_agent)  | PASS   |
 | Agent assigned (qa-agent)          | PASS   |
 | Skill assigned (pattern_extractor) | PASS   |
 | Artifacts provided (3 KCs)         | PASS   |
@@ -64,7 +64,7 @@ targets:
 ### Test C: spawn_pool_manager status
 | Check                          | Result |
 |--------------------------------|--------|
-| Reports all 6 agent_nodes       | PASS   |
+| Reports all 6 agent_groups       | PASS   |
 | Shows warm/cold status         | PASS   |
 | Displays boot time estimates   | PASS   |
 | Model + MCP mapping correct    | PASS   |
@@ -95,7 +95,7 @@ All: OPERATIONAL
 |---|------|------------|
 | 1 | contains | `PASS` in all Test A checks |
 | 2 | contains | `Score: 10.0/10.0` in Test B |
-| 3 | contains | `Reports all 6 agent_nodes` in Test C |
+| 3 | contains | `Reports all 6 agent_groups` in Test C |
 | 4 | score_gte | `quality >= 9.5` |
 | 5 | exact | `OPERATIONAL` for all 4 components |
 

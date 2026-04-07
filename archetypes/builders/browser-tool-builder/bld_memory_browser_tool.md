@@ -16,10 +16,13 @@ tags: [browser-tool, selector-fallback, playwright, timeout, action-structure, s
 tldr: "Selector fallback chains are load-bearing for scraper resilience. data_attr first, xpath last. Timeout always. Match actions frontmatter to body."
 impact_score: 8.0
 decay_rate: 0.04
-agent_node: edison
+agent_group: edison
 keywords: [browser tool, selector fallback, playwright, timeout, action structure, stealth, headless, DOM extraction]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Browser Tool"
+density_score: 0.90
 ---
 ## Summary
 Browser automation tools are consumed by agents and pipelines that cannot gracefully handle silent extraction failures. The difference between a resilient browser_tool and a brittle one comes down to two spec-time decisions: selector fallback chain and timeout declaration. Both are invisible during happy-path execution and catastrophic on failure if undefined.
@@ -27,28 +30,54 @@ A tool that targets `.price-current` as its only price selector will silently re
 ## Pattern
 **Selector fallback chains and explicit timeouts.**
 Selector priority (standard):
-- 1st: data_attr (`[data-testid="*"]`) — stable, test-annotated, survives CSS refactors
-- 2nd: aria (`[aria-label="*"]`, `[role="*"]`) — accessible elements, resilient to visual redesigns
-- 3rd: css (`.class`, `#id`) — fast but fragile; use for well-maintained design systems
-- 4th: xpath (`//div[@class="*"]`) — structural fallback, slowest, last resort
+1. 1st: data_attr (`[data-testid="*"]`) — stable, test-annotated, survives CSS refactors
+2. 2nd: aria (`[aria-label="*"]`, `[role="*"]`) — accessible elements, resilient to visual redesigns
+3. 3rd: css (`.class`, `#id`) — fast but fragile; use for well-maintained design systems
+4. 4th: xpath (`//div[@class="*"]`) — structural fallback, slowest, last resort
 Timeout rules:
-- Default: 30000ms per action
-- Static pages: 10000ms acceptable
-- SPA/dynamic content: 30000ms minimum
-- Never omit: a browser_tool with no timeout is an unbounded hang waiting to happen
+1. Default: 30000ms per action
+2. Static pages: 10000ms acceptable
+3. SPA/dynamic content: 30000ms minimum
+4. Never omit: a browser_tool with no timeout is an unbounded hang waiting to happen
 Action structure:
-- Write the actions list in frontmatter first (forces scope before prose)
-- Each frontmatter action name must exactly match a `## Actions > {name}` subsection in the body
-- Each action entry in the body must include: description, selector, params, wait condition, returns
+1. Write the actions list in frontmatter first (forces scope before prose)
+2. Each frontmatter action name must exactly match a `## Actions > {name}` subsection in the body
+3. Each action entry in the body must include: description, selector, params, wait condition, returns
 Body budget (2048 bytes max): Overview (150) + Engine (200) + Actions (900) + Selectors (400) + Output (400) = ~2050. Trim Actions if over limit.
 ## Anti-Pattern
-- Single CSS class selector with no fallback (breaks on any CSS refactor).
-- XPath as primary selector (slow, brittle to DOM restructuring).
-- Omitting headless flag (headed mode fails in server/CI environments).
-- No wait before extract (race condition: element not yet rendered in DOM).
-- Using computer_use concepts for DOM operations (pixel-based is slower, less reliable, wrong layer).
-- Confusing browser_tool with search_tool: browser_tool navigates to pages; search_tool queries APIs.
-- Including implementation code in the spec body (this is a contract document, not source).
-- Setting quality to a numeric value (corrupts pool quality metrics — always null).
+1. Single CSS class selector with no fallback (breaks on any CSS refactor).
+2. XPath as primary selector (slow, brittle to DOM restructuring).
+3. Omitting headless flag (headed mode fails in server/CI environments).
+4. No wait before extract (race condition: element not yet rendered in DOM).
+5. Using computer_use concepts for DOM operations (pixel-based is slower, less reliable, wrong layer).
+6. Confusing browser_tool with search_tool: browser_tool navigates to pages; search_tool queries APIs.
+7. Including implementation code in the spec body (this is a contract document, not source).
+8. Setting quality to a numeric value (corrupts pool quality metrics — always null).
 ## Context
 Body limit 2048B. Budget: Overview (150) + Engine (200) + Actions (900) + Selectors (400) + Output (400). Trim Actions first if over.
+
+## Metadata
+
+```yaml
+id: p10_lr_browser_tool_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-browser-tool-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | browser_tool |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

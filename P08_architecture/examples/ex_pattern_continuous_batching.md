@@ -2,12 +2,12 @@
 id: p08_pat_continuous_batching
 kind: pattern
 pillar: P08
-title: "Pattern: Continuous Batching (Satellite Grid)"
+title: "Pattern: Continuous Batching (Agent_group Grid)"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
-quality: 9.2
+quality: 9.0
 tags: [pattern, continuous-batching, grid, dispatch, orchestration]
 tldr: "When queue > slots: fill slots immediately as they complete instead of waiting for entire wave — 1.6x speedup on 7+ task missions"
 max_bytes: 2048
@@ -18,7 +18,7 @@ linked_artifacts:
   spawn: p12_spawn_grid_continuous
 ---
 
-# Pattern: Continuous Batching (Satellite Grid)
+# Pattern: Continuous Batching (Agent_group Grid)
 
 ## Problem
 
@@ -84,6 +84,6 @@ write_signal('pytha', 'complete', 9.0, task='cex7_batch_2')
 
 ## Constraints
 
-- Max 3 concurrent agent_nodes (BSOD at 4 on current hardware)
+- Max 3 concurrent agent_groups (BSOD at 4 on current hardware)
 - 5s delay between terminal spawns (RAM stability)
-- Git lock: zero contention confirmed at 3 concurrent agent_nodes
+- Git lock: zero contention confirmed at 3 concurrent agent_groups

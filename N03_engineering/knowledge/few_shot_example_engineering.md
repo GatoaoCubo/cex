@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [few-shot, builder, N03, golden]
 tldr: 3 golden artifact patterns the builder learns from -- agent, KC, workflow.
 density_score: 0.85
@@ -46,8 +46,39 @@ Body: Purpose > Steps (Agent/Input/Output/Signal/Depends each) > Quality Gates >
 
 ## What Makes Golden
 
-1. ZERO placeholder values in frontmatter (no null, no TBD)
+1. ZERO placeholder values in frontmatter (no null, no Pending finalization)
 2. Every section has 3+ lines of substantive content
 3. Tables have real data, not example rows
 4. Density >= 0.90
 5. Compiles to valid YAML without warnings
+
+
+## Example Quality Standards
+
+Few-shot examples must demonstrate the exact output format expected by the builder:
+
+- **Input completeness**: every example includes full context, not abbreviated placeholders
+- **Output fidelity**: example outputs pass the same quality gate as production artifacts
+- **Edge case coverage**: at least one example per category shows boundary conditions
+- **Negative examples**: include at least one counter-example showing what NOT to produce
+
+### Calibration Protocol
+
+```yaml
+# Few-shot calibration checklist
+calibration:
+  min_examples: 3
+  max_examples: 7
+  diversity_check: true
+  format_match: exact
+  quality_floor: 8.5
+  refresh_cycle: monthly
+```
+
+| Dimension | Requirement | Verification |
+|-----------|------------|--------------|
+| Format match | Output matches schema exactly | Automated parse test |
+| Domain accuracy | Content is factually correct | Peer review by domain expert |
+| Difficulty spread | Easy + medium + hard examples | Manual classification |
+| Length distribution | Examples span 50%-150% of target | Automated word count |
+

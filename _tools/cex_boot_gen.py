@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-CEX Boot Generator — reads nucleus_models.yaml → generates boot/*.cmd
+CEX Boot Generator -- reads nucleus_models.yaml -> generates boot/*.cmd
 
 Usage:
   python _tools/cex_boot_gen.py              # generate all boot scripts
@@ -14,60 +15,183 @@ Writes: boot/n0{1-6}.cmd + boot/cex.cmd + fallback scripts
 import yaml, sys, os
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG = ROOT / ".cex" / "config" / "nucleus_models.yaml"
+SINS_CONFIG = ROOT / ".cex" / "config" / "nucleus_sins.yaml"
 TEMPLATE = ROOT / ".cex" / "config" / "nucleus_models.template.yaml"
 BOOT_DIR = ROOT / "boot"
+
+
+def _load_sins() -> dict:
+    """Load nucleus_sins.yaml for sin-aware UX."""
+    if SINS_CONFIG.exists():
+        try:
+            with open(SINS_CONFIG, "r", encoding="utf-8") as f:
+                return yaml.safe_load(f) or {}
+        except Exception:
+            pass
+    return {}
+
 
 # Nucleus metadata (domain prompts)
 NUCLEUS_META = {
     "n07": {
         "title": "CEX-N07-ORCHESTRATOR",
         "var": "CEX_NUCLEUS=N07",
-        "prompt": "Voce e N07 Orchestrator do CEX. Orquestra nucleos, nunca constroi. Leia CLAUDE.md e .claude/rules/n07-orchestrator.md.",
+        "prompt": "You are N07 Orchestrator of CEX. Dispatch nuclei, never build. Read CLAUDE.md e .claude/rules/n07-orchestrator.md.",
     },
     "n01": {
         "title": "CEX-N01-RESEARCH",
         "var": "CEX_NUCLEUS=N01",
-        "prompt": "Voce e N01 Research Nucleus do CEX. Dominio: research, analise, papers, competidores. SE EXISTIR .cex/runtime/handoffs/n01_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N01 Research Nucleus of CEX. Domain: research, analysis, papers, competitors. IF .cex/runtime/handoffs/n01_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n02": {
         "title": "CEX-N02-MARKETING",
         "var": "CEX_NUCLEUS=N02",
-        "prompt": "Voce e N02 Marketing Nucleus do CEX. Dominio: copy, ads, campanhas, brand voice. SE EXISTIR .cex/runtime/handoffs/n02_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N02 Marketing Nucleus of CEX. Domain: copy, ads, campaigns, brand voice. IF .cex/runtime/handoffs/n02_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n03": {
         "title": "CEX-N03-BUILDER",
         "var": "CEX_NUCLEUS=N03",
-        "prompt": "Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/agents/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n04": {
         "title": "CEX-N04-KNOWLEDGE",
         "var": "CEX_NUCLEUS=N04",
-        "prompt": "Voce e N04 Knowledge Nucleus do CEX. Dominio: RAG, indexacao, knowledge cards, taxonomia. SE EXISTIR .cex/runtime/handoffs/n04_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N04 Knowledge Nucleus of CEX. Domain: RAG, indexing, knowledge cards, taxonomy. IF .cex/runtime/handoffs/n04_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n05": {
         "title": "CEX-N05-OPERATIONS",
         "var": "CEX_NUCLEUS=N05",
-        "prompt": "Voce e N05 Operations Nucleus do CEX. Dominio: code review, testing, CI/CD, deploy. SE EXISTIR .cex/runtime/handoffs/n05_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N05 Operations Nucleus of CEX. Domain: code review, testing, CI/CD, deploy. IF .cex/runtime/handoffs/n05_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n06": {
         "title": "CEX-N06-COMMERCIAL",
         "var": "CEX_NUCLEUS=N06",
-        "prompt": "Voce e N06 Commercial Nucleus do CEX. Dominio: pricing, funnels, monetizacao, brand. SE EXISTIR .cex/runtime/handoffs/n06_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N06 Commercial Nucleus of CEX. Domain: pricing, funnels, monetization, brand. IF .cex/runtime/handoffs/n06_task.md READ AND EXECUTE IMMEDIATELY.",
     },
 }
 
-# CLI-specific boot templates
+# Nucleus color scheme (visually distinct per nucleus)
+NUCLEUS_COLORS = {
+    "n01": {"bg": "DarkBlue",    "fg": "White",  "accent": "Cyan",    "label": "RESEARCH"},
+    "n02": {"bg": "DarkMagenta", "fg": "White",  "accent": "Magenta", "label": "MARKETING"},
+    "n03": {"bg": "DarkGreen",   "fg": "White",  "accent": "Green",   "label": "BUILDER"},
+    "n04": {"bg": "DarkCyan",    "fg": "White",  "accent": "Yellow",  "label": "KNOWLEDGE"},
+    "n05": {"bg": "DarkGray",    "fg": "White",  "accent": "Gray",    "label": "OPERATIONS"},
+    "n06": {"bg": "DarkRed",     "fg": "White",  "accent": "Red",     "label": "COMMERCIAL"},
+    "n07": {"bg": "Black",       "fg": "White",  "accent": "White",   "label": "ORCHESTRATOR"},
+}
+
+
+# CLI-specific boot templates -- PowerShell format (rich UX: colors, sizing, Unicode)
+def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
+    model = cfg.get("model", "claude-sonnet-4-6")
+    flags = cfg.get("flags", "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome")
+    mcps = cfg.get("mcps", "")
+    settings = cfg.get("settings", "")
+    ctx = cfg.get("context", 200000)
+
+    # Sin-aware colors (from nucleus_sins.yaml, fallback to legacy NUCLEUS_COLORS)
+    sins = _load_sins()
+    sin_data = sins.get(nucleus, {})
+    sin_color = sin_data.get("color", {})
+    legacy_colors = NUCLEUS_COLORS.get(nucleus, NUCLEUS_COLORS["n03"])
+
+    bg = sin_color.get("ps_bg", legacy_colors["bg"])
+    fg = sin_color.get("ps_fg", legacy_colors["fg"])
+    accent = sin_color.get("ps_accent", legacy_colors["accent"])
+    label = legacy_colors["label"]
+
+    # Sin identity
+    icon = sin_data.get("icon", "")
+    virtue = sin_data.get("virtue", "")
+    virtue_en = sin_data.get("virtue_en", "")
+    tagline = sin_data.get("tagline", "")
+    sin_injection = sin_data.get("prompt_injection", "").strip()
+
+    # Build the sin-injected prompt (sin lens BEFORE the domain prompt)
+    full_prompt = meta["prompt"]
+    if sin_injection:
+        # Clean for PS here-string (no special escaping needed inside @'...'@)
+        safe_injection = sin_injection.replace('\n', ' ').strip()
+        full_prompt = f"{safe_injection} --- {full_prompt}"
+    # Replace any em-dashes with regular dashes (PS encoding issue)
+    full_prompt = full_prompt.replace('\u2014', '--').replace('\u2013', '-')
+
+    # Build PS argument array items (each flag as separate quoted string)
+    flag_parts = flags.split()
+    flags_array = ", ".join(f'"{f}"' for f in flag_parts)
+
+    # MCP and settings as conditional argument additions
+    mcp_line = f'$args += "--mcp-config", "{ROOT}\\{mcps}"' if mcps else "# no MCP config"
+    settings_line = f'$args += "--settings", "{ROOT}\\{settings}"' if settings else "# no settings"
+
+    return f'''# CEX {nucleus.upper()} -- {meta["title"]}
+# Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml + nucleus_sins.yaml
+# CLI: claude | Model: {model} | Context: {ctx}
+# Sin: {virtue} ({virtue_en})
+
+# --- UX: Window appearance ---
+$Host.UI.RawUI.WindowTitle = "{meta["title"]} [{model}]"
+try {{
+    $Host.UI.RawUI.BackgroundColor = "{bg}"
+    $Host.UI.RawUI.ForegroundColor = "{fg}"
+    $bufSize = $Host.UI.RawUI.BufferSize
+    $bufSize.Width = 160; $bufSize.Height = 9999
+    $Host.UI.RawUI.BufferSize = $bufSize
+    $winSize = $Host.UI.RawUI.WindowSize
+    $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
+    $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
+    $Host.UI.RawUI.WindowSize = $winSize
+    Clear-Host
+}} catch {{}}
+
+Write-Host ""
+Write-Host "  {icon} {nucleus.upper()} {virtue} - {virtue_en}" -ForegroundColor {accent}
+Write-Host "  {'=' * 50}" -ForegroundColor DarkGray
+Write-Host "  {tagline}" -ForegroundColor DarkGray
+Write-Host "  {model}  |  {ctx // 1000}K context  |  8F pipeline" -ForegroundColor DarkGray
+Write-Host ""
+
+# --- Environment ---
+$env:CLAUDECODE = ""
+$env:{meta["var"].split("=")[0]} = "{meta["var"].split("=")[1]}"
+$env:CEX_ROOT = "{ROOT}"
+Set-Location $env:CEX_ROOT
+
+# --- Launch CLI ---
+# Store prompt in variable to avoid parsing issues with long strings
+$prompt = @'
+{full_prompt}
+'@
+
+# Build argument list (avoids PowerShell parsing -- flags as operators)
+$args = @({flags_array}, "--model", "{model}")
+{mcp_line}
+{settings_line}
+$args += $prompt
+
+# Call operator & ensures external command execution
+& claude @args
+'''
+
+
+# Legacy CMD format (kept for fallback/compatibility)
 def build_claude_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
-    model = cfg.get("model", "claude-sonnet-4-20250514")
+    model = cfg.get("model", "claude-sonnet-4-6")
     flags = cfg.get("flags", "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome")
     mcps = cfg.get("mcps", "")
     settings = cfg.get("settings", "")
 
     lines = [
         "@echo off",
-        f":: CEX {nucleus.upper()} — {meta['title']}",
+        f":: CEX {nucleus.upper()} -- {meta['title']}",
         f":: Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml",
         f":: CLI: claude | Model: {model}",
         "",
@@ -91,7 +215,7 @@ def build_claude_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
 
     lines += [
         "",
-        ":: ALWAYS interactive — task comes from handoff file, never CLI args",
+        ":: ALWAYS interactive -- task comes from handoff file, never CLI args",
         f'claude %FLAGS% %MODEL% %MCP% %SETTINGS% "{meta["prompt"]}"',
     ]
     return "\n".join(lines) + "\n"
@@ -103,7 +227,7 @@ def build_gemini_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
 
     return "\n".join([
         "@echo off",
-        f":: CEX {nucleus.upper()} — {meta['title']}",
+        f":: CEX {nucleus.upper()} -- {meta['title']}",
         f":: Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml",
         f":: CLI: gemini | Model: {model}",
         "",
@@ -117,7 +241,7 @@ def build_gemini_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
         "set GEMINI_API_KEY=",
         "set GOOGLE_AI_API_KEY=",
         "",
-        ":: ALWAYS interactive — task comes from handoff file, never CLI args",
+        ":: ALWAYS interactive -- task comes from handoff file, never CLI args",
         f'gemini -m {model} {flags} "{meta["prompt"]}"',
     ]) + "\n"
 
@@ -128,7 +252,7 @@ def build_codex_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
 
     return "\n".join([
         "@echo off",
-        f":: CEX {nucleus.upper()} — {meta['title']}",
+        f":: CEX {nucleus.upper()} -- {meta['title']}",
         f":: Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml",
         f":: CLI: codex | Model: {model}",
         "",
@@ -137,7 +261,7 @@ def build_codex_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
         f"set CEX_ROOT={ROOT}",
         'cd /d "%CEX_ROOT%"',
         "",
-        ":: ALWAYS interactive — task comes from handoff file, never CLI args",
+        ":: ALWAYS interactive -- task comes from handoff file, never CLI args",
         f'codex -m {model} {flags} "{meta["prompt"]}"',
     ]) + "\n"
 
@@ -148,7 +272,7 @@ def build_pi_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
 
     return "\n".join([
         "@echo off",
-        f":: CEX {nucleus.upper()} — {meta['title']}",
+        f":: CEX {nucleus.upper()} -- {meta['title']}",
         f":: Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml",
         f":: CLI: pi | Model: {model} | Thinking: {thinking}",
         "",
@@ -167,7 +291,7 @@ def build_ollama_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
 
     return "\n".join([
         "@echo off",
-        f":: CEX {nucleus.upper()} — {meta['title']}",
+        f":: CEX {nucleus.upper()} -- {meta['title']}",
         f":: Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml",
         f":: CLI: ollama | Model: {model}",
         "",
@@ -176,18 +300,28 @@ def build_ollama_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
         f"set CEX_ROOT={ROOT}",
         'cd /d "%CEX_ROOT%"',
         "",
-        ":: Local model — no API keys needed",
+        ":: Local model -- no API keys needed",
         f'ollama run {model}',
     ]) + "\n"
 
 
-BUILDERS = {
+# Primary builders (PowerShell -- rich UX)
+BUILDERS_PS1 = {
+    "claude": build_claude_ps1,
+}
+
+# Legacy builders (CMD -- fallback for non-PS environments)
+BUILDERS_CMD = {
     "claude": build_claude_cmd,
     "gemini": build_gemini_cmd,
     "codex": build_codex_cmd,
     "pi": build_pi_cmd,
     "ollama": build_ollama_cmd,
 }
+
+# Default: PS1 if available, else CMD
+BUILDERS = {**BUILDERS_CMD}  # base
+BUILDERS.update(BUILDERS_PS1)  # override with PS1 where available
 
 
 def load_config() -> dict:
@@ -222,12 +356,14 @@ def generate(config: dict, only: str = None, dry_run: bool = False):
             print(f"[ERROR] Unknown CLI '{cli}' for {nucleus}")
             continue
 
-        # Main boot script
+        # Main boot script -- PS1 for PowerShell builders, CMD for legacy
         content = builder(nucleus, cfg, meta)
+        is_ps1 = cli in BUILDERS_PS1
+        ext = ".ps1" if is_ps1 else ".cmd"
         if nucleus == "n07":
-            path = BOOT_DIR / "cex.cmd"
+            path = BOOT_DIR / f"cex{ext}"
         else:
-            path = BOOT_DIR / f"{nucleus}.cmd"
+            path = BOOT_DIR / f"{nucleus}{ext}"
 
         if dry_run:
             print(f"\n{'='*60}")

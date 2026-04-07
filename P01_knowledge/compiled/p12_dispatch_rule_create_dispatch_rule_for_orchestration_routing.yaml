@@ -29,7 +29,7 @@ keywords:
 - plan
 - planejar
 - grid
-agent_node: orchestrator
+agent_group: orchestrator
 model: opus
 priority: 9
 confidence_threshold: 0.72

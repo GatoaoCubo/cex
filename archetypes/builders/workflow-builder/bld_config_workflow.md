@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: pillar
+quality: 9.0
+title: "Config Workflow"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow, builder, examples]
+tldr: "Golden and anti-examples for workflow construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: workflow Production Rules
 ## Naming Convention
@@ -36,7 +46,7 @@ Rule: id MUST equal filename stem.
 | Value | When to use | Example |
 |-------|-------------|---------|
 | sequential | Steps must run in order (each depends on prior) | Research -> Build -> Deploy |
-| parallel | Steps are independent, run simultaneously | 3 agent_nodes researching different topics |
+| parallel | Steps are independent, run simultaneously | 3 agent_groups researching different topics |
 | mixed | Some steps parallel, some sequential (wave pattern) | Wave 1: [A, B] parallel, then Wave 2: C |
 ## Retry Policy Enum
 | Value | When to use | Example |
@@ -45,9 +55,9 @@ Rule: id MUST equal filename stem.
 | per_step | Failed step retried individually (max 1) | API calls, transient errors |
 | global | Entire workflow retried from start | Idempotent missions |
 ## Step Structure Requirements
-- Agent: agent_node name (lowercase) or "stella" for orchestrator steps
+- Agent: agent_group name (lowercase) or "stella" for orchestrator steps
 - Action: 1-sentence description of what the step does
 - Input: what the step receives (from prior step or external)
 - Output: what the step produces (for next step or final output)
-- Signal: signal emitted on completion (reference signal-builder)
+- Signal: signal emitted on completion (references signal-builder)
 - Depends on: list of step numbers or "none"

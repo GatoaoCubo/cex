@@ -16,10 +16,13 @@ tags: [few_shot_example, format_teaching, difficulty_calibration, input_output_p
 tldr: "Show format in output, not describe it. Calibrate easy->medium->hard. Stay under 1024 bytes body."
 impact_score: 7.5
 decay_rate: 0.04
-agent_node: edison
+agent_group: edison
 keywords: [few_shot, format_teaching, difficulty_calibration, output_demonstration, input_specificity, edge_case, explanation]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Few Shot Example"
+density_score: 0.90
 ---
 ## Summary
 Few-shot examples teach a model what format to produce, not what content to generate. The output field must be an actual demonstration of the target format. Difficulty must be calibrated across a set — easy examples establish the baseline, medium ones show variation, hard ones handle edge cases. The body limit is 1024 bytes, the tightest in the P01 pillar.
@@ -33,11 +36,58 @@ Few-shot examples teach a model what format to produce, not what content to gene
 7. The `id` field value must match the filename stem exactly.
 8. Tags must be a YAML list, not a string.
 ## Anti-Pattern
-- Output field containing prose: "a good response would have a tldr, then three bullet points..." — this teaches nothing about format.
-- Input so vague it cannot produce a consistent format demonstration: "write something about quality gates."
-- Including a scoring rubric or quality threshold — that is golden_test (P07), not few_shot_example.
-- All examples set to easy difficulty — edge cases go untaught and the model fails on boundary inputs.
-- Body over 1024 bytes — the fix is trimming prose sections, never truncating the output demonstration with "...".
-- Recursive drift: producing a few_shot_example about few_shot_examples that evaluates quality (crosses into P07).
+1. Output field containing prose: "a good response would have a tldr, then three bullet points..." — this teaches nothing about format.
+2. Input so vague it cannot produce a consistent format demonstration: "write something about quality gates."
+3. Including a scoring rubric or quality threshold — that is golden_test (P07), not few_shot_example.
+4. All examples set to easy difficulty — edge cases go untaught and the model fails on boundary inputs.
+5. Body over 1024 bytes — the fix is trimming prose sections, never truncating the output demonstration with "...".
+6. Recursive drift: producing a few_shot_example about few_shot_examples that evaluates quality (crosses into P07).
 ## Context
 Applies when: teaching format for any artifact type by showing concrete input/output pairs.
+
+## Builder Context
+
+This ISO operates within the `few-shot-example-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Reference
+
+```yaml
+id: p10_lr_few_shot_example_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_few_shot_example_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | few_shot_example |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

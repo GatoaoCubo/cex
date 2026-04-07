@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.2
 tags: [cex, lp03, prompt, reason, constrain, template, chain-of-thought]
 tldr: "P03 Prompt governa comunicacao do LLM via 10 tipos — de system_prompt a meta_prompt — cobrindo 5 funcoes LLM"
 when_to_use: "Classificar artefatos de prompt ou entender como P03 orquestra raciocinio e formato"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp01_knowledge
   related: [p01_kc_cex_lp02_model, p01_kc_cex_lp04_tools]
-density_score: null
+density_score: 1.0
 data_source: "https://arxiv.org/abs/2201.11903"
 ---
 
@@ -103,3 +103,10 @@ analogia: idioma + sotaque + registro
 - source: https://arxiv.org/abs/2210.03629
 - deepens: p01_kc_cex_lp01_knowledge
 - related: p01_kc_cex_lp02_model
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

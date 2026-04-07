@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for search_tool
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Search Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [search_tool, builder, examples]
+tldr: "Golden and anti-examples for search tool construction, demonstrating ideal structure and common pitfalls."
+domain: "search tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: search_tool
@@ -38,7 +48,7 @@ Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
 1. `## Overview` — what this search tool does, provider, use case
 2. `## Query` — query parameters, syntax, filtering options
-3. `## Results` — result structure, fields, ranking, pagination
+3. `## Results` — result structure, fields, ranking, pagetion
 4. `## Provider` — provider-specific details, API key, rate limits, cost
 ## Constraints
 - max_bytes: 2048 (body only)

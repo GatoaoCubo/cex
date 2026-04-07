@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How guardrail-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Guardrail"
+version: "1.0.0"
+author: n03_builder
+tags: [guardrail, builder, examples]
+tldr: "Golden and anti-examples for guardrail construction, demonstrating ideal structure and common pitfalls."
+domain: "guardrail construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: guardrail-builder

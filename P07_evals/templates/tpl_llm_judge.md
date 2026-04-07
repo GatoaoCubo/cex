@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — LLM Judge"
 tags: [template, llm, judge, evaluation, rubric]
 tldr: "An LLM-based evaluator that scores outputs against a rubric. Defines the judge prompt, scoring dimensions, calibration method, and bias mitigation."
-quality: 8.7
+quality: 9.1
+updated: "2026-04-07"
+domain: "evaluation and testing"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.89
 ---
 
 # LLM Judge: [JUDGE_NAME]
@@ -16,7 +21,7 @@ quality: 8.7
 
 ## Judge Configuration
 ```yaml
-model: [claude-sonnet-4-20250514 | gpt-4o]
+model: [claude-sonnet-4-6 | gpt-4o]
 temperature: 0.0          # Deterministic scoring
 max_tokens: 500           # Enough for scores + rationale
 cost_per_eval: ~$0.005    # Budget awareness

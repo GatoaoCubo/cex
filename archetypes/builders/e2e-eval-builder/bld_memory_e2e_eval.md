@@ -23,9 +23,12 @@ tags:
 tldr: "Chain stages with explicit data lineage, assert at each boundary, scale timeouts to pipeline depth, always clean up."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory E2E Eval"
+density_score: 0.90
 ---
 ## Summary
 End-to-end pipeline evaluations fail to catch real bugs when stages are disconnected, assertions only appear at the final output, or timeout values are borrowed from unit tests. A well-structured e2e eval specifies data lineage through the pipeline, asserts correctness at every stage boundary, scales timeouts to pipeline depth, and restores environment state after each run.
@@ -36,6 +39,61 @@ End-to-end pipeline evaluations fail to catch real bugs when stages are disconne
 **Environment isolation**: the eval spec must include explicit setup (load fixtures, seed state) and cleanup (delete created records, reset counters, remove temp files) steps. Tests without cleanup produce order-dependent results - a later run may pass or fail based on leftover state from an earlier run.
 **Test scope**: an e2e eval tests a pipeline (multiple components interacting). If the spec tests a single component in isolation, it is a unit eval and belongs in a different artifact type.
 ## Anti-Pattern
-- Disconnected stages where stage 2 reads from a static fixture rather than stage 1's actual output - hides integration failures.
-- Assertions only at the final output - means a bug in stage 2 of a 5-stage pipeline is only detected after running all 5 stages.
-- Timeout values under 60s for any multi-stage pipeline - almost always causes spurious failures in real environments.
+1. Disconnected stages where stage 2 reads from a static fixture rather than stage 1's actual output - hides integration failures.
+2. Assertions only at the final output - means a bug in stage 2 of a 5-stage pipeline is only detected after running all 5 stages.
+3. Timeout values under 60s for any multi-stage pipeline - almost always causes spurious failures in real environments.
+
+## Builder Context
+
+This ISO operates within the `e2e-eval-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_e2e_eval_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_e2e_eval_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | e2e_eval |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

@@ -4,6 +4,16 @@ id: bld_architecture_skill
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of skill — inventory, dependencies, and architectural position
+quality: 9.2
+title: "Architecture Skill"
+version: "1.0.0"
+author: n03_builder
+tags: [skill, builder, examples]
+tldr: "Golden and anti-examples for skill construction, demonstrating ideal structure and common pitfalls."
+domain: "skill construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: skill in the CEX
@@ -38,7 +48,7 @@ skill           --depends-->    knowledge_card
 | Multi-phase with defined input/output per phase | An event interceptor without phases (hook P04) |
 | User-invocable or agent-only based on flag | A protocol server exposing tools (mcp_server P04) |
 | Produces structured output on completion | A pluggable extension with lifecycle hooks (plugin P04) |
-| Scoped to one capability domain | A multi-satellite orchestration (workflow P12) |
+| Scoped to one capability domain | A multi-agent_group orchestration (workflow P12) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|------------|---------|

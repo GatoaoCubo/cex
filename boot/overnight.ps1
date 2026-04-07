@@ -397,8 +397,14 @@ function Invoke-Evolve {
     $improved = 0
 
     # Track failed evolves this cycle to avoid retrying same artifacts
+    # Convert evolve_tried from PSCustomObject (JSON load) to hashtable
+    # PSCustomObject.ContainsKey() does not exist -- hashtable does
     if (-not $State.PSObject.Properties['evolve_tried']) {
         $State | Add-Member -NotePropertyName 'evolve_tried' -NotePropertyValue @{} -Force
+    } elseif ($State.evolve_tried -is [PSCustomObject]) {
+        $ht = @{}
+        $State.evolve_tried.PSObject.Properties | ForEach-Object { $ht[$_.Name] = $_.Value }
+        $State.evolve_tried = $ht
     }
 
     foreach ($item in $toEvolve) {

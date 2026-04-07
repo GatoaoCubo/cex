@@ -1,0 +1,42 @@
+id: bld_output_template_supabase_data_layer
+kind: output_template
+pillar: P03
+title: Output Template — Supabase Data Layer Config
+version: 1.0.0
+created: 2026-03-31
+updated: 2026-03-31
+author: n04_knowledge
+domain: data_platform
+quality: 8.9
+tags:
+- builder
+- supabase
+- data-layer
+- output-template
+- config
+density_score: 0.87
+config_yaml_structure: "# Supabase Data Layer Config — [VERTICAL] — [TIER]\nidentidade:\n  empresa: \"[EMPRESA]\"\n  vertical:\
+  \ \"[ecommerce|saas|marketplace|content|custom]\"\n  regiao: \"[REGIAO]\"\n  tier: \"[free|pro|team|enterprise]\"\n\nprojeto:\n\
+  \  project_ref: \"[REF]\"\n  url: \"https://[REF].supabase.co\"\n\ndatabase:\n  schemas: [public]\n  extensions: [pgvector,\
+  \ pg_cron]\n  migrations_dir: \"supabase/migrations/\"\n\nauth:\n  providers: [email]\n  mfa: false\n  custom_claims: [org_id,\
+  \ role]\n\nrls:\n  multi_tenant_column: org_id\n  patterns: []\n\nstorage:\n  buckets: []\n\nrealtime:\n  habilitado: false\n\
+  \  postgres_changes: []\n\nvectors:\n  habilitado: false\n\nedge_functions:\n  functions: []\n\nintegracao_cex:\n  mcp_habilitado:\
+  \ false\n\nbudget:\n  alertas: []"
+migration_sql_template: "-- Migration: [YYYYMMDD]_[description].sql\n-- Vertical: [VERTICAL] | Tier: [TIER]\n\n-- Extensions\n\
+  CREATE EXTENSION IF NOT EXISTS \"pgvector\";\nCREATE EXTENSION IF NOT EXISTS \"pg_cron\";\n\n-- Core tables\nCREATE TABLE\
+  \ IF NOT EXISTS organizations (\n  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,\n  name TEXT NOT NULL,\n  plan TEXT DEFAULT\
+  \ 'free',\n  created_at TIMESTAMPTZ DEFAULT NOW()\n);\n\nCREATE TABLE IF NOT EXISTS memberships (\n  user_id UUID REFERENCES\
+  \ auth.users(id) ON DELETE CASCADE,\n  org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,\n  role TEXT DEFAULT\
+  \ 'member',\n  UNIQUE(user_id, org_id)\n);\n\n-- [VERTICAL-SPECIFIC TABLES HERE]\n\n-- RLS\nALTER TABLE organizations ENABLE\
+  \ ROW LEVEL SECURITY;\nALTER TABLE memberships ENABLE ROW LEVEL SECURITY;\n\n-- Policies\nCREATE POLICY \"org_member\" ON\
+  \ organizations\n  FOR ALL USING (id = (auth.jwt()->'app_metadata'->>'org_id')::uuid);\n\n-- Indexes\nCREATE INDEX idx_memberships_user\
+  \ ON memberships(user_id);\nCREATE INDEX idx_memberships_org ON memberships(org_id);"
+output_checklist:
+- '[ ] Config YAML with ALL sections filled'
+- '[ ] Migration SQL with RLS on every table'
+- '[ ] Indexes on all FK + RLS columns'
+- '[ ] Storage bucket policies defined'
+- '[ ] Realtime publications configured (if enabled)'
+- '[ ] Edge function scaffolds (if enabled)'
+- '[ ] MCP config (if enabled)'
+- '[ ] Tier limits documented in comments'

@@ -7,7 +7,7 @@ id: p02_mm_{{MODEL_SLUG}}
 kind: mental_model
 pillar: P02
 title: "{{MENTAL_MODEL_TITLE}}"
-owner: {{SATELLITE_NAME}}
+owner: {{AGENT_GROUP_NAME}}
 quality: {{QUALITY_7_TO_10}}
 ---
 

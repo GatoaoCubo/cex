@@ -47,7 +47,7 @@ type_codes_by_lp: '| LP | Type | Code | Example |
 
   | P06 | validator | `val` | `p06_val_quality_score.yaml` |
 
-  | P06 | interface | `iface` | `p06_iface_agent_node_handoff.yaml` |
+  | P06 | interface | `iface` | `p06_iface_agent_group_handoff.yaml` |
 
   | P07 | unit_eval | `ue` | `p07_ue_brain_query.yaml` |
 
@@ -69,7 +69,7 @@ type_codes_by_lp: '| LP | Type | Code | Example |
 
   | P09 | path_config | `path` | `p09_path_organization_repos.yaml` |
 
-  | P09 | runtime_rule | `rr` | `p09_rr_agent_node_spawn.yaml` |
+  | P09 | runtime_rule | `rr` | `p09_rr_agent_group_spawn.yaml` |
 
   | P10 | mental_model | `mm` | `p10_mm_edison.yaml` |
 

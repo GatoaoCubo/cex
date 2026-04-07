@@ -39,18 +39,18 @@
 #   cli: gemini
 #   model: gemini-2.5-pro
 #   flags: "--yolo"
-#   fallback: { cli: claude, model: claude-opus-4-0 }
+#   fallback: { cli: claude, model: claude-opus-4-6 }
 #   fallback_local: { cli: ollama, model: "qwen3:32b" }
 #
 # n02:
 #   cli: claude
-#   model: claude-sonnet-4-20250514
+#   model: claude-sonnet-4-6
 #   fallback: { cli: gemini, model: gemini-2.5-pro }
 #   fallback_local: { cli: ollama, model: "qwen3:14b" }
 #
 # n03:
 #   cli: claude
-#   model: claude-opus-4-0
+#   model: claude-opus-4-6
 #   fallback: { cli: codex, model: o3 }
 #   fallback_local: { cli: ollama, model: "qwen3:32b" }
 #
@@ -65,12 +65,12 @@
 #   cli: codex
 #   model: o3
 #   flags: "--full-auto"
-#   fallback: { cli: claude, model: claude-sonnet-4-20250514 }
+#   fallback: { cli: claude, model: claude-sonnet-4-6 }
 #   fallback_local: { cli: ollama, model: "qwen3:14b" }
 #
 # n06:
 #   cli: claude
-#   model: claude-sonnet-4-20250514
+#   model: claude-sonnet-4-6
 #   fallback: { cli: gemini, model: gemini-2.5-pro }
 #   fallback_local: { cli: ollama, model: "qwen3:14b" }
 
@@ -81,11 +81,11 @@
 
 # n07:
 #   cli: claude
-#   model: claude-sonnet-4-20250514
+#   model: claude-sonnet-4-6
 #
 # n01:
 #   cli: claude
-#   model: claude-sonnet-4-20250514
+#   model: claude-sonnet-4-6
 #
 # n02:
 #   cli: claude
@@ -93,7 +93,7 @@
 #
 # n03:
 #   cli: claude
-#   model: claude-sonnet-4-20250514
+#   model: claude-sonnet-4-6
 #
 # n04:
 #   cli: claude
@@ -190,11 +190,11 @@ n01:
 
 n02:
   cli: claude
-  model: claude-sonnet-4-20250514
+  model: claude-sonnet-4-6
 
 n03:
   cli: claude
-  model: claude-opus-4-0
+  model: claude-opus-4-6
 
 n04:
   cli: gemini
@@ -208,4 +208,4 @@ n05:
 
 n06:
   cli: claude
-  model: claude-sonnet-4-20250514
+  model: claude-sonnet-4-6

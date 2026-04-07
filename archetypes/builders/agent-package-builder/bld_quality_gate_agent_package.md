@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "agent_package — portable self-contained agent bundles with tier-validated file inventories"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, agent-package, packaging, portable, bundle, tier, distribution]
 tldr: "Gates ensuring agent_package artifacts are self-contained, tier-compliant, portability-enforced bundles with valid manifests and correct LP file mappings."
 density_score: 0.93
@@ -32,7 +32,7 @@ All must pass. Any failure = immediate reject.
 | H04 | Kind equals literal `agent_package` | Any other kind value |
 | H05 | Quality field is `null` | Any non-null value |
 | H06 | All 14 required manifest fields present | Any required field absent from manifest.yaml |
-| H07 | Tier is one of: `minimal`, `standard`, `complete`, `whitelabel` | Unknown or custom tier value |
+| H07 | Tier is one of: `minimal`, `standard`, `complete`, `whitelabel` | Unknown or costm tier value |
 | H08 | File count matches tier (minimal=3, standard=7, complete=10, whitelabel=12) | File count off by any amount |
 | H09 | No hardcoded absolute paths in any bundled file | Any `/home/`, `C:\`, `~`, or machine-specific path found |
 | H10 | `system_instruction.md` is <= 4096 tokens | Token count exceeds limit |

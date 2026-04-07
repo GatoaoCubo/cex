@@ -4,6 +4,16 @@ id: bld_architecture_session_state
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of session_state — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Session State"
+version: "1.0.0"
+author: n03_builder
+tags: [session_state, builder, examples]
+tldr: "Golden and anti-examples for session state construction, demonstrating ideal structure and common pitfalls."
+domain: "session state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: session_state in the CEX
@@ -36,7 +46,7 @@ session_state   --consumed_by-->  context_manager
 | An ephemeral snapshot of current session context | A persistent record of accumulated experience (learning_record P10) |
 | Discarded when session ends — not cross-session | A variable state that persists across sessions (runtime_state P10) |
 | Contains token usage, active tasks, and checkpoints | A design-time cognitive map (mental_model P02) |
-| Used for crash recovery and context overflow management | A search index or knowledge base (brain_index P01) |
+| Used for crash recovery and context overflow management | A search index or knowledge base (knowledge_index P01) |
 | Scoped to one session of one agent | A shared state across multiple agents |
 | Lightweight snapshot with minimal overhead | A comprehensive audit log of all actions |
 ## Layer Map

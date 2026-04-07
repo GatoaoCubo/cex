@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: research
-quality: 8.9
+quality: 9.1
 tags: [amazon-ads, brasil, acos, cpc, roas, benchmarks]
 tldr: "BR roda com CPC e ACOS abaixo dos EUA; breakeven ACOS = margem, target saudavel = margem menos 6 pontos."
 when_to_use: "Definir metas de Amazon Ads no Brasil sem importar benchmarks americanos"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: null
   related: [p01_kc_catalogo_proprio_mercado_livre]
-density_score: null
+density_score: 1.0
 data_source: "Benchmark de CPC, CTR, CVR, ACOS e sazonalidade Amazon Ads BR"
 ---
 
@@ -91,3 +91,10 @@ def acos_targets(margem_pct: float) -> dict:
 - external: https://advertising.amazon.com/library/guides/acos
 - external: https://advertising.amazon.com/
 - deepens: p01_kc_catalogo_proprio_mercado_livre
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

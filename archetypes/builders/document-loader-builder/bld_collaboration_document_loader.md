@@ -8,7 +8,7 @@ updated: 2026-03-28
 author: builder_agent
 domain: document_loader
 llm_function: INJECT
-quality: 8.9
+quality: 9.1
 tags: [collaboration, document_loader, ingestion, RAG, crew, P04]
 tldr: "Crew compositions, handoff protocol, and dependency map for document_loader-builder in multi-builder pipelines."
 density_score: 1.0

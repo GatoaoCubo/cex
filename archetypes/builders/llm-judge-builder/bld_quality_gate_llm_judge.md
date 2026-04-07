@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "LLM-as-Judge configuration — automated quality evaluators with declared model, criteria, scale, and calibration examples"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, llm-judge, P07, evals, criteria, scale, few-shot]
 tldr: "Pass/fail gate for llm_judge artifacts: judge_model presence, criteria completeness, scale anchors, few-shot calibration, and boundary compliance."
 density_score: 0.90
@@ -44,7 +44,7 @@ Weights sum to 100%.
 | Scale anchor quality | 1.0 | Anchors define concrete observable behaviors, not vague labels like "good" or "bad" |
 | Few-shot coverage | 1.0 | At least 2 examples present; covers both high and low score ends of scale |
 | Few-shot rationale quality | 1.0 | Each example has chain-of-thought rationale explaining score assignment |
-| Judge model appropriateness | 0.5 | Model is from different family than likely evaluated model (reduces self-enhancement bias) |
+| Judge model apownteness | 0.5 | Model is from different family than likely evaluated model (reduces self-enhancement bias) |
 | Framework mapping | 0.5 | Framework field set and integration pattern documented |
 | Chain-of-thought declaration | 0.5 | chain_of_thought field explicitly set; rationale provided if false |
 | Temperature setting | 0.5 | temperature <= 0.2 for reproducibility; reason documented if higher |

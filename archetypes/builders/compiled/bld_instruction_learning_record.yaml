@@ -91,7 +91,7 @@ phase_2_compose: 'Action: Write all frontmatter fields and body sections within 
   9. Write `## Anti-Pattern` — specific failures with observable symptoms; each states the failure mode ("avoid X because
   it causes Y").
 
-  10. Write `## Context` — environment, agent_node/agent, timing, constraints that bound this experience.
+  10. Write `## Context` — environment, agent_group/agent, timing, constraints that bound this experience.
 
   11. Write `## Impact` — measurable outcomes: time saved/lost, error rates, score deltas.
 

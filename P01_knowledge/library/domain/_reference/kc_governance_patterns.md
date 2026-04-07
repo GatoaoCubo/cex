@@ -9,7 +9,7 @@ created: '2026-03-29'
 author: orchestrator
 domain: governance
 origin: manual
-quality: 8.5
+quality: 9.0
 tags:
 - governance
 - adr
@@ -24,6 +24,7 @@ feeds_kinds:
 - diagram
 - decision_record
 density_score: 0.85
+updated: "2026-04-07"
 ---
 
 ## Quick Reference
@@ -52,3 +53,33 @@ density_score: 0.85
 - Decisions without records (tribal knowledge)
 - Diagrams without updates (stale maps)
 - Laws without enforcement (governance theater)
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_governance_patterns`
+- **Tags**: 
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_governance_patterns`
+- **Tags**: 
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

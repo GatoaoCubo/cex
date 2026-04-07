@@ -5,11 +5,21 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for client production — unidirectional API consumer specification
 sources: REST conventions, HTTP standards (RFC 7231), Stripe/GitHub API patterns
+quality: 9.1
+title: "Knowledge Card Api Client"
+version: "1.0.0"
+author: n03_builder
+tags: [api_client, builder, examples]
+tldr: "Golden and anti-examples for api client construction, demonstrating ideal structure and common pitfalls."
+domain: "api client construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: client
 ## Executive Summary
-Clients are unidirectional API consumers that send requests and receive responses from external services via REST, GraphQL, or gRPC. They define endpoints, authentication, error handling, pagination, and retry policies. Clients differ from connectors (bidirectional), MCP servers (protocol providers), and scrapers (HTML extraction).
+Clients are unidirectional API consumers that send requests and receive responses from external services via REST, GraphQL, or gRPC. They define endpoints, authentication, error handling, pagetion, and retry policies. Clients differ from connectors (bidirectional), MCP servers (protocol providers), and scrapers (HTML extraction).
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -43,7 +53,7 @@ Clients are unidirectional API consumers that send requests and receive response
 | Guessing auth strategy | Wrong header = 401 on every request |
 | No retry on 429/5xx | Transient failures become permanent errors |
 | Retrying 400 errors | Bad input stays bad; retries waste quota |
-| Missing pagination | Only first page of results returned |
+| Missing pagetion | Only first page of results returned |
 | No timeout configured | Requests hang indefinitely on slow APIs |
 | Mixing client with connector | Client is read-only; bidirectional needs connector |
 ## Application
@@ -51,10 +61,10 @@ Clients are unidirectional API consumers that send requests and receive response
 2. Map endpoints: verb_noun naming, HTTP method, path, parameters, return types
 3. Configure auth: strategy, token refresh, credential storage
 4. Set resilience: timeout, retry policy (exponential backoff), rate limit handling
-5. Define pagination: cursor or offset, page size
+5. Define pagetion: cursor or offset, page size
 6. Validate: test each endpoint with expected and error responses
 ## References
 - RFC 7231: HTTP/1.1 Semantics and Content
-- Stripe API: client design patterns (pagination, idempotency, versioning)
-- GitHub API: rate limiting and auth best practices
+- Stripe API: client design patterns (pagetion, idempotency, versioning)
+- GitHub API: rate limiting and auth best forctices
 - Enterprise Integration Patterns: messaging and request-reply

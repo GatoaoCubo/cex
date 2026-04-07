@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: action_prompt
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, action-prompt, P11, P03, governance, task-execution]
 tldr: "Gates for action_prompt artifacts — task-focused prompts with defined input/output contracts."
 density_score: 0.87

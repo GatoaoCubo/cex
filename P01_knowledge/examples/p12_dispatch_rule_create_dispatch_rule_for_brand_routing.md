@@ -7,12 +7,12 @@ created: 2026-04-02
 updated: 2026-04-02
 author: dispatch-rule-builder
 domain: brand
-quality: 8.8
+quality: 9.0
 tags: [dispatch, brand, identity, monetizer, routing, P12]
 tldr: Route brand identity, visual design, voice definition, and monetization tasks to monetizer
 scope: brand
 keywords: [brand, marca, identity, identidade, logo, visual, voice, voz, tone, monetize, monetizar, branding]
-agent_node: monetizer
+agent_group: monetizer
 model: sonnet
 priority: 8
 confidence_threshold: 0.72
@@ -22,6 +22,7 @@ conditions:
 load_balance: false
 routing_strategy: hybrid
 density_score: 0.79
+title: "P12 Dispatch Rule Create Dispatch Rule For Brand Routing"
 ---
 # brand Dispatch Rule
 
@@ -33,3 +34,18 @@ Bilingual PT/EN coverage fires on both Portuguese brand commands (`marca`, `iden
 
 ## Fallback Logic
 marketer (N02) handles brand-adjacent tasks when monetizer is unavailable, covering brand voice and creative direction without specialized monetization depth. Marketer provides continuity for identity tasks while excluding commercial strategy coverage. Excluded domains (`research`, `code_review`, `deployment`, `knowledge_indexing`) prevent routing collisions with researcher, executor, and knowledge-engine domains that share surface-level vocabulary overlap.
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `dispatch rule`
+- **Artifact ID**: `p12_dr_brand`
+- **Tags**: [dispatch, brand, identity, monetizer, routing, P12]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `dispatch rule` | Artifact type |
+| Pipeline | 8F (F1→F8) |

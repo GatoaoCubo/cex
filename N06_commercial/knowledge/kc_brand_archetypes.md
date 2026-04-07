@@ -7,12 +7,20 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-identity
-quality: 8.9
+quality: 9.1
+updated: 2026-04-07
 tags: [brand, archetypes, jung, personality, voice, identity]
 tldr: "Complete 12 Jungian archetypes with tone-of-voice scores, personality traits, shadow traits, colors, examples, and combination matrix."
 when_to_use: "When selecting brand archetype during brand discovery, or validating archetype-voice alignment."
 keywords: [archetype, jung, brand-personality, tone-of-voice, brand-identity]
 density_score: 0.94
+axioms:
+  - "ALWAYS select primary + secondary archetype — single archetype = flat brand."
+  - "NEVER mix archetypes from opposing quadrants without conscious tension design."
+  - "ALWAYS validate archetype against voice scores — misalignment = brand dissonance."
+linked_artifacts:
+  primary: p03_brand_book_generator
+  related: [p01_kc_brand_voice_systems, p01_kc_brand_frameworks, n06_schema_brand_book, n06_output_brand_book]
 ---
 
 # 12 Jungian Brand Archetypes

@@ -6,6 +6,16 @@ llm_function: CONSTRAIN
 purpose: Formal schema definition for learning_record — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 source: P10_memory/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml + real builder data
+quality: 9.1
+title: "Schema Learning Record"
+version: "1.0.0"
+author: n03_builder
+tags: [learning_record, builder, examples]
+tldr: "Golden and anti-examples for learning record construction, demonstrating ideal structure and common pitfalls."
+domain: "learning record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: learning_record
@@ -32,7 +42,7 @@ source: P10_memory/_schema.yaml v4.0 + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml + r
 | tldr | string <= 160 chars | REC | S01 |
 | impact_score | float 0.0-10.0 | REC | Magnitude of impact |
 | decay_rate | float, default 0.03 | REC | Half-life ~23 days at 0.03 |
-| agent_node | string | REC | Which agent_node produced this |
+| agent_group | string | REC | Which agent_group produced this |
 | keywords | list[string] | REC | Brain search terms |
 | linked_artifacts | object {primary, related} | REC | Cross-references |
 | entity_ref | string | REC | Link to entity tracking file |
@@ -65,7 +75,7 @@ linked_artifacts:
 1. `## Summary` — dense overview of the experience (2-3 sentences)
 2. `## Pattern` — what worked (concrete, reproducible steps)
 3. `## Anti-Pattern` — what failed or should be avoided
-4. `## Context` — environment, constraints, agent_node, timing
+4. `## Context` — environment, constraints, agent_group, timing
 5. `## Impact` — measurable outcomes (time saved, errors avoided)
 6. `## Reproducibility` — conditions for repeating this outcome
 7. `## References` — related records, artifacts, commits

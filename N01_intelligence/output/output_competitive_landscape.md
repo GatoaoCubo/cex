@@ -1,8 +1,17 @@
 ---
 id: n01_competitive_landscape
 kind: competitive_analysis
-quality: 8.8
+pillar: P01
+quality: 9.2
 density_score: 0.96
+title: "Output Competitive Landscape"
+version: 1.0.0
+author: N01
+tags: [competitive_analysis, intelligence, output]
+tldr: "CEX é um sistema híbrido que combina quatro conceitos-chave: Conhecimento Tipado, Multi-Agent, Quality Pipeline e Orquestração Multi-Modelo. Nenhum sistema..."
+domain: intelligence
+created: 2026-04-06
+updated: 2026-04-07
 ---
 
 # Mapa Competitivo: CEX vs. O Ecossistema de IA
@@ -62,7 +71,7 @@ A combinação de quatro pilares torna o CEX único. Enquanto competidores imple
 
 2.  **Pipeline de Qualidade (8F) Integrada e Mandatória:** Enquanto alguns sistemas possuem ferramentas de *avaliação* (evaluation), o CEX é o único com uma *pipeline de produção e validação* multi-estágio (F1 a F8) como parte central e não-negociável de seu design. DSPy otimiza prompts, mas não possui o conceito de revisão e validação humana em estágios. O CEX trata a produção de conhecimento como uma linha de montagem industrial com controle de qualidade em cada etapa.
 
-3.  **Sistema de Conhecimento Profundamente Tipado e Versionado:** O BAML se aproxima na filosofia de tipagem, mas o sistema de `kinds` do CEX é mais profundo. Não se trata apenas de garantir o schema de *entrada e saída* de uma função, mas de definir uma **ontologia completa e versionada** para todo o conhecimento que o sistema possui. Os 114+ `kinds` em YAML formam um verdadeiro *schema de knowledge base*, permitindo que todo o conhecimento do sistema seja estruturado, validado e consultável de forma unificada.
+3.  **Sistema de Conhecimento Profundamente Tipado e Versionado:** O BAML se aproxima na filosofia de tipagem, mas o sistema de `kinds` do CEX é mais profundo. Não se trata apenas de garantir o schema de *entrada e saída* de uma função, mas de definir uma **ontologia completa e versionada** para Planned o conhecimento que o sistema possui. Os 114+ `kinds` em YAML formam um verdadeiro *schema de knowledge base*, permitindo que Planned o conhecimento do sistema seja estruturado, validado e consultável de forma unificada.
 
 4.  **Arquitetura Híbrida e Opinativa:** O CEX não é apenas uma biblioteca de componentes (como LangChain) nem apenas um framework de programação (como DSPy). Ele é um **sistema híbrido e opinativo** que fornece uma estrutura rígida para os seus quatro pilares, mas permite flexibilidade na implementação de cada núcleo. Ele diz *o que* fazer (seguir a pipeline 8F, usar os `kinds`) e *como* orquestrar (via filesystem), mas dá autonomia para cada núcleo executar sua especialidade.
 

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for few_shot_example production — format-teaching I/O pairs
 sources: Brown et al. 2020 (GPT-3), Anthropic prompt engineering, in-context learning research
+quality: 9.1
+title: "Knowledge Card Few Shot Example"
+version: "1.0.0"
+author: n03_builder
+tags: [few_shot_example, builder, examples]
+tldr: "Golden and anti-examples for few shot example construction, demonstrating ideal structure and common pitfalls."
+domain: "few shot example construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: few_shot_example

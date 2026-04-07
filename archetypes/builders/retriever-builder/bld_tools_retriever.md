@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.0
 tags: [tools, retriever, P08, RAG, vector-search]
 density_score: 1.0
 ---
@@ -51,7 +51,7 @@ H02: confirm id starts with p04_retr_ and matches filename stem
 H03: kind field == "retriever" (exact, lowercase)
 H04: quality field == null (not a number, not missing)
 H05: check required fields: id, name, store_type, embedding_model, similarity_metric, top_k
-H06: store_type in [chroma, pinecone, faiss, qdrant, weaviate, milvus, elasticsearch, custom]
+H06: store_type in [chroma, pinecone, faiss, qdrant, weaviate, milvus, elasticsearch, costm]
 H07: embedding_model is non-empty string with provider identifiable
 H08: similarity_metric in [cosine, dot_product, euclidean, manhattan]
 H09: top_k is integer >= 1

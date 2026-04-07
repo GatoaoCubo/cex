@@ -9,7 +9,7 @@ created: 2026-03-23
 updated: 2026-03-23
 author: builder_agent
 domain: data_collection
-quality: 9.0
+quality: 9.1
 tags: [scraping, selenium, playwright, beautifulsoup, data-extraction]
 tldr: Skill que roteia automaticamente entre 4 estrategias de scraping baseado na complexidade do alvo e entrega dados estruturados
 user_invocable: true
@@ -29,7 +29,7 @@ density_score: 0.88
 # Web Scraping Skill
 
 ## Purpose
-web-scraping e o **roteador inteligente de extracao web** do organization. Domain: data_collection (research_agent agent_node). Resolve o problema de escolher a estrategia correta de scraping para cada alvo, evitando over-engineering (Selenium onde BeautifulSoup basta) e under-engineering (requests onde JS rendering e necessario).
+web-scraping e o **roteador inteligente de extracao web** do organization. Domain: data_collection (research_agent agent_group). Resolve o problema de escolher a estrategia correta de scraping para cada alvo, evitando over-engineering (Selenium onde BeautifulSoup basta) e under-engineering (requests onde JS rendering e necessario).
 
 ## Workflow Phases
 

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""CEX Mission Runner v1.0 — Autonomous wave-based grid orchestration.
+# -*- coding: utf-8 -*-
+"""CEX Mission Runner v1.0 -- Autonomous wave-based grid orchestration.
 
 Reads a mission plan, executes wave by wave:
-  write handoffs → dispatch grid → poll signals → stop → quality gate → consolidate
+  write handoffs -> dispatch grid -> poll signals -> stop -> quality gate -> consolidate
 
 Usage:
     python _tools/cex_mission_runner.py --plan .cex/runtime/plans/plan_X.md --dry-run
@@ -38,13 +39,13 @@ ARCHIVE_DIR = ROOT / ".cex" / "archive" / "handoffs_done"
 
 def log(msg, level="INFO"):
     ts = datetime.now().strftime("%H:%M:%S")
-    # Windows cp1252 can't handle unicode box chars — replace them
+    # Windows cp1252 can't handle unicode box chars -- replace them
     safe_msg = str(msg).encode("ascii", "replace").decode("ascii")
     print(f"[{ts}] [{level}] {safe_msg}", flush=True)
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="CEX Mission Runner — autonomous grid orchestration")
+    p = argparse.ArgumentParser(description="CEX Mission Runner -- autonomous grid orchestration")
     p.add_argument("--plan", help="Path to mission plan .md file")
     p.add_argument("--mission", default="MISSION", help="Mission name (default: MISSION)")
     p.add_argument("--waves", help="Path to waves YAML/JSON definition file")
@@ -57,15 +58,15 @@ def parse_args():
     return p.parse_args()
 
 
-# ══════════════════════════════════════════════════
+# ==================================================
 # WAVE PARSING
-# ══════════════════════════════════════════════════
+# ==================================================
 
 def parse_waves_from_plan(plan_path: str) -> list:
     """Extract wave definitions from a mission plan .md file.
 
     Looks for patterns like:
-        ## Wave 1 — Description
+        ## Wave 1 -- Description
         | N01 | gemini/2.5-pro | ... | `N01_.../output_X.md` |
         | N02 | claude/sonnet  | ... | `N02_.../output_Y.md` |
     """
@@ -128,9 +129,9 @@ def parse_waves_from_json(waves_path: str) -> list:
     return json.loads(text)
 
 
-# ══════════════════════════════════════════════════
+# ==================================================
 # GRID OPERATIONS
-# ══════════════════════════════════════════════════
+# ==================================================
 
 def clean_signals():
     """Remove old signals."""
@@ -141,16 +142,16 @@ def clean_signals():
 
 
 def copy_handoffs_to_tasks(mission: str, nuclei: list):
-    """Copy MISSION_n0X.md → n0X_task.md for each nucleus in wave."""
+    """Copy MISSION_n0X.md -> n0X_task.md for each nucleus in wave."""
     for ninfo in nuclei:
         nuc = ninfo["nucleus"]
         src = HANDOFF_DIR / f"{mission}_{nuc}.md"
         dst = HANDOFF_DIR / f"{nuc}_task.md"
         if src.exists():
             shutil.copy2(src, dst)
-            log(f"  {nuc}: handoff → task")
+            log(f"  {nuc}: handoff -> task")
         else:
-            log(f"  {nuc}: WARNING — handoff {src.name} not found", "WARN")
+            log(f"  {nuc}: WARNING -- handoff {src.name} not found", "WARN")
 
 
 def dispatch_grid(mission: str, dry_run: bool = False):
@@ -187,7 +188,7 @@ def watch_signals(nuclei: list, timeout: int, poll: int, dry_run: bool = False) 
     ]
     log(f"Watching signals: {expected} (timeout={timeout}s, poll={poll}s)")
 
-    # Run signal_watch — progress goes to stderr (printed live), JSON to stdout
+    # Run signal_watch -- progress goes to stderr (printed live), JSON to stdout
     result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
 
     # Print stderr progress lines to our log
@@ -245,9 +246,9 @@ def stop_processes(dry_run: bool = False):
         log(f"  [STOP] {line}")
 
 
-# ══════════════════════════════════════════════════
+# ==================================================
 # QUALITY GATE (G3)
-# ══════════════════════════════════════════════════
+# ==================================================
 
 def quality_gate(nuclei: list, watch_result: dict, floor: float) -> dict:
     """Check quality of each nucleus output. Returns pass/fail per nucleus."""
@@ -287,9 +288,9 @@ def quality_gate(nuclei: list, watch_result: dict, floor: float) -> dict:
     return gate
 
 
-# ══════════════════════════════════════════════════
+# ==================================================
 # CONSOLIDATION
-# ══════════════════════════════════════════════════
+# ==================================================
 
 def consolidate_wave(mission: str, wave_num: int, nuclei: list, dry_run: bool = False):
     """Commit outputs, archive handoffs, write wave summary."""
@@ -322,9 +323,9 @@ def consolidate_wave(mission: str, wave_num: int, nuclei: list, dry_run: bool = 
     log(f"Wave {wave_num} consolidated")
 
 
-# ══════════════════════════════════════════════════
+# ==================================================
 # MAIN LOOP
-# ══════════════════════════════════════════════════
+# ==================================================
 
 def run_mission(args):
     mission = args.mission
@@ -386,9 +387,32 @@ def run_mission(args):
         log(f"Signal watch returned: {watch_status}")
 
         if watch_status == "timeout":
-            log("TIMEOUT — some nuclei didn't complete", "WARN")
+            log("TIMEOUT -- some nuclei didn't complete", "WARN")
         elif watch_status in ("crashed", "all_pending_crashed"):
-            log("CRASH — nuclei died without signaling", "ERROR")
+            log("CRASH -- nuclei died without signaling", "ERROR")
+
+        # --- T08: Coordinator synthesis gate ---
+        try:
+            from cex_coordinator import CexCoordinator
+            coord = CexCoordinator(mission_id=mission)
+            nuc_results = []
+            for ninfo in nuclei:
+                nuc = ninfo["nucleus"]
+                sig = watch_result.get("nuclei", {}).get(nuc, {})
+                nuc_results.append({
+                    "nucleus": nuc, "status": sig.get("status", watch_status),
+                    "quality": sig.get("quality", 0.0),
+                    "output_path": sig.get("output", ""),
+                })
+            synthesis = coord.synthesize(nuc_results)
+            if synthesis.passed:
+                log(f"Synthesis gate PASSED (score={synthesis.score:.1f})")
+            else:
+                log(f"Synthesis gate ISSUES: {synthesis.issues}", "WARN")
+        except ImportError:
+            pass
+        except Exception as e:
+            log(f"Synthesis gate skipped: {e}", "WARN")
 
         # Step 5: Stop all processes
         if not args.skip_stop:

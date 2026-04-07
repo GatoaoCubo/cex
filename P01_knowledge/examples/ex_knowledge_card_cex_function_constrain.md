@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, llm-function, constrain, grammar, schema, template, formatting]
 tldr: "CONSTRAIN restringe output via 11 tipos em 3 niveis (hard/medium/soft) — entrega no padrao exigido"
 when_to_use: "Entender como LLMs formatam output e a fronteira entre CONSTRAIN (formato) e GOVERN (qualidade)"

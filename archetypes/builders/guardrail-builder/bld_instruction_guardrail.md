@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for guardrail
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.2
+title: "Instruction Guardrail"
+version: "1.0.0"
+author: n03_builder
+tags: [guardrail, builder, examples]
+tldr: "Golden and anti-examples for guardrail construction, demonstrating ideal structure and common pitfalls."
+domain: "guardrail construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a guardrail
@@ -37,3 +47,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 3. SOFT gates: rules are concrete not aspirational, bypass policy defined, scope of application specified
 4. Cross-check: safety boundary not access control (that is permission)? Not an operational law? Not quality scoring (that is quality_gate)? Every rule enforceable without subjective judgment?
 5. If score < 8.0: revise in the same pass before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify guardrail
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | guardrail construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -20,7 +20,7 @@
 ## 1.1 Camada Acima: As 8 Funcoes LLM
 
 Os 12 pillars organizam ARTEFATOS (filesystem). As 8 funcoes descrevem o que o LLM FAZ (pipeline).
-Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem:
+Todo sistema LLM — de prompt a agent_group — executa estas funcoes nesta ordem:
 
 | # | Funcao | Verbo | O Que Faz | pillars |
 |---|--------|-------|-----------|-----|
@@ -67,7 +67,7 @@ Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem
 | P07 | Evals | unit_eval, smoke_eval, e2e_eval, benchmark, golden_test, scoring_rubric (6) |
 | P08 | Architecture | agent_card, pattern, law, diagram, component_map (5) |
 | P09 | Config | env_config, path_config, permission, feature_flag, runtime_rule (5) |
-| P10 | Memory | runtime_state, brain_index, learning_record, session_state (4) |
+| P10 | Memory | runtime_state, knowledge_index, learning_record, session_state (4) |
 | P11 | Feedback | quality_gate, bugloop, lifecycle_rule, guardrail, optimizer (5) |
 | P12 | Orchestration | workflow, dag, spawn_config, signal, handoff, dispatch_rule, crew (7) |
 

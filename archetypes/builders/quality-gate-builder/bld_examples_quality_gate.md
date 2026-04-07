@@ -4,11 +4,21 @@ id: bld_examples_quality_gate
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of quality_gate artifacts
+quality: 9.0
+title: "Examples Quality Gate"
+version: "1.0.0"
+author: n03_builder
+tags: [quality_gate, builder, examples]
+tldr: "Golden and anti-examples for quality gate construction, demonstrating ideal structure and common pitfalls."
+domain: "quality gate construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: quality-gate-builder
 ## Golden Example
-INPUT: "Define gate pra knowledge_cards antes de publicar no pool"
+INPUT: "Define gate for knowledge_cards antes de publicar no pool"
 OUTPUT:
 ```yaml
 id: p11_qg_kc_publish

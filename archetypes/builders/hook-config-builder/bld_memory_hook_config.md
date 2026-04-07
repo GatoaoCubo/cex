@@ -16,10 +16,13 @@ tags: [hook-config, P04, type-builder]
 tldr: "Declare hooks, never implement. Validate against schema. Stay under 4096 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [hook config, pre-build, post-build, on-error, quality-fail, lifecycle, event]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Hook Config"
+density_score: 0.90
 ---
 ## Summary
 Hook lifecycle configuration — declares which hooks fire at each build phase. The difference between a useful hook_config and a useless one is clean declaration
@@ -30,10 +33,36 @@ Every hook must have: phase, event, action, and condition.
 Required body sections: Overview, Hooks, Lifecycle, Integration.
 Body budget: 4096 bytes max.
 ## Anti-Pattern
-- Embedding implementation: hook_config declares WHAT fires; hook implements HOW it runs
-- Missing conditions: Hooks without conditions fire unconditionally, causing noise
-- Phase mismatch: Declaring post-build hooks in pre-build phase breaks execution order
-- Overlapping events: Multiple hooks on same event without priority causes race conditions
+1. Embedding implementation: hook_config declares WHAT fires; hook implements HOW it runs
+2. Missing conditions: Hooks without conditions fire unconditionally, causing noise
+3. Phase mismatch: Declaring post-build hooks in pre-build phase breaks execution order
+4. Overlapping events: Multiple hooks on same event without priority causes race conditions
 ## Context
 The 4096-byte body limit keeps hook_config artifacts focused. Fill required fields first,
 then add recommended fields if space permits. Always set quality: null.
+
+## Metadata
+
+```yaml
+id: p10_lr_hook_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-hook-config-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | hook_config |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

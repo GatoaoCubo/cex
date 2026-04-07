@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 """
-cex_shared.py — Shared library for all CEX tools.
+cex_shared.py -- Shared library for all CEX tools.
 
 Single source of truth for common operations:
   - CEX_ROOT resolution
@@ -26,7 +27,7 @@ import yaml
 from cex_errors import ConfigError
 
 # =============================================================================
-# CEX_ROOT — Single resolution point
+# CEX_ROOT -- Single resolution point
 # =============================================================================
 
 CEX_ROOT: Path = Path(__file__).resolve().parent.parent

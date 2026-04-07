@@ -9,9 +9,9 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: handoff
-quality: 9.0
+quality: 9.1
 tags: [handoff, P12, COLLABORATE, kind-kc]
-tldr: "Complete task transfer package containing context, tasks, scope fence, commit instruction, and signal protocol for autonomous agent_node execution"
+tldr: "Complete task transfer package containing context, tasks, scope fence, commit instruction, and signal protocol for autonomous agent_group execution"
 when_to_use: "Building, reviewing, or reasoning about handoff artifacts"
 keywords: [task-transfer, context, autonomous]
 feeds_kinds: [handoff]
@@ -42,7 +42,7 @@ A handoff is a complete, self-contained task transfer document written by an orc
 | DSPy | Module chaining via `forward()` arguments | Pass state dict between modules as explicit keyword arguments |
 | Haystack | Pipeline component output → next component input | Structured data flows through pipeline connections |
 | OpenAI | Thread continuation + system instruction update | New system message with full context = handoff equivalent |
-| Anthropic | System prompt injection + full context block | Handoff content injected into system prompt for agent_node session |
+| Anthropic | System prompt injection + full context block | Handoff content injected into system prompt for agent_group session |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
@@ -55,16 +55,16 @@ A handoff is a complete, self-contained task transfer document written by an orc
 ## Patterns
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
-| OPEN_VARIABLES | Satellite decides implementation details | `Generate [TEMPLATE_TYPE] for [DOMAIN] using best approach` |
-| Batch handoff | >5 tasks for same agent_node | `p12_ho_mission_batch_1_shaka.md`, `p12_ho_mission_batch_2_shaka.md` |
+| OPEN_VARIABLES | Agent_group decides implementation details | `Generate [TEMPLATE_TYPE] for [DOMAIN] using best approach` |
+| Batch handoff | >5 tasks for same agent_group | `p12_ho_mission_batch_1_shaka.md`, `p12_ho_mission_batch_2_shaka.md` |
 | Dependency chain | Task B needs Task A output | Handoff B includes: `## DEPENDS_ON: p12_sig_task_a_complete.json` |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |
 |-------------|-------------|-----|
 | Inline prompt >200 chars | TSP `-p` flag hangs on long prompts | Write handoff file; prompt says only "Read [file] and execute" |
-| No scope fence | Satellite modifies unintended files; git conflicts | Always define SOMENTE/NAO TOQUE paths |
-| Missing commit instruction | Satellite completes work but never commits | Last section always: git add + git commit with message template |
+| No scope fence | Agent_group modifies unintended files; git conflicts | Always define SOMENTE/NAO TOQUE paths |
+| Missing commit instruction | Agent_group completes work but never commits | Last section always: git add + git commit with message template |
 
 ## Integration Graph
 ```
@@ -76,11 +76,11 @@ A handoff is a complete, self-contained task transfer document written by an orc
 
 ## Decision Tree
 - IF task has >5 steps THEN use batch handoffs (batch_1, batch_2, ...)
-- IF agent_node needs browser THEN include `--add browser` spawn modifier
+- IF agent_group needs browser THEN include `--add browser` spawn modifier
 - IF task is destructive THEN set autonomy_level: SUPERVISED
 - DEFAULT: autonomy_level: TOTAL; quality_target: 9.0; always include commit + signal sections
 
 ## Quality Criteria
 - GOOD: Has CONTEXTO, SEEDS, TAREFAS, SCOPE FENCE, COMMIT, SIGNAL sections; under 4096 bytes
-- GREAT: OPEN_VARIABLES for agent_node discretion; batch structure for large missions; dependency chain explicit
+- GREAT: OPEN_VARIABLES for agent_group discretion; batch structure for large missions; dependency chain explicit
 - FAIL: Missing commit section; no scope fence; >4096 bytes; inline task descriptions >200 chars for TSP

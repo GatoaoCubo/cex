@@ -9,7 +9,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: orchestrator
 domain: meta-construction
-quality: 9.5
+quality: 9.1
 tags: [format, benchmark, yaml, markdown, token-efficiency, cex, schema]
 tldr: "MD+YAML (.md) vence para 60/78 tipos CEX; YAML puro para 18 tipos machine-only; JSON para API payloads. Testado com tiktoken cl100k_base em 6 formatos."
 when_to_use: "Antes de definir formato de qualquer novo tipo CEX ou reescrever tipo existente"

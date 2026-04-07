@@ -4,6 +4,16 @@ id: bld_architecture_diagram
 pillar: P08
 llm_function: BECOME
 purpose: Component map of diagram — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Diagram"
+version: "1.0.0"
+author: n03_builder
+tags: [diagram, builder, examples]
+tldr: "Golden and anti-examples for diagram construction, demonstrating ideal structure and common pitfalls."
+domain: "diagram construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -25,7 +35,7 @@ pattern (P08) --illustrated_by--> diagram (pattern solution may be shown visuall
 law (P08) --illustrated_by--> diagram (enforcement flow may be diagrammed)
 diagram --produces_for--> documentation (external consumers: docs, READMEs, specs)
 diagram --referenced_by--> agent_card (P08) (specs may embed diagram reference)
-brain_index (P10) --indexes--> diagram (stored and retrieved via semantic search)
+knowledge_index (P10) --indexes--> diagram (stored and retrieved via semantic search)
 signal (P12) --independent-- diagram (diagram is static, not runtime)
 connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 ```
@@ -36,7 +46,7 @@ connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 | law | diagram | data_flow | enforcement flow to illustrate |
 | diagram | documentation | produces | visual representation for human readers |
 | diagram | agent_card | referenced_by | spec cites diagram for structure overview |
-| brain_index | diagram | indexes | diagram stored for semantic retrieval |
+| knowledge_index | diagram | indexes | diagram stored for semantic retrieval |
 ## Boundary Table
 | diagram IS | diagram IS NOT |
 |------------|----------------|
@@ -55,4 +65,4 @@ connector (P04) --independent-- diagram (diagram visualizes, does not integrate)
 | Visual Content | visual_body, layer_boundaries, annotations | The actual rendered diagram with structural markup |
 | Readability | legend, alt_text | Aid interpretation for human readers and search indexers |
 | Reference | source_reference | Trace diagram back to its authoritative source artifact |
-| Distribution | documentation, agent_card, brain_index | Consumers that embed, reference, or index the diagram |
+| Distribution | documentation, agent_card, knowledge_index | Consumers that embed, reference, or index the diagram |

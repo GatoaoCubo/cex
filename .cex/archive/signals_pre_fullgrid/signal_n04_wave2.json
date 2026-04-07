@@ -1,0 +1,22 @@
+{
+  "nucleus": "N04",
+  "mission": "MISSION_content_factory_wave2",
+  "task": "build_integration_knowledge_cards",
+  "status": "complete",
+  "artifacts_created": 10,
+  "output_path": "N04_knowledge/output/output_cf_integration_kcs.md",
+  "artifact_paths": [
+    "P01_knowledge/library/integration/kc_canva_connect_api.md",
+    "P01_knowledge/library/integration/kc_elevenlabs_tts.md",
+    "P01_knowledge/library/integration/kc_runway_api.md",
+    "P01_knowledge/library/integration/kc_ffmpeg_patterns.md",
+    "P01_knowledge/library/integration/kc_marp_cli.md",
+    "P01_knowledge/library/integration/kc_typst_patterns.md",
+    "P01_knowledge/library/integration/kc_pandoc_pipeline.md",
+    "P01_knowledge/library/integration/kc_youtube_api.md",
+    "P01_knowledge/library/integration/kc_ayrshare_api.md",
+    "P01_knowledge/library/integration/kc_notebooklm_integration.md"
+  ],
+  "timestamp": "2026-04-06T12:00:00Z",
+  "quality": null
+}

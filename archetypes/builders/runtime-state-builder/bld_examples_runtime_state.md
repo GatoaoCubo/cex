@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of runtime_state artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Runtime State"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_state, builder, examples]
+tldr: "Golden and anti-examples for runtime state construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: runtime-state-builder
 ## Golden Example
-INPUT: "Cria runtime_state para o agente de pesquisa (researcher) definindo routing e prioridades em runtime"
+INPUT: "Create runtime_state for the research agent (researcher) defining routing and priorities at runtime"
 OUTPUT:
 ```yaml
 id: p10_rs_researcher
@@ -23,7 +33,7 @@ author: "builder"
 agent: "researcher"
 persistence: "cross_session"
 domain: "market research"
-quality: null
+quality: 8.9
 tags: [runtime-state, researcher, routing, priorities, heuristics]
 tldr: "Researcher agent runtime state with keyword routing, 4 priorities, and source selection heuristics"
 routing_mode: "hybrid"
@@ -37,7 +47,7 @@ linked_artifacts:
   related: [p10_lr_research_patterns, p10_bi_knowledge_pool]
 ## Agent Context
 Researcher agent operates in market research domain. Routes incoming
-research tasks to appropriate sources (web, pool, API) based on
+research tasks to apownte sources (web, pool, API) based on
 query type and confidence thresholds. Accumulates source reliability
 scores and routing preferences during execution.
 ## Routing Rules

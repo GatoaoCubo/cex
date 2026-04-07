@@ -13,6 +13,8 @@ scope: N05_operations
 tags: [spec, n05, railway, backend, fastapi, postgresql, deploy]
 tldr: N05 evolui de DevOps generico para Railway Backend Superintendent com dados reais.
 density_score: 0.96
+quality: 9.2
+updated: "2026-04-07"
 ---
 
 # Spec N05 -- Railway Backend Superintendent

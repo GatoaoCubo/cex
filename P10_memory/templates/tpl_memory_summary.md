@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Memory Summary"
 tags: [template, memory, summary, compression, context]
 tldr: "Compresses long conversation or session history into a concise summary. Preserves key decisions, actions, and outcomes while reducing token count by 80%+."
-quality: 8.8
+quality: 9.0
 ---
 
 # Memory Summary: [SESSION_ID]

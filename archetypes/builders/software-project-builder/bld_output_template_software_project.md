@@ -8,9 +8,9 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.7
+quality: 9.1
 tags: [builder, output-template, software-project]
-tldr: "Standard output structure: pyproject.toml skeleton, src layout, conftest.py, Dockerfile, CI workflow. All [PLACEHOLDERS] for customization."
+tldr: "Standard output structure: pyproject.toml skeleton, src layout, conftest.py, Dockerfile, CI workflow. All [PLACEHOLDERS] for costmization."
 density_score: 0.88
 ---
 
@@ -122,3 +122,18 @@ jobs:
       - run: ruff check .
       - run: pytest --cov -m "not slow"
 ```
+
+## Cross-References
+
+- **Pillar**: P06 (Schema)
+- **Kind**: `output template`
+- **Artifact ID**: `bld_sp_output_template_software_project`
+- **Tags**: [builder, output-template, software-project]
+
+## Output Pipeline
+
+| Aspect | Detail |
+|--------|--------|
+| Template | Defines structure for output template outputs |
+| Validation | Checked against `validation_schema` |
+| Post-hook | Scored by `cex_score.py` after creation |

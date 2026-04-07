@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for social_publisher config
 pattern: CONFIG derives from this. TEMPLATE renders this.
+quality: 9.2
+title: "Schema Social Publisher"
+version: "1.0.0"
+author: n03_builder
+tags: [social_publisher, builder, examples]
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+domain: "social publisher construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: social_publisher
@@ -16,10 +26,10 @@ pattern: CONFIG derives from this. TEMPLATE renders this.
 |-------|------|----------|---------|
 | empresa | string | YES | "GATO3" |
 | handle | string | YES | "@gatoaocubo3" |
-| nicho | enum(pet,food,saas,fashion,fitness,beauty,tech,education,custom) | YES | "pet" |
+| nicho | enum(pet,food,saas,fashion,fitness,beauty,tech,education,costm) | YES | "pet" |
 | tom | string | YES | "casual, acolhedor" |
 | persona | string | YES | "Ro" |
-| bio | string(≤160) | YES | "Design minimalista para gatos" |
+| bio | string(≤160) | YES | "Design minimalist para gatos" |
 
 ### platforms (required)
 | Type | Constraint | Example |

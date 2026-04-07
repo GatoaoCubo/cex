@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: meta
-quality: 8.8
+quality: 9.0
 tags: [mcp, server, tool-integration, protocol, standard]
 tldr: "Model Context Protocol: universal tool integration for LLMs. Server exposes tools/resources/prompts. Client (LLM) calls them. JSON-RPC over stdio."
 when_to_use: "Adding external tool capabilities to any LLM agent"

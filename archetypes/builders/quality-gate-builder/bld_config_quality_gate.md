@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Quality Gate"
+version: "1.0.0"
+author: n03_builder
+tags: [quality_gate, builder, examples]
+tldr: "Golden and anti-examples for quality gate construction, demonstrating ideal structure and common pitfalls."
+domain: "quality gate construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: quality_gate Production Rules
 ## Naming
@@ -25,8 +35,34 @@ permission_scope: nucleus
 | Fields | snake_case | density_score |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: cex/P11_feedback/examples/p11_qg_{slug}.md
-- Compiled: cex/P11_feedback/compiled/p11_qg_{slug}.yaml
+1. Output: cex/P11_feedback/examples/p11_qg_{slug}.md
+2. Compiled: cex/P11_feedback/compiled/p11_qg_{slug}.yaml
 ## Size Limits (aligned with SCHEMA)
-- Body: max 4096 bytes
-- Density: >= 0.80
+1. Body: max 4096 bytes
+2. Density: >= 0.80
+
+## Metadata
+
+```yaml
+id: bld_config_quality_gate
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-quality-gate.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | quality gate construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

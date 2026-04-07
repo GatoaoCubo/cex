@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Intelligence Pipeline"
 steps_count: 3
 execution: sequential
-agent_nodes: [n01, n04, n07]
+agent_groups: [n01, n04, n07]
 timeout: 7200
 retry_policy: per_step
 depends_on: []

@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: agent_card
-quality: 9.0
+quality: 9.1
 tags: [agent_card, P08, BECOME, kind-kc]
 tldr: "agent_card is the deployment spec for an autonomous agent — encoding identity, model, tools, boot sequence, dispatch scope, and operational constraints in one versioned artifact."
 when_to_use: "Building, reviewing, or reasoning about agent_card artifacts"
@@ -75,12 +75,48 @@ boot_config, persona --> [agent_card] --> spawn_config, workflow
 ```
 
 ## Decision Tree
-- IF single agent_node domain THEN solo agent_card per agent_node
+- IF single agent_group domain THEN solo agent_card per agent_group
 - IF cross-domain orchestration THEN director + multiple agent_cards
 - IF ephemeral one-shot task THEN inline spec (no persistent card needed)
-- DEFAULT: dedicated agent_card per agent_node role, versioned in P08
+- DEFAULT: dedicated agent_card per agent_group role, versioned in P08
 
 ## Quality Criteria
 - GOOD: model, tools, boot_sequence, scope_fence all present and non-empty
 - GREAT: scope fence tight, model choice has explicit rationale, dispatch constraints documented
 - FAIL: missing model or tools, no constraints, inline prompt >200 chars, no version
+
+## Production Reference: OpenClaude Built-in Agents
+OpenClaude defines 3 built-in agent types as typed deployment specs:
+
+| Agent | Model | Background | Read-Only | Tool Denylist |
+|-------|-------|-----------|-----------|---------------|
+| Explore | haiku (speed) | no | yes | edit, write, spawn, plan-exit |
+| Plan | inherit (depth) | no | yes | edit, write, spawn, plan-exit |
+| Verification | inherit | yes | yes (except temp) | edit, write, spawn, plan-exit |
+
+**Key architectural insight**: Agent cards define CONSTRAINTS, not capabilities.
+The tool denylist is more important than the allowlist. An agent that can do
+everything except X is more dangerous than one that can only do Y.
+
+**Pattern: omit_project_rules**
+Explore and Plan agents skip loading CLAUDE.md/project rules. Reasoning:
+- They interpret results, not follow project conventions
+- Loading project rules biases sub-agents toward implementer assumptions
+- Main agent has full context and interprets sub-agent results
+CEX equivalent: agent_card field `omit_project_rules: true`
+
+**Pattern: model selection by purpose**
+- Speed tasks (explore): cheapest model (haiku)
+- Depth tasks (plan, verify): inherit parent model
+- Creative tasks: highest model (opus)
+CEX equivalent: router_config.yaml model tiers
+
+## New Agent Card Patterns Discovered
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| Tool denylist > allowlist | Define what's forbidden, not what's allowed | Verification agent |
+| Background flag | Agent runs independently, caller continues | Verification agent |
+| Model by purpose | haiku=speed, inherit=depth, opus=creative | Explore vs Plan |
+| omit_project_rules | Sub-agents should not load project conventions | All 3 agents |
+| Input/output contract | Typed input fields + typed output format | Verification agent |
+| Dispatch command | Exact CLI invocation in the card | All 3 agents |

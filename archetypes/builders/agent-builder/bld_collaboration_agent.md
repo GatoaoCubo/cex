@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How agent-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Agent"
+version: "1.0.0"
+author: n03_builder
+tags: [agent, builder, examples]
+tldr: "Golden and anti-examples for agent construction, demonstrating ideal structure and common pitfalls."
+domain: "agent construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: agent-builder
@@ -29,7 +39,7 @@ I produce agent definitions so downstream builders can configure, package, and d
 ```
 ## Handoff Protocol
 ### I Receive
-- seeds: agent name, domain, target capabilities, agent_node assignment
+- seeds: agent name, domain, target capabilities, agent_group assignment
 - optional: existing persona sketch, tool list, routing keywords
 ### I Produce
 - agent artifact with agent_package skeleton (10+ spec files)

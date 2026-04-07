@@ -46,3 +46,30 @@ density_score: 0.88
 | Builder missing | F2 load fail | Doctor report |
 | Quality < 8.0 | F7 reject | Retry 2x then abort |
 | Timeout | Process killed | Error signal |
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Agent identity persists across sessions via filesystem state
+- Capabilities declared explicitly; implicit inference prohibited
+- Constraint violations logged and escalated to N07 orchestrator
+- Version pinning ensures reproducible agent behavior across deploys
+
+### Usage Reference
+
+```yaml
+# agent_card integration
+artifact: agent_card_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

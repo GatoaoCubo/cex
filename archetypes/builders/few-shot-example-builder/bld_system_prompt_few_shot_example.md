@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "input/output pair crafting, difficulty calibration, edge case coverage, format exemplification | quality scoring, unit evaluation assertions, prompt template authoring"
 domain: "few_shot_example"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "few_shot_example", "prompt_engineering", "examples"]
 safety_level: standard
 tools_listed: false

@@ -1,0 +1,101 @@
+id: p01_kc_pandoc_pipeline
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Pandoc Pipeline — Multi-Format Publishing for Content Factory
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: n04_knowledge
+domain: pandoc
+quality: 9.1
+tags:
+- pandoc
+- ebook
+- pdf
+- epub
+- docx
+- markdown
+- content-factory
+- integration
+- INJECT
+tldr: 'Universal document converter: Markdown → PDF/EPUB/DOCX with templates, metadata YAML, citations, cross-refs, and Lua
+  filters'
+when_to_use: When any nucleus needs to publish long-form content in multiple formats — ebooks, reports, EPUB distribution
+keywords:
+- pandoc
+- epub
+- pdf
+- docx
+- markdown
+- ebook
+- multi-format
+- publishing
+feeds_kinds:
+- cli_tool
+- workflow
+- dag
+- formatter
+linked_artifacts:
+- kc_typst_patterns
+- kc_marp_cli
+density_score: null
+quick_reference: 'install: winget install JohnMacFarlane.Pandoc  # or choco install pandoc
+
+  binary: pandoc
+
+  version_check: pandoc --version
+
+  input_formats: markdown, rst, org, docx, html, latex, json, csv (80+ total)
+
+  output_formats: pdf, epub, docx, html, pptx, latex, odt, rtf (60+ total)
+
+  pdf_engines: [xelatex, lualatex, tectonic, typst, weasyprint, wkhtmltopdf]'
+metadata_yaml_front_matter_or_separate_file: "# metadata.yaml\ntitle: \"Guia Completo de IA para Criadores\"\nsubtitle: \"\
+  Da Ideia ao Conteúdo Publicado\"\nauthor:\n  - name: \"Brand Name\"\n    affiliation: \"Content Factory\"\ndate: \"Abril\
+  \ 2026\"\nlang: pt-BR\nrights: \"© 2026 Brand Name. Todos os direitos reservados.\"\ndescription: \"Um guia prático sobre\
+  \ IA generativa para criadores de conteúdo\"\ncover-image: assets/cover.png    # EPUB cover\ncss: assets/style.css     \
+  \       # EPUB/HTML stylesheet\ntoc: true                        # Table of contents\ntoc-depth: 3\nnumber-sections: true\n\
+  colorlinks: true\nlinkcolor: blue\ngeometry: margin=2.5cm           # PDF margins\nfontsize: 11pt\nmainfont: \"Inter\" \
+  \               # XeLaTeX/LuaLaTeX font\nmonofont: \"JetBrains Mono\""
+core_pipeline_commands: "# Markdown → PDF (via LaTeX)\npandoc book.md -o book.pdf \\\n  --metadata-file=metadata.yaml \\\n\
+  \  --pdf-engine=xelatex \\\n  --template=template.latex \\\n  --toc --toc-depth=3 \\\n  --number-sections \\\n  -V geometry:margin=2.5cm\
+  \ \\\n  -V fontsize=11pt \\\n  -V mainfont=\"Inter\"\n\n# Markdown → EPUB (for Kindle/Apple Books/Google Play)\npandoc book.md\
+  \ -o book.epub \\\n  --metadata-file=metadata.yaml \\\n  --epub-cover-image=assets/cover.png \\\n  --css=assets/epub.css\
+  \ \\\n  --toc --toc-depth=3 \\\n  --number-sections\n\n# Markdown → DOCX (for editors/collaborators)\npandoc book.md -o\
+  \ book.docx \\\n  --metadata-file=metadata.yaml \\\n  --reference-doc=template.docx \\\n  --toc\n\n# Markdown → HTML (for\
+  \ web/blog)\npandoc book.md -o book.html \\\n  --metadata-file=metadata.yaml \\\n  --standalone --self-contained \\\n  --css=assets/web.css\
+  \ \\\n  --toc\n\n# Multi-file book (chapters as separate files)\npandoc ch01.md ch02.md ch03.md appendix.md -o book.pdf\
+  \ \\\n  --metadata-file=metadata.yaml \\\n  --pdf-engine=xelatex \\\n  --toc --number-sections\n\n# Markdown → PDF via Typst\
+  \ (faster, no LaTeX needed)\npandoc book.md -o book.pdf \\\n  --pdf-engine=typst \\\n  --metadata-file=metadata.yaml"
+cross_references_with_pandoc_crossref_filter: "pip install pandoc-crossref  # or download binary\n\npandoc book.md -o book.pdf\
+  \ \\\n  --filter pandoc-crossref \\\n  --pdf-engine=xelatex \\\n  --citeproc\n\nIn markdown:\nSee @fig:architecture for\
+  \ the system diagram.\nAs shown in @tbl:pricing, the cost is...\nEquation @eq:roi calculates the return.\n\n!System Architecture{#fig:architecture}\n\
+  \n| Plan | Cost |\n|------|------|\n| Free | $0   |\n\n: Pricing comparison {#tbl:pricing}\n\n$$ ROI = \\frac{Revenue -\
+  \ Cost}{Cost} $$ {#eq:roi}"
+citations_with_citeproc: "pandoc book.md -o book.pdf \\\n  --citeproc \\\n  --bibliography=refs.bib \\\n  --csl=apa.csl\n\n\
+  In markdown: `According to @smith2024, AI content creation...`"
+lua_filters_custom_transformations: pandoc book.md --lua-filter=wordcount.lua -o /dev/null
+full_ebook_pipeline_all_formats_at_once: "#!/bin/bash\nSRC=\"book.md\"\nMETA=\"metadata.yaml\"\nOUT=\"dist\"\nmkdir -p $OUT\n\
+  \n# PDF (print-ready)\npandoc $SRC -o $OUT/book.pdf --metadata-file=$META \\\n  --pdf-engine=xelatex --toc --number-sections\
+  \ \\\n  --template=template.latex\n\n# EPUB (digital distribution)\npandoc $SRC -o $OUT/book.epub --metadata-file=$META\
+  \ \\\n  --epub-cover-image=assets/cover.png --css=assets/epub.css \\\n  --toc --number-sections\n\n# DOCX (editor review)\n\
+  pandoc $SRC -o $OUT/book.docx --metadata-file=$META \\\n  --reference-doc=template.docx --toc\n\n# HTML (web preview)\n\
+  pandoc $SRC -o $OUT/book.html --metadata-file=$META \\\n  --standalone --self-contained --css=assets/web.css --toc\n\necho\
+  \ \"Published: PDF + EPUB + DOCX + HTML\""
+gotchas:
+- PDF requires a LaTeX engine (xelatex/lualatex) OR Typst. Install TeX Live (~4GB) or use `--pdf-engine=typst` as a lighter
+  alternative.
+- 'EPUB cover image must be a separate file, not embedded in markdown. Recommended: 1600x2400px JPG.'
+- '`--self-contained` embeds all assets (images, CSS) into a single HTML file. Great for sharing but can be huge. For EPUB,
+  assets are bundled automatically.'
+- '`--reference-doc` for DOCX defines styles, not content. Create a template.docx with custom heading styles, then Pandoc
+  applies them.'
+- Multi-file order matters. `pandoc ch01.md ch02.md` processes in argument order. Use numbered filenames.
+- UTF-8 everywhere. Pandoc assumes UTF-8 input. PT-BR characters (ã, ç, é) work fine if files are UTF-8.
+- Images in EPUB must be local files, not URLs. Download external images before building EPUB.
+- '`--toc` adds TOC at the beginning. To control placement in LaTeX PDF, use `\tableofcontents` in template instead.'
+docs:
+- 'Manual: https://pandoc.org/MANUAL.html'
+- 'EPUB guide: https://pandoc.org/epub.html'
+- 'Lua filters: https://pandoc.org/lua-filters.html'

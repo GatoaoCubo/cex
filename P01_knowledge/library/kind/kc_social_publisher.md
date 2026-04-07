@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: social_publisher
-quality: 9.0
+quality: 9.1
 tags: [social_publisher, P04, PRODUCE, kind-kc, social-media, automation]
 tldr: "10-stage auto-posting pipeline (LOAD>FETCH>SELECT>GENERATE>OPTIMIZE>HASHTAGS>PUBLISH>LOG>NOTIFY>ROTATE) that transforms content into platform-optimized social posts with scheduling and analytics"
 when_to_use: "Building, reviewing, or reasoning about social_publisher artifacts"

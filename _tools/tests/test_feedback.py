@@ -1,4 +1,4 @@
-"""Tests for cex_feedback.py — artifact scanning and analysis."""
+"""Tests for cex_feedback.py -- artifact scanning and analysis."""
 import sys
 from pathlib import Path
 import pytest

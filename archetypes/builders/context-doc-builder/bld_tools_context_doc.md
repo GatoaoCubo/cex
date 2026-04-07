@@ -4,6 +4,16 @@ id: bld_tools_context_doc
 pillar: P04
 llm_function: CALL
 purpose: Tools and data sources available to context-doc-builder
+quality: 9.1
+title: "Tools Context Doc"
+version: "1.0.0"
+author: n03_builder
+tags: [context_doc, builder, examples]
+tldr: "Golden and anti-examples for context doc construction, demonstrating ideal structure and common pitfalls."
+domain: "context doc construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: context-doc-builder

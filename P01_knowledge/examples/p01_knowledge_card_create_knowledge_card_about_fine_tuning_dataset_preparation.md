@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "builder"
 domain: machine_learning
-quality: null
+quality: 9.2
 tags: [fine-tuning, dataset-preparation, llm-training, data-quality, machine-learning, knowledge]
 tldr: "Fine-tuning datasets require 1K-100K examples, consistent formatting, quality filtering, and balanced distribution across target tasks"
 when_to_use: "When preparing training data for LLM fine-tuning or instruction following tasks"

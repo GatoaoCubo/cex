@@ -4,6 +4,16 @@ id: bld_architecture_unit_eval
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of unit_eval — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Unit Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [unit_eval, builder, examples]
+tldr: "Golden and anti-examples for unit eval construction, demonstrating ideal structure and common pitfalls."
+domain: "unit eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: unit_eval in the CEX

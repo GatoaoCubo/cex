@@ -2,6 +2,16 @@
 kind: output_template
 id: bld_output_template_prompt_template
 pillar: P00
+quality: 9.0
+title: "Output Template Prompt Template"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_template, builder, examples]
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt template construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 id: p03_pt_{{topic_slug}}
 kind: prompt_template

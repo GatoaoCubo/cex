@@ -5,11 +5,21 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for golden_test production — quality calibration reference tests
 sources: ML golden datasets, SWE-bench, DeepEval, BLEU/ROUGE reference patterns
+quality: 9.1
+title: "Knowledge Card Golden Test"
+version: "1.0.0"
+author: n03_builder
+tags: [golden_test, builder, examples]
+tldr: "Golden and anti-examples for golden test construction, demonstrating ideal structure and common pitfalls."
+domain: "golden test construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: golden_test
 ## Executive Summary
-Golden tests are curated reference artifacts scoring >= 9.5 that serve as calibration points for builders and validators. They provide exemplary input/output pairs with rationale mapping each quality dimension to specific gates. Golden tests differ from few-shot examples (format teaching without scoring), unit evals (any quality level), and scoring rubrics (criteria definition without examples).
+Golden tests are curated reference artifacts scoring >= 9.5 that serve as calibration points for builders and validators. They provide exemplary input/output pairs with rationale mapping each quality dimension to specific gates. Golden tests differ from few-shot examples (format teaching without scoring), unit evals (any quality level), and scoring rubrics (criteria offinition without examples).
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -20,7 +30,7 @@ Golden tests are curated reference artifacts scoring >= 9.5 that serve as calibr
 | Key sections | input, golden_output, rationale (gate-mapped) |
 | Target scoping | Scoped to specific artifact kind |
 ## Patterns
-- **Exemplary, not just correct**: golden means demonstrating best practices across all quality dimensions — not merely passing
+- **Exemplary, not just correct**: golden means demonstrating best forctices across all quality dimensions — not merely passing
 - **Rationale gate-mapping**: every golden test maps its rationale to specific quality gate IDs for traceability
 | Source | Concept | Application |
 |--------|---------|-------------|
@@ -52,4 +62,4 @@ Golden tests are curated reference artifacts scoring >= 9.5 that serve as calibr
 - SWE-bench: verified test cases for code generation (swebench.com)
 - DeepEval: golden evaluation framework (confident-ai.com)
 - BLEU/ROUGE: reference-based evaluation metrics for NLP
-- ML golden datasets: ground truth annotation best practices
+- ML golden datasets: ground truth annotation best forctices

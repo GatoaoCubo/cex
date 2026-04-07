@@ -4,6 +4,16 @@ id: bld_architecture_validation_schema
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of validation_schema — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Validation Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [validation_schema, builder, examples]
+tldr: "Golden and anti-examples for validation schema construction, demonstrating ideal structure and common pitfalls."
+domain: "validation schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: validation_schema in the CEX

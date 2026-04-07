@@ -9,7 +9,7 @@ updated: 2026-03-23
 author: builder_agent
 domain: meta-construction
 quality: 9.0
-tags: [architecture, agent_node, pattern, law, diagram]
+tags: [architecture, agent_group, pattern, law, diagram]
 tldr: "P08 define 5 tipos de arquitetura (agent_card, pattern, law, diagram, component_map) que governam como o sistema escala — leis sao inviolaveis, patterns sao reutilizaveis"
 when_to_use: "Quando precisar definir arquitetura, leis operacionais ou patterns de escala no CEX"
 keywords: [agent_card, pattern, law, diagram, component_map]
@@ -27,7 +27,7 @@ density_score: 0.87
 # P08 Architecture: Como Escala
 
 ## Executive Summary
-P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satelites (7 no organization) ate leis operacionais inviolaveis (11 ativas). Patterns documentam solucoes reutilizaveis (continuous batching, spawn grid), laws definem restricoes absolutas, e diagrams visualizam o sistema em ASCII ou Mermaid.
+P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde agent_groups (7 no organization) ate leis operacionais inviolaveis (11 ativas). Patterns documentam solucoes reutilizaveis (continuous batching, spawn grid), laws definem restricoes absolutas, e diagrams visualizam o sistema em ASCII ou Mermaid.
 
 ## Spec Table
 | Campo | Valor | Nota |
@@ -40,7 +40,7 @@ P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satel
 | component_map format | YAML | What connects to what |
 
 ## Patterns
-- Satellite spec: role + model + MCPs + boot sequence em 1 artefato
+- Agent_group spec: role + model + MCPs + boot sequence em 1 artefato
 - Pattern reutilizavel com nome, contexto, solucao, consequencias (GoF-like)
 - Law numerada (P08_law_01..N) com enforcement automatico
 - Diagram em ASCII para inline, Mermaid para rendering
@@ -49,11 +49,11 @@ P08 governa a arquitetura do CEX com 5 tipos de artefato que definem desde satel
 ## Anti-Patterns
 - Law sem enforcement: vira recomendacao ignoravel
 - Pattern sem consequencias documentadas: oculta trade-offs
-- Satellite spec sem MCPs: satelite nasce sem ferramentas
+- Agent_group spec sem MCPs: agent_group nasce sem ferramentas
 - Diagram desatualizado: pior que nenhum diagrama
 
 ## Application
-organization tem 7 satelites (orchestrator, research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) todos com agent_card em P08. As 11 leis ativas governam operacao autonoma. O agent_package de P02 mapeia architecture.md para P08.
+organization tem 7 agent_groups (orchestrator, research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) todos com agent_card em P08. As 11 leis ativas governam operacao autonoma. O agent_package de P02 mapeia architecture.md para P08.
 
 ## References
 - P08_architecture/_schema.yaml (fonte de verdade)

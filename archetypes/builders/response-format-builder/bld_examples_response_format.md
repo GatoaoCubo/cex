@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of response_format artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Response Format"
+version: "1.0.0"
+author: n03_builder
+tags: [response_format, builder, examples]
+tldr: "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls."
+domain: "response format construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: response-format-builder
 ## Golden Example
-INPUT: "Cria response_format para knowledge_card output em YAML frontmatter + markdown"
+INPUT: "Create response_format para knowledge_card output em YAML frontmatter + markdown"
 OUTPUT:
 ```yaml
 id: p05_rf_knowledge_card

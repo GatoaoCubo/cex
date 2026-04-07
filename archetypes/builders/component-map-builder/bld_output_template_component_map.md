@@ -4,6 +4,15 @@ id: component-map-builder-output-template
 kind: output_template
 parent: component-map-builder
 version: 1.0.0
+quality: 9.0
+title: "Output Template Component Map"
+author: n03_builder
+tags: [component_map, builder, examples]
+tldr: "Golden and anti-examples for component map construction, demonstrating ideal structure and common pitfalls."
+domain: "component map construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template — component-map-builder

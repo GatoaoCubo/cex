@@ -11,7 +11,7 @@ title: "Parser: {{TARGET_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
-author: {{SATELLITE_NAME}}
+author: {{AGENT_GROUP_NAME}}
 quality: {{QUALITY_8_TO_10}}
 tags: [parser, output, {{TAG1}}]
 tldr: "{{ONE_SENTENCE_ON_EXTRACTION_GOAL}}"

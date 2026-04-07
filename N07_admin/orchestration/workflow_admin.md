@@ -9,17 +9,17 @@ author: builder_agent
 title: "Orchestration Workflows — Solo, Grid Static, Grid Continuous"
 steps_count: 5
 execution: mixed
-agent_nodes: [orchestrator, n01, n02, n03, n04, n05, n06]
+agent_groups: [orchestrator, n01, n02, n03, n04, n05, n06]
 timeout: 3600
 retry_policy: per_step
 depends_on: [dispatch_rule_admin]
 signals: [complete, error, progress]
 spawn_configs: [spawn_config_admin]
 domain: orchestration
-quality: 8.9
+quality: 9.1
 tags: [workflow, orchestration, N07, dispatch, solo, grid]
 tldr: "3 orchestration workflows — solo dispatch, grid static, grid continuous — with concrete spawn commands."
-density_score: 0.92
+density_score: 1.0
 ---
 
 # Orchestration Workflows

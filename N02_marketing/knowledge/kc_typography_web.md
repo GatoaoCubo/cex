@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: shaka_research
 domain: typography
-quality: 9.0
+quality: 9.2
 tags: [knowledge_card, typography, fonts, type-scale, variable-fonts, font-display, N02]
 tldr: Font pairing contrast principle, type scale ratios, line-height rules, max line length, font-display swap, variable fonts, hierarchy via weight+size+color — not size alone.
 when_to_use: Load before choosing fonts, setting up a type system, or writing CSS typography foundations.

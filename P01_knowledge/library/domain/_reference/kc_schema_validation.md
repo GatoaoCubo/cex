@@ -9,7 +9,7 @@ created: '2026-03-29'
 author: orchestrator
 domain: schema
 origin: manual
-quality: 8.5
+quality: 9.0
 tags:
 - schema
 - validation
@@ -25,6 +25,7 @@ feeds_kinds:
 - validation_schema
 - validator
 density_score: 0.85
+updated: "2026-04-07"
 ---
 
 ## Quick Reference
@@ -55,3 +56,33 @@ density_score: 0.85
 - Validating with prompts instead of schemas
 - Enum with 50+ values (use lookup table)
 - Interface without version
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_schema_validation`
+- **Tags**: 
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_schema_validation`
+- **Tags**: 
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

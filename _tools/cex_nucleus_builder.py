@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """cex_nucleus_builder.py -- Build a complete nucleus via 8F Runner.
 
 Sequentially produces the 7 core artifacts for a nucleus:
@@ -75,7 +76,7 @@ KIND_TO_SUBDIR = {
     # Retrieval
     "chunk_strategy": "knowledge",
     "retriever_config": "knowledge",
-    "brain_index": "knowledge",
+    "knowledge_index": "knowledge",
     "embedding_config": "knowledge",
 }
 

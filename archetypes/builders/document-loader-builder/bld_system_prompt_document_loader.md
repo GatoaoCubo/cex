@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "File parsing, chunking strategies, metadata extraction, encoding detection | NOT retrieval (vector search), search_tool (external APIs), embedding generation, vector store upsert"
 domain: "document_loader"
-quality: 8.8
+quality: 9.1
 tags: ["system_prompt", "document_loader", "ingestion", "chunking", "RAG", "P04"]
 safety_level: standard
 tools_listed: false

@@ -1,4 +1,4 @@
-"""Tests for cex_8f_motor.py — Intent parsing and kind resolution."""
+"""Tests for cex_8f_motor.py -- Intent parsing and kind resolution."""
 
 import sys
 from pathlib import Path
@@ -26,7 +26,7 @@ class TestParseIntent:
     @pytest.mark.unit
     def test_empty_intent(self):
         result = parse_intent("")
-        # Should handle gracefully — returns dict with defaults
+        # Should handle gracefully -- returns dict with defaults
         assert isinstance(result, dict)
 
     @pytest.mark.unit

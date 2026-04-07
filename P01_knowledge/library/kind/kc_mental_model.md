@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: mental_model
-quality: 8.9
+quality: 9.1
 tags: [mental_model, P02, BECOME, kind-kc]
 tldr: "YAML identity map encoding an agent's routing logic, decision boundaries, and personality constraints"
 when_to_use: "Building, reviewing, or reasoning about mental_model artifacts"
 keywords: [identity, routing, decision-map]
 feeds_kinds: [mental_model]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Mental Model
@@ -56,7 +59,7 @@ A mental model is a YAML identity map that encodes an agent's routing logic, dec
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | Domain-scoped model | Agent owns one vertical | `domain: marketing, tools: [copy, seo]` |
-| Multi-tool generalist | Orchestrator or gateway agent | `domain: orchestration, tools: [all_agent_nodes]` |
+| Multi-tool generalist | Orchestrator or gateway agent | `domain: orchestration, tools: [all_agent_groups]` |
 | Constraint-heavy model | Safety-critical or compliance tasks | `constraints: [no_pii, audit_trail, max_tokens_2000]` |
 
 ## Anti-Patterns
@@ -73,7 +76,7 @@ A mental model is a YAML identity map that encodes an agent's routing logic, dec
 ```
 
 ## Decision Tree
-- IF agent is core agent_node THEN mental_model required (boot dependency)
+- IF agent is core agent_group THEN mental_model required (boot dependency)
 - IF agent is ephemeral/one-shot THEN mental_model optional (use system_prompt only)
 - DEFAULT: Create mental_model for any agent that persists across sessions
 

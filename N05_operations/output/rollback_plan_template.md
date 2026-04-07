@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
 domain: railway-backend-operations
-quality: 8.8
+quality: 9.0
 tags: [output, rollback, plan, railway, 4-service, emergency]
 tldr: Rollback plan template for Railway 4-service topology with blast radius assessment and recovery coordination.
 output_type: rollback_plan

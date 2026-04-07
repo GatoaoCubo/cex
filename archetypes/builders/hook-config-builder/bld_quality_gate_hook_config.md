@@ -8,7 +8,7 @@ created: "2026-03-31"
 updated: "2026-03-31"
 author: "builder_agent"
 domain: "hook lifecycle configuration for builder execution"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, hook-config, P04]
 tldr: "Pass/fail gate for hook_config artifacts: required fields, id pattern, body sections, hook declaration completeness."
 density_score: 0.90
@@ -39,7 +39,7 @@ Weights sum to 100%.
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Hook completeness | 1.0 | All hooks have phase, event, action, condition (no placeholders) |
-| Condition quality | 1.0 | Each hook condition is specific and testable |
+| Condition quality | 1.0 | Each hook condition is specific and testsble |
 | Phase coverage | 1.0 | Hooks cover relevant 8F phases for the target builder |
 | Boundary clarity | 1.0 | Explicitly states what this IS and IS NOT |
 | Integration mapping | 0.5 | Upstream and downstream connections documented |

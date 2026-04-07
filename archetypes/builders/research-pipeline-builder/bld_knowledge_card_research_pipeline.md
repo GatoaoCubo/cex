@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for research pipeline design — STORM, CRAG, CRITIC patterns
 sources: Stanford STORM paper, CRAG paper (Yan et al 2024), CRITIC paper (Gou et al 2024), CODEXA production system (13908 lines)
+quality: 9.1
+title: "Knowledge Card Research Pipeline"
+version: "1.0.0"
+author: n03_builder
+tags: [research_pipeline, builder, examples]
+tldr: "Golden and anti-examples for research pipeline construction, demonstrating ideal structure and common pitfalls."
+domain: "research pipeline construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: research_pipeline
@@ -25,7 +35,7 @@ A research pipeline is a config-driven system that collects, scores, synthesizes
 - **Quality dimensions**: relevance, recency, completeness, trustworthiness.
 
 ### CRITIC (Self-Correcting with Tool-Interactive Critique)
-- **Paper**: Gou et al 2024 — LLM verifies own output, corrects with tools
+- **Paper**: Gou et al 2024 — LLM verifies own output, correct with tools
 - **CEX adaptation**: Stage 7 uses a thinking model (o4-mini) to verify synthesis against source data. Catches hallucinations, numerical errors, contradictions. Max 3 iterations — diminishing returns after that.
 
 ## 7-Stage Pipeline

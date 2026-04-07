@@ -55,7 +55,7 @@ keywords:
 - VSL
 - order_bump
 - OTO
-agent_node: commercial_hub
+agent_group: commercial_hub
 model: sonnet
 priority: 9
 confidence_threshold: 0.65

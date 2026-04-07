@@ -12,7 +12,7 @@ observation: "Chunking strategy and metadata preservation are the two highest-le
 pattern: "semantic chunking + 12.5% overlap + source/page/section metadata = best RAG baseline"
 evidence: "LangChain benchmarks show semantic chunking outperforms fixed by 15-23% on multi-hop QA; overlap prevents answer-spanning-chunk misses"
 confidence: 0.85
-quality: 8.8
+quality: 9.0
 tags: [learning_record, document_loader, chunking, metadata, RAG, P04]
 tldr: "Key lessons from document_loader builds: overlap is mandatory, metadata is non-negotiable, parser choice drives quality."
 memory_scope: project
@@ -48,7 +48,7 @@ but catastrophic at query time.
 - Embedding cost: smaller chunks = more embeddings = higher cost; balance with recall
 - Unstructured.io auto-detects format for mixed-format corpora; single-format loaders
   should use format-specific parsers for higher fidelity
-- Apache Tika covers 1000+ formats via JVM; use for rare formats before building custom parser
+- Apache Tika covers 1000+ formats via JVM; use for rare formats before building costm parser
 
 ## Versioning Signals
 - Bump minor version when adding new formats_supported

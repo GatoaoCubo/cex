@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: agent_memory
-quality: 9.0
+quality: 9.1
 tags: [memory-scope, conversational, buffer, summary, entity, redis, session, mem0]
 tldr: Configuracao de memoria para agente conversacional com 3 camadas — buffer (ultimas 10 msgs), summary (compressao apos 10), entity (entidades extraidas) — backend Redis com TTL 3600s
 when_to_use: Agentes que mantam conversa multi-turn com usuario e precisam lembrar contexto recente + entidades mencionadas
@@ -140,5 +140,5 @@ organization:memory:{session_id}:metadata     -> Hash          (created_at, last
 
 ## Related
 - `ex_agent_gateway.md` — Gateway agent que usa este memory scope
-- `ex_boot_config_edison_claude.md` — Boot config (memoria e efemera por sessao de satelite)
+- `ex_boot_config_edison_claude.md` — Boot config (memoria e efemera por sessao de agent_group)
 - `records/core/learning/memory/` — organization long-term memory (diferente de session memory)

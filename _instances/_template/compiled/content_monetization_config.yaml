@@ -1,0 +1,54 @@
+id: tpl_content_monetization_config
+kind: env_config
+pillar: P09
+version: 1.0.0
+created: 2026-03-31
+author: content-monetization-builder
+domain: content_monetization
+quality: null
+tldr: Instance template for content monetization — fill [PLACEHOLDERS] for any business
+tags:
+- template
+- monetization
+- config
+- hotmart
+- digistore24
+- multi-platform
+density_score: 1.0
+identity: "identity:\n  empresa: \"[EMPRESA_NOME]\"\n  domain: \"[VERTICAL — e.g. ai_tools, pet_education, fitness, finance]\"\
+  \n  vertical: \"[educacao|saas|consultoria|coaching|comunidade|infoproduto]\"\n  currency_primary: \"[BRL|EUR|USD]\"\n \
+  \ currency_unit: \"[centavos|cents]\"\n  region_primary: \"[BR|LATAM|EU|DACH|US|GLOBAL]\"\n  languages: [\"[pt-BR|de|en|es|fr|it|nl|pl]\"\
+  ]"
+platforms: "platforms:\n  tier_1:\n    brasil:\n      provider: \"[hotmart|kiwify|eduzz|monetizze|none]\"\n      product_id:\
+  \ \"[HOTMART_PRODUCT_ID]\"\n      token_env: \"[HOTMART_TOKEN]\"\n      affiliate_program: \"[true|false]\"\n      affiliate_commission_pct:\
+  \ \"[PERCENTUAL — e.g. 0.40]\"\n    internacional:\n      provider: \"[digistore24|teachable|thinkific|none]\"\n      product_id:\
+  \ \"[DS24_PRODUCT_ID]\"\n      api_key_env: \"[DS24_API_KEY]\"\n      affiliate_enabled: \"[true|false]\"\n      affiliate_commission_pct:\
+  \ \"[PERCENTUAL — e.g. 0.50]\"\n      merchant_of_record: \"[ds24|self]\"\n  tier_2:\n    - provider: \"[udemy|clickbank|gumroad|none]\"\
+  \n      purpose: \"[mass_niche|passive_income|lead_magnet]\""
+products: "products:\n  - tipo: \"[curso|ebook|mentoria|comunidade|template|saas|workshop]\"\n    nome: \"[PRODUTO_NOME]\"\
+  \n    slug: \"[produto-slug]\"\n    preco_brl: \"[PRECO_CENTAVOS — e.g. 9990]\"\n    preco_eur: \"[PRECO_CENTS — e.g. 2990]\"\
+  \n    preco_usd: \"[PRECO_CENTS — e.g. 2990]\"\n    checkout_br: \"[hotmart|kiwify]\"\n    checkout_int: \"[digistore24|teachable]\"\
+  \n    entrega: \"[hotmart_club|ds24_member|teachable|custom_lms]\"\n    upsell_to: \"[NEXT_PRODUCT_SLUG|none]\"\n    downsell_to:\
+  \ \"[LOWER_PRODUCT_SLUG|none]\""
+webhooks: "webhooks:\n  hotmart:\n    hottok_env: \"[HOTMART_HOTTOK]\"\n    endpoint: \"[URL_WEBHOOK_HOTMART — e.g. https://api.empresa.com/webhooks/hotmart]\"\
+  \n    events:\n      - PURCHASE_COMPLETE\n      - PURCHASE_CANCELED\n      - PURCHASE_REFUNDED\n      - PURCHASE_CHARGEBACK\n\
+  \      - SUBSCRIPTION_CANCELLATION\n      - SWITCH_PLAN\n    signature: \"sha256 HMAC (X-Hotmart-Hottok header)\"\n    format:\
+  \ \"JSON\"\n    idempotency_key: \"[transaction_id|purchase_id]\"\n\n  digistore24:\n    api_key_env: \"[DS24_API_KEY]\"\
+  \n    ipn_passphrase_env: \"[DS24_IPN_PASSPHRASE]\"\n    endpoint: \"[URL_WEBHOOK_DS24 — e.g. https://api.empresa.com/webhooks/ds24]\"\
+  \n    events:\n      - on_payment\n      - on_refund\n      - on_chargeback\n      - on_rebill_resumed\n      - on_rebill_cancelled\n\
+  \      - on_affiliatelink\n      - on_invoice_created\n      - on_payment_missed\n    signature: \"sha512 hash verification\"\
+  \n    format: \"form-encoded (NOT JSON)\"\n    response: \"body must be exact string 'OK'\"\n    idempotency_key: \"[order_id|transaction_id]\""
+affiliates: "affiliates:\n  hotmart:\n    programa_url: \"[LINK_PROGRAMA_AFILIADOS_HOTMART]\"\n    comissao_pct: \"[PERCENTUAL\
+  \ — e.g. 0.40]\"\n    cookie_days: \"[DIAS — e.g. 180]\"\n    marketplace_listed: \"[true|false]\"\n  digistore24:\n   \
+  \ affiliate_enabled: \"[true|false]\"\n    comissao_pct: \"[PERCENTUAL — e.g. 0.50]\"\n    marketplace_listed: \"[true|false]\"\
+  \n    promo_tools_url: \"[URL_DS24_PROMO_TOOLS]\""
+compliance: "compliance:\n  # GDPR (required for EU sales via DS24)\n  gdpr:\n    dpa_signed: \"[true|false]\"\n    double_optin:\
+  \ \"[true|false]\"\n    data_erasure_process: \"[manual|automated]\"\n    privacy_policy_url: \"[URL_PRIVACY_POLICY]\"\n\
+  \n  # EU-specific (required for DS24/DACH region)\n  eu:\n    impressum_url: \"[URL_IMPRESSUM — required DACH region]\"\n\
+  \    widerrufsrecht_url: \"[URL_CANCELLATION_POLICY — 14-day cooling-off]\"\n    cookie_consent_provider: \"[cookiebot|onetrust|custom|none]\"\
+  \n    vat_handling: \"[ds24_merchant_of_record|self_registered|not_applicable]\"\n\n  # BR-specific (required for Hotmart)\n\
+  \  br:\n    cnpj: \"[CNPJ_EMPRESA]\"\n    nota_fiscal: \"[manual|automated|not_applicable]\"\n    consumidor_gov: \"[true|false]\""
+analytics: "analytics:\n  tracking:\n    utm_convention: \"[source][medium][campaign]_[content]\"\n    pixel_meta_env: \"\
+  [META_PIXEL_ID]\"\n    pixel_google_env: \"[GOOGLE_ADS_TAG]\"\n    pixel_tiktok_env: \"[TIKTOK_PIXEL_ID|none]\"\n  kpis:\n\
+  \    cac_target: \"[VALOR_CENTAVOS — e.g. 5000]\"\n    ltv_target: \"[VALOR_CENTAVOS — e.g. 50000]\"\n    churn_max_monthly_pct:\
+  \ \"[PERCENTUAL — e.g. 0.05]\"\n    conversion_rate_target: \"[PERCENTUAL — e.g. 0.03]\""

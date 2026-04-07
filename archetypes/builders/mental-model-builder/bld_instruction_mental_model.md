@@ -15,7 +15,7 @@ prerequisites:
   - Agent's key decision points during operation are known
 validation_method: checklist
 domain: mental_model
-quality: 8.9
+quality: 9.2
 tags: [instruction, mental-model, routing, P02, decision-tree, cognitive-map]
 idempotent: true
 atomic: false
@@ -23,13 +23,13 @@ rollback: "Discard generated artifact; agent behavior is unchanged"
 dependencies: []
 logging: true
 tldr: Build a cognitive map for an agent defining routing rules, decision trees, priorities, heuristics, domain boundaries, and fallback behavior.
-density_score: 0.91
+density_score: 0.95
 ---
 
 ## Context
 The mental-model-builder produces `mental_model` artifacts (P02) — design-time cognitive maps that define how an agent routes tasks, makes decisions, and prioritizes work. Mental models differ from agent definitions (identity and capabilities), runtime state (P10, ephemeral), and router artifacts (pure task dispatchers): a mental model encodes the thinking patterns an agent uses during execution.
 **Inputs:**
-- `$agent_name (required) - string - "The agent this mental model belongs to (e.g. 'scout-agent', 'law-builder')"`
+- `$agent_name (required) - string - "The agent this mental model belongs to (e.g. 'scout-agent', 'invariant-builder')"`
 - `$agent_slug (required) - string - "snake_case version of agent name for use in id field"`
 - `$domain (required) - string - "Primary domain the agent operates in"`
 - `$routing_triggers (required) - list[string] - "Keywords or signal types that trigger this agent's activation"`
@@ -93,3 +93,15 @@ body_bytes = len(encode_utf8(body_content))
 | H05 | `quality` is `null` |
 | H06 | `routing_rules` has >= 3 rules each with keywords + action |
 | H07 | `decision_tree` has >= 2 conditions each with condition + then |
+
+
+## Validation
+- Verify output matches expected schema before delivery
+- Check all required fields are present and non-empty
+- Confirm no template placeholders remain in output
+
+
+## Edge Cases
+- Empty input: return structured error with guidance
+- Partial input: fill defaults, flag missing fields
+- Oversized input: truncate with warning, preserve structure

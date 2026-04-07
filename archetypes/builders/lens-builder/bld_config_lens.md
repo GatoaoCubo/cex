@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Lens"
+version: "1.0.0"
+author: n03_builder
+tags: [lens, builder, examples]
+tldr: "Golden and anti-examples for lens construction, demonstrating ideal structure and common pitfalls."
+domain: "lens construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: lens Production Rules
 ## Naming Convention
@@ -26,12 +36,12 @@ permission_scope: nucleus
 | Perspective slugs | snake_case, lowercase | `cost_efficiency`, `security_posture` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `cex/P02_model/examples/p02_lens_{perspective_slug}.yaml`
-- Compiled: `cex/P02_model/compiled/p02_lens_{perspective_slug}.yaml`
+1. Output: `cex/P02_model/examples/p02_lens_{perspective_slug}.yaml`
+2. Compiled: `cex/P02_model/compiled/p02_lens_{perspective_slug}.yaml`
 ## Size Limits (aligned with SCHEMA)
-- Body: max 2048 bytes
-- Total: ~3000 bytes including frontmatter
-- Density: >= 0.80
+1. Body: max 2048 bytes
+2. Total: ~3000 bytes including frontmatter
+3. Density: >= 0.80
 ## Perspective Rules
 | Rule | Enforcement |
 |------|-------------|
@@ -40,7 +50,19 @@ Rule: id MUST equal filename stem.
 | Concrete filters | SOFT (S04) |
 | Declared bias | SOFT (S08) |
 ## Composition Rules
-- Multiple lenses can apply to the same artifact kind
-- Weight field (0.0-1.0) controls influence in multi-lens scenarios
-- Priority field (integer) controls evaluation order
-- Conflicting lenses: higher priority wins, equal priority uses weight
+1. Multiple lenses can apply to the same artifact kind
+2. Weight field (0.0-1.0) controls influence in multi-lens scenarios
+3. Priority field (integer) controls evaluation order
+4. Conflicting lenses: higher priority wins, equal priority uses weight
+
+## Metadata
+
+```yaml
+id: bld_config_lens
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-lens.md
+```

@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "agent-builder"
-agent_node: N05
+agent_group: N05
 domain: "software-project-management"
 llm_function: BECOME
 capabilities_count: 6
@@ -50,9 +50,9 @@ Operates downstream of N03 (artifact creation) and upstream of the Railway Super
 | 4 | `cex_doctor.py` | Validate builder ISO health before dispatch |
 | 5 | `signal_writer` | Emit N05 completion signal to orchestrator after handoff |
 
-## Satellite Position
+## Agent_group Position
 
-- Satellite: N05 operations
+- Agent_group: N05 operations
 - Peers: Railway Superintendent (`p02_agent_railway_superintendent`)
 - Upstream: N03 creation nucleus (scaffold intent), N07 orchestrator (dispatch handoff)
 - Downstream: Railway Superintendent (validated manifest input), N07 (project audit report)
@@ -94,7 +94,7 @@ agents/software_project_manifest/
 
 ## Quality Gates
 
-HARD: `id` matches `^p02_agent_[a-z][a-z0-9_]+$`, `kind == agent`, `quality == null`, all 10 required frontmatter fields present, `agent_package >= 10` files listed, `llm_function == BECOME`, `agent_node` assigned and non-blank.
+HARD: `id` matches `^p02_agent_[a-z][a-z0-9_]+$`, `kind == agent`, `quality == null`, all 10 required frontmatter fields present, `agent_package >= 10` files listed, `llm_function == BECOME`, `agent_group` assigned and non-blank.
 SOFT: `tldr <= 160ch` (153ch ✓), `tags >= 3` with "agent" (5 tags ✓), `capabilities_count == 6` matches body (6 bullets ✓), `density_score >= 0.80` (0.87 ✓), domain is specific not generic.
 
 ## Common Issues

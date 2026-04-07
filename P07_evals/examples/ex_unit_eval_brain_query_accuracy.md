@@ -9,6 +9,11 @@ created: 2026-03-24
 author: operations_agent
 quality: 9.0
 tags: [unit-eval, brain, search, accuracy]
+updated: "2026-04-07"
+domain: "evaluation"
+title: "Unit Eval Brain Query Accuracy"
+density_score: 0.92
+tldr: "Defines unit eval for unit eval brain query accuracy, with validation gates and integration points."
 ---
 
 # Unit Eval: brain_query Accuracy
@@ -20,7 +25,7 @@ brain_query MCP tool — hybrid BM25+FAISS search.
 | Query | Expected Top Result | Pass Criteria |
 |-------|-------------------|---------------|
 | "agent for SEO" | KC with SEO/marketplace | Top-3 contains match |
-| "how to spawn agent_node" | KC_operations_agent_003 or spawn skill | Top-1 score > 0.7 |
+| "how to spawn agent_group" | KC_operations_agent_003 or spawn skill | Top-1 score > 0.7 |
 | "quality gate implementation" | KC_operations_agent_010 | Exact match in top-1 |
 | "brand propagation pipeline" | brand_propagation skill | Top-3 contains match |
 | "whatsapp voice pipeline" | voice_pipeline skill | Top-3 contains match |
@@ -44,5 +49,13 @@ for query, expected in TEST_CASES:
 | Fallback rate | < 5% | ~2% |
 
 ## Failure Action
-- Top-1 < 70%: Rebuild FAISS index, check embedding model
-- Latency > 500ms: Check Ollama status, model loading
+1. Top-1 < 70%: Rebuild FAISS index, check embedding model
+2. Latency > 500ms: Check Ollama status, model loading
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target

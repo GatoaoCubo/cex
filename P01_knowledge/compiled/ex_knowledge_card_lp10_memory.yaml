@@ -14,12 +14,12 @@ tags:
 - brain
 - learning
 - axiom
-tldr: P10 define 5 tipos de memoria (mental_model, brain_index, learning_record, session_state, axiom) que persistem conhecimento
+tldr: P10 define 5 tipos de memoria (mental_model, knowledge_index, learning_record, session_state, axiom) que persistem conhecimento
   entre sessoes — axioms sao imutaveis
 when_to_use: Quando precisar definir persistencia de conhecimento, learning records ou axiomas no CEX
 keywords:
 - mental_model
-- brain_index
+- knowledge_index
 - learning_record
 - session_state
 - axiom
@@ -39,13 +39,13 @@ spec_table: '| Campo | Valor | Nota |
 
   |-------|-------|------|
 
-  | Tipos | 5 | mental_model, brain_index, learning_record, session_state, axiom |
+  | Tipos | 5 | mental_model, knowledge_index, learning_record, session_state, axiom |
 
   | Max bytes (todos) | 3072 | Uniforme entre tipos |
 
   | mental_model format | YAML | routing_rules + decision_tree |
 
-  | brain_index engines | 2 | BM25 (keyword) + FAISS (semantic) |
+  | knowledge_index engines | 2 | BM25 (keyword) + FAISS (semantic) |
 
   | session_state lifecycle | efemero | Snapshot descartavel |
 
@@ -61,9 +61,9 @@ anti_patterns:
 - 'Learning record sem score: impossivel rankear por relevancia'
 - 'Brain index sem rebuild: embeddings ficam stale (>24h)'
 - 'Axiom mutavel: perde proposito de ser fundamento inviolavel'
-application: No organization, P10 manifesta como mental_model.yaml por satelite, Brain MCP (BM25+FAISS), learning memory (.claude/rules/organization-learning.md),
-  e MEMORY.md. O CEX formaliza cada tipo com schema validavel.
+application: No organization, P10 manifesta como mental_model.yaml por agent_group, Brain MCP (BM25+FAISS), learning memory
+  (.claude/rules/organization-learning.md), e MEMORY.md. O CEX formaliza cada tipo com schema validavel.
 references:
 - P10_memory/_schema.yaml (fonte de verdade)
-- records/agent_nodes/{sat}/mental_model.yaml (instancias reais)
+- records/agent_groups/{sat}/mental_model.yaml (instancias reais)
 - records/core/brain/ (Brain MCP implementation)

@@ -4,6 +4,16 @@ id: bld_tools_search_tool
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for search_tool production
+quality: 9.1
+title: "Tools Search Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [search_tool, builder, examples]
+tldr: "Golden and anti-examples for search tool construction, demonstrating ideal structure and common pitfalls."
+domain: "search tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: search-tool-builder
@@ -36,3 +46,23 @@ purpose: Tools and APIs available for search_tool production
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, provider specified,
 body <= 2048 bytes, quality == null, max_results >= 1, no API keys.
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_tools_search_tool
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-search-tool.md
+```

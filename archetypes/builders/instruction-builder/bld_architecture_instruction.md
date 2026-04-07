@@ -4,6 +4,16 @@ id: bld_architecture_instruction
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of instruction — inventory, dependencies, and architectural position
+quality: 9.0
+title: "Architecture Instruction"
+version: "1.0.0"
+author: n03_builder
+tags: [instruction, builder, examples]
+tldr: "Golden and anti-examples for instruction construction, demonstrating ideal structure and common pitfalls."
+domain: "instruction construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -37,7 +47,7 @@ skill          --depends_on--> instruction
 |----------------|-------------------|
 | Step-by-step recipe for a single executor | Conversational prompt with response format |
 | Specifies exact actions, not goals | Agent identity or persona definition |
-| Includes rollback for failure recovery | Multi-agent orchestration across agent_nodes |
+| Includes rollback for failure recovery | Multi-agent orchestration across agent_groups |
 | One-shot execution without lifecycle phases | Structured workflow with branching logic |
 | Single-agent scope | Task delegation package to a remote receiver |
 | Verifiable: each step has validation criteria | Event-triggered side-effect handler |

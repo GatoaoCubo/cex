@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: prompts
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [prompt, instruction, versioning, context, glossary, template, few-shot, chain-of-thought]
 tldr: "Prompt engineering manages the full lifecycle of LLM instructions — authoring, versioning, A/B testing, context assembly, and term standardization via glossaries"
 when_to_use: "Building or classifying components that author, version, test, or manage prompts and their supporting context"

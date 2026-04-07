@@ -11,25 +11,25 @@ pipeline: admin_orchestration
 nodes:
   - id: receive_intent
     label: "Receive human intent or mission plan"
-    agent_node: orchestrator
+    agent_group: orchestrator
   - id: classify_domain
     label: "Classify intent by domain keywords"
-    agent_node: orchestrator
+    agent_group: orchestrator
   - id: write_handoff
     label: "Write structured handoff to .cex/runtime/handoffs/"
-    agent_node: orchestrator
+    agent_group: orchestrator
   - id: dispatch_builder
     label: "Dispatch builder via bash _spawn/dispatch.sh"
-    agent_node: orchestrator
+    agent_group: orchestrator
   - id: monitor_signals
     label: "Monitor .cex/runtime/signals/ for completion or error"
-    agent_node: orchestrator
+    agent_group: orchestrator
   - id: validate_quality
     label: "Validate builder output quality >= 8.0"
-    agent_node: orchestrator
+    agent_group: orchestrator
   - id: accept_or_reject
     label: "Accept deliverable or return with feedback"
-    agent_node: orchestrator
+    agent_group: orchestrator
 edges:
   - from: receive_intent
     to: classify_domain
@@ -44,7 +44,7 @@ edges:
   - from: validate_quality
     to: accept_or_reject
 domain: orchestration
-quality: 8.9
+quality: 9.1
 tags: [dag, orchestration, N07, dispatch, pipeline]
 tldr: "7-node DAG for N07 orchestration — receive, classify, handoff, dispatch, monitor, validate, accept."
 execution_order:

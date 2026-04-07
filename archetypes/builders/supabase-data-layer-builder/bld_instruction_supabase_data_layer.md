@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.8
+quality: 9.0
 tags: [builder, supabase, data-layer, instruction, pipeline]
 density_score: 0.89
 ---
@@ -16,13 +16,13 @@ density_score: 0.89
 # Instructions: Supabase Data Layer Pipeline
 
 ## Phase 1: INTAKE — Read Config
-1. Load company config YAML (identidade, projeto, database, auth, rls, storage, realtime, vectors, edge_functions, integracao_cex, budget)
+1. Load company config YAML (identity, project, database, auth, rls, storage, realtime, vectors, edge_functions, integration_cex, budget)
 2. Validate tier vs requested features (e.g., CDN requires Pro+, SSO requires Team+)
-3. Identify vertical (ecommerce, saas, marketplace, content, custom)
+3. Identify vertical (ecommerce, saas, marketplace, content, costm)
 4. Map nucleus consumers: which N01-N06 nuclei will use which modules
 
 ## Phase 2: SCHEMA — Design Database
-1. Define schemas: `public` (app), `internal` (system), custom per config
+1. Define schemas: `public` (app), `internal` (system), costm per config
 2. Design tables per vertical (products, orders, users, orgs, memberships, etc.)
 3. Add standard columns: `id UUID DEFAULT gen_random_uuid()`, `created_at`, `updated_at`, `org_id`
 4. Enable extensions: pgvector (if vectors), pg_cron (if scheduled), pg_net (if webhooks)
@@ -41,10 +41,10 @@ density_score: 0.89
 
 ## Phase 4: AUTH — Configure Authentication
 1. Select providers from config (email, Google, Apple, GitHub, etc.)
-2. Configure JWT expiry, custom claims (role, org_id, plan)
+2. Configure JWT expiry, costm claims (role, org_id, plan)
 3. Set MFA if config requires (TOTP enrollment flow)
 4. Configure redirect URLs for OAuth callbacks
-5. Set custom SMTP if Pro+ (built-in limits 4 emails/hour)
+5. Set costm SMTP if Pro+ (built-in limits 4 emails/hour)
 
 ## Phase 5: STORAGE — Configure Buckets
 1. Create buckets per config (public vs private)

@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Reward Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [reward_signal, builder, examples]
+tldr: "Golden and anti-examples for reward signal construction, demonstrating ideal structure and common pitfalls."
+domain: "reward signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: reward_signal Production Rules
 ## Naming Convention
@@ -54,7 +64,7 @@ Rule: baseline MUST fall within declared scale range.
 | Value | Trigger |
 |-------|---------|
 | per_turn | After every LLM generation |
-| per_task | After a multi-turn task completes |
+| per_task | After a multi-turn task complete |
 | per_session | End-of-session rollup |
 | on_demand | Human-triggered evaluation |
 ## Aggregation Rules

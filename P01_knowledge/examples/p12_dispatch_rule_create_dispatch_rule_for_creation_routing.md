@@ -7,12 +7,12 @@ created: 2026-04-02
 updated: 2026-04-02
 author: dispatch-rule-builder
 domain: creation
-quality: 8.8
+quality: 9.0
 tags: [dispatch, creation, build, builder, artifact, scaffold, P12]
 tldr: Route artifact creation and build tasks to builder nucleus via keyword and intent matching
 scope: creation
 keywords: [create, build, construct, scaffold, generate, implement, criar, construir, gerar, montar, produzir, implementar]
-agent_node: builder
+agent_group: builder
 model: opus
 priority: 8
 confidence_threshold: 0.75
@@ -22,6 +22,7 @@ conditions:
 load_balance: false
 routing_strategy: hybrid
 density_score: 0.78
+title: "P12 Dispatch Rule Create Dispatch Rule For Creation Routing"
 ---
 # creation Dispatch Rule
 
@@ -46,3 +47,18 @@ followed by immediate execution, or artifact instantiation from existing templat
 Below 0.75 confidence, the router evaluates adjacent rules before activating fallback.
 `executor` is preferred over `knowledge-engine` because partially-built artifacts need
 execution capability, not indexing or retrieval.
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `dispatch rule`
+- **Artifact ID**: `p12_dr_creation`
+- **Tags**: [dispatch, creation, build, builder, artifact, scaffold, P12]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `dispatch rule` | Artifact type |
+| Pipeline | 8F (F1→F8) |

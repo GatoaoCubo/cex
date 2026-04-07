@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: llm_memory
-quality: 8.9
+quality: 9.1
 tags: [worker-service, daemon, bun, express, async, memory, hooks]
 tldr: "Persistent Bun/Express daemon on port 37777 handles AI ops async — hooks POST as thin clients, auto-restart via health polling"
 when_to_use: "Building memory or AI processing layer that multiple hooks/triggers share without blocking the main agent"

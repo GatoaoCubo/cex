@@ -4,6 +4,16 @@ id: bld_tools_response_format
 pillar: P04
 llm_function: CALL
 purpose: Tools available for response_format production
+quality: 9.1
+title: "Tools Response Format"
+version: "1.0.0"
+author: n03_builder
+tags: [response_format, builder, examples]
+tldr: "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls."
+domain: "response format construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: response-format-builder
@@ -32,9 +42,21 @@ purpose: Tools available for response_format production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p05_rf_ prefix
-- [ ] sections_count >= 1
-- [ ] format_type in valid enum
-- [ ] injection_point in valid enum
-- [ ] Example Output section present
+1. [ ] YAML parses
+2. [ ] id matches p05_rf_ prefix
+3. [ ] sections_count >= 1
+4. [ ] format_type in valid enum
+5. [ ] injection_point in valid enum
+6. [ ] Example Output section present
+
+## Metadata
+
+```yaml
+id: bld_tools_response_format
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-response-format.md
+```

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of checkpoint artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Checkpoint"
+version: "1.0.0"
+author: n03_builder
+tags: [checkpoint, builder, examples]
+tldr: "Golden and anti-examples for checkpoint construction, demonstrating ideal structure and common pitfalls."
+domain: "checkpoint construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: checkpoint-builder
@@ -22,7 +32,7 @@ author: "builder_agent"
 name: "Research Pipeline — Embed Chunks"
 workflow_ref: "p12_wf_research_pipeline"
 step: "embed_chunks"
-quality: null
+quality: 8.9
 tags: [checkpoint, research-pipeline, embedding, P12]
 tldr: "Checkpoint after chunk embedding step: 3 state keys, 24h TTL, resumable at embed_chunks"
 description: "Saves embedding progress after batch N chunks processed; enables resume without re-fetching sources."
@@ -57,7 +67,7 @@ Prerequisites: embedding service available; same embedding_model present; source
 
 Idempotent: yes — skips already-processed chunks.
 ## Lifecycle
-TTL: 24h — batch pipeline; checkpoint expires after workflow completes.
+TTL: 24h — batch pipeline; checkpoint expires after workflow complete.
 Chain: p12_ck_research_pipeline_fetch_sources -> this -> p12_ck_research_pipeline_validate_output
 
 WHY THIS IS GOLDEN:

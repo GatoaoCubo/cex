@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of permission artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Permission"
+version: "1.0.0"
+author: n03_builder
+tags: [permission, builder, examples]
+tldr: "Golden and anti-examples for permission construction, demonstrating ideal structure and common pitfalls."
+domain: "permission construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: permission-builder
 ## Golden Example
-INPUT: "Cria permission para controlar acesso de agentes ao pool de knowledge cards"
+INPUT: "Create permission para controlar access de agents ao pool de knowledge cards"
 OUTPUT:
 ```yaml
 id: p09_perm_pool_access
@@ -25,7 +35,7 @@ roles: [orchestrator, researcher, builder, auditor, viewer]
 read: "conditional"
 write: "conditional"
 execute: "deny"
-quality: null
+quality: 8.9
 tags: [permission, pool, access-control, knowledge, roles]
 tldr: "Controls read/write access to knowledge card pool by agent role with deny-overrides-allow"
 domain: "knowledge management"

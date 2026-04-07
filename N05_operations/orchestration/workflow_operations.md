@@ -13,11 +13,11 @@ error_recovery: rollback_then_checkpoint_then_escalate
 max_retries: 2
 timeout_ms: 7200000
 spawn_delay_ms: 2000
-quality: 8.8
+quality: 9.0
 tags: [workflow, railway, superintendent, deploy, fastapi, postgresql, rollback]
 tldr: "10-step deploy pipeline: validate_toml → env → migrations → health_local → rollback_plan → railway_up → health_prod → pipeline → monitor → signal."
 density_score: 0.97
-agent_nodes: [railway_superintendent]
+agent_groups: [railway_superintendent]
 signals: [toml_verified, env_validated, migrations_safe, health_local_ok, rollback_ready, deploy_complete, health_prod_ok, pipeline_ok, monitoring_active, deploy_signaled]
 spawn_configs: [spawn_config_operations]
 domain: railway-backend-operations

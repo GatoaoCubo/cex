@@ -11,20 +11,24 @@ version: 1.0.0
 created: 2026-03-24
 author: builder_agent
 domain: knowledge-retrieval
-quality: 9.5
+quality: 9.1
 tags: [mcp, brain, rag, bm25, faiss, ollama, search]
+updated: "2026-04-07"
+title: "Mcp Server Codexa Brain"
+density_score: 0.92
+tldr: "Defines mcp server for mcp server codexa brain, with validation gates and integration points."
 ---
 
 # Brain MCP Server
 
 ## Name
-- Name: organization-brain
-- Role: Central knowledge retrieval for all organization agent_nodes
+1. Name: organization-brain
+2. Role: Central knowledge retrieval for all organization agent_groups
 
 ## Transport
-- Transport: stdio (via `python -m organization_brain.server`)
-- Auth: none (local only)
-- Timeout: 30s per query
+1. Transport: stdio (via `python -m organization_brain.server`)
+2. Auth: none (local only)
+3. Timeout: 30s per query
 
 ## Tools Provided
 | Tool | Purpose |
@@ -41,14 +45,26 @@ tags: [mcp, brain, rag, bm25, faiss, ollama, search]
 | pool_index | json (agent/workflow/prompt counts) |
 
 ## Integration Notes
-- Start: `python -m organization_brain.server` (cwd: src/)
-- Required env: `organization_ROOT`, `PYTHONPATH`
-- Fallback: Ollama down = BM25 keyword-only (~50% accuracy vs ~88% hybrid)
-- Index rebuild: `python build_indexes_ollama.py --scope all` (~20 min)
-- Model: nomic-embed-text (768d), chunk 2048, overlap 128
+1. Start: `python -m organization_brain.server` (cwd: src/)
+2. Required env: `organization_ROOT`, `PYTHONPATH`
+3. Fallback: Ollama down = BM25 keyword-only (~50% accuracy vs ~88% hybrid)
+4. Index rebuild: `python build_indexes_ollama.py --scope all` (~20 min)
+5. Model: nomic-embed-text (768d), chunk 2048, overlap 128
 
 ## Debugging
 1. Check: `curl http://localhost:11434/api/tags` (Ollama running?)
 2. Verify: FAISS index exists in `src/indexes/` (~140MB)
 3. Test: `brain_status(verbose=true)` for cache/model state
 4. Common: "model not found" = run `ollama pull nomic-embed-text`
+
+## Metadata
+
+```yaml
+id: p04_mcp_organization_brain
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p04-mcp-organization-brain.md
+```

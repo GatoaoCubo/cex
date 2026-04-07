@@ -8,10 +8,19 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.9
+quality: 9.1
 tags: [pydantic, validation, models, settings, python]
 tldr: "Pydantic V2 patterns: BaseModel for request/response, field_validator for business rules, BaseSettings for env config, model_config for JSON serialization, discriminated unions for polymorphism."
-density_score: 0.90
+density_score: 1.0
+when_to_use: "Apply when pydantic v2 patterns: basemodel for request/response, field_validator for business rules, baseset..."
+keywords: [knowledge-card, field-validator, model-config, pydantic, software-engineering]
+axioms:
+  - "AVOID: ❌ Using `dict` instead of Pydantic models (no validation)"
+  - "AVOID: ❌ `os.getenv()` scattered everywhere (use BaseSettings)"
+  - "AVOID: ❌ V1 syntax (`class Config: orm_mode = True`) — use `model_config`"
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Pydantic V2 Patterns

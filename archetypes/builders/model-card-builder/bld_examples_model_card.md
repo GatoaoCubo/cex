@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of model_card artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Model Card"
+version: "1.0.0"
+author: n03_builder
+tags: [model_card, builder, examples]
+tldr: "Golden and anti-examples for model card construction, demonstrating ideal structure and common pitfalls."
+domain: "model card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: model-card-builder
 ## Golden Example
-INPUT: "Documenta o Claude Sonnet 4 pra decidir roteamento"
+INPUT: "Documenta o Claude Sonnet 4 for decidir routing"
 OUTPUT:
 ```yaml
 id: p02_mc_anthropic_sonnet_4
@@ -19,7 +29,7 @@ version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder_agent"
-model_name: "claude-sonnet-4-20250514"
+model_name: "claude-sonnet-4-6"
 provider: "anthropic"
 model_type: "text-generation"
 status: "active"
@@ -51,20 +61,20 @@ pricing:
 domain: model_selection
 quality: null
 tags: [model-card, anthropic, claude-4, sonnet, balanced]
-tldr: "Sonnet 4 — anthropic, 200K ctx, $3/$15 per 1M, melhor custo-beneficio analise/pesquisa"
-when_to_use: "Analise e pesquisa onde opus eh overkill e haiku insuficiente"
+tldr: "Sonnet 4 — anthropic, 200K ctx, $3/$15 per 1M, melhor cost-beneficio analysis/research"
+when_to_use: "Analise e research where opus is overkill e haiku insuficiente"
 keywords: [anthropic, claude-sonnet-4, balanced]
 linked_artifacts:
   primary: null
   related: [p02_mc_anthropic_opus_4]
 data_source: "https://docs.anthropic.com/en/docs/about-claude/models"
 ## Boundary
-model_card EH: spec tecnica do Sonnet 4 (capacidades, custos, limites).
-model_card NAO EH: boot_config, agent, benchmark.
+model_card IS: spec tecnica do Sonnet 4 (capacidades, costs, limits).
+model_card IS NOT: boot_config, agent, benchmark.
 ## Specifications
 | Spec | Value | Source |
 |------|-------|--------|
-| Model | claude-sonnet-4-20250514 | https://docs.anthropic.com/en/docs/about-claude/models |
+| Model | claude-sonnet-4-6 | https://docs.anthropic.com/en/docs/about-claude/models |
 | Context | 200K tokens | https://docs.anthropic.com/en/docs/about-claude/models |
 | Max Output | 16K tokens | https://docs.anthropic.com/en/docs/about-claude/models |
 | Cutoff | Apr 2025 | https://docs.anthropic.com/en/docs/about-claude/models |

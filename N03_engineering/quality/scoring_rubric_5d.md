@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.2
+quality: 9.1
 tags: [scoring-rubric, 5d, quality, dimensions, measurement]
 tldr: Every artifact is scored on 5 orthogonal dimensions. Final score = weighted average. Thresholds enforce build/no-build decisions.
 density_score: 0.93

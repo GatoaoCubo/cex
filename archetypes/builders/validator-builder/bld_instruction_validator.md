@@ -16,7 +16,7 @@ prerequisites:
   - "The check is binary pass/fail (not a score or range)"
 validation_method: checklist
 domain: validator
-quality: null
+quality: 9.0
 tags: [instruction, validator, pre-commit, pass-fail, P06]
 idempotent: true
 atomic: true

@@ -29,7 +29,7 @@ keywords:
 - deploy
 - index
 - price
-agent_node: orchestrator
+agent_group: orchestrator
 model: opus
 priority: 9
 confidence_threshold:

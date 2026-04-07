@@ -5,6 +5,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [10.1.0] - 2026-04-07 — G13 Terminology Unification
+
+### Changed
+- Renamed `satellite` and `agent_node` to `agent_group` across 648 files (2,078 insertions, 2,003 deletions)
+- All case variants handled: lowercase, Capitalized, UPPER, plurals, compound identifiers
+- Portuguese translation pairs in `translate_isos.py` updated
+- G13 gap closed — zero residual old terms remain
+
+---
+
 ## [10.0.0] - 2026-04-01 — Runtime Assimilation (Agno → CEX)
 
 ### Added — Phase 1: Runtime Foundation (v7.x)
@@ -86,7 +96,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ### Changed
 - 932 builder files renamed to comply with naming v2.0
-- 158 legacy examples renamed (satellite > director terminology)
+- 158 legacy examples renamed (agent_group > director terminology)
 
 ### Removed
 - Legacy naming patterns (mixed case, hyphens, non-standard prefixes)

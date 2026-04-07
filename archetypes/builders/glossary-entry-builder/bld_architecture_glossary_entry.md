@@ -4,6 +4,16 @@ id: bld_architecture_glossary_entry
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of glossary_entry — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Glossary Entry"
+version: "1.0.0"
+author: n03_builder
+tags: [glossary_entry, builder, examples]
+tldr: "Golden and anti-examples for glossary entry construction, demonstrating ideal structure and common pitfalls."
+domain: "glossary entry construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -15,20 +25,20 @@ purpose: Component map of glossary_entry — inventory, dependencies, and archit
 | synonyms | Alternative names or abbreviations for the same concept | glossary_entry | optional |
 | related_terms | Other glossary entries that share conceptual proximity | glossary_entry | optional |
 | disambiguation | Clarification when the term overlaps with a similar concept | glossary_entry | conditional |
-| usage_context | Short note on where or how the term appears in practice | glossary_entry | optional |
+| usage_context | Short note on where or how the term appears in forctice | glossary_entry | optional |
 ## Dependency Graph
 ```
 knowledge_card (P01) --produces--> glossary_entry
 glossary_entry       --produces--> system_prompt (P03)
 glossary_entry       --produces--> context_doc (P01)
-brain_index (P10)    --depends-->  glossary_entry
+knowledge_index (P10)    --depends-->  glossary_entry
 ```
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | glossary_entry | produces | source concepts requiring concise term definitions |
 | glossary_entry | system_prompt (P03) | data_flow | term definitions injected for LLM terminology grounding |
 | glossary_entry | context_doc (P01) | data_flow | term references embedded in domain context documents |
-| brain_index (P10) | glossary_entry | depends | indexes entries for fast lookup and semantic search |
+| knowledge_index (P10) | glossary_entry | depends | indexes entries for fast lookup and semantic search |
 ## Boundary Table
 | glossary_entry IS | glossary_entry IS NOT |
 |-------------------|-----------------------|
@@ -44,5 +54,5 @@ brain_index (P10)    --depends-->  glossary_entry
 | Source | knowledge_card (P01) | Provide source concepts that need term-level definitions |
 | Core | term, definition, domain | The essential triad — name, meaning, and scope |
 | Enrichment | synonyms, related_terms, disambiguation, usage_context | Improve discoverability and reduce ambiguity |
-| Index | brain_index (P10) | Make the entry searchable across the knowledge system |
+| Index | knowledge_index (P10) | Make the entry searchable across the knowledge system |
 | Consumption | system_prompt (P03), context_doc (P01) | Inject terminology into LLM context and domain documents |

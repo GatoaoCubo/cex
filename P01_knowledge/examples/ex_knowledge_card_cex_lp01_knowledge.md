@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.2
 tags: [cex, lp01, knowledge, inject, knowledge-card, rag, embedding]
 tldr: "P01 Knowledge agrupa 6 tipos de memoria destilada que alimentam o contexto do LLM via funcao INJECT"
 when_to_use: "Classificar artefatos de conhecimento ou entender o papel de P01 na taxonomia CEX"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_function_inject
   related: [p01_kc_cex_lp03_prompt, p01_kc_cex_lp02_model]
-density_score: null
+density_score: 1.0
 data_source: "https://arxiv.org/abs/2005.11401"
 ---
 
@@ -54,7 +54,7 @@ funcao_llm: INJECT | analogia: memoria de longo prazo
 1. Pesquisa: coletar dados de fontes verificaveis
 2. Destilacao: condensar em formato atomico (KC ou glossary)
 3. Validacao: quality gate (density, completeness, accuracy)
-4. Indexacao: embedding + brain_index para retrieval
+4. Indexacao: embedding + knowledge_index para retrieval
 5. Injecao: INJECT no contexto do LLM via RAG ou direto
 
 ## Regras de Ouro
@@ -94,3 +94,10 @@ funcao_llm: INJECT | analogia: memoria de longo prazo
 - source: https://arxiv.org/abs/2312.10997
 - deepens: p01_kc_cex_function_inject
 - related: p01_kc_cex_lp03_prompt
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

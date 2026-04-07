@@ -4,6 +4,16 @@ id: bld_architecture_naming_rule
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of naming_rule — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Naming Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [naming_rule, builder, examples]
+tldr: "Golden and anti-examples for naming rule construction, demonstrating ideal structure and common pitfalls."
+domain: "naming rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: naming_rule in the CEX

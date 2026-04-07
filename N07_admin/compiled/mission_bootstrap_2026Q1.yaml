@@ -355,7 +355,7 @@ fase_1_reconstruir_n07_o_orquestrador_1_5_2_5h: "Objetivo: N03 reconstrói os 10
 fase_2_corrigir_12_warns_dos_builders_30_min: "Objetivo: Comprimir 13 ISOs que excedem 4096B por 1-74 bytes.\n\nDependência:\
   \ Nenhuma (independente). Pode rodar em paralelo com Fase 1 ou entre Fase 1 e 3.\n\nRecomendação: Rodar ENTRE Fase 1 e Fase\
   \ 3 como cooldown/warmup.\n\nbuilders_warn:\n  - action-prompt-builder    (bld_examples: 4102B, bld_memory: 4104B) — 2 files\n\
-  \  - agent-package-builder    (bld_system_prompt: 4101B)\n  - benchmark-builder        (bld_memory: 4099B)\n  - brain-index-builder\
+  \  - agent-package-builder    (bld_system_prompt: 4101B)\n  - benchmark-builder        (bld_memory: 4099B)\n  - knowledge-index-builder\
   \      (bld_examples: 4098B)\n  - dag-builder              (bld_memory: 4104B)\n  - diagram-builder          (bld_examples:\
   \ 4108B)\n  - fallback-chain-builder   (bld_memory: 4097B)\n  - feature-flag-builder     (bld_memory: 4100B)\n  - hook-builder\
   \             (bld_quality_gate: 4101B)\n  - mental-model-builder     (bld_examples: 4098B)\n  - pattern-builder       \

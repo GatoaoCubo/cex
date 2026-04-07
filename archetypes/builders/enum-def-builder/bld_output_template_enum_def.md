@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an enum_def artifact
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.1
+title: "Output Template Enum Def"
+version: "1.0.0"
+author: n03_builder
+tags: [enum_def, builder, examples]
+tldr: "Golden and anti-examples for enum def construction, demonstrating ideal structure and common pitfalls."
+domain: "enum def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: enum_def
@@ -60,3 +70,25 @@ TypeScript: `type {{TypeName}} = {{quoted_values_pipe_separated}};`
 Default: {{default_value_or_"none"}}
 Extensible: {{yes — new values may be added in future versions | no — set is closed}}
 Deprecated: {{deprecated_value_list_with_reason_or_"none"}}
+
+## Template Standards
+
+1. Define all required sections for this output kind
+2. Include frontmatter schema with mandatory fields
+3. Provide structural markers for post-validation
+4. Specify format constraints for markdown YAML JSON
+5. Reference the validation_schema for automated checks
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | enum def construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

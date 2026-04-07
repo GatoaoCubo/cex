@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Hook"
+version: "1.0.0"
+author: n03_builder
+tags: [hook, builder, examples]
+tldr: "Golden and anti-examples for hook construction, demonstrating ideal structure and common pitfalls."
+domain: "hook construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: hook Production Rules
 ## Naming Convention
@@ -37,16 +47,16 @@ Rule: id MUST equal filename stem.
 | Value | When it fires | Typical use |
 |-------|---------------|-------------|
 | pre_tool_use | Before a tool executes | Permission check, input validation |
-| post_tool_use | After a tool completes | Metrics, logging, context update |
+| post_tool_use | After a tool complete | Metrics, logging, context update |
 | session_start | When session begins | Context loading, env setup |
 | session_end | When session ends | Cleanup, state persistence |
 | user_prompt_submit | When user sends prompt | Input preprocessing, routing hints |
 | stop | When agent stops | Signal emission, summary |
-| subagent_stop | When subagent completes | Result collection, cleanup |
+| subagent_stop | When subagent complete | Result collection, cleanup |
 | pre_compact | Before context compaction | State preservation |
 | permission_request | When permission is requested | Auto-approve, audit |
 | notification | When notification is sent | Forwarding, aggregation |
-| custom | Custom event | Domain-specific triggers |
+| costm | Custom event | Domain-specific triggers |
 ## Blocking vs Async Guide
 | Blocking | Async | Timeout | Use case |
 |----------|-------|---------|----------|

@@ -6,9 +6,10 @@ version: 1.0.0
 created: 2026-03-31
 author: content-monetization-builder
 domain: content_monetization
-quality: null
+quality: 9.0
 tldr: "Instance template for content monetization — fill [PLACEHOLDERS] for any business"
 tags: [template, monetization, config, hotmart, digistore24, multi-platform]
+density_score: 1.0
 ---
 
 # Content Monetization Config — Instance Template

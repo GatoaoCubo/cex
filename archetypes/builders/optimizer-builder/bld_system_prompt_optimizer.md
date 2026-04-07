@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "Metric-driven optimization cycles, tripartite thresholds (trigger/target/critical), automation vs manual action separation, baseline tracking, rollback, risk assessment, monitoring alerts | Does NOT: fix one-time bugs, passively measure (benchmark), enforce pass/fail gates (quality_gate), define safety walls (guardrail)"
 domain: optimizer
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, optimizer, P03]
 safety_level: standard
 tools_listed: false

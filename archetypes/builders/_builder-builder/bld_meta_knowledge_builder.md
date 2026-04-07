@@ -6,12 +6,22 @@ file_position: 3/13
 pillar: P01
 llm_function: INJECT
 purpose: Meta-template for generating KNOWLEDGE.md of any kind-builder
+quality: 9.1
+title: "Meta Knowledge Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: {{type_name}}
-<!-- Este meta-file gera o KNOWLEDGE.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: _schema.yaml do tipo-alvo, TAXONOMY_LAYERS.yaml, pesquisa de dominio -->
-<!-- NOTA: Este eh o file mais variavel entre builders — requer pesquisa real -->
+<!-- This meta-file generates the KNOWLEDGE.md of any builder -->
+<!-- REQUIRED INPUT: _schema.yaml do type-target, TAXONOMY_LAYERS.yaml, research de domain -->
+<!-- NOTE: Este is o file more variable between builders — requer research real -->
 
 ```yaml
 ---
@@ -23,20 +33,20 @@ sources: {{sources_used}}
 ```
 
 ## Foundational Standard/Concept
-<!-- NOTA: Origem academica ou industrial do tipo -->
+<!-- NOTE: Origem academica or industrial do type -->
 <!-- Padrao observado: -->
 <!-- - model_card: Mitchell et al. 2019 "Model Cards for Model Reporting" -->
 <!-- - knowledge_card: "Atomic searchable facts" (CEX-internal concept) -->
 <!-- - signal: "Smallest coordination artifact in P12" (operational concept) -->
 <!-- - quality_gate: Cooper 1990 stage-gate process -->
-<!-- Se o tipo tem origem academica, cite paper + URL -->
-<!-- Se o tipo eh CEX-interno, descreva o conceito fundamental -->
+<!-- Se o type tem origem academica, cite paper + URL -->
+<!-- Se o type is CEX-interno, descreva o concept fundamental -->
 {{foundational_description}}
 
 ## Industry Implementations
-<!-- NOTA: Tabela comparando implementacoes do conceito em ferramentas reais -->
+<!-- NOTE: Tabela comparando implementactions do concept em tools reais -->
 <!-- Padrao: Source | What it defines | CEX uses -->
-<!-- Se nao ha equivalente industrial direto: omitir ou adaptar como "Related Patterns" -->
+<!-- Se not ha equivalente industrial direto: omitir or adaptar as "Related Patterns" -->
 
 | Source | What it defines | CEX alignment |
 |--------|----------------|---------------|
@@ -45,24 +55,24 @@ sources: {{sources_used}}
 | {{source_3}} | {{what_3}} | {{cex_use_3}} |
 
 ## Key Patterns
-<!-- NOTA: 5-8 patterns/principles que governam a producao deste tipo -->
-<!-- Extrair de _schema.yaml constraints + experiencia do dominio -->
-<!-- Padrao: bullet list com padroes concretos e actionable -->
+<!-- NOTE: 5-8 patterns/principles that governam a producao deste type -->
+<!-- Extract de _schema.yaml constraints + experiencia do domain -->
+<!-- Padrao: bullet list with patterns concrete e actionable -->
 - {{pattern_1}}
 - {{pattern_2}}
 - {{pattern_3}}
 
 ## CEX-Specific Extensions
-<!-- NOTA: Campos ou regras que o CEX adiciona alem do padrao industrial -->
+<!-- NOTE: Campos or rules that o CEX adiciona alem do standard industrial -->
 <!-- Padrao: tabela Field | Justification | Closest industry equivalent -->
-<!-- Se todos os campos sao padrao industrial: omitir esta secao -->
+<!-- Se all os fields are standard industrial: omitir esta section -->
 
 | Field | Justification | Closest equivalent |
 |-------|--------------|-------------------|
 | {{field_1}} | {{why_1}} | {{equivalent_1}} |
 
 ## Boundary vs Nearby Types
-<!-- NOTA: Tabela distinguindo este tipo dos vizinhos confusos -->
+<!-- NOTE: Tabela distinguindo this type dos vizinhos confusos -->
 <!-- Padrao identico em TODOS os 4 builders existentes -->
 <!-- Buscar overlaps em TAXONOMY_LAYERS.yaml -->
 
@@ -72,6 +82,6 @@ sources: {{sources_used}}
 | {{confused_type_2}} | {{what_it_is}} | {{why_different}} |
 
 ## References
-<!-- NOTA: URLs de fontes oficiais, papers, documentacao -->
+<!-- NOTE: URLs de fontes oficiais, papers, documentation -->
 - {{reference_1}}
 - {{reference_2}}

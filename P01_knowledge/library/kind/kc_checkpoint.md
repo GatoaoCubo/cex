@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: checkpoint
-quality: 9.0
+quality: 9.1
 tags: [checkpoint, P12, GOVERN, kind-kc]
 tldr: "Point-in-time saved state of a workflow enabling resume-on-failure without full restart"
 when_to_use: "Building, reviewing, or reasoning about checkpoint artifacts"

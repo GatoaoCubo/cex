@@ -40,20 +40,33 @@ P05 padroniza as saidas do sistema CEX com 4 tipos de artefato. Output schemas d
 | naming_rule naming | p05_nr_{{scope}}.md | Regra de nomenclatura |
 
 ## Patterns
-- Output schema em YAML define contrato exato: campos, tipos, required, examples
-- Parser extrai dados estruturados de saida raw (regex, JSON path, YAML parse)
-- Formatter transforma entre formatos (JSON > MD, YAML > table, etc)
-- Naming rules cascateiam: LP > tipo > topic — garante `id == filename stem`
+1. Output schema em YAML define contrato exato: campos, tipos, required, examples
+2. Parser extrai dados estruturados de saida raw (regex, JSON path, YAML parse)
+3. Formatter transforma entre formatos (JSON > MD, YAML > table, etc)
+4. Naming rules cascateiam: LP > tipo > topic — garante `id == filename stem`
 
 ## Anti-Patterns
-- Agente sem output_schema: saida varia entre execucoes
-- Parser sem target definido: nao sabe o que extrair
-- Naming rule ambigua: colisao de IDs entre artefatos
-- Formatter sem format de entrada: transformacao impossivel
+1. Agente sem output_schema: saida varia entre execucoes
+2. Parser sem target definido: nao sabe o que extrair
+3. Naming rule ambigua: colisao de IDs entre artefatos
+4. Formatter sem format de entrada: transformacao impossivel
 
 ## Application
 No CEX, P05 trabalha em par com P06 (Schema) — P05 define "o que sai", P06 valida "o contrato". O agent_package de P02 mapeia output_template.md para P05, garantindo que todo agente tem saida definida.
 
 ## References
-- P05_output/_schema.yaml (fonte de verdade)
-- P02_model/_schema.yaml (agent_package.lp_mapping: output_template=P05)
+1. P05_output/_schema.yaml (fonte de verdade)
+2. P02_model/_schema.yaml (agent_package.lp_mapping: output_template=P05)
+
+## Retrieval
+
+```yaml
+query: "meta-construction"
+kind_filter: knowledge_card
+top_k: 5
+threshold: 0.7
+```
+
+```bash
+python _tools/cex_retriever.py "meta-construction" --top 5
+```

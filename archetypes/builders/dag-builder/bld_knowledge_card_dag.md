@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for dag production — dependency graph specification
 sources: graph theory (Kahn 1962), Apache Airflow, Makefile dependencies, topological sort
+quality: 9.1
+title: "Knowledge Card Dag"
+version: "1.0.0"
+author: n03_builder
+tags: [dag, builder, examples]
+tldr: "Golden and anti-examples for dag construction, demonstrating ideal structure and common pitfalls."
+domain: "dag construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: dag

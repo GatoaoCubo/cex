@@ -4,6 +4,16 @@ id: bld_architecture_mcp_server
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of mcp_server — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Mcp Server"
+version: "1.0.0"
+author: n03_builder
+tags: [mcp_server, builder, examples]
+tldr: "Golden and anti-examples for mcp server construction, demonstrating ideal structure and common pitfalls."
+domain: "mcp server construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: mcp_server in the CEX
@@ -30,7 +40,7 @@ mcp_server     --signals-->    health_status
 | mcp_server | tool_results | produces | structured responses from tool invocations |
 | mcp_server | transport_layer | dependency | requires stdio pipe, SSE stream, or HTTP endpoint |
 | mcp_server | health_status (P12) | signals | periodic health and availability signals |
-| spawn_config (P12) | mcp_server | data_flow | MCP profile path used during agent_node spawn |
+| spawn_config (P12) | mcp_server | data_flow | MCP profile path used during agent_group spawn |
 ## Boundary Table
 | mcp_server IS | mcp_server IS NOT |
 |---------------|-------------------|

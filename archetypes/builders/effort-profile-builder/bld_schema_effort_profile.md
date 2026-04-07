@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for effort_profile
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Effort Profile"
+version: "1.0.0"
+author: n03_builder
+tags: [effort_profile, builder, examples]
+tldr: "Golden and anti-examples for effort profile construction, demonstrating ideal structure and common pitfalls."
+domain: "effort profile construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: effort_profile

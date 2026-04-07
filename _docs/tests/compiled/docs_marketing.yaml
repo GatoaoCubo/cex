@@ -1,0 +1,256 @@
+id: e2e_gold_docs_marketing
+kind: golden_test
+type: marketing
+pillar: P01
+title: Gold Standard — Project Documentation Marketing Artifacts
+version: 1.0.0
+created: 2026-04-06
+author: n02_marketing
+scenario: S3
+input: documenta esse projeto
+quality: null
+tags:
+- e2e
+- gold-standard
+- docs
+- documentation
+- marketing
+- stress-test
+1_readme_structure: A README that makes people WANT to use your project. Not just understand it — WANT it.
+section_map: '# Project Name
+
+  > One-line tagline that sells (not describes)
+
+
+  ## The Problem
+
+  2-3 sentences. Paint the pain. Make the reader nod.
+
+
+  ## The Solution
+
+  What this project does. 1 paragraph max. Concrete, not abstract.
+
+
+  ## Quickstart
+
+  3-5 steps. Copy-paste ready. Time to first result: < 2 minutes.
+
+
+  ## Features
+
+  Bullet list. Each feature = benefit, not spec.
+
+  - "Automatic retry with exponential backoff" → BAD (spec)
+
+  - "Never lose a request — auto-retries handle flaky APIs" → GOOD (benefit)
+
+
+  ## Architecture (optional, for dev audience)
+
+  One diagram or ASCII art. Show how pieces connect.
+
+
+  ## Installation
+
+  Full install instructions. Every OS. Every edge case.
+
+  If it can go wrong, document it.
+
+
+  ## Usage
+
+  3 examples: basic, intermediate, advanced.
+
+  Each example: input → code → output.
+
+
+  ## API Reference (if applicable)
+
+  Link to generated docs. Don''t inline the full API.
+
+
+  ## Contributing
+
+  How to contribute. What you accept. Code style. PR template.
+
+
+  ## License
+
+  One line + link.'
+tone_rules_for_readme: '| Element | Tone | Example |
+
+  |---------|------|---------|
+
+  | Tagline | Bold, benefit-first | "Ship faster. Break nothing." |
+
+  | Problem section | Empathetic, specific | "You''ve been there: 3 AM, deployment failed..." |
+
+  | Solution section | Confident, concrete | "This tool does X, Y, Z. Period." |
+
+  | Quickstart | Imperative, minimal | "Run this. See that. Done." |
+
+  | Features | Benefit-driven | Each bullet answers "so what?" |
+
+  | Installation | Precise, paranoid | Assume nothing works first try |'
+anti_patterns_readme_fails: '- Wall of text with no headers
+
+  - "This is a project that..." (boring opener)
+
+  - Installation that assumes global deps are installed
+
+  - No quickstart (or quickstart > 10 steps)
+
+  - Features listed as specs, not benefits
+
+  - No example output (reader can''t visualize result)
+
+
+  ---'
+2_quickstart_structure: The quickstart is the most important page in your docs. If it fails, nothing else matters.
+template: '# Quickstart
+
+
+  > Time to first result: ~2 minutes
+
+
+  ## Prerequisites
+
+
+  - [Runtime] version X+ (`command --version` to check)
+
+  - [Package manager] installed
+
+  - [Account/API key] if needed (link to get one)
+
+
+  ## Step 1: Install
+
+
+  \```bash
+
+  [single command — prefer one-liner]
+
+  \```
+
+
+  ## Step 2: Configure
+
+
+  \```bash
+
+  [minimal config — defaults should work for 80% of users]
+
+  \```
+
+
+  ## Step 3: Run
+
+
+  \```bash
+
+  [the command that produces visible output]
+
+  \```
+
+
+  ## Expected Output
+
+
+  \```
+
+  [exact output the user should see — copy-paste verifiable]
+
+  \```
+
+
+  ## What Just Happened?
+
+
+  1-3 sentences explaining what the quickstart did.
+
+  Links to deeper docs for each concept.
+
+
+  ## Next Steps
+
+
+  - Common task 1 — "Add your first X"
+
+  - Common task 2 — "Configure Y for production"
+
+  - Troubleshooting — "Something broke? Start here."'
+quickstart_rules: '1. Max 5 steps — if you need more, your setup is too complex
+
+  2. Copy-paste everything — no "replace X with your value" without explanation
+
+  3. Show expected output — the reader needs to know it worked
+
+  4. Prerequisites up front — don''t let them fail at step 3
+
+  5. Time estimate — "~2 minutes" sets expectations and builds confidence
+
+
+  ---'
+3_knowledge_card_template_for_project_documentation: "---\nid: kc_[project]_[topic]\nkind: knowledge_card\ntype: technical\n\
+  pillar: P01\ntitle: \"[Project] — [Topic]\"\nversion: 1.0.0\ncreated: [date]\nauthor: [nucleus]\ndomain: [domain]\nquality:\
+  \ null\ntags: [project, topic, relevant-tags]\ntldr: \"One sentence: what this KC captures and why it matters\"\nwhen_to_use:\
+  \ \"When [specific trigger or question this KC answers]\"\nkeywords: [searchable, terms, for, retrieval]\nlinked_artifacts:\n\
+  \  - [path/to/related/artifact.md]\ndensity_score: null\n---\n\n# [Topic Title]\n\n## Executive Summary\n\n3-5 sentences.\
+  \ What this is, why it exists, what it enables.\nDense. No filler. Every sentence carries information.\n\n## Core Concepts\n\
+  \n### [Concept 1]\nDefinition + why it matters + how it connects to other concepts.\n\n### [Concept 2]\nSame structure.\
+  \ Build understanding progressively.\n\n## Architecture / How It Works\n\nDiagram or structured explanation of the mechanism.\n\
+  If code: annotated snippet (not full file dump).\n\n## Usage Patterns\n\n### Pattern 1: [Common Use Case]\n[concrete example\
+  \ with input/output]\n\n### Pattern 2: [Advanced Use Case]\n[concrete example]\n\n## Gotchas\n\n- [Non-obvious thing 1]\
+  \ — why it catches people\n- [Non-obvious thing 2] — how to avoid it\n\n## References\n\n- Link 1 — what it contains\n-\
+  \ Link 2 — what it contains"
+kc_quality_markers: '| Marker | Threshold | Why |
+
+  |--------|-----------|-----|
+
+  | density_score | >= 0.85 | Every sentence must carry information |
+
+  | tldr | <= 150 chars | Forces clarity |
+
+  | when_to_use | present | Enables retrieval — KC without trigger = lost KC |
+
+  | linked_artifacts | >= 1 | No orphan knowledge |
+
+  | executive_summary | 3-5 sentences | Not 1 (too sparse), not 10 (too verbose) |
+
+
+  ---'
+why_documentation_is_marketing: '| Bad Docs | Good Docs |
+
+  |----------|-----------|
+
+  | "This module handles X" | "This module lets you X in 3 lines of code" |
+
+  | 50-page PDF nobody reads | Scannable sections with anchored links |
+
+  | "See source for details" | Annotated examples with expected output |
+
+  | Written for the author | Written for someone who has never seen this |
+
+  | Assumes knowledge | Builds knowledge progressively |
+
+  | No quickstart | 2-minute quickstart that actually works |
+
+
+  > The best documentation makes the reader feel smart, not stupid.
+
+  > Every friction point in your docs is a user you lost.
+
+
+  ---'
+validation_criteria:
+- 'DOC-01: README structure has all required sections (Problem, Solution, Quickstart, Features, Install, Usage)'
+- 'DOC-02: README tagline exists and is under 80 characters'
+- 'DOC-03: Quickstart has max 5 steps'
+- 'DOC-04: Quickstart shows expected output'
+- 'DOC-05: Quickstart lists prerequisites before first command'
+- 'DOC-06: KC template includes all required frontmatter fields (id, kind, type, pillar, title, version, tldr, when_to_use)'
+- 'DOC-07: Features are written as benefits, not specs (at least 3 examples)'
+- 'DOC-08: Tone guidance exists with concrete examples (not just "be clear")'
+- 'DOC-09: Anti-patterns documented (what NOT to do)'
+- 'DOC-10: All content applicable to any project (not CEX-specific)'

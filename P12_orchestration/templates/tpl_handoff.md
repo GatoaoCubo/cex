@@ -11,14 +11,14 @@ title: "Handoff: {{TASK_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
-author: {{SATELLITE_NAME}}
+author: {{AGENT_GROUP_NAME}}
 quality: {{QUALITY_8_TO_10}}
 tags: [{{TAG1}}, {{TAG2}}, handoff, orchestration]
-tldr: "{{ONE_SENTENCE_WHAT_SATELLITE_MUST_DO}}"
+tldr: "{{ONE_SENTENCE_WHAT_AGENT_GROUP_MUST_DO}}"
 density_score: {{0.80_TO_1.00}}
 ---
 
-# {{TARGET_SATELLITE}} — {{MISSION}}: {{TITLE}}
+# {{TARGET_AGENT_GROUP}} — {{MISSION}}: {{TITLE}}
 **Autonomia Total** | **Quality {{MIN_QUALITY}}+**
 **REGRA: Commit e signal ANTES de qualquer pausa.**
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-cex_system_test.py — Full system validation for CEX bootstrap.
+cex_system_test.py -- Full system validation for CEX bootstrap.
 
 Tests all components: tools, builders, artifacts, hooks, runner, infra.
 Run after bootstrap to confirm system health.
@@ -39,10 +40,10 @@ def test(name: str, passed: bool, detail: str = ""):
     else:
         FAIL += 1
     RESULTS.append({"name": name, "status": status, "detail": detail})
-    symbol = "✅" if passed else "❌"
+    symbol = "[OK]" if passed else "[FAIL]"
     msg = f"  {symbol} {name}"
     if detail:
-        msg += f" — {detail}"
+        msg += f" -- {detail}"
     print(msg)
 
 
@@ -51,13 +52,16 @@ def skip(name: str, reason: str = ""):
     global SKIP
     SKIP += 1
     RESULTS.append({"name": name, "status": "SKIP", "detail": reason})
-    print(f"  ⏭️  {name} — {reason}")
+    print(f"  >>  {name} -- {reason}")
 
 
 def run_cmd(cmd: list, timeout: int = 30) -> tuple[int, str, str]:
     """Run command, return (returncode, stdout, stderr)."""
     try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+        r = subprocess.run(
+            cmd, capture_output=True, text=True, timeout=timeout,
+            encoding="utf-8", errors="replace",
+        )
         return r.returncode, r.stdout, r.stderr
     except Exception as e:
         return -1, "", str(e)
@@ -86,7 +90,7 @@ def test_doctor():
     """Run cex_doctor and check results."""
     print("\n=== DOCTOR ===")
     rc, out, err = run_cmd([sys.executable, "_tools/cex_doctor.py"])
-    full = out + err
+    full = (out or "") + (err or "")
 
     # Extract result line
     m = re.search(r"(\d+) PASS \| (\d+) WARN \| (\d+) FAIL", full)
@@ -103,7 +107,7 @@ def test_compile():
     """Test compilation works."""
     print("\n=== COMPILE ===")
     rc, out, err = run_cmd([sys.executable, "_tools/cex_compile.py", "--all"], timeout=60)
-    full = out + err
+    full = (out or "") + (err or "")
     m = re.search(r"(\d+)/(\d+) compiled", full)
     if m:
         ok, total = int(m.group(1)), int(m.group(2))
@@ -181,7 +185,7 @@ def test_hooks():
     print("\n=== HOOKS ===")
     # validate-all
     rc, out, err = run_cmd([sys.executable, "_tools/cex_hooks.py", "validate-all"])
-    full = out + err
+    full = (out or "") + (err or "")
     m = re.search(r"Errors:\s+(\d+)", full)
     errors = int(m.group(1)) if m else -1
     test("hooks:validate_all", errors == 0, f"{errors} errors")
@@ -231,7 +235,7 @@ def test_runner_dryrun():
         "create a knowledge card about testing", "--kind", "knowledge_card",
         "--dry-run", "--verbose"
     ])
-    full = out + err
+    full = (out or "") + (err or "")
     test("runner:dryrun_runs", rc == 0, f"exit={rc}")
     test("runner:has_f1", "CONSTRAIN" in full, "F1 CONSTRAIN found" if "CONSTRAIN" in full else "")
     test("runner:has_f6", "PRODUCE" in full, "F6 PRODUCE found" if "PRODUCE" in full else "")
@@ -250,7 +254,7 @@ def test_runner_execute(quick: bool = False):
         "create a knowledge card about system testing patterns",
         "--kind", "knowledge_card", "--execute", "--verbose"
     ], timeout=120)
-    full = out + err
+    full = (out or "") + (err or "")
     passed = "PASS" in full and "Verdict" in full
     test("runner:execute_pass", passed,
          "PASS" if passed else full[-200:])
@@ -279,6 +283,45 @@ def test_kc_library():
         test("kc:dir", False, "library/kind/ not found")
 
 
+def test_e2e(quick: bool = True):
+    """Test E2E stress scenarios via cex_e2e_test.py."""
+    print("\n=== E2E STRESS TESTS ===")
+    e2e_script = CEX_ROOT / "_tools" / "cex_e2e_test.py"
+    if not e2e_script.exists():
+        test("e2e:script_exists", False, "cex_e2e_test.py MISSING")
+        return
+
+    test("e2e:script_exists", True)
+
+    # Config exists
+    e2e_config = CEX_ROOT / "_docs" / "tests" / "e2e_config.yaml"
+    test("e2e:config_exists", e2e_config.exists())
+
+    if not e2e_config.exists():
+        return
+
+    # Run in quick (dry-run) mode -- no LLM calls
+    mode_args = ["--all", "--quick"] if quick else ["--all", "--full"]
+    rc, out, err = run_cmd(
+        [sys.executable, str(e2e_script)] + mode_args,
+        timeout=180,
+    )
+    full = (out or "") + (err or "")
+
+    # Parse summary line: "E2E: N/M passed"
+    m = re.search(r"E2E:\s+(\d+)/(\d+)\s+passed", full)
+    if m:
+        passed, total = int(m.group(1)), int(m.group(2))
+        test("e2e:scenarios_pass", passed == total,
+             f"{passed}/{total} scenarios passed")
+    else:
+        test("e2e:runs", rc == 0, f"exit={rc}, output={full[:150]}")
+
+    # Check JSON report was written
+    results_file = CEX_ROOT / "_docs" / "tests" / "e2e_results.json"
+    test("e2e:report_written", results_file.exists())
+
+
 def test_git():
     """Test git state."""
     print("\n=== GIT ===")
@@ -302,7 +345,7 @@ def main():
     args = parser.parse_args()
 
     print("=" * 60)
-    print("  CEX SYSTEM TEST — Full Bootstrap Validation")
+    print("  CEX SYSTEM TEST -- Full Bootstrap Validation")
     print("=" * 60)
 
     t0 = time.time()
@@ -318,6 +361,7 @@ def main():
     test_infra()
     test_runner_dryrun()
     test_runner_execute(quick=args.quick)
+    test_e2e(quick=args.quick)
     test_kc_library()
     test_git()
 
@@ -334,7 +378,7 @@ def main():
         print("\n  FAILURES:")
         for r in RESULTS:
             if r["status"] == "FAIL":
-                print(f"    ❌ {r['name']}: {r['detail']}")
+                print(f"    [FAIL] {r['name']}: {r['detail']}")
 
     # Write results
     results_path = CEX_ROOT / ".cex" / "system_test_results.json"

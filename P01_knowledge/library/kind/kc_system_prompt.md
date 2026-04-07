@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: system_prompt
-quality: 9.0
+quality: 9.1
 tags: [system_prompt, P03, BECOME, kind-kc]
 tldr: "Identity-defining prompt read first by the LLM, establishing persona, rules, output format, and behavioral boundaries"
 when_to_use: "Building, reviewing, or reasoning about system_prompt artifacts"
@@ -84,3 +84,36 @@ A system prompt is the identity-defining text read first by the LLM at the start
 - GOOD: Clear persona, explicit rules, output format defined, under 4096 bytes
 - GREAT: Persona matches domain; rules are testable; includes few-shot example reference
 - FAIL: Mixed with task instructions; no persona; contradictory rules; >4096 bytes
+
+## Production Reference: OpenClaude (Claude Code CLI)
+OpenClaude's system prompt architecture (prompts.ts, 914 lines) reveals production patterns:
+
+| Section | Purpose | CEX Equivalent |
+|---------|---------|----------------|
+| Identity | "You are an interactive agent..." | p03_sp_cex_core_identity |
+| System | Tool results, hooks, context limits | Part of identity |
+| Doing Tasks | No gold-plating, read before edit, verify | p03_ins_doing_tasks |
+| Actions | Reversibility, blast radius, confirmation | p03_ins_action_protocol |
+| Using Your Tools | Dedicated tools over Bash, parallel calls | Part of identity |
+| Tone and Style | No emojis, file:line references, concise | Part of identity |
+| Output Efficiency | Lead with answer, skip filler | Part of identity |
+| Session-specific | Agent tools, verification contract, skills | Dynamic per-nucleus |
+| Environment | CWD, platform, git status, model info | {{ENV_INFO}} runtime var |
+
+**Key architectural insight**: Static sections (Identity through Output Efficiency) are
+cache-shared across sessions. Dynamic sections (Session-specific, Environment) are
+per-session and separated by a `__SYSTEM_PROMPT_DYNAMIC_BOUNDARY__` marker.
+CEX equivalent: {{INCLUDE}} directives for static, runtime vars for dynamic.
+
+**New anti-pattern discovered**: "Verification avoidance" — agents narrate what they
+would test instead of actually running tests. Counter: require Command run blocks in
+every verification check (see p03_sp_verification_agent).
+
+## Production Reference: OpenClaude Agent Types
+Three built-in agent system prompts with role constraints:
+- **Explore agent**: READ-ONLY, fast (haiku model), omits project rules
+- **Plan agent**: READ-ONLY, deep (inherit model), produces Critical Files list
+- **Verification agent**: READ-ONLY, adversarial, produces VERDICT enum
+
+Pattern: All three are read-only by design. Write access is only for the main agent.
+Sub-agents that verify or plan should NEVER have write tools.

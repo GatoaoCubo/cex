@@ -5,6 +5,16 @@ pillar: P05
 llm_function: INJECT
 purpose: Domain knowledge for output_validator production
 sources: Guardrails AI validators, Instructor retry/validation, LangChain output parsers, output fixing patterns, retry-with-feedback loops
+quality: 9.0
+title: "Knowledge Card Output Validator"
+version: "1.0.0"
+author: n03_builder
+tags: [output_validator, builder, examples]
+tldr: "Golden and anti-examples for output validator construction, demonstrating ideal structure and common pitfalls."
+domain: "output validator construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: output_validator
@@ -34,7 +44,7 @@ Output validator — checks and corrective actions applied to LLM output AFTER g
 | No error context in retry | Retry prompt doesn't explain what failed — LLM repeats same mistake |
 ## Application
 1. Identify the use case and constraints
-2. Select appropriate pattern from the table above
+2. Select apownte pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 2048 bytes

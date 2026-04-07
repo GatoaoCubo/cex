@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for knowledge_card production — atomic searchable facts
 sources: validate_kc.py v2.0, _schema.yaml v4.0, 721 real knowledge cards
+quality: 9.1
+title: "Knowledge Card Knowledge Card"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_card, builder, examples]
+tldr: "Golden and anti-examples for knowledge card construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: knowledge_card

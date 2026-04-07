@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.2
+title: "Config Content Monetization"
+version: "1.0.0"
+author: n03_builder
+tags: [content_monetization, builder, examples]
+tldr: "Golden and anti-examples for content monetization construction, demonstrating ideal structure and common pitfalls."
+domain: "content monetization construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: content_monetization Production Rules
 
@@ -22,7 +32,7 @@ permission_scope: nucleus
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Config file | `content_monetization_config_{empresa}.yaml` | `content_monetization_config_codexa.yaml` |
-| Template | `tpl_content_monetization.md` | P04_tools/templates/ |
+| Template | `tpl_content_monetization.md` | P11_feedback/templates/ |
 | Examples | `ex_content_monetization_{model}.md` | `ex_content_monetization_saas.md` |
 | Instance | `content_monetization_config.md` | _instances/{co}/N06_commercial/ |
 | Frontmatter id | `p04_cli_content_monetization_{slug}` | `p04_cli_content_monetization_codexa` |
@@ -68,9 +78,9 @@ permission_scope: nucleus
 ## File Placement Rules
 | Artifact Type | Directory | Pillar |
 |--------------|-----------|--------|
-| Template | P04_tools/templates/ | P04 |
-| Examples | P04_tools/examples/ | P04 |
-| Compiled | P04_tools/compiled/ | P04 |
+| Template | P11_feedback/templates/ | P04 |
+| Examples | P11_feedback/examples/ | P04 |
+| Compiled | P11_feedback/compiled/ | P04 |
 | Nucleus tool | N06_commercial/tools/ | P04 |
 | Nucleus KCs | N06_commercial/knowledge/ | P01 |
 | Company config | _instances/{co}/N06_commercial/ | instance |

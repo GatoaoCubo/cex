@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for router
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Router"
+version: "1.0.0"
+author: n03_builder
+tags: [router, builder, examples]
+tldr: "Golden and anti-examples for router construction, demonstrating ideal structure and common pitfalls."
+domain: "router construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: router
@@ -34,7 +44,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 ```yaml
 route:
   pattern: string (regex or keyword list)
-  destination: string (agent_node name or agent id)
+  destination: string (agent_group name or agent id)
   priority: integer 1-100 (higher = preferred)
   confidence_min: float 0.0-1.0
   conditions: list[string] (optional extra conditions)
@@ -57,5 +67,5 @@ Rule: id MUST equal filename stem.
 - quality: null always
 - routes_count MUST match actual rows in Routes table
 - confidence_threshold between 0.0 and 1.0
-- fallback_route MUST be a valid agent_node name or "escalate"
+- fallback_route MUST be a valid agent_group name or "escalate"
 - Each route pattern MUST be unique (no duplicate patterns)

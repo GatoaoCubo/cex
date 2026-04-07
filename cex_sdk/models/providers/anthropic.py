@@ -1,5 +1,5 @@
 """
-cex_sdk.models.providers.anthropic — Claude provider.
+cex_sdk.models.providers.anthropic -- Claude provider.
 
 CEX version: 7.1.0 | Pillar: P02 | 8F: CALL (F5)
 # Originally from agno. Licensed under MPL-2.0.
@@ -22,7 +22,7 @@ from cex_sdk.utils.timer import Timer
 class Claude(Model):
     """Anthropic Claude models."""
 
-    id: str = "claude-sonnet-4-20250514"
+    id: str = "claude-sonnet-4-6"
     provider: str = "Anthropic"
     max_tokens: int = 8192
     api_key: Optional[str] = None

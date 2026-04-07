@@ -6,7 +6,7 @@ version: 4.0.0
 created: 2026-03-30
 updated: 2026-04-01
 author: n02_visual_frontend_marketing
-agent_node: visual-marketing-hub
+agent_group: visual-marketing-hub
 domain: visual_frontend_engineering_and_copywriting
 llm_function: BECOME
 capabilities_count: 21

@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Vision Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [vision_tool, builder, examples]
+tldr: "Golden and anti-examples for vision tool construction, demonstrating ideal structure and common pitfalls."
+domain: "vision tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: vision_tool Production Rules
 ## Naming Convention
@@ -59,4 +69,4 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 | Documents | document_parsing, form_extraction, barcode_detection |
 ## Provider Name Registry
 `openai_vision` | `anthropic_claude` | `google_vision` | `azure_computer_vision` | `tesseract` | `doctr`
-Rule: use canonical provider names from registry — custom names must document full endpoint.
+Rule: use canonical provider names from registry — costm names must document full endpoint.

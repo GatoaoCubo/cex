@@ -23,7 +23,7 @@ tags:
 - knowledge-base
 - ground-truth
 purpose: Ground-truth dataset for evaluating organization's RAG pipeline (brain_query -> context retrieval -> answer generation).
-  500 human-verified question-answer pairs drawn from real knowledge cards, pool artifacts, and agent_node documentation.
+  500 human-verified question-answer pairs drawn from real knowledge cards, pool artifacts, and agent_group documentation.
 dataset_schema: "# Each record follows this structure:\n- question: \"What embedding model does organization use for vector\
   \ search?\"\n  answer: \"nomic-embed-text via Ollama, producing 768-dim vectors at ~10ms/query locally\"\n  context: \"\
   KC_EMBED_001: organization uses nomic-embed-text through Ollama for local embedding generation. Dimensions: 768. Latency:\
@@ -59,9 +59,9 @@ category_distribution: '| Category | Count | Example Question |
 
   | Marketing | 80 | "How does marketing_agent generate Instagram carousel copy?" |'
 sample_records: ''
-easy_single_hop_retrieval: 'question: "What is the maximum number of agent_nodes orchestrator can spawn simultaneously?"
+easy_single_hop_retrieval: 'question: "What is the maximum number of agent_groups orchestrator can spawn simultaneously?"
 
-  answer: "3 agent_nodes plus orchestrator itself (4 total). More than 4 causes BSOD due to RAM limits."
+  answer: "3 agent_groups plus orchestrator itself (4 total). More than 4 causes BSOD due to RAM limits."
 
   context: "MEMORY: Max terminals = 3 sats + orchestrator. BSOD if >4. Power-save features disabled to prevent crashes."
 

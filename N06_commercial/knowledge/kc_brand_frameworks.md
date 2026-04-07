@@ -7,12 +7,20 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-strategy
-quality: 8.9
+quality: 9.1
+updated: 2026-04-07
 tags: [brand, frameworks, positioning, identity, voice, narrative, strategy]
 tldr: "Universal brand strategy frameworks: Ries & Trout, Blue Ocean, JTBD, Value Proposition Canvas, Keller Pyramid, NNGroup Voice, StoryBrand, Hero Journey."
 when_to_use: "When building brand strategy from scratch or auditing existing brand positioning."
 keywords: [brand-strategy, positioning, identity, voice, narrative, frameworks]
-density_score: 0.93
+density_score: 0.94
+axioms:
+  - "ALWAYS start with positioning statement before visual identity — strategy precedes aesthetics."
+  - "NEVER use more than 2 frameworks simultaneously — pick 1 primary, 1 validation."
+  - "ALWAYS validate positioning against JTBD — if it doesn't solve a real job, it's decoration."
+linked_artifacts:
+  primary: p01_kc_brand_book_patterns
+  related: [p01_kc_brand_archetypes, n06_kc_competitive_positioning, n06_kc_icp_frameworks, n06_output_brand_book]
 ---
 
 # Brand Strategy Frameworks Collection
@@ -69,7 +77,7 @@ density_score: 0.93
 **Fields**:
 - `situation`: Contexto ou gatilho que cria a necessidade (ex: estou saindo para o trabalho com pressa)
 - `motivation`: Acao ou solucao desejada (ex: aplicar maquiagem rapidamente)
-- `outcome`: Resultado final desejado (emocional ou funcional) (ex: parecer profissional o dia todo sem preocupacao)
+- `outcome`: Resultado final desejado (emocional ou funcional) (ex: parecer profissional o dia Planned sem preocupacao)
 
 **Example**:
 - brand: BEAUTYFIX

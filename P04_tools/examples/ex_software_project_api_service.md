@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.7
+quality: 9.1
 tags: [example, software-project, api-service, fastapi, supabase]
 tldr: "Complete API service: Product management with FastAPI+Pydantic+Supabase. Middleware stack (CORS→RateLimit→Auth→RLS), multi-stage Docker, Railway deploy, GitHub Actions CI."
 density_score: 0.90
@@ -68,3 +68,18 @@ src/product_api/
 - Async all the way (asyncpg, not psycopg2)
 - Docker compose with healthcheck deps
 - Rate limiting per tenant tier (free/pro/business)
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `example`
+- **Artifact ID**: `p04_ex_software_project_api_service`
+- **Tags**: [example, software-project, api-service, fastapi, supabase]
+
+## Example Registry
+
+| Aspect | Detail |
+|--------|--------|
+| Purpose | Few-shot exemplar for builder prompts |
+| Injection | Loaded by `cex_skill_loader.py` at F3 |
+| Quality | Must score 9.0+ to serve as exemplar |

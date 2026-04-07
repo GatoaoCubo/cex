@@ -59,7 +59,7 @@
     "description": "Principio fundamental imutavel â€” parte da identidade profunda da entidade",
     "llm_function": "BECOME",
     "max_bytes": 3072,
-    "naming": "p10_ax_{{rule}}.md",
+    "naming": "p02_ax_{{rule}}.md",
     "pillar": "P02"
   },
   "benchmark": {
@@ -72,22 +72,13 @@
     "pillar": "P07"
   },
   "boot_config": {
-    "boundary": "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, satelites).",
+    "boundary": "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, agent_groups).",
     "core": false,
     "description": "Configuracao de inicializacao por provider",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p02_boot_{{provider}}.md",
     "pillar": "P02"
-  },
-  "brain_index": {
-    "boundary": "Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).",
-    "core": true,
-    "description": "Indice de busca (BM25, FAISS config)",
-    "llm_function": "INJECT",
-    "max_bytes": 3072,
-    "naming": "p10_bi_{{index}}.yaml",
-    "pillar": "P10"
   },
   "browser_tool": {
     "boundary": "Interage com paginas web via DOM. NAO eh computer_use (tela generica) nem search_tool (busca sem navegacao).",
@@ -122,7 +113,7 @@
     "description": "Snapshot de estado de workflow",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p12_ckpt.md",
+    "naming": "p12_ckpt_{{name}}.md",
     "pillar": "P12"
   },
   "chunk_strategy": {
@@ -131,8 +122,17 @@
     "description": "Estrategia de chunking",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
-    "naming": "p01_chunk.md",
+    "naming": "p01_chunk_{{strategy}}.md",
     "pillar": "P01"
+  },
+  "citation": {
+    "description": "Structured source attribution with provenance, URL, date, and reliability metadata",
+    "boundary": "Source reference with provenance. NAO eh knowledge_card (conteudo em si), rag_source (pipeline config), nem glossary_entry (definicao de termo).",
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "max_bytes": 2048,
+    "naming": "p01_cit_{{topic}}.md",
+    "core": false
   },
   "cli_tool": {
     "boundary": "Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem daemon (nao persiste em background).",
@@ -153,13 +153,23 @@
     "pillar": "P04"
   },
   "component_map": {
-    "boundary": "Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 satelite).",
+    "boundary": "Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 agent_group).",
     "core": false,
     "description": "Mapa de componentes (what connects to what)",
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p08_cmap_{{scope}}.yaml",
     "pillar": "P08"
+  },
+  "compression_config": {
+    "added_version": "10.0.0",
+    "core": false,
+    "description": "Context compression configuration for tool outputs",
+    "layer": "runtime",
+    "llm_function": "INJECT",
+    "naming": "p10_cc_{{scope}}.yaml",
+    "pillar": "P10",
+    "sdk_module": "cex_sdk.memory.compression"
   },
   "computer_use": {
     "boundary": "Interacao com interface grafica via automacao. NAO eh browser_tool (DOM) nem cli_tool (linha de comando).",
@@ -176,7 +186,7 @@
     "description": "Regras de geracao constrained",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
-    "naming": "p03_constraint.md",
+    "naming": "p03_constraint_{{scope}}.md",
     "pillar": "P03"
   },
   "content_monetization": {
@@ -186,7 +196,7 @@
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
     "naming": "p04_cm_{{name}}.md",
-    "pillar": "P04"
+    "pillar": "P11"
   },
   "context_doc": {
     "boundary": "Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).",
@@ -196,6 +206,15 @@
     "max_bytes": 2048,
     "naming": "p01_ctx_{{topic}}.md + .yaml",
     "pillar": "P01"
+  },
+  "context_window_config": {
+    "description": "Token budget allocation, priority tiers, and overflow rules for prompt assembly",
+    "boundary": "Budget allocation spec. NAO eh prompt_template (conteudo), system_prompt (identidade), nem model_card (capabilities).",
+    "pillar": "P03",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 2048,
+    "naming": "p03_cwc_{{model}}.yaml",
+    "core": true
   },
   "daemon": {
     "boundary": "Processo background persistente. NAO eh hook (evento unico) nem cli_tool (execucao pontual e termina).",
@@ -230,7 +249,7 @@
     "description": "ADR: contexto, decisao, consequencias",
     "llm_function": "REASON",
     "max_bytes": 4096,
-    "naming": "p08_adr.md",
+    "naming": "p08_adr_{{decision}}.md",
     "pillar": "P08"
   },
   "diagram": {
@@ -242,7 +261,7 @@
     "naming": "p08_diag_{{scope}}.md",
     "pillar": "P08"
   },
-  "director": {
+  "supervisor": {
     "boundary": "",
     "core": false,
     "description": "Crew orchestrator that composes and coordinates multiple builders",
@@ -252,9 +271,9 @@
     "pillar": "P08"
   },
   "dispatch_rule": {
-    "boundary": "Regra de despacho keyword>satellite. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia).",
+    "boundary": "Regra de despacho keyword>agent_group. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia).",
     "core": false,
-    "description": "Regra de despacho (keyword > satellite)",
+    "description": "Regra de despacho (keyword > agent_group)",
     "llm_function": "REASON",
     "max_bytes": 3072,
     "naming": "p12_dr_{{scope}}.yaml",
@@ -287,8 +306,18 @@
     "naming": "p09_effort_profile_{{topic}}.md + .yaml",
     "pillar": "P09"
   },
+  "embedder_provider": {
+    "added_version": "10.0.0",
+    "core": true,
+    "description": "Text embedding provider for vector search",
+    "layer": "runtime",
+    "llm_function": "INJECT",
+    "naming": "p01_ep_{{provider}}.yaml",
+    "pillar": "P01",
+    "sdk_module": "cex_sdk.knowledge.embedder"
+  },
   "embedding_config": {
-    "boundary": "Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura o indice, apenas o modelo vetorial.",
+    "boundary": "Configuracao de modelo de embedding. NAO eh knowledge_index (P10) que configura o indice, apenas o modelo vetorial.",
     "core": false,
     "description": "Configuracao de embedding model",
     "llm_function": "GOVERN",
@@ -302,7 +331,7 @@
     "description": "Memoria sobre entidades",
     "llm_function": "INJECT",
     "max_bytes": 2048,
-    "naming": "p10_entity.md",
+    "naming": "p10_entity_{{name}}.md",
     "pillar": "P10"
   },
   "enum_def": {
@@ -311,7 +340,7 @@
     "description": "Enumeracao reutilizavel",
     "llm_function": "CONSTRAIN",
     "max_bytes": 1024,
-    "naming": "p06_enum.md",
+    "naming": "p06_enum_{{name}}.md",
     "pillar": "P06"
   },
   "env_config": {
@@ -329,7 +358,7 @@
     "description": "Colecao de test cases",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
-    "naming": "p07_dataset.md",
+    "naming": "p07_dataset_{{name}}.md",
     "pillar": "P07"
   },
   "fallback_chain": {
@@ -419,7 +448,7 @@
     "description": "Protocolo de transferencia entre agentes",
     "llm_function": "COLLABORATE",
     "max_bytes": 2048,
-    "naming": "p02_handoff.md",
+    "naming": "p02_handoff_{{protocol}}.md",
     "pillar": "P02"
   },
   "hook": {
@@ -476,7 +505,23 @@
     "naming": "p01_kc_{{topic}}.md + .yaml",
     "pillar": "P01"
   },
-  "law": {
+  "knowledge_index": {
+    "boundary": "Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).",
+    "core": true,
+    "description": "Indice de busca (BM25, FAISS config)",
+    "llm_function": "INJECT",
+    "max_bytes": 3072,
+    "naming": "p10_bi_{{index}}.yaml",
+    "pillar": "P10"
+  },
+  "landing_page": {
+    "pillar": "P05",
+    "builder": "landing-page-builder",
+    "domain": "frontend",
+    "description": "Complete production-ready landing page with 12 sections, responsive, dark mode, SEO",
+    "naming": "p05_lp_{{name}}.html"
+  },
+  "invariant": {
     "boundary": "Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel) nem guardrail (P11, safety-focused).",
     "core": true,
     "description": "Lei operacional (inviolavel)",
@@ -518,7 +563,7 @@
     "description": "Config LLM-as-Judge",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p07_judge.md",
+    "naming": "p07_judge_{{name}}.md",
     "pillar": "P07"
   },
   "mcp_server": {
@@ -536,7 +581,7 @@
     "description": "Config de memoria de agente",
     "llm_function": "INJECT",
     "max_bytes": 2048,
-    "naming": "p02_memscope.md",
+    "naming": "p02_memscope_{{agent}}.md",
     "pillar": "P02"
   },
   "memory_summary": {
@@ -545,7 +590,16 @@
     "description": "Resumo comprimido de memorias",
     "llm_function": "INJECT",
     "max_bytes": 2048,
-    "naming": "p10_summary.md",
+    "naming": "p10_summary_{{scope}}.md",
+    "pillar": "P10"
+  },
+  "memory_type": {
+    "boundary": "Classification and policy for memory types. NAO eh entity_memory (instancia de memoria) nem memory_scope (quem acessa) nem memory_summary (resumo).",
+    "core": false,
+    "description": "Classification of persistent memory by source, confidence, and decay rate",
+    "llm_function": "INJECT",
+    "max_bytes": 2048,
+    "naming": "p10_mt_{{type_name}}.yaml",
     "pillar": "P10"
   },
   "mental_model": {
@@ -566,13 +620,32 @@
     "naming": "p02_mc_{{model}}.md + .yaml",
     "pillar": "P02"
   },
+  "model_provider": {
+    "added_version": "10.0.0",
+    "core": true,
+    "description": "LLM provider adapter (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)",
+    "layer": "runtime",
+    "llm_function": "CALL",
+    "naming": "p02_mp_{{provider}}.yaml",
+    "pillar": "P02",
+    "sdk_module": "cex_sdk.models.providers"
+  },
+  "multi_modal_config": {
+    "description": "Input format, resolution, encoding, and routing rules for multi-modal LLM interactions",
+    "boundary": "Modality config. NAO eh vision_tool (analise visual), audio_tool (processa audio), nem model_card (capabilities).",
+    "pillar": "P04",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 2048,
+    "naming": "p04_mmc_{{capability}}.yaml",
+    "core": false
+  },
   "naming_rule": {
     "boundary": "Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo).",
     "core": false,
     "description": "Regra de nomenclatura",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
-    "naming": "p05_nr_{{scope}}.md",
+    "naming": "p08_nr_{{scope}}.md",
     "pillar": "P08"
   },
   "notifier": {
@@ -599,7 +672,7 @@
     "description": "Validacao pos-LLM",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p05_oval.md",
+    "naming": "p05_oval_{{target}}.md",
     "pillar": "P05"
   },
   "parser": {
@@ -647,6 +720,15 @@
     "naming": "p04_plug_{{name}}.md + .yaml",
     "pillar": "P04"
   },
+  "prompt_cache": {
+    "description": "TTL, eviction, and invalidation config for cached LLM prompt/completion pairs",
+    "boundary": "Cache config. NAO eh session_state (contexto efemero), memory_summary (historico), nem runtime_state (variaveis runtime).",
+    "pillar": "P10",
+    "llm_function": "GOVERN",
+    "max_bytes": 2048,
+    "naming": "p10_pc_{{name}}.yaml",
+    "core": false
+  },
   "prompt_template": {
     "boundary": "Template com variaveis. NAO eh user_prompt (fixo) nem system_prompt (identidade).",
     "core": true,
@@ -662,7 +744,7 @@
     "description": "Snapshot versionado de prompt",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p03_pv.md",
+    "naming": "p03_pv_{{version}}.md",
     "pillar": "P03"
   },
   "quality_gate": {
@@ -689,8 +771,18 @@
     "description": "Rate limiting: RPM, TPM, budget",
     "llm_function": "CONSTRAIN",
     "max_bytes": 1024,
-    "naming": "p09_ratelimit.md",
+    "naming": "p09_ratelimit_{{scope}}.md",
     "pillar": "P09"
+  },
+  "reasoning_trace": {
+    "added_version": "10.0.0",
+    "core": true,
+    "description": "Structured chain-of-thought reasoning with confidence scores",
+    "layer": "runtime",
+    "llm_function": "REASON",
+    "naming": "p03_rt_{{topic}}.md",
+    "pillar": "P03",
+    "sdk_module": "cex_sdk.reasoning.step"
   },
   "red_team_eval": {
     "boundary": "Eval seguranca. NAO eh e2e_eval.",
@@ -698,7 +790,7 @@
     "description": "Teste adversarial",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p07_redteam.md",
+    "naming": "p07_redteam_{{target}}.md",
     "pillar": "P07"
   },
   "regression_check": {
@@ -707,7 +799,7 @@
     "description": "Comparacao contra baseline",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p07_regcheck.md",
+    "naming": "p07_regcheck_{{target}}.md",
     "pillar": "P07"
   },
   "research_pipeline": {
@@ -743,7 +835,7 @@
     "description": "Config de retrieval (top_k, hybrid, reranker)",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
-    "naming": "p01_retr_cfg.md",
+    "naming": "p01_retr_cfg_{{store}}.md",
     "pillar": "P01"
   },
   "reward_signal": {
@@ -752,13 +844,13 @@
     "description": "Sinal continuo de qualidade",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p11_reward.md",
+    "naming": "p11_reward_{{metric}}.md",
     "pillar": "P11"
   },
   "router": {
-    "boundary": "Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite) nem fallback_chain (modelo>modelo).",
+    "boundary": "Roteamento task-to-agent_group. NAO eh dispatch_rule (P12, keyword>agent_group) nem fallback_chain (modelo>modelo).",
     "core": true,
-    "description": "Regra de roteamento (task > satellite)",
+    "description": "Regra de roteamento (task > agent_group)",
     "llm_function": "REASON",
     "max_bytes": 1024,
     "naming": "p02_rt_{{scope}}.yaml",
@@ -788,7 +880,7 @@
     "description": "Trigger temporal que inicia workflow",
     "llm_function": "GOVERN",
     "max_bytes": 1024,
-    "naming": "p12_sched.md",
+    "naming": "p12_sched_{{name}}.md",
     "pillar": "P12"
   },
   "scoring_rubric": {
@@ -815,8 +907,18 @@
     "description": "Gestao de secrets",
     "llm_function": "GOVERN",
     "max_bytes": 1024,
-    "naming": "p09_secret.md",
+    "naming": "p09_secret_{{scope}}.md",
     "pillar": "P09"
+  },
+  "session_backend": {
+    "added_version": "10.0.0",
+    "core": false,
+    "description": "Per-user session state persistence backend",
+    "layer": "runtime",
+    "llm_function": "INJECT",
+    "naming": "p10_sb_{{backend}}.yaml",
+    "pillar": "P10",
+    "sdk_module": "cex_sdk.session.base"
   },
   "session_state": {
     "boundary": "Estado efemero de sessao (snapshot). NAO eh runtime_state (persistente entre sessoes) nem learning_record (nao acumula).",
@@ -836,6 +938,20 @@
     "naming": "p12_sig_{{event}}.json",
     "pillar": "P12"
   },
+  "skill": {
+    "boundary": "Phased reusable capability with trigger. NOT agent (P02, has identity) or workflow (P12, orchestration steps) or action_prompt (P03, single-turn).",
+    "description": "Reusable capability with trigger + phases (AgentSkills.io / Semantic Kernel pattern)",
+    "examples": [
+      "p04_skill_git_commit",
+      "p04_skill_web_search",
+      "p04_skill_code_review"
+    ],
+    "layer": "",
+    "llm_function": "BECOME",
+    "naming": "p04_skill_{{name}}.md",
+    "pillar": "P04",
+    "schema_ref": "archetypes/builders/skill-builder/bld_schema_skill.md"
+  },
   "smoke_eval": {
     "boundary": "Teste rapido de sanidade em <30s. NAO eh unit_eval (profundo) nem benchmark (metricas continuas).",
     "core": false,
@@ -854,14 +970,32 @@
     "naming": "p04_sp_{{name}}.md",
     "pillar": "P04"
   },
+  "software_project": {
+    "description": "Complete software project definition — architecture, dependencies, build, deployment, repo structure",
+    "boundary": "Projeto completo. NAO eh component_map (P08, visao parcial) nem agent_package (P02, pacote de agente).",
+    "pillar": "P02",
+    "llm_function": "BECOME",
+    "max_bytes": 8192,
+    "naming": "p02_software_project_{{slug}}.md + .yaml",
+    "core": false
+  },
   "spawn_config": {
-    "boundary": "Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).",
+    "boundary": "Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).",
     "core": true,
     "description": "Configuracao de spawn (solo, grid, continuous)",
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p12_spawn_{{mode}}.yaml",
     "pillar": "P12"
+  },
+  "supabase_data_layer": {
+    "description": "Supabase-specific data layer — tables, RLS policies, edge functions, storage buckets, auth rules",
+    "boundary": "Data layer Supabase. NAO eh db_connector (conexao generica) nem api_client (cliente REST).",
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "max_bytes": 8192,
+    "naming": "p04_supabase_data_layer_{{slug}}.md + .yaml",
+    "core": false
   },
   "system_prompt": {
     "boundary": "Identidade + regras + formato. Lido PRIMEIRO pelo LLM.",
@@ -871,6 +1005,33 @@
     "max_bytes": 4096,
     "naming": "p03_sp_{{agent}}.md",
     "pillar": "P03"
+  },
+  "tagline": {
+    "pillar": "P03",
+    "builder": "tagline-builder",
+    "domain": "marketing",
+    "description": "Short memorable phrase capturing brand essence — taglines, slogans, headlines",
+    "naming": "p03_tl_{{topic}}.md"
+  },
+  "toolkit": {
+    "added_version": "10.0.0",
+    "core": true,
+    "description": "Collection of callable tools with auto JSON Schema",
+    "layer": "runtime",
+    "llm_function": "CALL",
+    "naming": "p04_tk_{{name}}.md + .yaml",
+    "pillar": "P04",
+    "sdk_module": "cex_sdk.tools.toolkit"
+  },
+  "trace_config": {
+    "added_version": "10.0.0",
+    "core": false,
+    "description": "Trace/span configuration for 8F pipeline observability",
+    "layer": "runtime",
+    "llm_function": "GOVERN",
+    "naming": "p07_tc_{{scope}}.yaml",
+    "pillar": "P07",
+    "sdk_module": "cex_sdk.tracing.exporter"
   },
   "type_def": {
     "boundary": "Definicao de tipo customizado no sistema. NAO eh input_schema (contrato de entrada) nem interface (contrato bilateral).",
@@ -908,6 +1069,16 @@
     "naming": "p06_val_{{rule}}.yaml",
     "pillar": "P06"
   },
+  "vector_store": {
+    "added_version": "10.0.0",
+    "core": true,
+    "description": "Vector database backend for similarity search",
+    "layer": "runtime",
+    "llm_function": "INJECT",
+    "naming": "p01_vdb_{{backend}}.yaml",
+    "pillar": "P01",
+    "sdk_module": "cex_sdk.vectordb"
+  },
   "vision_tool": {
     "boundary": "Processa input visual e retorna dados estruturados. NAO eh browser_tool (interacao DOM) nem computer_use (controle de tela).",
     "core": false,
@@ -935,98 +1106,14 @@
     "naming": "p12_wf_{{name}}.md + .yaml",
     "pillar": "P12"
   },
-  "skill": {
-    "description": "Reusable capability with trigger + phases (AgentSkills.io / Semantic Kernel pattern)",
-    "pillar": "P04",
-    "boundary": "Phased reusable capability with trigger. NOT agent (P02, has identity) or workflow (P12, orchestration steps) or action_prompt (P03, single-turn).",
-    "llm_function": "BECOME",
-    "layer": "",
-    "examples": [
-      "p04_skill_git_commit",
-      "p04_skill_web_search",
-      "p04_skill_code_review"
-    ],
-    "schema_ref": "archetypes/builders/skill-builder/bld_schema_skill.md"
-  },
-  "model_provider": {
-    "pillar": "P02",
-    "description": "LLM provider adapter (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)",
-    "layer": "runtime",
-    "core": true,
-    "sdk_module": "cex_sdk.models.providers",
-    "llm_function": "CALL",
-    "added_version": "10.0.0"
-  },
-  "toolkit": {
-    "pillar": "P04",
-    "description": "Collection of callable tools with auto JSON Schema",
-    "layer": "runtime",
-    "core": true,
-    "sdk_module": "cex_sdk.tools.toolkit",
-    "llm_function": "CALL",
-    "added_version": "10.0.0"
-  },
   "workflow_primitive": {
-    "pillar": "P12",
+    "added_version": "10.0.0",
+    "core": true,
     "description": "Workflow execution primitive (Step, Parallel, Loop, Condition, Router)",
     "layer": "runtime",
-    "core": true,
-    "sdk_module": "cex_sdk.workflow",
     "llm_function": "PRODUCE",
-    "added_version": "10.0.0"
-  },
-  "reasoning_trace": {
-    "pillar": "P03",
-    "description": "Structured chain-of-thought reasoning with confidence scores",
-    "layer": "runtime",
-    "core": true,
-    "sdk_module": "cex_sdk.reasoning.step",
-    "llm_function": "REASON",
-    "added_version": "10.0.0"
-  },
-  "compression_config": {
-    "pillar": "P10",
-    "description": "Context compression configuration for tool outputs",
-    "layer": "runtime",
-    "core": false,
-    "sdk_module": "cex_sdk.memory.compression",
-    "llm_function": "INJECT",
-    "added_version": "10.0.0"
-  },
-  "trace_config": {
-    "pillar": "P07",
-    "description": "Trace/span configuration for 8F pipeline observability",
-    "layer": "runtime",
-    "core": false,
-    "sdk_module": "cex_sdk.tracing.exporter",
-    "llm_function": "GOVERN",
-    "added_version": "10.0.0"
-  },
-  "session_backend": {
-    "pillar": "P10",
-    "description": "Per-user session state persistence backend",
-    "layer": "runtime",
-    "core": false,
-    "sdk_module": "cex_sdk.session.base",
-    "llm_function": "INJECT",
-    "added_version": "10.0.0"
-  },
-  "embedder_provider": {
-    "pillar": "P01",
-    "description": "Text embedding provider for vector search",
-    "layer": "runtime",
-    "core": true,
-    "sdk_module": "cex_sdk.knowledge.embedder",
-    "llm_function": "INJECT",
-    "added_version": "10.0.0"
-  },
-  "vectordb_backend": {
-    "pillar": "P01",
-    "description": "Vector database backend for similarity search",
-    "layer": "runtime",
-    "core": true,
-    "sdk_module": "cex_sdk.vectordb",
-    "llm_function": "INJECT",
-    "added_version": "10.0.0"
+    "naming": "p12_wp_{{primitive}}.yaml",
+    "pillar": "P12",
+    "sdk_module": "cex_sdk.workflow"
   }
 }

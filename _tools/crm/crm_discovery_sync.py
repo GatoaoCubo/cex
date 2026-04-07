@@ -1,5 +1,5 @@
 """
-CRM Discovery Sync — integration with cex_discovery_pipeline for ongoing CRM updates.
+CRM Discovery Sync -- integration with cex_discovery_pipeline for ongoing CRM updates.
 
 Bridges the discovery pipeline's BusinessRecord format with the CRM markdown table.
 Supports:
@@ -370,14 +370,14 @@ class DiscoverySync:
 def _infer_ring(city: str) -> str:
     """Infer ring classification from city name."""
     city_lower = city.lower().strip() if city else ""
-    abc_cities = {"são caetano do sul", "santo andré", "são bernardo do campo", "diadema", "mauá", "ribeirão pires", "rio grande da serra"}
-    grande_sp = {"guarulhos", "osasco", "barueri", "cotia", "taboão da serra", "carapicuíba"}
+    abc_cities = {"sao caetano do sul", "santo andre", "sao bernardo do campo", "diadema", "maua", "ribeirao pires", "rio grande da serra"}
+    grande_sp = {"guarulhos", "osasco", "barueri", "cotia", "taboao da serra", "carapicuiba"}
 
     if city_lower in abc_cities or "abc" in city_lower:
         return "1_abc"
     elif city_lower in grande_sp:
         return "2_grande_sp"
-    elif city_lower == "são paulo":
+    elif city_lower == "sao paulo":
         return "3_capital"
     else:
         return "4_interior"
@@ -387,7 +387,7 @@ def _infer_ring(city: str) -> str:
 if __name__ == "__main__":
     import argparse
 
-    ap = argparse.ArgumentParser(description="CRM Discovery Sync for GATO³")
+    ap = argparse.ArgumentParser(description="CRM Discovery Sync for GATO\u00b3")
     ap.add_argument("--crm", default=str(DEFAULT_CRM), help="Path to CRM .md file")
     ap.add_argument("--sync", help="Sync from discovery JSON file")
     ap.add_argument("--diff", help="Detect changes vs another CRM file")

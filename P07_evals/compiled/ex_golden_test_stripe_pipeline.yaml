@@ -36,7 +36,7 @@ golden_output: '## Pipeline Stress Tests
 
   | Generates handoff file             | PASS   |
 
-  | Correct agent_node routing (knowledge_agent)  | PASS   |
+  | Correct agent_group routing (knowledge_agent)  | PASS   |
 
   | Agent assigned (qa-agent)          | PASS   |
 
@@ -70,7 +70,7 @@ golden_output: '## Pipeline Stress Tests
 
   |--------------------------------|--------|
 
-  | Reports all 6 agent_nodes       | PASS   |
+  | Reports all 6 agent_groups       | PASS   |
 
   | Shows warm/cold status         | PASS   |
 
@@ -114,7 +114,7 @@ assertions_for_regression_testing: '| # | Type | Expression |
 
   | 2 | contains | `Score: 10.0/10.0` in Test B |
 
-  | 3 | contains | `Reports all 6 agent_nodes` in Test C |
+  | 3 | contains | `Reports all 6 agent_groups` in Test C |
 
   | 4 | score_gte | `quality >= 9.5` |
 

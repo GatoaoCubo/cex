@@ -9,15 +9,17 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.0
 tags: [instruction, retriever, P03, RAG, vector-search]
 density_score: 0.86
+domain: "instruction artifact construction"
+title: "Instruction Retriever"
 ---
 # Instructions: How to Produce a retriever
 
 ## Phase 1: RESEARCH
 
-1. Identify the vector store backend — ask if not specified (Chroma, Pinecone, FAISS, Qdrant, Weaviate, Milvus, Elasticsearch, custom)
+1. Identify the vector store backend — ask if not specified (Chroma, Pinecone, FAISS, Qdrant, Weaviate, Milvus, Elasticsearch, costm)
 2. Determine the embedding model: name, provider, dimension size (e.g. text-embedding-3-small = 1536d)
 3. Choose similarity metric based on embedding model recommendations:
    - OpenAI models: cosine (normalized) or dot_product

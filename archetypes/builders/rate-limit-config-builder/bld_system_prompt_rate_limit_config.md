@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "RPM, TPM, RPD, concurrent limits, budget caps, tier management, model overrides, retry-after | NOT runtime_rule (timeouts/retries/backoff), env_config (generic vars), guardrail (execution constraints)"
 domain: "rate_limit_config"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "rate_limit_config", "rpm", "tpm", "budget", "P09"]
 safety_level: standard
 tools_listed: false

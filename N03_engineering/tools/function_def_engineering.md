@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [function-def, builder, N03, tools]
 tldr: 10 callable functions in the builder pipeline -- motor, runner, compiler, doctor, forge, indexer, feedback, register, nucleus, validate.
 density_score: 0.90
@@ -41,3 +41,30 @@ The 8F Runner (F02) internally calls F03-F06-F10 in sequence.
 For full artifact creation: F01 > F02 (which runs F1-F8 internally).
 For batch: F05 calls F02 in parallel.
 For nucleus: F09 calls F02 sequentially for each kind.
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Engineering artifacts follow CEX 8F pipeline from intent to publication
+- Quality gates enforce minimum 8.0 threshold for all published artifacts
+- Cross-nucleus references use explicit id-based linking, not path-based
+- Version tracking enables rollback to any previous artifact state
+
+### Usage Reference
+
+```yaml
+# function_def integration
+artifact: function_def_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

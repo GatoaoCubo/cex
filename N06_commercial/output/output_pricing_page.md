@@ -7,10 +7,18 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-monetization
-quality: 8.8
+quality: 9.1
+updated: 2026-04-07
 tags: [output, brand, pricing, html, responsive, n06]
 tldr: "HTML pricing page with 2-4 tiers, anchoring, social proof, FAQ, CTA per tier. Brazilian market: BRL, PIX, parcelamento. Uses brand_config colors and fonts."
 density_score: 0.93
+axioms:
+  - "ALWAYS highlight middle tier as 'most popular' — anchoring increases Pro conversion by 20-40%."
+  - "NEVER show more than 4 tiers — choice paralysis kills conversion."
+  - "ALWAYS include PIX discount and parcelamento for Brazilian market."
+linked_artifacts:
+  primary: p01_kc_brand_monetization_models
+  related: [n06_output_monetization_business_plan, p01_kc_commercial_nucleus, n06_output_brand_book]
 ---
 
 # Pricing Page — {{BRAND_NAME}}

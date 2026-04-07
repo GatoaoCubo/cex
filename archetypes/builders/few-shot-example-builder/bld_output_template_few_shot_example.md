@@ -4,6 +4,16 @@ id: bld_output_template_few_shot_example
 pillar: P05
 llm_function: PRODUCE
 purpose: Canonical output template for few_shot_example artifacts
+quality: 9.0
+title: "Output Template Few Shot Example"
+version: "1.0.0"
+author: n03_builder
+tags: [few_shot_example, builder, examples]
+tldr: "Golden and anti-examples for few shot example construction, demonstrating ideal structure and common pitfalls."
+domain: "few shot example construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: few_shot_example

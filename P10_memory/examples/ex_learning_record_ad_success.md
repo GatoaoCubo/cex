@@ -8,12 +8,14 @@ references:
   - tpl_learning_record
   - ex_agent_copywriter
   - ex_quality_gate_copy
-quality: 8.5
----
+quality: 9.0
 tldr: "Learning record: ad campaign that worked well. Captures what, why, and reuse conditions."
-quality: null
-tldr: "Learning record: ad campaign that worked well. Captures what, why, and reuse conditions."
-quality: null
+updated: "2026-04-07"
+domain: "memory and state"
+version: "1.0.0"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.94
 ---
 
 # Ad Campaign Success Record
@@ -31,6 +33,31 @@ Next compilation will inject THIS as few_shot evidence.
 
 ## Links
 
-- Agent: [[ex_agent_copywriter]]
-- Gate used: [[ex_quality_gate_copy]]
-- Function: INJECT (memory feeds future hydration)
+1. Agent: [[ex_agent_copywriter]]
+2. Gate used: [[ex_quality_gate_copy]]
+3. Function: INJECT (memory feeds future hydration)
+
+## Cross-References
+
+1. **Pillar**: P10 (Memory)
+2. **Kind**: `learning record`
+3. **Artifact ID**: `ex_learning_record_ad_success`
+4. **Tags**: [memory, learning, feedback, success]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P10 | Memory domain |
+| Kind `learning record` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: learning_record
+pillar: P10
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

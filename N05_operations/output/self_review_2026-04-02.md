@@ -3,7 +3,7 @@ id: n05_self_review_2026-04-02
 kind: context-doc
 nucleus: N05
 pillar: P09
-quality: null
+quality: 9.0
 date: 2026-04-02
 type: self-review
 ---
@@ -21,7 +21,7 @@ type: self-review
 1. **Missing/Incomplete skill-builder artifact** — 12/15 test failures trace to this single artifact
    - Missing required fields: memory_scope, observation_types, effort, max_turns, disallowed_tools, permission_scope
    - Missing tool permissions section
-   - Wrong geo_description format
+   - Wrong capability_summary format
 
 2. **Test scoring logic flawed** — test_score.py has backwards assertions
    - Expects failing artifacts to score 8.0+ (should be low)

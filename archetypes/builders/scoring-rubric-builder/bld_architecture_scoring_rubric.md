@@ -4,6 +4,16 @@ id: bld_architecture_scoring_rubric
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of scoring_rubric — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Scoring Rubric"
+version: "1.0.0"
+author: n03_builder
+tags: [scoring_rubric, builder, examples]
+tldr: "Golden and anti-examples for scoring rubric construction, demonstrating ideal structure and common pitfalls."
+domain: "scoring rubric construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: scoring_rubric in the CEX

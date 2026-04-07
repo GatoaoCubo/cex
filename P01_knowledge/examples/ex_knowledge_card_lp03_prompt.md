@@ -41,21 +41,34 @@ P03 governa como agentes se comunicam, com 5 tipos de artefato de prompt. A form
 | Golden HOPs evidence | 257 | Base de destilacao |
 
 ## Patterns
-- System prompt: 3 secoes (identity, rules, output_format) — max 4096 bytes
-- Prompt template obriga variables_table (name/type/description/example) + quality_gates + examples
-- Semantic bridge obrigatorio se quality >= 8.0 (presente em 60% dos golden)
-- Chain type modela pipelines: prompt A > B > C com flow definido
+1. System prompt: 3 secoes (identity, rules, output_format) — max 4096 bytes
+2. Prompt template obriga variables_table (name/type/description/example) + quality_gates + examples
+3. Semantic bridge obrigatorio se quality >= 8.0 (presente em 60% dos golden)
+4. Chain type modela pipelines: prompt A > B > C com flow definido
 
 ## Anti-Patterns
-- {single_curly} syntax: deprecated, causa conflito com JSON/YAML
-- Template sem variables_table: impossivel de validar ou reusar
-- System prompt > 4096 bytes: excede context budget de muitos providers
-- Prompt sem quality_gates: nao tem criterio de validacao
+1. {single_curly} syntax: deprecated, causa conflito com JSON/YAML
+2. Template sem variables_table: impossivel de validar ou reusar
+3. System prompt > 4096 bytes: excede context budget de muitos providers
+4. Prompt sem quality_gates: nao tem criterio de validacao
 
 ## Application
 O forge usa P03 templates para gerar system prompts de novos agentes. Cada agente ISO tem system_instruction.md (P03) como arquivo obrigatorio, garantindo que todo agente tem identidade formatada.
 
 ## References
-- P03_prompt/_schema.yaml (fonte de verdade)
-- DISTILL_GOLDEN_TPL_HOP_PATTERNS.md (257 golden HOPs)
-- P03_prompt/templates/ (templates validados)
+1. P03_prompt/_schema.yaml (fonte de verdade)
+2. DISTILL_GOLDEN_TPL_HOP_PATTERNS.md (257 golden HOPs)
+3. P03_prompt/templates/ (templates validados)
+
+## Retrieval
+
+```yaml
+query: "meta-construction"
+kind_filter: knowledge_card
+top_k: 5
+threshold: 0.7
+```
+
+```bash
+python _tools/cex_retriever.py "meta-construction" --top 5
+```

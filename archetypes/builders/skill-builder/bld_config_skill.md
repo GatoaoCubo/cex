@@ -9,6 +9,16 @@ effort: medium
 max_turns: 20
 disallowed_tools: []
 permission_scope: pillar
+quality: 9.0
+title: "Config Skill"
+version: "1.0.0"
+author: n03_builder
+tags: [skill, builder, examples]
+tldr: "Golden and anti-examples for skill construction, demonstrating ideal structure and common pitfalls."
+domain: "skill construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Config: skill Production Rules

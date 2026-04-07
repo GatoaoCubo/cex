@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_crew_runner.py -- Crew Runner: Lightweight DAG Executor for CEX
 
@@ -32,13 +33,15 @@ if hasattr(sys.stdout, "reconfigure"): sys.stdout.reconfigure(encoding="utf-8")
 if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 
 import json
+import os
+import re
 import argparse
 from dataclasses import dataclass, field
 from pathlib import Path
 from datetime import datetime
 
 try:
-    import yaml  # noqa: F401 — optional, for future config loading
+    import yaml  # noqa: F401 -- optional, for future config loading
 except ImportError:
     yaml = None
 
@@ -48,6 +51,7 @@ except ImportError:
 # ---------------------------------------------------------------------------
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
+ROOT = CEX_ROOT  # alias used by fork/inline execution paths
 BUILDER_DIR = CEX_ROOT / "archetypes" / "builders"
 BUILDER_MAX_BYTES = 30 * 1024  # 30KB total budget for builder spec injection
 DEFAULT_QUALITY_GATE = 7.0
@@ -56,6 +60,94 @@ MAX_RETRIES = 2
 LLM_MODEL = "sonnet"
 LLM_MAX_TOKENS = 8000
 FORK_OUTPUT_DIR = CEX_ROOT / ".cex" / "temp" / "fork_outputs"
+
+# ---------------------------------------------------------------------------
+# Prompt Layers (compiled artifacts from pillar directories)
+# ---------------------------------------------------------------------------
+_prompt_layers = None
+
+
+def _get_prompt_layers():
+    """Get PromptLayers singleton (lazy import)."""
+    global _prompt_layers
+    if _prompt_layers is None:
+        try:
+            from cex_prompt_layers import get_layers
+            _prompt_layers = get_layers()
+        except ImportError:
+            _prompt_layers = None
+    return _prompt_layers
+
+
+# 8F functions that receive guardrails (write-capable phases)
+_GUARDRAIL_FUNCTIONS = {"CALL", "PRODUCE", "COLLABORATE"}
+# 8F functions that receive verification protocol (quality gate)
+_VERIFICATION_FUNCTIONS = {"GOVERN"}
+
+# Compaction and memory extract thresholds
+COMPACT_TRIGGER_RATIO = 0.85  # trigger compaction at 85% context budget
+MEMORY_EXTRACT_INTERVAL = 5   # extract memories every N builder executions
+_execution_counter = 0
+
+
+# ---------------------------------------------------------------------------
+# Wire 6: Context Compaction Trigger
+# ---------------------------------------------------------------------------
+
+
+def check_compaction_needed(prompt_text: str, max_tokens: int = 8192) -> dict:
+    """Check if context compaction should be triggered.
+
+    Returns: {"needed": bool, "usage_ratio": float, "skill_body": str}
+    The caller decides whether to compact; this just checks and provides the skill.
+    """
+    try:
+        from cex_token_budget import count_tokens
+        current_tokens = count_tokens(prompt_text)
+    except ImportError:
+        # Fallback: ~1.3 tokens per word
+        current_tokens = int(len(prompt_text.split()) * 1.3)
+
+    ratio = current_tokens / max_tokens if max_tokens > 0 else 0
+
+    result = {"needed": False, "usage_ratio": ratio, "skill_body": ""}
+
+    if ratio >= COMPACT_TRIGGER_RATIO:
+        result["needed"] = True
+        layers = _get_prompt_layers()
+        if layers:
+            result["skill_body"] = layers.get("p04_skill_compact")
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Wire 7: Memory Extract Trigger
+# ---------------------------------------------------------------------------
+
+
+def check_memory_extract_needed() -> dict:
+    """Check if background memory extraction should run.
+
+    Returns: {"needed": bool, "skill_body": str, "counter": int}
+    Called after each builder execution. Triggers every N executions.
+    """
+    global _execution_counter
+    _execution_counter += 1
+
+    result = {
+        "needed": False,
+        "skill_body": "",
+        "counter": _execution_counter,
+    }
+
+    if _execution_counter % MEMORY_EXTRACT_INTERVAL == 0:
+        result["needed"] = True
+        layers = _get_prompt_layers()
+        if layers:
+            result["skill_body"] = layers.get("p04_skill_memory_extract")
+
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -117,14 +209,39 @@ def _iso_sort_key(filepath: Path) -> int:
 def load_builder_context(builder_id: str, builder_dir: Path = BUILDER_DIR) -> str:
     """Load builder spec files (bld_*.md) for a builder.
 
-    Scans archetypes/builders/{builder-id}/ for .md files.
-    Budget: 30KB max. Files loaded in priority order.
+    Strategy: Try SkillLoader first (handles sort, shared skills, conditionals).
+    Fallback: manual glob (original behavior).
+    Budget: 30KB max.
     """
+    # --- T01: SkillLoader path (preferred) ---
+    try:
+        from cex_skill_loader import SkillLoader
+        sl = SkillLoader()
+        kind = builder_id.replace("-builder", "")
+        isos = sl.load_builder(kind)
+        if isos:
+            sections = []
+            total_bytes = 0
+            for iso in isos:
+                block = iso.get_prompt()
+                block_bytes = len(block.encode("utf-8"))
+                if total_bytes + block_bytes > BUILDER_MAX_BYTES:
+                    sections.append(f"\n[... truncated at {BUILDER_MAX_BYTES // 1024}KB budget ...]")
+                    break
+                sections.append(f"### {iso.name}")
+                sections.append(block.strip())
+                sections.append("")
+                total_bytes += block_bytes
+            if sections:
+                return "\n".join(sections)
+    except Exception:
+        pass  # D1: graceful fallback
+
+    # --- Fallback: manual glob (original) ---
     builder_path = builder_dir / builder_id
     if not builder_path.exists():
         return f"[Builder '{builder_id}' not found at {builder_path}]"
 
-    # Collect .md files (try bld_* pattern first, then any .md)
     md_files = sorted(builder_path.glob("bld_*.md"), key=_iso_sort_key)
     if not md_files:
         md_files = sorted(builder_path.glob("*.md"), key=_iso_sort_key)
@@ -160,7 +277,10 @@ def load_builder_context(builder_id: str, builder_dir: Path = BUILDER_DIR) -> st
 
 
 def _load_builder_memories(builder_id: str, intent: str) -> str:
-    """Load relevant memories for a builder. Returns formatted injection or empty string."""
+    """Load relevant memories for a builder.
+
+    T07: Enriched with memory type labels + freshness caveats.
+    """
     try:
         from cex_memory_select import select_relevant_memories, format_memory_injection
         from cex_memory import scan_builder_memories
@@ -179,28 +299,49 @@ def _load_builder_memories(builder_id: str, intent: str) -> str:
         if not selected:
             return ""
 
-        return format_memory_injection(selected, total_observations=len(headers))
+        base = format_memory_injection(selected, total_observations=len(headers))
+
+        # --- T07: Enrich with type + freshness ---
+        try:
+            from cex_memory_age import memory_freshness_tag
+            from cex_memory_types import parse_memory_type
+            enrichments = []
+            for s in selected:
+                tags = []
+                if hasattr(s, "type") and s.type:
+                    tags.append(f"type={s.type}")
+                if hasattr(s, "path") and s.path:
+                    import os
+                    try:
+                        tag = memory_freshness_tag(os.path.getmtime(s.path))
+                        tags.append(tag)
+                    except Exception:
+                        pass
+                if tags:
+                    enrichments.append(f"  [{', '.join(tags)}]")
+            if enrichments:
+                base += "\n" + "\n".join(enrichments)
+        except Exception:
+            pass  # enrichment is optional
+
+        return base
     except Exception:
         return ""
 
 
 def _load_relevant_kcs(intent: str, parsed: dict) -> str:
-    """Search Supabase pgvector for KCs relevant to the current intent.
+    """Load KCs relevant to the current intent via pure Python (local TF-IDF).
 
-    Uses two strategies:
-    1. feeds_kinds: find KCs that explicitly feed the target kind
-    2. semantic search: find KCs similar to the intent text
+    Uses two strategies (zero external dependencies):
+    1. feeds_kinds: find KCs that explicitly feed the target kind (motor KC library)
+    2. semantic search: TF-IDF similarity via cex_retriever (local index)
 
+    Falls back gracefully if retriever index not built.
     Returns formatted injection block or empty string.
     """
-    try:
-        from cex_kc_index import search_kcs_by_text, search_kcs_by_kind
-    except ImportError:
-        return ""
-
     kcs = []
 
-    # Strategy 1: KCs that feed this kind (explicit link)
+    # Strategy 1: KCs that feed this kind (explicit link via motor KC library)
     target_kind = ""
     if isinstance(parsed.get("object"), list):
         target_kind = parsed["object"][0] if parsed["object"] else ""
@@ -210,19 +351,42 @@ def _load_relevant_kcs(intent: str, parsed: dict) -> str:
 
     if target_kind:
         try:
-            kind_kcs = search_kcs_by_kind(target_kind, top_k=3)
-            for kc in kind_kcs:
-                kcs.append(kc)
+            from cex_8f_motor import load_kc_library, lookup_kcs_for_kind
+            kc_library = load_kc_library()
+            pillar = parsed.get("pillar", "P01")
+            matches = lookup_kcs_for_kind(kc_library, target_kind, pillar)
+            for m in matches[:3]:
+                kcs.append({
+                    "id": m.get("id", ""),
+                    "title": m.get("title", m.get("id", "?")),
+                    "file_path": m.get("path", ""),
+                    "domain": "",
+                    "tldr": "",
+                    "similarity": 0,
+                })
         except Exception:
             pass
 
-    # Strategy 2: Semantic search by intent
+    # Strategy 2: TF-IDF semantic search (pure Python, no external services)
     try:
-        sem_kcs = search_kcs_by_text(intent, top_k=3)
-        seen_ids = {kc["id"] for kc in kcs}
-        for kc in sem_kcs:
-            if kc["id"] not in seen_ids:
-                kcs.append(kc)
+        from cex_retriever import load_index as load_retriever_index
+        from cex_retriever import find_similar
+        idx = load_retriever_index()
+        if idx:
+            results = find_similar(intent, index=idx, top_k=3)
+            seen_ids = {kc["id"] for kc in kcs}
+            for r in results:
+                rid = r.get("id", "")
+                if rid and rid not in seen_ids:
+                    seen_ids.add(rid)
+                    kcs.append({
+                        "id": rid,
+                        "title": r.get("title", r.get("id", "?")),
+                        "file_path": r.get("path", ""),
+                        "domain": r.get("kind", ""),
+                        "tldr": r.get("tldr", ""),
+                        "similarity": r.get("score", 0),
+                    })
     except Exception:
         pass
 
@@ -230,7 +394,7 @@ def _load_relevant_kcs(intent: str, parsed: dict) -> str:
         return ""
 
     # Format injection block (cap at 5 KCs, ~2K tokens total)
-    parts = ["## Relevant Knowledge Cards (auto-retrieved from pgvector)"]
+    parts = ["## Relevant Knowledge Cards (auto-retrieved, pure Python TF-IDF)"]
     parts.append("Use these as domain context. Cite specific facts when relevant.\n")
 
     for kc in kcs[:5]:
@@ -283,8 +447,69 @@ def compose_prompt(
     3. Relevant prior outputs (from earlier pipeline steps)
     4. Retry feedback (if retrying after quality gate failure)
     5. Execution instructions
+    6. Sin lens injection (identity lens from nucleus_sins.yaml)
     """
     parts = []
+
+    # --- Sin Lens Injection (from nucleus_sins.yaml) ---
+    try:
+        from cex_theme import get_prompt_injection
+        nucleus = os.environ.get("CEX_NUCLEUS", "n03").lower()
+        sin_injection = get_prompt_injection(nucleus)
+        if sin_injection:
+            parts.append("## Your Identity Lens")
+            parts.append(sin_injection)
+            parts.append("")
+    except Exception:
+        pass  # sin injection is additive, never blocks
+
+    # --- Prompt Layers (Wire 1-4: identity + behavioral + action + guardrails) ---
+    layers = _get_prompt_layers()
+    if layers:
+        # Wire 1: Core identity (loaded FIRST, before everything)
+        identity_body = layers.get("p03_sp_cex_core_identity")
+        if identity_body:
+            # Resolve {{INCLUDE}} directives
+            for inc_id in ["p03_ins_doing_tasks", "p03_ins_action_protocol"]:
+                inc_body = layers.get(inc_id)
+                if inc_body:
+                    identity_body = identity_body.replace(
+                        "{{INCLUDE " + inc_id + "}}", inc_body
+                    )
+            # Strip remaining unresolved {{...}} placeholders
+            identity_body = re.sub(r"\{\{[A-Z_]+\}\}", "[runtime]", identity_body)
+            parts.append("## CEX Agent Identity")
+            parts.append(identity_body)
+            parts.append("")
+
+        # Wire 4: Guardrails (for write-capable functions)
+        if function_name.upper() in _GUARDRAIL_FUNCTIONS:
+            guardrail_ids = layers.by_kind("guardrail")
+            if guardrail_ids:
+                parts.append("## Safety Guardrails (auto-injected)")
+                for gid in guardrail_ids:
+                    g_body = layers.get(gid)
+                    g_meta = layers.get_meta(gid)
+                    if g_body:
+                        title = g_meta.get("title", gid)
+                        severity = g_meta.get("severity", "?")
+                        enforcement = g_meta.get("enforcement", "?")
+                        parts.append(f"### {title} [severity={severity}, enforcement={enforcement}]")
+                        parts.append(g_body)
+                        parts.append("")
+
+        # Wire 5: Verification protocol (for GOVERN function)
+        if function_name.upper() in _VERIFICATION_FUNCTIONS:
+            verify_body = layers.get("p03_sp_verification_agent")
+            if verify_body:
+                parts.append("## Verification Protocol (F7 GOVERN)")
+                parts.append(verify_body)
+                parts.append("")
+            verify_skill = layers.get("p04_skill_verify")
+            if verify_skill:
+                parts.append("## Verification Skill")
+                parts.append(verify_skill)
+                parts.append("")
 
     # --- Header ---
     parts.append(f"# CEX Crew Runner -- Builder Execution")
@@ -346,6 +571,12 @@ def compose_prompt(
     if memory_block:
         parts.append(memory_block)
 
+    # --- F5 Auto-Retrieved Context (tool execution outputs) ---
+    if hasattr(state, "tool_results") and state.tool_results.get("enrichment_text"):
+        parts.append("## Auto-Retrieved Context (F5 CALL)")
+        parts.append(state.tool_results["enrichment_text"])
+        parts.append("")
+
     # --- Prior Outputs ---
     # Only inject outputs from completed earlier steps (not current function)
     prior = {
@@ -358,7 +589,7 @@ def compose_prompt(
     if prior:
         parts.append("## Prior Builder Outputs")
         parts.append("These outputs were produced by earlier pipeline steps.")
-        parts.append("Use them as context — do not repeat their work.")
+        parts.append("Use them as context -- do not repeat their work.")
         parts.append("")
         for bid, out in prior.items():
             parts.append(f"### {bid} (score: {out.quality_score:.1f})")
@@ -426,13 +657,41 @@ class CrewRunner:
         return "inline"  # default to inline
 
     def _resolve_model(self, builder: dict) -> tuple[str, int]:
-        """Resolve LLM model and max_tokens from builder effort config.
+        """Resolve LLM model and max_tokens. Builder-explicit > Router > default.
+
+        Priority:
+          1. Builder-explicit model (set in plan by motor)
+          2. Router nucleus config (reads nucleus_models.yaml)
+          3. LLM_MODEL constant (fallback)
 
         Returns: (model_id, max_tokens)
         """
-        model = builder.get("model", LLM_MODEL)
-        max_tokens = builder.get("model_max_tokens", LLM_MAX_TOKENS)
-        return model, max_tokens
+        # --- 1. Builder-explicit model (highest priority) ---
+        if builder.get("model"):
+            return builder["model"], builder.get("model_max_tokens", LLM_MAX_TOKENS)
+
+        # --- 2. Router path (CexRouter + nucleus_models.yaml) ---
+        try:
+            from cex_router import CexRouter, get_router, resolve_model_for
+            nucleus = os.environ.get("CEX_NUCLEUS", "n03")
+            # Try CexRouter provider-aware routing first
+            router = get_router()
+            if isinstance(router, CexRouter) and router.providers:
+                try:
+                    route = router.resolve_nucleus(nucleus)
+                    if route.get("model"):
+                        return route["model"], LLM_MAX_TOKENS
+                except RuntimeError:
+                    pass  # No healthy provider -- fall through to static
+            # Fallback: static nucleus_models.yaml resolution
+            model = resolve_model_for(nucleus, fallback="")
+            if model:
+                return model, LLM_MAX_TOKENS
+        except Exception:
+            pass  # D1: graceful fallback
+
+        # --- 3. Default constant ---
+        return LLM_MODEL, LLM_MAX_TOKENS
 
     def _check_max_turns(self, builder_id: str, state: RunState) -> tuple[bool, int]:
         """Check if builder has exceeded max_turns. Returns (allowed, turns_used)."""
@@ -483,7 +742,7 @@ class CrewRunner:
             content = None
             try:
                 result = subprocess.run(
-                    ["claude", "-p", "--model", model, "--no-chrome"],
+                    ["pi", "-p", "--model", "anthropic/" + model],
                     input=prompt, capture_output=True, text=True,
                     timeout=120, cwd=str(ROOT), encoding="utf-8",
                 )
@@ -530,7 +789,7 @@ class CrewRunner:
                 status="complete",
             )
         except FileNotFoundError:
-            # claude CLI not in PATH — dry-run fallback
+            # claude CLI not in PATH -- dry-run fallback
             fork_file.write_text(f"[FORK-DRY-RUN] {bid}\n{prompt[:500]}", encoding="utf-8")
             return BuilderOutput(
                 builder_id=bid,
@@ -613,7 +872,7 @@ class CrewRunner:
 
         # Verify claude CLI is available
         try:
-            subprocess.run(["claude", "--version"], capture_output=True, timeout=5)
+            subprocess.run(["pi", "--version"], capture_output=True, timeout=5)
         except (FileNotFoundError, subprocess.TimeoutExpired):
             print("WARN: claude CLI not found. Falling back to dry-run.", file=sys.stderr)
             return self.execute_step_dry_run(step, state, output_dir)
@@ -674,12 +933,12 @@ class CrewRunner:
                     import re
 
                     cli_result = subprocess.run(
-                        ["claude", "-p", "--model", model, "--no-chrome"],
+                        ["pi", "-p", "--model", "anthropic/" + model],
                         input=prompt, capture_output=True, text=True,
                         timeout=120, cwd=str(ROOT), encoding="utf-8",
                     )
                     if cli_result.returncode != 0:
-                        raise RuntimeError(f"claude -p exit {cli_result.returncode}")
+                        raise RuntimeError(f"pi -p exit {cli_result.returncode}")
                     content = cli_result.stdout
 
                     # Extract self-assessed quality score
@@ -749,6 +1008,26 @@ class CrewRunner:
                     f"  [{fn_name}] {bid} -> {fname} "
                     f"(score: {out.quality_score:.1f}, "
                     f"status: {out.status})"
+                )
+
+            # Wire 6: Check if context compaction is needed
+            prompt_so_far = " ".join(
+                o.content for o in state.outputs.values()
+                if o.content and not o.content.startswith("[")
+            )
+            compact_check = check_compaction_needed(prompt_so_far)
+            if compact_check["needed"]:
+                state.warnings.append(
+                    f"[COMPACT] Context at {compact_check['usage_ratio']:.0%} capacity. "
+                    f"Compaction skill available: p04_skill_compact"
+                )
+
+            # Wire 7: Check if memory extraction should run
+            mem_check = check_memory_extract_needed()
+            if mem_check["needed"]:
+                state.warnings.append(
+                    f"[MEMORY] Extraction trigger at execution #{mem_check['counter']}. "
+                    f"Memory skill available: p04_skill_memory_extract"
                 )
 
             results.append(out)
@@ -937,7 +1216,7 @@ Examples:
     # Load plan
     plan_path = Path(args.plan)
     if not plan_path.exists():
-        print(f"ERRO: Plan file not found: {plan_path}", file=sys.stderr)
+        print(f"ERROR: Plan file not found: {plan_path}", file=sys.stderr)
         sys.exit(1)
 
     with open(plan_path, "r", encoding="utf-8") as f:
@@ -946,7 +1225,7 @@ Examples:
     # Validate plan has expected structure
     if "functions" not in plan:
         print(
-            "ERRO: Plan JSON missing 'functions' key. Is this a Motor 8F output?", file=sys.stderr
+            "ERROR: Plan JSON missing 'functions' key. Is this a Motor 8F output?", file=sys.stderr
         )
         sys.exit(1)
 

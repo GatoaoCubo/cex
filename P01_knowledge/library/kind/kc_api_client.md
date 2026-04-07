@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: api_client
-quality: 8.9
+quality: 9.1
 tags: [api_client, P04, CALL, kind-kc]
 tldr: "Typed client wrapping a REST/GraphQL/gRPC endpoint for deterministic external service calls"
 when_to_use: "Building, reviewing, or reasoning about api_client artifacts"
 keywords: [api, rest-client, typed-wrapper]
 feeds_kinds: [api_client]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # API Client

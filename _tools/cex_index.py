@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX SQLite Indexer — scans all .md/.yaml, parses frontmatter + wikilinks, stores in .cex/index.db"""
+# -*- coding: utf-8 -*-
+"""CEX SQLite Indexer -- scans all .md/.yaml, parses frontmatter + wikilinks, stores in .cex/index.db"""
 
 import argparse
 import json
@@ -107,7 +108,7 @@ def index_file(filepath: Path, root: Path) -> tuple[dict, list[tuple]]:
     keywords = fm.get("keywords", [])
     if isinstance(keywords, str):
         keywords = [k.strip() for k in keywords.split(",")]
-    # A2: fallback — extract keywords from body ## Routing section if frontmatter empty
+    # A2: fallback -- extract keywords from body ## Routing section if frontmatter empty
     if not keywords and "bld_manifest" in rel:
         body_match = BODY_KEYWORDS_RE.search(text)
         if body_match:

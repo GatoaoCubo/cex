@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for session_state - SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
+quality: 9.1
+title: "Schema Session State"
+version: "1.0.0"
+author: n03_builder
+tags: [session_state, builder, examples]
+tldr: "Golden and anti-examples for session state construction, demonstrating ideal structure and common pitfalls."
+domain: "session state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: session_state
@@ -27,7 +37,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
 | session_id | string | YES | - | Unique session identifier |
-| agent | string | YES | - | Agent or agent_node that owns this state |
+| agent | string | YES | - | Agent or agent_group that owns this state |
 | status | enum (`active`, `paused`, `completed`, `aborted`) | YES | - | Current session lifecycle status |
 | started_at | string, ISO 8601 | YES | - | Session start timestamp |
 | domain | string | YES | - | Domain this artifact belongs to |
@@ -67,7 +77,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 `session_state` IS NOT:
 - `runtime_state`: persistent state carried across sessions, accumulated routing decisions
 - `learning_record`: accumulated learning from outcomes, patterns over time
-- `brain_index`: search index configuration (BM25, FAISS)
+- `knowledge_index`: search index configuration (BM25, FAISS)
 - `axiom`: immutable fundamental rule
 ## ID Pattern
 Regex: `^p10_ss_[a-z][a-z0-9_]+$`

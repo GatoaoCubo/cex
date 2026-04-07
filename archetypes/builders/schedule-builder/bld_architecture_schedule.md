@@ -4,6 +4,16 @@ id: bld_architecture_schedule
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of schedule — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Schedule"
+version: "1.0.0"
+author: n03_builder
+tags: [schedule, builder, examples]
+tldr: "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls."
+domain: "schedule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

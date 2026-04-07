@@ -12,10 +12,11 @@ target_kinds: [knowledge_card, chunk_strategy, embedding_config, rag_source, ret
 linked_artifacts:
   primary:
     - n04_sr_knowledge
-quality: 8.9
+quality: 9.1
 tags: [quality-gate, n04, knowledge, evals, p07]
 tldr: "Defines the 9 quality gates (5 Hard, 4 Soft) for all N04-domain knowledge artifacts, ensuring structural integrity, atomicity, and discoverability."
-density_score: 0.9
+density_score: 0.92
+domain: knowledge
 ---
 
 # N04 Knowledge Artifact Quality Gate
@@ -35,7 +36,7 @@ These gates are executed automatically on commit or via `cex_doctor.py`. Failure
 | **H2** | **Valid Kind & Pillar** | The `kind` must be a registered CEX kind, and the `pillar` must be a valid P-level pillar from the taxonomy. | Fully Automated |
 | **H3** | **Unique ID** | The `id` field must be unique across all artifacts in the CEX ecosystem. | Fully Automated |
 | **H4** | **Valid Taxonomy Tags** | All entries in the `tags` list must be valid, registered tags within the CEX master taxonomy. | Fully Automated |
-| **H5** | **No Placeholder Content**| Key fields like `tldr` and `title` must not contain generic placeholder text (e.g., "...", "TBD", "Lorem Ipsum"). | Fully Automated |
+| **H5** | **No Placeholder Content**| Key fields like `tldr` and `title` must not contain generic placeholder text (e.g., "...", "Pending finalization", "Lorem Ipsum"). | Fully Automated |
 
 ## 3. Soft Gates: Semantic & Relational Quality
 These gates are evaluated by an LLM-assisted scorer using the `n04_sr_knowledge` rubric. The combined weighted score determines the final quality level.
@@ -57,3 +58,20 @@ These gates are evaluated by an LLM-assisted scorer using the `n04_sr_knowledge`
      - `7.5 <= score < 9.0`: Artifact is marked for review.
      - `score < 7.5`: Commit is rejected.
 - **Manual Execution**: The gate can be run manually on any file or directory using `python _tools/cex_doctor.py --gate n04_qg_knowledge`.
+
+## Actions
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish as exemplar |
+| >= 8.0 | PUBLISH | Ready for runtime |
+| >= 7.0 | REVIEW | Flag for review |
+| < 7.0  | REJECT | Rework required |
+
+## Bypass
+| Field | Value |
+|-------|-------|
+| conditions | Experimental knowledge artifact under active A/B testing |
+| approver | Nucleus lead (written approval required) |
+| audit_trail | Log in records/audits/ with bypass reason and timestamp |
+| expiry | 48h — must pass all gates before expiry |
+| never_bypass | H01 (YAML parse), H05 (quality null) |

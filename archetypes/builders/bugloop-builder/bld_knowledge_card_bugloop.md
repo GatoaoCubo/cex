@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for bugloop production — automated correction cycles
 sources: Google SRE Book ch.13, DORA MTTR metric, chaos engineering principles
+quality: 9.1
+title: "Knowledge Card Bugloop"
+version: "1.0.0"
+author: n03_builder
+tags: [bugloop, builder, examples]
+tldr: "Golden and anti-examples for bugloop construction, demonstrating ideal structure and common pitfalls."
+domain: "bugloop construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: bugloop

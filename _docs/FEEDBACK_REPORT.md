@@ -144,7 +144,7 @@
 | P10_memory/examples/ex_axiom_lifecycle_hooks.md | 9.0 | 0.74 | 1d | axiom |
 | P10_memory/examples/ex_axiom_privacy_controls.md | 9.0 | 0.72 | 1d | axiom |
 | P10_memory/examples/ex_axiom_session_compression.md | 9.0 | 0.76 | 1d | axiom |
-| P10_memory/examples/ex_brain_index_codexa_brain.md | 9.0 | 0.78 | 1d | brain_index |
+| P10_memory/examples/ex_knowledge_index_codexa_brain.md | 9.0 | 0.78 | 1d | knowledge_index |
 | P10_memory/examples/ex_learning_record_continuous_batching.m | 9.0 | 0.67 | 1d | learning_record |
 | P10_memory/examples/ex_session_state_director_dispatch.md | 9.0 | 0.89 | 1d | session_state |
 | P11_feedback/examples/ex_bugloop_director_execution.md | 9.0 | 0.73 | 1d | bugloop |
@@ -372,7 +372,7 @@
 | P01_knowledge/library/platform/kc_ruff_uv.md | 8.8 | 0.78 | 0d | knowledge_card |
 | P04_tools/examples/ex_cli_tool_cex_doctor.md | null | 0.78 | 1d | cli_tool |
 | P04_tools/examples/ex_cli_tool_fix_frontmatter.md | null | 0.78 | 1d | cli_tool |
-| P10_memory/examples/ex_brain_index_codexa_brain.md | 9.0 | 0.78 | 1d | brain_index |
+| P10_memory/examples/ex_knowledge_index_codexa_brain.md | 9.0 | 0.78 | 1d | knowledge_index |
 | P10_memory/README.md | null | 0.78 | 1d | - |
 | N02_marketing/architecture/agent_card_marketing.md | 8.9 | 0.78 | 0d | agent_card |
 | N02_marketing/quality/scoring_rubric_marketing.md | 9.0 | 0.78 | 0d | scoring_rubric |

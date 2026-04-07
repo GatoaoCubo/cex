@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for daemon production — persistent background process specification
 sources: systemd.service(5), daemon(7) Linux conventions, 12-Factor App process model
+quality: 9.1
+title: "Knowledge Card Daemon"
+version: "1.0.0"
+author: n03_builder
+tags: [daemon, builder, examples]
+tldr: "Golden and anti-examples for daemon construction, demonstrating ideal structure and common pitfalls."
+domain: "daemon construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: daemon

@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "URL validation, crawl scheduling, freshness policies, reliability scoring, RAG pipeline integration, source authority assessment | Does NOT: extract or distill content (knowledge_card), provide domain background prose (context_doc), configure embedding models (embedding_config)"
 domain: rag_source
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, rag_source, P01]
 safety_level: standard
 tools_listed: false
@@ -48,7 +48,7 @@ Deliver a `rag_source` artifact with this structure:
 2. `## Source` — one-line description of what this URL indexes
 3. `## Freshness` — crawl schedule and staleness threshold
 4. `## Reliability` — score rationale (authority, coverage, stability)
-5. `## Exclusions` — URL patterns to skip during crawl (login walls, PDFs, pagination)
+5. `## Exclusions` — URL patterns to skip during crawl (login walls, PDFs, pagetion)
 ## Constraints
 - Boundary: I produce `rag_source` pointer records (P01) only
 - I do NOT produce: `knowledge_card` (content), `context_doc` (background prose), `embedding_config` (vector config)

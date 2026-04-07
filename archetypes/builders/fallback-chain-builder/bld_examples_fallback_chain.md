@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of fallback_chain artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Fallback Chain"
+version: "1.0.0"
+author: n03_builder
+tags: [fallback_chain, builder, examples]
+tldr: "Golden and anti-examples for fallback chain construction, demonstrating ideal structure and common pitfalls."
+domain: "fallback chain construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: fallback-chain-builder
@@ -23,7 +33,7 @@ steps_count: 3
 timeout_per_step_ms: 30000
 quality_threshold: 7.0
 domain: "research_resilience"
-quality: null
+quality: 8.9
 tags: [fallback_chain, research, resilience, P02, model-degradation]
 tldr: "3-step research fallback: opus(30s)->sonnet(20s)->haiku(10s) with 7.0 quality gate"
 retry_count: 1

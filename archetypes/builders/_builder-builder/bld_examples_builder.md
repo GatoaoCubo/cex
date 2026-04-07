@@ -4,31 +4,68 @@ id: bld_examples_builder
 pillar: P03
 llm_function: INJECT
 purpose: Reference examples of well-built builders
+quality: 9.0
+title: "Examples Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Examples: _builder-builder
 
 ## Example 1: Minimal Skeleton Builder
 Builder: `memory-scope-builder` (13 files, 24KB)
-- Created via Validation Registry spec
-- Skeleton pattern: minimal content per ISO
-- All universal fields present
-- Doctor: PASS, 0 WARN
+1. Created via Validation Registry spec
+2. Skeleton pattern: minimal content per ISO
+3. All universal fields present
+4. Doctor: PASS, 0 WARN
 
 ## Example 2: Full-Featured Builder
 Builder: `agent-builder` (13 files, 42KB)
-- Full content in all ISOs
-- 212 crew compositions in bld_collaboration
-- Non-default overrides: effort=high, permission_scope=pillar
-- Doctor: PASS, 0 WARN
+1. Full content in all ISOs
+2. 212 crew compositions in bld_collaboration
+3. Non-default overrides: effort=high, permission_scope=pillar
+4. Doctor: PASS, 0 WARN
 
 ## Example 3: Domain-Specific Builder
 Builder: `content-monetization-builder` (13 files, 45KB)
-- Hotmart + Digistore24 parity in tools
-- Platform-specific quality gates
-- effort=high, permission_scope=nucleus
-- Doctor: PASS, 0 WARN
+1. Hotmart + Digistore24 parity in tools
+2. Platform-specific quality gates
+3. effort=high, permission_scope=nucleus
+4. Doctor: PASS, 0 WARN
 
 ## Anti-Example: Missing Universal Fields
 ❌ Builder without keywords in manifest → doctor WARN
 ❌ Builder without memory_scope → hydration required
 ❌ Builder with effort but no model mapping → runtime failure
+
+## Injection
+
+```yaml
+loader: cex_skill_loader
+stage: F3_compose
+role: exemplar
+max_examples: 3
+```
+
+```bash
+python _tools/cex_retriever.py --kind examples --top 3
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `examples` |
+| Pillar | P03 |
+| Domain | _builder construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

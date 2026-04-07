@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: path_config
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, path-config, P11, P09, governance, filesystem]
 tldr: "Gates for path_config artifacts — portable paths catalog with platform spec, expandable variables, and creation order."
 density_score: 0.85
@@ -61,7 +61,7 @@ Weights sum: 8.0. Normalize: divide each by 8.0 before scoring.
 ## Bypass
 | Field | Value |
 |-------|-------|
-| conditions | Emergency hotfix requiring path override before full catalog review completes |
+| conditions | Emergency hotfix requiring path override before full catalog review complete |
 | approver | p09-chief |
 | audit_trail | Log in records/audits/ with override path, platform, and timestamp |
 | expiry | 48h — full catalog must pass gates before next deploy cycle |

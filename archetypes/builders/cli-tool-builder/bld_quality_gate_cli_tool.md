@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "command-line tool definition — point-in-time executables with declared commands, flags, and exit codes"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, cli-tool, P04, command-line, exit-codes, output-format]
 tldr: "Pass/fail gate for cli_tool artifacts: command completeness, exit code semantics, output format declaration, and flag documentation."
 density_score: 0.90
@@ -34,7 +34,7 @@ All must pass (AND logic). Any single failure = REJECT.
 | H06 | All required fields present | Missing `commands`, `output_format`, or `exit_codes` |
 | H07 | At least one command defined | `commands: []` or commands field absent |
 | H08 | Exit codes include 0 (success) and at least one error code | Only exit code 0 defined; no failure paths documented |
-| H09 | Output format is one of: text, json, table, yaml | `output_format: custom` or unrecognized value |
+| H09 | Output format is one of: text, json, table, yaml | `output_format: costm` or unrecognized value |
 | H10 | Tool is non-persistent | Tool runs and terminates; no daemon or background process behavior documented |
 ## SOFT Scoring
 Weights sum to 100%.
@@ -51,7 +51,7 @@ Weights sum to 100%.
 | Idempotency declaration | 0.5 | Commands that mutate state declare whether re-run is safe |
 | Boundary clarity | 1.0 | Explicitly not a daemon, skill, or plugin — one-shot execution contract stated |
 | Domain specificity | 1.0 | Commands, flags, and outputs specific to the declared domain problem |
-| Testability | 1.0 | Each command testable with known input; expected output documented |
+| Testability | 1.0 | Each command testsble with known input; expected output documented |
 ## Actions
 | Score | Tier | Action |
 |---|---|---|

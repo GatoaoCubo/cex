@@ -1,6 +1,17 @@
 ---
+id: index
+kind: context_doc
+pillar: P08
 title: CEX v10.0.0
 tags: [cex, index]
+quality: 9.1
+version: "1.0.0"
+author: n03_builder
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # CEX v10.0.0
@@ -63,3 +74,27 @@ F8 COLLABORATE ← F7 GOVERN ← F6 PRODUCE ← F5 CALL
 ---
 
 [[CEX_ARCHITECTURE_MAP]] · [[LLM_PIPELINE]] · [[CLAUDE]]
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## System Context
+
+This artifact participates in the CEX typed knowledge system, a fractal
+architecture with 12 pillars, 8 nuclei, and 125 specialized builders.
+Artifacts flow through the 8F pipeline: Focus, Frame, Fetch, Filter,
+Format, Forge, Furnish, and Feedback.
+
+Quality is enforced via 3-layer scoring: structural (30%), rubric (30%),
+and semantic (40%). All artifacts target quality >= 9.0.
+
+| Layer | Weight | Method |
+|-------|--------|--------|
+| Structural | 30% | Automated count-based checks |
+| Rubric | 30% | Quality gate dimension scoring |
+| Semantic | 40% | LLM evaluation (when L1+L2 >= 8.5) |

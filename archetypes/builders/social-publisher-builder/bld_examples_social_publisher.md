@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of social publisher configs
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Social Publisher"
+version: "1.0.0"
+author: n03_builder
+tags: [social_publisher, builder, examples]
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+domain: "social publisher construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: social-publisher-builder
@@ -19,7 +29,7 @@ identity:
   nicho: pet
   tom: casual, acolhedor
   persona: Ro
-  bio: "Design minimalista para gatos exigentes"
+  bio: "Design minimalist para gatos exigentes"
 platforms: [instagram, facebook]
 schedule:
   timezone: America/Sao_Paulo
@@ -49,7 +59,7 @@ publisher:
   retry: { max: 3, backoff: exponential, base_seconds: 30 }
 hashtags:
   brand: ["gato3", "gatoaocubo"]
-  niche: ["produtosparagatos", "designminimalista", "petlovers"]
+  niche: ["produtosparagatos", "designminimalist", "petlovers"]
   max_per_post: 10
 notifications:
   discord_webhook_env: DISCORD_WEBHOOK_URL
@@ -62,7 +72,7 @@ WHY GOOD: Zero hardcoded secrets, all company data in config, percentages sum to
 COMPANY = "GATO3"
 API_KEY = "sk-abc123..."  # LEAKED SECRET
 def post_to_instagram():
-    caption = f"Nova colecao {COMPANY}! 🐱"  # hardcoded template
+    caption = f"Nova collection {COMPANY}! 🐱"  # hardcoded template
     ayrshare.post(caption, api_key=API_KEY)   # no retry
 ```
 WHY BAD: Hardcoded name, plaintext API key, no retry, no rotation, single platform, no quality gate.
@@ -90,3 +100,25 @@ publisher:
   retry: { max: 3, backoff: exponential, base_seconds: 60 }
 ```
 WHY GOOD: Different niche, different platforms, different API — same config schema works.
+
+## Exemplar Requirements
+
+1. Score 9.0+ to qualify as few-shot reference
+2. Demonstrate ideal structure for this artifact kind
+3. Populate all frontmatter fields with realistic values
+4. Use domain-specific content not generic placeholders
+5. Enable retrieval via tags and TF-IDF matching
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `examples` |
+| Pillar | P07 |
+| Domain | social publisher construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

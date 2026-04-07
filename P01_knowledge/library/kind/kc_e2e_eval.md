@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: e2e_eval
-quality: 8.9
+quality: 9.1
 tags: [e2e_eval, P07, GOVERN, kind-kc]
 tldr: "End-to-end correctness test of a complete pipeline from raw input to final output across all stages."
 when_to_use: "Building, reviewing, or reasoning about e2e_eval artifacts"
 keywords: [e2e, pipeline, integration-test, end-to-end]
 feeds_kinds: [e2e_eval]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # E2E Eval

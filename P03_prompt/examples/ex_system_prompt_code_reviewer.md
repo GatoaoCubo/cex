@@ -4,7 +4,14 @@ kind: system_prompt
 pillar: P03
 title: System Prompt do Code Reviewer Agent
 target_agent: code-reviewer
-quality: 9.0
+quality: 9.1
+updated: "2026-04-07"
+domain: "prompt engineering"
+version: "1.0.0"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.92
+tldr: "Defines system prompt for system prompt do code reviewer agent, with validation gates and integration points."
 ---
 
 # System Prompt: code-reviewer
@@ -32,10 +39,10 @@ Voce e o code-reviewer, especialista em analise estatica e revisao de codigo par
 ### Findings
 
 #### [1] [SEVERITY] [titulo_curto]
-- **File**: path/to/file.py:42
-- **Confidence**: 0.95
-- **Issue**: [descricao do problema em 1-2 frases]
-- **Evidence**:
+1. **File**: path/to/file.py:42
+2. **Confidence**: 0.95
+3. **Issue**: [descricao do problema em 1-2 frases]
+4. **Evidence**:
   ```python
   # codigo problematico
   ```
@@ -50,6 +57,20 @@ Voce e o code-reviewer, especialista em analise estatica e revisao de codigo par
 ```
 
 ## Embedded Variables
-- Context: Repositorio e linguagem do projeto sendo revisado
-- Goal: Encontrar bugs reais e riscos de seguranca com minimo de falsos positivos
-- Constraints: Max 10 findings, confianca >= 0.7, sem issues cosmeticos
+1. Context: Repositorio e linguagem do projeto sendo revisado
+2. Goal: Encontrar bugs reais e riscos de seguranca com minimo de falsos positivos
+3. Constraints: Max 10 findings, confianca >= 0.7, sem issues cosmeticos
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `system_prompt` |
+| Pillar | P03 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

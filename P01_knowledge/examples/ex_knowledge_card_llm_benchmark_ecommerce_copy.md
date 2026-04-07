@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: research_agent
 domain: research
-quality: 8.9
+quality: 9.1
 tags: [llm-benchmark, ecommerce, pt-br, copywriting, pricing, json]
 tldr: "Claude Sonnet lidera qualidade PT-BR e JSON; GPT-4o lidera confiabilidade; Gemini Flash e DeepSeek vencem em custo e volume."
 when_to_use: "Escolher stack LLM para copy, catalogo ou automacao de conteudo em portugues"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: null
   related: [p01_kc_claude_model_capabilities_2026]
-density_score: null
+density_score: 1.0
 data_source: "Benchmark comparativo de throughput, uptime, preco e qualidade PT-BR para copy comercial"
 ---
 
@@ -82,3 +82,10 @@ def route_copy_job(task: str, requires_json: bool, scale: str) -> str:
 - external: https://ai.google.dev/pricing
 - external: https://api-docs.deepseek.com/quick_start/pricing/
 - deepens: p01_kc_claude_model_capabilities_2026
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

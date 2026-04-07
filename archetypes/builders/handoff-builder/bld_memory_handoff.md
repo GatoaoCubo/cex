@@ -16,10 +16,13 @@ tags: [handoff, scope-fence, task-transfer, agent-boundary, atomic-steps]
 tldr: "Scope fences and atomic task steps are the two load-bearing elements of a reliable handoff document. Missing either causes scope drift or ambiguous completion."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [handoff, scope, permitted, prohibited, task-boundary, markdown, agent-transfer, signal, commit]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Handoff"
+density_score: 0.90
 ---
 ## Summary
 Handoff documents are the primary transfer interface between agents. Document quality determines whether the receiving agent executes correctly or drifts. The two highest-leverage structural elements are: (1) a SCOPE FENCE section with explicit permitted and prohibited paths, and (2) numbered atomic task steps each containing exactly one action verb.
@@ -38,7 +41,7 @@ Task steps must be idempotent where possible. State prerequisites as verifiable 
 - Absolute paths in scope fences — break when working directory differs.
 - Instructions inside CONTEXT — blurs background from directives.
 - More than 7 tasks without dependency ordering — wrong execution sequence.
-- Missing SIGNAL section — work completes silently, requires manual detection.
+- Missing SIGNAL section — work complete silently, requires manual detection.
 - Self-scoring quality field — scoring is external, set to null.
 ## Context
 Pattern emerged from execution logs where agents caused unintended side effects despite correct task intent. Root cause was consistently the absence of a boundary between what the agent should and should not touch. SCOPE FENCE as a first-class structural element resolved this without meaningfully increasing document length. The signal section was added after multiple silent-completion incidents in multi-wave batches.

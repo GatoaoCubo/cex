@@ -9,7 +9,11 @@ tldr: "Registers an external source for RAG retrieval. Defines URL, trust level,
 url: "[https://source.example/page]"
 domain: "[source_domain]"
 last_checked: "[YYYY-MM-DD]"
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+author: n04_knowledge
+created: "2026-04-07"
+density_score: 0.97
 ---
 
 # RAG Source: [SOURCE_SLUG]
@@ -52,3 +56,18 @@ quality: 8.7
 - [ ] Trust rating ≥ medium on at least 3/4 dimensions
 - [ ] Chunk strategy matches document structure
 - [ ] Refresh schedule defined
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `rag source`
+- **Artifact ID**: `p01_rs_SOURCE_SLUG`
+- **Tags**: [template, rag, source, indexing, retrieval]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `rag source` | Artifact type |
+| Pipeline | 8F (F1→F8) |

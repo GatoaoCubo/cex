@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for effort_profile production
 sources: Anthropic model documentation, Claude thinking budget specs, production dispatch configurations, cost/quality tradeoff analysis
+quality: 9.0
+title: "Knowledge Card Effort Profile"
+version: "1.0.0"
+author: n03_builder
+tags: [effort_profile, builder, examples]
+tldr: "Golden and anti-examples for effort profile construction, demonstrating ideal structure and common pitfalls."
+domain: "effort profile construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: effort_profile
@@ -34,7 +44,7 @@ Effort and thinking level configuration for builder execution — maps builder t
 | Ignoring cost | No cost tier awareness leads to budget blowout on batch runs |
 ## Application
 1. Identify the target builder and its typical task complexity
-2. Select appropriate model/thinking pattern from the table above
+2. Select apownte model/thinking pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 4096 bytes

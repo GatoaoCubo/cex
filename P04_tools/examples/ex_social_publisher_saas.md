@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
-quality: 8.7
+quality: 9.0
 tags: [social-publisher, example, saas, b2b, linkedin, twitter]
 tldr: "Config for B2B SaaS — LinkedIn+Twitter, CMS API catalog, thought-leadership content strategy with business-hours posting."
 density_score: 0.88
+updated: "2026-04-07"
 ---
 
 # Social Publisher — B2B SaaS
@@ -86,3 +87,18 @@ cron:
 - **Postiz (self-hosted)**: SaaS companies prefer self-hosted for data control and no vendor lock-in
 - **Twitter brevity**: 280 chars forces punchy, data-driven hooks ("We analyzed 10M events...")
 - **Weekend posting** (Sat/Sun reduced): B2B engagement drops 60% on weekends
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `cli tool`
+- **Artifact ID**: `ex_social_publisher_saas`
+- **Tags**: [social-publisher, example, saas, b2b, linkedin, twitter]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `cli tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |

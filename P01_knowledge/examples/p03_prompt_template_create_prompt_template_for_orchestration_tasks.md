@@ -51,7 +51,7 @@ variables:
 variable_syntax: "mustache"
 composable: false
 domain: orchestration
-quality: 9.0
+quality: 9.2
 tags: [orchestration, task-dispatch, coordination, nuclei]
 tldr: "Generates structured orchestration instructions for multi-nucleus task execution with clear goals and coordination."
 keywords: [orchestration, dispatch, nuclei, coordination, task, parallel]

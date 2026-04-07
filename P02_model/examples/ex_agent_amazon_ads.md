@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: commercial_agent
 domain: advertising
-quality: 8.5
+quality: 9.1
 tags: [amazon, ads, sponsored-products, acos, roas, campaign]
 tldr: Especialista em Amazon Ads BR - cria/otimiza campanhas SP/SB/SD, targeting de ASIN, protecao de marca, escala via ACOS/MPA
 when_to_use: Criar campanha Amazon Ads, otimizar ACOS, atacar ASIN concorrente, proteger marca
@@ -132,4 +132,4 @@ output:
 
 - `records/agents/amazon-ads-agent/README.md` (fonte original)
 - KC_AMAZON_MARKETPLACE_MASTER.md (Sections 2, 4)
-- Satellite: commercial_agent (Monetization & Commerce)
+- Agent_group: commercial_agent (Monetization & Commerce)

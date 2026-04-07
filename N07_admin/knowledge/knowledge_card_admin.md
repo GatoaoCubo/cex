@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: 8.9
+quality: 9.1
 tags: [orchestration, dispatch, multi-cli, N07, spawn, knowledge]
 tldr: "N07 orchestrates 6 nuclei via bash dispatch.sh — solo (1 builder) or grid (up to 6 parallel)."
 when_to_use: "When understanding how CEX dispatches tasks across nuclei and CLI providers."
@@ -24,7 +24,7 @@ axioms:
 linked_artifacts:
   primary: "N07_admin/agents/agent_admin.md"
   related: [N07_admin/orchestration/dispatch_rule_admin.md, N07_admin/orchestration/spawn_config_admin.md]
-density_score: 0.90
+density_score: 1.0
 data_source: "N07_admin/orchestration/spawn_config_admin.md"
 ---
 
@@ -79,7 +79,7 @@ bash _spawn/dispatch.sh stop
 
 ```json
 {
-  "agent_node": "n03",
+  "agent_group": "n03",
   "status": "complete",
   "quality_score": 9.0,
   "timestamp": "2026-03-30T14:00:00Z",
@@ -110,3 +110,10 @@ bash _spawn/dispatch.sh stop
 - Spawn config: N07_admin/orchestration/spawn_config_admin.md
 - Fallback chain: N07_admin/agents/fallback_chain_admin.md
 - Mission plan: N07_admin/orchestration/mission_bootstrap_2026Q1.md
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

@@ -1,14 +1,5 @@
 @echo off
-:: CEX Boot - N07 Orchestrator (nucleus mode)
-:: Runtime: pi (subscription/OAuth) | Model: claude-opus-4-6 | Thinking: xhigh
-:: The orchestrator. NEVER builds. Dispatches to N01-N06.
-
-title CEX-N07-ORCHESTRATOR
-set CLAUDECODE=
+title CEX-N07-ORCHESTRATOR [pi+opus]
 set CEX_NUCLEUS=N07
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
-cd /d "%CEX_ROOT%"
-
-:: ALWAYS interactive — N07 orchestrates, never receives task args
-:: Reads handoff from .cex/runtime/handoffs/n07_task.md if present
-pi --model anthropic/claude-opus-4-6 --thinking xhigh
+cd /d C:\Users\PC\Documents\GitHub\cex
+pi --model anthropic/claude-opus-4-6 --thinking xhigh --append-system-prompt "N07_admin/agent_card_n07.md" --append-system-prompt ".cex/config/context_self_select.md" --append-system-prompt "You are N07 Orchestrating Sloth. You NEVER build. You dispatch, monitor, consolidate. Transmute user input into CEX taxonomy. IF .cex/runtime/handoffs/n07_task.md EXISTS, READ AND EXECUTE." "Ready. What do you need?"

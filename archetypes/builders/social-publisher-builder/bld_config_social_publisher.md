@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Social Publisher"
+version: "1.0.0"
+author: n03_builder
+tags: [social_publisher, builder, examples]
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+domain: "social publisher construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: social_publisher Production Rules
 
@@ -42,7 +52,7 @@ permission_scope: nucleus
 | Min cooldown_days | 1 | Prevents spam / audience fatigue |
 | Max batch_size | 10 | API rate limit safety margin |
 | Max hashtags IG | 30 (rec 5-10) | Instagram limit |
-| Max hashtags TW | 3 | Twitter best practice |
+| Max hashtags TW | 3 | Twitter best forctice |
 | Max caption IG | 2200 chars | Platform limit |
 | Max caption TW | 280 chars | Platform limit |
 | Retry max | 5 | Prevent infinite loop |

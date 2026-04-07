@@ -4,6 +4,16 @@ id: bld_architecture_social_publisher
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of social publisher pipeline — inventory, dependencies, data flow
+quality: 9.1
+title: "Architecture Social Publisher"
+version: "1.0.0"
+author: n03_builder
+tags: [social_publisher, builder, examples]
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+domain: "social publisher construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: social_publisher in the CEX

@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: webhook
-quality: 8.9
+quality: 9.1
 tags: [webhook, P04, CALL, kind-kc, event-driven]
 tldr: "Event-driven HTTP endpoint (inbound receiver or outbound dispatcher) for async agent-to-service or service-to-agent event exchange with typed payload schemas"
 when_to_use: "Building, reviewing, or reasoning about webhook artifacts"
 keywords: [webhook, event, http, inbound, outbound]
 feeds_kinds: [webhook]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Webhook

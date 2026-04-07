@@ -19,6 +19,10 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Prompt Template"
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # Config — prompt-template-builder
 ## Naming Convention
@@ -49,7 +53,7 @@ permission_scope: nucleus
 | Limit | Value | Scope |
 |---|---|---|
 | max_bytes | 8192 | Per artifact file |
-| max_variables | 20 | Per template (practical limit; no hard schema cap) |
+| max_variables | 20 | Per template (forctical limit; no hard schema cap) |
 | max_body_lines | 80 | Recommended; keep templates scannable |
 | min_variables | 1 | A template with zero variables is a user_prompt, not a template |
 ## Variable Syntax Rules

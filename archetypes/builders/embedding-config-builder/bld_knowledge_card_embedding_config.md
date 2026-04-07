@@ -5,11 +5,21 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for embedding_config production — vector model configuration
 sources: MTEB benchmark, OpenAI embeddings, Ollama model library, DPR (Karpukhin 2020)
+quality: 9.1
+title: "Knowledge Card Embedding Config"
+version: "1.0.0"
+author: n03_builder
+tags: [embedding_config, builder, examples]
+tldr: "Golden and anti-examples for embedding config construction, demonstrating ideal structure and common pitfalls."
+domain: "embedding config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: embedding_config
 ## Executive Summary
-Embedding configs define how text is converted to vectors for semantic search: model selection, dimensions, chunk size, overlap, distance metric, and normalization. They sit in the spec layer — defining MODEL parameters, not index structure (brain_index) or data sources (rag_source). The choice of embedding model determines retrieval quality, cost, and latency.
+Embedding configs define how text is converted to vectors for semantic search: model selection, dimensions, chunk size, overlap, distance metric, and normalization. They sit in the spec layer — defining MODEL parameters, not index structure (knowledge_index) or data sources (rag_source). The choice of embedding model determines retrieval quality, cost, and latency.
 ## Spec Table
 | Property | Value |
 |----------|-------|

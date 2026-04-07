@@ -4,6 +4,16 @@ id: bld_tools_lens
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for lens production
+quality: 9.0
+title: "Tools Lens"
+version: "1.0.0"
+author: n03_builder
+tags: [lens, builder, examples]
+tldr: "Golden and anti-examples for lens construction, demonstrating ideal structure and common pitfalls."
+domain: "lens construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: lens-builder
@@ -32,9 +42,21 @@ purpose: Tools and APIs available for lens production
 ## Interim Validation
 No automated validator exists yet for lenses.
 Manually check each QUALITY_GATES.md gate against produced artifact:
-- [ ] YAML parses without error
-- [ ] id matches p02_lens_ prefix
-- [ ] perspective is non-empty
-- [ ] applies_to is list with >= 1 entry
-- [ ] quality is null
-- [ ] All 4 body sections present
+1. [ ] YAML parses without error
+2. [ ] id matches p02_lens_ prefix
+3. [ ] perspective is non-empty
+4. [ ] applies_to is list with >= 1 entry
+5. [ ] quality is null
+6. [ ] All 4 body sections present
+
+## Metadata
+
+```yaml
+id: bld_tools_lens
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-lens.md
+```

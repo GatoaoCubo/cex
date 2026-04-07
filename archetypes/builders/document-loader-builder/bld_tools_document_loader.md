@@ -8,7 +8,7 @@ updated: 2026-03-28
 author: builder_agent
 domain: document_loader
 llm_function: INJECT
-quality: 8.8
+quality: 9.1
 tags: [tools, document_loader, ingestion, P04]
 tldr: "Tools and data sources available to document_loader-builder during artifact production."
 density_score: 1.0

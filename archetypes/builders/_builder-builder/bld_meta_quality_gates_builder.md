@@ -6,12 +6,22 @@ file_position: 12/13
 pillar: P11
 llm_function: GOVERN
 purpose: Meta-template for generating QUALITY_GATES.md of any kind-builder
+quality: 9.1
+title: "Meta Quality Gates Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Quality Gates: {{type_name}}
-<!-- Este meta-file gera o QUALITY_GATES.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: SCHEMA.md ja gerado (gates validam o schema) -->
-<!-- NOTA: HARD gates derivam dos campos required. SOFT gates derivam de qualidade. -->
+<!-- This meta-file generates the QUALITY_GATES.md of any builder -->
+<!-- REQUIRED INPUT: SCHEMA.md ja gerado (gates validam o schema) -->
+<!-- NOTE: HARD gates derivam dos fields required. SOFT gates derivam de quality. -->
 
 ```yaml
 ---
@@ -23,7 +33,7 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 ```
 
 ## HARD Gates (block publish if ANY fails)
-<!-- NOTA: GERAR a partir de SCHEMA.md Required Fields + Constraints -->
+<!-- NOTE: GERAR a partir de SCHEMA.md Required Fields + Constraints -->
 <!-- HARD GATES UNIVERSAIS (presentes em TODOS os 4 builders): -->
 
 | Gate | Check | Why |
@@ -34,20 +44,20 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 | H04 | kind == "{{type_name}}" | Type integrity |
 | H05 | {{quality_gate}} | Never self-score |
 | H06 | {{required_fields_check}} | Completeness |
-<!-- NOTA: H01-H06 sao UNIVERSAIS (adaptar formato): -->
-<!-- H01: "YAML frontmatter parses" (md) ou "JSON payload parses" (json) -->
-<!-- H05: "quality == null" (md) ou "quality_score is numeric" (json/signal) -->
-<!-- H06: "N required fields present" ou "core fields present" -->
+<!-- NOTE: H01-H06 are UNIVERSAIS (adaptar format): -->
+<!-- H01: "YAML frontmatter parses" (md) or "JSON payload parses" (json) -->
+<!-- H05: "quality == null" (md) or "quality_score is numeric" (json/signal) -->
+<!-- H06: "N required fields present" or "core fields present" -->
 
 <!-- HARD GATES ESPECIFICOS DO TIPO: -->
 | H07 | {{hard_specific_1}} | {{why_1}} |
 | H08 | {{hard_specific_2}} | {{why_2}} |
 | H09 | {{hard_specific_3}} | {{why_3}} |
 | H10 | {{hard_specific_4}} | {{why_4}} |
-<!-- NOTA: Adicionar 2-5 gates especificos baseados em: -->
-<!-- - Campos com constraints fortes (enums, ranges, formats) -->
-<!-- - Boundary violations (drift para outro tipo) -->
-<!-- - Padroes de erros comuns do dominio -->
+<!-- NOTE: Adicionar 2-5 specific gates based em: -->
+<!-- - Campos with constraints fortes (enums, ranges, formats) -->
+<!-- - Boundary violations (drift for outro type) -->
+<!-- - Padroes de erros comuns do domain -->
 <!-- Exemplos observados: -->
 <!-- - model_card: provider in enum, context_window is integer, max_output is integer -->
 <!-- - KC: tags is list, body 200-5120 bytes, no internal paths, author != orchestrator -->
@@ -55,22 +65,22 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 <!-- - quality_gate: scoring weights sum to 100%, Definition has numeric threshold -->
 
 ## SOFT Gates (contribute to score)
-<!-- NOTA: GERAR a partir de SCHEMA.md Constraints + qualidade desejada -->
+<!-- NOTE: GERAR a partir de SCHEMA.md Constraints + quality desejada -->
 <!-- SOFT GATES UNIVERSAIS: -->
 
 | Gate | Check | Weight | Score if pass |
 |------|-------|--------|---------------|
 | S01 | tldr <= 160 chars, non-empty | 1.0 | 10 |
 | S02 | tags is list, len >= 3 | 0.5 | 10 |
-<!-- NOTA: S01-S02 presentes na maioria dos tipos md -->
+<!-- NOTE: S01-S02 presentes na maioria dos types md -->
 
 <!-- SOFT GATES ESPECIFICOS DO TIPO: -->
 | S03 | {{soft_specific_1}} | {{weight}} | 10 |
 | S04 | {{soft_specific_2}} | {{weight}} | 10 |
-<!-- NOTA: Adicionar 5-18 gates baseados em: -->
-<!-- - Secoes de body (cada secao obrigatoria = 1 gate) -->
-<!-- - Formatacao (tabelas, code blocks, URLs, bullets) -->
-<!-- - Densidade (>= 0.80 ou >= 0.85) -->
+<!-- NOTE: Adicionar 5-18 gates based em: -->
+<!-- - Secoes de body (each section obrigatoria = 1 gate) -->
+<!-- - Formataction (tabelas, code blocks, URLs, bullets) -->
+<!-- - Densidade (>= 0.80 or >= 0.85) -->
 <!-- - Filler detection (no "this document", "in summary") -->
 <!-- - Cross-references (linked_artifacts, data_source) -->
 <!-- - Type-specific checks (pricing consistency, boolean fields, etc.) -->
@@ -81,7 +91,7 @@ pattern: HARD gates block publish, SOFT gates contribute to 0-10 score
 <!-- - quality_gate: 7 SOFT gates (weights 0.5-1.0) -->
 
 ## Scoring Formula
-<!-- NOTA: Formula UNIVERSAL (identica em todos os 4 builders): -->
+<!-- NOTE: Formula UNIVERSAL (identica em all os 4 builders): -->
 ```text
 hard_pass = all {{hard_count}} HARD gates pass
 soft_score = sum(gate_score * weight) / sum(weights)
@@ -92,18 +102,18 @@ PUBLISH: >= 8.0 (all HARD + 80% SOFT)
 REVIEW:  >= 7.0 (all HARD + 70% SOFT)
 REJECT:  < 7.0 or any HARD fail
 ```
-<!-- NOTA: Thresholds sao UNIVERSAIS. Nao alterar. -->
-<!-- Variacao possivel: KC adiciona ACCEPTABLE e NEEDS_WORK entre REVIEW e REJECT -->
+<!-- NOTE: Thresholds are UNIVERSAIS. Nao alterar. -->
+<!-- Variaction possivel: KC adiciona ACCEPTABLE e NEEDS_WORK between REVIEW e REJECT -->
 
 ## Automation
-<!-- NOTA: Indicar estado do validador automatico -->
+<!-- NOTE: Indicar estado do validatar automatico -->
 Primary: {{validation_command}}
-<!-- Se validador existe: "python _tools/validate_kc.py <file>" -->
+<!-- Se validatar existe: "python _tools/validate_kc.py <file>" -->
 <!-- Se planejado: "validate_artifact.py --kind {{type_name}} [PLANNED]" -->
 Interim: validate manually against this file, checking each gate.
 
 ## Pre-Production Checklist
-<!-- NOTA: 3-5 items de verificacao ANTES de comecar a produzir -->
+<!-- NOTE: 3-5 items de verification ANTES de comecar a produzir -->
 - [ ] {{pre_check_1}}
 - [ ] {{pre_check_2}}
 - [ ] {{pre_check_3}}
@@ -111,4 +121,4 @@ Interim: validate manually against this file, checking each gate.
 <!-- - model_card: "Official provider docs accessible", "No existing card for this model" -->
 <!-- - KC: "Topic identified, not duplicate", "Sources gathered with URLs" -->
 <!-- - signal: "filename uses p12_sig_ prefix", "no handoff drift" -->
-<!-- - quality_gate: (nao tem; recomendado adicionar) -->
+<!-- - quality_gate: (nao tem; recomendata adicionar) -->

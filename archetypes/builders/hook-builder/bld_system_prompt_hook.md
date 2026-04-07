@@ -13,7 +13,7 @@ rules_count: 15
 tone: technical
 knowledge_boundary: "hook triggers, event types, blocking vs async execution, timeout handling, error strategies, condition expressions; NOT lifecycle policies, background daemons, or system plugins"
 domain: "hook"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "hook", "event", "lifecycle"]
 safety_level: standard
 tools_listed: false

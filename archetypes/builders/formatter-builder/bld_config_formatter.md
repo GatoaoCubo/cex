@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Formatter"
+version: "1.0.0"
+author: n03_builder
+tags: [formatter, builder, examples]
+tldr: "Golden and anti-examples for formatter construction, demonstrating ideal structure and common pitfalls."
+domain: "formatter construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: formatter Production Rules
 ## Naming Convention

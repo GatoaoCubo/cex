@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Axiom"
 tags: [template, axiom, rule, invariant, constraint]
 tldr: "An axiom is an immutable system rule that all agents and artifacts must obey. Axioms define hard boundaries — violations trigger immediate rejection."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "model configuration"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.93
 ---
 
 # Axiom: [AXIOM_TITLE]
@@ -50,3 +55,18 @@ Example: "Every artifact must have valid YAML frontmatter with id, kind, and pil
 - [ ] Rationale explains "what breaks" (not just "it's best practice")
 - [ ] At least 1 violation example with detection method
 - [ ] Scope explicitly defined
+
+## Cross-References
+
+- **Pillar**: P02 (Model)
+- **Kind**: `axiom`
+- **Artifact ID**: `tpl_axiom`
+- **Tags**: [template, axiom, rule, invariant, constraint]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P02 | Model domain |
+| Kind `axiom` | Artifact type |
+| Pipeline | 8F (F1→F8) |

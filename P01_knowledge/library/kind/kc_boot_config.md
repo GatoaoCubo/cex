@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: boot_config
-quality: 9.0
+quality: 9.1
 tags: [boot_config, p02, GOVERN, kind-kc]
 tldr: "Provider-specific bootstrap configuration — identity, constraints, tools, and MCPs loaded at agent initialization"
 when_to_use: "Building, reviewing, or reasoning about boot_config artifacts"
@@ -31,7 +31,7 @@ core: false
 ```
 
 ## What It Is
-A boot_config defines the initialization sequence for an agent on a specific provider (Claude Code, Cursor, Codex, etc.). It specifies which identity to load, which constraints apply, which tools are available, and which MCPs to connect. It is NOT an env_config (P09, which stores generic environment variables) nor a spawn_config (P12, which defines agent_node orchestration). Boot configs answer "how does this agent start on this provider?" — env configs answer "what variables exist?" and spawn configs answer "how do agent_nodes launch?"
+A boot_config defines the initialization sequence for an agent on a specific provider (Claude Code, Cursor, Codex, etc.). It specifies which identity to load, which constraints apply, which tools are available, and which MCPs to connect. It is NOT an env_config (P09, which stores generic environment variables) nor a spawn_config (P12, which defines agent_group orchestration). Boot configs answer "how does this agent start on this provider?" — env configs answer "what variables exist?" and spawn configs answer "how do agent_groups launch?"
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -56,7 +56,7 @@ A boot_config defines the initialization sequence for an agent on a specific pro
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | Minimal boot | Fast startup, simple tasks | Load identity + 2 core tools, no MCPs |
-| Full boot | Production agent_node | Identity + mental_model + MCPs + all domain tools |
+| Full boot | Production agent_group | Identity + mental_model + MCPs + all domain tools |
 | Provider adapter | Same agent, different platforms | Claude Code boot vs Cursor boot for same research_agent agent |
 
 ## Anti-Patterns
@@ -76,7 +76,7 @@ A boot_config defines the initialization sequence for an agent on a specific pro
 ## Decision Tree
 - IF configuring how an agent starts on a specific platform THEN boot_config
 - IF setting environment variables THEN env_config (P09)
-- IF defining agent_node launch parameters THEN spawn_config (P12)
+- IF defining agent_group launch parameters THEN spawn_config (P12)
 - IF defining the agent itself THEN agent (P02)
 - DEFAULT: boot_config for any provider-specific initialization
 

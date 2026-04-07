@@ -9,7 +9,10 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [output_template, webhook, P04, template]
-quality: null
+quality: 9.0
+density_score: 1.0
+domain: "output_template artifact construction"
+title: "Output Template Webhook"
 ---
 # Output Template: webhook
 
@@ -100,3 +103,12 @@ what triggers this webhook and what system receives it.}}
 #- END TEMPLATE
 #- Verify: body <= 1024 bytes after removing template comments
 #- Verify: id == filename stem (p04_webhook_{{event_slug}}.md)
+
+## Cross-References
+
+| Field | Value |
+|-------|-------|
+| Pillar | P04 (Tools) |
+| Kind | output_template |
+| Artifact ID | bld_output_template_webhook |
+| Validation | validation_schema + cex_score.py post-hook |

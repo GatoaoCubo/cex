@@ -6,7 +6,12 @@ version: 1.0.0
 title: Template - Daemon
 tags: [template, daemon, background, service, worker]
 tldr: "Long-running background service: startup, shutdown, health check, signal handling, restart policy."
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "tool integration"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.97
 ---
 
 # Daemon: [NAME]
@@ -29,11 +34,25 @@ pid_file: "[/var/run/daemon.pid]"
 | Stop | Finish task, cleanup | SIGTERM |
 | Kill | Immediate stop | SIGKILL |
 ## Restart Policy
-- **Crash**: Auto-restart after 5s, max 3 retries
-- **OOM**: Restart + increase memory
-- **Unresponsive**: Kill after 60s no health
+1. **Crash**: Auto-restart after 5s, max 3 retries
+2. **OOM**: Restart + increase memory
+3. **Unresponsive**: Kill after 60s no health
 ## Quality Gate
-- [ ] PID file prevents duplicates
-- [ ] Graceful SIGTERM handling
-- [ ] Health check endpoint
-- [ ] Max restart limit set
+1. [ ] PID file prevents duplicates
+2. [ ] Graceful SIGTERM handling
+3. [ ] Health check endpoint
+4. [ ] Max restart limit set
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `daemon` |
+| Pillar | P04 |
+| Domain | tool integration |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

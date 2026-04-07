@@ -1,0 +1,63 @@
+id: p04_fn_cf_canva_create
+kind: function_def
+pillar: P04
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: builder_agent
+name: canva_create_design
+description: Create a new design in Canva via API. Call when the Content Factory needs a presentation, social media graphic,
+  document, or video canvas. Requires design_type and title; optionally accepts template_id for brand consistency.
+parameters: ''
+returns: 'Type: object with `design_id` (string), `edit_url` (string), `thumbnail_url` (string).'
+provider_compat:
+- openai
+- anthropic
+- gemini
+strict: false
+domain: content_factory
+quality: null
+tags:
+- function_def
+- canva
+- design
+- create
+- content_factory
+tldr: LLM-callable function to create Canva designs via API — presentations, social posts, documents, videos
+examples: ''
+error_types:
+- invalid_template_id
+- quota_exceeded
+- invalid_dimensions
+- auth_expired
+density_score: 0.91
+overview: Creates a new design in Canva via the Connect API. The LLM calls this when the Content Factory pipeline needs a
+  visual asset — presentation slides, social media graphics, documents, or video canvases. Supports brand templates for consistent
+  styling and autofill for dynamic content injection.
+design_type: 'Type: string (enum) | Required: yes
+
+  One of: presentation, social_media_post, document, video, whiteboard, logo, poster.
+
+  Determines default canvas dimensions and Canva editor mode.'
+title: 'Type: string | Required: yes
+
+  Display name in the Canva dashboard. Use descriptive names for organization.'
+template_id: 'Type: string | Required: no
+
+  Brand template ID from `list_brand_templates`. When provided, the design starts from this template instead of blank.'
+width_height: 'Type: integer | Required: no
+
+  Custom dimensions in pixels. Overrides design_type defaults. Use for non-standard aspect ratios.'
+brand_kit_id: 'Type: string | Required: no
+
+  Applies brand colors, fonts, and logos automatically.'
+content_data: 'Type: object | Required: no
+
+  Key-value pairs that map to template autofill placeholders. Keys must match template placeholder names.'
+example_1_create_branded_presentation: '{"design_type": "presentation", "title": "AI Agents Course - Module 3", "template_id":
+  "DAF_brand_deck", "brand_kit_id": "BK_main"}
+
+  → `{"design_id": "DAG_m3deck", "edit_url": "https://canva.com/design/DAG_m3deck/edit", "thumbnail_url": "..."}`'
+example_2_create_social_post_with_autofill: '{"design_type": "social_media_post", "title": "Launch Post - LinkedIn", "template_id":
+  "DAF_social_li", "content_data": {"headline": "New course live today", "subtext": "8 hours of hands-on AI", "cta": "Link
+  in comments"}}'

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for diagram production — architecture visualization
 sources: UML, C4 Model (Brown 2018), Mermaid.js, arc42, ASCII art conventions
+quality: 9.1
+title: "Knowledge Card Diagram"
+version: "1.0.0"
+author: n03_builder
+tags: [diagram, builder, examples]
+tldr: "Golden and anti-examples for diagram construction, demonstrating ideal structure and common pitfalls."
+domain: "diagram construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: diagram

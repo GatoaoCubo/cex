@@ -24,9 +24,9 @@ repos: "repos:\n  organization_core:\n    alias: BRAIN\n    path: C:/Users/PC/Do
   \ C:/Users/PC/Documents/GitHub/fresh-start\n    purpose: React site, UI components, frontend\n    identity_file: REPO_IDENTITY.md\n\
   \n  gato_cubo:\n    alias: BODY\n    path: C:/Users/PC/Documents/GitHub/gato-cubo-commerce\n    purpose: e-commerce, Supabase,\
   \ Shopify, product data\n    identity_file: REPO_IDENTITY.md"
-key_paths_organization_core: "key_paths:\n  agent_node_primes: records/agent_nodes/{name}/PRIME_{NAME}.md\n  agents: records/agents/{name}/\n\
+key_paths_organization_core: "key_paths:\n  agent_group_primes: records/agent_groups/{name}/PRIME_{NAME}.md\n  agents: records/agents/{name}/\n\
   \  skills: records/skills/{name}/SKILL.md\n  pool_index: records/pool/POOL_INDEX.md\n  handoffs: .claude/handoffs/\n  signals:\
-  \ .claude/signals/\n  spawn_scripts: records/framework/powershell/spawn_*.ps1\n  brain_index: records/core/brain/mcp-organization-brain/\n\
+  \ .claude/signals/\n  spawn_scripts: records/framework/powershell/spawn_*.ps1\n  knowledge_index: records/core/brain/mcp-organization-brain/\n\
   \  learning: records/core/learning/memory/\n  mental_models: .claude/mental_models/"
 safe_git_protocol: '# BEFORE any git operation:
 

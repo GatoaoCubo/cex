@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Mental Model"
+version: "1.0.0"
+author: n03_builder
+tags: [mental_model, builder, examples]
+tldr: "Golden and anti-examples for mental model construction, demonstrating ideal structure and common pitfalls."
+domain: "mental model construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: mental_model Production Rules
 ## Naming Convention

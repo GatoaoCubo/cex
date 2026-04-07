@@ -15,7 +15,7 @@ tags:
 - coverage
 - validation
 - pytest
-tldr: Route test, QA, and validation tasks to executor agent_node for automated test execution
+tldr: Route test, QA, and validation tasks to executor agent_group for automated test execution
 scope: test
 keywords:
 - test
@@ -30,7 +30,7 @@ keywords:
 - automation
 - spec
 - verificar
-agent_node: executor
+agent_group: executor
 model: opus
 priority: 8
 confidence_threshold: 0.72
@@ -42,7 +42,7 @@ conditions:
 load_balance: false
 routing_strategy: hybrid
 density_score: 0.79
-purpose: Routes testing, QA, and validation tasks to the executor agent_node. Covers unit tests, integration tests, coverage
+purpose: Routes testing, QA, and validation tasks to the executor agent_group. Covers unit tests, integration tests, coverage
   reporting, fixture setup, and assertion-based spec validation. Executor carries test-optimized tooling (pytest, coverage.py)
   and is the authoritative target for all automated quality verification workflows.
 keyword_rationale: Bilingual PT/EN coverage ensures both `testar`/`validar` (Portuguese operator commands) and `pytest`/`coverage`/`fixture`

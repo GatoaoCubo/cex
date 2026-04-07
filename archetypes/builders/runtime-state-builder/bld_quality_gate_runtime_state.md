@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder
 domain: runtime_state
-quality: 8.8
+quality: 9.0
 density_score: 0.85
 tags:
   - quality-gate
@@ -62,5 +62,5 @@ Weight total: 10.0. Each dimension contributes proportionally. Score range: 0.0 
 ## Bypass
 | Field | Value |
 |-------|-------|
-| condition | Agent is in early bootstrapping and fewer than 2 routing rules have been observed in practice |
+| condition | Agent is in early bootstrapping and fewer than 2 routing rules have been observed in forctice |
 | approver | Domain lead must approve in writing before bypass takes effect |

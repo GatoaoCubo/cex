@@ -9,7 +9,12 @@ tldr: "Canonical definition for a domain term. Links synonyms, usage context, an
 term: "[TERM]"
 definition: "[SHORT_DEFINITION]"
 synonyms: ["[SYNONYM_1]", "[SYNONYM_2]"]
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "knowledge management"
+author: n04_knowledge
+created: "2026-04-07"
+density_score: 0.89
 ---
 
 # Glossary Entry: [TERM]
@@ -45,3 +50,18 @@ quality: 8.6
 - [ ] Usage example is concrete, not abstract
 - [ ] No circular definitions (term used in its own definition)
 - [ ] Total size ≤ 512 bytes (frontmatter) + 2048 bytes (body)
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `glossary entry`
+- **Artifact ID**: `p01_gl_TERM_SLUG`
+- **Tags**: [template, glossary, terminology, taxonomy]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `glossary entry` | Artifact type |
+| Pipeline | 8F (F1→F8) |

@@ -1,0 +1,105 @@
+id: p12_dag_cf_social
+kind: dag
+lp: P12
+version: 1.0.0
+created: '2026-04-06'
+updated: '2026-04-06'
+author: n01_intelligence
+pipeline: content_factory_social
+nodes: '| ID | Label | Agent | Type |
+
+  |----|-------|-------|------|
+
+  | receive_longform | Receive longform draft + brand context | n07_orchestrator | input |
+
+  | extract_hooks | Extract 10-15 hook snippets, quotes, stats | n01_research | compute |
+
+  | define_campaign | Map hooks to platforms with posting cadence | n02_marketing | compute |
+
+  | generate_posts | Write platform-native copy (char limits, CTAs) | n02_marketing | compute |
+
+  | create_carousels | Design carousel/infographic assets | n03_builder | compute |
+
+  | create_short_clips | Generate 15-60s video clips from hooks | n03_builder | compute |
+
+  | apply_branding | Brand palette, logo, fonts on all assets | n06_brand | transform |
+
+  | assemble_schedule | Build publishing calendar with optimal times | n02_marketing | compute |
+
+  | quality_check | Validate posts against platform + brand rules | n04_knowledge | gate |
+
+  | publish | Push to social platforms via API/Buffer | n05_operations | output |'
+edges: '| From | To | Type |
+
+  |------|----|------|
+
+  | receive_longform | extract_hooks | data |
+
+  | extract_hooks | define_campaign | data |
+
+  | define_campaign | generate_posts | data |
+
+  | define_campaign | create_carousels | data |
+
+  | define_campaign | create_short_clips | data |
+
+  | generate_posts | apply_branding | data |
+
+  | create_carousels | apply_branding | data |
+
+  | create_short_clips | apply_branding | data |
+
+  | apply_branding | assemble_schedule | data |
+
+  | assemble_schedule | quality_check | control |
+
+  | quality_check | publish | control |'
+domain: orchestration
+quality: null
+tags:
+- dag
+- content-factory
+- social-campaign
+- multi-platform
+- scheduling
+tldr: '10-node social DAG: longform→hooks→campaign→parallel(posts+carousels+clips)→brand→schedule→QA→publish'
+execution_order:
+- - receive_longform
+- - extract_hooks
+- - define_campaign
+- - generate_posts
+  - create_carousels
+  - create_short_clips
+- - apply_branding
+- - assemble_schedule
+- - quality_check
+- - publish
+parallel_groups:
+- 'Wave 1: receive_longform'
+- 'Wave 2: extract_hooks'
+- 'Wave 3: define_campaign'
+- 'Wave 4: generate_posts, create_carousels, create_short_clips (max parallelism = 3)'
+- 'Wave 5: apply_branding (join barrier — waits for all 3)'
+- 'Wave 6: assemble_schedule'
+- 'Wave 7: quality_check'
+- 'Wave 8: publish'
+critical_path: receive_longform (1min) → extract_hooks (8min) → define_campaign (5min) → create_short_clips (15min) → apply_branding
+  (5min) → assemble_schedule (5min) → quality_check (3min) → publish (3min) = 45min
+estimated_duration: 50min
+node_count: 10
+edge_count: 11
+max_parallelism: 3
+keywords:
+- social
+- campaign
+- hooks
+- scheduling
+- multi-platform
+- content-factory
+linked_artifacts:
+  primary: P12_orchestration/dags/content_factory/dag_cf_master.md
+  related:
+  - P03_prompts/constraints/content_factory/p03_constraint_cf_brief.md
+density_score: 1.0
+topological_order: receive_longform → extract_hooks → define_campaign → generate_posts → create_carousels → create_short_clips
+  → apply_branding → assemble_schedule → quality_check → publish

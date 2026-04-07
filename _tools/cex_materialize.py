@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_materialize.py -- Materialize 99 Claude Code sub-agents from kinds_meta.json.
 

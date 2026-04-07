@@ -10,6 +10,7 @@ author: n02_visual_frontend
 domain: frontend
 quality: 9.1
 density_score: 1.0
+tags: [email-template, responsive, html, marketing, n02]
 ---
 
 # Responsive Email HTML Template

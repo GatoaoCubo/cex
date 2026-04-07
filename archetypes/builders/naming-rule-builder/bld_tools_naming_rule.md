@@ -5,6 +5,14 @@ llm_function: CALL
 kind: tools
 domain: naming_rule
 version: 1.0.0
+quality: 9.1
+title: "Tools Naming Rule"
+author: n03_builder
+tags: [naming_rule, builder, examples]
+tldr: "Golden and anti-examples for naming rule construction, demonstrating ideal structure and common pitfalls."
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools — Naming Rule Builder

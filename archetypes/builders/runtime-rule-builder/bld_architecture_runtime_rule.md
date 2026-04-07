@@ -4,6 +4,16 @@ id: bld_architecture_runtime_rule
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of runtime_rule — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Runtime Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_rule, builder, examples]
+tldr: "Golden and anti-examples for runtime rule construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: runtime_rule in the CEX

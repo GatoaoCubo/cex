@@ -29,6 +29,11 @@ inputs: ["all .md/.yaml files in CEX repo"]
 outputs: [".cex/index.db (SQLite)", "query results", "orphan reports", "statistics"]
 dependencies: ["pyyaml", "sqlite3 (stdlib)"]
 category: governance
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

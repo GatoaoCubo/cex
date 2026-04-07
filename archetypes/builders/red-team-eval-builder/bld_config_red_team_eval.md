@@ -15,15 +15,25 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Red Team Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [red_team_eval, builder, examples]
+tldr: "Golden and anti-examples for red team eval construction, demonstrating ideal structure and common pitfalls."
+domain: "red team eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: red_team_eval Production Rules
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Artifact files | `p07_rt_{eval_slug}.md` | `p07_rt_customer_support_agent.md` |
+| Artifact files | `p07_rt_{eval_slug}.md` | `p07_rt_costmer_support_agent.md` |
 | Builder directory | kebab-case | `red-team-eval-builder/` |
 | Frontmatter fields | snake_case | `attack_types`, `pass_criteria`, `owasp_refs` |
-| Eval slug | snake_case, lowercase, no hyphens | `customer_support_agent`, `rag_pipeline` |
+| Eval slug | snake_case, lowercase, no hyphens | `costmer_support_agent`, `rag_pipeline` |
 | Attack type values | snake_case enum values | `prompt_injection`, `pii_leak`, `jailbreak` |
 | OWASP refs | uppercase with number | `LLM01`, `LLM06`, `LLM08` |
 
@@ -50,7 +60,7 @@ Rule: attack_types values MUST be from approved enum in SCHEMA.md.
 | garak | CLI-first security teams, probe-based scanning | CLI flags + JSONL output |
 | deepeval | Python-native teams, pytest integration | Python test files |
 | patronus | API-first teams, managed adversarial suites | REST API calls |
-| custom | Novel attack types not covered by frameworks | Custom test harness |
+| costm | Novel attack types not covered by frameworks | Custom test harness |
 ## Attack Type Constraints
 - Minimum 1 attack_type required (HARD gate)
 - Recommended: 3-5 attack types for meaningful coverage

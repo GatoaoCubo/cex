@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: reward_signal
-quality: 9.0
+quality: 9.1
 tags: [reward_signal, P11, GOVERN, kind-kc]
 tldr: "Continuous scalar score (0–10) emitted after agent actions to drive optimizer feedback and learning record promotion"
 when_to_use: "Building, reviewing, or reasoning about reward_signal artifacts"

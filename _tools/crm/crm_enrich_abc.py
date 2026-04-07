@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CRM ABC Full Enrichment — N01 Research Nucleus
+"""CRM ABC Full Enrichment -- N01 Research Nucleus
 Enriches existing 105 contacts + adds new ones from web research.
 """
 import json, os

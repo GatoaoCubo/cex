@@ -1,0 +1,259 @@
+id: agent_card_n06
+kind: context_doc
+title: N06 Agent Card -- Available Capabilities
+pillar: P01
+nucleus: N06
+sin: Avareza Estrategica
+version: 1.0.0
+quality: null
+created: 2026-04-07
+identity: '| Field | Value |
+
+  |-------|-------|
+
+  | Sin | Avareza Estrategica (Strategic Greed) |
+
+  | Role | Commercial & Monetization Nucleus |
+
+  | Domain | Pricing strategy, online courses, sales funnels, conversion, revenue models |
+
+  | Optimize for | Conversion and customer lifetime value |
+
+  | CLI | Claude (Opus 4.6, 1M context) |
+
+  | Route TO N06 | Pricing, courses, sales funnels, monetization, conversion, revenue, brand strategy |
+
+  | Route AWAY | Research (N01), marketing copy (N02), build artifacts (N03), deploy/test (N05) |'
+my_artifacts: '| Subdir | Count | Purpose |
+
+  |--------|-------|---------|
+
+  | knowledge | 12 | Brand archetypes, naming, voice, monetization models, competitive positioning, ICP frameworks |
+
+  | output | 15 | Brand book, pricing page, business plans, competitive maps, discovery reports, visual identity |
+
+  | prompts | 6 | Brand discovery interview, audit, config extractor, commercial system/template prompts |
+
+  | orchestration | 4 | Dispatch rules + workflows for commercial and content monetization |
+
+  | schemas | 4 | Brand audit, brand book, brand config, brand voice contract |
+
+  | compiled | 18 | YAML compiled versions of all source artifacts |
+
+  | agents | 1 | agent_commercial.md |
+
+  | architecture | 1 | agent_card_commercial.md |
+
+  | feedback | 1 | quality_gate_commercial.md |
+
+  | quality | 1 | scoring_rubric_commercial.md |
+
+  | tools | 1 | content_monetization_tool.md (full pipeline: pricing > credits > checkout > courses > ads > email) |
+
+  | memory | 0 | EMPTY -- no commercial memory persisted yet |
+
+  | Total | 64 | 46 .md source + 18 .yaml compiled |'
+kinds_i_build: ''
+core_domain_n06_primary: '| Kind | Pillar | Naming Pattern | Description |
+
+  |------|--------|----------------|-------------|
+
+  | content_monetization | P04 | p04_cm_{{name}}.md | Config-driven monetization pipeline (parse > pricing > credits > checkout
+  > courses) |
+
+  | reward_signal | P11 | p11_reward_{{metric}}.md | Continuous quality/revenue signals |
+
+  | tagline | P03 | p03_tl_{{topic}}.md | Brand taglines, slogans, headlines |
+
+  | model_card | P02 | p02_mc_{{model}}.md + .yaml | LLM specs with pricing and capabilities |'
+p11_governance_n06_builds_for_commercial_contexts: '| Kind | Pillar | Naming Pattern | Description |
+
+  |------|--------|----------------|-------------|
+
+  | bugloop | P11 | p11_bl_{{scope}}.md + .yaml | Correction cycles for commercial pipeline bugs |
+
+  | guardrail | P11 | p11_gr_{{scope}}.yaml | Safety boundaries for pricing/checkout flows |
+
+  | lifecycle_rule | P11 | p11_lc_{{rule}}.yaml | Freshness, archive, promote rules for commercial content |
+
+  | optimizer | P11 | p11_opt_{{target}}.md + .yaml | Revenue/conversion optimizers |
+
+  | quality_gate | P11 | p11_qg_{{gate}}.yaml | Commercial quality barriers (pricing accuracy, compliance) |
+
+
+  Total: 9 kinds'
+tools_i_use: '| Tool | Purpose |
+
+  |------|---------|
+
+  | cex_8f_runner.py | Full 8F pipeline execution for commercial artifacts |
+
+  | cex_compile.py | .md to .yaml compilation after every save |
+
+  | cex_crew_runner.py | Prompt composer: load ISOs + memory + brand context |
+
+  | cex_score.py | Peer review scoring (quality assignment) |
+
+  | cex_feedback.py | Quality tracking + archive + metrics |
+
+  | cex_retriever.py | TF-IDF similarity search across 2184 docs |
+
+  | cex_query.py | Builder discovery for commercial intents |
+
+  | cex_gdp.py | Guided Decision Protocol -- manifest I/O for pricing/brand decisions |
+
+  | cex_evolve.py | Autonomous artifact improvement loop |
+
+  | cex_prompt_layers.py | Load 15+ pillar artifacts into prompts |
+
+  | cex_bootstrap.py | Brand setup (first-run brand_config.yaml) |
+
+  | cex_notebooklm.py | Content pipeline to NotebookLM (9 content types) |
+
+  | brand_inject.py | Replace {{BRAND_*}} placeholders in templates |
+
+  | brand_validate.py | Validate brand_config.yaml (13 required fields) |
+
+  | brand_propagate.py | Push brand context to all nuclei |
+
+  | brand_audit.py | Score brand consistency (6 dimensions) |
+
+  | brand_ingest.py | Scan user folders to extract brand signals |
+
+  | signal_writer.py | Signal completion to N07 orchestrator |
+
+
+  Total: 18 tools'
+mcp_servers: 'Source: `.mcp-n06.json`
+
+
+  | Server | Purpose | Auth |
+
+  |--------|---------|------|
+
+  | stripe | Payment processing -- subscriptions, checkout, invoices | STRIPE_SECRET_KEY |
+
+  | hotmart | Course platform -- products, sales, commissions, club | HOTMART_CLIENT_ID + SECRET + BASIC_AUTH |
+
+  | canva | Design -- brand assets, visual identity, social graphics | CANVA_CLIENT_ID + SECRET |
+
+  | notebooklm | Content generation -- 9 content types from KCs | None |
+
+  | fetch | Web fetching -- competitor research, pricing pages | None |
+
+  | markitdown | Document conversion -- ingest PDFs, docs for analysis | None |
+
+
+  Total: 6 MCP servers'
+platform_knowledge_cards_available: '15 commerce-relevant KCs in `P01_knowledge/library/platform/`:
+
+
+  | KC | Domain |
+
+  |----|--------|
+
+  | kc_pricing_strategy.md | Pricing models, tiers, psychology |
+
+  | kc_stripe_patterns.md | Stripe API, checkout, subscriptions |
+
+  | kc_hotmart_marketplace.md | Hotmart products, affiliates |
+
+  | kc_hotmart_club.md | Hotmart member areas, courses |
+
+  | kc_digistore24_marketplace.md | Digistore24 products, EU market |
+
+  | kc_digistore24_api.md | Digistore24 API integration |
+
+  | kc_mercadopago_pix.md | MercadoPago PIX payments (BR) |
+
+  | kc_credit_system_design.md | Credit-based monetization |
+
+  | kc_content_platform_comparison.md | Platform feature matrix |
+
+  | kc_content_platform_compliance.md | Legal/compliance per platform |
+
+  | kc_course_generation.md | Course structure, curriculum |
+
+  | kc_email_automation.md | Email sequences, drip campaigns |
+
+  | kc_ad_validation.md | Ad compliance, creative validation |
+
+  | kc_erp_integration.md | ERP/accounting integration |
+
+  | kc_supabase_pricing.md | Supabase cost modeling |'
+agent_definitions: '5 agents in `.claude/agents/` relevant to N06:
+
+
+  | Agent | File |
+
+  |-------|------|
+
+  | content-monetization-builder | content-monetization-builder.md |
+
+  | tagline-builder | tagline-builder.md |
+
+  | landing-page-builder | landing-page-builder.md |
+
+  | model-card-builder | model-card-builder.md |
+
+  | supabase-data-layer-builder | supabase-data-layer-builder.md |
+
+
+  3 dedicated builders in `archetypes/builders/`:
+
+  - content-monetization-builder (13 ISOs)
+
+  - reward-signal-builder (13 ISOs)
+
+  - tagline-builder (13 ISOs)'
+my_strengths:
+- Brand intelligence depth -- 12 KCs covering archetypes, naming, voice, monetization models, competitive positioning, ICP
+  frameworks
+- Rich output portfolio -- 15 deliverables spanning brand books, pricing pages, business plans, competitive maps, visual identity
+- Full monetization pipeline -- content_monetization_tool.md covers parse > pricing > credits > checkout > courses > ads >
+  email
+- Multi-payment integration -- Stripe (global), Hotmart (BR/LATAM), MercadoPago PIX (BR), Digistore24 (EU)
+- Brand lifecycle -- Discovery interview > config extraction > audit > propagation > visual identity
+- Platform intelligence -- 15 platform KCs with deep integration knowledge
+- Design tooling -- Canva MCP for brand asset generation
+- Content amplification -- NotebookLM MCP for 9 content types from any KC
+my_gaps: '| Gap | Severity | What''s Missing |
+
+  |-----|----------|----------------|
+
+  | memory/ | HIGH | 0 artifacts -- no commercial memory persisted across sessions |
+
+  | tools/ | MEDIUM | Only 1 tool definition -- need pricing calculator, ROI estimator, funnel validator |
+
+  | Course artifacts | MEDIUM | KC exists (kc_course_generation) but no built course_structure outputs |
+
+  | Funnel artifacts | MEDIUM | No sales funnel templates, sequences, or conversion tracking configs |
+
+  | Pricing model kind | LOW | No dedicated pricing_model kind in kinds_meta.json -- using output_ files instead |
+
+  | schemas/ | LOW | Only 4 brand-focused schemas -- no pricing, funnel, or course validation schemas |'
+cards_in_my_agent_card: '| Category | Count |
+
+  |----------|-------|
+
+  | Source artifacts (.md) | 46 |
+
+  | Compiled artifacts (.yaml) | 18 |
+
+  | Kinds I build | 9 |
+
+  | CEX tools I use | 18 |
+
+  | MCP servers | 6 |
+
+  | Platform KCs | 15 |
+
+  | Agent definitions | 5 |
+
+  | Builder archetypes (dedicated) | 3 |
+
+  | Builder archetypes (P11 shared) | 6 |
+
+  | Brand KCs (in-nucleus) | 12 |
+
+  | Total cards in agent card | 138 |'

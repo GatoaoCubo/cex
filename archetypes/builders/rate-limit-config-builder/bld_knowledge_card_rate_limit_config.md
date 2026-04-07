@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for rate_limit_config production — LLM API rate limiting
 sources: Anthropic docs, OpenAI docs, LiteLLM docs, token bucket algorithm
+quality: 9.1
+title: "Knowledge Card Rate Limit Config"
+version: "1.0.0"
+author: n03_builder
+tags: [rate_limit_config, builder, examples]
+tldr: "Golden and anti-examples for rate limit config construction, demonstrating ideal structure and common pitfalls."
+domain: "rate limit config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: rate_limit_config

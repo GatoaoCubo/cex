@@ -1,0 +1,147 @@
+id: p01_kc_ayrshare_api
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Ayrshare Social API — Multi-Platform Publishing for Content Factory
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: n04_knowledge
+domain: ayrshare_api
+quality: 9.1
+tags:
+- ayrshare
+- social-media
+- api
+- publishing
+- scheduling
+- content-factory
+- integration
+- INJECT
+tldr: Single API to post, schedule, and track content across Instagram, TikTok, LinkedIn, Twitter/X, Facebook, and YouTube
+when_to_use: When any nucleus needs to publish or schedule content across multiple social media platforms simultaneously
+keywords:
+- ayrshare
+- social-media
+- multi-platform
+- scheduling
+- instagram
+- tiktok
+- linkedin
+- twitter
+feeds_kinds:
+- api_client
+- workflow
+- dag
+- schedule
+linked_artifacts:
+- kc_youtube_api
+- kc_canva_connect_api
+density_score: null
+quick_reference: 'base_url: https://api.ayrshare.com/api
+
+  auth: "Authorization: Bearer AYRSHARE_API_KEY" header
+
+  platforms: [instagram, tiktok, linkedin, twitter, facebook, youtube, pinterest, telegram, reddit, threads]
+
+  rate_limit: 100 requests/min (Premium), 30/min (Business)
+
+  content_type: application/json'
+core_endpoints: '| Endpoint | Method | Purpose |
+
+  |----------|--------|---------|
+
+  | `/post` | POST | Publish or schedule a post |
+
+  | `/post` | GET | List posts (with filters) |
+
+  | `/post/{id}` | GET | Get post details + analytics |
+
+  | `/delete` | DELETE | Delete a published post |
+
+  | `/analytics/post` | POST | Get post-level analytics |
+
+  | `/analytics/social` | GET | Get platform-level analytics |
+
+  | `/media/upload` | POST | Upload media (returns URL for use in /post) |
+
+  | `/user` | GET | Get connected accounts info |
+
+  | `/history` | GET | Post history with status |'
+publish_to_multiple_platforms_at_once: "import httpx\n\nheaders = {\n    \"Authorization\": f\"Bearer {AYRSHARE_API_KEY}\"\
+  ,\n    \"Content-Type\": \"application/json\"\n}\n\n# Post image + caption to 4 platforms simultaneously\nresp = httpx.post(\"\
+  https://api.ayrshare.com/api/post\", headers=headers, json={\n    \"post\": \"5 dicas de produtividade com IA que vão transformar\
+  \ seu workflow \U0001F680\\n\\n1. Automatize a criação de thumbnails\\n2. Use TTS para narração\\n3. Gere clips com IA\\\
+  n4. Agende posts em lote\\n5. Monitore métricas automaticamente\\n\\n#ia #produtividade #contentcreator\",\n    \"platforms\"\
+  : [\"instagram\", \"linkedin\", \"twitter\", \"facebook\"],\n    \"mediaUrls\": [\"https://storage.example.com/post_image.jpg\"\
+  ],\n    \"hashtags\": {\n        \"instagram\": [\"#ia\", \"#produtividade\", \"#marketingdigital\", \"#contentcreator\"\
+  ],\n    },\n    \"shortenLinks\": True\n})\n\nresult = resp.json()\n# Returns: { \"id\": \"abc123\", \"postIds\": [{\"platform\"\
+  : \"instagram\", \"id\": \"...\"}, ...] }"
+schedule_future_post: "resp = httpx.post(\"https://api.ayrshare.com/api/post\", headers=headers, json={\n    \"post\": \"\
+  Novo vídeo no canal! Link na bio \U0001F446\",\n    \"platforms\": [\"instagram\", \"twitter\", \"linkedin\"],\n    \"mediaUrls\"\
+  : [\"https://storage.example.com/promo.jpg\"],\n    \"scheduleDate\": \"2026-04-07T13:00:00Z\",   # UTC — 10:00 BRT\n  \
+  \  \"autoSchedule\": False   # True = Ayrshare picks optimal time per platform\n})"
+platform_specific_content: "resp = httpx.post(\"https://api.ayrshare.com/api/post\", headers=headers, json={\n    \"platforms\"\
+  : [\"instagram\", \"linkedin\", \"tiktok\"],\n\n    # Default post (used if no platform override)\n    \"post\": \"Check\
+  \ out our new AI guide!\",\n    \"mediaUrls\": [\"https://storage.example.com/video.mp4\"],\n\n    # Platform overrides\n\
+  \    \"instagramOptions\": {\n        \"post\": \"Novo guia de IA! \U0001F916 Salva pra depois ☝️\\n\\n#ia #guia\",\n  \
+  \      \"reels\": True,           # Post as Reel instead of feed post\n        \"shareReelToFeed\": True,\n        \"coverUrl\"\
+  : \"https://storage.example.com/cover.jpg\"\n    },\n    \"linkedinOptions\": {\n        \"post\": \"Acabamos de lançar\
+  \ nosso guia completo de IA para criadores de conteúdo.\\n\\nO que você vai encontrar:\\n→ Workflow completo\\n→ Ferramentas\
+  \ testadas\\n→ ROI real medido\\n\\nLink no primeiro comentário.\",\n        \"visibility\": \"PUBLIC\",\n        \"mediaDescription\"\
+  : \"AI Guide for Content Creators\"\n    },\n    \"tiktokOptions\": {\n        \"post\": \"O guia que faltava \U0001F3AF\
+  \ #ia #dicasdeconteudo #produtividade\",\n        \"privacy\": \"PUBLIC_TO_EVERYONE\",\n        \"disableDuet\": False,\n\
+  \        \"disableStitch\": False\n    }\n})"
+upload_media_before_posting: "# Upload image or video first, get hosted URL\nresp = httpx.post(\"https://api.ayrshare.com/api/media/upload\"\
+  , headers=headers, json={\n    \"file\": \"https://your-server.com/video.mp4\"   # URL to fetch from\n    # OR use multipart\
+  \ upload for local files\n})\nmedia_url = resp.json()[\"url\"]   # Use this in mediaUrls\n\n# For local files:\nwith open(\"\
+  video.mp4\", \"rb\") as f:\n    resp = httpx.post(\"https://api.ayrshare.com/api/media/upload\",\n        headers={\"Authorization\"\
+  : f\"Bearer {AYRSHARE_API_KEY}\"},\n        files={\"file\": (\"video.mp4\", f, \"video/mp4\")}\n    )"
+get_analytics: "# Post-level analytics\nresp = httpx.post(\"https://api.ayrshare.com/api/analytics/post\", headers=headers,\
+  \ json={\n    \"id\": \"post_abc123\",\n    \"platforms\": [\"instagram\", \"linkedin\"]\n})\n# Returns: likes, comments,\
+  \ shares, impressions, reach per platform\n\n# Platform-level analytics (overall account)\nresp = httpx.get(\"https://api.ayrshare.com/api/analytics/social?platforms=instagram,linkedin\"\
+  ,\n    headers=headers)\n# Returns: followers, engagement rate, top posts"
+media_requirements_by_platform: '| Platform | Image | Video | Max Duration | Max File Size |
+
+  |----------|-------|-------|-------------|---------------|
+
+  | Instagram Feed | JPG/PNG 1080x1080 | MP4 H.264 | 60min | 100MB |
+
+  | Instagram Reels | — | MP4 9:16 1080x1920 | 90s | 100MB |
+
+  | TikTok | — | MP4 9:16 1080x1920 | 10min | 72MB |
+
+  | LinkedIn | JPG/PNG | MP4 | 10min | 200MB |
+
+  | Twitter/X | JPG/PNG/GIF | MP4 | 2:20 | 512MB |
+
+  | Facebook | JPG/PNG | MP4 | 240min | 4GB |
+
+  | YouTube | — | MP4 | 12h | 256GB |'
+pricing: '| Plan | Profiles | Posts/mo | Cost |
+
+  |------|----------|---------|------|
+
+  | Premium | 1 | 100 | $49/mo |
+
+  | Business | 3 | 300 | $99/mo |
+
+  | Enterprise | 10+ | Unlimited | Custom |
+
+
+  Content Factory estimate: Business plan at $99/mo covers 3 brand profiles × 100 posts each = plenty for weekly content.'
+gotchas:
+- Instagram requires a linked Facebook Business Page. Connect via Ayrshare dashboard. Personal IG accounts cannot use the
+  API.
+- TikTok videos must be 9:16 vertical. Landscape videos get rejected or awkwardly cropped. Always export from FFmpeg in 1080x1920.
+- '`scheduleDate` is UTC. Brazil is UTC-3. Schedule for 13:00Z to post at 10:00 BRT.'
+- 'Reel vs Feed: set `instagramOptions.reels: true` explicitly. Default is feed post.'
+- 'LinkedIn text max: 3,000 chars. Twitter: 280 chars. Instagram caption: 2,200 chars. Tailor per platform.'
+- Media URLs must be publicly accessible. Ayrshare fetches the URL server-side. Pre-signed S3 URLs or public CDN URLs work.
+- 'Auto-delete: posts scheduled then deleted via API are removed from schedule but not from platforms if already published.'
+- 'Rate limit 429: Premium = 100 req/min. Batch your posts rather than sending one at a time.'
+- 'Analytics lag: Instagram/TikTok analytics may take 24-48h to populate. Don''t poll immediately after posting.'
+docs:
+- 'API Reference: https://docs.ayrshare.com/'
+- 'Platform setup: https://docs.ayrshare.com/social-networks'
+- 'Webhooks: https://docs.ayrshare.com/webhooks (get notified on post success/failure)'

@@ -1,0 +1,185 @@
+id: p01_kc_marp_cli
+kind: knowledge_card
+type: domain
+pillar: P01
+title: Marp CLI — Markdown to Slides for Content Factory
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: n04_knowledge
+domain: marp
+quality: 9.1
+tags:
+- marp
+- slides
+- markdown
+- presentation
+- html
+- pdf
+- pptx
+- content-factory
+- integration
+- INJECT
+tldr: Markdown → HTML/PDF/PPTX slides via CLI — theme directives, speaker notes, images, and batch export
+when_to_use: When any nucleus needs to generate slide decks from structured markdown content
+keywords:
+- marp
+- markdown-slides
+- presentation
+- cli
+- theme
+- speaker-notes
+feeds_kinds:
+- cli_tool
+- workflow
+- dag
+- formatter
+linked_artifacts:
+- kc_canva_connect_api
+- kc_typst_patterns
+- kc_pandoc_pipeline
+density_score: null
+quick_reference: 'install: npm install -g @marp-team/marp-cli
+
+  binary: marp
+
+  version_check: marp --version
+
+  slide_separator: "---"   # three dashes on own line
+
+  output_formats: [html, pdf, pptx, png, jpeg]
+
+  engine: marpit (Markdown-it based)
+
+  config_file: .marprc.yml  # optional project config'
+slide_syntax_basics: "---\nmarp: true\ntheme: default\npaginate: true\nheader: \"Content Factory — Week 14\"\nfooter: \"©\
+  \ 2026 Brand Name\"\nstyle: |\n  section { font-family: 'Inter', sans-serif; }\n  h1 { color: #2563eb; }\n---\n\n# Slide\
+  \ 1: Title Slide\n\nSubtitle or tagline here\n\n---\n\n# Slide 2: Content\n\n- Bullet point one\n- Bullet point two\n- Bold\
+  \ emphasis for key metrics\n\n!bg right:40%\n\n<!-- speaker notes go here — not rendered on slides -->\nThis is my speaker\
+  \ note for slide 2.\n\n---\n\n<!-- _class: lead -->\n# Slide 3: Section Break\n\nBig centered heading with `lead` class\n\
+  \n---\n\n# Slide 4: Two Columns\n\n<div class=\"columns\">\n<div>\n\nLeft column\n- Point A\n- Point B\n\n</div>\n<div>\n\
+  \nRight column\n- Point C\n- Point D\n\n</div>\n</div>"
+directives_per_slide_or_global: '| Directive | Scope | Example | Effect |
+
+  |-----------|-------|---------|--------|
+
+  | `marp: true` | Global | Front matter | Enables Marp processing |
+
+  | `theme` | Global | `theme: gaia` | Built-in: default, gaia, uncover |
+
+  | `paginate` | Both | `paginate: true` | Show page numbers |
+
+  | `header` / `footer` | Both | `header: "Title"` | Persistent header/footer text |
+
+  | `_class` | Slide | `<!-- _class: lead -->` | Apply CSS class to current slide |
+
+  | `_backgroundColor` | Slide | `<!-- _backgroundColor: #1a1a2e -->` | Slide background color |
+
+  | `_color` | Slide | `<!-- _color: white -->` | Text color override |
+
+  | `size` | Global | `size: 16:9` | Aspect ratio (default 16:9, also 4:3) |
+
+  | `style` | Global | `style: |` in front matter | Custom CSS block |'
+image_syntax: '# Background images
+
+  !bg                    # Full background
+
+  !bg contain            # Fit without crop
+
+  !bg right:40%          # Split: image on right 40%
+
+  !bg left:50%           # Split: image on left 50%
+
+  !bg blur:5px           # Blurred background
+
+  !bg brightness:0.5     # Darkened background
+
+
+  # Multiple backgrounds (side by side)
+
+  !bg
+
+  !bg
+
+
+  # Inline image with sizing
+
+  !w:300                  # Width 300px
+
+  !h:200                  # Height 200px
+
+  !w:300 h:200           # Both'
+export_commands: '# Markdown → HTML (single file, self-contained)
+
+  marp slides.md -o slides.html
+
+
+  # Markdown → PDF
+
+  marp slides.md -o slides.pdf
+
+
+  # Markdown → PowerPoint
+
+  marp slides.md -o slides.pptx
+
+
+  # Markdown → PNG (one image per slide)
+
+  marp slides.md --images png -o ./output/
+
+
+  # Markdown → JPEG
+
+  marp slides.md --images jpeg --jpeg-quality 85 -o ./output/
+
+
+  # Watch mode (auto-rebuild on save)
+
+  marp -w slides.md -o slides.html
+
+
+  # Server mode (live preview in browser)
+
+  marp -s ./slides/
+
+
+  # Batch: all .md files in directory
+
+  marp ./slides/ -o ./output/
+
+
+  # Custom theme file
+
+  marp slides.md --theme ./brand-theme.css -o slides.pdf'
+custom_theme_example: "/ brand-theme.css /\n@import 'default';\n\nsection {\n  font-family: 'Inter', 'Segoe UI', sans-serif;\n\
+  \  background: #ffffff;\n  color: #1a1a2e;\n}\n\nsection.lead {\n  background: linear-gradient(135deg, #2563eb 0%, #7c3aed\
+  \ 100%);\n  color: white;\n  text-align: center;\n}\n\nsection.lead h1 {\n  font-size: 2.5em;\n}\n\nh1 { color: #2563eb;\
+  \ border-bottom: 3px solid #2563eb; padding-bottom: 0.3em; }\nh2 { color: #7c3aed; }\n\nfooter { font-size: 0.6em; color:\
+  \ #94a3b8; }\n\n/ Two-column layout /\n.columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }"
+marprc_yml_project_config: 'allowLocalFiles: true
+
+  theme: ./brand-theme.css
+
+  html: true
+
+  output: ./output/
+
+  pdf: true'
+gotchas:
+- '`marp: true` in frontmatter is REQUIRED. Without it, Marp treats the file as plain markdown and outputs nothing useful.'
+- '`---` is a slide separator AND YAML frontmatter delimiter. The first `---` pair is frontmatter; every subsequent `---`
+  is a new slide.'
+- 'HTML is disabled by default. Add `html: true` to frontmatter or `--html` flag for `<div>` tags to work (needed for columns).'
+- PDF export requires Chrome/Chromium. Marp uses Puppeteer internally. First run downloads Chromium (~200MB).
+- PPTX is not fully editable. Text becomes text boxes, but complex layouts may render as images. Use for viewing, not heavy
+  editing.
+- 'Local images in PDF/PPTX need `--allow-local-files` flag or `allowLocalFiles: true` in config. Without it, images show
+  as broken.'
+- Speaker notes (`<!-- comment -->`) only visible in HTML output with presenter view (`?sync=` URL param). Not exported to
+  PDF.
+- 'Max recommended slides: ~50. PDF export with 100+ slides can OOM on Puppeteer. Split large decks.'
+docs:
+- 'CLI docs: https://github.com/marp-team/marp-cli'
+- 'Marpit framework: https://marpit.marp.app/'
+- 'Theme CSS reference: https://marpit.marp.app/theme-css'

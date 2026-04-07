@@ -6,10 +6,15 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: affiliate_platform
-quality: 8.9
+quality: 9.1
 tldr: "Hotmart Marketplace — affiliate ecosystem with 500K+ promoters, commission structures, cookie tracking, and promotion strategies for BR/LATAM."
 tags: [hotmart, marketplace, affiliate, commission, brazil, latam, infoproduct]
-density_score: 0.88
+density_score: 1.0
+when_to_use: "Apply when hotmart marketplace — affiliate ecosystem with 500k+ promoters, commission structures, cookie tra..."
+keywords: [knowledge-card, hotmart, ecosystem, marketplace, models]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Hotmart Marketplace — Affiliate Ecosystem
@@ -164,3 +169,10 @@ Upload materials to the Hotmart affiliate dashboard so promoters can access them
 3. **Promo materials ready** — affiliates with assets promote 3x more than those without.
 4. **Monitor refund rate per affiliate** — >15% = investigate fraud.
 5. **Dual marketplace** — Hotmart (BR) + DS24 (EU) for maximum global affiliate reach.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

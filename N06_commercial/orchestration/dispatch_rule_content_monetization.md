@@ -8,12 +8,19 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n06_commercial
 domain: content-monetization
-quality: 8.9
+quality: 9.2
+updated: 2026-04-07
 tags: [dispatch_rule, content-monetization, billing, checkout, credits, PIX, N06]
 tldr: Routes billing, checkout, credit, course generation, and payment tasks to content-monetization-builder via N06.
+axioms:
+  - "ALWAYS validate payment provider credentials before routing checkout tasks."
+  - "NEVER route monetization tasks without brand_config.yaml loaded — pricing inherits brand positioning."
+linked_artifacts:
+  primary: p12_wf_content_monetization
+  related: [p04_fn_content_monetization, p12_dr_commercial, p01_kc_brand_monetization_models]
 scope: content-monetization
 keywords: [monetizar, monetize, billing, faturamento, checkout, pagamento, payment, PIX, boleto, créditos, credits, wallet, saldo, curso, course, assinatura, subscription, plano, plan, pricing, preço, precificar, invoice, cobrança, charge, receita, revenue, MercadoPago, Stripe, Hotmart, Digistore24, DS24, Kiwify, Monetizze, Eduzz, geração de curso, course generation, anúncio monetizado, ads checkout, email transacional, transactional email, ERP sync, BaseLinker, pack de créditos, credit pack, IPN, webhook, affiliate, afiliado, EU VAT, GDPR, Widerrufsrecht]
-agent_node: content_monetization_builder
+agent_group: content_monetization_builder
 model: sonnet
 priority: 9
 confidence_threshold: 0.65

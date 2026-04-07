@@ -9,6 +9,10 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [schema, prompt-template, P03, source-of-truth]
+quality: 9.1
+title: "Schema Prompt Template"
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 
 # Schema — prompt-template-builder
@@ -28,7 +32,7 @@ Examples: `p03_pt_knowledge_card`, `p03_pt_research_synthesis`, `p03_pt_code_rev
 | version | string | YES | `"1.0.0"` | Semver string |
 | created | string | YES | — | ISO date: YYYY-MM-DD |
 | updated | string | YES | — | ISO date: YYYY-MM-DD, updated on every change |
-| author | string | YES | — | Satellite or human author ID |
+| author | string | YES | — | Agent_group or human author ID |
 | variables | list[object] | YES | — | List of variable definitions (see Variable Object below) |
 | variable_syntax | enum | YES | `"mustache"` | `"mustache"` or `"bracket"` |
 | composable | boolean | YES | `false` | True if template is designed for embedding in larger templates |

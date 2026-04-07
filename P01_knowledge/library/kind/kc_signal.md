@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: signal
-quality: 9.0
+quality: 9.1
 tags: [signal, P12, COLLABORATE, kind-kc]
 tldr: "Lightweight inter-agent event notification (complete/error/progress) enabling asynchronous coordination without polling"
 when_to_use: "Building, reviewing, or reasoning about signal artifacts"
@@ -48,7 +48,7 @@ A signal is a lightweight JSON event file written by one agent and read by anoth
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
 | event_type | enum | required | complete/error/progress/blocked — precise typing enables routing |
-| source | string | required | Emitting agent/agent_node name |
+| source | string | required | Emitting agent/agent_group name |
 | score | float | null | Optional quality score; required for complete events going to pool |
 | payload | map | {} | Minimal supplementary data; avoid large payloads in signal |
 

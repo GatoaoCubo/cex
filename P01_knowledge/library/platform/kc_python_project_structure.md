@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [python, pyproject, hatchling, packaging, project-structure]
 tldr: "Modern Python project anatomy: pyproject.toml as single source of truth, hatchling build backend, src layout, extras, CLI entry points, and dev environments."
 density_score: 0.91

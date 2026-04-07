@@ -4,6 +4,16 @@ id: bld_tools_input_schema
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for input_schema production
+quality: 9.1
+title: "Tools Input Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [input_schema, builder, examples]
+tldr: "Golden and anti-examples for input schema construction, demonstrating ideal structure and common pitfalls."
+domain: "input schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: input-schema-builder
@@ -33,9 +43,21 @@ purpose: Tools and APIs available for input_schema production
 ## Interim Validation
 No automated validator exists yet for input_schemas.
 Manually check each QUALITY_GATES.md gate against produced artifact:
-- [ ] YAML parses without error
-- [ ] id matches p06_is_ prefix
-- [ ] fields list is non-empty
-- [ ] each field has name and type
-- [ ] quality is null
-- [ ] optional fields have defaults
+1. [ ] YAML parses without error
+2. [ ] id matches p06_is_ prefix
+3. [ ] fields list is non-empty
+4. [ ] each field has name and type
+5. [ ] quality is null
+6. [ ] optional fields have defaults
+
+## Metadata
+
+```yaml
+id: bld_tools_input_schema
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-input-schema.md
+```

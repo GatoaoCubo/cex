@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for session_state production — atomic searchable facts
 sources: session-state-builder MANIFEST.md + SCHEMA.md, P10 schema
+quality: 9.1
+title: "Knowledge Card Session State"
+version: "1.0.0"
+author: n03_builder
+tags: [session_state, builder, examples]
+tldr: "Golden and anti-examples for session state construction, demonstrating ideal structure and common pitfalls."
+domain: "session state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: session_state

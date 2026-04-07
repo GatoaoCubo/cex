@@ -4,6 +4,16 @@ id: bld_tools_validator
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for validator production
+quality: 9.1
+title: "Tools Validator"
+version: "1.0.0"
+author: n03_builder
+tags: [validator, builder, examples]
+tldr: "Golden and anti-examples for validator construction, demonstrating ideal structure and common pitfalls."
+domain: "validator construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: validator-builder
@@ -33,9 +43,21 @@ purpose: Tools and APIs available for validator production
 ## Interim Validation
 No automated validator exists yet for validators.
 Manually check each QUALITY_GATES.md gate against produced artifact:
-- [ ] YAML parses without error
-- [ ] id matches p06_val_ prefix
-- [ ] severity is one of: error, warning, info
-- [ ] conditions list is non-empty
-- [ ] quality is null
-- [ ] error_message is actionable (tells HOW to fix)
+1. [ ] YAML parses without error
+2. [ ] id matches p06_val_ prefix
+3. [ ] severity is one of: error, warning, info
+4. [ ] conditions list is non-empty
+5. [ ] quality is null
+6. [ ] error_message is actionable (tells HOW to fix)
+
+## Metadata
+
+```yaml
+id: bld_tools_validator
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-validator.md
+```

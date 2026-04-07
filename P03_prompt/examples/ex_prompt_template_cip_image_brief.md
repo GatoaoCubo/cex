@@ -7,9 +7,9 @@ version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
 author: builder_agent
-agent_node: marketing_agent
+agent_group: marketing_agent
 domain: marketing
-quality: 9.0
+quality: 9.1
 tags: [image, cip, branding, visual, prompt-template, product-photography]
 tldr: "Filled CIP image brief for Agua Marinha Home lifestyle product shots — soft natural light, scandinavian style"
 when_to_use: "Reference example for generating brand-safe AI product images"

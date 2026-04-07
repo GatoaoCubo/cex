@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [security, scanning, secrets, sast, container-security]
 tldr: "5-layer security from codexa-core: dependency scanning (pip-audit+safety), secret detection (gitleaks), SAST (bandit+semgrep), container scanning (trivy), CodeQL analysis. Weekly cron + per-PR."
 density_score: 0.90

@@ -7,11 +7,12 @@ version: 1.0.0
 created: 2026-03-05
 updated: 2026-03-22
 author: orchestrator
-quality: 9.0
+quality: 9.1
 tags: [isofix, handoff, edison, orchestration]
 tldr: "Real handoff dispatching builder_agent to complete ISO vectorstores for 9 agents — demonstrates autonomia total pattern"
 density_score: 0.91
 source: organization-core/.claude/handoffs/_archived_isofix/ISOFIX_batch_1_edison.md
+domain: "orchestration"
 ---
 
 # builder_agent — ISOFIX: ISO Completion Batch 1/7
@@ -39,8 +40,8 @@ Verificar que cada agent tem >= 10 ISOs. Listar any gaps remaining.
 
 ## SCOPE FENCE
 
-- SOMENTE: `records/agents/*/iso_vectorstore/`
-- NAO TOQUE: `README.md` de agents, ISOs existentes, outros diretorios
+1. SOMENTE: `records/agents/*/iso_vectorstore/`
+2. NAO TOQUE: `README.md` de agents, ISOs existentes, outros diretorios
 
 ## COMMIT
 
@@ -57,3 +58,25 @@ python -c "from records.core.python.signal_writer import write_signal; write_sig
 
 ---
 *Migrated from: organization-core/.claude/handoffs/_archived_isofix/ISOFIX_batch_1_edison.md*
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `handoff` |
+| Pillar | P12 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

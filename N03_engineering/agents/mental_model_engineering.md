@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [mental-model, builder, N03, routing, decision]
 tldr: Decision logic for builder -- intent classification, builder selection, crew composition, cost optimization.
 density_score: 0.88

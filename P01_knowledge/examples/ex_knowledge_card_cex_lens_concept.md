@@ -8,13 +8,13 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
-tags: [cex, lens, perspective, cognitive-filter, agent_node]
+quality: 9.1
+tags: [cex, lens, perspective, cognitive-filter, agent_group]
 tldr: "Lens eh perspectiva cognitiva que filtra TODA percepcao e producao — mesmo input, outputs radicalmente diferentes por lens"
-when_to_use: "Entender como satelites processam o mesmo input de formas distintas"
+when_to_use: "Entender como agent_groups processam o mesmo input de formas distintas"
 keywords: [lens, cognitive-perspective, refraction, prismatic-model]
 long_tails:
-  - "Como lenses diferenciam satelites que recebem o mesmo input"
+  - "Como lenses diferenciam agent_groups que recebem o mesmo input"
   - "Qual a diferenca entre lens e role em sistemas multi-agente"
 axioms:
   - "SEMPRE definir lens no mental_model antes de atribuir tarefas"
@@ -28,7 +28,7 @@ data_source: null
 
 ## Summary
 
-Lens eh o conceito mais original do CEX. Diferente de "role" (papel funcional), lens eh perspectiva cognitiva que filtra TODA percepcao e producao de uma entidade. Implementada como artefato P02 no mental_model.yaml de cada satelite. Modelo prismatico: mesmo input (luz branca) passa por 6 lenses e produz 6 refracoes. O LensEngine orquestra roteamento automatico, execucao por lens especifica e pipelines multi-lens.
+Lens eh o conceito mais original do CEX. Diferente de "role" (papel funcional), lens eh perspectiva cognitiva que filtra TODA percepcao e producao de uma entidade. Implementada como artefato P02 no mental_model.yaml de cada agent_group. Modelo prismatico: mesmo input (luz branca) passa por 6 lenses e produz 6 refracoes. O LensEngine orquestra roteamento automatico, execucao por lens especifica e pipelines multi-lens.
 
 ## Spec
 
@@ -51,16 +51,16 @@ Modelo prismatico: 6 lenses + setima consciencia (usuario/orchestrator). Combina
 
 | Trigger | Action |
 |---------|--------|
-| Mesmo input precisa de multiplas perspectivas | Rotear para 2+ satelites com lenses distintas |
+| Mesmo input precisa de multiplas perspectivas | Rotear para 2+ agent_groups com lenses distintas |
 | Output generico sem personalidade | Verificar se lens esta definida |
 | Satelite produz output fora do esperado | Checar se lens esta alinhada com tarefa |
-| Novo satelite sendo criado | Definir lens ANTES de tools e knowledge |
+| Novo agent_group sendo criado | Definir lens ANTES de tools e knowledge |
 | Pipeline precisa de refino progressivo | Encadear lenses em sequencia |
 
 ## Anti-Patterns
 
 - Tratar lens como role descritivo (eh cognitiva, nao funcional)
-- Dois satelites com lenses identicas (redundancia total)
+- Dois agent_groups com lenses identicas (redundancia total)
 - Omitir lens e depender so de instructions (output generico)
 - Mudar lens mid-session (incoerencia de perspectiva)
 - Ignorar modelo prismatico para tarefas multi-perspectiva

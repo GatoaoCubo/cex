@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.1
 tags: [builder, tools, software-project, python-tooling]
 tldr: "Tool inventory: 4 build tools (hatch, uv, pip, setuptools), 3 quality tools (ruff, mypy, pytest), 3 deploy tools (docker, railway, render), 3 security tools (bandit, gitleaks, pip-audit), 2 MCP tools (github, fetch)."
 density_score: 0.89

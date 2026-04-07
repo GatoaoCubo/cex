@@ -1,5 +1,18 @@
 ---
+id: dispatch
+kind: instruction
+pillar: P08
 description: "Dispatch task to a nucleus. Usage: /dispatch <nucleus> <task>"
+quality: 9.1
+title: "Dispatch"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # /dispatch — Send Task to Nucleus Builder
@@ -8,9 +21,9 @@ Write a handoff file and spawn a nucleus builder.
 
 ## Usage
 
-- `/dispatch n03 rebuild N01 agent artifacts`
-- `/dispatch n01 research competitor analysis for SaaS market`
-- `/dispatch grid MISSION_NAME` — launch parallel grid
+1. `/dispatch n03 rebuild N01 agent artifacts`
+2. `/dispatch n01 research competitor analysis for SaaS market`
+3. `/dispatch grid MISSION_NAME` — launch parallel grid
 
 ## Steps
 
@@ -41,3 +54,19 @@ Write a handoff file and spawn a nucleus builder.
 | Knowledge/docs | n04 | gemini 2.5-pro |
 | Code/test/deploy | n05 | codex |
 | Sales/pricing | n06 | claude sonnet |
+
+## System Context
+
+This artifact participates in the CEX typed knowledge system, a fractal
+architecture with 12 pillars, 8 nuclei, and 125 specialized builders.
+Artifacts flow through the 8F pipeline: Focus, Frame, Fetch, Filter,
+Format, Forge, Furnish, and Feedback.
+
+Quality is enforced via 3-layer scoring: structural (30%), rubric (30%),
+and semantic (40%). All artifacts target quality >= 9.0.
+
+| Layer | Weight | Method |
+|-------|--------|--------|
+| Structural | 30% | Automated count-based checks |
+| Rubric | 30% | Quality gate dimension scoring |
+| Semantic | 40% | LLM evaluation (when L1+L2 >= 8.5) |

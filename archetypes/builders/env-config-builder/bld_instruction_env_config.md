@@ -5,11 +5,21 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for env_config
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.0
+title: "Instruction Env Config"
+version: "1.0.0"
+author: n03_builder
+tags: [env_config, builder, examples]
+tldr: "Golden and anti-examples for env config construction, demonstrating ideal structure and common pitfalls."
+domain: "env config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce an env_config
 ## Phase 1: RESEARCH
-1. Identify the scope: global (applies to all services), a named agent_node, or a specific service
+1. Identify the scope: global (applies to all services), a named agent_group, or a specific service
 2. Catalog all environment variables needed within that scope — include name, current or example value, and purpose
 3. Classify the type of each variable: string, integer, boolean, URL, or secret
 4. Classify the sensitivity of each variable: public (safe to log), internal (omit from logs), or secret (mask in all output)

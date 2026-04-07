@@ -86,6 +86,7 @@ kinds:
 
   effort_profile:
     description: Effort and thinking level configuration for builder execution
+    llm_function: CONSTRAIN
     boundary: effort_profile = QUAL modelo/thinking usar; runtime_rule = QUANDO/COMO executar
     layer: content
     core: false

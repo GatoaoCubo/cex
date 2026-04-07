@@ -57,7 +57,7 @@ keywords:
 - BaseLinker
 - pack de créditos
 - credit pack
-agent_node: content_monetization_builder
+agent_group: content_monetization_builder
 model: sonnet
 priority: 9
 confidence_threshold: 0.65

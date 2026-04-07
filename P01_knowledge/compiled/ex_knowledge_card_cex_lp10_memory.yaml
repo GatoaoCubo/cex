@@ -13,15 +13,15 @@ tags:
 - lp10
 - memory
 - runtime-state
-- brain-index
+- knowledge-index
 - learning-record
 - session
-tldr: 'P10 define 4 tipos de memoria operacional: runtime_state, brain_index, learning_record, session_state'
+tldr: 'P10 define 4 tipos de memoria operacional: runtime_state, knowledge_index, learning_record, session_state'
 when_to_use: Entender como agentes LLM gerenciam estado e memoria entre sessoes
 keywords:
 - memory
 - runtime-state
-- brain-index
+- knowledge-index
 - learning-record
 - session-state
 long_tails:
@@ -44,7 +44,7 @@ conceitos_chave:
 - P01 = o que ESTUDEI (externo, validado, persistente)
 - P10 = o que VIVI (interno, acumulado, sessional)
 - runtime_state guarda decisoes e routing entre sessoes
-- brain_index configura busca semantica (BM25 + FAISS)
+- knowledge_index configura busca semantica (BM25 + FAISS)
 - learning_record registra o que funcionou e o que falhou
 - session_state eh snapshot efemero (morre com a sessao)
 - LangChain separa Memory (P10) de Document (P01)
@@ -56,10 +56,10 @@ conceitos_chave:
 - 'Funcao dominante: INJECT (memoria injetada como contexto)'
 - runtime_state max 3072 bytes (persistente entre sessoes)
 - session_state NAO eh core (efemero, descartavel)
-- brain_index NAO eh embedding_config (P01) nem rag_source
+- knowledge_index NAO eh embedding_config (P01) nem rag_source
 fases:
 - Definir quais estados persistem entre sessoes (runtime)
-- Configurar brain_index com BM25 + FAISS para busca
+- Configurar knowledge_index com BM25 + FAISS para busca
 - Iniciar learning_record para capturar padroes
 - Criar session_state para snapshot da sessao ativa
 - Implementar regras de retencao via P09 (decay, archive)
@@ -76,7 +76,7 @@ comparativo: '| Tipo | Persistencia | Layer | Exemplo |
 
   | runtime_state | Entre sessoes | runtime | Routing decisions, counters |
 
-  | brain_index | Permanente | runtime | BM25 config, FAISS params |
+  | knowledge_index | Permanente | runtime | BM25 config, FAISS params |
 
   | learning_record | Permanente | content | Success/failure patterns |
 

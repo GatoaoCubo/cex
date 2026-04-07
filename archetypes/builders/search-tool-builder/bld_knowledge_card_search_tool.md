@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for search_tool production — web and semantic search integration
 sources: Tavily docs, Serper docs, Brave Search API, Exa docs, Google Grounding API
+quality: 9.1
+title: "Knowledge Card Search Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [search_tool, builder, examples]
+tldr: "Golden and anti-examples for search tool construction, demonstrating ideal structure and common pitfalls."
+domain: "search tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: search_tool

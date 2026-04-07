@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "memory compression — summarized conversation/session memory injected at runtime"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, memory-summary, P10, compression, retention, freshness]
 tldr: "Pass/fail gate for memory_summary artifacts: compression method, retention policy, trigger definition, boundary vs session_state and learning_record."
 density_score: 0.90
@@ -44,7 +44,7 @@ Weights sum to 100%.
 | Trigger precision | 1.0 | Threshold numeric value defined; condition unambiguous |
 | Retention policy | 1.0 | Entity, decision, and action item retention all declared |
 | Boundary declaration | 1.0 | Explicitly NOT session_state (ephemeral) and NOT learning_record (persistent) |
-| Freshness decay | 0.5 | freshness_decay in [0,1]; value appropriate for source_type |
+| Freshness decay | 0.5 | freshness_decay in [0,1]; value apownte for source_type |
 | Source window | 0.5 | source_window integer defined; matches compression method |
 | Max tokens constraint | 0.5 | max_tokens defined and reasonable for use case |
 | Density | 1.0 | No filler; every field load-bearing |

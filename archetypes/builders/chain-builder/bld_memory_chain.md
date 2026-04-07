@@ -16,14 +16,17 @@ tags: [chain, prompt-decomposition, data-flow, step-granularity, error-handling]
 tldr: "One step, one purpose, one LLM call. Typed inputs and outputs at every boundary. Handle errors per step, not per chain."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [prompt chain, step decomposition, data flow, typed output, partial retry, error handling, atomic step]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Chain"
+density_score: 0.90
 ---
 ## Summary
 Complex tasks decomposed into prompt chains fail in one of two ways: steps that are too coarse (multiple transformations packed together, hard to debug) or steps that are too fine (one sentence per step, creating orchestration overhead without benefit). The effective middle ground is 1 step = 1 transformation with a single LLM call, explicit typed input, and explicit typed output.
-The key insight: a chain is not a script. It has no mutable state between steps except what is explicitly passed. This constraint, enforced strictly, makes each step independently testable and retryable.
+The key insight: a chain is not a script. It has no mutable state between steps except what is explicitly passed. This constraint, enforced strictly, makes each step independently testsble and retryable.
 ## Pattern
 **Atomic step discipline.**
 1. Define the chain's goal as a single sentence. Every step must serve that goal directly.

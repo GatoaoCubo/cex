@@ -9,7 +9,7 @@ updated: 2026-03-30
 author: n07_orchestrator
 pipeline: bootstrap_full
 domain: orchestration
-quality: 9.0
+quality: 9.2
 tags: [mission, bootstrap, dag, orchestration, N07, critical]
 tldr: "Plano de 4 fases para o CEX se auto-construir: validar tools, N03 reconstroi N07, fix WARNs, N03 sequencial reconstroi N01-N06."
 node_count: 16
@@ -347,7 +347,7 @@ builders_warn:
   - action-prompt-builder    (bld_examples: 4102B, bld_memory: 4104B) — 2 files
   - agent-package-builder    (bld_system_prompt: 4101B)
   - benchmark-builder        (bld_memory: 4099B)
-  - brain-index-builder      (bld_examples: 4098B)
+  - knowledge-index-builder      (bld_examples: 4098B)
   - dag-builder              (bld_memory: 4104B)
   - diagram-builder          (bld_examples: 4108B)
   - fallback-chain-builder   (bld_memory: 4097B)

@@ -19,7 +19,7 @@ consequences:
 version: 1.0.0
 created: 2026-03-29
 author: builder_agent
-quality: 9.0
+quality: 9.1
 tags: [adr, vector-database, qdrant, pinecone, self-hosted, architecture]
 ---
 
@@ -33,14 +33,14 @@ tags: [adr, vector-database, qdrant, pinecone, self-hosted, architecture]
 organization's brain_query currently uses FAISS for vector search (140MB index, ~1,957 pool artifacts). This works for local development but has limitations:
 
 1. **No persistence** — index must be rebuilt on every fresh clone (~20 min)
-2. **No filtering** — cannot filter by pillar, agent_node, or quality score during search
+2. **No filtering** — cannot filter by pillar, agent_group, or quality score during search
 3. **No real-time updates** — adding a new KC requires full index rebuild
 4. **Single-machine** — cannot share index across Railway API + local dev
 
 We need a vector database that supports:
 - Self-hosted deployment (data sovereignty requirement — pool artifacts contain proprietary business knowledge)
 - Hybrid search (vector + keyword, replacing current BM25+FAISS dual system)
-- Metadata filtering (by pillar, agent_node, quality score, kind)
+- Metadata filtering (by pillar, agent_group, quality score, kind)
 - Real-time upsert without full rebuild
 - Affordable at our scale (2K-10K documents, 768-dim vectors)
 
@@ -107,7 +107,7 @@ Phase 1 (Week 1): Deploy Qdrant on Railway
 
 Phase 2 (Week 2): Integrate with brain_query
   - Replace hybrid_search() to call Qdrant instead of FAISS+BM25
-  - Add metadata filters: pillar, agent_node, quality, kind
+  - Add metadata filters: pillar, agent_group, quality, kind
   - Benchmark: must match or beat current 88% top-3 accuracy
 
 Phase 3 (Week 3): Real-time sync

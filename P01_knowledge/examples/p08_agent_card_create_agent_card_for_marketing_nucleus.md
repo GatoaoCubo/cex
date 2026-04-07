@@ -42,9 +42,10 @@ runtime: "claude"
 mcp_config_file: ".mcp-n02.json"
 flags: ["--model", "claude-sonnet-4-6", "-p"]
 domain: "marketing"
-quality: null
-tags: [agent_node, marketing, n02, copywriting, brand-voice]
+quality: 9.1
+tags: [agent_group, marketing, n02, copywriting, brand-voice]
 tldr: "N02 Marketing Nucleus — sonnet model, brand-voice-first copy, A/B variants, CTAs, campaigns, fetch+brain MCPs."
+---
 
 ## Role
 

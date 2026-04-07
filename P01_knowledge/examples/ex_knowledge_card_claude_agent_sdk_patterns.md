@@ -8,7 +8,7 @@ created: 2026-02-23
 updated: 2026-03-25
 author: builder_agent
 domain: architecture
-quality: 8.9
+quality: 9.1
 tags: [agent-sdk, multi-agent, handoffs, guardrails, orchestration, claude]
 tldr: "Agent SDK: agent(instructions+tools+model) + handoffs(triage/pipeline/parallel) + guardrails(input/output) + tracing + structured output"
 when_to_use: "Construir multi-agent systems, implementar handoffs entre agentes, ou adicionar guardrails em producao"

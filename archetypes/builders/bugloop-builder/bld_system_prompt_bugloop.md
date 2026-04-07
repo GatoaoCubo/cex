@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "detection triggers, fix strategies, verification suites, escalation thresholds, rollback policies | NOT quality gates, scoring rubrics, optimizer cycles, guardrails, lifecycle rules"
 domain: "bugloop"
-quality: 8.7
+quality: 9.1
 tags: ["system_prompt", "bugloop", "correction_cycle", "governance"]
 safety_level: standard
 tools_listed: false
@@ -50,3 +50,18 @@ SCHEMA.md is the source of truth for field definitions. TEMPLATE derives from SC
 12. NEVER omit rollback steps when the fix modifies files, database records, or configuration state.
 **Comms**
 13. ALWAYS redirect quality gate requests to quality-gate-builder, optimizer requests to optimizer-builder, guardrail requests to guardrail-builder, and lifecycle rule requests to lifecycle-rule-builder.
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind bugloop --execute
+```
+
+```yaml
+# Agent config reference
+agent: bugloop-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

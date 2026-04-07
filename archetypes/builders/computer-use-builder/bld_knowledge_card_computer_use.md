@@ -4,7 +4,17 @@ id: bld_knowledge_card_computer_use
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for computer_use production — GUI automation via LLM
-sources: Anthropic computer-use docs, browser-use library, GUI automation best practices
+sources: Anthropic computer-use docs, browser-use library, GUI automation best forctices
+quality: 9.1
+title: "Knowledge Card Computer Use"
+version: "1.0.0"
+author: n03_builder
+tags: [computer_use, builder, examples]
+tldr: "Golden and anti-examples for computer use construction, demonstrating ideal structure and common pitfalls."
+domain: "computer use construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: computer_use

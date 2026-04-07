@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Output Formatter — validate and fix LLM output against kind schemas.
+# -*- coding: utf-8 -*-
+"""CEX Output Formatter -- validate and fix LLM output against kind schemas.
 
 Uses jsonschema to validate frontmatter against pillar schemas.
 Auto-fixes common issues (missing quality:null, wrong types, missing fields).
@@ -272,7 +273,7 @@ def auto_fix_frontmatter(text: str) -> tuple[str, list[str]]:
     fixes = []
     fm = parse_frontmatter(text)
     if not fm:
-        return text, ["Cannot parse frontmatter — manual fix needed"]
+        return text, ["Cannot parse frontmatter -- manual fix needed"]
 
     lines = text.split("\n")
     # Find frontmatter boundaries
@@ -296,7 +297,7 @@ def auto_fix_frontmatter(text: str) -> tuple[str, list[str]]:
         for j, line in enumerate(fm_lines):
             if line.startswith("quality:"):
                 fm_lines[j] = "quality: null"
-                fixes.append(f"quality: {quality_val} → null")
+                fixes.append(f"quality: {quality_val} -> null")
                 changed = True
                 break
 
@@ -312,7 +313,7 @@ def auto_fix_frontmatter(text: str) -> tuple[str, list[str]]:
         for j, line in enumerate(fm_lines):
             if line.startswith("version:"):
                 fm_lines[j] = "version: 1.0.0"
-                fixes.append(f"version: {version} → 1.0.0")
+                fixes.append(f"version: {version} -> 1.0.0")
                 changed = True
                 break
 
@@ -328,7 +329,7 @@ def auto_fix_frontmatter(text: str) -> tuple[str, list[str]]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Output Formatter — validate & fix artifacts")
+    parser = argparse.ArgumentParser(description="CEX Output Formatter -- validate & fix artifacts")
     parser.add_argument("--validate", "-v", help="Validate artifact file")
     parser.add_argument("--fix", help="Auto-fix artifact file")
     parser.add_argument("--schema", help="Show JSON Schema for a kind")

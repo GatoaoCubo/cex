@@ -4,6 +4,16 @@ id: bld_architecture_content_monetization
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of content monetization — 9 stages, billing→credits→courses→ads→email
+quality: 9.1
+title: "Architecture Content Monetization"
+version: "1.0.0"
+author: n03_builder
+tags: [content_monetization, builder, examples]
+tldr: "Golden and anti-examples for content monetization construction, demonstrating ideal structure and common pitfalls."
+domain: "content monetization construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: content_monetization in the CEX
@@ -78,7 +88,7 @@ social_publisher ──► content_monetization ──► ad_campaign
 ## Position in CEX
 | Layer | Location |
 |-------|----------|
-| Templates | P04_tools/{templates,examples}/ |
+| Templates | P11_feedback/{templates,examples}/ |
 | Nucleus | N06_commercial/ |
 | Instance | _instances/{co}/N06_commercial/ |
 

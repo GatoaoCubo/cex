@@ -4,6 +4,16 @@ id: bld_architecture_research_pipeline
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of research pipeline — 7 stages, multi-model, data flow
+quality: 9.1
+title: "Architecture Research Pipeline"
+version: "1.0.0"
+author: n03_builder
+tags: [research_pipeline, builder, examples]
+tldr: "Golden and anti-examples for research pipeline construction, demonstrating ideal structure and common pitfalls."
+domain: "research pipeline construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: research_pipeline in the CEX

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of secret_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Secret Config"
+version: "1.0.0"
+author: n03_builder
+tags: [secret_config, builder, examples]
+tldr: "Golden and anti-examples for secret config construction, demonstrating ideal structure and common pitfalls."
+domain: "secret config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: secret-config-builder
@@ -28,7 +38,7 @@ encryption:
   at_rest: AES-256-GCM
   in_transit: TLS 1.3
 access_pattern: dynamic
-quality: null
+quality: 8.9
 tags: [secret_config, vault, llm-keys, P09]
 tldr: "Vault-backed LLM API keys for research_agent with daily auto-rotation and dynamic leases"
 description: "Manages OpenAI and Anthropic API keys for research_agent research agent via Vault dynamic secrets"

@@ -1,9 +1,9 @@
 """
-CRM Lead Scoring Engine — multi-factor scoring for GATO³ B2B pipeline.
+CRM Lead Scoring Engine -- multi-factor scoring for GATO\u00b3 B2B pipeline.
 
 Scores each business on 5 dimensions:
   - Business maturity (rating, reviews, online presence)
-  - Geographic alignment (ring proximity to GATO³ in SCS)
+  - Geographic alignment (ring proximity to GATO\u00b3 in SCS)
   - Service alignment (cat specialty, premium positioning)
   - Contact quality (validated channels, completeness)
   - Market influence (social following, review volume)
@@ -59,7 +59,7 @@ TIER_LABELS = {
     (0, 50): "Unqualified",
 }
 
-# Cities by ring proximity to SCS (GATO³ base)
+# Cities by ring proximity to SCS (GATO\u00b3 base)
 RING_SCORES = {
     "1_abc": 20,
     "2_grande_sp": 12,
@@ -68,18 +68,18 @@ RING_SCORES = {
 }
 
 CITY_RING_FALLBACK = {
-    "são caetano do sul": 20,
-    "santo andré": 18,
-    "são bernardo do campo": 18,
+    "sao caetano do sul": 20,
+    "santo andre": 18,
+    "sao bernardo do campo": 18,
     "diadema": 15,
-    "mauá": 15,
-    "ribeirão pires": 14,
+    "maua": 15,
+    "ribeirao pires": 14,
     "rio grande da serra": 14,
     "abc paulista": 16,
     "guarulhos": 12,
     "osasco": 12,
     "barueri": 10,
-    "são paulo": 8,
+    "sao paulo": 8,
 }
 
 # Segments with cat alignment bonus
@@ -169,7 +169,7 @@ def score_contact(biz: CRMBusiness) -> float:
     if biz.has_phone:
         pts += 4
 
-    # WhatsApp — highest value for outreach (0-4)
+    # WhatsApp -- highest value for outreach (0-4)
     if biz.has_whatsapp:
         pts += 4
 
@@ -229,12 +229,12 @@ def classify_tier(score: float) -> str:
 def recommended_action(tier: str, biz: CRMBusiness) -> str:
     """Generate recommended next action based on tier."""
     actions = {
-        "S+": f"PRIORITY: Contato imediato via {'WhatsApp' if biz.has_whatsapp else 'telefone'}. Agendar reunião presencial.",
+        "S+": f"PRIORITY: Contato imediato via {'WhatsApp' if biz.has_whatsapp else 'telefone'}. Agendar reuniao presencial.",
         "S": f"Alta prioridade: Enviar proposta personalizada via {'WhatsApp' if biz.has_whatsapp else 'email' if biz.has_email else 'telefone'}.",
-        "Tier 1": "Média prioridade: Incluir no próximo lote de outreach. Preparar pitch adaptado ao segmento.",
-        "Tier 2": "Pipeline de nutrição: Adicionar a campanhas de email marketing e conteúdo educativo.",
-        "Tier 3": "Monitoramento: Acompanhar evolução. Re-avaliar em 90 dias.",
-        "Unqualified": "Baixa prioridade: Dados insuficientes ou baixo alinhamento. Validar dados antes de investir esforço.",
+        "Tier 1": "Media prioridade: Incluir no proximo lote de outreach. Preparar pitch adaptado ao segmento.",
+        "Tier 2": "Pipeline de nutricao: Adicionar a campanhas de email marketing e conteudo educativo.",
+        "Tier 3": "Monitoramento: Acompanhar evolucao. Re-avaliar em 90 dias.",
+        "Unqualified": "Baixa prioridade: Dados insuficientes ou baixo alinhamento. Validar dados antes de investir esforco.",
     }
     return actions.get(tier, "Avaliar manualmente.")
 
@@ -329,7 +329,7 @@ class LeadScorer:
             self.run()
 
         print("=" * 60)
-        print("GATO³ CRM Lead Scoring — Summary")
+        print("GATO\u00b3 CRM Lead Scoring -- Summary")
         print("=" * 60)
         print(f"Total businesses: {len(self.businesses)}")
         print()
@@ -353,7 +353,7 @@ class LeadScorer:
 if __name__ == "__main__":
     import argparse
 
-    ap = argparse.ArgumentParser(description="CRM Lead Scoring Engine for GATO³")
+    ap = argparse.ArgumentParser(description="CRM Lead Scoring Engine for GATO\u00b3")
     ap.add_argument("--crm", default=str(DEFAULT_CRM), help="Path to CRM .md file")
     ap.add_argument("--export", action="store_true", help="Export full report JSON")
     ap.add_argument("--top", type=int, default=20, help="Number of top leads to show")

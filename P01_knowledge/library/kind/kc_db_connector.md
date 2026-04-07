@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: db_connector
-quality: 8.9
+quality: 9.1
 tags: [db_connector, P04, CALL, kind-kc]
 tldr: "Typed adapter to structured data sources (SQL, GraphQL, REST-to-DB) with pooling, retries, and schema introspection — NOT an api_client nor a retriever"
 when_to_use: "Building, reviewing, or reasoning about db_connector artifacts"
 keywords: [sql, database, pooling, connector]
 feeds_kinds: [db_connector]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # DB Connector
@@ -54,7 +57,7 @@ A db_connector wraps structured data access (SQL, GraphQL, REST-to-DB) behind a 
 ## Patterns
 | Pattern | When to Use | Example |
 |---|---|---|
-| Pool-per-tenant | Isolated agent_node DBs | operations_agent gets its own pg pool |
+| Pool-per-tenant | Isolated agent_group DBs | operations_agent gets its own pg pool |
 | Read replica routing | Analytics vs write path | SELECT to replica; INSERT to primary |
 | Parameterized queries | All user-facing queries | cursor.execute(sql, params) always |
 

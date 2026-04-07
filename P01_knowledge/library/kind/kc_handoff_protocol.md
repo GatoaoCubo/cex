@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: handoff_protocol
-quality: 9.0
+quality: 9.1
 tags: [handoff_protocol, p02, COLLABORATE, kind-kc]
 tldr: "Agent-to-agent transfer protocol — defines what context passes between agents and what the receiving agent must return"
 when_to_use: "Building, reviewing, or reasoning about handoff_protocol artifacts"
@@ -31,7 +31,7 @@ core: true
 ```
 
 ## What It Is
-A handoff_protocol defines how one agent transfers control to another — what context is passed, what the receiving agent must return, and what triggers the transfer. It is the contract between agents in a multi-agent system. It is NOT a dispatch_rule (P12, which maps keywords to agent_nodes) nor a router (which selects the target). Handoff protocols answer "what do I send and what do I get back?" — dispatch rules answer "who gets this task?"
+A handoff_protocol defines how one agent transfers control to another — what context is passed, what the receiving agent must return, and what triggers the transfer. It is the contract between agents in a multi-agent system. It is NOT a dispatch_rule (P12, which maps keywords to agent_groups) nor a router (which selects the target). Handoff protocols answer "what do I send and what do I get back?" — dispatch rules answer "who gets this task?"
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -79,7 +79,7 @@ A handoff_protocol defines how one agent transfers control to another — what c
 - IF agents run in separate terminals THEN file-based async handoff with signals
 - IF high volume, many concurrent agents THEN queue-based handoff
 - IF simple keyword routing without context THEN dispatch_rule (P12) instead
-- DEFAULT: file-based handoff for organization agent_node architecture
+- DEFAULT: file-based handoff for organization agent_group architecture
 
 ## Quality Criteria
 - GOOD: Trigger defined; context_passed listed; return_contract specified

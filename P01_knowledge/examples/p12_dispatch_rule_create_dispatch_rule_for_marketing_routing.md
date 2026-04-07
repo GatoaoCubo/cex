@@ -7,12 +7,12 @@ created: 2026-04-02
 updated: 2026-04-02
 author: codex
 domain: marketing
-quality: null
+quality: 9.0
 tags: [dispatch, marketing, marketer, copywriting, campaigns, P12]
-tldr: Route marketing copy, campaign creation, and brand voice tasks to marketer agent_node
+tldr: Route marketing copy, campaign creation, and brand voice tasks to marketer agent_group
 scope: marketing
 keywords: [marketing, campanha, campaign, copy, copywriting, anuncio, ads, headline, landing page, brand voice, redes sociais, redação]
-agent_node: marketer
+agent_group: marketer
 model: sonnet
 priority: 8
 confidence_threshold: 0.72
@@ -21,11 +21,14 @@ conditions:
   exclude_domains: [knowledge_indexing, research_analysis, code_deploy]
 load_balance: false
 routing_strategy: hybrid
+title: "P12 Dispatch Rule Create Dispatch Rule For Marketing Routing"
+density_score: 0.89
+---
 
 # marketing Dispatch Rule
 
 ## Purpose
-Routes marketing and copywriting tasks to the marketer agent_node (N02). Marketer
+Routes marketing and copywriting tasks to the marketer agent_group (N02). Marketer
 handles persuasive content creation: ad copy, email sequences, headlines, landing pages,
 CTAs, campaign briefs, and brand voice guidelines. Marketer runs claude-sonnet, optimized
 for fluent, conversion-oriented writing in both PT and EN.
@@ -49,3 +52,18 @@ the same writing intent from different linguistic angles.
 summarize, and retrieve existing copy assets without persuasive generation capability.
 This provides partial service continuity (content retrieval, not creation) rather than a
 full peer substitute, keeping the fallback chain acyclic and avoiding self-routing.
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `dispatch rule`
+- **Artifact ID**: `p12_dr_marketing`
+- **Tags**: [dispatch, marketing, marketer, copywriting, campaigns, P12]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `dispatch rule` | Artifact type |
+| Pipeline | 8F (F1→F8) |

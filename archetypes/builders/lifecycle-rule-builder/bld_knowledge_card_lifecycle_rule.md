@@ -5,6 +5,16 @@ pillar: P11
 llm_function: INJECT
 purpose: Domain knowledge for lifecycle_rule production — atomic searchable facts
 sources: lifecycle-rule-builder MANIFEST.md + SCHEMA.md v1.0.0
+quality: 9.1
+title: "Knowledge Card Lifecycle Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [lifecycle_rule, builder, examples]
+tldr: "Golden and anti-examples for lifecycle rule construction, demonstrating ideal structure and common pitfalls."
+domain: "lifecycle rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: lifecycle_rule
@@ -28,7 +38,7 @@ Lifecycle rules are declarative policies governing artifact state transitions ov
 |---------|-------------|
 | Domain-specific freshness | LLM pricing = 30 days; architectural law = 365 days |
 | Measurable transitions | Days since update, score threshold, or usage count |
-| Mandatory ownership | Unowned artifacts always rot — assign agent_node or agent |
+| Mandatory ownership | Unowned artifacts always rot — assign agent_group or agent |
 | Notification on stale | Stale artifact with no alert = hidden technical debt |
 | Automation levels | full (cron-driven), semi (auto-detect + human approve), manual |
 | State machine | Each state has entry criteria, exit criteria, and allowed transitions |

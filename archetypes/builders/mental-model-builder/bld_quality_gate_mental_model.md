@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: mental_model
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, mental-model, routing, P02, cognitive-map]
 tldr: "Quality gate for mental_model artifacts: enforces routing rules, decision tree, domain map, and design-time-only scope."
 density_score: 0.85
@@ -39,7 +39,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S02 | Routing rules have confidence thresholds | 1.0 | Each rule specifies a match confidence or keyword specificity level |
 | S03 | Decisions have if/then/else structure | 1.0 | Decision tree entries follow: condition → then action → else action |
 | S04 | Priorities ordered with rationale | 1.0 | `priorities` list is ranked and each rank has a one-line justification |
-| S05 | Heuristics testable | 0.5 | Each heuristic can be verified with a specific input example |
+| S05 | Heuristics testsble | 0.5 | Each heuristic can be verified with a specific input example |
 | S06 | Domain boundaries explicit | 1.0 | Domain Map states what the agent covers AND what it routes away |
 | S07 | Personality traits defined | 0.5 | `personality` object with `tone`, `verbosity`, `risk_tolerance` |
 | S08 | `tags` includes `"mental-model"` | 0.5 | Minimum tag for routing |

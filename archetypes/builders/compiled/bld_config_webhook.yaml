@@ -1,0 +1,78 @@
+kind: config
+id: bld_config_webhook
+pillar: P04
+llm_function: CONSTRAIN
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+quality: null
+tags:
+- config
+- webhook
+- P04
+- naming
+- constraints
+- enums
+tldr: 'Runtime config: naming convention, size limit, direction enum, signature enum, event naming patterns per provider.'
+effort: medium
+max_turns: 25
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
+density_score: 1.0
+naming_convention: 'filename : p04_webhook_{event_slug}.md
+
+  id       : p04_webhook_{event_slug}'
+event_slug_rules:
+- Lowercase only, underscores for separators (no hyphens, no dots)
+- Reflects the primary event_type, max 40 characters
+slug_derivation_examples: '| event_type | slug | id |
+
+  |-----------|------|----|
+
+  | payment_intent.succeeded | payment_completed | p04_webhook_payment_completed |
+
+  | push | push | p04_webhook_push |
+
+  | message.received | message_received | p04_webhook_message_received |
+
+  | customer.subscription.deleted | subscription_deleted | p04_webhook_subscription_deleted |
+
+  | inbound_email | inbound_email | p04_webhook_inbound_email |'
+size_constraint: 'max_bytes : 1024  (body only, frontmatter excluded)
+
+  Measure with: `len(body.encode("utf-8"))`. If over: compress Overview (1 sentence), inline minimal payload.'
+direction_enum: "direction:\n  - inbound   # external system calls your endpoint\n  - outbound  # your system calls external\
+  \ endpoint\nNo aliases: \"receive\", \"send\", \"incoming\", \"outgoing\" all fail H06."
+signature_method_enum: "signature_method:\n  - hmac_sha256   # recommended default\n  - hmac_sha1     # legacy (Twilio)\n\
+  \  - rsa_sha256    # SendGrid\n  - none          # only for internal/trusted-network outbound\n`none` on inbound always\
+  \ fails S11 (security gate)."
+provider_event_naming_patterns: '| Provider | Pattern | Examples |
+
+  |----------|---------|---------|
+
+  | Stripe | `object.action` | `payment_intent.succeeded`, `customer.created` |
+
+  | GitHub | `event_name` | `push`, `pull_request`, `issues` |
+
+  | Slack | `event_type` | `message`, `app_mention`, `reaction_added` |
+
+  | Twilio | `EventType` | `com.twilio.messaging.inbound-message` |
+
+  | SendGrid | `event` | `delivered`, `open`, `bounce`, `click` |
+
+  | Custom | `domain.action` | `order.fulfilled`, `user.signup` |'
+retry_policy_defaults: "retry_policy:\n  max_attempts: 3\n  backoff: exponential\n  backoff_base_ms: 1000\nProvider-managed\
+  \ (Stripe, GitHub): match provider window. Self-managed: 3-5 attempts, 5min cap."
+timeout_defaults: 'timeout_ms: 30000   # 30s standard
+
+  Stripe: 30s. GitHub: 10s. Slack: 3s (Events API). Use provider minimum when known.'
+tags_requirement: 'Must include: `"webhook"` (kind), event slug or domain (e.g., `"stripe"`), `"P04"` (pillar).'
+payload_schema: 'JSON Schema (type:object, required+properties). Include: event_id, event_type, data payload. `idempotency_key`
+  mandatory for inbound (Stripe: `data.object.id`, GitHub: `delivery.id`).'

@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Red Team Eval"
 tags: [template, red-team, security, adversarial, safety]
 tldr: "Adversarial evaluation that tests system robustness against prompt injection, jailbreaks, data leakage, and edge cases. Defines attack vectors and expected defenses."
-quality: 8.8
+quality: 9.0
 ---
 
 # Red Team Eval: [EVAL_NAME]

@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "baseline comparison configuration — current vs prior experiment for detecting quality regressions in LLM pipelines"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, regression-check, P07, evals, baseline, threshold]
 tldr: "Pass/fail gate for regression_check artifacts: baseline_ref resolvability, threshold semantics, metric coverage, and fail_action definition."
 density_score: 0.90
@@ -43,7 +43,7 @@ Weights sum to 100%.
 | Baseline clarity | 1.0 | baseline_ref is a resolvable ID with capture context documented |
 | Threshold justification | 1.0 | Threshold value explained; units documented |
 | Metric coverage | 1.0 | accuracy, latency, cost at minimum for production systems |
-| Per-metric thresholds | 0.5 | Different tolerance per metric where appropriate |
+| Per-metric thresholds | 0.5 | Different tolerance per metric where apownte |
 | Tool specification | 1.0 | Comparison tool identified with invocation pattern |
 | fail_action definition | 1.0 | fail_action is block/warn/log with rationale |
 | Notification config | 0.5 | Owner or channel defined for regression alerts |

@@ -4,6 +4,16 @@ id: bld_architecture_pattern
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of pattern — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Pattern"
+version: "1.0.0"
+author: n03_builder
+tags: [pattern, builder, examples]
+tldr: "Golden and anti-examples for pattern construction, demonstrating ideal structure and common pitfalls."
+domain: "pattern construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: pattern in the CEX
@@ -38,7 +48,7 @@ pattern         --signals-->   pattern_application
 | A named, reusable solution for a recurring architecture problem | An inviolable operational mandate (law P08) |
 | Documents forces, consequences, and applicability | A visual representation of structure (diagram P08) |
 | Recommends — does not mandate — adoption | An inventory of system parts (component_map P08) |
-| Derived from observed successes and documented failures | A specification of a agent_node component (agent_card P08) |
+| Derived from observed successes and documented failures | A specification of a agent_group component (agent_card P08) |
 | Cross-references related and anti-patterns | A multi-step execution sequence (workflow P12) |
 | Dense (>=0.80 density), max 4KB | A verbose tutorial or guide |
 ## Layer Map

@@ -13,7 +13,7 @@ tags: [dispatch, n04, knowledge, orchestration, p12, routing]
 tldr: "Routes tasks involving knowledge architecture, RAG, indexing, and semantic search to the N04 Knowledge Nucleus, based on a hybrid semantic and keyword match."
 scope: "CEX-wide knowledge retrieval and management tasks."
 keywords: [knowledge, rag, indexing, embeddings, taxonomy, retrieval, documentation, search, find, explain, chunking, consolidate, distill, what is, how does, document]
-agent_node: N04_knowledge
+agent_group: N04_knowledge
 priority: 10
 confidence_threshold: 0.90
 fallback: N01_intelligence

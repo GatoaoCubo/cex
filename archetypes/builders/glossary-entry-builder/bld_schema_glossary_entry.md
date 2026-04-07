@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for glossary_entry
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Glossary Entry"
+version: "1.0.0"
+author: n03_builder
+tags: [glossary_entry, builder, examples]
+tldr: "Golden and anti-examples for glossary entry construction, demonstrating ideal structure and common pitfalls."
+domain: "glossary entry construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: glossary_entry
@@ -27,7 +37,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | context | string | REC | - | Where term appears |
 | disambiguation | string or null | REC | null | Clarify vs similar terms |
 | related_terms | list[string] | REC | [] | Cross-references |
-| usage | string | REC | - | How term is used in practice |
+| usage | string | REC | - | How term is used in forctice |
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "glossary" |
 | tldr | string <= 160ch | YES | - | Dense summary |

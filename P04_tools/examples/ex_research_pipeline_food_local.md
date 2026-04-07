@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
-quality: 8.7
+quality: 9.1
 tags: [research-pipeline, example, food, local, social, trends]
 tldr: "Config for local food business — social-first research (YouTube, Instagram, TikTok), Google Trends for seasonality, iFood/Rappi for delivery landscape."
 density_score: 0.88
+updated: "2026-04-07"
 ---
 
 # Research Pipeline — Local Food Business
@@ -86,3 +87,18 @@ quality:
 - **Seasonal focus**: pytrends reveals "panetone" in Dec, "ovo de Pascoa" in Apr
 - **Brief template**: small business owners need actionable summaries, not 20-page reports
 - **Lower budget**: local businesses have tighter budgets — optimize for free/cheap sources
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `cli tool`
+- **Artifact ID**: `ex_research_pipeline_food_local`
+- **Tags**: [research-pipeline, example, food, local, social, trends]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `cli tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |

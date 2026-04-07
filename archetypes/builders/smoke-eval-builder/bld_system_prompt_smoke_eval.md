@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "smoke_eval artifacts: quick sanity tests under 30s, critical path verification, fast-fail checks, health probes | Does NOT: deep correctness unit-evals, full pipeline e2e-evals, performance benchmarks"
 domain: smoke_eval
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, smoke_eval, P03, P07]
 safety_level: standard
 tools_listed: false

@@ -4,7 +4,17 @@ id: bld_examples_dispatch_rule
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of dispatch_rule artifacts
-pattern: few-shot learning for keyword-to-agent_node routing rules
+pattern: few-shot learning for keyword-to-agent_group routing rules
+quality: 9.0
+title: "Examples Dispatch Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [dispatch_rule, builder, examples]
+tldr: "Golden and anti-examples for dispatch rule construction, demonstrating ideal structure and common pitfalls."
+domain: "dispatch rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: dispatch-rule-builder
@@ -22,10 +32,10 @@ author: codex
 domain: research
 quality: null
 tags: [dispatch, research, shaka, market, scrape]
-tldr: Route market research and competitor analysis tasks to researcher agent_node
+tldr: Route market research and competitor analysis tasks to researcher agent_group
 scope: research
-keywords: [pesquisar, research, mercado, market, concorrente, competitor, scrape, analise, analysis, benchmark]
-agent_node: shaka
+keywords: [researchr, research, market, market, competitor, competitor, scrape, analysis, analysis, benchmark]
+agent_group: shaka
 model: sonnet
 priority: 8
 confidence_threshold: 0.70
@@ -40,7 +50,7 @@ Routes market research, competitor intelligence, and scraping to researcher.
 researcher carries firecrawl MCP and research-optimized prompting.
 ## Keyword Rationale
 Bilingual PT/EN coverage fires on both Portuguese operator commands and English
-task descriptions. `analise`/`analysis` catch adjacent sub-tasks.
+task descriptions. `analysis`/`analysis` catch adjacent sub-tasks.
 ## Fallback Logic
 knowledge-engine handles knowledge domain when researcher is unavailable; can index and
 summarize research outputs without firecrawl.
@@ -50,11 +60,11 @@ WHY THIS IS GOLDEN:
 - `id: p12_dr_research` matches `^p12_dr_[a-z][a-z0-9_]+$`
 - `kind: dispatch_rule`, `pillar: P12` present
 - `quality: null` — never a score at authoring time
-- `tags` includes agent_node slug `shaka`
+- `tags` includes agent_group slug `shaka`
 - `tldr` <= 120 chars and specific
 - `scope` matches filename segment
 - `keywords` 10 terms: bilingual PT+EN coverage (S10 pass)
-- `agent_node: shaka` and `fallback: pytha` are distinct lowercase slugs
+- `agent_group: shaka` and `fallback: pytha` are distinct lowercase slugs
 - `model: sonnet` correct for researcher research domain
 - `priority: 8` for high-value business domain
 - `confidence_threshold: 0.70` in recommended precision range
@@ -70,7 +80,7 @@ BAD OUTPUT (`p12_dispatch_rule_research.json`):
 {
   "id": "dispatch-research",
   "type": "routing",
-  "agent_node": "researcher",
+  "agent_group": "researcher",
   "keywords": "research, market",
   "quality_score": 8.5,
   "timestamp": "2026-03-26T10:00:00Z",
@@ -90,8 +100,8 @@ FAILURES:
 5. [H07] `keywords` is a string — must be a YAML list for routing engine iteration
 6. [H09] `model: gpt-4` — not in enum (`sonnet`, `opus`, `haiku`, `flash`)
 7. [H10] `priority: "high"` — must be integer 1-10, not string label
-8. [H12] `fallback: researcher` equals `agent_node: researcher` — fallback must be a distinct agent_node
+8. [H12] `fallback: researcher` equals `agent_group: researcher` — fallback must be a distinct agent_group
 9. [H14] `status`, `timestamp`, `quality_score` present — signal boundary violation
 10. [H15] `tasks`, `scope_fence` present — handoff boundary violation
-11. [S01] `agent_node: researcher` uppercase — must be lowercase slug `shaka`
+11. [S01] `agent_group: researcher` uppercase — must be lowercase slug `shaka`
 12. [S10] keywords EN-only string — no PT variants for bilingual coverage

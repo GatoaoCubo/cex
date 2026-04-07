@@ -4,6 +4,16 @@ id: bld_architecture_type_def
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of type_def — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Type Def"
+version: "1.0.0"
+author: n03_builder
+tags: [type_def, builder, examples]
+tldr: "Golden and anti-examples for type def construction, demonstrating ideal structure and common pitfalls."
+domain: "type def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: type_def in the CEX

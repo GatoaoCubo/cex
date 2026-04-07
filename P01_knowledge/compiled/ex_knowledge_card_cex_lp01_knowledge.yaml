@@ -61,7 +61,7 @@ fases:
 - 'Pesquisa: coletar dados de fontes verificaveis'
 - 'Destilacao: condensar em formato atomico (KC ou glossary)'
 - 'Validacao: quality gate (density, completeness, accuracy)'
-- 'Indexacao: embedding + brain_index para retrieval'
+- 'Indexacao: embedding + knowledge_index para retrieval'
 - 'Injecao: INJECT no contexto do LLM via RAG ou direto'
 regras_de_ouro:
 - SEMPRE incluir data_source em KCs factuais

@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a fallback_chain artifact
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Fallback Chain"
+version: "1.0.0"
+author: n03_builder
+tags: [fallback_chain, builder, examples]
+tldr: "Golden and anti-examples for fallback chain construction, demonstrating ideal structure and common pitfalls."
+domain: "fallback chain construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: fallback_chain

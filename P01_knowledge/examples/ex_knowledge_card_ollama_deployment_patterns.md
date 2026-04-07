@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: execution
-quality: 8.9
+quality: 9.1
 tags: [ollama, deployment, gguf, lora, modelfile, local-llm]
 tldr: "Deploy Ollama depende de casar base e adapter, preservar template e escolher quantizacao entre memoria e qualidade."
 when_to_use: "Empacotar modelo fine-tuned para Ollama ou diagnosticar output ruim em deploy local"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: null
   related: [p01_kc_zero_touch_execution, p01_kc_cicd_pipeline_architecture]
-density_score: null
+density_score: 1.0
 data_source: "https://docs.ollama.com/modelfile"
 ---
 
@@ -102,3 +102,10 @@ ollama ps
 - external: https://docs.ollama.com/cli
 - deepens: p01_kc_zero_touch_execution
 - deepens: p01_kc_cicd_pipeline_architecture
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

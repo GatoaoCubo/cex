@@ -12,6 +12,7 @@ tags: [firecrawl, api-key, env, config]
 tldr: "Firecrawl API key for web scraping enrichment of marketplace research"
 density_score: 0.88
 source: organization-core/.claude/projects/memory/MEMORY.md
+domain: "config"
 ---
 
 # Env: FIRECRAWL_API_KEY
@@ -28,8 +29,8 @@ source: organization-core/.claude/projects/memory/MEMORY.md
 
 ## Source
 
-- Where defined: Railway environment variables (operations_agent agent_node)
-- How to obtain: Sign up at firecrawl.dev, $19/mo tier, copy API key from dashboard
+1. Where defined: Railway environment variables (operations_agent agent_group)
+2. How to obtain: Sign up at firecrawl.dev, $19/mo tier, copy API key from dashboard
 
 ## Fallback
 
@@ -40,13 +41,25 @@ source: organization-core/.claude/projects/memory/MEMORY.md
 
 ## Consumers
 
-- `api/core/erp_connector.py`: Enriches marketplace product data (shopee 3 credits, amazon 3 credits, magalu/americanas/casas_bahia/shein 1 each)
-- `api/v1/pesquisas.py`: Marketplace research with `formats: ["extract"]` + `extract: {schema, prompt}` pattern
+1. `api/core/erp_connector.py`: Enriches marketplace product data (shopee 3 credits, amazon 3 credits, magalu/americanas/casas_bahia/shein 1 each)
+2. `api/v1/pesquisas.py`: Marketplace research with `formats: ["extract"]` + `extract: {schema, prompt}` pattern
 
 ## Dependencies
 
-- Requires: `FIRECRAWL_ENABLED=true`, `FIRECRAWL_MONTHLY_BUDGET=3000`, `FIRECRAWL_PER_RESEARCH_BUDGET=10`
-- Conflicts: none (Serper runs independently)
+1. Requires: `FIRECRAWL_ENABLED=true`, `FIRECRAWL_MONTHLY_BUDGET=3000`, `FIRECRAWL_PER_RESEARCH_BUDGET=10`
+2. Conflicts: none (Serper runs independently)
 
 ---
 *Migrated from: organization MEMORY.md (Firecrawl integration 2026-03-01)*
+
+## Metadata
+
+```yaml
+id: p09_env_firecrawl
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p09-env-firecrawl.md
+```

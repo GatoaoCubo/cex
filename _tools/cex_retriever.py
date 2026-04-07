@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Retriever — TF-IDF semantic search over all CEX artifacts.
+# -*- coding: utf-8 -*-
+"""CEX Retriever -- TF-IDF semantic search over all CEX artifacts.
 
 Indexes all .md artifacts, builds a TF-IDF matrix, and provides
 similarity search for F3 INJECT knowledge injection.
@@ -399,7 +400,7 @@ def show_stats(index: dict):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Retriever — TF-IDF semantic search")
+    parser = argparse.ArgumentParser(description="CEX Retriever -- TF-IDF semantic search")
     parser.add_argument("--build", action="store_true", help="Build/rebuild the index")
     parser.add_argument("--query", "-q", help="Search query")
     parser.add_argument("--kind", "-k", help="Filter by kind")

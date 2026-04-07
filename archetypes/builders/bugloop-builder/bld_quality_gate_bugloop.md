@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "automated correction cycles — detect, fix, verify loops for regression prevention"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, bugloop, P11, correction-cycle, auto-fix, verification]
 tldr: "Pass/fail gate for bugloop artifacts: correction cycle completeness, fix strategy safety, and verification assertion coverage."
 density_score: 0.92

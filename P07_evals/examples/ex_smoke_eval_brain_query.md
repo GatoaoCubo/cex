@@ -20,7 +20,7 @@ linked_artifacts: null
 
 ## Purpose
 
-Quick sanity check to verify brain MCP is operational. Run after FAISS index rebuild or agent_node boot to confirm hybrid search returns relevant results before executing knowledge-intensive tasks.
+Quick sanity check to verify brain MCP is operational. Run after FAISS index rebuild or agent_group boot to confirm hybrid search returns relevant results before executing knowledge-intensive tasks.
 
 ## Runtime
 
@@ -30,7 +30,7 @@ Quick sanity check to verify brain MCP is operational. Run after FAISS index reb
 
 | Check | Input | Expected | Fail Condition |
 |-------|-------|----------|----------------|
-| BM25 fallback | `brain_query("spawn agent_node")` | >= 3 results | 0 results |
+| BM25 fallback | `brain_query("spawn agent_group")` | >= 3 results | 0 results |
 | FAISS semantic | `brain_query("agent for web scraping")` | web_scraper in top 5 | wrong agent returned |
 | Hybrid accuracy | `brain_query("skill for continuous batching")` | continuous_batching in top 3 | missing entirely |
 | Response time | any query | < 3s | > 10s (Ollama timeout) |

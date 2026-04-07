@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for regression_check production — baseline comparison configuration
 sources: Braintrust experiment comparison, Promptfoo --compare, LangSmith A/B experiments, DeepEval regression tests
+quality: 9.0
+title: "Knowledge Card Regression Check"
+version: "1.0.0"
+author: n03_builder
+tags: [regression_check, builder, examples]
+tldr: "Golden and anti-examples for regression check construction, demonstrating ideal structure and common pitfalls."
+domain: "regression check construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: regression_check

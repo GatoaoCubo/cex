@@ -6,10 +6,15 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: course_delivery
-quality: 8.9
+quality: 9.1
 tldr: "Hotmart Club — native member area for course delivery, drip content, progress tracking, and community features."
 tags: [hotmart, club, course, member-area, drip, infoproduct, brazil]
-density_score: 0.88
+density_score: 1.0
+when_to_use: "Apply when hotmart club — native member area for course delivery, drip content, progress tracking, and commu..."
+keywords: [knowledge-card, course, platform, delivery, structure]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Hotmart Club — Course Delivery Platform
@@ -190,3 +195,10 @@ Best for: Funnels using free content to drive paid conversions.
 3. **Club for BR, external for INT** — Club is optimized for Portuguese; use DS24 member area or Teachable for international.
 4. **Certificate at 80%** — encourages completion without being punitive.
 5. **API for automation** — use Club API to sync progress with your CRM/email provider.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

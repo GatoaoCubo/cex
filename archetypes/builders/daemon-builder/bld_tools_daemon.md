@@ -4,6 +4,16 @@ id: bld_tools_daemon
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for daemon production
+quality: 9.1
+title: "Tools Daemon"
+version: "1.0.0"
+author: n03_builder
+tags: [daemon, builder, examples]
+tldr: "Golden and anti-examples for daemon construction, demonstrating ideal structure and common pitfalls."
+domain: "daemon construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: daemon-builder
@@ -33,3 +43,23 @@ purpose: Tools and APIs available for daemon production
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate against
 the produced artifact. Key checks: YAML parses, id pattern, schedule is concrete,
 body <= 1024 bytes, quality == null, signal_handling includes SIGTERM.
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_tools_daemon
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-daemon.md
+```

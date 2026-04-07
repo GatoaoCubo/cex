@@ -8,10 +8,10 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: 8.9
+quality: 9.2
 tags: [signal, orchestration, N07, complete, error, progress]
 tldr: "Signal protocol for N07 orchestration — complete/error/progress payloads with quality score and artifact references."
-density_score: 0.90
+density_score: 1.0
 ---
 
 # Signal Protocol: N07 Orchestration
@@ -20,7 +20,7 @@ density_score: 0.90
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| agent_node | string | YES | Lowercase slug of emitting nucleus (e.g. n03, n07) |
+| agent_group | string | YES | Lowercase slug of emitting nucleus (e.g. n03, n07) |
 | status | string | YES | "complete", "error", or "progress" |
 | quality_score | float/null | YES | Quality score (0.0-10.0) or null |
 | timestamp | string | YES | ISO 8601 datetime |
@@ -48,7 +48,7 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
 ### N03 Complete Signal (builder finished)
 ```json
 {
-  "agent_node": "n03",
+  "agent_group": "n03",
   "status": "complete",
   "quality_score": 9.0,
   "timestamp": "2026-03-30T14:00:00Z",
@@ -66,7 +66,7 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
 ### N07 Mission Complete Signal (orchestrator finished)
 ```json
 {
-  "agent_node": "n07",
+  "agent_group": "n07",
   "status": "complete",
   "quality_score": 9.0,
   "timestamp": "2026-03-30T15:30:00Z",
@@ -79,7 +79,7 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
 ### N05 Error Signal (ops builder failed)
 ```json
 {
-  "agent_node": "n05",
+  "agent_group": "n05",
   "status": "error",
   "quality_score": null,
   "timestamp": "2026-03-30T16:00:00Z",
@@ -92,7 +92,7 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
 ### N01 Progress Signal (research in progress)
 ```json
 {
-  "agent_node": "n01",
+  "agent_group": "n01",
   "status": "progress",
   "quality_score": null,
   "timestamp": "2026-03-30T14:30:00Z",
@@ -112,7 +112,7 @@ python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus
 
 ## Consumer Contract
 
-- **MUST** handle: `agent_node`, `status`, `quality_score`, `timestamp`
+- **MUST** handle: `agent_group`, `status`, `quality_score`, `timestamp`
 - **MAY** process optional fields, ignoring absent ones
 - **MUST NOT** assume signal contains routing or execution instructions
 - **MUST** treat `quality_score: null` as "not yet evaluated"

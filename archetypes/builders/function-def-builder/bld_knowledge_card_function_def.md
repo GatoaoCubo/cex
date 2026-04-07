@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for function_def production — LLM function calling specification
 sources: OpenAI function calling docs, Anthropic tool_use docs, JSON Schema spec
+quality: 9.2
+title: "Knowledge Card Function Def"
+version: "1.0.0"
+author: n03_builder
+tags: [function_def, builder, examples]
+tldr: "Golden and anti-examples for function def construction, demonstrating ideal structure and common pitfalls."
+domain: "function def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: function_def

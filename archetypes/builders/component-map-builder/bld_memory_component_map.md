@@ -16,10 +16,13 @@ tags: [component-map, architecture, orphan-detection, connection-direction, scop
 tldr: "No orphan components. Every component must appear in at least one connection. Explicit direction on all connections. Split scope at 15 components."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [component map, architecture mapping, orphan detection, connection direction, data flow, dependency, scope boundary, ownership]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Component Map"
+density_score: 0.90
 ---
 ## Summary
 A component map's value is making hidden dependencies visible. Orphan components — listed in the component table but absent from connections — destroy that value. Orphans signal either truly isolated components (rare, annotate explicitly) or omitted connections (common, dangerous).
@@ -28,24 +31,50 @@ The second most common failure is undirected connections ("A relates to B"): str
 **No orphans. Explicit direction. Bounded scope.**
 No-orphan rule: after writing both the component table and the connection table, verify every component_id in the component table appears at least once as source or target in the connection table. Any component with no connections must be annotated explicitly as `isolated: true` with a justification.
 Connection direction types:
-- data_flow: data moves from source to target (A sends records to B)
-- dependency: source cannot function without target (A requires B to be running)
-- signal: source sends event/trigger to target (A emits events consumed by B)
-- produces: source creates target as output artifact (A generates B)
-- consumes: source reads or uses target (A reads from B)
+1. data_flow: data moves from source to target (A sends records to B)
+2. dependency: source cannot function without target (A requires B to be running)
+3. signal: source sends event/trigger to target (A emits events consumed by B)
+4. produces: source creates target as output artifact (A generates B)
+5. consumes: source reads or uses target (A reads from B)
 Scope boundary rules:
-- 3-15 components per map. Fewer than 3: use a agent_node spec instead. More than 15: split by domain.
-- Scope statement must name what is explicitly excluded, not just what is included.
-- Right-size example: "Brain search infrastructure: indexing, embedding, retrieval. Excludes: UI layer, API routing, authentication."
+1. 3-15 components per map. Fewer than 3: use a agent_group spec instead. More than 15: split by domain.
+2. Scope statement must name what is explicitly excluded, not just what is included.
+3. Right-size example: "Brain search infrastructure: indexing, embedding, retrieval. Excludes: UI layer, API routing, authentication."
 Component table required columns: id, name, type, owner, description (one sentence). No prose beyond the table.
 ## Anti-Pattern
-- Orphan components without `isolated: true` annotation (conceals dependencies).
-- Undirected connections without type annotation (structurally present, operationally useless).
-- Scope too broad ("the whole system") — split by domain.
-- Scope too narrow ("just the BM25 index") — use a spec for single-component documentation.
-- Prose connections instead of a table (kills density; S08 fail).
-- Confusing component map (structured data) with diagram (visual rendering).
-- component_count not matching actual table rows (H06 fail).
+1. Orphan components without `isolated: true` annotation (conceals dependencies).
+2. Undirected connections without type annotation (structurally present, operationally useless).
+3. Scope too broad ("the whole system") — split by domain.
+4. Scope too narrow ("just the BM25 index") — use a spec for single-component documentation.
+5. Prose connections instead of a table (kills density; S08 fail).
+6. Confusing component map (structured data) with diagram (visual rendering).
+7. component_count not matching actual table rows (H06 fail).
 ## Context
 Orphan detection emerged from maps where components were listed to signal existence without documenting connections — creating false completeness while hiding the actual dependency graph.
 Ownership column is required for incident response: knowing who owns a component halves time-to-contact when it is implicated in a failure. Health status column (optional): current, degraded, deprecated, unknown — doubles as a live dashboard when kept current.
+
+## Metadata
+
+```yaml
+id: p10_lr_component_map_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-component-map-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | component_map |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

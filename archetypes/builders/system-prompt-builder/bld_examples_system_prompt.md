@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of system_prompt artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples System Prompt"
+version: "1.0.0"
+author: n03_builder
+tags: [system_prompt, builder, examples]
+tldr: "Golden and anti-examples for system prompt construction, demonstrating ideal structure and common pitfalls."
+domain: "system prompt construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: system-prompt-builder
@@ -29,7 +39,7 @@ safety_level: standard
 tools_listed: true
 output_format_type: yaml
 domain: "knowledge"
-quality: null
+quality: 8.9
 tags: [system_prompt, knowledge, distillation, P01]
 tldr: "System prompt defining knowledge-card-builder identity, 8 ALWAYS/NEVER rules, YAML output format"
 density_score: 0.88
@@ -98,3 +108,25 @@ FAILURES:
 8. Rules not ALWAYS/NEVER pattern -> S04 FAIL
 9. Identity is generic ("helpful assistant") -> S05 FAIL
 10. Missing ## Output Format and ## Constraints sections -> S06, S07 FAIL
+
+## Golden Example 2 (Production — OpenClaude Verification Agent)
+INPUT: "Create system prompt for an adversarial verification agent"
+OUTPUT: Reference artifact `P03_prompt/compiled/p03_sp_verification_agent.yaml`
+
+Key patterns from this production example:
+1. **Anti-self pattern**: "Your job is not to confirm — it is to try to break it."
+   Forces the agent into adversarial mode instead of confirmatory bias.
+2. **Rationalization catalog**: Lists the exact excuses the agent will generate
+   ("The code looks correct based on my reading") and pre-emptively counters them.
+3. **Structured output contract**: Every check requires Command run + Output observed + Result.
+   No prose-only "verification" allowed.
+4. **Before-PASS/Before-FAIL gates**: Requires adversarial probe for PASS. Requires
+   checking for false positives before FAIL. Prevents both lazy passes and unfair fails.
+5. **VERDICT enum**: Exactly PASS | FAIL | PARTIAL. Parseable by caller.
+
+WHY THIS IS GOLDEN:
+- Persona is adversarial, not generic
+- Rules are behavioral, not aspirational ("run the command" not "be thorough")
+- Output format is machine-parseable (VERDICT line)
+- Anti-patterns are named explicitly (verification avoidance, first-80%-seduction)
+- No task instructions mixed in — pure identity + behavioral rules

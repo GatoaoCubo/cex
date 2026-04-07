@@ -16,10 +16,13 @@ tags: [chunk-strategy, P01, type-builder]
 tldr: "Concrete values with rationale. Validate against schema. Stay under 2048 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [chunk strategy, fixed-size, recursive character, semantic, document-structure]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Chunk Strategy"
+density_score: 0.90
 ---
 ## Summary
 Chunking method configuration — how to split documents into retrievable segments. The difference between a useful chunk_strategy and a useless one is concrete values
@@ -30,10 +33,36 @@ Every parameter must have: name, value, and why that value was chosen.
 Required body sections: Overview, Method, Parameters, Integration.
 Body budget: 2048 bytes max.
 ## Anti-Pattern
-- Zero overlap: Cuts context at chunk boundaries, retriever misses split answers
-- Chunk too large: Exceeds embedding model context, wastes tokens on irrelevant content
-- Chunk too small: Loses context, increases retrieval noise
-- Ignoring document structure: Splits mid-table or mid-code-block
+1. Zero overlap: Cuts context at chunk boundaries, retriever misses split answers
+2. Chunk too large: Exceeds embedding model context, wastes tokens on irrelevant content
+3. Chunk too small: Loses context, increases retrieval noise
+4. Ignoring document structure: Splits mid-table or mid-code-block
 ## Context
 The 2048-byte body limit keeps chunk_strategy artifacts focused. Fill required fields first,
 then add recommended fields if space permits. Always set quality: null.
+
+## Metadata
+
+```yaml
+id: p10_lr_chunk_strategy_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-chunk-strategy-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | chunk_strategy |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

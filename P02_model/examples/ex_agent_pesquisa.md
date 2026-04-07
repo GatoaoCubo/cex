@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: research_agent
 domain: research
-quality: 9.5
+quality: 9.1
 tags: [pesquisa, mercado, concorrentes, analise, research]
 tldr: Agente especializado em pesquisa de mercado com firecrawl + brain MCP
 when_to_use: Pesquisar concorrentes, mercado, tendencias, vocabulario

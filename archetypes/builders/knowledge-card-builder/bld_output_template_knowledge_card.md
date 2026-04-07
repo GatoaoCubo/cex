@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for knowledge_card production
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Knowledge Card"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_card, builder, examples]
+tldr: "Golden and anti-examples for knowledge card construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: knowledge_card (domain_kc)
@@ -16,7 +26,7 @@ title: "{{Title 5-100 chars}}"
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
-author: "{{satellite_name}}"
+author: "{{agent_group_name}}"
 domain: {{domain_name}}
 quality: null
 tags: [{{tag1}}, {{tag2}}, {{tag3}}, knowledge]
@@ -38,7 +48,7 @@ data_source: "{{source_url_or_artifact_ref}}"
 ` ``yaml
 topic: {{topic_name}}
 scope: {{scope_description}}
-owner: {{owner_agent_node}}
+owner: {{owner_agent_group}}
 criticality: {{low|medium|high}}
 ` ``
 ## Key Concepts

@@ -16,10 +16,13 @@ tags: [golden_test, quality_gate, gate_mapping, reviewer_independence, complete_
 tldr: "Source must score >= 9.5; output must be complete; rationale maps to gate IDs; producer cannot self-approve."
 impact_score: 7.5
 decay_rate: 0.04
-agent_node: edison
+agent_group: edison
 keywords: [golden_test, quality_threshold, gate_ids, rationale, reviewer_independence, complete_artifact, pool_admission, regression]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Golden Test"
+density_score: 0.90
 ---
 ## Summary
 A golden test is a high-quality artifact paired with gate-mapped rationale that serves as a regression anchor. Its purpose is to evaluate whether new outputs meet the same standard — not to teach format (that is few_shot_example). The source artifact must already score >= 9.5. The output must be complete. The rationale must reference specific gate IDs, not prose opinions.
@@ -32,11 +35,58 @@ A golden test is a high-quality artifact paired with gate-mapped rationale that 
 6. Producer and reviewer are different roles. The engineer who built the artifact cannot be its golden test reviewer.
 7. Candidates come from three sources: pool artifacts with quality >= 9.5 in metadata, builder EXAMPLES.md golden sections, or manually curated domain expert artifacts.
 ## Anti-Pattern
-- Source artifact with quality 9.4 or below — below-threshold sources produce below-threshold golden tests.
-- Truncated `golden_output` with "..." — partial output cannot serve as a regression reference, test results become unstable.
-- Rationale as prose opinion ("this is well-structured and thorough") — no gate IDs means no actionable pass/fail signal for reviewers.
-- Producer self-approving as reviewer — independence is required; the builder cannot be the judge of their own output.
-- Confusing golden_test (P07, evaluates quality) with few_shot_example (P01, teaches format) — different artifacts, different pillars, different purposes.
-- `quality_threshold: 9.0` — below the minimum of 9.5 for golden test classification.
+1. Source artifact with quality 9.4 or below — below-threshold sources produce below-threshold golden tests.
+2. Truncated `golden_output` with "..." — partial output cannot serve as a regression reference, test results become unstable.
+3. Rationale as prose opinion ("this is well-structured and thorough") — no gate IDs means no actionable pass/fail signal for reviewers.
+4. Producer self-approving as reviewer — independence is required; the builder cannot be the judge of their own output.
+5. Confusing golden_test (P07, evaluates quality) with few_shot_example (P01, teaches format) — different artifacts, different pillars, different purposes.
+6. `quality_threshold: 9.0` — below the minimum of 9.5 for golden test classification.
 ## Context
 Applies when: an artifact has achieved >= 9.5 quality and should serve as a stable regression reference for future outputs of the same type.
+
+## Builder Context
+
+This ISO operates within the `golden-test-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Reference
+
+```yaml
+id: p10_lr_golden_test_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_golden_test_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | golden_test |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

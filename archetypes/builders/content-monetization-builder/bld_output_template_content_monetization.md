@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for content monetization config production
 pattern: derives from SCHEMA — no extra fields
+quality: 9.0
+title: "Output Template Content Monetization"
+version: "1.0.0"
+author: n03_builder
+tags: [content_monetization, builder, examples]
+tldr: "Golden and anti-examples for content monetization construction, demonstrating ideal structure and common pitfalls."
+domain: "content monetization construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: content_monetization
@@ -107,7 +117,7 @@ validation:
 ---
 id: {{artifact_id}}
 kind: cli_tool
-pillar: P04
+pillar: P11
 title: "{{title}}"
 version: "1.0.0"
 created: "{{date}}"

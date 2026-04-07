@@ -14,6 +14,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Few Shot Example"
+version: "1.0.0"
+author: n03_builder
+tags: [few_shot_example, builder, examples]
+tldr: "Golden and anti-examples for few shot example construction, demonstrating ideal structure and common pitfalls."
+domain: "few shot example construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: few_shot_example
 ## File Naming

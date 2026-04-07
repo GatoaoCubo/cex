@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Validate a CEX builder directory against the archetype checklist.
 
-v2.0 — bld_* naming, density >= 0.8, size <= 4096B per file.
+v2.0 -- bld_* naming, density >= 0.8, size <= 4096B per file.
 
 Usage:
   python _tools/validate_builder.py archetypes/builders/agent-builder

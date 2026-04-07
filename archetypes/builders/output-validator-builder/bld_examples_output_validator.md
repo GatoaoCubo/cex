@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of output_validator artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.2
+title: "Examples Output Validator"
+version: "1.0.0"
+author: n03_builder
+tags: [output_validator, builder, examples]
+tldr: "Golden and anti-examples for output validator construction, demonstrating ideal structure and common pitfalls."
+domain: "output validator construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: output-validator-builder

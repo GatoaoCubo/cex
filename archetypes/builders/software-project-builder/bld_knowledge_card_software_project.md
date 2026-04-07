@@ -8,10 +8,15 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.9
+quality: 9.1
 tags: [builder, knowledge-card, software-project, python, patterns]
 tldr: "Core knowledge for building Python projects: 3 project archetypes (CLI/API/pipeline), tech stack decisions, dependency tiers, the 'spec→code' bridge pattern from codexa-core production system."
-density_score: 0.91
+density_score: 1.0
+when_to_use: "Apply when core knowledge for building python projects: 3 project archetypes (cli/api/pipeline), tech stack ..."
+keywords: [knowledge-card, project, software-engineering, rich, archetypes]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Software Project Knowledge
@@ -113,3 +118,10 @@ dependencies = ["fastapi>=0.100", "uvicorn[standard]>=0.23", "pydantic>=2.0"]
 # Tier 4: Full (add DB + cache + async)
 dependencies = [..., "asyncpg>=0.29", "redis>=5.0", "celery>=5.3"]
 ```
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.2
 tags: [cex, lp12, orchestration, workflow, spawn, signal, handoff, crew]
 tldr: "P12 define 7 tipos de coordenacao multi-agente: workflow, dag, spawn_config, signal, handoff, dispatch_rule, crew"
 when_to_use: "Entender como agentes LLM isolados viram sistema coordenado"
@@ -39,7 +39,7 @@ types: 7 | function: COLLABORATE + PRODUCE + GOVERN | layer: runtime + spec
 - spawn_config define como executar (solo, grid, continuous)
 - signal comunica eventos simples entre agentes (complete)
 - handoff transfere task + context + commit entre agentes
-- dispatch_rule roteia keyword > agent_node automaticamente
+- dispatch_rule roteia keyword > agent_group automaticamente
 - crew define grupo multi-agente com protocolo de coord
 - AutoGen tem GroupChat; CrewAI tem Crew; MetaGPT tem Env
 - crew do CEX unifica esses conceitos em tipo formal
@@ -79,7 +79,7 @@ types: 7 | function: COLLABORATE + PRODUCE + GOVERN | layer: runtime + spec
 | signal | Evento | Entre 2 agentes | complete, error, progress |
 | handoff | Instrucao | Task completa | Handoff com contexto+commit |
 | dispatch_rule | Roteamento | Keyword > sat | "pesquisar" > research_agent |
-| crew | Grupo | N agentes | Equipe de 3 agent_nodes |
+| crew | Grupo | N agentes | Equipe de 3 agent_groups |
 
 ## Flow
 

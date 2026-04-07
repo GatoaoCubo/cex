@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: 9.0
+quality: 9.1
 tags: [spawn-config, orchestrator, N07, multi-cli]
 tldr: Multi-CLI orchestration -- each nucleus uses the best LLM provider for its domain.
 density_score: 0.90
@@ -72,7 +72,7 @@ python _tools/cex_boot_gen.py --show   # show current matrix
 
 ## Cost Optimization
 
-- Use gemini (N01, N04) for knowledge-heavy tasks: /usr/bin/bash cost via subscription
-- Use codex (N05) for code tasks: competitive pricing
-- Use sonnet (N02, N06) for creative: 5x cheaper than opus
+- All nuclei upgraded to claude/opus-4-6 with 1M context (2026-04-06)
+- Fallback: gemini-2.5-pro (cross-provider), then ollama/qwen3 (local)
+- Config source: .cex/config/nucleus_models.yaml (regenerate boot scripts via cex_boot_gen.py)
 - Reserve opus (N03, N07) for complex construction and orchestration only

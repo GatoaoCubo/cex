@@ -3,19 +3,82 @@ kind: knowledge_card
 type: domain
 pillar: P01
 title: Prompt Evolution
-version: 1.0.0
+version: 2.0.0
 created: 2026-03-31
+updated: 2026-04-07
 author: n07_orchestrator
 domain: patterns
 quality: null
 tags:
-- pattern
-- skill
+- prompt-evolution
+- versioning
+- iteration
+- optimization
 - llm
-tldr: Track prompt performance, iterate. Version prompts like code. Frontmatter version field + git history.
+- prompt-engineering
+tldr: Version prompts like code. Measure per-version metrics, apply targeted fixes per pass, promote only on metric gain.
+when_to_use: When prompt output quality degrades, a new model drops, or A/B tests show regression
 keywords:
 - prompt-evolution
 - versioning
 - iteration
 - optimization
-density_score: 0.91
+- semantic-diff
+density_score: 0.93
+core_principle: Treat prompts as versioned artifacts. Each version maps to a measurable outcome. Promote only when metrics
+  improve.
+evolution_lifecycle: v1.0 (initial) -> deploy -> measure -> v1.1 (fix) -> deploy -> measure -> v2.0 (structural)
+version_types: '| Type | When | Scope | Example |
+
+  |------|------|-------|---------|
+
+  | Patch (1.0.x) | Output drift, minor regressions | Wording, few-shot swap | Fix hallucinated dates by adding "cite source"
+  |
+
+  | Minor (1.x.0) | New edge case, model update | Section add/remove, constraint | Add guard rail for empty input |
+
+  | Major (x.0.0) | Strategy shift, audience change | Full rewrite | Switch from chain-of-thought to tool-use |'
+measurement_framework: '| Metric | How to capture | Threshold |
+
+  |--------|---------------|-----------|
+
+  | Task accuracy | Golden test pass rate | >= 90% |
+
+  | Hallucination rate | Source-vs-output diff | < 5% |
+
+  | Token efficiency | Output tokens / useful tokens | >= 0.80 |
+
+  | Format compliance | Schema validation pass | 100% |
+
+  | Latency | Time-to-first-token | < baseline * 1.2 |'
+evolution_passes_per_version_bump: '| Pass | Target | Action |
+
+  |------|--------|--------|
+
+  | 1 | Failure modes | Collect failures, classify root cause |
+
+  | 2 | Constraint tightening | Add explicit "do NOT" or format rules |
+
+  | 3 | Example refresh | Replace weak few-shots with edge-case examples |
+
+  | 4 | Structure change | Reorder sections, split/merge instructions |
+
+  | 5 | Model-specific tuning | Adjust for new model capabilities or quirks |'
+anti_patterns:
+- 'No baseline: evolving without metrics = random drift'
+- 'Big-bang rewrite: changing everything at once hides what helped'
+- 'Copy-paste inheritance: forking prompts instead of versioning = divergence'
+- 'Metric gaming: optimizing token count at the cost of accuracy'
+cex_integration: '| Concept | CEX artifact |
+
+  |---------|-------------|
+
+  | Prompt source | `P03_prompts/` .md files |
+
+  | Version tracking | Frontmatter `version` + git history |
+
+  | Metric capture | `cex_score.py` + `.cex/experiments/results.tsv` |
+
+  | Regression gate | `quality_gate` artifact (P07) |
+
+  | Automated evolution | `cex_evolve.py` (keep/discard loop) |'

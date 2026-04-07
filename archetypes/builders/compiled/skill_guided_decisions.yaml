@@ -1,0 +1,241 @@
+id: skill_guided_decisions
+kind: instruction
+scope: shared
+purpose: Teach all builders and nuclei to present structured decision points instead of assuming. The Co-pilot Protocol.
+version: 1.0.0
+created: 2026-03-31
+author: n07_orchestrator
+quality: null
+tags:
+- skill
+- shared
+- copilot
+- guided-decisions
+- UX
+- interaction
+tldr: When a decision affects the output, STOP and present numbered options with recommendations. Never assume what the user
+  wants. This is as mandatory as 8F.
+density_score: 0.95
+the_principle: '> When the LLM decides, the output is generic. > When the USER decides, the output is theirs. > > Every assumption
+  you avoid is a revision the user won''t need. The GDP is as mandatory as the 8F pipeline. 8F controls HOW artifacts are
+  built. GDP controls WHO decides WHAT goes in them. ---'
+when_to_trigger_a_decision_point: 'A Decision Point (DP) activates when:
+
+
+  1. Multiple valid paths exist — archetype A vs B, layout X vs Y, tone formal vs casual
+
+  2. Subjective preference matters — colors, names, voice, positioning, pricing
+
+  3. Trade-offs are real — speed vs quality, cost vs features, niche vs broad
+
+  4. The output will be hard to undo — brand identity, architecture, deployment target
+
+  5. The user has context you don''t — their market, their competitors, their gut feeling
+
+
+  A DP does NOT activate for:
+
+  - Mechanical/deterministic steps (compile, validate, format)
+
+  - Technical correctness (schema compliance, syntax)
+
+  - CEX internal operations (8F pipeline, signaling, indexing)
+
+
+  ---'
+the_dp_format: "Every Decision Point follows this exact structure:\n\n━━━ DP {N}/{TOTAL}: {TOPIC} ━━━\n\n{1-2 sentence context\
+  \ explaining WHY this matters}\n\n  1. {OPTION_EMOJI} {Option Name} — \"{short description}\"\n     → Best if: {when to\
+  \ pick this}\n\n  2. {OPTION_EMOJI} {Option Name} — \"{short description}\"\n     → Best if: {when to pick this}\n\n  3.\
+  \ {OPTION_EMOJI} {Option Name} — \"{short description}\"\n     → Best if: {when to pick this}\n\n  ★ Recommended: {N} ({reason\
+  \ from context/signals})\n\n  [Type number, combine like \"1+3\", or describe your own]: ▌"
+rules_for_options: '| Rule | Detail |
+
+  |------|--------|
+
+  | 3-5 options max | More than 5 overwhelms. Less than 2 isn''t a choice. |
+
+  | Always have a ★ Recommended | The user can always just hit Enter. Never leave them stuck. |
+
+  | Recommendation has a reason | Not "I think" — cite a signal: "based on your ''educational'' description" |
+
+  | "Describe your own" is always valid | Options are suggestions, not walls. Freetext is always accepted. |
+
+  | Emoji per option | Visual scanning. One emoji per option, consistent within a DP. |
+
+  | "Best if" clause | Helps the user self-select without jargon. |
+
+  | Numbering is stable | Once presented, option 2 is always option 2. Don''t renumber. |
+
+
+  ---'
+dp_density_by_domain: 'Not every interaction needs the same amount of DPs.
+
+
+  | Domain | DP Density | Why |
+
+  |--------|-----------|-----|
+
+  | Brand Identity (N06) | HIGH (8-12 DPs) | Every choice is subjective and permanent |
+
+  | Content/Copy (N02) | MEDIUM (4-6 DPs) | Tone, layout, CTA style matter |
+
+  | Research (N01) | LOW-MEDIUM (2-4 DPs) | Scope, depth, focus area |
+
+  | Knowledge (N04) | LOW (1-3 DPs) | Structure, detail level |
+
+  | Operations (N05) | LOW (1-3 DPs) | Platform, scaling, cost trade-offs |
+
+  | Build (N03) | MINIMAL (0-2 DPs) | Mostly mechanical, schema-driven |
+
+  | Orchestration (N07) | MEDIUM (3-5 DPs) | Priority, sequencing, resource allocation |
+
+
+  ---'
+dp_chaining: "DPs can depend on each other. Later DPs adapt based on earlier choices.\n\nDP 1: Archetype → User picks \"Sage\"\
+  \nDP 2: Voice Tone → Options CHANGE because Sage implies authority+warmth\nDP 3: Color Palette → Options CHANGE because\
+  \ Sage palette is different from Rebel\n\nWhen a previous DP narrows the space, say so:\n\n━━━ DP 3/8: Color Palette ━━━\n\
+  \nBased on your Sage archetype, these palettes work best:\n\n  1. \U0001F535 Deep Trust — navy #1B365D + gold #C5A55A +\
+  \ cream #FAF3E0\n     → Best if: you want gravitas and authority\n\n  2. \U0001F7E2 Growth Wisdom — forest #2D5016 + sage\
+  \ #B2BEB5 + white #FAFAFA\n     → Best if: you want natural, approachable wisdom\n\n  3. \U0001F7E3 Modern Scholar — indigo\
+  \ #4B0082 + silver #C0C0C0 + white #FFFFFF\n     → Best if: you want contemporary, tech-forward wisdom\n\n  ★ Recommended:\
+  \ 1 (Deep Trust) — matches your \"professor but accessible\" description\n\n  [Type number, adjust colors, or describe your\
+  \ vibe]: ▌\n\n---"
+handling_user_responses: '| Response | Action |
+
+  |----------|--------|
+
+  | `2` | Select option 2. Confirm briefly: "Got it — Going with Growth Wisdom 🟢" |
+
+  | `1+3` | Combine elements. "Mixing Deep Trust base with Modern Scholar accents — nice." |
+
+  | `the first one but more green` | Adapt option 1 with modification. Show the modified version. |
+
+  | Free text: `"I want something techy and dark"` | Map to closest option or create custom. "Sounds like a Dark Mode Scholar
+  vibe. Let me propose..." |
+
+  | `?` or confused | Explain the trade-offs in simpler language. No jargon. |
+
+  | Empty / Enter / "whatever" / "you choose" | Apply ★ Recommended. "Going with the recommended option: Deep Trust 🔵" |
+
+  | `skip` | Apply ★ Recommended and note it can be changed later. |
+
+
+  ---'
+dp_timing_in_workflows: 'DPs are NOT dumped all at once. They are interleaved with progress.
+
+
+  BAD:  "Here are 12 questions. Answer all."
+
+  GOOD: "Let me ask you a few things as we go."
+
+
+  Pattern:
+
+  1. Ask DP 1-2 (identity basics)
+
+  2. Show progress: "Great. I already know enough to suggest..."
+
+  3. Ask DP 3-4 (personality, voice)
+
+  4. Show preview: "Here''s what your brand is looking like so far..."
+
+  5. Ask DP 5-6 (audience, positioning)
+
+  6. Show preview: "Almost there. Your brand summary so far..."
+
+  7. Ask DP 7-8 (visual, monetization)
+
+  8. Final confirmation: "Here''s the complete picture. Change anything?"
+
+
+  ---'
+preview_after_every_2_3_dps: "After every 2-3 decisions, show a running summary:\n\n━━━ Your Brand So Far ━━━\n  Name:   \
+  \    Acme Academy\n  Archetype:  \U0001F9D9 Sage\n  Voice:      Authoritative but warm (4,3,2,4,4)\n  Colors:     Deep Trust\
+  \ palette (#1B365D, #C5A55A, #FAF3E0)\n  Audience:   Career-switchers who want to become devs\n  ━━━ {5/8 decisions made}\
+  \ ━━━\n\nThis gives the user confidence that their choices are being heard,\nand a chance to go back: \"Actually, can I\
+  \ change the colors?\"\n\n---"
+the_final_confirmation_dp: "Every GDP sequence ends with a FULL REVIEW:\n\n━━━ Final Review ━━━\n\nHere's everything we've\
+  \ decided together:\n\n  Brand:         Acme Academy\n  Tagline:       \"Code your future\"\n  Archetype:     \U0001F9D9\
+  \ Sage\n  Voice:         Authoritative, warm, low humor, high trust\n  Colors:        #1B365D, #C5A55A, #FAF3E0\n  Font:\
+  \          Inter (headers) + Source Serif (body)\n  Audience:      Career-switchers, 25-40, frustrated with current job\n\
+  \  Transformation: From \"stuck in a dead-end job\" to \"confident junior dev\"\n  Category:      Online Education / Tech\n\
+  \  Pricing:       Subscription (R$ 47/mo basic, R$ 97/mo pro)\n\n  ✅ Confirm all → I'll generate brand_config.yaml\n  ✏️\
+  \ Change something → tell me which item\n  \U0001F504 Start over → we'll redo the whole flow\n\n  [Confirm, change, or start\
+  \ over]: ▌\n\n---"
+anti_patterns_blocked: '| Anti-Pattern | Why It''s Bad | Do This Instead |
+
+  |-------------|-------------|-----------------|
+
+  | "I''ll assume a Sage archetype" | User might be a Rebel. You just poisoned the brand. | Present 3-4 options with ★ recommendation
+  |
+
+  | Dumping 10 questions at once | Overwhelming. User gives shallow answers. | 2-3 at a time, preview between rounds |
+
+  | "Which of these 12 archetypes..." | Too many choices = paralysis | Pre-filter to 3-4 based on signals |
+
+  | No recommendation on any DP | User with no branding knowledge is stuck | ALWAYS have ★ Recommended with reason |
+
+  | Skipping final review | User can''t see the full picture | ALWAYS show complete summary before executing |
+
+  | Assuming after 1 vague answer | "Casual" doesn''t mean Jester. | Probe: "Casual like a friend or casual like a comedian?"
+  |
+
+  | Using branding jargon | "5D voice calibration" means nothing to a bakery owner | "How should your brand sound?" |
+
+
+  ---'
+part_2_the_autonomy_side: GDP is half the picture. The other half is what happens AFTER decisions are made.
+the_decision_manifest: 'Every GDP session produces a Decision Manifest:
+
+  `.cex/runtime/decisions/decision_manifest.yaml`
+
+
+  This file contains:
+
+  - Every DP answer (choice + reason + alternatives shown)
+
+  - Brand config pointer (`.cex/brand/brand_config.yaml`)
+
+  - Per-nucleus specific decisions
+
+  - Constraints (language, currency, quality floor)
+
+  - Flags for auto-filled decisions (user skipped → ★ Recommended applied)'
+the_two_phase_pattern: "PHASE 1 — Co-pilot (GDP active, user present)\n  N07 identifies mission\n  N07 identifies which decisions\
+  \ are subjective\n  N07 presents DPs to user (this skill)\n  N07 writes decision_manifest.yaml\n  N07 locks manifest (status:\
+  \ locked)\n\nPHASE 2 — Autonomous (GDP off, nuclei dispatched)\n  N07 dispatches via grid/solo\n  Handoff includes: \"Read\
+  \ .cex/runtime/decisions/decision_manifest.yaml\"\n  Each nucleus reads manifest ONCE at start\n  Each nucleus executes\
+  \ 8F with manifest context\n  ZERO questions to user\n  Commit → signal → done"
+how_nuclei_read_the_manifest: 'At the start of any dispatched task, a nucleus:
+
+
+  1. Checks if manifest exists: `.cex/runtime/decisions/decision_manifest.yaml`
+
+  2. If YES → reads it, extracts relevant decisions (global + per_nucleus.{self})
+
+  3. If NO → falls back to brand_config.yaml only (minimal context)
+
+  4. Uses decisions as CONSTRAINTS for 8F, not as suggestions
+
+
+  A nucleus NEVER overrides a manifest decision.
+
+  A nucleus NEVER re-asks a question the manifest already answered.'
+edge_cases_during_autonomous_execution: '| Situation | What the nucleus does |
+
+  |-----------|----------------------|
+
+  | Manifest covers the decision | Use it. No question. |
+
+  | Manifest doesn''t cover this specific case | Apply ★ Recommended. Add to `auto_filled` list. |
+
+  | Decision seems wrong in context | Execute it anyway. Flag in output: "⚠️ Manifest says X, but Y might be better — review
+  recommended." |
+
+  | Manifest is corrupt/missing | Fall back to brand_config.yaml. If that''s also missing, use sensible defaults + flag everything.
+  |'
+why_this_works: "The platô between autonomy and collaboration:\n\n100% User decides ←───────── GDP ──────────→ 100% LLM decides\n\
+  \         ↑                    ↑                       ↑\n     Slow, tedious      THE SWEET SPOT          Generic, misaligned\n\
+  \     but perfect        User decides WHAT        Fast but wrong\n                        LLM decides HOW\n\n- User decides\
+  \ WHAT: brand name, tone, audience, positioning, colors, pricing model\n- LLM decides HOW: file structure, frontmatter,\
+  \ 8F pipeline, compilation, signaling\n- Manifest is the contract: locks the WHAT so the HOW can run free"

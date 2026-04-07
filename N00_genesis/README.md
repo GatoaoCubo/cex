@@ -4,6 +4,14 @@ type: nucleus
 id: N00
 role: genesis
 tags: [nucleus, genesis, n00]
+quality: 9.0
+version: "1.0.0"
+author: n03_builder
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # N00 Genesis

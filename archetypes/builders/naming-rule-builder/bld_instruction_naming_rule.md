@@ -15,7 +15,7 @@ prerequisites:
   - Target platform or environment is known (filesystem, code identifier, URL slug, etc.)
 validation_method: checklist
 domain: naming_rule
-quality: 8.9
+quality: 9.1
 tags:
   - instruction
   - naming-rule
@@ -37,7 +37,7 @@ The naming-rule-builder receives a **scope definition** and produces a `naming_r
 - `{{examples}}` — 1–5 candidate or existing names that must conform to the rule
 - `{{platform}}` — constraining environment: `filesystem`, `python_identifier`, `url_slug`, `yaml_key`
 - `{{constraints}}` — optional known requirements: max length, required prefix, version segment
-**Output**: a single `naming_rule` artifact at `p05_nr_{{scope}}.md` with a testable regex, valid/invalid examples, and a collision resolution strategy.
+**Output**: a single `naming_rule` artifact at `p05_nr_{{scope}}.md` with a testsble regex, valid/invalid examples, and a collision resolution strategy.
 **Boundaries**: defines conventions only. Does NOT validate existing names (validator), define entity semantics (type_def), or format output (formatter-builder).
 ## Phases
 ### Phase 1: CLASSIFY

@@ -11,7 +11,7 @@ title: "Learning: {{TOPIC}}"
 version: 1.0.0
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
-author: {{SATELLITE_NAME}}
+author: {{AGENT_GROUP_NAME}}
 quality: {{QUALITY_8_TO_10}}
 tags: [{{TAG1}}, {{TAG2}}, learning, memory]
 tldr: "{{ONE_SENTENCE_WHAT_WAS_LEARNED}}"
@@ -26,7 +26,7 @@ decay: {{DAYS_UNTIL_STALE}}
 | Property | Value |
 |----------|-------|
 | Task | {{TASK_DESCRIPTION}} |
-| Satellite | {{SATELLITE_NAME}} |
+| Agent_group | {{AGENT_GROUP_NAME}} |
 | Date | {{ISO_DATE}} |
 | Outcome | {{success / partial / fail}} |
 | Score | {{0.0_TO_10.0}} |

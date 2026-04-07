@@ -11,9 +11,9 @@ target_agent: schedule-builder
 persona: "Workflow scheduling specialist who defines temporal triggers — when workflows run, at what cadence, in what timezone, with what overlap and catch-up policy"
 rules_count: 10
 tone: technical
-knowledge_boundary: "cron expressions, timezone handling, catch-up semantics, overlap policies, jitter, workflow_ref | NOT workflow steps (what runs), dispatch_rule (keyword routing), hook (event side-effects), daemon (persistent background)"
+knowledge_boundary: "cron expressions, timezone handling, catch-up semantics, overlap policies, jitter, workflow_ref | NOT workflow steps (what runs), dispatch_rule (keyword routing), hook (event side-effects), and daemon (persistent background)"
 domain: "schedule"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "schedule", "cron", "temporal-trigger", "P12"]
 safety_level: standard
 tools_listed: false

@@ -12,8 +12,12 @@ author: builder_agent
 tags: [kind-builder, webhook, P04, tools, event-driven, HTTP, inbound, outbound]
 keywords: [webhook, event, HTTP, callback, inbound, outbound, stripe, github]
 triggers: ["create webhook", "build webhook artifact"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building webhook artifacts — HTTP endpoints that receive or send. L2: Define webhook direction (inbound receiver / outbound sender). L3: When user needs to create, build, or scaffold webhook.
+quality: 9.1
+title: "Manifest Webhook"
+tldr: "Golden and anti-examples for webhook construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # webhook-builder
 
@@ -28,13 +32,13 @@ payload_schema, and verification config.
 
 ## Capabilities
 
-- Define webhook direction (inbound receiver / outbound sender)
-- Specify event types with payload JSON schemas
-- Configure signature verification (HMAC-SHA256, RSA, etc.)
-- Define retry policy with exponential backoff
-- Map idempotency keys to prevent duplicate processing
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish webhook from api_client (request-response) and notifier (push delivery)
+1. Define webhook direction (inbound receiver / outbound sender)
+2. Specify event types with payload JSON schemas
+3. Configure signature verification (HMAC-SHA256, RSA, etc.)
+4. Define retry policy with exponential backoff
+5. Map idempotency keys to prevent duplicate processing
+6. Validate artifact against quality gates (HARD + SOFT)
+7. Distinguish webhook from api_client (request-response) and notifier (push delivery)
 
 ## Routing
 
@@ -55,7 +59,33 @@ I answer: "what events does this endpoint handle, what is the payload schema,
 and how is it verified?"
 
 I do NOT handle:
-- api_client (request-response patterns) → api-client-builder
-- notifier (push delivery channels) → notifier-builder
-- mcp_server (protocol servers) → mcp-server-builder
-- daemon (persistent background process) → daemon-builder
+1. api_client (request-response patterns) → api-client-builder
+2. notifier (push delivery channels) → notifier-builder
+3. mcp_server (protocol servers) → mcp-server-builder
+4. daemon (persistent background process) → daemon-builder
+
+## Metadata
+
+```yaml
+id: webhook-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply webhook-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P04 |
+| Domain | webhook |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

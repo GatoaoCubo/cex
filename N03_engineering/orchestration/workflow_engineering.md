@@ -9,13 +9,13 @@ updated: 2026-03-30
 author: builder_agent
 steps_count: 9
 execution: sequential
-agent_nodes: [builder_nucleus]
+agent_groups: [builder_nucleus]
 timeout: 120
 retry_policy: per_step
 depends_on: []
 signals: [intent_parsed, constrained, identity_loaded, knowledge_injected, plan_ready, tools_ready, artifact_produced, validated, complete]
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [workflow, 8F, pipeline, N03]
 tldr: The 8F pipeline as an executable workflow -- 9 steps from intent to indexed artifact.
 density_score: 0.90

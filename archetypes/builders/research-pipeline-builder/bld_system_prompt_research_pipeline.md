@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "research pipeline design, STORM planning, CRAG retrieval, CRITIC verification, multi-model routing, source cataloging; NOT content writing, NOT API client implementation, NOT deployment"
 domain: research_pipeline
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, research-pipeline, STORM, CRAG, CRITIC, P04]
 safety_level: standard
 output_format_type: markdown

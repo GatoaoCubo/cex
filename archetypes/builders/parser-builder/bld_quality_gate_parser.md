@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: parser
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, parser, P11, P05, governance, data-extraction]
 tldr: "Gates for parser artifacts — input format defined, extraction rules tested, output schema matched to consumer."
 density_score: 0.85

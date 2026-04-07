@@ -5,11 +5,21 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for permission production — atomic searchable facts
 sources: permission-builder MANIFEST.md + SCHEMA.md, NIST RBAC, OWASP Access Control, POSIX
+quality: 9.1
+title: "Knowledge Card Permission"
+version: "1.0.0"
+author: n03_builder
+tags: [permission, builder, examples]
+tldr: "Golden and anti-examples for permission construction, demonstrating ideal structure and common pitfalls."
+domain: "permission construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: permission
 ## Executive Summary
-Permissions are declarative access control rules defining WHO can do WHAT (read/write/execute) on WHICH resource. Each permission declares a scope, roles with hierarchical inheritance, operations per role, and a deny-by-default baseline. They differ from guardrails (which prevent safety damage), laws (which mandate operational rules), feature flags (which toggle features), and runtime rules (which control system behavior) by governing access to specific resources through role-based allow/deny lists.
+Permissions are declarativand access control rules defining WHO can do WHAT (read/write/execute) on WHICH resource. Each permission declares a scope, roles with hierarchical inheritance, operations per role, and a deny-by-default baseline. They differ from guardrails (which prevent safety damage), laws (which mandate operational rules), feature flags (which toggle features), and runtime rules (which control system behavior) by governing access to specific resources through role-based allow/deny lists.
 ## Spec Table
 | Property | Value |
 |----------|-------|

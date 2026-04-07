@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.0
 tags: [config, retriever, P06, naming, constraints, RAG]
 effort: medium
 max_turns: 25
@@ -62,7 +62,7 @@ permission_scope: nucleus
 | weaviate | Weaviate | local Docker / Weaviate Cloud |
 | milvus | Milvus / Zilliz | local Docker / Zilliz Cloud |
 | elasticsearch | Elasticsearch | local / Elastic Cloud (kNN + BM25) |
-| custom | other or proprietary | document explicitly |
+| costm | other or proprietary | document explicitly |
 
 ## similarity_metric Enum
 

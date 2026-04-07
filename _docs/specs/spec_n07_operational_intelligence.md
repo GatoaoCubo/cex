@@ -14,6 +14,7 @@ scope: N07_admin
 tags: [spec, n07, autonomous, workflows, patterns, plan, spec, grid]
 tldr: User needs 4 commands (/plan /spec /grid /consolidate). N07 auto-chains 14 internal workflows + 53 KCs.
 density_score: 0.97
+quality: 9.1
 ---
 
 # Spec N07 -- Operational Intelligence Layer v2

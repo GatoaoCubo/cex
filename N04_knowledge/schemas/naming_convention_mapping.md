@@ -4,11 +4,17 @@ kind: validation_schema
 nucleus: N04
 pillar: P06
 domain: nomenclature
-quality: 8.9
+quality: 9.1
 created: 2026-04-02
 type: mapping_schema
 scope: builders_to_kcs
 density_score: 1.0
+title: "Naming Convention Mapping"
+version: 1.0.0
+author: N04
+tags: [validation_schema, knowledge, validation-schema, cex, artifact]
+tldr: "Naming rules mapping CEX artifact types to filesystem paths and identifiers"
+updated: 2026-04-07
 ---
 
 # Builder ↔ KC Naming Convention Mapping
@@ -55,7 +61,7 @@ def kc_to_builder(kc_filename):
 |---------|----|----- |
 | `_builder` | None | Meta-builder, no KC needed |
 | `skill-builder` | `kc_skill.md` | ✅ Exists |
-| None | `kc_director.md` | ❌ Orphan KC, no builder |
+| None | `kc_supervisor.md` | ❌ Orphan KC, no builder |
 
 ## Validation Queries
 

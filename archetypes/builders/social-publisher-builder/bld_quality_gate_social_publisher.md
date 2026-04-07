@@ -8,10 +8,10 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: social_publisher
-quality: 8.9
+quality: 9.1
 tags: [quality-gate, social-publisher, P11, automation, governance]
 tldr: "Gates for social publisher artifacts — config completeness, pipeline coverage, security, and reusability."
-density_score: 0.90
+density_score: 1.0
 ---
 
 # Gate: social_publisher
@@ -61,3 +61,20 @@ All 7 HARD must pass for score >= 6.0. SOFT gates add up to 4.0 bonus.
 | REJECT | < 8.0 | Missing required sections or security violation |
 | PUBLISH | 8.0-8.9 | Config complete, pipeline documented, secure |
 | EXEMPLARY | 9.0+ | Multi-provider, full failure modes, A/B support |
+
+## Actions
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish as exemplar |
+| >= 8.0 | PUBLISH | Ready for runtime |
+| >= 7.0 | REVIEW | Flag for review |
+| < 7.0  | REJECT | Rework required |
+
+## Bypass
+| Field | Value |
+|-------|-------|
+| conditions | Experimental social_publisher artifact under active A/B testing |
+| approver | Nucleus lead (written approval required) |
+| audit_trail | Log in records/audits/ with bypass reason and timestamp |
+| expiry | 48h — must pass all gates before expiry |
+| never_bypass | H01 (YAML parse), H05 (quality null) |

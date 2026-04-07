@@ -39,3 +39,30 @@ Maximum: intent + kind + pillar + context + domain + output_dir + model + dry_ru
 
 Success: file path + compiled path + quality score + signal JSON.
 Failure: error signal with step number and reason.
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Schema changes require backward compatibility assessment
+- Required fields enforced at validation time, not at parse time
+- Version field tracks breaking vs non-breaking schema evolution
+- Example payloads included for every schema to enable testing
+
+### Usage Reference
+
+```yaml
+# interface integration
+artifact: interface_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

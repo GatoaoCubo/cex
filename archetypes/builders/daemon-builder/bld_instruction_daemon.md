@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for daemon
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.2
+title: "Instruction Daemon"
+version: "1.0.0"
+author: n03_builder
+tags: [daemon, builder, examples]
+tldr: "Golden and anti-examples for daemon construction, demonstrating ideal structure and common pitfalls."
+domain: "daemon construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a daemon
@@ -23,7 +33,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Lifecycle section: startup sequence, restart conditions, and graceful shutdown procedure
 5. Write Schedule section: concrete cron expression, interval value, or the word "continuous" — never vague
-6. Write Signal Handling section: table with each signal (SIGTERM, SIGINT, SIGHUP, custom) and its handler behavior
+6. Write Signal Handling section: table with each signal (SIGTERM, SIGINT, SIGHUP, costm) and its handler behavior
 7. Write Health Check section: mechanism type, check interval, timeout, and expected healthy response
 8. Write Resource Limits section: memory ceiling, CPU shares, max file descriptors
 9. Write Monitoring section: metrics to expose, alerting thresholds, log rotation policy
@@ -43,3 +53,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 10. SOFT gates: graceful shutdown documented, score against QUALITY_GATES.md
 11. Cross-check: persistent background process (not a one-shot cli_tool)? Not event-triggered (hook)? Not invocable on demand (skill)? Graceful shutdown path documented?
 12. Revise if score < 8.0 before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify daemon
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | daemon construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

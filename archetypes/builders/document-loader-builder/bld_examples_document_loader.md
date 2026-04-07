@@ -8,7 +8,7 @@ updated: 2026-03-28
 author: builder_agent
 domain: document_loader
 llm_function: INJECT
-quality: 8.9
+quality: 9.1
 tags: [examples, document_loader, ingestion, chunking, RAG, P04]
 tldr: "Golden and anti-examples for document_loader artifacts with gate annotations."
 density_score: 1.0
@@ -39,7 +39,7 @@ overlap: 64
 encoding: utf-8
 quality: null
 tags: [document_loader, pdf, legal, RAG, P04]
-tldr: "Loads PDF legal documents, semantically chunks by topic boundary, preserves page/section metadata for citation."
+tldr: "Loads PDF legal documents, semanticslly chunks by topic boundary, preserves page/section metadata for citation."
 metadata_fields: [source, page, section, author, created_date]
 ---
 
@@ -74,7 +74,7 @@ preserving citation fidelity. Stage 1 of legal RAG pipeline: feeds langchain_doc
 - H01-H10: all HARD gates pass (valid YAML, correct id pattern, kind literal, quality null, all required fields, MIME types, valid enum values, body under 2048 bytes)
 - Specific parser (pdfplumber) with limitation noted (scanned PDFs)
 - Semantic strategy justified for legal domain
-- overlap: 64 = 12.5% of 512 — within best-practice range
+- overlap: 64 = 12.5% of 512 — within best-forctice range
 - metadata includes source provenance + citation fields (page, section)
 - output_format matches LangChain downstream
 - Body: ~920 bytes — well under 2048 limit

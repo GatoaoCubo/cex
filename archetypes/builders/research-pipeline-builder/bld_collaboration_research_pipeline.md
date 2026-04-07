@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How research-pipeline-builder works in crews with other builders
 pattern: each builder must know its ROLE, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Research Pipeline"
+version: "1.0.0"
+author: n03_builder
+tags: [research_pipeline, builder, examples]
+tldr: "Golden and anti-examples for research pipeline construction, demonstrating ideal structure and common pitfalls."
+domain: "research pipeline construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: research-pipeline-builder

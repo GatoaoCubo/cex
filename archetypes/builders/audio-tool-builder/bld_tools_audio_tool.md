@@ -4,6 +4,16 @@ id: bld_tools_audio_tool
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for audio_tool production
+quality: 9.0
+title: "Tools Audio Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [audio_tool, builder, examples]
+tldr: "Golden and anti-examples for audio tool construction, demonstrating ideal structure and common pitfalls."
+domain: "audio tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: audio-tool-builder

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for action_prompt production
 sources: OpenAI Chat API, Anthropic prompt guide, DSPy signatures, LangChain templates
+quality: 9.1
+title: "Knowledge Card Action Prompt"
+version: "1.0.0"
+author: n03_builder
+tags: [action_prompt, builder, examples]
+tldr: "Golden and anti-examples for action prompt construction, demonstrating ideal structure and common pitfalls."
+domain: "action prompt construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: action_prompt
@@ -45,7 +55,7 @@ Action prompts are task-focused messages injected at runtime that specify WHAT a
 5. Add validation criteria that a script could verify
 6. Confirm: is this a single task (action_prompt) or a multi-step recipe (instruction)?
 ## References
-- OpenAI: Chat Completions API — user message best practices
+- OpenAI: Chat Completions API — user message best forctices
 - Anthropic: Prompt engineering guide — Human turn design
 - DSPy: Signatures — typed input/output contracts for LLM calls
 - Zamfirescu-Pereira et al. 2023: "Why Johnny Can't Prompt"

@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of reward_signal artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Reward Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [reward_signal, builder, examples]
+tldr: "Golden and anti-examples for reward signal construction, demonstrating ideal structure and common pitfalls."
+domain: "reward signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: reward-signal-builder
 ## Golden Example
-INPUT: "Create reward signal for measuring helpfulness of agent responses in a customer support context"
+INPUT: "Create reward signal for measuring helpfulness of agent responses in a costmer support context"
 OUTPUT:
 ```yaml
 id: p11_rs_support_helpfulness
@@ -24,7 +34,7 @@ signal_type: scalar
 scale: "0-1"
 model: "claude-sonnet-4-6"
 quality: null
-tags: [reward_signal, helpfulness, customer-support, P11]
+tags: [reward_signal, helpfulness, costmer-support, P11]
 tldr: "Scalar 0-1 reward for support response helpfulness: 4 weighted criteria, baseline 0.70, feeds RLHF reward model."
 criteria:
   - "problem_resolution: did the response resolve the stated problem?"
@@ -34,10 +44,10 @@ criteria:
 frequency: per_task
 aggregation: weighted_mean
 baseline: 0.70
-description: "Continuous quality score for customer support responses. Feeds RLHF reward model training monthly."
+description: "Continuous quality score for costmer support responses. Feeds RLHF reward model training monthly."
 ```
 ## Overview
-Measures whether agent responses in customer support resolve the user's problem with clarity, appropriate tone, and completeness. Consumed by the monthly RLHF training cycle.
+Measures whether agent responses in costmer support resolve the user's problem with clarity, apownte tone, and completeness. Consumed by the monthly RLHF training cycle.
 ## Signal Design
 - Type: scalar — weighted 0-1 score from LLM-judge; simpler than preference pairs since resolution is measurable
 - Scale: 0.0 = fails to help, 0.5 = partial help, 1.0 = complete resolution with ideal tone

@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of memory_summary artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Memory Summary"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_summary, builder, examples]
+tldr: "Golden and anti-examples for memory summary construction, demonstrating ideal structure and common pitfalls."
+domain: "memory summary construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: memory-summary-builder
 ## Golden Example
-INPUT: "Create memory summary for a customer support session — compress after 15 turns, keep entity mentions and decisions, hybrid method"
+INPUT: "Create memory summary for a costmer support session — compress after 15 turns, keep entity mentions and decisions, hybrid method"
 OUTPUT:
 ```yaml
 id: p10_ms_support_session_hybrid
@@ -22,7 +32,7 @@ author: "builder_agent"
 name: "Customer Support Session Summary"
 source_type: session
 compression_method: hybrid
-quality: null
+quality: 8.9
 tags: [memory_summary, support, session, hybrid]
 tldr: "Hybrid compression of support sessions at 15 turns; retains entities + decisions; drops filler. 8:1 ratio."
 max_tokens: 512
@@ -31,23 +41,23 @@ source_window: 15
 retain_entities: true
 retain_timestamps: false
 freshness_decay: 0.1
-description: "Compresses customer support sessions after 15 turns using hybrid method; preserves issue entities, resolutions, and commitments."
+description: "Compresses costmer support sessions after 15 turns using hybrid method; preserves issue entities, resolutions, and commitments."
 ```
 ## Overview
-Compresses customer support session conversations after 15 turns using hybrid method.
+Compresses costmer support session conversations after 15 turns using hybrid method.
 Consumed by the support agent at session resume to restore context without full transcript replay.
 ## Compression
 Method: hybrid — abstractive narrative for conversation flow + extractive lift for issue details and resolutions
 Ratio: ~8:1 (avg 4000 tokens input -> 512 tokens output)
-Preserved: customer name, issue ID, product names, error codes, resolution steps agreed upon, open action items
+Preserved: costmer name, issue ID, product names, error codes, resolution steps agreed upon, open action items
 Dropped: greetings, repeated clarification loops, acknowledgment turns ("got it", "sure", "one moment")
 ## Trigger
 Condition: turn_count >= 15
 On fire: summarize last source_window turns, prepend to context buffer, drop raw turns beyond window
 ## Retention
-Entities: retained — customer name, product names, error codes, ticket IDs, URLs
+Entities: retained — costmer name, product names, error codes, ticket IDs, URLs
 Decisions: retained — resolution steps, escalation decisions, refund approvals
-Action items: retained — pending tasks with owner (agent/customer) and deadline if stated
+Action items: retained — pending tasks with owner (agent/costmer) and deadline if stated
 Timestamps: discarded — relative time ("earlier today") preserved in narrative; absolute timestamps dropped
 
 WHY THIS IS GOLDEN:

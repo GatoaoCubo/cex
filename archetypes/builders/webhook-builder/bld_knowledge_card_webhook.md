@@ -8,9 +8,10 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 domain: webhook
-quality: null
+quality: 9.1
 tags: [knowledge_card, webhook, HMAC, signature, retry, idempotency, stripe, github, slack]
 tldr: "Domain knowledge: webhook patterns, HMAC-SHA256 verification, retry/backoff, idempotency, provider specifics (Stripe/GitHub/Slack/Twilio)."
+density_score: 1.0
 ---
 # Knowledge Card: webhook
 ## Core Concept

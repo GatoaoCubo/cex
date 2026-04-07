@@ -5,7 +5,7 @@ domain: N05_operations
 kind: knowledge_card
 pillar: P05
 tags: [deploy, zero-downtime, blue-green, railway, sigterm, migrations, rollback, 12-factor]
-quality: 9.0
+quality: 9.1
 sources:
   - https://docs.railway.com/guides/healthchecks
   - https://12factor.net/

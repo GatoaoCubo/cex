@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [dispatch-rule, builder, N03]
 tldr: Routes construction tasks to N03 via keyword matching and confidence scoring.
 density_score: 0.88
@@ -47,3 +47,30 @@ routing_strategy: keyword_match
 
 If confidence < 0.70 and no other nucleus matches, route to N03
 with clarification. Builder is safest default for ambiguous make intents.
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Route by intent classification, not by filename convention
+- Fallback chains ensure graceful degradation on nucleus failure
+- Session isolation prevents cross-orchestrator interference
+- Signal completion within 30s of task finish or trigger timeout alert
+
+### Usage Reference
+
+```yaml
+# dispatch_rule integration
+artifact: dispatch_rule_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

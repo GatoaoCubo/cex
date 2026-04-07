@@ -4,6 +4,16 @@ id: bld_architecture_function_def
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of function_def — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Function Def"
+version: "1.0.0"
+author: n03_builder
+tags: [function_def, builder, examples]
+tldr: "Golden and anti-examples for function def construction, demonstrating ideal structure and common pitfalls."
+domain: "function def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: function_def

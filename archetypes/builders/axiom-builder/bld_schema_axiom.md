@@ -6,6 +6,16 @@ llm_function: CONSTRAIN
 purpose: Formal schema definition for axiom — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 source: P10_memory/_schema.yaml + SEED_BANK.yaml + TAXONOMY_LAYERS.yaml
+quality: 9.1
+title: "Schema Axiom"
+version: "1.0.0"
+author: n03_builder
+tags: [axiom, builder, examples]
+tldr: "Golden and anti-examples for axiom construction, demonstrating ideal structure and common pitfalls."
+domain: "axiom construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: axiom

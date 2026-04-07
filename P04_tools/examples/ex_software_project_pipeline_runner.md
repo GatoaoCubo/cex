@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [example, software-project, pipeline-runner, research, stages]
 tldr: "Complete pipeline runner: Research pipeline with STORM+CRAG stages. Stage-based executor pattern (like CEX 8F), async stages, retry per stage, structured output, pytest with stage mocks."
 density_score: 0.90

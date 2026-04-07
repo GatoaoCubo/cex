@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_8f_motor.py -- Motor 8F: Intent -> Execution Plan
 
@@ -13,7 +14,7 @@ Pipeline order (from MOTOR_8F_SPEC):
 Usage:
   python cex_8f_motor.py --intent "cria agente de vendas para ML"
   python cex_8f_motor.py --intent "reconstroi signal-builder" --quality 9.5
-  python cex_8f_motor.py --intent "cria agente E workflow de pesquisa"
+  python cex_8f_motor.py --intent "create agent AND research workflow"
   python cex_8f_motor.py --intent "cria agente" --output plan.json
   python cex_8f_motor.py --test
 """
@@ -33,7 +34,7 @@ _memory_scanner = None
 
 
 # ---------------------------------------------------------------------------
-# Turn Counter — Runtime Evolution Phase 3C
+# Turn Counter -- Runtime Evolution Phase 3C
 # ---------------------------------------------------------------------------
 
 
@@ -124,7 +125,7 @@ turn_counter = TurnCounter()
 try:
     import yaml
 except ImportError:
-    print("ERRO: PyYAML necessario. pip install pyyaml", file=sys.stderr)
+    print("ERROR: PyYAML required. pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
 
@@ -191,7 +192,7 @@ OBJECT_TO_KINDS = {
     "benchmark": [("benchmark", "P07", "GOVERN")],
     "boot": [("boot_config", "P02", "CONSTRAIN")],
     "boot_config": [("boot_config", "P02", "CONSTRAIN")],
-    "brain_index": [("brain_index", "P10", "INJECT")],
+    "knowledge_index": [("knowledge_index", "P10", "INJECT")],
     "browser": [("browser_tool", "P04", "CALL")],
     "browser_tool": [("browser_tool", "P04", "CALL")],
     "bugloop": [("bugloop", "P11", "GOVERN")],
@@ -273,8 +274,8 @@ OBJECT_TO_KINDS = {
     "loader": [("document_loader", "P04", "CALL")],
     "mcp": [("mcp_server", "P04", "CALL")],
     "mcp_server": [("mcp_server", "P04", "CALL")],
-    "memoria": [("brain_index", "P10", "INJECT")],
-    "memory": [("brain_index", "P10", "INJECT")],
+    "memoria": [("knowledge_index", "P10", "INJECT")],
+    "memory": [("knowledge_index", "P10", "INJECT")],
     "memory_scope": [("memory_scope", "P02", "INJECT")],
     "memory_summary": [("memory_summary", "P10", "INJECT")],
     "mental_model": [("mental_model", "P02", "BECOME")],
@@ -340,7 +341,7 @@ OBJECT_TO_KINDS = {
     "vision_tool": [("vision_tool", "P04", "CALL")],
     "webhook": [("webhook", "P04", "CALL")],
     "workflow": [("workflow", "P12", "COLLABORATE")],
-    # agent_card (P08) — deployment spec for autonomous agent
+    # agent_card (P08) -- deployment spec for autonomous agent
     "agent_card": [("agent_card", "P08", "BECOME")],
     "agent-card": [("agent_card", "P08", "BECOME")],
     "agentcard": [("agent_card", "P08", "BECOME")],
@@ -378,7 +379,7 @@ PRIMARY_NEEDS_KEYWORD = {
     "spawn-config-builder": ["spawn", "lancamento", "deploy"],
     "dispatch-rule-builder": ["dispatch", "routing policy", "despacho"],
     "e2e-eval-builder": ["e2e", "end-to-end"],
-    "validator-builder-codex": ["codex", "code review", "revisao de codigo"],
+    "validator-builder-codex": ["codex", "code review", "code review"],
     "type-def-builder": ["tipo customizado", "type definition", "typedef"],
     "validation-schema-builder": ["validation schema", "schema de validacao"],
     "daemon-builder": ["daemon", "background", "processo continuo"],
@@ -407,22 +408,37 @@ COMPLEX_BUILDERS = frozenset(
         "model-card-builder",
         "agent-package-builder",
         "e2e-eval-builder",
-        "director-builder",
+        "supervisor-builder",
     ]
 )
 META_BUILDERS = frozenset(["_builder-builder"])
 
 
 # ---------------------------------------------------------------------------
-# Effort-Aware Dispatch (Phase 2A — Runtime Evolution)
+# Effort-Aware Dispatch (Phase 2A -- Runtime Evolution)
 # ---------------------------------------------------------------------------
 
-EFFORT_TO_MODEL = {
-    "low": "claude-haiku-4-5-20251001",
-    "medium": "claude-sonnet-4-20250514",
-    "high": "claude-opus-4-20250514",
-    "max": "claude-opus-4-20250514",  # + extended thinking at runtime
-}
+def _load_effort_models() -> dict:
+    """Load effort-to-model mapping. Uses Router's nucleus_models if available."""
+    defaults = {
+        "low": "claude-haiku-4-5-20251001",
+        "medium": "claude-sonnet-4-6",
+        "high": "claude-opus-4-6",
+        "max": "claude-opus-4-6",
+    }
+    try:
+        from cex_router import load_nucleus_models
+        nm = load_nucleus_models()
+        if nm:
+            # Map effort tiers to nucleus model assignments
+            if "n02" in nm: defaults["medium"] = nm["n02"].get("model", defaults["medium"])
+            if "n03" in nm: defaults["high"] = nm["n03"].get("model", defaults["high"])
+            if "n03" in nm: defaults["max"] = nm["n03"].get("model", defaults["max"])
+    except Exception:
+        pass
+    return defaults
+
+EFFORT_TO_MODEL = _load_effort_models()
 
 EFFORT_TO_MAX_TOKENS = {
     "low": 4000,
@@ -453,7 +469,7 @@ def resolve_effort_model(effort: str, crew_override: str | None = None) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Permission Scope Enforcement (Phase 2D — Runtime Evolution)
+# Permission Scope Enforcement (Phase 2D -- Runtime Evolution)
 # ---------------------------------------------------------------------------
 
 
@@ -509,7 +525,7 @@ def check_permission_scope(
 
 
 # ---------------------------------------------------------------------------
-# Tool Deny-List Enforcement (Phase 2B — Runtime Evolution)
+# Tool Deny-List Enforcement (Phase 2B -- Runtime Evolution)
 # ---------------------------------------------------------------------------
 
 
@@ -542,7 +558,7 @@ def estimate_tokens(builder_id: str) -> int:
 
 
 # ---------------------------------------------------------------------------
-# Step 1: PARSE — extract verb, objects, domain, quality from intent
+# Step 1: PARSE -- extract verb, objects, domain, quality from intent
 # ---------------------------------------------------------------------------
 
 
@@ -711,7 +727,7 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Step 2: CLASSIFY — map objects to CEX kinds
+# Step 2: CLASSIFY -- map objects to CEX kinds
 # ---------------------------------------------------------------------------
 
 
@@ -747,7 +763,7 @@ def classify_objects(objects: list[str]) -> list[dict]:
                 )
                 seen_kinds.add(kind)
 
-    # A4: fallback — use cex_query.py keyword search when OBJECT_TO_KINDS has no match
+    # A4: fallback -- use cex_query.py keyword search when OBJECT_TO_KINDS has no match
     if not classified:
         try:
             from cex_query import query_builders
@@ -783,7 +799,7 @@ def classify_objects(objects: list[str]) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# KC Library — load domain KCs and match by feeds_kinds
+# KC Library -- load domain KCs and match by feeds_kinds
 # ---------------------------------------------------------------------------
 
 
@@ -866,14 +882,14 @@ def rebuild_kc_index():
 
 
 # ---------------------------------------------------------------------------
-# Step 3: FAN-OUT — select builders per function
+# Step 3: FAN-OUT -- select builders per function
 # ---------------------------------------------------------------------------
 
 
 def load_builder_map() -> dict:
     """Load 8F_BUILDER_MAP.yaml."""
     if not BUILDER_MAP_PATH.exists():
-        print(f"ERRO: Builder map nao encontrado: {BUILDER_MAP_PATH}", file=sys.stderr)
+        print(f"ERROR: Builder map not found: {BUILDER_MAP_PATH}", file=sys.stderr)
         sys.exit(1)
     with open(BUILDER_MAP_PATH, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
@@ -923,7 +939,7 @@ def _load_builder_tools_denied(builder_id: str) -> set:
         match = re.search(r'\|\s*DENIED\s*\|\s*([^|]+)\s*\|', content)
         if match:
             denied_text = match.group(1).strip()
-            if denied_text.lower() in ("(none)", "none", "—", "-", ""):
+            if denied_text.lower() in ("(none)", "none", "--", "-", ""):
                 return set()
             return {t.strip() for t in denied_text.split(",") if t.strip()}
     except Exception:
@@ -1133,7 +1149,7 @@ def fan_out(
 
 
 # ---------------------------------------------------------------------------
-# Step 4: PLAN — order functions by pipeline position
+# Step 4: PLAN -- order functions by pipeline position
 # ---------------------------------------------------------------------------
 
 
@@ -1143,7 +1159,7 @@ def order_plan(functions: list[dict]) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Step 5: OUTPUT — assemble final JSON
+# Step 5: OUTPUT -- assemble final JSON
 # ---------------------------------------------------------------------------
 
 
@@ -1165,11 +1181,11 @@ def generate_output(
 
     if parsed["domain"] == "generic":
         warnings.append(
-            "domain nao identificado — plan pode ser generico. Especifique o artefato alvo."
+            "domain not identified -- plan may be generic. Specify target artifact."
         )
 
     if any(c.get("meta") for c in classified):
-        warnings.append("intent meta detectado — ativando _builder-builder. Pipeline de 13 files.")
+        warnings.append("intent meta detectado -- ativando _builder-builder. Pipeline de 13 files.")
 
     # Parsed output (spec format: object is string or array)
     parsed_output = {
@@ -1218,7 +1234,7 @@ def main():
 Examples:
   python cex_8f_motor.py --intent "cria agente de vendas para ML"
   python cex_8f_motor.py --intent "reconstroi signal-builder" --quality 9.5
-  python cex_8f_motor.py --intent "cria agente E workflow de pesquisa"
+  python cex_8f_motor.py --intent "create agent AND research workflow"
   python cex_8f_motor.py --test
         """,
     )
@@ -1327,12 +1343,12 @@ def run_tests():
         check("_builder-builder active", bb is not None and bb["active"], f"got {bb}")
 
     # Test 3: multi-object
-    print("\nTest 3: cria agente E workflow de pesquisa")
-    p3 = parse_intent("cria agente E workflow de pesquisa")
+    print("\nTest 3: create agent AND research workflow")
+    p3 = parse_intent("create agent AND research workflow")
     check("multi_object=true", p3["multi_object"], f"got {p3['multi_object']}")
     check("has agente", "agente" in p3["objects"], f"got {p3['objects']}")
     check("has workflow", "workflow" in p3["objects"], f"got {p3['objects']}")
-    check("domain=pesquisa", "pesquisa" in p3["domain"], f"got {p3['domain']}")
+    check("domain=research", "research" in p3["domain"], f"got {p3['domain']}")
 
     # Test 4: empty intent
     print("\nTest 4: intent vazio")

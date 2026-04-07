@@ -4,6 +4,16 @@ id: bld_architecture_dag
 pillar: P08
 llm_function: PRODUCE
 purpose: Component map of dag — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Dag"
+version: "1.0.0"
+author: n03_builder
+tags: [dag, builder, examples]
+tldr: "Golden and anti-examples for dag construction, demonstrating ideal structure and common pitfalls."
+domain: "dag construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

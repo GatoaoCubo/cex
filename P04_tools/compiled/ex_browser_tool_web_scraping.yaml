@@ -28,7 +28,7 @@ examples:
 - /scrape https://example.com/products --strategy auto
 - /scrape https://marketplace.com/search?q=pet+toys --strategy dynamic --pagination 5
 density_score: 0.88
-purpose: 'web-scraping e o roteador inteligente de extracao web do organization. Domain: data_collection (research_agent agent_node).
+purpose: 'web-scraping e o roteador inteligente de extracao web do organization. Domain: data_collection (research_agent agent_group).
   Resolve o problema de escolher a estrategia correta de scraping para cada alvo, evitando over-engineering (Selenium onde
   BeautifulSoup basta) e under-engineering (requests onde JS rendering e necessario).'
 workflow_phases: ''

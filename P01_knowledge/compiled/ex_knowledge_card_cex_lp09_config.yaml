@@ -79,7 +79,7 @@ comparativo: '| Tipo | Layer | Format | Max Bytes | Exemplo |
 
   | path_config | runtime | yaml | 3072 | Dirs de agents, pool, output |
 
-  | permission | governance | yaml | 3072 | Satellite write access |
+  | permission | governance | yaml | 3072 | Agent_group write access |
 
   | feature_flag | runtime | json | 1536 | Enable firecrawl enrichment |
 

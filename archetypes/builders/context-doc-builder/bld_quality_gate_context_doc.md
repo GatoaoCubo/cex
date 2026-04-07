@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "domain context documentation — background documents that hydrate prompts with scope, stakeholders, constraints, and assumptions"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, context-doc, P01, prompt-hydration, domain-scope, constraints]
 tldr: "Pass/fail gate for context_doc artifacts: domain scope precision, constraint completeness, assumption capture, and hydration readiness."
 density_score: 0.91
@@ -48,7 +48,7 @@ Weights sum to 100%.
 | Hydration readiness | 1.0 | Document structured so key facts can be injected into a prompt without editing |
 | Freshness | 0.5 | `updated` date is recent; stale context docs noted as requiring review |
 | Terminology consistency | 0.5 | Key terms used consistently throughout; ambiguous terms defined inline |
-| Density appropriateness | 1.0 | Content is dense but readable; no padding or repeated constraints |
+| Density apownteness | 1.0 | Content is dense but readable; no padding or repeated constraints |
 | Boundary from knowledge_card | 1.0 | Document is context or background, not a distilled atomic fact (that belongs in knowledge_card) |
 | Domain specificity | 1.0 | Content specific to the declared domain; no generic boilerplate |
 ## Actions

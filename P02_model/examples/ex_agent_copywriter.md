@@ -3,7 +3,7 @@ id: ex_agent_copywriter
 kind: agent
 pillar: P02
 title: Copywriter Agent
-agent_node: persuasion_hub
+agent_group: persuasion_hub
 domain: marketing
 llm_function: BECOME
 capabilities_count: 6
@@ -16,7 +16,12 @@ references:
   - ex_knowledge_card_rag_fundamentals
   - ex_prompt_template_aida
 tldr: "Copywriter agent: AIDA-driven persuasive copy for infoproducts with tone control, quality rubric, and A/B variant generation."
-quality: 8.9
+quality: 9.1
+density_score: 0.77
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
+version: "1.0.0"
 ---
 
 # Copywriter Agent

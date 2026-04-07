@@ -6,10 +6,15 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: legal_compliance
-quality: 8.9
+quality: 9.1
 tldr: "EU and BR compliance for digital content sales — GDPR, Widerrufsrecht, Impressum, EU VAT, CDC consumer rights, and platform-specific requirements."
 tags: [compliance, gdpr, eu-vat, widerrufsrecht, impressum, brazil, cdc, hotmart, digistore24]
-density_score: 0.90
+density_score: 1.0
+when_to_use: "Apply when eu and br compliance for digital content sales — gdpr, widerrufsrecht, impressum, eu vat, cdc con..."
+keywords: [knowledge-card, compliance, platform, region, general]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Content Platform Compliance — EU & BR
@@ -256,3 +261,10 @@ email_compliance:
 4. **Impressum for DACH** — required by German law, 2-click reachable.
 5. **DPAs with every processor** — DS24, email provider, analytics tool.
 6. **Cookie opt-in before tracking** — pre-checked boxes are illegal in EU.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

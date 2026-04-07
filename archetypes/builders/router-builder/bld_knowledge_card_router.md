@@ -5,11 +5,21 @@ pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for router production — atomic searchable facts
 sources: router-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Router"
+version: "1.0.0"
+author: n03_builder
+tags: [router, builder, examples]
+tldr: "Golden and anti-examples for router construction, demonstrating ideal structure and common pitfalls."
+domain: "router construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: router
 ## Executive Summary
-A router is a dense rule table that maps task patterns to agent_node or agent destinations using confidence thresholds, priority ranking, and fallback logic. Unlike dispatch_rule (single keyword-agent_node map with no logic) or workflow (multi-step sequence), a router handles the full decision algorithm — confidence gating, priority sorting, load balancing, and escalation for ambiguous or low-confidence matches.
+A router is a dense rule table that maps task patterns to agent_group or agent destinations using confidence thresholds, priority ranking, and fallback logic. Unlike dispatch_rule (single keyword-agent_group map with no logic) or workflow (multi-step sequence), a router handles the full decision algorithm — confidence gating, priority sorting, load balancing, and escalation for ambiguous or low-confidence matches.
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -29,7 +39,7 @@ A router is a dense rule table that maps task patterns to agent_node or agent de
 | Priority ordering | Higher integer = preferred; router selects highest-priority matching route first |
 | Confidence gating | Match confidence < `confidence_threshold` falls through to fallback |
 | `routes_count` integrity | Must equal exact number of rows in Routes table — enforced by HARD gate |
-| `fallback_route` requirement | Must be a valid agent_node name or literal `"escalate"`; never empty |
+| `fallback_route` requirement | Must be a valid agent_group name or literal `"escalate"`; never empty |
 | Pattern uniqueness | No two routes may share the same pattern |
 | Load balancing options | `priority` (default) / `round_robin` / `weighted` / `none` |
 | Escalation trigger | Ambiguous multi-match or confidence tie — must have explicit resolution policy |

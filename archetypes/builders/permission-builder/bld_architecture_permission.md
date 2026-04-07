@@ -4,6 +4,16 @@ id: bld_architecture_permission
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of permission — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Permission"
+version: "1.0.0"
+author: n03_builder
+tags: [permission, builder, examples]
+tldr: "Golden and anti-examples for permission construction, demonstrating ideal structure and common pitfalls."
+domain: "permission construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: permission in the CEX
@@ -34,7 +44,7 @@ guardrail      --depends-->      permission
 ## Boundary Table
 | permission IS | permission IS NOT |
 |---------------|-------------------|
-| A read/write/execute access control with roles and scope | A safety boundary on agent behavior (guardrail P11) |
+| A read/write/executand access control with roles and scope | A safety boundary on agent behavior (guardrail P11) |
 | Enforced via allow_list and deny_list with precedence | An inviolable operational mandate (law P08) |
 | Role-based with inheritance hierarchy | A pass/fail quality check (quality_gate P11) |
 | Includes audit trail and escalation path | A runtime timeout or retry parameter (runtime_rule P09) |

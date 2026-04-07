@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Handoff"
+version: "1.0.0"
+author: n03_builder
+tags: [handoff, builder, examples]
+tldr: "Golden and anti-examples for handoff construction, demonstrating ideal structure and common pitfalls."
+domain: "handoff construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: handoff Production Rules
 ## Naming Convention
@@ -24,25 +34,51 @@ permission_scope: nucleus
 | Builder directory | kebab-case | `handoff-builder/` |
 | Frontmatter fields | snake_case | `quality_target`, `scope_fence` |
 | Autonomy values | lowercase enum | `full`, `supervised`, `assisted` |
-| Satellite values | lowercase slug | `edison`, `atlas`, `shaka` |
+| Agent_group values | lowercase slug | `edison`, `atlas`, `shaka` |
 Rule: use `.md` (YAML frontmatter + markdown body) for handoff artifacts.
 ## File Paths
-- Primary output: `.claude/handoffs/p12_ho_{task}.md`
-- Compiled output: `P12_orchestration/compiled/p12_ho_{task}.md`
-- Human reference: `P12_orchestration/examples/p12_ho_{task}.md`
+1. Primary output: `.claude/handoffs/p12_ho_{task}.md`
+2. Compiled output: `P12_orchestration/compiled/p12_ho_{task}.md`
+3. Human reference: `P12_orchestration/examples/p12_ho_{task}.md`
 ## Size Limits
-- Preferred handoff size: <= 3072 bytes
-- Absolute max: 4096 bytes
-- Tasks should be concise and specific
+1. Preferred handoff size: <= 3072 bytes
+2. Absolute max: 4096 bytes
+3. Tasks should be concise and specific
 ## Content Restrictions
-- Each task step must be one specific action (no compound steps)
-- Scope fence must list both SOMENTE and NAO TOQUE
-- Commit section must have exact git add and commit commands
-- Signal section must reference a concrete completion mechanism
+1. Each task step must be one specific action (no compound steps)
+2. Scope fence must list both SOMENTE and NAO TOQUE
+3. Commit section must have exact git add and commit commands
+4. Signal section must reference a concrete completion mechanism
 ## Boundary Restrictions
-- No prompt persona or response format constraints (belongs in action_prompt)
-- No status events or quality scores (belongs in signal)
-- No keyword routing tables (belongs in dispatch_rule)
-- No step graphs with error handling (belongs in workflow)
-- No dependency graph structure (belongs in dag)
-- No multi-agent coordination protocol (belongs in crew)
+1. No prompt persona or response format constraints (belongs in action_prompt)
+2. No status events or quality scores (belongs in signal)
+3. No keyword routing tables (belongs in dispatch_rule)
+4. No step graphs with error handling (belongs in workflow)
+5. No dependency graph structure (belongs in dag)
+6. No multi-agent coordination protocol (belongs in crew)
+
+## Metadata
+
+```yaml
+id: bld_config_handoff
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-handoff.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | handoff construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

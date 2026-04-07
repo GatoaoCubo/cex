@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for env_config
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Env Config"
+version: "1.0.0"
+author: n03_builder
+tags: [env_config, builder, examples]
+tldr: "Golden and anti-examples for env config construction, demonstrating ideal structure and common pitfalls."
+domain: "env config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: env_config
@@ -18,7 +28,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
-| scope | string | YES | - | Config scope: global, agent_node name, or service name |
+| scope | string | YES | - | Config scope: global, agent_group name, or service name |
 | variables | list[string], len >= 1 | YES | - | Variable names defined |
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "env_config" |

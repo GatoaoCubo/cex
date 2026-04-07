@@ -33,6 +33,11 @@ inputs: ["Motor 8F plan JSON", "optional step filter"]
 outputs: ["generated prompts per builder step", "LLM outputs (--execute mode)", "run state JSON"]
 dependencies: ["pyyaml", "anthropic (optional, for --execute)"]
 category: core
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose
@@ -70,4 +75,4 @@ python _tools/cex_crew_runner.py --plan /tmp/plan.json --output-dir /tmp/crew_ou
 ## Dependencies
 - Motor 8F plan JSON (from `cex_8f_motor.py`)
 - `archetypes/builders/` for builder ISO injection (30KB budget)
-- `anthropic` SDK (only for `--execute` mode, model: claude-sonnet-4-20250514)
+- `anthropic` SDK (only for `--execute` mode, model: claude-sonnet-4-6)

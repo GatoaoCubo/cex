@@ -8,6 +8,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [tools, type-def, P04, tooling]
+quality: 9.1
+title: "Tools Type Def"
+tldr: "Golden and anti-examples for type def construction, demonstrating ideal structure and common pitfalls."
+domain: "type def construction"
+density_score: 0.90
 ---
 
 ## Production Tools

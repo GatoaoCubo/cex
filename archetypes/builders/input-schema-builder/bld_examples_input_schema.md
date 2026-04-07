@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of input_schema artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Input Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [input_schema, builder, examples]
+tldr: "Golden and anti-examples for input schema construction, demonstrating ideal structure and common pitfalls."
+domain: "input schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: input-schema-builder
 ## Golden Example
-INPUT: "Define o input schema para o brain_query — o que precisa receber para buscar"
+INPUT: "Define o input schema para o brain_query — what precisa receber para searchr"
 OUTPUT:
 ```yaml
 id: p06_is_brain_query
@@ -47,13 +57,13 @@ examples:
   - {query: "agent for research", max_results: 5}
   - {query: "P06 validators", filters: {pillar: "P06", kind: "validator"}}
 domain: "brain-search"
-quality: null
+quality: 8.9
 tags: [input-schema, brain-query, search, P10]
 tldr: "Input contract for brain_query: requires query string, optional max_results and filters."
 density_score: 0.90
 ```
 ## Contract Definition
-brain_query receives search requests from any agent/agent_node. Callers provide a natural
+brain_query receives search requests from any agent/agent_group. Callers provide a natural
 language query string, optional result limit, and optional filters by pillar/kind/domain.
 ## Fields
 | # | Name | Type | Required | Default | Description |

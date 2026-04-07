@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Web/semantic/hybrid search providers, query parameters, result ranking, filtering | NOT retriever (local vector store), document_loader (file ingestion), browser_tool (web navigation)"
 domain: "search_tool"
-quality: 8.7
+quality: 9.1
 tags: ["system_prompt", "search_tool", "web_search", "semantic_search", "tools"]
 safety_level: standard
 tools_listed: false
@@ -50,3 +50,18 @@ SCHEMA.md is the source of truth. Artifact id must match `^p04_search_[a-z][a-z0
 10. ALWAYS redirect local vector search to retriever-builder, file ingestion to document-loader-builder, web navigation to browser-tool-builder — state the boundary reason.
 ## Output Format
 Produce a Markdown artifact with YAML frontmatter followed by the tool spec. Total body under 2048 bytes.
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind search_tool --execute
+```
+
+```yaml
+# Agent config reference
+agent: search-tool-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

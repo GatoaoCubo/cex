@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for regression_check
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Regression Check"
+version: "1.0.0"
+author: n03_builder
+tags: [regression_check, builder, examples]
+tldr: "Golden and anti-examples for regression check construction, demonstrating ideal structure and common pitfalls."
+domain: "regression check construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: regression_check
@@ -26,7 +36,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string], len >= 3 | YES | - | Must include "regression_check" |
 | tldr | string <= 160ch | YES | - | Dense summary |
 | description | string <= 200ch | REC | - | What this check compares |
-| tool | enum: braintrust, promptfoo, langsmith, deepeval, custom | REC | - | Comparison framework |
+| tool | enum: braintrust, promptfoo, langsmith, deepeval, costm | REC | - | Comparison framework |
 | comparison_mode | enum: relative, absolute | REC | relative | How threshold is applied |
 | fail_action | enum: block, warn, log | REC | warn | Action when regression detected |
 | notify | list[string] | REC | - | Channels or owners to notify |

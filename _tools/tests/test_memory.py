@@ -1,4 +1,4 @@
-"""Tests for cex_memory.py — persistent build context + entity memory."""
+"""Tests for cex_memory.py -- persistent build context + entity memory."""
 
 import json
 import sys

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -6,7 +7,7 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 """
-CEX Research — Generate structured research prompts that produce KC-Sources.
+CEX Research -- Generate structured research prompts that produce KC-Sources.
 
 A KC-Source is a raw taxonomy table scraped/researched from official docs.
 It feeds distill.py which transforms sources into domain Knowledge Cards.
@@ -44,7 +45,7 @@ DEFAULT_CATEGORIES = [
 # Research prompt template
 RESEARCH_PROMPT = """## TAREFA: Research & Taxonomy Extraction
 
-Voce eh um pesquisador tecnico. Sua tarefa: criar uma TAXONOMIA ESTRUTURADA
+You are a technical researcher. Your task: create a STRUCTURED TAXONOMY
 do topico "{topic}" usando as fontes listadas abaixo.
 
 ### FONTES OFICIAIS (use APENAS documentacao oficial):
@@ -58,14 +59,14 @@ do topico "{topic}" usando as fontes listadas abaixo.
 2. Term = nome oficial (classe, funcao, conceito) como aparece na doc
 3. Source = qual framework/provider (ex: langchain, openai, anthropic)
 4. Category = uma das categorias acima
-5. Description = 1 frase descritiva (max 120 chars), SEM jargao desnecessario
+5. Description = 1 frase descritiva (max 120 chars), SEM jargao desrequired
 6. CEX Mapping = qual pilar/kind do CEX esse conhecimento alimenta
    Pilares: P01(Knowledge) P02(Model) P03(Prompt) P04(Tools) P05(Output)
             P06(Schema) P07(Evals) P08(Architecture) P09(Config)
             P10(Memory) P11(Feedback) P12(Orchestration)
 7. Minimo 15 termos por fonte. Se a fonte tem mais, inclua mais.
 8. Ordene por Source, depois Category, depois Term
-9. NAO invente termos — apenas termos que existem na documentacao oficial
+9. NAO invente termos -- apenas termos que existem na documentacao oficial
 10. Inclua version/date de quando a doc foi consultada
 
 ### OUTPUT FORMAT:

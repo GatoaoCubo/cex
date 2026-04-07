@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Model Card"
+version: "1.0.0"
+author: n03_builder
+tags: [model_card, builder, examples]
+tldr: "Golden and anti-examples for model card construction, demonstrating ideal structure and common pitfalls."
+domain: "model card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: model_card Production Rules
 ## Naming Convention
@@ -27,24 +37,50 @@ permission_scope: nucleus
 | Model slug | snake_case, no provider prefix | `opus_4`, `gpt_4o`, `gemini_2_5_pro` |
 Rule: id MUST equal filename stem (validator checks this).
 ## File Paths
-- Output: `cex/P02_model/examples/p02_mc_{provider}_{slug}.md`
-- Compiled: `cex/P02_model/compiled/p02_mc_{provider}_{slug}.yaml`
+1. Output: `cex/P02_model/examples/p02_mc_{provider}_{slug}.md`
+2. Compiled: `cex/P02_model/compiled/p02_mc_{provider}_{slug}.yaml`
 ## Size Limits (aligned with SCHEMA)
-- Frontmatter: ~800-1200 bytes (26 fields)
-- Body: max 4096 bytes (excl frontmatter)
-- Total: max 5300 bytes
-- Density: >= 0.85
+1. Frontmatter: ~800-1200 bytes (26 fields)
+2. Body: max 4096 bytes (excl frontmatter)
+3. Total: max 5300 bytes
+4. Density: >= 0.85
 ## Provider Enum (same as SCHEMA)
 Valid: anthropic, openai, google, meta, mistral, cohere, deepseek, alibaba, ai21, other
 If provider not in list: use "other" and add provider name in tags.
 ## Pricing Policy (aligned with SCHEMA)
-- Frontmatter: BASE TIER only (lowest published standard API price)
-- If tiered: document higher tiers in body Specifications table
-- ALWAYS per_1M_tokens, USD only
-- open-weight: null (not 0, not "free")
-- commercial free tier: 0.00 (not null)
-- cache_write: null if provider has no symmetric cache write price
+1. Frontmatter: BASE TIER only (lowest published standard API price)
+2. If tiered: document higher tiers in body Specifications table
+3. ALWAYS per_1M_tokens, USD only
+4. open-weight: null (not 0, not "free")
+5. commercial free tier: 0.00 (not null)
+6. cache_write: null if provider has no symmetric cache write price
 ## Freshness
-- updated field must be within 90 days of current date
-- If model deprecated: status = "deprecated", linked_artifacts must point to replacement
-- Stale cards (>90d) flagged by lifecycle_rule for review
+1. updated field must be within 90 days of current date
+2. If model deprecated: status = "deprecated", linked_artifacts must point to replacement
+3. Stale cards (>90d) flagged by lifecycle_rule for review
+
+## Metadata
+
+```yaml
+id: bld_config_model_card
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-model-card.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | model card construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

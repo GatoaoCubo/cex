@@ -15,7 +15,7 @@ prerequisites:
   - Optimization direction is known (minimize or maximize)
 validation_method: checklist
 domain: optimizer
-quality: 8.6
+quality: 9.2
 tags:
   - instruction
   - optimizer
@@ -33,11 +33,11 @@ density_score: 0.87
 ## Context
 The optimizer-builder receives a **process description** and produces an `optimizer` artifact encoding the metric-to-action cycle for continuous improvement of that process.
 **Input variables**:
-- `{{process}}` — name and brief description of the process to optimize (e.g., "API response pipeline", "nightly batch job")
-- `{{metric}}` — the measurable quantity to optimize with unit (e.g., "p95 latency in ms", "error rate as %")
-- `{{direction}}` — `minimize` or `maximize`
-- `{{baseline}}` — optional current measured value under normal operating conditions; if absent, mark as `TBD`
-- `{{constraints}}` — optional hard limits optimization must not violate (e.g., "cannot exceed $50/day")
+1. `{{process}}` — name and brief description of the process to optimize (e.g., "API response pipeline", "nightly batch job")
+2. `{{metric}}` — the measurable quantity to optimize with unit (e.g., "p95 latency in ms", "error rate as %")
+3. `{{direction}}` — `minimize` or `maximize`
+4. `{{baseline}}` — optional current measured value under normal operating conditions; if absent, mark as `Configurable`
+5. `{{constraints}}` — optional hard limits optimization must not violate (e.g., "cannot exceed $50/day")
 **Output**: a single `optimizer` artifact at `p11_opt_{{process_slug}}.md` with tripartite thresholds, action catalog, baseline record, risk assessment, and monitoring config.
 **Boundaries**: handles continuous optimization cycles only. Does NOT produce one-time bug fixes (bugloop), passive measurement records (benchmark), pass/fail barriers (quality_gate), or safety constraints (guardrail).
 ## Phases
@@ -50,12 +50,12 @@ The optimizer-builder receives a **process description** and produces an `optimi
 3. If `{{baseline}}` is provided, derive initial threshold estimates:
    - **minimize**: target = baseline, trigger = baseline × 1.10, critical = baseline × 1.50
    - **maximize**: target = baseline, trigger = baseline × 0.90, critical = baseline × 0.50
-   If `{{baseline}}` is absent, set all three to `TBD` and define the measurement procedure (tool, window duration, conditions to hold constant).
+   If `{{baseline}}` is absent, set all three to `Configurable` and define the measurement procedure (tool, window duration, conditions to hold constant).
 4. Document baseline conditions: date or measurement window, load level, environment, config version.
 5. Identify 2–4 available actions: enumerate concrete operations that can move the metric toward `{{direction}}` (e.g., tune parameters, prune elements, scale capacity, replace component, restructure flow).
 6. For each action, assess automation risk: can it fire without human approval? Set `automated: true` only if `risk.level = low` AND rollback is instant.
 7. Search existing optimizers for this domain (brain_query [IF MCP]: `optimizer {{process}}`). Avoid duplicates; if found, determine whether an update is needed.
-**Exit**: metric fully characterized, threshold values set (or TBD with measurement procedure), at least 2 actions identified with automation flag.
+**Exit**: metric fully characterized, threshold values set (or Configurable with measurement procedure), at least 2 actions identified with automation flag.
 ### Phase 2: COMPOSE
 **Goal**: Produce all artifact fields and body sections following SCHEMA.md and OUTPUT_TEMPLATE.md.
 8. Read SCHEMA.md — source of truth for all required fields.
@@ -82,3 +82,31 @@ The optimizer-builder receives a **process description** and produces an `optimi
 26. Verify every action trigger is numeric — no subjective conditions ("when it feels slow" fails).
 27. Verify `automated: true` actions all have `risk.level = low`.
 28. Verify `monitoring.alerts` reference specific threshold violations, not generic notifications.
+
+## Template Loading
+
+```yaml
+# This instruction is ISO 3 of 13 in the builder stack
+loader: cex_skill_loader.py
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+# Verify instruction loads correctly
+python _tools/cex_skill_loader.py --verify optimizer
+```
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | optimizer |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

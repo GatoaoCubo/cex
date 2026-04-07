@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of workflow artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Workflow"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow, builder, examples]
+tldr: "Golden and anti-examples for workflow construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: workflow-builder
@@ -29,7 +39,7 @@ depends_on: []
 signals: [complete, error]
 spawn_configs: [p12_spawn_shaka_solo_research, p12_spawn_edison_solo_build]
 domain: "orchestration"
-quality: null
+quality: 8.8
 tags: [workflow, research, build, multi-director]
 tldr: "3-step mixed workflow: research_agent researches, builder_agent builds from findings, orchestrator consolidates"
 density_score: 0.90
@@ -76,7 +86,7 @@ WHY THIS IS GOLDEN:
 - steps_count: 3 matches actual 3 steps (H08 pass)
 - Each step has Agent/Action/Input/Output/Signal/Depends (S03 pass)
 - Dependencies section lists prerequisites (S05 pass)
-- Signals reference signal-builder conventions (S06 pass)
+- Signals references signal-builder conventions (S06 pass)
 - No prompt chaining in body (S08 pass)
 ## Anti-Example
 INPUT: "Create a workflow for doing stuff"

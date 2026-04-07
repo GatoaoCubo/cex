@@ -8,7 +8,7 @@ tldr: "Cache static prompt components to reduce LLM costs by 60-90%. Cache syste
 references:
   - tpl_knowledge_card
   - ex_knowledge_card_rag_fundamentals
-quality: 8.8
+quality: 9.0
 ---
 
 # Prompt Caching Strategies

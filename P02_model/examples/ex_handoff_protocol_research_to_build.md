@@ -8,8 +8,8 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: orchestration
-quality: 9.0
-tags: [handoff-protocol, shaka, edison, research, build, agent_node, a2a]
+quality: 9.1
+tags: [handoff-protocol, shaka, edison, research, build, agent_group, a2a]
 tldr: Protocolo de handoff entre research_agent (pesquisa) e builder_agent (build) — research_agent entrega findings+sources+quality_score via arquivo .md, builder_agent consome e produz build artifacts
 when_to_use: Quando pesquisa research_agent deve alimentar implementacao builder_agent sem intervencao manual de orchestrator
 ---
@@ -17,14 +17,14 @@ when_to_use: Quando pesquisa research_agent deve alimentar implementacao builder
 # Handoff Protocol: Research-to-Build (research_agent -> builder_agent)
 
 ## Overview
-Define o contrato de transferencia de contexto entre research_agent (satelite de pesquisa) e builder_agent (satelite de build). research_agent produz findings estruturados como knowledge cards ou research reports; builder_agent consome esses artifacts para implementar agentes, skills, ou componentes. O handoff e assincrono via filesystem — nao requer ambos satelites ativos simultaneamente.
+Define o contrato de transferencia de contexto entre research_agent (agent_group de pesquisa) e builder_agent (agent_group de build). research_agent produz findings estruturados como knowledge cards ou research reports; builder_agent consome esses artifacts para implementar agentes, skills, ou componentes. O handoff e assincrono via filesystem — nao requer ambos agent_groups ativos simultaneamente.
 
 ## Trigger
 | Field | Value |
 |-------|-------|
 | event | `research_complete` |
-| source_agent_node | research_agent |
-| target_agent_node | builder_agent |
+| source_agent_group | research_agent |
+| target_agent_group | builder_agent |
 | trigger_mechanism | Signal file: `.claude/signals/shaka_complete_*.json` |
 | detection | orchestrator poll (15s interval) ou `stella_signal_monitor.py --watch` |
 

@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-02"
 author: "builder"
 domain: market_research
-quality: null
+quality: 9.1
 tags: [market-research, data-triangulation, validation, methodology, bias-reduction, knowledge]
 tldr: "Data triangulation validates market insights using 3+ independent sources, combining quant/qual methods to reduce bias by 60-80%"
 when_to_use: "When market research findings require validation or single-source data shows unexpected patterns"
@@ -26,6 +26,7 @@ linked_artifacts:
   related: []
 density_score: 0.89
 data_source: "https://www.marketresearchsociety.org/resources/guidelines/triangulation"
+---
 
 # Market Research Data Triangulation for Insight Validation
 

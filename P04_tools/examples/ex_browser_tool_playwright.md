@@ -26,10 +26,13 @@ timeout: 30000
 javascript: true
 cookies: true
 stealth: false
-quality: 8.7
+quality: 9.0
 tags: [browser_tool, playwright, automation, scraping]
 tldr: "Playwright headless browser for web scraping, UI testing, and page interaction via CSS/XPath"
 description: "Automates Chromium browser for navigation, data extraction, and interaction"
+domain: "tool integration"
+title: "Browser Tool Playwright"
+density_score: 0.91
 ---
 
 # Playwright Browser Automation

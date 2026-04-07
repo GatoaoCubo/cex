@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "instruction — step-by-step operational recipes for agent task execution"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, instruction, steps, recipe, procedure, idempotency]
 tldr: "Gates ensuring instruction artifacts decompose tasks into atomic verifiable steps with prerequisites, completion criteria, and rollback procedures."
 density_score: 0.90

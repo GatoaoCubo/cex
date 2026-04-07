@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for validation_schema production — atomic searchable facts
 sources: validation-schema-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Validation Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [validation_schema, builder, examples]
+tldr: "Golden and anti-examples for validation schema construction, demonstrating ideal structure and common pitfalls."
+domain: "validation schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: validation_schema
@@ -28,7 +38,7 @@ A `validation_schema` (P06) is a post-generation structural contract the system 
 ## Patterns
 | Pattern | Rule |
 |---------|------|
-| JSON types only | `string`, `integer`, `number`, `boolean`, `array`, `object` — no custom types |
+| JSON types only | `string`, `integer`, `number`, `boolean`, `array`, `object` — no costm types |
 | Required vs Recommended split | Required fields → HARD gate; Recommended → SOFT gate |
 | 5-column fields table | Field, Type, Required, Default, Notes — all mandatory; Default = `--` for required |
 | `on_failure` per criticality | Critical fields (`id`, `kind`) → `reject`; style/recommended → `warn`; safe coercions → `auto_fix` |

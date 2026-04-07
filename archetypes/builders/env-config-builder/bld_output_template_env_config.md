@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an env_config artifact
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Env Config"
+version: "1.0.0"
+author: n03_builder
+tags: [env_config, builder, examples]
+tldr: "Golden and anti-examples for env config construction, demonstrating ideal structure and common pitfalls."
+domain: "env config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: env_config
@@ -16,7 +26,7 @@ version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
-scope: "{{global_or_agent_node_or_service}}"
+scope: "{{global_or_agent_group_or_service}}"
 variables:
   - {{VAR_NAME_1}}
   - {{VAR_NAME_2}}

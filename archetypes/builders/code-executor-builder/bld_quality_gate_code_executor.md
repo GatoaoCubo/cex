@@ -8,7 +8,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "Sandboxed code execution environments with isolation, language support, resource limits, and timeout policies"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, code-executor, P04, sandbox, isolation, timeout]
 tldr: "Pass/fail gate for code_executor artifacts: sandbox isolation, timeout policy, language listing, resource limits, and network access declaration."
 density_score: 0.90
@@ -44,7 +44,7 @@ Weights sum to 100%.
 | Language versioning | 1.0 | Each language has version constraint, not just name |
 | Resource limits detail | 1.0 | CPU, memory, disk limits specified with units |
 | Network policy clarity | 1.0 | network_access explicitly stated with rationale |
-| Timeout appropriateness | 0.5 | Timeout reasonable for declared use case |
+| Timeout apownteness | 0.5 | Timeout reasonable for declared use case |
 | File I/O policy | 0.5 | file_io explicitly stated with scope |
 | Session model | 0.5 | persistent_session declared with cleanup policy if true |
 | Pre-installed libraries | 0.5 | Libraries listed for each language |

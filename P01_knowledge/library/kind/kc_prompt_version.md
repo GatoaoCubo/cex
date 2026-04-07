@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: prompt_version
-quality: 8.9
+quality: 9.1
 tags: [prompt_version, P03, GOVERN, kind-kc]
 tldr: "Immutable snapshot of a prompt at a point in time, enabling A/B testing, rollback, and audit trails"
 when_to_use: "Building, reviewing, or reasoning about prompt_version artifacts"
 keywords: [versioning, snapshot, prompt-audit]
 feeds_kinds: [prompt_version]
-density_score: null
+density_score: 0.99
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Prompt Version

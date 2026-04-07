@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
-quality: 9.5
+quality: 9.1
 tags: [quality, audit, input, contract]
 tldr: "Validates input parameters for the codebase quality audit pipeline (scope, threshold, scan options)"
 density_score: 0.90

@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for eval_dataset
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.0
+title: "Instruction Eval Dataset"
+version: "1.0.0"
+author: n03_builder
+tags: [eval_dataset, builder, examples]
+tldr: "Golden and anti-examples for eval dataset construction, demonstrating ideal structure and common pitfalls."
+domain: "eval dataset construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce an eval_dataset
@@ -15,7 +25,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Decide on splits: eval-only (test: 1.0) is default unless training use is confirmed
 5. Estimate size: how many cases exist now, what is the target size, what is the growth cadence
 6. Identify source: human-curated, synthetic (LLM-generated), scraped, adversarial, or hybrid
-7. Choose target framework: Braintrust, LangSmith, DeepEval, HuggingFace, or custom
+7. Choose target framework: Braintrust, LangSmith, DeepEval, HuggingFace, or costm
 8. Check for existing eval_dataset artifacts to avoid duplicates
 9. Confirm dataset slug for id: snake_case, lowercase, no hyphens
 10. Confirm this is a COLLECTION (not a single golden_test, not a benchmark, not a scoring_rubric)

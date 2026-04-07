@@ -7,7 +7,7 @@ version: 2.0.0
 created: 2026-03-25
 updated: 2026-03-25
 author: orchestrator
-quality: 8.9
+quality: 9.1
 tags:
 - blueprint
 - knowledge-card
@@ -20,7 +20,7 @@ boundary: 'KC eh conhecimento destilado, estatico, versionado. KC NAO eh: instru
   teste (P07). Se tem `def/class` executavel → skill (P04). Se tem `faça X` → instruction (P03).'
 format: 'Arquivo `.md` com frontmatter YAML + body Markdown. Motivo: brain search so indexa .md; LLMs geram MD melhor que
   YAML; frontmatter validavel por schema.'
-naming: '`p01_kc_{{topic_slug}}.md` — id == filename stem. topic_slug: snake_case, sem agent_node prefix, descritivo.'
+naming: '`p01_kc_{{topic_slug}}.md` — id == filename stem. topic_slug: snake_case, sem agent_group prefix, descritivo.'
 frontmatter: "---\n# REQUIRED (13) — vazio = KC INVALIDO\nid: p01_kc_{{topic_slug}}       # == filename stem\nkind: knowledge_card\n\
   pillar: P01\ntitle: \"{{5-100 chars}}\"        # BM25 primary signal\nversion: \"{{semver}}\"\ncreated: \"{{YYYY-MM-DD}}\"\
   \nupdated: \"{{YYYY-MM-DD}}\"\nauthor: \"{{quem PRODUZIU}}\"     # quem escreveu, NAO quem roteou\ndomain: \"{{domain}}\"\

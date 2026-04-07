@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How effort-profile-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Effort Profile"
+version: "1.0.0"
+author: n03_builder
+tags: [effort_profile, builder, examples]
+tldr: "Golden and anti-examples for effort profile construction, demonstrating ideal structure and common pitfalls."
+domain: "effort profile construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: effort-profile-builder
@@ -27,14 +37,14 @@ I specify effort profiles so dispatchers and runtime systems can allocate the ri
 
 ## Handoff Protocol
 ### I Receive
-- seeds: target builder, complexity requirements, budget constraints
-- optional: specific model preferences, upstream artifact references
+1. seeds: target builder, complexity requirements, budget constraints
+2. optional: specific model preferences, upstream artifact references
 ### I Produce
-- effort_profile artifact (.md + .yaml frontmatter)
-- committed to: `cex/P09_config/examples/p09_effort_{name}.md`
+1. effort_profile artifact (.md + .yaml frontmatter)
+2. committed to: `cex/P09_config/examples/p09_effort_{name}.md`
 ### I Signal
-- signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with failure reasons
+1. signal: complete (with quality score from QUALITY_GATES)
+2. if quality < 8.0: signal retry with failure reasons
 ## Builders I Depend On
 None — independent builder (layer 0).
 ## Builders That Depend On Me
@@ -43,3 +53,17 @@ None — independent builder (layer 0).
 | runtime-rule-builder | Uses effort profile for execution planning |
 | agent-builder | References model/thinking in agent config |
 | system-prompt-builder | Adapts prompt complexity to thinking level |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `collaboration` |
+| Pillar | P12 |
+| Domain | effort profile construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

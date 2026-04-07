@@ -10,9 +10,9 @@ author: builder_agent
 domain: meta-construction
 quality: 9.0
 tags: [memory, mental_model, brain, learning, axiom]
-tldr: "P10 define 5 tipos de memoria (mental_model, brain_index, learning_record, session_state, axiom) que persistem conhecimento entre sessoes — axioms sao imutaveis"
+tldr: "P10 define 5 tipos de memoria (mental_model, knowledge_index, learning_record, session_state, axiom) que persistem conhecimento entre sessoes — axioms sao imutaveis"
 when_to_use: "Quando precisar definir persistencia de conhecimento, learning records ou axiomas no CEX"
-keywords: [mental_model, brain_index, learning_record, session_state, axiom]
+keywords: [mental_model, knowledge_index, learning_record, session_state, axiom]
 long_tails:
   - "como funciona a memoria persistente no CEX"
   - "qual a diferenca entre learning_record e axiom em P10"
@@ -32,10 +32,10 @@ P10 governa persistencia de conhecimento no CEX com 5 tipos que cobrem desde est
 ## Spec Table
 | Campo | Valor | Nota |
 |-------|-------|------|
-| Tipos | 5 | mental_model, brain_index, learning_record, session_state, axiom |
+| Tipos | 5 | mental_model, knowledge_index, learning_record, session_state, axiom |
 | Max bytes (todos) | 3072 | Uniforme entre tipos |
 | mental_model format | YAML | routing_rules + decision_tree |
-| brain_index engines | 2 | BM25 (keyword) + FAISS (semantic) |
+| knowledge_index engines | 2 | BM25 (keyword) + FAISS (semantic) |
 | session_state lifecycle | efemero | Snapshot descartavel |
 | axiom lifecycle | imutavel | Nunca muda |
 
@@ -53,9 +53,9 @@ P10 governa persistencia de conhecimento no CEX com 5 tipos que cobrem desde est
 - Axiom mutavel: perde proposito de ser fundamento inviolavel
 
 ## Application
-No organization, P10 manifesta como mental_model.yaml por satelite, Brain MCP (BM25+FAISS), learning memory (.claude/rules/organization-learning.md), e MEMORY.md. O CEX formaliza cada tipo com schema validavel.
+No organization, P10 manifesta como mental_model.yaml por agent_group, Brain MCP (BM25+FAISS), learning memory (.claude/rules/organization-learning.md), e MEMORY.md. O CEX formaliza cada tipo com schema validavel.
 
 ## References
 - P10_memory/_schema.yaml (fonte de verdade)
-- records/agent_nodes/{sat}/mental_model.yaml (instancias reais)
+- records/agent_groups/{sat}/mental_model.yaml (instancias reais)
 - records/core/brain/ (Brain MCP implementation)

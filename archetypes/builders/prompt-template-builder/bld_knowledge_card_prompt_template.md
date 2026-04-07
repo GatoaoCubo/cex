@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for prompt_template production — atomic searchable facts
 sources: prompt-template-builder MANIFEST.md + SCHEMA.md, LangChain, Mustache, Jinja2
+quality: 9.1
+title: "Knowledge Card Prompt Template"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_template, builder, examples]
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt template construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: prompt_template

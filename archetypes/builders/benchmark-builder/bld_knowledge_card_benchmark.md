@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for benchmark production — quantitative performance measurement
 sources: Jain 1991, MLPerf, wrk2, LMSYS Chatbot Arena, Anthropic model cards
+quality: 9.1
+title: "Knowledge Card Benchmark"
+version: "1.0.0"
+author: n03_builder
+tags: [benchmark, builder, examples]
+tldr: "Golden and anti-examples for benchmark construction, demonstrating ideal structure and common pitfalls."
+domain: "benchmark construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: benchmark

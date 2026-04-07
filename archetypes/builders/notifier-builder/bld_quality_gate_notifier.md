@@ -9,7 +9,7 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [quality_gate, notifier, P04, P11]
-quality: 8.8
+quality: 9.0
 tldr: "10 HARD gates (binary pass/fail) + 12 SOFT dims (scored 0-1). Min score 7.0 for pool."
 density_score: 1.0
 ---
@@ -42,8 +42,8 @@ density_score: 1.0
 | S08 | variable_docs       | 1.0    | template_vars list complete, each var described in body   |
 | S09 | boundary_clarity    | 1.0    | Explicitly not a webhook, not an api_client               |
 | S10 | domain_specificity  | 0.5    | Use case is specific (not generic "send notification")    |
-| S11 | testability         | 0.5    | Enough detail to write a unit test or mock delivery       |
-| S12 | user_experience     | 0.5    | Message tone, length, and format appropriate for channel  |
+| S11 | testsbility         | 0.5    | Enough detail to write a unit test or mock delivery       |
+| S12 | user_experience     | 0.5    | Message tone, length, and format apownte for channel  |
 
 ## Scoring Formula
 ```

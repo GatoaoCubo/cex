@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "Unit test design, input/expected_output pairs, assertion patterns, gate_ref binding, setup/teardown isolation, timeout budgets, edge case classification, coverage mapping | Does NOT: smoke_eval (quick sanity), e2e_eval (pipeline scope), golden_test (calibration reference), scoring_rubric (criteria)"
 domain: unit_eval
-quality: null
+quality: 9.1
 tags: [system_prompt, unit_eval, P03]
 safety_level: standard
 tools_listed: false
@@ -44,3 +44,26 @@ Emit a single YAML block. Top-level fields in order: `id`, `kind`, `pillar`, `ve
 NEVER produce: smoke_evals, e2e_evals, golden_tests, scoring_rubrics, or multi-agent coverage tests.
 If asked for any of those, name the correct builder and stop.
 Body MUST stay under 3072 bytes. Every assertion must be independently verifiable.
+
+## Operational Constraints
+
+- Never fabricate data or hallucinate references
+- Always validate output against the kind's schema
+- Respect token budget allocated by `cex_token_budget.py`
+- Signal completion via `signal_writer.py` when done
+- Log quality scores in frontmatter after generation
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind unit_eval --execute
+```
+
+```yaml
+# Agent config reference
+agent: unit-eval-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

@@ -1,0 +1,129 @@
+id: p12_dag_cf_master
+kind: dag
+lp: P12
+version: 1.0.0
+created: '2026-04-06'
+updated: '2026-04-06'
+author: n01_intelligence
+pipeline: content_factory_master
+nodes: '| ID | Label | Agent | Type |
+
+  |----|-------|-------|------|
+
+  | ingest_brief | Parse and validate content brief | n01_research | input |
+
+  | brand_inject | Load brand context into pipeline | n06_brand | transform |
+
+  | research | Deep topic research (competitors, keywords, sources) | n01_research | compute |
+
+  | strategy | Define angle, hook, CTA, distribution plan | n02_marketing | compute |
+
+  | author_longform | Write master longform draft from research+strategy | n03_builder | compute |
+
+  | fork_video | Trigger dag_cf_video sub-pipeline | n07_orchestrator | fork |
+
+  | fork_course | Trigger dag_cf_course sub-pipeline | n07_orchestrator | fork |
+
+  | fork_ebook | Trigger dag_cf_ebook sub-pipeline | n07_orchestrator | fork |
+
+  | fork_presentation | Trigger dag_cf_presentation sub-pipeline | n07_orchestrator | fork |
+
+  | fork_social | Trigger dag_cf_social sub-pipeline | n07_orchestrator | fork |
+
+  | collect_outputs | Aggregate all format outputs | n07_orchestrator | join |
+
+  | quality_gate | Brand consistency + constraint validation | n04_knowledge | gate |
+
+  | publish | Distribute to target channels | n05_operations | output |'
+edges: '| From | To | Type |
+
+  |------|----|------|
+
+  | ingest_brief | brand_inject | data |
+
+  | ingest_brief | research | data |
+
+  | brand_inject | strategy | data |
+
+  | research | strategy | data |
+
+  | strategy | author_longform | data |
+
+  | author_longform | fork_video | trigger |
+
+  | author_longform | fork_course | trigger |
+
+  | author_longform | fork_ebook | trigger |
+
+  | author_longform | fork_presentation | trigger |
+
+  | author_longform | fork_social | trigger |
+
+  | fork_video | collect_outputs | data |
+
+  | fork_course | collect_outputs | data |
+
+  | fork_ebook | collect_outputs | data |
+
+  | fork_presentation | collect_outputs | data |
+
+  | fork_social | collect_outputs | data |
+
+  | collect_outputs | quality_gate | control |
+
+  | quality_gate | publish | control |'
+domain: orchestration
+quality: null
+tags:
+- dag
+- content-factory
+- master-pipeline
+- multi-format
+- orchestration
+tldr: '13-node master DAG: brief→research→strategy→author→fan-out 5 format pipelines→collect→quality gate→publish'
+execution_order:
+- - ingest_brief
+- - brand_inject
+  - research
+- - strategy
+- - author_longform
+- - fork_video
+  - fork_course
+  - fork_ebook
+  - fork_presentation
+  - fork_social
+- - collect_outputs
+- - quality_gate
+- - publish
+parallel_groups:
+- 'Wave 1: ingest_brief'
+- 'Wave 2: brand_inject, research (independent after brief)'
+- 'Wave 3: strategy (needs both brand + research)'
+- 'Wave 4: author_longform'
+- 'Wave 5: fork_video, fork_course, fork_ebook, fork_presentation, fork_social (max parallelism = 5)'
+- 'Wave 6: collect_outputs (join barrier)'
+- 'Wave 7: quality_gate'
+- 'Wave 8: publish'
+critical_path: ingest_brief (5min) → research (30min) → strategy (15min) → author_longform (30min) → fork_video (25min) →
+  collect_outputs (5min) → quality_gate (5min) → publish (5min) = 120min
+estimated_duration: 120min
+node_count: 13
+edge_count: 17
+max_parallelism: 5
+keywords:
+- content-factory
+- master
+- pipeline
+- multi-format
+- fan-out
+linked_artifacts:
+  primary: P12_orchestration/dags/content_factory/
+  related:
+  - P12_orchestration/dags/content_factory/dag_cf_video.md
+  - P12_orchestration/dags/content_factory/dag_cf_course.md
+  - P12_orchestration/dags/content_factory/dag_cf_ebook.md
+  - P12_orchestration/dags/content_factory/dag_cf_presentation.md
+  - P12_orchestration/dags/content_factory/dag_cf_social.md
+density_score: 1.0
+topological_order: ingest_brief → brand_inject → research → strategy → author_longform → fork_video → fork_course → fork_ebook
+  → fork_presentation → fork_social → collect_outputs → quality_gate → publish

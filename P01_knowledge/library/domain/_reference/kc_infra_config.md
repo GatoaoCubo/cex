@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: infra_config
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [infrastructure, config, permissions, feature-flags, runtime, secrets, rate-limits, rbac]
 tldr: "Infrastructure configuration covers path management, RBAC permissions, feature toggles, runtime constraints, secret management, and API rate limiting"
 when_to_use: "Managing environment configs, access control, feature rollouts, secret rotation, or API tier enforcement"
@@ -49,7 +49,7 @@ criticality: high
 | Concept | Domain | CEX Kind | Role |
 |---------|--------|----------|------|
 | Path Registry | Environment | path_config | Centralized file/dir path management with validation |
-| RBAC Matrix | Access Control | permission | Role-based access with scope fences per agent/satellite |
+| RBAC Matrix | Access Control | permission | Role-based access with scope fences per agent/agent_group |
 | Feature Toggle | Rollout | feature_flag | Boolean/percentage flags for gradual feature release |
 | Runtime Constraint | Execution | runtime_rule | Timeouts, retry limits, concurrency caps, circuit breakers |
 | Secret Reference | Security | secret_config | Vault URIs, env var injection, rotation schedules |

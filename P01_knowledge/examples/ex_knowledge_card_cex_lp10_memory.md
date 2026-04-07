@@ -8,11 +8,11 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
-tags: [cex, lp10, memory, runtime-state, brain-index, learning-record, session]
-tldr: "P10 define 4 tipos de memoria operacional: runtime_state, brain_index, learning_record, session_state"
+quality: 9.1
+tags: [cex, lp10, memory, runtime-state, knowledge-index, learning-record, session]
+tldr: "P10 define 4 tipos de memoria operacional: runtime_state, knowledge_index, learning_record, session_state"
 when_to_use: "Entender como agentes LLM gerenciam estado e memoria entre sessoes"
-keywords: [memory, runtime-state, brain-index, learning-record, session-state]
+keywords: [memory, runtime-state, knowledge-index, learning-record, session-state]
 long_tails:
   - "Como gerenciar memoria de trabalho em agentes LLM"
   - "Qual a diferenca entre knowledge P01 e memory P10 no CEX"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp09_config
   related: [p01_kc_cex_lp01_knowledge]
-density_score: null
+density_score: 1.0
 data_source: "https://arxiv.org/abs/2304.03442"
 ---
 
@@ -37,7 +37,7 @@ types: 4 | function: INJECT | layer: runtime + content
 - P01 = o que ESTUDEI (externo, validado, persistente)
 - P10 = o que VIVI (interno, acumulado, sessional)
 - runtime_state guarda decisoes e routing entre sessoes
-- brain_index configura busca semantica (BM25 + FAISS)
+- knowledge_index configura busca semantica (BM25 + FAISS)
 - learning_record registra o que funcionou e o que falhou
 - session_state eh snapshot efemero (morre com a sessao)
 - LangChain separa Memory (P10) de Document (P01)
@@ -49,12 +49,12 @@ types: 4 | function: INJECT | layer: runtime + content
 - Funcao dominante: INJECT (memoria injetada como contexto)
 - runtime_state max 3072 bytes (persistente entre sessoes)
 - session_state NAO eh core (efemero, descartavel)
-- brain_index NAO eh embedding_config (P01) nem rag_source
+- knowledge_index NAO eh embedding_config (P01) nem rag_source
 
 ## Fases
 
 1. Definir quais estados persistem entre sessoes (runtime)
-2. Configurar brain_index com BM25 + FAISS para busca
+2. Configurar knowledge_index com BM25 + FAISS para busca
 3. Iniciar learning_record para capturar padroes
 4. Criar session_state para snapshot da sessao ativa
 5. Implementar regras de retencao via P09 (decay, archive)
@@ -73,7 +73,7 @@ types: 4 | function: INJECT | layer: runtime + content
 | Tipo | Persistencia | Layer | Exemplo |
 |------|-------------|-------|---------|
 | runtime_state | Entre sessoes | runtime | Routing decisions, counters |
-| brain_index | Permanente | runtime | BM25 config, FAISS params |
+| knowledge_index | Permanente | runtime | BM25 config, FAISS params |
 | learning_record | Permanente | content | Success/failure patterns |
 | session_state | Efemero | runtime | Current task snapshot |
 
@@ -107,3 +107,10 @@ types: 4 | function: INJECT | layer: runtime + content
 - source: https://arxiv.org/abs/2310.08560
 - related: p01_kc_cex_lp09_config
 - related: p01_kc_cex_lp01_knowledge
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.7
+quality: 9.0
 tags: [example, software-project, cli-tool, typer, scoring]
 tldr: "Complete CLI tool project: CEX artifact scorer with Typer+Rich. Shows pyproject.toml, src layout, Pydantic models, pytest fixtures, Ruff config, Dockerfile, GitHub Actions CI."
 density_score: 0.90
@@ -57,3 +57,18 @@ tests/
 - Rich console output for terminal users
 - `--json` flag for programmatic usage
 - Zero external service deps (works offline)
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `example`
+- **Artifact ID**: `p04_ex_software_project_cli_tool`
+- **Tags**: [example, software-project, cli-tool, typer, scoring]
+
+## Example Registry
+
+| Aspect | Detail |
+|--------|--------|
+| Purpose | Few-shot exemplar for builder prompts |
+| Injection | Loaded by `cex_skill_loader.py` at F3 |
+| Quality | Must score 9.0+ to serve as exemplar |

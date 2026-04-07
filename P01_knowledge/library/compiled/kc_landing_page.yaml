@@ -1,0 +1,49 @@
+id: kc_landing_page
+kind: knowledge_card
+pillar: P01
+title: 'KC: Landing Page'
+version: 1.0.0
+created: 2026-04-06
+author: n07_orchestrator
+quality: 8.8
+tags:
+- knowledge-card
+- landing-page
+- frontend
+- ui
+- marketing
+- conversion
+density_score: 1.0
+definition: 'A landing page is a standalone, production-ready web page designed for a single conversion goal. Built with HTML+Tailwind
+  (zero build step) or React/Next.js/Astro. 12 sections: HERO > PROBLEM > SOLUTION > FEATURES > SOCIAL-PROOF > HOW-IT-WORKS
+  > PRICING > TESTIMONIALS > FAQ > CTA > FOOTER > META.'
+builder: '`landing-page-builder` (13 ISOs) — Pillar P05'
+what_makes_it_different: 'Unlike Lovable/Bolt/v0/Framer/Webflow:
+
+  - You own the code — no platform lock-in
+
+  - Zero build step — HTML+Tailwind CDN deploys anywhere
+
+  - Conversion-optimized — CRO baked into every section
+
+  - Brand-injectable — {{BRAND_*}} placeholders for any client
+
+  - Production-ready — responsive, dark mode, SEO, a11y, analytics hooks'
+stack_options: '| Stack | Build | Best For |
+
+  |-------|-------|----------|
+
+  | HTML + Tailwind CDN | None | Quick pages, non-devs |
+
+  | React + Tailwind | npm | Existing React apps |
+
+  | Next.js App Router | next | SEO-critical, SSR |
+
+  | Astro | astro | Multi-page, content |'
+section_psychology: Hero=hook, Problem=empathy, Solution=relief, Features=logic, Social-Proof=trust, Pricing=decision, FAQ=objection-clearing,
+  CTA=conversion.
+relations:
+- 'Consumes: tagline-builder (hero headline)'
+- 'Consumes: content-monetization-builder (pricing tiers)'
+- 'Consumes: brand_config.yaml (design tokens)'
+- 'Feeds into: N05 deploy pipeline, N02 campaign pages'

@@ -12,6 +12,7 @@ tags: [firecrawl, feature-flag, enrichment, config]
 tldr: "Master switch for Firecrawl web scraping enrichment in marketplace research"
 density_score: 0.90
 source: organization-core/Railway env vars
+domain: "config"
 ---
 
 # Flag: FIRECRAWL_ENABLED
@@ -23,7 +24,7 @@ source: organization-core/Railway env vars
 | Flag | `FIRECRAWL_ENABLED` |
 | State | on |
 | Rollout | 100% |
-| Owner | operations_agent agent_node |
+| Owner | operations_agent agent_group |
 | Expires | never |
 
 ## Behavior
@@ -35,9 +36,21 @@ source: organization-core/Railway env vars
 
 ## Guard
 
-- Enable condition: `FIRECRAWL_API_KEY` is set and valid, monthly budget > 0
-- Disable condition: Credits exhausted or API key revoked
-- Rollback: Set `FIRECRAWL_ENABLED=false` in Railway dashboard, takes effect on next request (no restart needed)
+1. Enable condition: `FIRECRAWL_API_KEY` is set and valid, monthly budget > 0
+2. Disable condition: Credits exhausted or API key revoked
+3. Rollback: Set `FIRECRAWL_ENABLED=false` in Railway dashboard, takes effect on next request (no restart needed)
 
 ---
 *Migrated from: organization MEMORY.md (Architecture State section)*
+
+## Metadata
+
+```yaml
+id: p09_ff_firecrawl_enabled
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p09-ff-firecrawl-enabled.md
+```

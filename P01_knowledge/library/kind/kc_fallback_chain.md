@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: fallback_chain
-quality: 9.0
+quality: 9.1
 tags: [fallback_chain, p02, GOVERN, kind-kc]
 tldr: "Ordered model fallback sequence — when primary LLM fails or times out, cascade to next model with defined timeout per step"
 when_to_use: "Building, reviewing, or reasoning about fallback_chain artifacts"
@@ -31,7 +31,7 @@ core: false
 ```
 
 ## What It Is
-A fallback_chain defines an ordered sequence of LLM models to try when the primary model fails, times out, or returns low-confidence results. Each step has a timeout threshold. It is NOT a chain (P03, which is a sequence of prompts/steps) nor a router (which routes tasks to agent_nodes based on keywords). Fallback chains answer "what model do I try next when this one fails?" — routers answer "which agent handles this task?"
+A fallback_chain defines an ordered sequence of LLM models to try when the primary model fails, times out, or returns low-confidence results. Each step has a timeout threshold. It is NOT a chain (P03, which is a sequence of prompts/steps) nor a router (which routes tasks to agent_groups based on keywords). Fallback chains answer "what model do I try next when this one fails?" — routers answer "which agent handles this task?"
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |

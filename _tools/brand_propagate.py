@@ -1,4 +1,5 @@
-"""brand_propagate.py — Push brand context to all nuclei prompts.
+# -*- coding: utf-8 -*-
+"""brand_propagate.py -- Push brand context to all nuclei prompts.
 
 Reads .cex/brand/brand_config.yaml and injects relevant variables into
 each nucleus's system prompt, agent card, and boot file.
@@ -12,9 +13,8 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    import subprocess
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "pyyaml", "-q"])
-    import yaml
+    print("ERROR: PyYAML required. pip install pyyaml", file=sys.stderr)
+    sys.exit(1)
 
 ROOT = Path(__file__).resolve().parent.parent
 BRAND_CONFIG = ROOT / ".cex" / "brand" / "brand_config.yaml"
@@ -22,25 +22,29 @@ BRAND_CONFIG = ROOT / ".cex" / "brand" / "brand_config.yaml"
 # What each nucleus needs from brand_config
 NUCLEUS_VARS = {
     "N01": ["BRAND_ICP", "BRAND_COMPETITORS", "BRAND_CATEGORY", "BRAND_CONTENT_PILLARS",
-            "BRAND_ICP_LOCATION", "BRAND_ICP_VALUES"],
+            "BRAND_ICP_LOCATION", "BRAND_ICP_VALUES", "BRAND_COUNTRY"],
     "N02": ["BRAND_VOICE_TONE", "BRAND_VOICE_FORMALITY", "BRAND_VOICE_ENTHUSIASM",
             "BRAND_VOICE_HUMOR", "BRAND_VOICE_WARMTH", "BRAND_VOICE_AUTHORITY",
             "BRAND_VOICE_DO", "BRAND_VOICE_DONT", "BRAND_COLORS", "BRAND_FONTS",
-            "BRAND_VALUES", "BRAND_NAME", "BRAND_TAGLINE", "BRAND_LANGUAGE"],
+            "BRAND_VALUES", "BRAND_NAME", "BRAND_TAGLINE", "BRAND_LANGUAGE",
+            "BRAND_PERSON", "BRAND_ENERGY", "BRAND_BIO", "BRAND_HASHTAG"],
     "N03": ["BRAND_COLORS", "BRAND_FONTS", "BRAND_STYLE", "BRAND_NAME"],
     "N04": ["BRAND_NAME", "BRAND_CATEGORY", "BRAND_CONTENT_PILLARS",
-            "BRAND_LANGUAGE"],
+            "BRAND_LANGUAGE", "BRAND_TAGS"],
     "N05": ["BRAND_NAME", "BRAND_LOGO_URL", "BRAND_FAVICON_URL",
             "BRAND_PRICING_MODEL", "BRAND_PAYMENT_PROVIDERS"],
+    "N06": ["BRAND_NAME", "BRAND_TAGLINE", "BRAND_ESSENCE", "BRAND_MANIFESTO",
+            "BRAND_BIO", "BRAND_ARCHETYPE", "BRAND_STORY"],
     "N07": ["BRAND_NAME", "BRAND_TAGLINE"],
 }
 
 NUCLEUS_DIRS = {
-    "N01": "N01_research",
+    "N01": "N01_intelligence",
     "N02": "N02_marketing",
     "N03": "N03_builder",
     "N04": "N04_knowledge",
     "N05": "N05_operations",
+    "N06": "N06_commercial",
     "N07": "N07_admin",
 }
 
@@ -148,7 +152,7 @@ def main():
 
     config = load_brand_config(Path(args.config))
     if not config:
-        print(f"❌ No brand_config at {args.config}")
+        print(f"[FAIL] No brand_config at {args.config}")
         sys.exit(1)
 
     targets = [args.nucleus.upper()] if args.nucleus else None
@@ -163,12 +167,12 @@ def main():
         for nucleus, info in results.items():
             status = info["status"]
             if status == "propagated":
-                print(f"  ✅ {nucleus}: {info['vars_count']} vars → {info['path']}")
+                print(f"  [OK] {nucleus}: {info['vars_count']} vars -> {info['path']}")
             elif status == "dry-run":
-                print(f"  🔍 {nucleus}: would write {info['vars_count']} vars → {info['would_write']}")
+                print(f"  [DRY] {nucleus}: would write {info['vars_count']} vars -> {info['would_write']}")
                 print(f"       vars: {', '.join(info['vars'])}")
             else:
-                print(f"  ⏭️  {nucleus}: {info.get('reason', 'skipped')}")
+                print(f"  [SKIP] {nucleus}: {info.get('reason', 'skipped')}")
 
 
 if __name__ == "__main__":

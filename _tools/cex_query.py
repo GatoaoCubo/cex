@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Builder Discovery Query Tool — find builders by keyword, domain, or natural language intent.
+# -*- coding: utf-8 -*-
+"""CEX Builder Discovery Query Tool -- find builders by keyword, domain, or natural language intent.
 
 Usage:
     python _tools/cex_query.py "criar agente de vendas"
@@ -35,11 +36,11 @@ STOP_WORDS = {
     "criar", "create", "build", "make", "novo", "new",
 }
 
-# Simple PT/EN suffix stripping (poor man's stemmer — no external deps)
+# Simple PT/EN suffix stripping (poor man's stemmer -- no external deps)
 SUFFIXES = [
-    "ização", "ização", "amento", "imento", "mente", "ador", "edor",
+    "iza\u00e7\u00e3o", "iza\u00e7\u00e3o", "amento", "imento", "mente", "ador", "edor",
     "tion", "sion", "ment", "ness", "able", "ible", "ful", "less", "ing", "ous",
-    "ando", "endo", "indo", "ções", "ção", "ões", "ão",
+    "ando", "endo", "indo", "\u00e7\u00f5es", "\u00e7\u00e3o", "\u00f5es", "\u00e3o",
     "izar", "izar", "izar", "ar", "er", "ir",
     "ed", "ly", "er", "es", "al", "ive",
 ]
@@ -49,10 +50,10 @@ def normalize(text: str) -> str:
     """Lowercase, remove accents (simple), strip punctuation."""
     text = text.lower().strip()
     # Simple accent removal for PT
-    for src, dst in [("á", "a"), ("à", "a"), ("ã", "a"), ("â", "a"),
-                     ("é", "e"), ("ê", "e"), ("í", "i"), ("ó", "o"),
-                     ("ô", "o"), ("õ", "o"), ("ú", "u"), ("ü", "u"),
-                     ("ç", "c")]:
+    for src, dst in [("\u00e1", "a"), ("\u00e0", "a"), ("\u00e3", "a"), ("\u00e2", "a"),
+                     ("\u00e9", "e"), ("\u00ea", "e"), ("\u00ed", "i"), ("\u00f3", "o"),
+                     ("\u00f4", "o"), ("\u00f5", "o"), ("\u00fa", "u"), ("\u00fc", "u"),
+                     ("\u00e7", "c")]:
         text = text.replace(src, dst)
     # Replace hyphens/underscores with spaces for tokenization
     text = re.sub(r"[-_]", " ", text)
@@ -62,7 +63,7 @@ def normalize(text: str) -> str:
 
 
 def stem(word: str) -> str:
-    """Simple suffix stripping — good enough for keyword matching."""
+    """Simple suffix stripping -- good enough for keyword matching."""
     if len(word) <= 4:
         return word
     for suffix in SUFFIXES:
@@ -163,7 +164,7 @@ def score_builder(builder: dict, query_tokens: list[str], idf: dict[str, float])
             score += 0.6 * term_idf
             matched_keywords.append(qt)
 
-        # Substring keyword match (weight: 0.3) — handles partial matches
+        # Substring keyword match (weight: 0.3) -- handles partial matches
         elif any(qt in ks or ks in qt for ks in kw_stems if len(ks) >= 3):
             score += 0.3 * term_idf
             matched_keywords.append(f"~{qt}")
@@ -278,7 +279,7 @@ def rebuild_cache():
 
 def main():
     parser = argparse.ArgumentParser(
-        description="CEX Builder Discovery — find builders by keyword or natural language intent"
+        description="CEX Builder Discovery -- find builders by keyword or natural language intent"
     )
     parser.add_argument("query", nargs="?", help="Natural language query (e.g. 'monetizar curso hotmart')")
     parser.add_argument("--top", type=int, default=5, help="Number of results (default: 5)")

@@ -1,5 +1,5 @@
 """
-CRM Data Validator — quality control for GATO³ CRM database.
+CRM Data Validator -- quality control for GATO\u00b3 CRM database.
 
 Validates:
   - CNPJ (algorithmic check digit verification)
@@ -26,7 +26,7 @@ from _tools.crm.crm_parser import CRMBusiness, CRMParser, DEFAULT_CRM
 
 OUTPUT_DIR = Path(__file__).parent.parent.parent / "N01_research" / "output"
 
-# Valid DDDs for São Paulo state
+# Valid DDDs for Sao Paulo state
 VALID_DDDS_SP = {"11", "12", "13", "14", "15", "16", "17", "18", "19"}
 
 
@@ -454,7 +454,7 @@ class DataValidator:
         """Print validation summary to console."""
         s = self.summary()
         print("=" * 60)
-        print("GATO³ CRM Data Validation Report")
+        print("GATO\u00b3 CRM Data Validation Report")
         print("=" * 60)
         print(f"Total records:     {s['total_records']}")
         print(f"Avg completeness:  {s['avg_completeness']}%")
@@ -477,7 +477,7 @@ class DataValidator:
 if __name__ == "__main__":
     import argparse
 
-    ap = argparse.ArgumentParser(description="CRM Data Validator for GATO³")
+    ap = argparse.ArgumentParser(description="CRM Data Validator for GATO\u00b3")
     ap.add_argument("--crm", default=str(DEFAULT_CRM), help="Path to CRM .md file")
     ap.add_argument("--export", action="store_true", help="Export validation report")
     ap.add_argument("--duplicates", action="store_true", help="Show duplicate groups only")

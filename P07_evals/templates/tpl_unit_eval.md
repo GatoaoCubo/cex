@@ -11,7 +11,7 @@ title: "Unit Eval: {{AGENT_OR_PROMPT_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
-author: {{SATELLITE_NAME}}
+author: {{AGENT_GROUP_NAME}}
 target: {{p02_ag_name|p03_pt_name|p04_sk_name}}
 quality: {{QUALITY_8_TO_10}}
 tags: [{{TAG1}}, {{TAG2}}, eval, unit]

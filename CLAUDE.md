@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 114 kinds · 107 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime
+> 123 kinds · 125 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 59 tools
 
 ## Brand Identity
 
@@ -35,16 +35,20 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 
 | What | Where |
 |------|-------|
-| **8F pipeline** | `.claude/rules/n03-8f-enforcement.md` |
+| **8F pipeline** | `.claude/rules/8f-reasoning.md` |
 | **Orchestrator rules** | `.claude/rules/n07-orchestrator.md` |
 | **Nucleus rules** | `.claude/rules/n{01-06}-*.md` (1 per nucleus) |
 | **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission |
 | **Builders (source of truth)** | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
-| **Sub-agents** | `.claude/agents/{kind}-builder.md` (101 files) |
-| **N00 Genesis (mold)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
-| **Pillar schemas** | `P{01-12}_*/_schema.yaml` |
-| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (114 files) |
-| **Kind registry** | `.cex/kinds_meta.json` (114 kinds) |
+| **Sub-agents** | `.claude/agents/{kind}-builder.md` (125 files) |
+| **N00 Genesis (archetype)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
+| **Pillar schemas** | `P{01-12}_*/_schema.yaml` (all descriptions in EN) |
+| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (123 files) |
+| **Kind registry** | `.cex/kinds_meta.json` (123 kinds) |
+| **Terminology** | `_docs/specs/spec_metaphor_dictionary.md` + Rosetta Stone KC |
+| **N07 tech authority** | `.claude/rules/n07-technical-authority.md` |
+| **Infinite loop spec** | `_docs/specs/spec_infinite_bootstrap_loop.md` |
+| **Subagent definitions** | `.pi/agents/` (6 CEX agents: scout, builder-iso, kc-writer, etc.) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
 | **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
 | **Boot scripts** | `boot/cex.cmd` (N07) · `boot/n0{1-6}.cmd` |
@@ -112,7 +116,7 @@ User decides WHAT → LLM builds HOW → verify together.
 | `cex_signal_watch.py` | **Blocking signal poll**: waits for nuclei completion, detects crashes |
 | `cex_batch.py` | Multi-intent processing from file |
 | `cex_compile.py` | .md → .yaml compilation (--all) |
-| `cex_doctor.py` | Builder health check (105 PASS) |
+| `cex_doctor.py` | Builder health check (118 PASS) |
 | `cex_hooks.py` | Pre/post validation + git hook |
 | `cex_score.py` | Peer review scoring (--apply) |
 | `cex_feedback.py` | Quality tracking + archive + metrics |
@@ -133,6 +137,18 @@ User decides WHAT → LLM builds HOW → verify together.
 | `brand_audit.py` | Score brand consistency (6 dimensions) |
 | `brand_ingest.py` | Scan user's messy folder → extract brand signals |
 | `cex_evolve.py` | **AutoResearch loop**: evolve artifacts autonomously (keep/discard) |
+| `cex_model_updater.py` | **Self-heal**: discover/check/apply/propagate model version updates |
+| `cex_release_check.py` | **Release gate**: validates README, deps, CI, versions for public release |
+| `cex_prompt_layers.py` | Compiled artifact scanner: loads 15+ pillar artifacts into prompts |
+| `cex_skill_loader.py` | Builder ISO loader: 13 ISOs per kind, shared skills, conditionals |
+| `cex_router.py` | Multi-provider routing: 4 providers x 7 nuclei + fallback chains |
+| `cex_gdp.py` | GDP enforcement: manifest I/O, NeedsUserDecision gate at F4 |
+| `cex_memory_types.py` | 4-type memory taxonomy: correction/preference/convention/context |
+| `cex_memory_age.py` | Freshness caveats, age labels, linear decay over 365d |
+| `cex_agent_spawn.py` | Agent config validation + spawn pre-flight checks |
+| `cex_coordinator.py` | Synthesis gates between mission waves + workflow orchestration |
+| `cex_compile.py --target` | **Reverse compiler**: CEX artifacts -> claude-md, cursorrules, customgpt |
+| `cex_flywheel_audit.py` | **Doc vs Practice**: 109 checks across 7 layers + 7 wires + 7 cascades |
 
 ## Quick Dispatch
 
@@ -140,20 +156,28 @@ User decides WHAT → LLM builds HOW → verify together.
 bash _spawn/dispatch.sh solo n03 "task"   # 1 builder
 bash _spawn/dispatch.sh grid MISSION      # up to 6 parallel
 bash _spawn/dispatch.sh status            # monitor
-bash _spawn/dispatch.sh stop              # kill all
+bash _spawn/dispatch.sh stop              # stop MY session's nuclei only
+bash _spawn/dispatch.sh stop n03          # stop only N03 (surgical)
+bash _spawn/dispatch.sh stop --all        # stop ALL nuclei (DANGEROUS)
+bash _spawn/dispatch.sh stop --dry-run    # preview what would die
 ```
+
+> **Session-aware (v4.0)**: Multiple N07 orchestrators can run simultaneously.
+> `stop` only kills YOUR nuclei. Use `--all` explicitly to kill everything.
 
 ## Nucleus Routing
 
-| Domain | Nucleus | CLI | Model |
-|--------|---------|-----|-------|
-| Build/create | N03 | claude | opus |
-| Research/analysis | N01 | gemini | 2.5-pro |
-| Marketing/copy | N02 | claude | sonnet |
-| Knowledge/docs | N04 | gemini | 2.5-pro |
-| Code/test/deploy | N05 | codex | GPT |
-| Brand/monetization | N06 | claude | sonnet |
-| Orchestration | N07 | pi | opus |
+> All nuclei upgraded to Opus 1M context (2026-04-06). Config: `.cex/config/nucleus_models.yaml`
+
+| Domain | Nucleus | CLI | Model | Context |
+|--------|---------|-----|-------|---------|
+| Research/analysis | N01 | pi | opus-4-6 | 1M |
+| Marketing/copy | N02 | pi | opus-4-6 | 1M |
+| Build/create | N03 | pi | opus-4-6 | 1M |
+| Knowledge/docs | N04 | pi | opus-4-6 | 1M |
+| Code/test/deploy | N05 | pi | opus-4-6 | 1M |
+| Brand/monetization | N06 | pi | opus-4-6 | 1M |
+| Orchestration | N07 | pi | opus-4-6 | 1M |
 
 ## Constraints
 

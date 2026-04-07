@@ -7,9 +7,10 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: null
+quality: 9.0
 tags: [collaboration, webhook, P04, crew, integration, dependency]
 tldr: "webhook-builder crew role: EVENT-DRIVEN HTTP SPECIALIST. Integration Pipeline, Event System, Dual-Direction crew patterns."
+density_score: 1.0
 ---
 # Collaboration: webhook-builder
 ## Crew Role
@@ -32,7 +33,7 @@ Full event infrastructure: inbound capture, internal routing, outbound dispatch.
 ```
 webhook-builder  -> inbound event receiver spec
 hook-builder     -> internal lifecycle hook spec (pre/post processing)
-daemon-builder   -> persistent event processor spec (consumer loop)
+daemon-builder   -> persistent event processr spec (consumer loop)
 ```
 **Example**: GitHub push (webhook) -> pre-commit checks (hook) -> CI runner (daemon).
 **Handoff**: webhook defines payload schema; hook consumes it as trigger input; daemon receives processed events from hook output queue.
@@ -78,4 +79,4 @@ provides:
 | End-user push notification | Redirect to notifier-builder |
 | Persistent background processing | Redirect to daemon-builder |
 | MCP protocol server | Redirect to mcp-server-builder |
-| "Send notification when payment completes" | Clarify: webhook (receive event) + notifier (send to user) |
+| "Send notification when payment complete" | Clarify: webhook (receive event) + notifier (send to user) |

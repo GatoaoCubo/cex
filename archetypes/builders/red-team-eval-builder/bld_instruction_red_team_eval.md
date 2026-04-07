@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for red_team_eval
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.0
+title: "Instruction Red Team Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [red_team_eval, builder, examples]
+tldr: "Golden and anti-examples for red team eval construction, demonstrating ideal structure and common pitfalls."
+domain: "red team eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a red_team_eval
@@ -13,7 +23,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. Map the threat model: what could go wrong if this system is attacked? What data does it have access to?
 3. Select attack_types from the approved enum (at minimum 2; prefer 3-5 for coverage)
 4. Map each attack_type to its OWASP LLM Top 10 reference (LLM01-LLM10)
-5. Determine framework: Promptfoo (YAML config), Garak (CLI probes), DeepEval (Python), Patronus (API), or custom
+5. Determine framework: Promptfoo (YAML config), Garak (CLI probes), DeepEval (Python), Patronus (API), or costm
 6. Define pass_criteria as observable model behavior — what does "safe" look like in a response?
 7. Assess severity: critical/high/medium/low based on potential harm if attacks succeed
 8. Check for existing red_team_eval artifacts to avoid duplicates
@@ -42,7 +52,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Confirm target is specific (not "the system" or "the model")
 7. Confirm pass_criteria is observable and measurable
 8. Confirm no real PII or actual exploit payloads in body
-9. HARD gates: frontmatter valid, id pattern matches, attack_types declared, pass_criteria defined, target named
+9. HARD gates: frontmatter valid, id pattern matches, attack_types declared, pass_criteria offined, target named
 10. SOFT gates: score against QUALITY_GATES.md
 11. Cross-check boundary: is this testing BEFORE deployment (red_team_eval) or enforcing AT runtime (guardrail)? Is this adversarial (red_team_eval) or functional (e2e_eval)? Is this isolated unit logic (unit_eval)?
 12. Revise if score < 8.0 before outputting

@@ -4,6 +4,16 @@ id: bld_tools_system_prompt
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for system_prompt production
+quality: 9.0
+title: "Tools System Prompt"
+version: "1.0.0"
+author: n03_builder
+tags: [system_prompt, builder, examples]
+tldr: "Golden and anti-examples for system prompt construction, demonstrating ideal structure and common pitfalls."
+domain: "system prompt construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: system-prompt-builder
@@ -18,7 +28,7 @@ purpose: Tools and APIs available for system_prompt production
 |--------|----------|------|
 | CEX Schema | P03_prompt/_schema.yaml | Field definitions, kinds |
 | CEX Examples | P03_prompt/examples/ | Real system_prompt artifacts |
-| PRIME files | records/agent_nodes/*/PRIME_*.md | 7 existing system prompts |
+| PRIME files | records/agent_groups/*/PRIME_*.md | 7 existing system prompts |
 | ISO Instructions | records/agents/*/agent_package/ISO_*_SYSTEM_INSTRUCTION.md | 101 agent system prompts |
 | Rules files | .claude/rules/*.md | 10 operational rule sets |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P03_system_prompt |

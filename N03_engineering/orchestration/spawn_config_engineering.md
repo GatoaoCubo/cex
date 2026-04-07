@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [spawn-config, builder, N03]
 tldr: How to spawn the builder -- model, timeout, environment.
 density_score: 0.88
@@ -48,3 +48,34 @@ density_score: 0.88
 
 Builder operates with zero MCPs (all tools are local Python).
 Optional: brain MCP for enhanced knowledge search.
+
+
+## Spawn Configuration Details
+
+Process spawning uses validated configurations to ensure reproducible execution:
+
+- **Model pinning**: each nucleus specifies exact model version to prevent behavioral drift
+- **Resource limits**: token budgets and timeout caps prevent runaway processes
+- **Environment isolation**: spawned processes inherit only declared environment variables
+- **Health probes**: spawned processes must respond to health check within startup grace period
+
+### Configuration Validation
+
+```yaml
+# Spawn pre-flight checks
+validation:
+  required_fields: [nucleus, model, task]
+  model_exists: true
+  budget_within_limits: true
+  cwd_accessible: true
+  no_duplicate_spawn: true
+  max_concurrent: 6
+```
+
+| Parameter | Range | Default | Override |
+|-----------|-------|---------|---------|
+| timeout | 30-600s | 120s | Per-task |
+| token_budget | 1K-200K | 50K | Per-nucleus |
+| retry_count | 0-3 | 1 | Per-task |
+| startup_grace | 5-30s | 10s | Global |
+

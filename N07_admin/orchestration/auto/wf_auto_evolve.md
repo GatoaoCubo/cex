@@ -9,7 +9,7 @@ updated: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: gap_detector_triggers OR /evolve command
-quality: 8.8
+quality: 9.1
 tags: [workflow, auto, n07, evolve, autoresearch, experiment, gap, mlops]
 tldr: "Two modes: (1) AutoResearch loop — evolve existing artifacts via experiment (modify→measure→keep/discard). (2) Gap fill — detect missing artifacts and create them."
 density_score: 0.93

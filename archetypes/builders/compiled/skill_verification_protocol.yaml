@@ -1,0 +1,34 @@
+id: shared_skill_verification_protocol
+kind: skill
+pillar: P04
+version: 1.0.0
+created: 2026-04-05
+updated: 2026-04-05
+author: n07-orchestrator
+title: 'Shared Skill: Verification Protocol for All Builders'
+domain: verification
+quality: 8.8
+tags:
+- shared
+- skill
+- verification
+- adversarial
+- all-builders
+source_insight: OpenClaude verificationAgent.ts -- adapted as shared builder skill
+tldr: Every builder can invoke adversarial verification on its output before publishing
+density_score: 0.86
+when_to_verify:
+- 3+ sections modified in the artifact
+- Artifact kind is core (system_prompt, skill, guardrail, agent, agent_card)
+- Quality target >= 8.5
+- Retry attempt (previous quality gate failure)
+verification_steps: "1. Schema compliance: Does the artifact match its kind's SCHEMA.md?\n   Check: every required frontmatter\
+  \ field present and correctly typed.\n\n2. Boundary compliance: Does the artifact stay within its kind's boundary?\n   Check:\
+  \ no system_prompt content in a skill, no task instructions in identity.\n\n3. Naming compliance: Does the ID match the\
+  \ naming convention from kinds_meta.json?\n   Check: `p{NN}{prefix}{slug}` format.\n\n4. Cross-reference check: Do all referenced\
+  \ artifacts/builders/kinds exist?\n   Check: grep for references, verify targets are real paths.\n\n5. Adversarial probe:\
+  \ Try to break the artifact:\n   - Feed it an edge-case input (empty, malformed, contradictory)\n   - Check if the rules\
+  \ are enforceable or aspirational\n   - Verify the output format is machine-parseable"
+output: 'For each check: PASS with evidence or FAIL with Expected vs Actual.
+
+  Final: VERDICT: PASS | FAIL | PARTIAL'

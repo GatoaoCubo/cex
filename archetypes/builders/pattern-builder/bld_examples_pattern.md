@@ -5,11 +5,21 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of pattern artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Pattern"
+version: "1.0.0"
+author: n03_builder
+tags: [pattern, builder, examples]
+tldr: "Golden and anti-examples for pattern construction, demonstrating ideal structure and common pitfalls."
+domain: "pattern construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: pattern-builder
 ## Golden Example
-INPUT: "Document the Continuous Batching pattern for multi-agent_node task processing"
+INPUT: "Document the Continuous Batching pattern for multi-agent_group task processing"
 OUTPUT:
 ```yaml
 id: p08_pat_continuous_batching
@@ -21,34 +31,34 @@ updated: "2026-03-26"
 author: "builder"
 domain: "orchestration"
 quality: null
-tags: [pattern, batching, orchestration, parallel, multi-agent_node]
-tldr: "Auto-refill agent_node slots from queue as tasks complete, eliminating idle between waves"
+tags: [pattern, batching, orchestration, parallel, multi-agent_group]
+tldr: "Auto-refill agent_group slots from queue as tasks complete, eliminating idle between waves"
 name: "Continuous Batching"
-problem: "Sequential wave execution leaves agent_nodes idle between batches"
-solution: "Auto-refill available slots from queue as each agent_node completes"
-context: "Multi-agent_node orchestration with >6 independent tasks"
+problem: "Sequential wave execution leaves agent_groups idle between batches"
+solution: "Auto-refill available slots from queue as each agent_group complete"
+context: "Multi-agent_group orchestration with >6 independent tasks"
 forces: ["throughput vs resource limits", "parallelism vs git contention", "queue depth vs RAM ceiling"]
-consequences: ["1.6x speedup over sequential", "zero idle between waves", "requires independent tasks", "max 3 concurrent agent_nodes (RAM)"]
+consequences: ["1.6x speedup over sequential", "zero idle between waves", "requires independent tasks", "max 3 concurrent agent_groups (RAM)"]
 related_patterns: [p08_pat_wave_execution, p08_pat_signal_monitor]
 anti_patterns: ["manual slot management", "unbounded parallelism"]
-applicability: "Use when >6 independent tasks across <=3 agent_nodes. Do NOT use for dependent tasks or shared-file edits."
+applicability: "Use when >6 independent tasks across <=3 agent_groups. Do NOT use for dependent tasks or shared-file edits."
 keywords: [batching, parallel, queue, throughput, spawn]
 ```
 ## Problem
-When orchestrating multi-agent_node work in waves (batch N completes, then batch N+1 starts), agent_nodes sit idle between waves. If batch 1 has 3 tasks finishing at different times, the fastest agent_node waits for the slowest before batch 2 begins.
+When orchestrating multi-agent_group work in waves (batch N complete, then batch N+1 starts), agent_groups sit idle between waves. If batch 1 has 3 tasks finishing at different times, the fastest agent_group waits for the slowest before batch 2 begins.
 ## Context
-- Environment: Orchestrator managing 2-3 agent_nodes via spawn scripts
-- Frequency: every multi-agent_node mission with >6 tasks
+- Environment: Orchestrator managing 2-3 agent_groups via spawn scripts
+- Frequency: every multi-agent_group mission with >6 tasks
 - Severity: 40% throughput waste in sequential wave execution
 ## Forces
-- **Throughput vs resources**: more parallelism = faster, but RAM limits to 3 agent_nodes
+- **Throughput vs resources**: more parallelism = faster, but RAM limits to 3 agent_groups
 - **Independence vs contention**: parallel tasks must not edit same files (git conflicts)
 - **Queue depth vs complexity**: deeper queues need naming conventions and signal tracking
 ## Solution
 Replace static wave execution with a queue-drain loop:
 1. Fill all available slots (up to 3) with tasks from queue
 2. Monitor signals for completion (poll every 15s)
-3. When a agent_node completes, immediately assign next queued task
+3. When a agent_group complete, immediately assign next queued task
 4. Repeat until queue empty
 ```text
 Queue: [T1, T2, T3, T4, T5, T6, T7]
@@ -69,10 +79,10 @@ Costs:
 - Naming convention overhead ({MISSION}_batch_{N}_{SAT}.md)
 ## Examples
 1. **ISOFIX Mission**: 7 batches across researcher+builder+knowledge-engine, 1.6x speedup confirmed
-2. **CBTEST Mixed**: 3 agent_nodes, mixed complexity, zero git contention
+2. **CBTEST Mixed**: 3 agent_groups, mixed complexity, zero git contention
 ## Anti-Patterns
-- **Manual Slot Management**: manually tracking which agent_node is free wastes orchestrator time
-- **Unbounded Parallelism**: launching >3 agent_nodes causes BSOD (RAM exhaustion)
+- **Manual Slot Management**: manually tracking which agent_group is free wastes orchestrator time
+- **Unbounded Parallelism**: launching >3 agent_groups causes BSOD (RAM exhaustion)
 ## Related Patterns
 - Wave Execution: predecessor pattern (static batches); continuous batching improves on it
 - Signal Monitor: required infrastructure for detecting slot availability

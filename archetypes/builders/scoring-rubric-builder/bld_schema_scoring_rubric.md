@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for scoring_rubric
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Scoring Rubric"
+version: "1.0.0"
+author: n03_builder
+tags: [scoring_rubric, builder, examples]
+tldr: "Golden and anti-examples for scoring rubric construction, demonstrating ideal structure and common pitfalls."
+domain: "scoring rubric construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: scoring_rubric
@@ -20,7 +30,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | created | date YYYY-MM-DD | YES | — | Creation date |
 | updated | date YYYY-MM-DD | YES | — | Last update |
 | author | string | YES | — | Producer identity |
-| framework | string | YES | — | Framework name (5D, 12LP, custom) |
+| framework | string | YES | — | Framework name (5D, 12LP, costm) |
 | target_kinds | list[string] | YES | — | Artifact kinds this rubric evaluates |
 | dimensions_count | integer >= 3 | YES | — | Number of evaluation dimensions |
 | total_weight | literal 100 | YES | 100 | Weights must sum to 100% |

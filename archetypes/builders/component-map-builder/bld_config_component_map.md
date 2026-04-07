@@ -14,6 +14,15 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Component Map"
+author: n03_builder
+tags: [component_map, builder, examples]
+tldr: "Golden and anti-examples for component map construction, demonstrating ideal structure and common pitfalls."
+domain: "component map construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config — component-map-builder
 ## Naming Conventions
@@ -58,7 +67,7 @@ NOTE: machine_format is yaml (not md). Output extension is `.yaml`, not `.md`.
 - Words separated by underscores
 - No hyphens, no spaces, no special characters
 - Descriptive but concise (2-4 words)
-Valid: `brain_infrastructure`, `agent_node_network`, `api_layer`, `hook_system`
+Valid: `brain_infrastructure`, `agent_group_network`, `api_layer`, `hook_system`
 Invalid: `Brain-Infrastructure`, `brain infrastructure`, `b`, `the_entire_cex_system_components`
 ## Seeds Reference (from SEED_BANK.yaml P08_component_map)
 Primary seeds: scope, components, connections, dependencies, data_flow, ownership, health, versioning, interfaces, boundaries

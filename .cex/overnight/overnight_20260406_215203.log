@@ -1,0 +1,33 @@
+﻿[2026-04-06 21:52:03] [INFO] ============================================================
+[2026-04-06 21:52:03] [INFO]   CEX OVERNIGHT FLYWHEEL
+[2026-04-06 21:52:03] [INFO] ============================================================
+[2026-04-06 21:52:03] [INFO] Started: 2026-04-06T21:52:03.2928050-03:00
+[2026-04-06 21:52:03] [INFO] Budget:  200000 tokens
+[2026-04-06 21:52:03] [INFO] Target:  9
+[2026-04-06 21:52:03] [INFO] Thresh:  8.5
+[2026-04-06 21:52:03] [INFO] Cycles:  max 50
+[2026-04-06 21:52:03] [INFO] Phase:   evolve
+[2026-04-06 21:52:03] [INFO] DryRun:  False
+[2026-04-06 21:52:03] [INFO] Log:     C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260406_215203.log
+[2026-04-06 21:52:03] [INFO] 
+[2026-04-06 21:52:03] [INFO] ============================================================
+[2026-04-06 21:52:03] [INFO]   FLYWHEEL CYCLE 1 / 50
+[2026-04-06 21:52:03] [INFO] ============================================================
+[2026-04-06 21:52:03] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 21:52:03] [INFO] ============================================================
+[2026-04-06 21:52:03] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 21:52:03] [INFO] ============================================================
+[2026-04-06 21:52:03] [INFO] Found 20 artifacts below target 9
+[2026-04-06 21:52:03] [FATAL] FATAL: Falha na invocação do método porque [System.Management.Automation.PSCustomObject] não contém um método denominado 'ContainsKey'.
+[2026-04-06 21:52:03] [FATAL] em Invoke-Evolve, C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1: linha 412
+em Main, C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1: linha 742
+em <ScriptBlock>, C:\Users\PC\Documents\GitHub\cex\boot\overnight.ps1: linha 822
+[2026-04-06 21:52:04] [INFO] ============================================================
+[2026-04-06 21:52:04] [INFO]   OVERNIGHT COMPLETE
+[2026-04-06 21:52:04] [INFO] ============================================================
+[2026-04-06 21:52:04] [INFO] Cycles:    1
+[2026-04-06 21:52:04] [INFO] Created:   100
+[2026-04-06 21:52:04] [INFO] Evolved:   121
+[2026-04-06 21:52:04] [INFO] Tokens:    0 / 200000
+[2026-04-06 21:52:04] [INFO] Duration:  104.5h
+[2026-04-06 21:52:04] [INFO] Log:       C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260406_215203.log

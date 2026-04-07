@@ -4,6 +4,16 @@ id: bld_architecture_audio_tool
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of audio_tool — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Audio Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [audio_tool, builder, examples]
+tldr: "Golden and anti-examples for audio tool construction, demonstrating ideal structure and common pitfalls."
+domain: "audio tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -49,12 +59,12 @@ notifier    --consumes--> audio_bytes
 ## Boundary Table
 | audio_tool IS | audio_tool IS NOT |
 |---------------|------------------|
-| Processes audio signals (speech, sound, music) | A visual processor — that is vision_tool |
+| Processes audio signals (speech, sound, music) | A visual processr — that is vision_tool |
 | Converts speech to text (STT / direction: input) | A message delivery system — that is notifier |
 | Generates speech from text (TTS / direction: output) | A terminal utility — that is cli_tool |
 | Analyzes audio features (diarization, emotion, lang detect) | A generic HTTP client — that is api_client |
 | Bound to specific audio models with known providers | A background persistent process — that is daemon |
-| Format and language scoped at spec time | A video processor — that is vision_tool (video frames) |
+| Format and language scoped at spec time | A video processr — that is vision_tool (video frames) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|-----------|---------|

@@ -4,6 +4,16 @@ id: bld_tools_vision_tool
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for vision_tool production
+quality: 9.0
+title: "Tools Vision Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [vision_tool, builder, examples]
+tldr: "Golden and anti-examples for vision tool construction, demonstrating ideal structure and common pitfalls."
+domain: "vision tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: vision-tool-builder

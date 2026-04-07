@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""CEX Memory Selector — LLM-powered relevant memory retrieval.
+# -*- coding: utf-8 -*-
+"""CEX Memory Selector -- LLM-powered relevant memory retrieval.
 
 Selects top-K most relevant builder memories for a given query using
 an LLM (sonnet) as selector. Falls back to keyword matching when LLM
@@ -15,6 +16,7 @@ Usage:
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -31,12 +33,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cex_memory import MemoryHeader, scan_all_memories, scan_builder_memories
 from cex_shared import parse_frontmatter
 
+# --- T06: Memory age integration ---
+try:
+    from cex_memory_age import memory_age_days, memory_freshness_caveat, format_recalled_memory
+    _HAS_MEMORY_AGE = True
+except ImportError:
+    _HAS_MEMORY_AGE = False
+
 CEX_ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = CEX_ROOT / ".cex" / "temp" / "memory_cache"
 CACHE_TTL_SECONDS = 300  # 5 minutes
 
-# LLM selector model — sonnet is sufficient, 4x cheaper than opus
-LLM_MODEL = "claude-sonnet-4-20250514"
+# LLM selector model -- sonnet is sufficient, 4x cheaper than opus
+LLM_MODEL = "claude-sonnet-4-6"
 LLM_MAX_TOKENS = 1024
 
 
@@ -186,6 +195,14 @@ def _select_via_keywords(
         if overlap > 0:
             # Score = overlap count * confidence
             score = overlap * h.confidence
+            # --- T06: Age penalty (D3: linear decay over 1yr) ---
+            if _HAS_MEMORY_AGE and hasattr(h, "path") and h.path:
+                try:
+                    age = memory_age_days(os.path.getmtime(h.path))
+                    age_penalty = max(0.5, 1.0 - (age / 365))
+                    score *= age_penalty
+                except Exception:
+                    pass
             scored.append((i, score))
 
     scored.sort(key=lambda x: -x[1])
@@ -311,7 +328,7 @@ def format_memory_injection(memories: list[SelectedMemory], total_observations: 
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CEX Memory Selector — LLM-powered retrieval")
+    parser = argparse.ArgumentParser(description="CEX Memory Selector -- LLM-powered retrieval")
     parser.add_argument("--query", "-q", required=True, help="Query/intent to match memories against")
     parser.add_argument("--builder", "-b", help="Specific builder ID (default: search all)")
     parser.add_argument("--all", action="store_true", help="Search all builder memories")

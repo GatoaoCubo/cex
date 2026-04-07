@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: knowledge_agent
 domain: execution
-quality: 8.9
+quality: 9.1
 tags: [bling, automation, boundary, tiering, human-in-the-loop, erp]
 tldr: "44 campos Bling em 3 tiers: Tier1 auto via pipeline, Tier2 heuristica com override, Tier3 dados fiscais/fisicos so pelo usuario."
 when_to_use: "Definir o que o pipeline pode preencher sozinho vs o que exige confirmacao humana no Bling"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_bling_erp_field_parametrization
   related: [p01_kc_zero_touch_execution]
-density_score: null
+density_score: 1.0
 data_source: "https://developer.bling.com.br/homologacao"
 ---
 
@@ -83,3 +83,10 @@ def classify_field(field: str) -> str:
 - external: https://developer.bling.com.br/como-testar
 - deepens: p01_kc_bling_erp_field_parametrization
 - deepens: p01_kc_zero_touch_execution
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

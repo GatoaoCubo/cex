@@ -1237,8 +1237,8 @@
       "title": "Few-Shot: Agent Creation via 8F Pipeline"
     },
     {
-      "path": "P01_knowledge/examples/ex_glossary_entry_director.md",
-      "id": "p01_gl_agent_node",
+      "path": "P01_knowledge/examples/ex_glossary_entry_supervisor.md",
+      "id": "p01_gl_agent_group",
       "kind": "glossary_entry",
       "pillar": "P01",
       "nucleus": "",
@@ -1315,16 +1315,16 @@
       "pillar": "P01",
       "nucleus": "",
       "score": 9.0,
-      "title": "CEX Cortex Enterprise — Modular LLM Brain with CEO Orchestrator and Satellite Departments"
+      "title": "CEX Cortex Enterprise — Modular LLM Brain with CEO Orchestrator and Agent_group Departments"
     },
     {
-      "path": "P01_knowledge/examples/ex_knowledge_card_cex_director_concept.md",
-      "id": "p01_kc_cex_agent_node_concept",
+      "path": "P01_knowledge/examples/ex_knowledge_card_cex_supervisor_concept.md",
+      "id": "p01_kc_cex_agent_group_concept",
       "kind": "knowledge_card",
       "pillar": "P01",
       "nucleus": "",
       "score": 9.0,
-      "title": "CEX Satellite Concept — Verticalized Departments as Complete LLM Entities"
+      "title": "CEX Agent_group Concept — Verticalized Departments as Complete LLM Entities"
     },
     {
       "path": "P01_knowledge/examples/ex_knowledge_card_cex_fractal_architecture.md",
@@ -2290,13 +2290,13 @@
       "title": "Boot Config — Deep Knowledge for boot_config"
     },
     {
-      "path": "P01_knowledge/library/kind/kc_brain_index.md",
-      "id": "p01_kc_brain_index",
+      "path": "P01_knowledge/library/kind/kc_knowledge_index.md",
+      "id": "p01_kc_knowledge_index",
       "kind": "knowledge_card",
       "pillar": "P10",
       "nucleus": "",
       "score": 9.0,
-      "title": "Brain Index — Deep Knowledge for brain_index"
+      "title": "Brain Index — Deep Knowledge for knowledge_index"
     },
     {
       "path": "P01_knowledge/library/kind/kc_browser_tool.md",
@@ -2452,8 +2452,8 @@
       "title": "Diagram — Deep Knowledge for diagram"
     },
     {
-      "path": "P01_knowledge/library/kind/kc_director.md",
-      "id": "p01_kc_director",
+      "path": "P01_knowledge/library/kind/kc_supervisor.md",
+      "id": "p01_kc_supervisor",
       "kind": "knowledge_card",
       "pillar": "P08",
       "nucleus": "",
@@ -2677,8 +2677,8 @@
       "title": "Knowledge Card — Deep Knowledge for knowledge_card"
     },
     {
-      "path": "P01_knowledge/library/kind/kc_law.md",
-      "id": "p01_kc_law",
+      "path": "P01_knowledge/library/kind/kc_invariant.md",
+      "id": "p01_kc_invariant",
       "kind": "knowledge_card",
       "pillar": "P08",
       "nucleus": "",
@@ -3797,13 +3797,13 @@
       "title": "Template — Router"
     },
     {
-      "path": "P03_prompt/examples/ex_action_prompt_dispatch_director.md",
-      "id": "p03_up_dispatch_agent_node",
+      "path": "P03_prompt/examples/ex_action_prompt_dispatch_supervisor.md",
+      "id": "p03_up_dispatch_agent_group",
       "kind": "user_prompt",
       "pillar": "P03",
       "nucleus": "",
       "score": 8.5,
-      "title": "ex_action_prompt_dispatch_director"
+      "title": "ex_action_prompt_dispatch_supervisor"
     },
     {
       "path": "P03_prompt/examples/ex_chain_content_pipeline.md",
@@ -3914,13 +3914,13 @@
       "title": "CIP Image Brief: Agua Marinha Product Lifestyle"
     },
     {
-      "path": "P03_prompt/examples/ex_prompt_template_director_orchestrator.md",
-      "id": "p03_pt_agent_node_orchestrator",
+      "path": "P03_prompt/examples/ex_prompt_template_supervisor_orchestrator.md",
+      "id": "p03_pt_agent_group_orchestrator",
       "kind": "prompt_template",
       "pillar": "P03",
       "nucleus": "",
       "score": 9.0,
-      "title": "Satellite Orchestrator - Multi-Agent Dispatch Prompt"
+      "title": "Agent_group Orchestrator - Multi-Agent Dispatch Prompt"
     },
     {
       "path": "P03_prompt/examples/ex_prompt_template_sdk_agent_builder.md",
@@ -3950,13 +3950,13 @@
       "title": "ReAct Web Research Agent with Tool Loop"
     },
     {
-      "path": "P03_prompt/examples/ex_router_prompt_director_dispatch.md",
-      "id": "p03_rp_agent_node_dispatch",
+      "path": "P03_prompt/examples/ex_router_prompt_supervisor_dispatch.md",
+      "id": "p03_rp_agent_group_dispatch",
       "kind": "router_prompt",
       "pillar": "P03",
       "nucleus": "",
       "score": 8.8,
-      "title": "Router Prompt for organization Satellite Task Dispatch"
+      "title": "Router Prompt for organization Agent_group Task Dispatch"
     },
     {
       "path": "P03_prompt/examples/ex_system_prompt_code_reviewer.md",
@@ -4789,13 +4789,13 @@
       "title": "LLM Providers Enum — Multi-Provider Routing Registry"
     },
     {
-      "path": "P06_schema/examples/ex_interface_director_handoff.md",
-      "id": "p06_iface_agent_node_handoff",
+      "path": "P06_schema/examples/ex_interface_supervisor_handoff.md",
+      "id": "p06_iface_agent_group_handoff",
       "kind": "interface",
       "pillar": "P06",
       "nucleus": "",
       "score": 8.9,
-      "title": "Interface: orchestrator → Satellite Handoff Contract"
+      "title": "Interface: orchestrator → Agent_group Handoff Contract"
     },
     {
       "path": "P06_schema/examples/ex_type_def_quality_score.md",
@@ -4843,13 +4843,13 @@
       "title": "Template — Enum Definition"
     },
     {
-      "path": "P07_evals/examples/ex_benchmark_director_boot_time.md",
-      "id": "p07_bm_agent_node_boot_time",
+      "path": "P07_evals/examples/ex_benchmark_supervisor_boot_time.md",
+      "id": "p07_bm_agent_group_boot_time",
       "kind": "benchmark",
       "pillar": "P07",
       "nucleus": "",
       "score": 8.6,
-      "title": "ex_benchmark_director_boot_time"
+      "title": "ex_benchmark_supervisor_boot_time"
     },
     {
       "path": "P07_evals/examples/ex_e2e_eval_cex_forge_pipeline.md",
@@ -5013,7 +5013,7 @@
       "pillar": "P08",
       "nucleus": "",
       "score": 8.9,
-      "title": "Satellite: builder_agent"
+      "title": "Agent_group: builder_agent"
     },
     {
       "path": "P08_architecture/examples/ex_component_map_codexa_core.md",
@@ -5043,27 +5043,27 @@
       "title": "ADR-007: Choose Qdrant over Pinecone for Vector Database"
     },
     {
-      "path": "P08_architecture/examples/ex_diagram_director_grid.md",
-      "id": "p08_diag_agent_node_grid",
+      "path": "P08_architecture/examples/ex_diagram_supervisor_grid.md",
+      "id": "p08_diag_agent_group_grid",
       "kind": "diagram",
       "pillar": "P08",
       "nucleus": "",
       "score": 8.5,
-      "title": "ex_diagram_director_grid"
+      "title": "ex_diagram_supervisor_grid"
     },
     {
       "path": "P08_architecture/examples/ex_director_rag_pipeline.md",
       "id": "p08_dir_rag_pipeline",
-      "kind": "director",
+      "kind": "supervisor",
       "pillar": "P08",
       "nucleus": "",
       "score": 8.8,
       "title": "ex_director_rag_pipeline"
     },
     {
-      "path": "P08_architecture/examples/ex_law_shokunin.md",
+      "path": "P08_architecture/examples/ex_invariant_shokunin.md",
       "id": "p08_law_shokunin",
-      "kind": "law",
+      "kind": "invariant",
       "pillar": "P08",
       "nucleus": "",
       "score": 8.9,
@@ -5085,7 +5085,7 @@
       "pillar": "P08",
       "nucleus": "",
       "score": 8.9,
-      "title": "Pattern: Continuous Batching (Satellite Grid)"
+      "title": "Pattern: Continuous Batching (Agent_group Grid)"
     },
     {
       "path": "P08_architecture/examples/ex_pattern_nucleus_fractal.md",
@@ -5133,18 +5133,18 @@
       "title": "Template - Diagram"
     },
     {
-      "path": "P08_architecture/templates/tpl_director.md",
-      "id": "tpl_director",
-      "kind": "director",
+      "path": "P08_architecture/templates/tpl_supervisor.md",
+      "id": "tpl_supervisor",
+      "kind": "supervisor",
       "pillar": "P08",
       "nucleus": "",
       "score": 8.7,
       "title": "Template — Director"
     },
     {
-      "path": "P08_architecture/templates/tpl_law.md",
+      "path": "P08_architecture/templates/tpl_invariant.md",
       "id": "p08_law_{{NUMBER}}",
-      "kind": "law",
+      "kind": "invariant",
       "pillar": "P08",
       "nucleus": "",
       "score": 8.6,
@@ -5205,13 +5205,13 @@
       "title": "ex_rate_limit_config_anthropic_tier2"
     },
     {
-      "path": "P09_config/examples/ex_runtime_rule_director_spawn.md",
-      "id": "p09_rr_agent_node_spawn",
+      "path": "P09_config/examples/ex_runtime_rule_supervisor_spawn.md",
+      "id": "p09_rr_agent_group_spawn",
       "kind": "runtime_rule",
       "pillar": "P09",
       "nucleus": "",
       "score": 8.8,
-      "title": "Runtime Rule: Satellite Spawn Constraints"
+      "title": "Runtime Rule: Agent_group Spawn Constraints"
     },
     {
       "path": "P09_config/examples/ex_secret_config_openai_key.md",
@@ -5295,9 +5295,9 @@
       "title": "Axiom: Session Compression (Dual-ID Pattern)"
     },
     {
-      "path": "P10_memory/examples/ex_brain_index_codexa_brain.md",
+      "path": "P10_memory/examples/ex_knowledge_index_codexa_brain.md",
       "id": "p10_bi_organization_brain",
-      "kind": "brain_index",
+      "kind": "knowledge_index",
       "pillar": "P10",
       "nucleus": "",
       "score": 8.9,
@@ -5358,13 +5358,13 @@
       "title": "Runtime State: Conversation Context Manager"
     },
     {
-      "path": "P10_memory/examples/ex_session_state_director_dispatch.md",
-      "id": "p10_ss_agent_node_dispatch",
+      "path": "P10_memory/examples/ex_session_state_supervisor_dispatch.md",
+      "id": "p10_ss_agent_group_dispatch",
       "kind": "session_state",
       "pillar": "P10",
       "nucleus": "",
       "score": 8.5,
-      "title": "ex_session_state_director_dispatch"
+      "title": "ex_session_state_supervisor_dispatch"
     },
     {
       "path": "P10_memory/templates/tpl_entity_memory.md",
@@ -5405,13 +5405,13 @@
       ]
     },
     {
-      "path": "P11_feedback/examples/ex_bugloop_director_execution.md",
-      "id": "p11_bl_agent_node_execution",
+      "path": "P11_feedback/examples/ex_bugloop_supervisor_execution.md",
+      "id": "p11_bl_agent_group_execution",
       "kind": "bugloop",
       "pillar": "P11",
       "nucleus": "",
       "score": 8.8,
-      "title": "Bugloop: Satellite Execution Resilience"
+      "title": "Bugloop: Agent_group Execution Resilience"
     },
     {
       "path": "P11_feedback/examples/ex_guardrail_stella_dispatch.md",
@@ -5531,13 +5531,13 @@
       "title": "DAG: CEX Wave Migration Pipeline"
     },
     {
-      "path": "P12_orchestration/examples/ex_dispatch_rule_keyword_director.md",
-      "id": "p12_dr_keyword_agent_node",
+      "path": "P12_orchestration/examples/ex_dispatch_rule_keyword_supervisor.md",
+      "id": "p12_dr_keyword_agent_group",
       "kind": "dispatch_rule",
       "pillar": "P12",
       "nucleus": "",
       "score": 8.6,
-      "title": "ex_dispatch_rule_keyword_director"
+      "title": "ex_dispatch_rule_keyword_supervisor"
     },
     {
       "path": "P12_orchestration/examples/ex_dispatch_rule_research.md",
@@ -5567,13 +5567,13 @@
       "title": "Daily Reindex Schedule — Nightly Brain FAISS Rebuild"
     },
     {
-      "path": "P12_orchestration/examples/ex_signal_director_complete.md",
-      "id": "p12_sig_agent_node_complete",
+      "path": "P12_orchestration/examples/ex_signal_supervisor_complete.md",
+      "id": "p12_sig_agent_group_complete",
       "kind": "signal",
       "pillar": "P12",
       "nucleus": "",
       "score": 8.7,
-      "title": "ex_signal_director_complete"
+      "title": "ex_signal_supervisor_complete"
     },
     {
       "path": "P12_orchestration/examples/ex_spawn_config_grid_continuous.md",
@@ -5603,13 +5603,13 @@
       "title": "ex_workflow_brand_propagation"
     },
     {
-      "path": "P12_orchestration/examples/ex_workflow_director_grid.md",
-      "id": "p12_crew_agent_node_grid",
+      "path": "P12_orchestration/examples/ex_workflow_supervisor_grid.md",
+      "id": "p12_crew_agent_group_grid",
       "kind": "crew",
       "pillar": "P12",
       "nucleus": "",
       "score": 8.5,
-      "title": "ex_workflow_director_grid"
+      "title": "ex_workflow_supervisor_grid"
     },
     {
       "path": "P12_orchestration/examples/ex_workflow_stella_dispatch.md",

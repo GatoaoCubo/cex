@@ -8,7 +8,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "browser automation tool — DOM-based web interaction with declared engine, actions, selectors, and output contract"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, browser-tool, P04, playwright, dom, selectors, automation]
 tldr: "Pass/fail gate for browser_tool artifacts: engine declaration, action completeness, selector fallback chains, timeout config, and output format contract."
 density_score: 0.90
@@ -51,7 +51,7 @@ Weights sum to 100%.
 | Boundary clarity | 1.0 | Not computer_use/search_tool/vision_tool |
 | Selector rationale | 0.5 | Priority order explained |
 | Error behavior | 1.0 | Selector miss/timeout behavior documented |
-| Testability | 1.0 | Actions testable with example or schema |
+| Testability | 1.0 | Actions testsble with example or schema |
 ## Actions
 | Score | Tier | Action |
 |---|---|---|

@@ -8,10 +8,15 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.9
+quality: 9.1
 tags: [n03, software-engineering, master-kc, capabilities]
 tldr: "Master knowledge card for N03's software engineering capabilities. Maps 12 platform KCs + 23 CEX tools + software-project-builder into a unified engineering model. N03 can now: scaffold, implement, test, lint, dockerize, CI/CD, deploy, and review."
-density_score: 0.93
+density_score: 1.0
+when_to_use: "Apply when master knowledge card for n03's software engineering capabilities. maps 12 platform kcs + 23 cex ..."
+keywords: [verticalization, knowledge-card, layer, already, master]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # N03 Software Engineering — Master KC
@@ -89,3 +94,10 @@ N07 says: "add --batch flag to 8F runner"
 | Instance config template | 1 | _instances/_template/N03_engineering/ |
 | Dispatch rules | 2 | N03_engineering/orchestration/ |
 | Workflows | 2 | N03_engineering/orchestration/ |
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

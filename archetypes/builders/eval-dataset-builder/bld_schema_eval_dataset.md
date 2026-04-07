@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for eval_dataset
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Eval Dataset"
+version: "1.0.0"
+author: n03_builder
+tags: [eval_dataset, builder, examples]
+tldr: "Golden and anti-examples for eval dataset construction, demonstrating ideal structure and common pitfalls."
+domain: "eval dataset construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: eval_dataset
@@ -27,7 +37,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | schema_fields | list[string] | YES | - | Field names present in each test case |
 | description | string <= 200ch | REC | - | What the dataset covers |
 | source | string | REC | - | Origin of data (human, synthetic, scraped) |
-| framework | enum: braintrust, langsmith, deepeval, huggingface, custom | REC | - | Target eval framework |
+| framework | enum: braintrust, langsmith, deepeval, huggingface, costm | REC | - | Target eval framework |
 | task_type | string | REC | - | Classification, QA, summarization, etc. |
 | language | string | REC | "en" | Dataset language (ISO 639-1) |
 | license | string | REC | - | Data license (MIT, CC-BY, proprietary) |

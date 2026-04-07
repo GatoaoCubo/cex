@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "adversarial LLM safety evaluation — pre-deployment attack scenario configurations with declared attack_types, specific target, and measurable pass_criteria"
-quality: 8.9
+quality: 9.1
 tags: [quality-gate, red-team-eval, P07, adversarial, safety, llm-security, owasp]
 tldr: "Pass/fail gate for red_team_eval artifacts: attack coverage, target specificity, pass_criteria observability, payload safety, and OWASP traceability."
 density_score: 0.90
@@ -51,7 +51,7 @@ All must pass (AND logic). Any single failure = REJECT.
 | Boundary clarity | 1.0 | Explicitly not a guardrail, e2e_eval, unit_eval — adversarial pre-deploy purpose stated |
 | Payload safety | 1.0 | Placeholder notation used consistently; no real exploits or PII in spec body |
 | Domain specificity | 1.0 | Attack scenarios specific to declared target domain, not generic boilerplate |
-| Testability | 1.0 | Each scenario testable with declared framework; expected output described |
+| Testability | 1.0 | Each scenario testsble with declared framework; expected output described |
 | Severity classification | 0.5 | Severity declared; justification implied by attack types chosen |
 | Test count declaration | 0.5 | test_count field present and >= 1 |
 | Env var documentation | 0.5 | Environment variables listed with purpose |

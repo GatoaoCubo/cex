@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: llm_engineering
-quality: 8.9
+quality: 9.1
 tags: [cross-ide, memory, hooks, cursor, claude-code, openclaw, parity]
 tldr: "Single worker API (port 37777) serves 3 IDEs via thin adapters that map IDE-specific events to universal HTTP endpoints"
 when_to_use: "Building memory or context systems that must work across multiple AI coding tools"

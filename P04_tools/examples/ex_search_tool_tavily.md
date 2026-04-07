@@ -20,10 +20,13 @@ domain_filter: true
 language: [en, pt]
 cost_per_query: "$0.01"
 rate_limit: "1000/month (free tier)"
-quality: 8.6
+quality: 9.0
 tags: [search_tool, tavily, web, RAG]
 tldr: "Tavily web search optimized for LLM agents — returns ranked results with relevance scores"
 description: "Web search via Tavily API returning structured results for RAG and agent workflows"
+domain: "tool integration"
+title: "Search Tool Tavily"
+density_score: 0.93
 ---
 
 # Tavily Web Search
@@ -59,3 +62,18 @@ Results ranked by Tavily's proprietary relevance model, optimized for factual ac
 - Rate limit: 1000/month free, unlimited on paid plans
 - Cost: ~$0.01/query on paid tier
 - Free tier: 1000 queries/month
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `search tool`
+- **Artifact ID**: `p04_search_tavily`
+- **Tags**: [search_tool, tavily, web, RAG]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `search tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |

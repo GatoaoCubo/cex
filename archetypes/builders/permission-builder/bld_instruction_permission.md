@@ -15,7 +15,7 @@ prerequisites:
   - The operations requiring control are known (read, write, execute, or a subset)
 validation_method: checklist
 domain: permission
-quality: 8.8
+quality: 9.0
 tags:
   - instruction
   - permission
@@ -31,7 +31,7 @@ density_score: 0.84
 ---
 
 ## Context
-The permission-builder receives a **resource or artifact description** and produces a `permission` artifact encoding the access control rules for that scope — who can read, write, and execute it, under what conditions, and how access is inherited.
+The permission-builder receives a **resource or artifact description** and produces a `permission` artifact encoding thand access control rules for that scope — who can read, write, and execute it, under what conditions, and how access is inherited.
 **Input variables**:
 - `{{scope}}` — the resource, artifact, or agent being protected (e.g., `artifact_store`, `signal_writer`, `admin_dashboard`)
 - `{{roles}}` — list of roles that interact with the scope (e.g., `[admin, editor, viewer, service_account]`)
@@ -39,7 +39,7 @@ The permission-builder receives a **resource or artifact description** and produ
 - `{{access_model}}` — optional: `RBAC` (role-based), `ABAC` (attribute-based), or `ACL` (access control list). Default: `RBAC`
 - `{{conditions}}` — optional: contextual conditions under which access applies (e.g., "only during business hours", "only from internal network")
 **Output**: a single `permission` artifact at `p09_perm_{{scope_slug}}.md` with read/write/execute rules, role hierarchy, allow_list, deny_list, audit config, and escalation path.
-**Boundaries**: handles access control rules only. Does NOT define safety constraints that limit what a system CAN do regardless of permission (use guardrail-builder), operational laws that are inviolable (use law-builder), or quality thresholds (use quality_gate-builder).
+**Boundaries**: handles access control rules only. Does NOT define safety constraints that limit what a system CAN do regardless of permission (use guardrail-builder), operational laws that are inviolable (use invariant-builder), or quality thresholds (use quality_gate-builder).
 ## Phases
 ### Phase 1: RESEARCH
 **Goal**: Identify the full access landscape — scope, roles, access patterns, and existing rules — before writing.

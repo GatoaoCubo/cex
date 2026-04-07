@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How api-client-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Api Client"
+version: "1.0.0"
+author: n03_builder
+tags: [api_client, builder, examples]
+tldr: "Golden and anti-examples for api client construction, demonstrating ideal structure and common pitfalls."
+domain: "api client construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: api-client-builder
@@ -28,7 +38,7 @@ I specify unidirectional API consumers so agents can call external services reli
 ## Handoff Protocol
 ### I Receive
 - seeds: service name, base URL, auth strategy (API key, OAuth, bearer)
-- optional: endpoint list, rate limits, pagination pattern, retry policy
+- optional: endpoint list, rate limits, pagetion pattern, retry policy
 ### I Produce
 - client artifact (.md + .yaml frontmatter)
 - committed to: `cex/P04/examples/p04_client_{service}.md`

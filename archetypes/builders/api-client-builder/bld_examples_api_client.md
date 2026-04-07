@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of client artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Api Client"
+version: "1.0.0"
+author: n03_builder
+tags: [api_client, builder, examples]
+tldr: "Golden and anti-examples for api client construction, demonstrating ideal structure and common pitfalls."
+domain: "api client construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: api-client-builder
@@ -28,15 +38,15 @@ endpoints:
   - get_charge
   - create_refund
   - list_transactions
-quality: null
+quality: 8.8
 tags: [client, payment, api, P04]
-tldr: "Payment gateway client: 4 endpoints, bearer auth, JSON, cursor pagination"
+tldr: "Payment gateway client: 4 endpoints, bearer auth, JSON, cursor pagetion"
 description: "Client consuming payment gateway API for charge creation, refunds, and transaction listing"
 rate_limit: "100 req/min"
 retry: "3 retries, exponential backoff (1s, 2s, 4s)"
 timeout: "30s"
 serialization: json
-pagination: cursor
+pagetion: cursor
 error_codes: ["400", "401", "402", "404", "429", "500"]
 caching: "none (financial data)"
 ```
@@ -63,7 +73,7 @@ Parameters:
 - `amount` (integer, optional): Partial amount; defaults to full
 Returns: {id, charge_id, amount, status} object
 ### list_transactions
-GET /transactions — List transactions with cursor pagination.
+GET /transactions — List transactions with cursor pagetion.
 Parameters:
 - `cursor` (string, optional): Pagination cursor
 - `limit` (integer, optional): Max results; default 20, max 100

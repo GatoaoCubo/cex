@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
-quality: 8.9
+quality: 9.1
 tags: [blueprint, model-card, meta-template, production-mold, llm-spec]
 tldr: "Meta-template que define COMO gerar model_cards validos — frontmatter layered, capabilities como booleans, pricing normalizado, freshness 90d"
 when_to_use: "Antes de gerar qualquer model_card — este blueprint eh o molde"
@@ -64,7 +64,7 @@ author: "{{quem PRODUZIU}}"             # quem escreveu, NAO quem roteou
 # MODEL IDENTITY (6) — REQUIRED
 # Sources: Mitchell 2019 (model name, developers), HF (model_name, pipeline_tag),
 #          LiteLLM (litellm_provider, mode), Anthropic SDK (id, display_name, created_at)
-model_name: "{{id oficial do provider}}"         # ex: claude-opus-4-0520, gpt-4o-2024-08-06
+model_name: "{{id oficial do provider}}"         # ex: claude-opus-4-6520, gpt-4o-2024-08-06
 provider: "{{anthropic|openai|google|meta|mistral|cohere|deepseek|other}}"
 model_type: "{{text-generation|embedding|image-generation|audio|multimodal}}"  # HF pipeline_tag
 status: "{{active|deprecated|sunset}}"           # CEX-extension: lifecycle tracking (justified by 90d freshness)
@@ -280,7 +280,7 @@ version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
-model_name: claude-sonnet-4-20250514
+model_name: claude-sonnet-4-6
 provider: anthropic
 model_type: text-generation
 status: active
@@ -328,7 +328,7 @@ model_card NAO EH: boot_config, agent, benchmark.
 ## Specifications
 | Spec | Value | Source |
 |------|-------|--------|
-| Model | claude-sonnet-4-20250514 | Anthropic docs |
+| Model | claude-sonnet-4-6 | Anthropic docs |
 | Provider | Anthropic | — |
 | Context Window | 200K tokens | Anthropic docs |
 | Max Output | 16K tokens | Anthropic docs |

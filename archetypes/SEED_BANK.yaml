@@ -30,7 +30,7 @@ P01_rag_source:
 
 # ── P02 model ──
 P02_agent:
-  seeds: [identity, capabilities, constraints, tools, routing, fallback, boot, satellite, domain, architecture, when_to_use, input_output, integration, quality_gates, overview]
+  seeds: [identity, capabilities, constraints, tools, routing, fallback, boot, agent_group, domain, architecture, when_to_use, input_output, integration, quality_gates, overview]
   contexts: [creation, modification, audit, deployment]
 
 P02_boot_config:
@@ -58,7 +58,7 @@ P02_model_card:
   contexts: [selection, comparison, budgeting, migration]
 
 P02_router:
-  seeds: [routes, fallback, keywords, satellite, priority, confidence_threshold, load_balance, timeout, retry, escalation]
+  seeds: [routes, fallback, keywords, agent_group, priority, confidence_threshold, load_balance, timeout, retry, escalation]
   contexts: [dispatch, optimization, debugging, scaling]
 
 # ── P03 prompt ──
@@ -229,12 +229,12 @@ P10_axiom:
   seeds: [rule, rationale, scope, enforcement, immutable, examples, violations, history, priority, dependencies]
   contexts: [governance, onboarding, compliance, evolution]
 
-P10_brain_index:
+P10_knowledge_index:
   seeds: [index, algorithm, bm25, faiss, hybrid, rebuild_schedule, scope, filters, ranking, freshness]
   contexts: [setup, optimization, debugging, migration]
 
 P10_learning_record:
-  seeds: [topic, outcome, pattern, anti_pattern, score, context, timestamp, satellite, reproducibility, impact]
+  seeds: [topic, outcome, pattern, anti_pattern, score, context, timestamp, agent_group, reproducibility, impact]
   contexts: [retrospective, optimization, training, audit]
 
 P10_mental_model:
@@ -272,19 +272,19 @@ P12_dag:
   contexts: [pipeline_design, optimization, debugging, documentation]
 
 P12_dispatch_rule:
-  seeds: [scope, keywords, satellite, model, priority, confidence, fallback, conditions, load_balance, routing]
+  seeds: [scope, keywords, agent_group, model, priority, confidence, fallback, conditions, load_balance, routing]
   contexts: [routing, optimization, debugging, scaling]
 
 P12_handoff:
-  seeds: [task, context, commit, scope_fence, seeds, autonomy, quality_target, signal, satellite, dependencies]
+  seeds: [task, context, commit, scope_fence, seeds, autonomy, quality_target, signal, agent_group, dependencies]
   contexts: [dispatch, delegation, documentation, automation]
 
 P12_signal:
-  seeds: [event, satellite, status, score, timestamp, payload, routing, acknowledgment, expiry, priority]
+  seeds: [event, agent_group, status, score, timestamp, payload, routing, acknowledgment, expiry, priority]
   contexts: [coordination, monitoring, debugging, automation]
 
 P12_spawn_config:
-  seeds: [mode, satellite, model, flags, mcp_config, timeout, interactive, prompt, handoff, signal]
+  seeds: [mode, agent_group, model, flags, mcp_config, timeout, interactive, prompt, handoff, signal]
   contexts: [deployment, scaling, debugging, optimization]
 
 P12_workflow:

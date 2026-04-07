@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How db-connector-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Db Connector"
+version: "1.0.0"
+author: n03_builder
+tags: [db_connector, builder, examples]
+tldr: "Golden and anti-examples for db connector construction, demonstrating ideal structure and common pitfalls."
+domain: "db connector construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: db-connector-builder

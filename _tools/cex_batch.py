@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-cex_batch.py — Batch artifact production via 8F pipeline.
+cex_batch.py -- Batch artifact production via 8F pipeline.
 
 Reads intents from a file (one per line) or stdin, runs 8F for each.
 
@@ -133,7 +134,7 @@ def main():
     intents = intents[:args.max]
     mode = "DRY-RUN" if args.dry_run else "EXECUTE"
     print(f"\n{'='*60}")
-    print(f"  CEX BATCH RUNNER — {mode}")
+    print(f"  CEX BATCH RUNNER -- {mode}")
     print(f"  Intents: {len(intents)}")
     print(f"{'='*60}\n")
 
@@ -148,11 +149,11 @@ def main():
 
         if result["passed"]:
             passed += 1
-            print(f"  ✅ PASS ({result['elapsed_s']}s) → {result.get('path', 'N/A')}")
+            print(f"  [OK] PASS ({result['elapsed_s']}s) -> {result.get('path', 'N/A')}")
         else:
             failed += 1
             err = result.get("error", "gates failed")
-            print(f"  ❌ FAIL ({result['elapsed_s']}s) — {err}")
+            print(f"  [FAIL] FAIL ({result['elapsed_s']}s) -- {err}")
 
     # Summary
     print(f"\n{'='*60}")

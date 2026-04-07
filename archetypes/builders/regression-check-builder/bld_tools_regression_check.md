@@ -4,6 +4,16 @@ id: bld_tools_regression_check
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for regression_check production
+quality: 9.0
+title: "Tools Regression Check"
+version: "1.0.0"
+author: n03_builder
+tags: [regression_check, builder, examples]
+tldr: "Golden and anti-examples for regression check construction, demonstrating ideal structure and common pitfalls."
+domain: "regression check construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: regression-check-builder

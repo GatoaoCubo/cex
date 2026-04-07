@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.1
 tags: [cex, maturity, capability, diagnostic, lp-completeness]
 tldr: "7 niveis (L0-L6) medem maturidade de entidades LLM por completude de LPs — observacao diagnostica, NAO prescricao"
 when_to_use: "Diagnosticar por que uma entidade LLM falha ou avaliar sua maturidade atual"
@@ -38,7 +38,7 @@ Maturity Level mede a completude dos 12 LPs em uma entidade LLM, de L0 (prompt, 
 | L1 Chain | 2/12 | Sequenciar outputs | Composicao basica, sem memoria |
 | L2 Agent | 3-4/12 | Identidade + conhecimento | Entidade com papel e dados |
 | L3 Runtime | 6/12 | Processo dedicado | Tools, hooks, monitoramento |
-| L4 Satellite | 9/12 | Autonomia departamental | Memoria, evolucao, coordenacao |
+| L4 Agent_group | 9/12 | Autonomia departamental | Memoria, evolucao, coordenacao |
 | L5 System | 12/12 | Multi-agente coordenado | Todas 8 funcoes ativas |
 | L6 Ecosystem | 12/12+ | Auto-evolutivo | Gera novos tipos, LPs, funcoes |
 

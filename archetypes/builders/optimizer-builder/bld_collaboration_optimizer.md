@@ -5,6 +5,16 @@ pillar: P11
 llm_function: COLLABORATE
 purpose: How optimizer-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Optimizer"
+version: "1.0.0"
+author: n03_builder
+tags: [optimizer, builder, examples]
+tldr: "Golden and anti-examples for optimizer construction, demonstrating ideal structure and common pitfalls."
+domain: "optimizer construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: optimizer-builder

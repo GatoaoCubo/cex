@@ -1,10 +1,10 @@
 pillar: P01
 name: Knowledge
-description: O que o agente SABE
+description: What the agent KNOWS
 kinds:
   knowledge_card:
-    description: Fato atomico pesquisavel (densidade > 0.8)
-    boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+    description: Searchable atomic fact (density > 0.8)
+    boundary: Distilled, static, versioned knowledge. NOT an instruction, template, or configuration.
     layer: content
     core: true
     machine_format: yaml
@@ -38,12 +38,12 @@ kinds:
     body_structure:
       domain_kc:
       - quick_reference
-      - conceitos_chave
+      - key_concepts
       - strategy_phases
-      - regras_de_ouro
+      - golden_rules
       - visual_flow
-      - comparativo
-      - artefatos
+      - comparison
+      - artifacts
       meta_kc:
       - executive_summary
       - spec_table
@@ -62,20 +62,20 @@ kinds:
       - decision_tree
       - quality_criteria
     validation:
-    - content_hash nao vazio (auto SHA256)
+    - content_hash not empty (auto SHA256)
     - id == filename stem
-    - quality YAML +/- 1.0 do body
-    - tags = lista de strings (nunca lista-em-string)
-    - cada bullet max 80 chars
-    - secoes com < 3 linhas: expandir ou remover
+    - quality YAML +/- 1.0 of body
+    - tags = list of strings (never list-in-string)
+    - each bullet max 80 chars
+    - sections with < 3 lines: expand or remove
     llm_function: INJECT
     frontmatter_optional:
     - type
     - origin
     - feeds_kinds
   rag_source:
-    description: Fonte externa indexavel
-    boundary: Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas referencia com URL e freshness.
+    description: Indexable external source
+    boundary: Pointer to indexable external source. NOT the content itself, only reference with URL and freshness.
     layer: content
     core: false
     machine_format: yaml
@@ -90,8 +90,8 @@ kinds:
     - last_checked
     llm_function: INJECT
   glossary_entry:
-    description: Definicao de termo
-    boundary: Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo).
+    description: Term definition
+    boundary: Short domain term definition. NOT a knowledge_card (no min density) nor context_doc (no scope).
     layer: content
     core: false
     machine_format: yaml
@@ -106,9 +106,8 @@ kinds:
     - synonyms
     llm_function: INJECT
   context_doc:
-    description: Contexto de dominio
-    boundary: Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao
-      define termo).
+    description: Domain context document
+    boundary: Domain context for hydrating prompts. NOT a knowledge_card (no density gate) nor glossary_entry (does not define a term).
     layer: content
     core: false
     machine_format: yaml
@@ -122,8 +121,8 @@ kinds:
     - scope
     llm_function: INJECT
   embedding_config:
-    description: Configuracao de embedding model
-    boundary: Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura o indice, apenas o modelo vetorial.
+    description: Embedding model configuration
+    boundary: Embedding model configuration. NOT a knowledge_index (P10) which configures the index, only the vector model.
     layer: spec
     core: false
     machine_format: yaml
@@ -137,8 +136,8 @@ kinds:
     - chunk_size
     llm_function: GOVERN
   few_shot_example:
-    description: Exemplo input/output pra prompt
-    boundary: Par input/output para few-shot learning. NAO eh golden_test (P07) que avalia qualidade, apenas exemplifica formato.
+    description: Input/output example for prompt
+    boundary: Input/output pair for few-shot learning. NOT a golden_test (P07) which evaluates quality, only exemplifies format.
     layer: prompt
     core: true
     machine_format: yaml
@@ -153,8 +152,8 @@ kinds:
     - quality
     llm_function: INJECT
   chunk_strategy:
-    description: Estrategia de chunking
-    boundary: Metodo de split. NAO eh embedding_config.
+    description: Chunking strategy
+    boundary: Split method. NOT embedding_config.
     layer: runtime
     core: true
     machine_format: yaml
@@ -169,8 +168,8 @@ kinds:
     - chunk_overlap
     llm_function: CONSTRAIN
   retriever_config:
-    description: Config de retrieval (top_k, hybrid, reranker)
-    boundary: Parametros de busca. NAO eh embedding_config.
+    description: Retrieval config (top_k, hybrid, reranker)
+    boundary: Search parameters. NOT embedding_config.
     layer: runtime
     core: true
     machine_format: yaml
@@ -184,3 +183,23 @@ kinds:
     - top_k
     - search_type
     llm_function: CONSTRAIN
+  citation:
+    description: Structured source attribution with provenance, URL, date, and reliability metadata
+    boundary: Source reference with provenance. NAO eh knowledge_card (conteudo em si), rag_source (pipeline config), nem glossary_entry (definicao de termo).
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p01_cit_{{topic}}.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - source_type
+    - reliability_tier
+    - url
+    - date_accessed
+    - title
+    - excerpt
+    llm_function: INJECT

@@ -1,0 +1,406 @@
+id: spec_notebooklm_pipeline
+kind: constraint_spec
+pillar: P06
+title: Spec NotebookLM Pipeline — KC to Human Content via Browser Automation
+version: 1.0.0
+created: 2026-04-06
+author: n04_knowledge
+domain: notebooklm-pipeline
+quality_target: 9.0
+status: READY
+scope: N03_BUILD + N04_KNOWLEDGE
+depends_on:
+- HANDOFF_notebooklm_pipeline (PoC validated by N04)
+- spec_content_factory_v1 (parent spec)
+tags:
+- spec
+- notebooklm
+- pipeline
+- browser-automation
+- playwright
+- content-factory
+- flashcards
+- audio
+- quiz
+tldr: 'Formal spec for Fase 1 of the NotebookLM pipeline. Tool: cex_notebooklm.py (upload/studio/status/list). Config: notebooklm_notebooks.yaml
+  (domain→notebook mapping). Auth: Chrome profile reuse + session expiry detection. Integration: F8 hook + N04 auto-upload
+  + N02 downstream.'
+density_score: null
+1_architecture: ''
+data_flow: "                         CEX SYSTEM                          │  EXTERNAL (Google)\n                          \
+  \                                   │\n  KC .md file                                                │\n    │           \
+  \                                             │\n    ▼                                                        │\n  cex_notebooklm.py\
+  \ --upload <kc_path>                       │\n    │                                                        │\n    ├─ Reads\
+  \ KC content from disk                            │\n    ├─ Resolves domain from KC frontmatter (kind/domain)     │\n  \
+  \  ├─ Looks up notebook_id in notebooklm_notebooks.yaml     │\n    │   ├─ Found → reuse existing notebook              \
+  \     │\n    │   └─ Not found → create new notebook (Playwright)      │\n    ├─ Loads Google cookies from MCP browser state\
+  \            │\n    ├─ Launches Playwright (headless=false, Chrome)           │\n    │                                 \
+  \                       │\n    ▼                                                        │\n  Playwright Browser Session\
+  \ ──────────────────────────────► │ NotebookLM UI\n    │  1. Navigate to notebook URL                           │   (notebooklm.google.com)\n\
+  \    │  2. Click \"Adicionar fontes\"                           │\n    │  3. Click \"Texto copiado\"                   \
+  \           │\n    │  4. Fill title + paste KC content                      │\n    │  5. Click \"Inserir\"             \
+  \                       │\n    │  6. Wait for indexing (30s-5min)                       │\n    │                       \
+  \                                 │\n    ▼                                                        │\n  cex_notebooklm.py\
+  \ --studio <notebook_id>                   │\n    │                                                        │\n    ├─ Option\
+  \ A: Playwright clicks Estúdio outputs           │\n    │   └─ \"Cartões didáticos\", \"Resumo em áudio\", etc.     │\n\
+  \    ├─ Option B: claude --chrome spawns Chrome MCP           │\n    │   └─ Uses mcpclaude-in-chrome* (18 tools)       \
+  \  │\n    │                                                        │\n    ▼                                            \
+  \            │\n  NotebookLM Estúdio generates:                              │ Gemini processes\n    ├─ Flashcards (20-75\
+  \ cards)                              │   sources and\n    ├─ Audio Summary (5-30min podcast, 2 hosts)              │  \
+  \ generates outputs\n    └─ Quiz (10-20 questions)                                │\n         │                        \
+  \                           │\n         ▼                                                   │\n  Outputs available in NotebookLM\
+  \ UI                         │\n    │                                                        │\n    ▼                  \
+  \                                      │\n  cex_notebooklm.py --status <notebook_id>                   │\n    └─ Reports:\
+  \ sources indexed, outputs generated           │"
+component_map: '| Component | Type | Path | Status |
+
+  |-----------|------|------|--------|
+
+  | `cex_notebooklm.py` | Unified CLI tool | `_tools/cex_notebooklm.py` | TO BUILD (N03) |
+
+  | `notebooklm_notebooks.yaml` | Config registry | `.cex/config/notebooklm_notebooks.yaml` | TO BUILD (N04 draft) |
+
+  | `notebooklm_create.py` | Prototype (create notebook) | `_tools/notebooklm_create.py` | EXISTS (PoC) |
+
+  | `notebooklm_paste.py` | Prototype (paste into notebook) | `_tools/notebooklm_paste.py` | EXISTS (PoC) |
+
+  | NotebookLM MCP | 17 tools (query, list, search) | `.mcp-n04.json` | EXISTS (auth expires) |
+
+  | Chrome MCP | 18 tools (browser control) | via `claude --chrome` flag | EXISTS (requires spawn) |'
+key_constraint_no_public_api: 'NotebookLM has NO REST API. All automation is browser-based:
+
+  - Playwright for deterministic UI automation (create, paste, click)
+
+  - Chrome MCP (via `claude --chrome`) for AI-driven UI navigation
+
+  - NotebookLM MCP for read operations (list, search, ask_question)
+
+
+  This means: all write operations (upload sources, activate Estúdio) require a visible browser window.
+
+
+  ---'
+2_tool_spec_cex_notebooklm_py: ''
+overview: Unified CLI that consolidates the two prototypes (`notebooklm_create.py`, `notebooklm_paste.py`) into a single tool
+  with 4 subcommands.
+cli_interface: '# Upload a KC as source to a domain notebook
+
+  python _tools/cex_notebooklm.py --upload <kc_path> [--domain <domain>] [--notebook <id>]
+
+
+  # Activate Estúdio outputs for a notebook
+
+  python _tools/cex_notebooklm.py --studio <notebook_id> --outputs flashcards,audio_summary,quiz
+
+
+  # Check status of a notebook (sources, outputs, last sync)
+
+  python _tools/cex_notebooklm.py --status <notebook_id>
+
+
+  # List all tracked notebooks with domain mapping
+
+  python _tools/cex_notebooklm.py --list'
+subcommand_upload: "Input: Path to a KC `.md` file.\nBehavior:\n\n1. Read KC file, extract frontmatter (`domain`, `kind`,\
+  \ `title`).\n2. Resolve domain:\n   - If `--domain` provided → use it.\n   - Else → infer from KC's `domain` field or parent\
+  \ directory (e.g., `library/integration/` → `integration`).\n3. Look up `notebooklm_notebooks.yaml` for domain → notebook_id\
+  \ mapping.\n   - If mapping exists and notebook is reachable → paste KC as new source.\n   - If no mapping → create new\
+  \ notebook, save notebook_id to config.\n4. Load Google cookies from MCP browser state:\n   Path: %LOCALAPPDATA%\\notebooklm-mcp\\\
+  Data\\browser_state\\state.json\n5. Launch Playwright (headless=false):\n   - Navigate to notebook URL\n   - Click \"Adicionar\
+  \ fontes\" → \"Texto copiado\"\n   - Fill title from KC frontmatter `title`\n   - Paste KC content (up to 200K chars — NotebookLM\
+  \ limit is 500K words per source)\n   - Click \"Inserir\"\n   - Wait for indexing confirmation (poll for \"pronto\" / source\
+  \ count change)\n6. Update `notebooklm_notebooks.yaml`:\n   - `last_sync` timestamp\n   - Increment `source_count`\n   -\
+  \ Add KC path to `sources` list\n7. Return: `{ notebook_id, domain, source_title, status: \"indexed\" }`\n\nError handling:\n\
+  - Auth expired → print `[AUTH_EXPIRED] Run: python _tools/cex_notebooklm.py --reauth`\n- Playwright timeout → screenshot\
+  \ + retry once\n- Source limit reached (50) → warn, suggest new notebook"
+subcommand_studio: "Input: `notebook_id` + comma-separated output list.\nDefault outputs (from GDP D2): `flashcards,audio_summary,quiz`\n\
+  Behavior:\n\n1. Navigate to notebook.\n2. Locate \"Estúdio\" panel (right sidebar in NotebookLM UI).\n3. For each requested\
+  \ output:\n   - Click the output button (PT-BR labels):\n     - `flashcards` → \"Cartões didáticos\"\n     - `audio_summary`\
+  \ → \"Resumo em áudio\"\n     - `quiz` → \"Teste\"\n     - `mind_map` → \"Mapa mental\"\n     - `briefing` → \"Documento\
+  \ de resumo\"\n     - `timeline` → \"Linha do tempo\"\n     - `faq` → \"Perguntas frequentes\"\n   - Wait for generation\
+  \ (varies: flashcards ~30s, audio ~5min)\n4. Publish mode (from GDP D3): auto-publish — no manual approval step.\n5. Update\
+  \ config: `outputs_generated` list + timestamp.\n6. Return: `{ notebook_id, outputs: [{type, status, count_or_duration}]\
+  \ }`\n\nImplementation note: For audio_summary, generation can take 2-10 minutes. The tool should poll every 30s with a\
+  \ 15-minute timeout."
+subcommand_status: "Input: `notebook_id`\nBehavior:\n\n1. Query via NotebookLM MCP: `get_notebook` → source count, name.\n\
+  2. Read local config for: last_sync, sources uploaded, outputs generated.\n3. Return combined status:\n   notebook_id: 940fd258-...\n\
+  \   domain: meta\n   name: \"CEX Meta Knowledge\"\n   sources: 5\n   last_sync: 2026-04-06T18:00:00\n   outputs:\n     flashcards:\
+  \ generated (75 cards)\n     audio_summary: generated (12min)\n     quiz: pending"
+subcommand_list: 'Behavior: Read `notebooklm_notebooks.yaml`, format as table.
+
+
+  DOMAIN          NOTEBOOK_ID                              SOURCES  LAST_SYNC
+
+  meta            940fd258-847f-47c1-b7e6-caca7b730681     2        2026-04-06
+
+  brand           (not created)                            0        —
+
+  integration     (not created)                            0        —
+
+  kind            (not created)                            0        —'
+subcommand_reauth: 'Behavior: Re-authenticate Google session.
+
+
+  1. Launch Playwright with visible Chrome.
+
+  2. Navigate to `accounts.google.com`.
+
+  3. Wait for user to complete login (poll for cookie presence, 120s timeout).
+
+  4. Save cookies to MCP state file.
+
+  5. Alternatively: call NotebookLM MCP `setup_auth` or `re_auth` tool.'
+dependencies: 'playwright          # Browser automation (pip install playwright && playwright install chromium)
+
+  pyyaml              # Config read/write
+
+  pathlib, json       # Standard lib'
+code_structure_for_n03: "# _tools/cex_notebooklm.py\n\nimport argparse, json, time, yaml\nfrom pathlib import Path\nfrom datetime\
+  \ import datetime, timezone\n\nCONFIG_PATH = Path(\".cex/config/notebooklm_notebooks.yaml\")\nSTATE_FILE = Path(os.environ.get(\"\
+  LOCALAPPDATA\", \"\")) / \"notebooklm-mcp/Data/browser_state/state.json\"\nNOTEBOOKLM_BASE = \"https://notebooklm.google.com\"\
+  \n\n# --- Cookie Management ---\ndef load_cookies() -> list[dict]: ...\ndef check_auth(cookies: list) -> bool: ...\n\n#\
+  \ --- Config Management ---\ndef load_config() -> dict: ...\ndef save_config(config: dict): ...\ndef resolve_domain(kc_path:\
+  \ Path, explicit: str | None) -> str: ...\ndef get_notebook_id(domain: str) -> str | None: ...\n\n# --- Playwright Actions\
+  \ ---\ndef create_notebook(name: str, cookies: list) -> str: ...  # returns notebook_id\ndef paste_source(notebook_id: str,\
+  \ title: str, content: str, cookies: list) -> bool: ...\ndef activate_studio(notebook_id: str, outputs: list[str], cookies:\
+  \ list) -> list[dict]: ...\n\n# --- Subcommands ---\ndef cmd_upload(args): ...\ndef cmd_studio(args): ...\ndef cmd_status(args):\
+  \ ...\ndef cmd_list(args): ...\ndef cmd_reauth(args): ...\n\n# --- UI Selectors (PT-BR) ---\nSELECTORS = {\n    \"add_source\"\
+  : ['button:has-text(\"Adicionar fontes\")', '[aria-label*=\"Adicionar\"]'],\n    \"copied_text\": [':text(\"Texto copiado\"\
+  )', 'button:has-text(\"Texto copiado\")'],\n    \"title_input\": ['input[placeholder*=\"título\"]', 'input[type=\"text\"\
+  ]'],\n    \"content_area\": ['textarea[aria-label=\"Texto colado\"]', '.cdk-overlay-pane textarea'],\n    \"insert_btn\"\
+  : ['.cdk-overlay-pane button:has-text(\"Inserir\")', 'button:has-text(\"Inserir\")'],\n    \"studio_flashcards\": [':text(\"\
+  Cartões didáticos\")'],\n    \"studio_audio\": [':text(\"Resumo em áudio\")'],\n    \"studio_quiz\": [':text(\"Teste\")'],\n\
+  }\n\nif name == \"main\":\n    parser = argparse.ArgumentParser(description=\"CEX NotebookLM Pipeline Tool\")\n    # ...\
+  \ argparse setup ...\n    main()"
+selector_strategy: 'NotebookLM UI is Angular Material (PT-BR locale). Selectors must:
+
+  1. Try PT-BR labels first, EN fallback.
+
+  2. Use `force=True` on clicks to bypass Material overlay (`cdk-overlay-pane`).
+
+  3. Target `aria-label` when text selectors fail.
+
+  4. Fall back to JavaScript injection for Angular `formcontrolname` elements.
+
+
+  Known selectors (validated in PoC):
+
+
+  | Element | Primary Selector | Fallback |
+
+  |---------|-----------------|----------|
+
+  | Add sources button | `button:has-text("Adicionar fontes")` | `[aria-label*="Adicionar"]` |
+
+  | Copied text option | `:text("Texto copiado")` | `:text("Copied text")` |
+
+  | Title input | `input[placeholder*="título"]` | `mat-dialog-container input` |
+
+  | Content textarea | `textarea[aria-label="Texto colado"]` | `.cdk-overlay-pane textarea` |
+
+  | Insert button | `.cdk-overlay-pane button:has-text("Inserir")` | `button:has-text("Insert")` |
+
+  | Estúdio panel | `:text("Estúdio")` | `[aria-label*="Studio"]` |
+
+
+  ---'
+3_config_spec_notebooklm_notebooks_yaml: ''
+schema: "# .cex/config/notebooklm_notebooks.yaml\n# Domain → NotebookLM notebook mapping\n# GDP D1: 1 notebook per DOMAIN\
+  \ (reusable, not per-mission)\n\nversion: 1\ngoogle_account: financeiro@gatoaocubo3.com   # GDP D5\npublish_mode: auto \
+  \                           # GDP D3\nbrowser_engine: chrome_local                  # GDP D4\ndefault_outputs:         \
+  \                     # GDP D2\n  - flashcards\n  - audio_summary\n  - quiz\n\ncookie_source: \"%LOCALAPPDATA%\\\\notebooklm-mcp\\\
+  \\Data\\\\browser_state\\\\state.json\"\n\ndomains:\n  meta:\n    notebook_id: \"940fd258-847f-47c1-b7e6-caca7b730681\"\n\
+  \    name: \"CEX Meta Knowledge\"\n    description: \"8F pipeline, architecture, nuclei, pillars, system design\"\n    sources:\n\
+  \      - path: \"P01_knowledge/library/domain/meta/kc_8f_pipeline.md\"\n        uploaded: 2026-04-06\n    source_count:\
+  \ 2\n    outputs_generated:\n      - type: flashcards\n        count: 75\n        generated: 2026-04-06\n    last_sync:\
+  \ 2026-04-06T17:00:00-03:00\n    status: active\n\n  brand:\n    notebook_id: null  # to be created on first upload\n  \
+  \  name: \"Brand Knowledge\"\n    description: \"Brand identity, voice, visual guidelines, positioning\"\n    sources: []\n\
+  \    source_count: 0\n    outputs_generated: []\n    last_sync: null\n    status: pending\n\n  integration:\n    notebook_id:\
+  \ null\n    name: \"Integration Knowledge\"\n    description: \"External tool integrations: Canva, ElevenLabs, YouTube,\
+  \ etc.\"\n    sources: []\n    source_count: 0\n    outputs_generated: []\n    last_sync: null\n    status: pending\n\n\
+  \  kind:\n    notebook_id: null\n    name: \"Kind Reference\"\n    description: \"115 kind KCs — type system, builders,\
+  \ schemas\"\n    sources: []\n    source_count: 0\n    outputs_generated: []\n    last_sync: null\n    status: pending\n\
+  \n  operations:\n    notebook_id: null\n    name: \"Operations Knowledge\"\n    description: \"DevOps, CI/CD, testing, deployment\
+  \ patterns\"\n    sources: []\n    source_count: 0\n    outputs_generated: []\n    last_sync: null\n    status: pending\n\
+  \n  commercial:\n    notebook_id: null\n    name: \"Commercial Knowledge\"\n    description: \"Pricing, monetization, funnels,\
+  \ courses\"\n    sources: []\n    source_count: 0\n    outputs_generated: []\n    last_sync: null\n    status: pending"
+validation_rules: '| Field | Type | Required | Constraint |
+
+  |-------|------|----------|------------|
+
+  | `version` | int | yes | Must be 1 |
+
+  | `google_account` | string | yes | Valid email |
+
+  | `publish_mode` | enum | yes | `auto` or `manual` |
+
+  | `browser_engine` | enum | yes | `chrome_local` or `firecrawl_cloud` |
+
+  | `default_outputs` | list[str] | yes | Subset of: flashcards, audio_summary, quiz, mind_map, briefing, timeline, faq, infographic,
+  presentation, video, data_table |
+
+  | `domains.*.notebook_id` | string/null | yes | UUID or null |
+
+  | `domains.*.sources` | list | yes | Each: {path, uploaded} |
+
+  | `domains.*.source_count` | int | yes | <= 50 (NotebookLM limit) |
+
+
+  ---'
+4_integration_points: ''
+4_1_f8_collaborate_hook: "After any KC is committed in F8, optionally publish to NotebookLM:\n\n# In cex_hooks.py post_save\
+  \ hook (or as standalone post-commit hook)\n\ndef post_save_notebooklm(artifact_path: Path):\n    \"\"\"Called after F8\
+  \ saves a KC. Publishes to NotebookLM if configured.\"\"\"\n    import yaml\n\n    # Only trigger for knowledge_cards\n\
+  \    with open(artifact_path) as f:\n        content = f.read()\n    if \"kind: knowledge_card\" not in content[:500]:\n\
+  \        return\n\n    # Check if auto-publish is enabled\n    config = yaml.safe_load(open(\".cex/config/notebooklm_notebooks.yaml\"\
+  ))\n    if config.get(\"publish_mode\") != \"auto\":\n        return\n\n    # Upload\n    import subprocess\n    result\
+  \ = subprocess.run(\n        [\"python\", \"_tools/cex_notebooklm.py\", \"--upload\", str(artifact_path)],\n        capture_output=True,\
+  \ text=True, timeout=120\n    )\n    if result.returncode == 0:\n        print(f\"[NotebookLM] Uploaded: {artifact_path.name}\"\
+  )\n    else:\n        print(f\"[NotebookLM] Upload failed: {result.stderr[:200]}\")\n\nWhen it fires: Every time a KC passes\
+  \ F7 governance and is saved in F8.\nGuard: Only fires if `publish_mode: auto` in config. Only for `kind: knowledge_card`."
+4_2_n04_workflow_kc_save_auto_upload: "When N04 produces or updates a KC during a mission:\n\nN04 builds KC via 8F\n    →\
+  \ F8 COLLABORATE: save .md, compile .yaml, git commit\n    → F8 Hook: cex_notebooklm.py --upload <path>\n        → KC is\
+  \ pasted into domain notebook\n        → Config updated with new source\n    → Signal: n04 complete\n\nThis means every\
+  \ KC N04 produces is automatically available in NotebookLM within seconds of being committed."
+4_3_n02_downstream_generated_content_social_publishing: "After Estúdio generates outputs:\n\nN04: --studio activates flashcards\
+  \ + audio + quiz\n    │\n    ▼\nN02 Marketing can consume:\n    ├─ Audio Overview → edit with FFmpeg → publish as podcast\
+  \ (Spotify, YouTube)\n    ├─ Flashcards → extract text → social carousel (Canva API)\n    ├─ Quiz → embed in course module\
+  \ (Hotmart via N06)\n    └─ Briefing Doc → email newsletter content\n\nHandoff format: N04 signals completion with notebook_id\
+  \ + outputs list. N02/N06 read the config to find what was generated."
+4_4_mission_integration: "In a Content Factory mission (`dag_cf_master`):\n\nWave 3 PRODUCE:\n    N03 (parallel): Canva, Marp,\
+  \ Typst, ElevenLabs, FFmpeg\n    N04 (parallel): NotebookLM upload + Estúdio activation\n        ├─ Upload all KCs from\
+  \ Wave 1 research\n        ├─ Activate: flashcards + audio_summary + quiz (D2 defaults)\n        └─ Signal with output manifest\n\
+  \nN04's NotebookLM work runs in parallel with N03's tool-based production. No dependency between them — both read from the\
+  \ same KC sources.\n\n---"
+5_auth_management: ''
+5_1_cookie_architecture: "Google Account (financeiro@gatoaocubo3.com)\n    │\n    ▼\nNotebookLM MCP Server (Puppeteer-based)\n\
+  \    │ Logs in via browser, saves cookies\n    ▼\n%LOCALAPPDATA%\\notebooklm-mcp\\Data\\browser_state\\state.json\n    │\
+  \ Contains: cookies[], localStorage, sessionStorage\n    ▼\ncex_notebooklm.py reads cookies from state.json\n    │ Injects\
+  \ into Playwright browser context\n    ▼\nPlaywright operates NotebookLM UI as authenticated user"
+5_2_session_expiry_detection: "Google session cookies expire after ~14 days of inactivity. Detection:\n\ndef check_auth_valid(cookies:\
+  \ list) -> bool:\n    \"\"\"Check if cookies are likely still valid.\"\"\"\n    # 1. Check for essential cookies\n    essential\
+  \ = {\"SID\", \"HSID\", \"SSID\", \"APISID\", \"SAPISID\"}\n    present = {c[\"name\"] for c in cookies}\n    if not essential.issubset(present):\n\
+  \        return False\n\n    # 2. Check expiry timestamps\n    import time\n    now = time.time()\n    for c in cookies:\n\
+  \        if c[\"name\"] in essential:\n            if c.get(\"expires\", 0) > 0 and c[\"expires\"] < now:\n            \
+  \    return False\n\n    return True"
+5_3_re_authentication_flow: "When auth expires:\n\n[AUTH_EXPIRED] detected\n    │\n    ├─ Option 1 (preferred): NotebookLM\
+  \ MCP re_auth\n    │   Tool: mcpnotebooklmre_auth or mcpnotebooklmsetup_auth\n    │   Spawns Puppeteer browser → user logs\
+  \ in → cookies saved\n    │\n    ├─ Option 2: Playwright re-auth\n    │   python _tools/cex_notebooklm.py --reauth\n   \
+  \ │   Launches visible Chromium → navigates to accounts.google.com\n    │   Waits for user to complete login (120s timeout)\n\
+  \    │   Saves cookies to state.json\n    │\n    └─ Option 3 (fallback): Manual paste\n        User manually opens NotebookLM\
+  \ → pastes KC content\n        Only for emergency — bypasses automation entirely"
+5_4_chrome_profile_isolation: 'Problem: Playwright and system Chrome cannot share the same profile simultaneously (lock file
+  conflict). Solution: Playwright uses its own Chromium instance with injected cookies (not a shared Chrome profile). Cookies
+  are extracted from the MCP server''s `state.json`, which is updated independently. Consequence: If the user logs out of
+  their system Chrome, MCP cookies may still be valid (and vice versa). The two sessions are independent.'
+5_5_security_notes: '- Cookies are stored locally in `%LOCALAPPDATA%` (user-scoped, not world-readable).
+
+  - Google account `financeiro@gatoaocubo3.com` is a dedicated automation account (not personal).
+
+  - The `--dangerously-skip-permissions` flag is only needed when spawning Chrome MCP clones, not for Playwright uploads.
+
+  - No credentials are stored in the CEX repository. Cookie state is machine-local.
+
+
+  ---'
+6_domain_notebook_mapping_initial_draft: 'Based on existing KC library structure (`P01_knowledge/library/`):
+
+
+  | Domain | Notebook Name | KC Source Directories | Est. Sources |
+
+  |--------|--------------|----------------------|-------------|
+
+  | `meta` | CEX Meta Knowledge | `library/domain/meta/` | ~10 KCs |
+
+  | `brand` | Brand Knowledge | `library/domain/brand/` | ~5 KCs |
+
+  | `integration` | Integration Knowledge | `library/integration/` | ~10 KCs (Canva, ElevenLabs, YouTube, etc.) |
+
+  | `kind` | Kind Reference | `library/kind/` | ~115 KCs (one per kind) |
+
+  | `operations` | Operations Knowledge | `library/domain/operations/` | ~5 KCs |
+
+  | `commercial` | Commercial Knowledge | `library/domain/commercial/` | ~5 KCs |
+
+
+  Note on `kind` domain: 115 KCs exceeds the 50-source limit per notebook. Strategy:
+
+  - Split into sub-notebooks: `kind-p01` (P01 kinds), `kind-p02` (P02 kinds), etc.
+
+  - Or: upload only the most-used kinds first, expand as needed.
+
+  - Decision deferred to N03 implementation — the config schema supports dynamic notebook creation.
+
+
+  ---'
+7_risks_and_mitigations: '| Risk | Impact | Mitigation |
+
+  |------|--------|------------|
+
+  | Google changes NotebookLM UI selectors | Upload/Studio breaks | Selector strategy with multiple fallbacks + screenshot-on-failure
+  for debug |
+
+  | Auth expires mid-mission | Pipeline halts | Pre-flight auth check in every subcommand + `--reauth` subcommand |
+
+  | Source limit (50) reached | Cannot add more KCs | Warn at 45 sources, auto-create spillover notebook |
+
+  | Estúdio generation slow (audio: 2-10 min) | Mission wave timeout | Async polling with 15-min timeout, configurable |
+
+  | Playwright not installed on target machine | Tool fails on first run | Clear error message + install instructions |
+
+  | NotebookLM launches public API | This spec becomes partially obsolete | Abstract browser actions behind interface — swap
+  to REST when available |
+
+
+  ---'
+8_implementation_plan_for_n03_wave_2: ''
+phase_1_core_tool_priority_high: '| # | Task | Complexity | Depends On |
+
+  |---|------|-----------|------------|
+
+  | 1 | Consolidate prototypes into `cex_notebooklm.py` | Medium | Prototypes exist |
+
+  | 2 | Implement `--upload` with domain resolution | Medium | Config schema |
+
+  | 3 | Implement `--studio` with default outputs | Medium | Upload working |
+
+  | 4 | Implement `--status` (MCP + local config) | Low | Config schema |
+
+  | 5 | Implement `--list` (config reader) | Low | Config schema |
+
+  | 6 | Implement `--reauth` | Low | Cookie path known |
+
+  | 7 | Create `notebooklm_notebooks.yaml` with `meta` domain populated | Low | This spec |'
+phase_2_integration_hooks: '| # | Task | Complexity |
+
+  |---|------|-----------|
+
+  | 8 | Add F8 post-save hook for auto-upload | Low |
+
+  | 9 | Add pre-flight auth check to all subcommands | Low |
+
+  | 10 | Integration test: upload KC → verify in NotebookLM MCP list | Medium |'
+phase_3_resilience: '| # | Task | Complexity |
+
+  |---|------|-----------|
+
+  | 11 | Screenshot-on-failure debugging | Low |
+
+  | 12 | Retry logic (1 retry on timeout) | Low |
+
+  | 13 | Source count guard (warn at 45, block at 50) | Low |
+
+
+  Estimated N03 effort: 8-12 tasks, all within existing kind/tool scope.
+
+
+  ---'
+done_when:
+- '[ ] `cex_notebooklm.py` exists with 5 subcommands (upload, studio, status, list, reauth)'
+- '[ ] `notebooklm_notebooks.yaml` exists with 6 domains mapped'
+- '[ ] `--upload` successfully pastes a KC into `meta` notebook'
+- '[ ] `--studio` activates flashcards + audio + quiz'
+- '[ ] `--status` returns combined MCP + local config data'
+- '[ ] F8 hook auto-uploads KCs when `publish_mode: auto`'
+- '[ ] Auth expiry detected and re-auth flow works'
+- '[ ] `python _tools/cex_doctor.py` still passes'

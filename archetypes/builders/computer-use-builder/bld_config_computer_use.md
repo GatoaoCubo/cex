@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Computer Use"
+version: "1.0.0"
+author: n03_builder
+tags: [computer_use, builder, examples]
+tldr: "Golden and anti-examples for computer use construction, demonstrating ideal structure and common pitfalls."
+domain: "computer use construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: computer_use Production Rules
 ## Naming Convention

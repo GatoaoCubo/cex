@@ -5,6 +5,16 @@ pillar: P11
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for reward_signal
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Reward Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [reward_signal, builder, examples]
+tldr: "Golden and anti-examples for reward signal construction, demonstrating ideal structure and common pitfalls."
+domain: "reward signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: reward_signal

@@ -5,6 +5,16 @@ pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for memory_scope production
 sources: CrewAI memory architecture, Mem0 long-term memory, Mastra agent memory, conversation memory patterns, episodic vs semantic memory research
+quality: 9.0
+title: "Knowledge Card Memory Scope"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_scope, builder, examples]
+tldr: "Golden and anti-examples for memory scope construction, demonstrating ideal structure and common pitfalls."
+domain: "memory scope construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: memory_scope
@@ -34,7 +44,7 @@ Memory scope config — which memory types an agent uses, backends, TTL, and iso
 | No eviction policy | Full memory store silently drops new entries or crashes |
 ## Application
 1. Identify the use case and constraints
-2. Select appropriate pattern from the table above
+2. Select apownte pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 2048 bytes

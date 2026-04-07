@@ -1,0 +1,111 @@
+id: p12_dag_cf_video
+kind: dag
+lp: P12
+version: 1.0.0
+created: '2026-04-06'
+updated: '2026-04-06'
+author: n01_intelligence
+pipeline: content_factory_video
+nodes: '| ID | Label | Agent | Type |
+
+  |----|-------|-------|------|
+
+  | receive_longform | Receive longform draft + brand context | n07_orchestrator | input |
+
+  | extract_script | Extract video script (hook, body, CTA) | n02_marketing | compute |
+
+  | segment_scenes | Break script into timed scenes with directions | n03_builder | compute |
+
+  | generate_voiceover | TTS conversion (ElevenLabs/OpenAI) | n05_operations | compute |
+
+  | generate_visuals | AI image/clip generation (Midjourney/Runway/Sora) | n03_builder | compute |
+
+  | generate_music | Background music selection/generation | n03_builder | compute |
+
+  | assemble_video | FFmpeg composite: visuals+voice+music+overlays | n05_operations | compute |
+
+  | add_branding | Logo watermark, intro/outro, color grading | n06_brand | transform |
+
+  | render_variants | Render 16:9, 9:16, 1:1 format variants | n05_operations | compute |
+
+  | quality_check | Validate against cs_cf_video constraints | n04_knowledge | gate |
+
+  | export | Export to CDN staging, return paths | n05_operations | output |'
+edges: '| From | To | Type |
+
+  |------|----|------|
+
+  | receive_longform | extract_script | data |
+
+  | extract_script | segment_scenes | data |
+
+  | segment_scenes | generate_voiceover | data |
+
+  | segment_scenes | generate_visuals | data |
+
+  | segment_scenes | generate_music | data |
+
+  | generate_voiceover | assemble_video | data |
+
+  | generate_visuals | assemble_video | data |
+
+  | generate_music | assemble_video | data |
+
+  | assemble_video | add_branding | data |
+
+  | add_branding | render_variants | data |
+
+  | render_variants | quality_check | control |
+
+  | quality_check | export | control |'
+domain: orchestration
+quality: null
+tags:
+- dag
+- content-factory
+- video-pipeline
+- tts
+- ffmpeg
+- multi-format
+tldr: '11-node video DAG: longform→script→scenes→parallel(TTS+visuals+music)→assemble→brand→render variants→export'
+execution_order:
+- - receive_longform
+- - extract_script
+- - segment_scenes
+- - generate_voiceover
+  - generate_visuals
+  - generate_music
+- - assemble_video
+- - add_branding
+- - render_variants
+- - quality_check
+- - export
+parallel_groups:
+- 'Wave 1: receive_longform'
+- 'Wave 2: extract_script'
+- 'Wave 3: segment_scenes'
+- 'Wave 4: generate_voiceover, generate_visuals, generate_music (max parallelism = 3)'
+- 'Wave 5: assemble_video (join barrier — waits for all 3)'
+- 'Wave 6: add_branding'
+- 'Wave 7: render_variants'
+- 'Wave 8: quality_check'
+- 'Wave 9: export'
+critical_path: receive_longform (1min) → extract_script (8min) → segment_scenes (5min) → generate_visuals (12min) → assemble_video
+  (8min) → add_branding (3min) → render_variants (5min) → quality_check (2min) → export (1min) = 45min
+estimated_duration: 45min
+node_count: 11
+edge_count: 12
+max_parallelism: 3
+keywords:
+- video
+- tts
+- ffmpeg
+- rendering
+- content-factory
+linked_artifacts:
+  primary: P12_orchestration/dags/content_factory/dag_cf_master.md
+  related:
+  - P03_prompt/constraints/content_factory/cs_cf_video.md
+density_score: 1.0
+topological_order: receive_longform → extract_script → segment_scenes → generate_voiceover → generate_visuals → generate_music
+  → assemble_video → add_branding → render_variants → quality_check → export

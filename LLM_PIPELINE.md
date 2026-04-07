@@ -6,7 +6,7 @@
 
 ## O Que Eh Isso
 
-TODO sistema LLM — de um prompt simples a um satellite completo —
+TODO sistema LLM — de um prompt simples a um agent_group completo —
 executa as mesmas 8 funcoes na mesma ordem. A diferenca entre um
 prompt e um agente nao eh de natureza. Eh de COMPLETUDE.
 
@@ -68,7 +68,7 @@ OUTPUT
 | Prompt + RAG | 1-3 (+ INJECT) | Perplexity |
 | Agente | 4-5 (+ REASON + CALL) | CrewAI agent |
 | Agente + QA | 6-7 (+ CONSTRAIN + GOVERN) | Agente com evals |
-| Satellite completo | 8/8 (pipeline full) | CEX satellite |
+| Agent_group completo | 8/8 (pipeline full) | CEX agent_group |
 
 ---
 

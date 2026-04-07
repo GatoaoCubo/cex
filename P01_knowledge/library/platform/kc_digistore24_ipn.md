@@ -6,10 +6,15 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: webhook_integration
-quality: 8.9
+quality: 9.1
 tldr: "Digistore24 IPN — form-encoded webhook system with sha512 verification, mandatory 'OK' response, event types, and handler implementation."
 tags: [digistore24, ipn, webhook, sha512, form-encoded, payment-notification]
-density_score: 0.92
+density_score: 1.0
+when_to_use: "Apply when digistore24 ipn — form-encoded webhook system with sha512 verification, mandatory 'ok' response, ..."
+keywords: [on-rebill-resumed, knowledge-card, on-payment-missed, webhooks, on-chargeback]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Digistore24 IPN (Instant Payment Notification)
@@ -250,3 +255,10 @@ async def ds24_ipn(request: Request):
 4. **Respond first, process later** — async processing prevents timeouts.
 5. **Compound idempotency** — `(order_id, event)` because one order has multiple lifecycle events.
 6. **Test before live** — use DS24 test IPN button; verify signature + "OK" response + event logging.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

@@ -7,10 +7,20 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: brand-identity
-quality: 8.8
+quality: 9.0
+updated: 2026-04-07
 tags: [brand, brand-book, brand-guidelines, brand-identity, frameworks, brand-architecture]
 tldr: "Frameworks universais para construir brand books profissionais: anatomia, modelos 32-blocos, Keller, Aaker, Unilever Brand Key, scoring e exemplos world-class."
-density_score: null
+when_to_use: "When generating a brand book, auditing brand guidelines structure, or comparing brand book frameworks."
+keywords: [brand-book, brand-guidelines, 32-block, keller-pyramid, aaker-model, brand-anatomy]
+density_score: 0.94
+axioms:
+  - "ALWAYS build brand core (values, mission, positioning) BEFORE visual identity."
+  - "NEVER ship a brand book without voice Do/Don't examples — rules without examples are ignored."
+  - "ALWAYS include a 'never do' section with visual examples for logo and color."
+linked_artifacts:
+  primary: n06_output_brand_book
+  related: [n06_schema_brand_book, p03_brand_book_generator, p01_kc_brand_archetypes, p01_kc_brand_voice_systems]
 ---
 
 # Brand Book Patterns — Frameworks Universais

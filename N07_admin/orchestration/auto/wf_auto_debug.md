@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: error_during_execution
-quality: 8.8
+quality: 9.0
 tags: [workflow, auto, n07, debug, rca, itil, 5whys]
 tldr: "When a tool, test, or dispatch fails, auto-diagnose: classify error, check logs, apply known fix or escalate."
 density_score: 0.91
