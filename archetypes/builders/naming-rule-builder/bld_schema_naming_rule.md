@@ -23,7 +23,7 @@ Examples of invalid IDs: `p05_nr_KnowledgeCard` (uppercase), `p05_nr_-signal` (h
 | version | string | yes | Semver: `{major}.{minor}.{patch}` |
 | created | string | yes | ISO date: `"YYYY-MM-DD"` |
 | updated | string | yes | ISO date: `"YYYY-MM-DD"`, >= created |
-| author | string | yes | Satellite ID or human handle |
+| author | string | yes | Agent_group ID or human handle |
 | scope | string | yes | One sentence, max 120 chars, describes what is named |
 | pattern | string | yes | Valid regex, must match all valid examples |
 | prefix | string | yes | Fixed prefix string; may be empty string `""` if none |

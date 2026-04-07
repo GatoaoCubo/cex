@@ -11,7 +11,7 @@ quality: 9.5
 tags: [shokunin, pool, quality-gate, feedback]
 tldr: "Tiered quality gate for organization pool admission: >= 9.5 golden, >= 8.0 pool, >= 7.0 experimental, < 7.0 rejected"
 density_score: 0.93
-source: organization-core/CLAUDE.md + records/agent_nodes/edison/mental_model.yaml
+source: organization-core/CLAUDE.md + records/agent_groups/edison/mental_model.yaml
 ---
 
 # Gate: Shokunin Pool Admission
@@ -29,7 +29,7 @@ source: organization-core/CLAUDE.md + records/agent_nodes/edison/mental_model.ya
 
 | Result | Action | Escalation |
 |--------|--------|------------|
-| >= 9.5 (Golden) | Pool + `archetypes/golden/` + celebrate | Propagate pattern to other agent_nodes |
+| >= 9.5 (Golden) | Pool + `archetypes/golden/` + celebrate | Propagate pattern to other agent_groups |
 | >= 8.0 (Skilled) | Pool + `remember()` learning record | None |
 | >= 7.0 (Learning) | Experimental only | Flag for improvement |
 | < 7.0 (Rejected) | Redo from scratch | Block merge, notify author |

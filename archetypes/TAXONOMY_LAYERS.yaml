@@ -54,7 +54,7 @@ layers:
     count: 32
     kinds:
       - agent               # P02 — entidade executora (persona + capabilities)
-      - router              # P02 — regra de roteamento (task→satellite)
+      - router              # P02 — regra de roteamento (task→agent_group)
       - fallback_chain      # P02 — sequencia de fallback (model A→B→C)
       - skill               # P04 — habilidade reutilizavel (phases + trigger)
       - mcp_server          # P04 — servidor MCP (tools + resources)
@@ -79,7 +79,7 @@ layers:
       - spawn_config        # P12 — configuracao de spawn (solo, grid, continuous)
       - signal              # P12 — sinal entre agentes (complete, error, progress)
       - handoff             # P12 — instrucao de handoff (task + context + commit)
-      - dispatch_rule       # P12 — regra de despacho (keyword→satellite)
+      - dispatch_rule       # P12 — regra de despacho (keyword→agent_group)
       - bugloop             # P11 — ciclo de correcao automatica
       - optimizer           # P11 — otimizador de processo (metric→action)
       - memory_scope        # P10 — configuracao de escopo de memoria por builder

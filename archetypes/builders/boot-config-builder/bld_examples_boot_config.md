@@ -23,7 +23,7 @@ provider: "claude_code"
 identity:
   name: "Research Agent"
   role: "Deep web research and knowledge extraction"
-  agent_node: "agnostic"
+  agent_group: "agnostic"
 constraints:
   max_tokens: 16384
   context_window: 200000
@@ -54,7 +54,7 @@ Supports MCP servers, 200K context window, file system access.
 ## Identity Block
 Name: Research Agent
 Role: Deep web research and knowledge extraction
-Satellite: agnostic (cross-agent_node utility)
+Agent_group: agnostic (cross-agent_group utility)
 ## Constraints
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|

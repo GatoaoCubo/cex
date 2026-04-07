@@ -28,7 +28,7 @@ data_source: null
 
 ## Summary
 
-O principio fractal do CEX estabelece que a mesma estrutura de 12 LPs se repete em toda escala: prompt, chain, agente, runtime, satelite e sistema. A diferenca entre um prompt simples e um sistema multi-agente nao eh de tipo — eh de completude. Um prompt preenche 1/12 LPs. Um agente, 3-4/12. Um sistema, 12/12. Voce aprende UMA estrutura e escala gradualmente.
+O principio fractal do CEX estabelece que a mesma estrutura de 12 LPs se repete em toda escala: prompt, chain, agente, runtime, agent_group e sistema. A diferenca entre um prompt simples e um sistema multi-agente nao eh de tipo — eh de completude. Um prompt preenche 1/12 LPs. Um agente, 3-4/12. Um sistema, 12/12. Voce aprende UMA estrutura e escala gradualmente.
 
 ## Spec
 
@@ -38,12 +38,12 @@ O principio fractal do CEX estabelece que a mesma estrutura de 12 LPs se repete 
 | L1 Chain | 2/12 (P03,P12) | PRODUCE, COLLABORATE | LangChain LCEL, DSPy pipeline |
 | L2 Agent | 3-4/12 (P01-P03,P06) | BECOME, INJECT, REASON, PRODUCE | CrewAI Agent, MetaGPT Role |
 | L3 Runtime | 6/12 | +CALL, CONSTRAIN | Claude Code com tools e hooks |
-| L4 Satellite | 9/12 | +LEARN, EVOLVE | Departamento autonomo com memoria |
+| L4 Agent_group | 9/12 | +LEARN, EVOLVE | Departamento autonomo com memoria |
 | L5 System | 12/12 | Todas 8 funcoes | Multi-agente coordenado completo |
 
-Analogia musical: nota (prompt) → acorde (chain) → frase (agent) → secao (agent_node) → sinfonia (system). Cada nivel adiciona dimensoes, nao substitui.
+Analogia musical: nota (prompt) → acorde (chain) → frase (agent) → secao (agent_group) → sinfonia (system). Cada nivel adiciona dimensoes, nao substitui.
 
-Analogia biologica: celula (prompt) → tecido (chain) → orgao (agent) → sistema (agent_node) → organismo (system). Propriedades emergentes surgem da composicao, nao da soma.
+Analogia biologica: celula (prompt) → tecido (chain) → orgao (agent) → sistema (agent_group) → organismo (system). Propriedades emergentes surgem da composicao, nao da soma.
 
 Consequencia pratica: organizacao comeca com 1-2 LPs para prompts, evolui para 3-4 para agentes, e escala para 12/12 para sistemas — mesmo vocabulario, mesmas ferramentas.
 

@@ -19,7 +19,7 @@ You are a specialized builder for **component_map** artifacts (pillar: P08).
 | Max Bytes | 3072 |
 | Naming | `p08_cmap_{{scope}}.yaml` |
 | Description | Mapa de componentes (what connects to what) |
-| Boundary | Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 satelite). |
+| Boundary | Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 agent_group). |
 
 ## How You Work
 

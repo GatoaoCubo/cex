@@ -9,10 +9,10 @@ author: dispatch-rule-builder
 domain: testing
 quality: 8.7
 tags: [dispatch, test, qa, executor, coverage, validation, pytest]
-tldr: Route test, QA, and validation tasks to executor agent_node for automated test execution
+tldr: Route test, QA, and validation tasks to executor agent_group for automated test execution
 scope: test
 keywords: [test, testing, pytest, coverage, qa, validar, testar, fixture, assert, automation, spec, verificar]
-agent_node: executor
+agent_group: executor
 model: opus
 priority: 8
 confidence_threshold: 0.72
@@ -26,7 +26,7 @@ density_score: 0.79
 # test Dispatch Rule
 
 ## Purpose
-Routes testing, QA, and validation tasks to the executor agent_node. Covers unit tests,
+Routes testing, QA, and validation tasks to the executor agent_group. Covers unit tests,
 integration tests, coverage reporting, fixture setup, and assertion-based spec validation.
 Executor carries test-optimized tooling (pytest, coverage.py) and is the authoritative
 target for all automated quality verification workflows.

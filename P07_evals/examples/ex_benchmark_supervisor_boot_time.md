@@ -1,23 +1,23 @@
 ---
-id: p07_bm_agent_node_boot_time
+id: p07_bm_agent_group_boot_time
 kind: benchmark
 pillar: P07
-description: "Benchmark for agent_node boot times across all providers"
+description: "Benchmark for agent_group boot times across all providers"
 metric: boot_time_seconds
 version: 1.0.0
 created: 2026-03-24
 author: operations_agent
 quality: 9.0
-tags: [benchmark, performance, boot, agent_node]
+tags: [benchmark, performance, boot, agent_group]
 ---
 
-# Benchmark: Satellite Boot Time
+# Benchmark: Agent_group Boot Time
 
 ## Metric
 Time from `Start-Process` to first Claude API response (seconds).
 
 ## Baselines (measured 2026-03-05)
-| Satellite | Model | Boot Time | Status |
+| Agent_group | Model | Boot Time | Status |
 |-----------|-------|-----------|--------|
 | edison | opus | 5s | PASS |
 | shaka | sonnet | 12s | PASS |

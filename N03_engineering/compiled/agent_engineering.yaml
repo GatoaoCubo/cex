@@ -6,7 +6,7 @@ version: 3.0.0
 created: 2026-03-30
 updated: 2026-03-31
 author: builder_agent
-agent_node: builder_hub
+agent_group: builder_hub
 domain: meta-construction
 llm_function: BECOME
 capabilities_count: 11

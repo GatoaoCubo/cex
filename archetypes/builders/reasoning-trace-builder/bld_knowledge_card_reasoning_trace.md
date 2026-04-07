@@ -48,7 +48,7 @@ Reasoning traces are structured YAML decision records — the audit mechanism fo
 | No timestamp | Traces cannot be ordered, deduplicated, or correlated with builds |
 ## Application
 1. Identify the decision being traced: what did the agent need to decide?
-2. Set `agent` to the agent or agent_node slug
+2. Set `agent` to the agent or agent_group slug
 3. Set `intent` to the specific decision question
 4. Build the step chain: for each consideration, record thought + evidence + confidence
 5. Calibrate confidence: match score to evidence strength, not gut feeling

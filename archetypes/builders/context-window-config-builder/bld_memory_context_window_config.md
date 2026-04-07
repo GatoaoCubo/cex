@@ -16,7 +16,7 @@ tags: [context-window, token-budget, overflow, priority, allocation]
 tldr: "Reserve output >= 2000. Budget proportionally. Validate sum <= total. quality:null always."
 impact_score: 7.0
 decay_rate: 0.05
-agent_node: n04_knowledge
+agent_group: n04_knowledge
 keywords: [context_window, token_budget, output_reserve, overflow, priority_tiers]
 memory_scope: project
 observation_types: [reference]

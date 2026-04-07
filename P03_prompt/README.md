@@ -27,7 +27,7 @@
   - [[ex_meta_prompt_system_prompt_generator]]
   - [[ex_prompt_template_aida]]
   - [[ex_react_web_research]]
-  - [[ex_router_prompt_satellite_dispatch]]
+  - [[ex_router_prompt_agent_group_dispatch]]
   - [[ex_system_prompt_code_reviewer]]
   - [[ex_system_prompt_forge_agent]]
 

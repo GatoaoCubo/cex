@@ -76,7 +76,7 @@ A model card is a structured specification of an LLM's capabilities, pricing tie
 - IF task requires vision THEN select model_card with `modalities: [text, vision]`
 - IF budget is constrained THEN select model_card with lowest cost_per_1k_input meeting quality threshold
 - IF task is complex reasoning THEN select model_card with highest benchmark scores
-- DEFAULT: Use the model_card matching the agent_node's default model assignment
+- DEFAULT: Use the model_card matching the agent_group's default model assignment
 
 ## Quality Criteria
 - GOOD: Has model ID, context window, pricing, and modalities documented

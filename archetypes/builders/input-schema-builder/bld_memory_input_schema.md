@@ -16,7 +16,7 @@ tags: [input-schema, validation, coercion, typed-fields, error-messages, contrac
 tldr: "Required fields never have defaults. Optional fields always have defaults. Every field needs a specific type. Error messages must name the failing field."
 impact_score: 7.0
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [input_schema, validation, required, optional, default, coercion, type, error_message, contract]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

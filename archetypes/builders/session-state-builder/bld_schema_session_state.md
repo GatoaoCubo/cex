@@ -27,7 +27,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
 | session_id | string | YES | - | Unique session identifier |
-| agent | string | YES | - | Agent or agent_node that owns this state |
+| agent | string | YES | - | Agent or agent_group that owns this state |
 | status | enum (`active`, `paused`, `completed`, `aborted`) | YES | - | Current session lifecycle status |
 | started_at | string, ISO 8601 | YES | - | Session start timestamp |
 | domain | string | YES | - | Domain this artifact belongs to |

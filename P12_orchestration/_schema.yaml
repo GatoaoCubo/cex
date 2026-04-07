@@ -25,7 +25,7 @@ kinds:
     llm_function: PRODUCE
   spawn_config:
     description: Configuracao de spawn (solo, grid, continuous)
-    boundary: Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).
+    boundary: Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).
     layer: runtime
     core: true
     machine_format: yaml
@@ -54,8 +54,8 @@ kinds:
       max_bytes: 4096
     llm_function: COLLABORATE
   dispatch_rule:
-    description: Regra de despacho (keyword > satellite)
-    boundary: Regra de despacho keyword>satellite. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas
+    description: Regra de despacho (keyword > agent_group)
+    boundary: Regra de despacho keyword>agent_group. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas
       roteia).
     layer: runtime
     core: false

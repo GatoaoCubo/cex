@@ -9,7 +9,7 @@ purpose: Component map of env_config — inventory, dependencies, and architectu
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
-| scope | The system boundary this config covers: global, agent_node, service | env-config-builder | required |
+| scope | The system boundary this config covers: global, agent_group, service | env-config-builder | required |
 | variables | Catalog of env vars: name, type, default, description, sensitivity | env-config-builder | required |
 | validation_rules | Per-variable constraints: regex, range, enum, required flag | env-config-builder | required |
 | sensitive_vars | List of secret/key vars with masking rules (never log, never expose) | env-config-builder | required |

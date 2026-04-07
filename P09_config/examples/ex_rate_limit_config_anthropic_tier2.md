@@ -20,7 +20,7 @@ tags: [rate-limit, anthropic, tier-2, budget, queue, cost-control]
 
 ## Overview
 
-Enforces Anthropic API Tier 2 rate limits across all organization agent_nodes. When limits approach, requests queue instead of failing. Daily budget cap of $50 prevents runaway costs from autonomous agent_node loops.
+Enforces Anthropic API Tier 2 rate limits across all organization agent_groups. When limits approach, requests queue instead of failing. Daily budget cap of $50 prevents runaway costs from autonomous agent_group loops.
 
 ## Tier 2 Limits (Anthropic)
 
@@ -39,9 +39,9 @@ Enforces Anthropic API Tier 2 rate limits across all organization agent_nodes. W
 | claude-sonnet-4-6 | $3.00 | $15.00 | $0.024 (3K in, 1K out) |
 | claude-haiku-4-5 | $0.80 | $4.00 | $0.0064 (3K in, 1K out) |
 
-## Budget Allocation by Satellite
+## Budget Allocation by Agent_group
 
-| Satellite | Model | Daily Budget | Typical RPM | Rationale |
+| Agent_group | Model | Daily Budget | Typical RPM | Rationale |
 |-----------|-------|-------------|-------------|-----------|
 | orchestrator | opus-4-6 | $15 | 20 | Orchestration, low volume high complexity |
 | builder_agent | opus-4-6 | $12 | 50 | Build tasks, code generation |
@@ -179,5 +179,5 @@ Always parse these headers and sync local counters — Anthropic's count is auth
 - Retrying 429s immediately without exponential backoff (triggers stricter throttling)
 - Ignoring TPM limit and only tracking RPM (long prompts hit TPM first)
 - No daily budget cap (autonomous loops can spend hundreds overnight)
-- Single global rate limiter instead of per-agent_node budgets (one agent_node starves others)
+- Single global rate limiter instead of per-agent_group budgets (one agent_group starves others)
 - Hardcoding limits instead of reading from Anthropic response headers (limits change with tier upgrades)

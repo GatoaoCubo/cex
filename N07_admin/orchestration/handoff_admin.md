@@ -7,7 +7,7 @@ version: 2.0.0
 created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
-agent_node: orchestrator
+agent_group: orchestrator
 mission: admin_operations
 autonomy: full
 quality_target: 9.0

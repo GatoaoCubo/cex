@@ -29,7 +29,7 @@ Extraido de tools/AgentTool/loadAgentsDir.ts (producao):
 | tools | string[] | bld_tools | OK |
 | disallowedTools | string[] | NADA | **GAP** |
 | hooks | HooksSettings | NADA | **GAP** |
-| model | string | bld_config satellite | PARTIAL |
+| model | string | bld_config agent_group | PARTIAL |
 | effort | low/med/high/max | NADA | **GAP** |
 | permissionMode | string | nucleus-level | PARTIAL |
 | maxTurns | number | NADA | **GAP** |

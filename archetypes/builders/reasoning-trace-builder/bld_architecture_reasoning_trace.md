@@ -19,14 +19,14 @@ purpose: Component map of reasoning_trace — inventory, dependencies, and archi
 | feedback_flag | Low-confidence marker triggering memory feedback loop | system | active |
 ## Dependency Graph
 ```
-agent/agent_node  --reasons-->      reasoning_trace  --audited_by-->    human_reviewer
+agent/agent_group  --reasons-->      reasoning_trace  --audited_by-->    human_reviewer
 reasoning_trace   --feeds_back-->   memory_system    --improves-->      future_decisions
 reasoning_trace   --consumed_by-->  quality_gate     --validates-->     confidence_calibration
 8f_pipeline_F4    --produces-->     reasoning_trace  --archived_in-->   P03_prompt/compiled/
 ```
 | From | To | Type | Data |
 |------|----|------|------|
-| agent/agent_node (P02) | reasoning_trace | produces | agent records its decision chain during F4 REASON |
+| agent/agent_group (P02) | reasoning_trace | produces | agent records its decision chain during F4 REASON |
 | reasoning_trace | human_reviewer | consumes | auditor reviews trace to understand WHY a decision was made |
 | reasoning_trace | memory_system (P10) | data_flow | low-confidence traces feed learning records for future improvement |
 | reasoning_trace | quality_gate (P11) | validates | gate checks trace completeness, evidence density, confidence calibration |

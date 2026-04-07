@@ -88,10 +88,10 @@ Terms found across the repo that are CEX-specific and may confuse external LLMs:
 | density_score | 1637 | **information density** / signal-to-noise ratio | KEEP (well-defined in frontmatter) |
 | llm_function | 1629 | **pipeline_stage** / execution_phase | KEEP (maps to 8F, self-documenting) |
 | nucleus | 605 | **agent** / worker agent | DOCUMENT (add to metaphor dict) |
-| agent_node | 399 | **agent_group** / team / department | RENAME → Consider deprecating |
+| agent_group | 399 | **agent_group** / team / department | RENAME → Consider deprecating |
 | type_builder | 382 | **archetype** / kind_builder | KEEP (self-documenting) |
 | kind-builder | 382 | same as type_builder | KEEP |
-| satellite | 347 | **agent_group** / cluster | RENAME → maps to nothing in industry |
+| agent_group | 347 | **agent_group** / cluster | RENAME → maps to nothing in industry |
 | geo_description | 141 | **capability_summary** / scope_description | RENAME → confusing name |
 | fractal | 78 | **mirrored structure** / convention | Already in metaphor dict |
 | mold | 62 | **archetype** / template | Already in metaphor dict |
@@ -101,11 +101,11 @@ Terms found across the repo that are CEX-specific and may confuse external LLMs:
 
 | Term | Rename to | Scope | Risk |
 |------|-----------|-------|------|
-| satellite | agent_group | 347 files | HIGH (massive cascade) |
-| agent_node | agent_group | 399 files | HIGH (massive cascade, same target) |
+| agent_group | agent_group | 347 files | HIGH (massive cascade) |
+| agent_group | agent_group | 399 files | HIGH (massive cascade, same target) |
 | geo_description | capability_summary | 141 files | MEDIUM |
 
-**DECISION**: satellite + agent_node both mean "which group of agents does this belong to."
+**DECISION**: agent_group + agent_group both mean "which group of agents does this belong to."
 They should both become `agent_group`. But this is a ~700 file cascade.
 Schedule for a dedicated overnight run, not this session.
 
@@ -142,6 +142,6 @@ This is a mechanical replacement — safe for overnight evolve.
 | Schema descriptions | 🔄 IN PROGRESS | N03 translating PT→EN now |
 | New kinds | 🔄 IN PROGRESS | N04 adding 4 kinds now |
 | Builder ISOs (PT→EN) | ⏳ SCHEDULED | 139 files, overnight batch |
-| satellite/agent_node rename | ⏳ SCHEDULED | ~700 files, dedicated overnight |
+| agent_group/agent_group rename | ⏳ SCHEDULED | ~700 files, dedicated overnight |
 | geo_description rename | ⏳ SCHEDULED | 141 files, overnight batch |
 | Research validation | 🔄 IN PROGRESS | N01 researching official docs now |

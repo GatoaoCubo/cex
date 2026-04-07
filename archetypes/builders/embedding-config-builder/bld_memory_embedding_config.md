@@ -23,7 +23,7 @@ tags:
 tldr: "Match dimensions to model, set chunk at 65% of context window, overlap at 12%, align distance metric with normalization setting."
 impact_score: 8.0
 decay_rate: 0.06
-agent_node: edison
+agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

@@ -50,6 +50,6 @@ I produce technical operational parameters — timeouts, retry strategies, rate 
 |---------|-----|
 | feature-flag-builder | Feature flags may need timeout and fallback rules during rollout |
 | env-config-builder | Env config may reference runtime rule values for service limits |
-| spawn-config-builder | Uses my concurrency and timeout limits to configure agent_node spawn parameters |
+| spawn-config-builder | Uses my concurrency and timeout limits to configure agent_group spawn parameters |
 | fallback-chain-builder | Triggers fallback chain when I define circuit breaker trip conditions |
 | daemon-builder | Applies my retry and rate limit rules to long-running daemon operations |

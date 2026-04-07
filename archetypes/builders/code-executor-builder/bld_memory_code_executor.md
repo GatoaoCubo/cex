@@ -16,7 +16,7 @@ tags: [code-executor, sandbox, timeout, network, isolation, security]
 tldr: "Timeout and network policy are load-bearing for safety. Container minimum isolation. List language versions. Document pre-installed libs."
 impact_score: 8.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [code executor, sandbox, docker, e2b, timeout, network access, resource limits, isolation, security]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

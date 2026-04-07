@@ -10,7 +10,7 @@ title: Reasoning Trace Builder Instructions
 target: reasoning-trace-builder agent
 phases_count: 3
 prerequisites:
-  - Agent name or agent_node identifier is known
+  - Agent name or agent_group identifier is known
   - Intent or decision question is defined
   - Evidence sources are available (metrics, prior results, file references)
   - Timestamp or timing data is available
@@ -60,7 +60,7 @@ INPUT: agent, intent, evidence_sources, timestamp, alternatives
    Is it defining HOW steps connect?                           -> NOT a reasoning_trace
 2. Validate agent identifier:
    Must be non-empty string, lowercase slug preferred
-   Must match a known agent or agent_node in the system
+   Must match a known agent or agent_group in the system
 3. Validate intent:
    Must be a clear decision question or goal statement
    Must be specific enough to evaluate alternatives against

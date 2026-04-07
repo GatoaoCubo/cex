@@ -9,10 +9,10 @@ author: dispatch-rule-builder
 domain: engineering
 quality: 8.7
 tags: [dispatch, engineering, builder, coding, development]
-tldr: Route engineering, development and coding tasks to builder agent_node with opus model
+tldr: Route engineering, development and coding tasks to builder agent_group with opus model
 scope: engineering
 keywords: [engenharia, engineering, codigo, code, desenvolver, develop, programar, program, build, construir, implementar, implement, software, app]
-agent_node: builder
+agent_group: builder
 model: opus
 priority: 8
 confidence_threshold: 0.75
@@ -25,10 +25,10 @@ density_score: 0.79
 # engineering Dispatch Rule
 
 ## Purpose
-Routes software engineering, development, and coding tasks to the builder agent_node. The builder specializes in artifact creation, code implementation, and technical scaffolding with access to opus model for complex engineering reasoning and multi-step development tasks.
+Routes software engineering, development, and coding tasks to the builder agent_group. The builder specializes in artifact creation, code implementation, and technical scaffolding with access to opus model for complex engineering reasoning and multi-step development tasks.
 
 ## Keyword Rationale
 Bilingual PT/EN coverage captures both Portuguese operator commands ("desenvolver app") and English technical descriptions ("implement authentication"). Keywords span the full engineering lifecycle from high-level "engenharia" to specific actions like "programar" and "implementar". Generic terms like "software" and "app" catch domain-adjacent requests.
 
 ## Fallback Logic
-Routes to executor when builder is unavailable. Executor handles operational aspects of engineering like testing, deployment, and code review, providing complementary engineering capabilities when primary builder agent_node cannot accept the task.
+Routes to executor when builder is unavailable. Executor handles operational aspects of engineering like testing, deployment, and code review, providing complementary engineering capabilities when primary builder agent_group cannot accept the task.

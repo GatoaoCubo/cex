@@ -15,7 +15,7 @@ tags: [parser, brain, search-results, extraction]
 # Parser: brain_query Results
 
 ## Purpose
-Extracts ranked knowledge chunks from raw brain_query MCP tool output. Converts JSON response with scores and metadata into structured markdown sections for agent_node consumption.
+Extracts ranked knowledge chunks from raw brain_query MCP tool output. Converts JSON response with scores and metadata into structured markdown sections for agent_group consumption.
 
 ## Input
 ```json

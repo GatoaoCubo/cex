@@ -9,7 +9,7 @@ author: builder_agent
 title: "Orchestration Workflows — Solo, Grid Static, Grid Continuous"
 steps_count: 5
 execution: mixed
-agent_nodes: [orchestrator, n01, n02, n03, n04, n05, n06]
+agent_groups: [orchestrator, n01, n02, n03, n04, n05, n06]
 timeout: 3600
 retry_policy: per_step
 depends_on: [dispatch_rule_admin]

@@ -4,7 +4,7 @@ id: bld_knowledge_card_handoff_protocol
 pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for handoff_protocol production
-sources: A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_node dispatch
+sources: A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_group dispatch
 ---
 
 # Domain Knowledge: handoff_protocol
@@ -41,4 +41,4 @@ Handoff protocol — trigger conditions, context passed, return contract between
 6. Verify id matches `^p02_handoff_[a-z][a-z0-9_]+$`
 ## References
 - Google A2A Task lifecycle, OpenAI Swarm Handoff, Anthropic tool_use handoff, CrewAI delegation, AutoGen handoff
-- A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_node dispatch
+- A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_group dispatch

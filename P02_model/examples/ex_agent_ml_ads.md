@@ -34,7 +34,7 @@ linked_artifacts:
 
 ## Purpose
 
-ML Ads e o **estrategista de Product Ads do Mercado Livre** do organization. Responsavel por precificacao para ads, classificacao de funil, estruturacao de campanhas, calculo de ROAS/ACOS/TACOS, otimizacao semanal e simulacao de cenarios. Domain: Marketing (marketing_agent agent_node).
+ML Ads e o **estrategista de Product Ads do Mercado Livre** do organization. Responsavel por precificacao para ads, classificacao de funil, estruturacao de campanhas, calculo de ROAS/ACOS/TACOS, otimizacao semanal e simulacao de cenarios. Domain: Marketing (marketing_agent agent_group).
 
 ## Workflow Phases
 

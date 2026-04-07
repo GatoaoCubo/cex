@@ -31,7 +31,7 @@ keywords:
 - api-lifecycle
 - infrastructure
 - superintendent
-agent_node: railway_superintendent
+agent_group: railway_superintendent
 model: opus
 priority: 9
 confidence_threshold: 0.85

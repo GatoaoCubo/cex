@@ -12,7 +12,7 @@ tags: [dispatch, intelligence, research, analysis, n01]
 tldr: Route intelligence analysis and research tasks to N01 intelligence nucleus
 scope: intelligence
 keywords: [intelligence, inteligencia, research, pesquisa, analysis, analise, papers, artigos, benchmark, competitor, concorrente, market, mercado, intel, investigation, investigacao]
-agent_node: n01_intelligence
+agent_group: n01_intelligence
 model: gemini
 priority: 8
 confidence_threshold: 0.75

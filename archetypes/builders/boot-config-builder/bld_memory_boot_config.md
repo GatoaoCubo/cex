@@ -16,7 +16,7 @@ tags: [boot-config, provider-constraints, identity-block, token-limits, P02, con
 tldr: "One identity block per provider. Shared cross-provider configs cause 7x more boot failures and all silent truncation incidents."
 impact_score: 7.4
 decay_rate: 0.10
-agent_node: edison
+agent_group: edison
 keywords: [boot-config, provider, identity-block, context-window, tokens, timeout, tools, MCP]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

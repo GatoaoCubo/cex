@@ -8,7 +8,7 @@ author: workflow-builder
 title: Creation Pipeline Workflow
 steps_count: 4
 execution: mixed
-agent_nodes:
+agent_groups:
 - research_agent
 - builder_agent
 - validator_agent
@@ -86,5 +86,5 @@ dependencies:
 - GDP decisions (domain, tone, audience) must be resolved in `decision_manifest.yaml` before workflow starts
 references:
 - 'signal-builder: completion signal contract and naming conventions per step'
-- 'spawn-config-builder: agent_node launch parameters per satellite'
+- 'spawn-config-builder: agent_group launch parameters per agent_group'
 - 'bld_quality_gate_workflow: H01-H10 HARD gates and SOFT scoring rubric'

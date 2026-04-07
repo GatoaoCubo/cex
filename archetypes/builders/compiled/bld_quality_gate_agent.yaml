@@ -45,12 +45,12 @@ hard_gates: 'All must pass. Failure on any = final score 0.
 
   | H05 | quality == null | Never self-score |
 
-  | H06 | All 10 required fields present: id, kind, pillar, title, version, agent_node, domain, quality, tags, tldr | Completeness
+  | H06 | All 10 required fields present: id, kind, pillar, title, version, agent_group, domain, quality, tags, tldr | Completeness
   |
 
   | H07 | llm_function == "BECOME" | Agent is identity construct, not callable |
 
-  | H08 | agent_node field is set (not blank or null) | Every agent belongs to a agent_node |'
+  | H08 | agent_group field is set (not blank or null) | Every agent belongs to a agent_group |'
 soft_scoring: '| Gate | Check | Weight |
 
   |------|-------|--------|
@@ -91,7 +91,7 @@ bypass: '| Field | Value |
 
   |-------|-------|
 
-  | conditions | Critical agent_node gap requiring immediate agent deploy |
+  | conditions | Critical agent_group gap requiring immediate agent deploy |
 
   | approver | p02-chief |
 

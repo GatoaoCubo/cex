@@ -49,7 +49,7 @@ criticality: high
 | Concept | Domain | CEX Kind | Role |
 |---------|--------|----------|------|
 | Path Registry | Environment | path_config | Centralized file/dir path management with validation |
-| RBAC Matrix | Access Control | permission | Role-based access with scope fences per agent/satellite |
+| RBAC Matrix | Access Control | permission | Role-based access with scope fences per agent/agent_group |
 | Feature Toggle | Rollout | feature_flag | Boolean/percentage flags for gradual feature release |
 | Runtime Constraint | Execution | runtime_rule | Timeouts, retry limits, concurrency caps, circuit breakers |
 | Secret Reference | Security | secret_config | Vault URIs, env var injection, rotation schedules |

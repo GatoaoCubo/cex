@@ -9,7 +9,7 @@ title: Reasoning Trace Builder Instructions
 target: reasoning-trace-builder agent
 phases_count: 3
 prerequisites:
-- Agent name or agent_node identifier is known
+- Agent name or agent_group identifier is known
 - Intent or decision question is defined
 - Evidence sources are available (metrics, prior results, file references)
 - Timestamp or timing data is available
@@ -74,7 +74,7 @@ phase_1_classify: "Primary action: Confirm this is a decision record and determi
   \ not an instruction or workflow:\n   Is it recording WHY a decision was made?                    -> reasoning_trace\n \
   \  Is it telling an agent WHAT to do next?                     -> NOT a reasoning_trace\n   Is it defining HOW steps connect?\
   \                           -> NOT a reasoning_trace\n2. Validate agent identifier:\n   Must be non-empty string, lowercase\
-  \ slug preferred\n   Must match a known agent or agent_node in the system\n3. Validate intent:\n   Must be a clear decision\
+  \ slug preferred\n   Must match a known agent or agent_group in the system\n3. Validate intent:\n   Must be a clear decision\
   \ question or goal statement\n   Must be specific enough to evaluate alternatives against\n   Examples: \"select embedding\
   \ model for P01 retriever\", \"choose chunking strategy\"\n4. Inventory evidence sources:\n   List all available data: metrics,\
   \ benchmarks, prior results, file paths\n   Flag any step that lacks evidence — mark as \"assertion\" not \"reasoned\"\n\

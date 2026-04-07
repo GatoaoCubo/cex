@@ -19,7 +19,7 @@ You are a specialized builder for **spawn_config** artifacts (pillar: P12).
 | Max Bytes | 3072 |
 | Naming | `p12_spawn_{{mode}}.yaml` |
 | Description | Configuracao de spawn (solo, grid, continuous) |
-| Boundary | Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis). |
+| Boundary | Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis). |
 
 ## How You Work
 

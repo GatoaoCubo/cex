@@ -21,7 +21,7 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this. CONFIG.md restricts this.
 | version | semver X.Y.Z | YES | "1.0.0" | H06 | Quoted string. Increment on revision. |
 | created | date YYYY-MM-DD | YES | — | H06 | Quoted string. ISO 8601 format. |
 | updated | date YYYY-MM-DD | YES | — | H06 | Quoted string. Update on every revision. |
-| author | string | YES | — | H06 | Satellite ID or human name that produced this. |
+| author | string | YES | — | H06 | Agent_group ID or human name that produced this. |
 | domain | string | YES | — | H06 | Governance domain (e.g., "quality", "operations", "security"). |
 | quality | null | YES | null | H05 | MUST be literal null. NEVER a number. Self-scoring prohibited. |
 | tags | list[string], len >= 3 | YES | — | H07 | Must include "invariant" and pillar tag. |
@@ -33,7 +33,7 @@ SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this. CONFIG.md restricts this.
 ## Extended Fields (4)
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
-| scope | enum [system, agent_node, domain] | RECOMMENDED | Applicability boundary. Default: system. |
+| scope | enum [system, agent_group, domain] | RECOMMENDED | Applicability boundary. Default: system. |
 | exceptions | list[string] | RECOMMENDED | Conditions where law does not apply. Empty list `[]` = no exceptions. |
 | priority | integer 1-10 | RECOMMENDED | Conflict resolution. 10 = highest. Used when laws conflict. |
 | keywords | list[string], len >= 2 | RECOMMENDED | Brain search terms. S10 gate. |
@@ -66,7 +66,7 @@ All 8 sections MUST be present. Section headers are exact strings:
 | number | positive integer, unique, sequential |
 | enforcement | must name detection mechanism |
 | exceptions | explicit list or "None" — never omit |
-| scope | one of: system, agent_node, domain |
+| scope | one of: system, agent_group, domain |
 | priority | integer 1-10 |
 | quality | always null |
 ## Drift Prevention

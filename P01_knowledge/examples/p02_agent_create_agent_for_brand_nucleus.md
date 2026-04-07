@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-04-02"
 updated: "2026-04-02"
 author: "agent-builder"
-agent_node: "monetizer"
+agent_group: "monetizer"
 domain: "brand_strategy"
 llm_function: BECOME
 capabilities_count: 6
@@ -41,8 +41,8 @@ brand_nucleus is a monetizer specialist in brand_strategy. Enforces consistent b
 | 2 | brand_audit.py | Score brand consistency across 6 dimensions |
 | 3 | brand_inject.py | Replace `{{BRAND_*}}` vars in templates with live config values |
 
-### Satellite Position
-- Satellite: monetizer
+### Agent_group Position
+- Agent_group: monetizer
 - Peers: monetization_nucleus, commercial_nucleus
 - Upstream: brand_config (N06 init), cex_bootstrap.py
 - Downstream: N02 (copy generation), N03 (artifact body sections), N07 (audit signals)
@@ -84,7 +84,7 @@ agents/brand_nucleus/
 - brand_propagate.py pushes updated brand context to all nuclei after any brand_config change
 
 ## Quality Gates
-HARD: YAML parses, id matches `p02_agent_` pattern, kind == agent, quality == null, 10 required fields present, agent_package >= 10 files, llm_function == BECOME, agent_node == monetizer.
+HARD: YAML parses, id matches `p02_agent_` pattern, kind == agent, quality == null, 10 required fields present, agent_package >= 10 files, llm_function == BECOME, agent_group == monetizer.
 SOFT: tldr <= 160ch, tags >= 3, capabilities_count: 6 matches body, density >= 0.80, domain specific (brand_strategy).
 
 ## Common Issues
@@ -94,7 +94,7 @@ SOFT: tldr <= 160ch, tags >= 3, capabilities_count: 6 matches body, density >= 0
 | Voice drift across nuclei | Enforce brand_inject.py pre-dispatch hook in N07 handoff template |
 | Compliance score < 7.0 | Re-run brand_propagate.py — usually caused by stale brand_config after update |
 | Boundary violation: copy requests routed here | This agent VALIDATES; route generation to N02 after brand context injection |
-| agent_node unset | Always set monetizer — prevents nucleus becoming generic assistant |
+| agent_group unset | Always set monetizer — prevents nucleus becoming generic assistant |
 
 ## Invocation
 ```bash

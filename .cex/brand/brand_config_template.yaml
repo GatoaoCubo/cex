@@ -15,6 +15,9 @@ identity:
     - "{{VALUE_2}}"
     - "{{VALUE_3}}"
   BRAND_STORY: "{{BRAND_STORY}}"
+  BRAND_BIO: "{{BRAND_BIO}}"                   # Short 1-2 sentence bio for social profiles
+  BRAND_ESSENCE: "{{BRAND_ESSENCE}}"            # One-word or short phrase capturing the soul
+  BRAND_MANIFESTO: "{{BRAND_MANIFESTO}}"        # Extended brand manifesto / belief statement
 
 archetype:
   BRAND_ARCHETYPE: "{{BRAND_ARCHETYPE}}"       # creator|hero|sage|explorer|rebel|magician|lover|caregiver|jester|ruler|innocent|everyman
@@ -42,6 +45,8 @@ voice:
     - "{{DONT_2}}"
     - "{{DONT_3}}"
   BRAND_LANGUAGE: "pt-BR"
+  BRAND_PERSON: "2nd"                           # 1st (we) | 2nd (you) | 3rd (they)
+  BRAND_ENERGY: "moderate"                      # calm | moderate | energetic | bold
 
 audience:
   BRAND_ICP: "{{ICP_DESCRIPTION}}"
@@ -58,6 +63,7 @@ audience:
     - "{{ICP_ASPIRATION_1}}"
     - "{{ICP_ASPIRATION_2}}"
   BRAND_TRANSFORMATION: "From {{BEFORE}} to {{AFTER}} through {{BRIDGE}}"
+  BRAND_COUNTRY: "{{BRAND_COUNTRY}}"            # Primary market country (e.g. "BR", "US")
 
 visual:
   BRAND_COLORS:
@@ -86,6 +92,11 @@ positioning:
     - "{{PILLAR_1}}"
     - "{{PILLAR_2}}"
     - "{{PILLAR_3}}"
+  BRAND_HASHTAG: "{{BRAND_HASHTAG}}"            # Primary brand hashtag (e.g. "#YourBrand")
+  BRAND_TAGS:                                    # SEO/discovery tags
+    - "{{TAG_1}}"
+    - "{{TAG_2}}"
+    - "{{TAG_3}}"
 
 monetization:
   BRAND_PRICING_MODEL: "subscription"           # subscription|one-time|credits|freemium|marketplace|hybrid

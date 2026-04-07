@@ -38,7 +38,7 @@ skill           --depends-->    knowledge_card
 | Multi-phase with defined input/output per phase | An event interceptor without phases (hook P04) |
 | User-invocable or agent-only based on flag | A protocol server exposing tools (mcp_server P04) |
 | Produces structured output on completion | A pluggable extension with lifecycle hooks (plugin P04) |
-| Scoped to one capability domain | A multi-satellite orchestration (workflow P12) |
+| Scoped to one capability domain | A multi-agent_group orchestration (workflow P12) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|------------|---------|

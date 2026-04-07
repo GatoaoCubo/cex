@@ -3,7 +3,7 @@ kind: few_shot_example
 pillar: P01
 title: 'Few-Shot: Agent Creation via 8F Pipeline'
 input: '"criar agente de SEO para marketplace"'
-output: "operation: agent_create\ndomain: SEO\ncontext: marketplace\nagent_node: edison\nresult:\n  agent_name: seo_marketplace\n\
+output: "operation: agent_create\ndomain: SEO\ncontext: marketplace\nagent_group: edison\nresult:\n  agent_name: seo_marketplace\n\
   \  path: records/agents/seo_marketplace/\n  files_created: 10\n  iso_tier: standard\n  validation: PASS (6/6 gates)"
 tags:
 - few_shot

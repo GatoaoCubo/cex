@@ -91,7 +91,7 @@ Topic is about external tech/API/protocol?
 | version | semver format | `"1.0.0"` or `"2.1.3"` | H07: semver validation |
 | created | ISO date | `"2026-04-02"` | H06: YYYY-MM-DD format |
 | updated | ISO date | `"2026-04-02"` | H06: YYYY-MM-DD format |
-| author | satellite name | `"knowledge-card-builder"` | H10: not "orchestrator" |
+| author | agent_group name | `"knowledge-card-builder"` | H10: not "orchestrator" |
 | domain | snake_case label | `knowledge_management` | H06: no spaces/caps |
 | quality | literal `null` | `null` | H05: HARD fail if numeric |
 | tags | YAML list ≥3 items | `[rag, embedding, retrieval]` | H07: array format |
@@ -114,7 +114,7 @@ Topic is about external tech/API/protocol?
 | `quality: 8.5` | H05 HARD fail | Set `quality: null` |
 | `tags: "ai, ml"` as string | H07 HARD fail | Convert to YAML list `[ai, ml]` |
 | Internal paths in body | H09 HARD fail | Remove all `.claude/`, `records/`, `C:\` |
-| `author: orchestrator` | H10 HARD fail | Use satellite/builder name |
+| `author: orchestrator` | H10 HARD fail | Use agent_group/builder name |
 | `id: prompt_caching` | H03 HARD fail | Prefix: `p01_kc_prompt_caching` |
 | Body > 5120 bytes | H08 HARD fail | Split into 2 focused atomic cards |
 | tldr: "This card describes…" | S01 SOFT fail | Start with the fact, not a description |

@@ -8,7 +8,7 @@ updated: 2026-04-01
 author: n05_operations
 title: Railway Backend Superintendent Spawn Config
 mode: solo
-agent_node: railway_superintendent
+agent_group: railway_superintendent
 model: opus
 flags:
   - --model
@@ -37,7 +37,7 @@ codex --dangerously-skip-permissions --model gpt-5.4 --reasoning-effort high
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
 | `mode` | `solo` | repository execution tasks typically require single-owner control of the worktree |
-| `agent_node` | `operations_nucleus` | routes directly to the N05 operational persona |
+| `agent_group` | `operations_nucleus` | routes directly to the N05 operational persona |
 | `model` | `gpt-5.4` | strongest fit for review, debugging, CI/CD diagnosis, and patching |
 | `mcp_config` | `.mcp-n05.json` | reserved for GitHub Actions, Docker, pytest, and linter integrations |
 | `timeout_seconds` | `5400` | allows long test suites, compile loops, and release validation work |

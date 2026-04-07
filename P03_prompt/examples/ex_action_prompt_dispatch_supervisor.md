@@ -1,8 +1,8 @@
 ---
-id: p03_up_dispatch_agent_node
+id: p03_up_dispatch_agent_group
 kind: user_prompt
-action: dispatch_agent_node_task
-input_required: [task_description, agent_node_name, quality_target]
+action: dispatch_agent_group_task
+input_required: [task_description, agent_group_name, quality_target]
 output_expected: "Completion signal + git commit with artifacts"
 pillar: P03
 version: 1.0.0
@@ -10,18 +10,18 @@ created: 2026-03-24
 author: orchestrator
 domain: orchestration
 quality: 9.0
-tags: [user-prompt, dispatch, handoff, agent_node, task]
+tags: [user-prompt, dispatch, handoff, agent_group, task]
 ---
 
-# User Prompt: Dispatch Satellite Task
+# User Prompt: Dispatch Agent_group Task
 
 ## Purpose
-Instruct a agent_node to execute a specific task with defined inputs and quality gate.
+Instruct a agent_group to execute a specific task with defined inputs and quality gate.
 
 ## Input
 ```yaml
 task: "Create 8 P04 examples from real organization artifacts"
-agent_node: edison
+agent_group: edison
 quality_target: 9.0
 autonomy: full
 context_files:

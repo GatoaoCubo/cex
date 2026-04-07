@@ -12,7 +12,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: ASCII art, Mermaid notation, layered architecture diagrams, data flow visualization, legend and annotation
   systems, zoom levels, C4 model | NOT component_map structured data, pattern prescriptions, law definitions, workflow execution,
-  agent_node specs
+  agent_group specs
 domain: diagram
 quality:
 - 'ALWAYS set `quality: null` in output frontmatter — never self-assign a score. Validate all 9 HARD gates (frontmatter completeness

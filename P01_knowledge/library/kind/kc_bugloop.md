@@ -50,7 +50,7 @@ A bugloop is a declarative specification for an automated detect→fix→verify�
 | confidence | float [0,1] | 0.75 | Higher = less conservative fixes; calibrate to domain risk |
 | max_attempts | int | 3 | More attempts = higher recovery rate; longer MTTR |
 | fix_strategy | enum | patch_and_retry | patch_and_retry/rollback_first/isolate_then_fix |
-| escalation_target | string | human | human/queue/agent_node — depends on urgency |
+| escalation_target | string | human | human/queue/agent_group — depends on urgency |
 
 ## Patterns
 | Pattern | When to Use | Example |

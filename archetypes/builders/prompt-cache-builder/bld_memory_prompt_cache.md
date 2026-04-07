@@ -16,7 +16,7 @@ tags: [prompt-cache, ttl, eviction, invalidation, caching, cost]
 tldr: "Don't cache everything. Tie invalidation to content versions. TTL 300s default. Namespace keys. quality:null."
 impact_score: 7.0
 decay_rate: 0.05
-agent_node: n04_knowledge
+agent_group: n04_knowledge
 keywords: [prompt_cache, ttl, eviction, invalidation, cache_key, storage_backend]
 memory_scope: project
 observation_types: [reference]

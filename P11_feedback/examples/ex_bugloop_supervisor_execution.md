@@ -1,27 +1,27 @@
 ---
-id: p11_bl_agent_node_execution
+id: p11_bl_agent_group_execution
 kind: bugloop
 pillar: P11
-title: "Bugloop: Satellite Execution Resilience"
+title: "Bugloop: Agent_group Execution Resilience"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 quality: 9.0
-tags: [agent_node, resilience, bugloop, feedback]
-tldr: "3-retry bugloop for agent_node task execution — never stop on first error, skip after 3 failures, always commit partial work"
+tags: [agent_group, resilience, bugloop, feedback]
+tldr: "3-retry bugloop for agent_group task execution — never stop on first error, skip after 3 failures, always commit partial work"
 density_score: 0.90
-source: organization-core/.claude/rules/agent_node-execution.md
+source: organization-core/.claude/rules/agent_group-execution.md
 ---
 
-# Bugloop: Satellite Execution Resilience
+# Bugloop: Agent_group Execution Resilience
 
 ## Trigger
 
 | Property | Value |
 |----------|-------|
-| Detect | Any error during agent_node task execution (file not found, command failed, import error, git conflict, permission denied, timeout) |
-| Condition | `organization_SATELLITE` is set and NOT stella |
+| Detect | Any error during agent_group task execution (file not found, command failed, import error, git conflict, permission denied, timeout) |
+| Condition | `organization_AGENT_GROUP` is set and NOT stella |
 | Frequency | Every task step, checked after each action |
 
 ## Cycle
@@ -66,7 +66,7 @@ source: organization-core/.claude/rules/agent_node-execution.md
 ## Escalation
 
 - After 3 failures: Register error, SKIP to next task, continue execution
-- Owner: orchestrator (reviews via signal + git log after agent_node completes)
+- Owner: orchestrator (reviews via signal + git log after agent_group completes)
 
 ---
-*Migrated from: organization-core/.claude/rules/agent_node-execution.md (Resilience Protocol)*
+*Migrated from: organization-core/.claude/rules/agent_group-execution.md (Resilience Protocol)*

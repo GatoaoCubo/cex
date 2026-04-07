@@ -12,7 +12,7 @@ Naming pattern: `p12_sig_{event}.json`
 Filename: `p12_sig_{{event}}.json`
 ```json
 {
-  "agent_node": "{{agent_node_slug}}",
+  "agent_group": "{{agent_group_slug}}",
   "status": "{{complete|error|progress}}",
   "quality_score": {{0.0_to_10.0}},
   "timestamp": "{{ISO_8601_timestamp}}",

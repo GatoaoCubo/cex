@@ -55,7 +55,7 @@ patterns:
 - Path config centraliza caminhos — agents nao hardcodam paths
 - 'Permission com 3 niveis: read, write, execute per scope'
 - 'Feature flag com gradual rollout: 0% > 10% > 50% > 100%'
-- Runtime rule com defaults + overrides por satelite
+- Runtime rule com defaults + overrides por agent_group
 anti_patterns:
 - 'Hardcoded paths em agentes: quebra ao mudar ambiente'
 - 'Feature flag sem fallback: crash se flag nao existe'

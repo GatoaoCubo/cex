@@ -12,12 +12,12 @@ Sequencia deterministica de 8 camadas que inicializa qualquer sessao organizatio
 
 ## Current State
 ```
-L0 ENV        .env (API keys) + organization_SATELLITE env var
+L0 ENV        .env (API keys) + organization_AGENT_GROUP env var
 L1 BOOT       boot/{sat}.cmd — set CLAUDECODE= | model | MCP config
 L2 CLAUDE.MD  Auto-loaded — "read PRIME_{SAT}.md"
-L3 RULES      .claude/rules/ (10 files: nav, encoding, agent_node)
-L4 PRIME      records/agent_nodes/{sat}/PRIME_{SAT}.md (identity)
-L5 MENTAL     records/agent_nodes/{sat}/mental_model.yaml (deep state)
+L3 RULES      .claude/rules/ (10 files: nav, encoding, agent_group)
+L4 PRIME      records/agent_groups/{sat}/PRIME_{SAT}.md (identity)
+L5 MENTAL     records/agent_groups/{sat}/mental_model.yaml (deep state)
 L6 HANDOFF    .claude/handoffs/{sat}_*.md (dispatch queue)
 L7 EXECUTION  Agent -> Skill -> Sub-agents -> Quality Gate
 ```
@@ -25,7 +25,7 @@ L7 EXECUTION  Agent -> Skill -> Sub-agents -> Quality Gate
 ## Operational Context
 - **Deterministic**: same env = same boot state, always
 - **Fractal**: each layer references the next via path pointers
-- **Identity-first**: agent_node knows WHO before WHAT
+- **Identity-first**: agent_group knows WHO before WHAT
 - **Fail-safe**: missing layer = graceful fallback to general session
 
 | Layer | Token Cost | Mandatory |
@@ -33,13 +33,13 @@ L7 EXECUTION  Agent -> Skill -> Sub-agents -> Quality Gate
 | L0-L1 | 0 | yes (env + script) |
 | L2 CLAUDE.md | ~2K | yes |
 | L3 rules | ~8K | yes (auto-loaded) |
-| L4 PRIME | ~3K | yes (agent_nodes) |
+| L4 PRIME | ~3K | yes (agent_groups) |
 | L5 mental | ~2K | recommended |
 | L6 handoff | ~1K | if dispatched |
 
 ## Decision Notes
 - `set CLAUDECODE=` prevents nested Claude detection (critical for isolation)
-- `--strict-mcp-config` ensures only declared MCPs available per agent_node
+- `--strict-mcp-config` ensures only declared MCPs available per agent_group
 - Total boot context: ~15K tokens (98% reduction from v3.6 monolithic load)
 
 Source: `records/framework/docs/META_BOOTSTRAP.md`

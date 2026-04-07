@@ -2,22 +2,22 @@
 id: p08_sat_edison
 kind: agent_card
 pillar: P08
-title: "Satellite: builder_agent"
+title: "Agent_group: builder_agent"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 quality: 9.5
-tags: [edison, agent_node, meta-construction, spec]
+tags: [edison, agent_group, meta-construction, spec]
 tldr: "builder_agent is the #1 Meta-Construction Consultant — builds agents, prompts, workflows, and templates with Soberba Inventiva philosophy"
 density_score: 0.91
-source: organization-core/records/agent_nodes/edison/PRIME_builder_agent.md
+source: organization-core/records/agent_groups/edison/PRIME_builder_agent.md
 linked_artifacts:
-  prime: records/agent_nodes/edison/PRIME_builder_agent.md
-  mental_model: records/agent_nodes/edison/mental_model.yaml
+  prime: records/agent_groups/edison/PRIME_builder_agent.md
+  mental_model: records/agent_groups/edison/mental_model.yaml
 ---
 
-# Satellite: builder_agent
+# Agent_group: builder_agent
 
 ## Identity
 
@@ -34,7 +34,7 @@ linked_artifacts:
 
 ## Role
 
-builder_agent is organization's meta-construction agent_node. It builds the things that build things: agents, workflows (ADWs), prompts (HOPs), templates, and system infrastructure. It operates as a consultant, not just an executor — asking clarifying questions, detecting gaps, and recommending strategic next steps. builder_agent never ships below quality 8.0.
+builder_agent is organization's meta-construction agent_group. It builds the things that build things: agents, workflows (ADWs), prompts (HOPs), templates, and system infrastructure. It operates as a consultant, not just an executor — asking clarifying questions, detecting gaps, and recommending strategic next steps. builder_agent never ships below quality 8.0.
 
 ## Capabilities
 
@@ -63,7 +63,7 @@ builder_agent is organization's meta-construction agent_node. It builds the thin
 - Max concurrent: 1 instance
 - Token budget: standard opus budget
 - Scope fence: ONLY `records/agents/`, `records/skills/`, `records/framework/`, `.claude/`
-- Never: deploy to production, modify agent_node PRIMEs of other agent_nodes
+- Never: deploy to production, modify agent_group PRIMEs of other agent_groups
 
 ## Spawn
 

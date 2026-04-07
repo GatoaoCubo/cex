@@ -12,7 +12,7 @@ quality: 9.0
 tags: [gateway, router, mentor, intent-detection, handoff, entry-point]
 tldr: Ponto de entrada unico - combina mentor (loop interativo) + router (semantic intent detection) com handoff para 5 workflows automaticos
 when_to_use: Frontend chat, onboarding de usuarios, routing de intents
-when_not_to_use: Tarefas diretas de agent_node (usar agent_node dispatch), admin tasks
+when_not_to_use: Tarefas diretas de agent_group (usar agent_group dispatch), admin tasks
 keywords: [gateway, router, mentor, semantic-router, intent-detection]
 long_tails:
   - como criar entry point unico para sistema multi-agente
@@ -53,7 +53,7 @@ density_score: 0.87
 | Frontend chat (organizationapp.com) | SIM | - |
 | Routing de intents do usuario | SIM | - |
 | Onboarding e duvidas | SIM | - |
-| Satellite dispatch direto | NAO | orchestrator |
+| Agent_group dispatch direto | NAO | orchestrator |
 | Admin/infra tasks | NAO | operations_agent |
 
 ## Capabilities

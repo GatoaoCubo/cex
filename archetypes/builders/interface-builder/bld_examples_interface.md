@@ -39,14 +39,14 @@ mock:
     - method: "get_research_summary"
       input: {topic: "decoraction minimalist", max_sources: 5}
       output: {summary: "Tendencia crescente em 2026...", sources: ["url1", "url2"], confidence: 0.87}
-domain: "agent_node-integration"
+domain: "agent_group-integration"
 quality: null
-tags: [interface, shaka, lily, research, marketing, agent_node-integration]
+tags: [interface, shaka, lily, research, marketing, agent_group-integration]
 tldr: "Bilateral contract for researcher to deliver research results to marketer marketing workflows."
 density_score: 0.91
 ```
 ## Contract Definition
-researcher (research agent_node) provides structured research data to marketer (marketing agent_node).
+researcher (research agent_group) provides structured research data to marketer (marketing agent_group).
 marketer calls methods to get research summaries and competitor data for marketing campaigns.
 ## Methods
 | # | Name | Input | Output | Description |

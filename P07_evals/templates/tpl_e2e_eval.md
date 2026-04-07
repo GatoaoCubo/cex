@@ -10,7 +10,7 @@ title: [e2e_eval_do_pipeline]
 version: 1.0.0
 created: [yyyy-mm-dd]
 updated: [yyyy-mm-dd]
-author: [satellite_name]
+author: [agent_group_name]
 quality: [8.0_to_10.0]
 tags: [[tag1], [tag2], e2e, eval]
 tldr: [o_que_o_pipeline_valida]

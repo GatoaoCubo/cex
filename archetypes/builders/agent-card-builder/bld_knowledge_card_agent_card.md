@@ -9,7 +9,7 @@ sources: agent-card-builder MANIFEST.md + SCHEMA.md, microservices architecture,
 
 # Domain Knowledge: agent_card
 ## Executive Summary
-Satellite specs define autonomous processing units in multi-agent architectures — each spec declares one agent_node's domain, LLM model, MCP servers, boot sequence, constraints, and dispatch keywords. Each agent_node owns ONE domain with no cross-domain responsibilities. They differ from agents (individual entities inside a agent_node), boot configs (how to start a provider), patterns (abstract reusable solutions), and spawn configs (runtime launch parameters) by being the complete architectural specification of what a agent_node IS and what it does.
+Agent_group specs define autonomous processing units in multi-agent architectures — each spec declares one agent_group's domain, LLM model, MCP servers, boot sequence, constraints, and dispatch keywords. Each agent_group owns ONE domain with no cross-domain responsibilities. They differ from agents (individual entities inside a agent_group), boot configs (how to start a provider), patterns (abstract reusable solutions), and spawn configs (runtime launch parameters) by being the complete architectural specification of what a agent_group IS and what it does.
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -26,30 +26,30 @@ Satellite specs define autonomous processing units in multi-agent architectures 
 ## Patterns
 | Pattern | Application |
 |---------|-------------|
-| Single domain ownership | Each agent_node owns ONE domain; no cross-domain responsibilities |
+| Single domain ownership | Each agent_group owns ONE domain; no cross-domain responsibilities |
 | Model-to-task matching | opus for reasoning-heavy; sonnet for speed/volume |
-| MCP as tool interface | MCP servers are the agent_node's external tool access |
+| MCP as tool interface | MCP servers are the agent_group's external tool access |
 | Ordered boot sequence | Idempotent, ordered initialization steps |
-| Constraints as boundaries | Define what agent_node CANNOT do, not aspirations |
+| Constraints as boundaries | Define what agent_group CANNOT do, not aspirations |
 | Dispatch keywords as contract | Routing contract with orchestrator; concrete nouns/verbs |
-| Explicit dependencies | No hidden couplings between agent_nodes |
+| Explicit dependencies | No hidden couplings between agent_groups |
 | Signal-based monitoring | Signal on complete/failure enables autonomous recovery |
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Cross-domain responsibilities | Violates single-domain principle; creates coupling |
-| Missing boot sequence | Cannot reliably start or recover the agent_node |
-| No dispatch keywords | Orchestrator cannot route tasks to this agent_node |
+| Missing boot sequence | Cannot reliably start or recover the agent_group |
+| No dispatch keywords | Orchestrator cannot route tasks to this agent_group |
 | Constraints section empty | No boundaries = scope creep inevitable |
-| > 4 concurrent agent_nodes | Resource exhaustion; system instability |
+| > 4 concurrent agent_groups | Resource exhaustion; system instability |
 | Hidden dependencies | Undeclared coupling causes cascade failures |
 | No monitoring/signal config | Cannot detect completion or failure |
 ## Application
-1. Define agent_node role and domain (ONE domain only)
+1. Define agent_group role and domain (ONE domain only)
 2. Select LLM model matching task complexity
 3. List MCP servers with config file path
 4. Define ordered, idempotent boot sequence
-5. Set constraints (what agent_node CANNOT do)
+5. Set constraints (what agent_group CANNOT do)
 6. Define dispatch keywords (routing contract)
 7. Specify scaling limits and monitoring config
 8. Document dependencies explicitly

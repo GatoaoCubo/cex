@@ -19,7 +19,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ## Required Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
-| agent | string, non-empty, lowercase slug preferred | YES | - | agent or agent_node whose reasoning is recorded |
+| agent | string, non-empty, lowercase slug preferred | YES | - | agent or agent_group whose reasoning is recorded |
 | intent | string, non-empty | YES | - | decision question or goal being reasoned about |
 | steps | list[step_object], non-empty, >= 2 entries | YES | - | ordered chain of reasoning steps |
 | conclusion | string, non-empty | YES | - | final decision summary referencing strongest evidence |

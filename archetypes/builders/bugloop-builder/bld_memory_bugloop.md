@@ -16,7 +16,7 @@ tags: [bugloop, auto-fix, escalation, verification-suite, rollback-policy]
 tldr: "Classify failure type first; auto-fix only deterministic failures at high confidence; escalate everything ambiguous; vary strategy per retry attempt."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [bug detection, fix loop, confidence threshold, escalation, rollback, verification suite, deterministic, probabilistic]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

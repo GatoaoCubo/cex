@@ -16,11 +16,11 @@ version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
-name: "{{SATELLITE_NAME}}"
+name: "{{AGENT_GROUP_NAME}}"
 role: "{{primary_function_description}}"
 model: "{{llm_model}}"
 mcps: [{{mcp_1}}, {{mcp_2}}]
-domain_area: "{{domain_this_agent_node_covers}}"
+domain_area: "{{domain_this_agent_group_covers}}"
 boot_sequence:
   - "{{boot_step_1}}"
   - "{{boot_step_2}}"
@@ -43,11 +43,11 @@ mcp_config_file: "{{path_to_mcp_json_or_null}}"
 flags: [{{flag_1}}, {{flag_2}}]
 domain: "{{domain_value}}"
 quality: null
-tags: [agent_node, {{domain_tag}}, {{name_tag}}]
+tags: [agent_group, {{domain_tag}}, {{name_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
 ```
 ## Role
-{{what_the_agent_node_does_and_primary_function}}
+{{what_the_agent_group_does_and_primary_function}}
 ## Model & MCPs
 {{llm_model_details_and_mcp_server_specs}}
 ## Boot Sequence
@@ -57,7 +57,7 @@ tldr: "{{dense_summary_max_160ch}}"
 ## Constraints
 {{operational_limits_and_prohibitions}}
 ## Dependencies
-{{external_services_and_sibling_agent_nodes}}
+{{external_services_and_sibling_agent_groups}}
 ## Scaling & Monitoring
 {{concurrency_timeouts_health_checks}}
 ## References

@@ -13,7 +13,7 @@ tags: [dispatch_rule, content-monetization, billing, checkout, credits, PIX, N06
 tldr: Routes billing, checkout, credit, course generation, and payment tasks to content-monetization-builder via N06.
 scope: content-monetization
 keywords: [monetizar, monetize, billing, faturamento, checkout, pagamento, payment, PIX, boleto, créditos, credits, wallet, saldo, curso, course, assinatura, subscription, plano, plan, pricing, preço, precificar, invoice, cobrança, charge, receita, revenue, MercadoPago, Stripe, Hotmart, Digistore24, DS24, Kiwify, Monetizze, Eduzz, geração de curso, course generation, anúncio monetizado, ads checkout, email transacional, transactional email, ERP sync, BaseLinker, pack de créditos, credit pack, IPN, webhook, affiliate, afiliado, EU VAT, GDPR, Widerrufsrecht]
-agent_node: content_monetization_builder
+agent_group: content_monetization_builder
 model: sonnet
 priority: 9
 confidence_threshold: 0.65

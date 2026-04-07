@@ -142,7 +142,7 @@ frontmatter_14_required_fields: '| Field | Format | Example | Validator rule |
 
   | updated | ISO date | `"2026-04-02"` | H06: YYYY-MM-DD format |
 
-  | author | satellite name | `"knowledge-card-builder"` | H10: not "orchestrator" |
+  | author | agent_group name | `"knowledge-card-builder"` | H10: not "orchestrator" |
 
   | domain | snake_case label | `knowledge_management` | H06: no spaces/caps |
 
@@ -178,7 +178,7 @@ anti_patterns: '| Anti-Pattern | Failure | Fix |
 
   | Internal paths in body | H09 HARD fail | Remove all `.claude/`, `records/`, `C:\` |
 
-  | `author: orchestrator` | H10 HARD fail | Use satellite/builder name |
+  | `author: orchestrator` | H10 HARD fail | Use agent_group/builder name |
 
   | `id: prompt_caching` | H03 HARD fail | Prefix: `p01_kc_prompt_caching` |
 

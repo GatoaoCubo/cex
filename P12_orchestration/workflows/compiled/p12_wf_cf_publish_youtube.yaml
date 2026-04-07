@@ -8,7 +8,7 @@ author: n02_marketing
 title: Publish Video to YouTube
 steps_count: 5
 execution: sequential
-agent_nodes:
+agent_groups:
 - n02_marketing
 - n05_operations
 timeout: 300

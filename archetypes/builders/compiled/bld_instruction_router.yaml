@@ -9,8 +9,8 @@ title: Router Builder Instructions
 target: router-builder agent
 phases_count: 4
 prerequisites:
-- Routing domain is identified (e.g. task-to-agent_node, intent-to-agent, request-to-service)
-- All possible destination targets are enumerated (agent_nodes, agents, or services)
+- Routing domain is identified (e.g. task-to-agent_group, intent-to-agent, request-to-service)
+- All possible destination targets are enumerated (agent_groups, agents, or services)
 - Patterns or signals that distinguish each destination are known or inferable
 validation_method: checklist
 domain: router
@@ -29,7 +29,7 @@ dependencies: []
 logging: true
 tldr: Build a route table with patterns, confidence thresholds, fallback, and escalation logic for task-to-destination dispatch.
 density_score: 0.91
-context: 'A router artifact defines task-to-destination routing logic: given an incoming task, which agent_node, agent, or
+context: 'A router artifact defines task-to-destination routing logic: given an incoming task, which agent_group, agent, or
   service should handle it? It contains a route table (pattern → destination mappings), confidence thresholds per route, a
   fallback destination for unmatched tasks, and an escalation policy for ambiguous matches.
 
@@ -39,9 +39,9 @@ context: 'A router artifact defines task-to-destination routing logic: given an 
 
   |---|---|---|
 
-  | `routing_domain` | string | Category of tasks being routed (e.g. `agent_node_task_routing`, `intent_dispatch`) |
+  | `routing_domain` | string | Category of tasks being routed (e.g. `agent_group_task_routing`, `intent_dispatch`) |
 
-  | `destinations` | list | All valid routing targets (agent_node names, agent IDs, or service endpoints) |
+  | `destinations` | list | All valid routing targets (agent_group names, agent IDs, or service endpoints) |
 
   | `patterns` | list | Signals that distinguish each destination (keywords, regex, intent labels) |
 
@@ -58,7 +58,7 @@ context: 'A router artifact defines task-to-destination routing logic: given an 
 
   - router = full routing logic with confidence thresholds, fallback, escalation (this builder)
 
-  - dispatch_rule = simple keyword-to-agent_node mapping without confidence scoring (different builder)
+  - dispatch_rule = simple keyword-to-agent_group mapping without confidence scoring (different builder)
 
   - workflow = multi-step orchestration sequence (different builder)
 
@@ -72,10 +72,10 @@ phase_1_research_route_analysis: "Map tasks to destinations and determine routin
   \  Fallback must always be a valid destination (not null, not \"none\")\nEscalation scenarios:\n  ambiguous match:   multiple\
   \ routes exceed confidence_min simultaneously\n  low confidence:    best match is below confidence_min for all routes\n\
   \  conflict:          two routes have equal priority and equal confidence\nCheck brain_query [IF MCP] for existing routers\
-  \ in the same domain to avoid duplicates.\nGenerate router_slug: snake_case, lowercase, no hyphens (e.g. agent_node_task_router)\n\
+  \ in the same domain to avoid duplicates.\nGenerate router_slug: snake_case, lowercase, no hyphens (e.g. agent_group_task_router)\n\
   Deliverable: route map with patterns, confidence thresholds, priority, and fallback identified."
 phase_2_classify_boundary_check: "Confirm the artifact belongs to `router` and not a sibling kind.\nIF caller needs only a\
-  \ simple keyword → agent_node table with no confidence scoring:\n  RETURN \"Route to dispatch-rule-builder — simpler artifact,\
+  \ simple keyword → agent_group table with no confidence scoring:\n  RETURN \"Route to dispatch-rule-builder — simpler artifact,\
   \ no confidence logic needed.\"\nIF caller needs a multi-step execution sequence with dependencies:\n  RETURN \"Route to\
   \ workflow-builder — workflows orchestrate steps, not dispatch.\"\nIF caller needs to define what an agent IS rather than\
   \ where to route TO:\n  RETURN \"Route to agent-builder — agent identity is a different artifact kind.\"\nIF caller needs\

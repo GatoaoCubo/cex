@@ -10,10 +10,10 @@ pattern: few-shot learning for minimal orchestration events
 # Examples: signal-builder
 ## Golden Example
 INPUT: "Emit completion signal for codex after finishing signal-builder"
-OUTPUT (`p12_sig_agent_node_complete.json`):
+OUTPUT (`p12_sig_agent_group_complete.json`):
 ```json
 {
-  "agent_node": "codex",
+  "agent_group": "codex",
   "status": "complete",
   "quality_score": 9.2,
   "timestamp": "2026-03-26T10:45:00-03:00",
@@ -37,7 +37,7 @@ WHY THIS IS GOLDEN:
 OUTPUT (`p12_sig_batch_progress.json`):
 ```json
 {
-  "agent_node": "edison",
+  "agent_group": "edison",
   "status": "progress",
   "quality_score": 8.4,
   "timestamp": "2026-03-26T11:00:00-03:00",
@@ -53,7 +53,7 @@ WHY THIS PASSES:
 ## Anti-Example
 BAD OUTPUT (`p12_sig_dispatch.yaml`):
 ```yaml
-agent_node: codex
+agent_group: codex
 status: complete
 keywords:
   - orchestration

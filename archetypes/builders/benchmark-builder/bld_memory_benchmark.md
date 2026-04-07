@@ -16,7 +16,7 @@ tags: [benchmark, baseline, measurement, reproducibility, P07, quantitative]
 tldr: "Baseline before target. Absolute targets without baselines are not reproducible. Target = baseline * improvement_factor."
 impact_score: 7.6
 decay_rate: 0.06
-agent_node: edison
+agent_group: edison
 keywords: [benchmark, baseline, target, measurement, reproducibility, variance, metrics, quantitative]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

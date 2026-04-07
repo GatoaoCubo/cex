@@ -16,7 +16,7 @@ tags: [llm-judge, scale-anchors, few-shot, calibration, self-enhancement-bias, c
 tldr: "Behavioral scale anchors + few-shot rationale eliminate judge variance. Different model family eliminates self-enhancement. Max 5 criteria, verify non-overlap."
 impact_score: 8.5
 decay_rate: 0.03
-agent_node: edison
+agent_group: edison
 keywords: [llm judge, scale anchors, few shot, calibration, judge model, criteria, variance, self-enhancement bias, chain of thought]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

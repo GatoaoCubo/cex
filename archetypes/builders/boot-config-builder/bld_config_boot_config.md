@@ -44,7 +44,7 @@ Rule: id MUST equal filename stem.
 ## Identity Block Rules
 - name: human-readable agent name (not slug)
 - role: one-sentence role description
-- agent_node: real agent_node name or "agnostic" — never blank
+- agent_group: real agent_group name or "agnostic" — never blank
 ## Constraints Rules
 - All numeric fields must be integers (not strings)
 - temperature must be float 0.0-2.0

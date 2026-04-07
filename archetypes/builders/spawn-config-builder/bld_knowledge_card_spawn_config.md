@@ -9,7 +9,7 @@ sources: spawn-config-builder MANIFEST.md + SCHEMA.md
 
 # Domain Knowledge: spawn_config
 ## Executive Summary
-Spawn configs are YAML artifacts that define exactly how a agent node is launched — CLI flags, model, timeout, MCP profile, and prompt delivery strategy. They encode the spawn contract so the same agent_node can be reliably re-launched without manual CLI assembly. Unlike signals (runtime status) or dispatch_rules (routing policy), spawn configs are static pre-launch recipes that exist before the agent_node process starts.
+Spawn configs are YAML artifacts that define exactly how a agent node is launched — CLI flags, model, timeout, MCP profile, and prompt delivery strategy. They encode the spawn contract so the same agent_group can be reliably re-launched without manual CLI assembly. Unlike signals (runtime status) or dispatch_rules (routing policy), spawn configs are static pre-launch recipes that exist before the agent_group process starts.
 ## Spec Table
 | Property | Value |
 |----------|-------|
@@ -28,33 +28,33 @@ Spawn configs are YAML artifacts that define exactly how a agent node is launche
 ## Patterns
 | Pattern | Rule |
 |---------|------|
-| Mode selection | solo = 1 agent_node 1 task; grid = parallel fixed set; continuous = queue-refill loop |
+| Mode selection | solo = 1 agent_group 1 task; grid = parallel fixed set; continuous = queue-refill loop |
 | prompt_strategy | Use `handoff` when task > 200 chars; `inline` only for short commands |
 | flags list | Include all runtime-required permission and safety flags |
-| mcp_config | Reference `.mcp-{sat}.json`; omit only for agent_nodes with no MCP tools |
-| Model pairing | Match agent_node to correct model: opus = build/execute, sonnet = research/marketing |
+| mcp_config | Reference `.mcp-{sat}.json`; omit only for agent_groups with no MCP tools |
+| Model pairing | Match agent_group to correct model: opus = build/execute, sonnet = research/marketing |
 | interactive | `true` = terminal stays open for monitoring; `false` = fire-and-forget |
 | id == filename stem | `p12_spawn_solo_edison.yaml` → `id: p12_spawn_solo_edison` |
 | Timeout budgeting | research ~30 min, build ~45 min, deploy ~15 min |
 - **Body sections**: Spawn Command → Parameters → Constraints
 - **Spawn Command**: exact PowerShell/CLI command — not pseudocode
-- **Grid max**: 3 agent_nodes concurrent to prevent system instability
+- **Grid max**: 3 agent_groups concurrent to prevent system instability
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Inline prompt > 200 chars with `-p` flag | Long inline prompts hang non-interactive spawn |
-| Missing required permission flags | Satellite blocked by permission prompts mid-execution |
-| Wrong model for agent_node domain | Performance mismatch; sonnet for build tasks under-delivers |
-| Omitting `timeout` | Runaway agent_node consumes resources indefinitely |
+| Missing required permission flags | Agent_group blocked by permission prompts mid-execution |
+| Wrong model for agent_group domain | Performance mismatch; sonnet for build tasks under-delivers |
+| Omitting `timeout` | Runaway agent_group consumes resources indefinitely |
 | `mode: continuous` without queue refill logic | Slots go idle after first wave |
 | Hardcoded absolute paths in mcp_config | Breaks portability across machines |
-| Complex task with `prompt_strategy: inline` | Satellite receives insufficient context |
+| Complex task with `prompt_strategy: inline` | Agent_group receives insufficient context |
 ## Application
-1. Choose mode: `solo` (one agent_node), `grid` (parallel fixed), or `continuous` (queue-driven)
-2. Identify target agent_node and its correct model pairing
+1. Choose mode: `solo` (one agent_group), `grid` (parallel fixed), or `continuous` (queue-driven)
+2. Identify target agent_group and its correct model pairing
 3. Determine `prompt_strategy`: if task > 200 chars, write handoff file first and set `handoff`
 4. Assemble `flags` list with all required CLI flags
-5. Set `mcp_config` path if agent_node uses MCP tools
+5. Set `mcp_config` path if agent_group uses MCP tools
 6. Set `timeout` based on expected task duration
 7. Write body: Spawn Command (exact CLI) → Parameters → Constraints
 8. Set `quality: null`, verify body ≤ 3072 bytes

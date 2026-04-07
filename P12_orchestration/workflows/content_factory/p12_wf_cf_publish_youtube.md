@@ -9,7 +9,7 @@ author: "n02_marketing"
 title: "Publish Video to YouTube"
 steps_count: 5
 execution: sequential
-agent_nodes: [n02_marketing, n05_operations]
+agent_groups: [n02_marketing, n05_operations]
 timeout: 300
 retry_policy: per_step
 depends_on: [p03_ap_cf_generate_video]

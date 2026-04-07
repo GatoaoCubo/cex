@@ -12,7 +12,7 @@ tags: [dispatch, creation, build, builder, artifact, scaffold, P12]
 tldr: Route artifact creation and build tasks to builder nucleus via keyword and intent matching
 scope: creation
 keywords: [create, build, construct, scaffold, generate, implement, criar, construir, gerar, montar, produzir, implementar]
-agent_node: builder
+agent_group: builder
 model: opus
 priority: 8
 confidence_threshold: 0.75

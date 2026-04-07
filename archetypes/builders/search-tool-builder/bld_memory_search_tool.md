@@ -16,7 +16,7 @@ tags: [search-tool, max-results, cost, api-key, rate-limit, provider-selection]
 tldr: "Set max_results (default 10). Document cost. NEVER hardcode API keys. Document rate limits. Match provider to use case."
 impact_score: 8.0
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [search tool, web search, semantic search, tavily, serper, brave, exa, max results, cost, api key, rate limit]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

@@ -39,7 +39,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S02 | Rationale explains WHY | 1.0 | Does not merely restate the statement; explains consequence of violation |
 | S03 | Enforcement mechanism named | 1.0 | Names a specific detection method: automated check, review step, or runtime guard |
 | S04 | Exceptions documented | 1.0 | `exceptions` field present: list of conditions or explicitly `"None"` |
-| S05 | Scope boundary clear | 1.0 | `scope` specifies system, agent_node, or domain — not "everything" |
+| S05 | Scope boundary clear | 1.0 | `scope` specifies system, agent_group, or domain — not "everything" |
 | S06 | Violation examples concrete | 1.0 | `Violations` section has >= 2 breach scenarios with named consequences |
 | S07 | Correct-use examples present | 1.0 | `Examples` section has >= 2 applications showing compliant behavior |
 | S08 | All 8 body sections present | 1.0 | `Statement`, `Rationale`, `Enforcement`, `Exceptions`, `Examples`, `Violations`, `History`, `References` |

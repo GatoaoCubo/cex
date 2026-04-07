@@ -155,8 +155,8 @@ PHRASES = [
      "Calibrate detail level between conciseness and completeness"),
     ("Calibrar", "Calibrate"),
 
-    ("Posicionar agente no mapa de satelites e routing",
-     "Position agent in the satellite map and routing"),
+    ("Posicionar agente no mapa de agent_groups e routing",
+     "Position agent in the agent_group map and routing"),
     ("Posicionar", "Position"),
 
     ("Detectar boundary violations", "Detect boundary violations"),
@@ -173,7 +173,7 @@ PHRASES = [
      "Distinguish pattern from law (inviolable) and workflow (executable)"),
     ("Distinguir", "Distinguish"),
 
-    ("Integrar spawn_config por satelite", "Integrate spawn_config per satellite"),
+    ("Integrar spawn_config por agent_group", "Integrate spawn_config per agent_group"),
     ("Configurar health_check, PID file management, e resource limits",
      "Configure health_check, PID file management, and resource limits"),
     ("Configurar fallback_per_builder para resiliencia de dispatch",
@@ -235,7 +235,7 @@ PHRASES = [
      "crew orchestrators that dispatch, sequence, and collect results without executing tasks"),
     ("orquestradores de crew que coordenam multiplos builders sem executar tarefas diretamente",
      "crew orchestrators that coordinate multiple builders without directly executing tasks"),
-    ("logica de roteamento task-to-agent_node com", "task-to-agent_node routing logic with"),
+    ("logica de roteamento task-to-agent_group com", "task-to-agent_group routing logic with"),
     ("prompts de acao task-focused com input/output", "task-focused action prompts with input/output"),
     ("prompts de acao task-focused com inpu", "task-focused action prompts with inpu"),
     ("prompts de acao", "action prompts"),
@@ -276,8 +276,8 @@ PHRASES = [
     ("entidades nomeadas", "named entities"),
     ("mapas cognitivos de d", "cognitive maps of d"),
     ("mapas cognitivos", "cognitive maps"),
-    ("empacotam task, contexto, escopo e regras de commit for satellites executarem",
-     "package task, context, scope, and commit rules for satellites to execute"),
+    ("empacotam task, contexto, escopo e regras de commit for agent_groups executarem",
+     "package task, context, scope, and commit rules for agent_groups to execute"),
     ("empacotam task, contexto, escopo", "package task, context, scope"),
 
     # Dispatch rule specific
@@ -524,8 +524,8 @@ WORDS = [
     ("processos", "processes"),
     ("habilidade", "skill"),
     ("habilidades", "skills"),
-    ("satelites", "satellites"),
-    ("satelite", "satellite"),
+    ("agent_groups", "agent_groups"),
+    ("agent_group", "agent_group"),
     ("roteamento", "routing"),
     ("despacho", "dispatch"),
     ("violacoes", "violations"),
@@ -594,9 +594,9 @@ TRIGGER_TRANSLATIONS = {
     "spec do LLM": "LLM spec",
     "emite signal": "emit signal",
     "gera completion json": "generate completion JSON",
-    "notifica status do agent_node": "notify agent_node status",
-    "Especifica o satelite researcher para pesquisa de mercado":
-     "Specify the researcher satellite for market research",
+    "notifica status do agent_group": "notify agent_group status",
+    "Especifica o agent_group researcher para pesquisa de mercado":
+     "Specify the researcher agent_group for market research",
 }
 
 KEYWORD_TRANSLATIONS = {

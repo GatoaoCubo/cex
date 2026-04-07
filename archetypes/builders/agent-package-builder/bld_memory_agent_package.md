@@ -16,7 +16,7 @@ tags: [agent-package, portability, tier-compliance, llm-agnostic, manifest, pack
 tldr: "Scan for absolute paths before portable:true. Tier must match file count exactly. Token-budget system_instruction early. LP mappings from enum only."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [agent_package, portable, manifest, tier, lp_mapping, system_instruction, token_budget, file_inventory, hardcoded_paths]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

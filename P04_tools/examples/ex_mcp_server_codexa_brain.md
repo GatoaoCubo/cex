@@ -19,7 +19,7 @@ tags: [mcp, brain, rag, bm25, faiss, ollama, search]
 
 ## Name
 - Name: organization-brain
-- Role: Central knowledge retrieval for all organization agent_nodes
+- Role: Central knowledge retrieval for all organization agent_groups
 
 ## Transport
 - Transport: stdio (via `python -m organization_brain.server`)

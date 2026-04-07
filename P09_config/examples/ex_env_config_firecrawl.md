@@ -28,7 +28,7 @@ source: organization-core/.claude/projects/memory/MEMORY.md
 
 ## Source
 
-- Where defined: Railway environment variables (operations_agent agent_node)
+- Where defined: Railway environment variables (operations_agent agent_group)
 - How to obtain: Sign up at firecrawl.dev, $19/mo tier, copy API key from dashboard
 
 ## Fallback

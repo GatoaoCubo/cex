@@ -17,21 +17,21 @@ tags: [component-map, architecture, dependencies]
 | Component | Path | Depends On | Used By |
 |-----------|------|-----------|---------|
 | orchestrator orchestrator | boot/stella.cmd | pi runtime, rules | USER |
-| Satellite boots | boot/*.cmd | claude CLI, MCP configs | orchestrator |
-| Brain MCP | records/core/brain/ | Ollama, FAISS | All agent_nodes |
+| Agent_group boots | boot/*.cmd | claude CLI, MCP configs | orchestrator |
+| Brain MCP | records/core/brain/ | Ollama, FAISS | All agent_groups |
 | Quality Gate | records/core/python/quality_gate.py | git hooks | Pre-commit |
 | Spawn Scripts | records/core/powershell/ | PowerShell | orchestrator |
-| Signal Writer | records/core/python/signal_writer.py | filesystem | Satellites |
-| Agent Store | records/agents/ | Brain index | Satellites |
-| Skill Store | records/skills/ | Brain index | Satellites |
+| Signal Writer | records/core/python/signal_writer.py | filesystem | Agent_groups |
+| Agent Store | records/agents/ | Brain index | Agent_groups |
+| Skill Store | records/skills/ | Brain index | Agent_groups |
 | Pool | records/pool/ | Brain index | Knowledge queries |
 | WhatsApp Bridge | records/framework/whatsapp/ | Node.js, Groq | orchestrator |
-| Handoffs | .claude/handoffs/ | filesystem | orchestrator -> Satellites |
-| Signals | .claude/signals/ | filesystem | Satellites -> orchestrator |
+| Handoffs | .claude/handoffs/ | filesystem | orchestrator -> Agent_groups |
+| Signals | .claude/signals/ | filesystem | Agent_groups -> orchestrator |
 
 ## Data Flow
 ```
-USER -> orchestrator -> handoffs/ -> spawn -> SATELLITE -> signals/ -> orchestrator
+USER -> orchestrator -> handoffs/ -> spawn -> AGENT_GROUP -> signals/ -> orchestrator
                                            |
                                     brain_query (MCP)
                                            |

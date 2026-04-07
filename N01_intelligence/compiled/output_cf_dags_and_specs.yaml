@@ -108,7 +108,7 @@ schema_compliance: 'All DAGs follow `bld_schema_dag`:
 
   - [x] kind: dag, lp: P12
 
-  - [x] nodes with id, label, agent_node
+  - [x] nodes with id, label, agent_group
 
   - [x] edges with from, to
 

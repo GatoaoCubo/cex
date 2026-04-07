@@ -16,7 +16,7 @@ tags: [cli-tool, exit-codes, flag-naming, composability, command-structure]
 tldr: "Semantic exit codes are load-bearing for composability. Kebab-case flags. Mirror commands list in frontmatter to body. Stay under 1024 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [cli tool, exit codes, flag naming, command structure, composability, output format, config override]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

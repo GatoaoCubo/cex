@@ -125,7 +125,7 @@ EMOJI_MAP = {
     0x1F50D: "[?]",      # magnifying glass
     0x1F4E6: "[>>]",     # package
     0x1F3AF: "[>>]",     # target
-    0x1F4E1: "[>>]",     # satellite
+    0x1F4E1: "[>>]",     # agent_group
     0x1F534: "[!!]",     # red circle
     0x1F7E0: "[!!]",     # orange circle
     0x1F7E1: "[..]",     # yellow circle

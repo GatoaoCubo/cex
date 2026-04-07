@@ -11,7 +11,7 @@ title: "Env: {{VAR_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
-author: {{SATELLITE_NAME}}
+author: {{AGENT_GROUP_NAME}}
 quality: {{QUALITY_8_TO_10}}
 tags: [{{TAG1}}, {{TAG2}}, env, config]
 tldr: "{{ONE_SENTENCE_WHAT_THIS_VAR_CONTROLS}}"

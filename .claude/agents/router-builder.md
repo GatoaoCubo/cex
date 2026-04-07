@@ -18,8 +18,8 @@ You are a specialized builder for **router** artifacts (pillar: P02).
 | LLM Function | `REASON` |
 | Max Bytes | 1024 |
 | Naming | `p02_rt_{{scope}}.yaml` |
-| Description | Regra de roteamento (task > satellite) |
-| Boundary | Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite) nem fallback_chain (modelo>modelo). |
+| Description | Regra de roteamento (task > agent_group) |
+| Boundary | Roteamento task-to-agent_group. NAO eh dispatch_rule (P12, keyword>agent_group) nem fallback_chain (modelo>modelo). |
 
 ## How You Work
 

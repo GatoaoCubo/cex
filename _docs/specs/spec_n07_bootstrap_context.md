@@ -197,15 +197,16 @@ During task execution, the 8F pipeline enriches further:
 | Fix | Batch find-replace: PT patterns → EN equivalents |
 | Status | **SCHEDULED for overnight run** |
 
-### GAP G13 (NEW): satellite/agent_node terms (700+ files)
+### GAP G13 (CLOSED): satellite/agent_node renamed to agent_group
 
 | Metric | Value |
 |--------|-------|
-| "agent_node" in files | 399 |
-| "satellite" in files | 347 |
-| Problem | No industry equivalent. CEX-only terms. |
-| Fix | Rename both to `agent_group` |
-| Status | **SCHEDULED for dedicated overnight** |
+| Files modified | 648 |
+| Insertions | 2,078 |
+| Deletions | 2,003 |
+| Residual old terms | 0 |
+| Fix | Renamed satellite + agent_node to `agent_group` |
+| Status | **DONE** (2026-04-07, N03) |
 
 ### GAP G14 (NEW): 4 kinds missing llm_function
 

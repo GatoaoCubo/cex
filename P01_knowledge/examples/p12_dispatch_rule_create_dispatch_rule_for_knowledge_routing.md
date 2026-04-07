@@ -12,7 +12,7 @@ tags: [dispatch, knowledge, rag, indexing, knowledge-engine, P12]
 tldr: Route knowledge architecture, RAG, indexing, and documentation tasks to knowledge-engine
 scope: knowledge
 keywords: [knowledge, conhecimento, rag, indexar, indexing, retrieval, recuperação, documentation, docs, embedding, chunking, taxonomy]
-agent_node: knowledge-engine
+agent_group: knowledge-engine
 model: sonnet
 priority: 7
 confidence_threshold: 0.72
@@ -45,7 +45,7 @@ Bilingual PT/EN coverage fires on both Portuguese operator commands and English 
 Priority 7 (high) — knowledge management is a core pipeline function. Adjacent rule `p12_dr_research` holds priority 8; when input contains both research signals (`analise`, `benchmark`) and knowledge signals (`indexar`, `rag`), the research rule wins. Pure indexing and RAG requests resolve exclusively to this rule.
 
 ## Fallback
-researcher handles knowledge requests when knowledge-engine is unavailable; it can summarize, chunk, and synthesize content without full knowledge-graph tooling. researcher is a distinct agent_node — no self-fallback.
+researcher handles knowledge requests when knowledge-engine is unavailable; it can summarize, chunk, and synthesize content without full knowledge-graph tooling. researcher is a distinct agent_group — no self-fallback.
 
 ## Cross-Reference
 - **Upstream**: orchestrator, workflow tasks with knowledge, RAG, or documentation intent

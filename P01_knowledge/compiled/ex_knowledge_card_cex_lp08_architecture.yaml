@@ -20,7 +20,7 @@ tldr: 'P08 define 5 meta-artefatos que governam estrutura: agent_card, pattern, 
 when_to_use: Entender como sistemas LLM escalam via arquitetura formal e meta-artefatos
 keywords:
 - architecture
-- agent_node
+- agent_group
 - pattern
 - law
 - diagram
@@ -67,7 +67,7 @@ fases:
 - Revisar arquitetura quando evals P07 revelam gaps
 regras_de_ouro:
 - SEMPRE documentar WHY de cada law (nao so WHAT)
-- NUNCA criar agent_node sem agent_card formal
+- NUNCA criar agent_group sem agent_card formal
 - SEMPRE atualizar component_map ao adicionar componente
 - NUNCA tratar pattern como lei (pattern eh recomendacao)
 - SEMPRE separar diagram (visual) de component_map (dados)

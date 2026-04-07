@@ -17,7 +17,7 @@ tldr: Lessons from the N03 bootstrap -- bigram parser fixes, proprietary cleanup
 density_score: 0.85
 l01_bigram_parser_needs_digits: 'The Motor regex stripped digits from words, breaking kinds like e2e_eval. Fix: changed [^a-z]
   to [^a-z0-9_] in bigram/trigram resolution. Impact: 94/99 to 99/99 kind resolution.'
-l02_proprietary_terms_leak_everywhere: '624 author: fields contained satellite names. 81 content files had company refs. Fix:
+l02_proprietary_terms_leak_everywhere: '624 author: fields contained agent_group names. 81 content files had company refs. Fix:
   systematic grep + replace across entire repo. Lesson: run proprietary check BEFORE any release.'
 l03_type_to_template_must_stay_in_sync: '3 kinds were in kinds_meta but missing from TYPE_TO_TEMPLATE.yaml. Fix: cex_kind_register.py
   --validate catches this automatically. Lesson: always validate registries after any kind change.'

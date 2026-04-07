@@ -16,7 +16,7 @@ tags: [secret-config, rotation-policy, access-pattern, lease-duration, audit-log
 tldr: "Declare rotation method + lease_duration for dynamic access. Fallback for critical paths. Audit log always. No plaintext secrets anywhere."
 impact_score: 8.5
 decay_rate: 0.03
-agent_node: edison
+agent_group: edison
 keywords: [secret config, rotation policy, access pattern, lease duration, vault, kubernetes secrets, aws secrets manager, encryption, audit log, credential management]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

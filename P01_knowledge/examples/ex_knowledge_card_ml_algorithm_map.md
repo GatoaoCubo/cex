@@ -7,7 +7,7 @@ quality: 8.7
 source: "gdrive://organization Conhecimento/Mapeando_o_Universo_do_Machine_Learning.pdf"
 contributor: "CEO (root folder)"
 domain: conhecimento
-agent_node: knowledge_agent
+agent_group: knowledge_agent
 tags: [machine-learning, algoritmos, supervisionado, nao-supervisionado, guia-visual]
 created: "2026-03-23"
 ---
@@ -107,6 +107,6 @@ Dados rotulados?
 | Classificacao | Triage automatica de insumos (inbox → dominio) |
 | Clustering | Agrupar agents por similaridade de capabilities |
 | Regressao | Prever quality score de artefatos |
-| Decision Trees | Routing de tarefas para satelites |
+| Decision Trees | Routing de tarefas para agent_groups |
 | PCA | Reduzir dimensionalidade de embeddings do brain |
 | Ensemble | Combinar outputs de multiplos agents (grid) |

@@ -24,7 +24,7 @@ permission_scope: nucleus
 | Builder directory | kebab-case | `dag-builder/` |
 | Frontmatter fields | snake_case | `execution_order`, `critical_path` |
 | Node ids | lowercase slug | `research`, `write_copy`, `publish` |
-| Satellite values | lowercase slug | `edison`, `shaka`, `atlas` |
+| Agent_group values | lowercase slug | `edison`, `shaka`, `atlas` |
 Rule: use `.yaml` only for this builder.
 ## File Paths
 - Output: `cex/P12_orchestration/compiled/p12_dag_{pipeline}.yaml`

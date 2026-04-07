@@ -22,7 +22,7 @@ Fix: changed [^a-z] to [^a-z0-9_] in bigram/trigram resolution.
 Impact: 94/99 to 99/99 kind resolution.
 
 ## L02: Proprietary Terms Leak Everywhere
-624 author: fields contained satellite names. 81 content files had company refs.
+624 author: fields contained agent_group names. 81 content files had company refs.
 Fix: systematic grep + replace across entire repo.
 Lesson: run proprietary check BEFORE any release.
 

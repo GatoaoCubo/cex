@@ -11,12 +11,12 @@ tags:
 - pattern
 - nucleus
 - fractal
-- agent_node
+- agent_group
 - orchestration
 - 12-pillars
 tldr: A nucleus mirrors all 12 CEX pillars filled with domain-specific content — not a new kind, but a composition pattern
   of existing kinds
-problem: How to represent an autonomous agent_node (nucleus) that has its own identity, knowledge, tools, workflows, and quality
+problem: How to represent an autonomous agent_group (nucleus) that has its own identity, knowledge, tools, workflows, and quality
   gates — without inventing new taxonomy.
 solution: A nucleus is a DIRECTORY that mirrors the 12 CEX pillars, filled with domain-specific instances of existing kinds.
   No new kind needed.

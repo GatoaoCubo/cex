@@ -20,11 +20,11 @@ permission_scope: nucleus
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Artifact file | `p12_sig_{event}.json` | `p12_sig_agent_node_complete.json` |
+| Artifact file | `p12_sig_{event}.json` | `p12_sig_agent_group_complete.json` |
 | Builder directory | kebab-case | `signal-builder/` |
 | Payload fields | snake_case | `quality_score`, `commit_hash` |
 | Status values | lowercase enum | `complete`, `error`, `progress` |
-| Satellite values | lowercase slug | `codex`, `edison`, `atlas` |
+| Agent_group values | lowercase slug | `codex`, `edison`, `atlas` |
 Rule: use `.json` only for this builder.
 ## File Paths
 - Output: `cex/P12_orchestration/compiled/p12_sig_{event}.json`

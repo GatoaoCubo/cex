@@ -23,7 +23,7 @@ tags: [permission, stella, allow, block, orchestration]
 | Maintenance | del, rm, mkdir, copy, move |
 | Signals | read .claude/signals/, write completion signals |
 
-## Block List (route to agent_nodes)
+## Block List (route to agent_groups)
 | Domain | Route To |
 |--------|----------|
 | Research, market analysis | research_agent |

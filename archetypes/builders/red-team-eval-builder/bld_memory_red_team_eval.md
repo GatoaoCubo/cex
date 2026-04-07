@@ -16,7 +16,7 @@ tags: [red-team-eval, pass-criteria, attack-types, owasp, adversarial, llm-secur
 tldr: "Observable pass_criteria is load-bearing for gradeability. Use enum attack_types. Map to OWASP. Placeholders only — never real payloads."
 impact_score: 8.5
 decay_rate: 0.03
-agent_node: edison
+agent_group: edison
 keywords: [red team, adversarial eval, pass criteria, attack types, OWASP LLM, jailbreak, prompt injection, safety testing]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

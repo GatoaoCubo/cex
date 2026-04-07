@@ -19,7 +19,7 @@ version: "1.0.0"
 created: "2026-03-26"
 updated: "2026-03-26"
 author: "stella"
-agent_node: "edison"
+agent_group: "edison"
 mission: "wave19"
 autonomy: "full"
 quality_target: 9.0
@@ -94,7 +94,7 @@ FAILURES:
 3. wrong id prefix: `p03_ap_` instead of `p12_ho_` (H01)
 4. contains `persona`: prompt engineering -> action_prompt drift (H08)
 5. contains `response_format`: prompt constraint -> action_prompt drift (H08)
-6. missing required fields: `agent_node`, `mission`, `autonomy`, `quality_target`, `quality`, `tags`, `tldr` (H03)
+6. missing required fields: `agent_group`, `mission`, `autonomy`, `quality_target`, `quality`, `tags`, `tldr` (H03)
 7. vague tasks: "Build some archetype builders" is not specific (H09)
 8. no scope fence section: missing SOMENTE/NAO TOQUE (H10)
 9. no commit section: missing exact git commands (H10)

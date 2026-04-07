@@ -16,7 +16,7 @@ title: "{{Title 5-100 chars}}"
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
-author: "{{satellite_name}}"
+author: "{{agent_group_name}}"
 domain: {{domain_name}}
 quality: null
 tags: [{{tag1}}, {{tag2}}, {{tag3}}, knowledge]
@@ -38,7 +38,7 @@ data_source: "{{source_url_or_artifact_ref}}"
 ` ``yaml
 topic: {{topic_name}}
 scope: {{scope_description}}
-owner: {{owner_agent_node}}
+owner: {{owner_agent_group}}
 criticality: {{low|medium|high}}
 ` ``
 ## Key Concepts

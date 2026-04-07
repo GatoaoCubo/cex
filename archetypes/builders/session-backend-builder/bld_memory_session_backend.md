@@ -23,7 +23,7 @@ tags:
 tldr: "File-first with JSON, TTL 72h dev / 24h prod, per-nucleus scoping, never pickle, compaction on load, clear upgrade path."
 impact_score: 7.8
 decay_rate: 0.03
-agent_node: edison
+agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

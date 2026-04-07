@@ -49,7 +49,7 @@ spec: '| Nivel | LPs | Capacidade Central | Diagnostico |
 
   | L3 Runtime | 6/12 | Processo dedicado | Tools, hooks, monitoramento |
 
-  | L4 Satellite | 9/12 | Autonomia departamental | Memoria, evolucao, coordenacao |
+  | L4 Agent_group | 9/12 | Autonomia departamental | Memoria, evolucao, coordenacao |
 
   | L5 System | 12/12 | Multi-agente coordenado | Todas 8 funcoes ativas |
 

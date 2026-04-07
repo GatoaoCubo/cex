@@ -3,7 +3,7 @@ id: ex_agent_copywriter
 kind: agent
 pillar: P02
 title: Copywriter Agent
-agent_node: persuasion_hub
+agent_group: persuasion_hub
 domain: marketing
 llm_function: BECOME
 capabilities_count: 6

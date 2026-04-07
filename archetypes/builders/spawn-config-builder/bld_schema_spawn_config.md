@@ -20,7 +20,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | author | string | YES | - | Producer identity |
 | title | string | YES | - | Human-readable config name |
 | mode | enum: solo, grid, continuous | YES | - | Spawn mode |
-| agent_node | string or list[string] | YES | - | Target agent_node(s) |
+| agent_group | string or list[string] | YES | - | Target agent_group(s) |
 | model | string | YES | - | LLM model (opus, sonnet, haiku) |
 | flags | list[string] | YES | - | CLI flags for claude command |
 | mcp_config | string | REC | - | Path to .mcp-{sat}.json |

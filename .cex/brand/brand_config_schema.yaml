@@ -1,6 +1,8 @@
 # brand_config_schema.yaml
 # Validates .cex/brand/brand_config.yaml
-# 7 sections, 13 required fields, 28 optional fields
+# 7 sections, 13 required fields, 38 optional fields
+# Derived variables (BRAND_SLUG, BRAND_UPPER, BRAND_NAME_SHORT) computed by brand_inject.py
+# Aliases (BRAND_TONE->BRAND_VOICE_TONE, BRAND_VOICE->BRAND_VOICE_TONE, BRAND_NICHE->BRAND_CATEGORY) handled by brand_inject.py
 
 type: object
 required: [identity, archetype, voice, audience, visual, positioning, monetization]
@@ -17,6 +19,9 @@ properties:
       BRAND_VISION:     { type: string }
       BRAND_VALUES:     { type: array, items: { type: string }, minItems: 3, maxItems: 7 }
       BRAND_STORY:      { type: string, minLength: 200, maxLength: 2000 }
+      BRAND_BIO:        { type: string, maxLength: 300 }
+      BRAND_ESSENCE:    { type: string, maxLength: 50 }
+      BRAND_MANIFESTO:  { type: string, maxLength: 3000 }
 
   archetype:
     type: object
@@ -41,6 +46,8 @@ properties:
       BRAND_VOICE_DO:          { type: array, items: { type: string }, minItems: 3 }
       BRAND_VOICE_DONT:        { type: array, items: { type: string }, minItems: 3 }
       BRAND_LANGUAGE:          { type: string, pattern: "^[a-z]{2}-[A-Z]{2}$" }
+      BRAND_PERSON:            { type: string, enum: ["1st", "2nd", "3rd"] }
+      BRAND_ENERGY:            { type: string, enum: [calm, moderate, energetic, bold] }
 
   audience:
     type: object
@@ -54,6 +61,7 @@ properties:
       BRAND_ICP_FEARS:        { type: array, items: { type: string } }
       BRAND_ICP_ASPIRATIONS:  { type: array, items: { type: string } }
       BRAND_TRANSFORMATION:   { type: string, pattern: "From .+ to .+ through .+" }
+      BRAND_COUNTRY:          { type: string, pattern: "^[A-Z]{2}$" }
 
   visual:
     type: object
@@ -88,6 +96,8 @@ properties:
       BRAND_DIFFERENTIATOR: { type: string }
       BRAND_COMPETITORS:    { type: array, items: { type: string } }
       BRAND_CONTENT_PILLARS: { type: array, items: { type: string }, minItems: 3, maxItems: 7 }
+      BRAND_HASHTAG:       { type: string, pattern: "^#" }
+      BRAND_TAGS:          { type: array, items: { type: string }, maxItems: 10 }
 
   monetization:
     type: object

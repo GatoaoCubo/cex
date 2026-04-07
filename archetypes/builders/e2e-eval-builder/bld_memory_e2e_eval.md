@@ -23,7 +23,7 @@ tags:
 tldr: "Chain stages with explicit data lineage, assert at each boundary, scale timeouts to pipeline depth, always clean up."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

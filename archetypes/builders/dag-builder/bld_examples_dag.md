@@ -23,19 +23,19 @@ pipeline: "content_pipeline"
 nodes:
   - id: "research"
     label: "Research target market and competitors"
-    agent_node: "shaka"
+    agent_group: "shaka"
   - id: "write_copy"
     label: "Write marketing copy from research"
-    agent_node: "lily"
+    agent_group: "lily"
   - id: "create_images"
     label: "Generate product images from research"
-    agent_node: "edison"
+    agent_group: "edison"
   - id: "review"
     label: "Quality review of copy and images"
-    agent_node: "atlas"
+    agent_group: "atlas"
   - id: "publish"
     label: "Publish approved content to channels"
-    agent_node: "atlas"
+    agent_group: "atlas"
 edges:
   - from: "research"
     to: "write_copy"
@@ -49,7 +49,7 @@ edges:
     to: "publish"
 domain: "orchestration"
 quality: null
-tags: [dag, content-pipeline, multi-agent_node, dependency-graph]
+tags: [dag, content-pipeline, multi-agent_group, dependency-graph]
 tldr: "5-node content pipeline DAG: research fans out to copy+images, converges at review, then publish"
 execution_order:
   - ["research"]
@@ -63,7 +63,7 @@ estimated_duration: "45min"
 node_count: 5
 edge_count: 5
 max_parallelism: 2
-keywords: [content, pipeline, dag, multi-agent_node]
+keywords: [content, pipeline, dag, multi-agent_group]
 linked_artifacts:
   primary: "P12_orchestration/compiled/p12_dag_content_pipeline.yaml"
   related: ["archetypes/builders/workflow-builder/", "archetypes/builders/handoff-builder/"]

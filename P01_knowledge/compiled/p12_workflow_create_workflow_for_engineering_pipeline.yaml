@@ -8,7 +8,7 @@ author: workflow-builder
 title: Engineering Pipeline
 steps_count: 4
 execution: mixed
-agent_nodes:
+agent_groups:
 - edison
 - tesla
 - reviewer

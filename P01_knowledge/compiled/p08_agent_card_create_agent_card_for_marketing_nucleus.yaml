@@ -111,7 +111,7 @@ flags:
 domain: marketing
 quality: 9.1
 tags:
-- agent_node
+- agent_group
 - marketing
 - n02
 - copywriting

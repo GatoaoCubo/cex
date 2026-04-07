@@ -12,7 +12,7 @@ title: {{TITLE_DESCRITIVO}}
 version: 1.0.0
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
-author: {{SATELLITE_NAME}}
+author: {{AGENT_GROUP_NAME}}
 domain: {{DOMAIN}}
 quality: {{QUALITY_7_TO_10}}
 tags: [{{TAG1}}, {{TAG2}}, {{TAG3}}]

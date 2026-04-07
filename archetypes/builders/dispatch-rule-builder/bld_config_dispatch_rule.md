@@ -24,7 +24,7 @@ permission_scope: nucleus
 | Builder directory | kebab-case | `dispatch-rule-builder/` |
 | Frontmatter fields | snake_case | `confidence_threshold`, `load_balance` |
 | `id` field | `p12_dr_` prefix + snake_case scope | `p12_dr_build`, `p12_dr_marketing` |
-| `agent_node` values | lowercase slug | `edison`, `shaka`, `atlas` |
+| `agent_group` values | lowercase slug | `edison`, `shaka`, `atlas` |
 | `model` values | lowercase enum | `sonnet`, `opus`, `haiku`, `flash` |
 | `scope` values | lowercase slug, no spaces | `build`, `research`, `orchestration` |
 | `keywords` items | lowercase, no punctuation | `build`, `code`, `implementar` |
@@ -42,7 +42,7 @@ Rule: use `.yaml` only for this builder (frontmatter yaml + md body hybrid).
 - `quality` MUST be literal `null` — never a score at authoring time
 - `priority` MUST be integer 1-10 (not float, not string)
 - `confidence_threshold` MUST be float 0.0-1.0 (not percentage)
-- `fallback` MUST differ from `agent_node`
+- `fallback` MUST differ from `agent_group`
 - `keywords` MUST be a list, even for a single keyword
 - `model` MUST be one of: `sonnet`, `opus`, `haiku`, `flash`
 - `routing_strategy` MUST be one of: `keyword_match`, `semantic`, `hybrid`

@@ -16,7 +16,7 @@ tags: [enum-def, per-value-descriptions, extensibility, deprecation, value-namin
 tldr: "Per-value descriptions prevent misuse. Declare extensible. Mirror values to body. Deprecated stays until major bump."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [enum, enumeration, values, descriptions, extensible, deprecated, naming, JSON Schema, Pydantic, Zod, GraphQL, TypeScript]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

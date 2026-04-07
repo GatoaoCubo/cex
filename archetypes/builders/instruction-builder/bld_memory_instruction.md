@@ -16,7 +16,7 @@ tags: [instruction, atomic-steps, idempotence, rollback, prerequisites, decompos
 tldr: "One step = one verb + one verifiable output. Vague prerequisites are skipped. atomic:false requires rollback. steps_count must match exactly."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [instruction, atomic, idempotent, rollback, prerequisite, decomposition, step, verification, procedure]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

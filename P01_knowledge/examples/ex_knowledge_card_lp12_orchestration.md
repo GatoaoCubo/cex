@@ -27,7 +27,7 @@ density_score: 0.88
 # P12 Orchestration: Como Coordena
 
 ## Executive Summary
-P12 governa coordenacao multi-agente no CEX com 6 tipos de artefato. Workflows definem steps sequenciais/paralelos, DAGs modelam dependencias, spawn configs parametrizam lancamento de satelites (solo/grid/continuous), signals comunicam estado entre agentes, handoffs transferem contexto, e dispatch rules roteiam tasks por keyword.
+P12 governa coordenacao multi-agente no CEX com 6 tipos de artefato. Workflows definem steps sequenciais/paralelos, DAGs modelam dependencias, spawn configs parametrizam lancamento de agent_groups (solo/grid/continuous), signals comunicam estado entre agentes, handoffs transferem contexto, e dispatch rules roteiam tasks por keyword.
 
 ## Spec Table
 | Campo | Valor | Nota |
@@ -37,7 +37,7 @@ P12 governa coordenacao multi-agente no CEX com 6 tipos de artefato. Workflows d
 | signal format | JSON | complete, error, progress |
 | handoff max_bytes | 4096 | Task + context + commit |
 | spawn modes | 3 | solo, grid static, grid continuous |
-| dispatch_rule format | YAML | keyword > agent_node routing |
+| dispatch_rule format | YAML | keyword > agent_group routing |
 
 ## Patterns
 - Workflow com steps tipados: sequential (A>B>C) ou parallel (A+B+C)
@@ -45,12 +45,12 @@ P12 governa coordenacao multi-agente no CEX com 6 tipos de artefato. Workflows d
 - Spawn config: solo (1 sat), grid static (<=6 tasks), grid continuous (>6 tasks, auto-refill)
 - Signal protocol: {sat}_complete_{ts}.json com score para orchestrator monitorar
 - Handoff com 5 secoes: contexto, seeds, tarefas, scope fence, commit instruction
-- Dispatch rule: keyword match > agent_node routing em YAML
+- Dispatch rule: keyword match > agent_group routing em YAML
 
 ## Anti-Patterns
 - Handoff sem commit instruction: trabalho pode se perder
 - Signal sem timestamp: impossivel ordenar eventos
-- Spawn > 3 satelites simultaneos: BSOD risk no Windows
+- Spawn > 3 agent_groups simultaneos: BSOD risk no Windows
 - DAG com ciclo: deadlock garantido
 - Workflow sem error handling: falha em 1 step mata todo o pipeline
 

@@ -16,7 +16,7 @@ tags: [multi-modal, image, audio, resolution, routing, token-cost]
 tldr: "Set resolution limits per use case. Validate formats. Transcription fallback for audio. Estimate token costs. quality:null."
 impact_score: 7.0
 decay_rate: 0.05
-agent_node: n04_knowledge
+agent_group: n04_knowledge
 keywords: [multi_modal, resolution, format, routing, preprocessing, token_cost]
 memory_scope: project
 observation_types: [reference]

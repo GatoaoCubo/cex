@@ -42,4 +42,4 @@ I define persona, ALWAYS/NEVER constraints, tone, knowledge boundaries, and outp
 |---------|-----|
 | unit-eval-builder | tests the system prompt to verify the agent behaves as identity defines |
 | workflow-builder | multi-step workflows reference which agent handles each step |
-| spawn-config-builder | agent_node spawn configuration often pairs with a system_prompt as the agent identity layer |
+| spawn-config-builder | agent_group spawn configuration often pairs with a system_prompt as the agent identity layer |

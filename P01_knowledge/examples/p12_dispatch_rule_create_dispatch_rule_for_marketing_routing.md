@@ -9,10 +9,10 @@ author: codex
 domain: marketing
 quality: 8.9
 tags: [dispatch, marketing, marketer, copywriting, campaigns, P12]
-tldr: Route marketing copy, campaign creation, and brand voice tasks to marketer agent_node
+tldr: Route marketing copy, campaign creation, and brand voice tasks to marketer agent_group
 scope: marketing
 keywords: [marketing, campanha, campaign, copy, copywriting, anuncio, ads, headline, landing page, brand voice, redes sociais, redação]
-agent_node: marketer
+agent_group: marketer
 model: sonnet
 priority: 8
 confidence_threshold: 0.72
@@ -26,7 +26,7 @@ routing_strategy: hybrid
 # marketing Dispatch Rule
 
 ## Purpose
-Routes marketing and copywriting tasks to the marketer agent_node (N02). Marketer
+Routes marketing and copywriting tasks to the marketer agent_group (N02). Marketer
 handles persuasive content creation: ad copy, email sequences, headlines, landing pages,
 CTAs, campaign briefs, and brand voice guidelines. Marketer runs claude-sonnet, optimized
 for fluent, conversion-oriented writing in both PT and EN.

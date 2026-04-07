@@ -23,7 +23,7 @@ tags:
 tldr: "Tiered strategy (dedup→summarize→truncate), trigger at 0.80-0.90, always preserve system_prompt, decay_weights per message type, min_context >= 2x system prompt."
 impact_score: 8.0
 decay_rate: 0.03
-agent_node: edison
+agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

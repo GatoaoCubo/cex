@@ -18,7 +18,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
-| scope | string | YES | - | Config scope: global, agent_node name, or service name |
+| scope | string | YES | - | Config scope: global, agent_group name, or service name |
 | variables | list[string], len >= 1 | YES | - | Variable names defined |
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "env_config" |

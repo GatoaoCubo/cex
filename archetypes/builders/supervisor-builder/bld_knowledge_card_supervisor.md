@@ -37,7 +37,7 @@ A supervisor is the crew orchestration artifact in CEX — a declarative coordin
 | CrewAI | Crew + manager_agent (hierarchical) | Most direct: manager delegates, workers execute |
 | LangChain | RunnableParallel + LCEL compose | Fan-out chains with orchestration |
 | OpenAI | Orchestrator assistant pattern | Meta-assistant calling assistants via tools |
-| Anthropic | Orchestrator agent_node pattern | Dispatch spawns + monitor signals |
+| Anthropic | Orchestrator agent_group pattern | Dispatch spawns + monitor signals |
 | LlamaIndex | AgentWorkflow multi-agent | Event-driven agent coordination |
 | DSPy | Ensemble / pipeline Module | Sub-module coordination with voting |
 ## Anti-Patterns

@@ -16,7 +16,7 @@ tags: [browser-tool, selector-fallback, playwright, timeout, action-structure, s
 tldr: "Selector fallback chains are load-bearing for scraper resilience. data_attr first, xpath last. Timeout always. Match actions frontmatter to body."
 impact_score: 8.0
 decay_rate: 0.04
-agent_node: edison
+agent_group: edison
 keywords: [browser tool, selector fallback, playwright, timeout, action structure, stealth, headless, DOM extraction]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

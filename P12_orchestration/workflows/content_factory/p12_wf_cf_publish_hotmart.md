@@ -9,7 +9,7 @@ author: "n02_marketing"
 title: "Publish Course to Hotmart"
 steps_count: 5
 execution: sequential
-agent_nodes: [n02_marketing, n05_operations, n06_commercial]
+agent_groups: [n02_marketing, n05_operations, n06_commercial]
 timeout: 600
 retry_policy: per_step
 depends_on: [p03_ap_cf_generate_course]

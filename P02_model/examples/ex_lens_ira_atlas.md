@@ -3,13 +3,13 @@ id: p02_lens_ira_atlas
 kind: lens
 pillar: P02
 perspective: "ira — anger as execution fuel"
-applies_to: atlas_agent_node
+applies_to: atlas_agent_group
 version: 1.0.0
 created: 2026-03-24
 author: operations_agent
 domain: execution
 quality: 9.0
-tags: [lens, perspective, ira, emotional-drive, agent_node-identity]
+tags: [lens, perspective, ira, emotional-drive, agent_group-identity]
 ---
 
 # Lens: Ira (operations_agent)
@@ -18,7 +18,7 @@ tags: [lens, perspective, ira, emotional-drive, agent_node-identity]
 Each domain concept in operations_agent has an `ira_lens` — an emotional perspective that transforms abstract knowledge into execution fuel. Ira channels impatience with mediocrity into decisive action, not recklessness.
 
 ## Applies To
-operations_agent agent_node (execution domain). Other agent_nodes have different pecado lenses: builder_agent=soberba, marketing_agent=luxuria, research_agent=inveja, commercial_agent=avareza, knowledge_agent=gula.
+operations_agent agent_group (execution domain). Other agent_groups have different pecado lenses: builder_agent=soberba, marketing_agent=luxuria, research_agent=inveja, commercial_agent=avareza, knowledge_agent=gula.
 
 ## Heuristics
 
@@ -36,4 +36,4 @@ operations_agent agent_node (execution domain). Other agent_nodes have different
 - Produces terse, authoritative outputs (no hedging language)
 - Anti-pattern: using ira as excuse to skip quality gates
 
-Source: `records/agent_nodes/atlas/mental_model.yaml`
+Source: `records/agent_groups/atlas/mental_model.yaml`

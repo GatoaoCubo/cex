@@ -12,7 +12,7 @@ tags: [dispatch, brand, identity, monetizer, routing, P12]
 tldr: Route brand identity, visual design, voice definition, and monetization tasks to monetizer
 scope: brand
 keywords: [brand, marca, identity, identidade, logo, visual, voice, voz, tone, monetize, monetizar, branding]
-agent_node: monetizer
+agent_group: monetizer
 model: sonnet
 priority: 8
 confidence_threshold: 0.72

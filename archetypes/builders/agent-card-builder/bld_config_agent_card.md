@@ -23,7 +23,7 @@ permission_scope: nucleus
 | Artifact files | `p08_ac_{name_lower}.yaml` | `p08_ac_shaka.yaml` |
 | Builder directory | kebab-case | `agent-card-builder/` |
 | Frontmatter fields | snake_case | `domain_area`, `boot_sequence` |
-| Satellite names | UPPERCASE in name field | `researcher`, `builder`, `marketer` |
+| Agent_group names | UPPERCASE in name field | `researcher`, `builder`, `marketer` |
 | Name slugs | lowercase in id | `shaka`, `edison`, `lily` |
 Rule: id MUST equal filename stem.
 ## File Paths

@@ -21,7 +21,7 @@ tags: [schema, type-def, P06, source-of-truth]
 | `version` | string | `^\d+\.\d+\.\d+$` | SemVer |
 | `created` | string | `YYYY-MM-DD` | ISO 8601 date |
 | `updated` | string | `YYYY-MM-DD` | ISO 8601 date |
-| `author` | string | any | Satellite or agent ID |
+| `author` | string | any | Agent_group or agent ID |
 | `type_name` | string | PascalCase | Canonical name of the type |
 | `base_type` | enum | `string`, `integer`, `number`, `boolean`, `array`, `object`, `enum`, `union`, `intersection`, `tuple`, `record` | Root primitive or composite |
 | `domain` | string | snake_case | Owning domain or module |

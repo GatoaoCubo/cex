@@ -22,7 +22,7 @@ quality: 8.8
 operation: agent_create
 domain: SEO
 context: marketplace
-agent_node: edison
+agent_group: edison
 result:
   agent_name: seo_marketplace
   path: records/agents/seo_marketplace/

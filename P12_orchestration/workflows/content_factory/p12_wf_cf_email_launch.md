@@ -9,7 +9,7 @@ author: "n02_marketing"
 title: "Email Launch Sequence for Content"
 steps_count: 4
 execution: sequential
-agent_nodes: [n02_marketing, n05_operations]
+agent_groups: [n02_marketing, n05_operations]
 timeout: 240
 retry_policy: per_step
 depends_on: []

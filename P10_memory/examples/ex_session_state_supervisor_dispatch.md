@@ -1,8 +1,8 @@
 ---
-id: p10_ss_agent_node_dispatch
+id: p10_ss_agent_group_dispatch
 kind: session_state
 pillar: P10
-description: "Ephemeral session state tracking active agent_node dispatches"
+description: "Ephemeral session state tracking active agent_group dispatches"
 scope: stella_session
 version: 1.0.0
 created: 2026-03-24
@@ -11,18 +11,18 @@ quality: 9.0
 tags: [session-state, dispatch, tracking, ephemeral]
 ---
 
-# Session State: Satellite Dispatch Tracking
+# Session State: Agent_group Dispatch Tracking
 
 ## Schema
 ```yaml
 session_id: "stella_2026-03-24T20:00"
 active_dispatches:
-  - agent_node: edison
+  - agent_group: edison
     task: "P04 examples from real artifacts"
     started: "2026-03-24T19:45:00Z"
     status: running
     pid: 14624
-  - agent_node: shaka
+  - agent_group: shaka
     task: "Market research pet toys"
     started: "2026-03-24T19:50:00Z"
     status: complete
@@ -38,4 +38,4 @@ last_monitor_check: "2026-03-24T20:02:00Z"
 - Destroyed: on session end (ephemeral, not persisted to disk)
 
 ## Usage
-orchestrator uses this to track which agent_nodes are active, avoid double-dispatch, and determine when a wave is complete for collection.
+orchestrator uses this to track which agent_groups are active, avoid double-dispatch, and determine when a wave is complete for collection.

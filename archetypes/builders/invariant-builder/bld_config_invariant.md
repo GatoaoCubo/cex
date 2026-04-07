@@ -53,7 +53,7 @@ Rule: `id` MUST equal filename stem. File `p08_law_5.md` MUST have `id: p08_law_
 | number | Positive integer, unique, sequential | Identification and collision prevention |
 | enforcement | Must name detection mechanism explicitly | Unenforced laws are wishes, not laws |
 | exceptions | Explicit list or "None" — never omit field | Prevents ambiguity and "well technically" bypasses |
-| scope | One of: system, agent_node, domain | Precise applicability boundary |
+| scope | One of: system, agent_group, domain | Precise applicability boundary |
 | priority | Integer 1-10 (10 = highest) | Conflict resolution when laws compete |
 | quality | Always null | H05 gate; no self-scoring ever |
 | advisory language | PROHIBITED | "should", "consider", "recommended" belong in patterns/instructions |

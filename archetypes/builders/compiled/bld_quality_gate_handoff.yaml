@@ -6,7 +6,7 @@ version: 1.0.0
 created: '2026-03-27'
 updated: '2026-03-27'
 author: builder_agent
-domain: handoff — task delegation packages for agent_node execution
+domain: handoff — task delegation packages for agent_group execution
 quality: null
 tags:
 - quality-gate
@@ -71,7 +71,7 @@ soft_scoring: 'Total weights sum to 100%.
   | S04 | Commit instruction quality | 0.5 | Stage command + message template + signal command present | Only commit message
   present | No commit guidance |
 
-  | S05 | Signal instruction | 0.5 | Signal call with agent_node, status, and score specified | Signal mentioned without params
+  | S05 | Signal instruction | 0.5 | Signal call with agent_group, status, and score specified | Signal mentioned without params
   | Signal absent |
 
   | S06 | Step ordering | 1.0 | Dependencies between steps are explicit | Steps ordered but implicit deps | Steps unordered

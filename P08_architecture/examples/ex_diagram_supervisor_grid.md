@@ -1,21 +1,21 @@
 ---
-id: p08_diag_agent_node_grid
+id: p08_diag_agent_group_grid
 kind: diagram
 pillar: P08
-description: "Architecture diagram of orchestrator agent_node grid dispatch"
+description: "Architecture diagram of orchestrator agent_group grid dispatch"
 format: ascii
 scope: orchestration
 version: 1.0.0
 created: 2026-03-24
 author: builder_agent
 quality: 9.0
-tags: [diagram, architecture, grid, agent_node, orchestration]
+tags: [diagram, architecture, grid, agent_group, orchestration]
 ---
 
-# Diagram: Satellite Grid Dispatch
+# Diagram: Agent_group Grid Dispatch
 
 ## Overview
-orchestrator orchestrates up to 6 parallel agent_nodes via PowerShell spawn scripts.
+orchestrator orchestrates up to 6 parallel agent_groups via PowerShell spawn scripts.
 
 ## Architecture
 ```
@@ -49,6 +49,6 @@ orchestrator orchestrates up to 6 parallel agent_nodes via PowerShell spawn scri
 
 ## Key Properties
 - Max 6 slots for short tasks (<15min), 3 for long (>30min)
-- Each agent_node: own CMD window, own Claude session, own MCP config
+- Each agent_group: own CMD window, own Claude session, own MCP config
 - Continuous mode: slot completes -> next batch auto-dispatched
-- Isolation: agent_nodes share git repo but never edit same files
+- Isolation: agent_groups share git repo but never edit same files

@@ -2,7 +2,7 @@
   "id": "p04_mcp_organization_brain",
   "name": [
     "Name: organization-brain",
-    "Role: Central knowledge retrieval for all organization agent_nodes"
+    "Role: Central knowledge retrieval for all organization agent_groups"
   ],
   "description": "Hybrid RAG retrieval server — BM25 keyword + FAISS vector search with Ollama embeddings",
   "transport": [

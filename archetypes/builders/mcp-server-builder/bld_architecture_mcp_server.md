@@ -30,7 +30,7 @@ mcp_server     --signals-->    health_status
 | mcp_server | tool_results | produces | structured responses from tool invocations |
 | mcp_server | transport_layer | dependency | requires stdio pipe, SSE stream, or HTTP endpoint |
 | mcp_server | health_status (P12) | signals | periodic health and availability signals |
-| spawn_config (P12) | mcp_server | data_flow | MCP profile path used during agent_node spawn |
+| spawn_config (P12) | mcp_server | data_flow | MCP profile path used during agent_group spawn |
 ## Boundary Table
 | mcp_server IS | mcp_server IS NOT |
 |---------------|-------------------|

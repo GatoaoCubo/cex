@@ -49,7 +49,7 @@ Rule: files_count MUST match actual files in directory.
 Rule: tier MUST match file count (minimal=3, standard=7, complete=10, whitelabel=12).
 ## Portability Rules
 - No hardcoded paths: `/home/`, `/Users/`, `C:\`, `records/`, `.claude/`
-- No framework-specific agent_node names in system_instruction.md
+- No framework-specific agent_group names in system_instruction.md
 - All file references use relative paths within package directory
 - LLM-agnostic: no provider-specific API calls in instructions.md
 ## LP Mapping Enum

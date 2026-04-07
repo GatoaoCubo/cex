@@ -19,7 +19,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
 | provider | string | YES | - | Target provider runtime |
-| identity | object | YES | - | Agent identity block (name, role, agent_node) |
+| identity | object | YES | - | Agent identity block (name, role, agent_group) |
 | constraints | object | YES | - | Operational limits (tokens, timeout, retries) |
 | tools | list[string] | YES | - | Available tools/MCPs for this provider |
 | domain | string | YES | - | Config scope domain |
@@ -38,7 +38,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 identity:
   name: string        # Agent display name
   role: string        # Primary role description
-  agent_node: string   # Owning agent_node or "agnostic"
+  agent_group: string   # Owning agent_group or "agnostic"
 ```
 ## Constraints Object
 ```yaml
@@ -54,7 +54,7 @@ Regex: `^p02_boot_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
 1. `## Provider Overview` — which provider, runtime environment, version
-2. `## Identity Block` — agent name, role, agent_node assignment
+2. `## Identity Block` — agent name, role, agent_group assignment
 3. `## Constraints` — table of operational limits
 4. `## Tools Configuration` — MCP servers, CLI tools, available APIs
 5. `## Flags` — CLI/runtime flags with purpose

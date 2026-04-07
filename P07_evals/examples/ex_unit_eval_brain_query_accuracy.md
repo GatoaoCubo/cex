@@ -20,7 +20,7 @@ brain_query MCP tool — hybrid BM25+FAISS search.
 | Query | Expected Top Result | Pass Criteria |
 |-------|-------------------|---------------|
 | "agent for SEO" | KC with SEO/marketplace | Top-3 contains match |
-| "how to spawn agent_node" | KC_operations_agent_003 or spawn skill | Top-1 score > 0.7 |
+| "how to spawn agent_group" | KC_operations_agent_003 or spawn skill | Top-1 score > 0.7 |
 | "quality gate implementation" | KC_operations_agent_010 | Exact match in top-1 |
 | "brand propagation pipeline" | brand_propagation skill | Top-3 contains match |
 | "whatsapp voice pipeline" | voice_pipeline skill | Top-3 contains match |

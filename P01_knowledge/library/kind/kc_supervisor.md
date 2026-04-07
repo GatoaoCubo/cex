@@ -42,7 +42,7 @@ A supervisor is a crew orchestrator that composes and coordinates multiple build
 | DSPy | `Ensemble` / pipeline `Module` | Coordinates multiple sub-modules with voting |
 | Haystack | `AsyncPipeline` + `SuperComponent` | Wraps sub-pipelines as coordinated units |
 | OpenAI | Orchestrator assistant pattern | Meta-assistant calling other assistants via function tools |
-| Anthropic | orchestrator agent_node pattern | Dispatching spawns and monitoring completion signals |
+| Anthropic | orchestrator agent_group pattern | Dispatching spawns and monitoring completion signals |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
@@ -77,7 +77,7 @@ agent_card, workflow --> [supervisor] --> spawn_config, signal_file
 - IF single builder task THEN no supervisor needed — direct spawn
 - IF 2+ builders with dependencies THEN wave supervisor
 - IF routing depends on task content THEN conditional supervisor
-- DEFAULT: wave supervisor for multi-agent_node missions, sequential first then optimize
+- DEFAULT: wave supervisor for multi-agent_group missions, sequential first then optimize
 
 ## Quality Criteria
 - GOOD: topic, builders list, dispatch_mode, signal_check all defined

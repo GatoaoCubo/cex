@@ -27,7 +27,7 @@ pattern: every builder must know WHERE its output fits and what it CONNECTS to
 <!-- Exemplos observados: -->
 <!-- - model_card: "spec tecnica de LLM (capacidades, costs, limits, status lifecycle)" -->
 <!-- - KC: "atomic fact destilado, searchable, versionado, with density >= 0.80" -->
-<!-- - signal: "evento runtime atomic emitido per um agent_node for informar status" -->
+<!-- - signal: "evento runtime atomic emitido per um agent_group for informar status" -->
 <!-- - quality_gate: "barrier of quality with score numerico (pass/fail + weighted dimensions)" -->
 
 {{type_name}} IS NOT:

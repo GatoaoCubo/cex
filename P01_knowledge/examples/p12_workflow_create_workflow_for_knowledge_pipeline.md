@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Knowledge Pipeline"
 steps_count: 4
 execution: sequential
-agent_nodes: [research_agent, builder_agent, validator_agent, orchestrator]
+agent_groups: [research_agent, builder_agent, validator_agent, orchestrator]
 timeout: 7200
 retry_policy: per_step
 depends_on: []

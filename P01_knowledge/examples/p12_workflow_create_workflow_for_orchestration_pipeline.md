@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Orchestration Pipeline"
 steps_count: 5
 execution: mixed
-agent_nodes: [orchestrator, n01, n02, n03, n04, n05, n06]
+agent_groups: [orchestrator, n01, n02, n03, n04, n05, n06]
 timeout: 7200
 retry_policy: per_step
 depends_on: []

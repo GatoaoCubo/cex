@@ -54,7 +54,7 @@ A db_connector wraps structured data access (SQL, GraphQL, REST-to-DB) behind a 
 ## Patterns
 | Pattern | When to Use | Example |
 |---|---|---|
-| Pool-per-tenant | Isolated agent_node DBs | operations_agent gets its own pg pool |
+| Pool-per-tenant | Isolated agent_group DBs | operations_agent gets its own pg pool |
 | Read replica routing | Analytics vs write path | SELECT to replica; INSERT to primary |
 | Parameterized queries | All user-facing queries | cursor.execute(sql, params) always |
 

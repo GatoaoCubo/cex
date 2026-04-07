@@ -8,7 +8,7 @@ author: n02_marketing
 title: Promote Content Across Channels
 steps_count: 4
 execution: mixed
-agent_nodes:
+agent_groups:
 - n02_marketing
 - n05_operations
 timeout: 300

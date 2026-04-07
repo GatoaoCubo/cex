@@ -20,8 +20,8 @@ purpose: Tools and APIs available for agent_card production
 | CEX Examples | P08_architecture/examples/ | Real agent_card artifacts |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P08_agent_card seeds |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
-| PRIME files | records/agent_nodes/{name}/PRIME_{NAME}.md | Existing agent_node definitions |
-| MCP configs | .mcp-{sat}.json | Per-agent_node MCP server configs |
+| PRIME files | records/agent_groups/{name}/PRIME_{NAME}.md | Existing agent_group definitions |
+| MCP configs | .mcp-{sat}.json | Per-agent_group MCP server configs |
 | Spawn scripts | records/framework/powershell/spawn_*.ps1 | Boot and spawn patterns |
 ## Tool Permissions
 

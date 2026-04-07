@@ -18,7 +18,7 @@ kinds:
     - pillar
     - title
     - version
-    - satellite
+    - agent_group
     - domain
     - quality
     - tags
@@ -66,7 +66,7 @@ kinds:
     llm_function: INJECT
   boot_config:
     description: Per-provider initialization configuration
-    boundary: Bootstrap per provider (claude, cursor, codex). NOT an env_config (P09, generic variables) nor spawn_config (P12, satellites).
+    boundary: Bootstrap per provider (claude, cursor, codex). NOT an env_config (P09, generic variables) nor spawn_config (P12, agent_groups).
     layer: runtime
     core: false
     machine_format: yaml
@@ -112,8 +112,8 @@ kinds:
     - pricing
     llm_function: GOVERN
   router:
-    description: Routing rule (task > satellite)
-    boundary: Task-to-satellite routing. NOT a dispatch_rule (P12, keyword>satellite) nor fallback_chain (model>model).
+    description: Routing rule (task > agent_group)
+    boundary: Task-to-agent_group routing. NOT a dispatch_rule (P12, keyword>agent_group) nor fallback_chain (model>model).
     layer: runtime
     core: true
     machine_format: yaml

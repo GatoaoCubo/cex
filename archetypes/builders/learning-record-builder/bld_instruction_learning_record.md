@@ -67,7 +67,7 @@ The learning-record-builder produces `learning_record` artifacts (P10) — persi
 7. Write `## Summary` — dense 2-3 sentence overview of the full experience and outcome.
 8. Write `## Pattern` — concrete reproducible steps that worked; each step is actionable ("do X").
 9. Write `## Anti-Pattern` — specific failures with observable symptoms; each states the failure mode ("avoid X because it causes Y").
-10. Write `## Context` — environment, agent_node/agent, timing, constraints that bound this experience.
+10. Write `## Context` — environment, agent_group/agent, timing, constraints that bound this experience.
 11. Write `## Impact` — measurable outcomes: time saved/lost, error rates, score deltas.
 12. Write `## Reproducibility` — conditions that must hold for reproduction, confidence level, caveats.
 Density check pseudocode:

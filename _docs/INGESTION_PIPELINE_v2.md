@@ -18,7 +18,7 @@ SPECIALIST (Google Drive)              SYSTEM (CEX Instance)
                                             │
                                        TRIAGE (auto-classify)
                                             │
-                                       DISTILL (satellite)
+                                       DISTILL (agent_group)
                                             │
                                        QUALITY GATE
                                        ├── >= 7.0 APPROVED
@@ -110,7 +110,7 @@ Nao foi possivel extrair artefatos com qualidade >= 7.0.
 
 System auto-classifies based on content analysis, NOT folder location:
 
-| Content Detected | Satellite | Pool Destination |
+| Content Detected | Agent_group | Pool Destination |
 |-----------------|-----------|-----------------|
 | Copy, titulos, persuasao | marketing_agent | pool/knowledge/ or pool/marketing/ |
 | Dados, planilhas, metricas | commercial_agent | pool/data/ |

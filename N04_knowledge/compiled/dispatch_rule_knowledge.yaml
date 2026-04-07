@@ -35,7 +35,7 @@ keywords:
 - what is
 - how does
 - document
-agent_node: N04_knowledge
+agent_group: N04_knowledge
 priority: 10
 confidence_threshold: 0.9
 fallback: N01_intelligence

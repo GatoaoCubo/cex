@@ -12,7 +12,7 @@ tags: [examples, invariant-builder, golden, anti-example, P08]
 
 # invariant-builder — EXAMPLES
 ## Golden Example
-INPUT: "Codify the invariant that agent_nodes must never self-assign quality scores"
+INPUT: "Codify the invariant that agent_groups must never self-assign quality scores"
 OUTPUT:
 ```yaml
 id: p08_law_5
@@ -44,7 +44,7 @@ Self-scoring introduces systematic positive bias. Producers overestimate artifac
 - Detection: automated YAML parse checks `quality == null` before artifact enters pool
 - Consequence: artifact rejected (score = 0), cannot enter pool until quality field is set to null
 ## Exceptions
-None. No artifact type, producer, agent_node, or context bypasses this law.
+None. No artifact type, producer, agent_group, or context bypasses this law.
 ## Examples
 1. **Knowledge Card Production**: KC producer writes `quality: null`, external reviewer scores 8.5 after validating density and factual accuracy
 2. **Pattern Formalization**: pattern-builder sets `quality: null`, quality_gate_builder evaluates against 9 HARD + 11 SOFT gates and assigns score 7.8

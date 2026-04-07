@@ -79,7 +79,7 @@ bash _spawn/dispatch.sh stop
 
 ```json
 {
-  "agent_node": "n03",
+  "agent_group": "n03",
   "status": "complete",
   "quality_score": 9.0,
   "timestamp": "2026-03-30T14:00:00Z",

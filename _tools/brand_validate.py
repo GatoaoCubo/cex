@@ -96,6 +96,12 @@ def validate(config: dict, strict: bool = False) -> dict:
         lang = config["voice"].get("BRAND_LANGUAGE")
         if lang and not is_placeholder(lang) and not LANG_PATTERN.match(str(lang)):
             warnings.append(f"BRAND_LANGUAGE '{lang}' doesn't match pattern xx-XX")
+        person = config["voice"].get("BRAND_PERSON")
+        if person and not is_placeholder(person) and str(person) not in ("1st", "2nd", "3rd"):
+            warnings.append(f"BRAND_PERSON should be '1st', '2nd', or '3rd', got '{person}'")
+        energy = config["voice"].get("BRAND_ENERGY")
+        if energy and not is_placeholder(energy) and str(energy) not in ("calm", "moderate", "energetic", "bold"):
+            warnings.append(f"BRAND_ENERGY should be calm|moderate|energetic|bold, got '{energy}'")
 
     # Section: audience
     validate_section(config, "audience", ["BRAND_ICP", "BRAND_TRANSFORMATION"], errors, warnings)

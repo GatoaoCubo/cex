@@ -16,7 +16,7 @@ tags: [function-def, description, parameters, nesting, json-schema, tool-calling
 tldr: "LLM-facing descriptions are load-bearing for routing. Flat params (<=2 levels). Enum for finite sets. Required array mandatory. 2+ examples."
 impact_score: 8.0
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [function definition, json schema, tool calling, parameters, description, provider compatibility, nesting, enum]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

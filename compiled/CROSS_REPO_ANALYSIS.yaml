@@ -70,7 +70,7 @@ commands_13_missing_from_cex_4_5k_lines_total: '| Command | Lines | What it does
   | /diagnose | 359 | Full system health audit | N07 admin |
 
 
-  Action: Copy, rename satellite refs (STELLA→N07, SHAKA→N01, etc), test.
+  Action: Copy, rename agent_group refs (STELLA→N07, SHAKA→N01, etc), test.
 
   Effort: Low (find-replace branding, keep logic intact).'
 framework_docs_5_universal: '| Doc | Lines | Pattern |
@@ -237,12 +237,12 @@ skills_128_total_most_need_heavy_rewrite: 'Top 15 skills where the CONCEPT is va
   Action: Don''t copy the skill files. Extract the PATTERN into a KC.
 
   The 8F pipeline in CEX replaces the skill execution model.'
-framework_docs_16_too_branded: 'These contain useful IDEAS but can''t be ported without rewrite: META_BOOTSTRAP, SATELLITE_ARCHITECTURE,
+framework_docs_16_too_branded: 'These contain useful IDEAS but can''t be ported without rewrite: META_BOOTSTRAP, AGENT_GROUP_ARCHITECTURE,
   SUBAGENT_CATALOG, NAVIGATION_ARCHITECTURE, CODEXA_HARNESS_SPEC, IN_LOOP_OUT_LOOP, etc. Action: The ideas (boot chain, fractal
-  navigation, satellite architecture) are already encoded in CEX''s nucleus + pillar system. No action needed. ---'
-tier_4_do_not_port_codexa_specific_no_cex_value: '- Satellite-specific commands: /shaka, /lily, /edison, /pytha, /atlas, /york
+  navigation, agent_group architecture) are already encoded in CEX''s nucleus + pillar system. No action needed. ---'
+tier_4_do_not_port_codexa_specific_no_cex_value: '- Agent_group-specific commands: /shaka, /lily, /edison, /pytha, /atlas, /york
 
-  - Satellite PRIMEs: AGT_*_PRIME.md
+  - Agent_group PRIMEs: AGT_*_PRIME.md
 
   - Pool artifacts about codexa product: landing page copy, pricing, marketing
 
@@ -259,7 +259,7 @@ taxonomy_note: 'The user asked about "invented taxonomy" — here''s what IS vs 
 
   INVENTED (codexa-only, do NOT port):
 
-  - Satellite names (STELLA, SHAKA, etc) → already replaced by N01-N07
+  - Agent_group names (STELLA, SHAKA, etc) → already replaced by N01-N07
 
   - LAW numbers (LAW 0-13) → concepts are universal, numbering is invented
 
@@ -287,7 +287,7 @@ taxonomy_note: 'The user asked about "invented taxonomy" — here''s what IS vs 
 
   ---'
 recommended_migration_plan: ''
-phase_1_commands_immediate_1_session: Port 13 commands with satellite to nucleus rename. ~4.5K lines.
+phase_1_commands_immediate_1_session: Port 13 commands with agent_group to nucleus rename. ~4.5K lines.
 phase_2_universal_kcs_1_session: Copy 30 KCs to P01_knowledge/library/{domain}/. Scrub branding.
 phase_3_framework_patterns_1_session: Extract universal patterns from 8 portable docs into CEX KCs.
 phase_4_skill_concepts_ongoing: 'As nuclei need capabilities, extract patterns from relevant skills. Total estimated effort:

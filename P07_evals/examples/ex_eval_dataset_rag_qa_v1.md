@@ -24,7 +24,7 @@ tags: [eval-dataset, rag, qa, knowledge-base, ground-truth]
 
 ## Purpose
 
-Ground-truth dataset for evaluating organization's RAG pipeline (brain_query -> context retrieval -> answer generation). 500 human-verified question-answer pairs drawn from real knowledge cards, pool artifacts, and agent_node documentation.
+Ground-truth dataset for evaluating organization's RAG pipeline (brain_query -> context retrieval -> answer generation). 500 human-verified question-answer pairs drawn from real knowledge cards, pool artifacts, and agent_group documentation.
 
 ## Dataset Schema
 
@@ -67,8 +67,8 @@ Ground-truth dataset for evaluating organization's RAG pipeline (brain_query -> 
 
 ### Easy — Single-hop retrieval
 ```yaml
-question: "What is the maximum number of agent_nodes orchestrator can spawn simultaneously?"
-answer: "3 agent_nodes plus orchestrator itself (4 total). More than 4 causes BSOD due to RAM limits."
+question: "What is the maximum number of agent_groups orchestrator can spawn simultaneously?"
+answer: "3 agent_groups plus orchestrator itself (4 total). More than 4 causes BSOD due to RAM limits."
 context: "MEMORY: Max terminals = 3 sats + orchestrator. BSOD if >4. Power-save features disabled to prevent crashes."
 source: "memory_bsod_prevention"
 difficulty: "easy"

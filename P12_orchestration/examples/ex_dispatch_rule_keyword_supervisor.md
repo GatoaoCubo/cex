@@ -1,20 +1,20 @@
 ---
-id: p12_dr_keyword_agent_node
+id: p12_dr_keyword_agent_group
 kind: dispatch_rule
 pillar: P12
-description: "Keyword-to-agent_node routing rules for orchestrator auto-dispatch"
+description: "Keyword-to-agent_group routing rules for orchestrator auto-dispatch"
 scope: stella_routing
 version: 1.0.0
 created: 2026-03-24
 author: orchestrator
 quality: 9.0
-tags: [dispatch-rule, routing, keyword, agent_node]
+tags: [dispatch-rule, routing, keyword, agent_group]
 ---
 
-# Dispatch Rule: Keyword-to-Satellite
+# Dispatch Rule: Keyword-to-Agent_group
 
 ## Rules
-| Keywords | Satellite | Model | Auto |
+| Keywords | Agent_group | Model | Auto |
 |----------|-----------|-------|------|
 | pesquisar, mercado, concorrente | research_agent | sonnet | YES |
 | anuncio, marketing, copy, vender | marketing_agent | sonnet | YES |
@@ -27,7 +27,7 @@ tags: [dispatch-rule, routing, keyword, agent_node]
 ## Score Routing
 | Complexity | Action |
 |-----------|--------|
-| < 45% | Guide to single agent_node |
+| < 45% | Guide to single agent_group |
 | 45-70% | Suggest pipeline A -> B |
 | >= 70% | Dispatch parallel grid |
 

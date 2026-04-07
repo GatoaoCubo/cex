@@ -19,7 +19,7 @@ purpose: Tools available for runtime_state production
 | CEX Schema | P10_memory/_schema.yaml | Field definitions for runtime_state |
 | CEX Examples | P10_memory/examples/ | Existing runtime_state artifacts |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P10_mental_model seeds (runtime_state equivalent) |
-| Agent PRIMEs | records/agent_nodes/{name}/PRIME_{NAME}.md | Agent identity for state derivation |
+| Agent PRIMEs | records/agent_groups/{name}/PRIME_{NAME}.md | Agent identity for state derivation |
 ## Tool Permissions
 
 | Category | Tools | Status |

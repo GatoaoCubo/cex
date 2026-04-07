@@ -23,7 +23,7 @@ tags:
 tldr: "Privacy-first (no prompt capture), sample 5-10% prod, 3-tier retention (7/30/90d), 8F span mapping, classify errors, track tokens."
 impact_score: 8.2
 decay_rate: 0.03
-agent_node: edison
+agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---

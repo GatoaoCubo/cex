@@ -16,7 +16,7 @@ tags: [handoff-protocol, P02, type-builder]
 tldr: "Concrete values with rationale. Validate against schema. Stay under 2048 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [handoff protocol, fire-and-forget, request-response, streaming, escalation]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

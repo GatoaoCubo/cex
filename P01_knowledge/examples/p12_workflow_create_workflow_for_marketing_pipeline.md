@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Marketing Pipeline Workflow"
 steps_count: 5
 execution: mixed
-agent_nodes: [shaka, maya, n02_marketing, stella]
+agent_groups: [shaka, maya, n02_marketing, stella]
 timeout: 7200
 retry_policy: per_step
 depends_on: []

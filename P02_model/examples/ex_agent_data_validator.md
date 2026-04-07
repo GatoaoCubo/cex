@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
 author: builder_agent
-agent_node: operations_agent
+agent_group: operations_agent
 domain: data_quality
 quality: 9.0
 tags: [data-validation, quality-assurance, pipeline, schema-check, anomaly-detection]
@@ -90,4 +90,4 @@ Agent(subagent_type="validator", prompt="Validate output of scraper against expe
 - evaluator-agent: Avalia output LLM; data-validator avalia dados estruturados
 
 ## Footer
-Satellite: operations_agent | Quality: 9.0 | Domain: data_quality
+Agent_group: operations_agent | Quality: 9.0 | Domain: data_quality

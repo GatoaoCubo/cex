@@ -74,10 +74,10 @@ law, pattern, component_map --> [decision_record] --> law (consequent), pattern
 ```
 
 ## Decision Tree
-- IF decision affects >1 agent_node or >1 team THEN ADR mandatory
+- IF decision affects >1 agent_group or >1 team THEN ADR mandatory
 - IF reversing a previous decision THEN supersede old ADR + create new ADR
 - IF small tactical choice (1 file, 1 function) THEN inline comment sufficient
-- DEFAULT: ADR for any cross-team, cross-agent_node, or persistent architectural choice
+- DEFAULT: ADR for any cross-team, cross-agent_group, or persistent architectural choice
 
 ## Quality Criteria
 - GOOD: status, context, decision statement, consequences all present with date

@@ -12,7 +12,7 @@ tags: [spawn, config, grid, continuous, orchestration]
 tldr: "Continuous grid spawn: auto-fill slots on completion, 3 max concurrent, 5s delay, handoffs named batch_{N}_{sat}.md"
 max_bytes: 1024
 density_score: 0.89
-source: organization-core/records/agent_nodes/stella/mental_model.yaml + records/skills/continuous_batching/SKILL.md
+source: organization-core/records/agent_groups/stella/mental_model.yaml + records/skills/continuous_batching/SKILL.md
 linked_artifacts:
   pattern: p08_pat_continuous_batching
   workflow: p12_wf_stella_dispatch
@@ -93,4 +93,4 @@ powershell -File records/framework/powershell/spawn_stop.ps1
 ## Measured Results
 
 - ISOFIX mission: 7 batches, 1 slot → 1.6x speedup vs static waves
-- CBTEST: 3 mixed agent_nodes (research_agent+builder_agent+knowledge_agent) → zero git lock contention
+- CBTEST: 3 mixed agent_groups (research_agent+builder_agent+knowledge_agent) → zero git lock contention

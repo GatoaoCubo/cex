@@ -7,7 +7,7 @@
 
 ## Pipeline Architecture
 
-| Role | Model | Satellite | Task |
+| Role | Model | Agent_group | Task |
 |------|-------|-----------|------|
 | BUILD | Claude/Opus | edison | Construct 3 builders/wave (13 ISO) |
 | REVIEW | Codex/GPT-5.4 | edison-codex | Review all 3 (5-point checklist) |

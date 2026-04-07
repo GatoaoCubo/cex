@@ -47,7 +47,7 @@ An agent is the complete identity specification that transforms a general LLM in
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| agent_node | string | required | Determines runtime environment and MCPs available |
+| agent_group | string | required | Determines runtime environment and MCPs available |
 | domain | string | required | Scopes the agent's knowledge and tool access |
 | quality | float | >= 7.0 | Higher quality = pool eligible (8.0+) or golden (9.5+) |
 | iso_vectorstore | dir | required | Min 10 files; completeness determines agent reliability |
@@ -83,5 +83,5 @@ An agent is the complete identity specification that transforms a general LLM in
 
 ## Quality Criteria
 - GOOD: Persona defined; capabilities listed; tools specified; domain scoped
-- GREAT: ISO vectorstore complete (10+ files); tested in agent_node; quality >= 8.0; routing registered
+- GREAT: ISO vectorstore complete (10+ files); tested in agent_group; quality >= 8.0; routing registered
 - FAIL: No clear boundary from other agents; missing capabilities; tools undefined; iso_vectorstore < 3 files

@@ -20,10 +20,10 @@ I produce technical specs for LLMs with pricing, context limits, capability bool
   4. system-prompt-builder -> "persona adapted to model capabilities and context limits"
   5. boot-config-builder  -> "initialization wired to model ID, temperature, and token limits"
 ```
-### Crew: "Bootstrap New Satellite"
+### Crew: "Bootstrap New Agent_group"
 ```
-  1. model-card-builder    -> "spec for the model powering the agent_node"
-  2. agent-card-builder -> "agent_node role, MCPs, and behavioral constraints"
+  1. model-card-builder    -> "spec for the model powering the agent_group"
+  2. agent-card-builder -> "agent_group role, MCPs, and behavioral constraints"
   3. boot-config-builder   -> "startup configuration using model params from the card"
   4. system-prompt-builder -> "PRIME file adapted to documented model capabilities"
 ```

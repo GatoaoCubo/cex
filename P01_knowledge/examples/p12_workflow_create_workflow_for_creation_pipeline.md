@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Creation Pipeline Workflow"
 steps_count: 4
 execution: mixed
-agent_nodes: [research_agent, builder_agent, validator_agent, orchestrator]
+agent_groups: [research_agent, builder_agent, validator_agent, orchestrator]
 timeout: 7200
 retry_policy: per_step
 depends_on: []
@@ -83,5 +83,5 @@ Orchestrates the complete artifact creation pipeline from domain research throug
 
 ## References
 - signal-builder: completion signal contract and naming conventions per step
-- spawn-config-builder: agent_node launch parameters per satellite
+- spawn-config-builder: agent_group launch parameters per agent_group
 - bld_quality_gate_workflow: H01-H10 HARD gates and SOFT scoring rubric

@@ -28,14 +28,14 @@
 
 ## Guardrails
 ### Guardrail: orchestrator Dispatch Boundaries
-**tldr**: orchestrator is orchestrator-only: never executes tasks directly, never uses tsp_manager.py, never spawns >3 agent_nodes, never writes handoffs to .claude/temp/
+**tldr**: orchestrator is orchestrator-only: never executes tasks directly, never uses tsp_manager.py, never spawns >3 agent_groups, never writes handoffs to .claude/temp/
 
 ## Agent Cards
-### Satellite: builder_agent
+### Agent_group: builder_agent
 **tldr**: builder_agent is the #1 Meta-Construction Consultant — builds agents, prompts, workflows, and templates with Soberba Inventiva philosophy
 
 ## Patterns
-### Pattern: Continuous Batching (Satellite Grid)
+### Pattern: Continuous Batching (Agent_group Grid)
 **tldr**: When queue > slots: fill slots immediately as they complete instead of waiting for entire wave — 1.6x speedup on 7+ task missions
 **when_to_use**: | Condition | Use Continuous |
 |-----------|---------------|
@@ -65,8 +65,8 @@
 > Skill que roteia automaticamente entre 4 estrategias de scraping baseado na complexidade do alvo e entrega dados estruturados
 
 ## Bugloops
-### Bugloop: Satellite Execution Resilience
-> 3-retry bugloop for agent_node task execution — never stop on first error, skip after 3 failures, always commit partial work
+### Bugloop: Agent_group Execution Resilience
+> 3-retry bugloop for agent_group task execution — never stop on first error, skip after 3 failures, always commit partial work
 
 ## Chains
 ### Content Pipeline Chain (Research to Publish)
@@ -160,7 +160,7 @@
 ### ADR-007: Choose Qdrant over Pinecone for Vector Database
 
 ## Diagrams
-### p08_diag_agent_node_grid
+### p08_diag_agent_group_grid
 
 ## Directors
 ### p08_dir_rag_pipeline
@@ -244,8 +244,8 @@
 ### CIP Image Brief: Agua Marinha Product Lifestyle
 > Filled CIP image brief for Agua Marinha Home lifestyle product shots — soft natural light, scandinavian style
 
-### Satellite Orchestrator - Multi-Agent Dispatch Prompt
-> Prompt template para orchestrator orchestrator - intention parsing, agent_node routing, dependency resolution, dispatch, monitoring
+### Agent_group Orchestrator - Multi-Agent Dispatch Prompt
+> Prompt template para orchestrator orchestrator - intention parsing, agent_group routing, dependency resolution, dispatch, monitoring
 
 ### SDK Agent Builder - Generate Agent Artifacts from Description
 > Template para gerar MASTER_INSTRUCTIONS.md + AGENT_CONFIGURATION.json a partir de descricao natural language
@@ -276,14 +276,14 @@
 > Claude Haiku avalia cada resposta do agente em 3 criterios (accuracy, helpfulness, safety) gerando score 0.0-1.0 para feedback loop
 
 ## Router Prompts
-### Router Prompt for organization Satellite Task Dispatch
+### Router Prompt for organization Agent_group Task Dispatch
 
 ## Search Tools
 ### p04_search_tavily
 > Tavily web search optimized for LLM agents — returns ranked results with relevance scores
 
 ## User Prompts
-### p03_up_dispatch_agent_node
+### p03_up_dispatch_agent_group
 
 ## Vision Tools
 ### p04_vision_gpt4v

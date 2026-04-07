@@ -13,7 +13,7 @@ tags: [dispatch-rule, orchestration, N07, routing, multi-cli]
 tldr: "Routes tasks to 6 nuclei by domain keywords — build to N03, research to N01, marketing to N02, knowledge to N04, ops to N05, commercial to N06."
 scope: admin_orchestration
 keywords: [build, research, marketing, knowledge, operations, commercial, scaffold, analyze, write, deploy, index, price]
-agent_node: orchestrator
+agent_group: orchestrator
 model: opus
 priority: 9
 confidence_threshold: 0.70

@@ -23,8 +23,8 @@ source: organization-core/.claude/rules/orchestrator_RULES.md
 |----------|-------|
 | Trigger | User requests any task in orchestrator terminal |
 | Input | User task description (natural language) |
-| Output | Completed agent_node work (commits + signals) |
-| Timeout | 60 min (varies by agent_node count) |
+| Output | Completed agent_group work (commits + signals) |
+| Timeout | 60 min (varies by agent_group count) |
 
 ## Steps
 
@@ -36,30 +36,30 @@ source: organization-core/.claude/rules/orchestrator_RULES.md
 
 ### Step 1: CLARIFY
 - **Input**: User request (natural language)
-- **Action**: Decompose into agent_node tasks. Present table: agent_node, task, model. Ask "Confirma? (sim/ajustar)"
-- **Output**: Approved task decomposition (1 agent_node = 1 deliverable, max 3 tasks per sat)
+- **Action**: Decompose into agent_group tasks. Present table: agent_group, task, model. Ask "Confirma? (sim/ajustar)"
+- **Output**: Approved task decomposition (1 agent_group = 1 deliverable, max 3 tasks per sat)
 - **Duration**: 1-2 min
 
 ### Step 2: ENRICH
 - **Input**: Approved task list
-- **Action**: `brain_query("[domain] [keywords]")` per agent_node. Generate 5-10 seed words per handoff. Identify scope fence (SOMENTE/NAO TOQUE)
-- **Output**: Context map with agents, artifacts, seeds per agent_node
+- **Action**: `brain_query("[domain] [keywords]")` per agent_group. Generate 5-10 seed words per handoff. Identify scope fence (SOMENTE/NAO TOQUE)
+- **Output**: Context map with agents, artifacts, seeds per agent_group
 - **Duration**: 1-3 min
 
 ### Step 3: COMPOSE
-- **Input**: Enriched context per agent_node
+- **Input**: Enriched context per agent_group
 - **Action**: Write `.claude/handoffs/{MISSION}_{sat}.md` with CONTEXTO, SEEDS, TAREFAS, SCOPE FENCE, COMMIT template, SIGNAL command
-- **Output**: Handoff files on disk (1 per agent_node, or `batch_{N}` for >6 tasks)
+- **Output**: Handoff files on disk (1 per agent_group, or `batch_{N}` for >6 tasks)
 - **Duration**: 2-5 min
 
 ### Step 4: EXECUTE
 - **Input**: Handoff files
 - **Action**: `spawn_solo.ps1` (1 sat) or `spawn_grid.ps1` (multi-sat, auto-detects static vs continuous)
-- **Output**: Running agent_node terminals
-- **Duration**: 5-30 min (agent_node work time)
+- **Output**: Running agent_group terminals
+- **Duration**: 5-30 min (agent_group work time)
 
 ### Step 5: MONITOR
-- **Input**: Running agent_nodes
+- **Input**: Running agent_groups
 - **Action**: Check `.claude/signals/*_complete_*.json`, `git log --oneline -10`, `spawn_stop.ps1` when done
 - **Output**: Consolidated report, archived handoffs, git push
 - **Duration**: 2-5 min
@@ -68,18 +68,18 @@ source: organization-core/.claude/rules/orchestrator_RULES.md
 
 | Group | Steps | Max Concurrent |
 |-------|-------|----------------|
-| Satellite execution | Step 4 | 3 (BSOD limit at 4) |
+| Agent_group execution | Step 4 | 3 (BSOD limit at 4) |
 
 ## Rollback
 
 | Step | Rollback Action |
 |------|-----------------|
 | COMPOSE | Delete handoff files from `.claude/handoffs/` |
-| EXECUTE | `spawn_stop.ps1` to kill agent_node terminals |
+| EXECUTE | `spawn_stop.ps1` to kill agent_group terminals |
 
 ## Success Criteria
 
-- All agent_node signals received with score >= 8.0
+- All agent_group signals received with score >= 8.0
 - All commits present in `git log`
 - Zero orphaned terminals after MONITOR
 

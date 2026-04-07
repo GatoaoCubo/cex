@@ -132,4 +132,4 @@ output:
 
 - `records/agents/amazon-ads-agent/README.md` (fonte original)
 - KC_AMAZON_MARKETPLACE_MASTER.md (Sections 2, 4)
-- Satellite: commercial_agent (Monetization & Commerce)
+- Agent_group: commercial_agent (Monetization & Commerce)

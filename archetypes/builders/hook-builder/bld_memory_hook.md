@@ -16,7 +16,7 @@ tags: [hook, event-driven, blocking, async, timeout, error-handling, lifecycle]
 tldr: "Blocking hooks must be fast (<10s, ideally <3s). Async hooks are safe for logging. Every hook needs error_handling or it can crash the host."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [hook, trigger, blocking, async, timeout, error_handling, pre_tool_use, post_tool_use, session_start, stop]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

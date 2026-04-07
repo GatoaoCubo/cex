@@ -93,7 +93,7 @@ All sub-pipelines converge at `collect_outputs` → `quality_gate` → `publish`
 All DAGs follow `bld_schema_dag`:
 - [x] id matches `^p12_dag_[a-z][a-z0-9_]+$`
 - [x] kind: dag, lp: P12
-- [x] nodes with id, label, agent_node
+- [x] nodes with id, label, agent_group
 - [x] edges with from, to
 - [x] quality: null
 - [x] Acyclic graphs verified

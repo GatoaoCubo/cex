@@ -1,9 +1,9 @@
 {
-  "id": "p12_sig_agent_node_complete",
+  "id": "p12_sig_agent_group_complete",
   "kind": "signal",
   "pillar": "P12",
-  "description": "Completion signal emitted by agent_node after task execution",
-  "event": "agent_node_complete",
+  "description": "Completion signal emitted by agent_group after task execution",
+  "event": "agent_group_complete",
   "format": "json",
   "version": "1.0.0",
   "created": "2026-03-24",
@@ -12,12 +12,12 @@
   "tags": [
     "signal",
     "completion",
-    "agent_node",
+    "agent_group",
     "orchestration"
   ],
-  "purpose": "Emitted by agent_node after task completion. Consumed by spawn_monitor.ps1 and orchestrator for wave tracking.",
-  "schema": "{\n  \"agent_node\": \"edison\",\n  \"status\": \"complete\",\n  \"quality_score\": 9.0,\n  \"timestamp\": \"2026-03-24T20:00:00Z\",\n  \"task\": \"8 P04 examples from real artifacts\",\n  \"artifacts_count\": 8,\n  \"commit\": \"e8dd58b\"\n}",
+  "purpose": "Emitted by agent_group after task completion. Consumed by spawn_monitor.ps1 and orchestrator for wave tracking.",
+  "schema": "{\n  \"agent_group\": \"edison\",\n  \"status\": \"complete\",\n  \"quality_score\": 9.0,\n  \"timestamp\": \"2026-03-24T20:00:00Z\",\n  \"task\": \"8 P04 examples from real artifacts\",\n  \"artifacts_count\": 8,\n  \"commit\": \"e8dd58b\"\n}",
   "emit": "from records.core.python.signal_writer import write_signal\nwrite_signal(\"edison\", \"complete\", 9.0)\n# Writes to .claude/signals/edison_complete_9.0.json",
-  "consume": "# spawn_monitor.ps1 polls every 30s\nGet-ChildItem .claude/signals/*.json | ForEach-Object {\n    $sig = Get-Content $_ | ConvertFrom-Json\n    if ($sig.status -eq \"complete\") { \"Done: $($sig.agent_node)\" }\n}",
+  "consume": "# spawn_monitor.ps1 polls every 30s\nGet-ChildItem .claude/signals/*.json | ForEach-Object {\n    $sig = Get-Content $_ | ConvertFrom-Json\n    if ($sig.status -eq \"complete\") { \"Done: $($sig.agent_group)\" }\n}",
   "status_values": "| Status | Meaning | Action |\n|--------|---------|--------|\n| complete | Task done, quality passed | Collect + next batch |\n| error | Task failed | Log + retry or escalate |\n| progress | Still working (heartbeat) | Wait, check stuck timer |"
 }

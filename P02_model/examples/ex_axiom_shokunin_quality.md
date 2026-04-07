@@ -27,7 +27,7 @@ density_score: 0.92
 No artifact enters the pool with quality score below 7.0 — the Shokunin quality floor is non-negotiable.
 ## Rationale
 - Quality floor prevents accumulation of low-value artifacts that erode trust in pool search results
-- Downstream consumers (agents, skills, agent_nodes) depend on pool artifacts being production-ready
+- Downstream consumers (agents, skills, agent_groups) depend on pool artifacts being production-ready
 - Without enforcement, Gresham's Law applies: bad artifacts drive out good ones as noise drowns signal
 ## Scope
 - Domain: all artifact kinds (P01-P12)

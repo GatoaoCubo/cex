@@ -18,7 +18,7 @@ Env configs define the variable contract for a system scope — every environmen
 | Frontmatter fields | 15+ |
 | Quality gates | 8 HARD + 11 SOFT |
 | Override precedence | env var > config file > default |
-| Scope hierarchy | global > agent_node > service |
+| Scope hierarchy | global > agent_group > service |
 | Naming | UPPER_SNAKE_CASE, optional prefix per scope |
 ## Patterns
 - **Variable type system**: every variable has an explicit type with validation
@@ -29,7 +29,7 @@ Env configs define the variable contract for a system scope — every environmen
 | boolean | true/false only | DEBUG, FEATURE_ENABLED |
 | url | URL format check | API_BASE_URL, WEBHOOK_URL |
 | secret | non-empty, masked | API_KEY, JWT_SECRET |
-- **Scope hierarchy**: narrower scope wins — service config overrides agent_node, agent_node overrides global
+- **Scope hierarchy**: narrower scope wins — service config overrides agent_group, agent_group overrides global
 - **Sensitivity handling**: sensitive vars (secrets, keys) NEVER logged, NEVER committed, ALWAYS masked in output
 - **Required vs optional**: required vars block startup if missing; optional vars use defaults
 - **Naming convention**: UPPER_SNAKE_CASE with optional prefix (CEX_, researcher_) for scope clarity
@@ -52,7 +52,7 @@ Env configs define the variable contract for a system scope — every environmen
 1. Catalog variables: name, type, required/optional, default, description
 2. Classify sensitivity: public (ConfigMap) vs sensitive (Secret)
 3. Define validation: regex, range, enum per variable
-4. Set scope: global, agent_node, or service with apownte prefix
+4. Set scope: global, agent_group, or service with apownte prefix
 5. Document precedence: env var > config file > default
 6. Validate: required vars have no defaults; secrets are marked sensitive
 ## References

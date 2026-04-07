@@ -10,7 +10,7 @@ updated: 2026-03-26
 author: CODEX
 tags: [kind-builder, signal, P12, orchestration, specialist]
 keywords: [signal, completion, progress, error, heartbeat, status]
-triggers: ["emit signal", "generate completion JSON", "notify agent_node status"]
+triggers: ["emit signal", "generate completion JSON", "notify agent_group status"]
 geo_description: >
   L1: Specialist in building `signal` (P12): atomic events between agents.. L2: Produce signals JSON with minimal fields and correct P12 naming. L3: When user needs to create, build, or scaffold signal.
 ---
@@ -26,7 +26,7 @@ semantics and low overhead.
 - Validate signals against hard gates for naming, status, and timestamp
 ## Routing
 keywords: [signal, completion, progress, error, heartbeat, status]
-triggers: "emit signal", "generate completion JSON", "notify agent_node status"
+triggers: "emit signal", "generate completion JSON", "notify agent_group status"
 ## Crew Role
 In a crew, I handle ATOMIC STATUS EXCHANGE.
 I answer: "what happened, who emitted it, and when?"

@@ -9,7 +9,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 
 # Instructions: How to Produce an env_config
 ## Phase 1: RESEARCH
-1. Identify the scope: global (applies to all services), a named agent_node, or a specific service
+1. Identify the scope: global (applies to all services), a named agent_group, or a specific service
 2. Catalog all environment variables needed within that scope — include name, current or example value, and purpose
 3. Classify the type of each variable: string, integer, boolean, URL, or secret
 4. Classify the sensitivity of each variable: public (safe to log), internal (omit from logs), or secret (mask in all output)

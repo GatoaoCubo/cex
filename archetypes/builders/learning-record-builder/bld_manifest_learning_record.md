@@ -27,7 +27,7 @@ Produces records dense (>=0.80), max 3KB.
 - Produce learning_record artifacts with frontmatter complete (22 fields)
 - Classify patterns e anti-patterns with score de impacto
 - Validate artifact against quality gates (9 HARD + 12 SOFT)
-- Track reproducibility e context satellite/domain
+- Track reproducibility e context agent_group/domain
 ## Routing
 keywords: [learning, learning, experiencia, pattern, anti-pattern, retrospective]
 triggers: "registra learning X", "documenta o that deu certo em Y", "capture learning from Z"

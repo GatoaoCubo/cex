@@ -7,7 +7,7 @@ version: 2.0.0
 created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
-agent_node: orchestrator
+agent_group: orchestrator
 domain: orchestration
 llm_function: BECOME
 capabilities_count: 7

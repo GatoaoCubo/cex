@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-24
 updated: 2026-03-24
 author: builder_agent
-agent_node: operations_agent
+agent_group: operations_agent
 domain: data_quality
 quality: 9.0
 tags:
@@ -73,4 +73,4 @@ related_agents:
 - 'qa-agent: Agregacao de qualidade cross-agent (usa data-validator como input)'
 - 'tester-agent: Testa codigo; data-validator testa dados'
 - 'evaluator-agent: Avalia output LLM; data-validator avalia dados estruturados'
-footer: 'Satellite: operations_agent | Quality: 9.0 | Domain: data_quality'
+footer: 'Agent_group: operations_agent | Quality: 9.0 | Domain: data_quality'

@@ -9,7 +9,7 @@ author: "n02_marketing"
 title: "Publish Content to Social Media Platforms"
 steps_count: 4
 execution: mixed
-agent_nodes: [n02_marketing, n05_operations]
+agent_groups: [n02_marketing, n05_operations]
 timeout: 240
 retry_policy: per_step
 depends_on: [p03_ap_cf_generate_campaign]

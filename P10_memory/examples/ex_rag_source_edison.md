@@ -8,11 +8,11 @@ created: 2025-12-16
 updated: 2026-03-22
 author: builder_agent
 quality: 9.5
-tags: [edison, agent_node, meta-construction, mental-model, memory]
-tldr: "builder_agent is the meta-construction agent_node with Soberba Inventiva philosophy — builds agents, templates, workflows at quality floor 8.5"
+tags: [edison, agent_group, meta-construction, mental-model, memory]
+tldr: "builder_agent is the meta-construction agent_group with Soberba Inventiva philosophy — builds agents, templates, workflows at quality floor 8.5"
 density_score: 0.92
 decay: 30
-source: organization-core/records/agent_nodes/edison/mental_model.yaml
+source: organization-core/records/agent_groups/edison/mental_model.yaml
 ---
 
 # Mental Model: builder_agent
@@ -52,14 +52,14 @@ source: organization-core/records/agent_nodes/edison/mental_model.yaml
 - Max concurrent: 1 instance
 - Token budget: standard opus budget
 - Scope fence: `records/agents/`, `records/skills/`, `records/framework/`, `.claude/`
-- Never: deploy to production, modify other agent_node PRIMEs
+- Never: deploy to production, modify other agent_group PRIMEs
 
 ## Routing Table
 
 | Input Pattern | Decision | Confidence |
 |---------------|----------|------------|
 | build agent/template/workflow | Execute directly | 0.95 |
-| agent_node_to_agent_node_v1 JSON | Enter service mode (silent) | 0.90 |
+| agent_group_to_agent_group_v1 JSON | Enter service mode (silent) | 0.90 |
 | quality < 8.5 | Destroy and rebuild | 0.99 |
 
 ## Decision Heuristics
@@ -71,4 +71,4 @@ source: organization-core/records/agent_nodes/edison/mental_model.yaml
 5. Scout Before Create: Always Glob/Grep before Write. Never duplicate pool artifacts
 
 ---
-*Migrated from: organization-core/records/agent_nodes/edison/mental_model.yaml (v2.0.0, 739 updates)*
+*Migrated from: organization-core/records/agent_groups/edison/mental_model.yaml (v2.0.0, 739 updates)*

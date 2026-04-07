@@ -9,7 +9,7 @@ author: n02_visual_frontend_marketing
 title: Visual Frontend + Marketing Production Workflows
 steps_count: 18
 execution: mode_branching_sequential
-agent_nodes: [n02-visual-marketing-hub, n07-orchestrator]
+agent_groups: [n02-visual-marketing-hub, n07-orchestrator]
 timeout: 5400000
 retry_policy: per_step_with_mode_awareness
 depends_on: []

@@ -19,7 +19,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ## Required Payload Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
-| agent_node | string, non-empty, lowercase slug preferred | YES | - | emitting agent/agent_node |
+| agent_group | string, non-empty, lowercase slug preferred | YES | - | emitting agent/agent_group |
 | status | enum (`complete`, `error`, `progress`) | YES | - | atomic event state |
 | quality_score | number, `0.0 <= x <= 10.0` | YES | - | event quality/outcome score |
 | timestamp | string, ISO 8601 datetime | YES | - | emission moment |
@@ -47,12 +47,12 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 - lightweight machine-readable event
 `signal` IS NOT:
 - `handoff`: no task list, no scope fence, no execution instructions
-- `dispatch_rule`: no keyword map, no routing policy, no agent_node selection rules
+- `dispatch_rule`: no keyword map, no routing policy, no agent_group selection rules
 - `workflow`: no step graph, no sequencing logic
 ## Canonical Minimal Example
 ```json
 {
-  "agent_node": "codex",
+  "agent_group": "codex",
   "status": "complete",
   "quality_score": 9.0,
   "timestamp": "2026-03-26T10:30:00-03:00"

@@ -32,14 +32,14 @@ keywords: '| Group | Terms |
   Bilingual PT/EN coverage fires on both Portuguese operator commands and English task descriptions. `rag`, `embedding`, `chunking`
   catch specialized sub-tasks. Generic terms (`docs`, `knowledge`) are scoped by `exclude_domains` to prevent false matches
   from research or code-review domains.'
-agent_node: knowledge-engine
+agent_group: knowledge-engine
 model: sonnet
 priority: Priority 7 (high) — knowledge management is a core pipeline function. Adjacent rule `p12_dr_research` holds priority
   8; when input contains both research signals (`analise`, `benchmark`) and knowledge signals (`indexar`, `rag`), the research
   rule wins. Pure indexing and RAG requests resolve exclusively to this rule.
 confidence_threshold: 0.72
 fallback: researcher handles knowledge requests when knowledge-engine is unavailable; it can summarize, chunk, and synthesize
-  content without full knowledge-graph tooling. researcher is a distinct agent_node — no self-fallback.
+  content without full knowledge-graph tooling. researcher is a distinct agent_group — no self-fallback.
 conditions:
   exclude_domains:
   - market_research

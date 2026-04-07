@@ -6,11 +6,11 @@ version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
 author: instruction-builder
-title: Satellite Spec Builder Instructions
+title: Agent_group Spec Builder Instructions
 target: agent-card-builder agent
 phases_count: 4
 prerequisites:
-  - Satellite name is defined (non-empty string, kebab-case)
+  - Agent_group name is defined (non-empty string, kebab-case)
   - Primary domain or responsibility is stated
   - At least one tool or MCP server is identified
   - Target LLM model family is known (e.g. opus, sonnet, haiku)
@@ -29,11 +29,11 @@ density_score: 0.91
 
 ## Context
 The agent-card-builder produces `agent_card` artifacts — complete architectural
-specifications for an autonomous agent agent_node. A agent_card defines everything needed
-to instantiate, operate, and monitor a agent_node: its role, model, MCP servers, boot sequence,
+specifications for an autonomous agent agent_group. A agent_card defines everything needed
+to instantiate, operate, and monitor a agent_group: its role, model, MCP servers, boot sequence,
 constraints, dispatch rules, and scaling configuration.
 **Input contract**:
-- `{{agent_node_name}}`: kebab-case identifier (e.g. `research-sat`, `build-sat`)
+- `{{agent_group_name}}`: kebab-case identifier (e.g. `research-sat`, `build-sat`)
 - `{{domain}}`: primary operational domain (e.g. `web_research`, `code_generation`)
 - `{{model}}`: LLM model identifier (e.g. `claude-opus-4`, `claude-sonnet-4`)
 - `{{tools_list}}`: comma-separated list of MCP servers or built-in tools
@@ -42,29 +42,29 @@ constraints, dispatch rules, and scaling configuration.
 a narrative identity section, and structured subsections for boot sequence, dispatch rules,
 constraints, and monitoring.
 **Boundaries**:
-- Handles full agent_node architecture only.
+- Handles full agent_group architecture only.
 - Individual agent identity belongs in a separate agent artifact.
 - Per-provider boot configuration belongs in a boot_config artifact.
 - Reusable operation patterns belong in pattern artifacts.
 ## Phases
 ### Phase 1: Analyze Role and Boundary
-**Primary action**: Define the agent_node's operational role and establish what it does
+**Primary action**: Define the agent_group's operational role and establish what it does
 versus what it explicitly does not do.
 ```
-INPUT: agent_node_name, domain, constraints_raw
-1. Express the agent_node's single primary function:
-   role_statement = "{{agent_node_name}} is responsible for [ONE THING]"
+INPUT: agent_group_name, domain, constraints_raw
+1. Express the agent_group's single primary function:
+   role_statement = "{{agent_group_name}} is responsible for [ONE THING]"
    Reject vague roles like "general purpose" or "multi-domain"
 2. Map the NOT-domain boundary:
    for each adjacent domain in [research, build, execute, monitor, orchestrate, store]:
-     if domain != agent_node's primary domain:
+     if domain != agent_group's primary domain:
        add to NOT_HANDLES list with brief reason
    Minimum 2 entries required.
 3. Determine LLM function type:
-   if agent_node makes decisions     -> BECOME
-   if agent_node calls external tools -> CALL
-   if agent_node coordinates others  -> COLLABORATE
-   if agent_node injects context     -> INJECT
+   if agent_group makes decisions     -> BECOME
+   if agent_group calls external tools -> CALL
+   if agent_group coordinates others  -> COLLABORATE
+   if agent_group injects context     -> INJECT
 4. Extract capability_keywords (5-10 terms) from domain description.
 OUTPUT: role_statement, not_handles[], llm_function, capability_keywords[]
 ```
@@ -103,7 +103,7 @@ OUTPUT: model_config{}, mcp_bindings[], boot_sequence[], boot_time_seconds
 Verification: each MCP entry has `transport` and `required` fields.
 `boot_sequence` has >= 4 steps.
 ### Phase 3: Define Dispatch and Constraints
-**Primary action**: Specify how the agent_node receives work, what it accepts or rejects,
+**Primary action**: Specify how the agent_group receives work, what it accepts or rejects,
 and its operational limits.
 ```
 INPUT: constraints_raw, capability_keywords[], role_statement
@@ -115,8 +115,8 @@ INPUT: constraints_raw, capability_keywords[], role_statement
      priority: "normal" | "high" | "low"
    }
 2. Constraint extraction from constraints_raw:
-   hard_constraints = []   # things the agent_node MUST NEVER do
-   soft_constraints = []   # things the agent_node SHOULD prefer
+   hard_constraints = []   # things the agent_group MUST NEVER do
+   soft_constraints = []   # things the agent_group SHOULD prefer
    for each sentence in constraints_raw:
      if NEVER/MUST NOT/FORBIDDEN -> hard_constraint
      if PREFER/AVOID/MINIMIZE    -> soft_constraint

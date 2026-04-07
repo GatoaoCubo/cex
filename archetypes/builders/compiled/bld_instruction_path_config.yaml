@@ -50,7 +50,7 @@ context: 'The path-config-builder receives a system scope and produces a `path_c
   directories (permission-builder), feature toggles (feature_flag), or timeout/retry settings (runtime_rule).'
 phases: ''
 phase_1_research: "Goal: Enumerate every path needed by the scope and classify each one before writing anything.\n1. Identify\
-  \ the scope: confirm it is one of `global`, `agent_node name`, or `service name`. Record as a snake_case lowercase slug\
+  \ the scope: confirm it is one of `global`, `agent_group name`, or `service name`. Record as a snake_case lowercase slug\
   \ with no hyphens.\n2. List every filesystem path from `{{path_purposes}}`. For each, determine:\n   - Type: `dir` (container)\
   \ or `file` (specific file, include extension)\n   - Platform: `windows`, `unix`, or `all`\n   - Necessity: `required` (system\
   \ fails without it) or `optional` (feature degrades gracefully)\n   - Creation policy: `must_exist`, `create_if_absent`,\

@@ -16,7 +16,7 @@ tags: [interface, versioning, backward-compatibility, deprecation, bilateral-con
 tldr: "Both sides of the contract must be declared. Every method needs input AND output. Deprecation paths prevent breaking changes. backward_compatible is a boolean."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [interface, contract, provider, consumer, versioning, backward_compatible, deprecation, method, bilateral]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

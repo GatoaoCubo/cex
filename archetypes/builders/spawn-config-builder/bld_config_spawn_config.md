@@ -35,8 +35,8 @@ Rule: id MUST equal filename stem.
 ## Mode Enum
 | Value | When to use | Script |
 |-------|-------------|--------|
-| solo | 1 agent_node, 1 task | spawn_solo.ps1 |
-| grid | 2-6 agent_nodes, parallel tasks | spawn_grid.ps1 |
+| solo | 1 agent_group, 1 task | spawn_solo.ps1 |
+| grid | 2-6 agent_groups, parallel tasks | spawn_grid.ps1 |
 | continuous | >6 tasks, auto-refill slots from queue | spawn_grid.ps1 -mode continuous |
 ## Baseline Flags (mandatory)
 | Flag | Purpose |
@@ -44,8 +44,8 @@ Rule: id MUST equal filename stem.
 | --dangerously-skip-permissions | Skip tool permission prompts |
 | --no-chrome | Prevent Chrome extension loading |
 | -p | Non-interactive mode (skip workspace trust) |
-## Satellite-Model Routing
-| Satellite | Model | MCP Config |
+## Agent_group-Model Routing
+| Agent_group | Model | MCP Config |
 |-----------|-------|------------|
 | shaka | sonnet | .mcp-shaka.json |
 | lily | sonnet | .mcp-lily.json |

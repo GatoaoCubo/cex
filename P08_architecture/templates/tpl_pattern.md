@@ -11,7 +11,7 @@ title: "Pattern: {{PATTERN_NAME}}"
 version: 1.0.0
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
-author: {{SATELLITE_NAME}}
+author: {{AGENT_GROUP_NAME}}
 quality: {{QUALITY_8_TO_10}}
 tags: [{{TAG1}}, {{TAG2}}, pattern, architecture]
 tldr: "{{ONE_SENTENCE_PROBLEM_SOLUTION}}"
@@ -30,7 +30,7 @@ linked_artifacts:
 ## Context
 
 - When: {{CONDITION_WHERE_PATTERN_APPLIES}}
-- Scale: {{SINGLE_AGENT|MULTI_SATELLITE|SYSTEM_WIDE}}
+- Scale: {{SINGLE_AGENT|MULTI_AGENT_GROUP|SYSTEM_WIDE}}
 - Frequency: {{HOW_OFTEN_THIS_OCCURS}}
 
 ## Solution

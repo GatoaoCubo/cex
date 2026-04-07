@@ -46,7 +46,7 @@ repos:
 
 ```yaml
 key_paths:
-  agent_node_primes: records/agent_nodes/{name}/PRIME_{NAME}.md
+  agent_group_primes: records/agent_groups/{name}/PRIME_{NAME}.md
   agents: records/agents/{name}/
   skills: records/skills/{name}/SKILL.md
   pool_index: records/pool/POOL_INDEX.md

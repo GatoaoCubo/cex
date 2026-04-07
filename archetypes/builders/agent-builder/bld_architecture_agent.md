@@ -10,7 +10,7 @@ purpose: Component map of agent — inventory, dependencies, and architectural p
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
-| frontmatter block | 10-field identity header (id, kind, pillar, domain, agent_node, llm_function, version, tags, etc.) | agent-builder | required |
+| frontmatter block | 10-field identity header (id, kind, pillar, domain, agent_group, llm_function, version, tags, etc.) | agent-builder | required |
 | persona | Natural-language description of who the agent is and its domain expertise | author | required |
 | capabilities | List of concrete things the agent can do (4-8 items) | author | required |
 | agent_package/ | Directory of 10+ spec files providing full structured identity | agent-builder | required |
@@ -48,7 +48,7 @@ agent            --signals-->   routing_entry (registration)
 | A runtime identity — persona + capabilities + structured agent_package | A skill (executable capability without persistent identity) |
 | The definition of who executes, what they know, and what tools they have | A system prompt (how the agent speaks, not who it is) |
 | Persistent — defined once, instantiated many times | A mental_model (design-time blueprint, not runtime entity) |
-| Scoped to a agent_node with specific tool access | A model_card (LLM spec, not agent identity) |
+| Scoped to a agent_group with specific tool access | A model_card (LLM spec, not agent identity) |
 | A destination for routing and orchestration | A boot_config (initialization params, not agent definition) |
 | Packaged into agent_package with 10+ required builder specs | An agent_package (the distributable bundle, not the source definition) |
 ## Layer Map

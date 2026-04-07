@@ -11,7 +11,7 @@ author: operations_agent
 domain: router
 quality: 8.9
 tags: [router, P02, REASON, kind-kc]
-tldr: "Keyword-to-agent_node routing rule that maps incoming tasks to the correct execution target"
+tldr: "Keyword-to-agent_group routing rule that maps incoming tasks to the correct execution target"
 when_to_use: "Building, reviewing, or reasoning about router artifacts"
 keywords: [routing, dispatch, task-mapping]
 feeds_kinds: [router]
@@ -31,7 +31,7 @@ core: true
 ```
 
 ## What It Is
-A router is a structured rule that maps task keywords or intent signals to the correct agent_node or agent for execution. It enables the orchestrator to reason about where to dispatch work without hardcoding decisions. It is NOT a dispatch_rule (P12, which orchestrates multi-step workflows) nor a fallback_chain (model-to-model cascading). A router is a single-hop mapping: task in, target out.
+A router is a structured rule that maps task keywords or intent signals to the correct agent_group or agent for execution. It enables the orchestrator to reason about where to dispatch work without hardcoding decisions. It is NOT a dispatch_rule (P12, which orchestrates multi-step workflows) nor a fallback_chain (model-to-model cascading). A router is a single-hop mapping: task in, target out.
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -62,7 +62,7 @@ A router is a structured rule that maps task keywords or intent signals to the c
 | Anti-Pattern | Why It Fails | Fix |
 |-------------|-------------|-----|
 | Overlapping keywords across routers | Ambiguous routing, random target selection | Deduplicate keywords; assign each keyword to exactly one router |
-| Routing by model instead of capability | Wrong agent_node gets tasks it cannot handle | Route by domain/skill, not by model name |
+| Routing by model instead of capability | Wrong agent_group gets tasks it cannot handle | Route by domain/skill, not by model name |
 
 ## Integration Graph
 ```
@@ -75,7 +75,7 @@ A router is a structured rule that maps task keywords or intent signals to the c
 - IF keywords match exactly one router THEN dispatch to that target
 - IF keywords match multiple routers THEN use priority field as tiebreaker
 - IF no keywords match THEN fall back to semantic similarity or default target
-- DEFAULT: Route to the agent_node with the broadest domain scope
+- DEFAULT: Route to the agent_group with the broadest domain scope
 
 ## Quality Criteria
 - GOOD: Has keywords, target, and scope defined; no overlapping keywords

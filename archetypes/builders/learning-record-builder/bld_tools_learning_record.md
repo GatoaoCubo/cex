@@ -21,7 +21,7 @@ purpose: Tools and APIs available for learning_record production
 | CEX Taxonomy | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 | Seed Bank | archetypes/SEED_BANK.yaml | Seeds: topic, outcome, pattern, score |
 | Learning memory | records/core/learning/memory/ | Existing patterns |
-| Signal history | .claude/signals/ | Satellite completion signals |
+| Signal history | .claude/signals/ | Agent_group completion signals |
 ## Tool Permissions
 
 | Category | Tools | Status |

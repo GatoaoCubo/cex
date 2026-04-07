@@ -17,7 +17,7 @@ Signals are atomic JSON runtime notifications — the smallest status exchange u
 | Format | JSON |
 | Naming | `p12_sig_{event}.json` |
 | Max bytes | 4096 |
-| Required fields | 4: agent_node, status, quality_score, timestamp |
+| Required fields | 4: agent_group, status, quality_score, timestamp |
 | Optional fields | 7: task, artifacts, artifacts_count, commit_hash, error_code, message, progress_pct |
 | status enum | `complete` / `error` / `progress` |
 | quality_score range | 0.0 – 10.0 |
@@ -31,14 +31,14 @@ Signals are atomic JSON runtime notifications — the smallest status exchange u
 | status=error | Work failed or blocked; triggers retry/escalation |
 | status=progress | Work ongoing; include `progress_pct` (0–100) |
 | progress_pct | Valid ONLY when `status=progress` — never on complete/error |
-| agent_node field | Lowercase slug preferred: `codex`, `edison`, `shaka` |
+| agent_group field | Lowercase slug preferred: `codex`, `edison`, `shaka` |
 | quality_score | Reflects event outcome quality (9.0 = clean complete, 5.0 = partial) |
 | Immutable once emitted | Never mutate; emit a new signal for updated state |
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
 |-------------|-------------|
 | Task instructions in payload | Signal is not a handoff — no execution content |
-| Routing rules or agent_node selection | Signal is not a dispatch_rule |
+| Routing rules or agent_group selection | Signal is not a dispatch_rule |
 | `progress_pct` on `status=complete` | Schema violation; pct valid only during ongoing work |
 | Omitting `timestamp` | Breaks chronological ordering for signal consumers |
 | quality_score outside 0.0–10.0 | Hard schema rejection |
@@ -47,7 +47,7 @@ Signals are atomic JSON runtime notifications — the smallest status exchange u
 ## Application
 1. Identify the event type: completion, failure/block, or ongoing progress
 2. Set `status` to `complete`, `error`, or `progress`
-3. Set `agent_node` to lowercase slug of the emitting agent
+3. Set `agent_group` to lowercase slug of the emitting agent
 4. Set `quality_score` (0.0–10.0) reflecting outcome quality
 5. Set `timestamp` to current ISO 8601 datetime
 6. If `status=progress`, add `progress_pct` (0–100)

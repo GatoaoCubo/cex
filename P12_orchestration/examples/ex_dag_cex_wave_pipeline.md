@@ -32,7 +32,7 @@ linked_artifacts:
 
 ## Node Definitions
 
-| Node | Satellite | Volume | Input | Output |
+| Node | Agent_group | Volume | Input | Output |
 |------|-----------|--------|-------|--------|
 | W5.1 | knowledge_agent | 519 KCs quality>=7 | records/pool/knowledge/ | P01 examples |
 | W5.2 | knowledge_agent | 638 active prompts | records/pool/prompts/ | P03 examples |
@@ -58,7 +58,7 @@ dependencies:
 
 ## Execution Mode
 
-| Wave | Mode | Satellites | Estimated Batches |
+| Wave | Mode | Agent_groups | Estimated Batches |
 |------|------|-----------|-------------------|
 | W5.1 | grid continuous | knowledge_agent | ~10 batches (519 KCs) |
 | W5.2 | grid continuous | knowledge_agent | ~7 batches (638 prompts) |

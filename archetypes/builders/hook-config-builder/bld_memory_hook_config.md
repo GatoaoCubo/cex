@@ -16,7 +16,7 @@ tags: [hook-config, P04, type-builder]
 tldr: "Declare hooks, never implement. Validate against schema. Stay under 4096 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [hook config, pre-build, post-build, on-error, quality-fail, lifecycle, event]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

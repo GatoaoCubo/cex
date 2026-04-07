@@ -31,7 +31,7 @@ Motivo: brain search so indexa .md; LLMs geram MD melhor que YAML; frontmatter v
 ## Naming
 
 `p01_kc_{{topic_slug}}.md` — id == filename stem.
-topic_slug: snake_case, sem agent_node prefix, descritivo.
+topic_slug: snake_case, sem agent_group prefix, descritivo.
 
 ## Frontmatter
 

@@ -140,5 +140,5 @@ organization:memory:{session_id}:metadata     -> Hash          (created_at, last
 
 ## Related
 - `ex_agent_gateway.md` — Gateway agent que usa este memory scope
-- `ex_boot_config_edison_claude.md` — Boot config (memoria e efemera por sessao de satelite)
+- `ex_boot_config_edison_claude.md` — Boot config (memoria e efemera por sessao de agent_group)
 - `records/core/learning/memory/` — organization long-term memory (diferente de session memory)

@@ -23,7 +23,7 @@ source: organization-core/Railway env vars
 | Flag | `FIRECRAWL_ENABLED` |
 | State | on |
 | Rollout | 100% |
-| Owner | operations_agent agent_node |
+| Owner | operations_agent agent_group |
 | Expires | never |
 
 ## Behavior

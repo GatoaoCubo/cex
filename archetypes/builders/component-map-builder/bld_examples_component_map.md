@@ -39,11 +39,11 @@ connections:
   - {from: "Ollama", to: "build_indexes_ollama.py", type: "dependency"}
   - {from: "brain_query API", to: "BM25 Index", type: "data_flow"}
   - {from: "brain_query API", to: "FAISS Index", type: "data_flow"}
-  - {from: "agent_nodes", to: "brain_query API", type: "data_flow"}
+  - {from: "agent_groups", to: "brain_query API", type: "data_flow"}
   - {from: "Ollama", to: "brain_query API", type: "dependency"}
 keywords: [brain, search, bm25, faiss, ollama, knowledge, retrieval]
 ## Scope
-CEX Brain search infrastructure: all components involved in indexing, embedding, and retrieving knowledge artifacts. Excludes individual artifact content, agent_node internals, and API deployment.
+CEX Brain search infrastructure: all components involved in indexing, embedding, and retrieving knowledge artifacts. Excludes individual artifact content, agent_group internals, and API deployment.
 ## Components
 | Component | Role | Owner | Status | Version |
 |-----------|------|-------|--------|---------|
@@ -62,12 +62,12 @@ CEX Brain search infrastructure: all components involved in indexing, embedding,
 | Ollama | build_indexes_ollama.py | dependency | embeddings | unidirectional |
 | brain_query API | BM25 Index | data_flow | keyword results | unidirectional |
 | brain_query API | FAISS Index | data_flow | vector results | unidirectional |
-| agent_nodes | brain_query API | data_flow | search queries | unidirectional |
+| agent_groups | brain_query API | data_flow | search queries | unidirectional |
 | Ollama | brain_query API | dependency | runtime embeddings | unidirectional |
 ## Interfaces
 | Boundary | Components | Contract | Status |
 |----------|-----------|----------|--------|
-| Search API | brain_query <-> agent_nodes | MCP tool call, returns ranked results | active |
+| Search API | brain_query <-> agent_groups | MCP tool call, returns ranked results | active |
 | Embedding | Ollama <-> indexer/API | nomic-embed-text model, 768d vectors | active |
 ## Dependencies
 | Component | Depends On | Failure Impact |

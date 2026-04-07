@@ -18,8 +18,8 @@ purpose: Tools and APIs available for spawn_config production
 |--------|----------|------|
 | CEX Schema | P12_orchestration/_schema.yaml | Field definitions, spawn_config kind |
 | Spawn Scripts | records/framework/powershell/spawn_*.ps1 | Execution scripts (solo, grid, stop, monitor) |
-| MCP Configs | .mcp-*.json | Per-agent_node MCP profiles |
-| Satellite PRIMEs | records/agent_nodes/*/PRIME_*.md | Satellite routing table |
+| MCP Configs | .mcp-*.json | Per-agent_group MCP profiles |
+| Agent_group PRIMEs | records/agent_groups/*/PRIME_*.md | Agent_group routing table |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P12_spawn_config |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 ## Tool Permissions

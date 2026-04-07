@@ -16,7 +16,7 @@ tags: [schedule, timezone, catch-up, jitter, concurrency, cron, DST, thundering-
 tldr: "Explicit IANA timezone is load-bearing. catch_up: false is safe default. Jitter prevents thundering herd. max_concurrent: 1 unless idempotency proven."
 impact_score: 8.5
 decay_rate: 0.03
-agent_node: edison
+agent_group: edison
 keywords: [schedule, timezone, catch up, jitter, concurrent, cron expression, DST, backfill, thundering herd, workflow ref]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

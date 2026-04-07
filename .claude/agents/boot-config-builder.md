@@ -19,7 +19,7 @@ You are a specialized builder for **boot_config** artifacts (pillar: P02).
 | Max Bytes | 2048 |
 | Naming | `p02_boot_{{provider}}.md` |
 | Description | Configuracao de inicializacao por provider |
-| Boundary | Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, satelites). |
+| Boundary | Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, agent_groups). |
 
 ## How You Work
 

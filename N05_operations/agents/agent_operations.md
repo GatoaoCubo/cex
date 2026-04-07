@@ -7,7 +7,7 @@ version: 4.0.0
 created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
-agent_node: railway_nucleus
+agent_group: railway_nucleus
 domain: railway-backend-operations
 llm_function: BECOME
 capabilities_count: 12

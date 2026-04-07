@@ -23,7 +23,7 @@ tags:
 tldr: End-to-end execution workflow for review, test, debug, CI/CD repair, and release validation with checkpoints and signal
   discipline.
 density_score: 0.97
-agent_nodes:
+agent_groups:
 - operations_nucleus
 signals:
 - triage_complete

@@ -40,7 +40,7 @@ kind: agent_package
 title: "Human-Readable Agent Name"
 description: "One-line description of what this agent does"
 domain: "marketing"           # primary domain
-satellite: "marketing_agent"             # organization satellite (if applicable)
+agent_group: "marketing_agent"             # organization agent_group (if applicable)
 quality: 8.5                  # CEX quality score
 
 capabilities:
@@ -155,13 +155,13 @@ Before publishing an ISO Package:
 ## Existing Inventory
 
 organization currently has **118 agents** in ISO format with **~1148 files** across the pool.
-The ISO format has been battle-tested across all 7 satellites (orchestrator, research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent).
+The ISO format has been battle-tested across all 7 agent_groups (orchestrator, research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent).
 
 ### Legacy Naming Convention
 
 Existing agents use the naming pattern:
 ```
-ISO_{SATELLITE}_{NNN}_{TYPE}.md
+ISO_{AGENT_GROUP}_{NNN}_{TYPE}.md
 ```
 
 Example: `ISO_marketing_agent_015_MANIFEST.md`, `ISO_builder_agent_032_SYSTEM_INSTRUCTION.md`

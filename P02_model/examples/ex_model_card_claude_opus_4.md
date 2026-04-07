@@ -41,8 +41,8 @@ tags: [model-card, opus, anthropic, pricing, capabilities]
 | Simple text formatting or copy | NO (use haiku, 5% cost) |
 | Research and analysis | NO (use sonnet, 25% cost) |
 
-## organization Satellite Mapping
+## organization Agent_group Mapping
 - **builder_agent** (build): opus — code complexity demands reasoning depth
 - **operations_agent** (execute): opus — deployment requires zero-error precision
-- **orchestrator** (orchestrate): opus — routing decisions affect all agent_nodes
+- **orchestrator** (orchestrate): opus — routing decisions affect all agent_groups
 - **research_agent/marketing_agent/knowledge_agent/commercial_agent**: sonnet — analysis tasks don't need opus

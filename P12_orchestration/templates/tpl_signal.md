@@ -15,7 +15,7 @@ quality: {{QUALITY_8_TO_10}}
 ## Signal Mode: Event
 ```json
 {
-  "satellite": "{{SATELLITE_NAME}}",
+  "agent_group": "{{AGENT_GROUP_NAME}}",
   "mode": "event",
   "status": "{{complete|error|progress}}",
   "quality_score": {{QUALITY_SCORE}},
@@ -27,7 +27,7 @@ quality: {{QUALITY_8_TO_10}}
 <!-- Complementary to event mode — carries full position for cross-session resume -->
 ```json
 {
-  "satellite": "{{SATELLITE_NAME}}",
+  "agent_group": "{{AGENT_GROUP_NAME}}",
   "mode": "state_snapshot",
   "position": {
     "phase": "{{CURRENT_PHASE}}",

@@ -27,7 +27,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
 | pipeline | string | YES | - | Pipeline or mission name |
-| nodes | list[object{id, label, agent_node}] | YES | - | Tasks in the graph |
+| nodes | list[object{id, label, agent_group}] | YES | - | Tasks in the graph |
 | edges | list[object{from, to}] | YES | - | Dependency arrows |
 | domain | string | YES | - | Domain this artifact belongs to |
 | quality | null | YES | null | Never self-score |
@@ -46,7 +46,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | keywords | list[string] | NO | omitted | Brain search terms |
 | linked_artifacts | object {primary, related} | NO | omitted | Cross-references |
 ## Node Object
-Fields: `id` (unique slug), `label` (human description), `agent_node` (executor, optional).
+Fields: `id` (unique slug), `label` (human description), `agent_group` (executor, optional).
 ## Edge Object
 Fields: `from` (node id that complete first), `to` (node id that depends on from).
 ## Semantic Rules
@@ -65,7 +65,7 @@ Fields: `from` (node id that complete first), `to` (node id that depends on from
 Regex: `^p12_dag_[a-z][a-z0-9_]+$`
 Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
-1. `## Nodes` — task definitions with id, label, agent_node
+1. `## Nodes` — task definitions with id, label, agent_group
 2. `## Edges` — dependency relationships between nodes
 3. `## Execution Order` — topologically sorted waves
 ## Constraints

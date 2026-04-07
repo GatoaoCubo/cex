@@ -31,7 +31,7 @@ core: false
 ```
 
 ## What It Is
-A component_map is a structured map of components and their directed connections within a bounded scope — it answers "what connects to what" with explicit nodes and labeled edges. It is NOT a diagram (visual rendering), NOT an agent_card (scoped to a single agent_node identity), and NOT a workflow (no execution sequence or step ordering).
+A component_map is a structured map of components and their directed connections within a bounded scope — it answers "what connects to what" with explicit nodes and labeled edges. It is NOT a diagram (visual rendering), NOT an agent_card (scoped to a single agent_group identity), and NOT a workflow (no execution sequence or step ordering).
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -47,7 +47,7 @@ A component_map is a structured map of components and their directed connections
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| scope | string | required | system/agent_node/layer — broader = less actionable |
+| scope | string | required | system/agent_group/layer — broader = less actionable |
 | nodes | list[ComponentRef] | required | More nodes = richer but harder to read |
 | edges | list[EdgeDef] | required | Missing edges = silent coupling; over-specifying = brittle |
 | version | string | 1.0.0 | Bump on structural change, not on data/content change |
@@ -56,13 +56,13 @@ A component_map is a structured map of components and their directed connections
 | Pattern | When to Use | Example |
 |---------|-------------|---------|
 | Layer map | Auditing P01-P12 pillar interconnect | p08_cmap_system.yaml — all pillars as nodes |
-| Satellite topology | One agent_node's agent + tool connections | p08_cmap_atlas.yaml — operations_agent agents + MCP tools |
+| Agent_group topology | One agent_group's agent + tool connections | p08_cmap_atlas.yaml — operations_agent agents + MCP tools |
 | Data flow | Tracing data transformation between stages | input → chunk → embed → index flow |
 
 ## Anti-Patterns
 | Anti-Pattern | Why It Fails | Fix |
 |-------------|-------------|-----|
-| Mega-map | All 118 agents in one map is unreadable | Scope to 1 agent_node or 1 layer at a time |
+| Mega-map | All 118 agents in one map is unreadable | Scope to 1 agent_group or 1 layer at a time |
 | Stale map | Map diverges silently from live codebase | Version-gate: map version must match codebase tag |
 | Unlabeled ports | Edges without src/dst port names cause ambiguity | Always label edge source and destination ports |
 
@@ -74,10 +74,10 @@ diagram, agent_card --> [component_map] --> workflow, law, decision_record
 ```
 
 ## Decision Tree
-- IF visualizing one agent_node's internals THEN agent_node topology map
+- IF visualizing one agent_group's internals THEN agent_group topology map
 - IF auditing data transformation THEN data flow map
 - IF designing new system architecture THEN system-level layer map first
-- DEFAULT: agent_node topology, 1:1 with agents, one file per agent_node
+- DEFAULT: agent_group topology, 1:1 with agents, one file per agent_group
 
 ## Quality Criteria
 - GOOD: all nodes labeled, edges directed with port labels, scope and version present

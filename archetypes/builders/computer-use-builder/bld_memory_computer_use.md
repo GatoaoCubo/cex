@@ -16,7 +16,7 @@ tags: [computer-use, screenshot, safety, resolution, observe-act, coordinates]
 tldr: "Screenshot before every action. Safety constraints mandatory. 1024x768 default. Document action parameters. Explicit coordinate system."
 impact_score: 8.0
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [computer use, screen control, screenshot, coordinates, resolution, safety, mouse, keyboard, gui automation]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

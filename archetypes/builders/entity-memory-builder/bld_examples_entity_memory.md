@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: entity-memory-builder
 ## Golden Example
-INPUT: "Create entity memory for Firecrawl — the web scraping API service used by research_agent agent_node"
+INPUT: "Create entity memory for Firecrawl — the web scraping API service used by research_agent agent_group"
 OUTPUT:
 ```yaml
 id: p10_em_firecrawl
@@ -35,7 +35,7 @@ attributes:
 update_policy: overwrite
 source: "MEMORY.md + Firecrawl official docs"
 relationships:
-  - entity: "p10_em_shaka_agent_node"
+  - entity: "p10_em_shaka_agent_group"
     relation: "used_by"
   - entity: "p10_em_organization_core"
     relation: "integrated_into"
@@ -45,7 +45,7 @@ expiry: "2027-01-01"
 quality: null
 tags: [entity_memory, service, firecrawl, scraping, P10]
 tldr: "Firecrawl: $19/mo web scraping service, 3000 credits/mo, REST API, used by research_agent for research enrichment."
-description: "Firecrawl web scraping service — structured extraction, markdown output, 3000 monthly credits, integrated into research_agent agent_node."
+description: "Firecrawl web scraping service — structured extraction, markdown output, 3000 monthly credits, integrated into research_agent agent_group."
 ```
 ## Overview
 Firecrawl is a web scraping service used by research_agent to enrich product research with live marketplace data. Tracks pricing, credits, API details, and integration status.
@@ -60,7 +60,7 @@ Firecrawl is a web scraping service used by research_agent to enrich product res
 ## Relationships
 | Entity | Relation | Notes |
 |--------|----------|-------|
-| p10_em_shaka_agent_node | used_by | research_agent uses Firecrawl for research |
+| p10_em_shaka_agent_group | used_by | research_agent uses Firecrawl for research |
 | p10_em_organization_core | integrated_into | API key stored in Railway env |
 ## Update Policy
 Policy: overwrite — pricing and credit values change with plan changes.

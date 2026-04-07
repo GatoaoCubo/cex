@@ -16,7 +16,7 @@ tags: [audio-tool, direction, language-codes, model-naming, format-enum, sample-
 tldr: "Direction is load-bearing for audio routing. BCP-47 codes mandatory. Model ids must match provider docs. sample_rate affects STT accuracy."
 impact_score: 8.0
 decay_rate: 0.04
-agent_node: edison
+agent_group: edison
 keywords: [audio tool, STT, TTS, direction, language codes, BCP-47, model naming, format, sample rate, streaming]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

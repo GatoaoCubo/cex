@@ -12,7 +12,7 @@ quality: 8.9
 tags: [cex, lp08, architecture, patterns, laws, multi-agent, scaling]
 tldr: "P08 define 5 meta-artefatos que governam estrutura: agent_card, pattern, law, diagram, component_map"
 when_to_use: "Entender como sistemas LLM escalam via arquitetura formal e meta-artefatos"
-keywords: [architecture, agent_node, pattern, law, diagram, component-map]
+keywords: [architecture, agent_group, pattern, law, diagram, component-map]
 long_tails:
   - "Como escalar sistema multi-agente LLM com arquitetura"
   - "Qual a diferenca entre pattern e law no CEX"
@@ -63,7 +63,7 @@ types: 5 | function: BECOME + GOVERN | layer: spec + governance
 ## Regras de Ouro
 
 - SEMPRE documentar WHY de cada law (nao so WHAT)
-- NUNCA criar agent_node sem agent_card formal
+- NUNCA criar agent_group sem agent_card formal
 - SEMPRE atualizar component_map ao adicionar componente
 - NUNCA tratar pattern como lei (pattern eh recomendacao)
 - SEMPRE separar diagram (visual) de component_map (dados)

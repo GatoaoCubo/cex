@@ -1,17 +1,17 @@
 ---
-id: p03_rp_agent_node_dispatch
+id: p03_rp_agent_group_dispatch
 kind: router_prompt
 pillar: P03
-title: Router Prompt for organization Satellite Task Dispatch
+title: Router Prompt for organization Agent_group Task Dispatch
 routes: [research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent]
 fallback: builder_agent
 quality: 9.0
 ---
 
-# Router Prompt: Satellite Dispatch
+# Router Prompt: Agent_group Dispatch
 
 ## Objective
-Classificar a tarefa do usuario e rotear para o satelite organization mais adequado. O router deve analisar keywords, contexto semantico e tipo de entregavel esperado para determinar o satelite correto com score de confianca. Se confianca < threshold, usar fallback.
+Classificar a tarefa do usuario e rotear para o agent_group organization mais adequado. O router deve analisar keywords, contexto semantico e tipo de entregavel esperado para determinar o agent_group correto com score de confianca. Se confianca < threshold, usar fallback.
 
 ## Routes
 
@@ -94,7 +94,7 @@ ELSE:
 - **Fallback**: confidence < 0.4 (usar builder_agent como builder generico)
 
 ## Fallback
-**builder_agent** (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, builder_agent e o satelite mais versatil por usar opus e ter capacidade de construcao ampla.
+**builder_agent** (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, builder_agent e o agent_group mais versatil por usar opus e ter capacidade de construcao ampla.
 
 ## Disambiguation Rules
 | Conflito | Resolucao | Razao |
@@ -109,7 +109,7 @@ ELSE:
 ## Route Decision
 
 **Task**: [tarefa original do usuario]
-**Selected**: [SATELLITE_NAME]
+**Selected**: [AGENT_GROUP_NAME]
 **Confidence**: [0.0-1.0]
 **Reasoning**: [1 frase explicando a decisao]
 
@@ -130,4 +130,4 @@ ELSE:
 ## Research Base
 - Router pattern: confidence threshold + fallback (LangChain RouterChain)
 - Keyword + semantic hybrid = mais robusto que keyword-only
-- organization agent_node routing table: orchestrator_RULES.md + AGENT_ROUTING_INDEX.md
+- organization agent_group routing table: orchestrator_RULES.md + AGENT_ROUTING_INDEX.md

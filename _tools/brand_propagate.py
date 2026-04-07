@@ -22,25 +22,29 @@ BRAND_CONFIG = ROOT / ".cex" / "brand" / "brand_config.yaml"
 # What each nucleus needs from brand_config
 NUCLEUS_VARS = {
     "N01": ["BRAND_ICP", "BRAND_COMPETITORS", "BRAND_CATEGORY", "BRAND_CONTENT_PILLARS",
-            "BRAND_ICP_LOCATION", "BRAND_ICP_VALUES"],
+            "BRAND_ICP_LOCATION", "BRAND_ICP_VALUES", "BRAND_COUNTRY"],
     "N02": ["BRAND_VOICE_TONE", "BRAND_VOICE_FORMALITY", "BRAND_VOICE_ENTHUSIASM",
             "BRAND_VOICE_HUMOR", "BRAND_VOICE_WARMTH", "BRAND_VOICE_AUTHORITY",
             "BRAND_VOICE_DO", "BRAND_VOICE_DONT", "BRAND_COLORS", "BRAND_FONTS",
-            "BRAND_VALUES", "BRAND_NAME", "BRAND_TAGLINE", "BRAND_LANGUAGE"],
+            "BRAND_VALUES", "BRAND_NAME", "BRAND_TAGLINE", "BRAND_LANGUAGE",
+            "BRAND_PERSON", "BRAND_ENERGY", "BRAND_BIO", "BRAND_HASHTAG"],
     "N03": ["BRAND_COLORS", "BRAND_FONTS", "BRAND_STYLE", "BRAND_NAME"],
     "N04": ["BRAND_NAME", "BRAND_CATEGORY", "BRAND_CONTENT_PILLARS",
-            "BRAND_LANGUAGE"],
+            "BRAND_LANGUAGE", "BRAND_TAGS"],
     "N05": ["BRAND_NAME", "BRAND_LOGO_URL", "BRAND_FAVICON_URL",
             "BRAND_PRICING_MODEL", "BRAND_PAYMENT_PROVIDERS"],
+    "N06": ["BRAND_NAME", "BRAND_TAGLINE", "BRAND_ESSENCE", "BRAND_MANIFESTO",
+            "BRAND_BIO", "BRAND_ARCHETYPE", "BRAND_STORY"],
     "N07": ["BRAND_NAME", "BRAND_TAGLINE"],
 }
 
 NUCLEUS_DIRS = {
-    "N01": "N01_research",
+    "N01": "N01_intelligence",
     "N02": "N02_marketing",
     "N03": "N03_builder",
     "N04": "N04_knowledge",
     "N05": "N05_operations",
+    "N06": "N06_commercial",
     "N07": "N07_admin",
 }
 

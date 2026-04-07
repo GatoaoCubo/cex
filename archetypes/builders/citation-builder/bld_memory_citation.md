@@ -16,7 +16,7 @@ tags: [citation, provenance, reliability, excerpt, temporal]
 tldr: "Excerpt is mandatory (URL rots). Tier classification must be strict. date_accessed always present. quality:null always."
 impact_score: 7.0
 decay_rate: 0.05
-agent_node: n04_knowledge
+agent_group: n04_knowledge
 keywords: [citation, excerpt, reliability_tier, date_accessed, provenance, url]
 memory_scope: project
 observation_types: [reference]

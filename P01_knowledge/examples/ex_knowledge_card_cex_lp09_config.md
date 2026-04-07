@@ -74,7 +74,7 @@ types: 5 | function: GOVERN | layer: runtime + governance
 |------|-------|--------|-----------|---------|
 | env_config | runtime | yaml | 4096 | API keys, URLs, secrets |
 | path_config | runtime | yaml | 3072 | Dirs de agents, pool, output |
-| permission | governance | yaml | 3072 | Satellite write access |
+| permission | governance | yaml | 3072 | Agent_group write access |
 | feature_flag | runtime | json | 1536 | Enable firecrawl enrichment |
 | runtime_rule | runtime | yaml | 3072 | Timeout 30s, max 3 retries |
 

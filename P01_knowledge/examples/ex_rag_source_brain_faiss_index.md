@@ -12,7 +12,7 @@ last_checked: 2026-03-24
 `records/core/brain/mcp-organization-brain/src/indexes/` (local FAISS + BM25 indexes)
 
 ## Domain
-Knowledge retrieval — serves all organization agent_nodes via brain_query MCP tool.
+Knowledge retrieval — serves all organization agent_groups via brain_query MCP tool.
 
 ## Last Checked
 2026-03-24. Rebuild: `python build_indexes_ollama.py --scope all` (~20 min).

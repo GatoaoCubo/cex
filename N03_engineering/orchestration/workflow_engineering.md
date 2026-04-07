@@ -9,7 +9,7 @@ updated: 2026-03-30
 author: builder_agent
 steps_count: 9
 execution: sequential
-agent_nodes: [builder_nucleus]
+agent_groups: [builder_nucleus]
 timeout: 120
 retry_policy: per_step
 depends_on: []

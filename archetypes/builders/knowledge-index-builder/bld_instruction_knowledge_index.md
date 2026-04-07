@@ -13,7 +13,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. Determine the search algorithm: BM25 (keyword-based), FAISS (vector similarity), or hybrid (both combined with weighted scores)
 3. Assess freshness requirements: how often does the corpus change, what staleness is acceptable
 4. Map the ranking strategy: scoring formula, boost factors for recency or authority, tie-breaking rule
-5. Identify filter dimensions: metadata fields (pillar, kind, agent_node, tag) that users filter by, and their allowed values
+5. Identify filter dimensions: metadata fields (pillar, kind, agent_group, tag) that users filter by, and their allowed values
 6. Check for existing knowledge_index artifacts with overlapping scope to avoid redundant indexes
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields

@@ -1238,7 +1238,7 @@
     },
     {
       "path": "P01_knowledge/examples/ex_glossary_entry_supervisor.md",
-      "id": "p01_gl_agent_node",
+      "id": "p01_gl_agent_group",
       "kind": "glossary_entry",
       "pillar": "P01",
       "nucleus": "",
@@ -1315,16 +1315,16 @@
       "pillar": "P01",
       "nucleus": "",
       "score": 9.0,
-      "title": "CEX Cortex Enterprise — Modular LLM Brain with CEO Orchestrator and Satellite Departments"
+      "title": "CEX Cortex Enterprise — Modular LLM Brain with CEO Orchestrator and Agent_group Departments"
     },
     {
       "path": "P01_knowledge/examples/ex_knowledge_card_cex_supervisor_concept.md",
-      "id": "p01_kc_cex_agent_node_concept",
+      "id": "p01_kc_cex_agent_group_concept",
       "kind": "knowledge_card",
       "pillar": "P01",
       "nucleus": "",
       "score": 9.0,
-      "title": "CEX Satellite Concept — Verticalized Departments as Complete LLM Entities"
+      "title": "CEX Agent_group Concept — Verticalized Departments as Complete LLM Entities"
     },
     {
       "path": "P01_knowledge/examples/ex_knowledge_card_cex_fractal_architecture.md",
@@ -3798,7 +3798,7 @@
     },
     {
       "path": "P03_prompt/examples/ex_action_prompt_dispatch_supervisor.md",
-      "id": "p03_up_dispatch_agent_node",
+      "id": "p03_up_dispatch_agent_group",
       "kind": "user_prompt",
       "pillar": "P03",
       "nucleus": "",
@@ -3915,12 +3915,12 @@
     },
     {
       "path": "P03_prompt/examples/ex_prompt_template_supervisor_orchestrator.md",
-      "id": "p03_pt_agent_node_orchestrator",
+      "id": "p03_pt_agent_group_orchestrator",
       "kind": "prompt_template",
       "pillar": "P03",
       "nucleus": "",
       "score": 9.0,
-      "title": "Satellite Orchestrator - Multi-Agent Dispatch Prompt"
+      "title": "Agent_group Orchestrator - Multi-Agent Dispatch Prompt"
     },
     {
       "path": "P03_prompt/examples/ex_prompt_template_sdk_agent_builder.md",
@@ -3951,12 +3951,12 @@
     },
     {
       "path": "P03_prompt/examples/ex_router_prompt_supervisor_dispatch.md",
-      "id": "p03_rp_agent_node_dispatch",
+      "id": "p03_rp_agent_group_dispatch",
       "kind": "router_prompt",
       "pillar": "P03",
       "nucleus": "",
       "score": 8.8,
-      "title": "Router Prompt for organization Satellite Task Dispatch"
+      "title": "Router Prompt for organization Agent_group Task Dispatch"
     },
     {
       "path": "P03_prompt/examples/ex_system_prompt_code_reviewer.md",
@@ -4790,12 +4790,12 @@
     },
     {
       "path": "P06_schema/examples/ex_interface_supervisor_handoff.md",
-      "id": "p06_iface_agent_node_handoff",
+      "id": "p06_iface_agent_group_handoff",
       "kind": "interface",
       "pillar": "P06",
       "nucleus": "",
       "score": 8.9,
-      "title": "Interface: orchestrator → Satellite Handoff Contract"
+      "title": "Interface: orchestrator → Agent_group Handoff Contract"
     },
     {
       "path": "P06_schema/examples/ex_type_def_quality_score.md",
@@ -4844,7 +4844,7 @@
     },
     {
       "path": "P07_evals/examples/ex_benchmark_supervisor_boot_time.md",
-      "id": "p07_bm_agent_node_boot_time",
+      "id": "p07_bm_agent_group_boot_time",
       "kind": "benchmark",
       "pillar": "P07",
       "nucleus": "",
@@ -5013,7 +5013,7 @@
       "pillar": "P08",
       "nucleus": "",
       "score": 8.9,
-      "title": "Satellite: builder_agent"
+      "title": "Agent_group: builder_agent"
     },
     {
       "path": "P08_architecture/examples/ex_component_map_codexa_core.md",
@@ -5044,7 +5044,7 @@
     },
     {
       "path": "P08_architecture/examples/ex_diagram_supervisor_grid.md",
-      "id": "p08_diag_agent_node_grid",
+      "id": "p08_diag_agent_group_grid",
       "kind": "diagram",
       "pillar": "P08",
       "nucleus": "",
@@ -5085,7 +5085,7 @@
       "pillar": "P08",
       "nucleus": "",
       "score": 8.9,
-      "title": "Pattern: Continuous Batching (Satellite Grid)"
+      "title": "Pattern: Continuous Batching (Agent_group Grid)"
     },
     {
       "path": "P08_architecture/examples/ex_pattern_nucleus_fractal.md",
@@ -5206,12 +5206,12 @@
     },
     {
       "path": "P09_config/examples/ex_runtime_rule_supervisor_spawn.md",
-      "id": "p09_rr_agent_node_spawn",
+      "id": "p09_rr_agent_group_spawn",
       "kind": "runtime_rule",
       "pillar": "P09",
       "nucleus": "",
       "score": 8.8,
-      "title": "Runtime Rule: Satellite Spawn Constraints"
+      "title": "Runtime Rule: Agent_group Spawn Constraints"
     },
     {
       "path": "P09_config/examples/ex_secret_config_openai_key.md",
@@ -5359,7 +5359,7 @@
     },
     {
       "path": "P10_memory/examples/ex_session_state_supervisor_dispatch.md",
-      "id": "p10_ss_agent_node_dispatch",
+      "id": "p10_ss_agent_group_dispatch",
       "kind": "session_state",
       "pillar": "P10",
       "nucleus": "",
@@ -5406,12 +5406,12 @@
     },
     {
       "path": "P11_feedback/examples/ex_bugloop_supervisor_execution.md",
-      "id": "p11_bl_agent_node_execution",
+      "id": "p11_bl_agent_group_execution",
       "kind": "bugloop",
       "pillar": "P11",
       "nucleus": "",
       "score": 8.8,
-      "title": "Bugloop: Satellite Execution Resilience"
+      "title": "Bugloop: Agent_group Execution Resilience"
     },
     {
       "path": "P11_feedback/examples/ex_guardrail_stella_dispatch.md",
@@ -5532,7 +5532,7 @@
     },
     {
       "path": "P12_orchestration/examples/ex_dispatch_rule_keyword_supervisor.md",
-      "id": "p12_dr_keyword_agent_node",
+      "id": "p12_dr_keyword_agent_group",
       "kind": "dispatch_rule",
       "pillar": "P12",
       "nucleus": "",
@@ -5568,7 +5568,7 @@
     },
     {
       "path": "P12_orchestration/examples/ex_signal_supervisor_complete.md",
-      "id": "p12_sig_agent_node_complete",
+      "id": "p12_sig_agent_group_complete",
       "kind": "signal",
       "pillar": "P12",
       "nucleus": "",
@@ -5604,7 +5604,7 @@
     },
     {
       "path": "P12_orchestration/examples/ex_workflow_supervisor_grid.md",
-      "id": "p12_crew_agent_node_grid",
+      "id": "p12_crew_agent_group_grid",
       "kind": "crew",
       "pillar": "P12",
       "nucleus": "",

@@ -1,7 +1,7 @@
-id: p09_rr_agent_node_spawn
+id: p09_rr_agent_group_spawn
 kind: runtime_rule
 pillar: P09
-title: 'Runtime Rule: Satellite Spawn Constraints'
+title: 'Runtime Rule: Agent_group Spawn Constraints'
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
@@ -9,21 +9,21 @@ author: knowledge_agent
 quality: 9.0
 tags:
 - runtime
-- agent_node
+- agent_group
 - spawn
 - constraints
 - bsod
-tldr: 'Spawn rules: max 3 agent_nodes + orchestrator (BSOD at 4), 5s between terminals, -p flag mandatory for TSP, inline
+tldr: 'Spawn rules: max 3 agent_groups + orchestrator (BSOD at 4), 5s between terminals, -p flag mandatory for TSP, inline
   prompt < 200 chars'
 max_bytes: 512
 density_score: 0.91
 source: organization-core/.claude/rules/boot-autonomy-flags.md + MEMORY.md constraints
 linked_artifacts:
   spawn_config: p12_spawn_grid_continuous
-hard_limits: "spawn_limits:\n  max_concurrent_agent_nodes: 3   # + orchestrator = 4 total. BSOD confirmed at 5\n  delay_between_terminals:\
-  \ 5s    # RAM stability — never skip\n  max_inline_prompt_chars: 200   # TSP -p flag limit — longer prompts hang\n  agent_node_boot_timeout:\
+hard_limits: "spawn_limits:\n  max_concurrent_agent_groups: 3   # + orchestrator = 4 total. BSOD confirmed at 5\n  delay_between_terminals:\
+  \ 5s    # RAM stability — never skip\n  max_inline_prompt_chars: 200   # TSP -p flag limit — longer prompts hang\n  agent_group_boot_timeout:\
   \ 30s    # Kill and retry if no output after 30s"
-required_flags: '# TSP agent_node spawn (mandatory flags):
+required_flags: '# TSP agent_group spawn (mandatory flags):
 
   claude --dangerously-skip-permissions --no-chrome -p
 
@@ -32,7 +32,7 @@ required_flags: '# TSP agent_node spawn (mandatory flags):
 
   # --dangerously-skip-permissions: skips tool permission prompts
 
-  # --no-chrome: all agent_nodes (chrome only via boot/chrome.cmd)'
+  # --no-chrome: all agent_groups (chrome only via boot/chrome.cmd)'
 spawn_script_rules: '# CORRECT:
 
   spawn_solo.ps1 -sat pytha -task "Read handoff and execute" -interactive
@@ -47,13 +47,13 @@ environment_variables: '# REQUIRED in boot scripts (v2.1.50+ fix):
 
   set CLAUDECODE=
 
-  set organization_SATELLITE={SAT_NAME}&&claude --dangerously-skip-permissions ...
+  set organization_AGENT_GROUP={SAT_NAME}&&claude --dangerously-skip-permissions ...
 
 
   # Note: set VAR=val&& (no space before &&)'
 bsod_prevention: "bsod_history: 2026-02-18\ncause: USB power suspend + Intel I219-V driver race condition\nprevention:\n \
   \ - hybrid_sleep: disabled\n  - usb_selective_suspend: disabled\n  - hibernate: disabled\n  - wake_on_lan: disabled\nthreshold:\
-  \ NEVER spawn 4+ agent_nodes simultaneously"
+  \ NEVER spawn 4+ agent_groups simultaneously"
 handoff_offload_rule: 'When task > 200 chars, write to handoff file:
 
   # Inline prompt (PASS):

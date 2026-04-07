@@ -60,7 +60,7 @@ soft_scoring: 'Weights sum to 100%. Each dimension scores 0 or its full weight.
 
   | S04 | Exceptions documented | 1.0 | `exceptions` field present: list of conditions or explicitly `"None"` |
 
-  | S05 | Scope boundary clear | 1.0 | `scope` specifies system, agent_node, or domain — not "everything" |
+  | S05 | Scope boundary clear | 1.0 | `scope` specifies system, agent_group, or domain — not "everything" |
 
   | S06 | Violation examples concrete | 1.0 | `Violations` section has >= 2 breach scenarios with named consequences |
 

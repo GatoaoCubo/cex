@@ -38,5 +38,5 @@ Rule: id MUST equal filename stem.
 - Pattern concreteness: each step must be actionable ("use X with Y" not "be careful")
 - Anti-pattern specificity: name the failure mode, not generic warning
 - Timestamp precision: ISO 8601 with timezone when available
-- Satellite attribution: tag originating agent_node for routing intelligence
+- Agent_group attribution: tag originating agent_group for routing intelligence
 - Deduplication: brain_query before creating (same topic + same outcome = update, not new)

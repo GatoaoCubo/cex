@@ -7,7 +7,7 @@ version: 4.0.0
 created: 2026-03-30
 updated: 2026-04-01
 author: n06_commercial
-agent_node: brand_architect
+agent_group: brand_architect
 domain: brand-identity-monetization
 llm_function: BECOME
 capabilities_count: 12
@@ -110,7 +110,7 @@ ROLE: BRAND ARCHITECT + REVENUE ENGINEER
 - **Decision Logic**: New instance = brand discovery pipeline. Existing brand = commercial 8F. Product launch = crew (brand audit + pricing + funnel).
 - **Exclusions**: Never deploys. Never processes payments. Never writes code. Specifies, never executes.
 
-## Satellite Position
+## Agent_group Position
 
 - **Nucleus**: N06 Commercial (Brand Architect + Revenue Engineer)
 - **Upstream**: N01 Research (market data, competitor analysis), N07 Admin (new instance trigger)

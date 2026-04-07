@@ -27,10 +27,10 @@ when_to_use: '| Cenario | Usar? | Alternativa |
 
   | Onboarding e duvidas | SIM | - |
 
-  | Satellite dispatch direto | NAO | orchestrator |
+  | Agent_group dispatch direto | NAO | orchestrator |
 
   | Admin/infra tasks | NAO | operations_agent |'
-when_not_to_use: Tarefas diretas de agent_node (usar agent_node dispatch), admin tasks
+when_not_to_use: Tarefas diretas de agent_group (usar agent_group dispatch), admin tasks
 keywords:
 - gateway
 - router

@@ -8,10 +8,10 @@ version: 1.0.0
 
 # diagram-builder — EXAMPLES
 ## Golden Example
-INPUT: "Visualize the CEX agent_node orchestration architecture"
+INPUT: "Visualize the CEX agent_group orchestration architecture"
 FRONTMATTER (19 fields):
 ```yaml
-id: p08_diag_agent_node_orchestration
+id: p08_diag_agent_group_orchestration
 kind: diagram
 pillar: P08
 version: "1.0.0"
@@ -20,19 +20,19 @@ updated: "2026-03-26"
 author: "builder"
 domain: "orchestration"
 quality: null
-tags: [diagram, orchestration, agent_node, architecture, multi-agent]
-tldr: "System-level view of orchestrator orchestrating 6 agent_nodes via handoffs and signals"
-scope: "CEX agent_node orchestration — dispatch to 6 domain agent_nodes"
+tags: [diagram, orchestration, agent_group, architecture, multi-agent]
+tldr: "System-level view of orchestrator orchestrating 6 agent_groups via handoffs and signals"
+scope: "CEX agent_group orchestration — dispatch to 6 domain agent_groups"
 notation: "ascii"
 zoom_level: "system"
 components: [orchestrator, researcher, marketer, builder, knowledge-engine, executor, monetizer, Brain, Signal_Bus]
-connections: ["orchestrator->agent_nodes: handoff", "agent_nodes->Signal_Bus: complete/error"]
+connections: ["orchestrator->agent_groups: handoff", "agent_groups->Signal_Bus: complete/error"]
 layers: [orchestration, execution, infrastructure]
-annotations: ["Max 3 concurrent agent_nodes (RAM limit)", "Signal polling every 15s"]
-keywords: [orchestration, agent_node, dispatch, signal]
+annotations: ["Max 3 concurrent agent_groups (RAM limit)", "Signal polling every 15s"]
+keywords: [orchestration, agent_group, dispatch, signal]
 ```
 ## Scope
-CEX agent_node orchestration: how orchestrator dispatches tasks to 6 domain agent_nodes, monitors progress via signals, and consolidates results. System-level view — not individual agent_node internals.
+CEX agent_group orchestration: how orchestrator dispatches tasks to 6 domain agent_groups, monitors progress via signals, and consolidates results. System-level view — not individual agent_group internals.
 ## Diagram
 ```text
           ┌─────────┐
@@ -62,21 +62,21 @@ CEX agent_node orchestration: how orchestrator dispatches tasks to 6 domain agen
 | Component | Role | Layer |
 |-----------|------|-------|
 | orchestrator | Orchestrator — decomposes, dispatches, monitors | orchestration |
-| researcher/marketer/builder/knowledge-engine/executor/monetizer | Domain agent_nodes (6) | execution |
+| researcher/marketer/builder/knowledge-engine/executor/monetizer | Domain agent_groups (6) | execution |
 | Signal Bus | Event transport — complete/error signals | infrastructure |
 | Brain | Knowledge retrieval — BM25 + FAISS | infrastructure |
 ## Connections
 | From | To | Type | Data |
 |------|-----|------|------|
-| orchestrator | agent_nodes | handoff | task + seeds |
-| agent_nodes | Signal Bus | signal | status + score |
+| orchestrator | agent_groups | handoff | task + seeds |
+| agent_groups | Signal Bus | signal | status + score |
 | Signal Bus | orchestrator | poll | completion |
 | Brain | all | query | retrieval |
 ## Annotations
-- Max 3 concurrent agent_nodes (RAM limit — BSOD if >4)
+- Max 3 concurrent agent_groups (RAM limit — BSOD if >4)
 - Signal poll: 15s
 ## References
-- CLAUDE.md SATELLITES table
+- CLAUDE.md AGENT_GROUPS table
 - records/framework/docs/SPAWN_PLAYBOOK.md
 WHY GOLDEN: quality null, id pattern valid, 19 fields, scope defined, actual visual, legend + 7 body sections. See QUALITY_GATES.md.
 ## Anti-Example
@@ -87,7 +87,7 @@ id: system_diagram
 kind: drawing
 quality: 8.0
 The system has several components that work together.
-orchestrator talks to agent_nodes. Satellites send signals back.
+orchestrator talks to agent_groups. Agent_groups send signals back.
 ```
 FAILURES:
 1. id `system_diagram` has no `p08_diag_` prefix -> H02 FAIL

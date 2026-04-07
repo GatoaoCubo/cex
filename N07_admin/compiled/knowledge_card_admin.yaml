@@ -91,7 +91,7 @@ dispatch_commands: '# Solo — single builder in new window
   # Stop all builders
 
   bash _spawn/dispatch.sh stop'
-signal_protocol: "{\n  \"agent_node\": \"n03\",\n  \"status\": \"complete\",\n  \"quality_score\": 9.0,\n  \"timestamp\":\
+signal_protocol: "{\n  \"agent_group\": \"n03\",\n  \"status\": \"complete\",\n  \"quality_score\": 9.0,\n  \"timestamp\":\
   \ \"2026-03-30T14:00:00Z\",\n  \"task\": \"bootstrap_f1\",\n  \"artifacts\": [\"N07_admin/agents/agent_admin.md\"],\n  \"\
   artifacts_count\": 1\n}"
 golden_rules:

@@ -16,7 +16,7 @@ tags: [context-doc, scope-boundary, domain-scoping, stakeholders, constraints]
 tldr: "Scope requires two explicit lists: inside and outside. The outside list prevents downstream scope creep. Both are required."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [context document, scope boundary, domain scoping, stakeholders, constraints, assumptions, inside outside, clarification]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

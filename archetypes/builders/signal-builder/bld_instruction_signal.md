@@ -11,7 +11,7 @@ target: signal-builder agent
 phases_count: 3
 prerequisites:
   - Event type is known (complete, error, or progress)
-  - Emitting agent or agent_node name is identified
+  - Emitting agent or agent_group name is identified
   - Event slug is defined (e.g. "build_complete", "research_error")
   - Timestamp is available or can be generated
 validation_method: checklist
@@ -29,12 +29,12 @@ density_score: 0.86
 
 ## Context
 The signal-builder produces `signal` artifacts — minimal JSON payloads representing atomic
-status events emitted between agents or agent_nodes. A signal answers exactly three questions:
+status events emitted between agents or agent_groups. A signal answers exactly three questions:
 what happened, who emitted it, and when. Signals are consumed by orchestrators and monitoring
 systems; they are not instructions, routing policies, or handoffs.
 **Input contract**:
 - `{{event_slug}}`: snake_case event name (e.g. `build_complete`, `research_error`)
-- `{{emitter}}`: name of the emitting agent or agent_node (e.g. `build-sat`, `research-agent`)
+- `{{emitter}}`: name of the emitting agent or agent_group (e.g. `build-sat`, `research-agent`)
 - `{{status}}`: one of `complete`, `error`, `progress`
 - `{{timestamp}}`: ISO 8601 datetime of the event
 - `{{metadata_raw}}`: optional free-text of additional context to include

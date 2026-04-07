@@ -22,7 +22,7 @@ tags: [daemon, autonomous, background, orchestration]
 
 ## Loop
 1. Read task queue from `.claude/inbox/*.json`
-2. Route task to agent_node via spawn_solo.ps1
+2. Route task to agent_group via spawn_solo.ps1
 3. Emit completion signal to `.claude/signals/`
 
 ## Safety

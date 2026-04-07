@@ -16,7 +16,7 @@ tags: [golden_test, quality_gate, gate_mapping, reviewer_independence, complete_
 tldr: "Source must score >= 9.5; output must be complete; rationale maps to gate IDs; producer cannot self-approve."
 impact_score: 7.5
 decay_rate: 0.04
-agent_node: edison
+agent_group: edison
 keywords: [golden_test, quality_threshold, gate_ids, rationale, reviewer_independence, complete_artifact, pool_admission, regression]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

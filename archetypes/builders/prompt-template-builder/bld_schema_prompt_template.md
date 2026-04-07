@@ -28,7 +28,7 @@ Examples: `p03_pt_knowledge_card`, `p03_pt_research_synthesis`, `p03_pt_code_rev
 | version | string | YES | `"1.0.0"` | Semver string |
 | created | string | YES | — | ISO date: YYYY-MM-DD |
 | updated | string | YES | — | ISO date: YYYY-MM-DD, updated on every change |
-| author | string | YES | — | Satellite or human author ID |
+| author | string | YES | — | Agent_group or human author ID |
 | variables | list[object] | YES | — | List of variable definitions (see Variable Object below) |
 | variable_syntax | enum | YES | `"mustache"` | `"mustache"` or `"bracket"` |
 | composable | boolean | YES | `false` | True if template is designed for embedding in larger templates |

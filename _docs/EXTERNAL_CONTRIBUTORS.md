@@ -29,7 +29,7 @@ EXTERNAL (Google Drive)          INTERNAL (CEX Instance)
     notas_reuniao.txt
 
         ↓ MCP sync                 ↓ Pipeline
-    Drive API pull              knowledge_agent triage → Satellite distill → Pool
+    Drive API pull              knowledge_agent triage → Agent_group distill → Pool
 ```
 
 ## Google Drive Structure
@@ -88,7 +88,7 @@ triage:
   detected_domain: marketing
   detected_type: knowledge_card
   target_lp: P01
-  target_satellite: marketing_agent
+  target_agent_group: marketing_agent
   target_pool: pool/knowledge/
   suggested_id: "KC_marketing_agent_COPY_FRAMEWORKS"
   confidence: 0.85
@@ -106,9 +106,9 @@ triage:
 URLs in .txt → firecrawl → scraped + distilled
 ```
 
-### Step 4: Distill (Domain Satellite)
+### Step 4: Distill (Domain Agent_group)
 
-Satellite applies CEX template + quality standards:
+Agent_group applies CEX template + quality standards:
 - Adds frontmatter (id, type, lp, version, quality, source)
 - Structures content per CEX schema
 - Validates density >= 0.8
@@ -148,7 +148,7 @@ Templates have colored sections: GREEN = fill this, GRAY = system fills, RED = d
 ## Anti-Patterns
 
 - **NEVER** give specialists direct repo access (Git conflicts, format issues)
-- **NEVER** process without triage (wrong domain = wrong satellite)
+- **NEVER** process without triage (wrong domain = wrong agent_group)
 - **NEVER** skip quality gate (low quality artifacts poison the pool)
 - **NEVER** lose originals (always move to _processados, never delete)
 - **NEVER** process more than 10 files per batch (quality drops with volume)

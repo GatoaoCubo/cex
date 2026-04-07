@@ -8,14 +8,14 @@ created: 2026-03-29
 updated: 2026-03-29
 author: orchestrator
 quality: 8.9
-tags: [pattern, nucleus, fractal, agent_node, orchestration, 12-pillars]
+tags: [pattern, nucleus, fractal, agent_group, orchestration, 12-pillars]
 tldr: "A nucleus mirrors all 12 CEX pillars filled with domain-specific content — not a new kind, but a composition pattern of existing kinds"
 ---
 
 # Pattern: Nucleus as Fractal of 12 Pillars
 
 ## Problem
-How to represent an autonomous agent_node (nucleus) that has its own identity,
+How to represent an autonomous agent_group (nucleus) that has its own identity,
 knowledge, tools, workflows, and quality gates — without inventing new taxonomy.
 
 ## Solution

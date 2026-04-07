@@ -27,7 +27,7 @@ bias: "Favors lower cost-per-output-token when quality is comparable"
 interpretation: "Ranks artifacts by cost efficiency ratio: quality / cost. Higher = better."
 weight: 0.8
 priority: 1
-scope: "LLM selection, agent_node model routing, embedding provider choice"
+scope: "LLM selection, agent_group model routing, embedding provider choice"
 domain: "infrastructure-optimization"
 quality: null
 tags: [lens, cost, efficiency, pricing, model-selection]

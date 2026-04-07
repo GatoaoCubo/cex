@@ -6,7 +6,7 @@ version: 3.0.0
 created: 2026-03-30
 updated: 2026-03-31
 author: n06_commercial
-agent_node: commercial_hub
+agent_group: commercial_hub
 domain: pricing-courses-funnels
 llm_function: BECOME
 capabilities_count: 8
@@ -95,7 +95,7 @@ crew_role: 'ROLE: REVENUE ARCHITECT
   - Decision Logic: Single artifact = direct 8F. Product launch = crew (funnel + pricing + copy sequence).
 
   - Exclusions: Never deploys. Never processes payments. Specifies, never executes production ops.'
-satellite_position:
+agent_group_position:
 - 'Nucleus: N06 Commercial'
 - 'Upstream: N01 Research (market data), N04 Knowledge (domain expertise inputs)'
 - 'Downstream: N02 Marketing (distribute copy assets), N05 Engineering (implement checkout/payment)'

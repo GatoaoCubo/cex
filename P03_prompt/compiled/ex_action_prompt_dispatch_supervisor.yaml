@@ -1,9 +1,9 @@
-id: p03_up_dispatch_agent_node
+id: p03_up_dispatch_agent_group
 kind: user_prompt
-action: dispatch_agent_node_task
+action: dispatch_agent_group_task
 input_required:
 - task_description
-- agent_node_name
+- agent_group_name
 - quality_target
 output_expected: Completion signal + git commit with artifacts
 pillar: P03
@@ -16,10 +16,10 @@ tags:
 - user-prompt
 - dispatch
 - handoff
-- agent_node
+- agent_group
 - task
-purpose: Instruct a agent_node to execute a specific task with defined inputs and quality gate.
-input: "task: \"Create 8 P04 examples from real organization artifacts\"\nagent_node: edison\nquality_target: 9.0\nautonomy:\
+purpose: Instruct a agent_group to execute a specific task with defined inputs and quality gate.
+input: "task: \"Create 8 P04 examples from real organization artifacts\"\nagent_group: edison\nquality_target: 9.0\nautonomy:\
   \ full\ncontext_files:\n  - \"C:/Users/PC/Documents/GitHub/cex/P04_tools/_schema.yaml\"\n  - \"C:/Users/PC/Documents/GitHub/cex/P04_tools/examples/ex_skill_cex_forge.md\""
 execution:
 - Read schema to understand type constraints (max_bytes, required frontmatter)

@@ -51,7 +51,7 @@ CEX needs the PATTERNS, not the branding. This document classifies what to port.
 | /compose | 326 | Prompt composition from ISOs + context | N07 orchestration |
 | /diagnose | 359 | Full system health audit | N07 admin |
 
-**Action**: Copy, rename satellite refs (STELLA→N07, SHAKA→N01, etc), test.
+**Action**: Copy, rename agent_group refs (STELLA→N07, SHAKA→N01, etc), test.
 **Effort**: Low (find-replace branding, keep logic intact).
 
 ### Framework Docs (5 universal)
@@ -167,18 +167,18 @@ The 8F pipeline in CEX replaces the skill execution model.
 ### Framework Docs (16 too branded)
 
 These contain useful IDEAS but can't be ported without rewrite:
-META_BOOTSTRAP, SATELLITE_ARCHITECTURE, SUBAGENT_CATALOG, NAVIGATION_ARCHITECTURE,
+META_BOOTSTRAP, AGENT_GROUP_ARCHITECTURE, SUBAGENT_CATALOG, NAVIGATION_ARCHITECTURE,
 CODEXA_HARNESS_SPEC, IN_LOOP_OUT_LOOP, etc.
 
-**Action**: The ideas (boot chain, fractal navigation, satellite architecture)
+**Action**: The ideas (boot chain, fractal navigation, agent_group architecture)
 are already encoded in CEX's nucleus + pillar system. No action needed.
 
 ---
 
 ## TIER 4: DO NOT PORT (codexa-specific, no CEX value)
 
-- Satellite-specific commands: /shaka, /lily, /edison, /pytha, /atlas, /york
-- Satellite PRIMEs: AGT_*_PRIME.md
+- Agent_group-specific commands: /shaka, /lily, /edison, /pytha, /atlas, /york
+- Agent_group PRIMEs: AGT_*_PRIME.md
 - Pool artifacts about codexa product: landing page copy, pricing, marketing
 - MCP configs: .mcp-shaka.json etc (CEX has its own)
 - Brain index: records/core/brain/ (CEX uses cex_retriever.py)
@@ -191,7 +191,7 @@ are already encoded in CEX's nucleus + pillar system. No action needed.
 The user asked about "invented taxonomy" — here's what IS vs ISN'T:
 
 **INVENTED (codexa-only, do NOT port):**
-- Satellite names (STELLA, SHAKA, etc) → already replaced by N01-N07
+- Agent_group names (STELLA, SHAKA, etc) → already replaced by N01-N07
 - LAW numbers (LAW 0-13) → concepts are universal, numbering is invented
 - ADW (Agentic Design Workflow) → partially invented branding of universal patterns
 - ISO vectorstore → replaced by CEX's builder spec system
@@ -210,7 +210,7 @@ ustry standards
 ## RECOMMENDED MIGRATION PLAN
 
 ### Phase 1: Commands (immediate, 1 session)
-Port 13 commands with satellite to nucleus rename. ~4.5K lines.
+Port 13 commands with agent_group to nucleus rename. ~4.5K lines.
 
 ### Phase 2: Universal KCs (1 session)
 Copy 30 KCs to P01_knowledge/library/{domain}/. Scrub branding.

@@ -25,7 +25,7 @@ tags: [handoff_protocol, P02, handoff]
 tldr: "orchestrator-to-research_agent Research Delegation — production-ready handoff_protocol configuration"
 ```
 ## Overview
-Handoff protocol for delegating research tasks from orchestrator (orchestrator) to research_agent (research agent_node).
+Handoff protocol for delegating research tasks from orchestrator (orchestrator) to research_agent (research agent_group).
 orchestrator detects research intent, composes context, and dispatches via handoff file.
 
 ## Trigger

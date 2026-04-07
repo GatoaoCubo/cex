@@ -9,7 +9,7 @@ author: "workflow-builder"
 title: "Create Agent for Orchestration Nucleus"
 steps_count: 3
 execution: mixed
-agent_nodes: [n03, n05]
+agent_groups: [n03, n05]
 timeout: 7200
 retry_policy: per_step
 depends_on: []

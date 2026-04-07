@@ -20,7 +20,7 @@
 ## 1.1 Camada Acima: As 8 Funcoes LLM
 
 Os 12 pillars organizam ARTEFATOS (filesystem). As 8 funcoes descrevem o que o LLM FAZ (pipeline).
-Todo sistema LLM — de prompt a satellite — executa estas funcoes nesta ordem:
+Todo sistema LLM — de prompt a agent_group — executa estas funcoes nesta ordem:
 
 | # | Funcao | Verbo | O Que Faz | pillars |
 |---|--------|-------|-----------|-----|

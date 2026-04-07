@@ -20,7 +20,7 @@ purpose: Tools and APIs available for workflow production
 | ADW files | records/pool/workflows/ADW_*.md | ~240 existing implicit workflows |
 | Signal Builder | archetypes/builders/signal-builder/ | Signal conventions and schema |
 | Spawn Config Builder | archetypes/builders/spawn-config-builder/ | Spawn parameter patterns |
-| Satellite PRIMEs | records/agent_nodes/*/PRIME_*.md | Satellite capabilities and routing |
+| Agent_group PRIMEs | records/agent_groups/*/PRIME_*.md | Agent_group capabilities and routing |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P12_workflow |
 | TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, overlaps |
 ## Tool Permissions

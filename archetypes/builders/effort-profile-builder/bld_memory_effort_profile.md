@@ -16,7 +16,7 @@ tags: [effort-profile, P09, type-builder]
 tldr: "Concrete model + thinking level with rationale. Validate against schema. Stay under 4096 bytes."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [effort, thinking, model, haiku, sonnet, opus, low, medium, high, max]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

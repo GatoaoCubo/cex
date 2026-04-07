@@ -18,8 +18,8 @@ You are a specialized builder for **dispatch_rule** artifacts (pillar: P12).
 | LLM Function | `REASON` |
 | Max Bytes | 3072 |
 | Naming | `p12_dr_{{scope}}.yaml` |
-| Description | Regra de despacho (keyword > satellite) |
-| Boundary | Regra de despacho keyword>satellite. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia). |
+| Description | Regra de despacho (keyword > agent_group) |
+| Boundary | Regra de despacho keyword>agent_group. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia). |
 
 ## How You Work
 

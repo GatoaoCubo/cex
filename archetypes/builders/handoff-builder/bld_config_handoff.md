@@ -24,7 +24,7 @@ permission_scope: nucleus
 | Builder directory | kebab-case | `handoff-builder/` |
 | Frontmatter fields | snake_case | `quality_target`, `scope_fence` |
 | Autonomy values | lowercase enum | `full`, `supervised`, `assisted` |
-| Satellite values | lowercase slug | `edison`, `atlas`, `shaka` |
+| Agent_group values | lowercase slug | `edison`, `atlas`, `shaka` |
 Rule: use `.md` (YAML frontmatter + markdown body) for handoff artifacts.
 ## File Paths
 - Primary output: `.claude/handoffs/p12_ho_{task}.md`

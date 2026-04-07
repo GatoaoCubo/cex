@@ -1,15 +1,15 @@
 ---
-id: p06_iface_agent_node_handoff
+id: p06_iface_agent_group_handoff
 kind: interface
 pillar: P06
-title: "Interface: orchestrator → Satellite Handoff Contract"
+title: "Interface: orchestrator → Agent_group Handoff Contract"
 version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
 quality: 9.0
-tags: [interface, stella, agent_node, handoff, contract]
-tldr: "Interface contract for handoff files: orchestrator writes, agent_node reads — required sections, naming, signal protocol"
+tags: [interface, stella, agent_group, handoff, contract]
+tldr: "Interface contract for handoff files: orchestrator writes, agent_group reads — required sections, naming, signal protocol"
 max_bytes: 1024
 density_score: 0.91
 source: organization-core/.claude/rules/orchestrator_RULES.md (COMPOSE phase)
@@ -18,14 +18,14 @@ linked_artifacts:
   handoff: p12_ho_isofix_batch
 ---
 
-# Interface: orchestrator → Satellite Handoff Contract
+# Interface: orchestrator → Agent_group Handoff Contract
 
 ## Contract Overview
 
 | Property | Value |
 |----------|-------|
 | Producer | orchestrator (orchestrator) |
-| Consumer | Satellite (research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) |
+| Consumer | Agent_group (research_agent, marketing_agent, builder_agent, knowledge_agent, operations_agent, commercial_agent) |
 | Location | `.claude/handoffs/{MISSION}_{SAT}.md` |
 | Encoding | UTF-8, ASCII-safe Portuguese |
 | Trigger | orchestrator COMPOSE phase (Step 3 of 5) |
@@ -45,7 +45,7 @@ linked_artifacts:
 
 ## TAREFAS
 ### Step N: [ACTION_VERB] [OBJECT]
-[Description with [OPEN_VARIABLES] where agent_node decides]
+[Description with [OPEN_VARIABLES] where agent_group decides]
 
 ## SCOPE FENCE
 - SOMENTE: [permitted paths]
@@ -72,7 +72,7 @@ python -c "from records.core.python.signal_writer import write_signal; write_sig
 
 ## Signal Protocol
 
-Satellite MUST signal before stopping:
+Agent_group MUST signal before stopping:
 ```python
 write_signal(sat_name, 'complete', score, task=mission_id)
 # Writes to: .claude/signals/{sat}_complete_{timestamp}.json

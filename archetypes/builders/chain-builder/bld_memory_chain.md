@@ -16,7 +16,7 @@ tags: [chain, prompt-decomposition, data-flow, step-granularity, error-handling]
 tldr: "One step, one purpose, one LLM call. Typed inputs and outputs at every boundary. Handle errors per step, not per chain."
 impact_score: 7.5
 decay_rate: 0.05
-agent_node: edison
+agent_group: edison
 keywords: [prompt chain, step decomposition, data flow, typed output, partial retry, error handling, atomic step]
 memory_scope: project
 observation_types: [user, feedback, project, reference]

@@ -34,5 +34,5 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Confirm `steps_count` matches the actual number of rows in the Chain Steps table
 5. Confirm steps are ordered by decreasing capability (most capable first)
 6. Confirm all timeout values are greater than zero
-7. Cross-check: is this a model degradation sequence? If it chains prompt transformations it belongs in a `chain` artifact (P03). If it routes by task type it belongs in a `router`. If it sequences agent_node tasks it belongs in a workflow (P12). This artifact degrades model quality gracefully, nothing more.
+7. Cross-check: is this a model degradation sequence? If it chains prompt transformations it belongs in a `chain` artifact (P03). If it routes by task type it belongs in a `router`. If it sequences agent_group tasks it belongs in a workflow (P12). This artifact degrades model quality gracefully, nothing more.
 8. If score < 8.0: revise in the same pass before outputting

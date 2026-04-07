@@ -20,7 +20,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
 title: "Rebuild Brain FAISS Index"
-target: "knowledge-engine agent_node or human operator"
+target: "knowledge-engine agent_group or human operator"
 steps_count: 6
 prerequisites:
   - "Ollama running locally with nomic-embed-text model"

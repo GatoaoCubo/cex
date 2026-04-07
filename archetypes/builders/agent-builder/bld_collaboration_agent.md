@@ -29,7 +29,7 @@ I produce agent definitions so downstream builders can configure, package, and d
 ```
 ## Handoff Protocol
 ### I Receive
-- seeds: agent name, domain, target capabilities, agent_node assignment
+- seeds: agent name, domain, target capabilities, agent_group assignment
 - optional: existing persona sketch, tool list, routing keywords
 ### I Produce
 - agent artifact with agent_package skeleton (10+ spec files)

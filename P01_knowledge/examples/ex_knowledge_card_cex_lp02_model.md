@@ -43,7 +43,7 @@ funcao_llm: BECOME | analogia: DNA + personalidade
 - P02 define COMO P01 eh interpretado e P05 formatado
 - boot_config inicializa por provider (modelo, temp, MCPs)
 - model_card especifica LLM: pricing, context window, limites
-- router traduz task em agent_node (regra de roteamento)
+- router traduz task em agent_group (regra de roteamento)
 - fallback_chain sequencia modelos A -> B -> C com timeout
 - Ordem boot: system_prompt -> mental_model -> persona -> agent
 - P02 eh o LP mais diverso: 9 tipos para facetas de identidade
@@ -74,7 +74,7 @@ funcao_llm: BECOME | analogia: DNA + personalidade
 | mental_model | Mapa de routing e decisoes | <= 2048B | sim |
 | boot_config | Inicializacao por provider | <= 2048B | nao |
 | model_card | Spec do LLM (pricing, limites) | <= 2048B | nao |
-| router | Regra task -> agent_node | <= 1024B | sim |
+| router | Regra task -> agent_group | <= 1024B | sim |
 | fallback_chain | Sequencia fallback entre modelos | <= 512B | nao |
 | agent_package | Bundle portable de agente | <= 4096B | sim |
 | axiom | Principio fundamental imutavel | <= 3072B | sim |

@@ -72,7 +72,7 @@ Mapear `object` para `kind(s)` CEX usando TAXONOMY_LAYERS.yaml:
 | Object Keyword | Kind(s) Primario(s) | Pillar | Funcao |
 |----------------|-------------------|--------|--------|
 | agente, agent | agent | P02 | BECOME |
-| sistema, satelite | agent_card | P08 | BECOME |
+| sistema, agent_group | agent_card | P08 | BECOME |
 | prompt, instrucao | system_prompt, instruction | P03 | BECOME/REASON |
 | workflow, pipeline | workflow | P12 | COLLABORATE |
 | conhecimento, knowledge | knowledge_card | P01 | INJECT |
@@ -175,7 +175,7 @@ Gerar JSON execution plan (ver Schema completo na Secao 3).
 | **optional** | _builder-builder (meta-bootstrap apenas) |
 
 > *supervisor-builder: manifest id=`agent-card-builder`, pillar=P08, domain=agent_card.
-> Acionar quando intent menciona "satelite" ou "sistema completo".
+> Acionar quando intent menciona "agent_group" ou "sistema completo".
 
 ---
 
@@ -285,7 +285,7 @@ Gerar JSON execution plan (ver Schema completo na Secao 3).
 > - permission-builder: CONSTRAIN (P09) + GOVERN (P11)
 > - dag-builder: REASON (dependency planning) + COLLABORATE (P12)
 > - hook-builder: CALL (P04 event trigger) + COLLABORATE (P12 lifecycle)
-> - supervisor-builder: BECOME (satellite spec) + REASON (orchestration planning) + COLLABORATE
+> - supervisor-builder: BECOME (agent_group spec) + REASON (orchestration planning) + COLLABORATE
 
 > **builders_unassigned: []** — todos os 71 builders estao mapeados.
 
@@ -539,7 +539,7 @@ Palavras no intent que ativam builders secundarios/opcionais:
 | "com memoria", "lembra" | knowledge-index-builder, learning-record-builder |
 | "com RAG", "base de conhecimento" | rag-source-builder, embedding-config-builder |
 | "com fallback", "resiliente" | fallback-chain-builder, runtime-rule-builder |
-| "para satelite", "sistema completo" | supervisor-builder (agent-card), spawn-config-builder |
+| "para agent_group", "sistema completo" | supervisor-builder (agent-card), spawn-config-builder |
 | "com scraping", "extrai dados" | scraper-builder, parser-builder |
 | "com API", "integra com" | connector-builder, client-builder, interface-builder |
 | "com CLI", "linha de comando" | cli-tool-builder |

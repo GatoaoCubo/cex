@@ -151,7 +151,7 @@ director:
 dispatch_rule:
   builder: archetypes/builders/dispatch-rule-builder
   core: false
-  description: Regra de despacho (keyword > satellite)
+  description: Regra de despacho (keyword > agent_group)
   llm_function: REASON
   pillar: P12_orchestration
 document_loader:
@@ -475,7 +475,7 @@ reward_signal:
 router:
   builder: archetypes/builders/router-builder
   core: true
-  description: Regra de roteamento (task > satellite)
+  description: Regra de roteamento (task > agent_group)
   llm_function: REASON
   pillar: P02_model
 runtime_rule:

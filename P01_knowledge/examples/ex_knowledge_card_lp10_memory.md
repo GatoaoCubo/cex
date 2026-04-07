@@ -53,9 +53,9 @@ P10 governa persistencia de conhecimento no CEX com 5 tipos que cobrem desde est
 - Axiom mutavel: perde proposito de ser fundamento inviolavel
 
 ## Application
-No organization, P10 manifesta como mental_model.yaml por satelite, Brain MCP (BM25+FAISS), learning memory (.claude/rules/organization-learning.md), e MEMORY.md. O CEX formaliza cada tipo com schema validavel.
+No organization, P10 manifesta como mental_model.yaml por agent_group, Brain MCP (BM25+FAISS), learning memory (.claude/rules/organization-learning.md), e MEMORY.md. O CEX formaliza cada tipo com schema validavel.
 
 ## References
 - P10_memory/_schema.yaml (fonte de verdade)
-- records/agent_nodes/{sat}/mental_model.yaml (instancias reais)
+- records/agent_groups/{sat}/mental_model.yaml (instancias reais)
 - records/core/brain/ (Brain MCP implementation)

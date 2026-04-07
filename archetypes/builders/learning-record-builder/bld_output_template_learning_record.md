@@ -24,7 +24,7 @@ topic: "{{what_was_learned}}"
 outcome: {{SUCCESS_or_PARTIAL_or_FAILURE}}
 score: {{0.0_to_10.0}}
 context: "{{when_where_this_happened}}"
-agent_node: "{{agent_node_name_or_null}}"
+agent_group: "{{agent_group_name_or_null}}"
 reproducibility: {{HIGH_or_MEDIUM_or_LOW}}
 impact: "{{measurable_impact}}"
 timestamp: "{{ISO_8601_datetime}}"
@@ -45,7 +45,7 @@ linked_artifacts:
 - {{specific_failure_2}}
 ## Context
 - Environment: {{runtime_environment}}
-- Satellite: {{agent_node_involved}}
+- Agent_group: {{agent_group_involved}}
 - Timing: {{when_it_happened}}
 - Constraints: {{relevant_constraints}}
 ## Impact

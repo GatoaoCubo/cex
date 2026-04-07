@@ -61,7 +61,7 @@ prompt: |
   - P05: termos de output, formato, parser
   - P06: termos de schema, validacao, contrato
   - P07: termos de teste, eval, benchmark
-  - P08: termos de arquitetura, pattern, satellite
+  - P08: termos de arquitetura, pattern, agent_group
   - P09: termos de config, env, flag
   - P10: termos de memoria, learning, index
   - P11: termos de feedback, quality, bugloop

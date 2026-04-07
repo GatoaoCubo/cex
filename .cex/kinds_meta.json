@@ -72,7 +72,7 @@
     "pillar": "P07"
   },
   "boot_config": {
-    "boundary": "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, satelites).",
+    "boundary": "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, agent_groups).",
     "core": false,
     "description": "Configuracao de inicializacao por provider",
     "llm_function": "GOVERN",
@@ -153,7 +153,7 @@
     "pillar": "P04"
   },
   "component_map": {
-    "boundary": "Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 satelite).",
+    "boundary": "Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 agent_group).",
     "core": false,
     "description": "Mapa de componentes (what connects to what)",
     "llm_function": "INJECT",
@@ -271,9 +271,9 @@
     "pillar": "P08"
   },
   "dispatch_rule": {
-    "boundary": "Regra de despacho keyword>satellite. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia).",
+    "boundary": "Regra de despacho keyword>agent_group. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia).",
     "core": false,
-    "description": "Regra de despacho (keyword > satellite)",
+    "description": "Regra de despacho (keyword > agent_group)",
     "llm_function": "REASON",
     "max_bytes": 3072,
     "naming": "p12_dr_{{scope}}.yaml",
@@ -848,9 +848,9 @@
     "pillar": "P11"
   },
   "router": {
-    "boundary": "Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite) nem fallback_chain (modelo>modelo).",
+    "boundary": "Roteamento task-to-agent_group. NAO eh dispatch_rule (P12, keyword>agent_group) nem fallback_chain (modelo>modelo).",
     "core": true,
-    "description": "Regra de roteamento (task > satellite)",
+    "description": "Regra de roteamento (task > agent_group)",
     "llm_function": "REASON",
     "max_bytes": 1024,
     "naming": "p02_rt_{{scope}}.yaml",
@@ -980,7 +980,7 @@
     "core": false
   },
   "spawn_config": {
-    "boundary": "Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).",
+    "boundary": "Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).",
     "core": true,
     "description": "Configuracao de spawn (solo, grid, continuous)",
     "llm_function": "GOVERN",

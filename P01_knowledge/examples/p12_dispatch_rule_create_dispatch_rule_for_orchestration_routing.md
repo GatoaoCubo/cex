@@ -12,7 +12,7 @@ tags: [dispatch, orchestration, orchestrator, routing, pipeline, coordination]
 tldr: Route orchestration, coordination, and multi-agent workflow tasks to the N07 orchestrator nucleus
 scope: orchestration
 keywords: [orchestrate, orquestrar, coordinate, coordenar, dispatch, despachar, mission, missao, pipeline, plan, planejar, grid]
-agent_node: orchestrator
+agent_group: orchestrator
 model: opus
 priority: 9
 confidence_threshold: 0.72

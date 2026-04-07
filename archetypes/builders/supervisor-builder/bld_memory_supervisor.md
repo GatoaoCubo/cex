@@ -16,7 +16,7 @@ tags: [supervisor-design, orchestration, dispatch, wave-topology, P08, purity]
 tldr: "Separate orchestration from execution in directors. Mixed directors cause 62% builder confusion vs 11% when clean. Clean directors reuse across 3.2x missions."
 impact_score: 8.5
 decay_rate: 0.05
-agent_node: orchestrator
+agent_group: orchestrator
 keywords: [supervisor, orchestration, dispatch, purity, wave, signal, handoff, separation]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
