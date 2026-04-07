@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder
 domain: type_def
-quality: null
+quality: 9.0
 density_score: 0.85
 tags:
   - quality-gate
