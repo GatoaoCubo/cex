@@ -77,13 +77,72 @@ That's it. 3 runtimes + 2 packages + clone. CEX boots.
 | **tiktoken** | pip | Token counting (budget allocation) | 2MB |
 | **pi** | npm (global) | Agent CLI — runs all nuclei | 15MB |
 
-### Layer 3b: CEX Package (RECOMMENDED)
+### Pi Deep Dive (the nucleus runtime)
 
-| Package | Manager | Purpose | Size |
-|---------|---------|---------|------|
-| **@gatoaocubo/cex** | npm (global) or local | Themes (7), skills (3), extensions (subagent) | 500KB |
+Pi is the CLI that runs EVERY nucleus. CEX without pi is a library without an interpreter.
 
-Install: `npm install -g @gatoaocubo/cex` or `cd cex-pi-package && npm link`
+| What pi provides | How CEX uses it |
+|-----------------|-----------------|
+| LLM conversation loop | Each nucleus = 1 pi instance talking to Opus/Sonnet/Haiku |
+| `--model` flag | Routes each nucleus to its configured model |
+| `--append-system-prompt` | Injects agent card + sin lens + self-select protocol |
+| Tools (read, bash, edit, write) | How nuclei read/write artifacts, run Python tools |
+| Session persistence | `--continue` resumes after context exhaustion |
+| `/login` OAuth | Free auth for Claude Max, Gemini CLI, Copilot |
+| MCP server support | Each nucleus loads its `.mcp-n0X.json` config |
+| Extensions | Subagent extension enables parallel sub-tasks per nucleus |
+| Themes | 7 sin-colored themes (one per nucleus) |
+| Skills | /build, /mission, /status commands |
+| Prompt templates | /implement, /scout-and-plan workflows |
+| Compaction | Automatic context compression when window fills |
+
+**Install**:
+```cmd
+npm install -g @mariozechner/pi-coding-agent
+```
+
+**Auth** (first run — pick ONE):
+```
+pi                          :: starts pi
+/login                      :: in session, select provider:
+  - Claude Max/Pro          :: unlimited Opus (recommended)
+  - Gemini CLI              :: free, rate limited
+  - GitHub Copilot          :: free with GitHub account
+  - OpenAI Codex            :: ChatGPT Plus/Pro subscription
+  - Google Antigravity      :: free sandbox
+```
+
+**No API key needed** for subscription plans. Pi handles OAuth tokens automatically.
+API keys (ANTHROPIC_API_KEY etc.) are only for SDK/programmatic mode.
+
+### Pi Config Files in CEX Repo
+
+| Path | Purpose | Count |
+|------|---------|-------|
+| `.pi/agents/*.md` | Sub-agent definitions (scout, builder, etc.) | 6 |
+| `.pi/extensions/subagent/` | Subagent extension (parallel tasks) | 2 files |
+| `.claude/rules/*.md` | Behavioral rules auto-loaded by pi | 16 |
+| `.claude/commands/*.md` | Custom /commands | 13 |
+| `.claude/agents/*.md` | Builder sub-agents (1 per kind) | 125 |
+| `.claude/nucleus-settings/n0X.json` | Per-nucleus pi settings | 6 |
+| `.mcp-n0X.json` | MCP server configs per nucleus | 6 |
+| `boot/n0X.cmd` | Boot scripts that launch pi with flags | 7+ |
+
+### CEX Pi Package (themes + skills + extensions)
+
+| Component | Count | Purpose |
+|-----------|-------|---------|
+| Themes | 7 | Visual identity per nucleus (sin colors) |
+| Skills | 3 | /build, /mission, /status |
+| Extensions | 2 | cex-nucleus-ui.ts, cex-subagent/ |
+| Prompts | 3 | /implement, /build-and-review, /research-then-build |
+
+**Install**:
+```cmd
+cd cex-pi-package && npm link
+```
+
+This registers the package locally so pi auto-discovers themes, skills, and extensions.
 
 ### Layer 4: Optional Packages
 
