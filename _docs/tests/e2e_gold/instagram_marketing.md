@@ -9,8 +9,9 @@ created: 2026-04-06
 author: n02_marketing
 scenario: S2
 input: "preciso de conteudo pro instagram"
-quality: null
+quality: 8.8
 tags: [e2e, gold-standard, instagram, content, marketing, stress-test]
+density_score: 1.0
 ---
 
 # Instagram Content — Marketing Gold Standard
