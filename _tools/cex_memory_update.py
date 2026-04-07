@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Memory Update -- Dynamic builder memory with decay, prune, and append.
 
 Called AFTER builder execution to record new observations and maintain

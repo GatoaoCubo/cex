@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_system_test.py -- Full system validation for CEX bootstrap.
 

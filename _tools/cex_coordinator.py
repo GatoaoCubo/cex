@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Coordinator Protocol -- N07 orchestration runtime.
 
 Pattern: OpenClaude Coordinator Mode (coordinatorMode.ts, Section 1-6 protocol)

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_e2e_test.py -- E2E Stress Test Runner for CEX 8F Pipeline.
 

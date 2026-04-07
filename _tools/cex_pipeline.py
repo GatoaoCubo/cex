@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_pipeline.py -- 5-Stage CEX Build Engine
 CAPTURE -> DECOMPOSE -> HYDRATE -> COMPILE -> ENVELOPE

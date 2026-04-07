@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 CEX Boot Generator -- reads nucleus_models.yaml -> generates boot/*.cmd
 

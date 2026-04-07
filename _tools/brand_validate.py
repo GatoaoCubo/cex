@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """brand_validate.py -- Validate brand_config.yaml against schema.
 
 Checks required fields, enum values, format constraints (HEX, language code),

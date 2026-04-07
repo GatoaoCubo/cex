@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Model Updater -- Self-healing model discovery and update.
 
 Queries provider APIs for available models, compares against

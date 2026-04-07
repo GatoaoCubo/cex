@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Compiler: converts .md examples to compiled YAML/JSON for LLM consumption."""
 
 import argparse

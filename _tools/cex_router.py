@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Smart Router -- Config-driven, health-checked provider routing.
 
 Pattern: OpenClaude SmartRouter (smart_router.py)

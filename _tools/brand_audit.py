@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """brand_audit.py -- Score brand consistency across CEX artifacts.
 
 Scans all artifacts referencing brand variables and scores consistency

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 CEX KC Indexer -- Embed all Knowledge Cards into Supabase pgvector.
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Init v1.0 -- Scaffold a new CEX project in 5 questions.
 
 Interactive:

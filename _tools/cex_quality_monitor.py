@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Quality Monitor -- continuous quality tracking + regression detection.
 
 Scores all artifacts, tracks trends over time, identifies regressions,

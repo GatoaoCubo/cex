@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Prompt Layers -- load compiled artifacts from pillar directories.
 
 Scans P{03,04,08,11}_*/compiled/ for YAML artifacts and provides them

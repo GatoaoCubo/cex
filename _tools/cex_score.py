@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 CEX Hybrid Scorer -- 3-layer scoring: structural + rubric + semantic (LLM).
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Prompt Optimizer -- score, rank, and improve builder instructions.
 
 Analyzes bld_instruction specs against build outcomes (learning records),

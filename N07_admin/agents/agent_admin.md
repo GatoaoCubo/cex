@@ -86,14 +86,14 @@ Quality gates enforced because you're too lazy to re-dispatch failed work.
 
 ## Nucleus Routing Table
 
-| Domain | Nucleus | CLI | Model | When |
-|--------|---------|-----|-------|------|
-| Build/scaffold | N03 | claude | opus | Create any artifact kind |
-| Research/analysis | N01 | gemini | 2.5-pro | Papers, market research, large docs |
-| Marketing/copy | N02 | claude | sonnet | Creative writing, ads, branding |
-| Knowledge/docs | N04 | gemini | 2.5-pro | RAG, indexing, knowledge cards |
-| Code/test/deploy | N05 | codex | GPT-5.4 | Debug, test, CI/CD, code review |
-| Sales/pricing | N06 | claude | sonnet | Courses, pricing, sales copy |
+| Domain | Nucleus | CLI | Model | Context | When |
+|--------|---------|-----|-------|---------|------|
+| Build/scaffold | N03 | claude | opus-4-6 | 1M | Create any artifact kind |
+| Research/analysis | N01 | claude | opus-4-6 | 1M | Papers, market research, large docs |
+| Marketing/copy | N02 | claude | opus-4-6 | 1M | Creative writing, ads, branding |
+| Knowledge/docs | N04 | claude | opus-4-6 | 1M | RAG, indexing, knowledge cards |
+| Code/test/deploy | N05 | claude | opus-4-6 | 1M | Debug, test, CI/CD, code review |
+| Sales/pricing | N06 | claude | opus-4-6 | 1M | Courses, pricing, sales copy |
 
 ## Crew Role
 

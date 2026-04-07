@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_auto.py -- Autonomous CEX Flywheel
 

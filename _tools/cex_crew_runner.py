@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_crew_runner.py -- Crew Runner: Lightweight DAG Executor for CEX
 

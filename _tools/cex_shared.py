@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 cex_shared.py -- Shared library for all CEX tools.
 

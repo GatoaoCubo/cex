@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """brand_propagate.py -- Push brand context to all nuclei prompts.
 
 Reads .cex/brand/brand_config.yaml and injects relevant variables into

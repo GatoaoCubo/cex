@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_sanitize.py -- Universal non-ASCII sanitizer for CEX executable code.
 

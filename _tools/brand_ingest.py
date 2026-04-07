@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """brand_ingest.py -- Ingest messy user files into structured brand signals.
 
 Reads a folder of mixed files (PDF, DOCX, TXT, MD, images, HTML, PPTX)

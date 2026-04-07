@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):

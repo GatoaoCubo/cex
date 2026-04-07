@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Flywheel Worker: executes one cycle for a nucleus.
 
 Each call:

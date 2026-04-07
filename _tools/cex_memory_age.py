@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Memory Aging -- human-readable freshness + staleness caveats.
 
 Pattern: OpenClaude memdir/memoryAge.ts

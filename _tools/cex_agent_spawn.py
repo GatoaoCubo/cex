@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Agent Spawn -- Fork/Spawn dual-mode dispatch for nuclei.
 
 Pattern: OpenClaude AgentTool (forkSubagent.ts, runAgent.ts)

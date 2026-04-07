@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """cex_flywheel_audit.py -- Doc vs Practice Flywheel Bootstrap
 
 Reads CEX_SYSTEM_MAP.md claims and verifies each against the filesystem.

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Kind Register -- Add a new kind to the taxonomy in one command."""
 import argparse, json, re, sys
 from pathlib import Path

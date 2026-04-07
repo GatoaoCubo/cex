@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX changelog generator -- reads git log, groups by LP, formats entry."""
 
 import sys

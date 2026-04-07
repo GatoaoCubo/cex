@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Memory Types -- 4-type taxonomy with decay rates + save guards.
 
 Pattern: OpenClaude memdir/memoryTypes.ts

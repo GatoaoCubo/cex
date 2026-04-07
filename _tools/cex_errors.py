@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 cex_errors.py -- CEX Error Hierarchy
 

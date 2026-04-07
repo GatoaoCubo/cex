@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Output Formatter -- validate and fix LLM output against kind schemas.
 
 Uses jsonschema to validate frontmatter against pillar schemas.

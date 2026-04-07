@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_8f_motor.py -- Motor 8F: Intent -> Execution Plan
 

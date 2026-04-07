@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX SQLite Indexer -- scans all .md/.yaml, parses frontmatter + wikilinks, stores in .cex/index.db"""
 
 import argparse

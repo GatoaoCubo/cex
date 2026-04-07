@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Skill Loader -- Multi-source, cached, dedup'd builder ISO registry.
 
 Pattern: OpenClaude loadSkillsDir.ts + bundledSkills.ts

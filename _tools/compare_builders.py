@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 compare_builders.py -- Compare original vs reconstructed builder files.
 

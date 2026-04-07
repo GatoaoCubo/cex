@@ -1,127 +1,241 @@
 ---
 id: deck_n02
 kind: context_doc
-title: N02 Deck -- Available Capabilities
+pillar: P08
+title: "N02 Deck — Available Capabilities"
 nucleus: N02
 sin: Luxuria Criativa
 version: 1.0.0
-pillar: P01
 quality: null
 created: 2026-04-07
 ---
 
+# N02 Deck — Luxúria Criativa ♥
+
+> *"Isso SEDUZ o público?"* — Essa é a única pergunta que importa.
+
 ## Identity
 
-| Field | Value |
-|-------|-------|
-| Nucleus | N02 -- Marketing & Creative |
-| Sin | Luxuria Criativa (Creative Lust) |
-| Domain | Copywriting, ads, campaigns, brand voice, social media, CTAs, landing pages |
-| CLI | Claude (Opus 4.6, 1M context) |
-| Mantra | clarity -> desire -> action |
-| Standard practice | A/B copy variants on every deliverable |
+| Attribute | Value |
+|-----------|-------|
+| **Nucleus** | N02 — Marketing & Creative |
+| **Sin** | Luxúria (Lust) |
+| **Virtue** | Luxúria Criativa (Creative Lust) |
+| **Tagline** | "Isso SEDUZ o público?" |
+| **Color** | Magenta `#d946ef` |
+| **Icon** | ♥ |
+| **Domain** | Copywriting · Ads · Campanhas · Brand Voice · Landing Pages · Social Media · CTAs · Email Sequences |
+| **Model** | opus-4-6 (1M context) |
+| **CLI** | claude |
 
-**Routing rules:**
-- Route TO N02: copywriting, ads, headlines, CTAs, landing pages, email sequences, brand voice, social media, campaign copy, visual output
-- Route AWAY: research/papers (N01), artifact construction (N03), code/deploy (N05), pricing strategy (N06)
+**O que me torna diferente:** Todos os 7 núcleos usam o mesmo modelo. Minha lente — a Luxúria Criativa — transforma output técnico em desejo. Cada palavra que escrevo passa pelo filtro: *isso faz o leitor QUERER, não apenas SABER?* Claridade → Desejo → Ação. Sempre nessa ordem.
+
+---
 
 ## My Artifacts
 
-| Subdir | Count | Purpose |
-|--------|-------|---------|
-| agents | 1 | Agent definition for marketing nucleus |
-| architecture | 1 | Agent card (N02 capabilities) |
-| artifacts | 1 | Email sequence template |
-| config | 2 | A/B testing framework, brand override config |
-| feedback | 1 | Quality gate for marketing output |
-| knowledge | 12 | Design KCs: accessibility, color theory, CSS animation, email HTML, component library, responsive layouts, shadcn/radix, Tailwind, typography, visual hierarchy, marketing KC, social publishing KC |
-| memory | 2 | Campaign performance memory, copy optimization insights |
-| orchestration | 5 | Cross-nucleus handoffs, dispatch rules (marketing + social), weekly fashion workflow, marketing workflow |
-| output | 13 | Templates: CF actions, competitive positioning, dashboard UI, email, monetization launch, README hero, SDK self-audit, social card, style guide, visual report, component, landing page, self-review |
-| prompts | 4 | Action prompt, brand voice templates, prompt template, system prompt |
-| quality | 1 | Scoring rubric for marketing artifacts |
-| schemas | 5 | A11y checklist, design tokens, HTML output schema, responsive breakpoints, Tailwind palette contract |
-| tools | 1 | Social publisher tool |
-| **Total** | **49** | |
+| Subdir | Count | What's There |
+|--------|------:|--------------|
+| `agents/` | 1 | `agent_marketing.md` — minha identidade e instruções operacionais |
+| `architecture/` | 1 | `agent_card_marketing.md` — card P08 com routing e capabilities |
+| `artifacts/` | 1 | `email_sequence_template.md` — template de sequência de email |
+| `compiled/` | 42 | YAML compilados de todos os artefatos fonte (auto-gerado) |
+| `config/` | 2 | `ab_testing_framework.md` + `brand_override_config.md` |
+| `feedback/` | 1 | `quality_gate_marketing.md` — gates de qualidade para copy |
+| `knowledge/` | 12 | KCs especializados: a11y, color theory, CSS animation, email HTML, component library, responsive layouts, shadcn/radix, tailwind, typography, visual hierarchy, marketing KC, social publishing KC |
+| `memory/` | 2 | `campaign_performance_memory.md` + `copy_optimization_insights.md` |
+| `orchestration/` | 5 | Dispatch rules (marketing + social), cross-nucleus handoffs, workflow marketing, weekly fashion content workflow |
+| `output/` | 13 | Landing pages, emails, social cards, dashboard UI, readme hero, style guide, visual report, competitive positioning, monetization launch, SDK validation, content factory actions |
+| `prompts/` | 4 | System prompt, action prompt, prompt template, brand voice templates |
+| `quality/` | 1 | `scoring_rubric_marketing.md` — rubrica de avaliação para copy |
+| `schemas/` | 5 | a11y checklist, design tokens, HTML output schema, responsive breakpoints, tailwind palette contract |
+| `tools/` | 1 | `social_publisher_marketing.md` — publicação social multi-plataforma |
 
-## Kinds I Build
+**Total source files: 51** · **Total compiled: 42** · **Grand total: 93 files**
 
-| Kind | Pillar | Domain Fit |
-|------|--------|------------|
-| prompt_template | P03 | Campaign prompts, ad copy templates, email sequences |
-| action_prompt | P03 | Marketing action triggers, CTA prompts |
-| system_prompt | P03 | Marketing nucleus persona, brand voice injection |
-| tagline | P03 | Brand taglines, slogans, headlines |
-| landing_page | P05 | Conversion-optimized landing pages (HTML/Tailwind) |
-| social_publisher | P04 | Social media post creation and scheduling |
-| content_monetization | P04 | Content packaging for revenue (courses, gated content) |
-| knowledge_card | P01 | Marketing domain KCs (patterns, best practices) |
-| context_doc | P01 | Marketing context briefs, campaign briefs |
-| few_shot_example | P01 | Copy examples for prompt calibration |
-| response_format | P05 | Structured output for marketing deliverables |
-| scoring_rubric | P07 | Quality criteria for marketing artifacts |
-| quality_gate | P11 | Pass/fail gates for marketing output |
-| dispatch_rule | P12 | Routing rules for marketing tasks |
-| workflow | P12 | Multi-step marketing workflows (campaigns, launches) |
-| workflow_primitive | P12 | Reusable marketing workflow steps |
+---
 
-## Tools I Use
+## Kinds I Can Build
 
-| Tool | Purpose |
-|------|---------|
-| `cex_compile.py` | Compile .md artifacts to .yaml after every save |
-| `cex_8f_runner.py` | Execute full 8F pipeline for artifact creation |
-| `cex_crew_runner.py` | Compose prompts from ISOs + memory + brand context |
-| `cex_score.py` | Peer review scoring (quality assigned by others, never self) |
-| `cex_feedback.py` | Track quality metrics, archive feedback |
-| `cex_retriever.py` | Find similar artifacts for Template-First approach |
-| `cex_prompt_optimizer.py` | Analyze and improve prompt ISOs |
-| `cex_memory_select.py` | Inject relevant memories into build context |
-| `cex_token_budget.py` | Manage token allocation across long campaigns |
-| `cex_notebooklm.py` | Push KCs to NotebookLM for audio/human content |
-| `cex_evolve.py` | Auto-improve existing marketing artifacts |
-| `cex_quality_monitor.py` | Track quality snapshots and detect regressions |
-| `signal_writer.py` | Signal N07 on task completion |
+### Primary Domain (P03 — Prompts & Templates)
+
+| Kind | Pillar | Naming | Builder |
+|------|--------|--------|---------|
+| `action_prompt` | P03 | `p03_up_{{task}}.md` | ✅ action-prompt-builder |
+| `chain` | P03 | `p03_ch_{{pipeline}}.md` | ✅ chain-builder |
+| `constraint_spec` | P03 | `p03_constraint_{{scope}}.md` | ✅ constraint-spec-builder |
+| `instruction` | P03 | `ex_instruction_{topic}.md` | ✅ instruction-builder |
+| `prompt_template` | P03 | `p03_pt_{{topic}}.md` | ✅ prompt-template-builder |
+| `prompt_version` | P03 | `p03_pv_{{version}}.md` | ✅ prompt-version-builder |
+| `reasoning_trace` | P03 | `p03_rt_{{topic}}.md` | ✅ reasoning-trace-builder |
+| `system_prompt` | P03 | `p03_sp_{{agent}}.md` | ✅ system-prompt-builder |
+| `tagline` | P03 | `p03_tl_{{topic}}.md` | ✅ tagline-builder |
+
+### Secondary Domain (Scoring, Evaluation, Brand)
+
+| Kind | Pillar | Naming | Builder |
+|------|--------|--------|---------|
+| `scoring_rubric` | P07 | `p07_sr_{{framework}}.md` | ✅ scoring-rubric-builder |
+| `landing_page` | — | custom | ✅ landing-page-builder |
+| `social_publisher` | — | custom | ✅ social-publisher-builder |
+
+### Extended Reach (Can build via 8F when routed)
+
+| Kind | Pillar | Builder |
+|------|--------|---------|
+| `agent` | P02 | ✅ agent-builder |
+| `agent_card` | P08 | ✅ agent-card-builder |
+| `content_monetization` | — | ✅ content-monetization-builder |
+| `context_doc` | — | ✅ context-doc-builder |
+| `dispatch_rule` | — | ✅ dispatch-rule-builder |
+| `workflow` | P12 | ✅ workflow-builder |
+
+**Total kinds with builders: 18** (9 primary + 3 secondary + 6 extended)
+
+---
+
+## Tools Available
+
+### Core Pipeline
+
+| Tool | What It Does | N02 Relevance |
+|------|-------------|---------------|
+| `cex_8f_runner.py` | Full 8F pipeline (F1→F8) | **Essential** — every artifact I build |
+| `cex_crew_runner.py` | ISOs + memory + context → LLM prompt | **Essential** — prompt assembly |
+| `cex_compile.py` | .md → .yaml compilation | **Essential** — post-save mandatory |
+| `cex_run.py` | Intent → discover → plan → compose | **High** — autonomous building |
+
+### Quality & Feedback
+
+| Tool | What It Does | N02 Relevance |
+|------|-------------|---------------|
+| `cex_score.py` | Peer review scoring | **High** — quality validation |
+| `cex_feedback.py` | Quality tracking + archive | **High** — continuous improvement |
+| `cex_quality_monitor.py` | Regression detection | **Medium** — quality drift |
+| `cex_prompt_optimizer.py` | Builder ISO improvement | **High** — sharpen my prompts |
+
+### Memory & Context
+
+| Tool | What It Does | N02 Relevance |
+|------|-------------|---------------|
+| `cex_memory_select.py` | Relevant memory injection | **High** — past campaign insights |
+| `cex_memory_update.py` | Memory decay + append | **High** — learn from each build |
+| `cex_memory_types.py` | 4-type memory taxonomy | **Medium** — structured recall |
+| `cex_memory_age.py` | Freshness + staleness caveats | **Medium** — keep memory current |
+| `cex_token_budget.py` | Token counting + budget | **Medium** — fit in context |
+| `cex_prompt_layers.py` | Load compiled pillar artifacts | **High** — rich context |
+| `cex_retriever.py` | TF-IDF semantic search | **Medium** — find similar work |
+
+### Brand & Identity
+
+| Tool | What It Does | N02 Relevance |
+|------|-------------|---------------|
+| `brand_inject.py` | Replace `{{BRAND_*}}` in templates | **Critical** — brand consistency |
+| `brand_validate.py` | Validate brand_config.yaml | **High** — brand integrity |
+| `brand_propagate.py` | Push brand to all nuclei | **Medium** — cross-nucleus sync |
+| `brand_audit.py` | Score brand consistency | **High** — brand coherence |
+| `brand_ingest.py` | Extract brand signals from files | **High** — onboarding |
+
+### Orchestration
+
+| Tool | What It Does | N02 Relevance |
+|------|-------------|---------------|
+| `signal_writer.py` | Inter-nucleus signaling | **Essential** — completion signals |
+| `cex_gdp.py` | Guided Decision enforcement | **Essential** — never skip GDP |
+| `cex_skill_loader.py` | Load 13 ISOs per kind | **Essential** — builder context |
+| `cex_evolve.py` | AutoResearch artifact improvement | **Medium** — self-improve outputs |
+
+---
 
 ## MCP Servers
 
-| Server | Package | Purpose |
-|--------|---------|---------|
-| **markitdown** | `markitdown-mcp` | Convert documents (PDF, DOCX, PPTX) to markdown for content extraction |
-| **browser** | `@anthropic-ai/mcp-server-puppeteer` | Browse competitor sites, take screenshots, inspect live landing pages |
-| **canva** | `@mcp_factory/canva-mcp-server` | Create and edit designs via Canva API (social cards, banners, presentations) |
-| **notebooklm** | `notebooklm-mcp@latest` | Push KCs to Google NotebookLM for podcast/audio content generation |
+| Server | Command | What It Does | Status |
+|--------|---------|-------------|--------|
+| **markitdown** | `npx markitdown-mcp` | Converte documentos (PDF, DOCX, PPTX) para Markdown | ✅ Ready |
+| **browser** | `npx @anthropic-ai/mcp-server-puppeteer` | Navegação web, screenshots, scraping | ✅ Ready |
+| **canva** | `npx @mcp_factory/canva-mcp-server` | Cria designs (posts, stories, thumbnails) via Canva Business API | ✅ Ready (needs env vars) |
+| **notebooklm** | `npx notebooklm-mcp@latest` | Google NotebookLM: flashcards, audio summaries, quizzes | ✅ Ready |
 
-## My Strengths
+---
 
-1. **Visual output depth**: 13 output templates covering the full marketing stack -- from social cards to dashboard UIs to landing pages
-2. **Design knowledge**: 12 specialized KCs covering Tailwind, typography, color theory, accessibility, responsive layouts, CSS animation, visual hierarchy -- deep frontend/design expertise
-3. **Schema rigor**: 5 schema contracts (design tokens, responsive breakpoints, Tailwind palette, HTML output, a11y) ensure consistent visual output
-4. **Orchestration maturity**: 5 orchestration artifacts including cross-nucleus handoffs, dispatch rules, and a full weekly content workflow
-5. **Memory-driven optimization**: Campaign performance memory + copy optimization insights allow learning from past results
-6. **Full MCP stack**: Browser for competitive research, Canva for design, markitdown for content ingestion, NotebookLM for human-consumable content
+## Knowledge Base (12 KCs)
 
-## My Gaps
+| KC | Domain | Why It Matters |
+|----|--------|----------------|
+| `kc_accessibility_a11y.md` | A11Y | Copy acessível = copy que alcança TODOS |
+| `kc_color_theory_applied.md` | Design | Cores que provocam emoção, não só estética |
+| `kc_css_animation_micro.md` | Motion | Micro-interações que seduzem o scroll |
+| `kc_email_html_responsive.md` | Email | HTML que renderiza em 30+ clients |
+| `kc_html_component_library.md` | Components | Biblioteca de componentes reutilizáveis |
+| `kc_responsive_layout_systems.md` | Layout | Layouts que funcionam em qualquer tela |
+| `kc_shadcn_radix_patterns.md` | UI | Padrões de UI modernos |
+| `kc_tailwind_patterns.md` | CSS | Tailwind como sistema de design |
+| `kc_typography_web.md` | Typography | Tipografia que guia o olhar |
+| `kc_visual_hierarchy_principles.md` | Hierarchy | Hierarquia visual que converte |
+| `knowledge_card_marketing.md` | Marketing | KC raiz do domínio marketing |
+| `knowledge_card_social_publishing.md` | Social | KC de publicação social |
 
-| Area | Status | What's Missing |
-|------|--------|----------------|
-| artifacts/ | 1 file | Only email template -- needs ad copy templates, social post templates, campaign brief templates |
-| tools/ | 1 file | Only social publisher -- needs A/B test runner, copy analyzer, headline scorer |
-| feedback/ | 1 file | Only quality gate -- needs copy performance feedback loops, conversion tracking |
-| config/ | 2 files | Missing: social platform configs, email provider config, analytics integration |
-| architecture/ | 1 file | Agent card only -- needs N02 architecture diagram, integration map |
-| Landing pages | 0 dedicated | Template exists in output/ but no pre-built landing page artifacts |
-| Ad copy | 0 files | No dedicated ad copy artifacts despite being core domain |
-| Campaign briefs | 0 files | No structured campaign planning documents |
+---
 
-## Cards in My Deck
+## Strengths
 
-| Category | Count |
-|----------|-------|
-| Artifacts (all .md in N02_marketing/) | 49 |
-| Kinds I build | 16 |
-| Tools I use | 13 |
-| MCP servers | 4 |
-| Builder agents available | 16 |
-| Knowledge cards (local) | 12 |
-| **Total cards in deck** | **110** |
+1. **Deep Visual Knowledge** — 10 KCs cobrindo de tipografia a animação CSS. Não só escrevo copy — eu entendo o CONTEXTO VISUAL onde ela vive.
+
+2. **Full Prompt Arsenal** — System prompt, action prompts, brand voice templates, prompt templates. Posso gerar prompts que geram prompts.
+
+3. **Memory System Ativo** — Campaign performance memory + copy optimization insights. Aprendo com cada campanha anterior.
+
+4. **A/B Testing Built-In** — Framework de A/B testing nativo. Cada copy já nasce com variantes prontas para teste.
+
+5. **Design Token Integration** — Schemas para tokens de design, paletas Tailwind, breakpoints responsivos. Copy e design no mesmo pipeline.
+
+6. **4 MCP Servers** — Browser (pesquisa), Canva (visual), NotebookLM (repurpose), MarkItDown (ingest). Posso criar, publicar e repurpose conteúdo end-to-end.
+
+7. **Brand Voice System** — Templates de brand voice + brand override config + brand injection tools. Consistência garantida.
+
+8. **Cross-Nucleus Handoffs** — Protocolo formal para receber de N01 (research) e entregar para N05 (deploy). Não opero isolado.
+
+---
+
+## Gaps
+
+| Gap | Impact | Fix |
+|-----|--------|-----|
+| Brand not bootstrapped | `brand_config.yaml` só tem template — nenhuma marca configurada | `/init` ou `boot/n06.cmd` |
+| No `kc_email_sequence.md` | Kind KC ausente — email sequences sem referência formal | N04 criar KC |
+| No `kc_campaign.md` | Kind KC ausente — campanhas sem referência formal | N04 criar KC |
+| Single artifact in `artifacts/` | Apenas 1 template de email — falta landing page template, ad template | Build via 8F |
+| Single tool | `social_publisher_marketing.md` é o único — falta copy analyzer, headline scorer | N05 criar tools |
+| Canva env vars pendentes | MCP Canva precisa `CANVA_CLIENT_ID` + `CANVA_CLIENT_SECRET` configurados | Configurar .env |
+| No A/B test history | Framework existe mas sem dados de testes anteriores | Executar primeiro teste |
+
+---
+
+## Deck Summary
+
+```
+┌─────────────────────────────────────────────────┐
+│  N02 — LUXÚRIA CRIATIVA ♥                       │
+│  "Isso SEDUZ o público?"                        │
+├─────────────────────────────────────────────────┤
+│  📄 Source artifacts:  51                        │
+│  📦 Compiled:          42                        │
+│  📚 Total files:       93                        │
+│  🔧 Kinds buildable:  18 (9 primary)            │
+│  🛠️  Tools relevant:   22                        │
+│  🔌 MCP Servers:       4                         │
+│  🧠 Knowledge Cards:  12                         │
+│  💾 Memory slots:      2 active                  │
+│  📐 Schemas:           5                         │
+│  ⚡ Model:             opus-4-6 (1M ctx)         │
+├─────────────────────────────────────────────────┤
+│  STRENGTHS: Deep visual knowledge, full prompt   │
+│  arsenal, memory-driven learning, A/B native,    │
+│  4 MCP integrations, brand voice system          │
+│                                                  │
+│  GAPS: Brand not bootstrapped, 2 missing KCs,    │
+│  thin artifacts dir, Canva env pending           │
+└─────────────────────────────────────────────────┘
+```
+
+> *Cada copy que sai daqui não informa — ela seduz. Não descreve — provoca. Não explica — faz o leitor se mover.*

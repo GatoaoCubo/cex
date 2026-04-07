@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Doctor v2.0 -- Naming v2.0 + Density + 13-file completeness.
 
 Usage:

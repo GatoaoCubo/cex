@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Bootstrap -- creates a new CEX project from selected Leverage Points."""
 
 import sys

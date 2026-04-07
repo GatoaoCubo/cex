@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Release Check -- Validates everything needed for public release.
 
 Usage:

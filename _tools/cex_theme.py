@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 CEX Theme System -- reads nucleus_sins.yaml, outputs color schemes
 

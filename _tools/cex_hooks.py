@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_hooks.py -- Pre/post build validation hooks for CEX artifacts.
 

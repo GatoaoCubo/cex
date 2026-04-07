@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Mission Runner v1.0 -- Autonomous wave-based grid orchestration.
 
 Reads a mission plan, executes wave by wave:

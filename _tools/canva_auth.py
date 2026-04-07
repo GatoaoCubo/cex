@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Canva Connect API OAuth 2.0 PKCE Authentication
 Run once to get access_token, then store it.

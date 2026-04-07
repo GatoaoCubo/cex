@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX GDP (Guided Decision Protocol) -- Runtime enforcement layer.
 
 Pattern: OpenClaude permission protocol (tools/*/permissions + coordinatorMode)

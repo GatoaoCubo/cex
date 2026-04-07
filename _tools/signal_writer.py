@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """CEX Signal Writer v2.1 -- writes to .cex/runtime/signals/ with validation"""
 import json
 import re

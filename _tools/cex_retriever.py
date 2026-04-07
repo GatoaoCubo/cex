@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Retriever -- TF-IDF semantic search over all CEX artifacts.
 
 Indexes all .md artifacts, builds a TF-IDF matrix, and provides

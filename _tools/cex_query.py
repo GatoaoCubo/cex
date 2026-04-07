@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Builder Discovery Query Tool -- find builders by keyword, domain, or natural language intent.
 
 Usage:

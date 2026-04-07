@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Token Budget -- accurate token counting + prompt budget allocation.
 
 Uses tiktoken for real token counts. Allocates budget across F6 PRODUCE

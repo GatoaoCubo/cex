@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Schema Validator -- validates each P*/_schema.yaml for structural integrity."""
 
 import sys

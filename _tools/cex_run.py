@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Run -- Full autonomous pipeline: intent -> artifact on disk.
 
 This is the PRIMARY entry point for artifact production.

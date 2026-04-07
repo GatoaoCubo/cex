@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Create a NotebookLM notebook via Playwright browser automation.
 Injects Google cookies from NotebookLM MCP's saved state.

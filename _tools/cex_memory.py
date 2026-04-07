@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Memory Manager -- persistent build context + entity memory.
 
 Tracks builder performance per kind, aggregates learning records,

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 cex_forge.py -- O Forjador Universal CEX
 Gera prompts prontos para LLM que produzem artefatos CEX validos.

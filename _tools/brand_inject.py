@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """brand_inject.py -- Replace {{BRAND_*}} mustache variables in templates.
 
 Reads .cex/brand/brand_config.yaml, flattens nested keys, and replaces

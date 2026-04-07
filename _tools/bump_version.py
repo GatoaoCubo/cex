@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX version bumper -- increments LP or global version in VERSION.yaml."""
 
 import sys

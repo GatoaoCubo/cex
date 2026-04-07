@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """CEX Memory Selector -- LLM-powered relevant memory retrieval.
 
 Selects top-K most relevant builder memories for a given query using

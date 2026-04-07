@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """cex_bootstrap.py -- First-run brand setup for CEX instances.
 
 When a user first clones/installs CEX, this script:
