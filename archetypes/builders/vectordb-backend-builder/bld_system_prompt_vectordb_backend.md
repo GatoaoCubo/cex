@@ -13,7 +13,7 @@ rules_count: 9
 tone: technical
 knowledge_boundary: "Vector database APIs (Pinecone, pgvector, Chroma, FAISS, Qdrant, Weaviate, Milvus), HNSW algorithm, IVF indexing, distance metrics, metadata filtering | Does NOT: configure embedding models, define LLM routing, build agents, or design retrieval pipelines"
 domain: vectordb_backend
-quality: null
+quality: 9.0
 tags: [system_prompt, vectordb_backend, P03]
 safety_level: standard
 tools_listed: false
