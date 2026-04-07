@@ -23,7 +23,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 3. Fill all required frontmatter fields; set `quality: null` — never self-score
 4. Write **Tracing Specification** section: enabled flag, sample rate, exporter, rationale
 5. Write **Capture Rules** section: what is captured (spans, tokens, latency) and what is excluded (prompts, PII)
-6. Write **Span Attributes** section: 8F function mapping, custom attributes, error classification
+6. Write **Span Attributes** section: 8F function mapping, costm attributes, error classification
 7. Write **Retention Policy** section: hot/warm/cold tiers, days per tier, cleanup strategy
 8. Write **Privacy Controls** section: PII redaction rules, prompt/response capture policy, consent
 9. Confirm body <= 4096 bytes

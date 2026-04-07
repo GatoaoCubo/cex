@@ -29,7 +29,7 @@ Scoring rubrics are multi-dimensional weighted evaluation frameworks that define
 |---------|-------------|
 | Orthogonal dimensions | Each dimension measures ONE thing; no overlap between dimensions |
 | Explicit weights | Sum to exactly 100%; higher weight = more impact on final score |
-| Concrete criteria | Specify what counts at each level, not "good" or "appropriate" |
+| Concrete criteria | Specify what counts at each level, not "good" or "apownte" |
 | Consistent scales | All dimensions use same scale (0-10) for comparability |
 | Golden test calibration | Anchor rubric with known-good examples at 9.5+ |
 | Automation status | Declare per dimension: manual, semi-automated, or automated |

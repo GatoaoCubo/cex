@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: scoring-rubric-builder
 ## Golden Example
-INPUT: "Cria rubric de avaliacao 5D para knowledge_cards"
+INPUT: "Create rubric de evaluation 5D para knowledge_cards"
 OUTPUT:
 ```yaml
 id: p07_sr_5d_knowledge_card

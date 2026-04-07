@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: knowledge-index-builder
 ## Golden Example
-INPUT: "Cria knowledge_index para busca hibrida no pool de knowledge cards do CEX"
+INPUT: "Create knowledge_index para search hibrida no pool de knowledge cards do CEX"
 OUTPUT:
 ```yaml
 id: p10_bi_knowledge_pool

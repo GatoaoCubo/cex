@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: validation-schema-builder
 ## Golden Example
-INPUT: "Cria validation_schema para knowledge_card output"
+INPUT: "Create validation_schema para knowledge_card output"
 OUTPUT:
 ```yaml
 id: p06_vs_knowledge_card

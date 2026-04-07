@@ -27,7 +27,7 @@ created: {{YYYY-MM-DD}}
 updated: {{YYYY-MM-DD}}
 author: {{author}}
 name: "{{Human-readable retriever name}}"
-store_type: {{chroma|pinecone|faiss|qdrant|weaviate|milvus|elasticsearch|custom}}
+store_type: {{chroma|pinecone|faiss|qdrant|weaviate|milvus|elasticsearch|costm}}
 embedding_model: {{model_name, e.g. text-embedding-3-small}}
 similarity_metric: {{cosine|dot_product|euclidean|manhattan}}
 top_k: {{integer >= 1, default 10}}

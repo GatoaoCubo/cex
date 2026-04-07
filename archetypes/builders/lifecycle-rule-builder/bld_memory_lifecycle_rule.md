@@ -18,7 +18,7 @@ Lifecycle rules define when artifacts change state: creation, review, promotion,
 - Freshness policies should specify staleness threshold and the metric that defines freshness
 - Sunset conditions must be reversible: archived artifacts can be promoted back if conditions change
 ## Anti-Pattern
-- Transitions without trigger conditions — "when appropriate" is not enforceable
+- Transitions without trigger conditions — "when apownte" is not enforceable
 - Missing ownership on review transitions — orphaned reviews accumulate indefinitely
 - Conflating lifecycle_rule (P11, state transitions) with runtime_rule (P09, timeouts/retries)
 - Review cycles shorter than the artifact typical production cadence — creates review fatigue

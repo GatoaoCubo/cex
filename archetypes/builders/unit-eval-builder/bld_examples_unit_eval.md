@@ -22,7 +22,7 @@ updated: "2026-03-26"
 author: "builder"
 target: "knowledge-card-builder"
 target_kind: "knowledge_card"
-input: "Destila conhecimento sobre rate limiting para APIs REST"
+input: "Destila knowledge about rate limiting for APIs REST"
 expected_output: "Valid YAML with id, kind, pillar, quality: null, tags >= 3, tldr <= 160ch"
 assertions:
   - gate_ref: "H01"
@@ -56,8 +56,8 @@ tags: [unit-eval, knowledge-card, yaml-parse, HARD-gates]
 tldr: "Tests KC builder YAML parse and frontmatter HARD gates H01-H05 + S02"
 density_score: 0.91
 ## Input
-Destila conhecimento sobre rate limiting para APIs REST.
-Foco: algoritmos (token bucket, sliding window), headers padrao, HTTP 429 handling.
+Destila knowledge about rate limiting for APIs REST.
+Foco: algoritmos (token bucket, sliding window), headers standard, HTTP 429 handling.
 ## Expected Output
 Valid knowledge_card YAML artifact with:
 - id matching p01_kc_ prefix

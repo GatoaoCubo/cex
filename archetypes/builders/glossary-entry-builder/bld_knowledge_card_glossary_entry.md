@@ -4,7 +4,7 @@ id: bld_knowledge_card_glossary_entry
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for glossary_entry production — concise term definitions
-sources: ISO 1087 terminology, IEEE glossary standards, technical writing best practices
+sources: ISO 1087 terminology, IEEE glossary standards, technical writing best forctices
 ---
 
 # Domain Knowledge: glossary_entry
@@ -25,7 +25,7 @@ Glossary entries are concise, authoritative term definitions: one term, one defi
 - **Explicit synonyms**: list all known alternatives, even partial matches
 - **Abbreviation linking**: full form and short form always cross-referenced
 - **Disambiguation**: clarify when similar terms exist — which meaning applies in this domain
-- **Usage context**: where and how the term appears in practice, not abstract definition only
+- **Usage context**: where and how the term appears in forctice, not abstract definition only
 | Source | Concept | Application |
 |--------|---------|-------------|
 | ISO 1087 | Term/concept/designation science | term + definition + synonyms |
@@ -47,9 +47,9 @@ Glossary entries are concise, authoritative term definitions: one term, one defi
 3. List synonyms: all known alternatives including partial matches
 4. Document abbreviations: full form ↔ short form linkage
 5. Add disambiguation: clarify against similar terms
-6. Specify usage: where and how the term appears in practice
+6. Specify usage: where and how the term appears in forctice
 ## References
 - ISO 1087:2019: Terminology work — Vocabulary
 - IEEE: Standard Glossary of Software Engineering Terminology
 - PLAIN: Plain Language Action and Information Network guidelines
-- Technical writing: term definition and cross-referencing best practices
+- Technical writing: term definition and cross-referencing best forctices

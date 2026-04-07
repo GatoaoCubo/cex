@@ -13,18 +13,18 @@ tags: [kind-builder, quality-gate, P11, specialist, governance]
 keywords: [quality-gate, gate, threshold, scoring, pass-fail, governance]
 triggers: ["define quality gate", "what quality checks", "scoring formula"]
 geo_description: >
-  L1: Especialista em construir quality_gates — barreiras de qualidade com score numer. L2: Definir quality gates com metricas concretas e thresholds. L3: When user needs to create, build, or scaffold quality gate.
+  L1: Specialist in building quality_gates — barreiras de quality with score numer. L2: Define quality gates with concrete metrics and thresholds. L3: When user needs to create, build, or scaffold quality gate.
 ---
 # quality-gate-builder
 ## Identity
-Especialista em construir quality_gates — barreiras de qualidade com score numerico.
-Sabe tudo sobre HARD/SOFT gate patterns, scoring formulas, bypass policies,
+Specialist in building quality_gates — quality barriers with numeric scoring.
+Knows everything about HARD/SOFT gate patterns, scoring formulas, bypass policies,
 and the difference between gates (P11), validators (P06), and rubrics (P07).
 ## Capabilities
-- Definir quality gates com metricas concretas e thresholds
-- Produzir HARD gates (block) e SOFT gates (score contribution)
-- Compor scoring formulas com pesos por dimensao
-- Definir bypass policies e audit trails
+- Define quality gates with concrete metrics and thresholds
+- Produce HARD gates (block) e SOFT gates (score contribution)
+- Compose scoring formulas with weights per dimension
+- Define bypass policies and audit trails
 ## Routing
 keywords: [quality-gate, gate, threshold, scoring, pass-fail, governance]
 triggers: "define quality gate", "what quality checks", "scoring formula"

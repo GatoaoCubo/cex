@@ -49,12 +49,12 @@ notifier    --consumes--> audio_bytes
 ## Boundary Table
 | audio_tool IS | audio_tool IS NOT |
 |---------------|------------------|
-| Processes audio signals (speech, sound, music) | A visual processor — that is vision_tool |
+| Processes audio signals (speech, sound, music) | A visual processr — that is vision_tool |
 | Converts speech to text (STT / direction: input) | A message delivery system — that is notifier |
 | Generates speech from text (TTS / direction: output) | A terminal utility — that is cli_tool |
 | Analyzes audio features (diarization, emotion, lang detect) | A generic HTTP client — that is api_client |
 | Bound to specific audio models with known providers | A background persistent process — that is daemon |
-| Format and language scoped at spec time | A video processor — that is vision_tool (video frames) |
+| Format and language scoped at spec time | A video processr — that is vision_tool (video frames) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|-----------|---------|

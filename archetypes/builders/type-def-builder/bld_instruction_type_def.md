@@ -28,7 +28,7 @@ density_score: 0.91
 ---
 
 ## Context
-The type-def-builder produces a `type_def` artifact -- a machine-parseable YAML that declares a reusable custom type. These types form the vocabulary layer that other artifacts reference: `input_schema` uses them to define field types, `validator` uses them to enforce constraints, and `grammar` uses them for structural rules.
+The type-def-builder produces a `type_def` artifact -- a machine-parseable YAML that declares a reusable costm type. These types form the vocabulary layer that other artifacts reference: `input_schema` uses them to define field types, `validator` uses them to enforce constraints, and `grammar` uses them for structural rules.
 **Critical distinction**: `type_def` is purely declarative vocabulary. It does NOT define input validation contracts (`input_schema`), pass/fail enforcement rules (`validator`), or integration interfaces (`interface`). Confusing these produces types that duplicate validation logic they should not own.
 **Input contract**:
 - `type_name`: string -- kebab-case identifier (e.g. `iso-score`, `agent-id`, `wave-index`)
@@ -74,7 +74,7 @@ Constraint object schema:
 ```
 {
   kind: enum [min, max, min_length, max_length, pattern, enum_values,
-              min_items, max_items, unique_items, required_keys, custom],
+              min_items, max_items, unique_items, required_keys, costm],
   value: the constraint threshold, pattern, or list,
   error_message: string (human-readable violation message)
 }
@@ -85,7 +85,7 @@ string  -> allowed: min_length, max_length, pattern, enum_values
 integer -> allowed: min, max, enum_values
 number  -> allowed: min, max (inclusive/exclusive flag optional)
 array   -> allowed: min_items, max_items, unique_items
-object  -> allowed: required_keys, custom
+object  -> allowed: required_keys, costm
 union   -> constraints apply to the resolved member type, not the union itself
 ```
 Cross-type rules: `pattern` requires a valid regex; `enum_values` requires >= 2 distinct values; `min` must be <= `max` when both are present.

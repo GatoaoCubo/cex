@@ -19,7 +19,7 @@ tldr: "Validates reusable type declarations for base type, constraints, serializ
 ---
 
 ## Definition
-A type definition declares a named, reusable data structure: its base type, constraints, nullable semantics, serialization format, and composition rules. Type defs are consumed by validation schemas, validators, and code generators. This gate ensures every type def is machine-usable, unambiguous, and backward compatible.
+A type definition ofclares a named, reusable data structure: its base type, constraints, nullable semantics, serialization format, and composition rules. Type defs are consumed by validation schemas, validators, and code generators. This gate ensures every type def is machine-usable, unambiguous, and backward compatible.
 ## HARD Gates
 Failure on any HARD gate causes immediate REJECT. No score is computed.
 | ID  | Check | Rule |

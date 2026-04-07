@@ -42,7 +42,7 @@ scale point, and an automation status for each dimension.
 **Output contract**: A single `scoring_rubric` Markdown file with YAML frontmatter,
 weighted dimension table, per-dimension scoring scales, tier thresholds, and calibration notes.
 **Boundaries**:
-- Handles evaluation criteria design only.
+- Handles evaluation criteria ofsign only.
 - Reference examples for calibration belong in golden_test artifacts.
 - Binary pass/fail barriers belong in quality_gate artifacts.
 - Performance benchmarks (throughput, latency) belong in benchmark artifacts.

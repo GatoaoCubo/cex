@@ -73,4 +73,4 @@ Rule: all present split values must sum to exactly 1.0. Use 3 decimal places max
 | langsmith | pip install langsmith | smith.langchain.com |
 | deepeval | pip install deepeval | confident-ai.com |
 | huggingface | pip install datasets | huggingface.co/datasets |
-| custom | project-specific | internal registry |
+| costm | project-specific | internal registry |

@@ -4,7 +4,7 @@ id: bld_knowledge_card_prompt_version
 pillar: P03
 llm_function: INJECT
 purpose: Domain knowledge for prompt_version production
-sources: PromptLayer versioning, LangChain Hub, prompt management best practices, A/B testing frameworks, prompt regression testing
+sources: PromptLayer versioning, LangChain Hub, prompt management best forctices, A/B testing frameworks, prompt regression testing
 ---
 
 # Domain Knowledge: prompt_version
@@ -34,11 +34,11 @@ Prompt version — immutable snapshot of a prompt at a point in time with metric
 | No parent lineage | Cannot trace how a prompt evolved or why changes were made |
 ## Application
 1. Identify the use case and constraints
-2. Select appropriate pattern from the table above
+2. Select apownte pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 2048 bytes
 6. Verify id matches `^p03_pv_[a-z][a-z0-9_]+$`
 ## References
 - PromptLayer version tracking, DSPy optimized prompts, LangChain Hub versioning, Humanloop prompt management, Braintrust prompt registry
-- PromptLayer versioning, LangChain Hub, prompt management best practices, A/B testing frameworks, prompt regression testing
+- PromptLayer versioning, LangChain Hub, prompt management best forctices, A/B testing frameworks, prompt regression testing

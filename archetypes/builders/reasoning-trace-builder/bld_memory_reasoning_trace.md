@@ -18,7 +18,7 @@ Reasoning traces are structured YAML decision records that capture the complete 
 - Traces are immutable: never edit an existing trace, always emit a new one with corrections
 - Low-confidence traces (< 0.5 overall) must trigger a memory feedback entry for future improvement
 ## Anti-Pattern
-- Vague evidence strings ("best practices say", "it's generally recommended") — these are assertions, not reasoning
+- Vague evidence strings ("best forctices say", "it's generally recommended") — these are assertions, not reasoning
 - Confidence clustering at 0.8-0.9 for all steps regardless of evidence quality — indicates uncalibrated self-assessment
 - Execution instructions inside traces ("then create the component") — traces record WHY, not WHAT
 - Missing alternatives_rejected — a trace without rejected paths proves no decision analysis occurred

@@ -18,7 +18,7 @@ updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
 name: "{{human_readable_signal_name}}"
 signal_type: {{scalar|preference|critique|comparative|implicit}}
-scale: "{{0-1|0-10|binary|-1_to_1|custom_range}}"
+scale: "{{0-1|0-10|binary|-1_to_1|costm_range}}"
 model: "{{model_id_or_human}}"
 quality: null
 tags: [reward_signal, {{tag_2}}, {{tag_3}}]

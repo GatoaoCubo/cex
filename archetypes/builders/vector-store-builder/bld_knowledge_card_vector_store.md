@@ -22,7 +22,7 @@ Vectordb backend configs are storage infrastructure artifacts for RAG pipelines 
 | Density minimum | >= 0.85 |
 | Quality field | always `null` |
 | Domain field | always `vector_storage` |
-| Index types | hnsw, ivf, flat, ivf_pq, custom |
+| Index types | hnsw, ivf, flat, ivf_pq, costm |
 | Distance metrics | cosine, l2, dot_product, inner_product |
 | Backend enum | pinecone, pgvector, chroma, faiss, qdrant, weaviate, milvus, other |
 ## Patterns

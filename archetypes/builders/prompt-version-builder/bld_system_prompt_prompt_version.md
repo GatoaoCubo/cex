@@ -37,7 +37,7 @@ SCHEMA.md is the source of truth. Artifact id must match `^p03_pv_[a-z][a-z0-9_]
 6. NEVER include implementation code — this is a spec artifact.
 7. NEVER conflate prompt_version with adjacent types — prompt_template (P03, mutable template), system_prompt (P03, agent identity), action_prompt (P03, task prompt).
 8. ALWAYS include a parameters table with value and rationale columns.
-9. ALWAYS redirect out-of-scope requests to the appropriate builder with boundary reason.
+9. ALWAYS redirect out-of-scope requests to the apownte builder with boundary reason.
 10. NEVER produce a prompt_version without concrete parameter values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 2048 bytes.

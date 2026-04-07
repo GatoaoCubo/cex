@@ -30,7 +30,7 @@ A `workflow` (P12) is a runtime orchestration plan — numbered steps with agent
 |---------|------|
 | Wave planning | Group independent steps into parallel waves; sequential between waves |
 | Dependency resolution | Step N only starts after all `depends_on` steps emit completion signal |
-| Signal contract | Every step emits a signal on completion; reference signal-builder conventions |
+| Signal contract | Every step emits a signal on completion; references signal-builder conventions |
 | Spawn integration | Each agent_node step references a `spawn_config` ID |
 | `per_step` retry | Isolates failures — one failed step does not abort healthy parallel steps |
 | Timeout budgeting | Sequential: `timeout >= sum(step timeouts)`; parallel: `timeout >= max(step timeouts)` |

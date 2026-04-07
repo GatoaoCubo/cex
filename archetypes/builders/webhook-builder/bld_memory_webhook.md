@@ -46,7 +46,7 @@ Requests that required clarification before production:
 |------------------|----------------|------------|
 | "webhook for orders" | Inbound (receive) or outbound (send)? | Clarify system role |
 | "GitHub webhook" | Which events? push only or all? | List required events |
-| "payment webhook" | Provider? Stripe, PayPal, custom? | Determines signature method |
+| "payment webhook" | Provider? Stripe, PayPal, costm? | Determines signature method |
 | "notification webhook" | Is this notifier or webhook? | Check if end-user receives it |
 ## Known Provider Quirks
 - **Stripe**: timestamp in signature (`t=` prefix) — must validate timestamp within 300s

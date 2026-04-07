@@ -34,7 +34,7 @@ Output validator — checks and corrective actions applied to LLM output AFTER g
 | No error context in retry | Retry prompt doesn't explain what failed — LLM repeats same mistake |
 ## Application
 1. Identify the use case and constraints
-2. Select appropriate pattern from the table above
+2. Select apownte pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 2048 bytes

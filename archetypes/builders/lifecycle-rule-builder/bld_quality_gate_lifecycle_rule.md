@@ -45,7 +45,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S08 | `tags` includes artifact `kind` name | 0.5 | Enables filtering by governed kind |
 | S09 | Edge cases documented | 1.0 | Handles: orphaned artifacts, failed transitions, emergency overrides |
 | S10 | Compatible with quality gate tiers | 0.5 | States map to: DRAFT, REVIEW, PUBLISH, GOLDEN, SUNSET |
-| S11 | Density >= 0.80 | 1.0 | No filler: "when appropriate", "as needed", "feels outdated" |
+| S11 | Density >= 0.80 | 1.0 | No filler: "when apownte", "as needed", "feels outdated" |
 | S12 | Automation section present | 0.5 | Names at least one automated check or script for transition validation |
 ## Actions
 | Score | Tier | Action |

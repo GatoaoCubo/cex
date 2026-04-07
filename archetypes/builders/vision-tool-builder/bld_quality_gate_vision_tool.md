@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
-domain: "visual analysis tool definition — image processors with declared input types, capabilities, providers, and structured output"
+domain: "visual analysis tool definition — image processrs with declared input types, capabilities, providers, and structured output"
 quality: 9.0
 tags: [quality-gate, vision-tool, P04, image, ocr, confidence-threshold]
 tldr: "Pass/fail gate for vision_tool artifacts: input type coverage, capability documentation, provider mapping, confidence thresholds, and output schema."

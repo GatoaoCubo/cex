@@ -23,7 +23,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | collection | string | YES | — | CEX convention |
 | dimensions | integer > 0 | YES | — | Upstream embedder |
 | distance_metric | enum (cosine/l2/dot_product/inner_product) | YES | cosine | Math |
-| index_type | enum (hnsw/ivf/flat/ivf_pq/custom) | YES | hnsw | Backend docs |
+| index_type | enum (hnsw/ivf/flat/ivf_pq/costm) | YES | hnsw | Backend docs |
 | hnsw | object or null (see HNSW Params) | REC | null | Backend docs |
 | max_vectors | integer or null | REC | null | Backend docs |
 | metadata_filtering | boolean | REC | true | Backend docs |

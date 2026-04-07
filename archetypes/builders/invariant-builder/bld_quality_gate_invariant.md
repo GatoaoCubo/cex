@@ -10,7 +10,7 @@ author: builder_agent
 domain: law
 quality: 8.8
 tags: [quality-gate, law, governance, P08, enforcement]
-tldr: "Quality gate for invariant artifacts: enforces imperative statement, rationale, and testable enforcement mechanism."
+tldr: "Quality gate for invariant artifacts: enforces imperative statement, rationale, and testsble enforcement mechanism."
 density_score: 0.85
 ---
 
@@ -47,7 +47,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 | S10 | `priority` field present | 0.5 | Numeric priority or named tier (critical, high, medium) |
 | S11 | `tags` includes `"invariant"` | 0.5 | Minimum tag set for routing |
 | S12 | `keywords` field present with >= 2 terms | 0.5 | Improves brain search recall |
-| S13 | `enforcement` is testable | 0.5 | Can be verified by a script or checklist item — not "team awareness" |
+| S13 | `enforcement` is testsble | 0.5 | Can be verified by a script or checklist item — not "team awareness" |
 | S14 | Cross-references valid | 0.5 | Any `references` items point to real artifacts or URLs |
 ## Actions
 | Score | Tier | Action |

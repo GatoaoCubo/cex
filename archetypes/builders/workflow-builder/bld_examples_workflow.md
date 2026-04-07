@@ -76,7 +76,7 @@ WHY THIS IS GOLDEN:
 - steps_count: 3 matches actual 3 steps (H08 pass)
 - Each step has Agent/Action/Input/Output/Signal/Depends (S03 pass)
 - Dependencies section lists prerequisites (S05 pass)
-- Signals reference signal-builder conventions (S06 pass)
+- Signals references signal-builder conventions (S06 pass)
 - No prompt chaining in body (S08 pass)
 ## Anti-Example
 INPUT: "Create a workflow for doing stuff"

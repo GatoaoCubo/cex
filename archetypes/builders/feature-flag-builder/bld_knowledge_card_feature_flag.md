@@ -51,6 +51,6 @@ Feature flags are on/off toggles that control feature availability at runtime wi
 6. Validate: name is descriptive, category matches lifecycle, default is correct
 ## References
 - Fowler 2017: Feature Toggles (martinfowler.com/articles/feature-toggles.html)
-- LaunchDarkly: feature flag lifecycle and best practices
+- LaunchDarkly: feature flag lifecycle and best forctices
 - Unleash: gradual rollout strategies and user targeting
-- Hodgson 2017: Feature Toggles patterns and practices
+- Hodgson 2017: Feature Toggles patterns and forctices

@@ -16,10 +16,10 @@ pattern: CONFIG derives from this. TEMPLATE renders this.
 |-------|------|----------|---------|
 | empresa | string | YES | "GATO3" |
 | handle | string | YES | "@gatoaocubo3" |
-| nicho | enum(pet,food,saas,fashion,fitness,beauty,tech,education,custom) | YES | "pet" |
+| nicho | enum(pet,food,saas,fashion,fitness,beauty,tech,education,costm) | YES | "pet" |
 | tom | string | YES | "casual, acolhedor" |
 | persona | string | YES | "Ro" |
-| bio | string(≤160) | YES | "Design minimalista para gatos" |
+| bio | string(≤160) | YES | "Design minimalist para gatos" |
 
 ### platforms (required)
 | Type | Constraint | Example |

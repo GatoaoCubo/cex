@@ -40,7 +40,7 @@ The vector-store-builder produces `vector_store` artifacts (P01) — vector data
 1. Identify the backend: name, version, deployment model (local, cloud, self-hosted).
 2. Locate official documentation:
    - Backend API reference (collections, indexes, queries)
-   - Index types supported (HNSW, IVF, flat, custom)
+   - Index types supported (HNSW, IVF, flat, costm)
    - Distance metrics supported (cosine, L2, dot product, inner product)
    - Limits (max dimensions, max vectors per collection, max metadata size)
    - Pricing (if cloud-managed: per-vector, per-query, storage costs)

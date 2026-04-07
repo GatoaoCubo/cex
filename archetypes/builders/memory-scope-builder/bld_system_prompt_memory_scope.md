@@ -37,7 +37,7 @@ SCHEMA.md is the source of truth. Artifact id must match `^p02_memscope_[a-z][a-
 6. NEVER include implementation code — this is a spec artifact.
 7. NEVER conflate memory_scope with adjacent types — session_state (P10, runtime state), knowledge_index (P10, search index), learning_record (P10, pattern storage).
 8. ALWAYS include a parameters table with value and rationale columns.
-9. ALWAYS redirect out-of-scope requests to the appropriate builder with boundary reason.
+9. ALWAYS redirect out-of-scope requests to the apownte builder with boundary reason.
 10. NEVER produce a memory_scope without concrete parameter values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 2048 bytes.

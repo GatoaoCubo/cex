@@ -30,7 +30,7 @@ observation_types: [user, feedback, project, reference]
 ## Summary
 Routing rules that match tasks to executors fail in two directions: too narrow (low recall, tasks fall through to default) or too broad (low precision, wrong executor receives tasks). A disciplined keyword set, calibrated confidence threshold, and distinct fallback executor together achieve high recall and precision with a safety net for every miss.
 ## Pattern
-**Keyword coverage**: include 6-10 keywords per rule. Cover both English and Portuguese variants for the same concept (e.g., "build" and "construir", "research" and "pesquisar"). Include both noun and verb forms. Avoid generic words that appear in every task description.
+**Keyword coverage**: include 6-10 keywords per rule. Cover both English and Portuguese variants for the same concept (e.g., "build" and "build", "research" and "researchr"). Include both noun and verb forms. Avoid generic words that appear in every task description.
 **Confidence threshold**: 0.70-0.75 is the validated sweet spot for primary business domains. Below 0.65 produces false positives; above 0.80 produces false negatives. Use 0.60 only for catch-all fallback rules where broad matching is intentional.
 **Fallback chain**: the fallback executor must differ from the primary. A rule with primary=X and fallback=X has no fallback - it just retries the same failed executor. The universal fallback for execution-adjacent domains is a high-capability general-purpose executor.
 **Domain exclusion**: use `conditions.exclude_domains` to prevent overlap with adjacent rules in the same pillar. Without exclusion, two rules with similar keyword sets both fire and the higher-priority one wins unpredictably.

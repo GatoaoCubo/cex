@@ -30,7 +30,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
    - **Stage 4 RESOLVE**: entity dedup cross-source (EAN/GTIN/title similarity)
    - **Stage 5 SCORE**: Gartner 7-dimension scoring per listing/result
    - **Stage 6 SYNTHESIZE (GoT)**: Graph-of-Thoughts merge via domain-specific models
-   - **Stage 7 VERIFY (CRITIC)**: thinking model verifies, corrects (max 3 iterations)
+   - **Stage 7 VERIFY (CRITIC)**: thinking model verifies, correct (max 3 iterations)
 5. Write Source Catalog: all sources grouped by category
 6. Write Config Schema: all variable fields grouped by section
 7. Write Multi-Model Routing: model per stage/domain with cost rationale
@@ -42,7 +42,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 1. Check all 7 pipeline stages documented with input/output/model
 2. Verify source catalog covers 4 categories (inbound, outbound, search, trends)
 3. Verify no API keys in plaintext — only ENV_VAR references
-4. Verify STORM perspectives are customizable (not hardcoded)
+4. Verify STORM perspectives are costmizable (not hardcoded)
 5. Verify budget controls present (monthly + per-research)
 6. Verify CRAG quality gate has minimum score threshold
 7. Verify CRITIC has max iterations defined

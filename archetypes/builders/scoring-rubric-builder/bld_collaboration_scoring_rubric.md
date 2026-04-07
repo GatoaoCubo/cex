@@ -32,7 +32,7 @@ I design evaluation frameworks with weighted dimensions, tier thresholds, and ca
 ```
 ## Handoff Protocol
 ### I Receive
-- seeds: artifact kind name, quality criteria description, target audience, automation preference
+- seeds: artifact kind name, quality criteria ofscription, target audience, automation preference
 - optional: existing scoring examples, inter-rater reliability target, tier names (e.g. gold/silver/bronze)
 ### I Produce
 - scoring_rubric artifact (YAML + Markdown, dimensions with weights summing to 100%, max 250 lines)

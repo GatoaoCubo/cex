@@ -7,9 +7,9 @@ purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any kind-builder
 ---
 
 # Output Template: {{type_name}}
-<!-- Este meta-file gera o OUTPUT_TEMPLATE.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: SCHEMA.md ja gerado (este file DERIVA do schema) -->
-<!-- REGRA: todo campo aqui DEVE existir em SCHEMA.md. Template NUNCA inventa. -->
+<!-- This meta-file generates the OUTPUT_TEMPLATE.md of any builder -->
+<!-- REQUIRED INPUT: SCHEMA.md ja gerado (este file DERIVA do schema) -->
+<!-- REGRA: every field aqui DEVE existir em SCHEMA.md. Template NUNCA inventa. -->
 
 ```yaml
 ---
@@ -20,29 +20,29 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 ---
 ```
 
-<!-- NOTA: O formato do template depende do machine_format do tipo -->
+<!-- NOTE: O format do template depende do machine_format do type -->
 <!-- - md (maioria): YAML frontmatter + markdown body -->
 <!-- - json (signal): JSON payload puro -->
 <!-- - yaml: YAML documento -->
 
-<!-- ====== FORMATO MD (model_card, knowledge_card, quality_gate, e maioria) ====== -->
+<!-- ====== FORMATO MD (model_card, knowledge_card, quality_gate, and maioria) ====== -->
 
-<!-- FRONTMATTER: Gerar a partir de SCHEMA.md Frontmatter Fields -->
+<!-- FRONTMATTER: Generate a partir de SCHEMA.md Frontmatter Fields -->
 ```yaml
 ---
 id: {{id_prefix}}_{{slug_var}}
 kind: {{type_name}}
 pillar: {{lp}}
-<!-- NOTA: {{id_prefix}} = derivar de _schema.yaml naming. Ex: p02_mc, p01_kc, p11_qg -->
-<!-- NOTA: {{slug_var}} = parte variavel do id. Ex: {{provider}}_{{model_slug}}, {{topic_slug}} -->
+<!-- NOTE: {{id_prefix}} = derivar de _schema.yaml naming. Ex: p02_mc, p01_kc, p11_qg -->
+<!-- NOTE: {{slug_var}} = parte variable do id. Ex: {{provider}}_{{model_slug}}, {{topic_slug}} -->
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
 <!-- CAMPOS ESPECIFICOS DO TIPO: -->
-<!-- Copiar cada campo de SCHEMA.md Required/Extended fields -->
-<!-- Usar {{variable}} para valores dinamicos -->
-<!-- Usar literais para valores fixos (kind, lp, quality: null) -->
+<!-- Copiar each field de SCHEMA.md Required/Extended fields -->
+<!-- Usar {{variable}} for values dinamicos -->
+<!-- Usar literais for values fixos (kind, lp, quality: null) -->
 {{schema_specific_fields}}
 domain: {{domain_value}}
 quality: null
@@ -53,12 +53,12 @@ tldr: "{{dense_summary_max_160ch}}"
 ---
 ```
 
-<!-- BODY: Gerar secoes a partir de SCHEMA.md Body Structure -->
-<!-- Para cada secao obrigatoria, crie a estrutura com {{vars}} -->
+<!-- BODY: Generate sections a partir de SCHEMA.md Body Structure -->
+<!-- Para each section obrigatoria, crie a estrutura with {{vars}} -->
 
 ## {{body_section_1_name}}
-<!-- NOTA: Copiar estrutura da secao de SCHEMA.md -->
-<!-- Incluir tabelas, bullets, code blocks conforme o tipo exige -->
+<!-- NOTE: Copiar estrutura da section de SCHEMA.md -->
+<!-- Incluir tabelas, bullets, code blocks conforme o type exige -->
 {{body_section_1_content_with_vars}}
 
 ## {{body_section_2_name}}
@@ -67,13 +67,13 @@ tldr: "{{dense_summary_max_160ch}}"
 ## {{body_section_3_name}}
 {{body_section_3_content_with_vars}}
 
-<!-- NOTA: Numero de secoes varia por tipo: -->
-<!-- - model_card: 4 secoes (Boundary, Specifications, Capabilities, When to Use, References) -->
-<!-- - knowledge_card: 7 secoes domain_kc OU 6 secoes meta_kc -->
-<!-- - signal: 0 secoes body (JSON puro, apenas Derivation Notes) -->
-<!-- - quality_gate: 5 secoes (Definition, Checklist, Scoring, Actions, Bypass) -->
+<!-- NOTE: Numero de sections varia per type: -->
+<!-- - model_card: 4 sections (Boundary, Specifications, Capabilities, When to Use, References) -->
+<!-- - knowledge_card: 7 sections domain_kc OU 6 sections meta_kc -->
+<!-- - signal: 0 sections body (JSON puro, only Derivation Notes) -->
+<!-- - quality_gate: 5 sections (Definition, Checklist, Scoring, Actions, Bypass) -->
 
-<!-- ====== FORMATO JSON (signal e tipos machine-only) ====== -->
+<!-- ====== FORMATO JSON (signal e types machine-only) ====== -->
 <!-- Se machine_format == json, usar template JSON ao inves de YAML+MD: -->
 <!--
 ```json
@@ -89,8 +89,8 @@ Derivation Notes:
 - Omit absent optional fields instead of using placeholders
 -->
 
-<!-- SECAO UNIVERSAL (todos os tipos md): -->
+<!-- SECAO UNIVERSAL (todos os types md): -->
 ## References
 - {{reference_1}}
 - {{reference_2}}
-<!-- NOTA: Formato varia: source URL, artifact ref, pricing page, etc. -->
+<!-- NOTE: Formato varia: source URL, artifact ref, pricing page, etc. -->

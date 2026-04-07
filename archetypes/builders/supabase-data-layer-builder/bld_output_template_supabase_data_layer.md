@@ -18,13 +18,13 @@ density_score: 0.87
 ## Config YAML Structure
 ```yaml
 # Supabase Data Layer Config — [VERTICAL] — [TIER]
-identidade:
+identity:
   empresa: "[EMPRESA]"
-  vertical: "[ecommerce|saas|marketplace|content|custom]"
+  vertical: "[ecommerce|saas|marketplace|content|costm]"
   regiao: "[REGIAO]"
   tier: "[free|pro|team|enterprise]"
 
-projeto:
+project:
   project_ref: "[REF]"
   url: "https://[REF].supabase.co"
 
@@ -36,7 +36,7 @@ database:
 auth:
   providers: [email]
   mfa: false
-  custom_claims: [org_id, role]
+  costm_claims: [org_id, role]
 
 rls:
   multi_tenant_column: org_id
@@ -55,7 +55,7 @@ vectors:
 edge_functions:
   functions: []
 
-integracao_cex:
+integration_cex:
   mcp_habilitado: false
 
 budget:

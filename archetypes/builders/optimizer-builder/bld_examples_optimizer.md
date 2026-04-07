@@ -8,7 +8,7 @@ purpose: Golden and anti-examples of optimizer artifacts
 
 # Examples: optimizer-builder
 ## Golden Example
-INPUT: "Crie optimizer para latencia de geracao de knowledge cards"
+INPUT: "Crie optimizer para latency de geraction de knowledge cards"
 OUTPUT:
 ```yaml
 id: p11_opt_kc_generation_latency

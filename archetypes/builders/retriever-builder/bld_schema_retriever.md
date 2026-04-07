@@ -46,7 +46,7 @@ Rule: id MUST equal filename stem.
 Examples: `p04_retr_chroma`, `p04_retr_pinecone_hybrid`, `p04_retr_faiss_local`
 
 ## Enum: store_type
-`chroma | pinecone | faiss | qdrant | weaviate | milvus | elasticsearch | custom`
+`chroma | pinecone | faiss | qdrant | weaviate | milvus | elasticsearch | costm`
 
 ## Enum: similarity_metric
 `cosine | dot_product | euclidean | manhattan`

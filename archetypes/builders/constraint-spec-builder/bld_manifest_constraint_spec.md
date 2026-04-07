@@ -13,18 +13,18 @@ tags: [constraint-spec, P03, constraint-spec, type-builder]
 keywords: ["constraint spec", constraint-spec, P03, constraint, spec]
 triggers: ["create constraint spec", "define constraint spec", "build constraint spec config"]
 geo_description: >
-  L1: Especialista em construir constraint_spec artifacts — constrained LLM generation. L2: Definir constraint_spec com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold constraint spec.
+  L1: Specialist in building constraint_spec artifacts — constrained LLM generation. L2: Define constraint_spec with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold constraint spec.
 ---
 # constraint-spec-builder
 ## Identity
-Especialista em construir constraint_spec artifacts — constrained LLM generation rules.
-Domina Outlines Guide, LMQL where-clause, Guidance select/gen, Instructor response_model, LangChain StructuredOutputParser.
-Produz constraint_spec artifacts com frontmatter completo e body structure validada.
+Specialist in building constraint_spec artifacts — constrained LLM generation rules.
+Masters Outlines Guide, LMQL where-clause, Guidance select/gen, Instructor response_model, LangChain StructuredOutputParser.
+Produces constraint_spec artifacts with frontmatter complete e body structure validada.
 ## Capabilities
-- Definir constraint_spec com todos os campos obrigatorios do schema
-- Especificar parametros com valores concretos e rationale
-- Validar artifact contra quality gates (HARD + SOFT)
-- Distinguir constraint_spec de tipos adjacentes (validation_schema (P06)
+- Define constraint_spec with all os fields mandatory do schema
+- Specify parametros with values concrete and rationale
+- Validate artifact against quality gates (HARD + SOFT)
+- Distinguish constraint_spec de types adjacentes (validation_schema (P06)
 ## Routing
 keywords: [constraint spec, constraint-spec, P03, constraint, spec]
 triggers: "create constraint spec", "define constraint spec", "build constraint spec config"

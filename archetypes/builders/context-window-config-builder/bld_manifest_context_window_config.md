@@ -13,21 +13,21 @@ tags: [kind-builder, context-window-config, P03, specialist, token-budget, overf
 keywords: [context_window, token_budget, priority, overflow, truncation, prompt_assembly, budget_allocation]
 triggers: ["create context window config", "build token budget allocation", "configure prompt assembly limits"]
 geo_description: >
-  L1: Especialista em construir context_window_configs — alocacao de budget de tokens para assembly de prompts. L2: Definir budgets por secao, priority tiers, e overflow strategy. L3: When user needs to create, build, or scaffold context_window_config.
+  L1: Specialist in building context_window_configs — allocation de budget de tokens for assembly de prompts. L2: Define budgets per section, priority tiers, and overflow strategy. L3: When user needs to create, build, or scaffold context_window_config.
 ---
 # context-window-config-builder
 ## Identity
-Especialista em construir context_window_configs — specs de alocacao de budget de tokens
-para montar prompts dentro do limite de contexto do modelo. Domina token counting,
-priority-based truncation, overflow strategies, model-specific profiles, e a distincao
+Specialist in building context_window_configs — specs de allocation de budget de tokens
+para montar prompts dentro do limite de context do model. Masters token counting,
+priority-based truncation, overflow strategies, model-specific profiles, and the distinction
 entre context_window_config (P03), prompt_template (P03), system_prompt (P03), e
 model_card (P02).
 ## Capabilities
-- Definir alocacao de budget de tokens por secao (system, context, examples, output)
-- Configurar priority tiers para truncacao em overflow
-- Criar profiles per-model (opus 200K, haiku 200K, gpt-4 128K)
-- Definir compression fallbacks e dynamic scaling rules
-- Integrar com cex_token_budget.py para contagem real
+- Define allocation de budget de tokens per section (system, context, examples, output)
+- Configure priority tiers for truncation em overflow
+- Creater profiles per-model (opus 200K, haiku 200K, gpt-4 128K)
+- Define compression fallbacks e dynamic scaling rules
+- Integrar with cex_token_budget.py for contagem real
 ## Routing
 keywords: [context_window, token_budget, priority, overflow, truncation, prompt_assembly]
 triggers: "create context window config", "build token budget allocation", "configure prompt assembly limits"

@@ -75,7 +75,7 @@ defaults:
 | saas | pg_cron | users, orgs, subscriptions, features | documents | feature flags |
 | marketplace | pgvector, pg_cron, pg_net | sellers, listings, transactions | listing-images | bid updates |
 | content | pgvector | posts, comments, media, feeds | content-media | live comments |
-| custom | (per config) | (per config) | (per config) | (per config) |
+| costm | (per config) | (per config) | (per config) | (per config) |
 
 ## Environment Config
 ```yaml

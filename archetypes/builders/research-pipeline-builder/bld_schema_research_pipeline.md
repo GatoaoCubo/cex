@@ -17,7 +17,7 @@ pattern: CONFIG derives from this. TEMPLATE renders this.
 | empresa | string | YES | "CODEXA" |
 | nicho | string | YES | "pet_ecommerce" |
 | idioma | enum(pt-BR,en,es,fr,de) | YES | "pt-BR" |
-| pais | enum(BR,US,EU,UK,LATAM,APAC,custom) | YES | "BR" |
+| pais | enum(BR,US,EU,UK,LATAM,APAC,costm) | YES | "BR" |
 
 ### sources (required — at least 2 categories)
 | Category | Type | Required | Example |

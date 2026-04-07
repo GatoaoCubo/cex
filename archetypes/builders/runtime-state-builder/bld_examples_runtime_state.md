@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: runtime-state-builder
 ## Golden Example
-INPUT: "Cria runtime_state para o agente de pesquisa (researcher) definindo routing e prioridades em runtime"
+INPUT: "Create runtime_state for the research agent (researcher) defining routing and priorities at runtime"
 OUTPUT:
 ```yaml
 id: p10_rs_researcher
@@ -37,7 +37,7 @@ linked_artifacts:
   related: [p10_lr_research_patterns, p10_bi_knowledge_pool]
 ## Agent Context
 Researcher agent operates in market research domain. Routes incoming
-research tasks to appropriate sources (web, pool, API) based on
+research tasks to apownte sources (web, pool, API) based on
 query type and confidence thresholds. Accumulates source reliability
 scores and routing preferences during execution.
 ## Routing Rules

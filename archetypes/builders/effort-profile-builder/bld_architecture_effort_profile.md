@@ -30,7 +30,7 @@ purpose: Component map of effort_profile — inventory, dependencies, and archit
 | effort_profile IS | effort_profile IS NOT |
 |-------------|----------------|
 | Model and thinking level configuration for a builder | runtime_rule (execution rules) |
-| QUAL modelo/thinking usar | env_config (environment vars) |
+| QUAL model/thinking usar | env_config (environment vars) |
 | Maps builder to model and reasoning depth | model_card (model specs) |
 ## Layer Map
 | Layer | Components | Purpose |

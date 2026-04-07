@@ -31,7 +31,7 @@ density_score: 0.84
 ---
 
 ## Context
-The permission-builder receives a **resource or artifact description** and produces a `permission` artifact encoding the access control rules for that scope — who can read, write, and execute it, under what conditions, and how access is inherited.
+The permission-builder receives a **resource or artifact description** and produces a `permission` artifact encoding thand access control rules for that scope — who can read, write, and execute it, under what conditions, and how access is inherited.
 **Input variables**:
 - `{{scope}}` — the resource, artifact, or agent being protected (e.g., `artifact_store`, `signal_writer`, `admin_dashboard`)
 - `{{roles}}` — list of roles that interact with the scope (e.g., `[admin, editor, viewer, service_account]`)

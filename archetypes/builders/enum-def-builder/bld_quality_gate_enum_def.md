@@ -50,7 +50,7 @@ Weights sum to 100%.
 | Domain specificity | 1.0 | Values specific to the declared domain; no generic placeholder values |
 | Naming consistency | 0.5 | All values follow same case convention (SCREAMING_SNAKE or lowercase) |
 | Tldr density | 0.5 | tldr <= 160 chars and includes value count + domain context |
-| Testability | 1.0 | Each value testable — consumer can validate "is X in this enum?" |
+| Testability | 1.0 | Each value testsble — consumer can validate "is X in this enum?" |
 | Deprecation safety | 1.0 | Deprecated values retained in list; removal only in major version bump |
 ## Actions
 | Score | Tier | Action |

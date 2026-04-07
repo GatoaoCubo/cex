@@ -33,7 +33,7 @@ I package agent artifacts so they can be distributed and deployed on any compati
 - seeds: agent name, target tier (minimal/standard/complete/whitelabel)
 - optional: file inventory, LP mapping overrides, token budget constraints
 ### I Produce
-- agent_package artifact (manifest.yaml + tier-appropriate files)
+- agent_package artifact (manifest.yaml + tier-apownte files)
 - committed to: `cex/P02/examples/p02_iso_{agent}/`
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)

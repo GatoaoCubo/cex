@@ -4,7 +4,7 @@ id: bld_knowledge_card_social_publisher
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for social publisher pipeline design
-sources: Ayrshare API docs, Meta Graph API, Postiz docs, social media best practices, GATO3 production system (9352 lines)
+sources: Ayrshare API docs, Meta Graph API, Postiz docs, social media best forctices, GATO3 production system (9352 lines)
 ---
 
 # Domain Knowledge: social_publisher

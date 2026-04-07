@@ -27,8 +27,8 @@ A guardrail defines safety restrictions with concrete, matchable rules and expli
 1. Rules are concrete and matchable: name the exact pattern, field, operation, or value range. "Block requests where output contains PII fields: ssn, credit_card, dob" is enforceable. "Be careful with sensitive data" is not.
 2. `severity` is one of four values: `critical`, `high`, `medium`, `low`.
 3. `enforcement` matches severity:
-   - `critical` / `high` -> `block` (pre-execution hook or output filter; request never completes)
-   - `medium` -> `warn` (monitoring alert fired; request completes with warning logged)
+   - `critical` / `high` -> `block` (pre-execution hook or output filter; request never complete)
+   - `medium` -> `warn` (monitoring alert fired; request complete with warning logged)
    - `low` -> `log` (audit trail only; no interruption)
 4. Every guardrail, including critical ones, includes a `## Bypass Policy` section: who can authorize override, what process is followed, and how overrides are audited.
 5. Guardrail controls safety behavior (what the system must not do). Permission controls access (who can use the system). These are separate artifacts.

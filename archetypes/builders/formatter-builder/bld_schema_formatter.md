@@ -25,7 +25,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "formatter" |
 | tldr | string <= 160ch | YES | - | Dense summary |
-| template_engine | enum [mustache, jinja2, handlebars, string_format, custom, none] | REC | "none" | How templates are rendered |
+| template_engine | enum [mustache, jinja2, handlebars, string_format, costm, none] | REC | "none" | How templates are rendered |
 | pretty_print | boolean | REC | true | Whether output is indented |
 | escaping | enum [html, url, json, xml, shell, none] | REC | "none" | Escape strategy for special chars |
 | encoding | enum [utf8, ascii, latin1] | REC | "utf8" | Output encoding |
@@ -38,7 +38,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 rule:
   name: string (snake_case identifier)
   input_field: string (field to format)
-  transform: enum [template, serialize, tabulate, stringify, number_format, date_format, truncate, wrap, custom]
+  transform: enum [template, serialize, tabulate, stringify, number_format, date_format, truncate, wrap, costm]
   pattern: string (the formatting pattern or template)
   options: object (transform-specific options: indent, separator, max_length)
 ```

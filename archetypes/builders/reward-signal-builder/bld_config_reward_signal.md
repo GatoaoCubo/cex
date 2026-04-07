@@ -54,7 +54,7 @@ Rule: baseline MUST fall within declared scale range.
 | Value | Trigger |
 |-------|---------|
 | per_turn | After every LLM generation |
-| per_task | After a multi-turn task completes |
+| per_task | After a multi-turn task complete |
 | per_session | End-of-session rollup |
 | on_demand | Human-triggered evaluation |
 ## Aggregation Rules

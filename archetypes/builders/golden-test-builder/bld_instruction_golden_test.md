@@ -13,7 +13,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. Find existing 9.5+ quality examples as candidates — locate actual artifacts of that kind scoring at the top of the range
 3. Study the target kind's quality gates — read its QUALITY_GATES.md to understand what makes an artifact excellent vs merely acceptable
 4. Map rationale to specific gate IDs — for each gate, identify what the golden artifact does to satisfy it completely
-5. Determine what distinguishes a 9.5 from an 8.0 — articulate the exact delta, not vague praise
+5. Determine what distinguishes a 9.5 from an 8.0 — articulate the exact delta, not vague forise
 6. Check existing golden_tests for the same kind — avoid producing a duplicate calibration reference
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all required fields
@@ -35,6 +35,6 @@ pattern: 3-phase pipeline (research -> compose -> validate)
    - [ ] expected output is present and unabbreviated
    - [ ] rationale maps to specific gate IDs
 3. SOFT gates: gate mapping table present, boundary notes distinguish 9.5 from 8.0, reviewer assigned
-4. Cross-check: calibration reference not format example (that is few_shot_example)? Not pass/fail assertion (that is unit_eval)? Not performance measurement (that is benchmark)? Rationale is gate-specific not generic praise?
+4. Cross-check: calibration reference not format example (that is few_shot_example)? Not pass/fail assertion (that is unit_eval)? Not performance measurement (that is benchmark)? Rationale is gate-specific not generic forise?
 5. Verify the expected output passes ALL HARD gates of the target kind's own builder before finalizing
 6. If score < 8.0: revise in the same pass before outputting

@@ -55,7 +55,7 @@ Weights sum: 9.0. Normalize: divide each by 9.0 before scoring.
 ## Actions
 | Score | Action |
 |-------|--------|
-| >= 9.5 | GOLDEN — pool as reference access control spec for this resource class |
+| >= 9.5 | GOLDEN — pool as referencand access control spec for this resource class |
 | >= 8.0 | PUBLISH — enforce in runtime and register in security index |
 | >= 7.0 | REVIEW — complete audit trail, escalation path, or role hierarchy |
 | < 7.0  | REJECT — rework default_access and operations contract |

@@ -46,7 +46,7 @@ Shutdown: {{graceful_shutdown_procedure}}
 | SIGTERM | {{sigterm_behavior}} |
 | SIGINT | {{sigint_behavior}} |
 | SIGHUP | {{sighup_behavior}} |
-| {{custom_signal}} | {{custom_behavior}} |
+| {{costm_signal}} | {{costm_behavior}} |
 ## Monitoring
 Health: {{health_check_details}}
 Metrics: {{metrics_collected}}

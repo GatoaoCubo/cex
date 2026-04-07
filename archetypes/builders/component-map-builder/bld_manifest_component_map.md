@@ -19,7 +19,7 @@ geo_description: >
 Specialist in building `component_map` — structured inventories of system components and their relationships. Knows system decomposition, dependency mapping, interface boundaries, data flow analysis, and the distinction between component_map (P08, structured data), diagram (P08, visual), and agent_card (P08, single component).
 ## Capabilities
 - Analyze system architecture to produce structured component inventories
-- Produce component_map artifacts with frontmatter completo (19+ campos)
+- Produce component_map artifacts with frontmatter complete (19+ fields)
 - Document components, connections, dependencies, and data flows
 - Validate artifact against quality gates (9 HARD + 10 SOFT)
 - Map ownership, health status, and interface boundaries

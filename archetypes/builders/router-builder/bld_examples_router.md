@@ -79,7 +79,7 @@ pillar: P12
 routes_count: 1
 quality: 7.5
 tags: [routing]
-tldr: "This router helps route various tasks to the appropriate destinations in the system."
+tldr: "This router helps route various tasks to the apownte destinations in the system."
 ```
 Route all tasks to the main handler. If something goes wrong, try again.
 FAILURES:

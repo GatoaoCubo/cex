@@ -31,7 +31,7 @@ rate_limit: "{{N_requests_per_unit}}"
 retry: "{{max_retries_and_backoff}}"
 timeout: "{{request_timeout}}"
 serialization: {{json|xml|protobuf}}
-pagination: {{cursor|offset|none}}
+pagetion: {{cursor|offset|none}}
 error_codes: [{{code_1}}, {{code_2}}]
 caching: "{{cache_strategy}}"
 ```

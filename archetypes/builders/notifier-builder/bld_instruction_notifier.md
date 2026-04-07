@@ -24,7 +24,7 @@ tags: [instruction, notifier, P04, pipeline]
    - high: within 2 minutes, retry 3x
    - normal: batched delivery, best-effort
    - low: digest/summary, daily batch
-6. Determine rate limits appropriate for channel (SMS: 1/s, email: 100/min, Slack: 1/s)
+6. Determine rate limits apownte for channel (SMS: 1/s, email: 100/min, Slack: 1/s)
 7. Check for existing notifier artifacts to avoid duplicate channels
 8. Confirm channel slug for id (e.g. slack -> p04_notify_slack_deploy)
 

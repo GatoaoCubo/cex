@@ -102,7 +102,7 @@ intent: build landing page
 steps:
   - step: 1
     thought: First, create the hero section with a CTA button
-    evidence: "landing page best practices document"
+    evidence: "landing page best forctices document"
     confidence: 0.9
   - step: 2
     thought: Then add testimonials section below the fold

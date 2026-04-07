@@ -9,8 +9,8 @@ purpose: Meta-template for generating COLLABORATION.md of any kind-builder
 ---
 
 # Collaboration: {{builder_name}}
-<!-- Este meta-file gera o COLLABORATION.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: TAXONOMY_LAYERS.yaml (dependencias), ARCHITECTURE.md ja gerado -->
+<!-- This meta-file generates the COLLABORATION.md of any builder -->
+<!-- REQUIRED INPUT: TAXONOMY_LAYERS.yaml (dependencies), ARCHITECTURE.md ja gerado -->
 
 ```yaml
 ---
@@ -23,18 +23,18 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "{{one_question}}"
-<!-- NOTA: {{one_question}} = mesma pergunta do MANIFEST Crew Role -->
+<!-- NOTE: {{one_question}} = mesma pergunta do MANIFEST Crew Role -->
 I do not {{exclusion_verb_1}}. I do not {{exclusion_verb_2}}.
 I {{primary_verb}} so {{downstream_consumers}} can {{consumer_benefit}}.
-<!-- NOTA: Padrao observado em todos os 4 builders: -->
+<!-- NOTE: Padrao observado em all os 4 builders: -->
 <!-- - model_card: "I INFORM other builders so they can make better decisions" -->
 <!-- - KC: "I DISTILL knowledge so other builders and agents have factual context" -->
 <!-- - signal: "I report what just happened so monitors can decide what happens next" -->
 <!-- - quality_gate: "I define WHAT must pass. I do not implement HOW." -->
 
 ## Crew Compositions
-<!-- NOTA: 2-3 crews tipicas onde este builder participa -->
-<!-- Padrao: lista numerada com seta mostrando output de cada builder -->
+<!-- NOTE: 2-3 crews tipicas where this builder participa -->
+<!-- Padrao: lista numerada with seta mostrando output de each builder -->
 
 ### Crew: "{{crew_name_1}}"
 ```
@@ -42,11 +42,11 @@ I {{primary_verb}} so {{downstream_consumers}} can {{consumer_benefit}}.
   2. {{builder_role_2}} -> "{{output_description_2}}"
   3. {{builder_role_3}} -> "{{output_description_3}}"
 ```
-<!-- NOTA: Marcar builders que nao existem com [PLANNED] -->
+<!-- NOTE: Marcar builders that not existem with [PLANNED] -->
 <!-- Posicao do builder na crew reflete dependencies: -->
 <!-- - Layer 0 (infrastructure): primeiro na crew -->
-<!-- - Content: depois de pesquisa, antes de identity -->
-<!-- - Runtime: depois de specs, antes de orquestracao -->
+<!-- - Content: depois de research, antes de identity -->
+<!-- - Runtime: depois de specs, antes de orquestraction -->
 <!-- - Governance: ultimo na crew (valida output dos outros) -->
 
 ### Crew: "{{crew_name_2}}"
@@ -60,7 +60,7 @@ I {{primary_verb}} so {{downstream_consumers}} can {{consumer_benefit}}.
 ### I Receive
 - seeds: {{minimum_seeds}}
 - optional: {{optional_context}}
-<!-- NOTA: {{minimum_seeds}} = inputs minimos para o builder funcionar -->
+<!-- NOTE: {{minimum_seeds}} = inputs minimal for the builder funcionar -->
 <!-- Exemplos: -->
 <!-- - model_card: "model name, provider" -->
 <!-- - KC: "topic name, domain" -->
@@ -70,26 +70,26 @@ I {{primary_verb}} so {{downstream_consumers}} can {{consumer_benefit}}.
 ### I Produce
 - {{output_artifact}} ({{output_format}})
 - committed to: `cex/{{lp_dir}}/examples/{{naming_pattern}}`
-<!-- NOTA: Consistente com CONFIG.md File Paths -->
+<!-- NOTE: Consistente with CONFIG.md File Paths -->
 
 ### I Signal
 - signal: complete (with quality score from QUALITY_GATES)
 - if quality < 8.0: signal retry with failure reasons
-<!-- NOTA: Padrao UNIVERSAL — todos os builders sinalizam da mesma forma -->
+<!-- NOTE: Padrao UNIVERSAL — all os builders sinalizam da mesma forma -->
 
 ## Builders I Depend On
 {{dependencies_or_none}}
-<!-- NOTA: A maioria dos builders eh INDEPENDENTE (layer 0) -->
+<!-- NOTE: A maioria dos builders is INDEPENDENTE (layer 0) -->
 <!-- Se depende de outro builder, listar: -->
 <!-- "- {builder-name}: provides {what}" -->
-<!-- Buscar em ARCHITECTURE.md Dependency Graph -->
+<!-- Look up in ARCHITECTURE.md Dependency Graph -->
 
 ## Builders That Depend On Me [PLANNED]
-<!-- NOTA: GERAR a partir de ARCHITECTURE.md Dependency Graph -->
+<!-- NOTE: GERAR a partir de ARCHITECTURE.md Dependency Graph -->
 
 | Builder | Why |
 |---------|-----|
 | {{dependent_builder_1}} | {{why_depends_1}} |
 | {{dependent_builder_2}} | {{why_depends_2}} |
-<!-- NOTA: Marcar [PLANNED] se o builder dependente nao existe ainda -->
-<!-- Buscar em TAXONOMY_LAYERS.yaml quais tipos usam este tipo como input -->
+<!-- NOTE: Marcar [PLANNED] se the builder dependente not existe ainda -->
+<!-- Look up in TAXONOMY_LAYERS.yaml quais types usam this type as input -->

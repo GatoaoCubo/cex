@@ -28,7 +28,7 @@ Dispatch rules are routing policy records that map keywords to targets with prio
 |-----------|---------|-----|
 | Synonyms | [build, create, implement] | Same intent, different words |
 | Abbreviations | [docs, documentation] | Short forms common in queries |
-| Bilingual | [pesquisar, research] | Multi-language systems |
+| Bilingual | [researchr, research] | Multi-language systems |
 | Verb forms | [deploy, deploying] | Intent expressed as actions |
 - **Priority and threshold calibration**:
 | Priority | Meaning | Threshold | Behavior |

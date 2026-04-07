@@ -48,7 +48,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ## Node Object
 Fields: `id` (unique slug), `label` (human description), `agent_node` (executor, optional).
 ## Edge Object
-Fields: `from` (node id that completes first), `to` (node id that depends on from).
+Fields: `from` (node id that complete first), `to` (node id that depends on from).
 ## Semantic Rules
 1. One DAG describes one pipeline or mission's dependency structure
 2. Edges are directed: `from` must complete before `to` can start

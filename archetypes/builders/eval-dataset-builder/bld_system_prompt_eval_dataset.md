@@ -67,7 +67,7 @@ size: {integer}
 splits:
   test: 1.0
 schema_fields: [input, expected_output, metadata]
-framework: braintrust | langsmith | deepeval | huggingface | custom
+framework: braintrust | langsmith | deepeval | huggingface | costm
 ```
 ```markdown
 ## Schema

@@ -9,8 +9,8 @@ purpose: Meta-template for generating SCHEMA.md of any kind-builder
 ---
 
 # Schema: {{type_name}}
-<!-- Este meta-file gera o SCHEMA.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: _schema.yaml do Pillar-alvo (fonte primaria de campos) -->
+<!-- This meta-file generates the SCHEMA.md of any builder -->
+<!-- REQUIRED INPUT: _schema.yaml do Pillar-target (fonte primaria de fields) -->
 <!-- REGRA: Este file eh SINGLE SOURCE OF TRUTH. TEMPLATE deriva. CONFIG restringe. -->
 
 ```yaml
@@ -23,15 +23,15 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 ```
 
 ## Frontmatter Fields
-<!-- NOTA: GERAR esta tabela a partir de _schema.yaml -->
+<!-- NOTE: GERAR esta tabela a partir de _schema.yaml -->
 <!-- Separar em Required e Extended/Recommended -->
 <!-- Padrao observado: -->
-<!-- - model_card: 26 campos (muitos required) -->
+<!-- - model_card: 26 fields (muitos required) -->
 <!-- - knowledge_card: 13 required + 6 extended = 19 -->
-<!-- - quality_gate: ~13 campos -->
+<!-- - quality_gate: ~13 fields -->
 <!-- - signal: 4 required + 7 optional (JSON, sem frontmatter) -->
 
-<!-- CAMPOS UNIVERSAIS (presentes em TODO tipo md): -->
+<!-- CAMPOS UNIVERSAIS (presentes em TODO type md): -->
 
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -42,45 +42,45 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 | created | date YYYY-MM-DD | YES | - | Creation date |
 | updated | date YYYY-MM-DD | YES | - | Last update |
 | author | string | YES | - | Producer identity |
-<!-- NOTA: Alguns tipos adicionam restricao: "not orchestrator" (KC H10) -->
+<!-- NOTE: Alguns types adicionam restriction: "not orchestrator" (KC H10) -->
 
 <!-- CAMPOS ESPECIFICOS DO TIPO (gerar de _schema.yaml): -->
 | {{field_name}} | {{field_type}} | {{YES/REC}} | {{default}} | {{notes}} |
-<!-- NOTA: Para cada campo em _schema.yaml que nao seja universal: -->
-<!-- - Determinar tipo (string, integer, boolean, enum, object, list) -->
+<!-- NOTE: Para each field em _schema.yaml que nao seja universal: -->
+<!-- - Determinar type (string, integer, boolean, enum, object, list) -->
 <!-- - Determinar se required (YES) ou recommended (REC) -->
 <!-- - Anotar constraints (min/max length, allowed values, regex) -->
-<!-- - Referenciar fonte (Mitchell 2019, LiteLLM, CEX-internal, etc.) -->
+<!-- - Referencesr fonte (Mitchell 2019, LiteLLM, CEX-internal, etc.) -->
 
-<!-- CAMPOS UNIVERSAIS CEX (presentes na maioria dos tipos): -->
+<!-- CAMPOS UNIVERSAIS CEX (presentes na maioria dos types): -->
 | domain | string | YES | - | Domain this artifact belongs to |
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Searchability |
 | tldr | string <= 160ch | YES | - | Dense summary |
 
-<!-- CAMPOS OPCIONAIS CEX (presentes em muitos tipos): -->
+<!-- CAMPOS OPCIONAIS CEX (presentes em muitos types): -->
 | keywords | list[string] | REC | - | Brain search terms |
 | linked_artifacts | object {primary, related} | REC | - | Cross-references |
 | data_source | URL or artifact ref | REC | - | Provenance |
 | density_score | float 0.80-1.00 | REC | - | Content density |
 
 ## {{Complex_Object_Section}}
-<!-- NOTA: Se o tipo tem objetos complexos no frontmatter, documentar aqui -->
+<!-- NOTE: Se o type tem objetos complex no frontmatter, documentar aqui -->
 <!-- Exemplos: -->
 <!-- - model_card: Pricing Policy, Modalities Object, Features Object -->
 <!-- - knowledge_card: Linked Artifacts Object -->
-<!-- - signal: nenhum (campos simples) -->
-<!-- - quality_gate: nenhum (campos simples) -->
+<!-- - signal: nenhum (fields simples) -->
+<!-- - quality_gate: nenhum (fields simples) -->
 
 ```yaml
 {{object_name}}:
   {{field_1}}: {{kind}}
   {{field_2}}: {{kind}}
 ```
-<!-- NOTA: Incluir regras de preenchimento (ex: "open-weight = null, not 0") -->
+<!-- NOTE: Incluir rules de preenchimento (ex: "open-weight = null, not 0") -->
 
 ## ID Pattern
-<!-- NOTA: Regex de validacao do id -->
+<!-- NOTE: Regex de validation do id -->
 Regex: `{{id_regex}}`
 Rule: id MUST equal filename stem.
 <!-- Exemplos de padroes observados: -->
@@ -91,20 +91,20 @@ Rule: id MUST equal filename stem.
 <!-- Padrao universal: ^{{lp_lower}}_{{type_abbrev}}_[a-z][a-z0-9_]+$ -->
 
 ## Body Structure (required sections)
-<!-- NOTA: Listar secoes obrigatorias do body -->
-<!-- GERAR a partir de _schema.yaml ou convencoes do dominio -->
+<!-- NOTE: Listar sections obrigatorias do body -->
+<!-- GERAR a partir de _schema.yaml ou convencoes do domain -->
 1. `## {{section_1}}` — {{section_1_description}}
 2. `## {{section_2}}` — {{section_2_description}}
 3. `## {{section_3}}` — {{section_3_description}}
-<!-- NOTA: Numero de secoes varia: -->
-<!-- - model_card: 5 secoes fixas -->
-<!-- - knowledge_card: 7 (domain_kc) ou 6 (meta_kc) — 2 variantes -->
+<!-- NOTE: Numero de sections varia: -->
+<!-- - model_card: 5 sections fixas -->
+<!-- - knowledge_card: 7 (domain_kc) ou 6 (meta_kc) — 2 variants -->
 <!-- - signal: 0 (JSON puro) -->
-<!-- - quality_gate: 5 secoes fixas -->
-<!-- Se o tipo tem variantes de body, documentar todas -->
+<!-- - quality_gate: 5 sections fixas -->
+<!-- Se o type tem variants de body, documentar todas -->
 
 ## Constraints
-<!-- NOTA: Restricoes operacionais derivadas do schema -->
+<!-- NOTE: Restricoes operational derivadas do schema -->
 - max_bytes: {{max_body_bytes}}
 <!-- Padroes observados: model_card=4096, KC=5120 (min 200), signal=4096, QG=4096 -->
 - naming: {{naming_pattern}}

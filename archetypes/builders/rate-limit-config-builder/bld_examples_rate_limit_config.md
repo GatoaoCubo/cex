@@ -54,7 +54,7 @@ activated after $5 cumulative spend. Used by all Claude API integrations at this
 ## Tier
 **Tier**: build
 Standard production tier. Requires $5 cumulative API spend to activate.
-Includes all Claude models. Upgrade to Scale tier requires custom agreement with Anthropic sales.
+Includes all Claude models. Upgrade to Scale tier requires costm agreement with Anthropic sales.
 ## Budget
 Monthly cap: $100.00
 Alert threshold: 80% — trigger notification at $80 spend

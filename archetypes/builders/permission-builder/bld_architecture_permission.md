@@ -34,7 +34,7 @@ guardrail      --depends-->      permission
 ## Boundary Table
 | permission IS | permission IS NOT |
 |---------------|-------------------|
-| A read/write/execute access control with roles and scope | A safety boundary on agent behavior (guardrail P11) |
+| A read/write/executand access control with roles and scope | A safety boundary on agent behavior (guardrail P11) |
 | Enforced via allow_list and deny_list with precedence | An inviolable operational mandate (law P08) |
 | Role-based with inheritance hierarchy | A pass/fail quality check (quality_gate P11) |
 | Includes audit trail and escalation path | A runtime timeout or retry parameter (runtime_rule P09) |

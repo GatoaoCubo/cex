@@ -13,18 +13,18 @@ tags: [retriever-config, P01, retriever-config, type-builder]
 keywords: ["retriever config", retriever-config, P01, retriever, config]
 triggers: ["create retriever config", "define retriever config", "build retriever config config"]
 geo_description: >
-  L1: Especialista em construir retriever_config artifacts — retrieval configuration f. L2: Definir retriever_config com todos os campos obrigatorios do schema. L3: When user needs to create, build, or scaffold retriever config.
+  L1: Specialist in building retriever_config artifacts — retrieval configuration f. L2: Define retriever_config with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold retriever config.
 ---
 # retriever-config-builder
 ## Identity
-Especialista em construir retriever_config artifacts — retrieval configuration for RAG search.
-Domina LangChain BaseRetriever, LlamaIndex BaseRetriever, Haystack Retriever, ChromaDB, Pinecone, Weaviate, FAISS.
-Produz retriever_config artifacts com frontmatter completo e body structure validada.
+Specialist in building retriever_config artifacts — retrieval configuration for RAG search.
+Masters LangChain BaseRetriever, LlamaIndex BaseRetriever, Haystack Retriever, ChromaDB, Pinecone, Weaviate, FAISS.
+Produces retriever_config artifacts with frontmatter complete e body structure validada.
 ## Capabilities
-- Definir retriever_config com todos os campos obrigatorios do schema
-- Especificar parametros com valores concretos e rationale
-- Validar artifact contra quality gates (HARD + SOFT)
-- Distinguir retriever_config de tipos adjacentes (embedding_config (vector model))
+- Define retriever_config with all os fields mandatory do schema
+- Specify parametros with values concrete and rationale
+- Validate artifact against quality gates (HARD + SOFT)
+- Distinguish retriever_config de types adjacentes (embedding_config (vector model))
 ## Routing
 keywords: [retriever config, retriever-config, P01, retriever, config]
 triggers: "create retriever config", "define retriever config", "build retriever config config"

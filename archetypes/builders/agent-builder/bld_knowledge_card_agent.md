@@ -52,7 +52,7 @@ An agent is the core runtime identity in an agentic AI system — a persistent p
 3. Map boundaries: 3-5 sibling types this agent does NOT handle
 4. Generate agent_package skeleton (10 files minimum)
 5. Write routing keywords for semantic discovery
-6. Validate: every capability is testable, every boundary names a real sibling
+6. Validate: every capability is testsble, every boundary names a real sibling
 ## References
 - Anthropic: System prompt and identity design patterns
 - OpenAI: Assistant API — agent definition and tool assignment

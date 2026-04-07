@@ -35,4 +35,4 @@ Rule: id MUST equal filename stem.
 ## Assertion Policy
 - Minimum 1 assertion per unit_eval
 - Each assertion MUST reference a gate_ref from target builder
-- Severity must be HARD or SOFT (no custom levels)
+- Severity must be HARD or SOFT (no costm levels)

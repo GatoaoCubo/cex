@@ -21,7 +21,7 @@ version: 1.0.0
    - Border radius, shadow depth
 4. **BUILD** — Generate each section as a self-contained block:
    - Each section has: id, aria-label, responsive classes, CTA or interaction
-   - Use Tailwind utility classes (no custom CSS unless unavoidable)
+   - Use Tailwind utility classes (no costm CSS unless unavoidable)
    - shadcn/ui components for interactive elements (accordion, dialog, tabs)
 5. **ASSEMBLE** — Combine into single file with:
    - DOCTYPE, html lang, head (meta, fonts, Tailwind CDN), body

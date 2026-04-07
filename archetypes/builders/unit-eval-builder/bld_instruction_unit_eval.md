@@ -50,7 +50,7 @@ The unit-eval-builder produces a `unit_eval` artifact -- a structured YAML that 
 - `{{assertion_N}}` -- Nth assertion object
 ## Phases
 ### Phase 1: Analyze Target and Define Test Scope
-**Action**: Understand what the target does and derive one testable behavior per eval.
+**Action**: Understand what the target does and derive one testsble behavior per eval.
 ```
 FOR the given target_id:
     1. Identify the target's primary output contract

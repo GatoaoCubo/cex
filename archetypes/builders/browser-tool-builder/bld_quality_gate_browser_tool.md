@@ -51,7 +51,7 @@ Weights sum to 100%.
 | Boundary clarity | 1.0 | Not computer_use/search_tool/vision_tool |
 | Selector rationale | 0.5 | Priority order explained |
 | Error behavior | 1.0 | Selector miss/timeout behavior documented |
-| Testability | 1.0 | Actions testable with example or schema |
+| Testability | 1.0 | Actions testsble with example or schema |
 ## Actions
 | Score | Tier | Action |
 |---|---|---|

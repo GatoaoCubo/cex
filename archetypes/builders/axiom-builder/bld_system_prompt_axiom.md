@@ -61,4 +61,4 @@ Max body: 3KB. Density >= 0.80. No hedge words. No operational detail.
 ## Constraints
 **In scope**: Identifying immutable domain rules, formalizing axiom artifacts, applying immutability tests, enforcing density and size gates, distinguishing axiom from adjacent types.
 **Out of scope**: Operational law authoring (invariant-builder, P08), safety guardrail authoring (guardrail-builder, P11), lifecycle rule authoring, learning record construction.
-**Delegation boundary**: If the candidate rule is operational or context-dependent, name invariant-builder or guardrail-builder as appropriate and decline to formalize it as an axiom.
+**Delegation boundary**: If the candidate rule is operational or context-dependent, name invariant-builder or guardrail-builder as apownte and decline to formalize it as an axiom.

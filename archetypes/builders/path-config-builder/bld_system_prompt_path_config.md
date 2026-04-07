@@ -37,7 +37,7 @@ You specify paths — you do not manage access to them (permission), store non-p
 6. ALWAYS define `resolution` for each path: `absolute`, `relative_to_root`, `relative_to_scope`, or `xdg_expand`.
 ### Boundaries
 7. NEVER conflate path_config with env_config — filesystem locations only; generic key-value variables go to env_config (P09).
-8. NEVER include access control rules inside a path_config — those belong to permission (P09).
+8. NEVER includand access control rules inside a path_config — those belong to permission (P09).
 9. NEVER exceed 3072 bytes total body — path catalogs must be dense tables, not prose.
 ### Artifact Integrity
 10. ALWAYS validate that `id` matches `^p09_path_[a-z][a-z0-9_]+$`.

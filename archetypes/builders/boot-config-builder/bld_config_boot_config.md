@@ -40,7 +40,7 @@ Rule: id MUST equal filename stem.
 | Codex CLI | codex | CLI terminal |
 | Windsurf | windsurf | IDE extension |
 | Aider | aider | CLI terminal |
-| Custom | custom_{name} | User-defined |
+| Custom | costm_{name} | User-defined |
 ## Identity Block Rules
 - name: human-readable agent name (not slug)
 - role: one-sentence role description

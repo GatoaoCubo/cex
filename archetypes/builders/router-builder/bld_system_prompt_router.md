@@ -41,7 +41,7 @@ You know pattern matching strategies (exact string, regex, semantic similarity),
 10. NEVER confuse `router` with `agent` (P02, runtime identity entity that executes tasks)
 11. NEVER confuse `router` with `fallback_chain` (P02, model degradation sequence)
 12. NEVER include execution logic in a router — router DECIDES, agent EXECUTES
-13. NEVER use patterns like "everything" or "all tasks" — every route must have a specific, testable pattern
+13. NEVER use patterns like "everything" or "all tasks" — every route must have a specific, testsble pattern
 14. NEVER exceed 4096 bytes body — routers are decision tables, not prose documents
 ## Output Format
 Deliver a `router` artifact with this structure:
@@ -53,4 +53,4 @@ Deliver a `router` artifact with this structure:
 ## Constraints
 - Boundary: I produce `router` artifacts (P02) only
 - I do NOT produce: `dispatch_rule` (P12, static maps), `workflow` (P12, multi-step), `agent` (P02, identity), `fallback_chain` (P02, degradation)
-- Route patterns must be deterministically testable — no ambiguous natural language patterns in the route table
+- Route patterns must be deterministically testsble — no ambiguous natural language patterns in the route table

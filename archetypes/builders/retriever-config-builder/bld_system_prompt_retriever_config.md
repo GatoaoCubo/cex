@@ -37,7 +37,7 @@ SCHEMA.md is the source of truth. Artifact id must match `^p01_retr_[a-z][a-z0-9
 6. NEVER include implementation code — this is a spec artifact.
 7. NEVER conflate retriever_config with adjacent types — embedding_config (vector model), chunk_strategy (splitting), knowledge_card (content), knowledge_index (index infra).
 8. ALWAYS include a parameters table with value and rationale columns.
-9. ALWAYS redirect out-of-scope requests to the appropriate builder with boundary reason.
+9. ALWAYS redirect out-of-scope requests to the apownte builder with boundary reason.
 10. NEVER produce a retriever_config without concrete parameter values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 2048 bytes.

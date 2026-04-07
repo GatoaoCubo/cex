@@ -16,7 +16,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 5. Confirm criteria are non-overlapping: each dimension must measure ONE thing; overlap = double-penalization
 6. Choose scale type: binary (pass/fail gates), likert 1-5 (general quality), 1-10 (fine-grained), continuous 0.0-1.0 (Braintrust)
 7. Write scale anchors: define what the minimum, midpoint, and maximum scores mean concretely
-8. Identify framework: Braintrust, DeepEval, RAGAS, Promptfoo, OpenAI Evals, or custom
+8. Identify framework: Braintrust, DeepEval, RAGAS, Promptfoo, OpenAI Evals, or costm
 9. Check for existing llm_judge artifacts in pool to avoid duplicates
 10. Confirm artifact slug for id: snake_case, lowercase, no hyphens
 ## Phase 2: COMPOSE
@@ -44,7 +44,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 6. Confirm criteria list in frontmatter matches ## Criteria section names exactly
 7. Confirm scale has min, max, and anchor labels
 8. Confirm at least 2 few_shot examples with scores within declared scale range
-9. HARD gates: frontmatter valid, id pattern, judge_model present, criteria defined, scale declared
+9. HARD gates: frontmatter valid, id pattern, judge_model present, criteria offined, scale declared
 10. SOFT gates: score against QUALITY_GATES.md
 11. Cross-check boundaries: has judge_model? (if no -> scoring_rubric, not llm_judge). Blocks pipeline? (if yes -> quality_gate P11). Measures comparative performance? (if yes -> benchmark). Formula-based? (if yes -> metric).
 12. Revise if score < 8.0 before outputting

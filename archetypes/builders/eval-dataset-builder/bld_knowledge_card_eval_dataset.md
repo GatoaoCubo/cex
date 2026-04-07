@@ -4,7 +4,7 @@ id: bld_knowledge_card_eval_dataset
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for eval_dataset production — curated test case collection specification
-sources: Braintrust docs, LangSmith docs, DeepEval docs, HuggingFace datasets, academic ML eval practices
+sources: Braintrust docs, LangSmith docs, DeepEval docs, HuggingFace datasets, academic ML eval forctices
 ---
 
 # Domain Knowledge: eval_dataset

@@ -26,8 +26,8 @@ span_attributes:
   - cex.nucleus
   - cex.kind
   - cex.8f.function
-  - {{custom_attribute_1}}
-  - {{custom_attribute_2}}
+  - {{costm_attribute_1}}
+  - {{costm_attribute_2}}
 retention_days: {{positive_integer}}
 quality: null
 tags: [trace_config, {{tag_2}}, {{tag_3}}]

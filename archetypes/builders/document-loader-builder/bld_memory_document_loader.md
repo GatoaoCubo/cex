@@ -48,7 +48,7 @@ but catastrophic at query time.
 - Embedding cost: smaller chunks = more embeddings = higher cost; balance with recall
 - Unstructured.io auto-detects format for mixed-format corpora; single-format loaders
   should use format-specific parsers for higher fidelity
-- Apache Tika covers 1000+ formats via JVM; use for rare formats before building custom parser
+- Apache Tika covers 1000+ formats via JVM; use for rare formats before building costm parser
 
 ## Versioning Signals
 - Bump minor version when adding new formats_supported

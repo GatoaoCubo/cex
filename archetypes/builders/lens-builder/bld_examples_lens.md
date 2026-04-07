@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: lens-builder
 ## Golden Example
-INPUT: "Cria uma lens de custo para avaliar model_cards e embedding_configs"
+INPUT: "Create uma lens de cost para avaliar model_cards e embedding_configs"
 OUTPUT:
 ```yaml
 id: p02_lens_cost_efficiency

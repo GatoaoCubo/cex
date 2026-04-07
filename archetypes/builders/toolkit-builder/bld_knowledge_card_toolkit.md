@@ -9,7 +9,7 @@ sources: toolkit-builder schema + cex_skill_loader.py + cex_router.py
 
 # Domain Knowledge: toolkit
 ## Executive Summary
-Toolkits are YAML permission bundles — the access control mechanism for agent tool usage. Each toolkit defines which tools an agent or nucleus can access, what confirmation level each tool requires (auto for reads, confirm for writes, deny for dangerous), and which agents are explicitly denied specific tools. Unlike tool implementations (code), agent identities (system_prompts), or workflows (step graphs), toolkits carry only permission metadata — no execution logic, no persona rules, no sequencing.
+Toolkits are YAML permission bundles — thand access control mechanism for agent tool usage. Each toolkit defines which tools an agent or nucleus can access, what confirmation level each tool requires (auto for reads, confirm for writes, deny for dangerous), and which agents are explicitly denied specific tools. Unlike tool implementations (code), agent identities (system_prompts), or workflows (step graphs), toolkits carry only permission metadata — no execution logic, no persona rules, no sequencing.
 ## Spec Table
 | Property | Value |
 |----------|-------|

@@ -57,7 +57,7 @@ Prerequisites: embedding service available; same embedding_model present; source
 
 Idempotent: yes — skips already-processed chunks.
 ## Lifecycle
-TTL: 24h — batch pipeline; checkpoint expires after workflow completes.
+TTL: 24h — batch pipeline; checkpoint expires after workflow complete.
 Chain: p12_ck_research_pipeline_fetch_sources -> this -> p12_ck_research_pipeline_validate_output
 
 WHY THIS IS GOLDEN:

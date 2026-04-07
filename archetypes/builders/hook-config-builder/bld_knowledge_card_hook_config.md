@@ -34,7 +34,7 @@ Hook lifecycle configuration — declares which hooks fire at each build phase. 
 | Overlapping events | Multiple hooks on same event without priority causes race conditions |
 ## Application
 1. Identify the target builder and its 8F pipeline phases
-2. Select appropriate hook events from the patterns above
+2. Select apownte hook events from the patterns above
 3. Define concrete event bindings with phase, action, and condition
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 4096 bytes

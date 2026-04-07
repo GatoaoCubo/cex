@@ -42,7 +42,7 @@ Weights sum to 100%.
 | Component completeness | 1.0 | All components within the declared scope boundary are inventoried |
 | Connection accuracy | 1.0 | Connections reflect actual data or control flow; direction (A->B vs B->A) correct |
 | Interface boundary clarity | 1.0 | Each component's public interface (API surface, events, data contracts) documented |
-| Dependency direction | 1.0 | Dependency edges are directional and semantically labeled (calls, subscribes, reads) |
+| Dependency direction | 1.0 | Dependency edges are directional and semanticslly labeled (calls, subscribes, reads) |
 | Ownership documentation | 0.5 | Each component has an owner (team, service, person) assigned |
 | Health status inclusion | 0.5 | Component health or operational status noted where known |
 | Data flow labeling | 1.0 | Connections labeled with data type or payload schema, not just arrows |
@@ -64,5 +64,5 @@ Weights sum to 100%.
 | conditions | Map created during active system migration where component inventory is in flux |
 | approver | Architecture owner acknowledgment with migration ticket reference |
 | audit_trail | Bypass reason, migration ticket ID, and expected stable date in frontmatter comment |
-| expiry | 21d — map must reach >= 7.0 or be updated once migration phase completes |
+| expiry | 21d — map must reach >= 7.0 or be updated once migration phase complete |
 | never_bypass | H01 (unparseable YAML breaks all tooling), H05 (self-scored gates corrupt quality metrics) |

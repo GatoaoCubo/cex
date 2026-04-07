@@ -26,7 +26,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string] len >= 3 | YES | - | Must include "red_team_eval" |
 | tldr | string <= 160ch | YES | - | Dense summary |
 | description | string <= 200ch | REC | - | What the eval tests |
-| framework | enum: promptfoo, patronus, deepeval, garak, custom | REC | - | Eval framework used |
+| framework | enum: promptfoo, patronus, deepeval, garak, costm | REC | - | Eval framework used |
 | severity | enum: critical, high, medium, low | REC | - | Risk level if attacks succeed |
 | test_count | integer >= 1 | REC | - | Number of adversarial test cases |
 | owasp_refs | list[string] | REC | - | OWASP LLM Top 10 references |

@@ -42,7 +42,7 @@ few_shot:
     output: "{{example_output_2}}"
     score: {{score_within_scale}}
     rationale: "{{why_this_score}}"
-framework: {{braintrust|deepeval|ragas|promptfoo|openai_evals|custom}}
+framework: {{braintrust|deepeval|ragas|promptfoo|openai_evals|costm}}
 temperature: {{0.0}}
 chain_of_thought: {{true|false}}
 aggregation: {{mean|min|max|weighted_sum}}

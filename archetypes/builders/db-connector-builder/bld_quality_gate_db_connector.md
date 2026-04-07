@@ -33,7 +33,7 @@ All must pass (AND logic). Any single failure = REJECT.
 | H05 | Quality field is null | `quality: 8.0` or any non-null value |
 | H06 | All required fields present | Missing `service`, `protocol`, or `auth_strategy` |
 | H07 | Both inbound and outbound directions represented | Only inbound or only outbound endpoints defined — that is a client, not a connector |
-| H08 | Protocol is one of: rest, websocket, grpc, mqtt | `protocol: custom` without documented justification |
+| H08 | Protocol is one of: rest, websocket, grpc, mqtt | `protocol: costm` without documented justification |
 | H09 | Health check strategy defined | `health_check` field absent; connector must document liveness verification |
 | H10 | Transform rules defined for at least one endpoint | Connector passes raw data without any mapping — transforms must be explicit |
 ## SOFT Scoring

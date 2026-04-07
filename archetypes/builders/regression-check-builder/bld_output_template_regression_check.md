@@ -26,7 +26,7 @@ quality: null
 tags: [regression_check, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 description: "{{what_this_check_compares_max_200ch}}"
-tool: {{braintrust|promptfoo|langsmith|deepeval|custom}}
+tool: {{braintrust|promptfoo|langsmith|deepeval|costm}}
 comparison_mode: {{relative|absolute}}
 fail_action: {{block|warn|log}}
 notify: [{{owner_or_channel_1}}, {{owner_or_channel_2}}]

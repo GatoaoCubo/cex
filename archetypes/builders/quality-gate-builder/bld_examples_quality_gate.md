@@ -8,7 +8,7 @@ purpose: Golden and anti-examples of quality_gate artifacts
 
 # Examples: quality-gate-builder
 ## Golden Example
-INPUT: "Define gate pra knowledge_cards antes de publicar no pool"
+INPUT: "Define gate for knowledge_cards antes de publicar no pool"
 OUTPUT:
 ```yaml
 id: p11_qg_kc_publish

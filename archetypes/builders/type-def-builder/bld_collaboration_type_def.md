@@ -14,7 +14,7 @@ I produce reusable type vocabulary — primitive, composite, union, and algebrai
 ## Crew Compositions
 ### Crew: "Domain Type Modeling"
 ```
-  1. type-def-builder -> "defines custom types: shapes, constraints, serialization rules"
+  1. type-def-builder -> "defines costm types: shapes, constraints, serialization rules"
   2. validation-schema-builder -> "uses type_def vocabulary to build post-generation field contracts"
   3. validator-builder -> "references type_def constraints to write individual pass/fail rules"
 ```

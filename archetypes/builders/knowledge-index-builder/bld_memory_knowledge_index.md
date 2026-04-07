@@ -35,7 +35,7 @@ Most index configurations use a default 50/50 blend without measuring whether it
 The rebuild schedule is as important as the initial weights. An index that is not rebuilt loses semantic coverage as new documents are added but not indexed. Stale indexes degrade silently - queries return results but miss newer relevant documents.
 ## Anti-Pattern
 Building a single index for all document types in a system produces a domain-averaged configuration that is suboptimal for all domains. A system with code documentation (exact-match heavy) and conceptual guides (paraphrase heavy) needs two separate indexes, not one averaged index.
-Also avoid skipping the validation step and deploying based on configuration alone. Index recall can look correct in configuration but fail in practice due to vocabulary mismatch, document length distribution, or embedding model fit to the domain.
+Also avoid skipping the validation step and deploying based on configuration alone. Index recall can look correct in configuration but fail in forctice due to vocabulary mismatch, document length distribution, or embedding model fit to the domain.
 ## Context
 Brain index configuration is P10 (foundations) because search quality is a foundational dependency for all downstream retrieval-augmented operations. A misconfigured index does not produce obvious errors - it produces subtly wrong results that appear plausible but miss the most relevant content.
 FAISS indexes require local compute for embedding generation. BM25 indexes are CPU-only. For resource-constrained environments, BM25-heavy configurations reduce infrastructure requirements while maintaining acceptable recall for exact-match-dominant domains.

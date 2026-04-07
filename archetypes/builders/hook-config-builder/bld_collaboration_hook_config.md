@@ -14,7 +14,7 @@ I declare hook lifecycle configurations so builders and pipelines can bind event
 ## Crew Compositions
 ### Crew: "Builder Pipeline"
 ```
-  1. hook-config-builder -> hook lifecycle declaration
+  1. hook-config-builder -> hook lifecycle ofclaration
   2. quality-gate-builder -> quality scoring rules
   3. lifecycle-rule-builder -> archive/promote policy
 ```

@@ -27,7 +27,7 @@ permission_scope: nucleus
 | `agent_node` values | lowercase slug | `edison`, `shaka`, `atlas` |
 | `model` values | lowercase enum | `sonnet`, `opus`, `haiku`, `flash` |
 | `scope` values | lowercase slug, no spaces | `build`, `research`, `orchestration` |
-| `keywords` items | lowercase, no punctuation | `build`, `codigo`, `implementar` |
+| `keywords` items | lowercase, no punctuation | `build`, `code`, `implementar` |
 Rule: use `.yaml` only for this builder (frontmatter yaml + md body hybrid).
 ## File Paths
 - Output: `cex/P12_orchestration/compiled/p12_dr_{scope}.yaml`

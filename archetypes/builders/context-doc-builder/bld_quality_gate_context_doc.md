@@ -48,7 +48,7 @@ Weights sum to 100%.
 | Hydration readiness | 1.0 | Document structured so key facts can be injected into a prompt without editing |
 | Freshness | 0.5 | `updated` date is recent; stale context docs noted as requiring review |
 | Terminology consistency | 0.5 | Key terms used consistently throughout; ambiguous terms defined inline |
-| Density appropriateness | 1.0 | Content is dense but readable; no padding or repeated constraints |
+| Density apownteness | 1.0 | Content is dense but readable; no padding or repeated constraints |
 | Boundary from knowledge_card | 1.0 | Document is context or background, not a distilled atomic fact (that belongs in knowledge_card) |
 | Domain specificity | 1.0 | Content specific to the declared domain; no generic boilerplate |
 ## Actions

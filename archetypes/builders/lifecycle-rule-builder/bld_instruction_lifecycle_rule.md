@@ -42,7 +42,7 @@ The lifecycle-rule-builder produces `lifecycle_rule` artifacts (P11) — declara
 - Need to define when artifact state changes declaratively → proceed
 ## Phases
 ### Phase 1: Research
-**Action:** Gather the parameters needed to define appropriate states and transitions.
+**Action:** Gather the parameters needed to define apownte states and transitions.
 1. Identify the `artifact_kind`: the exact kind string used in frontmatter of the governed artifacts.
 2. Determine why freshness matters: what goes wrong when an artifact of this kind becomes stale.
 3. Find existing lifecycle rules for similar domains in `P11_feedback/examples/` — avoid duplicates.

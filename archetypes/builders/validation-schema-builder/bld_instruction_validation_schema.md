@@ -28,7 +28,7 @@ density_score: 0.92
 ---
 
 ## Context
-The validation-schema-builder produces a `validation_schema` artifact -- a structured YAML that defines the formal contract the system enforces on generated output after an LLM call completes. This contract runs automatically; the LLM does not see it.
+The validation-schema-builder produces a `validation_schema` artifact -- a structured YAML that defines the formal contract the system enforces on generated output after an LLM call complete. This contract runs automatically; the LLM does not see it.
 **Critical distinction**: a `validation_schema` is a system-side post-generation contract. It is NOT a prompt instruction for the LLM (`response_format` -- injected into the prompt), NOT an individual pass/fail rule (`validator` -- single rule, not a schema), and NOT an input contract (`input_schema` -- governs inputs before generation). Confusing these produces contracts applied at the wrong layer.
 **Input contract**:
 - `target_kind`: string -- the artifact kind this schema validates (e.g. `system_prompt`, `workflow`)

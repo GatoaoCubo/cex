@@ -25,13 +25,13 @@ recommended:
 
 ## Example 2: Pet Shop Premium (PT-BR)
 
-**Input**: Brand=PetRoyal, Industry=pet-care, Audience=classe A/B donas de pets, Tone=carinhoso-premium, USP="spa e nutricionista pra seu pet"
+**Input**: Brand=PetRoyal, Industry=pet-care, Audience=classe A/B donas de pets, Tone=carinhoso-premium, USP="spa e nutricionista for seu pet"
 
 **Output**:
 ```yaml
 recommended:
   text: "Seu pet merece o melhor. Nos sabemos qual."
-  reasoning: "Emocional + funcional. Implica expertise sem ser arrogante. 9 palavras, tom carinhoso-premium."
+  reasoning: "Emocional + functional. Implica expertise sem ser arrogante. 9 palavras, tom carinhoso-premium."
 variants:
   short:
     - text: "Realeza tem quatro patas."
@@ -39,16 +39,16 @@ variants:
     - text: "Amor com ciencia."
       approach: functional
   provocative:
-    - text: "Racao de supermercado? Seu pet discorda."
+    - text: "Raction de supermercado? Seu pet discorda."
       approach: provocative
 ```
 
 ## Anti-Example (what NOT to produce)
 ```yaml
 # BAD: Generic, fits any brand
-- "Inovacao que transforma"        # could be any company
-- "Excelencia em cada detalhe"     # zero differentiation
+- "Inovaction que transforma"        # could be any company
+- "Excelencia em each detalhe"     # zero differentiation
 - "Seu parceiro de confianca"      # meaningless
 # BAD: Too long
-- "A plataforma completa que integra todas as suas necessidades em um so lugar"  # 13 words, not memorable
+- "A plataforma complete que integra todas as suas necessidades em um so lugar"  # 13 words, not memorable
 ```

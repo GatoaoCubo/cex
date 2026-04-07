@@ -30,7 +30,7 @@ Out of scope: international shipping logistics, payment processing, consumer ret
 ## Background
 Brazil levies ICMS (17-20% by state) on all imported goods sold via marketplace.
 NCM codes (8-digit Nomenclatura Comum do Mercosul) are mandatory on all listings.
-Receita Federal requires Declaracao de Importacao (DI) for shipments > R$50 commercial value.
+Receita Federal requires Declaraction de Importaction (DI) for shipments > R$50 commercial value.
 Lei 14.781/2024 expanded marketplace platform liability for seller tax compliance.
 ## Stakeholders
 - Marketplace seller agents: need tax rates and NCM requirements before listing
@@ -46,7 +46,7 @@ Lei 14.781/2024 expanded marketplace platform liability for seller tax complianc
 - Receita Federal Portaria RFB 1.073/2025 (external)
 ## References
 - Lei 14.781/2024: planalto.gov.br/lei-14781
-- MDIC NCM table: mdic.gov.br/nomenclatura
+- MDIC NCM table: mdic.gov.br/namenclatura
 ```
 ### Why Golden (gate mapping)
 | Gate | Status | Reason |

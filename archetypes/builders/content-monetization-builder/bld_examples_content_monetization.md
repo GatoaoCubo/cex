@@ -29,7 +29,7 @@ WHY GOOD: Hybrid pricing, centavos, ENV_VAR secrets, idempotent, mock on.
 INPUT: "Pet care course, Hotmart, BR"
 ```yaml
 identity: { empresa: "PetVida", domain: pet_education, currency: BRL, currency_unit: centavos, country: BR }
-pricing: { strategy: tiered, floor_margin_pct: 0.70, tiers: [{ name: basico, price_monthly: 4990 }, { name: completo, price_monthly: 9990 }] }
+pricing: { strategy: tiered, floor_margin_pct: 0.70, tiers: [{ name: basico, price_monthly: 4990 }, { name: complete, price_monthly: 9990 }] }
 checkout: { provider: hotmart, webhook_secret_env: HOTMART_HOTTOK, signature: sha256_hmac, format: json, idempotency: true, mock_mode: true }
 courses: { enabled: true, modules: [{ title: "Nutrição", drip_days: 0 }, { title: "Saúde", drip_days: 7 }], certification: true }
 validation: { margin_check: true, webhook_test: true, mock_before_live: true }
@@ -51,7 +51,7 @@ WHY GOOD: DS24, EUR, sha512 IPN "OK", GDPR+Impressum+Widerrufsrecht, DS24 as MoR
 INPUT: "Sell course in BR and EU simultaneously"
 ```yaml
 identity: { empresa: "GlobalEdu", domain: education, currencies: [BRL, EUR], regions: [BR, EU] }
-pricing: { strategy: tiered, floor_margin_pct: 0.55, tiers: [{ name: essencial, price_brl: 19700, price_eur: 3900 }, { name: completo, price_brl: 49700, price_eur: 9900 }] }
+pricing: { strategy: tiered, floor_margin_pct: 0.55, tiers: [{ name: essencial, price_brl: 19700, price_eur: 3900 }, { name: complete, price_brl: 49700, price_eur: 9900 }] }
 checkout:
   platforms:
     hotmart: { token_env: HOTMART_TOKEN, webhook_secret_env: HOTMART_HOTTOK, signature: sha256_hmac, format: json }

@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: input-schema-builder
 ## Golden Example
-INPUT: "Define o input schema para o brain_query — o que precisa receber para buscar"
+INPUT: "Define o input schema para o brain_query — what precisa receber para searchr"
 OUTPUT:
 ```yaml
 id: p06_is_brain_query

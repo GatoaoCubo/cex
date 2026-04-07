@@ -26,7 +26,7 @@ sources:
   rag: [local_docs]
 storm_perspectives:
   - {role: buyer, focus: "preco frete reviews confianca"}
-  - {role: seller, focus: "posicionamento pricing qualidade listing"}
+  - {role: seller, focus: "positioning pricing quality listing"}
   - {role: analyst, focus: "tendencias volume sazonalidade crescimento"}
   - {role: marketer, focus: "keywords SEO content-gaps social-proof"}
   - {role: consumer_researcher, focus: "pain-points necessidades sentimento"}
@@ -48,7 +48,7 @@ quality:
   critic_max_iterations: 3
   final_min_score: 8.0
 ```
-WHY GOOD: All source categories covered, STORM perspectives customized to niche, budget caps defined, multi-model routing by task, quality gates explicit.
+WHY GOOD: All source categories covered, STORM perspectives costmized to niche, budget caps defined, multi-model routing by task, quality gates explicit.
 
 ## Anti-Example — Single Source Research
 ```python
@@ -83,4 +83,4 @@ budget:
   exa_monthly: 1000
 quality: { crag_min_score: 0.7, critic_max_iterations: 3, final_min_score: 8.0 }
 ```
-WHY GOOD: SaaS-specific sources (G2, Capterra), developer perspective, different model choices, appropriate budget for SaaS research volume.
+WHY GOOD: SaaS-specific sources (G2, Capterra), developer perspective, different model choices, apownte budget for SaaS research volume.

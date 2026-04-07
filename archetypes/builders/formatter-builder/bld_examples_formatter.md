@@ -48,21 +48,21 @@ Type: structured_data
 Structure: list of product objects with title, price, rating, stock, seller fields.
 Example:
 ```json
-[{"product_title": "Kit Decoracao Sala", "product_price": 149.90, "product_rating": 4.7,
+[{"product_title": "Kit Decoraction Sala", "product_price": 149.90, "product_rating": 4.7,
   "stock_status": "em estoque", "seller_name": "Loja Casa & Cia"}]
 ```
 ## Output Specification
 Format: markdown
 Example:
 ```markdown
-| Produto | Preco | Avaliacao | Estoque | Vendedor |
+| Produto | Preco | Avaliaction | Estoque | Vendedor |
 |---------|-------|-----------|---------|----------|
-| Kit Decoracao Sala | R$ 149,90 | 4.7/5.0 | EM ESTOQUE | Loja Casa & Cia |
+| Kit Decoraction Sala | R$ 149,90 | 4.7/5.0 | EM ESTOQUE | Loja Casa & Cia |
 ```
 ## Template
 Engine: string_format
 ```text
-| Produto | Preco | Avaliacao | Estoque | Vendedor |
+| Produto | Preco | Avaliaction | Estoque | Vendedor |
 |---------|-------|-----------|---------|----------|
 {rows}
 ```

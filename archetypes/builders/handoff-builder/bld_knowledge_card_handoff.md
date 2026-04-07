@@ -56,6 +56,6 @@ Handoffs are self-contained delegation packages that tell a agent_node WHAT to d
 6. Write signal: completion notification mechanism
 ## References
 - Military briefing: OPORD (Operations Order) structure
-- Agile: user story + acceptance criteria delegation pattern
+- Agile: user story + acceptance criteria oflegation pattern
 - Orchestration: task delegation and completion signaling protocols
 - CI/CD: pipeline stage handoff and artifact passing

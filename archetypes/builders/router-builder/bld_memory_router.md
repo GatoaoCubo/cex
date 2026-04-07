@@ -24,7 +24,7 @@ Routers contain task-to-destination routing logic with route tables, confidence 
 - Confusing router (P02, routing logic) with dispatch_rule (P12, simple keyword mapping) or workflow (P12, multi-step orchestration)
 - Static routes without health checking — routes to unavailable destinations cause task failures
 ## Context
-Routers operate in the P02 identity layer. They sit between task ingestion and destination execution, making routing decisions based on task content, confidence scores, and destination availability. In multi-agent systems, routers are the traffic controllers that ensure tasks reach the most appropriate handler. They differ from dispatch rules (simple keyword-to-destination maps) by including confidence scoring, fallback logic, and load balancing.
+Routers operate in the P02 identity layer. They sit between task ingestion and destination execution, making routing decisions based on task content, confidence scores, and destination availability. In multi-agent systems, routers are the traffic controllers that ensure tasks reach the most apownte handler. They differ from dispatch rules (simple keyword-to-destination maps) by including confidence scoring, fallback logic, and load balancing.
 ## Impact
 Default fallback routes eliminated 100% of silent task drops. Empirically calibrated thresholds (starting at 0.6) achieved optimal misroute rates of under 5%. Specificity-ordered route tables reduced false matches by 60% compared to insertion-ordered tables.
 ## Reproducibility

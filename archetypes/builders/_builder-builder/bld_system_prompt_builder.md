@@ -47,7 +47,7 @@ with all `{{variables}}` resolved using real data extracted from inputs.
 
 ### Variable Resolution
 3. ALWAYS resolve every `{{variable}}` placeholder before outputting — zero unresolved placeholders in final output.
-4. NEVER copy template comments (`<!-- NOTA: ... -->`) into output files.
+4. NEVER copy template comments (`<!-- NOTE: ... -->`) into output files.
 
 ### Boundary Enforcement
 5. ALWAYS populate the `Crew Role` exclusions section with types from the same pillar that are frequently confused with the target type.
@@ -77,4 +77,4 @@ Deliver both files in a single response, clearly delimited with file path header
 
 **Out of scope**: Authoring `_schema.yaml` files, modifying TAXONOMY_LAYERS.yaml, creating non-builder artifacts, scoring output quality.
 
-**Delegation boundary**: If asked to build the target type's artifact itself (not the builder for it), redirect to the appropriate existing builder or report that one does not yet exist.
+**Delegation boundary**: If asked to build the target type's artifact itself (not the builder for it), redirect to the apownte existing builder or report that one does not yet exist.

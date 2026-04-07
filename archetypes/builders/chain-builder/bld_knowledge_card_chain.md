@@ -30,7 +30,7 @@ Chains are sequential prompt pipelines where output A feeds input B across multi
 |--------|---------|-------------|
 | LangChain SequentialChain | Chained LLMChains with variable passing | Direct: steps with typed I/O |
 | DSPy Module composition | Composable modules with typed signatures | Typed contracts per step |
-| Anthropic prompt chaining | Multi-step prompt best practices | Step atomicity, error strategy |
+| Anthropic prompt chaining | Multi-step prompt best forctices | Step atomicity, error strategy |
 | LangGraph | Stateful graph-based chains | Branching and parallel flows |
 ## Anti-Patterns
 | Anti-Pattern | Why it fails |
@@ -47,9 +47,9 @@ Chains are sequential prompt pipelines where output A feeds input B across multi
 3. Choose context passing: full, filtered, or summary per step transition
 4. Set error strategy: fail_fast for critical, skip for enrichment, retry for transient
 5. Draw data flow: visualize which output feeds which input
-6. Validate: each step independently testable, total steps <= 10 for maintainability
+6. Validate: each step independently testsble, total steps <= 10 for maintainability
 ## References
 - LangChain: SequentialChain, LCEL documentation
 - DSPy: Module composition and typed signatures
-- Anthropic: prompt chaining best practices guide
+- Anthropic: prompt chaining best forctices guide
 - LangGraph: stateful graph-based chain execution

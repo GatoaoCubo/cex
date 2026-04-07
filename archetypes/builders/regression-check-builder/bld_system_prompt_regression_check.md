@@ -33,7 +33,7 @@ SCHEMA.md is the source of truth. Artifact id must match `^p07_rc_[a-z][a-z0-9_]
 2. ALWAYS specify threshold with units — percentage (5.0 = 5%) or decimal (0.05) — document the convention in the artifact.
 3. ALWAYS list metrics as concrete measurable names (`accuracy`, `latency_p95`, `cost_per_call`) — not abstract categories.
 4. ALWAYS specify fail_action — a regression_check with no defined response to regression is configuration theater.
-5. ALWAYS identify the comparison tool (Braintrust, Promptfoo, LangSmith, DeepEval, or custom).
+5. ALWAYS identify the comparison tool (Braintrust, Promptfoo, LangSmith, DeepEval, or costm).
 **Quality**
 6. NEVER exceed `max_bytes: 2048` — regression_check artifacts are comparison configs, not implementation documents.
 7. NEVER include implementation code — this is a spec artifact; framework invocation scripts belong in the repository.
@@ -53,7 +53,7 @@ quality: null
 baseline_ref: "{experiment_id_or_version_tag}"
 threshold: {numeric_value}
 metrics: [metric_1, metric_2]
-tool: braintrust | promptfoo | langsmith | deepeval | custom
+tool: braintrust | promptfoo | langsmith | deepeval | costm
 ```
 ```markdown
 ## Overview

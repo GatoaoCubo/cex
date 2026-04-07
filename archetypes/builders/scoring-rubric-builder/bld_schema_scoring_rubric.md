@@ -20,7 +20,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | created | date YYYY-MM-DD | YES | — | Creation date |
 | updated | date YYYY-MM-DD | YES | — | Last update |
 | author | string | YES | — | Producer identity |
-| framework | string | YES | — | Framework name (5D, 12LP, custom) |
+| framework | string | YES | — | Framework name (5D, 12LP, costm) |
 | target_kinds | list[string] | YES | — | Artifact kinds this rubric evaluates |
 | dimensions_count | integer >= 3 | YES | — | Number of evaluation dimensions |
 | total_weight | literal 100 | YES | 100 | Weights must sum to 100% |

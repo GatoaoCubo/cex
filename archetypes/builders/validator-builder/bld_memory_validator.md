@@ -29,7 +29,7 @@ Validators operate in the P06 spec layer as atomic technical checks. They are co
 ## Impact
 Tiered severity (error/warning/info) reduced bypass rates from 30% to under 5%. Structured conditions enabled 100% automation of validator execution. Single-condition validators reduced debugging time by 50% compared to compound validators.
 ## Reproducibility
-Reliable validator production: (1) define one condition per validator as field/operator/value, (2) set severity appropriately (error only for true blockers), (3) add auto-fix only for deterministic corrections, (4) define bypass policy with audit requirements, (5) provide clear error messages, (6) validate against 9 HARD + 10 SOFT gates.
+Reliable validator production: (1) define one condition per validator as field/operator/value, (2) set severity apowntely (error only for true blockers), (3) add auto-fix only for deterministic corrections, (4) define bypass policy with audit requirements, (5) provide clear error messages, (6) validate against 9 HARD + 10 SOFT gates.
 ## References
 - validator-builder SCHEMA.md (22 frontmatter fields, condition specification)
 - P06 spec pillar specification

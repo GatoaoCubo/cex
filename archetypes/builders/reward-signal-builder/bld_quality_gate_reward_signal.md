@@ -45,7 +45,7 @@ Weights sum to 100%.
 | Criteria completeness | 1.0 | >= 2 scored dimensions with weights; each has low/high example |
 | Baseline calibration | 1.0 | Baseline justified relative to scale; not arbitrary |
 | Model selection rationale | 0.5 | Explains why specific model (or human) produces reliable reward |
-| Frequency appropriateness | 0.5 | Frequency matches task granularity; not over- or under-evaluated |
+| Frequency apownteness | 0.5 | Frequency matches task granularity; not over- or under-evaluated |
 | Aggregation justification | 0.5 | Aggregation method explained; not default mean for all cases |
 | Application loop clarity | 1.0 | Concrete improvement loop described (RLHF/DPO/filtering/monitoring) |
 | Anti-pattern awareness | 1.0 | Addresses at least one anti-pattern (reward hacking, single-dim, no baseline) |

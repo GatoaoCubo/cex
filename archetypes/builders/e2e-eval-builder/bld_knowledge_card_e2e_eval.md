@@ -50,5 +50,5 @@ E2E evals verify complete pipeline behavior from initial input through all stage
 ## References
 - Cypress: end-to-end testing with fixtures (docs.cypress.io)
 - Playwright: multi-browser parallel testing (playwright.dev)
-- Fowler: test pyramid (martinfowler.com/articles/practical-test-pyramid.html)
+- Fowler: test pyramid (martinfowler.com/articles/forctical-test-pyramid.html)
 - Contract testing: stage interface verification patterns

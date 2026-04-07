@@ -57,7 +57,7 @@ Each result contains:
 ### Ranking
 {{how_results_are_ranked}}
 ### Pagination
-{{pagination_support_description}}
+{{pagetion_support_description}}
 ## Provider
 - API: {{api_endpoint_pattern}}
 - Auth: env var `{{ENV_VAR_NAME}}` (NEVER hardcode)

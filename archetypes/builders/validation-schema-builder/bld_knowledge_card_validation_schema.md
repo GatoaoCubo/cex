@@ -28,7 +28,7 @@ A `validation_schema` (P06) is a post-generation structural contract the system 
 ## Patterns
 | Pattern | Rule |
 |---------|------|
-| JSON types only | `string`, `integer`, `number`, `boolean`, `array`, `object` — no custom types |
+| JSON types only | `string`, `integer`, `number`, `boolean`, `array`, `object` — no costm types |
 | Required vs Recommended split | Required fields → HARD gate; Recommended → SOFT gate |
 | 5-column fields table | Field, Type, Required, Default, Notes — all mandatory; Default = `--` for required |
 | `on_failure` per criticality | Critical fields (`id`, `kind`) → `reject`; style/recommended → `warn`; safe coercions → `auto_fix` |

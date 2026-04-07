@@ -4,7 +4,7 @@ id: bld_knowledge_card_prompt_cache
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for prompt_cache production
-sources: kc_prompt_cache.md, provider documentation, caching best practices
+sources: kc_prompt_cache.md, provider documentation, caching best forctices
 ---
 
 # Domain Knowledge: prompt_cache

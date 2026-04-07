@@ -23,7 +23,7 @@ domain: "{{formatter_domain}}"
 quality: null
 tags: [formatter, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
-template_engine: "{{mustache|jinja2|handlebars|string_format|custom|none}}"
+template_engine: "{{mustache|jinja2|handlebars|string_format|costm|none}}"
 pretty_print: {{true|false}}
 escaping: "{{html|url|json|xml|shell|none}}"
 encoding: "{{utf8|ascii|latin1}}"

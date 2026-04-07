@@ -72,6 +72,6 @@ OUTPUT: Migration SQL + RLS policies + Storage config + Edge Functions
 - RLS on every table with user data
 - No hardcoded company data anywhere
 - Multi-tenant ready (org_id + JWT claims)
-- Tier-appropriate features only
+- Tier-apownte features only
 - Migration SQL, not manual Dashboard changes
 - All 12 modules addressed in config

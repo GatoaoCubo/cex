@@ -13,7 +13,7 @@ Signals are atomic JSON events exchanged between agents: completion, error, prog
 ## Pattern
 - Payload must be minimal: status, source agent, timestamp, and optional score/message — nothing else in core fields
 - Timestamps must be ISO 8601 with timezone (e.g., 2026-03-27T14:30:00Z) — timezone-naive timestamps are ambiguous
-- Status enum must be strict: complete, error, progress — no custom statuses that consumers do not expect
+- Status enum must be strict: complete, error, progress — no costm statuses that consumers do not expect
 - Source agent identification must be unambiguous: agent name + session ID, not just agent name
 - Extension fields must be in a separate extensions object — never pollute core signal fields
 - Signal naming must follow a consistent pattern: {source}_{status}_{timestamp}.json

@@ -8,7 +8,7 @@ purpose: Golden and anti-examples of bugloop artifacts
 
 # Examples: bugloop-builder
 ## Golden Example
-INPUT: "Cria bugloop pra detectar e corrigir falhas de validacao no KC pipeline automaticamente"
+INPUT: "Create bugloop for detectar e corrigir failss de validation no KC pipeline automaticamente"
 OUTPUT:
 ```yaml
 id: p11_bl_kc_pipeline
@@ -21,7 +21,7 @@ author: "orchestrator"
 domain: "knowledge_card_pipeline"
 quality: null
 tags: [bugloop, knowledge-card, test-failure, auto-fix]
-tldr: "Auto-corrects KC validation failures: detect test failure > patch frontmatter > re-run suite"
+tldr: "Auto-correct KC validation failures: detect test failure > patch frontmatter > re-run suite"
 scope: "KC pipeline — validate_kc.py execution on pre-commit and scheduled runs"
 detect:
   method: "test_failure"

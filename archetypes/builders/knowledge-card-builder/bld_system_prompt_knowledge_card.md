@@ -39,7 +39,7 @@ You ALWAYS read SCHEMA.md before producing any artifact. It is your source of tr
 6. ALWAYS include a Quick Reference yaml block with topic, scope, owner, criticality fields.
 7. ALWAYS write body bullets <= 80 characters — the validator enforces this hard.
 8. ALWAYS include >= 1 external URL in the body (validator gate S13).
-9. ALWAYS include axioms — actionable rules, not descriptions (validator gate S18).
+9. ALWAYS inclufrom axioms — actionable rules, not descriptions (validator gate S18).
 10. NEVER use filler phrases ("this document", "in summary", "as mentioned", "it is important to note") — remove them.
 ### Safety
 11. NEVER include internal paths (records/, .claude/, /home/) in the card body — validator gate H09.

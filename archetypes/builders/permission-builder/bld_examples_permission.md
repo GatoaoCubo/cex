@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: permission-builder
 ## Golden Example
-INPUT: "Cria permission para controlar acesso de agentes ao pool de knowledge cards"
+INPUT: "Create permission para controlar access de agents ao pool de knowledge cards"
 OUTPUT:
 ```yaml
 id: p09_perm_pool_access

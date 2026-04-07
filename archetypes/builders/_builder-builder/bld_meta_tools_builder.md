@@ -9,8 +9,8 @@ purpose: Meta-template for generating TOOLS.md of any kind-builder
 ---
 
 # Tools: {{builder_name}}
-<!-- Este meta-file gera o TOOLS.md de qualquer builder -->
-<!-- INPUT OBRIGATORIO: _schema.yaml + tipo de validador existente -->
+<!-- This meta-file generates the TOOLS.md of any builder -->
+<!-- REQUIRED INPUT: _schema.yaml + type de validatar existente -->
 
 ```yaml
 ---
@@ -21,7 +21,7 @@ purpose: Tools and APIs available for {{type_name}} production
 ```
 
 ## Production Tools
-<!-- NOTA: Tabela UNIVERSAL presente em todos os 4 builders -->
+<!-- NOTE: Tabela UNIVERSAL presente em todos os 4 builders -->
 <!-- TOOLS UNIVERSAIS (incluir em todo builder): -->
 
 | Tool | Purpose | When | Status |
@@ -31,16 +31,16 @@ purpose: Tools and APIs available for {{type_name}} production
 | validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |
 | cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |
 
-<!-- NOTA: {{validator_name}} = validador especifico se existir -->
+<!-- NOTE: {{validator_name}} = validatar specific se existir -->
 <!-- - knowledge_card: validate_kc.py (ACTIVE) -->
 <!-- - model_card: validate_artifact.py [PLANNED] -->
-<!-- - signal: nenhum especifico (manual) -->
-<!-- - quality_gate: nenhum especifico (manual) -->
-<!-- NOTA: Adicione tools especificos do dominio se existirem -->
+<!-- - signal: nenhum specific (manual) -->
+<!-- - quality_gate: nenhum specific (manual) -->
+<!-- NOTE: Adicione tools specific do domain se existirem -->
 
 ## Data Sources
-<!-- NOTA: Tabela de fontes de dados para producao -->
-<!-- Varia muito por tipo: -->
+<!-- NOTE: Tabela de fontes de data para producao -->
+<!-- Varia muito por type: -->
 <!-- - model_card: APIs de providers (Anthropic, OpenAI, Google, LiteLLM, HuggingFace) -->
 <!-- - knowledge_card: CEX Schema, CEX Examples, CEX Pool -->
 <!-- - signal: signal_writer.py, spawn_monitor.ps1, P12 schema -->
@@ -53,10 +53,10 @@ purpose: Tools and APIs available for {{type_name}} production
 | {{source_1}} | {{path_1}} | {{data_1}} |
 | {{source_2}} | {{path_2}} | {{data_2}} |
 
-<!-- NOTA: {{lp_dir}} = P01_knowledge, P02_model, P11_feedback, P12_orchestration, etc. -->
+<!-- NOTE: {{lp_dir}} = P01_knowledge, P02_model, P11_feedback, P12_orchestration, etc. -->
 
 ## Tool Permissions
-<!-- NOTA: Secao OBRIGATORIA em todo bld_tools. DENIED > ALLOWED quando conflito -->
+<!-- NOTE: Secao OBRIGATORIA em todo bld_tools. DENIED > ALLOWED quando conflito -->
 
 | Category | Tools | Status |
 |----------|-------|--------|
@@ -64,15 +64,15 @@ purpose: Tools and APIs available for {{type_name}} production
 | DENIED | {{denied_tools_list}} | Explicitly blocked |
 | EFFECTIVE | {{effective_tools_list}} | ALLOWED minus DENIED |
 
-<!-- NOTA: ALLOWED = tools que o builder pode usar -->
-<!-- NOTA: DENIED = tools bloqueadas (de bld_config.disallowed_tools) -->
-<!-- NOTA: EFFECTIVE = resultado final. DENIED sempre vence conflito -->
-<!-- NOTA: Se disallowed_tools = [], entao DENIED = vazio e EFFECTIVE = ALLOWED -->
+<!-- NOTE: ALLOWED = tools que the builder pode usar -->
+<!-- NOTE: DENIED = tools bloqueadas (de bld_config.disallowed_tools) -->
+<!-- NOTE: EFFECTIVE = resultado final. DENIED sempre vence conflito -->
+<!-- NOTE: Se disallowed_tools = [], entao DENIED = vazio e EFFECTIVE = ALLOWED -->
 
 ## Interim Validation
-<!-- NOTA: Fallback quando o validador automatico nao existe -->
+<!-- NOTE: Fallback quando o validatar automatico nao existe -->
 <!-- Padrao UNIVERSAL: -->
 {{interim_validation_text}}
-<!-- Se validador ACTIVE: "Run {validator} before committing. No manual checking needed." -->
-<!-- Se validador PLANNED: "Manually check each QUALITY_GATES.md gate against produced artifact." -->
-<!-- Incluir checklist minimo para validacao manual -->
+<!-- Se validatar ACTIVE: "Run {validator} before committing. No manual checking needed." -->
+<!-- Se validatar PLANNED: "Manually check each QUALITY_GATES.md gate against produced artifact." -->
+<!-- Incluir checklist minimal para validation manual -->

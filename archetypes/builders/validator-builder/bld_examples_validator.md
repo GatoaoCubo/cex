@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: validator-builder
 ## Golden Example
-INPUT: "Cria um validator que garante que todo knowledge_card tem quality null"
+INPUT: "Create um validator que garante que todo knowledge_card tem quality null"
 OUTPUT:
 ```yaml
 id: p06_val_kc_quality_null

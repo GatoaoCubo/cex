@@ -13,7 +13,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. Map every endpoint the client uses: HTTP method, path, query params, and return types
 3. Determine auth strategy: none, api_key, oauth, jwt, or basic
 4. Define rate limits (requests per second/minute) and retry policy (max retries, backoff)
-5. Identify pagination pattern: cursor, offset, page-number, or none
+5. Identify pagetion pattern: cursor, offset, page-number, or none
 6. Determine serialization format: json, xml, or protobuf
 7. Check for existing client artifacts to avoid duplicates
 8. Confirm API slug for id: snake_case, lowercase, no hyphens

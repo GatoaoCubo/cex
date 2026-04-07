@@ -59,7 +59,7 @@ quality: null
 attack_types: [prompt_injection, jailbreak]
 target: "{agent_or_prompt_name}"
 pass_criteria: "{observable_safe_behavior}"
-framework: promptfoo | garak | deepeval | patronus | custom
+framework: promptfoo | garak | deepeval | patronus | costm
 max_bytes: 2048
 ```
 ```markdown

@@ -31,7 +31,7 @@ tags: [eval_dataset, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 description: "{{what_dataset_covers_max_200ch}}"
 source: "{{human|synthetic|scraped|adversarial|hybrid}}"
-framework: "{{braintrust|langsmith|deepeval|huggingface|custom}}"
+framework: "{{braintrust|langsmith|deepeval|huggingface|costm}}"
 task_type: "{{classification|qa|summarization|tool_use|reasoning|other}}"
 language: "{{en|pt|es|...}}"
 license: "{{MIT|CC-BY-4.0|proprietary|...}}"
@@ -67,7 +67,7 @@ Total: 100% ({{total_cases}} cases)
 Split rationale: {{why_these_percentages_were_chosen}}
 
 ## Integration
-Framework: {{braintrust|langsmith|deepeval|huggingface|custom}}
+Framework: {{braintrust|langsmith|deepeval|huggingface|costm}}
 Loading:
 ```python
 {{framework_loading_snippet_5_to_10_lines}}

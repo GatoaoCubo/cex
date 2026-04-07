@@ -47,7 +47,7 @@ Format: html
 Structure: standard marketplace product page with semantic CSS classes.
 Example:
 ```html
-<h1 class="product-title">Kit Decoracao Sala</h1>
+<h1 class="product-title">Kit Decoraction Sala</h1>
 <span class="price-current">R$ 149,90</span>
 <span class="rating-value">4.7</span>
 ```

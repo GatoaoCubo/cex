@@ -23,7 +23,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Lifecycle section: startup sequence, restart conditions, and graceful shutdown procedure
 5. Write Schedule section: concrete cron expression, interval value, or the word "continuous" — never vague
-6. Write Signal Handling section: table with each signal (SIGTERM, SIGINT, SIGHUP, custom) and its handler behavior
+6. Write Signal Handling section: table with each signal (SIGTERM, SIGINT, SIGHUP, costm) and its handler behavior
 7. Write Health Check section: mechanism type, check interval, timeout, and expected healthy response
 8. Write Resource Limits section: memory ceiling, CPU shares, max file descriptors
 9. Write Monitoring section: metrics to expose, alerting thresholds, log rotation policy

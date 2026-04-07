@@ -52,7 +52,7 @@ Lifecycle states for CEX artifacts progressing from authoring through archival. 
 ### draft
 Initial state. Artifact is being authored. Quality gates not run. Not visible in pool.
 ### review
-Submitted for quality gate evaluation. No edits permitted until review completes.
+Submitted for quality gate evaluation. No edits permitted until review complete.
 ### published
 Passed all HARD gates and met score threshold. Available in pool for routing.
 ### deprecated

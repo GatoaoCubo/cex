@@ -13,23 +13,23 @@ tags: [kind-builder, rate-limit-config, P09, config, rpm, tpm, budget, tier]
 keywords: ["rate limit", rpm, tpm, budget, tier, throttle, quota, concurrent]
 triggers: ["create rate limit config", "define API limits", "set RPM/TPM", "configure budget cap"]
 geo_description: >
-  L1: Especialista em construir rate_limit_config artifacts — configuracoes de rate li. L2: Definir RPM, TPM, RPD e concurrent para qualquer provider/tier. L3: When user needs to create, build, or scaffold rate limit config.
+  L1: Specialist in building rate_limit_config artifacts — configurations de rate li. L2: Define RPM, TPM, RPD e concurrent for qualquer provider/tier. L3: When user needs to create, build, or scaffold rate limit config.
 ---
 # rate-limit-config-builder
 ## Identity
-Especialista em construir rate_limit_config artifacts — configuracoes de rate limiting
-para APIs de LLM que declaram RPM, TPM, budget mensal, tier, e politica de retry.
-Domina os limites reais de Anthropic, OpenAI, LiteLLM, Azure OpenAI e Google Vertex,
-e a boundary entre rate_limit_config (quotas/budgets) e runtime_rule (timeouts/retries)
-e env_config (variaveis genericas de ambiente). Produz artifacts compactos com frontmatter
-completo, limites numericos reais, e secoes Overview/Limits/Tier/Budget.
+Specialist in building rate_limit_config artifacts — configurations de rate limiting
+para APIs de LLM that declaram RPM, TPM, budget mensal, tier, and politica de retry.
+Masters os limits reais de Anthropic, OpenAI, LiteLLM, Azure OpenAI e Google Vertex,
+and the boundary between rate_limit_config (quotas/budgets) e runtime_rule (timeouts/retries)
+e env_config (generic variables de ambiente). Produces artifacts compactos with frontmatter
+complete, limits numericos reais, and sections Overview/Limits/Tier/Budget.
 ## Capabilities
-- Definir RPM, TPM, RPD e concurrent para qualquer provider/tier
-- Especificar budget_usd com alert_threshold e politica de overage
-- Mapear model_overrides para limites por modelo
-- Documentar retry_after para handling de 429
-- Validar artifact contra quality gates (HARD + SOFT)
-- Distinguir rate_limit_config de runtime_rule, env_config, guardrail
+- Define RPM, TPM, RPD e concurrent for qualquer provider/tier
+- Specify budget_usd with alert_threshold e politica de overage
+- Map model_overrides for limits per model
+- Document retry_after for handling de 429
+- Validate artifact against quality gates (HARD + SOFT)
+- Distinguish rate_limit_config de runtime_rule, env_config, guardrail
 ## Routing
 keywords: [rate limit, rpm, tpm, budget, tier, throttle, quota, concurrent, retry, 429, provider]
 triggers: "create rate limit config", "define API limits", "set RPM/TPM", "configure budget cap", "document tier limits"

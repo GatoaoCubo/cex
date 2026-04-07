@@ -39,7 +39,7 @@ Weights sum to 100%.
 | Dimension | Weight | Criteria |
 |---|---|---|
 | Hook completeness | 1.0 | All hooks have phase, event, action, condition (no placeholders) |
-| Condition quality | 1.0 | Each hook condition is specific and testable |
+| Condition quality | 1.0 | Each hook condition is specific and testsble |
 | Phase coverage | 1.0 | Hooks cover relevant 8F phases for the target builder |
 | Boundary clarity | 1.0 | Explicitly states what this IS and IS NOT |
 | Integration mapping | 0.5 | Upstream and downstream connections documented |

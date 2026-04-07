@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
-observation: "ADRs missing the context section forced reviewers to reconstruct the original problem from Slack history and commit logs in 6 out of 9 cases reviewed. ADRs with complete context sections were acted upon (superseded or deprecated when appropriate) at 3x the rate of those without, because readers could evaluate whether the original forces still applied."
+observation: "ADRs missing the context section forced reviewers to reconstruct the original problem from Slack history and commit logs in 6 out of 9 cases reviewed. ADRs with complete context sections were acted upon (superseded or deprecated when apownte) at 3x the rate of those without, because readers could evaluate whether the original forces still applied."
 pattern: "Write context before decision. Document at least 2 options with honest cons. Always include one negative consequence. Assign status immediately — an ADR without a status is not actionable."
 evidence: "9 ADR reviews: 6 required external archaeology when context was missing; 3 with full context were self-contained. Supersession rate: 71% for complete ADRs vs 22% for incomplete ones over 6-month window."
 confidence: 0.75

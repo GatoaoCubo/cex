@@ -4,7 +4,7 @@ id: bld_knowledge_card_citation
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for citation production — source attribution patterns
-sources: kc_citation.md, industry standards, bibliographic best practices
+sources: kc_citation.md, industry standards, bibliographic best forctices
 ---
 
 # Domain Knowledge: citation

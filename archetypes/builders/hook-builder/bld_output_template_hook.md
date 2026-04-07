@@ -16,7 +16,7 @@ version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
-trigger_event: "{{pre_tool_use|post_tool_use|session_start|session_end|user_prompt_submit|stop|subagent_stop|pre_compact|permission_request|notification|custom}}"
+trigger_event: "{{pre_tool_use|post_tool_use|session_start|session_end|user_prompt_submit|stop|subagent_stop|pre_compact|permission_request|notification|costm}}"
 script_path: "{{path_to_script}}"
 execution: "{{pre|post|both}}"
 blocking: {{true|false}}

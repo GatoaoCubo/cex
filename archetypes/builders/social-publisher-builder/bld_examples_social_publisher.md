@@ -19,7 +19,7 @@ identity:
   nicho: pet
   tom: casual, acolhedor
   persona: Ro
-  bio: "Design minimalista para gatos exigentes"
+  bio: "Design minimalist para gatos exigentes"
 platforms: [instagram, facebook]
 schedule:
   timezone: America/Sao_Paulo
@@ -49,7 +49,7 @@ publisher:
   retry: { max: 3, backoff: exponential, base_seconds: 30 }
 hashtags:
   brand: ["gato3", "gatoaocubo"]
-  niche: ["produtosparagatos", "designminimalista", "petlovers"]
+  niche: ["produtosparagatos", "designminimalist", "petlovers"]
   max_per_post: 10
 notifications:
   discord_webhook_env: DISCORD_WEBHOOK_URL
@@ -62,7 +62,7 @@ WHY GOOD: Zero hardcoded secrets, all company data in config, percentages sum to
 COMPANY = "GATO3"
 API_KEY = "sk-abc123..."  # LEAKED SECRET
 def post_to_instagram():
-    caption = f"Nova colecao {COMPANY}! 🐱"  # hardcoded template
+    caption = f"Nova collection {COMPANY}! 🐱"  # hardcoded template
     ayrshare.post(caption, api_key=API_KEY)   # no retry
 ```
 WHY BAD: Hardcoded name, plaintext API key, no retry, no rotation, single platform, no quality gate.

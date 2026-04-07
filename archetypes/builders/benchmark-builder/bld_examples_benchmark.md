@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: benchmark-builder
 ## Golden Example
-INPUT: "Cria benchmark de latencia TTFT comparando Sonnet 4 vs Haiku 4.5"
+INPUT: "Create benchmark de latency TTFT comparando Sonnet 4 vs Haiku 4.5"
 OUTPUT:
 ```yaml
 id: p07_bm_ttft_sonnet4_vs_haiku45

@@ -15,7 +15,7 @@ purpose: Component map of glossary_entry — inventory, dependencies, and archit
 | synonyms | Alternative names or abbreviations for the same concept | glossary_entry | optional |
 | related_terms | Other glossary entries that share conceptual proximity | glossary_entry | optional |
 | disambiguation | Clarification when the term overlaps with a similar concept | glossary_entry | conditional |
-| usage_context | Short note on where or how the term appears in practice | glossary_entry | optional |
+| usage_context | Short note on where or how the term appears in forctice | glossary_entry | optional |
 ## Dependency Graph
 ```
 knowledge_card (P01) --produces--> glossary_entry

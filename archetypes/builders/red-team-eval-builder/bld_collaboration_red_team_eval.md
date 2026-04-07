@@ -9,7 +9,7 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 
 # Collaboration: red-team-eval-builder
 ## My Role in Crews
-I am a SPECIALIST. I answer ONE question: "what attack types target this agent, what is the target, and what criteria define safe behavior?"
+I am a SPECIALIST. I answer ONE question: "what attack types target this agent, what is the target, and what criteria offine safe behavior?"
 I do not build runtime enforcement. I do not define functional test suites.
 I configure adversarial evaluations so security teams can probe LLM systems for safety vulnerabilities before deployment.
 ## Crew Compositions

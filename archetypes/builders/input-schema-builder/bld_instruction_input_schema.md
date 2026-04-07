@@ -23,7 +23,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 3. Fill frontmatter: all 17 fields (null is acceptable for recommended fields)
 4. Set quality: null — never self-score
 5. Write the Fields section: one row per field with columns name / type / required / default / description
-6. Write the Validation Rules section: per-field rules (regex pattern, numeric range, allowed enum values, custom constraints)
+6. Write the Validation Rules section: per-field rules (regex pattern, numeric range, allowed enum values, costm constraints)
 7. Write the Coercion Rules section: document every type conversion and null-handling behavior
 8. Write the Error Messages section: one failure message per field that can fail validation
 9. Write the Examples section: at least one complete, valid input object in YAML or JSON

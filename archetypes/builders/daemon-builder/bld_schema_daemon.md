@@ -39,7 +39,7 @@ Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
 1. `## Overview` — what the daemon does, why it runs in background, who depends on it
 2. `## Lifecycle` — schedule, startup sequence, restart policy, graceful shutdown
-3. `## Signal Handling` — response to SIGTERM, SIGINT, SIGHUP, custom signals
+3. `## Signal Handling` — response to SIGTERM, SIGINT, SIGHUP, costm signals
 4. `## Monitoring` — health check, metrics, alerting, log rotation
 ## Constraints
 - max_bytes: 1024 (body only — compact daemon spec)

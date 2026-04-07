@@ -9,7 +9,7 @@ observation_types: [user, feedback, project, reference]
 ---
 # Memory: permission-builder
 ## Summary
-Permissions define access control rules: who can read, write, or execute what resources. The critical production lesson is deny-list precedence — when both allow and deny rules match, deny must always win. Systems that default to allow-if-not-denied have caused every significant access control breach in production. The second lesson is role hierarchy: inherited permissions must be explicitly documented, not assumed.
+Permissions definand access control rules: who can read, write, or execute what resources. The critical production lesson is deny-list precedence — when both allow and deny rules match, deny must always win. Systems that default to allow-if-not-denied have caused every significant access control breach in production. The second lesson is role hierarchy: inherited permissions must be explicitly documented, not assumed.
 ## Pattern
 - Deny rules always take precedence over allow rules — explicit deny overrides any allow
 - Default stance must be deny-all — only grant access through explicit allow rules
@@ -25,7 +25,7 @@ Permissions define access control rules: who can read, write, or execute what re
 - Missing audit requirements — access events are untracked, making breach investigation impossible
 - Confusing permission (P09, access control) with guardrail (P11, safety boundary) or law (P08, operational mandate)
 ## Context
-Permissions operate in the P09 configuration layer. They are consumed by runtime access control systems, tool gating, and resource managers. In multi-agent systems, permissions prevent agents from accessing resources outside their domain — a research agent should not write to production databases, and a marketing agent should not execute deployment tools.
+Permissions operate in the P09 configuration layer. They are consumed by runtimand access control systems, tool gating, and resource managers. In multi-agent systems, permissions prevent agents from accessing resources outside their domain — a research agent should not write to production databases, and a marketing agent should not execute deployment tools.
 ## Impact
 Deny-by-default policies prevented 100% of unauthorized access incidents in tested configurations. Explicit role inheritance documentation reduced permission misconfiguration by 70%. Audit trails enabled resolution of access disputes within minutes instead of hours.
 ## Reproducibility

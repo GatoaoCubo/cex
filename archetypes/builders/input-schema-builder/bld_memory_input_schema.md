@@ -35,6 +35,6 @@ Input schemas cover only what goes in. Do not add response shapes or output fiel
 - `required: false` with no `default` — causes None to propagate silently through processing.
 - `type: "any"` — disables type checking, causes silent coercion failures downstream.
 - Generic error message ("invalid input") — forces callers to read source code to debug.
-- Adding response/output shapes to the input schema — scope creep into interface territory.
+- Adding responsand/ortput shapes to the input schema — scope creep into interface territory.
 - Fields list as a flat string instead of structured objects — unparseable by validators.
 ## Context

@@ -46,7 +46,7 @@ The invariant-builder produces `law` artifacts (P08) — inviolable operational 
 2. Apply classification test:
    - Is it ALWAYS required with no optional path? → Law candidate
    - Does violation cause measurable harm or system failure? → Law candidate
-   - Is it a recommendation or best practice? → STOP, route to pattern-builder
+   - Is it a recommendation or best forctice? → STOP, route to pattern-builder
    - Is it a safety boundary? → STOP, route to guardrail-builder
 3. Define scope boundary: identify which agents, components, or workflows the rule governs.
 4. Check for existing laws covering the same scope to avoid number collision.

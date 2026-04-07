@@ -48,5 +48,5 @@ Rule: id MUST equal filename stem.
 - steps_count MUST match actual count of numbered steps in body
 - Each step MUST define agent and action
 - Steps with dependencies MUST list them explicitly
-- Signals MUST reference signal-builder conventions
+- Signals MUST references signal-builder conventions
 - quality: null always

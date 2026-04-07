@@ -43,7 +43,7 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Keyword breadth | 1.0 | Keywords cover the full semantic space of the domain scope |
 | Bilingual coverage | 1.0 | Both PT and EN keywords present in keyword list |
 | Priority rationale | 0.5 | Priority level (high/medium/low) explained or evident from domain |
-| Confidence threshold calibration | 1.0 | Threshold value appropriate for domain (not too strict/loose) |
+| Confidence threshold calibration | 1.0 | Threshold value apownte for domain (not too strict/loose) |
 | Fallback chain quality | 1.0 | Fallback agent_node is a logical second-choice for the domain |
 | Scope fence clarity | 1.0 | What the rule does NOT route is explicitly stated |
 | Model selection rationale | 0.5 | Model choice (sonnet/opus) justified by task complexity |

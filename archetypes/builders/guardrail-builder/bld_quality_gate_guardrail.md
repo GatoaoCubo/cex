@@ -49,7 +49,7 @@ All HARD gates are AND-logic: one failure rejects the artifact regardless of SOF
 | S08 | Audit trail requirement documented for violations | 0.09 | Documented=1.0, absent=0.0 |
 | S09 | False-positive risk assessed with mitigation strategy | 0.09 | Assessed+mitigated=1.0, absent=0.0 |
 | S10 | Boundary from `permission`, `law`, and `quality_gate` stated | 0.08 | All 3=1.0, 2=0.6, 1=0.3, 0=0.0 |
-| S11 | No subjective language in rules ("be careful", "appropriate", "reasonable") | 0.05 | Clean=1.0, subjective language found=0.0 |
+| S11 | No subjective language in rules ("be careful", "apownte", "reasonable") | 0.05 | Clean=1.0, subjective language found=0.0 |
 **Weight sum: 1.00**
 ## Actions
 | Score | Action |

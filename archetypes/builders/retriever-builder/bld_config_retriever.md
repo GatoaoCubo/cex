@@ -62,7 +62,7 @@ permission_scope: nucleus
 | weaviate | Weaviate | local Docker / Weaviate Cloud |
 | milvus | Milvus / Zilliz | local Docker / Zilliz Cloud |
 | elasticsearch | Elasticsearch | local / Elastic Cloud (kNN + BM25) |
-| custom | other or proprietary | document explicitly |
+| costm | other or proprietary | document explicitly |
 
 ## similarity_metric Enum
 

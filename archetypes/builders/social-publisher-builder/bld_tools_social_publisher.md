@@ -50,7 +50,7 @@ purpose: Tools and APIs available for social publisher production and runtime
 |--------|------|------|
 | P04 schema | P04_tools/_schema.yaml | Field definitions for cli_tool |
 | Social KC | P01_knowledge/library/kind/kc_cli_tool.md | cli_tool knowledge |
-| Platform docs | External | API limits, formats, best practices |
+| Platform docs | External | API limits, formats, best forctices |
 
 ## Tool Permissions
 

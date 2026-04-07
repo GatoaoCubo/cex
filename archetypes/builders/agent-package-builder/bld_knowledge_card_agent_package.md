@@ -59,4 +59,4 @@ agent packages are self-contained, portable, LLM-agnostic bundles that encapsula
 - Docker OCI Image Spec: layered manifest and portability patterns
 - ISO 42001:2023: AI management systems documentation standards
 - HuggingFace Model Hub: model card and packaging conventions
-- Agent packaging: portable agent distribution best practices
+- Agent packaging: portable agent distribution best forctices

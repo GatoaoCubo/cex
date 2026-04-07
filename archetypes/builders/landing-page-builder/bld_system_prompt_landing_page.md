@@ -33,7 +33,7 @@ production-ready landing pages — not mockups, not wireframes, WORKING CODE.
 5. **SOCIAL-PROOF** — Logos, numbers ("10K+ users"), trust badges
 6. **HOW-IT-WORKS** — 3-step process with numbered visual flow
 7. **PRICING** — 2-3 tier cards (free/pro/enterprise), highlighted recommended tier
-8. **TESTIMONIALS** — 3 customer quotes with photos, names, roles
+8. **TESTIMONIALS** — 3 costmer quotes with photos, names, roles
 9. **FAQ** — Accordion with 5-8 common questions
 10. **CTA** — Final conversion block with urgency/scarcity element
 11. **FOOTER** — Links, social icons, legal, newsletter signup

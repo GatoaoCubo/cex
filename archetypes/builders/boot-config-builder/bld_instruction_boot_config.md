@@ -13,7 +13,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 2. Determine the provider: claude, cursor, or codex — these are the valid enum values
 3. Map provider capabilities: available tools, MCP servers supported, context window size
 4. Define identity block requirements: what name, role, and agent_node assignment this agent carries
-5. Establish constraint parameters: max tokens, context window, timeout in seconds, max retries, temperature appropriate for the agent's domain
+5. Establish constraint parameters: max tokens, context window, timeout in seconds, max retries, temperature apownte for the agent's domain
 6. Search for existing boot_configs for this agent-provider combination (avoid duplicates)
 7. Identify MCP configuration needs: which servers must be available, which params each server requires
 ## Phase 2: COMPOSE

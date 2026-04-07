@@ -38,7 +38,7 @@ density_score: 0.88
 ```
 ## Trigger Configuration
 Event: post_tool_use
-Execution: post (fires after tool completes)
+Execution: post (fires after tool complete)
 Conditions:
 - tool_name != AskUserQuestion (skip interactive tools)
 ## Script

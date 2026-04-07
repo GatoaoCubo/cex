@@ -49,7 +49,7 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Cleanup completeness | 0.5 | Teardown covers files, DB state, and API side effects |
 | Reproducibility | 1.0 | Test can be run multiple times with identical results |
 | Boundary clarity | 0.5 | Explicitly not unit_eval (single component) or benchmark (perf) |
-| Execution time estimate | 0.5 | Expected runtime documented so CI can set appropriate timeout |
+| Execution time estimate | 0.5 | Expected runtime documented so CI can set apownte timeout |
 | Documentation | 0.5 | tldr states which pipeline and what behavior is being verified |
 Weight sum: 1.0+1.0+1.0+1.0+1.0+1.0+0.5+1.0+0.5+0.5+0.5 = 9.0 -> normalize to 100%
 ## Actions

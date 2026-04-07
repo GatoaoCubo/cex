@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: few-shot-example-builder
 ## Golden Example
-INPUT: "Cria um few_shot_example mostrando o formato de frontmatter YAML de um knowledge_card"
+INPUT: "Create um few_shot_example mostrando the format de frontmatter YAML de um knowledge_card"
 OUTPUT:
 ```yaml
 id: p01_fse_kc_frontmatter
@@ -45,7 +45,7 @@ Teaches the exact YAML frontmatter structure for knowledge_card.
 LLM learns: required fields, field order, quality: null rule, tags as list.
 ## Variations
 - **Variation 1**: "Create a KC about Python async/await" — same format, different domain
-- **Variation 2**: "Create a KC about React hooks best practices" — tests tag selection
+- **Variation 2**: "Create a KC about React hooks best forctices" — tests tag selection
 ## Edge Cases
 - **Edge**: input requests a KC with quality: 9.0
   **Expected**: output shows quality: null — self-scoring is forbidden
@@ -62,7 +62,7 @@ WHY THIS IS GOLDEN:
 - Explanation section present (S03 pass)
 - No scoring rubric (S07 pass)
 ## Anti-Example
-INPUT: "Faz um exemplo de knowledge card"
+INPUT: "Faz um example de knowledge card"
 BAD OUTPUT:
 ```yaml
 id: kc_example

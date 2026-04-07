@@ -47,7 +47,7 @@ A rag_source is a pointer-only artifact that catalogs an external indexable URL 
 3. Add recommended fields: `reliability` (high/medium/low), `format`, `extraction_method`, `keywords` (3–8 terms)
 4. Write `## Source Description` — what the source is, who maintains it, why it is authoritative
 5. Write `## Freshness Policy` — re-check cadence + staleness threshold
-6. Write `## Extraction Notes` — method, auth requirements, pagination quirks
+6. Write `## Extraction Notes` — method, auth requirements, pagetion quirks
 7. Verify body <= 1024 bytes; create `.yaml` machine twin with identical `id`
 ## References
 - rag-source-builder MANIFEST.md v1.0.0

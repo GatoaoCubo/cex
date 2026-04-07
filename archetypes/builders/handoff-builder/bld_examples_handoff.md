@@ -39,7 +39,7 @@ linked_artifacts:
 ```
 # builder_agent — WAVE19: Build 3 Builders
 **Full Autonomy** | **Quality 9.0+**
-**REGRA: Commit e signal ANTES de qualquer pausa.**
+**REGRA: Commit and signal ANTES de qualquer pausa.**
 ## Context
 Wave 19 requires 3 new archetype builders for types session_state (P10),
 dag (P12), and handoff (P12). Each builder follows the 13-ISO pattern

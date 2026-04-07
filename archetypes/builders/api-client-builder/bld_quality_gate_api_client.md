@@ -33,7 +33,7 @@ All must pass (AND logic). Any single failure = REJECT.
 | H05 | Quality field is null | `quality: 9.0` or any non-null value |
 | H06 | All required fields present | Missing `base_url`, `auth_strategy`, or `endpoints` |
 | H07 | At least one endpoint defined | `endpoints: []` or endpoints field absent |
-| H08 | Auth strategy is one of: api_key, bearer, oauth2, basic, none | `auth_strategy: custom` without documented scheme |
+| H08 | Auth strategy is one of: api_key, bearer, oauth2, basic, none | `auth_strategy: costm` without documented scheme |
 | H09 | Each endpoint has HTTP method and path | Endpoint missing `method` or `path` field |
 | H10 | Client is unidirectional (consume-only) | Client defines push, webhook receipt, or server-side event emission |
 ## SOFT Scoring

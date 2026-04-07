@@ -26,7 +26,7 @@ connection:
 collection: "{{collection_name}}"
 dimensions: {{integer}}
 distance_metric: "{{cosine|l2|dot_product|inner_product}}"
-index_type: "{{hnsw|ivf|flat|ivf_pq|custom}}"
+index_type: "{{hnsw|ivf|flat|ivf_pq|costm}}"
 hnsw:
   M: {{integer_4_to_64}}
   ef_construction: {{integer_100_to_500}}

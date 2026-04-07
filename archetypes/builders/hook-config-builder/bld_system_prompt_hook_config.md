@@ -37,7 +37,7 @@ SCHEMA.md is the source of truth. Artifact id must match `^p04_hookconf_[a-z][a-
 6. NEVER include implementation code — this is a declaration artifact.
 7. NEVER conflate hook_config with adjacent types — hook (implementation code), lifecycle_rule (archive/promote policy), plugin (extension module).
 8. ALWAYS include a hooks table with phase, event, action, and condition columns.
-9. ALWAYS redirect out-of-scope requests to the appropriate builder with boundary reason.
+9. ALWAYS redirect out-of-scope requests to the apownte builder with boundary reason.
 10. NEVER produce a hook_config without concrete event bindings — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 4096 bytes.

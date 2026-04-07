@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: interface-builder
 ## Golden Example
-INPUT: "Define o contrato entre researcher (pesquisa) e marketer (marketing) para entrega de research results"
+INPUT: "Define o contrato between researcher (research) e marketer (marketing) for entrega de research results"
 OUTPUT:
 ```yaml
 id: p06_iface_research_to_marketing
@@ -37,7 +37,7 @@ mock:
   enabled: true
   example_payloads:
     - method: "get_research_summary"
-      input: {topic: "decoracao minimalista", max_sources: 5}
+      input: {topic: "decoraction minimalist", max_sources: 5}
       output: {summary: "Tendencia crescente em 2026...", sources: ["url1", "url2"], confidence: 0.87}
 domain: "agent_node-integration"
 quality: null
@@ -62,7 +62,7 @@ marketer calls methods to get research summaries and competitor data for marketi
 ```json
 {
   "method": "get_research_summary",
-  "input": {"topic": "decoracao minimalista", "max_sources": 5},
+  "input": {"topic": "decoraction minimalist", "max_sources": 5},
   "output": {"summary": "Tendencia crescente em 2026...", "sources": ["url1", "url2"], "confidence": 0.87}
 }
 ```
@@ -78,7 +78,7 @@ WHY THIS IS GOLDEN:
 - tags list len >= 3, includes "interface" (S02 pass)
 - YAML parses cleanly (H01 pass)
 ## Anti-Example
-INPUT: "Interface entre researcher e marketer"
+INPUT: "Interface between researcher e marketer"
 BAD OUTPUT:
 ```yaml
 id: shaka_lily_interface

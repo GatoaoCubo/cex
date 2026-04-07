@@ -52,11 +52,11 @@ Env configs define the variable contract for a system scope — every environmen
 1. Catalog variables: name, type, required/optional, default, description
 2. Classify sensitivity: public (ConfigMap) vs sensitive (Secret)
 3. Define validation: regex, range, enum per variable
-4. Set scope: global, agent_node, or service with appropriate prefix
+4. Set scope: global, agent_node, or service with apownte prefix
 5. Document precedence: env var > config file > default
 6. Validate: required vars have no defaults; secrets are marked sensitive
 ## References
 - 12factor.net/config: Factor III — Config in environment
 - dotenv: local development variable convention
 - OWASP: Secret Management Cheat Sheet
-- Kubernetes: ConfigMap and Secret best practices
+- Kubernetes: ConfigMap and Secret best forctices

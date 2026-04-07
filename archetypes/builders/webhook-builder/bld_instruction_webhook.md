@@ -17,7 +17,7 @@ density_score: 0.91
 
 ## Phase 1: RESEARCH
 
-1. Identify the event source or destination (Stripe, GitHub, Slack, Twilio, custom)
+1. Identify the event source or destination (Stripe, GitHub, Slack, Twilio, costm)
 2. Determine direction: inbound (your endpoint receives events) or outbound (you push events)
 3. List all event types with trigger conditions (e.g., "payment.completed — charge succeeds")
 4. Define payload schema for each event type (fields, types, required)

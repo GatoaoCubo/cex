@@ -64,7 +64,7 @@ kind: naming_convention          # FAILURE 2 [H02] Wrong kind value — must be 
 pillar: P1                       # FAILURE 3 [H03] Malformed pillar — must be `P05` not `P1`
 version: 1                       # FAILURE 4 [H04] Not semver — must be `1.0.0`
 scope: "Names stuff"             # FAILURE 5 [H05] Scope too vague — must specify exact artifact kind governed
-pattern: "starts with p01"       # FAILURE 6 [H06] Pattern is plain text, not regex — untestable by machines
+pattern: "starts with p01"       # FAILURE 6 [H06] Pattern is plain text, not regex — untestsble by machines
 case_style: lowercase            # FAILURE 7 [H07] Invalid enum value — `lowercase` not in allowed set (snake_case, kebab-case, camelCase, PascalCase, UPPER_SNAKE)
 collision_strategy: ignore       # FAILURE 8 [H08] Invalid enum value — `ignore` not in allowed set (append_sequence, append_hash, append_date, reject, overwrite)
 quality: 8.5                     # FAILURE 9 [S01] Quality must be `null` at creation — self-assigned scores not permitted

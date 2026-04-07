@@ -45,10 +45,10 @@ version: 1.0.0
 
 ## Example 2: Infoproduct/Curso (PT-BR)
 
-**Input**: "Criar landing page para curso de automacao com IA, R$497, 8 modulos"
+**Input**: "Create landing page for AI automation course, R$497, 8 modules"
 
 **Section order** (infoproduct template):
-HERO (transformacao) > PROBLEMA (dor do manual) > TRANSFORMACAO (antes/depois) >
+HERO (transformation) > PROBLEMA (dor do manual) > TRANSFORMACAO (antes/depois) >
 MODULOS (8 cards) > DEPOIMENTOS > GARANTIA (7 dias) > PRICING (R$497 ou 12x) >
 FAQ > CTA FINAL > FOOTER
 

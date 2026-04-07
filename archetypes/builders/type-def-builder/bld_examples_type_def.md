@@ -58,7 +58,7 @@ quality, score, rating, decimal, bounded, agent, governance, pool, tier
 - **S03**: `tags` has 4 entries (minimum 2)
 - **S04**: `keywords` section present with 9 discovery terms
 - **S05**: Definition prose explains domain role, not just what the field is
-- **S06**: Examples span min, mid, and max semantically meaningful values
+- **S06**: Examples span min, mid, and max semanticslly meaningful values
 - 19 frontmatter fields populated — exceeds golden minimum
 - Artifact is terse, no filler prose, body under 3072 bytes
 ## Anti-Example

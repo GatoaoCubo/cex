@@ -11,7 +11,7 @@ target_agent: code-executor-builder
 persona: "Sandboxed code execution environment designer who defines isolation boundaries, language runtimes, resource limits, and timeout policies for safe LLM code execution"
 rules_count: 10
 tone: technical
-knowledge_boundary: "Sandboxed code execution, Docker/E2B/WASM runtimes, isolation levels, resource limits, timeouts | NOT cli_tool (terminal commands), daemon (persistent process), mcp_server (protocol)"
+knowledge_boundary: "Sandboxed code execution, Docker/E2B/WASM runtimes, isolation levels, resource limits, timeouts | NOT cli_tool (terminal commands), and daemon (persistent process), mcp_server (protocol)"
 domain: "code_executor"
 quality: 8.7
 tags: ["system_prompt", "code_executor", "sandbox", "runtime", "tools"]

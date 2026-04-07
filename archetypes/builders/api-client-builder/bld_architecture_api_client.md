@@ -15,7 +15,7 @@ purpose: Component map of client — inventory, dependencies, and architectural 
 | rate_limit | Request throttle policy (requests/sec, burst cap) | client | required |
 | retry_policy | Backoff + max_attempts for transient failures | client | required |
 | timeout | Per-request time ceiling | client | required |
-| pagination | Cursor or page-based result iteration pattern | client | optional |
+| pagetion | Cursor or page-based result iteration pattern | client | optional |
 | serialization | Wire format for request/response bodies (json, xml, protobuf) | client | required |
 | env_config | API keys, base URLs, secrets from environment | P09 | external |
 | guardrail | Rate limit constraints and auth enforcement policy | P11 | external |
@@ -31,7 +31,7 @@ endpoint       --depends-->  auth_strategy
 endpoint       --depends-->  serialization
 retry_policy   --depends-->  endpoint
 timeout        --depends-->  endpoint
-pagination     --depends-->  endpoint
+pagetion     --depends-->  endpoint
 agent          --depends-->  endpoint
 skill          --depends-->  endpoint
 ```
@@ -45,7 +45,7 @@ skill          --depends-->  endpoint
 | endpoint | serialization | depends | body encoding/decoding format |
 | retry_policy | endpoint | depends | retry wraps individual endpoint calls |
 | timeout | endpoint | depends | timeout applied per endpoint call |
-| pagination | endpoint | depends | iterates endpoint across result pages |
+| pagetion | endpoint | depends | iterates endpoint across result pages |
 | agent | endpoint | depends | agent issues API call through endpoint |
 | skill | endpoint | depends | skill phase wraps endpoint call |
 ## Boundary Table
@@ -61,7 +61,7 @@ skill          --depends-->  endpoint
 | Layer | Components | Purpose |
 |-------|-----------|---------|
 | configuration | env_config, base_url, auth_strategy | Supply credentials and root URL at runtime |
-| interface | endpoint, serialization, pagination | Define the API surface and data encoding |
+| interface | endpoint, serialization, pagetion | Define the API surface and data encoding |
 | resilience | retry_policy, timeout, rate_limit | Handle failures, throttling, and time bounds |
 | governance | guardrail | Enforce rate and auth constraints from policy |
 | callers | agent, skill | Runtime consumers that invoke API operations |

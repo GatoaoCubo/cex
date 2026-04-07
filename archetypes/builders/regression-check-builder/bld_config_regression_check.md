@@ -64,7 +64,7 @@ Rule: ALWAYS document which convention is used in the artifact body. Mixed conve
 | Promptfoo | `promptfoo eval --compare <baseline_file>` |
 | LangSmith | UI comparison or SDK `compare_runs(baseline_id, current_id)` |
 | DeepEval | `deepeval test run --compare-to <baseline_file>` |
-| custom | Document invocation command in ## Baseline section |
+| costm | Document invocation command in ## Baseline section |
 
 ## Cadence Values
 | Value | Meaning |

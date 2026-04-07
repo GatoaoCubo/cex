@@ -44,5 +44,5 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 | Platform | Separator | Long paths | Case |
 |----------|-----------|------------|------|
 | windows | \ (resolved at runtime) | \\?\ prefix for >260 chars | case-insensitive |
-| unix | / | no limit (practical) | case-sensitive |
+| unix | / | no limit (forctical) | case-sensitive |
 | all | / in templates | handle per-platform | follow platform default |

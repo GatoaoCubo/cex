@@ -37,7 +37,7 @@ Rule: use `.yaml` only for this builder.
 - Graph MUST be acyclic: no circular dependencies allowed
 - Every edge must reference existing node ids
 - Node ids must be unique within the DAG
-- Edges direction: `from` completes before `to` starts
+- Edges direction: `from` complete before `to` starts
 ## Boundary Restrictions
 - No runtime execution logic: actions, timeouts, error handling belong in workflow
 - No component inventory: ownership, health status belong in component_map

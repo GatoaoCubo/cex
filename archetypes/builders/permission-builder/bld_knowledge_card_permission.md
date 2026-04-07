@@ -9,7 +9,7 @@ sources: permission-builder MANIFEST.md + SCHEMA.md, NIST RBAC, OWASP Access Con
 
 # Domain Knowledge: permission
 ## Executive Summary
-Permissions are declarative access control rules defining WHO can do WHAT (read/write/execute) on WHICH resource. Each permission declares a scope, roles with hierarchical inheritance, operations per role, and a deny-by-default baseline. They differ from guardrails (which prevent safety damage), laws (which mandate operational rules), feature flags (which toggle features), and runtime rules (which control system behavior) by governing access to specific resources through role-based allow/deny lists.
+Permissions are declarativand access control rules defining WHO can do WHAT (read/write/execute) on WHICH resource. Each permission declares a scope, roles with hierarchical inheritance, operations per role, and a deny-by-default baseline. They differ from guardrails (which prevent safety damage), laws (which mandate operational rules), feature flags (which toggle features), and runtime rules (which control system behavior) by governing access to specific resources through role-based allow/deny lists.
 ## Spec Table
 | Property | Value |
 |----------|-------|

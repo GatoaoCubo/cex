@@ -26,7 +26,7 @@ quality: null
 tags: [red_team_eval, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 description: "{{what_eval_tests_max_200ch}}"
-framework: {{promptfoo|garak|deepeval|patronus|custom}}
+framework: {{promptfoo|garak|deepeval|patronus|costm}}
 severity: {{critical|high|medium|low}}
 test_count: {{integer_number_of_test_cases}}
 owasp_refs: [{{LLM01}}, {{LLM06}}]

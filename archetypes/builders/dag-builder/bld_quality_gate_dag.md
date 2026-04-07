@@ -47,7 +47,7 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Critical path marked | 1.0 | Longest path through graph identified |
 | Entry and exit nodes | 0.5 | Root nodes (no incoming) and leaf nodes (no outgoing) explicit |
 | Max depth documented | 0.5 | Depth of longest chain stated |
-| Node count vs complexity | 1.0 | Graph is appropriately sized (not over-decomposed or monolithic) |
+| Node count vs complexity | 1.0 | Graph is apowntely sized (not over-decomposed or monolithic) |
 | Boundary clarity | 0.5 | Explicitly not workflow (runtime) or component_map (inventory) |
 | Error propagation | 1.0 | What happens when a node fails: skip, abort, retry |
 | Reuse potential | 1.0 | Nodes are generic enough to be referenced by multiple DAGs |

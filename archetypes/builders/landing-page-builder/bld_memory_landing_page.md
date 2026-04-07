@@ -11,7 +11,7 @@ observation_types: [user, feedback, project, reference]
 
 ## What to Remember
 - User's preferred stack (HTML/React/Next.js/Astro)
-- Design token overrides (custom colors, fonts, spacing)
+- Design token overrides (costm colors, fonts, spacing)
 - Section preferences (which sections they always want/skip)
 - Previous landing pages built (maintain design consistency)
 - User's deployment target (Vercel, Netlify, S3, GitHub Pages)

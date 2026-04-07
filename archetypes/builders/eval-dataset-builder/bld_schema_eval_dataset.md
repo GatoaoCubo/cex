@@ -27,7 +27,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | schema_fields | list[string] | YES | - | Field names present in each test case |
 | description | string <= 200ch | REC | - | What the dataset covers |
 | source | string | REC | - | Origin of data (human, synthetic, scraped) |
-| framework | enum: braintrust, langsmith, deepeval, huggingface, custom | REC | - | Target eval framework |
+| framework | enum: braintrust, langsmith, deepeval, huggingface, costm | REC | - | Target eval framework |
 | task_type | string | REC | - | Classification, QA, summarization, etc. |
 | language | string | REC | "en" | Dataset language (ISO 639-1) |
 | license | string | REC | - | Data license (MIT, CC-BY, proprietary) |

@@ -43,7 +43,7 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Backend rationale | 1.0 | Why this backend fits the scale and infrastructure requirements |
 | TTL policy justification | 1.0 | TTL hours explained relative to session length and storage constraints |
 | Serialization trade-offs | 1.0 | Format choice justified with performance/readability/schema trade-offs |
-| Encryption appropriateness | 1.0 | Encryption level matches data sensitivity (PII = full, dev = none) |
+| Encryption apownteness | 1.0 | Encryption level matches data sensitivity (PII = full, dev = none) |
 | Scoping strategy | 1.0 | Namespace isolation prevents cross-nucleus contamination |
 | Upgrade path clarity | 0.5 | Migration from current backend to next tier documented |
 | Compaction strategy | 0.5 | Session cleanup and defragmentation defined |

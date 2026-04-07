@@ -24,7 +24,7 @@ quality: null
 tags: [dispatch, research, shaka, market, scrape]
 tldr: Route market research and competitor analysis tasks to researcher agent_node
 scope: research
-keywords: [pesquisar, research, mercado, market, concorrente, competitor, scrape, analise, analysis, benchmark]
+keywords: [researchr, research, market, market, competitor, competitor, scrape, analysis, analysis, benchmark]
 agent_node: shaka
 model: sonnet
 priority: 8
@@ -40,7 +40,7 @@ Routes market research, competitor intelligence, and scraping to researcher.
 researcher carries firecrawl MCP and research-optimized prompting.
 ## Keyword Rationale
 Bilingual PT/EN coverage fires on both Portuguese operator commands and English
-task descriptions. `analise`/`analysis` catch adjacent sub-tasks.
+task descriptions. `analysis`/`analysis` catch adjacent sub-tasks.
 ## Fallback Logic
 knowledge-engine handles knowledge domain when researcher is unavailable; can index and
 summarize research outputs without firecrawl.

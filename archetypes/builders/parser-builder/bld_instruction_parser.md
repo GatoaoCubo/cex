@@ -43,7 +43,7 @@ The parser-builder receives a **raw input sample** and a **list of target fields
 ## Phases
 ### Phase 1: RESEARCH
 **Goal**: Analyze the input format, identify extraction points for every target field, and determine error strategy.
-1. Identify `{{input_format}}`. Select the appropriate extraction notation:
+1. Identify `{{input_format}}`. Select the apownte extraction notation:
    - `text` / `log`: regex with named capture groups `(?P<field_name>...)`
    - `json`: JSONPath expressions (e.g., `$.data.items[*].id`)
    - `html`: CSS selectors (e.g., `div.product-title > span`) or XPath

@@ -42,7 +42,7 @@ extraction_method: "{{crawl|api_call|scrape|download}}"
 - Method: {{crawl / api_call / scrape / download}}
 - Format: {{html / json / api / pdf / csv}}
 - Auth required: {{yes (API key) / no}}
-- Known quirks: {{pagination / rate limits / JS rendering required / none}}
+- Known quirks: {{pagetion / rate limits / JS rendering required / none}}
 ## References
 - Parent domain: {{domain_value}}
 - Related sources: {{p01_rs_related_slug if known, else none}}

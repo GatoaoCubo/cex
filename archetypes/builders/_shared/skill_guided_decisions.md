@@ -137,7 +137,7 @@ Based on your Sage archetype, these palettes work best:
 | `2` | Select option 2. Confirm briefly: "Got it — Going with Growth Wisdom 🟢" |
 | `1+3` | Combine elements. "Mixing Deep Trust base with Modern Scholar accents — nice." |
 | `the first one but more green` | Adapt option 1 with modification. Show the modified version. |
-| Free text: `"I want something techy and dark"` | Map to closest option or create custom. "Sounds like a Dark Mode Scholar vibe. Let me propose..." |
+| Free text: `"I want something techy and dark"` | Map to closest option or create costm. "Sounds like a Dark Mode Scholar vibe. Let me propose..." |
 | `?` or confused | Explain the trade-offs in simpler language. No jargon. |
 | Empty / Enter / "whatever" / "you choose" | Apply ★ Recommended. "Going with the recommended option: Deep Trust 🔵" |
 | `skip` | Apply ★ Recommended and note it can be changed later. |

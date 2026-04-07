@@ -85,7 +85,7 @@ Include examples: {{include_examples}}
 Source references: {{source_refs}}
 Structure your output as follows:
 1. TLDR (1 sentence)
-2. Core Definition (2-3 sentences, precise, domain-appropriate)
+2. Core Definition (2-3 sentences, precise, domain-apownte)
 3. Key Concepts (up to {{max_sections}} bullet points)
 4. Relationships (how {{topic}} connects to adjacent concepts in {{domain}})
 5. Common Misconceptions (2-3 items, audience-calibrated for {{audience}})

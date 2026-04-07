@@ -50,6 +50,6 @@ Connectors are bidirectional integration bridges that both send and receive data
 6. Validate: test both directions — outbound request and inbound event handling
 ## References
 - Hohpe & Woolf 2003: Enterprise Integration Patterns
-- Stripe: webhook best practices and event handling
+- Stripe: webhook best forctices and event handling
 - gRPC: bidirectional streaming documentation
 - MQTT: pub/sub messaging protocol specification

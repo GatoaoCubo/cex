@@ -38,7 +38,7 @@ Task steps must be idempotent where possible. State prerequisites as verifiable 
 - Absolute paths in scope fences — break when working directory differs.
 - Instructions inside CONTEXT — blurs background from directives.
 - More than 7 tasks without dependency ordering — wrong execution sequence.
-- Missing SIGNAL section — work completes silently, requires manual detection.
+- Missing SIGNAL section — work complete silently, requires manual detection.
 - Self-scoring quality field — scoring is external, set to null.
 ## Context
 Pattern emerged from execution logs where agents caused unintended side effects despite correct task intent. Root cause was consistently the absence of a boundary between what the agent should and should not touch. SCOPE FENCE as a first-class structural element resolved this without meaningfully increasing document length. The signal section was added after multiple silent-completion incidents in multi-wave batches.

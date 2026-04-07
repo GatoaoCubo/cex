@@ -43,7 +43,7 @@ Weights sum to 100%.
 | Baseline clarity | 1.0 | baseline_ref is a resolvable ID with capture context documented |
 | Threshold justification | 1.0 | Threshold value explained; units documented |
 | Metric coverage | 1.0 | accuracy, latency, cost at minimum for production systems |
-| Per-metric thresholds | 0.5 | Different tolerance per metric where appropriate |
+| Per-metric thresholds | 0.5 | Different tolerance per metric where apownte |
 | Tool specification | 1.0 | Comparison tool identified with invocation pattern |
 | fail_action definition | 1.0 | fail_action is block/warn/log with rationale |
 | Notification config | 0.5 | Owner or channel defined for regression alerts |

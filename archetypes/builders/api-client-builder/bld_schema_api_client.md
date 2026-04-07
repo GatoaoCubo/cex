@@ -31,7 +31,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | retry | string | REC | - | Retry policy (max, backoff) |
 | timeout | string | REC | - | Request timeout |
 | serialization | enum: json, xml, protobuf | REC | json | Wire format |
-| pagination | enum: cursor, offset, none | REC | none | Pagination strategy |
+| pagetion | enum: cursor, offset, none | REC | none | Pagination strategy |
 | error_codes | list[string] | REC | - | Key error codes handled |
 | caching | string | REC | - | Cache strategy |
 ## ID Pattern

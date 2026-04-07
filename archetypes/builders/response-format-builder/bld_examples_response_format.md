@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: response-format-builder
 ## Golden Example
-INPUT: "Cria response_format para knowledge_card output em YAML frontmatter + markdown"
+INPUT: "Create response_format para knowledge_card output em YAML frontmatter + markdown"
 OUTPUT:
 ```yaml
 id: p05_rf_knowledge_card

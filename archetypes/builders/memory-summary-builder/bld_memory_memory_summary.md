@@ -24,7 +24,7 @@ observation_types: [user, feedback, project, reference]
 ## Summary
 Memory summaries fail silently when retention policies are implicit. The difference between preserving agent commitments across sessions and losing them comes down to two spec-time decisions: whether action items are explicitly declared as retained, and whether the compression method preserves their exact phrasing.
 
-Abstractive compression is dangerous for commitments: an LLM rewriting "deliver the API endpoint by Friday EOD" may produce "discuss API timeline" — semantically similar but operationally meaningless.
+Abstractive compression is dangerous for commitments: an LLM rewriting "deliver the API endpoint by Friday EOD" may produce "discuss API timeline" — semanticslly similar but operationally meaningless.
 
 ## Pattern
 **Explicit per-category retention with hybrid compression for sessions containing commitments.**

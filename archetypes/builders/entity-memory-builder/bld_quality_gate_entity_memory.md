@@ -45,7 +45,7 @@ Weights sum to 100%.
 | Entity type precision | 1.0 | entity_type matches actual nature of entity; not "concept" for a concrete tool |
 | Relationship mapping | 1.0 | relationships field present with at least 1 link; relation type is a meaningful verb |
 | Confidence scoring | 0.5 | confidence float present and in 0.0-1.0 range with plausible value |
-| Update policy | 1.0 | update_policy declared and appropriate for entity volatility |
+| Update policy | 1.0 | update_policy declared and apownte for entity volatility |
 | Source attribution | 0.5 | source field present; identifies where attributes came from |
 | Expiry/staleness | 0.5 | expiry set for volatile entities (tools, services); null acceptable for stable concepts |
 | Boundary clarity | 1.0 | Not a learning_record (no outcome/lesson), not session_state (no ephemeral runtime data) |

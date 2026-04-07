@@ -30,13 +30,13 @@ endpoints:
   - list_transactions
 quality: null
 tags: [client, payment, api, P04]
-tldr: "Payment gateway client: 4 endpoints, bearer auth, JSON, cursor pagination"
+tldr: "Payment gateway client: 4 endpoints, bearer auth, JSON, cursor pagetion"
 description: "Client consuming payment gateway API for charge creation, refunds, and transaction listing"
 rate_limit: "100 req/min"
 retry: "3 retries, exponential backoff (1s, 2s, 4s)"
 timeout: "30s"
 serialization: json
-pagination: cursor
+pagetion: cursor
 error_codes: ["400", "401", "402", "404", "429", "500"]
 caching: "none (financial data)"
 ```
@@ -63,7 +63,7 @@ Parameters:
 - `amount` (integer, optional): Partial amount; defaults to full
 Returns: {id, charge_id, amount, status} object
 ### list_transactions
-GET /transactions — List transactions with cursor pagination.
+GET /transactions — List transactions with cursor pagetion.
 Parameters:
 - `cursor` (string, optional): Pagination cursor
 - `limit` (integer, optional): Max results; default 20, max 100

@@ -34,7 +34,7 @@ Effort and thinking level configuration for builder execution — maps builder t
 | Ignoring cost | No cost tier awareness leads to budget blowout on batch runs |
 ## Application
 1. Identify the target builder and its typical task complexity
-2. Select appropriate model/thinking pattern from the table above
+2. Select apownte model/thinking pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 4096 bytes

@@ -48,7 +48,7 @@ parser              --consumes-->   output_format
 | Processes static visual payload (base64, url, file) | A screen controller that moves cursor or clicks (computer_use) |
 | Calls a vision API or local OCR engine | A document loader that ingests files without visual analysis |
 | Returns json, text, or table from image content | A web search tool that finds images (search_tool) |
-| Spec-only: no implementation code | A streaming video processor (different artifact kind) |
+| Spec-only: no implementation code | A streaming video processr (different artifact kind) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|-----------|---------|

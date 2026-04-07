@@ -10,7 +10,7 @@ author: n03_engineering
 domain: software-engineering
 quality: 8.7
 tags: [builder, output-template, software-project]
-tldr: "Standard output structure: pyproject.toml skeleton, src layout, conftest.py, Dockerfile, CI workflow. All [PLACEHOLDERS] for customization."
+tldr: "Standard output structure: pyproject.toml skeleton, src layout, conftest.py, Dockerfile, CI workflow. All [PLACEHOLDERS] for costmization."
 density_score: 0.88
 ---
 

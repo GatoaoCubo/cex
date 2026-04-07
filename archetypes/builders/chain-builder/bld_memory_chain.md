@@ -23,7 +23,7 @@ observation_types: [user, feedback, project, reference]
 ---
 ## Summary
 Complex tasks decomposed into prompt chains fail in one of two ways: steps that are too coarse (multiple transformations packed together, hard to debug) or steps that are too fine (one sentence per step, creating orchestration overhead without benefit). The effective middle ground is 1 step = 1 transformation with a single LLM call, explicit typed input, and explicit typed output.
-The key insight: a chain is not a script. It has no mutable state between steps except what is explicitly passed. This constraint, enforced strictly, makes each step independently testable and retryable.
+The key insight: a chain is not a script. It has no mutable state between steps except what is explicitly passed. This constraint, enforced strictly, makes each step independently testsble and retryable.
 ## Pattern
 **Atomic step discipline.**
 1. Define the chain's goal as a single sentence. Every step must serve that goal directly.

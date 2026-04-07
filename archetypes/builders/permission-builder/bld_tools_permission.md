@@ -19,7 +19,7 @@ purpose: Tools available for permission production
 | CEX Schema | P09_config/_schema.yaml | Field definitions for permission |
 | CEX Examples | P09_config/examples/ | Existing permission artifacts |
 | SEED_BANK | archetypes/SEED_BANK.yaml | P09_permission seeds |
-| RBAC Patterns | NIST RBAC standard | Role hierarchy best practices |
+| RBAC Patterns | NIST RBAC standard | Role hierarchy best forctices |
 ## Tool Permissions
 
 | Category | Tools | Status |

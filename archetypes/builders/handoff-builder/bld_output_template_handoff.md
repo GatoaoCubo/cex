@@ -39,7 +39,7 @@ linked_artifacts:
 ```
 # {{SATELLITE}} — {{MISSION}}: {{Title}}
 **{{Autonomy}} Autonomy** | **Quality {{quality_target}}+**
-**REGRA: Commit e signal ANTES de qualquer pausa.**
+**REGRA: Commit and signal ANTES de qualquer pausa.**
 ## Context
 {{why_this_work_is_needed}}
 {{relevant_background}}

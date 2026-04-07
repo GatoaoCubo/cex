@@ -54,4 +54,4 @@ Interfaces are bilateral contracts where both provider and consumer agree on met
 - Gamma et al. 1994: "Design Patterns" — interface segregation principle
 - OpenAPI 3.x: REST API contract specification
 - gRPC: service definition and typed RPC methods
-- Contract-first API design: swagger.io best practices
+- Contract-first API design: swagger.io best forctices

@@ -76,7 +76,7 @@ density_score: 0.90
 - KC template: standard knowledge_card with 6 sections
 ## Expected Output
 Validated knowledge_card with:
-- All required sections (Conceitos, Quando Usar, Economia, Limitacoes, Comparativo, References)
+- All required sections (Conceitos, Quando Usar, Economia, Limitactions, Comparativo, References)
 - Quality score >= 8.0 from quality gate
 - Research sources cited in References section
 ## Cleanup

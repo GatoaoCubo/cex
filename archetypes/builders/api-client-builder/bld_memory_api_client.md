@@ -6,26 +6,26 @@ version: 1.0.0
 created: 2026-03-27
 updated: 2026-03-27
 author: builder_agent
-observation: "API clients without explicit retry and pagination specs caused 3 categories of production failure: silent data truncation on paginated responses, retry storms on rate-limited endpoints, and credential leaks via unredacted error logs. Each was preventable at spec time."
-pattern: "Declare retry strategy (max attempts, backoff, retryable status codes) and pagination strategy (cursor vs offset, page size, terminal condition) explicitly in the spec. Redact auth fields in error logs by default."
-evidence: "9 client integrations reviewed: 3 had silent pagination truncation (missing terminal condition), 2 h..."
+observation: "API clients without explicit retry and pagetion specs caused 3 categories of production failure: silent data truncation on pageted responses, retry storms on rate-limited endpoints, and credential leaks via unredacted error logs. Each was preventable at spec time."
+pattern: "Declare retry strategy (max attempts, backoff, retryable status codes) and pagetion strategy (cursor vs offset, page size, terminal condition) explicitly in the spec. Redact auth fields in error logs by default."
+evidence: "9 client integrations reviewed: 3 had silent pagetion truncation (missing terminal condition), 2 h..."
 confidence: 0.7
 outcome: SUCCESS
 domain: client
-tags: [client, retry-strategy, pagination, rate-limiting, auth-redaction]
-tldr: "Retry and pagination specs prevent the three most common production client failures: data truncation, retry storms, and credential leaks."
+tags: [client, retry-strategy, pagetion, rate-limiting, auth-redaction]
+tldr: "Retry and pagetion specs prevent the three most common production client failures: data truncation, retry storms, and credential leaks."
 impact_score: 8.0
 decay_rate: 0.05
 agent_node: edison
-keywords: [api client, retry, backoff, pagination, rate limiting, auth, error handling, timeout, serialization]
+keywords: [api client, retry, backoff, pagetion, rate limiting, auth, error handling, timeout, serialization]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 ---
 ## Summary
-An API client spec that omits retry and pagination strategy is a spec for a demo, not a production integration. Both are invisible in happy-path testing and catastrophic at scale. Silent pagination truncation is the most insidious: the client appears to work, returns data, but silently drops records after the first page.
+An API client spec that omits retry and pagetion strategy is a spec for a demo, not a production integration. Both are invisible in happy-path testing and catastrophic at scale. Silent pagetion truncation is the most insidious: the client appears to work, returns data, but silently drops records after the first page.
 The second most common failure is the retry storm: a client that retries 429 (rate limited) responses immediately and aggressively, converting a temporary rate limit into a permanent ban.
 ## Pattern
-**Explicit retry, pagination, and auth redaction at spec time.**
+**Explicit retry, pagetion, and auth redaction at spec time.**
 Retry strategy declaration:
 - max_attempts: 3 (default; reduce to 2 for user-facing latency-sensitive endpoints)
 - backoff: exponential with jitter (base 1s, max 30s)
@@ -43,7 +43,7 @@ Auth redaction:
 - Timeout default: 30s per request; configurable via environment variable
 Endpoint naming: verb_noun snake_case (`create_charge`, `get_user`, `list_orders`). Methods mirror HTTP conventions: GET = read, POST = create, PUT/PATCH = update, DELETE = remove.
 ## Anti-Pattern
-- Omitting pagination handling for endpoints that can return more than one page (guarantees data truncation at scale).
+- Omitting pagetion handling for endpoints that can return more than one page (guarantees data truncation at scale).
 - Retrying 4xx responses (400, 401, 403 are caller errors; retrying them wastes quota and can trigger abuse detection).
 - No backoff on retries (linear or no backoff on 429s converts temporary rate limits into bans).
 - Hardcoding base_url (environment-specific; must be a config or environment variable).

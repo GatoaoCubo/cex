@@ -44,7 +44,7 @@ density_score: 1.0
 | S06 | Error handling | Dead-letter or failure fallback described |
 | S07 | Timeout | timeout_ms explicitly set |
 | S08 | Boundary clarity | Clearly NOT api_client / notifier / mcp_server |
-| S09 | Domain specificity | Provider named (Stripe/GitHub/Slack/custom), not generic |
+| S09 | Domain specificity | Provider named (Stripe/GitHub/Slack/costm), not generic |
 | S10 | Testability | Payload examples are valid JSON, realistic values |
 | S11 | Security posture | Inbound: signature verified before parse; outbound: HTTPS only |
 | S12 | Delivery guarantees | At-least-once or exactly-once semantics stated |

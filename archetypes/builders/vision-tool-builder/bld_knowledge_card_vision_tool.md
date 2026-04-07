@@ -9,7 +9,7 @@ sources: OpenAI Vision API docs, Google Cloud Vision API, Tesseract OCR, DocTR, 
 
 # Domain Knowledge: vision_tool
 ## Executive Summary
-Vision tools are visual input processors that accept images (base64, URL, file path, buffer, screenshot) and return structured data via cloud vision APIs or local OCR engines. They define input types, capabilities, output format, and provider mapping. Vision tools are purely input-processing contracts — they do not interact with DOM (browser_tool), control the screen (computer_use), or ingest documents without visual analysis (document_loader).
+Vision tools are visual input processrs that accept images (base64, URL, file path, buffer, screenshot) and return structured data via cloud vision APIs or local OCR engines. They define input types, capabilities, output format, and provider mapping. Vision tools are purely input-processing contracts — they do not interact with DOM (browser_tool), control the screen (computer_use), or ingest documents without visual analysis (document_loader).
 ## Spec Table
 | Property | Value |
 |----------|-------|

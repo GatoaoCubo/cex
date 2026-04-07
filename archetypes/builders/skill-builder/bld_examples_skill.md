@@ -89,7 +89,7 @@ Key patterns:
 WHY THIS IS GOLDEN:
 - 2 phases (analysis scratchpad + structured summary)
 - Trigger is automatic (agent_invoked on context pressure, not user slash command)
-- Output is machine-processable (XML tags for extraction)
+- Output is machine-processesble (XML tags for extraction)
 - Anti-drift mechanism (user messages + quotes preserved)
 
 ## Anti-Example 3 (Bad — No parallel structure)

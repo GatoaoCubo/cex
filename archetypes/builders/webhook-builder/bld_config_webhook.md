@@ -37,7 +37,7 @@ id       : p04_webhook_{event_slug}
 | payment_intent.succeeded | payment_completed | p04_webhook_payment_completed |
 | push | push | p04_webhook_push |
 | message.received | message_received | p04_webhook_message_received |
-| customer.subscription.deleted | subscription_deleted | p04_webhook_subscription_deleted |
+| costmer.subscription.deleted | subscription_deleted | p04_webhook_subscription_deleted |
 | inbound_email | inbound_email | p04_webhook_inbound_email |
 ## Size Constraint
 ```
@@ -63,7 +63,7 @@ signature_method:
 ## Provider Event Naming Patterns
 | Provider | Pattern | Examples |
 |----------|---------|---------|
-| Stripe | `object.action` | `payment_intent.succeeded`, `customer.created` |
+| Stripe | `object.action` | `payment_intent.succeeded`, `costmer.created` |
 | GitHub | `event_name` | `push`, `pull_request`, `issues` |
 | Slack | `event_type` | `message`, `app_mention`, `reaction_added` |
 | Twilio | `EventType` | `com.twilio.messaging.inbound-message` |

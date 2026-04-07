@@ -26,7 +26,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tags | list[string], len >= 3 | YES | - | Must include "regression_check" |
 | tldr | string <= 160ch | YES | - | Dense summary |
 | description | string <= 200ch | REC | - | What this check compares |
-| tool | enum: braintrust, promptfoo, langsmith, deepeval, custom | REC | - | Comparison framework |
+| tool | enum: braintrust, promptfoo, langsmith, deepeval, costm | REC | - | Comparison framework |
 | comparison_mode | enum: relative, absolute | REC | relative | How threshold is applied |
 | fail_action | enum: block, warn, log | REC | warn | Action when regression detected |
 | notify | list[string] | REC | - | Channels or owners to notify |

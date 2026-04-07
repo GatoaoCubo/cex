@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: guardrail-builder
 ## Golden Example
-INPUT: "Cria guardrail para prevenir que agentes executem comandos destrutivos no filesystem"
+INPUT: "Create guardrail para prevenir que agents executem comandos destrutivos no filesystem"
 OUTPUT:
 ```yaml
 id: p11_gr_destructive_commands

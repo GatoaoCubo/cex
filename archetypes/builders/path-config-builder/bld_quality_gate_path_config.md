@@ -61,7 +61,7 @@ Weights sum: 8.0. Normalize: divide each by 8.0 before scoring.
 ## Bypass
 | Field | Value |
 |-------|-------|
-| conditions | Emergency hotfix requiring path override before full catalog review completes |
+| conditions | Emergency hotfix requiring path override before full catalog review complete |
 | approver | p09-chief |
 | audit_trail | Log in records/audits/ with override path, platform, and timestamp |
 | expiry | 48h — full catalog must pass gates before next deploy cycle |

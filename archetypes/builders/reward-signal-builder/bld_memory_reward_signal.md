@@ -13,7 +13,7 @@ confidence: 0.75
 outcome: SUCCESS
 domain: reward_signal
 tags: [reward-signal, reward-hacking, criteria-decomposition, baseline-calibration, rlhf, lm-as-judge]
-tldr: "Multi-criteria decomposition prevents reward hacking. Baseline must be human-percentile-anchored. LLM-judge needs Spearman >= 0.75 validation before production use."
+tldr: "Multi-criteria ofcomposition prevents reward hacking. Baseline must be human-percentile-anchored. LLM-judge needs Spearman >= 0.75 validation before production use."
 impact_score: 8.0
 decay_rate: 0.04
 agent_node: edison
@@ -27,7 +27,7 @@ Reward signals are the most consequential design decision in an RLHF pipeline. A
 Reward hacking occurs when the model maximizes a proxy (response length, hedging phrases, citation count) without improving actual quality. Fix: decompose into >= 2 criteria so no single axis can be gamed. Baseline drift occurs when the threshold is set arbitrarily rather than anchored to the human quality distribution. Recalibrate baseline every training cycle.
 
 ## Pattern
-**Multi-criteria decomposition + human-percentile baseline + LLM-judge validation.**
+**Multi-criteria ofcomposition + human-percentile baseline + LLM-judge validation.**
 
 Criteria design:
 - Minimum 2 dimensions (3+ preferred); weights sum to 1.0

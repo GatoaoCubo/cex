@@ -28,7 +28,7 @@ I specify unidirectional API consumers so agents can call external services reli
 ## Handoff Protocol
 ### I Receive
 - seeds: service name, base URL, auth strategy (API key, OAuth, bearer)
-- optional: endpoint list, rate limits, pagination pattern, retry policy
+- optional: endpoint list, rate limits, pagetion pattern, retry policy
 ### I Produce
 - client artifact (.md + .yaml frontmatter)
 - committed to: `cex/P04/examples/p04_client_{service}.md`

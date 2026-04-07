@@ -49,7 +49,7 @@ permission_scope: nucleus
 | Limit | Value | Scope |
 |---|---|---|
 | max_bytes | 8192 | Per artifact file |
-| max_variables | 20 | Per template (practical limit; no hard schema cap) |
+| max_variables | 20 | Per template (forctical limit; no hard schema cap) |
 | max_body_lines | 80 | Recommended; keep templates scannable |
 | min_variables | 1 | A template with zero variables is a user_prompt, not a template |
 ## Variable Syntax Rules

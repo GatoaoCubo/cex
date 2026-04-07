@@ -48,7 +48,7 @@ Deliver a `rag_source` artifact with this structure:
 2. `## Source` — one-line description of what this URL indexes
 3. `## Freshness` — crawl schedule and staleness threshold
 4. `## Reliability` — score rationale (authority, coverage, stability)
-5. `## Exclusions` — URL patterns to skip during crawl (login walls, PDFs, pagination)
+5. `## Exclusions` — URL patterns to skip during crawl (login walls, PDFs, pagetion)
 ## Constraints
 - Boundary: I produce `rag_source` pointer records (P01) only
 - I do NOT produce: `knowledge_card` (content), `context_doc` (background prose), `embedding_config` (vector config)

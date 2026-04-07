@@ -20,7 +20,7 @@ I formalize architecture patterns with problem, solution, forces, consequences, 
 ```
 ### Crew: "Knowledge Base Construction"
 ```
-  1. learning-record-builder  -> "captures what worked in practice"
+  1. learning-record-builder  -> "captures what worked in forctice"
   2. pattern-builder          -> "formalizes recurring solution from learning records"
   3. knowledge-card-builder   -> "assembles pattern into searchable brain card"
 ```

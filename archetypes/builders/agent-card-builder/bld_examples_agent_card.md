@@ -9,7 +9,7 @@ pattern: few-shot learning — LLM reads these before producing
 
 # Examples: agent-card-builder
 ## Golden Example
-INPUT: "Especifica o satelite researcher para pesquisa de mercado"
+INPUT: "Especifica o satellite researcher for research de mercado"
 OUTPUT:
 ```yaml
 id: p08_ac_shaka
@@ -34,7 +34,7 @@ constraints:
   - "Max 10 credits per research session (firecrawl budget)"
   - "No code generation — delegate to builder"
   - "Results must include source URLs"
-dispatch_keywords: [pesquisar, mercado, concorrente, scrape, analise, research]
+dispatch_keywords: [researchr, market, competitor, scrape, analysis, research]
 tools: [firecrawl_scrape, firecrawl_extract, brain_query, web_search]
 dependencies: [brain_mcp, firecrawl_api]
 scaling:
@@ -67,7 +67,7 @@ Does not generate code or modify production systems.
 3. Initialize brain MCP (verify Ollama running, index freshness)
 4. Check dispatch queue (.claude/handoffs/shaka_*.md)
 ## Dispatch
-Keywords: pesquisar, mercado, concorrente, scrape, analise, research
+Keywords: researchr, market, competitor, scrape, analysis, research
 Routing: orchestrator matches keywords against dispatch_keywords list.
 Priority: research tasks routed to researcher before any other agent_node.
 ## Constraints

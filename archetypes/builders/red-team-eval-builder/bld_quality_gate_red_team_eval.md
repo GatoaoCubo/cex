@@ -51,7 +51,7 @@ All must pass (AND logic). Any single failure = REJECT.
 | Boundary clarity | 1.0 | Explicitly not a guardrail, e2e_eval, unit_eval — adversarial pre-deploy purpose stated |
 | Payload safety | 1.0 | Placeholder notation used consistently; no real exploits or PII in spec body |
 | Domain specificity | 1.0 | Attack scenarios specific to declared target domain, not generic boilerplate |
-| Testability | 1.0 | Each scenario testable with declared framework; expected output described |
+| Testability | 1.0 | Each scenario testsble with declared framework; expected output described |
 | Severity classification | 0.5 | Severity declared; justification implied by attack types chosen |
 | Test count declaration | 0.5 | test_count field present and >= 1 |
 | Env var documentation | 0.5 | Environment variables listed with purpose |

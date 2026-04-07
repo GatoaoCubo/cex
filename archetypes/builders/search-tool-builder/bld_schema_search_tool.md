@@ -38,7 +38,7 @@ Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
 1. `## Overview` — what this search tool does, provider, use case
 2. `## Query` — query parameters, syntax, filtering options
-3. `## Results` — result structure, fields, ranking, pagination
+3. `## Results` — result structure, fields, ranking, pagetion
 4. `## Provider` — provider-specific details, API key, rate limits, cost
 ## Constraints
 - max_bytes: 2048 (body only)

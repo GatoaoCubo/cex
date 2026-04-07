@@ -55,7 +55,7 @@ Code executors are sandboxed environments where LLM-generated code runs safely. 
 6. Decide network policy: blocked unless explicitly needed
 7. Decide session model: ephemeral (default) or persistent
 ## References
-- Docker: container security best practices
+- Docker: container security best forctices
 - E2B: cloud sandbox documentation
 - OpenAI: Code Interpreter documentation
 - WASM: WebAssembly sandboxing specification

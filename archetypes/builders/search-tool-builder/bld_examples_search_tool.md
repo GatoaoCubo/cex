@@ -60,7 +60,7 @@ Each result contains:
 ### Ranking
 Results ranked by Tavily relevance algorithm optimized for LLM consumption.
 ### Pagination
-No cursor-based pagination — adjust max_results parameter.
+No cursor-based pagetion — adjust max_results parameter.
 ## Provider
 - API: api.tavily.com/search
 - Auth: env var `TAVILY_API_KEY` (NEVER hardcode)

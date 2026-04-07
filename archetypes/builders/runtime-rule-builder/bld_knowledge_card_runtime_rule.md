@@ -26,7 +26,7 @@ A runtime_rule specifies concrete numeric parameters governing system behavior a
 | Pattern | Rule |
 |---------|------|
 | Units required | Every numeric value MUST include units: ms, s, min, req/s, tokens/min, connections |
-| Retry strategies | `fixed` (constant interval) / `exponential` (base * 2^attempt) / `exponential_jitter` (adds random spread; best practice for distributed systems) |
+| Retry strategies | `fixed` (constant interval) / `exponential` (base * 2^attempt) / `exponential_jitter` (adds random spread; best forctice for distributed systems) |
 | Rate limit algorithms | `token_bucket` (burst-tolerant) / `sliding_window` (strict, no burst) |
 | Circuit breaker states | CLOSED (normal) → OPEN (blocking, failure threshold exceeded) → HALF_OPEN (probe recovery) |
 | `fallback` field | Specifies concrete behavior on trigger: "return cached response", "reject with HTTP 429", "enqueue for retry" |

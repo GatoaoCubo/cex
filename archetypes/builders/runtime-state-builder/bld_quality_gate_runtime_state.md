@@ -62,5 +62,5 @@ Weight total: 10.0. Each dimension contributes proportionally. Score range: 0.0 
 ## Bypass
 | Field | Value |
 |-------|-------|
-| condition | Agent is in early bootstrapping and fewer than 2 routing rules have been observed in practice |
+| condition | Agent is in early bootstrapping and fewer than 2 routing rules have been observed in forctice |
 | approver | Domain lead must approve in writing before bypass takes effect |

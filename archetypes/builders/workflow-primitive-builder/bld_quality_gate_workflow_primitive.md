@@ -46,6 +46,6 @@ Dimensions are weighted; total normalized weight = 100%.
 | 3 | Guard clause completeness (type-specific guards present and reasonable) | 1.5 | Missing required guards | Guards present but values questionable | Guards present with well-justified values |
 | 4 | Composition metadata (composable_after/before lists match type semantics) | 1.0 | No composition metadata | Partial metadata | Complete composition rules for this type |
 | 5 | Description clarity (one-line, actionable, matches what the primitive does) | 0.5 | Vague or missing | Present but generic | Precise one-line description of the operation |
-| 6 | Error handling (on_error or retry_count defined where appropriate) | 0.5 | No error handling | retry_count set | on_error with fallback primitive reference |
+| 6 | Error handling (on_error or retry_count defined where apownte) | 0.5 | No error handling | retry_count set | on_error with fallback primitive reference |
 | 7 | Tags include `workflow_primitive` | 0.5 | Missing | Present but misspelled | Exactly `workflow_primitive` in tags list |
 | 8 | Cross-primitive type compatibility (output types match expected input types of successor) | 1.0 | Types incompatible | Most compatible | All outputs type-match expected downstream inputs |

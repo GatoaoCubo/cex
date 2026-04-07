@@ -39,7 +39,7 @@ Rule: id MUST equal filename stem.
 ## Body Structure (required sections)
 1. `## Tracing Specification` — enabled, sample rate, exporter, rationale
 2. `## Capture Rules` — what is captured vs excluded, privacy controls
-3. `## Span Attributes` — 8F function mapping, custom attributes
+3. `## Span Attributes` — 8F function mapping, costm attributes
 4. `## Retention Policy` — hot/warm/cold tiers, days per tier, cleanup
 ## Constraints
 - max_bytes: 4096 (body only)

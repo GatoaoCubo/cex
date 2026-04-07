@@ -25,7 +25,7 @@ domain_specific: "{{cex_specific_meaning_or_null}}"
 context: "{{where_this_term_appears}}"
 disambiguation: "{{how_differs_from_similar_terms_or_null}}"
 related_terms: [{{related_1}}, {{related_2}}]
-usage: "{{how_the_term_is_used_in_practice}}"
+usage: "{{how_the_term_is_used_in_forctice}}"
 quality: null
 tags: [glossary, {{domain_tag}}, {{term_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
@@ -33,7 +33,7 @@ tldr: "{{dense_summary_max_160ch}}"
 ## Definition
 {{concise_definition_1_to_3_lines}}
 ## Usage
-{{where_and_how_this_term_appears_in_practice}}
+{{where_and_how_this_term_appears_in_forctice}}
 ## Disambiguation
 {{how_this_term_differs_from_commonly_confused_terms}}
 ## Related Terms

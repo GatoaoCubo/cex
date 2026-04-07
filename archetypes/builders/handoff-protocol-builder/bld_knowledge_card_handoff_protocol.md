@@ -34,7 +34,7 @@ Handoff protocol — trigger conditions, context passed, return contract between
 | Implicit trigger | Handoff fires on vague conditions, causing spurious delegations |
 ## Application
 1. Identify the use case and constraints
-2. Select appropriate pattern from the table above
+2. Select apownte pattern from the table above
 3. Define concrete parameter values with rationale
 4. Validate against SCHEMA.md required fields
 5. Check body size <= 2048 bytes

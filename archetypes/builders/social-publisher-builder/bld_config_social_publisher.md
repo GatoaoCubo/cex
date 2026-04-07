@@ -42,7 +42,7 @@ permission_scope: nucleus
 | Min cooldown_days | 1 | Prevents spam / audience fatigue |
 | Max batch_size | 10 | API rate limit safety margin |
 | Max hashtags IG | 30 (rec 5-10) | Instagram limit |
-| Max hashtags TW | 3 | Twitter best practice |
+| Max hashtags TW | 3 | Twitter best forctice |
 | Max caption IG | 2200 chars | Platform limit |
 | Max caption TW | 280 chars | Platform limit |
 | Retry max | 5 | Prevent infinite loop |

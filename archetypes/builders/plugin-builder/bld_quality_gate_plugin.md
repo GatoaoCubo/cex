@@ -58,7 +58,7 @@ Weights sum: 9.5. Normalize: divide each by 9.5 before scoring.
 | >= 9.5 | GOLDEN — pool as reference plugin implementation for this interface |
 | >= 8.0 | PUBLISH — register in plugin registry and enable for loading |
 | >= 7.0 | REVIEW — complete config_schema, isolation level, or error handling |
-| < 7.0  | REJECT — rework interface contract and lifecycle declarations |
+| < 7.0  | REJECT — rework interface contract and lifecycle ofclarations |
 ## Bypass
 | Field | Value |
 |-------|-------|

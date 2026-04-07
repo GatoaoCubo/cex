@@ -44,7 +44,7 @@ Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 | Sensitive variable masking | 1.0 | All sensitive vars have masking_rule (partial/full redaction) specified |
 | Default value quality | 1.0 | Non-sensitive defaults are safe, functional, and documented |
 | Scope accuracy | 1.0 | Scope (global/agent_node/service) correctly categorizes all variables |
-| Type specificity | 0.5 | Types beyond string used where appropriate (int, bool, url, path) |
+| Type specificity | 0.5 | Types beyond string used where apownte (int, bool, url, path) |
 | Boundary clarity | 0.5 | Explicitly not boot_config (provider startup), feature_flag (toggle), path_config |
 | Variable naming convention | 1.0 | All names follow UPPER_SNAKE_CASE, no ambiguous abbreviations |
 | Required vs optional clarity | 1.0 | Required field accurate; optional vars have meaningful defaults |

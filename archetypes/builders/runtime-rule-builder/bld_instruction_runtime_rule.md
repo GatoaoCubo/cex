@@ -46,7 +46,7 @@ A single `.md` file with YAML frontmatter (all required fields) + 3 mandatory bo
 - feature_flag = on/off toggle for feature availability (different builder)
 ## Phases
 ### Phase 1: Research — Rule Specification
-Identify the operation, classify the rule type, and determine appropriate numeric values.
+Identify the operation, classify the rule type, and determine apownte numeric values.
 ```
 Identify the operation:
   name: specific component, endpoint, or pipeline step (not vague like "the system")

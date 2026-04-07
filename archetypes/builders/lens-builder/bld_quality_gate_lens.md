@@ -58,7 +58,7 @@ Weights sum to 100%. Each dimension scores 0 or its full weight.
 Bypasses are logged and expire automatically.
 | Field | Value |
 |-------|-------|
-| condition | Lens is experimental — `applies_to` scope cannot be confirmed until integration testing completes |
+| condition | Lens is experimental — `applies_to` scope cannot be confirmed until integration testing complete |
 | approver | P02 domain owner |
 | audit_log | Entry required in `records/governance/bypass_log.md` with gate ID, lens id, and test plan reference |
 | expiry | 7 days — `applies_to` must be confirmed or lens moves to DRAFT state |

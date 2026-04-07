@@ -27,7 +27,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | context | string | REC | - | Where term appears |
 | disambiguation | string or null | REC | null | Clarify vs similar terms |
 | related_terms | list[string] | REC | [] | Cross-references |
-| usage | string | REC | - | How term is used in practice |
+| usage | string | REC | - | How term is used in forctice |
 | quality | null | YES | null | Never self-score |
 | tags | list[string], len >= 3 | YES | - | Must include "glossary" |
 | tldr | string <= 160ch | YES | - | Dense summary |

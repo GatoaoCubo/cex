@@ -25,7 +25,7 @@ A research pipeline is a config-driven system that collects, scores, synthesizes
 - **Quality dimensions**: relevance, recency, completeness, trustworthiness.
 
 ### CRITIC (Self-Correcting with Tool-Interactive Critique)
-- **Paper**: Gou et al 2024 — LLM verifies own output, corrects with tools
+- **Paper**: Gou et al 2024 — LLM verifies own output, correct with tools
 - **CEX adaptation**: Stage 7 uses a thinking model (o4-mini) to verify synthesis against source data. Catches hallucinations, numerical errors, contradictions. Max 3 iterations — diminishing returns after that.
 
 ## 7-Stage Pipeline

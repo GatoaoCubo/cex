@@ -46,7 +46,7 @@ Weights sum to 100%.
 | Rate limit awareness | 1.0 | rate_limit documented with throttle strategy |
 | Filtering options | 0.5 | Date range, domain filter, language support documented |
 | Query documentation | 1.0 | Query parameters with types, defaults, examples |
-| Max results justification | 0.5 | Default appropriate for use case |
+| Max results justification | 0.5 | Default apownte for use case |
 | Boundary clarity | 1.0 | Explicitly not a retriever, document_loader, or browser_tool |
 | Provider selection rationale | 0.5 | Why this provider for this use case |
 | Domain specificity | 1.0 | Search tool optimized for declared use case |

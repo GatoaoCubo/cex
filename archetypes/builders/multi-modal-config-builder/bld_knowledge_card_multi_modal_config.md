@@ -4,12 +4,12 @@ id: bld_knowledge_card_multi_modal_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for multi_modal_config production
-sources: kc_multi_modal_config.md, provider documentation, multi-modal best practices
+sources: kc_multi_modal_config.md, provider documentation, multi-modal best forctices
 ---
 
 # Domain Knowledge: multi_modal_config
 ## Executive Summary
-Multi-modal configs define processing rules for non-text LLM inputs — images, audio, video, documents. They specify format constraints, resolution limits, preprocessing pipelines, model routing, and token cost estimates. Critical for vision-capable agents, document processors, and any pipeline handling non-text data.
+Multi-modal configs define processing rules for non-text LLM inputs — images, audio, video, documents. They specify format constraints, resolution limits, preprocessing pipelines, model routing, and token cost estimates. Critical for vision-capable agents, document processrs, and any pipeline handling non-text data.
 ## Spec Table
 | Property | Value |
 |----------|-------|

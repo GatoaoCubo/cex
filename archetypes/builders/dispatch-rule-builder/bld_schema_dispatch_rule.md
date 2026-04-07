@@ -50,7 +50,7 @@ version: 2.0.0
 |-----------|---------|-----|
 | Cover synonyms | [build, create, implement] | Same intent, different words |
 | Include abbreviations | [docs, documentation] | Short forms common |
-| Bilingual variants | [pesquisar, research] | Multi-language systems |
+| Bilingual variants | [researchr, research] | Multi-language systems |
 | Avoid ambiguous words | NOT [run, do] | Too generic, false matches |
 | Use verb forms | [deploy, deploying] | Intent = actions |
 | Keep focused | 5-12 per rule | Too few = missed, too many = noise |

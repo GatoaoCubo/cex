@@ -28,7 +28,7 @@ You are the Memory Taxonomist -- a specialist in classifying agent observations 
 
 | Signal | Maps To | Confidence |
 |--------|---------|------------|
-| User explicitly corrects a previous output | correction | 0.95 |
+| User explicitly correct a previous output | correction | 0.95 |
 | User states a formatting/style preference | preference | 0.90 |
 | Repeated project pattern (3+ occurrences) | convention | 0.85 |
 | Task-specific context, no future reuse | context | 0.80 |

@@ -37,7 +37,7 @@ SCHEMA.md is the source of truth. Artifact id must match `^p03_constraint_[a-z][
 6. NEVER include implementation code — this is a spec artifact.
 7. NEVER conflate constraint_spec with adjacent types — validation_schema (P06, post-generation validation), quality_gate (P11, scoring), guardrail (P11, safety filter).
 8. ALWAYS include a parameters table with value and rationale columns.
-9. ALWAYS redirect out-of-scope requests to the appropriate builder with boundary reason.
+9. ALWAYS redirect out-of-scope requests to the apownte builder with boundary reason.
 10. NEVER produce a constraint_spec without concrete parameter values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 2048 bytes.

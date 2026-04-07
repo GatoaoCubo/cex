@@ -15,7 +15,7 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Decide on splits: eval-only (test: 1.0) is default unless training use is confirmed
 5. Estimate size: how many cases exist now, what is the target size, what is the growth cadence
 6. Identify source: human-curated, synthetic (LLM-generated), scraped, adversarial, or hybrid
-7. Choose target framework: Braintrust, LangSmith, DeepEval, HuggingFace, or custom
+7. Choose target framework: Braintrust, LangSmith, DeepEval, HuggingFace, or costm
 8. Check for existing eval_dataset artifacts to avoid duplicates
 9. Confirm dataset slug for id: snake_case, lowercase, no hyphens
 10. Confirm this is a COLLECTION (not a single golden_test, not a benchmark, not a scoring_rubric)

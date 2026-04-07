@@ -27,7 +27,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this.
 | tldr | string <= 160ch | YES | - | Dense summary |
 | description | string <= 200ch | REC | - | What the judge evaluates |
 | few_shot | list[map{input, output, score, rationale}] | REC | - | Calibration examples |
-| framework | enum: braintrust, deepeval, ragas, promptfoo, openai_evals, custom | REC | - | Eval framework integration |
+| framework | enum: braintrust, deepeval, ragas, promptfoo, openai_evals, costm | REC | - | Eval framework integration |
 | temperature | float 0.0-1.0 | REC | 0.0 | Judge inference temperature |
 | chain_of_thought | boolean | REC | true | Require rationale before score |
 | aggregation | enum: mean, min, max, weighted_sum | REC | mean | Multi-criteria aggregation |

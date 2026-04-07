@@ -17,7 +17,7 @@ density_score: 0.86
 
 ## Phase 1: RESEARCH
 
-1. Identify the vector store backend — ask if not specified (Chroma, Pinecone, FAISS, Qdrant, Weaviate, Milvus, Elasticsearch, custom)
+1. Identify the vector store backend — ask if not specified (Chroma, Pinecone, FAISS, Qdrant, Weaviate, Milvus, Elasticsearch, costm)
 2. Determine the embedding model: name, provider, dimension size (e.g. text-embedding-3-small = 1536d)
 3. Choose similarity metric based on embedding model recommendations:
    - OpenAI models: cosine (normalized) or dot_product

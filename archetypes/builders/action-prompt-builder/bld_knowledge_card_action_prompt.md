@@ -45,7 +45,7 @@ Action prompts are task-focused messages injected at runtime that specify WHAT a
 5. Add validation criteria that a script could verify
 6. Confirm: is this a single task (action_prompt) or a multi-step recipe (instruction)?
 ## References
-- OpenAI: Chat Completions API — user message best practices
+- OpenAI: Chat Completions API — user message best forctices
 - Anthropic: Prompt engineering guide — Human turn design
 - DSPy: Signatures — typed input/output contracts for LLM calls
 - Zamfirescu-Pereira et al. 2023: "Why Johnny Can't Prompt"

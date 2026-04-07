@@ -49,5 +49,5 @@ Rule: id MUST equal filename stem.
 - Action: 1-sentence description of what the step does
 - Input: what the step receives (from prior step or external)
 - Output: what the step produces (for next step or final output)
-- Signal: signal emitted on completion (reference signal-builder)
+- Signal: signal emitted on completion (references signal-builder)
 - Depends on: list of step numbers or "none"

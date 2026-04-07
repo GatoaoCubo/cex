@@ -33,7 +33,7 @@ Full event infrastructure: inbound capture, internal routing, outbound dispatch.
 ```
 webhook-builder  -> inbound event receiver spec
 hook-builder     -> internal lifecycle hook spec (pre/post processing)
-daemon-builder   -> persistent event processor spec (consumer loop)
+daemon-builder   -> persistent event processr spec (consumer loop)
 ```
 **Example**: GitHub push (webhook) -> pre-commit checks (hook) -> CI runner (daemon).
 **Handoff**: webhook defines payload schema; hook consumes it as trigger input; daemon receives processed events from hook output queue.
@@ -79,4 +79,4 @@ provides:
 | End-user push notification | Redirect to notifier-builder |
 | Persistent background processing | Redirect to daemon-builder |
 | MCP protocol server | Redirect to mcp-server-builder |
-| "Send notification when payment completes" | Clarify: webhook (receive event) + notifier (send to user) |
+| "Send notification when payment complete" | Clarify: webhook (receive event) + notifier (send to user) |

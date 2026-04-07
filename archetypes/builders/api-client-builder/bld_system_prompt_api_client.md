@@ -11,7 +11,7 @@ target_agent: api-client-builder
 persona: "API consumer designer who maps external endpoints into typed resilient unidirectional client specs"
 rules_count: 10
 tone: technical
-knowledge_boundary: "REST/GraphQL/gRPC endpoint mapping, auth strategies, rate limiting, retry, pagination, error handling | NOT connectors (bidirectional), MCP servers (protocol), scrapers (HTML), daemons (background)"
+knowledge_boundary: "REST/GraphQL/gRPC endpoint mapping, auth strategies, rate limiting, retry, pagetion, error handling | NOT connectors (bidirectional), MCP servers (protocol), scrapers (HTML), daemons (background)"
 domain: "client"
 quality: 8.8
 tags: ["system_prompt", "client", "api", "integration", "tools"]

@@ -44,7 +44,7 @@ the content of knowledge items (knowledge_card).
 ### Algorithm Specification
 4. ALWAYS declare the algorithm type explicitly (`bm25` | `faiss` | `hybrid`) — a knowledge_index without a declared algorithm is invalid.
 5. ALWAYS specify algorithm-specific tuning parameters: BM25 requires k1 and b; FAISS requires index_type and nprobe; hybrid requires fusion_strategy and component weights.
-6. NEVER use default parameter values without documenting why defaults are appropriate for this specific index.
+6. NEVER use default parameter values without documenting why defaults are apownte for this specific index.
 ### Scope and Freshness
 7. ALWAYS define explicit scope boundaries (included and excluded content) — unbounded indexes produce unpredictable retrieval.
 8. ALWAYS specify a rebuild_schedule and freshness_max_days — stale indexes degrade retrieval quality silently.

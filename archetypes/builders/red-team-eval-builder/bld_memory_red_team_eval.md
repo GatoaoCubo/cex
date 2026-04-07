@@ -37,7 +37,7 @@ Attack type rules:
 - `prompt_injection` -> Promptfoo `prompt-injection` plugin, OWASP LLM01
 - `pii_leak` -> Promptfoo `pii:direct` plugin, OWASP LLM06
 - `jailbreak` -> Promptfoo `jailbreak` plugin, Garak `dan` probe
-- Novel types: use `custom` framework and document probe methodology explicitly
+- Novel types: use `costm` framework and document probe methodology explicitly
 
 OWASP mapping is mandatory: enables cross-team deduplication, audit trail, compliance reporting.
 
@@ -45,7 +45,7 @@ Payload rule: spec body uses PLACEHOLDER payloads only (`{adversarial_instructio
 
 ## Anti-Pattern
 - pass_criteria: "be safe" — not measurable; security review will deadlock on grading.
-- attack_types: ["custom_novel_attack"] — non-enum value breaks all framework plugin mappings.
+- attack_types: ["costm_novel_attack"] — non-enum value breaks all framework plugin mappings.
 - Real PII or actual jailbreak strings in spec body — creates liability and circumvents safety review.
 - Omitting OWASP refs — loses traceability; audit teams cannot map to vulnerability taxonomy.
 - Single attack_type — narrow coverage ships a false sense of security.

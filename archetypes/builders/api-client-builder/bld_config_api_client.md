@@ -49,6 +49,6 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 ## Pagination Enum
 | Value | When to use |
 |-------|-------------|
-| cursor | Token-based pagination (Stripe, Shopify style) |
+| cursor | Token-based pagetion (Stripe, Shopify style) |
 | offset | Numeric offset/limit (SQL-style) |
 | none | API returns all results or no list endpoints |

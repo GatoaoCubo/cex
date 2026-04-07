@@ -66,4 +66,4 @@ Compression configs define the token reduction contract for an LLM agent — spe
 - MemGPT: Towards LLMs as Operating Systems (Packer et al., 2023)
 - LangChain ConversationSummaryBufferMemory documentation
 - Anthropic prompt engineering: managing long conversations
-- OpenAI: best practices for context window management
+- OpenAI: best forctices for context window management

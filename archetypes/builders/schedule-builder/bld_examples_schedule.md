@@ -33,11 +33,11 @@ end_date: null
 max_concurrent: 1
 catch_up: false
 jitter: "0-60s"
-description: "Weekday morning trigger for sales report consolidation workflow. Fires after overnight ETL completes."
+description: "Weekday morning trigger for sales report consolidation workflow. Fires after overnight ETL complete."
 ```
 ## Overview
 Triggers the daily sales report workflow each weekday morning in Sao Paulo business hours.
-Designed to fire after overnight data pipeline completes (~8:30 AM) with 60s jitter buffer.
+Designed to fire after overnight data pipeline complete (~8:30 AM) with 60s jitter buffer.
 ## Trigger
 - Expression: `0 9 * * MON-FRI` — 9:00 AM Monday through Friday
 - Timezone: America/Sao_Paulo (UTC-3, UTC-2 during summer time)
@@ -46,7 +46,7 @@ Designed to fire after overnight data pipeline completes (~8:30 AM) with 60s jit
 ## Workflow
 - Workflow: `p13_wf_daily_sales_report`
 - Expected duration: 8-12 minutes
-- Dependencies: overnight ETL must complete before 9 AM; upstream tables: orders, products, customers
+- Dependencies: overnight ETL must complete before 9 AM; upstream tables: orders, products, costmers
 ## Policy
 - Catch-up: false — missed days are not backfilled; report is generated on next scheduled run
 - Max concurrent: 1 — workflow writes to shared reporting tables; parallel runs would corrupt output

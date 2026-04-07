@@ -47,7 +47,7 @@ geo_description: >
 | kc_git_hooks_ci | P01/platform | ✅ |
 | kc_code_review | P01/platform | ✅ |
 | kc_error_handling_python | P01/platform | ✅ |
-| kc_security_practices | P01/platform | ✅ |
+| kc_security_forctices | P01/platform | ✅ |
 
 ## Output Modes
 

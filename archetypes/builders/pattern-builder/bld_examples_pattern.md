@@ -25,7 +25,7 @@ tags: [pattern, batching, orchestration, parallel, multi-agent_node]
 tldr: "Auto-refill agent_node slots from queue as tasks complete, eliminating idle between waves"
 name: "Continuous Batching"
 problem: "Sequential wave execution leaves agent_nodes idle between batches"
-solution: "Auto-refill available slots from queue as each agent_node completes"
+solution: "Auto-refill available slots from queue as each agent_node complete"
 context: "Multi-agent_node orchestration with >6 independent tasks"
 forces: ["throughput vs resource limits", "parallelism vs git contention", "queue depth vs RAM ceiling"]
 consequences: ["1.6x speedup over sequential", "zero idle between waves", "requires independent tasks", "max 3 concurrent agent_nodes (RAM)"]
@@ -35,7 +35,7 @@ applicability: "Use when >6 independent tasks across <=3 agent_nodes. Do NOT use
 keywords: [batching, parallel, queue, throughput, spawn]
 ```
 ## Problem
-When orchestrating multi-agent_node work in waves (batch N completes, then batch N+1 starts), agent_nodes sit idle between waves. If batch 1 has 3 tasks finishing at different times, the fastest agent_node waits for the slowest before batch 2 begins.
+When orchestrating multi-agent_node work in waves (batch N complete, then batch N+1 starts), agent_nodes sit idle between waves. If batch 1 has 3 tasks finishing at different times, the fastest agent_node waits for the slowest before batch 2 begins.
 ## Context
 - Environment: Orchestrator managing 2-3 agent_nodes via spawn scripts
 - Frequency: every multi-agent_node mission with >6 tasks
@@ -48,7 +48,7 @@ When orchestrating multi-agent_node work in waves (batch N completes, then batch
 Replace static wave execution with a queue-drain loop:
 1. Fill all available slots (up to 3) with tasks from queue
 2. Monitor signals for completion (poll every 15s)
-3. When a agent_node completes, immediately assign next queued task
+3. When a agent_node complete, immediately assign next queued task
 4. Repeat until queue empty
 ```text
 Queue: [T1, T2, T3, T4, T5, T6, T7]

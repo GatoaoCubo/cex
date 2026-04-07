@@ -37,7 +37,7 @@ SCHEMA.md is the source of truth. Artifact id must match `^p02_handoff_[a-z][a-z
 6. NEVER include implementation code — this is a spec artifact.
 7. NEVER conflate handoff_protocol with adjacent types — dispatch_rule (P12, keyword routing), workflow (P12, multi-step orchestration), router (P02, task routing).
 8. ALWAYS include a parameters table with value and rationale columns.
-9. ALWAYS redirect out-of-scope requests to the appropriate builder with boundary reason.
+9. ALWAYS redirect out-of-scope requests to the apownte builder with boundary reason.
 10. NEVER produce a handoff_protocol without concrete parameter values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 2048 bytes.
