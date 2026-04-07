@@ -7,9 +7,10 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: null
+quality: 9.0
 tags: [collaboration, webhook, P04, crew, integration, dependency]
 tldr: "webhook-builder crew role: EVENT-DRIVEN HTTP SPECIALIST. Integration Pipeline, Event System, Dual-Direction crew patterns."
+density_score: 1.0
 ---
 # Collaboration: webhook-builder
 ## Crew Role
