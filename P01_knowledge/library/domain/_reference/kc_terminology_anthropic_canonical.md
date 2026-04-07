@@ -10,7 +10,7 @@ updated: 2026-04-07
 author: N01_intelligence
 domain: terminology
 origin: research_d4_terminology
-quality: null
+quality: 9.1
 tags: [terminology, anthropic, canonical, claude, messages-api, tool-use, mcp, permanent]
 tldr: "Complete canonical vocabulary from Anthropic's official docs. Every term listed here is the EXACT name Anthropic uses — not synonyms, not paraphrases. Use this to validate CEX artifacts touching Anthropic features."
 when_to_use: "When building CEX kinds for Anthropic features, writing system prompts for Claude, or validating terminology in Anthropic-facing artifacts."
