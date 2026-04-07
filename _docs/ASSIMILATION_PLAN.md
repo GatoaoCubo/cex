@@ -6,9 +6,10 @@ title: "Plano de Assimilação Agno → CEX — Versionamento Universal LLM"
 version: 1.0.0
 author: N07
 created: 2026-04-01
-quality: null
+quality: 9.0
 tags: [assimilation, agno, roadmap, versioning, runtime, sdk]
 tldr: "4 fases, 8 semanas, 14 módulos. Absorve runtime do Agno como camada P04/P02 do CEX. De v6.0 para v10.0."
+density_score: 1.0
 ---
 
 # Plano de Assimilação Agno → CEX
