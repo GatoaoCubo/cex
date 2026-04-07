@@ -47,3 +47,27 @@ A good handoff should result in:
 - git commit with substantive changes
 
 If a nucleus completes in under 60 seconds, the task was too shallow.
+
+## Artifact References in Handoffs
+
+Every handoff N07 writes MUST include a "## Context" section listing:
+
+```markdown
+## Context (pre-loaded for you)
+Your deck: {nucleus_dir}/deck_{nuc}.md (loaded in system prompt)
+
+## Relevant artifacts (READ these before producing)
+- archetypes/builders/{kind}-builder/ (13 ISOs)
+- P01_knowledge/library/kind/kc_{kind}.md
+- P{xx}/{subdir}/tpl_{kind}.md (output template)
+- .claude/rules/{nuc}*.md (your rules)
+
+## Expected output
+- File: {path}
+- Kind: {kind}
+- Frontmatter: standard (id, kind, title, version, quality: null, tags)
+- Format: structured data (tables > prose)
+```
+
+This eliminates discovery turns. The nucleus reads the handoff,
+reads the referenced artifacts, and produces. No wandering.
