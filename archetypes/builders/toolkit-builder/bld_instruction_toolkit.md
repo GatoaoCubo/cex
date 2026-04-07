@@ -16,7 +16,7 @@ prerequisites:
   - MCP server availability is confirmed (if MCP tools are included)
 validation_method: checklist
 domain: toolkit
-quality: null
+quality: 9.0
 tags: [instruction, toolkit, permissions, P04]
 idempotent: true
 atomic: true
