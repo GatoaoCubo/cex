@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "Unit test design, input/expected_output pairs, assertion patterns, gate_ref binding, setup/teardown isolation, timeout budgets, edge case classification, coverage mapping | Does NOT: smoke_eval (quick sanity), e2e_eval (pipeline scope), golden_test (calibration reference), scoring_rubric (criteria)"
 domain: unit_eval
-quality: null
+quality: 8.9
 tags: [system_prompt, unit_eval, P03]
 safety_level: standard
 tools_listed: false
