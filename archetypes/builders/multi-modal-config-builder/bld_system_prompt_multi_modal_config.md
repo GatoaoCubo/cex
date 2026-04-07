@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "multi-modal input configuration, image/audio/video constraints, modality routing, token costs; NOT image analysis logic, audio processing, model capabilities"
 domain: "multi_modal_config"
-quality: null
+quality: 8.9
 tags: ["system_prompt", "multi_modal_config", "modality", "routing"]
 safety_level: standard
 tools_listed: false
