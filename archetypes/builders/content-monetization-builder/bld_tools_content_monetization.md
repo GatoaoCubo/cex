@@ -1,7 +1,7 @@
 ---
 kind: tools
 id: bld_tools_content_monetization
-pillar: P04
+pillar: P11
 llm_function: CALL
 purpose: Tools, APIs, and data sources for content monetization pipeline
 ---
@@ -80,7 +80,7 @@ Hotmart Club (native), Teachable, Thinkific, DS24 member area, Custom LMS.
 |--------|------|------|
 | Schema | P06/_schema.yaml | Field definitions |
 | Kind KC | P01_knowledge/library/kind/ | Domain knowledge |
-| Examples | P04_tools/examples/ | Reference configs |
+| Examples | P11_feedback/examples/ | Reference configs |
 | SEED_BANK | archetypes/SEED_BANK.yaml | Builder seeds |
 
 ## Tool Permissions

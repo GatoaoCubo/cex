@@ -17,7 +17,7 @@ when_to_use: "Building or mapping LlamaIndex constructs to CEX kinds"
 keywords: [llamaindex, query-engine, node, index, retriever, ingestion, workflow]
 long_tails:
   - "How does LlamaIndex ingestion pipeline map to CEX document_loader and chunk_strategy"
-  - "Which LlamaIndex classes map to CEX retriever and brain_index kinds"
+  - "Which LlamaIndex classes map to CEX retriever and knowledge_index kinds"
 axioms:
   - "Document -> TextNode is the fundamental data transformation — nodes carry relationships and metadata"
   - "VectorStoreIndex is the default index; PropertyGraphIndex for relational queries"
@@ -33,7 +33,7 @@ feeds_kinds:
   - embedding_config # Embedding interface, Settings.embed_model
   - workflow        # Workflow (event-driven), IngestionPipeline
   - response_format # ResponseSynthesizer (generates coherent answers)
-  - brain_index     # VectorStoreIndex, PropertyGraphIndex, IndexStore
+  - knowledge_index     # VectorStoreIndex, PropertyGraphIndex, IndexStore
   - knowledge_card  # Document, TextNode (atomic data units)
 density_score: 0.90
 ---
@@ -58,8 +58,8 @@ criticality: high
 | `SentenceSplitter` | `llama_index.core.node_parser` | chunk_strategy | Split by sentence boundaries |
 | `SimpleDirectoryReader` | `llama_index.core` | document_loader | Multi-file loader |
 | `IngestionPipeline` | `llama_index.core.ingestion` | workflow | End-to-end document processing |
-| `VectorStoreIndex` | `llama_index.core` | brain_index | Semantic search index via embeddings |
-| `PropertyGraphIndex` | `llama_index.core` | brain_index | Graph-based relational index |
+| `VectorStoreIndex` | `llama_index.core` | knowledge_index | Semantic search index via embeddings |
+| `PropertyGraphIndex` | `llama_index.core` | knowledge_index | Graph-based relational index |
 | `StorageContext` | `llama_index.core` | retriever_config | Unified storage configuration |
 | `BaseRetriever` | `llama_index.core.retrievers` | retriever | Abstract retriever interface |
 | `QueryEngine` | `llama_index.core.query_engine` | retriever | Process and answer queries |
@@ -93,7 +93,7 @@ criticality: high
 ## CEX Mapping
 
 ```text
-[document_loader -> chunk_strategy] -> [embedding_config -> brain_index]
+[document_loader -> chunk_strategy] -> [embedding_config -> knowledge_index]
     -> [retriever_config -> retriever -> response_format] -> [agent/workflow]
 ```
 

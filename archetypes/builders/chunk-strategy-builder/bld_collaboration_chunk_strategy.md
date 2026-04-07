@@ -42,4 +42,4 @@ None — independent builder (layer 0).
 |---------|-----|
 | embedding-config-builder | Downstream consumer |
 | retriever-config-builder | Downstream consumer |
-| brain-index-builder | Downstream consumer |
+| knowledge-index-builder | Downstream consumer |

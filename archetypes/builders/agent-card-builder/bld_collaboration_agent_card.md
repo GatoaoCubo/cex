@@ -1,6 +1,6 @@
 ---
 kind: collaboration
-id: bld_collaboration_director
+id: bld_collaboration_agent_card
 pillar: P08
 llm_function: COLLABORATE
 purpose: How agent-card-builder works in crews with other builders

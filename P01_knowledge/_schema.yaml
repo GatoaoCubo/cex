@@ -183,3 +183,23 @@ kinds:
     - top_k
     - search_type
     llm_function: CONSTRAIN
+  citation:
+    description: Structured source attribution with provenance, URL, date, and reliability metadata
+    boundary: Source reference with provenance. NAO eh knowledge_card (conteudo em si), rag_source (pipeline config), nem glossary_entry (definicao de termo).
+    layer: content
+    core: false
+    machine_format: yaml
+    naming: p01_cit_{{topic}}.md
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - source_type
+    - reliability_tier
+    - url
+    - date_accessed
+    - title
+    - excerpt
+    llm_function: INJECT

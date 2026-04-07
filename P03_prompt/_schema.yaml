@@ -193,3 +193,23 @@ kinds:
     - version
     - author
     llm_function: GOVERN
+  context_window_config:
+    description: Token budget allocation, priority tiers, and overflow rules for prompt assembly
+    boundary: Budget allocation spec. NAO eh prompt_template (conteudo), system_prompt (identidade), nem model_card (capabilities).
+    layer: spec
+    core: true
+    machine_format: yaml
+    naming: p03_cwc_{{model}}.yaml
+    constraints:
+      max_bytes: 2048
+    frontmatter_required:
+    - id
+    - kind
+    - pillar
+    - total_tokens
+    - system_prompt_budget
+    - retrieved_context_budget
+    - output_reserve
+    - overflow_strategy
+    - priority_tiers
+    llm_function: CONSTRAIN

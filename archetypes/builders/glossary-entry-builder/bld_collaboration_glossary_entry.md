@@ -43,4 +43,4 @@ None — independent builder (layer 0). Terms can be defined standalone.
 | context-doc-builder | References glossary terms in domain documentation |
 | knowledge-card-builder | Uses terms as search keywords for discoverability |
 | axiom-builder | References precise term definitions in axiom statements |
-| brain-index-builder | Uses glossary terms for query expansion in search |
+| knowledge-index-builder | Uses glossary terms for query expansion in search |

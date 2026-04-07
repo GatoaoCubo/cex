@@ -1,6 +1,6 @@
 ---
 kind: examples
-id: bld_examples_director
+id: bld_examples_agent_card
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of agent_card artifacts

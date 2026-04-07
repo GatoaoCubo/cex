@@ -31,4 +31,4 @@ triggers: "create memory scope", "define memory scope", "build memory scope conf
 ## Crew Role
 In a crew, I handle MEMORY SCOPE DEFINITION.
 I answer: "what are the parameters and constraints for this memory scope?"
-I do NOT handle: session_state (P10, runtime state), brain_index (P10, search index), learning_record (P10, pattern storage).
+I do NOT handle: session_state (P10, runtime state), knowledge_index (P10, search index), learning_record (P10, pattern storage).

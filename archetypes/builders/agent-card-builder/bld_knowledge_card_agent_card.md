@@ -1,6 +1,6 @@
 ---
 kind: knowledge_card
-id: bld_knowledge_card_director
+id: bld_knowledge_card_agent_card
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for agent_card production — atomic searchable facts

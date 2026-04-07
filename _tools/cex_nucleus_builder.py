@@ -76,7 +76,7 @@ KIND_TO_SUBDIR = {
     # Retrieval
     "chunk_strategy": "knowledge",
     "retriever_config": "knowledge",
-    "brain_index": "knowledge",
+    "knowledge_index": "knowledge",
     "embedding_config": "knowledge",
 }
 

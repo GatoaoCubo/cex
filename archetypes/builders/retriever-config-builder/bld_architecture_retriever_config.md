@@ -35,7 +35,7 @@ purpose: Component map of retriever_config — inventory, dependencies, and arch
 | Not embedding_config | embedding_config (vector model) |
 | Not chunk_strategy | chunk_strategy (splitting) |
 | Not knowledge_card | knowledge_card (content) |
-| Not brain_index | brain_index (index infra) |
+| Not knowledge_index | knowledge_index (index infra) |
 ## Layer Map
 | Layer | Components | Purpose |
 |-------|-----------|---------|

@@ -22,7 +22,7 @@ permission_scope: nucleus
 | Scope | Convention | Example |
 |-------|-----------|---------|
 | Config file | `content_monetization_config_{empresa}.yaml` | `content_monetization_config_codexa.yaml` |
-| Template | `tpl_content_monetization.md` | P04_tools/templates/ |
+| Template | `tpl_content_monetization.md` | P11_feedback/templates/ |
 | Examples | `ex_content_monetization_{model}.md` | `ex_content_monetization_saas.md` |
 | Instance | `content_monetization_config.md` | _instances/{co}/N06_commercial/ |
 | Frontmatter id | `p04_cli_content_monetization_{slug}` | `p04_cli_content_monetization_codexa` |
@@ -68,9 +68,9 @@ permission_scope: nucleus
 ## File Placement Rules
 | Artifact Type | Directory | Pillar |
 |--------------|-----------|--------|
-| Template | P04_tools/templates/ | P04 |
-| Examples | P04_tools/examples/ | P04 |
-| Compiled | P04_tools/compiled/ | P04 |
+| Template | P11_feedback/templates/ | P04 |
+| Examples | P11_feedback/examples/ | P04 |
+| Compiled | P11_feedback/compiled/ | P04 |
 | Nucleus tool | N06_commercial/tools/ | P04 |
 | Nucleus KCs | N06_commercial/knowledge/ | P01 |
 | Company config | _instances/{co}/N06_commercial/ | instance |

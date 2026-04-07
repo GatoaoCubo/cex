@@ -87,7 +87,7 @@ phase_1_research_rule_specification: "Identify the operation, classify the rule 
   \ and severity assessment."
 phase_2_classify_boundary_check: "Confirm the artifact belongs to `runtime_rule` and not a sibling kind.\nIF the rule is about\
   \ when to retire or promote an artifact through its lifecycle:\n  RETURN \"Route to lifecycle-rule-builder.\"\nIF the rule\
-  \ is an inviolable behavioral constraint that must never be overridden:\n  RETURN \"Route to law-builder — laws are non-technical\
+  \ is an inviolable behavioral constraint that must never be overridden:\n  RETURN \"Route to invariant-builder — laws are non-technical\
   \ behavioral rules.\"\nIF the rule defines a safety boundary for agent behavior:\n  RETURN \"Route to guardrail-builder.\"\
   \nIF the value is an environment variable (API key, base URL, flag):\n  RETURN \"Route to env-config-builder.\"\nIF the\
   \ value is a boolean feature toggle:\n  RETURN \"Route to feature-flag-builder.\"\nIF the rule governs timeout, retry, rate\

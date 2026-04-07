@@ -402,12 +402,12 @@ kind:
     path: kind\kc_boot_config.md
     pillar: P02
     title: Boot Config — Deep Knowledge for boot_config
-  p01_kc_brain_index:
-    domain: brain_index
+  p01_kc_knowledge_index:
+    domain: knowledge_index
     kind: knowledge_card
-    path: kind\kc_brain_index.md
+    path: kind\kc_knowledge_index.md
     pillar: P10
-    title: Brain Index — Deep Knowledge for brain_index
+    title: Brain Index — Deep Knowledge for knowledge_index
   p01_kc_browser_tool:
     domain: browser_tool
     kind: knowledge_card
@@ -510,10 +510,10 @@ kind:
     path: kind\kc_diagram.md
     pillar: P08
     title: Diagram — Deep Knowledge for diagram
-  p01_kc_director:
+  p01_kc_supervisor:
     domain: director
     kind: knowledge_card
-    path: kind\kc_director.md
+    path: kind\kc_supervisor.md
     pillar: P08
     title: Director — Deep Knowledge for director
   p01_kc_dispatch_rule:
@@ -666,10 +666,10 @@ kind:
     path: kind\kc_knowledge_card.md
     pillar: P01
     title: Knowledge Card — Deep Knowledge for knowledge_card
-  p01_kc_law:
+  p01_kc_invariant:
     domain: law
     kind: knowledge_card
-    path: kind\kc_law.md
+    path: kind\kc_invariant.md
     pillar: P08
     title: Law — Deep Knowledge for law
   p01_kc_learning_record:
@@ -1519,11 +1519,11 @@ domains:
     feeds_kinds:
     - boot_config
     origin: ''
-  p01_kc_brain_index:
-    path: P01_knowledge\library\kind\kc_brain_index.md
-    title: Brain Index — Deep Knowledge for brain_index
+  p01_kc_knowledge_index:
+    path: P01_knowledge\library\kind\kc_knowledge_index.md
+    title: Brain Index — Deep Knowledge for knowledge_index
     feeds_kinds:
-    - brain_index
+    - knowledge_index
     origin: ''
   p01_kc_browser_tool:
     path: P01_knowledge\library\kind\kc_browser_tool.md
@@ -1633,8 +1633,8 @@ domains:
     feeds_kinds:
     - diagram
     origin: ''
-  p01_kc_director:
-    path: P01_knowledge\library\kind\kc_director.md
+  p01_kc_supervisor:
+    path: P01_knowledge\library\kind\kc_supervisor.md
     title: Director — Deep Knowledge for director
     feeds_kinds:
     - director
@@ -1800,8 +1800,8 @@ domains:
     title: 'KC: Landing Page'
     feeds_kinds: []
     origin: ''
-  p01_kc_law:
-    path: P01_knowledge\library\kind\kc_law.md
+  p01_kc_invariant:
+    path: P01_knowledge\library\kind\kc_invariant.md
     title: Law — Deep Knowledge for law
     feeds_kinds:
     - law
@@ -2150,11 +2150,11 @@ domains:
     feeds_kinds:
     - validator
     origin: ''
-  p01_kc_vectordb_backend:
-    path: P01_knowledge\library\kind\kc_vectordb_backend.md
-    title: VectorDB Backend -- Deep Knowledge for vectordb_backend
+  p01_kc_vector_store:
+    path: P01_knowledge\library\kind\kc_vector_store.md
+    title: VectorDB Backend -- Deep Knowledge for vector_store
     feeds_kinds:
-    - vectordb_backend
+    - vector_store
     origin: ''
   p01_kc_vision_tool:
     path: P01_knowledge\library\kind\kc_vision_tool.md
@@ -2345,7 +2345,7 @@ domains:
     - workflow
     - function_def
     - retriever
-    - brain_index
+    - knowledge_index
     - embedding_config
     - prompt_template
     - knowledge_card
@@ -2395,7 +2395,7 @@ domains:
     - embedding_config
     - workflow
     - response_format
-    - brain_index
+    - knowledge_index
     - knowledge_card
     origin: src_framework_taxonomy
   p01_kc_mcp_protocol:
@@ -2533,8 +2533,8 @@ coverage:
   boot_config:
   - p01_kc_boot_config
   - p01_kc_agent_identity
-  brain_index:
-  - p01_kc_brain_index
+  knowledge_index:
+  - p01_kc_knowledge_index
   - p01_kc_haystack_patterns
   - p01_kc_llamaindex_patterns
   browser_tool:
@@ -2595,7 +2595,7 @@ coverage:
   - p01_kc_diagram
   - p01_kc_governance_patterns
   director:
-  - p01_kc_director
+  - p01_kc_supervisor
   - p01_kc_academic_agent_patterns
   - p01_kc_chinese_llm_ecosystem
   - p01_kc_crewai_patterns
@@ -2701,7 +2701,7 @@ coverage:
   - p01_kc_llamaindex_patterns
   - p01_kc_mcp_protocol
   law:
-  - p01_kc_law
+  - p01_kc_invariant
   - p01_kc_governance_patterns
   learning_record:
   - p01_kc_learning_record
@@ -2888,8 +2888,8 @@ coverage:
   validator:
   - p01_kc_validator
   - p01_kc_schema_validation
-  vectordb_backend:
-  - p01_kc_vectordb_backend
+  vector_store:
+  - p01_kc_vector_store
   vision_tool:
   - p01_kc_vision_tool
   - p01_kc_openai_api_patterns

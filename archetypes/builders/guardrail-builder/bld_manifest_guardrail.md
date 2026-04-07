@@ -31,4 +31,4 @@ triggers: "define safety guardrail", "what restrictions apply", "create security
 ## Crew Role
 In a crew, I handle SAFETY BOUNDARIES.
 I answer: "what must an agent NEVER do, and what happens if it tries?"
-I do NOT handle: access permissions (permission-builder [PLANNED]), operational laws (law-builder [PLANNED]), quality scoring (quality-gate-builder).
+I do NOT handle: access permissions (permission-builder [PLANNED]), operational laws (invariant-builder [PLANNED]), quality scoring (quality-gate-builder).

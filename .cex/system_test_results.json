@@ -1,20 +1,20 @@
 {
-  "timestamp": "2026-04-07T12:47:59.915882",
-  "pass": 56,
-  "fail": 2,
+  "timestamp": "2026-04-07T12:53:14.785985",
+  "pass": 55,
+  "fail": 3,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 82.6,
+  "elapsed_s": 95.2,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "53026B"
+      "detail": "53042B"
     },
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "68540B"
+      "detail": "68437B"
     },
     {
       "name": "tool:cex_intent.py",
@@ -29,7 +29,7 @@
     {
       "name": "tool:cex_doctor.py",
       "status": "PASS",
-      "detail": "15691B"
+      "detail": "15695B"
     },
     {
       "name": "tool:cex_index.py",
@@ -229,7 +229,7 @@
     {
       "name": "registry:kinds_meta",
       "status": "PASS",
-      "detail": "117 kinds registered"
+      "detail": "123 kinds registered"
     },
     {
       "name": "runner:dryrun_runs",
@@ -288,13 +288,13 @@
     },
     {
       "name": "git:clean",
-      "status": "PASS",
-      "detail": "1 dirty files"
+      "status": "FAIL",
+      "detail": "259 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "444b2cf9 [N01] Research: 4 LLM terminology KCs — Rosetta Sto"
+      "detail": "a85fa080 [N05] F3 INJECT: hoist imports to top-level (re, js"
     }
   ]
 }

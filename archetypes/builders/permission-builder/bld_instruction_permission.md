@@ -39,7 +39,7 @@ The permission-builder receives a **resource or artifact description** and produ
 - `{{access_model}}` — optional: `RBAC` (role-based), `ABAC` (attribute-based), or `ACL` (access control list). Default: `RBAC`
 - `{{conditions}}` — optional: contextual conditions under which access applies (e.g., "only during business hours", "only from internal network")
 **Output**: a single `permission` artifact at `p09_perm_{{scope_slug}}.md` with read/write/execute rules, role hierarchy, allow_list, deny_list, audit config, and escalation path.
-**Boundaries**: handles access control rules only. Does NOT define safety constraints that limit what a system CAN do regardless of permission (use guardrail-builder), operational laws that are inviolable (use law-builder), or quality thresholds (use quality_gate-builder).
+**Boundaries**: handles access control rules only. Does NOT define safety constraints that limit what a system CAN do regardless of permission (use guardrail-builder), operational laws that are inviolable (use invariant-builder), or quality thresholds (use quality_gate-builder).
 ## Phases
 ### Phase 1: RESEARCH
 **Goal**: Identify the full access landscape — scope, roles, access patterns, and existing rules — before writing.

@@ -1,6 +1,6 @@
 ---
 kind: memory
-id: bld_memory_director
+id: bld_memory_agent_card
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated production experience for agent_card artifact generation

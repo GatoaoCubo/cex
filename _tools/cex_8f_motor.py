@@ -192,7 +192,7 @@ OBJECT_TO_KINDS = {
     "benchmark": [("benchmark", "P07", "GOVERN")],
     "boot": [("boot_config", "P02", "CONSTRAIN")],
     "boot_config": [("boot_config", "P02", "CONSTRAIN")],
-    "brain_index": [("brain_index", "P10", "INJECT")],
+    "knowledge_index": [("knowledge_index", "P10", "INJECT")],
     "browser": [("browser_tool", "P04", "CALL")],
     "browser_tool": [("browser_tool", "P04", "CALL")],
     "bugloop": [("bugloop", "P11", "GOVERN")],
@@ -274,8 +274,8 @@ OBJECT_TO_KINDS = {
     "loader": [("document_loader", "P04", "CALL")],
     "mcp": [("mcp_server", "P04", "CALL")],
     "mcp_server": [("mcp_server", "P04", "CALL")],
-    "memoria": [("brain_index", "P10", "INJECT")],
-    "memory": [("brain_index", "P10", "INJECT")],
+    "memoria": [("knowledge_index", "P10", "INJECT")],
+    "memory": [("knowledge_index", "P10", "INJECT")],
     "memory_scope": [("memory_scope", "P02", "INJECT")],
     "memory_summary": [("memory_summary", "P10", "INJECT")],
     "mental_model": [("mental_model", "P02", "BECOME")],
@@ -408,7 +408,7 @@ COMPLEX_BUILDERS = frozenset(
         "model-card-builder",
         "agent-package-builder",
         "e2e-eval-builder",
-        "director-builder",
+        "supervisor-builder",
     ]
 )
 META_BUILDERS = frozenset(["_builder-builder"])

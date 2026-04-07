@@ -466,7 +466,7 @@ Interim: manual check against this file
 | 18 | component_map | P08 | spec | 0 | 3072 | yaml | No | Component mapping |
 | 19 | diagram | P08 | spec | 0 | 4096 | yaml | No | Architecture diagram |
 | 20 | env_config | P09 | runtime | 0 | 4096 | yaml | Yes | Environment vars |
-| 21 | brain_index | P10 | runtime | 0 | 3072 | yaml | No | Search index config |
+| 21 | knowledge_index | P10 | runtime | 0 | 3072 | yaml | No | Search index config |
 | 22 | mental_model_P10 | P10 | runtime | 0 | 3072 | yaml | Yes | Runtime state model |
 | 23 | bugloop | P11 | runtime | 0 | 4096 | yaml | Yes | Fix-verify cycle |
 | 24 | lifecycle_rule | P11 | governance | 0 | 4096 | yaml | No | Lifecycle policy |

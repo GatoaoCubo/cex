@@ -31,5 +31,5 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 1. Check QUALITY_GATES.md manually — no automated validator
 2. HARD gates: YAML parses, `id` matches `^p01_ec_[a-z][a-z0-9_]+$`, `kind` is the literal string `embedding_config`, model name is specified, dimensions is a numeric integer, chunk_size is defined, distance metric is selected, `quality` is null
 3. SOFT gates: score each gate from QUALITY_GATES.md against the artifact
-4. Cross-check: is this a model configuration? If it describes the index structure it belongs in `brain_index`. If it describes a data source being indexed it belongs in `rag_source`. If it produces content it belongs in `knowledge_card`. This artifact configures how embeddings are generated, nothing more.
+4. Cross-check: is this a model configuration? If it describes the index structure it belongs in `knowledge_index`. If it describes a data source being indexed it belongs in `rag_source`. If it produces content it belongs in `knowledge_card`. This artifact configures how embeddings are generated, nothing more.
 5. If score < 8.0: revise in the same pass before outputting

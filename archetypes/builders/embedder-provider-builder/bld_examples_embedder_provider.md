@@ -48,7 +48,7 @@ linked_artifacts:
 data_source: "https://platform.openai.com/docs/guides/embeddings"
 ## Boundary
 embedder_provider IS: connection config for text-embedding-3-small (dimensions, normalization, batch limits).
-embedder_provider IS NOT: vectordb_backend, model_provider, retriever, chunker.
+embedder_provider IS NOT: vector_store, model_provider, retriever, chunker.
 ## Configuration Matrix
 | Parameter | Value | Source |
 |-----------|-------|--------|

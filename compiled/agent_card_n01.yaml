@@ -85,7 +85,7 @@ p01_knowledge_primary_domain_all_10_kinds: '| Kind | Naming Pattern | Status |
 
   | retriever_config | `p01_retr_cfg_{{store}}.md` | Available, none built |
 
-  | vectordb_backend | `p01_vdb_{{backend}}.yaml` | Available, none built |'
+  | vector_store | `p01_vdb_{{backend}}.yaml` | Available, none built |'
 p07_evals_research_quality_measurement: '| Kind | Naming Pattern | Status |
 
   |------|---------------|--------|
@@ -110,7 +110,7 @@ p10_memory_research_accumulation: '| Kind | Naming Pattern | Status |
 
   |------|---------------|--------|
 
-  | brain_index | `p10_bi_{{index}}.yaml` | Available, none built |
+  | knowledge_index | `p10_bi_{{index}}.yaml` | Available, none built |
 
   | learning_record | `p10_lr_{{topic}}.md + .yaml` | Available, none built |'
 p02_model_agent_cognition: '| Kind | Naming Pattern | Status |
@@ -196,7 +196,7 @@ strengths:
   By comparison, N03 covers ~15 kinds focused on P03/P08, and N05 covers ~18 kinds focused on P09/P11.'
 - '1M context window: Enables processing entire codebases, long research papers, and multi-document analysis in a single pass.
   Critical for competitive intelligence that requires cross-referencing multiple sources.'
-- 'Knowledge accumulation infrastructure: Memory tools (select/update/age) + brain_index + learning_record kinds enable N01
+- 'Knowledge accumulation infrastructure: Memory tools (select/update/age) + knowledge_index + learning_record kinds enable N01
   to build institutional memory across research sessions.'
 gaps: '| Gap | Impact | Priority | Comparison |
 
@@ -214,7 +214,7 @@ gaps: '| Gap | Impact | Priority | Comparison |
   | No `embedder_provider` built | Cannot configure embedding models for RAG despite being a P01 kind | Medium | Exists in
   N00 examples only |
 
-  | No `vectordb_backend` built | Cannot configure vector stores for semantic search | Medium | Exists in N00 examples only
+  | No `vector_store` built | Cannot configure vector stores for semantic search | Medium | Exists in N00 examples only
   |
 
   | No `benchmark` artifacts | Cannot measure own research quality over time despite P07 access | Medium | N05 has evaluation
@@ -222,7 +222,7 @@ gaps: '| Gap | Impact | Priority | Comparison |
 
   | No `eval_dataset` artifacts | No test cases for validating research output quality | Medium | -- |
 
-  | No `brain_index` | Missing semantic index over 15 research outputs -- retrieval is keyword-only | Low | N04 likely has
+  | No `knowledge_index` | Missing semantic index over 15 research outputs -- retrieval is keyword-only | Low | N04 likely has
   this |
 
   | 15/20 kinds unbuilt | 75% of buildable kinds have zero instances -- potential unrealized | Low | Expected for v1 |

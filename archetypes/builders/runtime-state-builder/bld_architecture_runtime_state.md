@@ -38,7 +38,7 @@ runtime_state   --signals-->      state_update
 | Contains routing rules, priorities, and heuristics that evolve | An ephemeral snapshot discarded after session (session_state P10) |
 | Persists within or across sessions based on scope | A permanent record of past experience (learning_record P10) |
 | Updated by state transitions triggered at runtime | A static configuration loaded once at boot |
-| Scoped to one agent with specific update conditions | A search index or vector store (brain_index P01) |
+| Scoped to one agent with specific update conditions | A search index or vector store (knowledge_index P01) |
 | Reflects current operational intelligence | A historical changelog |
 ## Layer Map
 | Layer | Components | Purpose |

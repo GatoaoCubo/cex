@@ -21,8 +21,8 @@ purpose: Component map of knowledge_card — inventory, dependencies, and archit
 ## Dependency Graph
 ```
 rag_source     --produces--> knowledge_card
-knowledge_card --queried_by--> brain_index
-brain_index    --injects_into--> system_prompt
+knowledge_card --queried_by--> knowledge_index
+knowledge_index    --injects_into--> system_prompt
 knowledge_card --informs--> few_shot_example
 knowledge_card --referenced_by--> context_doc
 knowledge_card --referenced_by--> agent
@@ -30,8 +30,8 @@ knowledge_card --referenced_by--> agent
 | From | To | Type | Data |
 |------|----|------|------|
 | rag_source | knowledge_card | data_flow | raw source text to distill |
-| knowledge_card | brain_index | data_flow | title, body, tags for BM25 and vector indexing |
-| brain_index | system_prompt | data_flow | retrieved facts injected into prompt context |
+| knowledge_card | knowledge_index | data_flow | title, body, tags for BM25 and vector indexing |
+| knowledge_index | system_prompt | data_flow | retrieved facts injected into prompt context |
 | knowledge_card | few_shot_example | data_flow | factual grounding for input/output pairs |
 | knowledge_card | context_doc | data_flow | referenced as supporting evidence |
 | knowledge_card | agent | data_flow | linked domain knowledge in agent definition |
@@ -51,4 +51,4 @@ knowledge_card --referenced_by--> agent
 | Content | body, confidence_score, expiry_hint | Carry the distilled fact with reliability signal |
 | Discoverability | domain_tags, linked_artifacts | Enable retrieval routing and cross-referencing |
 | Provenance | sources | Trace the fact back to its origin |
-| Consumption | brain_index, system_prompt | Retrieve and inject facts into agent context at runtime |
+| Consumption | knowledge_index, system_prompt | Retrieve and inject facts into agent context at runtime |

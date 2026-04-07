@@ -42,7 +42,7 @@ source_session: SELF_BOOTSTRAP_2026-04-07
 | few_shot_example | **few-shot example** | All providers | ✅ Industry standard term |
 | chunk_strategy | **chunking strategy** / text splitter | LangChain | ✅ Aligned |
 | retriever_config | **retriever configuration** | LangChain, LlamaIndex | ✅ Aligned |
-| vectordb_backend | **vector store** / vector database | All | ⚠️ Industry says "vector store" not "vectordb backend" |
+| vector_store | **vector store** / vector database | All | ⚠️ Industry says "vector store" not "vectordb backend" |
 | embedder_provider | **embedding provider** | — | ✅ OK |
 
 ### P02 Model — "QUEM o agente EH"
@@ -157,7 +157,7 @@ All kinds here are standard infrastructure terms. ✅ No issues.
 
 | CEX kind | Industry term | Provider | Status |
 |----------|--------------|----------|--------|
-| brain_index | **knowledge index** / semantic index | LlamaIndex | ⚠️ "Brain" is metaphor. "Knowledge index" is industry. |
+| knowledge_index | **knowledge index** / semantic index | LlamaIndex | ⚠️ "Brain" is metaphor. "Knowledge index" is industry. |
 | entity_memory | **entity memory** | LangChain | ✅ Industry standard |
 | learning_record | **learning record** / experience log | — | ✅ OK |
 | memory_summary | **conversation summary** / memory summary | LangChain | ✅ Aligned |
@@ -203,8 +203,8 @@ ALL 12 _schema.yaml files use Portuguese descriptions:
 ### PROBLEM 2: 8 kinds with naming mismatches
 | Kind | CEX name | Industry name | Fix |
 |------|----------|---------------|-----|
-| vectordb_backend | vectordb_backend | **vector_store** | Rename (LangChain, LlamaIndex standard) |
-| brain_index | brain_index | **knowledge_index** | Rename (metaphor → industry) |
+| vector_store | vector_store | **vector_store** | Rename (LangChain, LlamaIndex standard) |
+| knowledge_index | knowledge_index | **knowledge_index** | Rename (metaphor → industry) |
 | code_executor | code_executor | **code_interpreter** | Consider rename (OpenAI term) |
 | law | law | **invariant** | Consider rename |
 | director | director | **supervisor** | Consider rename (LangGraph term) |

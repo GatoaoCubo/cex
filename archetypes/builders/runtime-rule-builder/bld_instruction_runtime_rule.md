@@ -77,7 +77,7 @@ Confirm the artifact belongs to `runtime_rule` and not a sibling kind.
 IF the rule is about when to retire or promote an artifact through its lifecycle:
   RETURN "Route to lifecycle-rule-builder."
 IF the rule is an inviolable behavioral constraint that must never be overridden:
-  RETURN "Route to law-builder — laws are non-technical behavioral rules."
+  RETURN "Route to invariant-builder — laws are non-technical behavioral rules."
 IF the rule defines a safety boundary for agent behavior:
   RETURN "Route to guardrail-builder."
 IF the value is an environment variable (API key, base URL, flag):

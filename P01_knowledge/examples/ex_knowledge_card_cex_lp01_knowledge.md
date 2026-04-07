@@ -54,7 +54,7 @@ funcao_llm: INJECT | analogia: memoria de longo prazo
 1. Pesquisa: coletar dados de fontes verificaveis
 2. Destilacao: condensar em formato atomico (KC ou glossary)
 3. Validacao: quality gate (density, completeness, accuracy)
-4. Indexacao: embedding + brain_index para retrieval
+4. Indexacao: embedding + knowledge_index para retrieval
 5. Injecao: INJECT no contexto do LLM via RAG ou direto
 
 ## Regras de Ouro

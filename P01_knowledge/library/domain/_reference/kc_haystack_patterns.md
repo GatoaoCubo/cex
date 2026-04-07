@@ -17,7 +17,7 @@ when_to_use: "Building or mapping Haystack v2 constructs to CEX kinds"
 keywords: [haystack, pipeline, component, document-store, retriever, generator, embedder]
 long_tails:
   - "How does Haystack Pipeline map to CEX workflow and component kinds"
-  - "Which Haystack classes map to CEX retriever and brain_index kinds"
+  - "Which Haystack classes map to CEX retriever and knowledge_index kinds"
 axioms:
   - "@component decorator + output_types = the universal Haystack building block"
   - "Pipeline is a directed multigraph — components wire via typed input/output sockets"
@@ -28,7 +28,7 @@ feeds_kinds:
   - workflow         # Pipeline, AsyncPipeline (directed multigraph execution)
   - function_def     # @component decorator (typed component = callable unit)
   - retriever        # Retriever component (document retrieval)
-  - brain_index      # DocumentStore (abstract storage interface)
+  - knowledge_index      # DocumentStore (abstract storage interface)
   - embedding_config # SentenceTransformersDocumentEmbedder, SentenceTransformersTextEmbedder
   - prompt_template  # PromptBuilder (template -> prompt)
   - knowledge_card   # Document (core data structure)
@@ -58,7 +58,7 @@ criticality: high
 | `AsyncPipeline` | `haystack` | workflow | Async parallel pipeline execution |
 | `SuperComponent` | `haystack` | pattern | Wraps complete pipeline as single component |
 | `Document` | `haystack` | knowledge_card | Core document data structure |
-| `DocumentStore` | `haystack` | brain_index | Abstract document storage interface |
+| `DocumentStore` | `haystack` | knowledge_index | Abstract document storage interface |
 | `DocumentWriter` | `haystack.components.writers` | document_loader | Writes documents into a DocumentStore |
 | `SentenceTransformersDocumentEmbedder` | `haystack.components.embedders` | embedding_config | Embeds documents via SentenceTransformers |
 | `SentenceTransformersTextEmbedder` | `haystack.components.embedders` | embedding_config | Embeds query strings |
@@ -95,7 +95,7 @@ criticality: high
 ## CEX Mapping
 
 ```text
-[knowledge_card (Document)] -> [embedding_config -> brain_index (DocumentStore)]
+[knowledge_card (Document)] -> [embedding_config -> knowledge_index (DocumentStore)]
     -> [retriever + dispatch_rule (ConditionalRouter)] -> [prompt_template (PromptBuilder)]
     -> [function_def (Generator)] -> [workflow (Pipeline)] -> [pattern (SuperComponent)]
 ```

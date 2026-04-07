@@ -77,5 +77,5 @@ The pattern-builder receives a **recurring problem description** and produces a 
 21. Check QUALITY_GATES.md manually (no automated validator for patterns).
 22. Verify all HARD gates pass: YAML parses, `id` matches pattern, `kind = pattern`, `quality = null`, all required fields present, `name` present, Problem section describes recurrence explicitly.
 23. Cross-check: is this truly a pattern (recurring, reusable)? Confirm it is NOT drifting into:
-    - law (inviolable rule) — route to law-builder
+    - law (inviolable rule) — route to invariant-builder
     - workflow (executable multi-step procedure) — route to workflow-builder

@@ -26,7 +26,7 @@ NON_DEFAULT_BUILDERS = {
     "output-validator-builder", "agent-builder", "knowledge-card-builder",
     "model-card-builder", "benchmark-builder", "content-monetization-builder",
     "supabase-data-layer-builder", "workflow-builder",
-    "chain-builder", "brain-index-builder", "bugloop-builder",
+    "chain-builder", "knowledge-index-builder", "bugloop-builder",
 }
 # social-publisher-builder excluded: all its override values are defaults
 

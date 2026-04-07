@@ -31,4 +31,4 @@ triggers: "define agent runtime state", "what decisions does this agent make", "
 ## Crew Role
 In a crew, I handle RUNTIME STATE DEFINITION.
 I answer: "what routing rules, priorities, and heuristics does this agent use at runtime?"
-I do NOT handle: design-time identity (mental-model-builder), ephemeral snapshots (session-state-builder), search indexes (brain-index-builder).
+I do NOT handle: design-time identity (mental-model-builder), ephemeral snapshots (session-state-builder), search indexes (knowledge-index-builder).

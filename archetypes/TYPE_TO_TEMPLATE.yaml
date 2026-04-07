@@ -7,7 +7,7 @@ audio_tool: P04_tools/templates/tpl_audio_tool.md
 axiom: null
 benchmark: null
 boot_config: P02_model/templates/tpl_boot_config.md
-brain_index: null
+knowledge_index: null
 browser_tool: P04_tools/templates/tpl_browser_tool.md
 bugloop: P11_feedback/templates/tpl_bugloop.md
 chain: null

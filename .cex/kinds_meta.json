@@ -80,15 +80,6 @@
     "naming": "p02_boot_{{provider}}.md",
     "pillar": "P02"
   },
-  "brain_index": {
-    "boundary": "Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).",
-    "core": true,
-    "description": "Indice de busca (BM25, FAISS config)",
-    "llm_function": "INJECT",
-    "max_bytes": 3072,
-    "naming": "p10_bi_{{index}}.yaml",
-    "pillar": "P10"
-  },
   "browser_tool": {
     "boundary": "Interage com paginas web via DOM. NAO eh computer_use (tela generica) nem search_tool (busca sem navegacao).",
     "core": true,
@@ -133,6 +124,15 @@
     "max_bytes": 2048,
     "naming": "p01_chunk_{{strategy}}.md",
     "pillar": "P01"
+  },
+  "citation": {
+    "description": "Structured source attribution with provenance, URL, date, and reliability metadata",
+    "boundary": "Source reference with provenance. NAO eh knowledge_card (conteudo em si), rag_source (pipeline config), nem glossary_entry (definicao de termo).",
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "max_bytes": 2048,
+    "naming": "p01_cit_{{topic}}.md",
+    "core": false
   },
   "cli_tool": {
     "boundary": "Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem daemon (nao persiste em background).",
@@ -207,6 +207,15 @@
     "naming": "p01_ctx_{{topic}}.md + .yaml",
     "pillar": "P01"
   },
+  "context_window_config": {
+    "description": "Token budget allocation, priority tiers, and overflow rules for prompt assembly",
+    "boundary": "Budget allocation spec. NAO eh prompt_template (conteudo), system_prompt (identidade), nem model_card (capabilities).",
+    "pillar": "P03",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 2048,
+    "naming": "p03_cwc_{{model}}.yaml",
+    "core": true
+  },
   "daemon": {
     "boundary": "Processo background persistente. NAO eh hook (evento unico) nem cli_tool (execucao pontual e termina).",
     "core": false,
@@ -252,7 +261,7 @@
     "naming": "p08_diag_{{scope}}.md",
     "pillar": "P08"
   },
-  "director": {
+  "supervisor": {
     "boundary": "",
     "core": false,
     "description": "Crew orchestrator that composes and coordinates multiple builders",
@@ -308,7 +317,7 @@
     "sdk_module": "cex_sdk.knowledge.embedder"
   },
   "embedding_config": {
-    "boundary": "Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura o indice, apenas o modelo vetorial.",
+    "boundary": "Configuracao de modelo de embedding. NAO eh knowledge_index (P10) que configura o indice, apenas o modelo vetorial.",
     "core": false,
     "description": "Configuracao de embedding model",
     "llm_function": "GOVERN",
@@ -496,7 +505,23 @@
     "naming": "p01_kc_{{topic}}.md + .yaml",
     "pillar": "P01"
   },
-  "law": {
+  "knowledge_index": {
+    "boundary": "Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).",
+    "core": true,
+    "description": "Indice de busca (BM25, FAISS config)",
+    "llm_function": "INJECT",
+    "max_bytes": 3072,
+    "naming": "p10_bi_{{index}}.yaml",
+    "pillar": "P10"
+  },
+  "landing_page": {
+    "pillar": "P05",
+    "builder": "landing-page-builder",
+    "domain": "frontend",
+    "description": "Complete production-ready landing page with 12 sections, responsive, dark mode, SEO",
+    "naming": "p05_lp_{{name}}.html"
+  },
+  "invariant": {
     "boundary": "Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel) nem guardrail (P11, safety-focused).",
     "core": true,
     "description": "Lei operacional (inviolavel)",
@@ -605,6 +630,15 @@
     "pillar": "P02",
     "sdk_module": "cex_sdk.models.providers"
   },
+  "multi_modal_config": {
+    "description": "Input format, resolution, encoding, and routing rules for multi-modal LLM interactions",
+    "boundary": "Modality config. NAO eh vision_tool (analise visual), audio_tool (processa audio), nem model_card (capabilities).",
+    "pillar": "P04",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 2048,
+    "naming": "p04_mmc_{{capability}}.yaml",
+    "core": false
+  },
   "naming_rule": {
     "boundary": "Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo).",
     "core": false,
@@ -685,6 +719,15 @@
     "max_bytes": 2048,
     "naming": "p04_plug_{{name}}.md + .yaml",
     "pillar": "P04"
+  },
+  "prompt_cache": {
+    "description": "TTL, eviction, and invalidation config for cached LLM prompt/completion pairs",
+    "boundary": "Cache config. NAO eh session_state (contexto efemero), memory_summary (historico), nem runtime_state (variaveis runtime).",
+    "pillar": "P10",
+    "llm_function": "GOVERN",
+    "max_bytes": 2048,
+    "naming": "p10_pc_{{name}}.yaml",
+    "core": false
   },
   "prompt_template": {
     "boundary": "Template com variaveis. NAO eh user_prompt (fixo) nem system_prompt (identidade).",
@@ -927,6 +970,15 @@
     "naming": "p04_sp_{{name}}.md",
     "pillar": "P04"
   },
+  "software_project": {
+    "description": "Complete software project definition — architecture, dependencies, build, deployment, repo structure",
+    "boundary": "Projeto completo. NAO eh component_map (P08, visao parcial) nem agent_package (P02, pacote de agente).",
+    "pillar": "P02",
+    "llm_function": "BECOME",
+    "max_bytes": 8192,
+    "naming": "p02_software_project_{{slug}}.md + .yaml",
+    "core": false
+  },
   "spawn_config": {
     "boundary": "Configuracao de spawn de satelites. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).",
     "core": true,
@@ -936,6 +988,15 @@
     "naming": "p12_spawn_{{mode}}.yaml",
     "pillar": "P12"
   },
+  "supabase_data_layer": {
+    "description": "Supabase-specific data layer — tables, RLS policies, edge functions, storage buckets, auth rules",
+    "boundary": "Data layer Supabase. NAO eh db_connector (conexao generica) nem api_client (cliente REST).",
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "max_bytes": 8192,
+    "naming": "p04_supabase_data_layer_{{slug}}.md + .yaml",
+    "core": false
+  },
   "system_prompt": {
     "boundary": "Identidade + regras + formato. Lido PRIMEIRO pelo LLM.",
     "core": true,
@@ -944,6 +1005,13 @@
     "max_bytes": 4096,
     "naming": "p03_sp_{{agent}}.md",
     "pillar": "P03"
+  },
+  "tagline": {
+    "pillar": "P03",
+    "builder": "tagline-builder",
+    "domain": "marketing",
+    "description": "Short memorable phrase capturing brand essence — taglines, slogans, headlines",
+    "naming": "p03_tl_{{topic}}.md"
   },
   "toolkit": {
     "added_version": "10.0.0",
@@ -1001,7 +1069,7 @@
     "naming": "p06_val_{{rule}}.yaml",
     "pillar": "P06"
   },
-  "vectordb_backend": {
+  "vector_store": {
     "added_version": "10.0.0",
     "core": true,
     "description": "Vector database backend for similarity search",
@@ -1047,19 +1115,5 @@
     "naming": "p12_wp_{{primitive}}.yaml",
     "pillar": "P12",
     "sdk_module": "cex_sdk.workflow"
-  },
-  "tagline": {
-    "pillar": "P03",
-    "builder": "tagline-builder",
-    "domain": "marketing",
-    "description": "Short memorable phrase capturing brand essence — taglines, slogans, headlines",
-    "naming": "p03_tl_{{topic}}.md"
-  },
-  "landing_page": {
-    "pillar": "P05",
-    "builder": "landing-page-builder",
-    "domain": "frontend",
-    "description": "Complete production-ready landing page with 12 sections, responsive, dark mode, SEO",
-    "naming": "p05_lp_{{name}}.html"
   }
 }

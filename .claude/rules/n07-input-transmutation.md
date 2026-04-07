@@ -59,7 +59,7 @@ N07 must know every step and apply it automatically:
 | P07 Evaluation | Quality, scoring, testing | quality_gate, scoring_rubric, benchmark |
 | P08 Architecture | System structure | agent_card, component_map, interface |
 | P09 Config | Runtime settings | env_config, path_config, secret_config |
-| P10 Memory | State, context, indexing | brain_index, memory_scope, entity_memory |
+| P10 Memory | State, context, indexing | knowledge_index, memory_scope, entity_memory |
 | P11 Feedback | Learning, correction | bugloop, learning_record, regression_check |
 | P12 Orchestration | Workflows, dispatch | workflow, dispatch_rule, schedule |
 

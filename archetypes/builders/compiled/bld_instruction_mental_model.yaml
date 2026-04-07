@@ -37,7 +37,7 @@ context: 'The mental-model-builder produces `mental_model` artifacts (P02) — d
 
   Inputs:
 
-  - `$agent_name (required) - string - "The agent this mental model belongs to (e.g. ''scout-agent'', ''law-builder'')"`
+  - `$agent_name (required) - string - "The agent this mental model belongs to (e.g. ''scout-agent'', ''invariant-builder'')"`
 
   - `$agent_slug (required) - string - "snake_case version of agent name for use in id field"`
 

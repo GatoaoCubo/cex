@@ -80,7 +80,7 @@ kinds_i_build: '| Kind | Pillar | Naming Pattern |
 
   | eval_dataset | P07 | `p07_dataset_{{name}}.md` |
 
-  | brain_index | P10 | `p10_bi_{{index}}.yaml` |
+  | knowledge_index | P10 | `p10_bi_{{index}}.yaml` |
 
   | learning_record | P10 | `p10_lr_{{topic}}.md + .yaml` |
 
@@ -175,7 +175,7 @@ my_gaps: '| Gap | Impact | Priority |
 
   | No `benchmark` artifacts built | Despite being a buildable kind, no benchmarks exist in N01 | Medium |
 
-  | No `brain_index` artifacts | Missing semantic index over intelligence outputs | Low |'
+  | No `knowledge_index` artifacts | Missing semantic index over intelligence outputs | Low |'
 cards_in_my_agent_card: '| Category | Count |
 
   |----------|------:|

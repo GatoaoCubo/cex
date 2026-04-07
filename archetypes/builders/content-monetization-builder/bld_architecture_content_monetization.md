@@ -78,7 +78,7 @@ social_publisher ──► content_monetization ──► ad_campaign
 ## Position in CEX
 | Layer | Location |
 |-------|----------|
-| Templates | P04_tools/{templates,examples}/ |
+| Templates | P11_feedback/{templates,examples}/ |
 | Nucleus | N06_commercial/ |
 | Instance | _instances/{co}/N06_commercial/ |
 

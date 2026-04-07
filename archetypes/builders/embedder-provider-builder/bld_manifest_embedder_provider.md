@@ -33,4 +33,4 @@ triggers: "configure embedding model", "which embedder to use", "setup embedding
 ## Crew Role
 In a crew, I handle EMBEDDING MODEL CONFIGURATION.
 I answer: "how should we embed documents and queries for this RAG pipeline?"
-I do NOT handle: vectordb_backend, model_provider, retriever, agent.
+I do NOT handle: vector_store, model_provider, retriever, agent.

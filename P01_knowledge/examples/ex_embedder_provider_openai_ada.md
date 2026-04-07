@@ -74,4 +74,4 @@ vector = response.data[0].embedding
 
 ## Boundary
 embedder_provider IS: connection config for an embedding API with model, dimensions, and batching.
-embedder_provider IS NOT: a vector store config (vectordb_backend), a chunk strategy, or a retriever pipeline.
+embedder_provider IS NOT: a vector store config (vector_store), a chunk strategy, or a retriever pipeline.

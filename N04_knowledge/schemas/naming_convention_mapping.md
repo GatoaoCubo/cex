@@ -55,7 +55,7 @@ def kc_to_builder(kc_filename):
 |---------|----|----- |
 | `_builder` | None | Meta-builder, no KC needed |
 | `skill-builder` | `kc_skill.md` | ✅ Exists |
-| None | `kc_director.md` | ❌ Orphan KC, no builder |
+| None | `kc_supervisor.md` | ❌ Orphan KC, no builder |
 
 ## Validation Queries
 

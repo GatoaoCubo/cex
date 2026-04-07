@@ -88,8 +88,8 @@ This card maps the **same concept** across 4 providers + MCP, giving CEX a singl
 | Context window | `max_tokens` + model limit (200K) | `max_tokens` + model limit (128K-1M) | `max_output_tokens` + model limit (1M-2M) | N/A | — (MISSING) | ❌ Add `context_window_config` |
 | Conversation memory | Via message history | `Thread` (Assistants) | Via multi-turn `contents` | N/A | `entity_memory`, `memory_summary` | ✅ |
 | Knowledge retrieval | Via MCP resources | `file_search` + vector store | Grounding with Google Search | `resources/read` | `retriever_config` | ✅ |
-| Vector storage | N/A (external) | `VectorStore` (Assistants) | N/A (Vertex AI Search) | N/A | `vectordb_backend` | ⚠️ Rename to `vector_store` |
-| Semantic index | N/A | N/A | N/A | N/A | `brain_index` | ⚠️ Rename to `knowledge_index` |
+| Vector storage | N/A (external) | `VectorStore` (Assistants) | N/A (Vertex AI Search) | N/A | `vector_store` | ⚠️ Rename to `vector_store` |
+| Semantic index | N/A | N/A | N/A | N/A | `knowledge_index` | ⚠️ Rename to `knowledge_index` |
 | Embeddings | N/A (deprecated Voyage) | `text-embedding-3-*` | `text-embedding-004` | N/A | `embedding_config` | ✅ |
 
 ## 5. Orchestration & Multi-Agent Concepts
@@ -132,7 +132,7 @@ This card maps the **same concept** across 4 providers + MCP, giving CEX a singl
 | Status | Count | Items |
 |--------|-------|-------|
 | ✅ Aligned | 38 | Majority of CEX kinds match industry terms |
-| ⚠️ Rename recommended | 5 | `vectordb_backend`, `brain_index`, `director`, `lens`, `code_executor` |
+| ⚠️ Rename recommended | 5 | `vector_store`, `knowledge_index`, `director`, `lens`, `code_executor` |
 | ❌ Missing kind | 4 | `prompt_cache`, `context_window_config`, `citation`, `multi_modal_config` |
 
 ## Conflict Resolution Rules

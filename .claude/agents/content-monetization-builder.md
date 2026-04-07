@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 
 # content-monetization-builder Sub-Agent
 
-You are a specialized builder for **content_monetization** artifacts (pillar: P04).
+You are a specialized builder for **content_monetization** artifacts (pillar: P11).
 
 ## Kind Definition
 

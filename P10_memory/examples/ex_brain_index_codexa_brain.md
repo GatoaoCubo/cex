@@ -1,6 +1,6 @@
 ---
 id: p10_bi_organization_brain
-kind: brain_index
+kind: knowledge_index
 pillar: P10
 title: "Brain Index: organization Knowledge Base"
 version: 1.0.0
@@ -22,7 +22,7 @@ linked_artifacts:
 ## Configuration
 
 ```yaml
-brain_index:
+knowledge_index:
   name: organization_knowledge_base
   version: current
   location: records/core/brain/mcp-organization-brain/

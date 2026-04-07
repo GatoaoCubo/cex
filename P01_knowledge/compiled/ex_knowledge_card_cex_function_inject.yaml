@@ -53,7 +53,7 @@ spec: '| Tipo | LP | Funcao |
 
   | few_shot_example | P01 | Par input/output demonstrativo |
 
-  | brain_index | P10 | Indice hibrido BM25 + embeddings |
+  | knowledge_index | P10 | Indice hibrido BM25 + embeddings |
 
   | embedding_config | P01 | Config do modelo de embeddings |
 
@@ -103,7 +103,7 @@ patterns: '| Trigger | Action |
 
   | Agente precisa de estado entre turnos | Manter session_state |
 
-  | Busca semantica sobre corpus | Configurar brain_index hibrido |'
+  | Busca semantica sobre corpus | Configurar knowledge_index hibrido |'
 anti_patterns:
 - Dump de dados brutos como KC (destile primeiro)
 - RAG sem relevance filter (polui contexto)

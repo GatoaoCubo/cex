@@ -107,7 +107,7 @@ validation:
 ---
 id: {{artifact_id}}
 kind: cli_tool
-pillar: P04
+pillar: P11
 title: "{{title}}"
 version: "1.0.0"
 created: "{{date}}"

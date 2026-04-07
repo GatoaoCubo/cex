@@ -1,0 +1,41 @@
+---
+kind: architecture
+id: bld_architecture_context_window_config
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of context_window_config — inventory, dependencies, architectural position
+---
+
+## Component Inventory
+| Name | Role | Owner | Status |
+|------|------|-------|--------|
+| total_tokens | Hard ceiling from model | model_card | required |
+| section_budgets | Per-component token allocation | author | required |
+| priority_tiers | Truncation protection order | author | required |
+| overflow_strategy | What happens on budget exceed | author | required |
+| output_reserve | Minimum response space | author | required |
+## Dependency Graph
+```
+model_card, system_prompt --> [context_window_config] --> prompt_template, agent_card
+                                       |
+                                 few_shot_example, retriever_config, cex_token_budget.py
+```
+| From | To | Type | Data |
+|------|----|------|------|
+| model_card | context_window_config | data_flow | total_tokens limit |
+| system_prompt | context_window_config | data_flow | system prompt token count |
+| context_window_config | prompt_template | data_flow | budget constraints for assembly |
+| context_window_config | agent_card | data_flow | deployment token limits |
+## Boundary Table
+| context_window_config IS | context_window_config IS NOT |
+|--------------------------|------------------------------|
+| Budget allocation spec for prompt assembly | Prompt content definition (prompt_template) |
+| Per-section token limits with overflow rules | Agent identity (system_prompt) |
+| Model-specific profile | Model capability spec (model_card) |
+## Layer Map
+| Layer | Components | Purpose |
+|-------|------------|---------|
+| Limits | total_tokens, output_reserve | Hard boundaries |
+| Allocation | section_budgets | How space is divided |
+| Protection | priority_tiers | What survives overflow |
+| Recovery | overflow_strategy | How to handle excess |

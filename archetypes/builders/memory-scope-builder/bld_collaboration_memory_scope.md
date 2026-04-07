@@ -21,7 +21,7 @@ I specify memory scope configurations so agents and pipelines can use them.
 ### Crew: "Memory System"
 ```
   1. memory-scope-builder -> scope config
-  2. brain-index-builder -> search index
+  2. knowledge-index-builder -> search index
   3. session-state-builder -> runtime state
 ```
 
@@ -40,5 +40,5 @@ I specify memory scope configurations so agents and pipelines can use them.
 ## Builders That Depend On Me
 | Builder | Why |
 |---------|-----|
-| brain-index-builder | Downstream consumer |
+| knowledge-index-builder | Downstream consumer |
 | session-state-builder | Downstream consumer |

@@ -110,7 +110,7 @@ TYPE_ABBREV = {
     "feature_flag": "ff",
     "runtime_rule": "rr",
     "runtime_state": "rstate",
-    "brain_index": "bi",
+    "knowledge_index": "bi",
     "learning_record": "lr",
     "session_state": "ss",
     "quality_gate": "qg",

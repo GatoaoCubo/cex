@@ -21,7 +21,7 @@ I specify retriever config configurations so agents and pipelines can use them.
 ### Crew: "Search System"
 ```
   1. retriever-config-builder -> retrieval params
-  2. brain-index-builder -> index infra
+  2. knowledge-index-builder -> index infra
   3. formatter-builder -> result formatting
 ```
 
@@ -41,4 +41,4 @@ I specify retriever config configurations so agents and pipelines can use them.
 ## Builders That Depend On Me
 | Builder | Why |
 |---------|-----|
-| brain-index-builder | Downstream consumer |
+| knowledge-index-builder | Downstream consumer |

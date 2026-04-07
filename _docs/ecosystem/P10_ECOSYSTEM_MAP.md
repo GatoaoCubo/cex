@@ -31,7 +31,7 @@
 | CEX Kind | Maps To | Coverage % | Gap |
 |----------|---------|:----------:|-----|
 | runtime_state | Runtime State | 80% | Good match to LangGraph checkpoints and Redis state. Gap: industry runtime state includes checkpoint versioning (LangGraph thread_ts) for replay/rollback. CEX is current-snapshot only. |
-| brain_index | Memory Index / Semantic Search | 85% | Strong match. CEX brain_index (BM25 + FAISS) aligns with Mem0/Zep/LangChain vector search. Gap: industry indexes support multi-modal (text + image embeddings) and cross-namespace search. |
+| knowledge_index | Memory Index / Semantic Search | 85% | Strong match. CEX knowledge_index (BM25 + FAISS) aligns with Mem0/Zep/LangChain vector search. Gap: industry indexes support multi-modal (text + image embeddings) and cross-namespace search. |
 | learning_record | Learning Record / Fact | 80% | Good match to Mem0 episodic memory and Zep fact extraction. Gap: industry learning records carry confidence scores and temporal decay (Mem0 decay, Zep temporal awareness). CEX records are static. |
 | session_state | Session/Conversation State | 85% | Excellent match. Maps directly to LangChain BufferMemory, LangGraph thread state, Redis sessions. Gap: industry session state supports multiple serialization formats and checkpoint branching. |
 
@@ -39,7 +39,7 @@
 | Kind | Justification | Frameworks | Priority |
 |------|---------------|------------|:-------:|
 | memory_summary | Every major memory framework implements summarization/compression as a distinct operation. When context windows fill up, older memories are condensed into summaries. Distinct from learning_record (records specific facts/outcomes) and session_state (ephemeral snapshot). A memory_summary is a compressed representation of many interactions. | LangChain (SummaryMemory, SummaryBufferMemory), Letta (archival compression), Zep (memory summaries), Conversation Window Mgmt (summarize-on-overflow) | high |
-| entity_memory | Tracking entities (users, tools, concepts) and their evolving attributes is a first-class concept across frameworks. Distinct from learning_record (captures what happened) and brain_index (search infrastructure). Entity memory answers "what do I know about X?" with structured, updateable facts. | LangChain (EntityMemory), Zep (entity extraction), Mem0 (graph memory entities), Letta (core memory persona/human blocks) | med |
+| entity_memory | Tracking entities (users, tools, concepts) and their evolving attributes is a first-class concept across frameworks. Distinct from learning_record (captures what happened) and knowledge_index (search infrastructure). Entity memory answers "what do I know about X?" with structured, updateable facts. | LangChain (EntityMemory), Zep (entity extraction), Mem0 (graph memory entities), Letta (core memory persona/human blocks) | med |
 
 ## 5. Proposed REMOVALS/RENAMES
 | Kind | Action | Reason |
@@ -51,7 +51,7 @@
 | Kind | Frameworks That Match |
 |------|----------------------|
 | runtime_state | LangGraph checkpoints, Redis key-value state, Motif activity tracking, Letta inner-thought state |
-| brain_index | Mem0 memory search config, LangChain VectorStoreMemory retriever, Zep relevance scoring, FAISS/BM25 hybrid |
+| knowledge_index | Mem0 memory search config, LangChain VectorStoreMemory retriever, Zep relevance scoring, FAISS/BM25 hybrid |
 | learning_record | Mem0 episodic memory, Zep fact extraction, Letta archival memory entries |
 | session_state | LangChain ConversationBufferMemory, LangGraph thread state, Redis session store, Zep session memory |
 

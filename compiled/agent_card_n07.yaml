@@ -61,7 +61,7 @@ cex_taxonomy_what_you_map_user_input_to: ''
 
   | P09 | Config | env_config, path_config, secret_config |
 
-  | P10 | Memory | brain_index, memory_scope, entity_memory |
+  | P10 | Memory | knowledge_index, memory_scope, entity_memory |
 
   | P11 | Feedback | bugloop, learning_record, regression_check |
 

@@ -1,6 +1,6 @@
 ---
 kind: schema
-id: bld_schema_director
+id: bld_schema_agent_card
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for agent_card

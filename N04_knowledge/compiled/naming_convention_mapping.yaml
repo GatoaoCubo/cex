@@ -29,7 +29,7 @@ special_cases: '| Builder | KC | Notes |
 
   | `skill-builder` | `kc_skill.md` | ✅ Exists |
 
-  | None | `kc_director.md` | ❌ Orphan KC, no builder |'
+  | None | `kc_supervisor.md` | ❌ Orphan KC, no builder |'
 validation_queries: "# Find builders without KCs\nfind archetypes/builders/ -name \"*-builder\" | while read b; do\n  builder=$(basename\
   \ $b)\n  kc_name=\"kc_$(echo $builder | sed 's/-builder//' | sed 's/-/_/g').md\"\n  if [ ! -f \"P01_knowledge/library/kind/$kc_name\"\
   \ ]; then\n    echo \"MISSING KC: $kc_name (for $builder)\"\n  fi\ndone\n\n# Find KCs without builders  \nfind P01_knowledge/library/kind/\

@@ -45,7 +45,7 @@ linked_artifacts:
 data_source: "{{provider_docs_url}}"
 ## Boundary
 embedder_provider IS: connection config for {{model}} (dimensions, normalization, batch limits).
-embedder_provider IS NOT: vectordb_backend, model_provider, retriever, chunker.
+embedder_provider IS NOT: vector_store, model_provider, retriever, chunker.
 ## Configuration Matrix
 | Parameter | Value | Source |
 |-----------|-------|--------|

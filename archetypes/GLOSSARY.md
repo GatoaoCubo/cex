@@ -91,7 +91,7 @@
 
 ### P10 Memory (5 tipos)
 - mental_model: modelo mental persistente
-- brain_index: indice de busca
+- knowledge_index: indice de busca
 - learning_record: registro de aprendizado
 - session_state: estado de sessao
 - axiom: regra fundamental

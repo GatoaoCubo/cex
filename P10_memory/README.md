@@ -12,7 +12,7 @@
   - [[tpl_axiom_lifecycle_hooks]]
   - [[tpl_axiom_privacy_controls]]
   - [[tpl_axiom_session_compression]]
-  - [[tpl_brain_index]]
+  - [[tpl_knowledge_index]]
   - [[tpl_learning_record]]
   - [[tpl_mental_model]]
   - [[tpl_session_state]]

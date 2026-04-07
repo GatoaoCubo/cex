@@ -90,12 +90,12 @@ p01_knowledge_10_kinds: '| Kind | Naming Pattern | Builder |
 
   | retriever_config | `p01_retr_cfg_{{store}}.md` | retriever-config-builder |
 
-  | vectordb_backend | `p01_vdb_{{backend}}.yaml` | vectordb-backend-builder |'
+  | vector_store | `p01_vdb_{{backend}}.yaml` | vector-store-builder |'
 p10_memory_8_kinds: '| Kind | Naming Pattern | Builder |
 
   |------|---------------|---------|
 
-  | brain_index | `p10_bi_{{index}}.yaml` | brain-index-builder |
+  | knowledge_index | `p10_bi_{{index}}.yaml` | knowledge-index-builder |
 
   | compression_config | `p10_cc_{{scope}}.yaml` | compression-config-builder |
 
@@ -203,7 +203,7 @@ my_strengths:
 - 'Supabase Integration: Dedicated embedding config, dispatch rule, workflow, data layer tool, and KC for Supabase. Plus 2
   MCP servers (supabase + postgres) for direct database operations. This makes N04 the bridge between knowledge artifacts
   and persistent storage.'
-- 'Memory Pillar Ownership: 8 kinds under P10 (brain_index through session_state) + 5 memory tools (select, update, types,
+- 'Memory Pillar Ownership: 8 kinds under P10 (knowledge_index through session_state) + 5 memory tools (select, update, types,
   age, core). N04 owns the memory lifecycle: creation, classification, decay, pruning, and summarization.'
 - '5 MCP Servers: Most connected nucleus. Ingestion (firecrawl + fetch) -> storage (supabase + postgres) -> transformation
   (notebooklm). This pipeline turns raw web content into indexed, retrievable, transformable knowledge.'
@@ -231,7 +231,7 @@ my_gaps: '| Area | Status | Impact |
   | memory | Thin (2) | Index + pipeline only. Missing: taxonomy memory, domain-specific memory scopes, entity memories for
   tracked domains. |
 
-  | brain_index | Missing | Kind exists (P10) but zero artifacts built. Should have at least BM25 + FAISS configs. |
+  | knowledge_index | Missing | Kind exists (P10) but zero artifacts built. Should have at least BM25 + FAISS configs. |
 
   | entity_memory | Missing | Kind exists (P10) but zero artifacts. Should track entities across knowledge domains. |
 

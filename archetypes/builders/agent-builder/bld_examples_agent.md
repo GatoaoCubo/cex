@@ -39,7 +39,7 @@ Converts raw sources into atomic searchable knowledge_card artifacts with densit
 Capabilities: distill raw text to atomic facts, score density, produce P01 frontmatter,
 validate sources, detect boundary (knowledge_card vs context_doc vs glossary_entry).
 Tools: brain_query [MCP] (dedup check), validate_artifact.py [PLANNED].
-Satellite: knowledge-engine | Upstream: researcher | Downstream: brain-index-builder.
+Satellite: knowledge-engine | Upstream: researcher | Downstream: knowledge-index-builder.
 ## File Structure
 ```
 agents/knowledge_card_builder/agent_package/
@@ -59,7 +59,7 @@ Triggers: "create knowledge card for X", "distill research into atomic facts"
 NOT when: full narrative needed (context_doc), term definition only (glossary_entry)
 ## Input / Output
 Input: raw_source (text/URL/file), domain. Output: p01_kc_{slug}.md + density report.
-Receives from: researcher. Produces for: brain_index, pool (quality >= 8.0).
+Receives from: researcher. Produces for: knowledge_index, pool (quality >= 8.0).
 ## Common Issues
 1. Generic bullets: compress to concrete data, remove filler
 2. Missing source: verify before citing

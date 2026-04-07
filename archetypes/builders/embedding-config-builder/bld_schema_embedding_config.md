@@ -50,4 +50,4 @@ Rule: id MUST equal filename stem.
 - chunk_size MUST be positive integer
 - distance_metric MUST be one of: cosine, euclidean, dot_product
 - quality: null always
-- embedding_config is CONFIGURATION — no index logic (that is brain_index P10)
+- embedding_config is CONFIGURATION — no index logic (that is knowledge_index P10)

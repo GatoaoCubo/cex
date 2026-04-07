@@ -12,7 +12,7 @@ pattern: few-shot learning — LLM reads these before producing
 INPUT: "Create daemon for a brain index rebuilder that runs every 6 hours"
 OUTPUT:
 ```yaml
-id: p04_daemon_brain_index_rebuilder
+id: p04_daemon_knowledge_index_rebuilder
 kind: daemon
 pillar: P04
 version: "1.0.0"

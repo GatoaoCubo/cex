@@ -1,5 +1,5 @@
 id: p10_bi_organization_brain
-kind: brain_index
+kind: knowledge_index
 pillar: P10
 title: 'Brain Index: organization Knowledge Base'
 version: 1.0.0
@@ -20,7 +20,7 @@ density_score: 0.89
 source: organization-core/CLAUDE.md (BRAIN SEARCH) + records/core/brain/mcp-organization-brain/
 linked_artifacts:
   smoke_eval: p07_se_brain_query
-configuration: "brain_index:\n  name: organization_knowledge_base\n  version: current\n  location: records/core/brain/mcp-organization-brain/\n\
+configuration: "knowledge_index:\n  name: organization_knowledge_base\n  version: current\n  location: records/core/brain/mcp-organization-brain/\n\
   \n  corpus:\n    total_files: ~9916\n    primary: records/pool/knowledge/  # KCs\n    secondary: records/agents/*/iso_vectorstore/\n\
   \    tertiary: records/skills/*/SKILL.md\n\n  search_backends:\n    bm25:\n      type: keyword\n      accuracy: ~50%\n \
   \     fallback: true  # activates when Ollama down\n      rebuild_time: < 1min\n\n    faiss:\n      type: semantic\n   \

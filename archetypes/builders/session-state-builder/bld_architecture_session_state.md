@@ -36,7 +36,7 @@ session_state   --consumed_by-->  context_manager
 | An ephemeral snapshot of current session context | A persistent record of accumulated experience (learning_record P10) |
 | Discarded when session ends — not cross-session | A variable state that persists across sessions (runtime_state P10) |
 | Contains token usage, active tasks, and checkpoints | A design-time cognitive map (mental_model P02) |
-| Used for crash recovery and context overflow management | A search index or knowledge base (brain_index P01) |
+| Used for crash recovery and context overflow management | A search index or knowledge base (knowledge_index P01) |
 | Scoped to one session of one agent | A shared state across multiple agents |
 | Lightweight snapshot with minimal overhead | A comprehensive audit log of all actions |
 ## Layer Map

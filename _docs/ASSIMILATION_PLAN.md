@@ -446,9 +446,9 @@ TAREFAS:
 ├── [T2.3.6] Integrar com P01 kinds existentes:
 │   ├── embedding_config: agora linkado a implementação real
 │   ├── retriever_config: agora linkado a implementação real
-│   └── brain_index (P10): agora instanciável
+│   └── knowledge_index (P10): agora instanciável
 ├── [T2.3.7] Testes: test_embedder.py, test_vectordb.py
-├── [T2.3.8] Registrar kinds: "embedder_provider", "vectordb_backend"
+├── [T2.3.8] Registrar kinds: "embedder_provider", "vector_store"
 └── [T2.3.9] CLI: python -m cex_sdk.knowledge --build --embedder openai --db chroma
 ```
 
@@ -784,7 +784,7 @@ VERSION    NOME                    MÓDULOS                          LINES    KI
 7.4.0      Structured Output      cex_sdk/models/structured.py     +300     —
 8.1.0      Knowledge Readers      cex_sdk/knowledge/reader/        +2.000   —  (document_loader já existe)
 8.2.0      Chunking               cex_sdk/knowledge/chunking/      +1.200   —  (chunk_strategy já existe)
-8.3.0      Embeddings+VectorDB    cex_sdk/knowledge/embedder+vdb   +3.000   +2 (embedder_provider, vectordb_backend)
+8.3.0      Embeddings+VectorDB    cex_sdk/knowledge/embedder+vdb   +3.000   +2 (embedder_provider, vector_store)
 8.4.0      Reranker               cex_sdk/knowledge/reranker/      +400     +1 (reranker)
 9.1.0      Workflow Primitives    cex_sdk/workflow/                 +2.500   +1 (workflow_primitive)
 9.2.0      Memory Manager         cex_sdk/memory/                  +2.000   —  (P10 kinds já existem)

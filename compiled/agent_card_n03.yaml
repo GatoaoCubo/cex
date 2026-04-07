@@ -104,7 +104,7 @@ kinds_i_can_build: 'N03 can build ALL 117 kinds in the CEX registry via 119 buil
   | P09 Config | 8 | effort_profile, env_config, feature_flag, path_config, permission, rate_limit_config, runtime_rule, secret_config
   |
 
-  | P10 Memory | 9 | brain_index, compression_config, entity_memory, learning_record, memory_summary, memory_type, runtime_state,
+  | P10 Memory | 9 | knowledge_index, compression_config, entity_memory, learning_record, memory_summary, memory_type, runtime_state,
   session_backend, session_state |
 
   | P11 Lifecycle | 6 | bugloop, guardrail, lifecycle_rule, optimizer, quality_gate, reward_signal |

@@ -9,7 +9,7 @@ sources: MTEB benchmark, OpenAI embeddings, Ollama model library, DPR (Karpukhin
 
 # Domain Knowledge: embedding_config
 ## Executive Summary
-Embedding configs define how text is converted to vectors for semantic search: model selection, dimensions, chunk size, overlap, distance metric, and normalization. They sit in the spec layer — defining MODEL parameters, not index structure (brain_index) or data sources (rag_source). The choice of embedding model determines retrieval quality, cost, and latency.
+Embedding configs define how text is converted to vectors for semantic search: model selection, dimensions, chunk size, overlap, distance metric, and normalization. They sit in the spec layer — defining MODEL parameters, not index structure (knowledge_index) or data sources (rag_source). The choice of embedding model determines retrieval quality, cost, and latency.
 ## Spec Table
 | Property | Value |
 |----------|-------|

@@ -22,7 +22,7 @@ I record significant architectural choices so future engineers can understand th
 ### Crew: "System Design Session"
 ```
   1. decision-record-builder -> "ADR for the core structural choice"
-  2. law-builder             -> "inviolable constraints that emerged from the design"
+  2. invariant-builder             -> "inviolable constraints that emerged from the design"
   3. knowledge-card-builder  -> "reference knowledge about technologies chosen"
 ```
 ### Crew: "Migration Planning"
@@ -51,7 +51,7 @@ I record significant architectural choices so future engineers can understand th
 ## Builders That Depend On Me
 | Builder | Why |
 |---------|-----|
-| law-builder | An accepted ADR may be promoted to a law if the decision becomes inviolable — law-builder reads the ADR for context |
+| invariant-builder | An accepted ADR may be promoted to a law if the decision becomes inviolable — invariant-builder reads the ADR for context |
 | pattern-builder | A repeatedly validated decision pattern may be extracted as a reusable prescription — pattern-builder references the originating ADR |
 | diagram-builder | Architecture diagrams document the resulting structure after an ADR is accepted — diagram-builder links back to the ADR |
 | instruction-builder | Implementation guides for executing a decision reference the ADR that motivated them |
@@ -59,7 +59,7 @@ I record significant architectural choices so future engineers can understand th
 If asked to produce any of the following, I MUST redirect and state the boundary reason:
 | Request | Redirect To | Reason |
 |---------|-------------|--------|
-| "Create a law that all services must use REST" | law-builder | Laws are inviolable constraints; ADRs document revisable choices |
+| "Create a law that all services must use REST" | invariant-builder | Laws are inviolable constraints; ADRs document revisable choices |
 | "Write a pattern for event-driven architecture" | pattern-builder | Patterns are reusable prescriptions; ADRs are single-instance records |
 | "Draw the microservices diagram" | diagram-builder | Diagrams are visual representations; ADRs are rationale records |
 | "Write a guide on how to migrate databases" | instruction-builder | Instructions are how-to sequences; ADRs document why a choice was made |

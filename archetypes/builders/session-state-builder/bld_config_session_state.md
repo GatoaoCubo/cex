@@ -42,5 +42,5 @@ Rule: use `.yaml` extension only for this builder.
 ## Boundary Restrictions
 - No persistent state: routing decisions, accumulated scores belong in runtime_state
 - No learning patterns: accumulated outcomes belong in learning_record
-- No search configuration: index settings belong in brain_index
+- No search configuration: index settings belong in knowledge_index
 - No immutable rules: fundamental axioms belong in axiom

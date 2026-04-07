@@ -63,13 +63,13 @@ N04 is the knowledge backbone of CEX. While N01 researches and N03 builds, N04 i
 | knowledge_card | `p01_kc_{{topic}}.md + .yaml` | knowledge-card-builder |
 | rag_source | `p01_rs_{{source}}.md + .yaml` | rag-source-builder |
 | retriever_config | `p01_retr_cfg_{{store}}.md` | retriever-config-builder |
-| vectordb_backend | `p01_vdb_{{backend}}.yaml` | vectordb-backend-builder |
+| vector_store | `p01_vdb_{{backend}}.yaml` | vector-store-builder |
 
 ### P10 Memory (8 kinds)
 
 | Kind | Naming Pattern | Builder |
 |------|---------------|---------|
-| brain_index | `p10_bi_{{index}}.yaml` | brain-index-builder |
+| knowledge_index | `p10_bi_{{index}}.yaml` | knowledge-index-builder |
 | compression_config | `p10_cc_{{scope}}.yaml` | compression-config-builder |
 | entity_memory | `p10_entity_{{name}}.md` | entity-memory-builder |
 | learning_record | `p10_lr_{{topic}}.md + .yaml` | learning-record-builder |
@@ -159,7 +159,7 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 
 4. **Supabase Integration**: Dedicated embedding config, dispatch rule, workflow, data layer tool, and KC for Supabase. Plus 2 MCP servers (supabase + postgres) for direct database operations. This makes N04 the bridge between knowledge artifacts and persistent storage.
 
-5. **Memory Pillar Ownership**: 8 kinds under P10 (brain_index through session_state) + 5 memory tools (select, update, types, age, core). N04 owns the memory lifecycle: creation, classification, decay, pruning, and summarization.
+5. **Memory Pillar Ownership**: 8 kinds under P10 (knowledge_index through session_state) + 5 memory tools (select, update, types, age, core). N04 owns the memory lifecycle: creation, classification, decay, pruning, and summarization.
 
 6. **5 MCP Servers**: Most connected nucleus. Ingestion (firecrawl + fetch) -> storage (supabase + postgres) -> transformation (notebooklm). This pipeline turns raw web content into indexed, retrievable, transformable knowledge.
 
@@ -177,7 +177,7 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 | prompts | Thin (1) | Single system prompt. No specialized prompts for different tasks (taxonomy building, KC auditing, embedding tuning). |
 | feedback | Thin (1) | Single quality gate. No iteration history, no learning from past KC quality issues. |
 | memory | Thin (2) | Index + pipeline only. Missing: taxonomy memory, domain-specific memory scopes, entity memories for tracked domains. |
-| brain_index | Missing | Kind exists (P10) but zero artifacts built. Should have at least BM25 + FAISS configs. |
+| knowledge_index | Missing | Kind exists (P10) but zero artifacts built. Should have at least BM25 + FAISS configs. |
 | entity_memory | Missing | Kind exists (P10) but zero artifacts. Should track entities across knowledge domains. |
 | document_loader | Missing | Kind exists (P04) but zero artifacts. Needed for PDF, HTML, CSV ingestion configs. |
 | few_shot_example | Missing | Kind exists (P01) but zero examples for knowledge domain. Critical for template-first builds. |

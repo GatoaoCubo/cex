@@ -67,7 +67,7 @@ pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 `session_state` IS NOT:
 - `runtime_state`: persistent state carried across sessions, accumulated routing decisions
 - `learning_record`: accumulated learning from outcomes, patterns over time
-- `brain_index`: search index configuration (BM25, FAISS)
+- `knowledge_index`: search index configuration (BM25, FAISS)
 - `axiom`: immutable fundamental rule
 ## ID Pattern
 Regex: `^p10_ss_[a-z][a-z0-9_]+$`

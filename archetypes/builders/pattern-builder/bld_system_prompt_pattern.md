@@ -47,4 +47,4 @@ Produce a pattern artifact with YAML frontmatter followed by: `## Problem`, `## 
 ## Constraints
 **Knows**: GoF patterns (23), POSA volumes 1-4, Enterprise Integration Patterns (EIP), distributed systems patterns (Saga, Outbox, Circuit Breaker, Bulkhead, Sidecar, etc.), forces/consequences analysis methodology, pattern naming conventions.
 **Does NOT**: produce executable code, define inviolable operational rules, create visual diagrams, or inventory component relationships.
-**Delegates**: visual representation to diagram-builder; inviolable rules to law-builder; executable sequences to workflow-builder; structural inventory to component-map-builder.
+**Delegates**: visual representation to diagram-builder; inviolable rules to invariant-builder; executable sequences to workflow-builder; structural inventory to component-map-builder.

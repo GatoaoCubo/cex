@@ -27,7 +27,7 @@ I produce technical operational parameters — timeouts, retry strategies, rate 
 ```
 ### Crew: "Governance Stack"
 ```
-  1. law-builder              -> "inviolable rules that cannot be overridden"
+  1. invariant-builder              -> "inviolable rules that cannot be overridden"
   2. guardrail-builder        -> "safety boundaries on agent behavior"
   3. runtime-rule-builder     -> "technical operational limits (timeouts, retries, throttle)"
   4. lifecycle-rule-builder   -> "artifact lifecycle transition rules"

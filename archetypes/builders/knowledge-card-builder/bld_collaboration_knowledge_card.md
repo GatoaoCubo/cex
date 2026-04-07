@@ -32,7 +32,7 @@ I distill knowledge into atomic facts so agents and builders have factual contex
 ```
   1. knowledge-card-builder -> "content to embed and index"
   2. embedding-config-builder -> "embedding model parameters"
-  3. brain-index-builder -> "search index configuration"
+  3. knowledge-index-builder -> "search index configuration"
 ```
 ## Handoff Protocol
 ### I Receive
@@ -52,5 +52,5 @@ None — independent builder (layer 0). Knowledge cards are distilled from sourc
 | agent-builder | Agent expertise is grounded in knowledge cards |
 | axiom-builder | Axioms are formalized from distilled facts |
 | context-doc-builder | Domain docs reference knowledge card facts |
-| brain-index-builder | Knowledge cards are primary content for indexing |
+| knowledge-index-builder | Knowledge cards are primary content for indexing |
 | instruction-builder | Recipes reference factual knowledge for accuracy |

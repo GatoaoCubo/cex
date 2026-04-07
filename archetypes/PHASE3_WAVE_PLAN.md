@@ -135,7 +135,7 @@ e2e_eval (COMPLEX), benchmark (MEDIUM), env_config (SIMPLE)
 path_config (SIMPLE), feature_flag (SIMPLE), runtime_rule (MEDIUM)
 
 ### Wave 22: P09+P10 [ ]
-permission (MEDIUM), runtime_state (MEDIUM), brain_index (MEDIUM)
+permission (MEDIUM), runtime_state (MEDIUM), knowledge_index (MEDIUM)
 
 ### Wave 23: P10+P11 [ ]
 learning_record (SIMPLE), session_state (SIMPLE), bugloop (MEDIUM)

@@ -19,7 +19,7 @@ You are a specialized builder for **embedding_config** artifacts (pillar: P01).
 | Max Bytes | 512 |
 | Naming | `p01_emb_{{model}}.yaml` |
 | Description | Configuracao de embedding model |
-| Boundary | Configuracao de modelo de embedding. NAO eh brain_index (P10) que configura o indice, apenas o modelo vetorial. |
+| Boundary | Configuracao de modelo de embedding. NAO eh knowledge_index (P10) que configura o indice, apenas o modelo vetorial. |
 
 ## How You Work
 

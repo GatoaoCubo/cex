@@ -2,11 +2,12 @@
 id: spec_n07_bootstrap_context
 kind: context_doc
 title: CEX Architecture -- Theory vs Practice Gap Analysis
-version: 1.0.0
-quality: 8.9
+version: 2.0.0
+quality: null
 created: 2026-04-07
+updated: 2026-04-07
 purpose: Give a fresh N07 instance full understanding of what was designed vs what exists
-density_score: 1.0
+density_score: null
 ---
 
 # CEX Architecture: Theory vs Practice
@@ -31,8 +32,10 @@ density_score: 1.0
 | Builder archetypes | archetypes/builders/{kind}-builder/ | 121 | 13 components per kind (instruction, examples, quality gate, output template, schema, etc) |
 | Knowledge library | P01_knowledge/library/ | 270+ KCs | Domain knowledge in structured form |
 | Templates | P{01-12}_*/templates/tpl_*.md | 67+ | Output patterns with {{variable}} slots |
-| Kind registry | .cex/kinds_meta.json | 117 kinds | Every artifact type CEX understands |
-| Rules | .claude/rules/*.md | 13 | Behavioral constraints |
+| Kind registry | .cex/kinds_meta.json | 121 kinds | Every artifact type CEX understands |
+| Rules | .claude/rules/*.md | 16 | Behavioral constraints (incl. technical-authority, input-transmutation) |
+| Terminology | _docs/specs/spec_metaphor_dictionary.md | 40+ terms | Metaphor → Industry term translation |
+| Rosetta Stone | P01_knowledge/library/domain/_reference/kc_terminology_rosetta_stone.md | 4 providers | Cross-provider canonical naming |
 
 ### Instance Layer (filled per agent)
 
@@ -96,17 +99,19 @@ During task execution, the 8F pipeline enriches further:
 
 ## Gaps Between Theory and Practice
 
-### GAP G3: 37% of artifacts are prose-heavy
+### GAP G3: 22% of artifacts are prose-heavy (was 37%, improved)
 
 | Metric | Value |
 |--------|-------|
-| Total artifacts | 3562 |
-| Prose-heavy (more prose than structured data) | 1302 (37%) |
-| Target | < 20% |
-| Fix | Overnight evolve sweep: prose -> tables |
-| Tool | cex_evolve.py sweep --target 9.0 |
+| Total artifacts | 3008 with frontmatter |
+| Prose-heavy (>50% prose lines) | 654 (22%) |
+| False positives | ~460 (bld_instruction_*.md = numbered lists, correct format) |
+| True offenders | ~190 (config, output, KC files with narrative paragraphs) |
+| Target | < 15% |
+| Fix | Overnight evolve sweep on true offenders |
+| Tool | cex_evolve.py agent <file> --target 9.0 |
 
-### GAP G4: F3 INJECT is broken
+### GAP G4: F3 INJECT is broken → N05 FIXING
 
 | Metric | Value |
 |--------|-------|
@@ -115,6 +120,7 @@ During task execution, the 8F pipeline enriches further:
 | Fix | Refactor F3 to use Python code only: cex_retriever + cex_prompt_layers |
 | Impact | Pipeline works on ANY model, even offline/free |
 | File | _tools/cex_8f_runner.py (1385 lines, F3 at ~line 200) |
+| Status | **N05 dispatched 3x (killed twice by spawn_stop bug). Active.** |
 
 ### GAP G5: Template variables not systematic
 
@@ -124,18 +130,14 @@ During task execution, the 8F pipeline enriches further:
 | Template files with {{variables}} | 67 |
 | Templates WITHOUT {{BRAND_*}} slots | Unknown -- needs audit |
 | Fix | Audit all bld_output_template_*.md, add missing {{BRAND_*}} and contextual slots |
+| Status | **SCHEDULED for wave 3** |
 
-### GAP G6: 6+ stale docs from March 30
+### GAP G6: Stale docs → RESOLVED
 
-| Doc | Status | Problem |
-|-----|--------|---------|
-| ROADMAP_CONSOLIDATED.md | STALE | Says 70 builders (now 121), 8F theoretical (now implemented) |
-| ARCHITECTURE.md | STALE | Wrong counts, no pi runtime |
-| HIERARCHY.md | STALE | Fractal structure changed |
-| QUICKSTART.md | STALE | References claude not pi |
-| NAMING_CONVENTION.md | STALE | Convention updated |
-| ONBOARDING.md | STALE | Runtime changed |
-| PATTERN_NUCLEUS_BOOT.md | STALE | Boot pattern completely different now |
+| Doc | Action | Commit |
+|-----|--------|--------|
+| All stale runtime docs | Archived by N04 | `24d172da` |
+| Status | **DONE** | 2026-04-07 |
 
 ### GAP G7: Handoff artifact selection not automated
 
@@ -145,6 +147,7 @@ During task execution, the 8F pipeline enriches further:
 | Practice | N07 writes text descriptions, nucleus discovers on its own |
 | Fix | Build a handoff composer that reads kinds_meta.json, finds builder path, finds KC, lists in handoff |
 | Impact | Nucleus starts producing on turn 1 instead of spending 5 turns discovering files |
+| Status | **SCHEDULED for wave 3** |
 
 ### GAP G8: Nucleus doesn't self-select context during task
 
@@ -154,6 +157,74 @@ During task execution, the 8F pipeline enriches further:
 | Practice | Nucleus follows handoff literally, doesn't explore library |
 | Fix | Nucleus boot prompt should instruct: "After reading handoff, scan P01_knowledge/library/ for relevant KCs before producing" |
 | Impact | Richer context = better output |
+| Status | **SCHEDULED for wave 4** |
+
+### GAP G9 (NEW): Schemas were in Portuguese → RESOLVED
+
+| Metric | Value |
+|--------|-------|
+| Problem | All 12 _schema.yaml descriptions in PT-BR |
+| Impact | Fails Llama-7B test. Non-PT models lose context. |
+| Fix | Translated all descriptions to English |
+| Status | **DONE** (N03 + N01, commit in wave 2) |
+
+### GAP G10 (NEW): 5 kinds with non-industry names → IN PROGRESS
+
+| Old name | New name | Industry source | Status |
+|----------|----------|----------------|--------|
+| vectordb_backend | vector_store | LangChain, LlamaIndex, Pinecone | 🔄 N03 renaming |
+| brain_index | knowledge_index | LlamaIndex | 🔄 N03 renaming |
+| director | supervisor | LangGraph | 🔄 N03 renaming |
+| law | invariant | Software engineering | 🔄 N03 renaming |
+| content_monetization | (move P04→P11) | Misplaced pillar | 🔄 N03 moving |
+
+### GAP G11 (NEW): 4 missing kinds → IN PROGRESS
+
+| Kind | Pillar | Industry source | Status |
+|------|--------|----------------|--------|
+| prompt_cache | P09 | Anthropic, Google | 🔄 N04 creating builders |
+| citation | P01 | Anthropic, Google grounding | 🔄 N04 creating builders |
+| context_window_config | P09 | All providers | 🔄 N04 creating builders |
+| multi_modal_config | P09 | OpenAI, Anthropic, Google | 🔄 N04 creating builders |
+
+### GAP G12 (NEW): 139 builder ISOs in Portuguese
+
+| Metric | Value |
+|--------|-------|
+| Files with Portuguese | 139 / 1578 (9%) |
+| Most common pattern | "Especialista em construir" (102 manifests) |
+| Other patterns | Validar (92), Domina (69), Produzir (57) |
+| Fix | Batch find-replace: PT patterns → EN equivalents |
+| Status | **SCHEDULED for overnight run** |
+
+### GAP G13 (NEW): satellite/agent_node terms (700+ files)
+
+| Metric | Value |
+|--------|-------|
+| "agent_node" in files | 399 |
+| "satellite" in files | 347 |
+| Problem | No industry equivalent. CEX-only terms. |
+| Fix | Rename both to `agent_group` |
+| Status | **SCHEDULED for dedicated overnight** |
+
+### GAP G14 (NEW): 4 kinds missing llm_function
+
+| Kind | Should be | Rationale |
+|------|-----------|-----------|
+| instruction (P03) | REASON | Instructions guide reasoning |
+| hook_config (P04) | GOVERN | Lifecycle hook config = governance |
+| director (P08) | REASON | Routing decisions (being renamed to supervisor) |
+| effort_profile (P09) | CONSTRAIN | Effort estimation constrains scope |
+
+### GAP G15 (NEW): spawn_stop -Nucleus bug
+
+| Metric | Value |
+|--------|-------|
+| Problem | `bash _spawn/dispatch.sh stop n0X` kills ALL nuclei, not just the specified one |
+| Impact | Killed N05 twice during this session, lost work |
+| Fix | Fix `-Nucleus` filter in `_spawn/spawn_stop.ps1` |
+| Workaround | Never use `stop n0X`. Let nuclei finish naturally or use `stop --all`. |
+| Status | **SCHEDULED for N05 wave 3** |
 
 ## Runtime Stack
 
@@ -177,6 +248,42 @@ During task execution, the 8F pipeline enriches further:
 | Content factory | _docs/specs/spec_content_factory_v1.md | Multi-format content production |
 | AutoResearch | _docs/specs/spec_autoresearch_assimilation.md | Karpathy pattern for CEX |
 
+## Industry Validation (2026-04-07)
+
+### 8F Pipeline = Universal LLM Agent Execution Cycle
+
+| 8F | Industry pattern | Provider mapping |
+|----|-----------------|-----------------|
+| F1 CONSTRAIN | Schema validation | JSON Schema (OpenAI), Pydantic (LangChain), Guardrails |
+| F2 BECOME | Agent initialization | System prompt (all), Agent config (CrewAI), Role (LangGraph) |
+| F3 INJECT | RAG / context injection | RAG (all), Context stuffing, Few-shot injection |
+| F4 REASON | Planning / chain-of-thought | Extended thinking (Anthropic), Reasoning (OpenAI o1/o3) |
+| F5 CALL | Tool use / function calling | Tool use (Anthropic), Function calling (OpenAI/Google) |
+| F6 PRODUCE | Generation / inference | Completion (all), Inference (MLOps) |
+| F7 GOVERN | Evaluation / quality gating | Evals (OpenAI), LLM-as-judge, Quality gates (CI/CD) |
+| F8 COLLABORATE | Artifact management / handoff | Handoff (Swarm), Observation (LangChain), Event (POSIX) |
+
+### 12 Pillars = Superset of All Frameworks
+
+| Framework | Pillars covered | Out of 12 |
+|-----------|----------------|-----------|
+| LangChain | P01, P02, P03, P04, P05, P06, P10, P12 | 8/12 |
+| OpenAI Agents | P02, P03, P04, P05, P06, P07, P10, P11, P12 | 9/12 |
+| Google A2A | P01, P02, P03, P04, P08, P12 | 6/12 |
+| CrewAI | P02, P03, P04, P10, P12 | 5/12 |
+| MCP | P01, P03, P04, P08 | 4/12 |
+| **CEX** | **All** | **12/12** |
+
+No framework covers P07 (Evals), P08 (Architecture), P09 (Config) as first-class citizens. CEX is the only system that treats all 12 as equal pillars.
+
+### Sin System = Persona Engineering (validated)
+
+Industry pattern: persona-driven behavioral differentiation through system prompt injection. The 7 sins create 7 orthogonal behavioral dimensions that make the same model (opus-4-6) produce meaningfully different outputs per nucleus. This is CEX's brand differentiator — keep as-is.
+
+### 13 Builder ISOs = Agent Construction Pattern (validated)
+
+Each ISO maps to a recognized industry concept: Agent Card, System Prompt, JSON Schema, Few-Shot Examples, Quality Gate, Output Schema, Architecture Doc, Context Document, Memory Config, Tool Config, Handoff Protocol.
+
 ## Memory (N07 persistent across sessions)
 
 | File | Purpose |
@@ -184,6 +291,20 @@ During task execution, the 8F pipeline enriches further:
 | cex_core_purpose.md | INVIOLABLE: universal taxonomy, zero jargon, LLM-to-LLM |
 | roadmap_cex.md | 3 horizons, 10 principles, current state |
 | operational_lessons.md | 7 hard-learned lessons (permanent) |
-| cex_game_architecture.md | Internal metaphor (NOT taxonomy) |
-| project_cex_product_context.md | CEX ships as blank brain |
+| terminology_standardization.md | Metaphor → industry term mapping + rename status |
+| user_directive_technical_authority.md | User delegated tech lead to N07. Terms taught. |
+| industry_terminology_audit.md | 117 kinds vs 4 providers |
+| deep_architecture_audit.md | 8F, sins, pillars, ISOs, tools validated |
+| project_cex_product_context.md | CEX ships as unconfigured instance |
 | project_notebooklm_pipeline.md | NotebookLM integration |
+
+## Terminology Reference (permanent)
+
+| Source | Path |
+|--------|------|
+| Metaphor dictionary | _docs/specs/spec_metaphor_dictionary.md |
+| Rosetta Stone | P01_knowledge/library/domain/_reference/kc_terminology_rosetta_stone.md |
+| Anthropic canonical | P01_knowledge/library/domain/_reference/kc_terminology_anthropic_canonical.md |
+| OpenAI canonical | P01_knowledge/library/domain/_reference/kc_terminology_openai_canonical.md |
+| Google/MCP canonical | P01_knowledge/library/domain/_reference/kc_terminology_google_mcp_canonical.md |
+| Decision manifest | .cex/runtime/decisions/decision_terminology_standardization.yaml |

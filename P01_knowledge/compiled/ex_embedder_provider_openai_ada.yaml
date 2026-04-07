@@ -83,4 +83,4 @@ comparison_to_alternatives: '| Model | Provider | Dims | Cost/1M | MTEB | Local 
 
   | nomic-embed-text | ollama | 768 | $0 | 62.4 | yes |'
 boundary: 'embedder_provider IS: connection config for an embedding API with model, dimensions, and batching. embedder_provider
-  IS NOT: a vector store config (vectordb_backend), a chunk strategy, or a retriever pipeline.'
+  IS NOT: a vector store config (vector_store), a chunk strategy, or a retriever pipeline.'

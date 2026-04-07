@@ -9,7 +9,7 @@ sources: embedder-provider-builder SCHEMA + MANIFEST, MTEB leaderboard, provider
 
 # Domain Knowledge: embedder_provider
 ## Executive Summary
-Embedder provider configs are infrastructure artifacts for RAG pipelines — they encode the connection spec between your application and an embedding model API. Each config captures provider, model ID, dimensions, normalization behavior, batch limits, max tokens, authentication, and pricing. The dimension count is a hard contract: downstream vector indices must match exactly. Normalization determines which distance metric to use. These configs differ from vectordb_backend (which stores vectors), model_provider (which routes LLM calls), and retriever (which orchestrates search).
+Embedder provider configs are infrastructure artifacts for RAG pipelines — they encode the connection spec between your application and an embedding model API. Each config captures provider, model ID, dimensions, normalization behavior, batch limits, max tokens, authentication, and pricing. The dimension count is a hard contract: downstream vector indices must match exactly. Normalization determines which distance metric to use. These configs differ from vector_store (which stores vectors), model_provider (which routes LLM calls), and retriever (which orchestrates search).
 ## Spec Table
 | Property | Value |
 |----------|-------|

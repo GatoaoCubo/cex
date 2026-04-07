@@ -21,14 +21,14 @@ purpose: Component map of glossary_entry — inventory, dependencies, and archit
 knowledge_card (P01) --produces--> glossary_entry
 glossary_entry       --produces--> system_prompt (P03)
 glossary_entry       --produces--> context_doc (P01)
-brain_index (P10)    --depends-->  glossary_entry
+knowledge_index (P10)    --depends-->  glossary_entry
 ```
 | From | To | Type | Data |
 |------|----|------|------|
 | knowledge_card (P01) | glossary_entry | produces | source concepts requiring concise term definitions |
 | glossary_entry | system_prompt (P03) | data_flow | term definitions injected for LLM terminology grounding |
 | glossary_entry | context_doc (P01) | data_flow | term references embedded in domain context documents |
-| brain_index (P10) | glossary_entry | depends | indexes entries for fast lookup and semantic search |
+| knowledge_index (P10) | glossary_entry | depends | indexes entries for fast lookup and semantic search |
 ## Boundary Table
 | glossary_entry IS | glossary_entry IS NOT |
 |-------------------|-----------------------|
@@ -44,5 +44,5 @@ brain_index (P10)    --depends-->  glossary_entry
 | Source | knowledge_card (P01) | Provide source concepts that need term-level definitions |
 | Core | term, definition, domain | The essential triad — name, meaning, and scope |
 | Enrichment | synonyms, related_terms, disambiguation, usage_context | Improve discoverability and reduce ambiguity |
-| Index | brain_index (P10) | Make the entry searchable across the knowledge system |
+| Index | knowledge_index (P10) | Make the entry searchable across the knowledge system |
 | Consumption | system_prompt (P03), context_doc (P01) | Inject terminology into LLM context and domain documents |

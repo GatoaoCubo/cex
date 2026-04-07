@@ -69,7 +69,7 @@ A memory_scope defines what memory an agent has access to, how it persists, and 
 
 ## Integration Graph
 ```
-[agent, boot_config] --> [memory_scope] --> [session_state (P10), brain_index (P10)]
+[agent, boot_config] --> [memory_scope] --> [session_state (P10), knowledge_index (P10)]
                               |
                        [knowledge_card, context_doc]
 ```

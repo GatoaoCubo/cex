@@ -65,7 +65,7 @@ N03 can build ALL 117 kinds in the CEX registry via 119 builder archetypes (in `
 | P07 Evals | 11 | benchmark, e2e_eval, eval_dataset, golden_test, llm_judge, red_team_eval, regression_check, scoring_rubric, smoke_eval, trace_config, unit_eval |
 | P08 Architecture | 8 | agent_card, component_map, decision_record, diagram, director, law, naming_rule, pattern |
 | P09 Config | 8 | effort_profile, env_config, feature_flag, path_config, permission, rate_limit_config, runtime_rule, secret_config |
-| P10 Memory | 9 | brain_index, compression_config, entity_memory, learning_record, memory_summary, memory_type, runtime_state, session_backend, session_state |
+| P10 Memory | 9 | knowledge_index, compression_config, entity_memory, learning_record, memory_summary, memory_type, runtime_state, session_backend, session_state |
 | P11 Lifecycle | 6 | bugloop, guardrail, lifecycle_rule, optimizer, quality_gate, reward_signal |
 | P12 Orchestration | 9 | checkpoint, dag, dispatch_rule, handoff, schedule, signal, spawn_config, workflow, workflow_primitive |
 

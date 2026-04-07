@@ -59,7 +59,7 @@ density_score: 1.0
 | glossary_entry | `p01_gl_{{term}}.md + .yaml` | Available, none built |
 | rag_source | `p01_rs_{{source}}.md + .yaml` | Active -- 1 built |
 | retriever_config | `p01_retr_cfg_{{store}}.md` | Available, none built |
-| vectordb_backend | `p01_vdb_{{backend}}.yaml` | Available, none built |
+| vector_store | `p01_vdb_{{backend}}.yaml` | Available, none built |
 
 ### P07 -- Evals (research quality measurement)
 
@@ -82,7 +82,7 @@ density_score: 1.0
 
 | Kind | Naming Pattern | Status |
 |------|---------------|--------|
-| brain_index | `p10_bi_{{index}}.yaml` | Available, none built |
+| knowledge_index | `p10_bi_{{index}}.yaml` | Available, none built |
 | learning_record | `p10_lr_{{topic}}.md + .yaml` | Available, none built |
 
 ### P02 -- Model (agent cognition)
@@ -137,7 +137,7 @@ Compared to: N03 builds primarily P03+P08 kinds (prompt/architecture), N05 build
 3. **End-to-end external pipeline**: 5 MCP servers give discover-extract-convert-structure-publish capability. N02 shares some servers but uses them for content creation, not structured intelligence.
 4. **Broadest kind coverage**: 20 kinds across 5 pillars (P01/P02/P04/P07/P10). This spans the full knowledge-to-evaluation lifecycle. By comparison, N03 covers ~15 kinds focused on P03/P08, and N05 covers ~18 kinds focused on P09/P11.
 5. **1M context window**: Enables processing entire codebases, long research papers, and multi-document analysis in a single pass. Critical for competitive intelligence that requires cross-referencing multiple sources.
-6. **Knowledge accumulation infrastructure**: Memory tools (select/update/age) + brain_index + learning_record kinds enable N01 to build institutional memory across research sessions.
+6. **Knowledge accumulation infrastructure**: Memory tools (select/update/age) + knowledge_index + learning_record kinds enable N01 to build institutional memory across research sessions.
 
 ## Gaps
 
@@ -147,10 +147,10 @@ Compared to: N03 builds primarily P03+P08 kinds (prompt/architecture), N05 build
 | `tools/` has only 1 artifact | Research pipeline defined but no tool-specific configs (scraping rules, API rate limits) | Medium | N05 has 3 tool configs |
 | `agents/` has only 1 artifact | No sub-agent definitions for specialized research roles (competitor tracker, paper reviewer) | Medium | N02 has 2 agents, N05 has 2 |
 | No `embedder_provider` built | Cannot configure embedding models for RAG despite being a P01 kind | Medium | Exists in N00 examples only |
-| No `vectordb_backend` built | Cannot configure vector stores for semantic search | Medium | Exists in N00 examples only |
+| No `vector_store` built | Cannot configure vector stores for semantic search | Medium | Exists in N00 examples only |
 | No `benchmark` artifacts | Cannot measure own research quality over time despite P07 access | Medium | N05 has evaluation infra |
 | No `eval_dataset` artifacts | No test cases for validating research output quality | Medium | -- |
-| No `brain_index` | Missing semantic index over 15 research outputs -- retrieval is keyword-only | Low | N04 likely has this |
+| No `knowledge_index` | Missing semantic index over 15 research outputs -- retrieval is keyword-only | Low | N04 likely has this |
 | 15/20 kinds unbuilt | 75% of buildable kinds have zero instances -- potential unrealized | Low | Expected for v1 |
 | No `chunk_strategy` | No document chunking config for processing long papers via RAG | Low | N04 may own this |
 

@@ -40,7 +40,7 @@ decision      --constrains--> agent
 ## Boundary Table
 | decision_record IS | decision_record IS NOT |
 |-------------------|----------------------|
-| Permanent record of a single significant architectural choice | A law (inviolable — use law-builder) |
+| Permanent record of a single significant architectural choice | A law (inviolable — use invariant-builder) |
 | Documents context, options, rationale, and consequences | A pattern (reusable prescription — use pattern-builder) |
 | Has lifecycle: proposed -> accepted -> deprecated/superseded | A diagram (use diagram-builder) |
 | Revisable: future teams can create superseding ADRs | A knowledge card (use knowledge-card-builder) |

@@ -20,7 +20,7 @@ purpose: Component map of learning_record — inventory, dependencies, and archi
 ## Dependency Graph
 ```
 session_state  --produces-->  learning_record  --consumed_by-->  knowledge_system
-agent          --produces-->  learning_record  --indexed_by-->   brain_index
+agent          --produces-->  learning_record  --indexed_by-->   knowledge_index
 learning_record  --signals-->  memory_update
 ```
 | From | To | Type | Data |
@@ -28,7 +28,7 @@ learning_record  --signals-->  memory_update
 | session_state (P10) | learning_record | data_flow | ephemeral session data distilled into persistent record |
 | agent (P02) | learning_record | produces | agent experience captured as structured learning |
 | learning_record | knowledge_card (P01) | data_flow | high-scoring patterns promoted to atomic facts |
-| learning_record | brain_index (P01) | consumes | indexed for retrieval by future agents |
+| learning_record | knowledge_index (P01) | consumes | indexed for retrieval by future agents |
 | learning_record | memory_update (P12) | signals | triggers memory consolidation pipeline |
 | scoring_rubric (P07) | learning_record | dependency | rubric defines how impact_score is calculated |
 ## Boundary Table
@@ -46,5 +46,5 @@ learning_record  --signals-->  memory_update
 | Source | session_state, agent execution | Supply raw experience data from task execution |
 | Capture | frontmatter, experience_summary, context_block | Record what happened, where, and under what conditions |
 | Analysis | patterns, anti_patterns, impact_score, reproducibility | Extract structured learning with quality metrics |
-| Integration | brain_index, knowledge_card | Index for retrieval and promote high-value patterns |
+| Integration | knowledge_index, knowledge_card | Index for retrieval and promote high-value patterns |
 | Notification | memory_update signal | Trigger downstream consolidation and routing |

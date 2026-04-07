@@ -68,7 +68,7 @@ An entity_memory stores current atomic facts about a named entity — a project,
 
 ## Integration Graph
 ```
-rag_source, context_doc --> [entity_memory] --> brain_index, agent_card
+rag_source, context_doc --> [entity_memory] --> knowledge_index, agent_card
                                     |
                                chunk_strategy, retriever_config, learning_record
 ```

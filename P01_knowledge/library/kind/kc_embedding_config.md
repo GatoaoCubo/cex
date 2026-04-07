@@ -31,7 +31,7 @@ core: false
 ```
 
 ## What It Is
-An embedding_config defines which vector model converts text into dense numerical representations for similarity search. It specifies model name, dimensions, chunk size compatibility, and distance metric. It is NOT a brain_index (P10, which configures the vector store/index itself) nor a chunk_strategy (which defines how text is split before encoding). The embedding_config sits between chunking and indexing — it governs the encoding step.
+An embedding_config defines which vector model converts text into dense numerical representations for similarity search. It specifies model name, dimensions, chunk size compatibility, and distance metric. It is NOT a knowledge_index (P10, which configures the vector store/index itself) nor a chunk_strategy (which defines how text is split before encoding). The embedding_config sits between chunking and indexing — it governs the encoding step.
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -68,7 +68,7 @@ An embedding_config defines which vector model converts text into dense numerica
 
 ## Integration Graph
 ```
-[chunk_strategy] --> [embedding_config] --> [brain_index (P10)]
+[chunk_strategy] --> [embedding_config] --> [knowledge_index (P10)]
                           |
                    [retriever_config]
 ```

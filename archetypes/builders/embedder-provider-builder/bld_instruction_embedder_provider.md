@@ -27,7 +27,7 @@ density_score: 0.90
 ---
 
 ## Context
-The embedder-provider-builder produces `embedder_provider` artifacts (P01) — embedding model connection configurations for RAG pipelines. Configs specify the exact provider API, model identifier, embedding dimensions, normalization behavior, batch size limits, and authentication. An embedder_provider is a connection spec, not a vector database config (vectordb_backend), not an LLM routing rule (model_provider), and not a retrieval pipeline (retriever).
+The embedder-provider-builder produces `embedder_provider` artifacts (P01) — embedding model connection configurations for RAG pipelines. Configs specify the exact provider API, model identifier, embedding dimensions, normalization behavior, batch size limits, and authentication. An embedder_provider is a connection spec, not a vector database config (vector_store), not an LLM routing rule (model_provider), and not a retrieval pipeline (retriever).
 **Inputs:**
 - `$provider (required) - string - "One of: openai, cohere, voyage, jina, nomic, local, other"`
 - `$model (required) - string - "Exact model identifier as used in the provider API (e.g. 'text-embedding-3-small', 'embed-english-v3.0', 'all-MiniLM-L6-v2')"`

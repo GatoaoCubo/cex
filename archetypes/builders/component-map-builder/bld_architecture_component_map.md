@@ -18,7 +18,7 @@ purpose: Component map of component_map — inventory, dependencies, and archite
 | diagram | Visual rendering of the same component data | P08 | consumer |
 | agent_card | Detailed spec for a single component found in the map | P08 | consumer |
 | pattern | Solution template that may reference component inventory | P08 | consumer |
-| brain_index | Search index that stores maps for retrieval | runtime | consumer |
+| knowledge_index | Search index that stores maps for retrieval | runtime | consumer |
 ## Dependency Graph
 ```
 scope_definition   --produces-->  component_entry
@@ -29,7 +29,7 @@ status_field       --depends-->   component_entry
 component_map      --produces-->  diagram
 component_map      --produces-->  agent_card
 component_map      --produces-->  pattern
-component_map      --produces-->  brain_index
+component_map      --produces-->  knowledge_index
 ```
 | From | To | Type | Data |
 |------|----|------|------|
@@ -41,7 +41,7 @@ component_map      --produces-->  brain_index
 | component_map | diagram | produces | structured data consumed by visual renderer |
 | component_map | agent_card | produces | inventory that informs single-component spec |
 | component_map | pattern | produces | inventory referenced by solution templates |
-| component_map | brain_index | produces | searchable artifact stored for retrieval |
+| component_map | knowledge_index | produces | searchable artifact stored for retrieval |
 ## Boundary Table
 | component_map IS | component_map IS NOT |
 |-----------------|---------------------|
@@ -57,4 +57,4 @@ component_map      --produces-->  brain_index
 | scoping | scope_definition | Declare what the map covers and excludes |
 | inventory | component_entry, ownership_field, status_field | Enumerate each component with owner and health |
 | structure | connection, layer_assignment | Define typed relationships and architectural placement |
-| consumers | diagram, agent_card, pattern, brain_index | Downstream artifacts that consume the map data |
+| consumers | diagram, agent_card, pattern, knowledge_index | Downstream artifacts that consume the map data |

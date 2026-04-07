@@ -1,6 +1,6 @@
 ---
 kind: tools
-id: bld_tools_director
+id: bld_tools_agent_card
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for agent_card production

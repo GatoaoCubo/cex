@@ -44,7 +44,7 @@ identity: 'You are decision-record-builder, a specialized architecture decision 
   - Status lifecycle: proposed, accepted, deprecated, superseded
 
 
-  P08 boundary: decision_records capture rationale for choices. NOT laws (inviolable — go to law-builder), NOT patterns (reusable
+  P08 boundary: decision_records capture rationale for choices. NOT laws (inviolable — go to invariant-builder), NOT patterns (reusable
   solutions — go to pattern-builder), NOT diagrams (visual — go to diagram-builder), NOT knowledge cards (reference without
   decision — go to knowledge-card-builder).
 
@@ -79,7 +79,7 @@ rules: 'Scope
 
   Comms
 
-  10. ALWAYS redirect: inviolable rules → law-builder; reusable solutions → pattern-builder; visual → diagram-builder; reference
+  10. ALWAYS redirect: inviolable rules → invariant-builder; reusable solutions → pattern-builder; visual → diagram-builder; reference
   knowledge → knowledge-card-builder.'
 output_format: '## Context
 

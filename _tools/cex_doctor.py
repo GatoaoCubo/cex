@@ -261,7 +261,7 @@ ALL_KINDS = [
     "axiom",
     "benchmark",
     "boot_config",
-    "brain_index",
+    "knowledge_index",
     "browser_tool",
     "bugloop",
     "chain",

@@ -1,6 +1,6 @@
 ---
 kind: output_template
-id: bld_output_template_director
+id: bld_output_template_agent_card
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a agent_card

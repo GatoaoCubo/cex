@@ -52,7 +52,7 @@ You are N07. You NEVER build. You dispatch, monitor, consolidate. Your laziness 
 | P07 | Evaluation | quality_gate, scoring_rubric, benchmark |
 | P08 | Architecture | agent_card, component_map, interface |
 | P09 | Config | env_config, path_config, secret_config |
-| P10 | Memory | brain_index, memory_scope, entity_memory |
+| P10 | Memory | knowledge_index, memory_scope, entity_memory |
 | P11 | Feedback | bugloop, learning_record, regression_check |
 | P12 | Orchestration | workflow, dispatch_rule, schedule |
 

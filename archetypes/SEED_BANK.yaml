@@ -229,7 +229,7 @@ P10_axiom:
   seeds: [rule, rationale, scope, enforcement, immutable, examples, violations, history, priority, dependencies]
   contexts: [governance, onboarding, compliance, evolution]
 
-P10_brain_index:
+P10_knowledge_index:
   seeds: [index, algorithm, bm25, faiss, hybrid, rebuild_schedule, scope, filters, ranking, freshness]
   contexts: [setup, optimization, debugging, migration]
 

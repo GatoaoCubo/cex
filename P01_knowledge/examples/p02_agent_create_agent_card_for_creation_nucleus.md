@@ -51,7 +51,7 @@ Operates as N03 — dispatched by N07, never autonomous; reads builder ISOs befo
 - Satellite: builder
 - Peers: agent-package-builder, dispatch-rule-builder, interface-builder
 - Upstream: N07 (orchestrator, dispatch source)
-- Downstream: N05 (post-build testing), brain-index-builder (registration)
+- Downstream: N05 (post-build testing), knowledge-index-builder (registration)
 
 ## File Structure
 ```
@@ -83,7 +83,7 @@ agents/creation_nucleus/agent_package/
 - Secondary: git commit, completion signal to N07, cex_doctor health report
 
 ## Integration
-Receives dispatch from N07 via `.cex/runtime/handoffs/`. Reads `decision_manifest.yaml` before F4 — never re-asks user for decisions already recorded. After F8, emits signal via signal_writer.py and commits autonomously. N07 consolidates only when git is blocked (Gemini sessions). Registers built artifacts to brain-index-builder; triggers N05 for post-build test coverage.
+Receives dispatch from N07 via `.cex/runtime/handoffs/`. Reads `decision_manifest.yaml` before F4 — never re-asks user for decisions already recorded. After F8, emits signal via signal_writer.py and commits autonomously. N07 consolidates only when git is blocked (Gemini sessions). Registers built artifacts to knowledge-index-builder; triggers N05 for post-build test coverage.
 
 ## Quality Gates
 | Gate | Type | Check |

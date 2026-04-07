@@ -31,4 +31,4 @@ triggers: "create retriever config", "define retriever config", "build retriever
 ## Crew Role
 In a crew, I handle RETRIEVER CONFIG DEFINITION.
 I answer: "what are the parameters and constraints for this retriever config?"
-I do NOT handle: embedding_config (vector model), chunk_strategy (splitting), knowledge_card (content), brain_index (index infra).
+I do NOT handle: embedding_config (vector model), chunk_strategy (splitting), knowledge_card (content), knowledge_index (index infra).

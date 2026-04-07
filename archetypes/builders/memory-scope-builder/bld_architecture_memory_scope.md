@@ -32,7 +32,7 @@ purpose: Component map of memory_scope — inventory, dependencies, and architec
 | Memory scope config — which memory types an agent uses, backends, TTL, and isolation boundaries | session_state (P10 |
 | Not session_state | session_state (P10 |
 | Not runtime state) | runtime state) |
-| Not brain_index | brain_index (P10 |
+| Not knowledge_index | knowledge_index (P10 |
 | Not search index) | search index) |
 | Not learning_record | learning_record (P10 |
 | Not pattern storage) | pattern storage) |

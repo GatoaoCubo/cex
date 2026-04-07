@@ -53,7 +53,7 @@ key_paths:
   handoffs: .claude/handoffs/
   signals: .claude/signals/
   spawn_scripts: records/framework/powershell/spawn_*.ps1
-  brain_index: records/core/brain/mcp-organization-brain/
+  knowledge_index: records/core/brain/mcp-organization-brain/
   learning: records/core/learning/memory/
   mental_models: .claude/mental_models/
 ```

@@ -36,7 +36,7 @@ automation: "semi"
 density_score: 0.93
 linked_artifacts:
   primary: "p11_qg_kc_publish"
-  related: [p01_kc_schema, p10_brain_index]
+  related: [p01_kc_schema, p10_knowledge_index]
 ## Definition
 Knowledge cards lose accuracy as domains evolve. LLM pricing changes monthly,
 framework APIs break quarterly, and research findings get superseded. A KC

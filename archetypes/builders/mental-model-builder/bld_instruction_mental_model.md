@@ -29,7 +29,7 @@ density_score: 0.91
 ## Context
 The mental-model-builder produces `mental_model` artifacts (P02) — design-time cognitive maps that define how an agent routes tasks, makes decisions, and prioritizes work. Mental models differ from agent definitions (identity and capabilities), runtime state (P10, ephemeral), and router artifacts (pure task dispatchers): a mental model encodes the thinking patterns an agent uses during execution.
 **Inputs:**
-- `$agent_name (required) - string - "The agent this mental model belongs to (e.g. 'scout-agent', 'law-builder')"`
+- `$agent_name (required) - string - "The agent this mental model belongs to (e.g. 'scout-agent', 'invariant-builder')"`
 - `$agent_slug (required) - string - "snake_case version of agent name for use in id field"`
 - `$domain (required) - string - "Primary domain the agent operates in"`
 - `$routing_triggers (required) - list[string] - "Keywords or signal types that trigger this agent's activation"`

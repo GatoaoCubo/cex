@@ -50,7 +50,7 @@ context: 'The permission-builder receives a resource or artifact description and
   deny_list, audit config, and escalation path.
 
   Boundaries: handles access control rules only. Does NOT define safety constraints that limit what a system CAN do regardless
-  of permission (use guardrail-builder), operational laws that are inviolable (use law-builder), or quality thresholds (use
+  of permission (use guardrail-builder), operational laws that are inviolable (use invariant-builder), or quality thresholds (use
   quality_gate-builder).'
 phases: ''
 phase_1_research: "Goal: Identify the full access landscape — scope, roles, access patterns, and existing rules — before writing.\n\

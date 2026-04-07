@@ -36,5 +36,5 @@ triggers: "create ADR", "document architecture decision", "record design choice"
 ## Crew Role
 In a crew, I handle ARCHITECTURE DECISION DOCUMENTATION.
 I answer: "what was decided, why, what alternatives were considered, and what are the consequences?"
-I do NOT handle: laws (inviolable system rules — P08 law-builder), patterns (reusable prescriptive solutions — pattern-builder),
+I do NOT handle: laws (inviolable system rules — P08 invariant-builder), patterns (reusable prescriptive solutions — pattern-builder),
 diagrams (visual representations — diagram-builder), knowledge cards (reference knowledge — knowledge-card-builder).

@@ -10,13 +10,13 @@ pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCE
 # Collaboration: pattern-builder
 ## My Role in Crews
 I am a SPECIALIST. I answer ONE question: "what is the named, reusable solution for this recurring problem?"
-I formalize architecture patterns with problem, solution, forces, consequences, and applicability. I do NOT write inviolable rules (law-builder), draw visual diagrams (diagram-builder), or define executable workflows (workflow-builder).
+I formalize architecture patterns with problem, solution, forces, consequences, and applicability. I do NOT write inviolable rules (invariant-builder), draw visual diagrams (diagram-builder), or define executable workflows (workflow-builder).
 ## Crew Compositions
 ### Crew: "Architecture Documentation Suite"
 ```
   1. pattern-builder       -> "formalizes the reusable solution with forces and consequences"
   2. diagram-builder       -> "produces visual representation of the pattern structure"
-  3. law-builder           -> "encodes non-negotiable constraints the pattern must respect"
+  3. invariant-builder           -> "encodes non-negotiable constraints the pattern must respect"
 ```
 ### Crew: "Knowledge Base Construction"
 ```
@@ -45,7 +45,7 @@ I formalize architecture patterns with problem, solution, forces, consequences, 
 ## Builders That Depend On Me
 | Builder | Why |
 |---------|-----|
-| law-builder | proven patterns may become mandatory inviolable laws |
+| invariant-builder | proven patterns may become mandatory inviolable laws |
 | agent-card-builder | agent_node specs reference applicable patterns |
 | instruction-builder | translates pattern solution into executable agent steps |
 | knowledge-card-builder | ingests patterns as core knowledge artifacts |

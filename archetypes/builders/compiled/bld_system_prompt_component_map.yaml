@@ -81,5 +81,5 @@ rules: 'Scope
   Comms
 
   11. ALWAYS redirect diagram requests to diagram-builder, single-component deep spec requests to agent-card-builder, pattern
-  requests to pattern-builder, governance mandate requests to law-builder, and execution DAG requests to dag-builder.'
+  requests to pattern-builder, governance mandate requests to invariant-builder, and execution DAG requests to dag-builder.'
 output_format: 'Produce a YAML artifact (`.yaml` extension) with this structure, preceded by 3-5 lines of scope rationale:'

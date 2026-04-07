@@ -39,7 +39,7 @@ author: n07-orchestrator
 | total commits | 22 | 28 | +6 |
 
 ## Artifacts Created
-- 9 kind KCs (compression_config, embedder_provider, model_provider, reasoning_trace, session_backend, toolkit, trace_config, vectordb_backend, workflow_primitive)
+- 9 kind KCs (compression_config, embedder_provider, model_provider, reasoning_trace, session_backend, toolkit, trace_config, vector_store, workflow_primitive)
 - 13 builder ISOs (memory-type-builder)
 - 1 sub-agent (memory-type-builder.md)
 - 1 overnight monitor (flywheel_monitor.ps1)

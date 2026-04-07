@@ -38,7 +38,7 @@ INJECT preenche o context window com informacao relevante apos identidade e ante
 | rag_source | P01 | Ponteiro para base indexada via RAG |
 | context_doc | P01 | Documento bruto nao destilado como referencia |
 | few_shot_example | P01 | Par input/output demonstrativo |
-| brain_index | P10 | Indice hibrido BM25 + embeddings |
+| knowledge_index | P10 | Indice hibrido BM25 + embeddings |
 | embedding_config | P01 | Config do modelo de embeddings |
 | session_state | P10 | Historico e variaveis da sessao atual |
 | runtime_state | P10 | Estado operacional: env vars, flags, results |
@@ -72,7 +72,7 @@ agent.run(task="Pesquisar mercado", context=context)
 | Corpus grande demais para contexto | Configurar rag_source com retrieval |
 | Instrucao textual insuficiente | Adicionar few_shot_examples |
 | Agente precisa de estado entre turnos | Manter session_state |
-| Busca semantica sobre corpus | Configurar brain_index hibrido |
+| Busca semantica sobre corpus | Configurar knowledge_index hibrido |
 
 ## Anti-Patterns
 

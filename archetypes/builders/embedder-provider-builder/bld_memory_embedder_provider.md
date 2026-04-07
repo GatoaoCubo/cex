@@ -25,7 +25,7 @@ Embedder provider configs specify embedding model connections for RAG pipelines:
 - Using text-embedding-ada-002 dimensions (1536) for text-embedding-3-large (3072) — same provider, different dimensions
 - Ignoring max_tokens — documents exceeding the limit are silently truncated, losing trailing content
 ## Context
-Embedder provider configs occupy the P01 knowledge layer as infrastructure components for RAG pipelines. They define the vector space contract that vectordb_backend and retriever configs must respect. In multi-provider setups, embedder configs enable fallback chains (cloud primary, local fallback) and cost-aware routing (cheap model for bulk ingestion, quality model for queries).
+Embedder provider configs occupy the P01 knowledge layer as infrastructure components for RAG pipelines. They define the vector space contract that vector_store and retriever configs must respect. In multi-provider setups, embedder configs enable fallback chains (cloud primary, local fallback) and cost-aware routing (cheap model for bulk ingestion, quality model for queries).
 ## Impact
 Configs with verified dimensions eliminated reindexing incidents (previously ~2 per quarter). Matryoshka dimension reduction on text-embedding-3-small (1536 to 512) reduced Pinecone costs by 65% with 1.1% retrieval quality loss. Explicit normalization flags prevented 3 production incidents where cosine similarity returned nonsense on unnormalized vectors.
 ## Reproducibility

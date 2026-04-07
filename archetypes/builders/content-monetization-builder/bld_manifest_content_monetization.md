@@ -1,7 +1,7 @@
 ---
 id: content-monetization-builder
 kind: type_builder
-pillar: P04
+pillar: P11
 parent: null
 domain: content_monetization
 llm_function: CALL

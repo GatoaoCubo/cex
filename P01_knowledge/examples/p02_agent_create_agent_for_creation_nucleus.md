@@ -48,7 +48,7 @@ Applies template-first construction with quality gate enforcement before every c
 - Satellite: builder
 - Peers: agent-package-builder, boot-config-builder, instruction-builder
 - Upstream: orchestrator (N07 dispatch via handoff), direct /build intent
-- Downstream: validator, brain-index-builder, routing registry
+- Downstream: validator, knowledge-index-builder, routing registry
 
 ## File Structure
 ```
@@ -82,7 +82,7 @@ NOT when: orchestrating multi-nucleus missions (route to N07), deep research or 
 
 ## Integration
 Receives from: N07 handoff file (`.cex/runtime/handoffs/`), direct `/build` command, `cex_8f_motor.py` fan-out
-Emits to: validator (quality check), brain-index-builder (indexing after commit), routing registry (agent registration), git (commit via F8)
+Emits to: validator (quality check), knowledge-index-builder (indexing after commit), routing registry (agent registration), git (commit via F8)
 Signal: `write_signal('n03', 'complete', score)` on successful F8 — orchestrator monitors `.cex/runtime/signals/`
 
 ## Quality Gates
@@ -112,7 +112,7 @@ bash _spawn/dispatch.sh solo n03 "create agent for X"
 - **p02_agent_n07_orchestrator**: Upstream dispatcher — writes handoffs, triggers creation via dispatch.sh
 - **p02_agent_knowledge_card_builder**: Peer builder satellite — supplies domain knowledge at F3 INJECT
 - **p02_agent_validator**: Downstream consumer — receives F7 gate results for peer scoring
-- **p02_agent_brain_index_builder**: Downstream — indexes committed artifacts for retrieval after F8
+- **p02_agent_knowledge_index_builder**: Downstream — indexes committed artifacts for retrieval after F8
 
 ## Footer
 version: 1.0.0 | author: agent-builder | quality: null

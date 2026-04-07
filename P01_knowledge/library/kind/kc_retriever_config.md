@@ -71,7 +71,7 @@ A retriever_config defines how the system searches for relevant chunks at query 
 ```
 [embedding_config] --> [retriever_config] --> [template (P03)]
                             |
-                     [chunk_strategy, brain_index (P10)]
+                     [chunk_strategy, knowledge_index (P10)]
 ```
 
 ## Decision Tree

@@ -50,7 +50,7 @@ OVERRIDES: dict[str, dict] = {
     "social-publisher-builder": {"effort": "medium", "disallowed_tools": [], "fork_context": None, "permission_scope": "nucleus"},
     "workflow-builder": {"effort": "high", "disallowed_tools": [], "fork_context": None, "permission_scope": "pillar"},
     "chain-builder": {"effort": "medium", "disallowed_tools": [], "fork_context": "inline", "permission_scope": "pillar"},
-    "brain-index-builder": {"effort": "high", "disallowed_tools": [], "fork_context": "fork", "permission_scope": "global"},
+    "knowledge-index-builder": {"effort": "high", "disallowed_tools": [], "fork_context": "fork", "permission_scope": "global"},
     "bugloop-builder": {"effort": "medium", "disallowed_tools": [], "fork_context": "fork", "permission_scope": "nucleus"},
 }
 

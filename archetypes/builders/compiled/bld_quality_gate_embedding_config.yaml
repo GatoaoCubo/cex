@@ -72,7 +72,7 @@ soft_scoring: 'Dimensions sum to 100%. Score each 0.0-10.0; multiply by weight.
 
   | Provider and cost | 1.0 | Provider (Ollama, OpenAI, etc.) and per-token cost documented |
 
-  | Boundary clarity | 0.5 | Explicitly not brain_index (search index) or rag_source (data source) |
+  | Boundary clarity | 0.5 | Explicitly not knowledge_index (search index) or rag_source (data source) |
 
   | Fallback model | 0.5 | Alternative model listed for when primary is unavailable |
 

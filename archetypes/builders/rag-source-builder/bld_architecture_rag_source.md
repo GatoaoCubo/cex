@@ -19,7 +19,7 @@ purpose: Component map of rag_source — inventory, dependencies, and architectu
 ## Dependency Graph
 ```
 external_source  --tracked_by-->  rag_source  --consumed_by-->  ingestion_pipeline
-rag_source       --produces-->    knowledge_card  --indexed_by--> brain_index
+rag_source       --produces-->    knowledge_card  --indexed_by--> knowledge_index
 rag_source       --signals-->     freshness_alert
 ```
 | From | To | Type | Data |
@@ -27,7 +27,7 @@ rag_source       --signals-->     freshness_alert
 | external_source (web) | rag_source | data_flow | URL and metadata of the authoritative source |
 | rag_source | ingestion_pipeline | consumes | pipeline reads URL to fetch and process content |
 | rag_source | knowledge_card (P01) | produces | distilled content extracted from the source |
-| rag_source | brain_index (P01) | data_flow | source metadata indexed for retrieval |
+| rag_source | knowledge_index (P01) | data_flow | source metadata indexed for retrieval |
 | rag_source | freshness_alert (P12) | signals | emitted when source exceeds staleness threshold |
 | embedding_config (P01) | rag_source | dependency | embedding settings for indexing source content |
 ## Boundary Table
@@ -46,4 +46,4 @@ rag_source       --signals-->     freshness_alert
 | Metadata | frontmatter, format_type, domain_tags, reliability_score | Classify and rate the source |
 | Freshness | freshness_policy, freshness_alert | Monitor staleness and trigger re-checks |
 | Ingestion | ingestion_pipeline, embedding_config | Fetch, process, and embed source content |
-| Output | knowledge_card, brain_index | Distilled content and search index entries |
+| Output | knowledge_card, knowledge_index | Distilled content and search index entries |

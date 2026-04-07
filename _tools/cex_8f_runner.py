@@ -66,6 +66,7 @@ from cex_shared import write_learning_record as _shared_write_learning_record
 try:
     from cex_retriever import (
         find_examples_for_kind,
+        find_similar as _find_similar,
     )
     from cex_retriever import (
         load_index as load_retriever_index,
@@ -832,8 +833,7 @@ class EightFRunner:
             try:
                 idx = load_retriever_index()
                 if idx:
-                    from cex_retriever import find_similar
-                    results = find_similar(intent, index=idx, top_k=3)
+                    results = _find_similar(intent, index=idx, top_k=3)
                     if results:
                         tool_results["tool_outputs"]["retriever"] = results
                         executed += 1

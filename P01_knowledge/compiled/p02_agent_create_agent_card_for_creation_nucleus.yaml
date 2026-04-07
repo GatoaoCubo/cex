@@ -65,7 +65,7 @@ satellite_position:
 - 'Satellite: builder'
 - 'Peers: agent-package-builder, dispatch-rule-builder, interface-builder'
 - 'Upstream: N07 (orchestrator, dispatch source)'
-- 'Downstream: N05 (post-build testing), brain-index-builder (registration)'
+- 'Downstream: N05 (post-build testing), knowledge-index-builder (registration)'
 file_structure: "agents/creation_nucleus/agent_package/\n  SPEC_CREATION_NUCLEUS_001_MANIFEST.md\n  SPEC_CREATION_NUCLEUS_002_QUICK_START.md\n\
   \  SPEC_CREATION_NUCLEUS_003_PRIME.md\n  SPEC_CREATION_NUCLEUS_004_INSTRUCTIONS.md\n  SPEC_CREATION_NUCLEUS_005_ARCHITECTURE.md\n\
   \  SPEC_CREATION_NUCLEUS_006_OUTPUT_TEMPLATE.md\n  SPEC_CREATION_NUCLEUS_007_EXAMPLES.md\n  SPEC_CREATION_NUCLEUS_008_ERROR_HANDLING.md\n\
@@ -82,7 +82,7 @@ output:
 - 'Secondary: git commit, completion signal to N07, cex_doctor health report'
 integration: Receives dispatch from N07 via `.cex/runtime/handoffs/`. Reads `decision_manifest.yaml` before F4 — never re-asks
   user for decisions already recorded. After F8, emits signal via signal_writer.py and commits autonomously. N07 consolidates
-  only when git is blocked (Gemini sessions). Registers built artifacts to brain-index-builder; triggers N05 for post-build
+  only when git is blocked (Gemini sessions). Registers built artifacts to knowledge-index-builder; triggers N05 for post-build
   test coverage.
 quality_gates: '| Gate | Type | Check |
 

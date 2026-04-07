@@ -31,4 +31,4 @@ triggers: "define access permission", "who can read/write", "create access contr
 ## Crew Role
 In a crew, I handle ACCESS CONTROL.
 I answer: "who can read/write/execute what, and how is access inherited?"
-I do NOT handle: safety boundaries (guardrail-builder), operational laws (law-builder), quality scoring (quality-gate-builder).
+I do NOT handle: safety boundaries (guardrail-builder), operational laws (invariant-builder), quality scoring (quality-gate-builder).
