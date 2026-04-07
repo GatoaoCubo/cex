@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n04_knowledge
 domain: marp
-quality: null
+quality: 9.1
 tags: [marp, slides, markdown, presentation, html, pdf, pptx, content-factory, integration, INJECT]
 tldr: "Markdown → HTML/PDF/PPTX slides via CLI — theme directives, speaker notes, images, and batch export"
 when_to_use: "When any nucleus needs to generate slide decks from structured markdown content"
