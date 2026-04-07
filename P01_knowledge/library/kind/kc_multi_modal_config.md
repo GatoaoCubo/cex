@@ -9,7 +9,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n04_knowledge
 domain: multi_modal_config
-quality: null
+quality: 9.1
 tags: [multi_modal_config, P04, CONSTRAIN, kind-kc]
 tldr: "multi_modal_config defines input format, resolution, encoding, and routing rules for multi-modal LLM interactions — images, audio, video, and documents."
 when_to_use: "Building, reviewing, or reasoning about multi_modal_config artifacts"
