@@ -9,7 +9,7 @@ author: "n01_intelligence"
 name: "Content Factory Brief Format Constraints"
 constraint_type: "input_schema"
 pattern: "required_fields"
-quality: null
+quality: 9.1
 tags: [constraint_spec, content-factory, brief, input-validation]
 tldr: "Brief constraints: required fields (topic, audience, formats, brand_ref), validation rules, completeness gate"
 description: "Governs the content brief input that initiates the entire Content Factory pipeline"
@@ -17,6 +17,7 @@ provider_compat: "json_schema, yaml_validation"
 fallback: "Interactive prompt to collect missing fields from user"
 temperature_override: "0.2"
 max_tokens: "1024"
+density_score: 1.0
 ---
 
 ## Overview
