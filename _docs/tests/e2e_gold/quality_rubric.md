@@ -7,8 +7,9 @@ title: "Quality Rubric — E2E Gold Standard Evaluation"
 version: 1.0.0
 created: 2026-04-06
 author: n02_marketing
-quality: null
+quality: 9.0
 tags: [e2e, gold-standard, rubric, quality, marketing, stress-test]
+density_score: 0.97
 ---
 
 # Quality Rubric — E2E Gold Standards
