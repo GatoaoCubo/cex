@@ -1,11 +1,11 @@
-id: deck_n01
+id: agent_card_n01
 kind: context_doc
-title: N01 Deck -- Available Capabilities
+title: N01 Agent Card -- Available Capabilities
 pillar: P01_knowledge
 nucleus: N01
 sin: Inveja Analitica
 version: 1.1.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 density_score: 1.0
 identity: '| Field | Value |
@@ -69,7 +69,7 @@ p01_knowledge_primary_domain_all_10_kinds: '| Kind | Naming Pattern | Status |
 
   | knowledge_card | `p01_kc_{{topic}}.md + .yaml` | Active -- 6 KCs built |
 
-  | context_doc | `p01_ctx_{{topic}}.md + .yaml` | Active -- this deck is one |
+  | context_doc | `p01_ctx_{{topic}}.md + .yaml` | Active -- this agent card is one |
 
   | chunk_strategy | `p01_chunk_{{strategy}}.md` | Available, none built |
 
@@ -228,7 +228,7 @@ gaps: '| Gap | Impact | Priority | Comparison |
   | 15/20 kinds unbuilt | 75% of buildable kinds have zero instances -- potential unrealized | Low | Expected for v1 |
 
   | No `chunk_strategy` | No document chunking config for processing long papers via RAG | Low | N04 may own this |'
-deck_summary: '| Category | Count |
+agent_card_summary: '| Category | Count |
 
   |----------|------:|
 
@@ -240,7 +240,7 @@ deck_summary: '| Category | Count |
 
   | MCP servers | 5 |
 
-  | Total cards in deck | 82 |
+  | Total cards in agent card | 82 |
 
 
   Competitive context: N01 (82) < N02 (110) < N05 (107) < N06 (138). N01''s lower count reflects focus -- a research nucleus

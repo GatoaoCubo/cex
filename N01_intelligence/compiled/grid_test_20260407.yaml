@@ -27,7 +27,7 @@ execution_proof: ''
 
   | Rules (`.claude/rules/n01*.md`) | Present, glob on `N01_intelligence/**` |
 
-  | Deck (`deck_n01.md`) | Exists (10,707 bytes, from prior session) |
+  | Agent card (`agent_card_n01.md`) | Exists (10,707 bytes, from prior session) |
 
   | Doctor | Operational (119 builders detected) |'
 3_competitive_context_analytical_envy: 'Grid dispatch vs. 2 alternatives:

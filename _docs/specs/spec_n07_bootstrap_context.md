@@ -40,7 +40,7 @@ density_score: 1.0
 |-----------|------|-------------------|---------|
 | Nucleus directory | N{01-06}_*/ | ~40 artifacts | Domain-specific filled molds |
 | Subdirectories | agents/, prompts/, knowledge/, schemas/, output/, orchestration/, quality/, ... | 9-14 subdirs | Mirrors 12 pillar categories |
-| Deck manifest | N{0X}_*/deck_n0X.md | 1 | Self-discovery: what this agent has |
+| Agent card manifest | N{0X}_*/agent_card_n0X.md | 1 | Self-discovery: what this agent has |
 
 ### Runtime Layer (assembled per task)
 
@@ -61,7 +61,7 @@ When a nucleus starts, it should ALREADY know its capabilities:
 | What loads | How | Status |
 |-----------|-----|--------|
 | CLAUDE.md | pi reads automatically on startup | WIRED |
-| deck_n0X.md | --append-system-prompt in boot .cmd | WIRED (Apr 7) |
+| agent_card_n0X.md | --append-system-prompt in boot .cmd | WIRED (Apr 7) |
 | .claude/rules/n0X*.md | pi reads automatically | WIRED |
 | Sin identity | --append-system-prompt in boot .cmd | WIRED |
 | Pi skills (/build, /mission, /status) | cex-pi-package installed | WIRED |

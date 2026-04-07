@@ -1,8 +1,8 @@
 ---
-id: deck_n02
+id: agent_card_n02
 kind: context_doc
 pillar: P08
-title: "N02 Deck — Available Capabilities"
+title: "N02 Agent Card — Available Capabilities"
 nucleus: N02
 sin: Luxuria Criativa
 version: 1.0.0
@@ -11,7 +11,7 @@ created: 2026-04-07
 density_score: 1.0
 ---
 
-# N02 Deck — Luxúria Criativa ♥
+# N02 Agent Card — Luxúria Criativa ♥
 
 > *"Isso SEDUZ o público?"* — Essa é a única pergunta que importa.
 
@@ -212,7 +212,7 @@ density_score: 1.0
 
 ---
 
-## Deck Summary
+## Agent Card Summary
 
 ```
 ┌─────────────────────────────────────────────────┐

@@ -15,7 +15,7 @@ game_architecture_metaphors: '| User says | System means | CEX implementation |
 
   | deck | loaded context | artifacts assembled for one agent per task |
 
-  | base deck | boot context | deck_n0X.md + rules + sin identity (loaded on startup) |
+  | base deck | boot context | agent_card_n0X.md + rules + sin identity (loaded on startup) |
 
   | mission deck | task context | handoff + referenced builders + KCs + templates |
 

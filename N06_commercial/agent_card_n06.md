@@ -1,7 +1,7 @@
 ---
-id: deck_n06
+id: agent_card_n06
 kind: context_doc
-title: "N06 Deck -- Available Capabilities"
+title: "N06 Agent Card -- Available Capabilities"
 nucleus: N06
 pillar: P01
 sin: Avareza Estrategica
@@ -11,7 +11,7 @@ created: 2026-04-07
 density_score: 1.0
 ---
 
-# N06 Deck — Available Capabilities
+# N06 Agent Card — Available Capabilities
 
 ## Identity
 
@@ -149,7 +149,7 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 
 ---
 
-## Deck Summary
+## Agent Card Summary
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -172,4 +172,4 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 └─────────────────────────────────────────────────┘
 ```
 
-**ROI of this deck**: Self-awareness is free. Ignorance of capabilities costs missed revenue opportunities, duplicated work, and misrouted tasks. This deck pays for itself every time N07 routes correctly to N06.
+**ROI of this agent card**: Self-awareness is free. Ignorance of capabilities costs missed revenue opportunities, duplicated work, and misrouted tasks. This agent card pays for itself every time N07 routes correctly to N06.

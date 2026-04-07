@@ -1,6 +1,6 @@
-id: deck_n01
+id: agent_card_n01
 kind: context_doc
-title: N01 Deck -- Available Capabilities
+title: N01 Agent Card -- Available Capabilities
 pillar: P01_knowledge
 nucleus: N01
 sin: Inveja Analitica
@@ -176,7 +176,7 @@ my_gaps: '| Gap | Impact | Priority |
   | No `benchmark` artifacts built | Despite being a buildable kind, no benchmarks exist in N01 | Medium |
 
   | No `brain_index` artifacts | Missing semantic index over intelligence outputs | Low |'
-cards_in_my_deck: '| Category | Count |
+cards_in_my_agent_card: '| Category | Count |
 
   |----------|------:|
 

@@ -42,7 +42,7 @@ N07 must know every step and apply it automatically:
 | F3 INJECT | Assemble context (KCs, examples, brand, memory) | List artifact references in handoff |
 | F4 REASON | Plan approach | GDP if subjective, autonomous if technical |
 | F5 CALL | Use tools for enrichment | Specify which tools are relevant |
-| F6 PRODUCE | Generate with full context | Ensure nucleus has deck + references |
+| F6 PRODUCE | Generate with full context | Ensure nucleus has agent card + references |
 | F7 GOVERN | Quality gate | Require signal with quality score |
 | F8 COLLABORATE | Save, compile, commit, signal | Specify signal + commit message format |
 

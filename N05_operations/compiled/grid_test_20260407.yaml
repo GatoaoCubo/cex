@@ -25,7 +25,7 @@ grid_test_result: '| Check | Result | Detail |
 
   | signal_writer available | PASS | _tools/signal_writer.py exists |
 
-  | Deck exists | PASS | N05_operations/deck_n05.md (113 cards) |
+  | Agent card exists | PASS | N05_operations/agent_card_n05.md (113 cards) |
 
   | Git clean before commit | PASS | Only staged grid test outputs from other nuclei |'
 environment:
@@ -43,4 +43,4 @@ prior_work_status: '| Task | Status | Notes |
 
   | FULLGRID W2 (E2E runner) | DONE | cex_e2e_test.py exists, --quick mode works |
 
-  | DECK discovery | DONE | deck_n05.md complete (113 cards) |'
+  | AGENT_CARD discovery | DONE | agent_card_n05.md complete (113 cards) |'

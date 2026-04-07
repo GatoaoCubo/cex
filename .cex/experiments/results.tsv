@@ -5716,3 +5716,9 @@ et
 2026-04-07 12:06:51	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_context_assembly.md	1	9.0	1.00	keep	added density_score: 1.0
 2026-04-07 12:06:52	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_metaphor_dictionary.md	1	9.0	1.00	keep	added density_score: 1.0
 2026-04-07 12:06:52	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_n07_bootstrap_context.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 12:14:27	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2396\test_already_at_target0\scored.md	0	9.2	1.00	skip	already at target
+2026-04-07 12:14:28	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2396\test_returns_dict0\test_artifact.md	1	8.7	0.97	keep	polished formatting (whitespace cleanup)
+2026-04-07 12:14:28	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2396\test_skips_already_at_target0\test_artifact.md	0	9.5	0.97	skip	already at target
+2026-04-07 12:14:28	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2396\test_keep_on_improvement0\test_artifact.md	1	8.5	0.95	keep	added examples
+2026-04-07 12:14:28	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2396\test_discard_on_no_improvement0\test_artifact.md	1	6.5	0.95	discard	tried something
+2026-04-07 12:14:28	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2396\test_budget_stops_loop0\test_artifact.md	1	5.0	0.95	discard	small change

@@ -1,11 +1,11 @@
-id: deck_n06
+id: agent_card_n06
 kind: context_doc
-title: N06 Deck -- Available Capabilities
+title: N06 Agent Card -- Available Capabilities
 nucleus: N06
 pillar: P01
 sin: Avareza Estrategica
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 density_score: 1.0
 identity: '| Attribute | Value |
@@ -219,7 +219,7 @@ gaps: '| Gap | Severity | Impact | Fix Cost |
 
 
   ---'
-deck_summary: '┌─────────────────────────────────────────────────┐
+agent_card_summary: '┌─────────────────────────────────────────────────┐
 
   │  N06 Commercial Nucleus — Avareza Estratégica   │
 
@@ -256,5 +256,5 @@ deck_summary: '┌────────────────────�
   └─────────────────────────────────────────────────┘
 
 
-  ROI of this deck: Self-awareness is free. Ignorance of capabilities costs missed revenue opportunities, duplicated work,
-  and misrouted tasks. This deck pays for itself every time N07 routes correctly to N06.'
+  ROI of this agent card: Self-awareness is free. Ignorance of capabilities costs missed revenue opportunities, duplicated
+  work, and misrouted tasks. This agent card pays for itself every time N07 routes correctly to N06.'

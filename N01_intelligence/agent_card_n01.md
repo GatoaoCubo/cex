@@ -1,7 +1,7 @@
 ---
-id: deck_n01
+id: agent_card_n01
 kind: context_doc
-title: N01 Deck -- Available Capabilities
+title: N01 Agent Card -- Available Capabilities
 pillar: P01_knowledge
 nucleus: N01
 sin: Inveja Analitica
@@ -51,7 +51,7 @@ density_score: 1.0
 | Kind | Naming Pattern | Status |
 |------|---------------|--------|
 | knowledge_card | `p01_kc_{{topic}}.md + .yaml` | Active -- 6 KCs built |
-| context_doc | `p01_ctx_{{topic}}.md + .yaml` | Active -- this deck is one |
+| context_doc | `p01_ctx_{{topic}}.md + .yaml` | Active -- this agent card is one |
 | chunk_strategy | `p01_chunk_{{strategy}}.md` | Available, none built |
 | embedder_provider | `p01_ep_{{provider}}.yaml` | Available, none built |
 | embedding_config | `p01_emb_{{model}}.yaml` | Active -- 1 built |
@@ -154,7 +154,7 @@ Compared to: N03 builds primarily P03+P08 kinds (prompt/architecture), N05 build
 | 15/20 kinds unbuilt | 75% of buildable kinds have zero instances -- potential unrealized | Low | Expected for v1 |
 | No `chunk_strategy` | No document chunking config for processing long papers via RAG | Low | N04 may own this |
 
-## Deck Summary
+## Agent Card Summary
 
 | Category | Count |
 |----------|------:|
@@ -162,6 +162,6 @@ Compared to: N03 builds primarily P03+P08 kinds (prompt/architecture), N05 build
 | Kinds I can build | 20 |
 | Tools relevant to my work | 16 |
 | MCP servers | 5 |
-| **Total cards in deck** | **82** |
+| **Total cards in agent card** | **82** |
 
 **Competitive context**: N01 (82) < N02 (110) < N05 (107) < N06 (138). N01's lower count reflects focus -- a research nucleus needs fewer artifacts than a marketing or commercial one. The gap is not weakness but specialization. However, the 15 unbuilt kinds and thin memory layer are genuine deficits that limit N01's ability to accumulate and recall intelligence across sessions.

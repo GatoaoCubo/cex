@@ -1,11 +1,11 @@
-id: deck_n02
+id: agent_card_n02
 kind: context_doc
 pillar: P08
-title: N02 Deck — Available Capabilities
+title: N02 Agent Card — Available Capabilities
 nucleus: N02
 sin: Luxuria Criativa
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 density_score: 1.0
 identity: '| Attribute | Value |
@@ -293,7 +293,7 @@ gaps: '| Gap | Impact | Fix |
 
 
   ---'
-deck_summary: '┌─────────────────────────────────────────────────┐
+agent_card_summary: '┌─────────────────────────────────────────────────┐
 
   │  N02 — LUXÚRIA CRIATIVA ♥                       │
 

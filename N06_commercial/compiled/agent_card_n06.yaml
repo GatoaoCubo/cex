@@ -1,6 +1,6 @@
-id: deck_n06
+id: agent_card_n06
 kind: context_doc
-title: N06 Deck -- Available Capabilities
+title: N06 Agent Card -- Available Capabilities
 pillar: P01
 nucleus: N06
 sin: Avareza Estrategica
@@ -232,7 +232,7 @@ my_gaps: '| Gap | Severity | What''s Missing |
   | Pricing model kind | LOW | No dedicated pricing_model kind in kinds_meta.json -- using output_ files instead |
 
   | schemas/ | LOW | Only 4 brand-focused schemas -- no pricing, funnel, or course validation schemas |'
-cards_in_my_deck: '| Category | Count |
+cards_in_my_agent_card: '| Category | Count |
 
   |----------|-------|
 
@@ -256,4 +256,4 @@ cards_in_my_deck: '| Category | Count |
 
   | Brand KCs (in-nucleus) | 12 |
 
-  | Total cards in deck | 138 |'
+  | Total cards in agent card | 138 |'

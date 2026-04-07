@@ -1,7 +1,7 @@
 ---
-id: deck_n05
+id: agent_card_n05
 kind: context_doc
-title: N05 Deck -- Available Capabilities
+title: N05 Agent Card -- Available Capabilities
 nucleus: N05
 sin: Ira Construtiva
 version: 1.0.0
@@ -122,7 +122,7 @@ density_score: 1.0
 | No CI/CD pipeline artifacts | No GitHub Actions, Railway deploy configs, or automation workflows in output/ |
 | No security artifacts | No `red_team_eval` or security-focused validation schemas |
 
-## Cards in My Deck
+## Cards in My Agent Card
 
 | Category | Count |
 |----------|-------|

@@ -1,5 +1,5 @@
 ---
-id: deck_n07
+id: agent_card_n07
 kind: context_doc
 title: N07 Orchestrator -- Capability Manifest
 pillar: P12

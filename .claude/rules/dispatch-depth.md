@@ -25,14 +25,14 @@ Every handoff N07 writes MUST include at least 3 of these depth amplifiers:
 
 BAD (shallow, wastes 1M):
 ```
-"Create deck_n05.md with your capabilities"
+"Create agent_card_n05.md with your capabilities"
 ```
 
 GOOD (deep, uses context):
 ```
 "Scan your entire nucleus directory N05_operations/. Read all 34 artifacts.
 Cross-reference with P01_knowledge/library/ for relevant KCs.
-Create deck_n05.md that maps every capability. Then identify 3 gaps
+Create agent_card_n05.md that maps every capability. Then identify 3 gaps
 where you have fewer artifacts than other nuclei. For each gap,
 create the missing artifact following 8F pipeline. Compile all outputs.
 Run cex_doctor.py and report results. Commit everything with detailed message."
@@ -54,7 +54,7 @@ Every handoff N07 writes MUST include a "## Context" section listing:
 
 ```markdown
 ## Context (pre-loaded for you)
-Your deck: {nucleus_dir}/deck_{nuc}.md (loaded in system prompt)
+Your agent card: {nucleus_dir}/agent_card_{nuc}.md (loaded in system prompt)
 
 ## Relevant artifacts (READ these before producing)
 - archetypes/builders/{kind}-builder/ (13 ISOs)

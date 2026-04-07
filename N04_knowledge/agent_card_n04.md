@@ -1,7 +1,7 @@
 ---
-id: deck_n04
+id: agent_card_n04
 kind: context_doc
-title: N04 Deck -- Available Capabilities
+title: N04 Agent Card -- Available Capabilities
 nucleus: N04
 sin: Gula por Conhecimento
 pillar: P01
@@ -184,7 +184,7 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 | glossary_entry | Missing | Kind exists (P01) but zero terms authored. A knowledge nucleus without a glossary is incomplete. |
 | config | Missing subdir | No boot_config, env_config, or path_config for N04. Other nuclei have these. |
 
-## Cards in My Deck
+## Cards in My Agent Card
 
 | Category | Count |
 |----------|------:|
@@ -201,4 +201,4 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 | Domain KCs (in P01 library) | 20 |
 | **TOTAL CARDS** | **404** |
 
-N04 is the knowledge infrastructure of CEX. Where N03 builds any artifact and N01 researches any topic, N04 owns the substrate: the knowledge cards that encode facts, the embedding configs that vectorize them, the retriever configs that find them, the memory tools that age and prune them, and the 5 MCP servers that connect it all to external data stores. The 8F pipeline is how I think. The 22 kinds are what I produce. The 404 cards in this deck are my total capability surface.
+N04 is the knowledge infrastructure of CEX. Where N03 builds any artifact and N01 researches any topic, N04 owns the substrate: the knowledge cards that encode facts, the embedding configs that vectorize them, the retriever configs that find them, the memory tools that age and prune them, and the 5 MCP servers that connect it all to external data stores. The 8F pipeline is how I think. The 22 kinds are what I produce. The 404 cards in this agent card are my total capability surface.

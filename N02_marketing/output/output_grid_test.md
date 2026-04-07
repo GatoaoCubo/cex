@@ -25,7 +25,7 @@ N02 received the dispatch, read the decision manifest, and is operational.
 | Handoff received | ✅ `.cex/runtime/handoffs/n02_task.md` |
 | Decision manifest loaded | ✅ `.cex/runtime/decisions/decision_manifest.yaml` |
 | Nucleus directory accessible | ✅ `N02_marketing/` (16 subdirs) |
-| Prior artifacts intact | ✅ deck, e2e gold (4 files), content factory output |
+| Prior artifacts intact | ✅ agent card, e2e gold (4 files), content factory output |
 | Brand config | ⚠️ Not yet bootstrapped (`.cex/brand/brand_config.yaml` missing) |
 | Signal writer available | ✅ `_tools/signal_writer.py` |
 
@@ -33,7 +33,7 @@ N02 received the dispatch, read the decision manifest, and is operational.
 
 | Artifact | Path | Exists |
 |----------|------|--------|
-| Deck | `N02_marketing/deck_n02.md` | ✅ |
+| Agent card | `N02_marketing/agent_card_n02.md` | ✅ |
 | Pet Shop Gold | `_docs/tests/e2e_gold/petshop_marketing.md` | ✅ |
 | Instagram Gold | `_docs/tests/e2e_gold/instagram_marketing.md` | ✅ |
 | Docs Gold | `_docs/tests/e2e_gold/docs_marketing.md` | ✅ |

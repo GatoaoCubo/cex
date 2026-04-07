@@ -1,11 +1,11 @@
-id: deck_n03
+id: agent_card_n03
 kind: context_doc
-title: N03 Deck -- Available Capabilities
+title: N03 Agent Card -- Available Capabilities
 pillar: P01
 nucleus: N03
 sin: Soberba Inventiva
 version: 2.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 density_score: 1.0
 identity: '| Field | Value |
@@ -243,7 +243,7 @@ gaps: '| Area | Gap | Severity |
 
 
   Thin areas: Memory, config, and schemas subdirectories are underpopulated relative to the depth of knowledge and orchestration.'
-deck_summary: '| Dimension | Count |
+agent_card_summary: '| Dimension | Count |
 
   |-----------|------:|
 

@@ -1,7 +1,7 @@
 ---
-id: deck_n03
+id: agent_card_n03
 kind: context_doc
-title: N03 Deck -- Available Capabilities
+title: N03 Agent Card -- Available Capabilities
 pillar: P01
 nucleus: N03
 sin: Soberba Inventiva
@@ -11,7 +11,7 @@ created: 2026-04-07
 density_score: 1.0
 ---
 
-# N03 Deck -- Available Capabilities
+# N03 Agent Card -- Available Capabilities
 
 ## Identity
 
@@ -166,7 +166,7 @@ Config: `.mcp-n03.json`
 
 **Thin areas**: Memory, config, and schemas subdirectories are underpopulated relative to the depth of knowledge and orchestration.
 
-## Deck Summary
+## Agent Card Summary
 
 | Dimension | Count |
 |-----------|------:|

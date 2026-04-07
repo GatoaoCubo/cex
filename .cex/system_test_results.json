@@ -1,25 +1,25 @@
 {
-  "timestamp": "2026-04-07T11:03:38.246372",
+  "timestamp": "2026-04-07T12:12:17.859749",
   "pass": 56,
   "fail": 2,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 97.6,
+  "elapsed_s": 83.8,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "53046B"
+      "detail": "53026B"
     },
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "60734B"
+      "detail": "60733B"
     },
     {
       "name": "tool:cex_intent.py",
       "status": "PASS",
-      "detail": "19418B"
+      "detail": "19393B"
     },
     {
       "name": "tool:cex_compile.py",
@@ -39,7 +39,7 @@
     {
       "name": "tool:cex_feedback.py",
       "status": "PASS",
-      "detail": "14186B"
+      "detail": "14185B"
     },
     {
       "name": "tool:cex_hooks.py",
@@ -109,12 +109,12 @@
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "44 artifacts (min 12)"
+      "detail": "45 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "34 artifacts (min 9)"
+      "detail": "35 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
@@ -124,17 +124,17 @@
     {
       "name": "nucleus:N07_admin",
       "status": "PASS",
-      "detail": "33 artifacts (min 13)"
+      "detail": "35 artifacts (min 13)"
     },
     {
       "name": "quality:zero_null",
       "status": "PASS",
-      "detail": "8 quality:null (awaiting peer review)"
+      "detail": "1 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "292 artifacts with quality score"
+      "detail": "303 artifacts with quality score"
     },
     {
       "name": "subagents:count",
@@ -254,7 +254,7 @@
     {
       "name": "runner:execute_pass",
       "status": "FAIL",
-      "detail": "g plan...\nERRO: Nenhum LLM provider disponivel.\n  CLI-Claude: exit 1: \n  SDK-Ollama: pip install ollama\n  HTTP-Ollama: HTTP Error 404: Not Found\n  API: Paid APIs disabled (set CEX_USE_API=1 to allow)\n"
+      "detail": "plan...\nERROR: No LLM provider available.\n  CLI-Pi: pi CLI not in PATH\n  SDK-Ollama: pip install ollama\n  HTTP-Ollama: HTTP Error 404: Not Found\n  API: Paid APIs disabled (set CEX_USE_API=1 to allow)\n"
     },
     {
       "name": "runner:learning_record",
@@ -294,7 +294,7 @@
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "0eeddc95 [N04] grid test: domain health validated â€” 287 KC"
+      "detail": "302b40ff [N07] feat: metaphor dictionary enriched with indus"
     }
   ]
 }

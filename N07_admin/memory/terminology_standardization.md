@@ -38,7 +38,7 @@ linked_artifacts:
 | Metaphor | Industry Term | Where it leaks in repo |
 |----------|--------------|----------------------|
 | card | artifact | Mostly clean — spec_metaphor_dictionary uses "card" |
-| deck (file) | agent_card | 7 files: deck_n0{1-7}.md, boot/*.cmd references |
+| deck (file) | agent_card | RENAMED: agent_card_n0{1-7}.md, boot/*.cmd, rules, compiled |
 | deck (concept) | context_assembly | spec_metaphor_dictionary, spec_n07_bootstrap_context |
 | hand | working_context | spec_metaphor_dictionary only |
 | draw | retrieval (RAG) | spec_metaphor_dictionary only |
@@ -60,7 +60,7 @@ linked_artifacts:
 
 | Priority | What | Scope | Risk |
 |----------|------|-------|------|
-| HIGH | deck_n0X.md → agent_card_n0X.md | 7 files + boot/*.cmd + rules + specs | Medium (cascade) |
+| DONE | deck_n0X.md → agent_card_n0X.md | 7 files + boot/*.cmd + rules + specs + compiled + archives | Executed 2026-04-07 by N03 |
 | LOW | N00_genesis/ → keep | Directory name is fine — "genesis" in path is clear enough | — |
 | SKIP | handoff | Too deeply wired — rename would break runtime. "Handoff" is acceptable as CEX-specific term. | — |
 | SKIP | signal | Already industry standard | — |

@@ -1,13 +1,12 @@
-id: deck_n05
+id: agent_card_n05
 kind: context_doc
-title: N05 Deck -- Available Capabilities
+title: N05 Agent Card -- Available Capabilities
 nucleus: N05
 sin: Ira Construtiva
 version: 1.0.0
-pillar: P01
+pillar: P08
 quality: null
 created: 2026-04-07
-density_score: 1.0
 identity: '| Field | Value |
 
   |-------|-------|
@@ -47,7 +46,7 @@ my_artifacts: '| Subdir | Count | Purpose |
 
   | schemas | 6 | API response, env contract, health check, middleware, Railway TOML, startup sequence |
 
-  | compiled | 19 | YAML compilations of source artifacts |
+  | compiled | 20 | YAML compilations of source artifacts |
 
   | Total | 33 | (source .md files, excluding compiled) |'
 kinds_i_build: '| Kind | Pillar | Domain Relevance |
@@ -180,7 +179,7 @@ my_gaps: '| Gap | Description |
   | No CI/CD pipeline artifacts | No GitHub Actions, Railway deploy configs, or automation workflows in output/ |
 
   | No security artifacts | No `red_team_eval` or security-focused validation schemas |'
-cards_in_my_deck: '| Category | Count |
+cards_in_my_agent_card: '| Category | Count |
 
   |----------|-------|
 
@@ -194,6 +193,6 @@ cards_in_my_deck: '| Category | Count |
 
   | MCP servers | 2 |
 
-  | Domain KCs (shared library) | 17 |
+  | Infrastructure KCs (shared library) | 10 |
 
-  | Total cards | 113 |'
+  | Total cards | 107 |'
