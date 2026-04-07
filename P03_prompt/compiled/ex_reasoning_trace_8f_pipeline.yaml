@@ -26,7 +26,7 @@ conclusion: '| Field | Value |
 confidence: 0.87
 duration_ms: 3400
 domain: reasoning_trace
-quality: null
+quality: 9.1
 tags:
 - reasoning-trace
 - chain-of-thought

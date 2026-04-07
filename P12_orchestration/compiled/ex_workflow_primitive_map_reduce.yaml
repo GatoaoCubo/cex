@@ -19,7 +19,7 @@ primitives_used: '| Primitive | Role | Config |
 
   | gate | Quality check on merged output | threshold: 8.0, retry_on_fail: true |'
 domain: workflow_primitive
-quality: null
+quality: 9.1
 tags:
 - workflow-primitive
 - map-reduce

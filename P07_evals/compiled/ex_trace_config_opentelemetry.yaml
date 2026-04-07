@@ -14,7 +14,7 @@ capture_prompts: false
 capture_responses: false
 retention_days: 7
 domain: trace_config
-quality: null
+quality: 9.1
 tags:
 - trace-config
 - opentelemetry

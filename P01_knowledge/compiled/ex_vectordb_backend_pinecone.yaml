@@ -12,7 +12,7 @@ dimensions: 1536
 distance_metric: cosine
 index_type: hnsw
 domain: vectordb_backend
-quality: null
+quality: 9.1
 tags:
 - vectordb-backend
 - pinecone

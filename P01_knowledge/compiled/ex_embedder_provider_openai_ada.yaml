@@ -14,7 +14,7 @@ batch_size: 100
 normalize: true
 api_key_env: OPENAI_API_KEY
 domain: embedder_provider
-quality: null
+quality: 9.1
 tags:
 - embedder-provider
 - openai
