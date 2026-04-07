@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "JSON Schema, field type constraints, required/optional semantics, type coercion rules, on_failure behavior (reject/warn/auto_fix), target_kind binding | Does NOT: response_format (LLM-facing instructions), validator (individual pass/fail rules), input_schema (input contracts)"
 domain: validation_schema
-quality: null
+quality: 8.9
 tags: [system_prompt, validation_schema, P03]
 safety_level: standard
 tools_listed: false
