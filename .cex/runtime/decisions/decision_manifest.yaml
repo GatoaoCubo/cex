@@ -1,134 +1,33 @@
-mission: "Verticalize N01 and N04 with full identity, schemas, outputs, quality, orchestration"
-decided_by: user
-decided_at: "2026-03-31T17:45:00-03:00"
-session_id: "session_637"
+# Decision Manifest — FULLGRID Mission 2026-04-06
+# GDP decisions made by user (via N07 proxy — continuous batching mode)
+# Nuclei MUST use these. Do NOT re-ask.
 
-brand:
-  config: .cex/brand/brand_config.yaml
-  overrides: {}
+mission: FULLGRID_20260406
+created: 2026-04-06T18:18:00-03:00
+decided_by: user_via_n07
 
-decisions:
-  n01_identity:
-    choice: "Research Analyst — inveja analítica"
-    dp_number: 1
-    alternatives: ["Research Analyst", "Intelligence Officer", "Knowledge Scout"]
-    recommended: "Research Analyst"
-    user_said: "1 - a inveja analítica"
-    reason: "Aligns with competitive intelligence KCs and N06 Brand Architect"
+# NotebookLM Pipeline (D1-D5 from HANDOFF_notebooklm_pipeline.md)
+notebooklm:
+  D1_notebook_scope: domain        # 1 notebook per domain (reusable, not per-mission)
+  D2_default_outputs:              # subset for speed
+    - flashcards
+    - audio_summary
+    - quiz
+  D3_publish_mode: auto            # auto-publish (speed > manual approval)
+  D4_browser_engine: chrome_local  # free, already validated in PoC
+  D5_google_account: financeiro@gatoaocubo3.com  # already PRO, working
 
-  n04_identity:
-    choice: "Knowledge Engineer — gula por conhecimento"
-    dp_number: 2
-    alternatives: ["Knowledge Librarian", "Documentation Engineer", "Learning Architect"]
-    recommended: "Knowledge Librarian"
-    user_said: "gula por conhecimento, organiza banco de dados (supabase, sql), responsável pelos KCs pra fine-tuning e ML"
-    reason: "User expanded scope beyond librarian: database layer + ML/fine-tuning + prompt injection"
+# Tech Debt (P1)
+tech_debt:
+  sanitize_scope: all_tools        # sanitize all _tools/*.py
+  encoding: utf8_strict            # enforce UTF-8, reject cp1252
+  hooks: pre_commit                # expand pre-commit: encoding + PS parse + YAML
 
-  scope:
-    choice: "FULL — 6 schemas + 8 outputs each"
-    dp_number: 3
-    alternatives: ["Minimal (4+4)", "Standard (5+6)", "Full (6+8)"]
-    recommended: "Standard"
-    user_said: "FULL"
-    reason: "User wants maximum coverage, parity with N06"
-
-  provider_strategy:
-    choice: "Hybrid — Gemini for search, Claude for analysis, swap on limits"
-    dp_number: 4
-    alternatives: ["Gemini only", "Claude only", "Hybrid"]
-    recommended: "Gemini"
-    user_said: "hibrido, modelo customizado por necessidade, já estouramos limite do gemini"
-    reason: "Practical reality — providers hit limits, need fallback"
-
-per_nucleus:
-  n01:
-    identity: "Research Analyst"
-    metaphor: "inveja analítica"
-    capabilities: [competitive-intelligence, market-analysis, trend-detection, OSINT, data-triangulation]
-    provider: hybrid (gemini-primary, claude-fallback)
-  n04:
-    identity: "Knowledge Engineer"
-    metaphor: "gula por conhecimento"
-    capabilities: [kc-management, database-layer, fine-tuning-prep, ml-datasets, knowledge-injection, supabase, sql]
-    provider: hybrid (claude-primary, gemini-fallback)
-
-constraints:
-  language: pt-BR
-  currency: BRL
-  quality_floor: 9.0
-
-auto_filled: []
-
-status: locked
-total_dps: 4
-answered_dps: 4
-skipped_dps: 0
-
-# ── Hybrid Scorer Decisions (2026-04-02) ──
-HYBRID_SCORER_D01:
-  question: "Score weights"
-  chosen: A
-  value: "structural 30% + rubric 30% + semantic 40%"
-  decided_by: user
-  date: "2026-04-02"
-
-HYBRID_SCORER_D02:
-  question: "LLM scoring provider"
-  chosen: A
-  value: "Same cascade (Claude CLI → Ollama)"
-  decided_by: user
-  date: "2026-04-02"
-
-HYBRID_SCORER_D03:
-  question: "Cache strategy"
-  chosen: A
-  value: "Cache by content hash (re-score only if content changed)"
-  decided_by: user
-  date: "2026-04-02"
-
-HYBRID_SCORER_D04:
-  question: "Evolve integration"
-  chosen: B
-  value: "Evolve sees dimension breakdown (targeted improvements)"
-  decided_by: user
-  date: "2026-04-02"
-
-# ── Nucleus Model Assignment (2026-04-02 /guide) ──
-MODEL_ASSIGNMENT:
-  decided_by: user
-  date: "2026-04-02"
-  session: "guide_nucleus_models"
-  status: locked
-
-  MODEL_D01:
-    question: "Primary model per nucleus"
-    decided_by: user
-    changes_from_previous:
-      - "N04: codex/o3 → gemini/2.5-pro (1M ctx for knowledge)"
-      - "N05: codex/o4-mini → codex/o3 (quality upgrade)"
-    confirmed_as_is:
-      - "N01: gemini/2.5-pro"
-      - "N02: claude/sonnet-4"
-      - "N03: claude/opus-4"
-      - "N06: claude/sonnet-4"
-      - "N07: pi/opus-4"
-    grid_distribution: "Claude:3 Gemini:2 Codex:1"
-
-  MODEL_D02:
-    question: "Fallback chain"
-    decided_by: user
-    principle: "Always cross-provider (never fallback to same provider)"
-    value: "Each nucleus falls to a different cloud provider, then to ollama"
-
-  MODEL_D03:
-    question: "Ollama free fallback"
-    decided_by: user
-    value: "qwen3:32b (heavy: N01,N03,N07) / qwen3:14b (light: N02,N04,N05,N06)"
-    reasoning: "Best instruction-following, structured output, PT-BR multilingual"
-
-  MODEL_D04:
-    question: "Fine-tuning cex-brain model"
-    decided_by: user
-    value: "DEFERRED — pending monetization strategy for repo + model bundle"
-    status: deferred
-    depends_on: "N06 commercial strategy for CEX distribution"
+# Agent Identity (P3)
+agent_identity:
+  source_of_truth: .cex/config/nucleus_sins.yaml
+  targets:
+    - N05_operations/agents/agent_operations.md
+    - N05_operations/prompts/system_prompt_operations.md
+    - N07_admin/agents/agent_admin.md
+    - N07_admin/prompts/system_prompt_admin.md

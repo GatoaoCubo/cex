@@ -1,0 +1,26 @@
+{
+  "nucleus": "n01",
+  "mission": "MISSION_content_factory_wave2",
+  "task": "build_dags_and_specs",
+  "status": "complete",
+  "timestamp": "2026-04-06T00:00:00Z",
+  "artifacts_produced": 12,
+  "dags": [
+    "P12_orchestration/dags/content_factory/dag_cf_master.md",
+    "P12_orchestration/dags/content_factory/dag_cf_video.md",
+    "P12_orchestration/dags/content_factory/dag_cf_course.md",
+    "P12_orchestration/dags/content_factory/dag_cf_ebook.md",
+    "P12_orchestration/dags/content_factory/dag_cf_presentation.md",
+    "P12_orchestration/dags/content_factory/dag_cf_social.md"
+  ],
+  "constraint_specs": [
+    "P03_prompts/constraints/content_factory/p03_constraint_cf_video.md",
+    "P03_prompts/constraints/content_factory/p03_constraint_cf_course.md",
+    "P03_prompts/constraints/content_factory/p03_constraint_cf_ebook.md",
+    "P03_prompts/constraints/content_factory/p03_constraint_cf_presentation.md",
+    "P03_prompts/constraints/content_factory/p03_constraint_cf_podcast.md",
+    "P03_prompts/constraints/content_factory/p03_constraint_cf_brief.md"
+  ],
+  "output_report": "N01_intelligence/output/output_cf_dags_and_specs.md",
+  "notes": "Podcast has constraint spec but no DAG (out of wave2 scope). 2 DAGs pre-existed (master+video), 4 created fresh. All 6 constraint specs created fresh."
+}

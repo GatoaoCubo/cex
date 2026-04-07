@@ -1,0 +1,358 @@
+[21:29:53,28] PHASE 1: H1 GAPS 
+[21:29:53,28] G1.1 n03 rule 
+I need you to approve the write to `.claude/rules/n03-builder.md` — it's flagged as sensitive because it's in the `.claude/` directory. Please approve the pending permission request so I can create the file and commit it.
+[21:30:36,03] G1.1 done (exit: 0) 
+[21:30:36,04] G2.1 kill-before-spawn 
+Done. The kill-before-spawn logic:
+
+1. Reads `spawn_pids.txt` and finds any existing entry matching the target nucleus
+2. Kills the old process with `taskkill /F /PID <pid> /T` (tree-kill)
+3. Removes the stale entry from the PID file (or deletes the file if empty)
+4. Then proceeds with the normal spawn
+
+Committed as `22c2d90`.
+[21:31:41,55] G2.1 done (exit: 0) 
+[21:31:41,56] G2.4 boots -p mode 
+Done. All 6 boot files updated:
+
+- `claude` → `claude -p` (prompt mode, auto-exit after task)
+- Added `--name N0X-<Domain>` flag (N01-Research, N02-Marketing, N03-Builder, N04-Knowledge, N05-Operations, N06-Commercial)
+- Added completion banner + pause after claude exits
+- Committed as `b7bac04`
+[21:32:57,05] G2.4 done (exit: 0) 
+[21:32:57,06] G1.2+G1.3 naming 
+Done. Committed `9a92d59` with all 14 fixes:
+
+**12 naming patterns added:**
+| Kind | Naming |
+|------|--------|
+| `compression_config` | `p10_cc_{{scope}}.yaml` |
+| `embedder_provider` | `p01_ep_{{provider}}.yaml` |
+| `model_provider` | `p02_mp_{{provider}}.yaml` |
+| `reasoning_trace` | `p03_rt_{{topic}}.md` |
+| `session_backend` | `p10_sb_{{backend}}.yaml` |
+| `toolkit` | `p04_tk_{{name}}.md + .yaml` |
+| `trace_config` | `p07_tc_{{scope}}.yaml` |
+| `vectordb_backend` | `p01_vdb_{{backend}}.yaml` |
+| `workflow_primitive` | `p12_wp_{{primitive}}.yaml` |
+| `skill` | `p04_skill_{{name}}.md` |
+| `tagline` | `p03_tl_{{topic}}.md` |
+| `landing_page` | `p05_lp_{{name}}.html` |
+
+**2 pillar mismatches fixed:**
+- `axiom`: naming `p10_ax_` → `p02_ax_` (matches pillar P02)
+- `naming_rule`: naming `p05_nr_` → `p08_nr_` (matches pillar P08)
+[21:35:37,85] G1.3 done (exit: 0) 
+[21:35:37,86] G2.2+G2.3+G2.5 spawn fixes 
+Committed `c22a1a1`. All three fixes applied and pre-commit passed (encoding + PS parse checks):
+
+1. **spawn_stop.ps1** — Replaced 2 remaining `Stop-Process` calls (orphan claude + codex) with `taskkill /F /PID /T` for proper tree-kill
+2. **spawn_monitor.ps1** — Now parses per-process spawn timestamp from PID entry (`parts[4]`) instead of using the PID file's modification time. Signals are only matched if newer than that specific process's spawn, and age calculation uses it too
+3. **flywheel_monitor.ps1** — Fixed `$round:` → `${round}:` in the git commit message string (PowerShell was parsing `$round:` as a scope-qualified variable like `$env:PATH`)
+[21:37:49,97] G2.X done (exit: 0) 
+[21:37:49,98] G4.4 sanitize hook 
+Done. The pre-commit hook now runs `cex_sanitize.py --check --scope _tools/` as check #5 whenever staged `.py` files exist under `_tools/`. The commit itself passed both the existing `encoding_check` and the new `sanitize_check` (116 files scanned, all clean).
+
+What was added:
+- **`check_sanitize()`** function (lines 409-447) — only triggers when staged `.py` files are in `_tools/`, runs `cex_sanitize.py --check --scope _tools/` as subprocess, fails the commit on exit code 1, and prints a fix suggestion pointing to `--fix` mode.
+- Wired as **check #5** in `run_pre_commit()` after YAML validation.
+[21:39:21,29] G4.4 done (exit: 0) 
+[21:51:28,24] H1 GATE CHECK 
+========================================================================
+CEX Doctor v2.0 -- Naming v2.0 + Density + 13-File Completeness
+Root: C:\Users\PC\Documents\GitHub\cex
+Mode: DIAGNOSE ONLY
+========================================================================
+
+Found 119 builder directories
+
+Builder                              Name  Dens  Size  13ok  YAML   ALL
+-----------------------------------------------------------------------
+action-prompt-builder                  ok    ok    ok    ok    ok    ok
+agent-builder                          ok    ok    ok    ok    ok    ok
+agent-card-builder                     ok    ok    ok    ok    ok    ok
+agent-package-builder                  ok    ok    ok    ok    ok    ok
+api-client-builder                     ok    ok    ok    ok    ok    ok
+audio-tool-builder                     ok    ok    ok    ok    ok    ok
+axiom-builder                          ok    ok    ok    ok    ok    ok
+benchmark-builder                      ok    ok    ok    ok    ok    ok
+boot-config-builder                    ok    ok    ok    ok    ok    ok
+brain-index-builder                    ok    ok    ok    ok    ok    ok
+browser-tool-builder                   ok    ok    ok    ok    ok    ok
+bugloop-builder                        ok    ok    ok    ok    ok    ok
+chain-builder                          ok    ok    ok    ok    ok    ok
+checkpoint-builder                     ok    ok    ok    ok    ok    ok
+chunk-strategy-builder                 ok    ok    ok    ok    ok    ok
+cli-tool-builder                       ok    ok    ok    ok    ok    ok
+code-executor-builder                  ok    ok    ok    ok    ok    ok
+component-map-builder                  ok    ok    ok    ok    ok    ok
+compression-config-builder             ok    ok    ok    ok    ok    ok
+computer-use-builder                   ok    ok    ok    ok    ok    ok
+constraint-spec-builder                ok    ok    ok    ok    ok    ok
+content-monetization-builder           ok    ok    ok    ok    ok    ok
+context-doc-builder                    ok    ok    ok    ok    ok    ok
+daemon-builder                         ok    ok    ok    ok    ok    ok
+dag-builder                            ok    ok    ok    ok    ok    ok
+db-connector-builder                   ok    ok    ok    ok    ok    ok
+decision-record-builder                ok    ok    ok    ok    ok    ok
+diagram-builder                        ok    ok    ok    ok    ok    ok
+director-builder                       ok    ok    ok    ok    ok    ok
+dispatch-rule-builder                  ok    ok    ok    ok    ok    ok
+document-loader-builder                ok    ok    ok    ok    ok    ok
+e2e-eval-builder                       ok    ok    ok    ok    ok    ok
+effort-profile-builder                 ok    ok    ok    ok    ok    ok
+embedder-provider-builder              ok    ok    ok    ok    ok    ok
+embedding-config-builder               ok    ok    ok    ok    ok    ok
+entity-memory-builder                  ok    ok    ok    ok    ok    ok
+enum-def-builder                       ok    ok    ok    ok    ok    ok
+env-config-builder                     ok    ok    ok    ok    ok    ok
+eval-dataset-builder                   ok    ok    ok    ok    ok    ok
+fallback-chain-builder                 ok    ok    ok    ok    ok    ok
+feature-flag-builder                   ok    ok    ok    ok    ok    ok
+few-shot-example-builder               ok    ok    ok    ok    ok    ok
+formatter-builder                      ok    ok    ok    ok    ok    ok
+function-def-builder                   ok    ok    ok    ok    ok    ok
+glossary-entry-builder                 ok    ok    ok    ok    ok    ok
+golden-test-builder                    ok    ok    ok    ok    ok    ok
+guardrail-builder                      ok    ok    ok    ok    ok    ok
+handoff-builder                        ok    ok    ok    ok    ok    ok
+handoff-protocol-builder               ok    ok    ok    ok    ok    ok
+hook-builder                           ok    ok    ok    ok    ok    ok
+hook-config-builder                    ok    ok    ok    ok    ok    ok
+input-schema-builder                   ok    ok    ok    ok    ok    ok
+instruction-builder                    ok    ok    ok    ok    ok    ok
+interface-builder                      ok    ok    ok    ok    ok    ok
+knowledge-card-builder                 ok    ok    ok    ok    ok    ok
+landing-page-builder                   ok    ok    ok    ok    ok    ok
+law-builder                            ok    ok    ok    ok    ok    ok
+learning-record-builder                ok    ok    ok    ok    ok    ok
+lens-builder                           ok    ok    ok    ok    ok    ok
+lifecycle-rule-builder                 ok    ok    ok    ok    ok    ok
+llm-judge-builder                      ok    ok    ok    ok    ok    ok
+mcp-server-builder                     ok    ok    ok    ok    ok    ok
+memory-scope-builder                   ok    ok    ok    ok    ok    ok
+memory-summary-builder                 ok    ok    ok    ok    ok    ok
+memory-type-builder                    ok    ok    ok    ok    ok    ok
+mental-model-builder                   ok    ok    ok    ok    ok    ok
+model-card-builder                     ok    ok    ok    ok    ok    ok
+model-provider-builder                 ok    ok    ok    ok    ok    ok
+naming-rule-builder                    ok    ok    ok    ok    ok    ok
+notifier-builder                       ok    ok    ok    ok    ok    ok
+optimizer-builder                      ok    ok    ok    ok    ok    ok
+output-validator-builder               ok    ok    ok    ok    ok    ok
+parser-builder                         ok    ok    ok    ok    ok    ok
+path-config-builder                    ok    ok    ok    ok    ok    ok
+pattern-builder                        ok    ok    ok    ok    ok    ok
+permission-builder                     ok    ok    ok    ok    ok    ok
+plugin-builder                         ok    ok    ok    ok    ok    ok
+prompt-template-builder                ok    ok    ok    ok    ok    ok
+prompt-version-builder                 ok    ok    ok    ok    ok    ok
+quality-gate-builder                   ok    ok    ok    ok    ok    ok
+rag-source-builder                     ok    ok    ok    ok    ok    ok
+rate-limit-config-builder              ok    ok    ok    ok    ok    ok
+reasoning-trace-builder                ok    ok    ok    ok    ok    ok
+red-team-eval-builder                  ok    ok    ok    ok    ok    ok
+regression-check-builder               ok    ok    ok    ok    ok    ok
+research-pipeline-builder              ok    ok    ok    ok    ok    ok
+response-format-builder                ok    ok    ok    ok    ok    ok
+retriever-builder                      ok    ok    ok    ok    ok    ok
+retriever-config-builder               ok    ok    ok    ok    ok    ok
+reward-signal-builder                  ok    ok    ok    ok    ok    ok
+router-builder                         ok    ok    ok    ok    ok    ok
+runtime-rule-builder                   ok    ok    ok    ok    ok    ok
+runtime-state-builder                  ok    ok    ok    ok    ok    ok
+schedule-builder                       ok    ok    ok    ok    ok    ok
+scoring-rubric-builder                 ok    ok    ok    ok    ok    ok
+search-tool-builder                    ok    ok    ok    ok    ok    ok
+secret-config-builder                  ok    ok    ok    ok    ok    ok
+session-backend-builder                ok    ok    ok    ok    ok    ok
+session-state-builder                  ok    ok    ok    ok    ok    ok
+signal-builder                         ok    ok    ok    ok    ok    ok
+skill-builder                          ok    ok    ok    ok    ok    ok
+smoke-eval-builder                     ok    ok    ok    ok    ok    ok
+social-publisher-builder               ok    ok    ok    ok    ok    ok
+software-project-builder               ok    ok    ok    ok    ok    ok
+spawn-config-builder                   ok    ok    ok    ok    ok    ok
+supabase-data-layer-builder            ok    ok    ok    ok    ok    ok
+system-prompt-builder                  ok    ok    ok    ok    ok    ok
+tagline-builder                        ok    ~~    ok    ok    ok    ~~
+toolkit-builder                        ok    ok    ok    ok    ok    ok
+trace-config-builder                   ok    ok    ok    ok    ok    ok
+type-def-builder                       ok    ok    ok    ok    ok    ok
+unit-eval-builder                      ok    ok    ok    ok    ok    ok
+validation-schema-builder              ok    ok    ok    ok    ok    ok
+validator-builder                      ok    ok    ok    ok    ok    ok
+vectordb-backend-builder               ok    ok    ok    ok    ok    ok
+vision-tool-builder                    ok    ok    ok    ok    ok    ok
+webhook-builder                        ok    ok    ok    ok    ok    ok
+workflow-builder                       ok    ok    ok    ok    ok    ok
+workflow-primitive-builder             ok    ok    ok    ok    ok    ok
+-----------------------------------------------------------------------
+TOTAL                               118 ok    1 ~~    0 XX
+
+DETAILS (non-PASS builders):
+
+[WARN] tagline-builder:
+  density: bld_output_template_tagline.md = 0.76 (min 0.78)
+
+========================================================================
+Builders:       119
+Total files:    1547 (expected 1547)
+Total size:     4446.9 KB
+Avg density:    0.98
+Oversized:      0 files (>6144B std, >8192B instructions)
+No frontmatter: 0 files
+Result:         118 PASS | 1 WARN | 0 FAIL
+========================================================================
+
+KC Library: 3 sources, 28 domains, 98/98 kinds covered
+========================================================================
+
+=== L0: Genesis & Config ===
+  [OK] L0/kinds_meta.json: WIRED  117 kinds
+  [OK] L0/router_config.yaml: WIRED  
+  [OK] L0/boot_scripts: WIRED  21 scripts
+  [OK] L0/dispatch.sh: WIRED  
+  [OK] L0/runtime/decisions: WIRED  
+  [OK] L0/runtime/handoffs: WIRED  
+  [OK] L0/runtime/signals: WIRED  
+  [OK] L0/runtime/pids: WIRED  
+  [OK] L0/runtime/locks: WIRED  
+  [OK] L0/runtime/plans: WIRED  
+  [OK] L0/runtime/outputs: WIRED  
+  [OK] L0/runtime/archive: WIRED  
+
+=== L1: Pillars (P01-P12) ===
+  [OK] L1/P01_knowledge/_schema: WIRED  
+  [OK] L1/P01_knowledge/compiled: WIRED  197 files
+  [OK] L1/P02_model/_schema: WIRED  
+  [OK] L1/P02_model/compiled: WIRED  21 files
+  [OK] L1/P03_prompt/_schema: WIRED  
+  [OK] L1/P03_prompt/compiled: WIRED  25 files
+  [OK] L1/P04_tools/_schema: WIRED  
+  [OK] L1/P04_tools/compiled: WIRED  61 files
+  [OK] L1/P05_output/_schema: WIRED  
+  [OK] L1/P05_output/compiled: WIRED  6 files
+  [OK] L1/P06_schema/_schema: WIRED  
+  [OK] L1/P06_schema/compiled: WIRED  11 files
+  [OK] L1/P07_evals/_schema: WIRED  
+  [OK] L1/P07_evals/compiled: WIRED  13 files
+  [OK] L1/P08_architecture/_schema: WIRED  
+  [OK] L1/P08_architecture/compiled: WIRED  14 files
+  [OK] L1/P09_config/_schema: WIRED  
+  [OK] L1/P09_config/compiled: WIRED  8 files
+  [OK] L1/P10_memory/_schema: WIRED  
+  [OK] L1/P10_memory/compiled: WIRED  14 files
+  [OK] L1/P11_feedback/_schema: WIRED  
+  [OK] L1/P11_feedback/compiled: WIRED  11 files
+  [OK] L1/P12_orchestration/_schema: WIRED  
+  [OK] L1/P12_orchestration/compiled: WIRED  15 files
+
+=== L2: Nuclei (N01-N07) ===
+  [OK] L2/N01_intelligence/structure: WIRED  12 subdirs
+  [OK] L2/N01_intelligence/compiled: WIRED  37 artifacts
+  [OK] L2/N02_marketing/structure: WIRED  14 subdirs
+  [OK] L2/N02_marketing/compiled: WIRED  40 artifacts
+  [OK] L2/N03_engineering/structure: WIRED  13 subdirs
+  [OK] L2/N03_engineering/compiled: WIRED  43 artifacts
+  [OK] L2/N04_knowledge/structure: WIRED  12 subdirs
+  [OK] L2/N04_knowledge/compiled: WIRED  41 artifacts
+  [OK] L2/N05_operations/structure: WIRED  10 subdirs
+  [OK] L2/N05_operations/compiled: WIRED  19 artifacts
+  [OK] L2/N06_commercial/structure: WIRED  12 subdirs
+  [OK] L2/N06_commercial/compiled: WIRED  17 artifacts
+  [OK] L2/N07_admin/structure: WIRED  10 subdirs
+  [OK] L2/N07_admin/compiled: WIRED  18 artifacts
+  [OK] L2/N01_rule: WIRED  n01-intelligence.md
+  [OK] L2/N02_rule: WIRED  n02-marketing.md
+  [??] L2/N03_rule: PHANTOM  
+  [OK] L2/N04_rule: WIRED  n04-knowledge.md
+  [OK] L2/N05_rule: WIRED  n05-operations.md
+  [OK] L2/N06_rule: WIRED  n06-commercial.md
+  [OK] L2/N07_rule: WIRED  n07-autonomous-lifecycle.md
+
+=== L3: Archetypes ===
+  [OK] L3/builder_count: WIRED  120 builders
+  [OK] L3/action-prompt-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-card-builder/ISOs: WIRED  13/13
+  [OK] L3/agent-package-builder/ISOs: WIRED  13/13
+  [OK] L3/api-client-builder/ISOs: WIRED  13/13
+  [OK] L3/shared_skills: WIRED  3 shared
+  [OK] L3/sub_agents: WIRED  121 agents
+
+=== L4: Knowledge Library ===
+  [OK] L4/kind_KCs: WIRED  119 KCs
+  [OK] L4/domain_KCs: WIRED  82 domain KCs
+  [OK] L4/KC_coverage: WIRED  117/117 covered, missing: []
+
+=== L5: Tools ===
+  [OK] L5/cex_tools: WIRED  58 tools
+  [OK] L5/import:cex_prompt_layers: WIRED  
+  [OK] L5/import:cex_skill_loader: WIRED  
+  [OK] L5/import:cex_router: WIRED  
+  [OK] L5/import:cex_token_budget: WIRED  
+  [OK] L5/import:cex_gdp: WIRED  
+  [OK] L5/import:cex_memory_types: WIRED  
+  [OK] L5/import:cex_memory_age: WIRED  
+  [OK] L5/import:cex_agent_spawn: WIRED  
+  [OK] L5/import:cex_coordinator: WIRED  
+  [OK] L5/prompt_layers_load: WIRED  15 artifacts
+  [OK] L5/skill_loader_ISOs: WIRED  1933 ISOs
+  [OK] L5/cex_sdk_modules: WIRED  56 modules
+
+=== WIRES: 7 OpenClaude Integrations ===
+  [OK] WIRE/W1_identity: WIRED  
+  [OK] WIRE/W2_doing_tasks: WIRED  
+  [OK] WIRE/W3_action_protocol: WIRED  
+  [OK] WIRE/W4_guardrails: WIRED  PRODUCE should have guardrails
+  [OK] WIRE/W4b_no_guard_REASON: WIRED  REASON excluded
+  [OK] WIRE/W5_verification: WIRED  
+  [OK] WIRE/W5b_no_verify_agent_PRODUCE: WIRED  verification_agent excluded from PRODUCE
+  [OK] WIRE/W6_compaction: WIRED  ratio=0.98
+  [OK] WIRE/W7_memory_extract: WIRED  counter=5
+  [OK] WIRE/T01_skill_loader_wired: WIRED  SkillLoader in crew_runner
+  [OK] WIRE/T02_router_wired: WIRED  CexRouter in crew_runner
+  [OK] WIRE/T03_gdp_wired: WIRED  GDP in 8f_runner
+  [OK] WIRE/T04_budget_wired: WIRED  TokenBudget in 8f_runner
+  [OK] WIRE/T05_memtype_wired: WIRED  MemoryType in update
+  [OK] WIRE/T06_memage_wired: WIRED  MemoryAge in select
+  [OK] WIRE/T08_coordinator_wired: WIRED  Coordinator in mission_runner
+  [OK] WIRE/T10_reverse_compiler: WIRED  Reverse compiler exists
+  [OK] WIRE/artifacts_loadable: WIRED  14/14
+
+=== L6: Governance ===
+  [OK] L6/rules: WIRED  11
+  [OK] L6/commands: WIRED  13
+  [OK] L6/learning_records: WIRED  75
+
+=== CASCADES: 7 Dependency Chains ===
+  [OK] CASCADE/C1_build: WIRED  verb=cria obj=None
+  [OK] CASCADE/C2_quality: WIRED  
+  [OK] CASCADE/C3_knowledge: WIRED  
+  [OK] CASCADE/C4_decision: WIRED  
+  [OK] CASCADE/C5_memory: WIRED  types=4 age_module=ok
+  [OK] CASCADE/C6_evolution: WIRED  
+  [OK] CASCADE/C7_dispatch: WIRED  runner=True watch=True dispatch=True
+
+============================================================
+CEX FLYWHEEL AUDIT -- Doc vs Practice
+============================================================
+  WIRED:   108  (documented AND working)
+  BROKEN:    0  (documented but broken)
+  PHANTOM:   1  (documented but missing)
+  ORPHAN:    0  (exists but undocumented)
+  TOTAL:   109  checks
+  HEALTH:  99%  (108/109)
+============================================================
+  Report:  C:\Users\PC\Documents\GitHub\cex\.cex\quality\audit_20260406_215202.json
+
+
+============================================================
+  Scanned: 116 files
+  Clean:   116
+  Dirty:   0
+  Issues:  0 non-ASCII chars
+============================================================
+[21:52:02,88] H1 gate logged 
+[21:52:02,90] PHASE 2: EVOLVE 

@@ -1,0 +1,16 @@
+{
+  "nucleus": "n01",
+  "mission": "MISSION_content_factory_v1",
+  "wave": 1,
+  "status": "complete",
+  "output": "N01_intelligence/output/output_content_factory_landscape.md",
+  "quality": null,
+  "timestamp": "2026-04-06T14:45:00-03:00",
+  "stats": {
+    "tools_evaluated": 52,
+    "categories": 8,
+    "sources_consulted": 48,
+    "file_bytes": 34408,
+    "file_lines": 462
+  }
+}
