@@ -6,7 +6,12 @@ version: 1.0.0
 title: Template - Component Map
 tags: [template, component, map, architecture, deps]
 tldr: Visual map of system components, technologies, responsibilities, and data flow between them.
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "system architecture"
+author: n03_builder
+created: "2026-04-07"
+density_score: 1.0
 ---
 
 # Component Map: [NAME]
@@ -32,7 +37,7 @@ quality: 8.6
 | API | Cache | Redis | No |
 | Worker | Queue | AMQP | Yes |
 ## Quality Gate
-- [ ] Every component has tech + responsibility
-- [ ] Data flow shows direction
-- [ ] Dependencies include protocol
-- [ ] Criticality assessed
+1. [ ] Every component has tech + responsibility
+2. [ ] Data flow shows direction
+3. [ ] Dependencies include protocol
+4. [ ] Criticality assessed

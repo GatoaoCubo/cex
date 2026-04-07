@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: meta
-quality: 8.7
+quality: 9.0
 tags: [claude-md, system-prompt, meta, project-context, memory]
 tldr: "CLAUDE.md is the system prompt that persists. Patterns: identity section, pointers table, rules count, brand injection, status dashboard."
 when_to_use: "Designing or maintaining CLAUDE.md for any Claude Code project"
 keywords: [claude-md, system-prompt, project-memory, configuration, identity]
 density_score: 0.93
+updated: "2026-04-07"
 ---
 
 # CLAUDE.md Patterns
@@ -43,3 +44,18 @@ CLAUDE.md is read by Claude Code at every session start. It's a persistent syste
 - Middle: Pointers + Rules + Commands (stable structure)
 - Bottom: Tools + Quick Dispatch (reference)
 - Total: ~120 lines (dense, every line matters)
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_claude_md_patterns`
+- **Tags**: [claude-md, system-prompt, meta, project-context, memory]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

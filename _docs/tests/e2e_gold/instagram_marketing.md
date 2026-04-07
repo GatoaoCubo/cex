@@ -12,6 +12,9 @@ input: "preciso de conteudo pro instagram"
 quality: 8.8
 tags: [e2e, gold-standard, instagram, content, marketing, stress-test]
 density_score: 1.0
+updated: "2026-04-07"
+domain: "CEX knowledge system"
+tldr: "Defines the golden test specification for gold standard — instagram content marketing artifacts, with structural rules, validation gates, and integration p"
 ---
 
 # Instagram Content — Marketing Gold Standard
@@ -117,10 +120,10 @@ density_score: 1.0
 
 ### Regras do calendario
 
-- **Nunca 2 Reels seguidos** — alterna formatos para evitar fadiga
-- **Stories diarios** mesmo sem post no feed (manter presenca)
-- **Horarios baseados em**: publico brasileiro, segmento educacao/negocios
-- **Sab/Dom = leve** — menos producao, mais interacao
+1. **Nunca 2 Reels seguidos** — alterna formatos para evitar fadiga
+2. **Stories diarios** mesmo sem post no feed (manter presenca)
+3. **Horarios baseados em**: publico brasileiro, segmento educacao/negocios
+4. **Sab/Dom = leve** — menos producao, mais interacao
 
 ---
 
@@ -139,16 +142,16 @@ density_score: 1.0
 ### Vocabulario
 
 **Usar**:
-- "voce" (nunca "voces" — fala 1 a 1)
-- Verbos de acao: "aplica", "testa", "faz", "comeca"
-- Numeros concretos: "30 posts", "4 horas", "6 meses"
-- Perguntas diretas: "Qual desses voce ja faz?"
+1. "voce" (nunca "voces" — fala 1 a 1)
+2. Verbos de acao: "aplica", "testa", "faz", "comeca"
+3. Numeros concretos: "30 posts", "4 horas", "6 meses"
+4. Perguntas diretas: "Qual desses voce ja faz?"
 
 **Evitar**:
-- Jargao em ingles sem contexto ("awareness", "branding", "leads" sozinhos)
-- Superlativos vazios ("o melhor", "incrivel", "fantastico")
-- Passiva ("foi feito", "sera lancado") — preferir ativa
-- Emojis excessivos (max 3 por caption)
+1. Jargao em ingles sem contexto ("awareness", "branding", "leads" sozinhos)
+2. Superlativos vazios ("o melhor", "incrivel", "fantastico")
+3. Passiva ("foi feito", "sera lancado") — preferir ativa
+4. Emojis excessivos (max 3 por caption)
 
 ### Hashtag Strategy
 
@@ -172,13 +175,13 @@ density_score: 1.0
 
 ## Validation Criteria
 
-- **IG-01**: Exactly 5 post concepts present
-- **IG-02**: Format mix includes at least 1 carousel, 1 reels, 1 static
-- **IG-03**: Every post has a CTA (explicit call-to-action)
-- **IG-04**: Content calendar covers 7 days with no gaps
-- **IG-05**: Brand voice guide defines tone dimensions numerically
-- **IG-06**: Hashtag strategy defined with volume tiers
-- **IG-07**: Reels scripts include timestamps and hook within 0-3s
-- **IG-08**: Captions respect Instagram 2200-char limit
-- **IG-09**: All copy in pt-BR
-- **IG-10**: No more than 20 hashtags per post
+1. **IG-01**: Exactly 5 post concepts present
+2. **IG-02**: Format mix includes at least 1 carousel, 1 reels, 1 static
+3. **IG-03**: Every post has a CTA (explicit call-to-action)
+4. **IG-04**: Content calendar covers 7 days with no gaps
+5. **IG-05**: Brand voice guide defines tone dimensions numerically
+6. **IG-06**: Hashtag strategy defined with volume tiers
+7. **IG-07**: Reels scripts include timestamps and hook within 0-3s
+8. **IG-08**: Captions respect Instagram 2200-char limit
+9. **IG-09**: All copy in pt-BR
+10. **IG-10**: No more than 20 hashtags per post

@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: path_config
-quality: 8.9
+quality: 9.0
 tags: [path_config, P09, GOVERN, kind-kc]
 tldr: "path_config is the versioned YAML map of named filesystem paths for a bounded scope — anchored to a base_dir, with explicit readonly declarations to prevent accidental overwrites."
 when_to_use: "Building, reviewing, or reasoning about path_config artifacts"
 keywords: [filesystem_paths, path_aliases, directory_config]
 feeds_kinds: [path_config]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Path Config

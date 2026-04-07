@@ -8,7 +8,7 @@ created: 2026-02-06
 updated: 2026-03-25
 author: knowledge_agent
 domain: architecture
-quality: 8.9
+quality: 9.0
 tags: [parallelization, token-optimization, multi-agent, context-reduction, spawn]
 tldr: "N workers com contexto narrow (2K tokens) substituem 1 agente com contexto full (50K). Reducao 79% tokens, velocidade 3-6x."
 when_to_use: "Agente unico carrega >10K tokens de contexto para tarefas que precisam de <3K cada"

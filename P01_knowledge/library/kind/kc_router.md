@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: router
-quality: 8.9
+quality: 9.0
 tags: [router, P02, REASON, kind-kc]
 tldr: "Keyword-to-agent_group routing rule that maps incoming tasks to the correct execution target"
 when_to_use: "Building, reviewing, or reasoning about router artifacts"
 keywords: [routing, dispatch, task-mapping]
 feeds_kinds: [router]
-density_score: null
+density_score: 0.99
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Router

@@ -7,10 +7,10 @@ version: 1.0.0
 created: 2026-04-01
 author: n05_railway_superintendent
 domain: infrastructure
-quality: 8.9
+quality: 9.0
 tags: [output, template, health, fastapi, monitoring]
 tldr: "Copy-paste FastAPI health endpoints — /health, /ready, /pipeline/health with real Pydantic models."
-density_score: 0.93
+density_score: 0.98
 ---
 
 # Health Endpoint Template

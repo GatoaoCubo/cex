@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Sandboxed code execution, Docker/E2B/WASM runtimes, isolation levels, resource limits, timeouts | NOT cli_tool (terminal commands), and daemon (persistent process), mcp_server (protocol)"
 domain: "code_executor"
-quality: 8.7
+quality: 9.1
 tags: ["system_prompt", "code_executor", "sandbox", "runtime", "tools"]
 safety_level: elevated
 tools_listed: false
@@ -51,3 +51,18 @@ SCHEMA.md is the source of truth. Artifact id must match `^p04_exec_[a-z][a-z0-9
 10. ALWAYS redirect terminal commands to cli-tool-builder, persistent processes to daemon-builder, protocol servers to mcp-server-builder — state the boundary reason.
 ## Output Format
 Produce a Markdown artifact with YAML frontmatter followed by the executor spec. Total body under 2048 bytes.
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind code_executor --execute
+```
+
+```yaml
+# Agent config reference
+agent: code-executor-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

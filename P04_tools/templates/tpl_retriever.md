@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Retriever"
 tags: [template, retriever, rag, search, tool]
 tldr: "A retriever tool that fetches relevant documents from a vector store or search index. Configures search strategy, ranking, filtering, and context assembly."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "tool integration"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.98
 ---
 
 # Retriever: [NAME]

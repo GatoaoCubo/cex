@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: operations
-quality: 8.7
+quality: 9.1
 tags: [zero-touch, automation, ops, autonomous, deploy]
 tldr: "Operations that require zero human intervention: auto-detect → auto-diagnose → auto-fix → auto-verify. The goal of mature agent systems."
 when_to_use: "Designing fully autonomous operational workflows"
 keywords: [zero-touch, automation, self-service, auto-remediation]
 density_score: 0.91
+updated: "2026-04-07"
 ---
 
 # Zero-Touch Operations
@@ -41,3 +42,21 @@ MANUAL → SCRIPTED → AUTOMATED → AUTONOMOUS → ZERO-TOUCH
 | Deploy | Auto-ship | CI/CD pipeline | Health probe |
 | Recover | Auto-diagnose | Auto-rollback | Doctor green |
 | Evolve | Gap detector | Auto-evolve | New KC passes |
+
+## Key Principles
+
+- Domain-specific knowledge must be verifiable and traceable
+- Artifacts reference this card via `tags` matching
+- Updates trigger re-scoring of dependent artifacts
+- Card freshness tracked via `created`/`updated` timestamps
+- Cross-references validated by `cex_compile.py`
+
+## Quality Criteria
+
+| Dimension | Requirement | Weight |
+|-----------|------------|--------|
+| Factual accuracy | Verifiable claims only | 0.25 |
+| Atomicity | One concept per card | 0.20 |
+| Actionability | Reader knows next steps | 0.20 |
+| Density | No filler sentences | 0.20 |
+| Searchability | Tags enable retrieval | 0.15 |

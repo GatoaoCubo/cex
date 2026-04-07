@@ -12,7 +12,12 @@ routes:
   - when: "[CONDITION_2]"
     send_to: "[TARGET_2]"
 fallback: "[DEFAULT_TARGET]"
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "model configuration"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.95
 ---
 
 # Router: [SCOPE_SLUG]

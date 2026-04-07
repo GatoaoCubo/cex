@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: law
-quality: 8.9
+quality: 9.0
 tags: [law, P08, CONSTRAIN, kind-kc]
 tldr: "law is an inviolable operational rule with a unique number, severity, scope, and rationale — it cannot be overridden by instruction, context, or convenience."
 when_to_use: "Building, reviewing, or reasoning about law artifacts"
 keywords: [operational_law, inviolable_rule, constraint]
 feeds_kinds: [law]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Invariant

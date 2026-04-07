@@ -8,10 +8,10 @@ updated: 2026-03-28
 author: builder_agent
 domain: document_loader
 llm_function: EXECUTE
-quality: 8.8
+quality: 9.0
 tags: [instruction, document_loader, ingestion, chunking, P04]
 tldr: "3-phase pipeline to produce a valid document_loader artifact: Research formats -> Compose spec -> Validate gates."
-density_score: 0.86
+density_score: 0.92
 ---
 
 # Instructions: How to Produce a document_loader
@@ -51,3 +51,15 @@ density_score: 0.86
 8. Verify chunk_strategy is one of: fixed, recursive, semantic, sentence, paragraph (H08).
 9. Verify output_format is one of: langchain_doc, llamaindex_node, haystack_doc, raw_dict (H09).
 10. Count body bytes — must be <= 2048 (H10).
+
+
+## Validation
+- Verify output matches expected schema before delivery
+- Check all required fields are present and non-empty
+- Confirm no template placeholders remain in output
+
+
+## Edge Cases
+- Empty input: return structured error with guidance
+- Partial input: fill defaults, flag missing fields
+- Oversized input: truncate with warning, preserve structure

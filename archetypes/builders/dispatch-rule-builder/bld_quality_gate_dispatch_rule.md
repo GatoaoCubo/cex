@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "dispatch_rule — routing rules mapping keywords to agent_groups with fallback logic"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, dispatch-rule, routing, keyword-mapping, P11]
 tldr: "Gates for dispatch_rule artifacts: validates keyword coverage, agent_group enum, fallback logic, bilingual support, and confidence thresholds."
 density_score: 0.92

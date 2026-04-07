@@ -8,10 +8,19 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.9
+quality: 9.0
 tags: [docker, container, multi-stage, compose, production]
 tldr: "Production Docker patterns from codexa-core: multi-stage builds (builder→runtime), non-root user, health checks, compose services (API+Postgres+Redis+Worker), profiles for dev tools."
-density_score: 0.92
+density_score: 1.0
+when_to_use: "Apply when production docker patterns from codexa-core: multi-stage builds (builder→runtime), non-root user,..."
+keywords: [multi-stage, knowledge-card, layer, profiles, docker]
+axioms:
+  - "AVOID: ❌ Single-stage build (huge image with build tools)"
+  - "AVOID: ❌ Running as root (security vulnerability)"
+  - "AVOID: ❌ No HEALTHCHECK (orchestrator can't detect failures)"
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Docker Patterns

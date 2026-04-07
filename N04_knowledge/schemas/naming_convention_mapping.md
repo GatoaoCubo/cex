@@ -4,7 +4,7 @@ kind: validation_schema
 nucleus: N04
 pillar: P06
 domain: nomenclature
-quality: 8.9
+quality: 9.0
 created: 2026-04-02
 type: mapping_schema
 scope: builders_to_kcs
@@ -12,7 +12,7 @@ density_score: 1.0
 title: "Naming Convention Mapping"
 version: 1.0.0
 author: N04
-tags: [validation_schema, knowledge]
+tags: [validation_schema, knowledge, validation-schema, cex, artifact]
 tldr: "Naming rules mapping CEX artifact types to filesystem paths and identifiers"
 updated: 2026-04-07
 ---

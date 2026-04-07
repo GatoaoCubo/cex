@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template - Vision Tool"
 tags: [template, vision, image, ocr, analysis]
 tldr: "Configures a vision tool for image analysis, OCR, or screenshot interpretation. Defines model, resolution, cost limits, and output format."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "tool integration"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.95
 ---
 
 # Vision Tool: [NAME]
@@ -34,13 +39,27 @@ max_tokens_response: [500 | 1000 | 4000]
 | Screenshot UI | claude-sonnet | 92% | Best for computer use |
 
 ## Error Handling
-- **Image too large**: Resize to max_resolution before sending
-- **Unsupported format**: Convert to PNG/JPEG
-- **Model timeout**: Retry with lower resolution
-- **Cost exceeded**: Reject + alert
+1. **Image too large**: Resize to max_resolution before sending
+2. **Unsupported format**: Convert to PNG/JPEG
+3. **Model timeout**: Retry with lower resolution
+4. **Cost exceeded**: Reject + alert
 
 ## Quality Gate
-- [ ] Provider and model specified
-- [ ] Resolution setting defined (low saves 60% cost)
-- [ ] Output format matches downstream consumer
-- [ ] Cost limit per image set
+1. [ ] Provider and model specified
+2. [ ] Resolution setting defined (low saves 60% cost)
+3. [ ] Output format matches downstream consumer
+4. [ ] Cost limit per image set
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `vision_tool` |
+| Pillar | P04 |
+| Domain | tool integration |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

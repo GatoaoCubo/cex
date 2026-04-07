@@ -2,9 +2,15 @@
 id: kc_mercadopago_pix
 kind: knowledge_card
 pillar: P01
-quality: 8.9
+quality: 9.0
 tldr: "Integration patterns for MercadoPago PIX payments — preference creation, IPN webhooks, HMAC-SHA256 verification, and sandbox testing."
 tags: ["mercadopago", "PIX", "BRL", "webhook", "IPN", "payments", "Brazil"]
+when_to_use: "Apply when integration patterns for mercadopago pix payments — preference creation, ipn webhooks, hmac-sha25..."
+keywords: [knowledge-card, brazilian, card, market, pending]
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 1.0
 ---
 
 # MercadoPago PIX Integration Patterns
@@ -164,3 +170,10 @@ preapproval = {
 4. **`external_reference` is your anchor** — links MP payment to your internal order ID.
 5. **Sandbox in CI** — `MP_ACCESS_TOKEN` must be sandbox token outside production.
 6. **Integer internally, float for MP API** — store centavos, convert to BRL float only at the API boundary.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

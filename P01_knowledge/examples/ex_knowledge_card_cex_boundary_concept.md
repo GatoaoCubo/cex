@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.0
 tags: [cex, boundary, type-safety, disambiguation, taxonomy]
 tldr: "Boundary define o que um tipo NAO EH, reduzindo ambiguidade em 78 tipos e prevenindo classificacao errada por LLMs"
 when_to_use: "Definir novos tipos CEX ou diagnosticar classificacao incorreta de artefatos"

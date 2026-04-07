@@ -8,7 +8,7 @@ created: "2026-04-07"
 updated: "2026-04-07"
 author: "n04_knowledge"
 domain: "context_window_config — token budget allocation for prompt assembly"
-quality: 8.9
+quality: 9.0
 tags: [quality-gate, context-window-config, token-budget, overflow]
 tldr: "Gates ensuring context_window_config artifacts have valid budgets, priority tiers, and overflow strategy."
 density_score: 0.90
@@ -43,3 +43,18 @@ density_score: 0.90
 | S03 | Overflow detail | 1.0 | Strategy + trigger + fallback documented | Strategy only | No overflow handling |
 | S04 | Priority rationale | 0.5 | Each tier justified | Order present | No tiers |
 | S05 | Dynamic scaling | 0.5 | Buffer for variable content | Fixed allocation | Budgets sum to exactly total |
+
+## Cross-References
+
+- **Pillar**: P11 (Feedback)
+- **Kind**: `quality gate`
+- **Artifact ID**: `p11_qg_context_window_config`
+- **Tags**: [quality-gate, context-window-config, token-budget, overflow]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P11 | Feedback domain |
+| Kind `quality gate` | Artifact type |
+| Pipeline | 8F (F1→F8) |

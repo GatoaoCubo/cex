@@ -8,7 +8,7 @@ created: "2026-04-07"
 updated: "2026-04-07"
 author: "n04_knowledge"
 domain: "citation — structured source attribution with provenance"
-quality: 8.9
+quality: 9.0
 tags: [quality-gate, citation, provenance, attribution, reliability]
 tldr: "Gates ensuring citation artifacts have verifiable provenance, reliability tier, excerpt, and temporal freshness."
 density_score: 0.90
@@ -45,3 +45,18 @@ density_score: 0.90
 | S04 | Temporal freshness | 0.5 | Freshness policy defined with days | Date only | No temporal info |
 | S05 | Verification completeness | 1.0 | URL + DOI/ISBN + access date | URL + date | URL only |
 | S06 | Body structure | 1.0 | All 5 sections present with content | 3-4 sections | Fewer |
+
+## Cross-References
+
+- **Pillar**: P11 (Feedback)
+- **Kind**: `quality gate`
+- **Artifact ID**: `p11_qg_citation`
+- **Tags**: [quality-gate, citation, provenance, attribution, reliability]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P11 | Feedback domain |
+| Kind `quality gate` | Artifact type |
+| Pipeline | 8F (F1→F8) |

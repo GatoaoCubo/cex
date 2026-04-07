@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Supervisor"
 tags: [template, supervisor, orchestration, crew, multi-agent]
 tldr: "A supervisor coordinates a crew of builders to produce complex artifacts. Defines crew composition, task decomposition, handoff protocol, and quality aggregation."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "system architecture"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.97
 ---
 
 # Supervisor: [DIRECTOR_NAME]

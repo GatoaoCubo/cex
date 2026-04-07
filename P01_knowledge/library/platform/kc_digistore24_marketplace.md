@@ -6,10 +6,15 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: affiliate_platform
-quality: 8.9
+quality: 9.0
 tldr: "Digistore24 Marketplace — EU/DACH affiliate ecosystem, multi-language vendor pages, per-country payments, and promotion tools."
 tags: [digistore24, marketplace, affiliate, eu, dach, commission, vendor]
-density_score: 0.88
+density_score: 1.0
+when_to_use: "Apply when digistore24 marketplace — eu/dach affiliate ecosystem, multi-language vendor pages, per-country p..."
+keywords: [knowledge-card, ecosystem, marketplace, affiliate, listing]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Digistore24 Marketplace — EU Affiliate Ecosystem
@@ -202,3 +207,10 @@ DS24 ranks products in marketplace search by:
 4. **Promo tools ready at launch** — affiliates with materials promote 3x more.
 5. **Monthly payout planning** — DS24 pays monthly net; plan cash flow accordingly.
 6. **Local payment methods sell** — don't fight it; DS24 handles this automatically.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

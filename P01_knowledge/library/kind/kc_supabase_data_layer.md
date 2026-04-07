@@ -9,13 +9,20 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: supabase_data_layer
-quality: 8.9
+quality: 9.0
 tags: [supabase_data_layer, P04, CALL, kind-kc, database, api, rls]
 tldr: "Supabase-specific data layer config — tables, RLS policies, edge functions, storage buckets, and auth rules as a declarative artifact"
 when_to_use: "Building, reviewing, or reasoning about supabase_data_layer artifacts"
 keywords: [supabase, data_layer, rls, edge_function, storage, postgres, auth]
 feeds_kinds: [supabase_data_layer]
-density_score: null
+density_score: 1.0
+axioms:
+  - "AVOID: Storing actual SUPABASE_KEY in the artifact (use env/secret_config)"
+  - "AVOID: Defining application logic in RLS policies (keep them data-scoped)"
+  - "AVOID: Missing RLS on public tables (security hole)"
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Supabase Data Layer

@@ -6,10 +6,13 @@ created: 2026-04-06
 status: READY
 author: n07-orchestrator
 title: "Runtime UX + Sin System + OpenClaude Pattern Completion"
-quality: 8.8
+quality: 8.9
 waves: 3
 tasks: 12
 density_score: 1.0
+updated: "2026-04-07"
+domain: "CEX knowledge system"
+tldr: "Defines the mission plan specification for runtime ux + sin system + openclaude pattern completion, with structural rules, validation gates, and integratio"
 ---
 
 # MISSION: 7 Pecados como Lente Técnica + Runtime UX Completo
@@ -145,3 +148,11 @@ Wave 3: N03 + N02 parallel (N03=agents+prompts, N02=visual identity)
 | Sin injection changes LLM behavior unpredictably | Sin is ADDITIVE (extra context), not REPLACING existing prompts |
 | Colors look bad on some terminals | Fallback to ANSI 256-color, degrade gracefully |
 | Provider discovery adds latency to boot | Cache result for 5min, async ping |
+
+## Lifecycle
+
+1. Created via 8F pipeline (F1-Focus through F8-Furnish)
+2. Scored by `cex_score.py` (3-layer: structural + rubric + semantic)
+3. Compiled by `cex_compile.py` for validation
+4. Retrieved by `cex_retriever.py` for context injection
+5. Evolved by `cex_evolve.py` when quality drops below threshold

@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: rag_source
-quality: 8.9
+quality: 9.0
 tags: [rag_source, p01, INJECT, kind-kc]
 tldr: "Pointer to an external indexable source — URL, freshness, and domain metadata for the RAG ingestion pipeline"
 when_to_use: "Building, reviewing, or reasoning about rag_source artifacts"
 keywords: [rag-source, external-data, ingestion, freshness]
 feeds_kinds: [rag_source]
-density_score: null
+density_score: 0.99
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # RAG Source

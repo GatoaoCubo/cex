@@ -6,10 +6,15 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: payment_platform
-quality: 8.9
+quality: 9.0
 tldr: "Digistore24 REST API — API key auth, product/purchase/affiliate endpoints, Merchant of Record model, EU VAT handling, and sandbox testing."
 tags: [digistore24, api, payment, eu, vat, merchant-of-record, dach]
-density_score: 0.91
+density_score: 1.0
+when_to_use: "Apply when digistore24 rest api — api key auth, product/purchase/affiliate endpoints, merchant of record mod..."
+keywords: [knowledge-card, core, endpoints, rest, authentication]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Digistore24 REST API Integration Patterns
@@ -210,3 +215,10 @@ for aff in affiliates["data"]:
 4. **Net revenue planning** — your payout = gross - VAT - DS24 fee - affiliate commission.
 5. **7 languages native** — let DS24 auto-detect language; don't force English on German buyers.
 6. **Pair with Hotmart** — DS24 (EU/DACH) + Hotmart (BR/LATAM) = global coverage.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

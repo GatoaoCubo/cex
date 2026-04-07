@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "embedding_config — vector model configuration for RAG pipelines including dimensions, chunking, and distance metrics"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, embedding-config, vector, rag, chunking, P11]
 tldr: "Gates for embedding_config artifacts: validates model spec, dimension accuracy, chunk size sanity, distance metric validity, and normalization settings."
 density_score: 0.90

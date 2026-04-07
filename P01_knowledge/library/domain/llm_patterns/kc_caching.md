@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: 8.7
+quality: 9.1
 tags: [caching, performance, cost, latency, prompt-cache]
 tldr: "Cache LLM responses to reduce cost and latency. Exact match, semantic, prefix caching. Trade-off: freshness vs speed."
 when_to_use: "Optimizing cost or latency in production LLM systems"
 keywords: [caching, prompt-cache, semantic-cache, memoization, cost-reduction]
 density_score: 0.91
+updated: "2026-04-07"
 ---
 
 # LLM Caching Strategies
@@ -39,3 +40,32 @@ density_score: 0.91
 - `compiled/*.yaml` = pre-compiled templates (avoid re-parsing)
 - Builder specs loaded once per session, reused across builds
 - Brand config cached in memory after first read
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_caching`
+- **Tags**: [caching, performance, cost, latency, prompt-cache]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Retrieval Example
+
+```yaml
+# Query this card via cex_retriever.py
+query: "LLM Caching Strategies"
+kind_filter: knowledge_card
+threshold: 0.7
+```
+
+```bash
+# CLI retrieval
+python _tools/cex_retriever.py "LLM Caching Strategies" --top 5
+```

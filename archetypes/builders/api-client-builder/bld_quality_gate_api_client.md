@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "API consumer definition — unidirectional clients for REST, GraphQL, or gRPC external services"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, client, P04, api-consumer, auth-strategy, endpoint-mapping]
 tldr: "Pass/fail gate for client artifacts: endpoint coverage, auth strategy declaration, retry/rate-limit policy, and unidirectional boundary."
 density_score: 0.91

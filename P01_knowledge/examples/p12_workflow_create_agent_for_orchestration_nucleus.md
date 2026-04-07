@@ -16,7 +16,7 @@ depends_on: []
 signals: [complete, error]
 spawn_configs: [p12_spawn_n03_solo_build, p12_spawn_n05_solo_validate]
 domain: "orchestration"
-quality: 8.9
+quality: 9.0
 tags: [workflow, orchestration, agent-creation]
 tldr: "3-step mixed workflow: n03 builds orchestration agent artifact, n05 deploys to N07 runtime, n05 validates end-to-end dispatch capabilities"
 density_score: 0.88
@@ -64,3 +64,18 @@ Establishes a new agent artifact scoped to the N07 orchestration nucleus. Step 1
 - signal-builder: P12 signal emission conventions
 - spawn-config-builder: `p12_spawn_n03_solo_build`, `p12_spawn_n05_solo_validate`
 - N07 routing rules: `.claude/rules/n07-orchestrator.md`
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `workflow`
+- **Artifact ID**: `p12_wf_create_orchestration_agent`
+- **Tags**: [workflow, orchestration, agent-creation]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `workflow` | Artifact type |
+| Pipeline | 8F (F1→F8) |

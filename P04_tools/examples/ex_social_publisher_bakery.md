@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
-quality: 8.7
+quality: 9.0
 tags: [social-publisher, example, bakery, food, instagram, tiktok]
 tldr: "Config for artisan bakery — IG+TikTok, Shopify catalog, visual-first content strategy with morning posting."
 density_score: 0.88
+updated: "2026-04-07"
 ---
 
 # Social Publisher — Artisan Bakery
@@ -83,3 +84,18 @@ cron:
 - **Higher product %** (45): visual food products drive direct sales more than educational
 - **Short cooldown** (2 days): bakeries rotate inventory faster than other niches
 - **Sensory language**: captions emphasize smell, texture, warmth — food engagement drivers
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `cli tool`
+- **Artifact ID**: `ex_social_publisher_bakery`
+- **Tags**: [social-publisher, example, bakery, food, instagram, tiktok]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `cli tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |

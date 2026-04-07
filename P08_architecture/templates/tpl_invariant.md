@@ -6,7 +6,12 @@ version: 1.0.0
 title: Template - Law
 tags: [template, law, principle, architecture, invariant]
 tldr: "Architectural law: stronger than guideline, MUST be followed. Violations are bugs."
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "system architecture"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.96
 ---
 
 # Law: [NAME]
@@ -29,10 +34,35 @@ quality: 8.6
 | [VIOLATION_1] | [BREAKS_X] | [HOW] |
 | [VIOLATION_2] | [BREAKS_Y] | [HOW] |
 ## Relationships
-- **Depends on**: [OTHER_LAW]
-- **Supports**: [PROPERTY — modularity, testability]
+1. **Depends on**: [OTHER_LAW]
+2. **Supports**: [PROPERTY — modularity, testability]
 ## Quality Gate
-- [ ] Statement is 1 sentence
-- [ ] Enforcement method identified
-- [ ] >= 1 violation example
-- [ ] Rationale explains consequences
+1. [ ] Statement is 1 sentence
+2. [ ] Enforcement method identified
+3. [ ] >= 1 violation example
+4. [ ] Rationale explains consequences
+
+## Cross-References
+
+1. **Pillar**: P08 (Architecture)
+2. **Kind**: `invariant`
+3. **Artifact ID**: `p08_law_{{NUMBER}}`
+4. **Tags**: [template, law, principle, architecture, invariant]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P08 | Architecture domain |
+| Kind `invariant` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: invariant
+pillar: P08
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

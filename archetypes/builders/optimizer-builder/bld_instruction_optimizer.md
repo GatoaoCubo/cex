@@ -15,7 +15,7 @@ prerequisites:
   - Optimization direction is known (minimize or maximize)
 validation_method: checklist
 domain: optimizer
-quality: 8.6
+quality: 8.9
 tags:
   - instruction
   - optimizer
@@ -33,11 +33,11 @@ density_score: 0.87
 ## Context
 The optimizer-builder receives a **process description** and produces an `optimizer` artifact encoding the metric-to-action cycle for continuous improvement of that process.
 **Input variables**:
-- `{{process}}` — name and brief description of the process to optimize (e.g., "API response pipeline", "nightly batch job")
-- `{{metric}}` — the measurable quantity to optimize with unit (e.g., "p95 latency in ms", "error rate as %")
-- `{{direction}}` — `minimize` or `maximize`
-- `{{baseline}}` — optional current measured value under normal operating conditions; if absent, mark as `TBD`
-- `{{constraints}}` — optional hard limits optimization must not violate (e.g., "cannot exceed $50/day")
+1. `{{process}}` — name and brief description of the process to optimize (e.g., "API response pipeline", "nightly batch job")
+2. `{{metric}}` — the measurable quantity to optimize with unit (e.g., "p95 latency in ms", "error rate as %")
+3. `{{direction}}` — `minimize` or `maximize`
+4. `{{baseline}}` — optional current measured value under normal operating conditions; if absent, mark as `TBD`
+5. `{{constraints}}` — optional hard limits optimization must not violate (e.g., "cannot exceed $50/day")
 **Output**: a single `optimizer` artifact at `p11_opt_{{process_slug}}.md` with tripartite thresholds, action catalog, baseline record, risk assessment, and monitoring config.
 **Boundaries**: handles continuous optimization cycles only. Does NOT produce one-time bug fixes (bugloop), passive measurement records (benchmark), pass/fail barriers (quality_gate), or safety constraints (guardrail).
 ## Phases
@@ -82,3 +82,31 @@ The optimizer-builder receives a **process description** and produces an `optimi
 26. Verify every action trigger is numeric — no subjective conditions ("when it feels slow" fails).
 27. Verify `automated: true` actions all have `risk.level = low`.
 28. Verify `monitoring.alerts` reference specific threshold violations, not generic notifications.
+
+## Template Loading
+
+```yaml
+# This instruction is ISO 3 of 13 in the builder stack
+loader: cex_skill_loader.py
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+# Verify instruction loads correctly
+python _tools/cex_skill_loader.py --verify optimizer
+```
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | optimizer |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

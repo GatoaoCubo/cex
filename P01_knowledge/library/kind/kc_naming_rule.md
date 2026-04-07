@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: naming_rule
-quality: 8.9
+quality: 9.0
 tags: [naming_rule, P08, GOVERN, kind-kc]
 tldr: "naming_rule is a machine-checkable pattern governing artifact names within a bounded scope — enforcing pillar prefix, kind infix, and extension conventions."
 when_to_use: "Building, reviewing, or reasoning about naming_rule artifacts"
 keywords: [naming_convention, artifact_naming, pattern_enforcement]
 feeds_kinds: [naming_rule]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Naming Rule

@@ -9,11 +9,13 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [memory, notifier, P04, patterns, learning]
-quality: 8.7
+quality: 9.0
 tldr: "Key learnings: rate_limit prevents provider bans, priority routing prevents alert fatigue, template_vars prevent runtime formatting errors."
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 density_score: 0.83
+domain: "memory artifact construction"
+title: "Memory Notifier"
 ---
 # Memory: notifier-builder Learnings
 
@@ -52,3 +54,18 @@ If artifact says "receives", "listens", "handles incoming" -> redirect to webhoo
 **Learning**: Notifier is a spec, not implementation. SDK code inflates bytes, bleeds
 implementation detail, and couples spec to language. Code belongs in code-gen output.
 **Rule derived**: Body may reference provider endpoint and env var only — no SDK imports.
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `memory`
+- **Artifact ID**: `bld_memory_notifier`
+- **Tags**: [memory, notifier, P04, patterns, learning]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `memory` | Artifact type |
+| Pipeline | 8F (F1→F8) |

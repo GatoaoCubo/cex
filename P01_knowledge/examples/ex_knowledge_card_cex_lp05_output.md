@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.0
 tags: [cex, lp05, output, response-format, parser, formatter]
 tldr: "P05 define COMO o LLM entrega resultados via 4 tipos: response_format, parser, formatter e naming_rule"
 when_to_use: "Entender formatos de entrega LLM e a fronteira entre geracao (P05) e validacao (P06)"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp06_schema
   related: [p01_kc_cex_lp07_evals]
-density_score: null
+density_score: 1.0
 data_source: "https://docs.anthropic.com/en/docs/build-with-claude/structured-output"
 ---
 
@@ -101,3 +101,10 @@ types: 4 | function: CONSTRAIN | layer: spec + runtime + governance
 - source: https://platform.openai.com/docs/guides/structured-outputs
 - related: p01_kc_cex_lp06_schema
 - related: p01_kc_cex_lp07_evals
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

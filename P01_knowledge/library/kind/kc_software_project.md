@@ -9,13 +9,20 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: software_project
-quality: 8.9
+quality: 9.0
 tags: [software_project, P02, BECOME, kind-kc, project, scaffold]
 tldr: "Complete software project definition — architecture, dependencies, build config, deployment spec, and repo structure as a single artifact"
 when_to_use: "Building, reviewing, or reasoning about software_project artifacts"
 keywords: [software_project, repo, scaffold, architecture, deployment, build]
 feeds_kinds: [software_project]
-density_score: null
+density_score: 1.0
+axioms:
+  - "AVOID: Mixing deployment scripts INTO the project definition (use separate deploy artifacts)"
+  - "AVOID: Defining runtime behavior (that's dag or workflow)"
+  - "AVOID: Embedding secrets in the artifact (use secret_config kind)"
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Software Project

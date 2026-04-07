@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
-quality: 8.7
+quality: 9.1
 tags: [social-publisher, example, fashion, clothing, instagram, tiktok, pinterest]
 tldr: "Config for fashion brand — IG+TikTok+Pinterest, Airtable catalog, visual-driven strategy with evening posting."
 density_score: 0.88
+updated: "2026-04-07"
 ---
 
 # Social Publisher — Fashion Brand
@@ -86,3 +87,18 @@ cron:
 - **Higher hashtag limit** (15): fashion IG posts benefit from more hashtags (discoverability)
 - **4-day cooldown**: fashion products need variety — same dress 2x/week kills exclusivity perception
 - **TikTok evening** (20h): Gen-Z fashion audience peaks at 20-22h — try-on hauls, styling tips
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `cli tool`
+- **Artifact ID**: `ex_social_publisher_clothing`
+- **Tags**: [social-publisher, example, fashion, clothing, instagram, tiktok, pinterest]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `cli tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |

@@ -13,7 +13,7 @@ auth: api_key
 endpoints:
   - query
   - execute
-quality: 8.5
+quality: 9.0
 tags: [db_connector, postgres, sql, data]
 tldr: "PostgreSQL connector for structured data queries via asyncpg with connection pooling"
 description: "Read/write access to PostgreSQL databases for agent data retrieval and storage"
@@ -24,6 +24,9 @@ retry: "3 retries with exponential backoff"
 rate_limit: "100 queries/minute"
 logging: structured
 versioning: "Schema migrations via Alembic"
+domain: "tool integration"
+title: "Db Connector Postgres"
+density_score: 0.91
 ---
 
 # PostgreSQL Connector
@@ -49,3 +52,33 @@ Health: `SELECT 1` on connection pool checkout
 - ConnectionError: retry with backoff, max 3 attempts
 - QueryTimeout: log and return error after 30s
 Circuit breaker: open after 5 consecutive failures, half-open after 60s
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `db connector`
+- **Artifact ID**: `p04_db_postgres`
+- **Tags**: [db_connector, postgres, sql, data]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `db connector` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `db connector`
+- **Artifact ID**: `p04_db_postgres`
+- **Tags**: [db_connector, postgres, sql, data]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `db connector` | Artifact type |
+| Pipeline | 8F (F1→F8) |

@@ -20,7 +20,7 @@ dependencies:
   - "Source code repository access"
 logging: true
 domain: "code_review"
-quality: 8.7
+quality: 9.0
 tags: [instruction, code-review, checklist, quality]
 tldr: "6-step code review instruction: read diff, check correctness, security, style, tests, then produce structured verdict."
 density_score: 0.90
@@ -46,3 +46,17 @@ Not applicable — code review is read-only and idempotent.
 ## References
 - OWASP Top 10 for security checks
 - Project CLAUDE.md for style and convention rules
+
+## Template Loading
+
+```yaml
+# This instruction is ISO 3 of 13 in the builder stack
+loader: cex_skill_loader.py
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+# Verify instruction loads correctly
+python _tools/cex_skill_loader.py --verify code_review
+```

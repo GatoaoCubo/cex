@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Architecture Decision Record"
 tags: [template, adr, decision, architecture, rationale]
 tldr: "Records an architectural decision with context, options considered, decision made, and consequences. Prevents revisiting decided questions and documents trade-offs."
-quality: 8.7
+quality: 9.0
+updated: "2026-04-07"
+domain: "system architecture"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.93
 ---
 
 # ADR-[NNN]: [DECISION_TITLE]
@@ -49,3 +54,18 @@ We chose **[OPTION_X]** because [PRIMARY_REASON].
 - [ ] ≥ 2 options considered (no rubber-stamping)
 - [ ] Consequences include positives AND negatives
 - [ ] Status is explicit
+
+## Cross-References
+
+- **Pillar**: P08 (Architecture)
+- **Kind**: `decision record`
+- **Artifact ID**: `p08_decision_record`
+- **Tags**: [template, adr, decision, architecture, rationale]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P08 | Architecture domain |
+| Kind `decision record` | Artifact type |
+| Pipeline | 8F (F1→F8) |

@@ -7,10 +7,10 @@ version: 1.0.0
 created: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
-quality: 8.9
+quality: 9.0
 tags: [research-pipeline, template, STORM, CRAG, CRITIC, multi-model]
 tldr: "Template for config-driven research pipeline. 7 stages, 30+ sources, multi-model, budget-aware. Any business configures sources and gets market intelligence."
-density_score: 0.92
+density_score: 1.0
 ---
 
 # Research Pipeline — Template

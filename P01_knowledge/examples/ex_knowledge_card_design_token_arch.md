@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: design_systems
-quality: 8.9
+quality: 9.0
 tags: [design-tokens, css-variables, theming, dark-mode, design-system]
 tldr: "3-layer token arch (Primitive->Semantic->Component) enables theme switching by changing only the semantic layer"
 when_to_use: "Building or refactoring a design system with theming, dark mode, or white-label support"

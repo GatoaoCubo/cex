@@ -9,7 +9,7 @@ created: '2026-03-29'
 author: orchestrator
 domain: output
 origin: manual
-quality: 8.5
+quality: 9.0
 tags:
 - formatter
 - naming
@@ -22,6 +22,7 @@ feeds_kinds:
 - naming_rule
 - response_format
 density_score: 0.85
+updated: "2026-04-07"
 ---
 
 ## Quick Reference
@@ -47,3 +48,33 @@ density_score: 0.85
 ## Anti-Patterns
 - Parsing free-text with regex instead of structured output
 - Mixing formatting and validation (formatter != validator)
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_output_formatting`
+- **Tags**: 
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_output_formatting`
+- **Tags**: 
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

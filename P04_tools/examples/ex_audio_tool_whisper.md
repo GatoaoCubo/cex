@@ -21,7 +21,7 @@ languages:
   - en
   - pt
   - es
-quality: 8.7
+quality: 9.0
 tags: [audio_tool, whisper, stt, transcription]
 tldr: "Whisper STT tool for transcribing audio to text, supporting 50+ languages via OpenAI API"
 description: "Transcribes audio files to text using OpenAI Whisper with word-level timestamps"
@@ -31,6 +31,9 @@ streaming: false
 word_timestamps: true
 voice_id: null
 provider: "OpenAI"
+domain: "tool integration"
+title: "Audio Tool Whisper"
+density_score: 0.96
 ---
 
 # Whisper Speech-to-Text
@@ -64,3 +67,18 @@ No streaming — full file must be uploaded before transcription begins.
 | en | English | high | high |
 | pt | Portuguese | high | high |
 | es | Spanish | high | high |
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `audio tool`
+- **Artifact ID**: `p04_audio_whisper`
+- **Tags**: [audio_tool, whisper, stt, transcription]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `audio tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |

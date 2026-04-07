@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
-quality: 8.7
+quality: 9.1
 tags: [research-pipeline, example, saas, global, competitive-intelligence]
 tldr: "Config for SaaS competitive research — G2/Capterra/ProductHunt, papers via Exa, developer community via HackerNews."
 density_score: 0.88
+updated: "2026-04-07"
 ---
 
 # Research Pipeline — Global SaaS
@@ -88,3 +89,18 @@ quality:
 - **Crunchbase**: funding rounds signal competitive threat level
 - **Higher reasoning model**: competitive analysis needs nuanced reasoning (Claude Sonnet over Flash)
 - **Lower Firecrawl budget**: SaaS platforms have structured APIs, less scraping needed
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `cli tool`
+- **Artifact ID**: `ex_research_pipeline_saas_global`
+- **Tags**: [research-pipeline, example, saas, global, competitive-intelligence]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `cli tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |

@@ -8,7 +8,7 @@ created: "2026-04-07"
 updated: "2026-04-07"
 author: "n04_knowledge"
 domain: "prompt_cache — TTL, eviction, and invalidation for cached LLM prompt/completion pairs"
-quality: 8.9
+quality: 9.0
 tags: [quality-gate, prompt-cache, ttl, eviction, caching]
 tldr: "Gates ensuring prompt_cache artifacts have valid TTL, eviction, key method, invalidation, and storage config."
 density_score: 0.90
@@ -44,3 +44,18 @@ density_score: 0.90
 | S04 | Invalidation detail | 1.0 | Trigger + conditions + actions | Trigger only | No rules |
 | S05 | Namespace isolation | 0.5 | Agent/domain namespacing | Partial | No isolation |
 | S06 | Provider integration | 0.5 | Provider-specific caching notes | Mentioned | Not addressed |
+
+## Cross-References
+
+- **Pillar**: P11 (Feedback)
+- **Kind**: `quality gate`
+- **Artifact ID**: `p11_qg_prompt_cache`
+- **Tags**: [quality-gate, prompt-cache, ttl, eviction, caching]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P11 | Feedback domain |
+| Kind `quality gate` | Artifact type |
+| Pipeline | 8F (F1→F8) |

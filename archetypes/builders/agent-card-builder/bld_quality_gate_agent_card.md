@@ -8,8 +8,8 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: agent_card
-quality: 8.8
-density_score: 0.85
+quality: 9.0
+density_score: 0.97
 tags:
   - quality-gate
   - agent-card
@@ -46,3 +46,20 @@ Dimensions are weighted; total normalized weight = 100%.
 | 6 | Tags include `agent-card` | 0.5 | Missing | Present but misspelled | Exactly `agent-card` in tags list |
 | 7 | Domain boundaries explicit (data and systems the agent_group may and may not access) | 1.0 | No boundaries | Implicit in examples | Explicit allowed-access list and forbidden-access list |
 | 8 | Tool availability listed with version or source per MCP server | 1.0 | None listed | Names only | Names + source/version + fallback if unavailable |
+
+## Actions
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish as exemplar |
+| >= 8.0 | PUBLISH | Ready for runtime |
+| >= 7.0 | REVIEW | Flag for review |
+| < 7.0  | REJECT | Rework required |
+
+## Bypass
+| Field | Value |
+|-------|-------|
+| conditions | Experimental agent_card artifact under active A/B testing |
+| approver | Nucleus lead (written approval required) |
+| audit_trail | Log in records/audits/ with bypass reason and timestamp |
+| expiry | 48h — must pass all gates before expiry |
+| never_bypass | H01 (YAML parse), H05 (quality null) |

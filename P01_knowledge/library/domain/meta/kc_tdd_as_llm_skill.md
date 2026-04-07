@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: meta
-quality: 8.7
+quality: 9.1
 tags: [tdd, testing, llm, skill, red-green-refactor]
 tldr: "LLMs can follow TDD: write test first (red), generate code to pass (green), refactor. Tests as specification. Especially effective for tool development."
 when_to_use: "Teaching LLM agents to write reliable code via test-first approach"
 keywords: [tdd, test-first, red-green-refactor, specification-by-test]
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # TDD as LLM Skill
@@ -51,3 +52,13 @@ REFACTOR: Improve code quality → test still passes
 
 ## Anti-Pattern: Test-After
 Writing code first, tests later. LLM writes code that "feels right" but has subtle bugs. Tests would have caught them. Always test first.
+
+## Quality Criteria
+
+| Dimension | Requirement | Weight |
+|-----------|------------|--------|
+| Factual accuracy | Verifiable claims only | 0.25 |
+| Atomicity | One concept per card | 0.20 |
+| Actionability | Reader knows next steps | 0.20 |
+| Density | No filler sentences | 0.20 |
+| Searchability | Tags enable retrieval | 0.15 |

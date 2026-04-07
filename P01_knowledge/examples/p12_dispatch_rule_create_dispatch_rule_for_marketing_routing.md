@@ -7,7 +7,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: codex
 domain: marketing
-quality: 8.9
+quality: 9.0
 tags: [dispatch, marketing, marketer, copywriting, campaigns, P12]
 tldr: Route marketing copy, campaign creation, and brand voice tasks to marketer agent_group
 scope: marketing
@@ -21,6 +21,8 @@ conditions:
   exclude_domains: [knowledge_indexing, research_analysis, code_deploy]
 load_balance: false
 routing_strategy: hybrid
+title: "P12 Dispatch Rule Create Dispatch Rule For Marketing Routing"
+density_score: 0.89
 ---
 
 # marketing Dispatch Rule
@@ -50,3 +52,18 @@ the same writing intent from different linguistic angles.
 summarize, and retrieve existing copy assets without persuasive generation capability.
 This provides partial service continuity (content retrieval, not creation) rather than a
 full peer substitute, keeping the fallback chain acyclic and avoiding self-routing.
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `dispatch rule`
+- **Artifact ID**: `p12_dr_marketing`
+- **Tags**: [dispatch, marketing, marketer, copywriting, campaigns, P12]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `dispatch rule` | Artifact type |
+| Pipeline | 8F (F1→F8) |

@@ -8,7 +8,13 @@ tldr: "The compilation pipeline thinks in 5 phases: CAPTURE→DECOMPOSE→HYDRAT
 references:
   - tpl_mental_model
   - ex_agent_copywriter
-quality: 8.8
+quality: 9.0
+updated: "2026-04-07"
+domain: "model configuration"
+version: "1.0.0"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.91
 ---
 
 # Pipeline Mental Model

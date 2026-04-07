@@ -8,7 +8,7 @@ created: "2026-04-07"
 updated: "2026-04-07"
 author: "n04_knowledge"
 domain: "multi_modal_config — input format, resolution, and routing for multi-modal LLM interactions"
-quality: 8.9
+quality: 9.0
 tags: [quality-gate, multi-modal-config, modality, routing, resolution]
 tldr: "Gates ensuring multi_modal_config artifacts have explicit modalities, format constraints, routing, and cost estimates."
 density_score: 0.90
@@ -42,3 +42,18 @@ density_score: 0.90
 | S04 | Preprocessing pipeline | 1.0 | Steps per modality | Some steps | No preprocessing |
 | S05 | Fallback chain | 0.5 | Fallback for unsupported modalities | Partial | None |
 | S06 | Format validation | 0.5 | Accepted formats listed per modality | Some listed | None |
+
+## Cross-References
+
+- **Pillar**: P11 (Feedback)
+- **Kind**: `quality gate`
+- **Artifact ID**: `p11_qg_multi_modal_config`
+- **Tags**: [quality-gate, multi-modal-config, modality, routing, resolution]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P11 | Feedback domain |
+| Kind `quality gate` | Artifact type |
+| Pipeline | 8F (F1→F8) |

@@ -8,10 +8,10 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.9
+quality: 9.0
 tags: [builder, architecture, software-project, layers]
 tldr: "4-layer architecture: Domain (business logic) → Infrastructure (DB, cache, external) → Interface (API/CLI) → Deploy (Docker, CI/CD). Clean deps: domain has zero external deps."
-density_score: 0.90
+density_score: 1.0
 ---
 
 # Architecture

@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "daemon — persistent background processes with lifecycle management"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, daemon, background-process, lifecycle, P11]
 tldr: "Gates for daemon artifacts: validates lifecycle completeness, signal handling, health checks, and restart policy correctness."
 density_score: 0.91

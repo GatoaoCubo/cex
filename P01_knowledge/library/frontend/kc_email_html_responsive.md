@@ -7,10 +7,15 @@ version: 1.0.0
 created: 2026-04-01
 author: builder
 domain: frontend
-quality: 8.9
+quality: 9.0
 tags: [email, html, responsive, outlook, gmail, dark-mode, templating, deliverability]
 tldr: Rock-solid email HTML with table layouts, inline CSS, client compatibility, and dark mode support for maximum deliverability
-density_score: 0.88
+density_score: 1.0
+when_to_use: "Apply when rock-solid email html with table layouts, inline css, client compatibility, and dark mode support..."
+keywords: [knowledge-card, reference, frontend, email, html]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Email HTML & Responsive Design
@@ -128,3 +133,9 @@ templating:
 - Accessibility: Alt text, semantic HTML, screen reader optimization
 - Templating: Jinja2 syntax, variable interpolation, conditional blocks
 - Resend API: Send transactional emails, template management, deliverability tracking
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

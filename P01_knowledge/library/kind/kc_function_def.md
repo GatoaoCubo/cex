@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: function_def
-quality: 8.9
+quality: 9.0
 tags: [function_def, P04, CALL, kind-kc, tool-use]
 tldr: "JSON Schema definition of a callable function that an LLM invokes via tool_use — the universal tool interface across OpenAI, Anthropic, and all major frameworks"
 when_to_use: "Building, reviewing, or reasoning about function_def artifacts"
 keywords: [function, tool, json-schema, tool-use, callable]
 feeds_kinds: [function_def]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Function Def

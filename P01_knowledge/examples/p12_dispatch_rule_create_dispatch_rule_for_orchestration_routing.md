@@ -7,7 +7,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: codex
 domain: orchestration
-quality: 8.8
+quality: 9.0
 tags: [dispatch, orchestration, orchestrator, routing, pipeline, coordination]
 tldr: Route orchestration, coordination, and multi-agent workflow tasks to the N07 orchestrator nucleus
 scope: orchestration
@@ -22,6 +22,7 @@ conditions:
 load_balance: false
 routing_strategy: hybrid
 density_score: 0.81
+title: "P12 Dispatch Rule Create Dispatch Rule For Orchestration Routing"
 ---
 # orchestration Dispatch Rule
 
@@ -33,3 +34,18 @@ Bilingual PT/EN coverage fires on both Portuguese operators and English document
 
 ## Fallback Logic
 `builder` (N03) handles fallback when N07 orchestrator is unavailable. N03 can execute single-artifact pipelines directly via 8F without full orchestration overhead — appropriate degradation for tasks that would have been simple solo dispatches. Circular routing to any execution nucleus (N01–N06) is excluded; fallback must escalate capability, not route to domain specialists.
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `dispatch rule`
+- **Artifact ID**: `p12_dr_orchestration`
+- **Tags**: [dispatch, orchestration, orchestrator, routing, pipeline, coordination]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `dispatch rule` | Artifact type |
+| Pipeline | 8F (F1→F8) |

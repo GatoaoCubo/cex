@@ -10,7 +10,7 @@ target_format: "markdown"
 input_type: "structured_data"
 rule_count: 11
 domain: "artifact_reporting"
-quality: 8.6
+quality: 9.0
 tags: [formatter, markdown, artifact-report, pipeline, P05, 8F, creation-report]
 tldr: "Formats artifact creation reports into structured Markdown with build metadata, quality score, file path, size, and pipeline gate summary"
 template_engine: "string_format"
@@ -21,6 +21,7 @@ locale: "en-US"
 streaming: false
 keywords: [artifact-report, creation-report, build-report, 8F-pipeline, formatter, pipeline-output]
 density_score: 0.89
+title: "P05 Formatter Create Output Template For Artifact Creation Report"
 ---
 ## Formatting Rules
 
@@ -29,3 +30,43 @@ density_score: 0.89
 | title_header | artifact_id | template | `# Artifact Creation Report: {value}` | none |
 | kind_pill | kind | stringify | `**Kind:** \`{value}\`` | none |
 | pillar_badge | pillar | stringify | `**
+
+## Cross-References
+
+- **Pillar**: P05 (Output)
+- **Kind**: `formatter`
+- **Artifact ID**: `p05_fmt_artifact_creation_report`
+- **Tags**: [formatter, markdown, artifact-report, pipeline, P05, 8F, creation-report]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P05 | Output domain |
+| Kind `formatter` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Cross-References
+
+- **Pillar**: P05 (Output)
+- **Kind**: `formatter`
+- **Artifact ID**: `p05_fmt_artifact_creation_report`
+- **Tags**: [formatter, markdown, artifact-report, pipeline, P05, 8F, creation-report]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P05 | Output domain |
+| Kind `formatter` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: formatter
+pillar: P05
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

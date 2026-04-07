@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: 8.7
+quality: 9.1
 tags: [tool-use, function-calling, mcp, api, agentic]
 tldr: "LLMs call external tools via structured definitions. Universal: define schema → LLM decides → runtime executes → LLM synthesizes."
 when_to_use: "When building agentic systems that interact with external APIs, databases, or tools"
 keywords: [tool-use, function-calling, mcp, api-integration, agentic]
 density_score: 0.93
+updated: "2026-04-07"
 ---
 
 # Tool Use / Function Calling
@@ -50,3 +51,13 @@ Abstracts tool provision across providers:
 - `.mcp-n0X.json` configs per nucleus
 - `_tools/*.py` callable via subprocess
 - `cex_run.py` orchestrates tool chains
+
+## Quality Criteria
+
+| Dimension | Requirement | Weight |
+|-----------|------------|--------|
+| Factual accuracy | Verifiable claims only | 0.25 |
+| Atomicity | One concept per card | 0.20 |
+| Actionability | Reader knows next steps | 0.20 |
+| Density | No filler sentences | 0.20 |
+| Searchability | Tags enable retrieval | 0.15 |

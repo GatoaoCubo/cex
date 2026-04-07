@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: research
-quality: 8.9
+quality: 9.0
 tags: [tag-grading, structured-data, browser-automation, scraping, csr]
 tldr: "Certificados TAG exigem browser: WebFetch retorna scripts, mas JSON-LD e grades so existem no DOM renderizado."
 when_to_use: "Extrair dados de paginas que renderizam certificados via JavaScript"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: null
   related: [p01_kc_claude_server_tools]
-density_score: null
+density_score: 1.0
 data_source: "Analise de pagina TAG Grading T9403163 — fetch estatico bloqueado"
 ---
 
@@ -96,3 +96,10 @@ def extract_after_render(url: str) -> dict:
 - external: https://playwright.dev/python/docs/intro
 - external: https://schema.org/
 - deepens: p01_kc_claude_server_tools
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

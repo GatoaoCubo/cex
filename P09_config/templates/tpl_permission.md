@@ -6,7 +6,12 @@ version: 1.0.0
 title: Template - Permission
 tags: [template, permission, access, rbac, security]
 tldr: Access control for agents and nuclei. Who can read, write, execute per resource type.
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "configuration management"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.97
 ---
 
 # Permission: [NAME]
@@ -36,3 +41,28 @@ quality: 8.6
 - [ ] Least privilege enforced
 - [ ] N07 coordinates but doesn't build
 - [ ] Escalation path documented
+
+## Cross-References
+
+- **Pillar**: P09 (Config)
+- **Kind**: `permission`
+- **Artifact ID**: `p09_perm_{{SCOPE_SLUG}}`
+- **Tags**: [template, permission, access, rbac, security]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P09 | Config domain |
+| Kind `permission` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: permission
+pillar: P09
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

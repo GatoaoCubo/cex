@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.0
 tags: [cex, lp10, memory, runtime-state, knowledge-index, learning-record, session]
 tldr: "P10 define 4 tipos de memoria operacional: runtime_state, knowledge_index, learning_record, session_state"
 when_to_use: "Entender como agentes LLM gerenciam estado e memoria entre sessoes"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp09_config
   related: [p01_kc_cex_lp01_knowledge]
-density_score: null
+density_score: 1.0
 data_source: "https://arxiv.org/abs/2304.03442"
 ---
 
@@ -107,3 +107,10 @@ types: 4 | function: INJECT | layer: runtime + content
 - source: https://arxiv.org/abs/2310.08560
 - related: p01_kc_cex_lp09_config
 - related: p01_kc_cex_lp01_knowledge
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

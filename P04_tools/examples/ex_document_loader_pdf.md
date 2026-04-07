@@ -14,7 +14,7 @@ output_format: langchain_doc
 chunk_size: 512
 overlap: 50
 encoding: utf-8
-quality: 8.7
+quality: 9.1
 tags: [document_loader, pdf, RAG, chunking, P04]
 tldr: "PDF loader with recursive chunking at 512 tokens for RAG pipelines using PyMuPDF parser"
 description: "Ingests PDF files, extracts text with layout awareness, and produces chunked Documents"
@@ -22,6 +22,9 @@ metadata_fields:
   - source
   - page_number
   - total_pages
+domain: "tool integration"
+title: "Document Loader Pdf"
+density_score: 0.93
 ---
 
 # PDF Document Loader
@@ -47,3 +50,28 @@ Ingests PDF files and converts them into chunked LangChain Documents for RAG ind
 | source | string | file path or URL | Required — provenance for every chunk |
 | page_number | int | PDF page index | 1-based page number |
 | total_pages | int | PDF metadata | Total document pages |
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `document loader`
+- **Artifact ID**: `p04_loader_pdf`
+- **Tags**: [document_loader, pdf, RAG, chunking, P04]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `document loader` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: document_loader
+pillar: P04
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

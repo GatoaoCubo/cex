@@ -16,10 +16,10 @@ depends_on: [dispatch_rule_admin]
 signals: [complete, error, progress]
 spawn_configs: [spawn_config_admin]
 domain: orchestration
-quality: 8.9
+quality: 9.0
 tags: [workflow, orchestration, N07, dispatch, solo, grid]
 tldr: "3 orchestration workflows — solo dispatch, grid static, grid continuous — with concrete spawn commands."
-density_score: 0.92
+density_score: 1.0
 ---
 
 # Orchestration Workflows

@@ -28,13 +28,15 @@ returns:
 provider_compat: [openai, anthropic, gemini, bedrock]
 strict: false
 domain: web-search
-quality: 8.8
+quality: 9.1
 tags: [function_def, search, web, tool_use]
 tldr: "OpenAI-compatible function def for web search with query, max_results, and search_type params"
 examples:
   - input: {"query": "best practices for RAG pipelines"}
     output: "[{title: '...', url: '...', snippet: '...', score: 0.95}]"
 error_types: [rate_limit_exceeded, invalid_query, timeout]
+title: "Function Def Search Web"
+density_score: 0.9
 ---
 
 # Web Search Function Definition
@@ -80,3 +82,18 @@ Output:
   {"title": "Evaluating RAG Systems", "url": "https://example.com/rag-eval", "snippet": "Metrics and frameworks for measuring RAG quality and relevance...", "score": 0.88}
 ]
 ```
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `function def`
+- **Artifact ID**: `p04_fn_search_web`
+- **Tags**: [function_def, search, web, tool_use]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `function def` | Artifact type |
+| Pipeline | 8F (F1→F8) |

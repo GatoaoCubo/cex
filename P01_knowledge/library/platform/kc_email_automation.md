@@ -2,9 +2,15 @@
 id: kc_email_automation
 kind: knowledge_card
 pillar: P01
-quality: 8.9
+quality: 9.0
 tldr: "Design patterns for transactional and marketing email automation — template dictionaries, BRL formatting, sequential launch sequences, and provider abstraction."
 tags: ["email", "automation", "transactional", "marketing", "templates", "BRL"]
+when_to_use: "Apply when design patterns for transactional and marketing email automation — template dictionaries, brl for..."
+keywords: [knowledge-card, dictionary, separation, email, transactional]
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 0.99
 ---
 
 # Email Automation Patterns
@@ -126,3 +132,10 @@ Before sending, every email passes through a personalization pipeline:
 4. **MockSender in CI** — zero real emails sent during test runs.
 5. **Sequential sequences** — each email references the previous for narrative continuity.
 6. **LGPD compliance** — marketing requires explicit opt-in; transactional uses legitimate interest basis.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

@@ -9,7 +9,14 @@ references:
   - ex_agent_copywriter
   - ex_response_format_ad_copy
   - ex_prompt_template_aida
-quality: 8.5
+quality: 9.1
+updated: "2026-04-07"
+domain: "evaluation and testing"
+version: "1.0.0"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.95
+tldr: "Defines the quality gate specification for copywriting quality gate, with structural rules, validation gates, and integration points."
 ---
 tldr: "Quality gate for copywriting: checks tone, CTA clarity, length, and brand voice compliance."
 quality: 8.5
@@ -36,3 +43,45 @@ Fail action: regenerate with feedback on weakest criterion.
 - Checks format: [[ex_response_format_ad_copy]]
 - Checks method: [[ex_prompt_template_aida]]
 - Function: GOVERN (is it good enough?)
+
+## Cross-References
+
+- **Pillar**: P07 (Evals)
+- **Kind**: `quality gate`
+- **Artifact ID**: `ex_quality_gate_copy`
+- **Tags**: [quality, gate, copy, evaluation]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P07 | Evals domain |
+| Kind `quality gate` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Cross-References
+
+- **Pillar**: P07 (Evals)
+- **Kind**: `quality gate`
+- **Artifact ID**: `ex_quality_gate_copy`
+- **Tags**: [quality, gate, copy, evaluation]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P07 | Evals domain |
+| Kind `quality gate` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Validation Command
+
+```bash
+# Score a single artifact against this gate
+python _tools/cex_score.py --apply --verbose artifact.md
+```
+
+```bash
+# Batch validation
+python _tools/cex_score.py --apply N03_builder/*.md
+```

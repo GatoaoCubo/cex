@@ -2,9 +2,15 @@
 id: kc_pricing_strategy
 kind: knowledge_card
 pillar: P01
-quality: 8.9
+quality: 9.0
 tldr: "Pricing strategy patterns for content monetization — cost-plus margins, tiered packs, freemium gates, value-based pricing, and dynamic margin calculation."
 tags: ["pricing", "monetization", "SaaS", "credits", "margins", "strategy"]
+when_to_use: "Apply when pricing strategy patterns for content monetization — cost-plus margins, tiered packs, freemium ga..."
+keywords: [knowledge-card, margin, monetization, calculation, content]
+linked_artifacts:
+  primary: null
+  related: []
+density_score: 1.0
 ---
 
 # Pricing Strategy Patterns for Content Monetization
@@ -157,3 +163,10 @@ Test pricing changes safely using feature flags and cohort analysis.
 4. **Frame against alternative, not cost** — R$0,75 vs 3 hours of manual work, not R$0,75 vs R$0,42 API cost.
 5. **Hybrid > pure credits or pure subscription** — base subscription + credit overage captures the best of both.
 6. **Never change pricing for everyone at once** — cohort test first, grandfather clause for existing users.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

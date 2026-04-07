@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "env_config — environment variable specifications with scope, validation rules, and sensitive var handling"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, env-config, environment-variables, secrets, configuration, P11]
 tldr: "Gates for env_config artifacts: validates variable catalog completeness, sensitive masking, default correctness, override precedence, and scope accuracy."
 density_score: 0.92

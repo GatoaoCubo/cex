@@ -21,10 +21,13 @@ screenshot_mode: before_action
 safety_constraints:
   - "Never execute commands that delete files or modify system settings"
   - "Block navigation to authentication pages unless explicitly instructed"
-quality: 8.6
+quality: 9.0
 tags: [computer_use, desktop, anthropic, agent]
 tldr: "Anthropic computer-use tool for desktop GUI automation via screenshot-click loops at 1280x800"
 description: "Controls desktop via mouse/keyboard using Anthropic's computer-use API"
+domain: "tool integration"
+title: "Computer Use Desktop Agent"
+density_score: 0.87
 ---
 
 # Desktop Agent (Anthropic Computer Use)
@@ -55,3 +58,28 @@ Resolution: 1280x800 — all coordinates within this space
 - Never execute destructive system commands
 - Block credential entry on untrusted sites
 - Sandbox: runs inside isolated VM or container
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `computer use`
+- **Artifact ID**: `p04_cu_desktop_agent`
+- **Tags**: [computer_use, desktop, anthropic, agent]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `computer use` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: computer_use
+pillar: P04
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

@@ -2,9 +2,16 @@
 id: kc_course_generation
 kind: knowledge_card
 pillar: P01
-quality: 8.7
+quality: 9.0
 tldr: "Using a sequential LLM chain with Pydantic models to progressively generate complex, structured content like online courses."
 tags: ["llm", "chain", "pydantic", "content-generation", "course"]
+updated: "2026-04-07"
+domain: "knowledge management"
+title: "Course Generation"
+version: "1.0.0"
+author: n04_knowledge
+created: "2026-04-07"
+density_score: 0.72
 ---
 
 # Sequential LLM Chain for Course Generation

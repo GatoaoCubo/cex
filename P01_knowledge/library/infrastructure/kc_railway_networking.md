@@ -1,5 +1,13 @@
 ---
 ```yaml
+updated: "2026-04-07"
+domain: "knowledge management"
+title: "Railway Networking"
+version: "1.0.0"
+author: n04_knowledge
+created: "2026-04-07"
+density_score: 0.97
+tldr: "Defines the artifact specification for railway networking, with structural rules, validation gates, and integration points."
 ---
 id: p01_kc_railway_networking
 kind: knowledge_card
@@ -11,7 +19,7 @@ updated: 2026-04-01
 author: knowledge-card-builder
 domain: infrastructure
 subdomain: railway-networking
-quality: 8.7
+quality: 9.0
 tags: [railway, networking, cors, domains, proxy, rate-limit, tcp]
 tldr: "Railway platform networking features: CORS regex origins *.domain.com, private URLs service.railway.internal, TCP proxy for databases, Redis rate limiting patterns, PORT auto-binding"
 when_to_use: "Configuring Railway networking, CORS policies, service discovery, rate limiting, custom domains, or TCP-based services"
@@ -50,10 +58,10 @@ CORS_METHODS="GET,POST,PUT,DELETE,OPTIONS"
 ```
 
 **Internal Private URLs**
-- Service discovery: `servicename.railway.internal`  
-- Database: `postgres.railway.internal:5432`
-- Redis: `redis.railway.internal:6379`
-- Port auto-binding: `$PORT` (Railway-provided)
+1. Service discovery: `servicename.railway.internal`  
+2. Database: `postgres.railway.internal:5432`
+3. Redis: `redis.railway.internal:6379`
+4. Port auto-binding: `$PORT` (Railway-provided)
 
 ## Key Concepts
 
@@ -156,28 +164,28 @@ const rateLimit = async (ip, limit = 100, window = 60) => {
 ## Golden Rules
 
 **Private Communication Security**
-- Use `.railway.internal` domains for service-to-service communication
-- Never expose internal services via public URLs
-- Database connections MUST use private Railway URLs
-- Enable authentication between internal services
+1. Use `.railway.internal` domains for service-to-service communication
+2. Never expose internal services via public URLs
+3. Database connections MUST use private Railway URLs
+4. Enable authentication between internal services
 
 **CORS Origin Best Practices**  
-- Use regex patterns instead of wildcards for production
-- Match protocol (https://) and exact domain patterns
-- Test CORS preflight OPTIONS requests during deployment
-- Set `credentials: true` only when necessary
+1. Use regex patterns instead of wildcards for production
+2. Match protocol (https://) and exact domain patterns
+3. Test CORS preflight OPTIONS requests during deployment
+4. Set `credentials: true` only when necessary
 
 **PORT Binding Standards**
-- Bind to `0.0.0.0:$PORT` for Railway compatibility  
-- Use `$PORT` environment variable, fallback to default
-- Health check endpoint on same port as main application
-- TCP services expose single port via Railway proxy
+1. Bind to `0.0.0.0:$PORT` for Railway compatibility  
+2. Use `$PORT` environment variable, fallback to default
+3. Health check endpoint on same port as main application
+4. TCP services expose single port via Railway proxy
 
 **Custom Domain Configuration**
-- CNAME record points to `servicename.up.railway.app`
-- SSL certificates auto-generated via Let's Encrypt
-- Domain verification via DNS TXT record
-- Multiple domains per service supported
+1. CNAME record points to `servicename.up.railway.app`
+2. SSL certificates auto-generated via Let's Encrypt
+3. Domain verification via DNS TXT record
+4. Multiple domains per service supported
 
 ## Comparativo 
 
@@ -190,9 +198,9 @@ const rateLimit = async (ip, limit = 100, window = 60) => {
 
 ## References
 
-- [Railway Networking Guide](https://docs.railway.app/reference/networking)
-- [CORS Configuration](https://docs.railway.app/develop/variables#cors-configuration)
-- [TCP Proxy Documentation](https://docs.railway.app/reference/tcp-proxy)
-- [Custom Domains Setup](https://docs.railway.app/deploy/custom-domains)
-- [Internal Service Discovery](https://docs.railway.app/reference/networking#private-networking)
-- [Rate Limiting Patterns](https://docs.railway.app/guides/rate-limiting)
+1. [Railway Networking Guide](https://docs.railway.app/reference/networking)
+2. [CORS Configuration](https://docs.railway.app/develop/variables#cors-configuration)
+3. [TCP Proxy Documentation](https://docs.railway.app/reference/tcp-proxy)
+4. [Custom Domains Setup](https://docs.railway.app/deploy/custom-domains)
+5. [Internal Service Discovery](https://docs.railway.app/reference/networking#private-networking)
+6. [Rate Limiting Patterns](https://docs.railway.app/guides/rate-limiting)

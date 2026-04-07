@@ -7,7 +7,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: dispatch-rule-builder
 domain: engineering
-quality: 8.7
+quality: 9.0
 tags: [dispatch, engineering, builder, coding, development]
 tldr: Route engineering, development and coding tasks to builder agent_group with opus model
 scope: engineering
@@ -21,6 +21,7 @@ conditions:
   exclude_domains: [research_papers, marketing_copy]
 routing_strategy: hybrid
 density_score: 0.79
+title: "P12 Dispatch Rule Create Dispatch Rule For Engineering Routing"
 ---
 # engineering Dispatch Rule
 
@@ -32,3 +33,28 @@ Bilingual PT/EN coverage captures both Portuguese operator commands ("desenvolve
 
 ## Fallback Logic
 Routes to executor when builder is unavailable. Executor handles operational aspects of engineering like testing, deployment, and code review, providing complementary engineering capabilities when primary builder agent_group cannot accept the task.
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `dispatch rule`
+- **Artifact ID**: `p12_dr_engineering`
+- **Tags**: [dispatch, engineering, builder, coding, development]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `dispatch rule` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: dispatch_rule
+pillar: P12
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

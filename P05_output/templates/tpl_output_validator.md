@@ -6,7 +6,12 @@ version: 1.0.0
 title: "Template — Output Validator"
 tags: [template, validator, output, quality, assertion]
 tldr: "Validates LLM output against schema, content rules, and safety constraints. Defines validation pipeline: parse → schema check → content rules → safety filters."
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "output formatting"
+author: n03_builder
+created: "2026-04-07"
+density_score: 1.0
 ---
 
 # Output Validator: [NAME]
@@ -29,15 +34,15 @@ Raw Output → Parse(format) → Schema(fields) → Content(rules) → Safety(fi
 | body | string | yes | ≥ 100 chars, ≤ max_bytes |
 
 ## Content Rules
-- **No hallucinated citations**: Every `[source]` must map to a real URL
-- **No placeholder text**: Reject if contains `{{`, `TODO`, `FIXME`
-- **Language consistency**: Body language matches frontmatter language
-- **Structure**: At least 3 `##` sections in body
+1. **No hallucinated citations**: Every `[source]` must map to a real URL
+2. **No placeholder text**: Reject if contains `{{`, `TODO`, `FIXME`
+3. **Language consistency**: Body language matches frontmatter language
+4. **Structure**: At least 3 `##` sections in body
 
 ## Safety Filters
-- **PII detection**: Flag emails, phone numbers, SSNs
-- **Prompt injection**: Detect "ignore previous instructions" patterns
-- **Harmful content**: Apply content policy (no violence, illegal advice)
+1. **PII detection**: Flag emails, phone numbers, SSNs
+2. **Prompt injection**: Detect "ignore previous instructions" patterns
+3. **Harmful content**: Apply content policy (no violence, illegal advice)
 
 ## Validation Result
 ```yaml
@@ -49,7 +54,21 @@ result:
 ```
 
 ## Quality Gate
-- [ ] Schema validation covers all required fields
-- [ ] At least 2 content rules defined
-- [ ] Safety filters configured
-- [ ] Result includes errors AND warnings (not just pass/fail)
+1. [ ] Schema validation covers all required fields
+2. [ ] At least 2 content rules defined
+3. [ ] Safety filters configured
+4. [ ] Result includes errors AND warnings (not just pass/fail)
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_validator` |
+| Pillar | P05 |
+| Domain | output formatting |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

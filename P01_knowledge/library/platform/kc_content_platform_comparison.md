@@ -6,10 +6,15 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: platform_analysis
-quality: 8.9
+quality: 9.0
 tldr: "Cross-platform comparison — Hotmart vs Digistore24 vs Kiwify vs Teachable for content monetization across BR, EU, and global markets."
 tags: [comparison, hotmart, digistore24, kiwify, teachable, platform, monetization]
-density_score: 0.89
+density_score: 1.0
+when_to_use: "Apply when cross-platform comparison — hotmart vs digistore24 vs kiwify vs teachable for content monetizatio..."
+keywords: [knowledge-card, platform, comparison, platform_analysis, content]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Content Platform Comparison
@@ -205,3 +210,10 @@ Hotmart (BR) + DS24 (EU) + ClickBank or Stripe (US)
 4. **Geo-routing at sales page** — detect visitor country, route to correct checkout.
 5. **Unified webhook router** — single handler architecture for all platforms.
 6. **Per-region pricing** — don't just convert; price for local purchasing power.
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

@@ -16,7 +16,7 @@ prerequisites:
   - Input and output for the skill are described
 validation_method: checklist
 domain: skill
-quality: 8.6
+quality: 9.1
 tags: [instruction, skill, phases, reusable, P04]
 idempotent: true
 atomic: false
@@ -51,3 +51,32 @@ concrete invocation examples, anti-patterns section, and metrics section.
 - Event-driven hooks (triggered by file/tool events) are a separate hook artifact.
 - MCP server tool exposure belongs in an mcp_server artifact.
 ## Phases
+
+## Cross-References
+
+- **Pillar**: P03 (Prompt)
+- **Kind**: `instruction`
+- **Artifact ID**: `p03_ins_skill_builder`
+- **Tags**: [instruction, skill, phases, reusable, P04]
+
+## Builder Integration
+
+| Aspect | Detail |
+|--------|--------|
+| ISO | 1 of 13 builder ISOs |
+| Loader | `cex_skill_loader.py` |
+| Pipeline | Injected at F3 (Compose) |
+
+## Template Loading
+
+```yaml
+# This instruction is ISO 3 of 13 in the builder stack
+loader: cex_skill_loader.py
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+# Verify instruction loads correctly
+python _tools/cex_skill_loader.py --verify skill
+```

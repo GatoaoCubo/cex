@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: llm_patterns
-quality: 8.7
+quality: 9.0
 tags: [rag, retrieval, hybrid, embedding, knowledge-base]
 tldr: "Combine retrieval (search knowledge base) with generation (LLM). Hybrid RAG: TF-IDF for structure + embeddings for semantics. Chunking strategies matter."
 when_to_use: "Building knowledge-aware LLM systems with external data sources"
 keywords: [rag, retrieval, embedding, vector-db, hybrid-search, chunking]
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # RAG Hybrid Patterns
@@ -42,8 +43,8 @@ QUERY → RETRIEVE (search KB) → AUGMENT (inject context) → GENERATE (LLM)
 | Parent-child | Section → sub-sections | Hierarchy | Long documents |
 
 ## CEX RAG Implementation
-- TF-IDF via `cex_query.py` (covers ~90% of cases)
-- File-based knowledge: `P01_knowledge/library/` (194+ KCs)
-- `cex_memory_select.py` = memory retrieval
-- `compose_prompt()` = the augmentation step
-- No vector DB needed yet — file-based TF-IDF is sufficient at current scale
+1. TF-IDF via `cex_query.py` (covers ~90% of cases)
+2. File-based knowledge: `P01_knowledge/library/` (194+ KCs)
+3. `cex_memory_select.py` = memory retrieval
+4. `compose_prompt()` = the augmentation step
+5. No vector DB needed yet — file-based TF-IDF is sufficient at current scale

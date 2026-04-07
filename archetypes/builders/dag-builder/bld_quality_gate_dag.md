@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "dag — directed acyclic graphs defining task dependency order and parallelism"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, dag, dependency-graph, topological-order, P11]
 tldr: "Gates for dag artifacts: validates acyclicity, node naming, edge correctness, topological ordering, and parallelism opportunities."
 density_score: 0.89

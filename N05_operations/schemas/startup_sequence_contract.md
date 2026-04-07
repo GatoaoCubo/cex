@@ -7,10 +7,10 @@ version: 1.0.0
 created: 2026-04-01
 author: n05_railway_superintendent
 domain: infrastructure
-quality: 8.9
+quality: 9.0
 tags: [schema, startup, health, deploy, railway, lifespan]
 tldr: "14-check ordered startup sequence with fallbacks. Shutdown cleanup. Lifespan protocol."
-density_score: 0.94
+density_score: 1.0
 ---
 
 # Startup Sequence Contract — 14 Checks

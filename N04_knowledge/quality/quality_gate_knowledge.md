@@ -12,10 +12,10 @@ target_kinds: [knowledge_card, chunk_strategy, embedding_config, rag_source, ret
 linked_artifacts:
   primary:
     - n04_sr_knowledge
-quality: 8.9
+quality: 9.0
 tags: [quality-gate, n04, knowledge, evals, p07]
 tldr: "Defines the 9 quality gates (5 Hard, 4 Soft) for all N04-domain knowledge artifacts, ensuring structural integrity, atomicity, and discoverability."
-density_score: 0.9
+density_score: 0.92
 domain: knowledge
 ---
 
@@ -58,3 +58,20 @@ These gates are evaluated by an LLM-assisted scorer using the `n04_sr_knowledge`
      - `7.5 <= score < 9.0`: Artifact is marked for review.
      - `score < 7.5`: Commit is rejected.
 - **Manual Execution**: The gate can be run manually on any file or directory using `python _tools/cex_doctor.py --gate n04_qg_knowledge`.
+
+## Actions
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish as exemplar |
+| >= 8.0 | PUBLISH | Ready for runtime |
+| >= 7.0 | REVIEW | Flag for review |
+| < 7.0  | REJECT | Rework required |
+
+## Bypass
+| Field | Value |
+|-------|-------|
+| conditions | Experimental knowledge artifact under active A/B testing |
+| approver | Nucleus lead (written approval required) |
+| audit_trail | Log in records/audits/ with bypass reason and timestamp |
+| expiry | 48h — must pass all gates before expiry |
+| never_bypass | H01 (YAML parse), H05 (quality null) |

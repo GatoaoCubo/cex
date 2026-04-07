@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: component_map
-quality: 8.9
+quality: 9.0
 tags: [component_map, P08, INJECT, kind-kc]
 tldr: "component_map is a structured YAML artifact encoding what connects to what — nodes (components) and directed edges (connections with port labels) for a bounded scope."
 when_to_use: "Building, reviewing, or reasoning about component_map artifacts"
 keywords: [component_topology, wiring, dependency_graph]
 feeds_kinds: [component_map]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Component Map

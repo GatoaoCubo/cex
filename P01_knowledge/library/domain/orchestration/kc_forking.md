@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
-quality: 8.7
+quality: 9.0
 tags: [forking, branching, parallel, fan-out, spawn]
 tldr: "Fork execution into parallel branches, each agent handles a subset, fan-in to collect results. Git branching model applied to agent work."
 when_to_use: "Designing parallel execution strategies for multi-agent systems"
 keywords: [forking, branching, parallel, fan-out, fan-in, spawn]
 density_score: 0.91
+updated: "2026-04-07"
 ---
 
 # Forking and Branching
@@ -45,3 +46,13 @@ PLAN (sequential)
 - Signals = fan-in mechanism
 - `/consolidate` = post-fork reconciliation
 - Wave-based dispatch = controlled forking (W1 done → fork W2)
+
+## Quality Criteria
+
+| Dimension | Requirement | Weight |
+|-----------|------------|--------|
+| Factual accuracy | Verifiable claims only | 0.25 |
+| Atomicity | One concept per card | 0.20 |
+| Actionability | Reader knows next steps | 0.20 |
+| Density | No filler sentences | 0.20 |
+| Searchability | Tags enable retrieval | 0.15 |

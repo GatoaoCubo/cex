@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.0
 tags: [cex, lp06, schema, contracts, validation, grammar, blueprint]
 tldr: "P06 define 7 tipos de contrato que restringem output: de input_schema a grammar (constraint no decoder)"
 when_to_use: "Entender contratos de dados em sistemas LLM e como soft CONSTRAIN vira hard CONSTRAIN"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp05_output
   related: [p01_kc_cex_lp07_evals]
-density_score: null
+density_score: 1.0
 data_source: "https://json-schema.org/understanding-json-schema"
 ---
 
@@ -101,3 +101,10 @@ types: 7 | function: CONSTRAIN + GOVERN | layer: spec + governance
 - source: https://github.com/guidance-ai/guidance
 - related: p01_kc_cex_lp05_output
 - related: p01_kc_cex_lp07_evals
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

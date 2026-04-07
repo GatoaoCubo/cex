@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: benchmark
-quality: 8.9
+quality: 9.0
 tags: [benchmark, P07, GOVERN, kind-kc]
 tldr: "Quantitative performance measurement of latency, cost, or quality across repeated runs with statistical rigor."
 when_to_use: "Building, reviewing, or reasoning about benchmark artifacts"
 keywords: [benchmark, performance, latency, cost, measurement]
 feeds_kinds: [benchmark]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Benchmark

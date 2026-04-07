@@ -7,10 +7,19 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.9
+quality: 9.0
 tags: [knowledge_card, retriever, P09, RAG, vector-search, embedding, hybrid-search]
 tldr: "Domain knowledge for retriever artifacts: stores, metrics, hybrid search, reranking, metadata filtering."
 density_score: 1.0
+when_to_use: "Apply when domain knowledge for retriever artifacts: stores, metrics, hybrid search, reranking, metadata fil..."
+keywords: [knowledge-card, spec, summary, domain, knowledge]
+axioms:
+  - "AVOID: No embedding_model specified — dimension mismatch breaks silently at query time"
+  - "AVOID: Cosine on unnormalized embeddings — use dot_product or normalize first"
+  - "AVOID: top_k too high without reranking — noise drowns signal above k=20"
+linked_artifacts:
+  primary: null
+  related: []
 ---
 # Domain Knowledge: retriever
 

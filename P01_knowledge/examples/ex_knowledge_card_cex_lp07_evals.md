@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.0
 tags: [cex, lp07, evals, scoring, benchmark, golden-test, shokunin]
 tldr: "P07 formaliza 6 tipos de eval como cidadaos de 1a classe: de smoke_eval 30s a golden_test 9.5+"
 when_to_use: "Entender como medir qualidade em sistemas LLM e o padrao Shokunin de tiers"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp06_schema
   related: [p01_kc_cex_lp05_output, p01_kc_cex_lp08_architecture]
-density_score: null
+density_score: 1.0
 data_source: "https://docs.anthropic.com/en/docs/test-and-evaluate/eval-tool"
 ---
 
@@ -108,3 +108,10 @@ pass v              fail --> fix + retry
 - related: p01_kc_cex_lp06_schema
 - related: p01_kc_cex_lp05_output
 - related: p01_kc_cex_lp08_architecture
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

@@ -9,7 +9,12 @@ definition: "Processo Claude CLI especializado com identidade, modelo e MCPs pro
 synonyms: [worker, executor, specialist]
 tags: [glossary, agent, node, orchestration]
 tldr: "An agent_group is an autonomous execution unit in the CEX system. Each has a fixed domain, dedicated LLM model, and exclusive MCP tools."
-quality: 8.5
+quality: 9.0
+updated: "2026-04-07"
+domain: "knowledge management"
+author: n04_knowledge
+created: "2026-04-07"
+density_score: 0.98
 ---
 
 # Glossary: agent_group
@@ -18,9 +23,9 @@ quality: 8.5
 Unidade autonoma de execucao no sistema CEX. Cada agent_group tem dominio fixo (Research, Build, Marketing), modelo LLM dedicado (opus ou sonnet), e MCPs exclusivos. O orchestrator (N07) coordena; agent_groups executam.
 
 ## Usage
-- **Context**: Aparece em N07 orchestration, dispatch rules, spawn configs
-- **Example**: "Spawnar agent_group builder_agent para executar 8F pipeline"
-- **Avoid confusion with**: `sub-agent` — um sub-agent é uma definição (.md); um agent_group é a execução viva
+1. **Context**: Aparece em N07 orchestration, dispatch rules, spawn configs
+2. **Example**: "Spawnar agent_group builder_agent para executar 8F pipeline"
+3. **Avoid confusion with**: `sub-agent` — um sub-agent é uma definição (.md); um agent_group é a execução viva
 
 ## Relationships
 
@@ -31,10 +36,50 @@ Unidade autonoma de execucao no sistema CEX. Cada agent_group tem dominio fixo (
 | child | task | Cada agent_group executa uma ou mais tasks |
 
 ## Domain Scope
-- **Pillars**: P02 (model), P03 (prompt), P12 (orchestration)
-- **Kinds**: agent, spawn_config, dispatch_rule
-- **Frequency**: high — termo usado em todo o sistema de orquestração
+1. **Pillars**: P02 (model), P03 (prompt), P12 (orchestration)
+2. **Kinds**: agent, spawn_config, dispatch_rule
+3. **Frequency**: high — termo usado em todo o sistema de orquestração
 
 ## Canonical Source
-- Reference: `.claude/rules/n07-orchestrator.md`
-- CEX adoption date: 2026-01-15
+1. Reference: `.claude/rules/n07-orchestrator.md`
+2. CEX adoption date: 2026-01-15
+
+## Cross-References
+
+1. **Pillar**: P01 (Knowledge)
+2. **Kind**: `glossary entry`
+3. **Artifact ID**: `p01_gl_agent_group`
+4. **Tags**: [glossary, agent, node, orchestration]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `glossary entry` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Cross-References
+
+1. **Pillar**: P01 (Knowledge)
+2. **Kind**: `glossary entry`
+3. **Artifact ID**: `p01_gl_agent_group`
+4. **Tags**: [glossary, agent, node, orchestration]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `glossary entry` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: glossary_entry
+pillar: P01
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

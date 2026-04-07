@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.9
+quality: 9.0
 tags: [builder, supabase, data-layer, output-template, config]
 density_score: 0.87
 ---
@@ -110,3 +110,18 @@ CREATE INDEX idx_memberships_org ON memberships(org_id);
 - [ ] Edge function scaffolds (if enabled)
 - [ ] MCP config (if enabled)
 - [ ] Tier limits documented in comments
+
+## Cross-References
+
+- **Pillar**: P03 (Prompt)
+- **Kind**: `output template`
+- **Artifact ID**: `bld_output_template_supabase_data_layer`
+- **Tags**: [builder, supabase, data-layer, output-template, config]
+
+## Output Pipeline
+
+| Aspect | Detail |
+|--------|--------|
+| Template | Defines structure for output template outputs |
+| Validation | Checked against `validation_schema` |
+| Post-hook | Scored by `cex_score.py` after creation |

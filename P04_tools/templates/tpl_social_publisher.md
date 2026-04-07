@@ -7,10 +7,10 @@ version: 1.0.0
 created: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
-quality: 8.9
+quality: 9.0
 tags: [social-publisher, automation, template, pipeline, social-media]
 tldr: "Template for config-driven social media auto-posting. Fill 1 YAML = automated posting to IG/FB/TT/LI/TW."
-density_score: 0.90
+density_score: 1.0
 ---
 
 # Social Publisher — Template

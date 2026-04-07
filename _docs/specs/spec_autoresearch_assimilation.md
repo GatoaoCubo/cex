@@ -6,8 +6,11 @@ created: 2026-03-31
 author: n07_orchestrator
 status: EXECUTED
 source: "https://github.com/karpathy/autoresearch + video tutorial"
-quality: 8.8
+quality: 9.0
 density_score: 1.0
+updated: "2026-04-07"
+domain: "system specification"
+tldr: "Defines the artifact specification for autoresearch pattern assimilation, with structural rules, validation gates, and integration points."
 ---
 
 # Spec: AutoResearch Pattern Assimilation
@@ -15,9 +18,9 @@ density_score: 1.0
 ## Core Insight
 
 Karpathy's AutoResearch = **autonomous experiment loop**:
-- 3-file architecture: `program.md` (human goals) + `train.py` (agent modifies) + `prepare.py` (immutable metric)
-- Loop: hypothesis → modify → run → measure → keep/discard → repeat
-- Never stop. Git-based versioning. One scalar metric.
+1. 3-file architecture: `program.md` (human goals) + `train.py` (agent modifies) + `prepare.py` (immutable metric)
+2. Loop: hypothesis → modify → run → measure → keep/discard → repeat
+3. Never stop. Git-based versioning. One scalar metric.
 
 **Key quote from video**: "If you can score it, you can auto-research it."
 
@@ -43,17 +46,42 @@ until it crosses a quality threshold, using git as the experiment ledger.
 ## Deliverables
 
 ### Wave 1: Core Tool (1 file)
-- `_tools/cex_evolve.py` — The autonomous experiment loop for CEX
+1. `_tools/cex_evolve.py` — The autonomous experiment loop for CEX
 
 ### Wave 2: Knowledge Cards (2 files)
-- `P01_knowledge/library/domain/patterns/kc_autoresearch_loop.md`
-- `P01_knowledge/library/domain/patterns/kc_experiment_driven_development.md`
+1. `P01_knowledge/library/domain/patterns/kc_autoresearch_loop.md`
+2. `P01_knowledge/library/domain/patterns/kc_experiment_driven_development.md`
 
 ### Wave 3: Integration (2 files)
-- `N07_admin/orchestration/auto/wf_auto_evolve.md` — REWRITE (add autoresearch loop)
-- `.claude/commands/evolve.md` — new `/evolve` command
+1. `N07_admin/orchestration/auto/wf_auto_evolve.md` — REWRITE (add autoresearch loop)
+2. `.claude/commands/evolve.md` — new `/evolve` command
 
 ### Wave 4: Score + Consolidate
-- Score all new artifacts from N01/N04 verticalization (40 files)
-- Score Wave 1-3 deliverables
-- Compile, doctor, commit
+1. Score all new artifacts from N01/N04 verticalization (40 files)
+2. Score Wave 1-3 deliverables
+3. Compile, doctor, commit
+
+## Cross-References
+
+1. **Pillar**:  (System)
+2. **Kind**: `artifact`
+3. **Artifact ID**: `spec_autoresearch_assimilation`
+4. **Tags**: []
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar  | System domain |
+| Kind `artifact` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: artifact
+pillar: 
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

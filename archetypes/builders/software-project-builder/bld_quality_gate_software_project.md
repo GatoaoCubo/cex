@@ -8,10 +8,10 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.9
+quality: 9.0
 tags: [builder, quality-gate, software-project, validation]
 tldr: "8 hard gates for software projects: syntax valid, tests pass, lint clean, no secrets, Docker builds, CI valid, health endpoint exists, deps audited. Must pass all 8 for ≥8.0."
-density_score: 0.91
+density_score: 1.0
 ---
 
 # Quality Gates
@@ -107,3 +107,20 @@ assert any(j for j in ci["jobs"] if "test" in j.lower() or "lint" in j.lower())
 - If G4 fails: remove secrets, replace with env vars, retry
 - If G5-G8 fail: flag as warnings, allow build to proceed
 - After 2 retries: save as DRAFT with quality < 8.0
+
+## Actions
+| Score | Tier | Action |
+|-------|------|--------|
+| >= 9.5 | GOLDEN | Publish as exemplar |
+| >= 8.0 | PUBLISH | Ready for runtime |
+| >= 7.0 | REVIEW | Flag for review |
+| < 7.0  | REJECT | Rework required |
+
+## Bypass
+| Field | Value |
+|-------|-------|
+| conditions | Experimental software-engineering artifact under active A/B testing |
+| approver | Nucleus lead (written approval required) |
+| audit_trail | Log in records/audits/ with bypass reason and timestamp |
+| expiry | 48h — must pass all gates before expiry |
+| never_bypass | H01 (YAML parse), H05 (quality null) |

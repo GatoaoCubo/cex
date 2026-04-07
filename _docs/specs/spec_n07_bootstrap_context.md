@@ -3,11 +3,13 @@ id: spec_n07_bootstrap_context
 kind: context_doc
 title: CEX Architecture -- Theory vs Practice Gap Analysis
 version: 2.0.0
-quality: 8.9
+quality: 9.0
 created: 2026-04-07
 updated: 2026-04-07
 purpose: Give a fresh N07 instance full understanding of what was designed vs what exists
 density_score: null
+domain: "system specification"
+author: n07_admin
 ---
 
 # CEX Architecture: Theory vs Practice
@@ -324,3 +326,18 @@ Peak throughput: 24 parallel LLM streams, 864 artifacts/hour, full CEX from zero
 | OpenAI canonical | P01_knowledge/library/domain/_reference/kc_terminology_openai_canonical.md |
 | Google/MCP canonical | P01_knowledge/library/domain/_reference/kc_terminology_google_mcp_canonical.md |
 | Decision manifest | .cex/runtime/decisions/decision_terminology_standardization.yaml |
+
+## Cross-References
+
+- **Pillar**:  (System)
+- **Kind**: `context doc`
+- **Artifact ID**: `spec_n07_bootstrap_context`
+- **Tags**: []
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar  | System domain |
+| Kind `context doc` | Artifact type |
+| Pipeline | 8F (F1→F8) |

@@ -8,12 +8,13 @@ version: 1.0.0
 created: 2026-03-30
 author: n02_visual_frontend
 domain: frontend
-quality: 8.7
+quality: 9.0
 tags: [visual-hierarchy, web-design, ux, layout, typography, contrast]
 tldr: "Size, color, contrast, spacing, and position guide user attention. F-pattern for text, Z-pattern for landing pages."
 when_to_use: "When designing web layouts or reviewing UI for attention flow"
 keywords: [visual-hierarchy, f-pattern, z-pattern, whitespace, typography]
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # Visual Hierarchy in Web Design
@@ -39,3 +40,18 @@ density_score: 0.92
 
 ## Anti-Pattern
 Everything emphasized = nothing emphasized. If all text is bold, bold loses meaning.
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_visual_hierarchy`
+- **Tags**: [visual-hierarchy, web-design, ux, layout, typography, contrast]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

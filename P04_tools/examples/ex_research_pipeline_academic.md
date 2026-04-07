@@ -7,10 +7,11 @@ version: 1.0.0
 created: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
-quality: 8.7
+quality: 9.1
 tags: [research-pipeline, example, academic, papers, literature-review, exa]
 tldr: "Config for academic research — Exa neural search, Semantic Scholar, ArXiv, institutional RAG. 5 scholarly perspectives, high CRAG threshold."
 density_score: 0.88
+updated: "2026-04-07"
 ---
 
 # Research Pipeline — Academic Literature Review
@@ -87,3 +88,18 @@ quality:
 - **Conference talks**: YouTube NeurIPS/ICML talks provide author intent missing from papers
 - **5 scholarly perspectives**: methodology, rigor, practice, theory, survey — covers all angles
 - **Academic template**: formal structure, proper citations, LaTeX-ready format
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `cli tool`
+- **Artifact ID**: `ex_research_pipeline_academic`
+- **Tags**: [research-pipeline, example, academic, papers, literature-review, exa]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `cli tool` | Artifact type |
+| Pipeline | 8F (F1→F8) |

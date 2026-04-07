@@ -5,7 +5,12 @@ version: 1.0.0
 title: Template - Chain
 tags: [template, chain, multi-step, reasoning, pipeline]
 tldr: "Multi-step prompt chain: each step output feeds the next. Defines steps, schemas, recovery, timeout."
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "prompt engineering"
+author: n03_builder
+created: "2026-04-07"
+density_score: 1.0
 ---
 
 # Chain: [NAME]
@@ -35,7 +40,7 @@ Input -> Step1 -> intermediate -> Step2 -> intermediate -> Step3 -> Output
 | Step 2 | Retry with step 1 context |
 | Step 3 | Return partial (step 2 output) |
 ## Quality Gate
-- [ ] >= 2 steps (1 step = not a chain)
-- [ ] Each step has input/output
-- [ ] Total timeout prevents runaway
-- [ ] Error recovery per step
+1. [ ] >= 2 steps (1 step = not a chain)
+2. [ ] Each step has input/output
+3. [ ] Total timeout prevents runaway
+4. [ ] Error recovery per step

@@ -2,9 +2,16 @@
 id: kc_ad_validation
 kind: knowledge_card
 pillar: P01
-quality: 8.7
+quality: 9.1
 tldr: "Patterns for validating LLM-generated content, including fabrication detection, confidence scoring, and retry-with-refinement logic."
 tags: ["llm", "validation", "quality", "guardrails", "accuracy"]
+updated: "2026-04-07"
+domain: "knowledge management"
+title: "Ad Validation"
+version: "1.0.0"
+author: n04_knowledge
+created: "2026-04-07"
+density_score: 0.75
 ---
 
 # LLM Output Validation and Guardrails
@@ -50,3 +57,18 @@ When validation fails, simply regenerating the entire text can be inefficient. A
     2.  The system triggers another LLM call, but the prompt is modified to include the original text and instructions for targeted correction.
 -   **Example Prompt**: "The following text was generated but has an error in the pricing section. Please regenerate *only the pricing section* with the correct price of `[PLACEHOLDER]`. Original text: [Original generated text]".
 -   **Benefit**: This iterative refinement is faster and more resource-efficient than starting from scratch.
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `kc_ad_validation`
+- **Tags**: ["llm", "validation", "quality", "guardrails", "accuracy"]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

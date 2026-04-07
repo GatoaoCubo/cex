@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: validator
-quality: 8.9
+quality: 9.0
 tags: [validator, P06, GOVERN, kind-kc]
 tldr: "Discrete pass/fail validation rule applied at pipeline boundaries or pre-commit quality gates."
 when_to_use: "Building, reviewing, or reasoning about validator artifacts"
 keywords: [validator, rule, pass-fail, quality-gate, pre-commit]
 feeds_kinds: [validator]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Validator

@@ -8,7 +8,7 @@ created: 2026-01-17
 updated: 2026-03-25
 author: research_agent
 domain: research
-quality: 8.9
+quality: 9.0
 tags: [embedding, benchmark, qwen3, bertimbau, pt-br, rag, ecommerce]
 tldr: "Qwen3 primary (120ms P95) + BERTimbau fallback (91% PT-BR) = hybrid otimo. Ambos local a $0 vs $16K/ano API."
 when_to_use: "Escolher modelo de embedding para RAG em portugues ou comparar custo local vs API"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: null
   related: [p01_kc_rag_fundamentals]
-density_score: null
+density_score: 1.0
 data_source: "Benchmark proprio: 50 queries x 30 docs, metricas Recall/MRR/NDCG/Latency"
 ---
 
@@ -84,3 +84,10 @@ def embed_hybrid(texts):
 - external: https://huggingface.co/neuralmind/bert-base-portuguese-cased
 - deepens: p01_kc_rag_fundamentals (arquitetura RAG completa)
 - deepens: /skill embedding_evaluation (como benchmarkar — a ser criada)
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

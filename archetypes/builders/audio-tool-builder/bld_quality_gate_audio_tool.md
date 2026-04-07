@@ -8,7 +8,7 @@ created: "2026-03-28"
 updated: "2026-03-28"
 author: "builder_agent"
 domain: "audio processing tool — STT, TTS, and audio analysis with declared direction, models, formats, and language coverage"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, audio-tool, P04, speech, stt, tts, direction, formats, languages]
 tldr: "Pass/fail gate for audio_tool artifacts: direction declaration, model validity, format enum compliance, BCP-47 language codes, streaming declaration."
 density_score: 0.91

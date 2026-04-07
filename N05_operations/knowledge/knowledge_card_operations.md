@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
 domain: railway-backend-operations
-quality: 8.9
+quality: 9.0
 tags: [knowledge_card, railway, superintendent, fastapi, postgresql, deploy]
 tldr: Railway-native doctrine for FastAPI lifecycle management on Railway platform with PostgreSQL, health monitoring, and 4-service topology awareness.
 when_to_use: When the request requires Railway deployment, FastAPI health checks, PostgreSQL operations, or infrastructure management on Railway platform.

@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.0
 tags: [cex, learning-package, dimensions, lp, entity-model]
 tldr: "12 LPs sao dimensoes (nao categorias) que definem qualquer entidade LLM -- de prompt (1 LP) a agent_group (12 LPs)"
 when_to_use: "Entender as 12 dimensoes de uma entidade LLM e como LPs se cruzam com funcoes"

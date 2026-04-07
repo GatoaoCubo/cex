@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: feature_flag
-quality: 8.9
+quality: 9.0
 tags: [feature_flag, P09, GOVERN, kind-kc]
 tldr: "feature_flag is a lightweight on/off control artifact with gradual rollout support — enabling kill switches, incremental rollouts, and per-agent_group capability gating without redeployment."
 when_to_use: "Building, reviewing, or reasoning about feature_flag artifacts"
 keywords: [feature_toggle, kill_switch, gradual_rollout]
 feeds_kinds: [feature_flag]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Feature Flag

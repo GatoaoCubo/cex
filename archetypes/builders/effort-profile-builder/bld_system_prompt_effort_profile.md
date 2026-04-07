@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Effort and thinking level configuration for builder execution | NOT runtime_rule (execution rules), env_config (environment vars), model_card (model specs)"
 domain: "effort_profile"
-quality: 8.7
+quality: 9.0
 tags: ["system_prompt", "effort-profile", "P09"]
 safety_level: standard
 tools_listed: false
@@ -41,3 +41,26 @@ SCHEMA.md is the source of truth. Artifact id must match `^p09_effort_[a-z][a-z0
 10. NEVER produce an effort_profile without concrete model and thinking level values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 4096 bytes.
+
+## Operational Constraints
+
+- Never fabricate data or hallucinate references
+- Always validate output against the kind's schema
+- Respect token budget allocated by `cex_token_budget.py`
+- Signal completion via `signal_writer.py` when done
+- Log quality scores in frontmatter after generation
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind effort_profile --execute
+```
+
+```yaml
+# Agent config reference
+agent: effort-profile-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

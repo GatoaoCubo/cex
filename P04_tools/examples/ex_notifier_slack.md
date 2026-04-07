@@ -19,10 +19,13 @@ retry_policy:
   backoff: exponential
 template_vars: [agent_name, status, message, timestamp]
 delivery_guarantee: at_least_once
-quality: 8.6
+quality: 9.0
 tags: [notifier, slack, alerts]
 tldr: "Slack notifier for agent status alerts via Webhook API with exponential retry"
 description: "Sends agent completion, error, and status notifications to Slack channels"
+domain: "tool integration"
+title: "Notifier Slack"
+density_score: 0.92
 ---
 
 # Slack Notifier
@@ -54,3 +57,28 @@ Sends structured notifications to Slack channels when agents complete tasks, enc
 - endpoint: Slack Incoming Webhook URL
 - auth: env var `SLACK_WEBHOOK_URL`
 - channel_id: configured per webhook (e.g., #organization-alerts)
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `notifier`
+- **Artifact ID**: `p04_notify_slack`
+- **Tags**: [notifier, slack, alerts]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `notifier` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: notifier
+pillar: P04
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

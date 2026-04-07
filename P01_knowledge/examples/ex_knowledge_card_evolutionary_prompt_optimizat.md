@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: llm_engineering
-quality: 8.9
+quality: 9.0
 tags: [prompt-optimization, evolutionary, promptbreeder, elo-rating, llm]
 tldr: "5 tecnicas evolucionarias (PromptBreeder, C-Evolve, APE, Tournament, Vision-Language) elevam fitness de 0.65 para 0.85+ com meta-mutacao e consenso."
 when_to_use: "Otimizar prompts sistematicamente em vez de iteracao manual — especialmente com populacoes de candidatos"

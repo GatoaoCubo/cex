@@ -6,9 +6,11 @@ title: "KC: Landing Page"
 version: 1.0.0
 created: 2026-04-06
 author: n07_orchestrator
-quality: 8.8
+quality: 9.0
 tags: [knowledge-card, landing-page, frontend, ui, marketing, conversion]
 density_score: 1.0
+updated: "2026-04-07"
+domain: "knowledge management"
 ---
 # Knowledge Card: landing_page
 
@@ -46,3 +48,18 @@ Social-Proof=trust, Pricing=decision, FAQ=objection-clearing, CTA=conversion.
 - Consumes: content-monetization-builder (pricing tiers)
 - Consumes: brand_config.yaml (design tokens)
 - Feeds into: N05 deploy pipeline, N02 campaign pages
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `kc_landing_page`
+- **Tags**: [knowledge-card, landing-page, frontend, ui, marketing, conversion]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

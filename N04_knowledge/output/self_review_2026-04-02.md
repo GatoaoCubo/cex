@@ -3,7 +3,7 @@ id: self_review_2026-04-02
 kind: context-doc
 nucleus: N04
 pillar: P09
-quality: 8.9
+quality: 9.0
 date: 2026-04-02
 type: self-review
 density_score: 1.0

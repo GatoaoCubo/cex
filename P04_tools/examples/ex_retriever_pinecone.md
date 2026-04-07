@@ -15,10 +15,13 @@ search_type: vector
 reranker: null
 metadata_filters: [source, pillar, kind]
 namespace: "default"
-quality: 8.6
+quality: 9.0
 tags: [retriever, pinecone, vector, RAG]
 tldr: "Pinecone vector retriever using text-embedding-3-small with cosine similarity, top-k=10"
 description: "Searches Pinecone serverless index for semantically similar document chunks"
+domain: "tool integration"
+title: "Retriever Pinecone"
+density_score: 0.95
 ---
 
 # Pinecone Vector Retriever
@@ -41,3 +44,28 @@ Pure vector search using cosine similarity. Cosine chosen because text-embedding
 - auth: env var `PINECONE_API_KEY`
 - connection: env var `PINECONE_INDEX_NAME` for index host
 - embedding_call: OpenAIEmbeddings(model="text-embedding-3-small")
+
+## Cross-References
+
+- **Pillar**: P04 (Tools)
+- **Kind**: `retriever`
+- **Artifact ID**: `p04_retr_pinecone`
+- **Tags**: [retriever, pinecone, vector, RAG]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P04 | Tools domain |
+| Kind `retriever` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: retriever
+pillar: P04
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

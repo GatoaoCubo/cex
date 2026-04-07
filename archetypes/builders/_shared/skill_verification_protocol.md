@@ -8,7 +8,7 @@ updated: 2026-04-05
 author: n07-orchestrator
 title: "Shared Skill: Verification Protocol for All Builders"
 domain: verification
-quality: 8.8
+quality: 9.1
 tags: [shared, skill, verification, adversarial, all-builders]
 source_insight: "OpenClaude verificationAgent.ts -- adapted as shared builder skill"
 tldr: "Every builder can invoke adversarial verification on its output before publishing"
@@ -20,10 +20,10 @@ density_score: 0.86
 After producing an artifact (F6 PRODUCE), invoke this protocol before F7 GOVERN.
 
 ## When to Verify
-- 3+ sections modified in the artifact
-- Artifact kind is core (system_prompt, skill, guardrail, agent, agent_card)
-- Quality target >= 8.5
-- Retry attempt (previous quality gate failure)
+1. 3+ sections modified in the artifact
+2. Artifact kind is core (system_prompt, skill, guardrail, agent, agent_card)
+3. Quality target >= 8.5
+4. Retry attempt (previous quality gate failure)
 
 ## Verification Steps
 
@@ -47,3 +47,27 @@ After producing an artifact (F6 PRODUCE), invoke this protocol before F7 GOVERN.
 ## Output
 For each check: PASS with evidence or FAIL with Expected vs Actual.
 Final: VERDICT: PASS | FAIL | PARTIAL
+
+## Artifact Metadata
+
+```yaml
+kind: skill
+pillar: P04
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `skill` |
+| Pillar | P04 |
+| Domain | verification |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

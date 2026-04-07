@@ -10,14 +10,14 @@ author: "builder_agent"
 agent: "conversation-manager"
 persistence: "session"
 domain: "conversation"
-quality: 8.9
+quality: 9.0
 tags: [runtime-state, conversation, context, session]
 tldr: "Session-scoped runtime state for conversation context: turn tracking, topic detection, memory promotion, and context window budget."
 routing_mode: "rule_based"
 priority_count: 4
 update_frequency: "per_task"
 fallback_agent: "gateway-agent"
-density_score: 0.90
+density_score: 1.0
 constraint_count: 3
 linked_artifacts:
   primary: "mental-model-builder"

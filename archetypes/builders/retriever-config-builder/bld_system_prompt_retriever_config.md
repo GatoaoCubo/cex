@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Retrieval parameters — how to search and rank chunks from a vector/hybrid store | NOT embedding_config (vector model), chunk_strategy (splitting), knowledge_card (content), knowledge_index (index infra)"
 domain: "retriever_config"
-quality: 8.7
+quality: 9.1
 tags: ["system_prompt", "retriever-config", "P01"]
 safety_level: standard
 tools_listed: false
@@ -41,3 +41,26 @@ SCHEMA.md is the source of truth. Artifact id must match `^p01_retr_[a-z][a-z0-9
 10. NEVER produce a retriever_config without concrete parameter values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 2048 bytes.
+
+## Operational Constraints
+
+- Never fabricate data or hallucinate references
+- Always validate output against the kind's schema
+- Respect token budget allocated by `cex_token_budget.py`
+- Signal completion via `signal_writer.py` when done
+- Log quality scores in frontmatter after generation
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind retriever_config --execute
+```
+
+```yaml
+# Agent config reference
+agent: retriever-config-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

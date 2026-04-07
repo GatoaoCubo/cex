@@ -8,9 +8,10 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.7
+quality: 9.1
 tags: [builder, supabase, data-layer, examples, few-shot]
 density_score: 0.88
+tldr: "Defines the few shot example specification for examples — supabase data layer builder, with structural rules, validation gates, and integration points."
 ---
 
 # Examples
@@ -91,3 +92,11 @@ FAILURES:
 ## Edge Case — Free Tier Minimal
 INPUT: "MVP with Supabase Free — auth + basic CRUD"
 OUTPUT: Config with only Free-tier features, no CDN, no PITR, no SSO, 500MB DB limit noted, 2 project limit noted. RLS still mandatory.
+
+## Lifecycle
+
+- Created via 8F pipeline (F1-Focus through F8-Furnish)
+- Scored by `cex_score.py` (3-layer: structural + rubric + semantic)
+- Compiled by `cex_compile.py` for validation
+- Retrieved by `cex_retriever.py` for context injection
+- Evolved by `cex_evolve.py` when quality drops below threshold

@@ -6,7 +6,12 @@ version: 1.0.0
 title: Template - Lifecycle Rule
 tags: [template, lifecycle, rule, retention, cleanup]
 tldr: When artifacts are created, updated, archived, deleted. Controls retention and versioning.
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "feedback and quality"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.96
 ---
 
 # Lifecycle Rule: [NAME]
@@ -38,3 +43,28 @@ quality: 8.6
 - [ ] Archive before delete
 - [ ] Semver versioning
 - [ ] Cleanup automated
+
+## Cross-References
+
+- **Pillar**: P11 (Feedback)
+- **Kind**: `lifecycle rule`
+- **Artifact ID**: `p11_lc_{{RULE_SLUG}}`
+- **Tags**: [template, lifecycle, rule, retention, cleanup]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P11 | Feedback domain |
+| Kind `lifecycle rule` | Artifact type |
+| Pipeline | 8F (F1→F8) |
+
+## Artifact Metadata
+
+```yaml
+kind: lifecycle_rule
+pillar: P11
+pipeline: 8F
+scoring: hybrid_3_layer
+compilation: cex_compile
+```

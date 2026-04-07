@@ -8,10 +8,19 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.9
+quality: 9.0
 tags: [deploy, railway, render, paas, nixpacks, production]
 tldr: "PaaS deploy patterns from codexa-core: Railway (primary), Render (secondary), nixpacks auto-detection, Procfile, health checks, rollback, env vars, scaling. Zero-Dockerfile deploys."
-density_score: 0.90
+density_score: 1.0
+when_to_use: "Apply when paas deploy patterns from codexa-core: railway (primary), render (secondary), nixpacks auto-detec..."
+keywords: [knowledge-card, software-engineering, paas, railway, deploy]
+axioms:
+  - "AVOID: ❌ Secrets in railway.toml/render.yaml (use env vars)"
+  - "AVOID: ❌ No health check (PaaS can't detect failures)"
+  - "AVOID: ❌ Logging to files instead of stdout"
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Deploy PaaS Patterns

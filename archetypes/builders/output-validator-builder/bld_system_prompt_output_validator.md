@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Output validator — checks and corrective actions applied to LLM output AFTER generation | NOT validation_schema (P06, type/schema definition), quality_gate (P11, scoring rubric), constraint_spec (P03, decode-time constraint), guardrail (P11, safety filter)"
 domain: "output_validator"
-quality: 8.7
+quality: 9.1
 tags: ["system_prompt", "output-validator", "P05"]
 safety_level: standard
 tools_listed: false
@@ -41,3 +41,26 @@ SCHEMA.md is the source of truth. Artifact id must match `^p05_oval_[a-z][a-z0-9
 10. NEVER produce a output_validator without concrete parameter values — no placeholders in production artifacts.
 ## Output Format
 Produce a compact Markdown artifact with YAML frontmatter followed by the spec body. Total body under 2048 bytes.
+
+## Operational Constraints
+
+- Never fabricate data or hallucinate references
+- Always validate output against the kind's schema
+- Respect token budget allocated by `cex_token_budget.py`
+- Signal completion via `signal_writer.py` when done
+- Log quality scores in frontmatter after generation
+
+## Invocation
+
+```bash
+# Direct invocation via 8F pipeline
+python _tools/cex_8f_runner.py --kind output_validator --execute
+```
+
+```yaml
+# Agent config reference
+agent: output-validator-builder
+nucleus: N03
+pipeline: 8F
+quality_target: 9.0
+```

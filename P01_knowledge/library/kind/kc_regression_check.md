@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: regression_check
-quality: 8.9
+quality: 9.0
 tags: [regression_check, P07, GOVERN, kind-kc]
 tldr: "Automated comparison of current pipeline performance against a stored baseline to detect quality degradation."
 when_to_use: "Building, reviewing, or reasoning about regression_check artifacts"
 keywords: [regression, baseline, comparison, degradation, delta]
 feeds_kinds: [regression_check]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Regression Check

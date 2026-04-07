@@ -10,8 +10,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [instruction, webhook, P03, pipeline]
-quality: 8.9
+quality: 9.1
 density_score: 0.91
+domain: "instruction artifact construction"
+title: "Instruction Webhook"
+tldr: "Defines the instruction specification for instruction webhook, with structural rules, validation gates, and integration points."
 ---
 # Instructions: How to Produce a webhook
 
@@ -62,3 +65,17 @@ Run gates in order — stop at first HARD failure:
 - Unknown payload schema: use `additionalProperties: true` with known fields only
 - Exceeds 1024 bytes: compress Overview to 1 sentence, merge small event examples
 - No signature info available: use hmac_sha256 as default, flag for secret setup
+
+## Template Loading
+
+```yaml
+# This instruction is ISO 3 of 13 in the builder stack
+loader: cex_skill_loader.py
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+# Verify instruction loads correctly
+python _tools/cex_skill_loader.py --verify instruction artifact construction
+```

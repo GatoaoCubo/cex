@@ -3,11 +3,16 @@ id: p01_kc_railway_platform_deep
 kind: knowledge_card
 pillar: P01
 domain: infrastructure
-quality: 8.8
+quality: 9.1
 density_score: 0.88
 name: Railway Platform Deep
 description: Railway PaaS deployment platform with 4-service topology, railway.toml configuration, and service orchestration
 tags: [railway, paas, deployment, nixpacks, docker, microservices]
+updated: "2026-04-07"
+title: "Railway Platform Deep"
+version: "1.0.0"
+author: n04_knowledge
+created: "2026-04-07"
 ---
 
 # Railway Platform Deep
@@ -132,3 +137,18 @@ PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE
 - [Service Networking Guide](https://docs.railway.app/reference/networking)
 - [Environment Variables](https://docs.railway.app/develop/variables)
 - [Custom Domains Setup](https://docs.railway.app/deploy/custom-domains)
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_railway_platform_deep`
+- **Tags**: [railway, paas, deployment, nixpacks, docker, microservices]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

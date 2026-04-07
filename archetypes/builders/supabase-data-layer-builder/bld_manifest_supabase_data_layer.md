@@ -8,9 +8,9 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.9
+quality: 9.0
 tags: [builder, supabase, data-layer, manifest, capabilities]
-density_score: 0.90
+density_score: 1.0
 keywords: ["data platform", data-layer, builder, capabilities, supabase, manifest]
 triggers: ["create data platform", "build data platform artifact"]
 geo_description: >

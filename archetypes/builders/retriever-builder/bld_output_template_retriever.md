@@ -9,9 +9,11 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.7
+quality: 9.0
 tags: [output_template, retriever, P05, vector-search, RAG]
 density_score: 1.0
+domain: "output_template artifact construction"
+title: "Output Template Retriever"
 ---
 # Output Template: retriever
 
@@ -74,3 +76,18 @@ If reranker: name the model, when it fires (after first-pass top_k), what it opt
 - tags list must include "retriever" as first tag
 - reranker: null if not used (do not omit the field)
 - metadata_filters: empty list [] if none (do not omit the field)
+
+## Cross-References
+
+- **Pillar**: P05 (Output)
+- **Kind**: `output template`
+- **Artifact ID**: `bld_output_template_retriever`
+- **Tags**: [output_template, retriever, P05, vector-search, RAG]
+
+## Output Pipeline
+
+| Aspect | Detail |
+|--------|--------|
+| Template | Defines structure for output template outputs |
+| Validation | Checked against `validation_schema` |
+| Post-hook | Scored by `cex_score.py` after creation |

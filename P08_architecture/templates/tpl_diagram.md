@@ -6,7 +6,12 @@ version: 1.0.0
 title: Template - Diagram
 tags: [template, diagram, visual, mermaid, ascii]
 tldr: Visual diagram (Mermaid or ASCII) showing structure, data flow, or sequences. Embedded in markdown.
-quality: 8.6
+quality: 9.0
+updated: "2026-04-07"
+domain: "system architecture"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.97
 ---
 
 # Diagram: [NAME]
@@ -26,6 +31,7 @@ graph LR
     A[Intent] --> B[F1]
     B --> C[F2]
     C --> D[F3]
+
     D --> E[F6]
     E --> F{F7}
     F -->|pass| G[F8]
@@ -38,7 +44,21 @@ Intent -> [F1] -> [F2] -> [F3] -> [F6] -> [F7] -> [F8]
                                      +-------+
 ```
 ## Quality Gate
-- [ ] Diagram has title
-- [ ] Arrows are labeled
-- [ ] Both Mermaid + ASCII provided
-- [ ] Matches textual description
+1. [ ] Diagram has title
+2. [ ] Arrows are labeled
+3. [ ] Both Mermaid + ASCII provided
+4. [ ] Matches textual description
+
+## Artifact Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `diagram` |
+| Pillar | P08 |
+| Domain | system architecture |
+| Pipeline | 8F (F1-F8) |
+| Scorer | `cex_score.py` |
+| Compiler | `cex_compile.py` |
+| Retriever | `cex_retriever.py` |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

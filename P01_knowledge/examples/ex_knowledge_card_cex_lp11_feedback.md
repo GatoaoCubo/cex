@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.0
 tags: [cex, lp11, feedback, quality-gate, bugloop, guardrail, optimizer]
 tldr: "P11 define 5 tipos de melhoria continua: quality_gate, bugloop, lifecycle_rule, guardrail, optimizer"
 when_to_use: "Entender como sistemas LLM implementam auto-correcao e melhoria continua"
@@ -22,7 +22,7 @@ axioms:
 linked_artifacts:
   primary: p01_kc_cex_lp10_memory
   related: [p01_kc_cex_lp07_evals]
-density_score: null
+density_score: 1.0
 data_source: "https://arxiv.org/abs/2303.11366"
 ---
 
@@ -112,3 +112,10 @@ types: 5 | function: GOVERN + CONSTRAIN | layer: governance
 - source: https://arxiv.org/abs/2310.11511
 - related: p01_kc_cex_lp10_memory
 - related: p01_kc_cex_lp07_evals
+
+
+## Anti-Patterns
+
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

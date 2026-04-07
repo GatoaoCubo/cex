@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "architecture decision record — single significant choice documented with context, options, rationale, and consequences"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, decision-record, P08, ADR, architecture, status-lifecycle]
 tldr: "Pass/fail gate for decision_record artifacts: context completeness, options coverage, consequence honesty, and status lifecycle integrity."
 density_score: 0.90

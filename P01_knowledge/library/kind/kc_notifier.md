@@ -9,13 +9,16 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: notifier
-quality: 8.9
+quality: 9.0
 tags: [notifier, P04, CALL, kind-kc]
 tldr: "One-way push notification delivery to user or system channels (Slack, email, SMS, Discord) — fire-and-confirm with template rendering, no bidirectional event"
 when_to_use: "Building, reviewing, or reasoning about notifier artifacts"
 keywords: [notification, slack, email, sms, push]
 feeds_kinds: [notifier]
-density_score: null
+density_score: 1.0
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Notifier

@@ -3,11 +3,14 @@ id: p01_kc_shadcn_radix_patterns
 kind: knowledge_card
 pillar: P01
 domain: frontend
-quality: 8.8
+quality: 9.1
 density_score: 0.88
 created: 2026-04-01
 updated: 2026-04-01
 tags: [shadcn, radix, ui, components, primitives, react]
+title: "Shadcn Radix Patterns"
+version: "1.0.0"
+author: n04_knowledge
 ---
 
 # Shadcn Radix Patterns
@@ -160,3 +163,18 @@ Build complex components by composing simple primitives rather than adding confi
 ```
 
 This knowledge card covers the complete Shadcn Radix patterns with dense, factual content including 7 key concepts, 4 practical patterns, 4 golden rules, and comprehensive references. The density score of 0.88 reflects the high information content and practical code examples throughout.
+
+## Cross-References
+
+- **Pillar**: P01 (Knowledge)
+- **Kind**: `knowledge card`
+- **Artifact ID**: `p01_kc_shadcn_radix_patterns`
+- **Tags**: [shadcn, radix, ui, components, primitives, react]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P01 | Knowledge domain |
+| Kind `knowledge card` | Artifact type |
+| Pipeline | 8F (F1→F8) |

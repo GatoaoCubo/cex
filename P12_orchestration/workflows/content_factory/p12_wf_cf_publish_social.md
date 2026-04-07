@@ -16,7 +16,7 @@ depends_on: [p03_ap_cf_generate_campaign]
 signals: [complete, error]
 spawn_configs: []
 domain: "content_factory"
-quality: 8.9
+quality: 9.0
 tags: [workflow, content_factory, social_media, ayrshare, publish]
 tldr: "Adapt content per platform, create visuals via Canva, schedule and publish via Ayrshare — 4 mixed steps"
 density_score: 0.92
@@ -80,3 +80,18 @@ Twitter/X, and TikTok simultaneously.
 - **On step complete**: {step_name}_complete per step
 - **On workflow complete**: wf_cf_publish_social_complete with per-platform status summary
 - **On error**: wf_cf_publish_social_error with platform + error detail
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `workflow`
+- **Artifact ID**: `p12_wf_cf_publish_social`
+- **Tags**: [workflow, content_factory, social_media, ayrshare, publish]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `workflow` | Artifact type |
+| Pipeline | 8F (F1→F8) |

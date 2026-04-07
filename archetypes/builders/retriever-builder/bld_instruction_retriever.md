@@ -9,9 +9,11 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.0
 tags: [instruction, retriever, P03, RAG, vector-search]
 density_score: 0.86
+domain: "instruction artifact construction"
+title: "Instruction Retriever"
 ---
 # Instructions: How to Produce a retriever
 

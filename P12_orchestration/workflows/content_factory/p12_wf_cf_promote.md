@@ -16,7 +16,7 @@ depends_on: [p03_ap_cf_generate_campaign]
 signals: [complete, error]
 spawn_configs: []
 domain: "content_factory"
-quality: 8.9
+quality: 9.1
 tags: [workflow, content_factory, promotion, social_media, canva]
 tldr: "Extract hooks from content, generate social posts + Canva thumbnails, schedule 7-day promotion campaign"
 density_score: 0.91
@@ -80,3 +80,18 @@ is created but needs audience reach.
 - **On step complete**: {step_name}_complete per step
 - **On workflow complete**: wf_cf_promote_complete with campaign summary
 - **On error**: wf_cf_promote_error with failed step + recovery suggestion
+
+## Cross-References
+
+- **Pillar**: P12 (Orchestration)
+- **Kind**: `workflow`
+- **Artifact ID**: `p12_wf_cf_promote`
+- **Tags**: [workflow, content_factory, promotion, social_media, canva]
+
+## Integration Points
+
+| Component | Role |
+|-----------|------|
+| Pillar P12 | Orchestration domain |
+| Kind `workflow` | Artifact type |
+| Pipeline | 8F (F1→F8) |

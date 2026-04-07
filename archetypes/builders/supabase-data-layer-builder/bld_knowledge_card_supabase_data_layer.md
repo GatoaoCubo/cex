@@ -8,9 +8,14 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.9
+quality: 9.0
 tags: [builder, supabase, data-layer, architecture, tradeoffs]
-density_score: 0.91
+density_score: 1.0
+when_to_use: "Use when building knowledge card artifacts for data_platform"
+keywords: [layer, knowledge-card, matrix, summary, data_platform]
+linked_artifacts:
+  primary: null
+  related: []
 ---
 
 # Supabase Data Layer — Builder Knowledge
