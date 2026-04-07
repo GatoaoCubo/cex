@@ -22,7 +22,6 @@ quality: null
 tags: [tagline, brand, {{BRAND_SLUG}}, marketing]
 brand: "{{BRAND_NAME}}"
 ---
-
 # Tagline: {{BRAND_NAME}}
 
 ## USP
