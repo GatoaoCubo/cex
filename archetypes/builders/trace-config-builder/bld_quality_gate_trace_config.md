@@ -8,7 +8,7 @@ created: "2026-04-06"
 updated: "2026-04-06"
 author: "builder_agent"
 domain: "trace_config — execution tracing specifications with exporters, sample rates, capture rules, and retention policies"
-quality: null
+quality: 9.0
 tags: [quality-gate, trace-config, observability, tracing, P11]
 tldr: "Gates for trace_config artifacts: validates exporter, sample rate, capture flags, span attributes, retention, and privacy controls."
 density_score: 0.91
