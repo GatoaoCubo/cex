@@ -10,9 +10,10 @@ author: n07_orchestrator
 domain: crm-research
 model: claude-opus-4
 tools: [serper, firecrawl, exa, fetch]
-quality: null
+quality: 9.1
 tags: [agent, crm, research, quality-first, anti-fake]
 tldr: "Agente de pesquisa CRM que prioriza qualidade sobre quantidade. 10 completos > 100 vazios. Anti-fabricação nativa."
+density_score: 1.0
 ---
 
 # CRM Research Agent v2 — Quality Researcher
