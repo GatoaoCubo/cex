@@ -29,6 +29,8 @@ import json
 import re
 import subprocess
 import time
+
+import yaml
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -76,10 +78,17 @@ except ImportError:
     _RETRIEVER_AVAILABLE = False
 
 try:
-    from cex_token_budget import count_tokens
+    from cex_token_budget import count_tokens, TokenBudget as _TokenBudget
     _TOKEN_BUDGET_AVAILABLE = True
 except ImportError:
     _TOKEN_BUDGET_AVAILABLE = False
+
+try:
+    from cex_gdp import GDPEnforcer as _GDPEnforcer
+    from cex_gdp import NeedsUserDecision as _NeedsUserDecision
+    _GDP_AVAILABLE = True
+except ImportError:
+    _GDP_AVAILABLE = False
 
 try:
     from cex_memory import get_injection_context as _memory_inject
@@ -364,12 +373,14 @@ class EightFRunner:
         T04: Token budget allocation at pipeline start.
         """
         # --- T04: Token budget ---
-        try:
-            from cex_token_budget import count_tokens, TokenBudget
-            budget = TokenBudget()
-            self.state.token_budget = budget
-            self._log("F1", f"token budget: input={budget.input_limit} output={budget.output_limit}")
-        except Exception:
+        if _TOKEN_BUDGET_AVAILABLE:
+            try:
+                budget = _TokenBudget()
+                self.state.token_budget = budget
+                self._log("F1", f"token budget: input={budget.input_limit} output={budget.output_limit}")
+            except Exception:
+                self.state.token_budget = None
+        else:
             self.state.token_budget = None
 
         bdir = self.state.builder_dir
@@ -699,20 +710,18 @@ class EightFRunner:
         raises NeedsUserDecision instead of proceeding (D2: raise = halt pipeline).
         """
         # --- T03: GDP gate ---
-        try:
-            from cex_gdp import GDPEnforcer, NeedsUserDecision
-            gdp = GDPEnforcer()
-            pending = gdp.get_pending()
-            for d in pending:
-                if d.kind == self.state.kind or d.scope.value == "GLOBAL":
-                    self._log("F4", f"GDP BLOCKED: unresolved decision '{d.id}' ({d.scope.value})")
-                    raise NeedsUserDecision(d)
-        except ImportError:
-            pass  # GDP module not available
-        except Exception as e:
-            if "NeedsUserDecision" in type(e).__name__:
+        if _GDP_AVAILABLE:
+            try:
+                gdp = _GDPEnforcer()
+                pending = gdp.get_pending()
+                for d in pending:
+                    if d.kind == self.state.kind or d.scope.value == "GLOBAL":
+                        self._log("F4", f"GDP BLOCKED: unresolved decision '{d.id}' ({d.scope.value})")
+                        raise _NeedsUserDecision(d)
+            except _NeedsUserDecision:
                 raise
-            self._log("F4", f"GDP check skipped: {e}")
+            except Exception as e:
+                self._log("F4", f"GDP check skipped: {e}")
 
         # Compose reasoning prompt from accumulated state
         parts = []
@@ -1407,8 +1416,7 @@ class EightFRunner:
                 try:
                     nlm_config_path = CEX_ROOT / ".cex" / "config" / "notebooklm_notebooks.yaml"
                     if nlm_config_path.exists():
-                        import yaml as _nlm_yaml
-                        nlm_cfg = _nlm_yaml.safe_load(
+                        nlm_cfg = yaml.safe_load(
                             nlm_config_path.read_text(encoding="utf-8")
                         ) or {}
                         if nlm_cfg.get("publish_mode") == "auto":
