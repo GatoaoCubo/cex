@@ -116,8 +116,24 @@ $bootCmd = "$root\boot\$nucleus.cmd"
 $bootPs1 = "$root\boot\$nucleus.ps1"
 
 if (Test-Path $bootCmd) {
-    # CMD boot -- stable: color persists through ANSI resets, no encoding issues
-    Write-Output "[$upper] Boot: CMD (color + title)"
+    # Set pi theme for this nucleus BEFORE launching (pi reads settings.json on startup)
+    # --theme flag doesn't work from CMD. settings.json is the only reliable method.
+    $themeMap = @{
+        n01 = "cex-n01-inveja"; n02 = "cex-n02-luxuria"; n03 = "cex-n03-soberba"
+        n04 = "cex-n04-gula";   n05 = "cex-n05-ira";     n06 = "cex-n06-avareza"
+    }
+    $piSettings = Join-Path $env:USERPROFILE ".pi\agent\settings.json"
+    if (Test-Path $piSettings) {
+        $themeName = $themeMap[$nucleus]
+        if ($themeName) {
+            $sJson = Get-Content $piSettings -Raw | ConvertFrom-Json
+            $sJson.theme = $themeName
+            $sJson | ConvertTo-Json -Depth 5 | Set-Content $piSettings -Encoding UTF8
+            Write-Output "[$upper] Theme: $themeName"
+        }
+    }
+
+    Write-Output "[$upper] Boot: CMD (pi + theme)"
     $proc = Start-Process cmd -ArgumentList "/k `"$bootCmd`"" -WorkingDirectory $root -PassThru
 } elseif (Test-Path $bootPs1) {
     # PowerShell fallback (encoding-sensitive, color does not persist)
