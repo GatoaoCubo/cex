@@ -26,7 +26,7 @@ constraints:
   - "Do NOT include external URLs — use placeholder {{REF_N}} for citations"
   - "Each chapter 1500-2500 words (total proportional to chapters_count)"
 domain: "content_factory"
-quality: null
+quality: 9.1
 tags: [action_prompt, content_factory, ebook, lead_magnet, digital_product]
 tldr: "Generate complete eBook manuscript (chapters + sections + takeaways) from topic and chapter count for lead magnet or sale"
 density_score: 0.90
