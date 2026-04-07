@@ -16,7 +16,7 @@ prerequisites:
   - Timestamp or timing data is available
 validation_method: checklist
 domain: reasoning_trace
-quality: null
+quality: 9.0
 tags: [instruction, reasoning_trace, cognition, P03]
 idempotent: true
 atomic: true
