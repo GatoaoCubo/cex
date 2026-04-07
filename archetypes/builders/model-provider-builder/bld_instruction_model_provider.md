@@ -15,7 +15,7 @@ prerequisites:
   - The provider is not already configured in the P02 examples directory
 validation_method: checklist
 domain: model_provider
-quality: null
+quality: 9.1
 tags: [instruction, model-provider, P02, llm-routing, fallback, rate-limit]
 idempotent: true
 atomic: false
