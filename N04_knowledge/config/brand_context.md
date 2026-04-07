@@ -2,66 +2,46 @@
 id: brand_context_n04
 kind: config
 pillar: P09
-title: Brand Context for N04 — Knowledge & Documentation
-version: 1.1.0
+title: Brand Context for N04 — Knowledge Management & Documentation
+version: 2.0.0
 created: 2026-04-01
 updated: 2026-04-07
 author: n06_commercial
-domain: knowledge
 quality: null
-tags: [brand, context, n04, knowledge, documentation, content-creation, gato3]
-tldr: Complete brand context for N04 knowledge nucleus — content pillars, documentation style, educational voice aligned to GATO³ brand
-density_score: 0.95
+tags: [brand, context, n04, knowledge, documentation]
+tldr: Brand context for N04 knowledge nucleus — content pillar distribution, documentation style for Portuguese cat owners, and knowledge card adaptation rules for GATO³
+density_score: 1.0
 ---
 
 ## Brand Context (injected by brand_propagate.py)
 
-Source: `.cex/brand/brand_config.yaml`
+**Source**: `.cex/brand/brand_config.yaml`
 
-## Core Identity
+### Core Identity
 
-| Field | Value |
-|-------|-------|
-| BRAND_NAME | GATO³ (Gato ao Cubo) |
-| BRAND_TAGLINE | Educação que acalma, soluções que funcionam, casa que continua elegante. |
-| BRAND_CATEGORY | Curadoria de bem-estar felino + casa multi-espécie harmonizada |
-| BRAND_LANGUAGE | pt-BR |
-| BRAND_ARCHETYPE | Caregiver (Cuidadora + Sábia + Criadora) |
+- **BRAND_NAME**: GATO³
+- **BRAND_TAGLINE**: Educação que acalma, soluções que funcionam, casa que continua elegante.
+- **BRAND_CATEGORY**: Curadoria de bem-estar felino + casa multi-espécie harmonizada
+- **BRAND_LANGUAGE**: pt-BR
+- **BRAND_ARCHETYPE**: Caregiver (Cuidadora + Sábia + Criadora)
+- **BRAND_VOICE_TONE**: sofisticado-acolhedor, informativo sem ser técnico demais, minimalista e direto
 
-## Content Pillars (N04 primary framework)
+### Content Pillars for Knowledge Organization
 
 | Pillar | Weight | N04 Application |
-|--------|--------|-----------------|
-| Produtos em destaque | 40% | Focus knowledge cards on product selection criteria, compatibility guides, care instructions |
-| Educacional | 30% | Include "Você sabia?" sections with feline science facts, behavioral insights |
-| Dicas da Ro | 20% | Add step-by-step implementation guides, troubleshooting protocols |
-| Tendências | 10% | Reference market trends only when directly relevant to knowledge being documented |
+|--------|--------|----------------|
+| Produtos em destaque (40%) | Dominant | Focus knowledge cards on product selection criteria, compatibility guides, curated recommendations |
+| Educacional (30%) | Strong | Include "Você sabia?" sections with feline science facts, behavioral insights |
+| Dicas da Ro (20%) | Supporting | Add step-by-step implementation guides, troubleshooting protocols |
+| Tendências (10%) | Minimal | Reference market trends only when directly relevant to knowledge cards |
 
-## Voice Parameters (for knowledge artifacts)
+### Target Audience Context
 
-| Dimension | Level | Knowledge Application |
-|-----------|-------|----------------------|
-| Formality | 3/5 | Professional but approachable — like a knowledgeable friend |
-| Enthusiasm | 3/5 | Measured — let the information inspire, not the tone |
-| Humor | 2/5 | Minimal — warmth over cleverness |
-| Warmth | 4/5 | High — make complex topics feel safe and accessible |
-| Authority | 3/5 | Confident without being clinical |
-
-### Voice DO Rules
-
-1. Usar frases curtas e parágrafos enxutos
-2. Explicar o porquê — ciência acessível, nunca jargão
-3. Dar passos práticos e acionáveis (protocolos da Ro)
-4. Tratar o tutor como parceiro, nunca como ignorante
-5. Contextualizar produto como meio, não como fim
-
-### Voice DONT Rules
-
-1. Prometer milagres ou resultados garantidos
-2. Usar gíria, infantilizar ou falar como pet shop genérico
-3. Medicalizar sem respaldo veterinário
-4. Usar CAPS LOCK, excesso de emojis ou tom de vendedor
-5. Comparar diretamente com concorrentes pelo nome
+- **ICP**: Tutores de gatos (25-45 anos) urbanos, classe B-C+
+- **Location**: ABC Paulista → Grande SP → Estado SP → Brasil
+- **Values**: Bem-estar animal, design funcional, educação antes de compra
+- **Fears**: Gato estressado, produtos feios, incerteza sobre cuidados corretos
+- **Transformation**: Tutor inseguro → tutor confiante com felino feliz em lar elegante
 
 ## N04 Knowledge Creation Guidelines
 
@@ -70,47 +50,40 @@ Source: `.cex/brand/brand_config.yaml`
 - **Tone**: Sofisticado-acolhedor — blend expertise with warmth
 - **Structure**: Lead with practical benefits, support with science
 - **Language patterns**: Use "seu gato" (familiar), avoid clinical veterinary terms
-- **Examples**: Always use Brazilian household contexts (apartamentos, varandas, salas)
-- **Persona voice**: Ro appears as guide — warm, knowledgeable, practical
+- **Examples**: Always use Brazilian household contexts (apartamentos, varandas)
+- **Length**: Prefer concise chunks (300-500 words per section) over long-form
 
 ### Knowledge Card Adaptation Rules
 
-| Rule | Implementation |
-|------|---------------|
-| Title format | "Como [action] para [benefit] do seu gato" |
-| Opening | Start with cat owner pain point, not product features |
-| Chunking | Break complex topics into "Você sabia?" callouts |
-| Validation | Include Ro's voice for reassurance ("Lembre-se...") |
-| Sources | Reference veterinary behavioral studies when available |
-| Language | Always pt-BR, avoid Anglicisms unless industry-standard |
+1. **Title format**: "Como [action] para [benefit] do seu gato"
+2. **Opening**: Start with cat owner pain point, not product features
+3. **Chunking**: Break complex topics into "Você sabia?" callouts
+4. **Validation**: Include Ro's voice for reassurance ("Lembre-se...")
+5. **Cross-linking**: Reference related knowledge cards when topics overlap
 
-### Content Structure Template
+### Voice Dos and Don'ts for Knowledge Content
 
-Every N04 knowledge card should follow this structure:
+| Do | Don't |
+|----|-------|
+| Usar frases curtas e parágrafos enxutos | Prometer milagres ou resultados garantidos |
+| Explicar o porquê — ciência acessível, nunca jargão | Usar gíria ou infantilizar |
+| Dar passos práticos e acionáveis (protocolos da Ro) | Medicalizar sem respaldo veterinário |
+| Tratar o tutor como parceiro, nunca como ignorante | Usar CAPS LOCK, excesso de emojis |
+| Contextualizar produto como meio, não como fim | Comparar diretamente com concorrentes pelo nome |
 
-1. **Hook** — Pain point or curiosity ("Seu gato arranha o sofá?")
-2. **Context** — Why this matters (brief feline behavior insight)
-3. **Solution** — Step-by-step protocol (Dicas da Ro style)
-4. **Science** — "Você sabia?" callout with supporting evidence
-5. **Product tie-in** — How GATO³ curated products help (40% pillar)
-6. **Reassurance** — Ro's closing encouragement
+### Knowledge Taxonomy Alignment
 
-### Audience Profile for Knowledge Artifacts
+| Domain | Knowledge Type | Priority |
+|--------|---------------|----------|
+| Feline behavior | Behavioral science cards | High — supports educational pillar (30%) |
+| Product selection | Comparison guides, compatibility matrices | High — supports product pillar (40%) |
+| Home harmonization | Room-by-room setup guides | Medium — supports Ro's tips pillar (20%) |
+| Market context | Industry trend summaries | Low — supports trends pillar (10%) |
 
-| Field | Value |
-|-------|-------|
-| Primary reader | Tutores de gatos (25-45 anos), urbanos |
-| Reading context | Mobile-first, quick reference, bookmarkable |
-| Prior knowledge | Varies — assume beginner, layer complexity |
-| Motivation | Solve a specific cat-related problem or learn proactively |
-| Trust trigger | Veterinary backing + Ro's practical experience |
+### Terminology Standards
 
-### Brand Values in Knowledge
-
-| Value | Knowledge Manifestation |
-|-------|------------------------|
-| Amor aos felinos | Every card puts cat welfare first |
-| Educação acolhedora | Tone is never condescending, always empowering |
-| Qualidade impecável | Facts are verified, sources cited, protocols tested |
-| Inovação com propósito | New information presented with clear practical application |
-| Comunidade | Encourage tutors to share knowledge, build confidence |
+- Use "tutor" not "dono" (owner) — aligns with caregiver archetype
+- Use "felino" or "gato" interchangeably — avoid "pet" when possible
+- Use "lar" or "casa" not "residência" — warm, not clinical
+- Use "bem-estar" not "saúde" when discussing general wellness
+- Use "curadoria" not "seleção" when describing product choices

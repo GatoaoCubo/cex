@@ -2,14 +2,15 @@
 id: brand_voice_templates
 kind: prompt_template
 pillar: P03
-title: Brand Voice Templates — Tone & Messaging Calibration
-version: 1.0.0
+title: "Brand Voice Templates — Tone & Messaging Calibration (GATO³ + Universal)"
+version: 2.0.0
 created: 2026-04-02
+updated: 2026-04-07
 author: n02_marketing
 domain: brand_voice_copywriting
-quality: 9.0
-tags: [prompt_template, brand_voice, tone, messaging, audience, N02]
-tldr: Brand voice calibration templates for different audiences, channels, and funnel stages — ensures consistent brand personality across all marketing copy.
+quality: null
+tags: [prompt_template, brand_voice, tone, messaging, audience, N02, gato3, ro]
+tldr: "Brand voice calibration templates for different audiences, channels, and funnel stages — universal framework + GATO³ Ro persona examples in pt-BR. Ensures consistent brand personality across all marketing copy."
 voice_dimensions: [tone, formality, personality, energy, perspective]
 density_score: 1.0
 ---
