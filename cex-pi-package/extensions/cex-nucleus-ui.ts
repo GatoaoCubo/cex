@@ -70,8 +70,8 @@ export default function (pi: ExtensionAPI) {
 					// Identity (always shown)
 					const id = theme.fg("accent", `${info.icon} ${nuc} ${info.short}`);
 
-					if (width >= 120) {
-						// WIDE: full path + bar + pct
+					if (width >= 100) {
+						// WIDE (full screen): path + bar + pct
 						const path = shortPath(ctx.cwd, 25);
 						const loc = theme.fg("dim", branch ? `${path} (${branch})` : path);
 						const ctx_ = theme.fg("dim", `${fmtK(tokens)}/${fmtK(max)} `)
@@ -81,18 +81,18 @@ export default function (pi: ExtensionAPI) {
 						return [truncateToWidth(id + sep + ctx_ + sep + mod + sep + loc, width)];
 					}
 
-					if (width >= 80) {
-						// GRID: short path + bar, no pct
-						const path = shortPath(ctx.cwd, 15);
-						const loc = theme.fg("dim", branch ? `${path} (${branch})` : path);
-						const ctx_ = theme.fg("dim", `${fmtK(tokens)}/${fmtK(max)} `)
-							+ theme.fg("accent", `[${bar(tokens, max, 8)}]`);
+					if (width >= 55) {
+						// GRID (~64 cols): short path + compact bar
+						const folder = ctx.cwd.replace(/\\/g, "/").split("/").pop() || "";
+						const loc = theme.fg("dim", branch ? `${folder} (${branch})` : folder);
+						const ctx_ = theme.fg("accent", `[${bar(tokens, max, 6)}]`)
+							+ theme.fg("dim", ` ${pct}%`);
 						const mod = theme.fg("dim", model);
 						return [truncateToWidth(id + sep + ctx_ + sep + mod + sep + loc, width)];
 					}
 
-					// NARROW: just identity + tokens + model
-					const ctx_ = theme.fg("dim", `${fmtK(tokens)}/${fmtK(max)} ${pct}%`);
+					// NARROW (< 55): minimal
+					const ctx_ = theme.fg("dim", `${pct}%`);
 					const mod = theme.fg("dim", model);
 					return [truncateToWidth(id + sep + ctx_ + sep + mod, width)];
 				},
