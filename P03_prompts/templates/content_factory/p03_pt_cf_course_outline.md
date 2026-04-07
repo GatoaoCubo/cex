@@ -56,7 +56,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, course, outline, curriculum, content_factory, P03]
 tldr: "Reusable mold for generating complete course structures with modules, lessons, dependencies, and duration"
 keywords: [course outline, curriculum, modules, lessons, content factory, structure]
