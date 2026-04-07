@@ -9,7 +9,7 @@ author: "n01_intelligence"
 name: "Content Factory Presentation Format Constraints"
 constraint_type: "format_rules"
 pattern: "multi_rule_set"
-quality: null
+quality: 9.1
 tags: [constraint_spec, content-factory, presentation, slides, canva]
 tldr: "Presentation constraints: 10-30 slides, 3-5 bullets/slide, speaker notes, PPTX+PDF+GSlides export"
 description: "Governs all presentation outputs from dag_cf_presentation for clarity and brand consistency"
@@ -17,6 +17,7 @@ provider_compat: "canva, google_slides, powerpoint"
 fallback: "Manual design review if automated validation unavailable"
 temperature_override: "0.4"
 max_tokens: "2048"
+density_score: 1.0
 ---
 
 ## Overview
