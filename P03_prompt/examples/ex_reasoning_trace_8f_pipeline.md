@@ -13,7 +13,7 @@ conclusion: "Build agent kind with 4 tools, consultative persona, sonnet tier"
 confidence: 0.87
 duration_ms: 3400
 domain: reasoning_trace
-quality: null
+quality: 9.1
 tags: [reasoning-trace, chain-of-thought, 8f, audit, decision]
 tldr: "Reasoning trace from N03 building a sales agent — 5 steps, rejected template clone and generic agent, chose hybrid approach with 0.87 confidence."
 when_to_use: "Auditing agent decisions, debugging low-quality outputs, or training from past reasoning"
