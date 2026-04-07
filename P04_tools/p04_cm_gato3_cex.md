@@ -8,12 +8,13 @@ created: 2026-04-02
 updated: 2026-04-02
 author: n06_commercial
 domain: content_monetization
-quality: null
+quality: 9.0
 tags: [content-monetization, gato3, cex, hybrid, b2c, b2b, cat-wellness, brazil]
 tldr: "Híbrido B2C (curadoria de produtos felinos) + B2B (licensing CEX para outras marcas) via MercadoPago/PIX + checkout multi-tier com courses de bem-estar felino"
 geo_constraint: brazil_abc_paulista
 expansion_rings: ["abc_paulista", "grande_sp", "estado_sp", "brasil"]
 cex_integration: true
+density_score: 1.0
 ---
 
 # GATO³ × CEX — Hybrid Monetization Pipeline
