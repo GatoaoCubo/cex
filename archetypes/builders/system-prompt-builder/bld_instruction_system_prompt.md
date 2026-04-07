@@ -16,7 +16,7 @@ prerequisites:
   - "At least 3 ALWAYS rules and 3 NEVER rules can be derived from the domain"
 validation_method: checklist
 domain: system_prompt
-quality: null
+quality: 9.0
 tags: [instruction, system-prompt, identity, persona, P03]
 idempotent: true
 atomic: false
