@@ -57,7 +57,7 @@ edges:
   - from: "quality_check"
     to: "export"
 domain: "orchestration"
-quality: null
+quality: 9.0
 tags: [dag, content-factory, presentation-pipeline, canva, slides, pptx]
 tldr: "9-node presentation DAG: longform→outline→content→parallel(notes+design+charts)→assemble→QA→export PPTX/PDF"
 execution_order:
@@ -80,6 +80,7 @@ linked_artifacts:
   primary: "P12_orchestration/dags/content_factory/dag_cf_master.md"
   related:
     - "P03_prompts/constraints/content_factory/p03_constraint_cf_presentation.md"
+density_score: 1.0
 ---
 
 ## Nodes
