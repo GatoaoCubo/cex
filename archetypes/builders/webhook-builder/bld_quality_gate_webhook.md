@@ -10,9 +10,10 @@ author: builder_agent
 target_kind: webhook
 hard_gates: 10
 soft_dims: 12
-quality: null
+quality: 9.1
 tags: [quality_gate, webhook, P11, validation]
 tldr: "10 HARD gates (any failure = reject) + 12 SOFT dims (score 0-10, threshold 7.0)"
+density_score: 1.0
 ---
 # Gate: webhook
 
