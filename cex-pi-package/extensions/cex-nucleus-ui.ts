@@ -16,7 +16,7 @@ const NUC: Record<string, { short: string; sector: string; icon: string; sin: st
 	N02: { short: "Lust", sector: "Marketing", icon: "[*]", sin: "Creative Lust" },
 	N03: { short: "Pride", sector: "Builder", icon: "[!]", sin: "Inventive Pride" },
 	N04: { short: "Gluttony", sector: "Knowledge", icon: "[o]", sin: "Knowledge Gluttony" },
-	N05: { short: "Wrath", sector: "Operations", icon: "[X]", sin: "Constructive Wrath" },
+	N05: { short: "Wrath", sector: "Operations", icon: "[X]", sin: "Gating Wrath" },
 	N06: { short: "Greed", sector: "Commercial", icon: "[$]", sin: "Strategic Greed" },
 	N07: { short: "Sloth", sector: "Orchestrator", icon: "[~]", sin: "Orchestrating Sloth" },
 };
