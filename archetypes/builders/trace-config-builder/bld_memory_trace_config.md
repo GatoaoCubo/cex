@@ -85,17 +85,3 @@ target: 9.0
 ```bash
 python _tools/cex_score.py --apply --verbose p10_lr_trace_config_builder.md
 ```
-
-## Properties
-
-| Property | Value |
-|----------|-------|
-| Kind | `learning_record` |
-| Pillar | P10 |
-| Domain | trace_config |
-| Pipeline | 8F |
-| Scorer | cex_score.py |
-| Compiler | cex_compile.py |
-| Retriever | cex_retriever.py |
-| Target | 9.0+ |
-| Density | 0.85+ |

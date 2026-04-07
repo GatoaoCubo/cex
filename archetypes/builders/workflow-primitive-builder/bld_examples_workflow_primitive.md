@@ -186,22 +186,3 @@ FAILURES:
 3. no typed inputs or outputs — composition is impossible
 4. no guard clauses — no max_iter, no threshold, no timeout
 5. this is a workflow (multi-step graph), not a primitive — use workflow-builder
-## Anti-Example: Loop Without Guard
-BAD OUTPUT (`p12_wp_loop.yaml`):
-```yaml
-type: loop
-description: Keep retrying until it works
-inputs:
-  - name: task
-    type: string
-    required: true
-outputs:
-  - name: result
-    type: string
-    required: true
-```
-FAILURES:
-1. no `max_iter` — unbounded loop will run forever (HARD gate H08 failure)
-2. no `break_condition` — no way to exit early
-3. description "keep retrying until it works" is vague and implies no termination
-4. no `feedback_input` — loop iterations have no way to improve

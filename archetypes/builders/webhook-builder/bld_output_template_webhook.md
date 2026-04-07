@@ -106,15 +106,9 @@ what triggers this webhook and what system receives it.}}
 
 ## Cross-References
 
-- **Pillar**: P04 (Tools)
-- **Kind**: `output template`
-- **Artifact ID**: `bld_output_template_webhook`
-- **Tags**: [output_template, webhook, P04, template]
-
-## Output Pipeline
-
-| Aspect | Detail |
-|--------|--------|
-| Template | Defines structure for output template outputs |
-| Validation | Checked against `validation_schema` |
-| Post-hook | Scored by `cex_score.py` after creation |
+| Field | Value |
+|-------|-------|
+| Pillar | P04 (Tools) |
+| Kind | output_template |
+| Artifact ID | bld_output_template_webhook |
+| Validation | validation_schema + cex_score.py post-hook |

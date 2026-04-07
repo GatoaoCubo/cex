@@ -90,12 +90,7 @@ python _tools/cex_score.py --apply --verbose p10_lr_session_backend_builder.md
 
 | Property | Value |
 |----------|-------|
-| Kind | `learning_record` |
+| Kind | learning_record |
 | Pillar | P10 |
-| Domain | session_backend |
-| Pipeline | 8F |
-| Scorer | cex_score.py |
-| Compiler | cex_compile.py |
-| Retriever | cex_retriever.py |
-| Target | 9.0+ |
-| Density | 0.85+ |
+| Pipeline | 8F → cex_score.py → cex_compile.py |
+| Target | 9.0+ density 0.85+ |
