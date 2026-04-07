@@ -122,7 +122,7 @@
     "description": "Snapshot de estado de workflow",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p12_ckpt.md",
+    "naming": "p12_ckpt_{{name}}.md",
     "pillar": "P12"
   },
   "chunk_strategy": {
@@ -131,7 +131,7 @@
     "description": "Estrategia de chunking",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
-    "naming": "p01_chunk.md",
+    "naming": "p01_chunk_{{strategy}}.md",
     "pillar": "P01"
   },
   "cli_tool": {
@@ -186,7 +186,7 @@
     "description": "Regras de geracao constrained",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
-    "naming": "p03_constraint.md",
+    "naming": "p03_constraint_{{scope}}.md",
     "pillar": "P03"
   },
   "content_monetization": {
@@ -240,7 +240,7 @@
     "description": "ADR: contexto, decisao, consequencias",
     "llm_function": "REASON",
     "max_bytes": 4096,
-    "naming": "p08_adr.md",
+    "naming": "p08_adr_{{decision}}.md",
     "pillar": "P08"
   },
   "diagram": {
@@ -322,7 +322,7 @@
     "description": "Memoria sobre entidades",
     "llm_function": "INJECT",
     "max_bytes": 2048,
-    "naming": "p10_entity.md",
+    "naming": "p10_entity_{{name}}.md",
     "pillar": "P10"
   },
   "enum_def": {
@@ -331,7 +331,7 @@
     "description": "Enumeracao reutilizavel",
     "llm_function": "CONSTRAIN",
     "max_bytes": 1024,
-    "naming": "p06_enum.md",
+    "naming": "p06_enum_{{name}}.md",
     "pillar": "P06"
   },
   "env_config": {
@@ -349,7 +349,7 @@
     "description": "Colecao de test cases",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
-    "naming": "p07_dataset.md",
+    "naming": "p07_dataset_{{name}}.md",
     "pillar": "P07"
   },
   "fallback_chain": {
@@ -439,7 +439,7 @@
     "description": "Protocolo de transferencia entre agentes",
     "llm_function": "COLLABORATE",
     "max_bytes": 2048,
-    "naming": "p02_handoff.md",
+    "naming": "p02_handoff_{{protocol}}.md",
     "pillar": "P02"
   },
   "hook": {
@@ -538,7 +538,7 @@
     "description": "Config LLM-as-Judge",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p07_judge.md",
+    "naming": "p07_judge_{{name}}.md",
     "pillar": "P07"
   },
   "mcp_server": {
@@ -556,7 +556,7 @@
     "description": "Config de memoria de agente",
     "llm_function": "INJECT",
     "max_bytes": 2048,
-    "naming": "p02_memscope.md",
+    "naming": "p02_memscope_{{agent}}.md",
     "pillar": "P02"
   },
   "memory_summary": {
@@ -565,7 +565,7 @@
     "description": "Resumo comprimido de memorias",
     "llm_function": "INJECT",
     "max_bytes": 2048,
-    "naming": "p10_summary.md",
+    "naming": "p10_summary_{{scope}}.md",
     "pillar": "P10"
   },
   "memory_type": {
@@ -638,7 +638,7 @@
     "description": "Validacao pos-LLM",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p05_oval.md",
+    "naming": "p05_oval_{{target}}.md",
     "pillar": "P05"
   },
   "parser": {
@@ -701,7 +701,7 @@
     "description": "Snapshot versionado de prompt",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p03_pv.md",
+    "naming": "p03_pv_{{version}}.md",
     "pillar": "P03"
   },
   "quality_gate": {
@@ -728,7 +728,7 @@
     "description": "Rate limiting: RPM, TPM, budget",
     "llm_function": "CONSTRAIN",
     "max_bytes": 1024,
-    "naming": "p09_ratelimit.md",
+    "naming": "p09_ratelimit_{{scope}}.md",
     "pillar": "P09"
   },
   "reasoning_trace": {
@@ -747,7 +747,7 @@
     "description": "Teste adversarial",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p07_redteam.md",
+    "naming": "p07_redteam_{{target}}.md",
     "pillar": "P07"
   },
   "regression_check": {
@@ -756,7 +756,7 @@
     "description": "Comparacao contra baseline",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p07_regcheck.md",
+    "naming": "p07_regcheck_{{target}}.md",
     "pillar": "P07"
   },
   "research_pipeline": {
@@ -792,7 +792,7 @@
     "description": "Config de retrieval (top_k, hybrid, reranker)",
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
-    "naming": "p01_retr_cfg.md",
+    "naming": "p01_retr_cfg_{{store}}.md",
     "pillar": "P01"
   },
   "reward_signal": {
@@ -801,7 +801,7 @@
     "description": "Sinal continuo de qualidade",
     "llm_function": "GOVERN",
     "max_bytes": 2048,
-    "naming": "p11_reward.md",
+    "naming": "p11_reward_{{metric}}.md",
     "pillar": "P11"
   },
   "router": {
@@ -837,7 +837,7 @@
     "description": "Trigger temporal que inicia workflow",
     "llm_function": "GOVERN",
     "max_bytes": 1024,
-    "naming": "p12_sched.md",
+    "naming": "p12_sched_{{name}}.md",
     "pillar": "P12"
   },
   "scoring_rubric": {
@@ -864,7 +864,7 @@
     "description": "Gestao de secrets",
     "llm_function": "GOVERN",
     "max_bytes": 1024,
-    "naming": "p09_secret.md",
+    "naming": "p09_secret_{{scope}}.md",
     "pillar": "P09"
   },
   "session_backend": {
