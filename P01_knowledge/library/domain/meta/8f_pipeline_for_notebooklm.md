@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n04_knowledge
 domain: meta
-quality: null
+quality: 9.2
 tags: [8f, pipeline, architecture, core, meta, production, builders]
 tldr: "8 sequential functions (CONSTRAIN→COLLABORATE) that transform intent into validated, compiled, committed artifacts — the heartbeat of CEX"
 when_to_use: "Understanding how CEX builds artifacts; onboarding new contributors; debugging pipeline failures; teaching the system to others"
