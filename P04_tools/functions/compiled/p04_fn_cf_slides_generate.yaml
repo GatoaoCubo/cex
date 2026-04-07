@@ -31,6 +31,7 @@ error_types:
 - marp_not_installed
 - invalid_markdown
 - theme_not_found
+density_score: 0.99
 overview: Generates slide presentations from Marp-formatted Markdown. The LLM calls this when the Content Factory pipeline
   has structured slide content (from `p03_pt_cf_slide_deck` template) and needs it compiled into deliverable PPTX, PDF, or
   HTML format. Marp handles theming, pagination, and speaker notes.

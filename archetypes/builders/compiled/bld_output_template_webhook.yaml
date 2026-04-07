@@ -1,0 +1,16 @@
+kind: output_template
+id: bld_output_template_webhook
+pillar: P04
+llm_function: GENERATE
+purpose: Fill-in template for webhook artifact production
+version: 1.0.0
+created: 2026-03-28
+updated: 2026-03-28
+author: builder_agent
+tags:
+- output_template
+- webhook
+- P04
+- template
+quality: 8.9
+density_score: 1.0

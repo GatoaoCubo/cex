@@ -19,6 +19,7 @@ tags:
 - cex
 tldr: 'Modelo de negócio completo para Content Factory autônoma: análise de 10 competidores com preços reais, ICP priorizado,
   modelo híbrido OSS+SaaS, pricing R$197-2997/mês, mapa de posicionamento 2D, GTM para CEX como caso #1.'
+density_score: 1.0
 1_executive_summary: 'O Produto: Uma fábrica de conteúdo digital autônoma alimentada pelo sistema CEX. Recebe um brief ("quero
   um curso sobre X para devs") e entrega em minutos: script, slides, vídeo, narração, PDF, curso estruturado e landing page
   — tudo com a voz e identidade da marca do cliente. O Gap de Mercado: Existem ferramentas excelentes para CADA formato (Jasper

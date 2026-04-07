@@ -1,0 +1,138 @@
+id: schedule_instagram_content_plan
+kind: schedule
+title: Instagram Content Plan -- Weekly Strategy
+version: 0.1.0
+quality: null
+pillar: P03_prompts
+tags:
+- instagram
+- social-media
+- content-calendar
+- schedule
+created: 2026-04-07
+density_score: 1.0
+1_post_concepts: ''
+concept_1_carousel_5_things_you_didn_t_know_about_industry:
+- 'Format: Carousel (8 slides)'
+- 'Hook slide: Bold stat or contrarian statement'
+- 'Middle slides: One insight per slide, minimal text, branded colors'
+- 'CTA slide: "Save this for later" + follow prompt'
+- 'Goal: Educate + drive saves'
+concept_2_reel_behind_the_scenes_process_reveal:
+- 'Format: Reel (30-45s)'
+- 'Structure: Trending audio + fast cuts showing real workflow'
+- 'Text overlay: Problem -> process -> result'
+- 'CTA: "Follow for more [niche] tips"'
+- 'Goal: Humanize brand + drive follows'
+concept_3_static_client_win_testimonial_spotlight:
+- 'Format: Single image (branded quote card)'
+- 'Design: Client quote on brand-colored background, logo watermark'
+- 'Caption: Full story -- problem, solution, outcome'
+- 'CTA: Link in bio for case study'
+- 'Goal: Social proof + conversions'
+concept_4_carousel_step_by_step_tutorial:
+- 'Format: Carousel (6 slides)'
+- 'Slide 1: "How to [achieve result] in [N] steps"'
+- 'Slides 2-5: One step per slide with visual example'
+- 'Slide 6: Recap + CTA ("DM us [keyword] for the full guide")'
+- 'Goal: Value delivery + DM engagement'
+concept_5_reel_myth_vs_reality_in_industry: '- Format: Reel (15-20s)
+
+  - Structure: Split screen or text flip -- myth on one side, reality on the other
+
+  - Tone: Confident, slightly provocative
+
+  - CTA: "Drop a [emoji] if you believed the myth"
+
+  - Goal: Engagement (comments + shares)
+
+
+  ---'
+2_one_week_content_calendar: '| Day       | Format   | Concept                          | Caption Theme            | CTA Type       |
+  Best Post Time |
+
+  |-----------|----------|----------------------------------|--------------------------|----------------|----------------|
+
+  | Monday    | Carousel | 5 Things You Didn''t Know         | Educational, curiosity   | Save + Follow  | 11:00 AM       |
+
+  | Tuesday   | Reel     | Behind-the-Scenes Process        | Authentic, casual        | Follow         | 12:00 PM       |
+
+  | Wednesday | Static   | Client Win Testimonial           | Story-driven, proof      | Link in Bio    | 10:00 AM       |
+
+  | Thursday  | Carousel | Step-by-Step Tutorial            | Instructional, helpful   | DM Keyword     | 11:00 AM       |
+
+  | Friday    | Reel     | Myth vs. Reality                 | Bold, provocative        | Comment        | 1:00 PM        |
+
+  | Saturday  | Story    | Poll / Q&A (repurpose week)      | Interactive, fun         | Vote / Reply   | 10:00 AM       |
+
+  | Sunday    | Story    | Week recap + Monday teaser       | Reflective, anticipation | Reminder On    | 6:00 PM        |
+
+
+  Posting cadence: 5 feed posts + 2 story days = consistent without burnout.
+
+
+  ---'
+3_brand_voice_guide_instagram: ''
+tone_pillars: '| Pillar        | Description                                        | Example                                      |
+
+  |---------------|----------------------------------------------------|----------------------------------------------|
+
+  | Confident     | Speak with authority, not arrogance                | "Here''s what actually works."                |
+
+  | Conversational| Write like talking to a smart friend               | "Real talk -- most people get this wrong."   |
+
+  | Action-biased | Every post moves the audience toward something     | "Try this today. Report back."               |
+
+  | Genuine       | Show real work, real results, real people           | "This took us 3 tries. Here''s the final."   |'
+do_don_t: '| Do                                      | Don''t                                    |
+
+  |-----------------------------------------|------------------------------------------|
+
+  | Use short sentences in captions         | Write walls of text with no line breaks  |
+
+  | Lead with the hook in line 1            | Bury the value after "more..."           |
+
+  | Use "you" and "your" frequently         | Talk about the brand in third person     |
+
+  | Include one clear CTA per post          | Stack multiple CTAs in one caption       |
+
+  | Match caption tone to format            | Use formal tone on a casual reel         |'
+caption_structure_template: '[HOOK -- first line visible before "more"]
+
+
+  [VALUE -- 2-4 short paragraphs, line breaks between each]
+
+
+  [CTA -- one action, clear and specific]
+
+
+  [HASHTAGS -- in comment or after line breaks]
+
+
+  ---'
+4_hashtag_strategy: ''
+hashtag_tiers_use_15_20_per_post_mixed_from_all_tiers: '| Tier       | Volume        | Count per Post | Purpose                  |
+  Examples                          |
+
+  |------------|---------------|----------------|--------------------------|-----------------------------------|
+
+  | Broad      | 1M+ posts     | 2-3            | Discovery ceiling        | #marketing, #business, #growth   |
+
+  | Mid-range  | 100K-1M posts | 5-7            | Realistic ranking        | #contentstrategy, #brandtips     |
+
+  | Niche      | 10K-100K posts| 5-7            | High relevance, low noise| #instagramforbusiness, #reelstips|
+
+  | Branded    | Custom        | 1-2            | Community + tracking     | #YourBrandName, #YourBrandMethod |'
+hashtag_sets_rotate_weekly_to_avoid_shadowban_patterns: 'Set A -- Educational posts: `#contenttips #marketingstrategy #socialmediatips
+  #instagramgrowth #digitalmarketing #brandbuilding #contentcreator #growthhacks #marketingtips #businesstips #onlinebusiness
+  #smallbusinesstips #entrepreneurtips #instagramtips #learnmarketing` Set B -- Behind-the-scenes / Reels: `#behindthescenes
+  #dayinthelife #processreveal #creativeprocess #agencylife #workinprogress #bts #reelsinstagram #instagramreels #viralreels
+  #trendingaudio #reelstips #contentcreation #videomarketing #shortformvideo` Set C -- Testimonials / Results: `#clientresults
+  #testimonial #casestudy #resultsspeak #socialproof #beforeandafter #transformation #clientwin #successstory #realresults
+  #proofofwork #happyclients #growthmindset #businessgrowth #resultsdriven`'
+hashtag_rules:
+- Place hashtags in the first comment, not the caption body
+- Rotate sets -- never use the same 15 hashtags two posts in a row
+- Audit monthly -- remove any hashtag flagged or with declining reach
+- Track branded hashtag usage for community growth metrics
+- Research 3 new niche hashtags weekly to keep sets fresh

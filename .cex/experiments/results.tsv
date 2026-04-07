@@ -5487,3 +5487,214 @@ et
 2026-04-06 22:35:21	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_readme_comparison.md	0	8.7	0.96	skip	already at target
 2026-04-06 22:35:22	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\output_sdk_validation_knowledge_audit.md	0	8.9	1.00	skip	already at target
 2026-04-06 22:35:22	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\output_content_factory_landscape.md	0	8.9	1.00	skip	already at target
+2026-04-07 08:38:53	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\MISSION_flywheel_integration.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:38:54	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\MISSION_public_release_v1.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 08:38:54	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\MISSION_public_release_v1.md	2	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 08:38:54	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\MISSION_public_release_v1.md	3	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 08:38:56	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\MISSION_runtime_ux_sins.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-07 08:38:56	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\MISSION_runtime_ux_sins.md	2	8.8	1.00	discard	tldr flagged for manual review
+2026-04-07 08:38:57	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\MISSION_runtime_ux_sins.md	3	8.8	1.00	discard	tldr flagged for manual review
+2026-04-07 08:40:13	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\compression-config-builder\bld_quality_gate_compression_config.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:40:14	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\compression-config-builder\bld_system_prompt_compression_config.md	1	9.0	0.75	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 08:40:16	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\director-builder\bld_quality_gate_director.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:40:17	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\director-builder\bld_system_prompt_director.md	1	9.0	0.92	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:18	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\embedder-provider-builder\bld_instruction_embedder_provider.md	1	9.1	0.98	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:19	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\embedder-provider-builder\bld_quality_gate_embedder_provider.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:40:19	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\embedder-provider-builder\bld_system_prompt_embedder_provider.md	1	9.0	0.85	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:20	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\model-provider-builder\bld_instruction_model_provider.md	1	9.1	0.97	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:21	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\model-provider-builder\bld_quality_gate_model_provider.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:40:22	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\model-provider-builder\bld_system_prompt_model_provider.md	1	9.0	0.85	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:22	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\reasoning-trace-builder\bld_instruction_reasoning_trace.md	1	9.0	0.86	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:23	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\reasoning-trace-builder\bld_quality_gate_reasoning_trace.md	1	9.0	0.97	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:40:24	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\reasoning-trace-builder\bld_system_prompt_reasoning_trace.md	1	9.0	0.85	keep	tldr flagged for manual review
+2026-04-07 08:40:25	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\session-backend-builder\bld_quality_gate_session_backend.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:40:26	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\session-backend-builder\bld_system_prompt_session_backend.md	1	9.0	0.77	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 08:40:26	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\supabase-data-layer-builder\bld_memory_supabase_data_layer.md	1	9.0	0.95	keep	tldr flagged for manual review
+2026-04-07 08:40:27	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\supabase-data-layer-builder\bld_output_template_supabase_data_layer.md	1	8.9	1.00	keep	tldr flagged for manual review
+2026-04-07 08:40:27	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\supabase-data-layer-builder\bld_output_template_supabase_data_layer.md	2	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 08:40:28	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\supabase-data-layer-builder\bld_output_template_supabase_data_layer.md	3	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 08:40:29	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\supabase-data-layer-builder\bld_quality_gate_supabase_data_layer.md	1	9.0	1.00	keep	tldr flagged for manual review
+2026-04-07 08:40:29	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\supabase-data-layer-builder\bld_schema_supabase_data_layer.md	1	9.0	1.00	keep	tldr flagged for manual review
+2026-04-07 08:40:30	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\supabase-data-layer-builder\bld_system_prompt_supabase_data_layer.md	1	9.0	1.00	keep	tldr flagged for manual review
+2026-04-07 08:40:31	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\supabase-data-layer-builder\bld_tools_supabase_data_layer.md	1	9.0	1.00	keep	tldr flagged for manual review
+2026-04-07 08:40:32	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\system-prompt-builder\bld_instruction_system_prompt.md	1	9.0	0.96	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:32	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\system-prompt-builder\bld_quality_gate_system_prompt.md	1	9.0	0.95	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:40:33	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\system-prompt-builder\bld_system_prompt_system_prompt.md	1	8.9	0.76	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:34	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\system-prompt-builder\bld_system_prompt_system_prompt.md	2	8.9	0.76	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:34	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\system-prompt-builder\bld_system_prompt_system_prompt.md	3	8.9	0.76	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:35	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\toolkit-builder\bld_instruction_toolkit.md	1	9.0	0.90	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:36	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\toolkit-builder\bld_quality_gate_toolkit.md	1	9.0	0.97	keep	tldr flagged for manual review
+2026-04-07 08:40:36	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\toolkit-builder\bld_system_prompt_toolkit.md	1	9.0	0.84	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:37	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\trace-config-builder\bld_quality_gate_trace_config.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:40:38	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\trace-config-builder\bld_system_prompt_trace_config.md	1	9.0	0.76	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 08:40:39	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\type-def-builder\bld_instruction_type_def.md	1	9.0	0.96	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:39	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\type-def-builder\bld_quality_gate_type_def.md	1	9.0	0.95	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:40:40	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\type-def-builder\bld_system_prompt_type_def.md	1	8.9	0.78	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:41	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\type-def-builder\bld_system_prompt_type_def.md	2	8.9	0.78	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:41	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\type-def-builder\bld_system_prompt_type_def.md	3	8.9	0.78	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:42	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\unit-eval-builder\bld_instruction_unit_eval.md	1	9.0	0.93	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:42	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\unit-eval-builder\bld_quality_gate_unit_eval.md	1	9.0	0.93	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:40:43	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\unit-eval-builder\bld_system_prompt_unit_eval.md	1	8.9	0.76	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:44	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\unit-eval-builder\bld_system_prompt_unit_eval.md	2	8.9	0.76	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:44	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\unit-eval-builder\bld_system_prompt_unit_eval.md	3	8.9	0.76	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:45	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validation-schema-builder\bld_instruction_validation_schema.md	1	9.0	0.94	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:46	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validation-schema-builder\bld_quality_gate_validation_schema.md	1	9.0	0.95	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:40:46	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validation-schema-builder\bld_system_prompt_validation_schema.md	1	8.9	0.75	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:47	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validation-schema-builder\bld_system_prompt_validation_schema.md	2	8.9	0.75	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:47	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validation-schema-builder\bld_system_prompt_validation_schema.md	3	8.9	0.75	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:48	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validator-builder\bld_instruction_validator.md	1	9.0	0.92	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:49	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validator-builder\bld_quality_gate_validator.md	1	9.0	0.95	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:40:49	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validator-builder\bld_system_prompt_validator.md	1	8.9	0.77	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:50	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validator-builder\bld_system_prompt_validator.md	2	8.9	0.77	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:50	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\validator-builder\bld_system_prompt_validator.md	3	8.9	0.77	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:51	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\vectordb-backend-builder\bld_instruction_vectordb_backend.md	1	9.1	0.98	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:52	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\vectordb-backend-builder\bld_quality_gate_vectordb_backend.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:40:52	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\vectordb-backend-builder\bld_system_prompt_vectordb_backend.md	1	9.0	0.86	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:53	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\vision-tool-builder\bld_quality_gate_vision_tool.md	1	9.0	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:40:54	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\vision-tool-builder\bld_system_prompt_vision_tool.md	1	9.0	0.96	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:55	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_architecture_webhook.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:40:56	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_collaboration_webhook.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:40:56	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_config_webhook.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:40:57	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_examples_webhook.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 08:40:58	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_examples_webhook.md	2	8.9	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:58	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_examples_webhook.md	3	8.9	1.00	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:40:59	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_instruction_webhook.md	1	8.9	0.91	keep	added density_score: 0.91
+2026-04-07 08:40:59	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_instruction_webhook.md	2	8.9	0.91	discard	tldr flagged for manual review
+2026-04-07 08:40:59	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_instruction_webhook.md	3	8.9	0.91	discard	tldr flagged for manual review
+2026-04-07 08:41:00	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_knowledge_card_webhook.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:01	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_memory_webhook.md	1	9.0	0.98	keep	added density_score: 0.98
+2026-04-07 08:41:02	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_output_template_webhook.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:02	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_output_template_webhook.md	2	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 08:41:02	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_output_template_webhook.md	3	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 08:41:03	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_quality_gate_webhook.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:04	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_system_prompt_webhook.md	1	8.9	0.92	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:05	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_system_prompt_webhook.md	2	8.9	0.92	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:05	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_system_prompt_webhook.md	3	8.9	0.92	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:06	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\webhook-builder\bld_tools_webhook.md	1	9.0	0.99	keep	added density_score: 0.99
+2026-04-07 08:41:06	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\workflow-builder\bld_instruction_workflow.md	1	9.0	0.96	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:07	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\workflow-builder\bld_quality_gate_workflow.md	1	9.0	0.94	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:41:08	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\workflow-builder\bld_system_prompt_workflow.md	1	8.9	0.77	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:08	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\workflow-builder\bld_system_prompt_workflow.md	2	8.9	0.77	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:09	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\workflow-builder\bld_system_prompt_workflow.md	3	8.9	0.77	discard	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:10	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\workflow-primitive-builder\bld_instruction_workflow_primitive.md	1	9.0	0.88	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:11	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\workflow-primitive-builder\bld_quality_gate_workflow_primitive.md	1	9.0	0.98	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:41:11	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\workflow-primitive-builder\bld_system_prompt_workflow_primitive.md	1	9.0	0.85	keep	tldr flagged for manual review
+2026-04-07 08:41:12	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\_builder-builder\bld_quality_gate_builder.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:41:13	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\_builder-builder\bld_system_prompt_builder.md	1	9.0	0.77	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 08:41:14	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\_shared\skill_guided_decisions.md	1	9.1	0.97	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:15	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\_shared\skill_verification_protocol.md	1	8.8	0.86	keep	added density_score: 0.86
+2026-04-07 08:41:15	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\_shared\skill_verification_protocol.md	2	8.8	0.86	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 08:41:15	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\_shared\skill_verification_protocol.md	3	8.8	0.86	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 08:41:16	C:\Users\PC\Documents\GitHub\cex\N03_engineering\output\output_cf_templates_and_tools.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:17	C:\Users\PC\Documents\GitHub\cex\N05_operations\output\output_sdk_validation_audit.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:18	C:\Users\PC\Documents\GitHub\cex\N06_commercial\output\output_content_factory_business_model.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:19	C:\Users\PC\Documents\GitHub\cex\N06_commercial\output\output_sdk_validation_audit.md	1	9.2	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:19	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\ex_embedder_provider_openai_ada.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:20	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\ex_vectordb_backend_pinecone.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:21	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\meta\8f_pipeline_for_notebooklm.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:22	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\meta\kc_8f_pipeline.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:23	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\meta\kc_8f_stress_tests.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:24	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\meta\kc_cex_as_digital_asset.md	1	9.2	0.89	keep	tldr flagged for manual review
+2026-04-07 08:41:24	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\meta\kc_cex_orchestration_architecture.md	1	9.2	0.94	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:25	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_ayrshare_api.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:26	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_canva_connect_api.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:27	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_elevenlabs_tts.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:28	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_ffmpeg_patterns.md	1	9.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:28	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_marp_cli.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:29	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_notebooklm_integration.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:30	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_pandoc_pipeline.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:31	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_runway_api.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:32	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_typst_patterns.md	1	9.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:32	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\integration\kc_youtube_api.md	1	9.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:33	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_landing_page.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:34	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_landing_page.md	2	8.8	1.00	discard	tldr flagged for manual review
+2026-04-07 08:41:34	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_landing_page.md	3	8.8	1.00	discard	tldr flagged for manual review
+2026-04-07 08:41:35	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_tagline.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:35	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_tagline.md	2	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 08:41:35	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_tagline.md	3	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 08:41:36	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\specs\openclaude_patterns\PATTERNS_INDEX.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:37	C:\Users\PC\Documents\GitHub\cex\P02_model\examples\ex_model_provider_anthropic_claude.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:38	C:\Users\PC\Documents\GitHub\cex\P03_prompt\examples\ex_reasoning_trace_8f_pipeline.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:41:39	C:\Users\PC\Documents\GitHub\cex\P03_prompts\actions\content_factory\p03_ap_cf_generate_campaign.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:40	C:\Users\PC\Documents\GitHub\cex\P03_prompts\actions\content_factory\p03_ap_cf_generate_course.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:40	C:\Users\PC\Documents\GitHub\cex\P03_prompts\actions\content_factory\p03_ap_cf_generate_ebook.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:41:41	C:\Users\PC\Documents\GitHub\cex\P03_prompts\actions\content_factory\p03_ap_cf_generate_podcast.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:41:42	C:\Users\PC\Documents\GitHub\cex\P03_prompts\actions\content_factory\p03_ap_cf_generate_presentation.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:43	C:\Users\PC\Documents\GitHub\cex\P03_prompts\actions\content_factory\p03_ap_cf_generate_video.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:43	C:\Users\PC\Documents\GitHub\cex\P03_prompts\actions\content_factory\p03_ap_cf_publish.md	1	9.1	0.98	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:44	C:\Users\PC\Documents\GitHub\cex\P03_prompts\constraints\content_factory\p03_constraint_cf_brief.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:45	C:\Users\PC\Documents\GitHub\cex\P03_prompts\constraints\content_factory\p03_constraint_cf_course.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:46	C:\Users\PC\Documents\GitHub\cex\P03_prompts\constraints\content_factory\p03_constraint_cf_ebook.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:47	C:\Users\PC\Documents\GitHub\cex\P03_prompts\constraints\content_factory\p03_constraint_cf_podcast.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:47	C:\Users\PC\Documents\GitHub\cex\P03_prompts\constraints\content_factory\p03_constraint_cf_presentation.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:48	C:\Users\PC\Documents\GitHub\cex\P03_prompts\constraints\content_factory\p03_constraint_cf_video.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:41:49	C:\Users\PC\Documents\GitHub\cex\P03_prompts\templates\content_factory\p03_pt_cf_course_outline.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:50	C:\Users\PC\Documents\GitHub\cex\P03_prompts\templates\content_factory\p03_pt_cf_ebook_chapter.md	1	9.1	0.99	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:51	C:\Users\PC\Documents\GitHub\cex\P03_prompts\templates\content_factory\p03_pt_cf_lesson_script.md	1	9.1	0.98	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:51	C:\Users\PC\Documents\GitHub\cex\P03_prompts\templates\content_factory\p03_pt_cf_quiz.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:52	C:\Users\PC\Documents\GitHub\cex\P03_prompts\templates\content_factory\p03_pt_cf_slide_deck.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:53	C:\Users\PC\Documents\GitHub\cex\P03_prompts\templates\content_factory\p03_pt_cf_social_post.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:54	C:\Users\PC\Documents\GitHub\cex\P03_prompts\templates\content_factory\p03_pt_cf_video_script.md	1	9.1	0.99	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:54	C:\Users\PC\Documents\GitHub\cex\P04_tools\examples\ex_toolkit_browser_tools.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:41:55	C:\Users\PC\Documents\GitHub\cex\P04_tools\functions\content_factory\p04_fn_cf_canva_create.md	1	9.0	0.91	keep	added density_score: 0.91
+2026-04-07 08:41:56	C:\Users\PC\Documents\GitHub\cex\P04_tools\functions\content_factory\p04_fn_cf_canva_export.md	1	9.0	0.91	keep	added density_score: 0.91
+2026-04-07 08:41:57	C:\Users\PC\Documents\GitHub\cex\P04_tools\functions\content_factory\p04_fn_cf_ebook_compile.md	1	9.0	0.99	keep	added density_score: 0.99
+2026-04-07 08:41:57	C:\Users\PC\Documents\GitHub\cex\P04_tools\functions\content_factory\p04_fn_cf_elevenlabs_tts.md	1	9.0	0.94	keep	added density_score: 0.94
+2026-04-07 08:41:58	C:\Users\PC\Documents\GitHub\cex\P04_tools\functions\content_factory\p04_fn_cf_pdf_generate.md	1	9.0	0.98	keep	added density_score: 0.98
+2026-04-07 08:41:59	C:\Users\PC\Documents\GitHub\cex\P04_tools\functions\content_factory\p04_fn_cf_slides_generate.md	1	9.0	0.99	keep	added density_score: 0.99
+2026-04-07 08:42:00	C:\Users\PC\Documents\GitHub\cex\P04_tools\functions\content_factory\p04_fn_cf_video_assemble.md	1	9.0	0.92	keep	added density_score: 0.92
+2026-04-07 08:42:01	C:\Users\PC\Documents\GitHub\cex\P07_evals\examples\ex_trace_config_opentelemetry.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:02	C:\Users\PC\Documents\GitHub\cex\P10_memory\examples\ex_compression_config_token_reduction_50pct.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:02	C:\Users\PC\Documents\GitHub\cex\P10_memory\examples\ex_session_backend_redis_config.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:03	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\dags\content_factory\dag_cf_course.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:04	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\dags\content_factory\dag_cf_ebook.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:05	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\dags\content_factory\dag_cf_master.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:06	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\dags\content_factory\dag_cf_presentation.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:06	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\dags\content_factory\dag_cf_social.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:07	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\dags\content_factory\dag_cf_video.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:08	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\examples\ex_workflow_primitive_map_reduce.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:09	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_email_launch.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:09	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_promote.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:10	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_promote.md	2	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 08:42:10	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_promote.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 08:42:11	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_publish_hotmart.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:12	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_publish_social.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:12	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_publish_social.md	2	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 08:42:12	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_publish_social.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 08:42:13	C:\Users\PC\Documents\GitHub\cex\P12_orchestration\workflows\content_factory\p12_wf_cf_publish_youtube.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:14	C:\Users\PC\Documents\GitHub\cex\_docs\AGNO_vs_CEX_ANALYSIS.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:15	C:\Users\PC\Documents\GitHub\cex\_docs\ASSIMILATION_PLAN.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:16	C:\Users\PC\Documents\GitHub\cex\_docs\CROSS_REPO_ANALYSIS.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:17	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_autoresearch_assimilation.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:17	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_autoresearch_assimilation.md	2	8.8	1.00	discard	tldr flagged for manual review
+2026-04-07 08:42:18	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_autoresearch_assimilation.md	3	8.8	1.00	discard	tldr flagged for manual review
+2026-04-07 08:42:18	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_gold\docs_marketing.md	1	9.1	0.98	keep	tldr flagged for manual review
+2026-04-07 08:42:19	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_gold\instagram_marketing.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:20	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_gold\instagram_marketing.md	2	8.8	1.00	discard	tldr flagged for manual review
+2026-04-07 08:42:20	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_gold\instagram_marketing.md	3	8.8	1.00	discard	tldr flagged for manual review
+2026-04-07 08:42:21	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_gold\petshop_marketing.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:22	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_gold\quality_rubric.md	1	9.0	0.97	keep	added density_score: 0.97
+2026-04-07 08:42:22	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_output\instagram_content.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:23	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_output\petshop_landing.md	1	9.0	0.99	keep	added density_score: 0.99
+2026-04-07 08:42:24	C:\Users\PC\Documents\GitHub\cex\_docs\tests\e2e_output\project_docs.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:25	C:\Users\PC\Documents\GitHub\cex\_instances\_template\N04_knowledge\supabase_config.md	1	9.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:26	C:\Users\PC\Documents\GitHub\cex\_instances\_template\N06_commercial\content_monetization_config.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:26	C:\Users\PC\Documents\GitHub\cex\_instances\_template\N06_commercial\launch_checklist.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:27	C:\Users\PC\Documents\GitHub\cex\_instances\_template\N06_commercial\launch_checklist.md	2	8.9	1.00	discard	analyzed: fix_frontmatter: missing title
+2026-04-07 08:42:27	C:\Users\PC\Documents\GitHub\cex\_instances\_template\N06_commercial\launch_checklist.md	3	8.9	1.00	discard	analyzed: fix_frontmatter: missing title
+2026-04-07 08:42:28	C:\Users\PC\Documents\GitHub\cex\_instances\_template\N06_commercial\pricing_model.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 08:42:29	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\agent-builder\bld_quality_gate_agent.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:29	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\agent-builder\bld_system_prompt_agent.md	1	9.0	0.87	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:30	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\director-builder\bld_instruction_director.md	1	9.0	0.93	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:31	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\director-builder\bld_quality_gate_director.md	1	9.0	0.96	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:42:32	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\director-builder\bld_system_prompt_director.md	1	9.0	0.87	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:32	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\env-config-builder\bld_quality_gate_env_config.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:33	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\env-config-builder\bld_system_prompt_env_config.md	1	9.0	0.78	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 08:42:34	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\knowledge-card-builder\bld_quality_gate_knowledge_card.md	1	9.0	0.99	keep	polished formatting (whitespace cleanup)
+2026-04-07 08:42:35	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\knowledge-card-builder\bld_system_prompt_knowledge_card.md	1	9.0	0.79	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:36	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\quality-gate-builder\bld_instruction_quality_gate.md	1	9.1	0.93	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:36	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\quality-gate-builder\bld_quality_gate_quality_gate.md	1	9.0	0.98	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:42:37	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\quality-gate-builder\bld_system_prompt_quality_gate.md	1	9.0	0.86	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:38	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\signal-builder\bld_instruction_signal.md	1	9.0	0.92	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 08:42:38	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\signal-builder\bld_quality_gate_signal.md	1	9.0	0.96	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-07 08:42:39	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\signal-builder\bld_system_prompt_signal.md	1	9.0	0.85	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists

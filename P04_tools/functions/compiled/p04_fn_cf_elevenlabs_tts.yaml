@@ -32,6 +32,7 @@ error_types:
 - quota_exceeded
 - invalid_model
 - rate_limited
+density_score: 0.94
 overview: Generates natural-sounding narration audio from text using ElevenLabs API. The LLM calls this when the Content Factory
   pipeline needs voiceover for video scripts, lesson narrations, or podcast intros. Supports multilingual output (PT-BR primary)
   with fine-grained control over voice expressiveness.

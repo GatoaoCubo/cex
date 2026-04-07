@@ -31,6 +31,7 @@ error_types:
 - ffmpeg_not_installed
 - codec_error
 - incompatible_resolution
+density_score: 0.92
 overview: Assembles a final video from component assets using FFmpeg. The LLM calls this as the final step in the Content
   Factory video pipeline — after script generation, TTS narration, and clip creation. Concatenates video clips, mixes narration
   with optional background music, and burns in subtitles.

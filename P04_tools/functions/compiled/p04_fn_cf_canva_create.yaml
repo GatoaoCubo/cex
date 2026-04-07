@@ -30,6 +30,7 @@ error_types:
 - quota_exceeded
 - invalid_dimensions
 - auth_expired
+density_score: 0.91
 overview: Creates a new design in Canva via the Connect API. The LLM calls this when the Content Factory pipeline needs a
   visual asset — presentation slides, social media graphics, documents, or video canvases. Supports brand templates for consistent
   styling and autofill for dynamic content injection.

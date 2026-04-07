@@ -33,6 +33,7 @@ error_types:
 - invalid_metadata
 - cover_not_found
 - compilation_error
+density_score: 0.99
 overview: Compiles multiple Markdown chapter files into a single ebook using Pandoc. The LLM calls this as the final step
   in the Content Factory ebook pipeline — after all chapters have been generated via `p03_pt_cf_ebook_chapter`. Handles cover
   art, table of contents, metadata, and styling.

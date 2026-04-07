@@ -31,6 +31,7 @@ error_types:
 - template_not_found
 - engine_not_installed
 - compilation_error
+density_score: 0.98
 overview: 'Generates a styled PDF from Markdown, HTML, or Typst source files. The LLM calls this when the Content Factory
   pipeline needs printable output — ebook chapters, worksheets, handouts, or reports. Supports three engines with different
   strengths: Typst (fast, modern), Pandoc (flexible, LaTeX), WeasyPrint (CSS-styled HTML).'

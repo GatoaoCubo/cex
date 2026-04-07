@@ -33,6 +33,7 @@ error_types:
 - export_in_progress
 - unsupported_format
 - auth_expired
+density_score: 0.91
 overview: Exports a Canva design to a downloadable file format. The LLM calls this after creating or editing a design to produce
   deliverable output — PDF handouts, PPTX presentations, PNG social graphics, or MP4 videos. Export is asynchronous; poll
   status until completed.

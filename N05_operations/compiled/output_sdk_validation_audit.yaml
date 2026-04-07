@@ -7,6 +7,7 @@ nucleus: N05
 mission: SDK_VALIDATION
 created: 2026-04-06
 quality: null
+density_score: 1.0
 t1_dependencies_check_pass: 'All dependencies resolve. Only 2 core deps required:
 
   - `pyyaml>=6.0` — installed (6.0.3)

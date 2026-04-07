@@ -1,0 +1,118 @@
+id: p03_ins_workflow_primitive_builder
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: instruction-builder
+title: Workflow Primitive Builder Instructions
+target: workflow-primitive-builder agent
+phases_count: 3
+prerequisites:
+- Primitive type is known (step, condition, loop, parallel, router, gate, or merge)
+- Input data types are identified
+- Output data types are identified
+- Guard clauses are defined (max_iter for loops, threshold for gates)
+validation_method: checklist
+domain: workflow_primitive
+quality: null
+tags:
+- instruction
+- workflow_primitive
+- orchestration
+- P12
+idempotent: true
+atomic: true
+rollback: Discard primitive and regenerate — primitives are stateless definitions
+dependencies: []
+logging: true
+tldr: Produce a YAML workflow primitive with typed inputs, typed outputs, composition constraints, and guard clauses — under
+  4096 bytes, one type per file, no full workflow graphs included.
+density_score: 0.86
+context: 'The workflow-primitive-builder produces `workflow_primitive` artifacts — YAML definitions of
+
+  atomic orchestration building blocks. A workflow primitive is the smallest reusable unit of
+
+  a workflow: it takes typed inputs, performs one operation, and produces typed outputs. Seven
+
+  types exist: step (single action), condition (branch), loop (repeat), parallel (fan-out),
+
+  router (dynamic dispatch), gate (sync barrier), and merge (fan-in). Primitives compose
+
+  left-to-right into full workflows.
+
+  Input contract:
+
+  - `{{type}}`: one of step, condition, loop, parallel, router, gate, merge
+
+  - `{{name}}`: descriptive name for this primitive instance (e.g. `research_step`, `quality_gate`)
+
+  - `{{inputs}}`: list of typed input fields the primitive consumes
+
+  - `{{outputs}}`: list of typed output fields the primitive produces
+
+  - `{{guards}}`: max_iter (loops), threshold (gates), timeout_s (parallel)
+
+  Output contract: A single `workflow_primitive` YAML file named `p12_wp_{{type}}.yaml`,
+
+  under 4096 bytes, with type, inputs, outputs, and guard clauses. No full workflow graphs,
+
+  no DAG edges, no signal payloads.
+
+  Boundaries:
+
+  - A workflow primitive is atomic — one type, one operation, one file.
+
+  - Full multi-step workflows belong in a workflow artifact.
+
+  - DAG edge definitions belong in a DAG artifact.
+
+  - Inter-agent signals belong in a signal artifact.
+
+  - Primitives must be composable: outputs of one primitive type-match inputs of the next.'
+phases: ''
+phase_1_classify: "Primary action: Confirm this is an atomic workflow block and determine the required\nstructure based on\
+  \ primitive type.\nINPUT: type, name, inputs, outputs, guards\n1. Confirm this is an atomic building block, not a full workflow\
+  \ or DAG:\n   Is it a single operation with typed I/O?               -> workflow_primitive\n   Is it multiple operations\
+  \ connected by edges?          -> NOT a workflow_primitive\n   Is it an inter-agent status notification?              ->\
+  \ NOT a workflow_primitive\n2. Validate type:\n   Must be one of: step, condition, loop, parallel, router, gate, merge\n\
+  \   Each type has specific required guards:\n     step:      none (simplest primitive)\n     condition: requires condition_expr\
+  \ (boolean expression)\n     loop:      requires max_iter (integer > 0)\n     parallel:  requires merge_ref (reference to\
+  \ corresponding merge primitive)\n     router:    requires routes (list of {match, target} pairs)\n     gate:      requires\
+  \ threshold (float 0.0-1.0 or integer count)\n     merge:     requires strategy (all, any, first, majority)\n3. Validate\
+  \ inputs:\n   Each input must have: name (string), type (string), required (boolean)\n   At least 1 input required (primitives\
+  \ do not create data from nothing)\n4. Validate outputs:\n   Each output must have: name (string), type (string)\n   At\
+  \ least 1 output required (primitives do not consume data without producing)\n5. Validate guards (type-specific):\n   loop:\
+  \ max_iter must be integer > 0 and <= 100\n   gate: threshold must be numeric (0.0-1.0 for ratio, integer for count)\n \
+  \  parallel: timeout_s must be integer > 0\nOUTPUT: validated_type, validated_inputs, validated_outputs, validated_guards\n\
+  Verification: `validated_type` is in the 7-value enum. Inputs and outputs are typed.\nType-specific guards are present and\
+  \ valid."
+phase_2_compose: "Primary action: Assemble the YAML primitive with typed I/O, guards, and\ncomposition metadata.\nINPUT: validated_type,\
+  \ name, validated_inputs, validated_outputs, validated_guards\n1. Set filename: p12_wp_{{type}}.yaml (or p12_wp_{{type}}_{{name}}.yaml\
+  \ if named)\n2. Assemble frontmatter:\n   id: p12_wp_{{type}}\n   kind: workflow_primitive\n   pillar: P12\n   type: {{type}}\n\
+  \   quality: null\n3. Compose inputs list:\n   For each input:\n     name: field name (snake_case)\n     type: data type\
+  \ (string, integer, float, boolean, list, object, artifact_ref)\n     required: true | false\n     description: one-line\
+  \ purpose\n4. Compose outputs list:\n   For each output:\n     name: field name (snake_case)\n     type: data type\n   \
+  \  description: one-line purpose\n5. Add type-specific guards:\n   step: (no guards)\n   condition:\n     condition_expr:\
+  \ boolean expression to evaluate\n     true_branch: reference to next primitive when true\n     false_branch: reference\
+  \ to next primitive when false\n   loop:\n     max_iter: integer (1-100)\n     break_condition: optional early exit expression\n\
+  \     feedback_input: field name that receives loop iteration feedback\n   parallel:\n     branches: list of primitive references\
+  \ to execute concurrently\n     timeout_s: max seconds before killing stalled branches\n     merge_ref: reference to the\
+  \ merge primitive that collects results\n   router:\n     routes: list of {match: pattern, target: primitive_ref}\n    \
+  \ default_route: fallback primitive_ref when no match\n   gate:\n     threshold: ratio (0.0-1.0) or count (integer) required\
+  \ to pass\n     wait_for: list of upstream primitive refs\n     timeout_s: max seconds to wait before failing\n   merge:\n\
+  \     strategy: all | any | first | majority\n     source_refs: list of upstream parallel/gate refs\n6. Add composition\
+  \ metadata:\n   composable_after: list of primitive types that can precede this\n   composable_before: list of primitive\
+  \ types that can follow this\n7. Size check:\n   Estimate YAML byte count\n   If > 4096 bytes: compress descriptions\n \
+  \  until size <= 4096 bytes\nOUTPUT: workflow_primitive YAML content (assembled, not yet validated)\nVerification: all required\
+  \ fields present. Type-specific guards present. Inputs\nand outputs are typed. Size <= 4096 bytes."
+phase_3_validate: "Primary action: Run all quality gates against the assembled YAML and output the\nfinal file only if all\
+  \ HARD gates pass.\nINPUT: workflow_primitive YAML content\n1. HARD quality gates (all must pass):\n   HARD_1: id matches\
+  \ pattern ^p12_wp_[a-z][a-z0-9_]+$\n   HARD_2: kind == \"workflow_primitive\"\n   HARD_3: type is one of: step, condition,\
+  \ loop, parallel, router, gate, merge\n   HARD_4: inputs is non-empty list with typed entries\n   HARD_5: outputs is non-empty\
+  \ list with typed entries\n   HARD_6: loop type has max_iter > 0 and <= 100\n   HARD_7: parallel type has merge_ref pointing\
+  \ to a merge primitive\n   HARD_8: gate type has numeric threshold\n   HARD_9: quality == null\n   HARD_10: YAML parses\
+  \ without syntax errors\n   HARD_11: total YAML size <= 4096 bytes\n   HARD_12: no full workflow graph or DAG in the primitive\n\
+  2. Scope check:\n   Verify primitive is atomic: one type, one operation\n   Verify primitive contains no signal payloads\
+  \ or handoff instructions\n   Verify composition metadata is consistent with type\n3. If all HARD gates pass: emit file\n\
+  \   If any HARD gate fails: return to Phase 2 with failure reasons\nOUTPUT: validated workflow_primitive YAML file"

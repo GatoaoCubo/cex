@@ -59,8 +59,8 @@ namespace_strategy: '| Key Pattern | Content | TTL |
 operations: "import redis, json\n\nr = redis.Redis.from_url(\"redis://localhost:6379/0\")\n\n# Save session state\nstate =\
   \ {\"turns\": [...], \"context\": {...}, \"decisions\": {...}}\nr.setex(f\"cex:session:n03:{sid}\", 86400, json.dumps(state))\n\
   \n# Load session state\nraw = r.get(f\"cex:session:n03:{sid}\")\nstate = json.loads(raw) if raw else {}\n\n# Signal completion\n\
-  r.setex(f\"cex:signal:MISSION:n03\", 3600, \"complete\")\n\n# Check all nucleus signals\nsignals = {k.decode(): r.get(k).decode()\
-  \ \n           for k in r.scan_iter(\"cex:signal:MISSION:*\")}"
+  r.setex(f\"cex:signal:MISSION:n03\", 3600, \"complete\")\n\n# Check all nucleus signals\nsignals = {k.decode(): r.get(k).decode()\n\
+  \           for k in r.scan_iter(\"cex:signal:MISSION:*\")}"
 upgrade_path: '| Backend | Concurrency | Persistence | Latency | Complexity |
 
   |---------|------------|-------------|---------|-----------|

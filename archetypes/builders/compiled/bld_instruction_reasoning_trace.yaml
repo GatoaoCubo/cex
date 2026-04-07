@@ -1,0 +1,111 @@
+id: p03_ins_reasoning_trace_builder
+kind: instruction
+pillar: P03
+version: 1.0.0
+created: 2026-04-06
+updated: 2026-04-06
+author: instruction-builder
+title: Reasoning Trace Builder Instructions
+target: reasoning-trace-builder agent
+phases_count: 3
+prerequisites:
+- Agent name or agent_node identifier is known
+- Intent or decision question is defined
+- Evidence sources are available (metrics, prior results, file references)
+- Timestamp or timing data is available
+validation_method: checklist
+domain: reasoning_trace
+quality: null
+tags:
+- instruction
+- reasoning_trace
+- cognition
+- P03
+idempotent: true
+atomic: true
+rollback: Discard trace and regenerate — traces are append-only records
+dependencies: []
+logging: true
+tldr: Produce a structured YAML reasoning trace capturing step-evidence-confidence chains, rejected alternatives, and conclusion
+  — under 8192 bytes, human-auditable, no execution instructions included.
+density_score: 0.86
+context: 'The reasoning-trace-builder produces `reasoning_trace` artifacts — structured YAML records
+
+  capturing the complete chain-of-thought behind an agent''s decision. A reasoning trace answers
+
+  exactly: what was considered, what evidence existed, how confident the agent was at each step,
+
+  what alternatives were rejected and why, and what conclusion was reached. Traces are consumed
+
+  by human auditors and feedback loops; they are not instructions, system prompts, or workflows.
+
+  Input contract:
+
+  - `{{agent}}`: name of the agent whose reasoning is being traced (e.g. `research-agent`, `build-sat`)
+
+  - `{{intent}}`: the decision question or goal being reasoned about (e.g. `select embedding model`)
+
+  - `{{evidence_sources}}`: available data, metrics, prior results, or file references
+
+  - `{{timestamp}}`: ISO 8601 datetime of the reasoning session
+
+  - `{{alternatives}}`: optional list of paths considered but not chosen
+
+  Output contract: A single `reasoning_trace` YAML file named `p03_rt_{{agent}}_{{timestamp}}.yaml`,
+
+  under 8192 bytes, with required fields and step-evidence-confidence chains. No execution
+
+  instructions, no tool calls, no workflow logic.
+
+  Boundaries:
+
+  - A reasoning trace is a decision record — one decision chain, one trace, one file.
+
+  - Execution instructions belong in an instruction artifact.
+
+  - Agent identity and persona belong in a system_prompt artifact.
+
+  - Multi-step workflows and DAGs are not reasoning traces.
+
+  - Evidence must be concrete and referenceable, not vague assertions.'
+phases: ''
+phase_1_classify: "Primary action: Confirm this is a decision record and determine the minimum required\ntrace structure before\
+  \ writing any YAML.\nINPUT: agent, intent, evidence_sources, timestamp, alternatives\n1. Confirm this is a decision record,\
+  \ not an instruction or workflow:\n   Is it recording WHY a decision was made?                    -> reasoning_trace\n \
+  \  Is it telling an agent WHAT to do next?                     -> NOT a reasoning_trace\n   Is it defining HOW steps connect?\
+  \                           -> NOT a reasoning_trace\n2. Validate agent identifier:\n   Must be non-empty string, lowercase\
+  \ slug preferred\n   Must match a known agent or agent_node in the system\n3. Validate intent:\n   Must be a clear decision\
+  \ question or goal statement\n   Must be specific enough to evaluate alternatives against\n   Examples: \"select embedding\
+  \ model for P01 retriever\", \"choose chunking strategy\"\n4. Inventory evidence sources:\n   List all available data: metrics,\
+  \ benchmarks, prior results, file paths\n   Flag any step that lacks evidence — mark as \"assertion\" not \"reasoned\"\n\
+  \   Require minimum 1 evidence source per step\n5. Identify alternatives:\n   List all paths considered (chosen + rejected)\n\
+  \   For each rejected alternative, require a rejection reason\n   If no alternatives exist, flag the trace as \"single-path\"\
+  \ (lower audit value)\nOUTPUT: validated_agent, validated_intent, evidence_inventory, alternatives_list\nVerification: `validated_agent`\
+  \ is non-empty slug. `validated_intent` is specific.\nEach step has at least one evidence source. Alternatives list is populated."
+phase_2_compose: "Primary action: Assemble the structured YAML trace with step-evidence-confidence\nchains, rejected alternatives,\
+  \ and conclusion.\nINPUT: validated_agent, validated_intent, evidence_inventory, alternatives_list, timestamp\n1. Set filename:\
+  \ p03_rt_{{agent}}_{{timestamp}}.yaml\n2. Assemble frontmatter:\n   id: p03_rt_{{agent}}_{{timestamp}}\n   kind: reasoning_trace\n\
+  \   pillar: P03\n   agent: {{agent}}\n   intent: {{intent}}\n   timestamp: {{timestamp}}\n   quality: null\n3. Compose step\
+  \ chain (ordered list):\n   For each reasoning step:\n     step: sequential integer (1, 2, 3...)\n     thought: what the\
+  \ agent considered at this point\n     evidence: concrete data supporting or refuting the thought\n     confidence: 0.0-1.0\
+  \ score for this specific step\n   Rules:\n     - Steps must be in chronological/logical order\n     - Each step must have\
+  \ non-empty thought AND evidence\n     - Confidence must be calibrated: 0.0-0.3 (low), 0.3-0.7 (medium), 0.7-1.0 (high)\n\
+  \     - A step with no evidence gets confidence capped at 0.3\n4. Compose alternatives_rejected:\n   For each rejected path:\n\
+  \     alternative: description of the rejected option\n     reason: why it was rejected (evidence-based)\n   At least 1\
+  \ rejected alternative required for a complete trace\n5. Compose conclusion:\n   One-paragraph summary of the final decision\n\
+  \   Must reference the strongest evidence from the step chain\n6. Compute overall confidence:\n   Geometric mean of all\
+  \ step confidences (penalizes weak links)\n   Round to 2 decimal places\n7. Add duration_ms if timing data available\n8.\
+  \ Size check:\n   Estimate YAML byte count\n   If > 8192 bytes: compress thought/evidence text (keep meaning, reduce words)\n\
+  \   until size <= 8192 bytes\nOUTPUT: reasoning_trace YAML content (assembled, not yet validated)\nVerification: all required\
+  \ fields present. Step chain is ordered. Each step has\nthought + evidence + confidence. At least 1 rejected alternative.\
+  \ Size <= 8192 bytes."
+phase_3_validate: "Primary action: Run all quality gates against the assembled YAML and output the\nfinal file only if all\
+  \ HARD gates pass.\nINPUT: reasoning_trace YAML content\n1. HARD quality gates (all must pass):\n   HARD_1: id matches pattern\
+  \ ^p03_rt_[a-z][a-z0-9_]+_\\d{8}T\\d{6}$\n   HARD_2: kind == \"reasoning_trace\"\n   HARD_3: agent is non-empty string\n\
+  \   HARD_4: intent is non-empty string\n   HARD_5: steps is non-empty list with >= 2 entries\n   HARD_6: each step has thought,\
+  \ evidence, confidence fields\n   HARD_7: confidence values are in range 0.0-1.0\n   HARD_8: conclusion is non-empty string\n\
+  \   HARD_9: alternatives_rejected is non-empty list with >= 1 entry\n   HARD_10: quality == null\n   HARD_11: timestamp\
+  \ is valid ISO 8601\n   HARD_12: total YAML size <= 8192 bytes\n   HARD_13: YAML parses without syntax errors\n2. Scope\
+  \ check:\n   Verify trace contains NO execution instructions\n   Verify trace contains NO workflow step definitions\n  \
+  \ Verify trace contains NO tool call definitions\n3. If all HARD gates pass: emit file\n   If any HARD gate fails: return\
+  \ to Phase 2 with failure reasons\nOUTPUT: validated reasoning_trace YAML file"
