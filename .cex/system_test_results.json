@@ -1,75 +1,75 @@
 {
-  "timestamp": "2026-04-06T14:08:48.760671",
-  "pass": 50,
+  "timestamp": "2026-04-07T11:03:38.246372",
+  "pass": 56,
   "fail": 2,
-  "skip": 1,
-  "total": 53,
-  "elapsed_s": 20.5,
+  "skip": 0,
+  "total": 58,
+  "elapsed_s": 97.6,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "54437B"
+      "detail": "53046B"
     },
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "51909B"
+      "detail": "60734B"
     },
     {
       "name": "tool:cex_intent.py",
       "status": "PASS",
-      "detail": "19974B"
+      "detail": "19418B"
     },
     {
       "name": "tool:cex_compile.py",
       "status": "PASS",
-      "detail": "18398B"
+      "detail": "18416B"
     },
     {
       "name": "tool:cex_doctor.py",
       "status": "PASS",
-      "detail": "15669B"
+      "detail": "15691B"
     },
     {
       "name": "tool:cex_index.py",
       "status": "PASS",
-      "detail": "11121B"
+      "detail": "11143B"
     },
     {
       "name": "tool:cex_feedback.py",
       "status": "PASS",
-      "detail": "14162B"
+      "detail": "14186B"
     },
     {
       "name": "tool:cex_hooks.py",
       "status": "PASS",
-      "detail": "15530B"
+      "detail": "22032B"
     },
     {
       "name": "tool:cex_score.py",
       "status": "PASS",
-      "detail": "25653B"
+      "detail": "25654B"
     },
     {
       "name": "tool:cex_materialize.py",
       "status": "PASS",
-      "detail": "5903B"
+      "detail": "5927B"
     },
     {
       "name": "tool:signal_writer.py",
       "status": "PASS",
-      "detail": "1736B"
+      "detail": "1717B"
     },
     {
       "name": "doctor:pass_count",
       "status": "PASS",
-      "detail": "108/98+ PASS"
+      "detail": "119/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
-      "status": "FAIL",
-      "detail": "1 WARN"
+      "status": "PASS",
+      "detail": "0 WARN"
     },
     {
       "name": "doctor:zero_fail",
@@ -79,12 +79,12 @@
     {
       "name": "compile:all",
       "status": "PASS",
-      "detail": "367/367"
+      "detail": "376/376"
     },
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "110 builders"
+      "detail": "120 builders"
     },
     {
       "name": "builders:13_isos",
@@ -94,32 +94,32 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "40 artifacts (min 11)"
+      "detail": "43 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "48 artifacts (min 10)"
+      "detail": "51 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "44 artifacts (min 34)"
+      "detail": "46 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "42 artifacts (min 12)"
+      "detail": "44 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "33 artifacts (min 9)"
+      "detail": "34 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "46 artifacts (min 9)"
+      "detail": "47 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
@@ -134,12 +134,12 @@
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "280 artifacts with quality score"
+      "detail": "292 artifacts with quality score"
     },
     {
       "name": "subagents:count",
       "status": "PASS",
-      "detail": "112 sub-agents"
+      "detail": "121 sub-agents"
     },
     {
       "name": "subagents:materializer",
@@ -252,9 +252,34 @@
       "detail": ""
     },
     {
-      "name": "runner:execute",
-      "status": "SKIP",
-      "detail": "skipped in --quick mode"
+      "name": "runner:execute_pass",
+      "status": "FAIL",
+      "detail": "g plan...\nERRO: Nenhum LLM provider disponivel.\n  CLI-Claude: exit 1: \n  SDK-Ollama: pip install ollama\n  HTTP-Ollama: HTTP Error 404: Not Found\n  API: Paid APIs disabled (set CEX_USE_API=1 to allow)\n"
+    },
+    {
+      "name": "runner:learning_record",
+      "status": "PASS",
+      "detail": "22 records"
+    },
+    {
+      "name": "e2e:script_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "e2e:config_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "e2e:scenarios_pass",
+      "status": "FAIL",
+      "detail": "0/3 scenarios passed"
+    },
+    {
+      "name": "e2e:report_written",
+      "status": "PASS",
+      "detail": ""
     },
     {
       "name": "kc:count",
@@ -263,13 +288,13 @@
     },
     {
       "name": "git:clean",
-      "status": "FAIL",
-      "detail": "7 dirty files"
+      "status": "PASS",
+      "detail": "1 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "30a6639 [N04] Content Factory internal audit v2 â€” 74 asset"
+      "detail": "0eeddc95 [N04] grid test: domain health validated â€” 287 KC"
     }
   ]
 }
