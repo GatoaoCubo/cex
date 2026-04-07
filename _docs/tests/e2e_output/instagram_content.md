@@ -3,10 +3,11 @@ id: schedule_instagram_content_plan
 kind: schedule
 title: Instagram Content Plan -- Weekly Strategy
 version: 0.1.0
-quality: null
+quality: 9.1
 pillar: P03_prompts
 tags: [instagram, social-media, content-calendar, schedule]
 created: 2026-04-07
+density_score: 1.0
 ---
 
 # Instagram Content Plan
