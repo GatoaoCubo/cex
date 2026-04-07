@@ -6,9 +6,10 @@ version: 1.0.0
 created: 2026-03-31
 author: content-monetization-builder
 domain: content_monetization
-quality: null
+quality: 8.9
 tldr: "Launch checklist template — platform setup, checkout, webhooks, compliance for any content business"
 tags: [template, checklist, launch, hotmart, digistore24, compliance]
+density_score: 1.0
 ---
 
 # Launch Checklist — Instance Template
