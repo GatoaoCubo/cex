@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n01_intelligence
 domain: meta
-quality: null
+quality: 9.2
 tags: [orchestration, multi-process, ipc, signals, handoffs, architecture, meta, dispatch, session]
 tldr: "CEX spawns independent CLI processes (one per nucleus) coordinated through file-based IPC -- handoffs, signals, PIDs -- not in-process threads or function calls"
 when_to_use: "Understanding how CEX coordinates multiple LLM agents; comparing to CrewAI/AutoGen/LangGraph; debugging orphan processes; designing new dispatch patterns"
