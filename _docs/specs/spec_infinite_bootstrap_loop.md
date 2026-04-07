@@ -3,9 +3,10 @@ id: spec_infinite_bootstrap_loop
 kind: context_doc
 title: "CEX Peak Architecture: Infinite Bootstrap Loop"
 version: 1.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 purpose: Full spec for autonomous infinite self-building loop with max throughput
+density_score: 1.0
 ---
 
 # CEX Peak Architecture: Infinite Bootstrap Loop
