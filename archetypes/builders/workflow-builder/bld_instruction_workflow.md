@@ -16,7 +16,7 @@ prerequisites:
   - "Completion signals are specified or can be derived from step outputs"
 validation_method: checklist
 domain: workflow
-quality: null
+quality: 9.0
 tags: [instruction, workflow, orchestration, multi-step, P12]
 idempotent: true
 atomic: false
