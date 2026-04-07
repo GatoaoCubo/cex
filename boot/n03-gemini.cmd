@@ -14,4 +14,4 @@ set GEMINI_API_KEY=
 set GOOGLE_AI_API_KEY=
 
 :: ALWAYS interactive -- task comes from handoff file, never CLI args
-gemini -m gemini-2.5-pro --yolo "Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE."
+gemini -m gemini-2.5-pro --yolo "Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. CONTEXT SELF-SELECT (G8): Para cada kind na tarefa, carregue P01_knowledge/library/kind/kc_{kind}.md e archetypes/builders/{kind}-builder/ ANTES de produzir. Para discovery: python _tools/cex_handoff_composer.py --task ... --nucleus n03 --discover-only. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE."

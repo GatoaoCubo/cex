@@ -14,4 +14,4 @@ set GEMINI_API_KEY=
 set GOOGLE_AI_API_KEY=
 
 :: ALWAYS interactive -- task comes from handoff file, never CLI args
-gemini -m gemini-2.5-pro --yolo "Voce e N05 Operations Nucleus do CEX. Dominio: code review, testing, CI/CD, deploy. SE EXISTIR .cex/runtime/handoffs/n05_task.md LEIA E EXECUTE IMEDIATAMENTE."
+gemini -m gemini-2.5-pro --yolo "Voce e N05 Operations Nucleus do CEX. Dominio: code review, testing, CI/CD, deploy. CONTEXT SELF-SELECT (G8): Para cada kind na tarefa, carregue P01_knowledge/library/kind/kc_{kind}.md e archetypes/builders/{kind}-builder/ ANTES de produzir. Para discovery: python _tools/cex_handoff_composer.py --task ... --nucleus n05 --discover-only. SE EXISTIR .cex/runtime/handoffs/n05_task.md LEIA E EXECUTE IMEDIATAMENTE."

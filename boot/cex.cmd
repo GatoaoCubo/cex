@@ -8,4 +8,4 @@ set CEX_NUCLEUS=N07
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-pi --model anthropic/claude-opus-4-6 --thinking xhigh
+pi --model anthropic/claude-opus-4-6 --thinking xhigh --append-system-prompt ".cex/config/context_self_select.md"
