@@ -15,7 +15,7 @@ batch_size: 100
 normalize: true
 api_key_env: OPENAI_API_KEY
 domain: embedder_provider
-quality: null
+quality: 9.1
 tags: [embedder-provider, openai, text-embedding-3, vector, rag]
 tldr: "OpenAI text-embedding-3-small config — 1536 dims (reducible to 256), $0.02/1M tokens, 8191 max input, L2-normalized."
 when_to_use: "Default cloud embedder for CEX RAG when OpenAI API is available and cost is acceptable"
