@@ -1,0 +1,40 @@
+# .cex/instance/instance_config.yaml
+# Instance-specific operational configuration (separate from brand identity)
+# Generated from kc_instance_variable_registry.md (N01, 2026-04-07)
+#
+# brand_config.yaml  = WHO you are (identity, voice, visual)
+# instance_config.yaml = WHAT you do (CRM, dashboards, infra, research)
+#
+# Run: python _tools/brand_inject.py --check-instance
+# Vars injected alongside BRAND_* by brand_inject.py
+
+crm_pipeline:
+  INDUSTRY: "{{INDUSTRY}}"                       # e.g., "pet", "food", "beauty"
+  TARGET_COUNT: "{{TARGET_COUNT}}"               # e.g., 500
+  BATCH_SOURCES: "{{BATCH_SOURCES}}"             # ["directories", "google_maps", "social", "marketplaces", "reputation", "cnae"]
+  DIRECTORY_SOURCES: "{{DIRECTORY_SOURCES}}"     # ["guialocal", "telelistas", "ifood"]
+  SEARCH_QUERIES: "{{SEARCH_QUERIES}}"           # ["pet shop {cidade}", "loja pet {cidade}"]
+  CATEGORIES: "{{CATEGORIES}}"                   # ["pet_shop", "clinica_vet", "banho_tosa"]
+  CITIES: "{{CITIES}}"                           # ["São Caetano do Sul", "Santo André"]
+  RADIUS_KM: "{{RADIUS_KM}}"                    # 50
+  HASHTAGS: "{{HASHTAGS}}"                       # ["#petshop", "#gatosdobrasil"]
+  MARKETPLACES: "{{MARKETPLACES}}"               # ["iFood", "Rappi", "Mercado Livre"]
+  CNAE_CODES: "{{CNAE_CODES}}"                   # ["4789-0/04", "7500-1/00"]
+  LEGAL_SOURCES: "{{LEGAL_SOURCES}}"             # ["Casa dos Dados", "CNPJ.biz", "ReceitaWS"]
+
+dashboard:
+  MAP_CENTER_LAT: "{{MAP_CENTER_LAT}}"           # -23.6235
+  MAP_CENTER_LNG: "{{MAP_CENTER_LNG}}"           # -46.5519
+  MAP_ZOOM: "{{MAP_ZOOM}}"                       # 12
+  CRM_DATA_SOURCE: "{{CRM_DATA_SOURCE}}"         # "inline" | "api_endpoint"
+
+infrastructure:
+  DB_PROVIDER: "{{DB_PROVIDER}}"                 # "supabase"
+  TABLES: "{{TABLES}}"                           # ["contatos", "interacoes", "segmentos"]
+  MAP_PROVIDER: "{{MAP_PROVIDER}}"               # "leaflet_osm"
+  AUTH_METHOD: "{{AUTH_METHOD}}"                  # "supabase_auth"
+
+research:
+  SEARCH_PROVIDERS: "{{SEARCH_PROVIDERS}}"       # ["SERPER", "FIRECRAWL", "EXA"]
+  MERGE_STRATEGY: "{{MERGE_STRATEGY}}"           # "dedup_by_cnpj"
+  DEDUP_FIELDS: "{{DEDUP_FIELDS}}"               # ["cnpj", "phone", "name"]

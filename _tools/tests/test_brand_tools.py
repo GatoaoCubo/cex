@@ -4,7 +4,10 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from brand_inject import flatten, inject_brand, count_unresolved, load_brand_config
+from brand_inject import (
+    flatten, inject_brand, count_unresolved, load_brand_config,
+    load_instance_config, compute_derived, INSTANCE_VARS, INSTANCE_CONFIG,
+)
 from brand_validate import validate, is_placeholder, validate_section
 from brand_propagate import extract_vars, format_brand_context, NUCLEUS_VARS
 from brand_audit import (
