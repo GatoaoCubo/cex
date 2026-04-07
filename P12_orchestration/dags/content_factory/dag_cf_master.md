@@ -83,7 +83,7 @@ edges:
   - from: "quality_gate"
     to: "publish"
 domain: "orchestration"
-quality: null
+quality: 9.0
 tags: [dag, content-factory, master-pipeline, multi-format, orchestration]
 tldr: "13-node master DAG: brief→research→strategy→author→fan-out 5 format pipelines→collect→quality gate→publish"
 execution_order:
@@ -112,6 +112,7 @@ linked_artifacts:
     - "P12_orchestration/dags/content_factory/dag_cf_ebook.md"
     - "P12_orchestration/dags/content_factory/dag_cf_presentation.md"
     - "P12_orchestration/dags/content_factory/dag_cf_social.md"
+density_score: 1.0
 ---
 
 ## Nodes
