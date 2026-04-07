@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-03
 author: n07_orchestrator
 domain: orchestration
-quality: null
+quality: 9.2
 tags: [autonomy, swarm, emergent, multi-agent, spawn, handoff, pattern]
 tldr: "Documentação da autonomia emergente observada na missão BRAND_GATO3: núcleos spawnam uns aos outros, escrevem handoffs, formam cadeias de produção sem intervenção humana."
 density_score: null
