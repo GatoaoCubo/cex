@@ -7,8 +7,7 @@ version: 1.0.0
 ---
 # Output Template: Tagline
 
-Use this template to produce structured tagline deliverables. Every field must be filled.
-The recommended tagline goes in the frontmatter `title` field for indexing.
+Structured tagline deliverable. Fill every field. Recommended tagline goes in frontmatter `title`.
 
 ```markdown
 ---
@@ -65,14 +64,32 @@ brand: "{{BRAND_NAME}}"
 {{COMPETITORS_TABLE}}
 
 ## Usage Guide
-- **Site Hero**: Use recommended tagline as-is, pair with sub-headline for context
-- **Social Bio**: Use medium variant, append URL or CTA
-- **Ad Headline**: Use short variant for display ads, medium for search ads
-- **Email Subject**: Use question or provocative variant for higher open rates
-- **Pitch Deck**: Use aspirational variant on title slide, functional on solution slide
+
+| Context | Variant | Pairing |
+|---------|---------|---------|
+| Site Hero | Recommended as-is | Sub-headline for context |
+| Social Bio | Medium variant | Append URL or CTA |
+| Display Ads | Short variant | Visual + brand logo |
+| Search Ads | Medium variant | Description line below |
+| Email Subject | Question/provocative | Preview text complements |
+| Pitch Title | Aspirational variant | Logo + one visual |
+| Pitch Solution | Functional variant | Problem-solution frame |
+
+## Scoring Criteria
+
+| Dimension | Weight | Measures |
+|-----------|--------|----------|
+| Memorability | 30% | Rhythm, brevity, recall ease |
+| Differentiation | 25% | Distance from competitor taglines |
+| Brand Fit | 20% | Voice, values, personality match |
+| Versatility | 15% | Works across all 5+ contexts |
+| Emotional Pull | 10% | Desire, curiosity, aspiration |
 
 ## Revision History
-- v1.0.0: Initial tagline set generated from brand_config + USP extraction
-- Future: A/B test results can inform which variant wins for each context
-- Memory: Approved taglines stored in builder memory for consistency across future builds
+
+| Version | Change | Source |
+|---------|--------|--------|
+| v1.0.0 | Initial set from brand_config + USP | tagline-builder |
+| Future | A/B test winners per context | analytics |
+| Memory | Approved taglines stored for consistency | builder memory |
 ```

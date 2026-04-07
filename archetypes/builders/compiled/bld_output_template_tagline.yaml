@@ -1,0 +1,5 @@
+id: bld_output_template_tagline
+kind: output_template
+pillar: P05
+builder: tagline-builder
+version: 1.0.0
