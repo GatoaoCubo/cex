@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-02
 author: n06_commercial
 domain: brand-voice
-quality: null
+quality: 9.2
 tags: [brand, voice, tone, gato3, ro, n06]
 tldr: "Guia completo de voz GATO³ com radar 5D, matriz de tom por canal, atributos We Are/Not, listas do/don't, frases de calibração e snippet LLM."
 density_score: 0.93
