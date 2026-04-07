@@ -1,0 +1,87 @@
+id: p07_smoke_eval_deploy
+kind: smoke_eval
+pillar: P07
+title: Deploy Smoke Evaluation Suite
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n05_operations
+domain: deployment-operations
+quality: null
+tags:
+- smoke_eval
+- deploy
+- operations
+- N05
+- health
+- verification
+tldr: Deploy smoke evaluation suite with 30-second budget, critical path checks, and automatic rollback triggers on failure.
+density_score: 0.96
+overview: This smoke evaluation runs immediately after every `railway up` deployment. It validates critical paths within a
+  strict 30-second time budget. If any critical check fails, rollback is triggered automatically. No deploy is considered
+  successful until the smoke eval passes.
+time_budget: '| phase | max_duration | purpose |
+
+  |-------|-------------|---------|
+
+  | health_wait | 20s | Wait for /health to return 200 |
+
+  | critical_paths | 8s | Verify core endpoints respond |
+
+  | middleware_check | 2s | Validate middleware headers present |
+
+  | total | 30s | Hard budget — exceeded = FAIL |'
+smoke_checks: ''
+critical_blocking_failure_triggers_rollback: '| check_id | endpoint | method | expected | timeout |
+
+  |----------|----------|--------|----------|---------|
+
+  | SMOKE01 | /health | GET | 200 + HealthResponse JSON | 20s |
+
+  | SMOKE02 | /pipeline/health | GET | 200 | 5s |
+
+  | SMOKE03 | /api/v1/auth/login | POST | 200 or 401 (not 500) | 3s |
+
+  | SMOKE04 | /docs | GET | 200 (OpenAPI schema loads) | 3s |'
+important_warning_logged_but_does_not_block: '| check_id | endpoint | method | expected | timeout |
+
+  |----------|----------|--------|----------|---------|
+
+  | SMOKE05 | /api/v1/list | GET | 200 + valid JSON array | 3s |
+
+  | SMOKE06 | /api/v1/search | POST | 200 + results structure | 3s |'
+middleware_verification: '| check_id | header | expected |
+
+  |----------|--------|----------|
+
+  | SMOKE_MW01 | X-Request-ID | Present (UUID format) |
+
+  | SMOKE_MW02 | X-RateLimit-Limit | Present (numeric) |
+
+  | SMOKE_MW03 | Access-Control-Allow-Origin | Present (not wildcard) |'
+execution_script: "#!/bin/bash\n# deploy_smoke.sh — run after railway up\nBASE_URL=\"${1:-https://api.example.railway.app}\"\
+  \nPASS=0; FAIL=0; WARN=0\n\necho \"=== Deploy Smoke Eval ===\"\necho \"Target: $BASE_URL\"\necho \"Budget: 30 seconds\"\n\
+  echo \"\"\n\n# SMOKE01: Health endpoint\nSTART=$(date +%s%N)\nRESP=$(curl -s -o /dev/null -w \"%{http_code}\" --max-time\
+  \ 20 \"$BASE_URL/health\")\nif [ \"$RESP\" = \"200\" ]; then echo \"[PASS] SMOKE01 /health -> $RESP\"; ((PASS++))\nelse\
+  \ echo \"[FAIL] SMOKE01 /health -> $RESP\"; ((FAIL++)); fi\n\n# SMOKE02: Pipeline health\nRESP=$(curl -s -o /dev/null -w\
+  \ \"%{http_code}\" --max-time 5 \"$BASE_URL/pipeline/health\")\nif [ \"$RESP\" = \"200\" ]; then echo \"[PASS] SMOKE02 /pipeline/health\
+  \ -> $RESP\"; ((PASS++))\nelse echo \"[FAIL] SMOKE02 /pipeline/health -> $RESP\"; ((FAIL++)); fi\n\n# SMOKE03: Auth endpoint\
+  \ (200 or 401 acceptable, 500 = fail)\nRESP=$(curl -s -o /dev/null -w \"%{http_code}\" --max-time 3 -X POST \"$BASE_URL/api/v1/auth/login\"\
+  )\nif [ \"$RESP\" != \"500\" ] && [ \"$RESP\" != \"000\" ]; then echo \"[PASS] SMOKE03 /auth -> $RESP\"; ((PASS++))\nelse\
+  \ echo \"[FAIL] SMOKE03 /auth -> $RESP\"; ((FAIL++)); fi\n\n# SMOKE04: OpenAPI docs\nRESP=$(curl -s -o /dev/null -w \"%{http_code}\"\
+  \ --max-time 3 \"$BASE_URL/docs\")\nif [ \"$RESP\" = \"200\" ]; then echo \"[PASS] SMOKE04 /docs -> $RESP\"; ((PASS++))\n\
+  else echo \"[FAIL] SMOKE04 /docs -> $RESP\"; ((FAIL++)); fi\n\necho \"\"\necho \"Results: $PASS passed, $FAIL failed, $WARN\
+  \ warnings\"\nif [ \"$FAIL\" -gt 0 ]; then\n    echo \"STATUS: SMOKE_FAILED — rollback recommended\"\n    exit 1\nelse\n\
+  \    echo \"STATUS: SMOKE_PASSED\"\n    exit 0\nfi"
+rollback_trigger: 'If any critical smoke check (SMOKE01-04) fails:
+
+
+  1. Log failure evidence (response code, timing, error body)
+
+  2. Signal N07 with `smoke_failed` status
+
+  3. Execute `railway rollback` to previous known-good deploy
+
+  4. Verify rollback health within 30s
+
+  5. Write incident report with failure evidence'
