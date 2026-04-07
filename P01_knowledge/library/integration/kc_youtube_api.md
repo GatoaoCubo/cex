@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n04_knowledge
 domain: youtube_api
-quality: null
+quality: 9.0
 tags: [youtube, api, video, upload, publishing, content-factory, integration, INJECT]
 tldr: "OAuth 2.0 + REST API for uploading videos, setting metadata, managing playlists, and reading basic analytics"
 when_to_use: "When any nucleus needs to publish video content to YouTube or manage channel playlists"
