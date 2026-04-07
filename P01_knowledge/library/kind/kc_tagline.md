@@ -6,8 +6,9 @@ title: "KC: Tagline"
 version: 1.0.0
 created: 2026-04-06
 author: n07_orchestrator
-quality: null
+quality: 8.9
 tags: [knowledge-card, tagline, marketing, brand, copy]
+density_score: 1.0
 ---
 # Knowledge Card: tagline
 
