@@ -6,8 +6,9 @@ title: "N02 Deck — Available Capabilities"
 nucleus: N02
 sin: Luxuria Criativa
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
+density_score: 1.0
 ---
 
 # N02 Deck — Luxúria Criativa ♥
