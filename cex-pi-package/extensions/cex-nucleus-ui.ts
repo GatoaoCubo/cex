@@ -11,14 +11,14 @@
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 import { truncateToWidth, visibleWidth } from "@mariozechner/pi-tui";
 
-const NUC: Record<string, { short: string; icon: string; sin: string }> = {
-	N01: { short: "Inveja", icon: "[+]", sin: "Inveja Analitica" },
-	N02: { short: "Luxuria", icon: "[*]", sin: "Luxuria Criativa" },
-	N03: { short: "Soberba", icon: "[!]", sin: "Soberba Inventiva" },
-	N04: { short: "Gula", icon: "[o]", sin: "Gula por Conhecimento" },
-	N05: { short: "Ira", icon: "[X]", sin: "Ira Construtiva" },
-	N06: { short: "Avareza", icon: "[$]", sin: "Avareza Estrategica" },
-	N07: { short: "Preguica", icon: "[~]", sin: "Preguica Orquestradora" },
+const NUC: Record<string, { short: string; sector: string; icon: string; sin: string }> = {
+	N01: { short: "Inveja", sector: "Research", icon: "[+]", sin: "Inveja Analitica" },
+	N02: { short: "Luxuria", sector: "Marketing", icon: "[*]", sin: "Luxuria Criativa" },
+	N03: { short: "Soberba", sector: "Builder", icon: "[!]", sin: "Soberba Inventiva" },
+	N04: { short: "Gula", sector: "Knowledge", icon: "[o]", sin: "Gula por Conhecimento" },
+	N05: { short: "Ira", sector: "Operations", icon: "[X]", sin: "Ira Construtiva" },
+	N06: { short: "Avareza", sector: "Commercial", icon: "[$]", sin: "Avareza Estrategica" },
+	N07: { short: "Preguica", sector: "Orchestrator", icon: "[~]", sin: "Preguica Orquestradora" },
 };
 
 function bar(used: number, max: number, len: number): string {
@@ -67,8 +67,9 @@ export default function (pi: ExtensionAPI) {
 					const model = (ctx.model?.id || "").replace("claude-", "");
 					const sep = theme.fg("dim", " | ");
 
-					// Identity (always shown)
-					const id = theme.fg("accent", `${info.icon} ${nuc} ${info.short}`);
+					// Identity: icon + nucleus + sin + sector
+					const id = theme.fg("accent", `${info.icon} ${nuc} ${info.short}`)
+						+ theme.fg("dim", ` ${info.sector}`);
 
 					if (width >= 100) {
 						// WIDE (full screen): path + bar + pct
@@ -85,7 +86,7 @@ export default function (pi: ExtensionAPI) {
 						// GRID (~64 cols): token count + wide bar + path
 						const folder = ctx.cwd.replace(/\\/g, "/").split("/").pop() || "";
 						const loc = theme.fg("dim", branch ? `${folder} (${branch})` : folder);
-						const barLen = Math.min(16, Math.max(6, width - 48));
+						const barLen = Math.min(10, Math.max(4, width - 58));
 						const ctx_ = theme.fg("dim", `${fmtK(tokens)}/${fmtK(max)} `)
 							+ theme.fg("accent", `[${bar(tokens, max, barLen)}]`)
 							+ theme.fg("dim", ` ${pct}%`);
