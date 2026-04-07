@@ -9,8 +9,9 @@ execution_mode: mixed
 steps_count: 8
 timeout_ms: 7200000
 error_recovery: retry
-quality: null
+quality: 8.8
 tags: [workflow, outreach, lead-nurturing, gato]
+density_score: 1.0
 ---
 
 # GATO³ Strategic Outreach Campaign
