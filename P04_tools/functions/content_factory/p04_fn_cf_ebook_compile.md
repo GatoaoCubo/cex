@@ -77,13 +77,14 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content_factory
-quality: null
+quality: 9.0
 tags: [function_def, pandoc, ebook, epub, pdf, compile, content_factory]
 tldr: "LLM-callable function to compile Markdown chapters into EPUB/PDF ebook via Pandoc"
 examples:
   - input: {"chapters": ["ch01.md", "ch02.md", "ch03.md"], "output_path": "output/book.epub", "format": "epub", "metadata": {"title": "RAG Guide", "author": "DataCraft"}, "cover_image": "covers/rag_cover.jpg", "toc": true}
     output: {"output_path": "output/book.epub", "chapter_count": 3, "file_size_bytes": 524288, "word_count": 15000}
 error_types: [chapter_not_found, pandoc_not_installed, invalid_metadata, cover_not_found, compilation_error]
+density_score: 0.99
 ---
 
 # eBook Compiler Function (Pandoc)
