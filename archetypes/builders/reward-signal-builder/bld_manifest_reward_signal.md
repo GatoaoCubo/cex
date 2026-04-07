@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, reward-signal, P11, feedback, rlhf, dpo, scoring]
 keywords: [reward, signal, rlhf, dpo, feedback, score, quality, preference]
 triggers: ["create reward signal", "define quality score", "build feedback loop", "RLHF reward model"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building reward_signal artifacts — sinais de quality contínuo. L2: Define signal_type correct for o domínio (scalar/preference/critique/comparati. L3: When user needs to create, build, or scaffold reward signal.
 quality: 9.1
 title: "Manifest Reward Signal"

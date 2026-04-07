@@ -12,7 +12,7 @@ author: n03_engineering
 tags: [kind-builder, content-monetization, P04, billing, checkout, courses, pricing, credits, marketing, funnel]
 keywords: [monetizar, billing, checkout, curso, pricing, credits, payment, stripe, hotmart, kiwify, funnel, sales-funnel, launch, infoproduct, marketing, brand-monetization, upsell, downsell]
 triggers: ["monetization config", "pricing strategy", "credit system", "checkout flow", "sales funnel", "launch strategy"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building configs de monetização de conteúdo: pricing, billing, . L2: Design pipeline 9-stage: PARSE→PRICING→CREDITS→CHECKOUT→COURSES→ADS→EMAILS→VAL. L3: When user needs to create, build, or scaffold content monetization.
 quality: 9.1
 title: "Manifest Content Monetization"

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, glossary-entry, P01, specialist, terminology]
 keywords: [glossary, term, definition, terminology, synonym, abbreviation, lexicon]
 triggers: ["define this term", "what does X mean in our system", "add glossary entry"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building glossary_entries — definitions curtas de termos do domi. L2: Define termos with definitions concisas (max 3 linhas). L3: When user needs to create, build, or scaffold glossary entry.
 quality: 9.1
 title: "Manifest Glossary Entry"

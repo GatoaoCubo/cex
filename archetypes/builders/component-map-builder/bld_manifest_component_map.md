@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, component-map, P08, specialist, inventory]
 keywords: [component, map, inventory, connections, dependencies, architecture, structure]
 triggers: ["map system components", "inventory connections between X", "create component map of Y"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `component_map` — structured inventories of system compon. L2: Analyze system architecture to produce structured component inventories. L3: When user needs to create, build, or scaffold component map.
 quality: 9.1
 title: "Manifest Component Map"

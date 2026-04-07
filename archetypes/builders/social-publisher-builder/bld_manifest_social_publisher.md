@@ -12,7 +12,7 @@ author: n03_engineering
 tags: [kind-builder, social-publisher, P04, automation, social-media, scheduling, api, marketing, brand]
 keywords: [social-media, auto-posting, instagram, facebook, tiktok, linkedin, ayrshare, postiz, marketing, brand-voice, content-calendar, caption, hashtag, engagement, campanha, ads, social-ads]
 triggers: ["create social publisher", "auto-posting system", "social media automation", "posting pipeline", "brand social media", "marketing automation"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building sistemas de auto-posting for redes sociais. Destila u. L2: Design pipeline de 10 passos: LOAD > FETCH > SELECT > GENERATE > OPTIMIZE > HA. L3: When user needs to create, build, or scaffold social publisher.
 quality: 9.1
 title: "Manifest Social Publisher"

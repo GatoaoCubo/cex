@@ -12,7 +12,7 @@ author: builder_agent
 tags: [constraint-spec, P03, constraint-spec, type-builder]
 keywords: ["constraint spec", constraint-spec, P03, constraint, spec]
 triggers: ["create constraint spec", "define constraint spec", "build constraint spec config"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building constraint_spec artifacts — constrained LLM generation. L2: Define constraint_spec with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold constraint spec.
 quality: 9.1
 title: "Manifest Constraint Spec"

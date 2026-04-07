@@ -147,9 +147,9 @@ sub-agents, multi-provider routing, quality gates.
 
 Expected: ~3-4 hours with full grid + sub-agents.
 
-### M2: geo_description rename → capability_summary
+### M2: capability_summary rename → capability_summary
 
-141 files still use the non-standard term `geo_description`.
+141 files still use the non-standard term `capability_summary`.
 Scheduled for overnight batch.
 
 ### M3: Content Factory v1

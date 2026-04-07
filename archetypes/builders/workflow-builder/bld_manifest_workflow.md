@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, workflow, P12, specialist, orchestration, multi-step]
 keywords: [workflow, orchestration, multi-step, wave, parallel, sequential, mission, pipeline]
 triggers: ["create workflow for mission", "build multi-agent_group orchestration", "design step-by-step agent flow"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `workflow` — workflows with sequential steps . L2: Decompose complex missions into steps with agents and dependencies. L3: When user needs to create, build, or scaffold workflow.
 quality: 9.1
 title: "Manifest Workflow"

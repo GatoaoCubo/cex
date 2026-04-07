@@ -134,7 +134,7 @@ layer_3_cex_only_terms_leakage_audit: 'Terms found across the repo that are CEX-
 
   | agent_group | 347 | agent_group / cluster | RENAME → maps to nothing in industry |
 
-  | geo_description | 141 | capability_summary / scope_description | RENAME → confusing name |
+  | capability_summary | 141 | capability_summary / scope_description | RENAME → confusing name |
 
   | fractal | 78 | mirrored structure / convention | Already in metaphor dict |
 
@@ -149,7 +149,7 @@ priority_renames_for_cex_only_terms: '| Term | Rename to | Scope | Risk |
 
   | agent_group | agent_group | 399 files | HIGH (massive cascade, same target) |
 
-  | geo_description | capability_summary | 141 files | MEDIUM |
+  | capability_summary | capability_summary | 141 files | MEDIUM |
 
 
   DECISION: agent_group + agent_group both mean "which group of agents does this belong to."
@@ -211,6 +211,6 @@ summary_what_s_left: '| Category | Status | Remaining work |
 
   | agent_group/agent_group rename | ⏳ SCHEDULED | ~700 files, dedicated overnight |
 
-  | geo_description rename | ⏳ SCHEDULED | 141 files, overnight batch |
+  | capability_summary rename | ⏳ SCHEDULED | 141 files, overnight batch |
 
   | Research validation | 🔄 IN PROGRESS | N01 researching official docs now |'

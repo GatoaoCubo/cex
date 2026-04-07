@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, regression-check, P07, evals, baseline, comparison]
 keywords: [regression, baseline, comparison, drift, degradation, experiment, A/B, threshold]
 triggers: ["create regression check", "compare against baseline", "detect quality regression", "track metric drift"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building regression_check artifacts — configurations de comparac. L2: Define configuration de comparison with baseline_ref e threshold. L3: When user needs to create, build, or scaffold regression check.
 quality: 9.1
 title: "Manifest Regression Check"

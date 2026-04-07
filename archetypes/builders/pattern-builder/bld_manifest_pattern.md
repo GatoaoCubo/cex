@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, pattern, P08, specialist, architecture]
 keywords: [pattern, design-pattern, solution, recurring, architecture, reusable]
 triggers: ["document pattern X", "formalize reusable solution Y", "create architecture pattern Z"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building patterns — named reusable architecture solution. L2: Identify and formalize recurring architecture solutions. L3: When user needs to create, build, or scaffold pattern.
 quality: 9.1
 title: "Manifest Pattern"

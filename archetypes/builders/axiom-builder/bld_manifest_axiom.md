@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, axiom, P10, specialist, memory]
 keywords: [axiom, rule-fundamental, immutable, verdade, principio, invariante]
 triggers: ["define axiom X", "formalize fundamental rule Y", "document immutable truth Z"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building axioms — fundamental immutable rules of the system.. L2: Identify and formalize fundamental immutable rules of any domain. L3: When user needs to create, build, or scaffold axiom.
 quality: 9.1
 title: "Manifest Axiom"

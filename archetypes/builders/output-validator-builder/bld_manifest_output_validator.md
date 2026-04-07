@@ -12,7 +12,7 @@ author: builder_agent
 tags: [output-validator, P05, output-validator, type-builder]
 keywords: ["output validator", output-validator, P05, output, validator]
 triggers: ["create output validator", "define output validator", "build output validator config"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building output_validator artifacts — post-LLM output validatio. L2: Define output_validator with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold output validator.
 quality: 9.1
 title: "Manifest Output Validator"

@@ -50,16 +50,16 @@ t2_builder_isos_audit: '| Builder | ISOs | manifest (keywords/triggers/geo) | co
 
   |---|---|---|---|---|
 
-  | prompt-template-builder | 13/13 | keywords + triggers + geo_description | effort=medium, max_turns=25, permission=nucleus
+  | prompt-template-builder | 13/13 | keywords + triggers + capability_summary | effort=medium, max_turns=25, permission=nucleus
   | PASS |
 
-  | action-prompt-builder | 13/13 | keywords + triggers + geo_description | effort=medium, max_turns=25, permission=nucleus
+  | action-prompt-builder | 13/13 | keywords + triggers + capability_summary | effort=medium, max_turns=25, permission=nucleus
   | PASS |
 
-  | content-monetization-builder | 13/13 | keywords + triggers + geo_description | effort=high, max_turns=25, permission=nucleus
+  | content-monetization-builder | 13/13 | keywords + triggers + capability_summary | effort=high, max_turns=25, permission=nucleus
   | PASS |
 
-  | social-publisher-builder | 13/13 | keywords + triggers + geo_description | effort=medium, max_turns=25, permission=nucleus
+  | social-publisher-builder | 13/13 | keywords + triggers + capability_summary | effort=medium, max_turns=25, permission=nucleus
   | PASS |
 
 

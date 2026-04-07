@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, action-prompt, P03, specialist, task, execution, marketing, copy]
 keywords: [action-prompt, task-prompt, execution-prompt, input-output, user-prompt, task-focused, copy, copywriting, marketing-prompt, campaign-prompt, ad-copy, email-copy, cta, call-to-action]
 triggers: ["create action prompt for task", "build task prompt with defined I/O", "write execution prompt", "write marketing copy prompt", "create ad copy"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building action_prompts — task-focused action prompts with inpu. L2: Define action prompts with clear input/output contracts. L3: When user needs to create, build, or scaffold action prompt.
 quality: 9.1
 title: "Manifest Action Prompt"

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [meta-builder, kind-builder, P02, iso-generation, builder-creation]
 keywords: [builder, meta-builder, iso, kind, scaffold, archetype, type_builder, generate]
 triggers: ["create new builder", "scaffold builder for kind", "generate 13 builder specs for builder"]
-geo_description: >
+capability_summary: >
   L1: Meta-builder that cria outros builders — gera 13 builder specs complete for qualquer kind.
   L2: Usa meta-templates for produzir manifest, instruction, config, memory, tools, etc.
   L3: Quando precisa criar um builder novo for um kind that ainda not tem builder.

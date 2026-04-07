@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, memory-summary, P10, memory, compression, runtime]
 keywords: [memory, summary, compression, session, conversation, retain, entities, decay]
 triggers: ["create memory summary", "compress conversation", "session summary", "summarize context"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building memory_summary artifacts — resumos comprimidos de conv. L2: Define compression method e ratio for qualquer source_type. L3: When user needs to create, build, or scaffold memory summary.
 quality: 9.1
 title: "Manifest Memory Summary"

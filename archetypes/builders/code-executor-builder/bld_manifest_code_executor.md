@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, code-executor, P04, tools, sandbox, runtime]
 keywords: [sandbox, execute, code, runtime, docker, e2b, jupyter, interpreter]
 triggers: ["create code executor", "define sandbox runtime", "build code execution environment", "specify isolated runner"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building code_executor artifacts — ambientes sandboxed that exec. L2: Define execution environment with runtime, sandbox_type, languages. L3: When user needs to create, build, or scaffold code executor.
 quality: 9.1
 title: "Manifest Code Executor"

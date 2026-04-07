@@ -4,7 +4,7 @@
 cex_schema_hydrate.py -- Hydrate builder specs with universal schema fields.
 
 Adds 8 universal patterns to all builders:
-  - bld_manifest: keywords, triggers, geo_description (frontmatter)
+  - bld_manifest: keywords, triggers, capability_summary (frontmatter)
   - bld_memory: memory_scope, observation_types (frontmatter)
   - bld_config: effort, max_turns, disallowed_tools, fork_context, hooks, permission_scope
   - bld_tools: ## Tool Permissions section
@@ -180,8 +180,8 @@ def extract_triggers_from_body(body: str) -> list[str]:
     return parts[:6]
 
 
-def generate_geo_description(fm: dict, body: str) -> str:
-    """Generate 3-layer geo_description from manifest content."""
+def generate_capability_summary(fm: dict, body: str) -> str:
+    """Generate 3-layer capability_summary from manifest content."""
     kind = fm.get("domain", fm.get("id", "unknown")).replace("-builder", "").replace("-", "_")
     identity = ""
     caps = ""
@@ -225,7 +225,7 @@ class Stats:
 
 
 def hydrate_manifest(path: Path, dry_run: bool, stats: Stats) -> bool:
-    """Add keywords, triggers, geo_description to manifest frontmatter."""
+    """Add keywords, triggers, capability_summary to manifest frontmatter."""
     content = path.read_text(encoding="utf-8")
     fm, raw_fm, body = split_fm(content)
     if not fm:
@@ -234,7 +234,7 @@ def hydrate_manifest(path: Path, dry_run: bool, stats: Stats) -> bool:
 
     keywords = fm.get("keywords")
     triggers = fm.get("triggers")
-    geo = fm.get("geo_description")
+    geo = fm.get("capability_summary")
 
     if keywords and triggers and geo:
         stats.skipped += 1
@@ -263,7 +263,7 @@ def hydrate_manifest(path: Path, dry_run: bool, stats: Stats) -> bool:
         new_fields["triggers"] = tr[:4]
 
     if not geo:
-        new_fields["geo_description"] = generate_geo_description(fm, body)
+        new_fields["capability_summary"] = generate_capability_summary(fm, body)
 
     if not new_fields:
         stats.skipped += 1

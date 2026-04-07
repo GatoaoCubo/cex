@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, guardrail, P11, specialist, governance, safety]
 keywords: [guardrail, safety, security-boundary, restriction, constraint, protection]
 triggers: ["define safety guardrail", "what restrictions apply", "create security boundary"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building guardrails — security restrictions e safety boundari. L2: Define security restrictions with concrete enforcement. L3: When user needs to create, build, or scaffold guardrail.
 quality: 9.1
 title: "Manifest Guardrail"

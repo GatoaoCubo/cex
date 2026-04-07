@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, feature-flag, P09, config, toggle, rollout]
 keywords: [feature, flag, toggle, rollout, experiment, release, kill_switch, gradual]
 triggers: ["create feature flag", "define feature toggle", "set up gradual rollout", "configure kill switch"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building feature_flag artifacts — definitions de flags de featur. L2: Define feature flags with estado (on/off), rollout percentage, and targeting rules. L3: When user needs to create, build, or scaffold feature flag.
 quality: 9.1
 title: "Manifest Feature Flag"

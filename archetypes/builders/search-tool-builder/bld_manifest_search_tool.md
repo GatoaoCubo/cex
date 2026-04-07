@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, search-tool, P04, tools, web-search, semantic-search]
 keywords: [search, web, semantic, tavily, serper, perplexity, brave, exa]
 triggers: ["create search tool", "define web search", "build search provider", "specify search API"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building search_tool artifacts — tools de search web, sema. L2: Define tool de search with provider, search_type, max_results. L3: When user needs to create, build, or scaffold search tool.
 quality: 9.1
 title: "Manifest Search Tool"

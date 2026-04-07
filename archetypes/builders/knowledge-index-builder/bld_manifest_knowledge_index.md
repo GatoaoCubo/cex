@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, knowledge-index, P10, specialist, runtime, search]
 keywords: [knowledge-index, search-index, bm25, faiss, hybrid-search, vector-index, retrieval, semantic-search]
 triggers: ["define search index", "configure brain retrieval", "create semantic index"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building knowledge_indexes — indices de search semantics combinando . L2: Define configuration de indice de search with algoritmo e parametros. L3: When user needs to create, build, or scaffold brain index.
 quality: 9.1
 title: "Manifest Knowledge Index"

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, document-loader, P04, tools, ingestion, chunking, RAG]
 keywords: [loader, ingest, chunk, pdf, csv, html, parse, document]
 triggers: ["create document loader", "ingest files", "chunk PDF", "parse HTML to documents"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building document_loader artifacts — ingestores de arquivo that . L2: Define loader for qualquer format: PDF, HTML, CSV, DOCX, JSON, TXT, MD, PPTX,. L3: When user needs to create, build, or scaffold document loader.
 quality: 9.1
 title: "Manifest Document Loader"

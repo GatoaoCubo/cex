@@ -12,7 +12,7 @@ author: orchestrator
 tags: [kind-builder, model-card, P02, specialist]
 keywords: [model-card, model, llm-spec, pricing, capabilities, provider]
 triggers: ["documenta model X", "qual model usar", "LLM spec"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building model_cards — technical specs of LLMs.. L2: Research specs of any LLM (pricing, context, features). L3: When user needs to create, build, or scaffold model card.
 quality: 9.0
 title: "Manifest Model Card"

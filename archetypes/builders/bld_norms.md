@@ -44,7 +44,7 @@ density_score: 0.90
 
 13. **MANIFEST.md keywords**: 4-8 terms in frontmatter, extracted from ## Routing body
 14. **MANIFEST.md triggers**: 2-4 natural language phrases in frontmatter
-15. **MANIFEST.md geo_description**: >= 50 chars, 3 layers (L1=what, L2=how, L3=when)
+15. **MANIFEST.md capability_summary**: >= 50 chars, 3 layers (L1=what, L2=how, L3=when)
 16. **MEMORY.md memory_scope**: must be user | project | local (default: project)
 17. **MEMORY.md observation_types**: must be [user, feedback, project, reference] — never alter
 18. **MEMORY.md observation**: each observation MUST have type: field matching one of 4 types

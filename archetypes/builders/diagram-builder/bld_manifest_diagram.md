@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, diagram, P08, specialist, visualization]
 keywords: [diagram, visual, architecture, mermaid, ascii, flow, layered]
 triggers: ["draw architecture diagram", "visualize system flow", "create diagram of X"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `diagram` artifacts — visual representations of architect. L2: Analyze system architecture to produce visual representations. L3: When user needs to create, build, or scaffold diagram.
 quality: 9.0
 title: "Manifest Diagram"

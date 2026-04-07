@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, browser-tool, P04, tools, dom, playwright, scraper, automation]
 keywords: [browser, dom, playwright, scrape, navigate, click, screenshot, puppeteer]
 triggers: ["create browser tool", "define scraper", "build DOM extractor", "wrap playwright automation"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building browser_tool artifacts — browser automation tools. L2: Define browser tool with engine and specific actions. L3: When user needs to create, build, or scaffold browser tool.
 quality: 9.1
 title: "Manifest Browser Tool"

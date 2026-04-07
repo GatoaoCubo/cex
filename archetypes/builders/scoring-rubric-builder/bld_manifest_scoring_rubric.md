@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, scoring-rubric, P07, specialist, governance, evaluation]
 keywords: [scoring-rubric, rubric, evaluation-criteria, dimensions, weights, grading]
 triggers: ["define scoring criteria", "how to evaluate quality", "create evaluation rubric"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building scoring_rubrics — frameworks de evaluation with dimensoe. L2: Design frameworks de evaluation with dimensoes e weights balanceados. L3: When user needs to create, build, or scaffold scoring rubric.
 quality: 9.1
 title: "Manifest Scoring Rubric"

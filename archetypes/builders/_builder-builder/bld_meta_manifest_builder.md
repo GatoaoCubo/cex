@@ -43,14 +43,14 @@ author: {{author}}
 tags: [kind-builder, {{type_name_kebab}}, {{lp}}, specialist]
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 triggers: ["{{trigger_phrase_1}}", "{{trigger_phrase_2}}"]
-geo_description: >
+capability_summary: >
   L1: {{what_it_does}}. L2: {{how_it_does_it}}. L3: {{when_to_use_it}}.
 ---
 ```
 
 <!-- NOTE: keywords = 4-8 routing/search terms. Extract from ## Routing body existente -->
 <!-- NOTE: triggers = 2-4 frases naturais that ativam this builder -->
-<!-- NOTE: geo_description = 3 semantic layers (L1=o que, L2=como, L3=quando). Min 50 chars -->
+<!-- NOTE: capability_summary = 3 semantic layers (L1=o que, L2=como, L3=quando). Min 50 chars -->
 
 ## Identity
 Specialist in building `{{type_name}}` — {{one_line_description}}.
@@ -68,7 +68,7 @@ Specialist in building `{{type_name}}` — {{one_line_description}}.
 <!-- NOTE: {{hard_count}}/{{soft_count}} = define in QUALITY_GATES.md -->
 
 ## Routing
-<!-- CANONICAL SOURCE: frontmatter keywords + triggers + geo_description -->
+<!-- CANONICAL SOURCE: frontmatter keywords + triggers + capability_summary -->
 <!-- Body section below is DERIVED from frontmatter for human readability -->
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 triggers: "{{trigger_phrase_1}}", "{{trigger_phrase_2}}", "{{trigger_phrase_3}}"

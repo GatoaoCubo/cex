@@ -12,7 +12,7 @@ author: n03_engineering
 tags: [kind-builder, landing-page, P05, frontend, ui, marketing, conversion, brand]
 keywords: [landing-page, landing, page, website, homepage, hero, conversion, cta, responsive, tailwind, shadcn, react, nextjs, frontend, ui, web-app, lovable, bolt, v0, builder, design-system, component, layout, section, above-fold, below-fold, testimonial, pricing-table, faq, footer]
 triggers: ["create landing page", "build landing page", "website homepage", "conversion page", "product page", "create sales page", "build web page"]
-geo_description: >
+capability_summary: >
   L1: Builds complete production-ready landing pages — from hero to footer — with HTML/React/Next.js, responsive, conversion-optimized.
   L2: Pipeline 12-section: HERO > PROBLEM > SOLUTION > FEATURES > SOCIAL-PROOF > PRICING > FAQ > CTA > FOOTER + SEO + Analytics + A11y.
   L3: When user needs to create landing page, product page, homepage, sales page, or any conversion-focused web page.

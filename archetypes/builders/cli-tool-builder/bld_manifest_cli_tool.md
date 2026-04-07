@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, cli-tool, P04, tools, command-line, terminal]
 keywords: [cli, tool, command, terminal, flag, arg, bash, shell]
 triggers: ["create CLI tool", "define command-line tool", "build terminal utility", "wrap script as tool"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building cli_tool artifacts — tools de linha de comando p. L2: Define tool CLI with commands, flags, and args. L3: When user needs to create, build, or scaffold cli tool.
 quality: 9.1
 title: "Manifest Cli Tool"

@@ -106,14 +106,14 @@ Indexador so le frontmatter -> builders invisiveis. Fix: hydrate frontmatter (Tr
 |--------|-----------|---------|
 | L0: KIND | OBJECT_TO_KINDS (167 kws, JA EXISTE) | "cria agent" -> agent-builder |
 | L1: DOMAIN | index.db keywords de builders (CRIAR) | "monetizar hotmart" -> content-monetization-builder |
-| L2: SEMANTIC | geo_description + scoring (CRIAR) | "quero vender curso online" -> melhor match |
+| L2: SEMANTIC | capability_summary + scoring (CRIAR) | "quero vender curso online" -> melhor match |
 
     FLUXO COMPLETO:
     Agente recebe tarefa
       -> L0: OBJECT_TO_KINDS busca KIND match
       -> Se achou: usar builder (caminho atual, funciona)
       -> Se NAO achou: L1 fallback via cex_query.py
-      -> cex_query.py busca index.db (keywords + triggers + geo_description)
+      -> cex_query.py busca index.db (keywords + triggers + capability_summary)
       -> Retorna builder + crew composition recomendada
       -> Score >= 0.5: auto-carrega 13 ISOs + bld_collaboration (crew)
       -> Score < 0.5: pede clarificacao
@@ -146,8 +146,8 @@ Indexador so le frontmatter -> builders invisiveis. Fix: hydrate frontmatter (Tr
 
 Le cada bld_manifest_*.md (102 arquivos):
 1. Extrai keywords e triggers do ## Routing section (body)
-2. Gera geo_description de ## Identity + ## Capabilities (3 camadas semanticas)
-3. Adiciona ao frontmatter YAML: keywords, triggers, geo_description
+2. Gera capability_summary de ## Identity + ## Capabilities (3 camadas semanticas)
+3. Adiciona ao frontmatter YAML: keywords, triggers, capability_summary
 4. Preserva todo o resto do frontmatter e body intactos
 5. Valida: YAML parseable, keywords nao-vazio
 
@@ -161,27 +161,27 @@ Formato frontmatter resultante:
     tags: [kind-builder, social-publisher]
     keywords: [social-media, auto-posting, instagram, facebook, ayrshare, scheduling]
     triggers: ["create social publisher", "auto-posting system", "social media automation"]
-    geo_description: >
+    capability_summary: >
       Sistema de auto-posting para redes sociais. Cobre pipeline de 10 passos
       com Ayrshare/Postiz/Meta Graph API, content mix, posting-time optimization.
       Use para: automatizar postagem, calendario, publicacao multi-plataforma.
     ---
 
 Flags: --dry-run (mostra diff, nao altera) | --apply (altera files)
-Validacao: 102/102 manifests com keywords + triggers + geo_description
-Commit: "geo: hydrate 102 builder manifests with keywords/triggers/geo_description"
+Validacao: 102/102 manifests com keywords + triggers + capability_summary
+Commit: "geo: hydrate 102 builder manifests with keywords/triggers/capability_summary"
 
 #### A2: Enhance Indexer (30min)
 
 **Atualizar**: _tools/cex_index.py
 
 Mudancas:
-1. Novos campos no schema: triggers_json TEXT, geo_description TEXT
+1. Novos campos no schema: triggers_json TEXT, capability_summary TEXT
 2. Fallback: se frontmatter nao tem keywords, parsear ## Routing do body
 3. Rebuild completo + stats
 
 Validacao: SELECT COUNT(*) FROM files WHERE path LIKE "%manifest%" AND keywords_json != "[]" == 102
-Commit: "geo: enhance cex_index.py with triggers, geo_description, body fallback"
+Commit: "geo: enhance cex_index.py with triggers, capability_summary, body fallback"
 
 #### A3: Query Tool (45min)
 
@@ -202,7 +202,7 @@ Algoritmo de scoring:
     keyword IN builder.keywords:        +0.30 (match exato)
     keyword IN builder.triggers:        +0.20 (match frase)
     keyword IN builder.domain:          +0.15 (match dominio)
-    keyword IN builder.geo_description: +0.10 (match semantico)
+    keyword IN builder.capability_summary: +0.10 (match semantico)
     keyword IN builder.tags:            +0.05 (match tag)
     normalizado: score / len(query_keywords)
 
@@ -419,7 +419,7 @@ Paralelo spawn 2 (memory):
 
 | Criterio | Validacao |
 |----------|----------|
-| Frontmatter hydrated | 102/102 manifests com keywords + triggers + geo_description |
+| Frontmatter hydrated | 102/102 manifests com keywords + triggers + capability_summary |
 | Index populated | 102 manifests com keywords_json != [] no index.db |
 | Query tool | cex_query.py retorna resultados para qualquer query |
 | Crew suggestion | Top-1 resultado inclui crew recomendada |
@@ -463,7 +463,7 @@ Paralelo spawn 2 (memory):
 | cex_intent.py | _tools/cex_intent.py | Base A4: adicionar fallback |
 | cex_8f_motor.py | _tools/cex_8f_motor.py | Base B2: carregar memory. NAO alterar OBJECT_TO_KINDS |
 | cex_crew_runner.py | _tools/cex_crew_runner.py | Base B2: injetar memory no compose_prompt |
-| index.db | .cex/index.db (3112 files) | Adicionar campos triggers_json + geo_description |
+| index.db | .cex/index.db (3112 files) | Adicionar campos triggers_json + capability_summary |
 | 102 manifests | archetypes/builders/*/bld_manifest_*.md | Input A1: hydrate frontmatter |
 | 103 bld_memory | archetypes/builders/*/bld_memory_*.md | Input B1: ativar como dynamic |
 | 103 bld_collaboration | archetypes/builders/*/bld_collaboration_*.md | Input A3: crew suggestions |

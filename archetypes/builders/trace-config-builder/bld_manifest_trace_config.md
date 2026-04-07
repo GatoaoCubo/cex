@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, trace-config, P07, observability, tracing, telemetry]
 keywords: [trace, tracing, observability, opentelemetry, langsmith, span, telemetry, sampling, retention, otel]
 triggers: ["define trace config", "create tracing configuration", "configure observability", "specify execution tracing"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building trace_config artifacts — specifications de tracking e observabilidade for agents LLM. L2: Define exporter, sample rate, capture rules, span attributes, and retention policies. L3: When user needs to create, build, or scaffold trace config.
 quality: 9.1
 title: "Manifest Trace Config"

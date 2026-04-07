@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, interface, P06, specialist, integration]
 keywords: [interface, contract, integration, api, methods, bilateral, interop, agent-to-agent]
 triggers: ["define integration contract between agents", "what is the API between X and Y", "create interface for agent communication"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building interfaces — contratos bilaterais de integration between . L2: Define contratos bilaterais with methods, input e output typed. L3: When user needs to create, build, or scaffold interface.
 quality: 9.1
 title: "Manifest Interface"

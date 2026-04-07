@@ -65,7 +65,7 @@ All 12 `test_schema_evolution.py` failures trace to ONE builder: `skill-builder`
 |---------------|-----|
 | keywords | bld_manifest_skill.md |
 | triggers | bld_manifest_skill.md |
-| geo_description (3-layer) | bld_manifest_skill.md |
+| capability_summary (3-layer) | bld_manifest_skill.md |
 | memory_scope | bld_memory_skill.md |
 | observation_types | bld_memory_skill.md |
 | effort | bld_config_skill.md |
@@ -74,7 +74,7 @@ All 12 `test_schema_evolution.py` failures trace to ONE builder: `skill-builder`
 | permission_scope | bld_config_skill.md |
 | Tool Permissions section | bld_tools_skill.md |
 
-**Root cause**: `skill-builder` was created but never updated to match the schema evolution requirements (runtime fields, memory taxonomy, geo_description layers, tool permissions). All other 106 builders pass these checks.
+**Root cause**: `skill-builder` was created but never updated to match the schema evolution requirements (runtime fields, memory taxonomy, capability_summary layers, tool permissions). All other 106 builders pass these checks.
 
 **Fix**: Hydrate `skill-builder` ISOs with the missing fields using `cex_schema_hydrate.py` or manual update.
 
@@ -202,7 +202,7 @@ All `boot/*.cmd` use `set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex`. Non-portab
 
 ### test_schema_evolution.py — 12 failures (all `skill-builder`)
 
-Tests check that ALL builders have evolved to include runtime fields (effort, max_turns, permission_scope, disallowed_tools), memory taxonomy (memory_scope, observation_types), discovery fields (keywords, triggers, geo_description), and tool permissions.
+Tests check that ALL builders have evolved to include runtime fields (effort, max_turns, permission_scope, disallowed_tools), memory taxonomy (memory_scope, observation_types), discovery fields (keywords, triggers, capability_summary), and tool permissions.
 
 106/107 builders pass. `skill-builder` is the sole holdout — it was created but never hydrated with these fields.
 

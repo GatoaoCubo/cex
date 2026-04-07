@@ -11,7 +11,7 @@ author: CODEX
 tags: [kind-builder, signal, P12, orchestration, specialist]
 keywords: [signal, completion, progress, error, heartbeat, status]
 triggers: ["emit signal", "generate completion JSON", "notify agent_group status"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `signal` (P12): atomic events between agents.. L2: Produce signals JSON with minimal fields and correct P12 naming. L3: When user needs to create, build, or scaffold signal.
 quality: 9.0
 title: "Manifest Signal"

@@ -12,7 +12,7 @@ parent: null
 tags: [kind-builder, dispatch_rule, P12, orchestration, routing, specialist]
 keywords: [dispatch, route, routing, routing, keyword, agent_group, scope, dispatch]
 triggers: ["cria rule de dispatch", "roteia keywords for agent_group", "define quem recebe task"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `dispatch_rule` (P12): dispatch rules that map. L2: Produce dispatch_rules with minimal fields and correct P12 naming. L3: When user needs to create, build, or scaffold dispatch rule.
 quality: 9.1
 title: "Manifest Dispatch Rule"

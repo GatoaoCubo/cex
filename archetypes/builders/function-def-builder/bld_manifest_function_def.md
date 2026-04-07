@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, function-def, P04, tools, json-schema, tool-calling]
 keywords: [function, tool_use, function_calling, json_schema, callable, parameters, tool_definition]
 triggers: ["create function definition", "define LLM tool", "build callable function", "specify tool parameters"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building function_def artifacts — definitions JSON Schema de fun. L2: Define function callable with name, description, parameters, returns. L3: When user needs to create, build, or scaffold function def.
 quality: 9.1
 title: "Manifest Function Def"

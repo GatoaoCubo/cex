@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, unit-eval, P07, specialist, governance]
 keywords: [unit-eval, unit-test, agent-test, prompt-test, assertion, coverage, regression]
 triggers: ["test this agent", "verify prompt output", "create unit test for"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building unit_evals — testes unitarios de agent/prompt individ. L2: Produce unit_eval with input/expected_output/assertion complete. L3: When user needs to create, build, or scaffold unit eval.
 quality: 9.1
 title: "Manifest Unit Eval"

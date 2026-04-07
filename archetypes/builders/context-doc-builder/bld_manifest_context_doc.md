@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, context-doc, P01, specialist, content]
 keywords: [context, domain, scope, background, hydration, onboarding, planning]
 triggers: ["create domain context", "background for prompt", "what context does this domain need", "onboarding document"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building context_doc — domain context documents for h. L2: Produce context_doc with complete frontmatter and all mandatory fields. L3: When user needs to create, build, or scaffold context doc.
 quality: 9.1
 title: "Manifest Context Doc"

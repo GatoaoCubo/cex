@@ -15,7 +15,7 @@ critical_gaps_must_fix:
 - Missing/Incomplete skill-builder artifact — 12/15 test failures trace to this single artifact
 - 'Missing required fields: memory_scope, observation_types, effort, max_turns, disallowed_tools, permission_scope'
 - Missing tool permissions section
-- Wrong geo_description format
+- Wrong capability_summary format
 - Test scoring logic flawed — test_score.py has backwards assertions
 - Expects failing artifacts to score 8.0+ (should be low)
 - Empty/missing files incorrectly pass validation

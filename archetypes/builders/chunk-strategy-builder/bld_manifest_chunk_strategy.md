@@ -12,7 +12,7 @@ author: builder_agent
 tags: [chunk-strategy, P01, chunk-strategy, type-builder]
 keywords: ["chunk strategy", chunk-strategy, P01, chunk, strategy]
 triggers: ["create chunk strategy", "define chunk strategy", "build chunk strategy config"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building chunk_strategy artifacts — text chunking and splitting. L2: Define chunk_strategy with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold chunk strategy.
 quality: 9.1
 title: "Manifest Chunk Strategy"

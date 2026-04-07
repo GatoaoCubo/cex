@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, permission, P09, specialist, governance, access-control]
 keywords: [permission, access, read, write, execute, role, acl, rbac]
 triggers: ["define access permission", "who can read/write", "creatand access control rule"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building permissions — access control rules (read/write. L2: Define access rules with scope, roles, and granularity. L3: When user needs to create, build, or scaffold permission.
 quality: 9.1
 title: "Manifest Permission"

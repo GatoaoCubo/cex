@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, client, P04, tools, api, integration]
 keywords: [client, api, rest, graphql, grpc, endpoint, consume, http]
 triggers: ["create API client", "define API consumer", "build client for service", "wrap external API"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building client artifacts — unidirectional external API clients. L2: Define API client with base_url and auth strategy. L3: When user needs to create, build, or scaffold client.
 quality: 9.1
 title: "Manifest Api Client"

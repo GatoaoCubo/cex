@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, agent-card, P08, specialist, architecture]
 keywords: [agent_group, spec, architecture, role, model, mcp, boot, dispatch]
 triggers: ["define a new agent_group", "spec this agent_group", "document agent_group architecture"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building agent_cards — complete specifications of au. L2: Specify agent_groups with role, model, MCPs and domain complete. L3: When user needs to create, build, or scaffold agent card.
 quality: 9.1
 title: "Manifest Agent Card"

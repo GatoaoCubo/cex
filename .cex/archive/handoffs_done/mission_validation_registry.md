@@ -103,7 +103,7 @@ Testa o CICLO COMPLETO:
 Test 1: Discovery -> Builder
   Input: "monetizar curso hotmart"
   Assert: cex_query retorna content-monetization-builder com score >= 0.7
-  Assert: keywords, triggers, geo_description presentes no manifest
+  Assert: keywords, triggers, capability_summary presentes no manifest
 
 Test 2: Builder -> Memory Load
   Input: carregar content-monetization-builder

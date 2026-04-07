@@ -12,7 +12,7 @@ author: n03_engineering
 tags: [kind-builder, tagline, P03, marketing, brand, copy, creative]
 keywords: [tagline, slogan, headline, brand-voice, copy, catchphrase, positioning, one-liner, hook, usp, value-proposition, brand-message, creative-copy, campaign-tagline]
 triggers: ["create tagline", "brand tagline", "write slogan", "campaign headline", "create catchphrase", "brand positioning line"]
-geo_description: >
+capability_summary: >
   L1: Specialist in creating taglines, slogans, and headlines that capture a brand's essence in few words.
   L2: Combines brand strategy, consumer psychology, and copywriting techniques to generate memorable lines.
   L3: When user needs to create tagline, slogan, headline, brand catchphrase, or positioning statement.

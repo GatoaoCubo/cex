@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, prompt-template, P03, specialist, reusable, marketing, copy]
 keywords: ["prompt template", P03, reusable, prompt-template, tagline, headline, copy-template, brand-voice-template, email-template, marketing-template, campaign-template, landing-copy]
 triggers: ["create prompt template", "build prompt template artifact", "create tagline template", "build marketing copy template"]
-geo_description: >
+capability_summary: >
   L1: I am the **prompt-template-builder**, a specialist type_builder for the `prompt_. L2: **Variable extraction**: Identify all dynamic slots in a prompt and formalize th. L3: When user needs to create, build, or scaffold prompt template.
 quality: 9.1
 title: "Manifest Prompt Template"

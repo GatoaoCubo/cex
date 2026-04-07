@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, chain, P03, specialist, pipeline, sequential]
 keywords: [chain, pipeline, sequential, prompt-chain, multi-step, composition, LLMChain]
 triggers: ["create prompt chain for pipeline", "build sequential prompt flow", "design multi-step prompt chain"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `chain` — sequences of chained prompts where output. L2: Decompose complex tasks into atomic prompt steps (1 step = 1 LLM call). L3: When user needs to create, build, or scaffold chain.
 quality: 9.1
 title: "Manifest Chain"

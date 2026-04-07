@@ -12,7 +12,7 @@ author: system
 tags: [kind-builder, optimizer, P11, specialist, governance]
 keywords: [optimizer, optimize, metric, action, threshold, tune, prune, scale]
 triggers: ["create optimizer", "optimize process", "metric > action", "tune pipeline"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building optimizers — artifacts that definem o ciclo metric>acti. L2: Define targets de optimization with metrics concrete e direction (minimize/maximiz. L3: When user needs to create, build, or scaffold optimizer.
 quality: 9.1
 title: "Manifest Optimizer"

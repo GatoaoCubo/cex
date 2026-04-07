@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, lens, P02, specialist, perspective]
 keywords: [lens, perspective, filter, viewpoint, bias, focus, interpretation, analysis]
 triggers: ["create a lens for X domain", "add perspective filter", "define analysis viewpoint"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building lenses — specialized perspectives applied a artef. L2: Define perspectives with focus, filters, and declared bias. L3: When user needs to create, build, or scaffold lens.
 quality: 9.1
 title: "Manifest Lens"

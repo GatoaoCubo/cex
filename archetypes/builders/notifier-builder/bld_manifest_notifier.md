@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, notifier, P04, tools, notification, push, email, sms, slack, discord]
 keywords: [notifier, notification, email, sms, slack, discord, push, alert]
 triggers: ["create notifier", "define notification channel", "build email sender"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building notifier artifacts — push delivery components that send n. L2: Define notification channel (email, sms, slack, discord, push, in_app, teams). L3: When user needs to create, build, or scaffold notifier.
 quality: 9.1
 title: "Manifest Notifier"

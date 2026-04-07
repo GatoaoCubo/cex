@@ -12,7 +12,7 @@ author: orchestrator
 tags: [kind-builder, embedder-provider, P01, specialist]
 keywords: [embedder, embedding, vector, sentence-transformer, openai-embed, cohere-embed, voyage]
 triggers: ["configure embedding model", "which embedder to use", "setup embedding provider"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building embedder_provider configs — embedding model connection specs. L2: Research embedding models (dimensions, batch size, normalization, pricing). L3: When user needs to create, build, or scaffold embedding provider configuration.
 quality: 9.1
 title: "Manifest Embedder Provider"

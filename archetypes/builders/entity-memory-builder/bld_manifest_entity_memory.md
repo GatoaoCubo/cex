@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, entity-memory, P10, memory, entity, attributes, relationships]
 keywords: [entity, memory, person, tool, concept, attributes, facts, relationships]
 triggers: ["store entity facts", "remember tool details", "track person attributes", "entity knowledge card"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building entity_memory artifacts — structured records of fa. L2: Extract and structure facts about an entity as key-value attributes. L3: When user needs to create, build, or scaffold entity memory.
 quality: 9.1
 title: "Manifest Entity Memory"

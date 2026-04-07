@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, instruction, P03, specialist, steps, recipe]
 keywords: [instruction, steps, recipe, how-to, procedure, runbook, execution, prerequisites]
 triggers: ["create step-by-step instruction", "write execution recipe for task", "build operational runbook"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building instructions — step-by-step operational recipes for. L2: Decompose complex tasks into atomic and sequential steps. L3: When user needs to create, build, or scaffold instruction.
 quality: 9.1
 title: "Manifest Instruction"

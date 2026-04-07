@@ -12,7 +12,7 @@ author: system
 tags: [kind-builder, quality-gate, P11, specialist, governance]
 keywords: [quality-gate, gate, threshold, scoring, pass-fail, governance]
 triggers: ["define quality gate", "what quality checks", "scoring formula"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building quality_gates — barreiras de quality with score numer. L2: Define quality gates with concrete metrics and thresholds. L3: When user needs to create, build, or scaffold quality gate.
 quality: 9.0
 title: "Manifest Quality Gate"

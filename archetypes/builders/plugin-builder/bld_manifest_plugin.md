@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, plugin, P04, specialist, extension, modular]
 keywords: [plugin, extension, modular, pluggable, addon, integrate, extend, api-surface]
 triggers: ["create plugin for system extension", "build pluggable module", "define extensible component"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `plugin` — extensions pluggable ao sistema with interfac. L2: Analyze requirements de extensibility e definir interface contracts. L3: When user needs to create, build, or scaffold plugin.
 quality: 9.1
 title: "Manifest Plugin"

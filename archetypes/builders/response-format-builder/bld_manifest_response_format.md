@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, response-format, P05, specialist, spec, output]
 keywords: [response-format, output-format, structured-output, json-mode, how-to-respond, output-structure]
 triggers: ["how should the LLM format its response", "define output structure", "create response format"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building response_formats — formats de resposta injected no p. L2: Design formats de resposta with sections, fields, and examples. L3: When user needs to create, build, or scaffold response format.
 quality: 9.1
 title: "Manifest Response Format"

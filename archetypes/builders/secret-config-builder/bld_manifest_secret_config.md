@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, secret-config, P09, credentials, vault, rotation]
 keywords: [secret, credential, vault, rotation, encryption, api-key, token, password]
 triggers: ["create secret config", "define credential management", "set up vault spec", "configure secret rotation"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building secret_config artifacts — specifications de gestao de . L2: Define secret_config with provider, rotation_policy, and encryption. L3: When user needs to create, build, or scaffold secret config.
 quality: 9.1
 title: "Manifest Secret Config"

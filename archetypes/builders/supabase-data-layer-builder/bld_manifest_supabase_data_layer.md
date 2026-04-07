@@ -13,7 +13,7 @@ tags: [builder, supabase, data-layer, manifest, capabilities]
 density_score: 1.0
 keywords: ["data platform", data-layer, builder, capabilities, supabase, manifest]
 triggers: ["create data platform", "build data platform artifact"]
-geo_description: >
+capability_summary: >
   L1: | Field | Value |. L2: RLS on every table with user data. L3: When user needs to create, build, or scaffold data platform.
 ---
 # Builder Manifest

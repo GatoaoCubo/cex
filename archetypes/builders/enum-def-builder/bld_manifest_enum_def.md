@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, enum-def, P06, schema, enumeration, finite-values]
 keywords: [enum, enumeration, values, options, choices, status, state, category]
 triggers: ["create enum", "define allowed values", "build enumeration", "list valid options"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building enum_def artifacts — reusable enumerations with con. L2: Define enumeration with finite named values. L3: When user needs to create, build, or scaffold enum def.
 quality: 9.1
 title: "Manifest Enum Def"

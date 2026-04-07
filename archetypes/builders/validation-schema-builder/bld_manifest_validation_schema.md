@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, validation-schema, P06, specialist, spec, post-generation]
 keywords: [validation-schema, output-validation, post-generation, contract, field-check, schema-enforcement]
 triggers: ["validate output after generation", "what fields must the output have", "create post-generation contract"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building validation_schemas — contratos de validation pos-geraca. L2: Design contratos de validation with fields, types, and constraints structured. L3: When user needs to create, build, or scaffold validation schema.
 quality: 9.1
 title: "Manifest Validation Schema"

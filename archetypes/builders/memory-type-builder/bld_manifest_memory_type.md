@@ -7,7 +7,7 @@ created: 2026-04-05
 updated: 2026-04-06
 keywords: [memory-type, taxonomy, decay, observation, classification, 4-type, enum]
 triggers: ["create memory type artifact", "define observation taxonomy", "build memory classification"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `memory_type` artifacts — taxonomia de 4 types with decay rates.
   L2: Classify observactions em user/feedback/project/reference with guards de quality.
   L3: When user needs to define, extend, or audit the memory type taxonomy.

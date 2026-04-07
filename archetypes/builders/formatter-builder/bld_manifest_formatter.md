@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, formatter, P05, specialist, output-format, presentation]
 keywords: [formatter, format, output, pretty-print, template, serialize, render, display]
 triggers: ["format output as markdown", "build formatter for JSON display", "create table formatter"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building `formatter` — transformadores de format de saida that . L2: Analyze data de input e definir rules de transformation for format de said. L3: When user needs to create, build, or scaffold formatter.
 quality: 9.1
 title: "Manifest Formatter"

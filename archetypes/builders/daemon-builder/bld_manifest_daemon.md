@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, daemon, P04, tools, background, persistent]
 keywords: [daemon, background, process, persistent, schedule, cron, service, watcher]
 triggers: ["create background process", "define persistent daemon", "build watcher service", "run scheduled background task"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building daemon artifacts — persistent background processes that. L2: Define background process with schedule and restart policy. L3: When user needs to create, build, or scaffold daemon.
 quality: 9.1
 title: "Manifest Daemon"

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, benchmark, P07, specialist, governance, performance]
 keywords: [benchmark, performance, latency, throughput, cost, measurement, baseline, target]
 triggers: ["measure performance of", "how fast is", "create benchmark for latency"]
-geo_description: >
+capability_summary: >
   L1: Specialist in building benchmarks — quantitative performance measurements (lat. L2: Design benchmarks with quantitative metrics, baselines, and targets. L3: When user needs to create, build, or scaffold benchmark.
 quality: 9.1
 title: "Manifest Benchmark"
