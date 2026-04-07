@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 115 kinds · 111 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 52 tools
+> 117 kinds · 120 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 64 tools
 
 ## Brand Identity
 
@@ -32,11 +32,11 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Nucleus rules** | `.claude/rules/n{01-06}-*.md` (1 per nucleus) |
 | **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission |
 | **Builders (source of truth)** | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
-| **Sub-agents** | `.claude/agents/{kind}-builder.md` (101 files) |
+| **Sub-agents** | `.claude/agents/{kind}-builder.md` (121 files) |
 | **N00 Genesis (mold)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
 | **Pillar schemas** | `P{01-12}_*/_schema.yaml` |
-| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (114 files) |
-| **Kind registry** | `.cex/kinds_meta.json` (114 kinds) |
+| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (121 files) |
+| **Kind registry** | `.cex/kinds_meta.json` (117 kinds) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
 | **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
 | **Boot scripts** | `boot/cex.cmd` (N07) · `boot/n0{1-6}.cmd` |
@@ -104,7 +104,7 @@ User decides WHAT → LLM builds HOW → verify together.
 | `cex_signal_watch.py` | **Blocking signal poll**: waits for nuclei completion, detects crashes |
 | `cex_batch.py` | Multi-intent processing from file |
 | `cex_compile.py` | .md → .yaml compilation (--all) |
-| `cex_doctor.py` | Builder health check (105 PASS) |
+| `cex_doctor.py` | Builder health check (118 PASS) |
 | `cex_hooks.py` | Pre/post validation + git hook |
 | `cex_score.py` | Peer review scoring (--apply) |
 | `cex_feedback.py` | Quality tracking + archive + metrics |
