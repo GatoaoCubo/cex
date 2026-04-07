@@ -18,7 +18,7 @@ rate_limit_tpm: 100000
 fallback: google
 max_retries: 3
 domain: model_provider
-quality: null
+quality: 9.1
 tags: [model-provider, anthropic, claude, routing, llm]
 tldr: "Anthropic provider config — 3 tiers (haiku/sonnet/opus), 60 RPM, fallback to Google, $0.25-$75 per 1M tokens."
 when_to_use: "Primary LLM provider for CEX nuclei when Anthropic API access is available"
