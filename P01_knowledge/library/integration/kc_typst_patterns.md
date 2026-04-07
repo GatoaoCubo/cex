@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n04_knowledge
 domain: typst
-quality: null
+quality: 9.0
 tags: [typst, pdf, ebook, report, typesetting, content-factory, integration, INJECT]
 tldr: "Modern markup → professional PDF with templates, functions, data loading, and programmatic layout — the LaTeX replacement"
 when_to_use: "When any nucleus needs to generate professional PDFs — ebooks, reports, whitepapers, certificates"
