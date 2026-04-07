@@ -15,7 +15,7 @@ capture_prompts: false
 capture_responses: false
 retention_days: 7
 domain: trace_config
-quality: null
+quality: 9.1
 tags: [trace-config, opentelemetry, observability, tracing, spans]
 tldr: "OpenTelemetry trace config — 100% sampling, OTLP export to localhost:4318, 8F function-level spans, 7-day retention."
 when_to_use: "Development/staging environments where full observability of 8F pipeline execution is needed"
