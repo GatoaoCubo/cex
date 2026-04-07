@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "context window allocation, token budgets, overflow strategies, priority tiers, model limits; NOT prompt content, agent identity, model capabilities"
 domain: "context_window_config"
-quality: null
+quality: 8.9
 tags: ["system_prompt", "context_window_config", "token_budget", "overflow"]
 safety_level: standard
 tools_listed: false
