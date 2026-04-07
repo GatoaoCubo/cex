@@ -82,10 +82,12 @@ export default function (pi: ExtensionAPI) {
 					}
 
 					if (width >= 55) {
-						// GRID (~64 cols): short path + compact bar
+						// GRID (~64 cols): token count + wide bar + path
 						const folder = ctx.cwd.replace(/\\/g, "/").split("/").pop() || "";
 						const loc = theme.fg("dim", branch ? `${folder} (${branch})` : folder);
-						const ctx_ = theme.fg("accent", `[${bar(tokens, max, 6)}]`)
+						const barLen = Math.min(16, Math.max(6, width - 48));
+						const ctx_ = theme.fg("dim", `${fmtK(tokens)}/${fmtK(max)} `)
+							+ theme.fg("accent", `[${bar(tokens, max, barLen)}]`)
 							+ theme.fg("dim", ` ${pct}%`);
 						const mod = theme.fg("dim", model);
 						return [truncateToWidth(id + sep + ctx_ + sep + mod + sep + loc, width)];
