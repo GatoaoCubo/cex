@@ -114,10 +114,8 @@ def inject_brand(template: str, brand_config: dict = None) -> str:
     """
     if brand_config is None:
         brand_config = load_brand_config()
-    if not brand_config:
-        return template
 
-    flat = flatten(brand_config)
+    flat = flatten(brand_config) if brand_config else {}
     derived = compute_derived(flat)
     # Derived vars fill gaps; config vars take precedence
     merged = {**derived, **{k: v for k, v in flat.items() if not _is_placeholder(v)}}
