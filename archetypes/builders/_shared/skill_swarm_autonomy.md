@@ -6,9 +6,10 @@ title: "Swarm Autonomy — Multi-Nucleus Self-Organization"
 version: 1.0.0
 created: 2026-04-03
 author: n07_orchestrator
-quality: null
+quality: 9.1
 tags: [swarm, autonomy, multi-agent, spawn, handoff, emergent]
 tldr: "Skill que habilita qualquer núcleo a spawnar colegas, criando cadeias autônomas de produção. Descoberto empiricamente na missão BRAND_GATO3."
+density_score: 1.0
 ---
 
 # Skill: Swarm Autonomy
