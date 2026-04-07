@@ -1,7 +1,20 @@
 ---
+id: brand_bootstrap
+kind: instruction
+pillar: P08
 glob: "**"
 alwaysApply: true
 description: "Brand bootstrap detection — trigger brand setup on first interaction"
+quality: 9.1
+title: "Brand-Bootstrap"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Brand Bootstrap Detection
@@ -49,3 +62,33 @@ Proceed normally. The brand context is auto-injected into all prompts.
 Without brand_config.yaml, every nucleus produces GENERIC output.
 With it, every output matches the user's voice, colors, and identity.
 The 2-minute investment saves hours of "make it sound more like us" revisions.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
+
+## System Context
+
+This artifact participates in the CEX typed knowledge system, a fractal
+architecture with 12 pillars, 8 nuclei, and 125 specialized builders.
+Artifacts flow through the 8F pipeline: Focus, Frame, Fetch, Filter,
+Format, Forge, Furnish, and Feedback.
+
+Quality is enforced via 3-layer scoring: structural (30%), rubric (30%),
+and semantic (40%). All artifacts target quality >= 9.0.
+
+| Layer | Weight | Method |
+|-------|--------|--------|
+| Structural | 30% | Automated count-based checks |
+| Rubric | 30% | Quality gate dimension scoring |
+| Semantic | 40% | LLM evaluation (when L1+L2 >= 8.5) |

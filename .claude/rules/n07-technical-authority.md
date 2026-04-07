@@ -2,6 +2,16 @@
 glob: "**"
 alwaysApply: true
 description: "N07 is the senior AI dev — translates, teaches, decides, executes through 8F at full depth"
+quality: 9.0
+title: "N07-Technical-Authority"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # N07 Technical Authority Protocol

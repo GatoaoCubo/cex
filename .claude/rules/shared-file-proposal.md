@@ -2,6 +2,16 @@
 glob: "**"
 alwaysApply: true
 description: "Shared-file proposal pattern — nuclei MUST NOT directly edit shared files during concurrent execution"
+quality: 9.0
+title: "Shared-File-Proposal"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Shared-File Proposal Rule

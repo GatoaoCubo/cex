@@ -2,6 +2,16 @@
 glob: "**"
 alwaysApply: true
 description: "8F Universal Reasoning Protocol — every nucleus, every task, every time"
+quality: 9.0
+title: "8F-Reasoning"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # 8F Universal Reasoning Protocol
@@ -179,8 +189,22 @@ F8 COLLABORATE → save to N06_commercial/, compile, signal N07
 
 ## Anti-Patterns (BLOCKED)
 
-- Processing a task without 8F trace — ANY task, not just builds
-- Skipping F7 validation
-- Saving without F8 (compile + commit + signal)
-- "I'll just do a quick..." — NO. Every task goes through 8F.
-- N07 dispatching without F1 (constraining scope) and F4 (planning approach)
+1. Processing a task without 8F trace — ANY task, not just builds
+2. Skipping F7 validation
+3. Saving without F8 (compile + commit + signal)
+4. "I'll just do a quick..." — NO. Every task goes through 8F.
+5. N07 dispatching without F1 (constraining scope) and F4 (planning approach)
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

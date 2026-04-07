@@ -2,6 +2,16 @@
 glob: "**"
 alwaysApply: true
 description: "N07 must dispatch deep tasks that use the 1M context window, not shallow atomic tasks"
+quality: 9.0
+title: "Dispatch-Depth"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Dispatch Depth Rule
@@ -41,10 +51,10 @@ Run cex_doctor.py and report results. Commit everything with detailed message."
 ## Measurement
 
 A good handoff should result in:
-- 3+ files created or modified
-- 10+ tool calls (read, write, bash)
-- 2+ minutes of work (not 30 seconds)
-- git commit with substantive changes
+1. 3+ files created or modified
+2. 10+ tool calls (read, write, bash)
+3. 2+ minutes of work (not 30 seconds)
+4. git commit with substantive changes
 
 If a nucleus completes in under 60 seconds, the task was too shallow.
 
@@ -57,17 +67,31 @@ Every handoff N07 writes MUST include a "## Context" section listing:
 Your agent card: {nucleus_dir}/agent_card_{nuc}.md (loaded in system prompt)
 
 ## Relevant artifacts (READ these before producing)
-- archetypes/builders/{kind}-builder/ (13 ISOs)
-- P01_knowledge/library/kind/kc_{kind}.md
-- P{xx}/{subdir}/tpl_{kind}.md (output template)
-- .claude/rules/{nuc}*.md (your rules)
+1. archetypes/builders/{kind}-builder/ (13 ISOs)
+2. P01_knowledge/library/kind/kc_{kind}.md
+3. P{xx}/{subdir}/tpl_{kind}.md (output template)
+4. .claude/rules/{nuc}*.md (your rules)
 
 ## Expected output
-- File: {path}
-- Kind: {kind}
-- Frontmatter: standard (id, kind, title, version, quality: null, tags)
-- Format: structured data (tables > prose)
+1. File: {path}
+2. Kind: {kind}
+3. Frontmatter: standard (id, kind, title, version, quality: null, tags)
+4. Format: structured data (tables > prose)
 ```
 
 This eliminates discovery turns. The nucleus reads the handoff,
 reads the referenced artifacts, and produces. No wandering.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

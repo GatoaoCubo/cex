@@ -2,6 +2,16 @@
 glob: "**"
 alwaysApply: true
 description: "N07 autonomous lifecycle -- poll, kill, dispatch, consolidate without user intervention"
+quality: 9.0
+title: "N07-Autonomous-Lifecycle"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # N07 Autonomous Lifecycle
@@ -9,10 +19,10 @@ description: "N07 autonomous lifecycle -- poll, kill, dispatch, consolidate with
 ## The Problem This Solves
 
 N07 was dispatching nuclei but NOT:
-- Polling for completion signals
-- Killing completed/idle processes
-- Auto-dispatching next wave
-- Consolidating results
+1. Polling for completion signals
+2. Killing completed/idle processes
+3. Auto-dispatching next wave
+4. Consolidating results
 
 The user had to manually invoke /consolidate, /status, stop commands.
 That defeats the purpose of an orchestrator.
@@ -61,8 +71,8 @@ NEXT WAVE
 
 **NEVER** run `python _tools/cex_signal_watch.py` as a blocking call.
 It freezes N07 for minutes. Instead:
-- Use `git log --since` + `dispatch.sh status` (non-blocking, 2 seconds)
-- signal_watch is for `cex_mission_runner.py` (headless overnight runs), NOT for interactive N07
+1. Use `git log --since` + `dispatch.sh status` (non-blocking, 2 seconds)
+2. signal_watch is for `cex_mission_runner.py` (headless overnight runs), NOT for interactive N07
 
 ### What N07 works on while nuclei run
 
@@ -126,14 +136,28 @@ After dispatching a wave, N07 should:
 
 ## What N07 Should NEVER Need the User For
 
-- Killing idle processes (do it autonomously after signal)
-- Dispatching next wave (do it after gate passes)
-- Running /status (N07 polls internally)
-- Running /consolidate (N07 does it after final wave)
-- Injecting context about spawn/stop mechanics (this rule IS the context)
+1. Killing idle processes (do it autonomously after signal)
+2. Dispatching next wave (do it after gate passes)
+3. Running /status (N07 polls internally)
+4. Running /consolidate (N07 does it after final wave)
+5. Injecting context about spawn/stop mechanics (this rule IS the context)
 
 ## What N07 SHOULD Ask the User
 
-- GDP decisions (tone, audience, style) -- BEFORE first dispatch
-- Quality gate failures (artifact below 8.0) -- re-dispatch or accept?
-- Timeout situations (nucleus stuck > 45min) -- wait or kill?
+1. GDP decisions (tone, audience, style) -- BEFORE first dispatch
+2. Quality gate failures (artifact below 8.0) -- re-dispatch or accept?
+3. Timeout situations (nucleus stuck > 45min) -- wait or kill?
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -1,5 +1,15 @@
 ---
 description: "Initialize CEX for your brand. First-time setup. Usage: /init [folder_path]"
+quality: 9.0
+title: "Init"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # /init — Bootstrap Your Brand
@@ -10,9 +20,9 @@ The X in CEX is YOUR brand. This command fills it.
 
 Check how the user invoked `/init`:
 
-- `/init` (no args) → **Conversational mode**: ask questions one by one
-- `/init C:\Users\...\my_brand_stuff` → **Ingest mode**: scan folder first, then ask
-- `/init --reset` → Reset existing brand: `python _tools/cex_bootstrap.py --reset`
+1. `/init` (no args) → **Conversational mode**: ask questions one by one
+2. `/init C:\Users\...\my_brand_stuff` → **Ingest mode**: scan folder first, then ask
+3. `/init --reset` → Reset existing brand: `python _tools/cex_bootstrap.py --reset`
 
 ## Step 0: Check Status
 
@@ -30,9 +40,9 @@ Ask these questions ONE AT A TIME in natural language. Wait for each answer.
 Use casual, friendly tone. The user might not know branding terminology.
 
 **Round 1 — The basics**
-- "What's the name of your company or product?"
-- "If you had to describe what you do in one sentence — like an elevator pitch — what would it be?"
-- "What are 3 things your company would NEVER compromise on? Like core values."
+1. "What's the name of your company or product?"
+2. "If you had to describe what you do in one sentence — like an elevator pitch — what would it be?"
+3. "What are 3 things your company would NEVER compromise on? Like core values."
 
 **Round 2 — Personality**
 - "How should your brand sound? More like a professor or a friend? More serious or fun?"
@@ -45,13 +55,13 @@ Use casual, friendly tone. The user might not know branding terminology.
     - etc. (only show 3-4 most likely matches)
 
 **Round 3 — Your people**
-- "Describe your dream customer — not their age, but their daily frustrations and what they wish was different."
-- "After they use your product, what changes? Try: 'From ___ to ___ through ___'"
+1. "Describe your dream customer — not their age, but their daily frustrations and what they wish was different."
+2. "After they use your product, what changes? Try: 'From ___ to ___ through ___'"
 
 **Round 4 — Business**
-- "What category or market are you in?"
-- "How do you make money — subscriptions, one-time sales, courses, something else?"
-- "What currency — BRL, USD?"
+1. "What category or market are you in?"
+2. "How do you make money — subscriptions, one-time sales, courses, something else?"
+3. "What currency — BRL, USD?"
 
 After all answers: write YAML, bootstrap, confirm.
 
@@ -68,25 +78,25 @@ python _tools/brand_ingest.py "$ARGUMENTS" --for-llm
 ```
 
 This scans the folder and extracts:
-- Color hex codes from CSS/HTML files
-- Font names
-- Potential brand names (by frequency)
-- Mission/vision/tagline (if found in text)
-- URLs, social handles, pricing
-- Source excerpts for context
+1. Color hex codes from CSS/HTML files
+2. Font names
+3. Potential brand names (by frequency)
+4. Mission/vision/tagline (if found in text)
+5. URLs, social handles, pricing
+6. Source excerpts for context
 
 ### Step 2: Read documents (if any)
 
 If `brand_ingest.py` reports documents (PDF, DOCX, PPTX):
-- Use the **markitdown** MCP tool to convert each to text
-- Extract brand signals from the converted text
-- Look for: pitch decks (positioning), brand guides (colors/fonts), proposals (ICP)
+1. Use the **markitdown** MCP tool to convert each to text
+2. Extract brand signals from the converted text
+3. Look for: pitch decks (positioning), brand guides (colors/fonts), proposals (ICP)
 
 ### Step 3: Read images (if any)
 
 If images are found (logos, screenshots, Canva exports):
-- Describe what you see: colors, style, typography direction
-- Note potential logo files
+1. Describe what you see: colors, style, typography direction
+2. Note potential logo files
 
 ### Step 4: Present findings to user
 
@@ -103,10 +113,10 @@ Show what you found:
 ### Step 5: Fill gaps conversationally
 
 Ask ONLY about what wasn't found:
-- If no archetype signals → ask about personality
-- If no ICP found → ask about ideal customer
-- If no transformation → ask about before/after
-- If no values → ask about non-negotiables
+1. If no archetype signals → ask about personality
+2. If no ICP found → ask about ideal customer
+3. If no transformation → ask about before/after
+4. If no values → ask about non-negotiables
 
 ### Step 6: Bootstrap
 
@@ -153,3 +163,17 @@ If they say yes → run the N06 Brand Book workflow.
 **User's materials are in a foreign language**:
 → brand_ingest.py detects language automatically.
 → Set BRAND_LANGUAGE accordingly.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

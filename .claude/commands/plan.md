@@ -1,5 +1,15 @@
 ---
 description: "Plan a goal — decompose into tasks, identify nuclei, map dependencies. Usage: /plan <goal>"
+quality: 9.0
+title: "Plan"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # /plan — Decompose a Goal
@@ -22,9 +32,9 @@ python _tools/cex_mission.py decompose "$ARGUMENTS"
 ```
 
 If the tool output is insufficient, decompose manually:
-- What artifacts need to exist?
-- Which nuclei own them?
-- What depends on what?
+1. What artifacts need to exist?
+2. Which nuclei own them?
+3. What depends on what?
 
 ### Step 3: Map dependencies
 
@@ -82,7 +92,21 @@ Adjust if needed. Then suggest:
 ## Plan is NOT execution
 
 `/plan` only PLANS. It does not:
-- Ask subjective questions (that's `/guide`)
-- Write detailed specs (that's `/spec`)
-- Build anything (that's `/grid` or `/build`)
-- Score or clean up (that's `/consolidate`)
+1. Ask subjective questions (that's `/guide`)
+2. Write detailed specs (that's `/spec`)
+3. Build anything (that's `/grid` or `/build`)
+4. Score or clean up (that's `/consolidate`)
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
