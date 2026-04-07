@@ -8,7 +8,7 @@ created: "2026-04-06"
 updated: "2026-04-06"
 author: "builder_agent"
 domain: "session_backend — session state persistence specifications with backend type, TTL, serialization, and encryption"
-quality: null
+quality: 9.0
 tags: [quality-gate, session-backend, persistence, state, P11]
 tldr: "Gates for session_backend artifacts: validates backend type, TTL, serialization, encryption, scoping, and credential safety."
 density_score: 0.91
