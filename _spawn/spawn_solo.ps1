@@ -122,15 +122,11 @@ if (Test-Path $bootCmd) {
         n01 = "cex-n01-inveja"; n02 = "cex-n02-luxuria"; n03 = "cex-n03-soberba"
         n04 = "cex-n04-gula";   n05 = "cex-n05-ira";     n06 = "cex-n06-avareza"
     }
-    $piSettings = Join-Path $env:USERPROFILE ".pi\agent\settings.json"
-    if (Test-Path $piSettings) {
-        $themeName = $themeMap[$nucleus]
-        if ($themeName) {
-            $sJson = Get-Content $piSettings -Raw | ConvertFrom-Json
-            $sJson.theme = $themeName
-            $sJson | ConvertTo-Json -Depth 5 | Set-Content $piSettings -Encoding UTF8
-            Write-Output "[$upper] Theme: $themeName"
-        }
+    $themeName = $themeMap[$nucleus]
+    if ($themeName) {
+        # Use python for JSON (PS ConvertTo-Json corrupts encoding)
+        & python -c "import json;p=r'$($env:USERPROFILE)\.pi\agent\settings.json';s=json.load(open(p,encoding='utf-8'));s['theme']='$themeName';json.dump(s,open(p,'w'),indent=2)" 2>$null
+        Write-Output "[$upper] Theme: $themeName"
     }
 
     Write-Output "[$upper] Boot: CMD (pi + theme)"
