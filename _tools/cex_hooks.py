@@ -406,6 +406,43 @@ def check_ps_parse(staged_files: list[str]) -> int:
     return errors
 
 
+def check_sanitize(staged_files: list[str]) -> int:
+    """Run cex_sanitize.py --check on _tools/ when staged .py files exist there.
+
+    This catches non-ASCII that check_encoding also flags, but provides
+    actionable replacement suggestions (em-dash -> --, smart quotes -> straight, etc.).
+    Returns error count (0 = clean, 1 = issues found).
+    """
+    py_in_tools = [f for f in staged_files
+                   if f.endswith(".py") and f.replace("\\", "/").startswith("_tools/")]
+    if not py_in_tools:
+        return 0
+
+    sanitize_script = CEX_ROOT / "_tools" / "cex_sanitize.py"
+    if not sanitize_script.exists():
+        print("  sanitize_check: SKIP (cex_sanitize.py not found)")
+        return 0
+
+    print("  sanitize_check: running cex_sanitize.py --check --scope _tools/ ...")
+    try:
+        result = subprocess.run(
+            [sys.executable, str(sanitize_script), "--check", "--scope", "_tools/"],
+            capture_output=True, text=True, timeout=30
+        )
+        if result.stdout.strip():
+            print(result.stdout.strip())
+        if result.returncode != 0:
+            print("    [FAIL] cex_sanitize found non-ASCII in _tools/")
+            print("    Fix with: python _tools/cex_sanitize.py --fix --scope _tools/")
+            return 1
+        else:
+            print("  sanitize_check: PASS")
+            return 0
+    except Exception as e:
+        print("  sanitize_check: SKIP (%s)" % e)
+        return 0
+
+
 def check_yaml_valid(staged_files: list[str]) -> int:
     """Validate YAML syntax for staged .yaml/.yml files.
 
@@ -452,6 +489,7 @@ def run_pre_commit() -> int:
     2. Encoding check: reject non-ASCII in staged .py/.ps1/.sh/.cmd
     3. PowerShell parse: AST validation for staged .ps1
     4. YAML validation: syntax check for staged .yaml/.yml
+    5. Sanitize check: cex_sanitize.py --check on staged _tools/*.py
     """
     try:
         result = subprocess.run(
@@ -494,6 +532,9 @@ def run_pre_commit() -> int:
 
     # 4. YAML validation
     errors += check_yaml_valid(all_staged)
+
+    # 5. Sanitize check -- cex_sanitize.py on staged _tools/*.py
+    errors += check_sanitize(all_staged)
 
     if errors:
         print(f"\npre-commit: BLOCKED -- {errors} error(s). Fix before committing.")
