@@ -6,8 +6,9 @@ nucleus: N06
 pillar: P01
 sin: Avareza Estrategica
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
+density_score: 1.0
 ---
 
 # N06 Deck — Available Capabilities
