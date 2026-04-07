@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-04-07
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 9.1
 tags: [prompt-evolution, versioning, iteration, optimization, llm, prompt-engineering]
 tldr: "Version prompts like code. Measure per-version metrics, apply targeted fixes per pass, promote only on metric gain."
 when_to_use: "When prompt output quality degrades, a new model drops, or A/B tests show regression"
