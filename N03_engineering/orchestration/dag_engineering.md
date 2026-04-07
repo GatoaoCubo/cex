@@ -56,3 +56,42 @@ Max cycle: 2. After 2 retries, F7 emits HARD FAIL.
 - Within single artifact: none (strict sequential)
 - Across artifacts: full parallel via cex_forge.py
 - Across nuclei: full parallel via spawn grid
+
+
+## DAG Execution Semantics
+
+The directed acyclic graph defines strict execution ordering with these constraints:
+
+- **No cycles allowed**: validator rejects graphs containing backward edges at parse time
+- **Parallel branches**: independent nodes execute concurrently up to nucleus pool limit
+- **Failure propagation**: node failure blocks all downstream dependents immediately
+- **Partial results**: completed branches produce artifacts even if sibling branches fail
+
+### DAG Definition Example
+
+```yaml
+# Engineering pipeline DAG
+dag:
+  name: build_and_validate
+  nodes:
+    - id: scaffold
+      nucleus: N03
+      depends: []
+    - id: test
+      nucleus: N05
+      depends: [scaffold]
+    - id: document
+      nucleus: N04
+      depends: [scaffold]
+    - id: review
+      nucleus: N05
+      depends: [test, document]
+```
+
+| Property | Constraint | Default |
+|----------|-----------|---------|
+| max_depth | 8 levels | 5 |
+| max_width | 6 parallel | 4 |
+| timeout_per_node | 300s | 120s |
+| retry_on_failure | 0-3 | 1 |
+

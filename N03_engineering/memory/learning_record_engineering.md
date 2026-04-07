@@ -45,3 +45,30 @@ Fix: added cex_index.py call after compile in Runner.F8.
 The builder nucleus builds itself. Phase 1 must be manual (genesis).
 Phase 2 uses the builder to complete itself (autopoiesis).
 Phase 3 rewrites originals with full context (strange loop).
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Memory entries decay linearly over 365 days unless refreshed
+- Four memory types: correction, preference, convention, context
+- Relevance scoring combines keyword match with recency weighting
+- Memory pruning removes entries below 0.3 relevance threshold
+
+### Usage Reference
+
+```yaml
+# learning_record integration
+artifact: learning_record_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

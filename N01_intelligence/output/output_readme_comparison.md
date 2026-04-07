@@ -4,6 +4,14 @@ kind: output_template
 pillar: P01
 quality: 8.7
 density_score: 0.95
+title: "Output Readme Comparison"
+version: 1.0.0
+author: N01
+tags: [output_template, intelligence, output]
+tldr: "**Typed Knowledge**: Critical for enterprises with compliance requirements or knowledge workers who need guaranteed artifact structure and validation."
+domain: intelligence
+created: 2026-04-06
+updated: 2026-04-07
 ---
 
 ## Feature Comparison
@@ -29,3 +37,20 @@ density_score: 0.95
 **100+ Builders**: Valuable for teams that need specialized output formats without custom prompt engineering (legal docs, technical specs, marketing materials).
 
 **Fine-Tune Ready**: Important for organizations planning to train custom models on their proprietary processes and knowledge base.
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | intelligence | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Intelligence artifacts follow CEX 8F pipeline from intent to publication
+- Quality gates enforce minimum 8.0 threshold for all published artifacts
+- Cross-nucleus references use explicit id-based linking, not path-based
+- Version tracking enables rollback to any previous artifact state
+

@@ -45,3 +45,39 @@ Model: opus + xthinking. Time: 10-30 min.
 | build {{thing}} with {{deps}} | P2 Crew |
 | scaffold nucleus N0x | P3 Bootstrap |
 | ambiguous | P1 via Motor |
+
+
+## Implementation Patterns
+
+The following patterns form the engineering backbone of CEX artifact construction:
+
+- **Builder-ISO pattern**: 13 ISOs per kind ensure complete artifact specification without scope drift
+- **Signal-based coordination**: filesystem signals enable async nucleus communication without shared memory
+- **Frontmatter-first design**: YAML frontmatter serves as machine-readable API for every artifact
+- **Quality gate pipeline**: hard gates block, soft dimensions score, semantic layer validates depth
+
+### Pattern Selection Criteria
+
+Choose patterns based on artifact complexity and cross-nucleus dependencies:
+
+```yaml
+# Pattern routing decision tree
+simple_artifact:
+  pattern: single_builder
+  nuclei: 1
+  quality_gate: structural_only
+  
+complex_artifact:
+  pattern: multi_builder_chain
+  nuclei: 2+
+  quality_gate: full_hybrid
+  synthesis_required: true
+```
+
+| Pattern | Complexity | Nuclei | Typical Use |
+|---------|-----------|--------|-------------|
+| Single builder | Low | 1 | Knowledge cards, schemas |
+| Chain | Medium | 2 | Research-to-output pipelines |
+| Fan-out | High | 3+ | Full mission grid dispatch |
+| Feedback loop | High | 2+ | Evolve + score iteration |
+

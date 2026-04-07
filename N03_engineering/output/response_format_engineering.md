@@ -52,3 +52,34 @@ Every artifact follows:
 
 File: {pillar_lower}_{kind}_{topic}.md
 Compiled: {kind}_{topic}.yaml
+
+
+## Response Format Constraints
+
+Engineering outputs follow strict formatting rules to enable automated parsing:
+
+- **Frontmatter mandatory**: every output starts with YAML frontmatter block
+- **Machine-parseable sections**: key data in tables or YAML blocks, not prose
+- **Deterministic structure**: heading hierarchy matches template exactly
+- **Size bounds**: outputs stay within 1KB-50KB range; outliers trigger review
+
+### Format Validation Pipeline
+
+```yaml
+# Post-generation validation
+validation:
+  frontmatter_check: strict
+  heading_hierarchy: ordered
+  table_parse: all_valid
+  code_block_syntax: highlighted
+  max_size_kb: 50
+  min_size_kb: 1
+```
+
+| Format Element | Requirement | Failure Action |
+|---------------|------------|----------------|
+| YAML frontmatter | Valid YAML, required fields present | Block publication |
+| Markdown headings | H2 > H3 ordering, no skips | Auto-fix if possible |
+| Tables | Parseable, aligned pipes | Warn and flag |
+| Code blocks | Language tag present | Auto-detect language |
+

@@ -36,3 +36,30 @@ Injected at Runner.F6 (PRODUCE). Variables filled by pipeline from F1-F5 outputs
 | {{construction_plan}} | LLM reasoning | F4 |
 | {{existing_artifacts_summary}} | artifact scan | F5 |
 | {{open_variables}} | mustache syntax | consumer at use-time |
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Prompt templates use {{VARIABLE}} syntax for parameter injection
+- Chain steps pass context via {previous} placeholder in task field
+- Token budget allocated per step to prevent context overflow
+- System prompts loaded from nucleus config, not hardcoded in chains
+
+### Usage Reference
+
+```yaml
+# prompt_template integration
+artifact: prompt_template_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

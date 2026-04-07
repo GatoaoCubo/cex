@@ -105,3 +105,21 @@ Intent: "implement research pipeline in Python"
 - docker (for container building)
 - @railway/cli (for Railway deploy)
 - @anthropic/mcp-server-github (for PR review)
+
+
+## Integration Checklist
+
+Software project tools must satisfy these operational requirements:
+
+- **Reproducible builds**: running the same command twice produces identical output
+- **Dependency lockfiles**: all dependencies pinned to exact versions in lockfile
+- **Test harness**: project includes test runner with minimum 80% coverage target
+- **CI-ready**: project includes configuration for at least one CI provider
+
+| Check | Tool | Threshold |
+|-------|------|-----------|
+| Build reproducibility | Hash comparison | 100% match |
+| Dependency freshness | Version checker | < 90 days old |
+| Test coverage | Coverage reporter | >= 80% lines |
+| Lint compliance | Linter | 0 errors |
+

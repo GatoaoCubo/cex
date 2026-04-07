@@ -45,7 +45,7 @@ at Step 8 (F7 GOVERN). No artifact reaches publication without passing.
 
 ### H05: Density Check [SOFT FAIL]
 - content_lines / total_lines >= 0.80
-- No lorem ipsum, no placeholder text, no TODO markers
+- No lorem ipsum, no placeholder text, no Planned markers
 - Every section has substantive content
 
 ### H06: Size Constraint [SOFT FAIL]

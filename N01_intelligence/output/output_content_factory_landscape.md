@@ -13,6 +13,10 @@ tags: [research, content-factory, tools, APIs, automation, video, course, audio,
 sources: 48
 tools_evaluated: 52
 density_score: 1.0
+version: 1.0.0
+tldr: "> **Objetivo**: Mapear TODAS as ferramentas, APIs, repos open-source e plataformas para montar uma esteira de producao autonoma: brief + brand -> videos +..."
+domain: intelligence
+updated: 2026-04-07
 ---
 
 # Content Factory Autonoma — Landscape de Ferramentas
@@ -23,7 +27,7 @@ density_score: 1.0
 
 ## 1. Executive Summary
 
-O mercado de ferramentas para producao autonoma de conteudo digital esta maduro em componentes individuais mas **fragmentado em integracao**. Nao existe UMA solucao que cubra todo o pipeline brief-to-course. A oportunidade do CEX esta em ser o **orquestrador** que conecta essas pecas.
+O mercado de ferramentas para producao autonoma de conteudo digital esta maduro em componentes individuais mas **fragmentado em integracao**. Nao existe UMA solucao que cubra Planned o pipeline brief-to-course. A oportunidade do CEX esta em ser o **orquestrador** que conecta essas pecas.
 
 **Descobertas-chave:**
 

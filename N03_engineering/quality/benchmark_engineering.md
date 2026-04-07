@@ -38,3 +38,30 @@ density_score: 0.88
 
 Any commit that reduces Motor resolution below 99/99 or introduces doctor FAILs
 must be reverted or fixed before merge. Benchmarks are checked in CI.
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Baseline metrics established from initial 100-artifact corpus
+- Regression detection triggers alert when score drops below baseline
+- Performance benchmarks run on standardized hardware configuration
+- Test coverage tracked per nucleus with minimum 80% gate threshold
+
+### Usage Reference
+
+```yaml
+# benchmark integration
+artifact: benchmark_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

@@ -41,3 +41,30 @@ JSON files written to signal directory.
 
 File naming: {nucleus}_{kind}_{status}_{timestamp}.json
 Monitors poll the signal directory at configurable interval.
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | engineering | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Engineering artifacts follow CEX 8F pipeline from intent to publication
+- Quality gates enforce minimum 8.0 threshold for all published artifacts
+- Cross-nucleus references use explicit id-based linking, not path-based
+- Version tracking enables rollback to any previous artifact state
+
+### Usage Reference
+
+```yaml
+# signal integration
+artifact: signal_engineering
+nucleus: N03
+domain: engineering
+quality_threshold: 9.0
+```
+

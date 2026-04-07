@@ -52,3 +52,31 @@ Multi-kind crews chain handoffs:
 Builder A produces artifact > hands path to Builder B as context >
 Builder B produces next > chain continues until crew complete.
 Each step signals independently. Crew done when all signals received.
+
+
+## Handoff Protocol Details
+
+Inter-nucleus handoffs follow a strict write-read-acknowledge lifecycle:
+
+- **Atomic writes**: handoff files created via temp-file + rename to prevent partial reads
+- **Schema validation**: receiving nucleus validates payload against expected schema before processing
+- **Timeout enforcement**: unacknowledged handoffs trigger escalation after configurable TTL
+- **Audit trail**: every handoff logged with timestamp, source, target, and payload hash
+
+### Handoff Payload Format
+
+```yaml
+# Standard handoff envelope
+handoff:
+  source: N03
+  target: N05
+  created: 2026-04-07T15:00:00
+  ttl_seconds: 300
+  payload_hash: sha256:abc123
+  schema_version: 1.0
+  task: "Run tests on scaffolded project"
+  context:
+    artifacts: [project_scaffold.md]
+    quality_threshold: 9.0
+```
+

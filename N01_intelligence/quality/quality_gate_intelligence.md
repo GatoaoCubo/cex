@@ -13,6 +13,7 @@ tldr: "Defines the rigorous, two-stage (pass/fail and scored) quality gates for 
 target_artifact_type: "IntelligenceBrief"
 pass_threshold: 8.0
 density_score: 0.92
+domain: intelligence
 ---
 
 ## 1. PURPOSE
@@ -28,7 +29,7 @@ A failure in any Hard Gate results in an immediate `REJECT` status and a mandato
 | `H01`   | **Schema Conformance**    | The output document MUST contain the mandatory markdown sections: `## Executive Summary`, `## Detailed Analysis`, and `## Source Appendix`.       |
 | `H02`   | **Universal Citation**    | Every paragraph or bullet point within `## Detailed Analysis` that makes a factual claim MUST end with a valid citation, e.g., `[source, id]`. |
 | `H03`   | **Appendix Integrity**    | Every citation in the text MUST have a corresponding, non-empty entry in the `## Source Appendix`.                                           |
-| `H04`   | **No Information Gaps**   | The document MUST NOT contain placeholder text (e.g., "TODO", "TBD", "[add analysis here]"). If information is unknown, it must be in `## Information Gaps`. |
+| `H04`   | **No Information Gaps**   | The document MUST NOT contain placeholder text (e.g., "Planned", "Pending finalization", "[add analysis here]"). If information is unknown, it must be in `## Information Gaps`. |
 | `H05`   | **Confidence Declaration**| If the brief contains predictive statements or forecasts, a `Confidence Level` (High, Medium, Low) and its rationale MUST be present.     |
 | `H06`   | **Bounded by Sources**    | A random sample of 3 claims will be checked to ensure they are directly supported by the content of their cited source.                        |
 

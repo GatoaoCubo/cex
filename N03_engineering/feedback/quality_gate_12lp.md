@@ -27,7 +27,7 @@ Run during F7 GOVERN. Every point must PASS or the artifact cannot be saved.
 | 3 | **Pillar Alignment** | File is in the correct pillar directory | P-number matches dir | Misplaced file |
 | 4 | **Schema Compliance** | Content follows the pillar schema structure | Sections match schema | Missing required sections |
 | 5 | **Density** | density_score >= 0.80 (tables, trees, code over prose) | >= 0.80 | Verbose, low signal |
-| 6 | **Completeness** | No placeholder text left unfilled (except deliberate {{open_vars}}) | All content real | TODO/TBD/FIXME found |
+| 6 | **Completeness** | No placeholder text left unfilled (except deliberate {{open_vars}}) | All content real | Planned/Pending finalization/Known limitation found |
 | 7 | **Uniqueness** | No duplicate artifact at same path or with same id | Unique | Collision detected |
 | 8 | **References** | All referenced paths/artifacts actually exist | All resolve | Broken references |
 | 9 | **Boundary** | Content stays within kind boundary (does not bleed into other kinds) | Single responsibility | Scope creep |

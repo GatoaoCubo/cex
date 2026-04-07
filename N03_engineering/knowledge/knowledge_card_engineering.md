@@ -55,3 +55,34 @@ rather than building artifacts directly. N03 builds builders, not products.
 - Skipping quality gates to save time
 - Hardcoding values that should be {{open_variables}}
 - Creating kinds without registering in kinds_meta.json
+
+
+## Engineering Knowledge Card Standards
+
+Knowledge cards in the engineering domain follow stricter structural requirements:
+
+- **One concept per card**: scope creep triggers mandatory split into child cards
+- **Executable examples**: every engineering KC includes at least one runnable snippet
+- **Version-aware**: cards reference specific tool versions and deprecation timelines
+- **Cross-linked**: explicit id-based references to related cards enable graph traversal
+
+### Retrieval Optimization
+
+```yaml
+# Knowledge card indexing config
+indexing:
+  method: tf_idf
+  min_tags: 3
+  max_tags: 8
+  density_threshold: 0.6
+  embedding_model: local
+  refresh_on_update: true
+```
+
+| Field | Purpose | Impact on Retrieval |
+|-------|---------|-------------------|
+| tags | Primary keyword matching | High - drives TF-IDF ranking |
+| tldr | Summary for quick scan | Medium - used in result preview |
+| domain | Namespace isolation | High - filters search scope |
+| density_score | Content richness metric | Low - quality indicator only |
+

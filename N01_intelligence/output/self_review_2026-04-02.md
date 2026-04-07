@@ -7,6 +7,14 @@ quality: 8.8
 date: 2026-04-02
 type: self-review
 density_score: 0.81
+title: "Self Review 2026 04 02"
+version: 1.0.0
+author: N01
+tags: [context-doc, intelligence, output]
+tldr: "1.  **Pillar P09 (Config) is Empty**: The `N01_intelligence/config/` directory contains no artifacts. A nucleus's config pillar is essential for holding..."
+domain: intelligence
+created: 2026-04-06
+updated: 2026-04-07
 ---
 # N01 Self-Review — 2026-04-02
 
