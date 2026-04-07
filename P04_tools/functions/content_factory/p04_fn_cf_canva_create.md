@@ -52,13 +52,14 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content_factory
-quality: null
+quality: 9.0
 tags: [function_def, canva, design, create, content_factory]
 tldr: "LLM-callable function to create Canva designs via API — presentations, social posts, documents, videos"
 examples:
   - input: {"design_type": "presentation", "title": "Q1 Results", "template_id": "DAF_abc123"}
     output: {"design_id": "DAGxyz789", "edit_url": "https://canva.com/design/DAGxyz789/edit", "thumbnail_url": "https://canva.com/design/DAGxyz789/thumb"}
 error_types: [invalid_template_id, quota_exceeded, invalid_dimensions, auth_expired]
+density_score: 0.91
 ---
 
 # Canva Create Design Function
