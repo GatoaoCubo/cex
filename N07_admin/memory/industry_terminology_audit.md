@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-04-07
 updated: 2026-04-07
 author: N07_orchestrator
-quality: null
+quality: 9.1
 tags: [terminology, audit, industry, anthropic, openai, google, langchain, permanent]
 tldr: "Maps all 117 CEX kinds against official terminology from 4 major providers. Identifies 8 gaps, 12 mismatches, and 1 critical problem: schemas in Portuguese."
 density_score: null
