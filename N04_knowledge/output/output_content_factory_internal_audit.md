@@ -10,8 +10,9 @@ version: 2.0.0
 created: 2026-04-06T13:30:00-03:00
 updated: 2026-04-06T16:00:00-03:00
 author: N04_knowledge_engineer
-quality: null
+quality: 9.1
 tags: [audit, internal, content-factory, builders, kinds, reuse, gap-analysis]
+density_score: 1.0
 ---
 
 # Auditoria Interna CEX: Assets Reutilizaveis para Content Factory
