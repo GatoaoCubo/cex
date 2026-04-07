@@ -8,6 +8,7 @@ version: 1.0.0
 quality: null
 created: 2026-04-07 11:00:00-03:00
 task_source: .cex/runtime/handoffs/n04_task.md
+density_score: 1.0
 task: Grid dispatch test. Prove N04 is alive, validate domain health, signal complete.
 execution_timestamp:
 - 'Start: 2026-04-07 11:00:45 BRT'

@@ -5698,3 +5698,21 @@ et
 2026-04-07 08:42:38	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\signal-builder\bld_instruction_signal.md	1	9.0	0.92	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
 2026-04-07 08:42:38	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\signal-builder\bld_quality_gate_signal.md	1	9.0	0.96	keep	analyzed: add_tags: minimum 3 tags required
 2026-04-07 08:42:39	C:\Users\PC\Documents\GitHub\cex\_tools\proof\rebuilt\signal-builder\bld_system_prompt_signal.md	1	9.0	0.85	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 12:06:40	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_self_bootstrap.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:41	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\deck_n01.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:42	C:\Users\PC\Documents\GitHub\cex\N01_intelligence\output\grid_test_20260407.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:43	C:\Users\PC\Documents\GitHub\cex\N02_marketing\deck_n02.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:43	C:\Users\PC\Documents\GitHub\cex\N02_marketing\output\output_grid_test.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:44	C:\Users\PC\Documents\GitHub\cex\N03_engineering\deck_n03.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:45	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\deck_n04.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:45	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\output\grid_test_20260407.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:46	C:\Users\PC\Documents\GitHub\cex\N05_operations\deck_n05.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:47	C:\Users\PC\Documents\GitHub\cex\N05_operations\output\grid_test_20260407.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:48	C:\Users\PC\Documents\GitHub\cex\N06_commercial\deck_n06.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:48	C:\Users\PC\Documents\GitHub\cex\N07_admin\deck_n07.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:49	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\examples\p01_knowledge_card_create_knowledge_card_about_rag_chunking_strategies_comparis.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 12:06:50	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\patterns\kc_prompt_evolution.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 12:06:50	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\patterns\kc_query_decomposition.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 12:06:51	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_context_assembly.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:52	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_metaphor_dictionary.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 12:06:52	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_n07_bootstrap_context.md	1	8.9	1.00	keep	added density_score: 1.0

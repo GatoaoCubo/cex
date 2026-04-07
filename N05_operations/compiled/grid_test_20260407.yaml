@@ -2,11 +2,13 @@ id: grid_test_n05_20260407
 kind: smoke_eval
 title: N05 Grid Dispatch Test -- 2026-04-07
 nucleus: N05
+pillar: P07
 sin: Ira Construtiva
 version: 1.0.0
 quality: null
 created: 2026-04-07
 mission: GRID_TEST
+density_score: 1.0
 grid_test_result: '| Check | Result | Detail |
 
   |-------|--------|--------|

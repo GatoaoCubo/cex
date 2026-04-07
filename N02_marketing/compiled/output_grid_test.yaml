@@ -1,0 +1,54 @@
+id: output_grid_test_n02
+kind: context_doc
+pillar: P08
+title: N02 Grid Test — Dispatch Verification
+nucleus: N02
+sin: Luxúria Criativa
+version: 1.0.0
+quality: null
+created: 2026-04-07 11:00:26-03:00
+mission: GRID_TEST
+density_score: 1.0
+status_pass: N02 received the dispatch, read the decision manifest, and is operational.
+checklist: '| Check | Result |
+
+  |-------|--------|
+
+  | Handoff received | ✅ `.cex/runtime/handoffs/n02_task.md` |
+
+  | Decision manifest loaded | ✅ `.cex/runtime/decisions/decision_manifest.yaml` |
+
+  | Nucleus directory accessible | ✅ `N02_marketing/` (16 subdirs) |
+
+  | Prior artifacts intact | ✅ deck, e2e gold (4 files), content factory output |
+
+  | Brand config | ⚠️ Not yet bootstrapped (`.cex/brand/brand_config.yaml` missing) |
+
+  | Signal writer available | ✅ `_tools/signal_writer.py` |'
+artifacts_verified: '| Artifact | Path | Exists |
+
+  |----------|------|--------|
+
+  | Deck | `N02_marketing/deck_n02.md` | ✅ |
+
+  | Pet Shop Gold | `_docs/tests/e2e_gold/petshop_marketing.md` | ✅ |
+
+  | Instagram Gold | `_docs/tests/e2e_gold/instagram_marketing.md` | ✅ |
+
+  | Docs Gold | `_docs/tests/e2e_gold/docs_marketing.md` | ✅ |
+
+  | Quality Rubric | `_docs/tests/e2e_gold/quality_rubric.md` | ✅ |
+
+  | CF Actions & Dist | `N02_marketing/output/output_cf_actions_and_distribution.md` | ✅ |'
+decision_manifest_summary: 'Loaded from `FULLGRID_20260406`:
+
+  - NotebookLM: domain scope, auto-publish, chrome_local, financeiro@gatoaocubo3.com
+
+  - Tech debt: sanitize all tools, utf8_strict, pre-commit hooks
+
+  - Agent identity: source from nucleus_sins.yaml
+
+
+  All subjective decisions pre-resolved. N02 will not re-ask.'
+conclusion: The seduction machine is warmed up. Dispatch pipeline proven. N02 ready for real work — just say the word and
+  watch copy drip.
