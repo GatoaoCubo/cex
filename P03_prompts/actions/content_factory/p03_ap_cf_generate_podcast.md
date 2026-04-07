@@ -26,7 +26,7 @@ constraints:
   - "Do NOT include specific guest names unless provided in input"
   - "Word count must approximate duration (150 words/minute spoken)"
 domain: "content_factory"
-quality: null
+quality: 9.1
 tags: [action_prompt, content_factory, podcast, audio, script]
 tldr: "Generate podcast episode script (segments + talking points + show notes) from topic and duration for recording"
 density_score: 0.91
