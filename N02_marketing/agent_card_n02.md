@@ -39,20 +39,20 @@ density_score: 1.0
 |--------|------:|--------------|
 | `agents/` | 1 | `agent_marketing.md` — minha identidade e instruções operacionais |
 | `architecture/` | 1 | `agent_card_marketing.md` — card P08 com routing e capabilities |
-| `artifacts/` | 1 | `email_sequence_template.md` — template de sequência de email |
-| `compiled/` | 42 | YAML compilados de todos os artefatos fonte (auto-gerado) |
+| `artifacts/` | 3 | `email_sequence_template.md` + `landing_page_template.md` + `ad_copy_template.md` |
+| `compiled/` | 48 | YAML compilados de todos os artefatos fonte (auto-gerado) |
 | `config/` | 2 | `ab_testing_framework.md` + `brand_override_config.md` |
 | `feedback/` | 1 | `quality_gate_marketing.md` — gates de qualidade para copy |
-| `knowledge/` | 12 | KCs especializados: a11y, color theory, CSS animation, email HTML, component library, responsive layouts, shadcn/radix, tailwind, typography, visual hierarchy, marketing KC, social publishing KC |
+| `knowledge/` | 14 | KCs especializados: a11y, campaign, color theory, CSS animation, email HTML, email sequence, component library, responsive layouts, shadcn/radix, tailwind, typography, visual hierarchy, marketing KC, social publishing KC |
 | `memory/` | 2 | `campaign_performance_memory.md` + `copy_optimization_insights.md` |
 | `orchestration/` | 5 | Dispatch rules (marketing + social), cross-nucleus handoffs, workflow marketing, weekly fashion content workflow |
 | `output/` | 13 | Landing pages, emails, social cards, dashboard UI, readme hero, style guide, visual report, competitive positioning, monetization launch, SDK validation, content factory actions |
 | `prompts/` | 4 | System prompt, action prompt, prompt template, brand voice templates |
 | `quality/` | 1 | `scoring_rubric_marketing.md` — rubrica de avaliação para copy |
 | `schemas/` | 5 | a11y checklist, design tokens, HTML output schema, responsive breakpoints, tailwind palette contract |
-| `tools/` | 1 | `social_publisher_marketing.md` — publicação social multi-plataforma |
+| `tools/` | 3 | `social_publisher_marketing.md` + `copy_analyzer.md` + `headline_scorer.md` |
 
-**Total source files: 51** · **Total compiled: 42** · **Grand total: 93 files**
+**Total source files: 57** · **Total compiled: 48** · **Grand total: 105 files**
 
 ---
 
@@ -159,14 +159,16 @@ density_score: 1.0
 
 ---
 
-## Knowledge Base (12 KCs)
+## Knowledge Base (14 KCs)
 
 | KC | Domain | Why It Matters |
 |----|--------|----------------|
 | `kc_accessibility_a11y.md` | A11Y | Copy acessível = copy que alcança TODOS |
+| `kc_campaign.md` | Campaigns | Da brief à conversão — o sistema completo de campanha |
 | `kc_color_theory_applied.md` | Design | Cores que provocam emoção, não só estética |
 | `kc_css_animation_micro.md` | Motion | Micro-interações que seduzem o scroll |
 | `kc_email_html_responsive.md` | Email | HTML que renderiza em 30+ clients |
+| `kc_email_sequence.md` | Email Sequences | Arcos de persuasão que convertem cold → warm → buyer |
 | `kc_html_component_library.md` | Components | Biblioteca de componentes reutilizáveis |
 | `kc_responsive_layout_systems.md` | Layout | Layouts que funcionam em qualquer tela |
 | `kc_shadcn_radix_patterns.md` | UI | Padrões de UI modernos |
@@ -200,15 +202,15 @@ density_score: 1.0
 
 ## Gaps
 
-| Gap | Impact | Fix |
-|-----|--------|-----|
-| Brand not bootstrapped | `brand_config.yaml` só tem template — nenhuma marca configurada | `/init` ou `boot/n06.cmd` |
-| No `kc_email_sequence.md` | Kind KC ausente — email sequences sem referência formal | N04 criar KC |
-| No `kc_campaign.md` | Kind KC ausente — campanhas sem referência formal | N04 criar KC |
-| Single artifact in `artifacts/` | Apenas 1 template de email — falta landing page template, ad template | Build via 8F |
-| Single tool | `social_publisher_marketing.md` é o único — falta copy analyzer, headline scorer | N05 criar tools |
-| Canva env vars pendentes | MCP Canva precisa `CANVA_CLIENT_ID` + `CANVA_CLIENT_SECRET` configurados | Configurar .env |
-| No A/B test history | Framework existe mas sem dados de testes anteriores | Executar primeiro teste |
+| Gap | Impact | Fix | Status |
+|-----|--------|-----|--------|
+| Brand not bootstrapped | `brand_config.yaml` só tem template — nenhuma marca configurada | `/init` ou `boot/n06.cmd` | ⏳ Aguardando user |
+| ~~No `kc_email_sequence.md`~~ | ~~Kind KC ausente~~ | ~~N04 criar KC~~ | ✅ Criado 2026-04-07 |
+| ~~No `kc_campaign.md`~~ | ~~Kind KC ausente~~ | ~~N04 criar KC~~ | ✅ Criado 2026-04-07 |
+| ~~Single artifact in `artifacts/`~~ | ~~Apenas 1 template~~ | ~~Build via 8F~~ | ✅ 3 templates agora |
+| ~~Single tool~~ | ~~Faltava copy analyzer, headline scorer~~ | ~~N05 criar tools~~ | ✅ 3 tools agora |
+| Canva env vars pendentes | MCP Canva precisa `CANVA_CLIENT_ID` + `CANVA_CLIENT_SECRET` configurados | Configurar .env | ⏳ Config task |
+| No A/B test history | Framework existe mas sem dados de testes anteriores | Executar primeiro teste | ⏳ Operacional |
 
 ---
 
@@ -219,23 +221,24 @@ density_score: 1.0
 │  N02 — LUXÚRIA CRIATIVA ♥                       │
 │  "Isso SEDUZ o público?"                        │
 ├─────────────────────────────────────────────────┤
-│  📄 Source artifacts:  51                        │
-│  📦 Compiled:          42                        │
-│  📚 Total files:       93                        │
+│  📄 Source artifacts:  57                        │
+│  📦 Compiled:          48                        │
+│  📚 Total files:      105                        │
 │  🔧 Kinds buildable:  18 (9 primary)            │
 │  🛠️  Tools relevant:   22                        │
 │  🔌 MCP Servers:       4                         │
-│  🧠 Knowledge Cards:  12                         │
+│  🧠 Knowledge Cards:  14                         │
 │  💾 Memory slots:      2 active                  │
 │  📐 Schemas:           5                         │
 │  ⚡ Model:             opus-4-6 (1M ctx)         │
 ├─────────────────────────────────────────────────┤
 │  STRENGTHS: Deep visual knowledge, full prompt   │
 │  arsenal, memory-driven learning, A/B native,    │
-│  4 MCP integrations, brand voice system          │
+│  4 MCP integrations, brand voice system,         │
+│  3 artifact templates, 3 tools, 14 KCs           │
 │                                                  │
-│  GAPS: Brand not bootstrapped, 2 missing KCs,    │
-│  thin artifacts dir, Canva env pending           │
+│  GAPS: Brand not bootstrapped (user action),     │
+│  Canva env pending (config task)                 │
 └─────────────────────────────────────────────────┘
 ```
 
