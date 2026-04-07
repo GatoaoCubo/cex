@@ -29,6 +29,7 @@ examples:
 density_score: 0.86
 linked_artifacts:
   agent: records/agents/design-extractor/README.md
+title: "Example: Browser Tool Design Extractor"
 ---
 
 # Design Extractor Skill

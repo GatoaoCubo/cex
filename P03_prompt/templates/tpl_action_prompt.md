@@ -1,6 +1,7 @@
 ---
-id: "p03_ap_"PLACEHOLDER""
+id: "p03_ap_{{ACTION_SLUG}}"
 kind: action_prompt
+pillar: P03
 version: 1.0.0
 title: Template - Action Prompt
 tags: [template, action, prompt, tool-use, execution]
@@ -51,7 +52,7 @@ patterns:
 | Property | Value |
 |----------|-------|
 | Kind | `action_prompt` |
-| Pillar |  |
+| Pillar | P03 |
 | Domain | prompt engineering |
 | Pipeline | 8F (F1-F8) |
 | Scorer | `cex_score.py` |

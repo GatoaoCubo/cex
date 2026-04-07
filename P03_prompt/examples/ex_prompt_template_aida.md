@@ -10,6 +10,12 @@ references:
   - ex_agent_copywriter
   - ex_quality_gate_copy
 quality: 9.0
+domain: "prompt engineering"
+density_score: 0.81
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
+version: "1.0.0"
 ---
 
 # AIDA Copywriting Template

@@ -1,7 +1,9 @@
 ---
 id: "p02_mc_[model_slug]"
+kind: model_card
+pillar: P02
 version: 1.0.0
-title: Template - Unknown
+title: "Template — Model Card"
 tags: [template, model-card, llm, config, selection]
 tldr: Documents LLM capabilities, costs, limits, and recommended use cases for informed model selection.
 quality: 9.0
@@ -16,10 +18,10 @@ created: "2026-04-07"
 density_score: 0.99
 ---
 
-# Unknown: [NAME]
+# Model Card: [NAME]
 
 ## Purpose
-[WHAT this unknown does]
+[WHAT model this card documents — capabilities, costs, limits, recommended usage]
 ## Model Identity
 | Field | Value |
 |-------|-------|

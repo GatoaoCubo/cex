@@ -7,6 +7,11 @@ title: "Template — Document Loader"
 tags: [template, document, loader, parser, extraction]
 tldr: "Configures document ingestion: parsing format, text extraction, metadata extraction, and chunking handoff. Supports PDF, HTML, markdown, CSV, and DOCX."
 quality: 9.0
+domain: "tool integration"
+density_score: 0.86
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
 ---
 
 # Document Loader: [NAME]

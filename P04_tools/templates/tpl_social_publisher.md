@@ -11,6 +11,7 @@ quality: 9.1
 tags: [social-publisher, automation, template, pipeline, social-media]
 tldr: "Template for config-driven social media auto-posting. Fill 1 YAML = automated posting to IG/FB/TT/LI/TW."
 density_score: 1.0
+updated: "2026-04-07"
 ---
 
 # Social Publisher — Template

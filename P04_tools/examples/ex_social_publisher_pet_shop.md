@@ -11,6 +11,7 @@ quality: 9.0
 tags: [social-publisher, example, pet-shop, instagram, facebook, ayrshare, production]
 tldr: "Real production config from GATO3 — minimalist cat accessories brand. IG+FB via Ayrshare, Supabase catalog, 7-day content calendar."
 density_score: 0.92
+updated: "2026-04-07"
 ---
 
 # Social Publisher — GATO3 Pet Shop

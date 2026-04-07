@@ -45,6 +45,8 @@ linked_artifacts:
   primary: null
   related: [p02_mc_claude_opus_4]
 data_source: "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro"
+density_score: 0.9
+title: "Example: Model Card Google Gemini 2 5 Pro"
 ---
 
 ## Boundary

@@ -10,6 +10,12 @@ references:
   - ex_skill_web_scraper
   - ex_dispatch_rule_research
 quality: 9.0
+domain: "prompt engineering"
+density_score: 0.83
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
+version: "1.0.0"
 ---
 
 # Research Pipeline Chain

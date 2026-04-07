@@ -12,6 +12,12 @@ trigger_conditions: [timeout, rate_limit, 5xx_error, context_overflow]
 tags: [fallback, cascade, model, cost-optimization]
 tldr: "Model cascade: opus→sonnet→haiku with cost-optimized fallback on timeout, rate limit, or error."
 quality: 9.0
+domain: "model configuration"
+density_score: 0.8
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
+version: "1.0.0"
 ---
 
 # Fallback: Model Cascade

@@ -7,6 +7,11 @@ title: "Template — Code Executor"
 tags: [template, code, executor, sandbox, runtime]
 tldr: "Configures a sandboxed code execution environment. Defines language, timeout, memory limits, allowed imports, and output capture for safe code running."
 quality: 9.0
+domain: "tool integration"
+density_score: 0.85
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
 ---
 
 # Code Executor: [NAME]

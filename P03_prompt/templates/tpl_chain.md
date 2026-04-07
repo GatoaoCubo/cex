@@ -1,6 +1,7 @@
 ---
 id: "p03_ch_{{PIPELINE_SLUG}}"
 kind: chain
+pillar: P03
 version: 1.0.0
 title: Template - Chain
 tags: [template, chain, multi-step, reasoning, pipeline]

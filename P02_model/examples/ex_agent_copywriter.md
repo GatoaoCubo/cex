@@ -17,6 +17,11 @@ references:
   - ex_prompt_template_aida
 tldr: "Copywriter agent: AIDA-driven persuasive copy for infoproducts with tone control, quality rubric, and A/B variant generation."
 quality: 9.1
+density_score: 0.77
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
+version: "1.0.0"
 ---
 
 # Copywriter Agent

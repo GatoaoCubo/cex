@@ -11,6 +11,7 @@ quality: 9.1
 tags: [research-pipeline, template, STORM, CRAG, CRITIC, multi-model]
 tldr: "Template for config-driven research pipeline. 7 stages, 30+ sources, multi-model, budget-aware. Any business configures sources and gets market intelligence."
 density_score: 1.0
+updated: "2026-04-07"
 ---
 
 # Research Pipeline — Template

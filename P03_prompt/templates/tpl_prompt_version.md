@@ -7,6 +7,11 @@ title: "Template — Prompt Version"
 tags: [template, prompt, version, evolution, regression]
 tldr: "Tracks prompt evolution with version numbering, change log, A/B test results, and rollback instructions. Prevents prompt regression."
 quality: 9.0
+domain: "prompt engineering"
+density_score: 0.8
+author: "n03_builder"
+created: "2026-04-07"
+updated: "2026-04-07"
 ---
 
 # Prompt Version: [PROMPT_ID] v[X.Y.Z]
