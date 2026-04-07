@@ -16,7 +16,7 @@ prerequisites:
   - "Test scope is bounded to a single agent or prompt (not a pipeline)"
 validation_method: checklist
 domain: unit_eval
-quality: null
+quality: 9.0
 tags: [instruction, unit-eval, testing, assertion, P07]
 idempotent: true
 atomic: true
