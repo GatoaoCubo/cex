@@ -69,7 +69,7 @@ edges:
   - from: "quality_check"
     to: "lms_upload"
 domain: "orchestration"
-quality: null
+quality: 9.0
 tags: [dag, content-factory, course-pipeline, lms, tts, education]
 tldr: "11-node course DAG: longform→outline→scripts→parallel(TTS+slides+quizzes+supplements)→package→brand→QA→LMS"
 execution_order:
@@ -93,6 +93,7 @@ linked_artifacts:
   primary: "P12_orchestration/dags/content_factory/dag_cf_master.md"
   related:
     - "P03_prompts/constraints/content_factory/p03_constraint_cf_course.md"
+density_score: 1.0
 ---
 
 ## Nodes
