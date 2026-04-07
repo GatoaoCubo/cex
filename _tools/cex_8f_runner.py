@@ -25,7 +25,9 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 import argparse
+import json
 import re
+import subprocess
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -579,8 +581,7 @@ class EightFRunner:
                             identity_body = identity_body.replace(
                                 "{{INCLUDE " + inc_id + "}}", inc_body
                             )
-                    import re as _re_layers
-                    identity_body = _re_layers.sub(
+                    identity_body = re.sub(
                         r"\{\{[A-Z_]+\}\}", "[runtime]", identity_body
                     )
                     layer_data["identity"] = identity_body
@@ -930,9 +931,8 @@ class EightFRunner:
                     )
                 else:
                     # Generic fallback
-                    import json as _json
                     enrichments.append(
-                        f"### {tool_name}\n{_json.dumps(output, indent=2, default=str)[:2000]}"
+                        f"### {tool_name}\n{json.dumps(output, indent=2, default=str)[:2000]}"
                     )
 
             tool_results["enrichment_text"] = "\n\n".join(enrichments)
@@ -1337,8 +1337,6 @@ class EightFRunner:
             try:
                 compile_script = CEX_ROOT / "_tools" / "cex_compile.py"
                 if compile_script.exists():
-                    import subprocess
-
                     subprocess.run(
                         [sys.executable, str(compile_script), str(out_path)],
                         capture_output=True,
