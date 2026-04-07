@@ -4,7 +4,7 @@ kind: template
 pillar: P04
 title: "Search Tool — Business Discovery Configuration"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/P04 search artifacts
