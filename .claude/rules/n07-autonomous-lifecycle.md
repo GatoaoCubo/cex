@@ -22,36 +22,58 @@ That defeats the purpose of an orchestrator.
 **After ANY dispatch, N07 MUST enter the autonomous lifecycle loop.**
 No user intervention required. No /commands needed.
 
-## The Loop
+## The Loop (NON-BLOCKING — N07 never idles)
 
 ```
 DISPATCH wave
   |
   v
-POLL (every 60s, up to 45min)
-  |-- check .cex/runtime/signals/ for new signal files
-  |-- check git log for nucleus commits
-  |-- if nucleus signaled: KILL its processes immediately
+WORK + MONITOR (interleaved, never blocking)
+  |
+  |-- DO: investigate, hydrate specs, write memory, plan next wave
+  |     (N07 always has a backlog — architecture audits, spec updates,
+  |      decision manifests, terminology checks, gap analysis)
+  |
+  |-- CHECK (every 2-3 own-tasks, ~2 seconds):
+  |     git log --oneline --since="3 minutes ago"
+  |     bash _spawn/dispatch.sh status
+  |     (detect nucleus commits or signal completion)
+  |
+  |-- If nucleus committed: note it, continue own work
+  |-- If ALL wave nuclei committed: CONSOLIDATE + DISPATCH next wave
+  |-- If stuck >15min with no commits: investigate (check PID alive)
   |
   v
-GATE (all nuclei in wave signaled?)
-  |-- YES: KILL any remaining processes, CONSOLIDATE, dispatch NEXT wave
-  |-- NO: keep polling
-  |-- TIMEOUT: report, ask user
-  |
-  v
-CONSOLIDATE
+CONSOLIDATE (when wave complete)
   |-- verify deliverables exist
+  |-- kill idle processes (only completed ones!)
   |-- run cex_doctor.py
-  |-- archive signals
-  |-- clean PID file
+  |-- git add + commit consolidation
   |
   v
-NEXT WAVE (if exists)
+NEXT WAVE
   |-- write handoffs
   |-- dispatch
-  |-- re-enter POLL loop
+  |-- IMMEDIATELY return to WORK + MONITOR
 ```
+
+### ANTI-PATTERN: signal_watch blocking
+
+**NEVER** run `python _tools/cex_signal_watch.py` as a blocking call.
+It freezes N07 for minutes. Instead:
+- Use `git log --since` + `dispatch.sh status` (non-blocking, 2 seconds)
+- signal_watch is for `cex_mission_runner.py` (headless overnight runs), NOT for interactive N07
+
+### What N07 works on while nuclei run
+
+Always maintain a backlog. If backlog is empty, generate one:
+1. Read a spec and verify it matches reality
+2. Audit a pillar schema against industry terms
+3. Write/update a memory file
+4. Check artifact counts and quality distribution
+5. Plan the next mission's waves
+6. Update CLAUDE.md or metaphor dictionary
+7. Investigate a new industry pattern
 
 ## How to Kill Processes (CORRECT METHOD)
 
