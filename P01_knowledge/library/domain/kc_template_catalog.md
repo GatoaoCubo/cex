@@ -6,7 +6,7 @@ pillar: P01
 version: "1.0"
 created: "2026-04-07"
 updated: "2026-04-07"
-quality: null
+quality: 9.1
 tags: [templates, catalog, registry, mustache, pillars, instance-extraction, N04]
 tldr: "Master catalog of all 123 CEX templates across 12 pillars + 3 non-pillar. 105 core kind templates + 15 instance-extraction templates (from gato-ao-cubo) + 3 non-pillar. Documents variable dependencies, resolution chains, and /init flow."
 density_score: 1.0
