@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
-quality: 9.0
+quality: 9.1
 tags: [naming, cex, convention, lp]
 tldr: "CEX file naming: p{LP}_{type}_{descriptor}.{ext} — LP number + 2-letter type code + snake_case descriptor"
 max_bytes: 2048

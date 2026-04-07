@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: audio_tool
-quality: 9.0
+quality: 9.1
 tags: [audio_tool, P04, CALL, kind-kc]
 tldr: "Tool for speech-to-text, text-to-speech, and audio analysis enabling voice-driven agent interactions"
 when_to_use: "Building, reviewing, or reasoning about audio_tool artifacts"

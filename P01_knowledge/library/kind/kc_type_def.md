@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: type_def
-quality: 9.0
+quality: 9.1
 tags: [type_def, P06, GOVERN, kind-kc]
 tldr: "Reusable abstract data type definition specifying shape, fields, and types for system-wide consistency."
 when_to_use: "Building, reviewing, or reasoning about type_def artifacts"

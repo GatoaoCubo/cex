@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.1
 tags: [git-hooks, pre-commit, validation, quality-gates, ci]
 tldr: "Git hooks as local quality gates: pre-commit validates artifacts before they reach CI. CEX uses cex_hooks.py (frontmatter check, compile, size). codexa-core uses 76 Python hooks (LLM validators, TTS, quality scoring)."
 density_score: 1.0

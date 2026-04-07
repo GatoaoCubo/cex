@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: orchestration
-quality: 8.8
+quality: 9.0
 tags: [schedule, cron, reindex, faiss, nightly, automation]
 tldr: "Cron diario as 02:00 UTC que rebuilda o FAISS index do Brain MCP a partir de KCs novos/modificados"
 when_to_use: "Quando workflows precisam rodar em horarios fixos sem trigger humano"

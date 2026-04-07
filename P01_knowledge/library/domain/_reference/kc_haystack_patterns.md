@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: haystack
 origin: src_framework_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [haystack, pipeline, component, document-store, generator, retriever]
 tldr: "Haystack v2 builds NLP pipelines as directed multigraphs of typed components — connect, run, serialize, wrap as SuperComponent"
 when_to_use: "Building or mapping Haystack v2 constructs to CEX kinds"

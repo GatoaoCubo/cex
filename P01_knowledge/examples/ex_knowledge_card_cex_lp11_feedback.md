@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, lp11, feedback, quality-gate, bugloop, guardrail, optimizer]
 tldr: "P11 define 5 tipos de melhoria continua: quality_gate, bugloop, lifecycle_rule, guardrail, optimizer"
 when_to_use: "Entender como sistemas LLM implementam auto-correcao e melhoria continua"

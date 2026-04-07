@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 target: p08_pat_stripe_pipeline
-quality: 9.5
+quality: 9.1
 tags: [stripe, pipeline, golden, e2e]
 tldr: "Complete pipeline validation proving handoff_builder, quality_gate, spawn_pool_manager, and blueprint_compiler all pass stress tests"
 source: organization-core/records/pool/reports/stripe_final_validation.md

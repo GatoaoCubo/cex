@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: routing
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [router, fallback, dispatch, resilience, intent, routing, priority, cascade, cost-aware]
 tldr: "Routing and resilience patterns ensure agent requests reach the right handler via intent classification, fallback cascades, and cost-aware dispatch rules"
 when_to_use: "Building or classifying components that route requests, handle failures, or manage dispatch priorities"

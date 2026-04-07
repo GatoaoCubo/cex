@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: orchestration_runtime
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [orchestration, dag, spawn, schedule, rag, runtime, airflow, prefect, cron]
 tldr: "Orchestration runtime covers DAG-based workflow execution, process spawning, cron scheduling, and external knowledge source management for agent systems"
 when_to_use: "Designing multi-step workflows, spawning agent_group processes, scheduling recurring tasks, or managing RAG knowledge sources"

@@ -17,6 +17,11 @@ inputs: ["archetypes/builders/ directory (auto-scanned)"]
 outputs: ["diagnostic report: naming violations, density scores, completeness per builder"]
 dependencies: ["pyyaml"]
 category: governance
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose
@@ -43,6 +48,20 @@ No arguments required — scans entire builders directory automatically.
 **Stage**: Post-build validation. Run after creating or modifying builders. Upstream of cex_feedback (which tracks quality over time).
 
 ## Dependencies
-- `archetypes/builders/` directory with builder subdirectories
-- Expected 13 kinds: architecture, collaboration, config, examples, instruction, knowledge_card, manifest, memory, output_template, quality_gate, schema, system_prompt, tools
-- Naming regex: `^bld_[a-z][a-z0-9_]+_[a-z][a-z0-9_]+\.md$`
+1. `archetypes/builders/` directory with builder subdirectories
+2. Expected 13 kinds: architecture, collaboration, config, examples, instruction, knowledge_card, manifest, memory, output_template, quality_gate, schema, system_prompt, tools
+3. Naming regex: `^bld_[a-z][a-z0-9_]+_[a-z][a-z0-9_]+\.md$`
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `cli_tool` |
+| Pillar | P04 |
+| Domain | tool integration |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

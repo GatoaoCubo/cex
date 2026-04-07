@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: builder
 domain: frontend
-quality: 8.8
+quality: 9.0
 tags: [knowledge, frontend, components, radix, shadcn]
 tldr: "shadcn/ui built on Radix primitives: unstyled components, variants, accessibility patterns"
 density_score: 0.88

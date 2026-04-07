@@ -53,6 +53,11 @@ inputs: ["artifact type", "topic", "pillar", "optional content/file"]
 outputs: ["complete .md artifact with frontmatter", "compiled .yaml/.json in compiled/"]
 dependencies: ["pyyaml"]
 category: core
+quality: 9.1
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [ruff, uv, linting, formatting, python-tooling]
 tldr: "Modern Python tooling: Ruff (linter+formatter, 100x faster than flake8+isort+black), UV (pip replacement, 10-100x faster installs). Config in pyproject.toml. Real config from codexa-core."
 density_score: 0.91

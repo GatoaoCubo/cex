@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.1
 tags: [docker, container, multi-stage, compose, production]
 tldr: "Production Docker patterns from codexa-core: multi-stage builds (builder→runtime), non-root user, health checks, compose services (API+Postgres+Redis+Worker), profiles for dev tools."
 density_score: 1.0

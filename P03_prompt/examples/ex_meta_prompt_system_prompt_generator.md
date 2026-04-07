@@ -6,6 +6,13 @@ title: Meta-Prompt for System Prompt Generation
 target_type: system_prompt
 optimization_method: manual_review_and_score
 quality: 9.0
+updated: "2026-04-07"
+domain: "prompt engineering"
+version: "1.0.0"
+author: n03_builder
+created: "2026-04-07"
+density_score: 0.92
+tldr: "Defines meta prompt for meta-prompt for system prompt generation, with validation gates and integration points."
 ---
 
 # Meta-Prompt: System Prompt Generator
@@ -40,19 +47,19 @@ Todo system_prompt gerado DEVE conter estas secoes, nesta ordem:
 4. **Constraints**: Limites operacionais (max tokens, timeout, scope fence)
 
 ### Rule 3: Token Budget
-- Max 2048 tokens no system_prompt gerado
-- Identity: ~100 tokens
-- Rules: ~800 tokens (100 tokens/regra x 8)
-- Output Format: ~600 tokens
-- Constraints: ~200 tokens
-- Buffer: ~348 tokens
+1. Max 2048 tokens no system_prompt gerado
+2. Identity: ~100 tokens
+3. Rules: ~800 tokens (100 tokens/regra x 8)
+4. Output Format: ~600 tokens
+5. Constraints: ~200 tokens
+6. Buffer: ~348 tokens
 
 ### Rule 4: Quality Signals
 O system_prompt gerado deve:
-- Ter identidade clara em 1a pessoa ("Voce e o {{agent_name}}")
-- Ter regras acionaveis (verbos imperativos, sem ambiguidade)
-- Ter output_format com placeholders concretos, nao descricoes vagas
-- NAO conter: jargao generico ("be helpful"), regras contraditorias, output_format em prosa
+1. Ter identidade clara em 1a pessoa ("Voce e o {{agent_name}}")
+2. Ter regras acionaveis (verbos imperativos, sem ambiguidade)
+3. Ter output_format com placeholders concretos, nao descricoes vagas
+4. NAO conter: jargao generico ("be helpful"), regras contraditorias, output_format em prosa
 
 ### Rule 5: Derivation Logic
 ```text
@@ -64,23 +71,23 @@ capabilities[2] -> regras de INTEGRACAO (como interagir com outros sistemas)
 ## Quality Criteria
 
 ### Score 9.0+ (Golden) requer:
-- [ ] Identity: nome e dominio claros, missao especifica (nao generica)
-- [ ] Rules: >= 5 regras, todas com verbo imperativo, zero ambiguidade
-- [ ] Output Format: template com placeholders, parseavel por codigo
-- [ ] Constraints: max_tokens definido, scope fence explicito
-- [ ] Nenhuma regra contradiz outra
-- [ ] Total < 2048 tokens
+1. [ ] Identity: nome e dominio claros, missao especifica (nao generica)
+2. [ ] Rules: >= 5 regras, todas com verbo imperativo, zero ambiguidade
+3. [ ] Output Format: template com placeholders, parseavel por codigo
+4. [ ] Constraints: max_tokens definido, scope fence explicito
+5. [ ] Nenhuma regra contradiz outra
+6. [ ] Total < 2048 tokens
 
 ### Score 7.0-8.9 (Acceptable):
-- Identity e rules presentes mas genericas
-- Output format descritivo (nao template)
-- Constraints vagas
+1. Identity e rules presentes mas genericas
+2. Output format descritivo (nao template)
+3. Constraints vagas
 
 ### Score < 7.0 (Reject):
-- Falta secao obrigatoria
-- Regras contraditorias
-- Output format em prosa livre
-- > 2048 tokens
+1. Falta secao obrigatoria
+2. Regras contraditorias
+3. Output format em prosa livre
+4. > 2048 tokens
 
 ## Iteration Method
 1. **Generate**: Meta-prompt gera system_prompt candidato
@@ -138,14 +145,14 @@ pedidos de compra automaticamente — mantendo zero stockouts e custo minimo de 
 </output_format>
 
 <constraints>
-- Max 2048 tokens por resposta
-- Scope: apenas SKUs ativos no catalogo atual
-- NAO acesse sistemas externos sem credenciais validadas
-- Timezone: America/Sao_Paulo para todos os timestamps
+1. Max 2048 tokens por resposta
+2. Scope: apenas SKUs ativos no catalogo atual
+3. NAO acesse sistemas externos sem credenciais validadas
+4. Timezone: America/Sao_Paulo para todos os timestamps
 </constraints>
 ```
 
 ## Research Base
-- Meta-prompt pattern: 3 user fields + AI generates rest (KC_research_agent_097)
-- XML tags for Claude improve section parsing (Anthropic docs)
-- Iteration with self-score converges em ~2 rounds para prompts simples
+1. Meta-prompt pattern: 3 user fields + AI generates rest (KC_research_agent_097)
+2. XML tags for Claude improve section parsing (Anthropic docs)
+3. Iteration with self-score converges em ~2 rounds para prompts simples

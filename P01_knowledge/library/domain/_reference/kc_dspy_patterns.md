@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: dspy
 origin: src_framework_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [dspy, signature, module, optimizer, assertion, few-shot, prompt-optimization]
 tldr: "DSPy treats prompts as optimizable programs — Signatures declare I/O, Modules compose logic, Optimizers tune prompts automatically"
 when_to_use: "Building or mapping DSPy constructs to CEX kinds"

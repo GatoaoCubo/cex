@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: handoff
-quality: 9.0
+quality: 9.1
 tags: [handoff, P12, COLLABORATE, kind-kc]
 tldr: "Complete task transfer package containing context, tasks, scope fence, commit instruction, and signal protocol for autonomous agent_group execution"
 when_to_use: "Building, reviewing, or reasoning about handoff artifacts"

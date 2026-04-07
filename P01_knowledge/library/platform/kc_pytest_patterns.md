@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [pytest, testing, fixtures, coverage, python]
 tldr: "Production pytest patterns from codexa-core: conftest fixtures, TestClient, parametrize, markers (unit/integration/e2e/slow), coverage config, and async testing."
 density_score: 0.93

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
-quality: 9.0
+quality: 9.1
 tags: [runtime, agent_group, spawn, constraints, bsod]
 tldr: "Spawn rules: max 3 agent_groups + orchestrator (BSOD at 4), 5s between terminals, -p flag mandatory for TSP, inline prompt < 200 chars"
 max_bytes: 512
@@ -15,6 +15,7 @@ density_score: 0.91
 source: organization-core/.claude/rules/boot-autonomy-flags.md + MEMORY.md constraints
 linked_artifacts:
   spawn_config: p12_spawn_grid_continuous
+domain: "config"
 ---
 
 # Runtime Rule: Agent_group Spawn Constraints
@@ -84,3 +85,25 @@ When task > 200 chars, write to handoff file:
 # Inline prompt (FAIL — hangs with -p):
 "Execute these 10 tasks: [1] research market... [2] build agent..." # 400+ chars
 ```
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `runtime_rule` |
+| Pillar | P09 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

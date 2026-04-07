@@ -9,7 +9,7 @@ updated: 2026-03-23
 author: builder_agent
 agent_group: research_agent
 domain: research
-quality: 9.0
+quality: 9.1
 tags: [research, web, scraping, data-extraction, competitive-intelligence]
 tldr: Agente autonomo de pesquisa web que coleta, estrutura e sintetiza dados de multiplas fontes online com verificacao cruzada
 when_to_use: Quando precisar de dados atualizados da web com sintese estruturada

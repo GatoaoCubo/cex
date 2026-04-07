@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: unit_eval
-quality: 9.0
+quality: 9.1
 tags: [unit_eval, P07, GOVERN, kind-kc]
 tldr: "Isolated correctness test of a single agent or prompt against expected output with scoring."
 when_to_use: "Building, reviewing, or reasoning about unit_eval artifacts"

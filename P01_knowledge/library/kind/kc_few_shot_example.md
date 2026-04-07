@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: few_shot_example
-quality: 9.0
+quality: 9.1
 tags: [few_shot_example, p01, INJECT, kind-kc]
 tldr: "Input/output pair injected into prompts to teach format and reasoning by demonstration — the most reliable steering mechanism after instructions"
 when_to_use: "Building, reviewing, or reasoning about few_shot_example artifacts"

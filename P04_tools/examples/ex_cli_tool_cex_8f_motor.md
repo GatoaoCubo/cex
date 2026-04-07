@@ -33,6 +33,11 @@ inputs: ["natural language intent", "optional quality target"]
 outputs: ["JSON execution plan with builder steps, dependencies, 8F positions"]
 dependencies: ["pyyaml"]
 category: core
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

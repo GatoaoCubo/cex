@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: retriever_config
-quality: 9.0
+quality: 9.1
 tags: [retriever_config, p01, CONSTRAIN, kind-kc]
 tldr: "Search-time parameters governing how chunks are retrieved — top_k, search type, reranking, and hybrid weights"
 when_to_use: "Building, reviewing, or reasoning about retriever_config artifacts"

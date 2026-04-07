@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: memory_scope
-quality: 9.0
+quality: 9.1
 tags: [memory_scope, p02, INJECT, kind-kc]
 tldr: "Agent memory configuration — defines which memory types, backends, and TTLs an agent uses for persistence across sessions"
 when_to_use: "Building, reviewing, or reasoning about memory_scope artifacts"

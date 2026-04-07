@@ -7,8 +7,13 @@ scope: full_system
 version: 1.0.0
 created: 2026-03-24
 author: builder_agent
-quality: 9.0
+quality: 9.1
 tags: [component-map, architecture, dependencies]
+updated: "2026-04-07"
+domain: "architecture"
+title: "Component Map Codexa Core"
+density_score: 0.92
+tldr: "Defines component map for component map codexa core, with validation gates and integration points."
 ---
 
 # Component Map: organization-core
@@ -37,3 +42,11 @@ USER -> orchestrator -> handoffs/ -> spawn -> AGENT_GROUP -> signals/ -> orchest
                                            |
                                     Pool + Agents + Skills
 ```
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target

@@ -44,3 +44,19 @@ Input -> Step1 -> intermediate -> Step2 -> intermediate -> Step3 -> Output
 2. [ ] Each step has input/output
 3. [ ] Total timeout prevents runaway
 4. [ ] Error recovery per step
+
+## System Context
+
+This artifact participates in the CEX typed knowledge system, a fractal
+architecture with 12 pillars, 8 nuclei, and 125 specialized builders.
+Artifacts flow through the 8F pipeline: Focus, Frame, Fetch, Filter,
+Format, Forge, Furnish, and Feedback.
+
+Quality is enforced via 3-layer scoring: structural (30%), rubric (30%),
+and semantic (40%). All artifacts target quality >= 9.0.
+
+| Layer | Weight | Method |
+|-------|--------|--------|
+| Structural | 30% | Automated count-based checks |
+| Rubric | 30% | Quality gate dimension scoring |
+| Semantic | 40% | LLM evaluation (when L1+L2 >= 8.5) |

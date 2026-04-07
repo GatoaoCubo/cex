@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: spawn_config
-quality: 9.0
+quality: 9.1
 tags: [spawn_config, P12, GOVERN, kind-kc]
 tldr: "Agent_group launch configuration specifying model, mode (solo/grid/continuous), MCP profile, and prompt constraints"
 when_to_use: "Building, reviewing, or reasoning about spawn_config artifacts"

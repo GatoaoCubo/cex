@@ -21,6 +21,11 @@ inputs: ["archetypes/builders/ .md files"]
 outputs: ["fixed .md files with kind+id in frontmatter", "dry-run report"]
 dependencies: ["pyyaml (implicit via frontmatter parsing)"]
 category: qa
+quality: 9.1
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose
@@ -48,5 +53,27 @@ One of `--dry-run` or `--fix` should be used.
 **Stage**: Repair tool. Run after bulk builder creation or migration to ensure all files have consistent frontmatter. Upstream of cex_doctor and validate_builder.
 
 ## Dependencies
-- `archetypes/builders/` directory
-- Filename convention: `bld_{kind}_{topic}.md`
+1. `archetypes/builders/` directory
+2. Filename convention: `bld_{kind}_{topic}.md`
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `cli_tool` |
+| Pillar | P04 |
+| Domain | tool integration |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

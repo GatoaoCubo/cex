@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.2
 tags: [cex, lp03, prompt, reason, constrain, template, chain-of-thought]
 tldr: "P03 Prompt governa comunicacao do LLM via 10 tipos — de system_prompt a meta_prompt — cobrindo 5 funcoes LLM"
 when_to_use: "Classificar artefatos de prompt ou entender como P03 orquestra raciocinio e formato"

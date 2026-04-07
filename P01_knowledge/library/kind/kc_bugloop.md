@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: bugloop
-quality: 9.0
+quality: 9.1
 tags: [bugloop, P11, GOVERN, kind-kc]
 tldr: "Automated detect-fix-verify cycle with confidence-calibrated fix strategies and escalation on max attempts"
 when_to_use: "Building, reviewing, or reasoning about bugloop artifacts"

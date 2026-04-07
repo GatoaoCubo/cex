@@ -8,6 +8,8 @@ author: n04_knowledge
 created: "2026-04-07"
 density_score: 0.97
 tldr: "Defines the artifact specification for railway networking, with structural rules, validation gates, and integration points."
+quality: 9.0
+tags: [artifact, builder, examples]
 ---
 id: p01_kc_railway_networking
 kind: knowledge_card

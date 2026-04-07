@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, llm-function, inject, context, rag, knowledge-card, few-shot]
 tldr: "INJECT fornece contexto ao LLM via 16 tipos (21% do CEX) — fator #1 de qualidade de output"
 when_to_use: "Entender como contexto e injetado em LLMs e por que INJECT e a maior funcao CEX"

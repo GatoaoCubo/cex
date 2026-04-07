@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, llm-function, reason, chain-of-thought, planning, routing]
 tldr: "REASON gera tokens internos (CoT, ReAct, planning) antes de agir — 7 tipos que separam pensar de produzir"
 when_to_use: "Entender por que raciocinio e funcao separada de geracao e como tipificar thinking patterns"

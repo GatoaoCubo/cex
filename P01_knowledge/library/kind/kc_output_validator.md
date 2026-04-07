@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: output_validator
-quality: 9.0
+quality: 9.1
 tags: [output_validator, P05, GOVERN, kind-kc, validation]
 tldr: "Post-LLM quality and safety checker applying heuristic, structural, and semantic checks before delivery — catches hallucination signals, toxicity, and format violations"
 when_to_use: "Building, reviewing, or reasoning about output_validator artifacts"

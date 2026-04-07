@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 domain: meta
-quality: 10.0
+quality: 9.1
 tags: [prompt, template, action, universal, meta]
 tldr: Template reutilizavel para criar action prompts com variaveis tipadas
 when_to_use: Quando precisa criar prompt de acao para qualquer agente

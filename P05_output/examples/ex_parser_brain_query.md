@@ -8,8 +8,13 @@ output_format: structured_markdown
 version: 1.0.0
 created: 2026-03-24
 author: builder_agent
-quality: 9.0
+quality: 9.1
 tags: [parser, brain, search-results, extraction]
+updated: "2026-04-07"
+domain: "output format"
+title: "Parser Brain Query"
+density_score: 0.92
+tldr: "Defines parser for parser brain query, with validation gates and integration points."
 ---
 
 # Parser: brain_query Results
@@ -49,6 +54,20 @@ Extracts ranked knowledge chunks from raw brain_query MCP tool output. Converts 
 ```
 
 ## Edge Cases
-- Empty results: return "No matches found for: {query}"
-- All scores < 0.5: return warning + top 1 result anyway
-- Single source multiple chunks: merge under one header
+1. Empty results: return "No matches found for: {query}"
+2. All scores < 0.5: return warning + top 1 result anyway
+3. Single source multiple chunks: merge under one header
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `parser` |
+| Pillar | P05 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -9,7 +9,7 @@ author: n06_commercial
 title: "Example — Content Monetization: SaaS (Stripe, USD, Monthly/Yearly)"
 tags: [example, content-monetization, saas, stripe, usd, subscription, N06]
 tldr: "SaaS content monetization config: free/pro/enterprise tiers, Stripe, USD cents, monthly+yearly billing, content credits per tier."
-quality: 8.8
+quality: 9.1
 domain: content-monetization
 use_case: saas-international
 ---

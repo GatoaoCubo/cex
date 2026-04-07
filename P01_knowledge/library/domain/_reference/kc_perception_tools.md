@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: perception
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [audio, vision, tts, stt, whisper, cli, daemon, subprocess, image, multimodal]
 tldr: "Perception tools give agents sensory capabilities — audio I/O (STT/TTS), vision analysis, CLI subprocess control, and persistent background daemons"
 when_to_use: "Building or classifying components that process audio, images, run CLI tools, or manage background services"

@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: axiom
-quality: 9.0
+quality: 9.1
 tags: [axiom, p02, BECOME, kind-kc]
 tldr: "Immutable fundamental principle — part of the entity's deep identity that never changes regardless of context"
 when_to_use: "Building, reviewing, or reasoning about axiom artifacts"

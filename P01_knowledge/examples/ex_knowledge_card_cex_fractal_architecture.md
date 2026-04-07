@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, fractal, scale, architecture, lp-completeness]
 tldr: "Mesmos 12 LPs descrevem prompt (1/12), agente (4/12) e sistema (12/12) — diferenca eh completude, nao estrutura"
 when_to_use: "Entender por que a mesma taxonomia funciona em toda escala LLM"

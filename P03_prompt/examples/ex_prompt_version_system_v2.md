@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: prompt_management
-quality: 9.0
+quality: 9.2
 tags: [prompt-version, system-prompt, pesquisa-agent, a-b-test, rollback, versioning]
 tldr: Versao 2.0 do system prompt do pesquisa-agent — adiciona secao de source credibility scoring e output estruturado, com metricas A/B vs v1 mostrando +18% relevance score
 when_to_use: Referencia para versionamento de prompts com metricas A/B, changelog, e rollback — padrao para qualquer prompt que evolui no organization

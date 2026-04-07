@@ -7,7 +7,7 @@ version: 2.0.0
 created: 2025-12-16
 updated: 2026-03-22
 author: builder_agent
-quality: 9.5
+quality: 9.1
 tags: [edison, agent_group, meta-construction, mental-model, memory]
 tldr: "builder_agent is the meta-construction agent_group with Soberba Inventiva philosophy — builds agents, templates, workflows at quality floor 8.5"
 density_score: 0.92

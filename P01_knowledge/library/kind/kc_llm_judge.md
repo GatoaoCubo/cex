@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: llm_judge
-quality: 9.0
+quality: 9.1
 tags: [llm_judge, P07, GOVERN, kind-kc]
 tldr: "Configuration for using an LLM as automated evaluator scoring outputs against defined criteria."
 when_to_use: "Building, reviewing, or reasoning about llm_judge artifacts"

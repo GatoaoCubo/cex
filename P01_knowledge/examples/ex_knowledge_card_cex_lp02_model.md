@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.2
 tags: [cex, lp02, model, become, agent, persona, identity, lens]
 tldr: "P02 Model define identidade do LLM via 9 tipos — de agent a lens — usando funcao BECOME antes de qualquer input"
 when_to_use: "Classificar artefatos de identidade ou entender como P02 configura quem o LLM eh"

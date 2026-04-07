@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [agentskills, skill-format, agent-interop, markdown-skills, cross-platform]
 tldr: "AgentSkills.io empacota conhecimento como SKILL.md reutilizavel por qualquer agente — Claude Code, Codex CLI, OpenCode"
 when_to_use: "Projetar skills portaveis entre plataformas LLM ou entender o padrao SKILL.md"

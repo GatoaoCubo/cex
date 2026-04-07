@@ -7,7 +7,7 @@ version: 3.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
-quality: 9.5
+quality: 9.1
 tags: [axiom, scout, law8, discovery, pool]
 tldr: "LAW 8: Always Glob/Grep before Write. Never duplicate pool artifacts. 60% similarity = adapt existing; <60% = build new"
 max_bytes: 512
@@ -15,6 +15,7 @@ density_score: 0.93
 source: organization-core/records/framework/docs/LAWS_v3_PRACTICAL.md (LAW 8 SCOUT-FIRST)
 linked_artifacts:
   law: p08_law_shokunin
+domain: "memory"
 ---
 
 # Axiom: Scout Before Create (Law 8)
@@ -64,3 +65,25 @@ similarity >= 0.60 → ADAPT (never build duplicate)
 similarity 0.40-0.59 → EXTEND (build new, link to existing)
 similarity < 0.40 → BUILD NEW (independent artifact)
 ```
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `axiom` |
+| Pillar | P10 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

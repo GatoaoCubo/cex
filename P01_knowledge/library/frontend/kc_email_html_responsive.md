@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: builder
 domain: frontend
-quality: 9.0
+quality: 9.1
 tags: [email, html, responsive, outlook, gmail, dark-mode, templating, deliverability]
 tldr: Rock-solid email HTML with table layouts, inline CSS, client compatibility, and dark mode support for maximum deliverability
 density_score: 1.0

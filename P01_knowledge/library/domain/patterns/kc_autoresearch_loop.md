@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
 domain: patterns
-quality: 9.0
+quality: 9.1
 tags: [autoresearch, karpathy, experiment, autonomous, loop, self-improvement]
 tldr: "Karpathy's AutoResearch pattern: 3-file architecture (goals + modifiable + metric), autonomous loop (modify → run → measure → keep/discard), git as experiment ledger."
 when_to_use: "When you have a clear scalar metric and want autonomous improvement"

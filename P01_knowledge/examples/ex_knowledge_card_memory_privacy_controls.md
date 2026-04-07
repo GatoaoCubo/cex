@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: llm_memory
-quality: 9.0
+quality: 9.1
 tags: [privacy, guardrails, tag-stripping, hook-layer, memory-systems]
 tldr: "Privacy guardrails at hook layer strip <private> tags before storage; worker strips auto-context tags to prevent re-storage loops"
 when_to_use: "Building agents that capture user context and need user-controlled privacy exclusion at the edge"

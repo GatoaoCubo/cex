@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [fastapi, api, middleware, auth, python]
 tldr: "Production FastAPI patterns from codexa-core (86K lines): middleware stack (CORS→RateLimit→Auth→RLS→Timing), router organization, health checks, lifecycle events, error handling, body size limits."
 density_score: 0.93

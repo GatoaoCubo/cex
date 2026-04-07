@@ -2,7 +2,7 @@
 id: kc_erp_integration
 kind: knowledge_card
 pillar: P01
-quality: 9.0
+quality: 9.1
 tldr: "Integration patterns for ERP/marketplace connectors — BaseLinker, Bling v3, order sync, inventory management, webhook-driven data flow, and OAuth2 token rotation."
 tags: ["ERP", "BaseLinker", "Bling", "integration", "orders", "inventory", "OAuth2"]
 when_to_use: "Apply when integration patterns for erp/marketplace connectors — baselinker, bling v3, order sync, inventory..."

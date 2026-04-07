@@ -8,8 +8,12 @@ version: 1.0.0
 created: 2026-03-24
 author: operations_agent
 domain: execution
-quality: 9.0
+quality: 9.1
 tags: [lens, perspective, ira, emotional-drive, agent_group-identity]
+updated: "2026-04-07"
+title: "Lens Ira Atlas"
+density_score: 0.92
+tldr: "Defines lens for lens ira atlas, with validation gates and integration points."
 ---
 
 # Lens: Ira (operations_agent)
@@ -31,9 +35,35 @@ operations_agent agent_group (execution domain). Other agent_groups have differe
 | Deploy | Downtime = betrayal | Zero-downtime or wait |
 
 ## Output Bias
-- Favors decisive action over analysis paralysis
-- Rejects bandaid fixes — demands root cause resolution
-- Produces terse, authoritative outputs (no hedging language)
-- Anti-pattern: using ira as excuse to skip quality gates
+1. Favors decisive action over analysis paralysis
+2. Rejects bandaid fixes — demands root cause resolution
+3. Produces terse, authoritative outputs (no hedging language)
+4. Anti-pattern: using ira as excuse to skip quality gates
 
 Source: `records/agent_groups/atlas/mental_model.yaml`
+
+## Metadata
+
+```yaml
+id: p02_lens_ira_atlas
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p02-lens-ira-atlas.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `lens` |
+| Pillar | P02 |
+| Domain | execution |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

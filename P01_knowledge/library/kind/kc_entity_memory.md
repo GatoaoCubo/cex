@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: entity_memory
-quality: 9.0
+quality: 9.1
 tags: [entity_memory, P10, INJECT, kind-kc]
 tldr: "entity_memory stores current atomic facts about a named entity (project, system, person) with confidence scores, source attribution, and TTL — representing present state, not event history."
 when_to_use: "Building, reviewing, or reasoning about entity_memory artifacts"

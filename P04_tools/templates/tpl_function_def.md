@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Function Definition"
 tags: [template, function, tool-use, api, schema]
 tldr: "Defines a tool function for LLM tool-use. Specifies name, description, parameters (JSON Schema), return type, and error contract for structured function calling."
-quality: 8.8
+quality: 9.0
 ---
 
 # Function Definition: [NAME]

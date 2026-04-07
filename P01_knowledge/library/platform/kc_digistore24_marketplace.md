@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: affiliate_platform
-quality: 9.0
+quality: 9.1
 tldr: "Digistore24 Marketplace — EU/DACH affiliate ecosystem, multi-language vendor pages, per-country payments, and promotion tools."
 tags: [digistore24, marketplace, affiliate, eu, dach, commission, vendor]
 density_score: 1.0

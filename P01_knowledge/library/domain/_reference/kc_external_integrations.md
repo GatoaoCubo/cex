@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: integrations
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [api, webhook, notification, database, browser, rest, graphql, playwright, connector]
 tldr: "External integrations bridge agent systems to the outside world via API clients, webhooks, notification channels, database connectors, and browser automation tools"
 when_to_use: "Building or classifying any component that communicates with external services, databases, or browsers"

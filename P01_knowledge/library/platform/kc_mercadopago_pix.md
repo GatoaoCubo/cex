@@ -2,7 +2,7 @@
 id: kc_mercadopago_pix
 kind: knowledge_card
 pillar: P01
-quality: 9.0
+quality: 9.1
 tldr: "Integration patterns for MercadoPago PIX payments — preference creation, IPN webhooks, HMAC-SHA256 verification, and sandbox testing."
 tags: ["mercadopago", "PIX", "BRL", "webhook", "IPN", "payments", "Brazil"]
 when_to_use: "Apply when integration patterns for mercadopago pix payments — preference creation, ipn webhooks, hmac-sha25..."

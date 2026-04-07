@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.1
 tags: [pydantic, validation, models, settings, python]
 tldr: "Pydantic V2 patterns: BaseModel for request/response, field_validator for business rules, BaseSettings for env config, model_config for JSON serialization, discriminated unions for polymorphism."
 density_score: 1.0

@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: research_agent
 domain: lifecycle_rule
-quality: 9.0
+quality: 9.1
 tags: [lifecycle_rule, P11, GOVERN, kind-kc]
 tldr: "Declarative rule governing artifact freshness, archival, and promotion thresholds across the knowledge lifecycle"
 when_to_use: "Building, reviewing, or reasoning about lifecycle_rule artifacts"

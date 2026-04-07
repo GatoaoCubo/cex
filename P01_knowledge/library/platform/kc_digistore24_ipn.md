@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: webhook_integration
-quality: 9.0
+quality: 9.1
 tldr: "Digistore24 IPN — form-encoded webhook system with sha512 verification, mandatory 'OK' response, event types, and handler implementation."
 tags: [digistore24, ipn, webhook, sha512, form-encoded, payment-notification]
 density_score: 1.0

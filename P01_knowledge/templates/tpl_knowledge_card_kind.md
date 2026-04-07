@@ -14,7 +14,7 @@ created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
 author: {{AUTHOR}}
 domain: {{KIND_SLUG}}
-quality: 8.9
+quality: 9.1
 tags: [{{KIND_SLUG}}, {{PILLAR_CODE}}, {{LLM_FUNCTION}}, kind-kc]
 tldr: "{{ONE_DENSE_SENTENCE_ABOUT_THIS_KIND}}"
 when_to_use: "Building, reviewing, or reasoning about {{KIND_SLUG}} artifacts"

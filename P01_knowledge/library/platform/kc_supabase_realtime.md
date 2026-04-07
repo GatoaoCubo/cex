@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 9.0
+quality: 9.1
 tags: [supabase, realtime, websocket, channels, presence, broadcast, platform]
 tldr: "WebSocket server com 4 modos: Channels (pub/sub), Presence (quem esta online), Broadcast (fire-and-forget), e Postgres Changes (subscribe a INSERT/UPDATE/DELETE)"
 when_to_use: "Quando configurar funcionalidades real-time em projetos Supabase"

@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: rate_limit_config
-quality: 9.0
+quality: 9.1
 tags: [rate_limit_config, P09, CONSTRAIN, kind-kc]
 tldr: "rate_limit_config defines RPM, TPM, and daily budget caps per model or agent_group — with backoff strategy — to prevent runaway spend and provider throttling."
 when_to_use: "Building, reviewing, or reasoning about rate_limit_config artifacts"

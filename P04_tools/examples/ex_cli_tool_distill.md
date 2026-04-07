@@ -37,6 +37,11 @@ inputs: ["raw input file (PDF, markdown, text)"]
 outputs: ["LLM prompt for template-compliant artifact extraction"]
 dependencies: []
 category: qa
+quality: 9.1
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

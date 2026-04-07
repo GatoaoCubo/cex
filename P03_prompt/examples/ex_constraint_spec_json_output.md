@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: constrained_generation
-quality: 9.0
+quality: 9.1
 tags: [constraint-spec, json-schema, structured-output, instructor, openai, anthropic, google]
 tldr: Constraint que forca LLM a gerar JSON valido com campos answer e confidence — compativel com OpenAI response_format, Anthropic tool_use, e Google responseSchema
 when_to_use: Quando output do LLM deve ser JSON parseavel com campos obrigatorios e tipos definidos — especialmente em pipelines automatizados sem intervencao humana

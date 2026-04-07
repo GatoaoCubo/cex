@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: feedback_loops
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [feedback, bugloop, lifecycle, self-healing, regression, continuous-improvement, hooks]
 tldr: "Feedback loops encode detect-diagnose-fix cycles and lifecycle rules that drive autonomous self-improvement in agent systems"
 when_to_use: "Implementing automated bug detection, self-healing code, lifecycle hooks, or continuous improvement pipelines"

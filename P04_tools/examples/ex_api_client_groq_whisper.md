@@ -13,14 +13,19 @@ created: 2026-03-24
 author: builder_agent
 quality: 9.0
 tags: [client, groq, whisper, transcription, audio]
+updated: "2026-04-07"
+domain: "tool integration"
+title: "Api Client Groq Whisper"
+density_score: 0.92
+tldr: "Defines api client for api client groq whisper, with validation gates and integration points."
 ---
 
 # Client: Groq Whisper
 
 ## Connection
-- Base URL: https://api.groq.com/openai/v1
-- Auth: Bearer token (GROQ_API_KEY env var)
-- Timeout: 30s
+1. Base URL: https://api.groq.com/openai/v1
+2. Auth: Bearer token (GROQ_API_KEY env var)
+3. Timeout: 30s
 
 ## Operations
 | Method | Endpoint | Purpose |
@@ -47,3 +52,17 @@ result = client.audio.transcriptions.create(
 )
 print(result.text)
 ```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `api_client` |
+| Pillar | P04 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

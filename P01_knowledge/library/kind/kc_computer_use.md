@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: computer_use
-quality: 9.0
+quality: 9.1
 tags: [computer_use, P04, CALL, kind-kc]
 tldr: "Screen-level automation where the LLM controls mouse, keyboard, and display via screenshot-action loops"
 when_to_use: "Building, reviewing, or reasoning about computer_use artifacts"

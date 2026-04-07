@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.8
+quality: 9.1
 tags: [example, supabase, data-layer, marketplace, config]
 tldr: "Marketplace config: sellers, listings, transactions, disputes, ratings, busca semantica de produtos, media de listings"
 density_score: 0.89

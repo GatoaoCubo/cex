@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 9.0
+quality: 9.1
 tags: [supabase, self-hosting, docker, kong, gotrue, realtime, platform]
 tldr: "Stack completo via Docker Compose: Kong (gateway) + GoTrue (auth) + PostgREST + Realtime + Storage + Studio + PostgreSQL 15+, totalmente open-source MIT"
 when_to_use: "Quando fazer self-hosting do Supabase em infraestrutura propria"

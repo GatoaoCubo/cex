@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-04-07
 author: n01_research
 domain: patterns
-quality: 9.0
+quality: 9.1
 tags: [pattern, skill, llm, seo, meta-tags, structured-data, core-web-vitals, search]
 tldr: "Meta tags, structured data, sitemaps, Core Web Vitals. For N02 frontend output needing search visibility. Actionable checklist per page type."
 when_to_use: "When generating landing pages, blog posts, product pages, or any content that must rank in search engines."

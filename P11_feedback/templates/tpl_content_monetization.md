@@ -9,7 +9,7 @@ author: n06_commercial
 title: "Template — Content Monetization Tool"
 tags: [template, content-monetization, billing, checkout, credits, courses, PIX, Stripe, N06]
 tldr: "Config-driven template for content monetization function_def artifacts. Covers payment_provider, currency (BRL centavos), pipeline_costs, credit packs, pricing tiers, and quality gates."
-quality: 9.0
+quality: 9.1
 density_score: 1.0
 ---
 

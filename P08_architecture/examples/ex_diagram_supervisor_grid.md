@@ -10,6 +10,11 @@ created: 2026-03-24
 author: builder_agent
 quality: 9.0
 tags: [diagram, architecture, grid, agent_group, orchestration]
+updated: "2026-04-07"
+domain: "architecture"
+title: "Diagram Supervisor Grid"
+density_score: 0.92
+tldr: "Defines diagram for diagram supervisor grid, with validation gates and integration points."
 ---
 
 # Diagram: Agent_group Grid Dispatch
@@ -48,7 +53,21 @@ orchestrator orchestrates up to 6 parallel agent_groups via PowerShell spawn scr
 ```
 
 ## Key Properties
-- Max 6 slots for short tasks (<15min), 3 for long (>30min)
-- Each agent_group: own CMD window, own Claude session, own MCP config
-- Continuous mode: slot completes -> next batch auto-dispatched
-- Isolation: agent_groups share git repo but never edit same files
+1. Max 6 slots for short tasks (<15min), 3 for long (>30min)
+2. Each agent_group: own CMD window, own Claude session, own MCP config
+3. Continuous mode: slot completes -> next batch auto-dispatched
+4. Isolation: agent_groups share git repo but never edit same files
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `diagram` |
+| Pillar | P08 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

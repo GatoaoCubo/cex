@@ -33,6 +33,11 @@ inputs: ["Motor 8F plan JSON", "optional step filter"]
 outputs: ["generated prompts per builder step", "LLM outputs (--execute mode)", "run state JSON"]
 dependencies: ["pyyaml", "anthropic (optional, for --execute)"]
 category: core
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

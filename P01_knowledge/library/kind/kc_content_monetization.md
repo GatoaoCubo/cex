@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: builder_agent
 domain: content_monetization
-quality: 9.0
+quality: 9.1
 tags: [content_monetization, P04, PRODUCE, kind-kc, monetization, pipeline]
 tldr: "Config-driven 9-stage pipeline (PARSE>PRICING>CREDITS>CHECKOUT>COURSES>ADS>EMAILS>VALIDATE>DEPLOY) that wires billing, credits, checkout, courses, ads, and emails into a single declarative artifact"
 when_to_use: "Building, reviewing, or reasoning about content_monetization artifacts"

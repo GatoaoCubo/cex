@@ -8,7 +8,7 @@ created: "2026-03-22"
 updated: "2026-03-22"
 author: knowledge_agent
 domain: meta
-quality: 9.0
+quality: 9.1
 tags: [lifecycle, freshness, archive, promote, anti-fragility]
 tldr: "Regras de freshness (30d), promotion (>=9.5), archive (<7.0), version sync e cascade para artefatos CEX"
 when_to_use: "Quando precisar validar, promover ou arquivar artefatos do sistema CEX"

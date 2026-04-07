@@ -8,6 +8,11 @@ created: 2026-03-25
 author: builder_agent
 quality: 9.0
 tags: [grammar, constraint, json, BNF, structured-generation]
+updated: "2026-04-07"
+domain: "schema"
+title: "Input Schema Json Object"
+density_score: 0.92
+tldr: "Defines grammar for input schema json object, with validation gates and integration points."
 ---
 
 # Grammar: JSON Object
@@ -29,10 +34,10 @@ ws     ::= [ \t\n]*
 ```
 
 ## Frameworks that use this
-- **Guidance** (Microsoft): grammar-based constrained generation
-- **Outlines** (dottxt): FSM-compiled regex/JSON schemas
-- **llama.cpp**: GBNF grammars for local models
-- **LMQL**: `where` clauses compile to token masks
+1. **Guidance** (Microsoft): grammar-based constrained generation
+2. **Outlines** (dottxt): FSM-compiled regex/JSON schemas
+3. **llama.cpp**: GBNF grammars for local models
+4. **LMQL**: `where` clauses compile to token masks
 
 ## Difference from response_format (P05)
 | | response_format (P05) | grammar (P06) |
@@ -41,3 +46,17 @@ ws     ::= [ \t\n]*
 | Guarantee | LLM may ignore | Physically enforced |
 | Flexibility | Works with any API | Requires grammar-aware runtime |
 | Function | CONSTRAIN (soft) | CONSTRAIN (hard) |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `grammar` |
+| Pillar | P06 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

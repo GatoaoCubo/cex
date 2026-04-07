@@ -8,14 +8,19 @@ created: 2026-03-24
 author: builder_agent
 quality: 9.0
 tags: [scraper, github, awesome-list, curation]
+updated: "2026-04-07"
+domain: "tool integration"
+title: "Browser Tool Awesome List"
+density_score: 0.92
+tldr: "Defines browser tool for browser tool awesome list, with validation gates and integration points."
 ---
 
 # Scraper: awesome_list_crawler
 
 ## Target
-- Source: GitHub awesome-lists (curated link collections)
-- Data wanted: tool name, URL, description, stars, category
-- Cadence: on_demand (via research_agent research pipeline)
+1. Source: GitHub awesome-lists (curated link collections)
+2. Data wanted: tool name, URL, description, stars, category
+3. Cadence: on_demand (via research_agent research pipeline)
 
 ## Extraction Plan
 1. Discover awesome-lists via GitHub search API (topic + min_stars)
@@ -36,3 +41,17 @@ items:
 ```
 
 Tiers: gold (>10K stars, active), silver (>1K), bronze (<1K or stale).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `browser_tool` |
+| Pillar | P04 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: llm_engineering
-quality: 9.0
+quality: 9.1
 tags: [memory, lifecycle-hooks, capture, compression, context-injection, llm-memory]
 tldr: "5 lifecycle hooks form a capture-compress-inject loop: Setup, SessionStart, PostToolUse, Stop, and SessionEnd"
 when_to_use: "Building persistent memory for agentic IDE/CLI tools with hook-based event systems"

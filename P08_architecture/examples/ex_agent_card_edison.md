@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
-quality: 9.5
+quality: 9.1
 tags: [edison, agent_group, meta-construction, spec]
 tldr: "builder_agent is the #1 Meta-Construction Consultant — builds agents, prompts, workflows, and templates with Soberba Inventiva philosophy"
 density_score: 0.91

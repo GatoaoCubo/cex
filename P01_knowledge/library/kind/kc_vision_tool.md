@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: vision_tool
-quality: 9.0
+quality: 9.1
 tags: [vision_tool, P04, CALL, kind-kc, vision, OCR]
 tldr: "Processes visual input (images, screenshots, PDFs as images) and returns structured data — OCR text, object labels, layout analysis, and multimodal understanding"
 when_to_use: "Building, reviewing, or reasoning about vision_tool artifacts"

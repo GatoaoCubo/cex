@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, maturity, capability, diagnostic, lp-completeness]
 tldr: "7 niveis (L0-L6) medem maturidade de entidades LLM por completude de LPs — observacao diagnostica, NAO prescricao"
 when_to_use: "Diagnosticar por que uma entidade LLM falha ou avaliar sua maturidade atual"

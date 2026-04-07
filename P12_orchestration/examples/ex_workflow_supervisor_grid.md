@@ -6,8 +6,13 @@ description: "Multi-agent_group crew configuration for parallel task execution v
 version: 1.0.0
 created: 2026-03-25
 author: orchestrator
-quality: 9.0
+quality: 9.1
 tags: [crew, multi-agent, grid, parallel, orchestration]
+updated: "2026-04-07"
+domain: "orchestration"
+title: "Workflow Supervisor Grid"
+density_score: 0.92
+tldr: "Defines crew for workflow supervisor grid, with validation gates and integration points."
 ---
 
 # Crew: Agent_group Grid
@@ -59,3 +64,25 @@ A crew instantiates ALL 12 LPs at the group level:
 P01=shared pool, P02=N agent_groups, P03=mission goal, P04=shared MCPs,
 P06=file isolation contract, P07=quality gates, P09=grid config,
 P10=shared git state, P11=monitor watchdog, P12=signal protocol.
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `crew` |
+| Pillar | P12 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -9,6 +9,11 @@ created: 2026-03-24
 author: builder_agent
 quality: 9.0
 tags: [session-state, dispatch, tracking, ephemeral]
+updated: "2026-04-07"
+domain: "memory"
+title: "Session State Supervisor Dispatch"
+density_score: 0.92
+tldr: "Defines session state for session state supervisor dispatch, with validation gates and integration points."
 ---
 
 # Session State: Agent_group Dispatch Tracking
@@ -33,9 +38,23 @@ last_monitor_check: "2026-03-24T20:02:00Z"
 ```
 
 ## Lifecycle
-- Created: on first dispatch in session
-- Updated: on each spawn, signal, or monitor check
-- Destroyed: on session end (ephemeral, not persisted to disk)
+1. Created: on first dispatch in session
+2. Updated: on each spawn, signal, or monitor check
+3. Destroyed: on session end (ephemeral, not persisted to disk)
 
 ## Usage
 orchestrator uses this to track which agent_groups are active, avoid double-dispatch, and determine when a wave is complete for collection.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `session_state` |
+| Pillar | P10 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

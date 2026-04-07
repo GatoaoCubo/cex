@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: decision_record
-quality: 9.0
+quality: 9.1
 tags: [decision_record, P08, REASON, kind-kc, ADR]
 tldr: "decision_record (ADR) captures an architectural decision with its context, the decision itself, rejected alternatives, and consequences — making reasoning durable across sessions and team members."
 when_to_use: "Building, reviewing, or reasoning about decision_record artifacts"

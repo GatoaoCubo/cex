@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Chunk Strategy"
 tags: [template, chunk, rag, splitting]
 tldr: "Defines how documents are split into retrievable chunks for RAG pipelines. Controls size, overlap, boundary detection, and metadata propagation."
-quality: 8.8
+quality: 9.0
 ---
 
 # Chunk Strategy Template

@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: dev_tooling
-quality: 9.0
+quality: 9.1
 tags: [git-worktree, isolation, parallel-agents, branch-management, workspace]
 tldr: "Git worktrees give each parallel agent an isolated directory and branch, eliminating merge conflicts in concurrent work"
 when_to_use: "Multiple agents or developers need to work on the same repo simultaneously without interference"

@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Enum Definition"
 tags: [template, enum, type, schema, validation]
 tldr: "Defines a controlled vocabulary for a field. Lists allowed values, descriptions, deprecation status, and default. Prevents free-text drift in typed fields."
-quality: 8.8
+quality: 9.0
 ---
 
 # Enum Definition: [ENUM_NAME]

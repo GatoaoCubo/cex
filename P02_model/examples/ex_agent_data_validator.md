@@ -9,7 +9,7 @@ updated: 2026-03-24
 author: builder_agent
 agent_group: operations_agent
 domain: data_quality
-quality: 9.0
+quality: 9.1
 tags: [data-validation, quality-assurance, pipeline, schema-check, anomaly-detection]
 tldr: Agente autonomo que valida qualidade de dados em pipelines — detecta schema drift, anomalias estatisticas, nulls inesperados e violacoes de regras de negocio
 when_to_use: Quando pipeline de dados precisa de validacao automatica antes de ingestao ou publicacao

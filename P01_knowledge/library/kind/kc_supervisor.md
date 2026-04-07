@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: commercial_agent
 domain: supervisor
-quality: 9.0
+quality: 9.1
 tags: [supervisor, P08, ORCHESTRATE, kind-kc]
 tldr: "supervisor is a crew orchestrator artifact that composes and coordinates multiple builders — it dispatches, sequences, and collects results without executing tasks itself."
 when_to_use: "Building, reviewing, or reasoning about supervisor artifacts"

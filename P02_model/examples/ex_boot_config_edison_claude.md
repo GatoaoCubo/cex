@@ -18,6 +18,10 @@ author: orchestrator
 domain: orchestration
 quality: 9.0
 tags: [boot, claude-cli, agent_group, edison, mcp-config]
+updated: "2026-04-07"
+title: "Boot Config Edison Claude"
+density_score: 0.92
+tldr: "Defines boot config for boot config edison claude, with validation gates and integration points."
 ---
 
 # builder_agent Boot Config — Claude CLI
@@ -43,6 +47,20 @@ claude %FLAGS% %MCP% "%IDENTITY%"
 5. **PRIME**: `records/agent_groups/edison/PRIME_builder_agent.md` (full identity)
 
 ## Key Design Decisions
-- `set CLAUDECODE=` prevents nested Claude detection (critical for agent_group isolation)
-- `--strict-mcp-config` ensures only declared MCPs are available
-- Identity prompt injected as first argument (not via file)
+1. `set CLAUDECODE=` prevents nested Claude detection (critical for agent_group isolation)
+2. `--strict-mcp-config` ensures only declared MCPs are available
+3. Identity prompt injected as first argument (not via file)
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `boot_config` |
+| Pillar | P02 |
+| Domain | orchestration |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

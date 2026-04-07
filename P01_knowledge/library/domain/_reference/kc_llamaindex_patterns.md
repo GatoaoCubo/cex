@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: llamaindex
 origin: src_framework_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [llamaindex, query-engine, node-parser, response-synthesizer, workflow, index]
 tldr: "LlamaIndex structures data as indexed nodes, queries via engines/retrievers, and synthesizes responses — optimized for RAG-first architectures"
 when_to_use: "Building or mapping LlamaIndex constructs to CEX kinds"

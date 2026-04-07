@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: agent_package
-quality: 9.0
+quality: 9.1
 tags: [agent_package, p02, BECOME, kind-kc]
 tldr: "Self-contained portable agent bundle — LLM-agnostic, distributable package with manifest, instructions, and examples"
 when_to_use: "Building, reviewing, or reasoning about agent_package artifacts"

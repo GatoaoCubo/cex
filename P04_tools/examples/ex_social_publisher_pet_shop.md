@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
-quality: 8.8
+quality: 9.0
 tags: [social-publisher, example, pet-shop, instagram, facebook, ayrshare, production]
 tldr: "Real production config from GATO3 — minimalist cat accessories brand. IG+FB via Ayrshare, Supabase catalog, 7-day content calendar."
 density_score: 0.92

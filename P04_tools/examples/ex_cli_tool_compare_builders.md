@@ -41,6 +41,11 @@ inputs: ["original builder directory", "generated builder directory"]
 outputs: ["comparison report with 5 metrics per file: structural, field coverage, Jaccard, size delta, quality 5D"]
 dependencies: ["pyyaml (optional)"]
 category: qa
+quality: 9.1
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

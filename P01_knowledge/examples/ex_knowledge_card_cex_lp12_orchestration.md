@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.2
 tags: [cex, lp12, orchestration, workflow, spawn, signal, handoff, crew]
 tldr: "P12 define 7 tipos de coordenacao multi-agente: workflow, dag, spawn_config, signal, handoff, dispatch_rule, crew"
 when_to_use: "Entender como agentes LLM isolados viram sistema coordenado"

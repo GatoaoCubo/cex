@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: knowledge_ingestion
-quality: 9.0
+quality: 9.1
 tags: [chunk-strategy, recursive, markdown, rag, langchain, text-splitter]
 tldr: Recursive text splitter otimizado para documentacao Markdown — chunk_size=1000, overlap=200, separadores hierarquicos por heading level
 when_to_use: Ingestao de knowledge cards, READMEs, e documentacao tecnica no pipeline RAG do organization Brain

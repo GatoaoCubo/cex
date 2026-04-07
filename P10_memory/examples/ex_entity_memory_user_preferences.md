@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: memory
-quality: 9.0
+quality: 9.1
 tags: [entity-memory, user-preferences, personalization, cross-session]
 tldr: "Armazena fatos sobre o user (nome, preferencias, expertise) com merge-on-new para personalizacao persistente"
 when_to_use: "Quando o sistema precisa lembrar quem e o user e como ele prefere trabalhar entre sessoes"

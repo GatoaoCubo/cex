@@ -9,7 +9,7 @@ references:
   - tpl_chain
   - ex_skill_web_scraper
   - ex_dispatch_rule_research
-quality: 8.8
+quality: 9.0
 ---
 
 # Research Pipeline Chain

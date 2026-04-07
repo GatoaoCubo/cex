@@ -9,7 +9,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
 domain: marketing
-quality: 9.5
+quality: 9.1
 tags: [mercado-livre, ads, roas, campaign, marketplace]
 tldr: Skill de Product Ads ML com calculadora de preco, classificacao de funil, estrutura de campanhas e otimizacao semanal
 user_invocable: true

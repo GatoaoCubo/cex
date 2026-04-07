@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: identity
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [agent, identity, lens, mental-model, model-card, boot, iso, axiom, persona, config]
 tldr: "Agent identity defines WHO an agent is — its cognitive lens, mental model, model selection, boot sequence, ISO packaging, and invariant axioms"
 when_to_use: "Building or classifying components that define agent persona, configuration, packaging, or foundational rules"

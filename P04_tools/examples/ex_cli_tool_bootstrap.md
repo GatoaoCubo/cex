@@ -33,6 +33,11 @@ inputs: ["project name", "optional LP selection"]
 outputs: ["new CEX project directory with selected pillars, schemas, templates"]
 dependencies: ["pyyaml"]
 category: product
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

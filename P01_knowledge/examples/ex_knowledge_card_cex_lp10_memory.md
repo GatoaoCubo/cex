@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, lp10, memory, runtime-state, knowledge-index, learning-record, session]
 tldr: "P10 define 4 tipos de memoria operacional: runtime_state, knowledge_index, learning_record, session_state"
 when_to_use: "Entender como agentes LLM gerenciam estado e memoria entre sessoes"

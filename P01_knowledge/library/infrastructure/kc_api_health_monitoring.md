@@ -8,7 +8,7 @@ created: "2026-04-01"
 updated: "2026-04-01" 
 author: "N04_knowledge"
 domain: infrastructure
-quality: 9.0
+quality: 9.1
 tags: [api_monitoring, health_checks, infrastructure, uptime, observability]
 tldr: "API health monitoring ensures service availability through status endpoints, uptime tracking, and dependency validation with structured response formats."
 when_to_use: "Implement when building APIs requiring availability monitoring, SLA tracking, or dependency health validation."

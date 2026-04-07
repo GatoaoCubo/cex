@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: knowledge-card-builder
 domain: infrastructure
-quality: 8.8
+quality: 9.0
 tags: [railway, cli, deploy, paas, infrastructure]
 tldr: "Railway CLI core patterns: login→link→up workflow, env vars via railway run, GitHub Actions CI/CD with RAILWAY_TOKEN, project/service/environment hierarchy"
 when_to_use: "Deploying to Railway platform, setting up Railway CI/CD, or debugging Railway deployments"

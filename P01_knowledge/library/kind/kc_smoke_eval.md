@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: knowledge_agent
 domain: smoke_eval
-quality: 9.0
+quality: 9.1
 tags: [smoke_eval, P07, GOVERN, kind-kc]
 tldr: "Fast <30s sanity check confirming a pipeline starts and returns a non-empty, structurally valid output."
 when_to_use: "Building, reviewing, or reasoning about smoke_eval artifacts"

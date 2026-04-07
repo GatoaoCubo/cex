@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: agent
-quality: 9.0
+quality: 9.1
 tags: [agent, p02, BECOME, kind-kc]
 tldr: "Complete agent definition — persona, capabilities, tools, and routing rules that make an LLM BECOME a specialist"
 when_to_use: "Building, reviewing, or reasoning about agent artifacts"

@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: glossary_entry
-quality: 9.0
+quality: 9.1
 tags: [glossary_entry, p01, INJECT, kind-kc]
 tldr: "Short term definition injected for vocabulary grounding — the lightest P01 knowledge unit"
 when_to_use: "Building, reviewing, or reasoning about glossary_entry artifacts"

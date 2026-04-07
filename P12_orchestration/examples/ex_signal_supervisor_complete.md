@@ -8,8 +8,13 @@ format: json
 version: 1.0.0
 created: 2026-03-24
 author: builder_agent
-quality: 9.0
+quality: 9.1
 tags: [signal, completion, agent_group, orchestration]
+updated: "2026-04-07"
+domain: "orchestration"
+title: "Signal Supervisor Complete"
+density_score: 0.92
+tldr: "Defines signal for signal supervisor complete, with validation gates and integration points."
 ---
 
 # Signal: agent_group_complete
@@ -52,3 +57,25 @@ Get-ChildItem .claude/signals/*.json | ForEach-Object {
 | complete | Task done, quality passed | Collect + next batch |
 | error | Task failed | Log + retry or escalate |
 | progress | Still working (heartbeat) | Wait, check stuck timer |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `signal` |
+| Pillar | P12 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

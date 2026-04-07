@@ -9,7 +9,7 @@ created: 2026-03-23
 updated: 2026-03-23
 author: builder_agent
 domain: data_collection
-quality: 9.0
+quality: 9.1
 tags: [scraping, selenium, playwright, beautifulsoup, data-extraction]
 tldr: Skill que roteia automaticamente entre 4 estrategias de scraping baseado na complexidade do alvo e entrega dados estruturados
 user_invocable: true

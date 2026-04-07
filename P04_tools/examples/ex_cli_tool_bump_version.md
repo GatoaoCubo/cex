@@ -25,6 +25,11 @@ inputs: ["_meta/VERSION.yaml"]
 outputs: ["updated VERSION.yaml", "changelog entry in _meta/CHANGELOG.md"]
 dependencies: ["pyyaml"]
 category: product
+quality: 9.0
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose

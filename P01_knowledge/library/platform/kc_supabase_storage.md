@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 9.0
+quality: 9.1
 tags: [supabase, storage, s3, buckets, cdn, imgproxy, tus, platform]
 tldr: "Storage S3-compatible com buckets public/private, RLS policies, image transforms via imgproxy, resumable uploads (TUS), e CDN Cloudflare no Pro+"
 when_to_use: "Quando configurar upload/download de arquivos e media em projetos Supabase"

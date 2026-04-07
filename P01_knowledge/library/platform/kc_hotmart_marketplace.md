@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: affiliate_platform
-quality: 9.0
+quality: 9.1
 tldr: "Hotmart Marketplace — affiliate ecosystem with 500K+ promoters, commission structures, cookie tracking, and promotion strategies for BR/LATAM."
 tags: [hotmart, marketplace, affiliate, commission, brazil, latam, infoproduct]
 density_score: 1.0

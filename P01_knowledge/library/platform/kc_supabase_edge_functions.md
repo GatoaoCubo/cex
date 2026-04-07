@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 9.0
+quality: 9.1
 tags: [supabase, edge-functions, deno, serverless, typescript, platform]
 tldr: "Serverless functions em Deno/TypeScript: deploy global, secrets management, CORS configuravel, CPU limits 2s(free)/10s(pro)/150s(team)"
 when_to_use: "Quando configurar serverless compute (webhooks, cron, API custom) em Supabase"

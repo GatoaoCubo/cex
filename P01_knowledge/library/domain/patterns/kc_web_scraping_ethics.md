@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-04-07
 author: n01_research
 domain: patterns
-quality: 9.0
+quality: 9.1
 tags: [pattern, skill, llm, scraping, ethics, robots-txt, rate-limit, attribution, legal]
 tldr: "Respect robots.txt, rate limits, ToS. Prefer APIs over scraping. Cache results. Attribute sources. Never scrape PII. Legal compliance is non-negotiable."
 when_to_use: "Before any automated web data collection, competitor research, or content aggregation task."

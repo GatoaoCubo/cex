@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 domain: orchestration
-quality: 9.5
+quality: 9.2
 tags: [orchestration, dispatch, routing, intention-parsing, multi-agent]
 tldr: Prompt template para orchestrator orchestrator - intention parsing, agent_group routing, dependency resolution, dispatch, monitoring
 when_to_use: Ao construir orchestrator que roteia tasks para agents especializados

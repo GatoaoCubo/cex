@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.2
 tags: [cex, lp07, evals, scoring, benchmark, golden-test, shokunin]
 tldr: "P07 formaliza 6 tipos de eval como cidadaos de 1a classe: de smoke_eval 30s a golden_test 9.5+"
 when_to_use: "Entender como medir qualidade em sistemas LLM e o padrao Shokunin de tiers"

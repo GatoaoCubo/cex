@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.2
 tags: [code-review, github, pull-request, rubric, quality]
 tldr: "Structured code review via GitHub MCP: PR size checks, 7-dimension rubric (correctness, security, performance, readability, tests, docs, architecture), review checklist, automated PR validation."
 density_score: 0.88

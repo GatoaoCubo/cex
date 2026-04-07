@@ -9,7 +9,7 @@ author: n06_commercial
 title: "Example — Content Monetization: Infoproduct (Course Generation, Email Sequences, Sales Page, Credit Packs)"
 tags: [example, content-monetization, infoproduct, course, email-sequence, sales-page, credit-packs, N06]
 tldr: "Infoproduct monetization: LLM course generation chain (outline→modules→sales_page→email_sequence), MercadoPago, BRL credit packs, ad validation, and launch email sequence."
-quality: 8.8
+quality: 9.0
 domain: content-monetization
 use_case: infoproduct-brazil
 ---

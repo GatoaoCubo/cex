@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 format: markdown
-quality: 9.5
+quality: 9.0
 tags: [security, audit, output]
 tldr: "Structured security audit report with findings by severity, remediation roadmap, and OWASP compliance mapping"
 max_bytes: 8192

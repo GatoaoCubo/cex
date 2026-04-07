@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: handoff_protocol
-quality: 9.0
+quality: 9.1
 tags: [handoff_protocol, p02, COLLABORATE, kind-kc]
 tldr: "Agent-to-agent transfer protocol — defines what context passes between agents and what the receiving agent must return"
 when_to_use: "Building, reviewing, or reasoning about handoff_protocol artifacts"

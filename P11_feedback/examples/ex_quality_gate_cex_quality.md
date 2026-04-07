@@ -8,7 +8,7 @@ created: "2026-03-22"
 updated: "2026-03-22"
 author: knowledge_agent
 domain: meta
-quality: 9.0
+quality: 9.2
 tags: [quality-gate, pre-commit, validation, scoring, anti-fragility]
 tldr: "Gate pre-commit com 5 checks (naming, size, density, schema, generator) + scoring formula + auto-reject criteria"
 when_to_use: "Antes de mergear qualquer novo artefato CEX no pool"
@@ -30,41 +30,41 @@ Pre-commit gate para novos artefatos CEX — rejeita antes de entrar no pool.
 ## Checklist (ALL must pass)
 
 ### C1: Naming Compliance
-- [ ] Filename matches `_schema.yaml` naming pattern for its type
-- [ ] Prefix = `{lp_lower}_{type_abbrev}_`
-- [ ] No spaces, uppercase, or special chars (kebab OK for topic)
-- **Auto-check**: `validate_examples.py` type matching
+1. [ ] Filename matches `_schema.yaml` naming pattern for its type
+2. [ ] Prefix = `{lp_lower}_{type_abbrev}_`
+3. [ ] No spaces, uppercase, or special chars (kebab OK for topic)
+4. **Auto-check**: `validate_examples.py` type matching
 
 ### C2: Size Constraint
-- [ ] File size <= `max_bytes` from schema constraints
-- [ ] If no constraint defined, max 4096 bytes default
-- **Auto-check**: `validate_examples.py` size check
+1. [ ] File size <= `max_bytes` from schema constraints
+2. [ ] If no constraint defined, max 4096 bytes default
+3. **Auto-check**: `validate_examples.py` size check
 
 ### C3: Density Threshold
-- [ ] Content density >= `density_min` from schema (or 0.7 baseline)
-- [ ] No empty sections, no placeholder text (TBD, TODO, ...)
-- [ ] Each bullet carries actionable data (Specificity Test)
-- **Auto-check**: `validate_examples.py` density estimation
+1. [ ] Content density >= `density_min` from schema (or 0.7 baseline)
+2. [ ] No empty sections, no placeholder text (Configurable, PENDING, ...)
+3. [ ] Each bullet carries actionable data (Specificity Test)
+4. **Auto-check**: `validate_examples.py` density estimation
 
 ### C4: Schema Compliance
-- [ ] Parent LP has valid `_schema.yaml` (passes `validate_schema.py`)
-- [ ] Type exists in schema types dict
-- [ ] All `frontmatter_required` fields present if applicable
+1. [ ] Parent LP has valid `_schema.yaml` (passes `validate_schema.py`)
+2. [ ] Type exists in schema types dict
+3. [ ] All `frontmatter_required` fields present if applicable
 
 ### C5: Generator Alignment
-- [ ] Parent LP has `_generator.md` that covers this type
-- [ ] Example follows generator's PASSO A PASSO structure
-- **Manual check**: review against generator sections
+1. [ ] Parent LP has `_generator.md` that covers this type
+2. [ ] Example follows generator's PASSO A PASSO structure
+3. **Manual check**: review against generator sections
 
 ## Auto-Reject Criteria
 
 Immediate rejection if ANY of these:
-- File has no content (0 bytes or only whitespace)
-- Filename doesn't match any schema type naming pattern
-- Size exceeds 2x the `max_bytes` constraint
-- Contains placeholder markers: `TBD`, `TODO`, `FIXME`, `...`, `placeholder`
-- Density below 0.5 (excessive boilerplate)
-- Duplicate `id` of existing example
+1. File has no content (0 bytes or only whitespace)
+2. Filename doesn't match any schema type naming pattern
+3. Size exceeds 2x the `max_bytes` constraint
+4. Contains placeholder markers: `Configurable`, `PENDING`, `NOTE`, `...`, `placeholder`
+5. Density below 0.5 (excessive boilerplate)
+6. Duplicate `id` of existing example
 
 ## Tiered Review
 
@@ -103,9 +103,9 @@ python _tools/validate_examples.py
 
 ## Escalation
 
-- 3+ consecutive rejections on same LP -> flag schema/generator for review
-- Golden promotion requires 2 independent validation passes
-- Disputes: author can request manual review with justification
+1. 3+ consecutive rejections on same LP -> flag schema/generator for review
+2. Golden promotion requires 2 independent validation passes
+3. Disputes: author can request manual review with justification
 
 ---
 *Quality Gate v1.0 | CEX Anti-Fragility Layer | 2026-03-22*

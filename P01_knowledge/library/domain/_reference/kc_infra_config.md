@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: infra_config
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [infrastructure, config, permissions, feature-flags, runtime, secrets, rate-limits, rbac]
 tldr: "Infrastructure configuration covers path management, RBAC permissions, feature toggles, runtime constraints, secret management, and API rate limiting"
 when_to_use: "Managing environment configs, access control, feature rollouts, secret rotation, or API tier enforcement"

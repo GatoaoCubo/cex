@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, lp09, config, env-config, feature-flag, permission, runtime-rule]
 tldr: "P09 define 5 tipos de configuracao operacional: env_config, path_config, permission, feature_flag, runtime_rule"
 when_to_use: "Entender como sistemas LLM separam configuracao de identidade e arquitetura"

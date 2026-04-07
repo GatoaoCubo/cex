@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: hook
-quality: 9.0
+quality: 9.1
 tags: [hook, P04, GOVERN, kind-kc]
 tldr: "Executable code triggered on a pre/post pipeline event — synchronous, short-lived, scoped to one event boundary, with side effects but no persistent state"
 when_to_use: "Building, reviewing, or reasoning about hook artifacts"

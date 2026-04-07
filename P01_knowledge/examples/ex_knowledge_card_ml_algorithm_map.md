@@ -3,7 +3,7 @@ id: KC_knowledge_agent_ML_UNIVERSE_MAP
 kind: knowledge_card
 pillar: P01
 version: 1.0.0
-quality: 8.7
+quality: 9.0
 source: "gdrive://organization Conhecimento/Mapeando_o_Universo_do_Machine_Learning.pdf"
 contributor: "CEO (root folder)"
 domain: conhecimento

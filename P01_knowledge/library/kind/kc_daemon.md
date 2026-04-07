@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: daemon
-quality: 9.0
+quality: 9.1
 tags: [daemon, P04, GOVERN, kind-kc]
 tldr: "Persistent background process that runs continuously, monitoring events or serving requests without direct agent invocation"
 when_to_use: "Building, reviewing, or reasoning about daemon artifacts"

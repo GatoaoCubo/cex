@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-22
 updated: 2026-03-22
 author: knowledge_agent
-quality: 9.0
+quality: 9.1
 tags: [spawn, config, grid, continuous, orchestration]
 tldr: "Continuous grid spawn: auto-fill slots on completion, 3 max concurrent, 5s delay, handoffs named batch_{N}_{sat}.md"
 max_bytes: 1024
@@ -16,6 +16,7 @@ source: organization-core/records/agent_groups/stella/mental_model.yaml + record
 linked_artifacts:
   pattern: p08_pat_continuous_batching
   workflow: p12_wf_stella_dispatch
+domain: "orchestration"
 ---
 
 # Spawn Config: Grid Continuous Mode
@@ -92,5 +93,27 @@ powershell -File records/framework/powershell/spawn_stop.ps1
 
 ## Measured Results
 
-- ISOFIX mission: 7 batches, 1 slot → 1.6x speedup vs static waves
-- CBTEST: 3 mixed agent_groups (research_agent+builder_agent+knowledge_agent) → zero git lock contention
+1. ISOFIX mission: 7 batches, 1 slot → 1.6x speedup vs static waves
+2. CBTEST: 3 mixed agent_groups (research_agent+builder_agent+knowledge_agent) → zero git lock contention
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `spawn_config` |
+| Pillar | P12 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

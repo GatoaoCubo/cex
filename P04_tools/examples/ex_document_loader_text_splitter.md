@@ -8,6 +8,11 @@ created: 2026-03-25
 author: builder_agent
 quality: 9.0
 tags: [component, pipeline, splitter, RAG, chunking]
+updated: "2026-04-07"
+domain: "tool integration"
+title: "Document Loader Text Splitter"
+density_score: 0.92
+tldr: "Defines component for document loader text splitter, with validation gates and integration points."
 ---
 
 # Component: Text Splitter
@@ -35,3 +40,25 @@ A **skill** (P04) is a high-level capability with multiple phases and triggers.
 A **component** is a single-function building block. It does ONE thing:
 receive input, transform, produce output. No phases, no triggers, no side effects.
 Composable into pipelines. The atom of data processing.
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `component` |
+| Pillar | P04 |
+| Domain |  |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

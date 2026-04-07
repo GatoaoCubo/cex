@@ -9,6 +9,11 @@ created: 2026-03-24
 author: operations_agent
 quality: 9.0
 tags: [benchmark, performance, boot, agent_group]
+updated: "2026-04-07"
+domain: "evaluation"
+title: "Benchmark Supervisor Boot Time"
+density_score: 0.92
+tldr: "Defines benchmark for benchmark supervisor boot time, with validation gates and integration points."
 ---
 
 # Benchmark: Agent_group Boot Time
@@ -39,3 +44,11 @@ Time from `Start-Process` to first Claude API response (seconds).
 ```bash
 powershell -Command "Measure-Command { Start-Process boot\edison.cmd -Wait }"
 ```
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target

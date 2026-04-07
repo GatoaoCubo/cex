@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: embedding_config
-quality: 9.0
+quality: 9.1
 tags: [embedding_config, p01, GOVERN, kind-kc]
 tldr: "Specifies which vector model encodes text into embeddings — dimensions, normalization, and distance metric"
 when_to_use: "Building, reviewing, or reasoning about embedding_config artifacts"

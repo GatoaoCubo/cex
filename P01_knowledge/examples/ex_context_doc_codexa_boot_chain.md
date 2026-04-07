@@ -3,6 +3,15 @@ id: p01_ctx_organization_boot_chain
 kind: context_doc
 domain: architecture
 scope: boot_initialization
+quality: 9.0
+title: "Context Doc Codexa Boot Chain"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for knowledge, demonstrating ideal structure and common pitfalls."
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Context: organization Boot Chain
@@ -23,10 +32,10 @@ L7 EXECUTION  Agent -> Skill -> Sub-agents -> Quality Gate
 ```
 
 ## Operational Context
-- **Deterministic**: same env = same boot state, always
-- **Fractal**: each layer references the next via path pointers
-- **Identity-first**: agent_group knows WHO before WHAT
-- **Fail-safe**: missing layer = graceful fallback to general session
+1. **Deterministic**: same env = same boot state, always
+2. **Fractal**: each layer references the next via path pointers
+3. **Identity-first**: agent_group knows WHO before WHAT
+4. **Fail-safe**: missing layer = graceful fallback to general session
 
 | Layer | Token Cost | Mandatory |
 |-------|-----------|-----------|
@@ -38,8 +47,8 @@ L7 EXECUTION  Agent -> Skill -> Sub-agents -> Quality Gate
 | L6 handoff | ~1K | if dispatched |
 
 ## Decision Notes
-- `set CLAUDECODE=` prevents nested Claude detection (critical for isolation)
-- `--strict-mcp-config` ensures only declared MCPs available per agent_group
-- Total boot context: ~15K tokens (98% reduction from v3.6 monolithic load)
+1. `set CLAUDECODE=` prevents nested Claude detection (critical for isolation)
+2. `--strict-mcp-config` ensures only declared MCPs available per agent_group
+3. Total boot context: ~15K tokens (98% reduction from v3.6 monolithic load)
 
 Source: `records/framework/docs/META_BOOTSTRAP.md`

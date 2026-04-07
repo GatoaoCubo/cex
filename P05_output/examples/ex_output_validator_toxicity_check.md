@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: output_safety
-quality: 9.0
+quality: 9.1
 tags: [output-validator, toxicity, pii, guardrails, safety, nemo, retry, content-filter]
 tldr: Validator pos-LLM que checa toxicidade (Perspective API) e PII (regex + spaCy NER) em output antes de entregar ao usuario — on_fail=retry_with_warning, max_retries=2
 when_to_use: Qualquer agente organization que gera texto user-facing — especialmente copy de marketing, respostas de chatbot, e conteudo publicavel em redes sociais

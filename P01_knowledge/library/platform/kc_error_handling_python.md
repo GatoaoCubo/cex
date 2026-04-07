@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [error-handling, exceptions, retry, circuit-breaker, logging, python]
 tldr: "Production error handling from codexa-core: custom exception hierarchy, structured logging with request IDs, retry with exponential backoff, circuit breaker for external services, graceful degradation."
 density_score: 0.90

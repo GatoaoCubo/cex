@@ -8,7 +8,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: orchestration
-quality: 9.0
+quality: 9.1
 tags: [checkpoint, rag, pipeline, resumable, state-snapshot]
 tldr: "Snapshot do pipeline RAG ingest apos step 3 (embed): 847 docs processados, 3 falharam, resumable=true para continuar sem reprocessar"
 when_to_use: "Quando pipelines longos precisam de recovery points para retomar sem perder progresso"

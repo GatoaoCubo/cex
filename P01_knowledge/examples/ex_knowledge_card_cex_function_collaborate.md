@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, llm-function, collaborate, handoff, signal, crew, multi-agent]
 tldr: "COLLABORATE coordena agentes via 3 tipos (crew/signal/handoff) — passagem de bastao entre entidades autonomas"
 when_to_use: "Entender como agentes coordenam entre si e a fronteira entre COLLABORATE (agente ativo) e CALL (ferramenta passiva)"

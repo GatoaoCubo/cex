@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: cli_tool
-quality: 9.0
+quality: 9.1
 tags: [cli_tool, P04, CALL, kind-kc]
 tldr: "Command-line tool wrapper enabling agents to execute shell commands as discrete, fire-and-forget operations"
 when_to_use: "Building, reviewing, or reasoning about cli_tool artifacts"

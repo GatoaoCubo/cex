@@ -2,7 +2,7 @@
 id: kc_pricing_strategy
 kind: knowledge_card
 pillar: P01
-quality: 9.0
+quality: 9.1
 tldr: "Pricing strategy patterns for content monetization — cost-plus margins, tiered packs, freemium gates, value-based pricing, and dynamic margin calculation."
 tags: ["pricing", "monetization", "SaaS", "credits", "margins", "strategy"]
 when_to_use: "Apply when pricing strategy patterns for content monetization — cost-plus margins, tiered packs, freemium ga..."

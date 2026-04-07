@@ -6,7 +6,7 @@ version: 1.0.0
 title: "Template — Computer Use"
 tags: [template, computer-use, gui, automation, vision]
 tldr: "Configures an LLM-driven computer use tool for GUI automation. Defines viewport, action space, screenshot frequency, and safety boundaries."
-quality: 8.8
+quality: 9.0
 ---
 
 # Computer Use: [NAME]

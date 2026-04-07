@@ -10,7 +10,7 @@ updated: 2026-03-29
 author: builder_agent
 domain: memory_persistence
 origin: manual
-quality: 9.0
+quality: 9.1
 tags: [memory, persistence, learning, session, state, entity, summary, lifecycle]
 tldr: "Memory persistence covers the full lifecycle from ephemeral session state through entity graphs to compressed long-term summaries"
 when_to_use: "Designing memory systems, session management, entity tracking, conversation compression, or long-term learning"

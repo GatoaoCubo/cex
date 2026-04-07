@@ -15,6 +15,10 @@ author: orchestrator
 domain: model_selection
 quality: 9.0
 tags: [model-card, opus, anthropic, pricing, capabilities]
+updated: "2026-04-07"
+title: "Model Card Claude Opus 4"
+density_score: 0.92
+tldr: "Defines model card for model card claude opus 4, with validation gates and integration points."
 ---
 
 # Claude Opus 4 — Model Card
@@ -42,7 +46,19 @@ tags: [model-card, opus, anthropic, pricing, capabilities]
 | Research and analysis | NO (use sonnet, 25% cost) |
 
 ## organization Agent_group Mapping
-- **builder_agent** (build): opus — code complexity demands reasoning depth
-- **operations_agent** (execute): opus — deployment requires zero-error precision
-- **orchestrator** (orchestrate): opus — routing decisions affect all agent_groups
-- **research_agent/marketing_agent/knowledge_agent/commercial_agent**: sonnet — analysis tasks don't need opus
+1. **builder_agent** (build): opus — code complexity demands reasoning depth
+2. **operations_agent** (execute): opus — deployment requires zero-error precision
+3. **orchestrator** (orchestrate): opus — routing decisions affect all agent_groups
+4. **research_agent/marketing_agent/knowledge_agent/commercial_agent**: sonnet — analysis tasks don't need opus
+
+## Metadata
+
+```yaml
+id: p02_mc_claude_opus_4
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p02-mc-claude-opus-4.md
+```

@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, lens, perspective, cognitive-filter, agent_group]
 tldr: "Lens eh perspectiva cognitiva que filtra TODA percepcao e producao — mesmo input, outputs radicalmente diferentes por lens"
 when_to_use: "Entender como agent_groups processam o mesmo input de formas distintas"

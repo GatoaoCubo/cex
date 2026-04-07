@@ -8,7 +8,7 @@ created: 2026-01-17
 updated: 2026-03-25
 author: research_agent
 domain: research
-quality: 9.0
+quality: 9.1
 tags: [embedding, benchmark, qwen3, bertimbau, pt-br, rag, ecommerce]
 tldr: "Qwen3 primary (120ms P95) + BERTimbau fallback (91% PT-BR) = hybrid otimo. Ambos local a $0 vs $16K/ano API."
 when_to_use: "Escolher modelo de embedding para RAG em portugues ou comparar custo local vs API"

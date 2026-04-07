@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: n03_builder
 domain: payment_platform
-quality: 9.0
+quality: 9.1
 tldr: "Hotmart REST API integration — OAuth2 auth, sales endpoints, webhook sha256 HMAC verification, sandbox testing, and affiliate management."
 tags: [hotmart, api, payment, webhook, oauth2, brazil, infoproduct]
 density_score: 1.0

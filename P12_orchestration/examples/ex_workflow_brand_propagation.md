@@ -23,7 +23,7 @@ created: 2026-03-24
 updated: 2026-03-24
 author: builder_agent
 domain: brand
-quality: 9.0
+quality: 9.1
 tags: [brand, design-system, propagation, tokens, identity]
 tldr: "Source-of-truth brand propagation: guidelines -> tokens -> CSS -> prompt injection across all agent_groups"
 density_score: 0.91

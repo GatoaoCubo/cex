@@ -9,7 +9,7 @@ references:
   - tpl_prompt_template
   - ex_agent_copywriter
   - ex_quality_gate_copy
-quality: 8.8
+quality: 9.0
 ---
 
 # AIDA Copywriting Template

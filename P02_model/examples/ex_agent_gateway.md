@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 domain: orchestration
-quality: 9.0
+quality: 9.1
 tags: [gateway, router, mentor, intent-detection, handoff, entry-point]
 tldr: Ponto de entrada unico - combina mentor (loop interativo) + router (semantic intent detection) com handoff para 5 workflows automaticos
 when_to_use: Frontend chat, onboarding de usuarios, routing de intents

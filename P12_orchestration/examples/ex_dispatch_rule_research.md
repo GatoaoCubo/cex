@@ -15,7 +15,7 @@ references:
   - ex_agent_copywriter
   - ex_skill_web_scraper
 tldr: "Dispatch rule: routes research intents to N01 research-agent (STORM+CRAG pipeline) with keyword+intent matching."
-quality: 8.9
+quality: 9.1
 ---
 
 # Research Task Routing

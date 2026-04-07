@@ -8,7 +8,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 9.0
+quality: 9.1
 tags: [cex, agent_group, department, specialization, agent-team, boot-sequence]
 tldr: "Agent_group eh entidade L4 que preenche 12 LPs — departamento completo com identidade, equipe, tools, memoria e governanca"
 when_to_use: "Entender como organizar agentes LLM em departamentos especializados com autonomia total"

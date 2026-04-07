@@ -8,7 +8,7 @@ created: 2026-03-24
 updated: 2026-03-24
 author: builder_agent
 domain: build
-quality: 9.0
+quality: 9.1
 tags: [tdd, testing, quality-gate, red-green-refactor, build-discipline]
 tldr: "Enforces test-first development: RED verified before code, YAGNI compliance, no RED commits merged"
 when_to_use: "Before merging any code commit in builder_agent or operations_agent build pipelines"

@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: marketing_agent
 domain: db_connector
-quality: 9.0
+quality: 9.1
 tags: [db_connector, P04, CALL, kind-kc]
 tldr: "Typed adapter to structured data sources (SQL, GraphQL, REST-to-DB) with pooling, retries, and schema introspection — NOT an api_client nor a retriever"
 when_to_use: "Building, reviewing, or reasoning about db_connector artifacts"

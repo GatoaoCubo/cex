@@ -8,7 +8,7 @@ created: 2026-03-26
 updated: 2026-03-26
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.8
+quality: 9.0
 tags: [brand, design-tokens, design-system, brand-guidelines, css-variables]
 tldr: "Brand como sistema vivo: guidelines.md (fonte unica) -> tokens JSON -> CSS vars -> codigo, com sync automatico"
 when_to_use: "Implementar identidade visual programatica com single source of truth e propagacao automatica"

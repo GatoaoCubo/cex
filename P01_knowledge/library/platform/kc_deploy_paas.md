@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.1
 tags: [deploy, railway, render, paas, nixpacks, production]
 tldr: "PaaS deploy patterns from codexa-core: Railway (primary), Render (secondary), nixpacks auto-detection, Procfile, health checks, rollback, env vars, scaling. Zero-Dockerfile deploys."
 density_score: 1.0

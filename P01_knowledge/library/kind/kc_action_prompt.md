@@ -9,7 +9,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: operations_agent
 domain: action_prompt
-quality: 9.0
+quality: 9.1
 tags: [action_prompt, P03, INJECT, kind-kc]
 tldr: "Task-specific prompt that a human or orchestrator sends to an agent for immediate execution"
 when_to_use: "Building, reviewing, or reasoning about action_prompt artifacts"

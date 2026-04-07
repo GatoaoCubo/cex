@@ -49,6 +49,11 @@ inputs: ["LP code", "artifact type", "seed words", "context text or file"]
 outputs: ["LLM-ready prompt (2-8KB markdown)", "validation warnings"]
 dependencies: ["pyyaml"]
 category: core
+quality: 9.1
+tldr: "Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls."
+domain: "tool integration"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Purpose
