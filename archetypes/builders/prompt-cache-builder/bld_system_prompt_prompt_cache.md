@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "prompt caching, TTL, eviction strategies, cache keys, invalidation, storage backends; NOT session state, conversation memory, runtime variables"
 domain: "prompt_cache"
-quality: null
+quality: 8.9
 tags: ["system_prompt", "prompt_cache", "ttl", "eviction", "caching"]
 safety_level: standard
 tools_listed: false
