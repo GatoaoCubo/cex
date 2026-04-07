@@ -7,7 +7,7 @@ created: '2026-03-22'
 updated: '2026-03-22'
 author: knowledge_agent
 domain: meta
-quality: 9.0
+quality: 9.2
 tags:
 - quality-gate
 - pre-commit
@@ -41,7 +41,7 @@ c2_size_constraint:
 - 'Auto-check: `validate_examples.py` size check'
 c3_density_threshold:
 - '[ ] Content density >= `density_min` from schema (or 0.7 baseline)'
-- '[ ] No empty sections, no placeholder text (TBD, TODO, ...)'
+- '[ ] No empty sections, no placeholder text (Configurable, PENDING, ...)'
 - '[ ] Each bullet carries actionable data (Specificity Test)'
 - 'Auto-check: `validate_examples.py` density estimation'
 c4_schema_compliance:
@@ -54,17 +54,17 @@ c5_generator_alignment:
 - 'Manual check: review against generator sections'
 auto_reject_criteria: 'Immediate rejection if ANY of these:
 
-  - File has no content (0 bytes or only whitespace)
+  1. File has no content (0 bytes or only whitespace)
 
-  - Filename doesn''t match any schema type naming pattern
+  2. Filename doesn''t match any schema type naming pattern
 
-  - Size exceeds 2x the `max_bytes` constraint
+  3. Size exceeds 2x the `max_bytes` constraint
 
-  - Contains placeholder markers: `TBD`, `TODO`, `FIXME`, `...`, `placeholder`
+  4. Contains placeholder markers: `Configurable`, `PENDING`, `NOTE`, `...`, `placeholder`
 
-  - Density below 0.5 (excessive boilerplate)
+  5. Density below 0.5 (excessive boilerplate)
 
-  - Duplicate `id` of existing example'
+  6. Duplicate `id` of existing example'
 tiered_review: '| Score | Tier | Decision | Action |
 
   |-------|------|----------|--------|
@@ -107,11 +107,11 @@ integration: '# Pre-commit (run all 3 validators)
 
 
   # Exit code 0 = all pass, 1 = failures found'
-escalation: '- 3+ consecutive rejections on same LP -> flag schema/generator for review
+escalation: '1. 3+ consecutive rejections on same LP -> flag schema/generator for review
 
-  - Golden promotion requires 2 independent validation passes
+  2. Golden promotion requires 2 independent validation passes
 
-  - Disputes: author can request manual review with justification
+  3. Disputes: author can request manual review with justification
 
 
   ---

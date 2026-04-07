@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: social-publisher-builder
 domain: social_publisher
-quality: 8.7
+quality: 9.0
 tags:
 - social-publisher
 - example
@@ -16,6 +16,7 @@ tags:
 - twitter
 tldr: Config for B2B SaaS — LinkedIn+Twitter, CMS API catalog, thought-leadership content strategy with business-hours posting.
 density_score: 0.88
+updated: '2026-04-07'
 about: Config for a B2B SaaS analytics platform. LinkedIn and Twitter focused, with thought-leadership content and data-driven
   case studies. Business-hours posting aligned to US Eastern timezone.
 config: "identity:\n  empresa: \"CloudMetrics\"\n  handle: \"@cloudmetrics\"\n  nicho: saas\n  tom: \"professional, data-driven,\
@@ -37,3 +38,17 @@ niche_notes:
 - 'Postiz (self-hosted): SaaS companies prefer self-hosted for data control and no vendor lock-in'
 - 'Twitter brevity: 280 chars forces punchy, data-driven hooks ("We analyzed 10M events...")'
 - 'Weekend posting (Sat/Sun reduced): B2B engagement drops 60% on weekends'
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `cli tool`'
+- 'Artifact ID: `ex_social_publisher_saas`'
+- 'Tags: [social-publisher, example, saas, b2b, linkedin, twitter]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P04 | Tools domain |
+
+  | Kind `cli tool` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'

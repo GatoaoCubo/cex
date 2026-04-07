@@ -11,7 +11,7 @@
   "protocol": "rest",
   "auth": "api_key",
   "endpoints": "",
-  "quality": 8.5,
+  "quality": 9.0,
   "tags": [
     "db_connector",
     "postgres",
@@ -27,8 +27,18 @@
   "rate_limit": "100 queries/minute",
   "logging": "structured",
   "versioning": "Schema migrations via Alembic",
+  "domain": "tool integration",
+  "title": "Db Connector Postgres",
+  "density_score": 0.91,
   "overview": "Provides agents with structured data access to PostgreSQL databases via asyncpg. Used for reading business data, writing agent outputs, and querying metadata stores.",
   "query_inbound": "SELECT queries — returns result rows as list of dicts.\nData shape:\n- `sql` (string): Parameterized SQL query\n- `params` (array): Bind parameters",
   "execute_outbound": "INSERT/UPDATE/DELETE — returns affected row count.\nData shape:\n- `sql` (string): Parameterized DML statement\n- `params` (array): Bind parameters",
-  "health_errors": "Health: `SELECT 1` on connection pool checkout\n- ConnectionError: retry with backoff, max 3 attempts\n- QueryTimeout: log and return error after 30s\nCircuit breaker: open after 5 consecutive failures, half-open after 60s"
+  "health_errors": "Health: `SELECT 1` on connection pool checkout\n- ConnectionError: retry with backoff, max 3 attempts\n- QueryTimeout: log and return error after 30s\nCircuit breaker: open after 5 consecutive failures, half-open after 60s",
+  "cross_references": [
+    "Pillar: P04 (Tools)",
+    "Kind: `db connector`",
+    "Artifact ID: `p04_db_postgres`",
+    "Tags: [db_connector, postgres, sql, data]"
+  ],
+  "integration_points": "| Component | Role |\n|-----------|------|\n| Pillar P04 | Tools domain |\n| Kind `db connector` | Artifact type |\n| Pipeline | 8F (F1→F8) |"
 }

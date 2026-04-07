@@ -37,7 +37,7 @@ languages: '| Code | Language | whisper-1 | whisper-large-v3 |
   | pt | Portuguese | high | high |
 
   | es | Spanish | high | high |'
-quality: 8.7
+quality: 9.0
 tags:
 - audio_tool
 - whisper
@@ -51,5 +51,22 @@ streaming: false
 word_timestamps: true
 voice_id: null
 provider: OpenAI
+domain: tool integration
+title: Audio Tool Whisper
+density_score: 0.96
 overview: Transcribes audio files to text using OpenAI's Whisper model. Used by agents that process voice messages, meeting
   recordings, or audio content for downstream text analysis.
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `audio tool`'
+- 'Artifact ID: `p04_audio_whisper`'
+- 'Tags: [audio_tool, whisper, stt, transcription]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P04 | Tools domain |
+
+  | Kind `audio tool` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'

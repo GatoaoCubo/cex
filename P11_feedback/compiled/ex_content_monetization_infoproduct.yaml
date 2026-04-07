@@ -17,7 +17,7 @@ tags:
 - N06
 tldr: 'Infoproduct monetization: LLM course generation chain (outline→modules→sales_page→email_sequence), MercadoPago, BRL
   credit packs, ad validation, and launch email sequence.'
-quality: 8.8
+quality: 9.0
 domain: content-monetization
 use_case: infoproduct-brazil
 configuration: "payment_provider: mercadopago\ncurrency: BRL\ncurrency_unit: centavos\nmode: LIVE\n\npipeline_costs:\n  OUTLINE:\

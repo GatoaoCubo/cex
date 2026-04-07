@@ -19,7 +19,7 @@ keywords:
 pillar: P04
 created: 2026-03-24
 author: builder_agent
-quality: 9.5
+quality: 9.1
 tags:
 - plugin
 - search
@@ -27,6 +27,11 @@ tags:
 - faiss
 - vector
 - semantic
+updated: '2026-04-07'
+domain: tool integration
+title: Plugin Brain Search
+density_score: 0.92
+tldr: Defines plugin for plugin brain search, with validation gates and integration points.
 purpose:
 - 'Extends: organization-brain MCP server'
 - 'Adds: Hybrid retrieval (BM25 keyword + FAISS semantic fusion)'
@@ -63,3 +68,4 @@ specs: '| Component | Detail |
   | Rebuild | `python build_indexes_ollama.py --scope all` (~20 min) |
 
   | Cache | LRU 100 entries, tracks hit rate |'
+metadata: python _tools/cex_score.py --apply p04-plug-brain-search.md

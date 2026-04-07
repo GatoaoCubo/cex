@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
-quality: 8.7
+quality: 9.1
 tags:
 - research-pipeline
 - example
@@ -17,6 +17,7 @@ tags:
 tldr: Config for academic research — Exa neural search, Semantic Scholar, ArXiv, institutional RAG. 5 scholarly perspectives,
   high CRAG threshold.
 density_score: 0.88
+updated: '2026-04-07'
 about: Config for academic research team conducting systematic literature reviews. Primary sources are academic paper databases
   (Exa, Semantic Scholar, ArXiv), with internal RAG over institutional publications.
 config: "identity:\n  empresa: \"AI Research Lab\"\n  nicho: academic_ai\n  idioma: en\n  pais: US\n\nsources:\n  inbound:\n\
@@ -46,3 +47,17 @@ niche_notes:
 - 'Conference talks: YouTube NeurIPS/ICML talks provide author intent missing from papers'
 - '5 scholarly perspectives: methodology, rigor, practice, theory, survey — covers all angles'
 - 'Academic template: formal structure, proper citations, LaTeX-ready format'
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `cli tool`'
+- 'Artifact ID: `ex_research_pipeline_academic`'
+- 'Tags: [research-pipeline, example, academic, papers, literature-review, exa]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P04 | Tools domain |
+
+  | Kind `cli tool` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'

@@ -72,3 +72,4 @@ references:
 - records/framework/powershell/spawn_*.ps1 (spawn implementations)
 - records/core/python/signal_writer.py (signal implementation)
 - .claude/handoffs/ (handoff instances)
+retrieval: python _tools/cex_retriever.py "meta-construction" --top 5

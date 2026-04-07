@@ -7,7 +7,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.7
+quality: 9.0
 tags:
 - example
 - software-project
@@ -45,3 +45,17 @@ what_makes_it_good:
 - Rich console output for terminal users
 - '`--json` flag for programmatic usage'
 - Zero external service deps (works offline)
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `example`'
+- 'Artifact ID: `p04_ex_software_project_cli_tool`'
+- 'Tags: [example, software-project, cli-tool, typer, scoring]'
+example_registry: '| Aspect | Detail |
+
+  |--------|--------|
+
+  | Purpose | Few-shot exemplar for builder prompts |
+
+  | Injection | Loaded by `cex_skill_loader.py` at F3 |
+
+  | Quality | Must score 9.0+ to serve as exemplar |'

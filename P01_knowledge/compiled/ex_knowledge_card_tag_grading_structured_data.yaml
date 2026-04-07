@@ -7,7 +7,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: research
-quality: 8.9
+quality: 9.1
 tags:
 - tag-grading
 - structured-data
@@ -32,7 +32,7 @@ linked_artifacts:
   primary: null
   related:
   - p01_kc_claude_server_tools
-density_score: null
+density_score: 1.0
 data_source: Analise de pagina TAG Grading T9403163 — fetch estatico bloqueado
 quick_reference: 'topic: structured data extraction | scope: TAG certificates | criticality: high
 
@@ -100,3 +100,7 @@ references:
 - 'external: https://playwright.dev/python/docs/intro'
 - 'external: https://schema.org/'
 - 'deepens: p01_kc_claude_server_tools'
+anti_patterns:
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

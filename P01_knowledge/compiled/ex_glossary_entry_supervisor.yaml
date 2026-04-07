@@ -17,7 +17,12 @@ tags:
 - orchestration
 tldr: An agent_group is an autonomous execution unit in the CEX system. Each has a fixed domain, dedicated LLM model, and
   exclusive MCP tools.
-quality: 8.5
+quality: 9.0
+updated: '2026-04-07'
+domain: knowledge management
+author: n04_knowledge
+created: '2026-04-07'
+density_score: 0.98
 usage:
 - 'Context: Aparece em N07 orchestration, dispatch rules, spawn configs'
 - 'Example: "Spawnar agent_group builder_agent para executar 8F pipeline"'
@@ -38,3 +43,26 @@ domain_scope:
 canonical_source:
 - 'Reference: `.claude/rules/n07-orchestrator.md`'
 - 'CEX adoption date: 2026-01-15'
+cross_references:
+- 'Pillar: P01 (Knowledge)'
+- 'Kind: `glossary entry`'
+- 'Artifact ID: `p01_gl_agent_group`'
+- 'Tags: [glossary, agent, node, orchestration]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P01 | Knowledge domain |
+
+  | Kind `glossary entry` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'
+artifact_metadata: 'kind: glossary_entry
+
+  pillar: P01
+
+  pipeline: 8F
+
+  scoring: hybrid_3_layer
+
+  compilation: cex_compile'

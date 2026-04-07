@@ -13,6 +13,11 @@ tags:
 - allow
 - block
 - orchestration
+updated: '2026-04-07'
+domain: config
+title: Permission Stella Allow Block
+density_score: 0.92
+tldr: Defines permission for permission stella allow block, with validation gates and integration points.
 allow_list_execute_directly: '| Category | Operations |
 
   |----------|-----------|
@@ -45,3 +50,10 @@ block_list_route_to_agent_groups: '| Domain | Route To |
   | Courses, pricing | commercial_agent |'
 confirm_required: Delete files, force push, production deploy, API key changes, payment operations.
 principle: orchestrator orchestrates, NEVER executes. If a task produces artifacts, it must be dispatched.
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target
+metadata: python _tools/cex_score.py --apply p09-perm-stella-allow-block.md

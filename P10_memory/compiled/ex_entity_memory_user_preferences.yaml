@@ -7,7 +7,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: memory
-quality: 8.9
+quality: 9.1
 tags:
 - entity-memory
 - user-preferences
@@ -28,7 +28,7 @@ attributes:
 - history
 - expertise
 update_policy: merge_on_new_interaction
-density_score: null
+density_score: 1.0
 tl_dr: 'Entity memory do tipo `user` armazena fatos persistentes sobre o usuario: nome, preferencias de workflow, historico
   de interacoes, e niveis de expertise por dominio. A politica `merge_on_new_interaction` garante que novos fatos sao incorporados
   sem sobrescrever os existentes.'

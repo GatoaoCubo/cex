@@ -14,6 +14,11 @@ tags:
 - autonomous
 - background
 - orchestration
+updated: '2026-04-07'
+domain: tool integration
+title: Daemon Autonomous
+density_score: 0.92
+tldr: Defines daemon for daemon autonomous, with validation gates and integration points.
 runtime:
 - 'Trigger: queue (watches .claude/inbox/ for new tasks)'
 - 'Interval: 60s poll cycle'
@@ -27,3 +32,25 @@ safety:
 - 'Restart policy: on_failure (max 3 retries, then alert)'
 - 'Stop condition: SIGTERM or `daemon.py stop` (reads PID)'
 cli: '`daemon.py start|stop|status|run-once` — start backgrounds with PID, stop via SIGTERM, run-once for testing.'
+metadata: python _tools/cex_score.py --apply p04-daemon-autonomous.md
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `daemon` |
+
+  | Pillar | P04 |
+
+  | Domain |  |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

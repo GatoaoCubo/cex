@@ -12,6 +12,11 @@ tags:
 - performance
 - boot
 - agent_group
+updated: '2026-04-07'
+domain: evaluation
+title: Benchmark Supervisor Boot Time
+density_score: 0.92
+tldr: Defines benchmark for benchmark supervisor boot time, with validation gates and integration points.
 baselines_measured_2026_03_05: '| Agent_group | Model | Boot Time | Status |
 
   |-----------|-------|-----------|--------|
@@ -41,3 +46,9 @@ thresholds: '| Tier | Max Boot | Action |
 
   | Slow | > 15s | Investigate MCP load |'
 how_to_run: powershell -Command "Measure-Command { Start-Process boot\edison.cmd -Wait }"
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target

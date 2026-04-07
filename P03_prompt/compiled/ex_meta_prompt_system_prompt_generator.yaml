@@ -5,6 +5,13 @@ title: Meta-Prompt for System Prompt Generation
 target_type: system_prompt
 optimization_method: manual_review_and_score
 quality: 9.0
+updated: '2026-04-07'
+domain: prompt engineering
+version: 1.0.0
+author: n03_builder
+created: '2026-04-07'
+density_score: 0.92
+tldr: Defines meta prompt for meta-prompt for system prompt generation, with validation gates and integration points.
 objective: Dado o nome, dominio e 3 capabilities de um novo agente, gerar um system_prompt completo e production-ready. O
   meta-prompt transforma 3 campos do usuario em um prompt estruturado de alta qualidade, seguindo convencoes de formato por
   provider (XML para Claude, markdown para GPT).
@@ -42,13 +49,13 @@ rule_3_token_budget:
 - 'Buffer: ~348 tokens'
 rule_4_quality_signals: 'O system_prompt gerado deve:
 
-  - Ter identidade clara em 1a pessoa ("Voce e o {{agent_name}}")
+  1. Ter identidade clara em 1a pessoa ("Voce e o {{agent_name}}")
 
-  - Ter regras acionaveis (verbos imperativos, sem ambiguidade)
+  2. Ter regras acionaveis (verbos imperativos, sem ambiguidade)
 
-  - Ter output_format com placeholders concretos, nao descricoes vagas
+  3. Ter output_format com placeholders concretos, nao descricoes vagas
 
-  - NAO conter: jargao generico ("be helpful"), regras contraditorias, output_format em prosa'
+  4. NAO conter: jargao generico ("be helpful"), regras contraditorias, output_format em prosa'
 rule_5_derivation_logic: 'capabilities[0] -> regras de EXECUCAO (como fazer a coisa principal)
 
   capabilities[1] -> regras de QUALIDADE (como garantir que o resultado e bom)
@@ -92,9 +99,9 @@ example_generation: "Input:\nagent_name: inventory-tracker\nagent_domain: e-comm
   \ | Current | Safety | Projected (7d) | Status |\n|-----|---------|--------|----------------|--------|\n| [sku] | [qty]\
   \ | [safety] | [projected] | [OK/LOW/CRITICAL] |\n\n### Alerts\n- [ALERT_TYPE]: [SKU] at [warehouse] — [details]\n\n###\
   \ Purchase Orders (if generated)\n| PO# | Supplier | SKU | Qty | Est. Cost | Confidence |\n|------|----------|-----|-----|-----------|------------|\n\
-  | [po_id] | [supplier] | [sku] | [qty] | R$ [cost] | [0.0-1.0] |\n</output_format>\n\n<constraints>\n- Max 2048 tokens por\
-  \ resposta\n- Scope: apenas SKUs ativos no catalogo atual\n- NAO acesse sistemas externos sem credenciais validadas\n- Timezone:\
-  \ America/Sao_Paulo para todos os timestamps\n</constraints>"
+  | [po_id] | [supplier] | [sku] | [qty] | R$ [cost] | [0.0-1.0] |\n</output_format>\n\n<constraints>\n1. Max 2048 tokens\
+  \ por resposta\n2. Scope: apenas SKUs ativos no catalogo atual\n3. NAO acesse sistemas externos sem credenciais validadas\n\
+  4. Timezone: America/Sao_Paulo para todos os timestamps\n</constraints>"
 research_base:
 - 'Meta-prompt pattern: 3 user fields + AI generates rest (KC_research_agent_097)'
 - XML tags for Claude improve section parsing (Anthropic docs)

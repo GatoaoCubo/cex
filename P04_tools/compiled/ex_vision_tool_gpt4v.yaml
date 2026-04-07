@@ -11,7 +11,7 @@ capabilities: ''
 output_format: 'JSON envelope: `{"capability": "string", "results": {...}, "model": "gpt-4-vision-preview"}`'
 providers:
 - openai_vision
-quality: 8.6
+quality: 9.0
 tags:
 - vision_tool
 - gpt4v
@@ -29,6 +29,9 @@ supported_formats:
 confidence_threshold: 0.8
 batch_support: false
 max_bytes_per_image: 20971520
+domain: tool integration
+title: Vision Tool Gpt4V
+density_score: 0.9
 overview: Analyzes images using OpenAI's GPT-4V model to extract structured information. Used by agents that need to understand
   screenshots, product photos, or document scans.
 base64: Base64-encoded image string. Max 20MB after decoding. Preferred for programmatic use.
@@ -39,3 +42,26 @@ ocr: 'Extracts visible text from images including screenshots, photos of documen
   [{"bbox": [x,y,w,h], "text": "string"}]}`'
 object_detection: 'Identifies and localizes objects within the image. Output: `{"objects": [{"label": "string", "bbox": [x,y,w,h],
   "confidence": float}]}`'
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `vision tool`'
+- 'Artifact ID: `p04_vision_gpt4v`'
+- 'Tags: [vision_tool, gpt4v, ocr, image_analysis]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P04 | Tools domain |
+
+  | Kind `vision tool` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'
+artifact_metadata: 'kind: vision_tool
+
+  pillar: P04
+
+  pipeline: 8F
+
+  scoring: hybrid_3_layer
+
+  compilation: cex_compile'

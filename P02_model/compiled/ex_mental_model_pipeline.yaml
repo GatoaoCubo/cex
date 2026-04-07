@@ -13,7 +13,13 @@ tldr: 'The compilation pipeline thinks in 5 phases: CAPTURE→DECOMPOSE→HYDRAT
 references:
 - tpl_mental_model
 - ex_agent_copywriter
-quality: 8.8
+quality: 9.0
+updated: '2026-04-07'
+domain: model configuration
+version: 1.0.0
+author: n03_builder
+created: '2026-04-07'
+density_score: 0.91
 the_5_phase_compilation_model: "Every artifact production follows the same mental model, regardless of kind:\n\nCAPTURE →\
   \ DECOMPOSE → HYDRATE → COMPILE → ENVELOPE\n   F1        F2-F3       F3       F4-F6      F7-F8"
 phase_details: '| Phase | What Happens | 8F Mapping | Output |

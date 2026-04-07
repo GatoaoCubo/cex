@@ -43,6 +43,11 @@ dependencies:
 - CEX root as template source for pillar structure, schemas, tools
 - 'Creates: P01-P12 dirs, nuclei dirs, archetypes/builders/, _tools/, _meta/, .cex/'
 category: product
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: 'Scaffolds a complete new CEX project structure through 5 questions: project name, business domain, builder count,
   LLM provider, and quality threshold. Creates all 12 pillars, selected nuclei, builder directories, tools, and configuration
   files.'

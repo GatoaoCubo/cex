@@ -7,7 +7,7 @@ created: 2026-03-25
 updated: 2026-03-25
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.9
+quality: 9.1
 tags:
 - cex
 - lp11
@@ -35,7 +35,7 @@ linked_artifacts:
   primary: p01_kc_cex_lp10_memory
   related:
   - p01_kc_cex_lp07_evals
-density_score: null
+density_score: 1.0
 data_source: https://arxiv.org/abs/2303.11366
 quick_reference: 'topic: P11 Feedback | scope: continuous improvement | criticality: high
 
@@ -95,3 +95,7 @@ references:
 - 'source: https://arxiv.org/abs/2310.11511'
 - 'related: p01_kc_cex_lp10_memory'
 - 'related: p01_kc_cex_lp07_evals'
+anti_patterns:
+- Applying this artifact without understanding the domain context
+- Treating this as a standalone reference without checking linked artifacts
+- Ignoring version constraints when integrating

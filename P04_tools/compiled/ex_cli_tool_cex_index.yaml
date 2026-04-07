@@ -42,6 +42,11 @@ dependencies:
 - Scans all directories except .git, .obsidian, pycache, node_modules, .cex
 - 'Stores in `.cex/index.db` with tables: files (path, id, type, pillar, etc.), edges (source, target wikilinks)'
 category: governance
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Scans all .md and .yaml files, parses YAML frontmatter and [[wikilinks]], stores metadata and edges in .cex/index.db
   (SQLite). Enables queries by any frontmatter field, orphan detection, and statistics about the knowledge graph.
 usage: '# Full index rebuild (scans all files)

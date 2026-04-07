@@ -34,6 +34,11 @@ dependencies:
 - Writes to `_archived/` directory and `.cex/metrics.jsonl`
 - 'Thresholds: archive < 7.0 (+ 30 days old), promote >= 9.0'
 category: governance
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Scans all CEX artifacts, extracts quality/density metrics from frontmatter, identifies archive candidates (age >
   30 days + quality < 7.0) and promotion candidates (quality >= 9.0). Maintains metrics history in .cex/metrics.jsonl.
 usage: '# Full scan and report

@@ -13,7 +13,7 @@
   "on_failure": "reject",
   "strict": true,
   "domain": "frontmatter_validation",
-  "quality": 8.7,
+  "quality": 9.0,
   "tags": [
     "validation-schema",
     "frontmatter",
@@ -45,5 +45,12 @@
     "Applied by: cex_doctor.py and publish pipeline validator",
     "Input: raw YAML frontmatter block (between `---` markers)",
     "Output: validated frontmatter dict or list of field-level errors"
-  ]
+  ],
+  "cross_references": [
+    "Pillar: P06 (Schema)",
+    "Kind: `validation schema`",
+    "Artifact ID: `p06_vs_frontmatter`",
+    "Tags: [validation-schema, frontmatter, yaml, all-kinds]"
+  ],
+  "integration_points": "| Component | Role |\n|-----------|------|\n| Pillar P06 | Schema domain |\n| Kind `validation schema` | Artifact type |\n| Pipeline | 8F (F1→F8) |"
 }

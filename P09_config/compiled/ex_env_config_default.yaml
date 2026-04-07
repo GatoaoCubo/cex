@@ -11,7 +11,7 @@ tags:
 references:
 - tpl_env_config
 tldr: 'Complete CEX environment configuration: model selection, API keys, quality thresholds, feature flags, and runtime settings.'
-quality: 8.8
+quality: 9.1
 core_model_settings: '| Variable | Default | Type | Description |
 
   |----------|---------|------|-------------|

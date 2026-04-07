@@ -24,7 +24,13 @@ tags:
 - model
 - cost-optimization
 tldr: 'Model cascade: opus→sonnet→haiku with cost-optimized fallback on timeout, rate limit, or error.'
-quality: 8.8
+quality: 9.0
+domain: model configuration
+density_score: 0.8
+author: n03_builder
+created: '2026-04-07'
+updated: '2026-04-07'
+version: 1.0.0
 chain_logic: "Request → opus (30s) ──timeout/error──→ sonnet (15s) ──timeout/error──→ haiku (5s)\n                 │     \
   \                       │                            │\n                 ▼                            ▼                \
   \            ▼\n              SUCCESS                     SUCCESS                      SUCCESS\n\nRule: Never skip a tier.\

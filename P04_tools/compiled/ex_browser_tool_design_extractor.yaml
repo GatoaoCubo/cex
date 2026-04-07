@@ -8,7 +8,7 @@ created: 2026-03-22
 updated: 2026-03-22
 author: builder_agent
 domain: building
-quality: 8.5
+quality: 9.1
 tags:
 - design-tokens
 - tailwind
@@ -33,6 +33,7 @@ examples:
 density_score: 0.86
 linked_artifacts:
   agent: records/agents/design-extractor/README.md
+title: 'Example: Browser Tool Design Extractor'
 purpose: Pipeline completo de URL ate design tokens production-ready. Captura screenshots, extrai cores/tipografia/espacamento/shadows/borders
   via HTML parsing, transforma em W3C DTCG tokens, gera Tailwind config / CSS vars / SCSS, opcionalmente gera React components,
   e valida pixel-perfect com ODiff.

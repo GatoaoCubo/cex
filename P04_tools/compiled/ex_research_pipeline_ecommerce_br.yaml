@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-03-31
 author: research-pipeline-builder
 domain: research_pipeline
-quality: 8.7
+quality: 9.1
 tags:
 - research-pipeline
 - example
@@ -17,6 +17,7 @@ tags:
 tldr: Real production config from CODEXA — pet e-commerce BR. 8 marketplaces, 30+ sources, Ayrshare+Serper+Firecrawl, STORM
   5 perspectives.
 density_score: 0.93
+updated: '2026-04-07'
 about: Real production config distilled from CODEXA's 13,908-line research system. Covers 8 Brazilian marketplaces, social
   intelligence, and trend analysis for pet e-commerce.
 config: "identity:\n  empresa: \"CODEXA\"\n  nicho: pet_ecommerce\n  idioma: pt-BR\n  pais: BR\n\nsources:\n  inbound:\n \
@@ -45,3 +46,17 @@ production_stats:
 - Avg 85-120 quality results per research (after CRAG)
 - 18% synthesis errors caught by CRITIC
 - 'Budget: ~$45/month (Firecrawl $19 + Serper $15 + LLM ~$11)'
+cross_references:
+- 'Pillar: P04 (Tools)'
+- 'Kind: `cli tool`'
+- 'Artifact ID: `ex_research_pipeline_ecommerce_br`'
+- 'Tags: [research-pipeline, example, ecommerce, brazil, marketplace, production]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P04 | Tools domain |
+
+  | Kind `cli tool` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'

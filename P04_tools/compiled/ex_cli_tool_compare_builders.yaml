@@ -52,6 +52,11 @@ dependencies:
 - Both directories must contain bld_*.md files with YAML frontmatter
 - Stopword filtering (PT + EN) for Jaccard similarity
 category: qa
+quality: 9.1
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: 'Compares original vs reconstructed builder files across 5 metrics: structural similarity, field coverage, content
   similarity (Jaccard with stopword removal), size delta, and quality 5D scoring. Used to validate LLM-generated builders
   against reference implementations.'

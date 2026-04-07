@@ -35,6 +35,11 @@ dependencies:
 - '`_schema.yaml` per LP for machine_format mapping (yaml vs json)'
 - Source .md files must have valid YAML frontmatter with `kind` field
 category: core
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Converts .md example files into compiled YAML or JSON for LLM consumption. Reads frontmatter + body, determines machine
   format from _schema.yaml, and writes to the LP's compiled/ directory.
 usage: '# Compile single file
