@@ -7,9 +7,10 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: null
+quality: 8.9
 tags: [examples, webhook, P04, golden, anti-pattern]
 tldr: "Golden: Stripe payment.completed inbound webhook. Anti: minimal broken artifact with annotated gate failures."
+density_score: 1.0
 ---
 # Examples: webhook
 ## GOLDEN — Stripe payment.completed (inbound)
