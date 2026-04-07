@@ -7,8 +7,9 @@ version: 1.0.0
 date: 2026-04-06
 nucleus: N02
 mission: SDK_VALIDATION
-quality: null
+quality: 9.1
 tags: [audit, sdk-validation, n02, marketing, self-audit, iso-check]
+density_score: 1.0
 ---
 
 # N02 Marketing — SDK Validation Self-Audit Report
