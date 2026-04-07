@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Webhooks, HTTP callbacks, event payloads, HMAC signatures, retry policies | NOT api_client (request-response), notifier (push delivery), mcp_server (protocol)"
 domain: webhook
-quality: null
+quality: 8.9
 tags: [system_prompt, webhook, event_driven, HTTP, signature]
 safety_level: standard
 tools_listed: false
