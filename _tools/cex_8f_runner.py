@@ -452,9 +452,26 @@ class EightFRunner:
     # -- F3 INJECT ----------------------------------------------------------
 
     def f3_inject(self) -> None:
-        """Load KC library + builder KCs + examples + memory + architecture -> state.knowledge."""
+        """Assemble ALL context from files -- pure Python, zero subprocess.
+
+        Single source of truth for context injection. Loads 14 source types:
+          1. Builder knowledge card (ISO)
+          2. Dedicated kind KC (1:1 per kind)
+          3. Cluster domain KCs (supplementary, max 2)
+          4. Few-shot examples (ISO)
+          5. Memory / persistent learnings (ISO)
+          6. Architecture / patterns (ISO)
+          7. Domain context (--context flag)
+          8. Build memory (past performance via cex_memory)
+          9. Semantic retrieval (TF-IDF via cex_retriever)
+         10. Prompt layers (compiled pillar artifacts)
+         11. Brand context (brand_config.yaml variables)
+         12. Sin lens (nucleus identity from nucleus_sins.yaml)
+         13. Skill loader ISOs (multi-source, priority-ordered)
+         14. Shared skills (cross-builder skills from _shared/)
+        """
         bdir = self.state.builder_dir
-        knowledge = {}
+        knowledge: dict = {}
 
         # 1. Builder knowledge card
         if bdir:
@@ -475,7 +492,7 @@ class EightFRunner:
         # 3. Cluster domain KCs from library (supplementary, max 2)
         kc_matches = lookup_kcs_for_kind(self.kc_library, self.state.kind, self.state.pillar)
         kc_domains = []
-        for kc in kc_matches[:2]:  # Reduced from 3 to 2 (dedicated KC is primary now)
+        for kc in kc_matches[:2]:
             kc_path = CEX_ROOT / kc["path"]
             if kc_path.exists():
                 text = kc_path.read_text(encoding="utf-8")
@@ -545,6 +562,128 @@ class EightFRunner:
                         self._log("F3", f"retriever: {len(similar)} semantic matches")
             except Exception as e:
                 self._log("F3", f"retriever unavailable: {e}")
+
+        # 10. Prompt layers (compiled pillar artifacts -- identity, guardrails, skills)
+        if _LAYERS_AVAILABLE:
+            try:
+                layers = _get_prompt_layers()
+                layer_data: dict = {}
+
+                # Wire 1: Core identity
+                identity_body = layers.get("p03_sp_cex_core_identity")
+                if identity_body:
+                    # Resolve {{INCLUDE}} directives
+                    for inc_id in ["p03_ins_doing_tasks", "p03_ins_action_protocol"]:
+                        inc_body = layers.get(inc_id)
+                        if inc_body:
+                            identity_body = identity_body.replace(
+                                "{{INCLUDE " + inc_id + "}}", inc_body
+                            )
+                    import re as _re_layers
+                    identity_body = _re_layers.sub(
+                        r"\{\{[A-Z_]+\}\}", "[runtime]", identity_body
+                    )
+                    layer_data["identity"] = identity_body
+
+                # Wire 4: Guardrails
+                guardrail_ids = layers.by_kind("guardrail")
+                if guardrail_ids:
+                    guardrail_parts = []
+                    for gid in guardrail_ids:
+                        g_body = layers.get(gid)
+                        g_meta = layers.get_meta(gid)
+                        if g_body:
+                            title = g_meta.get("title", gid)
+                            severity = g_meta.get("severity", "?")
+                            guardrail_parts.append(
+                                f"### {title} [severity={severity}]\n{g_body}"
+                            )
+                    if guardrail_parts:
+                        layer_data["guardrails"] = "\n\n".join(guardrail_parts)
+
+                # Wire 5: Verification protocol
+                verify_body = layers.get("p03_sp_verification_agent")
+                if verify_body:
+                    layer_data["verification"] = verify_body
+
+                # Wire 2-3: Behavioral + action skills
+                skill_ids = layers.by_kind("skill")
+                if skill_ids:
+                    skill_parts = []
+                    for sid in skill_ids:
+                        s_body = layers.get(sid)
+                        s_meta = layers.get_meta(sid)
+                        if s_body:
+                            title = s_meta.get("title", sid)
+                            skill_parts.append(f"### {title}\n{s_body}")
+                    if skill_parts:
+                        layer_data["skills"] = "\n\n".join(skill_parts)
+
+                if layer_data:
+                    knowledge["prompt_layers"] = layer_data
+                    self._log(
+                        "F3",
+                        f"prompt layers loaded: {list(layer_data.keys())}",
+                    )
+            except Exception as e:
+                self._log("F3", f"prompt layers unavailable: {e}")
+
+        # 11. Brand context (brand_config.yaml -- pure Python, no subprocess)
+        if _BRAND_INJECT_AVAILABLE:
+            try:
+                brand_config_path = CEX_ROOT / ".cex" / "brand" / "brand_config.yaml"
+                if brand_config_path.exists():
+                    brand_cfg = _load_brand_config(brand_config_path)
+                    if brand_cfg:
+                        flat = _flatten_brand(brand_cfg)
+                        real = {
+                            k: v
+                            for k, v in flat.items()
+                            if v and not str(v).startswith("{{")
+                        }
+                        if real:
+                            knowledge["brand_context"] = real
+                            self._log("F3", f"brand context: {len(real)} variables")
+            except Exception as e:
+                self._log("F3", f"brand context unavailable: {e}")
+
+        # 12. Sin lens (nucleus identity from nucleus_sins.yaml)
+        if _THEME_AVAILABLE:
+            try:
+                nucleus = os.environ.get("CEX_NUCLEUS", "n03").lower()
+                sin = _get_sin(nucleus)
+                if sin:
+                    knowledge["sin_lens"] = sin
+                    self._log("F3", f"sin lens: {sin.get('virtue', '?')}")
+            except Exception as e:
+                self._log("F3", f"sin lens unavailable: {e}")
+
+        # 13. Skill loader ISOs (multi-source, priority-ordered, dedup'd)
+        if _SKILL_LOADER_AVAILABLE:
+            try:
+                loader = _get_skill_loader()
+                isos = loader.load_builder(self.state.kind.replace("_", "-"))
+                if isos:
+                    # Count by source for logging
+                    by_source = {}
+                    for iso in isos:
+                        by_source[iso.source] = by_source.get(iso.source, 0) + 1
+                    knowledge["skill_loader_sources"] = by_source
+                    self._log(
+                        "F3",
+                        f"skill loader: {len(isos)} ISOs from {dict(by_source)}",
+                    )
+
+                    # 14. Shared skills (cross-builder, from _shared/)
+                    shared = [i for i in isos if i.source == "shared"]
+                    if shared:
+                        shared_parts = []
+                        for s in shared:
+                            shared_parts.append(f"### {s.name}\n{s.content[:2000]}")
+                        knowledge["shared_skills"] = "\n\n".join(shared_parts)
+                        self._log("F3", f"shared skills: {len(shared)}")
+            except Exception as e:
+                self._log("F3", f"skill loader unavailable: {e}")
 
         self.state.knowledge = knowledge
         self._log("F3", f"knowledge: {list(knowledge.keys())}")
@@ -740,31 +879,18 @@ class EightFRunner:
             except Exception as e:
                 self._log("F5", f"provider discovery failed: {e} (non-blocking)")
 
-        # 3e. Brand config: inject brand context
-        brand_path = CEX_ROOT / ".cex" / "brand" / "brand_config.yaml"
-        if brand_path.exists():
-            try:
-                import yaml
-                with open(brand_path, encoding="utf-8") as bf:
-                    brand = yaml.safe_load(bf)
-                if brand:
-                    tool_results["tool_outputs"]["brand"] = brand
-                    executed += 1
-                    self._log("F5", "brand config loaded")
-            except Exception as e:
-                self._log("F5", f"brand config failed: {e} (non-blocking)")
+        # 3e. Brand config -- MOVED to F3 INJECT (pure Python, single source of truth)
+        # F5 reads from F3 state if needed:
+        if self.state.knowledge.get("brand_context"):
+            tool_results["tool_outputs"]["brand"] = self.state.knowledge["brand_context"]
+            executed += 1
+            self._log("F5", "brand context: from F3 (already loaded)")
 
-        # 3f. Sin lens: load nucleus identity
-        if _THEME_AVAILABLE:
-            try:
-                nucleus = os.environ.get("CEX_NUCLEUS", "n03").lower()
-                sin = _get_sin(nucleus)
-                if sin:
-                    tool_results["tool_outputs"]["sin"] = sin
-                    executed += 1
-                    self._log("F5", f"sin lens: {sin.get('virtue', '?')}")
-            except Exception as e:
-                self._log("F5", f"sin lens failed: {e} (non-blocking)")
+        # 3f. Sin lens -- MOVED to F3 INJECT (pure Python, single source of truth)
+        if self.state.knowledge.get("sin_lens"):
+            tool_results["tool_outputs"]["sin"] = self.state.knowledge["sin_lens"]
+            executed += 1
+            self._log("F5", "sin lens: from F3 (already loaded)")
 
         # --- Phase 4: Build enrichment text for F6 injection ---
         if tool_results["tool_outputs"]:
@@ -825,6 +951,35 @@ class EightFRunner:
     def f6_produce(self, retry_feedback: str = "") -> None:
         """Compose STRUCTURED prompt with labeled sections -> state.artifact."""
         sections = []
+
+        # 0. PROMPT LAYERS (from F3 -- injected FIRST, before everything)
+        k = self.state.knowledge
+        pl = k.get("prompt_layers", {})
+        if pl.get("identity"):
+            sections.append(f"# CEX AGENT IDENTITY\n\n{pl['identity']}")
+        if k.get("sin_lens"):
+            sin = k["sin_lens"]
+            sections.append(
+                f"# IDENTITY LENS\n\n"
+                f"Virtue: {sin.get('virtue', '?')} | "
+                f"Tagline: {sin.get('tagline', '?')}"
+            )
+        if pl.get("guardrails"):
+            sections.append(f"# GUARDRAILS\n\n{pl['guardrails']}")
+
+        # 0b. BRAND CONTEXT (from F3)
+        brand = k.get("brand_context")
+        if brand and isinstance(brand, dict):
+            brand_lines = [f"- {bk}: {bv}" for bk, bv in sorted(brand.items())
+                           if not bk.startswith(("identity.", "archetype.", "voice.",
+                                                 "audience.", "visual.", "positioning.",
+                                                 "monetization."))]
+            if brand_lines:
+                sections.append("# BRAND CONTEXT\n\n" + "\n".join(brand_lines))
+
+        # 0c. SHARED SKILLS (from F3)
+        if k.get("shared_skills"):
+            sections.append(f"# SHARED SKILLS\n\n{k['shared_skills']}")
 
         # 1. IDENTITY (from F2)
         sp = self.state.identity.get("system_prompt", "")

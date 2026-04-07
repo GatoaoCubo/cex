@@ -13,9 +13,8 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    import subprocess
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "pyyaml", "-q"])
-    import yaml
+    print("ERROR: PyYAML required. pip install pyyaml", file=sys.stderr)
+    sys.exit(1)
 
 ROOT = Path(__file__).resolve().parent.parent
 BRAND_CONFIG = ROOT / ".cex" / "brand" / "brand_config.yaml"
