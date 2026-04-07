@@ -58,13 +58,14 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content_factory
-quality: null
+quality: 9.0
 tags: [function_def, elevenlabs, tts, audio, narration, content_factory]
 tldr: "LLM-callable function to generate voiceover audio via ElevenLabs TTS — PT-BR/EN with emotion control"
 examples:
   - input: {"text": "Bem-vindos ao modulo 3...", "voice_id": "pNInz6obpgDQGcFmaJgB", "language": "pt-BR", "model_id": "eleven_multilingual_v2"}
     output: {"audio_url": "https://api.elevenlabs.io/audio/abc123.mp3", "duration_seconds": 12.5, "characters_used": 280, "format": "mp3_44100_128"}
 error_types: [text_too_long, voice_not_found, quota_exceeded, invalid_model, rate_limited]
+density_score: 0.94
 ---
 
 # ElevenLabs Text-to-Speech Function
