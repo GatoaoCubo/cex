@@ -8,7 +8,7 @@ created: "2026-04-07"
 updated: "2026-04-07"
 author: "n04_knowledge"
 domain: "citation — structured source attribution with provenance"
-quality: null
+quality: 8.9
 tags: [quality-gate, citation, provenance, attribution, reliability]
 tldr: "Gates ensuring citation artifacts have verifiable provenance, reliability tier, excerpt, and temporal freshness."
 density_score: 0.90
