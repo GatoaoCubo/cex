@@ -56,7 +56,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, ebook, chapter, writing, content_factory, P03]
 tldr: "Reusable mold for generating ebook chapters with intro-body-examples-summary-exercises structure"
 keywords: [ebook chapter, livro, escrita, book, content factory, writing]
