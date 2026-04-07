@@ -10,7 +10,7 @@ author: builder_agent
 primitive_type: composite
 primitives_used: [parallel, merge, gate]
 domain: workflow_primitive
-quality: null
+quality: 9.1
 tags: [workflow-primitive, map-reduce, parallel, merge, orchestration, dag]
 tldr: "Map-reduce pattern: fan-out tasks to parallel nuclei (map), collect and synthesize results (reduce), quality gate before output."
 when_to_use: "Distributing independent subtasks across nuclei and combining results into a single output"
