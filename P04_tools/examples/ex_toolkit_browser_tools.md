@@ -13,7 +13,7 @@ tools_count: 5
 requires_confirmation: [navigate, click, fill_form]
 denied_for: [n04, n06]
 domain: toolkit
-quality: null
+quality: 9.1
 tags: [toolkit, browser, web, automation, MCP, tools]
 tldr: "Browser toolkit — 5 tools (screenshot, navigate, click, fill_form, extract_text) for web automation via Chrome MCP. Confirmation required for mutations."
 when_to_use: "Agents that need to interact with web pages for research, testing, or data extraction"
