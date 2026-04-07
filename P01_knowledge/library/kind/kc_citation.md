@@ -9,7 +9,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n04_knowledge
 domain: citation
-quality: null
+quality: 9.1
 tags: [citation, P01, INJECT, kind-kc]
 tldr: "citation is a structured source attribution with provenance, URL, date, and reliability metadata — grounding LLM outputs in verifiable external evidence."
 when_to_use: "Building, reviewing, or reasoning about citation artifacts"
