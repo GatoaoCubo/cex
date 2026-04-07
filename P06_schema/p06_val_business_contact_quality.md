@@ -13,9 +13,10 @@ target_kind: response_format
 scope: post_generation
 severity: error
 auto_fix: false
-quality: null
+quality: 8.9
 tags: [validator, crm, contact, anti-fake, quality-gate]
 tldr: "Valida contatos CRM: anti-fabricação (nomes numerados, CNPJs sequenciais), completeness gate, formato telefone/email/CNPJ."
+density_score: 1.0
 ---
 
 # Business Contact Quality Validator v2
