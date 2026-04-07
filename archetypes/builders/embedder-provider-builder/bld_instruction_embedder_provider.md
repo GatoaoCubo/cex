@@ -15,7 +15,7 @@ prerequisites:
   - The embedding model is not already configured in the P01 examples directory
 validation_method: checklist
 domain: embedder_provider
-quality: null
+quality: 9.1
 tags: [instruction, embedder-provider, P01, embedding, dimensions, normalization]
 idempotent: true
 atomic: false
