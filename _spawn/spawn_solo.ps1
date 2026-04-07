@@ -124,13 +124,33 @@ if (Test-Path $bootCmd) {
     }
     $themeName = $themeMap[$nucleus]
     if ($themeName) {
-        # Use python for JSON (PS ConvertTo-Json corrupts encoding)
+        # Lock -> write theme -> launch -> wait for pi to read -> unlock
+        # Prevents race condition when 6 nuclei dispatch in sequence
+        $lockFile = "$runtimeDir\.theme_lock"
+        $lockTimeout = 30
+        $lockStart = Get-Date
+        while (Test-Path $lockFile) {
+            if (((Get-Date) - $lockStart).TotalSeconds -gt $lockTimeout) {
+                Remove-Item $lockFile -Force -EA SilentlyContinue
+                break
+            }
+            Start-Sleep -Milliseconds 500
+        }
+        Set-Content $lockFile $nucleus -Encoding ASCII
+
+        # Write theme (python -- PS corrupts JSON encoding)
         & python -c "import json;p=r'$($env:USERPROFILE)\.pi\agent\settings.json';s=json.load(open(p,encoding='utf-8'));s['theme']='$themeName';json.dump(s,open(p,'w'),indent=2)" 2>$null
         Write-Output "[$upper] Theme: $themeName"
     }
 
     Write-Output "[$upper] Boot: CMD (pi + theme)"
     $proc = Start-Process cmd -ArgumentList "/k `"$bootCmd`"" -WorkingDirectory $root -PassThru
+
+    # Wait for pi to read settings.json, then release theme lock
+    if ($themeName) {
+        Start-Sleep -Seconds 3
+        Remove-Item $lockFile -Force -EA SilentlyContinue
+    }
 } elseif (Test-Path $bootPs1) {
     # PowerShell fallback (encoding-sensitive, color does not persist)
     Write-Output "[$upper] Boot: PowerShell (fallback)"
