@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-02
 author: n06_commercial
 domain: brand-visual
-quality: null
+quality: 9.2
 tags: [brand, visual, identity, cores, tipografia, gato3, n06]
 tldr: "Identidade visual GATO³: paleta PB minimalista, tipografia Allrounder+Kenao, guidelines de uso, fotografia alto contraste, dark mode. Design tokens para N03."
 density_score: 0.93
