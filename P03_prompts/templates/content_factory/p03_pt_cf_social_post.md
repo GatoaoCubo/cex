@@ -56,7 +56,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, social, post, marketing, content_factory, P03]
 tldr: "Reusable mold for generating platform-specific social media posts with hook-value-CTA structure"
 keywords: [social post, marketing, linkedin, twitter, instagram, content factory, social media]
