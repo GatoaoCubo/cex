@@ -5,6 +5,7 @@ title: N05 Deck -- Available Capabilities
 nucleus: N05
 sin: Ira Construtiva
 version: 1.0.0
+pillar: P08
 quality: null
 created: 2026-04-07
 ---
