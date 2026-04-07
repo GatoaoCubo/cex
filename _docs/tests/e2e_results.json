@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-07T15:53:14.634988+00:00",
+  "timestamp": "2026-04-07T16:06:40.060146+00:00",
   "version": "1.0.0",
   "summary": {
     "total": 3,
@@ -78,7 +78,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3833 chars)\r\n  [F1] bld_config loaded (3882 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3833 chars)\r\n  [F1] bld_config loaded (3894 chars)\r\n  [F1] constraints: 5 "
             },
             {
               "check": "f1_constrain_fires",
@@ -187,7 +187,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 30862
+      "total_elapsed_ms": 27893
     },
     {
       "name": "instagram",
@@ -311,7 +311,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 13679
+      "total_elapsed_ms": 12775
     },
     {
       "name": "docs",
@@ -435,7 +435,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 11232
+      "total_elapsed_ms": 10947
     }
   ]
 }
