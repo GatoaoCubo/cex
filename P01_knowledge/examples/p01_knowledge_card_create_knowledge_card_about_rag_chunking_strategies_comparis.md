@@ -8,7 +8,7 @@ created: "2026-04-02"
 updated: "2026-04-07"
 author: "builder"
 domain: rag_engineering
-quality: null
+quality: 9.1
 tags: [rag, chunking, embedding, retrieval, semantic-search, document-processing, knowledge, vector-db, llm-pipeline]
 tldr: "Fixed-size (256-512 tok) for speed, semantic for coherence, sliding window for overlap, document-aware for structure. 256-512 tokens is the sweet spot -- 1024+ degrades retrieval@5 by ~9%."
 when_to_use: "Designing RAG document preprocessing or optimizing retrieval quality vs performance"
