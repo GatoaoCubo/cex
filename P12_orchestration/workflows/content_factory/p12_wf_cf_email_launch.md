@@ -16,7 +16,7 @@ depends_on: []
 signals: [complete, error]
 spawn_configs: []
 domain: "content_factory"
-quality: null
+quality: 9.0
 tags: [workflow, content_factory, email, launch, automation]
 tldr: "Generate 5-email launch sequence, configure automation triggers, schedule and activate — 4 sequential steps"
 density_score: 0.90
