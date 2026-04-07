@@ -8,9 +8,10 @@ version: 1.0.0
 created: 2026-04-06
 author: n06_commercial
 domain: monetization-strategy
-quality: null
+quality: 9.0
 tags: [business-model, content-factory, monetization, positioning, pricing, market, gtm, cex]
 tldr: "Modelo de negócio completo para Content Factory autônoma: análise de 10 competidores com preços reais, ICP priorizado, modelo híbrido OSS+SaaS, pricing R$197-2997/mês, mapa de posicionamento 2D, GTM para CEX como caso #1."
+density_score: 1.0
 ---
 
 # Content Factory as a Service — Business Model & Positioning
