@@ -9,7 +9,7 @@ author: "n01_intelligence"
 name: "Content Factory Podcast Format Constraints"
 constraint_type: "format_rules"
 pattern: "multi_rule_set"
-quality: null
+quality: 9.1
 tags: [constraint_spec, content-factory, podcast, audio, tts]
 tldr: "Podcast constraints: 10-30min duration, intro/corpo/outro structure, audio specs, RSS metadata"
 description: "Governs all podcast outputs from Content Factory for audio quality and distribution compliance"
@@ -17,6 +17,7 @@ provider_compat: "elevenlabs, ffmpeg, rss_feed"
 fallback: "Manual audio review if automated validation unavailable"
 temperature_override: "0.4"
 max_tokens: "2048"
+density_score: 1.0
 ---
 
 ## Overview
