@@ -31,14 +31,14 @@ created: 2026-04-07
 | prompts | 6 | Brand discovery interview, audit, config extractor, commercial system/template prompts |
 | orchestration | 4 | Dispatch rules + workflows for commercial and content monetization |
 | schemas | 4 | Brand audit, brand book, brand config, brand voice contract |
-| compiled | 18 | YAML compiled versions of all source artifacts |
+| compiled | 19 | YAML compiled versions of all source artifacts |
 | agents | 1 | agent_commercial.md |
 | architecture | 1 | agent_card_commercial.md |
 | feedback | 1 | quality_gate_commercial.md |
 | quality | 1 | scoring_rubric_commercial.md |
 | tools | 1 | content_monetization_tool.md (full pipeline: pricing > credits > checkout > courses > ads > email) |
 | memory | 0 | **EMPTY** -- no commercial memory persisted yet |
-| **Total** | **64** | **46 .md source + 18 .yaml compiled** |
+| **Total** | **67** | **48 .md source + 19 .yaml compiled** |
 
 ## Kinds I Build
 
@@ -61,7 +61,18 @@ created: 2026-04-07
 | optimizer | P11 | p11_opt_{{target}}.md + .yaml | Revenue/conversion optimizers |
 | quality_gate | P11 | p11_qg_{{gate}}.yaml | Commercial quality barriers (pricing accuracy, compliance) |
 
-**Total: 9 kinds**
+### P06 Validation (N06 builds for commercial schemas)
+
+| Kind | Pillar | Naming Pattern | Description |
+|------|--------|----------------|-------------|
+| enum_def | P06 | p06_enum_{{name}}.md | Enumerations for pricing tiers, plan types, statuses |
+| input_schema | P06 | p06_is_{{scope}}.yaml | Input validation for checkout, pricing API calls |
+| interface | P06 | p06_iface_{{contract}}.yaml | Contracts for payment/monetization integrations |
+| type_def | P06 | p06_td_{{type}}.yaml | Type definitions for commerce data models |
+| validation_schema | P06 | p06_vs_{{scope}}.yaml | Schema validation for pricing configs, product catalogs |
+| validator | P06 | p06_val_{{rule}}.yaml | Business rule validators (margin checks, tier logic) |
+
+**Total: 15 kinds (4 core + 5 P11 + 6 P06)**
 
 ## Tools I Use
 
@@ -105,7 +116,7 @@ Source: `.mcp-n06.json`
 
 ## Platform Knowledge Cards Available
 
-15 commerce-relevant KCs in `P01_knowledge/library/platform/`:
+17 commerce-relevant KCs in `P01_knowledge/library/platform/`:
 
 | KC | Domain |
 |----|--------|
@@ -113,8 +124,10 @@ Source: `.mcp-n06.json`
 | kc_stripe_patterns.md | Stripe API, checkout, subscriptions |
 | kc_hotmart_marketplace.md | Hotmart products, affiliates |
 | kc_hotmart_club.md | Hotmart member areas, courses |
+| kc_hotmart_api.md | Hotmart API integration patterns |
 | kc_digistore24_marketplace.md | Digistore24 products, EU market |
 | kc_digistore24_api.md | Digistore24 API integration |
+| kc_digistore24_ipn.md | Digistore24 IPN webhooks, payment notifications |
 | kc_mercadopago_pix.md | MercadoPago PIX payments (BR) |
 | kc_credit_system_design.md | Credit-based monetization |
 | kc_content_platform_comparison.md | Platform feature matrix |
@@ -127,20 +140,24 @@ Source: `.mcp-n06.json`
 
 ## Agent Definitions
 
-5 agents in `.claude/agents/` relevant to N06:
+8 agents in `.claude/agents/` relevant to N06:
 
-| Agent | File |
-|-------|------|
-| content-monetization-builder | content-monetization-builder.md |
-| tagline-builder | tagline-builder.md |
-| landing-page-builder | landing-page-builder.md |
-| model-card-builder | model-card-builder.md |
-| supabase-data-layer-builder | supabase-data-layer-builder.md |
+| Agent | File | Domain |
+|-------|------|--------|
+| content-monetization-builder | content-monetization-builder.md | Monetization pipelines |
+| tagline-builder | tagline-builder.md | Brand taglines, slogans |
+| landing-page-builder | landing-page-builder.md | Conversion-optimized pages |
+| model-card-builder | model-card-builder.md | LLM pricing/capability specs |
+| supabase-data-layer-builder | supabase-data-layer-builder.md | Commerce data infrastructure |
+| guardrail-builder | guardrail-builder.md | Pricing/checkout safety boundaries |
+| quality-gate-builder | quality-gate-builder.md | Commercial quality barriers |
+| reward-signal-builder | reward-signal-builder.md | Revenue/conversion signals |
 
-3 dedicated builders in `archetypes/builders/`:
-- content-monetization-builder (13 ISOs)
-- reward-signal-builder (13 ISOs)
-- tagline-builder (13 ISOs)
+18 builder archetypes in `archetypes/builders/` (13 ISOs each):
+
+**Core commerce** (5): content-monetization, tagline, landing-page, model-card, supabase-data-layer
+**P11 governance** (7): bugloop, guardrail, lifecycle-rule, optimizer, quality-gate, reward-signal, output-validator
+**P06 validation** (6): enum-def, input-schema, interface, type-def, validation-schema, validator
 
 ## My Strengths
 
@@ -149,7 +166,7 @@ Source: `.mcp-n06.json`
 3. **Full monetization pipeline** -- content_monetization_tool.md covers parse > pricing > credits > checkout > courses > ads > email
 4. **Multi-payment integration** -- Stripe (global), Hotmart (BR/LATAM), MercadoPago PIX (BR), Digistore24 (EU)
 5. **Brand lifecycle** -- Discovery interview > config extraction > audit > propagation > visual identity
-6. **Platform intelligence** -- 15 platform KCs with deep integration knowledge
+6. **Platform intelligence** -- 17 platform KCs with deep integration knowledge
 7. **Design tooling** -- Canva MCP for brand asset generation
 8. **Content amplification** -- NotebookLM MCP for 9 content types from any KC
 
@@ -162,20 +179,21 @@ Source: `.mcp-n06.json`
 | Course artifacts | MEDIUM | KC exists (kc_course_generation) but no built course_structure outputs |
 | Funnel artifacts | MEDIUM | No sales funnel templates, sequences, or conversion tracking configs |
 | Pricing model kind | LOW | No dedicated pricing_model kind in kinds_meta.json -- using output_ files instead |
-| schemas/ | LOW | Only 4 brand-focused schemas -- no pricing, funnel, or course validation schemas |
+| P06 schemas | LOW | Only 4 brand-focused schemas in schemas/ -- P06 kinds (enum, input_schema, validator) can fill this |
 
 ## Cards in My Deck
 
 | Category | Count |
 |----------|-------|
-| Source artifacts (.md) | 46 |
-| Compiled artifacts (.yaml) | 18 |
-| Kinds I build | 9 |
+| Source artifacts (.md) | 48 |
+| Compiled artifacts (.yaml) | 19 |
+| Kinds I build | 15 |
 | CEX tools I use | 18 |
 | MCP servers | 6 |
-| Platform KCs | 15 |
-| Agent definitions | 5 |
-| Builder archetypes (dedicated) | 3 |
-| Builder archetypes (P11 shared) | 6 |
+| Platform KCs (commerce-relevant) | 17 |
+| Agent definitions | 8 |
+| Builder archetypes (core commerce) | 5 |
+| Builder archetypes (P11 governance) | 7 |
+| Builder archetypes (P06 validation) | 6 |
 | Brand KCs (in-nucleus) | 12 |
-| **Total cards in deck** | **138** |
+| **Total cards in deck** | **161** |
