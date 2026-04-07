@@ -16,7 +16,7 @@ depends_on: [p03_ap_cf_generate_course]
 signals: [complete, error]
 spawn_configs: []
 domain: "content_factory"
-quality: null
+quality: 9.0
 tags: [workflow, content_factory, hotmart, course, publish]
 tldr: "Upload course modules to Hotmart, configure checkout, create landing page, and go live — 5 sequential steps"
 density_score: 0.90
