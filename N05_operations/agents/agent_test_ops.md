@@ -14,7 +14,7 @@ capabilities_count: 8
 tools_count: 10
 routing_keywords: [test, eval, benchmark, regression, smoke, e2e, unit, golden, coverage, pytest]
 tags: [agent, testing, operations, N05, eval, regression, benchmark]
-tldr: "Test Operations Agent — owns all testing and evaluation across the pipeline: unit, e2e, smoke, regression, golden, benchmark, and red-team evals."
+tldr: "Test Operations Agent -- owns all testing and evaluation across the pipeline, including unit, e2e, smoke, regression, golden, benchmark, and red-team evals."
 density_score: 0.95
 quality: null
 linked_artifacts:
