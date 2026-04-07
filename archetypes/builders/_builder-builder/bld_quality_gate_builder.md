@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: type_builder
-quality: null
+quality: 9.1
 tags: [quality-gate, type-builder, builder-builder, P11, governance]
 tldr: "Gates for type_builder artifacts — meta-builders that specialize in producing one kind."
 density_score: 0.88
