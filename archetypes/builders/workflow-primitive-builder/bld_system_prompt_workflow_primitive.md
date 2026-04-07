@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "workflow_primitive artifacts: atomic orchestration blocks, typed inputs/outputs, composition rules, 7 primitive types | Does NOT: full multi-step workflows, DAG definitions, inter-agent signals, task instructions"
 domain: workflow_primitive
-quality: null
+quality: 9.0
 tags: [system_prompt, workflow_primitive, P12]
 safety_level: standard
 tools_listed: false
