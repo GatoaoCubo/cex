@@ -120,7 +120,8 @@ if (Test-Path $bootCmd) {
     # --theme flag doesn't work from CMD. settings.json is the only reliable method.
     $themeMap = @{
         n01 = "cex-n01-envy"; n02 = "cex-n02-lust"; n03 = "cex-n03-pride"
-        n04 = "cex-n04-gluttony";   n05 = "cex-n05-wrath";     n06 = "cex-n06-greed"
+        n04 = "cex-n04-gluttony"; n05 = "cex-n05-wrath"; n06 = "cex-n06-greed"
+        n07 = "cex-n07-sloth"
     }
     $themeName = $themeMap[$nucleus]
     if ($themeName) {
