@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-07T15:45:52.071137+00:00",
+  "timestamp": "2026-04-07T15:47:59.826880+00:00",
   "version": "1.0.0",
   "summary": {
     "total": 3,
@@ -187,7 +187,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 29385
+      "total_elapsed_ms": 28573
     },
     {
       "name": "instagram",
@@ -311,7 +311,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 14510
+      "total_elapsed_ms": 13336
     },
     {
       "name": "docs",
@@ -435,7 +435,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 11249
+      "total_elapsed_ms": 11320
     }
   ]
 }
