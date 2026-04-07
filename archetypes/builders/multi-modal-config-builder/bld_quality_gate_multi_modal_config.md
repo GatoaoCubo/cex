@@ -8,7 +8,7 @@ created: "2026-04-07"
 updated: "2026-04-07"
 author: "n04_knowledge"
 domain: "multi_modal_config — input format, resolution, and routing for multi-modal LLM interactions"
-quality: null
+quality: 8.9
 tags: [quality-gate, multi-modal-config, modality, routing, resolution]
 tldr: "Gates ensuring multi_modal_config artifacts have explicit modalities, format constraints, routing, and cost estimates."
 density_score: 0.90
