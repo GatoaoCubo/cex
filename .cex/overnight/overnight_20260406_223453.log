@@ -1,0 +1,654 @@
+﻿[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO]   CEX OVERNIGHT FLYWHEEL
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO] Started: 2026-04-06T22:34:53.8611785-03:00
+[2026-04-06 22:34:53] [INFO] Budget:  200000 tokens
+[2026-04-06 22:34:53] [INFO] Target:  9
+[2026-04-06 22:34:53] [INFO] Thresh:  8.5
+[2026-04-06 22:34:53] [INFO] Cycles:  max 50
+[2026-04-06 22:34:53] [INFO] Phase:   evolve
+[2026-04-06 22:34:53] [INFO] DryRun:  False
+[2026-04-06 22:34:53] [INFO] Log:     C:\Users\PC\Documents\GitHub\cex\.cex\overnight\overnight_20260406_223453.log
+[2026-04-06 22:34:53] [INFO] 
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO]   FLYWHEEL CYCLE 1 / 50
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:34:53] [INFO] ============================================================
+[2026-04-06 22:34:53] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:34:54] [INFO] ============================================================
+[2026-04-06 22:34:55] [INFO] Found 20 artifacts below target 9
+[2026-04-06 22:34:55] [INFO]   Evolving: N02_marketing\output\output_sdk_validation_self_audit.md (current: 0)
+[2026-04-06 22:34:56] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:34:56] [OK]   OK N02_marketing\output\output_sdk_validation_self_audit.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:34:56] [METRIC]   Mode: heuristic
+[2026-04-06 22:34:56] [INFO]   Evolving: N02_marketing\output\output_cf_actions_and_distribution.md (current: 0)
+[2026-04-06 22:34:57] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:34:57] [OK]   OK N02_marketing\output\output_cf_actions_and_distribution.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:34:57] [METRIC]   Mode: heuristic
+[2026-04-06 22:34:58] [INFO]   Evolving: N04_knowledge\output\output_cf_integration_kcs.md (current: 0)
+[2026-04-06 22:34:59] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:34:59] [OK]   OK N04_knowledge\output\output_cf_integration_kcs.md: 0 -> 9 (+9)
+[2026-04-06 22:34:59] [METRIC]   Mode: heuristic
+[2026-04-06 22:34:59] [INFO]   Evolving: N04_knowledge\output\output_sdk_validation_knowledge_audit.md (current: 0)
+[2026-04-06 22:35:00] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:00] [OK]   OK N04_knowledge\output\output_sdk_validation_knowledge_audit.md: 0 -> 8.9 (+8.9)
+[2026-04-06 22:35:00] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:00] [INFO]   Evolving: N04_knowledge\output\output_content_factory_internal_audit.md (current: 0)
+[2026-04-06 22:35:01] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:01] [OK]   OK N04_knowledge\output\output_content_factory_internal_audit.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:35:01] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:02] [INFO]   Evolving: N01_intelligence\output\output_sdk_validation_self_audit.md (current: 0)
+[2026-04-06 22:35:03] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:03] [OK]   OK N01_intelligence\output\output_sdk_validation_self_audit.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:35:03] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:03] [INFO]   Evolving: N01_intelligence\output\output_cf_dags_and_specs.md (current: 0)
+[2026-04-06 22:35:04] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:04] [OK]   OK N01_intelligence\output\output_cf_dags_and_specs.md: 0 -> 9.1 (+9.1)
+[2026-04-06 22:35:04] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:04] [INFO]   Evolving: N01_intelligence\output\output_content_factory_landscape.md (current: 0)
+[2026-04-06 22:35:05] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:05] [OK]   OK N01_intelligence\output\output_content_factory_landscape.md: 0 -> 8.9 (+8.9)
+[2026-04-06 22:35:05] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:06] [INFO]   Evolving: N01_intelligence\output\output_readme_comparison.md (current: 8.4)
+[2026-04-06 22:35:07] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:07] [OK]   OK N01_intelligence\output\output_readme_comparison.md: 8.4 -> 8.7 (+0.3)
+[2026-04-06 22:35:07] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:07] [INFO]   Evolving: N02_marketing\output\output_readme_hero.md (current: 8.6)
+[2026-04-06 22:35:07] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:07] [SKIP]   SKIP N02_marketing\output\output_readme_hero.md: no improvement (8.6)
+[2026-04-06 22:35:07] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:08] [INFO]   Evolving: N04_knowledge\output\output_readme_curriculum.md (current: 8.7)
+[2026-04-06 22:35:08] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:08] [SKIP]   SKIP N04_knowledge\output\output_readme_curriculum.md: no improvement (8.7)
+[2026-04-06 22:35:08] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:08] [INFO]   Evolving: N01_intelligence\output\output_competitive_landscape.md (current: 8.8)
+[2026-04-06 22:35:09] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:09] [SKIP]   SKIP N01_intelligence\output\output_competitive_landscape.md: no improvement (8.8)
+[2026-04-06 22:35:09] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:09] [INFO]   Evolving: N01_intelligence\output\self_review_2026-04-02.md (current: 8.8)
+[2026-04-06 22:35:09] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:09] [SKIP]   SKIP N01_intelligence\output\self_review_2026-04-02.md: no improvement (8.8)
+[2026-04-06 22:35:09] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:10] [INFO]   Evolving: N04_knowledge\memory\knowledge_memory_index.md (current: 8.8)
+[2026-04-06 22:35:10] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:10] [SKIP]   SKIP N04_knowledge\memory\knowledge_memory_index.md: no improvement (8.8)
+[2026-04-06 22:35:10] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:10] [INFO]   Evolving: N04_knowledge\output\self_review_2026-04-02.md (current: 8.9)
+[2026-04-06 22:35:11] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:11] [SKIP]   SKIP N04_knowledge\output\self_review_2026-04-02.md: no improvement (8.9)
+[2026-04-06 22:35:11] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:11] [INFO]   Evolving: N04_knowledge\schemas\naming_convention_mapping.md (current: 8.9)
+[2026-04-06 22:35:11] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:11] [SKIP]   SKIP N04_knowledge\schemas\naming_convention_mapping.md: no improvement (8.9)
+[2026-04-06 22:35:11] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:12] [INFO]   Evolving: N04_knowledge\quality\quality_gate_knowledge.md (current: 8.9)
+[2026-04-06 22:35:12] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:12] [SKIP]   SKIP N04_knowledge\quality\quality_gate_knowledge.md: no improvement (8.9)
+[2026-04-06 22:35:12] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:12] [INFO]   Evolving: N04_knowledge\output\output_competitive_knowledge.md (current: 8.9)
+[2026-04-06 22:35:12] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:12] [SKIP]   SKIP N04_knowledge\output\output_competitive_knowledge.md: no improvement (8.9)
+[2026-04-06 22:35:13] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:13] [INFO]   Evolving: N04_knowledge\memory\rag_pipeline_memory.md (current: 8.9)
+[2026-04-06 22:35:13] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:13] [SKIP]   SKIP N04_knowledge\memory\rag_pipeline_memory.md: no improvement (8.9)
+[2026-04-06 22:35:13] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:14] [INFO]   Evolving: N01_intelligence\quality\quality_gate_intelligence.md (current: 8.9)
+[2026-04-06 22:35:14] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:14] [SKIP]   SKIP N01_intelligence\quality\quality_gate_intelligence.md: no improvement (8.9)
+[2026-04-06 22:35:14] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:14] [INFO] Evolve complete. 20 processed, 9 improved.
+[2026-04-06 22:35:16] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:16] [INFO] 
+[2026-04-06 22:35:21] [INFO] ============================================================
+[2026-04-06 22:35:21] [INFO]   FLYWHEEL CYCLE 2 / 50
+[2026-04-06 22:35:21] [INFO] ============================================================
+[2026-04-06 22:35:21] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:21] [INFO] ============================================================
+[2026-04-06 22:35:21] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:21] [INFO] ============================================================
+[2026-04-06 22:35:21] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:21] [INFO]   Evolving: N01_intelligence\output\output_readme_comparison.md (current: 8.7)
+[2026-04-06 22:35:21] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:21] [SKIP]   SKIP N01_intelligence\output\output_readme_comparison.md: no improvement (8.7)
+[2026-04-06 22:35:21] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:22] [INFO]   Evolving: N04_knowledge\output\output_sdk_validation_knowledge_audit.md (current: 8.9)
+[2026-04-06 22:35:22] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:22] [SKIP]   SKIP N04_knowledge\output\output_sdk_validation_knowledge_audit.md: no improvement (8.9)
+[2026-04-06 22:35:22] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:22] [INFO]   Evolving: N01_intelligence\output\output_content_factory_landscape.md (current: 8.9)
+[2026-04-06 22:35:22] [METRIC] Tokens: +0 (total: 0/200000)
+[2026-04-06 22:35:22] [SKIP]   SKIP N01_intelligence\output\output_content_factory_landscape.md: no improvement (8.9)
+[2026-04-06 22:35:22] [METRIC]   Mode: heuristic
+[2026-04-06 22:35:23] [INFO] Evolve complete. 3 processed, 0 improved.
+[2026-04-06 22:35:23] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:23] [INFO] 
+[2026-04-06 22:35:28] [INFO] ============================================================
+[2026-04-06 22:35:28] [INFO]   FLYWHEEL CYCLE 3 / 50
+[2026-04-06 22:35:28] [INFO] ============================================================
+[2026-04-06 22:35:28] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:28] [INFO] ============================================================
+[2026-04-06 22:35:28] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:28] [INFO] ============================================================
+[2026-04-06 22:35:28] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:28] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:28] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:28] [INFO] 
+[2026-04-06 22:35:33] [INFO] ============================================================
+[2026-04-06 22:35:33] [INFO]   FLYWHEEL CYCLE 4 / 50
+[2026-04-06 22:35:33] [INFO] ============================================================
+[2026-04-06 22:35:33] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:33] [INFO] ============================================================
+[2026-04-06 22:35:33] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:33] [INFO] ============================================================
+[2026-04-06 22:35:33] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:34] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:34] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:34] [INFO] 
+[2026-04-06 22:35:39] [INFO] ============================================================
+[2026-04-06 22:35:39] [INFO]   FLYWHEEL CYCLE 5 / 50
+[2026-04-06 22:35:39] [INFO] ============================================================
+[2026-04-06 22:35:39] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:39] [INFO] ============================================================
+[2026-04-06 22:35:39] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:39] [INFO] ============================================================
+[2026-04-06 22:35:39] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:39] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:39] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:39] [INFO] 
+[2026-04-06 22:35:44] [INFO] ============================================================
+[2026-04-06 22:35:44] [INFO]   FLYWHEEL CYCLE 6 / 50
+[2026-04-06 22:35:44] [INFO] ============================================================
+[2026-04-06 22:35:44] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:44] [INFO] ============================================================
+[2026-04-06 22:35:44] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:44] [INFO] ============================================================
+[2026-04-06 22:35:44] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:44] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:44] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:44] [INFO] 
+[2026-04-06 22:35:49] [INFO] ============================================================
+[2026-04-06 22:35:49] [INFO]   FLYWHEEL CYCLE 7 / 50
+[2026-04-06 22:35:49] [INFO] ============================================================
+[2026-04-06 22:35:49] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:49] [INFO] ============================================================
+[2026-04-06 22:35:49] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:49] [INFO] ============================================================
+[2026-04-06 22:35:49] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:49] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:49] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:49] [INFO] 
+[2026-04-06 22:35:54] [INFO] ============================================================
+[2026-04-06 22:35:54] [INFO]   FLYWHEEL CYCLE 8 / 50
+[2026-04-06 22:35:54] [INFO] ============================================================
+[2026-04-06 22:35:54] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:35:54] [INFO] ============================================================
+[2026-04-06 22:35:54] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:35:54] [INFO] ============================================================
+[2026-04-06 22:35:55] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:35:55] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:35:55] [INFO] Artifacts still below target: 92
+[2026-04-06 22:35:55] [INFO] 
+[2026-04-06 22:36:00] [INFO] ============================================================
+[2026-04-06 22:36:00] [INFO]   FLYWHEEL CYCLE 9 / 50
+[2026-04-06 22:36:00] [INFO] ============================================================
+[2026-04-06 22:36:00] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:00] [INFO] ============================================================
+[2026-04-06 22:36:00] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:00] [INFO] ============================================================
+[2026-04-06 22:36:00] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:00] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:00] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:00] [INFO] 
+[2026-04-06 22:36:05] [INFO] ============================================================
+[2026-04-06 22:36:05] [INFO]   FLYWHEEL CYCLE 10 / 50
+[2026-04-06 22:36:05] [INFO] ============================================================
+[2026-04-06 22:36:05] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:05] [INFO] ============================================================
+[2026-04-06 22:36:05] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:05] [INFO] ============================================================
+[2026-04-06 22:36:05] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:05] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:05] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:05] [INFO] 
+[2026-04-06 22:36:10] [INFO] ============================================================
+[2026-04-06 22:36:10] [INFO]   FLYWHEEL CYCLE 11 / 50
+[2026-04-06 22:36:10] [INFO] ============================================================
+[2026-04-06 22:36:10] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:10] [INFO] ============================================================
+[2026-04-06 22:36:10] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:10] [INFO] ============================================================
+[2026-04-06 22:36:10] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:10] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:10] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:10] [INFO] 
+[2026-04-06 22:36:15] [INFO] ============================================================
+[2026-04-06 22:36:15] [INFO]   FLYWHEEL CYCLE 12 / 50
+[2026-04-06 22:36:16] [INFO] ============================================================
+[2026-04-06 22:36:16] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:16] [INFO] ============================================================
+[2026-04-06 22:36:16] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:16] [INFO] ============================================================
+[2026-04-06 22:36:16] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:16] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:16] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:16] [INFO] 
+[2026-04-06 22:36:21] [INFO] ============================================================
+[2026-04-06 22:36:21] [INFO]   FLYWHEEL CYCLE 13 / 50
+[2026-04-06 22:36:21] [INFO] ============================================================
+[2026-04-06 22:36:21] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:21] [INFO] ============================================================
+[2026-04-06 22:36:21] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:21] [INFO] ============================================================
+[2026-04-06 22:36:21] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:21] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:21] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:21] [INFO] 
+[2026-04-06 22:36:26] [INFO] ============================================================
+[2026-04-06 22:36:26] [INFO]   FLYWHEEL CYCLE 14 / 50
+[2026-04-06 22:36:26] [INFO] ============================================================
+[2026-04-06 22:36:26] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:26] [INFO] ============================================================
+[2026-04-06 22:36:26] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:26] [INFO] ============================================================
+[2026-04-06 22:36:26] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:26] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:26] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:26] [INFO] 
+[2026-04-06 22:36:31] [INFO] ============================================================
+[2026-04-06 22:36:31] [INFO]   FLYWHEEL CYCLE 15 / 50
+[2026-04-06 22:36:31] [INFO] ============================================================
+[2026-04-06 22:36:31] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:31] [INFO] ============================================================
+[2026-04-06 22:36:31] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:31] [INFO] ============================================================
+[2026-04-06 22:36:31] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:31] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:32] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:32] [INFO] 
+[2026-04-06 22:36:37] [INFO] ============================================================
+[2026-04-06 22:36:37] [INFO]   FLYWHEEL CYCLE 16 / 50
+[2026-04-06 22:36:37] [INFO] ============================================================
+[2026-04-06 22:36:37] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:37] [INFO] ============================================================
+[2026-04-06 22:36:37] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:37] [INFO] ============================================================
+[2026-04-06 22:36:37] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:37] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:37] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:37] [INFO] 
+[2026-04-06 22:36:42] [INFO] ============================================================
+[2026-04-06 22:36:42] [INFO]   FLYWHEEL CYCLE 17 / 50
+[2026-04-06 22:36:42] [INFO] ============================================================
+[2026-04-06 22:36:42] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:42] [INFO] ============================================================
+[2026-04-06 22:36:42] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:42] [INFO] ============================================================
+[2026-04-06 22:36:42] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:42] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:42] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:42] [INFO] 
+[2026-04-06 22:36:47] [INFO] ============================================================
+[2026-04-06 22:36:47] [INFO]   FLYWHEEL CYCLE 18 / 50
+[2026-04-06 22:36:47] [INFO] ============================================================
+[2026-04-06 22:36:47] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:47] [INFO] ============================================================
+[2026-04-06 22:36:47] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:47] [INFO] ============================================================
+[2026-04-06 22:36:47] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:47] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:47] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:47] [INFO] 
+[2026-04-06 22:36:52] [INFO] ============================================================
+[2026-04-06 22:36:52] [INFO]   FLYWHEEL CYCLE 19 / 50
+[2026-04-06 22:36:52] [INFO] ============================================================
+[2026-04-06 22:36:52] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:52] [INFO] ============================================================
+[2026-04-06 22:36:52] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:52] [INFO] ============================================================
+[2026-04-06 22:36:53] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:53] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:53] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:53] [INFO] 
+[2026-04-06 22:36:58] [INFO] ============================================================
+[2026-04-06 22:36:58] [INFO]   FLYWHEEL CYCLE 20 / 50
+[2026-04-06 22:36:58] [INFO] ============================================================
+[2026-04-06 22:36:58] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:36:58] [INFO] ============================================================
+[2026-04-06 22:36:58] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:36:58] [INFO] ============================================================
+[2026-04-06 22:36:58] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:36:58] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:36:58] [INFO] Artifacts still below target: 92
+[2026-04-06 22:36:58] [INFO] 
+[2026-04-06 22:37:03] [INFO] ============================================================
+[2026-04-06 22:37:03] [INFO]   FLYWHEEL CYCLE 21 / 50
+[2026-04-06 22:37:03] [INFO] ============================================================
+[2026-04-06 22:37:03] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:03] [INFO] ============================================================
+[2026-04-06 22:37:03] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:03] [INFO] ============================================================
+[2026-04-06 22:37:03] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:03] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:03] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:03] [INFO] 
+[2026-04-06 22:37:08] [INFO] ============================================================
+[2026-04-06 22:37:08] [INFO]   FLYWHEEL CYCLE 22 / 50
+[2026-04-06 22:37:08] [INFO] ============================================================
+[2026-04-06 22:37:08] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:08] [INFO] ============================================================
+[2026-04-06 22:37:08] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:08] [INFO] ============================================================
+[2026-04-06 22:37:08] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:08] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:08] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:09] [INFO] 
+[2026-04-06 22:37:14] [INFO] ============================================================
+[2026-04-06 22:37:14] [INFO]   FLYWHEEL CYCLE 23 / 50
+[2026-04-06 22:37:14] [INFO] ============================================================
+[2026-04-06 22:37:14] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:14] [INFO] ============================================================
+[2026-04-06 22:37:14] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:14] [INFO] ============================================================
+[2026-04-06 22:37:14] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:14] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:14] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:14] [INFO] 
+[2026-04-06 22:37:19] [INFO] ============================================================
+[2026-04-06 22:37:19] [INFO]   FLYWHEEL CYCLE 24 / 50
+[2026-04-06 22:37:19] [INFO] ============================================================
+[2026-04-06 22:37:19] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:19] [INFO] ============================================================
+[2026-04-06 22:37:19] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:19] [INFO] ============================================================
+[2026-04-06 22:37:19] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:19] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:19] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:19] [INFO] 
+[2026-04-06 22:37:24] [INFO] ============================================================
+[2026-04-06 22:37:24] [INFO]   FLYWHEEL CYCLE 25 / 50
+[2026-04-06 22:37:24] [INFO] ============================================================
+[2026-04-06 22:37:24] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:24] [INFO] ============================================================
+[2026-04-06 22:37:24] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:24] [INFO] ============================================================
+[2026-04-06 22:37:24] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:24] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:24] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:24] [INFO] 
+[2026-04-06 22:37:29] [INFO] ============================================================
+[2026-04-06 22:37:29] [INFO]   FLYWHEEL CYCLE 26 / 50
+[2026-04-06 22:37:29] [INFO] ============================================================
+[2026-04-06 22:37:29] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:29] [INFO] ============================================================
+[2026-04-06 22:37:29] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:29] [INFO] ============================================================
+[2026-04-06 22:37:29] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:29] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:30] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:30] [INFO] 
+[2026-04-06 22:37:35] [INFO] ============================================================
+[2026-04-06 22:37:35] [INFO]   FLYWHEEL CYCLE 27 / 50
+[2026-04-06 22:37:35] [INFO] ============================================================
+[2026-04-06 22:37:35] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:35] [INFO] ============================================================
+[2026-04-06 22:37:35] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:35] [INFO] ============================================================
+[2026-04-06 22:37:35] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:35] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:35] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:35] [INFO] 
+[2026-04-06 22:37:40] [INFO] ============================================================
+[2026-04-06 22:37:40] [INFO]   FLYWHEEL CYCLE 28 / 50
+[2026-04-06 22:37:40] [INFO] ============================================================
+[2026-04-06 22:37:40] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:40] [INFO] ============================================================
+[2026-04-06 22:37:40] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:40] [INFO] ============================================================
+[2026-04-06 22:37:40] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:40] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:40] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:40] [INFO] 
+[2026-04-06 22:37:45] [INFO] ============================================================
+[2026-04-06 22:37:45] [INFO]   FLYWHEEL CYCLE 29 / 50
+[2026-04-06 22:37:45] [INFO] ============================================================
+[2026-04-06 22:37:45] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:45] [INFO] ============================================================
+[2026-04-06 22:37:45] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:45] [INFO] ============================================================
+[2026-04-06 22:37:45] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:45] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:45] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:45] [INFO] 
+[2026-04-06 22:37:50] [INFO] ============================================================
+[2026-04-06 22:37:50] [INFO]   FLYWHEEL CYCLE 30 / 50
+[2026-04-06 22:37:50] [INFO] ============================================================
+[2026-04-06 22:37:50] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:50] [INFO] ============================================================
+[2026-04-06 22:37:50] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:50] [INFO] ============================================================
+[2026-04-06 22:37:51] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:51] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:51] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:51] [INFO] 
+[2026-04-06 22:37:56] [INFO] ============================================================
+[2026-04-06 22:37:56] [INFO]   FLYWHEEL CYCLE 31 / 50
+[2026-04-06 22:37:56] [INFO] ============================================================
+[2026-04-06 22:37:56] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:37:56] [INFO] ============================================================
+[2026-04-06 22:37:56] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:37:56] [INFO] ============================================================
+[2026-04-06 22:37:56] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:37:56] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:37:56] [INFO] Artifacts still below target: 92
+[2026-04-06 22:37:56] [INFO] 
+[2026-04-06 22:38:01] [INFO] ============================================================
+[2026-04-06 22:38:01] [INFO]   FLYWHEEL CYCLE 32 / 50
+[2026-04-06 22:38:01] [INFO] ============================================================
+[2026-04-06 22:38:01] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:01] [INFO] ============================================================
+[2026-04-06 22:38:01] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:01] [INFO] ============================================================
+[2026-04-06 22:38:01] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:01] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:01] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:01] [INFO] 
+[2026-04-06 22:38:06] [INFO] ============================================================
+[2026-04-06 22:38:06] [INFO]   FLYWHEEL CYCLE 33 / 50
+[2026-04-06 22:38:06] [INFO] ============================================================
+[2026-04-06 22:38:06] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:06] [INFO] ============================================================
+[2026-04-06 22:38:06] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:06] [INFO] ============================================================
+[2026-04-06 22:38:06] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:06] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:06] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:06] [INFO] 
+[2026-04-06 22:38:11] [INFO] ============================================================
+[2026-04-06 22:38:11] [INFO]   FLYWHEEL CYCLE 34 / 50
+[2026-04-06 22:38:11] [INFO] ============================================================
+[2026-04-06 22:38:11] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:11] [INFO] ============================================================
+[2026-04-06 22:38:11] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:11] [INFO] ============================================================
+[2026-04-06 22:38:12] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:12] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:12] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:12] [INFO] 
+[2026-04-06 22:38:17] [INFO] ============================================================
+[2026-04-06 22:38:17] [INFO]   FLYWHEEL CYCLE 35 / 50
+[2026-04-06 22:38:17] [INFO] ============================================================
+[2026-04-06 22:38:17] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:17] [INFO] ============================================================
+[2026-04-06 22:38:17] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:17] [INFO] ============================================================
+[2026-04-06 22:38:17] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:17] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:17] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:17] [INFO] 
+[2026-04-06 22:38:22] [INFO] ============================================================
+[2026-04-06 22:38:22] [INFO]   FLYWHEEL CYCLE 36 / 50
+[2026-04-06 22:38:22] [INFO] ============================================================
+[2026-04-06 22:38:22] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:22] [INFO] ============================================================
+[2026-04-06 22:38:22] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:22] [INFO] ============================================================
+[2026-04-06 22:38:22] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:22] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:22] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:22] [INFO] 
+[2026-04-06 22:38:27] [INFO] ============================================================
+[2026-04-06 22:38:27] [INFO]   FLYWHEEL CYCLE 37 / 50
+[2026-04-06 22:38:27] [INFO] ============================================================
+[2026-04-06 22:38:27] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:27] [INFO] ============================================================
+[2026-04-06 22:38:27] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:27] [INFO] ============================================================
+[2026-04-06 22:38:27] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:27] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:27] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:27] [INFO] 
+[2026-04-06 22:38:33] [INFO] ============================================================
+[2026-04-06 22:38:33] [INFO]   FLYWHEEL CYCLE 38 / 50
+[2026-04-06 22:38:33] [INFO] ============================================================
+[2026-04-06 22:38:33] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:33] [INFO] ============================================================
+[2026-04-06 22:38:33] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:33] [INFO] ============================================================
+[2026-04-06 22:38:33] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:33] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:33] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:33] [INFO] 
+[2026-04-06 22:38:38] [INFO] ============================================================
+[2026-04-06 22:38:38] [INFO]   FLYWHEEL CYCLE 39 / 50
+[2026-04-06 22:38:38] [INFO] ============================================================
+[2026-04-06 22:38:38] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:38] [INFO] ============================================================
+[2026-04-06 22:38:38] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:38] [INFO] ============================================================
+[2026-04-06 22:38:38] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:38] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:38] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:38] [INFO] 
+[2026-04-06 22:38:43] [INFO] ============================================================
+[2026-04-06 22:38:43] [INFO]   FLYWHEEL CYCLE 40 / 50
+[2026-04-06 22:38:43] [INFO] ============================================================
+[2026-04-06 22:38:43] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:43] [INFO] ============================================================
+[2026-04-06 22:38:43] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:43] [INFO] ============================================================
+[2026-04-06 22:38:43] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:43] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:43] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:43] [INFO] 
+[2026-04-06 22:38:48] [INFO] ============================================================
+[2026-04-06 22:38:48] [INFO]   FLYWHEEL CYCLE 41 / 50
+[2026-04-06 22:38:48] [INFO] ============================================================
+[2026-04-06 22:38:48] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:48] [INFO] ============================================================
+[2026-04-06 22:38:48] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:48] [INFO] ============================================================
+[2026-04-06 22:38:48] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:48] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:49] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:49] [INFO] 
+[2026-04-06 22:38:54] [INFO] ============================================================
+[2026-04-06 22:38:54] [INFO]   FLYWHEEL CYCLE 42 / 50
+[2026-04-06 22:38:54] [INFO] ============================================================
+[2026-04-06 22:38:54] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:54] [INFO] ============================================================
+[2026-04-06 22:38:54] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:54] [INFO] ============================================================
+[2026-04-06 22:38:54] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:54] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:54] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:54] [INFO] 
+[2026-04-06 22:38:59] [INFO] ============================================================
+[2026-04-06 22:38:59] [INFO]   FLYWHEEL CYCLE 43 / 50
+[2026-04-06 22:38:59] [INFO] ============================================================
+[2026-04-06 22:38:59] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:38:59] [INFO] ============================================================
+[2026-04-06 22:38:59] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:38:59] [INFO] ============================================================
+[2026-04-06 22:38:59] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:38:59] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:38:59] [INFO] Artifacts still below target: 92
+[2026-04-06 22:38:59] [INFO] 
+[2026-04-06 22:39:04] [INFO] ============================================================
+[2026-04-06 22:39:04] [INFO]   FLYWHEEL CYCLE 44 / 50
+[2026-04-06 22:39:04] [INFO] ============================================================
+[2026-04-06 22:39:04] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:04] [INFO] ============================================================
+[2026-04-06 22:39:04] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:04] [INFO] ============================================================
+[2026-04-06 22:39:04] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:04] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:04] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:04] [INFO] 
+[2026-04-06 22:39:09] [INFO] ============================================================
+[2026-04-06 22:39:09] [INFO]   FLYWHEEL CYCLE 45 / 50
+[2026-04-06 22:39:09] [INFO] ============================================================
+[2026-04-06 22:39:09] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:09] [INFO] ============================================================
+[2026-04-06 22:39:09] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:09] [INFO] ============================================================
+[2026-04-06 22:39:09] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:09] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:10] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:10] [INFO] 
+[2026-04-06 22:39:15] [INFO] ============================================================
+[2026-04-06 22:39:15] [INFO]   FLYWHEEL CYCLE 46 / 50
+[2026-04-06 22:39:15] [INFO] ============================================================
+[2026-04-06 22:39:15] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:15] [INFO] ============================================================
+[2026-04-06 22:39:15] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:15] [INFO] ============================================================
+[2026-04-06 22:39:15] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:15] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:15] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:15] [INFO] 
+[2026-04-06 22:39:20] [INFO] ============================================================
+[2026-04-06 22:39:20] [INFO]   FLYWHEEL CYCLE 47 / 50
+[2026-04-06 22:39:20] [INFO] ============================================================
+[2026-04-06 22:39:20] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:20] [INFO] ============================================================
+[2026-04-06 22:39:20] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:20] [INFO] ============================================================
+[2026-04-06 22:39:20] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:20] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:20] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:20] [INFO] 
+[2026-04-06 22:39:25] [INFO] ============================================================
+[2026-04-06 22:39:25] [INFO]   FLYWHEEL CYCLE 48 / 50
+[2026-04-06 22:39:25] [INFO] ============================================================
+[2026-04-06 22:39:25] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:25] [INFO] ============================================================
+[2026-04-06 22:39:25] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:25] [INFO] ============================================================
+[2026-04-06 22:39:25] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:25] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:25] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:25] [INFO] 
+[2026-04-06 22:39:30] [INFO] ============================================================
+[2026-04-06 22:39:30] [INFO]   FLYWHEEL CYCLE 49 / 50
+[2026-04-06 22:39:30] [INFO] ============================================================
+[2026-04-06 22:39:30] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:30] [INFO] ============================================================
+[2026-04-06 22:39:30] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:30] [INFO] ============================================================
+[2026-04-06 22:39:31] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:31] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:31] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:31] [INFO] 
+[2026-04-06 22:39:36] [INFO] ============================================================
+[2026-04-06 22:39:36] [INFO]   FLYWHEEL CYCLE 50 / 50
+[2026-04-06 22:39:36] [INFO] ============================================================
+[2026-04-06 22:39:36] [INFO] Budget remaining: 200000 tokens
+[2026-04-06 22:39:36] [INFO] ============================================================
+[2026-04-06 22:39:36] [INFO]   PHASE 2: EVOLVE (target: 9)
+[2026-04-06 22:39:36] [INFO] ============================================================
+[2026-04-06 22:39:36] [INFO] Found 14 artifacts below target 9
+[2026-04-06 22:39:36] [INFO] Evolve complete. 0 processed, 0 improved.
+[2026-04-06 22:39:36] [INFO] Artifacts still below target: 92
+[2026-04-06 22:39:36] [INFO] 

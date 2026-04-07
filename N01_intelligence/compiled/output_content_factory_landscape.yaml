@@ -22,6 +22,7 @@ tags:
 - orchestration
 sources: 48
 tools_evaluated: 52
+density_score: 1.0
 1_executive_summary: 'O mercado de ferramentas para producao autonoma de conteudo digital esta maduro em componentes individuais
   mas fragmentado em integracao. Nao existe UMA solucao que cubra todo o pipeline brief-to-course. A oportunidade do CEX esta
   em ser o orquestrador que conecta essas pecas.

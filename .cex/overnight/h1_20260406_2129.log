@@ -755,3 +755,14 @@ CEX FLYWHEEL AUDIT -- Doc vs Practice
   Fix the FAILs above before releasing.
 ==================================================
 
+warning: in the working copy of '.cex/overnight/h1_20260406_2129.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.claude/rules/n03-builder.md', LF will be replaced by CRLF the next time Git touches it
+
+pre-commit: PASS -- 5 file(s) checked.
+[main dba5c7d] [OVERNIGHT-H1] 06/04/2026 -- gaps + evolve + audit
+ 6 files changed, 1784 insertions(+), 1 deletion(-)
+ delete mode 100644 .cex/overnight/.lock
+ create mode 100644 .cex/quality/audit_20260406_215233.json
+ create mode 100644 .cex/quality/audit_20260406_215321.json
+ create mode 100644 .claude/rules/n03-builder.md
+[21:53:22,91] OVERNIGHT COMPLETE 
