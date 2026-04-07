@@ -15,7 +15,7 @@ prerequisites:
   - Upstream embedder_provider dimensions are known
 validation_method: checklist
 domain: vectordb_backend
-quality: null
+quality: 9.1
 tags: [instruction, vectordb-backend, P01, vector-database, index, hnsw]
 idempotent: true
 atomic: false
