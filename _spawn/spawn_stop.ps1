@@ -55,10 +55,12 @@ if (-not $mySession) {
 }
 
 # Determine which session to target
+# IMPORTANT: When -Nucleus is specified, do NOT auto-scope to session.
+# "-Nucleus n03" means "kill n03 everywhere" (or in -Session if given).
 $targetSession = ""
 if ($Session) {
     $targetSession = $Session
-} elseif (-not $All) {
+} elseif (-not $All -and -not $Nucleus) {
     $targetSession = $mySession
 }
 
@@ -88,12 +90,19 @@ if (Test-Path $pidFile) {
         $upper = $nuc.ToUpper()
         
         # Filter: should we kill this entry?
+        # FIX(G15): -Nucleus must NOT trigger session-wide kill.
+        # When -Nucleus is set, ONLY nucleus match fires.
         $shouldKill = $false
         if ($All) {
             $shouldKill = $true
         } elseif ($Nucleus -and $nuc -eq $Nucleus.ToLower()) {
-            $shouldKill = $true
-        } elseif ($targetSession -and $sess -eq $targetSession) {
+            # Nucleus-specific: respect -Session if given, else kill across all sessions
+            if ($targetSession) {
+                $shouldKill = ($sess -eq $targetSession)
+            } else {
+                $shouldKill = $true
+            }
+        } elseif (-not $Nucleus -and $targetSession -and $sess -eq $targetSession) {
             $shouldKill = $true
         }
         

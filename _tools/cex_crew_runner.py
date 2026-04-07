@@ -670,10 +670,20 @@ class CrewRunner:
         if builder.get("model"):
             return builder["model"], builder.get("model_max_tokens", LLM_MAX_TOKENS)
 
-        # --- 2. Router path (nucleus-level config) ---
+        # --- 2. Router path (CexRouter + nucleus_models.yaml) ---
         try:
-            from cex_router import resolve_model_for
+            from cex_router import CexRouter, get_router, resolve_model_for
             nucleus = os.environ.get("CEX_NUCLEUS", "n03")
+            # Try CexRouter provider-aware routing first
+            router = get_router()
+            if isinstance(router, CexRouter) and router.providers:
+                try:
+                    route = router.resolve_nucleus(nucleus)
+                    if route.get("model"):
+                        return route["model"], LLM_MAX_TOKENS
+                except RuntimeError:
+                    pass  # No healthy provider -- fall through to static
+            # Fallback: static nucleus_models.yaml resolution
             model = resolve_model_for(nucleus, fallback="")
             if model:
                 return model, LLM_MAX_TOKENS
