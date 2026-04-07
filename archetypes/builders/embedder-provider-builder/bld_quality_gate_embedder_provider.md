@@ -8,7 +8,7 @@ created: "2026-04-06"
 updated: "2026-04-06"
 author: builder_agent
 domain: embedder_provider
-quality: null
+quality: 9.0
 tags: [quality-gate, embedder-provider, embedding, P01, dimensions]
 tldr: "Quality gate for embedder_provider artifacts: enforces dimensions, normalization, max_tokens, and provider authentication fields."
 density_score: 0.87
