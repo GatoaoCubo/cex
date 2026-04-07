@@ -119,9 +119,7 @@ cross_pillar_4_kinds_with_knowledge_affinity: '| Kind | Pillar | Naming Pattern 
 
   | memory_scope | P02 | `p02_memscope_{{agent}}.md` | memory-scope-builder |
 
-  | retriever | P04 | `p04_retr_{{store}}.md + .yaml` | retriever-builder |
-
-  | memory_type | P10 | `p10_mt_{{type_name}}.yaml` | memory-type-builder |'
+  | retriever | P04 | `p04_retr_{{store}}.md + .yaml` | retriever-builder |'
 tools_i_use: ''
 core_knowledge_tools: '| Tool | Purpose | Relevance |
 

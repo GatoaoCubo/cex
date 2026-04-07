@@ -85,7 +85,6 @@ N04 is the knowledge backbone of CEX. While N01 researches and N03 builds, N04 i
 | document_loader | P04 | `p04_loader_{{format}}.md + .yaml` | (P04 native) |
 | memory_scope | P02 | `p02_memscope_{{agent}}.md` | memory-scope-builder |
 | retriever | P04 | `p04_retr_{{store}}.md + .yaml` | retriever-builder |
-| memory_type | P10 | `p10_mt_{{type_name}}.yaml` | memory-type-builder |
 
 ## Tools I Use
 
