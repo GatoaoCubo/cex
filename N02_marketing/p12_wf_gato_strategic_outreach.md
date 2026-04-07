@@ -2,12 +2,10 @@
 id: p12_wf_gato_strategic_outreach
 kind: workflow
 pillar: P12
-title: GATO³ Strategic Outreach Campaign Workflow
-version: 1.1.0
+version: 2.0.0
 created: 2026-04-06
 updated: 2026-04-07
-author: n02_marketing
-domain: marketing
+author: n04_knowledge
 mission_name: gato_strategic_outreach
 goal: "Convert 471 ABC Paulista pet business prospects into GATO³ brand partners via multi-channel outreach"
 execution_mode: mixed
@@ -15,172 +13,151 @@ steps_count: 8
 timeout_ms: 7200000
 error_recovery: retry
 quality: 9.1
-tags: [workflow, outreach, lead-nurturing, gato, b2b, partnerships, abc-paulista]
-tldr: 4-wave strategic outreach workflow to convert 471 ABC Paulista pet businesses into GATO³ partners via segment-specific content, automation, and optimization
+tags: [workflow, outreach, lead-nurturing, gato, b2b, abc-paulista]
+tldr: "8-step, 4-wave outreach campaign converting 471 ABC Paulista pet prospects into GATO³ partners. Segments: vets, pet shops, groomers, 24h hospitals. Channels: email, social, direct. Targets: 35% open, 15% response, 8% meetings, 25% partnerships."
 density_score: 1.0
 ---
 
 # GATO³ Strategic Outreach Campaign
 
-## Campaign Overview
+> **Mission**: Convert B2B prospects in ABC Paulista into GATO³ brand partners.
+> **Scope**: 471 verified business contacts across 4 segments.
+> **Timeline**: 4 waves, ~2h total execution time.
+> **Brand alignment**: Caregiver archetype → partnership over sales pressure.
 
-| Field | Value |
-|-------|-------|
-| Target market | ABC Paulista (Ring 1) |
-| Prospect pool | 471 pet businesses |
-| Segments | Veterinary clinics, pet shops, groomers, 24h hospitals |
-| Channel mix | Email, Instagram, Facebook, LinkedIn |
-| Duration | 8 weeks (2 weeks per wave) |
-| Brand voice | Sofisticado-acolhedor (B2B adaptation) |
+## Segment Profile
 
-## Segment Breakdown
-
-| Segment | Est. Count | Priority | Avg. Deal Value | Conversion Target |
-|---------|-----------|----------|-----------------|-------------------|
-| Veterinary clinics | ~120 | Highest | R$ 2,000-5,000/mo | 25% partnership |
-| Pet shops | ~200 | High | R$ 1,000-3,000/mo | 20% partnership |
-| Groomers | ~100 | Medium | R$ 500-1,500/mo | 15% partnership |
-| 24h hospitals | ~51 | Medium | R$ 1,500-4,000/mo | 20% partnership |
+| Segment | Count (est.) | Priority | Value Proposition |
+|---------|-------------|----------|-------------------|
+| Veterinary Clinics | ~80 | 🔴 Highest | Vet-validated products → professional credibility alignment |
+| Pet Shops | ~250 | 🟡 High | Curated SKUs → higher margins than generic brands |
+| Groomers (Banho e Tosa) | ~100 | 🟢 Medium | Complementary products → upsell during grooming visits |
+| 24h Hospitals | ~41 | 🔵 Niche | Emergency/recovery products → specialized need |
 
 ## Steps
 
-### Wave 1: Content (Parallel)
+### Wave 1: Content Preparation (Parallel)
 
 **Step 1: Copy Suite**
-
-| Field | Value |
-|-------|-------|
-| Agent | n02_marketing |
-| Action | Create segment-specific outreach templates (4 segments: vets, pet shops, groomers, 24h hospitals) |
-| Input | Handoff segments + GATO³ brand voice (B2B adaptation) |
-| Output | `outreach_copy_gato.md` |
-| Signal | `copy_complete` |
-| Depends_on | None |
-| On_failure | retry |
+- **Agent**: n02_marketing
+- **Action**: Create segment-specific outreach templates (4 segments)
+- **Input**: Handoff segments + GATO³ brand voice (sofisticado-acolhedor)
+- **Output**: `outreach_copy_gato.md`
+- **Signal**: `copy_complete`
+- **Depends_on**: []
+- **On_failure**: retry
+- **Voice rules**: No sales pressure, no CAPS, no competitor naming. Lead with education value.
 
 **Step 2: Social Strategy**
-
-| Field | Value |
-|-------|-------|
-| Agent | n02_marketing |
-| Action | Develop relationship building tactics for Instagram, Facebook, LinkedIn |
-| Input | Segment profiles + local ABC Paulista business culture |
-| Output | `social_strategy_gato.md` |
-| Signal | `social_complete` |
-| Depends_on | None |
-| On_failure | retry |
+- **Agent**: n02_marketing
+- **Action**: Develop relationship-building tactics for Instagram/Facebook/LinkedIn
+- **Input**: Segment profiles + ICP psychographics
+- **Output**: `social_strategy_gato.md`
+- **Signal**: `social_complete`
+- **Depends_on**: []
+- **On_failure**: retry
+- **Channel priority**: Instagram (visual → minimal-pb aesthetic) > LinkedIn (B2B credibility) > Facebook (local community)
 
 **Step 3: Conversion Assets**
+- **Agent**: n02_marketing
+- **Action**: Build case studies, ROI calculator, partnership guide
+- **Input**: GATO³ business impact framework + pricing model
+- **Output**: `conversion_assets_gato.md`
+- **Signal**: `assets_complete`
+- **Depends_on**: []
+- **On_failure**: retry
+- **Pricing reference**: R$ 30-80 anchor, hybrid model (wholesale B2B + consignment options)
 
-| Field | Value |
-|-------|-------|
-| Agent | n02_marketing |
-| Action | Build case studies, ROI calculator, partnership guide |
-| Input | GATO³ business impact framework + pricing tiers |
-| Output | `conversion_assets_gato.md` |
-| Signal | `assets_complete` |
-| Depends_on | None |
-| On_failure | retry |
-
-### Wave 2: Automation
+### Wave 2: Automation Setup
 
 **Step 4: Nurturing Sequence**
+- **Agent**: n02_marketing
+- **Action**: Design 5-touch email automation with educational content
+- **Input**: Copy suite + conversion assets
+- **Output**: `nurturing_automation_gato.md`
+- **Signal**: `automation_complete`
+- **Depends_on**: [copy_complete, assets_complete]
+- **On_failure**: retry
+- **Sequence structure**:
+  1. Introduction + Ro's welcome (warmth: 4/5)
+  2. Educational value — "Você sabia?" feline fact (authority: 3/5)
+  3. Social proof — partner testimonial (trust)
+  4. Product showcase — curated selection (benefit-first)
+  5. Partnership proposal — clear next steps (CTA)
 
-| Field | Value |
-|-------|-------|
-| Agent | n02_marketing |
-| Action | Design 5-touch email automation with educational content |
-| Input | Copy suite + conversion assets |
-| Output | `nurturing_automation_gato.md` |
-| Signal | `automation_complete` |
-| Depends_on | `copy_complete`, `assets_complete` |
-| On_failure | retry |
-
-### Wave 3: Execution (Sequential by priority)
+### Wave 3: Outreach Execution (Sequential by priority)
 
 **Step 5: Veterinary Outreach**
-
-| Field | Value |
-|-------|-------|
-| Agent | n02_marketing |
-| Action | Deploy professional partnership messaging to clinics (highest priority segment) |
-| Input | Copy suite + clinic prospect list |
-| Output | `vet_campaign_gato.md` |
-| Signal | `vet_complete` |
-| Depends_on | `copy_complete`, `social_complete` |
-| On_failure | retry |
+- **Agent**: n02_marketing
+- **Action**: Deploy professional partnership messaging to clinics (highest priority)
+- **Input**: Copy suite + clinic prospect list
+- **Output**: `vet_campaign_gato.md`
+- **Signal**: `vet_complete`
+- **Depends_on**: [copy_complete, social_complete]
+- **On_failure**: retry
+- **Tone override**: Authority +1 (clinics expect professional communication)
 
 **Step 6: Pet Shops + Specialized**
+- **Agent**: n02_marketing
+- **Action**: Deploy volume messaging to pet shops, groomers, hospitals
+- **Input**: Copy suite + remaining prospect lists
+- **Output**: `volume_campaign_gato.md`
+- **Signal**: `volume_complete`
+- **Depends_on**: [copy_complete]
+- **On_failure**: retry
+- **Tone override**: Warmth +1 for groomers (more personal relationship)
 
-| Field | Value |
-|-------|-------|
-| Agent | n02_marketing |
-| Action | Deploy volume messaging to pet shops, groomers, hospitals |
-| Input | Copy suite + remaining prospect lists |
-| Output | `volume_campaign_gato.md` |
-| Signal | `volume_complete` |
-| Depends_on | `copy_complete` |
-| On_failure | retry |
-
-### Wave 4: Optimization
+### Wave 4: Optimization & Conversion
 
 **Step 7: Nurturing Activation**
-
-| Field | Value |
-|-------|-------|
-| Agent | n02_marketing |
-| Action | Activate automated sequences for engaged prospects |
-| Input | Automation + engagement data from Waves 2-3 |
-| Output | `nurturing_activation_gato.md` |
-| Signal | `nurturing_active` |
-| Depends_on | `automation_complete`, `vet_complete`, `volume_complete` |
-| On_failure | retry |
+- **Agent**: n02_marketing
+- **Action**: Activate automated sequences for engaged prospects
+- **Input**: Automation + engagement data (opens, clicks, replies)
+- **Output**: `nurturing_activation_gato.md`
+- **Signal**: `nurturing_active`
+- **Depends_on**: [automation_complete, vet_complete, volume_complete]
+- **On_failure**: retry
+- **Trigger rules**: Activate only for prospects with ≥1 engagement signal
 
 **Step 8: Conversion & Optimization**
+- **Agent**: n02_marketing
+- **Action**: Deploy partnership proposals + A/B test optimization
+- **Input**: Conversion assets + qualified leads
+- **Output**: `conversion_campaign_gato.md`
+- **Signal**: `campaign_complete`
+- **Depends_on**: [nurturing_active]
+- **On_failure**: retry
+- **A/B tests**: Subject lines, CTA placement, Ro persona vs. brand-direct
 
-| Field | Value |
-|-------|-------|
-| Agent | n02_marketing |
-| Action | Deploy partnership proposals + A/B test optimization |
-| Input | Conversion assets + qualified leads |
-| Output | `conversion_campaign_gato.md` |
-| Signal | `campaign_complete` |
-| Depends_on | `nurturing_active` |
-| On_failure | retry |
-
-## Wave Dependency Graph
+## Wave Execution Map
 
 ```
-Wave 1 (Parallel):  [Step 1] ──┬──→ Wave 2: [Step 4] ──→ Wave 4: [Step 7] ──→ [Step 8]
-                     [Step 2] ──┤                                    ↑
-                     [Step 3] ──┘                                    │
-                                 ──→ Wave 3: [Step 5] ──────────────┤
-                                             [Step 6] ──────────────┘
+Wave 1 ─── [1: Copy] ──┬── Wave 2 ── [4: Nurture] ──┬── Wave 3 ── [5: Vets] ──── Wave 4 ── [7: Activate] ── [8: Convert]
+           [2: Social] ─┤                             │            [6: Volume] ────────────────┘
+           [3: Assets] ─┘                             │
+                                                      └── depends on 1+3
 ```
-
-## Wave Summary
-
-| Wave | Steps | Mode | Duration | Gate |
-|------|-------|------|----------|------|
-| Wave 1 | 1, 2, 3 | Parallel | Week 1-2 | All 3 signals complete |
-| Wave 2 | 4 | Sequential | Week 3-4 | Automation validated |
-| Wave 3 | 5, 6 | Sequential by priority | Week 4-6 | First responses tracked |
-| Wave 4 | 7, 8 | Sequential | Week 6-8 | Campaign metrics reviewed |
 
 ## Success Targets
 
 | Metric | Target | Measurement |
 |--------|--------|-------------|
-| Email open rate | 35%+ | Across all segments |
-| Response rate | 15%+ | Any engagement (reply, click, social interaction) |
-| Meeting conversion | 8%+ | Scheduled partnership discussions |
-| Partnership close | 25%+ | Of meetings that convert to signed partnerships |
+| Email open rate | ≥35% | Across all segments |
+| Response rate | ≥15% | Replies + form submissions |
+| Meeting bookings | ≥8% | Scheduled calls/visits |
+| Partnership conversion | ≥25% | Signed agreements within 60 days |
 
-## Risk Mitigation
+## Validation Gates
 
-| Risk | Mitigation |
-|------|-----------|
-| Low open rates | A/B test subject lines in Step 1, iterate in Wave 4 |
-| Segment mismatch | Validate copy with 1-2 prospects per segment before volume deploy |
-| Automation failures | Manual fallback queue for failed email sends |
-| Brand voice drift | All B2B copy reviewed against brand voice parameters before send |
+| Gate | Check | Fail Action |
+|------|-------|-------------|
+| Pre-send | All contacts pass `p06_val_business_contact_quality` AF1-AF4 | Block + quarantine |
+| Voice check | No competitor naming, no CAPS, no sales pressure | Reject copy, re-draft |
+| Brand alignment | Minimal-pb assets, Ro persona present in educational touches | Flag to N07 |
+| LGPD compliance | Opt-out link in every email, data retention policy stated | Block entire wave |
+
+## Cross-References
+- Contact validator → `P06_schema/p06_val_business_contact_quality.md`
+- CRM pipeline → `P12_orchestration/p12_wf_crm_research_pipeline.md`
+- Brand voice → `N02_marketing/config/brand_context.md`
+- Dispatch engine → `_spawn/dispatch.sh`

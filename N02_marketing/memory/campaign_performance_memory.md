@@ -2,14 +2,15 @@
 id: campaign_performance_memory
 kind: memory_summary
 pillar: P10
-title: Campaign Performance Memory
-version: 1.0.0
+title: "Campaign Performance Memory (Universal + GATO³ Pet Vertical)"
+version: 2.0.0
 created: 2026-04-02
+updated: 2026-04-07
 author: n02_marketing
 domain: performance_tracking
-quality: 9.0
-tags: [memory, performance, campaigns, conversion, A/B-testing, N02]
-tldr: Tracks campaign performance, copy effectiveness, and conversion insights to improve future marketing efforts.
+quality: null
+tags: [memory, performance, campaigns, conversion, A/B-testing, N02, gato3, pet-vertical]
+tldr: "Tracks campaign performance, copy effectiveness, and conversion insights — universal patterns + GATO³-specific campaign types for Brazilian cat tutor market (B2C education + B2B partnerships)."
 scope: marketing_performance_learning
 density_score: 1.0
 ---
