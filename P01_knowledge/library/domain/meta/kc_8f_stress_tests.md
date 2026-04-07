@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n01_intelligence
 domain: meta
-quality: null
+quality: 9.2
 tags: [8f, stress-test, e2e, benchmark, regression]
 tldr: "3 scenarios proving 8F amplifies 5-word vague input into validated artifacts + competitive benchmark vs raw LLM, Cursor, Custom GPTs"
 when_to_use: "Validating 8F resilience; regression testing; demonstrating CEX value"
