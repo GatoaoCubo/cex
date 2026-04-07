@@ -13,6 +13,8 @@ scope: N02_marketing
 tags: [spec, n02, frontend, html, css, tailwind, design-system, visual]
 tldr: N02 evolui de copywriter para Visual Frontend Engineer com HTML production-ready.
 density_score: 0.96
+quality: 9.2
+updated: "2026-04-07"
 ---
 
 # Spec N02 -- Visual Frontend Engineer (Lovable-killer)

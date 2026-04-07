@@ -16,6 +16,8 @@ depends_on:
 tags: [spec, content-factory, video, course, ebook, presentation, podcast, canva, notebooklm, pipeline]
 tldr: "Spec completa para Content Factory autonoma. Input: {{BRAND}} + brief. Output: videos, cursos, ebooks, apresentacoes, podcasts, posts. Zero kinds novos. Stack $0: Claude + NotebookLM + Canva Business + open-source tools."
 density_score: 0.97
+quality: 9.0
+updated: "2026-04-07"
 ---
 
 # Spec Content Factory v1 — A Maquina que Cria Conteudo

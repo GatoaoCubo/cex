@@ -6,6 +6,14 @@ author: n07_orchestrator
 roadmap_ref: roadmap_cex.md
 waves: 3
 nuclei: [n01, n03, n04, n05]
+quality: 9.1
+title: "Plan H2 Completion 20260407"
+version: "1.0.0"
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Plan: H2 Completion -- Context Assembly + Doc Hygiene

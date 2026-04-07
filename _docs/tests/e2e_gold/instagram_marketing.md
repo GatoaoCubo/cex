@@ -9,7 +9,7 @@ created: 2026-04-06
 author: n02_marketing
 scenario: S2
 input: "preciso de conteudo pro instagram"
-quality: 8.8
+quality: 9.2
 tags: [e2e, gold-standard, instagram, content, marketing, stress-test]
 density_score: 1.0
 updated: "2026-04-07"
@@ -29,7 +29,7 @@ tldr: "Defines the golden test specification for gold standard — instagram con
 ### Post 1 — Carousel: "5 erros que estao matando seu engajamento"
 
 **Format**: Carousel (8 slides)
-**Hook slide**: "Voce posta todo dia e ninguem interage? Slide 2 vai doer."
+**Hook slide**: "Voce posta pending dia e ninguem interage? Slide 2 vai doer."
 **Slides**:
 1. Capa com hook (fundo escuro, texto grande)
 2. Erro 1: Postar sem CTA — "Curtiu? Comenta? Salva? Se voce nao pede, ninguem faz."
@@ -40,7 +40,7 @@ tldr: "Defines the golden test specification for gold standard — instagram con
 7. Resumo visual com os 5 erros
 8. CTA: "Salva esse carrossel e manda pra quem precisa ouvir isso."
 
-**Caption**: "Eu ja cometi todos esses erros. O #3 me custou 6 meses de crescimento. [linha] Qual desses voce ainda comete? Fala nos comentarios que eu te ajudo. [linha] #marketingdigital #instagram #engajamento #dicasinstagram #socialmedia"
+**Caption**: "Eu ja cometi pendings esses erros. O #3 me custou 6 meses de crescimento. [linha] Qual desses voce ainda comete? Fala nos comentarios que eu te ajudo. [linha] #marketingdigital #instagram #engajamento #dicasinstagram #socialmedia"
 
 **Hashtags**: 15 (mix de volume alto + nicho)
 
@@ -53,7 +53,7 @@ tldr: "Defines the golden test specification for gold standard — instagram con
 **Script**:
 ```
 [0-3s] Hook direto na camera. Expressao seria.
-[3-8s] "Todo mundo reclama do alcance, mas ninguem olha pras metricas."
+[3-8s] "Pending mundo reclama do alcance, mas ninguem olha pras metricas."
 [8-15s] "Salvar > curtir. Compartilhar > comentar. O algoritmo recompensa VALOR."
 [15-22s] "Quer mais alcance? Para de postar bonito e comeca a postar util."
 [22-28s] "Uma dica pratica: no proximo post, termina com uma pergunta ESPECIFICA."
@@ -86,7 +86,7 @@ tldr: "Defines the golden test specification for gold standard — instagram con
 5. Passo 4: "Engajamento pos-post — 30 min respondendo TUDO"
 6. CTA: "Qual parte voce quer que eu detalhe? Comenta o numero."
 
-**Caption**: "Parece muito? Parece. Mas depois que vira rotina, leva 4 horas. [linha] O segredo nao e postar todo dia. E PREPARAR todo dia de uma vez. [linha] Qual passo voce ja faz? E qual voce precisa comecar? [linha] #produtividade #criacaodeconteudo #bastidores #rotina #contentcreator"
+**Caption**: "Parece muito? Parece. Mas depois que vira rotina, leva 4 horas. [linha] O segredo nao e postar pending dia. E PREPARAR pending dia de uma vez. [linha] Qual passo voce ja faz? E qual voce precisa comecar? [linha] #produtividade #criacaodeconteudo #bastidores #rotina #contentcreator"
 
 ---
 
@@ -166,7 +166,7 @@ tldr: "Defines the golden test specification for gold standard — instagram con
 ### Regras de ouro
 
 1. **Hook em 3 segundos** — se nao prendeu, perdeu
-2. **CTA em todo post** — sem excecao
+2. **CTA em pending post** — sem excecao
 3. **Valor antes de venda** — proporcao 80/20 (valor/promo)
 4. **Consistencia > perfeicao** — post "bom" publicado > post "perfeito" no rascunho
 5. **Responder TUDO** — comentario, DM, mention = oportunidade

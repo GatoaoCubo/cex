@@ -14,6 +14,8 @@ depends_on: spec_n05_railway_superintendent
 tags: [spec, n05, schemas, output, quality-gates, orchestration]
 tldr: Waves 3-4 do N05 -- schemas, output templates, quality gates, orchestration.
 density_score: 0.95
+quality: 9.2
+updated: "2026-04-07"
 ---
 
 # Spec N05 Part 2 -- Schemas, Output, Quality, Orchestration

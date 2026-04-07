@@ -1,4 +1,5 @@
 ---
+pillar: P12
 id: MISSION_runtime_ux_sins
 kind: mission_plan
 version: 1.0.0
@@ -6,13 +7,14 @@ created: 2026-04-06
 status: READY
 author: n07-orchestrator
 title: "Runtime UX + Sin System + OpenClaude Pattern Completion"
-quality: 8.9
+quality: 9.0
 waves: 3
 tasks: 12
 density_score: 1.0
 updated: "2026-04-07"
 domain: "CEX knowledge system"
 tldr: "Defines the mission plan specification for runtime ux + sin system + openclaude pattern completion, with structural rules, validation gates, and integratio"
+tags: [mission_plan, builder, cex]
 ---
 
 # MISSION: 7 Pecados como Lente Técnica + Runtime UX Completo

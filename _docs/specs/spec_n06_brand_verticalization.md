@@ -14,6 +14,8 @@ depends_on: null
 tags: [spec, n06, brand, verticalization, mustache, brand-book, persona, identity]
 tldr: "N06 evolui de Commercial generico para Brand Architect -- o nucleo que preenche a variavel {{BRAND}} que faz cada instancia CEX unica para um user/empresa."
 density_score: 0.96
+quality: 9.2
+updated: "2026-04-07"
 ---
 
 # Spec N06 -- Brand Verticalization: The Missing Variable

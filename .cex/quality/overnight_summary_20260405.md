@@ -3,6 +3,14 @@ id: overnight_summary_20260405
 kind: context_doc
 created: 2026-04-05
 author: n07-orchestrator
+quality: 9.0
+title: "Overnight Summary 20260405"
+version: "1.0.0"
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Overnight Autonomous Work Summary

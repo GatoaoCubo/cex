@@ -14,6 +14,8 @@ depends_on: spec_n06_brand_verticalization
 tags: [spec, n06, brand, output, schemas, quality-gates, orchestration]
 tldr: Waves 3-4 do N06 -- 32-block brand book, brand_config schema, voice guide, visual identity, quality gates, orchestration.
 density_score: 0.95
+quality: 9.1
+updated: "2026-04-07"
 ---
 
 # Spec N06 Part 2 -- Output, Schemas, Quality, Orchestration

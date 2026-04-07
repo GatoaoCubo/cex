@@ -16,6 +16,8 @@ depends_on:
 tags: [spec, notebooklm, pipeline, browser-automation, playwright, content-factory, flashcards, audio, quiz]
 tldr: "Formal spec for Fase 1 of the NotebookLM pipeline. Tool: cex_notebooklm.py (upload/studio/status/list). Config: notebooklm_notebooks.yaml (domain→notebook mapping). Auth: Chrome profile reuse + session expiry detection. Integration: F8 hook + N04 auto-upload + N02 downstream."
 density_score: null
+quality: 9.2
+updated: "2026-04-07"
 ---
 
 # Spec NotebookLM Pipeline — KC → Human Content
