@@ -7,7 +7,8 @@ mission: MISSION_content_factory_wave2
 task: build_integration_knowledge_cards
 created: 2026-04-06
 author: n04_knowledge
-quality: null
+quality: 9.0
+density_score: 1.0
 ---
 
 # N04 Output: Content Factory Integration Knowledge Cards
