@@ -9,7 +9,7 @@ created: 2026-03-31
 updated: 2026-04-07
 author: n07_orchestrator
 domain: patterns
-quality: null
+quality: 9.1
 tags: [pattern, skill, llm, retrieval, multi-step-reasoning]
 tldr: "Split complex queries into independent sub-queries, resolve each with the best source, merge into a single answer."
 keywords: [decomposition, sub-query, divide-conquer, complex, fan-out, merge]
