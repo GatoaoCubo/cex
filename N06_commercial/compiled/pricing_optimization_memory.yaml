@@ -1,0 +1,91 @@
+id: pricing_optimization_memory
+kind: memory_summary
+pillar: P10
+title: Pricing Optimization Memory — N06 Commercial
+nucleus: N06
+version: 1.0.0
+created: 2026-04-07
+author: n06_commercial
+domain: pricing_experiments
+quality: 9.0
+tags:
+- memory
+- pricing
+- optimization
+- A/B
+- conversion
+- N06
+tldr: Tracks pricing experiments, tier performance, and conversion data to drive data-backed pricing decisions.
+scope: pricing_performance_learning
+density_score: 1.0
+purpose: Pricing is the single highest-leverage commercial lever. A 1% price optimization outperforms a 1% traffic increase
+  every time. This memory tracks what we've tried, what worked, and what the data says. ---
+pricing_experiment_template: "experiment_id: \"PX-YYYY-MM-DD-NNN\"\ndate: \"2026-MM-DD\"\nproduct: \"product_name\"\nhypothesis:\
+  \ \"What we expected\"\nvariant_a: \"control — current pricing\"\nvariant_b: \"test — proposed pricing\"\nmetric: \"conversion_rate\
+  \ | revenue_per_visitor | ARPU\"\nduration_days: 14\nsample_size: 0\nresult:\n  variant_a_value: 0.0\n  variant_b_value:\
+  \ 0.0\n  lift_pct: 0.0\n  confidence: 0.0  # p-value or Bayesian credible interval\n  winner: \"a | b | inconclusive\"\n\
+  decision: \"keep_a | adopt_b | extend_test | redesign\"\nlearnings: \"What we learned\"\n\n---"
+active_pricing_models: No live products yet. Populate when first product launches.
+template_entry: "product: \"product_name\"\nmodel: \"subscription | one_time | freemium | usage_based | hybrid\"\ntiers:\n\
+  \  - name: \"Free\"\n    price: 0\n    features: [\"...\"]\n    target: \"trial users\"\n    conversion_to_paid: 0.0\n \
+  \ - name: \"Pro\"\n    price: 0\n    features: [\"...\"]\n    target: \"power users\"\n    churn_rate: 0.0\n  - name: \"\
+  Enterprise\"\n    price: \"custom\"\n    features: [\"...\"]\n    target: \"teams/orgs\"\n    avg_contract_value: 0\nlast_updated:\
+  \ \"2026-MM-DD\"\n\n---"
+pricing_insights_log: ''
+insight_template: 'insight_id: "PI-NNN"
+
+  date: "2026-MM-DD"
+
+  source: "experiment | competitor_analysis | user_feedback | market_research"
+
+  insight: "What we learned"
+
+  confidence: "high | medium | low"
+
+  actionable: true | false
+
+  action_taken: "What we did about it (if any)"
+
+
+  ---'
+competitor_pricing_benchmarks: '| Competitor | Model | Free Tier | Pro Price | Enterprise | Source | Date |
+
+  |-----------|-------|-----------|-----------|-----------|--------|------|
+
+  | TBD | — | — | — | — | — | — |
+
+
+  Populate via `fetch` MCP + manual research. Update quarterly.
+
+
+  ---'
+pricing_principles_earned_through_experience: '1. Price on value, not cost — what does it save/earn the customer?
+
+  2. Anchor high — the enterprise tier makes pro look reasonable
+
+  3. Free must convert — if free doesn''t feed paid, kill it
+
+  4. Annual discount = cash flow — offer 20% annual discount to lock revenue
+
+  5. Price increases are easier than you think — existing customers tolerate 10-15% if value grew
+
+
+  ---'
+metrics_dashboard: '| Metric | Current | Target | Gap | Trend |
+
+  |--------|---------|--------|-----|-------|
+
+  | ARPU | — | — | — | — |
+
+  | Conversion (free→paid) | — | — | — | — |
+
+  | Churn (monthly) | — | — | — | — |
+
+  | LTV | — | — | — | — |
+
+  | CAC | — | — | — | — |
+
+  | LTV/CAC ratio | — | ≥3.0 | — | — |
+
+
+  Update after first product launch.'

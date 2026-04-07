@@ -34,19 +34,19 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 
 | Subdir | Count | What's There |
 |--------|------:|--------------|
-| `agents/` | 1 | `agent_commercial.md` — N06 agent identity |
-| `architecture/` | 1 | `agent_card_commercial.md` — agent capability card |
+| `agents/` | 3 | `agent_commercial.md` — N06 agent identity, `axiom_commercial.md` — 12 immutable commercial laws, `mental_model_commercial.md` — decision routing + frameworks |
+| `architecture/` | 4 | `agent_card_commercial.md` — capability card, `pattern_brand_pipeline.md` — 6-stage brand pipeline, `pattern_pricing_framework.md` — value-based pricing, `pattern_funnel_architecture.md` — 5-stage conversion funnel |
 | `compiled/` | 19 | Auto-compiled YAML mirrors of source artifacts |
 | `feedback/` | 1 | `quality_gate_commercial.md` — N06 quality gate |
 | `knowledge/` | 12 | Brand KCs: archetypes, book patterns, frameworks, monetization models, naming, propagation, tokens pipeline, voice systems, competitive positioning, ICP frameworks, + 2 knowledge cards |
-| `memory/` | 0 | **EMPTY** — no memory artifacts yet |
+| `memory/` | 3 | `brand_decisions_memory.md` — GDP decision log, `pricing_optimization_memory.md` — pricing experiments + metrics, `commercial_learning_record.md` — 10 lessons learned |
 | `orchestration/` | 4 | Dispatch rules + workflows for commercial & content monetization |
 | `output/` | 15 | Brand book, brand config, brand one-pager, brand voice guide, competitive map, content factory model, discovery report, monetization plan, pricing page, README pricing, SDK validation audit, transformation arc, visual identity, competitive business, self-review |
 | `prompts/` | 6 | Brand audit, brand book generator, brand config extractor, brand discovery interview, prompt template, system prompt |
 | `quality/` | 1 | `scoring_rubric_commercial.md` — commercial scoring |
 | `schemas/` | 4 | Brand audit schema, brand book schema, brand config schema, brand voice contract |
-| `tools/` | 1 | `content_monetization_tool.md` — monetization pipeline tool |
-| **TOTAL** | **65** | **46 source + 19 compiled** |
+| `tools/` | 3 | `content_monetization_tool.md` — monetization pipeline, `pricing_experiment_tool.md` — A/B testing framework, `funnel_diagnostic_tool.md` — leak detection + fix prioritization |
+| **TOTAL** | **74** | **55 source + 19 compiled** |
 
 ---
 
@@ -136,16 +136,17 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 
 ---
 
-## Gaps
+## Gaps (Updated 2026-04-07)
 
-| Gap | Severity | Impact | Fix Cost |
-|-----|----------|--------|----------|
-| `memory/` is empty | 🔴 High | No persistent commercial memory → decisions repeat, context lost between sessions | Low — create initial memory artifacts |
-| Only 2 dedicated builders | 🟡 Medium | `content-monetization` and `tagline` are narrow. No dedicated `pricing-builder`, `funnel-builder`, `brand-book-builder` | Medium — register new kinds + build ISOs |
-| No `tests/` subdir | 🟡 Medium | Commercial outputs aren't systematically validated | Low — add golden tests for pricing/brand |
-| No `experiments/` subdir | 🟡 Medium | No A/B testing framework for pricing/copy variants | Medium — create experiment pipeline |
-| Single agent identity | 🟢 Low | Only 1 agent file. Could benefit from specialized sub-agents (brand agent, pricing agent, funnel agent) | Medium |
-| No dashboards/metrics | 🟡 Medium | Revenue tracking, conversion metrics not structured as artifacts | Medium — build metric dashboard kind |
+| Gap | Severity | Status | Resolution |
+|-----|----------|--------|------------|
+| `memory/` is empty | 🔴 High | ✅ CLOSED | 3 memory artifacts: brand decisions, pricing optimization, learning record |
+| Single agent identity | 🟢 Low | ✅ CLOSED | Added axiom_commercial.md (12 axioms) + mental_model_commercial.md (routing + frameworks) |
+| No architecture patterns | 🟡 Medium | ✅ CLOSED | 3 patterns: brand pipeline, pricing framework, funnel architecture |
+| Only 1 tool definition | 🟡 Medium | ✅ CLOSED | Added pricing_experiment_tool.md + funnel_diagnostic_tool.md |
+| Only 2 dedicated builders | 🟡 Medium | ⏳ OPEN | `content-monetization` and `tagline` are narrow. Future: register pricing-builder, funnel-builder |
+| No `tests/` subdir | 🟡 Medium | ⏳ OPEN | Commercial outputs lack golden test validation. Future: add test fixtures |
+| No dashboards/metrics | 🟡 Medium | 🟡 PARTIAL | Metrics templates exist in pricing_optimization_memory.md and funnel_diagnostic_tool.md. Future: live dashboard |
 
 ---
 
@@ -156,19 +157,22 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 │  N06 Commercial Nucleus — Avareza Estratégica   │
 │  "Quanto RENDE cada decisão?"                   │
 ├─────────────────────────────────────────────────┤
-│  📦 46 source artifacts + 19 compiled = 65 total│
+│  📦 55 source artifacts + 19 compiled = 74 total│
 │  🔧 2 dedicated builders + 9 cross-domain kinds │
-│  🛠️ 16 tools (5 brand + 11 system)              │
+│  🛠️ 18 tools (5 brand + 11 system + 2 N06)     │
 │  🔌 6 MCP servers (Stripe, Hotmart, Canva, ...)│
 │  📚 12 domain KCs                               │
 │  📐 4 brand schemas                             │
 │  📝 6 prompts                                   │
 │  📊 15 output artifacts                         │
+│  🧠 3 memory artifacts (decisions, pricing, LR) │
+│  📏 12 commercial axioms                        │
+│  🧭 3 architecture patterns (brand, price, fun) │
 ├─────────────────────────────────────────────────┤
 │  ✅ Strengths: brand infra, payment MCPs,       │
-│     knowledge depth, system propagation         │
-│  ⚠️ Gaps: empty memory, few builders,           │
-│     no tests, no experiments                    │
+│     knowledge depth, system propagation,        │
+│     commercial memory, pricing framework        │
+│  ⚠️ Remaining: dedicated builders, golden tests │
 └─────────────────────────────────────────────────┘
 ```
 
