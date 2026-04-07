@@ -118,9 +118,9 @@ option_d_keep_faiss_bm25: '| Aspect | Assessment |
 implementation_plan: "Phase 1 (Week 1): Deploy Qdrant on Railway\n  - Docker image: qdrant/qdrant:v1.8.4\n  - Collection:\
   \ organization_brain, 768-dim, cosine distance\n  - Initial load: migrate FAISS index -> Qdrant collection\n\nPhase 2 (Week\
   \ 2): Integrate with brain_query\n  - Replace hybrid_search() to call Qdrant instead of FAISS+BM25\n  - Add metadata filters:\
-  \ pillar, agent_group, quality, kind\n  - Benchmark: must match or beat current 88% top-3 accuracy\n\nPhase 3 (Week 3): Real-time\
-  \ sync\n  - On KC create/update: upsert to Qdrant via post-commit hook\n  - Remove build_indexes_ollama.py rebuild requirement\n\
-  \  - Add health check to /api/v2/health"
+  \ pillar, agent_group, quality, kind\n  - Benchmark: must match or beat current 88% top-3 accuracy\n\nPhase 3 (Week 3):\
+  \ Real-time sync\n  - On KC create/update: upsert to Qdrant via post-commit hook\n  - Remove build_indexes_ollama.py rebuild\
+  \ requirement\n  - Add health check to /api/v2/health"
 positive:
 - Single search system instead of BM25+FAISS dual maintenance
 - Real-time index updates — new KCs searchable in <1s

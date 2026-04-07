@@ -20,5 +20,5 @@ lifecycle:
 - 'Created: on first dispatch in session'
 - 'Updated: on each spawn, signal, or monitor check'
 - 'Destroyed: on session end (ephemeral, not persisted to disk)'
-usage: orchestrator uses this to track which agent_groups are active, avoid double-dispatch, and determine when a wave is complete
-  for collection.
+usage: orchestrator uses this to track which agent_groups are active, avoid double-dispatch, and determine when a wave is
+  complete for collection.

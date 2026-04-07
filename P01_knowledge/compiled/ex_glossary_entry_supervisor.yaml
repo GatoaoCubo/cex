@@ -15,8 +15,8 @@ tags:
 - agent
 - node
 - orchestration
-tldr: An agent_group is an autonomous execution unit in the CEX system. Each has a fixed domain, dedicated LLM model, and exclusive
-  MCP tools.
+tldr: An agent_group is an autonomous execution unit in the CEX system. Each has a fixed domain, dedicated LLM model, and
+  exclusive MCP tools.
 quality: 8.5
 usage:
 - 'Context: Aparece em N07 orchestration, dispatch rules, spawn configs'

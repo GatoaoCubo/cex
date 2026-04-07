@@ -6,9 +6,9 @@ routes: ''
 fallback: builder_agent (builder generico) — quando a tarefa nao mapeia claramente para nenhum dominio especializado, builder_agent
   e o agent_group mais versatil por usar opus e ter capacidade de construcao ampla.
 quality: 9.0
-objective: Classificar a tarefa do usuario e rotear para o agent_group organization mais adequado. O router deve analisar keywords,
-  contexto semantico e tipo de entregavel esperado para determinar o agent_group correto com score de confianca. Se confianca
-  < threshold, usar fallback.
+objective: Classificar a tarefa do usuario e rotear para o agent_group organization mais adequado. O router deve analisar
+  keywords, contexto semantico e tipo de entregavel esperado para determinar o agent_group correto com score de confianca.
+  Se confianca < threshold, usar fallback.
 research_agent_research: 'Modelo: sonnet | Dominio: Pesquisa e analise de mercado
 
   Keywords: pesquisar, mercado, concorrente, scrape, analise, benchmark, tendencia, dados, comparar, fornecedor

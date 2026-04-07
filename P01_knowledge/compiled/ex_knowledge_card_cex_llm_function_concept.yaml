@@ -37,8 +37,8 @@ density_score: null
 data_source: https://arxiv.org/abs/2308.00352
 summary: Funcao LLM eh o que o modelo FAZ com um artefato, nao o que o artefato EH. As 8 funcoes (BECOME, INJECT, REASON,
   CALL, PRODUCE, CONSTRAIN, GOVERN, COLLABORATE) formam o pipeline real de execucao de qualquer sistema LLM. Um prompt simples
-  executa 1-2 funcoes. Um agente executa 4-5. Um agent_group com lifecycle completo executa todas as 8. A diferenca eh de completude,
-  nao de natureza.
+  executa 1-2 funcoes. Um agente executa 4-5. Um agent_group com lifecycle completo executa todas as 8. A diferenca eh de
+  completude, nao de natureza.
 spec: '| Funcao | Estagio | O Que Faz | Tipos Exemplo |
 
   |--------|---------|-----------|---------------|

@@ -23,6 +23,6 @@ configuration: "crew:\n  name: \"GENESIS\"\n  coordinator: orchestrator\n  proto
   \    spawn: \"spawn_grid.ps1 -mission GENESIS -mode continuous\"\n    monitor: \"spawn_monitor.ps1 (30s poll)\"\n    completion:\
   \ \"all signals received\"\n    cleanup: \"spawn_stop.ps1 + archive handoffs\"\n\n  termination:\n    condition: all_signals_complete\n\
   \    timeout: 60m\n    on_stuck: escalate_to_stella"
-the_crew_is_a_fractal_of_12_lps: 'A crew instantiates ALL 12 LPs at the group level: P01=shared pool, P02=N agent_groups, P03=mission
-  goal, P04=shared MCPs, P06=file isolation contract, P07=quality gates, P09=grid config, P10=shared git state, P11=monitor
-  watchdog, P12=signal protocol.'
+the_crew_is_a_fractal_of_12_lps: 'A crew instantiates ALL 12 LPs at the group level: P01=shared pool, P02=N agent_groups,
+  P03=mission goal, P04=shared MCPs, P06=file isolation contract, P07=quality gates, P09=grid config, P10=shared git state,
+  P11=monitor watchdog, P12=signal protocol.'

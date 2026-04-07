@@ -108,9 +108,9 @@ quality_gates:
 - 'ANTI-PATTERNS: min 5 anti-patterns concretos'
 examples: ''
 input: '"Documentar o sistema e criar testes"'
-output: "intention: \"Documentacao + testes simultaneos\"\nagent_groups: [knowledge_agent, operations_agent]\ndependency: none\
-  \ (parallel)\ndispatch:\n  - agent_group: knowledge_agent\n    task: \"Documentar sistema\"\n    status: dispatched\n  -\
-  \ agent_group: operations_agent\n    task: \"Criar testes\"\n    status: dispatched\nmode: parallel"
+output: "intention: \"Documentacao + testes simultaneos\"\nagent_groups: [knowledge_agent, operations_agent]\ndependency:\
+  \ none (parallel)\ndispatch:\n  - agent_group: knowledge_agent\n    task: \"Documentar sistema\"\n    status: dispatched\n\
+  \  - agent_group: operations_agent\n    task: \"Criar testes\"\n    status: dispatched\nmode: parallel"
 semantic_bridge:
 - 'Also known as: task dispatcher, triage agent, orchestration prompt, coordination template'
 - 'Keywords: orchestration, dispatch, routing, multi-agent, intention parsing, dependency resolution'

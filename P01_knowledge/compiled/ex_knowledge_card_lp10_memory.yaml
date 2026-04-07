@@ -61,8 +61,8 @@ anti_patterns:
 - 'Learning record sem score: impossivel rankear por relevancia'
 - 'Brain index sem rebuild: embeddings ficam stale (>24h)'
 - 'Axiom mutavel: perde proposito de ser fundamento inviolavel'
-application: No organization, P10 manifesta como mental_model.yaml por agent_group, Brain MCP (BM25+FAISS), learning memory (.claude/rules/organization-learning.md),
-  e MEMORY.md. O CEX formaliza cada tipo com schema validavel.
+application: No organization, P10 manifesta como mental_model.yaml por agent_group, Brain MCP (BM25+FAISS), learning memory
+  (.claude/rules/organization-learning.md), e MEMORY.md. O CEX formaliza cada tipo com schema validavel.
 references:
 - P10_memory/_schema.yaml (fonte de verdade)
 - records/agent_groups/{sat}/mental_model.yaml (instancias reais)

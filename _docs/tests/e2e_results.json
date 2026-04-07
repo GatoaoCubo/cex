@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-07T16:06:40.060146+00:00",
+  "timestamp": "2026-04-07T18:41:20.196187+00:00",
   "version": "1.0.0",
   "summary": {
     "total": 3,
@@ -135,7 +135,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2714 chars)\r\n  [F1] bld_config loaded (2596 chars)\r\n  [F1] constraints: 8 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2719 chars)\r\n  [F1] bld_config loaded (2602 chars)\r\n  [F1] constraints: 8 "
             },
             {
               "check": "f1_constrain_fires",
@@ -187,7 +187,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 27893
+      "total_elapsed_ms": 27310
     },
     {
       "name": "instagram",
@@ -202,7 +202,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3890 chars)\r\n  [F1] bld_config loaded (2846 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3892 chars)\r\n  [F1] bld_config loaded (2846 chars)\r\n  [F1] constraints: 5 "
             },
             {
               "check": "f1_constrain_fires",
@@ -311,7 +311,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 12775
+      "total_elapsed_ms": 12596
     },
     {
       "name": "docs",
@@ -435,7 +435,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 10947
+      "total_elapsed_ms": 10813
     }
   ]
 }

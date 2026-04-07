@@ -38,8 +38,9 @@ linked_artifacts:
 density_score: null
 data_source: https://arxiv.org/abs/2308.00352
 summary: Todo sistema LLM executa as mesmas 8 funcoes na mesma ordem logica. Um prompt simples executa 1-2 (BECOME implicito
-  + PRODUCE). Um agente executa 4-5. Um agent_group com lifecycle completo executa todas as 8. A diferenca entre prompt e agent_group
-  nao eh de natureza — eh de completude. A boot sequence de um Cortex Enterprise eh ela mesma uma instanciacao dessas 8 funcoes.
+  + PRODUCE). Um agente executa 4-5. Um agent_group com lifecycle completo executa todas as 8. A diferenca entre prompt e
+  agent_group nao eh de natureza — eh de completude. A boot sequence de um Cortex Enterprise eh ela mesma uma instanciacao
+  dessas 8 funcoes.
 spec: '| # | Funcao | O que faz | Boot Equivalente |
 
   |---|--------|-----------|------------------|
