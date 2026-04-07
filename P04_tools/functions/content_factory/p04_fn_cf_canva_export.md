@@ -53,13 +53,14 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content_factory
-quality: null
+quality: 9.0
 tags: [function_def, canva, export, pdf, pptx, content_factory]
 tldr: "LLM-callable function to export Canva designs as PDF, PPTX, PNG, MP4 files"
 examples:
   - input: {"design_id": "DAGxyz789", "format": "pdf", "quality": "high"}
     output: {"export_id": "EXP_001", "status": "completed", "download_url": "https://export.canva.com/...", "file_size_bytes": 2451200}
 error_types: [design_not_found, export_in_progress, unsupported_format, auth_expired]
+density_score: 0.91
 ---
 
 # Canva Export Design Function
