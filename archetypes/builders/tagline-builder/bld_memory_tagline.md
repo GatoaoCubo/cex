@@ -4,6 +4,8 @@ kind: memory
 pillar: P09
 builder: tagline-builder
 version: 1.0.0
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
 # Memory: Tagline Builder
 

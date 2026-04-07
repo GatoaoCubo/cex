@@ -4,6 +4,8 @@ kind: memory
 pillar: P09
 builder: landing-page-builder
 version: 1.0.0
+memory_scope: project
+observation_types: [user, feedback, project, reference]
 ---
 # Memory: Landing Page Builder
 

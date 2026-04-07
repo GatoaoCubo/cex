@@ -4,12 +4,13 @@ kind: config
 pillar: P06
 builder: tagline-builder
 version: 1.0.0
+effort: medium
+max_turns: 15
+disallowed_tools: []
+permission_scope: nucleus
 ---
 # Config: Tagline Builder
 
-effort: medium
-max_turns: 15
-permission_scope: nucleus
 output_format: yaml
 quality_floor: 8.5
 

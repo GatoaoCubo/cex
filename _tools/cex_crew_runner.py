@@ -330,22 +330,18 @@ def _load_builder_memories(builder_id: str, intent: str) -> str:
 
 
 def _load_relevant_kcs(intent: str, parsed: dict) -> str:
-    """Search Supabase pgvector for KCs relevant to the current intent.
+    """Load KCs relevant to the current intent via pure Python (local TF-IDF).
 
-    Uses two strategies:
-    1. feeds_kinds: find KCs that explicitly feed the target kind
-    2. semantic search: find KCs similar to the intent text
+    Uses two strategies (zero external dependencies):
+    1. feeds_kinds: find KCs that explicitly feed the target kind (motor KC library)
+    2. semantic search: TF-IDF similarity via cex_retriever (local index)
 
+    Falls back gracefully if retriever index not built.
     Returns formatted injection block or empty string.
     """
-    try:
-        from cex_kc_index import search_kcs_by_text, search_kcs_by_kind
-    except ImportError:
-        return ""
-
     kcs = []
 
-    # Strategy 1: KCs that feed this kind (explicit link)
+    # Strategy 1: KCs that feed this kind (explicit link via motor KC library)
     target_kind = ""
     if isinstance(parsed.get("object"), list):
         target_kind = parsed["object"][0] if parsed["object"] else ""
@@ -355,19 +351,42 @@ def _load_relevant_kcs(intent: str, parsed: dict) -> str:
 
     if target_kind:
         try:
-            kind_kcs = search_kcs_by_kind(target_kind, top_k=3)
-            for kc in kind_kcs:
-                kcs.append(kc)
+            from cex_8f_motor import load_kc_library, lookup_kcs_for_kind
+            kc_library = load_kc_library()
+            pillar = parsed.get("pillar", "P01")
+            matches = lookup_kcs_for_kind(kc_library, target_kind, pillar)
+            for m in matches[:3]:
+                kcs.append({
+                    "id": m.get("id", ""),
+                    "title": m.get("title", m.get("id", "?")),
+                    "file_path": m.get("path", ""),
+                    "domain": "",
+                    "tldr": "",
+                    "similarity": 0,
+                })
         except Exception:
             pass
 
-    # Strategy 2: Semantic search by intent
+    # Strategy 2: TF-IDF semantic search (pure Python, no external services)
     try:
-        sem_kcs = search_kcs_by_text(intent, top_k=3)
-        seen_ids = {kc["id"] for kc in kcs}
-        for kc in sem_kcs:
-            if kc["id"] not in seen_ids:
-                kcs.append(kc)
+        from cex_retriever import load_index as load_retriever_index
+        from cex_retriever import find_similar
+        idx = load_retriever_index()
+        if idx:
+            results = find_similar(intent, index=idx, top_k=3)
+            seen_ids = {kc["id"] for kc in kcs}
+            for r in results:
+                rid = r.get("id", "")
+                if rid and rid not in seen_ids:
+                    seen_ids.add(rid)
+                    kcs.append({
+                        "id": rid,
+                        "title": r.get("title", r.get("id", "?")),
+                        "file_path": r.get("path", ""),
+                        "domain": r.get("kind", ""),
+                        "tldr": r.get("tldr", ""),
+                        "similarity": r.get("score", 0),
+                    })
     except Exception:
         pass
 
@@ -375,7 +394,7 @@ def _load_relevant_kcs(intent: str, parsed: dict) -> str:
         return ""
 
     # Format injection block (cap at 5 KCs, ~2K tokens total)
-    parts = ["## Relevant Knowledge Cards (auto-retrieved from pgvector)"]
+    parts = ["## Relevant Knowledge Cards (auto-retrieved, pure Python TF-IDF)"]
     parts.append("Use these as domain context. Cite specific facts when relevant.\n")
 
     for kc in kcs[:5]:

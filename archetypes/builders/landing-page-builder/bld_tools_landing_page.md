@@ -24,3 +24,9 @@ version: 1.0.0
 ## No Build Dependencies for HTML Output
 Default HTML+Tailwind CDN output requires ZERO build tools. User saves file and deploys.
 React/Next.js outputs require user's existing project setup.
+
+## Tool Permissions
+- READ: brand config, existing artifacts, competitor pages, design resources
+- WRITE: output files only (landing page HTML/JSX + compiled YAML)
+- EXECUTE: preview tools (browser_playwright, browser_design_extractor)
+- DENY: no database writes, no deployment, no external API mutations

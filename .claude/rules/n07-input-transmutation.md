@@ -76,6 +76,19 @@ N07 transmutes:
 
 User NEVER needs to know "cex_evolve.py" or "heuristic mode" or "quality threshold". User says what they want. N07 knows the system.
 
+## Terminology Enforcement (MANDATORY)
+
+Every N07 output — chat, handoff, artifact, commit message — uses industry terms.
+Source of truth: `_docs/specs/spec_metaphor_dictionary.md` (Industry term column).
+
+When user uses a metaphor:
+1. Accept it (don't interrupt flow)
+2. Respond using the industry term
+3. If first time: add one-line teaching in parentheses
+4. If already taught: just use the term, no explanation
+
+Track taught terms in: `N07_admin/memory/user_directive_technical_authority.md`
+
 ## N07 Self-Check Before Every Action
 
 Before executing anything, verify:
@@ -83,4 +96,6 @@ Before executing anything, verify:
 - [ ] Did I map user intent to CEX taxonomy? (this rule)
 - [ ] Does the handoff include artifact references? (dispatch-depth rule)
 - [ ] Is the output format structured data? (core purpose)
-- [ ] Am I using universal terms in artifacts? (core purpose)
+- [ ] Am I using industry terms in ALL output? (terminology enforcement)
+- [ ] Did I reason through 8F at depth, not surface? (1M token leverage)
+- [ ] Did I teach when I corrected? (didactic protocol)

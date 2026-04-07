@@ -4,12 +4,13 @@ kind: config
 pillar: P06
 builder: landing-page-builder
 version: 1.0.0
+effort: high
+max_turns: 30
+disallowed_tools: []
+permission_scope: nucleus
 ---
 # Config: Landing Page Builder
 
-effort: high
-max_turns: 30
-permission_scope: nucleus
 output_format: html
 quality_floor: 8.5
 
