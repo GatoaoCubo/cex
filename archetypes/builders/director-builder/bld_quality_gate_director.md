@@ -8,7 +8,7 @@ created: "2026-04-06"
 updated: "2026-04-06"
 author: "builder_agent"
 domain: director
-quality: null
+quality: 9.0
 tags: [quality-gate, director, P11, P08, governance, orchestration, dispatch]
 tldr: "Gates for director artifacts — wave topology + dispatch config + signal protocol ready for multi-builder coordination."
 density_score: 0.90
