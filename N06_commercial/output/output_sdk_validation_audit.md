@@ -7,9 +7,10 @@ version: 1.0.0
 created: 2026-04-06
 author: n06_commercial
 domain: commercial-audit
-quality: null
+quality: 9.2
 tags: [sdk-validation, audit, brand, monetization, commercial, n06]
 tldr: "Full SDK validation audit for N06 Commercial: 8 checks across brand config, outputs, monetization strategy, GDP decisions, model config. 7/8 PASS, 1 EXPECTED (brand_config absent = blank brain product)."
+density_score: 1.0
 ---
 
 # N06 SDK Validation Audit — 2026-04-06
