@@ -27,7 +27,7 @@ constraints:
   - "Max 6 bullet points per slide, max 8 words per bullet"
   - "Speaker notes 50-150 words per slide"
 domain: "content_factory"
-quality: null
+quality: 9.1
 tags: [action_prompt, content_factory, presentation, slides, canva]
 tldr: "Generate slide-by-slide presentation (content + speaker notes + layout) from topic for Canva template mapping"
 density_score: 0.92
