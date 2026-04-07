@@ -16,7 +16,7 @@ prerequisites:
   - "Serialization target format is known: JSON, YAML, or Protobuf"
 validation_method: checklist
 domain: type_def
-quality: null
+quality: 9.0
 tags: [instruction, type-def, spec, data-model, P06]
 idempotent: true
 atomic: true
