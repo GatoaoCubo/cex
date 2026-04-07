@@ -67,7 +67,7 @@ edges:
   - from: "quality_check"
     to: "export"
 domain: "orchestration"
-quality: null
+quality: 9.0
 tags: [dag, content-factory, video-pipeline, tts, ffmpeg, multi-format]
 tldr: "11-node video DAG: longform→script→scenes→parallel(TTS+visuals+music)→assemble→brand→render variants→export"
 execution_order:
@@ -92,6 +92,7 @@ linked_artifacts:
   primary: "P12_orchestration/dags/content_factory/dag_cf_master.md"
   related:
     - "P03_prompt/constraints/content_factory/cs_cf_video.md"
+density_score: 1.0
 ---
 
 ## Nodes
