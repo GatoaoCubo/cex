@@ -26,7 +26,7 @@ constraints:
   - "Do NOT set pricing — that is N06 Commercial domain"
   - "All text output in pt-BR unless brand_config.language overrides"
 domain: "content_factory"
-quality: null
+quality: 9.1
 tags: [action_prompt, content_factory, course, education, hotmart]
 tldr: "Generate structured course (modules + lessons + quizzes) from topic and audience, ready for Hotmart publish workflow"
 density_score: 0.91
