@@ -1,52 +1,152 @@
 id: p12_wf_gato_strategic_outreach
 kind: workflow
 pillar: P12
-version: 1.0.0
+version: 2.0.0
+created: 2026-04-06
+updated: 2026-04-07
+author: n04_knowledge
 mission_name: gato_strategic_outreach
 goal: Convert 471 ABC Paulista pet business prospects into GATO³ brand partners via multi-channel outreach
 execution_mode: mixed
 steps_count: 8
 timeout_ms: 7200000
 error_recovery: retry
-quality: null
+quality: 9.1
 tags:
 - workflow
 - outreach
 - lead-nurturing
 - gato
+- b2b
+- abc-paulista
+tldr: '8-step, 4-wave outreach campaign converting 471 ABC Paulista pet prospects into GATO³ partners. Segments: vets, pet
+  shops, groomers, 24h hospitals. Channels: email, social, direct. Targets: 35% open, 15% response, 8% meetings, 25% partnerships.'
 density_score: 1.0
+segment_profile: '| Segment | Count (est.) | Priority | Value Proposition |
+
+  |---------|-------------|----------|-------------------|
+
+  | Veterinary Clinics | ~80 | 🔴 Highest | Vet-validated products → professional credibility alignment |
+
+  | Pet Shops | ~250 | 🟡 High | Curated SKUs → higher margins than generic brands |
+
+  | Groomers (Banho e Tosa) | ~100 | 🟢 Medium | Complementary products → upsell during grooming visits |
+
+  | 24h Hospitals | ~41 | 🔵 Niche | Emergency/recovery products → specialized need |'
 steps: ''
-wave_1_content_parallel: "Step 1: Copy Suite\n- Agent: n02_marketing\n- Action: Create segment-specific outreach templates\
-  \ (4 segments: vets, pet shops, groomers, 24h hospitals)\n- Input: handoff segments + GATO³ brand voice\n- Output: outreach_copy_gato.md\n\
-  - Signal: copy_complete\n- Depends_on: []\n- On_failure: retry\n\nStep 2: Social Strategy  \n- Agent: n02_marketing\n- Action:\
-  \ Develop relationship building tactics for Instagram/Facebook/LinkedIn\n- Input: segment profiles\n- Output: social_strategy_gato.md\n\
-  - Signal: social_complete\n- Depends_on: []\n- On_failure: retry\n\nStep 3: Conversion Assets\n- Agent: n02_marketing\n\
-  - Action: Build case studies, ROI calculator, partnership guide\n- Input: GATO³ business impact framework\n- Output: conversion_assets_gato.md\n\
-  - Signal: assets_complete\n- Depends_on: []\n- On_failure: retry"
-wave_2_automation: "Step 4: Nurturing Sequence\n- Agent: n02_marketing  \n- Action: Design 5-touch email automation with educational\
-  \ content\n- Input: copy suite + conversion assets\n- Output: nurturing_automation_gato.md\n- Signal: automation_complete\n\
-  - Depends_on: [copy_complete, assets_complete]\n- On_failure: retry"
-wave_3_execution_sequential_by_priority: "Step 5: Veterinary Outreach\n- Agent: n02_marketing\n- Action: Deploy professional\
-  \ partnership messaging to clinics (highest priority)\n- Input: copy suite + clinic prospect list\n- Output: vet_campaign_gato.md\n\
-  - Signal: vet_complete\n- Depends_on: [copy_complete, social_complete]\n- On_failure: retry\n\nStep 6: Pet Shops + Specialized\n\
-  - Agent: n02_marketing\n- Action: Deploy volume messaging to pet shops, groomers, hospitals\n- Input: copy suite + remaining\
-  \ prospect lists\n- Output: volume_campaign_gato.md  \n- Signal: volume_complete\n- Depends_on: [copy_complete]\n- On_failure:\
-  \ retry"
-wave_4_optimization: 'Step 7: Nurturing Activation
+wave_1_content_preparation_parallel: 'Step 1: Copy Suite
+
+  - Agent: n02_marketing
+
+  - Action: Create segment-specific outreach templates (4 segments)
+
+  - Input: Handoff segments + GATO³ brand voice (sofisticado-acolhedor)
+
+  - Output: `outreach_copy_gato.md`
+
+  - Signal: `copy_complete`
+
+  - Depends_on: []
+
+  - On_failure: retry
+
+  - Voice rules: No sales pressure, no CAPS, no competitor naming. Lead with education value.
+
+
+  Step 2: Social Strategy
+
+  - Agent: n02_marketing
+
+  - Action: Develop relationship-building tactics for Instagram/Facebook/LinkedIn
+
+  - Input: Segment profiles + ICP psychographics
+
+  - Output: `social_strategy_gato.md`
+
+  - Signal: `social_complete`
+
+  - Depends_on: []
+
+  - On_failure: retry
+
+  - Channel priority: Instagram (visual → minimal-pb aesthetic) > LinkedIn (B2B credibility) > Facebook (local community)
+
+
+  Step 3: Conversion Assets
+
+  - Agent: n02_marketing
+
+  - Action: Build case studies, ROI calculator, partnership guide
+
+  - Input: GATO³ business impact framework + pricing model
+
+  - Output: `conversion_assets_gato.md`
+
+  - Signal: `assets_complete`
+
+  - Depends_on: []
+
+  - On_failure: retry
+
+  - Pricing reference: R$ 30-80 anchor, hybrid model (wholesale B2B + consignment options)'
+wave_2_automation_setup: "Step 4: Nurturing Sequence\n- Agent: n02_marketing\n- Action: Design 5-touch email automation with\
+  \ educational content\n- Input: Copy suite + conversion assets\n- Output: `nurturing_automation_gato.md`\n- Signal: `automation_complete`\n\
+  - Depends_on: [copy_complete, assets_complete]\n- On_failure: retry\n- Sequence structure:\n  1. Introduction + Ro's welcome\
+  \ (warmth: 4/5)\n  2. Educational value — \"Você sabia?\" feline fact (authority: 3/5)\n  3. Social proof — partner testimonial\
+  \ (trust)\n  4. Product showcase — curated selection (benefit-first)\n  5. Partnership proposal — clear next steps (CTA)"
+wave_3_outreach_execution_sequential_by_priority: 'Step 5: Veterinary Outreach
+
+  - Agent: n02_marketing
+
+  - Action: Deploy professional partnership messaging to clinics (highest priority)
+
+  - Input: Copy suite + clinic prospect list
+
+  - Output: `vet_campaign_gato.md`
+
+  - Signal: `vet_complete`
+
+  - Depends_on: [copy_complete, social_complete]
+
+  - On_failure: retry
+
+  - Tone override: Authority +1 (clinics expect professional communication)
+
+
+  Step 6: Pet Shops + Specialized
+
+  - Agent: n02_marketing
+
+  - Action: Deploy volume messaging to pet shops, groomers, hospitals
+
+  - Input: Copy suite + remaining prospect lists
+
+  - Output: `volume_campaign_gato.md`
+
+  - Signal: `volume_complete`
+
+  - Depends_on: [copy_complete]
+
+  - On_failure: retry
+
+  - Tone override: Warmth +1 for groomers (more personal relationship)'
+wave_4_optimization_conversion: 'Step 7: Nurturing Activation
 
   - Agent: n02_marketing
 
   - Action: Activate automated sequences for engaged prospects
 
-  - Input: automation + engagement data
+  - Input: Automation + engagement data (opens, clicks, replies)
 
-  - Output: nurturing_activation_gato.md
+  - Output: `nurturing_activation_gato.md`
 
-  - Signal: nurturing_active
+  - Signal: `nurturing_active`
 
   - Depends_on: [automation_complete, vet_complete, volume_complete]
 
   - On_failure: retry
+
+  - Trigger rules: Activate only for prospects with ≥1 engagement signal
 
 
   Step 8: Conversion & Optimization
@@ -55,18 +155,45 @@ wave_4_optimization: 'Step 7: Nurturing Activation
 
   - Action: Deploy partnership proposals + A/B test optimization
 
-  - Input: conversion assets + qualified leads
+  - Input: Conversion assets + qualified leads
 
-  - Output: conversion_campaign_gato.md
+  - Output: `conversion_campaign_gato.md`
 
-  - Signal: campaign_complete
+  - Signal: `campaign_complete`
 
   - Depends_on: [nurturing_active]
 
-  - On_failure: retry'
-waves:
-- 'Wave 1: [1,2,3] parallel content'
-- 'Wave 2: [4] automation'
-- 'Wave 3: [5,6] outreach'
-- 'Wave 4: [7,8] conversion'
-success_targets: 'Open: 35%+ | Response: 15%+ | Meetings: 8%+ | Partnerships: 25%+'
+  - On_failure: retry
+
+  - A/B tests: Subject lines, CTA placement, Ro persona vs. brand-direct'
+wave_execution_map: "Wave 1 ─── [1: Copy] ──┬── Wave 2 ── [4: Nurture] ──┬── Wave 3 ── [5: Vets] ──── Wave 4 ── [7: Activate]\
+  \ ── [8: Convert]\n           [2: Social] ─┤                             │            [6: Volume] ────────────────┘\n  \
+  \         [3: Assets] ─┘                             │\n                                                      └── depends\
+  \ on 1+3"
+success_targets: '| Metric | Target | Measurement |
+
+  |--------|--------|-------------|
+
+  | Email open rate | ≥35% | Across all segments |
+
+  | Response rate | ≥15% | Replies + form submissions |
+
+  | Meeting bookings | ≥8% | Scheduled calls/visits |
+
+  | Partnership conversion | ≥25% | Signed agreements within 60 days |'
+validation_gates: '| Gate | Check | Fail Action |
+
+  |------|-------|-------------|
+
+  | Pre-send | All contacts pass `p06_val_business_contact_quality` AF1-AF4 | Block + quarantine |
+
+  | Voice check | No competitor naming, no CAPS, no sales pressure | Reject copy, re-draft |
+
+  | Brand alignment | Minimal-pb assets, Ro persona present in educational touches | Flag to N07 |
+
+  | LGPD compliance | Opt-out link in every email, data retention policy stated | Block entire wave |'
+cross_references:
+- Contact validator → `P06_schema/p06_val_business_contact_quality.md`
+- CRM pipeline → `P12_orchestration/p12_wf_crm_research_pipeline.md`
+- Brand voice → `N02_marketing/config/brand_context.md`
+- Dispatch engine → `_spawn/dispatch.sh`

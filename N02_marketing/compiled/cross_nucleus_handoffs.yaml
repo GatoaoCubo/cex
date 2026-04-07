@@ -1,8 +1,10 @@
+id: cross_nucleus_handoffs
 kind: handoff_protocol
 pillar: P12
 title: Cross-Nucleus Handoff Protocols for N02 Marketing
-version: 1.0.0
+version: 2.0.0
 created: 2026-04-02
+updated: 2026-04-07
 author: n02_marketing
 domain: nucleus_coordination
 quality: null
@@ -11,14 +13,19 @@ tags:
 - coordination
 - N01
 - N02
+- N03
+- N04
 - N05
 - N06
 - cross-nucleus
-tldr: Defines handoff protocols between N02 Marketing and other nuclei for seamless research→copy→deployment→commercial workflows.
+- signal-writer
+tldr: Defines handoff protocols between N02 Marketing and all nuclei — signal_writer integration, retry strategies, GATO³
+  brand injection rules, and quality gates at every handoff boundary.
 handoff_types:
 - research_to_copy
 - copy_to_deployment
 - copy_to_commercial
+- copy_to_knowledge
 - feedback_loop
 density_score: 1.0
 1_n01_research_n02_marketing: ''
@@ -100,5 +107,61 @@ copy_deployment_checklist: "# Copy Deployment Checklist\n\n## Copy Assets Ready\
   \ Body copy (A/B versions)  \n- [ ] CTAs (2-3 options)\n- [ ] Meta data (titles, descriptions)\n\n## Technical Requirements\n\
   - [ ] Deployment channels confirmed\n- [ ] Tracking parameters defined\n- [ ] Personalization variables mapped\n- [ ] A/B\
   \ testing configured\n\n## Launch Coordination  \n- [ ] Go-live date confirmed\n- [ ] Performance monitoring ready\n- [\
-  \ ] Issue escalation path defined\n- [ ] Success criteria agreed upon\n\nThis handoff protocol ensures seamless coordination\
+  \ ] Issue escalation path defined\n- [ ] Success criteria agreed upon"
+7_signal_writer_integration: ''
+standard_signal_protocol_for_n02_handoffs: 'Every N02 handoff completion MUST emit a signal. This enables N07 orchestrator
+  polling and prevents lost handoffs.
+
+
+  # On handoff completion — N02 emits signal
+
+  from _tools.signal_writer import write_signal
+
+
+  # After completing copy for N05 deployment
+
+  write_signal(''n02'', ''handoff_n05_complete'', 9.0, ''COPY_DEPLOYMENT_READY'')
+
+
+  # After receiving research from N01
+
+  write_signal(''n02'', ''handoff_n01_received'', None, ''RESEARCH_BRIEF_INGESTED'')
+
+
+  # After aligning with N06 commercial
+
+  write_signal(''n02'', ''handoff_n06_aligned'', None, ''COMMERCIAL_COPY_READY'')'
+signal_based_handoff_flow: "handoff_signals:\n  n01_to_n02:\n    trigger_signal: \"n01.research_complete\"\n    n02_acknowledges:\
+  \ \"n02.research_received\"\n    n02_completes: \"n02.copy_from_research_done\"\n    timeout_ms: 1800000\n    on_timeout:\
+  \ \"n07_escalation\"\n\n  n02_to_n05:\n    trigger_signal: \"n02.copy_ready\"\n    n05_acknowledges: \"n05.copy_received\"\
+  \n    n05_completes: \"n05.deployment_live\"\n    timeout_ms: 3600000\n    on_timeout: \"n07_escalation\"\n\n  n02_to_n06:\n\
+  \    trigger_signal: \"n02.commercial_copy_draft\"\n    n06_acknowledges: \"n06.copy_review_started\"\n    n06_completes:\
+  \ \"n06.copy_approved\"\n    timeout_ms: 1200000\n    on_timeout: \"n02_proceeds_with_draft\"\n\n  n02_to_n03:\n    trigger_signal:\
+  \ \"n02.visual_brief_ready\"\n    n03_acknowledges: \"n03.design_started\"\n    n03_completes: \"n03.visual_assets_delivered\"\
+  \n    timeout_ms: 2400000\n    on_timeout: \"n02_uses_template_fallback\"\n\n  n02_to_n04:\n    trigger_signal: \"n02.kc_update_request\"\
+  \n    n04_acknowledges: \"n04.kc_review_started\"\n    n04_completes: \"n04.kc_published\"\n    timeout_ms: 1800000\n  \
+  \  on_timeout: \"n02_proceeds_without_kc\""
+8_retry_failure_strategies: ''
+handoff_failure_taxonomy: "failure_types:\n  timeout:\n    definition: \"Receiving nucleus doesn't acknowledge within timeout_ms\"\
+  \n    strategy: \"Retry once → escalate to N07 → continue with degraded mode\"\n    degraded_mode: \"N02 self-serves (e.g.,\
+  \ uses template instead of N03 custom design)\"\n\n  quality_rejection:\n    definition: \"Receiving nucleus rejects deliverable\
+  \ (quality < 8.0)\"\n    strategy: \"N02 re-runs artifact through 8F pipeline → resubmit\"\n    max_retries: 2\n    escalation:\
+  \ \"After 2 rejections → N07 mediates requirements alignment\"\n\n  context_loss:\n    definition: \"Handoff file missing\
+  \ critical context (brand, audience, etc.)\"\n    strategy: \"Auto-inject brand_config.yaml → retry with enriched context\"\
+  \n    prevention: \"All handoff files MUST include brand_context reference\"\n\n  signal_failure:\n    definition: \"signal_writer\
+  \ fails (file permissions, path error)\"\n    strategy: \"Fallback to .cex/runtime/handoffs/n02_status.md manual update\"\
+  \n    prevention: \"Pre-flight check signal_writer path on nucleus boot\""
+retry_decision_matrix: "retry_matrix:\n  should_retry:\n    - \"Timeout (network/scheduling issue, not content issue)\"\n\
+  \    - \"Quality 7.5-7.9 (close to threshold, small fix likely)\"\n    - \"Signal failure (transient error)\"\n  should_NOT_retry:\n\
+  \    - \"Quality < 7.0 (fundamental misunderstanding, needs human)\"\n    - \"3rd consecutive failure (systemic issue)\"\
+  \n    - \"Brand violation detected (Ro anti-patterns present)\"\n  should_escalate:\n    - \"Cross-nucleus disagreement\
+  \ on requirements\"\n    - \"GDP decision needed (subjective, user must decide)\"\n    - \"Budget exhaustion (no tokens\
+  \ left for retry)\""
+9_gato_brand_injection_at_handoff_boundaries: ''
+mandatory_brand_context_in_every_handoff: "gato3_handoff_rules:\n  outgoing_handoffs:\n    always_include:\n      - \"brand_config_path:\
+  \ .cex/brand/brand_config.yaml\"\n      - \"persona: Ro\"\n      - \"voice: sofisticado-acolhedor\"\n      - \"language:\
+  \ pt-BR\"\n      - \"forbidden_words: [gatinho, garantido, compre agora, dono]\"\n    validation: \"brand_validate.py must\
+  \ pass before handoff emitted\"\n\n  incoming_handoffs:\n    always_verify:\n      - \"Does incoming content respect GATO³\
+  \ brand voice?\"\n      - \"Are BRAND_* variables populated (not placeholder)?\"\n      - \"Is language pt-BR (not EN defaults)?\"\
+  \n    on_violation: \"N02 sanitizes before processing, logs violation\"\n\nThis handoff protocol ensures seamless coordination\
   \ between N02 and other nuclei, preventing information loss and enabling compound effectiveness across the CEX system."

@@ -2,15 +2,16 @@
 id: cross_nucleus_handoffs
 kind: handoff_protocol
 pillar: P12
-title: Cross-Nucleus Handoff Protocols for N02 Marketing  
-version: 1.0.0
+title: "Cross-Nucleus Handoff Protocols for N02 Marketing"
+version: 2.0.0
 created: 2026-04-02
+updated: 2026-04-07
 author: n02_marketing
 domain: nucleus_coordination
-quality: 9.0
-tags: [handoff, coordination, N01, N02, N05, N06, cross-nucleus]
-tldr: Defines handoff protocols between N02 Marketing and other nuclei for seamless research→copy→deployment→commercial workflows.
-handoff_types: [research_to_copy, copy_to_deployment, copy_to_commercial, feedback_loop]
+quality: null
+tags: [handoff, coordination, N01, N02, N03, N04, N05, N06, cross-nucleus, signal-writer]
+tldr: "Defines handoff protocols between N02 Marketing and all nuclei — signal_writer integration, retry strategies, GATO³ brand injection rules, and quality gates at every handoff boundary."
+handoff_types: [research_to_copy, copy_to_deployment, copy_to_commercial, copy_to_knowledge, feedback_loop]
 density_score: 1.0
 ---
 
@@ -387,6 +388,132 @@ handoff_quality_checks:
 - [ ] Performance monitoring ready
 - [ ] Issue escalation path defined
 - [ ] Success criteria agreed upon
+```
+
+## 7. Signal Writer Integration
+
+### Standard Signal Protocol for N02 Handoffs
+
+Every N02 handoff completion MUST emit a signal. This enables N07 orchestrator polling and prevents lost handoffs.
+
+```python
+# On handoff completion — N02 emits signal
+from _tools.signal_writer import write_signal
+
+# After completing copy for N05 deployment
+write_signal('n02', 'handoff_n05_complete', 9.0, 'COPY_DEPLOYMENT_READY')
+
+# After receiving research from N01
+write_signal('n02', 'handoff_n01_received', None, 'RESEARCH_BRIEF_INGESTED')
+
+# After aligning with N06 commercial
+write_signal('n02', 'handoff_n06_aligned', None, 'COMMERCIAL_COPY_READY')
+```
+
+### Signal-Based Handoff Flow
+```yaml
+handoff_signals:
+  n01_to_n02:
+    trigger_signal: "n01.research_complete"
+    n02_acknowledges: "n02.research_received"
+    n02_completes: "n02.copy_from_research_done"
+    timeout_ms: 1800000
+    on_timeout: "n07_escalation"
+
+  n02_to_n05:
+    trigger_signal: "n02.copy_ready"
+    n05_acknowledges: "n05.copy_received"
+    n05_completes: "n05.deployment_live"
+    timeout_ms: 3600000
+    on_timeout: "n07_escalation"
+
+  n02_to_n06:
+    trigger_signal: "n02.commercial_copy_draft"
+    n06_acknowledges: "n06.copy_review_started"
+    n06_completes: "n06.copy_approved"
+    timeout_ms: 1200000
+    on_timeout: "n02_proceeds_with_draft"
+
+  n02_to_n03:
+    trigger_signal: "n02.visual_brief_ready"
+    n03_acknowledges: "n03.design_started"
+    n03_completes: "n03.visual_assets_delivered"
+    timeout_ms: 2400000
+    on_timeout: "n02_uses_template_fallback"
+
+  n02_to_n04:
+    trigger_signal: "n02.kc_update_request"
+    n04_acknowledges: "n04.kc_review_started"
+    n04_completes: "n04.kc_published"
+    timeout_ms: 1800000
+    on_timeout: "n02_proceeds_without_kc"
+```
+
+## 8. Retry & Failure Strategies
+
+### Handoff Failure Taxonomy
+```yaml
+failure_types:
+  timeout:
+    definition: "Receiving nucleus doesn't acknowledge within timeout_ms"
+    strategy: "Retry once → escalate to N07 → continue with degraded mode"
+    degraded_mode: "N02 self-serves (e.g., uses template instead of N03 custom design)"
+
+  quality_rejection:
+    definition: "Receiving nucleus rejects deliverable (quality < 8.0)"
+    strategy: "N02 re-runs artifact through 8F pipeline → resubmit"
+    max_retries: 2
+    escalation: "After 2 rejections → N07 mediates requirements alignment"
+
+  context_loss:
+    definition: "Handoff file missing critical context (brand, audience, etc.)"
+    strategy: "Auto-inject brand_config.yaml → retry with enriched context"
+    prevention: "All handoff files MUST include brand_context reference"
+
+  signal_failure:
+    definition: "signal_writer fails (file permissions, path error)"
+    strategy: "Fallback to .cex/runtime/handoffs/n02_status.md manual update"
+    prevention: "Pre-flight check signal_writer path on nucleus boot"
+```
+
+### Retry Decision Matrix
+```yaml
+retry_matrix:
+  should_retry:
+    - "Timeout (network/scheduling issue, not content issue)"
+    - "Quality 7.5-7.9 (close to threshold, small fix likely)"
+    - "Signal failure (transient error)"
+  should_NOT_retry:
+    - "Quality < 7.0 (fundamental misunderstanding, needs human)"
+    - "3rd consecutive failure (systemic issue)"
+    - "Brand violation detected (Ro anti-patterns present)"
+  should_escalate:
+    - "Cross-nucleus disagreement on requirements"
+    - "GDP decision needed (subjective, user must decide)"
+    - "Budget exhaustion (no tokens left for retry)"
+```
+
+## 9. GATO³ Brand Injection at Handoff Boundaries
+
+### Mandatory Brand Context in Every Handoff
+
+```yaml
+gato3_handoff_rules:
+  outgoing_handoffs:
+    always_include:
+      - "brand_config_path: .cex/brand/brand_config.yaml"
+      - "persona: Ro"
+      - "voice: sofisticado-acolhedor"
+      - "language: pt-BR"
+      - "forbidden_words: [gatinho, garantido, compre agora, dono]"
+    validation: "brand_validate.py must pass before handoff emitted"
+
+  incoming_handoffs:
+    always_verify:
+      - "Does incoming content respect GATO³ brand voice?"
+      - "Are BRAND_* variables populated (not placeholder)?"
+      - "Is language pt-BR (not EN defaults)?"
+    on_violation: "N02 sanitizes before processing, logs violation"
 ```
 
 This handoff protocol ensures seamless coordination between N02 and other nuclei, preventing information loss and enabling compound effectiveness across the CEX system.

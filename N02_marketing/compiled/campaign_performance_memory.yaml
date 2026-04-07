@@ -1,8 +1,10 @@
+id: campaign_performance_memory
 kind: memory_summary
 pillar: P10
-title: Campaign Performance Memory
-version: 1.0.0
+title: Campaign Performance Memory (Universal + GATO³ Pet Vertical)
+version: 2.0.0
 created: 2026-04-02
+updated: 2026-04-07
 author: n02_marketing
 domain: performance_tracking
 quality: null
@@ -13,7 +15,10 @@ tags:
 - conversion
 - A/B-testing
 - N02
-tldr: Tracks campaign performance, copy effectiveness, and conversion insights to improve future marketing efforts.
+- gato3
+- pet-vertical
+tldr: Tracks campaign performance, copy effectiveness, and conversion insights — universal patterns + GATO³-specific campaign
+  types for Brazilian cat tutor market (B2C education + B2B partnerships).
 scope: marketing_performance_learning
 density_score: 1.0
 campaign_history_log: ''
@@ -91,3 +96,31 @@ next_testing_queue: "planned_tests:\n  - hypothesis: \"Video testimonials in ema
   \ improve B2C open rates\"  \n    timeline: \"Next month\"\n    success_metric: \"Open rate improvement >10%\"\n    \n \
   \ - hypothesis: \"Mobile-first landing page design will improve mobile conversions\"\n    timeline: \"Next quarter\"  \n\
   \    success_metric: \"Mobile CVR improvement >25%\""
+gato_campaign_types_performance_templates: ''
+b2c_education_campaigns_primary_revenue_driver: "gato3_b2c_campaigns:\n  protocolo_launch:\n    type: \"Educational content\
+  \ series → product soft-sell\"\n    channel_mix: \"Instagram (60%) + Email (30%) + Blog (10%)\"\n    copy_formula: \"Protocol\
+  \ Framework (Problema → Ciência → 3 Passos → Resultado)\"\n    funnel_mapping:\n      awareness: \"Reel/Carrossel with protocol\
+  \ teaser\"\n      consideration: \"Full protocol email + related product context\"\n      conversion: \"Protocol completion\
+  \ + product as 'next step'\"\n    kpi_targets:\n      instagram_save_rate: 0.08  # protocols get saved\n      email_open_rate:\
+  \ 0.35\n      product_page_visit: 0.12\n      conversion_to_purchase: 0.04\n    example_campaign:\n      name: \"Protocolo\
+  \ Noite Tranquila\"\n      hook: \"Seu gato te acorda às 4h? Protocolo da Ro em 3 passos.\"\n      product_tie: \"Kit Enriquecimento\
+  \ Noturno GATO³\"\n\n  community_challenge:\n    type: \"7-day challenge → community engagement → product discovery\"\n\
+  \    channel_mix: \"Instagram Stories (50%) + WhatsApp group (30%) + Email (20%)\"\n    copy_formula: \"BAB (Before daily\
+  \ challenge → After daily win → Bridge to next day)\"\n    kpi_targets:\n      challenge_completion: 0.40\n      ugc_generation:\
+  \ 0.25\n      product_discovery: 0.15\n    example_campaign:\n      name: \"Desafio 7 Dias de Enriquecimento\"\n      hook:\
+  \ \"7 dias, 7 brincadeiras, 1 gato mais feliz. Topa?\""
+b2b_partnership_campaigns_growth_driver: "gato3_b2b_campaigns:\n  vet_partnership_outreach:\n    type: \"Professional outreach\
+  \ → educational partnership proposal\"\n    channel_mix: \"Email (50%) + LinkedIn (30%) + Instagram DM (20%)\"\n    copy_formula:\
+  \ \"FAB (Feature: educational content → Advantage: client retention → Benefit: revenue growth)\"\n    funnel_mapping:\n\
+  \      cold_outreach: \"Ro introduces GATO³ mission + data point\"\n      warm_follow: \"Case study of existing partner\
+  \ + ROI\"\n      proposal: \"Partnership deck with co-branded materials\"\n    kpi_targets:\n      email_open_rate: 0.30\n\
+  \      response_rate: 0.12\n      meeting_booked: 0.05\n      partnership_signed: 0.25  # of meetings\n    voice_calibration:\
+  \ \"authority: 4/5, warmth: 3/5, formality: 4/5\"\n\n  pet_shop_volume:\n    type: \"Volume outreach → product placement\
+  \ + educational display\"\n    channel_mix: \"Email (40%) + WhatsApp Business (40%) + In-person visit (20%)\"\n    copy_formula:\
+  \ \"PAS (Problem: customer retention → Agitation: commodity competition → Solution: education differentiator)\"\n    kpi_targets:\n\
+  \      response_rate: 0.15\n      sample_request: 0.08\n      placement_confirmed: 0.04"
+campaign_memory_ro_persona_consistency_checks: "ro_consistency_audit:\n  pre_launch_checklist:\n    - \"Does every email start\
+  \ with Ro's personal greeting?\"\n    - \"Is there exactly 1 actionable protocol per communication?\"\n    - \"Are forbidden\
+  \ words absent? (gatinho, garantido, compre agora)\"\n    - \"Is warmth ≥ 3/5 in every touchpoint?\"\n    - \"Does the CTA\
+  \ invite rather than command?\"\n  post_campaign_review:\n    - \"Did Ro's voice remain consistent across all 5 channels?\"\
+  \n    - \"Which channel showed highest persona engagement?\"\n    - \"Were any brand anti-patterns detected in A/B variants?\""

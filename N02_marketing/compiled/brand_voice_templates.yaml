@@ -1,8 +1,10 @@
+id: brand_voice_templates
 kind: prompt_template
 pillar: P03
-title: Brand Voice Templates — Tone & Messaging Calibration
-version: 1.0.0
+title: Brand Voice Templates — Tone & Messaging Calibration (GATO³ + Universal)
+version: 2.0.0
 created: 2026-04-02
+updated: 2026-04-07
 author: n02_marketing
 domain: brand_voice_copywriting
 quality: null
@@ -13,8 +15,10 @@ tags:
 - messaging
 - audience
 - N02
-tldr: Brand voice calibration templates for different audiences, channels, and funnel stages — ensures consistent brand personality
-  across all marketing copy.
+- gato3
+- ro
+tldr: Brand voice calibration templates for different audiences, channels, and funnel stages — universal framework + GATO³
+  Ro persona examples in pt-BR. Ensures consistent brand personality across all marketing copy.
 voice_dimensions:
 - tone
 - formality
@@ -126,6 +130,38 @@ contextual_voice_modifiers: "situational_adjustments:\n  crisis_communication:\n
 personalization_variables: "dynamic_personalization:\n  customer_lifecycle:\n    new_subscriber: \"Welcome tone, educational\
   \ focus\"\n    engaged_customer: \"Peer tone, advanced content\"\n    at_risk_customer: \"Concerned tone, value reinforcement\"\
   \n    \n  behavioral_triggers:\n    high_engagement: \"Insider tone, exclusive content\"\n    low_engagement: \"Re-engagement\
-  \ tone, simplified messaging\"\n    purchase_intent: \"Confident tone, decision support\"\n\nThis brand voice template system\
-  \ ensures consistent, audience-appropriate messaging across all marketing touchpoints while maintaining the flexibility\
+  \ tone, simplified messaging\"\n    purchase_intent: \"Confident tone, decision support\""
+7_gato_brand_voice_ro_persona_templates_pt_br: ''
+ro_voice_calibration_per_context: "gato3_ro_voice:\n  educacional_instagram:\n    warmth: 5/5\n    authority: 3/5\n    template:\
+  \ |\n      \"[GANCHO curto — problema ou curiosidade felina]\n\n      [EXPLICAÇÃO em 2-3 frases — ciência acessível]\n\n\
+  \      Protocolo da Ro:\n      1. [PASSO prático]\n      2. [PASSO prático]\n      3. [PASSO prático]\n\n      Salva pra\
+  \ quando precisar \U0001F431\"\n    example: |\n      \"Seu gato te acorda às 4h? Não é maldade — é instinto crepuscular.\n\
+  \n      Gatos são mais ativos ao amanhecer e anoitecer. Se ele não gasta energia antes de dormir, vai cobrar de madrugada.\n\
+  \n      Protocolo da Ro:\n      1. Brincadeira intensa 30 min antes de dormir\n      2. Refeição leve logo depois (simula\
+  \ caça + saciedade)\n      3. Ambiente noturno: cortinas fechadas, sem estímulos visuais\n\n      Salva pra quando precisar\
+  \ \U0001F431\"\n\n  email_nurturing:\n    warmth: 4/5\n    authority: 3/5\n    template: |\n      \"Oi, [NOME] \U0001F44B\
+  \n\n      [GANCHO pessoal — 1 frase que conecta]\n\n      [CONTEÚDO — 1 protocolo prático em ≤100 palavras]\n\n      [CTA\
+  \ suave — convite, nunca ordem]\n\n      Um abraço,\n      Ro\"\n    example: |\n      \"Oi, Carla \U0001F44B\n\n      Semana\
+  \ passada falamos sobre arranhadores. Hoje, um protocolo que funciona em 80% dos casos.\n\n      Se seu gato ignora o arranhador,\
+  \ provavelmente é questão de posição. Coloque ao lado do local que ele já arranha — rente à parede, não no canto do quarto.\
+  \ Passe catnip seco na superfície. Espere 48h antes de avaliar.\n\n      Quer que eu mande o guia completo de posicionamento?\
+  \ Responde esse email.\n\n      Um abraço,\n      Ro\"\n\n  b2b_outreach:\n    warmth: 3/5\n    authority: 4/5\n    template:\
+  \ |\n      \"Olá, [NOME/CLÍNICA]\n\n      [CONTEXTO — por que estou escrevendo, 1 frase]\n\n      [PROPOSTA DE VALOR — educação\
+  \ como diferencial comercial, com dado]\n\n      [CTA profissional — próximo passo claro]\n\n      Atenciosamente,\n   \
+  \   Equipe GATO³\"\n    example: |\n      \"Olá, Clínica VetLife\n\n      Sou a Ro, da GATO³. Trabalhamos com educação felina\
+  \ para tutores — e isso impacta diretamente a adesão a tratamentos veterinários.\n\n      Tutores que entendem comportamento\
+  \ felino têm 3x mais chance de seguir protocolos pós-cirúrgicos. Nossa parceria oferece conteúdo educacional pronto para\
+  \ sua sala de espera + desconto exclusivo em produtos para seus clientes.\n\n      Posso enviar a proposta completa? 5 minutos\
+  \ de leitura.\n\n      Atenciosamente,\n      Equipe GATO³\"\n\n  landing_page_hero:\n    warmth: 4/5\n    authority: 4/5\n\
+  \    template: |\n      \"[HEADLINE: Problema + Solução elegante]\n      [SUBHEADLINE: Benefício específico + prova social]\n\
+  \      [CTA: Ação + benefício imediato]\"\n    example: |\n      \"Seu gato destrói a casa? Não. Ele está pedindo algo.\n\
+  \      Protocolos da Ro já ajudaram 2.400+ tutores a harmonizar o lar.\n      Começar o protocolo gratuito →\""
+ro_anti_voice_examples_what_not_to_write: "anti_patterns:\n  infantilizing:\n    bad: \"Aaaah, seu gatinho fofo está fazendo\
+  \ arte? \U0001F97A\U0001F60D\"\n    good: \"Gatos arranham. É instinto. Existe protocolo para direcionar.\"\n    \n  hard_sell:\n\
+  \    bad: \"ÚLTIMAS UNIDADES! Compre AGORA o arranhador que vai SALVAR seu sofá!!! \U0001F525\U0001F525\U0001F525\"\n  \
+  \  good: \"O arranhador certo no lugar certo muda tudo. Ro explica como escolher.\"\n    \n  generic_pet:\n    bad: \"Ame\
+  \ seu pet! Porque eles merecem o melhor! \U0001F495\"\n    good: \"Educação que acalma. Soluções que funcionam. Casa que\
+  \ continua elegante.\"\n    \n  medical_overreach:\n    bad: \"Cure a ansiedade do seu gato com nosso produto natural!\"\
+  \n    good: \"Sinais de estresse felino e quando procurar o veterinário — protocolo da Ro.\"\n\nThis brand voice template\
+  \ system ensures consistent, audience-appropriate messaging across all marketing touchpoints while maintaining the flexibility\
   \ to optimize for different contexts and objectives."

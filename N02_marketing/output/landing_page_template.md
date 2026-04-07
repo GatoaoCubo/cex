@@ -2,9 +2,10 @@
 id: p09_lpt_landing_page_template
 kind: output_validator
 pillar: P09
-title: Landing Page Template — Production Ready
-version: 1.0.0
+title: "Landing Page Template — Production Ready (Universal + GATO³ Brand Tokens)"
+version: 2.0.0
 created: 2026-04-01
+updated: 2026-04-07
 author: n02_visual_frontend_marketing
 template_type: landing_page
 output_format: html_with_integrated_copy
@@ -15,10 +16,10 @@ responsive: mobile_first
 accessibility: wcag_aa
 performance: lighthouse_90_plus
 domain: visual_frontend_engineering_and_copywriting
-quality: 9.0
-tags: [output_template, landing_page, dual_mode, html, tailwind, copy_integration, N02]
-tldr: Complete landing page template with integrated copy — hero to CTA sections, responsive design, WCAG AA, persuasion formulas in visual hierarchy.
-density_score: 0.96
+quality: null
+tags: [output_template, landing_page, dual_mode, html, tailwind, copy_integration, N02, gato3]
+tldr: "Complete landing page template with integrated copy — hero to CTA sections, responsive design, WCAG AA, persuasion formulas in visual hierarchy. Includes GATO³ brand token override for instant brand injection."
+density_score: 0.98
 ---
 
 # Landing Page Template — Production Ready
@@ -536,6 +537,95 @@ contrast-checker landing_page.html
 # → Include validation certificates
 # → Provide mobile/desktop screenshots
 # → Document any custom interactions
+```
+
+## GATO³ Brand Token Override
+
+When generating landing pages for GATO³, replace the default Tailwind config with:
+
+```javascript
+// GATO³ brand tokens — auto-injected by brand_inject.py
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#000000',    // GATO³ PB primary
+          foreground: '#ffffff',
+          hover: '#1F1F1F',
+        },
+        background: '#ffffff',
+        foreground: '#000000',
+        muted: {
+          DEFAULT: '#f5f5f5',
+          foreground: '#7A7A7A',  // GATO³ accent
+        },
+        accent: {
+          DEFAULT: '#7A7A7A',
+          foreground: '#ffffff',
+        },
+        surface: '#D1D1D1',
+        border: '#e5e5e5',
+      },
+      fontFamily: {
+        sans: ['Kenao', 'system-ui', 'sans-serif'],      // GATO³ body
+        heading: ['Allrounder', 'system-ui', 'sans-serif'], // GATO³ headings
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+    }
+  },
+  darkMode: 'class',
+}
+```
+
+### GATO³ Variable Substitution Example
+
+```yaml
+# GATO³ landing page: Protocolo Noite Tranquila
+product_name: "GATO³"
+key_benefit: "Protocolo Noite Tranquila — seu gato dormindo a noite toda"
+seo_description: "Protocolo gratuito da Ro para gatos que acordam de madrugada. 3 passos, 7 dias, noites tranquilas."
+nav_cta_text: "Começar Protocolo"
+hero_headline_v1: "Seu gato te acorda às 4h?"
+hero_headline_emphasis: "Tem protocolo pra isso."
+hero_subheadline_agitate: "Não é maldade — é instinto crepuscular. E a Ro tem um protocolo de 3 passos que funciona em 7 dias."
+social_proof_stat: "2.400+ tutores já usaram"
+social_proof_qualifier: "93% relatam melhora na primeira semana"
+primary_cta_text: "Começar Protocolo Gratuito"
+secondary_cta_text: "Ver Ciência por Trás"
+trust_indicator_1: "Baseado em comportamento felino"
+trust_indicator_2: "Sem produtos obrigatórios"
+features_headline: "Por que funciona"
+features_subheadline: "Ciência acessível, passos práticos, resultado mensurável."
+feature_1_title: "Instinto Crepuscular"
+feature_1_description: "Gatos são naturalmente ativos ao amanhecer. Redirecionamos essa energia antes de dormir."
+feature_2_title: "Sequência Caça-Saciedade"
+feature_2_description: "Brincadeira intensa + refeição leve = ciclo natural de sono profundo."
+feature_3_title: "Ambiente Noturno"
+feature_3_description: "Ajustes simples no quarto que eliminam estímulos e prolongam o sono."
+testimonials_headline: "Tutores que já dormiram a noite toda"
+testimonials_subheadline: "Resultados reais de quem seguiu o protocolo"
+testimonial_1_quote: "Na terceira noite a Luna parou de miar às 4h. Chorei de alívio."
+testimonial_1_name: "Carla M."
+testimonial_1_title: "Tutora da Luna, São Paulo"
+final_cta_headline: "Pronta pra dormir a noite toda?"
+final_cta_subheadline: "O protocolo é gratuito. 3 passos. 7 dias. Resultado mensurável."
+final_cta_button_text: "Começar Agora — É Gratuito"
+final_cta_disclaimer: "Sem cartão de crédito • Sem spam • Protocolo direto no email"
+footer_description: "GATO³ — Educação que acalma, soluções que funcionam, casa que continua elegante."
+```
+
+### GATO³ Copy Voice Constraints for Landing Pages
+```yaml
+gato3_landing_rules:
+  headline_max_words: 10
+  subheadline_max_words: 25
+  paragraph_max_sentences: 3
+  cta_verb: "Começar | Ver | Baixar | Descobrir"  # never "Comprar", "Garantir"
+  persona: "Ro speaks in 1st person only in testimonial section"
+  tone: "Authority 4/5, Warmth 3/5 (landing pages are more authoritative than Instagram)"
+  language: "pt-BR, formal-casual (você, not tu)"
+  forbidden_in_hero: "emojis, ALL CAPS, exclamation marks, 'garantido', 'promoção'"
 ```
 
 This template ensures every landing page generated by N02 meets production standards for performance, accessibility, and conversion optimization.

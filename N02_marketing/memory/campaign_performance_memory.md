@@ -283,3 +283,82 @@ planned_tests:
     timeline: "Next quarter"  
     success_metric: "Mobile CVR improvement >25%"
 ```
+
+## GATO³ Campaign Types — Performance Templates
+
+### B2C Education Campaigns (Primary Revenue Driver)
+```yaml
+gato3_b2c_campaigns:
+  protocolo_launch:
+    type: "Educational content series → product soft-sell"
+    channel_mix: "Instagram (60%) + Email (30%) + Blog (10%)"
+    copy_formula: "Protocol Framework (Problema → Ciência → 3 Passos → Resultado)"
+    funnel_mapping:
+      awareness: "Reel/Carrossel with protocol teaser"
+      consideration: "Full protocol email + related product context"
+      conversion: "Protocol completion + product as 'next step'"
+    kpi_targets:
+      instagram_save_rate: 0.08  # protocols get saved
+      email_open_rate: 0.35
+      product_page_visit: 0.12
+      conversion_to_purchase: 0.04
+    example_campaign:
+      name: "Protocolo Noite Tranquila"
+      hook: "Seu gato te acorda às 4h? Protocolo da Ro em 3 passos."
+      product_tie: "Kit Enriquecimento Noturno GATO³"
+
+  community_challenge:
+    type: "7-day challenge → community engagement → product discovery"
+    channel_mix: "Instagram Stories (50%) + WhatsApp group (30%) + Email (20%)"
+    copy_formula: "BAB (Before daily challenge → After daily win → Bridge to next day)"
+    kpi_targets:
+      challenge_completion: 0.40
+      ugc_generation: 0.25
+      product_discovery: 0.15
+    example_campaign:
+      name: "Desafio 7 Dias de Enriquecimento"
+      hook: "7 dias, 7 brincadeiras, 1 gato mais feliz. Topa?"
+```
+
+### B2B Partnership Campaigns (Growth Driver)
+```yaml
+gato3_b2b_campaigns:
+  vet_partnership_outreach:
+    type: "Professional outreach → educational partnership proposal"
+    channel_mix: "Email (50%) + LinkedIn (30%) + Instagram DM (20%)"
+    copy_formula: "FAB (Feature: educational content → Advantage: client retention → Benefit: revenue growth)"
+    funnel_mapping:
+      cold_outreach: "Ro introduces GATO³ mission + data point"
+      warm_follow: "Case study of existing partner + ROI"
+      proposal: "Partnership deck with co-branded materials"
+    kpi_targets:
+      email_open_rate: 0.30
+      response_rate: 0.12
+      meeting_booked: 0.05
+      partnership_signed: 0.25  # of meetings
+    voice_calibration: "authority: 4/5, warmth: 3/5, formality: 4/5"
+
+  pet_shop_volume:
+    type: "Volume outreach → product placement + educational display"
+    channel_mix: "Email (40%) + WhatsApp Business (40%) + In-person visit (20%)"
+    copy_formula: "PAS (Problem: customer retention → Agitation: commodity competition → Solution: education differentiator)"
+    kpi_targets:
+      response_rate: 0.15
+      sample_request: 0.08
+      placement_confirmed: 0.04
+```
+
+### Campaign Memory — Ro Persona Consistency Checks
+```yaml
+ro_consistency_audit:
+  pre_launch_checklist:
+    - "Does every email start with Ro's personal greeting?"
+    - "Is there exactly 1 actionable protocol per communication?"
+    - "Are forbidden words absent? (gatinho, garantido, compre agora)"
+    - "Is warmth ≥ 3/5 in every touchpoint?"
+    - "Does the CTA invite rather than command?"
+  post_campaign_review:
+    - "Did Ro's voice remain consistent across all 5 channels?"
+    - "Which channel showed highest persona engagement?"
+    - "Were any brand anti-patterns detected in A/B variants?"
+```
