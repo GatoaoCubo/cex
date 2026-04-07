@@ -16,7 +16,7 @@ prerequisites:
   - "The schema is system-applied (not injected into the LLM prompt)"
 validation_method: checklist
 domain: validation_schema
-quality: null
+quality: 9.0
 tags: [instruction, validation-schema, post-generation, contract, P06]
 idempotent: true
 atomic: true
