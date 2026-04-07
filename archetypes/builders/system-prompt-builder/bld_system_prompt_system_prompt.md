@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "Persona engineering, constitutional AI rules, knowledge boundary design, tone calibration, output format specification, OpenAI/Anthropic/Google/LangChain system prompt patterns | Does NOT: action_prompt (task-focused), instruction (step-by-step recipe), prompt_template (reusable with vars), dispatch logic"
 domain: system_prompt
-quality: null
+quality: 8.9
 tags: [system_prompt, system_prompt, P03]
 safety_level: standard
 tools_listed: false
