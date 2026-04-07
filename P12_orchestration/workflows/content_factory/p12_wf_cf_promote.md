@@ -16,7 +16,7 @@ depends_on: [p03_ap_cf_generate_campaign]
 signals: [complete, error]
 spawn_configs: []
 domain: "content_factory"
-quality: null
+quality: 8.9
 tags: [workflow, content_factory, promotion, social_media, canva]
 tldr: "Extract hooks from content, generate social posts + Canva thumbnails, schedule 7-day promotion campaign"
 density_score: 0.91
