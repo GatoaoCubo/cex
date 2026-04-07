@@ -16,7 +16,7 @@ prerequisites:
   - Guard clauses are defined (max_iter for loops, threshold for gates)
 validation_method: checklist
 domain: workflow_primitive
-quality: null
+quality: 9.0
 tags: [instruction, workflow_primitive, orchestration, P12]
 idempotent: true
 atomic: true
