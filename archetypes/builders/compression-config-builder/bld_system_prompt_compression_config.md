@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "context compression strategies (summarize/truncate_oldest/rolling_window/priority_keep), trigger ratios, preserve_types, decay weights, tiered compression pipelines, token accounting | NOT token_budget allocation, session_backend persistence, prompt_template structure, memory long-term storage"
 domain: "compression_config"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "compression_config", "context-window", "token-reduction", "P10"]
 safety_level: standard
 tools_listed: false
