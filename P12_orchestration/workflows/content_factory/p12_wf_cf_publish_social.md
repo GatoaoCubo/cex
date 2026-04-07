@@ -16,7 +16,7 @@ depends_on: [p03_ap_cf_generate_campaign]
 signals: [complete, error]
 spawn_configs: []
 domain: "content_factory"
-quality: null
+quality: 8.9
 tags: [workflow, content_factory, social_media, ayrshare, publish]
 tldr: "Adapt content per platform, create visuals via Canva, schedule and publish via Ayrshare — 4 mixed steps"
 density_score: 0.92
