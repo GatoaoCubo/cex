@@ -10,7 +10,8 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [instruction, webhook, P03, pipeline]
-quality: null
+quality: 8.9
+density_score: 0.91
 ---
 # Instructions: How to Produce a webhook
 
