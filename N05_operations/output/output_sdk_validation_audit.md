@@ -7,7 +7,8 @@ domain: operations
 nucleus: N05
 mission: SDK_VALIDATION
 created: 2026-04-06
-quality: null
+quality: 9.0
+density_score: 1.0
 ---
 
 # N05 Operations — SDK Validation Audit Report
