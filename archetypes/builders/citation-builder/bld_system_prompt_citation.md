@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "citation structure, source attribution, reliability tiers, temporal freshness, provenance tracking; NOT knowledge cards, retrieval pipelines, glossary entries"
 domain: "citation"
-quality: null
+quality: 8.9
 tags: ["system_prompt", "citation", "provenance", "attribution"]
 safety_level: standard
 tools_listed: false
