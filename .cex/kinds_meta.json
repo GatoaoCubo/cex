@@ -59,7 +59,7 @@
     "description": "Principio fundamental imutavel â€” parte da identidade profunda da entidade",
     "llm_function": "BECOME",
     "max_bytes": 3072,
-    "naming": "p10_ax_{{rule}}.md",
+    "naming": "p02_ax_{{rule}}.md",
     "pillar": "P02"
   },
   "benchmark": {
@@ -167,6 +167,7 @@
     "description": "Context compression configuration for tool outputs",
     "layer": "runtime",
     "llm_function": "INJECT",
+    "naming": "p10_cc_{{scope}}.yaml",
     "pillar": "P10",
     "sdk_module": "cex_sdk.memory.compression"
   },
@@ -302,6 +303,7 @@
     "description": "Text embedding provider for vector search",
     "layer": "runtime",
     "llm_function": "INJECT",
+    "naming": "p01_ep_{{provider}}.yaml",
     "pillar": "P01",
     "sdk_module": "cex_sdk.knowledge.embedder"
   },
@@ -599,6 +601,7 @@
     "description": "LLM provider adapter (Claude, GPT, Gemini, Ollama, OpenRouter, LiteLLM)",
     "layer": "runtime",
     "llm_function": "CALL",
+    "naming": "p02_mp_{{provider}}.yaml",
     "pillar": "P02",
     "sdk_module": "cex_sdk.models.providers"
   },
@@ -608,7 +611,7 @@
     "description": "Regra de nomenclatura",
     "llm_function": "GOVERN",
     "max_bytes": 4096,
-    "naming": "p05_nr_{{scope}}.md",
+    "naming": "p08_nr_{{scope}}.md",
     "pillar": "P08"
   },
   "notifier": {
@@ -734,6 +737,7 @@
     "description": "Structured chain-of-thought reasoning with confidence scores",
     "layer": "runtime",
     "llm_function": "REASON",
+    "naming": "p03_rt_{{topic}}.md",
     "pillar": "P03",
     "sdk_module": "cex_sdk.reasoning.step"
   },
@@ -869,6 +873,7 @@
     "description": "Per-user session state persistence backend",
     "layer": "runtime",
     "llm_function": "INJECT",
+    "naming": "p10_sb_{{backend}}.yaml",
     "pillar": "P10",
     "sdk_module": "cex_sdk.session.base"
   },
@@ -900,6 +905,7 @@
     ],
     "layer": "",
     "llm_function": "BECOME",
+    "naming": "p04_skill_{{name}}.md",
     "pillar": "P04",
     "schema_ref": "archetypes/builders/skill-builder/bld_schema_skill.md"
   },
@@ -945,6 +951,7 @@
     "description": "Collection of callable tools with auto JSON Schema",
     "layer": "runtime",
     "llm_function": "CALL",
+    "naming": "p04_tk_{{name}}.md + .yaml",
     "pillar": "P04",
     "sdk_module": "cex_sdk.tools.toolkit"
   },
@@ -954,6 +961,7 @@
     "description": "Trace/span configuration for 8F pipeline observability",
     "layer": "runtime",
     "llm_function": "GOVERN",
+    "naming": "p07_tc_{{scope}}.yaml",
     "pillar": "P07",
     "sdk_module": "cex_sdk.tracing.exporter"
   },
@@ -999,6 +1007,7 @@
     "description": "Vector database backend for similarity search",
     "layer": "runtime",
     "llm_function": "INJECT",
+    "naming": "p01_vdb_{{backend}}.yaml",
     "pillar": "P01",
     "sdk_module": "cex_sdk.vectordb"
   },
@@ -1035,6 +1044,7 @@
     "description": "Workflow execution primitive (Step, Parallel, Loop, Condition, Router)",
     "layer": "runtime",
     "llm_function": "PRODUCE",
+    "naming": "p12_wp_{{primitive}}.yaml",
     "pillar": "P12",
     "sdk_module": "cex_sdk.workflow"
   },
@@ -1042,12 +1052,14 @@
     "pillar": "P03",
     "builder": "tagline-builder",
     "domain": "marketing",
-    "description": "Short memorable phrase capturing brand essence — taglines, slogans, headlines"
+    "description": "Short memorable phrase capturing brand essence — taglines, slogans, headlines",
+    "naming": "p03_tl_{{topic}}.md"
   },
   "landing_page": {
     "pillar": "P05",
     "builder": "landing-page-builder",
     "domain": "frontend",
-    "description": "Complete production-ready landing page with 12 sections, responsive, dark mode, SEO"
+    "description": "Complete production-ready landing page with 12 sections, responsive, dark mode, SEO",
+    "naming": "p05_lp_{{name}}.html"
   }
 }
