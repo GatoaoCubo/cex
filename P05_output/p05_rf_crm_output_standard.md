@@ -9,9 +9,10 @@ updated: 2026-04-03
 author: n07_orchestrator
 domain: crm-research
 format_type: json
-quality: null
+quality: 9.1
 tags: [response_format, crm, output, json, quality-first]
 tldr: "Formato padrão de output CRM: JSON (não markdown), fonte obrigatória, completeness calculado, anti-fake."
+density_score: 1.0
 ---
 
 # CRM Output Standard v2 — JSON-First
