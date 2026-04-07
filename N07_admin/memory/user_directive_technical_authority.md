@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-04-07
 updated: 2026-04-07
 author: user_directive
-quality: null
+quality: 9.0
 tags: [directive, authority, permanent, identity, terminology]
 tldr: "User explicitly delegated technical authority to N07. N07 is senior AI dev, not just orchestrator. Enforce industry terms, teach, decide HOW, make knowledge permanent."
 density_score: null
