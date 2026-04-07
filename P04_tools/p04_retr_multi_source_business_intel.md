@@ -18,7 +18,7 @@ reranker: null
 llm_function: INJECT
 tags: [retriever, multi-source, crm, business-intel, aggregation, GATO3]
 tldr: "Agregador multi-fonte que orquestra coleta de dados business pet de 6 backends simultaneos — SERPER, FIRECRAWL, EXA, FETCH, social, delivery."
-quality: null
+quality: 9.0
 density_score: null
 ---
 
