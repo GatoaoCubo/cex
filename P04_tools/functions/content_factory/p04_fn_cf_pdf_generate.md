@@ -56,13 +56,14 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content_factory
-quality: null
+quality: 9.0
 tags: [function_def, pdf, typst, pandoc, generate, content_factory]
 tldr: "LLM-callable function to generate styled PDFs from Markdown/HTML via Typst, Pandoc, or WeasyPrint"
 examples:
   - input: {"input_path": "chapter_04.md", "engine": "typst", "output_path": "output/chapter_04.pdf", "template": "templates/book.typ"}
     output: {"output_path": "output/chapter_04.pdf", "page_count": 12, "file_size_bytes": 245760, "engine_used": "typst"}
 error_types: [input_not_found, template_not_found, engine_not_installed, compilation_error]
+density_score: 0.98
 ---
 
 # PDF Generator Function
