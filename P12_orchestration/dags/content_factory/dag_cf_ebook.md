@@ -62,7 +62,7 @@ edges:
   - from: "quality_check"
     to: "export"
 domain: "orchestration"
-quality: null
+quality: 9.0
 tags: [dag, content-factory, ebook-pipeline, pdf, epub, publishing]
 tldr: "10-node eBook DAG: longform→outline→chapters→parallel(review+illustrations)+cover→typeset→assemble→QA→export"
 execution_order:
@@ -87,6 +87,7 @@ linked_artifacts:
   primary: "P12_orchestration/dags/content_factory/dag_cf_master.md"
   related:
     - "P03_prompts/constraints/content_factory/p03_constraint_cf_ebook.md"
+density_score: 1.0
 ---
 
 ## Nodes
