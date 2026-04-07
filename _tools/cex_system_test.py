@@ -58,7 +58,10 @@ def skip(name: str, reason: str = ""):
 def run_cmd(cmd: list, timeout: int = 30) -> tuple[int, str, str]:
     """Run command, return (returncode, stdout, stderr)."""
     try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+        r = subprocess.run(
+            cmd, capture_output=True, text=True, timeout=timeout,
+            encoding="utf-8", errors="replace",
+        )
         return r.returncode, r.stdout, r.stderr
     except Exception as e:
         return -1, "", str(e)

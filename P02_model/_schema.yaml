@@ -1,11 +1,10 @@
 pillar: P02
 name: Model
-description: QUEM o agente EH
+description: WHO the agent IS
 kinds:
   agent:
-    description: Definicao de agente (persona + capabilities)
-    boundary: Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt
-      (P03, como fala).
+    description: Agent definition (persona + capabilities)
+    boundary: Complete agent definition (persona + capabilities). NOT a skill (P04, executable ability) nor system_prompt (P03, how it speaks).
     layer: spec
     core: true
     machine_format: yaml
@@ -51,8 +50,8 @@ kinds:
       - SYSTEM_INSTRUCTION
     llm_function: BECOME
   lens:
-    description: Perspectiva especializada sobre dominio
-    boundary: Perspectiva especializada sobre dominio. NAO eh agent (sem capabilities) nem mental_model (sem routing rules).
+    description: Specialized perspective on domain
+    boundary: Specialized perspective on domain. NOT an agent (no capabilities) nor mental_model (no routing rules).
     layer: content
     core: false
     machine_format: yaml
@@ -66,9 +65,8 @@ kinds:
     - applies_to
     llm_function: INJECT
   boot_config:
-    description: Configuracao de inicializacao por provider
-    boundary: Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config
-      (P12, satelites).
+    description: Per-provider initialization configuration
+    boundary: Bootstrap per provider (claude, cursor, codex). NOT an env_config (P09, generic variables) nor spawn_config (P12, satellites).
     layer: runtime
     core: false
     machine_format: yaml
@@ -83,8 +81,8 @@ kinds:
     - tools
     llm_function: GOVERN
   mental_model:
-    description: Mapa mental do agente (routing, decisoes)
-    boundary: Identidade fixa do agente com routing e decisoes. NAO eh mental_model P10 (estado variavel por sessao).
+    description: Agent mental map (routing, decisions)
+    boundary: Fixed agent identity with routing and decisions. NOT a runtime_state P10 (variable state per session).
     layer: spec
     core: true
     machine_format: yaml
@@ -98,9 +96,8 @@ kinds:
     - decision_tree
     llm_function: BECOME
   model_card:
-    description: Spec do LLM usado (pricing, context, capabilities)
-    boundary: Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02, quem usa o modelo) nem boot_config (como
-      inicia).
+    description: LLM spec (pricing, context window, capabilities)
+    boundary: LLM spec (pricing, context window, capabilities). NOT an agent (P02, who uses the model) nor boot_config (how it starts).
     layer: spec
     core: false
     machine_format: yaml
@@ -115,8 +112,8 @@ kinds:
     - pricing
     llm_function: GOVERN
   router:
-    description: Regra de roteamento (task > satellite)
-    boundary: Roteamento task-to-satellite. NAO eh dispatch_rule (P12, keyword>satellite) nem fallback_chain (modelo>modelo).
+    description: Routing rule (task > satellite)
+    boundary: Task-to-satellite routing. NOT a dispatch_rule (P12, keyword>satellite) nor fallback_chain (model>model).
     layer: runtime
     core: true
     machine_format: yaml
@@ -129,8 +126,8 @@ kinds:
     - fallback
     llm_function: REASON
   fallback_chain:
-    description: Sequencia de fallback (model A > B > C)
-    boundary: Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing).
+    description: Fallback sequence (model A > B > C)
+    boundary: Fallback sequence between LLM models. NOT a chain (P03, prompt sequence) nor router (task routing).
     layer: runtime
     core: false
     machine_format: yaml
@@ -143,8 +140,8 @@ kinds:
     - timeout_per_step
     llm_function: GOVERN
   agent_package:
-    description: Pacote portable de agente AI (ISO format) â€” self-contained, LLM-agnostic
-    boundary: Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) â€” agent_package eh o bundle portable.
+    description: Portable AI agent package (ISO format) — self-contained, LLM-agnostic
+    boundary: Distributable agent package in ISO format. NOT an agent (agent spec) — agent_package is the portable bundle.
     layer: spec
     core: true
     machine_format: yaml
@@ -189,18 +186,18 @@ kinds:
       upload_kit.md: P04
     llm_function: BECOME
   axiom:
-    boundary: Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel) nem instruction (P03, flexivel).
+    boundary: Immutable fundamental rule. NOT an invariant (P08, adjustable operational) nor instruction (P03, flexible).
     constraints:
       max_bytes: 3072
     core: true
-    description: Principio fundamental imutavel â€” parte da identidade profunda da entidade
+    description: Immutable fundamental principle — part of the entity's deep identity
     layer: governance
     llm_function: BECOME
     machine_format: yaml
     naming: p10_ax_{{rule}}.md
   handoff_protocol:
-    description: Protocolo de transferencia entre agentes
-    boundary: Handoff A2A. NAO eh dispatch_rule.
+    description: Inter-agent transfer protocol
+    boundary: A2A handoff. NOT a dispatch_rule.
     layer: runtime
     core: true
     machine_format: yaml
@@ -215,8 +212,8 @@ kinds:
     - return_contract
     llm_function: COLLABORATE
   memory_scope:
-    description: Config de memoria de agente
-    boundary: Qual memoria usar. NAO eh session_state.
+    description: Agent memory configuration
+    boundary: Which memory to use. NOT session_state.
     layer: runtime
     core: false
     machine_format: yaml

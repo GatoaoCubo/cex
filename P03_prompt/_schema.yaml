@@ -1,14 +1,14 @@
 pillar: P03
 name: Prompt
-description: COMO o agente FALA - 9 tipos de prompt engineering
+description: HOW the agent SPEAKS — 9 types of prompt engineering
 variable_syntax:
   tier1_template: '{{MUSTACHE}}'
   tier2_authoring: '[BRACKET]'
   deprecated: '{single_curly}'
 kinds:
   system_prompt:
-    description: Prompt de sistema que define identidade e regras do agente
-    boundary: Identidade + regras + formato. Lido PRIMEIRO pelo LLM.
+    description: System prompt defining agent identity and rules
+    boundary: Identity + rules + format. Read FIRST by the LLM.
     layer: prompt
     core: true
     machine_format: yaml
@@ -48,8 +48,8 @@ kinds:
     - constraints
     llm_function: BECOME
   prompt_template:
-    description: Molde reusavel com {{vars}} para gerar prompts
-    boundary: Template com variaveis. NAO eh user_prompt (fixo) nem system_prompt (identidade).
+    description: Reusable template with {{vars}} for generating prompts
+    boundary: Template with variables. NOT a user_prompt (fixed) nor system_prompt (identity).
     layer: prompt
     core: true
     machine_format: yaml
@@ -85,8 +85,8 @@ kinds:
     - examples
     llm_function: CONSTRAIN
   chain:
-    description: Sequencia de prompts encadeados (output A -> input B)
-    boundary: Sequencia de PROMPTS. NAO eh workflow (P12, agentes+tools).
+    description: Chained prompt sequence (output A → input B)
+    boundary: Sequence of PROMPTS. NOT a workflow (P12, agents+tools).
     layer: prompt
     core: false
     machine_format: yaml
@@ -119,8 +119,8 @@ kinds:
     - error_handling
     llm_function: PRODUCE
   action_prompt:
-    description: Prompt de tarefa que o humano/orquestrador envia ao agente
-    boundary: Tarefa especifica. O LLM EXECUTA isso.
+    description: Task prompt sent by human/orchestrator to agent
+    boundary: Specific task. The LLM EXECUTES this.
     layer: prompt
     core: true
     machine_format: yaml
@@ -163,8 +163,8 @@ kinds:
     description: Step-by-step execution instructions for agents or pipelines
     naming: ex_instruction_{topic}.md
   constraint_spec:
-    description: Regras de geracao constrained
-    boundary: Governa decoder. NAO eh validation_schema.
+    description: Constrained generation rules
+    boundary: Governs decoder. NOT validation_schema.
     layer: runtime
     core: true
     machine_format: json
@@ -178,8 +178,8 @@ kinds:
     - pattern
     llm_function: CONSTRAIN
   prompt_version:
-    description: Snapshot versionado de prompt
-    boundary: Versao imutavel. NAO eh prompt_template.
+    description: Versioned prompt snapshot
+    boundary: Immutable version. NOT prompt_template.
     layer: runtime
     core: false
     machine_format: yaml
