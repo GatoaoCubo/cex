@@ -6,8 +6,9 @@ nucleus: N05
 sin: Ira Construtiva
 version: 1.0.0
 pillar: P01
-quality: null
+quality: 9.0
 created: 2026-04-07
+density_score: 1.0
 ---
 
 ## Identity
