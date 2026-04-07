@@ -7,7 +7,6 @@ version: 1.0.0
 ---
 # Output Template: Tagline
 Structured tagline deliverable. Fill every field. Recommended tagline goes in frontmatter `title`.
-
 ```markdown
 ---
 id: tagline_{{BRAND_SLUG}}
