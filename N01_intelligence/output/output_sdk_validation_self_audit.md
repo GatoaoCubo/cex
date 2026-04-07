@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-06
 author: n01_intelligence
 domain: research-intelligence
-quality: null
+quality: 9.1
 tags: [sdk-validation, self-audit, n01, fractal, retriever, memory, model]
 density_score: 0.93
 ---
