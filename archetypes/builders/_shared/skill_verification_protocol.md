@@ -8,10 +8,11 @@ updated: 2026-04-05
 author: n07-orchestrator
 title: "Shared Skill: Verification Protocol for All Builders"
 domain: verification
-quality: null
+quality: 8.8
 tags: [shared, skill, verification, adversarial, all-builders]
 source_insight: "OpenClaude verificationAgent.ts -- adapted as shared builder skill"
 tldr: "Every builder can invoke adversarial verification on its output before publishing"
+density_score: 0.86
 ---
 
 # Verification Protocol (Shared Skill)
