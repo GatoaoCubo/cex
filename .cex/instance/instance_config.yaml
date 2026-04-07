@@ -1,0 +1,19 @@
+# Instance config for GATO³
+# CRM and pipeline variables that extend brand_config.yaml
+
+crm:
+  PIPELINE_NAME: "CRM_FULL_HARVEST"
+  TARGET_COUNT: 500
+  
+industry:
+  INDUSTRY: "pet (felino)"
+  INDUSTRY_CATEGORIES: ["pet shop", "veterinaria", "banho e tosa", "hotel felino", "creche felina"]
+
+research:
+  BATCH_SOURCES: ["diretorios", "google_maps", "social", "marketplaces", "reputation", "cnae"]
+  CITIES: ["Sao Caetano do Sul", "Santo Andre", "Sao Bernardo do Campo", "Diadema", "Maua", "Ribeirao Pires", "Rio Grande da Serra"]
+
+map:
+  MAP_CENTER_LAT: -23.6233
+  MAP_CENTER_LNG: -46.5544
+  MAP_ZOOM: 12
