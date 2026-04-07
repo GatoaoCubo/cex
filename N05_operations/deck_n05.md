@@ -5,7 +5,7 @@ title: N05 Deck -- Available Capabilities
 nucleus: N05
 sin: Ira Construtiva
 version: 1.0.0
-pillar: P08
+pillar: P01
 quality: null
 created: 2026-04-07
 ---
@@ -35,7 +35,7 @@ created: 2026-04-07
 | output | 11 | Deploy checklists, env contracts, health endpoints, middleware, Railway configs, SDK audits |
 | prompts | 1 | System prompt for N05 persona and behavior |
 | schemas | 6 | API response, env contract, health check, middleware, Railway TOML, startup sequence |
-| compiled | 20 | YAML compilations of source artifacts |
+| compiled | 19 | YAML compilations of source artifacts |
 | **Total** | **33** | **(source .md files, excluding compiled)** |
 
 ## Kinds I Build
@@ -130,5 +130,5 @@ created: 2026-04-07
 | Kinds I can build | 28 |
 | Tools relevant to my domain | 14 |
 | MCP servers | 2 |
-| Infrastructure KCs (shared library) | 10 |
-| **Total cards** | **107** |
+| Domain KCs (shared library) | 17 |
+| **Total cards** | **113** |

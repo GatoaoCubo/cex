@@ -1,0 +1,443 @@
+id: deck_n03
+kind: context_doc
+title: N03 Deck -- Available Capabilities
+pillar: P01
+nucleus: N03
+sin: Soberba Inventiva
+version: 1.0.0
+quality: null
+created: 2026-04-07
+identity: '| Field | Value |
+
+  |-------|-------|
+
+  | Nucleus | N03 -- Builder Architect |
+
+  | Sin | Soberba Inventiva (Inventive Pride) |
+
+  | CLI | claude (Opus 4.6, 1M context) |
+
+  | Domain | Artifact construction, builders, templates, scaffold, creation |
+
+  | Quality Floor | 9.0 (below = rebuild) |
+
+  | Protocol | 8F mandatory on every task (F1-F8, no exceptions) |
+
+
+  Routing TO N03: build artifacts, create builders, scaffold, templates, ISOs, any artifact construction.
+
+  Routing AWAY: research (N01), marketing copy (N02), deploy/test (N05), knowledge/RAG (N04), pricing (N06).
+
+
+  N03 is the ONLY nucleus that builds. Every other nucleus may produce domain-specific artifacts, but N03 is the primary constructor
+  invoked by N07 for all artifact creation tasks.'
+my_artifacts: '| Subdir | Count | Purpose |
+
+  |--------|------:|---------|
+
+  | agents | 3 | Agent definitions, axioms, mental models for engineering |
+
+  | architecture | 6 | Patterns (construction triad, crew dispatch, consultant model), agent card |
+
+  | config | 1 | Boot config for engineering nucleus |
+
+  | feedback | 3 | Guardrails, quality gates (12LP + engineering) |
+
+  | knowledge | 6 | KCs (construction laws, tooling master), few-shot examples, meta-builder recipe |
+
+  | memory | 1 | Learning record for engineering domain |
+
+  | orchestration | 9 | DAGs, dispatch rules, handoffs, signals, spawn configs, workflows (code review, spec-to-code) |
+
+  | output | 6 | Response formats, competitive/monetization architecture, README template, self-review |
+
+  | prompts | 3 | Chains, prompt templates, system prompts for engineering |
+
+  | quality | 3 | Benchmarks, scoring rubrics (5D + engineering) |
+
+  | schemas | 2 | Input schemas, interface definitions |
+
+  | tools | 2 | Function definitions, software project tool |
+
+  | compiled | 44 | YAML-compiled versions of all above |
+
+  | TOTAL | 45 | (excluding compiled) |'
+kinds_i_build: N03 can build ALL 117 kinds in the CEX registry. Below are the kinds grouped by pillar.
+p01_knowledge_10_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | chunk_strategy | p01_chunk_{{strategy}}.md |
+
+  | context_doc | p01_ctx_{{topic}}.md + .yaml |
+
+  | embedder_provider | p01_ep_{{provider}}.yaml |
+
+  | embedding_config | p01_emb_{{model}}.yaml |
+
+  | few_shot_example | p01_fse_{{topic}}.md + .yaml |
+
+  | glossary_entry | p01_gl_{{term}}.md + .yaml |
+
+  | knowledge_card | p01_kc_{{topic}}.md + .yaml |
+
+  | rag_source | p01_rs_{{source}}.md + .yaml |
+
+  | retriever_config | p01_retr_cfg_{{store}}.md |
+
+  | vectordb_backend | p01_vdb_{{backend}}.yaml |'
+p02_model_12_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | agent | p02_agent_{{name}}.md + .yaml |
+
+  | agent_package | agents/{{agent_name}}/manifest.yaml |
+
+  | axiom | p02_ax_{{rule}}.md |
+
+  | boot_config | p02_boot_{{provider}}.md |
+
+  | fallback_chain | p02_fb_{{chain}}.yaml |
+
+  | handoff_protocol | p02_handoff_{{protocol}}.md |
+
+  | lens | p02_lens_{{perspective}}.md + .yaml |
+
+  | memory_scope | p02_memscope_{{agent}}.md |
+
+  | mental_model | p02_mm_{{agent}}.yaml |
+
+  | model_card | p02_mc_{{model}}.md + .yaml |
+
+  | model_provider | p02_mp_{{provider}}.yaml |
+
+  | router | p02_rt_{{scope}}.yaml |'
+p03_prompt_9_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | action_prompt | p03_up_{{task}}.md |
+
+  | chain | p03_ch_{{pipeline}}.md |
+
+  | constraint_spec | p03_constraint_{{scope}}.md |
+
+  | instruction | ex_instruction_{topic}.md |
+
+  | prompt_template | p03_pt_{{topic}}.md |
+
+  | prompt_version | p03_pv_{{version}}.md |
+
+  | reasoning_trace | p03_rt_{{topic}}.md |
+
+  | system_prompt | p03_sp_{{agent}}.md |
+
+  | tagline | p03_tl_{{topic}}.md |'
+p04_tools_24_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | api_client | p04_api_{{service}}.md + .yaml |
+
+  | audio_tool | p04_audio_{{capability}}.md + .yaml |
+
+  | browser_tool | p04_browser_{{target}}.md + .yaml |
+
+  | cli_tool | p04_cli_{{tool}}.md |
+
+  | code_executor | p04_exec_{{runtime}}.md + .yaml |
+
+  | computer_use | p04_cu_{{target}}.md + .yaml |
+
+  | content_monetization | p04_cm_{{name}}.md |
+
+  | daemon | p04_daemon_{{name}}.md + .yaml |
+
+  | db_connector | p04_db_{{source}}.md + .yaml |
+
+  | document_loader | p04_loader_{{format}}.md + .yaml |
+
+  | function_def | p04_fn_{{name}}.md + .json |
+
+  | hook | p04_hook_{{name}}.md |
+
+  | hook_config | p04_hook_config_{{topic}}.md + .yaml |
+
+  | mcp_server | p04_mcp_{{server}}.md + .yaml |
+
+  | notifier | p04_notify_{{channel}}.md + .yaml |
+
+  | plugin | p04_plug_{{name}}.md + .yaml |
+
+  | research_pipeline | p04_rp_{{name}}.md |
+
+  | retriever | p04_retr_{{store}}.md + .yaml |
+
+  | search_tool | p04_search_{{provider}}.md + .yaml |
+
+  | skill | p04_skill_{{name}}.md |
+
+  | social_publisher | p04_sp_{{name}}.md |
+
+  | toolkit | p04_tk_{{name}}.md + .yaml |
+
+  | vision_tool | p04_vision_{{capability}}.md + .yaml |
+
+  | webhook | p04_webhook_{{event}}.md + .json |'
+p05_output_5_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | formatter | p05_fmt_{{format}}.md |
+
+  | landing_page | p05_lp_{{name}}.html |
+
+  | output_validator | p05_oval_{{target}}.md |
+
+  | parser | p05_parser_{{target}}.md + .yaml |
+
+  | response_format | p05_rf_{{format}}.yaml |'
+p06_schema_6_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | enum_def | p06_enum_{{name}}.md |
+
+  | input_schema | p06_is_{{scope}}.yaml |
+
+  | interface | p06_iface_{{contract}}.yaml |
+
+  | type_def | p06_td_{{type}}.yaml |
+
+  | validation_schema | p06_vs_{{scope}}.yaml |
+
+  | validator | p06_val_{{rule}}.yaml |'
+p07_evals_11_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | benchmark | p07_bm_{{metric}}.md + .yaml |
+
+  | e2e_eval | p07_e2e_{{pipeline}}.md + .yaml |
+
+  | eval_dataset | p07_dataset_{{name}}.md |
+
+  | golden_test | p07_gt_{{case}}.md + .yaml |
+
+  | llm_judge | p07_judge_{{name}}.md |
+
+  | red_team_eval | p07_redteam_{{target}}.md |
+
+  | regression_check | p07_regcheck_{{target}}.md |
+
+  | scoring_rubric | p07_sr_{{framework}}.md + .yaml |
+
+  | smoke_eval | p07_se_{{scope}}.md |
+
+  | trace_config | p07_tc_{{scope}}.yaml |
+
+  | unit_eval | p07_ue_{{target}}.md + .yaml |'
+p08_architecture_8_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | agent_card | p08_ac_{{agent_name}}.yaml |
+
+  | component_map | p08_cmap_{{scope}}.yaml |
+
+  | decision_record | p08_adr_{{decision}}.md |
+
+  | diagram | p08_diag_{{scope}}.md |
+
+  | director | ex_director_{{topic}}.md |
+
+  | law | p08_law_{{number}}.md |
+
+  | naming_rule | p08_nr_{{scope}}.md |
+
+  | pattern | p08_pat_{{name}}.md + .yaml |'
+p09_config_8_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | effort_profile | p09_effort_profile_{{topic}}.md + .yaml |
+
+  | env_config | p09_env_{{scope}}.yaml |
+
+  | feature_flag | p09_ff_{{feature}}.yaml |
+
+  | path_config | p09_path_{{scope}}.yaml |
+
+  | permission | p09_perm_{{scope}}.yaml |
+
+  | rate_limit_config | p09_ratelimit_{{scope}}.md |
+
+  | runtime_rule | p09_rr_{{rule}}.yaml |
+
+  | secret_config | p09_secret_{{scope}}.md |'
+p10_memory_9_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | brain_index | p10_bi_{{index}}.yaml |
+
+  | compression_config | p10_cc_{{scope}}.yaml |
+
+  | entity_memory | p10_entity_{{name}}.md |
+
+  | learning_record | p10_lr_{{topic}}.md + .yaml |
+
+  | memory_summary | p10_summary_{{scope}}.md |
+
+  | memory_type | p10_mt_{{type_name}}.yaml |
+
+  | runtime_state | p10_rs_{{agent}}.yaml |
+
+  | session_backend | p10_sb_{{backend}}.yaml |
+
+  | session_state | p10_ss_{{session}}.yaml |'
+p11_governance_6_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | bugloop | p11_bl_{{scope}}.md + .yaml |
+
+  | guardrail | p11_gr_{{scope}}.yaml |
+
+  | lifecycle_rule | p11_lc_{{rule}}.yaml |
+
+  | optimizer | p11_opt_{{target}}.md + .yaml |
+
+  | quality_gate | p11_qg_{{gate}}.yaml |
+
+  | reward_signal | p11_reward_{{metric}}.md |'
+p12_orchestration_9_kinds: '| Kind | Naming Pattern |
+
+  |------|---------------|
+
+  | checkpoint | p12_ckpt_{{name}}.md |
+
+  | dag | p12_dag_{{pipeline}}.yaml |
+
+  | dispatch_rule | p12_dr_{{scope}}.yaml |
+
+  | handoff | p12_ho_{{task}}.md |
+
+  | schedule | p12_sched_{{name}}.md |
+
+  | signal | p12_sig_{{event}}.json |
+
+  | spawn_config | p12_spawn_{{mode}}.yaml |
+
+  | workflow | p12_wf_{{name}}.md + .yaml |
+
+  | workflow_primitive | p12_wp_{{primitive}}.yaml |
+
+
+  Total: 117 kinds across 12 pillars. 119 builder archetypes (excluding _shared and _builder-builder meta).'
+tools_i_use: '| Tool | Purpose |
+
+  |------|---------|
+
+  | `cex_compile.py` | Compile .md artifacts to .yaml (mandatory F8) |
+
+  | `cex_8f_runner.py` | Execute full 8F pipeline with --kind and --nucleus flags |
+
+  | `cex_8f_motor.py` | Intent parser + classifier + fan-out + plan |
+
+  | `cex_crew_runner.py` | Prompt composer: ISOs + memory + context into LLM prompt |
+
+  | `cex_query.py` | TF-IDF builder discovery -- find the right builder for intent |
+
+  | `cex_doctor.py` | Builder health check (validate all 118 builders pass) |
+
+  | `cex_score.py` | Peer review scoring with --apply |
+
+  | `cex_hooks.py` | Pre/post validation + git hook enforcement |
+
+  | `cex_retriever.py` | TF-IDF artifact similarity (2184 docs, 12K vocab) |
+
+  | `cex_skill_loader.py` | Load 13 ISOs per kind + shared skills + conditionals |
+
+  | `cex_prompt_layers.py` | Load 15+ pillar artifacts into prompts |
+
+  | `cex_schema_hydrate.py` | Hydrate ISOs with universal patterns |
+
+  | `cex_materialize.py` | Builder ISOs to sub-agent definitions |
+
+  | `cex_token_budget.py` | Token counting + budget allocation |
+
+  | `cex_memory_select.py` | Inject relevant memories (keyword + LLM) |
+
+  | `cex_sanitize.py` | ASCII-only enforcement for code files |
+
+  | `cex_evolve.py` | AutoResearch loop for artifact improvement |
+
+  | `cex_index.py` | Index artifacts for discovery |
+
+  | `signal_writer.py` | Send completion signals to N07 |'
+mcp_servers: '| Server | Package | Purpose |
+
+  |--------|---------|---------|
+
+  | GitHub | `@anthropic/mcp-server-github` | Repository operations: PRs, issues, code search, file operations |
+
+  | Fetch | `@anthropic/mcp-server-fetch` | HTTP fetch for external resources, APIs, documentation |
+
+  | Canva | `@mcp_factory/canva-mcp-server` | Design asset creation and management via Canva API |
+
+
+  Config file: `.mcp-n03.json`'
+my_strengths:
+- 'Universal Builder: Can construct any of the 117 artifact kinds via 8F pipeline. No other nucleus has this breadth.'
+- 'Pattern Mastery: 6 architecture patterns (construction triad, crew dispatch, consultant model, 3-phase build) codify how
+  to build anything.'
+- 'Quality Infrastructure: 3 quality artifacts (5D scoring rubric, 12LP gate, engineering benchmark) ensure every output meets
+  the 9.0 floor.'
+- 'Workflow Coverage: 9 orchestration artifacts enable spec-to-code, code review, and dispatch workflows end-to-end.'
+- 'Self-Documenting: 6 knowledge artifacts (construction laws, tooling master, meta-builder recipe) capture N03''s own methodology.'
+- 'Full Toolchain: 19 tools from intent parsing to compilation to signaling -- complete build lifecycle.'
+- '121 Sub-Agents: Every kind has a dedicated builder agent definition in `.claude/agents/`, each loading 13 ISOs.'
+- 'External Reach: GitHub MCP for repo operations, Fetch for documentation, Canva for design assets.'
+my_gaps: '| Subdir | Issue |
+
+  |--------|-------|
+
+  | memory | Only 1 artifact (learning_record). No correction memory, no preference tracking. |
+
+  | config | Only 1 artifact (boot_config). Missing env configs, path configs, feature flags for engineering. |
+
+  | schemas | Only 2 artifacts. Missing validation schemas for common build patterns. |
+
+  | tools | Only 2 artifacts. Function defs for engineering tooling are underbuilt. |
+
+  | compiled | 44 of 45 artifacts compiled -- 1 may be missing (deck_n03 itself, pending compilation). |
+
+
+  Thin areas: Memory and config subdirectories are underpopulated relative to the depth of knowledge and orchestration subdirs.'
+cards_in_my_deck: '| Category | Count |
+
+  |----------|------:|
+
+  | N03 artifacts (in N03_engineering/) | 45 |
+
+  | Kinds I can build | 117 |
+
+  | Builder sub-agents | 121 |
+
+  | Tools in my toolchain | 19 |
+
+  | MCP servers | 3 |
+
+  | Architecture patterns | 6 |
+
+  | Quality gates | 3 |
+
+  | Workflows | 3 |
+
+  | TOTAL CARDS | 317 |
+
+
+  N03 is the most capable nucleus in the CEX system by construction count. Every artifact in every pillar flows through this
+  nucleus. The 8F pipeline is my spine, the 121 builders are my hands, and the quality gates are my conscience.'
