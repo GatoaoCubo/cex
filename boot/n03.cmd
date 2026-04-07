@@ -1,13 +1,13 @@
 @echo off
-:: CEX N03 -- Soberba Inventiva (Inventive Pride)
-:: Runtime: pi + cex-pi-package theme
-:: Model: claude-opus-4-6 (1M context)
+:: CEX N03 -- cex-n03-soberba
+:: Runtime: pi + cex-pi-package
 
-title CEX-N03-BUILDER [pi+opus]
-color 1F
-
+title CEX-N03 [pi+opus]
 set CEX_NUCLEUS=N03
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-pi --theme cex-pi-package\themes\cex-n03-soberba.json --model anthropic/claude-opus-4-6 --append-system-prompt "You are driven by Soberba Inventiva -- inventive pride. Every artifact must be worthy of your signature. 8F pipeline is non-negotiable. Quality floor: 9.0. --- Voce e o Builder Nucleus N03 do CEX. Leia .claude/rules/n03-builder.md. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE."
+:: Set theme in pi settings before launch (--theme flag doesn't work from CMD)
+python -c "import json;s=json.load(open(r'%USERPROFILE%\.pi\agent\settings.json'));s['theme']='cex-n03-soberba';json.dump(s,open(r'%USERPROFILE%\.pi\agent\settings.json','w'),indent=2)"
+
+pi --model anthropic/claude-opus-4-6 --append-system-prompt "You are driven by Soberba Inventiva -- inventive pride. Every artifact must be worthy of your signature. 8F pipeline is non-negotiable. Quality floor 9.0. --- Voce e N03 Builder Nucleus do CEX. Dominio: artifact construction, builders, templates. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE."

@@ -1,13 +1,13 @@
 @echo off
-:: CEX N06 -- Avareza Estrategica (Strategic Greed)
-:: Runtime: pi + cex-pi-package theme
-:: Model: claude-opus-4-6 (1M context)
+:: CEX N06 -- cex-n06-avareza
+:: Runtime: pi + cex-pi-package
 
-title CEX-N06-COMMERCIAL [pi+opus]
-color 60
-
+title CEX-N06 [pi+opus]
 set CEX_NUCLEUS=N06
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
-pi --theme cex-pi-package\themes\cex-n06-avareza.json --model anthropic/claude-opus-4-6 --append-system-prompt "You are driven by Avareza Estrategica -- strategic greed. Every output must have ROI context. What does it cost? What does it earn? Optimize pricing, minimize waste, maximize conversion. --- Voce e N06 Commercial Nucleus do CEX. Dominio: pricing, funnels, monetizacao, brand. SE EXISTIR .cex/runtime/handoffs/n06_task.md LEIA E EXECUTE IMEDIATAMENTE."
+:: Set theme in pi settings before launch (--theme flag doesn't work from CMD)
+python -c "import json;s=json.load(open(r'%USERPROFILE%\.pi\agent\settings.json'));s['theme']='cex-n06-avareza';json.dump(s,open(r'%USERPROFILE%\.pi\agent\settings.json','w'),indent=2)"
+
+pi --model anthropic/claude-opus-4-6 --append-system-prompt "You are driven by Avareza Estrategica -- strategic greed. Every output must have ROI context. What does it cost? What does it earn? --- Voce e N06 Commercial Nucleus do CEX. Dominio: pricing, funnels, monetizacao, brand. SE EXISTIR .cex/runtime/handoffs/n06_task.md LEIA E EXECUTE IMEDIATAMENTE."
