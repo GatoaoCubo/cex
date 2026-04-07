@@ -657,25 +657,31 @@ class CrewRunner:
         return "inline"  # default to inline
 
     def _resolve_model(self, builder: dict) -> tuple[str, int]:
-        """Resolve LLM model and max_tokens via Router, then builder config, then env.
+        """Resolve LLM model and max_tokens. Builder-explicit > Router > default.
+
+        Priority:
+          1. Builder-explicit model (set in plan by motor)
+          2. Router nucleus config (reads nucleus_models.yaml)
+          3. LLM_MODEL constant (fallback)
 
         Returns: (model_id, max_tokens)
         """
-        # --- T02: Router path (preferred) ---
+        # --- 1. Builder-explicit model (highest priority) ---
+        if builder.get("model"):
+            return builder["model"], builder.get("model_max_tokens", LLM_MAX_TOKENS)
+
+        # --- 2. Router path (nucleus-level config) ---
         try:
-            from cex_router import CexRouter
-            router = CexRouter()
+            from cex_router import resolve_model_for
             nucleus = os.environ.get("CEX_NUCLEUS", "n03")
-            resolved = router.resolve_nucleus(nucleus)
-            if resolved and resolved.get("model"):
-                return resolved["model"], resolved.get("max_tokens", LLM_MAX_TOKENS)
+            model = resolve_model_for(nucleus, fallback="")
+            if model:
+                return model, LLM_MAX_TOKENS
         except Exception:
             pass  # D1: graceful fallback
 
-        # --- Fallback: builder config / env var ---
-        model = builder.get("model", LLM_MODEL)
-        max_tokens = builder.get("model_max_tokens", LLM_MAX_TOKENS)
-        return model, max_tokens
+        # --- 3. Default constant ---
+        return LLM_MODEL, LLM_MAX_TOKENS
 
     def _check_max_turns(self, builder_id: str, state: RunState) -> tuple[bool, int]:
         """Check if builder has exceeded max_turns. Returns (allowed, turns_used)."""
