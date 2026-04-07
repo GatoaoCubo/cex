@@ -3,7 +3,8 @@ id: ctx_cex_new_dev_guide
 kind: context_doc
 title: CEX Project Guide for New Developers
 version: 0.1.0
-quality: null
+quality: 9.0
+density_score: 1.0
 ---
 
 ## What is CEX?
