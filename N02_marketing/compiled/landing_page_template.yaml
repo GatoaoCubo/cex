@@ -1,330 +1,254 @@
-id: p09_lpt_landing_page_template
-kind: output_validator
-pillar: P09
-title: Landing Page Template — Production Ready
+id: landing_page_template
+kind: prompt_template
+pillar: P05
+title: Landing Page Templates — High-Converting Page Architectures
 version: 1.0.0
-created: 2026-04-01
-author: n02_visual_frontend_marketing
-template_type: landing_page
-output_format: html_with_integrated_copy
-copy_formulas:
-- AIDA
-- PAS
-- BAB
-layout_patterns:
-- f_pattern
-- z_pattern
-sections:
-- hero
-- features
-- testimonials
-- pricing
-- faq
-- cta
-responsive: mobile_first
-accessibility: wcag_aa
-performance: lighthouse_90_plus
-domain: visual_frontend_engineering_and_copywriting
-quality: 8.8
+created: 2026-04-07
+author: n02_marketing
+domain: landing_pages
+quality: null
 tags:
-- output_template
-- landing_page
-- dual_mode
-- html
-- tailwind
-- copy_integration
+- template
+- landing-page
+- conversion
+- funnel
+- CTA
 - N02
-tldr: Complete landing page template with integrated copy — hero to CTA sections, responsive design, WCAG AA, persuasion formulas
-  in visual hierarchy.
-density_score: 0.96
-purpose: Complete template for generating conversion-focused landing pages that integrate persuasive copy with visual hierarchy.
-  Follows F/Z-pattern layout supporting PAS/AIDA copy formulas.
-template_structure: ''
-complete_landing_page_template: "---\ncomponent: landing_page_conversion\nresponsive: true\na11y_compliant: true\ndark_mode:\
-  \ true\nlighthouse_target: 90\npage_type: landing_page\ncopy_formula: PAS\nlayout_pattern: f_pattern\nbreakpoints: [sm,\
-  \ md, lg, xl, 2xl]\ncolor_scheme: codexa\n---\n\n<!DOCTYPE html>\n<html lang=\"en\" class=\"h-full scroll-smooth\">\n  <head>\n\
-  \    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    \n  \
-  \  <!-- SEO Meta -->\n    <title>{{product_name}} — {{key_benefit}}</title>\n    <meta name=\"description\" content=\"{{seo_description}}\"\
-  >\n    <meta property=\"og:title\" content=\"{{product_name}} — {{key_benefit}}\">\n    <meta property=\"og:description\"\
-  \ content=\"{{seo_description}}\">\n    <meta property=\"og:type\" content=\"website\">\n    <meta name=\"robots\" content=\"\
-  index, follow\">\n    \n    <!-- Fonts -->\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n    <link\
-  \ rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap\"\
-  \ rel=\"stylesheet\">\n    \n    <!-- Tailwind CSS -->\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <script>\n\
-  \      tailwind.config = {\n        theme: {\n          extend: {\n            colors: {\n              primary: {\n   \
-  \             DEFAULT: '#50C878',\n                foreground: '#ffffff',\n                hover: '#16a34a',\n         \
-  \     },\n              background: '#ffffff',\n              foreground: '#111827',\n              muted: {\n         \
-  \       DEFAULT: '#f3f4f6',\n                foreground: '#6b7280',\n              },\n              accent: {\n       \
-  \         DEFAULT: '#50C878',\n                foreground: '#ffffff',\n              },\n              border: '#e5e7eb',\n\
-  \            },\n            fontFamily: {\n              sans: ['Inter', 'system-ui', 'sans-serif'],\n            },\n\
-  \          }\n        },\n        darkMode: 'class',\n      }\n    </script>\n  </head>\n  \n  <body class=\"min-h-screen\
-  \ bg-background text-foreground font-sans antialiased\">\n    \n    <!-- Navigation -->\n    <nav class=\"border-b border-border\
-  \ bg-background/95 backdrop-blur sticky top-0 z-50\">\n      <div class=\"container mx-auto px-4 sm:px-6 lg:px-8\">\n  \
-  \      <div class=\"flex h-16 items-center justify-between\">\n          <!-- Logo -->\n          <div class=\"flex items-center\"\
-  >\n            <a href=\"#\" class=\"text-xl font-bold text-foreground\">\n              {{product_name}}\n            </a>\n\
-  \          </div>\n          \n          <!-- Navigation Links -->\n          <div class=\"hidden md:block\">\n        \
-  \    <div class=\"ml-10 flex items-baseline space-x-4\">\n              <a href=\"#features\" class=\"text-muted-foreground\
-  \ hover:text-foreground px-3 py-2 text-sm font-medium transition-colors\">\n                Features\n              </a>\n\
-  \              <a href=\"#pricing\" class=\"text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors\"\
-  >\n                Pricing\n              </a>\n              <a href=\"#testimonials\" class=\"text-muted-foreground hover:text-foreground\
-  \ px-3 py-2 text-sm font-medium transition-colors\">\n                Reviews\n              </a>\n            </div>\n\
-  \          </div>\n          \n          <!-- CTA Button -->\n          <div class=\"flex items-center space-x-4\">\n  \
-  \          <button class=\"bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2\
-  \ px-4 py-2 rounded-md text-sm font-medium transition-colors\">\n              {{nav_cta_text}}\n            </button>\n\
-  \          </div>\n        </div>\n      </div>\n    </nav>\n\n    <main>\n      <!-- Hero Section — PROBLEM (PAS Formula)\
-  \ -->\n      <section class=\"py-16 sm:py-24 lg:py-32\">\n        <div class=\"container mx-auto px-4 sm:px-6 lg:px-8\"\
-  >\n          <div class=\"grid gap-8 lg:grid-cols-2 lg:gap-16 items-center\">\n            \n            <!-- Content Column\
-  \ (F-pattern: starts top-left) -->\n            <div class=\"space-y-6 lg:space-y-8\">\n              <!-- PROBLEM: Main\
-  \ headline -->\n              <h1 class=\"text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl\">\n\
-  \                {{hero_headline_v1}}\n                <span class=\"text-primary\">{{hero_headline_emphasis}}</span>\n\
-  \              </h1>\n              \n              <!-- AGITATE: Subheadline -->\n              <p class=\"text-xl text-muted-foreground\
-  \ sm:text-2xl leading-relaxed\">\n                {{hero_subheadline_agitate}}\n              </p>\n              \n   \
-  \           <!-- Social Proof Hook -->\n              <p class=\"text-sm text-muted-foreground font-medium\">\n        \
-  \        ✓ {{social_proof_stat}} ({{social_proof_qualifier}})\n              </p>\n              \n              <!-- Primary\
-  \ CTA (F-pattern: left side focal point) -->\n              <div class=\"flex flex-col gap-4 sm:flex-row\">\n          \
-  \      <button class=\"bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2\
-  \ px-8 py-4 rounded-lg text-lg font-semibold transition-colors shadow-lg\">\n                  {{primary_cta_text}}\n  \
-  \              </button>\n                \n                <button class=\"border border-border hover:bg-muted hover:text-muted-foreground\
-  \ focus:ring-2 focus:ring-ring focus:ring-offset-2 px-8 py-4 rounded-lg text-lg font-medium transition-colors\">\n     \
-  \             {{secondary_cta_text}}\n                </button>\n              </div>\n              \n              <!--\
-  \ Trust Indicators -->\n              <div class=\"flex items-center space-x-6 text-sm text-muted-foreground\">\n      \
-  \          <div class=\"flex items-center space-x-2\">\n                  <svg class=\"w-4 h-4 text-green-500\" fill=\"\
-  currentColor\" viewBox=\"0 0 20 20\">\n                    <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8\
-  \ 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n  \
-  \                </svg>\n                  <span>{{trust_indicator_1}}</span>\n                </div>\n                <div\
-  \ class=\"flex items-center space-x-2\">\n                  <svg class=\"w-4 h-4 text-green-500\" fill=\"currentColor\"\
-  \ viewBox=\"0 0 20 20\">\n                    <path fill-rule=\"evenodd\" d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414\
-  \ 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\" clip-rule=\"evenodd\"></path>\n                  </svg>\n\
-  \                  <span>{{trust_indicator_2}}</span>\n                </div>\n              </div>\n            </div>\n\
-  \            \n            <!-- Visual Column (F-pattern: right side support) -->\n            <div class=\"lg:order-last\"\
-  >\n              <div class=\"aspect-video rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-border\
-  \ flex items-center justify-center\">\n                <!-- Hero Image/Video Placeholder -->\n                <div class=\"\
-  text-center p-8\">\n                  <div class=\"w-16 h-16 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center\"\
-  >\n                    <svg class=\"w-8 h-8 text-primary\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n\
-  \                      <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M14.828 14.828a4\
-  \ 4 0 01-5.656 0M9 10h1.5a1.5 1.5 0 001.5-1.5V7a1.5 1.5 0 00-1.5-1.5H9m12 0H9\"></path>\n                    </svg>\n  \
-  \                </div>\n                  <p class=\"text-muted-foreground text-sm\">{{visual_placeholder_text}}</p>\n\
-  \                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </section>\n\n\
-  \      <!-- Features Section — SOLUTION (PAS Formula) -->\n      <section id=\"features\" class=\"py-16 bg-muted\">\n  \
-  \      <div class=\"container mx-auto px-4 sm:px-6 lg:px-8\">\n          \n          <!-- Section Header -->\n         \
-  \ <div class=\"text-center mb-16\">\n            <h2 class=\"text-3xl font-bold text-foreground sm:text-4xl mb-4\">\n  \
-  \            {{features_headline}}\n            </h2>\n            <p class=\"text-xl text-muted-foreground max-w-2xl mx-auto\"\
-  >\n              {{features_subheadline}}\n            </p>\n          </div>\n          \n          <!-- Features Grid\
-  \ -->\n          <div class=\"grid gap-8 md:grid-cols-2 lg:grid-cols-3\">\n            \n            <!-- Feature 1 -->\n\
-  \            <div class=\"bg-background rounded-xl p-6 border border-border shadow-sm\">\n              <div class=\"w-12\
-  \ h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4\">\n                <svg class=\"w-6 h-6 text-primary\"\
-  \ fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n                  <path stroke-linecap=\"round\" stroke-linejoin=\"\
-  round\" stroke-width=\"2\" d=\"M13 10V3L4 14h7v7l9-11h-7z\"></path>\n                </svg>\n              </div>\n    \
-  \          <h3 class=\"text-lg font-semibold text-foreground mb-2\">\n                {{feature_1_title}}\n            \
-  \  </h3>\n              <p class=\"text-muted-foreground\">\n                {{feature_1_description}}\n              </p>\n\
-  \            </div>\n            \n            <!-- Feature 2 -->\n            <div class=\"bg-background rounded-xl p-6\
-  \ border border-border shadow-sm\">\n              <div class=\"w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center\
-  \ mb-4\">\n                <svg class=\"w-6 h-6 text-primary\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"\
-  >\n                  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 12l2 2 4-4m6 2a9\
-  \ 9 0 11-18 0 9 9 0 0118 0z\"></path>\n                </svg>\n              </div>\n              <h3 class=\"text-lg font-semibold\
-  \ text-foreground mb-2\">\n                {{feature_2_title}}\n              </h3>\n              <p class=\"text-muted-foreground\"\
-  >\n                {{feature_2_description}}\n              </p>\n            </div>\n            \n            <!-- Feature\
-  \ 3 -->\n            <div class=\"bg-background rounded-xl p-6 border border-border shadow-sm md:col-span-2 lg:col-span-1\"\
-  >\n              <div class=\"w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4\">\n            \
-  \    <svg class=\"w-6 h-6 text-primary\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n                \
-  \  <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4\
-  \ 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z\"></path>\n                </svg>\n              </div>\n              <h3 class=\"\
-  text-lg font-semibold text-foreground mb-2\">\n                {{feature_3_title}}\n              </h3>\n              <p\
-  \ class=\"text-muted-foreground\">\n                {{feature_3_description}}\n              </p>\n            </div>\n\
-  \          </div>\n        </div>\n      </section>\n\n      <!-- Testimonials Section — Social Proof -->\n      <section\
-  \ id=\"testimonials\" class=\"py-16\">\n        <div class=\"container mx-auto px-4 sm:px-6 lg:px-8\">\n          \n   \
-  \       <!-- Section Header -->\n          <div class=\"text-center mb-16\">\n            <h2 class=\"text-3xl font-bold\
-  \ text-foreground sm:text-4xl mb-4\">\n              {{testimonials_headline}}\n            </h2>\n            <p class=\"\
-  text-xl text-muted-foreground\">\n              {{testimonials_subheadline}}\n            </p>\n          </div>\n     \
-  \     \n          <!-- Testimonials Grid -->\n          <div class=\"grid gap-8 md:grid-cols-2 lg:grid-cols-3\">\n     \
-  \       \n            <!-- Testimonial 1 -->\n            <div class=\"bg-muted rounded-xl p-6 border border-border\">\n\
-  \              <div class=\"flex items-center mb-4\">\n                <div class=\"flex text-yellow-400\">\n          \
-  \        <svg class=\"w-4 h-4\" fill=\"currentColor\" viewBox=\"0 0 20 20\">\n                    <path d=\"M9.049 2.927c.3-.921\
-  \ 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755\
-  \ 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98\
-  \ 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>\n                  </svg>\n            \
-  \      <svg class=\"w-4 h-4\" fill=\"currentColor\" viewBox=\"0 0 20 20\">\n                    <path d=\"M9.049 2.927c.3-.921\
-  \ 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755\
-  \ 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98\
-  \ 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>\n                  </svg>\n            \
-  \      <svg class=\"w-4 h-4\" fill=\"currentColor\" viewBox=\"0 0 20 20\">\n                    <path d=\"M9.049 2.927c.3-.921\
-  \ 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755\
-  \ 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98\
-  \ 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>\n                  </svg>\n            \
-  \      <svg class=\"w-4 h-4\" fill=\"currentColor\" viewBox=\"0 0 20 20\">\n                    <path d=\"M9.049 2.927c.3-.921\
-  \ 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755\
-  \ 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98\
-  \ 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>\n                  </svg>\n            \
-  \      <svg class=\"w-4 h-4\" fill=\"currentColor\" viewBox=\"0 0 20 20\">\n                    <path d=\"M9.049 2.927c.3-.921\
-  \ 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755\
-  \ 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98\
-  \ 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>\n                  </svg>\n            \
-  \    </div>\n              </div>\n              <p class=\"text-foreground mb-4\">\n                \"{{testimonial_1_quote}}\"\
-  \n              </p>\n              <div class=\"flex items-center\">\n                <div class=\"w-10 h-10 bg-gray-200\
-  \ rounded-full mr-3\"></div>\n                <div>\n                  <p class=\"font-medium text-foreground\">{{testimonial_1_name}}</p>\n\
-  \                  <p class=\"text-sm text-muted-foreground\">{{testimonial_1_title}}</p>\n                </div>\n    \
-  \          </div>\n            </div>\n            \n            <!-- Additional testimonials follow same pattern -->\n\
-  \            <!-- ... -->\n          </div>\n        </div>\n      </section>\n\n      <!-- Final CTA Section — ACTION (PAS\
-  \ Formula) -->\n      <section class=\"py-16 bg-primary text-primary-foreground\">\n        <div class=\"container mx-auto\
-  \ px-4 sm:px-6 lg:px-8\">\n          <div class=\"text-center max-w-3xl mx-auto\">\n            <h2 class=\"text-3xl font-bold\
-  \ sm:text-4xl mb-4\">\n              {{final_cta_headline}}\n            </h2>\n            <p class=\"text-xl mb-8 text-primary-foreground/90\"\
-  >\n              {{final_cta_subheadline}}\n            </p>\n            \n            <!-- Large CTA Button -->\n    \
-  \        <div class=\"space-y-4\">\n              <button class=\"bg-white text-primary hover:bg-gray-100 focus:ring-2 focus:ring-white\
-  \ focus:ring-offset-2 focus:ring-offset-primary px-8 py-4 rounded-lg text-xl font-semibold transition-colors shadow-lg\"\
-  >\n                {{final_cta_button_text}}\n              </button>\n              \n              <p class=\"text-sm\
-  \ text-primary-foreground/75\">\n                {{final_cta_disclaimer}}\n              </p>\n            </div>\n    \
-  \      </div>\n        </div>\n      </section>\n    </main>\n\n    <!-- Footer -->\n    <footer class=\"bg-muted border-t\
-  \ border-border\">\n      <div class=\"container mx-auto px-4 sm:px-6 lg:px-8 py-12\">\n        <div class=\"grid gap-8\
-  \ md:grid-cols-2 lg:grid-cols-4\">\n          <div>\n            <h3 class=\"font-semibold text-foreground mb-4\">{{product_name}}</h3>\n\
-  \            <p class=\"text-muted-foreground text-sm\">\n              {{footer_description}}\n            </p>\n     \
-  \     </div>\n          <div>\n            <h4 class=\"font-medium text-foreground mb-4\">Product</h4>\n            <ul\
-  \ class=\"space-y-2 text-sm text-muted-foreground\">\n              <li><a href=\"#\" class=\"hover:text-foreground transition-colors\"\
-  >Features</a></li>\n              <li><a href=\"#\" class=\"hover:text-foreground transition-colors\">Pricing</a></li>\n\
-  \              <li><a href=\"#\" class=\"hover:text-foreground transition-colors\">Demo</a></li>\n            </ul>\n  \
-  \        </div>\n          <div>\n            <h4 class=\"font-medium text-foreground mb-4\">Company</h4>\n            <ul\
-  \ class=\"space-y-2 text-sm text-muted-foreground\">\n              <li><a href=\"#\" class=\"hover:text-foreground transition-colors\"\
-  >About</a></li>\n              <li><a href=\"#\" class=\"hover:text-foreground transition-colors\">Blog</a></li>\n     \
-  \         <li><a href=\"#\" class=\"hover:text-foreground transition-colors\">Contact</a></li>\n            </ul>\n    \
-  \      </div>\n          <div>\n            <h4 class=\"font-medium text-foreground mb-4\">Support</h4>\n            <ul\
-  \ class=\"space-y-2 text-sm text-muted-foreground\">\n              <li><a href=\"#\" class=\"hover:text-foreground transition-colors\"\
-  >Help Center</a></li>\n              <li><a href=\"#\" class=\"hover:text-foreground transition-colors\">Privacy</a></li>\n\
-  \              <li><a href=\"#\" class=\"hover:text-foreground transition-colors\">Terms</a></li>\n            </ul>\n \
-  \         </div>\n        </div>\n        \n        <div class=\"border-t border-border mt-12 pt-8\">\n          <p class=\"\
-  text-center text-sm text-muted-foreground\">\n            © 2026 {{product_name}}. All rights reserved.\n          </p>\n\
-  \        </div>\n      </div>\n    </footer>\n\n  </body>\n</html>"
-variable_substitution_guide: ''
-required_variables_for_template_completion: '# Product Information
+tldr: Complete landing page templates for 4 funnel stages — hero sections, benefit stacks, social proof patterns, CTA blocks,
+  and objection handlers. Every section earns the next scroll.
+density_score: 0.93
+universal_page_structure: '┌─────────────────────────────────────┐
 
-  product_name: "Your Product Name"
+  │  HERO — Stop. Read. Want.           │  Above the fold
 
-  key_benefit: "Primary value proposition"
+  │  (Headline + Subhead + CTA + Image) │
 
-  seo_description: "Meta description for SEO (155 chars max)"
+  ├─────────────────────────────────────┤
+
+  │  PROBLEM — "You know this pain"     │  Emotional hook
+
+  ├─────────────────────────────────────┤
+
+  │  SOLUTION — "Here''s the relief"     │  Product introduction
+
+  ├─────────────────────────────────────┤
+
+  │  BENEFITS — "What changes for you"  │  3-5 benefit blocks
+
+  ├─────────────────────────────────────┤
+
+  │  PROOF — "Others already did it"    │  Testimonials + logos
+
+  ├─────────────────────────────────────┤
+
+  │  HOW — "Here''s the path"            │  3-step process
+
+  ├─────────────────────────────────────┤
+
+  │  OFFER — "Here''s what you get"      │  Value stack
+
+  ├─────────────────────────────────────┤
+
+  │  OBJECTIONS — "But what about..."   │  FAQ / guarantees
+
+  ├─────────────────────────────────────┤
+
+  │  FINAL CTA — "Your move"            │  Urgency + action
+
+  └─────────────────────────────────────┘
 
 
-  # Navigation
+  ---'
+1_lead_capture_landing_page_tofu: 'Goal: Capture email in exchange for lead magnet Target conversion rate: 25-45%'
+hero_section: '<!-- HEADLINE: Transformation statement -->
 
-  nav_cta_text: "Get Started"
-
-
-  # Hero Section (PAS Formula - PROBLEM)
-
-  hero_headline_v1: "Stop Struggling with [Problem]"
-
-  hero_headline_emphasis: "That Changes Today"
-
-  hero_subheadline_agitate: "Every day you delay costs you [specific consequence]. Here''s what that''s really costing..."
-
-  social_proof_stat: "Join 10,000+ customers"
-
-  social_proof_qualifier: "already getting results"
-
-  primary_cta_text: "Start My Free Trial"
-
-  secondary_cta_text: "See How It Works"
-
-  trust_indicator_1: "No credit card required"
-
-  trust_indicator_2: "Setup in 5 minutes"
-
-  visual_placeholder_text: "Product demo or hero image"
+  <h1>From [CURRENT_STATE] to [DESIRED_STATE] — in [TIMEFRAME]</h1>
 
 
-  # Features Section (PAS Formula - SOLUTION)
+  <!-- SUBHEADLINE: How + social proof -->
 
-  features_headline: "Everything You Need to [Achieve Outcome]"
-
-  features_subheadline: "Stop patching together multiple tools. Get everything in one powerful platform."
-
-  feature_1_title: "Feature Name"
-
-  feature_1_description: "Benefit-focused description of what this does for the user"
-
-  feature_2_title: "Feature Name"
-
-  feature_2_description: "Benefit-focused description"
-
-  feature_3_title: "Feature Name"
-
-  feature_3_description: "Benefit-focused description"
+  <p>Join [NUMBER]+ [AUDIENCE] who used [PRODUCT_NAME] to [SPECIFIC_RESULT].</p>
 
 
-  # Testimonials
+  <!-- DUAL CTA -->
 
-  testimonials_headline: "Don''t Take Our Word for It"
+  <button class="primary">Get [PRODUCT_NAME] Now — $[PRICE]</button>
 
-  testimonials_subheadline: "See what our customers say about their results"
-
-  testimonial_1_quote: "Specific result or transformation quote"
-
-  testimonial_1_name: "Customer Name"
-
-  testimonial_1_title: "Job Title, Company"
+  <a class="secondary">Watch the 2-minute demo ▶</a>'
+what_s_inside_section: 'Inside this [RESOURCE_TYPE], you''ll discover:
 
 
-  # Final CTA (PAS Formula - ACTION)
+  ✓ [SPECIFIC_BENEFIT_1] — [one-line expansion]
 
-  final_cta_headline: "Ready to [Get Specific Outcome]?"
+  ✓ [SPECIFIC_BENEFIT_2] — [one-line expansion]
 
-  final_cta_subheadline: "Join thousands who are already [achieving result]. Start your transformation today."
+  ✓ [SPECIFIC_BENEFIT_3] — [one-line expansion]
 
-  final_cta_button_text: "Start My [Specific Outcome] Now"
+  ✓ [SPECIFIC_BENEFIT_4] — [one-line expansion]
 
-  final_cta_disclaimer: "14-day free trial • No credit card required • Cancel anytime"
-
-
-  # Footer
-
-  footer_description: "Brief company description and mission statement"'
-copy_formula_integration_examples: ''
-aida_structure_mapping: "<!-- ATTENTION: Hero headline -->\n<h1 class=\"text-4xl font-bold\">\n  \"10X Your Conversion Rate\
-  \ with One Simple Change\"\n</h1>\n\n<!-- INTEREST: Problem development -->\n<p class=\"text-xl text-muted-foreground\"\
-  >\n  \"Your landing page visitors are leaving without converting. Every bounce is money walking out the door...\"\n</p>\n\
-  \n<!-- DESIRE: Benefit visualization -->\n<div class=\"grid gap-8 lg:grid-cols-3\">\n  <!-- Features that create desire\
-  \ -->\n</div>\n\n<!-- ACTION: Clear next step -->\n<button class=\"bg-primary text-primary-foreground px-8 py-4\">\n  \"\
-  Get My Conversion Boost Now\"\n</button>"
-pas_structure_mapping: "<!-- PROBLEM: Name the pain -->\n<h1 class=\"text-4xl font-bold\">\n  \"Tired of Landing Pages That\
-  \ Don't Convert?\"\n</h1>\n\n<!-- AGITATE: Make it worse -->\n<p class=\"text-xl text-muted-foreground\">\n  \"Every visitor\
-  \ that bounces is lost revenue. While your competition captures leads, you're watching potential customers slip away...\"\
-  \n</p>\n\n<!-- SOLUTION: Present relief -->\n<section class=\"features\">\n  <!-- How your product solves the problem -->\n\
-  </section>"
-accessibility_compliance_checklist: ''
-wcag_aa_requirements_built_in:
-- ✅ Semantic HTML5 structure (header, main, section, footer)
-- ✅ Proper heading hierarchy (h1 → h2 → h3)
-- ✅ Color contrast >= 4.5:1 (verified with CODEXA palette)
-- ✅ Focus indicators on all interactive elements
-- ✅ Alt text placeholders for images
-- ✅ ARIA labels for complex interactions
-- ✅ Keyboard navigation support
-- ✅ Screen reader friendly markup
-- ✅ Touch-friendly button sizes (44px minimum)
-performance_optimization_built_in:
-- ✅ Preconnect to Google Fonts
-- '✅ Font-display: swap for faster rendering'
-- ✅ Minimal CSS via Tailwind utilities
-- ✅ Semantic markup for better Core Web Vitals
-- ✅ Optimized asset loading strategy
-- ✅ Mobile-first responsive approach
-deployment_integration: ''
-handoff_to_n05_operations: '# Validation before handoff
-
-  lighthouse landing_page.html --only=performance,accessibility
-
-  w3c-validator landing_page.html
-
-  contrast-checker landing_page.html
+  ✓ BONUS: [UNEXPECTED_VALUE] — [why it matters]'
+social_proof_strip: '"[SHORT_TESTIMONIAL_QUOTE]" — [NAME], [ROLE/COMPANY]
 
 
-  # If all pass:
+  [METRIC_1]: [NUMBER]+ downloads
 
-  # → Hand off to N05 for Railway deployment
+  [METRIC_2]: [RATING]★ average rating
 
-  # → Include validation certificates
-
-  # → Provide mobile/desktop screenshots
-
-  # → Document any custom interactions
+  [METRIC_3]: Featured in [PUBLICATION]'
+final_cta_repeat: 'Don''t let another [TIME_UNIT] go by struggling with [PROBLEM].
 
 
-  This template ensures every landing page generated by N02 meets production standards for performance, accessibility, and
-  conversion optimization.'
+  [SAME_CTA_BUTTON_AS_HERO]
+
+
+  You''re protected by our [GUARANTEE]. No risk. All upside.
+
+
+  ---'
+2_sales_page_bofu: 'Goal: Convert warm leads to buyers Target conversion rate: 2-8%'
+problem_section_pas_framework: "## Still [STRUGGLING_WITH_PROBLEM]?\n\nYou've tried [COMMON_SOLUTION_1]. And [COMMON_SOLUTION_2].\
+  \ Maybe even [COMMON_SOLUTION_3].\n\nBut here's what nobody tells you: [HIDDEN_REASON_THEY_FAIL].\n\nThe result? [PAINFUL_CONSEQUENCE_1].\
+  \ [PAINFUL_CONSEQUENCE_2]. \nAnd the nagging feeling that [EMOTIONAL_PAIN].\n\nWhat if there was a better way?"
+solution_section: "## Introducing [PRODUCT_NAME]\n\n[ONE_SENTENCE_DESCRIPTION — what it IS]\n\nUnlike [ALTERNATIVES], [PRODUCT_NAME]\
+  \ [KEY_DIFFERENTIATOR] so you can \n[PRIMARY_BENEFIT] without [PRIMARY_OBJECTION].\n\n[PRODUCT_SCREENSHOT_OR_VIDEO]"
+benefit_stack_fab_framework: '### What [PRODUCT_NAME] Does For You
+
+
+  ┌──────────────────────────────────────┐
+
+  │ [FEATURE_1]                          │
+
+  │ → [ADVANTAGE]: [what it does]        │
+
+  │ → [BENEFIT]: [what it means for you] │
+
+  ├──────────────────────────────────────┤
+
+  │ [FEATURE_2]                          │
+
+  │ → [ADVANTAGE]: [what it does]        │
+
+  │ → [BENEFIT]: [what it means for you] │
+
+  ├──────────────────────────────────────┤
+
+  │ [FEATURE_3]                          │
+
+  │ → [ADVANTAGE]: [what it does]        │
+
+  │ → [BENEFIT]: [what it means for you] │
+
+  └──────────────────────────────────────┘'
+social_proof_section: "## Don't Take My Word For It\n\n[TESTIMONIAL_1 — specific result + before/after]\n\"Before [PRODUCT],\
+  \ I was [BEFORE_STATE]. Now [AFTER_STATE]. \nThe best part? [SPECIFIC_METRIC_IMPROVEMENT].\"\n— [NAME], [TITLE] at [COMPANY]\n\
+  \n[TESTIMONIAL_2 — emotional transformation]\n[TESTIMONIAL_3 — skeptic-turned-believer]\n\nLOGOS: [COMPANY_1] · [COMPANY_2]\
+  \ · [COMPANY_3] · [COMPANY_4]"
+how_it_works_3_step: '## Get Started in 3 Simple Steps
+
+
+  1️⃣ [ACTION_VERB] — [what they do] (takes [TIME])
+
+  2️⃣ [ACTION_VERB] — [what happens next] (takes [TIME])
+
+  3️⃣ [ACTION_VERB] — [the outcome they experience]
+
+
+  That''s it. No [COMMON_COMPLEXITY]. No [COMMON_HASSLE].'
+offer_stack: '## Here''s Everything You Get
+
+
+  ✅ [CORE_PRODUCT] ........................ Value: $[AMOUNT]
+
+  ✅ [BONUS_1] ............................. Value: $[AMOUNT]
+
+  ✅ [BONUS_2] ............................. Value: $[AMOUNT]
+
+  ✅ [BONUS_3] ............................. Value: $[AMOUNT]
+
+
+  Total Value: $[SUM]
+
+  ━━━━━━━━━━━━━━━━━━━━━━━
+
+  Your Price Today: $[ACTUAL_PRICE]
+
+
+  [CTA_BUTTON: Get Everything Now — $[PRICE]]'
+objection_handler_faq: '## Common Questions
+
+
+  Q: [BIGGEST_OBJECTION — usually price or time]
+
+  A: [REFRAME_AS_INVESTMENT + comparison to cost of NOT buying]
+
+
+  Q: [SECOND_OBJECTION — usually "will it work for me?"]
+
+  A: [SEGMENT_SPECIFIC_PROOF + guarantee mention]
+
+
+  Q: [THIRD_OBJECTION — usually technical/logistical]
+
+  A: [SIMPLE_ANSWER + support mention]
+
+
+  Q: What if it doesn''t work for me?
+
+  A: [GUARANTEE_DETAILS — risk reversal is THE conversion lever]'
+final_cta_section: '## [TRANSFORMATION_HEADLINE]
+
+
+  You have two choices right now:
+
+
+  Option A: Close this page and go back to [CURRENT_PAINFUL_STATE].
+
+
+  Option B: [TAKE_ACTION] and start [EXPERIENCING_DESIRED_STATE] today.
+
+
+  [LARGE_CTA_BUTTON]
+
+
+  🔒 [GUARANTEE_BADGE] · [PAYMENT_SECURITY] · [SUPPORT_PROMISE]
+
+
+  P.S. [URGENCY_OR_FINAL_BENEFIT — restate the strongest argument in 2 sentences]
+
+
+  ---'
+3_webinar_event_registration_page_mofu: 'Goal: Register for live event Target conversion rate: 20-40%'
+structure: "HERO:\n  headline: \"Something [ADJECTIVE] is coming to [INDUSTRY/NICHE]\"\n  subhead: \"[ONE_SENTENCE_TEASER\
+  \ — enough to intrigue, not enough to satisfy]\"\n  cta: \"Join the Waitlist — Be First to Know\"\n  counter: \"[NUMBER]\
+  \ people already waiting\"\n\nTEASER_DETAILS:\n  reveal_1: \"[PARTIAL_DETAIL — what it does]\"\n  reveal_2: \"[PARTIAL_DETAIL\
+  \ — who it's for]\"\n  mystery: \"Full details drop [DATE]. Waitlist members get [EARLY_ACCESS/DISCOUNT].\"\n\nSOCIAL_PROOF:\n\
+  \  endorsement: \"[INDUSTRY_AUTHORITY] says: '[QUOTE]'\"\n  \nCOUNTDOWN:\n  target_date: \"[LAUNCH_DATE]\"\n  display: \"\
+  Days : Hours : Minutes : Seconds\"\n\n---"
+4_coming_soon_waitlist_page_pre_launch: 'Goal: Build anticipation + capture early interest Target conversion rate: 30-60%'
+conversion_optimization_checklist: "above_the_fold:\n  - [ ] Headline visible without scrolling\n  - [ ] CTA button visible\
+  \ without scrolling\n  - [ ] Value proposition clear in 5 seconds\n  - [ ] No navigation menu (single-purpose page)\n\n\
+  copy_quality:\n  - [ ] Headline passes 4U test (Useful, Urgent, Unique, Ultra-specific)\n  - [ ] All CTAs use first-person\
+  \ (\"Get MY guide\" not \"Get YOUR guide\")\n  - [ ] Benefits > Features (3:1 ratio minimum)\n  - [ ] Social proof within\
+  \ first 2 scrolls\n  - [ ] Guarantee/risk reversal present\n\ntechnical:\n  - [ ] Page loads under 3 seconds\n  - [ ] Mobile-responsive\
+  \ (test on 3 devices)\n  - [ ] Form has maximum 3 fields (email minimum)\n  - [ ] Thank-you page configured (not just \"\
+  thanks\")\n  - [ ] Tracking pixels installed (Meta, Google, UTMs)\n  - [ ] HTTPS (no mixed content warnings)\n\ndesign:\n\
+  \  - [ ] Single visual hierarchy path (F or Z pattern)\n  - [ ] Contrast ratio >= 4.5:1 on all text\n  - [ ] CTA button\
+  \ color contrasts with page (no blending)\n  - [ ] White space between sections (breathing room)\n  - [ ] Consistent typography\
+  \ (max 2 font families)\n\npsychology:\n  - [ ] Specific numbers > vague claims\n  - [ ] \"You/Your\" > \"We/Our\" (2:1\
+  \ ratio minimum)\n  - [ ] Urgency element present (deadline, scarcity, or FOMO)\n  - [ ] Risk reversal present (guarantee,\
+  \ free trial, refund)\n  - [ ] Social proof present (testimonials, logos, metrics)\n\n---"
+a_b_testing_priority_for_landing_pages: '| Priority | Element | Expected Impact |
+
+  |----------|---------|-----------------|
+
+  | 1 | Headline (pain vs benefit vs curiosity) | 20-40% conversion lift |
+
+  | 2 | CTA text (action vs benefit) | 10-25% conversion lift |
+
+  | 3 | Hero image (product vs people vs abstract) | 5-15% conversion lift |
+
+  | 4 | Form length (1 field vs 3 fields) | 10-30% conversion lift |
+
+  | 5 | Social proof placement (above vs below fold) | 5-10% conversion lift |
+
+  | 6 | Page length (short vs long) | Depends on awareness level |'

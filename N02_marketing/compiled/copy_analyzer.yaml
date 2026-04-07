@@ -1,0 +1,159 @@
+id: n02_tool_copy_analyzer
+kind: cli_tool
+pillar: P04
+title: Copy Analyzer — N02 Marketing Quality Tool
+version: 1.0.0
+created: 2026-04-07
+author: n02_marketing
+domain: copy_analysis
+nucleus: N02
+quality: null
+tags:
+- cli-tool
+- copy-analyzer
+- N02
+- marketing
+- quality
+- readability
+tldr: 'Automated copy analysis pipeline: readability scoring, persuasion pattern detection, CTA quality grading, brand voice
+  compliance, and funnel-stage alignment. The ruthless editor that catches what humans miss.'
+density_score: 0.91
+purpose: Automated quality analysis for all N02 marketing copy. Reads any copy artifact (email, ad, landing page, social post)
+  and produces a multi-dimensional quality report. Catches readability failures, weak CTAs, missing psychological triggers,
+  brand voice drift, and funnel misalignment — before the copy ships.
+pipeline: "INPUT ─► PARSE structure ─► READABILITY score\n              │\n              ▼\n         PERSUASION scan (formula\
+  \ detection)\n              │\n      ┌───────┼───────┐\n      ▼       ▼       ▼\n   CTA      BRAND    FUNNEL\n  grade  \
+  \   voice    align\n      │       │       │\n      └───────┼───────┘\n              ▼\n         REPORT (scores + fixes)\n\
+  \              │\n      ┌───────┼───────┐\n      ▼       ▼       ▼\n   JSON    SUMMARY  MEMORY\n  detail    human   update"
+usage: '# Analyze a single copy file
+
+  python copy_analyzer.py --input N02_marketing/artifacts/email_sequence_template.md
+
+
+  # Analyze all copy in a directory
+
+  python copy_analyzer.py --input N02_marketing/output/ --recursive
+
+
+  # Analyze with specific audience target
+
+  python copy_analyzer.py --input copy.md --audience b2c --funnel tofu
+
+
+  # Output JSON report
+
+  python copy_analyzer.py --input copy.md --format json --output report.json
+
+
+  # Quick score (no detailed report)
+
+  python copy_analyzer.py --input copy.md --quick
+
+
+  # Compare two versions (A/B analysis)
+
+  python copy_analyzer.py --compare v1.md v2.md'
+analysis_dimensions: ''
+1_readability_score: "metrics:\n  flesch_reading_ease:\n    b2c_target: \">= 65\"\n    b2b_target: \">= 50\"\n    executive_target:\
+  \ \">= 40\"\n  \n  avg_sentence_length:\n    target: \"<= 16 words\"\n    flag: \"> 22 words\"\n  \n  avg_word_length:\n\
+  \    target: \"<= 5 chars\"\n    flag: \"> 7 chars\"\n  \n  passive_voice_pct:\n    target: \"< 10%\"\n    flag: \"> 15%\"\
+  \n  \n  paragraph_length:\n    target: \"<= 3 sentences\"\n    flag: \"> 5 sentences\""
+2_persuasion_pattern_detection: "formula_detection:\n  AIDA:\n    attention: \"hook/headline present?\"\n    interest: \"\
+  problem/opportunity developed?\"\n    desire: \"benefits/transformation shown?\"\n    action: \"clear CTA present?\"\n \
+  \ \n  PAS:\n    problem: \"pain point named?\"\n    agitate: \"consequences deepened?\"\n    solution: \"relief presented?\"\
+  \n  \n  BAB:\n    before: \"current state described?\"\n    after: \"desired state described?\"\n    bridge: \"mechanism\
+  \ explained?\"\n  \n  score: \"formula_coverage_pct\"\n  fix: \"missing elements listed\""
+3_cta_quality_grade: "cta_analysis:\n  specificity:\n    fail: [\"click here\", \"learn more\", \"submit\", \"buy now\"]\n\
+  \    pass: [\"Get my free audit\", \"Start 14-day trial\", \"See pricing\"]\n    grade: \"A (specific benefit + action)\
+  \ / B (action only) / C (generic) / F (missing)\"\n  \n  count_check:\n    ideal: \"1 primary CTA per section\"\n    warning:\
+  \ \"> 2 CTAs per section (decision fatigue)\"\n    fail: \"0 CTAs in conversion-focused copy\"\n  \n  first_person:\n  \
+  \  preferred: \"'Get MY guide' > 'Get YOUR guide'\"\n    score: \"first_person_pct\"\n  \n  urgency_check:\n    present:\
+  \ \"deadline, scarcity, or consequence of inaction\"\n    authentic: \"is the urgency real or fabricated?\""
+4_brand_voice_compliance: "voice_check:\n  tone_score:\n    source: \"brand_config.yaml → tone_spectrum\"\n    method: \"\
+  compare copy tone vs configured brand tone\"\n    tolerance: \"+/- 1 point on 1-5 scale\"\n  \n  vocabulary_check:\n   \
+  \ banned_words: \"loaded from brand_config.yaml\"\n    signature_phrases: \"present/absent check\"\n    jargon_level: \"\
+  appropriate for target audience?\"\n  \n  person_consistency:\n    check: \"consistent use of we/you/they throughout\"\n\
+  \    flag: \"mixed person references\"\n  \n  energy_match:\n    check: \"copy energy matches brand energy setting\"\n \
+  \   flag: \"calm brand + hyperbolic copy, or bold brand + flat copy\""
+5_funnel_stage_alignment: "funnel_check:\n  detected_stage: \"TOFU / MOFU / BOFU (auto-detected from signals)\"\n  intended_stage:\
+  \ \"from --funnel flag or frontmatter\"\n  alignment_score: \"match / mismatch / ambiguous\"\n  \n  stage_signals:\n   \
+  \ tofu: [\"awareness\", \"discover\", \"introduction\", \"free\", \"learn\"]\n    mofu: [\"compare\", \"consider\", \"evaluate\"\
+  , \"demo\", \"trial\"]\n    bofu: [\"buy\", \"start\", \"subscribe\", \"limited\", \"guarantee\"]\n  \n  misalignment_examples:\n\
+  \    - \"TOFU copy with aggressive pricing → warn: audience not ready\"\n    - \"BOFU copy without objection handling →\
+  \ warn: missing FAQ/guarantee\"\n    - \"MOFU copy without social proof → warn: trust not built\""
+report_format: ''
+summary_report_default: '╔══════════════════════════════════════════════╗
+
+  ║  COPY ANALYSIS REPORT                       ║
+
+  ║  File: email_sequence_template.md           ║
+
+  ║  Analyzed: 2026-04-07 19:55:00              ║
+
+  ╠══════════════════════════════════════════════╣
+
+  ║                                              ║
+
+  ║  📖 Readability:     8.2/10  (Flesch: 68)   ║
+
+  ║  🎯 Persuasion:      7.5/10  (PAS detected) ║
+
+  ║  🔘 CTA Quality:     A  (specific + benefit) ║
+
+  ║  🎨 Brand Voice:     9.0/10  (on-brand)     ║
+
+  ║  📊 Funnel Align:    ✅ MOFU  (correct)      ║
+
+  ║                                              ║
+
+  ║  OVERALL:  8.2/10                            ║
+
+  ║                                              ║
+
+  ║  ⚠️  Issues Found: 3                         ║
+
+  ║  1. Sentence too long (line 42): 28 words    ║
+
+  ║  2. Passive voice (line 67): "was achieved"  ║
+
+  ║  3. Missing urgency element in final CTA     ║
+
+  ║                                              ║
+
+  ║  ✅ Fixes Applied: 0 (use --fix to auto-fix) ║
+
+  ╚══════════════════════════════════════════════╝'
+json_report_format_json: "{\n  \"file\": \"email_sequence_template.md\",\n  \"timestamp\": \"2026-04-07T19:55:00-03:00\",\n\
+  \  \"scores\": {\n    \"readability\": 8.2,\n    \"persuasion\": 7.5,\n    \"cta_grade\": \"A\",\n    \"brand_voice\": 9.0,\n\
+  \    \"funnel_alignment\": \"correct\",\n    \"overall\": 8.2\n  },\n  \"issues\": [...],\n  \"suggestions\": [...],\n \
+  \ \"formula_detected\": \"PAS\",\n  \"word_count\": 342,\n  \"reading_time_seconds\": 82\n}"
+integration: '| Direction | Target | Data |
+
+  |-----------|--------|------|
+
+  | Input ← | Any N02 copy artifact | .md files with copy content |
+
+  | Input ← | `brand_config.yaml` | Brand voice settings |
+
+  | Output → | `copy_optimization_insights.md` | Analysis patterns feed memory |
+
+  | Output → | `cex_score.py` | Scores compatible with peer review |
+
+  | Output → | `cex_feedback.py` | Quality tracking integration |
+
+  | Trigger | `cex_hooks.py` | Auto-run on pre-commit for copy files |'
+quality_gates: "pass_criteria:\n  - readability_score >= 7.0\n  - persuasion_score >= 6.0\n  - cta_grade in [A, B]  # C and\
+  \ F = fail\n  - brand_voice_score >= 7.0\n  - funnel_alignment = correct or ambiguous  # mismatch = fail\n  - no_critical_issues\
+  \  # (0 F-grade CTAs, 0 brand violations)\n\nauto_fix_capable:\n  - passive_voice → active_voice suggestion\n  - long_sentences\
+  \ → split recommendation\n  - generic_CTA → specific_CTA variants\n  - missing_urgency → urgency element suggestions"
+nucleus_dependencies: '| Dependency | What | Why |
+
+  |------------|------|-----|
+
+  | `brand_config.yaml` | Brand voice settings | Voice compliance requires brand context |
+
+  | `scoring_rubric_marketing.md` | Evaluation criteria | Aligns scores with N02 quality standards |
+
+  | `kc_email_sequence.md` | Email patterns | Validates sequence copy against KC rules |
+
+  | `kc_campaign.md` | Campaign patterns | Validates campaign copy against KC rules |'
