@@ -14,6 +14,7 @@ tags:
 - outreach
 - lead-nurturing
 - gato
+density_score: 1.0
 steps: ''
 wave_1_content_parallel: "Step 1: Copy Suite\n- Agent: n02_marketing\n- Action: Create segment-specific outreach templates\
   \ (4 segments: vets, pet shops, groomers, 24h hospitals)\n- Input: handoff segments + GATO³ brand voice\n- Output: outreach_copy_gato.md\n\

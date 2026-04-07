@@ -1,0 +1,21 @@
+id: brand_context_n05
+kind: config
+pillar: P09
+title: Brand Context for N05
+version: 1.0.0
+created: 2026-04-01
+author: n06_commercial
+quality: null
+tags:
+- brand
+- context
+- n05
+tldr: Auto-generated brand context for N05 from brand_config.yaml
+density_score: 0.9
+brand_context_injected_by_brand_propagate_py: ''
+source_cex_brand_brand_config_yaml:
+- 'BRAND_FAVICON_URL: https://gato3.com.br/favicon.ico'
+- 'BRAND_LOGO_URL: https://gato3.com.br/logo.svg'
+- 'BRAND_NAME: GATO³'
+- 'BRAND_PAYMENT_PROVIDERS: shopify, mercadopago, pix'
+- 'BRAND_PRICING_MODEL: hybrid'

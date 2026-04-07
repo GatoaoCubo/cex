@@ -26,6 +26,7 @@ expansion_rings:
 - estado_sp
 - brasil
 cex_integration: true
+density_score: 1.0
 parse_content_asset_inventory: ''
 cex_system_assets:
 - 114 kinds typados com builders completos

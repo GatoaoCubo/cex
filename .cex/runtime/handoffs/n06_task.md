@@ -1,21 +1,20 @@
----
-mission: SDK_VALIDATION
+﻿---
 nucleus: N06
-task: smoke_test
-priority: high
+task: dispatch
+created: 2026-04-07 18:53:59
 ---
+# Task for N06
 
-# N06 Brand/Commercial — SDK Validation Smoke Test
+Read .cex/runtime/handoffs/n06_task.md. AutoResearch: evolve 7 artifacts to 9.0+.
 
-## Objetivo
-Validar ferramentas de brand e pipeline de monetização.
+## DECISIONS (from user -- DO NOT re-ask)
+Read: .cex/runtime/decisions/decision_manifest.yaml
+All subjective decisions were already made with the user.
+Execute using those decisions. Do NOT override them.
 
-## Tarefas
-1. Verifique que `boot/n06.cmd` existe e aponta para modelo correto
-2. Execute `python _tools/brand_validate.py` (se brand_config existir)
-3. Execute `python _tools/cex_query.py "brand monetization"` e confirme resultados
-4. Verifique que guardrails BR funcionam: `python -c "from cex_sdk.guardrails.pii import PIIDetectionGuardrail; g=PIIDetectionGuardrail(); print(g.check('CPF: 123.456.789-09'))"`
-5. Signal: `python _tools/signal_writer.py n06 complete 9.0 SDK_VALIDATION`
+## ON COMPLETION
+1. Commit your work: git add -A && git commit -m "[N06] <description>"
+2. Signal complete:
 
-## Critério de Sucesso
-Boot OK, brand tools funcionais, guardrails BR detectam CPF.
+## SIGNAL
+python -c "from _tools.signal_writer import write_signal; write_signal('n06', 'complete', 9.0)"

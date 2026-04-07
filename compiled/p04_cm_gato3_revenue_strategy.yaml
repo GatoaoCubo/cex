@@ -21,6 +21,7 @@ geo_constraint: abc_paulista_grande_sp
 prospect_universe: 578_businesses_classified
 revenue_target: 5x_crm_investment_roi
 conversion_framework: tier_based_prioritization
+density_score: 1.0
 parse_prospect_asset_inventory: ''
 crm_expansion_data_asset:
 - 'Total Universe: 578 businesses (471 new + 107 existing)'

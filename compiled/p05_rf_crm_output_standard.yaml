@@ -1,59 +1,66 @@
 id: p05_rf_crm_output_standard
 kind: response_format
 pillar: P05
-title: CRM Output Standard Response Format
-version: 1.0.0
+title: CRM Output Standard v2 — JSON-First
+version: 2.0.0
 created: 2026-04-03
 updated: 2026-04-03
-author: builder_agent
+author: n07_orchestrator
 domain: crm-research
-task: Padronizar output de research CRM multi-cidade para pipeline pet business
-format_type: yaml
-injection_point: system_prompt
-target_kind: agent
-sections: ''
-sections_count: 3
-llm_function: CONSTRAIN
+format_type: json
+quality: null
 tags:
 - response_format
 - crm
 - output
-- multi-city
-- pet
-- pipeline
-- GATO3
-tldr: Schema padrao de output CRM multi-cidade — estrutura cidade + lista businesses + estatisticas, replicavel cross-city.
-quality: null
-density_score: null
-format_overview: 'Define a estrutura de output padronizada para toda pipeline CRM de descoberta pet. O LLM DEVE seguir este
-  formato estritamente ao gerar resultados de research por cidade. Output e YAML com 3 secoes: metadados da cidade, lista
-  de businesses, e estatisticas resumo. Modo strict: sim.'
-s1_cidade_required: "cidade:\n  nome: string          # Nome completo (ex: \"Sao Bernardo do Campo\")\n  uf: string      \
-  \      # Sigla estado (ex: \"SP\")\n  ring: int             # Ring geografico 1|2|3|4\n  populacao_estimada: int  # Populacao\
-  \ IBGE estimada\n  densidade_estimada: float  # Businesses pet / 10k habitantes\n  data_research: string    # Data ISO da\
-  \ pesquisa (YYYY-MM-DD)\n  fontes_usadas: list      # [\"serper\", \"firecrawl\", \"exa\", \"fetch\"]\n  budget_consumido:\n\
-  \    serper: int          # Queries gastas\n    firecrawl: int       # Scrapes gastos"
-s2_businesses_repeated_min_1: "businesses:\n  - nome: string              # Nome comercial\n    cnpj: string | null      \
-  \ # 14 digitos sem formatacao\n    telefone: string | null   # +55XXXXXXXXXXX\n    whatsapp: string | null   # +55XXXXXXXXXXX\
-  \ (pode ser = telefone)\n    email: string | null      # email comercial\n    website: string | null    # URL com protocolo\n\
-  \    endereco: string          # Endereco completo\n    bairro: string | null     # Bairro\n    segmento: enum         \
-  \   # pet_shop|banho_tosa|veterinario|distribuidor|hotel_pet|adestramento|alimentacao|acessorios|daycare|farmacia_vet|estetica|funeraria\n\
-  \    potencial: enum           # A|B|C\n    completeness_score: int   # 0-4 (campos de contato validados)\n    fonte_descoberta:\
-  \ string  # Fonte primaria de descoberta\n    fontes_cruzadas: list     # Todas as fontes que confirmaram\n    data_discovery:\
-  \ string    # ISO date\n    notas: string | null      # Observacoes livres"
-s3_summary_stats_required: "summary:\n  total_businesses: int\n  por_segmento:              # Contagem por vertical\n    pet_shop:\
-  \ int\n    banho_tosa: int\n    veterinario: int\n    distribuidor: int\n    hotel_pet: int\n    outros: int\n  por_potencial:\n\
-  \    A: int\n    B: int\n    C: int\n  taxa_contato_direto: float   # % com telefone ou whatsapp\n  taxa_email: float  \
-  \          # % com email\n  taxa_website: float          # % com website\n  completeness_media: float    # Media do completeness_score\n\
-  \  tempo_execucao: string       # \"1h23m\""
-example_output: "cidade:\n  nome: \"Sao Bernardo do Campo\"\n  uf: \"SP\"\n  ring: 1\n  populacao_estimada: 844483\n  densidade_estimada:\
-  \ 1.8\n  data_research: \"2026-04-03\"\n  fontes_usadas: [\"serper\", \"firecrawl\", \"fetch\"]\n  budget_consumido:\n \
-  \   serper: 42\n    firecrawl: 15\n\nbusinesses:\n  - nome: \"Pet House SBC\"\n    cnpj: \"12345678000190\"\n    telefone:\
-  \ \"+5511999887766\"\n    whatsapp: \"+5511999887766\"\n    email: \"contato@pethouse.com.br\"\n    website: \"https://pethouse.com.br\"\
-  \n    endereco: \"Rua Marechal Deodoro 500, Centro\"\n    bairro: \"Centro\"\n    segmento: \"pet_shop\"\n    potencial:\
-  \ \"A\"\n    completeness_score: 4\n    fonte_descoberta: \"serper\"\n    fontes_cruzadas: [\"serper\", \"firecrawl\", \"\
-  fetch\"]\n    data_discovery: \"2026-04-03\"\n    notas: \"Loja grande, aceita revenda\"\n\nsummary:\n  total_businesses:\
-  \ 48\n  por_segmento:\n    pet_shop: 15\n    banho_tosa: 12\n    veterinario: 10\n    distribuidor: 3\n    hotel_pet: 5\n\
-  \    outros: 3\n  por_potencial:\n    A: 12\n    B: 20\n    C: 16\n  taxa_contato_direto: 0.73\n  taxa_email: 0.52\n  taxa_website:\
-  \ 0.44\n  completeness_media: 2.8\n  tempo_execucao: \"1h47m\""
-footer: 'Format: crm_output_standard | Quality: null | Domain: crm-research'
+- json
+- quality-first
+tldr: 'Formato padrão de output CRM: JSON (não markdown), fonte obrigatória, completeness calculado, anti-fake.'
+density_score: 1.0
+regra_principal: Output é JSON. Não markdown. Não YAML. Não tabela. O pesquisador (N01) grava direto em `N01_research/output/data/crm_batch_{scope}.json`.
+  ---
+schema_por_registro: "{\n  \"nome_fantasia\": \"string — OBRIGATÓRIO\",\n  \"razao_social\": \"string — opcional\",\n  \"\
+  cnpj\": \"string — XX.XXX.XXX/XXXX-XX ou vazio\",\n  \"segmento\": \"enum — OBRIGATÓRIO\",\n  \"sub_segmento\": \"string\
+  \ — opcional\",\n  \"endereco\": \"string — com número se possível\",\n  \"bairro\": \"string — extraído do endereço\",\n\
+  \  \"cidade\": \"string — OBRIGATÓRIO\",\n  \"ring\": \"string — 1_abc | 2_grande_sp | 3_sp | 4_brasil\",\n  \"telefone\"\
+  : \"string — (XX) XXXX-XXXX ou (XX) XXXXX-XXXX\",\n  \"whatsapp\": \"string — mesmo formato\",\n  \"email\": \"string —\
+  \ email comercial\",\n  \"instagram\": \"string — @handle\",\n  \"website\": \"string — URL com protocolo\",\n  \"google_maps_url\"\
+  : \"string — URL Google Maps\",\n  \"google_rating\": \"string — 1.0 a 5.0\",\n  \"google_reviews\": \"string — número\"\
+  ,\n  \"porte\": \"string — mei | me | epp | medio | grande\",\n  \"foco_felino\": \"string — true | false\",\n  \"potencial_b2b\"\
+  : \"string — alto | medio | baixo\",\n  \"notas\": \"string — observações do pesquisador\",\n  \"fonte_descoberta\": \"\
+  string — OBRIGATÓRIO — query ou URL de origem\",\n  \"fonte_enriquecimento\": \"string — como os dados extras foram obtidos\"\
+  ,\n  \"completeness_score\": \"int — 0-5, calculado automaticamente\",\n  \"data_discovery\": \"string — YYYY-MM-DD\",\n\
+  \  \"lat\": \"float — latitude\",\n  \"lng\": \"float — longitude\"\n}"
+segmentos_v_lidos: "pet_shop | clinica_vet | banho_tosa | hospital_24h | hotel_pet | creche_pet | \ndistribuidor | agropecuaria\
+  \ | ong | cat_cafe | arquiteto_pet | adestramento"
+campos_obrigat_rios_gate_m_nimo: '| Campo | Obrigatório | Motivo |
+
+  |-------|:-----------:|--------|
+
+  | nome_fantasia | ✅ | Sem nome = sem contato |
+
+  | cidade | ✅ | Sem cidade = sem localização |
+
+  | segmento | ✅ | Sem segmento = sem classificação |
+
+  | fonte_descoberta | ✅ | Sem fonte = possivelmente fabricado |
+
+  | pelo menos 1 de: telefone, whatsapp, email, website | ✅ | Sem canal = não acionável |
+
+
+  Registro sem os 5 campos = REJEITADO antes de entrar no CRM.
+
+
+  ---'
+exemplo_completo: "{\n  \"nome_fantasia\": \"Pets House\",\n  \"razao_social\": \"Pets House Centro Veterinário e Pet Shop\
+  \ Ltda.\",\n  \"cnpj\": \"48.807.594/0001-73\",\n  \"segmento\": \"clinica_vet\",\n  \"sub_segmento\": \"24h\",\n  \"endereco\"\
+  : \"Av. Goiás, 269 - Santo Antônio\",\n  \"bairro\": \"Santo Antônio\",\n  \"cidade\": \"São Caetano do Sul\",\n  \"ring\"\
+  : \"1_abc\",\n  \"telefone\": \"(11) 4234-2384\",\n  \"whatsapp\": \"(11) 97727-0001\",\n  \"email\": \"\",\n  \"instagram\"\
+  : \"@_petshouse\",\n  \"website\": \"\",\n  \"google_maps_url\": \"https://www.google.com/maps/search/?api=1&query=Pets+House+São+Caetano\"\
+  ,\n  \"google_rating\": \"4.9\",\n  \"google_reviews\": \"130\",\n  \"porte\": \"epp\",\n  \"foco_felino\": \"true\",\n\
+  \  \"potencial_b2b\": \"alto\",\n  \"notas\": \"Clínica 24h com bom foco em gatos, Dra. Larissa é especialista.\",\n  \"\
+  fonte_descoberta\": \"serper:query='clinica veterinaria santo antonio são caetano'\",\n  \"fonte_enriquecimento\": \"fetch:google_maps+serper:telefone\"\
+  ,\n  \"completeness_score\": 4,\n  \"data_discovery\": \"2026-04-03\",\n  \"lat\": -23.627,\n  \"lng\": -46.567\n}"
+exemplo_m_nimo_aceit_vel_score_2: "{\n  \"nome_fantasia\": \"Dog's Day\",\n  \"segmento\": \"pet_shop\",\n  \"cidade\": \"\
+  São Caetano do Sul\",\n  \"endereco\": \"R. Visc. de Inhaúma, 65 - Oswaldo Cruz\",\n  \"fonte_descoberta\": \"serper:query='pet\
+  \ shop oswaldo cruz são caetano'\",\n  \"completeness_score\": 2\n}"

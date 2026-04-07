@@ -1,0 +1,324 @@
+id: n06_output_brand_book
+kind: brand_book
+pillar: P06
+title: Brand Book GATO³ — 34 Blocos Completos
+version: 1.0.0
+created: 2026-04-02
+author: n06_commercial
+domain: brand-book
+quality: null
+tags:
+- brand
+- brand-book
+- gato3
+- felinos
+- n06
+tldr: Brand Book completo GATO³ com identidade, posicionamento, voz, visual, narrativa, guidelines e validação. Inclui Persona
+  Ro e estratégia geográfica ABC.
+density_score: 0.95
+section_1_identity: ''
+block_1_names:
+- 'Primary: GATO³'
+- 'Short: G3'
+- 'Hashtag: #gato3'
+block_2_taglines:
+- Educação que acalma, soluções que funcionam, casa que continua elegante. ← winner
+- Cuidado em três dimensões.
+- Gato feliz, casa elegante, tutor tranquilo.
+block_3_archetype:
+- 'Primary: Caregiver — Cuidadora que harmoniza bem-estar felino, tranquilidade do tutor e elegância da casa'
+- 'Secondary Influence: Sage (Educação acolhedora) + Creator (Design minimalista)'
+- 'Shadow (avoid): Mártir — sacrificar qualidade por crescimento rápido ou diluir curadoria para ter mais SKUs'
+block_4_personality_traits:
+- Sofisticada — Estética minimalista PB que eleva qualquer ambiente
+- Acolhedora — Tom que abraça o tutor sem julgamento, com passos práticos
+- Informativa — Traduz ciência felina em linguagem acessível e acionável
+- Minimalista — Produtos que desaparecem no ambiente, design que não agride
+- Inspiradora — Mostra que convivência harmoniosa gato+tutor+casa é possível
+block_5_brand_essence: '> "Curadoria de bem-estar felino que harmoniza três dimensões: gato feliz, tutor tranquilo, casa elegante."
+  ---'
+section_2_positioning: ''
+block_6_unique_value_proposition: 'Headline: Para tutores de gatos que buscam elegância e funcionalidade
+
+  Subheadline: GATO³ é a curadoria de bem-estar felino que harmoniza gato, tutor e casa porque cada produto é validado por
+  veterinários comportamentalistas e desenhado para desaparecer no ambiente.
+
+
+  Proof Points:
+
+  1. Validação veterinária comportamental em cada produto do catálogo
+
+  2. Design PB minimalista que integra com decoração existente
+
+  3. Educação acolhedora via Persona Ro com protocolos práticos'
+block_7_market_segment:
+- 'Demographics: Tutores de gatos 25-45 anos, urbanos, classe B-C+ (R$ 5-15k), ABC Paulista → Grande SP'
+- 'Psychographics: Valorizam bem-estar animal, design funcional, educação antes de compra impulsiva'
+- 'Behavioral: Buscam soluções práticas e elegantes, pesquisam antes de comprar, querem harmonia gato+casa'
+block_8_differentiation: '> "Somos a única curadoria de produtos felinos que une validação veterinária comportamental + estética
+  PB minimalista + educação acolhedora via persona-guia (Ro)"
+
+
+  | Attribute | GATO³ | CatMyPet | Chalesco |
+
+  |-----------|-------|----------|----------|
+
+  | Validação veterinária | ✅ | ❌ | ⚠️ |
+
+  | Design minimalista PB | ✅ | ✅ | ❌ |
+
+  | Persona-guia educacional | ✅ | ❌ | ❌ |'
+block_9_transformation_promise: '> From tutor inseguro com gato estressado em casa bagunçada to tutor confiante com felino
+  feliz em lar elegante through educação acolhedora da Ro + curadoria de produtos premium validados por veterinários'
+block_10_ries_trout_statement: '> "GATO³ is the curadoria de bem-estar felino for tutores de gatos urbanos que valorizam segurança,
+  design funcional e estética minimalista who want lar harmonioso onde gato, tutor e casa coexistem em paz" ---'
+section_3_voice: ''
+block_11_5d_voice_scale: '| Dimension | Score | Description |
+
+  |-----------|-------|-------------|
+
+  | Formality | 3/5 | Equilibrio entre sofisticação e acessibilidade — não técnico demais, não casual demais |
+
+  | Enthusiasm | 3/5 | Tom moderado — engajado mas controlado, sem excessos ou frieza |
+
+  | Humor | 2/5 | Sutileza — leveza ocasional mas sempre respeitosa e adequada ao contexto |
+
+  | Warmth | 4/5 | Acolhedor — abraça o tutor sem julgamento, oferece apoio emocional |
+
+  | Authority | 3/5 | Conhecimento confiável — baseado em ciência veterinária mas não autoritário |'
+block_12_language_style:
+- 'Sentence structure: Frases curtas e parágrafos enxutos, ritmo fluido e digestivo'
+- 'Vocabulary level: Linguagem acessível com termos técnicos explicados quando necessário'
+- 'Jargon policy: Evitar jargão veterinário — traduzir ciência em passos práticos'
+block_13_voice_do_s:
+- Usar frases curtas e parágrafos enxutos
+- Explicar o porquê — ciência acessível, nunca jargão
+- Dar passos práticos e acionáveis (protocolos da Ro)
+- Tratar o tutor como parceiro, nunca como ignorante
+- Contextualizar produto como meio, não como fim
+block_14_voice_don_ts:
+- Prometer milagres ou resultados garantidos
+- Usar gíria, infantilizar ou falar como pet shop genérico
+- Medicalizar sem respaldo veterinário
+- Usar CAPS LOCK, excesso de emojis ou tom de vendedor
+- Comparar diretamente com concorrentes pelo nome
+block_15_example_phrases: '1. "O ronronar não é só carinho — é sinal de bem-estar."
+
+  2. "Cada gato é único. Aqui você encontra o que funciona para o seu."
+
+  3. "Design que não briga com sua decoração."
+
+  4. "A Ro ensina, você aplica, seu gato aproveita."
+
+  5. "Produtos testados por veterinários comportamentalistas."
+
+  6. "Casa elegante, gato feliz — as duas coisas são possíveis."
+
+  7. "Sem truques, sem milagres. Só o que funciona de verdade."
+
+  8. "Curadoria inteligente para tutores exigentes."
+
+  9. "Educação que acalma, soluções que funcionam."
+
+  10. "O ³ no nome não é decoração — é compromisso."
+
+
+  ---'
+section_4_visual: ''
+block_16_color_palette: '| Role | HEX | RGB | Psychology |
+
+  |------|-----|-----|------------|
+
+  | Primary | #000000 | 0,0,0 | Elegância, sofisticação, atemporalidade |
+
+  | Secondary | #1F1F1F | 31,31,31 | Profundidade, contraste suave, modernidade |
+
+  | Accent | #7A7A7A | 122,122,122 | Equilíbrio, neutralidade, versatilidade |
+
+  | Background | #FFFFFF | 255,255,255 | Limpeza, clareza, respiração visual |
+
+  | Foreground | #000000 | 0,0,0 | Legibilidade, contraste máximo, clareza |
+
+  | Surface | #D1D1D1 | 209,209,209 | Delimitação sutil, organização visual |'
+block_17_typography: '| Role | Font | Weight | Size Scale |
+
+  |------|------|--------|------------|
+
+  | Heading | Allrounder | 600-700 | 2.0-3.5rem |
+
+  | Body | Kenao | 400-500 | 0.875-1.125rem |
+
+  | Mono | JetBrains Mono | 400-600 | 0.75-1.0rem |
+
+
+  Pairing rationale: Allrounder traz personalidade display para títulos, Kenao oferece legibilidade excepcional para interface,
+  JetBrains Mono garante clareza técnica. Harmonia geométrica entre as três famílias.'
+block_18_mood_board_3_3: '| | Column 1 | Column 2 | Column 3 |
+
+  |-|----------|----------|----------|
+
+  | Row 1 | Gato PB em ambiente minimalista | Cubo geométrico preto | Textura sisal natural |
+
+  | Row 2 | Linha clean de móveis | Sombras suaves em branco | Produto integrado na decoração |
+
+  | Row 3 | Fotografia alto contraste | Tipografia bold + clean | Espaço negativo bem usado |'
+block_19_visual_guidelines: '- Logo usage: Cubo + wordmark GATO³, espaço livre ≥1× expoente ³, mínimo 24px web/10mm print
+
+  - Photography style: PB alto contraste, produto como meio não fim, ambiente real não staged
+
+  - Icon style: Monoline 2px, geométrica, consistência com cubo da marca
+
+  - Dark mode: Inversão inteligente — branco vira #1F1F1F, preto vira #FFFFFF, acentos mantidos
+
+
+  ---'
+section_5_narrative: ''
+block_20_origin_story: 'GATO³ nasceu da percepção de que o mercado pet tratava gatos como cães menores — produtos genéricos,
+  sem curadoria, sem design. Três dimensões definem tudo que fazemos: o bem-estar do gato, a tranquilidade do tutor e a harmonia
+  da casa. O ³ no nome não é decoração — é compromisso. Cada produto passa por veterinários comportamentalistas antes de entrar
+  no catálogo. Cada conteúdo é guiado pela Ro, nossa persona que traduz ciência felina em passos práticos. Cada decisão visual
+  segue uma estética PB minimalista que prova: produtos para gatos podem ser bonitos. De tapetes gelados a camas de janela,
+  de arranhadores a kits Gatitude — tudo existe para que o tutor viva mais leve e o gato viva melhor. Vendemos no site próprio
+  (gato3.com.br), Mercado Livre e Shopee, e atendemos tanto tutores (B2C) quanto revendedores (B2B) que compartilham nossa
+  visão de curadoria premium acessível.'
+block_21_mission: '> Harmonizar casa e rotina para que gatos vivam melhor e tutores vivam mais leves — unindo curadoria veterinária,
+  educação acolhedora e design que desaparece no ambiente.'
+block_22_vision: '> Ser a referência nacional em bem-estar felino, onde cada produto, conteúdo e interação eleva a convivência
+  entre gatos, tutores e lares.'
+block_23_values:
+- Amor aos felinos — Cada decisão é filtrada pelo bem-estar felino, nunca pelo lucro rápido
+- Educação acolhedora — Traduzimos ciência em passos práticos, sem julgamento ou tom professoral
+- Qualidade impecável — Curadoria rigorosa — se não usaríamos com nossos gatos, não vendemos
+- Inovação com propósito — Design minimalista que resolve problemas reais sem agredir o ambiente
+- Comunidade — Construímos rede de tutores informados que se apoiam mutuamente
+block_24_manifesto: 'Gatos não são cães pequenos. Tutores não são consumidores ignorantes. Casas não precisam virar pet shops.
+  O ³ em GATO³ representa nossa tríade sagrada: gato feliz, tutor tranquilo, casa elegante. Enquanto o mercado empurra produtos
+  genéricos e promessas vazias, nós curamos com critério científico e design intencional. A Ro é nossa voz — acolhedora mas
+  informada, prática mas nunca simplista. Cada produto que escolhemos passou pelo filtro de veterinários comportamentalistas.
+  Cada foto que publicamos honra a estética minimalista que não briga com sua decoração. Acreditamos que convivência harmoniosa
+  entre espécies é possível, que educação transforma mais que marketing, que design inteligente resolve problemas sem criar
+  novos. Não vendemos produtos — curamos soluções. Não fazemos marketing — construímos confiança. Não prometemos milagres
+  — entregamos resultados sustentáveis. GATO³ é para tutores que entendem que o melhor investimento é aquele que beneficia
+  todos os moradores da casa — inclusive os que andam em quatro patas. ---'
+section_6_guidelines: ''
+block_25_extended_do_s:
+- Sempre mostrar produto em contexto real de uso (não fundo branco isolado)
+- Usar depoimentos autênticos de tutores — nada de "cliente satisfeito"
+- Citar fontes científicas quando falar de comportamento felino
+- Fotografar em ambientes reais minimalistas (não cenários montados)
+- Incluir protocolo da Ro em conteúdos educacionais
+- Destacar validação veterinária como diferencial competitivo
+- Manter hierarquia visual clara — título, subtítulo, CTA bem definidos
+- Usar testemunhos visuais (antes/depois) quando possível
+block_26_extended_don_ts:
+- Nunca usar termos como "revolucionário", "milagroso", "único no mundo"
+- Não fotografar produtos empilhados ou em quantidade — minimalismo sempre
+- Evitar modelos posando com pets — foco na interação natural
+- Não usar cores vibrantes que quebrem a paleta PB (nem em detalhes)
+- Jamais copiar tom de concorrentes (especialmente Zee.Dog ou Petlove)
+- Não prometer resultados em prazos específicos ("em 7 dias seu gato...")
+- Evitar layouts carregados — espaço negativo é estratégico
+- Nunca descartar marca d'água ou assinatura GATO³ em materiais
+block_27_compliance:
+- 'ANVISA: Produtos pet devem atender RDC 51/2011 — materiais seguros, não tóxicos, laudos técnicos atualizados'
+- 'INMETRO: Certificação obrigatória para brinquedos pet — resistência, materiais, rotulagem conforme portaria 302/2021'
+- 'CONAR: Publicidade responsável — não antropomorfizar resultados, claims baseados em evidência científica'
+- 'CDC: Garantia legal 30 dias + adicional 90 dias, SAC claro, política de trocas transparente'
+block_28_brand_consistency_checklist: '- [ ] Name spelled correctly (GATO³)
+
+  - [ ] Tagline matches approved version
+
+  - [ ] Colors match brand palette (HEX values)
+
+  - [ ] Fonts match brand typography stack
+
+  - [ ] Voice tone matches 5D scores (±1 tolerance)
+
+  - [ ] Archetype personality consistent
+
+  - [ ] Transformation arc present (From/To/Through)
+
+  - [ ] UVP stated correctly
+
+  - [ ] No competitor language copied
+
+  - [ ] Compliance reviewed for market
+
+
+  ---'
+section_7_validation: ''
+block_29_consistency_score: 'Score: 0.92 / 1.00 Threshold: >= 0.85 Status: ✅ APROVADO - Consistência alta entre elementos
+  visuais, tom de voz e posicionamento'
+block_30_uniqueness_score: 'Score: 8.7 / 10.0 Threshold: >= 8.0 Status: ✅ APROVADO - Diferenciação clara no mercado pet felino
+  brasileiro'
+block_31_competitor_audit: '| Dimension | GATO³ | CatMyPet | Chalesco | Zee.Dog |
+
+  |-----------|-------|----------|----------|---------|
+
+  | Voice tone | Sofisticado-acolhedor | Técnico-frio | Genérico-promocional | Jovem-irreverente |
+
+  | Visual style | PB minimalista | Cores vibrantes | Multi-colorido | Neon + grafitti |
+
+  | Positioning | Curadoria científica + design | Produtos especializados | Volume + variedade | Lifestyle pet urbano |'
+block_32_integration_notes: 'This brand book maps to `brand_config.yaml` as follows:
+
+  - Blocks 1-5 → `identity` + `archetype` sections
+
+  - Blocks 6-10 → `positioning` + `audience` sections
+
+  - Blocks 11-15 → `voice` section
+
+  - Blocks 16-19 → `visual` section
+
+  - Blocks 20-24 → `identity` section (story, mission, vision, values)
+
+  - Blocks 25-28 → guidelines (not in config, reference only)
+
+  - Blocks 29-32 → validation metadata
+
+
+  ---'
+section_8_extens_es_gato: ''
+block_33_persona_ro_guia_educacional: 'Identidade: Ro é a persona-guia GATO³ que traduz ciência felina em protocolos práticos
+  e acolhedores.
+
+
+  Características:
+
+  - Tom: Acolhedor mas informado, prático mas nunca simplista
+
+  - Expertise: Veterinária comportamentalista + 15 anos com felinos
+
+  - Método: Passo-a-passo acionável, sem julgamento ao tutor
+
+  - Assinatura: "A Ro ensina, você aplica, seu gato aproveita"
+
+
+  Voice Pattern Ro:
+
+  - Formality: 2/5 (mais casual que marca institucional)
+
+  - Warmth: 5/5 (máximo acolhimento)
+
+  - Authority: 4/5 (expertise baseada em experiência)
+
+
+  Exemplos de Aplicação:
+
+  - Conteúdo educacional Instagram/TikTok
+
+  - Guias de produto no e-commerce
+
+  - Email marketing educativo
+
+  - Suporte ao cliente B2C'
+block_34_estrat_gia_geogr_fica_abc: "Base: São Caetano do Sul - SP (Av. Antônio da Fonseca Martins, 419)\n\nExpansão em Anéis\
+  \ Concêntricos:\n1. Ring 1 (Local): ABC Paulista (São Caetano, Santo André, São Bernardo, Diadema, Mauá, Ribeirão Pires,\
+  \ Rio Grande da Serra)\n   - Entrega rápida same-day\n   - Eventos pet locais\n   - Parcerias clínicas veterinárias\n\n\
+  2. Ring 2 (Regional): Grande São Paulo (Capital + ABCDMRR + Guarulhos, Osasco, Barueri)\n   - E-commerce com entrega expressa\n\
+  \   - Parcerias pet shops premium\n   - Influenciadores locais\n\n3. Ring 3 (Estadual): São Paulo (Campinas, Santos, Sorocaba,\
+  \ Ribeirão Preto)\n   - Marketplace expansion (ML/Shopee)\n   - Rede de revendedores B2B\n   - Marketing digital geotargeted\n\
+  \n4. Ring 4 (Nacional): Brasil (capitais + regiões metropolitanas)\n   - E-commerce nacional\n   - Parcerias estratégicas\n\
+  \   - Content marketing SEO\n\nCanais por Ring:\n- Local: Presencial + WhatsApp + site próprio\n- Regional: Site próprio\
+  \ + marketplaces + B2B\n- Estadual: Marketplaces + B2B + paid ads\n- Nacional: E-commerce + marketplaces + content\n\nRun\
+  \ `python _tools/brand_validate.py` to verify config extraction."

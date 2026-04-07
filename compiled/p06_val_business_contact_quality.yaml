@@ -1,55 +1,110 @@
 id: p06_val_business_contact_quality
 kind: validator
 pillar: P06
-title: Business Contact Quality Validator
-version: 1.0.0
+title: Business Contact Quality Validator v2 — Anti-Fake
+version: 2.0.0
 created: 2026-04-03
 updated: 2026-04-03
-author: builder_agent
+author: n07_orchestrator
 domain: crm-research
 rule_name: validate-business-contact-quality
 target_kind: response_format
 scope: post_generation
-severity: warning
+severity: error
 auto_fix: false
-llm_function: GOVERN
+quality: null
 tags:
 - validator
 - crm
 - contact
-- phone
-- cnpj
-- email
-- website
-- GATO3
-tldr: Valida qualidade de contatos business descobertos — telefone BR, CNPJ algoritmico, email formato+dominio, website SSL+200.
-quality: null
-density_score: null
-overview: 'Regra de validacao para contatos de businesses pet descobertos pela pipeline CRM. Verifica 4 dimensoes de qualidade:
-  telefone, CNPJ, email e website. Cada dimensao produz pass/fail independente; o contato recebe um completeness_score baseado
-  em quantas dimensoes passam.'
-conditions: ''
-c1_telefone_br_valido: "field: business.telefone\noperator: matches\nvalue: \"^\\\\+?55\\\\d{2}[2-9]\\\\d{7,8}$\"\non_fail:\
-  \ warning\nremediation: \"Normalizar para formato +55XX9XXXXXXXX. Remover espacos, parenteses, hifens.\"\nnotes: |\n  -\
-  \ Celular: 11 digitos (com 9 inicial)\n  - Fixo: 10 digitos\n  - DDD obrigatorio (2 digitos)\n  - Aceita com ou sem +55"
-c2_cnpj_algoritmico: "field: business.cnpj\noperator: matches\nvalue: \"^\\\\d{14}$\"\non_fail: info\nremediation: \"Verificar\
-  \ digitos verificadores (mod 11). Consultar ReceitaWS se disponivel.\"\nnotes: |\n  - 14 digitos sem formatacao\n  - Digitos\
-  \ verificadores: posicoes 13 e 14\n  - Algoritmo: multiplicar por pesos [5,4,3,2,9,8,7,6,5,4,3,2], mod 11\n  - Campo opcional\
-  \ — muitos pequenos negocios nao divulgam"
-c3_email_formato_dominio: "field: business.email\noperator: matches\nvalue: \"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}$\"\
-  \non_fail: warning\nremediation: \"Verificar formato RFC 5322 basico. Checar MX record do dominio se possivel.\"\nnotes:\
-  \ |\n  - Rejeitar emails genericos sem dominio corporativo (gmail, hotmail) com flag\n  - Verificar se dominio resolve (DNS\
-  \ MX lookup)\n  - Flag dominios expirados ou parked"
-c4_website_ssl_response_200: "field: business.website\noperator: matches\nvalue: \"^https?://[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}\"\
-  \non_fail: info\nremediation: \"Verificar URL com HEAD request. Aceitar 200, 301, 302. Rejeitar 404, 5xx, timeout.\"\nnotes:\
-  \ |\n  - Preferir HTTPS (flag HTTP-only)\n  - Timeout: 10s max\n  - Aceitar redirects (301/302) como validos\n  - Rejeitar\
-  \ paginas de parking/domain-for-sale"
-scoring: "completeness_score:\n  4/4: \"A — contato completo, pronto para outreach\"\n  3/4: \"B — contato parcial, util para\
-  \ campanha\"\n  2/4: \"C — contato basico, requer enriquecimento\"\n  1/4: \"D — contato minimo, apenas referencia\"\n \
-  \ 0/4: \"F — sem dados de contato, descartavel para CRM ativo\"\nminimum_viable: 2  # Minimo 2 campos validados para entrar\
-  \ no CRM"
-error_message: "\"Contact validation: {passed}/{total} checks passed. \n Failed: {failed_fields}. Score: {completeness_score}.\""
-bypass_policy: 'allowed: false
+- anti-fake
+- quality-gate
+tldr: 'Valida contatos CRM: anti-fabricação (nomes numerados, CNPJs sequenciais), completeness gate, formato telefone/email/CNPJ.'
+density_score: 1.0
+anti_fabrica_o_reject_imediato: ''
+af1_nome_numerado_sequencial: 'field: nome_fantasia
 
-  reason: "Contatos nao-validados poluem CRM e desperdicam budget de outreach"'
-footer: 'Rule: validate-business-contact-quality | Quality: null | Domain: crm-research'
+  rule: NÃO pode terminar em dígito se segue padrão "Segmento Cidade N"
+
+  regex_reject: "^(Pet Shop|Banho E Tosa|Clinica|Hospital|Veterinaria|Pet Business).+\d+$"
+
+  severity: REJECT
+
+  reason: "Padrão de fabricação detectado: nomes genéricos numerados"'
+af2_cnpj_sequencial: 'field: cnpj
+
+  rule: Diferença entre CNPJ atual e anterior deve ser > 1000
+
+  check: abs(int(cnpj_atual) - int(cnpj_anterior)) > 1000
+
+  severity: REJECT
+
+  reason: "CNPJs sequenciais indicam fabricação em lote"'
+af3_endere_o_gen_rico: 'field: endereco
+
+  regex_reject: "^(Avenida|Rua)\s+(Pet Shop|Banho E Tosa|Clinica|Hospital|Veterinaria)"
+
+  severity: REJECT
+
+  reason: "Endereço usa nome de segmento como logradouro — fabricado"'
+af4_fonte_ausente: 'field: fonte_descoberta
+
+  rule: Campo obrigatório e não vazio
+
+  severity: REJECT
+
+  reason: "Sem fonte rastreável. Todo contato precisa de URL/query de origem."
+
+
+  ---'
+completeness_score_0_5: "scoring:\n  - field: nome_fantasia\n    points: 1\n    condition: \"não vazio e len > 2\"\n\n  -\
+  \ field: endereco\n    points: 1\n    condition: \"não vazio e contém número\"\n\n  - field: telefone OR whatsapp\n    points:\
+  \ 1\n    condition: \"pelo menos 1 preenchido com 10+ dígitos\"\n\n  - field: email OR website\n    points: 1\n    condition:\
+  \ \"pelo menos 1 preenchido e válido\"\n\n  - field: instagram OR google_maps_url\n    points: 1\n    condition: \"pelo\
+  \ menos 1 preenchido\"\n\ngates:\n  - score >= 2: PASS (entra no CRM)\n  - score == 1: QUARANTINE (precisa enriquecimento)\n\
+  \  - score == 0: REJECT (descartado)\n\n---"
+valida_es_de_formato: ''
+f1_telefone_br: 'field: telefone
+
+  format: "^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$"
+
+  normalize: "Remover espaços, parênteses, hífens → (XX) XXXXX-XXXX"
+
+  severity: WARN'
+f2_cnpj: 'field: cnpj
+
+  format: "^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$"
+
+  check: "Dígitos verificadores mod 11"
+
+  severity: INFO (campo opcional — muitos não divulgam)'
+f3_email: 'field: email
+
+  format: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+  severity: WARN'
+f4_website: 'field: website
+
+  format: "^https?://"
+
+  check: "Idealmente HTTP 200, mas não bloquear"
+
+  severity: INFO
+
+
+  ---'
+aplica_o: 'Este validator roda no Step 3 (Validação) da pipeline `p12_wf_crm_research_pipeline.md`.
+
+
+  # Uso:
+
+  from _tools.crm.crm_data_validator import validate_contact
+
+
+  result = validate_contact(record, previous_records)
+
+  # result.status: PASS | QUARANTINE | REJECT
+
+  # result.score: 0-5
+
+  # result.issues: ["AF1: nome numerado", "F1: telefone inválido"]'

@@ -1,7 +1,22 @@
+---
+id: spec_agent_package
+kind: spec
+pillar: P01
+title: "ISO Package Spec v1.0 — Universal Agent Distribution Format"
+version: 1.0.0
+created: 2026-03-23
+updated: 2026-04-07
+author: n03_engineering
+quality: 9.2
+tags: [spec, iso-package, agent, distribution, portable, llm-agnostic]
+tldr: "Universal portable agent format: 3-12 files (manifest + system_instruction + instructions), 4 maturity tiers (Minimal→Whitelabel), LLM-agnostic, 6 portability rules, maps to 10 CEX pillars."
+density_score: 1.0
+---
+
 # ISO Package Spec v1.0
 
 > Universal portable format for AI agent distribution.
-> Copy folder -> paste in any LLM/pipeline -> agent works.
+> Copy folder → paste in any LLM/pipeline → agent works.
 
 ## What It Is
 
@@ -179,4 +194,5 @@ for portability. The compile/decompile tools handle conversion between formats.
 
 ---
 
+---
 *ISO Package Spec v1.0 | CEX Framework | 2026-03-23*

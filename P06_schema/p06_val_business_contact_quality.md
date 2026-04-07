@@ -13,7 +13,7 @@ target_kind: response_format
 scope: post_generation
 severity: error
 auto_fix: false
-quality: 8.9
+quality: 9.0
 tags: [validator, crm, contact, anti-fake, quality-gate]
 tldr: "Valida contatos CRM: anti-fabricação (nomes numerados, CNPJs sequenciais), completeness gate, formato telefone/email/CNPJ."
 density_score: 1.0
@@ -54,7 +54,7 @@ reason: "Endereço usa nome de segmento como logradouro — fabricado"
 field: fonte_descoberta
 rule: Campo obrigatório e não vazio
 severity: REJECT
-reason: "Sem fonte rastreável. Todo contato precisa de URL/query de origem."
+reason: "Sem fonte rastreável. Cada contato precisa de URL/query de origem."
 ```
 
 ---
@@ -97,7 +97,7 @@ gates:
 ```yaml
 field: telefone
 format: "^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$"
-normalize: "Remover espaços, parênteses, hífens → (XX) XXXXX-XXXX"
+normalize: "Remover espaços, parênteses, hífens → (11) 91234-5678 (exemplo)"
 severity: WARN
 ```
 

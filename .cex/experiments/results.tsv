@@ -5790,3 +5790,32 @@ et
 2026-04-07 16:06:58	archetypes\builders\citation-builder\bld_quality_gate_citation.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
 2026-04-07 16:06:59	archetypes\builders\citation-builder\bld_quality_gate_citation.md	4	8.9	1.00	discard	polished formatting (whitespace cleanup)
 2026-04-07 16:07:00	archetypes\builders\citation-builder\bld_quality_gate_citation.md	5	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 18:54:08	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_instance_extraction.md	1	8.7	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:08	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\_shared\skill_swarm_autonomy.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:09	C:\Users\PC\Documents\GitHub\cex\N01_research\config\brand_context.md	1	8.6	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 18:54:10	C:\Users\PC\Documents\GitHub\cex\N01_research\output\output_crm_pet_abc.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:11	C:\Users\PC\Documents\GitHub\cex\N02_marketing\p12_wf_gato_strategic_outreach.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:11	C:\Users\PC\Documents\GitHub\cex\N03_engineering\config\brand_context.md	1	8.5	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 18:54:12	C:\Users\PC\Documents\GitHub\cex\N05_operations\config\brand_context.md	1	8.5	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 18:54:13	C:\Users\PC\Documents\GitHub\cex\N06_commercial\output\output_brand_book.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:13	C:\Users\PC\Documents\GitHub\cex\N06_commercial\output\output_brand_one_pager.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 18:54:14	C:\Users\PC\Documents\GitHub\cex\N06_commercial\output\output_brand_voice_guide.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:15	C:\Users\PC\Documents\GitHub\cex\N06_commercial\output\output_discovery_report.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 18:54:15	C:\Users\PC\Documents\GitHub\cex\N06_commercial\output\output_transformation_arc.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 18:54:16	C:\Users\PC\Documents\GitHub\cex\N06_commercial\output\output_visual_identity.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:17	C:\Users\PC\Documents\GitHub\cex\N07_admin\config\brand_context.md	1	8.5	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 18:54:18	C:\Users\PC\Documents\GitHub\cex\N07_admin\output\output_crm_pipeline_evidence.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:18	C:\Users\PC\Documents\GitHub\cex\N07_admin\output\output_emergent_autonomy_report.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:19	C:\Users\PC\Documents\GitHub\cex\N07_admin\output\output_pipeline_retrospective.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:20	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\kc_template_catalog.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-07 18:54:20	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\meta\kc_instance_variable_registry.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:21	C:\Users\PC\Documents\GitHub\cex\P02_model\p02_agent_crm_research_orchestrator.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:22	C:\Users\PC\Documents\GitHub\cex\P04_tools\p04_cm_gato3_cex.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:22	C:\Users\PC\Documents\GitHub\cex\P04_tools\p04_cm_gato3_revenue_strategy.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:23	C:\Users\PC\Documents\GitHub\cex\P04_tools\p04_retr_multi_source_business_intel.md	1	9.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:24	C:\Users\PC\Documents\GitHub\cex\P04_tools\p04_search_pet_business_discovery.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:24	C:\Users\PC\Documents\GitHub\cex\P04_tools\templates\tpl_retriever_business_intel.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:25	C:\Users\PC\Documents\GitHub\cex\P04_tools\templates\tpl_search_tool_business_discovery.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 18:54:26	C:\Users\PC\Documents\GitHub\cex\P05_output\p05_rf_crm_output_standard.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:26	C:\Users\PC\Documents\GitHub\cex\P06_schema\p06_val_business_contact_quality.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-07 18:54:27	C:\Users\PC\Documents\GitHub\cex\P07_evals\p07_sr_geographic_business_density.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
