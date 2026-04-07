@@ -56,7 +56,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, slides, presentation, deck, content_factory, P03]
 tldr: "Reusable mold for generating slide deck content with titles, bullets, speaker notes, and visual cues"
 keywords: [slide deck, presentation, slides, marp, speaker notes, content factory]
