@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-02
 author: n06_commercial
 domain: brand-discovery
-quality: null
+quality: 9.1
 tags: [brand, discovery, research, mercado-pet, abc, gato3, n06]
 tldr: "Relatório completo discovery GATO³: mercado pet R$ 77bi, keywords felinas, gaps competitivos ABC Paulista, archetype Caregiver validado, 22 SKUs mapeados."
 density_score: 0.92
@@ -96,7 +96,7 @@ Exact phrases your audience uses:
 
 ### Categoria Core (Tapetes Gelados)
 - CB4290: Tapete Gelado 40x50cm (R$ 29,52 B2C)
-- CB4291: Tapete Refrescante 65x50cm (R$ 42,48 B2C) 
+- CB4291: Tapete Refrescante 65x50cm (R$ 42,48 B2C)
 - CB4292: Tapete Gelado Grande 50x90cm (R$ 60,16 B2C)
 
 ### Categoria Arranhadores
