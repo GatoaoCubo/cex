@@ -8,7 +8,7 @@ version: 1.0.0
 created: 2026-04-07
 updated: 2026-04-07
 author: N07_orchestrator
-quality: null
+quality: 9.1
 tags: [terminology, naming, metaphors, industry, standards, permanent]
 tldr: "CEX uses game metaphors internally. Artifacts must use industry terms. This maps one to the other and tracks the rename cascade."
 density_score: null
