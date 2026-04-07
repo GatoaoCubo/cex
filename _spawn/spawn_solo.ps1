@@ -82,6 +82,26 @@ python -c "from _tools.signal_writer import write_signal; write_signal('$nucleus
     Write-Output "[$upper] Handoff: $handoffPath"
 }
 
+# Kill-before-spawn (roadmap principle 6)
+$pidFile = "$runtimeDir\pids\spawn_pids.txt"
+if (Test-Path $pidFile) {
+    $surviving = @()
+    foreach ($line in Get-Content $pidFile) {
+        if ($line -match "^\s*(\d+)\s+$nucleus\s") {
+            $oldPid = [int]$matches[1]
+            Write-Output "[$upper] Killing existing PID:$oldPid before respawn"
+            & taskkill /F /PID $oldPid /T 2>$null
+        } else {
+            $surviving += $line
+        }
+    }
+    if ($surviving.Count -gt 0) {
+        $surviving | Set-Content $pidFile -Encoding UTF8
+    } else {
+        Remove-Item $pidFile -Force
+    }
+}
+
 # Boot script -- prefer .cmd (stable colors via `color XX`) over .ps1 (encoding issues)
 $bootCmd = "$root\boot\$nucleus.cmd"
 $bootPs1 = "$root\boot\$nucleus.ps1"
@@ -118,6 +138,5 @@ if (-not $sessionId) {
     $sessionId = "s$parentPid"
 }
 $timestamp = Get-Date -Format "yyyy-MM-dd_HH:mm:ss"
-$pidFile = "$runtimeDir\pids\spawn_pids.txt"
 "$($proc.Id) $nucleus $cli $sessionId $timestamp" | Add-Content $pidFile
 Write-Output "[$upper] Spawned PID:$($proc.Id) CLI:$cli Session:$sessionId at ($($pos.x),$($pos.y))"
