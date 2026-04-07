@@ -6,7 +6,7 @@ purpose: "Teach all builders and nuclei to present structured decision points in
 version: 1.0.0
 created: 2026-03-31
 author: n07_orchestrator
-quality: null
+quality: 9.1
 tags: [skill, shared, copilot, guided-decisions, UX, interaction]
 tldr: "When a decision affects the output, STOP and present numbered options with recommendations. Never assume what the user wants. This is as mandatory as 8F."
 density_score: 0.95
