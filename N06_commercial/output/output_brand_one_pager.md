@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-02
 author: n06_commercial
 domain: brand-summary
-quality: null
+quality: 9.1
 tags: [brand, one-pager, b2b, parceria, gato3, n06]
 tldr: "One-pager B2B GATO³: logo + tagline + 22 SKUs + margem 18% + sede SCS + curadoria veterinária + design PB minimalista. Para parceiros comerciais."
 density_score: 0.92
@@ -55,7 +55,7 @@ density_score: 0.92
 
 ### **Core Products (Alto Giro)**
 - Tapetes Gelados (3 tamanhos) — R$ 29-60 B2C
-- Arranhadores Papelão + Sisal — R$ 9-32 B2C  
+- Arranhadores Papelão + Sisal — R$ 9-32 B2C
 - Brinquedos Interativos — R$ 9-54 B2C
 
 ### **Categorias Completas**
@@ -102,7 +102,7 @@ density_score: 0.92
 
 ### **Canais de Venda**
 ✅ E-commerce próprio (gato3.com.br)
-✅ Marketplaces (Mercado Livre, Shopee) 
+✅ Marketplaces (Mercado Livre, Shopee)
 ✅ **B2B Revenda** ← SUA OPORTUNIDADE
 ✅ B2C Local (ABC Paulista)
 
