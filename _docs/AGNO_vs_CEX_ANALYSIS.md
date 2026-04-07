@@ -6,9 +6,10 @@ title: "Agno vs CEX — Comparative Analysis & Gap Report"
 version: 1.0.0
 author: N01
 created: 2026-04-01
-quality: null
+quality: 9.1
 tags: [competitive-analysis, architecture, gaps, roadmap]
 tldr: "Agno = runtime SDK para executar agentes. CEX = sistema de conhecimento tipado para PROJETAR agentes. Complementares, não concorrentes. 17 gaps identificados, 10 módulos copiáveis."
+density_score: 1.0
 ---
 
 # Agno vs CEX — Análise Comparativa Completa
