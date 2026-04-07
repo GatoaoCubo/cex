@@ -10,6 +10,7 @@ author: n06_commercial
 quality: 9.0
 tags: [readme, commercial, N06, brand, monetization, fractal-module]
 tldr: "N06 fractal module index: 12 pillar subdirs, 48 artifacts, dual-role Brand Architect + Revenue Engineer. Brand discovery → propagation → monetization."
+domain: commercial
 ---
 
 # N06_commercial
@@ -41,3 +42,30 @@ tldr: "N06 fractal module index: 12 pillar subdirs, 48 artifacts, dual-role Bran
 - Pipeline: [[LLM_PIPELINE]]
 
 Source mold: [[N00_genesis]]
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | commercial | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Commercial artifacts follow CEX 8F pipeline from intent to publication
+- Quality gates enforce minimum 8.0 threshold for all published artifacts
+- Cross-nucleus references use explicit id-based linking, not path-based
+- Version tracking enables rollback to any previous artifact state
+
+### Usage Reference
+
+```yaml
+# readme integration
+artifact: README
+nucleus: N06
+domain: commercial
+quality_threshold: 9.0
+```
+

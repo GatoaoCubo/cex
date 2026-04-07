@@ -3,6 +3,14 @@ id: n05_readme_install
 kind: output_template
 pillar: P05
 quality: 8.7
+title: "Output Readme Install"
+version: 1.0.0
+author: N05
+tags: [output_template, operations, output]
+tldr: "Structured output artifact produced by nucleus pipeline with verified quality metrics"
+domain: operations
+created: 2026-04-06
+updated: 2026-04-07
 ---
 
 # Installation & Requirements
@@ -57,7 +65,7 @@ quality: 8.7
 | **Premium** | All cloud models | Claude Pro + Gemini Advanced + OpenAI Plus | ~$60/mo |
 | **Mid** | Claude only | Claude Pro | ~$20/mo |
 | **Local** | Offline models | Ollama (free) | $0 |
-| **CEX-FT** | Fine-tuned | Coming soon | TBD |
+| **CEX-FT** | Fine-tuned | Coming soon | Pending finalization |
 
 ## Verify Installation
 

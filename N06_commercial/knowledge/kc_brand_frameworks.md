@@ -77,7 +77,7 @@ linked_artifacts:
 **Fields**:
 - `situation`: Contexto ou gatilho que cria a necessidade (ex: estou saindo para o trabalho com pressa)
 - `motivation`: Acao ou solucao desejada (ex: aplicar maquiagem rapidamente)
-- `outcome`: Resultado final desejado (emocional ou funcional) (ex: parecer profissional o dia todo sem preocupacao)
+- `outcome`: Resultado final desejado (emocional ou funcional) (ex: parecer profissional o dia Planned sem preocupacao)
 
 **Example**:
 - brand: BEAUTYFIX

@@ -9,6 +9,12 @@ created: 2026-04-02
 type: technical_memory
 scope: rag_components
 density_score: 1.0
+title: "Rag Pipeline Memory"
+version: 1.0.0
+author: N04
+tags: [memory_scope, knowledge]
+tldr: "Persistent memory store for cross-session learning with decay and relevance scoring"
+updated: 2026-04-07
 ---
 
 # RAG Pipeline Technical Memory

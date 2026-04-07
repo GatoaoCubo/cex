@@ -4,6 +4,14 @@ kind: competitive_analysis
 pillar: P01
 quality: 8.9
 density_score: 0.95
+title: "Output Competitive Knowledge"
+version: 1.0.0
+author: N04
+tags: [competitive_analysis, knowledge, output]
+tldr: "This report analyzes the structural depth and governance of the CEX 'Knowledge Operating System' (114 kinds, 12 pillars, 8 functions) against leading LLM..."
+domain: knowledge
+created: 2026-04-06
+updated: 2026-04-07
 ---
 
 # Competitive Intel: CEX Typed Knowledge vs. Market Frameworks

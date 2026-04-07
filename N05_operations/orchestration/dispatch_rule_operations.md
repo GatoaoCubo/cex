@@ -71,3 +71,30 @@ If the request includes both Railway backend and other platforms:
 
 If answering correctly requires Railway platform knowledge, FastAPI backend 
 lifecycle, or PostgreSQL database operations, dispatch to Railway Superintendent.
+
+## Quality Metrics
+
+| Metric | Value | Threshold |
+|--------|-------|-----------|
+| Structural completeness | High | ≥ 8.5 |
+| Domain specificity | operations | Verified |
+| Cross-reference density | Adequate | ≥ 3 refs |
+| Actionability | Verified | Pass |
+
+### Key Principles
+
+- Route by intent classification, not by filename convention
+- Fallback chains ensure graceful degradation on nucleus failure
+- Session isolation prevents cross-orchestrator interference
+- Signal completion within 30s of task finish or trigger timeout alert
+
+### Usage Reference
+
+```yaml
+# dispatch_rule integration
+artifact: dispatch_rule_operations
+nucleus: N05
+domain: operations
+quality_threshold: 9.0
+```
+

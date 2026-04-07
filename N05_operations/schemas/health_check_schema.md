@@ -95,3 +95,38 @@ health_response:
   }
 }
 ```
+
+
+## Health Check Implementation
+
+Health check endpoints follow a standardized response format:
+
+- **Response time**: health endpoint must respond within 500ms under normal load
+- **Dependency cascading**: check reports status of each downstream dependency individually
+- **Degraded state**: partial failures reported as DEGRADED, not DOWN, with detail
+- **History retention**: last 100 health check results stored for trend analysis
+
+### Endpoint Specification
+
+```yaml
+# Health check response schema
+health:
+  status: UP | DEGRADED | DOWN
+  timestamp: ISO8601
+  version: semver
+  checks:
+    - name: database
+      status: UP
+      latency_ms: 12
+    - name: cache
+      status: UP
+      latency_ms: 3
+  uptime_seconds: 86400
+```
+
+| Status | Meaning | Alert Level |
+|--------|---------|-------------|
+| UP | All checks pass | None |
+| DEGRADED | Non-critical check failed | Warning |
+| DOWN | Critical check failed | Critical |
+

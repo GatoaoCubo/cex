@@ -9,6 +9,12 @@ created: 2026-04-02
 type: mapping_schema
 scope: builders_to_kcs
 density_score: 1.0
+title: "Naming Convention Mapping"
+version: 1.0.0
+author: N04
+tags: [validation_schema, knowledge]
+tldr: "Naming rules mapping CEX artifact types to filesystem paths and identifiers"
+updated: 2026-04-07
 ---
 
 # Builder ↔ KC Naming Convention Mapping

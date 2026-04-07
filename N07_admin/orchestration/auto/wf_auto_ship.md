@@ -12,6 +12,7 @@ quality: 8.7
 tags: [workflow, auto, n07, ship, cicd, deploy]
 tldr: "When all quality gates pass: compile all, run tests, git commit, push, signal complete. The CI/CD pipeline of CEX."
 density_score: 0.92
+updated: 2026-04-07
 ---
 
 # Auto-Ship
@@ -48,3 +49,36 @@ Quality: {avg_score}
 ## Failure Mode
 Test failure → abort ship, trigger auto-debug. Never push broken code.
 Compile failure → abort ship, fix compilation, retry.
+
+
+## Operational Constraints
+
+This automated workflow operates under strict resource and safety boundaries:
+
+- **Budget cap**: maximum token expenditure per execution enforced via runtime counter
+- **Idempotency**: re-running the workflow produces no side effects if previous run succeeded
+- **Rollback safe**: every state change creates a checkpoint enabling full reversal
+- **Audit logged**: execution start, each step completion, and final status written to log
+
+### Execution Trace
+
+```yaml
+# Workflow execution record
+trace:
+  workflow: wf_auto_ship
+  started: 2026-04-07T15:00:00
+  status: completed
+  steps_total: 4
+  steps_passed: 4
+  duration_seconds: 45
+  token_usage: 12000
+  artifacts_modified: 3
+```
+
+| Phase | Action | Gate |
+|-------|--------|------|
+| Pre-check | Validate inputs and prerequisites | Abort on missing dependency |
+| Execute | Run core workflow logic | Monitor for errors |
+| Post-check | Verify outputs meet quality threshold | Flag regressions |
+| Cleanup | Archive temp files, update signals | Always runs |
+

@@ -12,6 +12,7 @@ quality: 8.7
 tags: [workflow, auto, n07, review, quality, gate]
 tldr: "When a nucleus signals complete, auto-review its output: frontmatter, compilation, quality gate, doctor check."
 density_score: 0.92
+updated: 2026-04-07
 ---
 
 # Auto-Review
@@ -49,3 +50,36 @@ Pull Request review / code review gate. Output doesn't ship until it passes revi
 
 ## Failure Mode
 Review itself fails → log error, mark output as "unreviewed," proceed.
+
+
+## Operational Constraints
+
+This automated workflow operates under strict resource and safety boundaries:
+
+- **Budget cap**: maximum token expenditure per execution enforced via runtime counter
+- **Idempotency**: re-running the workflow produces no side effects if previous run succeeded
+- **Rollback safe**: every state change creates a checkpoint enabling full reversal
+- **Audit logged**: execution start, each step completion, and final status written to log
+
+### Execution Trace
+
+```yaml
+# Workflow execution record
+trace:
+  workflow: wf_auto_review
+  started: 2026-04-07T15:00:00
+  status: completed
+  steps_total: 4
+  steps_passed: 4
+  duration_seconds: 45
+  token_usage: 12000
+  artifacts_modified: 3
+```
+
+| Phase | Action | Gate |
+|-------|--------|------|
+| Pre-check | Validate inputs and prerequisites | Abort on missing dependency |
+| Execute | Run core workflow logic | Monitor for errors |
+| Post-check | Verify outputs meet quality threshold | Flag regressions |
+| Cleanup | Archive temp files, update signals | Always runs |
+

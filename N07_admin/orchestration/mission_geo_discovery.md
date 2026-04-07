@@ -39,3 +39,35 @@ Phase 1 (N07 scrape) ──→ Phase 2 (N04 KCs) ──→ Phase 3 (N03 ISOs)
 
 ## Superintendent: N01 (Intelligence)
 ## Spec: `.cex/runtime/handoffs/mission_geo_discovery.md`
+
+
+## Mission Decomposition
+
+This mission breaks down into sequential waves with inter-wave quality gates:
+
+- **Wave 1 (Research)**: N01 gathers context, competitive data, and domain knowledge
+- **Wave 2 (Build)**: N03 constructs artifacts using research as input context
+- **Wave 3 (Polish)**: N02 applies brand voice and visual consistency to outputs
+- **Wave 4 (Validate)**: N05 runs quality checks, scoring, and regression tests
+
+### Resource Allocation
+
+```yaml
+# Mission budget allocation
+budget:
+  total_tokens: 200000
+  wave_1_research: 50000
+  wave_2_build: 80000
+  wave_3_polish: 40000
+  wave_4_validate: 30000
+  max_duration_minutes: 30
+  max_parallel_nuclei: 4
+```
+
+| Wave | Nucleus | Input | Output | Quality Gate |
+|------|---------|-------|--------|-------------|
+| 1 | N01 | Goal statement | Research brief | Completeness >= 8.0 |
+| 2 | N03 | Research brief | Artifacts | Structural >= 8.5 |
+| 3 | N02 | Raw artifacts | Polished artifacts | Brand compliance |
+| 4 | N05 | Final artifacts | Score report | All >= 9.0 |
+
