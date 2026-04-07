@@ -6,8 +6,9 @@ nucleus: N04
 sin: Gula por Conhecimento
 pillar: P01
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
+density_score: 1.0
 ---
 
 ## Identity
