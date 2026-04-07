@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n04_knowledge
 domain: ffmpeg
-quality: null
+quality: 9.0
 tags: [ffmpeg, video, audio, media, content-factory, integration, cli, INJECT]
 tldr: "Battle-tested FFmpeg commands for concatenation, audio mixing, subtitles, thumbnails, and format conversion in content pipelines"
 when_to_use: "When any nucleus needs to process, combine, or convert media files — the glue between all content factory tools"
