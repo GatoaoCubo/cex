@@ -8,7 +8,7 @@ created: "2026-04-06"
 updated: "2026-04-06"
 author: builder_agent
 domain: model_provider
-quality: null
+quality: 9.0
 tags: [quality-gate, model-provider, llm-routing, P02, fallback]
 tldr: "Quality gate for model_provider artifacts: enforces tiered models, rate limits, fallback chain, and provider authentication fields."
 density_score: 0.87
