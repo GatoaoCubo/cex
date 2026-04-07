@@ -172,8 +172,8 @@ During task execution, the 8F pipeline enriches further:
 
 | Old name | New name | Industry source | Status |
 |----------|----------|----------------|--------|
-| vectordb_backend | vector_store | LangChain, LlamaIndex, Pinecone | 🔄 N03 renaming |
-| brain_index | knowledge_index | LlamaIndex | 🔄 N03 renaming |
+| vector_store | vector_store | LangChain, LlamaIndex, Pinecone | 🔄 N03 renaming |
+| knowledge_index | knowledge_index | LlamaIndex | 🔄 N03 renaming |
 | director | supervisor | LangGraph | 🔄 N03 renaming |
 | law | invariant | Software engineering | 🔄 N03 renaming |
 | content_monetization | (move P04→P11) | Misplaced pillar | 🔄 N03 moving |

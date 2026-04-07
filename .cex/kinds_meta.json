@@ -196,7 +196,7 @@
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
     "naming": "p04_cm_{{name}}.md",
-    "pillar": "P04"
+    "pillar": "P11"
   },
   "context_doc": {
     "boundary": "Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).",

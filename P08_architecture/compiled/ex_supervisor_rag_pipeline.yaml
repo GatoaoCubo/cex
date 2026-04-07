@@ -17,8 +17,8 @@ tags:
 - pipeline
 - orchestration
 - P08
-tldr: 'Crew supervisor for RAG pipeline: document-loader -> parser -> embedding-config -> retriever -> prompt-template in strict
-  sequence.'
+tldr: 'Crew supervisor for RAG pipeline: document-loader -> parser -> embedding-config -> retriever -> prompt-template in
+  strict sequence.'
 density_score: 0.91
 overview: Orchestrates a 5-builder crew for Retrieval-Augmented Generation pipelines. Each builder produces one artifact in
   strict pipeline order — output of each stage feeds as input to the next. No parallelism; each stage depends on the previous.
