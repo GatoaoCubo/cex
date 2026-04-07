@@ -48,7 +48,7 @@ def build_distill_prompt(template: str, raw_content: str, source_name: str) -> s
     """Build the prompt that forces template compliance."""
     return f"""## TAREFA: Distill Knowledge
 
-Voce recebeu um insumo RAW e um TEMPLATE obrigatorio.
+You received a RAW input and a REQUIRED TEMPLATE.
 Seu trabalho: PREENCHER o template com conhecimento EXTRAIDO + EXPANDIDO do insumo.
 
 ### REGRAS:

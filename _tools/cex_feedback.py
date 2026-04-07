@@ -22,7 +22,7 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    print("ERRO: PyYAML necessario. pip install pyyaml", file=sys.stderr)
+    print("ERROR: PyYAML required. pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
 CEX_ROOT = Path(__file__).resolve().parent.parent

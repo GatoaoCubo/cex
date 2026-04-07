@@ -123,7 +123,7 @@ Hierarquia: CODEX > _schema > _generator > templates > instances
 ## ANATOMIA UNIVERSAL
 YAML front: id, type, lp, quality, keywords(3+), long_tails(2+), bullets(3+), axioms(1+)
 MD body: title, summary 1-line, secoes por tipo
-Density >= 0.8 obrigatorio. Max 4KB.
+Density >= 0.8 required. Max 4KB.
 Prosa > 3 linhas proibida. Bullets com max 80 chars.
 
 ## NAMING
@@ -138,7 +138,7 @@ Regras: lowercase, snake_case, ASCII, max 50 chars
 
 ## WORKFLOW
 1. Escolher LP + tipo (consultar _schema.yaml)
-2. Ler _generator.md (instrucoes passo-a-passo)
+2. Read _generator.md (step-by-step instructions)
 3. Usar template/ como base
 4. Preencher variaveis e conteudo
 5. Validar contra schema (density >= 0.8)
@@ -197,7 +197,7 @@ Knowledge base construido com [CEX](https://github.com/sniff-group/cex).
 # 1. Escolher LP e tipo
 cat P01_knowledge/_schema.yaml   # ver tipos disponiveis
 
-# 2. Ler instrucoes
+# 2. Read instructions
 cat P01_knowledge/_generator.md  # passo-a-passo
 
 # 3. Usar template

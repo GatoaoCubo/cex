@@ -707,7 +707,7 @@ class CrewRunner:
             content = None
             try:
                 result = subprocess.run(
-                    ["claude", "-p", "--model", model, "--no-chrome"],
+                    ["pi", "-p", "--model", "anthropic/" + model],
                     input=prompt, capture_output=True, text=True,
                     timeout=120, cwd=str(ROOT), encoding="utf-8",
                 )
@@ -837,7 +837,7 @@ class CrewRunner:
 
         # Verify claude CLI is available
         try:
-            subprocess.run(["claude", "--version"], capture_output=True, timeout=5)
+            subprocess.run(["pi", "--version"], capture_output=True, timeout=5)
         except (FileNotFoundError, subprocess.TimeoutExpired):
             print("WARN: claude CLI not found. Falling back to dry-run.", file=sys.stderr)
             return self.execute_step_dry_run(step, state, output_dir)
@@ -898,12 +898,12 @@ class CrewRunner:
                     import re
 
                     cli_result = subprocess.run(
-                        ["claude", "-p", "--model", model, "--no-chrome"],
+                        ["pi", "-p", "--model", "anthropic/" + model],
                         input=prompt, capture_output=True, text=True,
                         timeout=120, cwd=str(ROOT), encoding="utf-8",
                     )
                     if cli_result.returncode != 0:
-                        raise RuntimeError(f"claude -p exit {cli_result.returncode}")
+                        raise RuntimeError(f"pi -p exit {cli_result.returncode}")
                     content = cli_result.stdout
 
                     # Extract self-assessed quality score
@@ -1181,7 +1181,7 @@ Examples:
     # Load plan
     plan_path = Path(args.plan)
     if not plan_path.exists():
-        print(f"ERRO: Plan file not found: {plan_path}", file=sys.stderr)
+        print(f"ERROR: Plan file not found: {plan_path}", file=sys.stderr)
         sys.exit(1)
 
     with open(plan_path, "r", encoding="utf-8") as f:
@@ -1190,7 +1190,7 @@ Examples:
     # Validate plan has expected structure
     if "functions" not in plan:
         print(
-            "ERRO: Plan JSON missing 'functions' key. Is this a Motor 8F output?", file=sys.stderr
+            "ERROR: Plan JSON missing 'functions' key. Is this a Motor 8F output?", file=sys.stderr
         )
         sys.exit(1)
 

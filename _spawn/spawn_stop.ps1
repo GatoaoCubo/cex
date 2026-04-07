@@ -148,15 +148,15 @@ Log "  STEP 3: Orphan CLI scan"
 if ($All) {
     $found = $false
     
-    foreach ($p in @(Get-Process "claude" -EA SilentlyContinue | Where-Object { $PSItem.Id -notin $killedPids })) {
+    foreach ($p in @(Get-Process "claude","pi" -EA SilentlyContinue | Where-Object { $PSItem.Id -notin $killedPids })) {
         $cimProc = Get-CimInstance Win32_Process -Filter "ProcessId=$($p.Id)" -EA SilentlyContinue
         $parentPid = $cimProc.ParentProcessId
         $parentAlive = Get-Process -Id $parentPid -EA SilentlyContinue
         if ($parentAlive -and $parentAlive.ProcessName -eq "cmd") {
-            Log "    ORPHAN claude PID:$($p.Id) parent CMD:$parentPid -- killing tree"
+            Log "    ORPHAN cli PID:$($p.Id) parent CMD:$parentPid -- killing tree"
             Kill-Tree -TargetPid $parentPid -Tag "orphan"
         } else {
-            Log "    ORPHAN claude PID:$($p.Id) no parent CMD -- killing directly"
+            Log "    ORPHAN cli PID:$($p.Id) no parent CMD -- killing directly"
             Kill-Tree -TargetPid $p.Id -Tag "orphan-direct"
         }
         $found = $true
@@ -170,7 +170,7 @@ if ($All) {
     
     if (-not $found) { Log "    No orphans" }
 } else {
-    Log "    SKIPPED (only with -All -- DANGEROUS: kills ALL claude processes)"
+    Log "    SKIPPED (only with -All -- DANGEROUS: kills ALL claude+pi processes)"
 }
 
 # --- SUMMARY ---

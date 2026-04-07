@@ -14,7 +14,7 @@ Pipeline order (from MOTOR_8F_SPEC):
 Usage:
   python cex_8f_motor.py --intent "cria agente de vendas para ML"
   python cex_8f_motor.py --intent "reconstroi signal-builder" --quality 9.5
-  python cex_8f_motor.py --intent "cria agente E workflow de pesquisa"
+  python cex_8f_motor.py --intent "create agent AND research workflow"
   python cex_8f_motor.py --intent "cria agente" --output plan.json
   python cex_8f_motor.py --test
 """
@@ -125,7 +125,7 @@ turn_counter = TurnCounter()
 try:
     import yaml
 except ImportError:
-    print("ERRO: PyYAML necessario. pip install pyyaml", file=sys.stderr)
+    print("ERROR: PyYAML required. pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
 
@@ -379,7 +379,7 @@ PRIMARY_NEEDS_KEYWORD = {
     "spawn-config-builder": ["spawn", "lancamento", "deploy"],
     "dispatch-rule-builder": ["dispatch", "routing policy", "despacho"],
     "e2e-eval-builder": ["e2e", "end-to-end"],
-    "validator-builder-codex": ["codex", "code review", "revisao de codigo"],
+    "validator-builder-codex": ["codex", "code review", "code review"],
     "type-def-builder": ["tipo customizado", "type definition", "typedef"],
     "validation-schema-builder": ["validation schema", "schema de validacao"],
     "daemon-builder": ["daemon", "background", "processo continuo"],
@@ -889,7 +889,7 @@ def rebuild_kc_index():
 def load_builder_map() -> dict:
     """Load 8F_BUILDER_MAP.yaml."""
     if not BUILDER_MAP_PATH.exists():
-        print(f"ERRO: Builder map nao encontrado: {BUILDER_MAP_PATH}", file=sys.stderr)
+        print(f"ERROR: Builder map not found: {BUILDER_MAP_PATH}", file=sys.stderr)
         sys.exit(1)
     with open(BUILDER_MAP_PATH, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
@@ -1181,7 +1181,7 @@ def generate_output(
 
     if parsed["domain"] == "generic":
         warnings.append(
-            "domain nao identificado -- plan pode ser generico. Especifique o artefato alvo."
+            "domain not identified -- plan may be generic. Specify target artifact."
         )
 
     if any(c.get("meta") for c in classified):
@@ -1234,7 +1234,7 @@ def main():
 Examples:
   python cex_8f_motor.py --intent "cria agente de vendas para ML"
   python cex_8f_motor.py --intent "reconstroi signal-builder" --quality 9.5
-  python cex_8f_motor.py --intent "cria agente E workflow de pesquisa"
+  python cex_8f_motor.py --intent "create agent AND research workflow"
   python cex_8f_motor.py --test
         """,
     )
@@ -1343,12 +1343,12 @@ def run_tests():
         check("_builder-builder active", bb is not None and bb["active"], f"got {bb}")
 
     # Test 3: multi-object
-    print("\nTest 3: cria agente E workflow de pesquisa")
-    p3 = parse_intent("cria agente E workflow de pesquisa")
+    print("\nTest 3: create agent AND research workflow")
+    p3 = parse_intent("create agent AND research workflow")
     check("multi_object=true", p3["multi_object"], f"got {p3['multi_object']}")
     check("has agente", "agente" in p3["objects"], f"got {p3['objects']}")
     check("has workflow", "workflow" in p3["objects"], f"got {p3['objects']}")
-    check("domain=pesquisa", "pesquisa" in p3["domain"], f"got {p3['domain']}")
+    check("domain=research", "research" in p3["domain"], f"got {p3['domain']}")
 
     # Test 4: empty intent
     print("\nTest 4: intent vazio")

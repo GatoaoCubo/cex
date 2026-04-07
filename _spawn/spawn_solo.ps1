@@ -39,7 +39,7 @@ $runtimeDir = "$root\.cex\runtime"
 New-Item -ItemType Directory -Force -Path "$runtimeDir\handoffs","$runtimeDir\signals","$runtimeDir\pids" | Out-Null
 
 # -- Read CLI from nucleus_models.yaml (single source of truth) --
-$cli = "claude"  # fallback
+$cli = "pi"  # fallback
 $modelsFile = "$root\.cex\config\nucleus_models.yaml"
 if (Test-Path $modelsFile) {
     $inNucleus = $false
@@ -119,8 +119,8 @@ if (Test-Path $bootCmd) {
     # Set pi theme for this nucleus BEFORE launching (pi reads settings.json on startup)
     # --theme flag doesn't work from CMD. settings.json is the only reliable method.
     $themeMap = @{
-        n01 = "cex-n01-inveja"; n02 = "cex-n02-luxuria"; n03 = "cex-n03-soberba"
-        n04 = "cex-n04-gula";   n05 = "cex-n05-ira";     n06 = "cex-n06-avareza"
+        n01 = "cex-n01-envy"; n02 = "cex-n02-lust"; n03 = "cex-n03-pride"
+        n04 = "cex-n04-gluttony";   n05 = "cex-n05-wrath";     n06 = "cex-n06-greed"
     }
     $themeName = $themeMap[$nucleus]
     if ($themeName) {

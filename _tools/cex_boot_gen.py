@@ -43,37 +43,37 @@ NUCLEUS_META = {
     "n07": {
         "title": "CEX-N07-ORCHESTRATOR",
         "var": "CEX_NUCLEUS=N07",
-        "prompt": "Voce e N07 Orchestrator do CEX. Orquestra nucleos, nunca constroi. Leia CLAUDE.md e .claude/rules/n07-orchestrator.md.",
+        "prompt": "You are N07 Orchestrator of CEX. Dispatch nuclei, never build. Read CLAUDE.md e .claude/rules/n07-orchestrator.md.",
     },
     "n01": {
         "title": "CEX-N01-RESEARCH",
         "var": "CEX_NUCLEUS=N01",
-        "prompt": "Voce e N01 Research Nucleus do CEX. Dominio: research, analise, papers, competidores. SE EXISTIR .cex/runtime/handoffs/n01_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N01 Research Nucleus of CEX. Domain: research, analysis, papers, competitors. IF .cex/runtime/handoffs/n01_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n02": {
         "title": "CEX-N02-MARKETING",
         "var": "CEX_NUCLEUS=N02",
-        "prompt": "Voce e N02 Marketing Nucleus do CEX. Dominio: copy, ads, campanhas, brand voice. SE EXISTIR .cex/runtime/handoffs/n02_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N02 Marketing Nucleus of CEX. Domain: copy, ads, campaigns, brand voice. IF .cex/runtime/handoffs/n02_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n03": {
         "title": "CEX-N03-BUILDER",
         "var": "CEX_NUCLEUS=N03",
-        "prompt": "Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/agents/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n04": {
         "title": "CEX-N04-KNOWLEDGE",
         "var": "CEX_NUCLEUS=N04",
-        "prompt": "Voce e N04 Knowledge Nucleus do CEX. Dominio: RAG, indexacao, knowledge cards, taxonomia. SE EXISTIR .cex/runtime/handoffs/n04_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N04 Knowledge Nucleus of CEX. Domain: RAG, indexing, knowledge cards, taxonomy. IF .cex/runtime/handoffs/n04_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n05": {
         "title": "CEX-N05-OPERATIONS",
         "var": "CEX_NUCLEUS=N05",
-        "prompt": "Voce e N05 Operations Nucleus do CEX. Dominio: code review, testing, CI/CD, deploy. SE EXISTIR .cex/runtime/handoffs/n05_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N05 Operations Nucleus of CEX. Domain: code review, testing, CI/CD, deploy. IF .cex/runtime/handoffs/n05_task.md READ AND EXECUTE IMMEDIATELY.",
     },
     "n06": {
         "title": "CEX-N06-COMMERCIAL",
         "var": "CEX_NUCLEUS=N06",
-        "prompt": "Voce e N06 Commercial Nucleus do CEX. Dominio: pricing, funnels, monetizacao, brand. SE EXISTIR .cex/runtime/handoffs/n06_task.md LEIA E EXECUTE IMEDIATAMENTE.",
+        "prompt": "You are N06 Commercial Nucleus of CEX. Domain: pricing, funnels, monetization, brand. IF .cex/runtime/handoffs/n06_task.md READ AND EXECUTE IMMEDIATELY.",
     },
 }
 

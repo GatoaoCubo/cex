@@ -35,7 +35,7 @@ try:
     if importlib.util.find_spec("yaml") is None:
         raise ImportError
 except ImportError:
-    print("ERRO: PyYAML necessario. pip install pyyaml", file=sys.stderr)
+    print("ERROR: PyYAML required. pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
 # --- Imports from Motor + Intent ---

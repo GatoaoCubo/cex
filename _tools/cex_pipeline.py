@@ -24,7 +24,7 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    print("ERRO: PyYAML necessario. pip install pyyaml", file=sys.stderr)
+    print("ERROR: PyYAML required. pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
 
@@ -148,11 +148,11 @@ def slugify(text: str) -> str:
 def load_schema(pillar: str) -> dict:
     lp_dir = LP_DIRS.get(pillar)
     if not lp_dir:
-        print(f"ERRO: Pillar '{pillar}' invalido. Use P01-P12.", file=sys.stderr)
+        print(f"ERROR: Invalid pillar. Use P01-P12.", file=sys.stderr)
         sys.exit(1)
     schema_path = CEX_ROOT / lp_dir / "_schema.yaml"
     if not schema_path.exists():
-        print(f"ERRO: Schema nao encontrado: {schema_path}", file=sys.stderr)
+        print(f"ERROR: Schema not found: {schema_path}", file=sys.stderr)
         sys.exit(1)
     return load_yaml_file(schema_path)
 
@@ -192,7 +192,7 @@ def capture_interactive() -> dict:
 
     pillar = input("\nPillar (e.g. P01): ").strip().upper()
     if pillar not in LP_DIRS:
-        print(f"ERRO: Pillar '{pillar}' invalido.", file=sys.stderr)
+        print(f"ERROR: Invalid pillar.", file=sys.stderr)
         sys.exit(1)
 
     schema = load_schema(pillar)
@@ -204,7 +204,7 @@ def capture_interactive() -> dict:
 
     type_name = input("\nType: ").strip()
     if type_name not in kinds:
-        print(f"ERRO: Type '{type_name}' nao existe em {pillar}.", file=sys.stderr)
+        print(f"ERROR: Type not found em {pillar}.", file=sys.stderr)
         sys.exit(1)
 
     topic = input("Topic (e.g. 'error handling'): ").strip()
@@ -236,7 +236,7 @@ def capture_interactive() -> dict:
 def capture_from_file(filepath: str) -> dict:
     path = Path(filepath)
     if not path.exists():
-        print(f"ERRO: File not found: {filepath}", file=sys.stderr)
+        print(f"ERROR: File not found: {filepath}", file=sys.stderr)
         sys.exit(1)
 
     with open(path, "r", encoding="utf-8") as f:
@@ -272,7 +272,7 @@ def decompose(input_data: dict) -> dict:
         pillar = find_pillar_for_type(type_name)
         if not pillar:
             print(
-                f"ERRO: Type '{type_name}' nao encontrado em nenhum pillar. Use --pillar.",
+                f"ERROR: Type not found em nenhum pillar. Use --pillar.",
                 file=sys.stderr,
             )
             sys.exit(1)
@@ -284,7 +284,7 @@ def decompose(input_data: dict) -> dict:
     if type_name not in kinds:
         available = ", ".join(kinds.keys())
         print(
-            f"ERRO: Type '{type_name}' nao existe em {pillar}. Disponiveis: {available}",
+            f"ERROR: Type not found em {pillar}. Available: {available}",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -684,10 +684,10 @@ def _section_value(content: str):
 
 def run_pipeline(input_data: dict, dry_run: bool = False) -> dict:
     if not input_data.get("type"):
-        print("ERRO: --type obrigatorio.", file=sys.stderr)
+        print("ERROR: --type required.", file=sys.stderr)
         sys.exit(1)
     if not input_data.get("topic"):
-        print("ERRO: --topic obrigatorio.", file=sys.stderr)
+        print("ERROR: --topic required.", file=sys.stderr)
         sys.exit(1)
     data = decompose(input_data)
     data = hydrate(data)

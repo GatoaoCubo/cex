@@ -159,12 +159,12 @@ bash _spawn/dispatch.sh stop --dry-run    # preview what would die
 
 | Domain | Nucleus | CLI | Model | Context |
 |--------|---------|-----|-------|---------|
-| Research/analysis | N01 | claude | opus-4-6 | 1M |
-| Marketing/copy | N02 | claude | opus-4-6 | 1M |
-| Build/create | N03 | claude | opus-4-6 | 1M |
-| Knowledge/docs | N04 | claude | opus-4-6 | 1M |
-| Code/test/deploy | N05 | claude | opus-4-6 | 1M |
-| Brand/monetization | N06 | claude | opus-4-6 | 1M |
+| Research/analysis | N01 | pi | opus-4-6 | 1M |
+| Marketing/copy | N02 | pi | opus-4-6 | 1M |
+| Build/create | N03 | pi | opus-4-6 | 1M |
+| Knowledge/docs | N04 | pi | opus-4-6 | 1M |
+| Code/test/deploy | N05 | pi | opus-4-6 | 1M |
+| Brand/monetization | N06 | pi | opus-4-6 | 1M |
 | Orchestration | N07 | pi | opus-4-6 | 1M |
 
 ## Constraints

@@ -1,14 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
-  "name": "cex-n02-luxuria",
+  "name": "cex-n06-greed",
   "vars": {
-    "sin": "#d946ef",
-    "sinDark": "#86198f",
-    "sinLight": "#f0abfc",
-    "bg": "#1f0a2e",
-    "card": "#2e1245",
-    "toolBg": "#280d3a",
-    "msgBg": "#221035"
+    "sin": "#eab308",
+    "sinDark": "#854d0e",
+    "sinLight": "#fde68a",
+    "bg": "#1f1a0a",
+    "card": "#332b0f",
+    "toolBg": "#292210",
+    "msgBg": "#2e2612"
   },
   "colors": {
     "accent": "sin",

@@ -1,14 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
-  "name": "cex-n01-inveja",
+  "name": "cex-n03-pride",
   "vars": {
-    "sin": "#22c55e",
-    "sinDark": "#166534",
-    "sinLight": "#86efac",
-    "bg": "#0d2818",
-    "card": "#143d24",
-    "toolBg": "#0a3318",
-    "msgBg": "#122e1c"
+    "sin": "#3b82f6",
+    "sinDark": "#1e3a8a",
+    "sinLight": "#93c5fd",
+    "bg": "#0c1533",
+    "card": "#122050",
+    "toolBg": "#0e1a40",
+    "msgBg": "#101d45"
   },
   "colors": {
     "accent": "sin",

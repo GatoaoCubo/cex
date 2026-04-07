@@ -30,7 +30,7 @@ n07:
 
 # --- N01: Research & Intelligence ---
 n01:
-  cli: claude
+  cli: pi
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -48,7 +48,7 @@ n01:
 
 # --- N02: Marketing & Copy ---
 n02:
-  cli: claude
+  cli: pi
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -66,7 +66,7 @@ n02:
 
 # --- N03: Engineering & Builder ---
 n03:
-  cli: claude
+  cli: pi
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -84,7 +84,7 @@ n03:
 
 # --- N04: Knowledge & RAG ---
 n04:
-  cli: claude
+  cli: pi
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -102,7 +102,7 @@ n04:
 
 # --- N05: Operations & DevOps ---
 n05:
-  cli: claude
+  cli: pi
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -120,7 +120,7 @@ n05:
 
 # --- N06: Commercial & Brand ---
 n06:
-  cli: claude
+  cli: pi
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000

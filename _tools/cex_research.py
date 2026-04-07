@@ -45,7 +45,7 @@ DEFAULT_CATEGORIES = [
 # Research prompt template
 RESEARCH_PROMPT = """## TAREFA: Research & Taxonomy Extraction
 
-Voce eh um pesquisador tecnico. Sua tarefa: criar uma TAXONOMIA ESTRUTURADA
+You are a technical researcher. Your task: create a STRUCTURED TAXONOMY
 do topico "{topic}" usando as fontes listadas abaixo.
 
 ### FONTES OFICIAIS (use APENAS documentacao oficial):
@@ -59,7 +59,7 @@ do topico "{topic}" usando as fontes listadas abaixo.
 2. Term = nome oficial (classe, funcao, conceito) como aparece na doc
 3. Source = qual framework/provider (ex: langchain, openai, anthropic)
 4. Category = uma das categorias acima
-5. Description = 1 frase descritiva (max 120 chars), SEM jargao desnecessario
+5. Description = 1 frase descritiva (max 120 chars), SEM jargao desrequired
 6. CEX Mapping = qual pilar/kind do CEX esse conhecimento alimenta
    Pilares: P01(Knowledge) P02(Model) P03(Prompt) P04(Tools) P05(Output)
             P06(Schema) P07(Evals) P08(Architecture) P09(Config)

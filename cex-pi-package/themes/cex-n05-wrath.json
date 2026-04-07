@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
-  "name": "cex-n05-ira",
+  "name": "cex-n05-wrath",
   "vars": {
     "red": "#ef4444",
     "darkRed": "#991b1b",

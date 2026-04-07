@@ -112,7 +112,7 @@ QUALITY_THRESHOLDS = {
 COPY_TOOLS = ["cex_doctor.py", "validate_builder.py", "cex_compile.py"]
 
 VALID_DOMAINS = ["marketing", "engineering", "research", "ops", "custom"]
-VALID_LLMS = ["claude", "openai", "gemini", "multi"]
+VALID_LLMS = ["pi", "claude", "openai", "gemini", "multi"]
 VALID_QUALITIES = ["strict", "standard", "relaxed"]
 
 
@@ -288,8 +288,8 @@ def generate_codex(dest: Path, name: str, domain: str, quality: str) -> None:
         qmin = QUALITY_THRESHOLDS[quality]["min"]
         dmin = QUALITY_THRESHOLDS[quality]["density"]
         content = content.replace(
-            "Density >= 0.8 obrigatorio.",
-            f"Density >= {dmin} obrigatorio. Quality min: {qmin}.",
+            "Density >= 0.8 required.",
+            f"Density >= {dmin} required. Quality min: {qmin}.",
         )
         (codex_dest / "CODEX.md").write_text(content, encoding="utf-8")
     else:
@@ -312,7 +312,7 @@ Hierarquia: CODEX > _schema > _generator > templates > instances
 ## ANATOMIA UNIVERSAL
 YAML front: id, type, lp, quality, keywords(3+), long_tails(2+), bullets(3+), axioms(1+)
 MD body: title, summary 1-line, secoes por tipo
-Density >= {q["density"]} obrigatorio. Quality min: {q["min"]}.
+Density >= {q["density"]} required. Quality min: {q["min"]}.
 Max 4KB. Prosa > 3 linhas proibida. Bullets com max 80 chars.
 
 ## NAMING

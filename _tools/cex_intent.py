@@ -275,7 +275,7 @@ def execute_prompt(prompt: str) -> str:
     try:
         import subprocess
         result = subprocess.run(
-            ["claude", "-p", "--model", "claude-sonnet-4-6", "--no-chrome"],
+            ["pi", "-p", "--model", "anthropic/claude-sonnet-4-6"],
             input=prompt, capture_output=True, text=True,
             timeout=120, encoding="utf-8",
         )
@@ -283,7 +283,7 @@ def execute_prompt(prompt: str) -> str:
             return result.stdout
         errors["CLI-Claude"] = f"exit {result.returncode}: {result.stderr[:200]}"
     except FileNotFoundError:
-        errors["CLI-Claude"] = "claude CLI not in PATH"
+        errors["CLI-Pi"] = "pi CLI not in PATH"
     except Exception as e:
         errors["CLI-Claude"] = str(e)[:120]
 
@@ -353,7 +353,7 @@ def execute_prompt(prompt: str) -> str:
         except ImportError:
             errors["SDK"] = "cex_sdk not available"
 
-    print("ERRO: Nenhum LLM provider disponivel.", file=sys.stderr)
+    print("ERROR: No LLM provider available.", file=sys.stderr)
     for provider, err in errors.items():
         print(f"  {provider}: {err}", file=sys.stderr)
     sys.exit(1)
@@ -413,7 +413,7 @@ def run_intent(
     builder_dir = find_builder_dir(primary_kind)
 
     if not builder_dir:
-        print(f"AVISO: Builder nao encontrado para kind '{primary_kind}'", file=sys.stderr)
+        print(f"WARNING: Builder not found for kind '{primary_kind}'", file=sys.stderr)
         print("  Tentando fallback: knowledge-card-builder", file=sys.stderr)
         builder_dir = find_builder_dir("knowledge_card")
 
