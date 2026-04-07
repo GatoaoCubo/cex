@@ -8,7 +8,7 @@ created: "2026-04-07"
 updated: "2026-04-07"
 author: "n04_knowledge"
 domain: "context_window_config — token budget allocation for prompt assembly"
-quality: null
+quality: 8.9
 tags: [quality-gate, context-window-config, token-budget, overflow]
 tldr: "Gates ensuring context_window_config artifacts have valid budgets, priority tiers, and overflow strategy."
 density_score: 0.90
