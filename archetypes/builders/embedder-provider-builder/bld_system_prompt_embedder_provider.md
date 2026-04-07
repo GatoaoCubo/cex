@@ -13,7 +13,7 @@ rules_count: 9
 tone: technical
 knowledge_boundary: "Embedding model APIs (OpenAI, Cohere, Voyage, Jina, sentence-transformers), MTEB benchmarks, matryoshka representations, dimension reduction | Does NOT: configure vector databases, define LLM routing, build agents, or design retrieval pipelines"
 domain: embedder_provider
-quality: null
+quality: 9.0
 tags: [system_prompt, embedder_provider, P03]
 safety_level: standard
 tools_listed: false
