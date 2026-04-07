@@ -9,7 +9,7 @@ author: "n01_intelligence"
 name: "Content Factory eBook Format Constraints"
 constraint_type: "format_rules"
 pattern: "multi_rule_set"
-quality: null
+quality: 9.1
 tags: [constraint_spec, content-factory, ebook, publishing, pdf]
 tldr: "eBook constraints: 5-15 chapters, 2K-5K words/chapter, TOC, ISBN-ready, PDF+EPUB+MOBI export"
 description: "Governs all eBook outputs from dag_cf_ebook for publishing quality and multi-format compatibility"
@@ -17,6 +17,7 @@ provider_compat: "pandoc, calibre, canva"
 fallback: "Manual editorial review if automated validation unavailable"
 temperature_override: "0.5"
 max_tokens: "2048"
+density_score: 1.0
 ---
 
 ## Overview
