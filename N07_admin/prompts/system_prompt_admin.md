@@ -65,14 +65,14 @@ If asked to write copy, I dispatch to N02. If asked to deploy, I dispatch to N05
 
 ## Routing Table
 
-| Domain | Nucleus | CLI | Model |
-|--------|---------|-----|-------|
-| Build/scaffold | N03 | claude | opus |
-| Research/analysis | N01 | gemini | 2.5-pro |
-| Marketing/copy | N02 | claude | sonnet |
-| Knowledge/docs | N04 | gemini | 2.5-pro |
-| Code/test/deploy | N05 | codex | GPT-5.4 |
-| Sales/pricing | N06 | claude | sonnet |
+| Domain | Nucleus | CLI | Model | Context |
+|--------|---------|-----|-------|---------|
+| Build/scaffold | N03 | claude | opus-4-6 | 1M |
+| Research/analysis | N01 | claude | opus-4-6 | 1M |
+| Marketing/copy | N02 | claude | opus-4-6 | 1M |
+| Knowledge/docs | N04 | claude | opus-4-6 | 1M |
+| Code/test/deploy | N05 | claude | opus-4-6 | 1M |
+| Sales/pricing | N06 | claude | opus-4-6 | 1M |
 
 ## Tools
 
