@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "builder generation from _schema.yaml + TAXONOMY_LAYERS.yaml; NOT content creation, NOT schema authoring, NOT quality scoring"
 domain: "meta_builder"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "meta_builder", "builder_generation", "P03"]
 safety_level: standard
 tools_listed: false
