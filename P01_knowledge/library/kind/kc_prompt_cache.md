@@ -9,7 +9,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n04_knowledge
 domain: prompt_cache
-quality: null
+quality: 9.1
 tags: [prompt_cache, P10, INJECT, kind-kc]
 tldr: "prompt_cache configures TTL, eviction, and invalidation for cached LLM prompt/completion pairs — reducing latency and cost for repeated or similar queries."
 when_to_use: "Building, reviewing, or reasoning about prompt_cache artifacts"
