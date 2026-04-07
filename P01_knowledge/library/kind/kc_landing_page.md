@@ -6,8 +6,9 @@ title: "KC: Landing Page"
 version: 1.0.0
 created: 2026-04-06
 author: n07_orchestrator
-quality: null
+quality: 8.8
 tags: [knowledge-card, landing-page, frontend, ui, marketing, conversion]
+density_score: 1.0
 ---
 # Knowledge Card: landing_page
 
