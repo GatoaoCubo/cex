@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n04_knowledge
 domain: ayrshare_api
-quality: null
+quality: 9.1
 tags: [ayrshare, social-media, api, publishing, scheduling, content-factory, integration, INJECT]
 tldr: "Single API to post, schedule, and track content across Instagram, TikTok, LinkedIn, Twitter/X, Facebook, and YouTube"
 when_to_use: "When any nucleus needs to publish or schedule content across multiple social media platforms simultaneously"
