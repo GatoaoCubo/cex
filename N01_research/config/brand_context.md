@@ -2,113 +2,117 @@
 id: brand_context_n01
 kind: config
 pillar: P09
-title: Brand Context for N01 — Research & Intelligence
-version: 1.1.0
+title: Brand Context for N01
+version: 2.0.0
 created: 2026-04-01
 updated: 2026-04-07
-author: n06_commercial
-domain: research
-quality: 9.2
-tags: [brand, context, n01, research, intelligence, market-analysis, gato3]
-tldr: Complete brand context for N01 research nucleus — ICP, competitors, content pillars, market positioning for GATO³ intelligence operations
+author: n04_knowledge
+quality: 9.1
+tags: [brand, context, n01, research, analysis, icp, competitive]
+tldr: "Brand context for N01 Research — ICP profile, competitive landscape, market analysis frameworks, research boundaries, and evidence standards for GATO³ feline wellness market."
 density_score: 0.95
 ---
 
-## Brand Context (injected by brand_propagate.py)
+# Brand Context — N01 Research
 
-Source: `.cex/brand/brand_config.yaml`
+> Source: `.cex/brand/brand_config.yaml`
+> Nucleus: N01 (Research/Analysis)
+> Domain: Market research, competitive analysis, ICP profiling, trend scouting
 
-## Core Identity
+## Core Brand Identity
 
 | Field | Value |
 |-------|-------|
-| BRAND_NAME | GATO³ (Gato ao Cubo) |
-| BRAND_TAGLINE | Educação que acalma, soluções que funcionam, casa que continua elegante. |
-| BRAND_CATEGORY | Curadoria de bem-estar felino + casa multi-espécie harmonizada |
-| BRAND_ARCHETYPE | Caregiver (Cuidadora + Sábia + Criadora) |
-| BRAND_LANGUAGE | pt-BR |
+| **Brand** | GATO³ (Gato ao Cubo) |
+| **Category** | Curadoria de bem-estar felino + casa multi-espécie harmonizada |
+| **UVP** | Curadoria validada por veterinários + estética PB minimalista + educação via Ro |
+| **Differentiator** | Única curadoria felina com validação veterinária comportamental + design minimal + persona-guia |
+| **Language** | pt-BR |
 
 ## Ideal Customer Profile (ICP)
 
+### Demographics
 | Field | Value |
 |-------|-------|
-| Age | 25-45 anos |
-| Location | Brasil — capitais e regiões metropolitanas |
-| Income | Classe B-C+ (renda familiar R$ 5-15k) |
-| Profile | Tutores de gatos urbanos que valorizam segurança, design funcional e estética minimalista |
+| **Age** | 25-45 anos |
+| **Location** | Brasil — capitais e regiões metropolitanas |
+| **Income** | Classe B-C+ (renda familiar R$ 5-15k) |
+| **Initial radius** | ABC Paulista → Grande SP → Estado de SP → Brasil |
 
-### ICP Values (research lens: what motivates purchase decisions)
+### Psychographics
 
-1. **Bem-estar animal acima de estética** — Welfare-first purchasing psychology
-2. **Design funcional que não agride o ambiente** — Aesthetic constraint as purchase driver
-3. **Educação antes de compra impulsiva** — Information-seeking behavior pre-purchase
+**Values** (research must validate these assumptions):
+- Bem-estar animal acima de estética
+- Design funcional que não agride o ambiente
+- Educação antes de compra impulsiva
 
-### ICP Fears (research lens: pain points to investigate)
+**Fears** (pain points to research and address):
+- Gato estressado, ansioso ou destruindo a casa
+- Produtos feios que destoam da decoração
+- Não saber se está fazendo a coisa certa como tutor
 
-1. **Gato estressado, ansioso ou destruindo a casa** — Behavioral problem frequency, triggers, costs
-2. **Produtos feios que destoam da decoração** — Design dissatisfaction in pet product market
-3. **Não saber se está fazendo a coisa certa como tutor** — Information asymmetry, decision paralysis
-
-### ICP Aspirations (research lens: desired outcomes to validate)
-
-1. **Lar harmonioso** — Cat, tutor, and home coexisting peacefully
-2. **Reconhecimento social** — Being seen as a caring, well-informed tutor
+**Aspirations** (desired outcomes to research):
+- Lar harmonioso onde gato, tutor e casa coexistem em paz
+- Ser reconhecido(a) como tutor(a) cuidadoso(a) e bem informado(a)
 
 ### Brand Transformation Promise
-
-**From**: Tutor inseguro com gato estressado em casa bagunçada
-**To**: Tutor confiante com felino feliz em lar elegante
-**Through**: Educação acolhedora da Ro + curadoria de produtos premium validados por veterinários
+> From: tutor inseguro com gato estressado em casa bagunçada
+> To: tutor confiante com felino feliz em lar elegante
+> Through: educação acolhedora da Ro + curadoria de produtos premium validados por veterinários
 
 ## Competitive Landscape
 
-| Competitor | Positioning | GATO³ Differentiator |
-|------------|-------------|---------------------|
-| CatMyPet | Cat-specific products, general market | No veterinary behavioral validation, no design ethos |
-| Chalesco | Traditional pet accessories, mass market | Generic brand, no curation, no educational content |
-| Zee.Dog (linha gatos) | Design-forward pet brand, premium | Dog-first brand with cat line — not cat-native |
-| Petlove (marketplace) | Broad marketplace coverage | Aggregator, no brand curation, no persona-guide |
+### Direct Competitors
 
-### GATO³ Unique Value Proposition
+| Competitor | Category | GATO³ Differentiation |
+|------------|----------|-----------------------|
+| CatMyPet | Cat products (online) | They sell generic → we curate with vet validation |
+| Chalesco | Pet accessories (mass) | No persona/education → we have Ro + science |
+| Zee.Dog (gatos) | Premium pet (dog-first) | Dog brand adding cats → we are cat-first, cat-only |
+| Petlove (marketplace) | Pet marketplace | They aggregate everything → we curate selectively |
 
-> Para tutores de gatos que buscam elegância e funcionalidade, GATO³ é a curadoria de bem-estar felino que harmoniza gato, tutor e casa porque cada produto é validado por veterinários comportamentalistas e desenhado para desaparecer no ambiente.
+### Research Directives
+- **Never name competitors in public content** (BRAND_VOICE_DONT rule)
+- Research competitors for internal strategy only
+- Focus on market gaps, not competitor weaknesses
+- Track competitor pricing in R$ 30-80 anchor range
 
-### Key Differentiator (3-part moat)
+## N01 Research Guidelines
 
-1. **Veterinary behavioral validation** — Products vetted by cat behaviorists
-2. **Minimal-PB aesthetic** — Design that disappears into home decor
-3. **Educational persona-guide (Ro)** — Translates feline science into practical steps
+### Content Pillar Research Allocation
 
-## Content Pillars (research priorities)
+| Pillar | % | Research Focus |
+|--------|---|----------------|
+| Produtos (40%) | High priority | Product-market fit, pricing sensitivity, SKU gap analysis |
+| Educacional (30%) | Medium priority | Cat behavior science, veterinary trends, myth-busting |
+| Dicas da Ro (20%) | Low priority | Tutor habits, common mistakes, seasonal patterns |
+| Tendências (10%) | Ongoing | Market trends, design trends, new product categories |
 
-| Pillar | Weight | N01 Research Focus |
-|--------|--------|-------------------|
-| Produtos em destaque | 40% | Product selection criteria, supplier analysis, competitor pricing |
-| Educacional | 30% | Feline science sources, behavioral research, veterinary studies |
-| Dicas da Ro | 20% | Common tutor questions, step-by-step effectiveness validation |
-| Tendências | 10% | Pet market trends, design trends, emerging cat wellness categories |
+### Evidence Standards
+1. **Primary sources**: IBGE, ABINPET (pet industry association), government registries
+2. **Secondary sources**: Google Trends, SimilarWeb, marketplace analytics
+3. **Prohibited**: Fabricated data, unverified social media claims, competitor defamation
+4. **Citation format**: Include URL + access date for every external claim
+5. **Confidence scoring**: Mark each finding as HIGH/MEDIUM/LOW confidence
 
-## Market Geography
-
-### Expansion Rings (research scope for market analysis)
+### Geographic Research Rings
 
 | Ring | Region | Research Priority |
-|------|--------|------------------|
-| Ring 1 | ABC Paulista (São Caetano, Santo André, São Bernardo, Diadema, Mauá) | Active — primary market intelligence |
-| Ring 2 | Grande São Paulo | Near-term — competitive density analysis |
-| Ring 3 | Estado de São Paulo | Mid-term — market sizing |
-| Ring 4 | Brasil (capitais) | Long-term — national TAM estimation |
+|------|--------|-------------------|
+| 1 | ABC Paulista (SCS, SA, SBC, Diadema, Mauá, RP, RGS) | Critical — local market intelligence |
+| 2 | Grande São Paulo (Capital + ABCDMRR + Guarulhos, Osasco, Barueri) | High — expansion readiness |
+| 3 | Estado de SP (Campinas, Santos, Sorocaba, Ribeirão Preto) | Medium — market sizing |
+| 4 | Brasil (capitais via e-commerce) | Low — long-term opportunity |
 
-## N01 Research — Brand-Aligned Guidelines
+### Research Anti-Patterns (N01-specific)
+- ❌ Fabricating business contacts with sequential CNPJs (see AF1-AF4 in validator)
+- ❌ Extrapolating ABC Paulista data to national market without adjustments
+- ❌ Using competitor brand names in customer-facing research outputs
+- ❌ Assuming ICP uniformity — segment by ring, income, and cat ownership stage
+- ❌ Ignoring seasonal patterns (winter = heated beds, summer = cooling mats)
 
-### Research Methodology Alignment
-
-- All competitive research must map findings to GATO³'s 3-part moat
-- Market sizing should segment by ICP criteria (age, income, urban, cat-specific)
-- Trend reports should prioritize trends relevant to caregiver archetype
-- Source quality: prefer veterinary journals, pet industry reports (ABINPET), IBGE demographic data
-- Language: research notes in pt-BR, data analysis bilingual (pt-BR + EN for technical terms)
-
-### Voice in Research Outputs
-
-Research artifacts consumed by other nuclei should maintain brand-neutral analytical tone, but flag opportunities where findings reinforce or challenge the brand's caregiver positioning.
+## Cross-References
+- Contact validator → `P06_schema/p06_val_business_contact_quality.md`
+- CRM pipeline → `P12_orchestration/p12_wf_crm_research_pipeline.md`
+- ICP enrichment → `N06_commercial/` (monetization data)
+- Brand config → `.cex/brand/brand_config.yaml`

@@ -2,88 +2,115 @@
 id: brand_context_n04
 kind: config
 pillar: P09
-title: Brand Context for N04 — Knowledge Management & Documentation
+title: Brand Context for N04
 version: 2.0.0
 created: 2026-04-01
 updated: 2026-04-07
-author: n06_commercial
-quality: null
-tags: [brand, context, n04, knowledge, documentation]
-tldr: Brand context for N04 knowledge nucleus — content pillar distribution, documentation style for Portuguese cat owners, and knowledge card adaptation rules for GATO³
-density_score: 1.0
+author: n04_knowledge
+quality: 9.1
+tags: [brand, context, n04, knowledge, rag, indexing, content-pillars]
+tldr: "Brand context for N04 Knowledge — content pillar distribution, knowledge card adaptation rules, RAG chunking guidelines, taxonomy standards, and documentation voice for GATO³ feline wellness knowledge base."
+density_score: 0.96
 ---
 
-## Brand Context (injected by brand_propagate.py)
+# Brand Context — N04 Knowledge
 
-**Source**: `.cex/brand/brand_config.yaml`
+> Source: `.cex/brand/brand_config.yaml`
+> Nucleus: N04 (Knowledge/Docs/RAG/Indexing)
+> Domain: Knowledge cards, documentation, taxonomy, embeddings, retrieval
 
-### Core Identity
+## Core Brand Identity
 
-- **BRAND_NAME**: GATO³
-- **BRAND_TAGLINE**: Educação que acalma, soluções que funcionam, casa que continua elegante.
-- **BRAND_CATEGORY**: Curadoria de bem-estar felino + casa multi-espécie harmonizada
-- **BRAND_LANGUAGE**: pt-BR
-- **BRAND_ARCHETYPE**: Caregiver (Cuidadora + Sábia + Criadora)
-- **BRAND_VOICE_TONE**: sofisticado-acolhedor, informativo sem ser técnico demais, minimalista e direto
+| Field | Value |
+|-------|-------|
+| **Brand** | GATO³ (Gato ao Cubo) |
+| **Category** | Curadoria de bem-estar felino + casa multi-espécie harmonizada |
+| **Archetype** | Caregiver (Cuidadora + Sábia + Criadora) |
+| **Voice** | Sofisticado-acolhedor, informativo, minimalista |
+| **Language** | pt-BR |
 
-### Content Pillars for Knowledge Organization
+## Content Pillar Distribution
 
-| Pillar | Weight | N04 Application |
-|--------|--------|----------------|
-| Produtos em destaque (40%) | Dominant | Focus knowledge cards on product selection criteria, compatibility guides, curated recommendations |
-| Educacional (30%) | Strong | Include "Você sabia?" sections with feline science facts, behavioral insights |
-| Dicas da Ro (20%) | Supporting | Add step-by-step implementation guides, troubleshooting protocols |
-| Tendências (10%) | Minimal | Reference market trends only when directly relevant to knowledge cards |
+All N04 knowledge artifacts must respect these proportions:
 
-### Target Audience Context
+| Pillar | Weight | N04 Application | Tag |
+|--------|--------|-----------------|-----|
+| Produtos (40%) | Dominant | Product selection criteria, compatibility guides, specification cards | `pillar:produto` |
+| Educacional (30%) | Strong | Feline science KCs, "Você sabia?" callouts, behavioral insights | `pillar:educacional` |
+| Dicas da Ro (20%) | Supporting | Step-by-step guides, troubleshooting, protocols | `pillar:dicas-ro` |
+| Tendências (10%) | Minimal | Market trend KCs, design trend summaries | `pillar:tendencia` |
 
-- **ICP**: Tutores de gatos (25-45 anos) urbanos, classe B-C+
-- **Location**: ABC Paulista → Grande SP → Estado SP → Brasil
-- **Values**: Bem-estar animal, design funcional, educação antes de compra
-- **Fears**: Gato estressado, produtos feios, incerteza sobre cuidados corretos
-- **Transformation**: Tutor inseguro → tutor confiante com felino feliz em lar elegante
+## Knowledge Card Adaptation Rules
 
-## N04 Knowledge Creation Guidelines
+### Title Format
+- **Pattern**: "Como [ação] para [benefício] do seu gato"
+- **Examples**:
+  - ✅ "Como escolher a cama ideal para o conforto do seu gato"
+  - ✅ "Como reduzir o estresse do seu gato em apartamento"
+  - ❌ "Cama para gatos — Guia completo" (generic, no benefit)
 
-### Documentation Style for Portuguese Cat Owners
+### Opening Structure
+1. Start with cat owner **pain point**, not product features
+2. Acknowledge the feeling ("Sabemos que pode ser frustrante quando...")
+3. Preview the solution ("Neste guia, a Ro vai te mostrar...")
 
+### Chunking Strategy
+- Break complex topics into **"Você sabia?"** callout boxes
+- Maximum 200 words per section before a visual break
+- Use Ro's voice for reassurance: "Lembre-se...", "Dica da Ro:", "O mais importante é..."
+- Tag each chunk with content pillar for retrieval accuracy
+
+### Documentation Voice for Portuguese Cat Owners
 - **Tone**: Sofisticado-acolhedor — blend expertise with warmth
 - **Structure**: Lead with practical benefits, support with science
 - **Language patterns**: Use "seu gato" (familiar), avoid clinical veterinary terms
-- **Examples**: Always use Brazilian household contexts (apartamentos, varandas)
-- **Length**: Prefer concise chunks (300-500 words per section) over long-form
+- **Examples**: Always use Brazilian household contexts (apartamentos, varandas, kitinets)
+- **Pronouns**: "você" (informal, warm), never "senhor/senhora" (too formal)
 
-### Knowledge Card Adaptation Rules
+## RAG & Indexing Guidelines
 
-1. **Title format**: "Como [action] para [benefit] do seu gato"
-2. **Opening**: Start with cat owner pain point, not product features
-3. **Chunking**: Break complex topics into "Você sabia?" callouts
-4. **Validation**: Include Ro's voice for reassurance ("Lembre-se...")
-5. **Cross-linking**: Reference related knowledge cards when topics overlap
+### Embedding Optimization
+- **Chunk size**: 512 tokens (optimized for pt-BR diacritics overhead)
+- **Overlap**: 50 tokens between chunks
+- **Metadata tags**: Always include `pillar`, `domain`, `icp_segment`, `product_category`
+- **Language model**: Use multilingual embeddings (pt-BR native support required)
 
-### Voice Dos and Don'ts for Knowledge Content
+### Taxonomy Standards
 
-| Do | Don't |
-|----|-------|
-| Usar frases curtas e parágrafos enxutos | Prometer milagres ou resultados garantidos |
-| Explicar o porquê — ciência acessível, nunca jargão | Usar gíria ou infantilizar |
-| Dar passos práticos e acionáveis (protocolos da Ro) | Medicalizar sem respaldo veterinário |
-| Tratar o tutor como parceiro, nunca como ignorante | Usar CAPS LOCK, excesso de emojis |
-| Contextualizar produto como meio, não como fim | Comparar diretamente com concorrentes pelo nome |
+| Level | Example | Purpose |
+|-------|---------|---------|
+| Domain | `feline-wellness` | Top-level categorization |
+| Category | `behavior`, `nutrition`, `products` | Mid-level grouping |
+| Topic | `stress-reduction`, `environment-enrichment` | Specific subject |
+| Subtopic | `window-perch-selection`, `scratching-post-placement` | Granular retrieval |
 
-### Knowledge Taxonomy Alignment
+### ICP-Aware Retrieval
+When building retrieval pipelines, prioritize:
+1. Content matching ICP fears (stress, ugly products, uncertainty)
+2. Content matching ICP aspirations (harmony, confidence, beauty)
+3. Product-related content (40% pillar = most searched)
+4. Educational content with scientific backing
 
-| Domain | Knowledge Type | Priority |
-|--------|---------------|----------|
-| Feline behavior | Behavioral science cards | High — supports educational pillar (30%) |
-| Product selection | Comparison guides, compatibility matrices | High — supports product pillar (40%) |
-| Home harmonization | Room-by-room setup guides | Medium — supports Ro's tips pillar (20%) |
-| Market context | Industry trend summaries | Low — supports trends pillar (10%) |
+## Brand Values in Knowledge Creation
 
-### Terminology Standards
+| Value | Knowledge Application |
+|-------|----------------------|
+| Amor aos felinos | Every KC must prioritize cat well-being over convenience |
+| Educação acolhedora | Explain the "why" — accessible science, never jargon |
+| Qualidade impecável | No KC published below quality 8.0; target 9.0+ |
+| Inovação com propósito | New knowledge structures must serve retrieval, not novelty |
+| Comunidade | Cross-reference related KCs to build knowledge networks |
 
-- Use "tutor" not "dono" (owner) — aligns with caregiver archetype
-- Use "felino" or "gato" interchangeably — avoid "pet" when possible
-- Use "lar" or "casa" not "residência" — warm, not clinical
-- Use "bem-estar" not "saúde" when discussing general wellness
-- Use "curadoria" not "seleção" when describing product choices
+## Anti-Patterns (N04-specific)
+- ❌ Clinical veterinary language without Ro's warmth layer
+- ❌ Product-first content that ignores educational context
+- ❌ Generic pet advice that applies equally to dogs (cat-specific only)
+- ❌ Knowledge cards without content pillar tags (breaks retrieval)
+- ❌ Orphan KCs with no cross-references (breaks knowledge graph)
+
+## Cross-References
+- KC structure contract → `P01_knowledge/library/domain/meta/kc_8f_pipeline.md`
+- Template catalog → `P01_knowledge/library/domain/kc_template_catalog.md`
+- Variable registry → `P01_knowledge/library/domain/meta/kc_instance_variable_registry.md`
+- Brand config → `.cex/brand/brand_config.yaml`
+- N02 voice guide → `N02_marketing/config/brand_context.md`

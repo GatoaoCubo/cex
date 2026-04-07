@@ -14,7 +14,7 @@ execution_mode: mixed
 steps_count: 8
 timeout_ms: 7200000
 error_recovery: retry
-quality: null
+quality: 9.1
 tags: [workflow, outreach, lead-nurturing, gato, b2b, partnerships, abc-paulista]
 tldr: 4-wave strategic outreach workflow to convert 471 ABC Paulista pet businesses into GATO³ partners via segment-specific content, automation, and optimization
 density_score: 1.0

@@ -7,7 +7,7 @@ version: 2.0.0
 created: 2026-04-01
 updated: 2026-04-07
 author: n06_commercial
-quality: null
+quality: 9.1
 tags: [brand, context, n02, marketing, content, voice]
 tldr: Brand context for N02 marketing — full voice system, customer segment strategies, and content creation guidelines for GATO³ sofisticado-acolhedor brand voice
 density_score: 1.0
