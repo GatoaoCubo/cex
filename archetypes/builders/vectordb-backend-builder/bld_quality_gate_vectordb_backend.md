@@ -8,7 +8,7 @@ created: "2026-04-06"
 updated: "2026-04-06"
 author: builder_agent
 domain: vectordb_backend
-quality: null
+quality: 9.0
 tags: [quality-gate, vectordb-backend, vector-database, P01, hnsw]
 tldr: "Quality gate for vectordb_backend artifacts: enforces dimensions, distance metric, index type, and persistence fields."
 density_score: 0.87
