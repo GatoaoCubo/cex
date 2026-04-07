@@ -1,10 +1,8 @@
 /**
- * CEX Nucleus UI Extension v2
+ * CEX Nucleus UI Extension v3
  *
  * Auto-activates when CEX_NUCLEUS env var is set.
- * - Custom footer: identity + context bar + model + branch
- * - Terminal title: CEX-N0X Sin Name
- * - No $ cost (misleading for subscription users)
+ * Footer: identity | task | context bar | model | path (branch)
  */
 
 import type { AssistantMessage } from "@mariozechner/pi-ai";
@@ -21,17 +19,43 @@ const NUCLEUS_INFO: Record<string, { sin: string; short: string; icon: string }>
 	N07: { sin: "Preguica Orquestradora", short: "Preguica", icon: "[~]" },
 };
 
-function contextBar(used: number, max: number, barLen: number): string {
+function contextBar(used: number, max: number, len: number): string {
 	const pct = Math.min(1, used / max);
-	const filled = Math.round(pct * barLen);
-	const empty = barLen - filled;
-	return "=".repeat(filled) + "-".repeat(empty);
+	const filled = Math.round(pct * len);
+	return "=".repeat(filled) + "-".repeat(len - filled);
 }
 
-function fmtTokens(n: number): string {
+function fmtK(n: number): string {
 	if (n < 1000) return `${n}`;
 	if (n < 1_000_000) return `${(n / 1000).toFixed(0)}K`;
 	return `${(n / 1_000_000).toFixed(1)}M`;
+}
+
+function getActiveTask(): string {
+	// Read handoff filename to show what task is active
+	const fs = require("fs");
+	const nuc = (process.env.CEX_NUCLEUS || "").toLowerCase();
+	const handoff = `${process.cwd()}/.cex/runtime/handoffs/${nuc}_task.md`;
+	try {
+		if (fs.existsSync(handoff)) {
+			const text = fs.readFileSync(handoff, "utf-8").slice(0, 300);
+			// Extract task from frontmatter
+			const match = text.match(/task:\s*(.+)/);
+			if (match) return match[1].trim().slice(0, 20);
+			// Or first heading
+			const heading = text.match(/^#\s+(.+)/m);
+			if (heading) return heading[1].trim().slice(0, 20);
+		}
+	} catch {}
+	return "idle";
+}
+
+function shortPath(cwd: string): string {
+	// C:\Users\PC\Documents\GitHub\cex -> ~/GitHub/cex
+	return cwd
+		.replace(/\\/g, "/")
+		.replace(/^C:\/Users\/[^/]+\/Documents\//, "~/")
+		.replace(/^C:\/Users\/[^/]+\//, "~/");
 }
 
 export default function (pi: ExtensionAPI) {
@@ -40,10 +64,8 @@ export default function (pi: ExtensionAPI) {
 		const info = NUCLEUS_INFO[nuc];
 		if (!info) return;
 
-		// Terminal title
 		ctx.ui.setTitle(`CEX-${nuc} ${info.sin}`);
 
-		// Custom footer
 		ctx.ui.setFooter((tui, theme, footerData) => {
 			const unsub = footerData.onBranchChange(() => tui.requestRender());
 
@@ -51,44 +73,47 @@ export default function (pi: ExtensionAPI) {
 				dispose: unsub,
 				invalidate() {},
 				render(width: number): string[] {
-					// Context usage
+					// Context
 					const usage = ctx.getContextUsage();
-					const ctxTokens = usage?.tokens || 0;
-					const ctxMax = ctx.model?.contextWindow || 1_000_000;
-					const pct = ((ctxTokens / ctxMax) * 100).toFixed(1);
+					const tokens = usage?.tokens || 0;
+					const max = ctx.model?.contextWindow || 1_000_000;
+					const pct = ((tokens / max) * 100).toFixed(1);
 
-					// Git branch
+					// Git + path
 					const branch = footerData.getGitBranch();
-					const branchStr = branch ? `(${branch})` : "";
+					const path = shortPath(ctx.cwd);
+					const pathBranch = branch ? `${path} (${branch})` : path;
 
-					// Model (short name)
-					const modelFull = ctx.model?.id || "no-model";
-					const modelShort = modelFull.replace("claude-", "").replace("anthropic/", "");
+					// Model
+					const model = (ctx.model?.id || "no-model").replace("claude-", "");
 
-					// LEFT: nucleus identity
-					const left = theme.fg("accent", `${info.icon} ${nuc} ${info.short}`);
+					// Task
+					const task = getActiveTask();
 
-					// CENTER: context bar
-					const bar = contextBar(ctxTokens, ctxMax, 10);
-					const center = theme.fg("dim", `${fmtTokens(ctxTokens)}/${fmtTokens(ctxMax)}`)
-						+ " "
-						+ theme.fg("accent", "[") + theme.fg("accent", bar) + theme.fg("accent", "]")
-						+ " "
-						+ theme.fg("dim", `${pct}%`);
+					// Build segments
+					const seg1 = theme.fg("accent", `${info.icon} ${nuc} ${info.short}`);
+					const seg2 = theme.fg("dim", `task:`) + theme.fg("accent", task);
+					const seg3 = theme.fg("dim", `${fmtK(tokens)}/${fmtK(max)} `)
+						+ theme.fg("accent", `[${contextBar(tokens, max, 10)}]`)
+						+ theme.fg("dim", ` ${pct}%`);
+					const seg4 = theme.fg("dim", model);
+					const seg5 = theme.fg("dim", pathBranch);
 
-					// RIGHT: model + branch
-					const right = theme.fg("dim", `${modelShort} ${branchStr}`);
+					// Layout: fill gaps evenly
+					const sep = theme.fg("dim", " | ");
+					const sepW = visibleWidth(sep);
+					const parts = [seg1, seg2, seg3, seg4, seg5];
+					const partsW = parts.reduce((a, p) => a + visibleWidth(p), 0);
+					const totalSepW = (parts.length - 1) * sepW;
+					const content = parts.join(sep);
 
-					// Layout with padding
-					const lw = visibleWidth(left);
-					const cw = visibleWidth(center);
-					const rw = visibleWidth(right);
-					const totalContent = lw + cw + rw;
-					const gap = Math.max(2, Math.floor((width - totalContent) / 2));
-					const padL = " ".repeat(gap);
-					const padR = " ".repeat(Math.max(1, width - lw - cw - rw - gap));
-
-					return [truncateToWidth(left + padL + center + padR + right, width)];
+					if (partsW + totalSepW <= width) {
+						// Fits -- pad to full width
+						const pad = " ".repeat(Math.max(0, width - partsW - totalSepW));
+						return [truncateToWidth(content + pad, width)];
+					}
+					// Too wide -- truncate
+					return [truncateToWidth(content, width)];
 				},
 			};
 		});
