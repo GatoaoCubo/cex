@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n04_knowledge
 domain: runtime-orchestration
-quality: null
+quality: 9.2
 tags: [task-queue, continuous-mode, infinite-bootstrap, dispatch, runtime, P09]
 tldr: "File-based task queue for overnight/infinite mode. Priority levels, lifecycle states, dequeue protocol, and auto-replenishment."
 density_score: 0.91
