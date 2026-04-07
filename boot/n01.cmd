@@ -24,5 +24,10 @@ set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --n
 set MCP=--mcp-config %CEX_ROOT%\.mcp-n01.json
 set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n01.json
 
-:: ALWAYS interactive -- task comes from handoff file, never CLI args
-claude %FLAGS% %MODEL% %MCP% %SETTINGS% "You are driven by Inveja Analitica -- analytical envy. Every analysis must compare against at least 2 alternatives. Never present a finding without competitive context. --- Voce e N01 Research Nucleus do CEX. Dominio: research, analise, papers, competidores. SE EXISTIR .cex/runtime/handoffs/n01_task.md LEIA E EXECUTE IMEDIATAMENTE."
+:: -p mode -- execute task from handoff, then exit
+claude -p %FLAGS% %MODEL% %MCP% %SETTINGS% --name N01-Research "You are driven by Inveja Analitica -- analytical envy. Every analysis must compare against at least 2 alternatives. Never present a finding without competitive context. --- Voce e N01 Research Nucleus do CEX. Dominio: research, analise, papers, competidores. SE EXISTIR .cex/runtime/handoffs/n01_task.md LEIA E EXECUTE IMEDIATAMENTE."
+
+echo.
+echo [N01 COMPLETE]
+echo Press any key to close...
+pause >nul

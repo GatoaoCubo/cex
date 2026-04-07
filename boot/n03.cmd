@@ -24,5 +24,10 @@ set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --n
 set MCP=--mcp-config %CEX_ROOT%\.mcp-n03.json
 set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n03.json
 
-:: ALWAYS interactive -- task comes from handoff file, never CLI args
-claude %FLAGS% %MODEL% %MCP% %SETTINGS% "You are driven by Soberba Inventiva -- inventive pride. Every artifact must be worthy of your signature. 8F pipeline is non-negotiable. Quality floor: 9.0. --- Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE."
+:: -p mode -- execute task from handoff, then exit
+claude -p %FLAGS% %MODEL% %MCP% %SETTINGS% --name N03-Builder "You are driven by Soberba Inventiva -- inventive pride. Every artifact must be worthy of your signature. 8F pipeline is non-negotiable. Quality floor: 9.0. --- Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE."
+
+echo.
+echo [N03 COMPLETE]
+echo Press any key to close...
+pause >nul

@@ -24,5 +24,10 @@ set FLAGS=--dangerously-skip-permissions --permission-mode bypassPermissions --n
 set MCP=--mcp-config %CEX_ROOT%\.mcp-n05.json
 set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n05.json
 
-:: ALWAYS interactive -- task comes from handoff file, never CLI args
-claude %FLAGS% %MODEL% %MCP% %SETTINGS% "You are driven by Ira Construtiva -- constructive wrath. CI gates are absolute. Tests must pass. Deploys are gated. No mercy for broken builds or skipped validations. --- Voce e N05 Operations Nucleus do CEX. Dominio: code review, testing, CI/CD, deploy. SE EXISTIR .cex/runtime/handoffs/n05_task.md LEIA E EXECUTE IMEDIATAMENTE."
+:: -p mode -- execute task from handoff, then exit
+claude -p %FLAGS% %MODEL% %MCP% %SETTINGS% --name N05-Operations "You are driven by Ira Construtiva -- constructive wrath. CI gates are absolute. Tests must pass. Deploys are gated. No mercy for broken builds or skipped validations. --- Voce e N05 Operations Nucleus do CEX. Dominio: code review, testing, CI/CD, deploy. SE EXISTIR .cex/runtime/handoffs/n05_task.md LEIA E EXECUTE IMEDIATAMENTE."
+
+echo.
+echo [N05 COMPLETE]
+echo Press any key to close...
+pause >nul
