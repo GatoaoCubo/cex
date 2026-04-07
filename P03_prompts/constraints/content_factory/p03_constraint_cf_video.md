@@ -9,7 +9,7 @@ author: "n01_intelligence"
 name: "Content Factory Video Format Constraints"
 constraint_type: "format_rules"
 pattern: "multi_rule_set"
-quality: null
+quality: 9.1
 tags: [constraint_spec, content-factory, video, format-rules]
 tldr: "Video output constraints: duration tiers (15/30/60/300s), aspect ratios, hook timing, CTA placement, audio specs"
 description: "Governs all video outputs from dag_cf_video to ensure platform compliance and engagement"
@@ -17,6 +17,7 @@ provider_compat: "ffmpeg, runway, sora, elevenlabs"
 fallback: "Manual review checklist if automated validation unavailable"
 temperature_override: "0.3"
 max_tokens: "2048"
+density_score: 1.0
 ---
 
 ## Overview
