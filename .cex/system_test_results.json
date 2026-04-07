@@ -1,20 +1,20 @@
 {
-  "timestamp": "2026-04-07T12:53:14.785985",
-  "pass": 55,
-  "fail": 3,
+  "timestamp": "2026-04-07T13:06:40.150146",
+  "pass": 54,
+  "fail": 4,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 95.2,
+  "elapsed_s": 81.1,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "53042B"
+      "detail": "53044B"
     },
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "68437B"
+      "detail": "68564B"
     },
     {
       "name": "tool:cex_intent.py",
@@ -64,7 +64,7 @@
     {
       "name": "doctor:pass_count",
       "status": "PASS",
-      "detail": "119/98+ PASS"
+      "detail": "121/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
@@ -73,8 +73,8 @@
     },
     {
       "name": "doctor:zero_fail",
-      "status": "PASS",
-      "detail": "0 FAIL"
+      "status": "FAIL",
+      "detail": "2 FAIL"
     },
     {
       "name": "compile:all",
@@ -84,12 +84,12 @@
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "120 builders"
+      "detail": "124 builders"
     },
     {
       "name": "builders:13_isos",
-      "status": "PASS",
-      "detail": "all 13 specs"
+      "status": "FAIL",
+      "detail": "2 short: multi-modal-config-builder(0), prompt-cache-builder(0)"
     },
     {
       "name": "nucleus:N01_intelligence",
@@ -288,13 +288,13 @@
     },
     {
       "name": "git:clean",
-      "status": "FAIL",
-      "detail": "259 dirty files"
+      "status": "PASS",
+      "detail": "2 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "a85fa080 [N05] F3 INJECT: hoist imports to top-level (re, js"
+      "detail": "92005ac6 [N03] Phase 2: rename 5 kinds (vectordb_backend→vec"
     }
   ]
 }
