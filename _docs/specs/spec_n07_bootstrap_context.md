@@ -3,9 +3,10 @@ id: spec_n07_bootstrap_context
 kind: context_doc
 title: CEX Architecture -- Theory vs Practice Gap Analysis
 version: 1.0.0
-quality: null
+quality: 8.9
 created: 2026-04-07
 purpose: Give a fresh N07 instance full understanding of what was designed vs what exists
+density_score: 1.0
 ---
 
 # CEX Architecture: Theory vs Practice
