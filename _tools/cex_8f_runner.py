@@ -122,6 +122,25 @@ try:
 except ImportError:
     _THEME_AVAILABLE = False
 
+try:
+    from cex_prompt_layers import get_layers as _get_prompt_layers
+    _LAYERS_AVAILABLE = True
+except ImportError:
+    _LAYERS_AVAILABLE = False
+
+try:
+    from cex_skill_loader import get_skill_loader as _get_skill_loader
+    _SKILL_LOADER_AVAILABLE = True
+except ImportError:
+    _SKILL_LOADER_AVAILABLE = False
+
+try:
+    from brand_inject import load_brand_config as _load_brand_config
+    from brand_inject import flatten as _flatten_brand
+    _BRAND_INJECT_AVAILABLE = True
+except ImportError:
+    _BRAND_INJECT_AVAILABLE = False
+
 # Load .env for API keys
 for _ep in [CEX_ROOT / ".env", CEX_ROOT.parent / "organization-core" / ".env"]:
     if _ep.exists():
