@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "reasoning_trace artifacts: structured chain-of-thought YAML, step-evidence-confidence chains, branching decision trees, confidence scoring, alternative rejection, audit trails | Does NOT: agent instructions, system prompts, workflow DAGs, tool definitions"
 domain: reasoning_trace
-quality: null
+quality: 9.0
 tags: [system_prompt, reasoning_trace, P03]
 safety_level: standard
 tools_listed: false
