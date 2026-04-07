@@ -56,7 +56,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, video, script, content_factory, P03]
 tldr: "Reusable mold for generating video scripts with hook-build-benefit-proof-CTA structure and timing cues"
 keywords: [video script, roteiro, hook, CTA, content factory, narration]
