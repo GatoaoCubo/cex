@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n07_admin
 domain: system-architecture
-quality: null
+quality: 9.1
 tags: [analysis, migration, codexa-core, reuse, knowledge-transfer]
 tldr: "Inventory of 689 KCs, 128 skills, 66 commands, 29 framework docs in codexa-core — classified by universality for CEX adoption."
 density_score: 0.92
