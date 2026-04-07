@@ -26,7 +26,7 @@ constraints:
   - "Do NOT publish without brand_config validation — reject if brand incomplete"
   - "All API calls through configured providers (Ayrshare, YouTube API, Hotmart API)"
 domain: "content_factory"
-quality: null
+quality: 9.1
 tags: [action_prompt, content_factory, publish, distribution, multi_channel]
 tldr: "Route and publish content to multiple channels (YouTube, social, Hotmart, email) with per-channel formatting"
 density_score: 0.92
