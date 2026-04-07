@@ -16,7 +16,7 @@ depends_on: [p03_ap_cf_generate_video]
 signals: [complete, error]
 spawn_configs: []
 domain: "content_factory"
-quality: null
+quality: 9.0
 tags: [workflow, content_factory, youtube, publish, video]
 tldr: "Upload video to YouTube with metadata, thumbnail, captions, and publish — 5 sequential steps with retry"
 density_score: 0.91
