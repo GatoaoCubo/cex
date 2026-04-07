@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "director artifact construction including wave topology, dispatch modes, signal waiting, fallback chains; NOT builder definition, NOT workflow execution, NOT spawn configuration"
 domain: "director"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "director", "orchestration", "P08"]
 safety_level: standard
 tools_listed: false
