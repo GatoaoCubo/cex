@@ -6,8 +6,9 @@ pillar: P01
 nucleus: N03
 sin: Soberba Inventiva
 version: 2.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
+density_score: 1.0
 ---
 
 # N03 Deck -- Available Capabilities
