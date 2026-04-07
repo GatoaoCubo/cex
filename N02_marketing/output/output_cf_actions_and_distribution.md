@@ -13,7 +13,7 @@ task: build_action_prompts_and_distribution_workflows
 status: complete
 artifacts_produced: 12
 domain: "content_factory"
-quality: null
+quality: 9.1
 tags: [output, content_factory, wave2, n02]
 tldr: "N02 output: 7 action prompts + 5 distribution workflows for Content Factory"
 density_score: 0.90
