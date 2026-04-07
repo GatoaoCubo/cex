@@ -15,7 +15,7 @@ aggregation: weighted_avg
 llm_function: GOVERN
 tags: [scoring_rubric, geographic, density, crm, expansion, priority, GATO3]
 tldr: "Framework de avaliacao para priorizar cidades por densidade de negocios pet, saturacao, potencial de expansao e alinhamento com estrategia GATO3 ring-based."
-quality: null
+quality: 9.1
 density_score: null
 ---
 
