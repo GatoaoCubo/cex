@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "Primitive/composite/algebraic types, nullability semantics, constraint specification, union/intersection/discriminated union composition, serialization specs, examples | Does NOT: input_schema (input contracts), validator (pass/fail rules), interface (bilateral contracts), runtime instructions"
 domain: type_def
-quality: null
+quality: 8.9
 tags: [system_prompt, type_def, P03]
 safety_level: standard
 tools_listed: false
