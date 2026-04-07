@@ -9,7 +9,8 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [output_template, webhook, P04, template]
-quality: null
+quality: 8.9
+density_score: 1.0
 ---
 # Output Template: webhook
 
