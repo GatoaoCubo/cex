@@ -9,7 +9,7 @@ author: "n01_intelligence"
 name: "Content Factory Course Format Constraints"
 constraint_type: "format_rules"
 pattern: "multi_rule_set"
-quality: null
+quality: 9.1
 tags: [constraint_spec, content-factory, course, education, lms]
 tldr: "Course constraints: 5-12 modules, 3-8 lessons/module, quiz rules, certification, SCORM compliance"
 description: "Governs all course outputs from dag_cf_course for LMS platform compliance and pedagogical quality"
@@ -17,6 +17,7 @@ provider_compat: "scorm, xapi, lms_generic"
 fallback: "Manual pedagogical review if automated validation unavailable"
 temperature_override: "0.4"
 max_tokens: "2048"
+density_score: 1.0
 ---
 
 ## Overview
