@@ -3,8 +3,9 @@ id: spec_context_assembly
 kind: context_doc
 title: Context Assembly Specification
 version: 1.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
+density_score: 1.0
 ---
 
 # Context Assembly Specification
