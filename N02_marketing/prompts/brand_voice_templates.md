@@ -360,4 +360,122 @@ dynamic_personalization:
     purchase_intent: "Confident tone, decision support"
 ```
 
+## 7. GATO³ Brand Voice — Ro Persona Templates (pt-BR)
+
+### Ro Voice Calibration Per Context
+
+```yaml
+gato3_ro_voice:
+  educacional_instagram:
+    warmth: 5/5
+    authority: 3/5
+    template: |
+      "[GANCHO curto — problema ou curiosidade felina]
+
+      [EXPLICAÇÃO em 2-3 frases — ciência acessível]
+
+      Protocolo da Ro:
+      1. [PASSO prático]
+      2. [PASSO prático]
+      3. [PASSO prático]
+
+      Salva pra quando precisar 🐱"
+    example: |
+      "Seu gato te acorda às 4h? Não é maldade — é instinto crepuscular.
+
+      Gatos são mais ativos ao amanhecer e anoitecer. Se ele não gasta energia antes de dormir, vai cobrar de madrugada.
+
+      Protocolo da Ro:
+      1. Brincadeira intensa 30 min antes de dormir
+      2. Refeição leve logo depois (simula caça + saciedade)
+      3. Ambiente noturno: cortinas fechadas, sem estímulos visuais
+
+      Salva pra quando precisar 🐱"
+
+  email_nurturing:
+    warmth: 4/5
+    authority: 3/5
+    template: |
+      "Oi, [NOME] 👋
+
+      [GANCHO pessoal — 1 frase que conecta]
+
+      [CONTEÚDO — 1 protocolo prático em ≤100 palavras]
+
+      [CTA suave — convite, nunca ordem]
+
+      Um abraço,
+      Ro"
+    example: |
+      "Oi, Carla 👋
+
+      Semana passada falamos sobre arranhadores. Hoje, um protocolo que funciona em 80% dos casos.
+
+      Se seu gato ignora o arranhador, provavelmente é questão de posição. Coloque ao lado do local que ele já arranha — rente à parede, não no canto do quarto. Passe catnip seco na superfície. Espere 48h antes de avaliar.
+
+      Quer que eu mande o guia completo de posicionamento? Responde esse email.
+
+      Um abraço,
+      Ro"
+
+  b2b_outreach:
+    warmth: 3/5
+    authority: 4/5
+    template: |
+      "Olá, [NOME/CLÍNICA]
+
+      [CONTEXTO — por que estou escrevendo, 1 frase]
+
+      [PROPOSTA DE VALOR — educação como diferencial comercial, com dado]
+
+      [CTA profissional — próximo passo claro]
+
+      Atenciosamente,
+      Equipe GATO³"
+    example: |
+      "Olá, Clínica VetLife
+
+      Sou a Ro, da GATO³. Trabalhamos com educação felina para tutores — e isso impacta diretamente a adesão a tratamentos veterinários.
+
+      Tutores que entendem comportamento felino têm 3x mais chance de seguir protocolos pós-cirúrgicos. Nossa parceria oferece conteúdo educacional pronto para sua sala de espera + desconto exclusivo em produtos para seus clientes.
+
+      Posso enviar a proposta completa? 5 minutos de leitura.
+
+      Atenciosamente,
+      Equipe GATO³"
+
+  landing_page_hero:
+    warmth: 4/5
+    authority: 4/5
+    template: |
+      "[HEADLINE: Problema + Solução elegante]
+      [SUBHEADLINE: Benefício específico + prova social]
+      [CTA: Ação + benefício imediato]"
+    example: |
+      "Seu gato destrói a casa? Não. Ele está pedindo algo.
+      Protocolos da Ro já ajudaram 2.400+ tutores a harmonizar o lar.
+      Começar o protocolo gratuito →"
+```
+
+### Ro Anti-Voice Examples (What NOT to Write)
+
+```yaml
+anti_patterns:
+  infantilizing:
+    bad: "Aaaah, seu gatinho fofo está fazendo arte? 🥺😍"
+    good: "Gatos arranham. É instinto. Existe protocolo para direcionar."
+    
+  hard_sell:
+    bad: "ÚLTIMAS UNIDADES! Compre AGORA o arranhador que vai SALVAR seu sofá!!! 🔥🔥🔥"
+    good: "O arranhador certo no lugar certo muda tudo. Ro explica como escolher."
+    
+  generic_pet:
+    bad: "Ame seu pet! Porque eles merecem o melhor! 💕"
+    good: "Educação que acalma. Soluções que funcionam. Casa que continua elegante."
+    
+  medical_overreach:
+    bad: "Cure a ansiedade do seu gato com nosso produto natural!"
+    good: "Sinais de estresse felino e quando procurar o veterinário — protocolo da Ro."
+```
+
 This brand voice template system ensures consistent, audience-appropriate messaging across all marketing touchpoints while maintaining the flexibility to optimize for different contexts and objectives.

@@ -2,15 +2,16 @@
 id: copy_optimization_insights
 kind: learning_record
 pillar: P10
-title: Copy Optimization Insights & Learning Records
-version: 1.0.0
+title: "Copy Optimization Insights & Learning Records (Universal + GATO³ Pet Vertical)"
+version: 2.0.0
 created: 2026-04-02
+updated: 2026-04-07
 author: n02_marketing
 domain: copy_performance_learning
-quality: 9.0
-tags: [learning_record, optimization, insights, performance, copy_improvement, N02]
-tldr: Consolidated learning records from copy performance data, A/B testing results, and audience feedback to drive continuous improvement.
-learning_types: [performance_insights, audience_behavior, copy_patterns, optimization_strategies]
+quality: null
+tags: [learning_record, optimization, insights, performance, copy_improvement, N02, pet-vertical, gato3]
+tldr: "Consolidated learning records from copy performance data, A/B testing results, and audience feedback — includes pet vertical insights and GATO³-specific patterns for Brazilian cat tutor market."
+learning_types: [performance_insights, audience_behavior, copy_patterns, optimization_strategies, pet_vertical]
 density_score: 1.0
 ---
 
