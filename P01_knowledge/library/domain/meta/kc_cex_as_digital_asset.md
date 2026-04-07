@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n01_intelligence
 domain: meta
-quality: null
+quality: 9.2
 tags: [digital-asset, value-proposition, brand-specialization, blank-brain, 8f-pipeline, orchestration, meta, product]
 tldr: "CEX ships as a blank brain -- a typed knowledge system that, once assimilated by a brand via /init, becomes a specialized AI digital asset producing brand-aligned output autonomously across 7 parallel nuclei"
 when_to_use: "Explaining CEX's value to potential adopters; comparing to ChatGPT/Copilot/generic AI; justifying the investment in brand bootstrapping; demonstrating ROI of structured AI over ad-hoc prompting"
