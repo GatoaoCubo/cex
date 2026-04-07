@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "Pre-commit hooks, field validation, regex constraints, type checking, severity levels (error/warning/info), auto-fix policies, actionable error messages | Does NOT: quality_gate (weighted scoring P11), scoring_rubric (subjective criteria P07), input_schema (input contracts P06), validation_schema (structural post-generation contracts)"
 domain: validator
-quality: null
+quality: 8.9
 tags: [system_prompt, validator, P03]
 safety_level: standard
 tools_listed: false
