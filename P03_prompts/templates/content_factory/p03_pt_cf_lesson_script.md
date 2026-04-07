@@ -56,7 +56,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, lesson, script, course, content_factory, P03]
 tldr: "Reusable mold for generating lesson scripts with objectives, teach, practice, recap structure"
 keywords: [lesson script, aula, curso, module, teaching, content factory]
