@@ -14,7 +14,7 @@ max_sessions: 100
 serialization: json
 encryption: false
 domain: session_backend
-quality: null
+quality: 9.1
 tags: [session-backend, redis, persistence, state, memory]
 tldr: "Redis session backend — localhost:6379, JSON serialization, 24h TTL, 100 max sessions, namespace-per-nucleus isolation."
 when_to_use: "Multi-process agent sessions requiring shared state and fast read/write with automatic expiry"
@@ -60,7 +60,7 @@ state = json.loads(raw) if raw else {}
 r.setex(f"cex:signal:MISSION:n03", 3600, "complete")
 
 # Check all nucleus signals
-signals = {k.decode(): r.get(k).decode() 
+signals = {k.decode(): r.get(k).decode()
            for k in r.scan_iter("cex:signal:MISSION:*")}
 ```
 
