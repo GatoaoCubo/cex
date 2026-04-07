@@ -1,0 +1,88 @@
+id: p12_spawn_knowledge_engineer
+kind: spawn_config
+pillar: P12
+version: 1.0.0
+created: 2026-04-07
+author: n04_knowledge
+title: Knowledge Engineer Spawn Config
+mode: solo
+agent_group: knowledge_engineer
+model: opus-4-6
+flags:
+- --model
+- opus-4-6
+- --reasoning-effort
+- high
+mcp_config: .mcp-n04.json
+timeout_seconds: 7200
+prompt_inline: false
+handoff_path: .cex/runtime/handoffs/n04_task.md
+quality: null
+tags:
+- spawn_config
+- knowledge
+- n04
+- opus
+- rag
+- embedding
+- supabase
+tldr: N04 Knowledge Engineer spawn on Opus 4.6 with 5 MCP servers (supabase, postgres, fetch, firecrawl, notebooklm) for full
+  knowledge lifecycle.
+domain: knowledge-management
+density_score: 0.92
+parameters: '| Parameter | Value | Rationale |
+
+  |-----------|-------|-----------|
+
+  | `mode` | `solo` | Knowledge work requires deep context — single-owner session |
+
+  | `agent_group` | `knowledge_engineer` | Routes to N04 persona with Gula por Conhecimento lens |
+
+  | `model` | `opus-4-6` | 1M context for ingesting large document corpora |
+
+  | `timeout_seconds` | `7200` | 2h — KC creation, embedding batch, taxonomy builds are long-running |
+
+  | `mcp_config` | `.mcp-n04.json` | 5 servers: supabase, postgres, fetch, firecrawl, notebooklm |
+
+  | `prompt_inline` | `false` | Prompt loaded from agent card + ISOs, not CLI arg |'
+mcp_servers_required: '| Server | Critical | Used For |
+
+  |--------|----------|----------|
+
+  | supabase | Yes | Schema ops, RLS, project admin |
+
+  | postgres | Yes | Direct SQL — migrations, bulk vector inserts |
+
+  | fetch | Yes | HTTP content retrieval for KC authoring |
+
+  | firecrawl | Recommended | Bulk web crawling for knowledge ingestion |
+
+  | notebooklm | Optional | Transform KCs → audio, flashcards, quizzes |'
+environment: '| Variable | Value |
+
+  |----------|-------|
+
+  | `CEX_NUCLEUS` | `N04` |
+
+  | `CEX_SIN` | `Gula por Conhecimento` |
+
+  | `CEX_DOMAIN` | `knowledge-management` |'
+pre_flight_checklist:
+- '`.mcp-n04.json` exists and all 5 servers reachable'
+- '`.cex/runtime/handoffs/n04_task.md` exists with valid frontmatter'
+- '`N04_knowledge/agent_card_n04.md` loaded for capability awareness'
+- '`cex_skill_loader.py` can resolve builder ISOs for target kind'
+- Git working tree is clean (no uncommitted changes in N04_knowledge/)
+post_completion: '# Compile all created artifacts
+
+  python _tools/cex_compile.py N04_knowledge/ --all
+
+
+  # Signal completion
+
+  python -c "from _tools.signal_writer import write_signal; write_signal(''n04'', ''complete'', 9.0)"
+
+
+  # Commit
+
+  git add -A && git commit -m "[N04] <description>"'
