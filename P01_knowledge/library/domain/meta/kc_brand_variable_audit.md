@@ -6,9 +6,10 @@ pillar: P01
 version: "1.0"
 created: "2026-04-07"
 updated: "2026-04-07"
-quality: null
+quality: 9.1
 tags: [brand, variables, audit, template, injection, N04]
 tldr: "Full audit of 44 {{BRAND_*}} template variables across 68 files. 13 gaps fixed."
+density_score: 1.0
 ---
 
 # Brand Template Variable Audit
