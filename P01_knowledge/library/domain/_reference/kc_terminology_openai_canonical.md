@@ -10,7 +10,7 @@ updated: 2026-04-07
 author: N01_intelligence
 domain: terminology
 origin: research_d4_terminology
-quality: null
+quality: 9.1
 tags: [terminology, openai, canonical, agents-sdk, assistants, function-calling, structured-outputs, permanent]
 tldr: "Complete canonical vocabulary from OpenAI's official docs. Every term is the EXACT name OpenAI uses. Covers Chat Completions, Assistants API, Agents SDK, Structured Outputs, Evals, and Responses API."
 when_to_use: "When building CEX kinds for OpenAI features, comparing OpenAI vs Anthropic terminology, or validating naming in OpenAI-facing artifacts."
