@@ -299,6 +299,21 @@ Each ISO maps to a recognized industry concept: Agent Card, System Prompt, JSON 
 | project_cex_product_context.md | CEX ships as unconfigured instance |
 | project_notebooklm_pipeline.md | NotebookLM integration |
 
+## Infinite Bootstrap Loop (spec: spec_infinite_bootstrap_loop.md)
+
+| Component | Status | Purpose |
+|-----------|--------|---------|
+| cex_mission_state.py | BUILDING | Checkpoint that survives N07 restart |
+| cex_lock.py | BUILDING | Atomic file locking for shared resources |
+| overnight_infinite.cmd | BUILDING | Auto-restart loop for N07 |
+| --continuous mode | BUILDING | Continuous batching in mission_runner |
+| pi subagent extension | BUILDING | 4 concurrent sub-agents per nucleus |
+| 6 CEX agent definitions | BUILDING | scout, builder-iso, kc-writer, formatter, test-runner, researcher |
+| Shared-file proposal pattern | BUILDING | Nuclei propose, N07 applies (git conflict prevention) |
+| Task queue spec | BUILDING | Prioritized task queue for continuous dispatch |
+
+Peak throughput: 24 parallel LLM streams, 864 artifacts/hour, full CEX from zero in ~3 hours.
+
 ## Terminology Reference (permanent)
 
 | Source | Path |

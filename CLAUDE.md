@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 117 kinds · 121 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 58 tools
+> 123 kinds · 125 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 59 tools
 
 ## Brand Identity
 
@@ -32,11 +32,15 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Nucleus rules** | `.claude/rules/n{01-06}-*.md` (1 per nucleus) |
 | **Commands** | `.claude/commands/` → /build, /validate, /dispatch, /status, /doctor, /mission |
 | **Builders (source of truth)** | `archetypes/builders/{kind}-builder/` (13 ISOs each) |
-| **Sub-agents** | `.claude/agents/{kind}-builder.md` (121 files) |
-| **N00 Genesis (mold)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
-| **Pillar schemas** | `P{01-12}_*/_schema.yaml` |
-| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (121 files) |
-| **Kind registry** | `.cex/kinds_meta.json` (117 kinds) |
+| **Sub-agents** | `.claude/agents/{kind}-builder.md` (125 files) |
+| **N00 Genesis (archetype)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
+| **Pillar schemas** | `P{01-12}_*/_schema.yaml` (all descriptions in EN) |
+| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (123 files) |
+| **Kind registry** | `.cex/kinds_meta.json` (123 kinds) |
+| **Terminology** | `_docs/specs/spec_metaphor_dictionary.md` + Rosetta Stone KC |
+| **N07 tech authority** | `.claude/rules/n07-technical-authority.md` |
+| **Infinite loop spec** | `_docs/specs/spec_infinite_bootstrap_loop.md` |
+| **Subagent definitions** | `.pi/agents/` (6 CEX agents: scout, builder-iso, kc-writer, etc.) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
 | **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
 | **Boot scripts** | `boot/cex.cmd` (N07) · `boot/n0{1-6}.cmd` |
