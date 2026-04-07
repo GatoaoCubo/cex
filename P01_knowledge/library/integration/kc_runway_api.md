@@ -9,7 +9,7 @@ created: 2026-04-06
 updated: 2026-04-06
 author: n04_knowledge
 domain: runway_api
-quality: null
+quality: 9.1
 tags: [runway, api, video, gen4, ai-video, content-factory, integration, INJECT]
 tldr: "REST API for text-to-video and image-to-video generation with Gen-4 models — async job-based workflow"
 when_to_use: "When any nucleus needs to generate AI video clips from text prompts or reference images"
