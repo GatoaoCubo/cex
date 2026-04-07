@@ -6,9 +6,10 @@ version: 1.0.0
 created: 2026-03-31
 author: content-monetization-builder
 domain: pricing_strategy
-quality: null
+quality: 9.0
 tldr: "Pricing strategy template — value ladder, PPP, coupons, metrics for any content business"
 tags: [template, pricing, ladder, ppp, monetization, hotmart, digistore24]
+density_score: 1.0
 ---
 
 # Pricing Model — Instance Template
