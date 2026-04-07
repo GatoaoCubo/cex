@@ -9,7 +9,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n04_knowledge
 domain: context_window_config
-quality: null
+quality: 9.1
 tags: [context_window_config, P03, CONSTRAIN, kind-kc]
 tldr: "context_window_config defines token budget allocation, priority tiers, and overflow rules for assembling LLM prompts within a model's context window limit."
 when_to_use: "Building, reviewing, or reasoning about context_window_config artifacts"
