@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "Sequential/parallel/mixed execution modes, wave planning, dependency resolution, signal-based completion contracts, agent_node coordination, error recovery policies, spawn_config references | Does NOT: chain (prompt chaining P03), dag (dependency graph without execution P12), dispatch_rule (keyword routing P12)"
 domain: workflow
-quality: null
+quality: 8.9
 tags: [system_prompt, workflow, P03]
 safety_level: standard
 tools_listed: false
