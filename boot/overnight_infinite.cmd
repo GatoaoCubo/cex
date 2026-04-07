@@ -7,7 +7,7 @@ title CEX INFINITE BOOTSTRAP [%date%]
 color 0E
 mode con: cols=160 lines=50
 
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
+set CEX_ROOT=%~dp0..
 cd /d "%CEX_ROOT%"
 
 echo.

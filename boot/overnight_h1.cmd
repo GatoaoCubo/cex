@@ -21,7 +21,7 @@ echo   Kill: close this window (or Ctrl+C)
 echo   ============================================================
 echo.
 
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
+set CEX_ROOT=%~dp0..
 cd /d "%CEX_ROOT%"
 
 set LOG=.cex\overnight\h1_%date:~-4%%date:~3,2%%date:~0,2%_%time:~0,2%%time:~3,2%.log

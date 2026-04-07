@@ -5,7 +5,7 @@
 
 title CEX-N02-MARKETING
 set CEX_NUCLEUS=N02
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
+set CEX_ROOT=%~dp0..
 cd /d "%CEX_ROOT%"
 
 :: Force subscription OAuth (clear API keys)

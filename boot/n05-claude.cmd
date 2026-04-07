@@ -6,7 +6,7 @@
 title CEX-N05-OPERATIONS [claude fallback]
 set CLAUDECODE=
 set CEX_NUCLEUS=N05
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
+set CEX_ROOT=%~dp0..
 cd /d "%CEX_ROOT%"
 
 set MODEL=--model claude-sonnet-4-6
