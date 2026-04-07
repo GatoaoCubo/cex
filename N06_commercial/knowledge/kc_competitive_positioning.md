@@ -7,10 +7,20 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: commercial-positioning
-quality: 8.8
+quality: 9.0
+updated: 2026-04-07
 tags: [positioning, competitive, blue-ocean, porter, ries-trout, differentiation, perceptual-map, category-design]
 tldr: "Frameworks universais para posicionar qualquer marca competitivamente: Ries & Trout, Blue Ocean ERRC, Porter, VPC, perceptual mapping, category design."
-density_score: null
+when_to_use: "When positioning a brand against competitors, creating perceptual maps, or designing new market categories."
+keywords: [competitive-positioning, ries-trout, blue-ocean, porter, perceptual-map, category-design, differentiation]
+density_score: 0.93
+axioms:
+  - "ALWAYS position against the leader's weakness, never their strength."
+  - "NEVER compete on price alone — commoditization kills margins."
+  - "ALWAYS map competitors on 2 axes before choosing positioning — intuition lies, data reveals."
+linked_artifacts:
+  primary: n06_output_competitive_map
+  related: [p01_kc_brand_frameworks, n06_kc_icp_frameworks, n06_output_competitive_business]
 ---
 
 # Competitive Positioning Methods — Universal Frameworks

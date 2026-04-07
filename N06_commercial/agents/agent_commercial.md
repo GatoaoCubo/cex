@@ -13,10 +13,18 @@ llm_function: BECOME
 capabilities_count: 12
 tools_count: 10
 routing_keywords: [brand, marca, identidade, brand-book, persona, arquetipo, voz, naming, tagline, posicionamento, UVP, ICP, design-tokens, paleta, pricing, curso, funnel, monetizar, receita, upsell, checkout]
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [agent, commercial, N06, brand, identity, monetization, brand-architect]
 tldr: "Dual-role nucleus: Brand Architect discovers and codifies brand identity into brand_config.yaml, then Revenue Engineer monetizes it via pricing, funnels, and courses. N06 runs FIRST on new CEX instances — brand before everything."
 density_score: 0.95
+axioms:
+  - "Brand ALWAYS runs before any other nucleus — identity precedes expression."
+  - "NEVER produce monetization artifacts without brand_config.yaml loaded."
+  - "ALWAYS validate voice consistency after every brand propagation cycle."
+linked_artifacts:
+  primary: p03_sp_commercial_nucleus
+  related: [p08_ac_commercial_nucleus, p12_dr_commercial, p12_wf_commercial, p07_qg_commercial]
 ---
 
 # Brand Architect & Revenue Engineer — N06 Nucleus Agent

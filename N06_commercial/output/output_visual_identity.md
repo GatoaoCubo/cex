@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-visual
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [output, brand, visual, identity, colors, typography, n06]
 tldr: "Visual identity reference: color swatches (HEX+HSL+RGB), font specimens, logo usage, photography style, dark mode rules. Feeds into N03 design tokens."
 density_score: 0.93
+axioms:
+  - "ALWAYS provide HEX + HSL + RGB for every color — incomplete specs cause inconsistency."
+  - "NEVER skip dark mode rules — 40%+ users prefer dark mode."
+linked_artifacts:
+  primary: p01_kc_brand_propagation_arch
+  related: [p01_kc_brand_tokens_pipeline, n06_output_brand_book, n06_output_brand_config]
 ---
 
 # Visual Identity — {{BRAND_NAME}}

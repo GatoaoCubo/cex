@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-narrative
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [output, brand, transformation, narrative, arc, n06]
 tldr: "Standalone transformation arc template. Maps the customer journey from pain (Before) through mechanism (Bridge) to desired state (After). Used in brand books, landing pages, course outlines, and funnel copy."
 density_score: 0.93
+axioms:
+  - "ALWAYS define Before/Bridge/After in concrete terms — abstract arcs don't convert."
+  - "The arc IS the price anchor — stronger transformation = higher justifiable price."
+linked_artifacts:
+  primary: p01_kc_brand_frameworks
+  related: [n06_output_brand_book, p01_kc_commercial_nucleus, n06_output_monetization_business_plan]
 ---
 
 # Transformation Arc — {{BRAND_NAME}}

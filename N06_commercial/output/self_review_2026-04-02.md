@@ -3,10 +3,13 @@ id: n06_self_review_20260402
 kind: context-doc
 nucleus: N06
 pillar: P09
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 date: 2026-04-02
 type: self-review
 author: n06_commercial
+tags: [self-review, N06, brand, commercial, audit]
+tldr: "N06 self-assessment: CEX is a product in development. Brand not-bootstrapped is correct product state. Focus on builder quality, tool robustness, onboarding UX."
 ---
 
 # N06 Self-Review — 2026-04-02

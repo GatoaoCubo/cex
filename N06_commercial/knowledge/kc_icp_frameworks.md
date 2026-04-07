@@ -7,10 +7,20 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: commercial-positioning
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [icp, buyer-persona, jtbd, segmentation, psychographic, demographic, behavioral, transformation-promise, b2b, b2c]
 tldr: "Frameworks universais para construir ICPs e personas: VPC, JTBD, Job Stories, segmentacao tri-dimensional, transformation promise, templates B2B e B2C."
-density_score: null
+when_to_use: "When defining target audience, building buyer personas, or validating ICP against product-market fit."
+keywords: [icp, buyer-persona, jtbd, segmentation, transformation-promise, b2b, b2c]
+density_score: 0.93
+axioms:
+  - "ICP defines WHO to sell to (company level). Persona defines WHO decides (human level). Never skip either."
+  - "ALWAYS validate ICP against actual paying customers — theoretical ICPs mislead."
+  - "NEVER build a persona without JTBD — demographics without motivation are useless."
+linked_artifacts:
+  primary: n06_output_discovery_report
+  related: [n06_kc_competitive_positioning, p01_kc_brand_frameworks, p01_kc_commercial_nucleus]
 ---
 
 # ICP Frameworks + Buyer Persona — Universal Methods

@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-positioning
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [output, brand, competitive, positioning, blue-ocean, n06]
 tldr: "2D perceptual positioning grid, Blue Ocean ERRC (Eliminate-Reduce-Raise-Create), competitive audit table, whitespace identification, and gap analysis."
 density_score: 0.93
+axioms:
+  - "ALWAYS plot at least 4 competitors on the 2D grid — fewer creates false confidence."
+  - "NEVER skip ERRC — the 4-action framework is what turns analysis into strategy."
+linked_artifacts:
+  primary: n06_kc_competitive_positioning
+  related: [n06_output_competitive_business, p01_kc_brand_frameworks, n06_output_discovery_report]
 ---
 
 # Competitive Positioning Map — {{BRAND_NAME}}

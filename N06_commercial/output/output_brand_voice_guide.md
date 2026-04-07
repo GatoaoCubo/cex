@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-voice
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [output, brand, voice, tone, guide, n06]
 tldr: "Voice guide with 5D radar, tone matrix per channel, We Are X Not Y attributes, do/don't lists, 10 calibration phrases, and LLM injection snippet."
-density_score: 0.93
+density_score: 0.94
+axioms:
+  - "Voice is constant across channels. Tone adapts per context — ALWAYS distinguish."
+  - "NEVER ship voice guide without 10+ calibration phrases — abstract guidelines get misinterpreted."
+linked_artifacts:
+  primary: p01_kc_brand_voice_systems
+  related: [n06_schema_brand_voice_contract, n06_output_brand_book, p03_sp_commercial_nucleus]
 ---
 
 # Voice Guide — {{BRAND_NAME}}

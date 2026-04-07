@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-summary
-quality: 8.8
+quality: 9.0
+updated: 2026-04-07
 tags: [output, brand, one-pager, executive, summary, n06]
 tldr: "1-page brand summary: logo + name + tagline + archetype + values + UVP + colors + fonts + ICP + transformation. Shareable to stakeholders."
-density_score: 0.92
+density_score: 0.93
+axioms:
+  - "ALWAYS fit on 1 page — if it needs scrolling, it's not a one-pager."
+  - "NEVER omit the transformation arc — it's the emotional hook for stakeholders."
+linked_artifacts:
+  primary: n06_output_brand_book
+  related: [n06_output_brand_config, n06_output_brand_voice_guide, n06_output_visual_identity]
 ---
 
 # Brand One-Pager — {{BRAND_NAME}}

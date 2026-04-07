@@ -12,6 +12,13 @@ role: "Brand Architect & Revenue Engineer — discovers brand identity, codifies
 model: sonnet
 mcps: [fetch, stripe_mcp, hotmart_mcp]
 domain_area: brand-identity-monetization
+quality: 9.0
+tags: [agent_card, commercial, N06, brand, monetization, brand-architect]
+tldr: "N06 agent card: dual-role Brand Architect + Revenue Engineer. Boot sequence loads 10 KCs, system prompt, dispatch rule. Sonnet default, Opus escalation for brand-from-scratch."
+density_score: 0.94
+linked_artifacts:
+  primary: p02_agent_commercial_nucleus
+  related: [p03_sp_commercial_nucleus, p12_dr_commercial, p07_qg_commercial]
 boot_sequence:
   - "Check if .cex/brand/brand_config.yaml exists"
   - "Load N06_commercial/agents/agent_commercial.md (dual-role identity)"

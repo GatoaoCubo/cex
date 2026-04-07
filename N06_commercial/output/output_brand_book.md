@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-book
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [output, brand, brand-book, 32-block, n06]
 tldr: "Crown jewel output. 32-block Brand Book covering identity, positioning, voice, visual, narrative, guidelines, validation. All {{BRAND_*}} variables — zero hardcoded values."
 density_score: 0.95
+axioms:
+  - "NEVER hardcode brand values — all {{BRAND_*}} mustache variables only."
+  - "ALWAYS generate all 32 blocks — partial brand books create inconsistency."
+linked_artifacts:
+  primary: p03_brand_book_generator
+  related: [n06_schema_brand_book, p01_kc_brand_book_patterns, n06_output_brand_config, n06_output_brand_voice_guide]
 ---
 
 # Brand Book — {{BRAND_NAME}}

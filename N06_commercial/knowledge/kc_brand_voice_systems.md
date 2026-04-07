@@ -7,10 +7,20 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: brand-identity
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [brand, voice, tone, brand-voice, nngroup, content-design, governance, messaging]
 tldr: "Frameworks universais para sistemas de voz de marca: NNGroup 4D model, distincao voice/tone, matriz de canais, atributos, Do/Don't, governanca e scoring."
-density_score: null
+when_to_use: "When calibrating brand voice dimensions, building tone matrix per channel, or writing voice governance guidelines."
+keywords: [brand-voice, tone-matrix, nngroup-4d, voice-governance, channel-calibration]
+density_score: 0.94
+axioms:
+  - "Voice is WHO you are (constant). Tone is HOW you adjust (contextual). Never confuse them."
+  - "ALWAYS include Do/Don't examples — guidelines without examples get ignored."
+  - "NEVER calibrate voice without testing on 3+ channels — what works on social may fail in support."
+linked_artifacts:
+  primary: n06_output_brand_voice_guide
+  related: [p01_kc_brand_archetypes, n06_schema_brand_voice_contract, p03_sp_commercial_nucleus]
 ---
 
 # Brand Voice Systems — Frameworks Universais

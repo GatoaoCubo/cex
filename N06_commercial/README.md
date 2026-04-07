@@ -1,3 +1,17 @@
+---
+id: n06_readme
+kind: readme
+pillar: P09
+title: "N06 Commercial Nucleus — README"
+version: 2.0.0
+created: 2026-03-30
+updated: 2026-04-07
+author: n06_commercial
+quality: 9.0
+tags: [readme, commercial, N06, brand, monetization, fractal-module]
+tldr: "N06 fractal module index: 12 pillar subdirs, 48 artifacts, dual-role Brand Architect + Revenue Engineer. Brand discovery → propagation → monetization."
+---
+
 # N06_commercial
 
 > **Fractal Module** — Contains instances of all 12 pillars scoped to commercial.

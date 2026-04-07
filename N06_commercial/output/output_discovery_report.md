@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-discovery
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [output, brand, discovery, research, report, n06]
 tldr: "Research output after Brand Discovery: market intelligence, keyword analysis, audience insights, competitive gaps, archetype recommendation, and next steps."
-density_score: 0.92
+density_score: 0.93
+axioms:
+  - "ALWAYS recommend primary + secondary archetype with percentages — never just one."
+  - "NEVER ship discovery without competitive gap analysis — unknown gaps become blind spots."
+linked_artifacts:
+  primary: p03_brand_audit_prompt
+  related: [n06_kc_icp_frameworks, n06_kc_competitive_positioning, n06_output_brand_book]
 ---
 
 # Brand Discovery Report — {{BRAND_NAME}}

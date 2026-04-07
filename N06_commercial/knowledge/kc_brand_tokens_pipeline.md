@@ -3,12 +3,12 @@ id: p01_kc_brand_tokens_pipeline
 kind: knowledge_card
 pillar: P01
 title: "Brand Tokens Pipeline — Living Brand System from Guidelines to Code"
-version: 1.0.0
+version: 1.1.0
 created: 2026-03-26
-updated: 2026-03-26
+updated: 2026-04-07
 author: builder_agent
 domain: cex_taxonomy
-quality: 8.8
+quality: 9.0
 tags: [brand, design-tokens, design-system, brand-guidelines, css-variables]
 tldr: "Brand como sistema vivo: guidelines.md (fonte unica) -> tokens JSON -> CSS vars -> codigo, com sync automatico"
 when_to_use: "Implementar identidade visual programatica com single source of truth e propagacao automatica"
@@ -16,13 +16,16 @@ keywords: [brand-system, design-tokens, brand-guidelines, brand-sync]
 long_tails:
   - "Como criar um sistema de brand com propagacao automatica para codigo"
   - "Qual a arquitetura de design tokens de guidelines ate CSS"
+  - "Como sincronizar brand config com CSS variables automaticamente"
 axioms:
   - "SEMPRE editar brand-guidelines.md primeiro, nunca tokens diretamente"
+  - "NUNCA ter mais de 1 source of truth — brand_config.yaml é canônico."
+  - "SEMPRE validar tokens compilados contra brand_config antes de deploy."
   - "NUNCA usar hex hardcoded em componentes — usar CSS variables"
 linked_artifacts:
-  primary: null
-  related: [p01_kc_agentskills_spec, p01_kc_csv_as_knowledge]
-density_score: 0.90
+  primary: p01_kc_brand_propagation_arch
+  related: [n06_output_visual_identity, n06_schema_brand_config, n06_output_brand_config, p01_kc_agentskills_spec]
+density_score: 0.93
 data_source: "https://www.designtokens.org/glossary/"
 ---
 

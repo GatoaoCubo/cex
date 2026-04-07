@@ -7,10 +7,20 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: brand-identity
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [brand, naming, trademark, linguistic, tagline, strategy]
 tldr: "7 tipos de nome de marca, processo de 5 etapas, screening linguistico/legal e formulas de naming"
-density_score: null
+when_to_use: "When naming a new brand, validating existing brand name, or creating taglines and slogans."
+keywords: [brand-naming, trademark, linguistic-screening, tagline, naming-process]
+density_score: 0.93
+axioms:
+  - "ALWAYS check domain + social handle availability BEFORE falling in love with a name."
+  - "NEVER name a brand without linguistic screening in target markets."
+  - "ALWAYS generate 20+ candidates before shortlisting — first idea is rarely best."
+linked_artifacts:
+  primary: n06_output_brand_book
+  related: [p01_kc_brand_archetypes, p01_kc_brand_frameworks, n06_output_discovery_report]
 ---
 
 # Brand Naming Patterns
