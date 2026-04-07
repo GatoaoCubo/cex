@@ -26,7 +26,7 @@ constraints:
   - "Character limits: Twitter 280, LinkedIn 3000, Instagram caption 2200, TikTok 2200"
   - "Hashtag count: Instagram 20-30, LinkedIn 3-5, Twitter 2-3"
 domain: "content_factory"
-quality: null
+quality: 9.1
 tags: [action_prompt, content_factory, campaign, social_media, ayrshare]
 tldr: "Generate multi-platform social campaign (posts + hashtags + schedule) from content for Ayrshare distribution"
 density_score: 0.93
