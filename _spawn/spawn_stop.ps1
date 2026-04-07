@@ -157,16 +157,15 @@ if ($All) {
             Kill-Tree -TargetPid $parentPid -Tag "orphan"
         } else {
             Log "    ORPHAN claude PID:$($p.Id) no parent CMD -- killing directly"
-            if (-not $DryRun) { taskkill /F /PID $($p.Id) /T 2>&1 | Out-Null }
-            $script:stopped++
+            Kill-Tree -TargetPid $p.Id -Tag "orphan-direct"
         }
         $found = $true
     }
     
     foreach ($p in @(Get-Process "codex" -EA SilentlyContinue | Where-Object { $PSItem.Id -notin $killedPids })) {
         Log "    ORPHAN codex PID:$($p.Id)"
-        if (-not $DryRun) { taskkill /F /PID $($p.Id) /T 2>&1 | Out-Null }
-        $script:stopped++; $found = $true
+        Kill-Tree -TargetPid $p.Id -Tag "orphan-codex"
+        $found = $true
     }
     
     if (-not $found) { Log "    No orphans" }

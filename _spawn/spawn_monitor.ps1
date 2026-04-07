@@ -1,7 +1,7 @@
 # CEX Spawn Monitor v1.0
 $root = Split-Path $PSScriptRoot -Parent
 $pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
-$signalDir = "$root\.cex/runtime/signals"
+$signalDir = "$root\.cex\runtime\signals"
 
 if (-not (Test-Path $pidFile)) { Write-Output "No active spawns."; exit 0 }
 
@@ -22,7 +22,7 @@ foreach ($line in $lines) {
     # Per-process spawn time from PID entry (parts[4]), fall back to file mtime
     $procSpawn = $fileMTime
     if ($parts.Count -ge 5) {
-        try { $procSpawn = [datetime]::Parse($parts[4]) } catch { }
+        try { $procSpawn = [datetime]::Parse($parts[4] -replace '_', ' ') } catch { }
     }
 
     $quality = '  -'; $status = 'RUNNING'

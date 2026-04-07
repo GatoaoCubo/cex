@@ -13,7 +13,7 @@ param(
     [switch]$Verbose
 )
 
-$CEX_ROOT = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+$CEX_ROOT = Split-Path -Parent $PSScriptRoot
 Set-Location $CEX_ROOT
 
 $LogDir = Join-Path $CEX_ROOT ".cex\quality"
@@ -104,7 +104,7 @@ for ($round = 1; $round -le $MaxRounds; $round++) {
     if ($gitStatus) {
         Log "Git: uncommitted changes detected, auto-snapshot..."
         git add -A 2>$null
-        git commit -m "[flywheel] round ${round}: health=$health wired=$wired broken=$broken" --no-verify 2>$null
+        git commit -m "[flywheel] round ${round}: health=$health wired=$wired broken=$broken" 2>$null
         Log "Git: committed snapshot"
     }
 
