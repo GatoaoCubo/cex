@@ -9,8 +9,9 @@ created: 2026-04-06
 author: n02_marketing
 scenario: S1
 input: "faz um CRM pra pet shop"
-quality: null
+quality: 9.0
 tags: [e2e, gold-standard, petshop, crm, marketing, stress-test]
+density_score: 1.0
 ---
 
 # Pet Shop CRM — Marketing Gold Standard
