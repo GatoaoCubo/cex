@@ -26,7 +26,7 @@ constraints:
   - "Do NOT include copyrighted music suggestions — use 'royalty-free' placeholder"
   - "Narration word count must match duration (avg 150 words/minute)"
 domain: "content_factory"
-quality: null
+quality: 9.1
 tags: [action_prompt, content_factory, video, youtube, script]
 tldr: "Generate scene-by-scene video script with narration, visual cues, and YouTube metadata from topic and duration"
 density_score: 0.93
