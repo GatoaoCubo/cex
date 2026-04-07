@@ -13,7 +13,7 @@ preserve_types: [correction, user_decision, identity, system_prompt]
 max_summary_tokens: 2048
 min_context_tokens: 1024
 domain: compression_config
-quality: null
+quality: 9.1
 tags: [compression-config, rolling-window, token-reduction, memory, context]
 tldr: "Rolling window compression — triggers at 85% context, keeps last 10 turns verbatim, summarizes older turns, preserves corrections. ~50% token reduction."
 when_to_use: "Long-running agent sessions that accumulate context beyond 50% of model limit"
