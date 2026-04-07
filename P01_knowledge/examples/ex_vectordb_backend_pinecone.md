@@ -13,7 +13,7 @@ dimensions: 1536
 distance_metric: cosine
 index_type: hnsw
 domain: vectordb_backend
-quality: null
+quality: 9.1
 tags: [vectordb-backend, pinecone, vector, rag, cloud]
 tldr: "Pinecone serverless backend — 1536 dims, cosine similarity, 3 namespaces (kc/memory/artifact), auto-scales."
 when_to_use: "Production vector storage when managed serverless is preferred over self-hosted"
