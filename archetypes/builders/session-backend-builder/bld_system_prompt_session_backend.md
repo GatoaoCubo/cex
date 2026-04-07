@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "session state persistence backends (file/sqlite/redis/postgres), connection management, TTL policies, serialization formats, encryption at rest, session scoping, upgrade paths | NOT compression_config token reduction, memory long-term storage, cache ephemeral, env_config environment variables"
 domain: "session_backend"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "session_backend", "persistence", "state", "P10"]
 safety_level: standard
 tools_listed: false
