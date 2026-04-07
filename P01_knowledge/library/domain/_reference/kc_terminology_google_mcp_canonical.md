@@ -10,7 +10,7 @@ updated: 2026-04-07
 author: N01_intelligence
 domain: terminology
 origin: research_d4_terminology
-quality: null
+quality: 9.1
 tags: [terminology, google, gemini, a2a, mcp, canonical, grounding, permanent]
 tldr: "Complete canonical vocabulary from Google Gemini API, A2A Protocol, and MCP spec. Combined because MCP complements Google's A2A — together they define the agent interoperability layer."
 when_to_use: "When building CEX kinds for Google features, A2A agent cards, MCP server integration, or validating terminology in multi-provider artifacts."
