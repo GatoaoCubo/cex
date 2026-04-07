@@ -8,7 +8,7 @@ created: "2026-04-07"
 updated: "2026-04-07"
 author: "n04_knowledge"
 domain: "prompt_cache — TTL, eviction, and invalidation for cached LLM prompt/completion pairs"
-quality: null
+quality: 8.9
 tags: [quality-gate, prompt-cache, ttl, eviction, caching]
 tldr: "Gates ensuring prompt_cache artifacts have valid TTL, eviction, key method, invalidation, and storage config."
 density_score: 0.90
