@@ -6,7 +6,7 @@ $signalDir = "$root\.cex/runtime/signals"
 if (-not (Test-Path $pidFile)) { Write-Output "No active spawns."; exit 0 }
 
 $lines = Get-Content $pidFile
-$spawnTime = (Get-Item $pidFile).LastWriteTime
+$fileMTime = (Get-Item $pidFile).LastWriteTime
 
 Write-Output ""
 Write-Output "  NUCLEUS   STATUS     QUALITY  TIME"
@@ -19,10 +19,16 @@ foreach ($line in $lines) {
     $nucleus = $parts[1]
     $upper = $nucleus.ToUpper()
 
-    $hasSignal = $false; $quality = '  -'; $status = 'RUNNING'
+    # Per-process spawn time from PID entry (parts[4]), fall back to file mtime
+    $procSpawn = $fileMTime
+    if ($parts.Count -ge 5) {
+        try { $procSpawn = [datetime]::Parse($parts[4]) } catch { }
+    }
+
+    $quality = '  -'; $status = 'RUNNING'
 
     $sigs = Get-ChildItem "$signalDir\signal_${nucleus}_*.json" -EA SilentlyContinue |
-        Where-Object { $_.LastWriteTime -gt $spawnTime }
+        Where-Object { $_.LastWriteTime -gt $procSpawn }
     if ($sigs) {
         $latest = $sigs | Sort-Object LastWriteTime -Descending | Select-Object -First 1
         try {
@@ -35,6 +41,6 @@ foreach ($line in $lines) {
     $alive = Get-Process -Id $procId -EA SilentlyContinue
     if (-not $alive -and $status -eq 'RUNNING') { $status = 'CRASHED' }
 
-    $age = [math]::Round(((Get-Date) - $spawnTime).TotalMinutes)
+    $age = [math]::Round(((Get-Date) - $procSpawn).TotalMinutes)
     Write-Output "  $($upper.PadRight(9)) $($status.PadRight(10)) $($quality.ToString().PadRight(7))  ${age}min"
 }
