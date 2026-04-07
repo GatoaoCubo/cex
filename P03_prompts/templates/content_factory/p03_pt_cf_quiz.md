@@ -46,7 +46,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, quiz, assessment, test, content_factory, P03]
 tldr: "Reusable mold for generating multiple-choice quizzes with answer keys and objective mapping"
 keywords: [quiz, assessment, test, multiple choice, content factory, evaluation]
