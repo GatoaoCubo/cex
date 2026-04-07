@@ -3,10 +3,11 @@ id: lp_petshop_crm_001
 kind: landing_page
 title: "PetDesk CRM -- The All-in-One Platform for Pet Shop Management"
 version: 0.1.0
-quality: null
+quality: 9.0
 pillar: P05
 audience: pet_shop_owners
 status: draft
+density_score: 0.99
 ---
 
 # Every Tail Wagging, Every Client Tracked
