@@ -3,10 +3,11 @@ id: spec_metaphor_dictionary
 kind: context_doc
 title: Metaphor Dictionary -- Internal Language to Universal Terms
 version: 1.0.0
-quality: null
+quality: 9.0
 pillar: P01
 created: 2026-04-07
 purpose: When the user says X, the system means Y. Translation table for all internal metaphors.
+density_score: 1.0
 ---
 
 # Metaphor Dictionary
