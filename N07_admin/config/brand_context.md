@@ -6,7 +6,7 @@ title: Brand Context for N07
 version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
-quality: null
+quality: 8.5
 tags: [brand, context, n07]
 tldr: Auto-generated brand context for N07 from brand_config.yaml
 density_score: 0.90
