@@ -9,7 +9,7 @@ created: 2026-04-06
 author: n02_marketing
 scenario: S3
 input: "documenta esse projeto"
-quality: null
+quality: 9.1
 tags: [e2e, gold-standard, docs, documentation, marketing, stress-test]
 ---
 
