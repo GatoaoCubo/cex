@@ -12,13 +12,13 @@ import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 import { truncateToWidth, visibleWidth } from "@mariozechner/pi-tui";
 
 const NUC: Record<string, { short: string; sector: string; icon: string; sin: string }> = {
-	N01: { short: "Inveja", sector: "Research", icon: "[+]", sin: "Inveja Analitica" },
-	N02: { short: "Luxuria", sector: "Marketing", icon: "[*]", sin: "Luxuria Criativa" },
-	N03: { short: "Soberba", sector: "Builder", icon: "[!]", sin: "Soberba Inventiva" },
-	N04: { short: "Gula", sector: "Knowledge", icon: "[o]", sin: "Gula por Conhecimento" },
-	N05: { short: "Ira", sector: "Operations", icon: "[X]", sin: "Ira Construtiva" },
-	N06: { short: "Avareza", sector: "Commercial", icon: "[$]", sin: "Avareza Estrategica" },
-	N07: { short: "Preguica", sector: "Orchestrator", icon: "[~]", sin: "Preguica Orquestradora" },
+	N01: { short: "Envy", sector: "Research", icon: "[+]", sin: "Analytical Envy" },
+	N02: { short: "Lust", sector: "Marketing", icon: "[*]", sin: "Creative Lust" },
+	N03: { short: "Pride", sector: "Builder", icon: "[!]", sin: "Inventive Pride" },
+	N04: { short: "Gluttony", sector: "Knowledge", icon: "[o]", sin: "Knowledge Gluttony" },
+	N05: { short: "Wrath", sector: "Operations", icon: "[X]", sin: "Constructive Wrath" },
+	N06: { short: "Greed", sector: "Commercial", icon: "[$]", sin: "Strategic Greed" },
+	N07: { short: "Sloth", sector: "Orchestrator", icon: "[~]", sin: "Orchestrating Sloth" },
 };
 
 function bar(used: number, max: number, len: number): string {
