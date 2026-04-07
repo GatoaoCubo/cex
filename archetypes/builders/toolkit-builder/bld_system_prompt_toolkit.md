@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "toolkit artifacts: bundled tool collections, permission scopes, confirmation tiers, deny lists, MCP mapping, category grouping | Does NOT: implement tools, define agent identity, design workflows, set routing policy"
 domain: toolkit
-quality: null
+quality: 9.0
 tags: [system_prompt, toolkit, P04]
 safety_level: standard
 tools_listed: false
