@@ -77,13 +77,14 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content_factory
-quality: null
+quality: 9.0
 tags: [function_def, ffmpeg, video, assemble, montage, content_factory]
 tldr: "LLM-callable function to assemble video from clips + audio + subtitles via FFmpeg"
 examples:
   - input: {"video_tracks": [{"path": "clips/intro.mp4"}, {"path": "clips/main.mp4"}], "audio_track": "audio/narration.mp3", "subtitle_track": "subs/captions.srt", "output_path": "output/final.mp4"}
     output: {"output_path": "output/final.mp4", "duration_seconds": 62.5, "file_size_bytes": 15728640, "resolution": "1920x1080"}
 error_types: [file_not_found, ffmpeg_not_installed, codec_error, incompatible_resolution]
+density_score: 0.92
 ---
 
 # Video Assembler Function (FFmpeg)
