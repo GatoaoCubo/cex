@@ -252,14 +252,209 @@ goto loop
 With continuous batching: ~2 hours to build the infrastructure.
 Then the infrastructure builds CEX: ~3-4 hours for full from-zero bootstrap.
 
+## Multi-Provider Model Strategy
+
+### The Insight: Not Every Task Needs Opus
+
+Opus 4.6 (1M context, $15/M tokens) is overkill for mechanical tasks.
+A 3-tier model strategy cuts cost 70%+ without quality loss:
+
+| Tier | Model | Context | Cost/M | Use for |
+|------|-------|---------|--------|---------|
+| **T1 Reasoning** | claude-opus-4-6 | 1M | $15 | Complex builds, architecture, research |
+| **T2 Execution** | claude-sonnet-4-6, gemini-2.5-pro | 200K-1M | $3-5 | Standard ISOs, KCs, templates |
+| **T3 Mechanical** | claude-haiku-4-5, gemini-flash, ollama/qwen3 | 128K-200K | $0-0.25 | Renames, format fixes, compilation |
+
+### How pi Already Supports This
+
+pi has native multi-provider support. Every process can use a different model:
+
+```bash
+# Nucleus main process: Opus (complex orchestration)
+pi --model anthropic/claude-opus-4-6
+
+# Sub-agent scout: Haiku (fast recon, read-only)
+# Defined in .pi/agents/scout.md with: model: claude-haiku-4-5
+
+# Sub-agent builder: Sonnet (standard artifact generation)
+# Defined in .pi/agents/builder-iso.md with: model: claude-sonnet-4-6
+
+# Sub-agent formatter: Gemini Flash (mechanical formatting)
+# Defined in .pi/agents/formatter.md with: model: google/gemini-2.0-flash
+```
+
+### pi Provider Support (18+ providers native)
+
+| Provider | Auth method | Models | Free tier? |
+|----------|-------------|--------|-----------|
+| Anthropic | API key or Max subscription | Opus, Sonnet, Haiku | No (Max = unlimited) |
+| Google Gemini CLI | OAuth (free) | 2.5 Pro, 2.0 Flash | **YES** (rate limited) |
+| Google Antigravity | OAuth (free) | Gemini 3, Claude, GPT-OSS | **YES** (sandbox) |
+| OpenAI | API key or Plus/Pro | GPT-4.1, 4.1-mini | No |
+| GitHub Copilot | OAuth | Claude, GPT | **YES** (with GitHub account) |
+| Groq | API key | Llama, Mixtral | **YES** (rate limited) |
+| Cerebras | API key | Llama-70B | **YES** (rate limited) |
+| Ollama | Local (no auth) | Any GGUF | **YES** (your hardware) |
+| OpenRouter | API key | 100+ models | Pay-per-token |
+| Mistral | API key | Mistral Large, Small | Free tier available |
+| Hugging Face | HF_TOKEN | Open models | **YES** |
+| Custom | pi.registerProvider() | Any OpenAI-compatible API | Depends |
+
+### The 3-Tier Architecture Applied to CEX
+
+```
+N07 (Opus — needs deepest reasoning for orchestration)
+  |
+  +-- N03 Engineering (Opus — complex 8F pipeline, 13 ISOs)
+  |     +-- sub: builder-iso (Sonnet — standard ISO generation)
+  |     +-- sub: builder-iso (Sonnet)
+  |     +-- sub: formatter (Haiku — frontmatter fixes)
+  |     +-- sub: compiler (Gemini Flash — cex_compile.py runner)
+  |
+  +-- N01 Research (Opus — deep analysis, 1M context for papers)
+  |     +-- sub: scout (Haiku — fast web search recon)
+  |     +-- sub: scout (Haiku)
+  |     +-- sub: kc-writer (Sonnet — structured KC from research)
+  |     +-- sub: kc-writer (Sonnet)
+  |
+  +-- N04 Knowledge (Sonnet — standard indexing, no deep reasoning)
+  |     +-- sub: kc-writer (Haiku — batch KC generation)
+  |     +-- sub: kc-writer (Haiku)
+  |     +-- sub: formatter (Gemini Flash — compile + validate)
+  |     +-- sub: indexer (Haiku — cex_index.py runner)
+  |
+  +-- N05 Operations (Opus — code requires precision)
+  |     +-- sub: test-runner (Haiku — run tests, report results)
+  |     +-- sub: linter (Gemini Flash — mechanical checks)
+  |
+  +-- N02 Marketing (Sonnet — creative but structured)
+  |     +-- sub: copy-writer (Sonnet — ad variants)
+  |     +-- sub: formatter (Haiku)
+  |
+  +-- N06 Commercial (Sonnet — pricing models, structured)
+        +-- sub: analyst (Haiku — data gathering)
+        +-- sub: formatter (Haiku)
+```
+
+### Cost Model at Peak Throughput
+
+| Component | Instances | Model | Tokens/hr | Cost/hr |
+|-----------|-----------|-------|-----------|---------|
+| N07 orchestrator | 1 | Opus | 500K | $7.50 |
+| Nucleus main (x6) | 6 | Opus (2) + Sonnet (4) | 6M | $30-60 |
+| Sub-agents T2 (x12) | 12 | Sonnet | 12M | $36-60 |
+| Sub-agents T3 (x12) | 12 | Haiku/Flash/Ollama | 12M | $0-3 |
+| **TOTAL** | **31** | **mixed** | **~30M** | **$73-130/hr** |
+
+### Free Tier Strategy (zero cost)
+
+For users without paid API keys, CEX can run entirely on free providers:
+
+| Nucleus | Provider | Model | Limitation |
+|---------|----------|-------|-----------|
+| N07 | Gemini CLI (free) | gemini-2.5-pro | Rate limited |
+| N01-N06 | Gemini CLI (free) | gemini-2.5-pro | Rate limited |
+| Sub-agents | Ollama (local) | qwen3:32b or llama3:70b | Your GPU |
+| Sub-agents | Groq (free) | llama-3.3-70b | 6K tokens/min |
+| Sub-agents | Cerebras (free) | llama-3.3-70b | Rate limited |
+
+**Throughput on free tier**: ~50-100 artifacts/hour (rate limits are the bottleneck).
+**Full CEX from zero on free**: ~30-50 hours (but zero cost).
+
+### Fine-Tuned Models
+
+A CEX-specific fine-tuned model would be the endgame:
+
+| What to fine-tune on | Output | Use for |
+|---------------------|--------|---------|
+| 1,630 builder ISOs | FT that generates ISOs from kind name | T3 sub-agent for batch ISO generation |
+| 123 kind KCs | FT that generates KCs from kind schema | T3 sub-agent for batch KC generation |
+| 377 templates + examples | FT that fills templates from intent | T3 sub-agent for template filling |
+
+**How**: Export training pairs (input=kind+schema, output=artifact) → fine-tune on OpenAI or HF → register as custom provider in pi.
+
+```typescript
+// .pi/extensions/cex-ft-provider.ts
+pi.registerProvider("cex-ft", {
+  baseUrl: "https://api.openai.com/v1",  // or local vLLM
+  apiKey: "FT_API_KEY",
+  api: "openai-completions",
+  models: [{
+    id: "ft:gpt-4.1-mini:cex:iso-gen:abc123",
+    name: "CEX ISO Generator",
+    contextWindow: 128000,
+    maxTokens: 4096,
+    cost: { input: 0.001, output: 0.002 }
+  }]
+});
+```
+
+Then in agent definition:
+```markdown
+---
+name: builder-iso-ft
+description: Fine-tuned ISO generator — 10x faster, 90% cheaper
+tools: read, write, bash
+model: cex-ft/ft:gpt-4.1-mini:cex:iso-gen:abc123
+---
+```
+
+### Model Selection in nucleus_models.yaml
+
+The existing config already supports this — just needs sub-agent tiers added:
+
+```yaml
+n03:
+  cli: pi
+  model: claude-opus-4-6          # Main process: T1
+  context: 1000000
+  sub_agents:                      # NEW: per-nucleus sub-agent config
+    builder_iso:
+      model: claude-sonnet-4-6    # T2: standard generation
+      tools: read,write,bash,edit
+    formatter:
+      model: google/gemini-2.0-flash  # T3: mechanical
+      tools: read,bash
+    compiler:
+      model: ollama/qwen3:14b     # T3: local, free
+      tools: bash
+  fallback:
+    cli: gemini
+    model: gemini-2.5-pro
+```
+
+### Router Decision Matrix
+
+`cex_router.py` already exists with health checks + fallback chains.
+Extend it with task-complexity routing:
+
+| Task complexity | Signal | Route to |
+|----------------|--------|----------|
+| **Complex** (new kind, architecture, research) | unknown kind, no template match, >3 sections | T1 Opus |
+| **Standard** (ISO from template, KC from schema) | template match >60%, known kind | T2 Sonnet |
+| **Mechanical** (rename, format, compile, validate) | no generation needed, find-replace | T3 Haiku/Flash/Ollama |
+
+```python
+# In cex_router.py — new method
+def route_task(self, task: dict) -> str:
+    if task.get("template_match", 0) < 0.6:
+        return "T1"  # needs reasoning
+    if task.get("is_mechanical", False):
+        return "T3"  # cheap model
+    return "T2"  # standard execution
+```
+
 ## Throughput at Peak
 
-| Metric | Value |
-|--------|-------|
-| Parallel LLM streams | 24 (6 nuclei x 4 sub-agents) |
-| Tokens per hour | ~36M |
-| Artifacts per hour | 720-864 |
-| Time for full CEX from zero | ~3-4 hours |
-| N07 context cycles | ~7 (41M / 6M per cycle, continuous restart) |
-| Total wall time | ~4-5 hours (including N07 restarts) |
-| Human intervention required | Zero (after /mission start) |
+| Config | Streams | Tokens/hr | Artifacts/hr | Cost/hr | Time full build |
+|--------|---------|-----------|-------------|---------|----------------|
+| 6 nuclei solo (all Opus) | 6 | 6M | 180 | $90 | 15h |
+| 6 nuclei x4 sub (all Opus) | 24 | 24M | 720 | $360 | 3.8h |
+| 6 nuclei x4 sub (mixed tiers) | 24 | 24M | 720 | $73-130 | 3.8h |
+| + continuous batching (mixed) | 24 | 30M | 864 | $90-150 | 3.2h |
+| Free tier only (Gemini + Ollama) | 6-12 | 3-6M | 50-100 | $0 | 30-50h |
+| With CEX fine-tuned model | 24 | 30M | 1000+ | $30-50 | 2.5h |
+
+## Human intervention required
+
+Zero (after `/mission start`).
