@@ -2,7 +2,7 @@
 id: n04_competitive_knowledge
 kind: competitive_analysis
 pillar: P01
-quality: 9.0
+quality: 9.1
 density_score: 0.95
 title: "Output Competitive Knowledge"
 version: 1.0.0

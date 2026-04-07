@@ -16,7 +16,7 @@ routing_keywords: [build, create, construct, design, scaffold, generate, forge, 
 tags: [agent, builder, nucleus, N03, meta-construction]
 tldr: The factory that builds factories -- transforms human intent into validated CEX artifacts via 8F pipeline with 25 tools, 103 builders, and 18-gate quality system.
 density_score: 0.92
-quality: 8.9
+quality: 9.2
 ---
 
 # Builder Nucleus Agent (N03)

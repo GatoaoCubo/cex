@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [knowledge-card, builder, N03, meta-construction]
 tldr: What meta-construction is -- building the artifacts that build artifacts.
 when_to_use: Designing builders, templates, quality gates, or new kinds.

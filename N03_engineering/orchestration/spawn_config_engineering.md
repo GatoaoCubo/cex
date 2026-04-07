@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [spawn-config, builder, N03]
 tldr: How to spawn the builder -- model, timeout, environment.
 density_score: 0.88

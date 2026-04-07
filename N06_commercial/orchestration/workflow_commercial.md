@@ -9,7 +9,7 @@ updated: 2026-04-01
 author: n06_commercial
 domain: brand-identity-monetization
 step_count: 10
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [workflow, commercial, N06, brand, monetization, pipeline]
 tldr: "3 workflows: BRAND (10-step discovery→propagation), MONETIZATION (7-step product→revenue), BRIDGE (5-step brand→monetization alignment). N06 runs FIRST on new instances."

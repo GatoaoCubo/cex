@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n05_railway_superintendent
 domain: infrastructure
-quality: 9.0
+quality: 9.1
 tags: [schema, api, response, contract, fastapi]
 tldr: "Standard API response format — success/error envelopes, required headers, status codes."
 density_score: 1.0

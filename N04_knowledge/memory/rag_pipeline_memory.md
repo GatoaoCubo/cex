@@ -4,7 +4,7 @@ kind: memory_scope
 nucleus: N04
 pillar: P10
 domain: rag_pipeline
-quality: 9.0
+quality: 9.1
 created: 2026-04-02
 type: technical_memory
 scope: rag_components

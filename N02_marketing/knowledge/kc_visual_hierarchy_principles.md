@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: shaka_research
 domain: design-theory
-quality: 9.0
+quality: 9.2
 tags: [knowledge_card, design, visual-hierarchy, gestalt, ux-laws, layout, N02]
 tldr: F/Z scanning patterns, Gestalt laws, visual weight, type scale ratios, UX laws (Fitts, Hick, Jakob, Miller) — operational reference for UI/marketing layout decisions.
 when_to_use: Load before designing landing pages, ads, email layouts, or any visual hierarchy decision.

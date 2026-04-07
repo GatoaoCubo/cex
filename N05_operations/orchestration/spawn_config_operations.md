@@ -19,7 +19,7 @@ mcp_config: .mcp-n05.json
 timeout_seconds: 7200
 prompt_inline: false
 handoff_path: .cex/runtime/handoffs/n05_task.md
-quality: 8.7
+quality: 9.1
 tags: [spawn_config, railway, superintendent, opus, fastapi, postgresql]
 tldr: Railway Superintendent spawn on Claude Opus with railway/postgresql MCPs for FastAPI deployment lifecycle and 4-service topology management.
 domain: operations-engineering

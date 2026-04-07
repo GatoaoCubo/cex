@@ -16,7 +16,7 @@ threshold_publish: 8.0
 threshold_review: 7.0
 automation_status: semi-automated
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [scoring-rubric, builder, N03, quality]
 tldr: 5-dimension rubric for scoring any CEX artifact -- correctness, completeness, density, usefulness, integration.
 density_score: 0.90

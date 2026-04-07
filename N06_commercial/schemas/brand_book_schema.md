@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-book-validation
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [schema, brand, brand-book, validation, n06]
 tldr: "Validates 32-block Brand Book output. 7 sections, 18 required blocks, 14 optional. Consistency >= 0.85, uniqueness >= 8.0."

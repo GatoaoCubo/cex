@@ -7,7 +7,7 @@ version: 3.1.0
 created: 2026-03-30
 updated: 2026-04-07
 author: n06_commercial
-quality: 9.0
+quality: 9.1
 tags: [prompt_template, commercial, N06, pricing, courses, funnels, brand]
 tldr: "7 prompt templates for N06 commercial outputs: pricing page, course outline, sales page, upsell sequence, brand-aligned copy. All parametric with {{variables}}."
 density_score: 0.93

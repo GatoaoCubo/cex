@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: 9.0
+quality: 9.1
 tags: [orchestration, dispatch, multi-cli, N07, spawn, knowledge]
 tldr: "N07 orchestrates 6 nuclei via bash dispatch.sh — solo (1 builder) or grid (up to 6 parallel)."
 when_to_use: "When understanding how CEX dispatches tasks across nuclei and CLI providers."

@@ -5,7 +5,7 @@ domain: N05_operations
 kind: knowledge_card
 pillar: P05
 tags: [uvicorn, gunicorn, workers, uvloop, httptools, fastapi, production, graceful-reload, memory]
-quality: 9.0
+quality: 9.1
 sources:
   - https://www.uvicorn.org/deployment/
   - https://www.uvicorn.org/settings/

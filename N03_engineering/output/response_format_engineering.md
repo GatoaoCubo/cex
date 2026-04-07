@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [response-format, builder, N03]
 tldr: Output format for all artifacts -- YAML frontmatter + Markdown body with open variables.
 density_score: 0.88

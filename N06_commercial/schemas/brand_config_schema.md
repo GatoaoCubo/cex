@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-config-validation
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [schema, brand, config, validation, n06]
 tldr: "Schema documentation for brand_config.yaml. 7 sections (identity, archetype, voice, audience, visual, positioning, monetization), 13 required fields, 28 optional. Validated by brand_validate.py."

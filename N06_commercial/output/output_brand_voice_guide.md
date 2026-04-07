@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-voice
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [output, brand, voice, tone, guide, n06]
 tldr: "Voice guide with 5D radar, tone matrix per channel, We Are X Not Y attributes, do/don't lists, 10 calibration phrases, and LLM injection snippet."

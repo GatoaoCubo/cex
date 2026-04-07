@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: shaka_research
 domain: color-systems
-quality: 9.0
+quality: 9.2
 tags: [knowledge_card, color, design-system, WCAG, dark-mode, accessibility, N02]
 tldr: 60-30-10 rule, color harmony, HSL manipulation, semantic naming, dark mode derivation, WCAG contrast ratios, GitHub Primer + Material Design 3 patterns.
 when_to_use: Load before building any color system, choosing palette for a brand/UI, or implementing dark mode.

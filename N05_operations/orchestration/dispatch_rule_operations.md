@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
 domain: railway-backend-operations
-quality: 8.7
+quality: 9.1
 tags: [dispatch_rule, railway, superintendent, deploy, fastapi, postgresql]
 tldr: Route Railway platform tasks to N05 Railway Superintendent when the answer depends on Railway deployment, FastAPI health, PostgreSQL operations, or 4-service topology management.
 scope: railway-backend-operations

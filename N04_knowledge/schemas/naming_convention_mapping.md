@@ -4,7 +4,7 @@ kind: validation_schema
 nucleus: N04
 pillar: P06
 domain: nomenclature
-quality: 9.0
+quality: 9.1
 created: 2026-04-02
 type: mapping_schema
 scope: builders_to_kcs

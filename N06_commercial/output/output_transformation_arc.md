@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-narrative
-quality: 9.0
+quality: 9.2
 updated: 2026-04-07
 tags: [output, brand, transformation, narrative, arc, n06]
 tldr: "Standalone transformation arc template. Maps the customer journey from pain (Before) through mechanism (Bridge) to desired state (After). Used in brand books, landing pages, course outlines, and funnel copy."

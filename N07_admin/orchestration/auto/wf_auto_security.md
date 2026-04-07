@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: before_production
-quality: 8.7
+quality: 9.1
 tags: [workflow, auto, n07, security, owasp, vapt, scan]
 tldr: "Security scan before any production deploy: secrets leak, dependency audit, env validation, prompt injection check."
 density_score: 0.91

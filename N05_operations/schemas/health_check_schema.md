@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
 domain: railway-backend-operations
-quality: 8.7
+quality: 9.1
 tags: [schema, health, response, monitoring, fastapi]
 tldr: Schema for HealthResponse JSON validation covering status, version, uptime, database, and cache health indicators.
 schema_type: json_response

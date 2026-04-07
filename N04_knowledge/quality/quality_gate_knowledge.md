@@ -12,7 +12,7 @@ target_kinds: [knowledge_card, chunk_strategy, embedding_config, rag_source, ret
 linked_artifacts:
   primary:
     - n04_sr_knowledge
-quality: 9.0
+quality: 9.1
 tags: [quality-gate, n04, knowledge, evals, p07]
 tldr: "Defines the 9 quality gates (5 Hard, 4 Soft) for all N04-domain knowledge artifacts, ensuring structural integrity, atomicity, and discoverability."
 density_score: 0.92

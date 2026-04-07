@@ -6,7 +6,7 @@ title: "CEX README Hero Section — Landing Copy"
 nucleus: N02
 sin: Luxúria Criativa
 version: 2.0.0
-quality: null
+quality: 9.0
 created: 2026-04-02T12:00:00-03:00
 updated: 2026-04-07T15:44:00-03:00
 tags: [readme, hero, landing-copy, marketing, n02, open-source]

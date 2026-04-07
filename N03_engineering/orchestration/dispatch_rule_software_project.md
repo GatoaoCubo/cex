@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [dispatch-rule, software-project, n03, routing]
 tldr: "Routes software engineering tasks to N03: implement, deploy, test, lint, docker, scaffold, review. Confidence 0.85-0.95. Excludes pure research (N01), marketing (N02), schema design (N04)."
 density_score: 0.88

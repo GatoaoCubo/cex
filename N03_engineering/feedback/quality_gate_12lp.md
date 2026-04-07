@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.3
+quality: 9.1
 tags: [quality-gate, 12lp, validation, checklist, mandatory]
 tldr: 12 mandatory checkpoints every artifact must pass before save. No shortcuts. No exceptions. Run in F7 GOVERN phase.
 density_score: 0.95

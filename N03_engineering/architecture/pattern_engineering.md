@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [pattern, builder, N03]
 tldr: 3 construction patterns -- direct build, crew composition, nucleus bootstrap.
 density_score: 0.88

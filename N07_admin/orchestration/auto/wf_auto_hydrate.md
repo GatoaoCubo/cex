@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: every_user_input
-quality: 8.7
+quality: 9.1
 tags: [workflow, auto, n07, hydrate, enrichment]
 tldr: "Automatically enriches raw user input with brand context, memory, and KC signals before any nucleus receives it."
 density_score: 0.92

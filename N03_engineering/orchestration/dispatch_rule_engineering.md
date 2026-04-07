@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [dispatch-rule, builder, N03]
 tldr: Routes construction tasks to N03 via keyword matching and confidence scoring.
 density_score: 0.88

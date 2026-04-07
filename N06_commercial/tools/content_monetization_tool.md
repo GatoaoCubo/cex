@@ -7,7 +7,7 @@ version: 1.1.0
 created: 2026-03-31
 updated: 2026-04-07
 author: n06_commercial
-quality: 9.0
+quality: 9.1
 tags: [tool, function, content-monetization, billing, checkout, credits, N06]
 tldr: "Full content monetization pipeline: pricing resolution, credit gating, PIX/Stripe/Hotmart checkout, LLM course generation, ad validation, email dispatch."
 density_score: 0.93

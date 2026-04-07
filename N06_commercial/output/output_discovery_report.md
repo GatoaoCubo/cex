@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-discovery
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [output, brand, discovery, research, report, n06]
 tldr: "Research output after Brand Discovery: market intelligence, keyword analysis, audience insights, competitive gaps, archetype recommendation, and next steps."

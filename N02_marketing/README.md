@@ -6,7 +6,7 @@ title: "N02 Marketing Nucleus — Creative Lust Engine"
 nucleus: N02
 sin: Luxúria Criativa
 version: 2.0.0
-quality: null
+quality: 9.1
 created: 2026-04-06T12:00:00-03:00
 updated: 2026-04-07T15:44:00-03:00
 tags: [nucleus, marketing, n02, readme, fractal]

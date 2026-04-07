@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: shaka_research
 domain: component-library
-quality: 9.0
+quality: 9.1
 tags: [knowledge_card, shadcn, radix, react, components, ui, N02]
 tldr: Patterns operacionais para shadcn/ui — catalogo de componentes, composicao com cn()/cva, Radix primitives, customizacao via CSS variables, e exemplos HTML prontos para hero/card/dialog/navbar.
 when_to_use: Carregar antes de qualquer tarefa de build UI com shadcn. Referencia para escolha de componente, customizacao de tema e composicao de layouts.

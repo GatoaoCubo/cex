@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [handoff, builder, N03]
 tldr: How the builder receives work and delivers results.
 density_score: 0.88

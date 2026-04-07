@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-strategy
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [brand, frameworks, positioning, identity, voice, narrative, strategy]
 tldr: "Universal brand strategy frameworks: Ries & Trout, Blue Ocean, JTBD, Value Proposition Canvas, Keller Pyramid, NNGroup Voice, StoryBrand, Hero Journey."

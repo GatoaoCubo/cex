@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-monetization
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [output, brand, pricing, html, responsive, n06]
 tldr: "HTML pricing page with 2-4 tiers, anchoring, social proof, FAQ, CTA per tier. Brazilian market: BRL, PIX, parcelamento. Uses brand_config colors and fonts."

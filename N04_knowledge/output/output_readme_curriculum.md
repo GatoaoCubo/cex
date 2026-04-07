@@ -2,7 +2,7 @@
 id: n04_readme_curriculum
 kind: output_template
 pillar: P01
-quality: 8.7
+quality: 9.0
 density_score: 1.0
 title: "Output Readme Curriculum"
 version: 1.0.0

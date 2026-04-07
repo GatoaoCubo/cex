@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-voice-validation
-quality: 9.0
+quality: 9.2
 updated: 2026-04-07
 tags: [schema, brand, voice, contract, consistency, n06]
 tldr: "Validates voice consistency across channels. 5D scores within ±1 tolerance of brand_config. Tone matrix per channel. Do/Don't hard constraints."

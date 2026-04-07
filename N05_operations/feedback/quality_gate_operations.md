@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
 domain: railway-backend-operations
-quality: 9.0
+quality: 9.1
 tags: [quality_gate, railway, superintendent, deploy, fastapi, postgresql]
 tldr: Railway deployment validation gate covering deploy smoke tests, rollback planning, migration safety, environment contracts, health monitoring, and middleware integrity.
 density_score: 1.0

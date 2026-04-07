@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [pattern, protocol, 3-phase, execution, workflow]
 tldr: Every build follows three phases -- validate intent (30s), execute with full autonomy (5-30min), synthesize results (1min). No shortcuts.
 density_score: 0.91

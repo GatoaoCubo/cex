@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [few-shot, builder, N03, golden]
 tldr: 3 golden artifact patterns the builder learns from -- agent, KC, workflow.
 density_score: 0.85

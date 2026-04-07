@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: quality_gate_passes
-quality: 8.7
+quality: 9.1
 tags: [workflow, auto, n07, ship, cicd, deploy]
 tldr: "When all quality gates pass: compile all, run tests, git commit, push, signal complete. The CI/CD pipeline of CEX."
 density_score: 0.92

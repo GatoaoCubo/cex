@@ -10,7 +10,7 @@ author: n06_commercial
 domain: brand-identity-monetization
 gate_count: 14
 pass_threshold: 12
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [quality_gate, commercial, N06, brand, monetization]
 tldr: "14-check quality gate for N06 dual-role: 8 brand checks (config, archetype, voice, positioning, naming, book, consistency, propagation) + 6 revenue checks (pricing, funnel, transformation, platform, LTV, compliance)."

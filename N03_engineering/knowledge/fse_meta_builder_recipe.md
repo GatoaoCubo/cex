@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.2
 tags: [few-shot-example, meta-builder, agent-factory, recipe, how-to]
 tldr: Complete worked example of building an agent from intent to published artifact. Shows every 8F step, every decision, every validation. The reference build.
 density_score: 0.92

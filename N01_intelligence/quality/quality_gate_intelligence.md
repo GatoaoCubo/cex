@@ -7,7 +7,7 @@ version: "1.0.0"
 created: "2026-03-31"
 updated: "2026-03-31"
 author: "N01_rebuild_8F"
-quality: 9.0
+quality: 9.1
 tags: [quality, validation, gate, n01, research, intelligence]
 tldr: "Defines the rigorous, two-stage (pass/fail and scored) quality gates for all analytical outputs produced by the N01 Research & Intelligence Nucleus."
 target_artifact_type: "IntelligenceBrief"

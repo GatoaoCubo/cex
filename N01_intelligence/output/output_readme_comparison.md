@@ -2,7 +2,7 @@
 id: n01_readme_comparison
 kind: output_template
 pillar: P01
-quality: 8.7
+quality: 9.0
 density_score: 0.95
 title: "Output Readme Comparison"
 version: 1.0.0

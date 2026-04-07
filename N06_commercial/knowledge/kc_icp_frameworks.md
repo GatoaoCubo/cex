@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: commercial-positioning
-quality: 9.0
+quality: 9.2
 updated: 2026-04-07
 tags: [icp, buyer-persona, jtbd, segmentation, psychographic, demographic, behavioral, transformation-promise, b2b, b2c]
 tldr: "Frameworks universais para construir ICPs e personas: VPC, JTBD, Job Stories, segmentacao tri-dimensional, transformation promise, templates B2B e B2C."

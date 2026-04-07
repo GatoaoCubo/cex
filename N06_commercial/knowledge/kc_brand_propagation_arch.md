@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: shaka_research
 domain: brand-identity
-quality: 9.0
+quality: 9.2
 updated: 2026-04-07
 tags: [brand, design-tokens, style-dictionary, css-variables, propagation, theming, prompt-injection, atomic-design]
 tldr: "Arquitetura de 3 camadas (primitivo > semantico > componente), pipeline brand-to-code, Style Dictionary, multi-plataforma e prompt injection"

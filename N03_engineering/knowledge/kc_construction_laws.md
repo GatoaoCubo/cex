@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.2
+quality: 9.1
 tags: [knowledge-card, laws, framework, construction, methodology]
 tldr: 11 immutable laws organized in 3 layers (Foundation / Execution / Quality) that govern all artifact construction. Distilled from 4 months of operational learning.
 density_score: 0.94

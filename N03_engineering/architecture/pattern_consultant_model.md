@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.2
 tags: [pattern, consultant, intelligence, gap-detection, insight]
 tldr: A builder is not an executor. It is a consultant that detects gaps, generates insights, and recommends strategy before and after every build.
 density_score: 0.90

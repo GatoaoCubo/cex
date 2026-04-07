@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n05_railway_superintendent
 domain: infrastructure
-quality: 8.8
+quality: 9.0
 tags: [schema, middleware, fastapi, cors, auth, rate-limit]
 tldr: "8-layer ordered middleware stack — CORS outermost, request_id innermost. Order is law."
 density_score: 0.95

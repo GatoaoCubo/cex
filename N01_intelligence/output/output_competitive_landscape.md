@@ -2,7 +2,7 @@
 id: n01_competitive_landscape
 kind: competitive_analysis
 pillar: P01
-quality: 8.8
+quality: 9.2
 density_score: 0.96
 title: "Output Competitive Landscape"
 version: 1.0.0

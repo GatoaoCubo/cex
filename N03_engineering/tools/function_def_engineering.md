@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [function-def, builder, N03, tools]
 tldr: 10 callable functions in the builder pipeline -- motor, runner, compiler, doctor, forge, indexer, feedback, register, nucleus, validate.
 density_score: 0.90

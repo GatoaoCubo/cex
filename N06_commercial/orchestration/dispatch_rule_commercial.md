@@ -12,7 +12,7 @@ keywords: [brand, marca, identidade, brand-book, persona, arquetipo, voz, naming
 model: sonnet
 model_escalation: opus
 mcps: [fetch, stripe, hotmart]
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [dispatch_rule, commercial, N06, brand, monetization, routing]
 tldr: "N06 routes brand discovery + identity + monetization. 25 keywords, dual-model (sonnet default, opus for brand-from-scratch). N06 runs FIRST on new CEX instances."

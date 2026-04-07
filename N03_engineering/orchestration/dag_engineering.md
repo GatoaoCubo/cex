@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: meta-construction
-quality: 9.0
+quality: 9.1
 tags: [dag, builder, N03, pipeline]
 tldr: The 8F pipeline as DAG -- 9 nodes, strict order, retry loop at F6-F7.
 density_score: 0.88

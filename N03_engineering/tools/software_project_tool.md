@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.1
 tags: [cli-tool, software-project, scaffold, test, deploy, n03]
 tldr: "CLI tool for N03 software project operations: scaffold (new project), implement (spec→code), test (run pytest), lint (ruff+mypy), docker (build container), deploy (railway/render), review (PR check)."
 density_score: 0.89

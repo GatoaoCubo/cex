@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-31
 author: n06_commercial
 domain: commercial-monetization
-quality: 9.0
+quality: 9.2
 tags: [commercial, pricing, funnels, courses, monetization, N06, revenue]
 tldr: Distilled knowledge for N06 — pricing frameworks, course monetization models, funnel stages, conversion benchmarks, and Brazilian infoprodutos market specifics.
 when_to_use: When designing pricing strategy, structuring an online course, building a sales funnel, or optimizing conversion for digital products.

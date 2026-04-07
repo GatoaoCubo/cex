@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-identity
-quality: 9.0
+quality: 9.1
 updated: 2026-04-07
 tags: [brand, archetypes, jung, personality, voice, identity]
 tldr: "Complete 12 Jungian archetypes with tone-of-voice scores, personality traits, shadow traits, colors, examples, and combination matrix."

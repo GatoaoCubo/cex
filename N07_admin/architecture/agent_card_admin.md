@@ -38,7 +38,7 @@ runtime: "pi + claude opus xhigh"
 mcp_config_file: null
 flags: [xhigh-thinking, interactive]
 domain: orchestration
-quality: 9.0
+quality: 9.2
 tags: [agent_card, orchestrator, N07, multi-cli, dispatch]
 tldr: "N07 deployment spec — pi + opus xhigh, dispatch-only orchestrator with 7 tools and 6 downstream nuclei."
 density_score: 0.91

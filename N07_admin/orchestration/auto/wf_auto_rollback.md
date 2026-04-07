@@ -8,7 +8,7 @@ created: 2026-03-31
 author: n07_orchestrator
 domain: orchestration
 trigger: deploy_fails_health
-quality: 8.7
+quality: 9.1
 tags: [workflow, auto, n07, rollback, sre, recovery]
 tldr: "When auto-ship or deploy fails health check, automatically revert to last known good state."
 density_score: 0.91

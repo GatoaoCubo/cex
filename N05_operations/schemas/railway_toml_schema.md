@@ -8,7 +8,7 @@ created: 2026-04-01
 updated: 2026-04-01
 author: n05_operations
 domain: railway-backend-operations
-quality: 8.7
+quality: 9.1
 tags: [schema, railway, toml, nixpacks, deployment]
 tldr: Schema for railway.toml configuration validation covering buildCommand, startCommand, healthcheckPath, and nixpacks settings.
 schema_type: toml_config

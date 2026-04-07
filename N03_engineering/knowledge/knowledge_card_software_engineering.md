@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.1
 tags: [n03, software-engineering, master-kc, capabilities]
 tldr: "Master knowledge card for N03's software engineering capabilities. Maps 12 platform KCs + 23 CEX tools + software-project-builder into a unified engineering model. N03 can now: scaffold, implement, test, lint, dockerize, CI/CD, deploy, and review."
 density_score: 1.0

@@ -2,7 +2,7 @@
 id: n05_readme_install
 kind: output_template
 pillar: P05
-quality: 8.7
+quality: 9.0
 title: "Output Readme Install"
 version: 1.0.0
 author: N05

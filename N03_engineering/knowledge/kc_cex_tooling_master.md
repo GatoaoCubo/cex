@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: meta-construction
-quality: 9.0
+quality: 9.2
 tags: [cex, tools, python, reference, 8f-pipeline]
 tldr: "Complete reference of all 23 CEX Python tools in _tools/. Organized by function: core pipeline (motor, runner, intent), batch ops (auto, batch, forge, crew), validation (doctor, hooks, score, system_test), lifecycle (compile, index, feedback), scaffolding (init, bootstrap, nucleus_builder, kind_register, materialize), and domain (mission, pipeline, research, flywheel)."
 density_score: 0.94

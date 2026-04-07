@@ -6,7 +6,7 @@ title: "N02 Grid Test — Dispatch Verification Report"
 nucleus: N02
 sin: Luxúria Criativa
 version: 2.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07T11:00:26-03:00
 updated: 2026-04-07T15:44:00-03:00
 mission: GRID_TEST

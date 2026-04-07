@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-book
-quality: 9.0
+quality: 9.2
 updated: 2026-04-07
 tags: [output, brand, brand-book, 32-block, n06]
 tldr: "Crown jewel output. 32-block Brand Book covering identity, positioning, voice, visual, narrative, guidelines, validation. All {{BRAND_*}} variables — zero hardcoded values."

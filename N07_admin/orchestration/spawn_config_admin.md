@@ -8,7 +8,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: 9.0
+quality: 9.1
 tags: [spawn-config, orchestrator, N07, multi-cli]
 tldr: Multi-CLI orchestration -- each nucleus uses the best LLM provider for its domain.
 density_score: 0.90

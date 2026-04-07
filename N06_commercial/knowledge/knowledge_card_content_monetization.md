@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n06_commercial
 domain: content-monetization
-quality: 9.0
+quality: 9.2
 tags: [content-monetization, billing, credits, checkout, courses, PIX, MercadoPago, Stripe, N06]
 tldr: Distilled knowledge for N06 content monetization pipeline — BRL credit wallet, payment providers, course LLM generation, ad validation, email automation, and ERP sync.
 when_to_use: When implementing or reasoning about content monetization flows involving billing, credits, course generation, checkout, ad validation, or ERP integration.
