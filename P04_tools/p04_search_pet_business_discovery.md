@@ -16,7 +16,7 @@ cost_per_query: "SERPER ~$0.004, FIRECRAWL ~$0.01, EXA ~$0.01"
 rate_limits: "SERPER 2500/mo, FIRECRAWL 500/mo, EXA 1000/mo"
 tags: [search_tool, pet, business, discovery, crm, SERPER, FIRECRAWL, GATO3]
 tldr: "Busca multi-provider otimizada para descoberta de negocios pet por cidade — termos primarios por vertical, long-tail local, negative keywords e variacoes regionais."
-quality: null
+quality: 9.1
 density_score: null
 ---
 
