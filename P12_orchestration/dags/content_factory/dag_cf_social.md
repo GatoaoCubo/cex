@@ -62,7 +62,7 @@ edges:
   - from: "quality_check"
     to: "publish"
 domain: "orchestration"
-quality: null
+quality: 9.0
 tags: [dag, content-factory, social-campaign, multi-platform, scheduling]
 tldr: "10-node social DAG: longform→hooks→campaign→parallel(posts+carousels+clips)→brand→schedule→QA→publish"
 execution_order:
@@ -86,6 +86,7 @@ linked_artifacts:
   primary: "P12_orchestration/dags/content_factory/dag_cf_master.md"
   related:
     - "P03_prompts/constraints/content_factory/p03_constraint_cf_brief.md"
+density_score: 1.0
 ---
 
 ## Nodes
