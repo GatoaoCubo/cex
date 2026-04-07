@@ -14,6 +14,10 @@ keywords: ["rate limit", rpm, tpm, budget, tier, throttle, quota, concurrent]
 triggers: ["create rate limit config", "define API limits", "set RPM/TPM", "configure budget cap"]
 geo_description: >
   L1: Specialist in building rate_limit_config artifacts — configurations de rate li. L2: Define RPM, TPM, RPD e concurrent for qualquer provider/tier. L3: When user needs to create, build, or scaffold rate limit config.
+quality: 9.1
+title: "Manifest Rate Limit Config"
+tldr: "Golden and anti-examples for rate limit config construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # rate-limit-config-builder
 ## Identity
@@ -24,12 +28,12 @@ and the boundary between rate_limit_config (quotas/budgets) e runtime_rule (time
 e env_config (generic variables de ambiente). Produces artifacts compactos with frontmatter
 complete, limits numericos reais, and sections Overview/Limits/Tier/Budget.
 ## Capabilities
-- Define RPM, TPM, RPD e concurrent for qualquer provider/tier
-- Specify budget_usd with alert_threshold e politica de overage
-- Map model_overrides for limits per model
-- Document retry_after for handling de 429
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish rate_limit_config de runtime_rule, env_config, guardrail
+1. Define RPM, TPM, RPD e concurrent for qualquer provider/tier
+2. Specify budget_usd with alert_threshold e politica de overage
+3. Map model_overrides for limits per model
+4. Document retry_after for handling de 429
+5. Validate artifact against quality gates (HARD + SOFT)
+6. Distinguish rate_limit_config de runtime_rule, env_config, guardrail
 ## Routing
 keywords: [rate limit, rpm, tpm, budget, tier, throttle, quota, concurrent, retry, 429, provider]
 triggers: "create rate limit config", "define API limits", "set RPM/TPM", "configure budget cap", "document tier limits"
@@ -39,3 +43,29 @@ I answer: "what are the RPM, TPM, budget, and tier limits for this provider?"
 I do NOT handle: runtime_rule (timeouts, retry logic, backoff strategies),
 env_config (generic environment variables), guardrail (execution constraints beyond rate limits),
 client (API consumer code), connector (bidirectional service integration).
+
+## Metadata
+
+```yaml
+id: rate-limit-config-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply rate-limit-config-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P09 |
+| Domain | rate_limit_config |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

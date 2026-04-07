@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of benchmark artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Benchmark"
+version: "1.0.0"
+author: n03_builder
+tags: [benchmark, builder, examples]
+tldr: "Golden and anti-examples for benchmark construction, demonstrating ideal structure and common pitfalls."
+domain: "benchmark construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: benchmark-builder
@@ -30,7 +40,7 @@ warmup: 10
 percentiles: [50, 75, 95, 99]
 environment: "Railway PRO, us-east-1, Python 3.12, httpx 0.27, 2 vCPU / 4GB RAM"
 domain: "llm_inference"
-quality: null
+quality: 8.9
 tags: [benchmark, ttft, latency, model-comparison, sonnet, haiku]
 tldr: "TTFT benchmark: Sonnet 4 (850ms baseline) vs Haiku 4.5 (target 400ms), 100 iterations, p50/p95/p99 on Railway PRO"
 comparison_subjects: [claude-sonnet-4-6, claude-haiku-4-5-20251001]

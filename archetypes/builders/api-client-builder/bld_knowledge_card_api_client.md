@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for client production — unidirectional API consumer specification
 sources: REST conventions, HTTP standards (RFC 7231), Stripe/GitHub API patterns
+quality: 9.1
+title: "Knowledge Card Api Client"
+version: "1.0.0"
+author: n03_builder
+tags: [api_client, builder, examples]
+tldr: "Golden and anti-examples for api client construction, demonstrating ideal structure and common pitfalls."
+domain: "api client construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: client

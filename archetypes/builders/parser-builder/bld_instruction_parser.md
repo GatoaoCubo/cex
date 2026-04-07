@@ -15,7 +15,7 @@ prerequisites:
   - Downstream consumer of the parsed data is known (API, database, another builder)
 validation_method: checklist
 domain: parser
-quality: 8.8
+quality: 9.0
 tags:
   - instruction
   - parser

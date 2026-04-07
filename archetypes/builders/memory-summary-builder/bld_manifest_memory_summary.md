@@ -14,6 +14,10 @@ keywords: [memory, summary, compression, session, conversation, retain, entities
 triggers: ["create memory summary", "compress conversation", "session summary", "summarize context"]
 geo_description: >
   L1: Specialist in building memory_summary artifacts — resumos comprimidos de conv. L2: Define compression method e ratio for qualquer source_type. L3: When user needs to create, build, or scaffold memory summary.
+quality: 9.1
+title: "Manifest Memory Summary"
+tldr: "Golden and anti-examples for memory summary construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # memory-summary-builder
 ## Identity
@@ -25,12 +29,12 @@ reusable) and session_state (ephemeral snapshot) and learning_record (persistent
 Produces memory_summary artifacts with frontmatter complete, compression ratio, trigger
 threshold, and retention policy declared.
 ## Capabilities
-- Define compression method e ratio for qualquer source_type
-- Specify trigger condition (token_threshold, turn_count, explicit, time_based)
-- Declare retention policy (entities, decisions, action items, timestamps)
-- Configure freshness_decay for envelhecimento progressivo do resumo
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish memory_summary de session_state, learning_record, knowledge_card
+1. Define compression method e ratio for qualquer source_type
+2. Specify trigger condition (token_threshold, turn_count, explicit, time_based)
+3. Declare retention policy (entities, decisions, action items, timestamps)
+4. Configure freshness_decay for envelhecimento progressivo do resumo
+5. Validate artifact against quality gates (HARD + SOFT)
+6. Distinguish memory_summary de session_state, learning_record, knowledge_card
 ## Routing
 keywords: [memory, summary, compression, session, conversation, retain, entities, decay, window, abstractive]
 triggers: "create memory summary", "compress conversation", "session summary", "summarize context", "memory compression spec"
@@ -41,3 +45,29 @@ I do NOT handle: session_state (ephemeral runtime snapshot — use session-state
 learning_record (persistent learned patterns — use learning-record-builder),
 knowledge_card (static domain knowledge — use knowledge-card-builder),
 retrieval (fetching summaries — use retrieval-builder).
+
+## Metadata
+
+```yaml
+id: memory-summary-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply memory-summary-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P10 |
+| Domain | memory_summary |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

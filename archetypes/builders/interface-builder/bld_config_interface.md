@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Interface"
+version: "1.0.0"
+author: n03_builder
+tags: [interface, builder, examples]
+tldr: "Golden and anti-examples for interface construction, demonstrating ideal structure and common pitfalls."
+domain: "interface construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: interface Production Rules
 ## Naming Convention
@@ -26,12 +36,12 @@ permission_scope: nucleus
 | Contract slugs | snake_case, lowercase | `research_to_marketing`, `brain_search` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `cex/P06_schema/examples/p06_iface_{contract_slug}.yaml`
-- Compiled: `cex/P06_schema/compiled/p06_iface_{contract_slug}.json`
+1. Output: `cex/P06_schema/examples/p06_iface_{contract_slug}.yaml`
+2. Compiled: `cex/P06_schema/compiled/p06_iface_{contract_slug}.json`
 ## Size Limits (aligned with SCHEMA)
-- Body: max 3072 bytes
-- Total: ~4000 bytes including frontmatter
-- Density: >= 0.80
+1. Body: max 3072 bytes
+2. Total: ~4000 bytes including frontmatter
+3. Density: >= 0.80
 ## Method Contract Rules
 | Rule | Enforcement |
 |------|-------------|
@@ -41,7 +51,19 @@ Rule: id MUST equal filename stem.
 | Each method has description | SOFT (S05) |
 | Methods list >= 1 entry | HARD (H07) |
 ## Versioning Policy
-- New interfaces start at 1.0.0
-- Breaking changes: bump major, set backward_compatible: false
-- Additive methods: bump minor, backward_compatible: true
-- Fix/doc changes: bump patch
+1. New interfaces start at 1.0.0
+2. Breaking changes: bump major, set backward_compatible: false
+3. Additive methods: bump minor, backward_compatible: true
+4. Fix/doc changes: bump patch
+
+## Metadata
+
+```yaml
+id: bld_config_interface
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-interface.md
+```

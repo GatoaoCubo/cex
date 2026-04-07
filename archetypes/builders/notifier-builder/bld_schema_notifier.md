@@ -10,6 +10,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [schema, notifier, P04, P06]
+quality: 9.1
+title: "Schema Notifier"
+tldr: "Golden and anti-examples for notifier construction, demonstrating ideal structure and common pitfalls."
+domain: "notifier construction"
+density_score: 0.90
 ---
 # Schema: notifier
 

@@ -4,6 +4,16 @@ id: bld_tools_knowledge_card
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for knowledge_card production
+quality: 9.1
+title: "Tools Knowledge Card"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_card, builder, examples]
+tldr: "Golden and anti-examples for knowledge card construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: knowledge-card-builder

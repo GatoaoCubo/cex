@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of unit_eval artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Unit Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [unit_eval, builder, examples]
+tldr: "Golden and anti-examples for unit eval construction, demonstrating ideal structure and common pitfalls."
+domain: "unit eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: unit-eval-builder
@@ -51,7 +61,7 @@ teardown: "Discard generated artifact"
 edge_case: false
 coverage_scope: "HARD gates H01-H05 + SOFT gate S02"
 domain: "knowledge"
-quality: null
+quality: 8.8
 tags: [unit-eval, knowledge-card, yaml-parse, HARD-gates]
 tldr: "Tests KC builder YAML parse and frontmatter HARD gates H01-H05 + S02"
 density_score: 0.91

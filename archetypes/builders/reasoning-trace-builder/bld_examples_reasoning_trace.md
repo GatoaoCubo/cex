@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of reasoning_trace artifacts
 pattern: few-shot learning for structured decision audit records
+quality: 9.0
+title: "Examples Reasoning Trace"
+version: "1.0.0"
+author: n03_builder
+tags: [reasoning_trace, builder, examples]
+tldr: "Golden and anti-examples for reasoning trace construction, demonstrating ideal structure and common pitfalls."
+domain: "reasoning trace construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: reasoning-trace-builder

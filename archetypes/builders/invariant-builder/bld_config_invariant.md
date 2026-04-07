@@ -18,6 +18,11 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Invariant"
+tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
+domain: "invariant construction"
+density_score: 0.90
 ---
 # invariant-builder — CONFIG
 ## Naming Convention

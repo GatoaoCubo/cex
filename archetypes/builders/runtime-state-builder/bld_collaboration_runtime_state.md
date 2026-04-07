@@ -5,6 +5,16 @@ pillar: P10
 llm_function: COLLABORATE
 purpose: How runtime-state-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Runtime State"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_state, builder, examples]
+tldr: "Golden and anti-examples for runtime state construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: runtime-state-builder

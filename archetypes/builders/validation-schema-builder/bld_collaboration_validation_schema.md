@@ -5,6 +5,16 @@ pillar: P06
 llm_function: COLLABORATE
 purpose: How validation-schema-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Validation Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [validation_schema, builder, examples]
+tldr: "Golden and anti-examples for validation schema construction, demonstrating ideal structure and common pitfalls."
+domain: "validation schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: validation-schema-builder

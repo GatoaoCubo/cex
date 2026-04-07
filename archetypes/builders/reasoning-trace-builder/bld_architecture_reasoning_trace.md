@@ -4,6 +4,16 @@ id: bld_architecture_reasoning_trace
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of reasoning_trace — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Reasoning Trace"
+version: "1.0.0"
+author: n03_builder
+tags: [reasoning_trace, builder, examples]
+tldr: "Golden and anti-examples for reasoning trace construction, demonstrating ideal structure and common pitfalls."
+domain: "reasoning trace construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: reasoning_trace in the CEX

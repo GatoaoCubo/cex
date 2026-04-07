@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Optimizer"
+version: "1.0.0"
+author: n03_builder
+tags: [optimizer, builder, examples]
+tldr: "Golden and anti-examples for optimizer construction, demonstrating ideal structure and common pitfalls."
+domain: "optimizer construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: optimizer Production Rules
 ## Naming
@@ -27,11 +37,11 @@ permission_scope: nucleus
 Rule: id MUST equal filename stem.
 Rule: target_slug derived from target field — spaces to underscores, lowercase.
 ## File Paths
-- Output: cex/P11_feedback/examples/p11_opt_{target_slug}.md
-- Compiled: cex/P11_feedback/compiled/p11_opt_{target_slug}.yaml
+1. Output: cex/P11_feedback/examples/p11_opt_{target_slug}.md
+2. Compiled: cex/P11_feedback/compiled/p11_opt_{target_slug}.yaml
 ## Size Limits (aligned with SCHEMA)
-- Body: max 4096 bytes
-- Density: >= 0.80
+1. Body: max 4096 bytes
+2. Density: >= 0.80
 ## Threshold Ordering Rules
 | metric.direction | Ordering |
 |-----------------|----------|
@@ -44,9 +54,21 @@ tune, prune, scale, replace, restructure
 ## Risk Level Enum (valid values only)
 low, medium, high
 ## Improvement History
-- list of {date: YYYY-MM-DD, value: float}
-- minimum 0 entries at creation
-- append on each optimization cycle
+1. list of {date: YYYY-MM-DD, value: float}
+2. minimum 0 entries at creation
+3. append on each optimization cycle
 ## Automated Flag
-- true: system executes action without human approval
-- false: system flags, human approves before execution
+1. true: system executes action without human approval
+2. false: system flags, human approves before execution
+
+## Metadata
+
+```yaml
+id: bld_config_optimizer
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-optimizer.md
+```

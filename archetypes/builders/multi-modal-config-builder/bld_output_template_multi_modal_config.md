@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for multi_modal_config production
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.1
+title: "Output Template Multi Modal Config"
+version: "1.0.0"
+author: n03_builder
+tags: [multi_modal_config, builder, examples]
+tldr: "Golden and anti-examples for multi modal config construction, demonstrating ideal structure and common pitfalls."
+domain: "multi modal config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: multi_modal_config

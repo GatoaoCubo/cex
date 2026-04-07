@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of supervisor artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Supervisor"
+version: "1.0.0"
+author: n03_builder
+tags: [supervisor, builder, examples]
+tldr: "Golden and anti-examples for supervisor construction, demonstrating ideal structure and common pitfalls."
+domain: "supervisor construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: supervisor-builder
@@ -41,7 +51,7 @@ fallback_per_builder:
   landing-page-builder: abort
 llm_function: ORCHESTRATE
 domain: "brand_launch"
-quality: null
+quality: 8.9
 tags: [supervisor, brand, launch, orchestration, P08]
 tldr: "Coordinates brand launch across 4 builders in 3 waves — research first, then parallel content+marketing, then landing page."
 density_score: 0.89

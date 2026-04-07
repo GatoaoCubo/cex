@@ -8,6 +8,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [schema, invariant-builder, source-of-truth, P08]
+quality: 9.1
+title: "Schema Invariant"
+tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
+domain: "invariant construction"
+density_score: 0.90
 ---
 
 # invariant-builder — SCHEMA

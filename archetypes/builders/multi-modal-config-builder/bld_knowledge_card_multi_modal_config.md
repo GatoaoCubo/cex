@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for multi_modal_config production
 sources: kc_multi_modal_config.md, provider documentation, multi-modal best forctices
+quality: 9.0
+title: "Knowledge Card Multi Modal Config"
+version: "1.0.0"
+author: n03_builder
+tags: [multi_modal_config, builder, examples]
+tldr: "Golden and anti-examples for multi modal config construction, demonstrating ideal structure and common pitfalls."
+domain: "multi modal config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: multi_modal_config

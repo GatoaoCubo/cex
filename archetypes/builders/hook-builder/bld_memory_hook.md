@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [hook, trigger, blocking, async, timeout, error_handling, pre_tool_use, post_tool_use, session_start, stop]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Hook"
+density_score: 0.90
 ---
 ## Summary
 Hooks are event-driven interceptors that fire at lifecycle boundaries. Their value comes from being lightweight and reliable. The two most common failures are: (1) blocking hooks with excessive timeouts that freeze the host, and (2) missing error_handling that allows hook failures to propagate as host crashes.

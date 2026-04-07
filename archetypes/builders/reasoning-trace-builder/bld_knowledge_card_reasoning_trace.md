@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for reasoning_trace production — atomic searchable facts
 sources: reasoning-trace-builder schema + cex_sdk/reasoning/tracer.py
+quality: 9.1
+title: "Knowledge Card Reasoning Trace"
+version: "1.0.0"
+author: n03_builder
+tags: [reasoning_trace, builder, examples]
+tldr: "Golden and anti-examples for reasoning trace construction, demonstrating ideal structure and common pitfalls."
+domain: "reasoning trace construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: reasoning_trace

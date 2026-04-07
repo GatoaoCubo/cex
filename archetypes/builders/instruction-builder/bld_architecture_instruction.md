@@ -4,6 +4,16 @@ id: bld_architecture_instruction
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of instruction — inventory, dependencies, and architectural position
+quality: 9.0
+title: "Architecture Instruction"
+version: "1.0.0"
+author: n03_builder
+tags: [instruction, builder, examples]
+tldr: "Golden and anti-examples for instruction construction, demonstrating ideal structure and common pitfalls."
+domain: "instruction construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

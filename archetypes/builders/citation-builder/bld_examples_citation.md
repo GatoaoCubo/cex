@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of citation artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Citation"
+version: "1.0.0"
+author: n03_builder
+tags: [citation, builder, examples]
+tldr: "Golden and anti-examples for citation construction, demonstrating ideal structure and common pitfalls."
+domain: "citation construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: citation-builder
@@ -28,7 +38,7 @@ date_accessed: "2026-04-07"
 excerpt: "Prompt caching allows you to cache frequently used context between API calls, reducing latency by up to 85% and costs by up to 90% for long prompts."
 relevance_scope: [llm_engineering, prompt_cache, cost_optimization]
 domain: llm_engineering
-quality: null
+quality: 8.8
 tags: [citation, anthropic, prompt-caching, cost-optimization]
 tldr: "Official Anthropic docs on prompt caching — 90% cost reduction, 85% latency reduction via prefix reuse with 5min TTL"
 ---

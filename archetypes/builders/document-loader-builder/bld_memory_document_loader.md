@@ -12,7 +12,7 @@ observation: "Chunking strategy and metadata preservation are the two highest-le
 pattern: "semantic chunking + 12.5% overlap + source/page/section metadata = best RAG baseline"
 evidence: "LangChain benchmarks show semantic chunking outperforms fixed by 15-23% on multi-hop QA; overlap prevents answer-spanning-chunk misses"
 confidence: 0.85
-quality: 8.8
+quality: 9.0
 tags: [learning_record, document_loader, chunking, metadata, RAG, P04]
 tldr: "Key lessons from document_loader builds: overlap is mandatory, metadata is non-negotiable, parser choice drives quality."
 memory_scope: project

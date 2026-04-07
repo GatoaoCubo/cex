@@ -4,6 +4,16 @@ id: bld_tools_dag
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to dag production
+quality: 9.0
+title: "Tools Dag"
+version: "1.0.0"
+author: n03_builder
+tags: [dag, builder, examples]
+tldr: "Golden and anti-examples for dag construction, demonstrating ideal structure and common pitfalls."
+domain: "dag construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: dag-builder
@@ -29,9 +39,21 @@ purpose: Tools and runtime surfaces relevant to dag production
 
 ## Interim Validation
 Until a generic validator exists, validate manually:
-- filename matches `p12_dag_{pipeline}.yaml`
-- YAML parses
-- required fields present
-- graph is acyclic (trace all paths, no revisits)
-- every edge references existing node ids
-- payload fits `dag`, not `workflow` or `component_map`
+1. filename matches `p12_dag_{pipeline}.yaml`
+2. YAML parses
+3. required fields present
+4. graph is acyclic (trace all paths, no revisits)
+5. every edge references existing node ids
+6. payload fits `dag`, not `workflow` or `component_map`
+
+## Metadata
+
+```yaml
+id: bld_tools_dag
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-dag.md
+```

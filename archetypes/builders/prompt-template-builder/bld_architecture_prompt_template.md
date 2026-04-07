@@ -4,6 +4,16 @@ id: bld_architecture_prompt_template
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of prompt_template — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Prompt Template"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_template, builder, examples]
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt template construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: prompt_template in the CEX

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for e2e_eval production — end-to-end pipeline testing
 sources: Cypress, Playwright, test pyramid (Fowler), contract testing patterns
+quality: 9.1
+title: "Knowledge Card E2E Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [e2e_eval, builder, examples]
+tldr: "Golden and anti-examples for e2e eval construction, demonstrating ideal structure and common pitfalls."
+domain: "e2e eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: e2e_eval

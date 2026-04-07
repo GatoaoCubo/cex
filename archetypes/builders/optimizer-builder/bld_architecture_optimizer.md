@@ -4,6 +4,16 @@ id: bld_architecture_optimizer
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of optimizer — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Optimizer"
+version: "1.0.0"
+author: n03_builder
+tags: [optimizer, builder, examples]
+tldr: "Golden and anti-examples for optimizer construction, demonstrating ideal structure and common pitfalls."
+domain: "optimizer construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: optimizer in the CEX

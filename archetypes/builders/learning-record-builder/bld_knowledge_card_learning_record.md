@@ -5,6 +5,16 @@ pillar: P10
 llm_function: INJECT
 purpose: Domain knowledge for learning_record production — atomic searchable facts
 sources: learning-record-builder MANIFEST.md + SCHEMA.md v1.0.0
+quality: 9.1
+title: "Knowledge Card Learning Record"
+version: "1.0.0"
+author: n03_builder
+tags: [learning_record, builder, examples]
+tldr: "Golden and anti-examples for learning record construction, demonstrating ideal structure and common pitfalls."
+domain: "learning record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: learning_record

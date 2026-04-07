@@ -9,6 +9,15 @@ builder_name: memory-type-builder
 domain: memory classification and lifecycle
 pillar_boundary: P10 (Memory)
 kind_boundary: memory_type
+quality: 9.1
+title: "System Prompt Memory Type"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_type, builder, examples]
+tldr: "Golden and anti-examples for memory type construction, demonstrating ideal structure and common pitfalls."
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Memory Type Builder Persona

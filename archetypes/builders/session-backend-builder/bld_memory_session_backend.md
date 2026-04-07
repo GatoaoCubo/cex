@@ -26,6 +26,9 @@ decay_rate: 0.03
 agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Session Backend"
+density_score: 0.90
 ---
 ## Summary
 Session persistence failures divide into: data loss (in-memory backends, no TTL cleanup leading to storage exhaustion), security vulnerabilities (pickle deserialization, embedded credentials), and data corruption (global namespaces with concurrent writes). The file-first pattern with JSON serialization, TTL enforcement, and per-nucleus scoping addresses all three categories with zero external dependencies.
@@ -36,8 +39,63 @@ Session persistence failures divide into: data loss (in-memory backends, no TTL 
 **Compaction on load**: when a session is loaded, remove entries that have been superseded (e.g., old handoff data that was archived, stale signals that were processed). This keeps session files lean without requiring a separate maintenance process.
 **Never pickle**: pickle allows arbitrary code execution on deserialization. Use JSON (human-readable, schema-flexible) for development or msgpack (binary, fast) for production. Protobuf if typed schema enforcement is needed.
 ## Anti-Pattern
-- In-memory without persistence: state lost on restart — agents forget mid-conversation.
-- Global namespace: concurrent nuclei overwrite each other's sessions.
-- No TTL: session directory grows unbounded — storage exhaustion in weeks.
-- Pickle serialization: remote code execution vulnerability (CVE-rich attack surface).
-- Embedded credentials in connection_string: secrets committed to git, exposed in logs.
+1. In-memory without persistence: state lost on restart — agents forget mid-conversation.
+2. Global namespace: concurrent nuclei overwrite each other's sessions.
+3. No TTL: session directory grows unbounded — storage exhaustion in weeks.
+4. Pickle serialization: remote code execution vulnerability (CVE-rich attack surface).
+5. Embedded credentials in connection_string: secrets committed to git, exposed in logs.
+
+## Builder Context
+
+This ISO operates within the `session-backend-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_session_backend_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_session_backend_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | session_backend |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

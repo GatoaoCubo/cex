@@ -4,6 +4,16 @@ id: bld_architecture_memory_summary
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of memory_summary — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Memory Summary"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_summary, builder, examples]
+tldr: "Golden and anti-examples for memory summary construction, demonstrating ideal structure and common pitfalls."
+domain: "memory summary construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of e2e_eval artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples E2E Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [e2e_eval, builder, examples]
+tldr: "Golden and anti-examples for e2e eval construction, demonstrating ideal structure and common pitfalls."
+domain: "e2e eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: e2e-eval-builder
@@ -48,7 +58,7 @@ cleanup: "Remove generated artifacts from P07_evals/scratch/"
 parallel: false
 reporting: "stdout summary with stage pass/fail"
 domain: "knowledge"
-quality: null
+quality: 8.8
 tags: [e2e-eval, research-pipeline, knowledge-card, integration]
 tldr: "300s e2e: research->distill->validate pipeline produces quality KC >= 8.0"
 density_score: 0.90

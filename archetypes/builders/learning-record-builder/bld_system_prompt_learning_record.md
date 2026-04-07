@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "Experience capture, pattern/anti-pattern classification, impact scoring, reproducibility tracking | Does NOT: write knowledge cards, session states, mental models, or axioms"
 domain: learning_record
-quality: 8.7
+quality: 9.0
 tags: [system_prompt, learning_record, P03]
 safety_level: standard
 tools_listed: false

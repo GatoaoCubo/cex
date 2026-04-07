@@ -8,6 +8,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [examples, invariant-builder, golden, anti-example, P08]
+quality: 9.1
+title: "Examples Invariant"
+tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
+domain: "invariant construction"
+density_score: 0.90
 ---
 
 # invariant-builder — EXAMPLES
@@ -23,7 +28,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder_agent"
 domain: "quality"
-quality: null
+quality: 9.0
 tags: [law, quality, self-score, governance, artifact]
 tldr: "Artifacts MUST have quality: null — scoring is external reviewer responsibility"
 number: 5

@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: lifecycle_rule
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, lifecycle-rule, governance, P11, state-machine]
 tldr: "Quality gate for lifecycle_rule artifacts: enforces state list, measurable transitions, and periodic review cycle."
 density_score: 0.85

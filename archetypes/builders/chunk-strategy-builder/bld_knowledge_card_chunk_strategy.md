@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for chunk_strategy production
 sources: LangChain text_splitter module, LlamaIndex node_parser, Unstructured chunking, semantic chunking research (Anthropic, Greg Kamradt)
+quality: 9.0
+title: "Knowledge Card Chunk Strategy"
+version: "1.0.0"
+author: n03_builder
+tags: [chunk_strategy, builder, examples]
+tldr: "Golden and anti-examples for chunk strategy construction, demonstrating ideal structure and common pitfalls."
+domain: "chunk strategy construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: chunk_strategy

@@ -15,7 +15,7 @@ prerequisites:
   - "Injection point is known or inferable: system_prompt (persistent) or user_message (per-request)"
 validation_method: checklist
 domain: response_format
-quality: 8.8
+quality: 9.1
 tags: [instruction, response-format, P05, structured-output, output-design, injection]
 idempotent: true
 atomic: false

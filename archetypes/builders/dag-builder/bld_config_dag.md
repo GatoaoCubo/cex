@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Dag"
+version: "1.0.0"
+author: n03_builder
+tags: [dag, builder, examples]
+tldr: "Golden and anti-examples for dag construction, demonstrating ideal structure and common pitfalls."
+domain: "dag construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: dag Production Rules
 ## Naming Convention
@@ -27,19 +37,45 @@ permission_scope: nucleus
 | Agent_group values | lowercase slug | `edison`, `shaka`, `atlas` |
 Rule: use `.yaml` only for this builder.
 ## File Paths
-- Output: `cex/P12_orchestration/compiled/p12_dag_{pipeline}.yaml`
-- Human reference: `cex/P12_orchestration/examples/p12_dag_{pipeline}.md`
+1. Output: `cex/P12_orchestration/compiled/p12_dag_{pipeline}.yaml`
+2. Human reference: `cex/P12_orchestration/examples/p12_dag_{pipeline}.md`
 ## Size Limits
-- Preferred DAG size: <= 2048 bytes
-- Absolute max: 3072 bytes
-- Nodes should have concise labels
+1. Preferred DAG size: <= 2048 bytes
+2. Absolute max: 3072 bytes
+3. Nodes should have concise labels
 ## Structure Restrictions
-- Graph MUST be acyclic: no circular dependencies allowed
-- Every edge must reference existing node ids
-- Node ids must be unique within the DAG
-- Edges direction: `from` complete before `to` starts
+1. Graph MUST be acyclic: no circular dependencies allowed
+2. Every edge must reference existing node ids
+3. Node ids must be unique within the DAG
+4. Edges direction: `from` complete before `to` starts
 ## Boundary Restrictions
-- No runtime execution logic: actions, timeouts, error handling belong in workflow
-- No component inventory: ownership, health status belong in component_map
-- No prompt sequencing: text pipelines belong in chain
-- No status events: completion/error reporting belongs in signal
+1. No runtime execution logic: actions, timeouts, error handling belong in workflow
+2. No component inventory: ownership, health status belong in component_map
+3. No prompt sequencing: text pipelines belong in chain
+4. No status events: completion/error reporting belongs in signal
+
+## Metadata
+
+```yaml
+id: bld_config_dag
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-dag.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | dag construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

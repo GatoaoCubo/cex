@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How prompt-cache-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Prompt Cache"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_cache, builder, examples]
+tldr: "Golden and anti-examples for prompt cache construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt cache construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: prompt-cache-builder

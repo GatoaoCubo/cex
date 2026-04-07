@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for path_config production — atomic searchable facts
 sources: path-config-builder MANIFEST.md + SCHEMA.md, XDG Base Directory, Windows Known Folders
+quality: 9.1
+title: "Knowledge Card Path Config"
+version: "1.0.0"
+author: n03_builder
+tags: [path_config, builder, examples]
+tldr: "Golden and anti-examples for path config construction, demonstrating ideal structure and common pitfalls."
+domain: "path config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: path_config

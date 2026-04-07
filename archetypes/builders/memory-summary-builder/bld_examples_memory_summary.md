@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of memory_summary artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Memory Summary"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_summary, builder, examples]
+tldr: "Golden and anti-examples for memory summary construction, demonstrating ideal structure and common pitfalls."
+domain: "memory summary construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: memory-summary-builder
@@ -22,7 +32,7 @@ author: "builder_agent"
 name: "Customer Support Session Summary"
 source_type: session
 compression_method: hybrid
-quality: null
+quality: 8.9
 tags: [memory_summary, support, session, hybrid]
 tldr: "Hybrid compression of support sessions at 15 turns; retains entities + decisions; drops filler. 8:1 ratio."
 max_tokens: 512

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of computer_use artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Computer Use"
+version: "1.0.0"
+author: n03_builder
+tags: [computer_use, builder, examples]
+tldr: "Golden and anti-examples for computer use construction, demonstrating ideal structure and common pitfalls."
+domain: "computer use construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: computer-use-builder
@@ -35,7 +45,7 @@ safety_constraints:
   - "No credential or password entry"
   - "Sandbox environment only"
   - "No access to banking or payment sites"
-quality: null
+quality: 8.8
 tags: [computer_use, browser, screen-control, automation, P04]
 tldr: "Browser screen control: 6 actions, 1024x768, absolute coords, screenshot before each action"
 description: "LLM-driven browser control via screenshots and coordinate-based mouse/keyboard actions"

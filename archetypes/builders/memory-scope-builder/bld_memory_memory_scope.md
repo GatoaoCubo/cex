@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [memory scope, ephemeral, session-scoped, long-term, shared]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Memory Scope"
+density_score: 0.90
 ---
 ## Summary
 Memory scope config — which memory types an agent uses, backends, TTL, and isolation boundaries. The difference between a useful memory_scope and a useless one is concrete values
@@ -30,10 +33,36 @@ Every parameter must have: name, value, and why that value was chosen.
 Required body sections: Overview, Memory Types, Backend Config, Lifecycle.
 Body budget: 2048 bytes max.
 ## Anti-Pattern
-- No TTL: Memory grows unbounded, stale facts pollute context
-- No scope isolation: Agent A reads Agent B's private memory, causing confusion
-- Storing raw conversations: Token waste; store distilled facts, not transcripts
-- No eviction policy: Full memory store silently drops new entries or crashes
+1. No TTL: Memory grows unbounded, stale facts pollute context
+2. No scope isolation: Agent A reads Agent B's private memory, causing confusion
+3. Storing raw conversations: Token waste; store distilled facts, not transcripts
+4. No eviction policy: Full memory store silently drops new entries or crashes
 ## Context
 The 2048-byte body limit keeps memory_scope artifacts focused. Fill required fields first,
 then add recommended fields if space permits. Always set quality: null.
+
+## Metadata
+
+```yaml
+id: p10_lr_memory_scope_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-memory-scope-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | memory_scope |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

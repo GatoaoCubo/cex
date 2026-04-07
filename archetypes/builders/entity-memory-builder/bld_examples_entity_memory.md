@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of entity_memory artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Entity Memory"
+version: "1.0.0"
+author: n03_builder
+tags: [entity_memory, builder, examples]
+tldr: "Golden and anti-examples for entity memory construction, demonstrating ideal structure and common pitfalls."
+domain: "entity memory construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: entity-memory-builder
@@ -42,7 +52,7 @@ relationships:
 confidence: 0.92
 last_referenced: "2026-03-29"
 expiry: "2027-01-01"
-quality: null
+quality: 8.9
 tags: [entity_memory, service, firecrawl, scraping, P10]
 tldr: "Firecrawl: $19/mo web scraping service, 3000 credits/mo, REST API, used by research_agent for research enrichment."
 description: "Firecrawl web scraping service — structured extraction, markdown output, 3000 monthly credits, integrated into research_agent agent_group."

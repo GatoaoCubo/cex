@@ -6,6 +6,15 @@ llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for instruction
 pattern: TEMPLATE derives from this. CONFIG restricts this.
 version: 2.0.0
+quality: 9.1
+title: "Schema Instruction"
+author: n03_builder
+tags: [instruction, builder, examples]
+tldr: "Golden and anti-examples for instruction construction, demonstrating ideal structure and common pitfalls."
+domain: "instruction construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: instruction (v2)

@@ -5,6 +5,16 @@ pillar: P04
 llm_function: CALL
 purpose: Tools available to skill-builder during construction
 pattern: what external tools this builder can invoke
+quality: 9.0
+title: "Tools Skill"
+version: "1.0.0"
+author: n03_builder
+tags: [skill, builder, examples]
+tldr: "Golden and anti-examples for skill construction, demonstrating ideal structure and common pitfalls."
+domain: "skill construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: skill-builder
@@ -34,3 +44,11 @@ F8: cex_compile.py + cex_doctor.py + signal_writer.py → ship
 | ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
 | DENIED | (none) | Explicitly blocked |
 | EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target

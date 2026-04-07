@@ -20,22 +20,51 @@ agent_group: edison
 keywords: [ADR, architecture decision, context, consequences, options, status, supersede, rationale]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Decision Record"
+density_score: 0.90
 ---
 ## Summary
 ADRs fail in two ways: never written, or written incompletely. The second is more insidious — a reader finds an ADR and trusts it without realizing the rationale is incomplete or context has changed. The context section is the most load-bearing field: it answers whether to still follow the decision, or whether the situation has changed.
 
 ## Pattern
 **Write context first. Options prove deliberation. Consequences must include negatives.**
-- Context: write before the Decision section; state forces and constraints, NOT the decision; 2-5 sentences in past/present tense
-- Options: always list >= 2 with descriptive names; include honest cons for the chosen option
-- Consequences: always include >= 1 negative; distinguish positive/negative/neutral; be specific not vague
-- Status: assign at creation (proposed/accepted); superseded requires superseded_by; deprecated needs no replacement link; never edit an accepted ADR's decision — create a superseding one
+1. Context: write before the Decision section; state forces and constraints, NOT the decision; 2-5 sentences in past/present tense
+2. Options: always list >= 2 with descriptive names; include honest cons for the chosen option
+3. Consequences: always include >= 1 negative; distinguish positive/negative/neutral; be specific not vague
+4. Status: assign at creation (proposed/accepted); superseded requires superseded_by; deprecated needs no replacement link; never edit an accepted ADR's decision — create a superseding one
 
 ## Anti-Pattern
-- Missing context: reader cannot evaluate if the decision still applies
-- Single option: proves no alternatives were considered
-- Only positive consequences: hides tradeoffs, creates technical debt surprises
-- Editing accepted ADR decision text: destroys audit trail
-- Treating ADR as a law: ADRs are revisable; laws are inviolable
-- Vague decision text: state which services, boundaries, and why
-- No status assigned: cannot be superseded, deprecated, or enforced
+1. Missing context: reader cannot evaluate if the decision still applies
+2. Single option: proves no alternatives were considered
+3. Only positive consequences: hides tradeoffs, creates technical debt surprises
+4. Editing accepted ADR decision text: destroys audit trail
+5. Treating ADR as a law: ADRs are revisable; laws are inviolable
+6. Vague decision text: state which services, boundaries, and why
+7. No status assigned: cannot be superseded, deprecated, or enforced
+
+## Metadata
+
+```yaml
+id: p10_lr_decision_record_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-decision-record-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | decision_record |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

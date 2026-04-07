@@ -4,6 +4,16 @@ id: bld_tools_pattern
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for pattern production
+quality: 9.0
+title: "Tools Pattern"
+version: "1.0.0"
+author: n03_builder
+tags: [pattern, builder, examples]
+tldr: "Golden and anti-examples for pattern construction, demonstrating ideal structure and common pitfalls."
+domain: "pattern construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: pattern-builder

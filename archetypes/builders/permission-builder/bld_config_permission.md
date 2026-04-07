@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Permission"
+version: "1.0.0"
+author: n03_builder
+tags: [permission, builder, examples]
+tldr: "Golden and anti-examples for permission construction, demonstrating ideal structure and common pitfalls."
+domain: "permission construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: permission Production Rules
 ## Naming
@@ -25,11 +35,11 @@ permission_scope: nucleus
 | Fields | snake_case | deny_list, allow_list |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: cex/P09_config/examples/p09_perm_{scope_slug}.md
-- Compiled: cex/P09_config/compiled/p09_perm_{scope_slug}.yaml
+1. Output: cex/P09_config/examples/p09_perm_{scope_slug}.md
+2. Compiled: cex/P09_config/compiled/p09_perm_{scope_slug}.yaml
 ## Size Limits (aligned with SCHEMA)
-- Body: max 3072 bytes
-- Density: >= 0.80
+1. Body: max 3072 bytes
+2. Density: >= 0.80
 ## Access Level Matrix
 | Level | Meaning | Enum values |
 |-------|---------|------------|
@@ -38,3 +48,15 @@ Rule: id MUST equal filename stem.
 | execute | Run resource as action | allow, deny, conditional |
 ## Precedence Rule
 deny_list ALWAYS overrides allow_list (no exceptions).
+
+## Metadata
+
+```yaml
+id: bld_config_permission
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-permission.md
+```

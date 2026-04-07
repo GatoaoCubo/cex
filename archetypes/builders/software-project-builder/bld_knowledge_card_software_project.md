@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.1
 tags: [builder, knowledge-card, software-project, python, patterns]
 tldr: "Core knowledge for building Python projects: 3 project archetypes (CLI/API/pipeline), tech stack decisions, dependency tiers, the 'spec→code' bridge pattern from codexa-core production system."
 density_score: 1.0

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of model_provider artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Model Provider"
+version: "1.0.0"
+author: n03_builder
+tags: [model_provider, builder, examples]
+tldr: "Golden and anti-examples for model provider construction, demonstrating ideal structure and common pitfalls."
+domain: "model provider construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: model-provider-builder

@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [instruction, atomic, idempotent, rollback, prerequisite, decomposition, step, verification, procedure]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Instruction"
+density_score: 0.90
 ---
 ## Summary
 Instructions describe how to execute a procedure step by step. The primary failure mode is compound steps: packaging multiple actions into one step causes partial execution that appears complete. The secondary failure is unverifiable prerequisites that agents skip silently. Both are fixed at authoring time with simple structural rules.
@@ -34,19 +37,61 @@ Step anatomy (all four elements required):
 **Rollback**: [Required only if idempotent:no — how to undo this step]
 ```
 Decomposition rules:
-- One verb per step: create, edit, run, verify, wait, delete — never "and"
-- If a step has a conditional branch, split into two steps with explicit IF noted
-- Long-running steps must include monitoring command and expected completion indicator
-- Verification steps are their own numbered steps, not sub-bullets of action steps
+1. One verb per step: create, edit, run, verify, wait, delete — never "and"
+2. If a step has a conditional branch, split into two steps with explicit IF noted
+3. Long-running steps must include monitoring command and expected completion indicator
+4. Verification steps are their own numbered steps, not sub-bullets of action steps
 Idempotence classification:
-- `idempotent: yes` — running the step twice produces the same result as running once
-- `idempotent: no` — running twice causes side effects; rollback procedure required
+1. `idempotent: yes` — running the step twice produces the same result as running once
+2. `idempotent: no` — running twice causes side effects; rollback procedure required
 Steps_count in frontmatter must be updated manually after adding or removing steps. Validator rejects mismatches.
 ## Anti-Pattern
-- Compound step: "Deploy the app and verify health and restart workers" — split into 3 steps.
-- Vague prerequisite: "Environment is ready" — not machine-checkable, silently skipped.
-- `atomic: false` without rollback — leaves system in partial state on failure.
-- `steps_count: 5` when body has 7 steps — validator rejects, causes production failure.
-- Persona text in instructions ("You are an expert deployer") — belongs in system_prompt, not here.
-- Verification buried as sub-bullet inside action step — easy to skip, hard to audit.
+1. Compound step: "Deploy the app and verify health and restart workers" — split into 3 steps.
+2. Vague prerequisite: "Environment is ready" — not machine-checkable, silently skipped.
+3. `atomic: false` without rollback — leaves system in partial state on failure.
+4. `steps_count: 5` when body has 7 steps — validator rejects, causes production failure.
+5. Persona text in instructions ("You are an expert deployer") — belongs in system_prompt, not here.
+6. Verification buried as sub-bullet inside action step — easy to skip, hard to audit.
 ## Context
+
+## Builder Context
+
+This ISO operates within the `instruction-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | instruction |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

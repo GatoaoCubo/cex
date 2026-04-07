@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Runtime State"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_state, builder, examples]
+tldr: "Golden and anti-examples for runtime state construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: runtime_state Production Rules
 ## Naming
@@ -25,11 +35,11 @@ permission_scope: nucleus
 | Fields | snake_case | routing_mode, update_frequency |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: cex/P10_memory/examples/p10_rs_{agent_slug}.md
-- Compiled: cex/P10_memory/compiled/p10_rs_{agent_slug}.yaml
+1. Output: cex/P10_memory/examples/p10_rs_{agent_slug}.md
+2. Compiled: cex/P10_memory/compiled/p10_rs_{agent_slug}.yaml
 ## Size Limits (aligned with SCHEMA)
-- Body: max 3072 bytes
-- Density: >= 0.80
+1. Body: max 3072 bytes
+2. Density: >= 0.80
 ## Persistence Modes
 | Mode | Lifetime | Use case |
 |------|----------|----------|
@@ -42,3 +52,15 @@ Rule: id MUST equal filename stem.
 | semantic | Embedding similarity | Fuzzy, meaning-based routing |
 | hybrid | Keyword + semantic combined | Balanced accuracy + recall |
 | rule_based | Explicit if-then rules | Complex multi-condition routing |
+
+## Metadata
+
+```yaml
+id: bld_config_runtime_state
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-runtime-state.md
+```

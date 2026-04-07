@@ -5,6 +5,16 @@ pillar: P10
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for entity_memory
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Entity Memory"
+version: "1.0.0"
+author: n03_builder
+tags: [entity_memory, builder, examples]
+tldr: "Golden and anti-examples for entity memory construction, demonstrating ideal structure and common pitfalls."
+domain: "entity memory construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: entity_memory

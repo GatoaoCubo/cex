@@ -4,6 +4,15 @@ id: component-map-builder-examples
 kind: examples
 parent: component-map-builder
 version: 1.0.0
+quality: 9.1
+title: "Examples Component Map"
+author: n03_builder
+tags: [component_map, builder, examples]
+tldr: "Golden and anti-examples for component map construction, demonstrating ideal structure and common pitfalls."
+domain: "component map construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples — component-map-builder

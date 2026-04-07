@@ -4,6 +4,16 @@ id: bld_architecture_learning_record
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of learning_record — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Learning Record"
+version: "1.0.0"
+author: n03_builder
+tags: [learning_record, builder, examples]
+tldr: "Golden and anti-examples for learning record construction, demonstrating ideal structure and common pitfalls."
+domain: "learning record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: learning_record in the CEX

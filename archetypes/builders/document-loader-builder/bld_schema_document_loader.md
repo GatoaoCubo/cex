@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for document_loader
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Document Loader"
+version: "1.0.0"
+author: n03_builder
+tags: [document_loader, builder, examples]
+tldr: "Golden and anti-examples for document loader construction, demonstrating ideal structure and common pitfalls."
+domain: "document loader construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: document_loader

@@ -5,6 +5,16 @@ pillar: P04
 llm_function: INJECT
 purpose: Domain knowledge for mcp_server production — atomic searchable facts
 sources: mcp-server-builder MANIFEST.md + SCHEMA.md v1.0.0
+quality: 9.1
+title: "Knowledge Card Mcp Server"
+version: "1.0.0"
+author: n03_builder
+tags: [mcp_server, builder, examples]
+tldr: "Golden and anti-examples for mcp server construction, demonstrating ideal structure and common pitfalls."
+domain: "mcp server construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: mcp_server

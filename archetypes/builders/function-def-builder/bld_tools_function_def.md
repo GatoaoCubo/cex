@@ -4,6 +4,16 @@ id: bld_tools_function_def
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for function_def production
+quality: 9.0
+title: "Tools Function Def"
+version: "1.0.0"
+author: n03_builder
+tags: [function_def, builder, examples]
+tldr: "Golden and anti-examples for function def construction, demonstrating ideal structure and common pitfalls."
+domain: "function def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: function-def-builder

@@ -5,6 +5,15 @@ pillar: P06
 llm_function: CONSTRAIN
 role: source_of_truth
 version: 1.0.0
+quality: 9.1
+title: "Schema Rag Source"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: rag_source

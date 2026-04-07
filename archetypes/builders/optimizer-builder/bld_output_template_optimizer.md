@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for optimizer production
 pattern: derives from SCHEMA.md — no extra fields, no instructions
+quality: 9.1
+title: "Output Template Optimizer"
+version: "1.0.0"
+author: n03_builder
+tags: [optimizer, builder, examples]
+tldr: "Golden and anti-examples for optimizer construction, demonstrating ideal structure and common pitfalls."
+domain: "optimizer construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: optimizer

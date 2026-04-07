@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for hook
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.2
+title: "Instruction Hook"
+version: "1.0.0"
+author: n03_builder
+tags: [hook, builder, examples]
+tldr: "Golden and anti-examples for hook construction, demonstrating ideal structure and common pitfalls."
+domain: "hook construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a hook
@@ -41,3 +51,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 3. SOFT gates: conditions section present, error handling defined, environment variables documented
 4. Cross-check: event interception not lifecycle policy (that is lifecycle_rule)? Not a persistent process (that is daemon)? Not a system extension (that is plugin)? Script is idempotent — safe to run multiple times with same result?
 5. If score < 8.0: revise in the same pass before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify hook
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | hook construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

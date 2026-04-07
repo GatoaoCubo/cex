@@ -4,6 +4,16 @@ id: bld_tools_rate_limit_config
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for rate_limit_config production
+quality: 9.0
+title: "Tools Rate Limit Config"
+version: "1.0.0"
+author: n03_builder
+tags: [rate_limit_config, builder, examples]
+tldr: "Golden and anti-examples for rate limit config construction, demonstrating ideal structure and common pitfalls."
+domain: "rate limit config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: rate-limit-config-builder

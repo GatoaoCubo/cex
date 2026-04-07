@@ -4,6 +4,15 @@ id: diagram-builder-schema
 kind: schema
 builder: diagram-builder
 version: 1.0.0
+quality: 9.0
+title: "Schema Diagram"
+author: n03_builder
+tags: [diagram, builder, examples]
+tldr: "Golden and anti-examples for diagram construction, demonstrating ideal structure and common pitfalls."
+domain: "diagram construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # diagram-builder — SCHEMA

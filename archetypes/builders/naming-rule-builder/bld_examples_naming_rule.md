@@ -5,6 +5,14 @@ llm_function: GOVERN
 kind: examples
 domain: naming_rule
 version: 1.0.0
+quality: 9.1
+title: "Examples Naming Rule"
+author: n03_builder
+tags: [naming_rule, builder, examples]
+tldr: "Golden and anti-examples for naming rule construction, demonstrating ideal structure and common pitfalls."
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples — Naming Rule Builder
@@ -26,7 +34,7 @@ case_style: snake_case
 versioning: null
 collision_strategy: reject
 domain: knowledge_card
-quality: null
+quality: 8.9
 tags: [naming-rule, knowledge-card, p01, pool, convention]
 tldr: "Naming rule for P01 knowledge card files: p01_kc_{topic_slug}.md in snake_case"
 keywords: [knowledge_card, p01, kc, topic_slug, snake_case, pool, naming, convention]

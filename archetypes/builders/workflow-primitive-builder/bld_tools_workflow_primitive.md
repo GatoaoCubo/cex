@@ -4,6 +4,16 @@ id: bld_tools_workflow_primitive
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to workflow_primitive production
+quality: 9.0
+title: "Tools Workflow Primitive"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow_primitive, builder, examples]
+tldr: "Golden and anti-examples for workflow primitive construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow primitive construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: workflow-primitive-builder

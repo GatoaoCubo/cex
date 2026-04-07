@@ -5,6 +5,16 @@ pillar: P06
 llm_function: COLLABORATE
 purpose: How type-def-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Type Def"
+version: "1.0.0"
+author: n03_builder
+tags: [type_def, builder, examples]
+tldr: "Golden and anti-examples for type def construction, demonstrating ideal structure and common pitfalls."
+domain: "type def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: type-def-builder

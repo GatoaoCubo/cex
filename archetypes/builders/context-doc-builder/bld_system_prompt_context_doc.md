@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "domain scoping, stakeholder mapping, constraint documentation, assumption capture, prompt hydration | NOT knowledge card distillation, glossary definitions, step-by-step instructions, embedding configuration"
 domain: "context_doc"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "context_doc", "hydration", "P01", "content"]
 safety_level: standard
 tools_listed: false

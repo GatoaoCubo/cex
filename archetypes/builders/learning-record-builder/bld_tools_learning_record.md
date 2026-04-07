@@ -4,6 +4,16 @@ id: bld_tools_learning_record
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for learning_record production
+quality: 9.0
+title: "Tools Learning Record"
+version: "1.0.0"
+author: n03_builder
+tags: [learning_record, builder, examples]
+tldr: "Golden and anti-examples for learning record construction, demonstrating ideal structure and common pitfalls."
+domain: "learning record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: learning-record-builder

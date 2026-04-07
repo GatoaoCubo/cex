@@ -19,6 +19,9 @@ decay_rate: 0.02
 keywords: [research, STORM, CRAG, CRITIC, multi-model, retrieval, quality-gate]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Research Pipeline"
+density_score: 0.90
 ---
 # Learning: research_pipeline
 

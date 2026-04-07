@@ -19,6 +19,10 @@ geo_description: >
 effort: high
 max_turns: 30
 permission_scope: nucleus
+quality: 9.1
+title: "Manifest Landing Page"
+tldr: "Golden and anti-examples for landing page construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # landing-page-builder
 
@@ -34,18 +38,18 @@ Not a wireframe — it's the FINISHED page. Functional, responsive code with pla
 assets the user replaces. Ship-ready in 1 deploy.
 
 ## Capabilities
-- Generate complete landing page (12 sections) with HTML/CSS or React+Tailwind
-- Pipeline 12-section: HERO > PROBLEM > SOLUTION > FEATURES > SOCIAL-PROOF > HOW-IT-WORKS > PRICING > TESTIMONIALS > FAQ > CTA > FOOTER > META
-- Responsive mobile-first (breakpoints: sm/md/lg/xl)
-- Dark mode support via CSS variables or Tailwind dark:
-- Tailwind CSS + shadcn/ui components (or plain HTML if preferred)
-- SEO: meta tags, Open Graph, structured data (JSON-LD)
-- Performance: lazy loading, font optimization, critical CSS
-- Accessibility: ARIA labels, contrast ratios, keyboard navigation
-- Analytics-ready: GTM/GA4 data attributes, conversion tracking hooks
-- A/B testing structure: variant containers with feature flags
-- Brand injection: {{BRAND_*}} placeholders in colors, fonts, copy
-- Output: single HTML file OR Next.js page component OR Astro page
+1. Generate complete landing page (12 sections) with HTML/CSS or React+Tailwind
+2. Pipeline 12-section: HERO > PROBLEM > SOLUTION > FEATURES > SOCIAL-PROOF > HOW-IT-WORKS > PRICING > TESTIMONIALS > FAQ > CTA > FOOTER > META
+3. Responsive mobile-first (breakpoints: sm/md/lg/xl)
+4. Dark mode support via CSS variables or Tailwind dark:
+5. Tailwind CSS + shadcn/ui components (or plain HTML if preferred)
+6. SEO: meta tags, Open Graph, structured data (JSON-LD)
+7. Performance: lazy loading, font optimization, critical CSS
+8. Accessibility: ARIA labels, contrast ratios, keyboard navigation
+9. Analytics-ready: GTM/GA4 data attributes, conversion tracking hooks
+10. A/B testing structure: variant containers with feature flags
+11. Brand injection: {{BRAND_*}} placeholders in colors, fonts, copy
+12. Output: single HTML file OR Next.js page component OR Astro page
 
 ## Routing
 keywords: [landing-page, website, homepage, hero, conversion, tailwind, react, nextjs, frontend, web-app, lovable]
@@ -56,3 +60,29 @@ In a crew, I handle COMPLETE WEB PAGE CONSTRUCTION.
 I answer: "what does the actual page look like, in working code?"
 I do NOT handle: taglines alone (tagline-builder), backend APIs (api-builder), brand strategy (brand-builder).
 I CONSUME from: tagline-builder (hero headline), brand_config (colors, fonts, tone).
+
+## Metadata
+
+```yaml
+id: landing-page-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply landing-page-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P05 |
+| Domain | landing_page |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

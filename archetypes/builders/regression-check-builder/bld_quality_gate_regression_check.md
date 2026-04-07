@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "baseline comparison configuration — current vs prior experiment for detecting quality regressions in LLM pipelines"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, regression-check, P07, evals, baseline, threshold]
 tldr: "Pass/fail gate for regression_check artifacts: baseline_ref resolvability, threshold semantics, metric coverage, and fail_action definition."
 density_score: 0.90

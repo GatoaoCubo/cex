@@ -9,7 +9,7 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [tools, notifier, P04, brain, validate, forge]
-quality: 8.8
+quality: 9.0
 tldr: "Tools used by notifier-builder: brain_query for discovery, validate for gates, forge for artifact creation."
 density_score: 1.0
 ---

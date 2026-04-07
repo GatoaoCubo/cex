@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for type_builder (meta-builder)
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.1
+title: "Instruction Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a type_builder
@@ -37,3 +47,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 3. SOFT gates: capabilities >= 4 bullets, routing keywords >= 4, crew role has exclusions, boundary types listed
 4. Cross-check: is every sibling type mentioned in boundaries? Does INSTRUCTIONS.md match SCHEMA.md body sections? Are EXAMPLES.md examples realistic?
 5. If score < 8.0: revise weakest file in same pass before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify _builder
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | _builder construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

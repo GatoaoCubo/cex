@@ -3,6 +3,16 @@ kind: tools
 id: bld_tools_memory_type
 pillar: P04
 llm_function: CALL
+quality: 9.1
+title: "Tools Memory Type"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_type, builder, examples]
+tldr: "Golden and anti-examples for memory type construction, demonstrating ideal structure and common pitfalls."
+domain: "memory type construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: memory-type-builder
@@ -24,3 +34,43 @@ llm_function: CALL
 | cex_memory_update.py | ✅ | ✅ | ✅ | P10 |
 | cex_compile.py | ✅ | ✅ | ✅ | pillar |
 | cex_score.py | ✅ | ❌ | ✅ | pillar |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_tools_memory_type
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-memory-type.md
+```
+
+## Builder Context
+
+This ISO operates within the `memory-type-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |

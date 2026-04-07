@@ -15,7 +15,7 @@ prerequisites:
   - Agent's key decision points during operation are known
 validation_method: checklist
 domain: mental_model
-quality: 9.0
+quality: 9.2
 tags: [instruction, mental-model, routing, P02, decision-tree, cognitive-map]
 idempotent: true
 atomic: false

@@ -4,6 +4,16 @@ id: bld_architecture_llm_judge
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of llm_judge — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Llm Judge"
+version: "1.0.0"
+author: n03_builder
+tags: [llm_judge, builder, examples]
+tldr: "Golden and anti-examples for llm judge construction, demonstrating ideal structure and common pitfalls."
+domain: "llm judge construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

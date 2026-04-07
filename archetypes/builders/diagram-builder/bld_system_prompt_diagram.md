@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "ASCII art, Mermaid notation, layered architecture diagrams, data flow visualization, legend and annotation systems, zoom levels, C4 model | NOT component_map structured data, pattern prescriptions, law definitions, workflow execution, agent_group specs"
 domain: "diagram"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "diagram", "visualization", "P08"]
 safety_level: standard
 tools_listed: false

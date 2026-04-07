@@ -6,6 +6,16 @@ llm_function: CONSTRAIN
 purpose: Formal schema for knowledge_card — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 source: P01_knowledge/_schema.yaml v4.0 + validate_kc.py v2.0 + 721 real KCs
+quality: 9.1
+title: "Schema Knowledge Card"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_card, builder, examples]
+tldr: "Golden and anti-examples for knowledge card construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: knowledge_card

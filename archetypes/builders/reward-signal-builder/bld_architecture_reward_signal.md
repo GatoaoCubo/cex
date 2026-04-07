@@ -4,6 +4,16 @@ id: bld_architecture_reward_signal
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of reward_signal — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Reward Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [reward_signal, builder, examples]
+tldr: "Golden and anti-examples for reward signal construction, demonstrating ideal structure and common pitfalls."
+domain: "reward signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

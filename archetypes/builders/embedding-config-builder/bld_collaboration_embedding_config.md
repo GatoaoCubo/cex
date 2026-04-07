@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How embedding-config-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Embedding Config"
+version: "1.0.0"
+author: n03_builder
+tags: [embedding_config, builder, examples]
+tldr: "Golden and anti-examples for embedding config construction, demonstrating ideal structure and common pitfalls."
+domain: "embedding config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: embedding-config-builder

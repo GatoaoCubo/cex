@@ -4,6 +4,16 @@ id: bld_tools_agent_card
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for agent_card production
+quality: 9.0
+title: "Tools Agent Card"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_card, builder, examples]
+tldr: "Golden and anti-examples for agent card construction, demonstrating ideal structure and common pitfalls."
+domain: "agent card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: agent-card-builder

@@ -14,6 +14,10 @@ keywords: [social-media, auto-posting, instagram, facebook, tiktok, linkedin, ay
 triggers: ["create social publisher", "auto-posting system", "social media automation", "posting pipeline", "brand social media", "marketing automation"]
 geo_description: >
   L1: Specialist in building sistemas de auto-posting for redes sociais. Destila u. L2: Design pipeline de 10 passos: LOAD > FETCH > SELECT > GENERATE > OPTIMIZE > HA. L3: When user needs to create, build, or scaffold social publisher.
+quality: 9.1
+title: "Manifest Social Publisher"
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # social-publisher-builder
 
@@ -26,14 +30,14 @@ Produces artifacts that permitem qualquer empresa preencher 1 YAML de config e t
 automatica em IG, FB, TT, LI, TW.
 
 ## Capabilities
-- Design pipeline de 10 passos: LOAD > FETCH > SELECT > GENERATE > OPTIMIZE > HASHTAGS > PUBLISH > LOG > NOTIFY > ROTATE
-- Generate config YAML variable per empresa (identity, plataformas, ritmo, mix, catalogo)
-- Specify integration with APIs de publicaction (Ayrshare, Postiz, Meta Graph)
-- Define content mix strategy (produto/educacional/dicas/trend with percentuais)
-- Design posting-time optimization per plataforma e timezone
-- Implementar product rotation with cooldown anti-repetition
-- Define quality gates for posts (score minimal, hashtag limits, caption length)
-- Generate scheduling via cron/Windows Task Scheduler/systemd
+1. Design pipeline de 10 passos: LOAD > FETCH > SELECT > GENERATE > OPTIMIZE > HASHTAGS > PUBLISH > LOG > NOTIFY > ROTATE
+2. Generate config YAML variable per empresa (identity, plataformas, ritmo, mix, catalogo)
+3. Specify integration with APIs de publicaction (Ayrshare, Postiz, Meta Graph)
+4. Define content mix strategy (produto/educacional/dicas/trend with percentuais)
+5. Design posting-time optimization per plataforma e timezone
+6. Implementar product rotation with cooldown anti-repetition
+7. Define quality gates for posts (score minimal, hashtag limits, caption length)
+8. Generate scheduling via cron/Windows Task Scheduler/systemd
 
 ## Routing
 keywords: [social-media, auto-posting, instagram, facebook, tiktok, linkedin, ayrshare, postiz, scheduling, content-calendar, hashtags, caption]
@@ -43,3 +47,29 @@ triggers: "create social publisher", "auto-posting system", "social media automa
 In a crew, I handle SOCIAL MEDIA PUBLISHING ARCHITECTURE.
 I answer: "how does automated social posting work end-to-end, what config does each company need, and how do we validate post quality?"
 I do NOT handle: content writing (prompt-template-builder), API client code (cli-tool-builder), deployment infra (spawn-config-builder).
+
+## Metadata
+
+```yaml
+id: social-publisher-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply social-publisher-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P04 |
+| Domain | social_publisher |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

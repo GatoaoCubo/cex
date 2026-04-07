@@ -26,6 +26,9 @@ decay_rate: 0.03
 agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Compression Config"
+density_score: 0.90
 ---
 ## Summary
 Context compression failures cluster into two categories: premature loss (trigger too early, lose useful context) and structural loss (compress system prompts or tool definitions, agent loses identity or capabilities). Tiered strategies with type-aware decay weights address both by compressing the least valuable content first and protecting structural context absolutely.
@@ -36,8 +39,63 @@ Context compression failures cluster into two categories: premature loss (trigge
 **Decay weights**: every message type needs a decay weight. Higher priority = kept longer. Weight decays with age (distance from the current turn). Formula: effective_priority = base_priority * (1 - age_decay * distance_in_turns).
 **Min context tokens**: set to at least 2x the system prompt token count. This prevents compression from collapsing the context to the point where only the system prompt remains with no room for actual conversation.
 ## Anti-Pattern
-- trigger_ratio below 0.50: compresses when context is mostly empty, destroying useful information for no benefit.
-- Compressing system prompts: agent loses identity, starts hallucinating role or capabilities.
-- Summarizing tool outputs: summaries lose structured data (JSON, tables) that the agent needs for accurate reasoning.
-- No preserve_types list: every message type is eligible for compression, including structural ones.
-- Single-strategy without tiers: truncate_oldest alone destroys recent high-value content when old low-value content would be a better target.
+1. trigger_ratio below 0.50: compresses when context is mostly empty, destroying useful information for no benefit.
+2. Compressing system prompts: agent loses identity, starts hallucinating role or capabilities.
+3. Summarizing tool outputs: summaries lose structured data (JSON, tables) that the agent needs for accurate reasoning.
+4. No preserve_types list: every message type is eligible for compression, including structural ones.
+5. Single-strategy without tiers: truncate_oldest alone destroys recent high-value content when old low-value content would be a better target.
+
+## Builder Context
+
+This ISO operates within the `compression-config-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_compression_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_compression_config_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | compression_config |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

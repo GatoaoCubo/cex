@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "guardrail — safety boundaries and enforcement policies applied to agents and artifacts"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, guardrail, safety, enforcement, security-boundary, P11]
 tldr: "Validates guardrail artifacts: enforcement mode specificity, concrete violation examples, severity classification, and bypass policy."
 density_score: 0.94

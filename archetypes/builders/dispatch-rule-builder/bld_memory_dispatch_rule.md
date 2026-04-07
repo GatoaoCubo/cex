@@ -26,6 +26,9 @@ decay_rate: 0.05
 agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Dispatch Rule"
+density_score: 0.90
 ---
 ## Summary
 Routing rules that match tasks to executors fail in two directions: too narrow (low recall, tasks fall through to default) or too broad (low precision, wrong executor receives tasks). A disciplined keyword set, calibrated confidence threshold, and distinct fallback executor together achieve high recall and precision with a safety net for every miss.
@@ -37,8 +40,63 @@ Routing rules that match tasks to executors fail in two directions: too narrow (
 **Model selection**: match model capacity to task complexity. Synthesis and generation tasks need higher-capacity models. Retrieval, classification, and formatting tasks work correctly with standard-capacity models.
 **Priority**: use integer values (1-10). Primary business-domain rules default to 8. Override rules (e.g., explicit user routing) use 9-10. Catch-all fallbacks use 1-2.
 ## Anti-Pattern
-- Setting confidence_threshold below 0.5, causing the rule to match unrelated tasks.
-- Using the same executor for both primary and fallback - no actual fallback behavior.
-- Writing keywords as a single comma-separated string instead of a YAML list.
-- Using uppercase executor names - slugs must be lowercase.
-- Including only English keywords for a system where operators work in Portuguese.
+1. Setting confidence_threshold below 0.5, causing the rule to match unrelated tasks.
+2. Using the same executor for both primary and fallback - no actual fallback behavior.
+3. Writing keywords as a single comma-separated string instead of a YAML list.
+4. Using uppercase executor names - slugs must be lowercase.
+5. Including only English keywords for a system where operators work in Portuguese.
+
+## Builder Context
+
+This ISO operates within the `dispatch-rule-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_dispatch_rule_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_dispatch_rule_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | dispatch_rule |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

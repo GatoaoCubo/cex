@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for compression_config production — context compression strategies
 sources: OpenAI context window research, Anthropic prompt engineering, LangChain memory modules, academic papers on conversation summarization
+quality: 9.1
+title: "Knowledge Card Compression Config"
+version: "1.0.0"
+author: n03_builder
+tags: [compression_config, builder, examples]
+tldr: "Golden and anti-examples for compression config construction, demonstrating ideal structure and common pitfalls."
+domain: "compression config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: compression_config

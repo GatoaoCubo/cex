@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [constraint spec, regex, enum/choice, json schema, grammar (cfg)]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Constraint Spec"
+density_score: 0.90
 ---
 ## Summary
 Constraint spec — rules that govern the LLM decoder during generation (grammar, regex, enum, schema). The difference between a useful constraint_spec and a useless one is concrete values
@@ -30,10 +33,36 @@ Every parameter must have: name, value, and why that value was chosen.
 Required body sections: Overview, Constraint Definition, Provider Compatibility, Integration.
 Body budget: 2048 bytes max.
 ## Anti-Pattern
-- Constraint too strict: Rejects valid outputs, LLM loops or fails to generate
-- No fallback: Hard constraint failure crashes pipeline instead of graceful degrade
-- Provider-specific syntax: Constraint only works on one provider, not portable
-- Constraint in prompt only: Natural language constraints are soft — LLM may ignore them
+1. Constraint too strict: Rejects valid outputs, LLM loops or fails to generate
+2. No fallback: Hard constraint failure crashes pipeline instead of graceful degrade
+3. Provider-specific syntax: Constraint only works on one provider, not portable
+4. Constraint in prompt only: Natural language constraints are soft — LLM may ignore them
 ## Context
 The 2048-byte body limit keeps constraint_spec artifacts focused. Fill required fields first,
 then add recommended fields if space permits. Always set quality: null.
+
+## Metadata
+
+```yaml
+id: p10_lr_constraint_spec_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-constraint-spec-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | constraint_spec |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

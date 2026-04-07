@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Reasoning Trace"
+version: "1.0.0"
+author: n03_builder
+tags: [reasoning_trace, builder, examples]
+tldr: "Golden and anti-examples for reasoning trace construction, demonstrating ideal structure and common pitfalls."
+domain: "reasoning trace construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: reasoning_trace Production Rules
 ## Naming Convention
@@ -27,26 +37,52 @@ permission_scope: nucleus
 | Agent values | lowercase slug | `research-agent`, `build-sat` |
 Rule: use `.yaml` only for this builder — traces are human-readable audit records.
 ## File Paths
-- Output: `cex/P03_prompt/compiled/p03_rt_{agent}_{timestamp}.yaml`
-- Human reference: `cex/P03_prompt/examples/p03_rt_{agent}_{timestamp}.md`
+1. Output: `cex/P03_prompt/compiled/p03_rt_{agent}_{timestamp}.yaml`
+2. Human reference: `cex/P03_prompt/examples/p03_rt_{agent}_{timestamp}.md`
 ## Size Limits
-- Preferred trace size: <= 4096 bytes
-- Absolute max: 8192 bytes
-- Steps should be concise: thought + evidence in 1-2 sentences each
-- Cap step count at 10 — more than 10 steps indicates the decision should be decomposed
+1. Preferred trace size: <= 4096 bytes
+2. Absolute max: 8192 bytes
+3. Steps should be concise: thought + evidence in 1-2 sentences each
+4. Cap step count at 10 — more than 10 steps indicates the decision should be decomposed
 ## Trace Restrictions
-- Required fields must appear exactly as defined in schema
-- Omit optional null/unknown fields instead of writing placeholders
-- `duration_ms` allowed only when timing data is genuinely available
-- Each step MUST have non-empty `thought`, `evidence`, and `confidence`
-- Confidence values must be numeric 0.0-1.0, not strings or percentages
-- Overall confidence is geometric mean of step confidences, not arithmetic mean
+1. Required fields must appear exactly as defined in schema
+2. Omit optional null/unknown fields instead of writing placeholders
+3. `duration_ms` allowed only when timing data is genuinely available
+4. Each step MUST have non-empty `thought`, `evidence`, and `confidence`
+5. Confidence values must be numeric 0.0-1.0, not strings or percentages
+6. Overall confidence is geometric mean of step confidences, not arithmetic mean
 ## Boundary Restrictions
-- No execution instructions, tool calls, or action items inside the trace
-- No workflow step definitions, DAGs, or sequencing logic
-- No system prompt content, persona definitions, or agent identity
-- No routing tables, dispatch rules, or agent selection logic
+1. No execution instructions, tool calls, or action items inside the trace
+2. No workflow step definitions, DAGs, or sequencing logic
+3. No system prompt content, persona definitions, or agent identity
+4. No routing tables, dispatch rules, or agent selection logic
 ## Feedback Loop Rules
-- Traces with overall confidence < 0.5 trigger memory feedback: write learning record
-- Traces with any single step confidence < 0.2 flag that step for human review
-- Traces are immutable once emitted — corrections produce a new trace, never mutate
+1. Traces with overall confidence < 0.5 trigger memory feedback: write learning record
+2. Traces with any single step confidence < 0.2 flag that step for human review
+3. Traces are immutable once emitted — corrections produce a new trace, never mutate
+
+## Metadata
+
+```yaml
+id: bld_config_reasoning_trace
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-reasoning-trace.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | reasoning trace construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

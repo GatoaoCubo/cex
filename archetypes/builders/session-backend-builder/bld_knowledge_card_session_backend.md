@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for session_backend production — agent session state persistence
 sources: 12-Factor App (Factor VI), Redis persistence docs, SQLite WAL mode, PostgreSQL session management, OWASP session management cheat sheet
+quality: 9.1
+title: "Knowledge Card Session Backend"
+version: "1.0.0"
+author: n03_builder
+tags: [session_backend, builder, examples]
+tldr: "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls."
+domain: "session backend construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: session_backend

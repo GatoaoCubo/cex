@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How retriever-config-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Retriever Config"
+version: "1.0.0"
+author: n03_builder
+tags: [retriever_config, builder, examples]
+tldr: "Golden and anti-examples for retriever config construction, demonstrating ideal structure and common pitfalls."
+domain: "retriever config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: retriever-config-builder
@@ -27,14 +37,14 @@ I specify retriever config configurations so agents and pipelines can use them.
 
 ## Handoff Protocol
 ### I Receive
-- seeds: retriever config purpose, target system, constraints
-- optional: specific parameter values, upstream artifact references
+1. seeds: retriever config purpose, target system, constraints
+2. optional: specific parameter values, upstream artifact references
 ### I Produce
-- retriever_config artifact (.md + .yaml frontmatter)
-- committed to: `cex/P01_knowledge/examples/p01_retr_{name}.md`
+1. retriever_config artifact (.md + .yaml frontmatter)
+2. committed to: `cex/P01_knowledge/examples/p01_retr_{name}.md`
 ### I Signal
-- signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with failure reasons
+1. signal: complete (with quality score from QUALITY_GATES)
+2. if quality < 8.0: signal retry with failure reasons
 ## Builders I Depend On
 | chunk-strategy-builder | Upstream dependency |
 | embedding-config-builder | Upstream dependency |
@@ -42,3 +52,17 @@ I specify retriever config configurations so agents and pipelines can use them.
 | Builder | Why |
 |---------|-----|
 | knowledge-index-builder | Downstream consumer |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `collaboration` |
+| Pillar | P12 |
+| Domain | retriever config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

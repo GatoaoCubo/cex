@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for action_prompt
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Action Prompt"
+version: "1.0.0"
+author: n03_builder
+tags: [action_prompt, builder, examples]
+tldr: "Golden and anti-examples for action prompt construction, demonstrating ideal structure and common pitfalls."
+domain: "action prompt construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: action_prompt

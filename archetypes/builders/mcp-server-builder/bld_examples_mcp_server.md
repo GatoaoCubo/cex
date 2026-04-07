@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of mcp_server artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Mcp Server"
+version: "1.0.0"
+author: n03_builder
+tags: [mcp_server, builder, examples]
+tldr: "Golden and anti-examples for mcp server construction, demonstrating ideal structure and common pitfalls."
+domain: "mcp server construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: mcp-server-builder

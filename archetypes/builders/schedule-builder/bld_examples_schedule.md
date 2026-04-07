@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of schedule artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Schedule"
+version: "1.0.0"
+author: n03_builder
+tags: [schedule, builder, examples]
+tldr: "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls."
+domain: "schedule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: schedule-builder
@@ -23,7 +33,7 @@ name: "Daily Sales Report Schedule"
 trigger_type: cron
 cron: "0 9 * * MON-FRI"
 workflow_ref: "p13_wf_daily_sales_report"
-quality: null
+quality: 8.9
 tags: [schedule, sales, daily-report, P12]
 tldr: "Triggers daily-sales-report workflow at 9 AM Sao Paulo time, Mon-Fri. max_concurrent 1, catch_up false."
 timezone: "America/Sao_Paulo"

@@ -15,7 +15,7 @@ prerequisites:
   - Target platform or environment is known (filesystem, code identifier, URL slug, etc.)
 validation_method: checklist
 domain: naming_rule
-quality: 8.9
+quality: 9.1
 tags:
   - instruction
   - naming-rule

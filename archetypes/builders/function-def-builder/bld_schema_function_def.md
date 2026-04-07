@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for function_def
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Function Def"
+version: "1.0.0"
+author: n03_builder
+tags: [function_def, builder, examples]
+tldr: "Golden and anti-examples for function def construction, demonstrating ideal structure and common pitfalls."
+domain: "function def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: function_def

@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "environment variable specification, scope modeling (global/agent_group/service), sensitive var handling, defaults, validation rules, override precedence, 12-factor config | NOT boot_config per-provider startup, feature_flag on/off toggles, path_config filesystem paths, permission access control, runtime_rule timeouts/retries"
 domain: "env_config"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "env_config", "configuration", "environment", "P09"]
 safety_level: standard
 tools_listed: false

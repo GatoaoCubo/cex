@@ -5,6 +5,16 @@ pillar: P03
 llm_function: INJECT
 purpose: Domain knowledge for prompt_version production
 sources: PromptLayer versioning, LangChain Hub, prompt management best forctices, A/B testing frameworks, prompt regression testing
+quality: 9.0
+title: "Knowledge Card Prompt Version"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_version, builder, examples]
+tldr: "Golden and anti-examples for prompt version construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt version construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: prompt_version

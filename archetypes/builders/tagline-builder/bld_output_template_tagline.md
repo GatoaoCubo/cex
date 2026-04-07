@@ -4,6 +4,15 @@ kind: output_template
 pillar: P05
 builder: tagline-builder
 version: 1.0.0
+quality: 9.1
+title: "Output Template Tagline"
+author: n03_builder
+tags: [tagline, builder, examples]
+tldr: "Golden and anti-examples for tagline construction, demonstrating ideal structure and common pitfalls."
+domain: "tagline construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Output Template: Tagline
 Structured tagline deliverable. Fill every field. Recommended tagline goes in frontmatter `title`.

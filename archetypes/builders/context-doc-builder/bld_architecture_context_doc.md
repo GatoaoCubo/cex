@@ -4,6 +4,16 @@ id: bld_architecture_context_doc
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of context_doc — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Context Doc"
+version: "1.0.0"
+author: n03_builder
+tags: [context_doc, builder, examples]
+tldr: "Golden and anti-examples for context doc construction, demonstrating ideal structure and common pitfalls."
+domain: "context doc construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [bug detection, fix loop, confidence threshold, escalation, rollback, verification suite, deterministic, probabilistic]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Bugloop"
+density_score: 0.90
 ---
 ## Summary
 Automated bug-fix loops fail disproportionately when a single confidence threshold drives fix application without first classifying the failure type. Deterministic failures (syntax error, missing import, missing file) are reliably auto-fixable. Probabilistic failures (logic error, assertion mismatch, intermittent failure) require either manual review or a conservative retry with distinct strategies before escalating.
@@ -35,14 +38,40 @@ The core learning: confidence score alone is insufficient. A logic error can pro
 Verification suite minimum: the originally failing test + one regression test for adjacent code + one smoke test for the affected module.
 Rollback policy: if verification fails after auto-fix, revert changed files via git, log the attempt, escalate.
 ## Anti-Pattern
-- Applying auto-fix based solely on confidence score without classifying failure type first.
-- Retrying with the same fix strategy (identical patch applied twice never improves outcomes).
-- Skipping the verification suite after auto-fix and relying on the original single test.
-- Setting max_attempts above 5 (loop thrash risk; returns diminish sharply after attempt 3).
-- Treating escalation as failure; escalation is the correct output for probabilistic failures.
-- Setting detect.pattern too broadly (matches unrelated failures, generates spurious fix attempts).
+1. Applying auto-fix based solely on confidence score without classifying failure type first.
+2. Retrying with the same fix strategy (identical patch applied twice never improves outcomes).
+3. Skipping the verification suite after auto-fix and relying on the original single test.
+4. Setting max_attempts above 5 (loop thrash risk; returns diminish sharply after attempt 3).
+5. Treating escalation as failure; escalation is the correct output for probabilistic failures.
+6. Setting detect.pattern too broadly (matches unrelated failures, generates spurious fix attempts).
 ## Context
 This pattern emerged from fix loops that processed syntax-level and logic-level failures in the same pipeline with a uniform threshold of 0.80. Probabilistic failures like assertion mismatches were auto-fixed with patches that passed locally but broke downstream consumers. Separating classification into a pre-fix gate cut incorrect auto-fixes by 74%.
 Confidence calibration reference:
-- Deterministic + reversible: 0.85-0.95 — auto-fix safe
-- Schema/format errors: 0.70-0.88 — auto-fix safe with assertions
+1. Deterministic + reversible: 0.85-0.95 — auto-fix safe
+2. Schema/format errors: 0.70-0.88 — auto-fix safe with assertions
+
+## Metadata
+
+```yaml
+id: p10_lr_bugloop_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-bugloop-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | bugloop |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of runtime_state artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Runtime State"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_state, builder, examples]
+tldr: "Golden and anti-examples for runtime state construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: runtime-state-builder
@@ -23,7 +33,7 @@ author: "builder"
 agent: "researcher"
 persistence: "cross_session"
 domain: "market research"
-quality: null
+quality: 8.9
 tags: [runtime-state, researcher, routing, priorities, heuristics]
 tldr: "Researcher agent runtime state with keyword routing, 4 priorities, and source selection heuristics"
 routing_mode: "hybrid"

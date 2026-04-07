@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for prompt_cache
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Prompt Cache"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_cache, builder, examples]
+tldr: "Golden and anti-examples for prompt cache construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt cache construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: prompt_cache

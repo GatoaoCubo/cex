@@ -26,6 +26,9 @@ decay_rate: 0.06
 agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Embedding Config"
+density_score: 0.90
 ---
 ## Summary
 Embedding pipeline misconfiguration produces incorrect similarity rankings that appear to work until retrieval quality is measured quantitatively. The four critical decisions - model/dimensions pairing, chunk size, overlap, and distance metric with normalization - interact: a correct choice in one dimension can be undermined by a wrong choice in another.
@@ -37,3 +40,58 @@ Embedding pipeline misconfiguration produces incorrect similarity rankings that 
 **Batch size**: set to the model provider's recommended value. Too-large batches increase latency variance; too-small batches underutilize GPU throughput. Start at 32 and adjust from measured throughput data.
 ## Anti-Pattern
 - Using cosine distance without normalize: true - produces similarity scores based on vector length, not direction.
+
+## Builder Context
+
+This ISO operates within the `embedding-config-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_embedding_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_embedding_config_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | embedding_config |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

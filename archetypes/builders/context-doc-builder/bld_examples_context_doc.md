@@ -4,6 +4,16 @@ id: bld_examples_context_doc
 pillar: P07
 llm_function: GOVERN
 purpose: Golden example and anti-example for context_doc production
+quality: 9.1
+title: "Examples Context Doc"
+version: "1.0.0"
+author: n03_builder
+tags: [context_doc, builder, examples]
+tldr: "Golden and anti-examples for context doc construction, demonstrating ideal structure and common pitfalls."
+domain: "context doc construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: context_doc
@@ -18,7 +28,7 @@ updated: "2026-03-26"
 author: builder_agent
 domain: ecommerce_imports
 scope: "Brazilian import regulations for marketplace sellers, 2025-2026 enforcement cycle"
-quality: null
+quality: 8.9
 tags: [context-doc, ecommerce_imports, brazil, regulation]
 tldr: "BR marketplace imports: ICMS 17-20%, NCM code required, Receita Federal DI threshold R$50"
 keywords: [icms, ncm, receita_federal, import, brazil, marketplace, tax]

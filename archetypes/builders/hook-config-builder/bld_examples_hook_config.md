@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of hook_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Hook Config"
+version: "1.0.0"
+author: n03_builder
+tags: [hook_config, builder, examples]
+tldr: "Golden and anti-examples for hook config construction, demonstrating ideal structure and common pitfalls."
+domain: "hook config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: hook-config-builder
@@ -22,7 +32,7 @@ author: "builder_agent"
 name: "Agent Builder Hook Lifecycle"
 target_builder: "agent-builder"
 phases: [F1_CONSTRAIN, F6_PRODUCE, F7_GOVERN, F8_COLLABORATE]
-quality: null
+quality: 8.8
 tags: [hook_config, P04, agent-builder]
 tldr: "Hook lifecycle for agent-builder — pre-build validation, post-produce compile, quality-fail retry, post-commit signal"
 ```

@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How golden-test-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Golden Test"
+version: "1.0.0"
+author: n03_builder
+tags: [golden_test, builder, examples]
+tldr: "Golden and anti-examples for golden test construction, demonstrating ideal structure and common pitfalls."
+domain: "golden test construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: golden-test-builder

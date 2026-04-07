@@ -4,6 +4,16 @@ id: bld_architecture_permission
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of permission — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Permission"
+version: "1.0.0"
+author: n03_builder
+tags: [permission, builder, examples]
+tldr: "Golden and anti-examples for permission construction, demonstrating ideal structure and common pitfalls."
+domain: "permission construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: permission in the CEX

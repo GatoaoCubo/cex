@@ -14,6 +14,10 @@ keywords: [secret, credential, vault, rotation, encryption, api-key, token, pass
 triggers: ["create secret config", "define credential management", "set up vault spec", "configure secret rotation"]
 geo_description: >
   L1: Specialist in building secret_config artifacts — specifications de gestao de . L2: Define secret_config with provider, rotation_policy, and encryption. L3: When user needs to create, build, or scaffold secret config.
+quality: 9.1
+title: "Manifest Secret Config"
+tldr: "Golden and anti-examples for secret config construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # secret-config-builder
 ## Identity
@@ -25,12 +29,12 @@ generics), permission (access control), and feature_flag (toggle on/off). Produc
 secret_config artifacts with frontmatter complete, provider declared, rotation_policy defined,
 e access_pattern specified.
 ## Capabilities
-- Define secret_config with provider, rotation_policy, and encryption
-- Specify access_pattern (como agents recuperam secrets)
-- Define rotation_policy with frequencia e metodo
-- Map encryption at-rest e in-transit
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish secret_config de env_config, permission, feature_flag
+1. Define secret_config with provider, rotation_policy, and encryption
+2. Specify access_pattern (como agents recuperam secrets)
+3. Define rotation_policy with frequencia e metodo
+4. Map encryption at-rest e in-transit
+5. Validate artifact against quality gates (HARD + SOFT)
+6. Distinguish secret_config de env_config, permission, feature_flag
 ## Routing
 keywords: [secret, credential, vault, rotation, encryption, api-key, token, password, k8s, aws-sm]
 triggers: "create secret config", "define credential management", "set up vault spec", "configure secret rotation"
@@ -39,3 +43,29 @@ In a crew, I handle CREDENTIAL AND SECRET MANAGEMENT SPECIFICATION.
 I answer: "what provider stores these secrets, how do they rotate, and how do agents retrieve them?"
 I do NOT handle: env_config (generic environment variables), permission (access control rules),
 feature_flag (on/off toggles), rate_limit_config (throttling), boot_config (startup parameters).
+
+## Metadata
+
+```yaml
+id: secret-config-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply secret-config-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P09 |
+| Domain | secret_config |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

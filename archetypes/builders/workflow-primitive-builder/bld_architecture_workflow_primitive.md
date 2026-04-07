@@ -4,6 +4,16 @@ id: bld_architecture_workflow_primitive
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of workflow_primitive — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Workflow Primitive"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow_primitive, builder, examples]
+tldr: "Golden and anti-examples for workflow primitive construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow primitive construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: workflow_primitive in the CEX

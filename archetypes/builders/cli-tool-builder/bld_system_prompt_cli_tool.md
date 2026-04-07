@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "CLI commands, flags, args, exit codes, output formats, config files, env vars | NOT skills (phased reuse), daemons (persistent), plugins (extensible), MCP servers (protocol)"
 domain: "cli_tool"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "cli_tool", "command_line", "tools", "terminal"]
 safety_level: standard
 tools_listed: false

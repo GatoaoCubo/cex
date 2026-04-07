@@ -4,6 +4,15 @@ kind: knowledge_card
 pillar: P01
 builder: tagline-builder
 version: 1.0.0
+quality: 9.1
+title: "Knowledge Card Tagline"
+author: n03_builder
+tags: [tagline, builder, examples]
+tldr: "Golden and anti-examples for tagline construction, demonstrating ideal structure and common pitfalls."
+domain: "tagline construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Knowledge Card: Tagline
 
@@ -23,14 +32,27 @@ ad headlines, email signatures, pitch decks.
 | Metaphor | Analogy-based | "The Swiss Army knife of AI." |
 
 ## Best Practices
-- 3-5 words = gold standard (Nike, Apple, McDonald's)
-- Test against competitors: if they could use it, it's not unique enough
-- Rhythm matters: iambic or trochaic patterns are more memorable
-- One idea per tagline — never compound
-- Translate to check: if it breaks in another language, it might be fragile
+1. 3-5 words = gold standard (Nike, Apple, McDonald's)
+2. Test against competitors: if they could use it, it's not unique enough
+3. Rhythm matters: iambic or trochaic patterns are more memorable
+4. One idea per tagline — never compound
+5. Translate to check: if it breaks in another language, it might be fragile
 
 ## Anti-Patterns
-- Buzzword soup: "Innovative synergistic solutions"
-- Too long: anything over 15 words is a sentence, not a tagline
-- Generic: "Excellence in every detail" (fits any company)
-- Feature-focused: "128-bit encryption with real-time sync" (not a tagline)
+1. Buzzword soup: "Innovative synergistic solutions"
+2. Too long: anything over 15 words is a sentence, not a tagline
+3. Generic: "Excellence in every detail" (fits any company)
+4. Feature-focused: "128-bit encryption with real-time sync" (not a tagline)
+
+## Retrieval
+
+```yaml
+query: "tagline construction"
+kind_filter: knowledge_card
+top_k: 5
+threshold: 0.7
+```
+
+```bash
+python _tools/cex_retriever.py "tagline construction" --top 5
+```

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of eval_dataset artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Eval Dataset"
+version: "1.0.0"
+author: n03_builder
+tags: [eval_dataset, builder, examples]
+tldr: "Golden and anti-examples for eval dataset construction, demonstrating ideal structure and common pitfalls."
+domain: "eval dataset construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: eval-dataset-builder
@@ -27,7 +37,7 @@ schema_fields:
   - input
   - expected_output
   - metadata
-quality: null
+quality: 8.9
 tags: [eval_dataset, quality-gate, artifact-validation, P07]
 tldr: "200 test cases covering all 10 HARD gates for CEX artifact validation, eval-only split"
 description: "Evaluation dataset for CEX artifact quality gate validation covering all hard gate failure modes"

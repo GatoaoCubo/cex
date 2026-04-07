@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Finite named value sets, per-value descriptions, default values, deprecation, framework representations (JSON Schema, Pydantic, Zod, GraphQL, TypeScript) | NOT type_def (abstract type with methods/constraints), NOT input_schema (validation contract), NOT validator (pass/fail rule), NOT constant (single fixed value)"
 domain: "enum_def"
-quality: 8.8
+quality: 9.1
 tags: ["system_prompt", "enum_def", "enumeration", "schema", "finite-values"]
 safety_level: standard
 tools_listed: false

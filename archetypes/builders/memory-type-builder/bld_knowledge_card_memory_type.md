@@ -3,6 +3,16 @@ kind: knowledge_card
 id: bld_knowledge_card_memory_type
 pillar: P01
 llm_function: INJECT
+quality: 9.1
+title: "Knowledge Card Memory Type"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_type, builder, examples]
+tldr: "Golden and anti-examples for memory type construction, demonstrating ideal structure and common pitfalls."
+domain: "memory type construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Knowledge Card: memory_type

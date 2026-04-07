@@ -4,6 +4,16 @@ id: bld_tools_toolkit
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to toolkit production
+quality: 9.0
+title: "Tools Toolkit"
+version: "1.0.0"
+author: n03_builder
+tags: [toolkit, builder, examples]
+tldr: "Golden and anti-examples for toolkit construction, demonstrating ideal structure and common pitfalls."
+domain: "toolkit construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: toolkit-builder

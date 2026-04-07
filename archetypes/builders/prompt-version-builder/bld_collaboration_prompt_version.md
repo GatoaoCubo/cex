@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How prompt-version-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Prompt Version"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_version, builder, examples]
+tldr: "Golden and anti-examples for prompt version construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt version construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: prompt-version-builder
@@ -27,14 +37,14 @@ I specify prompt version configurations so agents and pipelines can use them.
 
 ## Handoff Protocol
 ### I Receive
-- seeds: prompt version purpose, target system, constraints
-- optional: specific parameter values, upstream artifact references
+1. seeds: prompt version purpose, target system, constraints
+2. optional: specific parameter values, upstream artifact references
 ### I Produce
-- prompt_version artifact (.md + .yaml frontmatter)
-- committed to: `cex/P03_prompt/examples/p03_pv_{name}.md`
+1. prompt_version artifact (.md + .yaml frontmatter)
+2. committed to: `cex/P03_prompt/examples/p03_pv_{name}.md`
 ### I Signal
-- signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with failure reasons
+1. signal: complete (with quality score from QUALITY_GATES)
+2. if quality < 8.0: signal retry with failure reasons
 ## Builders I Depend On
 | prompt-template-builder | Upstream dependency |
 ## Builders That Depend On Me
@@ -42,3 +52,17 @@ I specify prompt version configurations so agents and pipelines can use them.
 |---------|-----|
 | e2e-eval-builder | Downstream consumer |
 | smoke-eval-builder | Downstream consumer |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `collaboration` |
+| Pillar | P12 |
+| Domain | prompt version construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

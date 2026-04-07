@@ -4,6 +4,15 @@ id: diagram-builder-examples
 kind: examples
 builder: diagram-builder
 version: 1.0.0
+quality: 9.1
+title: "Examples Diagram"
+author: n03_builder
+tags: [diagram, builder, examples]
+tldr: "Golden and anti-examples for diagram construction, demonstrating ideal structure and common pitfalls."
+domain: "diagram construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # diagram-builder — EXAMPLES
@@ -19,7 +28,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "builder"
 domain: "orchestration"
-quality: null
+quality: 8.9
 tags: [diagram, orchestration, agent_group, architecture, multi-agent]
 tldr: "System-level view of orchestrator orchestrating 6 agent_groups via handoffs and signals"
 scope: "CEX agent_group orchestration — dispatch to 6 domain agent_groups"

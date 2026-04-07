@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [reward signal, reward hacking, criteria, baseline, rlhf, dpo, lm as judge, preference, scalar, calibration]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Reward Signal"
+density_score: 0.90
 ---
 ## Summary
 Reward signals are the most consequential design decision in an RLHF pipeline. A miscalibrated signal does not produce a neutral outcome — it actively degrades the model by reinforcing the wrong behaviors. The two most common failure modes are reward hacking (single criterion) and baseline drift (uncalibrated threshold).

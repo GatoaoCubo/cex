@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of spawn_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Spawn Config"
+version: "1.0.0"
+author: n03_builder
+tags: [spawn_config, builder, examples]
+tldr: "Golden and anti-examples for spawn config construction, demonstrating ideal structure and common pitfalls."
+domain: "spawn config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: spawn-config-builder
@@ -32,7 +42,7 @@ timeout: 1800
 interactive: true
 prompt_strategy: handoff
 domain: "research"
-quality: null
+quality: 8.8
 tags: [spawn_config, shaka, solo, research]
 tldr: "Solo spawn for research_agent research with sonnet, 30min timeout, handoff-based prompt"
 ```

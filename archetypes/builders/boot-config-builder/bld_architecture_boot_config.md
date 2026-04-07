@@ -4,6 +4,16 @@ id: bld_architecture_boot_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of boot_config — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Boot Config"
+version: "1.0.0"
+author: n03_builder
+tags: [boot_config, builder, examples]
+tldr: "Golden and anti-examples for boot config construction, demonstrating ideal structure and common pitfalls."
+domain: "boot config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: boot_config in the CEX

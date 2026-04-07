@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for agent artifact production
 sources: CEX P02 schema, agent_package pattern, agentic AI literature (Anthropic, OpenAI, LangChain)
+quality: 9.1
+title: "Knowledge Card Agent"
+version: "1.0.0"
+author: n03_builder
+tags: [agent, builder, examples]
+tldr: "Golden and anti-examples for agent construction, demonstrating ideal structure and common pitfalls."
+domain: "agent construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: agent

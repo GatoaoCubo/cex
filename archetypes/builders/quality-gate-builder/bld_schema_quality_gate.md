@@ -6,6 +6,15 @@ llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for quality_gate
 pattern: TEMPLATE derives from this. CONFIG restricts this.
 version: "2.0.0"
+quality: 9.1
+title: "Schema Quality Gate"
+author: n03_builder
+tags: [quality_gate, builder, examples]
+tldr: "Golden and anti-examples for quality gate construction, demonstrating ideal structure and common pitfalls."
+domain: "quality gate construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: quality_gate

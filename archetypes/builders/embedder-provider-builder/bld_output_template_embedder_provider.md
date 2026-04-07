@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an embedder_provider
 pattern: every field here exists in SCHEMA — template derives, never invents
+quality: 9.1
+title: "Output Template Embedder Provider"
+version: "1.0.0"
+author: n03_builder
+tags: [embedder_provider, builder, examples]
+tldr: "Golden and anti-examples for embedder provider construction, demonstrating ideal structure and common pitfalls."
+domain: "embedder provider construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: embedder_provider

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for trace_config production — agent execution tracing and observability
 sources: OpenTelemetry specification, LangSmith documentation, Jaeger architecture, Honeycomb observability, OWASP logging cheat sheet
+quality: 9.1
+title: "Knowledge Card Trace Config"
+version: "1.0.0"
+author: n03_builder
+tags: [trace_config, builder, examples]
+tldr: "Golden and anti-examples for trace config construction, demonstrating ideal structure and common pitfalls."
+domain: "trace config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: trace_config

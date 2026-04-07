@@ -4,6 +4,16 @@ id: bld_tools_runtime_state
 pillar: P04
 llm_function: CALL
 purpose: Tools available for runtime_state production
+quality: 9.0
+title: "Tools Runtime State"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_state, builder, examples]
+tldr: "Golden and anti-examples for runtime state construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: runtime-state-builder
@@ -30,8 +40,20 @@ purpose: Tools available for runtime_state production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p10_rs_ prefix
-- [ ] persistence in [session, cross_session]
-- [ ] routing_mode in [keyword, semantic, hybrid, rule_based]
-- [ ] Decision Tree has branches
+1. [ ] YAML parses
+2. [ ] id matches p10_rs_ prefix
+3. [ ] persistence in [session, cross_session]
+4. [ ] routing_mode in [keyword, semantic, hybrid, rule_based]
+5. [ ] Decision Tree has branches
+
+## Metadata
+
+```yaml
+id: bld_tools_runtime_state
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-runtime-state.md
+```

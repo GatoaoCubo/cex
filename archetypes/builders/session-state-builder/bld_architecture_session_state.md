@@ -4,6 +4,16 @@ id: bld_architecture_session_state
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of session_state — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Session State"
+version: "1.0.0"
+author: n03_builder
+tags: [session_state, builder, examples]
+tldr: "Golden and anti-examples for session state construction, demonstrating ideal structure and common pitfalls."
+domain: "session state construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: session_state in the CEX

@@ -4,6 +4,16 @@ id: bld_tools_embedder_provider
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for embedder_provider production
+quality: 9.0
+title: "Tools Embedder Provider"
+version: "1.0.0"
+author: n03_builder
+tags: [embedder_provider, builder, examples]
+tldr: "Golden and anti-examples for embedder provider construction, demonstrating ideal structure and common pitfalls."
+domain: "embedder provider construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: embedder-provider-builder

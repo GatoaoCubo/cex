@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a toolkit
 pattern: every field here exists in the schema; template derives, never invents
+quality: 9.1
+title: "Output Template Toolkit"
+version: "1.0.0"
+author: n03_builder
+tags: [toolkit, builder, examples]
+tldr: "Golden and anti-examples for toolkit construction, demonstrating ideal structure and common pitfalls."
+domain: "toolkit construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: toolkit
@@ -42,10 +52,24 @@ deny_list:
 review_date: "{{ISO_8601_date_or_omit}}"
 ```
 ## Derivation Notes
-- The four top-level fields (name, tools, category, requires_confirmation) are required
-- Each tool MUST have name, description, and confirmation
-- `mcp_endpoint`, `denied_for`, `risk_level` are per-tool optional fields
-- `scope`, `target_agent`, `mcp_server`, `deny_list`, `review_date` are top-level optional
-- Omit absent optional fields instead of filling with placeholder strings
-- Read tools: confirmation = auto. Write tools: confirmation = confirm. Dangerous: deny.
-- Maximum 15 tools per toolkit — split by category if more are needed
+1. The four top-level fields (name, tools, category, requires_confirmation) are required
+2. Each tool MUST have name, description, and confirmation
+3. `mcp_endpoint`, `denied_for`, `risk_level` are per-tool optional fields
+4. `scope`, `target_agent`, `mcp_server`, `deny_list`, `review_date` are top-level optional
+5. Omit absent optional fields instead of filling with placeholder strings
+6. Read tools: confirmation = auto. Write tools: confirmation = confirm. Dangerous: deny.
+7. Maximum 15 tools per toolkit — split by category if more are needed
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | toolkit construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

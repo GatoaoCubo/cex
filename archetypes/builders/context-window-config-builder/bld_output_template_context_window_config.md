@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for context_window_config production
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.1
+title: "Output Template Context Window Config"
+version: "1.0.0"
+author: n03_builder
+tags: [context_window_config, builder, examples]
+tldr: "Golden and anti-examples for context window config construction, demonstrating ideal structure and common pitfalls."
+domain: "context window config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: context_window_config

@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How e2e-eval-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration E2E Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [e2e_eval, builder, examples]
+tldr: "Golden and anti-examples for e2e eval construction, demonstrating ideal structure and common pitfalls."
+domain: "e2e eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: e2e-eval-builder

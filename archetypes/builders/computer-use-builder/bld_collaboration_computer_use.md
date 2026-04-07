@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How computer-use-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Computer Use"
+version: "1.0.0"
+author: n03_builder
+tags: [computer_use, builder, examples]
+tldr: "Golden and anti-examples for computer use construction, demonstrating ideal structure and common pitfalls."
+domain: "computer use construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: computer-use-builder

@@ -4,6 +4,15 @@ kind: instruction
 pillar: P03
 builder: landing-page-builder
 version: 1.0.0
+quality: 9.0
+title: "Instruction Landing Page"
+author: n03_builder
+tags: [landing_page, builder, examples]
+tldr: "Golden and anti-examples for landing page construction, demonstrating ideal structure and common pitfalls."
+domain: "landing page construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Instruction: Landing Page Construction Pipeline
 

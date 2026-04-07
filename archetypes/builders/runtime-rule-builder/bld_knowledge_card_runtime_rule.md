@@ -5,6 +5,16 @@ pillar: P09
 llm_function: INJECT
 purpose: Domain knowledge for runtime_rule production — atomic searchable facts
 sources: runtime-rule-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Runtime Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_rule, builder, examples]
+tldr: "Golden and anti-examples for runtime rule construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: runtime_rule

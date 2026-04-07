@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How secret-config-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Secret Config"
+version: "1.0.0"
+author: n03_builder
+tags: [secret_config, builder, examples]
+tldr: "Golden and anti-examples for secret config construction, demonstrating ideal structure and common pitfalls."
+domain: "secret config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: secret-config-builder

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of content monetization configs
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Content Monetization"
+version: "1.0.0"
+author: n03_builder
+tags: [content_monetization, builder, examples]
+tldr: "Golden and anti-examples for content monetization construction, demonstrating ideal structure and common pitfalls."
+domain: "content monetization construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: content-monetization-builder

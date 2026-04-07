@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for input_schema production — unilateral entry contracts
 sources: JSON Schema (draft-07), OpenAPI requestBody, Pydantic BaseModel, TypeScript params
+quality: 9.1
+title: "Knowledge Card Input Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [input_schema, builder, examples]
+tldr: "Golden and anti-examples for input schema construction, demonstrating ideal structure and common pitfalls."
+domain: "input schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: input_schema

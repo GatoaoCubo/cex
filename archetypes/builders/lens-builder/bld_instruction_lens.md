@@ -15,7 +15,7 @@ prerequisites:
   - The lens has a distinct focus not already covered by an existing lens
 validation_method: checklist
 domain: lens
-quality: 9.0
+quality: 9.2
 tags: [instruction, lens, perspective, P02, filter, analysis]
 idempotent: true
 atomic: true

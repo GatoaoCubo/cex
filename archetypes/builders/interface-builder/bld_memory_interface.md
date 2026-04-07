@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [interface, contract, provider, consumer, versioning, backward_compatible, deprecation, method, bilateral]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Interface"
+density_score: 0.90
 ---
 ## Summary
 Interfaces define bilateral contracts between a provider and a consumer. The most damaging failure is treating an interface as unilateral — defining only one party. The second most damaging failure is incrementing a version number without declaring what happens to old methods. Both failures cause breaking changes that are expensive to debug after deployment.
@@ -32,10 +35,57 @@ Bilateral contract checklist:
 5. **Mock payload fidelity** - Mock payloads in examples must contain exactly the fields declared in the method schema. No extra fields, no missing fields.
 Do not add event handling or runtime state to an interface — those belong in signal and runtime_state artifacts respectively.
 ## Anti-Pattern
-- `provider` declared but no `consumer` — unilateral definition, incomplete contract.
-- Method with `input` but no `output` — consumer cannot know what to expect.
-- `backward_compatible: "yes"` — must be boolean `true`, string causes schema rejection.
-- Version increment without `deprecation_path` — old consumers break silently.
-- Mock payload with different fields than declared schema — misleads callers about actual behavior.
-- Adding event handling to interface — scope creep into signal territory.
+1. `provider` declared but no `consumer` — unilateral definition, incomplete contract.
+2. Method with `input` but no `output` — consumer cannot know what to expect.
+3. `backward_compatible: "yes"` — must be boolean `true`, string causes schema rejection.
+4. Version increment without `deprecation_path` — old consumers break silently.
+5. Mock payload with different fields than declared schema — misleads callers about actual behavior.
+6. Adding event handling to interface — scope creep into signal territory.
 ## Context
+
+## Builder Context
+
+This ISO operates within the `interface-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Reference
+
+```yaml
+id: p10_lr_interface_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_interface_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | interface |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

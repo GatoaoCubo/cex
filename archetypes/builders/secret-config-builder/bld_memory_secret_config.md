@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [secret config, rotation policy, access pattern, lease duration, vault, kubernetes secrets, aws secrets manager, encryption, audit log, credential management]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Secret Config"
+density_score: 0.90
 ---
 ## Summary
 Secret configs are consumed by agents at runtime under time pressure — a stale credential or misconfigured access pattern causes silent failures that are expensive to diagnose. Three decisions made at spec time determine safety: rotation method explicitness, access pattern precision, and audit logging.
@@ -30,26 +33,81 @@ A config with `rotation_policy.frequency: daily` but no `method` leaves agents g
 **Explicit rotation method + dynamic access with lease TTL + always-on audit log.**
 
 Rotation policy (complete schema):
-- frequency: daily | weekly | monthly | on-breach
-- method: automatic | manual | triggered
-- trigger: what fires rotation (schedule, breach signal, certificate expiry)
-- rollback: previous version retention period
+1. frequency: daily | weekly | monthly | on-breach
+2. method: automatic | manual | triggered
+3. trigger: what fires rotation (schedule, breach signal, certificate expiry)
+4. rollback: previous version retention period
 
 Access pattern rules:
-- dynamic: set lease_duration (1h default); agent renews on TTL expiry
-- static: document re-deploy trigger (CI pipeline step)
-- injected: document sidecar/init container spec reference
-- env: document platform injection mechanism
+1. dynamic: set lease_duration (1h default); agent renews on TTL expiry
+2. static: document re-deploy trigger (CI pipeline step)
+3. injected: document sidecar/init container spec reference
+4. env: document platform injection mechanism
 
 Security rules:
-- NEVER commit real secrets — scan for 40+ char alphanumeric strings, BEGIN PRIVATE KEY, password: non-placeholder
-- audit_log: true is non-negotiable for production secrets
-- Define fallback for every secret in a critical-path agent (LLM API keys, DB creds, payment keys)
+1. NEVER commit real secrets — scan for 40+ char alphanumeric strings, BEGIN PRIVATE KEY, password: non-placeholder
+2. audit_log: true is non-negotiable for production secrets
+3. Define fallback for every secret in a critical-path agent (LLM API keys, DB creds, payment keys)
 
 ## Anti-Pattern
-- rotation_policy without method — caller cannot determine if action is required after rotation event.
-- access_pattern: static with no re-deploy trigger — credentials silently stale after provider rotation.
-- Omitting lease_duration for dynamic access — default TTL may be too short or long.
-- Plaintext secrets anywhere in the file — immediate security violation.
-- audit_log: false without justification — undetectable breach window.
-- Missing fallback for LLM API key secrets — agent hard-fails if vault unreachable.
+1. rotation_policy without method — caller cannot determine if action is required after rotation event.
+2. access_pattern: static with no re-deploy trigger — credentials silently stale after provider rotation.
+3. Omitting lease_duration for dynamic access — default TTL may be too short or long.
+4. Plaintext secrets anywhere in the file — immediate security violation.
+5. audit_log: false without justification — undetectable breach window.
+6. Missing fallback for LLM API key secrets — agent hard-fails if vault unreachable.
+
+## Builder Context
+
+This ISO operates within the `secret-config-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_secret_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_secret_config_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | secret_config |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

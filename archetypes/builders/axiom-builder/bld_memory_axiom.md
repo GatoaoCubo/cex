@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [axiom, immutable, negation-test, law, guardrail, classification, rules, fundamental]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Axiom"
+density_score: 0.90
 ---
 ## Summary
 Axioms are the highest-confidence rules in a rule system: they are asserted to be unconditionally true and are not subject to override or exception. The authoring challenge is not writing axioms - it is identifying which candidate rules genuinely qualify as axioms versus which are laws (rules with conditions) or guardrails (enforcement mechanisms for laws).

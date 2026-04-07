@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Agent Package"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_package, builder, examples]
+tldr: "Golden and anti-examples for agent package construction, demonstrating ideal structure and common pitfalls."
+domain: "agent package construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: agent_package Production Rules
 ## Naming Convention

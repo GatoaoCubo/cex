@@ -4,6 +4,16 @@ id: bld_tools_benchmark
 pillar: P04
 llm_function: CALL
 purpose: Tools available for benchmark production
+quality: 9.1
+title: "Tools Benchmark"
+version: "1.0.0"
+author: n03_builder
+tags: [benchmark, builder, examples]
+tldr: "Golden and anti-examples for benchmark construction, demonstrating ideal structure and common pitfalls."
+domain: "benchmark construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: benchmark-builder
@@ -32,9 +42,21 @@ purpose: Tools available for benchmark production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p07_bm_ prefix
-- [ ] iterations >= 10, warmup >= 1
-- [ ] percentiles include p50 + p95
-- [ ] baseline and target are numeric with same unit
-- [ ] direction is explicit
+1. [ ] YAML parses
+2. [ ] id matches p07_bm_ prefix
+3. [ ] iterations >= 10, warmup >= 1
+4. [ ] percentiles include p50 + p95
+5. [ ] baseline and target are numeric with same unit
+6. [ ] direction is explicit
+
+## Metadata
+
+```yaml
+id: bld_tools_benchmark
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-benchmark.md
+```

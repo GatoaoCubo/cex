@@ -13,6 +13,8 @@ author: n03_builder
 created: "2026-04-07"
 density_score: 0.94
 tldr: "Defines the examples specification for examples multi modal config, with structural rules, validation gates, and integration points."
+quality: 9.1
+tags: [multi_modal_config, builder, examples]
 ---
 
 # Examples: multi-modal-config-builder

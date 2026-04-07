@@ -8,6 +8,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder_agent
 tags: [tools, invariant-builder, data-sources, P08]
+quality: 9.1
+title: "Tools Invariant"
+tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
+domain: "invariant construction"
+density_score: 0.90
 ---
 
 # invariant-builder — TOOLS

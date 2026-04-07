@@ -5,6 +5,16 @@ pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for handoff_protocol production
 sources: A2A protocol spec (Google), Swarm handoff patterns, multi-agent orchestration research, organization agent_group dispatch
+quality: 9.0
+title: "Knowledge Card Handoff Protocol"
+version: "1.0.0"
+author: n03_builder
+tags: [handoff_protocol, builder, examples]
+tldr: "Golden and anti-examples for handoff protocol construction, demonstrating ideal structure and common pitfalls."
+domain: "handoff protocol construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: handoff_protocol

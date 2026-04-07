@@ -5,6 +5,16 @@ pillar: P09
 llm_function: COLLABORATE
 purpose: How runtime-rule-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Runtime Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_rule, builder, examples]
+tldr: "Golden and anti-examples for runtime rule construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: runtime-rule-builder

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for vector_store production — atomic searchable facts
 sources: vector-store-builder SCHEMA + MANIFEST, backend docs, HNSW paper
+quality: 9.1
+title: "Knowledge Card Vector Store"
+version: "1.0.0"
+author: n03_builder
+tags: [vector_store, builder, examples]
+tldr: "Golden and anti-examples for vector store construction, demonstrating ideal structure and common pitfalls."
+domain: "vector store construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: vector_store

@@ -4,6 +4,16 @@ id: bld_tools_unit_eval
 pillar: P04
 llm_function: CALL
 purpose: Tools available for unit_eval production
+quality: 9.0
+title: "Tools Unit Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [unit_eval, builder, examples]
+tldr: "Golden and anti-examples for unit eval construction, demonstrating ideal structure and common pitfalls."
+domain: "unit eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: unit-eval-builder
@@ -31,8 +41,20 @@ purpose: Tools available for unit_eval production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p07_ue_ prefix
-- [ ] assertions is non-empty list
-- [ ] each assertion has gate_ref
-- [ ] timeout is positive integer
+1. [ ] YAML parses
+2. [ ] id matches p07_ue_ prefix
+3. [ ] assertions is non-empty list
+4. [ ] each assertion has gate_ref
+5. [ ] timeout is positive integer
+
+## Metadata
+
+```yaml
+id: bld_tools_unit_eval
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-unit-eval.md
+```

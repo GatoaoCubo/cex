@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a dispatch_rule
 pattern: every field here exists in SCHEMA.md; template derives, never invents
+quality: 9.0
+title: "Output Template Dispatch Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [dispatch_rule, builder, examples]
+tldr: "Golden and anti-examples for dispatch rule construction, demonstrating ideal structure and common pitfalls."
+domain: "dispatch rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: dispatch_rule
@@ -14,22 +24,27 @@ Filename: `p12_dr_{{scope}}.yaml`
 id: p12_dr_{{scope}}
 kind: dispatch_rule
 pillar: P12
+
 version: 1.0.0
 created: {{ISO_8601_date}}
 updated: {{ISO_8601_date}}
 author: {{author_slug}}
+
 domain: {{domain_name}}
 quality: null
 tags: [{{tag_1}}, {{tag_2}}, {{agent_group_slug}}]
 tldr: {{one_line_summary_max_120_chars}}
+
 scope: {{scope_slug}}
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
 agent_group: {{agent_group_slug}}
 model: {{sonnet|opus|haiku|flash}}
+
 priority: {{1_to_10}}
 confidence_threshold: {{0.0_to_1.0}}
 fallback: {{fallback_agent_group_slug}}
 conditions: {{object_or_omit}}
+
 load_balance: {{true|false_or_omit}}
 routing_strategy: {{keyword_match|semantic|hybrid_or_omit}}
 # {{scope}} Dispatch Rule
@@ -41,8 +56,22 @@ routing_strategy: {{keyword_match|semantic|hybrid_or_omit}}
 {{brief_explanation_of_when_fallback_fires_and_what_it_handles}}
 ```
 ## Derivation Notes
-- All frontmatter fields derive from SCHEMA.md required or optional fields
-- Omit `conditions`, `load_balance`, `routing_strategy` if not needed
-- Body sections are human commentary only; routing logic lives in frontmatter
-- `quality: null` must never be changed at authoring time
-- `fallback` must be a different agent_group slug than `agent_group`
+1. All frontmatter fields derive from SCHEMA.md required or optional fields
+2. Omit `conditions`, `load_balance`, `routing_strategy` if not needed
+3. Body sections are human commentary only; routing logic lives in frontmatter
+4. `quality: null` must never be changed at authoring time
+5. `fallback` must be a different agent_group slug than `agent_group`
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | dispatch rule construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

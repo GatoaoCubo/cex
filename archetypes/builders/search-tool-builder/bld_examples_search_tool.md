@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of search_tool artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Search Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [search_tool, builder, examples]
+tldr: "Golden and anti-examples for search tool construction, demonstrating ideal structure and common pitfalls."
+domain: "search tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: search-tool-builder
@@ -33,7 +43,7 @@ domain_filter: true
 language: ["en", "pt", "es"]
 cost_per_query: "~$0.005"
 rate_limit: "100/min"
-quality: null
+quality: 8.8
 tags: [search_tool, tavily, web-search, ai-optimized, P04]
 tldr: "Tavily AI web search: 10 results, clean text content, date/domain filters, $0.005/query"
 description: "AI-optimized web search via Tavily API returning clean text results for LLM consumption"

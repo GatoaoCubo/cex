@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "dispatch rules, keyword-to-agent_group routing, confidence thresholds, fallback logic, bilingual PT/EN keyword coverage, priority modeling | NOT task execution instructions, runtime status events, workflow sequencing, handoff content"
 domain: "dispatch_rule"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "dispatch_rule", "orchestration", "routing", "P12"]
 safety_level: standard
 tools_listed: false

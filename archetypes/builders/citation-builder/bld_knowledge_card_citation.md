@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for citation production — source attribution patterns
 sources: kc_citation.md, industry standards, bibliographic best forctices
+quality: 9.0
+title: "Knowledge Card Citation"
+version: "1.0.0"
+author: n03_builder
+tags: [citation, builder, examples]
+tldr: "Golden and anti-examples for citation construction, demonstrating ideal structure and common pitfalls."
+domain: "citation construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: citation

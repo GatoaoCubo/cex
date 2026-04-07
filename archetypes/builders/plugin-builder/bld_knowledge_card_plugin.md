@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for plugin production — atomic searchable facts
 sources: plugin-builder MANIFEST.md + SCHEMA.md, VS Code extensions, WordPress plugins
+quality: 9.1
+title: "Knowledge Card Plugin"
+version: "1.0.0"
+author: n03_builder
+tags: [plugin, builder, examples]
+tldr: "Golden and anti-examples for plugin construction, demonstrating ideal structure and common pitfalls."
+domain: "plugin construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: plugin

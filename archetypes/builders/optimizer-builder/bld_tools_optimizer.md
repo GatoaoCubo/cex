@@ -4,6 +4,16 @@ id: bld_tools_optimizer
 pillar: P04
 llm_function: CALL
 purpose: Tools available for optimizer production
+quality: 9.1
+title: "Tools Optimizer"
+version: "1.0.0"
+author: n03_builder
+tags: [optimizer, builder, examples]
+tldr: "Golden and anti-examples for optimizer construction, demonstrating ideal structure and common pitfalls."
+domain: "optimizer construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: optimizer-builder

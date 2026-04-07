@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [signal, builder, examples]
+tldr: "Golden and anti-examples for signal construction, demonstrating ideal structure and common pitfalls."
+domain: "signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: signal Production Rules
 ## Naming Convention
@@ -27,19 +37,45 @@ permission_scope: nucleus
 | Agent_group values | lowercase slug | `codex`, `edison`, `atlas` |
 Rule: use `.json` only for this builder.
 ## File Paths
-- Output: `cex/P12_orchestration/compiled/p12_sig_{event}.json`
-- Human reference: `cex/P12_orchestration/examples/p12_sig_{event}.md`
+1. Output: `cex/P12_orchestration/compiled/p12_sig_{event}.json`
+2. Human reference: `cex/P12_orchestration/examples/p12_sig_{event}.md`
 ## Size Limits
-- Preferred payload size: <= 1024 bytes
-- Absolute max: 4096 bytes
-- Optional fields should remain sparse and compact
+1. Preferred payload size: <= 1024 bytes
+2. Absolute max: 4096 bytes
+3. Optional fields should remain sparse and compact
 ## Payload Restrictions
-- Required fields must appear exactly as defined in SCHEMA.md
-- Omit optional null/unknown fields instead of writing placeholders
-- `progress_pct` allowed only when `status=progress`
-- `artifacts_count` should match `artifacts` length when both exist
-- `quality_score` must stay numeric; never quote it as text
+1. Required fields must appear exactly as defined in SCHEMA.md
+2. Omit optional null/unknown fields instead of writing placeholders
+3. `progress_pct` allowed only when `status=progress`
+4. `artifacts_count` should match `artifacts` length when both exist
+5. `quality_score` must stay numeric; never quote it as text
 ## Boundary Restrictions
-- No markdown, prose sections, or frontmatter inside the JSON payload
-- No task lists, scope fences, or commit instructions
-- No routing tables, keywords arrays for dispatch, or model selection logic
+1. No markdown, prose sections, or frontmatter inside the JSON payload
+2. No task lists, scope fences, or commit instructions
+3. No routing tables, keywords arrays for dispatch, or model selection logic
+
+## Metadata
+
+```yaml
+id: bld_config_signal
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-signal.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | signal construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for embedding_config
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.2
+title: "Instruction Embedding Config"
+version: "1.0.0"
+author: n03_builder
+tags: [embedding_config, builder, examples]
+tldr: "Golden and anti-examples for embedding config construction, demonstrating ideal structure and common pitfalls."
+domain: "embedding config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce an embedding_config
@@ -33,3 +43,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 3. SOFT gates: score each gate from QUALITY_GATES.md against the artifact
 4. Cross-check: is this a model configuration? If it describes the index structure it belongs in `knowledge_index`. If it describes a data source being indexed it belongs in `rag_source`. If it produces content it belongs in `knowledge_card`. This artifact configures how embeddings are generated, nothing more.
 5. If score < 8.0: revise in the same pass before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify embedding
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | embedding config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

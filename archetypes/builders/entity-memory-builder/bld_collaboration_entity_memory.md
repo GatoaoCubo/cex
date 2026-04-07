@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How entity-memory-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Entity Memory"
+version: "1.0.0"
+author: n03_builder
+tags: [entity_memory, builder, examples]
+tldr: "Golden and anti-examples for entity memory construction, demonstrating ideal structure and common pitfalls."
+domain: "entity memory construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: entity-memory-builder

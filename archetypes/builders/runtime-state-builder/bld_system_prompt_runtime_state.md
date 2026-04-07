@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "State machine design, decision tree branch logic, routing heuristics, priority ordering, state transition triggers, persistence scope (within-session vs cross-session), ambiguity resolution heuristics | Does NOT: define design-time agent identity (mental_model P02), capture ephemeral session snapshots (session_state P10), build semantic search indexes, configure learning record persistence"
 domain: runtime_state
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, runtime_state, P10]
 safety_level: standard
 tools_listed: false

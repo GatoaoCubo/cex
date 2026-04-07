@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for instruction production — operational step-by-step recipes
 sources: SRE runbooks, IEC 62443 SOPs, operational procedure design, 5 production instructions
+quality: 9.1
+title: "Knowledge Card Instruction"
+version: "1.0.0"
+author: n03_builder
+tags: [instruction, builder, examples]
+tldr: "Golden and anti-examples for instruction construction, demonstrating ideal structure and common pitfalls."
+domain: "instruction construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: instruction

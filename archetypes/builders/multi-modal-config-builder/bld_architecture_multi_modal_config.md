@@ -4,6 +4,16 @@ id: bld_architecture_multi_modal_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of multi_modal_config — inventory, dependencies, architectural position
+quality: 9.0
+title: "Architecture Multi Modal Config"
+version: "1.0.0"
+author: n03_builder
+tags: [multi_modal_config, builder, examples]
+tldr: "Golden and anti-examples for multi modal config construction, demonstrating ideal structure and common pitfalls."
+domain: "multi modal config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

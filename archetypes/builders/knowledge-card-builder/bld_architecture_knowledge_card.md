@@ -4,6 +4,16 @@ id: bld_architecture_knowledge_card
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of knowledge_card — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Knowledge Card"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_card, builder, examples]
+tldr: "Golden and anti-examples for knowledge card construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

@@ -4,6 +4,16 @@ id: bld_architecture_pattern
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of pattern — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Pattern"
+version: "1.0.0"
+author: n03_builder
+tags: [pattern, builder, examples]
+tldr: "Golden and anti-examples for pattern construction, demonstrating ideal structure and common pitfalls."
+domain: "pattern construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: pattern in the CEX

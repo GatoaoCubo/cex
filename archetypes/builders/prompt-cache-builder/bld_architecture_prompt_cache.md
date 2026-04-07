@@ -4,6 +4,16 @@ id: bld_architecture_prompt_cache
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of prompt_cache — inventory, dependencies, architectural position
+quality: 9.0
+title: "Architecture Prompt Cache"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_cache, builder, examples]
+tldr: "Golden and anti-examples for prompt cache construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt cache construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

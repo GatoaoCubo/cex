@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for red_team_eval
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Red Team Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [red_team_eval, builder, examples]
+tldr: "Golden and anti-examples for red team eval construction, demonstrating ideal structure and common pitfalls."
+domain: "red team eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: red_team_eval

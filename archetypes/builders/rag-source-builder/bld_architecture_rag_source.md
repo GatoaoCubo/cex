@@ -4,6 +4,16 @@ id: bld_architecture_rag_source
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of rag_source — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Rag Source"
+version: "1.0.0"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: rag_source in the CEX

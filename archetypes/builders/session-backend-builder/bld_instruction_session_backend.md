@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for session_backend
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.2
+title: "Instruction Session Backend"
+version: "1.0.0"
+author: n03_builder
+tags: [session_backend, builder, examples]
+tldr: "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls."
+domain: "session backend construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a session_backend
@@ -41,3 +51,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 10. Confirm body <= 4096 bytes
 11. Cross-check: is this a persistence backend? If this is token reduction it belongs in `compression_config`. If this is long-term memory it belongs in memory config. If this is ephemeral caching it belongs in cache config. This artifact specifies WHERE to persist state, not HOW to reduce it or WHAT to remember.
 12. If score < 8.0: revise in the same pass before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify session
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | session backend construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for spawn_config
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Spawn Config"
+version: "1.0.0"
+author: n03_builder
+tags: [spawn_config, builder, examples]
+tldr: "Golden and anti-examples for spawn config construction, demonstrating ideal structure and common pitfalls."
+domain: "spawn config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: spawn_config

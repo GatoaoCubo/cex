@@ -4,6 +4,16 @@ id: bld_tools_signal
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to signal production
+quality: 9.0
+title: "Tools Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [signal, builder, examples]
+tldr: "Golden and anti-examples for signal construction, demonstrating ideal structure and common pitfalls."
+domain: "signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: signal-builder
@@ -30,9 +40,21 @@ purpose: Tools and runtime surfaces relevant to signal production
 
 ## Interim Validation
 Until a generic validator exists, validate manually:
-- filename matches `p12_sig_{event}.json`
-- JSON parses
-- core fields present
-- status in enum
-- timestamp is ISO 8601
-- payload fits `signal`, not `handoff` or `dispatch_rule`
+1. filename matches `p12_sig_{event}.json`
+2. JSON parses
+3. core fields present
+4. status in enum
+5. timestamp is ISO 8601
+6. payload fits `signal`, not `handoff` or `dispatch_rule`
+
+## Metadata
+
+```yaml
+id: bld_tools_signal
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-signal.md
+```

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for checkpoint production — workflow state snapshot specification
 sources: LangGraph docs, Temporal event sourcing patterns, Prefect persistence model, CEX P12 spec
+quality: 9.1
+title: "Knowledge Card Checkpoint"
+version: "1.0.0"
+author: n03_builder
+tags: [checkpoint, builder, examples]
+tldr: "Golden and anti-examples for checkpoint construction, demonstrating ideal structure and common pitfalls."
+domain: "checkpoint construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: checkpoint

@@ -4,6 +4,16 @@ id: bld_tools_guardrail
 pillar: P04
 llm_function: CALL
 purpose: Tools available for guardrail production
+quality: 9.0
+title: "Tools Guardrail"
+version: "1.0.0"
+author: n03_builder
+tags: [guardrail, builder, examples]
+tldr: "Golden and anti-examples for guardrail construction, demonstrating ideal structure and common pitfalls."
+domain: "guardrail construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: guardrail-builder
@@ -31,8 +41,20 @@ purpose: Tools available for guardrail production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p11_gr_ prefix
-- [ ] severity in [critical, high, medium, low]
-- [ ] enforcement in [block, warn, log]
-- [ ] Rules are concrete and enforceable
+1. [ ] YAML parses
+2. [ ] id matches p11_gr_ prefix
+3. [ ] severity in [critical, high, medium, low]
+4. [ ] enforcement in [block, warn, log]
+5. [ ] Rules are concrete and enforceable
+
+## Metadata
+
+```yaml
+id: bld_tools_guardrail
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-guardrail.md
+```

@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for vector_store — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
+quality: 9.1
+title: "Schema Vector Store"
+version: "1.0.0"
+author: n03_builder
+tags: [vector_store, builder, examples]
+tldr: "Golden and anti-examples for vector store construction, demonstrating ideal structure and common pitfalls."
+domain: "vector store construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: vector_store

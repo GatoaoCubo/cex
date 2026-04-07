@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for social publisher pipeline design
 sources: Ayrshare API docs, Meta Graph API, Postiz docs, social media best forctices, GATO3 production system (9352 lines)
+quality: 9.1
+title: "Knowledge Card Social Publisher"
+version: "1.0.0"
+author: n03_builder
+tags: [social_publisher, builder, examples]
+tldr: "Golden and anti-examples for social publisher construction, demonstrating ideal structure and common pitfalls."
+domain: "social publisher construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: social_publisher

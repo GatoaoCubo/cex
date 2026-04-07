@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "judge_model selection, criteria dimensions, scoring scales, few-shot calibration, framework integration (Braintrust, DeepEval, RAGAS, Promptfoo, OpenAI Evals) | NOT scoring_rubric (criteria without model), quality_gate (P11, pipeline blocker), benchmark (comparative performance), metric (formula-based)"
 domain: "llm_judge"
-quality: 8.8
+quality: 9.1
 tags: ["system_prompt", "llm_judge", "evals", "scoring", "judge"]
 safety_level: standard
 tools_listed: false

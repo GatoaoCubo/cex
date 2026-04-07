@@ -3,6 +3,16 @@ kind: quality_gate
 id: bld_quality_gate_memory_type
 pillar: P11
 llm_function: GOVERN
+quality: 9.0
+title: "Quality Gate Memory Type"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_type, builder, examples]
+tldr: "Golden and anti-examples for memory type construction, demonstrating ideal structure and common pitfalls."
+domain: "memory type construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Quality Gate: memory_type
@@ -26,3 +36,21 @@ llm_function: GOVERN
 | S03 | Decay Policy section present | -1.0 |
 | S04 | Storage Rules section present | -0.5 |
 | S05 | tldr <= 160 chars | -0.5 |
+
+## Gate Execution Steps
+
+1. Parse frontmatter and validate required fields
+2. Run all hard gates as binary pass/fail checks
+3. Score soft dimensions with weighted 0-10 scale
+4. Compute weighted average across all dimensions
+5. Apply threshold: 7.0 publish, 8.0 pool, 9.5 golden
+
+## Scoring Command
+
+```bash
+python _tools/cex_score.py --apply --verbose target.md
+```
+
+```bash
+python _tools/cex_score.py --apply N0*/*.md
+```

@@ -4,6 +4,16 @@ id: bld_architecture_context_window_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of context_window_config — inventory, dependencies, architectural position
+quality: 9.0
+title: "Architecture Context Window Config"
+version: "1.0.0"
+author: n03_builder
+tags: [context_window_config, builder, examples]
+tldr: "Golden and anti-examples for context window config construction, demonstrating ideal structure and common pitfalls."
+domain: "context window config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

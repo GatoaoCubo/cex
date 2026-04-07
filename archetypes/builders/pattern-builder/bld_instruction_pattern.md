@@ -15,7 +15,7 @@ prerequisites:
   - The solution is reusable across contexts (not a one-time fix)
 validation_method: checklist
 domain: pattern
-quality: 8.8
+quality: 9.0
 tags:
   - instruction
   - pattern

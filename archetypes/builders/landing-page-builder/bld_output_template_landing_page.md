@@ -4,6 +4,15 @@ kind: output_template
 pillar: P05
 builder: landing-page-builder
 version: 1.0.0
+quality: 9.0
+title: "Output Template Landing Page"
+author: n03_builder
+tags: [landing_page, builder, examples]
+tldr: "Golden and anti-examples for landing page construction, demonstrating ideal structure and common pitfalls."
+domain: "landing page construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Output Template: Landing Page
 
@@ -55,3 +64,17 @@ seo:
 4. Deploy to: Vercel (`vercel deploy`) / Netlify (`netlify deploy`) / GitHub Pages
 5. Test on mobile (375px) and desktop (1440px)
 ```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | landing page construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

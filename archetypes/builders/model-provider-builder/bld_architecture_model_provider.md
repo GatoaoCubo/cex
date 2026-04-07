@@ -4,6 +4,16 @@ id: bld_architecture_model_provider
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of model_provider — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Model Provider"
+version: "1.0.0"
+author: n03_builder
+tags: [model_provider, builder, examples]
+tldr: "Golden and anti-examples for model provider construction, demonstrating ideal structure and common pitfalls."
+domain: "model provider construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: model_provider in the CEX

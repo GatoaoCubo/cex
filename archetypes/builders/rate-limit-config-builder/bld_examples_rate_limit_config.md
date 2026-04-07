@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of rate_limit_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Rate Limit Config"
+version: "1.0.0"
+author: n03_builder
+tags: [rate_limit_config, builder, examples]
+tldr: "Golden and anti-examples for rate limit config construction, demonstrating ideal structure and common pitfalls."
+domain: "rate limit config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: rate-limit-config-builder

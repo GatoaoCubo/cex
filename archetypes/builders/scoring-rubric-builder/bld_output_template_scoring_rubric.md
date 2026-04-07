@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for scoring_rubric production
 pattern: derives from SCHEMA.md — no extra fields
+quality: 9.0
+title: "Output Template Scoring Rubric"
+version: "1.0.0"
+author: n03_builder
+tags: [scoring_rubric, builder, examples]
+tldr: "Golden and anti-examples for scoring rubric construction, demonstrating ideal structure and common pitfalls."
+domain: "scoring rubric construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: scoring_rubric

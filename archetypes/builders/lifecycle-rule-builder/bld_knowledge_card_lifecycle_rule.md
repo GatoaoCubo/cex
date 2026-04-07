@@ -5,6 +5,16 @@ pillar: P11
 llm_function: INJECT
 purpose: Domain knowledge for lifecycle_rule production — atomic searchable facts
 sources: lifecycle-rule-builder MANIFEST.md + SCHEMA.md v1.0.0
+quality: 9.1
+title: "Knowledge Card Lifecycle Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [lifecycle_rule, builder, examples]
+tldr: "Golden and anti-examples for lifecycle rule construction, demonstrating ideal structure and common pitfalls."
+domain: "lifecycle rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: lifecycle_rule

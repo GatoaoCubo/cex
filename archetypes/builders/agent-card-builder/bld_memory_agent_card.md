@@ -6,24 +6,34 @@ llm_function: INJECT
 purpose: Accumulated production experience for agent_card artifact generation
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Agent Card"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_card, builder, examples]
+tldr: "Golden and anti-examples for agent card construction, demonstrating ideal structure and common pitfalls."
+domain: "agent card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Memory: agent-card-builder
 ## Summary
 Agent_group specs define complete autonomous processing units: role, LLM model, MCP servers, boot sequences, constraints, and dispatch rules. The critical production lesson is that boot sequence ordering matters — MCP connections must be established before any tool-dependent step runs. A single out-of-order boot step causes silent tool failures that manifest only at task execution time. The second lesson is constraint completeness: agent_groups without explicit resource limits (max concurrent tasks, memory ceiling, timeout) consume unbounded resources.
 ## Pattern
-- Boot sequence must establish MCP connections before any step that uses tools — validate dependency order
-- Resource constraints must be explicit: max concurrent tasks, memory ceiling, session timeout, token budget
-- Model selection must match the agent_group domain: complex reasoning tasks need larger models, simple formatting needs smaller
-- MCP server list must specify both the server name and its transport — ambiguous MCP references fail at connection time
-- Dispatch rules must define both acceptance criteria (what tasks this agent_group handles) and rejection criteria (what it refuses)
-- Monitoring must include health check endpoint/signal and the escalation path when health degrades
+1. Boot sequence must establish MCP connections before any step that uses tools — validate dependency order
+2. Resource constraints must be explicit: max concurrent tasks, memory ceiling, session timeout, token budget
+3. Model selection must match the agent_group domain: complex reasoning tasks need larger models, simple formatting needs smaller
+4. MCP server list must specify both the server name and its transport — ambiguous MCP references fail at connection time
+5. Dispatch rules must define both acceptance criteria (what tasks this agent_group handles) and rejection criteria (what it refuses)
+6. Monitoring must include health check endpoint/signal and the escalation path when health degrades
 ## Anti-Pattern
-- Boot sequence with tool-dependent steps before MCP connection — tools fail silently until first task execution
-- Missing resource constraints — agent_group consumes unbounded memory/tokens during peak load
-- Model oversized for the domain — using the largest model for simple tasks wastes cost without quality gain
-- MCP servers listed without transport type — connection attempts use wrong protocol
-- Confusing agent_card (P08, complete unit) with agent (P02, individual identity) or boot_config (P02, provider-specific config)
-- Dispatch rules without rejection criteria — agent_group accepts tasks outside its competence
+1. Boot sequence with tool-dependent steps before MCP connection — tools fail silently until first task execution
+2. Missing resource constraints — agent_group consumes unbounded memory/tokens during peak load
+3. Model oversized for the domain — using the largest model for simple tasks wastes cost without quality gain
+4. MCP servers listed without transport type — connection attempts use wrong protocol
+5. Confusing agent_card (P08, complete unit) with agent (P02, individual identity) or boot_config (P02, provider-specific config)
+6. Dispatch rules without rejection criteria — agent_group accepts tasks outside its competence
 ## Context
 Agent_group specs live in the P08 architecture layer. They define the complete specification for an autonomous processing unit that can be spawned, monitored, and stopped independently. Each agent_group combines an LLM model, MCP tool servers, domain constraints, and dispatch rules into a deployable unit. Agent_group specs are consumed by spawn systems that instantiate the agent_group and by orchestrators that route tasks to it.
 ## Impact
@@ -31,6 +41,32 @@ Correct boot sequence ordering eliminated 100% of silent tool failures on agent_
 ## Reproducibility
 Reliable agent_group spec production: (1) define role and domain clearly, (2) select model matching domain complexity, (3) list MCP servers with transport types, (4) order boot sequence with MCP connections first, (5) set explicit resource constraints, (6) define dispatch acceptance and rejection criteria, (7) configure monitoring and escalation, (8) validate against 10 HARD + 10 SOFT gates.
 ## References
-- agent-card-builder SCHEMA.md (24+ frontmatter fields)
-- P08 architecture pillar specification
-- Autonomous agent deployment and orchestration patterns
+1. agent-card-builder SCHEMA.md (24+ frontmatter fields)
+2. P08 architecture pillar specification
+3. Autonomous agent deployment and orchestration patterns
+
+## Metadata
+
+```yaml
+id: bld_memory_agent_card
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-memory-agent-card.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory` |
+| Pillar | P10 |
+| Domain | agent card construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -5,6 +5,16 @@ pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for lens production — atomic searchable facts
 sources: lens-builder MANIFEST.md + SCHEMA.md v1.0.0
+quality: 9.1
+title: "Knowledge Card Lens"
+version: "1.0.0"
+author: n03_builder
+tags: [lens, builder, examples]
+tldr: "Golden and anti-examples for lens construction, demonstrating ideal structure and common pitfalls."
+domain: "lens construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: lens

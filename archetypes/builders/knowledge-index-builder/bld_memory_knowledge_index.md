@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [knowledge-index, hybrid-search, BM25, FAISS, semantic, retrieval, weights, recall, vectorstore]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Knowledge Index"
+density_score: 0.90
 ---
 ## Summary
 A hybrid search index combines keyword-based retrieval (BM25) and semantic retrieval (vector similarity) to handle both exact-match and paraphrase queries. The combination outperforms either method alone on mixed query sets, but only if the blend weights are calibrated to the actual query distribution.

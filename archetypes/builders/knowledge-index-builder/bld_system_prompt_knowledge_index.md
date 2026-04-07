@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "knowledge_index artifact construction (P10, search index configuration); NOT embedding model config (embedding_config), NOT data source definition (rag_source), NOT content creation (knowledge_card)"
 domain: "knowledge_index"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "knowledge_index", "semantic_search", "P10"]
 safety_level: standard
 tools_listed: false

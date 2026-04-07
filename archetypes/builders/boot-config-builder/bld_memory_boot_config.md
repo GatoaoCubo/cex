@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [boot-config, provider, identity-block, context-window, tokens, timeout, tools, MCP]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Boot Config"
+density_score: 0.90
 ---
 ## Summary
 Boot configuration defines how an AI system initializes: identity, constraints, available tools, and provider-specific parameters. The highest-risk design decision is whether to use shared configuration blocks across providers or per-provider blocks. Shared blocks appear to reduce duplication but create hidden compatibility mismatches.

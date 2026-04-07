@@ -4,6 +4,16 @@ id: bld_examples_bugloop
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of bugloop artifacts
+quality: 9.0
+title: "Examples Bugloop"
+version: "1.0.0"
+author: n03_builder
+tags: [bugloop, builder, examples]
+tldr: "Golden and anti-examples for bugloop construction, demonstrating ideal structure and common pitfalls."
+domain: "bugloop construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: bugloop-builder

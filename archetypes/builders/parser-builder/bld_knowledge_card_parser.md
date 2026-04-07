@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for parser production — atomic searchable facts
 sources: parser-builder MANIFEST.md + SCHEMA.md, regex standards, JSONPath RFC 9535
+quality: 9.1
+title: "Knowledge Card Parser"
+version: "1.0.0"
+author: n03_builder
+tags: [parser, builder, examples]
+tldr: "Golden and anti-examples for parser construction, demonstrating ideal structure and common pitfalls."
+domain: "parser construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: parser

@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "JSON mode, YAML frontmatter, markdown section design, CSV layout, injection_point selection (system_prompt vs user_message), format_type enumeration, example_output composition | Does NOT: write post-generation validation schemas (P06), build parsers or extractors (P05), build formatters that transform existing output (P05)"
 domain: response_format
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, response_format, P05]
 safety_level: standard
 tools_listed: false

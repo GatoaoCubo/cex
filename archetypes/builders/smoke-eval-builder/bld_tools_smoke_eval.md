@@ -4,6 +4,16 @@ id: bld_tools_smoke_eval
 pillar: P04
 llm_function: CALL
 purpose: Tools available for smoke_eval production
+quality: 9.0
+title: "Tools Smoke Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [smoke_eval, builder, examples]
+tldr: "Golden and anti-examples for smoke eval construction, demonstrating ideal structure and common pitfalls."
+domain: "smoke eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: smoke-eval-builder
@@ -30,8 +40,20 @@ purpose: Tools available for smoke_eval production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p07_se_ prefix
-- [ ] timeout <= 30 seconds
-- [ ] fast_fail == true
-- [ ] critical_path is non-empty
+1. [ ] YAML parses
+2. [ ] id matches p07_se_ prefix
+3. [ ] timeout <= 30 seconds
+4. [ ] fast_fail == true
+5. [ ] critical_path is non-empty
+
+## Metadata
+
+```yaml
+id: bld_tools_smoke_eval
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-smoke-eval.md
+```

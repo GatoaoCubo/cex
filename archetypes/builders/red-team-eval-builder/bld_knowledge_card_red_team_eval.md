@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for red_team_eval production — adversarial LLM safety evaluation
 sources: Promptfoo redteam plugin, Patronus AI, DeepEval, Garak, OWASP LLM Top 10
+quality: 9.1
+title: "Knowledge Card Red Team Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [red_team_eval, builder, examples]
+tldr: "Golden and anti-examples for red team eval construction, demonstrating ideal structure and common pitfalls."
+domain: "red team eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: red_team_eval

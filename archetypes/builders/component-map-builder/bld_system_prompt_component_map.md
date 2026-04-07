@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "system decomposition, component inventory, dependency mapping, interface boundaries, data flows, ownership, health status | NOT visual diagrams, single-component specs, reusable patterns, governance mandates, execution DAGs"
 domain: "component_map"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "component_map", "architecture", "inventory", "P08"]
 safety_level: standard
 tools_listed: false

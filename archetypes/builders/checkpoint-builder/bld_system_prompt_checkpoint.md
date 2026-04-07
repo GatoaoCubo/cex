@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Workflow checkpoints, state serialization schemas, TTL policies, checkpoint chains, resume protocols | NOT signals (simple events), session_state (P10, ephemeral, no workflow_ref), workflow definitions (the DAG itself), or daemons"
 domain: "checkpoint"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "checkpoint", "workflow", "resume", "state"]
 safety_level: standard
 tools_listed: false

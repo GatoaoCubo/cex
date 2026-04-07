@@ -4,6 +4,16 @@ id: bld_tools_knowledge_index
 pillar: P04
 llm_function: CALL
 purpose: Tools available for knowledge_index production
+quality: 9.1
+title: "Tools Knowledge Index"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_index, builder, examples]
+tldr: "Golden and anti-examples for knowledge index construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge index construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: knowledge-index-builder
@@ -31,8 +41,20 @@ purpose: Tools available for knowledge_index production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p10_bi_ prefix
-- [ ] algorithm in [bm25, faiss, hybrid]
-- [ ] corpus_type in [text, vector, structured]
-- [ ] rebuild_schedule valid enum
+1. [ ] YAML parses
+2. [ ] id matches p10_bi_ prefix
+3. [ ] algorithm in [bm25, faiss, hybrid]
+4. [ ] corpus_type in [text, vector, structured]
+5. [ ] rebuild_schedule valid enum
+
+## Metadata
+
+```yaml
+id: bld_tools_knowledge_index
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-knowledge-index.md
+```

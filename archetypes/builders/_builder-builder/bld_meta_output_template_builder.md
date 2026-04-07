@@ -4,6 +4,16 @@ file_position: 6/13
 pillar: P05
 llm_function: PRODUCE
 purpose: Meta-template for generating OUTPUT_TEMPLATE.md of any kind-builder
+quality: 9.1
+title: "Meta Output Template Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: {{type_name}}
@@ -84,13 +94,27 @@ tldr: "{{dense_summary_max_160ch}}"
 }
 ```
 Derivation Notes:
-- First N fields are required minimum from SCHEMA.md
-- Remaining fields are optional extensions
-- Omit absent optional fields instead of using placeholders
+1. First N fields are required minimum from SCHEMA.md
+2. Remaining fields are optional extensions
+3. Omit absent optional fields instead of using placeholders
 -->
 
 <!-- SECAO UNIVERSAL (todos os types md): -->
 ## References
-- {{reference_1}}
-- {{reference_2}}
+1. {{reference_1}}
+2. {{reference_2}}
 <!-- NOTE: Formato varia: source URL, artifact ref, pricing page, etc. -->
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar | P05 |
+| Domain | _builder construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

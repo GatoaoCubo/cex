@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: "hook — pre/post event interceptors for system lifecycle events"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, hook, event, lifecycle, trigger, intercept]
 tldr: "Gates ensuring hook artifacts define safe, scoped event interceptors with trigger configs, timeout, and error strategies."
 density_score: 0.91

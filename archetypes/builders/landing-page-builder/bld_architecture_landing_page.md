@@ -4,6 +4,15 @@ kind: architecture
 pillar: P08
 builder: landing-page-builder
 version: 1.0.0
+quality: 9.1
+title: "Architecture Landing Page"
+author: n03_builder
+tags: [landing_page, builder, examples]
+tldr: "Golden and anti-examples for landing page construction, demonstrating ideal structure and common pitfalls."
+domain: "landing page construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Architecture: Landing Page Builder
 
@@ -45,13 +54,27 @@ Next.js App Router (optional)
 ```
 
 ## Dependencies
-- brand_config.yaml (optional — design tokens fallback to defaults)
-- tagline-builder output (optional — hero headline)
-- No runtime dependencies for HTML output (zero-JS except interactions)
+1. brand_config.yaml (optional — design tokens fallback to defaults)
+2. tagline-builder output (optional — hero headline)
+3. No runtime dependencies for HTML output (zero-JS except interactions)
 
 ## Integration Points
-- tagline-builder → hero headline and sub-headline
-- social-publisher-builder → Open Graph meta for social sharing
-- content-monetization-builder → pricing section tiers
-- N02 Marketing → campaign-specific landing pages
-- N05 Operations → deploy pipeline (Vercel/Netlify/S3)
+1. tagline-builder → hero headline and sub-headline
+2. social-publisher-builder → Open Graph meta for social sharing
+3. content-monetization-builder → pricing section tiers
+4. N02 Marketing → campaign-specific landing pages
+5. N05 Operations → deploy pipeline (Vercel/Netlify/S3)
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | landing page construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

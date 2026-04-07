@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for agent_card production — atomic searchable facts
 sources: agent-card-builder MANIFEST.md + SCHEMA.md, microservices architecture, multi-agent systems
+quality: 9.1
+title: "Knowledge Card Agent Card"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_card, builder, examples]
+tldr: "Golden and anti-examples for agent card construction, demonstrating ideal structure and common pitfalls."
+domain: "agent card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: agent_card

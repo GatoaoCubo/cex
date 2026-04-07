@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for reward_signal production — continuous quality scoring for agent improvement
 sources: RLHF literature, DPO paper (Rafailov 2023), Constitutional AI (Anthropic 2022), LLM-as-judge (Zheng 2023)
+quality: 9.1
+title: "Knowledge Card Reward Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [reward_signal, builder, examples]
+tldr: "Golden and anti-examples for reward signal construction, demonstrating ideal structure and common pitfalls."
+domain: "reward signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: reward_signal

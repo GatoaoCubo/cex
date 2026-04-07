@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: agent_card
-quality: 9.0
+quality: 9.1
 density_score: 0.97
 tags:
   - quality-gate

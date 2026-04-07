@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "Filesystem path specs, platform normalization (Win/Linux/Mac), directory hierarchies, path resolution (relative/absolute/~ expansion), XDG Base Dir spec, fallback paths | Does NOT: define env vars, manage permissions, toggle features, specify runtime rules"
 domain: path_config
-quality: 8.7
+quality: 9.0
 tags: [system_prompt, path_config, P03]
 safety_level: standard
 tools_listed: false

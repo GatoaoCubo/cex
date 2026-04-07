@@ -14,6 +14,10 @@ keywords: [multi_modal, image, audio, video, vision, modality, routing, resoluti
 triggers: ["create multi-modal config", "configure image/audio input", "build modality routing rules"]
 geo_description: >
   L1: Specialist in building multi_modal_configs — configuration de inputs multimodais for LLMs. L2: Define formats, resolutions, routing, and preprocessing per modalidade. L3: When user needs to create, build, or scaffold multi_modal_config.
+quality: 9.1
+title: "Manifest Multi Modal Config"
+tldr: "Golden and anti-examples for multi modal config construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # multi-modal-config-builder
 ## Identity
@@ -23,11 +27,11 @@ audio transcription fallbacks, video keyframe extraction, modality routing betwe
 token cost estimation per modalidade, and the distinction between multi_modal_config (P04),
 vision_tool (P04), audio_tool (P04), and model_card (P02).
 ## Capabilities
-- Define supported modalities e format constraints per modalidade
-- Configure resolution limits e preprocessing pipelines
-- Creater routing maps (modality → model) for multi-model setups
-- Estimar token costs per modalidade for budget planning
-- Define fallback chains for modalities not suportadas nativamente
+1. Define supported modalities e format constraints per modalidade
+2. Configure resolution limits e preprocessing pipelines
+3. Creater routing maps (modality → model) for multi-model setups
+4. Estimar token costs per modalidade for budget planning
+5. Define fallback chains for modalities not suportadas nativamente
 ## Routing
 keywords: [multi_modal, image, audio, video, vision, modality, routing]
 triggers: "create multi-modal config", "configure image/audio input", "build modality routing rules"
@@ -35,3 +39,29 @@ triggers: "create multi-modal config", "configure image/audio input", "build mod
 In a crew, I handle MODALITY CONFIGURATION.
 I answer: "how should non-text inputs be processed, routed, and constrained?"
 I do NOT handle: image analysis logic (vision_tool), audio processing (audio_tool), model capabilities (model_card).
+
+## Metadata
+
+```yaml
+id: multi-modal-config-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply multi-modal-config-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P04 |
+| Domain | multi_modal_config |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

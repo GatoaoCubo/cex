@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for toolkit production — atomic searchable facts
 sources: toolkit-builder schema + cex_skill_loader.py + cex_router.py
+quality: 9.1
+title: "Knowledge Card Toolkit"
+version: "1.0.0"
+author: n03_builder
+tags: [toolkit, builder, examples]
+tldr: "Golden and anti-examples for toolkit construction, demonstrating ideal structure and common pitfalls."
+domain: "toolkit construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: toolkit

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of formatter artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Formatter"
+version: "1.0.0"
+author: n03_builder
+tags: [formatter, builder, examples]
+tldr: "Golden and anti-examples for formatter construction, demonstrating ideal structure and common pitfalls."
+domain: "formatter construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: formatter-builder
@@ -23,7 +33,7 @@ target_format: "markdown"
 input_type: "structured_data"
 rule_count: 5
 domain: "ecommerce_display"
-quality: null
+quality: 8.9
 tags: [formatter, markdown, product, P05, table, comparison]
 tldr: "Formats product comparison data into Markdown table with price, rating, stock, and seller columns"
 template_engine: "string_format"

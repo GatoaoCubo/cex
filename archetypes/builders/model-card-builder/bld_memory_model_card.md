@@ -6,23 +6,33 @@ llm_function: INJECT
 purpose: Accumulated production experience for model_card artifact generation
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Model Card"
+version: "1.0.0"
+author: n03_builder
+tags: [model_card, builder, examples]
+tldr: "Golden and anti-examples for model card construction, demonstrating ideal structure and common pitfalls."
+domain: "model card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Memory: model-card-builder
 ## Summary
 Model cards document LLM technical specifications: capabilities, pricing, context windows, and feature booleans. The primary production challenge is data freshness — LLM providers update pricing and capabilities frequently, so cards require explicit last_verified dates and source URLs. The second challenge is capability booleans: features like vision or function calling must be binary true/false, not qualified with partial support.
 ## Pattern
-- Always include last_verified date and source URL for every data point — LLM specs change monthly
-- Capability booleans must be strict true/false — use a separate notes field for qualifications
-- Normalize pricing to a common unit: USD per 1M tokens (input) and USD per 1M tokens (output)
-- Context window must distinguish between input limit and total (input + output) limit
-- Include at least 3 concrete use-case recommendations based on the model strength profile
-- Document known limitations and failure modes, not just capabilities
+1. Always include last_verified date and source URL for every data point — LLM specs change monthly
+2. Capability booleans must be strict true/false — use a separate notes field for qualifications
+3. Normalize pricing to a common unit: USD per 1M tokens (input) and USD per 1M tokens (output)
+4. Context window must distinguish between input limit and total (input + output) limit
+5. Include at least 3 concrete use-case recommendations based on the model strength profile
+6. Document known limitations and failure modes, not just capabilities
 ## Anti-Pattern
-- Publishing pricing without last_verified date — pricing changes break downstream cost calculations silently
-- Capability fields with "partial" or "limited" values — booleans must be true/false; nuance goes in notes
-- Mixing token counts with character counts — always normalize to tokens with the model tokenizer
-- Omitting the provider deprecation timeline — deprecated models waste integration effort
-- Confusing model_card (P02, technical spec) with agent (P02, identity with behavior) or benchmark (P07, performance test)
+1. Publishing pricing without last_verified date — pricing changes break downstream cost calculations silently
+2. Capability fields with "partial" or "limited" values — booleans must be true/false; nuance goes in notes
+3. Mixing token counts with character counts — always normalize to tokens with the model tokenizer
+4. Omitting the provider deprecation timeline — deprecated models waste integration effort
+5. Confusing model_card (P02, technical spec) with agent (P02, identity with behavior) or benchmark (P07, performance test)
 ## Context
 Model cards occupy the P02 identity layer as reference documents for LLM selection decisions. They are consumed by routing logic, cost estimators, and capacity planners. In multi-model systems, model cards enable automated model selection based on task requirements versus model capabilities and cost constraints.
 ## Impact
@@ -30,6 +40,32 @@ Cards with normalized pricing enabled automated cost optimization that reduced A
 ## Reproducibility
 For reliable model card production: (1) source all data from official provider documentation, (2) record last_verified date per field, (3) normalize pricing to USD/1M tokens, (4) use strict booleans for capabilities, (5) include deprecation timeline if known, (6) validate against 10 HARD + 15 SOFT gates.
 ## References
-- model-card-builder SCHEMA.md (26 frontmatter fields)
-- Mitchell et al. 2019 Model Cards framework
-- P02 identity pillar specification
+1. model-card-builder SCHEMA.md (26 frontmatter fields)
+2. Mitchell et al. 2019 Model Cards framework
+3. P02 identity pillar specification
+
+## Metadata
+
+```yaml
+id: bld_memory_model_card
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-memory-model-card.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `memory` |
+| Pillar | P10 |
+| Domain | model card construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

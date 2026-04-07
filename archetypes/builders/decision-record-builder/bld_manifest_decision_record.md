@@ -14,6 +14,10 @@ keywords: [ADR, decision, architecture, record, tradeoff, proposed, accepted, su
 triggers: ["create ADR", "document architecture decision", "record design choice", "write decision record"]
 geo_description: >
   L1: Specialist in building decision_record artifacts — Architecture Decision Reco. L2: Define ADR with title, status, context, decision, consequences, and options. L3: When user needs to create, build, or scaffold decision record.
+quality: 9.1
+title: "Manifest Decision Record"
+tldr: "Golden and anti-examples for decision record construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # decision-record-builder
 ## Identity
@@ -24,12 +28,12 @@ considered alternatives. Masters the format Nygard 2011, AWS Decision Log, Light
 trackable, and the clear boundary between ADR (decision record), law (inviolable rule),
 pattern (reusable prescription), and diagram (visual representation).
 ## Capabilities
-- Define ADR with title, status, context, decision, consequences, and options
-- Track ADR status: proposed, accepted, deprecated, superseded
-- Document tradeoffs and explicitly considered alternatives
-- Link related ADRs (supersedes, related_to)
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish decision_record from law, pattern, diagram, knowledge_card
+1. Define ADR with title, status, context, decision, consequences, and options
+2. Track ADR status: proposed, accepted, deprecated, superseded
+3. Document tradeoffs and explicitly considered alternatives
+4. Link related ADRs (supersedes, related_to)
+5. Validate artifact against quality gates (HARD + SOFT)
+6. Distinguish decision_record from law, pattern, diagram, knowledge_card
 ## Routing
 keywords: [ADR, decision, architecture, record, tradeoff, proposed, accepted, superseded, deprecated, rationale]
 triggers: "create ADR", "document architecture decision", "record design choice", "write decision record", "capture rationale"
@@ -38,3 +42,29 @@ In a crew, I handle ARCHITECTURE DECISION DOCUMENTATION.
 I answer: "what was decided, why, what alternatives were considered, and what are the consequences?"
 I do NOT handle: laws (inviolable system rules — P08 invariant-builder), patterns (reusable prescriptive solutions — pattern-builder),
 diagrams (visual representations — diagram-builder), knowledge cards (reference knowledge — knowledge-card-builder).
+
+## Metadata
+
+```yaml
+id: decision-record-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply decision-record-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P08 |
+| Domain | decision_record |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for mental_model production — atomic searchable facts
 sources: mental-model-builder MANIFEST.md + SCHEMA.md, cognitive science, BDI architecture
+quality: 9.1
+title: "Knowledge Card Mental Model"
+version: "1.0.0"
+author: n03_builder
+tags: [mental_model, builder, examples]
+tldr: "Golden and anti-examples for mental model construction, demonstrating ideal structure and common pitfalls."
+domain: "mental model construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: mental_model

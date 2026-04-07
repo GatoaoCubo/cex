@@ -5,6 +5,14 @@ llm_function: CONSTRAIN
 kind: schema
 domain: naming_rule
 version: 1.0.0
+quality: 9.1
+title: "Schema Naming Rule"
+author: n03_builder
+tags: [naming_rule, builder, examples]
+tldr: "Golden and anti-examples for naming rule construction, demonstrating ideal structure and common pitfalls."
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema — Naming Rule (SOURCE OF TRUTH)

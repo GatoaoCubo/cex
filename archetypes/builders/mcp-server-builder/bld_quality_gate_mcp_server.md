@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: mcp_server
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, mcp-server, protocol, P04, integration]
 tldr: "Quality gate for mcp_server artifacts: enforces tool list, transport type, auth strategy, and JSON-Schema params."
 density_score: 0.85

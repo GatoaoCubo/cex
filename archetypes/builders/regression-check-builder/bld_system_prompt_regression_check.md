@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Baseline comparison configs, experiment references, metric thresholds, deviation detection, Braintrust/Promptfoo/LangSmith/DeepEval integrations | NOT benchmarks (absolute performance), unit_evals (isolated correctness), golden_tests (single reference case), smoke_evals (rapid sanity)"
 domain: "regression_check"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "regression_check", "baseline", "evals", "comparison"]
 safety_level: standard
 tools_listed: false

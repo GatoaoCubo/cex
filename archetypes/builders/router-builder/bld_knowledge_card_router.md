@@ -5,6 +5,16 @@ pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for router production — atomic searchable facts
 sources: router-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Router"
+version: "1.0.0"
+author: n03_builder
+tags: [router, builder, examples]
+tldr: "Golden and anti-examples for router construction, demonstrating ideal structure and common pitfalls."
+domain: "router construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: router

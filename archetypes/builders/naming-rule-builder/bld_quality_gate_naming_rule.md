@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: naming_rule
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, naming-rule, P11, P05, governance, conventions]
 tldr: "Gates for naming_rule artifacts — pattern, scope, case style, and collision resolution for consistent identifiers."
 density_score: 0.85

@@ -14,6 +14,10 @@ keywords: [mcp, server, tools, resources, transport, stdio, sse, http]
 triggers: ["create MCP server", "define tools for agent", "build MCP provider", "expose tools via MCP"]
 geo_description: >
   L1: Specialist in building mcp_server artifacts — servidores MCP (Model Context P. L2: Define servidor MCP with transport correct (stdio/SSE/HTTP). L3: When user needs to create, build, or scaffold mcp server.
+quality: 9.1
+title: "Manifest Mcp Server"
+tldr: "Golden and anti-examples for mcp server construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # mcp-server-builder
 ## Identity
@@ -23,12 +27,12 @@ Masters transport selection, tool schema design, resource URI patterns, auth str
 and the boundary between mcp_server (provider) e client/connector (consumeres).
 Produces mcp_server artifacts with frontmatter complete, defined tools_provided and resources_provided.
 ## Capabilities
-- Define servidor MCP with transport correct (stdio/SSE/HTTP)
-- Specify tools_provided with JSON-Schema parameters
-- Define resources_provided with URI templates
-- Select auth strategy per transport type
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish mcp_server de connector, client, plugin, daemon
+1. Define servidor MCP with transport correct (stdio/SSE/HTTP)
+2. Specify tools_provided with JSON-Schema parameters
+3. Define resources_provided with URI templates
+4. Select auth strategy per transport type
+5. Validate artifact against quality gates (HARD + SOFT)
+6. Distinguish mcp_server de connector, client, plugin, daemon
 ## Routing
 keywords: [mcp, server, tools, resources, transport, stdio, sse, http, protocol, expose]
 triggers: "create MCP server", "define tools for agent", "build MCP provider", "expose tools via MCP"
@@ -37,3 +41,29 @@ In a crew, I handle MCP INFRASTRUCTURE DEFINITION.
 I answer: "what tools and resources does this server expose, and how does it transport them?"
 I do NOT handle: skill (reusable capability with phases), connector (bidirectional integration),
 client (API consumer), daemon (background process without MCP protocol).
+
+## Metadata
+
+```yaml
+id: mcp-server-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply mcp-server-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P04 |
+| Domain | mcp_server |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

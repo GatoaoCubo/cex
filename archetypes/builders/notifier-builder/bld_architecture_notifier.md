@@ -9,7 +9,7 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [architecture, notifier, P04, boundary, components]
-quality: 9.0
+quality: 9.1
 tldr: "Notifier = push delivery. Components: channel_router, template_engine, priority_queue, rate_limiter, delivery_engine, retry_handler."
 density_score: 1.0
 ---

@@ -4,6 +4,16 @@ id: bld_tools_e2e_eval
 pillar: P04
 llm_function: CALL
 purpose: Tools available for e2e_eval production
+quality: 9.0
+title: "Tools E2E Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [e2e_eval, builder, examples]
+tldr: "Golden and anti-examples for e2e eval construction, demonstrating ideal structure and common pitfalls."
+domain: "e2e eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: e2e-eval-builder
@@ -31,8 +41,20 @@ purpose: Tools available for e2e_eval production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p07_e2e_ prefix
-- [ ] stages is non-empty list with connected flow
-- [ ] environment specified
-- [ ] cleanup procedure defined
+1. [ ] YAML parses
+2. [ ] id matches p07_e2e_ prefix
+3. [ ] stages is non-empty list with connected flow
+4. [ ] environment specified
+5. [ ] cleanup procedure defined
+
+## Metadata
+
+```yaml
+id: bld_tools_e2e_eval
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-e2e-eval.md
+```

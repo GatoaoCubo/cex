@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of router artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Router"
+version: "1.0.0"
+author: n03_builder
+tags: [router, builder, examples]
+tldr: "Golden and anti-examples for router construction, demonstrating ideal structure and common pitfalls."
+domain: "router construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: router-builder
@@ -23,7 +33,7 @@ routes_count: 7
 fallback_route: "builder_agent"
 confidence_threshold: 0.7
 domain: "director_dispatch"
-quality: null
+quality: 8.9
 tags: [router, director, dispatch, P02, multi-agent]
 tldr: "Routes incoming tasks to 7 CEX directors by domain pattern matching with 0.7 confidence gate"
 timeout_ms: 3000

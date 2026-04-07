@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a model_card
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.1
+title: "Output Template Model Card"
+version: "1.0.0"
+author: n03_builder
+tags: [model_card, builder, examples]
+tldr: "Golden and anti-examples for model card construction, demonstrating ideal structure and common pitfalls."
+domain: "model card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: model_card

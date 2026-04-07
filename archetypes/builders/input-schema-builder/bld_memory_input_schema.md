@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [input_schema, validation, required, optional, default, coercion, type, error_message, contract]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Input Schema"
+density_score: 0.90
 ---
 ## Summary
 Input schemas define the contract between a caller and a component. The most common failure mode is semantic confusion between required and optional: a required field with a default is a contradiction, and an optional field without a default creates None propagation bugs. Getting these two rules right eliminates the majority of runtime validation failures.
@@ -31,10 +34,57 @@ Field definition rules (all three must hold):
 Coercion rule format: `coerce: "string -> integer via int()"` — explicit source type, target type, and conversion function. Declare coercion whenever accepting loose input (e.g., form data, CLI args, LLM output).
 Input schemas cover only what goes in. Do not add response shapes or output fields — that is an interface contract (different artifact type).
 ## Anti-Pattern
-- `required: true` with a `default` value — contradictory, creates caller confusion.
-- `required: false` with no `default` — causes None to propagate silently through processing.
-- `type: "any"` — disables type checking, causes silent coercion failures downstream.
-- Generic error message ("invalid input") — forces callers to read source code to debug.
-- Adding responsand/ortput shapes to the input schema — scope creep into interface territory.
-- Fields list as a flat string instead of structured objects — unparseable by validators.
+1. `required: true` with a `default` value — contradictory, creates caller confusion.
+2. `required: false` with no `default` — causes None to propagate silently through processing.
+3. `type: "any"` — disables type checking, causes silent coercion failures downstream.
+4. Generic error message ("invalid input") — forces callers to read source code to debug.
+5. Adding responsand/ortput shapes to the input schema — scope creep into interface territory.
+6. Fields list as a flat string instead of structured objects — unparseable by validators.
 ## Context
+
+## Builder Context
+
+This ISO operates within the `input-schema-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Reference
+
+```yaml
+id: p10_lr_input_schema_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_input_schema_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | input_schema |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

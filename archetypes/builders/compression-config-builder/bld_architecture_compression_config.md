@@ -4,6 +4,16 @@ id: bld_architecture_compression_config
 pillar: P08
 llm_function: GOVERN
 purpose: Component map of compression_config — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Compression Config"
+version: "1.0.0"
+author: n03_builder
+tags: [compression_config, builder, examples]
+tldr: "Golden and anti-examples for compression config construction, demonstrating ideal structure and common pitfalls."
+domain: "compression config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

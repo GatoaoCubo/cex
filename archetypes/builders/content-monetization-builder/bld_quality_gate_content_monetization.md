@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: content_monetization
-quality: 9.0
+quality: 9.1
 tags: [quality-gate, content-monetization, P11, pricing, billing, credits, governance]
 tldr: "Gates for monetization artifacts — margin enforcement, webhook idempotency, credit tracking, mock-first development, checkout security."
 density_score: 1.0

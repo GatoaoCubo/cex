@@ -5,6 +5,16 @@ pillar: P12
 llm_function: INJECT
 purpose: Domain knowledge for spawn_config production — atomic searchable facts
 sources: spawn-config-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Spawn Config"
+version: "1.0.0"
+author: n03_builder
+tags: [spawn_config, builder, examples]
+tldr: "Golden and anti-examples for spawn config construction, demonstrating ideal structure and common pitfalls."
+domain: "spawn config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: spawn_config

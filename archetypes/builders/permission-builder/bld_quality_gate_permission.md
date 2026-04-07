@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: "builder_agent"
 domain: permission
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, permission, P11, P09, governance, access-control, security]
 tldr: "Gates for permission artifacts — roles, operations, deny-by-default, audit trail, and escalation path defined."
 density_score: 0.85

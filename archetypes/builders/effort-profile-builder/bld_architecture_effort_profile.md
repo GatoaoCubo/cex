@@ -4,6 +4,16 @@ id: bld_architecture_effort_profile
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of effort_profile — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Effort Profile"
+version: "1.0.0"
+author: n03_builder
+tags: [effort_profile, builder, examples]
+tldr: "Golden and anti-examples for effort profile construction, demonstrating ideal structure and common pitfalls."
+domain: "effort profile construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -38,3 +48,23 @@ purpose: Component map of effort_profile — inventory, dependencies, and archit
 | spec | model, thinking_level, target_builder | Define the artifact's core parameters |
 | optional | cost_tier, fallback_model | Extend with recommended fields |
 | external | runtime_rule, agent | Upstream/downstream connections |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_architecture_effort_profile
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-architecture-effort-profile.md
+```

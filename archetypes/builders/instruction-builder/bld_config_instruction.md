@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Instruction"
+version: "1.0.0"
+author: n03_builder
+tags: [instruction, builder, examples]
+tldr: "Golden and anti-examples for instruction construction, demonstrating ideal structure and common pitfalls."
+domain: "instruction construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: instruction Production Rules
 ## Naming Convention
@@ -26,12 +36,12 @@ permission_scope: nucleus
 | Task slug | snake_case, lowercase | `rebuild_brain_faiss`, `deploy_api` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `cex/P03_prompt/examples/p03_ins_{task_slug}.md`
-- Compiled: `cex/P03_prompt/compiled/p03_ins_{task_slug}.yaml`
+1. Output: `cex/P03_prompt/examples/p03_ins_{task_slug}.md`
+2. Compiled: `cex/P03_prompt/compiled/p03_ins_{task_slug}.yaml`
 ## Size Limits (aligned with SCHEMA)
-- Body: max 4096 bytes
-- Total (frontmatter + body): ~5500 bytes
-- Density: >= 0.80
+1. Body: max 4096 bytes
+2. Total (frontmatter + body): ~5500 bytes
+3. Density: >= 0.80
 ## Validation Method Enum
 | Value | When to use |
 |-------|-------------|
@@ -40,8 +50,20 @@ Rule: id MUST equal filename stem.
 | manual | Human judgment required (subjective) |
 | none | Fire-and-forget (rare, discouraged) |
 ## Step Writing Rules
-- One action per step (verb + object + expected outcome)
-- Steps numbered sequentially (1, 2, 3...)
-- Include concrete commands where applicable (not "run the script" but `python build.py --all`)
-- Expected outcome after dash: "1. Run build — output shows 0 errors"
-- If step has conditional: split into sub-steps (1a, 1b) or separate steps
+1. One action per step (verb + object + expected outcome)
+2. Steps numbered sequentially (1, 2, 3...)
+3. Include concrete commands where applicable (not "run the script" but `python build.py --all`)
+4. Expected outcome after dash: "1. Run build — output shows 0 errors"
+5. If step has conditional: split into sub-steps (1a, 1b) or separate steps
+
+## Metadata
+
+```yaml
+id: bld_config_instruction
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-instruction.md
+```

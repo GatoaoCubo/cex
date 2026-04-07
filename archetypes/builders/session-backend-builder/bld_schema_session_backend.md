@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for session_backend
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Session Backend"
+version: "1.0.0"
+author: n03_builder
+tags: [session_backend, builder, examples]
+tldr: "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls."
+domain: "session backend construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: session_backend

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for context_window_config production
 sources: kc_context_window_config.md, provider documentation, cex_token_budget.py
+quality: 9.0
+title: "Knowledge Card Context Window Config"
+version: "1.0.0"
+author: n03_builder
+tags: [context_window_config, builder, examples]
+tldr: "Golden and anti-examples for context window config construction, demonstrating ideal structure and common pitfalls."
+domain: "context window config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: context_window_config

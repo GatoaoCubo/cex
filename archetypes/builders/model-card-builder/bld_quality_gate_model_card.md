@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: model_card
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, model-card, llm-spec, P02, provider]
 tldr: "Quality gate for model_card artifacts: enforces provider, context window, pricing, and capabilities fields."
 density_score: 0.85

@@ -4,6 +4,16 @@ id: bld_tools_session_backend
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for session_backend production
+quality: 9.0
+title: "Tools Session Backend"
+version: "1.0.0"
+author: n03_builder
+tags: [session_backend, builder, examples]
+tldr: "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls."
+domain: "session backend construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: session-backend-builder

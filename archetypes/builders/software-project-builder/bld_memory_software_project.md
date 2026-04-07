@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.7
+quality: 9.0
 tags: [builder, memory, software-project, learnings]
 tldr: "Learnings from codexa-core (145K lines): CORS must be outermost middleware, env vars before imports, multi-stage Docker cuts 600MB, pytest markers save CI time, Railway rollback is instant."
 density_score: 0.89

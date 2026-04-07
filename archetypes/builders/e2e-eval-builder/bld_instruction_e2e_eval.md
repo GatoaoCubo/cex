@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for e2e_eval
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.2
+title: "Instruction E2E Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [e2e_eval, builder, examples]
+tldr: "Golden and anti-examples for e2e eval construction, demonstrating ideal structure and common pitfalls."
+domain: "e2e eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce an e2e_eval
@@ -32,3 +42,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 4. Confirm stages form a connected sequence: the output of stage N feeds the input of stage N+1
 5. Cross-check: does this test a full pipeline from entry to exit? If it tests a single function or isolated unit it belongs in a `unit_eval`. If it measures performance under load it belongs in a `benchmark`. Assertions must be concrete values, not aspirational descriptions.
 6. If score < 8.0: revise in the same pass before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify e2e
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | e2e eval construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -13,6 +13,16 @@ hooks:
   pre_build: null
   post_build: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Prompt Cache"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_cache, builder, examples]
+tldr: "Golden and anti-examples for prompt cache construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt cache construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: prompt_cache Production Rules
 ## Naming Convention
@@ -23,11 +33,11 @@ permission_scope: nucleus
 | Frontmatter fields | snake_case | `ttl_seconds`, `eviction_strategy` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `P10_memory/examples/p10_pc_{name}.yaml`
-- Compiled: `P10_memory/compiled/p10_pc_{name}.yaml`
+1. Output: `P10_memory/examples/p10_pc_{name}.yaml`
+2. Compiled: `P10_memory/compiled/p10_pc_{name}.yaml`
 ## Size Limits
-- Total file: max 2048 bytes
-- tldr: <= 160 chars
+1. Total file: max 2048 bytes
+2. tldr: <= 160 chars
 ## TTL Guidelines
 | Freshness Need | TTL | Use Case |
 |----------------|-----|----------|
@@ -41,3 +51,15 @@ Rule: id MUST equal filename stem.
 | Anthropic | Explicit breakpoints | cache_control: ephemeral | 90% read |
 | OpenAI | Automatic prefix | >= 1024 token prefix | 50% read |
 | Google | Explicit context | >= 32768 tokens | 75% read |
+
+## Metadata
+
+```yaml
+id: bld_config_prompt_cache
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-prompt-cache.md
+```

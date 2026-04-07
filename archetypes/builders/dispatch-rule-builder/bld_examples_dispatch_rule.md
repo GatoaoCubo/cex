@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of dispatch_rule artifacts
 pattern: few-shot learning for keyword-to-agent_group routing rules
+quality: 9.0
+title: "Examples Dispatch Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [dispatch_rule, builder, examples]
+tldr: "Golden and anti-examples for dispatch rule construction, demonstrating ideal structure and common pitfalls."
+domain: "dispatch rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: dispatch-rule-builder

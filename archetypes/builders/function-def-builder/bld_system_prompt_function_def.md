@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "JSON Schema function definitions, parameter typing, tool_use/function_calling formats, return types | NOT mcp_server (protocol), api_client (implementation), code_executor (runtime)"
 domain: "function_def"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "function_def", "json_schema", "tool_calling", "tools"]
 safety_level: standard
 tools_listed: false

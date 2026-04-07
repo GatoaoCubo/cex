@@ -5,6 +5,16 @@ pillar: P08
 llm_function: COLLABORATE
 purpose: How invariant-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Invariant"
+version: "1.0.0"
+author: n03_builder
+tags: [invariant, builder, examples]
+tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
+domain: "invariant construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: invariant-builder

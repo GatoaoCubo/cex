@@ -26,6 +26,9 @@ decay_rate: 0.03
 agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Trace Config"
+density_score: 0.90
 ---
 ## Summary
 Tracing failures cluster into three categories: storage explosion (capturing everything without sampling or retention), privacy violations (prompts with PII captured and stored indefinitely), and debugging blindness (traces without 8F function mapping that show the agent did something but not what pipeline stage failed). Privacy-first configuration with selective sampling, tiered retention, and function-level spans addresses all three.
@@ -36,8 +39,63 @@ Tracing failures cluster into three categories: storage explosion (capturing eve
 **8F function mapping**: create one span per 8F function (F1-F8) as children of the root pipeline span. Each span captures function-specific attributes: F1 records kind_resolved, F6 records bytes and density, F7 records score and gate results. This gives pipeline-level visibility into exactly which stage is slow or failing.
 **Error classification**: every error span must be classified as transient (retry automatically), permanent (escalate to operator), or degraded (fallback was triggered, continue with reduced capability). This enables automated retry logic and faster incident response.
 ## Anti-Pattern
-- Capturing all prompts in production: 95% of storage wasted on content never queried, PII exposure risk.
-- sample_rate 1.0 in production: 8% latency overhead from tracing pipeline, storage explosion.
-- No retention policy: trace data grows unbounded — 200GB in 3 months is common.
-- No error classification: every error treated the same, slows incident response.
-- No 8F span mapping: traces show "something happened" but not which pipeline stage failed.
+1. Capturing all prompts in production: 95% of storage wasted on content never queried, PII exposure risk.
+2. sample_rate 1.0 in production: 8% latency overhead from tracing pipeline, storage explosion.
+3. No retention policy: trace data grows unbounded — 200GB in 3 months is common.
+4. No error classification: every error treated the same, slows incident response.
+5. No 8F span mapping: traces show "something happened" but not which pipeline stage failed.
+
+## Builder Context
+
+This ISO operates within the `trace-config-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_trace_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_trace_config_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | trace_config |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

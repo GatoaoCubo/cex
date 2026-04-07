@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of decision_record artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Decision Record"
+version: "1.0.0"
+author: n03_builder
+tags: [decision_record, builder, examples]
+tldr: "Golden and anti-examples for decision record construction, demonstrating ideal structure and common pitfalls."
+domain: "decision record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: decision-record-builder
@@ -23,7 +33,7 @@ version: "1.0.0"
 created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
-quality: null
+quality: 8.9
 tags: [decision_record, database, P08, storage, postgresql]
 tldr: "Chose PostgreSQL over MongoDB for CEX artifact store: stable schema + relational queries outweigh document store flexibility."
 consequences: "Relational queries are fast and type-safe. Schema migrations required for frontmatter changes. MongoDB expertise on team becomes less relevant."

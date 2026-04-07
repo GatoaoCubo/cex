@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [action-prompt, contract, edge-case, schema, input, output, frontmatter, validation]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Action Prompt"
+density_score: 0.90
 ---
 ## Summary
 An action prompt is a contract between a caller and an execution engine. The 21 frontmatter fields exist to make that contract explicit and machine-verifiable. In forctice, the contract breaks at the edges: inputs near boundary values and output fields with ambiguous format expectations.

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of path_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Path Config"
+version: "1.0.0"
+author: n03_builder
+tags: [path_config, builder, examples]
+tldr: "Golden and anti-examples for path config construction, demonstrating ideal structure and common pitfalls."
+domain: "path config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: path-config-builder
@@ -29,7 +39,7 @@ paths:
   - config_dir
   - cache_dir
 platform: all
-quality: null
+quality: 8.9
 tags: [path_config, data_pipeline, P09, filesystem, directories]
 tldr: "Data pipeline paths: 7 dirs, all platform, base-relative, auto-create optional"
 description: "Filesystem paths for data pipeline service covering input, output, staging, logs, config, cache"

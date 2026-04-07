@@ -4,6 +4,16 @@ id: bld_architecture_agent_card
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of agent_card — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Agent Card"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_card, builder, examples]
+tldr: "Golden and anti-examples for agent card construction, demonstrating ideal structure and common pitfalls."
+domain: "agent card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: agent_card in the CEX

@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "directed acyclic graphs, topological ordering, parallel execution modeling, cycle detection, node and edge specification | NOT workflow execution runtime, status reporting, routing policy, spawn config, component inventory"
 domain: "dag"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "dag", "orchestration", "P12"]
 safety_level: standard
 tools_listed: false

@@ -4,6 +4,16 @@ id: bld_architecture_router
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of router — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Router"
+version: "1.0.0"
+author: n03_builder
+tags: [router, builder, examples]
+tldr: "Golden and anti-examples for router construction, demonstrating ideal structure and common pitfalls."
+domain: "router construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: router in the CEX

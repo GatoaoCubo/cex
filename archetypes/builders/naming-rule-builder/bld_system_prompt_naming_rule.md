@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "Scope-bound naming patterns, regex/glob, prefix/suffix/separator/case rules, versioning in name segments, collision resolution | Does NOT: define types, format output, parse text, validate runtime values"
 domain: naming_rule
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, naming_rule, P03]
 safety_level: standard
 tools_listed: false

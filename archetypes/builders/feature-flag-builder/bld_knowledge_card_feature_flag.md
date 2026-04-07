@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for feature_flag production — feature toggle specification
 sources: Fowler 2017 "Feature Toggles", LaunchDarkly, Unleash, Split.io
+quality: 9.1
+title: "Knowledge Card Feature Flag"
+version: "1.0.0"
+author: n03_builder
+tags: [feature_flag, builder, examples]
+tldr: "Golden and anti-examples for feature flag construction, demonstrating ideal structure and common pitfalls."
+domain: "feature flag construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: feature_flag

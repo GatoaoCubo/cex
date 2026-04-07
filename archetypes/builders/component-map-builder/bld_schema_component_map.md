@@ -4,6 +4,15 @@ id: component-map-builder-schema
 kind: schema
 parent: component-map-builder
 version: 2.0.0
+quality: 9.1
+title: "Schema Component Map"
+author: n03_builder
+tags: [component_map, builder, examples]
+tldr: "Golden and anti-examples for component map construction, demonstrating ideal structure and common pitfalls."
+domain: "component map construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema — component-map-builder

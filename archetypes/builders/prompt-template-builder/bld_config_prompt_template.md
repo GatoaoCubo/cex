@@ -19,6 +19,10 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Prompt Template"
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # Config — prompt-template-builder
 ## Naming Convention

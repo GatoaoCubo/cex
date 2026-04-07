@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "memory compression — summarized conversation/session memory injected at runtime"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, memory-summary, P10, compression, retention, freshness]
 tldr: "Pass/fail gate for memory_summary artifacts: compression method, retention policy, trigger definition, boundary vs session_state and learning_record."
 density_score: 0.90

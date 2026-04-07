@@ -4,6 +4,16 @@ id: bld_architecture_axiom
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of axiom — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Axiom"
+version: "1.0.0"
+author: n03_builder
+tags: [axiom, builder, examples]
+tldr: "Golden and anti-examples for axiom construction, demonstrating ideal structure and common pitfalls."
+domain: "axiom construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: axiom in the CEX

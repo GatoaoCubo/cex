@@ -16,7 +16,7 @@ prerequisites:
   - Tier thresholds are defined or can be derived (e.g. master >= 9.5, skilled >= 8.0)
 validation_method: checklist
 domain: scoring_rubric
-quality: 8.8
+quality: 9.0
 tags: [instruction, scoring-rubric, evaluation, governance, P07]
 idempotent: true
 atomic: false

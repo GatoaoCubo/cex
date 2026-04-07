@@ -4,6 +4,16 @@ id: bld_architecture_chunk_strategy
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of chunk_strategy — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Chunk Strategy"
+version: "1.0.0"
+author: n03_builder
+tags: [chunk_strategy, builder, examples]
+tldr: "Golden and anti-examples for chunk strategy construction, demonstrating ideal structure and common pitfalls."
+domain: "chunk strategy construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory
@@ -39,3 +49,23 @@ purpose: Component map of chunk_strategy — inventory, dependencies, and archit
 | spec | method, chunk_size, chunk_overlap, separators | Define the artifact's core parameters |
 | optional | tokenizer | Extend with recommended fields |
 | external | embedding_config, retriever_config | Upstream/downstream connections |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_architecture_chunk_strategy
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-architecture-chunk-strategy.md
+```

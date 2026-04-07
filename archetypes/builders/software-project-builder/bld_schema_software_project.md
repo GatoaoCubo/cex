@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.1
 tags: [builder, schema, software-project, validation]
 tldr: "Validation schema for software projects: required files, pyproject.toml fields, directory structure, test requirements, Docker constraints."
 density_score: 0.88

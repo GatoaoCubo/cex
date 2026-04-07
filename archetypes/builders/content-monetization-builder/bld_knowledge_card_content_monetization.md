@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for content monetization — pricing, billing, credits, checkout patterns
 sources: Stripe docs, Hotmart API, SaaS pricing literature (ProfitWell, OpenView), CEX production systems
+quality: 9.1
+title: "Knowledge Card Content Monetization"
+version: "1.0.0"
+author: n03_builder
+tags: [content_monetization, builder, examples]
+tldr: "Golden and anti-examples for content monetization construction, demonstrating ideal structure and common pitfalls."
+domain: "content monetization construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: content_monetization

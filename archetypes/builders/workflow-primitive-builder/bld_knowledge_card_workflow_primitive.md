@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for workflow_primitive production — atomic searchable facts
 sources: workflow-primitive-builder schema + cex_mission_runner.py + cex_coordinator.py
+quality: 9.1
+title: "Knowledge Card Workflow Primitive"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow_primitive, builder, examples]
+tldr: "Golden and anti-examples for workflow primitive construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow primitive construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: workflow_primitive

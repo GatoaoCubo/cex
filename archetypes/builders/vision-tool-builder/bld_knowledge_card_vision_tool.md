@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for vision_tool production — visual analysis and OCR specification
 sources: OpenAI Vision API docs, Google Cloud Vision API, Tesseract OCR, DocTR, Azure Computer Vision, Anthropic Claude Vision
+quality: 9.1
+title: "Knowledge Card Vision Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [vision_tool, builder, examples]
+tldr: "Golden and anti-examples for vision tool construction, demonstrating ideal structure and common pitfalls."
+domain: "vision tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: vision_tool

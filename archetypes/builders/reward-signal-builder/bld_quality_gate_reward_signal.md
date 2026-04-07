@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "reward signals — continuous quality scores for agent improvement via RLHF, DPO, critique, or implicit feedback"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, reward-signal, P11, feedback, rlhf, scoring]
 tldr: "Pass/fail gate for reward_signal artifacts: signal_type validity, scale consistency, baseline calibration, criteria completeness, and application loop documentation."
 density_score: 0.90

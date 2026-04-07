@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for connector production — bidirectional service integration
 sources: Enterprise Integration Patterns (Hohpe 2003), Stripe webhooks, gRPC, MQTT
+quality: 9.1
+title: "Knowledge Card Db Connector"
+version: "1.0.0"
+author: n03_builder
+tags: [db_connector, builder, examples]
+tldr: "Golden and anti-examples for db connector construction, demonstrating ideal structure and common pitfalls."
+domain: "db connector construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: connector

@@ -4,6 +4,15 @@ kind: examples
 pillar: P01
 builder: landing-page-builder
 version: 1.0.0
+quality: 9.1
+title: "Examples Landing Page"
+author: n03_builder
+tags: [landing_page, builder, examples]
+tldr: "Golden and anti-examples for landing page construction, demonstrating ideal structure and common pitfalls."
+domain: "landing page construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Examples: Landing Page Builder
 
@@ -62,3 +71,25 @@ FAQ > CTA FINAL > FOOTER
 </div>
 <!-- Missing: responsive, dark mode, SEO, a11y, sections, styling, EVERYTHING -->
 ```
+
+## Exemplar Requirements
+
+1. Score 9.0+ to qualify as few-shot reference
+2. Demonstrate ideal structure for this artifact kind
+3. Populate all frontmatter fields with realistic values
+4. Use domain-specific content not generic placeholders
+5. Enable retrieval via tags and TF-IDF matching
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `examples` |
+| Pillar | P01 |
+| Domain | landing page construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

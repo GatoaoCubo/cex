@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of dag artifacts
 pattern: few-shot learning for dependency graph specification
+quality: 9.0
+title: "Examples Dag"
+version: "1.0.0"
+author: n03_builder
+tags: [dag, builder, examples]
+tldr: "Golden and anti-examples for dag construction, demonstrating ideal structure and common pitfalls."
+domain: "dag construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: dag-builder

@@ -4,6 +4,16 @@ id: bld_tools_vector_store
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for vector_store production
+quality: 9.0
+title: "Tools Vector Store"
+version: "1.0.0"
+author: n03_builder
+tags: [vector_store, builder, examples]
+tldr: "Golden and anti-examples for vector store construction, demonstrating ideal structure and common pitfalls."
+domain: "vector store construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: vector-store-builder

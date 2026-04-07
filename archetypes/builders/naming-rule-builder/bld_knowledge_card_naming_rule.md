@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for naming_rule production — atomic searchable facts
 sources: naming-rule-builder MANIFEST.md + SCHEMA.md, PEP 8, BEM CSS, DNS naming, NPM
+quality: 9.1
+title: "Knowledge Card Naming Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [naming_rule, builder, examples]
+tldr: "Golden and anti-examples for naming rule construction, demonstrating ideal structure and common pitfalls."
+domain: "naming rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: naming_rule

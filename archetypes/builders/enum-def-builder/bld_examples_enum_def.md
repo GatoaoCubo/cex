@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of enum_def artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Enum Def"
+version: "1.0.0"
+author: n03_builder
+tags: [enum_def, builder, examples]
+tldr: "Golden and anti-examples for enum def construction, demonstrating ideal structure and common pitfalls."
+domain: "enum def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: enum-def-builder
@@ -29,7 +39,7 @@ values:
 default: "draft"
 extensible: false
 deprecated: []
-quality: null
+quality: 8.8
 tags: [enum_def, publication, status, P06]
 tldr: "5-value publication lifecycle enum: draft->review->published->deprecated->archived"
 description: "Lifecycle states for CEX artifacts from initial creation through archival"

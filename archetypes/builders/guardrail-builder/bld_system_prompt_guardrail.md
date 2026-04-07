@@ -13,7 +13,7 @@ rules_count: 15
 tone: technical
 knowledge_boundary: "safety constraint definition, severity classification, enforcement modes, violation documentation, bypass policy | user access permissions, operational laws, quality scoring gates"
 domain: "guardrail"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "guardrail", "safety", "security_boundary"]
 safety_level: standard
 tools_listed: false

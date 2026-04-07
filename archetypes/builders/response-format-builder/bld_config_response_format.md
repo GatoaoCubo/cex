@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Response Format"
+version: "1.0.0"
+author: n03_builder
+tags: [response_format, builder, examples]
+tldr: "Golden and anti-examples for response format construction, demonstrating ideal structure and common pitfalls."
+domain: "response format construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: response_format Production Rules
 ## Naming
@@ -26,16 +36,42 @@ permission_scope: nucleus
 | Format slugs | lowercase_underscores | knowledge_card, model_card, signal_json |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: cex/P05_output/examples/p05_rf_{format_slug}.yaml
-- Compiled: cex/P05_output/compiled/p05_rf_{format_slug}.json
+1. Output: cex/P05_output/examples/p05_rf_{format_slug}.yaml
+2. Compiled: cex/P05_output/compiled/p05_rf_{format_slug}.json
 ## Size Limits (aligned with SCHEMA)
-- Body: max 4096 bytes
-- Density: >= 0.80
-- Sections: >= 1 (recommend 3-7; LLMs struggle above 10)
+1. Body: max 4096 bytes
+2. Density: >= 0.80
+3. Sections: >= 1 (recommend 3-7; LLMs struggle above 10)
 ## Format Policy
-- format_type determines output structure the LLM follows
-- json: highest compliance rate, best for machine consumption
-- yaml: good for config-like output with frontmatter
-- markdown: best for human-readable docs, supports headers/tables
-- csv: tabular data only, simple extraction
-- plaintext: unstructured, use only when no structure needed
+1. format_type determines output structure the LLM follows
+2. json: highest compliance rate, best for machine consumption
+3. yaml: good for config-like output with frontmatter
+4. markdown: best for human-readable docs, supports headers/tables
+5. csv: tabular data only, simple extraction
+6. plaintext: unstructured, use only when no structure needed
+
+## Metadata
+
+```yaml
+id: bld_config_response_format
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-response-format.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | response format construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

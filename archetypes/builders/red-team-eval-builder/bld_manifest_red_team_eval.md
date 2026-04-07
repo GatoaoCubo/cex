@@ -14,6 +14,10 @@ keywords: ["red team", adversarial, jailbreak, "prompt injection", "PII leak", t
 triggers: ["create red team eval", "adversarial test config", "define jailbreak eval", "build safety evaluation"]
 geo_description: >
   L1: Specialist in building red_team_eval artifacts — configurations de evaluation a. L2: Define adversarial evaluation configuration with concrete attack_types. L3: When user needs to create, build, or scaffold red team eval.
+quality: 9.1
+title: "Manifest Red Team Eval"
+tldr: "Golden and anti-examples for red team eval construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # red-team-eval-builder
 ## Identity
@@ -24,12 +28,12 @@ bias), target definition, approval criteria, and the boundary between red_team_e
 e guardrail (P11, runtime security barrier). Produces red_team_eval artifacts with
 frontmatter complete, attack_types declared, target defined, and pass_criteria specified.
 ## Capabilities
-- Define adversarial evaluation configuration with concrete attack_types
-- Specify target (which agent/prompt is being evaluated)
-- Define pass_criteria (what constitutes safe behavior)
-- Map frameworks: Promptfoo redteam, Patronus AI, DeepEval, Garak, OWASP LLM Top 10
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish red_team_eval from e2e_eval, unit_eval, guardrail, smoke_eval
+1. Define adversarial evaluation configuration with concrete attack_types
+2. Specify target (which agent/prompt is being evaluated)
+3. Define pass_criteria (what constitutes safe behavior)
+4. Map frameworks: Promptfoo redteam, Patronus AI, DeepEval, Garak, OWASP LLM Top 10
+5. Validate artifact against quality gates (HARD + SOFT)
+6. Distinguish red_team_eval from e2e_eval, unit_eval, guardrail, smoke_eval
 ## Routing
 keywords: [red team, adversarial, jailbreak, prompt injection, PII leak, toxicity, bias, safety, OWASP, LLM security, attack, eval]
 triggers: "create red team eval", "adversarial test config", "define jailbreak eval", "build safety evaluation", "configure attack scenarios"
@@ -39,3 +43,29 @@ I answer: "what attack types target this agent, what is the target, and what cri
 I do NOT handle: e2e_eval (functional end-to-end test), unit_eval (isolated correctness test),
 guardrail (P11 runtime safety boundary), smoke_eval (quick sanity check),
 benchmark (comparative performance scoring).
+
+## Metadata
+
+```yaml
+id: red-team-eval-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply red-team-eval-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P07 |
+| Domain | red_team_eval |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

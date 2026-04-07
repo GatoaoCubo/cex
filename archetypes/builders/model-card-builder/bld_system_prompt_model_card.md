@@ -13,7 +13,7 @@ rules_count: 9
 tone: technical
 knowledge_boundary: "Mitchell 2019 model cards, HuggingFace card format, LiteLLM registry, provider docs | Does NOT: define boot configs, agents, benchmarks, or routers"
 domain: model_card
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, model_card, P03]
 safety_level: standard
 tools_listed: false

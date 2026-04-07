@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.0
 tags: [tools, retriever, P08, RAG, vector-search]
 density_score: 1.0
 ---

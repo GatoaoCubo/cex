@@ -19,6 +19,10 @@ geo_description: >
 effort: medium
 max_turns: 15
 permission_scope: nucleus
+quality: 9.1
+title: "Manifest Tagline"
+tldr: "Golden and anti-examples for tagline construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # tagline-builder
 
@@ -30,13 +34,13 @@ aligned with positioning. Masters: USP extraction, rhyme/rhythm patterns, emotio
 triggers, cultural adaptation PT-BR/EN, A/B variants, and competitive differentiation.
 
 ## Capabilities
-- Extract USP and value proposition from brand_config
-- Generate 10+ variants per round (emotional, functional, aspirational, provocative)
-- Apply frameworks: AIDA headline, PAS hook, Before/After, Question hook, Command
-- Calibrate tone: formal, colloquial, technical, bold, minimalist
-- Adapt for contexts: site hero, social bio, email subject, ad headline, pitch deck
-- Validate against competitors (no repetition, differentiate)
-- Produce short versions (3-5 words), medium (6-10), long (11-15)
+1. Extract USP and value proposition from brand_config
+2. Generate 10+ variants per round (emotional, functional, aspirational, provocative)
+3. Apply frameworks: AIDA headline, PAS hook, Before/After, Question hook, Command
+4. Calibrate tone: formal, colloquial, technical, bold, minimalist
+5. Adapt for contexts: site hero, social bio, email subject, ad headline, pitch deck
+6. Validate against competitors (no repetition, differentiate)
+7. Produce short versions (3-5 words), medium (6-10), long (11-15)
 
 ## Routing
 keywords: [tagline, slogan, headline, brand-voice, copy, catchphrase, positioning, one-liner, hook, usp]
@@ -46,3 +50,29 @@ triggers: "create tagline", "brand tagline", "write slogan", "campaign headline"
 In a crew, I handle BRAND MESSAGING AND TAGLINES.
 I answer: "what is the one line that captures this brand's essence?"
 I do NOT handle: full brand books (brand-builder), email sequences (content-monetization), full landing pages (landing-page-builder).
+
+## Metadata
+
+```yaml
+id: tagline-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply tagline-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P03 |
+| Domain | tagline |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

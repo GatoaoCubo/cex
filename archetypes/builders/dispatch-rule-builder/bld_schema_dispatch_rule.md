@@ -6,6 +6,15 @@ llm_function: CONSTRAIN
 purpose: Formal schema definition for dispatch_rule - SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
 version: 2.0.0
+quality: 9.1
+title: "Schema Dispatch Rule"
+author: n03_builder
+tags: [dispatch_rule, builder, examples]
+tldr: "Golden and anti-examples for dispatch rule construction, demonstrating ideal structure and common pitfalls."
+domain: "dispatch rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: dispatch_rule

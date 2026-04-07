@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for hook_config production
 sources: pre-commit hook patterns, GitHub Actions event triggers, Webpack plugin lifecycle, 8F pipeline phase transitions, event-driven architecture patterns
+quality: 9.0
+title: "Knowledge Card Hook Config"
+version: "1.0.0"
+author: n03_builder
+tags: [hook_config, builder, examples]
+tldr: "Golden and anti-examples for hook config construction, demonstrating ideal structure and common pitfalls."
+domain: "hook config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: hook_config

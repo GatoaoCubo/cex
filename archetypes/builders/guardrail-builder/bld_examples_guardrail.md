@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of guardrail artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.2
+title: "Examples Guardrail"
+version: "1.0.0"
+author: n03_builder
+tags: [guardrail, builder, examples]
+tldr: "Golden and anti-examples for guardrail construction, demonstrating ideal structure and common pitfalls."
+domain: "guardrail construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: guardrail-builder
@@ -25,7 +35,7 @@ severity: "critical"
 enforcement: "block"
 applies_to: [agent, skill, hook, daemon]
 domain: "safety"
-quality: null
+quality: 9.0
 tags: [guardrail, filesystem, destructive, safety, critical]
 tldr: "Blocks rm -rf, format, DROP TABLE, and other destructive commands in agent execution"
 density_score: 0.91

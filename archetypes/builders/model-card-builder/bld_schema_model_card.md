@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for model_card — SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
+quality: 9.1
+title: "Schema Model Card"
+version: "1.0.0"
+author: n03_builder
+tags: [model_card, builder, examples]
+tldr: "Golden and anti-examples for model card construction, demonstrating ideal structure and common pitfalls."
+domain: "model card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: model_card

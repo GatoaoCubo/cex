@@ -2,6 +2,16 @@
 kind: output_template
 id: bld_output_template_diagram
 pillar: P00
+quality: 9.0
+title: "Output Template Diagram"
+version: "1.0.0"
+author: n03_builder
+tags: [diagram, builder, examples]
+tldr: "Golden and anti-examples for diagram construction, demonstrating ideal structure and common pitfalls."
+domain: "diagram construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 id: p08_diag_{{scope_slug}}
 kind: diagram
@@ -45,5 +55,13 @@ keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
 ## Annotations
 {{non_obvious_design_decisions}}
 ## References
-- {{reference_1}}
-- {{reference_2}}
+1. {{reference_1}}
+2. {{reference_2}}
+
+## Template Standards
+
+1. Define all required sections for this output kind
+2. Include frontmatter schema with mandatory fields
+3. Provide structural markers for post-validation
+4. Specify format constraints for markdown YAML JSON
+5. Reference the validation_schema for automated checks

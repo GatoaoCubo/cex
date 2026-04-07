@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of toolkit artifacts
 pattern: few-shot learning for permission bundles with confirmation tiers
+quality: 9.0
+title: "Examples Toolkit"
+version: "1.0.0"
+author: n03_builder
+tags: [toolkit, builder, examples]
+tldr: "Golden and anti-examples for toolkit construction, demonstrating ideal structure and common pitfalls."
+domain: "toolkit construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: toolkit-builder

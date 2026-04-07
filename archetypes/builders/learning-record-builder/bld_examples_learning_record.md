@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of learning_record artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Learning Record"
+version: "1.0.0"
+author: n03_builder
+tags: [learning_record, builder, examples]
+tldr: "Golden and anti-examples for learning record construction, demonstrating ideal structure and common pitfalls."
+domain: "learning record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: learning-record-builder
@@ -20,7 +30,7 @@ created: "2026-03-05"
 updated: "2026-03-05"
 author: "builder"
 domain: "orchestration"
-quality: null
+quality: 8.8
 tags: [learning, continuous-batching, speedup, orchestration, multi-agent_group]
 tldr: "Continuous batching with 3 sats achieved 1.6x speedup; task complexity drives speed, not model tier"
 topic: "Continuous batching multi-agent_group performance"

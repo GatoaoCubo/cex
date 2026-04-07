@@ -8,7 +8,7 @@ created: "2026-03-29"
 updated: "2026-03-29"
 author: "builder_agent"
 domain: "credential and secret management specification — provider, rotation policy, encryption posture, and access pattern"
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, secret-config, P09, credentials, rotation, encryption]
 tldr: "Pass/fail gate for secret_config artifacts: provider validity, rotation policy completeness, encryption posture, access pattern, and no plaintext secrets."
 density_score: 0.90

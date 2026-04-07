@@ -4,6 +4,16 @@ id: bld_architecture_formatter
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of formatter — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Formatter"
+version: "1.0.0"
+author: n03_builder
+tags: [formatter, builder, examples]
+tldr: "Golden and anti-examples for formatter construction, demonstrating ideal structure and common pitfalls."
+domain: "formatter construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

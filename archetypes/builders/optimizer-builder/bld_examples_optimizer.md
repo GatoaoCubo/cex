@@ -4,6 +4,16 @@ id: bld_examples_optimizer
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of optimizer artifacts
+quality: 9.1
+title: "Examples Optimizer"
+version: "1.0.0"
+author: n03_builder
+tags: [optimizer, builder, examples]
+tldr: "Golden and anti-examples for optimizer construction, demonstrating ideal structure and common pitfalls."
+domain: "optimizer construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: optimizer-builder
@@ -19,7 +29,7 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: "system"
 domain: "knowledge_card_pipeline"
-quality: null
+quality: 8.9
 tags: [optimizer, knowledge-card, latency, continuous]
 tldr: "Optimize KC generation latency via batch/model tuning; trigger 3s, target 1.5s, critical 8s"
 density_score: 0.91

@@ -6,6 +6,16 @@ file_position: 5/13
 pillar: P04
 llm_function: CALL
 purpose: Meta-template for generating TOOLS.md of any kind-builder
+quality: 9.0
+title: "Meta Tools Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: {{builder_name}}

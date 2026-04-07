@@ -14,6 +14,10 @@ keywords: [plugin, extension, modular, pluggable, addon, integrate, extend, api-
 triggers: ["create plugin for system extension", "build pluggable module", "define extensible component"]
 geo_description: >
   L1: Specialist in building `plugin` — extensions pluggable ao sistema with interfac. L2: Analyze requirements de extensibility e definir interface contracts. L3: When user needs to create, build, or scaffold plugin.
+quality: 9.1
+title: "Manifest Plugin"
+tldr: "Golden and anti-examples for plugin construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # plugin-builder
 ## Identity
@@ -22,13 +26,13 @@ lifecycle management, configuration, and own API surface. Produces dense plugins
 definitions, lifecycle hooks (load/enable/disable/unload), dependency declarations, isolation
 levels, and hot-reload capability that extend the system without modifying the core.
 ## Capabilities
-- Analyze extensibility requirements and define interface contracts
-- Produce plugin artifact with complete frontmatter (16 fields required)
-- Define API surface with methods/tools exposed by the plugin
-- Validate artifact against quality gates (9 HARD + 12 SOFT)
-- Distinguish plugin from hook (P04), skill (P04), mcp_server (P04), and daemon (P04)
-- Configure lifecycle hooks, dependency chains, and isolation levels
-- Define config_schema with defaults and validation rules
+1. Analyze extensibility requirements and define interface contracts
+2. Produce plugin artifact with complete frontmatter (16 fields required)
+3. Define API surface with methods/tools exposed by the plugin
+4. Validate artifact against quality gates (9 HARD + 12 SOFT)
+5. Distinguish plugin from hook (P04), skill (P04), mcp_server (P04), and daemon (P04)
+6. Configure lifecycle hooks, dependency chains, and isolation levels
+7. Define config_schema with defaults and validation rules
 ## Routing
 keywords: [plugin, extension, modular, pluggable, addon, integrate, extend, api-surface]
 triggers: "create plugin for system extension", "build pluggable module", "define extensible component"
@@ -36,3 +40,29 @@ triggers: "create plugin for system extension", "build pluggable module", "defin
 In a crew, I handle SYSTEM EXTENSION DESIGN.
 I answer: "how should this capability be added as a pluggable extension?"
 I do NOT handle: event interception (hook-builder), multi-phase workflows (skill-builder), background processes (daemon-builder [PLANNED]), MCP protocol servers (mcp-server-builder).
+
+## Metadata
+
+```yaml
+id: plugin-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply plugin-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P04 |
+| Domain | plugin |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

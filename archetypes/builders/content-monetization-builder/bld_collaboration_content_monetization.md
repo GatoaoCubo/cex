@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How content-monetization-builder works in crews with other builders
 pattern: each builder must know its ROLE, what it RECEIVES and PRODUCES
+quality: 9.2
+title: "Collaboration Content Monetization"
+version: "1.0.0"
+author: n03_builder
+tags: [content_monetization, builder, examples]
+tldr: "Golden and anti-examples for content monetization construction, demonstrating ideal structure and common pitfalls."
+domain: "content monetization construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: content-monetization-builder

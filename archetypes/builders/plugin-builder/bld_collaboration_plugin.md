@@ -5,6 +5,16 @@ pillar: P04
 llm_function: COLLABORATE
 purpose: How plugin-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Plugin"
+version: "1.0.0"
+author: n03_builder
+tags: [plugin, builder, examples]
+tldr: "Golden and anti-examples for plugin construction, demonstrating ideal structure and common pitfalls."
+domain: "plugin construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: plugin-builder

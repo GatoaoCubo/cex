@@ -9,6 +9,10 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [schema, prompt-template, P03, source-of-truth]
+quality: 9.1
+title: "Schema Prompt Template"
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 
 # Schema — prompt-template-builder

@@ -6,6 +6,16 @@ file_position: 10/13
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Meta-template for generating CONFIG.md of any kind-builder
+quality: 9.1
+title: "Meta Config Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Config: {{type_name}} Production Rules

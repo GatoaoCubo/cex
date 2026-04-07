@@ -8,6 +8,11 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [examples, type-def, P07, golden, anti-pattern]
+quality: 9.0
+title: "Examples Type Def"
+tldr: "Golden and anti-examples for type def construction, demonstrating ideal structure and common pitfalls."
+domain: "type def construction"
+density_score: 0.90
 ---
 
 ## Golden Example
@@ -24,7 +29,7 @@ type_name: AgentScore
 base_type: number
 domain: quality
 nullable: false
-quality: null
+quality: 8.9
 tags: [quality, scoring, agent, numeric]
 tldr: "A bounded decimal representing an agent output quality score from 0.0 to 10.0."
 ## Definition

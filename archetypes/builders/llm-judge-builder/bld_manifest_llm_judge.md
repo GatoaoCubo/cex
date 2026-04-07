@@ -14,6 +14,10 @@ keywords: [judge, eval, score, evaluate, llm-as-judge, criteria, rating, quality
 triggers: ["create LLM judge", "define eval criteria", "build automated scorer", "configure LLM-as-judge"]
 geo_description: >
   L1: Specialist in building llm_judge artifacts — configurations de LLM-as-Judge pa. L2: Select judge_model apownte for o domain avaliado. L3: When user needs to create, build, or scaffold llm judge.
+quality: 9.1
+title: "Manifest Llm Judge"
+tldr: "Golden and anti-examples for llm judge construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # llm-judge-builder
 ## Identity
@@ -24,13 +28,13 @@ few-shot calibration, and the boundary between llm_judge (model+criteria+escala)
 Produces llm_judge artifacts with frontmatter complete, defined criteria, declared scale,
 e few_shot examples calibrateds.
 ## Capabilities
-- Select judge_model apownte for o domain avaliado
-- Define criteria with dimensoes de evaluation independentes
-- Specify scale (1-5, 1-10, binary, likert) with anchors semantic
-- Compose few_shot examples calibrateds for reduzir variance do juiz
-- Map frameworks: Braintrust scorer, DeepEval, RAGAS, Promptfoo, OpenAI Evals
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish llm_judge from scoring_rubric, quality_gate, benchmark, metric
+1. Select judge_model apownte for o domain avaliado
+2. Define criteria with dimensoes de evaluation independentes
+3. Specify scale (1-5, 1-10, binary, likert) with anchors semantic
+4. Compose few_shot examples calibrateds for reduzir variance do juiz
+5. Map frameworks: Braintrust scorer, DeepEval, RAGAS, Promptfoo, OpenAI Evals
+6. Validate artifact against quality gates (HARD + SOFT)
+7. Distinguish llm_judge from scoring_rubric, quality_gate, benchmark, metric
 ## Routing
 keywords: [judge, eval, score, evaluate, llm-as-judge, criteria, rating, quality, assessment, rubric-with-model]
 triggers: "create LLM judge", "define eval criteria", "build automated scorer", "configure LLM-as-judge", "set up quality evaluator"
@@ -40,3 +44,29 @@ I answer: "which model evaluates, on what criteria, at what scale, with what cal
 I do NOT handle: scoring_rubric (criteria framework without judge model),
 quality_gate (P11, blocks pipeline based on threshold), benchmark (comparative performance measurement),
 metric (single numeric formula without LLM), dataset (eval corpus without judge).
+
+## Metadata
+
+```yaml
+id: llm-judge-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply llm-judge-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P07 |
+| Domain | llm_judge |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

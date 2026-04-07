@@ -5,6 +5,16 @@ pillar: P02
 llm_function: COLLABORATE
 purpose: How mental-model-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Mental Model"
+version: "1.0.0"
+author: n03_builder
+tags: [mental_model, builder, examples]
+tldr: "Golden and anti-examples for mental model construction, demonstrating ideal structure and common pitfalls."
+domain: "mental model construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: mental-model-builder

@@ -3,6 +3,16 @@ kind: architecture
 id: bld_architecture_memory_type
 pillar: P08
 llm_function: INJECT
+quality: 9.0
+title: "Architecture Memory Type"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_type, builder, examples]
+tldr: "Golden and anti-examples for memory type construction, demonstrating ideal structure and common pitfalls."
+domain: "memory type construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: memory_type
@@ -32,3 +42,11 @@ obs -> should_save(obs, ctx) -> [reject | classify(correction|preference|convent
 | Compaction | correction=KEEP, preference=KEEP, convention=KEEP, context=DROP |
 | Classifier | Heuristic-first (keyword), LLM-fallback (budget-aware) |
 | Prune | confidence < 0.1 -> auto-remove on next update cycle |
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target

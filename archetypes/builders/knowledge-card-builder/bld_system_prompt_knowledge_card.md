@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "knowledge_card structure, information density, semantic frontmatter, domain_kc vs meta_kc classification, validate_kc.py v2.0 gates; NOT model cards, boot configs, agent definitions, benchmarks, or routers"
 domain: "knowledge_card"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "knowledge_card", "distillation", "density"]
 safety_level: standard
 tools_listed: false

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for schedule production — temporal workflow trigger specification
 sources: Airflow timetables, Dagster ScheduleDefinition, Temporal schedule, POSIX cron
+quality: 9.1
+title: "Knowledge Card Schedule"
+version: "1.0.0"
+author: n03_builder
+tags: [schedule, builder, examples]
+tldr: "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls."
+domain: "schedule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: schedule

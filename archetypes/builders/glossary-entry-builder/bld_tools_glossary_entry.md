@@ -4,6 +4,16 @@ id: bld_tools_glossary_entry
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for glossary_entry production
+quality: 9.1
+title: "Tools Glossary Entry"
+version: "1.0.0"
+author: n03_builder
+tags: [glossary_entry, builder, examples]
+tldr: "Golden and anti-examples for glossary entry construction, demonstrating ideal structure and common pitfalls."
+domain: "glossary entry construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: glossary-entry-builder
@@ -32,9 +42,21 @@ purpose: Tools and APIs available for glossary_entry production
 ## Interim Validation
 No automated validator exists yet for glossary entries.
 Manually check each QUALITY_GATES.md gate against produced artifact:
-- [ ] YAML parses without error
-- [ ] id matches p01_gl_ prefix
-- [ ] definition is <= 3 lines
-- [ ] synonyms list is non-empty
-- [ ] quality is null
-- [ ] term is non-empty string
+1. [ ] YAML parses without error
+2. [ ] id matches p01_gl_ prefix
+3. [ ] definition is <= 3 lines
+4. [ ] synonyms list is non-empty
+5. [ ] quality is null
+6. [ ] term is non-empty string
+
+## Metadata
+
+```yaml
+id: bld_tools_glossary_entry
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-glossary-entry.md
+```

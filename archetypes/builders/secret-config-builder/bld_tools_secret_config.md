@@ -4,6 +4,16 @@ id: bld_tools_secret_config
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for secret_config production
+quality: 9.0
+title: "Tools Secret Config"
+version: "1.0.0"
+author: n03_builder
+tags: [secret_config, builder, examples]
+tldr: "Golden and anti-examples for secret config construction, demonstrating ideal structure and common pitfalls."
+domain: "secret config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: secret-config-builder

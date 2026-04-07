@@ -4,6 +4,16 @@ id: bld_architecture_red_team_eval
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of red_team_eval — inventory, dependencies, and architectural position
+quality: 9.0
+title: "Architecture Red Team Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [red_team_eval, builder, examples]
+tldr: "Golden and anti-examples for red team eval construction, demonstrating ideal structure and common pitfalls."
+domain: "red team eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

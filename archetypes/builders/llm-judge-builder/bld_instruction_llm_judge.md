@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for llm_judge
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.0
+title: "Instruction Llm Judge"
+version: "1.0.0"
+author: n03_builder
+tags: [llm_judge, builder, examples]
+tldr: "Golden and anti-examples for llm judge construction, demonstrating ideal structure and common pitfalls."
+domain: "llm judge construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a llm_judge

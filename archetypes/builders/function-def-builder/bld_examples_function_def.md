@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of function_def artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Function Def"
+version: "1.0.0"
+author: n03_builder
+tags: [function_def, builder, examples]
+tldr: "Golden and anti-examples for function def construction, demonstrating ideal structure and common pitfalls."
+domain: "function def construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: function-def-builder
@@ -48,7 +58,7 @@ returns:
   description: "Array of search results with title, URL, and snippet"
 provider_compat: [openai, anthropic, gemini, bedrock]
 strict: false
-quality: null
+quality: 8.8
 tags: [function_def, search, web, P04]
 tldr: "Web search function: query + max_results + language params, returns ranked results array"
 examples:

@@ -4,6 +4,15 @@ id: bld_tools_rag_source
 pillar: P04
 llm_function: CALL
 version: 1.0.0
+quality: 9.1
+title: "Tools Rag Source"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: rag-source-builder

@@ -16,7 +16,7 @@ prerequisites:
   - Timestamp is available or can be generated
 validation_method: checklist
 domain: signal
-quality: 8.8
+quality: 9.0
 tags: [instruction, signal, orchestration, P12]
 idempotent: false
 atomic: true

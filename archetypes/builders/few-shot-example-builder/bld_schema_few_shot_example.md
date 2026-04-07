@@ -6,6 +6,15 @@ llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for few_shot_example
 pattern: TEMPLATE derives from this. CONFIG restricts this.
 version: "2.0.0"
+quality: 9.1
+title: "Schema Few Shot Example"
+author: n03_builder
+tags: [few_shot_example, builder, examples]
+tldr: "Golden and anti-examples for few shot example construction, demonstrating ideal structure and common pitfalls."
+domain: "few shot example construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: few_shot_example

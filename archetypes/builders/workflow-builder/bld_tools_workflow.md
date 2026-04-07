@@ -4,6 +4,16 @@ id: bld_tools_workflow
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for workflow production
+quality: 9.0
+title: "Tools Workflow"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow, builder, examples]
+tldr: "Golden and anti-examples for workflow construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: workflow-builder

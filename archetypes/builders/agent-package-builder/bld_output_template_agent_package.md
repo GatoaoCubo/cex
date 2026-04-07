@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce an agent_package manifest
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Agent Package"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_package, builder, examples]
+tldr: "Golden and anti-examples for agent package construction, demonstrating ideal structure and common pitfalls."
+domain: "agent package construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: agent_package

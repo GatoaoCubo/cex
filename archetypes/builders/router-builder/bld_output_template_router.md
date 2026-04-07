@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a router artifact
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Router"
+version: "1.0.0"
+author: n03_builder
+tags: [router, builder, examples]
+tldr: "Golden and anti-examples for router construction, demonstrating ideal structure and common pitfalls."
+domain: "router construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: router
@@ -12,18 +22,22 @@ pattern: every field here exists in SCHEMA.md — template derives, never invent
 id: p02_router_{{router_slug}}
 kind: router
 pillar: P02
+
 version: "1.0.0"
 created: "{{YYYY-MM-DD}}"
 updated: "{{YYYY-MM-DD}}"
 author: "{{who_produced}}"
+
 routes_count: {{integer_matching_table}}
 fallback_route: "{{default_destination}}"
 confidence_threshold: {{0.0_to_1.0}}
 domain: "{{routing_domain}}"
+
 quality: null
 tags: [router, {{tag_2}}, {{tag_3}}]
 tldr: "{{dense_summary_max_160ch}}"
 timeout_ms: {{integer_ms}}
+
 retry_count: {{integer}}
 load_balance: "{{round_robin|weighted|priority|none}}"
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
@@ -47,10 +61,24 @@ Trigger: {{ambiguous_match_description}}
 Action: {{escalation_action}}
 Notification: {{signal_type_or_none}}
 ## Integration
-- Receives from: {{upstream_source}}
-- Routes to: {{downstream_destinations}}
-- Consults: {{dispatch_rules_or_model_cards}}
-- Signal on failure: {{signal_type}}
+1. Receives from: {{upstream_source}}
+2. Routes to: {{downstream_destinations}}
+3. Consults: {{dispatch_rules_or_model_cards}}
+4. Signal on failure: {{signal_type}}
 ## References
-- {{reference_1}}
-- {{reference_2}}
+1. {{reference_1}}
+2. {{reference_2}}
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | router construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

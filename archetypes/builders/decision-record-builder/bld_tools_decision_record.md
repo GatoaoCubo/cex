@@ -4,6 +4,16 @@ id: bld_tools_decision_record
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for decision_record production
+quality: 9.0
+title: "Tools Decision Record"
+version: "1.0.0"
+author: n03_builder
+tags: [decision_record, builder, examples]
+tldr: "Golden and anti-examples for decision record construction, demonstrating ideal structure and common pitfalls."
+domain: "decision record construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: decision-record-builder

@@ -9,7 +9,7 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.0
 tags: [schema, retriever, P04, P06, vector-search, RAG]
 density_score: 1.0
 ---

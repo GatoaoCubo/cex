@@ -5,6 +5,16 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for compression_config
 pattern: 3-phase pipeline (research -> compose -> validate)
+quality: 9.2
+title: "Instruction Compression Config"
+version: "1.0.0"
+author: n03_builder
+tags: [compression_config, builder, examples]
+tldr: "Golden and anti-examples for compression config construction, demonstrating ideal structure and common pitfalls."
+domain: "compression config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a compression_config
@@ -39,3 +49,29 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 9. Confirm body <= 4096 bytes
 10. Cross-check: is this a compression strategy? If this is a token allocation it belongs in `token_budget`. If this is state persistence it belongs in `session_backend`. If this is long-term memory it belongs in memory config. This artifact specifies HOW to compress, not HOW MUCH to allocate or WHERE to store.
 11. If score < 8.0: revise in the same pass before outputting
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify compression
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | compression config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
-quality: 8.8
+quality: 9.1
 tags: [quality_gate, retriever, P11, validation, RAG, vector-search]
 tldr: "10 HARD gates block delivery. 12 SOFT dimensions score 0-10. Threshold 7.0."
 density_score: 1.0

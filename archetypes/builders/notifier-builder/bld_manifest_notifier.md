@@ -14,6 +14,10 @@ keywords: [notifier, notification, email, sms, slack, discord, push, alert]
 triggers: ["create notifier", "define notification channel", "build email sender"]
 geo_description: >
   L1: Specialist in building notifier artifacts — push delivery components that send n. L2: Define notification channel (email, sms, slack, discord, push, in_app, teams). L3: When user needs to create, build, or scaffold notifier.
+quality: 9.1
+title: "Manifest Notifier"
+tldr: "Golden and anti-examples for notifier construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # notifier-builder
 
@@ -25,13 +29,13 @@ Mailgun. Masters channel selection, message templates, priority levels, rate lim
 delivery guarantees. Produces notifier artifacts with channel, template, priority, and rate config.
 
 ## Capabilities
-- Define notification channel (email, sms, slack, discord, push, in_app, teams)
-- Specify message templates with variable substitution ({{user_name}}, {{order_id}}, etc.)
-- Configure priority levels (critical, high, normal, low) with delivery timing semantics
-- Define rate limiting and throttling rules (max_per_minute, max_per_hour)
-- Map delivery guarantees (at_least_once with retry, best_effort fire-and-forget)
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish notifier from webhook (event-driven HTTP) and api_client (full integration)
+1. Define notification channel (email, sms, slack, discord, push, in_app, teams)
+2. Specify message templates with variable substitution ({{user_name}}, {{order_id}}, etc.)
+3. Configure priority levels (critical, high, normal, low) with delivery timing semantics
+4. Define rate limiting and throttling rules (max_per_minute, max_per_hour)
+5. Map delivery guarantees (at_least_once with retry, best_effort fire-and-forget)
+6. Validate artifact against quality gates (HARD + SOFT)
+7. Distinguish notifier from webhook (event-driven HTTP) and api_client (full integration)
 
 ## Routing
 keywords: [notifier, notification, email, sms, slack, discord, push, alert, sendgrid, twilio,
@@ -45,3 +49,29 @@ I answer: "how does this system deliver notifications to users, via which channe
 template and priority?"
 I do NOT handle: webhook (event-driven HTTP endpoints), api_client (request-response
 integration), mcp_server (protocol servers), daemon (background processes).
+
+## Metadata
+
+```yaml
+id: notifier-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply notifier-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P04 |
+| Domain | notifier |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

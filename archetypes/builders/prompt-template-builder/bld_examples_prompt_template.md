@@ -9,6 +9,10 @@ created: "2026-03-26"
 updated: "2026-03-26"
 author: builder
 tags: [examples, prompt-template, P03, golden, anti-example]
+quality: 9.1
+title: "Examples Prompt Template"
+tldr: "Golden and anti-examples for prompt template construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 
 # Examples — prompt-template-builder
@@ -57,7 +61,7 @@ variables:
 variable_syntax: "mustache"
 composable: false
 domain: knowledge
-quality: 0.92
+quality: 9.0
 tags: [knowledge-card, pytha, production, parameterized]
 tldr: "Generates a structured knowledge card for any topic and domain with configurable depth."
 keywords: [knowledge, card, synthesis, structured, reusable, topic]

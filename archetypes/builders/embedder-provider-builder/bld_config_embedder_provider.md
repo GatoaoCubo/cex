@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Embedder Provider"
+version: "1.0.0"
+author: n03_builder
+tags: [embedder_provider, builder, examples]
+tldr: "Golden and anti-examples for embedder provider construction, demonstrating ideal structure and common pitfalls."
+domain: "embedder provider construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: embedder_provider Production Rules
 ## Naming Convention
@@ -27,31 +37,57 @@ permission_scope: nucleus
 | Model slug | snake_case, no provider prefix | `text_embedding_3_small`, `embed_english_v3_0` |
 Rule: id MUST equal filename stem (validator checks this).
 ## File Paths
-- Output: `cex/P01_knowledge/examples/p01_emb_{provider}_{slug}.yaml`
-- Compiled: `cex/P01_knowledge/compiled/p01_emb_{provider}_{slug}.yaml`
+1. Output: `cex/P01_knowledge/examples/p01_emb_{provider}_{slug}.yaml`
+2. Compiled: `cex/P01_knowledge/compiled/p01_emb_{provider}_{slug}.yaml`
 ## Size Limits (aligned with SCHEMA)
-- Frontmatter: ~600-900 bytes (20+ fields)
-- Body: max 4096 bytes (excl frontmatter)
-- Total: max 5000 bytes
-- Density: >= 0.85
+1. Frontmatter: ~600-900 bytes (20+ fields)
+2. Body: max 4096 bytes (excl frontmatter)
+3. Total: max 5000 bytes
+4. Density: >= 0.85
 ## Provider Enum
 Valid: openai, cohere, voyage, jina, nomic, local, huggingface, other
 If provider not in list: use "other" and add provider name in tags.
 ## Dimension Policy (aligned with SCHEMA)
-- Frontmatter: native dimensions unless matryoshka reduction is configured
-- If matryoshka: document reduced dimension in `dimensions_override` field
-- ALWAYS integer, never float or string
-- Common dimensions: 384, 512, 768, 1024, 1536, 3072
+1. Frontmatter: native dimensions unless matryoshka reduction is configured
+2. If matryoshka: document reduced dimension in `dimensions_override` field
+3. ALWAYS integer, never float or string
+4. Common dimensions: 384, 512, 768, 1024, 1536, 3072
 ## Normalization Policy
-- ALWAYS explicit boolean: true or false
-- true: output vectors are L2-normalized (unit length), use cosine similarity
-- false: raw vectors, use dot-product or L2 distance
-- If provider normalizes by default: set `normalize: true` and note in body
+1. ALWAYS explicit boolean: true or false
+2. true: output vectors are L2-normalized (unit length), use cosine similarity
+3. false: raw vectors, use dot-product or L2 distance
+4. If provider normalizes by default: set `normalize: true` and note in body
 ## Authentication
-- NEVER hardcode API keys in artifacts
-- ALWAYS use environment variable reference: `api_key_env: "OPENAI_API_KEY"`
-- For local models: `api_key_env: null` (no auth needed)
+1. NEVER hardcode API keys in artifacts
+2. ALWAYS use environment variable reference: `api_key_env: "OPENAI_API_KEY"`
+3. For local models: `api_key_env: null` (no auth needed)
 ## Freshness
-- updated field must be within 90 days of current date
-- Embedding models change less frequently than LLMs, but pricing changes
-- Stale configs (>90d) flagged by lifecycle_rule for review
+1. updated field must be within 90 days of current date
+2. Embedding models change less frequently than LLMs, but pricing changes
+3. Stale configs (>90d) flagged by lifecycle_rule for review
+
+## Metadata
+
+```yaml
+id: bld_config_embedder_provider
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-embedder-provider.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | embedder provider construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

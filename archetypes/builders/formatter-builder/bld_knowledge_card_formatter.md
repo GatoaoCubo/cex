@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for formatter production — output presentation transforms
 sources: Mustache/Handlebars, Jinja2, JSON serialization, Markdown table rendering
+quality: 9.1
+title: "Knowledge Card Formatter"
+version: "1.0.0"
+author: n03_builder
+tags: [formatter, builder, examples]
+tldr: "Golden and anti-examples for formatter construction, demonstrating ideal structure and common pitfalls."
+domain: "formatter construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: formatter

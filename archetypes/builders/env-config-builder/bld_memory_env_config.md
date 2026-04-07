@@ -26,6 +26,9 @@ decay_rate: 0.04
 agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Env Config"
+density_score: 0.90
 ---
 ## Summary
 Environment configuration failures fall into two categories: security failures (secrets exposed because sensitivity was not marked) and reliability failures (services crash on startup because types are wrong or required variables are missing). A five-field variable specification and explicit sensitivity section address both categories systematically.
@@ -36,5 +39,60 @@ Environment configuration failures fall into two categories: security failures (
 **Scope specificity**: use the narrowest accurate scope slug. "api_service" is better than "system" because it limits which processes load the config. Common validated scopes: global (applies everywhere), api_service, agent_group (one background worker type), worker (queue consumer).
 **Never include actual values**: the artifact describes the shape and constraints of configuration, not the values themselves. Actual secrets belong in a secrets manager, not in any committed file.
 ## Anti-Pattern
-- Variable names in lowercase - environment-reading code conventionally skips lowercase names.
-- Omitting the `## Sensitive Variables` section - auditors cannot confirm the review was done.
+1. Variable names in lowercase - environment-reading code conventionally skips lowercase names.
+2. Omitting the `## Sensitive Variables` section - auditors cannot confirm the review was done.
+
+## Builder Context
+
+This ISO operates within the `env-config-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_env_config_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_env_config_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | env_config |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

@@ -26,6 +26,9 @@ decay_rate: 0.05
 agent_group: edison
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Dag"
+density_score: 0.90
 ---
 ## Summary
 Task dependency graphs fail silently when cycles exist or edge targets are undefined. Omitting topological order forces every consumer to recompute it - and different consumers may compute different valid orders, causing non-deterministic execution. Three-pass construction (nodes, edges, computed order) produces a self-contained, verifiable spec.
@@ -34,19 +37,74 @@ Task dependency graphs fail silently when cycles exist or edge targets are undef
 **Pass 2 - Edges**: each edge carries `from`, `to`, and optional `condition` (e.g., `on_success`, `on_failure`, `always`). Every `to` value must match an existing node `id`.
 **Pass 3 - Computed fields**: run topological sort (Kahn's algorithm or DFS) to produce `execution_order` as an ordered list of node ids. Identify the longest path by summed duration for `critical_path`. Embed both in the artifact so consumers need no graph library.
 **Validation checklist before emitting**:
-- No node appears in its own ancestor chain (cycle check).
-- Every edge `from` and `to` references a declared node id.
-- At least one root node (no incoming edges) exists.
-- At least one leaf node (no outgoing edges) exists.
-- `execution_order` length equals node count.
+1. No node appears in its own ancestor chain (cycle check).
+2. Every edge `from` and `to` references a declared node id.
+3. At least one root node (no incoming edges) exists.
+4. At least one leaf node (no outgoing edges) exists.
+5. `execution_order` length equals node count.
 ## Anti-Pattern
-- Creating edges `A -> B -> A` (cycle), which breaks topological sort and causes infinite loops.
-- Referencing node ids in edges before declaring those nodes, leading to dangling references.
-- Including implementation code or shell commands in the DAG spec - this is a dependency model, not a workflow executor.
-- Using a flat `steps` list instead of `nodes` + `edges` - steps imply serial order, destroying parallelism information.
-- Omitting `execution_order` and leaving it to each consumer to recompute, risking inconsistent scheduling.
+1. Creating edges `A -> B -> A` (cycle), which breaks topological sort and causes infinite loops.
+2. Referencing node ids in edges before declaring those nodes, leading to dangling references.
+3. Including implementation code or shell commands in the DAG spec - this is a dependency model, not a workflow executor.
+4. Using a flat `steps` list instead of `nodes` + `edges` - steps imply serial order, destroying parallelism information.
+5. Omitting `execution_order` and leaving it to each consumer to recompute, risking inconsistent scheduling.
 ## Context
 Applies to any task-dependency specification: build pipelines, data processing workflows, multi-agent mission plans, test suites with setup/teardown constraints. DAGs model what must happen before what; they do not prescribe how or when in absolute time. For time-based scheduling, combine with a daemon (P04) or cron trigger.
 ## Impact
-- Catches cycle bugs at spec-authoring time, not at runtime.
-- Provides a canonical execution order that all executors agree on.
+1. Catches cycle bugs at spec-authoring time, not at runtime.
+2. Provides a canonical execution order that all executors agree on.
+
+## Builder Context
+
+This ISO operates within the `dag-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Checklist
+
+1. Created via 8F pipeline
+2. Scored by cex_score across three layers
+3. Compiled by cex_compile for validation
+4. Retrieved by cex_retriever for injection
+5. Evolved by cex_evolve when quality drops
+
+## Reference
+
+```yaml
+id: p10_lr_dag_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_dag_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | dag |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Vector stores, embedding models, similarity metrics, hybrid search, reranking, metadata filtering | NOT search_tool (web), document_loader (file ingestion), db_connector (SQL)"
 domain: retriever
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, retriever, vector_search, RAG, embedding]
 safety_level: standard
 tools_listed: false

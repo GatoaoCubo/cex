@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "signal types, scale calibration, criteria ofcomposition, baseline setting, RLHF/DPO/filtering loops | NOT quality_gate (pass/fail), scoring_rubric (criteria taxonomy), metric (KPI), kpi (business outcome)"
 domain: "reward_signal"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "reward_signal", "feedback", "rlhf", "P11"]
 safety_level: standard
 tools_listed: false

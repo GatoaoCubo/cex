@@ -3,6 +3,16 @@ id: skill_memory_update
 kind: instruction
 scope: shared
 purpose: Teach builders to reflect and record learnings after execution
+quality: 9.0
+title: "Skill Memory Update"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Skill: Memory Update After Execution
 
@@ -13,14 +23,14 @@ After EVERY build session, before signaling complete.
 One structured observation per session. Focus on **reusable patterns**, not obvious facts.
 
 ### Good Observations
-- "Splitting handler into validate+process+respond reduced errors 40%"
-- "Builders with >3 tools need explicit tool-selection criteria"
-- "ISO files >4KB overflow small model context — split into sections"
+1. "Splitting handler into validate+process+respond reduced errors 40%"
+2. "Builders with >3 tools need explicit tool-selection criteria"
+3. "ISO files >4KB overflow small model context — split into sections"
 
 ### Bad Observations (DO NOT record)
-- "The schema was followed" (obvious)
-- "The file was saved" (mechanical)
-- "Quality was high" (vague)
+1. "The schema was followed" (obvious)
+2. "The file was saved" (mechanical)
+3. "Quality was high" (vague)
 
 ## How to Record
 
@@ -49,3 +59,17 @@ python _tools/cex_memory_update.py \
 3. Pattern must be ACTIONABLE (someone else can apply it)
 4. Evidence must be MEASURABLE when possible
 5. If nothing was learned, don't force an observation
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

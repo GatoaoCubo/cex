@@ -6,6 +6,16 @@ file_position: 8/13
 pillar: P07
 llm_function: GOVERN
 purpose: Meta-template for generating EXAMPLES.md of any kind-builder
+quality: 9.1
+title: "Meta Examples Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: {{builder_name}}

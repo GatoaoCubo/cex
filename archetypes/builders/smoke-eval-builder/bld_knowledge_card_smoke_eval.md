@@ -5,6 +5,16 @@ pillar: P07
 llm_function: INJECT
 purpose: Domain knowledge for smoke_eval production — atomic searchable facts
 sources: smoke-eval-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Smoke Eval"
+version: "1.0.0"
+author: n03_builder
+tags: [smoke_eval, builder, examples]
+tldr: "Golden and anti-examples for smoke eval construction, demonstrating ideal structure and common pitfalls."
+domain: "smoke eval construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: smoke_eval

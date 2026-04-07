@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of session_backend artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Session Backend"
+version: "1.0.0"
+author: n03_builder
+tags: [session_backend, builder, examples]
+tldr: "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls."
+domain: "session backend construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: session-backend-builder
@@ -26,7 +36,7 @@ max_sessions: 50
 serialization: json
 encryption: none
 scoping: per_nucleus
-quality: null
+quality: 8.8
 tags: [session_backend, file, development, P10, zero-deps]
 tldr: "File-based sessions at .cex/runtime/sessions/, JSON, 72h TTL, 50 max, per-nucleus scoping"
 description: "Zero-dependency file backend for local development with per-nucleus session isolation"

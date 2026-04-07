@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "agent artifact construction including agent_package (10 required builder specs); NOT skill definition, NOT system_prompt writing, NOT model card documentation"
 domain: "agent"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "agent", "agent_package", "P02"]
 safety_level: standard
 tools_listed: false

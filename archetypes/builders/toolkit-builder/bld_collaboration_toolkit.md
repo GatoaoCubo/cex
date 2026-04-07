@@ -5,6 +5,16 @@ pillar: P02
 llm_function: COLLABORATE
 purpose: How toolkit-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.0
+title: "Collaboration Toolkit"
+version: "1.0.0"
+author: n03_builder
+tags: [toolkit, builder, examples]
+tldr: "Golden and anti-examples for toolkit construction, demonstrating ideal structure and common pitfalls."
+domain: "toolkit construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: toolkit-builder

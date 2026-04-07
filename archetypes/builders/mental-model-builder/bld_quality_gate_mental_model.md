@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder_agent
 domain: mental_model
-quality: 8.8
+quality: 9.0
 tags: [quality-gate, mental-model, routing, P02, cognitive-map]
 tldr: "Quality gate for mental_model artifacts: enforces routing rules, decision tree, domain map, and design-time-only scope."
 density_score: 0.85

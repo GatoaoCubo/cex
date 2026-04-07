@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of runtime_rule artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Runtime Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [runtime_rule, builder, examples]
+tldr: "Golden and anti-examples for runtime rule construction, demonstrating ideal structure and common pitfalls."
+domain: "runtime rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: runtime-rule-builder
@@ -22,7 +32,7 @@ author: "builder"
 rule_name: "payment_api_retry"
 rule_type: retry
 scope: "payment_connector"
-quality: null
+quality: 8.9
 tags: [runtime_rule, retry, payment, P09, api, resilience]
 tldr: "Payment API retry: exponential backoff 500ms base, 3 max, jitter, 5s total budget"
 description: "Retry strategy for external payment API calls with exponential backoff and jitter"

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for handoff production — task delegation packaging
 sources: orchestration patterns, delegation protocols, mission briefing design
+quality: 9.1
+title: "Knowledge Card Handoff"
+version: "1.0.0"
+author: n03_builder
+tags: [handoff, builder, examples]
+tldr: "Golden and anti-examples for handoff construction, demonstrating ideal structure and common pitfalls."
+domain: "handoff construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: handoff

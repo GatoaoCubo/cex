@@ -4,6 +4,16 @@ id: bld_architecture_workflow
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of workflow — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Workflow"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow, builder, examples]
+tldr: "Golden and anti-examples for workflow construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: workflow in the CEX

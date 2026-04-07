@@ -4,6 +4,16 @@ id: bld_tools_llm_judge
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for llm_judge production
+quality: 9.0
+title: "Tools Llm Judge"
+version: "1.0.0"
+author: n03_builder
+tags: [llm_judge, builder, examples]
+tldr: "Golden and anti-examples for llm judge construction, demonstrating ideal structure and common pitfalls."
+domain: "llm judge construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: llm-judge-builder

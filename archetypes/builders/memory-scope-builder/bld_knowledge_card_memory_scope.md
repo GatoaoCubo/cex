@@ -5,6 +5,16 @@ pillar: P02
 llm_function: INJECT
 purpose: Domain knowledge for memory_scope production
 sources: CrewAI memory architecture, Mem0 long-term memory, Mastra agent memory, conversation memory patterns, episodic vs semantic memory research
+quality: 9.0
+title: "Knowledge Card Memory Scope"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_scope, builder, examples]
+tldr: "Golden and anti-examples for memory scope construction, demonstrating ideal structure and common pitfalls."
+domain: "memory scope construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: memory_scope

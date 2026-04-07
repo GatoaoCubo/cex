@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of llm_judge artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Llm Judge"
+version: "1.0.0"
+author: n03_builder
+tags: [llm_judge, builder, examples]
+tldr: "Golden and anti-examples for llm judge construction, demonstrating ideal structure and common pitfalls."
+domain: "llm judge construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: llm-judge-builder
@@ -32,7 +42,7 @@ scale:
     1: "completely unfaithful or irrelevant"
     3: "partially faithful and relevant with notable gaps"
     5: "fully faithful to context and directly answers the question"
-quality: null
+quality: 8.9
 tags: [llm_judge, rag, faithfulness, P07]
 tldr: "RAG quality judge: gpt-4o evaluates faithfulness + relevance on 1-5 likert via DeepEval"
 description: "Evaluates RAG pipeline outputs for factual faithfulness to retrieved context and relevance to user question"

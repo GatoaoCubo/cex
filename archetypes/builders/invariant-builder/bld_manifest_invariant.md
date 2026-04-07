@@ -14,6 +14,10 @@ keywords: [law, P08, governance]
 triggers: ["create law N", "define mandatory rule X", "codify operational law Y", "what must always be followed"]
 geo_description: >
   L1: Specialist in building `law` — inviolable operational rules of the system. Knows. L2: Research and formalize inviolable operational rules from patterns, failures, or . L3: When user needs to create, build, or scaffold law.
+quality: 9.0
+title: "Manifest Invariant"
+tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # invariant-builder — MANIFEST
 ## Identity

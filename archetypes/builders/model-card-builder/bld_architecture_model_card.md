@@ -4,6 +4,16 @@ id: bld_architecture_model_card
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of model_card — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Model Card"
+version: "1.0.0"
+author: n03_builder
+tags: [model_card, builder, examples]
+tldr: "Golden and anti-examples for model card construction, demonstrating ideal structure and common pitfalls."
+domain: "model card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: model_card in the CEX

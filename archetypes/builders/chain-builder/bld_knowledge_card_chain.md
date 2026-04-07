@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for chain production — sequential prompt pipelines
 sources: LangChain SequentialChain, DSPy Module composition, Anthropic prompt chaining guide
+quality: 9.1
+title: "Knowledge Card Chain"
+version: "1.0.0"
+author: n03_builder
+tags: [chain, builder, examples]
+tldr: "Golden and anti-examples for chain construction, demonstrating ideal structure and common pitfalls."
+domain: "chain construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: chain

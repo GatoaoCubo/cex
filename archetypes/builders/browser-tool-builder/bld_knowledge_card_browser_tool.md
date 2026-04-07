@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for browser_tool production — browser automation and DOM interaction specification
 sources: Playwright docs, Puppeteer API, W3C WebDriver, ARIA spec, CSS selectors level 4
+quality: 9.1
+title: "Knowledge Card Browser Tool"
+version: "1.0.0"
+author: n03_builder
+tags: [browser_tool, builder, examples]
+tldr: "Golden and anti-examples for browser tool construction, demonstrating ideal structure and common pitfalls."
+domain: "browser tool construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: browser_tool

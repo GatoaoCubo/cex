@@ -10,6 +10,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [instruction, notifier, P04, pipeline]
+quality: 9.1
+title: "Instruction Notifier"
+tldr: "Golden and anti-examples for notifier construction, demonstrating ideal structure and common pitfalls."
+domain: "notifier construction"
+density_score: 0.90
 ---
 # Instructions: How to Produce a notifier
 
@@ -52,3 +57,29 @@ tags: [instruction, notifier, P04, pipeline]
 10. artifact does NOT describe bidirectional HTTP (that is webhook territory)
 11. body bytes <= 1024
 12. tags list includes "notifier", len >= 3
+
+## ISO Loading
+
+```yaml
+loader: cex_skill_loader
+injection_point: F3_compose
+priority: high
+```
+
+```bash
+python _tools/cex_skill_loader.py --verify notifier
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | notifier construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

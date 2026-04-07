@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How output-validator-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Output Validator"
+version: "1.0.0"
+author: n03_builder
+tags: [output_validator, builder, examples]
+tldr: "Golden and anti-examples for output validator construction, demonstrating ideal structure and common pitfalls."
+domain: "output validator construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: output-validator-builder
@@ -27,14 +37,14 @@ I specify output validator configurations so agents and pipelines can use them.
 
 ## Handoff Protocol
 ### I Receive
-- seeds: output validator purpose, target system, constraints
-- optional: specific parameter values, upstream artifact references
+1. seeds: output validator purpose, target system, constraints
+2. optional: specific parameter values, upstream artifact references
 ### I Produce
-- output_validator artifact (.md + .yaml frontmatter)
-- committed to: `cex/P05_output/examples/p05_oval_{name}.md`
+1. output_validator artifact (.md + .yaml frontmatter)
+2. committed to: `cex/P05_output/examples/p05_oval_{name}.md`
 ### I Signal
-- signal: complete (with quality score from QUALITY_GATES)
-- if quality < 8.0: signal retry with failure reasons
+1. signal: complete (with quality score from QUALITY_GATES)
+2. if quality < 8.0: signal retry with failure reasons
 ## Builders I Depend On
 | constraint-spec-builder | Upstream dependency |
 ## Builders That Depend On Me
@@ -42,3 +52,17 @@ I specify output validator configurations so agents and pipelines can use them.
 |---------|-----|
 | quality-gate-builder | Downstream consumer |
 | formatter-builder | Downstream consumer |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `collaboration` |
+| Pillar | P12 |
+| Domain | output validator construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

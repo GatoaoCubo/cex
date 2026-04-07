@@ -4,6 +4,16 @@ id: bld_architecture_skill
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of skill — inventory, dependencies, and architectural position
+quality: 9.2
+title: "Architecture Skill"
+version: "1.0.0"
+author: n03_builder
+tags: [skill, builder, examples]
+tldr: "Golden and anti-examples for skill construction, demonstrating ideal structure and common pitfalls."
+domain: "skill construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: skill in the CEX

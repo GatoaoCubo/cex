@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 8.8
+quality: 9.0
 tags: [builder, manifest, software-project, capabilities]
 tldr: "Capability manifest: 8 verticals (scaffold, implement, test, lint, docker, ci, deploy, review), 12 platform KCs consumed, 23 CEX tools available, 3 output modes (CLI, API, pipeline)."
 density_score: 0.89

@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "model degradation sequences, timeout/threshold/circuit-breaker configuration, cost estimation per step | prompt sequencing, task routing, orchestration workflows, access permissions"
 domain: "fallback_chain"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "fallback_chain", "resilience", "degradation"]
 safety_level: standard
 tools_listed: false

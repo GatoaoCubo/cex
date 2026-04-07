@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for model_provider production — atomic searchable facts
 sources: model-provider-builder SCHEMA + MANIFEST, provider API docs, CEX router
+quality: 9.1
+title: "Knowledge Card Model Provider"
+version: "1.0.0"
+author: n03_builder
+tags: [model_provider, builder, examples]
+tldr: "Golden and anti-examples for model provider construction, demonstrating ideal structure and common pitfalls."
+domain: "model provider construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: model_provider

@@ -5,6 +5,16 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How memory-summary-builder works in crews with other builders
 pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: 9.1
+title: "Collaboration Memory Summary"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_summary, builder, examples]
+tldr: "Golden and anti-examples for memory summary construction, demonstrating ideal structure and common pitfalls."
+domain: "memory summary construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Collaboration: memory-summary-builder

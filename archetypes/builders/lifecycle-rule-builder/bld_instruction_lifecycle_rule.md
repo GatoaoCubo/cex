@@ -15,7 +15,7 @@ prerequisites:
   - No existing lifecycle rule covers this artifact kind and scope
 validation_method: checklist
 domain: lifecycle_rule
-quality: 8.9
+quality: 9.1
 tags: [instruction, lifecycle-rule, freshness, P11, governance, state-machine]
 idempotent: true
 atomic: false

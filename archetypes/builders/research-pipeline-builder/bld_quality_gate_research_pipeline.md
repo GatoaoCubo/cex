@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: research_pipeline
-quality: 9.0
+quality: 9.1
 tags: [quality-gate, research-pipeline, P11, STORM, CRAG, CRITIC, governance]
 tldr: "Gates for research pipeline artifacts — 7-stage completeness, source diversity, CRAG thresholds, CRITIC verification, budget controls."
 density_score: 1.0

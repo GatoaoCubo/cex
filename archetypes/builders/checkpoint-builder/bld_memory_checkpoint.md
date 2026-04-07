@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [checkpoint, workflow state, ttl, resume, state minimization, chain, rollback, orphan]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Checkpoint"
+density_score: 0.90
 ---
 ## Summary
 Checkpoints are only useful if they can be found and restored. Three properties make or break checkpoint utility: TTL enforcement (prevents orphan accumulation), workflow_ref presence (enables association during incident recovery), and state minimization (determines restore speed). The most expensive failure is a checkpoint that exists but cannot be used — correct id and step, but missing workflow_ref blocks recovery tooling.
@@ -28,27 +31,53 @@ Checkpoints are only useful if they can be found and restored. Three properties 
 **TTL + workflow_ref + minimal state.**
 
 TTL schema:
-- 1h: interactive/human-in-the-loop workflows
-- 24h: batch processing (single run)
-- 7d: multi-day research or ingestion pipelines
-- 30d: compliance/audit workflows (retention-driven)
-- none: permanent archival only — requires justification
+1. 1h: interactive/human-in-the-loop workflows
+2. 24h: batch processing (single run)
+3. 7d: multi-day research or ingestion pipelines
+4. 30d: compliance/audit workflows (retention-driven)
+5. none: permanent archival only — requires justification
 
 State minimization:
-- Include only keys needed to re-enter at this step
-- Exclude: derived values, large blobs (reference by id), volatile counters
-- Target: < 512 bytes; > 1024 bytes requires justification
+1. Include only keys needed to re-enter at this step
+2. Exclude: derived values, large blobs (reference by id), volatile counters
+3. Target: < 512 bytes; > 1024 bytes requires justification
 
 Chain integrity:
-- Always set parent_checkpoint (null only for first checkpoint)
-- Chain must be traversable; each parent must exist or be archived
-- On completion: write terminal checkpoint with resumable: false
+1. Always set parent_checkpoint (null only for first checkpoint)
+2. Chain must be traversable; each parent must exist or be archived
+3. On completion: write terminal checkpoint with resumable: false
 
 Step alignment: step field must exactly match the workflow's step definition name.
 
 ## Anti-Pattern
-- Omitting TTL (orphan checkpoints; storage bloat across all runs).
-- Missing workflow_ref (cannot associate checkpoint with workflow during recovery).
-- Storing full object graphs in state (restore time scales with size; store ids instead).
-- step value mismatched from workflow definition (resume tooling cannot find re-entry point).
-- Setting resumable: false without explanation (callers cannot distinguish tombstone from failure).
+1. Omitting TTL (orphan checkpoints; storage bloat across all runs).
+2. Missing workflow_ref (cannot associate checkpoint with workflow during recovery).
+3. Storing full object graphs in state (restore time scales with size; store ids instead).
+4. step value mismatched from workflow definition (resume tooling cannot find re-entry point).
+5. Setting resumable: false without explanation (callers cannot distinguish tombstone from failure).
+
+## Metadata
+
+```yaml
+id: p10_lr_checkpoint_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-checkpoint-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | checkpoint |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

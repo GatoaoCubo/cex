@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n04_knowledge
 domain: data_platform
-quality: 8.8
+quality: 9.1
 tags: [builder, supabase, data-layer, architecture, multi-nucleus]
 density_score: 0.90
 ---

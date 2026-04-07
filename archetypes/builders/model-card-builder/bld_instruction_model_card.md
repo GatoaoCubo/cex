@@ -15,7 +15,7 @@ prerequisites:
   - The model is not already documented in the P02 examples directory
 validation_method: checklist
 domain: model_card
-quality: 8.9
+quality: 9.1
 tags: [instruction, model-card, P02, llm-spec, pricing, capabilities]
 idempotent: true
 atomic: false

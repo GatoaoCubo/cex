@@ -4,6 +4,16 @@ id: bld_architecture_diagram
 pillar: P08
 llm_function: BECOME
 purpose: Component map of diagram — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Diagram"
+version: "1.0.0"
+author: n03_builder
+tags: [diagram, builder, examples]
+tldr: "Golden and anti-examples for diagram construction, demonstrating ideal structure and common pitfalls."
+domain: "diagram construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Input Schema"
+version: "1.0.0"
+author: n03_builder
+tags: [input_schema, builder, examples]
+tldr: "Golden and anti-examples for input schema construction, demonstrating ideal structure and common pitfalls."
+domain: "input schema construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: input_schema Production Rules
 ## Naming Convention
@@ -26,12 +36,12 @@ permission_scope: nucleus
 | Scope slugs | snake_case, lowercase | `brain_query`, `research_input` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `cex/P06_schema/examples/p06_is_{scope_slug}.yaml`
-- Compiled: `cex/P06_schema/compiled/p06_is_{scope_slug}.json`
+1. Output: `cex/P06_schema/examples/p06_is_{scope_slug}.yaml`
+2. Compiled: `cex/P06_schema/compiled/p06_is_{scope_slug}.json`
 ## Size Limits (aligned with SCHEMA)
-- Body: max 3072 bytes
-- Total: ~4000 bytes including frontmatter
-- Density: >= 0.80
+1. Body: max 3072 bytes
+2. Total: ~4000 bytes including frontmatter
+3. Density: >= 0.80
 ## Field Type Enum
 | Type | JSON equivalent | Example |
 |------|----------------|---------|
@@ -42,6 +52,18 @@ Rule: id MUST equal filename stem.
 | list | array | [1, 2, 3] |
 | object | object | {key: value} |
 ## Required vs Optional Policy
-- Required fields: MUST be provided by caller, error_message SHOULD be set
-- Optional fields: MUST have default value, caller can omit
-- No field can be both required AND have a default (required means caller provides)
+1. Required fields: MUST be provided by caller, error_message SHOULD be set
+2. Optional fields: MUST have default value, caller can omit
+3. No field can be both required AND have a default (required means caller provides)
+
+## Metadata
+
+```yaml
+id: bld_config_input_schema
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-input-schema.md
+```

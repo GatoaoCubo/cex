@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for agent_package
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Agent Package"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_package, builder, examples]
+tldr: "Golden and anti-examples for agent package construction, demonstrating ideal structure and common pitfalls."
+domain: "agent package construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: agent_package

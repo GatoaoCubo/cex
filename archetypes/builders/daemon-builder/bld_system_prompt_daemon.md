@@ -13,7 +13,7 @@ rules_count: 12
 tone: technical
 knowledge_boundary: "daemon lifecycle, restart policies, signal handling, health checks, PID management, resource limits, graceful shutdown, log rotation, monitoring | NOT hooks, skills, cli_tools, workflows, connectors"
 domain: "daemon"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "daemon", "background_process", "P04"]
 safety_level: standard
 tools_listed: false

@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for quality_gate production
 pattern: derives from SCHEMA.md — no extra fields
+quality: 9.0
+title: "Output Template Quality Gate"
+version: "1.0.0"
+author: n03_builder
+tags: [quality_gate, builder, examples]
+tldr: "Golden and anti-examples for quality gate construction, demonstrating ideal structure and common pitfalls."
+domain: "quality gate construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: quality_gate
@@ -30,12 +40,24 @@ density_score: {{0.80_to_1.00}}
 | Operator | {{>= / <= / == / !=}} |
 | Scope | {{where_gate_applies}} |
 ## Checklist (HARD gates — ALL must pass)
-- [ ] {{check_1}}: {{description}}
-- [ ] {{check_2}}: {{description}}
-- [ ] {{check_3}}: {{description}}
+1. [ ] {{check_1}}: {{description}}
+2. [ ] {{check_2}}: {{description}}
+3. [ ] {{check_3}}: {{description}}
 ## Scoring (SOFT gates — weighted dimensions)
 | Dimension | Weight | Criteria |
 |-----------|--------|----------|
 | {{dim_1}} | {{pct}}% | {{what_to_check}} |
 | {{dim_2}} | {{pct}}% | {{what_to_check}} |
 | {{dim_3}} | {{pct}}% | {{wha
+
+## Metadata
+
+```yaml
+id: bld_output_template_quality_gate
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-output-template-quality-gate.md
+```

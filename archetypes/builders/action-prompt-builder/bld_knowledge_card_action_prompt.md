@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for action_prompt production
 sources: OpenAI Chat API, Anthropic prompt guide, DSPy signatures, LangChain templates
+quality: 9.1
+title: "Knowledge Card Action Prompt"
+version: "1.0.0"
+author: n03_builder
+tags: [action_prompt, builder, examples]
+tldr: "Golden and anti-examples for action prompt construction, demonstrating ideal structure and common pitfalls."
+domain: "action prompt construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: action_prompt

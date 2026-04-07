@@ -4,6 +4,16 @@ id: bld_tools_reasoning_trace
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to reasoning_trace production
+quality: 9.0
+title: "Tools Reasoning Trace"
+version: "1.0.0"
+author: n03_builder
+tags: [reasoning_trace, builder, examples]
+tldr: "Golden and anti-examples for reasoning trace construction, demonstrating ideal structure and common pitfalls."
+domain: "reasoning trace construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: reasoning-trace-builder

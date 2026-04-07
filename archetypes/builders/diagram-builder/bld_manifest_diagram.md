@@ -14,6 +14,10 @@ keywords: [diagram, visual, architecture, mermaid, ascii, flow, layered]
 triggers: ["draw architecture diagram", "visualize system flow", "create diagram of X"]
 geo_description: >
   L1: Specialist in building `diagram` artifacts — visual representations of architect. L2: Analyze system architecture to produce visual representations. L3: When user needs to create, build, or scaffold diagram.
+quality: 9.0
+title: "Manifest Diagram"
+tldr: "Golden and anti-examples for diagram construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # diagram-builder — MANIFEST
 ## Identity

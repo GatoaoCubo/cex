@@ -6,6 +6,16 @@ file_position: 3/13
 pillar: P01
 llm_function: INJECT
 purpose: Meta-template for generating KNOWLEDGE.md of any kind-builder
+quality: 9.1
+title: "Meta Knowledge Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: {{type_name}}

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of context_window_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Context Window Config"
+version: "1.0.0"
+author: n03_builder
+tags: [context_window_config, builder, examples]
+tldr: "Golden and anti-examples for context window config construction, demonstrating ideal structure and common pitfalls."
+domain: "context window config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: context-window-config-builder
@@ -39,11 +49,11 @@ tldr: "Opus 200K RAG-heavy: 50% context, 16% output, 5% system — priority trun
 # Remaining 19% unallocated (buffer for dynamic scaling)
 ```
 WHY THIS IS GOLDEN:
-- quality: null
-- Budgets sum <= total_tokens (162K of 200K, with buffer)
-- output_reserve >= 2000 (32K)
-- priority_tiers present and ordered
-- overflow_strategy is valid enum
+1. quality: null
+2. Budgets sum <= total_tokens (162K of 200K, with buffer)
+3. output_reserve >= 2000 (32K)
+4. priority_tiers present and ordered
+5. overflow_strategy is valid enum
 
 ## Anti-Example
 BAD OUTPUT:
@@ -60,3 +70,17 @@ FAILURES:
 3. output_reserve: too small (< 2000)
 4. quality: not null
 5. No priority_tiers or overflow_strategy
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `examples` |
+| Pillar | P07 |
+| Domain | context window config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

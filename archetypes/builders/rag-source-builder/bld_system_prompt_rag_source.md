@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "URL validation, crawl scheduling, freshness policies, reliability scoring, RAG pipeline integration, source authority assessment | Does NOT: extract or distill content (knowledge_card), provide domain background prose (context_doc), configure embedding models (embedding_config)"
 domain: rag_source
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, rag_source, P01]
 safety_level: standard
 tools_listed: false

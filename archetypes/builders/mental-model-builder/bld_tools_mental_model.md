@@ -4,6 +4,16 @@ id: bld_tools_mental_model
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for mental_model (P02) production
+quality: 9.1
+title: "Tools Mental Model"
+version: "1.0.0"
+author: n03_builder
+tags: [mental_model, builder, examples]
+tldr: "Golden and anti-examples for mental model construction, demonstrating ideal structure and common pitfalls."
+domain: "mental model construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: mental-model-builder
@@ -34,3 +44,23 @@ purpose: Tools and APIs available for mental_model (P02) production
 No automated validator exists yet. Check each QUALITY_GATES.md gate manually.
 Key checks: YAML parses, id pattern match, kind == mental_model, pillar == P02 (not P10),
 quality == null, routing_rules >= 3, decision_tree >= 2, keywords are specific.
+
+## Pipeline Integration
+
+1. Created via 8F pipeline from F1-Focus through F8-Furnish
+2. Scored by cex_score across three structural layers
+3. Compiled by cex_compile for structural validation
+4. Retrieved by cex_retriever for context injection
+5. Evolved by cex_evolve when quality regresses below target
+
+## Metadata
+
+```yaml
+id: bld_tools_mental_model
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-mental-model.md
+```

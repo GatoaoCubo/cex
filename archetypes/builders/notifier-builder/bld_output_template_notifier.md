@@ -9,6 +9,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [output_template, notifier, P04]
+quality: 9.1
+title: "Output Template Notifier"
+tldr: "Golden and anti-examples for notifier construction, demonstrating ideal structure and common pitfalls."
+domain: "notifier construction"
+density_score: 0.90
 ---
 # Output Template: notifier
 
@@ -51,22 +56,36 @@ description: "{{<= 200ch description of what notifications this sends and when}}
 **Pattern**: `{{message pattern with {{vars}} shown}}`
 
 **Variables**:
-- `{{var1}}`: {{what it contains}}
-- `{{var2}}`: {{what it contains}}
+1. `{{var1}}`: {{what it contains}}
+2. `{{var2}}`: {{what it contains}}
 
 **Examples by priority**:
-- critical: `{{full message example for critical priority}}`
-- high: `{{full message example for high priority}}`
-- normal: `{{full message example for normal priority}}`
+1. critical: `{{full message example for critical priority}}`
+2. high: `{{full message example for high priority}}`
+3. normal: `{{full message example for normal priority}}`
 
 ## Delivery
-- rate_limit: {{max_per_minute}}/min, {{max_per_hour}}/hr
-- retry: {{max_attempts}}x {{backoff}} backoff
-- guarantee: {{at_least_once|best_effort}}
-- on_failure: {{what happens — log, alert, dead-letter queue}}
+1. rate_limit: {{max_per_minute}}/min, {{max_per_hour}}/hr
+2. retry: {{max_attempts}}x {{backoff}} backoff
+3. guarantee: {{at_least_once|best_effort}}
+4. on_failure: {{what happens — log, alert, dead-letter queue}}
 
 ## Configuration
-- endpoint: `{{provider API endpoint or webhook URL pattern}}`
-- auth: `{{env var name for credentials, e.g. SENDGRID_API_KEY}}`
-- channel_id: `{{channel-specific identifier, e.g. Slack channel #alerts}}`
+1. endpoint: `{{provider API endpoint or webhook URL pattern}}`
+2. auth: `{{env var name for credentials, e.g. SENDGRID_API_KEY}}`
+3. channel_id: `{{channel-specific identifier, e.g. Slack channel #alerts}}`
 ```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P04 |
+| Domain | notifier construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

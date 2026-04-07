@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for multi_modal_config
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.0
+title: "Schema Multi Modal Config"
+version: "1.0.0"
+author: n03_builder
+tags: [multi_modal_config, builder, examples]
+tldr: "Golden and anti-examples for multi modal config construction, demonstrating ideal structure and common pitfalls."
+domain: "multi modal config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: multi_modal_config

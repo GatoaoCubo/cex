@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for component_map production — structured system inventories
 sources: systems engineering (CMDB), microservice registries, C4 model, dependency graph theory
+quality: 9.1
+title: "Knowledge Card Component Map"
+version: "1.0.0"
+author: n03_builder
+tags: [component_map, builder, examples]
+tldr: "Golden and anti-examples for component map construction, demonstrating ideal structure and common pitfalls."
+domain: "component map construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: component_map

@@ -19,6 +19,9 @@ decay_rate: 0.03
 keywords: [social-publisher, config, reusability, pipeline, automation, anti-pattern]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Social Publisher"
+density_score: 0.90
 ---
 # Learning: social_publisher
 

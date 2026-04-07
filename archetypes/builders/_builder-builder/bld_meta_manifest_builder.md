@@ -4,6 +4,16 @@ file_position: 1/13
 pillar: P02
 llm_function: BECOME
 purpose: Meta-template for generating MANIFEST.md of any kind-builder
+quality: 9.1
+title: "Meta Manifest Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # {{builder_name}}
@@ -50,10 +60,10 @@ Specialist in building `{{type_name}}` — {{one_line_description}}.
 ## Capabilities
 <!-- NOTE: 4-6 bullets descrevendo o that the builder PODE fazer -->
 <!-- Pattern observed in the 4 existing builders: -->
-- Research/analisar {{domain_knowledge}} for produzir {{type_name}}
-- Produce {{type_name}} with frontmatter complete ({{field_count}} fields)
-- Validate artifact against quality gates ({{hard_count}} HARD + {{soft_count}} SOFT)
-- {{capability_extra_1}}
+1. Research/analisar {{domain_knowledge}} for produzir {{type_name}}
+2. Produce {{type_name}} with frontmatter complete ({{field_count}} fields)
+3. Validate artifact against quality gates ({{hard_count}} HARD + {{soft_count}} SOFT)
+4. {{capability_extra_1}}
 <!-- NOTE: {{field_count}} = count fields in _schema.yaml -->
 <!-- NOTE: {{hard_count}}/{{soft_count}} = define in QUALITY_GATES.md -->
 
@@ -73,3 +83,17 @@ I do NOT handle: {{exclusion_1}}, {{exclusion_2}}, {{exclusion_3}}.
 <!-- NOTE: {{ROLE_CAPS}} = role in CAPS. Ex: MODEL DOCUMENTATION, KNOWLEDGE DISTILLATION -->
 <!-- NOTE: {{exclusions}} = types vizinhos no mesmo Pillar or frequentemente confundidos -->
 <!-- Look up confusions in TAXONOMY_LAYERS.yaml overlaps e na _schema.yaml do Pillar -->
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `` |
+| Pillar | P02 |
+| Domain | _builder construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

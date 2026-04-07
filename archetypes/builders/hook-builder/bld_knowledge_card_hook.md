@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for hook production — event interception specification
 sources: Git hooks, Claude Code hooks, Kubernetes admission webhooks, React lifecycle
+quality: 9.1
+title: "Knowledge Card Hook"
+version: "1.0.0"
+author: n03_builder
+tags: [hook, builder, examples]
+tldr: "Golden and anti-examples for hook construction, demonstrating ideal structure and common pitfalls."
+domain: "hook construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: hook

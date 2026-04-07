@@ -4,6 +4,16 @@ id: bld_tools_axiom
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for axiom production
+quality: 9.1
+title: "Tools Axiom"
+version: "1.0.0"
+author: n03_builder
+tags: [axiom, builder, examples]
+tldr: "Golden and anti-examples for axiom construction, demonstrating ideal structure and common pitfalls."
+domain: "axiom construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: axiom-builder
@@ -31,10 +41,22 @@ purpose: Tools and APIs available for axiom production
 
 ## Interim Validation
 No automated validator exists yet. Manually check each QUALITY_GATES.md gate:
-- [ ] YAML frontmatter parses without error
-- [ ] id matches `p10_ax_` pattern
-- [ ] kind == "axiom"
-- [ ] quality == null
-- [ ] rule is ONE atomic sentence
-- [ ] scope names concrete domain boundary
-- [ ] density >= 0.80 (no filler phrases)
+1. [ ] YAML frontmatter parses without error
+2. [ ] id matches `p10_ax_` pattern
+3. [ ] kind == "axiom"
+4. [ ] quality == null
+5. [ ] rule is ONE atomic sentence
+6. [ ] scope names concrete domain boundary
+7. [ ] density >= 0.80 (no filler phrases)
+
+## Metadata
+
+```yaml
+id: bld_tools_axiom
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-axiom.md
+```

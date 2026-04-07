@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Scoring Rubric"
+version: "1.0.0"
+author: n03_builder
+tags: [scoring_rubric, builder, examples]
+tldr: "Golden and anti-examples for scoring rubric construction, demonstrating ideal structure and common pitfalls."
+domain: "scoring rubric construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: scoring_rubric Production Rules
 ## Naming
@@ -26,14 +36,40 @@ permission_scope: nucleus
 | Framework names | descriptive slug | 5d, 12lp, kc_quality |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: cex/P07_evals/examples/p07_sr_{framework_slug}.md
-- Compiled: cex/P07_evals/compiled/p07_sr_{framework_slug}.yaml
+1. Output: cex/P07_evals/examples/p07_sr_{framework_slug}.md
+2. Compiled: cex/P07_evals/compiled/p07_sr_{framework_slug}.yaml
 ## Size Limits (aligned with SCHEMA)
-- Body: max 5120 bytes
-- Density: >= 0.80
-- Dimensions: >= 3 (no upper limit, but 3-8 recommended)
+1. Body: max 5120 bytes
+2. Density: >= 0.80
+3. Dimensions: >= 3 (no upper limit, but 3-8 recommended)
 ## Weight Policy
-- All dimension weights MUST sum to exactly 100%
-- Integer percentages preferred (25%, 20%, 15%)
-- No dimension below 5% (too small to matter)
-- No dimension above 40% (avoid single-dimension dominance)
+1. All dimension weights MUST sum to exactly 100%
+2. Integer percentages preferred (25%, 20%, 15%)
+3. No dimension below 5% (too small to matter)
+4. No dimension above 40% (avoid single-dimension dominance)
+
+## Metadata
+
+```yaml
+id: bld_config_scoring_rubric
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-scoring-rubric.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | scoring rubric construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

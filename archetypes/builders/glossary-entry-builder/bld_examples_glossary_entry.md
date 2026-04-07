@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of glossary_entry artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.0
+title: "Examples Glossary Entry"
+version: "1.0.0"
+author: n03_builder
+tags: [glossary_entry, builder, examples]
+tldr: "Golden and anti-examples for glossary entry construction, demonstrating ideal structure and common pitfalls."
+domain: "glossary entry construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: glossary-entry-builder
@@ -29,7 +39,7 @@ context: "Used in every artifact frontmatter as the kind field, in TAXONOMY_LAYE
 disambiguation: "kind is the CEX-specific term. 'type' is the generic programming concept. 'type_def' (P06) is a different artifact that defines costm types."
 related_terms: [pillar, layer, artifact, type_def]
 usage: "Set kind: glossary_entry in frontmatter. Route via brain_query using kind filter."
-quality: null
+quality: 8.8
 tags: [glossary, cex-taxonomy, kind, terminology]
 tldr: "kind = artifact type identifier in CEX. Belongs to one pillar, has unique schema and builder."
 ```

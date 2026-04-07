@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for model_card production — atomic searchable facts
 sources: model-card-builder MANIFEST.md + SCHEMA.md, Mitchell 2019, LiteLLM, HuggingFace
+quality: 9.1
+title: "Knowledge Card Model Card"
+version: "1.0.0"
+author: n03_builder
+tags: [model_card, builder, examples]
+tldr: "Golden and anti-examples for model card construction, demonstrating ideal structure and common pitfalls."
+domain: "model card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: model_card

@@ -4,6 +4,16 @@ id: bld_architecture_fallback_chain
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of fallback_chain — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Fallback Chain"
+version: "1.0.0"
+author: n03_builder
+tags: [fallback_chain, builder, examples]
+tldr: "Golden and anti-examples for fallback chain construction, demonstrating ideal structure and common pitfalls."
+domain: "fallback chain construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

@@ -4,6 +4,16 @@ id: bld_architecture_client
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of client — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Api Client"
+version: "1.0.0"
+author: n03_builder
+tags: [api_client, builder, examples]
+tldr: "Golden and anti-examples for api client construction, demonstrating ideal structure and common pitfalls."
+domain: "api client construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 ## Component Inventory

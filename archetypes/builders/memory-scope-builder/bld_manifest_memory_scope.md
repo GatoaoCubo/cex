@@ -14,6 +14,10 @@ keywords: ["memory scope", memory-scope, P02, memory, scope]
 triggers: ["create memory scope", "define memory scope", "build memory scope config"]
 geo_description: >
   L1: Specialist in building memory_scope artifacts — agent memory configuration an. L2: Define memory_scope with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold memory scope.
+quality: 9.1
+title: "Manifest Memory Scope"
+tldr: "Golden and anti-examples for memory scope construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # memory-scope-builder
 ## Identity
@@ -21,10 +25,10 @@ Specialist in building memory_scope artifacts — agent memory configuration and
 Masters CrewAI MemoryScope, Mastra memory, Mem0, LangChain ConversationBufferMemory, LlamaIndex ChatMemoryBuffer.
 Produces memory_scope artifacts with frontmatter complete e body structure validada.
 ## Capabilities
-- Define memory_scope with all os fields mandatory do schema
-- Specify parametros with values concrete and rationale
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish memory_scope de types adjacentes (session_state (P10)
+1. Define memory_scope with all os fields mandatory do schema
+2. Specify parametros with values concrete and rationale
+3. Validate artifact against quality gates (HARD + SOFT)
+4. Distinguish memory_scope de types adjacentes (session_state (P10)
 ## Routing
 keywords: [memory scope, memory-scope, P02, memory, scope]
 triggers: "create memory scope", "define memory scope", "build memory scope config"
@@ -32,3 +36,29 @@ triggers: "create memory scope", "define memory scope", "build memory scope conf
 In a crew, I handle MEMORY SCOPE DEFINITION.
 I answer: "what are the parameters and constraints for this memory scope?"
 I do NOT handle: session_state (P10, runtime state), knowledge_index (P10, search index), learning_record (P10, pattern storage).
+
+## Metadata
+
+```yaml
+id: memory-scope-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply memory-scope-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P02 |
+| Domain | memory_scope |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

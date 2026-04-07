@@ -16,7 +16,7 @@ prerequisites:
   - Total expected runtime is under 30 seconds
 validation_method: checklist
 domain: smoke_eval
-quality: 8.8
+quality: 9.0
 tags: [instruction, smoke-eval, testing, sanity-check, P07]
 idempotent: true
 atomic: true

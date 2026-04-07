@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for golden_test production — quality calibration reference tests
 sources: ML golden datasets, SWE-bench, DeepEval, BLEU/ROUGE reference patterns
+quality: 9.1
+title: "Knowledge Card Golden Test"
+version: "1.0.0"
+author: n03_builder
+tags: [golden_test, builder, examples]
+tldr: "Golden and anti-examples for golden test construction, demonstrating ideal structure and common pitfalls."
+domain: "golden test construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: golden_test

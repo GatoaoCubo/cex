@@ -14,6 +14,10 @@ keywords: [schedule, cron, trigger, interval, timer, temporal, recurring, workfl
 triggers: ["create schedule", "define cron job", "set up recurring trigger", "schedule workflow run"]
 geo_description: >
   L1: Specialist in building schedule artifacts — definitions de gatilhos temporais . L2: Define schedule with trigger_type (cron, interval, event, manual, one_shot). L3: When user needs to create, build, or scaffold schedule.
+quality: 9.1
+title: "Manifest Schedule"
+tldr: "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls."
+density_score: 0.90
 ---
 # schedule-builder
 ## Identity
@@ -23,12 +27,12 @@ overlap policies, catch-up semantics, and the boundary between schedule (WHEN to
 dispatch_rule (keyword routing), and workflow (o that rodar). Produces schedule artifacts
 com frontmatter complete, trigger declared, workflow_ref resolvido, and policy defined.
 ## Capabilities
-- Define schedule with trigger_type (cron, interval, event, manual, one_shot)
-- Specify cron expression with timezone correct
-- Declare workflow_ref apontando for workflow existente
-- Configure catch_up, max_concurrent, jitter, enabled
-- Validate artifact against quality gates (HARD + SOFT)
-- Distinguish schedule de dispatch_rule, workflow, hook, daemon
+1. Define schedule with trigger_type (cron, interval, event, manual, one_shot)
+2. Specify cron expression with timezone correct
+3. Declare workflow_ref apontando for workflow existente
+4. Configure catch_up, max_concurrent, jitter, enabled
+5. Validate artifact against quality gates (HARD + SOFT)
+6. Distinguish schedule de dispatch_rule, workflow, hook, daemon
 ## Routing
 keywords: [schedule, cron, trigger, interval, timer, temporal, recurring, workflow-start, timetable]
 triggers: "create schedule", "define cron job", "set up recurring trigger", "schedule workflow run"
@@ -37,3 +41,29 @@ In a crew, I handle TEMPORAL TRIGGER DEFINITION.
 I answer: "when does this workflow run, at what cadence, in what timezone, with what overlap policy?"
 I do NOT handle: workflow (what to run), dispatch_rule (keyword routing to workflows),
 hook (event-driven side effects), daemon (background persistent process), skill (reusable phases).
+
+## Metadata
+
+```yaml
+id: schedule-builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply schedule-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P12 |
+| Domain | schedule |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

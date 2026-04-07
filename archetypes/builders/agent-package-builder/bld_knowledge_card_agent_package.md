@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for agent_package production — portable agent bundle packaging
 sources: Docker OCI spec, ISO 42001 AI management, HuggingFace Model Hub, agent packaging patterns
+quality: 9.1
+title: "Knowledge Card Agent Package"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_package, builder, examples]
+tldr: "Golden and anti-examples for agent package construction, demonstrating ideal structure and common pitfalls."
+domain: "agent package construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: agent_package

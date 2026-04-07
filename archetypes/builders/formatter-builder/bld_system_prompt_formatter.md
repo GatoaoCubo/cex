@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "output format transformation rules, template engines, escaping strategies, locale-aware formatting, tabulation | data extraction/parsing, content validation, naming conventions"
 domain: "formatter"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "formatter", "output_format", "presentation"]
 safety_level: standard
 tools_listed: false

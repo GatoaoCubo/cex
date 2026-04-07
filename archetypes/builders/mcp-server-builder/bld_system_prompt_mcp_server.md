@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "MCP protocol, transport types (stdio/SSE/HTTP), tool schema design, resource URIs, auth strategies | Does NOT: define skills, connectors, clients, or daemons"
 domain: mcp_server
-quality: 8.7
+quality: 9.0
 tags: [system_prompt, mcp_server, P03]
 safety_level: standard
 tools_listed: false

@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [handoff, scope, permitted, prohibited, task-boundary, markdown, agent-transfer, signal, commit]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Handoff"
+density_score: 0.90
 ---
 ## Summary
 Handoff documents are the primary transfer interface between agents. Document quality determines whether the receiving agent executes correctly or drifts. The two highest-leverage structural elements are: (1) a SCOPE FENCE section with explicit permitted and prohibited paths, and (2) numbered atomic task steps each containing exactly one action verb.

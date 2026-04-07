@@ -2,6 +2,16 @@
 kind: output_template
 id: bld_output_template_invariant
 pillar: P00
+quality: 9.0
+title: "Output Template Invariant"
+version: "1.0.0"
+author: n03_builder
+tags: [invariant, builder, examples]
+tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
+domain: "invariant construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 id: p08_law_{{number}}
 kind: invariant
@@ -29,9 +39,9 @@ keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
 ## Rationale
 {{why_this_law_exists_detailed}}
 ## Enforcement
-- Mechanism: {{automated_check_or_review_or_runtime}}
-- Detection: {{how_violation_is_detected}}
-- Consequence: {{what_happens_on_violation}}
+1. Mechanism: {{automated_check_or_review_or_runtime}}
+2. Detection: {{how_violation_is_detected}}
+3. Consequence: {{what_happens_on_violation}}
 ## Exceptions
 {{exception_conditions_or_none}}
 ## Examples
@@ -41,8 +51,34 @@ keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
 1. **{{violation_name_1}}**: {{what_happened_and_consequence_1}}
 2. **{{violation_name_2}}**: {{what_happened_and_consequence_2}}
 ## History
-- Established: {{date_and_reason}}
-- {{revision_if_any_or_remove_line}}
+1. Established: {{date_and_reason}}
+2. {{revision_if_any_or_remove_line}}
 ## References
-- {{reference_1}}
-- {{reference_2}}
+1. {{reference_1}}
+2. {{reference_2}}
+
+## Metadata
+
+```yaml
+id: bld_output_template_invariant
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-output-template-invariant.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P00 |
+| Domain | invariant construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

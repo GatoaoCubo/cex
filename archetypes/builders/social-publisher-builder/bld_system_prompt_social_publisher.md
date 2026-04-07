@@ -13,7 +13,7 @@ rules_count: 11
 tone: technical
 knowledge_boundary: "social media publishing pipeline design, config schema, API integration patterns; NOT content writing, NOT API client implementation, NOT deployment infrastructure"
 domain: social_publisher
-quality: 8.8
+quality: 9.0
 tags: [system_prompt, social-publisher, P04, automation]
 safety_level: standard
 tools_listed: false

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for secret_config production — credential and secret management specification
 sources: HashiCorp Vault docs, Kubernetes Secrets, AWS Secrets Manager, SOPS, OWASP Secrets Management
+quality: 9.1
+title: "Knowledge Card Secret Config"
+version: "1.0.0"
+author: n03_builder
+tags: [secret_config, builder, examples]
+tldr: "Golden and anti-examples for secret config construction, demonstrating ideal structure and common pitfalls."
+domain: "secret config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: secret_config

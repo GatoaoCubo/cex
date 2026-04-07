@@ -4,6 +4,16 @@ id: bld_architecture_supervisor
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of supervisor — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Supervisor"
+version: "1.0.0"
+author: n03_builder
+tags: [supervisor, builder, examples]
+tldr: "Golden and anti-examples for supervisor construction, demonstrating ideal structure and common pitfalls."
+domain: "supervisor construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: supervisor in the CEX

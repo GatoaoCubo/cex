@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Pattern"
+version: "1.0.0"
+author: n03_builder
+tags: [pattern, builder, examples]
+tldr: "Golden and anti-examples for pattern construction, demonstrating ideal structure and common pitfalls."
+domain: "pattern construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: pattern Production Rules
 ## Naming Convention
@@ -26,18 +36,44 @@ permission_scope: nucleus
 | Slug | lowercase + underscores | `continuous_batching` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `cex/P08_architecture/examples/p08_pat_{slug}.md`
-- Compiled: `cex/P08_architecture/compiled/p08_pat_{slug}.yaml`
+1. Output: `cex/P08_architecture/examples/p08_pat_{slug}.md`
+2. Compiled: `cex/P08_architecture/compiled/p08_pat_{slug}.yaml`
 ## Size Limits (aligned with SCHEMA)
-- Body: max 4096 bytes
-- Total: ~5300 bytes (frontmatter + body)
-- Density: >= 0.80
+1. Body: max 4096 bytes
+2. Total: ~5300 bytes (frontmatter + body)
+3. Density: >= 0.80
 ## Pattern-Specific Constraints
-- Name: 2-5 words, Title Case (e.g., "Continuous Batching", "Signal Monitor")
-- Problem recurrence: must describe a situation that happens repeatedly
-- Forces minimum: at least 2 competing tensions
-- Consequences balance: MUST include at least 1 cost/drawback alongside benefits
-- Examples minimum: at least 2 concrete, named applications
-- Solution concreteness: must describe HOW (steps or diagram), not just WHAT
-- Anti-patterns: specific wrong approaches, not generic warnings
-- No prescriptive language: "consider" not "you must" (patterns recommend, laws mandate)
+1. Name: 2-5 words, Title Case (e.g., "Continuous Batching", "Signal Monitor")
+2. Problem recurrence: must describe a situation that happens repeatedly
+3. Forces minimum: at least 2 competing tensions
+4. Consequences balance: MUST include at least 1 cost/drawback alongside benefits
+5. Examples minimum: at least 2 concrete, named applications
+6. Solution concreteness: must describe HOW (steps or diagram), not just WHAT
+7. Anti-patterns: specific wrong approaches, not generic warnings
+8. No prescriptive language: "consider" not "you must" (patterns recommend, laws mandate)
+
+## Metadata
+
+```yaml
+id: bld_config_pattern
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-pattern.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `config` |
+| Pillar | P09 |
+| Domain | pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

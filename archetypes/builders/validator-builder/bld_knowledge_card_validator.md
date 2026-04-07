@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for validator production — atomic searchable facts
 sources: validator-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Validator"
+version: "1.0.0"
+author: n03_builder
+tags: [validator, builder, examples]
+tldr: "Golden and anti-examples for validator construction, demonstrating ideal structure and common pitfalls."
+domain: "validator construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: validator

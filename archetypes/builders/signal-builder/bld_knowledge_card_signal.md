@@ -5,6 +5,16 @@ pillar: P12
 llm_function: INJECT
 purpose: Domain knowledge for signal production — atomic searchable facts
 sources: signal-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Signal"
+version: "1.0.0"
+author: n03_builder
+tags: [signal, builder, examples]
+tldr: "Golden and anti-examples for signal construction, demonstrating ideal structure and common pitfalls."
+domain: "signal construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: signal

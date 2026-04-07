@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a reasoning_trace
 pattern: every field here exists in the schema; template derives, never invents
+quality: 9.1
+title: "Output Template Reasoning Trace"
+version: "1.0.0"
+author: n03_builder
+tags: [reasoning_trace, builder, examples]
+tldr: "Golden and anti-examples for reasoning trace construction, demonstrating ideal structure and common pitfalls."
+domain: "reasoning trace construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: reasoning_trace
@@ -48,10 +58,24 @@ context: "{{additional_context_or_omit}}"
 trigger: "{{instruction_id_or_user_request_or_omit}}"
 ```
 ## Derivation Notes
-- The first six body fields (agent, intent, steps, conclusion, confidence, timestamp) are required
-- `alternatives_rejected` is strongly recommended but technically optional
-- `duration_ms`, `context`, and `trigger` are optional extensions
-- Omit absent optional fields instead of filling with placeholder strings
-- Each step MUST have thought + evidence + confidence — never skip evidence
-- Overall confidence is geometric mean: `(c1 * c2 * ... * cn) ^ (1/n)`
-- Keep the trace focused: no instructions, no tool calls, no workflow steps
+1. The first six body fields (agent, intent, steps, conclusion, confidence, timestamp) are required
+2. `alternatives_rejected` is strongly recommended but technically optional
+3. `duration_ms`, `context`, and `trigger` are optional extensions
+4. Omit absent optional fields instead of filling with placeholder strings
+5. Each step MUST have thought + evidence + confidence — never skip evidence
+6. Overall confidence is geometric mean: `(c1 * c2 * ... * cn) ^ (1/n)`
+7. Keep the trace focused: no instructions, no tool calls, no workflow steps
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | reasoning trace construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

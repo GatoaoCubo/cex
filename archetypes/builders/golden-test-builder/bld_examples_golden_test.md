@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of golden_test artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Golden Test"
+version: "1.0.0"
+author: n03_builder
+tags: [golden_test, builder, examples]
+tldr: "Golden and anti-examples for golden test construction, demonstrating ideal structure and common pitfalls."
+domain: "golden test construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: golden-test-builder

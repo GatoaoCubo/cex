@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for rag_source production — atomic searchable facts
 sources: rag-source-builder MANIFEST.md + SCHEMA.md
+quality: 9.1
+title: "Knowledge Card Rag Source"
+version: "1.0.0"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: rag_source

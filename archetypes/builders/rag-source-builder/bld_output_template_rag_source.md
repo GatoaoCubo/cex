@@ -5,6 +5,15 @@ pillar: P05
 llm_function: PRODUCE
 derives_from: SCHEMA.md
 version: 1.0.0
+quality: 9.0
+title: "Output Template Rag Source"
+author: n03_builder
+tags: [rag_source, builder, examples]
+tldr: "Golden and anti-examples for rag source construction, demonstrating ideal structure and common pitfalls."
+domain: "rag source construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: rag_source

@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of env_config artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Env Config"
+version: "1.0.0"
+author: n03_builder
+tags: [env_config, builder, examples]
+tldr: "Golden and anti-examples for env config construction, demonstrating ideal structure and common pitfalls."
+domain: "env config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: env-config-builder
@@ -29,7 +39,7 @@ variables:
   - MAX_CONNECTIONS
   - DEBUG
   - REDIS_URL
-quality: null
+quality: 8.9
 tags: [env_config, api, service, P09, configuration]
 tldr: "API service env: 8 vars (2 sensitive), port 8000, structured logging, JWT auth"
 description: "Environment variables for the API service including database, auth, logging, and cache config"

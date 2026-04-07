@@ -4,6 +4,16 @@ id: bld_tools_supervisor
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for supervisor production
+quality: 9.0
+title: "Tools Supervisor"
+version: "1.0.0"
+author: n03_builder
+tags: [supervisor, builder, examples]
+tldr: "Golden and anti-examples for supervisor construction, demonstrating ideal structure and common pitfalls."
+domain: "supervisor construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: supervisor-builder

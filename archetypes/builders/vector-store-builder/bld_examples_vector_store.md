@@ -5,6 +5,16 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of vector_store artifacts
 pattern: few-shot learning — LLM reads these before producing
+quality: 9.1
+title: "Examples Vector Store"
+version: "1.0.0"
+author: n03_builder
+tags: [vector_store, builder, examples]
+tldr: "Golden and anti-examples for vector store construction, demonstrating ideal structure and common pitfalls."
+domain: "vector store construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Examples: vector-store-builder

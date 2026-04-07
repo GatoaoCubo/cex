@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema definition for workflow_primitive - SINGLE SOURCE OF TRUTH
 pattern: TEMPLATE derives from this. CONFIG restricts this. Never the inverse.
+quality: 9.1
+title: "Schema Workflow Primitive"
+version: "1.0.0"
+author: n03_builder
+tags: [workflow_primitive, builder, examples]
+tldr: "Golden and anti-examples for workflow primitive construction, demonstrating ideal structure and common pitfalls."
+domain: "workflow primitive construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: workflow_primitive

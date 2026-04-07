@@ -4,6 +4,16 @@ id: bld_tools_entity_memory
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for entity_memory production
+quality: 9.0
+title: "Tools Entity Memory"
+version: "1.0.0"
+author: n03_builder
+tags: [entity_memory, builder, examples]
+tldr: "Golden and anti-examples for entity memory construction, demonstrating ideal structure and common pitfalls."
+domain: "entity memory construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: entity-memory-builder

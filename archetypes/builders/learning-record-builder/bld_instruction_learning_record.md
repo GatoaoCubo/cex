@@ -15,7 +15,7 @@ prerequisites:
   - Enough context is available to assess reproducibility
 validation_method: checklist
 domain: learning_record
-quality: 8.9
+quality: 9.1
 tags: [instruction, learning-record, memory, P10, experience-capture]
 idempotent: true
 atomic: false

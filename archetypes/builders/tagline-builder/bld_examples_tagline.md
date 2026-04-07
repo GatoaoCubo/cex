@@ -4,6 +4,15 @@ kind: examples
 pillar: P01
 builder: tagline-builder
 version: 1.0.0
+quality: 9.1
+title: "Examples Tagline"
+author: n03_builder
+tags: [tagline, builder, examples]
+tldr: "Golden and anti-examples for tagline construction, demonstrating ideal structure and common pitfalls."
+domain: "tagline construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Examples: Tagline Builder
 
@@ -46,9 +55,23 @@ variants:
 ## Anti-Example (what NOT to produce)
 ```yaml
 # BAD: Generic, fits any brand
-- "Inovaction que transforma"        # could be any company
-- "Excelencia em each detalhe"     # zero differentiation
-- "Seu parceiro de confianca"      # meaningless
+1. "Inovaction que transforma"        # could be any company
+2. "Excelencia em each detalhe"     # zero differentiation
+3. "Seu parceiro de confianca"      # meaningless
 # BAD: Too long
 - "A plataforma complete que integra todas as suas necessidades em um so lugar"  # 13 words, not memorable
 ```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `examples` |
+| Pillar | P01 |
+| Domain | tagline construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

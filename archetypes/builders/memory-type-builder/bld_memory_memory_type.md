@@ -11,6 +11,16 @@ evidence: "kc_memory_type.md created before builder; density gates caught low-de
 outcome: "successful"
 memory_scope: "project"
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Memory Type"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_type, builder, examples]
+tldr: "Golden and anti-examples for memory type construction, demonstrating ideal structure and common pitfalls."
+domain: "memory type construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Memory: memory-type-builder

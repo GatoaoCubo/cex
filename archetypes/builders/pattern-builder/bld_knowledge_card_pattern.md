@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for pattern production — atomic searchable facts
 sources: pattern-builder MANIFEST.md + SCHEMA.md, GoF 1994, Alexander 1977, POSA 1996
+quality: 9.1
+title: "Knowledge Card Pattern"
+version: "1.0.0"
+author: n03_builder
+tags: [pattern, builder, examples]
+tldr: "Golden and anti-examples for pattern construction, demonstrating ideal structure and common pitfalls."
+domain: "pattern construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: pattern

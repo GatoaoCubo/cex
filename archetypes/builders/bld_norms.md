@@ -1,6 +1,16 @@
 ---
 kind: norms
 id: bld_norms
+quality: 9.1
+title: "Norms"
+version: "1.0.0"
+author: n03_builder
+tags: [artifact, builder, examples]
+tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
+domain: "CEX system"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Builder Norms (inject in every builder handoff)
@@ -17,10 +27,10 @@ id: bld_norms
 
 ## Quality Floor
 
-- HARD gates: all must pass (YAML parses, id pattern, kind literal, quality null, required fields)
-- SOFT gates: score >= 8.0 minimum
-- Density: >= 0.80 (no filler phrases)
-- Max 4KB per builder spec
+1. HARD gates: all must pass (YAML parses, id pattern, kind literal, quality null, required fields)
+2. SOFT gates: score >= 8.0 minimum
+3. Density: >= 0.80 (no filler phrases)
+4. Max 4KB per builder spec
 
 ## Deep Review Learnings (Waves 3-4)
 
@@ -43,3 +53,29 @@ id: bld_norms
 21. **CONFIG.md disallowed_tools**: list of blocked tools (empty list = all allowed)
 22. **CONFIG.md permission_scope**: must be nucleus | pillar | global | restricted (default: nucleus)
 23. **TOOLS.md Tool Permissions**: ## Tool Permissions section required with ALLOWED/DENIED/EFFECTIVE
+
+## Metadata
+
+```yaml
+id: bld_norms
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-norms.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `norms` |
+| Pillar |  |
+| Domain | CEX system |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

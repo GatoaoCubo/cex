@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for boot_config production — agent initialization per provider
 sources: Claude Code CLI, Cursor rules, Codex runtime, Kubernetes container spec patterns
+quality: 9.1
+title: "Knowledge Card Boot Config"
+version: "1.0.0"
+author: n03_builder
+tags: [boot_config, builder, examples]
+tldr: "Golden and anti-examples for boot config construction, demonstrating ideal structure and common pitfalls."
+domain: "boot config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: boot_config

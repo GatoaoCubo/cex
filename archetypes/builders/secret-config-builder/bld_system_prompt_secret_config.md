@@ -13,7 +13,7 @@ rules_count: 10
 tone: technical
 knowledge_boundary: "Secret providers (Vault/K8s/AWS/Portkey/1Password/SOPS), rotation policies, encryption at-rest and in-transit, access patterns | NOT env_config (generic vars), permission (access control), feature_flag (on/off toggle), rate_limit_config (throttling)"
 domain: "secret_config"
-quality: 8.8
+quality: 9.1
 tags: ["system_prompt", "secret_config", "credentials", "vault", "rotation"]
 safety_level: high
 tools_listed: false

@@ -4,6 +4,16 @@ id: bld_tools_permission
 pillar: P04
 llm_function: CALL
 purpose: Tools available for permission production
+quality: 9.0
+title: "Tools Permission"
+version: "1.0.0"
+author: n03_builder
+tags: [permission, builder, examples]
+tldr: "Golden and anti-examples for permission construction, demonstrating ideal structure and common pitfalls."
+domain: "permission construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: permission-builder
@@ -30,8 +40,20 @@ purpose: Tools available for permission production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p09_perm_ prefix
-- [ ] read/write/execute in [allow, deny, conditional]
-- [ ] roles is non-empty list
-- [ ] Access Matrix present with roles
+1. [ ] YAML parses
+2. [ ] id matches p09_perm_ prefix
+3. [ ] read/write/execute in [allow, deny, conditional]
+4. [ ] roles is non-empty list
+5. [ ] Access Matrix present with roles
+
+## Metadata
+
+```yaml
+id: bld_tools_permission
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-permission.md
+```

@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.1
+title: "Config Agent Card"
+version: "1.0.0"
+author: n03_builder
+tags: [agent_card, builder, examples]
+tldr: "Golden and anti-examples for agent card construction, demonstrating ideal structure and common pitfalls."
+domain: "agent card construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: agent_card Production Rules
 ## Naming Convention
@@ -27,12 +37,12 @@ permission_scope: nucleus
 | Name slugs | lowercase in id | `shaka`, `edison`, `lily` |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: `cex/P08_architecture/examples/p08_ac_{name_lower}.yaml`
-- Compiled: `cex/P08_architecture/compiled/p08_ac_{name_lower}.yaml`
+1. Output: `cex/P08_architecture/examples/p08_ac_{name_lower}.yaml`
+2. Compiled: `cex/P08_architecture/compiled/p08_ac_{name_lower}.yaml`
 ## Size Limits (aligned with SCHEMA)
-- Body: max 4096 bytes
-- Total: ~6000 bytes including frontmatter
-- Density: >= 0.80
+1. Body: max 4096 bytes
+2. Total: ~6000 bytes including frontmatter
+3. Density: >= 0.80
 ## Model Enum
 | Model | When to use |
 |-------|-------------|
@@ -40,12 +50,24 @@ Rule: id MUST equal filename stem.
 | sonnet | Balanced cost/quality, research, marketing |
 | haiku | Simple tasks, classification, formatting |
 ## MCP Convention
-- List all MCPs even if empty: `mcps: []`
-- Use short names: `brain`, `firecrawl`, `railway`, `pg`
-- MCP config path follows: `.mcp-{sat_lower}.json`
+1. List all MCPs even if empty: `mcps: []`
+2. Use short names: `brain`, `firecrawl`, `railway`, `pg`
+3. MCP config path follows: `.mcp-{sat_lower}.json`
 ## Scaling Defaults
 | Field | Default | Max |
 |-------|---------|-----|
 | max_concurrent | 1 | 3 (BSOD prevention) |
 | timeout_minutes | 30 | 120 |
 | memory_limit_mb | 2048 | 8192 |
+
+## Metadata
+
+```yaml
+id: bld_config_agent_card
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-agent-card.md
+```

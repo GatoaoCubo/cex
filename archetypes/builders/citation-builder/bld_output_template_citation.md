@@ -5,6 +5,16 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} for citation production
 pattern: every field here exists in SCHEMA.md — template derives, never invents
+quality: 9.0
+title: "Output Template Citation"
+version: "1.0.0"
+author: n03_builder
+tags: [citation, builder, examples]
+tldr: "Golden and anti-examples for citation construction, demonstrating ideal structure and common pitfalls."
+domain: "citation construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: citation
@@ -33,27 +43,41 @@ tldr: "{{Dense <=160ch summary of source}}"
 # {{Source Title}}
 
 ## Source
-- **Author**: {{author_name}}
-- **Title**: {{full_title}}
-- **Publisher/Venue**: {{publisher_or_venue}}
-- **Date**: {{publication_date}}
-- **Type**: {{source_type}} ({{reliability_tier}})
+1. **Author**: {{author_name}}
+2. **Title**: {{full_title}}
+3. **Publisher/Venue**: {{publisher_or_venue}}
+4. **Date**: {{publication_date}}
+5. **Type**: {{source_type}} ({{reliability_tier}})
 
 ## Excerpt
 > {{Key passage from source, 1-3 sentences}}
 
 ## Relevance
-- Supports: {{what claims or artifacts this citation grounds}}
-- Scope: {{which domains or kinds benefit from this source}}
+1. Supports: {{what claims or artifacts this citation grounds}}
+2. Scope: {{which domains or kinds benefit from this source}}
 
 ## Verification
-- URL: {{source_url}}
-- Accessed: {{date_accessed}}
-- Freshness policy: {{days until re-verification needed}}
-- DOI/ISBN: {{if applicable}}
+1. URL: {{source_url}}
+2. Accessed: {{date_accessed}}
+3. Freshness policy: {{days until re-verification needed}}
+4. DOI/ISBN: {{if applicable}}
 
 ## Related
-- Citations: {{related_citation_ids}}
-- Knowledge cards: {{supported_kc_ids}}
-- Context docs: {{supported_ctx_ids}}
+1. Citations: {{related_citation_ids}}
+2. Knowledge cards: {{supported_kc_ids}}
+3. Context docs: {{supported_ctx_ids}}
 ```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `output_template` |
+| Pillar | P05 |
+| Domain | citation construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

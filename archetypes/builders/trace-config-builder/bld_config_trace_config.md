@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+quality: 9.0
+title: "Config Trace Config"
+version: "1.0.0"
+author: n03_builder
+tags: [trace_config, builder, examples]
+tldr: "Golden and anti-examples for trace config construction, demonstrating ideal structure and common pitfalls."
+domain: "trace config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: trace_config Production Rules
 ## Naming Convention

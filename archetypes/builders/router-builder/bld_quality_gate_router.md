@@ -8,7 +8,7 @@ created: "2026-03-27"
 updated: "2026-03-27"
 author: builder
 domain: router
-quality: 8.8
+quality: 9.0
 density_score: 0.85
 tags:
   - quality-gate

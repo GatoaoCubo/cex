@@ -4,6 +4,16 @@ id: bld_architecture_system_prompt
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of system_prompt — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture System Prompt"
+version: "1.0.0"
+author: n03_builder
+tags: [system_prompt, builder, examples]
+tldr: "Golden and anti-examples for system prompt construction, demonstrating ideal structure and common pitfalls."
+domain: "system prompt construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: system_prompt in the CEX

@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for prompt_cache production
 sources: kc_prompt_cache.md, provider documentation, caching best forctices
+quality: 9.0
+title: "Knowledge Card Prompt Cache"
+version: "1.0.0"
+author: n03_builder
+tags: [prompt_cache, builder, examples]
+tldr: "Golden and anti-examples for prompt cache construction, demonstrating ideal structure and common pitfalls."
+domain: "prompt cache construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: prompt_cache

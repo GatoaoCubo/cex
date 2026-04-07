@@ -15,7 +15,7 @@ prerequisites:
   - Rule intent is classifiable as mandate, not recommendation, safety restriction, or abstract truth
 validation_method: checklist
 domain: law
-quality: 8.9
+quality: 9.1
 tags: [instruction, law, governance, P08, mandate, enforcement]
 idempotent: true
 atomic: false

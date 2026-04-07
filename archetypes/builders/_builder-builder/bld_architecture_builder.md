@@ -4,6 +4,16 @@ id: bld_architecture_builder
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of builder — inventory, dependencies, and architectural position
+quality: 9.1
+title: "Architecture Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Architecture: builder in the CEX

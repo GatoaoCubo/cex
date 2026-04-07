@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [benchmark, baseline, target, measurement, reproducibility, variance, metrics, quantitative]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Benchmark"
+density_score: 0.90
 ---
 ## Summary
 A benchmark is only as useful as it is reproducible. Reproducibility requires three things: a defined measurement methodology, a baseline from a known state, and a target expressed relative to that baseline. Benchmarks that skip any of these three components produce scores that cannot be compared across runs, operators, or system versions.

@@ -4,6 +4,16 @@ id: bld_tools_dispatch_rule
 pillar: P04
 llm_function: CALL
 purpose: Tools and runtime surfaces relevant to dispatch_rule production
+quality: 9.1
+title: "Tools Dispatch Rule"
+version: "1.0.0"
+author: n03_builder
+tags: [dispatch_rule, builder, examples]
+tldr: "Golden and anti-examples for dispatch rule construction, demonstrating ideal structure and common pitfalls."
+domain: "dispatch rule construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: dispatch-rule-builder

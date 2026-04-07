@@ -8,7 +8,7 @@ created: 2026-03-31
 updated: 2026-03-31
 author: n03_engineering
 domain: software-engineering
-quality: 9.0
+quality: 9.1
 tags: [builder, system-prompt, software-project, python, full-stack]
 tldr: "Identity prompt for the Software Project Builder. Transforms CEX builder specs and configs into complete Python projects with tests, CI/CD, Docker, and deploy configs."
 density_score: 0.90

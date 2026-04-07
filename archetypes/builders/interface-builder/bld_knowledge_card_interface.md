@@ -5,6 +5,16 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for interface production — bilateral integration contracts
 sources: Gamma et al. 1994, OpenAPI 3.x, gRPC/Protobuf, contract-first API design
+quality: 9.1
+title: "Knowledge Card Interface"
+version: "1.0.0"
+author: n03_builder
+tags: [interface, builder, examples]
+tldr: "Golden and anti-examples for interface construction, demonstrating ideal structure and common pitfalls."
+domain: "interface construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Domain Knowledge: interface

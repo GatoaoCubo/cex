@@ -3,6 +3,16 @@ kind: output_template
 id: bld_output_template_memory_type
 pillar: P05
 llm_function: PRODUCE
+quality: 9.0
+title: "Output Template Memory Type"
+version: "1.0.0"
+author: n03_builder
+tags: [memory_type, builder, examples]
+tldr: "Golden and anti-examples for memory type construction, demonstrating ideal structure and common pitfalls."
+domain: "memory type construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Output Template: memory_type
@@ -37,6 +47,18 @@ llm_function: PRODUCE
 
 ## Constraints
 
-- Total body <= 2048 bytes
-- One artifact per type (max 4 artifacts in entire system)
-- decay_rate must match type: correction=0.00, preference=0.01, convention=0.02, context=0.05
+1. Total body <= 2048 bytes
+2. One artifact per type (max 4 artifacts in entire system)
+3. decay_rate must match type: correction=0.00, preference=0.01, convention=0.02, context=0.05
+
+## Metadata
+
+```yaml
+id: bld_output_template_memory_type
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-output-template-memory-type.md
+```

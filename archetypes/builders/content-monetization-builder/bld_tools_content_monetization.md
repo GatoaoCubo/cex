@@ -4,6 +4,16 @@ id: bld_tools_content_monetization
 pillar: P11
 llm_function: CALL
 purpose: Tools, APIs, and data sources for content monetization pipeline
+quality: 9.1
+title: "Tools Content Monetization"
+version: "1.0.0"
+author: n03_builder
+tags: [content_monetization, builder, examples]
+tldr: "Golden and anti-examples for content monetization construction, demonstrating ideal structure and common pitfalls."
+domain: "content monetization construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: content-monetization-builder

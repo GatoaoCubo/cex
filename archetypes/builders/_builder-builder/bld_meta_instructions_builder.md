@@ -6,6 +6,16 @@ file_position: 4/13
 pillar: P03
 llm_function: REASON
 purpose: Meta-template for generating INSTRUCTIONS.md of any kind-builder
+quality: 9.0
+title: "Meta Instructions Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Instructions: How to Produce a {{type_name}}

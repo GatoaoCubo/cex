@@ -4,6 +4,16 @@ id: bld_tools_scoring_rubric
 pillar: P04
 llm_function: CALL
 purpose: Tools available for scoring_rubric production
+quality: 9.1
+title: "Tools Scoring Rubric"
+version: "1.0.0"
+author: n03_builder
+tags: [scoring_rubric, builder, examples]
+tldr: "Golden and anti-examples for scoring rubric construction, demonstrating ideal structure and common pitfalls."
+domain: "scoring rubric construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: scoring-rubric-builder
@@ -32,8 +42,20 @@ purpose: Tools available for scoring_rubric production
 
 ## Interim Validation
 Manually check each QUALITY_GATES.md gate against produced artifact.
-- [ ] YAML parses
-- [ ] id matches p07_sr_ prefix
-- [ ] Dimension weights sum to exactly 100%
-- [ ] All 4 tiers defined (GOLDEN/PUBLISH/REVIEW/REJECT)
-- [ ] Criteria are concrete (no subjective language)
+1. [ ] YAML parses
+2. [ ] id matches p07_sr_ prefix
+3. [ ] Dimension weights sum to exactly 100%
+4. [ ] All 4 tiers defined (GOLDEN/PUBLISH/REVIEW/REJECT)
+5. [ ] Criteria are concrete (no subjective language)
+
+## Metadata
+
+```yaml
+id: bld_tools_scoring_rubric
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-tools-scoring-rubric.md
+```

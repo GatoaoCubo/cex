@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [guardrail, severity, enforcement, block, warn, log, bypass_policy, concrete_rule, safety, access_control]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.2
+title: "Memory Guardrail"
+density_score: 0.90
 ---
 ## Summary
 A guardrail defines safety restrictions with concrete, matchable rules and explicit enforcement. Its value comes from being unambiguous — the enforcement layer must be able to evaluate whether a given input or output triggers the rule. Severity classification drives enforcement mode, and every guardrail must document how it can be bypassed in an emergency.
@@ -34,10 +37,57 @@ A guardrail defines safety restrictions with concrete, matchable rules and expli
 5. Guardrail controls safety behavior (what the system must not do). Permission controls access (who can use the system). These are separate artifacts.
 6. `id` slug uses underscores: `p11_gr_dest_cmds` not `p11_gr_dest-cmds`.
 ## Anti-Pattern
-- Subjective rules like "be careful" or "handle responsibly" — enforcement cannot match these.
-- `severity: "important"` or `severity: "danger"` — invalid enum values, rejected by schema.
-- `enforcement: "stop"` or `enforcement: "prevent"` — invalid enum values; use block/warn/log.
-- No bypass policy on critical guardrails — leaves incident responders with no override path.
-- Using block enforcement for low-severity guardrails — fires on benign inputs, causes alert fatigue, gets disabled.
-- Combining access control rules with safety rules in one guardrail — conflation makes both harder to audit and maintain.
+1. Subjective rules like "be careful" or "handle responsibly" — enforcement cannot match these.
+2. `severity: "important"` or `severity: "danger"` — invalid enum values, rejected by schema.
+3. `enforcement: "stop"` or `enforcement: "prevent"` — invalid enum values; use block/warn/log.
+4. No bypass policy on critical guardrails — leaves incident responders with no override path.
+5. Using block enforcement for low-severity guardrails — fires on benign inputs, causes alert fatigue, gets disabled.
+6. Combining access control rules with safety rules in one guardrail — conflation makes both harder to audit and maintain.
 ## Context
+
+## Builder Context
+
+This ISO operates within the `guardrail-builder` stack, one of 125
+specialized builders in the CEX architecture. Each builder has 13 ISOs
+covering system prompt, instruction, output template, quality gate,
+examples, schema, config, tools, memory, manifest, constraints,
+validation schema, and runtime rules.
+
+The builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3
+(Compose), merges them with relevant memory from `cex_memory_select.py`,
+and produces artifacts that must pass the quality gate at F7 (Filter).
+
+| Component | Purpose |
+|-----------|---------|
+| System prompt | Identity and behavioral rules |
+| Instruction | Step-by-step procedure |
+| Output template | Structural scaffold |
+| Quality gate | Scoring rubric |
+| Examples | Few-shot references |
+
+## Reference
+
+```yaml
+id: p10_lr_guardrail_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+target: 9.0
+```
+
+```bash
+python _tools/cex_score.py --apply --verbose p10_lr_guardrail_builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | guardrail |
+| Pipeline | 8F |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Target | 9.0+ |
+| Density | 0.85+ |

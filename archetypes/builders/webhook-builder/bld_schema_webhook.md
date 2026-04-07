@@ -10,6 +10,11 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 tags: [schema, webhook, P04, P06, constraint]
+quality: 9.1
+title: "Schema Webhook"
+tldr: "Golden and anti-examples for webhook construction, demonstrating ideal structure and common pitfalls."
+domain: "webhook construction"
+density_score: 0.90
 ---
 # Schema: webhook
 

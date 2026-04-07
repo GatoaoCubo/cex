@@ -15,6 +15,16 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: global
+quality: 9.0
+title: "Config Knowledge Index"
+version: "1.0.0"
+author: n03_builder
+tags: [knowledge_index, builder, examples]
+tldr: "Golden and anti-examples for knowledge index construction, demonstrating ideal structure and common pitfalls."
+domain: "knowledge index construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 # Config: knowledge_index Production Rules
 ## Naming
@@ -25,11 +35,11 @@ permission_scope: global
 | Fields | snake_case | rebuild_schedule, freshness_max_days |
 Rule: id MUST equal filename stem.
 ## File Paths
-- Output: cex/P10_memory/examples/p10_bi_{index_slug}.md
-- Compiled: cex/P10_memory/compiled/p10_bi_{index_slug}.yaml
+1. Output: cex/P10_memory/examples/p10_bi_{index_slug}.md
+2. Compiled: cex/P10_memory/compiled/p10_bi_{index_slug}.yaml
 ## Size Limits (aligned with SCHEMA)
-- Body: max 3072 bytes
-- Density: >= 0.80
+1. Body: max 3072 bytes
+2. Density: >= 0.80
 ## Algorithm Reference
 | Algorithm | Best for | Latency | Accuracy |
 |-----------|----------|---------|----------|
@@ -44,3 +54,15 @@ Rule: id MUST equal filename stem.
 | daily | Once per day | Standard knowledge pool |
 | weekly | Once per week | Stable, rarely changing |
 | manual | On demand only | Static reference data |
+
+## Metadata
+
+```yaml
+id: bld_config_knowledge_index
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply bld-config-knowledge-index.md
+```

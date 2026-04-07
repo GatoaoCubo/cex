@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [fallback, chain, circuit_breaker, timeout_per_step_ms, quality_threshold, cost_weight, degradation, static_response]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.0
+title: "Memory Fallback Chain"
+density_score: 0.90
 ---
 ## Summary
 A fallback chain is a sequence of model calls executed in order until one meets a quality threshold or the chain is exhausted. Without explicit timeout, cost, and quality fields on each step the chain becomes unpredictable under load. The terminal step must be a static response to guarantee resolution in all failure modes.

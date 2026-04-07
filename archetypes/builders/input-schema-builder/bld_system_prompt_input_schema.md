@@ -13,7 +13,7 @@ rules_count: 15
 tone: technical
 knowledge_boundary: "field definitions, type constraints, required/optional fields, defaults, coercion rules, validation patterns, unilateral input contracts; NOT bilateral interface contracts, validation rule engines, or abstract type definitions"
 domain: "input_schema"
-quality: 8.8
+quality: 9.0
 tags: ["system_prompt", "input_schema", "contract", "schema"]
 safety_level: standard
 tools_listed: false

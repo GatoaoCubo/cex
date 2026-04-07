@@ -20,6 +20,9 @@ agent_group: edison
 keywords: [prompt version, sequential, branching, optimized, rollback]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
+quality: 9.1
+title: "Memory Prompt Version"
+density_score: 0.90
 ---
 ## Summary
 Prompt version — immutable snapshot of a prompt at a point in time with metrics and lineage. The difference between a useful prompt_version and a useless one is concrete values
@@ -30,10 +33,36 @@ Every parameter must have: name, value, and why that value was chosen.
 Required body sections: Overview, Prompt Snapshot, Metrics, Lineage.
 Body budget: 2048 bytes max.
 ## Anti-Pattern
-- No version tracking: Cannot reproduce results or rollback on regression
-- Mutable versions: Changing a 'version' in place breaks reproducibility
-- No metrics: Cannot compare versions objectively
-- No parent lineage: Cannot trace how a prompt evolved or why changes were made
+1. No version tracking: Cannot reproduce results or rollback on regression
+2. Mutable versions: Changing a 'version' in place breaks reproducibility
+3. No metrics: Cannot compare versions objectively
+4. No parent lineage: Cannot trace how a prompt evolved or why changes were made
 ## Context
 The 2048-byte body limit keeps prompt_version artifacts focused. Fill required fields first,
 then add recommended fields if space permits. Always set quality: null.
+
+## Metadata
+
+```yaml
+id: p10_lr_prompt_version_builder
+pipeline: 8F
+scoring: hybrid_3_layer
+```
+
+```bash
+python _tools/cex_score.py --apply p10-lr-prompt-version-builder.md
+```
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `learning_record` |
+| Pillar | P10 |
+| Domain | prompt_version |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

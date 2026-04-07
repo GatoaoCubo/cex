@@ -5,6 +5,16 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema — SINGLE SOURCE OF TRUTH for connector
 pattern: TEMPLATE derives from this. CONFIG restricts this.
+quality: 9.1
+title: "Schema Db Connector"
+version: "1.0.0"
+author: n03_builder
+tags: [db_connector, builder, examples]
+tldr: "Golden and anti-examples for db connector construction, demonstrating ideal structure and common pitfalls."
+domain: "db connector construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: connector

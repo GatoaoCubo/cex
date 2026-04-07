@@ -6,6 +6,16 @@ file_position: 7/13
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Meta-template for generating SCHEMA.md of any kind-builder
+quality: 9.0
+title: "Meta Schema Builder"
+version: "1.0.0"
+author: n03_builder
+tags: [_builder, builder, examples]
+tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
+domain: "_builder construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Schema: {{type_name}}

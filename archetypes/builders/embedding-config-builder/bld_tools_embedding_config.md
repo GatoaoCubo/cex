@@ -4,6 +4,16 @@ id: bld_tools_embedding_config
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for embedding_config production
+quality: 9.0
+title: "Tools Embedding Config"
+version: "1.0.0"
+author: n03_builder
+tags: [embedding_config, builder, examples]
+tldr: "Golden and anti-examples for embedding config construction, demonstrating ideal structure and common pitfalls."
+domain: "embedding config construction"
+created: "2026-04-07"
+updated: "2026-04-07"
+density_score: 0.90
 ---
 
 # Tools: embedding-config-builder
