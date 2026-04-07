@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-02
 author: n06_commercial
 domain: brand-book
-quality: null
+quality: 9.1
 tags: [brand, brand-book, gato3, felinos, n06]
 tldr: "Brand Book completo GATO³ com identidade, posicionamento, voz, visual, narrativa, guidelines e validação. Inclui Persona Ro e estratégia geográfica ABC."
 density_score: 0.95
