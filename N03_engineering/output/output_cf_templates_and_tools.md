@@ -11,9 +11,10 @@ version: 1.0.0
 created: 2026-04-06
 updated: 2026-04-06
 author: builder_agent
-quality: null
+quality: 9.1
 tags: [output, content_factory, wave2, N03]
 tldr: "Build report for Content Factory wave2 — 14 artifacts (7 prompt_templates + 7 function_defs)"
+density_score: 1.0
 ---
 
 # Output: Content Factory — Prompt Templates + Production Tools
