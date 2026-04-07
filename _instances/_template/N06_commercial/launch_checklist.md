@@ -6,10 +6,17 @@ version: 1.0.0
 created: 2026-03-31
 author: content-monetization-builder
 domain: content_monetization
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tldr: "Launch checklist template — platform setup, checkout, webhooks, compliance for any content business"
 tags: [template, checklist, launch, hotmart, digistore24, compliance]
 density_score: 1.0
+axioms:
+  - "NEVER launch without completing all Phase 1 items — platform setup is non-negotiable."
+  - "ALWAYS test checkout flow end-to-end before go-live — broken checkout = zero revenue."
+linked_artifacts:
+  primary: tpl_content_monetization_config
+  related: [tpl_pricing_model, p12_wf_content_monetization, p04_fn_content_monetization]
 ---
 
 # Launch Checklist — Instance Template

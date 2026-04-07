@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-audit-validation
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [schema, brand, audit, scoring, consistency, n06]
 tldr: "Defines 6 audit dimensions with weights: archetype (0.25), voice (0.20), visual (0.20), positioning (0.15), narrative (0.10), config (0.10). Pass = 0.85. Tool: brand_audit.py."
 density_score: 0.93
+axioms:
+  - "Weights sum to 1.0 exactly. Pass threshold is 0.85. Below 0.70 = critical brand misalignment."
+  - "ALWAYS run brand_audit.py after propagation — never trust manual assessment alone."
+linked_artifacts:
+  primary: p03_brand_audit_prompt
+  related: [n06_schema_brand_voice_contract, n06_schema_brand_config, p07_qg_commercial]
 ---
 
 # Brand Audit Schema

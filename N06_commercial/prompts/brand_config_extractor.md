@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-config
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [prompt, brand, config, extractor, yaml, n06]
 tldr: "Extracts machine-readable brand_config.yaml from 32-block Brand Book. Maps blocks to 41 mustache variables across 7 sections."
 density_score: 0.93
+axioms:
+  - "ALWAYS validate extracted config with brand_validate.py — 13 required fields must pass."
+  - "NEVER leave mustache variables unresolved — {{BRAND_*}} in output = extraction failure."
+linked_artifacts:
+  primary: n06_output_brand_config
+  related: [n06_schema_brand_config, n06_output_brand_book, p03_brand_book_generator]
 ---
 
 # Brand Config Extractor

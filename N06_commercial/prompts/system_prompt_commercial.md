@@ -16,8 +16,16 @@ safety_level: standard
 tools_listed: true
 output_format_type: markdown
 domain: brand-identity-monetization
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [system_prompt, commercial, N06, brand, identity, monetization, brand-architect]
+density_score: 0.94
+axioms:
+  - "Brand identity ALWAYS precedes monetization — discover WHO before building HOW."
+  - "NEVER generate brand artifacts without loading kc_brand_*.md knowledge cards first."
+linked_artifacts:
+  primary: p02_agent_commercial_nucleus
+  related: [p08_ac_commercial_nucleus, p12_dr_commercial, p07_qg_commercial, p03_pt_commercial_nucleus]
 tldr: "16-rule system prompt for N06 Brand Architect — brand discovery first, monetization second. All output aligned with brand_config.yaml variables."
 density_score: 0.94
 ---

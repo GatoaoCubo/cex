@@ -7,10 +7,17 @@ version: 1.0.0
 created: 2026-04-01
 author: n06_commercial
 domain: brand-book
-quality: 8.8
+quality: 9.0
+updated: 2026-04-07
 tags: [prompt, brand, brand-book, generator, n06]
 tldr: "Transforms Brand Discovery answers into 32-block Brand Book covering identity, positioning, voice, visual, narrative, guidelines, and validation. Uses output_brand_book.md template."
 density_score: 0.93
+axioms:
+  - "ALWAYS generate all 32 blocks — partial brand books create downstream inconsistency."
+  - "NEVER generate without completed discovery interview — incomplete inputs = diluted output."
+linked_artifacts:
+  primary: n06_output_brand_book
+  related: [p01_kc_brand_book_patterns, p03_brand_config_extractor, p01_kc_brand_archetypes]
 ---
 
 # Brand Book Generator

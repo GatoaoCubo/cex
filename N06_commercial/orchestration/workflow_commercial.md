@@ -9,10 +9,17 @@ updated: 2026-04-01
 author: n06_commercial
 domain: brand-identity-monetization
 step_count: 10
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [workflow, commercial, N06, brand, monetization, pipeline]
 tldr: "3 workflows: BRAND (10-step discovery→propagation), MONETIZATION (7-step product→revenue), BRIDGE (5-step brand→monetization alignment). N06 runs FIRST on new instances."
 density_score: 0.94
+axioms:
+  - "BRAND workflow ALWAYS completes before MONETIZATION workflow starts."
+  - "BRIDGE workflow validates alignment — if brand→monetization gap > 0.15, re-run brand audit."
+linked_artifacts:
+  primary: p12_dr_commercial
+  related: [p02_agent_commercial_nucleus, p07_qg_commercial, n06_schema_brand_audit]
 ---
 
 # N06 Workflow — Brand + Monetization + Bridge

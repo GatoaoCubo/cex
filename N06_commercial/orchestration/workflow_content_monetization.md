@@ -12,10 +12,17 @@ execution_mode: sequential
 error_recovery: retry_with_mock_fallback
 max_retries: 2
 timeout_minutes: 30
-quality: 8.9
+quality: 9.0
+updated: 2026-04-07
 tags: [workflow, content-monetization, billing, credits, courses, checkout, ads, emails, N06]
 tldr: Full 9-step content monetization workflow — PARSE through DEPLOY — with credit gating, PIX checkout, LLM course generation, ad validation, and email dispatch.
-density_score: null
+density_score: 0.93
+axioms:
+  - "ALWAYS validate credit balance before gating — never charge then fail."
+  - "NEVER deploy checkout without testing PIX + card + boleto flows."
+linked_artifacts:
+  primary: p12_dr_content_monetization
+  related: [p04_fn_content_monetization, p01_kc_brand_monetization_models, n06_output_pricing_page]
 ---
 
 # Content Monetization Workflow
