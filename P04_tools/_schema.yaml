@@ -286,6 +286,7 @@ kinds:
     llm_function: CONSTRAIN
   hook_config:
     description: Hook lifecycle configuration for builder execution
+    llm_function: GOVERN
     boundary: hook_config = DECLARATION of which hooks; hook = IMPLEMENTATION of the hook
     layer: content
     core: false

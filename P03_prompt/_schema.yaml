@@ -161,6 +161,7 @@ kinds:
     llm_function: INJECT
   instruction:
     description: Step-by-step execution instructions for agents or pipelines
+    llm_function: REASON
     naming: ex_instruction_{topic}.md
   constraint_spec:
     description: Constrained generation rules

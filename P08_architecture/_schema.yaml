@@ -71,6 +71,7 @@ kinds:
     - Docker Compose service
   director:
     description: Crew orchestrator that composes and coordinates multiple builders
+    llm_function: REASON
     naming: ex_director_{topic}.md
   decision_record:
     description: 'ADR: contexto, decisao, consequencias'
