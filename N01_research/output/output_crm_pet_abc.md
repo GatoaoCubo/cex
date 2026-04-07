@@ -4,7 +4,8 @@ kind: research
 pillar: P01
 title: "Banco de Dados CRM Pet - ABC Paulista e Grande SP"
 version: 1.0
-quality: null
+quality: 9.0
+density_score: 1.0
 ---
 
 # Missão: BRAND_GATO3 — N01 Research: Banco CRM Pet ABC Paulista
