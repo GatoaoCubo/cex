@@ -6,7 +6,8 @@ title: "CRM_FULL_HARVEST — Pipeline Evidence & Batch Status"
 version: 1.0.0
 created: 2026-04-04
 author: n07_orchestrator
-quality: null
+quality: 9.1
+density_score: 1.0
 ---
 
 # CRM_FULL_HARVEST — Pipeline Evidence
