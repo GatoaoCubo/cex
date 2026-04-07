@@ -16,10 +16,19 @@ public class Win32 {
 }
 "@
 
+# Dynamic grid: detect screen size, calculate 3x2 layout
+# Works on any monitor. Taskbar-aware via WorkingArea.
+Add-Type -AssemblyName System.Windows.Forms
+$screen = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
+$cols = 3; $rows = 2
+$cellW = [math]::Floor($screen.Width / $cols)
+$cellH = [math]::Floor($screen.Height / $rows)
+$ox = $screen.X; $oy = $screen.Y
+
 $grid = @{
-    n01 = @{x=0;    y=0};    n02 = @{x=640;  y=0}
-    n03 = @{x=1280; y=0};    n04 = @{x=0;    y=520}
-    n05 = @{x=640;  y=520};  n06 = @{x=1280; y=520}
+    n01 = @{x=$ox;             y=$oy};              n02 = @{x=$ox+$cellW;     y=$oy}
+    n03 = @{x=$ox+2*$cellW;    y=$oy};              n04 = @{x=$ox;             y=$oy+$cellH}
+    n05 = @{x=$ox+$cellW;      y=$oy+$cellH};       n06 = @{x=$ox+2*$cellW;    y=$oy+$cellH}
 }
 
 $root = Split-Path $PSScriptRoot -Parent
@@ -125,7 +134,7 @@ Start-Sleep -Seconds 3
 
 # Position window in grid
 if ($proc -and $pos) {
-    [Win32]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, 640, 520, $true) | Out-Null
+    [Win32]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, $cellW, $cellH, $true) | Out-Null
 }
 
 # Record PID with session tracking

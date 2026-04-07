@@ -29,10 +29,18 @@ $pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 
 New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\runtime\pids" | Out-Null
 
+# Dynamic grid: detect screen size, calculate 3x2 layout
+Add-Type -AssemblyName System.Windows.Forms
+$scr = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
+$gCols = 3; $gRows = 2
+$gW = [math]::Floor($scr.Width / $gCols)
+$gH = [math]::Floor($scr.Height / $gRows)
+$gOx = $scr.X; $gOy = $scr.Y
+
 $gridPos = @{
-    n01 = @{x=0;    y=0};    n02 = @{x=640;  y=0}
-    n03 = @{x=1280; y=0};    n04 = @{x=0;    y=520}
-    n05 = @{x=640;  y=520};  n06 = @{x=1280; y=520}
+    n01 = @{x=$gOx;           y=$gOy};            n02 = @{x=$gOx+$gW;     y=$gOy}
+    n03 = @{x=$gOx+2*$gW;     y=$gOy};            n04 = @{x=$gOx;           y=$gOy+$gH}
+    n05 = @{x=$gOx+$gW;       y=$gOy+$gH};        n06 = @{x=$gOx+2*$gW;     y=$gOy+$gH}
 }
 
 # Discover handoffs for mission
@@ -102,7 +110,7 @@ function Launch-Nucleus($handoff) {
     Start-Sleep -Seconds 3
 
     if ($proc) {
-        [Win32Grid]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, 640, 520, $true) | Out-Null
+        [Win32Grid]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
         "$($proc.Id) $nucleus" | Add-Content $pidFile
         Write-Output "[$upper] Spawned PID:$($proc.Id) handoff:$($handoff.Name)"
     }
