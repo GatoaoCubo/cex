@@ -13,7 +13,7 @@ rules_count: 9
 tone: technical
 knowledge_boundary: "LLM provider APIs (Anthropic, OpenAI, Google, Ollama, Groq, Mistral, Together), rate limiting, fallback patterns, cost optimization | Does NOT: document model specs (model_card), configure embeddings (embedder_provider), define agents, or design retrieval pipelines"
 domain: model_provider
-quality: null
+quality: 9.0
 tags: [system_prompt, model_provider, P03]
 safety_level: standard
 tools_listed: false
