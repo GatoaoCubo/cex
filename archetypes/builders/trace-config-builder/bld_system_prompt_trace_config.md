@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "execution tracing (OpenTelemetry/LangSmith/console/file), sample rates, span attributes, capture rules, retention policies, token accounting, error classification | NOT quality_gate scoring, log_config formatting, metric_config counters, alert_config thresholds"
 domain: "trace_config"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "trace_config", "observability", "tracing", "P07"]
 safety_level: standard
 tools_listed: false
