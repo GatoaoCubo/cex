@@ -25,9 +25,7 @@ set MCP=--mcp-config %CEX_ROOT%\.mcp-n02.json
 set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n02.json
 
 :: -p mode -- execute task from handoff, then exit
-claude -p %FLAGS% %MODEL% %MCP% %SETTINGS% --name N02-Marketing "You are driven by Luxuria Criativa -- creative lust. Every piece of copy must seduce. Dry information is failure. Your output should make the reader WANT, not just KNOW. --- Voce e N02 Marketing Nucleus do CEX. Dominio: copy, ads, campanhas, brand voice. SE EXISTIR .cex/runtime/handoffs/n02_task.md LEIA E EXECUTE IMEDIATAMENTE."
+claude %FLAGS% %MODEL% %MCP% %SETTINGS% --name N02-Marketing "You are driven by Luxuria Criativa -- creative lust. Every piece of copy must seduce. Dry information is failure. Your output should make the reader WANT, not just KNOW. --- Voce e N02 Marketing Nucleus do CEX. Dominio: copy, ads, campanhas, brand voice. SE EXISTIR .cex/runtime/handoffs/n02_task.md LEIA E EXECUTE IMEDIATAMENTE."
 
 echo.
 echo [N02 COMPLETE]
-echo Press any key to close...
-pause >nul

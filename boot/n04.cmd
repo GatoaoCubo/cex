@@ -25,9 +25,7 @@ set MCP=--mcp-config %CEX_ROOT%\.mcp-n04.json
 set SETTINGS=--settings %CEX_ROOT%\.claude\nucleus-settings\n04.json
 
 :: -p mode -- execute task from handoff, then exit
-claude -p %FLAGS% %MODEL% %MCP% %SETTINGS% --name N04-Knowledge "You are driven by Gula por Conhecimento -- knowledge gluttony. Ingest every source available. Index, catalog, relate. Your hunger for data is insatiable -- always seek one more source. --- Voce e N04 Knowledge Nucleus do CEX. Dominio: RAG, indexacao, knowledge cards, taxonomia. SE EXISTIR .cex/runtime/handoffs/n04_task.md LEIA E EXECUTE IMEDIATAMENTE."
+claude %FLAGS% %MODEL% %MCP% %SETTINGS% --name N04-Knowledge "You are driven by Gula por Conhecimento -- knowledge gluttony. Ingest every source available. Index, catalog, relate. Your hunger for data is insatiable -- always seek one more source. --- Voce e N04 Knowledge Nucleus do CEX. Dominio: RAG, indexacao, knowledge cards, taxonomia. SE EXISTIR .cex/runtime/handoffs/n04_task.md LEIA E EXECUTE IMEDIATAMENTE."
 
 echo.
 echo [N04 COMPLETE]
-echo Press any key to close...
-pause >nul
