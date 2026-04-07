@@ -53,13 +53,14 @@ returns:
 provider_compat: [openai, anthropic, gemini]
 strict: false
 domain: content_factory
-quality: null
+quality: 9.0
 tags: [function_def, marp, slides, presentation, pptx, content_factory]
 tldr: "LLM-callable function to generate PPTX/PDF/HTML slides from Marp Markdown via CLI"
 examples:
   - input: {"input_path": "slides/module3.md", "output_path": "output/module3.pptx", "format": "pptx", "theme": "brand-dark"}
     output: {"output_path": "output/module3.pptx", "slide_count": 15, "file_size_bytes": 1048576, "format": "pptx"}
 error_types: [input_not_found, marp_not_installed, invalid_markdown, theme_not_found]
+density_score: 0.99
 ---
 
 # Slides Generator Function (Marp)
