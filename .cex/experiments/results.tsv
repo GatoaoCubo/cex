@@ -5734,3 +5734,54 @@ et
 2026-04-07 12:28:33	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2398\test_keep_on_improvement0\test_artifact.md	1	8.5	0.95	keep	added examples
 2026-04-07 12:28:33	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2398\test_discard_on_no_improvement0\test_artifact.md	1	6.5	0.95	discard	tried something
 2026-04-07 12:28:33	C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-2398\test_budget_stops_loop0\test_artifact.md	1	5.0	0.95	discard	small change
+2026-04-07 15:43:03	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_infinite_bootstrap.md	1	8.6	1.00	keep	added density_score: 1.0
+2026-04-07 15:43:03	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_infinite_bootstrap.md	2	8.6	1.00	discard	tldr flagged for manual review
+2026-04-07 15:43:04	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_infinite_bootstrap.md	3	8.6	1.00	discard	tldr flagged for manual review
+2026-04-07 15:43:04	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_quality_sweep.md	1	8.5	1.00	keep	added density_score: 1.0
+2026-04-07 15:43:05	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_quality_sweep.md	2	8.5	1.00	discard	tldr flagged for manual review
+2026-04-07 15:43:05	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_quality_sweep.md	3	8.5	1.00	discard	tldr flagged for manual review
+2026-04-07 15:43:06	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_remaining_gaps.md	1	8.7	1.00	keep	added density_score: 1.0
+2026-04-07 15:43:06	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_remaining_gaps.md	2	8.7	1.00	discard	tldr flagged for manual review
+2026-04-07 15:43:06	C:\Users\PC\Documents\GitHub\cex\.cex\runtime\plans\mission_remaining_gaps.md	3	8.7	1.00	discard	tldr flagged for manual review
+2026-04-07 15:43:07	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\citation-builder\bld_quality_gate_citation.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 15:43:07	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\citation-builder\bld_quality_gate_citation.md	2	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 15:43:07	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\citation-builder\bld_quality_gate_citation.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 15:43:08	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\citation-builder\bld_system_prompt_citation.md	1	8.9	0.79	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:08	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\citation-builder\bld_system_prompt_citation.md	2	8.9	0.79	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:09	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\citation-builder\bld_system_prompt_citation.md	3	8.9	0.79	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:09	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\context-window-config-builder\bld_quality_gate_context_window_config.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 15:43:10	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\context-window-config-builder\bld_quality_gate_context_window_config.md	2	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 15:43:10	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\context-window-config-builder\bld_quality_gate_context_window_config.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 15:43:11	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\context-window-config-builder\bld_system_prompt_context_window_config.md	1	8.9	0.86	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:11	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\context-window-config-builder\bld_system_prompt_context_window_config.md	2	8.9	0.86	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:11	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\context-window-config-builder\bld_system_prompt_context_window_config.md	3	8.9	0.86	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:12	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\multi-modal-config-builder\bld_quality_gate_multi_modal_config.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 15:43:12	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\multi-modal-config-builder\bld_quality_gate_multi_modal_config.md	2	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 15:43:13	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\multi-modal-config-builder\bld_quality_gate_multi_modal_config.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 15:43:13	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\multi-modal-config-builder\bld_system_prompt_multi_modal_config.md	1	8.9	0.86	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:14	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\multi-modal-config-builder\bld_system_prompt_multi_modal_config.md	2	8.9	0.86	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:14	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\multi-modal-config-builder\bld_system_prompt_multi_modal_config.md	3	8.9	0.86	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:15	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\prompt-cache-builder\bld_quality_gate_prompt_cache.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 15:43:15	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\prompt-cache-builder\bld_quality_gate_prompt_cache.md	2	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 15:43:15	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\prompt-cache-builder\bld_quality_gate_prompt_cache.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-07 15:43:16	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\prompt-cache-builder\bld_system_prompt_prompt_cache.md	1	8.9	0.82	keep	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:16	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\prompt-cache-builder\bld_system_prompt_prompt_cache.md	2	8.9	0.82	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:16	C:\Users\PC\Documents\GitHub\cex\archetypes\builders\prompt-cache-builder\bld_system_prompt_prompt_cache.md	3	8.9	0.82	discard	analyzed: increase_density: remove filler words, compress prose into tables
+2026-04-07 15:43:17	C:\Users\PC\Documents\GitHub\cex\N04_knowledge\architecture\task_queue_spec.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 15:43:18	C:\Users\PC\Documents\GitHub\cex\N07_admin\memory\deep_architecture_audit.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 15:43:19	C:\Users\PC\Documents\GitHub\cex\N07_admin\memory\industry_terminology_audit.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 15:43:19	C:\Users\PC\Documents\GitHub\cex\N07_admin\memory\terminology_standardization.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 15:43:20	C:\Users\PC\Documents\GitHub\cex\N07_admin\memory\user_directive_technical_authority.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 15:43:21	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\meta\kc_brand_variable_audit.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-07 15:43:21	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\_reference\kc_terminology_anthropic_canonical.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-07 15:43:22	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\_reference\kc_terminology_google_mcp_canonical.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 15:43:23	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\_reference\kc_terminology_openai_canonical.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-07 15:43:23	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\domain\_reference\kc_terminology_rosetta_stone.md	1	9.2	1.00	keep	tldr flagged for manual review
+2026-04-07 15:43:24	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_citation.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 15:43:25	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_context_window_config.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 15:43:25	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_multi_modal_config.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 15:43:26	C:\Users\PC\Documents\GitHub\cex\P01_knowledge\library\kind\kc_prompt_cache.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-07 15:43:27	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_infinite_bootstrap_loop.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-07 15:43:28	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_n07_bootstrap_context.md	1	8.9	1.00	keep	tldr flagged for manual review
+2026-04-07 15:43:28	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_n07_bootstrap_context.md	2	8.9	1.00	discard	tldr flagged for manual review
+2026-04-07 15:43:28	C:\Users\PC\Documents\GitHub\cex\_docs\specs\spec_n07_bootstrap_context.md	3	8.9	1.00	discard	tldr flagged for manual review

@@ -1,11 +1,12 @@
 id: spec_n07_bootstrap_context
 kind: context_doc
 title: CEX Architecture -- Theory vs Practice Gap Analysis
-version: 1.0.0
-quality: null
+version: 2.0.0
+quality: 8.9
 created: 2026-04-07
+updated: 2026-04-07
 purpose: Give a fresh N07 instance full understanding of what was designed vs what exists
-density_score: 1.0
+density_score: null
 what_cex_is: '| Attribute | Value |
 
   |-----------|-------|
@@ -33,9 +34,14 @@ base_layer_read_only_molds: '| Component | Path | Count | Purpose |
 
   | Templates | P{01-12}*/templates/tpl*.md | 67+ | Output patterns with {{variable}} slots |
 
-  | Kind registry | .cex/kinds_meta.json | 117 kinds | Every artifact type CEX understands |
+  | Kind registry | .cex/kinds_meta.json | 121 kinds | Every artifact type CEX understands |
 
-  | Rules | .claude/rules/*.md | 13 | Behavioral constraints |'
+  | Rules | .claude/rules/*.md | 16 | Behavioral constraints (incl. technical-authority, input-transmutation) |
+
+  | Terminology | _docs/specs/spec_metaphor_dictionary.md | 40+ terms | Metaphor → Industry term translation |
+
+  | Rosetta Stone | P01_knowledge/library/domain/_reference/kc_terminology_rosetta_stone.md | 4 providers | Cross-provider
+  canonical naming |'
 instance_layer_filled_per_agent: '| Component | Path | Count per nucleus | Purpose |
 
   |-----------|------|-------------------|---------|
@@ -118,20 +124,24 @@ phase_3_pipeline_8f_execution: 'During task execution, the 8F pipeline enriches 
 
   | F8 COLLABORATE | Save, compile, commit, signal | WIRED |'
 gaps_between_theory_and_practice: ''
-gap_g3_37_of_artifacts_are_prose_heavy: '| Metric | Value |
+gap_g3_22_of_artifacts_are_prose_heavy_was_37_improved: '| Metric | Value |
 
   |--------|-------|
 
-  | Total artifacts | 3562 |
+  | Total artifacts | 3008 with frontmatter |
 
-  | Prose-heavy (more prose than structured data) | 1302 (37%) |
+  | Prose-heavy (>50% prose lines) | 654 (22%) |
 
-  | Target | < 20% |
+  | False positives | ~460 (bld_instruction_*.md = numbered lists, correct format) |
 
-  | Fix | Overnight evolve sweep: prose -> tables |
+  | True offenders | ~190 (config, output, KC files with narrative paragraphs) |
 
-  | Tool | cex_evolve.py sweep --target 9.0 |'
-gap_g4_f3_inject_is_broken: '| Metric | Value |
+  | Target | < 15% |
+
+  | Fix | Overnight evolve sweep on true offenders |
+
+  | Tool | cex_evolve.py agent <file> --target 9.0 |'
+gap_g4_f3_inject_is_broken_n05_fixing: '| Metric | Value |
 
   |--------|-------|
 
@@ -143,7 +153,9 @@ gap_g4_f3_inject_is_broken: '| Metric | Value |
 
   | Impact | Pipeline works on ANY model, even offline/free |
 
-  | File | _tools/cex_8f_runner.py (1385 lines, F3 at ~line 200) |'
+  | File | _tools/cex_8f_runner.py (1385 lines, F3 at ~line 200) |
+
+  | Status | N05 dispatched 3x (killed twice by spawn_stop bug). Active. |'
 gap_g5_template_variables_not_systematic: '| Metric | Value |
 
   |--------|-------|
@@ -154,24 +166,16 @@ gap_g5_template_variables_not_systematic: '| Metric | Value |
 
   | Templates WITHOUT {{BRAND_*}} slots | Unknown -- needs audit |
 
-  | Fix | Audit all bld_output_template_*.md, add missing {{BRAND_*}} and contextual slots |'
-gap_g6_6_stale_docs_from_march_30: '| Doc | Status | Problem |
+  | Fix | Audit all bld_output_template_*.md, add missing {{BRAND_*}} and contextual slots |
 
-  |-----|--------|---------|
+  | Status | SCHEDULED for wave 3 |'
+gap_g6_stale_docs_resolved: '| Doc | Action | Commit |
 
-  | ROADMAP_CONSOLIDATED.md | STALE | Says 70 builders (now 121), 8F theoretical (now implemented) |
+  |-----|--------|--------|
 
-  | ARCHITECTURE.md | STALE | Wrong counts, no pi runtime |
+  | All stale runtime docs | Archived by N04 | `24d172da` |
 
-  | HIERARCHY.md | STALE | Fractal structure changed |
-
-  | QUICKSTART.md | STALE | References claude not pi |
-
-  | NAMING_CONVENTION.md | STALE | Convention updated |
-
-  | ONBOARDING.md | STALE | Runtime changed |
-
-  | PATTERN_NUCLEUS_BOOT.md | STALE | Boot pattern completely different now |'
+  | Status | DONE | 2026-04-07 |'
 gap_g7_handoff_artifact_selection_not_automated: '| Metric | Value |
 
   |--------|-------|
@@ -182,7 +186,9 @@ gap_g7_handoff_artifact_selection_not_automated: '| Metric | Value |
 
   | Fix | Build a handoff composer that reads kinds_meta.json, finds builder path, finds KC, lists in handoff |
 
-  | Impact | Nucleus starts producing on turn 1 instead of spending 5 turns discovering files |'
+  | Impact | Nucleus starts producing on turn 1 instead of spending 5 turns discovering files |
+
+  | Status | SCHEDULED for wave 3 |'
 gap_g8_nucleus_doesn_t_self_select_context_during_task: '| Metric | Value |
 
   |--------|-------|
@@ -194,7 +200,96 @@ gap_g8_nucleus_doesn_t_self_select_context_during_task: '| Metric | Value |
   | Fix | Nucleus boot prompt should instruct: "After reading handoff, scan P01_knowledge/library/ for relevant KCs before
   producing" |
 
-  | Impact | Richer context = better output |'
+  | Impact | Richer context = better output |
+
+  | Status | SCHEDULED for wave 4 |'
+gap_g9_new_schemas_were_in_portuguese_resolved: '| Metric | Value |
+
+  |--------|-------|
+
+  | Problem | All 12 _schema.yaml descriptions in PT-BR |
+
+  | Impact | Fails Llama-7B test. Non-PT models lose context. |
+
+  | Fix | Translated all descriptions to English |
+
+  | Status | DONE (N03 + N01, commit in wave 2) |'
+gap_g10_new_5_kinds_with_non_industry_names_in_progress: '| Old name | New name | Industry source | Status |
+
+  |----------|----------|----------------|--------|
+
+  | vector_store | vector_store | LangChain, LlamaIndex, Pinecone | 🔄 N03 renaming |
+
+  | knowledge_index | knowledge_index | LlamaIndex | 🔄 N03 renaming |
+
+  | director | supervisor | LangGraph | 🔄 N03 renaming |
+
+  | law | invariant | Software engineering | 🔄 N03 renaming |
+
+  | content_monetization | (move P04→P11) | Misplaced pillar | 🔄 N03 moving |'
+gap_g11_new_4_missing_kinds_in_progress: '| Kind | Pillar | Industry source | Status |
+
+  |------|--------|----------------|--------|
+
+  | prompt_cache | P09 | Anthropic, Google | 🔄 N04 creating builders |
+
+  | citation | P01 | Anthropic, Google grounding | 🔄 N04 creating builders |
+
+  | context_window_config | P09 | All providers | 🔄 N04 creating builders |
+
+  | multi_modal_config | P09 | OpenAI, Anthropic, Google | 🔄 N04 creating builders |'
+gap_g12_new_139_builder_isos_in_portuguese: '| Metric | Value |
+
+  |--------|-------|
+
+  | Files with Portuguese | 139 / 1578 (9%) |
+
+  | Most common pattern | "Especialista em construir" (102 manifests) |
+
+  | Other patterns | Validar (92), Domina (69), Produzir (57) |
+
+  | Fix | Batch find-replace: PT patterns → EN equivalents |
+
+  | Status | SCHEDULED for overnight run |'
+gap_g13_closed_satellite_agent_node_renamed_to_agent_group: '| Metric | Value |
+
+  |--------|-------|
+
+  | Files modified | 648 |
+
+  | Insertions | 2,078 |
+
+  | Deletions | 2,003 |
+
+  | Residual old terms | 0 |
+
+  | Fix | Renamed satellite + agent_node to `agent_group` |
+
+  | Status | DONE (2026-04-07, N03) |'
+gap_g14_new_4_kinds_missing_llm_function: '| Kind | Should be | Rationale |
+
+  |------|-----------|-----------|
+
+  | instruction (P03) | REASON | Instructions guide reasoning |
+
+  | hook_config (P04) | GOVERN | Lifecycle hook config = governance |
+
+  | director (P08) | REASON | Routing decisions (being renamed to supervisor) |
+
+  | effort_profile (P09) | CONSTRAIN | Effort estimation constrains scope |'
+gap_g15_new_spawn_stop_nucleus_bug: '| Metric | Value |
+
+  |--------|-------|
+
+  | Problem | `bash _spawn/dispatch.sh stop n0X` kills ALL nuclei, not just the specified one |
+
+  | Impact | Killed N05 twice during this session, lost work |
+
+  | Fix | Fix `-Nucleus` filter in `_spawn/spawn_stop.ps1` |
+
+  | Workaround | Never use `stop n0X`. Let nuclei finish naturally or use `stop --all`. |
+
+  | Status | SCHEDULED for N05 wave 3 |'
 runtime_stack: '| Component | Technology | Purpose |
 
   |-----------|-----------|---------|
@@ -225,6 +320,51 @@ spec_reference: '| Spec | Path | What it defines |
   | Content factory | _docs/specs/spec_content_factory_v1.md | Multi-format content production |
 
   | AutoResearch | _docs/specs/spec_autoresearch_assimilation.md | Karpathy pattern for CEX |'
+industry_validation_2026_04_07: ''
+8f_pipeline_universal_llm_agent_execution_cycle: '| 8F | Industry pattern | Provider mapping |
+
+  |----|-----------------|-----------------|
+
+  | F1 CONSTRAIN | Schema validation | JSON Schema (OpenAI), Pydantic (LangChain), Guardrails |
+
+  | F2 BECOME | Agent initialization | System prompt (all), Agent config (CrewAI), Role (LangGraph) |
+
+  | F3 INJECT | RAG / context injection | RAG (all), Context stuffing, Few-shot injection |
+
+  | F4 REASON | Planning / chain-of-thought | Extended thinking (Anthropic), Reasoning (OpenAI o1/o3) |
+
+  | F5 CALL | Tool use / function calling | Tool use (Anthropic), Function calling (OpenAI/Google) |
+
+  | F6 PRODUCE | Generation / inference | Completion (all), Inference (MLOps) |
+
+  | F7 GOVERN | Evaluation / quality gating | Evals (OpenAI), LLM-as-judge, Quality gates (CI/CD) |
+
+  | F8 COLLABORATE | Artifact management / handoff | Handoff (Swarm), Observation (LangChain), Event (POSIX) |'
+12_pillars_superset_of_all_frameworks: '| Framework | Pillars covered | Out of 12 |
+
+  |-----------|----------------|-----------|
+
+  | LangChain | P01, P02, P03, P04, P05, P06, P10, P12 | 8/12 |
+
+  | OpenAI Agents | P02, P03, P04, P05, P06, P07, P10, P11, P12 | 9/12 |
+
+  | Google A2A | P01, P02, P03, P04, P08, P12 | 6/12 |
+
+  | CrewAI | P02, P03, P04, P10, P12 | 5/12 |
+
+  | MCP | P01, P03, P04, P08 | 4/12 |
+
+  | CEX | All | 12/12 |
+
+
+  No framework covers P07 (Evals), P08 (Architecture), P09 (Config) as first-class citizens. CEX is the only system that treats
+  all 12 as equal pillars.'
+sin_system_persona_engineering_validated: 'Industry pattern: persona-driven behavioral differentiation through system prompt
+  injection. The 7 sins create 7 orthogonal behavioral dimensions that make the same model (opus-4-6) produce meaningfully
+  different outputs per nucleus. This is CEX''s brand differentiator — keep as-is.'
+13_builder_isos_agent_construction_pattern_validated: 'Each ISO maps to a recognized industry concept: Agent Card, System
+  Prompt, JSON Schema, Few-Shot Examples, Quality Gate, Output Schema, Architecture Doc, Context Document, Memory Config,
+  Tool Config, Handoff Protocol.'
 memory_n07_persistent_across_sessions: '| File | Purpose |
 
   |------|---------|
@@ -235,8 +375,51 @@ memory_n07_persistent_across_sessions: '| File | Purpose |
 
   | operational_lessons.md | 7 hard-learned lessons (permanent) |
 
-  | cex_game_architecture.md | Internal metaphor (NOT taxonomy) |
+  | terminology_standardization.md | Metaphor → industry term mapping + rename status |
 
-  | project_cex_product_context.md | CEX ships as blank brain |
+  | user_directive_technical_authority.md | User delegated tech lead to N07. Terms taught. |
+
+  | industry_terminology_audit.md | 117 kinds vs 4 providers |
+
+  | deep_architecture_audit.md | 8F, sins, pillars, ISOs, tools validated |
+
+  | project_cex_product_context.md | CEX ships as unconfigured instance |
 
   | project_notebooklm_pipeline.md | NotebookLM integration |'
+infinite_bootstrap_loop_spec_spec_infinite_bootstrap_loop_md: '| Component | Status | Purpose |
+
+  |-----------|--------|---------|
+
+  | cex_mission_state.py | BUILDING | Checkpoint that survives N07 restart |
+
+  | cex_lock.py | BUILDING | Atomic file locking for shared resources |
+
+  | overnight_infinite.cmd | BUILDING | Auto-restart loop for N07 |
+
+  | --continuous mode | BUILDING | Continuous batching in mission_runner |
+
+  | pi subagent extension | BUILDING | 4 concurrent sub-agents per nucleus |
+
+  | 6 CEX agent definitions | BUILDING | scout, builder-iso, kc-writer, formatter, test-runner, researcher |
+
+  | Shared-file proposal pattern | BUILDING | Nuclei propose, N07 applies (git conflict prevention) |
+
+  | Task queue spec | BUILDING | Prioritized task queue for continuous dispatch |
+
+
+  Peak throughput: 24 parallel LLM streams, 864 artifacts/hour, full CEX from zero in ~3 hours.'
+terminology_reference_permanent: '| Source | Path |
+
+  |--------|------|
+
+  | Metaphor dictionary | _docs/specs/spec_metaphor_dictionary.md |
+
+  | Rosetta Stone | P01_knowledge/library/domain/_reference/kc_terminology_rosetta_stone.md |
+
+  | Anthropic canonical | P01_knowledge/library/domain/_reference/kc_terminology_anthropic_canonical.md |
+
+  | OpenAI canonical | P01_knowledge/library/domain/_reference/kc_terminology_openai_canonical.md |
+
+  | Google/MCP canonical | P01_knowledge/library/domain/_reference/kc_terminology_google_mcp_canonical.md |
+
+  | Decision manifest | .cex/runtime/decisions/decision_terminology_standardization.yaml |'
