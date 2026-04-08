@@ -2,30 +2,31 @@
 id: roadmap_cex
 kind: context_doc
 title: "CEX Roadmap — What Was Done, What's Next"
-version: 3.0.0
+version: 4.0.0
 quality: null
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-04-08
 purpose: Single source of truth for CEX progress and next steps
 ---
 
 # CEX Roadmap
 
-## Current State (2026-04-07)
+## Current State (2026-04-08)
 
 | Metric | Value |
 |--------|-------|
 | Kinds | 123 |
-| Builders | 124 (115 PASS, 8 WARN, 0 FAIL) |
-| Artifacts scored | 3,050 |
-| At 9.0+ | 3,049 (100%) |
-| Below 9.0 | 0 |
+| Builders | 123 PASS / 0 WARN / 0 FAIL |
+| Builder dirs | 124 (123 kind-builders + _builder-builder) |
+| Builder ISOs | 1,599 files (avg density 0.95) |
+| Sub-agents | 125 (.claude/agents/) |
+| Kind KCs | 123 (98/98 kinds covered) |
 | Flywheel | 109/109 WIRED (100%) |
-| Tools | 59 Python tools |
+| Python tools | 92 total (64 cex_* tools) |
 | Rules | 16 |
-| N07 memory files | 5 permanent |
+| N07 memory files | 6 permanent |
 | Terminology KCs | 5 (Rosetta Stone + 4 providers) |
-| Commits today | 111 |
+| Commits (2026-04-08) | 29 |
 
 ---
 
@@ -105,27 +106,52 @@ purpose: Single source of truth for CEX progress and next steps
 
 Resolved prior to this session. Doctor now: 123 PASS / 0 WARN / 0 FAIL.
 
-### H2: Continuous batching mode — IN PROGRESS (N05, grid ROADMAP_NEXT)
+### H2: Continuous batching mode — DONE (N05, grid ROADMAP_NEXT)
 
-`cex_mission_runner.py --continuous` verification + fine-tune data export.
-Dispatched to N05 on 2026-04-08.
+N05 delivered `cex_continuous.py` for continuous batching + fine-tune data export.
+Commit: `0c3eda32`.
 
-### H3: Fine-tune data export — IN PROGRESS (N05, grid ROADMAP_NEXT)
+### H3: Fine-tune data export — DONE (N05, grid ROADMAP_NEXT)
 
-Export training pairs from existing ISOs for fine-tuning.
-Bundled with H2 dispatch to N05.
+Bundled with H2. N05 delivered fine-tune export tooling alongside continuous batching.
+Commit: `0c3eda32`.
 
 ### H4: capabilities rename (147 files) — DONE (N03, grid ROADMAP_NEXT)
 
 Renamed `capability_summary` to `capabilities` across all 146 files. Python tools, tests, templates, manifests updated.
+Commit: `b905cffd`.
 
-### H5: NotebookLM pipeline build — IN PROGRESS (N01, grid ROADMAP_NEXT)
+### H5: NotebookLM pipeline build — DONE (N01, grid ROADMAP_NEXT)
 
-Build pipeline components from spec. KC audit + 5 new kind KCs. Dispatched to N01.
+N01 built pipeline components, KC audit, 4 origin fixes, 5 new kind KCs.
+Commit: `6b0a2c6d`.
 
-### H6: Content Factory commercial layer — IN PROGRESS (N06, grid ROADMAP_NEXT)
+### H6: Content Factory commercial layer — DONE (N06, grid ROADMAP_NEXT)
 
-Pricing model + monetization audit + product funnel. Dispatched to N06.
+N06 delivered pricing model, monetization audit, product funnel.
+Commit: `7a78dcdf`.
+
+### H7: CANONICALIZATION grid (6 nuclei) — DONE (2026-04-08)
+
+Full 6-nucleus grid for intent resolution canonicalization:
+- N01: intent resolution patterns across 16 sources
+- N02: value prop + seed words + didactic protocol
+- N03: intent resolution map (123 kinds) + quality gate + audit
+- N04: intent resolution KC + Rosetta Stone expansion + metaphor audit
+- N05: e2e pipeline test + failure modes + performance audit
+- N06: moat analysis + pricing tiers + value calculator
+Consolidated commit: `c78621d8`.
+
+### H8: INTENT_FIX grid (6 nuclei) — DONE (2026-04-08)
+
+Follow-up grid fixing code + docs from CANONICALIZATION findings:
+- N01: confidence scoring + clarification patterns + query decomposition + 50-case benchmark
+- N02: onboarding + FAQ + 3 case studies for intent resolution
+- N03: didactic protocol + seed words spec + metaphor expansion
+- N05: EN verbs + AND split + 65 synonyms + fuzzy matching + confidence scoring
+- N06: L0-L7 intent resolution depth spec + conversion triggers
+- N07: consolidation + nucleus UX hardening
+Consolidated commit: `f3dfc921`.
 
 ---
 
@@ -139,21 +165,19 @@ sub-agents, multi-provider routing, quality gates.
 
 Expected: ~3-4 hours with full grid + sub-agents.
 
-### M2: capabilities rename — DONE
+### M2: capabilities rename — DONE (completed in H4)
 
-Completed in H4. All 146 files renamed `capability_summary` → `capabilities`.
-
-### M3: Content Factory v1
+### M3: Content Factory v1 — PARTIALLY DONE
 
 Spec exists: `spec_content_factory_v1.md`.
-Pipeline: CEX artifacts → multi-format content (blog, social, video scripts).
-Uses N02 (marketing) + N06 (commercial) + NotebookLM integration.
+Pipeline: CEX artifacts -> multi-format content (blog, social, video scripts).
+N06 delivered pricing + funnel (H6). N01 delivered NotebookLM pipeline (H5).
+Remaining: integration layer connecting N01 pipeline output to N02/N06 endpoints.
 
-### M4: NotebookLM Pipeline
+### M4: NotebookLM Pipeline — DONE (completed in H5)
 
-Spec exists: `spec_notebooklm_pipeline.md`.
-Pipeline: KCs → Google NotebookLM → audio content.
-N01 has MCP server for this (`notebooklm-mcp`).
+N01 built full pipeline: KC -> NotebookLM -> audio content.
+KC audit completed. 4 origin fixes applied.
 
 ---
 
@@ -190,13 +214,18 @@ REST API exposing CEX capabilities:
 
 ## Architecture Health Targets
 
-| Metric | Current | Target |
-|--------|---------|--------|
+| Metric | Current (2026-04-08) | Target |
+|--------|----------------------|--------|
 | Kinds | 123 | 130+ (as industry evolves) |
-| Builders PASS | 115 | 124 (zero WARN) |
+| Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
+| Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
+| Kind KCs | 123 (98/98 covered) | 100% coverage |
 | Quality floor | 9.0 (100%) | Maintain |
-| Flywheel | 100% | Maintain |
+| Flywheel | 109/109 (100%) | Maintain |
+| Python tools | 92 (64 cex_*) | Consolidate overlaps |
+| Sub-agents | 125 | Maintain 1:1 with builders |
+| Rules | 16 | Add as patterns emerge |
 | Portuguese remnants | ~0 | 0 (continuous audit) |
-| Industry term alignment | 95% | 99% (quarterly review vs provider docs) |
-| Sub-agent coverage | 6 agents | 10+ (specialized per task type) |
+| Industry term alignment | 98% | 99% (quarterly review) |
+| Intent resolution | 123 kinds mapped + confidence scoring | Full fuzzy matching |
 | Overnight bootstrap time | Untested | < 4 hours |

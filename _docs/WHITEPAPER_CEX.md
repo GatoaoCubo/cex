@@ -373,7 +373,7 @@ User: "Too formal, didnt like it"
 
 ## 8. Builders: Stored Procedures (Self-Referential)
 
-125 builders x 13 ISOs = 1,625 stored procedures.
+124 builders x 13 ISOs = 1,612+ stored procedures (1,630 total with shared ISOs).
 
 Each builder = factory for one kind of artifact. system-prompt-builder produces identity files. instruction-builder produces method files. quality-gate-builder produces validation files.
 
@@ -424,7 +424,7 @@ Lovable bootstraps the FACE of your company. CEX bootstraps the BRAIN.
     Audience?      > "junior devs seeking first job"
     Tone of voice? > [formal / casual / technical / fun]
 
-5 questions. 30 seconds. CEX generates a complete, operable repo: 125 builders ready, 3 pre-filled knowledge cards, 2 default agents, full governance (pre-commit, doctor, schemas), multi-LLM entry points (CLAUDE.md, .cursorrules, GPT system prompt).
+5 questions. 30 seconds. CEX generates a complete, operable repo: 124 builders ready, 123 kind knowledge cards, 125 sub-agent definitions, full governance (pre-commit, doctor, schemas), multi-LLM entry points (CLAUDE.md, .cursorrules, GPT system prompt).
 
 ### Day 2+: Human asks things, CEX compiles
 

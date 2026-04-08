@@ -1,6 +1,6 @@
 # CEX FAQ
 
-> 10 most common questions answered.
+> 15 most common questions answered.
 
 ---
 
@@ -173,6 +173,45 @@ a knowledge card, a context doc, or a glossary entry. CEX asks. If it doesn't as
 gets it wrong, just say "no, I meant X" and it re-resolves. The cost of a wrong
 dispatch is seconds, not hours.
 
+### 14. What is intent resolution?
+
+Intent resolution is how CEX turns your vague request into a precise action. When you
+type "make me a landing page," CEX resolves:
+
+- **Kind**: `landing_page` (from 123 possible types)
+- **Pillar**: P05 Output (from 12 possible categories)
+- **Nucleus**: the right specialist agent (from 7 possible)
+- **Builder**: landing-page-builder with 13 ISO components
+
+This happens via a multi-stage pipeline:
+
+1. **Seed word matching**: 80+ trigger phrases in EN/PT mapped to canonical actions
+2. **Fuzzy matching**: Levenshtein distance catches typos and near-misses
+3. **Synonym expansion**: 65+ synonym pairs (e.g., "webpage" -> "landing_page")
+4. **Confidence scoring**: high confidence (> 80%) executes; low confidence asks
+5. **Verb resolution**: 14 PT/EN verb pairs mapped to canonical actions (create, improve, analyze...)
+
+The full mapping of all 123 kinds is in `N03_engineering/knowledge/kc_intent_resolution_map.md`.
+
+### 15. How does CEX handle ambiguous requests?
+
+Three layers protect against misrouted intent:
+
+1. **Confidence threshold**: If CEX scores below 80% confidence on intent resolution,
+   it asks a clarifying question before proceeding. Example: "Did you mean a knowledge
+   card (documentation) or a context doc (onboarding guide)?"
+
+2. **AND-split detection**: Compound requests like "research competitors and write ad
+   copy" are decomposed into separate tasks routed to different nuclei (N01 for research,
+   N02 for copy).
+
+3. **Restatement protocol**: Before executing complex tasks, CEX restates what it
+   understood in precise terms so you can confirm or redirect. The cost of a wrong
+   dispatch is seconds, not hours -- everything saves to git, nothing is lost.
+
+See the benchmark dataset (50 test cases) in `N01_intelligence/evaluation/` for
+real-world resolution accuracy metrics.
+
 ---
 
-*CEX FAQ v3.0 -- Updated 2026-04-08*
+*CEX FAQ v4.0 -- Updated 2026-04-08*
