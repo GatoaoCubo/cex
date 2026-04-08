@@ -1,75 +1,75 @@
 {
-  "timestamp": "2026-04-07T15:41:20.328188",
+  "timestamp": "2026-04-08T13:13:13.169872",
   "pass": 54,
   "fail": 4,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 83.2,
+  "elapsed_s": 113.8,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "53044B"
+      "detail": "54445B"
     },
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "68564B"
+      "detail": "70213B"
     },
     {
       "name": "tool:cex_intent.py",
       "status": "PASS",
-      "detail": "19393B"
+      "detail": "19955B"
     },
     {
       "name": "tool:cex_compile.py",
       "status": "PASS",
-      "detail": "18416B"
+      "detail": "18980B"
     },
     {
       "name": "tool:cex_doctor.py",
       "status": "PASS",
-      "detail": "15695B"
+      "detail": "16224B"
     },
     {
       "name": "tool:cex_index.py",
       "status": "PASS",
-      "detail": "11143B"
+      "detail": "11479B"
     },
     {
       "name": "tool:cex_feedback.py",
       "status": "PASS",
-      "detail": "14185B"
+      "detail": "14638B"
     },
     {
       "name": "tool:cex_hooks.py",
       "status": "PASS",
-      "detail": "22032B"
+      "detail": "22683B"
     },
     {
       "name": "tool:cex_score.py",
       "status": "PASS",
-      "detail": "25654B"
+      "detail": "26367B"
     },
     {
       "name": "tool:cex_materialize.py",
       "status": "PASS",
-      "detail": "5927B"
+      "detail": "6108B"
     },
     {
       "name": "tool:signal_writer.py",
       "status": "PASS",
-      "detail": "1717B"
+      "detail": "1760B"
     },
     {
       "name": "doctor:pass_count",
       "status": "PASS",
-      "detail": "122/98+ PASS"
+      "detail": "123/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
-      "status": "FAIL",
-      "detail": "1 WARN"
+      "status": "PASS",
+      "detail": "0 WARN"
     },
     {
       "name": "doctor:zero_fail",
@@ -94,32 +94,32 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "43 artifacts (min 11)"
+      "detail": "55 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "51 artifacts (min 10)"
+      "detail": "57 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "46 artifacts (min 34)"
+      "detail": "47 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "46 artifacts (min 12)"
+      "detail": "67 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "35 artifacts (min 9)"
+      "detail": "56 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "47 artifacts (min 9)"
+      "detail": "59 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
@@ -128,13 +128,13 @@
     },
     {
       "name": "quality:zero_null",
-      "status": "PASS",
-      "detail": "5 quality:null (awaiting peer review)"
+      "status": "FAIL",
+      "detail": "83 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "303 artifacts with quality score"
+      "detail": "323 artifacts with quality score"
     },
     {
       "name": "subagents:count",
@@ -254,7 +254,7 @@
     {
       "name": "runner:execute_pass",
       "status": "FAIL",
-      "detail": "plan...\nERROR: No LLM provider available.\n  CLI-Pi: pi CLI not in PATH\n  SDK-Ollama: pip install ollama\n  HTTP-Ollama: HTTP Error 404: Not Found\n  API: Paid APIs disabled (set CEX_USE_API=1 to allow)\n"
+      "detail": "oning plan...\nERROR: No LLM provider available.\n  CLI-Claude: exit 1: \n  SDK-Ollama: pip install ollama\n  HTTP-Ollama: HTTP Error 404: Not Found\n  API: Paid APIs disabled (set CEX_USE_API=1 to allow)\n"
     },
     {
       "name": "runner:learning_record",
@@ -289,12 +289,12 @@
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "105 dirty files"
+      "detail": "248 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "a01ce6f1 [N07] step6: install pi subagent extension (index.t"
+      "detail": "3d7ea849 [N07] consolidate: W2 deliverables + docs update + "
     }
   ]
 }
