@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-07T18:41:20.196187+00:00",
+  "timestamp": "2026-04-08T16:13:13.013622+00:00",
   "version": "1.0.0",
   "summary": {
     "total": 3,
@@ -21,7 +21,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (1219 chars)\r\n  [F1] bld_config loaded (1042 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2144 chars)\r\n  [F1] bld_config loaded (2133 chars)\r\n  [F1] constraints: 5 "
             },
             {
               "check": "f1_constrain_fires",
@@ -78,7 +78,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3833 chars)\r\n  [F1] bld_config loaded (3894 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4199 chars)\r\n  [F1] bld_config loaded (4260 chars)\r\n  [F1] constraints: 5 "
             },
             {
               "check": "f1_constrain_fires",
@@ -135,7 +135,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2719 chars)\r\n  [F1] bld_config loaded (2602 chars)\r\n  [F1] constraints: 8 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3025 chars)\r\n  [F1] bld_config loaded (2908 chars)\r\n  [F1] constraints: 8 "
             },
             {
               "check": "f1_constrain_fires",
@@ -187,7 +187,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 27310
+      "total_elapsed_ms": 32890
     },
     {
       "name": "instagram",
@@ -202,7 +202,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3892 chars)\r\n  [F1] bld_config loaded (2846 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4075 chars)\r\n  [F1] bld_config loaded (3029 chars)\r\n  [F1] constraints: 5 "
             },
             {
               "check": "f1_constrain_fires",
@@ -259,7 +259,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2473 chars)\r\n  [F1] bld_config loaded (2336 chars)\r\n  [F1] constraints: 7 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2791 chars)\r\n  [F1] bld_config loaded (2654 chars)\r\n  [F1] constraints: 7 "
             },
             {
               "check": "f1_constrain_fires",
@@ -311,7 +311,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 12596
+      "total_elapsed_ms": 17210
     },
     {
       "name": "docs",
@@ -326,7 +326,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3105 chars)\r\n  [F1] bld_config loaded (2046 chars)\r\n  [F1] constraints: 10"
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3447 chars)\r\n  [F1] bld_config loaded (2388 chars)\r\n  [F1] constraints: 10"
             },
             {
               "check": "f1_constrain_fires",
@@ -383,7 +383,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2552 chars)\r\n  [F1] bld_config loaded (2013 chars)\r\n  [F1] constraints: 7 "
+              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2882 chars)\r\n  [F1] bld_config loaded (2343 chars)\r\n  [F1] constraints: 7 "
             },
             {
               "check": "f1_constrain_fires",
@@ -435,7 +435,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 10813
+      "total_elapsed_ms": 14409
     }
   ]
 }

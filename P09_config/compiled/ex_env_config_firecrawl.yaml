@@ -17,6 +17,7 @@ density_score: 0.88
 source:
 - 'Where defined: Railway environment variables (operations_agent agent_group)'
 - 'How to obtain: Sign up at firecrawl.dev, $19/mo tier, copy API key from dashboard'
+domain: config
 variable: '| Property | Value |
 
   |----------|-------|
@@ -41,11 +42,12 @@ consumers:
 - '`api/core/erp_connector.py`: Enriches marketplace product data (shopee 3 credits, amazon 3 credits, magalu/americanas/casas_bahia/shein
   1 each)'
 - '`api/v1/pesquisas.py`: Marketplace research with `formats: ["extract"]` + `extract: {schema, prompt}` pattern'
-dependencies: '- Requires: `FIRECRAWL_ENABLED=true`, `FIRECRAWL_MONTHLY_BUDGET=3000`, `FIRECRAWL_PER_RESEARCH_BUDGET=10`
+dependencies: '1. Requires: `FIRECRAWL_ENABLED=true`, `FIRECRAWL_MONTHLY_BUDGET=3000`, `FIRECRAWL_PER_RESEARCH_BUDGET=10`
 
-  - Conflicts: none (Serper runs independently)
+  2. Conflicts: none (Serper runs independently)
 
 
   ---
 
   Migrated from: organization MEMORY.md (Firecrawl integration 2026-03-01)'
+metadata: python _tools/cex_score.py --apply p09-env-firecrawl.md

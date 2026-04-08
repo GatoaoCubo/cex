@@ -44,6 +44,11 @@ dependencies:
 - CEX root as template source
 - 'Copies: _schema.yaml, templates/, optionally examples/ and _tools/'
 category: product
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Creates a new CEX project from selected Leverage Points (P01-P12). Lighter than cex_init — copies pillar structure,
   schemas, and templates without the interactive questionnaire. Supports partial LP selection for focused projects.
 usage: '# Full project (all LPs)

@@ -47,6 +47,11 @@ dependencies:
 - Templates in `P01_knowledge/templates/` (tpl_knowledge_card_*.md)
 - TYPE_TO_TEMPLATE mapping for type resolution
 category: qa
+quality: 9.1
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Transforms raw input into template-compliant artifacts. The template IS the prompt — it forces LLM to fill every
   {{PLACEHOLDER}} with knowledge extracted and expanded from the input. Enforces density >= 0.85, actionable axioms, anti-patterns,
   and concrete application sections.

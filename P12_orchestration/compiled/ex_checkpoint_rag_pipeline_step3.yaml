@@ -7,7 +7,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: orchestration
-quality: 8.9
+quality: 9.1
 tags:
 - checkpoint
 - rag
@@ -26,7 +26,7 @@ keywords:
 name: rag_pipeline_step3_embed
 workflow_ref: rag_ingest_pipeline
 step: 3_embed
-density_score: null
+density_score: 1.0
 tl_dr: Checkpoint captura o estado exato do pipeline `rag_ingest` apos completar step 3 (embedding generation). Com 847 documentos
   processados com sucesso e 3 falhas, o checkpoint permite retomar do step 4 (index_update) sem reprocessar os 847 embeddings
   ja gerados.

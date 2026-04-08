@@ -68,6 +68,11 @@ dependencies:
 - '`archetypes/TYPE_TO_TEMPLATE.yaml` for template mapping'
 - Output feeds into `cex_compile.py` if not auto-compiled
 category: core
+quality: 9.1
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: 'Transforms user input into complete CEX artifacts through 5 stages: CAPTURE (gather input) > DECOMPOSE (parse intent)
   > HYDRATE (enrich with schema/template) > COMPILE (generate .md + compiled/) > ENVELOPE (wrap with metadata). Produces dual
   output: markdown source + compiled machine format.'

@@ -19,6 +19,10 @@ tags:
 - anthropic
 - pricing
 - capabilities
+updated: '2026-04-07'
+title: Model Card Claude Opus 4
+density_score: 0.92
+tldr: Defines model card for model card claude opus 4, with validation gates and integration points.
 specifications: '| Spec | Value |
 
   |------|-------|
@@ -58,3 +62,4 @@ organization_agent_group_mapping:
 - 'operations_agent (execute): opus — deployment requires zero-error precision'
 - 'orchestrator (orchestrate): opus — routing decisions affect all agent_groups'
 - 'research_agent/marketing_agent/knowledge_agent/commercial_agent: sonnet — analysis tasks don''t need opus'
+metadata: python _tools/cex_score.py --apply p02-mc-claude-opus-4.md

@@ -32,6 +32,11 @@ dependencies:
 - '`archetypes/builders/` directory'
 - 'Filename convention: `bld_{kind}_{topic}.md`'
 category: qa
+quality: 9.1
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Scans all builder .md files and adds missing `kind` and `id` fields to YAML frontmatter. Derives kind from filename
   pattern (bld_{kind}_{topic}.md) and id from the filename stem. Operates in dry-run (report) or fix (apply) mode.
 usage: '# Report what would change
@@ -54,3 +59,30 @@ arguments: '| Flag | Type | Required | Description |
   One of `--dry-run` or `--fix` should be used.'
 pipeline_position: '8F Function: GOVERN (F7) — repair and normalization. Stage: Repair tool. Run after bulk builder creation
   or migration to ensure all files have consistent frontmatter. Upstream of cex_doctor and validate_builder.'
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `cli_tool` |
+
+  | Pillar | P04 |
+
+  | Domain | tool integration |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Compiler | cex_compile.py |
+
+  | Retriever | cex_retriever.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'

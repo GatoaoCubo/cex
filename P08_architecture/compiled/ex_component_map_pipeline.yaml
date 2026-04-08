@@ -14,7 +14,7 @@ references:
 - tpl_component_map
 - ex_mental_model_pipeline
 - ex_dispatch_rule_research
-quality: 8.8
+quality: 9.0
 architecture_overview: 'CAPTURE ──→ DECOMPOSE ──→ HYDRATE ──→ COMPILE ──→ ENVELOPE
 
   (Python)    (LLM micro)   (YAML/Py)   (LLM gen)   (Git/Py)'

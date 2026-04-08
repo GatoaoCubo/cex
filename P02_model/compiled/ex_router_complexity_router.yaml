@@ -21,7 +21,13 @@ tags:
 - scoring
 - cost-optimization
 tldr: Routes requests by complexity score (6 weighted factors) to local/hybrid/cloud tiers for cost-optimal inference.
-quality: 8.8
+quality: 9.1
+domain: model configuration
+density_score: 0.82
+author: n03_builder
+created: '2026-04-07'
+updated: '2026-04-07'
+version: 1.0.0
 scoring_algorithm: "Complexity score = weighted sum of 6 factors, each normalized to [0, 1]:\n\n| Factor | Weight | Measurement\
   \ | Example |\n|--------|--------|-------------|---------|\n| `token_est` | 0.20 | Expected output length (normalized by\
   \ 4096) | Short answer=0.1, essay=0.8 |\n| `reasoning` | 0.25 | Reasoning depth required (chain-of-thought steps) | Lookup=0.1,\

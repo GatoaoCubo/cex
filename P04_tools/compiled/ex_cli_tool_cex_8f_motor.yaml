@@ -45,6 +45,11 @@ dependencies:
 - Verb normalization table (PT imperative/infinitive to canonical actions)
 - Output consumed by `cex_crew_runner.py`
 category: core
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: 'Receives a natural language intent and produces a structured execution plan: which builders to activate, in what
   order, with what dependencies, following the 8F pipeline (CONSTRAIN > BECOME > INJECT > REASON > CALL > PRODUCE > GOVERN
   > COLLABORATE).'

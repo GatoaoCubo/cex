@@ -6,7 +6,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: dispatch-rule-builder
 domain: testing
-quality: 8.7
+quality: 9.0
 tags:
 - dispatch
 - test
@@ -42,6 +42,7 @@ conditions:
 load_balance: false
 routing_strategy: hybrid
 density_score: 0.79
+title: P12 Dispatch Rule Create Dispatch Rule For Test
 purpose: Routes testing, QA, and validation tasks to the executor agent_group. Covers unit tests, integration tests, coverage
   reporting, fixture setup, and assertion-based spec validation. Executor carries test-optimized tooling (pytest, coverage.py)
   and is the authoritative target for all automated quality verification workflows.
@@ -52,3 +53,26 @@ keyword_rationale: Bilingual PT/EN coverage ensures both `testar`/`validar` (Por
 fallback_logic: '`builder` (N03) handles construction of test scaffolding and test artifact templates when executor is unavailable.
   Builder cannot run tests but can produce test files, fixtures, and test configs — a useful partial degradation that preserves
   progress without blocking the pipeline entirely.'
+cross_references:
+- 'Pillar: P12 (Orchestration)'
+- 'Kind: `dispatch rule`'
+- 'Artifact ID: `p12_dr_test`'
+- 'Tags: [dispatch, test, qa, executor, coverage, validation, pytest]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P12 | Orchestration domain |
+
+  | Kind `dispatch rule` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'
+artifact_metadata: 'kind: dispatch_rule
+
+  pillar: P12
+
+  pipeline: 8F
+
+  scoring: hybrid_3_layer
+
+  compilation: cex_compile'

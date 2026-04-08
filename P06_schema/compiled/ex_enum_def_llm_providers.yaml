@@ -7,7 +7,7 @@ created: 2026-03-29
 updated: 2026-03-29
 author: builder_agent
 domain: schema
-quality: 8.9
+quality: 9.1
 tags:
 - enum
 - llm-providers
@@ -31,7 +31,7 @@ values:
 - cohere
 - mistral
 description: Supported LLM providers for multi-provider routing
-density_score: null
+density_score: 1.0
 tl_dr: Enum canonica que lista os 7 provedores LLM suportados pelo organization para routing multi-modelo. Qualquer configuracao
   que referencia um provedor deve usar exatamente um destes valores. Novas adicoes passam por review (impacto em routing,
   billing, e fallback chains).

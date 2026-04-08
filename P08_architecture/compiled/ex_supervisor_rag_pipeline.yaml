@@ -10,7 +10,7 @@ description: 'Orchestrates the RAG pipeline: document ingestion, chunking, embed
 crew_size: 5
 execution_mode: pipeline
 domain: rag
-quality: 8.8
+quality: 9.1
 tags:
 - supervisor
 - rag

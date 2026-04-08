@@ -18,7 +18,7 @@
   "created": "2026-03-24",
   "author": "builder_agent",
   "domain": "knowledge-retrieval",
-  "quality": 9.5,
+  "quality": 9.1,
   "tags": [
     "mcp",
     "brain",
@@ -28,6 +28,10 @@
     "ollama",
     "search"
   ],
+  "updated": "2026-04-07",
+  "title": "Mcp Server Codexa Brain",
+  "density_score": 0.92,
+  "tldr": "Defines mcp server for mcp server codexa brain, with validation gates and integration points.",
   "integration_notes": [
     "Start: `python -m organization_brain.server` (cwd: src/)",
     "Required env: `organization_ROOT`, `PYTHONPATH`",
@@ -40,5 +44,6 @@
     "Verify: FAISS index exists in `src/indexes/` (~140MB)",
     "Test: `brain_status(verbose=true)` for cache/model state",
     "Common: \"model not found\" = run `ollama pull nomic-embed-text`"
-  ]
+  ],
+  "metadata": "python _tools/cex_score.py --apply p04-mcp-organization-brain.md"
 }

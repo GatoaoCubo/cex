@@ -6,7 +6,7 @@ created: '2026-03-28'
 updated: '2026-03-28'
 author: builder_agent
 domain: quality
-quality: 8.7
+quality: 9.0
 tags:
 - axiom
 - shokunin
@@ -40,6 +40,7 @@ linked_artifacts:
   - scoring-rubric-builder
   - validator-builder
 density_score: 0.92
+title: Axiom Shokunin Quality
 rule_statement: No artifact enters the pool with quality score below 7.0 — the Shokunin quality floor is non-negotiable.
 examples:
 - Agent artifact scores 8.5 on SOFT gates, all HARD gates pass -> admitted to pool
@@ -48,3 +49,13 @@ violations:
 - Manual pool insertion bypassing quality gate
 - 'Impact: unreliable artifacts pollute search results, agents consume bad context'
 - 'Resolution: remove artifact, run gate retroactively, re-admit only if >= 7.0'
+artifact_metadata: 'kind: axiom
+
+  pillar: P10
+
+  pipeline: 8F
+
+  scoring: hybrid_3_layer
+
+
+  compilation: cex_compile'

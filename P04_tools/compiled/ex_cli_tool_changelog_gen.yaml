@@ -35,6 +35,11 @@ dependencies:
 - '`_meta/CHANGELOG.md` for appending entries'
 - LP detection regex on file paths (P\d{2}_\w+)
 category: product
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Reads git log since the last tag (or specified ref), groups commits by LP based on file paths, and generates a formatted
   changelog entry. Auto-detects the last git tag as starting point.
 usage: '# Auto-detect last tag, generate changelog

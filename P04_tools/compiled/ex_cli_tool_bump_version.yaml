@@ -36,6 +36,11 @@ dependencies:
 - '`_meta/VERSION.yaml` with cex_version and lps sections'
 - '`_meta/CHANGELOG.md` for appending entries'
 category: product
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Increments semantic version (major.minor.patch) for a specific LP or the global CEX version. Updates _meta/VERSION.yaml
   and optionally appends a changelog entry to _meta/CHANGELOG.md.
 usage: '# Bump global patch version

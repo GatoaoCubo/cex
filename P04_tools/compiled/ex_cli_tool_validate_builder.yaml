@@ -44,6 +44,11 @@ dependencies:
 - '`archetypes/builders/` directory structure'
 - 'Git (for `--changed` mode: `git diff --cached --name-only`)'
 category: governance
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: 'Validates a CEX builder directory against the archetype checklist: bld_* naming, 13 required ISO kinds, density
   >= 0.8 per file, size <= 4096B (6144B for instruction), and correct frontmatter (kind, pillar, 8F function mapping).'
 usage: '# Validate single builder

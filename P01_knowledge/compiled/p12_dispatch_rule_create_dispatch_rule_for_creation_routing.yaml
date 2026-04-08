@@ -6,7 +6,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: dispatch-rule-builder
 domain: creation
-quality: 8.8
+quality: 9.0
 tags:
 - dispatch
 - creation
@@ -45,6 +45,7 @@ conditions:
 load_balance: false
 routing_strategy: hybrid
 density_score: 0.78
+title: P12 Dispatch Rule Create Dispatch Rule For Creation Routing
 purpose: Routes all artifact creation, build, and scaffolding tasks to the builder nucleus (N03). Builder carries the full
   8F pipeline, 114 builder archetypes, and CEX construction toolkit. Any task requesting a new artifact, schema, template,
   component, or structured output routes here. N03 is the authoritative executor for `create`, `build`, and `scaffold` intent
@@ -58,3 +59,17 @@ fallback_logic: '`executor` handles tasks at the intersection of build and run p
   execution, or artifact instantiation from existing templates). Below 0.75 confidence, the router evaluates adjacent rules
   before activating fallback. `executor` is preferred over `knowledge-engine` because partially-built artifacts need execution
   capability, not indexing or retrieval.'
+cross_references:
+- 'Pillar: P12 (Orchestration)'
+- 'Kind: `dispatch rule`'
+- 'Artifact ID: `p12_dr_creation`'
+- 'Tags: [dispatch, creation, build, builder, artifact, scaffold, P12]'
+integration_points: '| Component | Role |
+
+  |-----------|------|
+
+  | Pillar P12 | Orchestration domain |
+
+  | Kind `dispatch rule` | Artifact type |
+
+  | Pipeline | 8F (F1→F8) |'

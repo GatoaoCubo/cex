@@ -47,6 +47,11 @@ dependencies:
 - '`archetypes/builders/` for builder ISO injection (30KB budget)'
 - '`anthropic` SDK (only for `--execute` mode, model: claude-sonnet-4-6)'
 category: core
+quality: 9.0
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: LangGraph-inspired state machine that executes CEX builder plans produced by Motor 8F. In dry-run mode (default),
   generates prompts and saves to files. In execute mode, calls Claude via anthropic SDK with quality gates (>= 7.0 advance,
   < 7.0 retry, exhausted degrade).

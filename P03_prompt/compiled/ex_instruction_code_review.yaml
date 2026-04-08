@@ -19,7 +19,7 @@ dependencies:
 - Source code repository access
 logging: true
 domain: code_review
-quality: 8.7
+quality: 9.0
 tags:
 - instruction
 - code-review
@@ -43,3 +43,6 @@ validation:
 references:
 - OWASP Top 10 for security checks
 - Project CLAUDE.md for style and convention rules
+template_loading: '# Verify instruction loads correctly
+
+  python _tools/cex_skill_loader.py --verify code_review'

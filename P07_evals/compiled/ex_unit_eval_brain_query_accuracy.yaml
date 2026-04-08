@@ -12,6 +12,11 @@ tags:
 - brain
 - search
 - accuracy
+updated: '2026-04-07'
+domain: evaluation
+title: Unit Eval Brain Query Accuracy
+density_score: 0.92
+tldr: Defines unit eval for unit eval brain query accuracy, with validation gates and integration points.
 test_cases: '| Query | Expected Top Result | Pass Criteria |
 
   |-------|-------------------|---------------|
@@ -41,3 +46,9 @@ metrics: '| Metric | Threshold | Current |
 failure_action:
 - 'Top-1 < 70%: Rebuild FAISS index, check embedding model'
 - 'Latency > 500ms: Check Ollama status, model loading'
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target

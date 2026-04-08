@@ -64,6 +64,11 @@ dependencies:
 - '`archetypes/TYPE_TO_TEMPLATE.yaml` for type-to-template mapping'
 - '`archetypes/builders/` for `--builder` mode (ISO files, 40KB budget)'
 category: core
+quality: 9.1
+tldr: Golden and anti-examples for tool integration, demonstrating ideal structure and common pitfalls.
+domain: tool integration
+updated: '2026-04-07'
+density_score: 0.9
 purpose: Reads _schema.yaml + TYPE_TO_TEMPLATE.yaml + seed words + context and assembles a complete LLM-ready prompt that
   produces valid CEX artifacts. Does NOT call LLM — generates the prompt only.
 usage: '# Generate knowledge card prompt

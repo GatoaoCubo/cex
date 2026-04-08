@@ -64,3 +64,4 @@ application: No CEX, P05 trabalha em par com P06 (Schema) — P05 define "o que 
 references:
 - P05_output/_schema.yaml (fonte de verdade)
 - 'P02_model/_schema.yaml (agent_package.lp_mapping: output_template=P05)'
+retrieval: python _tools/cex_retriever.py "meta-construction" --top 5
