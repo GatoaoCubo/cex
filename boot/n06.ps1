@@ -3,12 +3,51 @@
 # CLI: claude | Model: claude-opus-4-6 | Context: 1000000
 # Sin: Strategic Greed (Strategic Greed)
 
-# --- UX: Window appearance ---
-$Host.UI.RawUI.WindowTitle = "CEX-N06-COMMERCIAL [claude-opus-4-6]"
+# --- UX: Window title with mission + sin + status ---
+$cexRoot = "C:\Users\PC\Documents\GitHub\cex"
+$nucleus = "n06"
+$sinName = "Strategic Greed"
+$modelShort = "claude-opus-4-6" -replace "claude-", ""
+
+# Detect mission from handoff file
+$mission = ""
+$handoff = "$cexRoot\.cex\runtime\handoffs\${nucleus}_task.md"
+if (Test-Path $handoff) {
+    $content = Get-Content $handoff -Head 10 -EA SilentlyContinue
+    foreach ($line in $content) {
+        if ($line -match "^mission:\s*(.+)$") {
+            $mission = $Matches[1].Trim()
+            break
+        }
+    }
+}
+
+# Detect git repo name + branch
+$gitBranch = ""
+$gitRepo = ""
+try {
+    $gitBranch = (git rev-parse --abbrev-ref HEAD 2>$null)
+    $gitRemote = (git remote get-url origin 2>$null)
+    if ($gitRemote -match "[/:]([^/]+?)(?:\.git)?$") { $gitRepo = $Matches[1] }
+} catch {}
+
+# Build title: N0X Sin | repo@branch [mission] -- STATUS
+function Set-CexTitle($status) {
+    $t = "N06 $sinName"
+    if ($gitRepo) { $t += " | $gitRepo" }
+    if ($gitBranch) { $t += "@$gitBranch" }
+    if ($mission) { $t += " [$mission]" }
+    $t += " -- $status"
+    $Host.UI.RawUI.WindowTitle = $t
+}
+
+Set-CexTitle "BOOTING"
+
 try {
     $Host.UI.RawUI.BackgroundColor = "DarkYellow"
     $Host.UI.RawUI.ForegroundColor = "Black"
     if (-not $env:CEX_GRID) {
+        # Solo mode: set buffer + window size. Grid mode: spawn_grid controls sizing.
         $bufSize = $Host.UI.RawUI.BufferSize
         $bufSize.Width = 160; $bufSize.Height = 9999
         $Host.UI.RawUI.BufferSize = $bufSize
@@ -25,12 +64,13 @@ Write-Host "  $ N06 Strategic Greed - Strategic Greed" -ForegroundColor Yellow
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  What does each decision EARN-" -ForegroundColor DarkGray
 Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
+if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor Yellow }
 Write-Host ""
 
 # --- Environment ---
 $env:CLAUDECODE = ""
 $env:CEX_NUCLEUS = "N06"
-$env:CEX_ROOT = "C:\Users\PC\Documents\GitHub\cex"
+$env:CEX_ROOT = $cexRoot
 Set-Location $env:CEX_ROOT
 
 # --- Launch CLI ---
@@ -45,13 +85,14 @@ Read .cex/runtime/handoffs/n06_task.md and execute. If no handoff, report ready.
 '@
 
 # Build argument list (avoids PowerShell parsing -- flags as operators)
-$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6", "--name", "CEX-N06")
-$args += "--append-system-prompt", "N06_commercial/agent_card_n06.md"
-$args += "--append-system-prompt", ".cex/config/context_self_select.md"
-$args += "--append-system-prompt", $sysPrompt
+$cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6", "--name", "CEX-N06")
+$cliArgs += "--append-system-prompt", "N06_commercial/agent_card_n06.md"
+$cliArgs += "--append-system-prompt", ".cex/config/context_self_select.md"
+$cliArgs += "--append-system-prompt", $sysPrompt
 $args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex\.mcp-n06.json"
 $args += "--settings", "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n06.json"
-$args += $initialMsg
+$cliArgs += $initialMsg
 
-# Call operator & ensures external command execution
-& claude @args
+Set-CexTitle "RUNNING"
+& claude @cliArgs
+Set-CexTitle "DONE"

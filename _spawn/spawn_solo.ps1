@@ -25,10 +25,19 @@ $cellW = [math]::Floor($screen.Width / $cols)
 $cellH = [math]::Floor($screen.Height / $rows)
 $ox = $screen.X; $oy = $screen.Y
 
+# Fixed cell map -- same layout as spawn_grid.ps1
+# +--------+--------+--------+
+# |  N01   |  N02   |  N03   |
+# +--------+--------+--------+
+# |  N04   |  N05   |  N06   |
+# +--------+--------+--------+
 $grid = @{
-    n01 = @{x=$ox;             y=$oy};              n02 = @{x=$ox+$cellW;     y=$oy}
-    n03 = @{x=$ox+2*$cellW;    y=$oy};              n04 = @{x=$ox;             y=$oy+$cellH}
-    n05 = @{x=$ox+$cellW;      y=$oy+$cellH};       n06 = @{x=$ox+2*$cellW;    y=$oy+$cellH}
+    n01 = @{x=$ox;             y=$oy}
+    n02 = @{x=$ox+$cellW;      y=$oy}
+    n03 = @{x=$ox+2*$cellW;    y=$oy}
+    n04 = @{x=$ox;             y=$oy+$cellH}
+    n05 = @{x=$ox+$cellW;      y=$oy+$cellH}
+    n06 = @{x=$ox+2*$cellW;    y=$oy+$cellH}
 }
 
 $root = Split-Path $PSScriptRoot -Parent
@@ -128,11 +137,20 @@ if (Test-Path $bootPs1) {
     Write-Output "[$upper] ERROR: no boot script at $bootPs1 or $bootCmd"; exit 1
 }
 
-Start-Sleep -Seconds 3
-
-# Position window in grid
+# Position window in fixed grid cell (retry loop for window handle)
 if ($proc -and $pos) {
-    [Win32]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, $cellW, $cellH, $true) | Out-Null
+    $hwnd = [IntPtr]::Zero
+    for ($i = 0; $i -lt 10; $i++) {
+        Start-Sleep -Milliseconds 500
+        try { $proc.Refresh() } catch {}
+        $hwnd = $proc.MainWindowHandle
+        if ($hwnd -ne [IntPtr]::Zero) { break }
+    }
+    if ($hwnd -ne [IntPtr]::Zero) {
+        [Win32]::MoveWindow($hwnd, $pos.x, $pos.y, $cellW, $cellH, $true) | Out-Null
+    } else {
+        Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
+    }
 }
 
 # Record PID with session tracking

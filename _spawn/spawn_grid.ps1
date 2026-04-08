@@ -55,26 +55,42 @@ if ($handoffs.Count -eq 0) {
 if ($mode -eq "auto") {
     $mode = if ($handoffs.Count -gt $maxSlots) { "continuous" } else { "static" }
 }
-# Fixed 3x2 grid layout (3 cols, 2 rows) -- consistent positioning for all dispatches
-# Nuclei always occupy their canonical cell: n01=0, n02=1, n03=2, n04=3, n05=4, n06=5
+# Fixed 3x2 grid layout (3 cols, 2 rows) -- each nucleus has a PERMANENT cell
+# Just by looking at screen position you know which nucleus it is:
+#
+#   +--------+--------+--------+
+#   |  N01   |  N02   |  N03   |
+#   +--------+--------+--------+
+#   |  N04   |  N05   |  N06   |
+#   +--------+--------+--------+
+#
 $n = $handoffs.Count
 $gCols = 3; $gRows = 2
 $gW = [math]::Floor($scr.Width / $gCols)
 $gH = [math]::Floor($scr.Height / $gRows)
 
-# Build position map: assign grid cells left-to-right, top-to-bottom
-$nucleiNames = @()
+# Fixed cell map: nucleus -> (col, row) -- NEVER changes regardless of dispatch order
+$fixedCells = @{
+    "n01" = @{col=0; row=0}  # top-left
+    "n02" = @{col=1; row=0}  # top-center
+    "n03" = @{col=2; row=0}  # top-right
+    "n04" = @{col=0; row=1}  # bottom-left
+    "n05" = @{col=1; row=1}  # bottom-center
+    "n06" = @{col=2; row=1}  # bottom-right
+}
+
+# Build position map from fixed cells
 foreach ($h in $handoffs) {
     $base = [System.IO.Path]::GetFileNameWithoutExtension($h.Name)
     $parts = $base -split '_'
-    $nucleiNames += $parts[-1]
-}
-$cellIdx = 0
-foreach ($nuc in $nucleiNames) {
-    $col = $cellIdx % $gCols
-    $row = [math]::Floor($cellIdx / $gCols)
-    $gridPos[$nuc] = @{x=$gOx + $col * $gW; y=$gOy + $row * $gH}
-    $cellIdx++
+    $nuc = $parts[-1]
+    $cell = $fixedCells[$nuc]
+    if ($cell) {
+        $gridPos[$nuc] = @{x=$gOx + $cell.col * $gW; y=$gOy + $cell.row * $gH}
+    } else {
+        # Unknown nucleus -- fallback to first empty cell
+        $gridPos[$nuc] = @{x=$gOx; y=$gOy}
+    }
 }
 
 Write-Output "[GRID] Mission: $mission | Mode: $mode | Handoffs: $n | Layout: ${gCols}x${gRows}"

@@ -3,8 +3,46 @@
 # CLI: claude | Model: claude-opus-4-6 | Context: 1000000
 # Sin: Analytical Envy (Analytical Envy)
 
-# --- UX: Window appearance ---
-$Host.UI.RawUI.WindowTitle = "CEX-N01-RESEARCH [claude-opus-4-6]"
+# --- UX: Window title with mission + sin + status ---
+$cexRoot = "C:\Users\PC\Documents\GitHub\cex"
+$nucleus = "n01"
+$sinName = "Analytical Envy"
+$modelShort = "claude-opus-4-6" -replace "claude-", ""
+
+# Detect mission from handoff file
+$mission = ""
+$handoff = "$cexRoot\.cex\runtime\handoffs\${nucleus}_task.md"
+if (Test-Path $handoff) {
+    $content = Get-Content $handoff -Head 10 -EA SilentlyContinue
+    foreach ($line in $content) {
+        if ($line -match "^mission:\s*(.+)$") {
+            $mission = $Matches[1].Trim()
+            break
+        }
+    }
+}
+
+# Detect git repo name + branch
+$gitBranch = ""
+$gitRepo = ""
+try {
+    $gitBranch = (git rev-parse --abbrev-ref HEAD 2>$null)
+    $gitRemote = (git remote get-url origin 2>$null)
+    if ($gitRemote -match "[/:]([^/]+?)(?:\.git)?$") { $gitRepo = $Matches[1] }
+} catch {}
+
+# Build title: N0X Sin | repo@branch [mission] -- STATUS
+function Set-CexTitle($status) {
+    $t = "N01 $sinName"
+    if ($gitRepo) { $t += " | $gitRepo" }
+    if ($gitBranch) { $t += "@$gitBranch" }
+    if ($mission) { $t += " [$mission]" }
+    $t += " -- $status"
+    $Host.UI.RawUI.WindowTitle = $t
+}
+
+Set-CexTitle "BOOTING"
+
 try {
     $Host.UI.RawUI.BackgroundColor = "DarkGreen"
     $Host.UI.RawUI.ForegroundColor = "White"
@@ -26,12 +64,13 @@ Write-Host "  [*] N01 Analytical Envy - Analytical Envy" -ForegroundColor Green
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  What does the competitor do better- How do we surpass them-" -ForegroundColor DarkGray
 Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
+if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor Green }
 Write-Host ""
 
 # --- Environment ---
 $env:CLAUDECODE = ""
 $env:CEX_NUCLEUS = "N01"
-$env:CEX_ROOT = "C:\Users\PC\Documents\GitHub\cex"
+$env:CEX_ROOT = $cexRoot
 Set-Location $env:CEX_ROOT
 
 # --- Launch CLI ---
@@ -46,13 +85,14 @@ Read .cex/runtime/handoffs/n01_task.md and execute. If no handoff, report ready.
 '@
 
 # Build argument list (avoids PowerShell parsing -- flags as operators)
-$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6", "--name", "CEX-N01")
-$args += "--append-system-prompt", "N01_intelligence/agent_card_n01.md"
-$args += "--append-system-prompt", ".cex/config/context_self_select.md"
-$args += "--append-system-prompt", $sysPrompt
+$cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6", "--name", "CEX-N01")
+$cliArgs += "--append-system-prompt", "N01_intelligence/agent_card_n01.md"
+$cliArgs += "--append-system-prompt", ".cex/config/context_self_select.md"
+$cliArgs += "--append-system-prompt", $sysPrompt
 $args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex\.mcp-n01.json"
 $args += "--settings", "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n01.json"
-$args += $initialMsg
+$cliArgs += $initialMsg
 
-# Call operator & ensures external command execution
-& claude @args
+Set-CexTitle "RUNNING"
+& claude @cliArgs
+Set-CexTitle "DONE"
