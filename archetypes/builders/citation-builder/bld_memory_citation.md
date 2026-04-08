@@ -19,7 +19,7 @@ decay_rate: 0.05
 agent_group: n04_knowledge
 keywords: [citation, excerpt, reliability_tier, date_accessed, provenance, url]
 memory_scope: project
-observation_types: [reference]
+observation_types: [user, feedback, project, reference]
 ---
 ## Summary
 Citations ground LLM outputs in verifiable external evidence. The primary failure mode is URL-only citations without context, excerpt, or reliability assessment.

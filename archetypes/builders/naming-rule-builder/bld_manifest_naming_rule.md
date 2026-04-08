@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, naming-rule, P05, specialist, convention]
 keywords: ["naming rule", naming-rule, convention, P05]
 triggers: ["create naming rule", "build naming rule artifact"]
-capability_summary: >
+capabilities: >
   L1: Specialist builder for the `naming_rule` kind (P05). Activates when a naming con. L2: Define scope-bound naming patterns using regex or glob notation. L3: When user needs to create, build, or scaffold naming rule.
 quality: 9.0
 title: "Manifest Naming Rule"

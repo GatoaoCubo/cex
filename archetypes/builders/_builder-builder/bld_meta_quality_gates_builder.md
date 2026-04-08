@@ -113,7 +113,7 @@ Primary: {{validation_command}}
 Interim: validate manually against this file, checking each gate.
 
 ## Pre-Production Checklist
-<!-- NOTE: 3-5 items de verification ANTES de comecar a produzir -->
+<!-- NOTE: 3-5 verification items BEFORE starting to produce -->
 - [ ] {{pre_check_1}}
 - [ ] {{pre_check_2}}
 - [ ] {{pre_check_3}}

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, learning-record, P10, specialist, memory]
 keywords: [learning, learning, experiencia, pattern, anti-pattern, retrospective]
 triggers: ["registra learning X", "documenta o that deu certo em Y", "capture learning from Z"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building learning_records — learning records persistent. L2: Capture experiencias de sucesso e fails as records structured. L3: When user needs to create, build, or scaffold learning record.
 quality: 9.1
 title: "Manifest Learning Record"

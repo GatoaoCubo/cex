@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, smoke-eval, P07, specialist, governance]
 keywords: [smoke-eval, smoke-test, sanity-check, health-check, quick-test, fast-fail, CI-check]
 triggers: ["quick test this", "sanity check", "health check for", "smoke test before deploy"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building smoke_evals — testes rapidos de sanidade (<30s) that ve. L2: Produce smoke_eval with critical_path e assertions rapidas. L3: When user needs to create, build, or scaffold smoke eval.
 quality: 9.1
 title: "Manifest Smoke Eval"

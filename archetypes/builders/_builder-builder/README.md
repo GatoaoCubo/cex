@@ -148,7 +148,7 @@ Added 2026-03-31 via Schema Evolution mission (Claude Code source analysis).
 |-----|-------|------|---------|--------|
 | MANIFEST | `keywords` | list[str] | (extracted) | ## Routing body |
 | MANIFEST | `triggers` | list[str] | (extracted) | ## Routing body |
-| MANIFEST | `capability_summary` | str | (generated) | Identity + Capabilities |
+| MANIFEST | `capabilities` | str | (generated) | Identity + Capabilities |
 | MEMORY | `memory_scope` | enum | project | user/project/local |
 | MEMORY | `observation_types` | list[str] | [user,feedback,project,reference] | Fixed taxonomy |
 | CONFIG | `effort` | enum | medium | low/medium/high/max |

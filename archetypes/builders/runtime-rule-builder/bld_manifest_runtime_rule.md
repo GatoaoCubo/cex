@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, runtime-rule, P09, config, timeout, retry, limit]
 keywords: [timeout, retry, rate_limit, concurrency, circuit_breaker, backoff, throttle, limit]
 triggers: ["define timeout rules", "create retry strategy", "set rate limits", "configure circuit breaker"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building runtime_rule artifacts — rules de behavior runti. L2: Define rules de timeout with granularity per operation. L3: When user needs to create, build, or scaffold runtime rule.
 quality: 9.1
 title: "Manifest Runtime Rule"

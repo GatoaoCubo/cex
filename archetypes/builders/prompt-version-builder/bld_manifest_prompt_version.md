@@ -12,7 +12,7 @@ author: builder_agent
 tags: [prompt-version, P03, prompt-version, type-builder]
 keywords: ["prompt version", prompt-version, P03, prompt, version]
 triggers: ["create prompt version", "define prompt version", "build prompt version config"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building prompt_version artifacts — versioned prompt snapshots . L2: Define prompt_version with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold prompt version.
 quality: 9.1
 title: "Manifest Prompt Version"

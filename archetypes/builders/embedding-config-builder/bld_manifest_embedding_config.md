@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, embedding-config, P01, specialist, vector]
 keywords: [embedding, vector, dimensions, chunk, tokenizer, distance, cosine, faiss]
 triggers: ["configure embedding model", "set up vector embeddings", "define RAG embedding config"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building embedding_configs — configurations de models de embedd. L2: Configure models de embedding with dimensoes, chunk size e overlap. L3: When user needs to create, build, or scaffold embedding config.
 quality: 9.1
 title: "Manifest Embedding Config"

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [hook-config, P04, hook-config, type-builder]
 keywords: ["hook config", hook-config, P04, hook, lifecycle, pre-build, post-build, on-error]
 triggers: ["create hook config", "define hook config", "build hook lifecycle config"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building hook_config artifacts — hook lifecycle configuration f. L2: Define hook_config with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold hook config.
 quality: 9.1
 title: "Manifest Hook Config"

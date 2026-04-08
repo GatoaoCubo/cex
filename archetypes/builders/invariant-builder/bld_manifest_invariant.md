@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, law, P08, specialist, governance]
 keywords: [law, P08, governance]
 triggers: ["create law N", "define mandatory rule X", "codify operational law Y", "what must always be followed"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `law` — inviolable operational rules of the system. Knows. L2: Research and formalize inviolable operational rules from patterns, failures, or . L3: When user needs to create, build, or scaffold law.
 quality: 9.0
 title: "Manifest Invariant"

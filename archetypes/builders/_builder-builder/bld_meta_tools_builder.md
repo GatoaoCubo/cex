@@ -20,7 +20,7 @@ density_score: 0.90
 
 # Tools: {{builder_name}}
 <!-- This meta-file generates the TOOLS.md of any builder -->
-<!-- REQUIRED INPUT: _schema.yaml + type de validatar existente -->
+<!-- REQUIRED INPUT: _schema.yaml + existing validator type -->
 
 ```yaml
 ---
@@ -66,7 +66,7 @@ purpose: Tools and APIs available for {{type_name}} production
 <!-- NOTE: {{lp_dir}} = P01_knowledge, P02_model, P11_feedback, P12_orchestration, etc. -->
 
 ## Tool Permissions
-<!-- NOTE: Secao OBRIGATORIA em todo bld_tools. DENIED > ALLOWED quando conflito -->
+<!-- NOTE: REQUIRED section in every bld_tools. DENIED > ALLOWED on conflict -->
 
 | Category | Tools | Status |
 |----------|-------|--------|
@@ -74,14 +74,14 @@ purpose: Tools and APIs available for {{type_name}} production
 | DENIED | {{denied_tools_list}} | Explicitly blocked |
 | EFFECTIVE | {{effective_tools_list}} | ALLOWED minus DENIED |
 
-<!-- NOTE: ALLOWED = tools que the builder pode usar -->
-<!-- NOTE: DENIED = tools bloqueadas (de bld_config.disallowed_tools) -->
-<!-- NOTE: EFFECTIVE = resultado final. DENIED sempre vence conflito -->
-<!-- NOTE: Se disallowed_tools = [], entao DENIED = vazio e EFFECTIVE = ALLOWED -->
+<!-- NOTE: ALLOWED = tools the builder can use -->
+<!-- NOTE: DENIED = tools blocked (from bld_config.disallowed_tools) -->
+<!-- NOTE: EFFECTIVE = final result. DENIED always wins on conflict -->
+<!-- NOTE: If disallowed_tools = [], then DENIED = empty and EFFECTIVE = ALLOWED -->
 
 ## Interim Validation
-<!-- NOTE: Fallback quando o validatar automatico nao existe -->
-<!-- Padrao UNIVERSAL: -->
+<!-- NOTE: Fallback when the automatic validator does not exist -->
+<!-- UNIVERSAL pattern: -->
 {{interim_validation_text}}
 <!-- Se validatar ACTIVE: "Run {validator} before committing. No manual checking needed." -->
 <!-- Se validatar PLANNED: "Manually check each QUALITY_GATES.md gate against produced artifact." -->

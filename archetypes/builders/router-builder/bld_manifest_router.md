@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, router, P02, specialist, routing, dispatch]
 keywords: [router, routing, dispatch, route-table, task-assignment, agent_group-routing, load-balance, confidence]
 triggers: ["create routing rules", "build router for task dispatch", "define route table for agent_groups"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `router` — task-to-agent_group routing logic with. L2: Analyze task domains and routing requirements to design route tables. L3: When user needs to create, build, or scaffold router.
 quality: 9.1
 title: "Manifest Router"

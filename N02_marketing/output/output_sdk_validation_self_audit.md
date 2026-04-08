@@ -42,10 +42,10 @@ density_score: 1.0
 
 | Builder | ISOs | manifest (keywords/triggers/geo) | config (effort/max_turns/permission) | Status |
 |---|---|---|---|---|
-| prompt-template-builder | 13/13 | keywords + triggers + capability_summary | effort=medium, max_turns=25, permission=nucleus | PASS |
-| action-prompt-builder | 13/13 | keywords + triggers + capability_summary | effort=medium, max_turns=25, permission=nucleus | PASS |
-| content-monetization-builder | 13/13 | keywords + triggers + capability_summary | effort=high, max_turns=25, permission=nucleus | PASS |
-| social-publisher-builder | 13/13 | keywords + triggers + capability_summary | effort=medium, max_turns=25, permission=nucleus | PASS |
+| prompt-template-builder | 13/13 | keywords + triggers + capabilities | effort=medium, max_turns=25, permission=nucleus | PASS |
+| action-prompt-builder | 13/13 | keywords + triggers + capabilities | effort=medium, max_turns=25, permission=nucleus | PASS |
+| content-monetization-builder | 13/13 | keywords + triggers + capabilities | effort=high, max_turns=25, permission=nucleus | PASS |
+| social-publisher-builder | 13/13 | keywords + triggers + capabilities | effort=medium, max_turns=25, permission=nucleus | PASS |
 
 **Marketing domain coverage**: copy/prompts, social automation, monetization, action prompts.
 

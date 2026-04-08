@@ -12,7 +12,7 @@ author: orchestrator
 tags: [kind-builder, bugloop, P11, specialist, governance, feedback]
 keywords: [bugloop, detect-fix-verify, auto-fix, correction-cycle, test-failure, regression]
 triggers: ["create bugloop", "auto fix cycle", "detect and fix", "correction loop"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building bugloops — ciclos automaticos de correction (detect > fi. L2: Define detection patterns with triggers concrete (regex, test failure signature. L3: When user needs to create, build, or scaffold bugloop.
 quality: 9.1
 title: "Manifest Bugloop"

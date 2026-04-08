@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, session-backend, P10, config, persistence, state]
 keywords: [session, backend, persistence, state, file, sqlite, redis, postgres, ttl, serialization]
 triggers: ["define session backend", "create session config", "configure state persistence", "specify session storage"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building session_backend artifacts — specifications de persistencia de estado de session for agents. L2: Define backend, path, TTL, serializaction, encriptaction, and scoping per nucleo. L3: When user needs to create, build, or scaffold session backend config.
 quality: 9.1
 title: "Manifest Session Backend"

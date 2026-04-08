@@ -12,10 +12,10 @@ author: builder_agent
 tags: [meta-builder, kind-builder, P02, iso-generation, builder-creation]
 keywords: [builder, meta-builder, iso, kind, scaffold, archetype, type_builder, generate]
 triggers: ["create new builder", "scaffold builder for kind", "generate 13 builder specs for builder"]
-capability_summary: >
-  L1: Meta-builder that cria outros builders — gera 13 builder specs complete for qualquer kind.
-  L2: Usa meta-templates for produzir manifest, instruction, config, memory, tools, etc.
-  L3: Quando precisa criar um builder novo for um kind that ainda not tem builder.
+capabilities: >
+  L1: Meta-builder that creates other builders -- generates 13 builder specs for any kind.
+  L2: Uses meta-templates to produce manifest, instruction, config, memory, tools, etc.
+  L3: When you need to create a new builder for a kind that does not have one yet.
 quality: 9.0
 title: "Manifest Builder"
 tldr: "Golden and anti-examples for _builder construction, demonstrating ideal structure and common pitfalls."
@@ -32,8 +32,8 @@ meta-template rendering, ISO structure, quality gate enforcement, and universal 
 4. Respeitar non-default overrides table
 ## Routing
 ### Triggers
-1. "cria builder", "scaffold builder", "novo kind precisa builder"
-2. "gera 13 builder specs", "meta-builder"
+1. "create builder", "scaffold builder", "new kind needs builder"
+2. "generate 13 builder specs", "meta-builder"
 ### Anti-triggers
 - "cria agent" (→ agent-builder), "cria workflow" (→ workflow-builder)
 

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, e2e-eval, P07, specialist, governance]
 keywords: [e2e-eval, end-to-end, pipeline-test, integration-test, acceptance-test, regression-test]
 triggers: ["test this pipeline", "verify end-to-end flow", "integration test for"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building e2e_evals — end-to-end tests that verify pipelines . L2: Produce e2e_eval with stages, data_fixtures, and complete expected_output. L3: When user needs to create, build, or scaffold e2e eval.
 quality: 9.1
 title: "Manifest E2E Eval"

@@ -21,7 +21,7 @@ type: self-review
 1. **Missing/Incomplete skill-builder artifact** — 12/15 test failures trace to this single artifact
    - Missing required fields: memory_scope, observation_types, effort, max_turns, disallowed_tools, permission_scope
    - Missing tool permissions section
-   - Wrong capability_summary format
+   - Wrong capabilities format
 
 2. **Test scoring logic flawed** — test_score.py has backwards assertions
    - Expects failing artifacts to score 8.0+ (should be low)

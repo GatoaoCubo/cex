@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, skill, P04, specialist, phases, trigger, reusable]
 keywords: [skill, phases, trigger, reusable, capability, slash-command, workflow, lifecycle]
 triggers: ["create skill for", "build reusable capability", "define phases for", "add slash command"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `skill` — reusable skills with structured phases. L2: Analyze the skill domain to decompose into executable phases with defined trigger. L3: When user needs to create, build, or scaffold a reusable skill.
 quality: 9.1
 title: "Manifest Skill"

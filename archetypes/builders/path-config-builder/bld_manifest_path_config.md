@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, path-config, P09, config, filesystem, paths]
 keywords: [path, directory, folder, filepath, filesystem, dir, base_dir, log_dir]
 triggers: ["define filesystem paths", "create path config", "document directory structure", "specify system paths"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building path_config artifacts — specifications de caminhos do . L2: Define caminhos of the system with scope, platform, type, and validation. L3: When user needs to create, build, or scaffold path config.
 quality: 9.1
 title: "Manifest Path Config"

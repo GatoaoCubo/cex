@@ -12,7 +12,7 @@ parent: null
 tags: [kind-builder, dag, P12, orchestration, specialist]
 keywords: [dag, dependency, graph, pipeline, topological, parallel, execution_order]
 triggers: ["define dependencies between tasks", "monta pipeline de execution", "grafo de dependencies"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `dag` (P12): acyclic dependency graphs. L2: Produce dag YAML with nodes, edges, and correct topological order. L3: When user needs to create, build, or scaffold dag.
 quality: 9.0
 title: "Manifest Dag"

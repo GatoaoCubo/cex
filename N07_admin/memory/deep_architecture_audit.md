@@ -92,7 +92,7 @@ Terms found across the repo that are CEX-specific and may confuse external LLMs:
 | type_builder | 382 | **archetype** / kind_builder | KEEP (self-documenting) |
 | kind-builder | 382 | same as type_builder | KEEP |
 | agent_group | 347 | **agent_group** / cluster | RENAME → maps to nothing in industry |
-| capability_summary | 141 | **capability_summary** / scope_description | 🔄 RENAMING (N03 dispatched) |
+| capabilities | 141 | **capabilities** / scope_description | 🔄 RENAMING (N03 dispatched) |
 | fractal | 78 | **mirrored structure** / convention | Already in metaphor dict |
 | mold | 62 | **archetype** / template | Already in metaphor dict |
 | deck | 45 | **agent_card** | RENAMED (N03 completed) |
@@ -103,7 +103,7 @@ Terms found across the repo that are CEX-specific and may confuse external LLMs:
 |------|-----------|-------|------|
 | agent_group | agent_group | 347 files | HIGH (massive cascade) |
 | agent_group | agent_group | 399 files | HIGH (massive cascade, same target) |
-| capability_summary | capability_summary | 141 files | MEDIUM |
+| capabilities | capabilities | 141 files | MEDIUM |
 
 **DECISION**: agent_group + agent_group both mean "which group of agents does this belong to."
 They should both become `agent_group`. But this is a ~700 file cascade.
@@ -143,5 +143,5 @@ This is a mechanical replacement — safe for overnight evolve.
 | New kinds | 🔄 IN PROGRESS | N04 adding 4 kinds now |
 | Builder ISOs (PT→EN) | ⏳ SCHEDULED | 139 files, overnight batch |
 | agent_group/agent_group rename | ⏳ SCHEDULED | ~700 files, dedicated overnight |
-| capability_summary rename | ⏳ SCHEDULED | 141 files, overnight batch |
+| capabilities rename | ⏳ SCHEDULED | 141 files, overnight batch |
 | Research validation | 🔄 IN PROGRESS | N01 researching official docs now |

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, webhook, P04, tools, event-driven, HTTP, inbound, outbound]
 keywords: [webhook, event, HTTP, callback, inbound, outbound, stripe, github]
 triggers: ["create webhook", "build webhook artifact"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building webhook artifacts — HTTP endpoints that receive or send. L2: Define webhook direction (inbound receiver / outbound sender). L3: When user needs to create, build, or scaffold webhook.
 quality: 9.1
 title: "Manifest Webhook"

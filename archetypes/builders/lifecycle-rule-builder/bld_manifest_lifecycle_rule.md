@@ -4,7 +4,7 @@ id: bld_manifest_lifecycle_rule
 pillar: P00
 keywords: [lifecycle-rule, freshness, archive, promote, demote, expiry, sunset, review-cycle]
 triggers: ["define lifecycle rule", "when should this artifact expire", "create freshness policy"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building lifecycle_rules — rules declarativas de lifecycle. L2: Define rules de lifecycle with estados, transitions e triggers temporais. L3: When user needs to create, build, or scaffold bld manifest lifecycle rule.
 quality: 9.1
 title: "Manifest Lifecycle Rule"

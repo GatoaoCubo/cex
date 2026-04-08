@@ -99,41 +99,33 @@ purpose: Single source of truth for CEX progress and next steps
 
 ---
 
-## NEXT — Immediate (next session)
+## NEXT — Immediate
 
-### H1: Doctor WARN cleanup (8 builders)
+### H1: Doctor WARN cleanup (8 builders) — DONE (2026-04-08)
 
-7 builders have ISOs slightly oversized (>6144B), 1 has low density (0.78).
+Resolved prior to this session. Doctor now: 123 PASS / 0 WARN / 0 FAIL.
 
-| Builder | Issue | Fix |
-|---------|-------|-----|
-| agent-card-builder | bld_examples 6642B | Trim examples |
-| compression-config-builder | bld_memory 6284B | Compress |
-| guardrail-builder | bld_examples 6377B | Trim |
-| session-backend-builder | bld_memory 6167B | Compress |
-| system-prompt-builder | bld_examples 6350B | Trim |
-| trace-config-builder | bld_memory 6343B | Compress |
-| webhook-builder | bld_output_template density 0.78 | Restructure |
-| workflow-primitive-builder | bld_examples 6424B | Trim |
+### H2: Continuous batching mode — IN PROGRESS (N05, grid ROADMAP_NEXT)
 
-Effort: 1 dispatch to N03. ~10 min.
+`cex_mission_runner.py --continuous` verification + fine-tune data export.
+Dispatched to N05 on 2026-04-08.
 
-### H2: Continuous batching mode
+### H3: Fine-tune data export — IN PROGRESS (N05, grid ROADMAP_NEXT)
 
-`cex_mission_runner.py --continuous` was specified but needs verification.
-Test with a mini-mission (10 artifacts across 3 nuclei).
+Export training pairs from existing ISOs for fine-tuning.
+Bundled with H2 dispatch to N05.
 
-Effort: 1 dispatch to N05. ~15 min.
+### H4: capabilities rename (147 files) — DONE (N03, grid ROADMAP_NEXT)
 
-### H3: Fine-tune data export
+Renamed `capability_summary` to `capabilities` across all 146 files. Python tools, tests, templates, manifests updated.
 
-Export training pairs from existing ISOs for fine-tuning:
-- Input: kind name + schema definition
-- Output: complete ISO artifact
+### H5: NotebookLM pipeline build — IN PROGRESS (N01, grid ROADMAP_NEXT)
 
-This creates the dataset for the T3 fine-tuned model described in the spec.
+Build pipeline components from spec. KC audit + 5 new kind KCs. Dispatched to N01.
 
-Effort: 1 dispatch to N05. ~30 min.
+### H6: Content Factory commercial layer — IN PROGRESS (N06, grid ROADMAP_NEXT)
+
+Pricing model + monetization audit + product funnel. Dispatched to N06.
 
 ---
 
@@ -147,10 +139,9 @@ sub-agents, multi-provider routing, quality gates.
 
 Expected: ~3-4 hours with full grid + sub-agents.
 
-### M2: capability_summary rename → capability_summary
+### M2: capabilities rename — DONE
 
-141 files still use the non-standard term `capability_summary`.
-Scheduled for overnight batch.
+Completed in H4. All 146 files renamed `capability_summary` → `capabilities`.
 
 ### M3: Content Factory v1
 

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, rate-limit-config, P09, config, rpm, tpm, budget, tier]
 keywords: ["rate limit", rpm, tpm, budget, tier, throttle, quota, concurrent]
 triggers: ["create rate limit config", "define API limits", "set RPM/TPM", "configure budget cap"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building rate_limit_config artifacts — configurations de rate li. L2: Define RPM, TPM, RPD e concurrent for qualquer provider/tier. L3: When user needs to create, build, or scaffold rate limit config.
 quality: 9.1
 title: "Manifest Rate Limit Config"

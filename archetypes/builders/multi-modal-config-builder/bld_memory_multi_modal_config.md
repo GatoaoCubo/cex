@@ -19,7 +19,7 @@ decay_rate: 0.05
 agent_group: n04_knowledge
 keywords: [multi_modal, resolution, format, routing, preprocessing, token_cost]
 memory_scope: project
-observation_types: [reference]
+observation_types: [user, feedback, project, reference]
 ---
 ## Summary
 Multi-modal configs define how non-text inputs are processed in LLM pipelines. Primary failures are unlimited resolution (burns tokens), no format validation (API errors), and no fallback chains.

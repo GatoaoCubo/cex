@@ -11,7 +11,7 @@ author: N03
 tags: [kind-builder, toolkit, P04, tools, specialist]
 keywords: [toolkit, tools, tool-bundle, permissions, MCP, confirmation, deny-list]
 triggers: ["create tool bundle", "define agent toolkit", "configure tool permissions"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `toolkit` artifacts for P04: bundled tool collections assigned to agents with permission scopes. L2: Produce toolkit YAML with tool definitions, confirmation tiers, deny lists, and MCP mapping. L3: When user needs to create, build, or scaffold toolkit.
 quality: 9.1
 title: "Manifest Toolkit"

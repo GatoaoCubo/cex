@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, golden-test, P07, specialist, governance]
 keywords: [golden-test, golden, reference-test, calibration, quality-baseline, evaluation]
 triggers: ["create golden test", "calibrate evaluation", "reference example for quality"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building golden_tests — casos de teste reference quality 9.5+ . L2: Select artifacts quality 9.5+ as candidatos a golden. L3: When user needs to create, build, or scaffold golden test.
 quality: 9.1
 title: "Manifest Golden Test"

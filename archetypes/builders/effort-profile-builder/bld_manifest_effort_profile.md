@@ -12,7 +12,7 @@ author: builder_agent
 tags: [effort-profile, P09, effort-profile, type-builder]
 keywords: [effort, thinking, model, haiku, sonnet, opus, low, medium]
 triggers: ["create effort profile", "define effort profile", "build effort profile config"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building effort_profile artifacts — effort and thinking level c. L2: Define effort_profile with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold effort profile.
 quality: 9.1
 title: "Manifest Effort Profile"

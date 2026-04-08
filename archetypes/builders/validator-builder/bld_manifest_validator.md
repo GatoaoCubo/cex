@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, validator, P06, specialist, governance]
 keywords: [validator, validation, pre-commit, rule, check, constraint, pass-fail]
 triggers: ["define validation rule", "what should be checked before commit", "create pre-commit validator"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building validators — rules de validation tecnica pass/fail.. L2: Define rules de validation with conditions structured (field/operator/value). L3: When user needs to create, build, or scaffold validator.
 quality: 9.1
 title: "Manifest Validator"

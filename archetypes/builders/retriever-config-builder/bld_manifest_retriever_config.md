@@ -12,7 +12,7 @@ author: builder_agent
 tags: [retriever-config, P01, retriever-config, type-builder]
 keywords: ["retriever config", retriever-config, P01, retriever, config]
 triggers: ["create retriever config", "define retriever config", "build retriever config config"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building retriever_config artifacts — retrieval configuration f. L2: Define retriever_config with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold retriever config.
 quality: 9.1
 title: "Manifest Retriever Config"

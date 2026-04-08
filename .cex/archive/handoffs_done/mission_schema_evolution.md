@@ -46,7 +46,7 @@ CC Effort: low, medium, high, max
 
 | # | Pattern | CEX Atual | CEX Apos | Prio |
 |---|---------|-----------|----------|------|
-| 1 | Discovery fields (keywords, triggers, capability_summary) | Body-only 0/103 | Frontmatter todo manifest | P0 |
+| 1 | Discovery fields (keywords, triggers, capabilities) | Body-only 0/103 | Frontmatter todo manifest | P0 |
 | 2 | Memory taxonomy (4 tipos: user/feedback/project/reference) | Generico 1 tipo | 4 tipos no bld_memory | P0 |
 | 3 | Memory scoping (3 escopos: user/project/local) | Escopo unico | 3 escopos no bld_config | P0 |
 | 4 | Tool deny-list (disallowedTools) | Nenhum | Campo no bld_config | P1 |
@@ -70,7 +70,7 @@ Adicionar ao template YAML frontmatter (apos tags):
 
     keywords: [keyword_1, keyword_2, ..., keyword_8]       # 4-8 termos search/routing
     triggers: ["trigger_phrase_1", "trigger_phrase_2"]       # 2-4 frases naturais
-    capability_summary: >                                       # 3 camadas semanticas
+    capabilities: >                                       # 3 camadas semanticas
       L1: O que faz. L2: Como faz. L3: Quando usar.
 
 Atualizar ## Routing: frontmatter = canonical, body = derivado.
@@ -130,7 +130,7 @@ Commit: schema-evo: evolve 4 meta-templates with 8 universal patterns
 
 Para cada builder em archetypes/builders/*/:
 
-**bld_manifest**: extrair keywords/triggers de ## Routing body -> frontmatter. Gerar capability_summary.
+**bld_manifest**: extrair keywords/triggers de ## Routing body -> frontmatter. Gerar capabilities.
 **bld_memory**: adicionar memory_scope: project + observation_types: [4 tipos]. Type cada obs existente.
 **bld_config**: adicionar effort/max_turns/disallowed_tools/fork_context/hooks/permission_scope.
 **bld_tools**: adicionar ## Tool Permissions section.
@@ -162,7 +162,7 @@ Flags: --dry-run | --apply | --builders [list] | --iso type | --stats
 Restantes ~89: defaults (medium, 25, [], null, {nulls}, nucleus).
 
 Validacao pos-hydrate:
-- 103/103 manifests com keywords (>= 3) + triggers (>= 2) + capability_summary (>= 50 chars)
+- 103/103 manifests com keywords (>= 3) + triggers (>= 2) + capabilities (>= 50 chars)
 - 104/104 memories com memory_scope + observation_types
 - 103/103 configs com effort + max_turns + disallowed_tools + permission_scope
 - 103/103 tools com ## Tool Permissions
@@ -187,7 +187,7 @@ Adicionar 11 novas regras (items 13-23):
 |---|-------|
 | 13 | bld_manifest keywords: 4-8 in frontmatter |
 | 14 | bld_manifest triggers: 2-4 phrases |
-| 15 | bld_manifest capability_summary: >= 50 chars, 3 layers |
+| 15 | bld_manifest capabilities: >= 50 chars, 3 layers |
 | 16 | bld_memory memory_scope: user/project/local |
 | 17 | bld_memory observation_types: all 4 types |
 | 18 | bld_memory observation: EACH must have type: field |
@@ -209,7 +209,7 @@ Commit: schema-evo: update bld_norms with 11 universal rules
 15 tests:
 1. 103 manifests have keywords (list, len >= 3)
 2. 103 manifests have triggers (list, len >= 2)
-3. 103 manifests have capability_summary (str, len >= 50)
+3. 103 manifests have capabilities (str, len >= 50)
 4. 104 memories have memory_scope (enum)
 5. 104 memories have observation_types (list, len == 4)
 6. 103 configs have effort (enum)
@@ -221,7 +221,7 @@ Commit: schema-evo: update bld_norms with 11 universal rules
 12. YAML parseable in all modified files
 13. 15 specific builders have non-default values
 14. observation_types always == [user, feedback, project, reference]
-15. capability_summary has 3 layers
+15. capabilities has 3 layers
 
 Criterio: 15/15 passam.
 Commit: schema-evo: add test_schema_evolution.py
@@ -275,7 +275,7 @@ Commit: schema-evo: update _builder-builder README
 |---|----------|----------|
 | 1 | 4 meta-templates atualizados | Diff mostra novos campos |
 | 2 | cex_schema_hydrate.py funcional | --dry-run + --apply |
-| 3 | 103 manifests com discovery fields | keywords + triggers + capability_summary |
+| 3 | 103 manifests com discovery fields | keywords + triggers + capabilities |
 | 4 | 104 memories com taxonomy | memory_scope + observation_types |
 | 5 | 103 configs com runtime fields | effort + max_turns + disallowed_tools + hooks + permission_scope |
 | 6 | 103 tools com permissions | ## Tool Permissions section |

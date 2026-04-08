@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, rag-source, P01, specialist, content]
 keywords: [rag, source, url, crawl, index, freshness, external, ingestion]
 triggers: ["catalog external source", "add data source for indexing", "track URL for RAG", "where to find authoritative data"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building rag_source — ponteiros for fontes externas indexaveis. L2: Catalogar fontes externas indexaveis with frontmatter complete (5 required fields. L3: When user needs to create, build, or scaffold rag source.
 quality: 9.1
 title: "Manifest Rag Source"
