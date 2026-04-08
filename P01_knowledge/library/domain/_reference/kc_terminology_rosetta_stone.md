@@ -9,7 +9,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: N01_intelligence
 domain: terminology
-origin: research_d4_terminology
+origin: src_standards_global
 quality: 9.2
 tags: [terminology, rosetta-stone, anthropic, openai, google, mcp, canonical, permanent]
 tldr: "Cross-provider mapping of official LLM terminology. Every row maps a CEX concept to its canonical name at Anthropic, OpenAI, Google, and MCP. Use this as the single source of truth for CEX kind naming."
