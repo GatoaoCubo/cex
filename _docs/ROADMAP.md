@@ -2,7 +2,7 @@
 id: roadmap_cex
 kind: context_doc
 title: "CEX Roadmap — What Was Done, What's Next"
-version: 4.0.0
+version: 5.0.0
 quality: null
 created: 2026-04-07
 updated: 2026-04-08
@@ -22,11 +22,13 @@ purpose: Single source of truth for CEX progress and next steps
 | Sub-agents | 125 (.claude/agents/) |
 | Kind KCs | 123 (98/98 kinds covered) |
 | Flywheel | 109/109 WIRED (100%) |
-| Python tools | 92 total (64 cex_* tools) |
+| Python tools | 95 total (67 cex_* tools) |
 | Rules | 16 |
 | N07 memory files | 6 permanent |
 | Terminology KCs | 5 (Rosetta Stone + 4 providers) |
-| Commits (2026-04-08) | 29 |
+| Ollama models | 2 (qwen3:8b, deepseek-r1:8b) |
+| Distribution | install.cmd + release.cmd ready |
+| Commits (2026-04-08) | 35+ |
 
 ---
 
@@ -153,6 +155,91 @@ Follow-up grid fixing code + docs from CANONICALIZATION findings:
 - N07: consolidation + nucleus UX hardening
 Consolidated commit: `f3dfc921`.
 
+### H9: Distribution Infrastructure — DONE (2026-04-08)
+
+| Component | File | Status |
+|-----------|------|--------|
+| One-click installer | install.cmd | Built (8 steps: winget, Git, Python, Node, Claude, repo, deps, PS policy) |
+| Release ZIP builder | release.cmd | Built (6 steps: doctor, compile, sanitize, git archive, verify, checksum) |
+| Security fix | .gitignore | Added `**/*_token.json`, `**/*_credentials.json`, `_releases/` |
+| Canva token leak | .cex/brand/canva_token.json | Removed from git tracking |
+| Release check | cex_release_check.py | 25/28 PASS (3 cosmetic README fixes) |
+
+### H10: Ollama Pipeline — DONE (2026-04-08)
+
+Free local model support for CEX. Models run on user's hardware, zero API cost.
+
+| Component | File | Status |
+|-----------|------|--------|
+| Ollama client | cex_ollama.py | Built (health, list, generate, artifact retry, /no_think) |
+| Benchmark tool | cex_benchmark_ollama.py | Built (10 tasks, HTTP API, scoring) |
+| Intent router | cex_intent.py | Updated (model_override, CEX_FORCE_OLLAMA, CEX_OLLAMA_MODEL) |
+| 8F pipeline | cex_8f_runner.py | Updated (--model, F4 skip, ultra-lite F6: 15->5 sections) |
+| Dispatch modes | dispatch.sh | Added `ollama` and `ollama-grid` modes |
+| Router config | router_config.yaml | Updated (qwen3:8b, deepseek-r1:8b) |
+| Nucleus fallbacks | nucleus_models.yaml | Updated (fallback_local -> qwen3:8b) |
+| E2E proof | p01_kc_markdown_tables.md | Generated via Ollama, F7: 6/6 PASS |
+
+Performance on GTX 1070 (4GB VRAM):
+- Direct generation: ~4 min per artifact
+- Full 8F pipeline (ultra-lite): ~7 min per artifact
+- Speed: ~4.5 tok/s (CPU offload, 10x faster on RTX 3060+)
+
+### H11: Token Optimization (4 tools) — DONE (2026-04-08)
+
+| Tool | Change | Savings |
+|------|--------|---------|
+| cex_memory_select.py | LLM -> TF-IDF cosine similarity | ~1K tokens/call |
+| cex_score.py | L3 cache inheritance gate | ~2K tokens/artifact |
+| cex_8f_runner.py | Template-first F4 skip | ~5K tokens/build |
+| cex_evolve.py | Heuristic add_updated, add_tags | ~1K tokens/artifact |
+
+---
+
+## NEXT SESSION — Start here
+
+### S1: Fine-tune dataset preparation
+
+Build QLoRA training dataset from CEX's own artifacts:
+- Source: 1,630 ISOs + 123 KCs + 377 templates/examples
+- Format: instruction/response pairs for Qwen 3 8B
+- Tool: `cex_continuous.py` (built in H2) has export mode
+- Target: 2,000+ training pairs covering all 123 kinds
+- Validate: train/test split, dedup, format check
+
+### S2: QLoRA fine-tune on Qwen 3 8B
+
+Train custom model `cex-qwen3:8b` using prepared dataset:
+- Framework: Unsloth or Axolotl (QLoRA, 4-bit)
+- Hardware: GTX 1070 4GB (tight -- use gradient checkpointing)
+- Epochs: 3-5 on full dataset
+- Eval: re-run benchmark tool, compare base vs FT
+- Deploy: `ollama create cex-qwen3 -f Modelfile`
+
+### S3: Hybrid dispatch (Claude N07 + Ollama nuclei)
+
+Wire the pipeline so `/mission` and `/grid` dispatch to Ollama:
+- N07 stays Claude Opus (orchestration needs full agent)
+- N01-N06 workers use Ollama/cex-qwen3 via `cex_8f_runner.py`
+- Handoff format stays the same (model reads via pipeline, not CLI)
+- F8 compiles + commits (pipeline handles, not model)
+- Test: full 6-nucleus grid via Ollama
+
+### S4: Benchmark re-run (valid comparison)
+
+Re-run with fixed code (HTTP API, 300s timeout, /no_think):
+- `python _tools/cex_benchmark_ollama.py --models qwen3:8b,deepseek-r1:8b --timeout 600`
+- Compare: base Qwen 3 vs base DeepSeek R1 vs FT cex-qwen3
+- Publish results to `.cex/benchmarks/`
+
+### S5: Content Factory integration
+
+Connect existing components into working pipeline:
+- N01 NotebookLM pipeline (H5) -> input
+- N02 content templates -> formatting
+- N06 monetization layer (H6) -> distribution
+- Remaining: integration workflow connecting the pieces
+
 ---
 
 ## NEXT — Medium term (week)
@@ -160,41 +247,43 @@ Consolidated commit: `f3dfc921`.
 ### M1: Full from-zero bootstrap test
 
 Use `boot/overnight_infinite.cmd` to rebuild CEX from a clean state.
-Validates the entire infrastructure: mission_state, continuous batching,
-sub-agents, multi-provider routing, quality gates.
-
+Validates: mission_state, continuous batching, sub-agents, quality gates.
 Expected: ~3-4 hours with full grid + sub-agents.
 
-### M2: capabilities rename — DONE (completed in H4)
+### M2: Release v1.0 on Hotmart/Gumroad
 
-### M3: Content Factory v1 — PARTIALLY DONE
+Pre-requisites:
+- `cex_release_check.py` passes 28/28 (3 README fixes remaining)
+- Course outline or quickstart guide for buyers
+- ZIP tested on clean Windows 10 VM
+- Payment + download flow tested end-to-end
 
-Spec exists: `spec_content_factory_v1.md`.
-Pipeline: CEX artifacts -> multi-format content (blog, social, video scripts).
-N06 delivered pricing + funnel (H6). N01 delivered NotebookLM pipeline (H5).
-Remaining: integration layer connecting N01 pipeline output to N02/N06 endpoints.
+### M3: Ollama-only mode (zero Claude dependency)
 
-### M4: NotebookLM Pipeline — DONE (completed in H5)
-
-N01 built full pipeline: KC -> NotebookLM -> audio content.
-KC audit completed. 4 origin fixes applied.
+Make CEX fully functional without any Claude subscription:
+- Replace N07 orchestration with CLI wizard + cex_mission_runner.py
+- All nuclei via Ollama/cex-qwen3
+- install.cmd installs Ollama instead of Claude Code
+- Target audience: users who can't afford $20/month
 
 ---
 
 ## NEXT — Long term (month)
 
-### L1: CEX as npm package
+### L1: CEX as distributable product
 
-Release CEX as a distributable package. Users clone or download, then run `/init`.
-Gets: all archetypes, schemas, KCs, tools, rules. No brand (blank brain).
+Release CEX as downloadable package:
+- install.cmd (built, H9) handles dependencies
+- release.cmd (built, H9) packages ZIP
+- Channels: Hotmart ZIP, GitHub Releases, Gumroad
 
-Blocker: `cex_release_check.py` must pass all 28 checks.
+### L2: Fine-tuned CEX model (production)
 
-### L2: Fine-tuned CEX model
-
-Train on 1,630 ISOs + 123 KCs + 377 templates/examples.
-Deploy as custom model via API.
-Target: 10x faster artifact generation at 90% cost reduction.
+Iterate on S2 prototype:
+- Larger dataset (add user artifacts, session outputs)
+- Multi-model: cex-qwen3:8b (free), cex-qwen3:32b (better GPU)
+- Publish on Ollama registry or HuggingFace
+- Potential revenue: sell fine-tuned model access
 
 ### L3: Multi-tenant CEX
 
@@ -202,13 +291,14 @@ Multiple brands running on same infrastructure.
 Each brand = separate `.cex/brand/` config.
 Nuclei route based on brand context.
 
-### L4: CEX API
+### L4: CEX API (SaaS)
 
 REST API exposing CEX capabilities:
-- POST /build → 8F pipeline → artifact
-- POST /evolve → improve artifact
-- GET /query → find relevant artifacts
-- POST /mission → decompose + execute
+- POST /build -> 8F pipeline -> artifact
+- POST /evolve -> improve artifact
+- GET /query -> find relevant artifacts
+- POST /mission -> decompose + execute
+- Revenue: usage-based pricing
 
 ---
 
@@ -222,10 +312,10 @@ REST API exposing CEX capabilities:
 | Kind KCs | 123 (98/98 covered) | 100% coverage |
 | Quality floor | 9.0 (100%) | Maintain |
 | Flywheel | 109/109 (100%) | Maintain |
-| Python tools | 92 (64 cex_*) | Consolidate overlaps |
+| Python tools | 95 (67 cex_*) | Consolidate overlaps |
 | Sub-agents | 125 | Maintain 1:1 with builders |
 | Rules | 16 | Add as patterns emerge |
-| Portuguese remnants | ~0 | 0 (continuous audit) |
-| Industry term alignment | 98% | 99% (quarterly review) |
-| Intent resolution | 123 kinds mapped + confidence scoring | Full fuzzy matching |
+| Ollama models tested | 2 (qwen3:8b, deepseek-r1:8b) | FT model: cex-qwen3:8b |
+| Ollama pipeline | Working (ultra-lite, 7 min/artifact) | < 2 min with FT + better GPU |
+| Distribution | install.cmd + release.cmd ready | v1.0 on Hotmart |
 | Overnight bootstrap time | Untested | < 4 hours |
