@@ -111,22 +111,21 @@ if (Test-Path $pidFile) {
     }
 }
 
-# Boot script -- prefer .cmd (stable colors via `color XX`) over .ps1 (encoding issues)
-$bootCmd = "$root\boot\$nucleus.cmd"
+# Boot script -- prefer .ps1 (sin-aware UX: colors, sizing, banner) over .cmd (basic)
 $bootPs1 = "$root\boot\$nucleus.ps1"
+$bootCmd = "$root\boot\$nucleus.cmd"
 
-if (Test-Path $bootCmd) {
-    Write-Output "[$upper] Boot: CMD (claude)"
-    $proc = Start-Process cmd -ArgumentList "/k `"$bootCmd`"" -WorkingDirectory $root -PassThru
-} elseif (Test-Path $bootPs1) {
-    # PowerShell fallback (encoding-sensitive, color does not persist)
-    Write-Output "[$upper] Boot: PowerShell (fallback)"
+if (Test-Path $bootPs1) {
+    Write-Output "[$upper] Boot: PowerShell (sin-aware UX)"
     $proc = Start-Process powershell -ArgumentList @(
         "-NoProfile", "-NoExit", "-ExecutionPolicy", "Bypass",
         "-File", $bootPs1
     ) -WorkingDirectory $root -PassThru
+} elseif (Test-Path $bootCmd) {
+    Write-Output "[$upper] Boot: CMD (fallback)"
+    $proc = Start-Process cmd -ArgumentList "/k `"$bootCmd`"" -WorkingDirectory $root -PassThru
 } else {
-    Write-Output "[$upper] ERROR: no boot script at $bootCmd or $bootPs1"; exit 1
+    Write-Output "[$upper] ERROR: no boot script at $bootPs1 or $bootCmd"; exit 1
 }
 
 Start-Sleep -Seconds 3

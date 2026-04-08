@@ -38,42 +38,56 @@ def _load_sins() -> dict:
     return {}
 
 
-# Nucleus metadata (domain prompts)
+# Nucleus metadata (domain prompts + agent cards + initial messages)
 NUCLEUS_META = {
     "n07": {
         "title": "CEX-N07-ORCHESTRATOR",
         "var": "CEX_NUCLEUS=N07",
+        "agent_card": "N07_admin/agent_card_n07.md",
         "prompt": "You are N07 Orchestrator of CEX. Dispatch nuclei, never build. Read CLAUDE.md e .claude/rules/n07-orchestrator.md.",
+        "initial": "Ready. What do you need?",
     },
     "n01": {
         "title": "CEX-N01-RESEARCH",
         "var": "CEX_NUCLEUS=N01",
-        "prompt": "You are N01 Research Nucleus of CEX. Domain: research, analysis, papers, competitors. IF .cex/runtime/handoffs/n01_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N01_intelligence/agent_card_n01.md",
+        "prompt": "You are N01 Research Nucleus of CEX. Domain: research, analysis, papers, competitors. IF .cex/runtime/handoffs/n01_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n01_task.md and execute. If no handoff, report ready.",
     },
     "n02": {
         "title": "CEX-N02-MARKETING",
         "var": "CEX_NUCLEUS=N02",
-        "prompt": "You are N02 Marketing Nucleus of CEX. Domain: copy, ads, campaigns, brand voice. IF .cex/runtime/handoffs/n02_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N02_marketing/agent_card_n02.md",
+        "prompt": "You are N02 Marketing Nucleus of CEX. Domain: copy, ads, campaigns, brand voice. IF .cex/runtime/handoffs/n02_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n02_task.md and execute. If no handoff, report ready.",
     },
     "n03": {
         "title": "CEX-N03-BUILDER",
         "var": "CEX_NUCLEUS=N03",
-        "prompt": "You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/agents/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N03_engineering/agent_card_n03.md",
+        "prompt": "You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/agents/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n03_task.md and execute. If no handoff, report ready.",
     },
     "n04": {
         "title": "CEX-N04-KNOWLEDGE",
         "var": "CEX_NUCLEUS=N04",
-        "prompt": "You are N04 Knowledge Nucleus of CEX. Domain: RAG, indexing, knowledge cards, taxonomy. IF .cex/runtime/handoffs/n04_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N04_knowledge/agent_card_n04.md",
+        "prompt": "You are N04 Knowledge Nucleus of CEX. Domain: RAG, indexing, knowledge cards, taxonomy. IF .cex/runtime/handoffs/n04_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n04_task.md and execute. If no handoff, report ready.",
     },
     "n05": {
         "title": "CEX-N05-OPERATIONS",
         "var": "CEX_NUCLEUS=N05",
-        "prompt": "You are N05 Operations Nucleus of CEX. Domain: code review, testing, CI/CD, deploy. IF .cex/runtime/handoffs/n05_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N05_operations/agent_card_n05.md",
+        "prompt": "You are N05 Operations Nucleus of CEX. Domain: code review, testing, CI/CD, deploy. IF .cex/runtime/handoffs/n05_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n05_task.md and execute. If no handoff, report ready.",
     },
     "n06": {
         "title": "CEX-N06-COMMERCIAL",
         "var": "CEX_NUCLEUS=N06",
-        "prompt": "You are N06 Commercial Nucleus of CEX. Domain: pricing, funnels, monetization, brand. IF .cex/runtime/handoffs/n06_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N06_commercial/agent_card_n06.md",
+        "prompt": "You are N06 Commercial Nucleus of CEX. Domain: pricing, funnels, monetization, brand. IF .cex/runtime/handoffs/n06_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n06_task.md and execute. If no handoff, report ready.",
     },
 }
 
@@ -109,11 +123,20 @@ def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
     label = legacy_colors["label"]
 
     # Sin identity
-    icon = sin_data.get("icon", "")
+    icon_raw = sin_data.get("icon", "")
     virtue = sin_data.get("virtue", "")
     virtue_en = sin_data.get("virtue_en", "")
     tagline = sin_data.get("tagline", "")
     sin_injection = sin_data.get("prompt_injection", "").strip()
+
+    # ASCII-safe icon (PS1 must be ASCII-only per ascii-code-rule.md)
+    icon = icon_raw if icon_raw.isascii() else "[*]"
+    # ASCII-safe tagline and virtue
+    def _ascii_safe(s):
+        return s.encode('ascii', 'replace').decode('ascii').replace('?', '-') if s else ""
+    tagline = _ascii_safe(tagline)
+    virtue_display = _ascii_safe(virtue)
+    virtue_en_display = _ascii_safe(virtue_en)
 
     # Build the sin-injected prompt (sin lens BEFORE the domain prompt)
     full_prompt = meta["prompt"]
@@ -121,8 +144,9 @@ def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
         # Clean for PS here-string (no special escaping needed inside @'...'@)
         safe_injection = sin_injection.replace('\n', ' ').strip()
         full_prompt = f"{safe_injection} --- {full_prompt}"
-    # Replace any em-dashes with regular dashes (PS encoding issue)
+    # Replace any non-ASCII in prompt (em-dashes, accents, etc.)
     full_prompt = full_prompt.replace('\u2014', '--').replace('\u2013', '-')
+    full_prompt = full_prompt.encode('ascii', 'replace').decode('ascii').replace('?', '-')
 
     # Build PS argument array items (each flag as separate quoted string)
     flag_parts = flags.split() if flags else []
@@ -135,7 +159,7 @@ def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
     return f'''# CEX {nucleus.upper()} -- {meta["title"]}
 # Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml + nucleus_sins.yaml
 # CLI: claude | Model: {model} | Context: {ctx}
-# Sin: {virtue} ({virtue_en})
+# Sin: {virtue_display} ({virtue_en_display})
 
 # --- UX: Window appearance ---
 $Host.UI.RawUI.WindowTitle = "{meta["title"]} [{model}]"
@@ -153,7 +177,7 @@ try {{
 }} catch {{}}
 
 Write-Host ""
-Write-Host "  {icon} {nucleus.upper()} {virtue} - {virtue_en}" -ForegroundColor {accent}
+Write-Host "  {icon} {nucleus.upper()} {virtue_display} - {virtue_en_display}" -ForegroundColor {accent}
 Write-Host "  {'=' * 50}" -ForegroundColor DarkGray
 Write-Host "  {tagline}" -ForegroundColor DarkGray
 Write-Host "  {model}  |  {ctx // 1000}K context  |  8F pipeline" -ForegroundColor DarkGray
@@ -166,16 +190,24 @@ $env:CEX_ROOT = "{ROOT}"
 Set-Location $env:CEX_ROOT
 
 # --- Launch CLI ---
-# Store prompt in variable to avoid parsing issues with long strings
-$prompt = @'
+# System prompt (sin identity + domain role) injected via --append-system-prompt
+$sysPrompt = @'
 {full_prompt}
+'@
+
+# Initial message (what the nucleus does on startup)
+$initialMsg = @'
+{meta.get("initial", "Ready.")}
 '@
 
 # Build argument list (avoids PowerShell parsing -- flags as operators)
 $args = @({(flags_array + ', ' if flags_array else '')}"--model", "{model}")
+$args += "--append-system-prompt", "{meta.get("agent_card", "")}"
+$args += "--append-system-prompt", ".cex/config/context_self_select.md"
+$args += "--append-system-prompt", $sysPrompt
 {mcp_line}
 {settings_line}
-$args += $prompt
+$args += $initialMsg
 
 # Call operator & ensures external command execution
 & claude @args

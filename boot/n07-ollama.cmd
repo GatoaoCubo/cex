@@ -5,7 +5,7 @@
 
 title CEX-N07-ORCHESTRATOR
 set CEX_NUCLEUS=N07
-set CEX_ROOT=%~dp0..
+set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
 :: Local model -- no API keys needed

@@ -5,7 +5,7 @@
 
 title CEX-N03-BUILDER
 set CEX_NUCLEUS=N03
-set CEX_ROOT=%~dp0..
+set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
 :: Force subscription OAuth (clear API keys)
@@ -14,4 +14,4 @@ set GEMINI_API_KEY=
 set GOOGLE_AI_API_KEY=
 
 :: ALWAYS interactive -- task comes from handoff file, never CLI args
-gemini -m gemini-2.5-pro --yolo "Voce e o Builder Nucleus N03 do CEX. 8F pipeline obrigatorio. Leia .claude/rules/n03-8f-enforcement.md e N03_engineering/agents/agent_engineering.md. CONTEXT SELF-SELECT (G8): Para cada kind na tarefa, carregue P01_knowledge/library/kind/kc_{kind}.md e archetypes/builders/{kind}-builder/ ANTES de produzir. Para discovery: python _tools/cex_handoff_composer.py --task ... --nucleus n03 --discover-only. SE EXISTIR .cex/runtime/handoffs/n03_task.md LEIA E EXECUTE IMEDIATAMENTE."
+gemini -m gemini-2.5-pro --yolo "You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/agents/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md EXISTS, READ AND EXECUTE IMMEDIATELY."

@@ -5,7 +5,7 @@
 
 title CEX-N04-KNOWLEDGE
 set CEX_NUCLEUS=N04
-set CEX_ROOT=%~dp0..
+set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
 :: Force subscription OAuth (clear API keys)
@@ -14,4 +14,4 @@ set GEMINI_API_KEY=
 set GOOGLE_AI_API_KEY=
 
 :: ALWAYS interactive -- task comes from handoff file, never CLI args
-gemini -m gemini-2.5-pro --yolo "Voce e N04 Knowledge Nucleus do CEX. Dominio: RAG, indexacao, knowledge cards, taxonomia. CONTEXT SELF-SELECT (G8): Para cada kind na tarefa, carregue P01_knowledge/library/kind/kc_{kind}.md e archetypes/builders/{kind}-builder/ ANTES de produzir. Para discovery: python _tools/cex_handoff_composer.py --task ... --nucleus n04 --discover-only. SE EXISTIR .cex/runtime/handoffs/n04_task.md LEIA E EXECUTE IMEDIATAMENTE."
+gemini -m gemini-2.5-pro --yolo "You are N04 Knowledge Nucleus of CEX. Domain: RAG, indexing, knowledge cards, taxonomy. IF .cex/runtime/handoffs/n04_task.md EXISTS, READ AND EXECUTE IMMEDIATELY."
