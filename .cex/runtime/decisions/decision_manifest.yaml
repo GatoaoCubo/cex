@@ -1,10 +1,25 @@
-# Decision Manifest — FULLGRID Mission 2026-04-06
-# GDP decisions made by user (via N07 proxy — continuous batching mode)
+# Decision Manifest — CLAUDE_NATIVE Mission 2026-04-08
+# GDP decisions made by user (via N07 proxy)
 # Nuclei MUST use these. Do NOT re-ask.
 
-mission: FULLGRID_20260406
-created: 2026-04-06T18:18:00-03:00
+mission: CLAUDE_NATIVE_20260408
+created: 2026-04-08T15:00:00-03:00
 decided_by: user_via_n07
+
+# PI Pivot (2026-04-08)
+pi_pivot:
+  runtime: claude_code_native          # PI wrapper is dead
+  distribution: git_clone              # not npm package
+  monetization: templates_consulting   # not wrapper subscription
+  pi_references: replace_all           # 30 files need cleanup
+  grid_layout: 3x2                     # 3 cols, 2 rows
+  boot_preference: ps1                 # sin-aware PS1 over CMD
+  new_features:
+    - --name                           # session naming for /resume
+    - --fork-session                   # safe context resume
+    - --continue                       # session continuation
+  self_audit: every_nucleus            # each nucleus reports missing tools
+  quality_floor: 9.0
 
 # NotebookLM Pipeline (D1-D5 from HANDOFF_notebooklm_pipeline.md)
 notebooklm:

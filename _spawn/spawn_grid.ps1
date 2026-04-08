@@ -29,19 +29,13 @@ $pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 
 New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\runtime\pids" | Out-Null
 
-# Dynamic grid: detect screen size, calculate 3x2 layout
+# Dynamic grid: detect screen size, adapt layout to nucleus count
 Add-Type -AssemblyName System.Windows.Forms
 $scr = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
-$gCols = 3; $gRows = 2
-$gW = [math]::Floor($scr.Width / $gCols)
-$gH = [math]::Floor($scr.Height / $gRows)
 $gOx = $scr.X; $gOy = $scr.Y
 
-$gridPos = @{
-    n01 = @{x=$gOx;           y=$gOy};            n02 = @{x=$gOx+$gW;     y=$gOy}
-    n03 = @{x=$gOx+2*$gW;     y=$gOy};            n04 = @{x=$gOx;           y=$gOy+$gH}
-    n05 = @{x=$gOx+$gW;       y=$gOy+$gH};        n06 = @{x=$gOx+2*$gW;     y=$gOy+$gH}
-}
+# gridPos is computed AFTER handoff discovery (see below)
+$gridPos = @{}
 
 # Discover handoffs for mission
 $handoffs = @()
@@ -61,7 +55,36 @@ if ($handoffs.Count -eq 0) {
 if ($mode -eq "auto") {
     $mode = if ($handoffs.Count -gt $maxSlots) { "continuous" } else { "static" }
 }
-Write-Output "[GRID] Mission: $mission | Mode: $mode | Handoffs: $($handoffs.Count)"
+# Adaptive grid layout based on nucleus count
+$n = $handoffs.Count
+if ($n -le 1) {
+    $gCols = 1; $gRows = 1
+} elseif ($n -le 2) {
+    $gCols = 2; $gRows = 1
+} elseif ($n -le 4) {
+    $gCols = 2; $gRows = 2
+} else {
+    $gCols = 3; $gRows = 2
+}
+$gW = [math]::Floor($scr.Width / $gCols)
+$gH = [math]::Floor($scr.Height / $gRows)
+
+# Build position map: assign grid cells left-to-right, top-to-bottom
+$nucleiNames = @()
+foreach ($h in $handoffs) {
+    $base = [System.IO.Path]::GetFileNameWithoutExtension($h.Name)
+    $parts = $base -split '_'
+    $nucleiNames += $parts[-1]
+}
+$cellIdx = 0
+foreach ($nuc in $nucleiNames) {
+    $col = $cellIdx % $gCols
+    $row = [math]::Floor($cellIdx / $gCols)
+    $gridPos[$nuc] = @{x=$gOx + $col * $gW; y=$gOy + $row * $gH}
+    $cellIdx++
+}
+
+Write-Output "[GRID] Mission: $mission | Mode: $mode | Handoffs: $n | Layout: ${gCols}x${gRows}"
 
 # Extract nucleus from handoff filename (pattern: {mission}_{nucleus}.md or {mission}_batch_{N}_{nucleus}.md)
 function Get-NucleusFromHandoff($filename) {
