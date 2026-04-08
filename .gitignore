@@ -9,6 +9,9 @@ __pycache__/
 _config/*.credentials
 _config/client_secret.json
 _config/token.json
+**/canva_token.json
+**/*_token.json
+**/*_credentials.json
 
 # IDE
 .obsidian/
@@ -36,6 +39,9 @@ _ops/
 _docs/*.mp4
 _docs/*.mp3
 _docs/*.srt
+
+# Releases (built locally, not tracked)
+_releases/
 
 # Platform
 Thumbs.db
