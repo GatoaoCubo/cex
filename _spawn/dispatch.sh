@@ -64,12 +64,68 @@ case "$MODE" in
         done
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_stop.ps1 $STOP_ARGS
         ;;
+    ollama)
+        # Headless dispatch via 8F pipeline + Ollama (no Claude Code CLI needed)
+        NUCLEUS="${1:-n03}"
+        MODEL="${2:-qwen3:8b}"
+        HANDOFF="${3:-}"
+        echo "[DISPATCH] Ollama: $NUCLEUS via $MODEL"
+        # Read task from handoff file or n0x_task.md
+        if [ -z "$HANDOFF" ]; then
+            HANDOFF=".cex/runtime/handoffs/${NUCLEUS}_task.md"
+        fi
+        if [ ! -f "$HANDOFF" ]; then
+            echo "[FAIL] No handoff found: $HANDOFF"
+            exit 1
+        fi
+        # Run 8F pipeline with Ollama model
+        python _tools/cex_8f_runner.py \
+            --execute \
+            --model "ollama/$MODEL" \
+            --nucleus "$NUCLEUS" \
+            --context "$(cat "$HANDOFF")" \
+            "$(head -1 "$HANDOFF" | sed 's/^#* *//')"
+        echo "[DONE] $NUCLEUS via Ollama/$MODEL"
+        ;;
+    ollama-grid)
+        # Parallel Ollama dispatch (all nuclei via local models)
+        MISSION="${1:-DEFAULT}"
+        MODEL="${2:-qwen3:8b}"
+        echo "[DISPATCH] Ollama Grid: $MISSION via $MODEL"
+        HANDOFF_DIR=".cex/runtime/handoffs"
+        PIDS=""
+        for hf in "$HANDOFF_DIR"/${MISSION}_n0*.md; do
+            if [ -f "$hf" ]; then
+                NUC=$(echo "$hf" | grep -o 'n0[1-7]')
+                echo "  [>>] Starting $NUC..."
+                python _tools/cex_8f_runner.py \
+                    --execute \
+                    --model "ollama/$MODEL" \
+                    --nucleus "$NUC" \
+                    --context "$(cat "$hf")" \
+                    "$(head -1 "$hf" | sed 's/^#* *//')" &
+                PIDS="$PIDS $!"
+            fi
+        done
+        if [ -z "$PIDS" ]; then
+            echo "[FAIL] No handoffs found for mission: $MISSION"
+            exit 1
+        fi
+        echo "[WAIT] Waiting for $PIDS..."
+        wait $PIDS
+        echo "[DONE] Ollama Grid complete: $MISSION"
+        ;;
     *)
-        echo "Usage: bash _spawn/dispatch.sh {solo|grid|status|stop} [args]"
+        echo "Usage: bash _spawn/dispatch.sh {solo|grid|ollama|ollama-grid|status|stop} [args]"
         echo ""
-        echo "  stop              Stop MY session's nuclei only"
-        echo "  stop n03          Stop only N03"
-        echo "  stop --all        Stop ALL CEX nuclei (DANGEROUS)"
-        echo "  stop --dry-run    Preview what would be killed"
+        echo "  solo n03 \"task\"       Spawn 1 Claude Code nucleus"
+        echo "  grid MISSION          Spawn up to 6 Claude Code nuclei"
+        echo "  ollama n03 qwen3:8b   Run 1 nucleus via Ollama (free)"
+        echo "  ollama-grid MISSION qwen3:8b  Run all nuclei via Ollama (free)"
+        echo "  status                Monitor running nuclei"
+        echo "  stop                  Stop MY session's nuclei only"
+        echo "  stop n03              Stop only N03"
+        echo "  stop --all            Stop ALL CEX nuclei (DANGEROUS)"
+        echo "  stop --dry-run        Preview what would be killed"
         ;;
 esac

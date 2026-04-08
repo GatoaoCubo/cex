@@ -1,0 +1,687 @@
+{
+  "timestamp": "2026-04-08T17:28:14.967149",
+  "tasks": 10,
+  "models": {
+    "qwen3:8b": {
+      "task_results": [
+        {
+          "task_id": "T01_kc_simple",
+          "task_name": "Simple Knowledge Card",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T02_agent",
+          "task_name": "Agent Definition",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T03_prompt_template",
+          "task_name": "Prompt Template",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T04_quality_gate",
+          "task_name": "Quality Gate",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T05_intent_resolution",
+          "task_name": "Intent Resolution (complex)",
+          "success": true,
+          "elapsed": 72.33,
+          "score": 1.5,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 227,
+            "is_json": true,
+            "json_valid": false,
+            "total_score": 1.5
+          },
+          "output_length": 1559,
+          "error": ""
+        },
+        {
+          "task_id": "T06_structured_table",
+          "task_name": "Structured Data Extraction",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T07_yaml_precision",
+          "task_name": "YAML Frontmatter Precision",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T08_bilingual",
+          "task_name": "Bilingual Understanding",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T09_complex_artifact",
+          "task_name": "Complex Multi-Section Artifact",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T10_reasoning",
+          "task_name": "Multi-Step Reasoning",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        }
+      ],
+      "avg_score": 0.1,
+      "avg_time": 115.2,
+      "success_rate": 10.0
+    },
+    "deepseek-r1:8b": {
+      "task_results": [
+        {
+          "task_id": "T01_kc_simple",
+          "task_name": "Simple Knowledge Card",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T02_agent",
+          "task_name": "Agent Definition",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T03_prompt_template",
+          "task_name": "Prompt Template",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T04_quality_gate",
+          "task_name": "Quality Gate",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T05_intent_resolution",
+          "task_name": "Intent Resolution (complex)",
+          "success": true,
+          "elapsed": 49.68,
+          "score": 1.5,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 141,
+            "is_json": true,
+            "json_valid": false,
+            "total_score": 1.5
+          },
+          "output_length": 970,
+          "error": ""
+        },
+        {
+          "task_id": "T06_structured_table",
+          "task_name": "Structured Data Extraction",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T07_yaml_precision",
+          "task_name": "YAML Frontmatter Precision",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T08_bilingual",
+          "task_name": "Bilingual Understanding",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T09_complex_artifact",
+          "task_name": "Complex Multi-Section Artifact",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        },
+        {
+          "task_id": "T10_reasoning",
+          "task_name": "Multi-Step Reasoning",
+          "success": false,
+          "elapsed": 120,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "TIMEOUT"
+        }
+      ],
+      "avg_score": 0.1,
+      "avg_time": 113.0,
+      "success_rate": 10.0
+    },
+    "claude-sonnet": {
+      "task_results": [
+        {
+          "task_id": "T01_kc_simple",
+          "task_name": "Simple Knowledge Card",
+          "success": false,
+          "elapsed": 225.50484538078308,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "Command '['claude', '-p', '--model', 'sonnet', '--no-chrome']' timed out after 120 seconds"
+        },
+        {
+          "task_id": "T02_agent",
+          "task_name": "Agent Definition",
+          "success": false,
+          "elapsed": 129.4254026412964,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "Command '['claude', '-p', '--model', 'sonnet', '--no-chrome']' timed out after 120 seconds"
+        },
+        {
+          "task_id": "T03_prompt_template",
+          "task_name": "Prompt Template",
+          "success": false,
+          "elapsed": 140.12030839920044,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "Command '['claude', '-p', '--model', 'sonnet', '--no-chrome']' timed out after 120 seconds"
+        },
+        {
+          "task_id": "T04_quality_gate",
+          "task_name": "Quality Gate",
+          "success": false,
+          "elapsed": 125.88434410095215,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "Command '['claude', '-p', '--model', 'sonnet', '--no-chrome']' timed out after 120 seconds"
+        },
+        {
+          "task_id": "T05_intent_resolution",
+          "task_name": "Intent Resolution (complex)",
+          "success": true,
+          "elapsed": 86.76,
+          "score": 2.5,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": true,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 30,
+            "is_json": true,
+            "json_valid": true,
+            "total_score": 2.5
+          },
+          "output_length": 238,
+          "error": ""
+        },
+        {
+          "task_id": "T06_structured_table",
+          "task_name": "Structured Data Extraction",
+          "success": true,
+          "elapsed": 7.73,
+          "score": 2.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 7,
+            "has_lists": 0,
+            "word_count": 121,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 2.0
+          },
+          "output_length": 658,
+          "error": ""
+        },
+        {
+          "task_id": "T07_yaml_precision",
+          "task_name": "YAML Frontmatter Precision",
+          "success": true,
+          "elapsed": 3.58,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 35,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 284,
+          "error": ""
+        },
+        {
+          "task_id": "T08_bilingual",
+          "task_name": "Bilingual Understanding",
+          "success": true,
+          "elapsed": 15.67,
+          "score": 3.5,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": true,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 3,
+            "word_count": 119,
+            "is_json": true,
+            "json_valid": true,
+            "total_score": 3.5
+          },
+          "output_length": 892,
+          "error": ""
+        },
+        {
+          "task_id": "T09_complex_artifact",
+          "task_name": "Complex Multi-Section Artifact",
+          "success": true,
+          "elapsed": 43.12,
+          "score": 3.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 13,
+            "has_tables": 32,
+            "has_lists": 6,
+            "word_count": 908,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 3.0
+          },
+          "output_length": 6159,
+          "error": ""
+        },
+        {
+          "task_id": "T10_reasoning",
+          "task_name": "Multi-Step Reasoning",
+          "success": false,
+          "elapsed": 132.58830785751343,
+          "score": 0.0,
+          "details": {
+            "has_frontmatter": false,
+            "frontmatter_valid": false,
+            "kind_correct": false,
+            "pillar_correct": false,
+            "has_headings": 0,
+            "has_tables": 0,
+            "has_lists": 0,
+            "word_count": 0,
+            "is_json": false,
+            "json_valid": false,
+            "total_score": 0.0
+          },
+          "output_length": 0,
+          "error": "Command '['claude', '-p', '--model', 'sonnet', '--no-chrome']' timed out after 120 seconds"
+        }
+      ],
+      "avg_score": 1.1,
+      "avg_time": 91.0,
+      "success_rate": 50.0
+    }
+  }
+}

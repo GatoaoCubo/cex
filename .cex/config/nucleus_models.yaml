@@ -24,7 +24,7 @@ n07:
   domain: orchestration
   fallback:
     cli: ollama
-    model: qwen3:32b
+    model: qwen3:8b
   notes: "Maestro. Best reasoning for dispatch decisions."
 
 # --- N01: Research & Intelligence ---
@@ -42,7 +42,7 @@ n01:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:32b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: gemini→opus. 1M context + deepest reasoning for research."
 
 # --- N02: Marketing & Copy ---
@@ -60,7 +60,7 @@ n02:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for brand strategy + creative."
 
 # --- N03: Engineering & Builder ---
@@ -78,7 +78,7 @@ n03:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:32b
+    model: qwen3:8b
   notes: "Already opus. 13 ISOs + 8F pipeline. Deepest reasoning."
 
 # --- N04: Knowledge & RAG ---
@@ -96,7 +96,7 @@ n04:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: gemini→opus. 1M context for full knowledge library + taxonomy."
 
 # --- N05: Operations & DevOps ---
@@ -114,7 +114,7 @@ n05:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for code review + CI/CD."
 
 # --- N06: Commercial & Brand ---
@@ -132,7 +132,7 @@ n06:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for pricing + monetization."
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
