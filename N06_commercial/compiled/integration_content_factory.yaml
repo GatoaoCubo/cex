@@ -1,0 +1,297 @@
+id: n06_integration_content_factory
+kind: content_monetization
+pillar: P11
+title: Content Factory Integration Spec -- Pricing x Pipeline x Checkout
+version: 1.0.0
+created: 2026-04-08
+author: n06_commercial
+nucleus: N06
+domain: content-factory-integration
+quality: null
+tags:
+- integration
+- content-factory
+- pricing
+- pipeline
+- checkout
+- stripe
+- hotmart
+- eduzz
+- brand-price-variables
+tldr: 'Integration spec connecting N06 pricing artifacts to N03 pipeline workflow. Covers: checkout flow via Stripe/Hotmart/Eduzz,
+  credit system architecture, {{BRAND_PRICE_*}} variable injection, webhook event flow, subscription lifecycle, and cross-nucleus
+  data contracts.'
+density_score: 0.94
+depends_on:
+- pricing_content_factory
+- funnel_content_factory
+- spec_content_factory_v1
+linked_artifacts:
+  primary: pricing_content_factory
+  related:
+  - funnel_content_factory
+  - roi_content_factory
+  - dag_cf_master
+  - wf_cf_publish_hotmart
+1_system_architecture: "CUSTOMER\n    |\n    v\n[LANDING PAGE] ---- N03 builds, N06 provides {{BRAND_PRICE_*}} variables\n\
+  \    |\n    | Selects tier / buys Content Pack\n    v\n[CHECKOUT] -------- Stripe (INT) / Hotmart (BR courses) / Eduzz (BR\
+  \ products)\n    |\n    | Payment confirmed (webhook)\n    v\n[CREDIT SYSTEM] --- N05 manages (Supabase)\n    |\n    | Credits\
+  \ allocated\n    v\n[CONTENT FACTORY PIPELINE] --- N03 executes (dag_cf_master)\n    |\n    | Produces 7+ outputs\n    v\n\
+  [DELIVERY] -------- Email + dashboard + download links\n    |\n    | Usage tracked\n    v\n[BILLING] --------- Overage billing\
+  \ / subscription renewal\n\n---"
+2_checkout_integration_points: ''
+2_1_stripe_primary_international_subscriptions: "Status: CONFIGURED (STRIPE_SECRET_KEY in env)\n\n| Integration | Endpoint\
+  \ | Purpose | CEX Artifact |\n|------------|----------|---------|-------------|\n| Subscription products | `POST /v1/products`\
+  \ | 5 tiers (Free/Creator/Pro/Studio/Factory) | pricing_content_factory.md |\n| Price objects | `POST /v1/prices` | Monthly\
+  \ + annual pricing per tier | pricing_content_factory.md |\n| Checkout sessions | `POST /v1/checkout/sessions` | One-click\
+  \ purchase flow | funnel_content_factory.md |\n| Customer portal | Stripe hosted | Self-service upgrade/downgrade/cancel\
+  \ | -- |\n| Webhooks | `POST /api/stripe/webhook` | Payment events -> credit allocation | This spec |\n| Credit pack products\
+  \ | `POST /v1/products` | 5 credit pack SKUs | pricing_content_factory.md |\n| Usage records | `POST /v1/subscription_items/{id}/usage_records`\
+  \ | Metered billing for overage | This spec |\n\nStripe Product Structure:\n\nproducts:\n  - name: \"Content Factory Creator\"\
+  \n    id: prod_cf_creator\n    prices:\n      - id: price_cf_creator_monthly\n        amount: 14700  # R$147.00 in centavos\n\
+  \        currency: brl\n        recurring: { interval: month }\n      - id: price_cf_creator_annual\n        amount: 11700\
+  \  # R$117.00/mo billed annually\n        currency: brl\n        recurring: { interval: month, interval_count: 12 }\n  -\
+  \ name: \"Content Factory Pro\"\n    id: prod_cf_pro\n    prices:\n      - id: price_cf_pro_monthly\n        amount: 49700\n\
+  \        currency: brl\n        recurring: { interval: month }\n  - name: \"Content Factory Studio\"\n    id: prod_cf_studio\n\
+  \    prices:\n      - id: price_cf_studio_monthly\n        amount: 149700\n        currency: brl\n        recurring: { interval:\
+  \ month }\n  - name: \"Content Factory Factory\"\n    id: prod_cf_factory\n    prices:\n      - id: price_cf_factory_monthly\n\
+  \        amount: 399700\n        currency: brl\n        recurring: { interval: month }\n\ncredit_packs:\n  - name: \"Credit\
+  \ Pack Starter (50)\"\n    id: prod_cp_starter\n    price: 6000  # R$60.00\n    metadata: { credits: 50 }\n  - name: \"\
+  Credit Pack Standard (200)\"\n    id: prod_cp_standard\n    price: 20000\n    metadata: { credits: 200 }\n  - name: \"Credit\
+  \ Pack Pro (500)\"\n    id: prod_cp_pro\n    price: 42500\n    metadata: { credits: 500 }\n  - name: \"Credit Pack Bulk\
+  \ (1000)\"\n    id: prod_cp_bulk\n    price: 75000\n    metadata: { credits: 1000 }\n  - name: \"Credit Pack Enterprise\
+  \ (5000)\"\n    id: prod_cp_enterprise\n    price: 325000\n    metadata: { credits: 5000 }"
+2_2_hotmart_courses_br_market: 'Status: CONFIGURED (MCP wired to N06)
+
+
+  | Integration | Purpose | CEX Artifact |
+
+  |------------|---------|-------------|
+
+  | Product creation | Course "CEX na Pratica" (R$497 / R$997) | output_monetization_business_plan.md |
+
+  | Checkout page | Hosted by Hotmart (zero dev effort) | funnel_content_factory.md |
+
+  | Affiliate program | 25% commission, Hotmart handles payouts | funnel_content_factory.md |
+
+  | Webhook: purchase | `PURCHASE_APPROVED` -> grant course access | This spec |
+
+  | Webhook: refund | `PURCHASE_REFUNDED` -> revoke access | This spec |
+
+  | Student area | Hotmart hosts course modules | spec_content_factory_v1.md |
+
+
+  Hotmart Products:
+
+
+  | Product | Price | Commission | Affiliate % |
+
+  |---------|-------|-----------|------------|
+
+  | CEX Builder (course) | R$497 | R$24.85 (Hotmart 5%) | 25% (R$124.25) |
+
+  | CEX Master (course) | R$997 | R$49.85 (Hotmart 5%) | 25% (R$249.25) |'
+2_3_eduzz_alternative_br_market: 'Status: Not yet configured. Backup for Hotmart.
+
+
+  | Integration | Purpose | Priority |
+
+  |------------|---------|---------|
+
+  | Product listing | Mirror Hotmart products | Low (only if Hotmart issues) |
+
+  | Checkout | Alternative payment processor | Low |
+
+  | Webhook | Same flow as Hotmart | Low |
+
+
+  When to activate Eduzz: If Hotmart account issues arise, or if A/B testing shows higher conversion on Eduzz checkout pages.
+
+
+  ---'
+3_credit_system_architecture: ''
+3_1_data_model_supabase: "-- Credit accounts (1 per customer)\nCREATE TABLE credit_accounts (\n    id UUID PRIMARY KEY DEFAULT\
+  \ gen_random_uuid(),\n    customer_id UUID NOT NULL REFERENCES customers(id),\n    stripe_customer_id TEXT,\n    tier TEXT\
+  \ NOT NULL DEFAULT 'free',\n    credits_balance INTEGER NOT NULL DEFAULT 0,\n    credits_allocated INTEGER NOT NULL DEFAULT\
+  \ 0,  -- monthly allocation\n    credits_used_this_period INTEGER NOT NULL DEFAULT 0,\n    period_start TIMESTAMPTZ NOT\
+  \ NULL DEFAULT NOW(),\n    period_end TIMESTAMPTZ NOT NULL,\n    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n    updated_at\
+  \ TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);\n\n-- Credit transactions (audit trail)\nCREATE TABLE credit_transactions (\n \
+  \   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    account_id UUID NOT NULL REFERENCES credit_accounts(id),\n    amount\
+  \ INTEGER NOT NULL,  -- positive = credit, negative = debit\n    type TEXT NOT NULL,  -- 'allocation', 'usage', 'purchase',\
+  \ 'refund', 'overage'\n    description TEXT,\n    format TEXT,  -- which content format consumed credits\n    brief_id UUID,\
+  \  -- links to the content brief\n    stripe_payment_id TEXT,\n    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);\n\n\
+  -- Content briefs (links to pipeline)\nCREATE TABLE content_briefs (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n\
+  \    account_id UUID NOT NULL REFERENCES credit_accounts(id),\n    topic TEXT NOT NULL,\n    audience TEXT,\n    formats\
+  \ JSONB NOT NULL,  -- [\"blog\", \"social\", \"video_short\"]\n    credits_estimated INTEGER NOT NULL,\n    credits_actual\
+  \ INTEGER,\n    status TEXT NOT NULL DEFAULT 'pending',  -- pending, processing, complete, failed\n    pipeline_run_id TEXT,\
+  \  -- links to dag_cf_master execution\n    outputs JSONB,  -- URLs/paths to produced content\n    quality_score REAL,\n\
+  \    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n    completed_at TIMESTAMPTZ\n);"
+3_2_credit_allocation_by_tier: '| Tier | Monthly Credits | Overage Rate | Reset Policy |
+
+  |------|---------------|-------------|-------------|
+
+  | Free | 15 (capped per format) | N/A | Monthly reset, no rollover |
+
+  | Creator | 150 | R$1.20/credit | Monthly reset, no rollover |
+
+  | Pro | 600 | R$1.00/credit | Monthly reset, 50 credits rollover max |
+
+  | Studio | 2,000 | R$0.85/credit | Monthly reset, 200 credits rollover |
+
+  | Factory | 6,000 | R$0.70/credit | Monthly reset, 500 credits rollover |'
+3_3_credit_deduction_flow: "Customer submits brief\n    |\n    v\nEstimate credits needed (based on formats selected)\n  \
+  \  |\n    v\nCheck balance >= estimate?\n    |\n    +--> YES: Reserve credits (soft lock)\n    |         |\n    |      \
+  \   v\n    |    Run dag_cf_master pipeline\n    |         |\n    |         v\n    |    Deduct actual credits used (may differ\
+  \ from estimate)\n    |    Release excess reservation\n    |         |\n    |         v\n    |    Deliver outputs\n    |\n\
+  \    +--> NO: Check overage policy\n              |\n              +--> Overage allowed (paid tier): Proceed, bill overage\
+  \ via Stripe\n              +--> No overage (Free): Return error \"Upgrade to continue\"\n\n---"
+4_brand_price_variable_injection: ''
+4_1_variable_registry: 'These variables are injected into landing pages, emails, and sales copy by `brand_inject.py`:
+
+
+  | Variable | Value (Current) | Source | Used In |
+
+  |----------|----------------|--------|---------|
+
+  | `{{BRAND_PRICE_FREE}}` | R$0 | pricing_content_factory.md | Landing page, comparison table |
+
+  | `{{BRAND_PRICE_CREATOR}}` | R$147/mo | pricing_content_factory.md | Pricing page, checkout |
+
+  | `{{BRAND_PRICE_CREATOR_ANNUAL}}` | R$117/mo | pricing_content_factory.md | Annual toggle |
+
+  | `{{BRAND_PRICE_PRO}}` | R$497/mo | pricing_content_factory.md | Pricing page, checkout |
+
+  | `{{BRAND_PRICE_PRO_ANNUAL}}` | R$397/mo | pricing_content_factory.md | Annual toggle |
+
+  | `{{BRAND_PRICE_STUDIO}}` | R$1,497/mo | pricing_content_factory.md | Pricing page, checkout |
+
+  | `{{BRAND_PRICE_FACTORY}}` | R$3,997/mo | pricing_content_factory.md | Pricing page, checkout |
+
+  | `{{BRAND_PRICE_TRIPWIRE}}` | R$19 | funnel_content_factory.md | Tripwire landing |
+
+  | `{{BRAND_PRICE_CORE_OFFER}}` | R$147 | funnel_content_factory.md | Core offer landing |
+
+  | `{{BRAND_PRICE_COURSE_BUILDER}}` | R$497 | output_monetization_business_plan.md | Hotmart checkout |
+
+  | `{{BRAND_PRICE_COURSE_MASTER}}` | R$997 | output_monetization_business_plan.md | Hotmart checkout |
+
+  | `{{BRAND_PRICE_CREDIT_STARTER}}` | R$60 (50 credits) | pricing_content_factory.md | Credit pack purchase |
+
+  | `{{BRAND_PRICE_CREDIT_PRO}}` | R$425 (500 credits) | pricing_content_factory.md | Credit pack purchase |
+
+  | `{{BRAND_PRICE_SAVINGS_VS_AGENCY}}` | R$42,411/mo | roi_content_factory.md | ROI section |
+
+  | `{{BRAND_PRICE_BREAK_EVEN}}` | <2 days | roi_content_factory.md | Sales copy |'
+4_2_how_injection_works: "N03 builds landing page with {{BRAND_PRICE_*}} placeholders\n    |\n    v\nbrand_inject.py reads\
+  \ .cex/brand/brand_config.yaml + pricing artifacts\n    |\n    v\nReplaces all {{BRAND_PRICE_*}} with current values\n \
+  \   |\n    v\nOutput: production-ready HTML with real prices\n\nWhy variables, not hardcoded prices? When pricing changes\
+  \ (A/B test, annual adjustment, regional pricing), update 1 source file -> all landing pages, emails, and sales copy update\
+  \ automatically. Zero manual find-and-replace."
+4_3_adding_price_variables_to_brand_config_yaml: "# Add to .cex/brand/brand_config.yaml under pricing: section\npricing:\n\
+  \  BRAND_PRICING_MODEL: \"hybrid\"\n  BRAND_PRICE_FREE: 0\n  BRAND_PRICE_CREATOR: 14700       # centavos (R$147.00)\n  BRAND_PRICE_CREATOR_ANNUAL:\
+  \ 11700\n  BRAND_PRICE_PRO: 49700\n  BRAND_PRICE_PRO_ANNUAL: 39700\n  BRAND_PRICE_STUDIO: 149700\n  BRAND_PRICE_FACTORY:\
+  \ 399700\n  BRAND_PRICE_TRIPWIRE: 1900\n  BRAND_PRICE_CORE_OFFER: 14700\n  BRAND_PRICE_COURSE_BUILDER: 49700\n  BRAND_PRICE_COURSE_MASTER:\
+  \ 99700\n  BRAND_PRICE_CREDIT_STARTER: 6000\n  BRAND_PRICE_CREDIT_STANDARD: 20000\n  BRAND_PRICE_CREDIT_PRO: 42500\n  BRAND_PRICE_CREDIT_BULK:\
+  \ 75000\n  BRAND_PRICE_CREDIT_ENTERPRISE: 325000\n  BRAND_CHECKOUT_PRIMARY: \"stripe\"\n  BRAND_CHECKOUT_SECONDARY: \"hotmart\"\
+  \n  BRAND_CURRENCY_PRIMARY: \"BRL\"\n  BRAND_CURRENCY_SECONDARY: \"USD\"\n\n---"
+5_webhook_event_flow: ''
+5_1_stripe_webhook_events: '| Event | Action | Owner |
+
+  |-------|--------|-------|
+
+  | `checkout.session.completed` | Create credit_account, allocate credits for tier | N05 |
+
+  | `customer.subscription.created` | Initialize subscription, set period_start/end | N05 |
+
+  | `customer.subscription.updated` | Update tier, adjust credits (upgrade/downgrade) | N05 |
+
+  | `customer.subscription.deleted` | Set tier=free, stop credit allocation | N05 |
+
+  | `invoice.paid` | Reset monthly credits, log allocation transaction | N05 |
+
+  | `invoice.payment_failed` | Flag account, send retry email, grace period 3 days | N05 |
+
+  | `charge.succeeded` (one-time) | Add credits from credit pack purchase | N05 |
+
+  | `charge.refunded` | Deduct credits, flag if negative balance | N05 |'
+5_2_hotmart_webhook_events: '| Event | Action | Owner |
+
+  |-------|--------|-------|
+
+  | `PURCHASE_APPROVED` | Grant course access, create student record | N06 |
+
+  | `PURCHASE_REFUNDED` | Revoke access, log refund | N06 |
+
+  | `PURCHASE_CHARGEBACK` | Block account, flag for review | N06 |
+
+  | `SUBSCRIPTION_CANCELLATION` | Remove from community, send win-back email | N06 |'
+5_3_webhook_security: "webhook_security:\n  stripe:\n    endpoint_secret: \"whsec_...\" # in env, never in code\n    signature_header:\
+  \ \"Stripe-Signature\"\n    verification: \"stripe.Webhook.construct_event(payload, sig, secret)\"\n  hotmart:\n    hottok:\
+  \ \"...\" # in env\n    verification: \"X-Hotmart-Hottok header matches stored hottok\"\n  eduzz:\n    api_key: \"...\"\
+  \ # in env\n    verification: \"HMAC-SHA256 signature validation\"\n\n---"
+6_cross_nucleus_data_contracts: ''
+6_1_n06_commercial_n03_pipeline: "When a customer submits a brief:\n\n# Contract: N06 sends to N03 via dag_cf_master\nbrief_request:\n\
+  \  brief_id: \"uuid\"\n  customer_id: \"uuid\"\n  topic: \"string\"\n  audience: \"string\"\n  formats:\n    - blog\n  \
+  \  - social_set\n    - video_short\n    - podcast\n    - course_module\n    - ebook_chapter\n    - presentation\n    - email_sequence\n\
+  \    - landing_page\n  brand_config_path: \".cex/brand/customer_{id}/brand_config.yaml\"\n  quality_tier: \"basic\"  # or\
+  \ \"premium\"\n  credits_budget: 140\n  callback_url: \"/api/brief/{brief_id}/complete\""
+6_2_n03_pipeline_n06_commercial: "When pipeline completes:\n\n# Contract: N03 returns to N06\nbrief_result:\n  brief_id: \"\
+  uuid\"\n  status: \"complete\"  # or \"partial\" or \"failed\"\n  formats_produced:\n    blog:\n      path: \"output/customer_{id}/blog_{topic}.md\"\
+  \n      credits_used: 8\n      quality_score: 9.1\n    social_set:\n      path: \"output/customer_{id}/social_{topic}/\"\
+  \n      credits_used: 12\n      quality_score: 8.7\n    # ... etc for each format\n  total_credits_used: 138\n  total_quality_avg:\
+  \ 8.9\n  pipeline_duration_seconds: 480\n  errors: []"
+6_3_n06_commercial_n05_operations: "Billing instructions:\n\n# Contract: N06 sends to N05 for billing\nbilling_instruction:\n\
+  \  account_id: \"uuid\"\n  action: \"debit_credits\"\n  amount: 138\n  brief_id: \"uuid\"\n  overage: false  # true if exceeds\
+  \ monthly allocation\n  stripe_customer_id: \"cus_...\""
+6_4_n05_operations_n06_commercial: "Usage reports for pricing optimization:\n\n# Contract: N05 sends monthly to N06\nusage_report:\n\
+  \  period: \"2026-04\"\n  total_customers: 135\n  by_tier:\n    creator: { count: 78, avg_usage: 68%, churn: 5.2% }\n  \
+  \  pro: { count: 42, avg_usage: 72%, churn: 4.1% }\n    studio: { count: 12, avg_usage: 61%, churn: 2.8% }\n    factory:\
+  \ { count: 3, avg_usage: 45%, churn: 0% }\n  top_formats: [\"blog\", \"social_set\", \"email_sequence\"]\n  overage_revenue:\
+  \ 4520  # R$45.20\n  credit_pack_revenue: 28500  # R$285.00\n\n---"
+7_subscription_lifecycle: "SIGNUP (checkout.session.completed)\n    |\n    v\nONBOARDING (Day 0-7)\n    |  Email: \"Welcome\
+  \ + first brief tutorial\"\n    |  Action: Allocate monthly credits\n    |  Goal: First brief within 24h\n    |\n    v\n\
+  ACTIVATION (Day 1-14)\n    |  Trigger: 3+ briefs completed\n    |  Email: \"Your first month: X hours saved, Y pieces created\"\
+  \n    |  Goal: Habit formation\n    |\n    v\nRETENTION (Month 2+)\n    |  Monthly: \"Your content report\" email with ROI\
+  \ data\n    |  Trigger: Usage < 30% -> \"Content ideas for this month\" email\n    |  Trigger: Usage > 80% -> \"Upgrade\
+  \ to save on overages\" prompt\n    |\n    v\nEXPANSION (Month 3+)\n    |  Trigger: Hit credit limit 2x -> \"Upgrade\" CTA\n\
+  \    |  Trigger: 6 months active -> \"Go annual, save 20%\"\n    |  Trigger: Agency signals (multiple brands) -> \"Studio\
+  \ is for you\"\n    |\n    v\nAT RISK (signals)\n    |  No brief in 30 days -> \"We miss you\" + free credit bonus\n   \
+  \ |  Payment failed -> Grace period 3 days + retry email\n    |  Cancel intent -> \"Before you go: here's your ROI this\
+  \ year\"\n    |\n    v\nCHURNED (subscription deleted)\n    |  Exit survey (1 question: \"Why?\")\n    |  Win-back email\
+  \ at Day 30 + Day 90 (\"We improved X\")\n    |  Data retained 12 months for potential return\n\n---"
+8_implementation_priority: '| # | Integration | Owner | Dependencies | Priority | Effort |
+
+  |---|------------|-------|-------------|---------|--------|
+
+  | 1 | Stripe products + prices (5 tiers) | N05 | Stripe MCP | P0 | 2h |
+
+  | 2 | Credit account schema (Supabase) | N05 | Supabase | P0 | 3h |
+
+  | 3 | Checkout session + webhook handler | N05 | Stripe #1 | P0 | 4h |
+
+  | 4 | {{BRAND_PRICE_*}} variables in brand_config | N06 | brand_inject.py | P1 | 1h |
+
+  | 5 | Credit deduction on brief completion | N05 | Credit schema #2 | P1 | 2h |
+
+  | 6 | Landing page with pricing variables | N03 | Brand variables #4 | P1 | 3h |
+
+  | 7 | Hotmart course products + webhooks | N06 | Hotmart MCP | P2 | 3h |
+
+  | 8 | Overage billing automation | N05 | Stripe metered billing | P2 | 4h |
+
+  | 9 | Usage dashboard (customer-facing) | N03 | Credit transactions | P2 | 6h |
+
+  | 10 | Eduzz backup integration | N05 | -- | P3 | 4h |
+
+
+  Total estimated effort: ~32 hours across N03/N05/N06
+
+
+  ---
+
+
+  Generated by N06 Commercial Nucleus -- Content Factory Integration Spec
+
+  Connects pricing to pipeline to checkout. Every variable has a source.
+
+  Zero hardcoded prices. One YAML change updates all surfaces.'
