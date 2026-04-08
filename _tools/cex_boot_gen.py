@@ -236,6 +236,7 @@ Write-Host ""
 $env:CLAUDECODE = ""
 $env:{var_name} = "{var_val}"
 $env:CEX_ROOT = $cexRoot
+$env:CLAUDE_CODE_USE_POWERSHELL_TOOL = "1"
 Set-Location $env:CEX_ROOT
 
 # --- Launch CLI ---

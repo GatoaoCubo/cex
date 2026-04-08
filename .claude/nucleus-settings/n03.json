@@ -1,9 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+      "Read", "Write", "Edit", "Bash", "Glob", "Grep", "Agent", "WebFetch", "WebSearch", "NotebookEdit",
       "mcp__github__*"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "bypassPermissions"
   }
 }
