@@ -772,10 +772,37 @@ class EightFRunner:
             self.state.reasoning = {"plan": prompt, "model_used": "dry-run"}
             self._log("F4", f"dry-run reasoning prompt ({len(prompt.split())} words)")
         else:
-            self._log("F4", "calling LLM for reasoning plan...")
-            response = execute_prompt(prompt)
-            self.state.reasoning = {"plan": response, "model_used": "haiku"}
-            self._log("F4", f"reasoning plan received ({len(response)} chars)")
+            # Token optimization: skip LLM reasoning if F3 found existing
+            # artifacts of the same kind (template-first approach).
+            # The plan is predictable: adapt from template structure.
+            existing_count = len(self.state.knowledge.get("similar", []))
+            kc_builder = self.state.knowledge.get("kc_builder", "")
+            has_template = bool(kc_builder and len(kc_builder) > 200)
+
+            if existing_count >= 1 and has_template:
+                # Deterministic plan from template (saves ~5K tokens)
+                c = self.state.constraints
+                plan_lines = [
+                    f"## F4 Reasoning Plan (template-first, zero LLM tokens)",
+                    f"Kind: {self.state.kind} | Pillar: {self.state.pillar}",
+                    f"Approach: adapt from {existing_count} existing artifact(s)",
+                    f"",
+                    f"1. Frontmatter: id, kind, pillar, title, version, quality: null, "
+                    f"tags, tldr, domain, created, updated, density_score",
+                    f"2. Structure: follow output template sections",
+                    f"3. Content: domain-specific, no filler, density >= 0.85",
+                    f"4. Quality: target 9.0+, all hard gates PASS",
+                ]
+                if c.get("boundary"):
+                    plan_lines.append(f"5. Boundary: {c['boundary']}")
+                response = "\n".join(plan_lines)
+                self.state.reasoning = {"plan": response, "model_used": "template-skip"}
+                self._log("F4", f"template-first plan ({existing_count} matches, LLM skipped)")
+            else:
+                self._log("F4", "calling LLM for reasoning plan...")
+                response = execute_prompt(prompt)
+                self.state.reasoning = {"plan": response, "model_used": "haiku"}
+                self._log("F4", f"reasoning plan received ({len(response)} chars)")
 
     # -- F5 CALL ------------------------------------------------------------
 

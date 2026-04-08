@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-04-08T14:12:10.667859",
+  "timestamp": "2026-04-08T16:27:10.712590",
   "pass": 54,
   "fail": 4,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 91.0,
+  "elapsed_s": 90.8,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -14,7 +14,7 @@
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "70213B"
+      "detail": "71906B"
     },
     {
       "name": "tool:cex_intent.py",
@@ -49,7 +49,7 @@
     {
       "name": "tool:cex_score.py",
       "status": "PASS",
-      "detail": "26367B"
+      "detail": "28146B"
     },
     {
       "name": "tool:cex_materialize.py",
@@ -94,17 +94,17 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "60 artifacts (min 11)"
+      "detail": "62 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "59 artifacts (min 10)"
+      "detail": "62 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "51 artifacts (min 34)"
+      "detail": "55 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
@@ -114,12 +114,12 @@
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "58 artifacts (min 9)"
+      "detail": "59 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "66 artifacts (min 9)"
+      "detail": "69 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
@@ -129,7 +129,7 @@
     {
       "name": "quality:zero_null",
       "status": "FAIL",
-      "detail": "105 quality:null (awaiting peer review)"
+      "detail": "118 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
@@ -289,12 +289,12 @@
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "17 dirty files"
+      "detail": "16 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "755cae07 [N01] research: confidence scoring + clarification "
+      "detail": "17bdf83f [N01] research: token optimization audit -- 89 tool"
     }
   ]
 }

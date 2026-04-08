@@ -219,6 +219,10 @@ def analyze_weaknesses(filepath: Path) -> list[str]:
     if "density_score" not in fm:
         suggestions.append("add_density_score: add density_score field to frontmatter")
 
+    # Check updated field
+    if "updated" not in fm:
+        suggestions.append("add_updated: add updated date field to frontmatter")
+
     # Check for prose-heavy sections (>5 consecutive non-structured lines)
     lines = body.split("\n")
     prose_run = 0
@@ -312,10 +316,34 @@ def apply_improvement(filepath: Path, suggestion: str) -> str:
         # Just flag it -- needs LLM for good tldr rewrite
         return "tldr flagged for manual review"
 
+    if "add_tags" in suggestion:
+        # Auto-generate tags from frontmatter kind + domain + title
+        fm = read_frontmatter(filepath)
+        kind = fm.get("kind", "")
+        domain = fm.get("domain", "")
+        pillar = fm.get("pillar", "")
+        auto_tags = [t for t in [kind, domain, pillar] if t]
+        if auto_tags and "tags:" in text:
+            old_tags = re.search(r'tags:\s*\[.*?\]', text)
+            if old_tags:
+                new_tag_str = f"tags: [{', '.join(auto_tags)}]"
+                text = text.replace(old_tags.group(), new_tag_str)
+                filepath.write_text(text, encoding="utf-8")
+                return f"auto-generated {len(auto_tags)} tags from metadata"
+
+    if "add_updated" in suggestion or ("fix_frontmatter" in suggestion and "updated" in suggestion):
+        # Add updated field with today's date
+        if "updated:" not in text:
+            today = datetime.datetime.now().strftime("%Y-%m-%d")
+            text = text.replace("\n---", f'\nupdated: "{today}"\n---', 1)
+            filepath.write_text(text, encoding="utf-8")
+            return f"added updated: {today}"
+
     if "polish" in suggestion:
         # Ensure consistent formatting
         text = re.sub(r"\n{3,}", "\n\n", text)  # Remove triple+ newlines
         text = re.sub(r" +\n", "\n", text)  # Remove trailing spaces
+        text = re.sub(r"\t", "  ", text)  # Tabs to 2 spaces
         filepath.write_text(text, encoding="utf-8")
         return "polished formatting (whitespace cleanup)"
 
