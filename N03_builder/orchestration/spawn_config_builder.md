@@ -10,7 +10,7 @@ author: builder_agent
 domain: construction
 quality: null
 tags: [spawn-config, builder, N03, cli, model, dispatch]
-tldr: "Spawn configuration for N03 Builder — pi CLI with claude opus-4-6, 1M context, interactive mode."
+tldr: "Spawn configuration for N03 Builder -- claude CLI with opus-4-6, 1M context, interactive mode."
 density_score: 0.92
 linked_artifacts:
   primary: "N03_builder/orchestration/dispatch_rule_builder.md"
@@ -32,7 +32,7 @@ construction tasks.
 ```yaml
 nucleus: N03
 name: builder
-cli: pi
+cli: claude
 model: opus-4-6
 context_window: 1000000
 mode: interactive
@@ -51,7 +51,7 @@ sin: soberba
 bash _spawn/dispatch.sh solo n03 "Leia .cex/runtime/handoffs/n03_task.md e execute."
 
 # What dispatch.sh executes internally:
-start "N03 Builder ★" cmd /k "pi --model opus-4-6 --prompt 'Read .cex/runtime/handoffs/n03_task.md and execute.'"
+start "N03 Builder ★" cmd /k "claude --model opus-4-6 --prompt 'Read .cex/runtime/handoffs/n03_task.md and execute.'"
 ```
 
 ## Environment

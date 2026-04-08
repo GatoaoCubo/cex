@@ -26,7 +26,7 @@ linked_artifacts:
 
 | Nucleus | CLI | Model | Context | Cost | Domain Strength |
 |---------|-----|-------|---------|------|-----------------|
-| N07 Orchestrator | pi + claude | opus-4-6 xhigh | 200K | 1156$ | Meta-reasoning, dispatch |
+| N07 Orchestrator | claude | opus-4-6 xhigh | 200K | 1156$ | Meta-reasoning, dispatch |
 | N03 Builder | claude | opus | 200K | 1156$ | Complex construction, 8F |
 | N05 Operations | codex | GPT-5.4 | 192K | 1156 | Code review, testing, debug |
 | N04 Knowledge | gemini | 2.5-pro | 1M | /usr/bin/bash | Large docs, RAG, indexing |

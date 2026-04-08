@@ -15,7 +15,7 @@ tags:
 - cli
 - model
 - dispatch
-tldr: Spawn configuration for N03 Builder — pi CLI with claude opus-4-6, 1M context, interactive mode.
+tldr: Spawn configuration for N03 Builder -- claude CLI with opus-4-6, 1M context, interactive mode.
 density_score: 0.92
 linked_artifacts:
   primary: N03_builder/orchestration/dispatch_rule_builder.md
@@ -24,7 +24,7 @@ linked_artifacts:
   - N07_admin/orchestration/spawn_config_admin.md
 purpose: Defines the exact CLI, model, and launch parameters for spawning N03 Builder in a new terminal window. Used by `_spawn/dispatch.sh`
   when N07 dispatches construction tasks.
-configuration: "nucleus: N03\nname: builder\ncli: pi\nmodel: opus-4-6\ncontext_window: 1000000\nmode: interactive\ncolor:\n\
+configuration: "nucleus: N03\nname: builder\ncli: claude\nmodel: opus-4-6\ncontext_window: 1000000\nmode: interactive\ncolor:\n\
   \  bg: DarkBlue\n  fg: White\n  accent: Blue\nicon: \"★\"\nsin: soberba"
 launch_command: '# Solo dispatch (used by dispatch.sh)
 
@@ -33,7 +33,7 @@ launch_command: '# Solo dispatch (used by dispatch.sh)
 
   # What dispatch.sh executes internally:
 
-  start "N03 Builder ★" cmd /k "pi --model opus-4-6 --prompt ''Read .cex/runtime/handoffs/n03_task.md and execute.''"'
+  start "N03 Builder ★" cmd /k "claude --model opus-4-6 --prompt ''Read .cex/runtime/handoffs/n03_task.md and execute.''"'
 environment: '| Variable | Value | Purpose |
 
   |----------|-------|---------|

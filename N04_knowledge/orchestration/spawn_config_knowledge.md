@@ -28,7 +28,7 @@ density_score: 0.92
 # Spawn Command
 
 ```powershell
-pi --model opus-4-6 --reasoning-effort high
+claude --model opus-4-6 --reasoning-effort high
 ```
 
 ## Parameters
