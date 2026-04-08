@@ -9,8 +9,8 @@ updated: 2026-04-01
 author: n06_commercial
 name: brand_architect
 role: "Brand Architect & Revenue Engineer — discovers brand identity, codifies brand_config.yaml, propagates to all nuclei, then monetizes via pricing/courses/funnels."
-model: sonnet
-mcps: [fetch, stripe_mcp, hotmart_mcp]
+model: opus-4-6
+mcps: [fetch, stripe_mcp, hotmart_mcp, canva, notebooklm]
 domain_area: brand-identity-monetization
 quality: 9.1
 tags: [agent_card, commercial, N06, brand, monetization, brand-architect]
@@ -51,9 +51,9 @@ runtime: claude
 subscription: anthropic_max
 flags: []
 domain: brand-identity-monetization
-quality: 8.9
-tags: [agent_card, commercial, N06, brand, identity, monetization, sonnet]
-tldr: "brand_architect: Sonnet model, Anthropic Max subscription. Phase 1 = Brand Discovery (12-15 Qs → brand book → brand_config.yaml → propagate). Phase 2 = Revenue (pricing, funnels, courses — all brand-aligned)."
+quality: null
+tags: [agent_card, commercial, N06, brand, identity, monetization, opus]
+tldr: "brand_architect: Opus 4.6 model, Anthropic Max subscription. Phase 1 = Brand Discovery (12-15 Qs -> brand book -> brand_config.yaml -> propagate). Phase 2 = Revenue (pricing, funnels, courses -- all brand-aligned)."
 density_score: 0.94
 ---
 
@@ -64,9 +64,9 @@ It handles brand identity discovery and codification (Phase 1) and revenue-facin
 
 ## Model & Subscription
 
-- **Model**: `claude-sonnet` — brand discovery needs empathy + structure; revenue needs persuasion + creativity
+- **Model**: `claude-opus-4-6` (1M context) -- all nuclei upgraded 2026-04-06
 - **Subscription**: Anthropic Max (zero API cost, subscription-based)
-- **Escalation to opus**: Complex multi-brand architecture or brand-from-scratch with minimal input
+- **Runtime**: Claude Code native (git clone + Claude Code, no wrapper)
 
 ## MCPs
 

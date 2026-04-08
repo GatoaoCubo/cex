@@ -139,7 +139,7 @@ Every 9th is a subset. None of the 8 is subset of another. **8 orthogonal. Minim
 |-------------|----------------|--------------|
 | DATABASE | Repository | Container for everything |
 | SCHEMA | Pillar (P01-P12) | Organizational namespace |
-| TABLE | Kind (78 types) | Shape/format of data |
+| TABLE | Kind (123 kinds) | Shape/format of data |
 | COLUMN | Frontmatter field | Required attributes |
 | ROW | Instance (.md file) | One real artifact |
 | PRIMARY KEY | id (== filename stem) | Unique identifier |
@@ -204,7 +204,7 @@ In CEX with naming v2.0:
 
 ---
 
-## 4. The Taxonomy: 78 Types in 12 Pillars
+## 4. The Taxonomy: 123 Kinds in 12 Pillars
 
 | Group | Pillars | Functions |
 |-------|---------|-----------|
@@ -373,7 +373,7 @@ User: "Too formal, didnt like it"
 
 ## 8. Builders: Stored Procedures (Self-Referential)
 
-70 builders x 13 files = 910 stored procedures.
+125 builders x 13 ISOs = 1,625 stored procedures.
 
 Each builder = factory for one kind of artifact. system-prompt-builder produces identity files. instruction-builder produces method files. quality-gate-builder produces validation files.
 
@@ -424,7 +424,7 @@ Lovable bootstraps the FACE of your company. CEX bootstraps the BRAIN.
     Audience?      > "junior devs seeking first job"
     Tone of voice? > [formal / casual / technical / fun]
 
-5 questions. 30 seconds. CEX generates a complete, operable repo: 70 builders ready, 3 pre-filled knowledge cards, 2 default agents, full governance (pre-commit, doctor, schemas), multi-LLM entry points (CLAUDE.md, .cursorrules, GPT system prompt).
+5 questions. 30 seconds. CEX generates a complete, operable repo: 125 builders ready, 3 pre-filled knowledge cards, 2 default agents, full governance (pre-commit, doctor, schemas), multi-LLM entry points (CLAUDE.md, .cursorrules, GPT system prompt).
 
 ### Day 2+: Human asks things, CEX compiles
 

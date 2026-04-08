@@ -6,7 +6,7 @@
 
 ### 1. What is a builder?
 
-A builder is a factory blueprint that lives in `archetypes/builders/{type}-builder/`.
+A builder is a factory blueprint that lives in `archetypes/builders/{kind}-builder/`.
 Each builder contains 13 ISO files (manifest, system prompt, knowledge, instructions,
 tools, output template, schema, examples, architecture, config, memory, quality gates,
 collaboration). Builders define HOW to create a specific type of artifact.
@@ -20,14 +20,15 @@ entries. Each pillar has its own `_schema.yaml`, `_generator.md`, `templates/`, 
 
 ### 3. What is a nucleus?
 
-A nucleus is one of 7 business domains (N01-N07) where real artifacts live. Each
-nucleus contains instances organized by pillar. Example: `N02_marketing/P03_prompt/`
-holds marketing-specific prompts.
+A nucleus is one of 8 domains (N00-N07) where real artifacts live. N00 (Genesis) is
+the archetype nucleus -- it holds the builder definitions, pillar schemas, and shared
+ISOs that all other nuclei inherit from. N01-N07 are business nuclei where domain
+instances live. Example: `N02_marketing/P03_prompt/` holds marketing-specific prompts.
 
-### 4. How do I add a custom type?
+### 4. How do I add a custom kind?
 
-Custom types go in the `_custom/` directory within a pillar. The 78 core types are
-fixed and cannot be modified without architecture review. To add a custom type:
+Custom kinds go in the `_custom/` directory within a pillar. The 123 core kinds are
+fixed and cannot be modified without architecture review. To add a custom kind:
 
 1. Create `P{NN}_{pillar}/_custom/{your_type}/`
 2. Add a `_schema.yaml` that inherits from the parent pillar schema
@@ -42,7 +43,7 @@ Three levels of validation:
 python _tools/cex_doctor.py
 
 # Builder ISO completeness
-python _tools/validate_builder.py archetypes/builders/{type}-builder/
+python _tools/validate_builder.py archetypes/builders/{kind}-builder/
 
 # Schema compliance for a specific file
 python _tools/validate_schema.py
@@ -117,4 +118,4 @@ constraints.
 
 ---
 
-*CEX FAQ v1.0*
+*CEX FAQ v2.0 -- Updated 2026-04-08*

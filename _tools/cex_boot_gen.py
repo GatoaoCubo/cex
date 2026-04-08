@@ -166,13 +166,16 @@ $Host.UI.RawUI.WindowTitle = "{meta["title"]} [{model}]"
 try {{
     $Host.UI.RawUI.BackgroundColor = "{bg}"
     $Host.UI.RawUI.ForegroundColor = "{fg}"
-    $bufSize = $Host.UI.RawUI.BufferSize
-    $bufSize.Width = 160; $bufSize.Height = 9999
-    $Host.UI.RawUI.BufferSize = $bufSize
-    $winSize = $Host.UI.RawUI.WindowSize
-    $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
-    $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
-    $Host.UI.RawUI.WindowSize = $winSize
+    if (-not $env:CEX_GRID) {{
+        # Solo mode: set buffer + window size. Grid mode: spawn_grid controls sizing.
+        $bufSize = $Host.UI.RawUI.BufferSize
+        $bufSize.Width = 160; $bufSize.Height = 9999
+        $Host.UI.RawUI.BufferSize = $bufSize
+        $winSize = $Host.UI.RawUI.WindowSize
+        $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
+        $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
+        $Host.UI.RawUI.WindowSize = $winSize
+    }}
     Clear-Host
 }} catch {{}}
 

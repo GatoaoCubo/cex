@@ -6,16 +6,21 @@ scope: full_system
 version: 1.0.0
 created: 2026-03-24
 author: builder_agent
-quality: 9.0
+quality: 9.1
 tags:
 - component-map
 - architecture
 - dependencies
+updated: '2026-04-07'
+domain: architecture
+title: Component Map Codexa Core
+density_score: 0.92
+tldr: Defines component map for component map codexa core, with validation gates and integration points.
 components: '| Component | Path | Depends On | Used By |
 
   |-----------|------|-----------|---------|
 
-  | orchestrator orchestrator | boot/stella.cmd | pi runtime, rules | USER |
+  | orchestrator orchestrator | boot/stella.cmd | Claude Code runtime, rules | USER |
 
   | Agent_group boots | boot/*.cmd | claude CLI, MCP configs | orchestrator |
 
@@ -41,3 +46,9 @@ components: '| Component | Path | Depends On | Used By |
 data_flow: "USER -> orchestrator -> handoffs/ -> spawn -> AGENT_GROUP -> signals/ -> orchestrator\n                      \
   \                     |\n                                    brain_query (MCP)\n                                       \
   \    |\n                                    Pool + Agents + Skills"
+pipeline_integration:
+- Created via 8F pipeline from F1-Focus through F8-Furnish
+- Scored by cex_score across three structural layers
+- Compiled by cex_compile for structural validation
+- Retrieved by cex_retriever for context injection
+- Evolved by cex_evolve when quality regresses below target

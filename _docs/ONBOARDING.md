@@ -37,14 +37,18 @@ cd cex
 ### Bootstrap a new project
 
 ```bash
-python _tools/bootstrap.py --name MyProject --lps P01,P02,P03 --with-examples
+# Interactive bootstrap via Claude Code CLI
+python _tools/cex_bootstrap.py
+
+# Or via the boot script (auto-detects first run)
+boot/cex.cmd
 ```
 
-This creates `MyProject/` with schemas, generators, templates, and examples for
-the selected pillars. For all 12 pillars:
+This configures CEX for your brand: asks ~6 questions, writes `brand_config.yaml`,
+and propagates brand context to all nuclei. For full brand discovery:
 
 ```bash
-python _tools/bootstrap.py --name MyProject
+boot/n06.cmd
 ```
 
 ### Validate the structure
@@ -72,7 +76,7 @@ python _tools/cex_compile.py --all
 
 ## 3. Architecture
 
-CEX has 5 layers, 12 pillars, and 7 business nuclei.
+CEX has 5 layers, 12 pillars, and 8 nuclei (N00 Genesis + 7 business nuclei).
 
 ### The 5 Layers
 
@@ -105,17 +109,18 @@ L0 DNA         archetypes/builders/ (13 ISO files per builder type)
 | P11 | Feedback      | Quality gates, guardrails, optimizers            |
 | P12 | Orchestration | Workflows, DAGs, signals, handoffs               |
 
-### The 7 Nuclei (Business Domains)
+### The 8 Nuclei
 
-| ID  | Domain         | Primary Pillars |
-|-----|----------------|-----------------|
-| N01 | Research       | P01, P07        |
-| N02 | Marketing      | P03, P05        |
-| N03 | Engineering    | P02, P04, P06   |
-| N04 | Knowledge Mgmt | P01, P10        |
-| N05 | Operations     | P04, P12        |
-| N06 | Commercial     | P05, P09        |
-| N07 | Administration | P08, P11, P12   |
+| ID  | Domain         | Primary Pillars | Role |
+|-----|----------------|-----------------|------|
+| N00 | Genesis        | All (P01-P12)   | Archetype nucleus: builder definitions, pillar schemas, shared ISOs |
+| N01 | Research       | P01, P07        | Intelligence, market analysis, competitor research |
+| N02 | Marketing      | P03, P05        | Copywriting, campaigns, brand voice |
+| N03 | Engineering    | P02, P04, P06   | Artifact construction, builders, templates |
+| N04 | Knowledge Mgmt | P01, P10        | RAG, indexing, knowledge cards, taxonomy |
+| N05 | Operations     | P04, P12        | Code, testing, CI/CD, deployment |
+| N06 | Commercial     | P05, P09        | Pricing, courses, sales funnels |
+| N07 | Administration | P08, P11, P12   | Orchestrator -- dispatches, never builds |
 
 ### How They Fit Together
 
@@ -204,7 +209,7 @@ Your artifact must score >= 7.0 to be accepted:
 | 7.0+  | Learning | Experimental |
 | < 7.0 | Rejected | Redo         |
 
-Density must be >= 0.8. No prose blocks longer than 3 lines. Bullets max 80 chars.
+Density must be >= 0.85. No prose blocks longer than 3 lines. Bullets max 80 chars.
 
 ---
 
@@ -253,4 +258,4 @@ are Python scripts in `_tools/` — run them from your terminal of choice.
 
 ---
 
-*CEX Onboarding v1.0*
+*CEX Onboarding v2.0 -- Updated 2026-04-08*

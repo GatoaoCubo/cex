@@ -43,7 +43,7 @@ This is fundamentally different from in-process orchestration frameworks. Each n
 ### How N07 Dispatches a Nucleus
 
 ```
-N07 (pi CLI) ──> dispatch.sh solo n03 "task"
+N07 (Claude Code CLI) ──> dispatch.sh solo n03 "task"
                     │
                     ├── Write handoff: .cex/runtime/handoffs/n03_task.md
                     ├── Kill any existing N03 (kill-before-spawn)

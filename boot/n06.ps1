@@ -8,13 +8,15 @@ $Host.UI.RawUI.WindowTitle = "CEX-N06-COMMERCIAL [claude-opus-4-6]"
 try {
     $Host.UI.RawUI.BackgroundColor = "DarkYellow"
     $Host.UI.RawUI.ForegroundColor = "Black"
-    $bufSize = $Host.UI.RawUI.BufferSize
-    $bufSize.Width = 160; $bufSize.Height = 9999
-    $Host.UI.RawUI.BufferSize = $bufSize
-    $winSize = $Host.UI.RawUI.WindowSize
-    $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
-    $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
-    $Host.UI.RawUI.WindowSize = $winSize
+    if (-not $env:CEX_GRID) {
+        $bufSize = $Host.UI.RawUI.BufferSize
+        $bufSize.Width = 160; $bufSize.Height = 9999
+        $Host.UI.RawUI.BufferSize = $bufSize
+        $winSize = $Host.UI.RawUI.WindowSize
+        $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
+        $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
+        $Host.UI.RawUI.WindowSize = $winSize
+    }
     Clear-Host
 } catch {}
 

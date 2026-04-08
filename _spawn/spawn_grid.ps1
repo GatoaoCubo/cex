@@ -55,17 +55,10 @@ if ($handoffs.Count -eq 0) {
 if ($mode -eq "auto") {
     $mode = if ($handoffs.Count -gt $maxSlots) { "continuous" } else { "static" }
 }
-# Adaptive grid layout based on nucleus count
+# Fixed 3x2 grid layout (3 cols, 2 rows) -- consistent positioning for all dispatches
+# Nuclei always occupy their canonical cell: n01=0, n02=1, n03=2, n04=3, n05=4, n06=5
 $n = $handoffs.Count
-if ($n -le 1) {
-    $gCols = 1; $gRows = 1
-} elseif ($n -le 2) {
-    $gCols = 2; $gRows = 1
-} elseif ($n -le 4) {
-    $gCols = 2; $gRows = 2
-} else {
-    $gCols = 3; $gRows = 2
-}
+$gCols = 3; $gRows = 2
 $gW = [math]::Floor($scr.Width / $gCols)
 $gH = [math]::Floor($scr.Height / $gRows)
 
@@ -124,6 +117,11 @@ function Launch-Nucleus($handoff) {
     $nucleusHandoff = "$handoffDir\${nucleus}_task.md"
     Copy-Item $handoff.FullName -Destination $nucleusHandoff -Force
 
+    # Set env var so boot scripts skip their own WindowSize override
+    $env:CEX_GRID = "1"
+    $env:CEX_GRID_W = "$gW"
+    $env:CEX_GRID_H = "$gH"
+
     # ALWAYS boot interactive -- task comes from handoff, never CLI args (avoids nested-quote hell)
     if ($bootType -eq "ps1") {
         $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bootScript`"" -WorkingDirectory $root -PassThru
@@ -156,11 +154,32 @@ function Launch-Nucleus($handoff) {
 # Static mode: launch all at once
 if ($mode -eq "static") {
     $launched = 0
+    $launchedProcs = @{}
     foreach ($h in $handoffs) {
         if ($launched -ge $maxSlots) { break }
-        Launch-Nucleus $h | Out-Null
+        $nucleus = Get-NucleusFromHandoff $h.Name
+        $proc = Launch-Nucleus $h
+        if ($proc) { $launchedProcs[$nucleus] = $proc }
         $launched++
         Start-Sleep -Seconds 4
+    }
+    # Re-enforce grid positions after all windows have settled
+    # Boot scripts may resize windows; this second pass corrects them
+    Write-Output "[GRID] Re-enforcing window positions..."
+    Start-Sleep -Seconds 6
+    foreach ($kv in $launchedProcs.GetEnumerator()) {
+        $nucleus = $kv.Key
+        $proc = $kv.Value
+        $pos = $gridPos[$nucleus]
+        if (-not $pos) { continue }
+        try {
+            $proc.Refresh()
+            $hwnd = $proc.MainWindowHandle
+            if ($hwnd -ne [IntPtr]::Zero) {
+                [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
+                Write-Output "  [$($nucleus.ToUpper())] repositioned"
+            }
+        } catch {}
     }
     Write-Output "[GRID] Static: $launched/$($handoffs.Count) launched"
     exit 0

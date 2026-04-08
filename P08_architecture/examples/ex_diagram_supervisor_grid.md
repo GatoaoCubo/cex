@@ -27,7 +27,7 @@ orchestrator orchestrates up to 6 parallel agent_groups via PowerShell spawn scr
                     USER INPUT
                         |
                     [orchestrator]
-                   (pi runtime)
+                   (Claude Code runtime)
                    /    |    \
           [HANDOFF] [HANDOFF] [HANDOFF]
               |         |         |

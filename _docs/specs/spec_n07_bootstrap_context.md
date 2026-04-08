@@ -65,11 +65,11 @@ When a nucleus starts, it should ALREADY know its capabilities:
 
 | What loads | How | Status |
 |-----------|-----|--------|
-| CLAUDE.md | pi reads automatically on startup | WIRED |
+| CLAUDE.md | Claude Code reads automatically on startup | WIRED |
 | agent_card_n0X.md | --append-system-prompt in boot .cmd | WIRED (Apr 7) |
-| .claude/rules/n0X*.md | pi reads automatically | WIRED |
+| .claude/rules/n0X*.md | Claude Code reads automatically | WIRED |
 | Sin identity | --append-system-prompt in boot .cmd | WIRED |
-| Pi skills (/build, /mission, /status) | cex-pi-package installed | WIRED |
+| Slash commands (/build, /mission, /status) | .claude/commands/ (native) | WIRED |
 
 ### Phase 2: Task (orchestrator assembles)
 
@@ -233,11 +233,11 @@ During task execution, the 8F pipeline enriches further:
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
-| N07 runtime | pi (this process) | Orchestration, dispatch, monitoring |
-| N01-N06 runtime | pi (spawned via CMD) | Nucleus execution |
-| Themes | cex-pi-package (7 themes) | Visual identity per nucleus |
-| Skills | cex-pi-package (/build, /mission, /status) | CEX commands in pi |
-| Extension | cex-nucleus-ui.ts | Custom footer with identity + context bar |
+| N07 runtime | Claude Code (this process) | Orchestration, dispatch, monitoring |
+| N01-N06 runtime | Claude Code (spawned via CMD) | Nucleus execution |
+| Slash commands | .claude/commands/ (native) | /build, /mission, /status, /grid |
+| Sub-agents | .claude/agents/ (native) | 125 builder sub-agents |
+| Rules | .claude/rules/ (auto-loaded) | 8F, nucleus-specific, dispatch |
 | Process management | _spawn/*.ps1 | Spawn, monitor, kill, grid layout |
 | Quality | _tools/cex_doctor.py + cex_flywheel_audit.py | Health checks |
 | Evolution | _tools/cex_evolve.py + boot/overnight_h1.cmd | Autonomous improvement |

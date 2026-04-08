@@ -79,8 +79,8 @@ purpose: Single source of truth for CEX progress and next steps
 | File locking | _tools/cex_lock.py | ✅ Built |
 | Overnight infinite loop | boot/overnight_infinite.cmd | ✅ Built |
 | Shared-file proposal rule | .claude/rules/shared-file-proposal.md | ✅ Built |
-| 6 sub-agent definitions | .pi/agents/*.md | ✅ Built |
-| Subagent extension | .pi/extensions/subagent/ | ✅ Installed |
+| 125 sub-agent definitions | .claude/agents/*.md | ✅ Built |
+| Agent tool (native) | Claude Code built-in sub-agent spawning | ✅ Native |
 | Task queue spec | N04_knowledge/architecture/task_queue_spec.md | ✅ Spec written |
 | Infinite bootstrap spec | _docs/specs/spec_infinite_bootstrap_loop.md | ✅ Full spec |
 | Multi-provider strategy | In spec above | ✅ Documented |
@@ -170,10 +170,7 @@ N01 has MCP server for this (`notebooklm-mcp`).
 
 ### L1: CEX as npm package
 
-Release CEX as a distributable pi package. Users install via:
-```bash
-npm install @cex/brain
-```
+Release CEX as a distributable package. Users clone or download, then run `/init`.
 Gets: all archetypes, schemas, KCs, tools, rules. No brand (blank brain).
 
 Blocker: `cex_release_check.py` must pass all 28 checks.
@@ -181,7 +178,7 @@ Blocker: `cex_release_check.py` must pass all 28 checks.
 ### L2: Fine-tuned CEX model
 
 Train on 1,630 ISOs + 123 KCs + 377 templates/examples.
-Deploy as custom provider in pi.
+Deploy as custom model via API.
 Target: 10x faster artifact generation at 90% cost reduction.
 
 ### L3: Multi-tenant CEX

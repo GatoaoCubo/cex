@@ -40,10 +40,10 @@ Gate: F3 --dry-run works without LLM. 20+ templates have {{mustache}} slots.
 
 | Nucleus | Task | Depth amplifiers | Deliverables |
 |---------|------|-----------------|-------------|
-| N01 | UPDATE: ARCHITECTURE.md, HIERARCHY.md, QUICKSTART.md | Read current state: CLAUDE.md + spec_context_assembly.md + nucleus_models.yaml + cex_doctor output. Rewrite each doc with current counts, pi runtime, context assembly architecture. All structured data (tables > prose). ARCHIVE ROADMAP_CONSOLIDATED.md to _docs/_archive/ | 3 updated docs + 1 archived |
+| N01 | UPDATE: ARCHITECTURE.md, HIERARCHY.md, QUICKSTART.md | Read current state: CLAUDE.md + spec_context_assembly.md + nucleus_models.yaml + cex_doctor output. Rewrite each doc with current counts, Claude Code runtime, context assembly architecture. All structured data (tables > prose). ARCHIVE ROADMAP_CONSOLIDATED.md to _docs/_archive/ | 3 updated docs + 1 archived |
 | N03 | UPDATE: NAMING_CONVENTION.md, ONBOARDING.md, PATTERN_NUCLEUS_BOOT.md | Read kinds_meta.json (naming patterns), boot/*.cmd (new pi runtime), spec_context_assembly.md (two-phase loading). Rewrite with current reality. Check PLAYBOOK.md and LLM_INSTRUCTIONS.md for staleness. | 3+ updated docs |
 
-Gate: All docs reference correct counts (121 builders, 117 kinds, 58 tools, pi runtime). Zero references to "claude" as CLI in docs.
+Gate: All docs reference correct counts (121 builders, 117 kinds, 58 tools, Claude Code runtime). All docs use "claude" as the CLI name.
 
 ## Wave 3: Overnight prose sweep
 
