@@ -1,151 +1,186 @@
-# Naming Convention — CEX ISO Packages
+# Naming Convention -- CEX Artifacts & Builders
 
-> Canonical rules for all agent folders, ISO files, prompts, and data files.
-> Source of truth: this file. Applies to all files under `packages/` and `decks/`.
+> Canonical rules for all artifact files, builder ISOs, nucleus directories, and tool scripts.
+> Source of truth: this file + `.cex/kinds_meta.json` (123 kinds).
 
 ---
 
-## Agent Folders
+## 1. Builder Directories
 
 | Rule | Detail |
 |------|--------|
-| Case | `snake_case` |
-| Suffix | No `_agent` suffix (use `anuncio`, not `anuncio_agent`) |
-| Max length | 30 characters |
-| Separator | Underscore only. No hyphens in new packages |
-| Examples | `anuncio`, `knowledge_distiller`, `gateway`, `web_scraper` |
+| Location | `archetypes/builders/{kind}-builder/` |
+| Case | `kebab-case` (hyphens between words) |
+| Files inside | `bld_{iso}_{kind}.md` (13 per builder) |
+| Examples | `agent-builder/`, `knowledge-card-builder/`, `mcp-server-builder/` |
 
-**Exception**: Legacy agents with hyphens (`amazon-ads-agent`, `tool-shed`) are grandfathered.
-Do not rename during migration — only normalize on new package creation.
+Shared files live in `archetypes/builders/_shared/`.
 
 ---
 
-## ISO File Names (Canonical)
+## 2. Builder ISO Files (13 per kind)
 
-The canonical ISO Package spec uses human-readable filenames. Legacy agents used
-`ISO_{AGENT_GROUP}_{NNN}_{TYPE}.md` — this table maps old to new.
-
-### Conversion Table: OLD → NEW
-
-| OLD (iso_vectorstore/) | NEW (packages/) | pillar | Required |
-|------------------------|-----------------|-----|----------|
-| `ISO_*_MANIFEST.md` | `manifest.yaml` | P02 | YES |
-| `ISO_*_SYSTEM_INSTRUCTION.md` | `system_instruction.md` | P03 | YES |
-| `ISO_*_INSTRUCTIONS.md` | `instructions.md` | P03 | YES |
-| `ISO_*_ARCHITECTURE.md` | `architecture.md` | P08 | Recommended |
-| `ISO_*_OUTPUT_TEMPLATE.md` | `output_template.md` | P05 | Recommended |
-| `ISO_*_EXAMPLES.md` | `examples.md` | P07 | Recommended |
-| `ISO_*_ERROR_HANDLING.md` | `error_handling.md` | P11 | Recommended |
-| `ISO_*_QUICK_START.md` | `quick_start.md` | P01 | Optional |
-| `ISO_*_INPUT_SCHEMA.md` | `input_schema.yaml` | P06 | Optional |
-| `ISO_*_UPLOAD_KIT.md` | `upload_kit.md` | P04 | Optional |
-| `ISO_*_UPLOAD_KIT_WHITELABEL.md` | `upload_kit_whitelabel.md` | P04 | Whitelabel |
-| `ISO_*_SYSTEM_INSTRUCTION_WHITELABEL.md` | `system_instruction_whitelabel.md` | P03 | Whitelabel |
-| `ISO_*_README.md` | `README.md` | — | Package root |
-
-### File Type Rules
-
-- `manifest.yaml` — YAML only (not .md). Machine-readable identity card.
-- `input_schema.yaml` — YAML only. JSON contract for inputs.
-- All other files — Markdown (CommonMark), UTF-8, no hardcoded paths.
+| # | File Pattern | Pillar | Content |
+|---|-------------|--------|---------|
+| 1 | `bld_manifest_{kind}.md` | P02 | Identity, metadata |
+| 2 | `bld_system_prompt_{kind}.md` | P03 | Persona, voice |
+| 3 | `bld_knowledge_card_{kind}.md` | P01 | Domain knowledge |
+| 4 | `bld_instruction_{kind}.md` | P03 | Build pipeline |
+| 5 | `bld_tools_{kind}.md` | P04 | Available tools |
+| 6 | `bld_output_template_{kind}.md` | P05 | Template with {{vars}} |
+| 7 | `bld_schema_{kind}.md` | P06 | Structural schema |
+| 8 | `bld_examples_{kind}.md` | P07 | Golden + anti-patterns |
+| 9 | `bld_architecture_{kind}.md` | P08 | Boundary definition |
+| 10 | `bld_config_{kind}.md` | P09 | Naming, paths, limits |
+| 11 | `bld_memory_{kind}.md` | P10 | Historical patterns |
+| 12 | `bld_quality_gate_{kind}.md` | P11 | HARD/SOFT gates |
+| 13 | `bld_collaboration_{kind}.md` | P12 | Crew coordination |
 
 ---
 
-## Sub-Agent Prompts
-
-Agents that spawn sub-agents store their prompt templates under `prompts/`:
-
-```
-packages/anuncio/
-  prompts/
-    headline_writer.md      # Sub-agent: writes ad headlines
-    copy_refiner.md         # Sub-agent: refines ad copy
-    audience_analyzer.md    # Sub-agent: analyzes target audience
-```
+## 3. Sub-Agent Definitions
 
 | Rule | Detail |
 |------|--------|
-| Location | `packages/{agent}/prompts/{name}.md` |
-| Case | `snake_case` |
-| Format | Markdown, must be self-contained (no external imports) |
-| Naming | Descriptive verb_noun: `headline_writer`, `copy_refiner` |
-| Max size | 2048 tokens per prompt file |
+| Location | `.claude/agents/{kind}-builder.md` |
+| Case | `kebab-case` (matches builder directory) |
+| Count | 125 (123 kinds + 2 shared/meta) |
+| Examples | `agent-builder.md`, `knowledge-card-builder.md` |
 
 ---
 
-## Domain Data Files
+## 4. Artifact Instance Files
 
-Static data, configurations, and lookup tables live under `data/`:
+Artifacts produced by builders follow kind-specific naming from `bld_config_{kind}.md`.
+
+| Component | Rule | Example |
+|-----------|------|---------|
+| Prefix | Kind abbreviation or none | `kc_`, `wf_`, `qg_` |
+| Name | `snake_case`, descriptive | `react_server_components` |
+| Extension | `.md` (source) | `kc_react_server_components.md` |
+| Compiled | `.yaml` or `.json` (compiled/) | `kc_react_server_components.yaml` |
+| Max length | 60 characters (full filename) | -- |
+
+### Location in Nucleus
 
 ```
-packages/pricing/
-  data/
-    margin_tiers.yaml       # Business rule: margin tiers by category
-    platforms.yaml          # Supported platform list
-    currency_map.yaml       # Currency code mappings
+N{XX}_{domain}/{subdir}/{artifact_file}.md
 ```
+
+| Subdir | Pillars | Example Kinds |
+|--------|---------|--------------|
+| agents/ | P02 | agent, model_card, boot_config |
+| architecture/ | P08 | agent_card, pattern, diagram |
+| config/ | P09 | env_config, path_config |
+| feedback/ | P11 | quality_gate, bugloop |
+| knowledge/ | P01 | knowledge_card, context_doc |
+| memory/ | P10 | learning_record, runtime_state |
+| orchestration/ | P12 | workflow, dispatch_rule, signal |
+| output/ | P05 | response_format, formatter |
+| prompts/ | P03 | system_prompt, instruction |
+| quality/ | P07 | scoring_rubric, benchmark |
+| schemas/ | P06 | input_schema, type_def |
+| tools/ | P04 | cli_tool, mcp_server |
+| compiled/ | -- | Compiled .yaml output |
+
+---
+
+## 5. Knowledge Cards (P01)
 
 | Rule | Detail |
 |------|--------|
-| Location | `packages/{agent}/data/{name}.yaml` |
+| Location | `P01_knowledge/library/kind/kc_{kind}.md` (kind KCs) |
+| Location | `P01_knowledge/library/domain/kc_{topic}.md` (domain KCs) |
+| Location | `N{XX}/knowledge/kc_{topic}.md` (nucleus-local) |
+| Prefix | `kc_` (always) |
 | Case | `snake_case` |
-| Format | YAML only (not JSON, not .md) |
-| Naming | Descriptive noun: `margin_tiers`, `platforms`, `currency_map` |
-| No secrets | Never store API keys, tokens, passwords in data/ |
 
 ---
 
-## Full Package Structure
+## 6. Pillar Directories
 
+| Rule | Detail |
+|------|--------|
+| Pattern | `P{NN}_{name}/` |
+| Case | `snake_case` for name |
+| Examples | `P01_knowledge/`, `P04_tools/`, `P12_orchestration/` |
+| Contents | `_schema.yaml`, `templates/`, `examples/`, `compiled/` |
+
+---
+
+## 7. Nucleus Directories
+
+| Rule | Detail |
+|------|--------|
+| Pattern | `N{XX}_{domain}/` |
+| Case | `snake_case` for domain |
+| Subdirs | 12 (mirrors pillars) + compiled/ |
+| Examples | `N03_engineering/`, `N07_admin/` |
+
+---
+
+## 8. Tool Scripts
+
+| Rule | Detail |
+|------|--------|
+| Location | `_tools/` |
+| Pattern | `cex_{function}.py` (core tools) |
+| Pattern | `{function}.py` (support scripts) |
+| Case | `snake_case` |
+| Examples | `cex_doctor.py`, `cex_compile.py`, `signal_writer.py`, `brand_inject.py` |
+
+---
+
+## 9. Boot Scripts
+
+| Rule | Detail |
+|------|--------|
+| Location | `boot/` |
+| Pattern | `{nucleus}.cmd` or `cex.cmd` (N07) |
+| CLI | `claude` (all nuclei use Claude Code) |
+| Examples | `boot/cex.cmd`, `boot/n03.cmd`, `boot/n06.cmd` |
+
+---
+
+## 10. Runtime Files
+
+| Directory | Pattern | Purpose |
+|-----------|---------|---------|
+| `.cex/runtime/handoffs/` | `{MISSION}_{nucleus}.md` | Dispatch handoffs |
+| `.cex/runtime/signals/` | `signal_{nucleus}_{mission}_{timestamp}.json` | Completion signals |
+| `.cex/runtime/pids/` | `spawn_pids.txt` | Process tracking |
+| `.cex/runtime/decisions/` | `decision_manifest.yaml` | GDP decisions |
+| `.cex/runtime/proposals/` | `{nucleus}_{timestamp}_{target}.proposal.md` | Concurrent edit proposals |
+
+---
+
+## 11. Frontmatter (All Artifacts)
+
+Every `.md` artifact MUST have YAML frontmatter:
+
+```yaml
+---
+id: unique_identifier
+kind: knowledge_card       # from kinds_meta.json
+title: Human-Readable Title
+version: 1.0.0
+quality: null              # NEVER self-score
+tags: [tag1, tag2]
+---
 ```
-packages/{agent_name}/
-  manifest.yaml                    # REQUIRED: identity + capabilities
-  system_instruction.md            # REQUIRED: system prompt
-  instructions.md                  # REQUIRED: usage guide
-  architecture.md                  # Recommended: flow diagram
-  output_template.md               # Recommended: output format
-  examples.md                      # Recommended: input/output pairs
-  error_handling.md                # Recommended: error scenarios
-  quick_start.md                   # Optional: 5-min setup
-  input_schema.yaml                # Optional: input contract
-  upload_kit.md                    # Optional: platform guide
-  upload_kit_whitelabel.md         # Whitelabel tier
-  system_instruction_whitelabel.md # Whitelabel tier
-  prompts/                         # Sub-agent prompts (if any)
-    {verb_noun}.md
-  data/                            # Domain data (if any)
-    {noun}.yaml
-```
 
 ---
 
-## Validation Rules
+## 12. Validation Rules
 
-1. `manifest.yaml` must be valid YAML with fields: `id`, `version`, `type`, `title`, `domain`
-2. `id` in manifest must equal the folder name (stem match)
-3. `system_instruction.md` must be < 4096 tokens
-4. No hardcoded paths in any file (`C:\`, `/home/`, `/Users/`)
-5. File names: lowercase, snake_case, ASCII only
-6. `prompts/` files: prefix with action verb (`write_`, `analyze_`, `refine_`)
-7. `data/` files: plural nouns preferred (`tiers`, `platforms`, `rules`)
-
----
-
-## Migration Path
-
-Legacy `records/agents/{name}/iso_vectorstore/ISO_*_*.md`
-→ New `packages/{name}/{canonical_name}`
-
-Use `_tools/rename_iso.py` for automated conversion:
-```bash
-python _tools/rename_iso.py \
-  --source records/agents/anuncio/iso_vectorstore/ \
-  --output packages/anuncio/ \
-  --dry-run
-```
-
-Remove `--dry-run` to execute. Tool validates portability before writing.
+1. All file names: lowercase, `snake_case`, ASCII only
+2. Builder ISOs: exactly 13 files per `{kind}-builder/` directory
+3. Frontmatter: required on ALL artifact instances
+4. `quality: null` in frontmatter (never self-score)
+5. No hardcoded absolute paths in any artifact
+6. Executable code (.py, .ps1, .cmd): ASCII-only (see `ascii-code-rule.md`)
+7. Max artifact size: per `bld_config_{kind}.md` specification
 
 ---
 
-*Naming Convention v1.0 | CEX Framework | 2026-03-23*
+*Naming Convention v2.0 -- Updated for CEX v4.0. 123 kinds, Claude Code native. 2026-04-08.*
