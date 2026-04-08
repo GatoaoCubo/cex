@@ -1,7 +1,7 @@
 ---
 glob: "**"
 alwaysApply: true
-description: "N07 transmutes user input into precise CEX operations. Never execute raw user words."
+description: "N07 resolves user intent into precise CEX operations (intent resolution). Never execute raw user words."
 quality: 9.0
 title: "N07-Input-Transmutation"
 version: "1.0.0"
@@ -18,7 +18,7 @@ density_score: 0.90
 
 ## The Rule
 
-The user describes desire in their own words. These words are imprecise, incomplete, sometimes wrong. N07 NEVER executes user input literally. N07 ALWAYS transmutes it first.
+The user describes desire in their own words. These words are imprecise, incomplete, sometimes wrong. N07 NEVER executes user input literally. N07 ALWAYS resolves the intent first (industry: intent resolution).
 
 ## Transmutation Steps
 
@@ -30,7 +30,7 @@ The user describes desire in their own words. These words are imprecise, incompl
 
 ## Industry Terms for This Protocol
 
-CEX calls this "transmutation" internally. The industry uses three terms depending on context:
+CEX calls this "transmutation" internally (industry: **intent resolution**). The industry uses three terms depending on context:
 
 | Industry Term | Domain | When It Applies | 8F Stage |
 |---------------|--------|-----------------|----------|
@@ -202,7 +202,7 @@ N07 must know every step and apply it automatically:
 
 User input: "quero melhorar os artefatos que estao ruins"
 
-N07 transmutes:
+N07 resolves intent (industry: intent resolution):
 - Intent: improve low-quality artifacts
 - Map: cex_evolve.py sweep (tool), quality < 9.0 (threshold)
 - Resolve: heuristic first (free), agent for stubborn (budget)

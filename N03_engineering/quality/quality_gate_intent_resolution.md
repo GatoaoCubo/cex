@@ -17,7 +17,7 @@ density_score: 0.93
 
 ## Purpose
 
-Validates that the intent resolution pipeline (transmutation rule + cex_8f_motor.py + cex_query.py)
+Validates that the intent resolution pipeline (intent resolution rule + cex_8f_motor.py + cex_query.py)
 correctly maps natural language user input to the expected kind, pillar, and nucleus.
 
 ## Gate Criteria
@@ -114,4 +114,4 @@ ELSE:
 - `N03_engineering/knowledge/kc_intent_resolution_map.md` -- exhaustive 123-kind mapping
 - `_tools/cex_8f_motor.py` -- OBJECT_TO_KINDS and parse_intent()
 - `_tools/cex_query.py` -- TF-IDF fallback
-- `.claude/rules/n07-input-transmutation.md` -- transmutation protocol
+- `.claude/rules/n07-input-transmutation.md` -- intent resolution protocol

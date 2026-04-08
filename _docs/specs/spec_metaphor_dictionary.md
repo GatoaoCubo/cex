@@ -105,6 +105,19 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 | mix / blend | combine multiple sources | **fusion** / ensemble (ML) | multi-source context assembly in F3 |
 | stamp / seal | validate and approve | **quality gate** (CI/CD) | 8F F7 GOVERN + `cex_score.py` |
 
+## Operational Metaphors
+
+| User says | System means | Industry term | CEX implementation | Teach? |
+|-----------|-------------|---------------|-------------------|--------|
+| teach it | inject examples | **in-context learning** (few-shot prompting) | few_shot_example kind, P03 prompt injection | YES -- "Few-shot, not fine-tuning" |
+| remember this | persist to memory | **entity memory** / knowledge persistence | entity_memory kind, P10 + cex_memory_update.py | YES -- "Entity memory, not conversation history" |
+| forget this | prune memory | **memory eviction** (cache management) | cex_memory_update.py --prune | YES -- "Eviction, like cache invalidation" |
+| connect to X | integrate API/MCP | **tool registration** / MCP server config | mcp_server kind, P04 + api_client kind | YES -- "MCP tool registration" |
+| speed it up | optimize latency | **inference optimization** (batch/cache/quantize) | prompt_cache kind, P10 + context_window_config | YES -- "Inference optimization, not just fewer tokens" |
+| make it cheaper | reduce cost | **token budget optimization** | cex_token_budget.py + context_window_config | YES -- "Token budget, the unit of LLM cost" |
+| make it smarter | improve quality | **prompt optimization** / model upgrade | cex_prompt_optimizer.py + cex_evolve.py | YES -- "Prompt optimization first, model upgrade second" |
+| test it | run evaluation | **evaluation** (unit/e2e/smoke) | unit_eval, e2e_eval, smoke_eval, benchmark kinds | YES if ambiguous -- "Which eval type?" |
+
 ## Rules
 
 1. **Artifacts, code, docs**: use "Industry term" column. ALWAYS.
@@ -112,3 +125,4 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 3. **This dictionary**: the ONLY place both columns coexist.
 4. **Llama-7B test**: if the term needs this dictionary to be understood, it's wrong for artifacts.
 5. **Rename cascade**: changing a term requires CRUD across all files that reference it. See `N07_admin/memory/terminology_standardization.md` for the full map.
+6. **Didactic protocol**: check `N07_admin/memory/taught_terms_registry.md` before teaching. Teach once per term, never repeat. See N02's didactic protocol spec for format guidelines.

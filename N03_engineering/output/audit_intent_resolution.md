@@ -25,13 +25,13 @@ density_score: 0.92
 | Stale kind references in motor | 2 | [FAIL] |
 | PT verb coverage | 7 actions (12 conjugations) | [WARN] 54% of common actions |
 | EN verb coverage | 0 | [FAIL] |
-| Transmutation rule examples | 8 | [WARN] covers 6% of use cases |
+| Intent resolution rule examples | 8 | [WARN] covers 6% of use cases |
 | Metaphor dictionary entries | 64 | [OK] but no kind-level mapping |
 | TF-IDF fallback (cex_query.py) | Functional | [WARN] only searches bld_manifest |
 
 ## Artifact 1: n07-input-transmutation.md
 
-**Role in intent resolution:** Defines the 5-step transmutation protocol (capture > map > resolve > restate > execute). Contains the primary mapping table and 12-pillar mastery reference.
+**Role in intent resolution:** Defines the 5-step intent resolution protocol (capture > map > resolve > restate > execute). Contains the primary mapping table and 12-pillar mastery reference.
 
 **Strengths:**
 - Clear 5-step protocol
@@ -202,12 +202,12 @@ density_score: 0.92
 | 2 stale kind names | motor | P0 -- produces wrong builder |
 | No EN verb parsing | motor | P1 -- EN users get no verb match |
 | 7 missing PT verbs | motor | P1 -- common actions ignored |
-| 8 examples in transmutation rule | transmutation | P2 -- insufficient guidance |
+| 8 examples in intent resolution rule | intent resolution | P2 -- insufficient guidance |
 | No kind-level metaphor mapping | dictionary, authority | P2 -- concept translation only |
 | TF-IDF only on bld_manifest | query | P3 -- fallback misses kinds |
 
 ## Deliverables from This Audit
 
 1. **Intent Resolution Map** (kc_intent_resolution_map.md) -- maps all 123 kinds to natural language phrases
-2. **Enhanced Transmutation Rule** -- expanded with missing mappings and PT triggers
+2. **Enhanced Intent Resolution Rule** -- expanded with missing mappings and PT triggers
 3. **Intent Resolution Quality Gate** -- 20 test cases (10 EN, 10 PT)
