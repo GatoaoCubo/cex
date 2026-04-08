@@ -85,7 +85,9 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 
 | User says | System means | Industry term | CEX implementation |
 |-----------|-------------|---------------|-------------------|
-| translate / transmute | resolve intent | **intent resolution** (NLU, agent routing) | N07 transmutation -> 8F F1 CONSTRAIN |
+| translate / transmute (at F1) | resolve intent | **intent resolution** (NLU: Rasa, Dialogflow, Amazon Lex) | N07 transmutation -> 8F F1 CONSTRAIN |
+| translate / transmute (at F3) | rewrite query | **query rewriting** (Search/RAG: Google, ES, LlamaIndex) | cex_query.py + cex_retriever.py -> 8F F3 INJECT |
+| translate / transmute (at F6) | optimize prompt | **prompt optimization** (LLM: DSPy "prompt compilation") | cex_crew_runner.py -> 8F F6 PRODUCE |
 | understand me | parse intent | **intent classification** (NLU) | `cex_8f_motor.py` intent parser + `kinds_meta.json` |
 | fill in the blanks | complete parameters | **slot filling** (NLU, dialogue systems) | prompt_template {{vars}} + brand_inject.py |
 | figure out what I mean | disambiguate | **disambiguation** (NLU, search) | GDP clarifying questions + N07 restatement |
