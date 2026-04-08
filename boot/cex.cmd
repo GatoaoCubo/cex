@@ -8,4 +8,4 @@ set CEX_NUCLEUS=N07
 set CEX_ROOT=%~dp0..
 cd /d "%CEX_ROOT%"
 
-claude --model claude-opus-4-6 --append-system-prompt ".cex/config/context_self_select.md"
+claude --dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome --model claude-opus-4-6 --append-system-prompt ".cex/config/context_self_select.md"

@@ -19,7 +19,7 @@
 n07:
   cli: claude
   model: claude-opus-4-6
-  flags: ""
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: orchestration
   fallback:
