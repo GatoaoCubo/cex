@@ -29,10 +29,11 @@ Every kind has a KC file, but none are optimized for intent resolution. A user s
 | `when_to_use` | 122/123 | 1 | 99.2% | Situational trigger (1 sentence) |
 | `tldr` | 122/123 | 1 | 99.2% | Quick summary for retrieval ranking |
 | Cross-Framework Map | 110/123 | 13 | 89.4% | Provider vocabulary mapping |
-| `long_tails` | 0/123 | 123 | **0%** | Natural language query matching |
-| `aliases` | 0/123 | 123 | **0%** | Alternative names for kind |
-| `also_known_as` | 0/123 | 123 | **0%** | Cross-provider synonyms |
-| `user_says` | 0/123 | 123 | **0%** | Common user phrasings |
+| `long_tails` | 18/123 | 105 | **14.6%** | Natural language query matching |
+| `aliases` | 18/123 | 105 | **14.6%** | Alternative names for kind |
+| `also_known_as` | 0/123 | 123 | **0%** | Cross-provider synonyms (superseded by cross_provider) |
+| `user_says` | 18/123 | 105 | **14.6%** | Common user phrasings |
+| `cross_provider` | 18/123 | 105 | **14.6%** | Framework-specific equivalent mapping |
 
 ## Missing Fields Detail
 

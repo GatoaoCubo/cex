@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about agent artifacts"
 keywords: [agent, persona, capabilities, specialist, identity]
 feeds_kinds: [agent]
 density_score: null
+aliases: ["agent definition", "bot config", "assistant spec", "AI persona", "autonomous agent"]
+user_says: ["create an agent", "build a bot", "make an assistant", "criar agente", "I need an AI that does X", "set up an autonomous worker"]
+long_tails: ["I need an AI agent that can handle customer support", "set up a conversational bot for my product", "build an autonomous assistant that uses tools", "define a specialist persona with capabilities and routing"]
+cross_provider:
+  langchain: "AgentExecutor / create_react_agent"
+  llamaindex: "AgentRunner / FunctionCallingAgent"
+  crewai: "Agent(role, goal, backstory, tools)"
+  dspy: "dspy.ReAct / dspy.Module subclass"
+  openai: "Assistants API (assistant object)"
+  anthropic: "Claude with tool_use + system prompt"
+  haystack: "Agent (preview) / pipeline-as-agent"
 ---
 
 # Agent

@@ -19,6 +19,17 @@ density_score: 1.0
 linked_artifacts:
   primary: null
   related: []
+aliases: ["REST client", "API wrapper", "HTTP client", "service connector", "API integration"]
+user_says: ["connect to an API", "cliente de API", "integrate with a service", "call an external endpoint", "wrap this REST API"]
+long_tails: ["I need to call an external REST API from my agent", "integrate with a third-party service via HTTP", "build a typed wrapper around this API endpoint", "connect my agent to an external data source via API"]
+cross_provider:
+  langchain: "BaseTool wrapping requests / API SDK"
+  llamaindex: "LlamaHub tool spec / FunctionTool"
+  crewai: "BaseTool with API call in _run()"
+  dspy: "Python function in Module.forward()"
+  openai: "function tool with developer-side execution"
+  anthropic: "tool definition with developer-side execution"
+  haystack: "Custom @component making HTTP calls"
 ---
 
 # API Client

@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about runtime_state artifacts"
 keywords: [state, routing, persistence]
 feeds_kinds: [runtime_state]
 density_score: null
+aliases: ["persistent state", "agent state", "runtime variables", "accumulated state", "cross-session state"]
+user_says: ["save runtime state", "salvar estado do agente", "persist agent decisions", "keep track of routing", "store counters across sessions"]
+long_tails: ["I need to persist routing decisions and counters across agent sessions", "store accumulated state that survives between runs", "track the agent's task queue and progress across multiple sessions", "save mutable state like retry counts and routing choices persistently"]
+cross_provider:
+  langchain: "RunnableConfig metadata + custom persistence"
+  llamaindex: "AgentWorkflow state dict (ctx.data)"
+  crewai: "Flow state object (@start/@listen)"
+  dspy: "dspy.settings + module instance variables"
+  openai: "Thread metadata dict"
+  anthropic: "Custom YAML injected into system prompt"
+  haystack: "Pipeline metadata + component state"
 ---
 
 # Runtime State

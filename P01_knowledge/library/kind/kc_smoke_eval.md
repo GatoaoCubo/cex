@@ -19,6 +19,17 @@ density_score: 1.0
 linked_artifacts:
   primary: null
   related: []
+aliases: ["smoke test", "sanity check", "health check", "startup test", "deploy gate"]
+user_says: ["quick sanity check", "verificacao rapida", "is it alive", "run a smoke test", "check if it starts"]
+long_tails: ["I just deployed and need to verify the system is alive", "run a fast check to confirm the API responds before running full tests", "make sure the agent boots and returns something valid in under 30 seconds", "create a deploy gate that checks basic functionality"]
+cross_provider:
+  langchain: "chain.invoke('test') + non-null check"
+  llamaindex: "query_engine.query('test') + exists check"
+  crewai: "crew.kickoff({'input':'test'}) + output check"
+  dspy: "program('test') + output check"
+  openai: "chat.completions.create(minimal) + role check"
+  anthropic: "messages.create(minimal) + content check"
+  haystack: "pipeline.run({'query':'test'}) + key check"
 ---
 
 # Smoke Eval

@@ -19,6 +19,17 @@ density_score: 1.0
 linked_artifacts:
   primary: null
   related: []
+aliases: ["gold standard test", "reference test", "baseline case", "anchor test", "verified example"]
+user_says: ["create a golden test", "criar teste de referencia", "set the quality baseline", "make a verified test case", "anchor this as the gold standard"]
+long_tails: ["I need a human-verified reference case to detect quality regressions", "create a gold-standard test case at quality 9.5+ for calibration", "set up a regression anchor so I know when quality degrades", "build a verified input/output pair to calibrate my LLM judge"]
+cross_provider:
+  langchain: "LangSmith golden dataset entry"
+  llamaindex: "BaseNode with quality annotation"
+  crewai: "Reference task output (manually validated)"
+  dspy: "devset gold example (score=1.0)"
+  openai: "Eval ideal response ({input, ideal})"
+  anthropic: "Human-verified eval case"
+  haystack: "EvaluationExample (gold=True)"
 ---
 
 # Golden Test

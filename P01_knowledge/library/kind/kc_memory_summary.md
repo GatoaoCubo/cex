@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about memory_summary artifacts"
 keywords: [compression, summary, context-window]
 feeds_kinds: [memory_summary]
 density_score: null
+aliases: ["compressed memory", "session digest", "context summary", "memory compression", "conversation summary"]
+user_says: ["compress memory", "comprimir memoria", "summarize past sessions", "reduce context size", "make a memory digest"]
+long_tails: ["I need to compress past conversation history to fit the context window", "summarize what happened in previous sessions for the next session", "create a compact digest of prior sessions to bootstrap context cheaply", "reduce memory token usage by compressing old sessions into summaries"]
+cross_provider:
+  langchain: "ConversationSummaryMemory"
+  llamaindex: "ResponseSynthesizer (tree mode)"
+  crewai: "Memory LTM + LLM compression"
+  dspy: "ChainOfThought summarization module"
+  openai: "Thread summarization via gpt-4o"
+  anthropic: "System prompt injection of compressed prior"
+  haystack: "PromptBuilder + summarization pipeline"
 ---
 
 # Memory Summary

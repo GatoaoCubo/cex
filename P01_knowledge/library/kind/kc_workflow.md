@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about workflow artifacts"
 keywords: [execution, steps, orchestration]
 feeds_kinds: [workflow]
 density_score: null
+aliases: ["pipeline", "process flow", "agent workflow", "automation sequence", "orchestration flow"]
+user_says: ["create a workflow", "fluxo de trabalho", "chain agents together", "automate this process", "build a multi-step pipeline", "set up an automation"]
+long_tails: ["I need to chain multiple agents together in sequence", "set up an automated multi-step process with quality gates", "build a pipeline where agent A feeds into agent B", "orchestrate parallel tasks with dependencies and checkpoints"]
+cross_provider:
+  langchain: "RunnableSequence / LCEL pipeline"
+  llamaindex: "Workflow + AgentWorkflow"
+  crewai: "Crew(process=Process.sequential/hierarchical)"
+  dspy: "dspy.Module.forward() composition"
+  openai: "Assistants API with tool use loop"
+  anthropic: "Tool use agentic loop + system prompt"
+  haystack: "Pipeline (directed multigraph)"
 ---
 
 # Workflow

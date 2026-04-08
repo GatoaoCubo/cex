@@ -116,6 +116,63 @@ Quality depends on: density (>= 0.8), completeness of frontmatter, specificity
 (every sentence enables action without external docs), and adherence to schema
 constraints.
 
+### 11. Why does CEX rephrase what I said?
+
+You type "make me a landing page." CEX responds with "Dispatching landing-page-builder
+via 8F pipeline to P05_output." That's not CEX being pedantic -- that's **intent
+resolution** in action.
+
+Your 5 words carry about 5% of what the LLM actually needs. CEX fills the other 95%
+by mapping your words to its taxonomy: a specific kind (`landing_page`), a specific
+pillar (`P05`), a specific builder (13 components), your brand voice, 10+ knowledge
+sources, and a quality gate. The rephrased response is CEX showing you exactly what
+it understood -- so you can correct it before it builds.
+
+Think of it like a waiter repeating your order back. Not because they doubt you. Because
+getting it right the first time saves everyone time.
+
+If CEX ever maps your intent wrong, just say so. "No, I meant a pricing page, not a
+landing page." CEX re-resolves instantly. No penalty, no wasted work.
+
+### 12. Can I use Portuguese or English?
+
+Both. Simultaneously. In the same sentence if you want.
+
+CEX resolves **intent**, not syntax. "Cria uma landing page" and "create a landing page"
+trigger the exact same pipeline. "Pesquisar concorrentes" and "research competitors"
+dispatch the same intelligence nucleus. Even mixed: "quero um prompt template pro meu
+curso" works perfectly.
+
+The verb resolution table covers 14 Portuguese verbs and their English equivalents.
+The seed word table covers 80+ trigger phrases in each language. CEX doesn't translate
+your words -- it maps them to the same canonical action regardless of language.
+
+One note: artifact **content** will match whatever language you use. If you ask in
+Portuguese, you'll get Portuguese output. If you want English output from a Portuguese
+prompt, just add "in English" and CEX adjusts.
+
+### 13. What if CEX misunderstands me?
+
+Three things happen before that can cause damage:
+
+1. **Confidence scoring**: CEX internally scores how confident it is about the intent
+   resolution. High confidence (> 80%) = it executes. Low confidence = it asks a
+   clarifying question before proceeding. You'll see something like: "Did you mean
+   a knowledge card (documentation) or a context doc (onboarding guide)?"
+
+2. **Restatement**: Before executing anything complex, CEX restates what it understood
+   in precise terms. "I'll create a 3-tier pricing model with free/pro/enterprise
+   levels, feature gating, and annual discount structure." You can confirm or redirect.
+
+3. **Non-destructive execution**: CEX saves artifacts as new files and commits to git.
+   Nothing is overwritten without explicit instruction. If the output isn't what you
+   wanted, the previous version is one `git checkout` away.
+
+The most common "misunderstanding" is ambiguity, not error. "Document this" could mean
+a knowledge card, a context doc, or a glossary entry. CEX asks. If it doesn't ask and
+gets it wrong, just say "no, I meant X" and it re-resolves. The cost of a wrong
+dispatch is seconds, not hours.
+
 ---
 
-*CEX FAQ v2.0 -- Updated 2026-04-08*
+*CEX FAQ v3.0 -- Updated 2026-04-08*

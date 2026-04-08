@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about entity_memory artifacts"
 keywords: [entity_facts, knowledge_graph, working_memory]
 feeds_kinds: [entity_memory]
 density_score: null
+aliases: ["entity store", "fact store", "knowledge graph entry", "entity facts", "named entity memory"]
+user_says: ["remember this entity", "lembrar essa entidade", "store facts about this project", "save what we know about X", "track this entity"]
+long_tails: ["I need to store current facts about a project so the AI remembers next session", "track what we know about this customer with confidence scores", "create a persistent fact store for named entities like people and systems", "remember key attributes about this project across sessions"]
+cross_provider:
+  langchain: "ConversationEntityMemory"
+  llamaindex: "AgentWorkflow state dict"
+  crewai: "Memory (entity scope)"
+  dspy: "History type (implicit)"
+  openai: "Thread messages + file_search"
+  anthropic: "cache_control ephemeral"
+  haystack: "n/a (custom via DocumentStore)"
 ---
 
 # Entity Memory

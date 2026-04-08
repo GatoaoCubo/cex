@@ -11,6 +11,16 @@ tags: [knowledge-card, landing-page, frontend, ui, marketing, conversion]
 density_score: 1.0
 updated: "2026-04-07"
 domain: "knowledge management"
+aliases: ["sales page", "squeeze page", "conversion page", "marketing page", "lead capture page"]
+user_says: ["make me a landing page", "criar landing page", "build a website", "I need a page to sell my product", "create a sales page"]
+long_tails: ["I need a website to sell my product with pricing and testimonials", "create a conversion-optimized page to capture leads", "build a responsive landing page with hero section and CTA", "make a marketing page for my SaaS product launch"]
+cross_provider:
+  lovable: "Page component"
+  v0: "UI generation"
+  framer: "Landing page template"
+  webflow: "Landing page"
+  bolt: "Full-stack page"
+  astro: "Astro page component"
 ---
 # Knowledge Card: landing_page
 

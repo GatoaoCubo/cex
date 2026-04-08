@@ -19,6 +19,17 @@ density_score: 1.0
 linked_artifacts:
   primary: null
   related: []
+aliases: ["end-to-end test", "integration test", "pipeline test", "full-stack eval", "system test"]
+user_says: ["test the whole pipeline", "testar o pipeline completo", "run an integration test", "check if everything works together", "evaluate end to end"]
+long_tails: ["I need to test the entire pipeline from user input to final output", "verify that all agents and tools work correctly together", "run an end-to-end test across all stages of my workflow", "check if the full pipeline handles error recovery correctly"]
+cross_provider:
+  langchain: "End-to-end chain.invoke() test"
+  llamaindex: "QueryPipeline eval run"
+  crewai: "Crew.kickoff() test"
+  dspy: "Evaluate on full compiled program"
+  openai: "Assistants thread eval"
+  anthropic: "Multi-turn eval with tool use"
+  haystack: "Pipeline.run() test"
 ---
 
 # E2E Eval

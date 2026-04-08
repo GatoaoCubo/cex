@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about session_state artifacts"
 keywords: [ephemeral, snapshot, session]
 feeds_kinds: [session_state]
 density_score: null
+aliases: ["session snapshot", "ephemeral state", "run state", "current session", "in-flight state"]
+user_says: ["save current session", "salvar sessao atual", "track session progress", "checkpoint this run", "what step am I on"]
+long_tails: ["I need to track the current task and step progress within this session", "save an ephemeral snapshot so I can resume if the agent crashes", "create a session checkpoint with current inputs and intermediate outputs", "track which step I'm on in a multi-step session for crash recovery"]
+cross_provider:
+  langchain: "BaseChatMessageHistory (in-memory)"
+  llamaindex: "ChatEngine session context"
+  crewai: "Flow ephemeral state (@start data)"
+  dspy: "Module forward() local variables"
+  openai: "Thread messages array (single session)"
+  anthropic: "messages array within single API call chain"
+  haystack: "Pipeline.run() input/output dict"
 ---
 
 # Session State

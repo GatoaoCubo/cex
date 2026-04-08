@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about knowledge_card artifacts"
 keywords: [knowledge-card, atomic-knowledge, density, distillation]
 feeds_kinds: [knowledge_card]
 density_score: null
+aliases: ["knowledge document", "fact card", "information unit", "KC", "knowledge base entry"]
+user_says: ["document this", "documentar isso", "write a KC", "store this knowledge", "I need to capture what we know about X"]
+long_tails: ["I need to document what we know about this topic for retrieval", "store this information so the AI can use it later", "create a dense factual reference about this domain", "write down everything important about X in a searchable format"]
+cross_provider:
+  langchain: "Document with metadata"
+  llamaindex: "TextNode / Document"
+  crewai: "Knowledge source / tool result"
+  dspy: "dspy.Example / passage"
+  openai: "File search chunk / knowledge base"
+  anthropic: "Context window injection"
+  haystack: "Document dataclass"
 ---
 
 # Knowledge Card

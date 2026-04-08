@@ -1,0 +1,119 @@
+id: case_studies_intent_resolution
+kind: context_doc
+title: 'Intent Resolution Case Studies: 3 Transformations That Shouldn''t Be Possible'
+version: 1.0.0
+pillar: P01
+created: 2026-04-08
+author: n02_marketing
+quality: null
+tags:
+- case-study
+- intent-resolution
+- 8F
+- before-after
+- onboarding
+- landing-page
+- mcp-server
+- pricing
+density_score: 0.91
+case_study_1_the_non_technical_founder_who_typed_5_words: ''
+the_user: 'Lucas runs a SaaS product for restaurant management. He''s been on a flat-rate pricing model and knows he''s leaving
+  money on the table. He typed: > "pricing for my SaaS" 4 words. No mention of tiers. No mention of competitors. No mention
+  of feature gating or annual discounts. Just the raw desire to figure out pricing.'
+what_a_raw_llm_would_do: Produce a generic 3-tier table (Basic/Pro/Enterprise) with made-up prices and features that have
+  nothing to do with restaurant management. Lucas would look at it and think "this could be for any product" -- because it
+  was.
+what_cex_did: '| 8F Stage | Action | Time |
+
+  |----------|--------|------|
+
+  | F1 CONSTRAIN | Resolved: kind=`content_monetization`, pillar=P11, nucleus=N06 (Commercial). Domain: SaaS pricing. Schema
+  loaded: requires tier_structure, feature_matrix, revenue_model, competitive_positioning | 0.1s |
+
+  | F2 BECOME | Loaded content-monetization-builder (13 ISOs). Identity: Gula Monetizadora -- maximize every revenue stream.
+  Lens: see every feature as a monetization lever | 0.3s |
+
+  | F3 INJECT | 11 context sources: brand_config.yaml (restaurant SaaS, B2B, 200 current customers), competitor pricing KC
+  (3 known competitors with pricing data from prior N01 research), SaaS pricing patterns KC (usage-based vs. seat-based vs.
+  feature-gated analysis), customer segmentation from brand config (solo restaurant, small chain 2-5, enterprise 6+), revenue
+  benchmarks KC, churn reduction patterns, annual discount optimization data, upsell trigger patterns | 0.5s |
+
+  | F4 REASON | Plan: 3 tiers mapped to customer segments (Solo/Chain/Enterprise), feature gating based on actual product
+  capabilities from brand config, annual discount at 20% (industry standard for B2B SaaS), freemium rejected (B2B restaurant
+  market has low tolerance for free-tier noise), usage-based component for API calls | 0.3s |
+
+  | F5 CALL | Retrieved: competitor pricing data (3 competitors, price points mapped), existing customer distribution from
+  brand config, product feature list from brand config. Calculated: recommended price points using value-metric analysis (per-location
+  pricing, the restaurant SaaS standard) | 0.4s |
+
+  | F6 PRODUCE | Generated complete pricing strategy document: 3-tier model, feature gating matrix (14 features across 3 tiers),
+  per-location pricing rationale, annual discount structure, revenue projection (12-month forecast based on current 200 customers),
+  migration plan from flat-rate to tiered (including grandfather clause for existing customers), competitive positioning table
+  (CEX''s tiers vs. 3 competitors), upsell triggers (when Solo customers should be nudged to Chain) | 5.1s |
+
+  | F7 GOVERN | Validation: tiers differentiated (no cannibalization between Solo and Chain)? YES. Margins positive at all
+  tiers? YES. Price points within 15% of competitor median? YES. Grandfather clause included for existing customers? YES.
+  Revenue projection assumptions stated? YES | 0.7s |
+
+  | F8 COLLABORATE | Saved to `N06_commercial/P11_feedback/content_monetization/cm_saas_restaurant_pricing.md`. Compiled.
+  Committed. Signal sent to N07 | 0.3s |
+
+
+  Total elapsed: ~7.7 seconds.'
+the_output: 'Lucas received a complete pricing strategy:
+
+
+  Tier Structure
+
+
+  | | Solo (1 location) | Chain (2-5 locations) | Enterprise (6+) |
+
+  |---|---|---|---|
+
+  | Monthly (per location) | $49/mo | $39/mo | Custom |
+
+  | Annual (per location) | $39/mo (20% off) | $31/mo (20% off) | Custom |
+
+  | Setup fee | $0 | $0 | $500 onboarding |
+
+
+  Feature Gating Matrix -- 14 features mapped across tiers, with clear upgrade
+
+  triggers ("When Solo users hit 500 orders/month, prompt Chain upgrade")
+
+
+  Revenue Projection -- 12-month forecast showing migration from flat-rate to
+
+  tiered pricing, with conservative/moderate/aggressive scenarios
+
+
+  Competitive Positioning -- Lucas''s tiers vs. 3 competitors, showing where he
+
+  undercuts and where he adds premium value
+
+
+  Migration Plan -- Step-by-step: grandfather existing customers for 6 months,
+
+  A/B test new pricing on new signups for 30 days, full rollout with email sequence
+
+
+  Amplification: 4 words in --> structured pricing strategy with projections. Ratio: ~200:1.'
+why_this_matters: Lucas didn't say "per-location pricing." CEX knew that because the restaurant SaaS market uses per-location
+  as the standard value metric (from the pricing patterns KC). Lucas didn't say "grandfather existing customers." CEX included
+  it because the migration plan KC flags this as critical for B2B SaaS pricing changes (churn risk). Lucas didn't mention
+  competitors. CEX pulled competitor data from a prior N01 intelligence brief that already existed in the knowledge library.
+  A pricing consultant would charge $5,000-$15,000 and take 3-4 weeks of interviews, research, and modeling. Lucas typed 4
+  words and got a better starting point in 8 seconds -- because CEX had already accumulated the intelligence, the patterns,
+  and the constraints that a human consultant would need to gather from scratch. ---
+case_study_2_the_developer_who_typed_3_words: ''
+case_study_3_the_business_owner_who_typed_4_words: ''
+the_pattern_across_all_three: "| Metric | Maria (landing page) | Andre (MCP server) | Lucas (pricing) |\n|--------|---------------------|--------------------|-----------------|\
+  \ \n| Words typed | 5 | 3 | 4 |\n| Context sources injected | 14 | 8 | 11 |\n| Autonomous decisions made | 7+ | 5 | 6+ |\n\
+  | Output size | 847 lines HTML | 186 lines Python + config | Full pricing strategy |\n| Amplification ratio | 170:1 | 62:1\
+  \ | ~200:1 |\n| Time elapsed | 6.5s | 6s | 7.7s |\n| Questions asked of user | 0 | 0 | 0 |\n| Quality gate | Passed (7/7\
+  \ hard gates) | Passed (schema + ASCII) | Passed (5/5 checks) |\n\nThe formula is always the same:\n\nFew human words\n\
+  \    --> F1 resolve kind + pillar + schema\n    --> F2 load specialized builder (13 components)\n    --> F3 inject 8-14\
+  \ context sources\n    --> F4 plan approach using domain knowledge\n    --> F5 scan codebase for reusable patterns\n   \
+  \ --> F6 produce with full context\n    --> F7 govern against quality gate\n    --> F8 save, compile, commit, signal\n\n\
+  The user never sees F1 through F8. They see the output. And the output is\nunreasonably good for a handful of words.\n\n\
+  That's intent resolution. That's the product."
