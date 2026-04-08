@@ -130,11 +130,24 @@ function Launch-Nucleus($handoff) {
     } else {
         $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`"" -WorkingDirectory $root -PassThru
     }
-    Start-Sleep -Seconds 3
-
+    # Retry loop: poll for window handle (up to 5s, 500ms intervals)
     if ($proc) {
-        [Win32Grid]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
-        "$($proc.Id) $nucleus" | Add-Content $pidFile
+        $hwnd = [IntPtr]::Zero
+        for ($i = 0; $i -lt 10; $i++) {
+            Start-Sleep -Milliseconds 500
+            try { $proc.Refresh() } catch {}
+            $hwnd = $proc.MainWindowHandle
+            if ($hwnd -ne [IntPtr]::Zero) { break }
+        }
+        if ($hwnd -ne [IntPtr]::Zero) {
+            [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
+        } else {
+            Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
+        }
+        # PID format: {pid} {nucleus} {cli} {session_id} {timestamp}
+        $sessId = if ($env:CEX_SESSION_ID) { $env:CEX_SESSION_ID } else { "s$PID" }
+        $ts = Get-Date -Format "yyyy-MM-ddTHH:mm:ss"
+        "$($proc.Id) $nucleus claude $sessId $ts" | Add-Content $pidFile
         Write-Output "[$upper] Spawned PID:$($proc.Id) handoff:$($handoff.Name)"
     }
     return $proc

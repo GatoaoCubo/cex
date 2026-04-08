@@ -43,7 +43,7 @@ Read .cex/runtime/handoffs/n03_task.md and execute. If no handoff, report ready.
 '@
 
 # Build argument list (avoids PowerShell parsing -- flags as operators)
-$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6")
+$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6", "--name", "CEX-N03")
 $args += "--append-system-prompt", "N03_engineering/agent_card_n03.md"
 $args += "--append-system-prompt", ".cex/config/context_self_select.md"
 $args += "--append-system-prompt", $sysPrompt

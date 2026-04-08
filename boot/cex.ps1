@@ -43,7 +43,7 @@ Ready. What do you need?
 '@
 
 # Build argument list (avoids PowerShell parsing -- flags as operators)
-$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6")
+$args = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermissions", "--no-chrome", "--model", "claude-opus-4-6", "--name", "CEX-N07")
 $args += "--append-system-prompt", "N07_admin/agent_card_n07.md"
 $args += "--append-system-prompt", ".cex/config/context_self_select.md"
 $args += "--append-system-prompt", $sysPrompt

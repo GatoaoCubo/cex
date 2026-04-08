@@ -201,7 +201,7 @@ $initialMsg = @'
 '@
 
 # Build argument list (avoids PowerShell parsing -- flags as operators)
-$args = @({(flags_array + ', ' if flags_array else '')}"--model", "{model}")
+$args = @({(flags_array + ', ' if flags_array else '')}"--model", "{model}", "--name", "CEX-{nucleus.upper()}")
 $args += "--append-system-prompt", "{meta.get("agent_card", "")}"
 $args += "--append-system-prompt", ".cex/config/context_self_select.md"
 $args += "--append-system-prompt", $sysPrompt
@@ -234,6 +234,7 @@ def build_claude_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
         'cd /d "%CEX_ROOT%"',
         "",
         f"set MODEL=--model {model}",
+        f"set NAME=--name CEX-{nucleus.upper()}",
         f"set FLAGS={flags}",
     ]
     if mcps:
@@ -248,7 +249,7 @@ def build_claude_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
     lines += [
         "",
         ":: ALWAYS interactive -- task comes from handoff file, never CLI args",
-        f'claude %FLAGS% %MODEL% %MCP% %SETTINGS% "{meta["prompt"]}"',
+        f'claude %FLAGS% %NAME% %MODEL% %MCP% %SETTINGS% "{meta["prompt"]}"',
     ]
     return "\n".join(lines) + "\n"
 
