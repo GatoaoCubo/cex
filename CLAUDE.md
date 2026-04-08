@@ -40,7 +40,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Terminology** | `_docs/specs/spec_metaphor_dictionary.md` + Rosetta Stone KC |
 | **N07 tech authority** | `.claude/rules/n07-technical-authority.md` |
 | **Infinite loop spec** | `_docs/specs/spec_infinite_bootstrap_loop.md` |
-| **Subagent definitions** | `.pi/agents/` (6 CEX agents: scout, builder-iso, kc-writer, etc.) |
+| **Subagent definitions** | `.claude/agents/` (125 builder sub-agents) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
 | **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
 | **Boot scripts** | `boot/cex.cmd` (N07) · `boot/n0{1-6}.cmd` |
@@ -163,13 +163,13 @@ bash _spawn/dispatch.sh stop --dry-run    # preview what would die
 
 | Domain | Nucleus | CLI | Model | Context |
 |--------|---------|-----|-------|---------|
-| Research/analysis | N01 | pi | opus-4-6 | 1M |
-| Marketing/copy | N02 | pi | opus-4-6 | 1M |
-| Build/create | N03 | pi | opus-4-6 | 1M |
-| Knowledge/docs | N04 | pi | opus-4-6 | 1M |
-| Code/test/deploy | N05 | pi | opus-4-6 | 1M |
-| Brand/monetization | N06 | pi | opus-4-6 | 1M |
-| Orchestration | N07 | pi | opus-4-6 | 1M |
+| Research/analysis | N01 | claude | opus-4-6 | 1M |
+| Marketing/copy | N02 | claude | opus-4-6 | 1M |
+| Build/create | N03 | claude | opus-4-6 | 1M |
+| Knowledge/docs | N04 | claude | opus-4-6 | 1M |
+| Code/test/deploy | N05 | claude | opus-4-6 | 1M |
+| Brand/monetization | N06 | claude | opus-4-6 | 1M |
+| Orchestration | N07 | claude | opus-4-6 | 1M |
 
 ## Constraints
 

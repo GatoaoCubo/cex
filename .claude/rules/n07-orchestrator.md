@@ -119,7 +119,7 @@ This avoids nested-quote hell that kills CMD.
 
 | Nucleus | CLI | Model | Auth | Sub-agents? |
 |---------|-----|-------|------|-------------|
-| **N07** | pi | opus-4-6 1M | Anthropic Max | — (orchestrator) |
+| **N07** | claude | opus-4-6 1M | Anthropic Max | — (orchestrator) |
 | N01 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |
 | N02 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |
 | N03 | claude | opus-4-6 1M | Anthropic Max | ✅ 5 parallel |

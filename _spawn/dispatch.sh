@@ -1,5 +1,5 @@
 #!/bin/bash
-# CEX Dispatch -- bash wrapper for pi/N07
+# CEX Dispatch -- bash wrapper for claude/N07
 #
 # Usage:
 #   bash _spawn/dispatch.sh solo n03 "task"    # dispatch 1 nucleus
@@ -11,7 +11,7 @@
 #   bash _spawn/dispatch.sh stop --dry-run     # preview what would be killed
 
 # --- Session ID: stable identifier for this orchestrator ---
-# Each pi/N07 session sets CEX_SESSION_ID once. All dispatch calls inherit it.
+# Each claude/N07 session sets CEX_SESSION_ID once. All dispatch calls inherit it.
 # If not set, generate from timestamp (stable within same second).
 # IMPORTANT: For multi-N07, set CEX_SESSION_ID before first dispatch.
 if [ -z "$CEX_SESSION_ID" ]; then

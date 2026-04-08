@@ -60,25 +60,19 @@ echo [2/5] Installing Python dependencies...
 pip install pyyaml tiktoken uv 2>&1 | findstr /i "Successfully already"
 echo.
 
-echo [3/5] Installing pi coding agent...
-call npm list -g @mariozechner/pi-coding-agent >nul 2>&1
+echo [3/5] Installing Claude Code CLI...
+claude --version >nul 2>&1
 if errorlevel 1 (
-    call npm install -g @mariozechner/pi-coding-agent
+    echo   [X] Claude Code CLI NOT FOUND
+    echo       Install: npm install -g @anthropic-ai/claude-code
+    call npm install -g @anthropic-ai/claude-code
 ) else (
-    echo   [OK] pi already installed
+    for /f %%v in ('claude --version 2^>^&1') do echo   [OK] Claude Code %%v
 )
 echo.
 
-:: -- Layer 3b: CEX Package --
-echo [4/5] Installing CEX package (themes + skills + extensions)...
-if exist cex-pi-package\package.json (
-    cd cex-pi-package
-    call npm link 2>&1 | findstr /i "added up"
-    cd ..
-    echo   [OK] CEX package linked
-) else (
-    echo   [SKIP] cex-pi-package not found (optional)
-)
+:: -- Layer 3b: Reserved --
+echo [4/5] Checking Claude Code configuration...
 echo.
 
 :: -- Verification --
@@ -94,7 +88,7 @@ echo   SETUP COMPLETE
 echo   ============================================================
 echo.
 echo   Next steps:
-echo     1. Run:  pi /login        (authenticate with your LLM provider)
+echo     1. Run:  claude           (authenticate with Anthropic)
 echo     2. Run:  boot\cex.cmd     (start N07 orchestrator)
 echo     3. Or:   boot\n03.cmd     (start a single nucleus)
 echo.

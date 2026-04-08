@@ -275,7 +275,7 @@ def execute_prompt(prompt: str) -> str:
     try:
         import subprocess
         result = subprocess.run(
-            ["pi", "-p", "--model", "anthropic/claude-sonnet-4-6"],
+            ["claude", "-p", "--model", "claude-sonnet-4-6"],
             input=prompt, capture_output=True, text=True,
             timeout=120, encoding="utf-8",
         )

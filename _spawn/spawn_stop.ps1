@@ -157,7 +157,7 @@ Log "  STEP 3: Orphan CLI scan"
 if ($All) {
     $found = $false
     
-    foreach ($p in @(Get-Process "claude","pi" -EA SilentlyContinue | Where-Object { $PSItem.Id -notin $killedPids })) {
+    foreach ($p in @(Get-Process "claude" -EA SilentlyContinue | Where-Object { $PSItem.Id -notin $killedPids })) {
         $cimProc = Get-CimInstance Win32_Process -Filter "ProcessId=$($p.Id)" -EA SilentlyContinue
         $parentPid = $cimProc.ParentProcessId
         $parentAlive = Get-Process -Id $parentPid -EA SilentlyContinue
