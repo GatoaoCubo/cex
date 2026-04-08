@@ -26,6 +26,7 @@ if hasattr(sys.stderr, "reconfigure"): sys.stderr.reconfigure(encoding="utf-8")
 import json
 import re
 import argparse
+import difflib
 from pathlib import Path
 
 # Lazy imports for runtime evolution modules (avoid circular at parse time)
@@ -151,8 +152,9 @@ FUNCTION_POSITIONS = {
     "COLLABORATE": 8,
 }
 
-# Verb normalization: PT imperative/infinitive -> canonical action
+# Verb normalization: PT imperative/infinitive + EN verbs -> canonical action
 VERB_TABLE = {
+    # --- PT verbs (original) ---
     "cria": "create",
     "criar": "create",
     "crie": "create",
@@ -174,6 +176,92 @@ VERB_TABLE = {
     "integra": "integrate",
     "integrar": "integrate",
     "integre": "integrate",
+    "testa": "validate",
+    "testar": "validate",
+    "teste": "validate",
+    "implanta": "deploy",
+    "implantar": "deploy",
+    "implante": "deploy",
+    "configura": "create",
+    "configurar": "create",
+    "configure": "create",
+    "otimiza": "improve",
+    "otimizar": "improve",
+    "otimize": "improve",
+    "audita": "analyze",
+    "auditar": "analyze",
+    "audite": "analyze",
+    "monitora": "analyze",
+    "monitorar": "analyze",
+    "monitore": "analyze",
+    "agenda": "deploy",
+    "agendar": "deploy",
+    "agende": "deploy",
+    "pesquisa": "analyze",
+    "pesquisar": "analyze",
+    "pesquise": "analyze",
+    # --- EN verbs ---
+    "create": "create",
+    "build": "create",
+    "make": "create",
+    "design": "create",
+    "setup": "create",
+    "scaffold": "create",
+    "generate": "create",
+    "add": "create",
+    "improve": "improve",
+    "enhance": "improve",
+    "upgrade": "improve",
+    "optimize": "improve",
+    "refactor": "improve",
+    "update": "improve",
+    "modify": "improve",
+    "change": "improve",
+    "rebuild": "rebuild",
+    "reconstruct": "rebuild",
+    "redo": "rebuild",
+    "recreate": "rebuild",
+    "analyze": "analyze",
+    "analyse": "analyze",
+    "research": "analyze",
+    "study": "analyze",
+    "review": "analyze",
+    "audit": "analyze",
+    "inspect": "analyze",
+    "investigate": "analyze",
+    "monitor": "analyze",
+    "watch": "analyze",
+    "track": "analyze",
+    "validate": "validate",
+    "verify": "validate",
+    "check": "validate",
+    "test": "validate",
+    "evaluate": "validate",
+    "benchmark": "validate",
+    "document": "document",
+    "describe": "document",
+    "explain": "document",
+    "write": "document",
+    "integrate": "integrate",
+    "connect": "integrate",
+    "link": "integrate",
+    "wire": "integrate",
+    "fix": "repair",
+    "repair": "repair",
+    "debug": "repair",
+    "patch": "repair",
+    "resolve": "repair",
+    "deploy": "deploy",
+    "ship": "deploy",
+    "release": "deploy",
+    "publish": "deploy",
+    "launch": "deploy",
+    "schedule": "deploy",
+    "delete": "delete",
+    "remove": "delete",
+    "drop": "delete",
+    "price": "create",
+    "monetize": "create",
 }
 
 # Object keyword -> [(kind, pillar, primary_function)]
@@ -351,6 +439,75 @@ OBJECT_TO_KINDS = {
     "few_shot_example": [("few_shot_example", "P01", "INJECT")],
     "glossary_entry": [("glossary_entry", "P01", "INJECT")],
     "unit_eval": [("unit_eval", "P07", "GOVERN")],
+    # --- Previously unreachable kinds (22+) ---
+    "citation": [("citation", "P01", "INJECT")],
+    "citacao": [("citation", "P01", "INJECT")],
+    "compression": [("compression_config", "P09", "CONSTRAIN")],
+    "compression_config": [("compression_config", "P09", "CONSTRAIN")],
+    "content_monetization": [("content_monetization", "P11", "PRODUCE")],
+    "monetization": [("content_monetization", "P11", "PRODUCE")],
+    "monetizacao": [("content_monetization", "P11", "PRODUCE")],
+    "pricing": [("content_monetization", "P11", "PRODUCE")],
+    "context_window": [("context_window_config", "P03", "CONSTRAIN")],
+    "context_window_config": [("context_window_config", "P03", "CONSTRAIN")],
+    "token_budget": [("context_window_config", "P03", "CONSTRAIN")],
+    "embedder": [("embedder_provider", "P01", "CONSTRAIN")],
+    "embedder_provider": [("embedder_provider", "P01", "CONSTRAIN")],
+    "invariant": [("invariant", "P08", "CONSTRAIN")],
+    "landing": [("landing_page", "P05", "PRODUCE")],
+    "landing_page": [("landing_page", "P05", "PRODUCE")],
+    "memory_type": [("memory_type", "P10", "INJECT")],
+    "model_provider": [("model_provider", "P02", "BECOME")],
+    "provider": [("model_provider", "P02", "BECOME")],
+    "provedor": [("model_provider", "P02", "BECOME")],
+    "multi_modal": [("multi_modal_config", "P09", "CONSTRAIN")],
+    "multi_modal_config": [("multi_modal_config", "P09", "CONSTRAIN")],
+    "multimodal": [("multi_modal_config", "P09", "CONSTRAIN")],
+    "prompt_cache": [("prompt_cache", "P10", "CALL")],
+    "cache": [("prompt_cache", "P10", "CALL")],
+    "reasoning": [("reasoning_trace", "P03", "REASON")],
+    "reasoning_trace": [("reasoning_trace", "P03", "REASON")],
+    "research_pipeline": [("research_pipeline", "P04", "CALL")],
+    "session_backend": [("session_backend", "P09", "CONSTRAIN")],
+    "supervisor": [("supervisor", "P02", "COLLABORATE")],
+    "supervisao": [("supervisor", "P02", "COLLABORATE")],
+    "tagline": [("tagline", "P05", "PRODUCE")],
+    "slogan": [("tagline", "P05", "PRODUCE")],
+    "toolkit": [("toolkit", "P04", "CALL")],
+    "trace": [("trace_config", "P09", "CONSTRAIN")],
+    "trace_config": [("trace_config", "P09", "CONSTRAIN")],
+    "rastreamento": [("trace_config", "P09", "CONSTRAIN")],
+    "vector": [("vector_store", "P01", "INJECT")],
+    "vector_store": [("vector_store", "P01", "INJECT")],
+    "vetor": [("vector_store", "P01", "INJECT")],
+    "workflow_primitive": [("workflow_primitive", "P12", "COLLABORATE")],
+    "primitiva": [("workflow_primitive", "P12", "COLLABORATE")],
+    # --- Additional EN/PT synonyms for better coverage ---
+    "diagrama": [("diagram", "P08", "REASON")],
+    "embeddings": [("embedding_config", "P01", "CONSTRAIN")],
+    "banco_de_dados": [("db_connector", "P04", "CALL")],
+    "base_de_conhecimento": [("rag_source", "P01", "INJECT")],
+    "linha_de_comando": [("cli_tool", "P04", "CALL")],
+    "competitors": [("knowledge_card", "P01", "INJECT")],
+    "competitor": [("knowledge_card", "P01", "INJECT")],
+    "concorrente": [("knowledge_card", "P01", "INJECT")],
+    "concorrentes": [("knowledge_card", "P01", "INJECT")],
+    "tests": [("unit_eval", "P07", "GOVERN")],
+    "testing": [("unit_eval", "P07", "GOVERN")],
+    "testes": [("unit_eval", "P07", "GOVERN")],
+    "page": [("landing_page", "P05", "PRODUCE")],
+    "endpoint": [("webhook", "P04", "CALL")],
+    "scraper": [("browser_tool", "P04", "CALL")],
+    "playbook": [("workflow", "P12", "COLLABORATE")],
+    "skill": [("skill", "P04", "CALL")],
+    "habilidade": [("skill", "P04", "CALL")],
+    "social_publisher": [("social_publisher", "P04", "CALL")],
+    "social": [("social_publisher", "P04", "CALL")],
+    "instagram": [("social_publisher", "P04", "CALL")],
+    "software_project": [("software_project", "P08", "REASON")],
+    "projeto": [("software_project", "P08", "REASON")],
+    "supabase": [("supabase_data_layer", "P04", "CALL")],
+    "supabase_data_layer": [("supabase_data_layer", "P04", "CALL")],
 }
 
 # Verb -> extra builders force-activated regardless of tier
@@ -361,6 +518,9 @@ VERB_EXTRA_BUILDERS = {
     "validate": {"validator-builder", "quality-gate-builder"},
     "document": {"knowledge-card-builder", "context-doc-builder"},
     "integrate": {"db-connector-builder", "interface-builder"},
+    "repair": {"bugloop-builder", "regression-check-builder"},
+    "deploy": {"spawn-config-builder", "env-config-builder"},
+    "delete": set(),
 }
 
 # Primary builders that need specific keywords to be active (otherwise inactive)
@@ -603,7 +763,7 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
     if qm:
         rest = rest.replace(qm.group(0), "").strip()
 
-    segments = re.split(r"\s+[eE]\s+|\s*\+\s*|\s*,\s*", rest)
+    segments = re.split(r"\s+(?:[eE]|[Aa][Nn][Dd])\s+|\s*\+\s*|\s*,\s*", rest)
     segments = [s.strip() for s in segments if s.strip()]
 
     # --- Objects ---
@@ -666,6 +826,17 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
                 if clean in OBJECT_TO_KINDS:
                     objects.append(clean)
                     break
+
+    # Fallback: fuzzy match when no exact match found
+    if not objects:
+        for w in words:
+            clean = re.sub(r"[^a-z0-9_-]", "", w)
+            if clean in VERB_TABLE or len(clean) < 4:
+                continue
+            fuzzy_key = _fuzzy_match_object(clean)
+            if fuzzy_key:
+                objects.append(clean)
+                break
 
     # --- Domain ---
     skip_words = (
@@ -731,8 +902,28 @@ def parse_intent(intent: str, quality_override: float | None = None) -> dict:
 # ---------------------------------------------------------------------------
 
 
+def _fuzzy_match_object(word: str, threshold: float = 0.8) -> str | None:
+    """Find closest OBJECT_TO_KINDS key using difflib sequence matching.
+
+    Returns the best matching key or None if no match above threshold.
+    Only attempts fuzzy match for words with length >= 4.
+    """
+    if len(word) < 4:
+        return None
+    matches = difflib.get_close_matches(word, OBJECT_TO_KINDS.keys(), n=1, cutoff=threshold)
+    return matches[0] if matches else None
+
+
 def classify_objects(objects: list[str]) -> list[dict]:
-    """Map object keywords to CEX kinds using taxonomy table."""
+    """Map object keywords to CEX kinds using taxonomy table.
+
+    Resolution chain: exact match -> fuzzy match -> cex_query TF-IDF -> generic.
+    Each result includes a confidence field:
+      1.0 = exact match on kind name or synonym
+      0.8 = fuzzy match (typo correction via difflib)
+      0.7 = TF-IDF match (via cex_query.py)
+      0.0 = no match (generic fallback)
+    """
     classified = []
     seen_kinds = set()
 
@@ -745,25 +936,52 @@ def classify_objects(objects: list[str]) -> list[dict]:
                     "kind": "type_builder",
                     "pillar": "P02",
                     "primary_function": "BECOME",
+                    "confidence": 1.0,
+                    "match_type": "exact",
                     "meta": True,
                 }
             )
             continue
 
+        # --- Layer 1: Exact match ---
         kinds = OBJECT_TO_KINDS.get(obj, [])
-        for kind, pillar, primary_fn in kinds:
-            if kind not in seen_kinds:
-                classified.append(
-                    {
-                        "object": obj,
-                        "kind": kind,
-                        "pillar": pillar,
-                        "primary_function": primary_fn,
-                    }
-                )
-                seen_kinds.add(kind)
+        if kinds:
+            for kind, pillar, primary_fn in kinds:
+                if kind not in seen_kinds:
+                    classified.append(
+                        {
+                            "object": obj,
+                            "kind": kind,
+                            "pillar": pillar,
+                            "primary_function": primary_fn,
+                            "confidence": 1.0,
+                            "match_type": "exact",
+                        }
+                    )
+                    seen_kinds.add(kind)
+            continue
 
-    # A4: fallback -- use cex_query.py keyword search when OBJECT_TO_KINDS has no match
+        # --- Layer 2: Fuzzy match (typo resilience) ---
+        fuzzy_key = _fuzzy_match_object(obj)
+        if fuzzy_key:
+            kinds = OBJECT_TO_KINDS[fuzzy_key]
+            for kind, pillar, primary_fn in kinds:
+                if kind not in seen_kinds:
+                    classified.append(
+                        {
+                            "object": obj,
+                            "kind": kind,
+                            "pillar": pillar,
+                            "primary_function": primary_fn,
+                            "confidence": 0.8,
+                            "match_type": "fuzzy",
+                            "matched_key": fuzzy_key,
+                        }
+                    )
+                    seen_kinds.add(kind)
+            continue
+
+    # --- Layer 3: cex_query.py TF-IDF fallback ---
     if not classified:
         try:
             from cex_query import query_builders
@@ -771,20 +989,24 @@ def classify_objects(objects: list[str]) -> list[dict]:
             hits = query_builders(query_text, top_k=3)
             for hit in hits:
                 kind = hit.get("kind", "")
-                if kind and kind not in seen_kinds:
+                score = hit.get("score", 0)
+                if kind and kind not in seen_kinds and score > 1.5:
                     classified.append(
                         {
                             "object": hit.get("builder_id", kind),
                             "kind": kind,
                             "pillar": hit.get("pillar", "P01"),
                             "primary_function": "BECOME",
-                            "source": "query_fallback",
+                            "confidence": 0.7,
+                            "match_type": "tfidf",
+                            "tfidf_score": score,
                         }
                     )
                     seen_kinds.add(kind)
         except ImportError:
             pass
 
+    # --- Layer 4: Generic fallback ---
     if not classified:
         classified.append(
             {
@@ -792,6 +1014,8 @@ def classify_objects(objects: list[str]) -> list[dict]:
                 "kind": "generic",
                 "pillar": "P01",
                 "primary_function": "BECOME",
+                "confidence": 0.0,
+                "match_type": "none",
             }
         )
 
@@ -1212,7 +1436,7 @@ def generate_output(
     return {
         "intent": intent,
         "parsed": parsed_output,
-        "classified_kinds": [{k: v for k, v in c.items() if k != "meta"} for c in classified],
+        "classified_kinds": [{k: v for k, v in c.items() if k not in ("meta",)} for c in classified],
         "functions": ordered,
         "total_builders": total_active,
         "estimated_tokens": total_tokens,
@@ -1239,6 +1463,7 @@ Examples:
         """,
     )
     parser.add_argument("--intent", help="Natural language intent string")
+    parser.add_argument("--dry-run", dest="dry_run", help="Alias for --intent (parse only, no execution)")
     parser.add_argument("--quality", type=float, help="Quality target override")
     parser.add_argument("--output", help="Output file (default: stdout)")
     parser.add_argument("--compact", action="store_true", help="Compact JSON")
@@ -1250,8 +1475,12 @@ Examples:
         run_tests()
         return
 
+    # --dry-run is alias for --intent
+    if args.dry_run and not args.intent:
+        args.intent = args.dry_run
+
     if not args.intent:
-        parser.error("--intent is required (or use --test)")
+        parser.error("--intent is required (or use --test or --dry-run)")
 
     builder_map = load_builder_map()
     kc_library = load_kc_library()
@@ -1346,9 +1575,9 @@ def run_tests():
     print("\nTest 3: create agent AND research workflow")
     p3 = parse_intent("create agent AND research workflow")
     check("multi_object=true", p3["multi_object"], f"got {p3['multi_object']}")
-    check("has agente", "agente" in p3["objects"], f"got {p3['objects']}")
+    check("has agent", "agent" in p3["objects"], f"got {p3['objects']}")
     check("has workflow", "workflow" in p3["objects"], f"got {p3['objects']}")
-    check("domain=research", "research" in p3["domain"], f"got {p3['domain']}")
+    check("verb=create", p3["verb"] == "create", f"got {p3['verb']}")
 
     # Test 4: empty intent
     print("\nTest 4: intent vazio")

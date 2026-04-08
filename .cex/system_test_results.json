@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-04-08T13:13:13.169872",
+  "timestamp": "2026-04-08T14:12:10.667859",
   "pass": 54,
   "fail": 4,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 113.8,
+  "elapsed_s": 91.0,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "54445B"
+      "detail": "63781B"
     },
     {
       "name": "tool:cex_8f_runner.py",
@@ -94,42 +94,42 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "55 artifacts (min 11)"
+      "detail": "60 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "57 artifacts (min 10)"
+      "detail": "59 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "47 artifacts (min 34)"
+      "detail": "51 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "67 artifacts (min 12)"
+      "detail": "68 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "56 artifacts (min 9)"
+      "detail": "58 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "59 artifacts (min 9)"
+      "detail": "66 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
       "status": "PASS",
-      "detail": "38 artifacts (min 13)"
+      "detail": "39 artifacts (min 13)"
     },
     {
       "name": "quality:zero_null",
       "status": "FAIL",
-      "detail": "83 quality:null (awaiting peer review)"
+      "detail": "105 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
@@ -289,12 +289,12 @@
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "248 dirty files"
+      "detail": "17 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "3d7ea849 [N07] consolidate: W2 deliverables + docs update + "
+      "detail": "755cae07 [N01] research: confidence scoring + clarification "
     }
   ]
 }
