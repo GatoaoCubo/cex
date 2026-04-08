@@ -4,9 +4,9 @@ kind: knowledge_card
 type: domain
 pillar: P01
 title: "LLM Terminology Rosetta Stone: Cross-Provider Canonical Mapping"
-version: 1.0.0
+version: 1.1.0
 created: 2026-04-07
-updated: 2026-04-07
+updated: 2026-04-08
 author: N01_intelligence
 domain: terminology
 origin: src_standards_global
@@ -125,15 +125,29 @@ This card maps the **same concept** across 4 providers + MCP, giving CEX a singl
 | PDF input | `document` content block | File upload + parsing | PDF in Gemini | `application/pdf` resource | — | — |
 | Multi-modal config | Via content blocks | Via modalities param | Via `generation_config` | Via MIME types | — (MISSING) | ❌ Add `multi_modal_config` |
 
+## 8. Intent Resolution & Input Processing Concepts
+
+| Concept | Anthropic | OpenAI | Google | MCP | LangChain | DSPy | CEX Kind / Implementation | CEX Aligned? |
+|---------|-----------|--------|--------|-----|-----------|------|---------------------------|-------------|
+| Intent classification (determine which action/tool to invoke) | `tool_choice` routing + extended thinking | `tool_choice` + Agent `handoff()` routing | `function_calling_config.mode` | Host-side routing (not in spec) | Router chains, `MultiPromptChain` | `Predict` with routing module | `router` (P02) + `dispatch_rule` (P12) | ✅ |
+| Query rewriting (transform user query into better query) | Via extended thinking (internal) | N/A (developer-side) | `retrieval_queries` (auto-generated for grounding) | N/A | `MultiQueryRetriever`, `HyDE`, `QueryTransformRetriever` | `ChainOfThought` (implicit rewrite) | 8F F1 CONSTRAIN + F4 REASON | ✅ Pipeline covers this |
+| Context assembly (build full prompt from multiple sources) | `messages` array + `cache_control` blocks | `messages` array + `system`/`developer` role | `contents` + `system_instruction` | `prompts/get` (server-side template) | `RunnablePassthrough` + retrieval chains | `Module.forward()` assembles from signature | 8F F3 INJECT (`cex_crew_runner.py`) | ✅ |
+| Slot filling (resolve template variables at runtime) | N/A (developer-side) | N/A (developer-side) | N/A (developer-side) | `arguments` in `prompts/get` | `PromptTemplate.format()` / `.invoke()` | Signature fields auto-populated | `prompt_template` {{vars}} + `brand_inject.py` | ✅ |
+| Input normalization (standardize user input before processing) | N/A (no native abstraction) | N/A (developer-side) | N/A (developer-side) | N/A | `TextSplitter`, custom `Runnable` preprocessors | `InputField` type coercion | 8F F1 CONSTRAIN + N07 transmutation | ✅ Pipeline covers this |
+| Intent-to-kind mapping (resolve user desire to artifact type) | N/A | N/A | N/A | N/A | N/A | N/A | `kinds_meta.json` + `cex_8f_motor.py` intent parser | ✅ CEX-unique |
+| Prompt composition (assemble multiple artifacts into one prompt) | Multi-block `messages` (text + tool + image) | Multi-message + system + tools | `contents` with multiple `Part` types | Tool + resource + prompt composition | `RunnableSequence`, `create_stuff_documents_chain` | `Module` chaining | `cex_crew_runner.py` + `cex_prompt_layers.py` | ✅ |
+| Disambiguation (resolve ambiguous user input to specific action) | Extended thinking reasoning | Agent SDK `handoff()` with triage agent | N/A | N/A | Agent router with fallback | `Retry` module + `Assert` | N07 transmutation protocol + GDP | ✅ |
+
 ---
 
 ## Summary: CEX Alignment Scorecard
 
 | Status | Count | Items |
 |--------|-------|-------|
-| ✅ Aligned | 38 | Majority of CEX kinds match industry terms |
+| ✅ Aligned | 46 | Majority of CEX kinds match industry terms |
 | ⚠️ Rename recommended | 5 | `vector_store`, `knowledge_index`, `director`, `lens`, `code_executor` |
 | ❌ Missing kind | 4 | `prompt_cache`, `context_window_config`, `citation`, `multi_modal_config` |
+| ✅ Intent resolution | 8 | New section — cross-provider + framework mapping for input processing |
 
 ## Conflict Resolution Rules
 

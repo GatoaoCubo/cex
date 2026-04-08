@@ -1519,12 +1519,6 @@ domains:
     feeds_kinds:
     - boot_config
     origin: ''
-  p01_kc_knowledge_index:
-    path: P01_knowledge\library\kind\kc_knowledge_index.md
-    title: Brain Index — Deep Knowledge for knowledge_index
-    feeds_kinds:
-    - knowledge_index
-    origin: ''
   p01_kc_browser_tool:
     path: P01_knowledge\library\kind\kc_browser_tool.md
     title: Browser Tool — Deep Knowledge for browser_tool
@@ -1554,6 +1548,12 @@ domains:
     title: Chunk Strategy — Deep Knowledge for chunk_strategy
     feeds_kinds:
     - chunk_strategy
+    origin: ''
+  p01_kc_citation:
+    path: P01_knowledge\library\kind\kc_citation.md
+    title: Citation — Deep Knowledge for citation
+    feeds_kinds:
+    - citation
     origin: ''
   p01_kc_cli_tool:
     path: P01_knowledge\library\kind\kc_cli_tool.md
@@ -1603,6 +1603,12 @@ domains:
     feeds_kinds:
     - context_doc
     origin: ''
+  p01_kc_context_window_config:
+    path: P01_knowledge\library\kind\kc_context_window_config.md
+    title: Context Window Config — Deep Knowledge for context_window_config
+    feeds_kinds:
+    - context_window_config
+    origin: ''
   p01_kc_daemon:
     path: P01_knowledge\library\kind\kc_daemon.md
     title: Daemon — Deep Knowledge for daemon
@@ -1632,12 +1638,6 @@ domains:
     title: Diagram — Deep Knowledge for diagram
     feeds_kinds:
     - diagram
-    origin: ''
-  p01_kc_supervisor:
-    path: P01_knowledge\library\kind\kc_supervisor.md
-    title: Director — Deep Knowledge for director
-    feeds_kinds:
-    - director
     origin: ''
   p01_kc_dispatch_rule:
     path: P01_knowledge\library\kind\kc_dispatch_rule.md
@@ -1789,22 +1789,28 @@ domains:
     feeds_kinds:
     - interface
     origin: ''
+  p01_kc_invariant:
+    path: P01_knowledge\library\kind\kc_invariant.md
+    title: Law — Deep Knowledge for law
+    feeds_kinds:
+    - law
+    origin: ''
   p01_kc_knowledge_card:
     path: P01_knowledge\library\kind\kc_knowledge_card.md
     title: Knowledge Card — Deep Knowledge for knowledge_card
     feeds_kinds:
     - knowledge_card
     origin: ''
+  p01_kc_knowledge_index:
+    path: P01_knowledge\library\kind\kc_knowledge_index.md
+    title: Brain Index — Deep Knowledge for knowledge_index
+    feeds_kinds:
+    - knowledge_index
+    origin: ''
   kc_landing_page:
     path: P01_knowledge\library\kind\kc_landing_page.md
     title: 'KC: Landing Page'
     feeds_kinds: []
-    origin: ''
-  p01_kc_invariant:
-    path: P01_knowledge\library\kind\kc_invariant.md
-    title: Law — Deep Knowledge for law
-    feeds_kinds:
-    - law
     origin: ''
   p01_kc_learning_record:
     path: P01_knowledge\library\kind\kc_learning_record.md
@@ -1875,6 +1881,12 @@ domains:
     feeds_kinds:
     - model_provider
     origin: ''
+  p01_kc_multi_modal_config:
+    path: P01_knowledge\library\kind\kc_multi_modal_config.md
+    title: Multi-Modal Config — Deep Knowledge for multi_modal_config
+    feeds_kinds:
+    - multi_modal_config
+    origin: ''
   p01_kc_naming_rule:
     path: P01_knowledge\library\kind\kc_naming_rule.md
     title: Naming Rule — Deep Knowledge for naming_rule
@@ -1928,6 +1940,12 @@ domains:
     title: Plugin — Deep Knowledge for plugin
     feeds_kinds:
     - plugin
+    origin: ''
+  p01_kc_prompt_cache:
+    path: P01_knowledge\library\kind\kc_prompt_cache.md
+    title: Prompt Cache — Deep Knowledge for prompt_cache
+    feeds_kinds:
+    - prompt_cache
     origin: ''
   p01_kc_prompt_template:
     path: P01_knowledge\library\kind\kc_prompt_template.md
@@ -2102,6 +2120,12 @@ domains:
     title: Supabase Data Layer — Deep Knowledge for supabase_data_layer
     feeds_kinds:
     - supabase_data_layer
+    origin: ''
+  p01_kc_supervisor:
+    path: P01_knowledge\library\kind\kc_supervisor.md
+    title: Supervisor — Deep Knowledge for supervisor
+    feeds_kinds:
+    - supervisor
     origin: ''
   p01_kc_system_prompt:
     path: P01_knowledge\library\kind\kc_system_prompt.md
@@ -2498,6 +2522,48 @@ domains:
     - validation_schema
     - validator
     origin: manual
+  p01_kc_terminology_anthropic_canonical:
+    path: P01_knowledge\library\domain\_reference\kc_terminology_anthropic_canonical.md
+    title: 'Anthropic Official Terminology: Canonical Vocabulary (2026)'
+    feeds_kinds:
+    - function_def
+    - mcp_server
+    - computer_use
+    - system_prompt
+    - prompt_template
+    origin: src_provider_taxonomy
+  p01_kc_terminology_google_mcp_canonical:
+    path: P01_knowledge\library\domain\_reference\kc_terminology_google_mcp_canonical.md
+    title: 'Google & MCP Official Terminology: Canonical Vocabulary (2026)'
+    feeds_kinds:
+    - function_def
+    - agent_card
+    - mcp_server
+    - search_tool
+    - code_executor
+    - system_prompt
+    origin: src_provider_taxonomy
+  p01_kc_terminology_openai_canonical:
+    path: P01_knowledge\library\domain\_reference\kc_terminology_openai_canonical.md
+    title: 'OpenAI Official Terminology: Canonical Vocabulary (2026)'
+    feeds_kinds:
+    - function_def
+    - code_executor
+    - search_tool
+    - response_format
+    - input_schema
+    - system_prompt
+    origin: src_provider_taxonomy
+  p01_kc_terminology_rosetta_stone:
+    path: P01_knowledge\library\domain\_reference\kc_terminology_rosetta_stone.md
+    title: 'LLM Terminology Rosetta Stone: Cross-Provider Canonical Mapping'
+    feeds_kinds:
+    - knowledge_card
+    - glossary_entry
+    - agent_card
+    - function_def
+    - mcp_server
+    origin: src_standards_global
 coverage:
   action_prompt:
   - p01_kc_action_prompt
@@ -2515,6 +2581,8 @@ coverage:
   - p01_kc_llamaindex_patterns
   agent_card:
   - p01_kc_agent_card
+  - p01_kc_terminology_google_mcp_canonical
+  - p01_kc_terminology_rosetta_stone
   agent_package:
   - p01_kc_agent_package
   - p01_kc_agent_identity
@@ -2533,10 +2601,6 @@ coverage:
   boot_config:
   - p01_kc_boot_config
   - p01_kc_agent_identity
-  knowledge_index:
-  - p01_kc_knowledge_index
-  - p01_kc_haystack_patterns
-  - p01_kc_llamaindex_patterns
   browser_tool:
   - p01_kc_browser_tool
   - p01_kc_external_integrations
@@ -2556,6 +2620,8 @@ coverage:
   - p01_kc_academic_rag_patterns
   - p01_kc_langchain_patterns
   - p01_kc_llamaindex_patterns
+  citation:
+  - p01_kc_citation
   cli_tool:
   - p01_kc_cli_tool
   - p01_kc_perception_tools
@@ -2563,6 +2629,8 @@ coverage:
   - p01_kc_code_executor
   - p01_kc_google_ai_patterns
   - p01_kc_openai_api_patterns
+  - p01_kc_terminology_google_mcp_canonical
+  - p01_kc_terminology_openai_canonical
   component_map:
   - p01_kc_component_map
   - p01_kc_governance_patterns
@@ -2571,6 +2639,7 @@ coverage:
   computer_use:
   - p01_kc_computer_use
   - p01_kc_anthropic_api_patterns
+  - p01_kc_terminology_anthropic_canonical
   constraint_spec:
   - p01_kc_constraint_spec
   - p01_kc_dspy_patterns
@@ -2579,6 +2648,8 @@ coverage:
   context_doc:
   - p01_kc_context_doc
   - p01_kc_prompt_engineering
+  context_window_config:
+  - p01_kc_context_window_config
   daemon:
   - p01_kc_daemon
   - p01_kc_perception_tools
@@ -2594,11 +2665,6 @@ coverage:
   diagram:
   - p01_kc_diagram
   - p01_kc_governance_patterns
-  director:
-  - p01_kc_supervisor
-  - p01_kc_academic_agent_patterns
-  - p01_kc_chinese_llm_ecosystem
-  - p01_kc_crewai_patterns
   dispatch_rule:
   - p01_kc_dispatch_rule
   - p01_kc_haystack_patterns
@@ -2658,9 +2724,14 @@ coverage:
   - p01_kc_langchain_patterns
   - p01_kc_mcp_protocol
   - p01_kc_openai_api_patterns
+  - p01_kc_terminology_anthropic_canonical
+  - p01_kc_terminology_google_mcp_canonical
+  - p01_kc_terminology_openai_canonical
+  - p01_kc_terminology_rosetta_stone
   glossary_entry:
   - p01_kc_glossary_entry
   - p01_kc_prompt_engineering
+  - p01_kc_terminology_rosetta_stone
   golden_test:
   - p01_kc_golden_test
   - p01_kc_reward_and_alignment
@@ -2687,12 +2758,16 @@ coverage:
   - p01_kc_dspy_patterns
   - p01_kc_google_ai_patterns
   - p01_kc_openai_api_patterns
+  - p01_kc_terminology_openai_canonical
   instruction:
   - p01_kc_instruction
   - p01_kc_prompt_engineering
   interface:
   - p01_kc_interface
   - p01_kc_schema_validation
+  law:
+  - p01_kc_invariant
+  - p01_kc_governance_patterns
   knowledge_card:
   - p01_kc_knowledge_card
   - p01_kc_academic_rag_patterns
@@ -2700,9 +2775,11 @@ coverage:
   - p01_kc_haystack_patterns
   - p01_kc_llamaindex_patterns
   - p01_kc_mcp_protocol
-  law:
-  - p01_kc_invariant
-  - p01_kc_governance_patterns
+  - p01_kc_terminology_rosetta_stone
+  knowledge_index:
+  - p01_kc_knowledge_index
+  - p01_kc_haystack_patterns
+  - p01_kc_llamaindex_patterns
   learning_record:
   - p01_kc_learning_record
   - p01_kc_memory_persistence
@@ -2721,6 +2798,9 @@ coverage:
   - p01_kc_anthropic_api_patterns
   - p01_kc_chinese_llm_ecosystem
   - p01_kc_mcp_protocol
+  - p01_kc_terminology_anthropic_canonical
+  - p01_kc_terminology_google_mcp_canonical
+  - p01_kc_terminology_rosetta_stone
   memory_scope:
   - p01_kc_memory_scope
   - p01_kc_memory_type
@@ -2740,6 +2820,8 @@ coverage:
   - p01_kc_agent_identity
   model_provider:
   - p01_kc_model_provider
+  multi_modal_config:
+  - p01_kc_multi_modal_config
   naming_rule:
   - p01_kc_naming_rule
   - p01_kc_output_formatting
@@ -2768,6 +2850,8 @@ coverage:
   - p01_kc_plugin
   - p01_kc_chinese_llm_ecosystem
   - p01_kc_mcp_protocol
+  prompt_cache:
+  - p01_kc_prompt_cache
   prompt_template:
   - p01_kc_prompt_template
   - p01_kc_anthropic_api_patterns
@@ -2775,6 +2859,7 @@ coverage:
   - p01_kc_haystack_patterns
   - p01_kc_langchain_patterns
   - p01_kc_mcp_protocol
+  - p01_kc_terminology_anthropic_canonical
   prompt_version:
   - p01_kc_prompt_version
   - p01_kc_prompt_engineering
@@ -2804,6 +2889,7 @@ coverage:
   - p01_kc_llamaindex_patterns
   - p01_kc_openai_api_patterns
   - p01_kc_output_formatting
+  - p01_kc_terminology_openai_canonical
   retriever:
   - p01_kc_retriever
   - p01_kc_dspy_patterns
@@ -2840,6 +2926,8 @@ coverage:
   - p01_kc_academic_rag_patterns
   - p01_kc_google_ai_patterns
   - p01_kc_openai_api_patterns
+  - p01_kc_terminology_google_mcp_canonical
+  - p01_kc_terminology_openai_canonical
   secret_config:
   - p01_kc_secret_config
   - p01_kc_infra_config
@@ -2866,12 +2954,17 @@ coverage:
   - p01_kc_orchestration_runtime
   supabase_data_layer:
   - p01_kc_supabase_data_layer
+  supervisor:
+  - p01_kc_supervisor
   system_prompt:
   - p01_kc_system_prompt
   - p01_kc_academic_agent_patterns
   - p01_kc_anthropic_api_patterns
   - p01_kc_google_ai_patterns
   - p01_kc_openai_api_patterns
+  - p01_kc_terminology_anthropic_canonical
+  - p01_kc_terminology_google_mcp_canonical
+  - p01_kc_terminology_openai_canonical
   toolkit:
   - p01_kc_toolkit
   trace_config:
@@ -2906,3 +2999,7 @@ coverage:
   - p01_kc_llamaindex_patterns
   workflow_primitive:
   - p01_kc_workflow_primitive
+  director:
+  - p01_kc_academic_agent_patterns
+  - p01_kc_chinese_llm_ecosystem
+  - p01_kc_crewai_patterns

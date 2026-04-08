@@ -2,7 +2,7 @@
 id: spec_metaphor_dictionary
 kind: context_doc
 title: Metaphor Dictionary -- Internal Language to Universal Terms
-version: 1.0.0
+version: 1.1.0
 quality: 9.0
 pillar: P01
 created: 2026-04-07
@@ -80,6 +80,28 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 | assimilate | bootstrap brand | **bootstrap** / provision ✅ | /init -> brand_config.yaml -> brand_inject.py |
 | the X | brand variable | **brand identity** (unique to CEX) | CEX = C + E + X, where X = the brand identity |
 | digital asset | configured CEX instance | **configured instance** / deployed agent | CEX + brand = specialized AI system |
+
+## Intent Resolution Metaphors
+
+| User says | System means | Industry term | CEX implementation |
+|-----------|-------------|---------------|-------------------|
+| translate / transmute | resolve intent | **intent resolution** (NLU, agent routing) | N07 transmutation -> 8F F1 CONSTRAIN |
+| understand me | parse intent | **intent classification** (NLU) | `cex_8f_motor.py` intent parser + `kinds_meta.json` |
+| fill in the blanks | complete parameters | **slot filling** (NLU, dialogue systems) | prompt_template {{vars}} + brand_inject.py |
+| figure out what I mean | disambiguate | **disambiguation** (NLU, search) | GDP clarifying questions + N07 restatement |
+| rewrite my question | optimize query | **query rewriting** (IR, RAG) | 8F F1 CONSTRAIN + F4 REASON |
+| assemble the context | build prompt | **prompt composition** / context assembly | `cex_crew_runner.py` + `cex_prompt_layers.py` |
+
+## Input/Output Pipeline Metaphors
+
+| User says | System means | Industry term | CEX implementation |
+|-----------|-------------|---------------|-------------------|
+| feed it | provide input | **injection** / input provision | 8F F3 INJECT (load KCs, memory, brand into prompt) |
+| spit out / produce | generate output | **generation** / inference | 8F F6 PRODUCE (LLM generates artifact) |
+| cook / bake | process through pipeline | **pipeline execution** (MLOps) | 8F F1-F8 full pipeline run |
+| filter | select relevant items | **retrieval filtering** / re-ranking | `cex_retriever.py` top_k + reranker |
+| mix / blend | combine multiple sources | **fusion** / ensemble (ML) | multi-source context assembly in F3 |
+| stamp / seal | validate and approve | **quality gate** (CI/CD) | 8F F7 GOVERN + `cex_score.py` |
 
 ## Rules
 
