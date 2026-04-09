@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, llm-judge, P07, evals, scoring, quality]
 keywords: [judge, eval, score, evaluate, llm-as-judge, criteria, rating, quality]
 triggers: ["create LLM judge", "define eval criteria", "build automated scorer", "configure LLM-as-judge"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building llm_judge artifacts — configurations de LLM-as-Judge pa. L2: Select judge_model apownte for o domain avaliado. L3: When user needs to create, build, or scaffold llm judge.
 quality: 9.1
 title: "Manifest Llm Judge"

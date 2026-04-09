@@ -9,28 +9,27 @@
 # Low-budget? Use ollama + local models everywhere.
 # Premium? Use the best cloud model per domain.
 #
-# CLI options:  claude | gemini | codex | pi | ollama
+# CLI options:  claude | gemini | codex | ollama
 # Model: any model string your CLI supports
 #
 # Decision: 2026-04-02 — /guide session, user-confirmed
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# --- N07: Orchestrator (this session — pi) ---
+# --- N07: Orchestrator (this session — claude) ---
 n07:
-  cli: pi
-  model: anthropic/claude-opus-4-6
-  thinking: xhigh
-  flags: ""
+  cli: claude
+  model: claude-opus-4-6
+  flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: orchestration
   fallback:
     cli: ollama
-    model: qwen3:32b
+    model: qwen3:8b
   notes: "Maestro. Best reasoning for dispatch decisions."
 
 # --- N01: Research & Intelligence ---
 n01:
-  cli: pi
+  cli: claude
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -43,12 +42,12 @@ n01:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:32b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: gemini→opus. 1M context + deepest reasoning for research."
 
 # --- N02: Marketing & Copy ---
 n02:
-  cli: pi
+  cli: claude
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -61,12 +60,12 @@ n02:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for brand strategy + creative."
 
 # --- N03: Engineering & Builder ---
 n03:
-  cli: pi
+  cli: claude
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -79,12 +78,12 @@ n03:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:32b
+    model: qwen3:8b
   notes: "Already opus. 13 ISOs + 8F pipeline. Deepest reasoning."
 
 # --- N04: Knowledge & RAG ---
 n04:
-  cli: pi
+  cli: claude
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -97,12 +96,12 @@ n04:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: gemini→opus. 1M context for full knowledge library + taxonomy."
 
 # --- N05: Operations & DevOps ---
 n05:
-  cli: pi
+  cli: claude
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -115,12 +114,12 @@ n05:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for code review + CI/CD."
 
 # --- N06: Commercial & Brand ---
 n06:
-  cli: pi
+  cli: claude
   model: claude-opus-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
@@ -133,14 +132,14 @@ n06:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
+    model: qwen3:8b
   notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for pricing + monetization."
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # GRID LOAD DISTRIBUTION (6 simultaneous during /grid):
 #
 #   Claude/Opus: N01 + N02 + N03 + N04 + N05 + N06  = 6 (all opus-4-6, 1M ctx)
-#   N07 runs in pi (separate session, doesn't compete)
+#   N07 runs in claude (separate session, doesn't compete)
 #
 # UPGRADED 2026-04-06: All nuclei → opus-4-6 for maximum reasoning + 1M context
 # Fallback principle: always cross-provider (claude → gemini → ollama)

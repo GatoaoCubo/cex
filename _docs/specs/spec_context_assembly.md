@@ -50,9 +50,9 @@ On startup, each agent loads its own artifacts automatically:
 
 | Source | What loads | How |
 |--------|-----------|-----|
-| CLAUDE.md | System overview, commands, constraints | pi reads on startup |
-| deck_{id}.md | Agent's own capability manifest | --append-system-prompt |
-| .claude/rules/{id}*.md | Behavioral rules for this agent | pi reads on startup |
+| CLAUDE.md | System overview, commands, constraints | Claude Code reads on startup |
+| agent_card_{id}.md | Agent's own capability manifest | --append-system-prompt |
+| .claude/rules/{id}*.md | Behavioral rules for this agent | Claude Code reads on startup |
 | Sin identity | Role personality via system prompt | --append-system-prompt |
 
 The agent starts knowing: what it has, what it can build, what rules apply. Zero discovery needed.

@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, input-schema, P06, specialist, contract]
 keywords: [input-schema, input, contract, entry, fields, required, defaults, coercion]
 triggers: ["define input contract for this agent", "what data does X need", "create entry schema"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building input_schemas — contratos unilaterais de input.. L2: Define contratos de input with fields typed e constraints. L3: When user needs to create, build, or scaffold input schema.
 quality: 9.1
 title: "Manifest Input Schema"

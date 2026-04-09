@@ -25,10 +25,19 @@ $cellW = [math]::Floor($screen.Width / $cols)
 $cellH = [math]::Floor($screen.Height / $rows)
 $ox = $screen.X; $oy = $screen.Y
 
+# Fixed cell map -- same layout as spawn_grid.ps1
+# +--------+--------+--------+
+# |  N01   |  N02   |  N03   |
+# +--------+--------+--------+
+# |  N04   |  N05   |  N06   |
+# +--------+--------+--------+
 $grid = @{
-    n01 = @{x=$ox;             y=$oy};              n02 = @{x=$ox+$cellW;     y=$oy}
-    n03 = @{x=$ox+2*$cellW;    y=$oy};              n04 = @{x=$ox;             y=$oy+$cellH}
-    n05 = @{x=$ox+$cellW;      y=$oy+$cellH};       n06 = @{x=$ox+2*$cellW;    y=$oy+$cellH}
+    n01 = @{x=$ox;             y=$oy}
+    n02 = @{x=$ox+$cellW;      y=$oy}
+    n03 = @{x=$ox+2*$cellW;    y=$oy}
+    n04 = @{x=$ox;             y=$oy+$cellH}
+    n05 = @{x=$ox+$cellW;      y=$oy+$cellH}
+    n06 = @{x=$ox+2*$cellW;    y=$oy+$cellH}
 }
 
 $root = Split-Path $PSScriptRoot -Parent
@@ -39,7 +48,7 @@ $runtimeDir = "$root\.cex\runtime"
 New-Item -ItemType Directory -Force -Path "$runtimeDir\handoffs","$runtimeDir\signals","$runtimeDir\pids" | Out-Null
 
 # -- Read CLI from nucleus_models.yaml (single source of truth) --
-$cli = "pi"  # fallback
+$cli = "claude"  # fallback
 $modelsFile = "$root\.cex\config\nucleus_models.yaml"
 if (Test-Path $modelsFile) {
     $inNucleus = $false
@@ -111,63 +120,37 @@ if (Test-Path $pidFile) {
     }
 }
 
-# Boot script -- prefer .cmd (stable colors via `color XX`) over .ps1 (encoding issues)
-$bootCmd = "$root\boot\$nucleus.cmd"
+# Boot script -- prefer .ps1 (sin-aware UX: colors, sizing, banner) over .cmd (basic)
 $bootPs1 = "$root\boot\$nucleus.ps1"
+$bootCmd = "$root\boot\$nucleus.cmd"
 
-if (Test-Path $bootCmd) {
-    # Set pi theme for this nucleus BEFORE launching (pi reads settings.json on startup)
-    # --theme flag doesn't work from CMD. settings.json is the only reliable method.
-    $themeMap = @{
-        n01 = "cex-n01-envy"; n02 = "cex-n02-lust"; n03 = "cex-n03-pride"
-        n04 = "cex-n04-gluttony"; n05 = "cex-n05-wrath"; n06 = "cex-n06-greed"
-        n07 = "cex-n07-sloth"
-    }
-    $themeName = $themeMap[$nucleus]
-    if ($themeName) {
-        # Lock -> write theme -> launch -> wait for pi to read -> unlock
-        # Prevents race condition when 6 nuclei dispatch in sequence
-        $lockFile = "$runtimeDir\.theme_lock"
-        $lockTimeout = 30
-        $lockStart = Get-Date
-        while (Test-Path $lockFile) {
-            if (((Get-Date) - $lockStart).TotalSeconds -gt $lockTimeout) {
-                Remove-Item $lockFile -Force -EA SilentlyContinue
-                break
-            }
-            Start-Sleep -Milliseconds 500
-        }
-        Set-Content $lockFile $nucleus -Encoding ASCII
-
-        # Write theme (python -- PS corrupts JSON encoding)
-        & python -c "import json;p=r'$($env:USERPROFILE)\.pi\agent\settings.json';s=json.load(open(p,encoding='utf-8'));s['theme']='$themeName';json.dump(s,open(p,'w'),indent=2)" 2>$null
-        Write-Output "[$upper] Theme: $themeName"
-    }
-
-    Write-Output "[$upper] Boot: CMD (pi + theme)"
-    $proc = Start-Process cmd -ArgumentList "/k `"$bootCmd`"" -WorkingDirectory $root -PassThru
-
-    # Wait for pi to read settings.json, then release theme lock
-    if ($themeName) {
-        Start-Sleep -Seconds 3
-        Remove-Item $lockFile -Force -EA SilentlyContinue
-    }
-} elseif (Test-Path $bootPs1) {
-    # PowerShell fallback (encoding-sensitive, color does not persist)
-    Write-Output "[$upper] Boot: PowerShell (fallback)"
+if (Test-Path $bootPs1) {
+    Write-Output "[$upper] Boot: PowerShell (sin-aware UX)"
     $proc = Start-Process powershell -ArgumentList @(
         "-NoProfile", "-NoExit", "-ExecutionPolicy", "Bypass",
         "-File", $bootPs1
     ) -WorkingDirectory $root -PassThru
+} elseif (Test-Path $bootCmd) {
+    Write-Output "[$upper] Boot: CMD (fallback)"
+    $proc = Start-Process cmd -ArgumentList "/k `"$bootCmd`"" -WorkingDirectory $root -PassThru
 } else {
-    Write-Output "[$upper] ERROR: no boot script at $bootCmd or $bootPs1"; exit 1
+    Write-Output "[$upper] ERROR: no boot script at $bootPs1 or $bootCmd"; exit 1
 }
 
-Start-Sleep -Seconds 3
-
-# Position window in grid
+# Position window in fixed grid cell (retry loop for window handle)
 if ($proc -and $pos) {
-    [Win32]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, $cellW, $cellH, $true) | Out-Null
+    $hwnd = [IntPtr]::Zero
+    for ($i = 0; $i -lt 10; $i++) {
+        Start-Sleep -Milliseconds 500
+        try { $proc.Refresh() } catch {}
+        $hwnd = $proc.MainWindowHandle
+        if ($hwnd -ne [IntPtr]::Zero) { break }
+    }
+    if ($hwnd -ne [IntPtr]::Zero) {
+        [Win32]::MoveWindow($hwnd, $pos.x, $pos.y, $cellW, $cellH, $true) | Out-Null
+    } else {
+        Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
+    }
 }
 
 # Record PID with session tracking

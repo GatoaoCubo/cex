@@ -12,7 +12,7 @@ author: n04_knowledge
 tags: [kind-builder, context-window-config, P03, specialist, token-budget, overflow, priority]
 keywords: [context_window, token_budget, priority, overflow, truncation, prompt_assembly, budget_allocation]
 triggers: ["create context window config", "build token budget allocation", "configure prompt assembly limits"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building context_window_configs — allocation de budget de tokens for assembly de prompts. L2: Define budgets per section, priority tiers, and overflow strategy. L3: When user needs to create, build, or scaffold context_window_config.
 quality: 9.1
 title: "Manifest Context Window Config"

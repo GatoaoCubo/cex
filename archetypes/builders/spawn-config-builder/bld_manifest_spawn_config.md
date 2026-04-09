@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, spawn-config, P12, specialist, orchestration, agent_group]
 keywords: [spawn, config, agent_group, solo, grid, continuous, terminal, deploy]
 triggers: ["create spawn config for agent_group", "configure grid spawn", "build solo spawn definition"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `spawn_config` — configurations de spawn de agent_groups. L2: Produce spawn_config with frontmatter complete (19 fields). L3: When user needs to create, build, or scaffold spawn config.
 quality: 9.1
 title: "Manifest Spawn Config"

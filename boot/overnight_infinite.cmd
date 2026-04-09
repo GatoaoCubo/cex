@@ -7,7 +7,7 @@ title CEX INFINITE BOOTSTRAP [%date%]
 color 0E
 mode con: cols=160 lines=50
 
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
+set CEX_ROOT=%~dp0..
 cd /d "%CEX_ROOT%"
 
 echo.
@@ -25,7 +25,7 @@ echo.
 :loop
 echo [%time%] Starting N07 session...
 
-pi --model anthropic/claude-opus-4-6 ^
+claude --model claude-opus-4-6 --name "CEX-N07-OVERNIGHT" --continue --fork-session ^
    --append-system-prompt "N07_admin/agent_card_n07.md" ^
    --append-system-prompt ".cex/config/context_self_select.md" ^
    --append-system-prompt "You are N07 Orchestrating Sloth. Read .cex/runtime/mission_state.yaml. Continue the mission from last checkpoint. Dispatch nuclei, monitor via git log (non-blocking), consolidate. When your context is getting full, write mission state to disk and exit cleanly." ^

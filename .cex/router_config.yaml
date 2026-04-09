@@ -41,8 +41,10 @@ providers:
     api_key_env: ""
     cost_per_1k: 0.0
     models:
-      large: llama3:70b
-      small: llama3:8b
+      large: qwen3:8b
+      small: deepseek-r1:8b
+      reasoning: deepseek-r1:8b
+      structured: qwen3:8b
 
 # Nucleus → Provider mapping
 # UPGRADED 2026-04-06: All nuclei → anthropic/opus (1M context, deepest reasoning)

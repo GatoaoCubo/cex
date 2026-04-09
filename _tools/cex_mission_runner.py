@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""CEX Mission Runner v1.0 -- Autonomous wave-based grid orchestration.
+"""CEX Mission Runner v2.0 -- Autonomous grid orchestration (wave + continuous).
 
-Reads a mission plan, executes wave by wave:
-  write handoffs -> dispatch grid -> poll signals -> stop -> quality gate -> consolidate
+Reads a mission plan, executes wave by wave or in continuous batching mode:
+  wave:       dispatch all -> wait all -> consolidate -> next wave
+  continuous: dispatch all -> on completion, immediately re-dispatch -> no idle gaps
 
 Usage:
     python _tools/cex_mission_runner.py --plan .cex/runtime/plans/plan_X.md --dry-run
     python _tools/cex_mission_runner.py --plan .cex/runtime/plans/plan_X.md --timeout 3600
     python _tools/cex_mission_runner.py --mission MONETIZE --waves waves.yaml
+    python _tools/cex_mission_runner.py --task-queue .cex/runtime/task_queue.yaml --continuous
 
 Exit codes:
-    0 = all waves complete, all quality gates passed
+    0 = all waves/tasks complete, all quality gates passed
     1 = timeout on one or more waves
     2 = quality gate failure (outputs below threshold)
     3 = crash (nucleus died)
@@ -55,6 +57,9 @@ def parse_args():
     p.add_argument("--max-retries", type=int, default=1, help="Max retries per failed nucleus (default: 1)")
     p.add_argument("--dry-run", action="store_true", help="Preview without executing")
     p.add_argument("--skip-stop", action="store_true", help="Don't kill processes after each wave")
+    p.add_argument("--continuous", action="store_true",
+                   help="Continuous batching: re-dispatch idle nuclei immediately on completion")
+    p.add_argument("--task-queue", help="Path to task queue YAML/JSON for continuous mode")
     return p.parse_args()
 
 
@@ -289,6 +294,311 @@ def quality_gate(nuclei: list, watch_result: dict, floor: float) -> dict:
 
 
 # ==================================================
+# CONTINUOUS BATCHING
+# ==================================================
+
+TASK_QUEUE_PATH = ROOT / ".cex" / "runtime" / "task_queue.yaml"
+
+NUCLEUS_DOMAINS = {
+    "n01": ["research", "analysis", "intelligence", "benchmark"],
+    "n02": ["marketing", "copy", "campaign", "ad", "brand_voice"],
+    "n03": ["build", "create", "scaffold", "template", "iso"],
+    "n04": ["knowledge", "rag", "embedding", "chunk", "index", "taxonomy"],
+    "n05": ["code", "test", "deploy", "ci", "debug", "review"],
+    "n06": ["pricing", "course", "funnel", "monetization", "revenue"],
+}
+
+
+def load_task_queue(path: str) -> list:
+    """Load task queue from YAML or JSON.
+
+    Format:
+    - task: "Build KC for agent kind"
+      kind: knowledge_card
+      nucleus: n04          # optional -- auto-routed if missing
+      priority: normal       # critical | normal | low
+    """
+    p = Path(path)
+    if not p.exists():
+        log(f"Task queue not found: {path}", "ERROR")
+        return []
+    text = p.read_text(encoding="utf-8")
+    if p.suffix in (".yaml", ".yml"):
+        try:
+            import yaml
+            data = yaml.safe_load(text)
+        except ImportError:
+            log("PyYAML not installed -- falling back to JSON parser", "WARN")
+            data = json.loads(text)
+    else:
+        data = json.loads(text)
+
+    tasks = data if isinstance(data, list) else data.get("tasks", [])
+    # Add index for tracking
+    for i, t in enumerate(tasks):
+        t.setdefault("id", i)
+        t.setdefault("status", "pending")
+        t.setdefault("priority", "normal")
+        t.setdefault("nucleus", route_task_to_nucleus(t))
+    return tasks
+
+
+def route_task_to_nucleus(task: dict) -> str:
+    """Auto-route a task to a nucleus based on kind or keywords."""
+    kind = task.get("kind", "")
+    desc = task.get("task", "").lower()
+
+    # Check kinds_meta for pillar -> nucleus mapping
+    pillar_nucleus = {
+        "P01": "n04", "P02": "n03", "P03": "n03", "P04": "n05",
+        "P05": "n03", "P06": "n03", "P07": "n05", "P08": "n03",
+        "P09": "n05", "P10": "n04", "P11": "n05", "P12": "n03",
+    }
+
+    # Try kinds_meta.json lookup
+    km_path = ROOT / ".cex" / "kinds_meta.json"
+    if km_path.exists() and kind:
+        try:
+            km = json.loads(km_path.read_text(encoding="utf-8"))
+            if kind in km:
+                pillar = km[kind].get("pillar", "")
+                if pillar in pillar_nucleus:
+                    return pillar_nucleus[pillar]
+        except Exception:
+            pass
+
+    # Keyword fallback
+    for nuc, keywords in NUCLEUS_DOMAINS.items():
+        if any(kw in desc for kw in keywords):
+            return nuc
+
+    return "n03"  # Default: builder
+
+
+def pop_next_task(tasks: list, nucleus: str) -> dict:
+    """Pop the next pending task for a given nucleus. Priority: critical first."""
+    priority_order = {"critical": 0, "normal": 1, "low": 2}
+    candidates = [t for t in tasks if t["status"] == "pending" and t["nucleus"] == nucleus]
+    if not candidates:
+        # Try any pending task (flexible routing)
+        candidates = [t for t in tasks if t["status"] == "pending"]
+    if not candidates:
+        return {}
+    candidates.sort(key=lambda t: priority_order.get(t.get("priority", "normal"), 1))
+    chosen = candidates[0]
+    chosen["status"] = "dispatched"
+    chosen["dispatched_at"] = datetime.now(timezone.utc).isoformat()
+    return chosen
+
+
+def write_task_handoff(mission: str, nucleus: str, task: dict):
+    """Write a handoff file for a single task dispatch."""
+    HANDOFF_DIR.mkdir(parents=True, exist_ok=True)
+    handoff_path = HANDOFF_DIR / f"{mission}_{nucleus}.md"
+    content = f"""---
+from: mission_runner
+to: {nucleus.upper()}
+mission: {mission}
+task_id: {task.get('id', 0)}
+created: {datetime.now(timezone.utc).isoformat()}
+---
+
+# Task: {task.get('task', 'No description')}
+
+## Kind
+{task.get('kind', 'unknown')}
+
+## Instructions
+Build this artifact following 8F pipeline. Load builder ISOs from
+archetypes/builders/{task.get('kind', 'unknown')}-builder/.
+Read KC from P01_knowledge/library/kind/kc_{task.get('kind', 'unknown')}.md.
+Compile after save. Signal on complete.
+"""
+    handoff_path.write_text(content, encoding="utf-8")
+    # Also copy to task file
+    task_path = HANDOFF_DIR / f"{nucleus}_task.md"
+    task_path.write_text(content, encoding="utf-8")
+    log(f"  Handoff written: {handoff_path.name}")
+
+
+def dispatch_solo(nucleus: str, mission: str, dry_run: bool = False):
+    """Dispatch a single nucleus via dispatch.sh solo."""
+    if dry_run:
+        log(f"[DRY-RUN] Would dispatch {nucleus.upper()} solo", "DRY")
+        return
+    cmd = ["bash", str(SPAWN / "dispatch.sh"), "solo", nucleus, f"{mission} task"]
+    try:
+        subprocess.run(cmd, cwd=str(ROOT), timeout=30, capture_output=True)
+        log(f"  {nucleus.upper()} dispatched (solo)")
+    except Exception as e:
+        log(f"  {nucleus.upper()} dispatch failed: {e}", "ERROR")
+
+
+def check_signal(nucleus: str) -> dict:
+    """Non-blocking check: has this nucleus signaled completion?"""
+    if not SIGNAL_DIR.exists():
+        return {}
+    sigs = sorted(
+        SIGNAL_DIR.glob(f"signal_{nucleus}_*.json"),
+        key=lambda f: f.stat().st_mtime, reverse=True,
+    )
+    if not sigs:
+        return {}
+    try:
+        data = json.loads(sigs[0].read_text(encoding="utf-8"))
+        return {
+            "status": data.get("status", "complete"),
+            "quality": data.get("quality_score", 0),
+            "signal_file": str(sigs[0]),
+        }
+    except Exception:
+        return {}
+
+
+def run_continuous(args):
+    """Continuous batching mode: dispatch -> poll -> re-dispatch -> repeat."""
+    mission = args.mission
+    log(f"{'='*50}")
+    log(f"CEX MISSION RUNNER v2.0 -- CONTINUOUS MODE")
+    log(f"Mission: {mission}")
+    log(f"Timeout: {args.timeout}s | Poll: {args.poll}s")
+    log(f"Quality floor: {args.quality_floor}")
+    log(f"Dry run: {args.dry_run}")
+    log(f"{'='*50}")
+
+    # Load task queue
+    queue_path = args.task_queue or str(TASK_QUEUE_PATH)
+    tasks = load_task_queue(queue_path)
+    if not tasks:
+        log("No tasks in queue. Provide --task-queue or populate .cex/runtime/task_queue.yaml", "ERROR")
+        sys.exit(1)
+
+    total = len(tasks)
+    log(f"Loaded {total} tasks from queue")
+    for t in tasks[:10]:
+        log(f"  [{t['priority']}] {t['nucleus'].upper()}: {t.get('task', '?')[:60]}")
+    if total > 10:
+        log(f"  ... and {total - 10} more")
+
+    # Track active nuclei
+    active = {}  # nucleus -> task
+    completed = []
+    failed = []
+    all_nuclei = ["n01", "n02", "n03", "n04", "n05", "n06"]
+    start_time = time.time()
+
+    # Initial dispatch: fill all idle nuclei
+    for nuc in all_nuclei:
+        task = pop_next_task(tasks, nuc)
+        if task:
+            write_task_handoff(mission, nuc, task)
+            dispatch_solo(nuc, mission, args.dry_run)
+            active[nuc] = task
+            log(f"  Initial: {nuc.upper()} -> {task.get('task', '?')[:50]}")
+
+    if not active:
+        log("No tasks to dispatch", "ERROR")
+        sys.exit(1)
+
+    log(f"\n{len(active)} nuclei dispatched. Entering poll loop (every {args.poll}s)...")
+
+    # Main poll loop
+    iteration = 0
+    while active:
+        elapsed = int(time.time() - start_time)
+        if elapsed > args.timeout:
+            log(f"TIMEOUT after {elapsed}s -- {len(active)} nuclei still active", "WARN")
+            break
+
+        time.sleep(args.poll)
+        iteration += 1
+
+        # Check for completions
+        newly_done = []
+        for nuc, task in list(active.items()):
+            sig = check_signal(nuc)
+            if sig:
+                quality = sig.get("quality", 0)
+                passed = quality >= args.quality_floor if quality > 0 else True
+                status_tag = "PASS" if passed else "FAIL"
+
+                log(f"  {nuc.upper()} DONE: quality={quality} [{status_tag}] "
+                    f"task={task.get('task', '?')[:40]}")
+
+                task["quality"] = quality
+                task["passed"] = passed
+                task["status"] = "complete"
+
+                if passed:
+                    completed.append(task)
+                else:
+                    failed.append(task)
+
+                newly_done.append(nuc)
+
+                # Clean the signal so we don't re-detect
+                sig_file = sig.get("signal_file", "")
+                if sig_file and Path(sig_file).exists():
+                    Path(sig_file).unlink()
+
+        # Remove completed from active, dispatch next
+        for nuc in newly_done:
+            del active[nuc]
+
+            # Immediately re-dispatch
+            next_task = pop_next_task(tasks, nuc)
+            if next_task:
+                write_task_handoff(mission, nuc, next_task)
+                dispatch_solo(nuc, mission, args.dry_run)
+                active[nuc] = next_task
+                log(f"  RE-DISPATCH: {nuc.upper()} -> {next_task.get('task', '?')[:50]}")
+
+        # Progress report every 5 iterations
+        pending = sum(1 for t in tasks if t["status"] == "pending")
+        if iteration % 5 == 0 or newly_done:
+            log(f"  [poll {iteration}] active={len(active)} done={len(completed)} "
+                f"fail={len(failed)} pending={pending} elapsed={elapsed}s")
+
+    # Final stop
+    if not args.skip_stop and not args.dry_run:
+        log("Stopping all processes...")
+        stop_processes(args.dry_run)
+
+    # Final report
+    total_duration = int(time.time() - start_time)
+    pending_count = sum(1 for t in tasks if t["status"] == "pending")
+
+    log("")
+    log(f"{'='*50}")
+    log(f"CONTINUOUS MISSION COMPLETE: {mission}")
+    log(f"{'='*50}")
+    log(f"Total tasks: {total}")
+    log(f"Completed: {len(completed)} | Failed: {len(failed)} | Pending: {pending_count}")
+    log(f"Duration: {total_duration}s ({total_duration // 60}min)")
+
+    all_passed = len(failed) == 0 and pending_count == 0
+
+    summary = {
+        "mission": mission,
+        "mode": "continuous",
+        "status": "complete" if all_passed else "partial",
+        "tasks_total": total,
+        "tasks_completed": len(completed),
+        "tasks_failed": len(failed),
+        "tasks_pending": pending_count,
+        "total_duration_seconds": total_duration,
+        "all_quality_passed": all_passed,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+    summary_path = ROOT / ".cex" / "runtime" / "grid_status.json"
+    summary_path.write_text(json.dumps(summary, indent=2, default=str), encoding="utf-8")
+    log(f"Summary written to {summary_path}")
+
+    sys.exit(0 if all_passed else 2)
+
+
+# ==================================================
 # CONSOLIDATION
 # ==================================================
 
@@ -488,4 +798,7 @@ def run_mission(args):
 
 if __name__ == "__main__":
     args = parse_args()
-    run_mission(args)
+    if args.continuous:
+        run_continuous(args)
+    else:
+        run_mission(args)

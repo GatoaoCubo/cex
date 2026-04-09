@@ -9,7 +9,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: N01_intelligence
 domain: terminology
-origin: research_d4_terminology
+origin: src_provider_taxonomy
 quality: 9.1
 tags: [terminology, anthropic, canonical, claude, messages-api, tool-use, mcp, permanent]
 tldr: "Complete canonical vocabulary from Anthropic's official docs. Every term listed here is the EXACT name Anthropic uses — not synonyms, not paraphrases. Use this to validate CEX artifacts touching Anthropic features."

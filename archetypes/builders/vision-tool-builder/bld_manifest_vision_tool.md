@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, vision-tool, P04, tools, image, ocr, screenshot]
 keywords: [vision, image, ocr, screenshot, photo, picture, scan, detect]
 triggers: ["create vision tool", "define image analyzer", "build OCR tool", "wrap screenshot reader"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building vision_tool artifacts — tools de analysis visual . L2: Define tool de visao with input_types e capabilities declared. L3: When user needs to create, build, or scaffold vision tool.
 quality: 9.1
 title: "Manifest Vision Tool"

@@ -1,0 +1,71 @@
+id: p04_output_github_actions
+kind: hook_config
+pillar: P04
+title: GitHub Actions CI/CD Pipeline Configuration
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n05_operations
+domain: ci-cd-operations
+quality: null
+tags:
+- hook_config
+- ci-cd
+- operations
+- N05
+- github-actions
+- pipeline
+tldr: GitHub Actions CI/CD pipeline with pre-commit hooks, artifact validation, system tests, quality gates, and Railway deploy
+  automation.
+density_score: 0.96
+overview: This configuration defines the complete CI/CD pipeline for CEX via GitHub Actions. Three workflows cover validation,
+  testing, and deployment. Every push and PR is gated. No merge without green checks. No deploy without passing all quality
+  gates.
+workflow_1_validate_on_every_push_and_pr: "# .github/workflows/validate.yml\nname: CEX Validate\non:\n  push:\n    branches:\
+  \ [main, develop]\n  pull_request:\n    branches: [main]\n\njobs:\n  validate:\n    runs-on: ubuntu-latest\n    steps:\n\
+  \      - uses: actions/checkout@v4\n\n      - name: Setup Python\n        uses: actions/setup-python@v5\n        with:\n\
+  \          python-version: '3.11'\n          cache: 'pip'\n\n      - name: Install dependencies\n        run: pip install\
+  \ -r requirements.txt\n\n      - name: Encoding check\n        run: python _tools/cex_sanitize.py --all\n\n      - name:\
+  \ Frontmatter validation\n        run: python _tools/cex_hooks.py --all\n\n      - name: YAML compilation\n        run:\
+  \ python _tools/cex_compile.py --all --dry-run\n\n      - name: Builder health\n        run: python _tools/cex_doctor.py\n\
+  \n      - name: Quality snapshot\n        run: python _tools/cex_quality_monitor.py --snapshot"
+workflow_2_test_on_pr_to_main: "# .github/workflows/test.yml\nname: CEX Test\non:\n  pull_request:\n    branches: [main]\n\
+  \njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Setup Python\n\
+  \        uses: actions/setup-python@v5\n        with:\n          python-version: '3.11'\n          cache: 'pip'\n\n    \
+  \  - name: Install dependencies\n        run: pip install -r requirements.txt\n\n      - name: System tests (54 tests)\n\
+  \        run: python _tools/cex_system_test.py\n\n      - name: Flywheel audit (109 checks)\n        run: python _tools/cex_flywheel_audit.py\n\
+  \n      - name: Regression check\n        run: python _tools/cex_quality_monitor.py --compare\n\n      - name: Release gate\n\
+  \        run: python _tools/cex_release_check.py"
+workflow_3_deploy_on_merge_to_main_manual_trigger: "# .github/workflows/deploy.yml\nname: CEX Deploy\non:\n  push:\n    branches:\
+  \ [main]\n  workflow_dispatch:\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    if: github.event_name == 'push' || github.event_name\
+  \ == 'workflow_dispatch'\n    environment: production\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Setup\
+  \ Railway CLI\n        run: npm install -g @railway/cli\n\n      - name: Pre-flight checks\n        run: |\n          python\
+  \ _tools/cex_release_check.py\n          python _tools/cex_hooks.py --all\n\n      - name: Deploy to Railway\n        env:\n\
+  \          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}\n        run: railway up --detach\n\n      - name: Smoke eval (30s\
+  \ budget)\n        run: bash N05_operations/output/smoke_eval_deploy.sh ${{ vars.API_URL }}\n        timeout-minutes: 1\n\
+  \n      - name: Post-deploy health verification\n        run: |\n          sleep 10\n          curl -sf ${{ vars.API_URL\
+  \ }}/health | jq ."
+branch_protection_rules: '| rule | value |
+
+  |------|-------|
+
+  | Required status checks | validate, test |
+
+  | Required reviews | 1 minimum |
+
+  | Dismiss stale reviews | true |
+
+  | Require up-to-date branch | true |
+
+  | Restrict pushes to main | only via PR |
+
+  | Allow force push | never |'
+secrets_required: '| secret | purpose |
+
+  |--------|---------|
+
+  | RAILWAY_TOKEN | Railway CLI authentication for deploys |
+
+  | ANTHROPIC_API_KEY | LLM API access for runtime tests |
+
+  | DATABASE_URL | PostgreSQL connection for integration tests |'

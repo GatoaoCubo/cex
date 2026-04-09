@@ -12,7 +12,7 @@ author: n04_knowledge
 tags: [kind-builder, citation, P01, specialist, provenance, attribution, source]
 keywords: [citation, reference, provenance, attribution, source, evidence, grounding, reliability]
 triggers: ["create citation for source", "add source attribution", "build reference with provenance"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building citations — structured source attributions with provenance. L2: Define references with URL, reliability tier, and excerpt. L3: When user needs to create, build, or scaffold citation.
 quality: 9.1
 title: "Manifest Citation"

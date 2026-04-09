@@ -112,7 +112,7 @@ QUALITY_THRESHOLDS = {
 COPY_TOOLS = ["cex_doctor.py", "validate_builder.py", "cex_compile.py"]
 
 VALID_DOMAINS = ["marketing", "engineering", "research", "ops", "custom"]
-VALID_LLMS = ["pi", "claude", "openai", "gemini", "multi"]
+VALID_LLMS = ["claude", "openai", "gemini", "multi"]
 VALID_QUALITIES = ["strict", "standard", "relaxed"]
 
 

@@ -51,7 +51,7 @@ Rule: Every builder directory MUST contain exactly 13 builder spec files.
 
 ## Builder Generation Constraints
 1. MUST generate all 13 builder specs per builder (manifest, instruction, config, memory, tools, collaboration, architecture, schema, output_template, examples, quality_gate, knowledge_card, system_prompt)
-2. MUST include universal fields in generated ISOs (keywords, triggers, capability_summary in manifest; memory_scope, observation_types in memory; effort, max_turns, hooks, permission_scope in config; Tool Permissions in tools)
+2. MUST include universal fields in generated ISOs (keywords, triggers, capabilities in manifest; memory_scope, observation_types in memory; effort, max_turns, hooks, permission_scope in config; Tool Permissions in tools)
 3. MUST respect non-default overrides table for specific builders
 4. NEVER generate ISOs that exceed size limits
 5. ALWAYS validate generated builder with cex_doctor.py before commit

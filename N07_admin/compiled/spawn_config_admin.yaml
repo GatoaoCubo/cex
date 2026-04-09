@@ -7,7 +7,7 @@ created: 2026-03-30
 updated: 2026-03-30
 author: builder_agent
 domain: orchestration
-quality: 9.0
+quality: 9.1
 tags:
 - spawn-config
 - orchestrator
@@ -15,11 +15,17 @@ tags:
 - multi-cli
 tldr: Multi-CLI orchestration -- each nucleus uses the best LLM provider for its domain.
 density_score: 0.9
+linked_artifacts:
+  primary: N07_admin/orchestration/workflow_admin.md
+  related:
+  - N07_admin/orchestration/handoff_admin.md
+  - N07_admin/orchestration/signal_admin.md
+  - N07_admin/memory/grid_orchestration_mastery.md
 cli_matrix_best_tool_for_each_job: '| Nucleus | CLI | Model | Context | Cost | Domain Strength |
 
   |---------|-----|-------|---------|------|-----------------|
 
-  | N07 Orchestrator | pi + claude | opus-4-6 xhigh | 200K | 1156$ | Meta-reasoning, dispatch |
+  | N07 Orchestrator | claude | opus-4-6 xhigh | 200K | 1156$ | Meta-reasoning, dispatch |
 
   | N03 Builder | claude | opus | 200K | 1156$ | Complex construction, 8F |
 
@@ -41,35 +47,30 @@ why_multi_cli: 'No single LLM is best at everything:
   - Gemini 2.5 Pro: 1M context window, free via subscription, ideal for knowledge
 
   - Claude sonnet: Best cost/quality for creative writing'
-boot_commands: '| Nucleus | Command |
+boot_commands: 'Boot scripts are generated from `.cex/config/nucleus_models.yaml`:
 
-  |---------|---------|
+  python _tools/cex_boot_gen.py          # regenerate all
 
-  | N07 | boot\cex.cmd (pi + opus xhigh) |
+  python _tools/cex_boot_gen.py --show   # show current matrix
 
-  | N03 | boot
 
-  03.cmd (claude opus) |
+  | Nucleus | Command | Generated from config |
 
-  | N05 | boot
+  |---------|---------|----------------------|
 
-  05.cmd (codex full-auto) |
+  | N07 | boot\cex.cmd | n07.cli + n07.model |
 
-  | N04 | boot
+  | N01 | boot\n01.cmd | n01.cli + n01.model |
 
-  04.cmd (gemini 2.5-pro yolo) |
+  | N02 | boot\n02.cmd | n02.cli + n02.model |
 
-  | N01 | boot
+  | N03 | boot\n03.cmd | n03.cli + n03.model |
 
-  01.cmd (gemini 2.5-pro yolo) |
+  | N04 | boot\n04.cmd | n04.cli + n04.model |
 
-  | N02 | boot
+  | N05 | boot\n05.cmd | n05.cli + n05.model |
 
-  02.cmd (claude sonnet) |
-
-  | N06 | boot
-
-  06.cmd (claude sonnet) |'
+  | N06 | boot\n06.cmd | n06.cli + n06.model |'
 spawn_commands_from_n07: '| Mode | Command |
 
   |------|---------|
@@ -84,7 +85,7 @@ spawn_commands_from_n07: '| Mode | Command |
 
   | Stop | powershell -File _spawn/spawn_stop.ps1 |'
 cost_optimization:
-- 'Use gemini (N01, N04) for knowledge-heavy tasks: /usr/bin/bash cost via subscription'
-- 'Use codex (N05) for code tasks: competitive pricing'
-- 'Use sonnet (N02, N06) for creative: 5x cheaper than opus'
+- All nuclei upgraded to claude/opus-4-6 with 1M context (2026-04-06)
+- 'Fallback: gemini-2.5-pro (cross-provider), then ollama/qwen3 (local)'
+- 'Config source: .cex/config/nucleus_models.yaml (regenerate boot scripts via cex_boot_gen.py)'
 - Reserve opus (N03, N07) for complex construction and orchestration only

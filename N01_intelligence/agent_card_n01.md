@@ -5,7 +5,7 @@ title: N01 Agent Card -- Available Capabilities
 pillar: P01_knowledge
 nucleus: N01
 sin: Inveja Analitica
-version: 1.1.0
+version: 1.2.0
 quality: 9.0
 created: 2026-04-07
 density_score: 1.0
@@ -25,24 +25,24 @@ density_score: 1.0
 
 8F is the reasoning protocol for every task -- research briefs, competitive grids, trend reports all pass F1-F8.
 
-**Comparative positioning**: N01 is the deepest analyst but leanest producer. Where N02 (110 cards) and N06 (138 cards) have broader artifact libraries, N01 compensates with 5 MCP research servers and 6 schema contracts that no other nucleus has. N05 (107 cards) shares eval-building capability but lacks N01's external data pipeline.
+**Comparative positioning**: N01 has closed its artifact gaps. With 53 artifacts, 3 agents, 4 tool configs, and 5 quality artifacts (including benchmark + eval dataset), N01 now matches N05's infrastructure maturity while maintaining unique depth in external research via 5 MCP servers and 6 schema contracts.
 
 ## My Artifacts
 
 | Subdir | Count | Purpose |
 |--------|------:|---------|
-| agents | 1 | Agent definition for intelligence nucleus |
+| agents | 3 | Main agent + competitor tracker sub-agent + paper reviewer sub-agent |
 | architecture | 1 | Agent card (capabilities, routing, interfaces) |
 | feedback | 1 | Quality gate for intelligence outputs |
 | knowledge | 6 | KCs: intelligence domain, research methods, source catalog, pet market, embedding config, RAG source |
-| memory | 2 | Embedding config + RAG source for persistent recall |
+| memory | 5 | Learning record, checkpoint, knowledge index, embedding config, RAG source |
 | orchestration | 3 | Dispatch rules (intelligence routing, research pipeline) + workflow |
-| output | 15 | Research deliverables: competitive grids, SWOT, market snapshots, trend reports, benchmark reports, executive summaries, SDK audits, content factory landscape |
+| output | 16 | Research deliverables: competitive grids, SWOT, market snapshots, trend reports, benchmark reports, executive summaries, SDK audits, content factory landscape, monetization research |
 | prompts | 2 | System prompt + prompt template for intelligence tasks |
-| quality | 3 | Quality gate + 2 scoring rubrics |
+| quality | 5 | Quality gate + 2 scoring rubrics + benchmark + eval dataset |
 | schemas | 6 | Contracts: citation format, competitive analysis, research brief, depth levels, source quality, trend detection |
-| tools | 1 | Research pipeline tool definition |
-| **TOTAL** | **41** | |
+| tools | 4 | Research pipeline + scraping config + search config + MCP server orchestration |
+| **TOTAL** | **53** | |
 
 ## Kinds I Can Build
 
@@ -139,29 +139,37 @@ Compared to: N03 builds primarily P03+P08 kinds (prompt/architecture), N05 build
 5. **1M context window**: Enables processing entire codebases, long research papers, and multi-document analysis in a single pass. Critical for competitive intelligence that requires cross-referencing multiple sources.
 6. **Knowledge accumulation infrastructure**: Memory tools (select/update/age) + knowledge_index + learning_record kinds enable N01 to build institutional memory across research sessions.
 
-## Gaps
+## Gaps (Updated 2026-04-07)
+
+### CLOSED Gaps
+
+| Gap | Resolution | Artifacts Added |
+|-----|-----------|----------------|
+| ~~memory/ has only 2 artifacts~~ | CLOSED -- now 5 artifacts | learning_record, checkpoint, knowledge_index |
+| ~~tools/ has only 1 artifact~~ | CLOSED -- now 4 artifacts | scraping_config, search_config, mcp_server_config |
+| ~~agents/ has only 1 artifact~~ | CLOSED -- now 3 artifacts | competitor_tracker, paper_reviewer |
+| ~~No benchmark artifacts~~ | CLOSED | p07_benchmark_research_quality |
+| ~~No eval_dataset artifacts~~ | CLOSED | p07_eval_dataset_research_outputs |
+| ~~No knowledge_index~~ | CLOSED | knowledge_index_intelligence in memory/ |
+
+### Remaining Gaps
 
 | Gap | Impact | Priority | Comparison |
 |-----|--------|----------|------------|
-| `memory/` has only 2 artifacts | Research findings not accumulating across sessions -- each task starts near-blank | **High** | N02 has 5 memory artifacts, N06 has 4 |
-| `tools/` has only 1 artifact | Research pipeline defined but no tool-specific configs (scraping rules, API rate limits) | Medium | N05 has 3 tool configs |
-| `agents/` has only 1 artifact | No sub-agent definitions for specialized research roles (competitor tracker, paper reviewer) | Medium | N02 has 2 agents, N05 has 2 |
-| No `embedder_provider` built | Cannot configure embedding models for RAG despite being a P01 kind | Medium | Exists in N00 examples only |
-| No `vector_store` built | Cannot configure vector stores for semantic search | Medium | Exists in N00 examples only |
-| No `benchmark` artifacts | Cannot measure own research quality over time despite P07 access | Medium | N05 has evaluation infra |
-| No `eval_dataset` artifacts | No test cases for validating research output quality | Medium | -- |
-| No `knowledge_index` | Missing semantic index over 15 research outputs -- retrieval is keyword-only | Low | N04 likely has this |
-| 15/20 kinds unbuilt | 75% of buildable kinds have zero instances -- potential unrealized | Low | Expected for v1 |
-| No `chunk_strategy` | No document chunking config for processing long papers via RAG | Low | N04 may own this |
+| No `embedder_provider` built | Cannot configure embedding models for RAG despite being a P01 kind | Low | Covered functionally by embedding_config |
+| No `vector_store` built | Cannot configure vector stores for semantic search | Low | Depends on infra decisions (N05 domain) |
+| 12/20 kinds unbuilt | 60% of buildable kinds have zero instances | Low | Expected for v1 -- build on demand |
+| No `chunk_strategy` | No document chunking config for long papers via RAG | Low | Partially covered by embedding_config chunking section |
 
 ## Agent Card Summary
 
 | Category | Count |
 |----------|------:|
-| Artifacts in N01_intelligence/ | 41 |
+| Artifacts in N01_intelligence/ | 53 |
 | Kinds I can build | 20 |
+| Kinds with instances | 8 |
 | Tools relevant to my work | 16 |
 | MCP servers | 5 |
-| **Total cards in agent card** | **82** |
+| **Total cards in agent card** | **94** |
 
-**Competitive context**: N01 (82) < N02 (110) < N05 (107) < N06 (138). N01's lower count reflects focus -- a research nucleus needs fewer artifacts than a marketing or commercial one. The gap is not weakness but specialization. However, the 15 unbuilt kinds and thin memory layer are genuine deficits that limit N01's ability to accumulate and recall intelligence across sessions.
+**Competitive context**: N01 (94) is now competitive with N05 (107). The remaining gap vs N02 (110) and N06 (138) reflects specialization, not deficiency. N01's unique strengths (5 MCP servers, 6 schema contracts, 20 test cases in eval dataset) are unmatched. The memory layer (5 artifacts) now enables cross-session research accumulation. The quality measurement infrastructure (benchmark + eval dataset + 2 scoring rubrics) provides self-assessment capability that most nuclei lack.

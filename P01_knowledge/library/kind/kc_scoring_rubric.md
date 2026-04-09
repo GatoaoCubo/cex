@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about scoring_rubric artifacts"
 keywords: [rubric, criteria, evaluation, 5D, 12LP, quality-framework]
 feeds_kinds: [scoring_rubric]
 density_score: null
+aliases: ["evaluation rubric", "grading criteria", "quality framework", "scoring guide", "assessment matrix"]
+user_says: ["define scoring criteria", "criterios de avaliacao", "how do I measure quality", "create a rubric", "set up evaluation dimensions"]
+long_tails: ["I need to define what good output looks like across multiple dimensions", "create a scoring framework to calibrate my LLM judge", "build an evaluation rubric with anchor descriptions for each score level", "set up quality criteria with weighted dimensions for automated scoring"]
+cross_provider:
+  langchain: "CriteriaEvalChain with rubric prompt"
+  llamaindex: "RelevancyEvaluator with scoring guide"
+  crewai: "Custom scoring agent with rubric"
+  dspy: "Custom metric function with rubric logic"
+  openai: "model-graded rubric (grader_model_graded)"
+  anthropic: "Claude judge with dimension anchors"
+  haystack: "Custom LLMEvaluator with rubric"
 ---
 
 # Scoring Rubric

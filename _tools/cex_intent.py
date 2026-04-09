@@ -253,73 +253,103 @@ def list_kinds():
 # ---------------------------------------------------------------------------
 
 
-def execute_prompt(prompt: str) -> str:
+def execute_prompt(prompt: str, model_override: str = "") -> str:
     """Send composed prompt to LLM via available provider.
 
-    Priority: SUBSCRIPTION > LOCAL > API (pay-per-token is LAST resort).
+    Priority: OVERRIDE > SUBSCRIPTION > LOCAL > API (pay-per-token is LAST resort).
+
+    If model_override starts with 'ollama/', routes directly to Ollama.
+    Example: model_override='ollama/qwen3:8b'
 
     Tries (in order):
+      0. Model override  -- if specified, use that provider directly
       1. Claude CLI  -- uses Max/Pro subscription, zero extra cost
-      2. Ollama SDK  -- local, free
-      3. Ollama HTTP -- local fallback, free
-      4. Anthropic API -- only if CEX_USE_API=1, pay-per-token
-      5. OpenAI API   -- only if CEX_USE_API=1, pay-per-token
+      2. Ollama      -- local, free (via cex_ollama.py client)
+      3. Anthropic API -- only if CEX_USE_API=1, pay-per-token
+      4. OpenAI API   -- only if CEX_USE_API=1, pay-per-token
 
-    Set CEX_USE_API=1 to allow paid API calls as last resort.
+    Env vars:
+      CEX_USE_API=1     -- allow paid API calls as last resort
+      CEX_OLLAMA_MODEL  -- default Ollama model (default: qwen3:8b)
+      CEX_FORCE_OLLAMA=1 -- skip Claude CLI, go straight to Ollama
+
     Returns the LLM response text.
     """
     errors = {}
     allow_paid_api = os.environ.get("CEX_USE_API", "0") == "1"
+    force_ollama = os.environ.get("CEX_FORCE_OLLAMA", "0") == "1"
+
+    # --- [0] Model override (explicit routing) ---
+    if model_override:
+        if model_override.startswith("ollama/"):
+            ollama_model = model_override[7:]  # strip "ollama/" prefix
+            try:
+                from cex_ollama import execute_via_ollama
+                return execute_via_ollama(prompt, model=ollama_model, structured=True)
+            except SystemExit:
+                raise
+            except Exception as e:
+                errors["Ollama-Override"] = str(e)[:120]
+                # Fall through to other providers
+        elif model_override.startswith("claude"):
+            # Explicit Claude model
+            try:
+                import subprocess
+                result = subprocess.run(
+                    ["claude", "-p", "--model", model_override],
+                    input=prompt, capture_output=True, text=True,
+                    timeout=120, encoding="utf-8",
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    return result.stdout
+                errors["CLI-Claude-Override"] = f"exit {result.returncode}"
+            except Exception as e:
+                errors["CLI-Claude-Override"] = str(e)[:120]
 
     # --- [1] Claude CLI (subscription -- included in Max/Pro plan) ---
-    try:
-        import subprocess
-        result = subprocess.run(
-            ["pi", "-p", "--model", "anthropic/claude-sonnet-4-6"],
-            input=prompt, capture_output=True, text=True,
-            timeout=120, encoding="utf-8",
-        )
-        if result.returncode == 0 and result.stdout.strip():
-            return result.stdout
-        errors["CLI-Claude"] = f"exit {result.returncode}: {result.stderr[:200]}"
-    except FileNotFoundError:
-        errors["CLI-Pi"] = "pi CLI not in PATH"
-    except Exception as e:
-        errors["CLI-Claude"] = str(e)[:120]
+    if not force_ollama:
+        try:
+            import subprocess
+            result = subprocess.run(
+                ["claude", "-p", "--model", "claude-sonnet-4-6"],
+                input=prompt, capture_output=True, text=True,
+                timeout=120, encoding="utf-8",
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                return result.stdout
+            errors["CLI-Claude"] = f"exit {result.returncode}: {result.stderr[:200]}"
+        except FileNotFoundError:
+            errors["CLI-Claude"] = "claude CLI not in PATH"
+        except Exception as e:
+            errors["CLI-Claude"] = str(e)[:120]
 
-    # --- [2] Ollama SDK (local, free) ---
+    # --- [2] Ollama (local, free -- via cex_ollama.py) ---
     try:
-        sdk_root = str(Path(__file__).resolve().parent.parent)
-        if sdk_root not in sys.path:
-            sys.path.insert(0, sdk_root)
-        from cex_sdk.models.message import Message as SDKMessage
-        from cex_sdk.models.providers.ollama import Ollama
-        model = Ollama(id="llama3.2")
-        response = model.invoke([SDKMessage(role="user", content=prompt)])
-        if response.content:
-            _log_sdk_metrics(response, "Ollama")
-            return response.content
+        from cex_ollama import OllamaClient
+        client = OllamaClient()
+        if client.health():
+            ollama_model = os.environ.get("CEX_OLLAMA_MODEL", "qwen3:8b")
+            resp = client.generate_artifact(
+                model=ollama_model,
+                prompt=prompt,
+            )
+            if resp.success and resp.content:
+                print(
+                    f"  [Ollama] {ollama_model} | {resp.tokens_generated} tokens | "
+                    f"{resp.tokens_per_second:.1f} tok/s",
+                    file=sys.stderr,
+                )
+                return resp.content
+            if not resp.success:
+                errors["Ollama"] = resp.error
+        else:
+            errors["Ollama"] = "server not running"
+    except ImportError:
+        errors["Ollama"] = "cex_ollama.py not available"
     except Exception as e:
-        errors["SDK-Ollama"] = str(e)[:120]
+        errors["Ollama"] = str(e)[:120]
 
-    # --- [3] Ollama HTTP fallback (local, free) ---
-    try:
-        import urllib.request
-        data = json.dumps(
-            {"model": "llama3.2", "prompt": prompt, "stream": False}
-        ).encode("utf-8")
-        req = urllib.request.Request(
-            "http://localhost:11434/api/generate",
-            data=data,
-            headers={"Content-Type": "application/json"},
-        )
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            result = json.loads(resp.read().decode("utf-8"))
-            return result.get("response", "")
-    except Exception as e:
-        errors["HTTP-Ollama"] = str(e)[:120]
-
-    # --- [4-5] Paid API providers (ONLY if CEX_USE_API=1) ---
+    # --- [3-4] Paid API providers (ONLY if CEX_USE_API=1) ---
     if not allow_paid_api:
         errors["API"] = "Paid APIs disabled (set CEX_USE_API=1 to allow)"
     else:
@@ -329,7 +359,7 @@ def execute_prompt(prompt: str) -> str:
                 sys.path.insert(0, sdk_root)
             from cex_sdk.models.message import Message as SDKMessage
 
-            # [4] Anthropic API
+            # [3] Anthropic API
             try:
                 from cex_sdk.models.providers.anthropic import Claude
                 model = Claude(id="claude-sonnet-4-6", max_tokens=8000)
@@ -340,7 +370,7 @@ def execute_prompt(prompt: str) -> str:
             except Exception as e:
                 errors["API-Anthropic"] = str(e)[:120]
 
-            # [5] OpenAI API
+            # [4] OpenAI API
             try:
                 from cex_sdk.models.providers.openai import GPT
                 model = GPT(id="gpt-4o", max_tokens=8000)

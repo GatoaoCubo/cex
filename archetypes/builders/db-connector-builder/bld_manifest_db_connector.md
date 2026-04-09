@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, connector, P04, tools, integration, bidirectional]
 keywords: [connector, integration, bidirectional, sync, service, webhook, transform, mapping]
 triggers: ["create service connector", "build bidirectional integration", "define two-way sync", "bridge external service"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building connector artifacts — connectors bidirecionais de serv. L2: Define conector bidirecional with service name, protocol, and auth strategy. L3: When user needs to create, build, or scaffold connector.
 quality: 9.1
 title: "Manifest Db Connector"

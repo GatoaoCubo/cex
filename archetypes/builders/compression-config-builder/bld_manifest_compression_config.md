@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, compression-config, P10, config, memory, context-window]
 keywords: [compression, token, context, summarize, truncate, rolling-window, priority, decay, memory, compact]
 triggers: ["define compression strategy", "create compression config", "configure context window compression", "specify token reduction policy"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building compression_config artifacts — strategies de compression de context/memory for agents LLM. L2: Define strategy de compression, trigger ratio, types preservados, limits de tokens, decay weights. L3: When user needs to create, build, or scaffold compression config.
 quality: 9.1
 title: "Manifest Compression Config"

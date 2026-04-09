@@ -1,0 +1,71 @@
+id: p10_memory_deploy_history
+kind: runtime_state
+pillar: P10
+title: Deploy History Memory
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n05_operations
+domain: deployment-operations
+quality: null
+tags:
+- runtime_state
+- memory
+- operations
+- N05
+- deploy
+- history
+tldr: Persistent deploy history tracking every deployment with evidence, timing, health status, rollback events, and incident
+  correlation.
+density_score: 0.95
+purpose: This memory artifact tracks the history of all deployments to Railway. Every deploy, rollback, and incident is recorded
+  with evidence. This memory enables pattern detection (recurring failures), trend analysis (deploy frequency, success rate),
+  and incident correlation.
+schema: "deploy_entry:\n  id: \"deploy_{YYYYMMDD}{HHMMSS}{service}\"\n  timestamp: ISO-8601\n  service: \"api | frontend |\
+  \ dashboard | gateway\"\n  trigger: \"git_push | manual | workflow_dispatch | rollback\"\n  branch: string\n  commit_sha:\
+  \ string (short)\n  status: \"success | failed | rolled_back\"\n  duration_s: number\n  health_check:\n    endpoint: \"\
+  /health\"\n    response_code: number\n    response_time_ms: number\n    healthy: boolean\n  smoke_eval:\n    passed: boolean\n\
+  \    checks_passed: number\n    checks_total: number\n  evidence:\n    logs_hash: string\n    health_json_hash: string\n\
+  \    env_vars_validated: number\n  rollback:\n    triggered: boolean\n    reason: string | null\n    rollback_duration_s:\
+  \ number | null\n    recovery_verified: boolean | null\n  incident_id: string | null\n  notes: string | null"
+deploy_log: '| date | service | status | duration | health_ms | smoke | notes |
+
+  |------|---------|--------|----------|-----------|-------|-------|
+
+  | 2026-04-07 | api | — | — | — | — | Memory initialized, no deploys recorded yet |'
+metrics: '| metric | value | updated |
+
+  |--------|-------|---------|
+
+  | total_deploys | 0 | 2026-04-07 |
+
+  | success_rate | N/A | 2026-04-07 |
+
+  | avg_duration_s | N/A | 2026-04-07 |
+
+  | rollback_count | 0 | 2026-04-07 |
+
+  | last_deploy | N/A | 2026-04-07 |
+
+  | last_incident | N/A | 2026-04-07 |'
+pattern_detection: 'After 10+ deploys, analyze for:
+
+
+  - Recurring failure services: Which service fails most?
+
+  - Time-of-day correlation: Do deploys at certain hours fail more?
+
+  - Commit size correlation: Do large diffs correlate with failures?
+
+  - Health check latency trends: Is health response time degrading?
+
+  - Rollback frequency: Is rollback rate increasing?'
+retention: '| field | value |
+
+  |-------|-------|
+
+  | entries_kept | Last 100 deploys |
+
+  | archive | Monthly archive to `.cex/runtime/archive/deploys/` |
+
+  | cleanup | Auto-purge entries older than 365 days |'

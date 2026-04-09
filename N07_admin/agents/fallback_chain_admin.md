@@ -41,7 +41,7 @@ density_score: 0.92
 User with zero subscriptions can still use CEX:
 - Install Ollama (free, local)
 - Pull qwen2.5-coder:7b (4GB download)
-- Boot: pi -e ./extensions/ollama-provider --model ollama/qwen2.5-coder:7b
+- Boot: claude --model ollama/qwen2.5-coder:7b (requires Ollama running locally)
 - All CEX tools work (motor, doctor, compile, index are Python-only)
 - 8F Runner F4/F6 use local model (slower, lower quality, but functional)
 

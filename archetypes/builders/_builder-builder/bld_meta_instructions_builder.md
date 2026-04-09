@@ -32,9 +32,9 @@ pattern: 3-phase pipeline (research -> compose -> validate)
 ```
 
 ## Phase 1: RESEARCH
-<!-- NOTE: Fase de coleta. Nome pode variar: RESEARCH, CLASSIFY, DISCOVER -->
-<!-- signal usa CLASSIFY (porque is simples); model_card usa RESEARCH (porque precisa researchr) -->
-<!-- Escolha o name that reflete a complexidade do type -->
+<!-- NOTE: Collection phase. Name can vary: RESEARCH, CLASSIFY, DISCOVER -->
+<!-- signal uses CLASSIFY (simpler); model_card uses RESEARCH (needs deeper research) -->
+<!-- Choose the name that reflects the complexity of the type -->
 1. Identify the {{primary_entity}}: {{what_to_identify}}
 <!-- NOTE: {{primary_entity}} = "model" for model_card, "topic" for KC, "event" for signal -->
 2. {{research_step_2}}

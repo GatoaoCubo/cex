@@ -11,7 +11,7 @@
 #   claude  — Anthropic Claude Code CLI
 #   gemini  — Google Gemini CLI
 #   codex   — OpenAI Codex CLI
-#   pi      — PI coding agent (multi-provider)
+#   (pi removed — third-party wrapper no longer supported)
 #   ollama  — Local models via Ollama
 #
 # PRESETS (uncomment one section, or mix and match):
@@ -30,9 +30,8 @@
 # ╚══════════════════════════════════════════════════╝
 
 # n07:
-#   cli: pi
-#   model: anthropic/claude-opus-4-6
-#   thinking: xhigh
+#   cli: claude
+#   model: claude-opus-4-6
 #   fallback: { cli: ollama, model: "qwen3:32b" }
 #
 # n01:
@@ -179,9 +178,8 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 n07:
-  cli: pi
-  model: anthropic/claude-opus-4-6
-  thinking: xhigh
+  cli: claude
+  model: claude-opus-4-6
 
 n01:
   cli: gemini

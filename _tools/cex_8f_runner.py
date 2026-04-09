@@ -282,10 +282,12 @@ class EightFRunner:
         verbose: bool = False,
         output_dir: Path | None = None,
         context: str = "",
+        model: str = "",
     ):
         self.dry_run = dry_run
         self.verbose = verbose
         self.output_dir = output_dir
+        self.model = model  # e.g. "ollama/qwen3:8b" or "claude-sonnet-4-6"
         self.state = RunState(intent=intent, context=context)
 
         # Motor parse + classify
@@ -772,10 +774,43 @@ class EightFRunner:
             self.state.reasoning = {"plan": prompt, "model_used": "dry-run"}
             self._log("F4", f"dry-run reasoning prompt ({len(prompt.split())} words)")
         else:
-            self._log("F4", "calling LLM for reasoning plan...")
-            response = execute_prompt(prompt)
-            self.state.reasoning = {"plan": response, "model_used": "haiku"}
-            self._log("F4", f"reasoning plan received ({len(response)} chars)")
+            # Token optimization: skip LLM reasoning if F3 found existing
+            # artifacts of the same kind (template-first approach).
+            # The plan is predictable: adapt from template structure.
+            existing_count = len(self.state.knowledge.get("similar", []))
+            kc_builder = self.state.knowledge.get("kc_builder", "")
+            has_template = bool(kc_builder and len(kc_builder) > 200)
+
+            # Ollama models: ALWAYS use deterministic plan (skip F4 LLM call)
+            # Saves ~280s on weak hardware. F6 already sends full context.
+            is_ollama = self.model and self.model.startswith("ollama/")
+
+            if existing_count >= 1 and has_template or is_ollama:
+                # Deterministic plan from template (saves ~5K tokens)
+                c = self.state.constraints
+                plan_lines = [
+                    f"## F4 Reasoning Plan (template-first, zero LLM tokens)",
+                    f"Kind: {self.state.kind} | Pillar: {self.state.pillar}",
+                    f"Approach: adapt from {existing_count} existing artifact(s)",
+                    f"",
+                    f"1. Frontmatter: id, kind, pillar, title, version, quality: null, "
+                    f"tags, tldr, domain, created, updated, density_score",
+                    f"2. Structure: follow output template sections",
+                    f"3. Content: domain-specific, no filler, density >= 0.85",
+                    f"4. Quality: target 9.0+, all hard gates PASS",
+                ]
+                if c.get("boundary"):
+                    plan_lines.append(f"5. Boundary: {c['boundary']}")
+                response = "\n".join(plan_lines)
+                skip_reason = "ollama-skip" if is_ollama else "template-skip"
+                self.state.reasoning = {"plan": response, "model_used": skip_reason}
+                self._log("F4", f"deterministic plan ({skip_reason}, LLM skipped)")
+            else:
+                self._log("F4", "calling LLM for reasoning plan...")
+                response = execute_prompt(prompt, model_override=self.model)
+                model_tag = self.model or "default"
+                self.state.reasoning = {"plan": response, "model_used": model_tag}
+                self._log("F4", f"reasoning plan received ({len(response)} chars)")
 
     # -- F5 CALL ------------------------------------------------------------
 
@@ -1123,6 +1158,27 @@ class EightFRunner:
 
         prompt = "\n\n---\n\n".join(sections)
 
+        # Ollama ultra-lite mode: aggressive prompt reduction for local models
+        # Local models on weak hardware (4GB VRAM, CPU offload) need <3K tokens
+        if self.model and self.model.startswith("ollama/"):
+            keep_headers = {
+                "# IDENTITY", "# CONSTRAINTS", "# INSTRUCTION",
+                "# TEMPLATE", "# TASK",
+            }
+            lite_sections = []
+            for sec in sections:
+                header = sec.split("\n")[0].strip()
+                if header in keep_headers:
+                    # Truncate long sections to ~500 chars
+                    if len(sec) > 600 and header not in ("# TASK",):
+                        sec = sec[:600] + "\n[...truncated for local model...]"
+                    lite_sections.append(sec)
+            # Always include TASK (last)
+            if not any(s.startswith("# TASK") for s in lite_sections):
+                lite_sections.append(sections[-1])
+            prompt = "\n\n---\n\n".join(lite_sections)
+            self._log("F6", f"Ollama ultra-lite: {len(sections)} -> {len(lite_sections)} sections")
+
         # Token budget analysis (if available)
         token_count = len(prompt.split())  # fallback: word count
         if _TOKEN_BUDGET_AVAILABLE:
@@ -1133,8 +1189,8 @@ class EightFRunner:
             self.state.artifact = prompt
             self._log("F6", f"dry-run prompt composed ({token_count:,} tokens)")
         else:
-            self._log("F6", f"executing prompt ({token_count:,} tokens)...")
-            response = execute_prompt(prompt)
+            self._log("F6", f"executing prompt ({token_count:,} tokens) via {self.model or 'default'}...")
+            response = execute_prompt(prompt, model_override=self.model)
             self.state.artifact = response
             self._log("F6", f"LLM response received ({len(response)} chars)")
 
@@ -1600,6 +1656,8 @@ def main() -> None:
     parser.add_argument("--output-dir", metavar="DIR", help="Save outputs to this directory")
     parser.add_argument("--nucleus", metavar="N0X", help="Target nucleus (e.g. N01, N05)")
     parser.add_argument("--context", metavar="TEXT", help="Domain context to inject")
+    parser.add_argument("--model", metavar="MODEL",
+                        help="Model override (e.g. 'ollama/qwen3:8b', 'claude-sonnet-4-6')")
     args = parser.parse_args()
 
     if args.list_kinds:
@@ -1632,6 +1690,7 @@ def main() -> None:
         runner = EightFRunner(
             intent=intent, context=context, kind=kind,
             dry_run=not args.execute, verbose=args.verbose, output_dir=args.output_dir,
+            model=getattr(args, "model", "") or "",
         )
         t0 = time.perf_counter()
         state = runner.run(stop_at=args.step)

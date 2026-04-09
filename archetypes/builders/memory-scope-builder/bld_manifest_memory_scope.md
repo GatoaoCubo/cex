@@ -12,7 +12,7 @@ author: builder_agent
 tags: [memory-scope, P02, memory-scope, type-builder]
 keywords: ["memory scope", memory-scope, P02, memory, scope]
 triggers: ["create memory scope", "define memory scope", "build memory scope config"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building memory_scope artifacts — agent memory configuration an. L2: Define memory_scope with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold memory scope.
 quality: 9.1
 title: "Manifest Memory Scope"

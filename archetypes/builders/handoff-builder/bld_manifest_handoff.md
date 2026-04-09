@@ -12,7 +12,7 @@ parent: null
 tags: [kind-builder, handoff, P12, orchestration, specialist]
 keywords: [handoff, delegation, dispatch, task, context, scope_fence, commit]
 triggers: ["delega task for agent_group", "cria instruction de handoff", "prepara execution remota"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `handoff` (P12): complete delegation instructions. L2: Produce handoff markdown with mandatory fields and correct P12 naming. L3: When user needs to create, build, or scaffold handoff.
 quality: 9.0
 title: "Manifest Handoff"

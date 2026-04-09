@@ -27,17 +27,17 @@ density_score: 1.0
 
 | Subdir | Count | Purpose |
 |--------|-------|---------|
-| agents | 1 | Agent definition for operations nucleus |
-| architecture | 1 | Agent card with capabilities and routing |
-| feedback | 1 | Quality gate definitions and validation rules |
+| agents | 4 | Railway superintendent + deploy ops + test ops + code review agents |
+| architecture | 3 | Agent card + ADR-001 (Railway topology) + ADR-002 (testing strategy) |
+| feedback | 4 | Quality gates: Railway deploy + security + performance + artifact quality |
 | knowledge | 8 | Domain KCs: Railway, health monitoring, deployments, Nixpacks, PostgreSQL, Uvicorn |
-| memory | 1 | Checkpoint for session state persistence |
+| memory | 3 | Checkpoint + deploy history + operations session memory |
 | orchestration | 3 | Dispatch rules, spawn config, workflow definitions |
-| output | 11 | Deploy checklists, env contracts, health endpoints, middleware, Railway configs, SDK audits |
-| prompts | 1 | System prompt for N05 persona and behavior |
-| schemas | 6 | API response, env contract, health check, middleware, Railway TOML, startup sequence |
-| compiled | 19 | YAML compilations of source artifacts |
-| **Total** | **33** | **(source .md files, excluding compiled)** |
+| output | 17 | Deploy checklists, env contracts, health endpoints, middleware, Railway configs, CI/CD, smoke eval, benchmark, regression check, red-team eval |
+| prompts | 4 | System prompts: superintendent + review + deploy + debug modes |
+| schemas | 7 | API response, env contract, health check, middleware, Railway TOML, startup sequence, security validation |
+| compiled | 40 | YAML compilations of source artifacts |
+| **Total** | **53** | **(source .md files, excluding compiled)** |
 
 ## Kinds I Build
 
@@ -111,25 +111,27 @@ density_score: 1.0
 
 ## My Gaps
 
-| Gap | Description |
-|-----|-------------|
-| agents/ | Only 1 agent definition -- could have specialized sub-agents for deploy, test, review |
-| architecture/ | Only 1 agent card -- missing architecture decision records for infra choices |
-| memory/ | Only 1 checkpoint -- no persistent session memory across operations |
-| prompts/ | Only 1 system prompt -- could have specialized prompts for review, deploy, debug modes |
-| feedback/ | Only 1 quality gate -- needs more domain-specific gates (security, performance, a11y) |
-| Missing kinds built | No `trace_config`, `benchmark`, `smoke_eval`, `regression_check` artifacts yet -- kinds exist but no N05 instances |
-| No CI/CD pipeline artifacts | No GitHub Actions, Railway deploy configs, or automation workflows in output/ |
-| No security artifacts | No `red_team_eval` or security-focused validation schemas |
+| Gap | Status | Resolution |
+|-----|--------|------------|
+| agents/ | ✅ CLOSED | Added deploy_ops, test_ops, code_review agents (Wave 1) |
+| architecture/ | ✅ CLOSED | Added ADR-001 (Railway topology), ADR-002 (testing strategy) (Wave 6) |
+| memory/ | ✅ CLOSED | Added deploy_history + operations_session memory (Wave 6) |
+| prompts/ | ✅ CLOSED | Added review, deploy, debug system prompts (Wave 2) |
+| feedback/ | ✅ CLOSED | Added security, performance, artifact quality gates (Wave 3) |
+| Missing kinds built | ✅ CLOSED | Added trace_config, benchmark, smoke_eval, regression_check (Wave 4) |
+| No CI/CD pipeline artifacts | ✅ CLOSED | Added GitHub Actions workflow config (Wave 5) |
+| No security artifacts | ✅ CLOSED | Added red_team_eval + security_validation_schema (Wave 5) |
+
+**All 8 gaps closed in AutoResearch session 2026-04-07.**
 
 ## Cards in My Agent Card
 
 | Category | Count |
 |----------|-------|
-| Source artifacts (.md) | 33 |
-| Compiled artifacts (.yaml) | 20 |
+| Source artifacts (.md) | 53 |
+| Compiled artifacts (.yaml) | 40 |
 | Kinds I can build | 28 |
 | Tools relevant to my domain | 14 |
 | MCP servers | 2 |
 | Domain KCs (shared library) | 17 |
-| **Total cards** | **113** |
+| **Total cards** | **154** |

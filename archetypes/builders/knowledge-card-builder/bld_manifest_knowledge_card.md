@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, knowledge-card, P01, specialist]
 keywords: [knowledge-card, kc, fact, distillation, density, knowledge]
 triggers: ["documenta knowledge X", "create KC about Y", "distill fact Z"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building knowledge_cards — searchable atomic facts.. L2: Research and distill knowledge from any domain into atomic facts. L3: When user needs to create, build, or scaffold knowledge card.
 quality: 9.1
 title: "Manifest Knowledge Card"

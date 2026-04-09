@@ -2,7 +2,7 @@
 id: spec_metaphor_dictionary
 kind: context_doc
 title: Metaphor Dictionary -- Internal Language to Universal Terms
-version: 1.0.0
+version: 1.1.0
 quality: 9.0
 pillar: P01
 created: 2026-04-07
@@ -81,6 +81,43 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 | the X | brand variable | **brand identity** (unique to CEX) | CEX = C + E + X, where X = the brand identity |
 | digital asset | configured CEX instance | **configured instance** / deployed agent | CEX + brand = specialized AI system |
 
+## Intent Resolution Metaphors
+
+| User says | System means | Industry term | CEX implementation |
+|-----------|-------------|---------------|-------------------|
+| translate / transmute (at F1) | resolve intent | **intent resolution** (NLU: Rasa, Dialogflow, Amazon Lex) | N07 transmutation -> 8F F1 CONSTRAIN |
+| translate / transmute (at F3) | rewrite query | **query rewriting** (Search/RAG: Google, ES, LlamaIndex) | cex_query.py + cex_retriever.py -> 8F F3 INJECT |
+| translate / transmute (at F6) | optimize prompt | **prompt optimization** (LLM: DSPy "prompt compilation") | cex_crew_runner.py -> 8F F6 PRODUCE |
+| understand me | parse intent | **intent classification** (NLU) | `cex_8f_motor.py` intent parser + `kinds_meta.json` |
+| fill in the blanks | complete parameters | **slot filling** (NLU, dialogue systems) | prompt_template {{vars}} + brand_inject.py |
+| figure out what I mean | disambiguate | **disambiguation** (NLU, search) | GDP clarifying questions + N07 restatement |
+| rewrite my question | optimize query | **query rewriting** (IR, RAG) | 8F F1 CONSTRAIN + F4 REASON |
+| assemble the context | build prompt | **prompt composition** / context assembly | `cex_crew_runner.py` + `cex_prompt_layers.py` |
+
+## Input/Output Pipeline Metaphors
+
+| User says | System means | Industry term | CEX implementation |
+|-----------|-------------|---------------|-------------------|
+| feed it | provide input | **injection** / input provision | 8F F3 INJECT (load KCs, memory, brand into prompt) |
+| spit out / produce | generate output | **generation** / inference | 8F F6 PRODUCE (LLM generates artifact) |
+| cook / bake | process through pipeline | **pipeline execution** (MLOps) | 8F F1-F8 full pipeline run |
+| filter | select relevant items | **retrieval filtering** / re-ranking | `cex_retriever.py` top_k + reranker |
+| mix / blend | combine multiple sources | **fusion** / ensemble (ML) | multi-source context assembly in F3 |
+| stamp / seal | validate and approve | **quality gate** (CI/CD) | 8F F7 GOVERN + `cex_score.py` |
+
+## Operational Metaphors
+
+| User says | System means | Industry term | CEX implementation | Teach? |
+|-----------|-------------|---------------|-------------------|--------|
+| teach it | inject examples | **in-context learning** (few-shot prompting) | few_shot_example kind, P03 prompt injection | YES -- "Few-shot, not fine-tuning" |
+| remember this | persist to memory | **entity memory** / knowledge persistence | entity_memory kind, P10 + cex_memory_update.py | YES -- "Entity memory, not conversation history" |
+| forget this | prune memory | **memory eviction** (cache management) | cex_memory_update.py --prune | YES -- "Eviction, like cache invalidation" |
+| connect to X | integrate API/MCP | **tool registration** / MCP server config | mcp_server kind, P04 + api_client kind | YES -- "MCP tool registration" |
+| speed it up | optimize latency | **inference optimization** (batch/cache/quantize) | prompt_cache kind, P10 + context_window_config | YES -- "Inference optimization, not just fewer tokens" |
+| make it cheaper | reduce cost | **token budget optimization** | cex_token_budget.py + context_window_config | YES -- "Token budget, the unit of LLM cost" |
+| make it smarter | improve quality | **prompt optimization** / model upgrade | cex_prompt_optimizer.py + cex_evolve.py | YES -- "Prompt optimization first, model upgrade second" |
+| test it | run evaluation | **evaluation** (unit/e2e/smoke) | unit_eval, e2e_eval, smoke_eval, benchmark kinds | YES if ambiguous -- "Which eval type?" |
+
 ## Rules
 
 1. **Artifacts, code, docs**: use "Industry term" column. ALWAYS.
@@ -88,3 +125,4 @@ The user (and internal docs) use metaphors to explain concepts. LLMs and artifac
 3. **This dictionary**: the ONLY place both columns coexist.
 4. **Llama-7B test**: if the term needs this dictionary to be understood, it's wrong for artifacts.
 5. **Rename cascade**: changing a term requires CRUD across all files that reference it. See `N07_admin/memory/terminology_standardization.md` for the full map.
+6. **Didactic protocol**: check `N07_admin/memory/taught_terms_registry.md` before teaching. Teach once per term, never repeat. See N02's didactic protocol spec for format guidelines.

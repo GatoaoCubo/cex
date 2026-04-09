@@ -38,42 +38,56 @@ def _load_sins() -> dict:
     return {}
 
 
-# Nucleus metadata (domain prompts)
+# Nucleus metadata (domain prompts + agent cards + initial messages)
 NUCLEUS_META = {
     "n07": {
         "title": "CEX-N07-ORCHESTRATOR",
         "var": "CEX_NUCLEUS=N07",
+        "agent_card": "N07_admin/agent_card_n07.md",
         "prompt": "You are N07 Orchestrator of CEX. Dispatch nuclei, never build. Read CLAUDE.md e .claude/rules/n07-orchestrator.md.",
+        "initial": "Ready. What do you need?",
     },
     "n01": {
         "title": "CEX-N01-RESEARCH",
         "var": "CEX_NUCLEUS=N01",
-        "prompt": "You are N01 Research Nucleus of CEX. Domain: research, analysis, papers, competitors. IF .cex/runtime/handoffs/n01_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N01_intelligence/agent_card_n01.md",
+        "prompt": "You are N01 Research Nucleus of CEX. Domain: research, analysis, papers, competitors. IF .cex/runtime/handoffs/n01_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n01_task.md and execute. If no handoff, report ready.",
     },
     "n02": {
         "title": "CEX-N02-MARKETING",
         "var": "CEX_NUCLEUS=N02",
-        "prompt": "You are N02 Marketing Nucleus of CEX. Domain: copy, ads, campaigns, brand voice. IF .cex/runtime/handoffs/n02_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N02_marketing/agent_card_n02.md",
+        "prompt": "You are N02 Marketing Nucleus of CEX. Domain: copy, ads, campaigns, brand voice. IF .cex/runtime/handoffs/n02_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n02_task.md and execute. If no handoff, report ready.",
     },
     "n03": {
         "title": "CEX-N03-BUILDER",
         "var": "CEX_NUCLEUS=N03",
-        "prompt": "You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/agents/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N03_engineering/agent_card_n03.md",
+        "prompt": "You are N03 Builder Nucleus of CEX. 8F pipeline mandatory. Read .claude/rules/n03-8f-enforcement.md and N03_engineering/agents/agent_engineering.md. IF .cex/runtime/handoffs/n03_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n03_task.md and execute. If no handoff, report ready.",
     },
     "n04": {
         "title": "CEX-N04-KNOWLEDGE",
         "var": "CEX_NUCLEUS=N04",
-        "prompt": "You are N04 Knowledge Nucleus of CEX. Domain: RAG, indexing, knowledge cards, taxonomy. IF .cex/runtime/handoffs/n04_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N04_knowledge/agent_card_n04.md",
+        "prompt": "You are N04 Knowledge Nucleus of CEX. Domain: RAG, indexing, knowledge cards, taxonomy. IF .cex/runtime/handoffs/n04_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n04_task.md and execute. If no handoff, report ready.",
     },
     "n05": {
         "title": "CEX-N05-OPERATIONS",
         "var": "CEX_NUCLEUS=N05",
-        "prompt": "You are N05 Operations Nucleus of CEX. Domain: code review, testing, CI/CD, deploy. IF .cex/runtime/handoffs/n05_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N05_operations/agent_card_n05.md",
+        "prompt": "You are N05 Operations Nucleus of CEX. Domain: code review, testing, CI/CD, deploy. IF .cex/runtime/handoffs/n05_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n05_task.md and execute. If no handoff, report ready.",
     },
     "n06": {
         "title": "CEX-N06-COMMERCIAL",
         "var": "CEX_NUCLEUS=N06",
-        "prompt": "You are N06 Commercial Nucleus of CEX. Domain: pricing, funnels, monetization, brand. IF .cex/runtime/handoffs/n06_task.md READ AND EXECUTE IMMEDIATELY.",
+        "agent_card": "N06_commercial/agent_card_n06.md",
+        "prompt": "You are N06 Commercial Nucleus of CEX. Domain: pricing, funnels, monetization, brand. IF .cex/runtime/handoffs/n06_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.",
+        "initial": "Read .cex/runtime/handoffs/n06_task.md and execute. If no handoff, report ready.",
     },
 }
 
@@ -109,11 +123,20 @@ def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
     label = legacy_colors["label"]
 
     # Sin identity
-    icon = sin_data.get("icon", "")
+    icon_raw = sin_data.get("icon", "")
     virtue = sin_data.get("virtue", "")
     virtue_en = sin_data.get("virtue_en", "")
     tagline = sin_data.get("tagline", "")
     sin_injection = sin_data.get("prompt_injection", "").strip()
+
+    # ASCII-safe icon (PS1 must be ASCII-only per ascii-code-rule.md)
+    icon = icon_raw if icon_raw.isascii() else "[*]"
+    # ASCII-safe tagline and virtue
+    def _ascii_safe(s):
+        return s.encode('ascii', 'replace').decode('ascii').replace('?', '-') if s else ""
+    tagline = _ascii_safe(tagline)
+    virtue_display = _ascii_safe(virtue)
+    virtue_en_display = _ascii_safe(virtue_en)
 
     # Build the sin-injected prompt (sin lens BEFORE the domain prompt)
     full_prompt = meta["prompt"]
@@ -121,64 +144,124 @@ def build_claude_ps1(nucleus: str, cfg: dict, meta: dict) -> str:
         # Clean for PS here-string (no special escaping needed inside @'...'@)
         safe_injection = sin_injection.replace('\n', ' ').strip()
         full_prompt = f"{safe_injection} --- {full_prompt}"
-    # Replace any em-dashes with regular dashes (PS encoding issue)
+    # Replace any non-ASCII in prompt (em-dashes, accents, etc.)
     full_prompt = full_prompt.replace('\u2014', '--').replace('\u2013', '-')
+    full_prompt = full_prompt.encode('ascii', 'replace').decode('ascii').replace('?', '-')
 
     # Build PS argument array items (each flag as separate quoted string)
-    flag_parts = flags.split()
+    flag_parts = flags.split() if flags else []
     flags_array = ", ".join(f'"{f}"' for f in flag_parts)
 
     # MCP and settings as conditional argument additions
     mcp_line = f'$args += "--mcp-config", "{ROOT}\\{mcps}"' if mcps else "# no MCP config"
     settings_line = f'$args += "--settings", "{ROOT}\\{settings}"' if settings else "# no settings"
 
-    return f'''# CEX {nucleus.upper()} -- {meta["title"]}
+    nuc_upper = nucleus.upper()
+    ctx_k = ctx // 1000
+    var_name = meta["var"].split("=")[0]
+    var_val = meta["var"].split("=")[1]
+    agent_card = meta.get("agent_card", "")
+    initial = meta.get("initial", "Ready.")
+
+    return f'''# CEX {nuc_upper} -- {meta["title"]}
 # Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml + nucleus_sins.yaml
 # CLI: claude | Model: {model} | Context: {ctx}
-# Sin: {virtue} ({virtue_en})
+# Sin: {virtue_display} ({virtue_en_display})
 
-# --- UX: Window appearance ---
-$Host.UI.RawUI.WindowTitle = "{meta["title"]} [{model}]"
+# --- UX: Window title with mission + sin + status ---
+$cexRoot = "{ROOT}"
+$nucleus = "{nucleus}"
+$sinName = "{virtue_en_display}"
+$modelShort = "{model}" -replace "claude-", ""
+
+# Detect mission from handoff file
+$mission = ""
+$handoff = "$cexRoot\\.cex\\runtime\\handoffs\\${{nucleus}}_task.md"
+if (Test-Path $handoff) {{
+    $content = Get-Content $handoff -Head 10 -EA SilentlyContinue
+    foreach ($line in $content) {{
+        if ($line -match "^mission:\\s*(.+)$") {{
+            $mission = $Matches[1].Trim()
+            break
+        }}
+    }}
+}}
+
+# Detect git repo name + branch
+$gitBranch = ""
+$gitRepo = ""
+try {{
+    $gitBranch = (git rev-parse --abbrev-ref HEAD 2>$null)
+    $gitRemote = (git remote get-url origin 2>$null)
+    if ($gitRemote -match "[/:]([^/]+?)(?:\.git)?$") {{ $gitRepo = $Matches[1] }}
+}} catch {{}}
+
+# Build title: N0X Sin | repo@branch [mission] -- STATUS
+function Set-CexTitle($status) {{
+    $t = "{nuc_upper} $sinName"
+    if ($gitRepo) {{ $t += " | $gitRepo" }}
+    if ($gitBranch) {{ $t += "@$gitBranch" }}
+    if ($mission) {{ $t += " [$mission]" }}
+    $t += " -- $status"
+    $Host.UI.RawUI.WindowTitle = $t
+}}
+
+Set-CexTitle "BOOTING"
+
 try {{
     $Host.UI.RawUI.BackgroundColor = "{bg}"
     $Host.UI.RawUI.ForegroundColor = "{fg}"
-    $bufSize = $Host.UI.RawUI.BufferSize
-    $bufSize.Width = 160; $bufSize.Height = 9999
-    $Host.UI.RawUI.BufferSize = $bufSize
-    $winSize = $Host.UI.RawUI.WindowSize
-    $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
-    $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
-    $Host.UI.RawUI.WindowSize = $winSize
+    if (-not $env:CEX_GRID) {{
+        # Solo mode: set buffer + window size. Grid mode: spawn_grid controls sizing.
+        $bufSize = $Host.UI.RawUI.BufferSize
+        $bufSize.Width = 160; $bufSize.Height = 9999
+        $Host.UI.RawUI.BufferSize = $bufSize
+        $winSize = $Host.UI.RawUI.WindowSize
+        $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
+        $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
+        $Host.UI.RawUI.WindowSize = $winSize
+    }}
     Clear-Host
 }} catch {{}}
 
 Write-Host ""
-Write-Host "  {icon} {nucleus.upper()} {virtue} - {virtue_en}" -ForegroundColor {accent}
+Write-Host "  {icon} {nuc_upper} {virtue_display} - {virtue_en_display}" -ForegroundColor {accent}
 Write-Host "  {'=' * 50}" -ForegroundColor DarkGray
 Write-Host "  {tagline}" -ForegroundColor DarkGray
-Write-Host "  {model}  |  {ctx // 1000}K context  |  8F pipeline" -ForegroundColor DarkGray
+Write-Host "  {model}  |  {ctx_k}K context  |  8F pipeline" -ForegroundColor DarkGray
+if ($mission) {{ Write-Host "  Mission: $mission" -ForegroundColor {accent} }}
 Write-Host ""
 
 # --- Environment ---
 $env:CLAUDECODE = ""
-$env:{meta["var"].split("=")[0]} = "{meta["var"].split("=")[1]}"
-$env:CEX_ROOT = "{ROOT}"
+$env:{var_name} = "{var_val}"
+$env:CEX_ROOT = $cexRoot
+$env:CLAUDE_CODE_USE_POWERSHELL_TOOL = "1"
 Set-Location $env:CEX_ROOT
 
 # --- Launch CLI ---
-# Store prompt in variable to avoid parsing issues with long strings
-$prompt = @'
+# System prompt (sin identity + domain role) injected via --append-system-prompt
+$sysPrompt = @'
 {full_prompt}
 '@
 
+# Initial message (what the nucleus does on startup)
+$initialMsg = @'
+{initial}
+'@
+
 # Build argument list (avoids PowerShell parsing -- flags as operators)
-$args = @({flags_array}, "--model", "{model}")
+$cliArgs = @({(flags_array + ', ' if flags_array else '')}"--model", "{model}", "--name", "CEX-{nuc_upper}")
+$cliArgs += "--append-system-prompt", "{agent_card}"
+$cliArgs += "--append-system-prompt", ".cex/config/context_self_select.md"
+$cliArgs += "--append-system-prompt", $sysPrompt
 {mcp_line}
 {settings_line}
-$args += $prompt
+$cliArgs += $initialMsg
 
-# Call operator & ensures external command execution
-& claude @args
+Set-CexTitle "RUNNING"
+& claude @cliArgs
+Set-CexTitle "DONE"
 '''
 
 
@@ -202,6 +285,7 @@ def build_claude_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
         'cd /d "%CEX_ROOT%"',
         "",
         f"set MODEL=--model {model}",
+        f"set NAME=--name CEX-{nucleus.upper()}",
         f"set FLAGS={flags}",
     ]
     if mcps:
@@ -216,7 +300,7 @@ def build_claude_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
     lines += [
         "",
         ":: ALWAYS interactive -- task comes from handoff file, never CLI args",
-        f'claude %FLAGS% %MODEL% %MCP% %SETTINGS% "{meta["prompt"]}"',
+        f'claude %FLAGS% %NAME% %MODEL% %MCP% %SETTINGS% "{meta["prompt"]}"',
     ]
     return "\n".join(lines) + "\n"
 
@@ -267,22 +351,9 @@ def build_codex_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
 
 
 def build_pi_cmd(nucleus: str, cfg: dict, meta: dict) -> str:
-    model = cfg.get("model", "anthropic/claude-opus-4-6")
-    thinking = cfg.get("thinking", "xhigh")
-
-    return "\n".join([
-        "@echo off",
-        f":: CEX {nucleus.upper()} -- {meta['title']}",
-        f":: Generated by cex_boot_gen.py from .cex/config/nucleus_models.yaml",
-        f":: CLI: pi | Model: {model} | Thinking: {thinking}",
-        "",
-        f"title {meta['title']}",
-        f"set {meta['var']}",
-        f"set CEX_ROOT={ROOT}",
-        'cd /d "%CEX_ROOT%"',
-        "",
-        f"pi --model {model} --thinking {thinking}",
-    ]) + "\n"
+    """DEPRECATED: pi CLI is no longer supported. Use claude CLI instead."""
+    # Redirect to claude CMD builder as fallback
+    return build_claude_cmd(nucleus, cfg, meta)
 
 
 def build_ollama_cmd(nucleus: str, cfg: dict, meta: dict) -> str:

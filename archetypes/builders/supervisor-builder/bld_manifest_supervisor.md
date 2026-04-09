@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, supervisor, P08, orchestration, dispatch, crew-coordination, multi-agent]
 keywords: [supervisor, orchestrator, dispatch, crew, wave, signal, parallel, sequential, conditional, multi-agent]
 triggers: ["create supervisor for crew", "build crew orchestrator", "define multi-agent dispatch plan"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `supervisor` artifacts — crew orchestrators that dispatch, sequence, and collect results without executing tasks. L2: Research wave topology, dispatch modes, and signal protocols to coordinate builders. L3: When user needs to create, build, or scaffold a crew supervisor.
 quality: 9.1
 title: "Manifest Supervisor"

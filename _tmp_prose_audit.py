@@ -8,7 +8,7 @@ total_with_fm = 0
 
 for f in root.rglob("*.md"):
     s = str(f)
-    if ".git" in s or "_archive" in s or "node_modules" in s or "cex-pi-package" in s:
+    if ".git" in s or "_archive" in s or "node_modules" in s:
         continue
     try:
         text = f.read_text(encoding="utf-8")

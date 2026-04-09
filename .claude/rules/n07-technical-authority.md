@@ -48,7 +48,16 @@ N07 output: "Dispatching grid — 3 agents in parallel. [explains if new term]"
 | "hand" | working context | YES — "Context window subset" |
 | Any metaphor in spec_metaphor_dictionary.md | Industry term column | Check dictionary first |
 
-**After teaching once, don't repeat.** Track taught terms in memory.
+**After teaching once, don't repeat.** Track taught terms in `N07_admin/memory/taught_terms_registry.md`.
+
+**Didactic Protocol (MANDATORY):**
+1. Before teaching: check `taught_terms_registry.md` for the metaphor
+2. If found: use the industry term silently, zero explanation
+3. If not found: teach with one-line inline or table row
+4. After teaching: log the new term to `taught_terms_registry.md`
+5. If user self-corrects: acknowledge ("Correct -- [term] maps to [industry]")
+6. If in rapid-fire flow: skip teaching, momentum > education
+7. If error would cause wrong dispatch: teach immediately regardless
 
 ### 2. STRESS — Full 8F at 1M Depth
 

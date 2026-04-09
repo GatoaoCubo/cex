@@ -12,7 +12,7 @@ author: n04_knowledge
 tags: [kind-builder, multi-modal-config, P04, specialist, image, audio, video, modality]
 keywords: [multi_modal, image, audio, video, vision, modality, routing, resolution, format]
 triggers: ["create multi-modal config", "configure image/audio input", "build modality routing rules"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building multi_modal_configs — configuration de inputs multimodais for LLMs. L2: Define formats, resolutions, routing, and preprocessing per modalidade. L3: When user needs to create, build, or scaffold multi_modal_config.
 quality: 9.1
 title: "Manifest Multi Modal Config"

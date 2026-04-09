@@ -29,19 +29,13 @@ $pidFile = "$root\.cex\runtime\pids\spawn_pids.txt"
 
 New-Item -ItemType Directory -Force -Path $handoffDir,$signalDir,"$root\.cex\runtime\pids" | Out-Null
 
-# Dynamic grid: detect screen size, calculate 3x2 layout
+# Dynamic grid: detect screen size, adapt layout to nucleus count
 Add-Type -AssemblyName System.Windows.Forms
 $scr = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea
-$gCols = 3; $gRows = 2
-$gW = [math]::Floor($scr.Width / $gCols)
-$gH = [math]::Floor($scr.Height / $gRows)
 $gOx = $scr.X; $gOy = $scr.Y
 
-$gridPos = @{
-    n01 = @{x=$gOx;           y=$gOy};            n02 = @{x=$gOx+$gW;     y=$gOy}
-    n03 = @{x=$gOx+2*$gW;     y=$gOy};            n04 = @{x=$gOx;           y=$gOy+$gH}
-    n05 = @{x=$gOx+$gW;       y=$gOy+$gH};        n06 = @{x=$gOx+2*$gW;     y=$gOy+$gH}
-}
+# gridPos is computed AFTER handoff discovery (see below)
+$gridPos = @{}
 
 # Discover handoffs for mission
 $handoffs = @()
@@ -61,7 +55,45 @@ if ($handoffs.Count -eq 0) {
 if ($mode -eq "auto") {
     $mode = if ($handoffs.Count -gt $maxSlots) { "continuous" } else { "static" }
 }
-Write-Output "[GRID] Mission: $mission | Mode: $mode | Handoffs: $($handoffs.Count)"
+# Fixed 3x2 grid layout (3 cols, 2 rows) -- each nucleus has a PERMANENT cell
+# Just by looking at screen position you know which nucleus it is:
+#
+#   +--------+--------+--------+
+#   |  N01   |  N02   |  N03   |
+#   +--------+--------+--------+
+#   |  N04   |  N05   |  N06   |
+#   +--------+--------+--------+
+#
+$n = $handoffs.Count
+$gCols = 3; $gRows = 2
+$gW = [math]::Floor($scr.Width / $gCols)
+$gH = [math]::Floor($scr.Height / $gRows)
+
+# Fixed cell map: nucleus -> (col, row) -- NEVER changes regardless of dispatch order
+$fixedCells = @{
+    "n01" = @{col=0; row=0}  # top-left
+    "n02" = @{col=1; row=0}  # top-center
+    "n03" = @{col=2; row=0}  # top-right
+    "n04" = @{col=0; row=1}  # bottom-left
+    "n05" = @{col=1; row=1}  # bottom-center
+    "n06" = @{col=2; row=1}  # bottom-right
+}
+
+# Build position map from fixed cells
+foreach ($h in $handoffs) {
+    $base = [System.IO.Path]::GetFileNameWithoutExtension($h.Name)
+    $parts = $base -split '_'
+    $nuc = $parts[-1]
+    $cell = $fixedCells[$nuc]
+    if ($cell) {
+        $gridPos[$nuc] = @{x=$gOx + $cell.col * $gW; y=$gOy + $cell.row * $gH}
+    } else {
+        # Unknown nucleus -- fallback to first empty cell
+        $gridPos[$nuc] = @{x=$gOx; y=$gOy}
+    }
+}
+
+Write-Output "[GRID] Mission: $mission | Mode: $mode | Handoffs: $n | Layout: ${gCols}x${gRows}"
 
 # Extract nucleus from handoff filename (pattern: {mission}_{nucleus}.md or {mission}_batch_{N}_{nucleus}.md)
 function Get-NucleusFromHandoff($filename) {
@@ -101,17 +133,35 @@ function Launch-Nucleus($handoff) {
     $nucleusHandoff = "$handoffDir\${nucleus}_task.md"
     Copy-Item $handoff.FullName -Destination $nucleusHandoff -Force
 
+    # Set env var so boot scripts skip their own WindowSize override
+    $env:CEX_GRID = "1"
+    $env:CEX_GRID_W = "$gW"
+    $env:CEX_GRID_H = "$gH"
+
     # ALWAYS boot interactive -- task comes from handoff, never CLI args (avoids nested-quote hell)
     if ($bootType -eq "ps1") {
         $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bootScript`"" -WorkingDirectory $root -PassThru
     } else {
         $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`"" -WorkingDirectory $root -PassThru
     }
-    Start-Sleep -Seconds 3
-
+    # Retry loop: poll for window handle (up to 5s, 500ms intervals)
     if ($proc) {
-        [Win32Grid]::MoveWindow($proc.MainWindowHandle, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
-        "$($proc.Id) $nucleus" | Add-Content $pidFile
+        $hwnd = [IntPtr]::Zero
+        for ($i = 0; $i -lt 10; $i++) {
+            Start-Sleep -Milliseconds 500
+            try { $proc.Refresh() } catch {}
+            $hwnd = $proc.MainWindowHandle
+            if ($hwnd -ne [IntPtr]::Zero) { break }
+        }
+        if ($hwnd -ne [IntPtr]::Zero) {
+            [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
+        } else {
+            Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
+        }
+        # PID format: {pid} {nucleus} {cli} {session_id} {timestamp}
+        $sessId = if ($env:CEX_SESSION_ID) { $env:CEX_SESSION_ID } else { "s$PID" }
+        $ts = Get-Date -Format "yyyy-MM-ddTHH:mm:ss"
+        "$($proc.Id) $nucleus claude $sessId $ts" | Add-Content $pidFile
         Write-Output "[$upper] Spawned PID:$($proc.Id) handoff:$($handoff.Name)"
     }
     return $proc
@@ -120,11 +170,32 @@ function Launch-Nucleus($handoff) {
 # Static mode: launch all at once
 if ($mode -eq "static") {
     $launched = 0
+    $launchedProcs = @{}
     foreach ($h in $handoffs) {
         if ($launched -ge $maxSlots) { break }
-        Launch-Nucleus $h | Out-Null
+        $nucleus = Get-NucleusFromHandoff $h.Name
+        $proc = Launch-Nucleus $h
+        if ($proc) { $launchedProcs[$nucleus] = $proc }
         $launched++
         Start-Sleep -Seconds 4
+    }
+    # Re-enforce grid positions after all windows have settled
+    # Boot scripts may resize windows; this second pass corrects them
+    Write-Output "[GRID] Re-enforcing window positions..."
+    Start-Sleep -Seconds 6
+    foreach ($kv in $launchedProcs.GetEnumerator()) {
+        $nucleus = $kv.Key
+        $proc = $kv.Value
+        $pos = $gridPos[$nucleus]
+        if (-not $pos) { continue }
+        try {
+            $proc.Refresh()
+            $hwnd = $proc.MainWindowHandle
+            if ($hwnd -ne [IntPtr]::Zero) {
+                [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
+                Write-Output "  [$($nucleus.ToUpper())] repositioned"
+            }
+        } catch {}
     }
     Write-Output "[GRID] Static: $launched/$($handoffs.Count) launched"
     exit 0

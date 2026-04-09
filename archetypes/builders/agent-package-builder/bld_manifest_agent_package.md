@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, agent-package, P02, specialist, packaging, portable, agent-bundle]
 keywords: [agent-package, packaging, portable, bundle, self-contained, agent-package, distribute, deploy-agent]
 triggers: ["package this agent for distribution", "create agent package bundle for agent", "build portable agent package"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `agent_package` artifacts — pacotes portaveis self-con. L2: Produce agent_package with manifest.yaml complete (14 fields required + 5 recomm. L3: When user needs to create, build, or scaffold agent package.
 quality: 9.1
 title: "Manifest Agent Package"

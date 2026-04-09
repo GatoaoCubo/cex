@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, runtime-state, P10, specialist, runtime, memory]
 keywords: [runtime-state, mental-model, agent-state, routing, decisions, priorities, heuristics, state-machine]
 triggers: ["define agent runtime state", "what decisions does this agent make", "create runtime mental model"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building runtime_states — variable mental states that agents. L2: Define agent mental state with routing rules and decision trees. L3: When user needs to create, build, or scaffold runtime state.
 quality: 9.1
 title: "Manifest Runtime State"

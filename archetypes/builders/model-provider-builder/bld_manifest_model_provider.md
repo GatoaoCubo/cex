@@ -12,7 +12,7 @@ author: orchestrator
 tags: [kind-builder, model-provider, P02, specialist]
 keywords: [model-provider, llm-routing, api-provider, anthropic, openai, google, ollama, fallback]
 triggers: ["configure LLM provider", "setup model routing", "add API provider"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building model_provider configs — LLM API connection and routing specs. L2: Configure provider connections with tiered models, fallback chains, and rate limits. L3: When user needs to create, build, or scaffold LLM provider configuration.
 quality: 9.1
 title: "Manifest Model Provider"

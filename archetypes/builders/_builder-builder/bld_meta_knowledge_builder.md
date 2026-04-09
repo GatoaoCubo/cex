@@ -72,9 +72,9 @@ sources: {{sources_used}}
 | {{field_1}} | {{why_1}} | {{equivalent_1}} |
 
 ## Boundary vs Nearby Types
-<!-- NOTE: Tabela distinguindo this type dos vizinhos confusos -->
-<!-- Padrao identico em TODOS os 4 builders existentes -->
-<!-- Buscar overlaps em TAXONOMY_LAYERS.yaml -->
+<!-- NOTE: Table distinguishing this type from confusing neighbors -->
+<!-- Pattern identical in ALL 4 existing builders -->
+<!-- Search overlaps in TAXONOMY_LAYERS.yaml -->
 
 | Type | What it is | Why it is NOT {{type_name}} |
 |------|------------|---------------------------|

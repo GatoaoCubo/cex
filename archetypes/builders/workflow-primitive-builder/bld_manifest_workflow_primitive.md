@@ -11,7 +11,7 @@ author: N03
 tags: [kind-builder, workflow_primitive, P12, orchestration, specialist]
 keywords: [workflow, primitive, step, condition, loop, parallel, router, gate, merge]
 triggers: ["create workflow step", "define orchestration primitive", "build workflow building block"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `workflow_primitive` artifacts for P12: atomic workflow building blocks for orchestration. L2: Produce YAML primitives (step, condition, loop, parallel, router, gate, merge) with inputs, outputs, and composition rules. L3: When user needs to create, build, or scaffold workflow_primitive.
 quality: 9.1
 title: "Manifest Workflow Primitive"

@@ -31,7 +31,7 @@ density_score: 0.90
 |-------|-----|------|---------|
 | keywords | manifest | list[str] | 4-8 terms |
 | triggers | manifest | list[str] | 2-4 phrases |
-| capability_summary | manifest | string | 3 layers L1/L2/L3 |
+| capabilities | manifest | string | 3 layers L1/L2/L3 |
 | memory_scope | memory | enum | project |
 | observation_types | memory | list | [user,feedback,project,reference] |
 | effort | config | enum | medium |

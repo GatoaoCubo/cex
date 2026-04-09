@@ -1,0 +1,89 @@
+id: pricing_experiment_tool
+kind: tool_card
+pillar: P11
+title: Pricing Experiment Tool — A/B Testing Framework
+nucleus: N06
+version: 1.0.0
+created: 2026-04-07
+author: n06_commercial
+domain: pricing_experiments
+quality: 9.0
+tags:
+- tool
+- pricing
+- experiment
+- A/B
+- N06
+- testing
+tldr: 'Structured experiment design for pricing changes: hypothesis → test → measure → decide. Prevents gut-feel pricing adjustments.'
+density_score: 0.9
+purpose: 'Pricing changes without measurement are gambling. This tool defines a structured experiment protocol so every pricing
+  adjustment is hypothesis-driven, measured, and recorded. ROI: One well-run pricing experiment that finds a 10% revenue improvement
+  pays for itself in the first month. One gut-feel change that drops conversion by 15% costs months to recover. ---'
+experiment_protocol: ''
+step_1_define_hypothesis: "experiment:\n  id: \"PX-YYYY-MM-DD-NNN\"\n  product: \"product_name\"\n  hypothesis: \"Changing\
+  \ [variable] from [A] to [B] will [metric] by [expected %]\"\n  variable: \"price | tier_features | billing_cycle | trial_length\
+  \ | discount\"\n  metric: \"conversion_rate | revenue_per_visitor | arpu | trial_to_paid\"\n  expected_lift: \"+X%\"\n \
+  \ risk: \"What could go wrong?\"\n  rollback_plan: \"How to undo if it fails\""
+step_2_design_test: "test_design:\n  type: \"A/B | sequential | cohort\"\n  \n  # A/B test (sufficient traffic: >1000 visitors/variant)\n\
+  \  ab_test:\n    variant_a: \"control — current pricing\"\n    variant_b: \"test — proposed change\"\n    traffic_split:\
+  \ \"50/50\"\n    min_sample_size: 1000  # per variant for 95% confidence\n    duration_days: 14  # minimum 2 weeks to capture\
+  \ weekly patterns\n    \n  # Sequential test (low traffic: <1000/week)\n  sequential_test:\n    week_1: \"price_high — measure\
+  \ conversion\"\n    week_2: \"price_mid — measure conversion\"\n    week_3: \"price_low — measure conversion\"\n    analysis:\
+  \ \"revenue_optimizing_price = argmax(price × conversion)\"\n    \n  # Cohort test (existing customers)\n  cohort_test:\n\
+  \    group_a: \"existing customers — no change\"\n    group_b: \"new customers — new pricing\"\n    duration: \"30 days\"\
+  \n    metric: \"LTV comparison at day 30, 60, 90\""
+step_3_run_measure: "measurement:\n  primary_metric: \"revenue_per_visitor\"  # not just conversion!\n  secondary_metrics:\n\
+  \    - conversion_rate\n    - average_order_value\n    - churn_rate_delta\n    - customer_satisfaction  # if measurable\n\
+  \  \n  data_sources:\n    - \"Stripe MCP: payment data\"\n    - \"Analytics: visitor counts, funnel progression\"\n    -\
+  \ \"Support: complaint volume\"\n  \n  statistical_rigor:\n    confidence_level: 0.95\n    min_effect_size: 0.05  # 5% minimum\
+  \ detectable effect\n    power: 0.80"
+step_4_decide: "decision_matrix:\n  strong_positive:  # lift > expected, p < 0.05\n    action: \"adopt variant B\"\n    next:\
+  \ \"log to pricing_optimization_memory.md\"\n    \n  weak_positive:  # lift > 0 but p > 0.05\n    action: \"extend test\
+  \ duration or increase sample\"\n    next: \"re-evaluate in 1 week\"\n    \n  neutral:  # no significant difference\n  \
+  \  action: \"keep current (avoid change cost)\"\n    next: \"log insight, try different variable\"\n    \n  negative:  #\
+  \ variant B worse\n    action: \"revert immediately\"\n    next: \"analyze why, update anti-pattern list\""
+step_5_record: "Every completed experiment → append to `pricing_optimization_memory.md`:\n\nresult:\n  experiment_id: \"PX-YYYY-MM-DD-NNN\"\
+  \n  outcome: \"positive | neutral | negative\"\n  variant_a_metric: 0.0\n  variant_b_metric: 0.0\n  lift_pct: 0.0\n  confidence:\
+  \ 0.0\n  decision: \"adopt | extend | keep_current | revert\"\n  learning: \"What we learned for future experiments\"\n\
+  \  date_completed: \"YYYY-MM-DD\"\n\n---"
+experiment_types_by_variable: '| Variable | Test Type | Duration | GDP? |
+
+  |----------|----------|----------|------|
+
+  | Base price change | A/B or sequential | 14-28 days | Yes |
+
+  | Adding/removing tier | Sequential | 30 days | Yes |
+
+  | Annual discount % | A/B | 14 days | No |
+
+  | Trial length (7→14 days) | Cohort | 60 days | No |
+
+  | Feature gating changes | A/B | 14 days | Yes |
+
+  | Checkout flow optimization | A/B | 7-14 days | No |
+
+  | Payment options (add crypto, etc.) | A/B | 14 days | Yes |
+
+
+  ---'
+common_experiments_to_run_first: ''
+experiment_1_price_sensitivity: 'Hypothesis: Current price is within 20% of optimal. Method: Sequential test at -20%, current,
+  +20%. Metric: Revenue per visitor (not just conversion). Expected duration: 3 weeks.'
+experiment_2_annual_discount_impact: 'Hypothesis: Offering 20% annual discount increases annual plan adoption. Method: A/B
+  (show/hide annual toggle). Metric: Annual plan adoption rate, 12-month revenue projection. Expected duration: 2 weeks.'
+experiment_3_free_tier_conversion_gate: 'Hypothesis: Moving feature X behind paywall increases free→pro conversion. Method:
+  A/B (feature available vs. gated). Metric: Free→pro upgrade rate, churn impact. Expected duration: 30 days. ---'
+integration: '| CEX Component | Role |
+
+  |---------------|------|
+
+  | `pricing_optimization_memory.md` | Stores all experiment results |
+
+  | Stripe MCP | Pulls revenue/subscription data |
+
+  | `cex_evolve.py` | Can auto-evolve pricing page copy between experiments |
+
+  | `brand_audit.py` | Verifies pricing changes align with brand positioning |
+
+  | `scoring_rubric_commercial.md` | Quality gate for experiment design |'

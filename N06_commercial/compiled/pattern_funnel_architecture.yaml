@@ -1,0 +1,152 @@
+id: p08_pat_funnel_architecture
+kind: pattern
+pillar: P08
+title: Pattern — Conversion Funnel Architecture
+nucleus: N06
+version: 1.0.0
+created: 2026-04-07
+author: n06_commercial
+domain: funnel_optimization
+quality: 9.0
+tags:
+- pattern
+- funnel
+- conversion
+- N06
+- architecture
+- AIDA
+tldr: '5-stage funnel framework: Attract → Engage → Convert → Retain → Expand. Each stage has metrics, tools, and cross-nucleus
+  handoffs.'
+density_score: 0.93
+overview: 'Every commercial system is a funnel. The funnel pattern ensures N06 can design, measure, and optimize the path
+  from stranger to revenue. Without structure, funnel optimization is guesswork. With it, every stage has clear metrics and
+  ownership. ROI: A structured funnel with stage-level metrics typically improves conversion 15-40% over untracked funnels
+  — because you can see where people drop. ---'
+funnel_stages: "┌─────────────────────┐\n                    │     ATTRACT          │  ← Content, SEO, ads, social\n     \
+  \               │  (Awareness)         │     Owner: N02 Marketing\n                    │  Metric: reach       │\n      \
+  \              └────────┬────────────┘\n                             │ CTR\n                    ┌────────▼────────────┐\n\
+  \                    │     ENGAGE           │  ← Landing pages, lead magnets, demos\n                    │  (Consideration)\
+  \     │     Owner: N02+N06\n                    │  Metric: engagement  │\n                    └────────┬────────────┘\n\
+  \                             │ Signup/Trial Rate\n                    ┌────────▼────────────┐\n                    │  \
+  \   CONVERT          │  ← Pricing page, checkout, onboarding\n                    │  (Decision)          │     Owner: N06\
+  \ Commercial\n                    │  Metric: conversion  │\n                    └────────┬────────────┘\n              \
+  \               │ Activation Rate\n                    ┌────────▼────────────┐\n                    │     RETAIN       \
+  \    │  ← Product value, support, engagement\n                    │  (Loyalty)           │     Owner: N05+N06\n        \
+  \            │  Metric: churn       │\n                    └────────┬────────────┘\n                             │ Expansion\
+  \ Rate\n                    ┌────────▼────────────┐\n                    │     EXPAND           │  ← Upsell, cross-sell,\
+  \ referrals\n                    │  (Advocacy)          │     Owner: N06 Commercial\n                    │  Metric: NRR\
+  \         │\n                    └─────────────────────┘\n\n---"
+stage_details: ''
+1_attract_top_of_funnel: '| Element | Detail |
+
+  |---------|--------|
+
+  | Goal | Get qualified eyeballs |
+
+  | Owner | N02 Marketing (copy) + N06 (strategy) |
+
+  | Channels | Content marketing, SEO, social, paid ads, PR |
+
+  | Key Metric | Qualified traffic (not vanity pageviews — AX11) |
+
+  | Tools | NotebookLM (content), fetch MCP (research) |
+
+  | Handoff to N02 | Content brief with target keywords + audience |'
+2_engage_mid_funnel: '| Element | Detail |
+
+  |---------|--------|
+
+  | Goal | Convert visitors to leads/trials |
+
+  | Owner | N02 (copy) + N06 (offer structure) + N03 (build) |
+
+  | Assets | Landing pages, lead magnets, free tools, demos |
+
+  | Key Metric | Signup/trial rate (visitors → leads) |
+
+  | Tools | Landing page builder, email sequences |
+
+  | GDP needed | Lead magnet topic, form fields, value proposition |'
+3_convert_decision_point: '| Element | Detail |
+
+  |---------|--------|
+
+  | Goal | Turn leads into paying customers |
+
+  | Owner | N06 Commercial (pricing, checkout) |
+
+  | Assets | Pricing page, checkout flow, payment processing |
+
+  | Key Metric | Conversion rate (leads → customers) |
+
+  | Tools | Stripe MCP (payments), Hotmart MCP (courses) |
+
+  | Critical | AX05 (3+ tiers), AX02 (value-based pricing) |'
+4_retain_post_sale: '| Element | Detail |
+
+  |---------|--------|
+
+  | Goal | Keep customers paying |
+
+  | Owner | N05 (product ops) + N06 (engagement strategy) |
+
+  | Assets | Onboarding sequences, support, feature updates |
+
+  | Key Metric | Monthly churn rate (target: < 5%) |
+
+  | Tools | Stripe MCP (subscription management) |
+
+  | Warning | Churn > 5%/month = leaky bucket. Fix before spending on ATTRACT |'
+5_expand_revenue_growth: '| Element | Detail |
+
+  |---------|--------|
+
+  | Goal | Increase revenue per customer |
+
+  | Owner | N06 Commercial |
+
+  | Strategies | Upsell to higher tier, cross-sell products, referral programs |
+
+  | Key Metric | Net Revenue Retention (NRR, target: > 110%) |
+
+  | Tools | Stripe MCP (upgrade tracking), pricing_optimization_memory.md |
+
+  | ROI note | Expanding existing customers costs 5-7× less than acquiring new ones |
+
+
+  ---'
+funnel_metrics_dashboard: "funnel_metrics:\n  attract:\n    traffic_monthly: 0\n    qualified_pct: 0.0\n    cost_per_visitor:\
+  \ 0.00\n  engage:\n    landing_page_views: 0\n    signups: 0\n    signup_rate: 0.0  # signups / views\n  convert:\n    trials:\
+  \ 0\n    paid: 0\n    conversion_rate: 0.0  # paid / trials\n    avg_deal_value: 0.00\n  retain:\n    active_customers:\
+  \ 0\n    churned_this_month: 0\n    churn_rate: 0.0  # churned / active\n    mrr: 0.00\n  expand:\n    upgrades: 0\n   \
+  \ cross_sells: 0\n    nrr: 0.0  # (mrr + expansion - churn) / mrr_start\n  \n  derived:\n    cac: 0.00  # total spend /\
+  \ paid customers\n    ltv: 0.00  # arpu / churn_rate\n    ltv_cac: 0.0  # must be > 3.0 (AX07)\n    payback_months: 0  #\
+  \ cac / arpu\n\n---"
+cross_nucleus_ownership_map: '| Stage | N01 | N02 | N03 | N04 | N05 | N06 |
+
+  |-------|-----|-----|-----|-----|-----|-----|
+
+  | ATTRACT | Research | Copy | — | Content | — | Strategy |
+
+  | ENGAGE | — | Landing copy | Build pages | Lead magnets | — | Offer design |
+
+  | CONVERT | — | — | Checkout flow | — | Payment ops | Pricing |
+
+  | RETAIN | — | Email nurture | Feature dev | Docs | Support ops | Engagement |
+
+  | EXPAND | — | Upgrade copy | Upsell UX | — | Billing ops | Revenue strategy |
+
+
+  ---'
+diagnostic_where_s_the_leak: 'IF conversion_rate < 2% → Fix CONVERT (pricing, checkout friction)
+
+  IF signup_rate < 10% → Fix ENGAGE (landing page, value prop)
+
+  IF churn_rate > 5% → Fix RETAIN (onboarding, product value)
+
+  IF NRR < 100% → Fix EXPAND (upsell opportunities)
+
+  IF qualified_traffic < threshold → Fix ATTRACT (content, SEO, ads)
+
+
+  Rule: Always fix the leakiest stage first. Pouring more traffic into a leaky funnel wastes money.'

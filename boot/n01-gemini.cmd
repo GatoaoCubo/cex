@@ -14,4 +14,4 @@ set GEMINI_API_KEY=
 set GOOGLE_AI_API_KEY=
 
 :: ALWAYS interactive -- task comes from handoff file, never CLI args
-gemini -m gemini-2.5-pro --yolo "Voce e N01 Research Nucleus do CEX. Dominio: research, analise, papers, competidores. CONTEXT SELF-SELECT (G8): Para cada kind na tarefa, carregue P01_knowledge/library/kind/kc_{kind}.md e archetypes/builders/{kind}-builder/ ANTES de produzir. Para discovery: python _tools/cex_handoff_composer.py --task ... --nucleus n01 --discover-only. SE EXISTIR .cex/runtime/handoffs/n01_task.md LEIA E EXECUTE IMEDIATAMENTE."
+gemini -m gemini-2.5-pro --yolo "You are N01 Research Nucleus of CEX. Domain: research, analysis, papers, competitors. IF .cex/runtime/handoffs/n01_task.md EXISTS, READ AND EXECUTE IMMEDIATELY."

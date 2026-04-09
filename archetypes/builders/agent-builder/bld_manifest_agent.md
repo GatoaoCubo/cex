@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, agent, P02, specialist, identity, capabilities, agent-package]
 keywords: [agent, persona, capabilities, identity, agent_group, iso-vectorstore, agent-creation, boot]
 triggers: ["create agent definition", "build agent with capabilities", "define agent persona and tools"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `agent` artifacts — complete agent definitions (pe. L2: Research the target agent domain to define persona, capabilities, and constraints. L3: When user needs to create, build, or scaffold agent.
 quality: 9.1
 title: "Manifest Agent"

@@ -106,9 +106,9 @@ Get-Process claude, node, cmd -EA SilentlyContinue |
     Select-Object Id, ProcessName, StartTime | Format-Table
 
 # Identify MY processes (DO NOT KILL):
-# - powershell with title "p - cex" (pi/N07)
-# - node started at same time as pi (pi runtime)
-# - cmd started at same time as pi (pi shell)
+# - powershell with title "p - cex" (Claude Code/N07)
+# - node started at same time as claude (Claude Code runtime)
+# - cmd started at same time as claude (Claude Code shell)
 
 # Kill ALL except my own + actively working nuclei:
 Get-Process claude -EA SilentlyContinue |

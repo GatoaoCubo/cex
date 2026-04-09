@@ -19,6 +19,17 @@ density_score: 1.0
 linked_artifacts:
   primary: null
   related: []
+aliases: ["performance test", "speed test", "latency benchmark", "cost benchmark", "perf measurement"]
+user_says: ["benchmark this", "benchmark disso", "measure performance", "how fast is it", "what does it cost per request"]
+long_tails: ["I need to measure how fast my pipeline responds under load", "track the cost per 1000 tokens across different models", "run a performance benchmark with p50/p95/p99 latency percentiles", "compare latency before and after this optimization"]
+cross_provider:
+  langchain: "LangSmith traces + metrics"
+  llamaindex: "IngestionBenchmark / BatchEvalRunner"
+  crewai: "Task execution metrics (manual)"
+  dspy: "Evaluate class + metrics"
+  openai: "usage stats + Evals API"
+  anthropic: "usage field + custom latency tracker"
+  haystack: "BenchmarkMeta / EvaluationRunOverview"
 ---
 
 # Benchmark

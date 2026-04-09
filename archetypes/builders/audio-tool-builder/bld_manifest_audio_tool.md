@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, audio-tool, P04, tools, speech, tts, stt, voice]
 keywords: [audio, speech, voice, tts, stt, whisper, transcribe, synthesize]
 triggers: ["create audio tool", "define speech tool", "build TTS", "wrap transcription service"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building audio_tool artifacts — tools that process input. L2: Define audio tool with direction and models. L3: When user needs to create, build, or scaffold audio tool.
 quality: 9.1
 title: "Manifest Audio Tool"

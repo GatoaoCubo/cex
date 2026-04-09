@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, schedule, P12, orchestration, cron, temporal-trigger]
 keywords: [schedule, cron, trigger, interval, timer, temporal, recurring, workflow-start]
 triggers: ["create schedule", "define cron job", "set up recurring trigger", "schedule workflow run"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building schedule artifacts — definitions de gatilhos temporais . L2: Define schedule with trigger_type (cron, interval, event, manual, one_shot). L3: When user needs to create, build, or scaffold schedule.
 quality: 9.1
 title: "Manifest Schedule"

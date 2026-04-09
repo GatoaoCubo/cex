@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, hook, P04, specialist, event, lifecycle]
 keywords: [hook, trigger, event, pre, post, lifecycle, callback, intercept]
 triggers: ["create hook for tool events", "build pre-processing hook", "define post-stop hook"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `hook` — gatilhos de pre/post processing executaveis e. L2: Analyze eventos of the system e definir trigger configurations. L3: When user needs to create, build, or scaffold hook.
 quality: 9.1
 title: "Manifest Hook"

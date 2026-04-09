@@ -1,7 +1,7 @@
 ---
 glob: "**"
 alwaysApply: true
-description: "N07 transmutes user input into precise CEX operations. Never execute raw user words."
+description: "N07 resolves user intent into precise CEX operations (intent resolution). Never execute raw user words."
 quality: 9.0
 title: "N07-Input-Transmutation"
 version: "1.0.0"
@@ -18,7 +18,7 @@ density_score: 0.90
 
 ## The Rule
 
-The user describes desire in their own words. These words are imprecise, incomplete, sometimes wrong. N07 NEVER executes user input literally. N07 ALWAYS transmutes it first.
+The user describes desire in their own words. These words are imprecise, incomplete, sometimes wrong. N07 NEVER executes user input literally. N07 ALWAYS resolves the intent first (industry: intent resolution).
 
 ## Transmutation Steps
 
@@ -28,18 +28,143 @@ The user describes desire in their own words. These words are imprecise, incompl
 4. **Restate in precise terms**: show the user what you understood
 5. **Execute in LLM-to-LLM language**: structured, referenced, complete
 
-## Mapping Table
+## Industry Terms for This Protocol
 
-| User says (imprecise) | N07 maps to (precise) |
-|----------------------|----------------------|
-| "make me a landing page" | kind: landing_page, pillar: P05, builder: landing-page-builder |
-| "document this" | kind: knowledge_card OR context_doc, pillar: P01 |
-| "fix the tests" | nucleus: N05, domain: operations, tools: cex_e2e_test.py |
-| "content for instagram" | kind: schedule + prompt_template, pillar: P03+P12, nucleus: N02 |
-| "overnight improvement" | tool: overnight.ps1, mode: evolve, target: 9.0 |
-| "launch all nuclei" | dispatch: grid, 6 nuclei, handoffs required |
-| "pricing strategy" | kind: content_monetization, pillar: P06, nucleus: N06 |
-| "research competitors" | nucleus: N01, kind: knowledge_card, domain: competitive |
+CEX calls this "transmutation" internally (industry: **intent resolution**). The industry uses three terms depending on context:
+
+| Industry Term | Domain | When It Applies | 8F Stage |
+|---------------|--------|-----------------|----------|
+| **Intent resolution** | NLU (Rasa, Dialogflow, Amazon Lex) | User phrase -> structured action (kind, pillar, nucleus) | F1 CONSTRAIN |
+| **Query rewriting** | Search/RAG (Google, Elasticsearch, LlamaIndex) | Fuzzy input -> precise retrieval query | F3 INJECT |
+| **Prompt optimization** | LLM (DSPy "prompt compilation") | User intent -> optimized LLM prompt | F6 PRODUCE |
+
+All three are active in every 8F run. This rule primarily covers **intent resolution** (F1).
+The exhaustive reference is `N03_engineering/knowledge/kc_intent_resolution_map.md` (123 kinds mapped).
+
+## Mapping Table (by Pillar)
+
+### P01 Knowledge
+| User says | N07 maps to |
+|-----------|-------------|
+| "document this" / "documentar isso" | kind: knowledge_card OR context_doc, pillar: P01, nucleus: N04 |
+| "set up RAG" / "configurar RAG" | kind: rag_source + retriever_config + embedding_config, pillar: P01, nucleus: N04 |
+| "define this term" / "definir esse termo" | kind: glossary_entry, pillar: P01, nucleus: N04 |
+| "add a citation" / "adicionar citacao" | kind: citation, pillar: P01, nucleus: N04 |
+
+### P02 Model
+| User says | N07 maps to |
+|-----------|-------------|
+| "create agent" / "criar agente" | kind: agent, pillar: P02, nucleus: N03 |
+| "agent deployment spec" / "spec de deploy" | kind: agent_card, pillar: P08, nucleus: N03 |
+| "add a new LLM provider" / "adicionar provedor" | kind: model_provider, pillar: P02, nucleus: N05 |
+| "model fallback chain" / "cadeia de fallback" | kind: fallback_chain, pillar: P02, nucleus: N03 |
+
+### P03 Prompt
+| User says | N07 maps to |
+|-----------|-------------|
+| "write a prompt template" / "criar template de prompt" | kind: prompt_template, pillar: P03, nucleus: N03 |
+| "system prompt" / "prompt de sistema" | kind: system_prompt, pillar: P03, nucleus: N03 |
+| "chain of prompts" / "cadeia de prompts" | kind: chain, pillar: P03, nucleus: N03 |
+| "token budget" / "orcamento de tokens" | kind: context_window_config, pillar: P03, nucleus: N03 |
+| "write a tagline" / "criar slogan" | kind: tagline, pillar: P03, nucleus: N02 |
+
+### P04 Tools
+| User says | N07 maps to |
+|-----------|-------------|
+| "MCP server" / "servidor MCP" | kind: mcp_server, pillar: P04, nucleus: N05 |
+| "web scraper" / "scraper web" | kind: browser_tool, pillar: P04, nucleus: N05 |
+| "API client" / "cliente de API" | kind: api_client, pillar: P04, nucleus: N05 |
+| "webhook endpoint" / "endpoint webhook" | kind: webhook, pillar: P04, nucleus: N05 |
+| "deep research" / "pesquisa profunda" | kind: research_pipeline, pillar: P04, nucleus: N01 |
+
+### P05 Output
+| User says | N07 maps to |
+|-----------|-------------|
+| "make me a landing page" / "criar landing page" | kind: landing_page, pillar: P05, builder: landing-page-builder |
+| "format as JSON" / "formatar como JSON" | kind: formatter, pillar: P05, nucleus: N03 |
+| "parse the output" / "extrair dados da saida" | kind: parser, pillar: P05, nucleus: N03 |
+
+### P06 Schema
+| User says | N07 maps to |
+|-----------|-------------|
+| "validate the input" / "validar entrada" | kind: input_schema, pillar: P06, nucleus: N03 |
+| "define a custom type" / "definir tipo customizado" | kind: type_def, pillar: P06, nucleus: N03 |
+| "integration contract" / "contrato de integracao" | kind: interface, pillar: P06, nucleus: N03 |
+
+### P07 Evaluation
+| User says | N07 maps to |
+|-----------|-------------|
+| "fix the tests" / "consertar os testes" | nucleus: N05, domain: operations, tools: cex_e2e_test.py |
+| "benchmark this" / "benchmark disso" | kind: benchmark, pillar: P07, nucleus: N05 |
+| "scoring criteria" / "criterios de avaliacao" | kind: scoring_rubric, pillar: P07, nucleus: N05 |
+| "LLM as judge" / "LLM como juiz" | kind: llm_judge, pillar: P07, nucleus: N05 |
+
+### P08 Architecture
+| User says | N07 maps to |
+|-----------|-------------|
+| "architecture diagram" / "diagrama de arquitetura" | kind: diagram, pillar: P08, nucleus: N03 |
+| "decision record" / "registro de decisao" | kind: decision_record, pillar: P08, nucleus: N03 |
+| "naming convention" / "convencao de nomes" | kind: naming_rule, pillar: P08, nucleus: N03 |
+
+### P09 Config
+| User says | N07 maps to |
+|-----------|-------------|
+| "environment config" / "config de ambiente" | kind: env_config, pillar: P09, nucleus: N05 |
+| "rate limits" / "limites de taxa" | kind: rate_limit_config, pillar: P09, nucleus: N05 |
+| "manage secrets" / "gerenciar credenciais" | kind: secret_config, pillar: P09, nucleus: N05 |
+| "feature toggle" / "flag de feature" | kind: feature_flag, pillar: P09, nucleus: N05 |
+
+### P10 Memory
+| User says | N07 maps to |
+|-----------|-------------|
+| "remember this entity" / "lembrar essa entidade" | kind: entity_memory, pillar: P10, nucleus: N04 |
+| "build search index" / "criar indice de busca" | kind: knowledge_index, pillar: P10, nucleus: N04 |
+| "compress memory" / "comprimir memoria" | kind: memory_summary, pillar: P10, nucleus: N04 |
+| "cache prompts" / "cache de prompts" | kind: prompt_cache, pillar: P10, nucleus: N05 |
+
+### P11 Feedback
+| User says | N07 maps to |
+|-----------|-------------|
+| "quality gate" / "gate de qualidade" | kind: quality_gate, pillar: P11, nucleus: N03 |
+| "auto-fix bugs" / "correcao automatica" | kind: bugloop, pillar: P11, nucleus: N05 |
+| "safety guardrail" / "limite de seguranca" | kind: guardrail, pillar: P11, nucleus: N03 |
+| "pricing strategy" / "estrategia de preco" | kind: content_monetization, pillar: P11, nucleus: N06 |
+
+### P12 Orchestration
+| User says | N07 maps to |
+|-----------|-------------|
+| "workflow" / "fluxo de trabalho" | kind: workflow, pillar: P12, nucleus: N03 |
+| "launch all nuclei" / "lancar todos nuclei" | dispatch: grid, 6 nuclei, handoffs required |
+| "schedule a task" / "agendar tarefa" | kind: schedule, pillar: P12, nucleus: N07 |
+| "overnight improvement" / "melhoria noturna" | tool: overnight.ps1, mode: evolve, target: 9.0 |
+
+### Operational (no specific kind)
+| User says | N07 maps to |
+|-----------|-------------|
+| "research competitors" / "pesquisar concorrentes" | nucleus: N01, kind: knowledge_card, domain: competitive |
+| "content for instagram" / "conteudo pro insta" | kind: schedule + prompt_template, pillar: P03+P12, nucleus: N02 |
+| "optimize the system" / "otimizar o sistema" | kind: optimizer, pillar: P11, nucleus: N05 |
+
+## Verb Resolution (PT + EN)
+
+N07 maps user verbs to canonical actions. These inform which 8F functions to emphasize.
+
+| PT Verb | EN Verb | Canonical Action | Primary 8F Function |
+|---------|---------|-----------------|---------------------|
+| criar, crie, cria | create, build, make | create | F6 PRODUCE |
+| melhorar, melhore | improve, enhance, evolve | improve | F7 GOVERN |
+| reconstruir, reconstroi | rebuild, recreate | rebuild | F2 BECOME + F6 PRODUCE |
+| analisar, analise | analyze, review, audit | analyze | F3 INJECT + F4 REASON |
+| validar, valide | validate, verify, check | validate | F7 GOVERN |
+| documentar, documente | document, describe | document | F6 PRODUCE (knowledge_card) |
+| integrar, integre | integrate, connect | integrate | F5 CALL |
+| testar, teste | test, evaluate | test | F7 GOVERN (eval kinds) |
+| implantar, implante | deploy, ship, release | deploy | F8 COLLABORATE |
+| configurar, configure | configure, setup | configure | F1 CONSTRAIN (config kinds) |
+| otimizar, otimize | optimize, tune | optimize | F7 GOVERN (optimizer) |
+| auditar, audite | audit, inspect | audit | F3 INJECT + F7 GOVERN |
+| agendar, agende | schedule, plan, time | schedule | F8 COLLABORATE (schedule) |
+| monitorar, monitore | monitor, watch, observe | monitor | F5 CALL (trace_config) |
 
 ## 8F Pipeline Mastery
 
@@ -77,7 +202,7 @@ N07 must know every step and apply it automatically:
 
 User input: "quero melhorar os artefatos que estao ruins"
 
-N07 transmutes:
+N07 resolves intent (industry: intent resolution):
 - Intent: improve low-quality artifacts
 - Map: cex_evolve.py sweep (tool), quality < 9.0 (threshold)
 - Resolve: heuristic first (free), agent for stubborn (budget)

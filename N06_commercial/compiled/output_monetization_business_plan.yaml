@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-02
 author: n06_commercial
 domain: monetization-strategy
-quality: null
+quality: 9.2
 tags:
 - monetization
 - business-plan
@@ -209,13 +209,15 @@ competitive_threats: 'E se OpenAI/Google lança similar?
   Probabilidade: MÉDIA (12-18 meses)
 
   Mitigation: Build network effects via community + consulting'
-supply_chain_risk: 'E se Qwen muda licença de cex-brain?
+platform_dependency_risk: 'E se Anthropic muda pricing do Claude Code / Max subscription?
 
-  - Backup plan: Llama 3.3 70B ou Mixtral 8x22B
+  - Mitigation: CEX knowledge system is model-agnostic (typed .md + .yaml)
 
-  - Timeline: 2-4 semanas para re-train
+  - Backup plan: Export artifacts, run via API (pay-per-token) or alternative LLM
 
-  - Impact: BAIXO (modelo é commodity, knowledge é o moat)'
+  - Impact: MEDIO (runtime changes, knowledge persists)
+
+  - Moat: 123 kinds + 12 pillars + 2000+ artifacts = portable knowledge, not locked to one provider'
 demand_risk: 'E se conversão é menor que esperado?
 
 
@@ -249,7 +251,7 @@ fase_2_scale_premium_m_s_4_6: 'Goal: Escalar + Master tier
 
   - ✅ Master course R$697 launch
 
-  - ✅ cex-brain:14b exclusivo para paid users
+  - ✅ Claude Code templates + advanced builder packs (paid)
 
   - ✅ Afiliados program (25% comissão)
 
@@ -269,7 +271,7 @@ fase_3_enterprise_community_m_s_7_12: 'Goal: Diversificar revenue streams
 
 
   ---'
-resumo_executivo: 'Estratégia: Repo público + curso premium + model exclusivo
+resumo_executivo: 'Estrategia: Repo publico + curso premium + Claude Code native
 
   Target Ano 1: R$441K-882K receita líquida
 

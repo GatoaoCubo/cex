@@ -1,18 +1,18 @@
 @echo off
-:: CEX Global Command — opens N07 Orchestrator
+:: CEX Global Command -- opens N07 Orchestrator
 :: Usage: cex [subcommand]
-::   cex          — boot N07 orchestrator (claude CLI, subscription)
-::   cex status   — check spawned nuclei
-::   cex stop     — kill all spawned nuclei
-::   cex grid M   — launch grid mission M
-::   cex solo N T — launch nucleus N with task T
-::   cex doctor   — run CEX health check
+::   cex          -- boot N07 orchestrator (claude CLI, subscription)
+::   cex status   -- check spawned nuclei
+::   cex stop     -- kill all spawned nuclei
+::   cex grid M   -- launch grid mission M
+::   cex solo N T -- launch nucleus N with task T
+::   cex doctor   -- run CEX health check
 
 set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
 cd /d "%CEX_ROOT%"
 
 if "%~1"=="" (
-    call boot\cex.cmd
+    powershell -NoProfile -NoExit -ExecutionPolicy Bypass -File boot\cex.ps1
 ) else if "%~1"=="status" (
     powershell -NoProfile -ExecutionPolicy Bypass -File _spawn\spawn_monitor.ps1
 ) else if "%~1"=="stop" (
@@ -24,5 +24,5 @@ if "%~1"=="" (
 ) else if "%~1"=="doctor" (
     python _tools\cex_doctor.py
 ) else (
-    call boot\cex.cmd "%*"
+    powershell -NoProfile -NoExit -ExecutionPolicy Bypass -File boot\cex.ps1 %*
 )

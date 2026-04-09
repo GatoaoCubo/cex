@@ -19,7 +19,7 @@ decay_rate: 0.05
 agent_group: n04_knowledge
 keywords: [prompt_cache, ttl, eviction, invalidation, cache_key, storage_backend]
 memory_scope: project
-observation_types: [reference]
+observation_types: [user, feedback, project, reference]
 ---
 ## Summary
 Prompt caches reduce LLM latency and cost by reusing prompt/completion pairs. Primary failures are caching everything (pollution), no invalidation (stale), and excessive TTL (outdated).

@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, system-prompt, P03, specialist, identity, persona]
 keywords: [system-prompt, persona, identity, rules, always-never, agent-creation, system-message]
 triggers: ["create system prompt for agent", "define agent persona and rules", "build identity prompt"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building system_prompts — prompts de sistema that definem identi. L2: Research domain do agent-target for definir persona e expertise. L3: When user needs to create, build, or scaffold system prompt.
 quality: 9.1
 title: "Manifest System Prompt"

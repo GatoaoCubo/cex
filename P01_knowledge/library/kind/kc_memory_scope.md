@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about memory_scope artifacts"
 keywords: [memory, persistence, scope, ttl, session-state]
 feeds_kinds: [memory_scope]
 density_score: null
+aliases: ["memory config", "memory settings", "persistence config", "memory policy", "agent memory definition"]
+user_says: ["configure memory", "configurar memoria", "set up persistence", "define what the agent remembers", "how long should it remember"]
+long_tails: ["I need to define what this agent remembers and for how long", "configure memory types and TTL policies for my agent", "set up tiered memory with hot session buffer and cold archive", "define which memory backends and expiration policies my agent uses"]
+cross_provider:
+  langchain: "ConversationBufferMemory / VectorStoreMemory"
+  llamaindex: "ChatMemoryBuffer / storage context"
+  crewai: "memory=True on Crew (auto-managed)"
+  dspy: "n/a (state managed externally)"
+  openai: "Assistants thread history (automatic)"
+  anthropic: "File-based MEMORY.md system"
+  haystack: "ChatMessageStore"
 ---
 
 # Memory Scope

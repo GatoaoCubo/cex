@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, computer-use, P04, tools, screen, automation, gui]
 keywords: [computer, screen, mouse, keyboard, gui, automation, screenshot, coordinate]
 triggers: ["create computer use tool", "define screen control", "build GUI automation", "specify desktop interaction"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building computer_use artifacts — interfaces de control de tel. L2: Define interface de control with target, resolution, actions_supported. L3: When user needs to create, build, or scaffold computer use.
 quality: 9.1
 title: "Manifest Computer Use"

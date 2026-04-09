@@ -19,7 +19,7 @@ decay_rate: 0.05
 agent_group: n04_knowledge
 keywords: [context_window, token_budget, output_reserve, overflow, priority_tiers]
 memory_scope: project
-observation_types: [reference]
+observation_types: [user, feedback, project, reference]
 ---
 ## Summary
 Context window configs allocate a model's finite context among prompt sections. The primary failure is insufficient output reserve leading to truncated responses.

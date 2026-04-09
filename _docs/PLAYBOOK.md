@@ -1,24 +1,23 @@
-# CEX Spawn Playbook — The Complete Operations Manual
+# CEX Spawn Playbook -- The Complete Operations Manual
 
-**Version**: 1.0.0 | **Tested**: 2026-03-30 | **Runtime**: pi (bash) + claude/codex/gemini (CMD)
+**Version**: 2.0.0 | **Updated**: 2026-04-08 | **Runtime**: Claude Code native (all nuclei)
 
 ---
 
 ## GOLDEN RULE
 
 ```
-N07 runs in PI (bash).
-Nuclei N01-N06 run in CLI windows (Windows CMD).
-From PI bash, ONLY `bash _spawn/dispatch.sh` creates visible windows.
+N07 runs in Claude Code (orchestrator terminal).
+Nuclei N01-N06 run in separate Claude Code windows (Windows CMD).
+From N07, ONLY `bash _spawn/dispatch.sh` creates visible windows.
 ```
 
-**NEVER from pi bash:**
-- `start cmd /k ...` — Windows CMD syntax, not bash
-- `cmd /c boot\n03.cmd` — won't open new window
-- `python subprocess.Popen(CREATE_NEW_CONSOLE)` — invisible window
-- Direct `powershell -File ...` — works but verbose
+**NEVER from N07:**
+- `start cmd /k ...` -- Windows CMD syntax, not bash
+- `cmd /c boot\n03.cmd` -- won't open new window
+- Direct `powershell -File ...` -- works but bypasses session tracking
 
-**ALWAYS from pi bash:**
+**ALWAYS from N07:**
 ```bash
 bash _spawn/dispatch.sh solo n03 "task"
 bash _spawn/dispatch.sh grid MISSION
@@ -32,15 +31,15 @@ bash _spawn/dispatch.sh stop
 
 ```bash
 # Interactive (stays open)
-bash _spawn/dispatch.sh solo n03 "Leia .cex/runtime/handoffs/TASK.md e execute."
+bash _spawn/dispatch.sh solo n03 "Read .cex/runtime/handoffs/n03_task.md and execute."
 
-# All nuclei
-bash _spawn/dispatch.sh solo n01 "research task"    # gemini
-bash _spawn/dispatch.sh solo n02 "marketing task"   # claude sonnet
-bash _spawn/dispatch.sh solo n03 "build task"       # claude opus
-bash _spawn/dispatch.sh solo n04 "knowledge task"   # gemini
-bash _spawn/dispatch.sh solo n05 "code review"      # codex
-bash _spawn/dispatch.sh solo n06 "pricing task"     # claude sonnet
+# All nuclei (all use Claude Code + Opus 4.6)
+bash _spawn/dispatch.sh solo n01 "research task"     # claude opus-4-6
+bash _spawn/dispatch.sh solo n02 "marketing task"    # claude opus-4-6
+bash _spawn/dispatch.sh solo n03 "build task"        # claude opus-4-6
+bash _spawn/dispatch.sh solo n04 "knowledge task"    # claude opus-4-6
+bash _spawn/dispatch.sh solo n05 "code review"       # claude opus-4-6
+bash _spawn/dispatch.sh solo n06 "pricing task"      # claude opus-4-6
 ```
 
 ---
@@ -72,12 +71,12 @@ bash _spawn/dispatch.sh grid MISSION continuous
 +----------+----------+----------+
 |  N01     |  N02     |  N03     |  y=0    (top row)
 | (0,0)    | (640,0)  | (1280,0) |
-| gemini   | sonnet   | opus     |
+| claude   | claude   | claude   |
 | research | market   | build    |
 +----------+----------+----------+
 |  N04     |  N05     |  N06     |  y=520  (bottom row)
 | (0,520)  | (640,520)| (1280,520)|
-| gemini   | codex    | sonnet   |
+| claude   | claude   | claude   |
 | knowledge| ops      | commerce |
 +----------+----------+----------+
 Cell: 640x520px | Screen: 1920x1080 (WorkingArea: 1920x1040)
@@ -87,15 +86,12 @@ Cell: 640x520px | Screen: 1920x1080 (WorkingArea: 1920x1040)
 
 | Resolution | Cell W | Cell H | Columns | Rows | Notes |
 |------------|--------|--------|---------|------|-------|
-| 1920x1080 | 640 | 520 | 3 | 2 | Our setup (primary) |
+| 1920x1080 | 640 | 520 | 3 | 2 | Primary setup |
 | 2560x1440 | 853 | 720 | 3 | 2 | 1440p monitor |
-| 3840x2160 | 960 | 540 | 4 | 4 | 4K — can do 16 slots! |
-| 1366x768 | 683 | 384 | 2 | 2 | Laptop — max 4 slots |
-| 1280x720 | 640 | 360 | 2 | 2 | Small laptop — max 4 |
+| 3840x2160 | 960 | 540 | 4 | 4 | 4K -- up to 16 slots |
+| 1366x768 | 683 | 384 | 2 | 2 | Laptop -- max 4 slots |
 
 Formula: `cellW = screenW / columns`, `cellH = (screenH - taskbar) / rows`
-
-To customize: edit `$grid` in `_spawn/spawn_solo.ps1` and `_spawn/spawn_grid.ps1`.
 
 ---
 
@@ -107,19 +103,14 @@ When you have more tasks than slots:
 ```
 .cex/runtime/handoffs/{MISSION}_batch_{N}_{nucleus}.md
 ```
-Examples:
-```
-BUILD_batch_1_n03.md    BUILD_batch_2_n03.md    BUILD_batch_3_n03.md
-BUILD_batch_1_n01.md    BUILD_batch_2_n01.md
-```
 
 ### How it works
 ```
-Slot finishes → signal in .cex/runtime/signals/
-  → Monitor detects (poll every 30s)
-  → Checks queue: more batches for this nucleus?
-  → Yes: dispatch next batch, zero idle time
-  → No: mark nucleus done, keep monitoring others
+Slot finishes -> signal in .cex/runtime/signals/
+  -> Monitor detects (poll every 30s)
+  -> Checks queue: more batches for this nucleus?
+  -> Yes: dispatch next batch, zero idle time
+  -> No: mark nucleus done, keep monitoring others
 ```
 
 ### Launch
@@ -133,16 +124,8 @@ bash _spawn/dispatch.sh grid BUILD continuous
 | Max 10 tasks per batch handoff | Nuclei lose focus with too many |
 | COMMIT section in every batch | Nucleus commits before signaling |
 | SIGNAL section in every batch | Monitor depends on signals |
-| Outputs in committed paths | .cex/runtime/pids/ is gitignored! |
+| Outputs in committed paths | .cex/runtime/pids/ is gitignored |
 | Naming: {MISSION}_batch_{N}_{nucleus} | Monitor groups queues by pattern |
-
-### When to use Continuous vs Waves
-
-| Condition | Mode |
-|-----------|------|
-| Tasks independent, >6 | Continuous batching |
-| Tasks have dependencies (B needs A output) | Sequential waves |
-| Mix of independent + dependent | Hybrid (CB for independent, waves for chains) |
 
 ---
 
@@ -153,19 +136,20 @@ bash _spawn/dispatch.sh grid BUILD continuous
 bash _spawn/dispatch.sh status
 ```
 
-### Spawn a dedicated monitor window (for overnight)
+### What N07 checks (non-blocking)
 ```bash
-# Open a PowerShell window that polls every 30s
-powershell -Command "Start-Process powershell -ArgumentList '-NoProfile','-Command','while(\$true){cls; powershell -File C:\Users\PC\Documents\GitHub\cex\_spawn\spawn_monitor.ps1; Start-Sleep 30}'"
+git log --oneline --since="5 minutes ago"    # recent commits from nuclei
+bash _spawn/dispatch.sh status               # process alive?
+ls .cex/runtime/signals/signal_*             # completion signals
 ```
 
 ### Status meanings
 | Status | Meaning | Action |
 |--------|---------|--------|
 | RUNNING | Process alive, working | Wait |
-| COMPLETE | Signal received | Nothing — done |
-| STUCK | Alive but no activity for 15min | Stop + respawn or investigate |
-| CRASHED | Process died without signal | Stop + respawn |
+| COMPLETE | Signal received | Kill process, consolidate |
+| STUCK | Alive but no activity for 15min | Investigate or respawn |
+| CRASHED | Process died without signal | Respawn |
 
 ### Monitor detects 4 layers:
 1. **Signal file**: .cex/runtime/signals/signal_{nucleus}_*.json
@@ -175,7 +159,137 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile','-Comma
 
 ---
 
-## 5. OVERNIGHT / AFK OPERATION
+## 5. PROCESS MANAGEMENT (Session-Aware v4.0)
+
+Multiple N07 orchestrators can run simultaneously.
+Each spawn records a session ID in the PID file.
+
+```bash
+# Stop MY session's nuclei only (safe -- default)
+bash _spawn/dispatch.sh stop
+
+# Stop specific nucleus (surgical)
+bash _spawn/dispatch.sh stop n03
+
+# Stop ALL nuclei (DANGEROUS -- kills other N07's processes too)
+bash _spawn/dispatch.sh stop --all
+
+# Preview what would be killed (safe)
+bash _spawn/dispatch.sh stop --dry-run
+```
+
+### Kill Tree (correct method on Windows)
+```bash
+# CORRECT: taskkill with /T flag = tree-kill
+taskkill /F /PID <pid> /T
+
+# WRONG: Stop-Process -- does NOT kill child processes
+# WRONG: dispatch.sh stop -- may not match orphaned processes
+```
+
+---
+
+## 6. WAVE CYCLE (full orchestration lifecycle)
+
+```
+N07 Workflow:
+  1. PLAN     -> /plan <goal> or write plan manually
+  2. GUIDE    -> /guide (GDP: user decides WHAT, LLM decides HOW)
+  3. HANDOFF  -> Write .cex/runtime/handoffs/{MISSION}_{nucleus}.md
+  4. DISPATCH -> bash _spawn/dispatch.sh grid MISSION
+  5. MONITOR  -> git log + dispatch.sh status (non-blocking)
+  6. COLLECT  -> Verify deliverables exist
+  7. STOP     -> bash _spawn/dispatch.sh stop
+  8. COMMIT   -> git add + git commit -m "[N07] consolidate wave N"
+  9. ARCHIVE  -> Move handoffs to archive
+  10. REPEAT  -> Next wave with new handoffs
+```
+
+### Wave Pattern (multi-phase with dependencies)
+```
+Wave 1: N01 + N03 (research + build foundation)
+  -> dispatch -> monitor -> complete -> stop -> commit
+Wave 2: N04 + N02 (knowledge + marketing)
+  -> dispatch -> monitor -> complete -> stop -> commit
+Wave 3: N05 + N06 (operations + monetize)
+  -> dispatch -> monitor -> complete -> stop -> commit
+```
+
+### Autonomous Mission Runner
+```bash
+python _tools/cex_mission_runner.py --plan .cex/runtime/plans/plan_X.md --mission NAME --timeout 3600
+```
+Does: dispatch grid -> poll signals (blocking) -> stop -> quality gate -> consolidate.
+Multi-wave: automatically chains waves, no user intervention needed.
+
+---
+
+## 7. HANDOFF TEMPLATE
+
+```markdown
+---
+mission: MISSION_NAME
+nucleus: n03
+wave: 1
+created: 2026-04-08T14:00:00-03:00
+---
+
+# N03 Task: {Title}
+
+## Mission Context
+Brief description of what this wave accomplishes.
+
+## DECISIONS (from user)
+See: .cex/runtime/decisions/decision_manifest.yaml
+
+## Context (pre-loaded for you)
+Your agent card: N03_engineering/agent_card_n03.md
+
+## Relevant artifacts (READ these before producing)
+1. archetypes/builders/{kind}-builder/ (13 ISOs)
+2. P01_knowledge/library/kind/kc_{kind}.md
+
+## Tasks
+1. Task 1
+2. Task 2
+
+## Expected Output
+1. File: {path}
+2. Kind: {kind}
+```
+
+Nuclei commit and signal autonomously. No manual intervention needed.
+
+---
+
+## 8. BOOT SCRIPTS
+
+Each nucleus has a boot script in `boot/`:
+
+```cmd
+@echo off
+title CEX-N03 [claude+opus]
+set CEX_NUCLEUS=N03
+set CEX_ROOT=%~dp0..
+cd /d "%CEX_ROOT%"
+claude --dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome --model claude-opus-4-6 ...
+```
+
+### CLI x Nucleus Matrix (all Claude Code, all Opus)
+
+| Nucleus | Boot Script | CLI | Model | Context |
+|---------|------------|-----|-------|---------|
+| N07 | boot/cex.cmd | claude | opus-4-6 | 1M |
+| N01 | boot/n01.cmd | claude | opus-4-6 | 1M |
+| N02 | boot/n02.cmd | claude | opus-4-6 | 1M |
+| N03 | boot/n03.cmd | claude | opus-4-6 | 1M |
+| N04 | boot/n04.cmd | claude | opus-4-6 | 1M |
+| N05 | boot/n05.cmd | claude | opus-4-6 | 1M |
+| N06 | boot/n06.cmd | claude | opus-4-6 | 1M |
+
+---
+
+## 9. OVERNIGHT / AFK OPERATION
 
 ### Setup for overnight continuous batching
 ```bash
@@ -185,169 +299,9 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile','-Comma
 # 2. Launch continuous grid
 bash _spawn/dispatch.sh grid OVERNIGHT continuous
 
-# 3. Open dedicated monitor (separate window)
-powershell -Command "Start-Process powershell -ArgumentList '-NoProfile','-Command','while(\$true){cls; powershell -File C:\Users\PC\Documents\GitHub\cex\_spawn\spawn_monitor.ps1; Start-Sleep 30}'"
+# 3. Go AFK. Monitor auto-refills slots as they complete.
 
-# 4. Go AFK. Monitor auto-refills slots as they complete.
-# 5. Next morning: check results
-bash _spawn/dispatch.sh status
-git log --oneline -20
-```
-
-### Safety limits
-| Parameter | Default | Override |
-|-----------|---------|----------|
-| Poll interval | 30s | `-pollSeconds 15` |
-| Max runtime | 45min per slot | `-maxMinutes 120` |
-| Max slots | 6 | `-maxSlots 3` (for RAM) |
-| Stuck timeout | 15min | Hardcoded in monitor |
-
-### RAM management
-| Slots | Est. RAM | Use When |
-|-------|----------|----------|
-| 1 | ~2GB | Simple tasks |
-| 3 | ~5GB | Long tasks (>30min) |
-| 6 | ~8GB | Short tasks (<15min) |
-
----
-
-## 6. WAVE CYCLE (full orchestration lifecycle)
-
-```
-N07 Workflow:
-  1. PLAN     → Write _instances/codexa/N07_admin/plans/{MISSION}_{date}.md
-  2. HANDOFF  → Write .cex/runtime/handoffs/{MISSION}_{nucleus}_{seq}.md
-  3. DISPATCH → bash _spawn/dispatch.sh grid MISSION
-  4. MONITOR  → bash _spawn/dispatch.sh status (or dedicated window)
-  5. COLLECT  → git log, check _instances/codexa/N07_admin/reports/
-  6. STOP     → bash _spawn/dispatch.sh stop
-  7. COMMIT   → git add . && git commit -m "[WAVE] ..." && git push
-  8. ARCHIVE  → handoffs auto-moved to _instances/codexa/N07_admin/archive/
-  9. REPEAT   → Next wave with new handoffs
-```
-
-### Wave Pattern (multi-phase with dependencies)
-```
-Wave 1: N01 + N03 (research + build foundation)
-  → dispatch → monitor → complete → stop → commit → push
-Wave 2: N04 + N02 (knowledge + marketing)
-  → dispatch → monitor → complete → stop → commit → push
-Wave 3: N05 + N06 (test + monetize)
-  → dispatch → monitor → complete → stop → commit → push
-```
-
----
-
-## 7. HANDOFF TEMPLATE
-
-```markdown
-# {NUCLEUS} Task: {Title}
-**Autonomia Total** | **Quality 9.0+**
-**REGRA: Commit e signal ANTES de qualquer pausa.**
-
-## TAREFAS
-1. Task 1
-2. Task 2
-
-## COMMIT (OBRIGATORIO)
-git add -A
-git commit -m "[{NUCLEUS}] {message}"
-
-## SIGNAL
-python -c "from _tools.signal_writer import write_signal; write_signal('{nucleus}', 'complete', 9.0, '{mission}')"
-```
-
----
-
-## 8. CUSTOMIZING BOOT SCRIPTS
-
-Each nucleus has a boot script in `boot/`. To customize:
-
-### Edit boot/{nucleus}.cmd
-```cmd
-@echo off
-title CEX-{NUCLEUS}-{DOMAIN}        ← Window title
-set CEX_NUCLEUS={NUCLEUS}            ← Identity
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
-cd /d "%CEX_ROOT%"
-
-:: Choose CLI + model per nucleus:
-:: claude: claude --model {model} --no-chrome
-:: codex:  codex --dangerou
-sly-bypass-approvals-and-sandbox
-:: gemini: gemini -m gemini-2.5-pro --yolo
-
-{CLI} {FLAGS} "%~1"
-```
-
-### CLI x Nucleus Matrix
-| Nucleus | boot/ | CLI line | Model |
-|---------|-------|----------|-------|
-| n01 | n01.cmd | `gemini -m gemini-2.5-pro --yolo` | Gemini 1M ctx |
-| n02 | n02.cmd | `claude --model sonnet` | Claude Sonnet |
-| n03 | n03.cmd | `claude --model opus` | Claude Opus |
-| n04 | n04.cmd | `gemini -m gemini-2.5-pro --yolo` | Gemini 1M ctx |
-| n05 | n05.cmd | `codex --dangerously-bypass-approvals-and-sandbox` | GPT-5.4 |
-| n06 | n06.cmd | `claude --model sonnet` | Claude Sonnet |
-
-### Window Positioning
-Edit `$grid` in `_spawn/spawn_solo.ps1`:
-```powershell
-$grid = @{
-    n01 = @{x=0;    y=0}       # top-left
-    n02 = @{x=640;  y=0}       # top-center
-    n03 = @{x=1280; y=0}       # top-right
-    n04 = @{x=0;    y=520}     # bottom-left
-    n05 = @{x=640;  y=520}     # bottom-center
-    n06 = @{x=1280; y=520}     # bottom-right
-}
-```
-
-For different monitors, adjust x/y. Formula:
-```
-x = column * (screenWidth / numColumns)
-y = row * ((screenHeight - taskbarHeight) / numRows)
-```
-
-Our setup: 1920x1080, taskbar 40px, WorkingArea 1920x1040.
-
----
-
-## 9. ERROR HANDLING
-
-```bash
-# STUCK: nucleus alive but no output for 15min
-bash _spawn/dispatch.sh stop
-# Simplify handoff, respawn
-
-# CRASHED: process died without signal
-bash _spawn/dispatch.sh stop
-# Check git log for partial commits, respawn
-
-# GIT CONFLICT: two nuclei edited same file
-git status
-git merge --abort  # or resolve manually
-# Lesson: handoffs must target different files
-```
-
----
-
-## 10. OVERNIGHT / AFK OPERATION
-
-### Setup for overnight continuous batching
-```bash
-# 1. Write all batch handoffs
-# .cex/runtime/handoffs/OVERNIGHT_batch_{1..20}_n03.md
-
-# 2. Launch continuous grid
-bash _spawn/dispatch.sh grid OVERNIGHT continuous
-
-# 3. Open dedicated monitor (separate window, polls every 30s)
-powershell -Command "Start-Process powershell -ArgumentList '-NoProfile','-Command','while(1){cls; powershell -File _spawn/spawn_monitor.ps1; Start-Sleep 30}'"
-
-# 4. Go AFK. Monitor auto-refills slots as they complete.
-
-# 5. Next morning:
+# 4. Next morning: check results
 bash _spawn/dispatch.sh status
 git log --oneline -20
 ```
@@ -368,20 +322,38 @@ git log --oneline -20
 
 ---
 
+## 10. ERROR HANDLING
+
+```bash
+# STUCK: nucleus alive but no output for 15min
+bash _spawn/dispatch.sh stop n03
+# Simplify handoff, respawn
+
+# CRASHED: process died without signal
+bash _spawn/dispatch.sh stop
+# Check git log for partial commits, respawn
+
+# GIT CONFLICT: two nuclei edited same file
+git status
+# Use shared-file proposal pattern (see .claude/rules/shared-file-proposal.md)
+# Lesson: handoffs must target different files
+```
+
+---
+
 ## FILES
 
 | File | Purpose |
 |------|---------|
-| `_spawn/dispatch.sh` | Bash wrapper (N07 uses THIS) |
+| `_spawn/dispatch.sh` | Bash wrapper (N07 entry point) |
 | `_spawn/spawn_solo.ps1` | PowerShell: spawn 1 nucleus + position |
 | `_spawn/spawn_grid.ps1` | PowerShell: spawn grid + continuous batching |
 | `_spawn/spawn_monitor.ps1` | PowerShell: signal + stuck detection |
-| `_spawn/spawn_stop.ps1` | PowerShell: session-aware stop (v4.0 — only YOUR nuclei by default) |
+| `_spawn/spawn_stop.ps1` | PowerShell: session-aware stop (v4.0) |
 | `_tools/signal_writer.py` | Python: nuclei write completion signals |
 | `boot/{nucleus}.cmd` | CMD: boot script per nucleus |
 | `.cex/runtime/` | Runtime workspace (handoffs, signals, pids) |
 
 ---
 
-*v1.0.0 -- Adapted from codexa-core SPAWN_PLAYBOOK v2.0.
-Proven: grid 6/6, continuous batching 7/7, mixed 3-sat, overnight AFK.*
+*Playbook v2.0 -- Claude Code native. All nuclei Opus 4.6 1M. Session-aware dispatch v4.0. 2026-04-08.*

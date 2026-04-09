@@ -2,7 +2,7 @@
 test_schema_evolution.py -- 15 tests validating Schema Evolution v1.0.
 
 Validates that all builder ISOs were correctly hydrated with the 8 universal
-patterns: keywords, triggers, capability_summary, memory_scope, observation_types,
+patterns: keywords, triggers, capabilities, memory_scope, observation_types,
 effort, max_turns, disallowed_tools, permission_scope, Tool Permissions section.
 """
 
@@ -79,7 +79,7 @@ TOOLS = collect_isos("bld_tools")
 
 
 class TestManifestDiscovery:
-    """Tests 1-3: keywords, triggers, capability_summary in manifest frontmatter."""
+    """Tests 1-3: keywords, triggers, capabilities in manifest frontmatter."""
 
     def test_01_manifests_have_keywords(self):
         """All manifests have keywords list with >= 3 items."""
@@ -101,15 +101,15 @@ class TestManifestDiscovery:
                 missing.append(f"{name}: triggers={tr}")
         assert not missing, f"{len(missing)} manifests missing triggers:\n" + "\n".join(missing[:10])
 
-    def test_03_manifests_have_capability_summary(self):
-        """All manifests have capability_summary string >= 50 chars."""
+    def test_03_manifests_have_capabilities(self):
+        """All manifests have capabilities string >= 50 chars."""
         missing = []
         for name, path in MANIFESTS:
             fm = parse_fm(path)
-            geo = fm.get("capability_summary")
+            geo = fm.get("capabilities")
             if not isinstance(geo, str) or len(geo.strip()) < 50:
-                missing.append(f"{name}: capability_summary len={len(geo) if geo else 0}")
-        assert not missing, f"{len(missing)} manifests missing capability_summary:\n" + "\n".join(missing[:10])
+                missing.append(f"{name}: capabilities len={len(geo) if geo else 0}")
+        assert not missing, f"{len(missing)} manifests missing capabilities:\n" + "\n".join(missing[:10])
 
 
 # ---------------------------------------------------------------------------
@@ -306,19 +306,19 @@ class TestObservationTypesFixed:
 
 
 # ---------------------------------------------------------------------------
-# Test 15: capability_summary has 3 layers
+# Test 15: capabilities has 3 layers
 # ---------------------------------------------------------------------------
 
 
-class TestCapabilitySummaryLayers:
-    """Test 15: capability_summary contains L1, L2, L3 markers."""
+class TestCapabilitiesLayers:
+    """Test 15: capabilities contains L1, L2, L3 markers."""
 
-    def test_15_capability_summary_three_layers(self):
-        """capability_summary must contain L1:, L2:, L3: markers."""
+    def test_15_capabilities_three_layers(self):
+        """capabilities must contain L1:, L2:, L3: markers."""
         missing = []
         for name, path in MANIFESTS:
             fm = parse_fm(path)
-            geo = fm.get("capability_summary", "")
+            geo = fm.get("capabilities", "")
             if not all(f"L{i}:" in geo for i in (1, 2, 3)):
                 missing.append(f"{name}: geo='{geo[:60]}...'")
-        assert not missing, f"{len(missing)} manifests without 3-layer capability_summary:\n" + "\n".join(missing[:10])
+        assert not missing, f"{len(missing)} manifests without 3-layer capabilities:\n" + "\n".join(missing[:10])

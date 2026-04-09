@@ -16,6 +16,17 @@ when_to_use: "Building, reviewing, or reasoning about prompt_template artifacts"
 keywords: [template, variables, prompt-mold]
 feeds_kinds: [prompt_template]
 density_score: null
+aliases: ["prompt mold", "reusable prompt", "template prompt", "prompt with variables", "parameterized prompt"]
+user_says: ["write a prompt template", "criar template de prompt", "make a reusable prompt", "I need a prompt with placeholders", "create a prompt I can use for different inputs"]
+long_tails: ["I need a reusable prompt that works for different inputs", "create a prompt with variables I can fill in at runtime", "build a template that structures how the AI responds to any topic", "make a parameterized prompt for repeated use across domains"]
+cross_provider:
+  langchain: "ChatPromptTemplate / PromptTemplate"
+  llamaindex: "Prompt templates in QueryEngine"
+  crewai: "system_template / prompt_template in Agent config"
+  dspy: "Signature class with typed fields"
+  openai: "System/user message templates (app-level)"
+  anthropic: "System/user message templates (app-level)"
+  haystack: "PromptBuilder with Jinja2"
 ---
 
 # Prompt Template

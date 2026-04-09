@@ -19,6 +19,17 @@ density_score: 1.0
 linked_artifacts:
   primary: null
   related: []
+aliases: ["unit test", "agent test", "prompt test", "isolated eval", "component test"]
+user_says: ["test this agent", "testar esse agente", "write a unit test", "check if the prompt works", "evaluate this component"]
+long_tails: ["I need to test if this agent produces correct output for known inputs", "write an isolated test for a single prompt with scoring", "evaluate whether my agent handles edge cases correctly", "create a regression test for this prompt after I change it"]
+cross_provider:
+  langchain: "Unit test + LLM mock"
+  llamaindex: "QueryEngine unit test"
+  crewai: "Single agent test with mocked tools"
+  dspy: "Evaluate(program, devset)"
+  openai: "Single call + assertion"
+  anthropic: "Single message + rubric scoring"
+  haystack: "Component unit test"
 ---
 
 # Unit Eval

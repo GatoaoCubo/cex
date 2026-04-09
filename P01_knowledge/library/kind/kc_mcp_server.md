@@ -19,6 +19,17 @@ density_score: 1.0
 linked_artifacts:
   primary: null
   related: []
+aliases: ["tool server", "MCP plugin", "tool provider", "Model Context Protocol server", "MCP endpoint"]
+user_says: ["create an MCP server", "servidor MCP", "expose tools to Claude", "give the AI access to my database", "build an MCP plugin"]
+long_tails: ["I want to give Claude access to my database via MCP", "expose a set of tools over the Model Context Protocol", "build a tool server that Claude Code can connect to", "create an MCP server with stdio transport for local tools"]
+cross_provider:
+  langchain: "LangChain MCP Adapters (mcp-adapters)"
+  llamaindex: "McpToolSpec"
+  crewai: "MCPServerAdapter"
+  dspy: "n/a (manual function_def wrapping)"
+  openai: "n/a (uses function_def natively)"
+  anthropic: "Native MCP client in Claude Code"
+  haystack: "n/a (tool wrapping required)"
 ---
 
 # MCP Server

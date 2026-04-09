@@ -271,7 +271,7 @@ Spawn 3 (N03 enrich + validate):
 
 | Mission | Conexao |
 |---------|---------|
-| mission_builder_autodiscovery | Track A hydrata frontmatter do builder (keywords/triggers/capability_summary). Independente. |
+| mission_builder_autodiscovery | Track A hydrata frontmatter do builder (keywords/triggers/capabilities). Independente. |
 | mission_builder_autodiscovery | Track B ativa bld_memory. Independente. |
 | mission_research_pipeline | Usa mesmo padrao de KCs em P01_knowledge/library/platform/. Consistente. |
 | mission_supabase_data_layer | KCs de supabase sao modelo para os KCs de Hotmart/DS24. Mesmo padrao. |

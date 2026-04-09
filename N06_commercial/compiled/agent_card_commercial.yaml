@@ -1,36 +1,72 @@
 id: p08_ac_commercial_nucleus
+title: Agent Card Commercial
 kind: agent_card
 pillar: P08
-version: 3.0.0
+version: 4.0.0
 created: 2026-03-30
-updated: 2026-03-31
+updated: 2026-04-01
 author: n06_commercial
-name: commercial_hub
-role: 'The `commercial_hub` agent card defines the deployment spec for N06 Commercial Nucleus. It handles all revenue-facing
-  artifacts: pricing strategies, online course structures, sales funnels, upsell sequences, and conversion audits.'
-model: sonnet
+name: brand_architect
+role: The `brand_architect` agent card defines the deployment spec for N06 Brand Architect & Revenue Engineer. It handles
+  brand identity discovery and codification (Phase 1) and revenue-facing artifacts (Phase 2).
+model: opus-4-6
 mcps: '| MCP | Purpose | Status |
 
   |-----|---------|--------|
 
-  | hotmart_mcp | Course sales data, affiliate commissions, product performance | planned |
+  | fetch | Web research for competitor analysis, market data | active |
 
-  | stripe_mcp | Subscription analytics, churn rate, payment intent data | planned |
+  | stripe_mcp | Subscription analytics, churn rate, payment data | planned |
 
-  | analytics_mcp | Funnel conversion tracking, drop-off analysis | planned |'
-domain_area: commercial-monetization
+  | hotmart_mcp | Course sales data, affiliate commissions, products | planned |'
+domain_area: brand-identity-monetization
+quality: null
+tags:
+- agent_card
+- commercial
+- N06
+- brand
+- identity
+- monetization
+- opus
+tldr: 'brand_architect: Opus 4.6 model, Anthropic Max subscription. Phase 1 = Brand Discovery (12-15 Qs -> brand book -> brand_config.yaml
+  -> propagate). Phase 2 = Revenue (pricing, funnels, courses -- all brand-aligned).'
+density_score: 0.94
+linked_artifacts:
+  primary: p02_agent_commercial_nucleus
+  related:
+  - p03_sp_commercial_nucleus
+  - p12_dr_commercial
+  - p07_qg_commercial
 boot_sequence:
-- Load `agent_commercial.md` — establish N06 identity and capabilities
-- Load `knowledge_card_commercial.md` — inject pricing frameworks and funnel benchmarks
-- Load `system_prompt_commercial.md` — activate ALWAYS/NEVER rules
-- Initialize MCPs (hotmart, stripe, analytics)
+- Check `.cex/brand/brand_config.yaml` existence → determines Phase 1 or Phase 2
+- Load `agent_commercial.md` — establish dual-role identity
+- Load all `kc_brand_*.md` KCs (10 files, ~180KB brand knowledge)
+- Load `system_prompt_commercial.md` — activate 16 ALWAYS/NEVER rules
+- Load brand schemas for validation
+- Initialize MCPs (fetch, stripe, hotmart)
 - Ready for dispatch
 constraints:
-- Never handle payment transactions directly — advisory and specification only
-- Never produce pricing without a revenue model (units × price × conversion)
-- Never write generic copy — all commercial output must name the specific audience and pain
-- Never recommend a single flat price — always explore tiered options
+- FIRST nucleus on new instance — brand_config.yaml must exist before other nuclei produce branded output.
+- Never hardcode brand values — all output uses {{BRAND_*}} mustache variables.
+- Never write production code — advisory and specification only.
+- Never execute financial transactions — model revenue, never process payments.
+- Brand consistency score must be >= 0.85 before handoff to other nuclei.
 dispatch_keywords:
+- brand
+- marca
+- identidade
+- brand-book
+- persona
+- arquetipo
+- voz
+- naming
+- tagline
+- posicionamento
+- UVP
+- ICP
+- design-tokens
+- paleta
 - pricing
 - precificar
 - curso
@@ -44,65 +80,52 @@ dispatch_keywords:
 - upsell
 - downsell
 - checkout
-- conversão
+- conversao
 - conversion
 - LTV
 - MRR
 - assinatura
-- subscription
-- oferta
-- offer
-- venda
-- sale
-- lançamento
-- launch
-- infoproduto
-- hotmart
-- kiwify
 tools:
+- brand_inject
+- brand_validate
+- brand_propagate
+- brand_audit
 - pricing_calculator
 - funnel_mapper
 - conversion_tracker
 - revenue_forecaster
 dependencies:
-- hotmart_mcp
+- fetch
 - stripe_mcp
-- analytics_mcp
+- hotmart_mcp
 scaling:
   max_concurrent: 3
-  timeout_minutes: 30
+  timeout_minutes: 45
   memory_limit_mb: 2048
 monitoring:
-  health_check: hotmart_mcp.health_check()
+  health_check: brand_validate.py --check .cex/brand/brand_config.yaml
   signal_on_complete: true
   alert_on_failure: true
 runtime: claude
 subscription: anthropic_max
 flags: []
-domain: commercial-monetization
-quality: null
-tags:
-- agent_card
-- commercial
-- N06
-- sonnet
-- monetization
-- infoprodutos
-tldr: 'commercial_hub: Sonnet model, Anthropic Max subscription, specialized for pricing/course/funnel monetization with Hotmart/Kiwify/Stripe
-  MCP integration.'
-density_score: 0.91
+domain: brand-identity-monetization
 model_subscription:
-- 'Model: `claude-sonnet` — selected for persuasive copywriting, structured reasoning, and creative commercial strategy'
+- 'Model: `claude-opus-4-6` (1M context) -- all nuclei upgraded 2026-04-06'
 - 'Subscription: Anthropic Max (zero API cost, subscription-based)'
-- 'NOT opus: commercial tasks require creative fluency > deep reasoning. Sonnet is optimal.'
+- 'Runtime: Claude Code native (git clone + Claude Code, no wrapper)'
 dispatch:
-- 'Keywords: pricing, curso, funil, monetizar, receita, conversão, upsell, checkout, oferta, venda, LTV, MRR, assinatura,
-  precificar, lançamento'
-- 'Priority: 9 (high — commercial intent is high-value, time-sensitive)'
-- 'Fallback: N03 Builder (for artifact construction) or N01 Research (for market data needs)'
+- 'Keywords: brand, marca, identidade, brand-book, persona, arquétipo, voz, naming, tagline, posicionamento, UVP, ICP, design-tokens,
+  paleta, pricing, curso, funil, monetizar, receita, upsell, checkout'
+- 'Priority: 10 (highest — brand discovery blocks all other branded output)'
+- 'Fallback: N01 Research (market data) or N03 Builder (artifact construction)'
+brand_propagation_architecture: "N06 generates .cex/brand/brand_config.yaml\n  │\n  ├──→ N01: BRAND_ICP, BRAND_COMPETITORS,\
+  \ BRAND_CATEGORY\n  ├──→ N02: BRAND_VOICE, BRAND_COLORS, BRAND_FONTS, BRAND_VALUES\n  ├──→ N03: BRAND_COLORS, BRAND_FONTS,\
+  \ BRAND_STYLE\n  ├──→ N04: BRAND_NAME, BRAND_CATEGORY, BRAND_CONTENT_PILLARS\n  ├──→ N05: BRAND_NAME, BRAND_LOGO_URL (env\
+  \ vars, service labels)\n  ├──→ N07: BRAND_NAME (commit messages, logging)\n  └──→ boot/*.cmd: BRAND_NAME (window titles)"
 scaling_monitoring:
-- 'Max 3 concurrent instances (commercial tasks can parallelize: pricing + copy + funnel simultaneously)'
-- 30-minute timeout for complex multi-artifact commercial builds
-- Health check via hotmart_mcp connectivity
-- 'Signal on complete: write to `.cex/runtime/signals/n06_complete.json`'
-- 'Alert on failure: write to `.cex/runtime/signals/n06_error.json`'
+- Max 3 concurrent instances (brand audit + pricing + funnel can parallelize)
+- 45-minute timeout (brand discovery interview can be long)
+- Health check via `brand_validate.py --check`
+- 'Signal on complete: `.cex/runtime/signals/n06_complete.json`'
+- 'Alert on failure: `.cex/runtime/signals/n06_error.json`'

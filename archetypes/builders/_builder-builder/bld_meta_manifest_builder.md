@@ -43,24 +43,24 @@ author: {{author}}
 tags: [kind-builder, {{type_name_kebab}}, {{lp}}, specialist]
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 triggers: ["{{trigger_phrase_1}}", "{{trigger_phrase_2}}"]
-capability_summary: >
+capabilities: >
   L1: {{what_it_does}}. L2: {{how_it_does_it}}. L3: {{when_to_use_it}}.
 ---
 ```
 
-<!-- NOTE: keywords = 4-8 routing/search terms. Extract from ## Routing body existente -->
-<!-- NOTE: triggers = 2-4 frases naturais that ativam this builder -->
-<!-- NOTE: capability_summary = 3 semantic layers (L1=o que, L2=como, L3=quando). Min 50 chars -->
+<!-- NOTE: keywords = 4-8 routing/search terms. Extract from ## Routing body -->
+<!-- NOTE: triggers = 2-4 natural phrases that activate this builder -->
+<!-- NOTE: capabilities = 3 semantic layers (L1=what, L2=how, L3=when). Min 50 chars -->
 
 ## Identity
 Specialist in building `{{type_name}}` — {{one_line_description}}.
 <!-- NOTE: {{one_line_description}} = extract from TAXONOMY_LAYERS.yaml kinds[].description or _schema.yaml purpose -->
-<!-- Add 1-2 frases about domain, tools, and o that produz -->
+<!-- Add 1-2 sentences about domain, tools, and what it produces -->
 
 ## Capabilities
-<!-- NOTE: 4-6 bullets descrevendo o that the builder PODE fazer -->
+<!-- NOTE: 4-6 bullets describing what the builder CAN do -->
 <!-- Pattern observed in the 4 existing builders: -->
-1. Research/analisar {{domain_knowledge}} for produzir {{type_name}}
+1. Research/analyze {{domain_knowledge}} to produce {{type_name}}
 2. Produce {{type_name}} with frontmatter complete ({{field_count}} fields)
 3. Validate artifact against quality gates ({{hard_count}} HARD + {{soft_count}} SOFT)
 4. {{capability_extra_1}}
@@ -68,13 +68,13 @@ Specialist in building `{{type_name}}` — {{one_line_description}}.
 <!-- NOTE: {{hard_count}}/{{soft_count}} = define in QUALITY_GATES.md -->
 
 ## Routing
-<!-- CANONICAL SOURCE: frontmatter keywords + triggers + capability_summary -->
+<!-- CANONICAL SOURCE: frontmatter keywords + triggers + capabilities -->
 <!-- Body section below is DERIVED from frontmatter for human readability -->
 keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}, {{keyword_4}}]
 triggers: "{{trigger_phrase_1}}", "{{trigger_phrase_2}}", "{{trigger_phrase_3}}"
-<!-- NOTE: keywords = 4-8 termos that ativam this builder via brain_query -->
-<!-- NOTE: triggers = 2-3 frases naturais that um user diria -->
-<!-- NOTE: Manter body sincronizado with frontmatter. Frontmatter = source of truth -->
+<!-- NOTE: keywords = 4-8 terms that activate this builder via query -->
+<!-- NOTE: triggers = 2-3 natural phrases a user would say -->
+<!-- NOTE: Keep body synchronized with frontmatter. Frontmatter = source of truth -->
 
 ## Crew Role
 In a crew, I handle {{ROLE_CAPS}}.

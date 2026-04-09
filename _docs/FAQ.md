@@ -1,12 +1,12 @@
 # CEX FAQ
 
-> 10 most common questions answered.
+> 15 most common questions answered.
 
 ---
 
 ### 1. What is a builder?
 
-A builder is a factory blueprint that lives in `archetypes/builders/{type}-builder/`.
+A builder is a factory blueprint that lives in `archetypes/builders/{kind}-builder/`.
 Each builder contains 13 ISO files (manifest, system prompt, knowledge, instructions,
 tools, output template, schema, examples, architecture, config, memory, quality gates,
 collaboration). Builders define HOW to create a specific type of artifact.
@@ -20,14 +20,15 @@ entries. Each pillar has its own `_schema.yaml`, `_generator.md`, `templates/`, 
 
 ### 3. What is a nucleus?
 
-A nucleus is one of 7 business domains (N01-N07) where real artifacts live. Each
-nucleus contains instances organized by pillar. Example: `N02_marketing/P03_prompt/`
-holds marketing-specific prompts.
+A nucleus is one of 8 domains (N00-N07) where real artifacts live. N00 (Genesis) is
+the archetype nucleus -- it holds the builder definitions, pillar schemas, and shared
+ISOs that all other nuclei inherit from. N01-N07 are business nuclei where domain
+instances live. Example: `N02_marketing/P03_prompt/` holds marketing-specific prompts.
 
-### 4. How do I add a custom type?
+### 4. How do I add a custom kind?
 
-Custom types go in the `_custom/` directory within a pillar. The 78 core types are
-fixed and cannot be modified without architecture review. To add a custom type:
+Custom kinds go in the `_custom/` directory within a pillar. The 123 core kinds are
+fixed and cannot be modified without architecture review. To add a custom kind:
 
 1. Create `P{NN}_{pillar}/_custom/{your_type}/`
 2. Add a `_schema.yaml` that inherits from the parent pillar schema
@@ -42,7 +43,7 @@ Three levels of validation:
 python _tools/cex_doctor.py
 
 # Builder ISO completeness
-python _tools/validate_builder.py archetypes/builders/{type}-builder/
+python _tools/validate_builder.py archetypes/builders/{kind}-builder/
 
 # Schema compliance for a specific file
 python _tools/validate_schema.py
@@ -115,6 +116,102 @@ Quality depends on: density (>= 0.8), completeness of frontmatter, specificity
 (every sentence enables action without external docs), and adherence to schema
 constraints.
 
+### 11. Why does CEX rephrase what I said?
+
+You type "make me a landing page." CEX responds with "Dispatching landing-page-builder
+via 8F pipeline to P05_output." That's not CEX being pedantic -- that's **intent
+resolution** in action.
+
+Your 5 words carry about 5% of what the LLM actually needs. CEX fills the other 95%
+by mapping your words to its taxonomy: a specific kind (`landing_page`), a specific
+pillar (`P05`), a specific builder (13 components), your brand voice, 10+ knowledge
+sources, and a quality gate. The rephrased response is CEX showing you exactly what
+it understood -- so you can correct it before it builds.
+
+Think of it like a waiter repeating your order back. Not because they doubt you. Because
+getting it right the first time saves everyone time.
+
+If CEX ever maps your intent wrong, just say so. "No, I meant a pricing page, not a
+landing page." CEX re-resolves instantly. No penalty, no wasted work.
+
+### 12. Can I use Portuguese or English?
+
+Both. Simultaneously. In the same sentence if you want.
+
+CEX resolves **intent**, not syntax. "Cria uma landing page" and "create a landing page"
+trigger the exact same pipeline. "Pesquisar concorrentes" and "research competitors"
+dispatch the same intelligence nucleus. Even mixed: "quero um prompt template pro meu
+curso" works perfectly.
+
+The verb resolution table covers 14 Portuguese verbs and their English equivalents.
+The seed word table covers 80+ trigger phrases in each language. CEX doesn't translate
+your words -- it maps them to the same canonical action regardless of language.
+
+One note: artifact **content** will match whatever language you use. If you ask in
+Portuguese, you'll get Portuguese output. If you want English output from a Portuguese
+prompt, just add "in English" and CEX adjusts.
+
+### 13. What if CEX misunderstands me?
+
+Three things happen before that can cause damage:
+
+1. **Confidence scoring**: CEX internally scores how confident it is about the intent
+   resolution. High confidence (> 80%) = it executes. Low confidence = it asks a
+   clarifying question before proceeding. You'll see something like: "Did you mean
+   a knowledge card (documentation) or a context doc (onboarding guide)?"
+
+2. **Restatement**: Before executing anything complex, CEX restates what it understood
+   in precise terms. "I'll create a 3-tier pricing model with free/pro/enterprise
+   levels, feature gating, and annual discount structure." You can confirm or redirect.
+
+3. **Non-destructive execution**: CEX saves artifacts as new files and commits to git.
+   Nothing is overwritten without explicit instruction. If the output isn't what you
+   wanted, the previous version is one `git checkout` away.
+
+The most common "misunderstanding" is ambiguity, not error. "Document this" could mean
+a knowledge card, a context doc, or a glossary entry. CEX asks. If it doesn't ask and
+gets it wrong, just say "no, I meant X" and it re-resolves. The cost of a wrong
+dispatch is seconds, not hours.
+
+### 14. What is intent resolution?
+
+Intent resolution is how CEX turns your vague request into a precise action. When you
+type "make me a landing page," CEX resolves:
+
+- **Kind**: `landing_page` (from 123 possible types)
+- **Pillar**: P05 Output (from 12 possible categories)
+- **Nucleus**: the right specialist agent (from 7 possible)
+- **Builder**: landing-page-builder with 13 ISO components
+
+This happens via a multi-stage pipeline:
+
+1. **Seed word matching**: 80+ trigger phrases in EN/PT mapped to canonical actions
+2. **Fuzzy matching**: Levenshtein distance catches typos and near-misses
+3. **Synonym expansion**: 65+ synonym pairs (e.g., "webpage" -> "landing_page")
+4. **Confidence scoring**: high confidence (> 80%) executes; low confidence asks
+5. **Verb resolution**: 14 PT/EN verb pairs mapped to canonical actions (create, improve, analyze...)
+
+The full mapping of all 123 kinds is in `N03_engineering/knowledge/kc_intent_resolution_map.md`.
+
+### 15. How does CEX handle ambiguous requests?
+
+Three layers protect against misrouted intent:
+
+1. **Confidence threshold**: If CEX scores below 80% confidence on intent resolution,
+   it asks a clarifying question before proceeding. Example: "Did you mean a knowledge
+   card (documentation) or a context doc (onboarding guide)?"
+
+2. **AND-split detection**: Compound requests like "research competitors and write ad
+   copy" are decomposed into separate tasks routed to different nuclei (N01 for research,
+   N02 for copy).
+
+3. **Restatement protocol**: Before executing complex tasks, CEX restates what it
+   understood in precise terms so you can confirm or redirect. The cost of a wrong
+   dispatch is seconds, not hours -- everything saves to git, nothing is lost.
+
+See the benchmark dataset (50 test cases) in `N01_intelligence/evaluation/` for
+real-world resolution accuracy metrics.
+
 ---
 
-*CEX FAQ v1.0*
+*CEX FAQ v4.0 -- Updated 2026-04-08*

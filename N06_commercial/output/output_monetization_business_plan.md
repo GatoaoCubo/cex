@@ -15,7 +15,7 @@ density_score: 0.92
 
 # CEX Monetization Business Plan — Estratégia Comercial 2026
 
-> **Estratégia Aprovada**: Repo público (MIT) + Curso pago + cex-brain:14b exclusivo
+> **Estrategia Aprovada**: Repo publico (MIT) + Curso pago + Claude Code native (Anthropic Max)
 
 ---
 
@@ -208,12 +208,13 @@ Dois tiers claros criam decisão binária mais fácil.
 **Probabilidade**: MÉDIA (12-18 meses)
 **Mitigation**: Build network effects via community + consulting
 
-### Supply Chain Risk
+### Platform Dependency Risk
 
-**E se Qwen muda licença de cex-brain?**
-- **Backup plan**: Llama 3.3 70B ou Mixtral 8x22B
-- **Timeline**: 2-4 semanas para re-train
-- **Impact**: BAIXO (modelo é commodity, knowledge é o moat)
+**E se Anthropic muda pricing do Claude Code / Max subscription?**
+- **Mitigation**: CEX knowledge system is model-agnostic (typed .md + .yaml)
+- **Backup plan**: Export artifacts, run via API (pay-per-token) or alternative LLM
+- **Impact**: MEDIO (runtime changes, knowledge persists)
+- **Moat**: 123 kinds + 12 pillars + 2000+ artifacts = portable knowledge, not locked to one provider
 
 ### Demand Risk
 
@@ -252,7 +253,7 @@ Dois tiers claros criam decisão binária mais fácil.
 **Goal**: Escalar + Master tier
 
 - ✅ Master course R$697 launch
-- ✅ cex-brain:14b exclusivo para paid users
+- ✅ Claude Code templates + advanced builder packs (paid)
 - ✅ Afiliados program (25% comissão)
 - 🎯 **Target**: 150 alunos total, R$45K MRR
 
@@ -269,7 +270,7 @@ Dois tiers claros criam decisão binária mais fácil.
 
 ## RESUMO EXECUTIVO
 
-**Estratégia**: Repo público + curso premium + model exclusivo
+**Estrategia**: Repo publico + curso premium + Claude Code native
 **Target Ano 1**: R$441K-882K receita líquida
 **Key Metrics**: CAC R$89, LTV R$572-1.397, payback imediato
 **Diferencial**: 114 kinds + Template-First construction vs generic frameworks

@@ -12,7 +12,7 @@ author: n04_knowledge
 tags: [kind-builder, prompt-cache, P10, specialist, cache, ttl, eviction, latency, cost]
 keywords: [prompt_cache, cache, ttl, eviction, invalidation, latency, cost, completion, prefix]
 triggers: ["create prompt cache config", "configure LLM caching", "build cache eviction rules"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building prompt_caches — configs de cache for pares prompt/completion LLM. L2: Define TTL, eviction, invalidation, and storage backend. L3: When user needs to create, build, or scaffold prompt_cache.
 quality: 9.1
 title: "Manifest Prompt Cache"

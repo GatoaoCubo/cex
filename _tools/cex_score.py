@@ -494,6 +494,9 @@ def score_hybrid(path: str, use_cache: bool = True, force_semantic: bool = False
     all_notes = struct_notes + rubric_notes
 
     # Layer 3: Semantic (only if structural+rubric avg >= 8.5 OR forced)
+    # Token optimization: check cache for same-kind scored artifacts first.
+    # If a cached artifact of the same kind scored 9.0+, and L1+L2 are also
+    # strong (>= 8.8), skip the LLM call and inherit the cached semantic score.
     avg_12 = (structural + rubric) / 2
     semantic = None
     sem_dims = {}
@@ -501,9 +504,34 @@ def score_hybrid(path: str, use_cache: bool = True, force_semantic: bool = False
     suggestion = ""
 
     if force_semantic or avg_12 >= 8.5:
-        if verbose:
-            print(f"  [L3] semantic: calling LLM (avg_12={avg_12:.1f})...")
-        semantic_raw, sem_dims, reason = score_semantic(path, structural, rubric_dims)
+        # Token gate: skip LLM if L1+L2 are strong AND kind has cached 9.0+ scores
+        skip_llm = False
+        if not force_semantic and avg_12 >= 8.8:
+            cache = _load_cache()
+            fm_match_inner = re.match(r'^---\n(.*?)\n---', open(path, 'r', encoding='utf-8').read(), re.DOTALL)
+            if fm_match_inner:
+                kind_m = re.search(r'kind:\s*(\S+)', fm_match_inner.group(1))
+                if kind_m:
+                    this_kind = kind_m.group(1).strip().strip('"\'')
+                    # Find any cached score for same kind with semantic >= 9.0
+                    for ck, cv in cache.items():
+                        if cv.get("semantic") and cv["semantic"] >= 9.0:
+                            # Check if same kind
+                            cached_path = ck.split(":")[0] if ":" in ck else ck
+                            if this_kind in cached_path or cv.get("kind") == this_kind:
+                                # Inherit semantic score (saves ~2K tokens)
+                                semantic_raw = cv["semantic"]
+                                sem_dims = cv.get("dimensions", {})
+                                reason = "inherited from same-kind cache (token optimization)"
+                                skip_llm = True
+                                if verbose:
+                                    print(f"  [L3] semantic: INHERITED from cache (avg_12={avg_12:.1f}, kind={this_kind})")
+                                break
+
+        if not skip_llm:
+            if verbose:
+                print(f"  [L3] semantic: calling LLM (avg_12={avg_12:.1f})...")
+            semantic_raw, sem_dims, reason = score_semantic(path, structural, rubric_dims)
         # Normalize to same scale
         semantic = round(8.0 + (semantic_raw / 10.0) * 1.3, 2)
         semantic = min(semantic, 9.5)

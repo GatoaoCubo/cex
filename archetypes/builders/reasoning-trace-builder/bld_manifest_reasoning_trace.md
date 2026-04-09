@@ -11,7 +11,7 @@ author: N03
 tags: [kind-builder, reasoning_trace, P03, cognition, specialist]
 keywords: [reasoning, chain-of-thought, trace, decision, evidence, confidence, scratchpad]
 triggers: ["capture reasoning trace", "log agent decision chain", "record why the agent chose this"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `reasoning_trace` artifacts for P03: structured chain-of-thought records capturing WHY behind agent decisions. L2: Produce YAML trace files with step-evidence-confidence chains, branching alternatives, and audit trails. L3: When user needs to create, build, or scaffold reasoning_trace.
 quality: 9.1
 title: "Manifest Reasoning Trace"

@@ -21,7 +21,7 @@ tldr: "Defines component map for component map codexa core, with validation gate
 ## Components
 | Component | Path | Depends On | Used By |
 |-----------|------|-----------|---------|
-| orchestrator orchestrator | boot/stella.cmd | pi runtime, rules | USER |
+| orchestrator orchestrator | boot/stella.cmd | Claude Code runtime, rules | USER |
 | Agent_group boots | boot/*.cmd | claude CLI, MCP configs | orchestrator |
 | Brain MCP | records/core/brain/ | Ollama, FAISS | All agent_groups |
 | Quality Gate | records/core/python/quality_gate.py | git hooks | Pre-commit |

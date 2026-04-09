@@ -12,7 +12,7 @@ author: orchestrator
 tags: [kind-builder, vector-store, P01, specialist]
 keywords: [vectordb, vector-database, pinecone, pgvector, chroma, faiss, qdrant, index]
 triggers: ["configure vector database", "setup vector storage", "which vectordb to use"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building vector_store configs — vector database storage specifications. L2: Configure vector indices with dimensions, distance metrics, and index types. L3: When user needs to create, build, or scaffold vector database configuration.
 quality: 9.1
 title: "Manifest Vector Store"

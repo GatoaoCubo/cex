@@ -12,7 +12,7 @@ author: builder_agent
 tags: [handoff-protocol, P02, handoff-protocol, type-builder]
 keywords: ["handoff protocol", handoff-protocol, P02, handoff, protocol]
 triggers: ["create handoff protocol", "define handoff protocol", "build handoff protocol config"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building handoff_protocol artifacts — agent-to-agent handoff an. L2: Define handoff_protocol with all os fields mandatory do schema. L3: When user needs to create, build, or scaffold handoff protocol.
 quality: 9.1
 title: "Manifest Handoff Protocol"

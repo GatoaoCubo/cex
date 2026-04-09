@@ -2,11 +2,12 @@
 id: spec_infinite_bootstrap_loop
 kind: context_doc
 title: "CEX Peak Architecture: Infinite Bootstrap Loop"
-version: 1.0.0
-quality: 9.0
+version: 2.0.0
+quality: null
 created: 2026-04-07
-purpose: Full spec for autonomous infinite self-building loop with max throughput
-density_score: 1.0
+updated: 2026-04-08
+purpose: Full spec for autonomous infinite self-building loop with max throughput (Claude Code native)
+density_score: null
 ---
 
 # CEX Peak Architecture: Infinite Bootstrap Loop
@@ -14,8 +15,9 @@ density_score: 1.0
 ## Vision
 
 CEX builds itself from zero. N07 orchestrates continuously, 6 nuclei work
-in parallel (each with sub-agents), artifacts flow through 8F, quality gates
-filter, and the flywheel never stops. N07 never idles.
+in parallel (each with sub-agents via Claude Code Agent tool), artifacts
+flow through 8F, quality gates filter, and the flywheel never stops.
+N07 never idles.
 
 ## Bill of Materials (from zero)
 
@@ -27,7 +29,7 @@ filter, and the flywheel never stops. N07 never idles.
 | Templates + examples | 377 | 5.7M |
 | Pillar schemas | 12 | 0.2M |
 | Tools (.py) | 59 | 0.9M |
-| Rules + configs | 15 | 0.2M |
+| Rules + configs | 16 | 0.2M |
 | Nucleus artifacts | 313 | 4.7M |
 | Sub-agents | 125 | 1.9M |
 | **TOTAL** | **2,742** | **41.1M** |
@@ -45,16 +47,16 @@ filter, and the flywheel never stops. N07 never idles.
 ```
 overnight_infinite.cmd (loop forever)
   |
-  +-- N07 (pi --continue, resumes state)
+  +-- N07 (claude --continue, resumes session state)
   |     |
   |     +-- WORK + DISPATCH (non-blocking interleaved)
   |     |     |
-  |     |     +-- N01 + sub-agents (research)
-  |     |     +-- N02 + sub-agents (marketing)
-  |     |     +-- N03 + sub-agents (build)
-  |     |     +-- N04 + sub-agents (knowledge)
-  |     |     +-- N05 + sub-agents (code)
-  |     |     +-- N06 + sub-agents (commercial)
+  |     |     +-- N01 + Agent tool sub-agents (research)
+  |     |     +-- N02 + Agent tool sub-agents (marketing)
+  |     |     +-- N03 + Agent tool sub-agents (build)
+  |     |     +-- N04 + Agent tool sub-agents (knowledge)
+  |     |     +-- N05 + Agent tool sub-agents (code)
+  |     |     +-- N06 + Agent tool sub-agents (commercial)
   |     |     |
   |     |     +-- = 6 nuclei x (1 + 4 sub-agents) = 30 LLM streams
   |     |
@@ -62,7 +64,7 @@ overnight_infinite.cmd (loop forever)
   |           write state to disk, exit cleanly
   |
   +-- SLEEP 10s
-  +-- RESTART N07 (pi --continue, fresh context)
+  +-- RESTART N07 (claude --continue, fresh context via auto-compaction)
 ```
 
 ## 5 Blockers and Solutions
@@ -75,12 +77,12 @@ overnight_infinite.cmd (loop forever)
 
 | Solution | How | Status |
 |----------|-----|--------|
-| **pi --continue** | pi natively supports `--continue` flag to resume previous session | EXISTS in pi |
-| **pi /handoff** | Extension that extracts context and creates new focused session | EXISTS as pi extension (handoff.ts) |
-| **pi compact()** | Built-in compaction that summarizes conversation to free tokens | EXISTS in pi SDK |
+| **claude --continue** | Claude Code natively supports `--continue` flag to resume previous session | Native in Claude Code |
+| **claude --fork-session** | Creates a new session forked from previous state (prevents corruption) | Native in Claude Code |
+| **Auto-compaction** | Claude Code automatically compresses conversation when approaching context limit | Native in Claude Code |
 | **mission_state.yaml** | CEX-specific checkpoint file on disk with task queue + progress | NEEDS BUILD |
 
-**Recommended approach**: Combine `mission_state.yaml` (CEX state) with pi's `/handoff` (context transfer).
+**Recommended approach**: Combine `mission_state.yaml` (CEX state) with Claude Code's `--continue` or `--fork-session` (context transfer).
 
 ```yaml
 # .cex/runtime/mission_state.yaml
@@ -105,6 +107,15 @@ tokens_used: 12400000
 **Implementation**: N05 builds `cex_mission_state.py` (read/write/update checkpoint).
 N07 reads on boot, writes before context exhaustion.
 
+**Comparison: Claude Code vs alternatives for session continuity**:
+
+| Feature | Claude Code | Gemini CLI | Codex CLI |
+|---------|------------|------------|-----------|
+| Session resume | `--continue` | Not supported | Not supported |
+| Safe fork | `--fork-session` | N/A | N/A |
+| Auto-compaction | Built-in | N/A | N/A |
+| Context window | 1M tokens | 1M tokens | 192K tokens |
+
 ### Blocker 2: Sub-agents Inside Each Nucleus (6x -> 30x)
 
 **Problem**: Each nucleus runs 1 LLM instance. Could run 1 + 4 sub-agents.
@@ -113,33 +124,35 @@ N07 reads on boot, writes before context exhaustion.
 
 | Solution | How | Status |
 |----------|-----|--------|
-| **pi subagent extension** | Official pi extension: spawns isolated pi subprocesses, supports parallel (max 8, 4 concurrent), chain mode, streaming | EXISTS as pi example extension |
-| **Agent .md files** | YAML frontmatter defines agent: name, tools, model | EXISTS (pi convention) |
-| **Parallel mode** | `{ tasks: [{agent, task}, ...] }` — runs up to 4 concurrent | EXISTS in subagent extension |
-| **Chain mode** | `{ chain: [{agent, task with {previous}}, ...] }` — sequential with context passing | EXISTS in subagent extension |
+| **Claude Code Agent tool** | Native sub-agent spawning built into Claude Code. Supports parallel execution, typed agent specialization, automatic context isolation | Native in Claude Code |
+| **Agent .md files** | YAML frontmatter defines agent: name, tools, model. Auto-discovered from `.claude/agents/` | Native convention |
+| **--agents JSON** | Inline agent definitions via CLI flag for runtime agent creation | Native in Claude Code |
+| **subagent_type parameter** | Agent tool accepts `subagent_type` to route to specialized agent definitions | Native in Claude Code |
 
-**Recommended approach**: Install subagent extension in each nucleus boot.
+**Recommended approach**: Use Claude Code Agent tool directly -- no extensions needed.
 
 ```
-.pi/agents/                          # Project-level agents for CEX
-  builder-iso.md                     # Sub-agent: builds 1 ISO file
-  kc-writer.md                       # Sub-agent: writes 1 KC
-  example-generator.md               # Sub-agent: generates 1 example
-  template-filler.md                 # Sub-agent: fills 1 template
+.claude/agents/                      # Project-level agents for CEX
+  knowledge-card-builder.md          # Sub-agent: builds 1 KC
+  agent-builder.md                   # Sub-agent: builds 1 agent artifact
+  prompt-template-builder.md         # Sub-agent: builds 1 prompt template
+  ...                                # 125 builder sub-agents total
 ```
 
-Each nucleus boot loads the subagent extension. When N03 gets "build 13 ISOs for citation-builder", it spawns:
-- 4 parallel sub-agents, each building 3-4 ISOs
-- Total time: 1/4 of solo
+Each nucleus uses the Agent tool natively. When N03 gets "build 13 ISOs for citation-builder", it spawns:
+- 4+ parallel sub-agents via Agent tool, each building a subset
+- Total time: fraction of solo execution
 
-**Constraint**: pi subagent max = 8 tasks, 4 concurrent per invocation.
-With 6 nuclei x 4 concurrent = 24 parallel LLM streams.
+**Constraint**: Agent tool supports concurrent parallel sub-agents.
+With 6 nuclei x 4+ concurrent = 24+ parallel LLM streams.
 
-**Implementation**:
-1. Install subagent extension: symlink from pi examples to `.pi/extensions/subagent/`
-2. Create 4-6 CEX-specific agent .md files in `.pi/agents/`
-3. Update boot scripts to include subagent extension
-4. Update handoff format to support parallel sub-tasks
+**Comparison: Sub-agent approaches**:
+
+| Approach | Isolation | Setup | Concurrency | Status |
+|----------|-----------|-------|-------------|--------|
+| Claude Code Agent tool | Full (separate context) | Zero config | Unlimited parallel calls | Native |
+| LangGraph sub-graphs | Shared process | Python setup | Async coroutines | External lib |
+| CrewAI agents | Shared process | YAML config | Thread pool | External lib |
 
 ### Blocker 3: Git Conflicts (6 nuclei writing same repo)
 
@@ -154,25 +167,26 @@ on shared files (kinds_meta.json, _schema.yaml).
 | **Lock files** | `.cex/runtime/locks/{file}.lock` with PID | Simple | Deadlocks if nucleus crashes |
 | **Append-only directories** | Each nucleus writes only to its own `N0X_*/` dir | Zero conflicts | Shared files (kinds_meta) still conflict |
 | **N07 consolidation queue** | Nuclei write to staging dir, N07 applies to main | Zero conflicts | Delay between produce and commit |
-| **git worktrees** | Each nucleus gets its own worktree of same repo | Full isolation | Complex setup, disk space |
+| **Proposal pattern** | Nuclei write `.proposal.md` files, N07 merges post-wave | Zero conflicts | Deferred application |
 
-**Recommended approach**: Hybrid — append-only for artifacts + lock files for shared resources.
+**Recommended approach**: Hybrid -- append-only for artifacts + proposal pattern for shared resources.
 
 Current reality: nuclei ALREADY mostly write to their own directories.
 The only shared files that conflict:
-- `.cex/kinds_meta.json` — N07 should be sole writer (nuclei propose, N07 applies)
-- `P{xx}/_schema.yaml` — same, N07 applies
-- `archetypes/builders/` — conflict-free if each nucleus builds different kinds
+- `.cex/kinds_meta.json` -- N07 should be sole writer (nuclei propose, N07 applies)
+- `P{xx}/_schema.yaml` -- same, N07 applies
+- `archetypes/builders/` -- conflict-free if each nucleus builds different kinds
 
 **Implementation**:
-1. Create `_tools/cex_lock.py` — atomic file locking (PID-based, auto-expire 5min)
+1. `_tools/cex_lock.py` -- atomic file locking (PID-based, auto-expire 5min) -- EXISTS
 2. Rule: nuclei NEVER edit kinds_meta.json or _schema.yaml directly
 3. Rule: nuclei write proposals to `.cex/runtime/proposals/{nucleus}_{file}.yaml`
 4. N07 reads proposals, applies to shared files, commits
+5. See `.claude/rules/shared-file-proposal.md` for full protocol
 
 ### Blocker 4: Continuous Batching (no wave gaps)
 
-**Problem**: Current model is wave-based — dispatch all, wait all, consolidate, next wave.
+**Problem**: Current model is wave-based -- dispatch all, wait all, consolidate, next wave.
 Idle time between waves wastes throughput.
 
 **Solutions found**:
@@ -187,7 +201,7 @@ Idle time between waves wastes throughput.
 
 ```python
 # Current (wave-based):
-dispatch_wave(nuclei) → wait_all() → consolidate() → next_wave()
+dispatch_wave(nuclei) -> wait_all() -> consolidate() -> next_wave()
 
 # Target (continuous):
 while tasks_remain():
@@ -209,13 +223,13 @@ while tasks_remain():
 
 | Solution | How | Status |
 |----------|-----|--------|
-| **CMD loop** | `@echo off` + `:loop` + `goto loop` with pi inside | PATTERN EXISTS (overnight_h1.cmd) |
-| **pi --continue** | Resume previous session with context | EXISTS in pi |
-| **pi /handoff** | Create focused new session from current context | EXISTS as extension |
-| **pi compact()** | SDK method to compress conversation | EXISTS in pi |
+| **CMD loop** | `@echo off` + `:loop` + `goto loop` with claude inside | PATTERN EXISTS (overnight_h1.cmd) |
+| **claude --continue** | Resume previous session with context | Native in Claude Code |
+| **claude --fork-session** | Fork session to prevent state corruption on resume | Native in Claude Code |
+| **Auto-compaction** | Claude Code compresses conversation automatically | Native in Claude Code |
 | **mission_state.yaml** | State file survives restart | NEEDS BUILD |
 
-**Recommended approach**: CMD loop + mission_state.yaml + pi --continue.
+**Recommended approach**: CMD loop + mission_state.yaml + claude --continue.
 
 ```cmd
 @echo off
@@ -223,10 +237,10 @@ title CEX INFINITE BOOTSTRAP
 :loop
 echo [%time%] Starting N07 session...
 
-pi --model anthropic/claude-opus-4-6 ^
+claude --model opus-4-6 ^
    --append-system-prompt "N07_admin/agent_card_n07.md" ^
    --append-system-prompt ".cex/config/context_self_select.md" ^
-   "Read .cex/runtime/mission_state.yaml. Continue the mission from where it left off. When context is 80%% full, write state and exit with message EXIT_CHECKPOINT."
+   -p "Read .cex/runtime/mission_state.yaml. Continue the mission from where it left off. When context is 80%%%% full, write state and exit with message EXIT_CHECKPOINT."
 
 echo [%time%] N07 exited. Restarting in 10s...
 timeout /t 10 /nobreak
@@ -235,22 +249,31 @@ goto loop
 
 **Key**: N07 must write `mission_state.yaml` BEFORE exiting. The next instance reads it and continues seamlessly.
 
+**Comparison: Restart strategies**:
+
+| Strategy | Context preserved | State preserved | Risk |
+|----------|------------------|-----------------|------|
+| `--continue` (same session) | Yes (compacted) | Yes | Compaction loss |
+| `--fork-session` (new from old) | Partial (forked) | Yes (if state file written) | Fork divergence |
+| Fresh start + state file | No | Yes (from disk) | Cold start overhead |
+| **Recommended: state file + --continue** | **Yes** | **Yes** | **Minimal** |
+
 ## Implementation Roadmap
 
 | Step | What | Nucleus | Depends on | Effort |
 |------|------|---------|-----------|--------|
-| 1 | `cex_mission_state.py` (checkpoint R/W) | N05 | — | 1 dispatch |
+| 1 | `cex_mission_state.py` (checkpoint R/W) | N05 | -- | 1 dispatch |
 | 2 | `overnight_infinite.cmd` (auto-restart loop) | N05 | Step 1 | 1 dispatch |
-| 3 | `cex_lock.py` (shared file locking) | N05 | — | 1 dispatch |
-| 4 | Proposal pattern for shared files | N07 (rule) | Step 3 | N07 direct |
-| 5 | Install subagent extension + create CEX agents | N05 | — | 1 dispatch |
-| 6 | Update boot scripts for subagent support | N05 | Step 5 | 1 dispatch |
+| 3 | `cex_lock.py` (shared file locking) | N05 | -- | EXISTS |
+| 4 | Proposal pattern for shared files | N07 (rule) | Step 3 | EXISTS |
+| 5 | Agent tool sub-agent definitions | -- | -- | EXISTS (125 in .claude/agents/) |
+| 6 | Boot scripts with Claude Code CLI | N05 | -- | EXISTS (boot/n0X.cmd) |
 | 7 | `--continuous` mode in mission_runner | N05 | Steps 1,3 | 1 dispatch |
 | 8 | Task queue file + auto-prioritization | N05 | Step 7 | 1 dispatch |
 | 9 | Full integration test (mini bootstrap) | N07 | Steps 1-8 | 1 mission |
 
-**Estimated total**: 8 dispatches + 1 integration test.
-With continuous batching: ~2 hours to build the infrastructure.
+**Estimated total**: 4 dispatches + 1 integration test (Steps 3-6 already exist).
+With continuous batching: ~1 hour to build remaining infrastructure.
 Then the infrastructure builds CEX: ~3-4 hours for full from-zero bootstrap.
 
 ## Multi-Provider Model Strategy
@@ -266,75 +289,67 @@ A 3-tier model strategy cuts cost 70%+ without quality loss:
 | **T2 Execution** | claude-sonnet-4-6, gemini-2.5-pro | 200K-1M | $3-5 | Standard ISOs, KCs, templates |
 | **T3 Mechanical** | claude-haiku-4-5, gemini-flash, ollama/qwen3 | 128K-200K | $0-0.25 | Renames, format fixes, compilation |
 
-### How pi Already Supports This
+### How Claude Code Supports Multi-Model
 
-pi has native multi-provider support. Every process can use a different model:
+Claude Code supports model selection per process via `--model` flag:
 
 ```bash
 # Nucleus main process: Opus (complex orchestration)
-pi --model anthropic/claude-opus-4-6
+claude --model opus-4-6
 
-# Sub-agent scout: Haiku (fast recon, read-only)
-# Defined in .pi/agents/scout.md with: model: claude-haiku-4-5
+# Sub-agent via Agent tool: Haiku (fast recon, read-only)
+# Defined in .claude/agents/scout.md with model frontmatter
+# Or specified inline: Agent({ model: "haiku", ... })
 
-# Sub-agent builder: Sonnet (standard artifact generation)
-# Defined in .pi/agents/builder-iso.md with: model: claude-sonnet-4-6
+# Sub-agent via Agent tool: Sonnet (standard artifact generation)
+# Defined in .claude/agents/builder-iso.md with model frontmatter
 
-# Sub-agent formatter: Gemini Flash (mechanical formatting)
-# Defined in .pi/agents/formatter.md with: model: google/gemini-2.0-flash
+# Per-dispatch model override:
+# Agent({ model: "sonnet", subagent_type: "knowledge-card-builder", ... })
 ```
 
-### pi Provider Support (18+ providers native)
+**Comparison: Multi-model support across CLIs**:
 
-| Provider | Auth method | Models | Free tier? |
-|----------|-------------|--------|-----------|
-| Anthropic | API key or Max subscription | Opus, Sonnet, Haiku | No (Max = unlimited) |
-| Google Gemini CLI | OAuth (free) | 2.5 Pro, 2.0 Flash | **YES** (rate limited) |
-| Google Antigravity | OAuth (free) | Gemini 3, Claude, GPT-OSS | **YES** (sandbox) |
-| OpenAI | API key or Plus/Pro | GPT-4.1, 4.1-mini | No |
-| GitHub Copilot | OAuth | Claude, GPT | **YES** (with GitHub account) |
-| Groq | API key | Llama, Mixtral | **YES** (rate limited) |
-| Cerebras | API key | Llama-70B | **YES** (rate limited) |
-| Ollama | Local (no auth) | Any GGUF | **YES** (your hardware) |
-| OpenRouter | API key | 100+ models | Pay-per-token |
-| Mistral | API key | Mistral Large, Small | Free tier available |
-| Hugging Face | HF_TOKEN | Open models | **YES** |
-| Custom | pi.registerProvider() | Any OpenAI-compatible API | Depends |
+| CLI | Model selection | Sub-agent model override | Provider switching |
+|-----|----------------|--------------------------|-------------------|
+| Claude Code | `--model` flag + Agent tool `model` param | Yes (per sub-agent) | Anthropic only (native) |
+| Gemini CLI | `--model` flag | No sub-agent system | Google only |
+| Codex CLI | `--model` flag | No sub-agent system | OpenAI only |
 
 ### The 3-Tier Architecture Applied to CEX
 
 ```
-N07 (Opus — needs deepest reasoning for orchestration)
+N07 (Opus -- needs deepest reasoning for orchestration)
   |
-  +-- N03 Engineering (Opus — complex 8F pipeline, 13 ISOs)
-  |     +-- sub: builder-iso (Sonnet — standard ISO generation)
-  |     +-- sub: builder-iso (Sonnet)
-  |     +-- sub: formatter (Haiku — frontmatter fixes)
-  |     +-- sub: compiler (Gemini Flash — cex_compile.py runner)
+  +-- N03 Engineering (Opus -- complex 8F pipeline, 13 ISOs)
+  |     +-- Agent(model:"sonnet"): builder-iso (standard ISO generation)
+  |     +-- Agent(model:"sonnet"): builder-iso
+  |     +-- Agent(model:"haiku"): formatter (frontmatter fixes)
+  |     +-- Agent(model:"haiku"): compiler (cex_compile.py runner)
   |
-  +-- N01 Research (Opus — deep analysis, 1M context for papers)
-  |     +-- sub: scout (Haiku — fast web search recon)
-  |     +-- sub: scout (Haiku)
-  |     +-- sub: kc-writer (Sonnet — structured KC from research)
-  |     +-- sub: kc-writer (Sonnet)
+  +-- N01 Research (Opus -- deep analysis, 1M context for papers)
+  |     +-- Agent(model:"haiku"): scout (fast web search recon)
+  |     +-- Agent(model:"haiku"): scout
+  |     +-- Agent(model:"sonnet"): kc-writer (structured KC from research)
+  |     +-- Agent(model:"sonnet"): kc-writer
   |
-  +-- N04 Knowledge (Sonnet — standard indexing, no deep reasoning)
-  |     +-- sub: kc-writer (Haiku — batch KC generation)
-  |     +-- sub: kc-writer (Haiku)
-  |     +-- sub: formatter (Gemini Flash — compile + validate)
-  |     +-- sub: indexer (Haiku — cex_index.py runner)
+  +-- N04 Knowledge (Sonnet -- standard indexing, no deep reasoning)
+  |     +-- Agent(model:"haiku"): kc-writer (batch KC generation)
+  |     +-- Agent(model:"haiku"): kc-writer
+  |     +-- Agent(model:"haiku"): formatter (compile + validate)
+  |     +-- Agent(model:"haiku"): indexer (cex_index.py runner)
   |
-  +-- N05 Operations (Opus — code requires precision)
-  |     +-- sub: test-runner (Haiku — run tests, report results)
-  |     +-- sub: linter (Gemini Flash — mechanical checks)
+  +-- N05 Operations (Opus -- code requires precision)
+  |     +-- Agent(model:"haiku"): test-runner (run tests, report results)
+  |     +-- Agent(model:"haiku"): linter (mechanical checks)
   |
-  +-- N02 Marketing (Sonnet — creative but structured)
-  |     +-- sub: copy-writer (Sonnet — ad variants)
-  |     +-- sub: formatter (Haiku)
+  +-- N02 Marketing (Sonnet -- creative but structured)
+  |     +-- Agent(model:"sonnet"): copy-writer (ad variants)
+  |     +-- Agent(model:"haiku"): formatter
   |
-  +-- N06 Commercial (Sonnet — pricing models, structured)
-        +-- sub: analyst (Haiku — data gathering)
-        +-- sub: formatter (Haiku)
+  +-- N06 Commercial (Sonnet -- pricing models, structured)
+        +-- Agent(model:"haiku"): analyst (data gathering)
+        +-- Agent(model:"haiku"): formatter
 ```
 
 ### Cost Model at Peak Throughput
@@ -344,23 +359,30 @@ N07 (Opus — needs deepest reasoning for orchestration)
 | N07 orchestrator | 1 | Opus | 500K | $7.50 |
 | Nucleus main (x6) | 6 | Opus (2) + Sonnet (4) | 6M | $30-60 |
 | Sub-agents T2 (x12) | 12 | Sonnet | 12M | $36-60 |
-| Sub-agents T3 (x12) | 12 | Haiku/Flash/Ollama | 12M | $0-3 |
+| Sub-agents T3 (x12) | 12 | Haiku | 12M | $0-3 |
 | **TOTAL** | **31** | **mixed** | **~30M** | **$73-130/hr** |
 
 ### Free Tier Strategy (zero cost)
 
-For users without paid API keys, CEX can run entirely on free providers:
+For users on Anthropic Max subscription (unlimited Claude Code usage):
 
-| Nucleus | Provider | Model | Limitation |
-|---------|----------|-------|-----------|
-| N07 | Gemini CLI (free) | gemini-2.5-pro | Rate limited |
-| N01-N06 | Gemini CLI (free) | gemini-2.5-pro | Rate limited |
-| Sub-agents | Ollama (local) | qwen3:32b or llama3:70b | Your GPU |
-| Sub-agents | Groq (free) | llama-3.3-70b | 6K tokens/min |
-| Sub-agents | Cerebras (free) | llama-3.3-70b | Rate limited |
+| Component | How | Limitation |
+|-----------|-----|-----------|
+| N07 orchestrator | Claude Code (Max) | Unlimited |
+| N01-N06 nuclei | Claude Code (Max) | Unlimited |
+| Sub-agents | Agent tool (included) | Unlimited |
 
-**Throughput on free tier**: ~50-100 artifacts/hour (rate limits are the bottleneck).
-**Full CEX from zero on free**: ~30-50 hours (but zero cost).
+**Throughput on Max**: Full speed, zero marginal cost.
+**Full CEX from zero on Max**: ~3-4 hours.
+
+For users without Max (API billing):
+
+| Nucleus | Model | Cost/hr est. |
+|---------|-------|-------------|
+| N07 | Opus | $7.50 |
+| N01-N06 | Mixed Opus/Sonnet | $30-60 |
+| Sub-agents | Haiku/Sonnet | $3-36 |
+| **Total** | -- | **$40-100/hr** |
 
 ### Fine-Tuned Models
 
@@ -372,71 +394,51 @@ A CEX-specific fine-tuned model would be the endgame:
 | 123 kind KCs | FT that generates KCs from kind schema | T3 sub-agent for batch KC generation |
 | 377 templates + examples | FT that fills templates from intent | T3 sub-agent for template filling |
 
-**How**: Export training pairs (input=kind+schema, output=artifact) → fine-tune on OpenAI or HF → register as custom provider in pi.
+**How**: Export training pairs (input=kind+schema, output=artifact) -> fine-tune on OpenAI or Hugging Face -> use via API endpoint.
 
-```typescript
-// .pi/extensions/cex-ft-provider.ts
-pi.registerProvider("cex-ft", {
-  baseUrl: "https://api.openai.com/v1",  // or local vLLM
-  apiKey: "FT_API_KEY",
-  api: "openai-completions",
-  models: [{
-    id: "ft:gpt-4.1-mini:cex:iso-gen:abc123",
-    name: "CEX ISO Generator",
-    contextWindow: 128000,
-    maxTokens: 4096,
-    cost: { input: 0.001, output: 0.002 }
-  }]
-});
-```
-
-Then in agent definition:
+Then reference in Agent tool:
 ```markdown
----
-name: builder-iso-ft
-description: Fine-tuned ISO generator — 10x faster, 90% cheaper
-tools: read, write, bash
-model: cex-ft/ft:gpt-4.1-mini:cex:iso-gen:abc123
----
+Agent({
+  model: "haiku",  // or custom endpoint if supported
+  subagent_type: "knowledge-card-builder",
+  prompt: "Build KC for {kind} using template..."
+})
 ```
 
 ### Model Selection in nucleus_models.yaml
 
-The existing config already supports this — just needs sub-agent tiers added:
+The existing config supports per-nucleus model routing:
 
 ```yaml
 n03:
-  cli: pi
-  model: claude-opus-4-6          # Main process: T1
+  cli: claude
+  model: opus-4-6          # Main process: T1
   context: 1000000
-  sub_agents:                      # NEW: per-nucleus sub-agent config
+  sub_agents:               # Per-nucleus sub-agent config
     builder_iso:
-      model: claude-sonnet-4-6    # T2: standard generation
-      tools: read,write,bash,edit
+      model: sonnet         # T2: standard generation via Agent tool
     formatter:
-      model: google/gemini-2.0-flash  # T3: mechanical
-      tools: read,bash
+      model: haiku          # T3: mechanical
     compiler:
-      model: ollama/qwen3:14b     # T3: local, free
-      tools: bash
+      model: haiku          # T3: validation
   fallback:
-    cli: gemini
-    model: gemini-2.5-pro
+    cli: claude
+    model: sonnet-4-6
 ```
 
 ### Router Decision Matrix
 
-`cex_router.py` already exists with health checks + fallback chains.
+`cex_router.py` exists with health checks + fallback chains.
 Extend it with task-complexity routing:
 
 | Task complexity | Signal | Route to |
 |----------------|--------|----------|
 | **Complex** (new kind, architecture, research) | unknown kind, no template match, >3 sections | T1 Opus |
 | **Standard** (ISO from template, KC from schema) | template match >60%, known kind | T2 Sonnet |
-| **Mechanical** (rename, format, compile, validate) | no generation needed, find-replace | T3 Haiku/Flash/Ollama |
+| **Mechanical** (rename, format, compile, validate) | no generation needed, find-replace | T3 Haiku |
 
 ```python
-# In cex_router.py — new method
+# In cex_router.py
 def route_task(self, task: dict) -> str:
     if task.get("template_match", 0) < 0.6:
         return "T1"  # needs reasoning
@@ -453,7 +455,7 @@ def route_task(self, task: dict) -> str:
 | 6 nuclei x4 sub (all Opus) | 24 | 24M | 720 | $360 | 3.8h |
 | 6 nuclei x4 sub (mixed tiers) | 24 | 24M | 720 | $73-130 | 3.8h |
 | + continuous batching (mixed) | 24 | 30M | 864 | $90-150 | 3.2h |
-| Free tier only (Gemini + Ollama) | 6-12 | 3-6M | 50-100 | $0 | 30-50h |
+| Max subscription (unlimited) | 24 | 30M | 864 | $0 marginal | 3.2h |
 | With CEX fine-tuned model | 24 | 30M | 1000+ | $30-50 | 2.5h |
 
 ## Human intervention required

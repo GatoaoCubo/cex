@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, parser, P05, specialist, extraction, structured-data]
 keywords: [parser, extraction, parse, regex, structured-data, normalize, transform, scrape]
 triggers: ["create parser for output", "build extractor for JSON response", "define parser for log format"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building `parser` — extratores de data structured a partir d. L2: Analyze formats de input e definir extraction rules for data structured. L3: When user needs to create, build, or scaffold parser.
 quality: 9.1
 title: "Manifest Parser"

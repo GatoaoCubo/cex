@@ -1,0 +1,63 @@
+id: p06_security_validation_schema
+kind: validator
+pillar: P06
+title: Security Validation Schema
+version: 1.0.0
+created: 2026-04-07
+updated: 2026-04-07
+author: n05_operations
+domain: security-operations
+quality: null
+tags:
+- validator
+- security
+- operations
+- N05
+- schema
+- validation
+tldr: Security validation schema defining rules for secret detection, auth verification, input sanitization, and dependency
+  auditing across the CEX codebase.
+density_score: 0.96
+overview: This schema defines validation rules for security-sensitive operations across the CEX codebase. Every commit, every
+  deploy, every code review checks against these rules. Security is not a feature — it's a constraint.
+validation_rules: ''
+secret_detection: "secret_detection:\n  scope: \"/.py, /.yaml, /.md, /.json, */.env\"\n  exclude: \"/.env.example, /test_,\
+  \ */mock_\"\n  patterns:\n    - name: api_key_literal\n      regex: '(?i)(api[_-]?key|apikey)\\s*[=:]\\s*[\"\\x27][a-zA-Z0-9]{20,}[\"\
+  \\x27]'\n      severity: critical\n      action: block_commit\n    - name: password_literal\n      regex: '(?i)(password|passwd|pwd)\\\
+  s*[=:]\\s*[\"\\x27][^\\s]{8,}[\"\\x27]'\n      severity: critical\n      action: block_commit\n    - name: database_url_hardcoded\n\
+  \      regex: 'postgres(ql)?://[a-zA-Z0-9]+:[^@]+@'\n      severity: critical\n      action: block_commit\n    - name: jwt_secret_literal\n\
+  \      regex: '(?i)(jwt[-]?secret|secret[-]?key)\\s*[=:]\\s*[\"\\x27][^\\s]{16,}[\"\\x27]'\n      severity: critical\n \
+  \     action: block_commit\n    - name: private_key_block\n      regex: '-----BEGIN (RSA |EC |DSA )?PRIVATE KEY-----'\n\
+  \      severity: critical\n      action: block_commit\n  remediation: \"Move to environment variable. Reference via os.environ['KEY_NAME'].\""
+auth_verification: "auth_verification:\n  scope: \"/routers/.py, /endpoints/.py\"\n  rules:\n    - name: protected_endpoint_has_auth\n\
+  \      description: \"All non-public endpoints must have auth dependency\"\n      check: \"Depends(get_current_user) or\
+  \ Depends(verify_api_key)\"\n      exceptions: [\"/health\", \"/docs\", \"/openapi.json\", \"/pipeline/health\"]\n     \
+  \ severity: critical\n    - name: role_validation_server_side\n      description: \"Role checks use server-side user object,\
+  \ not client-sent role\"\n      check: \"current_user.role, not request.body.role\"\n      severity: critical\n    - name:\
+  \ tenant_isolation\n      description: \"Multi-tenant queries filter by tenant_id from auth context\"\n      check: \"WHERE\
+  \ tenant_id = $tenant_id from auth, not from request\"\n      severity: critical"
+input_sanitization: "input_sanitization:\n  scope: \"/models/.py, /schemas/.py\"\n  rules:\n    - name: pydantic_validation\n\
+  \      description: \"All request bodies use Pydantic models with field validators\"\n      check: \"BaseModel subclass\
+  \ with Field() constraints\"\n      severity: high\n    - name: string_length_limits\n      description: \"All string fields\
+  \ have max_length constraint\"\n      check: \"Field(max_length=N) or constr(max_length=N)\"\n      severity: high\n   \
+  \ - name: sql_parameterized\n      description: \"All SQL queries use parameterized placeholders\"\n      check: \"$1, $2\
+  \ syntax, no f-string or .format() in SQL\"\n      severity: critical\n    - name: path_traversal_prevention\n      description:\
+  \ \"File paths are validated against allowed directories\"\n      check: \"os.path.realpath() + startswith(allowed_dir)\"\
+  \n      severity: critical"
+dependency_audit: "dependency_audit:\n  tool: \"pip-audit or safety\"\n  frequency: \"every PR, weekly scheduled\"\n  rules:\n\
+  \    - name: no_critical_cves\n      description: \"No dependencies with critical CVE\"\n      severity: critical\n    \
+  \  action: block_merge\n    - name: no_high_cves\n      description: \"No dependencies with high CVE\"\n      severity:\
+  \ high\n      action: warning\n    - name: pinned_versions\n      description: \"All dependencies have pinned versions in\
+  \ requirements.txt\"\n      severity: high\n      action: warning\n    - name: no_unused_deps\n      description: \"No installed\
+  \ packages not imported in source\"\n      severity: low\n      action: suggestion"
+integration_points: '| integration | trigger | action |
+
+  |-------------|---------|--------|
+
+  | Pre-commit hook | `git commit` | Run secret detection on staged files |
+
+  | PR check | Pull request opened | Full security validation scan |
+
+  | Deploy gate | Before `railway up` | Auth + input + dependency audit |
+
+  | Scheduled | Weekly (Sunday 02:00) | Full dependency CVE scan |'

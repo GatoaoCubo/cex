@@ -12,7 +12,7 @@ author: builder_agent
 tags: [kind-builder, retriever, P04, tools, vector-search, RAG, embedding, hybrid-search]
 keywords: [retriever, vector, embedding, similarity, RAG, search, hybrid, BM25]
 triggers: ["create retriever", "build retriever artifact"]
-capability_summary: >
+capabilities: >
   L1: Specialist in building retriever artifacts — vector/keyword/hybrid search over l. L2: Define vector store connection with embedding model and similarity metric. L3: When user needs to create, build, or scaffold retriever.
 quality: 9.1
 title: "Manifest Retriever"

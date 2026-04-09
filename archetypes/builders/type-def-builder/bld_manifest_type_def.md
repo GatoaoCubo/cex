@@ -12,7 +12,7 @@ author: builder
 tags: [kind-builder, type-def, P06, specialist]
 keywords: ["type def", type-def, P06]
 triggers: ["create type def", "build type def artifact"]
-capability_summary: >
+capabilities: >
   L1: type-def-builder is the specialist builder for P06 `type_def` artifacts in the C. L2: Define primitive, composite, and algebraic costm types with full constraint set. L3: When user needs to create, build, or scaffold type def.
 quality: 9.1
 title: "Manifest Type Def"

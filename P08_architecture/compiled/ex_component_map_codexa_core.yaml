@@ -20,7 +20,7 @@ components: '| Component | Path | Depends On | Used By |
 
   |-----------|------|-----------|---------|
 
-  | orchestrator orchestrator | boot/stella.cmd | pi runtime, rules | USER |
+  | orchestrator orchestrator | boot/stella.cmd | Claude Code runtime, rules | USER |
 
   | Agent_group boots | boot/*.cmd | claude CLI, MCP configs | orchestrator |
 

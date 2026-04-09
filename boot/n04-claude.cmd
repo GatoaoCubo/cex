@@ -6,7 +6,7 @@
 title CEX-N04-KNOWLEDGE
 set CLAUDECODE=
 set CEX_NUCLEUS=N04
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
+set CEX_ROOT=%~dp0..
 cd /d "%CEX_ROOT%"
 
 set MODEL=--model claude-sonnet-4-6

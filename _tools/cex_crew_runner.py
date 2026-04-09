@@ -742,7 +742,7 @@ class CrewRunner:
             content = None
             try:
                 result = subprocess.run(
-                    ["pi", "-p", "--model", "anthropic/" + model],
+                    ["claude", "-p", "--model", model],
                     input=prompt, capture_output=True, text=True,
                     timeout=120, cwd=str(ROOT), encoding="utf-8",
                 )
@@ -872,7 +872,7 @@ class CrewRunner:
 
         # Verify claude CLI is available
         try:
-            subprocess.run(["pi", "--version"], capture_output=True, timeout=5)
+            subprocess.run(["claude", "--version"], capture_output=True, timeout=5)
         except (FileNotFoundError, subprocess.TimeoutExpired):
             print("WARN: claude CLI not found. Falling back to dry-run.", file=sys.stderr)
             return self.execute_step_dry_run(step, state, output_dir)
@@ -933,12 +933,12 @@ class CrewRunner:
                     import re
 
                     cli_result = subprocess.run(
-                        ["pi", "-p", "--model", "anthropic/" + model],
+                        ["claude", "-p", "--model", model],
                         input=prompt, capture_output=True, text=True,
                         timeout=120, cwd=str(ROOT), encoding="utf-8",
                     )
                     if cli_result.returncode != 0:
-                        raise RuntimeError(f"pi -p exit {cli_result.returncode}")
+                        raise RuntimeError(f"claude -p exit {cli_result.returncode}")
                     content = cli_result.stdout
 
                     # Extract self-assessed quality score
