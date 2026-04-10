@@ -1,0 +1,267 @@
+id: spec_marketplace_sync
+kind: e2e_eval
+title: MARKETPLACE_SYNC Spec -- Cross-Channel Inventory & ML Integration
+version: 1.0.0
+quality: null
+pillar: P07
+tags:
+- spec
+- marketplace
+- sync
+- mercado-livre
+- inventory
+- overselling
+- cron
+- webhook
+nucleus: N05
+created: 2026-04-10
+mission_purpose: 'Build the missing pieces to make GATO3 a true multi-channel commerce operation:
+
+  1. Mercado Livre product listing sync
+
+  2. Cross-channel inventory reconciliation
+
+  3. Automated token refresh
+
+  4. Order webhook chain across all channels'
+current_state_from_audit: '| Channel | Product Sync | Stock Sync | Order Sync | Token Refresh |
+
+  |---------|-------------|------------|------------|---------------|
+
+  | Shopify | Bidirectional | Bidirectional | Webhook (partial) | N/A (permanent token) |
+
+  | Bling | Supabase->Bling | Bling->Supabase (webhook) | None | Manual (6h TTL) |
+
+  | ML | None | None | None | Manual (6h TTL) |'
+target_state: '| Channel | Product Sync | Stock Sync | Order Sync | Token Refresh |
+
+  |---------|-------------|------------|------------|---------------|
+
+  | Shopify | Bidirectional | Bidirectional | Full (incl. cancel/refund) | N/A |
+
+  | Bling | Bidirectional | Bidirectional + propagate | Order->NF-e trigger | Auto cron (4h) |
+
+  | ML | Supabase->ML | Supabase->ML + ML->Supabase | ML order->Supabase | Auto cron (4h) |
+
+
+  ---'
+wave_1_overselling_prevention_p0_revenue_risk: ''
+1_1_inventory_reconciliation_function: "New edge function: `inventory-reconcile`\n\nPurpose: After any stock change event,\
+  \ propagate the new quantity to ALL channels\nTrigger: Called by shopify-webhook-handler, bling-webhook, and future meli-webhook\n\
+  \nFlow:\n1. Receive { productId, newQuantity, source: \"shopify\" | \"bling\" | \"supabase\" }\n2. Update Supabase products.quantity\
+  \ = newQuantity\n3. For each OTHER channel (not the source):\n   a. If shopify_product_id exists -> update Shopify inventory\
+  \ via Admin API\n   b. If bling_product_id exists -> update Bling stock via API v3\n   c. If meli_item_id exists -> update\
+  \ ML stock via Items API\n4. Log reconciliation to new reconciliation_log table\n\nKey design decisions:\n- Source channel\
+  \ is excluded from propagation (avoid echo loops)\n- Uses Supabase as single source of truth\n- Rate limited per channel\
+  \ (Shopify 500ms, Bling 500ms, ML 1s)"
+1_2_idempotent_order_processing: "Modify: `shopify-webhook-handler` orders/create handler\n\nBefore decrementing stock:\n\
+  1. Check shopify_order_log for order_id (new table)\n2. If exists -> skip (already processed)\n3. If not -> process + insert\
+  \ order_id\n4. After decrementing Supabase -> call inventory-reconcile\n\nNew table: `order_processing_log`\nCREATE TABLE\
+  \ order_processing_log (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  order_id VARCHAR(100) NOT NULL,\n  channel\
+  \ VARCHAR(20) NOT NULL, -- shopify, bling, meli\n  event_type VARCHAR(50) NOT NULL, -- orders/create, orders/cancel\n  processed_at\
+  \ TIMESTAMPTZ DEFAULT NOW(),\n  UNIQUE(order_id, channel, event_type)\n);"
+1_3_order_cancellation_refund_handlers: 'Modify: `shopify-webhook-handler` to handle:
+
+  - `orders/cancelled`: Restore stock in Supabase + propagate via inventory-reconcile
+
+  - `refunds/create`: Restore stock for refunded line items
+
+
+  Add to webhook-manager REQUIRED_WEBHOOKS:
+
+  { topic: ''orders/cancelled'', format: ''json'' },
+
+  { topic: ''refunds/create'', format: ''json'' },
+
+
+  ---'
+wave_2_token_auto_refresh_p2_operational_risk: ''
+2_1_token_refresh_cron_function: "New edge function: `token-refresh-cron`\n\nPurpose: Auto-refresh Bling and ML tokens before\
+  \ they expire\nSchedule: Every 4 hours via pg_cron or Supabase scheduled function\nMethod: Supabase pg_cron -> HTTP POST\
+  \ to edge functions\n\nFlow:\n1. Query bling_credentials.expires_at\n   - If expires in < 2 hours -> POST to bling-oauth-callback\
+  \ (refresh)\n   - If refresh fails -> log error, send alert via Supabase webhook\n2. Query meli_credentials.expires_at\n\
+  \   - If expires in < 2 hours -> POST to meli-oauth-callback (refresh)\n   - If refresh fails -> log error\n\nAlert mechanism:\
+  \ Insert into new token_alerts table, read from Integracoes.tsx"
+2_2_pg_cron_setup: "-- Enable pg_cron extension (Supabase Pro plan required)\nCREATE EXTENSION IF NOT EXISTS pg_cron;\n\n\
+  -- Schedule token refresh every 4 hours\nSELECT cron.schedule(\n  'refresh-marketplace-tokens',\n  '0 /4   ',\n  $$\n  SELECT\
+  \ net.http_post(\n    url := current_setting('app.settings.supabase_url') || '/functions/v1/token-refresh-cron',\n    headers\
+  \ := jsonb_build_object(\n      'Authorization', 'Bearer ' || current_setting('app.settings.service_role_key'),\n      'Content-Type',\
+  \ 'application/json'\n    ),\n    body := '{}'::jsonb\n  );\n  $$\n);"
+2_3_token_health_check_in_integracoes_tsx: 'Modify: `Integracoes.tsx` to show:
+
+  - Last auto-refresh timestamp
+
+  - Next scheduled refresh
+
+  - Alert banner if refresh has been failing
+
+
+  ---'
+wave_3_mercado_livre_product_sync_p1_revenue_opportunity: ''
+3_1_ml_product_listing_function: "New edge function: `sync-meli-product`\n\nPurpose: Create or update ML listing from Supabase\
+  \ product\nAPI: ML Items API (POST /items, PUT /items/{id})\n\nFlow:\n1. Receive { productId }\n2. Load product from Supabase\n\
+  3. Load ML credentials from meli_credentials\n4. If meli_item_id is null -> CREATE listing\n   - Map Supabase fields to\
+  \ ML Item schema\n   - POST https://api.mercadolibre.com/items\n   - Store returned item_id in products.meli_item_id\n5.\
+  \ If meli_item_id exists -> UPDATE listing\n   - PUT https://api.mercadolibre.com/items/{meli_item_id}\n   - Update title,\
+  \ price, available_quantity, description\n\nField mapping:\n| Supabase | ML Items API |\n|----------|-------------|\n| name\
+  \ | title (max 60 chars) |\n| price | price (or preco_b2c if set) |\n| quantity | available_quantity |\n| description |\
+  \ plain text description |\n| images[0..9] | pictures[].source |\n| \"MLB\" | site_id |\n| category_id | listing_type_id\
+  \ = \"gold_special\" |"
+3_2_ml_batch_sync_function: 'New edge function: `sync-all-products-meli`
+
+
+  Purpose: Batch sync all published products to ML
+
+  Similar to sync-all-products-bling pattern
+
+  Filters: pending, error, all
+
+  Service-role only'
+3_3_ml_webhook_handler: "New edge function: `meli-webhook-handler`\n\nPurpose: Handle ML notifications\nML notification types:\n\
+  - orders_v2: New order -> decrement stock + call inventory-reconcile\n- items: Item status change -> update Supabase\n-\
+  \ questions: New question -> insert into meli_questions table (future CRM)\n\nWebhook setup:\nPOST https://api.mercadolibre.com/applications/{APP_ID}/webhooks\n\
+  {\n  \"callback_url\": \"https://fuuguegkqnpzrrhwymgw.supabase.co/functions/v1/meli-webhook-handler\",\n  \"topic\": \"\
+  orders_v2\"\n}"
+3_4_ml_webhook_manager: 'New edge function: `meli-webhook-manager`
+
+
+  Same pattern as webhook-manager but for ML:
+
+  - list: GET notification topics
+
+  - setup: register order + item webhooks
+
+  - status: verify configuration
+
+
+  ---'
+wave_4_bidirectional_sync_cron_p3_consistency: ''
+4_1_scheduled_bidirectional_sync: 'New edge function: `scheduled-sync`
+
+
+  Purpose: Periodic full reconciliation across all channels
+
+  Schedule: Every 15 minutes via pg_cron
+
+
+  Flow:
+
+  1. Run unified-sync bidirectional (Shopify <-> Supabase)
+
+  2. Run sync-all-products-bling filter=all (Supabase -> Bling)
+
+  3. Run sync-all-products-meli filter=all (Supabase -> ML)
+
+  4. Compare quantities across channels
+
+  5. If mismatch detected -> use Supabase as truth, propagate
+
+  6. Log sync summary to sync_reconciliation_log'
+4_2_pg_cron_for_bidirectional_sync: "SELECT cron.schedule(\n  'bidirectional-product-sync',\n  '/15    *',\n  $$\n  SELECT\
+  \ net.http_post(\n    url := current_setting('app.settings.supabase_url') || '/functions/v1/scheduled-sync',\n    headers\
+  \ := jsonb_build_object(\n      'Authorization', 'Bearer ' || current_setting('app.settings.service_role_key'),\n      'Content-Type',\
+  \ 'application/json'\n    ),\n    body := '{\"scope\": \"inventory\"}'::jsonb\n  );\n  $$\n);\n\n---"
+new_database_tables_required: "-- 1. Order processing idempotency\nCREATE TABLE order_processing_log (\n  id UUID PRIMARY\
+  \ KEY DEFAULT gen_random_uuid(),\n  order_id VARCHAR(100) NOT NULL,\n  channel VARCHAR(20) NOT NULL,\n  event_type VARCHAR(50)\
+  \ NOT NULL,\n  line_items JSONB,\n  processed_at TIMESTAMPTZ DEFAULT NOW(),\n  UNIQUE(order_id, channel, event_type)\n);\n\
+  \n-- 2. Inventory reconciliation audit\nCREATE TABLE inventory_reconciliation_log (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n\
+  \  product_id UUID REFERENCES products(id),\n  source_channel VARCHAR(20) NOT NULL,\n  old_quantity INTEGER,\n  new_quantity\
+  \ INTEGER,\n  channels_updated JSONB, -- {\"shopify\": true, \"bling\": true, \"meli\": false}\n  errors JSONB,\n  created_at\
+  \ TIMESTAMPTZ DEFAULT NOW()\n);\n\n-- 3. Token health alerts\nCREATE TABLE token_alerts (\n  id UUID PRIMARY KEY DEFAULT\
+  \ gen_random_uuid(),\n  provider VARCHAR(20) NOT NULL, -- bling, meli\n  alert_type VARCHAR(50) NOT NULL, -- refresh_failed,\
+  \ expired, refresh_success\n  message TEXT,\n  resolved BOOLEAN DEFAULT FALSE,\n  created_at TIMESTAMPTZ DEFAULT NOW()\n\
+  );\n\n-- 4. ML sync log (mirror bling_sync_log)\nCREATE TABLE meli_sync_log (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n\
+  \  product_id UUID REFERENCES products(id),\n  meli_item_id VARCHAR(20),\n  operation VARCHAR(50) NOT NULL,\n  direction\
+  \ VARCHAR(30) NOT NULL,\n  request_payload JSONB,\n  response_payload JSONB,\n  status VARCHAR(20) NOT NULL,\n  error_message\
+  \ TEXT,\n  created_at TIMESTAMPTZ DEFAULT NOW()\n);\n\n---"
+new_edge_functions_summary: '| Function | Wave | Lines (est.) | Purpose |
+
+  |----------|------|-------------|---------|
+
+  | `inventory-reconcile` | 1 | ~200 | Cross-channel stock propagation |
+
+  | `token-refresh-cron` | 2 | ~150 | Auto-refresh Bling + ML tokens |
+
+  | `sync-meli-product` | 3 | ~300 | ML product listing create/update |
+
+  | `sync-all-products-meli` | 3 | ~180 | ML batch sync |
+
+  | `meli-webhook-handler` | 3 | ~200 | ML order/item notifications |
+
+  | `meli-webhook-manager` | 3 | ~250 | ML webhook CRUD |
+
+  | `scheduled-sync` | 4 | ~150 | Periodic full reconciliation |
+
+
+  Total new code: ~1,430 lines across 7 functions + 4 new DB tables + 2 cron jobs.
+
+
+  ---'
+modified_existing_functions: '| Function | Change | Wave |
+
+  |----------|--------|------|
+
+  | `shopify-webhook-handler` | Add idempotency, order cancel/refund, call inventory-reconcile | 1 |
+
+  | `bling-webhook` | Harden auth (reject invalid secret), call inventory-reconcile | 1 |
+
+  | `product-sync-webhook` | Add Bling + ML trigger alongside Shopify | 3 |
+
+  | `webhook-manager` | Add orders/cancelled + refunds/create to REQUIRED_WEBHOOKS | 1 |
+
+
+  ---'
+priority_fix_list_ordered_by_revenue_risk: ''
+p0_overselling_prevention_wave_1:
+- 'Risk: Customer buys last item on Shopify + ML simultaneously = 2 orders, 1 item'
+- 'Fix: `inventory-reconcile` function + idempotent order processing'
+- 'Effort: 2-3 days'
+- 'Revenue impact: Direct loss on every oversold order (refund + reputation)'
+p1_ml_product_sync_wave_3:
+- 'Risk: ML is a revenue channel with zero product automation'
+- 'Fix: `sync-meli-product` + `meli-webhook-handler`'
+- 'Effort: 3-4 days'
+- 'Revenue impact: Currently manual listing management = missed sales + stale prices'
+p2_auto_token_refresh_wave_2:
+- 'Risk: Bling + ML tokens expire every 6h with no cron'
+- 'Fix: `token-refresh-cron` + pg_cron schedule'
+- 'Effort: 1 day'
+- 'Revenue impact: Silent sync failure = stale stock = overselling OR lost sales'
+p3_order_webhook_chain_waves_1_3:
+- 'Risk: Shopify orders don''t update Bling stock. ML orders don''t exist.'
+- 'Fix: Modify shopify-webhook-handler + new meli-webhook-handler'
+- 'Effort: 2-3 days'
+- 'Revenue impact: Stock desync across channels compounds over time'
+p4_scheduled_reconciliation_wave_4: '- Risk: Webhook failures or missed events cause gradual stock drift
+
+  - Fix: `scheduled-sync` + pg_cron every 15 minutes
+
+  - Effort: 1-2 days
+
+  - Revenue impact: Safety net -- catches what webhooks miss
+
+
+  ---'
+implementation_order: "Week 1: Wave 1 (P0) -- Overselling prevention\n  Day 1-2: inventory-reconcile function\n  Day 2-3:\
+  \ Modify shopify-webhook-handler (idempotency + cancel/refund)\n  Day 3:   Modify bling-webhook (hard auth + propagation)\n\
+  \  Day 3:   DB migrations (order_processing_log, inventory_reconciliation_log)\n\nWeek 1: Wave 2 (P2) -- Token refresh\n\
+  \  Day 4:   token-refresh-cron function\n  Day 4:   pg_cron setup + token_alerts table\n  Day 4:   Integracoes.tsx health\
+  \ display update\n\nWeek 2: Wave 3 (P1) -- ML integration\n  Day 5-6: sync-meli-product + sync-all-products-meli\n  Day\
+  \ 7-8: meli-webhook-handler + meli-webhook-manager\n  Day 8:   DB migrations (meli_sync_log)\n  Day 8:   Modify product-sync-webhook\
+  \ (add ML trigger)\n\nWeek 2: Wave 4 (P3) -- Scheduled sync\n  Day 9:   scheduled-sync function\n  Day 9:   pg_cron setup\
+  \ (15min interval)\n  Day 10:  Integration testing across all channels\n\n---"
+success_criteria: '| Metric | Current | Target |
+
+  |--------|---------|--------|
+
+  | Channels with product sync | 2 (Shopify, Bling) | 3 (+ML) |
+
+  | Channels with stock propagation | 0 | 3 |
+
+  | Token refresh automation | Manual | Auto (4h cron) |
+
+  | Overselling protection | None | Idempotent + cross-channel |
+
+  | Stock reconciliation frequency | Never | Every 15 min |
+
+  | Order -> stock update channels | 1 (Shopify->Supabase) | 3 (all channels) |'
