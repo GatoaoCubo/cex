@@ -1,0 +1,194 @@
+---
+id: tpl_blog_howto
+kind: prompt_template
+title: "Template: Blog How-To Post (GATO3)"
+version: 1.0.0
+quality: null
+tags: [template, blog, howto, tutorial, seo, content, gato3]
+pillar: P03
+nucleus: N04
+created: 2026-04-10
+mission: CONTENT_PIPELINE
+---
+
+# Template: Blog How-To Post
+
+> For step-by-step tutorials. 1500-2000 words. Voice: Ro (sofisticado-acolhedor).
+> SEO-optimized with internal linking to product pages.
+
+## Post Structure
+
+```
+1. TITLE (H1)
+2. META DESCRIPTION
+3. HERO IMAGE
+4. INTRODUCTION (150-200 words)
+5. TABLE OF CONTENTS (auto-generated)
+6. STEPS (H2 per step, 3-7 steps)
+7. COMMON MISTAKES (H2)
+8. FAQ (H2, 3-5 questions, schema markup)
+9. CONCLUSION + CTA (100-150 words)
+10. RELATED PRODUCTS (sidebar/inline)
+11. INTERNAL LINKS (2+ blog posts, 2+ product pages)
+```
+
+## Section Details
+
+### 1. Title (H1)
+
+| Formula | Example |
+|---------|---------|
+| "Como [verbo] [objeto]: Guia Completo [ano]" | "Como Apresentar Dois Gatos: Guia Completo 2026" |
+| "[Numero] Passos para [resultado]" | "7 Passos para um Gato Menos Estressado" |
+| "Guia [adjetivo]: [topic] para [audience]" | "Guia Pratico: Enriquecimento Ambiental para Tutores Iniciantes" |
+
+**Rules:**
+- Max 60 chars (SEO title tag)
+- Include primary keyword
+- H1 on page can be longer (up to 80 chars)
+
+### 2. Meta Description
+
+```
+[Primary keyword] + [benefit] + [CTA]. Max 155 chars.
+Example: "Aprenda como apresentar dois gatos em 7 passos seguros.
+Protocolo da Ro com dicas de veterinarios. Leia o guia completo."
+```
+
+### 3. Hero Image
+
+| Spec | Value |
+|------|-------|
+| Dimensions | 1200x630px (OG image compatible) |
+| Alt text | Descriptive, includes primary keyword |
+| Style | PB minimalista, cat photo or illustration |
+| File | WebP preferred, max 200KB |
+
+### 4. Introduction (150-200 words)
+
+```
+[Empathy opener -- relate to ICP's pain/question]
+"Se voce ja tentou [problem] e nao conseguiu, voce nao esta sozinho."
+
+[Why this matters -- 1-2 sentences with data if available]
+"Estudos mostram que [stat]. O impacto no dia a dia e real."
+
+[What this guide covers -- set expectations]
+"Neste guia, a Ro te mostra [N] passos praticos para [result].
+Vamos usar o mesmo protocolo que veterinarios comportamentalistas recomendam."
+
+[Quick win -- give 1 actionable tip upfront]
+"Dica rapida antes de comecar: [1 sentence tip]."
+```
+
+### 5. Steps (H2 per step)
+
+Each step follows this structure:
+
+```
+## Passo [N]: [Action verb] + [object]
+
+[1-2 paragraphs explaining the step -- 100-200 words]
+
+**O que voce vai precisar:**
+- Item 1
+- Item 2 (product link if relevant)
+
+**Como fazer:**
+1. Sub-step 1
+2. Sub-step 2
+3. Sub-step 3
+
+**Dica da Ro:** [1 sentence practical tip from Ro's persona]
+
+[Optional: image/infographic illustrating the step]
+```
+
+**Step writing rules:**
+- Start each step with an action verb (Prepare, Observe, Ajuste, Posicione)
+- 100-200 words per step (not counting sub-steps)
+- Include at least 1 product mention per 3 steps (natural, contextual)
+- Add "Dica da Ro" to 3+ steps (Ro's persona adds warmth)
+
+### 6. Common Mistakes (H2)
+
+```
+## Erros Comuns (e como evitar)
+
+| Erro | Por que acontece | O que fazer |
+|------|-----------------|-------------|
+| [Mistake 1] | [Root cause] | [Correction] |
+| [Mistake 2] | [Root cause] | [Correction] |
+| [Mistake 3] | [Root cause] | [Correction] |
+```
+
+3-5 mistakes. This section builds trust (showing we know the pitfalls).
+
+### 7. FAQ (H2, Schema Markup)
+
+```
+## Perguntas Frequentes
+
+### [Question 1]?
+[Answer in 2-3 sentences. Direct, no filler.]
+
+### [Question 2]?
+[Answer in 2-3 sentences.]
+
+### [Question 3]?
+[Answer. Include product link if naturally relevant.]
+```
+
+3-5 questions. Use "People Also Ask" from Google for real queries.
+Mark up with FAQ schema (JSON-LD) for rich snippets.
+
+### 8. Conclusion + CTA (100-150 words)
+
+```
+## Conclusao
+
+[Recap the key takeaway in 1-2 sentences.]
+[Empathy close -- "Cada gato e unico, e o importante e observar o SEU."]
+[CTA options -- choose 1-2:]
+
+**Proximo passo:** [Link to related blog post]
+**Precisa de ajuda?** [Link to product category or WhatsApp]
+**Salve este guia:** [Encourage bookmark/share]
+```
+
+### 9. Related Products (Sidebar or Inline)
+
+```
+## Produtos Relacionados
+
+| Produto | Como ajuda | Preco |
+|---------|-----------|-------|
+| [Product 1 with link] | [1 sentence benefit] | R$ XX |
+| [Product 2 with link] | [1 sentence benefit] | R$ XX |
+```
+
+2-3 products max. Never feel like an ad -- always contextual.
+
+---
+
+## SEO Checklist
+
+- [ ] Primary keyword in: title, H1, first 100 words, meta description, URL slug, alt text
+- [ ] 2-3 long-tail keywords used naturally in body
+- [ ] Internal links: 2+ product pages, 1+ other blog post
+- [ ] External links: 1-2 authority sources (vet publications, studies)
+- [ ] Images: alt text with keywords, WebP format, lazy loading
+- [ ] URL: /blog/[primary-keyword-slug] (max 5 words in slug)
+- [ ] Reading time indicator at top
+- [ ] FAQ schema markup (JSON-LD)
+- [ ] Mobile-friendly (short paragraphs, scannable headers)
+
+## Brand Voice Checklist
+
+- [ ] Ro's persona present (at least 3 "Dica da Ro" callouts)
+- [ ] Science accessible, never jargon
+- [ ] Tutor as partner, never as ignorant
+- [ ] Product as means, never as end
+- [ ] No promises of guaranteed results
+- [ ] No comparison with competitors by name
+- [ ] Warm authority: "a gente recomenda" not "voce deve"

@@ -1,0 +1,229 @@
+---
+id: editorial_calendar_template
+kind: knowledge_card
+title: "13-Week Editorial Calendar -- GATO3 Content Pipeline"
+version: 1.0.0
+quality: null
+tags: [calendar, editorial, content, scheduling, instagram, blog, gato3]
+pillar: P01
+nucleus: N04
+created: 2026-04-10
+mission: CONTENT_PIPELINE
+horizon: "2026-04-15 to 2026-07-15"
+---
+
+# 13-Week Editorial Calendar -- GATO3
+
+> Apr 15 - Jul 15, 2026 | Instagram 5x/week + Blog 2x/week
+> Mix: 40% educativo, 30% memes, 20% produto, 10% seasonal
+
+## Weekly Rhythm (Default Template)
+
+| Day | Instagram | Pillar | Blog | Notes |
+|-----|-----------|--------|------|-------|
+| **Mon** | Feed: Carrossel educativo | Educativo (40%) | -- | Start week with value |
+| **Tue** | Reel: Humor/trending | Meme (30%) | Blog post (educativo or produto) | High-engagement day |
+| **Wed** | Feed: Infografico ou single | Educativo (40%) | -- | Mid-week authority |
+| **Thu** | Feed: Product showcase | Produto (20%) | Blog post (how-to or review) | Commerce day |
+| **Fri** | Reel: Meme/POV | Meme (30%) | -- | Weekend shareability |
+| **Sat** | -- | Rest | -- | Schedule next week |
+| **Sun** | Story: Quiz/Enquete/CTA | Engagement | -- | Community building |
+
+**Override rule:** seasonal content replaces the lowest-performing slot of the week.
+
+---
+
+## Week 1: Apr 15-20 (Launch Week)
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Tue | Apr 15 | IG Feed | Carrossel | Educativo | "5 sinais de que seu gato esta estressado" | Arranhador, brinquedos | [ ] |
+| Tue | Apr 15 | Blog | How-to | Educativo | "Como identificar estresse felino: guia completo" | Enriquecimento ambiental | [ ] |
+| Wed | Apr 16 | IG Reel | 30s trending | Meme | POV: "Quando o gato decide que 3h da manha e hora de brincar" | Varinha interativa | [ ] |
+| Thu | Apr 17 | IG Feed | Single image | Produto | Donut GATO3: hero shot + 3 beneficios | Donut GATO3 (R$ 599) | [ ] |
+| Thu | Apr 17 | Blog | Review | Produto | "Donut GATO3: review honesto apos 30 dias" | Donut GATO3 | [ ] |
+| Fri | Apr 18 | IG Reel | 15s meme | Meme | "Gato vs arranhador vs sofa" | Arranhador + adesivo protetor | [ ] |
+| Sun | Apr 20 | IG Story | Quiz | Engagement | "Voce sabe por que gatos ronronam?" | -- | [ ] |
+
+## Week 2: Apr 21-27
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | Apr 21 | IG Feed | Carrossel | Seasonal | "Feriado em casa com gato: 5 atividades" (Tiradentes) | Brinquedos interativos | [ ] |
+| Tue | Apr 22 | IG Reel | 30s | Educativo | "Dia da Terra: como escolher produtos sustentaveis pet" | Linha GATO3 | [ ] |
+| Tue | Apr 22 | Blog | How-to | Educativo | "Enriquecimento ambiental: 7 passos para um gato feliz" | Arranhador, tunel, bola inteligente | [ ] |
+| Wed | Apr 23 | IG Feed | Infografico | Educativo | "Linguagem corporal felina: orelhas, cauda, olhos" | -- | [ ] |
+| Thu | Apr 24 | IG Feed | Single | Produto | Cama Suspensa de Janela: gato no mirante | Cama Suspensa (R$ 30.97) | [ ] |
+| Thu | Apr 24 | Blog | Listicle | Produto | "7 beneficios da cama suspensa de janela" | Cama Suspensa | [ ] |
+| Fri | Apr 25 | IG Reel | 15s | Meme | "Expectativa de novo brinquedo vs realidade" | -- | [ ] |
+| Sun | Apr 27 | IG Story | Enquete | Engagement | "Seu gato prefere: caixa de papelao ou cama premium?" | -- | [ ] |
+
+## Week 3: Apr 28 - May 4
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | Apr 28 | IG Feed | Carrossel | Educativo | "Alimentacao felina: mitos e verdades" | Comedouro elevado duplo | [ ] |
+| Tue | Apr 29 | IG Reel | 30s | Meme | "Os 5 estagios do tutor quando o gato vomita" | -- | [ ] |
+| Tue | Apr 29 | Blog | Deep dive | Educativo | "Guia completo: hidratacao felina e fontes de agua" | Fonte automatica, bebedouro | [ ] |
+| Wed | Apr 30 | IG Feed | Infografico | Educativo | "Quanto de agua seu gato precisa por dia?" | Fonte automatica | [ ] |
+| Thu | May 1 | IG Feed | Single | Seasonal | "Dia do Trabalho: quem trabalha em home office com gato..." | Meme + produto | [ ] |
+| Thu | May 1 | Blog | Listicle | Produto | "5 comedouros elevados que seu gato merece" | Comedouro elevado, giratório | [ ] |
+| Fri | May 2 | IG Reel | 15s | Meme | "Reuniao de trabalho vs gato no teclado" | -- | [ ] |
+| Sun | May 4 | IG Story | Caixa perguntas | Engagement | "Pergunte a Ro: duvidas sobre alimentacao" | -- | [ ] |
+
+## Week 4: May 5-11 (Dia das Maes)
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | May 5 | IG Feed | Carrossel | Educativo | "Por que seu gato amassa pao: a ciencia por tras" | -- | [ ] |
+| Tue | May 6 | IG Reel | 30s | Meme | "Coisas que todo tutor de gato faz e nao admite" | -- | [ ] |
+| Tue | May 6 | Blog | How-to | Educativo | "Como acostumar seu gato com a escovacao" | Escova autolimpante, massageadora | [ ] |
+| Wed | May 7 | IG Feed | Infografico | Educativo | "Escovacao felina: frequencia por tipo de pelo" | Escova removedora | [ ] |
+| Thu | May 8 | IG Feed | Carrossel | Seasonal | "Dia das Maes: mae de gato tambem e mae" | Kit presente GATO3 | [ ] |
+| Thu | May 8 | Blog | Listicle | Produto | "10 presentes para maes de gato (curadoria GATO3)" | Kit completo, cama, brinquedos | [ ] |
+| Fri | May 9 | IG Reel | 60s | Produto | "Unboxing Kit Mae de Gato GATO3" | Kit Dia das Maes | [ ] |
+| Sun | May 11 | IG Story | Countdown + quiz | Seasonal | "Feliz Dia das Maes! Quiz: que tipo de mae de gato voce e?" | -- | [ ] |
+
+## Week 5: May 12-18
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | May 12 | IG Feed | Carrossel | Educativo | "Gatos e espacos verticais: por que altura importa" | Cama suspensa, prateleiras | [ ] |
+| Tue | May 13 | IG Reel | 30s | Meme | "Quando voce compra a cama premium e o gato prefere a caixa" | Donut GATO3 | [ ] |
+| Tue | May 13 | Blog | How-to | Educativo | "Ambientacao vertical: como transformar paredes em playground felino" | Cama suspensa janela | [ ] |
+| Wed | May 14 | IG Feed | Single | Educativo | "Mapa de ambientacao: zonas essenciais do territorio felino" | -- | [ ] |
+| Thu | May 15 | IG Feed | Carrossel | Produto | "Tapete gelado: como funciona e por que seu gato precisa" | Tapete gelado (3 tamanhos) | [ ] |
+| Thu | May 15 | Blog | Review | Produto | "Tapete gelado para gatos: review dos 3 tamanhos" | Tapete 40x50, 65x50, 50x90 | [ ] |
+| Fri | May 16 | IG Reel | 15s | Meme | "O gato quando descobre o tapete gelado pela primeira vez" | Tapete gelado | [ ] |
+| Sun | May 18 | IG Story | Enquete | Engagement | "Seu gato gosta de lugares altos ou baixos?" | -- | [ ] |
+
+## Week 6: May 19-25
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | May 19 | IG Feed | Carrossel | Educativo | "Brincadeiras que simulam caca: o instinto predatorio" | Brinquedos interativos | [ ] |
+| Tue | May 20 | IG Reel | 30s | Meme | "Estagio do gato: ignorar brinquedo novo por 3 dias" | -- | [ ] |
+| Tue | May 20 | Blog | How-to | Educativo | "Brincadeiras de caca: 10 formas de estimular o instinto do gato" | Varinha, bola inteligente, laser | [ ] |
+| Wed | May 21 | IG Feed | Infografico | Educativo | "Cronograma ideal de brincadeiras por idade do gato" | -- | [ ] |
+| Thu | May 22 | IG Feed | Single | Produto | "Bola inteligente USB: 3 modos de diversao" | Bola inteligente | [ ] |
+| Thu | May 22 | Blog | Comparativo | Produto | "Brinquedos interativos vs tradicionais: qual escolher?" | Bola, varinha, laser, corda | [ ] |
+| Fri | May 23 | IG Reel | 15s | Meme | "Gato olhando o brinquedo automatico como se fosse alien" | Brinquedo automatico | [ ] |
+| Sun | May 25 | IG Story | Quiz | Engagement | "Quiz: quanto tempo de brincadeira seu gato precisa?" | -- | [ ] |
+
+## Week 7: May 26 - Jun 1
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | May 26 | IG Feed | Carrossel | Educativo | "Seguranca felina: 8 perigos escondidos na sua casa" | Tela protecao, rede janela | [ ] |
+| Tue | May 27 | IG Reel | 30s | Meme | "Quando voce percebe que a casa inteira e do gato" | -- | [ ] |
+| Tue | May 27 | Blog | How-to | Educativo | "Casa a prova de gato: checklist de seguranca completo" | Tela, grade, rede, portao | [ ] |
+| Wed | May 28 | IG Feed | Single | Educativo | "Antes e depois: casa segura vs perigos comuns" | Adesivo protetor | [ ] |
+| Thu | May 29 | IG Feed | Carrossel | Produto | "Tela de protecao GATO3: instalacao passo a passo" | Tela protecao | [ ] |
+| Thu | May 29 | Blog | Review | Produto | "Tela de protecao para gatos: como escolher e instalar" | Tela + rede | [ ] |
+| Fri | May 30 | IG Reel | 15s | Meme | "O gato testando a tela de protecao nova" | Tela protecao | [ ] |
+| Sun | Jun 1 | IG Story | Caixa perguntas | Engagement | "Duvidas sobre seguranca felina? Pergunte!" | -- | [ ] |
+
+## Week 8: Jun 2-8
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | Jun 2 | IG Feed | Carrossel | Educativo | "Transporte felino: como levar o gato ao veterinario sem trauma" | Mochila capsula, caixa | [ ] |
+| Tue | Jun 3 | IG Reel | 30s | Meme | "A cara do gato quando viu a caixa de transporte" | -- | [ ] |
+| Tue | Jun 3 | Blog | How-to | Educativo | "Dessensibilizacao: como treinar seu gato para viagens" | Mochila, caixa retratil | [ ] |
+| Wed | Jun 4 | IG Feed | Infografico | Educativo | "Checklist do passeio seguro com gato: peitoral + mochila" | Peitoral, mochila | [ ] |
+| Thu | Jun 5 | IG Feed | Single | Produto | "Mochila Capsula Astronauta: visao panoramica ate 6.5kg" | Mochila capsula | [ ] |
+| Thu | Jun 5 | Blog | Comparativo | Produto | "Mochila vs caixa de transporte: qual e melhor pra seu gato?" | Mochila + caixa | [ ] |
+| Fri | Jun 6 | IG Reel | 15s | Meme | "POV: voce e o gato na mochila capsula" | Mochila | [ ] |
+| Sun | Jun 8 | IG Story | Enquete | Engagement | "Seu gato aceita passear? Sim/Nao (de jeito nenhum)" | -- | [ ] |
+
+## Week 9: Jun 9-15 (Dia dos Namorados)
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | Jun 9 | IG Feed | Carrossel | Educativo | "Gatos e rotina: como mudancas afetam o comportamento" | -- | [ ] |
+| Tue | Jun 10 | IG Reel | 30s | Seasonal | "Dia dos Namorados: o gato e o terceiro no relacionamento" | -- | [ ] |
+| Tue | Jun 10 | Blog | Listicle | Seasonal | "Casal com gato: 8 dicas para uma convivencia harmoniosa" | Camas, comedouros | [ ] |
+| Wed | Jun 11 | IG Feed | Single | Seasonal | "Presente de Dia dos Namorados pro casal gateiro" | Kit casal GATO3 | [ ] |
+| Thu | Jun 12 | IG Feed | Carrossel | Seasonal | "Feliz Dia dos Namorados! O amor do tutor pelo gato" | -- | [ ] |
+| Thu | Jun 12 | Blog | How-to | Educativo | "Mudanca de casa com gato: guia completo" | Feromonio, cama, toca | [ ] |
+| Fri | Jun 13 | IG Reel | 15s | Meme | "O gato no meio do casal no sofa" | -- | [ ] |
+| Sun | Jun 15 | IG Story | Quiz | Engagement | "Qual e a linguagem do amor do seu gato?" | -- | [ ] |
+
+## Week 10: Jun 16-22 (Inicio do Inverno)
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | Jun 16 | IG Feed | Carrossel | Educativo | "Gatos e frio: como manter o calor no inverno" | Camas, tocas, feltro | [ ] |
+| Tue | Jun 17 | IG Reel | 30s | Meme | "O gato no inverno: de 'nao me toque' a 'nao saia de perto'" | Cama Donut | [ ] |
+| Tue | Jun 17 | Blog | Deep dive | Seasonal | "Guia completo: cuidados com gatos no inverno" | Camas, tocas, meias | [ ] |
+| Wed | Jun 18 | IG Feed | Infografico | Educativo | "Temperatura ideal para gatos: guia por ambiente" | -- | [ ] |
+| Thu | Jun 19 | IG Feed | Carrossel | Produto | "TOP 5 camas para inverno: curadoria GATO3" | Donut, feltro, suspensa | [ ] |
+| Thu | Jun 19 | Blog | Listicle | Produto | "Melhores camas para gatos no inverno: ranking" | Toda linha de camas | [ ] |
+| Fri | Jun 20 | IG Reel | 15s | Meme | "Gato debaixo da coberta vs gato que odeia coberta" | Toca feltro | [ ] |
+| Sun | Jun 22 | IG Story | Enquete | Seasonal | "Seu gato fica mais carente no frio? Sim/Nao" | -- | [ ] |
+
+## Week 11: Jun 23-29 (Sao Joao)
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | Jun 23 | IG Feed | Carrossel | Seasonal | "Festas juninas: como proteger seu gato dos fogos" | Toca feltro (refugio) | [ ] |
+| Tue | Jun 24 | IG Reel | 30s | Educativo | "Ansiedade por fogos: sinais e como acalmar" | -- | [ ] |
+| Tue | Jun 24 | Blog | How-to | Educativo | "Protocolo anti-fogos: 8 passos para proteger seu gato" | Toca, cama, feromonio | [ ] |
+| Wed | Jun 25 | IG Feed | Single | Educativo | "Ambiente seguro durante festas: checklist visual" | Tela, grade, portao | [ ] |
+| Thu | Jun 26 | IG Feed | Single | Produto | "Toca Feltro: o refugio perfeito para noites de fogos" | Toca feltro (R$ 45) | [ ] |
+| Thu | Jun 26 | Blog | Listicle | Produto | "5 produtos que ajudam seu gato em noites de fogos" | Toca, cama, brinquedo | [ ] |
+| Fri | Jun 27 | IG Reel | 15s | Meme | "O gato quando ouve fogos vs quando ouve o saco de racao" | -- | [ ] |
+| Sun | Jun 29 | IG Story | Caixa perguntas | Engagement | "Seu gato tem medo de fogos? Conte pra gente" | -- | [ ] |
+
+## Week 12: Jun 30 - Jul 6
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | Jun 30 | IG Feed | Carrossel | Educativo | "Unhas de gato: quando e como aparar com seguranca" | -- | [ ] |
+| Tue | Jul 1 | IG Reel | 30s | Meme | "Tentando cortar a unha do gato: missao impossivel" | Arranhador | [ ] |
+| Tue | Jul 1 | Blog | How-to | Educativo | "Guia de higiene felina: unhas, pelos, ouvidos e dentes" | Escova, cortador | [ ] |
+| Wed | Jul 2 | IG Feed | Infografico | Educativo | "Frequencia ideal de higiene por area do corpo" | Escovas | [ ] |
+| Thu | Jul 3 | IG Feed | Single | Produto | "Escova Autolimpante GATO3: remocao de pelos sem estresse" | Escova autolimpante | [ ] |
+| Thu | Jul 3 | Blog | Review | Produto | "Melhores escovas para gatos: comparativo GATO3" | Escovas (3 modelos) | [ ] |
+| Fri | Jul 4 | IG Reel | 15s | Meme | "A quantidade de pelo que sai na escova vs a quantidade que fica no sofa" | Rolo tira pelos | [ ] |
+| Sun | Jul 6 | IG Story | Quiz | Engagement | "Quiz: quanto voce sabe sobre higiene felina?" | -- | [ ] |
+
+## Week 13: Jul 7-13 (Closing Week)
+
+| Day | Date | Platform | Format | Pillar | Topic | Product hook | Status |
+|-----|------|----------|--------|--------|-------|-------------|--------|
+| Mon | Jul 7 | IG Feed | Carrossel | Educativo | "Sono felino: por que gatos dormem 16h por dia" | Camas | [ ] |
+| Tue | Jul 8 | IG Reel | 30s | Seasonal | "Dia da Ciencia: 5 fatos cientificos sobre gatos" | -- | [ ] |
+| Tue | Jul 8 | Blog | Deep dive | Educativo | "A ciencia do sono felino: fases, posicoes e o que revelam" | Donut, cama suspensa | [ ] |
+| Wed | Jul 9 | IG Feed | Infografico | Educativo | "O que a posicao de dormir do gato diz sobre ele" | Camas | [ ] |
+| Thu | Jul 10 | IG Feed | Carrossel | Produto | "Retrospectiva Q2: top 5 produtos mais amados" | Top sellers | [ ] |
+| Thu | Jul 10 | Blog | Listicle | Produto | "Os 10 produtos GATO3 mais vendidos no trimestre" | Catalogo completo | [ ] |
+| Fri | Jul 11 | IG Reel | 60s | Meme | "Compilado: melhores momentos felinos do trimestre" | -- | [ ] |
+| Sun | Jul 13 | IG Story | Enquete + CTA | Engagement | "O que voce quer ver no proximo trimestre? Vote!" | -- | [ ] |
+
+---
+
+## Summary Metrics
+
+| Metric | Target |
+|--------|--------|
+| Total Instagram posts | 70 |
+| Total blog posts | 26 |
+| Total content pieces | 96 |
+| Educativo % | 40% (~38 pieces) |
+| Meme/Humor % | 30% (~29 pieces) |
+| Produto % | 20% (~19 pieces) |
+| Seasonal % | 10% (~10 pieces) |
+| Avg product integration score | 1.2-1.5 |
+| Min quality score to publish | 4.0/5.0 |
+| Seasonal events covered | 7 (Tiradentes, Terra, Trabalho, Maes, Namorados, Inverno, Sao Joao) |
+
+---
+
+## How to Use This Calendar
+
+1. **N02 (Marketing):** use this as the assignment sheet -- produce each content piece in order
+2. **N05 (Operations):** load into Supabase `content_schedule` table for tracking
+3. **Review:** every piece passes rubric (see `rubric_content_quality.md`) before scheduling
+4. **Adapt:** if a piece underperforms, swap in from the backlog, keep the pillar mix balanced
+5. **Analytics:** weekly review of top 3 / bottom 3, adjust next week's topics accordingly

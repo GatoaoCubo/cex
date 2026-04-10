@@ -1,0 +1,209 @@
+---
+id: rubric_content_quality
+kind: scoring_rubric
+title: "Content Quality Scoring Rubric -- GATO3 Content Pipeline"
+version: 1.0.0
+quality: null
+tags: [rubric, quality, scoring, content, review, gato3]
+pillar: P07
+nucleus: N04
+created: 2026-04-10
+mission: CONTENT_PIPELINE
+min_score: 4.0
+max_score: 5.0
+---
+
+# Content Quality Scoring Rubric -- GATO3
+
+> Every content piece must score >= 4.0/5.0 average across all 6 dimensions before scheduling.
+> Below 4.0 = revise. Below 3.0 on any single dimension = reject and rewrite.
+
+## Scoring Dimensions
+
+### D1. Brand Voice Alignment (Weight: 20%)
+
+How well does the content match GATO3's sofisticado-acolhedor voice?
+
+| Score | Criteria |
+|-------|----------|
+| **5** | Perfect Ro voice. Warm authority, science accessible, tutor as partner. Reads as if Ro herself wrote it. |
+| **4** | Strong voice match. Minor deviations (slightly too formal or too casual in 1-2 sentences). Easy fix. |
+| **3** | Acceptable but generic. Could be any pet brand. Missing Ro's personality and GATO3 positioning. |
+| **2** | Voice mismatch. Too clinical, too salesy, too informal, or condescending. Needs full rewrite of tone. |
+| **1** | Wrong voice entirely. Uses CAPS LOCK, hard sell, emoji overload, jargon, or competitor mentions by name. |
+
+**Quick test:** Read the piece aloud. Does it sound like a knowledgeable friend who loves cats, or like a marketing bot?
+
+**Red flags (auto-fail D1):**
+- "COMPRE AGORA" or any urgency pressure
+- Infantilizing the tutor ("voce sabia que gatinhos...")
+- Medical claims without "consulte seu veterinario"
+- Comparing competitors by name
+
+### D2. Visual Consistency (Weight: 15%)
+
+Does the visual match GATO3's PB minimalista aesthetic?
+
+| Score | Criteria |
+|-------|----------|
+| **5** | Perfect PB palette, Allrounder/Kenao typography, clean layout, GATO3 watermark. Instantly recognizable as brand. |
+| **4** | Mostly on-brand. Minor deviation (slightly wrong font size, accent color off by shade). |
+| **3** | Acceptable but not distinctive. Generic pet content look. Could be any brand. |
+| **2** | Clashing colors, wrong fonts, cluttered layout, poor image quality. |
+| **1** | Off-brand entirely. Bright colors, clip art, stock photo with watermark, low resolution. |
+
+**Applies to:** Instagram feed, carrossel, reel thumbnails, blog hero images.
+**N/A for:** Pure text content (blog body), stories (ephemeral).
+
+**Quick test:** Put the visual next to gato3.com.br. Does it look like it belongs?
+
+### D3. CTA Clarity (Weight: 15%)
+
+Is there a clear, single call-to-action that matches the content goal?
+
+| Score | Criteria |
+|-------|----------|
+| **5** | One clear CTA, perfectly matched to content type. Reader knows exactly what to do next. |
+| **4** | Clear CTA but slightly buried or competing with secondary action. |
+| **3** | CTA exists but is vague ("veja mais") or mismatched (engagement CTA on product post). |
+| **2** | Multiple competing CTAs or missing CTA entirely. |
+| **1** | No CTA, or CTA contradicts brand voice ("COMPRE AGORA ANTES QUE ACABE"). |
+
+**CTA matching guide:**
+
+| Content type | Primary CTA | Secondary CTA |
+|-------------|-------------|---------------|
+| Educational | "Salva pra depois" | "Comenta sua duvida" |
+| Meme | "Marca alguem" | "Compartilha" |
+| Product | "Link na bio" | "Salva pra quando precisar" |
+| Blog how-to | "Leia o guia completo" | "Veja produtos relacionados" |
+| Story | "Vote/Responda" | "Swipe up" |
+
+### D4. SEO Optimization (Weight: 15%) -- Blog Only
+
+Is the blog post optimized for search discovery?
+
+| Score | Criteria |
+|-------|----------|
+| **5** | Primary keyword in title/H1/meta/first 100 words/URL. Long-tails in body. FAQ schema. 2+ internal links. Alt texts. |
+| **4** | Most SEO elements present. Missing 1-2 minor elements (alt text, one internal link). |
+| **3** | Basic SEO. Keyword in title but not optimized throughout. No schema markup. |
+| **2** | Minimal SEO. No keyword strategy, no internal links, no meta description. |
+| **1** | No SEO consideration. Title not searchable, no structure, no links. |
+
+**For Instagram posts:** Score D4 as N/A (exclude from average, redistribute weight to D1 and D5).
+
+**Redistributed weights when D4 = N/A (Instagram):**
+
+| Dimension | Normal weight | Instagram weight |
+|-----------|--------------|-----------------|
+| D1 Voice | 20% | 25% |
+| D2 Visual | 15% | 15% |
+| D3 CTA | 15% | 15% |
+| D4 SEO | 15% | N/A |
+| D5 Engagement | 20% | 25% |
+| D6 Product | 15% | 20% |
+
+### D5. Engagement Potential (Weight: 20%)
+
+How likely is this content to generate saves, shares, comments, or clicks?
+
+| Score | Criteria |
+|-------|----------|
+| **5** | Highly shareable. Strong hook, emotional resonance, conversation starter. Would perform in top 10% of brand content. |
+| **4** | Good engagement drivers. Solid hook, clear value, likely to get saves or comments. |
+| **3** | Decent content but not remarkable. Will perform at average level. No standout hook. |
+| **2** | Low engagement potential. Boring hook, generic content, no conversation trigger. |
+| **1** | Would actively hurt the brand. Tone-deaf, insensitive, or irrelevant to audience. |
+
+**Engagement signals to evaluate:**
+- **Hook strength:** Does the first line stop the scroll? (test: cover everything except line 1 -- would you tap?)
+- **Save-worthy:** Does it teach something the reader will want to reference later?
+- **Share-worthy:** Would the reader send this to a friend who has a cat?
+- **Comment-worthy:** Does it ask a question or invite opinion?
+
+### D6. Product Integration Naturalness (Weight: 15%)
+
+If products are mentioned, how natural does the integration feel?
+
+| Score | Criteria |
+|-------|----------|
+| **5** | Product appears as the natural solution to the problem discussed. Reader doesn't feel "sold to." |
+| **4** | Product mention is relevant and contextual. Slightly more prominent than ideal but not jarring. |
+| **3** | Product mention feels inserted. Not terrible, but reader notices the shift to commercial. |
+| **2** | Product mention is forced. Disrupts the content flow. Feels like an ad mid-article. |
+| **1** | Hard sell disguised as content. Reader feels tricked. Damages trust. |
+| **N/A** | No product mention (pure education or meme). Score as 5 -- absence of product push IS the right call. |
+
+**Integration score alignment:**
+
+| Taxonomy integration score | Expected D6 rubric score |
+|---------------------------|-------------------------|
+| 0 (no mention) | 5 (correct decision) |
+| 1 (subtle) | 4-5 |
+| 2 (contextual) | 3-5 (depends on execution) |
+| 3 (product-first) | 3-4 (hard to score 5 with product-first) |
+
+---
+
+## Scoring Process
+
+### Step 1: Score Each Dimension
+
+Rate D1-D6 on 1-5 scale using criteria above.
+
+### Step 2: Calculate Weighted Average
+
+**Blog posts:**
+```
+Score = (D1 * 0.20) + (D2 * 0.15) + (D3 * 0.15) + (D4 * 0.15) + (D5 * 0.20) + (D6 * 0.15)
+```
+
+**Instagram posts (D4 = N/A):**
+```
+Score = (D1 * 0.25) + (D2 * 0.15) + (D3 * 0.15) + (D5 * 0.25) + (D6 * 0.20)
+```
+
+### Step 3: Apply Gates
+
+| Gate | Condition | Action |
+|------|-----------|--------|
+| **Hard reject** | Any dimension < 3.0 | Rewrite that dimension, re-score |
+| **Revise** | Average < 4.0 | Revise weakest dimensions, re-score |
+| **Approve** | Average >= 4.0 AND no dimension < 3.0 | Schedule for publishing |
+| **Excellence** | Average >= 4.5 | Flag for promotion/boost |
+
+### Step 4: Document Score
+
+```yaml
+content_id: "[slug or calendar reference]"
+scored_by: "[reviewer]"
+scored_at: "[date]"
+scores:
+  d1_voice: X
+  d2_visual: X
+  d3_cta: X
+  d4_seo: X  # or N/A
+  d5_engagement: X
+  d6_product: X
+weighted_average: X.X
+gate: "approve|revise|reject|excellence"
+notes: "[any specific feedback]"
+```
+
+---
+
+## Quick Scoring Card (Print-Friendly)
+
+```
+CONTENT: ___________________  DATE: ________  REVIEWER: ________
+
+D1 Voice:      [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]  x0.20 = ___
+D2 Visual:     [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]  x0.15 = ___
+D3 CTA:        [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]  x0.15 = ___
+D4 SEO:        [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]  x0.15 = ___  (N/A for IG)
+D5 Engagement: [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]  x0.20 = ___
+D6 Product:    [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ]  x0.15 = ___
+
+TOTAL: ___/5.0    GATE: [ ] Approve  [ ] Revise  [ ] Reject
+```

@@ -1,0 +1,97 @@
+id: tpl_instagram_feed_educativo
+kind: prompt_template
+title: 'Template: Instagram Feed -- Educativo (GATO3)'
+version: 1.0.0
+quality: null
+tags:
+- template
+- instagram
+- feed
+- educativo
+- content
+- gato3
+pillar: P03
+nucleus: N04
+created: 2026-04-10
+mission: CONTENT_PIPELINE
+visual_specs: '| Spec | Value |
+
+  |------|-------|
+
+  | Dimensions | 1080x1350px (4:5 portrait) preferred, 1080x1080px (1:1) accepted |
+
+  | File format | JPG or PNG, max 8MB |
+
+  | Color palette | PB minimalista -- #000000 primary, #FFFFFF background, #7A7A7A accent |
+
+  | Typography | Allrounder (headings), Kenao (body) |
+
+  | Logo placement | Bottom-right corner, 10% opacity watermark |'
+caption_structure: "[HOOK -- 1 line, max 125 chars, visible before \"mais\"]\n_\n\n[BODY -- 3-5 short paragraphs]\nParagraph\
+  \ 1: The problem/question your ICP faces.\nParagraph 2: The science/explanation (Ro's voice).\nParagraph 3: Practical step\
+  \ the tutor can take TODAY.\nParagraph 4 (optional): Product contextual mention (integration score 1-2).\nParagraph 5: Closing\
+  \ thought / empathy line.\n\n[CTA -- 1 line]\nOptions:\n  - \"Salva esse post pra consultar depois\"\n  - \"Marca alguem\
+  \ que precisa saber disso\"\n  - \"Comenta a duvida que voce tem sobre [topic]\"\n  - \"Link na bio pra o guia completo\"\
+  \n\n[HASHTAGS -- first comment, not caption]\n5 brand + 10 category + 5-10 trending = 20-25 total"
+hook_formulas_choose_1: '| Formula | Example |
+
+  |---------|---------|
+
+  | Numero + beneficio | "5 sinais de que seu gato esta estressado" |
+
+  | Pergunta provocativa | "Voce sabe por que gatos ronronam?" |
+
+  | Mito vs verdade | "Mito: gatos nao precisam de brincadeiras" |
+
+  | Voce sabia | "Voce sabia que gatos dormem 16h por dia?" |
+
+  | Erro comum | "O erro que 80% dos tutores cometem com agua" |'
+brand_voice_checklist:
+- '[ ] Frases curtas, paragrafos enxutos'
+- '[ ] Explica o "por que" (ciencia acessivel)'
+- '[ ] Passos praticos e acionaveis'
+- '[ ] Tutor como parceiro, nunca como ignorante'
+- '[ ] Produto como meio, nunca como fim'
+- '[ ] Sem CAPS LOCK, sem excesso de emojis, sem tom de vendedor'
+- '[ ] Sem promessas de resultados garantidos'
+product_integration_rules: '| Score | When | How |
+
+  |-------|------|-----|
+
+  | 0 | Pure science, no natural product fit | Skip product mention entirely |
+
+  | 1 | Topic tangentially relates to a product | "...e uma boa [product] pode ajudar nesse caso" |
+
+  | 2 | Topic directly involves a product category | Show product in image, mention in body naturally |'
+example_filled: 'Visual: Infographic -- 5 stress signs with cat silhouette icons on white BG.
+
+
+  Caption:
+
+  Seu gato esta estressado? Esses 5 sinais nao mentem.
+
+
+  Gatos sao mestres em esconder desconforto. Mas o corpo fala.
+
+
+  1. Pupilas dilatadas fora de contexto
+
+  2. Lambedura excessiva (alopecia)
+
+  3. Esconder-se mais do que o normal
+
+  4. Agredir sem motivo aparente
+
+  5. Miados excessivos ou mudanca na vocalizacao
+
+
+  Esses sinais nao sao "frescura" -- sao pedidos de ajuda.
+
+  O primeiro passo: observe 48h e anote quando os sinais aparecem.
+
+  Enriquecimento ambiental (arranhadores, brinquedos de caca,
+
+  espacos verticais) reduz 70% dos comportamentos de estresse.
+
+
+  Seu gato mostra algum desses? Comenta aqui que a Ro te ajuda.'

@@ -1,0 +1,104 @@
+---
+id: tpl_instagram_carrossel
+kind: prompt_template
+title: "Template: Instagram Carrossel (GATO3)"
+version: 1.0.0
+quality: null
+tags: [template, instagram, carrossel, carousel, content, gato3]
+pillar: P03
+nucleus: N04
+created: 2026-04-10
+mission: CONTENT_PIPELINE
+---
+
+# Template: Instagram Carrossel
+
+> For multi-slide educational, product comparison, and listicle carousels.
+> Up to 10 slides. Voice: sofisticado-acolhedor.
+
+## Visual Specs
+
+| Spec | Value |
+|------|-------|
+| Dimensions | 1080x1350px (4:5) per slide -- ALL slides same size |
+| Slides | 5-10 (sweet spot: 7-8 for educational, 5-6 for product) |
+| File format | JPG or PNG per slide, max 8MB each |
+| Color palette | PB minimalista, consistent across all slides |
+| Typography | Allrounder (headings 36-48pt), Kenao (body 24-32pt) |
+| Logo | Last slide only, or subtle watermark on each |
+
+## Slide-by-Slide Structure
+
+### Educational Carrossel (7-8 slides)
+
+| Slide | Content | Design notes |
+|-------|---------|-------------|
+| 1 (Cover) | **Hook headline** -- max 8 words. Large text, compelling question or statement. | Bold Allrounder font, high contrast, NO "swipe for more" text |
+| 2 | **Context** -- "Por que isso importa" in 2-3 sentences. Set the problem. | Clean layout, 1 supporting icon or illustration |
+| 3-6 | **Core content** -- 1 point per slide, numbered. Short text + visual. | Number large (48pt), text max 50 words per slide |
+| 7 | **Summary** -- recap key points in bullet list or visual matrix. | All icons from slides 3-6 together |
+| 8 | **CTA slide** -- "Salva pra consultar depois" + GATO3 branding. | Brand colors, logo centered, clear CTA |
+
+### Product Comparison Carrossel (5-6 slides)
+
+| Slide | Content | Design notes |
+|-------|---------|-------------|
+| 1 (Cover) | **"[Product A] vs [Product B]: qual escolher?"** | Both products side by side |
+| 2 | **Product A** -- key features, price, best for whom | Product image left, specs right |
+| 3 | **Product B** -- key features, price, best for whom | Same layout as slide 2 |
+| 4 | **Comparison table** -- side by side feature matrix | Clean table, checkmarks |
+| 5 | **"Qual e pra voce?"** -- decision tree or flow | Simple if/then visual |
+| 6 | **CTA** -- "Veja os dois no site" + link in bio | Brand CTA + logo |
+
+### Listicle Carrossel (8-10 slides)
+
+| Slide | Content | Design notes |
+|-------|---------|-------------|
+| 1 (Cover) | **"X [coisas/dicas/erros] que todo tutor precisa saber"** | Number large (120pt) + topic |
+| 2-9 | **One item per slide** -- number + title + 1-2 sentence explanation | Consistent layout, number prominent |
+| 10 | **CTA** -- "Qual desses voce ja sabia? Comenta!" | Engagement-focused |
+
+## Caption Structure (same for all types)
+
+```
+[HOOK -- mirrors slide 1 text, max 125 chars]
+
+[BODY -- 2-3 paragraphs expanding on the carrossel topic]
+Para quem nao pode ver todas as imagens, resuma os pontos aqui.
+Inclua 1 insight extra que nao esta nos slides (reward for reading).
+
+[CTA]
+"Salva esse carrossel pra quando precisar"
+"Compartilha com um tutor que precisa ver isso"
+
+[HASHTAGS -- first comment]
+```
+
+## Design Consistency Rules
+
+1. **Same template across all slides** -- change content, not layout
+2. **Swipe motivation** -- each slide must end with implicit "continue" (numbered, cliffhanger, or partial reveal)
+3. **Standalone slides** -- each slide must make sense if screenshot alone (shareability)
+4. **Text limit** -- max 75 words per slide. If more, split into 2 slides.
+5. **Accessibility** -- alt text for every slide describing visual + text content
+
+## Product Integration
+
+| Type | Integration | Example |
+|------|-------------|---------|
+| Educational | Score 1: last slide mentions product naturally | Slide 7: "Um bom arranhador resolve 80% dos casos" |
+| Comparison | Score 3: product IS the content | Full product review/comparison |
+| Listicle | Score 1-2: product appears as 1 of N items | "Dica 5: Um comedouro elevado melhora a digestao" |
+
+## Example Outline: "5 sinais de estresse felino"
+
+| Slide | Headline | Visual |
+|-------|----------|--------|
+| 1 | "5 sinais de que seu gato esta estressado" | Cat silhouette with stress indicators |
+| 2 | "Gatos escondem dor. Mas o corpo fala." | Magnifying glass over cat |
+| 3 | "1. Pupilas dilatadas fora de contexto" | Close-up eye icon |
+| 4 | "2. Lambedura excessiva (alopecia)" | Cat grooming icon |
+| 5 | "3. Esconder-se mais que o normal" | Cat under furniture icon |
+| 6 | "4. Agressao sem motivo aparente" | Hissing cat icon |
+| 7 | "5. Vocalizacao alterada" | Sound wave + cat icon |
+| 8 | "Salva esse post. Observe seu gato 48h." | GATO3 logo + CTA |

@@ -1,0 +1,162 @@
+id: tpl_instagram_reel_script
+kind: prompt_template
+title: 'Template: Instagram Reel Script (GATO3)'
+version: 1.0.0
+quality: null
+tags:
+- template
+- instagram
+- reel
+- video
+- script
+- content
+- gato3
+pillar: P03
+nucleus: N04
+created: 2026-04-10
+mission: CONTENT_PIPELINE
+video_specs: '| Spec | Value |
+
+  |------|-------|
+
+  | Dimensions | 1080x1920px (9:16 vertical) |
+
+  | Formats | MP4, MOV |
+
+  | Max file size | 4GB |
+
+  | Frame rate | 30fps minimum |
+
+  | Audio | Original audio or trending sound (licensed) |
+
+  | Captions | Required -- burned-in or auto-generated + reviewed |'
+script_structure_by_duration: ''
+15_second_reel_memes_quick_tips: '| Section | Duration | Content | Notes |
+
+  |---------|----------|---------|-------|
+
+  | HOOK | 0-2s | Pattern interrupt. Text on screen + eye-catching visual. | First frame = thumbnail. Must stop the scroll.
+  |
+
+  | BODY | 2-12s | One single point. Fast cuts, text overlays, trending audio. | 2-3 cuts max. Every second earns the next.
+  |
+
+  | CTA | 12-15s | Soft close. Text: "Salva pra depois" or brand tag. | Logo flash, no hard sell. |
+
+
+  Best for: memes, "voce sabia?", quick product showcase, trending audio.'
+30_second_reel_tutorials_product_demos: '| Section | Duration | Content | Notes |
+
+  |---------|----------|---------|-------|
+
+  | HOOK | 0-3s | Question or bold claim. "Voce esta fazendo isso ERRADO com seu gato." | Text + face or cat reaction |
+
+  | SETUP | 3-10s | Context. What''s the problem? Why should they care? | B-roll of cat behavior |
+
+  | CONTENT | 10-25s | The answer. 2-3 quick points or product demo. | Text overlays per point |
+
+  | CTA | 25-30s | Follow for more + product link. | Brand card + @gatoaocubo3 |
+
+
+  Best for: educational tips, product demos, myth-busting, before/after.'
+60_second_reel_deep_tips_reviews_storytelling: '| Section | Duration | Content | Notes |
+
+  |---------|----------|---------|-------|
+
+  | HOOK | 0-5s | Open loop. "Depois de descobrir isso, voce nunca mais vai..." | Must create curiosity gap |
+
+  | PROBLEM | 5-15s | Relate to ICP pain. "Todo tutor ja passou por isso..." | Emotional connection |
+
+  | SOLUTION | 15-45s | 3-5 actionable points. Numbered, with text overlays. | Each point = 6-8 seconds |
+
+  | PROOF | 45-52s | Show result. Before/after, testimonial, product in use. | Visual evidence > words |
+
+  | CTA | 52-60s | Segue, salva, comenta, link na bio. | Pick ONE primary CTA |
+
+
+  Best for: tutorials, product reviews, storytelling, "day in the life with cat".'
+90_second_reel_authority_pieces: '| Section | Duration | Content | Notes |
+
+  |---------|----------|---------|-------|
+
+  | HOOK | 0-5s | Bold claim + authority. "Veterinarios confirmam..." | Establish credibility |
+
+  | CONTEXT | 5-20s | Deep problem statement. Why this matters for your cat. | Data or stats if available |
+
+  | CONTENT | 20-70s | 5-7 points. Each 7-8 seconds, numbered with visuals. | Maintain pace, no filler |
+
+  | SUMMARY | 70-80s | Recap + key takeaway. | Visual recap slide |
+
+  | CTA | 80-90s | "Guia completo no blog -- link na bio." | Drive to blog for SEO |
+
+
+  Best for: deep educational content, comprehensive reviews, "everything you need to know".
+
+
+  ---'
+hook_bank_reusable_openers: '| Category | Hook examples |
+
+  |----------|--------------|
+
+  | Curiosity | "Ninguem te conta isso sobre gatos..." |
+
+  | Confrontation | "Voce esta fazendo isso ERRADO com seu gato." |
+
+  | Statistic | "90% dos tutores nao sabem que..." |
+
+  | POV | "POV: seu gato as 3h da manha" |
+
+  | Question | "Por que seu gato faz isso?" |
+
+  | Controversy | "Gatos nao sao independentes. Pronto, falei." |
+
+  | Before/After | "Antes vs depois de [product/behavior change]" |
+
+  | List | "3 coisas que seu gato precisa e voce nao sabe" |'
+audio_strategy: '| Content type | Audio approach |
+
+  |-------------|---------------|
+
+  | Educational | Voiceover (Ro''s voice) + subtle background music |
+
+  | Meme/Humor | Trending audio/sound (check license, adapt with cat twist) |
+
+  | Product | Original audio with ambient sounds + music |
+
+  | POV | Trending audio or original narration |
+
+
+  Rule: NEVER use copyrighted music without license. Prefer IG''s audio library or original.'
+caption_structure_reels: '[HOOK -- rephrase the reel''s main point, max 125 chars]
+
+
+  [1-2 paragraphs expanding on the topic]
+
+  Add one detail NOT in the video (reward for reading caption).
+
+
+  [CTA -- match the reel''s CTA]
+
+  "Salva pra quando precisar"
+
+  "Manda pra um tutor que precisa ver isso"
+
+
+  [HASHTAGS -- first comment]'
+brand_voice_by_reel_type: '| Type | Tone | What to avoid |
+
+  |------|------|--------------|
+
+  | Educational | Warm authority, "a Ro explica" | Jargon, condescension |
+
+  | Meme | Relatable, gentle humor | Cat shaming, cruelty, cheap laughs |
+
+  | Product | Honest enthusiasm | Hard sell, "COMPRE AGORA", clickbait |
+
+  | Seasonal | Protective, caring | Fear-mongering, guilt-tripping |'
+thumbnail_rules:
+- First frame IS the thumbnail (or set custom)
+- Must include text overlay (max 5 words)
+- High contrast (readable on small screens)
+- Show a cat or cat-related visual
+- Avoid clutter -- 1 focal point
