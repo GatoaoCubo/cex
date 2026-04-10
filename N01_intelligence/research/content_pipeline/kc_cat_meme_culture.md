@@ -1,6 +1,7 @@
 ---
 id: kc_cat_meme_culture
 kind: knowledge_card
+pillar: P01
 version: 1.0.0
 title: "Cat Meme & Viral Content Culture -- Trends, Formats, and Patterns"
 description: "Research compilation of cat meme trends 2025-2026, viral content formats, TikTok/Reels audio trends, and shareability patterns. For GATO3 content pipeline (30% memes/humor)."

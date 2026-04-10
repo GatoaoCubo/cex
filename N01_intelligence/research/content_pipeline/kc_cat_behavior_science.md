@@ -1,6 +1,7 @@
 ---
 id: kc_cat_behavior_science
 kind: knowledge_card
+pillar: P01
 version: 1.0.0
 title: "Cat Behavior Science -- Complete Research for Content Pipeline"
 description: "Comprehensive feline behavior research covering stress signals, enrichment, multi-cat dynamics, sleep, nutrition, aging, and kitten development. Structured for GATO3 content production (40% educativo)."

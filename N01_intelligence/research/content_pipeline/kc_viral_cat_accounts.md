@@ -1,6 +1,7 @@
 ---
 id: kc_viral_cat_accounts
 kind: knowledge_card
+pillar: P01
 version: 1.0.0
 title: "Viral Cat Accounts Analysis -- Format, Frequency, Engagement"
 description: "Analysis of top 15+ cat Instagram/TikTok accounts (Brazilian + international). Content format patterns, posting frequency, engagement drivers, and lessons for GATO3."

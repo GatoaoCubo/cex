@@ -1,6 +1,7 @@
 ---
 id: kc_content_sources_registry
 kind: knowledge_card
+pillar: P01
 version: 1.0.0
 title: "Content Sources Registry -- Master List of All Research Sources"
 description: "Comprehensive registry of 60+ sources found during content pipeline research. Categorized by topic, reliability, language, and content creation utility."

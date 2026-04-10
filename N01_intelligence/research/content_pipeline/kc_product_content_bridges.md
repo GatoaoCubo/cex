@@ -1,6 +1,7 @@
 ---
 id: kc_product_content_bridges
 kind: knowledge_card
+pillar: P01
 version: 1.0.0
 title: "Product-Content Bridges -- Education-to-Product Connection Map"
 description: "Maps each GATO3 product category to educational content angles backed by feline science. Enables 20% product content that feels like 100% education."

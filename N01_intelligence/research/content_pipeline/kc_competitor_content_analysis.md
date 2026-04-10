@@ -1,6 +1,7 @@
 ---
 id: kc_competitor_content_analysis
 kind: knowledge_card
+pillar: P01
 version: 1.0.0
 title: "Competitor Content Analysis -- Strategy Breakdown"
 description: "Competitive intelligence on content strategies of Petlove, Zee.Dog/Zee.Cat, CatMyPet, Catit, Jackson Galaxy, and Tuft+Paw. Compared across 8 dimensions. Identifies GATO3 whitespace."

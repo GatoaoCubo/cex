@@ -1,6 +1,7 @@
 ---
 id: kc_seasonal_calendar_pet
 kind: knowledge_card
+pillar: P01
 version: 1.0.0
 title: "Seasonal & Calendar Events -- 12-Month Editorial Skeleton"
 description: "Complete editorial calendar for GATO3 covering Brazilian pet dates, international cat days, seasonal care topics, and commercial opportunities. Apr 2026 to Mar 2027."
