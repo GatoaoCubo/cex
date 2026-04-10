@@ -1,0 +1,152 @@
+id: sync_fix_report_20260410
+kind: e2e_eval
+title: Unified-Sync Push Fix + Stock Alignment Report
+version: 1.0.0
+quality: null
+pillar: P07
+tags:
+- shopify
+- sync
+- bug-fix
+- variant
+- stock-alignment
+- inventory
+nucleus: N05
+created: 2026-04-10
+executive_summary: Fixed 3 critical bugs in the Shopify push pipeline (`unified-sync` and `sync-shopify-product`) in `gato-cubo-commerce`.
+  These bugs caused duplicate Shopify variants on every push update, image re-download storms, and silent crash on API rate
+  limiting. ---
+bugs_fixed: ''
+bug_1_variant_id_missing_on_update_critical: "| Field | Value |\n|-------|-------|\n| Files | `unified-sync/index.ts:530`,\
+  \ `sync-shopify-product/index.ts:115` |\n| Severity | CRITICAL -- data corruption on every push update |\n| Root cause |\
+  \ `pushProduct()` sends `variants: [{ price }]` without `id` field |\n| Impact | Shopify interprets missing variant ID as\
+  \ \"create new variant\" on PUT |\n| Result | Duplicate variants accumulate on every sync cycle |\n\nFix applied: Extract\
+  \ numeric variant ID from the GID format stored in Supabase (`gid://shopify/ProductVariant/12345` -> `12345`), include it\
+  \ in the variant object on update requests.\n\nBefore:\nshopifyData.variants = [{ price: product.price.toString() }];\n\n\
+  After:\nif (isUpdate && numericVariantId) {\n  shopifyData.variants = [{ id: numericVariantId, price: product.price.toString()\
+  \ }];\n} else {\n  shopifyData.variants = [{ price: product.price.toString() }];\n}"
+bug_2_images_resent_on_every_update_performance: '| Field | Value |
+
+  |-------|-------|
+
+  | File | `unified-sync/index.ts:539`, `sync-shopify-product/index.ts:123` |
+
+  | Severity | MEDIUM -- performance + duplicate images |
+
+  | Root cause | `images` array sent in PUT request body on every update |
+
+  | Impact | Shopify re-downloads all image URLs, creating duplicates |
+
+
+  Fix applied: Only include `images` in the payload when creating new products.'
+bug_3_no_429_retry_logic_reliability: '| Field | Value |
+
+  |-------|-------|
+
+  | File | `unified-sync/index.ts:190` |
+
+  | Severity | MEDIUM -- batch sync crashes on rate limit |
+
+  | Root cause | `ShopifyAPI.request()` throws on any non-200 |
+
+  | Impact | Batch push of 50+ products hits Shopify rate limit, entire batch fails |
+
+
+  Fix applied: Added retry loop (max 3 retries) that reads `Retry-After` header and backs off before retrying.
+
+
+  ---'
+files_modified_gato_cubo_commerce: '| File | Lines changed | Change type |
+
+  |------|--------------|-------------|
+
+  | `supabase/functions/unified-sync/index.ts` | ~40 | Bug fix (variant ID, images, retry) |
+
+  | `supabase/functions/sync-shopify-product/index.ts` | ~25 | Bug fix (variant ID, images) |
+
+
+  ---'
+stock_alignment_assessment: ''
+current_propagation_matrix: '| Event | Supabase | Shopify | Bling | ML |
+
+  |-------|----------|---------|-------|----|
+
+  | Product edit in Supabase | -- | Auto (if sync_enabled) | Manual | NONE |
+
+  | Shopify sale | webhook -> DB | -- | NOT propagated | NONE |
+
+  | Bling stock change | webhook -> DB | NOT propagated | -- | NONE |
+
+  | ML sale | NOT HANDLED | NOT HANDLED | NOT HANDLED | -- |
+
+
+  Key finding: Changes flow INTO Supabase from Shopify and Bling webhooks, but never propagate OUTWARD to sibling channels.
+  This means:
+
+  - A Shopify sale decrements Supabase but Bling still shows old stock
+
+  - A Bling physical adjustment updates Supabase but Shopify still shows old stock
+
+  - ML has zero automation'
+existing_mitigation_inventory_reconcile: 'The `inventory-reconcile` edge function EXISTS and is functional. It:
+
+  1. Reads Supabase stock (source of truth)
+
+  2. Queries Bling and Shopify stock via API
+
+  3. Detects discrepancies
+
+  4. Auto-corrects by pushing Supabase values outward
+
+  5. Logs all movements to `inventory_movements` table
+
+
+  This function is the correct fix for stock alignment. It needs to be scheduled via pg_cron (see MARKETPLACE_SYNC spec Wave
+  4).'
+recommended_operational_actions: "#### Immediate (can run now)\n\n1. Run inventory-reconcile in dry_run mode to assess current\
+  \ stock drift:\n   POST /functions/v1/inventory-reconcile?dry_run=1\n   Authorization: Bearer {service_role_key}\n\n2. Run\
+  \ inventory-reconcile in correction mode to align all channels:\n   POST /functions/v1/inventory-reconcile\n   Authorization:\
+  \ Bearer {service_role_key}\n\n3. Run unified-sync push (now fixed) to create missing Shopify listings:\n   POST /functions/v1/unified-sync\n\
+  \   Body: { \"mode\": \"push\", \"scope\": \"all\", \"force\": true }\n   Authorization: Bearer {service_role_key}\n\n####\
+  \ Short-term (schedule via pg_cron)\n\n4. Schedule inventory-reconcile every 15 minutes to prevent stock drift:\n   SELECT\
+  \ cron.schedule(\n     'inventory-reconcile-15m',\n     '/15    *',\n     $$SELECT net.http_post(\n       url := current_setting('app.settings.supabase_url')\
+  \ || '/functions/v1/inventory-reconcile',\n       headers := jsonb_build_object(\n         'Authorization', 'Bearer ' ||\
+  \ current_setting('app.settings.service_role_key'),\n         'Content-Type', 'application/json'\n       ),\n       body\
+  \ := '{}'::jsonb\n     );$$\n   );\n\n5. Schedule token-auto-refresh every 4 hours (Bling + ML tokens expire in 6h):\n \
+  \  See `token-auto-refresh` function (already exists in commerce repo).\n\n---"
+missing_shopify_listings_diagnostic_query: "Products in Supabase with `status = 'published'` but no Shopify listing:\n\nSELECT\
+  \ id, name, sku, price, quantity, shopify_sync_enabled\nFROM products\nWHERE status = 'published'\n  AND shopify_product_id\
+  \ IS NULL\nORDER BY created_at;\n\nTo batch-create all missing listings, enable sync and push:\n\n-- Enable sync for all\
+  \ published products without Shopify listing\nUPDATE products\nSET shopify_sync_enabled = true\nWHERE status = 'published'\n\
+  \  AND shopify_product_id IS NULL;\n\nThen call:\nPOST /functions/v1/unified-sync\nBody: { \"mode\": \"push\", \"scope\"\
+  : \"all\" }\n\nThe fixed `pushProduct()` will create new Shopify products for these and store the IDs back in Supabase.\n\
+  \n---"
+remaining_gaps_from_marketplace_sync_spec: '| Gap | Priority | Status |
+
+  |-----|----------|--------|
+
+  | Cross-channel stock propagation on webhook events | P0 | NOT BUILT -- inventory-reconcile handles scheduled, not real-time
+  |
+
+  | Idempotent order processing (dedup) | P0 | NOT BUILT -- shopify-webhook-handler has no order dedup |
+
+  | ML product sync | P1 | NOT BUILT -- meli OAuth works but no listing functions |
+
+  | Auto token refresh cron | P2 | FUNCTION EXISTS -- needs pg_cron schedule |
+
+  | Bling webhook hard auth | P2 | NOT FIXED -- still soft-warns on invalid secret |
+
+  | Order cancel/refund stock restore | P3 | NOT BUILT -- no handlers for orders/cancelled or refunds/create |
+
+
+  ---'
+verification_checklist:
+- '[x] unified-sync push sends variant ID on update'
+- '[x] unified-sync push skips images on update'
+- '[x] unified-sync has 429 retry with Retry-After backoff'
+- '[x] sync-shopify-product sends variant ID on update'
+- '[x] sync-shopify-product skips images on update'
+- '[ ] Run inventory-reconcile dry_run to confirm stock state'
+- '[ ] Run unified-sync push to create missing Shopify listings'
+- '[ ] Schedule inventory-reconcile via pg_cron'
+- '[ ] Schedule token-auto-refresh via pg_cron'
