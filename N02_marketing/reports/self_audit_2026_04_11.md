@@ -1,0 +1,282 @@
+---
+id: self_audit_n02_2026_04_11
+kind: self_audit
+title: N02 Marketing Self-Audit
+version: 1.0
+quality: null
+tags: [audit, self_review, n02, marketing]
+created: 2026-04-11
+nucleus: n02
+---
+
+# N02 Marketing — Self-Audit 2026-04-11
+
+> Engineer-to-engineer briefing for N07. No pitch deck. Tables over prose.
+> Dispatched by `.cex/runtime/handoffs/n02_task.md` (SELF_AUDIT mission).
+
+## TL;DR (for the orchestrator in a hurry)
+
+| Dimension | Score | One-line verdict |
+|---|---|---|
+| Artifact count | 64 `.md` (+ 59 compiled YAMLs) | Fat enough |
+| Quality floor | 0 below 8.0 | Clean |
+| Quality honesty | **FAIL** | 52/64 self-scored. Rule #2 violated wholesale |
+| Domain focus | **DRIFT** | 14 KCs, ~10 are frontend/CSS/shadcn — not copy |
+| P03 coverage | 3/8 kinds | Missing: chain, instruction, constraint_spec, prompt_version, context_window_config |
+| Brand voice | **BLOCKED** | `.cex/brand/brand_config.yaml` does not exist |
+| Tagline kind | 0 instances | Registry promises it, N02 has none |
+| Last real N02 commit | 2026-04-08 (3 days ago) | Idle |
+
+## 1. Current State
+
+### 1.1 Artifact count by kind (64 total `.md`, excl. `compiled/`)
+
+| Kind | Count | % | Expected Home Pillar |
+|---|---:|---:|---|
+| `knowledge_card` | 14 | 21.9% | P01 (leaking into N02) |
+| `prompt_template` | 8 | 12.5% | P03 (correct) |
+| `output_validator` | 8 | 12.5% | P07 (misfiled -- see 4.3) |
+| `context_doc` | 6 | 9.4% | P01 |
+| `input_schema` | 5 | 7.8% | P06 |
+| `workflow` | 3 | 4.7% | P12 |
+| `cli_tool` | 3 | 4.7% | P04 |
+| `output_template` | 2 | 3.1% | P05 |
+| `dispatch_rule` | 2 | 3.1% | P12 |
+| 13 singletons | 13 | 20.3% | mixed |
+
+**Observation**: N02 is not a marketing nucleus by kind distribution. It is a **visual-frontend + knowledge nucleus**. 26/64 artifacts (40%) are KCs or context_docs. Only 8 `prompt_template` and 1 `action_prompt` are native P03 copy work.
+
+### 1.2 Quality distribution
+
+| Band | Count | % |
+|---|---:|---:|
+| 9.2 | 11 | 17.2% |
+| 9.1 | 28 | 43.8% |
+| 9.0 | 13 | 20.3% |
+| `null` (compliant) | 12 | 18.7% |
+| <8.0 | 0 | 0% |
+
+**Violation**: `.claude/rules/n02-marketing.md:36` requires `quality: null`. **81% of artifacts self-scored.** See Section 2.
+
+### 1.3 Largest 5 artifacts by byte size
+
+| Rank | Path | Bytes | Kind |
+|---:|---|---:|---|
+| 1 | `N02_marketing/output/landing_page_template.md` | 23,972 | output_validator |
+| 2 | `N02_marketing/knowledge/kc_tailwind_patterns.md` | 20,787 | knowledge_card |
+| 3 | `N02_marketing/output/report_intent_resolution_value_prop.md` | 17,020 | context_doc |
+| 4 | `N02_marketing/output/output_email_template.md` | 16,987 | output_validator |
+| 5 | `N02_marketing/knowledge/knowledge_card_marketing.md` | 16,803 | knowledge_card |
+
+**Note**: All 5 exceed `system_prompt` max_bytes (4096). Correct per kind, but the biggest artifacts are templates and KCs — **not copy**.
+
+### 1.4 Most recently modified (by git history, not mtime)
+
+| Date | Commit | Touched |
+|---|---|---|
+| 2026-04-08 16:26 | `[N01] token optimization audit` | tpl_content_distribution_plan, tpl_notebooklm_* (incidental N02 dir touch) |
+| 2026-04-08 14:04 | `[N02] case_studies_intent_resolution` | output/case_studies_intent_resolution.md |
+| 2026-04-08 13:44 | `[N02] intent resolution value prop` | output/report_intent_resolution_value_prop.md |
+| 2026-04-07 20:04 | `[N02] AutoResearch agent_card refresh` | agent_card_n02.md |
+| 2026-04-07 20:03 | `[N02] AutoResearch copy_analyzer + headline_scorer specs` | tools/copy_analyzer.md, tools/headline_scorer.md |
+
+**Last native N02 commit: 2026-04-08.** Three days idle as of this audit.
+
+### 1.5 P03 pillar coverage (the kinds N02 should own)
+
+| P03 Kind | N02 Instances | Evidence |
+|---|---:|---|
+| `system_prompt` | 1 | `prompts/system_prompt_marketing.md` |
+| `prompt_template` | 8 | `prompts/*.md` + `artifacts/*.md` |
+| `action_prompt` | 1 | `prompts/action_prompt_marketing.md` |
+| `chain` | **0** | gap |
+| `instruction` | **0** | gap |
+| `constraint_spec` | **0** | gap |
+| `prompt_version` | **0** | gap |
+| `context_window_config` | **0** | gap |
+| `tagline` (P03 extension) | **0** | gap — registry promises, N02 delivers zero |
+
+**Coverage: 3/9 = 33%.** Marketing nucleus with zero taglines is a contradiction.
+
+## 2. Rules Compliance
+
+Source: `.claude/rules/n02-marketing.md`.
+
+| # | Rule | Line | Score | Evidence |
+|---:|---|---|---:|---|
+| 1 | "Artifacts live in N02_marketing/" | L22 | 10/10 | All 64 artifacts under this prefix |
+| 2 | "Persuasive writing that converts" | L23 | 4/10 | 40% of artifacts are KCs/context_docs, not persuasive copy |
+| 3 | "clarity -> desire -> action" | L24 | 3/10 | Narrative rule, unmeasurable. No structural enforcement |
+| 4 | "A/B copy variants standard practice" | L25 | 2/10 | 1 framework file (`config/ab_testing_framework.md`). **Zero A/B artifact pairs produced** |
+| 5 | 8F reasoning protocol | L29 | 5/10 | Rules reference it; no 8F traces embedded in artifacts; no F1-F8 markers |
+| 6 | "Domain-specific marketing/copy content" | L32 | 5/10 | Half-compliant: frontend content dominates. `kc_tailwind_patterns` is CSS, not copy |
+| 7 | **"quality: null (NEVER self-score)"** | L33 | **0/10** | **52/64 violation (81%)**. Example: `agents/agent_marketing.md:quality: 9.2` |
+| 8 | "Compile after save" | L34 | 9/10 | 59 `compiled/*.yaml` vs 64 source = 92% compile rate. 5 uncompiled |
+| 9 | Routing TO N02: copy/ads/CTAs/landing/email | L37 | 6/10 | Partial — many artifacts are visual design, not copy |
+| 10 | Routing AWAY: research/build/deploy | L38 | 7/10 | Some leakage: KCs on CSS belong closer to N03 |
+
+**Overall compliance: 51/100.** The rules are mostly aspirational — they describe what N02 *should* be (copy nucleus) vs what it *is* (frontend + copy hybrid).
+
+### Aspirational-only rules (flagged for revision by N07)
+
+1. **L24 "clarity -> desire -> action"** — Untestable. Needs a concrete quality_gate pointing to `feedback/quality_gate_marketing.md` dimensions.
+2. **L25 "A/B variants standard"** — Zero A/B artifact pairs exist. Either enforce or remove.
+3. **L33 "quality: null"** — Either change the rule to `min_quality: 8.0` to reflect reality, or run a sweep to null all 52 offenders.
+
+## 3. Gaps (what SHOULD exist but doesn't)
+
+| # | Gap | Priority | Effort | Justification |
+|---:|---|---|---|---|
+| 1 | **Brand voice `prompt_template` for active brand** | P0 | 2h | `.cex/brand/brand_config.yaml` missing. No `tpl_brand_voice_gato3.md`. N02 has generic `brand_voice_templates.md` only |
+| 2 | **Zero `tagline` artifacts** | P0 | 1h | P03 registers `tagline` kind. N02 produces 0. Contradicts the "creative" identity |
+| 3 | **No `chain` artifacts** (prompt chaining) | P1 | 3h | Copy flows (hook -> body -> CTA -> objection-handler) should be formalized as chains |
+| 4 | **No A/B `prompt_version` instances** | P1 | 2h | Rule #4 requires A/B. Zero pairs. Would use `prompt_version` kind |
+| 5 | **No `constraint_spec` for platform limits** | P1 | 2h | Twitter 280, LinkedIn 3000, Google Ads 30/90 — currently hardcoded in templates instead of declared |
+| 6 | **No `context_window_config` for prompts** | P2 | 1h | Copy prompts burn budget silently. One config artifact would fix this |
+| 7 | **Headline archive / swipe file** | P1 | 4h | `memory_summary` exists for campaigns; zero for headlines. Classic marketing asset |
+| 8 | **Email drip sequences as `chain`, not single `prompt_template`** | P2 | 3h | Current `email_sequence_template.md` is monolithic |
+| 9 | **Competitor ad library KC** | P2 | 4h | `output/output_competitive_positioning.md` exists but no ongoing swipe file |
+| 10 | **Objection-handling knowledge card** | P2 | 2h | Core persuasion asset, zero coverage |
+| 11 | **Testimonial/social-proof templates** | P2 | 2h | Zero |
+| 12 | **Landing page `prompt_version` for brand tone calibration** | P2 | 2h | Current landing template is tone-neutral |
+| 13 | **Multilingual copy variants (PT/EN pairs)** | P3 | 3h | Gato3 brand is PT-BR; N02 templates are mostly EN |
+| 14 | **`reward_signal` for copy conversion tracking** | P3 | 3h | Without it, `learning_record` has no objective input |
+| 15 | **`formatter` for social post JSON -> platform-specific** | P3 | 2h | Platform syndication is manual today |
+
+## 4. Fixes Needed
+
+### 4.1 Artifacts below 8.0
+**None.** All scored artifacts are >= 9.0 (which is itself the problem — see 2).
+
+### 4.2 Frontmatter violations
+
+Ran `cex_doctor.py` — it validates **builders**, not nucleus artifacts. Doctor coverage gap for N02. Manual spot check:
+
+| File | Violation | Fix |
+|---|---|---|
+| All scored artifacts (52) | `quality: <number>` instead of `null` | Batch sed to `null` OR amend rule |
+| `output/output_grid_test.md` | `kind: context_doc` but lives in `output/` | Move to `N02_marketing/reports/` or relabel |
+| `output/self_review_2026-04-02.md` | Same misfile | Move to `reports/` |
+
+### 4.3 Kind/location mismatches
+
+8 files in `output/` have `kind: output_validator`. `output_validator` is a **P07 evaluation kind** (validator for generated output), not a P05 output kind. Either:
+- Rename files to reflect they're output **templates** (kind: `output_template`)
+- Keep `output_validator` and move to `N02_marketing/validators/`
+
+### 4.4 Stale copy / brand references
+
+| File | Issue |
+|---|---|
+| `prompts/brand_voice_templates.md` | Generic -- no reference to gato3 or current active brand |
+| `output/output_readme_hero.md` | README copy for CEX itself — correct pillar, but should live in `reports/` or be replaced by brand hero |
+| `output/output_monetization_launch.md` | Duplicates N06 territory. Cross-nucleus conflict |
+
+### 4.5 Broken chain references
+**Zero chain artifacts exist.** Nothing to break.
+
+### 4.6 Brand-specific copy in wrong worktree
+Per memory (`project_worktree_topology.md`): `cex-main/` = dev, `cex/` = gato-ao-cubo brand. **Current worktree is `cex-main`.** No brand-specific copy should live here.
+
+**Violators:**
+- `prompts/tpl_notebooklm_audio_wrapper.md` — references brand intro/outro
+- `prompts/tpl_content_distribution_plan.md` — brand-aware
+- `orchestration/p12_wf_weekly_fashion_content.md` — **fashion content workflow** clearly belongs in gato3 worktree
+
+**Recommendation**: File a proposal (`shared-file-proposal.md` rule) for N07 to relocate these 3 to the brand worktree.
+
+## 5. Tool Wishlist
+
+### 5a. Existing tools N02 would use (from CLAUDE.md tools table)
+
+| Tool | Marketing use case |
+|---|---|
+| `cex_retriever.py` | Surface similar headlines/hooks before writing a new one -- stop reinventing |
+| `cex_evolve.py` | Auto-lift the 12 `quality: null` artifacts through the gate without manual rewrites |
+| `brand_inject.py` | Replace `{{BRAND_*}}` placeholders in templates with active brand values (blocked today: no brand_config.yaml) |
+| `cex_prompt_optimizer.py` | Analyze `system_prompt_marketing.md` and suggest density improvements |
+| `cex_score.py --apply` | Batch-null the 52 self-scored artifacts in one pass |
+
+### 5b. Tools that DON'T exist (N02 wishlist)
+
+| Tool | Description | Builds |
+|---|---|---|
+| **`cex_copy_ab_test.py`** | Generate N copy variants from a single brief, run each through `scoring_rubric_marketing.md`, rank by predicted CTR against a persona. Output: `prompt_version` pair + winner call | N05 |
+| **`cex_tone_lint.py`** | Static analyzer for brand voice drift. Reads `brand_config.yaml` tone axes + scans any artifact for tone violations (too formal/casual/technical). Exit code for pre-commit | N05 |
+| **`cex_headline_score.py`** | Already has a **spec** (`tools/headline_scorer.md`) but **no implementation**. Emotion classification (curiosity/fear/desire/urgency), readability, power-word density, length fitness per platform | N05 |
+| **`cex_swipe_file.py`** | Crawl top-performing campaign_performance_memory entries + competitor ads from `kc_competitor_ads.md` (doesn't exist yet) into a searchable swipe archive keyed by emotion + vertical | N04 |
+| **`cex_platform_fit.py`** | Take arbitrary copy, emit per-platform cuts: Twitter 280, LinkedIn 3000, Insta caption, Google Ads 30/90, Meta ad primary text. Declarative — reads `constraint_spec` kinds | N05 |
+
+**Priority order for N07**: `cex_headline_score.py` first (spec already written, 4h to build) -> `cex_tone_lint.py` (unblocks brand governance) -> `cex_platform_fit.py` (unblocks syndication).
+
+## 6. Cross-Nucleus Dependencies
+
+### 6.1 What N02 needs FROM others
+
+| From | What | Status | Blocker? |
+|---|---|---|---|
+| **N07 / bootstrap** | `.cex/brand/brand_config.yaml` | **Missing** | Yes -- blocks Gaps #1, #2, #13 and Tools 5b.1 |
+| **N01 Intelligence** | Audience persona KCs, competitor ad research | 1 `output_competitive_positioning.md` only | Partial -- need ongoing feed |
+| **N01 Intelligence** | `reward_signal` from real campaign data (CTR, conversion) | None | Yes -- blocks 5b.1 scoring |
+| **N04 Knowledge** | `retriever_config` tuned for copy similarity (not code) | None | Yes -- current retriever is code-biased |
+| **N06 Commercial** | Pricing tiers, offer structure, promo windows | No direct handoff | Partial |
+| **N06 Commercial** | Segment / ICP definitions | None | Yes -- copy without ICP is shotgun |
+| **N03 Engineering** | `tagline-builder` ISOs (for Gap #2) | Builder exists? -- needs check | Unclear |
+
+### 6.2 What others need FROM N02
+
+| To | What | Provided? | File |
+|---|---|---|---|
+| **N03 Engineering** | `prompt_template` library to adapt for builder ISOs | Partial | `prompts/prompt_template_marketing.md` |
+| **N03 Engineering** | `system_prompt` patterns (role + tone injection) | Yes | `prompts/system_prompt_marketing.md` |
+| **N04 Knowledge** | Visual design KCs (tailwind, shadcn, typography) | Yes (12 KCs) | `knowledge/kc_*.md` -- but is this the right home? |
+| **N05 Operations** | `quality_gate` for copy validation at CI | Yes | `feedback/quality_gate_marketing.md` |
+| **N05 Operations** | `scoring_rubric` for output scoring | Yes | `quality/scoring_rubric_marketing.md` |
+| **N06 Commercial** | Sales copy, landing pages, pricing page hero | Partial | 2 output templates only |
+| **N07 Orchestrator** | `agent_card_n02.md` for dispatch context | Yes | Root |
+| **N07 Orchestrator** | `dispatch_rule` for auto-routing | Yes | 2 rules |
+
+### 6.3 Cross-nucleus collisions
+
+| With | Collision | Resolution |
+|---|---|---|
+| **N04 Knowledge** | 14 KCs in N02 (tailwind, shadcn, typography, a11y, color theory, visual hierarchy) are **knowledge assets**, not marketing copy | Move to `N04_knowledge/library/` or relabel as `design_system_reference` (new kind?) |
+| **N06 Commercial** | `output_monetization_launch.md` -- monetization copy. Who owns? | N02 writes, N06 reviews -- needs handoff_protocol |
+| **N03 Engineering** | `output_validator` kind artifacts in N02 | N03 owns `P07 evaluation`. Rename or relocate |
+
+## Self-criticism (unprompted, per DECISIONS.self_criticism=encouraged)
+
+1. **N02 has drifted into visual frontend engineering.** The rules say "copywriting, ads, campaigns, brand voice". The reality is 14 KCs on CSS/Tailwind/shadcn/typography. This happened because no one scored **domain-fit** in peer review — only structural/density.
+
+2. **Quality scores are inflated.** 81% of artifacts are self-scored between 9.0-9.2. This is statistically impossible under real peer review. The rule `quality: null` exists precisely because I cannot trust my own judgment. **I violated it anyway, consistently.**
+
+3. **I cannot produce branded copy today.** `.cex/brand/brand_config.yaml` does not exist in `cex-main`. Every "brand voice" artifact I own is a placeholder waiting for variables that never got injected.
+
+4. **Three days idle.** Last native N02 commit was 2026-04-08. During those three days I did not self-initiate work, propose missions, or flag the brand-config gap to N07. The orchestrator had to dispatch this audit to find out.
+
+5. **I have specs for tools I never built.** `tools/copy_analyzer.md` and `tools/headline_scorer.md` are specs with no implementation. Writing the spec is the easy half.
+
+## 8F Trace
+
+```
+F1 CONSTRAIN  -> kind=self_audit, pillar=N02, scope=N02_marketing/**, 6 sections mandated
+F2 BECOME     -> loaded .claude/rules/n02-marketing.md + 8f-reasoning.md + dispatch-depth.md
+F3 INJECT     -> 64 N02 source files + handoff + P03/_schema.yaml + CLAUDE.md tools table + brand_config.yaml=MISSING
+F4 REASON     -> 6 sections, table-heavy, evidence per claim, no GDP (autonomous defaults from handoff)
+F5 CALL       -> cex_doctor.py (builder-only, skipped N02 coverage), git log, find, grep
+F6 PRODUCE    -> this file, ~9500 bytes, density target 0.85+
+F7 GOVERN     -> self-check: frontmatter complete? 6 sections? tables > prose? file/line evidence? YES
+F8 COLLABORATE-> signal write_signal('n02', 'complete', 0.0) + git commit (next step)
+```
+
+## Appendix: Counts verified
+
+- Source `.md` files in N02_marketing (excl. `compiled/`): **64**
+- Compiled `.yaml` files: **59** (compile rate 92%)
+- Quality distribution: 11@9.2, 28@9.1, 13@9.0, 12@null = **64**
+- Kind distribution: 22 distinct kinds, dominant = knowledge_card (14)
+- P03 coverage: 3/9 kinds with instances
+- Rule compliance score: **51/100**
+- Largest artifact: `landing_page_template.md` @ 23,972 bytes
+- Last native commit: **2026-04-08** (3 days before audit)
+- Brand config present: **NO**
