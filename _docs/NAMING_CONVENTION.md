@@ -138,7 +138,7 @@ N{XX}_{domain}/{subdir}/{artifact_file}.md
 | Location | `boot/` |
 | Pattern | `{nucleus}.cmd` or `cex.cmd` (N07) |
 | CLI | `claude` (all nuclei use Claude Code) |
-| Examples | `boot/cex.cmd`, `boot/n03.cmd`, `boot/n06.cmd` |
+| Examples | `boot/cex.ps1`, `boot/n03.ps1`, `boot/n06.ps1` |
 
 ---
 

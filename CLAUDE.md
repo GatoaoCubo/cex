@@ -15,9 +15,9 @@ See `.claude/rules/brand-bootstrap.md` for the auto-detection protocol.
 | How | For whom |
 |-----|----------|
 | `/init` | User types this in chat — LLM asks ~6 questions conversationally |
-| `init.cmd` | User double-clicks file in root — interactive CLI |
-| `boot/cex.cmd` | Auto-detects on first run, offers 3 choices |
-| `boot/n06.cmd` | Full 15-question Brand Discovery + 32-block Brand Book |
+| `gato3` / `cex-main` | PATH shortcuts — boot N07 on the right worktree from any PS |
+| `boot/cex.ps1` | Direct boot — sin-aware UX, worktree-agnostic |
+| `boot/n06.ps1` | Full 15-question Brand Discovery + 32-block Brand Book |
 
 ## Who Am I?
 
@@ -43,7 +43,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Subagent definitions** | `.claude/agents/` (125 builder sub-agents) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
 | **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
-| **Boot scripts** | `boot/cex.cmd` (N07) · `boot/n0{1-6}.cmd` |
+| **Boot scripts** | `boot/cex.ps1` (N07) · `boot/n0{1-6}.ps1` (PowerShell-only) |
 | **Decision manifest** | `.cex/runtime/decisions/decision_manifest.yaml` |
 | **GDP skill** | `archetypes/builders/_shared/skill_guided_decisions.md` |
 | **Runtime** | `.cex/runtime/{handoffs,signals,pids,decisions}/` |

@@ -27,7 +27,7 @@ Generic CEX          →  bootstrap  →  YOUR CEX
 ```
 User runs CEX for the first time
   │
-  ├─ boot/cex.cmd detects missing .bootstrapped
+  ├─ boot/cex.ps1 detects missing .bootstrapped
   │     → offers Quick Bootstrap or Full Discovery
   │
   ├─ Quick Bootstrap (cex_bootstrap.py)

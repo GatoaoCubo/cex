@@ -274,7 +274,7 @@ def inject_brand(template: str, brand_config: dict) -> str:
 | 1 | N06/agents/agent_commercial.md | P02 | REWRITE -> Brand Architect + Revenue Engineer |
 | 2 | N06/prompts/system_prompt_commercial.md | P03 | REWRITE -> brand-first, dual-role |
 | 3 | N06/architecture/agent_card_commercial.md | P08 | REWRITE -> brand propagation architecture |
-| 4 | boot/n06.cmd | P09 | REWRITE -> Brand Architect identity |
+| 4 | boot/n06.ps1 | P09 | REWRITE -> Brand Architect identity |
 | 5 | .mcp-n06.json | P09 | REWRITE -> add stripe/hotmart MCPs |
 | 6 | _seeds/seed_n06.txt | P09 | REWRITE -> brand + monetization seeds |
 
