@@ -10,8 +10,16 @@ param(
     [switch]$interactive,
     [int]$pollSeconds = 30,
     [int]$maxMinutes = 45,
-    [int]$maxSlots = 6
+    [int]$maxSlots = 6,
+    [ValidateSet('claude','gemini','codex')]
+    [string]$cli = "claude"
 )
+
+# Multi-CLI config:
+#   claude -> boot/n0X.ps1       + handoff copy .cex/runtime/handoffs/n0X_task.md
+#   gemini -> boot/n0X_gemini.ps1 + handoff copy .cex/runtime/handoffs/n0X_task_gemini.md
+#   codex  -> boot/n0X_codex.ps1  + handoff copy .cex/runtime/handoffs/n0X_task_codex.md
+$cliSuffix = if ($cli -eq "claude") { "" } else { "_$cli" }
 
 Add-Type @"
 using System;
@@ -109,28 +117,20 @@ function Launch-Nucleus($handoff) {
     $pos = $gridPos[$nucleus]
     if (-not $pos) { $pos = @{x=0; y=0} }
 
-    # Prefer PS1 (sin-aware UX) over CMD (legacy)
-    $bootPs1 = "$root\boot\$nucleus.ps1"
-    $bootCmd = "$root\boot\$nucleus.cmd"
+    # Per-CLI boot script: claude -> n0X.ps1, gemini -> n0X_gemini.ps1, codex -> n0X_codex.ps1
+    $bootPs1 = "$root\boot\${nucleus}${cliSuffix}.ps1"
     if (Test-Path $bootPs1) {
         $bootScript = $bootPs1
         $bootType = "ps1"
-    } elseif (Test-Path $bootCmd) {
-        $bootScript = $bootCmd
-        $bootType = "cmd"
     } else {
-        Write-Output "[$upper] SKIP: no boot script"
+        Write-Output "[$upper] SKIP: no boot script ($bootPs1)"
         return $null
     }
 
-    # Sin identity log (read from sins.yaml if available)
-    $sinFile = "$root\.cex\config\nucleus_sins.yaml"
-    if (Test-Path $sinFile) {
-        Write-Output "[$upper] Sin-aware boot ($bootType)"
-    }
+    Write-Output "[$upper] Boot via $cli ($bootType)"
 
-    # Write per-nucleus handoff pointer so boot script picks it up
-    $nucleusHandoff = "$handoffDir\${nucleus}_task.md"
+    # Write per-nucleus + per-CLI handoff pointer so boot script picks it up
+    $nucleusHandoff = "$handoffDir\${nucleus}_task${cliSuffix}.md"
     Copy-Item $handoff.FullName -Destination $nucleusHandoff -Force
 
     # Set env var so boot scripts skip their own WindowSize override
@@ -139,11 +139,7 @@ function Launch-Nucleus($handoff) {
     $env:CEX_GRID_H = "$gH"
 
     # ALWAYS boot interactive -- task comes from handoff, never CLI args (avoids nested-quote hell)
-    if ($bootType -eq "ps1") {
-        $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bootScript`"" -WorkingDirectory $root -PassThru
-    } else {
-        $proc = Start-Process cmd -ArgumentList "/k `"$bootScript`"" -WorkingDirectory $root -PassThru
-    }
+    $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bootScript`"" -WorkingDirectory $root -PassThru
     # Retry loop: poll for window handle (up to 5s, 500ms intervals)
     if ($proc) {
         $hwnd = [IntPtr]::Zero
@@ -161,7 +157,7 @@ function Launch-Nucleus($handoff) {
         # PID format: {pid} {nucleus} {cli} {session_id} {timestamp}
         $sessId = if ($env:CEX_SESSION_ID) { $env:CEX_SESSION_ID } else { "s$PID" }
         $ts = Get-Date -Format "yyyy-MM-ddTHH:mm:ss"
-        "$($proc.Id) $nucleus claude $sessId $ts" | Add-Content $pidFile
+        "$($proc.Id) $nucleus $cli $sessId $ts" | Add-Content $pidFile
         Write-Output "[$upper] Spawned PID:$($proc.Id) handoff:$($handoff.Name)"
     }
     return $proc

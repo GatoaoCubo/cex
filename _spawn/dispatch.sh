@@ -45,8 +45,18 @@ case "$MODE" in
         ;;
     grid)
         MISSION="${1:-DEFAULT}"
-        echo "[DISPATCH] Grid: $MISSION"
-        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -interactive
+        echo "[DISPATCH] Grid: $MISSION (cli=claude)"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -cli claude -interactive
+        ;;
+    grid-gemini)
+        MISSION="${1:-DEFAULT}"
+        echo "[DISPATCH] Grid: $MISSION (cli=gemini)"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -cli gemini -interactive
+        ;;
+    grid-codex)
+        MISSION="${1:-DEFAULT}"
+        echo "[DISPATCH] Grid: $MISSION (cli=codex)"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -cli codex -interactive
         ;;
     status)
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_monitor.ps1
@@ -116,16 +126,18 @@ case "$MODE" in
         echo "[DONE] Ollama Grid complete: $MISSION"
         ;;
     *)
-        echo "Usage: bash _spawn/dispatch.sh {solo|grid|ollama|ollama-grid|status|stop} [args]"
+        echo "Usage: bash _spawn/dispatch.sh {solo|grid|grid-gemini|grid-codex|ollama|ollama-grid|status|stop} [args]"
         echo ""
-        echo "  solo n03 \"task\"       Spawn 1 Claude Code nucleus"
-        echo "  grid MISSION          Spawn up to 6 Claude Code nuclei"
-        echo "  ollama n03 qwen3:8b   Run 1 nucleus via Ollama (free)"
-        echo "  ollama-grid MISSION qwen3:8b  Run all nuclei via Ollama (free)"
-        echo "  status                Monitor running nuclei"
-        echo "  stop                  Stop MY session's nuclei only"
-        echo "  stop n03              Stop only N03"
-        echo "  stop --all            Stop ALL CEX nuclei (DANGEROUS)"
-        echo "  stop --dry-run        Preview what would be killed"
+        echo "  solo n03 \"task\"           Spawn 1 Claude Code nucleus"
+        echo "  grid MISSION              Spawn up to 6 Claude Code nuclei"
+        echo "  grid-gemini MISSION       Spawn up to 6 Gemini CLI nuclei"
+        echo "  grid-codex MISSION        Spawn up to 6 Codex CLI nuclei"
+        echo "  ollama n03 qwen3:8b       Run 1 nucleus via Ollama (free)"
+        echo "  ollama-grid MISSION ...   Run all nuclei via Ollama (free)"
+        echo "  status                    Monitor running nuclei"
+        echo "  stop                      Stop MY session's nuclei only"
+        echo "  stop n03                  Stop only N03"
+        echo "  stop --all                Stop ALL CEX nuclei (DANGEROUS)"
+        echo "  stop --dry-run            Preview what would be killed"
         ;;
 esac
