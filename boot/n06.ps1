@@ -4,7 +4,8 @@
 # Sin: Strategic Greed (Strategic Greed)
 
 # --- UX: Window title with mission + sin + status ---
-$cexRoot = "C:\Users\PC\Documents\GitHub\cex"
+# Auto-detect root from script location (worktree-agnostic)
+$cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n06"
 $sinName = "Strategic Greed"
 $modelShort = "claude-opus-4-6" -replace "claude-", ""
@@ -90,8 +91,8 @@ $cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermi
 $cliArgs += "--append-system-prompt", "N06_commercial/agent_card_n06.md"
 $cliArgs += "--append-system-prompt", ".cex/config/context_self_select.md"
 $cliArgs += "--append-system-prompt", $sysPrompt
-$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex\.mcp-n06.json"
-$args += "--settings", "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n06.json"
+$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex-main\.mcp-n06.json"
+$args += "--settings", "C:\Users\PC\Documents\GitHub\cex-main\.claude/nucleus-settings/n06.json"
 $cliArgs += $initialMsg
 
 Set-CexTitle "RUNNING"

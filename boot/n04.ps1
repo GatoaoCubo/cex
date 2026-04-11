@@ -4,7 +4,8 @@
 # Sin: Knowledge Gluttony (Knowledge Gluttony)
 
 # --- UX: Window title with mission + sin + status ---
-$cexRoot = "C:\Users\PC\Documents\GitHub\cex"
+# Auto-detect root from script location (worktree-agnostic)
+$cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n04"
 $sinName = "Knowledge Gluttony"
 $modelShort = "claude-opus-4-6" -replace "claude-", ""
@@ -90,8 +91,8 @@ $cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermi
 $cliArgs += "--append-system-prompt", "N04_knowledge/agent_card_n04.md"
 $cliArgs += "--append-system-prompt", ".cex/config/context_self_select.md"
 $cliArgs += "--append-system-prompt", $sysPrompt
-$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex\.mcp-n04.json"
-$args += "--settings", "C:\Users\PC\Documents\GitHub\cex\.claude/nucleus-settings/n04.json"
+$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex-main\.mcp-n04.json"
+$args += "--settings", "C:\Users\PC\Documents\GitHub\cex-main\.claude/nucleus-settings/n04.json"
 $cliArgs += $initialMsg
 
 Set-CexTitle "RUNNING"
