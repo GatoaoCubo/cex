@@ -1,0 +1,208 @@
+id: xref_product_content
+kind: knowledge_card
+title: Product-Content Cross-Reference Map -- GATO3
+version: 1.0.0
+quality: null
+tags:
+- xref
+- product
+- content
+- mapping
+- editorial
+- gato3
+pillar: P01
+nucleus: N04
+created: 2026-04-10
+mission: CONTENT_PIPELINE
+source: gato-cubo-commerce/scripts/current_catalog.json + supabase migrations
+hero_products_gato3_branded: '| Product | Price | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Donut GATO3 (cama tunel 3 em 1) | R$ 599 | "Ciencia do sono felino", "Review: Donut GATO3 apos 30 dias", "Como escolher
+  a cama ideal" | Before/after (gato dormindo), unboxing reel, "3 modos de usar" carrossel | Inverno: "Cama mais quentinha",
+  Dia das Maes: kit | "R$ 599 na cama e o gato dorme na caixa" |
+
+  | Cama Suspensa de Janela (CB2204) | R$ 30.97 | "7 beneficios da cama de janela", "Ambientacao vertical: guia completo"
+  | Gato no mirante, timelapse (gato observando passaros), POV do gato | Verao: "Brisa na janela", Inverno: "Sol de inverno"
+  | "Melhor TV do gato: a janela" |
+
+  | Varinha Interativa com Ventosa | -- | "Brincadeiras de caca: 10 formas", "Instinto predatorio: como estimular" | Reel
+  gato brincando, slow-motion caca, "antes vs depois de 15 min" | -- | "O gato as 3h da manha querendo brincar" |
+
+  | Tela de Protecao para Pets | -- | "Casa a prova de gato: checklist", "Como instalar tela de protecao" | Passo a passo
+  instalacao, antes/depois, "paz de espirito" | Festas juninas (protecao fogos), mudanca de casa | "O gato testando a tela
+  nova" |'
+camas_e_tocas: '| Product | Price | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Cama Ventosas Feltro | R$ 25.00 | "Tipos de cama felina: qual e a ideal?" | Material close-up, gato dentro | Inverno:
+  refugio quentinho | "Cama nova? Que caixa bonita!" |
+
+  | Toca Feltro Tunel Donut | R$ 45.00 | "Refugios fechados: por que gatos amam tocas" | Gato entrando na toca, peek-a-boo
+  reel | Sao Joao (refugio anti-fogos), Inverno | "Gato no modo: nao me ache" |
+
+  | Tunel Dobravel | R$ 45.00 | "Tuneis e estimulacao: brincadeira ativa" | Reel: gato correndo pelo tunel, velocidade | --
+  | "O barulho do tunel as 2h da manha" |'
+brinquedos_interativos: '| Product | Price | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Bola Inteligente USB | -- | "Brinquedos interativos vs tradicionais", "Estimulacao mental felina" | Reel: 3 modos de diversao,
+  gato perseguindo | -- | "Gato vs tecnologia: quem vence?" |
+
+  | Brinquedo Automatico Corda | -- | "Brincadeiras para quando voce nao esta em casa" | Time-lapse gato sozinho brincando
+  | -- | "O brinquedo que brinca sozinho" |
+
+  | Bola Frisbee 2 em 1 | -- | "Diversao indoor: alternativas para dias de chuva" | Reel: gato jogando frisbee indoor | Inverno:
+  "Dia de chuva, dia de brincar dentro" | "Gato atletico vs gato preguicoso" |
+
+  | Brinquedo Catnip Corda Penas | -- | "Catnip: o que e, como funciona, e seguro?" | Close-up reacao ao catnip, before/after
+  | -- | "O gato no catnip: 10 segundos de loucura" |
+
+  | Laser Interativo | -- | "Laser para gatos: diversao ou frustacao?" | Reel: gato perseguindo laser | -- | "O ponto vermelho
+  que controla o gato" |'
+alimentacao_e_hidratacao: '| Product | Price | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Comedouro Elevado Duplo | -- | "Ergonomia felina: por que a altura importa", "5 comedouros que fazem diferenca" | Infografico:
+  angulo 15 graus, gato comendo confortavel | -- | "Jantar gourmet no comedouro elevado" |
+
+  | Comedouro Giratório 360 | -- | "Acessorios inteligentes para gatos" | Reel: giratório em acao | -- | "Gato girando o comedouro
+  ate a racao cair" |
+
+  | Fonte de Agua Automatica (2L) | -- | "Hidratacao felina: guia completo", "Fonte vs pote: por que gatos preferem agua corrente"
+  | Reel: gato bebendo da fonte, som de agua | Verao: "Hidratacao no calor" | "O gato que so bebe agua da torneira" |
+
+  | Bebedouro Portatil | -- | "Viajando com gato: kit essencial" | Flat-lay kit viagem | Ferias, feriados | "Kit sobrevivencia:
+  passeio com gato" |
+
+  | Comedouro Retratil Portatil | -- | "Alimentacao em viagem: como manter a rotina" | Flat-lay viagem, reel uso | Ferias
+  | -- |'
+tapetes_gelados_refrescantes: '| Product | Sizes | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Tapete Gelado Pet | 40x50, 65x50, 50x90cm | "Tapete gelado: como funciona?", "Review dos 3 tamanhos", "Temperatura ideal
+  para gatos" | Before/after (gato no calor vs no tapete), infografico como funciona | Verao: ESSENCIAL, Primavera: "preparando
+  pro calor" | "Gato quando descobre o tapete gelado" |'
+higiene_e_grooming: '| Product | Price | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Escova Autolimpante | -- | "Guia de higiene felina", "Melhores escovas: comparativo" | Reel: escovacao + quantidade de
+  pelo, satisfying content | Troca de pelagem (outono/primavera) | "A montanha de pelo que sai na escova" |
+
+  | Escova Massageadora Catnip | -- | "Escovacao sem estresse: como transformar higiene em prazer" | Reel: gato ronronando
+  na escova | -- | "Spa day felino" |
+
+  | Rolo Tira Pelos (20 folhas) | -- | "Sobrevivendo aos pelos: guia do tutor" | Before/after roupa, meme visual | Troca de
+  pelagem | "A quantidade de pelo vs o tamanho do gato" |
+
+  | Escova Removedora Pelos | -- | Incluso em comparativo de escovas | Incluso em reel de escovas | -- | -- |'
+transporte_e_passeio: '| Product | Price | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Mochila Capsula Astronauta | -- | "Mochila vs caixa: qual escolher?", "Dessensibilizacao para viagens" | POV do gato na
+  mochila, reel passeio | Ferias, feriados | "Astronauta felino: explorando o mundo" |
+
+  | Caixa Transporte Retratil | -- | "Como levar o gato ao vet sem trauma" | Reel: montagem/desmontagem, gato entrando | --
+  | "A cara do gato quando ve a caixa" |
+
+  | Peitoral Pet (P e M) | -- | "Passeio com gato: guia passo a passo" | Reel: gato de peitoral, first walk | Primavera/verao
+  | "Gato de coleira: modelo ou prisioneiro?" |
+
+  | Assento Carro Pet | R$ 70.63 | "Road trip com gato: checklist" | Flat-lay carro, gato no assento | Ferias, feriados prolongados
+  | "Co-piloto felino" |'
+seguranca: '| Product | Price | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Tela Divisoria Removivel 180x78cm | R$ 35.00 | "Separacao segura: como apresentar dois gatos" | Before/after, instalacao
+  passo a passo | Adocao (campanhas) | "O gato quando descobre que tem vizinho" |
+
+  | Grade Ajustavel 1.80m | -- | "Seguranca em escadas: gatos e bebes" | Instalacao reel | Bebe chegando + gato em casa |
+  -- |
+
+  | Portao Retratil 1.80m | -- | Incluso em guia de seguranca | Incluso em reel seguranca | -- | -- |
+
+  | Meia Antiderrapante Pet | R$ 25.00 | "Pisos escorregadios: riscos para gatos idosos" | Reel: gato de meia (cute overload)
+  | Inverno: "Patinhas quentinhas" | "Gato fashion: colecao inverno" |'
+decorativo_e_lifestyle: '| Product | Price | Blog topics | Instagram angles | Seasonal hooks | Meme potential |
+
+  |---------|-------|-------------|-----------------|----------------|----------------|
+
+  | Estatua Gato Buda | R$ 15.00 | "Decoracao cat-friendly: estilo sem comprometer" | Lifestyle shot, flat-lay decoracao |
+  Natal: presente | "Gato meditando: goals" |
+
+  | Cachepot Gato | R$ 15.00 | Incluso em guia decoracao | Lifestyle shot | Natal, Dia dos Namorados | -- |
+
+  | Espelho Mesa Gatinho + Organizador | -- | "Presentes para tutores de gato" | Flat-lay presentes, unboxing | Dia das Maes,
+  Natal, Namorados | "Ate o espelho e de gato" |
+
+  | Garrafa Termica Inox 320ml | R$ 75.58 | "Acessorios para o tutor: curadoria GATO3" | Lifestyle shot, daily carry | --
+  | "A garrafa que denuncia o gateiro" |
+
+
+  ---'
+content_opportunity_matrix_by_calendar_week: '| Week | Seasonal hook | Hero product | Supporting products | Blog angle |
+
+  |------|-------------|-------------|-------------------|------------|
+
+  | 1 (Apr 15) | Launch | Donut GATO3 | Arranhadores, brinquedos | Estresse felino |
+
+  | 2 (Apr 21) | Tiradentes/Dia Terra | Cama Suspensa | Brinquedos indoor | Enriquecimento ambiental |
+
+  | 3 (Apr 28) | -- | Fonte Automatica | Comedouros | Hidratacao felina |
+
+  | 4 (May 5) | Dia das Maes | Kit GATO3 | Camas, brinquedos, decorativo | Escovacao/higiene |
+
+  | 5 (May 12) | -- | Tapete Gelado | Cama suspensa | Ambientacao vertical |
+
+  | 6 (May 19) | -- | Bola Inteligente | Varinha, laser, automatico | Brincadeiras de caca |
+
+  | 7 (May 26) | -- | Tela Protecao | Grade, rede, portao | Seguranca em casa |
+
+  | 8 (Jun 2) | -- | Mochila Capsula | Caixa, peitoral, assento | Transporte felino |
+
+  | 9 (Jun 9) | Dia dos Namorados | Kit Casal | Camas, comedouros | Rotina e mudancas |
+
+  | 10 (Jun 16) | Inicio Inverno | Donut + Tocas | Feltro, meias, camas | Cuidados no inverno |
+
+  | 11 (Jun 23) | Sao Joao | Toca Feltro | Tela, camas fechadas | Protecao contra fogos |
+
+  | 12 (Jun 30) | -- | Escovas | Rolo, removedora | Higiene felina |
+
+  | 13 (Jul 7) | Dia da Ciencia | Retrospectiva | Top sellers | Ciencia do sono felino |
+
+
+  ---'
+product_category_content_frequency: '| Category | Products | Content pieces (13 weeks) | Avg pieces/product |
+
+  |----------|----------|--------------------------|-------------------|
+
+  | Camas e Tocas | 5 | ~18 | 3.6 |
+
+  | Brinquedos | 6 | ~14 | 2.3 |
+
+  | Alimentacao | 5 | ~8 | 1.6 |
+
+  | Tapetes Gelados | 3 sizes | ~6 | 2.0 |
+
+  | Higiene | 4 | ~6 | 1.5 |
+
+  | Transporte | 4 | ~6 | 1.5 |
+
+  | Seguranca | 4 | ~6 | 1.5 |
+
+  | Decorativo | 4 | ~4 | 1.0 |
+
+  | Total | 35+ | ~68 | 1.9 |
+
+
+  Rule: No single product appears more than 4x in 13 weeks (avoid fatigue).
+
+  Hero products (Donut, Cama Suspensa) get 3-4 appearances. Others get 1-2.'

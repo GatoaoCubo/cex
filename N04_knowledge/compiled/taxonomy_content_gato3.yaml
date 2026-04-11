@@ -1,0 +1,270 @@
+id: taxonomy_content_gato3
+kind: knowledge_card
+title: Content Taxonomy -- GATO3 Content Pipeline
+version: 1.0.0
+quality: null
+tags:
+- taxonomy
+- content
+- editorial
+- instagram
+- blog
+- gato3
+pillar: P01
+nucleus: N04
+created: 2026-04-10
+mission: CONTENT_PIPELINE
+1_content_pillars: '| Pillar | Mix % | Weekly slots | 13-week total | Primary goal |
+
+  |--------|-------|-------------|---------------|-------------|
+
+  | Educativo | 40% | 2 IG + 1 blog | ~26 IG + 13 blog | Build authority, teach cat science |
+
+  | Meme/Humor | 30% | 2 IG | ~26 IG | Engagement, shareability, reach |
+
+  | Produto | 20% | 1 IG + 1 blog | ~13 IG + 13 blog | Conversion, product awareness |
+
+  | Seasonal | 10% | rotativo | ~5 IG | Relevance, trend surfing |
+
+
+  Total output (13 weeks): ~70 Instagram posts + ~26 blog posts = ~96 content pieces.'
+1_1_educativo_40: 'Content that teaches cat science in an accessible, warm tone (Ro''s voice).
+
+
+  | Format | Platform | Frequency | Example topics |
+
+  |--------|----------|-----------|----------------|
+
+  | Carrossel infografico | IG Feed | 1x/week | "5 sinais de estresse no gato", "Linguagem corporal felina" |
+
+  | Reel explicativo | IG Reels | 1x/week | "Por que gatos ronronam?", "Gatos e agua: a verdade" |
+
+  | How-to guide | Blog | 1x/week | "Como apresentar dois gatos", "Enriquecimento ambiental em 7 passos" |
+
+  | Story quiz/enquete | IG Story | 1x/2 weeks | "Voce sabe por que seu gato amassa pao?" |
+
+
+  Content sources: veterinary literature, AAFP guidelines, feline behaviorist studies.
+
+  Brand voice rule: explain the "why" -- science accessible via Ro''s protocols.'
+1_2_meme_humor_30: 'Relatable cat humor that drives shares and saves.
+
+
+  | Format | Platform | Frequency | Example topics |
+
+  |--------|----------|-----------|----------------|
+
+  | Meme feed (image) | IG Feed | 1x/week | "10 coisas que so tutores entendem", "Expectativa vs realidade" |
+
+  | Reel trending audio | IG Reels | 1x/week | POV memes, trending sounds with cat twist |
+
+  | Story engagement | IG Story | 1x/2 weeks | "Marque alguem que faz isso", caption contests |
+
+
+  Content sources: curated + original (never repost third-party memes directly per DP6).
+
+  Brand voice rule: humor is warm, never cruel. No cat shaming. Sofisticado even in memes.'
+1_3_produto_20: 'Product showcases that educate first, sell second.
+
+
+  | Format | Platform | Frequency | Example topics |
+
+  |--------|----------|-----------|----------------|
+
+  | Product showcase | IG Feed | 1x/week | Before/after, unboxing, cat using product |
+
+  | Review detalhado | Blog | 1x/week | "Tapete gelado: vale a pena?", "Donut GATO3: review completo" |
+
+  | Carrossel comparativo | IG Feed | 1x/month | "Cama suspensa vs cama convencional" |
+
+  | Story swipe | IG Story | 1x/week | Quick product highlight with link |
+
+
+  Content sources: product catalog (50+ SKUs), customer testimonials, usage data.
+
+  Brand voice rule: product = means to well-being, never hard sell. Contextualize benefit.'
+1_4_seasonal_lifestyle_10: 'Timely content tied to dates, weather, and trends.
+
+
+  | Format | Platform | Frequency | Example topics |
+
+  |--------|----------|-----------|----------------|
+
+  | Data comemorativa | IG Feed | as needed | Dia do Gato (17 fev), Dia dos Animais (4 out) |
+
+  | Dica sazonal | IG Feed/Story | as needed | "Inverno: como aquecer seu gato", "Verao: hidratacao felina" |
+
+  | Guia sazonal | Blog | 1x/month | "Guia completo: gatos no inverno", "Natal seguro para felinos" |
+
+
+  Key dates in horizon (Apr 15 - Jul 15):
+
+
+  | Date | Event | Content angle |
+
+  |------|-------|---------------|
+
+  | Apr 19 | Dia do Indio / Dia do Exercito | Skip (low relevance) |
+
+  | Apr 21 | Tiradentes (feriado) | "Feriado com gato: atividades indoor" |
+
+  | Apr 22 | Dia da Terra | "Produtos sustentaveis para seu gato" |
+
+  | May 1 | Dia do Trabalho | "Quem trabalha em casa com gato sabe..." (meme) |
+
+  | May 11 | Dia das Maes | "Mae de gato tambem e mae" (emocional + produto kit) |
+
+  | Jun 12 | Dia dos Namorados | "Casal + gato: guia de convivencia" |
+
+  | Jun 24 | Sao Joao | "Festas juninas: como proteger seu gato dos fogos" |
+
+  | Jun 21 | Inicio do inverno | "Guia de inverno felino" (product hook: camas, tocas) |
+
+  | Jul 8 | Dia Nacional da Ciencia | "Ciencia felina: 5 fatos que voce nao sabia" |
+
+
+  ---'
+2_content_formats: ''
+2_1_instagram_feed: '| Format | Specs | When to use |
+
+  |--------|-------|-------------|
+
+  | Single image | 1080x1080px (1:1) or 1080x1350px (4:5) | Product showcase, meme, date comemorativa |
+
+  | Carrossel | Up to 10 slides, 1080x1350px each | Educational infographic, product comparison, listicle |
+
+  | Infografico | 1080x1350px, data-driven visual | Statistics, step-by-step, myth-busting |
+
+
+  Caption limits: up to 2,200 chars. First 125 chars visible before "more". Hook MUST be in first line.'
+2_2_instagram_reels: '| Duration | When to use | Structure |
+
+  |----------|-------------|-----------|
+
+  | 15s | Quick tip, meme, trending audio | Hook (2s) + Content (10s) + CTA (3s) |
+
+  | 30s | How-to, product demo | Hook (3s) + Content (22s) + CTA (5s) |
+
+  | 60s | Tutorial, storytelling | Hook (5s) + Content (45s) + CTA (10s) |
+
+  | 90s | Deep dive, review | Hook (5s) + Content (75s) + CTA (10s) |
+
+
+  Performance rule: 15-30s Reels get highest completion rate. Reserve 60-90s for high-value educational content only.'
+2_3_instagram_stories: '| Format | Engagement tool | When to use |
+
+  |--------|----------------|-------------|
+
+  | Enquete | 2-option poll | Quick opinion, "voce prefere A ou B?" |
+
+  | Quiz | 4-option quiz | Educational test, "qual dessas e mito?" |
+
+  | Countdown | Timer to date | Product launch, seasonal event |
+
+  | Swipe/Link | External link | Blog post promo, product page |
+
+  | Caixa de perguntas | Open-ended | AMA with Ro, "pergunte ao veterinario" |
+
+
+  Story cadence: 3-5 stories per publishing day. Mix: 1 engagement + 1 content + 1 CTA.'
+2_4_blog_posts: '| Format | Word count | Structure | When to use |
+
+  |--------|-----------|-----------|-------------|
+
+  | How-to | 1500-2000 | Intro + Steps + Conclusion + CTA | Teaching a process |
+
+  | Listicle | 800-1200 | Intro + Numbered items + CTA | Curated lists, tips |
+
+  | Deep dive | 2000-3000 | Intro + Sections + Data + Conclusion | Authority pieces, SEO pillars |
+
+  | Quick tip | 500-800 | Problem + Solution + Product mention | Fast answers, long-tail SEO |
+
+
+  SEO rule: every blog post targets 1 primary keyword + 2-3 long-tail variants.
+
+  Internal linking: every post links to at least 2 product pages and 1 other blog post.
+
+
+  ---'
+3_hashtag_strategy: ''
+3_1_brand_hashtags_always_include: '| Tag | Purpose |
+
+  |-----|---------|
+
+  | #gato3 | Primary brand |
+
+  | #gatoaocubo | Brand full name |
+
+  | #bemestarfelino | Category ownership |
+
+  | #dicasdaroGATO3 | Persona-driven (Ro''s tips) |
+
+  | #curadoriagato3 | Product curation positioning |'
+3_2_category_hashtags_per_pillar: '| Pillar | Hashtags (top 10 per category) |
+
+  |--------|-------------------------------|
+
+  | Educativo | #gatofeliz #cuidadoscomgatos #comportamentofelino #saúdefelina #gatosdomesticos #mundofelino #dicasparafelinos
+  #vidadegato #catbehavior #felinelove |
+
+  | Meme/Humor | #memesdegato #coisadegato #gatices #gateirosdobrasil #catmemes #humorfelino #amodemais #gateiro #miau #catlife
+  |
+
+  | Produto | #produtosparagatos #lojadegato #presentefelino #designpet #petdesign #catfurniture #casacomgato #decoracaopet
+  #petlovers #catlovers |
+
+  | Seasonal | Rotate per event: #inverno #natal #verao #feriado + niche tags |'
+3_3_hashtag_rules: '1. Total per post: 20-25 hashtags (Instagram sweet spot 2026)
+
+  2. Mix: 5 brand + 10 category + 5-10 trending/niche
+
+  3. Placement: first comment (not caption) to keep caption clean
+
+  4. Rotation: change 5 trending tags weekly to avoid shadowban patterns
+
+  5. Research cadence: weekly review of hashtag performance via Instagram Insights
+
+
+  ---'
+4_content_product_integration_rules: 'Every content piece has a product integration score (0-3):
+
+
+  | Score | Meaning | When |
+
+  |-------|---------|------|
+
+  | 0 | No product mention | Pure meme, pure education |
+
+  | 1 | Subtle mention | "...uma boa cama como a Donut resolve isso" |
+
+  | 2 | Contextual showcase | Product appears naturally in educational content |
+
+  | 3 | Product-first | Review, unboxing, comparison |
+
+
+  Weekly target: average integration score of 1.2-1.5 across all posts.
+
+  Below 1.0 = not monetizing content. Above 2.0 = too salesy for brand voice.
+
+
+  ---'
+5_audience_segmentation_for_content: '| Segment | % of ICP | Content preference | Best format |
+
+  |---------|----------|-------------------|-------------|
+
+  | Tutor iniciante | 35% | "Como fazer X", basics | How-to blog, carrossel |
+
+  | Tutor experiente | 40% | Deep science, product reviews | Deep dive blog, comparativo |
+
+  | Tutor emocional | 15% | Humor, community, lifestyle | Memes, stories, engagement |
+
+  | Profissional pet | 10% | B2B, trends, data | Blog deep dive, newsletter |
+
+
+  ---'
+6_content_lifecycle: "IDEATION --> DRAFT --> REVIEW --> SCHEDULE --> PUBLISH --> ANALYZE --> ITERATE\n   |           |   \
+  \      |          |            |           |           |\n   |           |         |          |            |           |\
+  \           |\n   Backlog   Writer    Rubric    Calendar     Post       7-day       Update\n   (Notion)  (N02)    (4.0/5.0)\
+  \  (template)  (manual)   metrics     taxonomy\n\nPublish cadence: semi-automated (DP8). Content created in DB, scheduled\
+  \ manually for now.\nReview gate: every piece scores >= 4.0/5.0 on rubric before scheduling (see rubric artifact).\nAnalytics\
+  \ cycle: weekly review of top/bottom 3 posts. Feed insights back to taxonomy."
