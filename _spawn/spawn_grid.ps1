@@ -11,15 +11,24 @@ param(
     [int]$pollSeconds = 30,
     [int]$maxMinutes = 45,
     [int]$maxSlots = 6,
-    [ValidateSet('claude','gemini','codex')]
+    [ValidateSet('claude','gemini','codex','auto')]
     [string]$cli = "claude"
 )
 
-# Multi-CLI config:
-#   claude -> boot/n0X.ps1       + handoff copy .cex/runtime/handoffs/n0X_task.md
+# Multi-CLI config (3 routing levels):
+#   L1 explicit: -cli claude|gemini|codex -- operator override, global for this grid
+#   L2 auto:     -cli auto -- resolver picks per-nucleus from nucleus_models.yaml
+#                              (primary + fallback_chain, binary pre-check)
+#   L3 router:   cex_router.py (not used here; used by cex_mission_runner.py)
+#
+# Per-CLI boot + handoff suffix mapping:
+#   claude -> boot/n0X.ps1        + handoff copy .cex/runtime/handoffs/n0X_task.md
 #   gemini -> boot/n0X_gemini.ps1 + handoff copy .cex/runtime/handoffs/n0X_task_gemini.md
 #   codex  -> boot/n0X_codex.ps1  + handoff copy .cex/runtime/handoffs/n0X_task_codex.md
-$cliSuffix = if ($cli -eq "claude") { "" } else { "_$cli" }
+$globalCli = $cli
+$cliSuffix = if ($cli -eq "claude") { "" }
+             elseif ($cli -eq "auto") { "" }  # placeholder; real suffix resolved per-nucleus
+             else { "_$cli" }
 
 Add-Type @"
 using System;
@@ -110,6 +119,73 @@ function Get-NucleusFromHandoff($filename) {
     return $parts[-1]  # last segment is nucleus name
 }
 
+# Walk process tree recursively from a parent PID, return all descendant PIDs
+# Fix for "wrapper PID pitfall" -- Start-Process -PassThru returns the wrapper
+# powershell.exe PID, NOT the actual worker (claude.exe/codex.exe/node.exe).
+# We need the grandchildren/great-grandchildren to track real liveness.
+function Get-DescendantPids($parentId) {
+    $allProcs = Get-CimInstance Win32_Process -EA SilentlyContinue
+    $result = @()
+    $queue = [System.Collections.Queue]::new()
+    $queue.Enqueue($parentId)
+    while ($queue.Count -gt 0) {
+        $current = $queue.Dequeue()
+        $kids = $allProcs | Where-Object { $_.ParentProcessId -eq $current }
+        foreach ($k in $kids) {
+            $result += [PSCustomObject]@{
+                Id = [int]$k.ProcessId
+                Name = ($k.Name -replace '\.exe$','').ToLower()
+                Parent = [int]$current
+            }
+            $queue.Enqueue([int]$k.ProcessId)
+        }
+    }
+    return $result
+}
+
+# Resolve CLI for a nucleus via YAML fallback chain + binary pre-check.
+# Called when $globalCli -eq "auto". Returns hashtable @{cli=..; model=..; flags=..; chain_step=..}
+# or $null if no working CLI in the chain.
+function Resolve-NucleusCli($nucleus) {
+    $resolverScript = "$root\_tools\cex_cli_resolver.py"
+    if (-not (Test-Path $resolverScript)) {
+        Write-Output "  [WARN] resolver missing, falling back to claude: $resolverScript"
+        return @{cli="claude"; chain_step="default"}
+    }
+    try {
+        $raw = & python $resolverScript --nucleus $nucleus --pre-check --json 2>&1
+        $json = $raw -join "`n" | ConvertFrom-Json
+        if ($json.error) {
+            Write-Output "  [WARN] resolver error for ${nucleus}: $($json.error)"
+            return $null
+        }
+        return @{
+            cli = $json.cli
+            model = $json.model
+            flags = $json.flags
+            chain_step = $json.chain_step
+        }
+    } catch {
+        Write-Output "  [WARN] resolver failed for ${nucleus}: $_"
+        return @{cli="claude"; chain_step="default"}
+    }
+}
+
+# Find worker PIDs (claude/codex/gemini/node) that are descendants of a wrapper.
+# Returns comma-separated PID list, "-" if none found.
+function Find-WorkerPids($wrapperPid, $cli) {
+    $targetNames = switch ($cli) {
+        "claude" { @("claude","node") }
+        "gemini" { @("gemini","node") }
+        "codex"  { @("codex") }
+        default  { @("claude","codex","gemini","node") }
+    }
+    $descendants = Get-DescendantPids $wrapperPid
+    $workers = $descendants | Where-Object { $targetNames -contains $_.Name }
+    if ($workers.Count -eq 0) { return "-" }
+    return ($workers | ForEach-Object { $_.Id }) -join ","
+}
+
 # Launch a single nucleus with handoff
 function Launch-Nucleus($handoff) {
     $nucleus = Get-NucleusFromHandoff $handoff.Name
@@ -117,20 +193,43 @@ function Launch-Nucleus($handoff) {
     $pos = $gridPos[$nucleus]
     if (-not $pos) { $pos = @{x=0; y=0} }
 
-    # Per-CLI boot script: claude -> n0X.ps1, gemini -> n0X_gemini.ps1, codex -> n0X_codex.ps1
-    $bootPs1 = "$root\boot\${nucleus}${cliSuffix}.ps1"
-    if (Test-Path $bootPs1) {
-        $bootScript = $bootPs1
-        $bootType = "ps1"
-    } else {
-        Write-Output "[$upper] SKIP: no boot script ($bootPs1)"
-        return $null
+    # Resolve CLI: explicit (L1) or auto from YAML fallback_chain (L2)
+    $effectiveCli = $globalCli
+    $chainStep = "explicit"
+    if ($globalCli -eq "auto") {
+        $resolved = Resolve-NucleusCli $nucleus
+        if (-not $resolved) {
+            Write-Output "[$upper] SKIP: no working CLI in fallback chain"
+            return $null
+        }
+        $effectiveCli = $resolved.cli
+        $chainStep = $resolved.chain_step
     }
+    $effectiveSuffix = if ($effectiveCli -eq "claude") { "" } else { "_$effectiveCli" }
 
-    Write-Output "[$upper] Boot via $cli ($bootType)"
+    # Per-CLI boot script: claude -> n0X.ps1, gemini -> n0X_gemini.ps1, codex -> n0X_codex.ps1
+    $bootPs1 = "$root\boot\${nucleus}${effectiveSuffix}.ps1"
+    if (-not (Test-Path $bootPs1)) {
+        # Auto fallback: if resolved CLI lacks a boot script, try claude
+        if ($globalCli -eq "auto" -and $effectiveCli -ne "claude") {
+            Write-Output "[$upper] WARN: no boot script for $effectiveCli ($bootPs1), falling back to claude"
+            $effectiveCli = "claude"
+            $effectiveSuffix = ""
+            $chainStep = "boot_fallback"
+            $bootPs1 = "$root\boot\${nucleus}.ps1"
+        }
+        if (-not (Test-Path $bootPs1)) {
+            Write-Output "[$upper] SKIP: no boot script ($bootPs1)"
+            return $null
+        }
+    }
+    $bootScript = $bootPs1
+    $bootType = "ps1"
+
+    Write-Output "[$upper] Boot via $effectiveCli ($chainStep)"
 
     # Write per-nucleus + per-CLI handoff pointer so boot script picks it up
-    $nucleusHandoff = "$handoffDir\${nucleus}_task${cliSuffix}.md"
+    $nucleusHandoff = "$handoffDir\${nucleus}_task${effectiveSuffix}.md"
     Copy-Item $handoff.FullName -Destination $nucleusHandoff -Force
 
     # Set env var so boot scripts skip their own WindowSize override
@@ -154,11 +253,13 @@ function Launch-Nucleus($handoff) {
         } else {
             Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
         }
-        # PID format: {pid} {nucleus} {cli} {session_id} {timestamp}
+        # PID format: {wrapper_pid} {nucleus} {cli} {session_id} {timestamp} {worker_pids}
+        # worker_pids is filled by Enrich-PidFile after all launches (empty = "-" here)
+        # cli = effectiveCli (per-nucleus resolved, not the global -cli flag)
         $sessId = if ($env:CEX_SESSION_ID) { $env:CEX_SESSION_ID } else { "s$PID" }
         $ts = Get-Date -Format "yyyy-MM-ddTHH:mm:ss"
-        "$($proc.Id) $nucleus $cli $sessId $ts" | Add-Content $pidFile
-        Write-Output "[$upper] Spawned PID:$($proc.Id) handoff:$($handoff.Name)"
+        "$($proc.Id) $nucleus $effectiveCli $sessId $ts -" | Add-Content $pidFile
+        Write-Output "[$upper] Spawned wrapper PID:$($proc.Id) handoff:$($handoff.Name)"
     }
     return $proc
 }
@@ -192,6 +293,24 @@ if ($mode -eq "static") {
                 Write-Output "  [$($nucleus.ToUpper())] repositioned"
             }
         } catch {}
+    }
+    # Enrich PID file: walk descendants to capture real worker PIDs
+    # (Start-Process -PassThru returned the wrapper, not the worker.)
+    Write-Output "[GRID] Enriching PID file with worker PIDs..."
+    Start-Sleep -Seconds 4  # let CLI workers actually start
+    if (Test-Path $pidFile) {
+        $lines = Get-Content $pidFile
+        $newLines = @()
+        foreach ($line in $lines) {
+            $parts = $line.Trim() -split '\s+'
+            if ($parts.Count -lt 5) { $newLines += $line; continue }
+            $wPid = [int]$parts[0]; $nuc = $parts[1]; $c = $parts[2]
+            $sess = $parts[3]; $t = $parts[4]
+            $workerList = Find-WorkerPids $wPid $c
+            $newLines += "$wPid $nuc $c $sess $t $workerList"
+            Write-Output "  [$($nuc.ToUpper())] wrapper:$wPid workers:$workerList"
+        }
+        Set-Content $pidFile $newLines -Encoding UTF8
     }
     Write-Output "[GRID] Static: $launched/$($handoffs.Count) launched"
     exit 0

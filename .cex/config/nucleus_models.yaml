@@ -22,6 +22,14 @@ n07:
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
   context: 1000000
   domain: orchestration
+  # fallback_chain: ordered list consumed by cex_cli_resolver.py.
+  # Primary fails (quota/offline/missing) -> next entry is tried.
+  # Rule: never hardcode the CLI -- this YAML IS the config surface.
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
+  # Legacy single-fallback field -- kept for backward compat with older tools.
   fallback:
     cli: ollama
     model: qwen3:8b
@@ -36,14 +44,18 @@ n01:
   domain: research
   mcps: ".mcp-n01.json"
   settings: ".claude/nucleus-settings/n01.json"
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
-    model: gemini-2.5-pro
+    model: gemini-2.5-flash
     flags: "--yolo"
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: gemini→opus. 1M context + deepest reasoning for research."
+  notes: "UPGRADED 2026-04-06: gemini->opus. 1M context + deepest reasoning for research. Fallback uses gemini-2.5-flash (pro has aggressive quota on free tier)."
 
 # --- N02: Marketing & Copy ---
 n02:
@@ -54,14 +66,18 @@ n02:
   domain: marketing
   mcps: ".mcp-n02.json"
   settings: ".claude/nucleus-settings/n02.json"
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
-    model: gemini-2.5-pro
+    model: gemini-2.5-flash
     flags: "--yolo"
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for brand strategy + creative."
+  notes: "UPGRADED 2026-04-06: sonnet->opus. Full reasoning for brand strategy + creative."
 
 # --- N03: Engineering & Builder ---
 n03:
@@ -72,14 +88,18 @@ n03:
   domain: engineering
   mcps: ".mcp-n03.json"
   settings: ".claude/nucleus-settings/n03.json"
+  fallback_chain:
+    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
-    cli: gemini
-    model: gemini-2.5-pro
-    flags: "--yolo"
+    cli: codex
+    model: gpt-5-codex
+    flags: "--dangerously-bypass-approvals-and-sandbox"
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "Already opus. 13 ISOs + 8F pipeline. Deepest reasoning."
+  notes: "Already opus. 13 ISOs + 8F pipeline. Deepest reasoning. N03 fallback prefers codex (code-specialized) over gemini."
 
 # --- N04: Knowledge & RAG ---
 n04:
@@ -90,14 +110,18 @@ n04:
   domain: knowledge
   mcps: ".mcp-n04.json"
   settings: ".claude/nucleus-settings/n04.json"
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
-    model: gemini-2.5-pro
+    model: gemini-2.5-flash
     flags: "--yolo"
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: gemini→opus. 1M context for full knowledge library + taxonomy."
+  notes: "UPGRADED 2026-04-06: gemini->opus. 1M context for full knowledge library + taxonomy."
 
 # --- N05: Operations & DevOps ---
 n05:
@@ -108,14 +132,18 @@ n05:
   domain: operations
   mcps: ".mcp-n05.json"
   settings: ".claude/nucleus-settings/n05.json"
+  fallback_chain:
+    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
-    cli: gemini
-    model: gemini-2.5-pro
-    flags: "--yolo"
+    cli: codex
+    model: gpt-5-codex
+    flags: "--dangerously-bypass-approvals-and-sandbox"
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for code review + CI/CD."
+  notes: "UPGRADED 2026-04-06: sonnet->opus. Full reasoning for code review + CI/CD. N05 fallback prefers codex (code-specialized)."
 
 # --- N06: Commercial & Brand ---
 n06:
@@ -126,14 +154,18 @@ n06:
   domain: commercial
   mcps: ".mcp-n06.json"
   settings: ".claude/nucleus-settings/n06.json"
+  fallback_chain:
+    - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
+    - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
-    model: gemini-2.5-pro
+    model: gemini-2.5-flash
     flags: "--yolo"
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: sonnet→opus. Full reasoning for pricing + monetization."
+  notes: "UPGRADED 2026-04-06: sonnet->opus. Full reasoning for pricing + monetization."
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # GRID LOAD DISTRIBUTION (6 simultaneous during /grid):
@@ -141,7 +173,13 @@ n06:
 #   Claude/Opus: N01 + N02 + N03 + N04 + N05 + N06  = 6 (all opus-4-6, 1M ctx)
 #   N07 runs in claude (separate session, doesn't compete)
 #
-# UPGRADED 2026-04-06: All nuclei → opus-4-6 for maximum reasoning + 1M context
-# Fallback principle: always cross-provider (claude → gemini → ollama)
+# UPGRADED 2026-04-06: All nuclei -> opus-4-6 for maximum reasoning + 1M context
+# Fallback principle: always cross-provider (claude -> gemini-flash -> codex -> ollama)
 # Fallback local: qwen3:32b (heavy: N01,N03) / qwen3:14b (light: N02,N04,N05,N06)
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#
+# 2026-04-11: Added fallback_chain (ordered list). Consumed by cex_cli_resolver.py
+# during `-cli auto` mode in spawn_grid.ps1. Gemini-2.5-pro replaced with
+# gemini-2.5-flash after pro quota exhaustion in SELF_AUDIT_GEMINI multi-CLI test
+# (pro free tier: ~few hundred RPM, 24h reset; flash: separate pool, higher ceiling).
+# -----------------------------------------------------------------------------------
+
