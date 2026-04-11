@@ -137,19 +137,44 @@ if (Test-Path $bootPs1) {
     Write-Output "[$upper] ERROR: no boot script at $bootPs1 or $bootCmd"; exit 1
 }
 
-# Position window in fixed grid cell (retry loop for window handle)
+# Position window in fixed grid cell (aggressive: repeat for 15s to beat Claude resize)
 if ($proc -and $pos) {
     $hwnd = [IntPtr]::Zero
+    # Phase 1: find the window handle (up to 5s)
     for ($i = 0; $i -lt 10; $i++) {
         Start-Sleep -Milliseconds 500
         try { $proc.Refresh() } catch {}
         $hwnd = $proc.MainWindowHandle
         if ($hwnd -ne [IntPtr]::Zero) { break }
     }
+    # Phase 2: force position repeatedly using PID (re-fetch handle each time)
+    # The window handle can go stale when Claude Code replaces the terminal
+    $bgPid = $proc.Id; $bgX = $pos.x; $bgY = $pos.y; $bgW = $cellW; $bgH = $cellH
+    Start-Job -ScriptBlock {
+        param($procId, $x, $y, $w, $hh)
+        Add-Type @"
+using System; using System.Runtime.InteropServices;
+public class W32 { [DllImport("user32.dll")] public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int W, int H, bool r); }
+"@
+        # Force position 10 times over 20 seconds (every 2s)
+        # Re-fetch handle each time to survive Claude Code window replacement
+        for ($r = 0; $r -lt 10; $r++) {
+            Start-Sleep -Seconds 2
+            try {
+                $p = Get-Process -Id $procId -EA SilentlyContinue
+                if ($p) {
+                    $p.Refresh()
+                    $h = $p.MainWindowHandle
+                    if ($h -ne [IntPtr]::Zero) {
+                        [W32]::MoveWindow($h, $x, $y, $w, $hh, $true) | Out-Null
+                    }
+                }
+            } catch {}
+        }
+    } -ArgumentList @($bgPid, $bgX, $bgY, $bgW, $bgH) | Out-Null
+    # Also do one immediate move if handle is available
     if ($hwnd -ne [IntPtr]::Zero) {
         [Win32]::MoveWindow($hwnd, $pos.x, $pos.y, $cellW, $cellH, $true) | Out-Null
-    } else {
-        Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
     }
 }
 
