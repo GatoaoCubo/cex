@@ -120,23 +120,22 @@ def inject_brand_header(config: dict) -> None:
 
 
 def update_boot_titles(config: dict) -> None:
-    """Update boot/*.cmd window titles with brand name."""
+    """Update boot/*.ps1 window titles with brand name."""
     name = config.get("identity", {}).get("BRAND_NAME", "")
     if not name or name.startswith("{{"):
         return
 
     boot_dir = ROOT / "boot"
-    for cmd_file in boot_dir.glob("*.cmd"):
+    for ps1_file in boot_dir.glob("*.ps1"):
         try:
-            content = cmd_file.read_text(encoding="utf-8")
-            # Replace title lines
+            content = ps1_file.read_text(encoding="utf-8")
+            # Replace sin-aware title prefix -- `$t = "N07 ...` or `$t = "N0X ...`
             content = re.sub(
-                r"^title CEX-",
-                f"title {name}-CEX-",
+                r'(\$t\s*=\s*"N0\d+ )',
+                lambda m: m.group(1).replace('"N0', f'"{name} N0'),
                 content,
-                flags=re.MULTILINE,
             )
-            cmd_file.write_text(content, encoding="utf-8")
+            ps1_file.write_text(content, encoding="utf-8")
         except Exception:
             continue
 
@@ -278,7 +277,7 @@ def run_bootstrap(config: dict, interactive: bool = True) -> bool:
     brand_name = config.get("identity", {}).get("BRAND_NAME", "CEX")
     print(f"\n  BOOTSTRAP COMPLETE")
     print(f"  CEX is now the brain of: {brand_name}")
-    print(f"  For full Brand Discovery: boot/n06.cmd")
+    print(f"  For full Brand Discovery: boot/n06.ps1")
     print(f"  To re-bootstrap: python _tools/cex_bootstrap.py --reset")
     return True
 

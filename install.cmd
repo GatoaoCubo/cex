@@ -179,13 +179,13 @@ echo     Open a terminal and run: claude
 echo     (This opens your browser for Anthropic login)
 echo.
 echo  2. Boot CEX N07:
-echo     boot\cex.cmd
+echo     powershell -ExecutionPolicy Bypass -File boot\cex.ps1
 echo.
 echo  3. Inside Claude, type:
 echo     /init
 echo     (Configures CEX for your brand -- 2 min)
 echo.
-echo  After that, just run boot\cex.cmd to start.
+echo  After that, run: powershell -ExecutionPolicy Bypass -File boot\cex.ps1
 echo  ========================================
 echo.
 
@@ -194,10 +194,10 @@ set /p BOOT="  Boot CEX now? (y/n): "
 if /i "%BOOT%"=="y" (
     echo.
     echo  Launching CEX N07...
-    call boot\cex.cmd
+    powershell -NoProfile -NoExit -ExecutionPolicy Bypass -File boot\cex.ps1
 ) else (
     echo.
-    echo  To boot later: boot\cex.cmd
+    echo  To boot later: powershell -ExecutionPolicy Bypass -File boot\cex.ps1
     echo.
     pause
 )

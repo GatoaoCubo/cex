@@ -4,7 +4,8 @@
 # Sin: Orchestrating Sloth (Orchestrating Sloth)
 
 # --- UX: Window title with mission + sin + status ---
-$cexRoot = "C:\Users\PC\Documents\GitHub\cex"
+# Auto-detect root from script location (worktree-agnostic)
+$cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n07"
 $sinName = "Orchestrating Sloth"
 $modelShort = "claude-opus-4-6" -replace "claude-", ""
