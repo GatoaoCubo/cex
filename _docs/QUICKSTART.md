@@ -33,9 +33,9 @@ setup.cmd
 ## 3. Boot
 
 ```bash
-boot\cex.cmd            # Start N07 orchestrator (main entry point)
+boot\cex.ps1            # Start N07 orchestrator (main entry point)
 # -- OR --
-boot\n03.cmd            # Start a specific nucleus (builder)
+boot\n03.ps1            # Start a specific nucleus (builder)
 # -- OR --
 claude                  # Raw Claude Code in the repo directory
 ```

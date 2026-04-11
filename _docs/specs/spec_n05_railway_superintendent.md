@@ -143,7 +143,7 @@ Rollback: identify service - logs - blast radius - railway rollback - verify - c
 6 gates: deploy smoke 30s, rollback plan 4svcs, migration safe, env 63vars, health full, middleware intact
 
 ### F8 COLLABORATE
-dispatch receives_from N03/N07, handoff_to N03, boot/n05.cmd
+dispatch receives_from N03/N07, handoff_to N03, boot/n05.ps1
 
 ---
 

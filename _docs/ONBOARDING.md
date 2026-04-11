@@ -41,14 +41,14 @@ cd cex
 python _tools/cex_bootstrap.py
 
 # Or via the boot script (auto-detects first run)
-boot/cex.cmd
+boot/cex.ps1
 ```
 
 This configures CEX for your brand: asks ~6 questions, writes `brand_config.yaml`,
 and propagates brand context to all nuclei. For full brand discovery:
 
 ```bash
-boot/n06.cmd
+boot/n06.ps1
 ```
 
 ### Validate the structure

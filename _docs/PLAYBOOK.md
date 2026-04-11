@@ -14,7 +14,7 @@ From N07, ONLY `bash _spawn/dispatch.sh` creates visible windows.
 
 **NEVER from N07:**
 - `start cmd /k ...` -- Windows CMD syntax, not bash
-- `cmd /c boot\n03.cmd` -- won't open new window
+- `cmd /c boot\n03.ps1` -- wrong shell, wont open new window
 - Direct `powershell -File ...` -- works but bypasses session tracking
 
 **ALWAYS from N07:**
@@ -279,13 +279,13 @@ claude --dangerously-skip-permissions --permission-mode bypassPermissions --no-c
 
 | Nucleus | Boot Script | CLI | Model | Context |
 |---------|------------|-----|-------|---------|
-| N07 | boot/cex.cmd | claude | opus-4-6 | 1M |
-| N01 | boot/n01.cmd | claude | opus-4-6 | 1M |
-| N02 | boot/n02.cmd | claude | opus-4-6 | 1M |
-| N03 | boot/n03.cmd | claude | opus-4-6 | 1M |
-| N04 | boot/n04.cmd | claude | opus-4-6 | 1M |
-| N05 | boot/n05.cmd | claude | opus-4-6 | 1M |
-| N06 | boot/n06.cmd | claude | opus-4-6 | 1M |
+| N07 | boot/cex.ps1 | claude | opus-4-6 | 1M |
+| N01 | boot/n01.ps1 | claude | opus-4-6 | 1M |
+| N02 | boot/n02.ps1 | claude | opus-4-6 | 1M |
+| N03 | boot/n03.ps1 | claude | opus-4-6 | 1M |
+| N04 | boot/n04.ps1 | claude | opus-4-6 | 1M |
+| N05 | boot/n05.ps1 | claude | opus-4-6 | 1M |
+| N06 | boot/n06.ps1 | claude | opus-4-6 | 1M |
 
 ---
 

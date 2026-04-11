@@ -67,7 +67,7 @@ pip install pyyaml tiktoken uv
 :: 3. Clone and run
 git clone https://github.com/<user>/cex.git
 cd cex
-boot\cex.cmd
+boot\cex.ps1
 ```
 
 Or just run `setup.cmd` which does all of the above with validation.
@@ -120,7 +120,7 @@ The user never needs to pre-install anything beyond Layer 1 + Layer 2.
 | `.claude/agents/*.md` | Builder sub-agents (1 per kind) | 125 |
 | `.claude/nucleus-settings/n0X.json` | Per-nucleus settings | 6 |
 | `.mcp-n0X.json` | MCP server configs per nucleus | 6 |
-| `boot/n0X.cmd` | Boot scripts that launch Claude Code with flags | 7+ |
+| `boot/n0X.ps1` | Boot scripts that launch Claude Code with flags | 7+ |
 | `.cex/config/context_self_select.md` | Self-select context injected on boot | 1 |
 
 ## Environment Variables

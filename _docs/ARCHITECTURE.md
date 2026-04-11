@@ -178,7 +178,7 @@ Minimum density: 0.85. Max size: per _schema.yaml. Scoring: 3-layer hybrid (stru
 ## 10. Runtime Architecture
 
 ```
-User --> boot/cex.cmd --> claude (Opus 4.6, 1M context)
+User --> boot/cex.ps1 --> claude (Opus 4.6, 1M context)
                              |
                              +--> CLAUDE.md (system instructions)
                              +--> .claude/rules/ (nucleus rules)
@@ -189,12 +189,12 @@ User --> boot/cex.cmd --> claude (Opus 4.6, 1M context)
                                     |
                                     +--> bash _spawn/dispatch.sh grid MISSION
                                     |       |
-                                    |       +--> boot/n01.cmd (claude, opus-4-6)
-                                    |       +--> boot/n02.cmd (claude, opus-4-6)
-                                    |       +--> boot/n03.cmd (claude, opus-4-6)
-                                    |       +--> boot/n04.cmd (claude, opus-4-6)
-                                    |       +--> boot/n05.cmd (claude, opus-4-6)
-                                    |       +--> boot/n06.cmd (claude, opus-4-6)
+                                    |       +--> boot/n01.ps1 (claude, opus-4-6)
+                                    |       +--> boot/n02.ps1 (claude, opus-4-6)
+                                    |       +--> boot/n03.ps1 (claude, opus-4-6)
+                                    |       +--> boot/n04.ps1 (claude, opus-4-6)
+                                    |       +--> boot/n05.ps1 (claude, opus-4-6)
+                                    |       +--> boot/n06.ps1 (claude, opus-4-6)
                                     |
                                     +--> .cex/runtime/ (handoffs, signals, pids)
                                     +--> _tools/ (91 Python scripts)
