@@ -1,0 +1,268 @@
+---
+id: self_audit_n02_codex_2026_04_11
+kind: self_audit
+pillar: P11
+title: N02 Marketing Self-Audit
+version: 1.0
+quality: null
+tags: [audit, self_review, n02, marketing]
+created: 2026-04-11
+nucleus: n02
+---
+
+## 1. Estado Atual
+- Escopo: 66 arquivos .md fonte (compiled/ excluido) varridos em 2026-04-11.
+- Medicoes: stat local (America/Sao_Paulo) e linhas obtidas direto do frontmatter.
+
+### 1.1 Inventario completo
+| Path | Kind | Quality | Evidence (kind/quality lines) |
+|---|---|---|---|
+| N02_marketing/README.md | context_doc | 9.1 | N02_marketing/README.md:3 / N02_marketing/README.md:9 |
+| N02_marketing/agent_card_n02.md | context_doc | 9.1 | N02_marketing/agent_card_n02.md:3 / N02_marketing/agent_card_n02.md:9 |
+| N02_marketing/agents/agent_marketing.md | agent | 9.2 | N02_marketing/agents/agent_marketing.md:3 / N02_marketing/agents/agent_marketing.md:16 |
+| N02_marketing/architecture/agent_card_marketing.md | agent_card | 9.2 | N02_marketing/architecture/agent_card_marketing.md:4 / N02_marketing/architecture/agent_card_marketing.md:48 |
+| N02_marketing/artifacts/ad_copy_template.md | prompt_template | null | N02_marketing/artifacts/ad_copy_template.md:3 / N02_marketing/artifacts/ad_copy_template.md:10 |
+| N02_marketing/artifacts/email_sequence_template.md | prompt_template | 9.1 | N02_marketing/artifacts/email_sequence_template.md:3 / N02_marketing/artifacts/email_sequence_template.md:10 |
+| N02_marketing/artifacts/landing_page_template.md | prompt_template | null | N02_marketing/artifacts/landing_page_template.md:3 / N02_marketing/artifacts/landing_page_template.md:10 |
+| N02_marketing/config/ab_testing_framework.md | validation_schema | 9.0 | N02_marketing/config/ab_testing_framework.md:3 / N02_marketing/config/ab_testing_framework.md:10 |
+| N02_marketing/config/brand_override_config.md | env_config | 9.0 | N02_marketing/config/brand_override_config.md:3 / N02_marketing/config/brand_override_config.md:10 |
+| N02_marketing/feedback/quality_gate_marketing.md | quality_gate | 9.1 | N02_marketing/feedback/quality_gate_marketing.md:3 / N02_marketing/feedback/quality_gate_marketing.md:11 |
+| N02_marketing/knowledge/kc_accessibility_a11y.md | knowledge_card | 9.1 | N02_marketing/knowledge/kc_accessibility_a11y.md:3 / N02_marketing/knowledge/kc_accessibility_a11y.md:10 |
+| N02_marketing/knowledge/kc_campaign.md | knowledge_card | null | N02_marketing/knowledge/kc_campaign.md:3 / N02_marketing/knowledge/kc_campaign.md:8 |
+| N02_marketing/knowledge/kc_color_theory_applied.md | knowledge_card | 9.2 | N02_marketing/knowledge/kc_color_theory_applied.md:3 / N02_marketing/knowledge/kc_color_theory_applied.md:11 |
+| N02_marketing/knowledge/kc_css_animation_micro.md | knowledge_card | 9.1 | N02_marketing/knowledge/kc_css_animation_micro.md:3 / N02_marketing/knowledge/kc_css_animation_micro.md:8 |
+| N02_marketing/knowledge/kc_email_html_responsive.md | knowledge_card | 9.0 | N02_marketing/knowledge/kc_email_html_responsive.md:3 / N02_marketing/knowledge/kc_email_html_responsive.md:8 |
+| N02_marketing/knowledge/kc_email_sequence.md | knowledge_card | null | N02_marketing/knowledge/kc_email_sequence.md:3 / N02_marketing/knowledge/kc_email_sequence.md:8 |
+| N02_marketing/knowledge/kc_html_component_library.md | knowledge_card | 9.1 | N02_marketing/knowledge/kc_html_component_library.md:3 / N02_marketing/knowledge/kc_html_component_library.md:10 |
+| N02_marketing/knowledge/kc_responsive_layout_systems.md | knowledge_card | 9.0 | N02_marketing/knowledge/kc_responsive_layout_systems.md:3 / N02_marketing/knowledge/kc_responsive_layout_systems.md:8 |
+| N02_marketing/knowledge/kc_shadcn_radix_patterns.md | knowledge_card | 9.1 | N02_marketing/knowledge/kc_shadcn_radix_patterns.md:3 / N02_marketing/knowledge/kc_shadcn_radix_patterns.md:11 |
+| N02_marketing/knowledge/kc_tailwind_patterns.md | knowledge_card | 9.0 | N02_marketing/knowledge/kc_tailwind_patterns.md:3 / N02_marketing/knowledge/kc_tailwind_patterns.md:11 |
+| N02_marketing/knowledge/kc_typography_web.md | knowledge_card | 9.2 | N02_marketing/knowledge/kc_typography_web.md:3 / N02_marketing/knowledge/kc_typography_web.md:11 |
+| N02_marketing/knowledge/kc_visual_hierarchy_principles.md | knowledge_card | 9.2 | N02_marketing/knowledge/kc_visual_hierarchy_principles.md:3 / N02_marketing/knowledge/kc_visual_hierarchy_principles.md:11 |
+| N02_marketing/knowledge/knowledge_card_marketing.md | knowledge_card | 9.2 | N02_marketing/knowledge/knowledge_card_marketing.md:3 / N02_marketing/knowledge/knowledge_card_marketing.md:11 |
+| N02_marketing/knowledge/knowledge_card_social_publishing.md | knowledge_card | 9.1 | N02_marketing/knowledge/knowledge_card_social_publishing.md:3 / N02_marketing/knowledge/knowledge_card_social_publishing.md:12 |
+| N02_marketing/memory/campaign_performance_memory.md | memory_summary | 9.0 | N02_marketing/memory/campaign_performance_memory.md:3 / N02_marketing/memory/campaign_performance_memory.md:10 |
+| N02_marketing/memory/copy_optimization_insights.md | learning_record | 9.0 | N02_marketing/memory/copy_optimization_insights.md:3 / N02_marketing/memory/copy_optimization_insights.md:10 |
+| N02_marketing/orchestration/cross_nucleus_handoffs.md | handoff_protocol | 9.0 | N02_marketing/orchestration/cross_nucleus_handoffs.md:3 / N02_marketing/orchestration/cross_nucleus_handoffs.md:10 |
+| N02_marketing/orchestration/dispatch_rule_marketing.md | dispatch_rule | 9.1 | N02_marketing/orchestration/dispatch_rule_marketing.md:4 / N02_marketing/orchestration/dispatch_rule_marketing.md:11 |
+| N02_marketing/orchestration/dispatch_rule_social_publisher.md | dispatch_rule | 9.1 | N02_marketing/orchestration/dispatch_rule_social_publisher.md:3 / N02_marketing/orchestration/dispatch_rule_social_publisher.md:12 |
+| N02_marketing/orchestration/p12_wf_weekly_fashion_content.md | workflow | 9.1 | N02_marketing/orchestration/p12_wf_weekly_fashion_content.md:3 / N02_marketing/orchestration/p12_wf_weekly_fashion_content.md:19 |
+| N02_marketing/orchestration/workflow_marketing.md | workflow | 9.1 | N02_marketing/orchestration/workflow_marketing.md:3 / N02_marketing/orchestration/workflow_marketing.md:18 |
+| N02_marketing/output/case_studies_intent_resolution.md | context_doc | null | N02_marketing/output/case_studies_intent_resolution.md:3 / N02_marketing/output/case_studies_intent_resolution.md:9 |
+| N02_marketing/output/component_template.md | output_validator | 9.1 | N02_marketing/output/component_template.md:3 / N02_marketing/output/component_template.md:18 |
+| N02_marketing/output/landing_page_template.md | output_validator | 9.0 | N02_marketing/output/landing_page_template.md:3 / N02_marketing/output/landing_page_template.md:18 |
+| N02_marketing/output/output_cf_actions_and_distribution.md | output_template | 9.1 | N02_marketing/output/output_cf_actions_and_distribution.md:3 / N02_marketing/output/output_cf_actions_and_distribution.md:16 |
+| N02_marketing/output/output_competitive_positioning.md | competitive_analysis | 9.0 | N02_marketing/output/output_competitive_positioning.md:3 / N02_marketing/output/output_competitive_positioning.md:6 |
+| N02_marketing/output/output_dashboard_ui.md | output_validator | 9.1 | N02_marketing/output/output_dashboard_ui.md:3 / N02_marketing/output/output_dashboard_ui.md:10 |
+| N02_marketing/output/output_email_template.md | output_validator | 9.1 | N02_marketing/output/output_email_template.md:3 / N02_marketing/output/output_email_template.md:11 |
+| N02_marketing/output/output_grid_test.md | context_doc | 9.1 | N02_marketing/output/output_grid_test.md:3 / N02_marketing/output/output_grid_test.md:9 |
+| N02_marketing/output/output_monetization_launch.md | output_validator | 9.2 | N02_marketing/output/output_monetization_launch.md:3 / N02_marketing/output/output_monetization_launch.md:10 |
+| N02_marketing/output/output_readme_hero.md | output_template | 9.0 | N02_marketing/output/output_readme_hero.md:3 / N02_marketing/output/output_readme_hero.md:9 |
+| N02_marketing/output/output_sdk_validation_self_audit.md | output | 9.1 | N02_marketing/output/output_sdk_validation_self_audit.md:3 / N02_marketing/output/output_sdk_validation_self_audit.md:10 |
+| N02_marketing/output/output_social_card.md | output_validator | 9.1 | N02_marketing/output/output_social_card.md:3 / N02_marketing/output/output_social_card.md:10 |
+| N02_marketing/output/output_style_guide.md | output_validator | 9.1 | N02_marketing/output/output_style_guide.md:3 / N02_marketing/output/output_style_guide.md:10 |
+| N02_marketing/output/output_visual_report.md | output_validator | 9.2 | N02_marketing/output/output_visual_report.md:3 / N02_marketing/output/output_visual_report.md:10 |
+| N02_marketing/output/report_intent_resolution_value_prop.md | context_doc | null | N02_marketing/output/report_intent_resolution_value_prop.md:3 / N02_marketing/output/report_intent_resolution_value_prop.md:9 |
+| N02_marketing/output/self_review_2026-04-02.md | context_doc | 9.0 | N02_marketing/output/self_review_2026-04-02.md:3 / N02_marketing/output/self_review_2026-04-02.md:7 |
+| N02_marketing/prompts/action_prompt_marketing.md | action_prompt | 9.1 | N02_marketing/prompts/action_prompt_marketing.md:3 / N02_marketing/prompts/action_prompt_marketing.md:30 |
+| N02_marketing/prompts/brand_voice_templates.md | prompt_template | 9.0 | N02_marketing/prompts/brand_voice_templates.md:3 / N02_marketing/prompts/brand_voice_templates.md:10 |
+| N02_marketing/prompts/prompt_template_marketing.md | prompt_template | 9.2 | N02_marketing/prompts/prompt_template_marketing.md:3 / N02_marketing/prompts/prompt_template_marketing.md:104 |
+| N02_marketing/prompts/system_prompt_marketing.md | system_prompt | 9.2 | N02_marketing/prompts/system_prompt_marketing.md:3 / N02_marketing/prompts/system_prompt_marketing.md:19 |
+| N02_marketing/prompts/tpl_content_distribution_plan.md | prompt_template | null | N02_marketing/prompts/tpl_content_distribution_plan.md:3 / N02_marketing/prompts/tpl_content_distribution_plan.md:71 |
+| N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md | prompt_template | null | N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md:3 / N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md:66 |
+| N02_marketing/prompts/tpl_notebooklm_flashcard_format.md | prompt_template | null | N02_marketing/prompts/tpl_notebooklm_flashcard_format.md:3 / N02_marketing/prompts/tpl_notebooklm_flashcard_format.md:71 |
+| N02_marketing/quality/scoring_rubric_marketing.md | scoring_rubric | 9.2 | N02_marketing/quality/scoring_rubric_marketing.md:3 / N02_marketing/quality/scoring_rubric_marketing.md:21 |
+| N02_marketing/reports/self_audit_2026_04_11.md | self_audit | null | N02_marketing/reports/self_audit_2026_04_11.md:3 / N02_marketing/reports/self_audit_2026_04_11.md:7 |
+| N02_marketing/reports/self_audit_gemini_2026_04_11.md | self_audit | null | N02_marketing/reports/self_audit_gemini_2026_04_11.md:3 / N02_marketing/reports/self_audit_gemini_2026_04_11.md:6 |
+| N02_marketing/schemas/a11y_checklist.md | input_schema | 9.1 | N02_marketing/schemas/a11y_checklist.md:3 / N02_marketing/schemas/a11y_checklist.md:10 |
+| N02_marketing/schemas/design_token_contract.md | input_schema | 9.1 | N02_marketing/schemas/design_token_contract.md:3 / N02_marketing/schemas/design_token_contract.md:15 |
+| N02_marketing/schemas/html_output_schema.md | input_schema | 9.1 | N02_marketing/schemas/html_output_schema.md:3 / N02_marketing/schemas/html_output_schema.md:14 |
+| N02_marketing/schemas/responsive_breakpoints.md | input_schema | 9.1 | N02_marketing/schemas/responsive_breakpoints.md:3 / N02_marketing/schemas/responsive_breakpoints.md:10 |
+| N02_marketing/schemas/tailwind_palette_contract.md | input_schema | 9.1 | N02_marketing/schemas/tailwind_palette_contract.md:3 / N02_marketing/schemas/tailwind_palette_contract.md:10 |
+| N02_marketing/tools/copy_analyzer.md | cli_tool | null | N02_marketing/tools/copy_analyzer.md:3 / N02_marketing/tools/copy_analyzer.md:11 |
+| N02_marketing/tools/headline_scorer.md | cli_tool | null | N02_marketing/tools/headline_scorer.md:3 / N02_marketing/tools/headline_scorer.md:11 |
+| N02_marketing/tools/social_publisher_marketing.md | cli_tool | 9.1 | N02_marketing/tools/social_publisher_marketing.md:3 / N02_marketing/tools/social_publisher_marketing.md:12 |
+| N02_marketing/workflows/wf_kc_to_content.md | workflow | null | N02_marketing/workflows/wf_kc_to_content.md:3 / N02_marketing/workflows/wf_kc_to_content.md:40 |
+
+### 1.2 Contagem por kind registrado
+| Kind | Count | Path refs |
+|---|---|---|
+| action_prompt | 1 | N02_marketing/prompts/action_prompt_marketing.md:3 |
+| agent | 1 | N02_marketing/agents/agent_marketing.md:3 |
+| agent_card | 1 | N02_marketing/architecture/agent_card_marketing.md:4 |
+| cli_tool | 3 | N02_marketing/tools/copy_analyzer.md:3; N02_marketing/tools/headline_scorer.md:3; N02_marketing/tools/social_publisher_marketing.md:3 |
+| competitive_analysis | 1 | N02_marketing/output/output_competitive_positioning.md:3 |
+| context_doc | 6 | N02_marketing/README.md:3; N02_marketing/agent_card_n02.md:3; N02_marketing/output/case_studies_intent_resolution.md:3; N02_marketing/output/output_grid_test.md:3; N02_marketing/output/report_intent_resolution_value_prop.md:3; N02_marketing/output/self_review_2026-04-02.md:3 |
+| dispatch_rule | 2 | N02_marketing/orchestration/dispatch_rule_marketing.md:4; N02_marketing/orchestration/dispatch_rule_social_publisher.md:3 |
+| env_config | 1 | N02_marketing/config/brand_override_config.md:3 |
+| handoff_protocol | 1 | N02_marketing/orchestration/cross_nucleus_handoffs.md:3 |
+| input_schema | 5 | N02_marketing/schemas/a11y_checklist.md:3; N02_marketing/schemas/design_token_contract.md:3; N02_marketing/schemas/html_output_schema.md:3; N02_marketing/schemas/responsive_breakpoints.md:3; N02_marketing/schemas/tailwind_palette_contract.md:3 |
+| knowledge_card | 14 | N02_marketing/knowledge/kc_accessibility_a11y.md:3; N02_marketing/knowledge/kc_campaign.md:3; N02_marketing/knowledge/kc_color_theory_applied.md:3; N02_marketing/knowledge/kc_css_animation_micro.md:3; N02_marketing/knowledge/kc_email_html_responsive.md:3; N02_marketing/knowledge/kc_email_sequence.md:3; N02_marketing/knowledge/kc_html_component_library.md:3; N02_marketing/knowledge/kc_responsive_layout_systems.md:3; N02_marketing/knowledge/kc_shadcn_radix_patterns.md:3; N02_marketing/knowledge/kc_tailwind_patterns.md:3; N02_marketing/knowledge/kc_typography_web.md:3; N02_marketing/knowledge/kc_visual_hierarchy_principles.md:3; N02_marketing/knowledge/knowledge_card_marketing.md:3; N02_marketing/knowledge/knowledge_card_social_publishing.md:3 |
+| learning_record | 1 | N02_marketing/memory/copy_optimization_insights.md:3 |
+| memory_summary | 1 | N02_marketing/memory/campaign_performance_memory.md:3 |
+| output | 1 | N02_marketing/output/output_sdk_validation_self_audit.md:3 |
+| output_template | 2 | N02_marketing/output/output_cf_actions_and_distribution.md:3; N02_marketing/output/output_readme_hero.md:3 |
+| output_validator | 8 | N02_marketing/output/component_template.md:3; N02_marketing/output/landing_page_template.md:3; N02_marketing/output/output_dashboard_ui.md:3; N02_marketing/output/output_email_template.md:3; N02_marketing/output/output_monetization_launch.md:3; N02_marketing/output/output_social_card.md:3; N02_marketing/output/output_style_guide.md:3; N02_marketing/output/output_visual_report.md:3 |
+| prompt_template | 8 | N02_marketing/artifacts/ad_copy_template.md:3; N02_marketing/artifacts/email_sequence_template.md:3; N02_marketing/artifacts/landing_page_template.md:3; N02_marketing/prompts/brand_voice_templates.md:3; N02_marketing/prompts/prompt_template_marketing.md:3; N02_marketing/prompts/tpl_content_distribution_plan.md:3; N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md:3; N02_marketing/prompts/tpl_notebooklm_flashcard_format.md:3 |
+| quality_gate | 1 | N02_marketing/feedback/quality_gate_marketing.md:3 |
+| scoring_rubric | 1 | N02_marketing/quality/scoring_rubric_marketing.md:3 |
+| self_audit | 2 | N02_marketing/reports/self_audit_2026_04_11.md:3; N02_marketing/reports/self_audit_gemini_2026_04_11.md:3 |
+| system_prompt | 1 | N02_marketing/prompts/system_prompt_marketing.md:3 |
+| validation_schema | 1 | N02_marketing/config/ab_testing_framework.md:3 |
+| workflow | 3 | N02_marketing/orchestration/p12_wf_weekly_fashion_content.md:3; N02_marketing/orchestration/workflow_marketing.md:3; N02_marketing/workflows/wf_kc_to_content.md:3 |
+
+### 1.3 Distribuicao de qualidade declarada
+| Bucket | Count | Evidence (quality lines) |
+|---|---|---|
+| >=9.0 | 52 | N02_marketing/README.md:9; N02_marketing/agent_card_n02.md:9; N02_marketing/agents/agent_marketing.md:16; N02_marketing/architecture/agent_card_marketing.md:48; N02_marketing/artifacts/email_sequence_template.md:10; N02_marketing/config/ab_testing_framework.md:10; N02_marketing/config/brand_override_config.md:10; N02_marketing/feedback/quality_gate_marketing.md:11; N02_marketing/knowledge/kc_accessibility_a11y.md:10; N02_marketing/knowledge/kc_color_theory_applied.md:11; N02_marketing/knowledge/kc_css_animation_micro.md:8; N02_marketing/knowledge/kc_email_html_responsive.md:8; N02_marketing/knowledge/kc_html_component_library.md:10; N02_marketing/knowledge/kc_responsive_layout_systems.md:8; N02_marketing/knowledge/kc_shadcn_radix_patterns.md:11; N02_marketing/knowledge/kc_tailwind_patterns.md:11; N02_marketing/knowledge/kc_typography_web.md:11; N02_marketing/knowledge/kc_visual_hierarchy_principles.md:11; N02_marketing/knowledge/knowledge_card_marketing.md:11; N02_marketing/knowledge/knowledge_card_social_publishing.md:12; N02_marketing/memory/campaign_performance_memory.md:10; N02_marketing/memory/copy_optimization_insights.md:10; N02_marketing/orchestration/cross_nucleus_handoffs.md:10; N02_marketing/orchestration/dispatch_rule_marketing.md:11; N02_marketing/orchestration/dispatch_rule_social_publisher.md:12; N02_marketing/orchestration/p12_wf_weekly_fashion_content.md:19; N02_marketing/orchestration/workflow_marketing.md:18; N02_marketing/output/component_template.md:18; N02_marketing/output/landing_page_template.md:18; N02_marketing/output/output_cf_actions_and_distribution.md:16; N02_marketing/output/output_competitive_positioning.md:6; N02_marketing/output/output_dashboard_ui.md:10; N02_marketing/output/output_email_template.md:11; N02_marketing/output/output_grid_test.md:9; N02_marketing/output/output_monetization_launch.md:10; N02_marketing/output/output_readme_hero.md:9; N02_marketing/output/output_sdk_validation_self_audit.md:10; N02_marketing/output/output_social_card.md:10; N02_marketing/output/output_style_guide.md:10; N02_marketing/output/output_visual_report.md:10; N02_marketing/output/self_review_2026-04-02.md:7; N02_marketing/prompts/action_prompt_marketing.md:30; N02_marketing/prompts/brand_voice_templates.md:10; N02_marketing/prompts/prompt_template_marketing.md:104; N02_marketing/prompts/system_prompt_marketing.md:19; N02_marketing/quality/scoring_rubric_marketing.md:21; N02_marketing/schemas/a11y_checklist.md:10; N02_marketing/schemas/design_token_contract.md:15; N02_marketing/schemas/html_output_schema.md:14; N02_marketing/schemas/responsive_breakpoints.md:10; N02_marketing/schemas/tailwind_palette_contract.md:10; N02_marketing/tools/social_publisher_marketing.md:12 |
+| 8.0-8.9 | 0 | none |
+| <8.0 | 0 | none |
+| null | 14 | N02_marketing/artifacts/ad_copy_template.md:10; N02_marketing/artifacts/landing_page_template.md:10; N02_marketing/knowledge/kc_campaign.md:8; N02_marketing/knowledge/kc_email_sequence.md:8; N02_marketing/output/case_studies_intent_resolution.md:9; N02_marketing/output/report_intent_resolution_value_prop.md:9; N02_marketing/prompts/tpl_content_distribution_plan.md:71; N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md:66; N02_marketing/prompts/tpl_notebooklm_flashcard_format.md:71; N02_marketing/reports/self_audit_2026_04_11.md:7; N02_marketing/reports/self_audit_gemini_2026_04_11.md:6; N02_marketing/tools/copy_analyzer.md:11; N02_marketing/tools/headline_scorer.md:11; N02_marketing/workflows/wf_kc_to_content.md:40 |
+
+### 1.4 Itens ainda sem nota externa (quality:null)
+| Path | Kind | Evidence (quality line) |
+|---|---|---|
+| N02_marketing/artifacts/ad_copy_template.md | prompt_template | N02_marketing/artifacts/ad_copy_template.md:10 |
+| N02_marketing/artifacts/landing_page_template.md | prompt_template | N02_marketing/artifacts/landing_page_template.md:10 |
+| N02_marketing/knowledge/kc_campaign.md | knowledge_card | N02_marketing/knowledge/kc_campaign.md:8 |
+| N02_marketing/knowledge/kc_email_sequence.md | knowledge_card | N02_marketing/knowledge/kc_email_sequence.md:8 |
+| N02_marketing/output/case_studies_intent_resolution.md | context_doc | N02_marketing/output/case_studies_intent_resolution.md:9 |
+| N02_marketing/output/report_intent_resolution_value_prop.md | context_doc | N02_marketing/output/report_intent_resolution_value_prop.md:9 |
+| N02_marketing/prompts/tpl_content_distribution_plan.md | prompt_template | N02_marketing/prompts/tpl_content_distribution_plan.md:71 |
+| N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md | prompt_template | N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md:66 |
+| N02_marketing/prompts/tpl_notebooklm_flashcard_format.md | prompt_template | N02_marketing/prompts/tpl_notebooklm_flashcard_format.md:71 |
+| N02_marketing/reports/self_audit_2026_04_11.md | self_audit | N02_marketing/reports/self_audit_2026_04_11.md:7 |
+| N02_marketing/reports/self_audit_gemini_2026_04_11.md | self_audit | N02_marketing/reports/self_audit_gemini_2026_04_11.md:6 |
+| N02_marketing/tools/copy_analyzer.md | cli_tool | N02_marketing/tools/copy_analyzer.md:11 |
+| N02_marketing/tools/headline_scorer.md | cli_tool | N02_marketing/tools/headline_scorer.md:11 |
+| N02_marketing/workflows/wf_kc_to_content.md | workflow | N02_marketing/workflows/wf_kc_to_content.md:40 |
+
+### 1.5 Maiores artefatos por tamanho
+| Path | Size_B | MTime_local | Evidence |
+|---|---|---|---|
+| N02_marketing/output/landing_page_template.md | 23972 | 2026-04-11 10:37:58 | stat N02_marketing/output/landing_page_template.md |
+| N02_marketing/knowledge/kc_tailwind_patterns.md | 20787 | 2026-04-11 10:37:58 | stat N02_marketing/knowledge/kc_tailwind_patterns.md |
+| N02_marketing/reports/self_audit_2026_04_11.md | 17337 | 2026-04-11 12:25:12 | stat N02_marketing/reports/self_audit_2026_04_11.md |
+| N02_marketing/output/report_intent_resolution_value_prop.md | 17020 | 2026-04-11 10:37:58 | stat N02_marketing/output/report_intent_resolution_value_prop.md |
+| N02_marketing/output/output_email_template.md | 16987 | 2026-04-11 10:37:58 | stat N02_marketing/output/output_email_template.md |
+
+```text
+Listing L1 - Get-ChildItem - sort Length
+N02_marketing\output/landing_page_template.md	23972	2026-04-11 10:37:58
+N02_marketing\knowledge/kc_tailwind_patterns.md	20787	2026-04-11 10:37:58
+N02_marketing\reports/self_audit_2026_04_11.md	17337	2026-04-11 12:25:12
+N02_marketing\output/report_intent_resolution_value_prop.md	17020	2026-04-11 10:37:58
+N02_marketing\output/output_email_template.md	16987	2026-04-11 10:37:58
+```
+
+### 1.6 Artefatos mais recentes
+| Path | MTime_local | Size_B | Evidence |
+|---|---|---|---|
+| N02_marketing/reports/self_audit_gemini_2026_04_11.md | 2026-04-11 13:06:05 | 7056 | stat N02_marketing/reports/self_audit_gemini_2026_04_11.md |
+| N02_marketing/reports/self_audit_2026_04_11.md | 2026-04-11 12:25:12 | 17337 | stat N02_marketing/reports/self_audit_2026_04_11.md |
+| N02_marketing/workflows/wf_kc_to_content.md | 2026-04-11 10:37:58 | 12796 | stat N02_marketing/workflows/wf_kc_to_content.md |
+| N02_marketing/tools/social_publisher_marketing.md | 2026-04-11 10:37:58 | 3240 | stat N02_marketing/tools/social_publisher_marketing.md |
+| N02_marketing/tools/headline_scorer.md | 2026-04-11 10:37:58 | 11212 | stat N02_marketing/tools/headline_scorer.md |
+
+```text
+Listing L2 - Get-ChildItem - sort LastWriteTime
+N02_marketing\reports/self_audit_gemini_2026_04_11.md	2026-04-11 13:06:05	7056
+N02_marketing\reports/self_audit_2026_04_11.md	2026-04-11 12:25:12	17337
+N02_marketing\workflows/wf_kc_to_content.md	2026-04-11 10:37:58	12796
+N02_marketing\tools/social_publisher_marketing.md	2026-04-11 10:37:58	3240
+N02_marketing\tools/headline_scorer.md	2026-04-11 10:37:58	11212
+```
+
+### 1.7 Cobertura dos kinds P03 pedidos
+| Kind | Count | Evidence |
+|---|---|---|
+| prompt_template | 8 | N02_marketing/artifacts/ad_copy_template.md:3; N02_marketing/artifacts/email_sequence_template.md:3; N02_marketing/artifacts/landing_page_template.md:3; N02_marketing/prompts/brand_voice_templates.md:3; N02_marketing/prompts/prompt_template_marketing.md:3; N02_marketing/prompts/tpl_content_distribution_plan.md:3; N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md:3; N02_marketing/prompts/tpl_notebooklm_flashcard_format.md:3 |
+| system_prompt | 1 | N02_marketing/prompts/system_prompt_marketing.md:3 |
+| action_prompt | 1 | N02_marketing/prompts/action_prompt_marketing.md:3 |
+| chain | 0 | no matches in inventory |
+| context_window_config | 0 | no matches in inventory |
+| tagline | 0 | no matches in inventory |
+
+```text
+Listing L3 - Select-String counts
+PS> @(Select-String -Path N02_marketing\*.md -Pattern "^kind\:\s*tagline").Count
+0
+PS> @(Select-String -Path N02_marketing\*.md -Pattern "^kind\:\s*chain").Count
+0
+PS> @(Select-String -Path N02_marketing\*.md -Pattern "^kind\:\s*context_window_config").Count
+0
+```
+
+## 2. Regras e conformidade
+| Regra | Score | Evidence | Nota |
+|---|---|---|---|
+| Artefatos ficam em N02_marketing/ | 9/10 | N02_marketing/README.md:3; N02_marketing/artifacts/email_sequence_template.md:3 | Escaneamento so encontrou fontes dentro da arvore exigida. |
+| Foco em copy/marketing | 8/10 | N02_marketing/output/output_monetization_launch.md:17-70 | Ainda existem arquivos puramente tecnicos, mas a maioria descreve narrativas de conversao. |
+| Sequencia clareza->desejo->acao | 6/10 | N02_marketing/output/output_monetization_launch.md:34-70 | Regra aspiracional; alguns templates (ex.: output/component_template.md) sao puramente tecnicos. |
+| A/B variants como padrao | 5/10 | N02_marketing/tools/headline_scorer.md:1-34 | Aspiracional; somente o headline scorer e alguns briefs citam variantes. |
+| Todo artefato contem conteudo de marketing/copy | 7/10 | N02_marketing/schemas/design_token_contract.md:3-32 | Varios artefatos sao especificacoes de design sem copy (schemas/, output_validator/). |
+| quality deve ser null (sem auto-score) | 2/10 | N02_marketing/output/output_email_template.md:11; N02_marketing/README.md:9 | 52 arquivos trazem notas 9.x apesar da proibi??o. |
+| Compilar apos salvar | 8/10 | N02_marketing/compiled/output_sdk_validation_self_audit.yaml:1-4 | compiled/ contem YAMLs atualizados, mas nao ha comprovacao para todos os arquivos recentes. |
+| 8F em todo fluxo | 6/10 | N02_marketing/reports/self_audit_2026_04_11.md:263 | So os relatorios trazem F1-F8; templates nao embedam o tra?o. |
+
+## 3. Gaps prioritarios
+| ID | Gap | Priority | Effort | Evidence |
+|---|---|---|---|---|
+| G1 | Zero taglines apesar de P03 registrar o kind | P0 | 2h | Listing L3 (tagline count 0); N02_marketing/reports/self_audit_2026_04_11.md:98-100 |
+| G2 | Nenhum chain/context_window_config para orquestrar funis | P0 | 4h | Listing L3 (chain/context_window_config = 0); N02_marketing/reports/self_audit_gemini_2026_04_11.md:58 |
+| G3 | 8 arquivos marcados como output_validator mas sao templates de referencia | P1 | 3h | N02_marketing/output/output_email_template.md:3; N02_marketing/output/output_social_card.md:3; demais em Section 1.1 |
+| G4 | Fluxo NotebookLM (wf_kc_to_content + tpl_notebooklm_*) mora no worktree generico | P1 | 5h | N02_marketing/workflows/wf_kc_to_content.md:5-160; N02_marketing/prompts/tpl_notebooklm_audio_wrapper.md:5-104 |
+| G5 | Auto-scores 9.x violam regra quality:null | P0 | 2h | N02_marketing/output/output_email_template.md:11; N02_marketing/README.md:9 |
+| G6 | 14 artefatos continuam sem avaliacao (quality:null) sem plano de review | P1 | 4h | Section 1.4 tabela null; exemplos: N02_marketing/tools/headline_scorer.md:11 |
+| G7 | Nenhum brand_config carregado -> sem voz ativa para prompts | P0 | 1h | CLAUDE.md:7-12; Listing L4 (Test-Path False) |
+| G8 | Context docs arquivados em output/ (ex.: report_intent_resolution) | P2 | 1h | N02_marketing/output/report_intent_resolution_value_prop.md:3; N02_marketing/output/case_studies_intent_resolution.md:3 |
+
+```text
+Listing L4 - Brand config inexistente
+PS> Test-Path .cex/brand/brand_config.yaml
+False
+```
+
+## 4. Fixes obrigatorios
+| Escopo | Acao imediata | Evidence |
+|---|---|---|
+| Artefatos <8.0 | Nenhum item abaixo de 8; manter vigilancia mensal. | Section 1.3 bucket <8.0 = 0 |
+| Frontmatter | cex_doctor mostra 123 PASS; continuar rodando apos cada entrega. | Listing L5 |
+| output_validator mislabels | Trocar kind para output_template ou mover para P07 eval (component_template.md etc). | N02_marketing/output/output_email_template.md:3; .../output_visual_report.md:3 |
+| Auto-score removals | Limpar field quality para null e depender de cex_score. | N02_marketing/output/output_email_template.md:11 |
+| Quality backlog | Agendar peer review para os 14 itens listados em Section 1.4. | Section 1.4 tabela |
+| Copy com marca especifica | Mover tpl_notebooklm_* e wf_kc_to_content para worktree da marca ou parametrizar via brand_config. | N02_marketing/workflows/wf_kc_to_content.md:5-160 |
+| Chain coverage | Criar pelo menos um chain para campanhas e so entao validar referencias. | Listing L3 (chain count 0) |
+| Copy que deveria viver em brand worktree | NotebookLM planilhas e wrappers devem ser isolados junto ao cliente que pediu. | N02_marketing/prompts/tpl_content_distribution_plan.md:5-88 |
+
+```text
+Listing L5 - cex_doctor resumo
+python _tools/cex_doctor.py => Result: 123 PASS | 0 WARN | 0 FAIL
+```
+
+## 5. Ferramentas
+### 5a. Ferramentas atuais aproveitaveis
+| Ferramenta | Uso direto | Evidence |
+|---|---|---|
+| cex_8f_runner.py | Executar pipeline completo para novos prompt_template e relatorios. | CLAUDE.md:102 |
+| cex_crew_runner.py | Montar stack de ISOs + memoria antes de tocar copy. | CLAUDE.md:103 |
+| cex_retriever.py | Comparar artefatos existentes antes de duplicar prompt. | CLAUDE.md:117 |
+| cex_prompt_optimizer.py | Criticar prompt_template e sugerir melhorias de densidade. | CLAUDE.md:116 |
+| cex_memory_select.py | Injetar memorias de campanhas ao gerar copy. | CLAUDE.md:119 |
+
+### 5b. Wishlist de ferramentas
+| Ferramenta desejada | Owner | Descricao |
+|---|---|---|
+| cex_copy_ab_test.py | N05 | Gera variantes A/B, injeta hipoteses e colhe metricas por canal antes do deploy. |
+| cex_tone_lint.py | N03 | Linter de tom que compara copy contra brand_config e lista desvios com exemplos. |
+| cex_tagline_workshop.py | N02 | Workshop automatizado para gerar 10 taglines + justificativas + score MAP (memoria, audiencia, proposta). |
+| cex_persona_gap_mapper.py | N01 | Mapeia gaps entre pesquisas recentes e mensagens ativas, priorizando briefs para N02. |
+
+## 6. Dependencias cruzadas
+| Direcao | Nucleo | Dependencia | Evidence |
+|---|---|---|---|
+| Preciso de | N01 | research_to_copy_brief com audiencia, dores e oportunidades | N02_marketing/orchestration/cross_nucleus_handoffs.md:19-60 |
+| Preciso de | N06 | commercial_guidance (pricing strategy, garantias) antes de escrever ofertas | N02_marketing/orchestration/cross_nucleus_handoffs.md:167-210 |
+| Preciso de | Brand config | brand_config.yaml inexistente -> sem voz aprovada | CLAUDE.md:7-12; Listing L4 |
+| Entrego para | N05 | copy_deployment_package com variantes, requisitos tecnicos e checklist | N02_marketing/orchestration/cross_nucleus_handoffs.md:93-150 |
+| Entrego para | N06 | copy comercial alinhada a pricing antes do go-live | N02_marketing/orchestration/cross_nucleus_handoffs.md:167-210 |
