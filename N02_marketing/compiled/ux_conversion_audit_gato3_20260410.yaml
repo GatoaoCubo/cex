@@ -1,0 +1,282 @@
+id: ux_conversion_audit_gato3_20260410
+kind: scoring_rubric
+title: UX & Conversion Audit — gato3.com.br
+version: 1.0.0
+date: 2026-04-10
+nucleus: N02
+quality: null
+tags:
+- audit
+- ux
+- conversion
+- brand
+- gato3
+- marketing
+executive_summary: 'GATO3 has a surprisingly mature e-commerce foundation for a young brand. The product detail pages are
+  genuinely best-in-class for Brazilian pet e-commerce — benefit tabs, usage guides, vet-validated copy, and an AI chat assistant
+  that recommends products contextually. The B2B program is well-structured with clear onboarding and margin transparency.
+
+
+  But the site is leaving money on the table. The biggest conversion killers are:
+
+
+  1. The homepage hero sells features, not desire — "Produtos inteligentes que harmonizam" is informative but doesn''t make
+  anyone''s pulse quicken
+
+  2. Zero social proof anywhere — no reviews, no testimonials, no user photos, no "X tutores confiam"
+
+  3. Blog is visually orphaned — completely different design system (amber/orange), breaking brand trust
+
+  4. No urgency or scarcity signals — the only scarcity is "Ultimas unidades" on low-stock items
+
+  5. Newsletter capture is buried — only in footer, with the weakest possible hook ("dicas e ofertas")
+
+
+  Overall site score: 7.2/10 — Solid architecture, weak persuasion layer.
+
+
+  ---'
+page_by_page_scoring: '| Page | Copy Quality | CTA Effectiveness | Brand Consistency | Conversion Potential | Overall |
+
+  |------|:-----------:|:-----------------:|:-----------------:|:-------------------:|:-------:|
+
+  | Homepage (B2C) | 7 | 7 | 8 | 6 | 7.0 |
+
+  | Catalog | 6 | 7 | 9 | 7 | 7.3 |
+
+  | Product Detail | 9 | 8 | 9 | 8 | 8.5 |
+
+  | SAC / Ronronalda | 8 | 7 | 7 | 8 | 7.5 |
+
+  | B2B | 8 | 8 | 8 | 8 | 8.0 |
+
+  | About | 5 | 5 | 7 | 4 | 5.3 |
+
+  | Blog | 7 | 5 | 3 | 5 | 5.0 |
+
+  | Footer / Cross-cutting | 7 | 6 | 8 | 6 | 6.8 |
+
+
+  ---'
+1_homepage_b2c_score_7_0_10: ''
+what_works:
+- 'Content quality is high: 12 posts covering behavior, science, products, trends. Sources cited (Journal of Feline Medicine,
+  Scientific American, Cornell). This is real educational content, not SEO filler.'
+- 'Category system: 5 categories with icons. Filterable. Searchable.'
+- 'Reading time and dates: Sets expectations. Professional.'
+- 'Featured posts: 3 highlighted articles. Editorial curation.'
+what_bleeds_revenue:
+- 'Brand story is anemic: "A GATO3 nasceu da observacao de que o mercado pet brasileiro tinha muitos produtos genericos..."
+  — this reads like a business plan executive summary, not a brand story. Where''s the founder? Where''s the emotion? Where''s
+  the cat that started it all?'
+- 'No founder presence: The brand config has a detailed brand story about "tres dimensoes" and vet validation, but this page
+  strips all the richness away into a dry paragraph.'
+- 'No photos: An About page without a single image of a real cat, a real product, or a real person. This is the page where
+  trust is built — and it''s all text.'
+- 'Accent-stripped copy: "Educacao" instead of "Educacao" (likely sanitized for ASCII safety but visible to users). Multiple
+  instances: "Historia", "duvidas", etc.'
+- 'No team, no CNPJ, no address on this page: Trust signals that should be HERE are only in the footer.'
+recommended_rewrites: 'Headline (current): > "Catalogo GATO3" Proposed: > "Curadoria completa — cada produto aprovado por
+  veterinarios" Subheadline (current): > "Design minimalista e funcionalidade para o bem-estar do seu gato" Proposed: > "Sem
+  generico, sem exagero. So o que funciona de verdade." ---'
+2_catalog_catalogo_score_7_3_10: ''
+3_product_detail_produtos_slug_score_8_5_10: ''
+what_works_this_is_the_site_s_crown_jewel:
+- 'Benefit tabs (Functional + Emotional): Splitting benefits into "Funcionais" and "Emocionais" is brilliant. The ICP buys
+  emotionally and justifies rationally. This structure serves both modes.'
+- '"Por que funciona" section: Explaining the science behind the product (vet validation) is exactly what the Caregiver archetype
+  demands.'
+- 'Usage guide with numbered steps: Reduces post-purchase anxiety. Shows the brand cares about adoption, not just sale.'
+- 'Box contents: "O que vem na caixa" — eliminates a common purchase objection.'
+- 'Care instructions: Extends product lifetime = higher satisfaction = more repeat purchases.'
+- 'Warranty section: Highlighted in a special card with brand accent. Trust signal.'
+- 'Product FAQ: Per-product FAQ with accordion. Addresses product-specific objections.'
+- 'Related products carousel: Cross-sell is present and functional.'
+- 'Dual CTA: "Adicionar ao Carrinho" + "Chat com a Ronronalda" — buy OR get help. No dead end.'
+- 'GA4 tracking: `view_item` and `add_to_cart` events. Data-driven.'
+- 'SEO: Product schema JSON-LD, custom SEO fields per product, breadcrumbs.'
+- 'Media Kit for B2B: Product pages double as B2B showcase with downloadable assets. Efficient.'
+recommended_addition: 'Add a review/social proof section above the fold. Even curated testimonials from WhatsApp conversations
+  (with permission) would work. Structure:
+
+  "Comprei o Donut e meu gato dormiu 3 horas direto no primeiro dia." — Ana P., Sao Paulo
+
+
+  ---'
+4_sac_ronronalda_sac_score_7_5_10: ''
+recommended_copy: 'Welcome message (add as initial assistant message): > "Oi! Sou a Ronronalda, especialista em comportamento
+  felino. Pode me contar o que esta acontecendo — eu te ajudo a entender e a encontrar a solucao certa." ---'
+5_b2b_b2b_score_8_0_10: ''
+6_about_sobre_score_5_3_10: ''
+recommended_rewrite: 'Brand story (current): > "A GATO3 nasceu da observacao de que o mercado pet brasileiro tinha muitos
+  produtos genericos e poucos que equilibravam design, funcionalidade e o real bem-estar do gato." Proposed: > "Tudo comecou
+  com uma pergunta simples: por que produtos para gatos precisam ser feios? A GATO3 nasceu da recusa em aceitar o generico.
+  Cada produto no nosso catalogo passa por veterinarios comportamentalistas antes de chegar ate voce. Porque o seu gato merece
+  mais que ''serve''. E a sua casa tambem." ---'
+7_blog_blog_score_5_0_10: ''
+what_bleeds_revenue_the_biggest_brand_consistency_failure:
+- 'Completely different visual identity: The blog uses `bg-gradient-to-b from-amber-50 to-white`, amber/orange color scheme,
+  and a different header. The main site is PB minimalista (black/white). The blog looks like it belongs to a DIFFERENT BRAND.'
+- 'Different header: Uses its own inline header with `<Cat className="h-8 w-8 text-amber-600" />` and amber-900 text instead
+  of the site''s `<Header />` component. A user navigating from the catalog to the blog will feel lost.'
+- 'Different footer: `<footer className="bg-gray-900 text-white py-8">` — one line of text. The main footer has 4 columns
+  with newsletter, social, trust signals. The blog footer has none of this.'
+- 'No product integration in posts: Blog posts about "tapete gelado" or "fonte de agua" don''t link to actual products in
+  the catalog. This is the #1 missed conversion opportunity — educational content that creates desire but doesn''t offer the
+  solution.'
+- 'Instagram CTA uses gradient button: `bg-gradient-to-r from-pink-500 to-purple-500` — Instagram-colored, not brand-colored.
+  This is the only place on the site with pink/purple.'
+- 'No newsletter capture on blog: The main site footer has newsletter. The blog doesn''t. Blog readers are the HIGHEST intent
+  audience for email capture.'
+critical_fix: The blog MUST use `<Header variant="b2c" />` and `<Footer variant="b2c" />` from the main site. The amber color
+  scheme must be replaced with the brand's PB palette. This is non-negotiable for brand coherence. ---
+8_cross_cutting_conversion_analysis_score_6_8_10: ''
+navigation_friction_map: "Landing (B2C) → Catalogo → Produto → Carrinho → Checkout (Shopify)\n     2 clicks to product page\n\
+  \     3 clicks to cart\n     4 clicks to checkout (redirects to Shopify)\n\nVerdict: Acceptable funnel length. The Shopify\
+  \ redirect at checkout is standard but creates a moment of doubt (\"am I still on GATO3?\")."
+newsletter_capture:
+- 'Location: Footer only (all pages except Blog)'
+- 'Hook: "Receba dicas de bem-estar felino e ofertas exclusivas"'
+- 'Grade: D — Generic hook, buried placement. No lead magnet, no discount incentive, no popup.'
+- 'Fix: Add a "Guia gratuito: 7 sinais de estresse felino" lead magnet with exit-intent popup.'
+social_proof:
+- 'Reviews: ZERO anywhere on the site'
+- 'Testimonials: ZERO'
+- 'User photos: ZERO'
+- 'Trust badges: Only "Compra Segura | Pagamento via Shopify" in footer'
+- 'Grade: F — This is the site''s most critical gap'
+urgency_scarcity:
+- 'Stock signals: "Ultimas unidades" badge when quantity <= 5'
+- 'Limited editions: None'
+- 'Seasonal: None'
+- 'Countdown: None'
+- 'Grade: D — Only reactive scarcity (low stock), no proactive urgency'
+mobile_experience:
+- 'Touch targets: min-h-[48px] on all interactive elements. WCAG compliant.'
+- 'Mobile menu: Hamburger with focus trap and Escape key handling. Excellent.'
+- 'Carousel navigation: Dot indicators on mobile, arrows on desktop. Good.'
+- 'Product cards: Full-width on mobile, 2-col on tablet, 3-col on desktop. Responsive.'
+- 'Grade: A — Mobile UX is well-executed'
+footer_trust_signals: '- CNPJ: Present (51.765.687/0001-97)
+
+  - Security badge: "Compra Segura" with ShieldCheck icon
+
+  - Payment: "Pagamento via Shopify"
+
+  - Social links: Instagram, YouTube, Facebook, WhatsApp
+
+  - Contact: WhatsApp number displayed
+
+  - Marketplace links: Mercado Livre, Shopee
+
+  - Legal: Privacy Policy, Terms of Use
+
+  - Grade: B+ — All essentials present. Missing: SSL badge, payment method icons (Visa, Mastercard, Pix).
+
+
+  ---'
+top_5_quick_wins_highest_impact_lowest_effort: '| # | Fix | Impact | Effort | Page |
+
+  |---|-----|--------|--------|------|
+
+  | 1 | Add 5-10 curated reviews (from WhatsApp conversations or Mercado Livre) to product pages | Critical | Low — create
+  a `reviews` array in product data | Product Detail |
+
+  | 2 | Replace blog header/footer with site-wide `<Header>` and `<Footer>` components | High — brand trust | Low — 2 import
+  changes | Blog |
+
+  | 3 | Add "Avise-me" email capture on out-of-stock products | High — captures leads | Low — form + Supabase insert | Product
+  Detail |
+
+  | 4 | Add welcome message to Ronronalda chat | Medium — sets tone | Trivial — 1 line in initial messages | SAC |
+
+  | 5 | Update B2B copyright to dynamic year | Low but signals care | Trivial — `{new Date().getFullYear()}` | B2B |'
+top_5_strategic_improvements_high_impact_more_effort: '| # | Improvement | Impact | Effort | Scope |
+
+  |---|-------------|--------|--------|-------|
+
+  | 1 | Social proof system: Reviews, ratings, "X vendidos", user photo gallery | Critical — the #1 conversion blocker | Medium
+  — DB schema + UI components + collection workflow | Sitewide |
+
+  | 2 | Blog visual alignment: Replace amber palette with PB minimalista. Add product cross-links in educational posts | High
+  — brand coherence + content commerce | Medium — CSS overhaul + product linking logic | Blog |
+
+  | 3 | Newsletter lead magnet: Exit-intent popup with free guide ("7 sinais de estresse felino" PDF) + 10% first purchase
+  discount | High — email list = owned audience | Medium — popup component + PDF + Supabase flow | Sitewide |
+
+  | 4 | Product categories in catalog: Add category tabs or sidebar (Camas, Arranhadores, Brinquedos, Acessorios) | Medium
+  — improves discovery as catalog grows | Medium — category taxonomy + filter UI | Catalog |
+
+  | 5 | Rewrite About page: Founder story with photos, mission statement from brand_config.yaml, team section, timeline |
+  Medium — builds trust for unknown brand | Medium — content creation + photo sourcing | About |
+
+
+  ---'
+brand_voice_consistency_audit: '| Criterion | Target (brand_config) | Actual (site) | Verdict |
+
+  |-----------|----------------------|---------------|---------|
+
+  | Tone: sofisticado-acolhedor | Warm + sophisticated | Mostly achieved except About (dry) and Blog (casual/amber) | 7/10
+  |
+
+  | Formality: 3/5 | Balanced | Consistent across B2C pages | 8/10 |
+
+  | Warmth: 4/5 | High warmth | Strong in Ronronalda, FAQ, product pages. Weak in About, Catalog headline | 7/10 |
+
+  | "Explicar o porque" | Science-backed education | Excellent in blog and product pages ("Por que funciona") | 9/10 |
+
+  | "Tratar tutor como parceiro" | No condescension | Consistent — language is respectful throughout | 9/10 |
+
+  | "Nunca prometer milagres" | No overclaiming | Clean — no false promises anywhere | 10/10 |
+
+  | "Sem CAPS LOCK ou emoji excessivo" | Restrained | Almost perfect — blog CTA has Instagram gradient that breaks this |
+  8/10 |
+
+  | Visual: PB minimalista | Black/white, Allrounder + Kenao | Perfect on B2C, Catalog, Product, B2B. Blog breaks this completely
+  | 6/10 |
+
+
+  Overall brand consistency: 8.0/10 (dragged down by Blog''s visual divorce)
+
+
+  ---'
+conversion_funnel_heatmap: 'STAGE          SCORE   NOTES
+
+  Awareness      7/10    SEO is solid. Blog content is quality. Social channels linked.
+
+  Interest       6/10    Hero creates interest but doesn''t CREATE DESIRE. No social proof.
+
+  Desire         8/10    Product pages are exceptional. Benefits, science, usage guides.
+
+  Action         7/10    Cart works. Dual CTA (buy + chat). But no urgency, no reviews.
+
+  Retention      5/10    Newsletter is weak. No post-purchase sequence visible. No loyalty program.
+
+  Referral       3/10    No referral program. No "share with a friend". No UGC.
+
+
+  ---'
+final_verdict: 'GATO3 has built a technically excellent e-commerce site with a genuinely differentiated product page experience.
+  The combination of vet-validated products, benefit-driven copy, AI chat assistant, and B2B transparency is rare in Brazilian
+  pet e-commerce.
+
+
+  The site''s architecture is a 9. Its persuasion layer is a 6.
+
+
+  The gap between "informing" and "converting" is where the money lives. Adding social proof, fixing the blog''s visual identity,
+  and strengthening the newsletter capture would move the overall score from 7.2 to 8.5+ within 30 days.
+
+
+  The brand voice is consistent where it matters most (product pages, FAQ, Ronronalda). The About page and Blog are the weak
+  links — and they''re the cheapest to fix.
+
+
+  ---
+
+
+  Report generated by N02 Marketing Nucleus | 8F Pipeline | 2026-04-10
+
+  Source: gato-cubo-commerce repo (React/TypeScript/Lovable) + brand_config.yaml
+
+  Method: Source code analysis (SPA cannot be crawled via WebFetch)'
