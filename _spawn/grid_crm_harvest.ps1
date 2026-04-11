@@ -41,7 +41,7 @@ $batchLabels = @(
     "BATCH_F CNAE Deep"
 )
 
-$bootScript = "$root\boot\n01.cmd"
+$bootScript = "$root\boot\n01.ps1"
 
 Write-Host ""
 Write-Host "  CEX GRID - CRM_FULL_HARVEST - 6 SLOTS" -ForegroundColor Cyan

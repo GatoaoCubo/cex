@@ -120,9 +120,8 @@ if (Test-Path $pidFile) {
     }
 }
 
-# Boot script -- prefer .ps1 (sin-aware UX: colors, sizing, banner) over .cmd (basic)
+# Boot script -- PowerShell-only stack (sin-aware UX: colors, sizing, banner)
 $bootPs1 = "$root\boot\$nucleus.ps1"
-$bootCmd = "$root\boot\$nucleus.cmd"
 
 if (Test-Path $bootPs1) {
     Write-Output "[$upper] Boot: PowerShell (sin-aware UX)"
@@ -130,11 +129,8 @@ if (Test-Path $bootPs1) {
         "-NoProfile", "-NoExit", "-ExecutionPolicy", "Bypass",
         "-File", $bootPs1
     ) -WorkingDirectory $root -PassThru
-} elseif (Test-Path $bootCmd) {
-    Write-Output "[$upper] Boot: CMD (fallback)"
-    $proc = Start-Process cmd -ArgumentList "/k `"$bootCmd`"" -WorkingDirectory $root -PassThru
 } else {
-    Write-Output "[$upper] ERROR: no boot script at $bootPs1 or $bootCmd"; exit 1
+    Write-Output "[$upper] ERROR: no boot script at $bootPs1"; exit 1
 }
 
 # Position window in fixed grid cell (aggressive: repeat for 15s to beat Claude resize)

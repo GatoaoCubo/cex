@@ -223,9 +223,9 @@ if !WARN!==1 (
 echo   ============================================================
 echo.
 echo   Next steps:
-echo     1. boot\cex.cmd             Start N07 orchestrator
-echo     2. boot\n03.cmd             Start builder nucleus
-echo     3. Type /init in chat       Configure your brand
+echo     1. powershell boot\cex.ps1    Start N07 orchestrator
+echo     2. powershell boot\n03.ps1    Start builder nucleus
+echo     3. Type /init in chat         Configure your brand
 echo.
 echo   3 runtimes + Claude Code + clone = CEX runs.
 echo.

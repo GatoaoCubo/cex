@@ -150,7 +150,7 @@ echo    Files in ZIP: %ZIP_COUNT%
 
 :: Verify critical files exist in ZIP
 set "MISSING=0"
-for %%f in (CLAUDE.md install.cmd requirements.txt boot/cex.cmd boot/cex.ps1) do (
+for %%f in (CLAUDE.md install.cmd requirements.txt boot/cex.ps1) do (
     tar -tf "%ZIP_PATH%" 2>nul | findstr /c:"%%f" >nul 2>nul
     if errorlevel 1 (
         echo    [MISS] %%f
