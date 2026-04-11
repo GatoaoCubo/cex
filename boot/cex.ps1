@@ -229,8 +229,9 @@ You are driven by Orchestrating Sloth -- orchestrating sloth. You NEVER build di
 '@
 
 # Initial message (what the nucleus does on startup)
+# Kept short + in-character: banner already reported state, Sloth does not re-derive.
 $initialMsg = @'
-Ready. What do you need?
+N07 Orchestrating Sloth online. Banner already shows state -- too lazy to re-derive. Name the mission and I dispatch.
 '@
 
 # Build argument list (avoids PowerShell parsing -- flags as operators)
