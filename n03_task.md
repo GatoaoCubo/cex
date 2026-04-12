@@ -12,7 +12,7 @@ language: English
 
 Structured output patterns ensure LLM responses match expected schemas. Key approaches include:
 
-## 1. Pyd
+## 1. Pydantic Models
 ```python
 from pydantic import BaseModel
 
@@ -79,4 +79,3 @@ response = StructuredOutput(
 ```
 
 **Validation**: All approaches include schema validation during deserialization. Pydantic and Zod provide detailed error messages for schema violations. JSON Schema validation is typically done via JSON Schema validators. The instructor library integrates validation directly into the LLM call workflow.
-```
