@@ -1,3 +1,3 @@
-Create file: N06_commercial/knowledge/kc_ai_saas_monetization.md
-Knowledge card about AI SaaS monetization models. Cover: per-token pricing, seat-based, usage-based, freemium, enterprise tiers. Include comparison table with examples.
-YAML frontmatter: id: kc_ai_saas_monetization, kind: knowledge_card, title: "AI SaaS Monetization Models", version: 1.0.0, quality: null, pillar: P01. English only. Under 100 lines.
+Create: N06_commercial/knowledge/kc_token_economics.md
+KC about token economics for LLM operations. Cover: input vs output pricing, prompt caching savings, batch discounts, local vs cloud break-even analysis.
+YAML: id: kc_token_economics, kind: knowledge_card, title: "Token Economics for LLM Operations", version: 1.0.0, quality: null, pillar: P01. English. Under 80 lines.
