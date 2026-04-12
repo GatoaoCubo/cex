@@ -3,7 +3,7 @@ id: kc_model_context_protocol
 kind: knowledge_card
 title: "Model Context Protocol (MCP)"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 ---
 

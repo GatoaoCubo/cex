@@ -3,7 +3,7 @@ id: kc_prompt_engineering_taxonomy
 kind: knowledge_card
 title: "Prompt Engineering Taxonomy"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 ---
 

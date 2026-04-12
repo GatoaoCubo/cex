@@ -3,7 +3,7 @@ id: kc_git_workflow_for_agents
 kind: knowledge_card
 title: "Git Workflow for Autonomous Agents"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: en
 ---

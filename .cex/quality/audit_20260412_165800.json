@@ -1,0 +1,666 @@
+{
+  "ts": "2026-04-12T16:58:00.560153",
+  "summary": {
+    "wired": 108,
+    "broken": 1,
+    "phantom": 0,
+    "orphan": 0,
+    "total": 109
+  },
+  "checks": [
+    {
+      "layer": "L0",
+      "check": "kinds_meta.json",
+      "status": "WIRED",
+      "detail": "132 kinds"
+    },
+    {
+      "layer": "L0",
+      "check": "router_config.yaml",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "boot_scripts",
+      "status": "WIRED",
+      "detail": "24 scripts"
+    },
+    {
+      "layer": "L0",
+      "check": "dispatch.sh",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "runtime/decisions",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "runtime/handoffs",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "runtime/signals",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "runtime/pids",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "runtime/locks",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "runtime/plans",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "runtime/outputs",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L0",
+      "check": "runtime/archive",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P01_knowledge/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P01_knowledge/compiled",
+      "status": "WIRED",
+      "detail": "196 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P02_model/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P02_model/compiled",
+      "status": "WIRED",
+      "detail": "21 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P03_prompt/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P03_prompt/compiled",
+      "status": "WIRED",
+      "detail": "26 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P04_tools/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P04_tools/compiled",
+      "status": "WIRED",
+      "detail": "57 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P05_output/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P05_output/compiled",
+      "status": "WIRED",
+      "detail": "5 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P06_schema/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P06_schema/compiled",
+      "status": "WIRED",
+      "detail": "11 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P07_evals/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P07_evals/compiled",
+      "status": "WIRED",
+      "detail": "13 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P08_architecture/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P08_architecture/compiled",
+      "status": "WIRED",
+      "detail": "14 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P09_config/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P09_config/compiled",
+      "status": "WIRED",
+      "detail": "8 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P10_memory/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P10_memory/compiled",
+      "status": "WIRED",
+      "detail": "14 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P11_feedback/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P11_feedback/compiled",
+      "status": "WIRED",
+      "detail": "17 files"
+    },
+    {
+      "layer": "L1",
+      "check": "P12_orchestration/_schema",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L1",
+      "check": "P12_orchestration/compiled",
+      "status": "WIRED",
+      "detail": "14 files"
+    },
+    {
+      "layer": "L2",
+      "check": "N01_intelligence/structure",
+      "status": "WIRED",
+      "detail": "13 subdirs"
+    },
+    {
+      "layer": "L2",
+      "check": "N01_intelligence/compiled",
+      "status": "WIRED",
+      "detail": "63 artifacts"
+    },
+    {
+      "layer": "L2",
+      "check": "N02_marketing/structure",
+      "status": "WIRED",
+      "detail": "16 subdirs"
+    },
+    {
+      "layer": "L2",
+      "check": "N02_marketing/compiled",
+      "status": "WIRED",
+      "detail": "54 artifacts"
+    },
+    {
+      "layer": "L2",
+      "check": "N03_builder/structure",
+      "status": "BROKEN",
+      "detail": "10 subdirs, missing: ['output']"
+    },
+    {
+      "layer": "L2",
+      "check": "N03_builder/compiled",
+      "status": "WIRED",
+      "detail": "13 artifacts"
+    },
+    {
+      "layer": "L2",
+      "check": "N04_knowledge/structure",
+      "status": "WIRED",
+      "detail": "13 subdirs"
+    },
+    {
+      "layer": "L2",
+      "check": "N04_knowledge/compiled",
+      "status": "WIRED",
+      "detail": "66 artifacts"
+    },
+    {
+      "layer": "L2",
+      "check": "N05_operations/structure",
+      "status": "WIRED",
+      "detail": "12 subdirs"
+    },
+    {
+      "layer": "L2",
+      "check": "N05_operations/compiled",
+      "status": "WIRED",
+      "detail": "44 artifacts"
+    },
+    {
+      "layer": "L2",
+      "check": "N06_commercial/structure",
+      "status": "WIRED",
+      "detail": "13 subdirs"
+    },
+    {
+      "layer": "L2",
+      "check": "N06_commercial/compiled",
+      "status": "WIRED",
+      "detail": "34 artifacts"
+    },
+    {
+      "layer": "L2",
+      "check": "N07_admin/structure",
+      "status": "WIRED",
+      "detail": "10 subdirs"
+    },
+    {
+      "layer": "L2",
+      "check": "N07_admin/compiled",
+      "status": "WIRED",
+      "detail": "22 artifacts"
+    },
+    {
+      "layer": "L2",
+      "check": "N01_rule",
+      "status": "WIRED",
+      "detail": "n01-intelligence.md"
+    },
+    {
+      "layer": "L2",
+      "check": "N02_rule",
+      "status": "WIRED",
+      "detail": "n02-marketing.md"
+    },
+    {
+      "layer": "L2",
+      "check": "N03_rule",
+      "status": "WIRED",
+      "detail": "n03-builder.md"
+    },
+    {
+      "layer": "L2",
+      "check": "N04_rule",
+      "status": "WIRED",
+      "detail": "n04-knowledge.md"
+    },
+    {
+      "layer": "L2",
+      "check": "N05_rule",
+      "status": "WIRED",
+      "detail": "n05-operations.md"
+    },
+    {
+      "layer": "L2",
+      "check": "N06_rule",
+      "status": "WIRED",
+      "detail": "n06-commercial.md"
+    },
+    {
+      "layer": "L2",
+      "check": "N07_rule",
+      "status": "WIRED",
+      "detail": "n07-autonomous-lifecycle.md"
+    },
+    {
+      "layer": "L3",
+      "check": "builder_count",
+      "status": "WIRED",
+      "detail": "125 builders"
+    },
+    {
+      "layer": "L3",
+      "check": "action-prompt-builder/ISOs",
+      "status": "WIRED",
+      "detail": "13/13"
+    },
+    {
+      "layer": "L3",
+      "check": "agent-builder/ISOs",
+      "status": "WIRED",
+      "detail": "13/13"
+    },
+    {
+      "layer": "L3",
+      "check": "agent-card-builder/ISOs",
+      "status": "WIRED",
+      "detail": "13/13"
+    },
+    {
+      "layer": "L3",
+      "check": "agent-package-builder/ISOs",
+      "status": "WIRED",
+      "detail": "13/13"
+    },
+    {
+      "layer": "L3",
+      "check": "api-client-builder/ISOs",
+      "status": "WIRED",
+      "detail": "13/13"
+    },
+    {
+      "layer": "L3",
+      "check": "shared_skills",
+      "status": "WIRED",
+      "detail": "3 shared"
+    },
+    {
+      "layer": "L3",
+      "check": "sub_agents",
+      "status": "WIRED",
+      "detail": "126 agents"
+    },
+    {
+      "layer": "L4",
+      "check": "kind_KCs",
+      "status": "WIRED",
+      "detail": "133 KCs"
+    },
+    {
+      "layer": "L4",
+      "check": "domain_KCs",
+      "status": "WIRED",
+      "detail": "92 domain KCs"
+    },
+    {
+      "layer": "L4",
+      "check": "KC_coverage",
+      "status": "WIRED",
+      "detail": "132/132 covered, missing: []"
+    },
+    {
+      "layer": "L5",
+      "check": "cex_tools",
+      "status": "WIRED",
+      "detail": "76 tools"
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_prompt_layers",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_skill_loader",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_router",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_token_budget",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_gdp",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_memory_types",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_memory_age",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_agent_spawn",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "import:cex_coordinator",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "L5",
+      "check": "prompt_layers_load",
+      "status": "WIRED",
+      "detail": "15 artifacts"
+    },
+    {
+      "layer": "L5",
+      "check": "skill_loader_ISOs",
+      "status": "WIRED",
+      "detail": "2013 ISOs"
+    },
+    {
+      "layer": "L5",
+      "check": "cex_sdk_modules",
+      "status": "WIRED",
+      "detail": "56 modules"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W1_identity",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "WIRE",
+      "check": "W2_doing_tasks",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "WIRE",
+      "check": "W3_action_protocol",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "WIRE",
+      "check": "W4_guardrails",
+      "status": "WIRED",
+      "detail": "PRODUCE should have guardrails"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W4b_no_guard_REASON",
+      "status": "WIRED",
+      "detail": "REASON excluded"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W5_verification",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "WIRE",
+      "check": "W5b_no_verify_agent_PRODUCE",
+      "status": "WIRED",
+      "detail": "verification_agent excluded from PRODUCE"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W6_compaction",
+      "status": "WIRED",
+      "detail": "ratio=0.98"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W7_memory_extract",
+      "status": "WIRED",
+      "detail": "counter=5"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T01_skill_loader_wired",
+      "status": "WIRED",
+      "detail": "SkillLoader in crew_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T02_router_wired",
+      "status": "WIRED",
+      "detail": "CexRouter in crew_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T03_gdp_wired",
+      "status": "WIRED",
+      "detail": "GDP in 8f_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T04_budget_wired",
+      "status": "WIRED",
+      "detail": "TokenBudget in 8f_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T05_memtype_wired",
+      "status": "WIRED",
+      "detail": "MemoryType in update"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T06_memage_wired",
+      "status": "WIRED",
+      "detail": "MemoryAge in select"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T08_coordinator_wired",
+      "status": "WIRED",
+      "detail": "Coordinator in mission_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T10_reverse_compiler",
+      "status": "WIRED",
+      "detail": "Reverse compiler exists"
+    },
+    {
+      "layer": "WIRE",
+      "check": "artifacts_loadable",
+      "status": "WIRED",
+      "detail": "14/14"
+    },
+    {
+      "layer": "L6",
+      "check": "rules",
+      "status": "WIRED",
+      "detail": "16"
+    },
+    {
+      "layer": "L6",
+      "check": "commands",
+      "status": "WIRED",
+      "detail": "13"
+    },
+    {
+      "layer": "L6",
+      "check": "learning_records",
+      "status": "WIRED",
+      "detail": "16"
+    },
+    {
+      "layer": "CASCADE",
+      "check": "C1_build",
+      "status": "WIRED",
+      "detail": "verb=create obj=None"
+    },
+    {
+      "layer": "CASCADE",
+      "check": "C2_quality",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "CASCADE",
+      "check": "C3_knowledge",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "CASCADE",
+      "check": "C4_decision",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "CASCADE",
+      "check": "C5_memory",
+      "status": "WIRED",
+      "detail": "types=4 age_module=ok"
+    },
+    {
+      "layer": "CASCADE",
+      "check": "C6_evolution",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "CASCADE",
+      "check": "C7_dispatch",
+      "status": "WIRED",
+      "detail": "runner=True watch=True dispatch=True"
+    }
+  ]
+}

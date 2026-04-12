@@ -3,7 +3,7 @@ id: kc_container_deployment_llm
 kind: knowledge_card
 title: "Container Deployment for LLM Apps"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: en
 ---

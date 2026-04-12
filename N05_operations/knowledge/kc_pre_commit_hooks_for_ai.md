@@ -3,7 +3,7 @@ id: kc_pre_commit_hooks_for_ai
 kind: knowledge_card
 title: "Pre-Commit Hooks for AI-Generated Code"
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
 language: en
 ---

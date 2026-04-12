@@ -3,7 +3,7 @@ id: kc_synthetic_data_generation
 kind: knowledge_card
 title: "Synthetic Data Generation for LLMs"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: English
 ---

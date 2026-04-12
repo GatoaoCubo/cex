@@ -3,7 +3,8 @@ id: kc_dispatch_modes
 kind: knowledge_card
 title: CEX Dispatch Modes Comparison
 version: 1.0.0
-quality: null
+quality: 8.6
+pillar: P01
 ---
 
 # CEX Dispatch Modes Comparison

@@ -3,7 +3,7 @@ id: kc_open_source_ai_ecosystem
 kind: knowledge_card
 title: "Open Source AI Ecosystem 2026"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 ---
 

@@ -3,7 +3,7 @@ id: kc_developer_experience_patterns
 kind: knowledge_card
 title: "Developer Experience Patterns for AI Tools"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: English
 lines: 79

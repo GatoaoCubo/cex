@@ -3,7 +3,7 @@ id: kc_ollama_deployment_guide
 kind: knowledge_card
 title: "Ollama Deployment Guide"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 ---
 

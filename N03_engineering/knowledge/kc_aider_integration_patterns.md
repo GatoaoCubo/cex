@@ -3,7 +3,7 @@ id: kc_aider_integration_patterns
 kind: knowledge_card
 title: "Aider CLI Integration Patterns"
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
 ---
 

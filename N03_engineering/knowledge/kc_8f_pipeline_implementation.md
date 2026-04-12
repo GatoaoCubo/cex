@@ -3,7 +3,7 @@ id: kc_8f_pipeline_implementation
 kind: knowledge_card
 title: "8F Pipeline Implementation Guide"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 ---
 

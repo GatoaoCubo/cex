@@ -3,7 +3,7 @@ id: kc_llm_agent_frameworks
 kind: knowledge_card
 title: "LLM Agent Frameworks Comparison"
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
 ---
 
