@@ -52,7 +52,7 @@ density_score: 1.0
 | `schemas/` | 5 | a11y checklist, design tokens, HTML output schema, responsive breakpoints, tailwind palette contract |
 | `tools/` | 3 | `social_publisher_marketing.md` + `copy_analyzer.md` + `headline_scorer.md` |
 
-**Total source files: 57** · **Total compiled: 48** · **Grand total: 105 files**
+**Total source files: 66** · **Total compiled: 56** · **Grand total: 122+ files**
 
 ---
 
@@ -152,10 +152,10 @@ density_score: 1.0
 
 | Server | Command | What It Does | Status |
 |--------|---------|-------------|--------|
-| **markitdown** | `npx markitdown-mcp` | Converte documentos (PDF, DOCX, PPTX) para Markdown | ✅ Ready |
-| **browser** | `npx @anthropic-ai/mcp-server-puppeteer` | Navegação web, screenshots, scraping | ✅ Ready |
-| **canva** | `npx @mcp_factory/canva-mcp-server` | Cria designs (posts, stories, thumbnails) via Canva Business API | ✅ Ready (needs env vars) |
-| **notebooklm** | `npx notebooklm-mcp@latest` | Google NotebookLM: flashcards, audio summaries, quizzes | ✅ Ready |
+| **markitdown** | `npx markitdown-mcp-npx` | Converte documentos (PDF, DOCX, PPTX) para Markdown | FAIL -- config has wrong package (`markitdown-mcp` is 404). Fix: use `markitdown-mcp-npx` |
+| **browser** | `npx @modelcontextprotocol/server-puppeteer` | Navegação web, screenshots, scraping | FAIL -- config has wrong package (`@anthropic-ai/mcp-server-puppeteer` is 404). Fix: use `@modelcontextprotocol/server-puppeteer` (deprecated, watch for replacement) |
+| **canva** | `npx @mcp_factory/canva-mcp-server` | Cria designs (posts, stories, thumbnails) via Canva Business API | FAIL -- `CANVA_CLIENT_ID` and `CANVA_CLIENT_SECRET` NOT SET |
+| **notebooklm** | `npx notebooklm-mcp@latest` | Google NotebookLM: flashcards, audio summaries, quizzes | PASS -- v1.0.0 starts correctly |
 
 ---
 
@@ -209,7 +209,10 @@ density_score: 1.0
 | ~~No `kc_campaign.md`~~ | ~~Kind KC ausente~~ | ~~N04 criar KC~~ | ✅ Criado 2026-04-07 |
 | ~~Single artifact in `artifacts/`~~ | ~~Apenas 1 template~~ | ~~Build via 8F~~ | ✅ 3 templates agora |
 | ~~Single tool~~ | ~~Faltava copy analyzer, headline scorer~~ | ~~N05 criar tools~~ | ✅ 3 tools agora |
+| MCP markitdown wrong package | Config says `markitdown-mcp` (404). Correct: `markitdown-mcp-npx` | Update `.mcp-n02.json` | ⏳ Config task |
+| MCP browser wrong package | Config says `@anthropic-ai/mcp-server-puppeteer` (404). Correct: `@modelcontextprotocol/server-puppeteer` (deprecated) | Update `.mcp-n02.json` + find maintained fork | ⏳ Config task |
 | Canva env vars pendentes | MCP Canva precisa `CANVA_CLIENT_ID` + `CANVA_CLIENT_SECRET` configurados | Configurar .env | ⏳ Config task |
+| No video/reel script kind | Short-form video dominates social -- no artifact type for scripts | Request N03 build `video_script` kind | ⏳ Gap |
 | No A/B test history | Framework existe mas sem dados de testes anteriores | Executar primeiro teste | ⏳ Operacional |
 
 ---
@@ -221,9 +224,9 @@ density_score: 1.0
 │  N02 — LUXÚRIA CRIATIVA ♥                       │
 │  "Isso SEDUZ o público?"                        │
 ├─────────────────────────────────────────────────┤
-│  📄 Source artifacts:  57                        │
-│  📦 Compiled:          48                        │
-│  📚 Total files:      105                        │
+│  📄 Source artifacts:  66                        │
+│  📦 Compiled:          56                        │
+│  📚 Total files:      122+                       │
 │  🔧 Kinds buildable:  18 (9 primary)            │
 │  🛠️  Tools relevant:   22                        │
 │  🔌 MCP Servers:       4                         │
