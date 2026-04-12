@@ -25,7 +25,7 @@ tools:
 mcp_servers:
   - firecrawl
   - fetch
-quality: null
+quality: 9.0
 tags: [agent, n04, ingestion, crawling, extraction, freshness]
 tldr: "Specialist agent for web crawling, document loading, content cleaning, dedup, and source freshness management."
 density_score: 0.92

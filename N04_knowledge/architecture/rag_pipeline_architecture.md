@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-infrastructure
-quality: null
+quality: 9.0
 tags: [architecture, rag, pipeline, embedding, retrieval, n04]
 tldr: "Complete RAG pipeline: ingest → chunk → embed → store → retrieve → inject. 6 stages, 8 kinds, 5 MCP servers."
 density_score: 0.95

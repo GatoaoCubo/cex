@@ -3,7 +3,7 @@ id: terminology_sweep_2026_04_08
 kind: context_doc
 title: "Terminology Sweep Report -- capability_summary rename + Portuguese cleanup"
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
 created: 2026-04-08
 author: n03_builder

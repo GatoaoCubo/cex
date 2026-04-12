@@ -25,7 +25,7 @@ tools:
 mcp_servers:
   - supabase
   - postgres
-quality: null
+quality: 8.9
 tags: [agent, n04, embedding, vector, pgvector, chunking]
 tldr: "Specialist agent for embedding model selection, chunk strategies, vector store config, and hybrid search tuning."
 density_score: 0.93

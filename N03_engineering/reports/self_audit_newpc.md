@@ -5,7 +5,7 @@ title: N03 Self-Audit -- New PC Setup (2026-04-12)
 pillar: P01
 nucleus: N03
 version: 1.0.0
-quality: null
+quality: 8.9
 created: 2026-04-12
 tags: [self-audit, newpc, infrastructure, validation]
 ---

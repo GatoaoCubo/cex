@@ -22,7 +22,7 @@ tools:
   - "cex_compile.py (frontmatter validation)"
   - "cex_doctor.py (builder-kind alignment)"
   - "validate_schema.py (schema contract enforcement)"
-quality: null
+quality: 8.9
 tags: [agent, n04, taxonomy, classification, kind-registry]
 tldr: "Specialist agent for taxonomy construction, kind classification, tag normalization, and cross-pillar mapping."
 density_score: 0.91
