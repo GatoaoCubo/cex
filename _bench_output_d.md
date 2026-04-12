@@ -6,37 +6,33 @@ version: 1.0.0
 quality: null
 ---
 
-# RAG Pipeline Optimization
+# RAG Optimization
 
-**RAG (Retrieval-Augmented Generation)** combines document retrieval with LLM generation to enhance factual accuracy.
+**RAG (Retrieval-Augmented Generation)** combines document retrieval with generative models to enhance accuracy and relevance.
 
 ## 4 Optimization Techniques
 
 1. **Chunking**  
-   - Splits documents into manageable segments  
-   - Pros: Reduces context overload, improves relevance  
-   - Cons: May lose cross-chunk context
+   Splits documents into manageable parts.  
+   *Pros*: Improves context relevance. *Cons*: May lose document coherence.
 
 2. **Reranking**  
-   - Prioritizes retrieval results using semantic scoring  
-   - Pros: Enhances precision, handles ambiguous queries  
-   - Cons: Increases computational overhead
+   Uses models to prioritize relevant snippets.  
+   *Pros*: Enhances retrieval precision. *Cons*: Increases computational cost.
 
 3. **Hybrid Search**  
-   - Combines vector similarity + keyword matching  
-   - Pros: Balances speed and accuracy  
-   - Cons: Complex to tune parameters
+   Combines keyword + semantic search methods.  
+   *Pros*: Balances speed and accuracy. *Cons*: Complex implementation.
 
 4. **Query Expansion**  
-   - Augments queries with synonyms/related terms  
-   - Pros: Captures implicit user intent  
-   - Cons: Risks introducing irrelevant information
+   Enhances queries with related terms.  
+   *Pros*: Captures implicit user intent. *Cons*: Risks introducing irrelevant results.
 
 ## Comparison Table
 
-| Technique     | Description                | Pros                     | Cons                   |
-|---------------|----------------------------|--------------------------|------------------------|
-| Chunking      | Document segmentation      | Reduces context overload | May lose cross-chunk context |
-| Reranking     | Semantic result prioritization | Enhances precision       | Higher computational cost |
-| Hybrid Search | Combines vector + keyword  | Balances speed/accuracy  | Complex parameter tuning |
-| Query Expansion | Query term augmentation   | Captures implicit intent | Risks irrelevant info  |
+| Technique     | Description               | Pros                     | Cons                     |
+|---------------|---------------------------|--------------------------|--------------------------|
+| Chunking      | Document segmentation     | Context relevance        | Coherence loss          |
+| Reranking     | Prioritizes relevant snippets | Precision improvement   | Higher resource use     |
+| Hybrid Search | Combines search methods   | Balanced accuracy/speed | Implementation complexity |
+| Query Expansion | Expands search terms     | Captures implicit intent | Risk of irrelevant results |
