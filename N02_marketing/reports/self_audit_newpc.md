@@ -4,7 +4,7 @@ kind: context_doc
 pillar: P08
 title: "N02 Self-Audit -- New PC Setup (2026-04-12)"
 nucleus: N02
-version: 1.0.0
+version: 1.1.0
 quality: null
 created: 2026-04-12
 mission: NEWPC_SETUP
@@ -85,14 +85,14 @@ No missing pip packages detected for these entry points.
 | `tools/` | 3 | Copy analyzer + headline scorer + social publisher |
 | `workflows/` | 1 | KC-to-content workflow |
 
-**Total source .md: 66** | **Compiled .yaml: 56** | **Grand total: 122+ files**
+**Total source .md: 65** | **Compiled .yaml: 53** | **Grand total: 118+ files**
 
-> Agent card states 57 source / 48 compiled / 105 total -- **outdated**.
-> Actual: 66 source / 56 compiled / 122 total.
+> Agent card states 66 source / 56 compiled / 122 total -- **slightly high**.
+> Verified 2026-04-12: 65 source / 53 compiled / 118 total.
 
 ### Artifacts with `quality: null` (never scored)
 
-18 artifacts still carry `quality: null`:
+16 artifacts still carry `quality: null`:
 
 1. `architecture/agent_card_marketing.md`
 2. `artifacts/ad_copy_template.md`
@@ -106,14 +106,12 @@ No missing pip packages detected for these entry points.
 10. `prompts/tpl_content_distribution_plan.md`
 11. `prompts/tpl_notebooklm_audio_wrapper.md`
 12. `prompts/tpl_notebooklm_flashcard_format.md`
-13. `reports/self_audit_2026_04_11.md`
-14. `reports/self_audit_codex_2026_04_11.md`
-15. `reports/self_audit_gemini_2026_04_11.md`
-16. `tools/copy_analyzer.md`
-17. `tools/headline_scorer.md`
-18. `workflows/wf_kc_to_content.md`
+13. `tools/copy_analyzer.md`
+14. `tools/headline_scorer.md`
+15. `workflows/wf_kc_to_content.md`
+16. `reports/self_audit_newpc.md` (this file)
 
-**27% of source artifacts are unscored.** Peer review needed.
+**25% of source artifacts are unscored.** Peer review needed.
 
 ### Cross-Reference: Marketing-Related KCs in P01
 
@@ -147,9 +145,9 @@ No missing pip packages detected for these entry points.
 |-------|----------------|---------|--------|
 | Model | opus-4-6 (1M context) | opus-4-6 (1M context) | YES |
 | CLI | claude | claude | YES |
-| Source artifacts | 57 | 66 | NO -- update needed |
-| Compiled | 48 | 56 | NO -- update needed |
-| Total files | 105 | 122+ | NO -- update needed |
+| Source artifacts | 66 | 65 | CLOSE -- minor drift |
+| Compiled | 56 | 53 | CLOSE -- minor drift |
+| Total files | 122+ | 118+ | CLOSE -- minor drift |
 | MCP: markitdown | Ready | FAIL (wrong package name) | NO |
 | MCP: browser | Ready | FAIL (wrong package name) | NO |
 | MCP: canva | Ready (needs env) | FAIL (env not set) | PARTIAL |
@@ -167,8 +165,8 @@ No missing pip packages detected for these entry points.
 |-------|-------|-------|
 | MCP Servers | 1/4 PASS | 2 wrong package names, 1 missing env vars |
 | Python Tools | 3/3 PASS | All operational |
-| Artifact Inventory | 66 source / 56 compiled | 18 unscored (27%), 3 gaps identified |
-| Agent Card | STALE | Counts and MCP status need update |
+| Artifact Inventory | 65 source / 53 compiled | 16 unscored (25%), 3 gaps identified |
+| Agent Card | CLOSE | Counts slightly high, MCP status accurate |
 
 ### Priority Actions
 

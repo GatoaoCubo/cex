@@ -52,7 +52,7 @@ density_score: 1.0
 | `schemas/` | 5 | a11y checklist, design tokens, HTML output schema, responsive breakpoints, tailwind palette contract |
 | `tools/` | 3 | `social_publisher_marketing.md` + `copy_analyzer.md` + `headline_scorer.md` |
 
-**Total source files: 66** · **Total compiled: 56** · **Grand total: 122+ files**
+**Total source files: 65** · **Total compiled: 53** · **Grand total: 118+ files**
 
 ---
 
@@ -224,9 +224,9 @@ density_score: 1.0
 │  N02 — LUXÚRIA CRIATIVA ♥                       │
 │  "Isso SEDUZ o público?"                        │
 ├─────────────────────────────────────────────────┤
-│  📄 Source artifacts:  66                        │
-│  📦 Compiled:          56                        │
-│  📚 Total files:      122+                       │
+│  Source artifacts:    65                         │
+│  Compiled:            53                         │
+│  Total files:        118+                        │
 │  🔧 Kinds buildable:  18 (9 primary)            │
 │  🛠️  Tools relevant:   22                        │
 │  🔌 MCP Servers:       4                         │
