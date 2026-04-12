@@ -24,7 +24,7 @@ You describe **intent** in 8 tokens. CEX compiles it into a **governed prompt** 
 
 ### Key capabilities
 
-- **117 artifact kinds** across 12 pillars, each with typed frontmatter and validation
+- **132 artifact kinds** across 12 pillars, each with typed frontmatter and validation
 - **8-function pipeline** (8F): CONSTRAIN > BECOME > INJECT > REASON > CALL > PRODUCE > GOVERN > COLLABORATE
 - **121 builder factories**, each with 13 ISO files (schema, prompt, examples, quality gate, ...)
 - **Multi-provider routing**: Claude, GPT, Gemini, Ollama -- with health checks and automatic fallback
