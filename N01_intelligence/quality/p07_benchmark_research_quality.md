@@ -10,7 +10,7 @@ author: n01_intelligence
 agent_group: n01-research-analyst
 domain: research-quality-measurement
 target_system: N01 Intelligence research pipeline
-quality: null
+quality: 9.1
 tags: [benchmark, research, quality, n01, metrics, evaluation]
 tldr: "Quantitative benchmark for N01 research quality -- measures source density, triangulation rate, freshness compliance, output density, and pipeline throughput across research deliverables."
 density_score: 0.94

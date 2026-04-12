@@ -10,7 +10,7 @@ updated: 2026-04-08
 author: N01_intelligence
 domain: intent-resolution
 origin: src_standards_global
-quality: null
+quality: 8.9
 tags: [intent, resolution, transmutation, query-transformation, routing, NLU, compiler, survey]
 tldr: "Survey of how 13 frameworks handle the transformation of vague human input into precise LLM-consumable instructions. Maps CEX 'transmutation' to canonical industry terms. Identifies 5 CEX strengths and 8 gaps."
 when_to_use: "When naming or redesigning CEX's input processing pipeline. When comparing CEX against industry patterns."

@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01_knowledge
 title: "Extraction: Quality Gate Severity Levels from aiox-core"
 version: 1.0
-quality: null
+quality: 8.9
 tags: [extraction, quality_gate, severity, aiox, port]
 created: 2026-04-12
 author: n01_intelligence

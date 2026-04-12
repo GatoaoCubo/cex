@@ -3,7 +3,7 @@ id: taxonomy_completeness_audit
 kind: knowledge_card
 title: CEX Taxonomy Completeness Audit
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 created: 2026-04-12
 tags: [audit, taxonomy, 8F, pillars, kinds, vocabulary, wiring]

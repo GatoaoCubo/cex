@@ -9,7 +9,7 @@ updated: 2026-04-07
 author: n01_intelligence
 agent_group: n01-research-analyst
 domain: research-quality-evaluation
-quality: null
+quality: 9.1
 tags: [eval, dataset, research, quality, n01, validation, test-cases]
 tldr: "20 test cases for validating N01 research output quality -- covers all 6 output types with expected sources, structure, density, and correctness criteria."
 density_score: 0.93

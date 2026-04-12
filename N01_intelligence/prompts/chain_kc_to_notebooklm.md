@@ -10,7 +10,7 @@ author: N01_intelligence
 domain: notebooklm-pipeline
 steps: 4
 flow: discover -> score -> format -> validate
-quality: null
+quality: 9.0
 tags: [chain, notebooklm, kc, formatting, pipeline, content-factory]
 tldr: "4-step prompt chain: discover KCs by domain -> score relevance -> format for NotebookLM input -> validate output. Transforms structured KCs into plain text optimized for NotebookLM indexing."
 density_score: null
