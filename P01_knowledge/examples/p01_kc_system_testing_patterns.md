@@ -1,89 +1,107 @@
 ---
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
-kc_type: domain_kc
+kc_type: meta_kc
 pillar: P01
-title: "System Testing Patterns for Agent and LLM Pipelines"
+title: "System Testing Patterns — Smoke, Integration, E2E, Regression"
 version: "1.0.0"
 created: "2026-04-12"
 updated: "2026-04-12"
-author: "n03"
-domain: software_testing
-subdomain: quality_assurance
+author: "N04"
+domain: testing
 quality: null
-tags: [system-testing, e2e, integration, smoke, regression, golden-test, cex-sdk]
-tldr: "7 canonical system-test patterns: smoke, regression, e2e, contract, golden, load, chaos — each maps to a CEX eval kind and a distinct assertion target."
-when_to_use: "Designing test suites, auditing coverage gaps, or selecting test kinds for a new component, pipeline, or CEX nucleus."
-keywords: [smoke-eval, regression-check, e2e-eval, golden-test, contract-test]
+tags: [system-test, integration-test, e2e, regression, smoke-test, validation, cex]
+tldr: "4 pattern families gate system quality: smoke (alive?), integration (contracts?), e2e (golden path?), regression (no drift?)."
+when_to_use: "Before deploy, after major refactors, as CI gate, or when validating multi-component flows."
+keywords: [system-test, smoke-test, integration-test, regression, e2e-test]
 long_tails:
-  - which test pattern to use for a new LLM pipeline component
-  - difference between smoke test and regression test in agent systems
-  - how to map CEX eval kinds to standard QA patterns
+  - when to run smoke tests vs integration tests
+  - how to classify a system test failure by root cause
+  - what patterns cover multi-component validation in CI
 axioms:
-  - ALWAYS run smoke before regression; a failing smoke invalidates all deeper tests
-  - NEVER use golden tests for non-deterministic outputs without a fuzzy match threshold
-  - IF adding a new nucleus THEN add contract tests at every input/output boundary
+  - ALWAYS run smoke before integration — a dead process cannot have contract bugs
+  - NEVER use unit mocks in e2e tests — mock boundaries invalidate golden path coverage
+  - IF regression baseline is missing THEN generate it before merging, not after
 linked_artifacts:
   primary: null
-  related: [p01_kc_rag_fundamentals, p07_benchmark_cex_sdk]
+  related: [p01_kc_cex_system_test_suite]
 density_score: 0.87
-data_source: "https://martinfowler.com/articles/microservice-testing/"
+data_source: "https://martinfowler.com/articles/practical-test-pyramid.html"
 ---
 
-# System Testing Patterns for Agent and LLM Pipelines
+# System Testing Patterns — Smoke, Integration, E2E, Regression
 
 ## Quick Reference
 ```yaml
 topic: system_testing_patterns
-scope: Agent pipelines, LLM systems, CEX nuclei
-owner: n05
+scope: multi-component validation (not unit tests)
+owner: N04 / N05
 criticality: high
-pattern_count: 7
-cex_tool: cex_system_test.py (54 tests)
+cex_tool: _tools/cex_system_test.py (54 tests)
 ```
 
-## Pattern Reference Table
+## Pattern Taxonomy
 
-| Pattern | When to Apply | Key Assertion | CEX Kind | Failure Cost |
-|---------|--------------|---------------|----------|--------------|
-| Smoke | After any deploy or nucleus boot | Critical paths return non-error | `smoke_eval` | Blocks all other tests |
-| Regression | Before merge, after refactor | Outputs match prior baseline | `regression_check` | High — silent drift |
-| End-to-End | Full mission or pipeline change | User goal achieved end-to-end | `e2e_eval` | High — integration gap |
-| Contract | At service/nucleus boundaries | I/O schema matches declared spec | `validation_schema` | Medium — breaks consumers |
-| Golden | Deterministic output components | Output byte-matches snapshot | `golden_test` | Low — easy to update |
-| Load | Before scaling or peak events | Latency + throughput within SLA | `benchmark` | High if missed |
-| Chaos | Resilience audits, pre-release | System recovers from injected fault | `guardrail` | Critical if production |
+| Pattern | Scope | Trigger | Pass Criteria | Typical Count |
+|---------|-------|---------|---------------|---------------|
+| Smoke | Process alive, config valid | Every deploy | Exit 0, no crash | 3-10 |
+| Integration | Component boundary contracts | PR merge, dependency bump | All contracts satisfied | 10-30 |
+| E2E | Full golden path, real I/O | Release gate, nightly | Output matches expected fixture | 5-15 |
+| Regression | No drift from baseline | Refactor, model update | Delta within threshold | 20-100 |
 
-## Test Pyramid Position
+## Smoke Tests
+- **Purpose**: fastest possible alive-check — is the system bootable?
+- **Checks**: process starts, config loads, DB reachable, required env vars set
+- **SLA**: must complete in < 30 s; if > 30 s, scope is wrong
+- **On failure**: stop pipeline immediately — no value running deeper tests
 
-| Layer | Pattern | Coverage Target | Failure Cost | Run Frequency |
-|-------|---------|----------------|-------------|---------------|
-| Top (System) | Chaos, Load | 5-10% of suite | Highest | Weekly |
-| Mid (Integration) | E2E, Contract | 20-30% | High | Per PR |
-| Base (Component) | Smoke, Regression, Golden | 60-70% | Medium | Per commit |
+## Integration Tests
+- **Purpose**: validate contracts between two components at their boundary
+- **Boundary types**: API schema, event payload, DB row shape, file format
+- **Data**: use deterministic fixtures, never prod snapshots
+- **Anti-pattern**: testing internal state instead of the boundary output
 
-## CEX Tool Map
+## End-to-End (E2E) Tests
+- **Purpose**: validate complete user-facing flow from input to final output
+- **Coverage target**: golden path first; edge cases only after golden passes
+- **Environment**: real infra or hermetic replica — no mocks past the boundary
+- **Fixture strategy**: record-and-replay for external APIs; seed DB before each run
 
-| cex_system_test.py check | Pattern | Nucleus |
-|--------------------------|---------|---------|
-| Builder boot validation | Smoke | N03, N05 |
-| Artifact frontmatter schema | Contract | N03, N04 |
-| Compiled output diff | Regression | N05 |
-| Signal round-trip | E2E | N07 |
-| Quality score stability | Golden | N05 |
-| Token budget enforcement | Load | N07 |
-| Dispatch recovery on crash | Chaos | N07 |
+## Regression Tests
+- **Purpose**: detect unintended drift from a known-good baseline snapshot
+- **Baseline storage**: commit snapshot artifacts alongside code (`tests/snapshots/`)
+- **Diff strategy**: exact match for deterministic outputs; tolerance for LLM outputs
+- **Update flow**: human approves diff → commit new baseline → CI green
 
-## Anti-Patterns
+## Failure Classification
 
-- Over-mocking: mocking nucleus I/O hides real integration failures at boundaries
-- Skipping smoke: running 54 regression checks before smoke wastes time on a dead system
-- No contract tests: schema drift between nuclei discovered only in production
-- Golden tests on LLM text: byte-match fails on rephrasing; use semantic similarity >= 0.92
+| Failure Type | Root Cause Signal | Resolution Path |
+|-------------|-------------------|----------------|
+| Smoke fails | Process crash / missing config | Fix env or boot before any other work |
+| Integration fails | Schema mismatch / version skew | Align producer and consumer schemas |
+| E2E fails | Logic regression or infra gap | Reproduce locally, add unit test, fix |
+| Regression fails | Intentional change or model drift | Review diff, approve or revert |
+| Flaky | Timing, order dependence, external I/O | Isolate with retry budget, then fix root |
+
+## Decision Matrix
+
+| Situation | Use Pattern |
+|-----------|-------------|
+| First check after deploy | Smoke |
+| New API endpoint added | Integration |
+| Full feature shipped to user | E2E (golden path) |
+| Prompt or model version bumped | Regression |
+| CI gate for every PR | Smoke + Integration |
+| Nightly quality gate | All 4 in sequence |
+| CEX pipeline validation | `cex_system_test.py` (54 tests, covers all 4) |
+
+## Golden Rules
+- ALWAYS run patterns in order: smoke -> integration -> e2e -> regression
+- NEVER let a flaky test block CI — quarantine it, file a ticket, fix within 48 h
+- ALWAYS tie regression baselines to a commit SHA, not a date
+- IF smoke fails in production THEN rollback immediately, do not debug in prod
 
 ## References
-
-- Fowler, "Microservice Testing": https://martinfowler.com/articles/microservice-testing/
-- CEX tool: `_tools/cex_system_test.py` (54 tests, covers all 7 patterns)
-- CEX kinds: `smoke_eval`, `regression_check`, `e2e_eval`, `golden_test`, `benchmark`, `guardrail`
-- Related KC: `p01_kc_rag_fundamentals` (pipeline structure tested by E2E pattern)
+- Fowler, M. "Practical Test Pyramid": https://martinfowler.com/articles/practical-test-pyramid.html
+- CEX tool: `_tools/cex_system_test.py` — 54 tests across all 4 pattern families
+- Related: `_tools/cex_hooks.py` — pre-commit smoke gate integration
