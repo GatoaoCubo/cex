@@ -2,86 +2,147 @@
 id: p01_kc_retriever_config
 kind: knowledge_card
 type: kind
-pillar: P01
-title: "Retriever Config — Deep Knowledge for retriever_config"
+pillar: P04
+title: "Retriever Configuration — Deep Knowledge for retriever configuration"
 version: 1.0.0
-created: 2026-03-30
-updated: 2026-03-30
-author: builder_agent
+created: 2026-04-02
+updated: 2026-04-02
+author: builder_knowledge
 domain: retriever_config
 quality: 9.1
-tags: [retriever_config, p01, CONSTRAIN, kind-kc]
-tldr: "Search-time parameters governing how chunks are retrieved — top_k, search type, reranking, and hybrid weights"
-when_to_use: "Building, reviewing, or reasoning about retriever_config artifacts"
-keywords: [retrieval, top-k, hybrid-search, reranker, bm25]
+tags: [retriever_config, p04, reusable, kind-kc]
+tldr: "Reusable configuration framework with structured phases, trigger conditions, and lifecycle management for repeatable retrieval workflows"
+when_to_use: "Building, reviewing, or reasoning about retriever configuration artifacts"
+keywords: [retriever_config, phases, trigger, reusable, capability, workflow, lifecycle]
 feeds_kinds: [retriever_config]
 density_score: null
 ---
 
-# Retriever Config
+# Retriever Configuration
 
 ## Spec
 ```yaml
 kind: retriever_config
-pillar: P01
-llm_function: CONSTRAIN
-max_bytes: 2048
-naming: p01_retr_cfg.md
+pillar: P04
+llm_function: TOOL
+max_bytes: 4096
+naming: p04_retriever_config_{{name}}.md + .yaml
 core: true
 ```
 
 ## What It Is
-A retriever_config defines how the system searches for relevant chunks at query time. It controls top_k, search type (vector/keyword/hybrid), reranking strategy, and filtering rules. It is NOT an embedding_config (which defines the vector model used to encode) nor a chunk_strategy (which defines how documents are split). Retriever config operates at search time; the others operate at index time.
+A retriever configuration is a reusable framework for defining structured retrieval workflows with trigger conditions and lifecycle management. It defines a specific pattern for how information should be retrieved and processed across different contexts. Retriever configurations are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A retriever configuration answers "what phases execute to achieve this retrieval pattern?" while agents answer "who am I?" and prompts answer "how do I communicate?"
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
 |-------------------|---------------|-------|
-| LangChain | `BaseRetriever` / `VectorStoreRetriever` | `search_type`, `search_kwargs` (k, score_threshold, filter) |
-| LlamaIndex | `RetrieverQueryEngine` / `VectorIndexRetriever` | `similarity_top_k`, `node_postprocessors` for reranking |
-| CrewAI | RAG tool configuration | `n_results`, search params in tool setup |
-| DSPy | `dspy.Retrieve(k=...)` | Declarative; optimizer can tune k |
-| Haystack | `InMemoryBM25Retriever` / `EmbeddingRetriever` | Pipeline nodes with `top_k` parameter |
-| OpenAI | Assistants `file_search` tool | `max_num_results` (default 20), `ranking_options` with `ranker` and `score_threshold` |
-| Anthropic | No native retrieval | External retriever feeds context window |
+| LangChain | `RetrievalChain` / `VectorStoreRetriever` | Structured retrieval with defined phases |
+| LlamaIndex | `Retriever` / `VectorStoreIndex` | Multi-step retrieval workflows with phase management |
+| CrewAI | `RetrievalTask` + `Process` | Task definition with sequential/hierarchical retrieval execution |
+| DSPy | `dspy.Retrieve` method | Structured computation with defined retrieval phases |
+| Haystack | `Retriever` with nodes | Explicit DAG execution with phase transitions |
+| AutoGen | `RetrievalAgent` workflow | Multi-agent retrieval patterns |
+| Microsoft Semantic Kernel | `RetrievalPlan` / `KernelFunction` | Function orchestration with step management |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| top_k | int | 5 | Higher = more recall but more noise and tokens |
-| search_type | enum | similarity | Hybrid (vector+BM25) = best recall; vector = fastest |
-| reranker | string | none | Reranking boosts precision 10-30% but adds latency |
-| score_threshold | float | 0.0 | Higher = fewer but more relevant results |
+| trigger_type | enum | "user_invocable" | user_invocable (slash commands) vs agent_only (programmatic) |
+| phases | array | required | More phases = granular control vs complexity |
+| input_schema | object | {} | Strong typing vs flexibility |
+| output_format | string | "markdown" | Structured output vs natural language |
+| timeout_seconds | int | 300 | Execution time limit vs complex workflows |
 
-## Patterns
-| Pattern | When to Use | Example |
-|---------|-------------|---------|
-| Hybrid search | Best general-purpose retrieval | BM25 (0.3 weight) + vector (0.7 weight), top_k=10 |
-| Two-stage retrieval | Large corpus, precision critical | Retrieve top_k=50, rerank to top_k=5 with Cohere reranker |
-| Filtered retrieval | Multi-tenant or multi-domain | Filter by domain metadata before vector search |
-| MMR (Maximal Marginal Relevance) | Diverse results needed | Reduces redundancy in retrieved chunks |
+## Phase Structure
+| Phase | Purpose | Input | Output |
+|-------|---------|-------|--------|
+| discover | Context gathering | user_input, environment | context_data |
+| configure | Parameter setup | context_data, user_preferences | configuration |
+| execute | Main retrieval workflow | configuration, tools | raw_results |
+| validate | Quality assurance | raw_results, criteria | validated_output |
+
+## Trigger Patterns
+| Trigger Type | Example | Activation |
+|--------------|---------|------------|
+| slash_command | "/retrieve", "/query" | User types exact command |
+| keyword_match | "search", "find" | Natural language contains keywords |
+| event_driven | file_change, time_schedule | System event occurs |
+| agent_invoked | crew.use_retriever("search") | Programmatic call from agent |
+
+## Quality Gates
+| Gate | Validation | Failure Impact |
+|------|------------|----------------|
+| H01_phases_defined | phases array not empty | Cannot execute workflow |
+| H02_trigger_valid | trigger_type in allowed values | Cannot activate retriever |
+| H03_input_schema | Valid JSON schema format | Runtime parameter errors |
+| H04_output_format | Defined output structure | Unpredictable results |
+
+## Usage Examples
+```yaml
+# User-invocable retriever (slash command)
+trigger_type: user_invocable
+slash_command: "/retrieve"
+phases: [discover, query, format]
+
+# Agent-only retriever (programmatic)
+trigger_type: agent_only
+invoke_pattern: "crew.use_retriever('search')"
+phases: [load, parse, query, export]
+
+# Event-driven retriever
+trigger_type: event_driven
+event_pattern: "file_change:*.md"
+phases: [detect, parse, query, notify]
+```
 
 ## Anti-Patterns
-| Anti-Pattern | Why It Fails | Fix |
-|-------------|-------------|-----|
-| top_k=1 | Single point of failure; misses context | Use top_k >= 3 for robustness |
-| No reranking on large k | Noise overwhelms the generator | Add reranker when top_k > 10 |
-| Vector-only on keyword-heavy queries | Misses exact matches (product codes, IDs) | Use hybrid search with BM25 component |
+| Anti-Pattern | Why Wrong | Correct Approach |
+|--------------|-----------|------------------|
+| Single-phase retriever | Not reusable, just a function | Use action_prompt for one-off tasks |
+| No trigger definition | Cannot be activated | Define clear trigger conditions |
+| Agent identity in retriever | Mixing concerns | Use agent for identity, retriever for capability |
+| Hard-coded parameters | Not reusable | Use input_schema for parameterization |
 
-## Integration Graph
-```
-[embedding_config] --> [retriever_config] --> [template (P03)]
-                            |
-                     [chunk_strategy, knowledge_index (P10)]
-```
+## Integration Points
+- **F2 BECOME**: Retriever configurations are loaded by agents to extend retrieval capabilities
+- **F3 INJECT**: Retriever configurations can inject domain-specific knowledge
+- **F5 CALL**: Retriever configurations orchestrate tool usage across phases
+- **Handoffs**: Retriever configurations can be passed between nuclei for specialized execution
+- **Memory**: Retriever configurations can persist state between phases via memory_scope
 
-## Decision Tree
-- IF small corpus (<1000 chunks) THEN vector search, top_k=5, no reranker
-- IF large corpus with exact-match queries THEN hybrid search (BM25+vector)
-- IF precision critical (legal, medical) THEN two-stage with reranker
-- IF results feel repetitive THEN enable MMR with lambda_mult=0.7
-- DEFAULT: hybrid search, top_k=5, score_threshold=0.3
+Retriever configurations enable modular, reusable retrieval pattern definition that bridges the gap between simple prompts and complex multi-agent systems.
+## Production Reference: OpenClaude Bundled Retriever Configurations
+OpenClaude ships ~18 bundled retriever configurations as battle-tested implementations:
 
-## Quality Criteria
-- GOOD: top_k and search_type specified; tested on representative queries
-- GREAT: Hybrid weights tuned on eval set; reranker benchmarked; score_threshold justified
-- FAIL: top_k chosen arbitrarily; no search_type specified; vector-only on keyword-heavy domain
+| Retriever | Trigger | Pattern | CEX Equivalent |
+|-------|---------|---------|----------------|
+| /search | slash_command | 3-parallel-agent review | p04_retriever_search |
+| /query | slash_command | adversarial verification | p04_retriever_query |
+| /fetch | agent_invoked | 9-section summarization | p03_retriever_fetch |
+| /loop | slash_command | recurring cron schedule | p04_retriever_loop (future) |
+| /stuck | slash_command | diagnostic investigation | n/a (Anthropic-specific) |
+
+**Key architectural insight**: Retriever configurations are defined as prompt text with frontmatter,
+not as code. The retriever configuration body IS the prompt injected when the retriever triggers. This
+maps directly to CEX's retriever configuration-as-artifact model.
+
+**Parallel dispatch pattern** (from /search):
+- Phase 1: Identify changes (git diff)
+- Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
+- Phase 3: Aggregate findings and fix issues directly
+This pattern generalizes: any retriever configuration can dispatch parallel sub-agents with typed foci.
+
+**Analysis scratchpad pattern** (from /fetch):
+- <analysis> tags create a private drafting space
+- Forces structured thinking before output
+- Scratchpad is stripped from final result
+- Improves quality without consuming permanent context
+
+## New Retriever Patterns Discovered
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| Adversarial retriever | Agent explicitly tries to BREAK the implementation | p04_retriever_query |
+| Parallel review | Multiple focused agents analyze same diff concurrently | p04_retriever_search |
+| Scratchpad retriever | <analysis> block for private reasoning, stripped from output | p03_retriever_fetch |
+| Background extract | Runs silently after N turns, extracts persistent memories | p04_retriever_memory_extract |
+| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_retriever_query |
