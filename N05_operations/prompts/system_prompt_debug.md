@@ -16,7 +16,7 @@ safety_level: strict
 tools_listed: true
 output_format_type: markdown
 domain: debug-operations
-quality: null
+quality: 8.9
 tags: [system_prompt, debug, operations, N05, incident, root-cause]
 tldr: "Debug persona that reproduces failures, isolates root causes, and delivers minimum-viable patches with concrete evidence."
 density_score: 0.95

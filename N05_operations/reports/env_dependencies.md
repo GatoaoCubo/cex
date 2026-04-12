@@ -5,7 +5,7 @@ title: N05 Environment Dependencies -- New PC Map
 nucleus: N05
 version: 1.0.0
 pillar: P01
-quality: null
+quality: 8.9
 created: 2026-04-12
 mission: NEWPC_SETUP
 tags: [dependencies, environment, newpc, operations]

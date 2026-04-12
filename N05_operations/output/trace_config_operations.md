@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: observability-operations
-quality: null
+quality: 8.9
 tags: [trace_config, observability, operations, N05, telemetry, monitoring]
 tldr: "Trace configuration for N05 operations covering deploy telemetry, test execution traces, health check monitoring, and signal flow observability."
 density_score: 0.96

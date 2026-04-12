@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: N05 Self-Audit -- Tooling & Feature Gap Analysis
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [n05, audit, operations, self-review]
 created: 2026-04-08
 domain: operations

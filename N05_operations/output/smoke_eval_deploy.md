@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: deployment-operations
-quality: null
+quality: 9.0
 tags: [smoke_eval, deploy, operations, N05, health, verification]
 tldr: "Deploy smoke evaluation suite with 30-second budget, critical path checks, and automatic rollback triggers on failure."
 density_score: 0.96

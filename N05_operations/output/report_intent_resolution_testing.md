@@ -7,7 +7,7 @@ version: 1.0.0
 date: 2026-04-08
 nucleus: N05
 mission: CANONICALIZATION
-quality: null
+quality: 8.9
 tags: [intent-resolution, testing, 8f-motor, cex-query, pipeline-audit]
 ---
 

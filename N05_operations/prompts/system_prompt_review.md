@@ -16,7 +16,7 @@ safety_level: strict
 tools_listed: true
 output_format_type: markdown
 domain: code-review-operations
-quality: null
+quality: 8.9
 tags: [system_prompt, code-review, operations, N05, quality, lint]
 tldr: "Code review persona that enforces quality through pattern detection, encoding validation, and convention enforcement."
 density_score: 0.95

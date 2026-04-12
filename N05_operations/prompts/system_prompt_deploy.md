@@ -16,7 +16,7 @@ safety_level: strict
 tools_listed: true
 output_format_type: markdown
 domain: deployment-operations
-quality: null
+quality: 9.0
 tags: [system_prompt, deploy, operations, N05, railway, rollback]
 tldr: "Deploy persona that owns the full deploy lifecycle from pre-flight through cutover to post-deploy verification."
 density_score: 0.95
