@@ -1,24 +1,25 @@
 ---
 id: benchmark_test
 kind: knowledge_card
-title: LLM Agent Orchestration Patterns
+title: Padrões de Orquestração de Agentes LLM
 version: 1.0.0
 quality: null
 ---
 
-### Section 1: What is multi-agent orchestration?
-Multi-agent orchestration is the process of coordinating multiple AI agents to work collaboratively toward a common goal. It involves defining communication protocols, task delegation, and conflict resolution mechanisms. This pattern enables complex problem-solving by leveraging the specialized capabilities of individual agents.
+### O que é orquestração multi-agente?
 
-### Section 2: Pattern Comparison
-| Pattern       | Description                              | Pros                          | Cons                          |
-|---------------|------------------------------------------|-------------------------------|-------------------------------|
-| Star Topology | Centralized control with peripheral agents | Simple to implement           | Single point of failure       |
-| Mesh Topology | Fully decentralized peer-to-peer network  | High fault tolerance          | Complex coordination required |
-| Pipeline      | Sequential task execution                 | Clear workflow structure      | Limited parallelism          |
-| Hierarchical  | Multi-layered command and control         | Scalable for complex tasks   | Potential for communication delays |
+A orquestração multi-agente refere-se à coordenação de múltiplos agentes autônomos para alcançar objetivos complexos por meio de comunicação estruturada e divisão de tarefas. Esses agentes podem operar em paralelo ou sequencialmente, dependendo do padrão de arquitetura escolhido. A eficácia da orquestração depende de mecanismos de negociação de recursos, sincronização e resolução de conflitos.
 
-### Section 3: Use Cases
-- **Star Topology**: Ideal for tasks requiring centralized decision-making (e.g., mission control)
-- **Mesh Topology**: Best for decentralized collaboration (e.g., swarm robotics)
-- **Pipeline**: Suitable for linear workflows (e.g., data processing pipelines)
-- **Hierarchical**: Effective for complex systems with distinct operational layers (e.g., enterprise architectures)
+| Padrão          | Estrutura       | Comunicação       | Escalabilidade | Casos de Uso                  | Exemplo                          |
+|-----------------|-----------------|-------------------|----------------|-------------------------------|----------------------------------|
+| Estrela         | Centralizado    | Unidirecional     | Baixa          | Tarefas simples e previsíveis | Sistema de atendimento ao cliente|
+| Malha           | Distribuído     | Bidirecional      | Alta           | Ambientes dinâmicos e complexos| Redes de sensores autônomos      |
+| Pipeline        | Linear          | Sequencial        | Média          | Processamento de dados em etapas | Análise de dados em tempo real   |
+| Hierárquico     | Aninhado        | Hierárquica       | Média-Alta     | Sistemas com níveis de decisão | Organizações corporativas        |
+
+### Quando usar cada padrão:
+
+- **Estrela**: Ideal para sistemas com um controlador centralizado e tarefas que não exigem autonomia individual.
+- **Malha**: Recomendado para ambientes distribuídos onde a resiliência e a comunicação descentralizada são críticas.
+- **Pipeline**: Adequado para fluxos de trabalho lineares com etapas bem definidas e dependentes.
+- **Hierárquico**: Melhor para sistemas complexos com níveis de autoridade e tomada de decisão estratificada.
