@@ -580,6 +580,33 @@ def resolve_intent(text):
 # CLI
 # ---------------------------------------------------------------------------
 
+def resolve_intent_verbose(text):
+    """Verbose wrapper -- prints resolution trace to stderr."""
+    tokens = tokenize(text)
+    verb = _resolve_verb(tokens)
+    print("  [intent] Input:  %s" % text, file=sys.stderr)
+    print("  [intent] Tokens: %s" % tokens, file=sys.stderr)
+    print("  [intent] Verb:   %s" % verb, file=sys.stderr)
+
+    exact = _exact_match(text)
+    if exact:
+        kind, pillar, nucleus, confidence = exact
+        print("  [intent] Exact match: %s (P=%s, N=%s, conf=%.0f%%)" % (
+            kind, pillar, nucleus, confidence * 100), file=sys.stderr)
+        return resolve_intent(text)
+
+    print("  [intent] No exact match, trying TF-IDF...", file=sys.stderr)
+    tfidf_results = _tfidf_search(text, top_k=3)
+    if tfidf_results:
+        for k, p, n, c in tfidf_results:
+            print("  [intent] TF-IDF: %-22s P=%-4s N=%-3s conf=%.0f%%" % (
+                k, p, n, c * 100), file=sys.stderr)
+    else:
+        print("  [intent] TF-IDF: no matches", file=sys.stderr)
+
+    return resolve_intent(text)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="CEX Intent Resolver -- Python-first kind resolution (0 LLM tokens)"
@@ -587,15 +614,95 @@ def main():
     parser.add_argument("query", nargs="?", help="Natural language intent")
     parser.add_argument("--json", action="store_true",
                         help="Output as JSON (default for pipe)")
+    parser.add_argument("--verbose", "-v", action="store_true",
+                        help="Show resolution trace on stderr")
+    parser.add_argument("--batch", metavar="FILE",
+                        help="Resolve intents from file (one per line)")
     parser.add_argument("--threshold", type=float, default=CONFIDENCE_THRESHOLD,
                         help="Confidence threshold (default: %.2f)" % CONFIDENCE_THRESHOLD)
+    parser.add_argument("--test", action="store_true",
+                        help="Run built-in self-test suite")
     args = parser.parse_args()
 
+    # Self-test mode
+    if args.test:
+        print("=== CEX Intent Resolver Self-Test ===\n")
+        cases = [
+            ("criar um agente de pesquisa", "agent", 0.6),
+            ("create agent", "agent", 0.6),
+            ("MCP server para Supabase", "mcp_server", 0.6),
+            ("webhook endpoint", "webhook", 0.6),
+            ("landing page para meu produto", "landing_page", 0.6),
+            ("configurar RAG", "rag_source", 0.6),
+            ("benchmark de performance", "benchmark", 0.6),
+            ("pricing strategy", "content_monetization", 0.6),
+            ("system prompt do agente", "system_prompt", 0.6),
+            ("quality gate", "quality_gate", 0.6),
+            ("red team eval", "red_team_eval", 0.6),
+            ("unit test", "unit_eval", 0.6),
+            ("guardrail de seguranca", "guardrail", 0.6),
+            ("workflow de deploy", "workflow", 0.6),
+            ("glossario de termos", "glossary_entry", 0.6),
+        ]
+        passed = 0
+        for user_input, expected_kind, min_conf in cases:
+            result = resolve_intent(user_input)
+            ok = (result.get("kind") == expected_kind
+                  and result.get("confidence", 0) >= min_conf)
+            tag = "[OK]" if ok else "[FAIL]"
+            if ok:
+                passed += 1
+            print("  %s %-40s -> %-22s conf=%.0f%% method=%s" % (
+                tag, '"%s"' % user_input[:36],
+                result.get("kind") or "(none)",
+                result.get("confidence", 0) * 100,
+                result.get("method", "?"),
+            ))
+        print("\n  %d/%d passed" % (passed, len(cases)))
+        sys.exit(0 if passed == len(cases) else 1)
+
+    resolver = resolve_intent_verbose if args.verbose else resolve_intent
+
+    # Batch mode
+    if args.batch:
+        batch_path = Path(args.batch)
+        if not batch_path.exists():
+            print("File not found: %s" % args.batch, file=sys.stderr)
+            sys.exit(2)
+        lines = [l.strip() for l in batch_path.read_text(encoding="utf-8").splitlines()
+                 if l.strip() and not l.strip().startswith("#")]
+        results = []
+        resolved = 0
+        for line in lines:
+            r = resolver(line)
+            r["input"] = line
+            results.append(r)
+            if r.get("kind"):
+                resolved += 1
+        if args.json:
+            print(json.dumps(results, indent=2, ensure_ascii=False))
+        else:
+            for r in results:
+                tag = "[OK]" if r.get("kind") else "[??]"
+                print("  %s %-35s -> %-20s %s %s (%.0f%% %s)" % (
+                    tag, r["input"][:35],
+                    r.get("kind") or "?",
+                    r.get("pillar") or "?",
+                    r.get("nucleus") or "?",
+                    r["confidence"] * 100,
+                    r["method"],
+                ))
+            print("\n  Resolved: %d/%d (%.0f%%)" % (
+                resolved, len(lines),
+                100 * resolved / max(1, len(lines))))
+        sys.exit(0 if resolved == len(lines) else 1)
+
+    # Single query
     if not args.query:
         parser.print_help()
         sys.exit(2)
 
-    result = resolve_intent(args.query)
+    result = resolver(args.query)
 
     if args.json or not sys.stdout.isatty():
         print(json.dumps(result, indent=2, ensure_ascii=False))

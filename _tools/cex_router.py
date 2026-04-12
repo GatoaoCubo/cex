@@ -137,6 +137,11 @@ class CexRouter:
             provider.healthy = False
             return
 
+        # Local providers (ollama): use stdlib urllib, no httpx needed
+        if provider.name in ("ollama", "atomic-chat"):
+            self._ping_local(provider)
+            return
+
         try:
             import httpx
         except ImportError:
@@ -169,6 +174,71 @@ class CexRouter:
         except Exception as e:
             provider.healthy = False
             logger.warning(f"CexRouter: {provider.name} unreachable -- {e}")
+
+    def _ping_local(self, provider: Provider):
+        """Synchronous health check for local providers (no httpx needed)."""
+        import urllib.request
+        try:
+            start = time.monotonic()
+            req = urllib.request.Request(provider.ping_url, method="GET")
+            resp = urllib.request.urlopen(req, timeout=5)
+            elapsed = (time.monotonic() - start) * 1000
+            if resp.status == 200:
+                provider.healthy = True
+                provider.avg_latency_ms = elapsed
+                if provider.name == "ollama":
+                    import json as _json
+                    body = resp.read().decode("utf-8", errors="replace")
+                    data = _json.loads(body)
+                    models = [m.get("name", "?") for m in data.get("models", [])]
+                    logger.info(
+                        "CexRouter: ollama OK (%dms, %d models: %s)",
+                        elapsed, len(models), ", ".join(models[:5])
+                    )
+                else:
+                    logger.info(
+                        "CexRouter: %s OK (%dms)", provider.name, elapsed
+                    )
+            else:
+                provider.healthy = False
+                logger.warning(
+                    "CexRouter: %s unhealthy (status=%d)",
+                    provider.name, resp.status
+                )
+        except Exception as e:
+            provider.healthy = False
+            logger.warning(
+                "CexRouter: %s unreachable -- %s", provider.name, e
+            )
+
+    def get_ollama_client_config(self, model: str = "qwen3:14b") -> dict:
+        """Return OpenAI-compatible client config for Ollama.
+
+        Usage with openai library:
+            cfg = router.get_ollama_client_config("qwen3:14b")
+            client = openai.OpenAI(base_url=cfg["base_url"], api_key=cfg["api_key"])
+            response = client.chat.completions.create(
+                model=cfg["model"], messages=[...]
+            )
+
+        Returns:
+            {"base_url": str, "api_key": str, "model": str}
+        """
+        ollama = self.providers.get("ollama")
+        if not ollama or not ollama.healthy:
+            raise RuntimeError(
+                "Ollama provider not available. Start: ollama serve"
+            )
+        return {
+            "base_url": "http://localhost:11434/v1",
+            "api_key": "ollama",
+            "model": model,
+        }
+
+    def get_ollama_models(self) -> list:
+        """Query Ollama for available models. Returns list of model names."""
+        health = check_ollama_health()
+        return health.get("models", [])
 
     def resolve_nucleus(self, nucleus: str) -> dict:
         """Resolve nucleus to provider + model + key.
@@ -344,6 +414,55 @@ def resolve_default_model(fallback: str = "claude-sonnet-4-6") -> str:
 
 
 # ---------------------------------------------------------------------------
+# Provider Inference
+# ---------------------------------------------------------------------------
+
+
+def _infer_provider(model_name: str) -> str:
+    """Infer provider name from a model string.
+
+    Handles: claude/opus/sonnet/haiku -> anthropic,
+             gemini -> google, gpt -> openai,
+             qwen/llama/mistral/phi/deepseek/local models -> ollama.
+    Falls back to 'anthropic' for unknown models.
+    """
+    m = model_name.lower()
+    if any(k in m for k in ("claude", "opus", "sonnet", "haiku")):
+        return "anthropic"
+    if "gemini" in m:
+        return "google"
+    if "gpt" in m:
+        return "openai"
+    # Local model patterns (Ollama-served)
+    if any(k in m for k in ("qwen", "llama", "mistral", "phi", "deepseek",
+                             "codellama", "starcoder", "yi", "gemma")):
+        return "ollama"
+    # Ollama tag format: model:size (e.g., qwen3:14b)
+    if ":" in m and not m.startswith("http"):
+        return "ollama"
+    return "anthropic"
+
+
+def check_ollama_health(timeout: float = 3.0) -> dict:
+    """Quick Ollama health check using stdlib (no httpx needed).
+
+    Returns: {"healthy": bool, "models": list[str], "error": str}
+    """
+    import urllib.request
+    try:
+        req = urllib.request.Request(
+            "http://localhost:11434/api/tags", method="GET"
+        )
+        resp = urllib.request.urlopen(req, timeout=timeout)
+        import json as _json
+        data = _json.loads(resp.read().decode("utf-8", errors="replace"))
+        models = [m.get("name", "?") for m in data.get("models", [])]
+        return {"healthy": True, "models": models, "error": ""}
+    except Exception as e:
+        return {"healthy": False, "models": [], "error": str(e)[:120]}
+
+
+# ---------------------------------------------------------------------------
 # Provider Discovery Integration
 # ---------------------------------------------------------------------------
 
@@ -380,15 +499,7 @@ def discover_and_route(nucleus: str) -> dict:
     primary_model = resolve_model_for(nuc_key)
 
     # Infer primary provider
-    model_lower = primary_model.lower()
-    if "claude" in model_lower or "opus" in model_lower or "sonnet" in model_lower:
-        primary_provider = "anthropic"
-    elif "gemini" in model_lower:
-        primary_provider = "google"
-    elif "gpt" in model_lower:
-        primary_provider = "openai"
-    else:
-        primary_provider = "anthropic"
+    primary_provider = _infer_provider(primary_model)
 
     # Check if primary is alive
     primary_status = providers.get(primary_provider, {})
@@ -404,16 +515,7 @@ def discover_and_route(nucleus: str) -> dict:
     # Primary offline -- try fallback via discovery
     best = get_best_provider(nuc_key, providers)
     if best:
-        # Infer provider for the fallback model
-        fb_lower = best.lower()
-        if "claude" in fb_lower or "opus" in fb_lower or "sonnet" in fb_lower:
-            fb_provider = "anthropic"
-        elif "gemini" in fb_lower:
-            fb_provider = "google"
-        elif "gpt" in fb_lower:
-            fb_provider = "openai"
-        else:
-            fb_provider = "ollama"
+        fb_provider = _infer_provider(best)
 
         logger.warning(
             f"{nuc_key.upper()}: {primary_provider} FAIL -> {fb_provider}/{best} (fallback)"
@@ -459,6 +561,7 @@ def main():
     parser.add_argument("--status", action="store_true", help="Show provider status")
     parser.add_argument("--resolve", metavar="NUCLEUS", help="Resolve nucleus to provider")
     parser.add_argument("--ping", action="store_true", help="Ping all providers")
+    parser.add_argument("--ollama", action="store_true", help="Show Ollama status and models")
     args = parser.parse_args()
 
     router = get_router()
@@ -489,6 +592,21 @@ def main():
         except RuntimeError as e:
             print(f"  ERROR: {e}", file=sys.stderr)
             sys.exit(1)
+
+    elif args.ollama:
+        health = check_ollama_health()
+        print("\n=== Ollama Status ===\n")
+        print(f"  Healthy:  {health['healthy']}")
+        if health['error']:
+            print(f"  Error:    {health['error']}")
+        if health['models']:
+            print(f"  Models:   {len(health['models'])}")
+            for m in health['models']:
+                print(f"    - {m}")
+        else:
+            print("  Models:   none (run: ollama pull qwen3:8b)")
+        print(f"\n  OpenAI-compat endpoint: http://localhost:11434/v1")
+        print(f"  API key: 'ollama' (placeholder)")
 
     else:
         parser.print_help()
