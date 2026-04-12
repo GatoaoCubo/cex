@@ -6,12 +6,12 @@ title: "System Testing Patterns"
 version: "1.0.0"
 created: "2026-04-12"
 updated: "2026-04-12"
-author: "N04"
+author: "n04"
 domain: software_testing
 quality: null
 tags: [testing, system-testing, e2e, contract, smoke, regression, chaos, property-based, qa]
 tldr: "7 canonical system-testing patterns: smoke, contract, regression, golden, chaos, property-based, E2E. Each targets a distinct failure class at process boundary or above."
-when_to_use: "Designing test suites, selecting test strategies, or teaching testing taxonomy to engineers."
+when_to_use: "Designing test suites, selecting test strategies, or onboarding engineers to QA taxonomy."
 keywords: [smoke-test, contract-test, regression-test, chaos-engineering, property-based-testing]
 long_tails:
   - which system testing pattern to use for API boundary validation
@@ -36,7 +36,7 @@ data_source: "https://martinfowler.com/articles/practical-test-pyramid.html"
 ```yaml
 topic: system_testing_patterns
 scope: backend, API, distributed systems, CLI tools
-owner: N04
+owner: n04
 criticality: high
 patterns: 7
 boundary: process-level and above (not unit tests)
@@ -45,7 +45,7 @@ boundary: process-level and above (not unit tests)
 ## Pattern Taxonomy
 
 | Pattern | Trigger | Key Tooling | Failure Signal |
-|---------|---------|-------------|---------------|
+|---------|---------|-------------|----------------|
 | Smoke | Every deploy | pytest, k6, Docker healthcheck | Deploy gate blocks — service dead |
 | Contract | API boundary change | Pact, Schemathesis | Breaking change caught pre-deploy |
 | Regression | Before release cut | pytest --last-failed, Newman | Known flow broken — rollback |
@@ -73,7 +73,7 @@ boundary: process-level and above (not unit tests)
 
 ### Golden (Snapshot)
 - Validates: serialized output matches approved baseline file byte-for-byte
-- Update flow: diff appears → human reviews → `--snapshot-update` if intentional
+- Update flow: diff appears -> human reviews -> `--snapshot-update` if intentional
 - Anti-pattern: stale snapshots auto-approved without human review
 
 ### Chaos
@@ -89,7 +89,7 @@ boundary: process-level and above (not unit tests)
 ### E2E (User Journey)
 - Validates: full user flow — UI through backend to persistence layer
 - Anti-pattern: testing every edge case E2E (slow, brittle, hard to debug)
-- Scope rule: E2E covers the 3–5 most critical user journeys only
+- Scope rule: E2E covers the 3-5 most critical user journeys only
 
 ## Selection Guide
 
@@ -122,10 +122,11 @@ Output format must be stable?
 
 - Does NOT cover: unit tests, load/perf, SAST/DAST security scanning
 - Does NOT cover: mutation testing, fuzzing (distinct disciplines)
-- Scope: process boundary and above — a smoke test crossing a network call is in scope; a function-level assertion is not
+- Scope: process boundary and above — a network-crossing smoke test is in
+  scope; a function-level assertion is not
 
 ## References
 - Practical Test Pyramid: https://martinfowler.com/articles/practical-test-pyramid.html
-- Pact contract testing docs: https://docs.pact.io/
+- Pact contract testing: https://docs.pact.io/
 - Hypothesis property-based: https://hypothesis.readthedocs.io/en/latest/
-- Schemathesis (OpenAPI fuzzing): https://schemathesis.readthedocs.io/
+- Schemathesis OpenAPI fuzzing: https://schemathesis.readthedocs.io/
