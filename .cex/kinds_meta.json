@@ -720,6 +720,15 @@
     "naming": "p04_plug_{{name}}.md + .yaml",
     "pillar": "P04"
   },
+  "prompt_compiler": {
+    "description": "Intent-to-artifact transmutation rules. Compiles vague user input into structured {kind, pillar, nucleus, verb} resolution. The behavioral seed that makes any LLM operating CEX a prompt compiler (DSPy term).",
+    "boundary": "Transmutation rules and mappings. NOT a router (routes between providers), NOT a dispatch_rule (routes tasks to agents), NOT a prompt_template (template with vars). This IS the layer that resolves WHAT the user wants before any routing happens.",
+    "pillar": "P03",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 16384,
+    "naming": "p03_pc_{{name}}.md",
+    "core": true
+  },
   "prompt_cache": {
     "description": "TTL, eviction, and invalidation config for cached LLM prompt/completion pairs",
     "boundary": "Cache config. NAO eh session_state (contexto efemero), memory_summary (historico), nem runtime_state (variaveis runtime).",
