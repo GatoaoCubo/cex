@@ -2,131 +2,106 @@
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
-title: "System Testing Patterns"
-version: "1.0.0"
+title: "System Testing Patterns: Scope, Coverage, and Failure Classification"
+version: "1.1.0"
 created: "2026-04-12"
 updated: "2026-04-12"
-author: "n04"
-domain: software_testing
+author: "knowledge-card-builder"
+domain: software-testing
 quality: null
-tags: [testing, system-testing, e2e, contract, smoke, regression, chaos, property-based, qa]
-tldr: "7 canonical system-testing patterns: smoke, contract, regression, golden, chaos, property-based, E2E. Each targets a distinct failure class at process boundary or above."
-when_to_use: "Designing test suites, selecting test strategies, or onboarding engineers to QA taxonomy."
-keywords: [smoke-test, contract-test, regression-test, chaos-engineering, property-based-testing]
+tags: [testing, system-testing, integration, e2e, test-patterns, qa, coverage, knowledge]
+tldr: "6 test pattern types mapped by isolation, speed, confidence; scope decision matrix, order heuristics, 5 failure classes, and coverage strategies."
+when_to_use: "When designing test suites, classifying failures, choosing test scope, or auditing coverage gaps in a multi-layer system."
+keywords: [system-testing, e2e, integration-test, test-coverage, failure-classification]
 long_tails:
-  - which system testing pattern to use for API boundary validation
-  - how to choose between smoke test and regression test
-  - when to apply chaos engineering vs property-based testing
-  - snapshot testing vs golden file testing difference
+  - "When to use end-to-end tests vs integration tests vs unit tests"
+  - "How to classify test failures by ownership and resolution path"
+  - "Execution order for test suites to maximize feedback speed"
+  - "Coverage strategies for multi-layer artifact validation pipelines"
 axioms:
-  - ALWAYS start new projects with smoke tests before adding regression or contract suites
-  - NEVER skip golden file tests when serialized output format stability is required
-  - IF a service boundary exists THEN add contract tests before E2E tests
-  - NEVER run chaos tests in production without a defined SLO baseline first
+  - "ALWAYS run fast isolated tests before slow integrated tests"
+  - "NEVER report coverage percentage without specifying the coverage dimension"
+  - "IF a test fails intermittently, classify as environment before blaming code"
 linked_artifacts:
   primary: null
-  related: []
+  related: [p07_qg_system_gate, p01_kc_rag_fundamentals]
 density_score: 0.88
 data_source: "https://martinfowler.com/articles/practical-test-pyramid.html"
 ---
 
-# System Testing Patterns
+# System Testing Patterns: Scope, Coverage, and Failure Classification
 
 ## Quick Reference
 ```yaml
 topic: system_testing_patterns
-scope: backend, API, distributed systems, CLI tools
-owner: n04
+scope: multi-layer test design, failure classification, coverage
+owner: knowledge-card-builder
 criticality: high
-patterns: 7
-boundary: process-level and above (not unit tests)
 ```
 
 ## Pattern Taxonomy
 
-| Pattern | Trigger | Key Tooling | Failure Signal |
-|---------|---------|-------------|----------------|
-| Smoke | Every deploy | pytest, k6, Docker healthcheck | Deploy gate blocks — service dead |
-| Contract | API boundary change | Pact, Schemathesis | Breaking change caught pre-deploy |
-| Regression | Before release cut | pytest --last-failed, Newman | Known flow broken — rollback |
-| Golden (snapshot) | Output format stabilization | pytest-snapshot, Jest toMatchSnapshot | Unexpected output diff |
-| Chaos | Pre-production resilience | Chaos Monkey, Toxiproxy, Gremlin | Cascading failure, SLO breach |
-| Property-based | Edge case discovery | Hypothesis (Py), fast-check (JS) | Counterexample found — edge case |
-| E2E (user journey) | Critical user flows | Playwright, Cypress, Selenium | Critical path broken for user |
+| Pattern | Scope | Trigger | Isolation | Speed | Confidence Signal |
+|---------|-------|---------|-----------|-------|-------------------|
+| Unit | Single function/class | Logic change | Full | <1ms | Logic bugs |
+| Integration | 2+ components, real deps | API/boundary change | Partial | 10-500ms | Contract bugs |
+| System (E2E) | Full stack, real env | Release gate | None | 1-60s | Regression |
+| Smoke | Critical paths only | Deploy | None | <30s | Liveness |
+| Contract | API schema, SLA boundary | Interface change | Mocked | ~100ms | Compatibility |
+| Property | Input space, invariants | Algorithm change | Partial | varies | Edge cases |
 
-## Pattern Details
+## Test Scope Decision Matrix
 
-### Smoke
-- Validates: service boots, health endpoints respond (200), DB reachable
-- Scope: happy path only — narrow and fast (< 60 s)
-- Anti-pattern: testing edge cases in smoke suite (slows pipeline gate)
+| Condition | Choose |
+|-----------|--------|
+| Logic, no I/O, no state | Unit |
+| DB query, cache, or external call | Integration |
+| User journey, multi-service flow | System/E2E |
+| Post-deploy health check | Smoke |
+| Cross-team API boundary | Contract |
+| State machines, parsers, converters | Property |
+| CI speed constraint (<5 min) | Unit + Smoke |
+| Release gate | System + Smoke |
 
-### Contract
-- Validates: producer/consumer API shape; schema compliance (OpenAPI/Pact)
-- Pact: consumer-driven — consumer defines expectations, provider verifies
-- Schemathesis: generates test cases from OpenAPI spec automatically
+## Execution Order Heuristics
 
-### Regression
-- Validates: previously passing scenarios still pass after code change
-- Pattern: record-and-replay using fixtures or VCR cassettes
-- Gate: run with `--last-failed` first; full suite on merge to main
+| Rule | Rationale | Anti-pattern |
+|------|-----------|-------------|
+| Unit first, E2E last | Isolate logic failures early | E2E-first wastes 10min on a logic bug |
+| Smoke before full suite | Fail fast on infra issues | Full suite on broken env = false failures |
+| Stable before flaky | Deterministic signal before probabilistic | Mixed order = noisy CI dashboards |
+| Shortest first per layer | Maximize parallel feedback | All long tests together = bottleneck |
+| Independent before chained | Avoid cascade masking root cause | Sequential tests = ambiguous failures |
 
-### Golden (Snapshot)
-- Validates: serialized output matches approved baseline file byte-for-byte
-- Update flow: diff appears -> human reviews -> `--snapshot-update` if intentional
-- Anti-pattern: stale snapshots auto-approved without human review
+## Coverage Strategies
 
-### Chaos
-- Validates: system tolerates infra failures (latency spike, crash, partition)
-- Tooling tiers: Toxiproxy (network faults, local), Gremlin (cloud, SaaS)
-- Prerequisite: SLO defined (p99 latency, error rate budget) before injection
+| Strategy | Measures | Gap Risk | CEX Context |
+|----------|----------|----------|-------------|
+| Line/statement | Code executed | Misses branch logic | cex_system_test.py (54 tests) |
+| Branch | Decision paths | Misses data-driven paths | Schema + frontmatter gate |
+| Mutation | Test quality (kill rate) | Expensive, slow | Manual for core pipeline |
+| Behavioral | User stories, contracts | Misses edge inputs | 12LP checklist (12 points) |
+| Exploratory | Unknown unknowns | Unstructured, hard to repeat | cex_doctor.py scan |
 
-### Property-Based
-- Validates: function invariants hold across auto-generated random inputs
-- Hypothesis shrinks failing inputs to minimal counterexample automatically
-- Best targets: parsers, serializers, pure transforms, sorting/search functions
+## Failure Classification
 
-### E2E (User Journey)
-- Validates: full user flow — UI through backend to persistence layer
-- Anti-pattern: testing every edge case E2E (slow, brittle, hard to debug)
-- Scope rule: E2E covers the 3-5 most critical user journeys only
+| Class | Diagnosis Signal | Ownership | Resolution |
+|-------|-----------------|-----------|------------|
+| Logic | Deterministic, reproducible | Author | Fix code, add unit test |
+| Environment | Intermittent, env-dependent | Infra/DevOps | Pin deps, isolate env |
+| Data | Specific input/fixture triggers | Author | Add fixture, sanitize data |
+| Timing | Race condition, flaky under load | Author/Infra | Add retry, fix async order |
+| Contract | Interface mismatch, schema drift | API owner | Align contract, add contract test |
 
-## Selection Guide
+## CEX Application
 
-```text
-Starting a new service?
-  -> Smoke (always first)
-  -> Regression (on first stable release)
-  -> Contract (at first external API boundary)
-
-Mature system?
-  -> Chaos (resilience audit — top 3 failure modes)
-  -> Property-based (pure functions with invariants)
-  -> E2E (3-5 critical user journeys max)
-
-Output format must be stable?
-  -> Golden/Snapshot tests mandatory
-```
-
-## Maturity Ladder
-
-| Stage | Add | Min Coverage Target |
-|-------|-----|---------------------|
-| 0 — MVP | Smoke | 1 health + 1 core path |
-| 1 — Beta | + Regression | All critical user flows |
-| 2 — GA | + Contract | All external API surfaces |
-| 3 — Scale | + Chaos | Top 3 infra failure modes |
-| 4 — Mature | + Property-based | All pure functions with invariants |
-
-## Boundaries
-
-- Does NOT cover: unit tests, load/perf, SAST/DAST security scanning
-- Does NOT cover: mutation testing, fuzzing (distinct disciplines)
-- Scope: process boundary and above — a network-crossing smoke test is in
-  scope; a function-level assertion is not
+- `cex_system_test.py`: 54 tests across integration + system scope
+- `cex_doctor.py`: smoke-style health check (builder + schema liveness)
+- `cex_hooks.py`: pre-commit gate (ASCII rule + frontmatter contract tests)
+- F7 GOVERN: behavioral coverage via 12LP checklist + H01-H07 hard gates
+- Failure triage: deterministic = logic class; intermittent = environment class
 
 ## References
-- Practical Test Pyramid: https://martinfowler.com/articles/practical-test-pyramid.html
-- Pact contract testing: https://docs.pact.io/
-- Hypothesis property-based: https://hypothesis.readthedocs.io/en/latest/
-- Schemathesis OpenAPI fuzzing: https://schemathesis.readthedocs.io/
+
+- Fowler, M. "Practical Test Pyramid": https://martinfowler.com/articles/practical-test-pyramid.html
+- Related: p07_qg_system_gate, cex_system_test.py (54 tests), cex_doctor.py
