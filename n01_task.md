@@ -1,6 +1,3 @@
-Create file: N01_intelligence/knowledge/kc_model_context_protocol.md
-Knowledge card about MCP (Model Context Protocol) by Anthropic.
-Cover: what MCP is, server/client architecture, tool/resource/prompt primitives,
-how CEX uses MCP (.mcp-n0X.json configs), comparison with function calling.
-Include YAML frontmatter: id: kc_model_context_protocol, kind: knowledge_card, title: "Model Context Protocol (MCP)", version: 1.0.0, quality: null, pillar: P01
-All content in English. Keep under 120 lines.
+Create file: N01_intelligence/knowledge/kc_prompt_engineering_taxonomy.md
+Knowledge card about prompt engineering taxonomy. Cover: zero-shot, few-shot, chain-of-thought, tree-of-thought, ReAct, self-consistency. Include comparison table.
+YAML frontmatter: id: kc_prompt_engineering_taxonomy, kind: knowledge_card, title: "Prompt Engineering Taxonomy", version: 1.0.0, quality: null, pillar: P01. English only. Under 100 lines.
