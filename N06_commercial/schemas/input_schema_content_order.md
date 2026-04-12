@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: content-factory-ordering
-quality: null
+quality: 8.9
 tags: [input-schema, content-factory, order, brief, customer, checkout]
 tldr: "Complete input schema for Content Factory orders. Defines every field a customer submits to produce content: topic, audience, formats, brand config, delivery preferences, billing. Validates before pipeline execution."
 density_score: 0.93

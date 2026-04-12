@@ -8,7 +8,7 @@ created: 2026-04-08
 updated: 2026-04-08
 author: n03_builder
 nucleus: N07
-quality: null
+quality: 9.0
 tags: [didactic, terminology, taught-terms, memory, tracking]
 tldr: "Registry of industry terms N07 has taught the user. Check BEFORE teaching to avoid repetition. Update AFTER teaching to persist knowledge."
 density_score: 0.92

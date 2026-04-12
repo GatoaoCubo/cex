@@ -10,8 +10,8 @@
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <img src="https://img.shields.io/badge/LLMs-Claude%20%7C%20GPT%20%7C%20Gemini%20%7C%20Ollama-8A2BE2" alt="LLMs">
   <img src="https://img.shields.io/badge/pillars-12-orange" alt="Pillars">
-  <img src="https://img.shields.io/badge/artifact%20kinds-117-red" alt="Kinds">
-  <img src="https://img.shields.io/badge/tools-58-brightgreen" alt="Tools">
+  <img src="https://img.shields.io/badge/artifact%20kinds-132-red" alt="Kinds">
+  <img src="https://img.shields.io/badge/tools-83-brightgreen" alt="Tools">
 </p>
 
 ---
