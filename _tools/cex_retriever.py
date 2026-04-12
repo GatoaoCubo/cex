@@ -66,7 +66,7 @@ def strip_frontmatter(text: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# TF-IDF Implementation (no external deps beyond stdlib + numpy)
+# TF-IDF Implementation (pure stdlib -- no numpy/sklearn required)
 # ---------------------------------------------------------------------------
 
 import math
