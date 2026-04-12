@@ -1,0 +1,45 @@
+---
+id: p12_sc_instagram_content_weekly
+kind: schedule
+pillar: P12
+version: "1.0.0"
+created: "2026-04-12"
+updated: "2026-04-12"
+author: "schedule-builder"
+name: "Instagram Content — Weekly Cadence"
+trigger_type: cron
+cron: "0 8 * * 1,3,5"
+workflow_ref: "p12_wf_instagram_content_gen"
+quality: null
+tags: [schedule, instagram, social, marketing]
+tldr: "Triggers Instagram content generation Mon/Wed/Fri at 08:00 BRT. max_concurrent 1, catch_up false."
+timezone: "America/Sao_Paulo"
+enabled: true
+start_date: null
+end_date: null
+max_concurrent: 1
+catch_up: false
+jitter: "0-60s"
+description: "Weekday trigger for Instagram content generation. Fires before peak engagement (12h-22h BRT)."
+---
+
+## Overview
+Triggers Instagram content generation three times per week, before peak engagement hours.
+Produces one post per run; content is ready for review or auto-publish before noon.
+
+## Trigger
+- Expression: `0 8 * * 1,3,5` — 8:00 AM on Monday, Wednesday, and Friday
+- Timezone: America/Sao_Paulo
+- Enabled: true
+- Trigger type: cron
+
+## Workflow
+- Workflow: `p12_wf_instagram_content_gen`
+- Expected duration: 10-20 minutes
+- Dependencies: brand_config.yaml, N02 content templates
+
+## Policy
+- Catch-up: false — stale posts are not published retroactively
+- Max concurrent: 1 — sequential content ensures brand voice consistency
+- Jitter: 0-60s — staggers against other morning schedules
+- On failure: alert — notify team; do not auto-retry
