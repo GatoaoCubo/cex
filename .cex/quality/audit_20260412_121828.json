@@ -1,0 +1,120 @@
+{
+  "ts": "2026-04-12T12:18:28.486387",
+  "summary": {
+    "wired": 18,
+    "broken": 0,
+    "phantom": 0,
+    "orphan": 0,
+    "total": 18
+  },
+  "checks": [
+    {
+      "layer": "WIRE",
+      "check": "W1_identity",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "WIRE",
+      "check": "W2_doing_tasks",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "WIRE",
+      "check": "W3_action_protocol",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "WIRE",
+      "check": "W4_guardrails",
+      "status": "WIRED",
+      "detail": "PRODUCE should have guardrails"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W4b_no_guard_REASON",
+      "status": "WIRED",
+      "detail": "REASON excluded"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W5_verification",
+      "status": "WIRED",
+      "detail": ""
+    },
+    {
+      "layer": "WIRE",
+      "check": "W5b_no_verify_agent_PRODUCE",
+      "status": "WIRED",
+      "detail": "verification_agent excluded from PRODUCE"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W6_compaction",
+      "status": "WIRED",
+      "detail": "ratio=0.98"
+    },
+    {
+      "layer": "WIRE",
+      "check": "W7_memory_extract",
+      "status": "WIRED",
+      "detail": "counter=5"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T01_skill_loader_wired",
+      "status": "WIRED",
+      "detail": "SkillLoader in crew_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T02_router_wired",
+      "status": "WIRED",
+      "detail": "CexRouter in crew_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T03_gdp_wired",
+      "status": "WIRED",
+      "detail": "GDP in 8f_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T04_budget_wired",
+      "status": "WIRED",
+      "detail": "TokenBudget in 8f_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T05_memtype_wired",
+      "status": "WIRED",
+      "detail": "MemoryType in update"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T06_memage_wired",
+      "status": "WIRED",
+      "detail": "MemoryAge in select"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T08_coordinator_wired",
+      "status": "WIRED",
+      "detail": "Coordinator in mission_runner"
+    },
+    {
+      "layer": "WIRE",
+      "check": "T10_reverse_compiler",
+      "status": "WIRED",
+      "detail": "Reverse compiler exists"
+    },
+    {
+      "layer": "WIRE",
+      "check": "artifacts_loadable",
+      "status": "WIRED",
+      "detail": "14/14"
+    }
+  ]
+}

@@ -25,3 +25,8 @@ When you receive a task (via handoff or interactive), automatically discover and
 - **Decision manifest**: `.cex/runtime/decisions/decision_manifest.yaml` contains user decisions. Do NOT re-ask what's already decided.
 - **Frontmatter is mandatory**: Every artifact must have YAML frontmatter matching the pillar schema.
 - **8F applies**: The context you load informs F2 (Frame) and F3 (Filter). Skip nothing.
+
+### Prompt Compiler (Intent Resolution)
+Source of truth: `P03_prompt/layers/p03_pc_cex_universal.md`
+Always resolve user intent through this artifact before dispatching.
+It maps natural language (PT-BR + EN) to `{kind, pillar, nucleus, verb}` tuples for all 124 CEX kinds.

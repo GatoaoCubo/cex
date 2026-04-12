@@ -511,6 +511,14 @@ def compose_prompt(
                 parts.append(verify_skill)
                 parts.append("")
 
+    # --- Wire: Prompt Compiler (F1 CONSTRAIN injection) ---
+    if layers and function_name.upper() == "CONSTRAIN":
+        pc_body = layers.get("p03_pc_cex_universal")
+        if pc_body:
+            parts.append("## Prompt Compiler (Intent Resolution -- F1 CONSTRAIN)")
+            parts.append(pc_body)
+            parts.append("")
+
     # --- Header ---
     parts.append(f"# CEX Crew Runner -- Builder Execution")
     parts.append(f"**Builder**: `{builder_id}`")

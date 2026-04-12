@@ -68,14 +68,35 @@ def _parse_simple_meta(text: str) -> dict:
     return meta
 
 
+_META_KEYS = {
+    "id", "kind", "pillar", "version", "created", "updated", "author",
+    "title", "domain", "coverage", "languages", "quality", "tags",
+    "tldr", "density_score", "severity", "enforcement",
+}
+
+
 def _try_yaml_safe_load(text: str) -> tuple:
     """Try parsing flat YAML with PyYAML. Returns (meta_dict, body_str) or None."""
     try:
         import yaml
         data = yaml.safe_load(text)
-        if isinstance(data, dict) and data.get("id") and data.get("body"):
+        if not isinstance(data, dict) or not data.get("id"):
+            return None
+        if data.get("body"):
             body = str(data.pop("body", ""))
             return data, body
+        # Reconstruct body from non-metadata keys (compiled artifacts
+        # without explicit 'body' key, e.g. prompt_compiler)
+        if data.get("kind"):
+            body_parts = []
+            meta = {}
+            for k, v in data.items():
+                if k in _META_KEYS:
+                    meta[k] = v
+                else:
+                    body_parts.append(f"## {k}\n{v}")
+            if body_parts:
+                return meta, "\n\n".join(body_parts)
     except Exception:
         pass
     return None
