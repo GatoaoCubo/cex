@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 8.8
 tags: [feedback, builder, N03, quality, review, template]
 tldr: "Feedback template for N03 builder output reviews — structured format for peer scoring and improvement notes."
 density_score: 0.91

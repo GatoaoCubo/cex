@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 9.0
 tags: [architecture, builder, N03, component-map, 8F]
 tldr: "Component architecture map for N03 Builder — shows data flow from intent through 8F pipeline to compiled artifact."
 density_score: 0.93

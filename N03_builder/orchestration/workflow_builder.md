@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 9.0
 tags: [workflow, builder, N03, 8F, construction, pipeline, batch]
 tldr: "3 builder workflows — single artifact (8F), batch construction, and AutoResearch loop — with concrete tool commands."
 steps_count: 8

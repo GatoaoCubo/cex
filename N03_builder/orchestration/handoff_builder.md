@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 8.9
 tags: [handoff, builder, N03, contract, dispatch, orchestration]
 tldr: "Handoff contract defining what N07 must provide and what N03 must deliver when receiving construction tasks."
 density_score: 0.94

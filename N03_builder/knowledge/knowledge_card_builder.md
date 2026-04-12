@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 9.0
 tags: [knowledge-card, builder, N03, 8F, construction, ISOs, pipeline]
 tldr: "N03 builds all 123 CEX kinds via 8F pipeline — load ISOs, inject context, produce with frontmatter, compile to YAML."
 when_to_use: "When understanding how CEX builds artifacts, what the 8F pipeline does, or how builder ISOs work."

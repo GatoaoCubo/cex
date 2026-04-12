@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 9.0
 tags: [dispatch-rule, builder, N03, routing, construction, 8F]
 tldr: "Routes build/create/scaffold/artifact tasks to N03 Builder nucleus — keyword match with 0.70 confidence threshold."
 scope: builder_construction

@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 8.9
 tags: [signal, builder, N03, protocol, orchestration, complete, error]
 tldr: "Signal protocol for N03 Builder — emits complete/error/progress signals to .cex/runtime/signals/ for N07 consumption."
 density_score: 0.93
