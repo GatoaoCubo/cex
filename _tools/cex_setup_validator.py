@@ -468,6 +468,107 @@ def check_system():
 
 
 # ---------------------------------------------------------------------------
+# Category: OLLAMA
+# ---------------------------------------------------------------------------
+
+OLLAMA_BINARY_PATHS = [
+    Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "Ollama" / "ollama.exe",
+    Path("C:/Users") / os.environ.get("USERNAME", "user") / "AppData" / "Local" / "Programs" / "Ollama" / "ollama.exe",
+]
+
+
+def check_ollama():
+    results = []
+
+    # 1. Binary exists
+    binary_found = None
+    # Try shutil.which first (if ollama is on PATH)
+    which_path = shutil.which("ollama")
+    if which_path:
+        binary_found = which_path
+    else:
+        for bp in OLLAMA_BINARY_PATHS:
+            if bp.exists():
+                binary_found = str(bp)
+                break
+
+    if binary_found:
+        results.append(CheckResult("OLLAMA", "binary", OK,
+                                   "Ollama binary: %s" % binary_found))
+    else:
+        results.append(CheckResult("OLLAMA", "binary", FAIL,
+                                   "Ollama binary not found (checked PATH + AppData)"))
+        # If no binary, remaining checks will also fail
+        results.append(CheckResult("OLLAMA", "service", FAIL,
+                                   "Ollama service: skipped (no binary)"))
+        results.append(CheckResult("OLLAMA", "models", FAIL,
+                                   "Ollama models: skipped (no binary)"))
+        results.append(CheckResult("OLLAMA", "gpu", INFO,
+                                   "GPU check: skipped (no binary)"))
+        return results
+
+    # 2. Service responding
+    try:
+        import urllib.request
+        req = urllib.request.Request("http://localhost:11434/api/tags",
+                                    method="GET")
+        resp = urllib.request.urlopen(req, timeout=5)
+        body = resp.read().decode("utf-8", errors="replace")
+        tag_data = json.loads(body)
+        models = tag_data.get("models", [])
+        results.append(CheckResult("OLLAMA", "service", OK,
+                                   "Ollama service responding (port 11434)"))
+    except Exception as e:
+        err_str = str(e)[:80]
+        results.append(CheckResult("OLLAMA", "service", FAIL,
+                                   "Ollama service not responding: %s" % err_str))
+        results.append(CheckResult("OLLAMA", "models", FAIL,
+                                   "Ollama models: skipped (service down)"))
+        results.append(CheckResult("OLLAMA", "gpu", INFO,
+                                   "GPU check: independent of service"))
+        # Still check GPU
+        results.extend(_check_gpu())
+        return results
+
+    # 3. At least 1 model pulled
+    if models:
+        model_names = [m.get("name", "?") for m in models]
+        display = ", ".join(model_names[:5])
+        if len(model_names) > 5:
+            display += " (+%d more)" % (len(model_names) - 5)
+        results.append(CheckResult("OLLAMA", "models", OK,
+                                   "Ollama models: %d pulled (%s)" % (
+                                       len(model_names), display)))
+    else:
+        results.append(CheckResult("OLLAMA", "models", FAIL,
+                                   "Ollama: no models pulled (run: ollama pull qwen3:8b)"))
+
+    # 4. GPU available
+    results.extend(_check_gpu())
+
+    return results
+
+
+def _check_gpu():
+    """Check nvidia-smi for GPU availability."""
+    results = []
+    rc, out, err = run_cmd(["nvidia-smi", "--query-gpu=name,memory.total",
+                            "--format=csv,noheader,nounits"], timeout=10)
+    if rc == 0 and out.strip():
+        # Parse first line: "NVIDIA GeForce RTX 5070 Ti, 16384"
+        line = out.strip().split("\n")[0]
+        results.append(CheckResult("OLLAMA", "gpu", OK,
+                                   "GPU: %s" % line.strip()))
+    elif rc == -1:
+        results.append(CheckResult("OLLAMA", "gpu", INFO,
+                                   "nvidia-smi not found (CPU-only inference)"))
+    else:
+        results.append(CheckResult("OLLAMA", "gpu", INFO,
+                                   "GPU query failed: %s" % (err[:60] or "unknown")))
+    return results
+
+
+# ---------------------------------------------------------------------------
 # Fix mode
 # ---------------------------------------------------------------------------
 
@@ -518,7 +619,7 @@ def apply_fixes(all_results):
 
 CATEGORIES_ORDER = [
     "RUNTIME", "PACKAGES", "MCP_SERVERS", "ENV_VARS",
-    "STRUCTURE", "GIT_HOOKS", "SYSTEM"
+    "STRUCTURE", "GIT_HOOKS", "SYSTEM", "OLLAMA"
 ]
 
 
@@ -602,6 +703,7 @@ def main():
         "STRUCTURE": lambda: check_structure(fix_mode=args.fix),
         "GIT_HOOKS": lambda: check_git_hooks(fix_mode=args.fix),
         "SYSTEM": check_system,
+        "OLLAMA": check_ollama,
     }
 
     for cat in CATEGORIES_ORDER:

@@ -41,9 +41,9 @@ providers:
     api_key_env: ""
     cost_per_1k: 0.0
     models:
-      large: qwen3:8b
-      small: deepseek-r1:8b
-      reasoning: deepseek-r1:8b
+      large: qwen3:14b
+      small: qwen3:8b
+      reasoning: qwen3:14b
       structured: qwen3:8b
 
 # Nucleus → Provider mapping
@@ -53,34 +53,34 @@ nucleus_routing:
   N01_intelligence:
     primary: anthropic
     model_tier: opus
-    fallback: [google, openai]
+    fallback: [google, openai, ollama]
 
   N02_content:
     primary: anthropic
     model_tier: opus
-    fallback: [google]
+    fallback: [google, ollama]
 
   N03_builder:
     primary: anthropic
     model_tier: opus
-    fallback: [google]
+    fallback: [google, ollama]
 
   N04_knowledge:
     primary: anthropic
     model_tier: opus
-    fallback: [google]
+    fallback: [google, ollama]
 
   N05_operations:
     primary: anthropic
     model_tier: opus
-    fallback: [google, openai]
+    fallback: [google, openai, ollama]
 
   N06_commercial:
     primary: anthropic
     model_tier: opus
-    fallback: [google]
+    fallback: [google, ollama]
 
   N07_orchestrator:
     primary: anthropic
     model_tier: opus
-    fallback: [google, openai]
+    fallback: [google, openai, ollama]

@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-04-12T12:09:40.575525",
+  "timestamp": "2026-04-12T14:00:57.349792",
   "pass": 55,
   "fail": 3,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 244.1,
+  "elapsed_s": 285.5,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -64,7 +64,7 @@
     {
       "name": "doctor:pass_count",
       "status": "PASS",
-      "detail": "123/98+ PASS"
+      "detail": "124/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
@@ -84,7 +84,7 @@
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "124 builders"
+      "detail": "125 builders"
     },
     {
       "name": "builders:13_isos",
@@ -94,7 +94,7 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "64 artifacts (min 11)"
+      "detail": "66 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
@@ -129,7 +129,7 @@
     {
       "name": "quality:zero_null",
       "status": "FAIL",
-      "detail": "131 quality:null (awaiting peer review)"
+      "detail": "133 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
@@ -139,7 +139,7 @@
     {
       "name": "subagents:count",
       "status": "PASS",
-      "detail": "125 sub-agents"
+      "detail": "126 sub-agents"
     },
     {
       "name": "subagents:materializer",
@@ -229,7 +229,7 @@
     {
       "name": "registry:kinds_meta",
       "status": "PASS",
-      "detail": "123 kinds registered"
+      "detail": "124 kinds registered"
     },
     {
       "name": "runner:dryrun_runs",
@@ -259,7 +259,7 @@
     {
       "name": "runner:learning_record",
       "status": "PASS",
-      "detail": "8 records"
+      "detail": "10 records"
     },
     {
       "name": "e2e:script_exists",
@@ -272,9 +272,9 @@
       "detail": ""
     },
     {
-      "name": "e2e:runs",
+      "name": "e2e:scenarios_pass",
       "status": "FAIL",
-      "detail": "exit=-1, output=Command '['C:\\\\Users\\\\CEX\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\python.exe', 'C:\\\\Users\\\\CEX\\\\Documents\\\\GitHub\\\\cex\\\\_tools\\\\cex_e2e_test.py',"
+      "detail": "0/3 scenarios passed"
     },
     {
       "name": "e2e:report_written",
@@ -284,17 +284,17 @@
     {
       "name": "kc:count",
       "status": "PASS",
-      "detail": "123/98 kind KCs"
+      "detail": "126/98 kind KCs"
     },
     {
       "name": "git:clean",
-      "status": "FAIL",
-      "detail": "32 dirty files"
+      "status": "PASS",
+      "detail": "0 dirty files"
     },
     {
       "name": "git:has_commits",
-      "status": "PASS",
-      "detail": "cf669c3b [8F] knowledge_card: create a knowledge card about "
+      "status": "FAIL",
+      "detail": ""
     }
   ]
 }
