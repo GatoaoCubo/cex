@@ -685,6 +685,20 @@ def run_mission(args):
         log("Preparing handoffs...")
         copy_handoffs_to_tasks(mission, nuclei)
 
+        # Step 2.5: Hygiene gate (warning only, does not block dispatch)
+        try:
+            from cex_hygiene import run_scan
+            scan_result = run_scan()
+            if scan_result.critical_count > 0:
+                log(f"Hygiene: {scan_result.critical_count} critical issues found", "WARN")
+                log("Run: python _tools/cex_hygiene.py clean", "WARN")
+            else:
+                log("Hygiene: clean")
+        except ImportError:
+            log("Hygiene scanner not available -- skipping", "WARN")
+        except Exception as e:
+            log(f"Hygiene scan error: {e}", "WARN")
+
         # Step 3: Dispatch grid
         log("Dispatching grid...")
         dispatch_grid(mission, args.dry_run)
