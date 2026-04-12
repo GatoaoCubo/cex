@@ -12,7 +12,7 @@ language: English
 
 Structured output patterns ensure LLM responses match expected schemas. Key approaches include:
 
-## 1. Pydantic Models
+## 1. Pyd
 ```python
 from pydantic import BaseModel
 
