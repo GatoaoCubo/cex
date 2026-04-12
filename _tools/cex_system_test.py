@@ -200,7 +200,7 @@ def test_infra():
     print("\n=== INFRASTRUCTURE ===")
     # Boot scripts
     for n in ["n01", "n02", "n03", "n04", "n05", "n06"]:
-        boot = CEX_ROOT / "boot" / f"{n}.cmd"
+        boot = CEX_ROOT / "boot" / f"{n}.ps1"
         test(f"boot:{n}", boot.exists())
 
     # Spawn scripts

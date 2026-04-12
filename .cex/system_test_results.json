@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-04-12T11:10:14.246160",
-  "pass": 48,
-  "fail": 10,
+  "timestamp": "2026-04-12T12:09:40.575525",
+  "pass": 55,
+  "fail": 3,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 283.4,
+  "elapsed_s": 244.1,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -94,32 +94,32 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "66 artifacts (min 11)"
+      "detail": "64 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "67 artifacts (min 10)"
+      "detail": "64 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "59 artifacts (min 34)"
+      "detail": "56 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "73 artifacts (min 12)"
+      "detail": "70 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "63 artifacts (min 9)"
+      "detail": "62 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "73 artifacts (min 9)"
+      "detail": "71 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
@@ -129,7 +129,7 @@
     {
       "name": "quality:zero_null",
       "status": "FAIL",
-      "detail": "145 quality:null (awaiting peer review)"
+      "detail": "131 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
@@ -153,37 +153,37 @@
     },
     {
       "name": "hooks:git_precommit",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": ""
     },
     {
       "name": "boot:n01",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": ""
     },
     {
       "name": "boot:n02",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": ""
     },
     {
       "name": "boot:n03",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": ""
     },
     {
       "name": "boot:n04",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": ""
     },
     {
       "name": "boot:n05",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": ""
     },
     {
       "name": "boot:n06",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": ""
     },
     {
@@ -259,7 +259,7 @@
     {
       "name": "runner:learning_record",
       "status": "PASS",
-      "detail": "4 records"
+      "detail": "8 records"
     },
     {
       "name": "e2e:script_exists",
@@ -289,12 +289,12 @@
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "18 dirty files"
+      "detail": "32 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "1afc225c [8F] agent: faz um CRM pra pet shop"
+      "detail": "cf669c3b [8F] knowledge_card: create a knowledge card about "
     }
   ]
 }

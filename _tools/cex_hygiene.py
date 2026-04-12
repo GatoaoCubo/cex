@@ -294,28 +294,64 @@ def rule_r06_superseded_docs(root):
     return issues
 
 
+def _load_known_kinds():
+    """Load valid kind names from kinds_meta.json."""
+    kinds_path = CEX_ROOT / ".cex" / "kinds_meta.json"
+    if kinds_path.exists():
+        try:
+            data = json.loads(kinds_path.read_text(encoding="utf-8"))
+            return set(data.keys())
+        except Exception:
+            pass
+    return set()
+
+
+_KNOWN_KINDS = None
+
+
+def _get_known_kinds():
+    global _KNOWN_KINDS
+    if _KNOWN_KINDS is None:
+        _KNOWN_KINDS = _load_known_kinds()
+    return _KNOWN_KINDS
+
+
 def _is_user_project_file(path, root):
     """Heuristic: does this file look like a user-project artifact?
 
-    Two independent checks (per spec):
-    1. Frontmatter title/description matches user-project patterns
-    2. Content entirely lacks CEX system terms (kind, pillar, etc. as VALUES,
-       not just YAML keys -- we skip the frontmatter block for term detection)
+    Three-layer check:
+    1. If frontmatter has a valid CEX kind -> KEEP (golden example for builders)
+    2. If title/description matches user-project patterns -> FLAG
+    3. If body entirely lacks CEX system terms AND no valid kind -> FLAG
+
+    Golden examples (ex_*.md in examples/) are FORMAT references for builders.
+    They demonstrate HOW to structure a knowledge_card, agent, etc. Their CONTENT
+    may be about Amazon ads or React patterns -- that's fine. What matters is
+    whether they have valid CEX frontmatter (kind field matching kinds_meta.json).
     """
     try:
         content = path.read_text(encoding="utf-8", errors="ignore")
     except Exception:
         return False
-    # Check 1: frontmatter title/description for user project patterns
+
     fm = parse_frontmatter(content)
+
+    # Check 1: valid CEX kind in frontmatter -> this is a golden example, KEEP
+    if fm and isinstance(fm, dict):
+        kind = str(fm.get("kind", "")).strip().lower()
+        known = _get_known_kinds()
+        if kind and (kind in known or kind.replace("-", "_") in known):
+            return False  # legitimate golden example
+
+    # Check 2: frontmatter title/description matches user-project patterns
     if fm and isinstance(fm, dict):
         title = str(fm.get("title", ""))
         desc = str(fm.get("description", ""))
         header = title + " " + desc
         if USER_PROJECT_RE.search(header):
             return True
-    # Check 2: body (after frontmatter) lacks CEX system terms entirely
-    # We check body only -- frontmatter keys like "kind:" don't count
+
+    # Check 3: body (after frontmatter) lacks CEX system terms entirely
     body = content
     if content.strip().startswith("---"):
         end = content.find("---", content.find("---") + 3)

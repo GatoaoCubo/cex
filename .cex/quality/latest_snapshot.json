@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-04-12T11:15:46",
+  "timestamp": "2026-04-12T12:06:40",
   "total": 1,
   "avg_score": 8.0,
   "artifacts": [
     {
-      "path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P01_knowledge\\examples\\p01_ctx_cex_project.md",
-      "kind": "context_doc",
+      "path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P01_knowledge\\examples\\p01_kc_system_testing_patterns.md",
+      "kind": "knowledge_card",
       "pillar": "P01",
       "score": 8.0
     }

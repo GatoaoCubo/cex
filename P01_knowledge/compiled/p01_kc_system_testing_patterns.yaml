@@ -1,134 +1,121 @@
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
+kc_type: meta_kc
 pillar: P01
-title: 'System Testing Patterns: Scope, Coverage, and Failure Classification'
-version: 1.1.0
+title: System Testing Patterns — Smoke, Integration, E2E, Regression
+version: 1.0.0
 created: '2026-04-12'
 updated: '2026-04-12'
-author: knowledge-card-builder
-domain: software-testing
+author: N04
+domain: testing
 quality: null
 tags:
-- testing
-- system-testing
-- integration
-- e2e
-- test-patterns
-- qa
-- coverage
-- knowledge
-tldr: 6 test pattern types mapped by isolation, speed, confidence; scope decision matrix, order heuristics, 5 failure classes,
-  and coverage strategies.
-when_to_use: When designing test suites, classifying failures, choosing test scope, or auditing coverage gaps in a multi-layer
-  system.
-keywords:
-- system-testing
-- e2e
+- system-test
 - integration-test
-- test-coverage
-- failure-classification
+- e2e
+- regression
+- smoke-test
+- validation
+- cex
+tldr: '4 pattern families gate system quality: smoke (alive?), integration (contracts?), e2e (golden path?), regression (no
+  drift?).'
+when_to_use: Before deploy, after major refactors, as CI gate, or when validating multi-component flows.
+keywords:
+- system-test
+- smoke-test
+- integration-test
+- regression
+- e2e-test
 long_tails:
-- When to use end-to-end tests vs integration tests vs unit tests
-- How to classify test failures by ownership and resolution path
-- Execution order for test suites to maximize feedback speed
-- Coverage strategies for multi-layer artifact validation pipelines
+- when to run smoke tests vs integration tests
+- how to classify a system test failure by root cause
+- what patterns cover multi-component validation in CI
 axioms:
-- ALWAYS run fast isolated tests before slow integrated tests
-- NEVER report coverage percentage without specifying the coverage dimension
-- IF a test fails intermittently, classify as environment before blaming code
+- ALWAYS run smoke before integration — a dead process cannot have contract bugs
+- NEVER use unit mocks in e2e tests — mock boundaries invalidate golden path coverage
+- IF regression baseline is missing THEN generate it before merging, not after
 linked_artifacts:
   primary: null
   related:
-  - p07_qg_system_gate
-  - p01_kc_rag_fundamentals
-density_score: 0.88
+  - p01_kc_cex_system_test_suite
+density_score: 0.87
 data_source: https://martinfowler.com/articles/practical-test-pyramid.html
 quick_reference: 'topic: system_testing_patterns
 
-  scope: multi-layer test design, failure classification, coverage
+  scope: multi-component validation (not unit tests)
 
-  owner: knowledge-card-builder
+  owner: N04 / N05
 
-  criticality: high'
-pattern_taxonomy: '| Pattern | Scope | Trigger | Isolation | Speed | Confidence Signal |
+  criticality: high
 
-  |---------|-------|---------|-----------|-------|-------------------|
+  cex_tool: _tools/cex_system_test.py (54 tests)'
+pattern_taxonomy: '| Pattern | Scope | Trigger | Pass Criteria | Typical Count |
 
-  | Unit | Single function/class | Logic change | Full | <1ms | Logic bugs |
+  |---------|-------|---------|---------------|---------------|
 
-  | Integration | 2+ components, real deps | API/boundary change | Partial | 10-500ms | Contract bugs |
+  | Smoke | Process alive, config valid | Every deploy | Exit 0, no crash | 3-10 |
 
-  | System (E2E) | Full stack, real env | Release gate | None | 1-60s | Regression |
+  | Integration | Component boundary contracts | PR merge, dependency bump | All contracts satisfied | 10-30 |
 
-  | Smoke | Critical paths only | Deploy | None | <30s | Liveness |
+  | E2E | Full golden path, real I/O | Release gate, nightly | Output matches expected fixture | 5-15 |
 
-  | Contract | API schema, SLA boundary | Interface change | Mocked | ~100ms | Compatibility |
+  | Regression | No drift from baseline | Refactor, model update | Delta within threshold | 20-100 |'
+smoke_tests:
+- 'Purpose: fastest possible alive-check — is the system bootable?'
+- 'Checks: process starts, config loads, DB reachable, required env vars set'
+- 'SLA: must complete in < 30 s; if > 30 s, scope is wrong'
+- 'On failure: stop pipeline immediately — no value running deeper tests'
+integration_tests:
+- 'Purpose: validate contracts between two components at their boundary'
+- 'Boundary types: API schema, event payload, DB row shape, file format'
+- 'Data: use deterministic fixtures, never prod snapshots'
+- 'Anti-pattern: testing internal state instead of the boundary output'
+end_to_end_e2e_tests:
+- 'Purpose: validate complete user-facing flow from input to final output'
+- 'Coverage target: golden path first; edge cases only after golden passes'
+- 'Environment: real infra or hermetic replica — no mocks past the boundary'
+- 'Fixture strategy: record-and-replay for external APIs; seed DB before each run'
+regression_tests:
+- 'Purpose: detect unintended drift from a known-good baseline snapshot'
+- 'Baseline storage: commit snapshot artifacts alongside code (`tests/snapshots/`)'
+- 'Diff strategy: exact match for deterministic outputs; tolerance for LLM outputs'
+- 'Update flow: human approves diff → commit new baseline → CI green'
+failure_classification: '| Failure Type | Root Cause Signal | Resolution Path |
 
-  | Property | Input space, invariants | Algorithm change | Partial | varies | Edge cases |'
-test_scope_decision_matrix: '| Condition | Choose |
+  |-------------|-------------------|----------------|
 
-  |-----------|--------|
+  | Smoke fails | Process crash / missing config | Fix env or boot before any other work |
 
-  | Logic, no I/O, no state | Unit |
+  | Integration fails | Schema mismatch / version skew | Align producer and consumer schemas |
 
-  | DB query, cache, or external call | Integration |
+  | E2E fails | Logic regression or infra gap | Reproduce locally, add unit test, fix |
 
-  | User journey, multi-service flow | System/E2E |
+  | Regression fails | Intentional change or model drift | Review diff, approve or revert |
 
-  | Post-deploy health check | Smoke |
+  | Flaky | Timing, order dependence, external I/O | Isolate with retry budget, then fix root |'
+decision_matrix: '| Situation | Use Pattern |
 
-  | Cross-team API boundary | Contract |
+  |-----------|-------------|
 
-  | State machines, parsers, converters | Property |
+  | First check after deploy | Smoke |
 
-  | CI speed constraint (<5 min) | Unit + Smoke |
+  | New API endpoint added | Integration |
 
-  | Release gate | System + Smoke |'
-execution_order_heuristics: '| Rule | Rationale | Anti-pattern |
+  | Full feature shipped to user | E2E (golden path) |
 
-  |------|-----------|-------------|
+  | Prompt or model version bumped | Regression |
 
-  | Unit first, E2E last | Isolate logic failures early | E2E-first wastes 10min on a logic bug |
+  | CI gate for every PR | Smoke + Integration |
 
-  | Smoke before full suite | Fail fast on infra issues | Full suite on broken env = false failures |
+  | Nightly quality gate | All 4 in sequence |
 
-  | Stable before flaky | Deterministic signal before probabilistic | Mixed order = noisy CI dashboards |
-
-  | Shortest first per layer | Maximize parallel feedback | All long tests together = bottleneck |
-
-  | Independent before chained | Avoid cascade masking root cause | Sequential tests = ambiguous failures |'
-coverage_strategies: '| Strategy | Measures | Gap Risk | CEX Context |
-
-  |----------|----------|----------|-------------|
-
-  | Line/statement | Code executed | Misses branch logic | cex_system_test.py (54 tests) |
-
-  | Branch | Decision paths | Misses data-driven paths | Schema + frontmatter gate |
-
-  | Mutation | Test quality (kill rate) | Expensive, slow | Manual for core pipeline |
-
-  | Behavioral | User stories, contracts | Misses edge inputs | 12LP checklist (12 points) |
-
-  | Exploratory | Unknown unknowns | Unstructured, hard to repeat | cex_doctor.py scan |'
-failure_classification: '| Class | Diagnosis Signal | Ownership | Resolution |
-
-  |-------|-----------------|-----------|------------|
-
-  | Logic | Deterministic, reproducible | Author | Fix code, add unit test |
-
-  | Environment | Intermittent, env-dependent | Infra/DevOps | Pin deps, isolate env |
-
-  | Data | Specific input/fixture triggers | Author | Add fixture, sanitize data |
-
-  | Timing | Race condition, flaky under load | Author/Infra | Add retry, fix async order |
-
-  | Contract | Interface mismatch, schema drift | API owner | Align contract, add contract test |'
-cex_application:
-- '`cex_system_test.py`: 54 tests across integration + system scope'
-- '`cex_doctor.py`: smoke-style health check (builder + schema liveness)'
-- '`cex_hooks.py`: pre-commit gate (ASCII rule + frontmatter contract tests)'
-- 'F7 GOVERN: behavioral coverage via 12LP checklist + H01-H07 hard gates'
-- 'Failure triage: deterministic = logic class; intermittent = environment class'
+  | CEX pipeline validation | `cex_system_test.py` (54 tests, covers all 4) |'
+golden_rules:
+- 'ALWAYS run patterns in order: smoke -> integration -> e2e -> regression'
+- NEVER let a flaky test block CI — quarantine it, file a ticket, fix within 48 h
+- ALWAYS tie regression baselines to a commit SHA, not a date
+- IF smoke fails in production THEN rollback immediately, do not debug in prod
 references:
 - 'Fowler, M. "Practical Test Pyramid": https://martinfowler.com/articles/practical-test-pyramid.html'
-- 'Related: p07_qg_system_gate, cex_system_test.py (54 tests), cex_doctor.py'
+- 'CEX tool: `_tools/cex_system_test.py` — 54 tests across all 4 pattern families'
+- 'Related: `_tools/cex_hooks.py` — pre-commit smoke gate integration'
