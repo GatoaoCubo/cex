@@ -1,0 +1,151 @@
+id: extraction_trust_tiers
+kind: knowledge_card
+pillar: P01_knowledge
+title: 'Extraction: Trust Tiers (Capability-Based Access) from ruflo'
+version: 1.0
+quality: null
+tags:
+- extraction
+- trust
+- capability
+- access_control
+- ruflo
+- port
+created: 2026-04-12
+author: n01_intelligence
+domain: dispatch security
+source: ruvnet/ruflo v3.5
+tldr: ruflo uses capability-based access (not fixed tiers) with 7 capabilities, workload limits, claim lifecycle, and work
+  stealing. CEX should adopt a simpler 3-tier model mapped to agent_card + dispatch guard.
+1_key_finding_capability_based_not_tier_based: 'ruflo does NOT implement traditional fixed trust tiers (Tier 1/2/3).
+
+  Instead it uses a gradient capability model with 5 enforcement dimensions:
+
+
+  1. Capabilities: array of strings per agent
+
+  2. Workload: 0-100% capacity tracking
+
+  3. Claim lifecycle: state machine for task ownership
+
+  4. Progress protection: high-progress claims resist stealing
+
+  5. Access levels: private/team/swarm/public/system for memory
+
+
+  This is more flexible than fixed tiers but harder to reason about.
+
+  CEX should adopt a simplified 3-tier model inspired by ruflo''s capability
+
+  checks but with explicit tier labels for dispatch clarity.'
+2_ruflo_implementation_details: ''
+2_1_agent_capabilities_agent_ts_17_186: "// 7 capability types\nconst typeToCapability = {\n  'code': 'code',\n  'test': 'test',\n\
+  \  'review': 'review',\n  'design': 'design',\n  'deploy': 'deploy',\n  'refactor': 'refactor',\n  'debug': 'debug'\n};\n\
+  \n// Check before execution\ncanExecute(taskType: string): boolean {\n  const required = typeToCapability[taskType];\n \
+  \ return this.hasCapability(required);\n}"
+2_2_claim_capacity_limits_rules_ts_50_265: "// Capacity enforcement\nconst maxClaims = claimant.maxConcurrentClaims ?? 5;\n\
+  const activeClaims = existingClaims.filter(\n  c => c.claimant.id === claimant.id && isActiveClaim(c.status)\n).length;\n\
+  \nif (activeClaims >= maxClaims) {\n  return ruleFailure('CLAIMANT_AT_CAPACITY');\n}\n\nif (workload >= 100) {\n  return\
+  \ ruleFailure('CLAIMANT_AT_CAPACITY', 'At 100% capacity');\n}"
+2_3_claim_status_lifecycle_types_ts_32_41: 'active -> pending_handoff | in_review | completed | released | paused | blocked
+  | stealable
+
+  pending_handoff -> active | completed
+
+  in_review -> active | completed
+
+  paused -> active | blocked | stealable | completed
+
+  blocked -> active | paused | stealable | completed
+
+  stealable -> active | completed
+
+  completed -> (terminal)
+
+  released -> (terminal)
+
+  expired -> (terminal)'
+2_4_work_stealing_rules_ts_180_286: "type StealableReason = 'stale' | 'blocked' | 'overloaded' | 'manual' | 'timeout';\n\n\
+  // Conditions for stealing\ncanStealClaim(claim, challenger, config, now):\n  1. Claim must be in 'stealable' status\n \
+  \ 2. Grace period must have elapsed (stealableAt timestamp)\n  3. Progress below minProgressToProtect %\n  4. Challenger\
+  \ != owner (no self-steal)\n  5. No pending contest already\n  6. Cross-type stealing allowed (if configured)"
+2_5_memory_access_levels_types_ts_25_30: "type AccessLevel = 'private' | 'team' | 'swarm' | 'public' | 'system';\n\n// MemoryEntry\
+  \ includes:\ninterface MemoryEntry {\n  accessLevel: AccessLevel;\n  ownerId?: string;\n}"
+2_6_command_execution_security_safe_executor_ts_163_250: "// Allowlist-only model\ninterface ExecutorConfig {\n  allowedCommands:\
+  \ string[];     // ONLY these can execute\n  blockedPatterns?: string[];    // injection prevention\n  timeout?: number;\
+  \              // default 30000ms\n  maxBuffer?: number;            // default 10MB\n  allowSudo?: boolean;           //\
+  \ default false\n}\n\n// Blocked patterns (injection prevention)\nconst DEFAULT_BLOCKED = [';', '&&', '||', '|', '`', '$(',\
+  \ '${', '>', '<', '>>', '&', '\\n', '\\r', '\\0'];"
+3_cex_integration_plan: ''
+current_state: CEX has no trust/capability model. Any nucleus can be dispatched any task. N07 uses routing rules (domain ->
+  nucleus) but there's no enforcement -- nothing prevents dispatching a deploy task to N02 (marketing).
+proposed_3_tier_trust_model_for_agent_card: '| Tier | Label | Capabilities | Example nuclei |
+
+  |------|-------|-------------|----------------|
+
+  | T1 | `sandboxed` | read, research, draft | N01 (research), N02 (marketing) |
+
+  | T2 | `audited` | T1 + build, modify artifacts, compile | N03 (builder), N04 (knowledge) |
+
+  | T3 | `privileged` | T2 + deploy, modify tools, modify rules | N05 (operations), N07 (orchestrator) |'
+schema_extension_for_agent_card_kind: "Add to `P08_architecture/_schema.yaml` under `agent_card`:\n\nagent_card:\n  frontmatter_required:\n\
+  \    # ... existing fields ...\n    - trust_tier          # NEW: sandboxed | audited | privileged\n    - capabilities  \
+  \      # NEW: array of capability strings\n  constraints:\n    trust_tiers: [sandboxed, audited, privileged]\n    capability_values:\
+  \ [read, research, draft, build, compile, modify_artifacts, deploy, modify_tools, modify_rules]"
+dispatch_guard_in_n07: "Add to `_tools/cex_agent_spawn.py` or new `_tools/cex_trust_guard.py`:\n\ndef check_trust(task_requirements:\
+  \ list[str], nucleus_card: dict) -> bool:\n    \"\"\"Verify nucleus has capabilities required by the task.\"\"\"\n    nucleus_caps\
+  \ = set(nucleus_card.get(\"capabilities\", []))\n    required = set(task_requirements)\n    missing = required - nucleus_caps\n\
+  \    if missing:\n        raise TrustViolation(\n            f\"Nucleus {nucleus_card['id']} lacks: {missing}. \"\n    \
+  \        f\"Tier: {nucleus_card['trust_tier']}\"\n        )\n    return True"
+files_to_create_modify: '| File | Action | Lines est. |
+
+  |------|--------|-----------|
+
+  | `P08_architecture/_schema.yaml` | MODIFY -- add trust_tier + capabilities to agent_card | ~10 |
+
+  | `_tools/cex_trust_guard.py` | CREATE -- dispatch guard logic | ~80 |
+
+  | `_tools/cex_agent_spawn.py` | MODIFY -- call trust guard before spawn | ~15 |
+
+  | `N0{1-7}_*/agent_card_n0{1-7}.md` | MODIFY -- add trust_tier + capabilities fields | ~7 files x 3 lines |
+
+  | `.claude/rules/n07-orchestrator.md` | MODIFY -- document trust check in dispatch | ~10 |'
+estimated_effort:
+- 'Complexity: Low (additive schema fields + one guard function)'
+- 'Lines of code: ~80 new + ~50 modified across 10 files'
+- 'Dependencies: None'
+- 'Risk: Low -- additive only, no existing behavior changes'
+4_comparative_analysis: '| Dimension | ruflo capability model | Proposed CEX trust tiers | Traditional RBAC |
+
+  |-----------|----------------------|-------------------------|-----------------|
+
+  | Granularity | Per-capability (7 types) | Per-tier (3 levels) | Per-role (N roles) |
+
+  | Complexity | High (5 enforcement dims) | Low (1 check at dispatch) | Medium |
+
+  | Work stealing | Yes (stealable state) | No (not needed -- N07 re-dispatches) | N/A |
+
+  | Workload tracking | Yes (0-100%) | No (PID-based liveness only) | N/A |
+
+  | Memory access control | 5 levels | Not needed (nuclei own their dirs) | N/A |
+
+  | Injection prevention | Allowlist + blocked patterns | Not needed (no shell exec in nuclei) | N/A |'
+what_not_to_port_from_ruflo:
+- Work stealing -- CEX nuclei don't compete for tasks; N07 assigns
+- Claim lifecycle -- CEX uses signals (complete/fail), not claim states
+- Workload percentage -- CEX tracks PID liveness, not load
+- Memory access levels -- CEX nuclei own their N0x_*/ dirs; no cross-access needed
+- Command injection prevention -- CEX nuclei run in Claude Code sandbox
+5_key_code_references_in_ruflo: '| File (relative to ruflo/) | What it contains |
+
+  |---------------------------|-----------------|
+
+  | `v3/src/agent-lifecycle/domain/Agent.ts` | Capability array, canExecute(), hasCapability() |
+
+  | `v3/@claude-flow/claims/src/domain/types.ts` | ClaimStatus lifecycle, Claimant interface |
+
+  | `v3/@claude-flow/claims/src/domain/rules.ts` | canClaimIssue(), canStealClaim(), capacity checks |
+
+  | `v3/@claude-flow/security/src/safe-executor.ts` | Allowlist model, blocked patterns, sudo prevention |
+
+  | `v3/@claude-flow/memory/src/types.ts` | AccessLevel enum (private/team/swarm/public/system) |'
