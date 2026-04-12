@@ -16,7 +16,7 @@ cd "$CEX_ROOT"
 
 MODEL_FAST="ollama_chat/qwen3:8b"
 MODEL_DEEP="ollama_chat/qwen3:14b"
-AIDER_FLAGS="--subtree-only --yes-always --auto-commits --no-show-model-warnings --no-suggest-shell-commands"
+AIDER_FLAGS="--subtree-only --yes-always --auto-commits --no-show-model-warnings --no-suggest-shell-commands --commit-language english"
 
 MODE="${1:-grid}"
 shift
