@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 8.9
 tags: [schema, builder, N03, frontmatter, validation, contract]
 tldr: "Universal frontmatter schema that every CEX artifact must satisfy — 11 required fields + kind-specific extensions."
 density_score: 0.95

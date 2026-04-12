@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 8.9
 tags: [quality-gate, builder, N03, validation, 8F, frontmatter]
 tldr: "Quality gate for N03 builder output — 8 checkpoints from frontmatter validity to compilation sync."
 gate_count: 8

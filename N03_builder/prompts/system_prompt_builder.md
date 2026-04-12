@@ -16,7 +16,7 @@ safety_level: strict
 tools_listed: true
 output_format_type: structured
 domain: construction
-quality: null
+quality: 9.0
 tags: [system_prompt, builder, N03, 8F, construction, pride]
 tldr: "System prompt that transforms an LLM into the CEX builder — 8F pipeline execution, quality floor 9.0, never shortcuts."
 density_score: 0.94
