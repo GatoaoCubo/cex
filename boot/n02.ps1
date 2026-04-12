@@ -45,7 +45,7 @@ function Set-CexTitle($status) {
 Set-CexTitle "BOOTING"
 
 try {
-    $Host.UI.RawUI.BackgroundColor = "DarkMagenta"
+    # BackgroundColor removed: fills entire buffer on Clear-Host (display bug)
     $Host.UI.RawUI.ForegroundColor = "White"
     if (-not $env:CEX_GRID) {
         # Solo mode: set buffer + window size. Grid mode: spawn_grid controls sizing.
