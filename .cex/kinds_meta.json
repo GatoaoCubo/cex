@@ -189,6 +189,15 @@
     "naming": "p03_constraint_{{scope}}.md",
     "pillar": "P03"
   },
+  "cost_budget": {
+    "description": "Token budget allocation, spend tracking, cost alerts per provider/model/nucleus",
+    "boundary": "Money and token economics. NOT a rate_limit_config (requests/sec) nor a token_budget tool (internal). This is the budget POLICY.",
+    "pillar": "P09",
+    "llm_function": "GOVERN",
+    "max_bytes": 3072,
+    "naming": "p09_cb_{{name}}.yaml",
+    "core": false
+  },
   "content_monetization": {
     "boundary": "Pipeline completo de monetizacao de conteudo: billing, credits, checkout, courses, ads, emails. NAO eh pricing_strategy (estrategia apenas) nem payment_integration (provider apenas).",
     "core": false,
@@ -370,6 +379,15 @@
     "naming": "p02_fb_{{chain}}.yaml",
     "pillar": "P02"
   },
+  "experiment_config": {
+    "description": "A/B test and prompt experiment configuration with variants, metrics, and statistical analysis",
+    "boundary": "Experiment config with variants and metrics. NOT a feature_flag (boolean toggle) nor a benchmark (one-time evaluation).",
+    "pillar": "P09",
+    "llm_function": "GOVERN",
+    "max_bytes": 4096,
+    "naming": "p09_ec_{{name}}.yaml",
+    "core": false
+  },
   "feature_flag": {
     "boundary": "Flag de feature on/off com rollout gradual. NAO eh permission (acesso) nem env_config (variavel generica).",
     "core": false,
@@ -378,6 +396,15 @@
     "max_bytes": 1536,
     "naming": "p09_ff_{{feature}}.yaml",
     "pillar": "P09"
+  },
+  "finetune_config": {
+    "description": "Fine-tuning job configuration: dataset, base model, adapter type (LoRA/PEFT), hyperparameters, eval metrics",
+    "boundary": "Training config. NOT a model_provider (runtime routing) nor a model_card (documentation). This defines HOW to train/adapt a model.",
+    "pillar": "P02",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 4096,
+    "naming": "p02_ft_{{name}}.yaml",
+    "core": false
   },
   "few_shot_example": {
     "boundary": "Par input/output para few-shot learning. NAO eh golden_test (P07) que avalia qualidade, apenas exemplifica formato.",
@@ -433,6 +460,15 @@
     "naming": "p11_gr_{{scope}}.yaml",
     "pillar": "P11"
   },
+  "batch_config": {
+    "description": "Async batch processing config for bulk API operations (OpenAI Batch, Anthropic Batches)",
+    "boundary": "API-level async batch job config. NOT a schedule (cron-based) nor a workflow (multi-step). This is a single bulk request.",
+    "pillar": "P09",
+    "llm_function": "CALL",
+    "max_bytes": 2048,
+    "naming": "p09_bc_{{name}}.yaml",
+    "core": false
+  },
   "handoff": {
     "boundary": "Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03, prompt puro) nem signal (evento simples).",
     "core": true,
@@ -450,6 +486,15 @@
     "max_bytes": 2048,
     "naming": "p02_handoff_{{protocol}}.md",
     "pillar": "P02"
+  },
+  "hitl_config": {
+    "description": "Human-in-the-loop approval flow configuration: review triggers, escalation chains, timeout actions",
+    "boundary": "Requires HUMAN judgment. NOT a guardrail (automated block) nor a quality_gate (automated scoring). This pauses for human review.",
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "max_bytes": 3072,
+    "naming": "p11_hitl_{{name}}.yaml",
+    "core": false
   },
   "hook": {
     "boundary": "Codigo executavel em evento pre/post. NAO eh lifecycle_rule (P11, regra declarativa) nem daemon (processo persistente).",
@@ -495,6 +540,15 @@
     "max_bytes": 3072,
     "naming": "p06_iface_{{contract}}.yaml",
     "pillar": "P06"
+  },
+  "knowledge_graph": {
+    "description": "Graph-based knowledge schema with entity types, relation types, and traversal strategies for GraphRAG",
+    "boundary": "Relational knowledge structure. NOT an entity_memory (single entity recall) nor a knowledge_index (flat search). This defines RELATIONSHIPS between entities.",
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "max_bytes": 8192,
+    "naming": "p01_kg_{{name}}.md",
+    "core": false
   },
   "knowledge_card": {
     "boundary": "Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.",

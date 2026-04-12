@@ -53,6 +53,24 @@ Read: any relevant domain KCs
 Output: "F3: Injected {N} knowledge sources. Template-First match: {score}%"
 ```
 
+### F3b PERSIST (sub-step, optional)
+```
+After assembling context, declare what new knowledge should be persisted:
+- New entities discovered -> entity_memory
+- Updated facts -> knowledge_card update
+- Session learnings -> learning_record
+Output: "F3b: Persist {N} items (entities: {n1}, facts: {n2}, learnings: {n3})"
+```
+
+### F3c GROUND (sub-step, when sources cited)
+```
+For each injected source, record provenance:
+- Source path/URL
+- Retrieval confidence score
+- Freshness (last updated timestamp)
+Output: "F3c: Grounded {N} sources. Avg confidence: {X}%"
+```
+
 ### F4 REASON
 ```
 Plan: sections, approach, references, estimated density
@@ -82,6 +100,15 @@ Run: 12LP checklist (all 12 points)
 Score: 5D dimensions (D1-D5 weighted)
 Output: "F7: Score {X}/10. Gates: {pass}/{total}. 12LP: {pass}/12"
 If FAIL: return to F6 (max 2 retries)
+```
+
+### F7b LEARN (sub-step, optional)
+```
+After scoring, capture feedback signals:
+- What patterns led to high/low scores -> reward_signal
+- Which gates commonly fail -> regression_check
+- Quality trends over time -> quality metrics
+Output: "F7b: Learn {N} signals (rewards: {n1}, regressions: {n2})"
 ```
 
 ### F8 COLLABORATE

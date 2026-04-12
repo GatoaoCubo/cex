@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 123 kinds · 125 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 59 tools
+> 130 kinds · 126 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 79 tools
 
 ## Brand Identity
 
@@ -35,8 +35,8 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Sub-agents** | `.claude/agents/{kind}-builder.md` (125 files) |
 | **N00 Genesis (archetype)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
 | **Pillar schemas** | `P{01-12}_*/_schema.yaml` (all descriptions in EN) |
-| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (123 files) |
-| **Kind registry** | `.cex/kinds_meta.json` (123 kinds) |
+| **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (131 files) |
+| **Kind registry** | `.cex/kinds_meta.json` (128 kinds) |
 | **Terminology** | `_docs/specs/spec_metaphor_dictionary.md` + Rosetta Stone KC |
 | **N07 tech authority** | `.claude/rules/n07-technical-authority.md` |
 | **Infinite loop spec** | `_docs/specs/spec_infinite_bootstrap_loop.md` |
@@ -46,6 +46,14 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Boot scripts** | `boot/cex.ps1` (N07) · `boot/n0{1-6}.ps1` (PowerShell-only) |
 | **Decision manifest** | `.cex/runtime/decisions/decision_manifest.yaml` |
 | **GDP skill** | `archetypes/builders/_shared/skill_guided_decisions.md` |
+| **Prompt Compiler** | `P03_prompt/layers/p03_pc_cex_universal.md` (seed artifact) |
+| **Intent Resolver** | `_tools/cex_intent_resolver.py` (Python-first, 0 tokens) |
+| **Setup Validator** | `_tools/cex_setup_validator.py` (new PC readiness check) |
+| **Hygiene Tool** | `_tools/cex_hygiene.py` (artifact CRUD, 8 rules) |
+| **Prompt Cache** | `_tools/cex_prompt_cache.py` + `.cex/cache/` (125 builders pre-compiled) |
+| **Token Efficiency Map** | `N01_intelligence/reports/token_efficiency_gap_map.md` |
+| **Taxonomy Audit** | `N01_intelligence/reports/taxonomy_completeness_audit.md` |
+| **Port Plan (external repos)** | `_docs/specs/port_plan_external_repos.md` |
 | **Runtime** | `.cex/runtime/{handoffs,signals,pids,decisions}/` |
 | **Experiment history** | `.cex/experiments/results.tsv` |
 | **Learning records** | `.cex/learning_records/` |
