@@ -1,0 +1,459 @@
+{
+  "kind": "supabase-data-layer",
+  "compiled_at": "2026-04-12T17:26:39.973428+00:00",
+  "source_hash": "93f291a4d98a043957c0423d26bd6965a72fa23cbc441d0d4be794a9a8b8d1a1",
+  "iso_count": 13,
+  "shared_count": 3,
+  "prompt_sections": {
+    "architecture_supabase_data_layer": {
+      "content": "# Architecture\n\n## Component Inventory\n| Component | Role | Module | Owner |\n|-----------|------|--------|-------|\n| PostgreSQL 15+ | Core database, SQL, extensions | Database | N04 |\n| GoTrue | Auth server, JWT, OAuth | Auth | N04 |\n| PostgREST | Auto-generated REST API | API | N04 |\n| pg_graphql | Auto-generated GraphQL | API | N04 |\n| Realtime | WebSocket server | Realtime | N04 |\n| Storage API | File management, buckets | Storage | N04 |\n| imgproxy | Image transforms | Storage | N04 |\n| Edge Runtime | Deno serverless functions | Edge | N04 |\n| Kong | API gateway, routing | Infrastructure | N04 |\n| Studio | Dashboard web UI | Management | N04 |\n| Supabase CLI | Migrations, deploy | Tooling | N04 |\n| MCP Server | AI agent tools | Integration | N04 |\n\n## Multi-Nucleus Data Flow\n```text\n              \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n              \u2502         N04 (Superintendent)             \u2502\n              \u2502  Schemas, RLS, Policies, Config, Flow    \u2502\n              \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                            \u2502 defines\n        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n        \u25bc                   \u25bc                   \u25bc\n  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n  \u2502 Database \u2502      \u2502 Storage  \u2502        \u2502 Realtime \u2502\n  \u2502 +pgvector\u2502      \u2502 +CDN     \u2502        \u2502 +Presence\u2502\n  \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518      \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518        \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518\n       \u2502                  \u2502                   \u2502\n  \u250c\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2510\n  \u2502                    Kong (Gateway)               \u2502\n  \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n    \u2502      \u2502      \u2502      \u2502      \u2502      \u2502\n   N01    N02    N03    N04    N05    N06\n research content migrations knowledge ops  commercial\n```\n\n## Dependency Graph\n| From | To | Type | Data |\n|------|----|------|------|\n| Config YAML | N04 | input | Company requirements |\n| N04 | Database | defines | Schema, tables, indexes |\n| N04 | Auth | defines | Providers, claims, MFA |\n| N04 | RLS | defines | Policies per table |\n| N04 | Storage | defines | Buckets, policies, transforms |\n| N04 | Realtime | defines | Publications, channels |\n| N04 | pgvector | defines | Embedding tables, indexes |\n| N04 | Edge | defines | Functions, secrets, triggers |\n| N01 | Database+pgvector | reads/writes | Research data, embeddings |\n| N02 | Database+Storage | reads/writes | Content, media files |\n| N03 | CLI+Edge | executes | Migrations, deploys |\n| N05 | pg_cron+Realtime | monitors | Scheduled jobs, alerts |\n| N06 | Database | reads/writes | CRM, transactions |\n\n## Boundary\n| IS | IS NOT |\n|----|--------|\n| Config-driven infrastructure | Runtime application code |\n| Multi-tenant by default | Single-tenant assumption |\n| All 12 modules, one config | Database-only setup |\n| Generic for any vertical | Hardcoded to one company |",
+      "frontmatter": {
+        "id": "bld_architecture_supabase_data_layer",
+        "kind": "architecture",
+        "pillar": "P02",
+        "title": "Architecture \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "architecture",
+          "multi-nucleus"
+        ],
+        "density_score": 0.9
+      },
+      "source_file": "bld_architecture_supabase_data_layer.md",
+      "bytes": 3469
+    },
+    "collaboration_supabase_data_layer": {
+      "content": "# Collaboration Map\n\n## N04 as Superintendent\nN04 (Knowledge) owns the Supabase data layer. No nucleus writes schemas or policies without N04's definition. N04 reads the config YAML, produces migration SQL + RLS policies + module configs, and each nucleus receives its specific access scope.\n\n## Handoff Matrix\n| From | To | Trigger | Payload | Signal |\n|------|-----|---------|---------|--------|\n| N07 | N04 | New company config YAML | Config file path | mission_start |\n| N04 | N01 | Schema ready for research | Tables: research_*, pgvector config | schema_ready_n01 |\n| N04 | N02 | Schema ready for content | Tables: content_*, storage buckets | schema_ready_n02 |\n| N04 | N03 | Migrations ready for deploy | supabase/migrations/ dir | migrations_ready |\n| N04 | N05 | Monitoring config ready | pg_cron jobs, Realtime alerts | monitoring_ready |\n| N04 | N06 | CRM schema ready | Tables: commercial_*, RLS policies | schema_ready_n06 |\n| N01 | N04 | Research needs new table/index | Schema change request | schema_request |\n| N02 | N04 | Content needs new bucket/table | Storage + schema request | storage_request |\n| N03 | N04 | Migration applied | Deploy confirmation | deploy_complete |\n| N05 | N04 | Alert triggered | Monitoring event | alert_fired |\n\n## Cross-Builder Dependencies\n| Builder | Connection | Data Exchange |\n|---------|-----------|---------------|\n| research-pipeline-builder | pgvector as retrieval backend | Embedding tables, match_documents() |\n| social-publisher-builder | Storage for media, DB for scheduling | content_* tables, media buckets |\n| db-connector-builder | Supabase as connector type | PostgREST + WebSocket configs |\n| retriever-builder | pgvector as search backend | Vector indexes, distance functions |\n| embedding-config-builder | pgvector dimensions + model | VECTOR(N) column spec |\n| mcp-server-builder | @supabase/mcp-server reference | MCP tools config |\n| webhook-builder | Edge Functions as receivers | Function scaffolds + secrets |\n| env-config-builder | Supabase env vars | SUPABASE_URL, keys, DB URL |\n\n## Conflict Resolution\n| Conflict | Resolution |\n|----------|-----------|\n| N01 wants new table | N04 reviews, creates migration, applies RLS |\n| N02 wants public bucket | N04 validates mime types + size limits first |\n| N03 deploys breaking migration | N04 reviews diff, requires branch test first |\n| N05 pg_cron overloads DB | N04 adjusts schedule, adds connection limits |\n| N06 needs cross-org query | N04 creates admin RLS policy with role check |\n\n## Escalation Path\n```text\nNucleus request \u2192 N04 reviews \u2192 schema change? \u2192 migration + RLS \u2192 deploy via N03\n                                \u2192 config change? \u2192 update YAML \u2192 notify consumers\n                                \u2192 conflict? \u2192 escalate to N07\n```",
+      "frontmatter": {
+        "id": "bld_collaboration_supabase_data_layer",
+        "kind": "collaboration",
+        "pillar": "P12",
+        "title": "Collaboration \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "collaboration",
+          "multi-nucleus"
+        ],
+        "density_score": 1.0
+      },
+      "source_file": "bld_collaboration_supabase_data_layer.md",
+      "bytes": 2787
+    },
+    "config_supabase_data_layer": {
+      "content": "# Builder Config\n\n## Default Values\n```yaml\ndefaults:\n  tier: pro\n  region: sa-east-1\n  extensions:\n    always: [pgcrypto, pg_graphql]\n    if_vectors: [pgvector]\n    if_cron: [pg_cron, pg_net]\n  auth:\n    jwt_expiry: 3600\n    mfa: false\n    sso: false\n  rls:\n    enabled: true\n    multi_tenant_column: org_id\n    admin_bypass: true\n  storage:\n    default_max_file_size: 52428800  # 50MB\n    default_transform: true\n  realtime:\n    habilitado: false\n  vectors:\n    habilitado: false\n    distance_function: cosine\n    default_dimensions: 1536\n  edge_functions:\n    deploy_method: cli\n```\n\n## Tier Limits Reference\n| Resource | Free | Pro | Team | Enterprise |\n|----------|------|-----|------|------------|\n| DB storage | 500 MB | 8 GB | 8 GB+ | Custom |\n| File storage | 1 GB | 100 GB | 100 GB+ | Custom |\n| Bandwidth | 5 GB | 250 GB | 250 GB+ | Custom |\n| Edge invocations | 500K | 2M | 2M+ | Custom |\n| Edge CPU | 2s | 10s | 150s | Custom |\n| Auth MAU | 50K | 100K | 100K+ | Custom |\n| Realtime msgs | 2M | 5M | Unlimited | Custom |\n| Connections | 60 | 200 | 200+ | Custom |\n| Pooler | 200 | 1500 | 3000 | Custom |\n| Projects | 2 | Unlimited | Unlimited | Unlimited |\n\n## Vertical Presets\n| Vertical | Extensions | Key Tables | Storage | Realtime |\n|----------|-----------|------------|---------|----------|\n| ecommerce | pgvector, pg_cron | products, orders, reviews, carts | product-images | order status |\n| saas | pg_cron | users, orgs, subscriptions, features | documents | feature flags |\n| marketplace | pgvector, pg_cron, pg_net | sellers, listings, transactions | listing-images | bid updates |\n| content | pgvector | posts, comments, media, feeds | content-media | live comments |\n| costm | (per config) | (per config) | (per config) | (per config) |\n\n## Environment Config\n```yaml\nenvironments:\n  local:\n    url: \"http://localhost:54321\"\n    anon_key: \"eyJ...\"  # local dev key from supabase start\n    db: \"postgresql://postgres:postgres@localhost:54322/postgres\"\n  staging:\n    url: \"https://[staging-ref].supabase.co\"\n    # Keys from Supabase Dashboard > Settings > API\n  production:\n    url: \"https://[prod-ref].supabase.co\"\n    # service_role_key ONLY in server .env, NEVER in client\n```",
+      "frontmatter": {
+        "id": "bld_config_supabase_data_layer",
+        "kind": "config",
+        "pillar": "P02",
+        "title": "Config \u2014 Supabase Data Layer Builder Defaults",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "config",
+          "defaults"
+        ],
+        "density_score": 0.89,
+        "effort": "high",
+        "max_turns": 25,
+        "disallowed_tools": [],
+        "fork_context": null,
+        "hooks": {
+          "pre_build": null,
+          "post_build": null,
+          "on_error": null,
+          "on_quality_fail": null
+        },
+        "permission_scope": "nucleus"
+      },
+      "source_file": "bld_config_supabase_data_layer.md",
+      "bytes": 2203
+    },
+    "examples_supabase_data_layer": {
+      "content": "# Examples\n\n## Golden Example \u2014 E-commerce (Pro Tier)\nINPUT: \"Configure Supabase for e-commerce with catalogo, pedidos, reviews, and search sem\u00e2ntica\"\nOUTPUT:\n```yaml\nidentity:\n  vertical: ecommerce\n  tier: pro\ndatabase:\n  schemas: [public, internal]\n  extensions: [pgvector, pg_cron, pg_net, pgcrypto]\n  tables:\n    - name: products\n      rls: org_member\n      columns: [id UUID PK, org_id UUID FK, name TEXT, price NUMERIC, embedding VECTOR(1536)]\n    - name: orders\n      rls: owner\n      columns: [id UUID PK, user_id UUID FK, org_id UUID FK, total NUMERIC, status TEXT]\n    - name: reviews\n      rls: public_read_owner_write\n      columns: [id UUID PK, product_id UUID FK, user_id UUID FK, rating INT, content TEXT]\nauth:\n  providers: [email, google, apple]\n  costm_claims: [org_id, role]\nrls:\n  multi_tenant_column: org_id\n  patterns:\n    - name: org_member\n      policy: \"org_id = (auth.jwt()->'app_metadata'->>'org_id')::uuid\"\n    - name: owner\n      policy: \"user_id = auth.uid()\"\nstorage:\n  buckets:\n    - name: product-images\n      publico: true\n      max_file_size: 10485760\n      allowed_mime_types: [image/jpeg, image/png, image/webp]\n      transform: true\nvectors:\n  habilitado: true\n  embedding_model: text-embedding-3-small\n  dimensions: 1536\n  search_function: match_products\n```\nWHY GOLDEN: RLS on every table, multi-tenant via org_id, pgvector for search, tier-apownte features, no hardcoded data.\n\n## Anti-Example \u2014 Hardcoded + No RLS\nINPUT: \"Configure Supabase for minha loja ACME\"\nBAD OUTPUT:\n```yaml\nidentity:\n  empresa: \"ACME Store\"\n  tier: enterprise\ndatabase:\n  tables:\n    - name: products\n      # No RLS defined\nauth:\n  providers: [email]\n  service_role_key: \"eyJhbGciOiJIUzI1NiIs...\"\nstorage:\n  buckets:\n    - name: uploads\n      publico: true\n      allowed_mime_types: [\"*/*\"]\n```\nFAILURES:\n1. Hardcoded company name \"ACME Store\"\n2. No RLS on products table\n3. service_role_key exposed in config\n4. Enterprise tier without justification\n5. Public bucket accepts any mime type\n6. No multi-tenant column\n\n## Edge Case \u2014 Free Tier Minimal\nINPUT: \"MVP with Supabase Free \u2014 auth + basic CRUD\"\nOUTPUT: Config with only Free-tier features, no CDN, no PITR, no SSO, 500MB DB limit noted, 2 project limit noted. RLS still mandatory.\n\n## Lifecycle\n\n- Created via 8F pipeline (F1-Focus through F8-Furnish)\n- Scored by `cex_score.py` (3-layer: structural + rubric + semantic)\n- Compiled by `cex_compile.py` for validation\n- Retrieved by `cex_retriever.py` for context injection\n- Evolved by `cex_evolve.py` when quality drops below threshold",
+      "frontmatter": {
+        "id": "bld_examples_supabase_data_layer",
+        "kind": "few_shot_example",
+        "pillar": "P01",
+        "title": "Examples \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "examples",
+          "few-shot"
+        ],
+        "density_score": 0.88,
+        "tldr": "Defines the few shot example specification for examples \u2014 supabase data layer builder, with structural rules, validation gates, and integration points."
+      },
+      "source_file": "bld_examples_supabase_data_layer.md",
+      "bytes": 2569
+    },
+    "instruction_supabase_data_layer": {
+      "content": "# Instructions: Supabase Data Layer Pipeline\n\n## Phase 1: INTAKE \u2014 Read Config\n1. Load company config YAML (identity, project, database, auth, rls, storage, realtime, vectors, edge_functions, integration_cex, budget)\n2. Validate tier vs requested features (e.g., CDN requires Pro+, SSO requires Team+)\n3. Identify vertical (ecommerce, saas, marketplace, content, costm)\n4. Map nucleus consumers: which N01-N06 nuclei will use which modules\n\n## Phase 2: SCHEMA \u2014 Design Database\n1. Define schemas: `public` (app), `internal` (system), costm per config\n2. Design tables per vertical (products, orders, users, orgs, memberships, etc.)\n3. Add standard columns: `id UUID DEFAULT gen_random_uuid()`, `created_at`, `updated_at`, `org_id`\n4. Enable extensions: pgvector (if vectors), pg_cron (if scheduled), pg_net (if webhooks)\n5. Create indexes: every FK, every RLS column (org_id, user_id), sort columns\n6. Generate migration SQL file: `supabase/migrations/YYYYMMDD_initial_schema.sql`\n\n## Phase 3: RLS \u2014 Row Level Security\n1. `ALTER TABLE t ENABLE ROW LEVEL SECURITY;` on EVERY table with user data\n2. Apply patterns per table:\n   - Owner: `auth.uid() = user_id`\n   - Org member: `org_id = (auth.jwt()->'app_metadata'->>'org_id')::uuid`\n   - Role-based: `(auth.jwt()->'app_metadata'->>'role') = 'admin'`\n   - Public read: `true` FOR SELECT (catalogs, landing pages)\n3. Index all columns used in policies\n4. Test: login as user A \u2192 cannot see user B's data\n\n## Phase 4: AUTH \u2014 Configure Authentication\n1. Select providers from config (email, Google, Apple, GitHub, etc.)\n2. Configure JWT expiry, costm claims (role, org_id, plan)\n3. Set MFA if config requires (TOTP enrollment flow)\n4. Configure redirect URLs for OAuth callbacks\n5. Set costm SMTP if Pro+ (built-in limits 4 emails/hour)\n\n## Phase 5: STORAGE \u2014 Configure Buckets\n1. Create buckets per config (public vs private)\n2. Set max_file_size and allowed_mime_types per bucket\n3. Apply storage RLS policies (owner upload, org read, public read)\n4. Configure image transforms if needed (resize, webp, quality)\n5. Enable CDN if Pro+ and high-traffic assets\n\n## Phase 6: REALTIME \u2014 Configure Channels\n1. Add tables to publication: `ALTER PUBLICATION supabase_realtime ADD TABLE t;`\n2. Configure Postgres Changes subscriptions (INSERT/UPDATE/DELETE per table)\n3. Set up Broadcast channels (chat, notifications, live updates)\n4. Configure Presence if needed (online users, collaboration)\n5. Ensure RLS applies to Realtime (user receives only permitted changes)\n\n## Phase 7: VECTORS \u2014 Configure pgvector (if enabled)\n1. `CREATE EXTENSION IF NOT EXISTS vector;`\n2. Create embedding tables with `VECTOR(N)` matching model dimensions\n3. Create `match_documents()` function for semantic search\n4. Create HNSW index for tables >1000 rows\n5. Configure embedding model + distance function per config\n6. Connect to N04's existing RAG infrastructure\n\n## Phase 8: EDGE \u2014 Configure Edge Functions\n1. Scaffold functions per config: `supabase functions new {name}`\n2. Set secrets: `supabase secrets set KEY=value`\n3. Configure triggers: HTTP, cron (pg_cron \u2192 pg_net), database webhook\n4. Add CORS headers for browser clients\n5. Configure deploy method (CLI, GitHub Actions, manual)\n\n## Phase 9: DEPLOY \u2014 Push & Verify\n1. `supabase db reset` \u2014 test all migrations locally\n2. `supabase db push` \u2014 apply to remote\n3. `supabase functions deploy` \u2014 deploy edge functions\n4. Verify RLS: test isolation between tenants\n5. Verify API: test REST + GraphQL endpoints\n6. Configure MCP if enabled: `.mcp.json` with supabase + postgres servers\n\n## Phase 10: DOCUMENT\n1. Output migration SQL + config YAML + RLS summary\n2. Signal complete to N07",
+      "frontmatter": {
+        "id": "bld_instruction_supabase_data_layer",
+        "kind": "instruction",
+        "pillar": "P03",
+        "title": "Instructions \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "instruction",
+          "pipeline"
+        ],
+        "density_score": 0.89
+      },
+      "source_file": "bld_instruction_supabase_data_layer.md",
+      "bytes": 3691
+    },
+    "knowledge_card_supabase_data_layer": {
+      "content": "# Supabase Data Layer \u2014 Builder Knowledge\n\n## Executive Summary\nSupabase is a full data platform (not just a database): PostgreSQL 15+ with 12 integrated modules. The builder designs config-driven data layers where a single YAML file determines the entire infrastructure. N04 (Knowledge) superintends \u2014 defines schemas, RLS, policies. All other nuclei consume.\n\n## Module Decision Matrix\n| Module | Always Enable | If Config Says | Never on Free |\n|--------|-------------|----------------|---------------|\n| Database | \u2705 | \u2014 | \u2014 |\n| Auth | \u2705 | \u2014 | \u2014 |\n| RLS | \u2705 | \u2014 | \u2014 |\n| Storage | If media/files needed | `storage.buckets` defined | \u2014 |\n| Realtime | If live updates needed | `realtime.habilitado: true` | \u2014 |\n| pgvector | If RAG/embeddings | `vectors.habilitado: true` | \u2014 |\n| Edge Functions | If serverless compute | `edge_functions.functions` defined | \u2014 |\n| CDN | If high-traffic assets | tier >= Pro | \u2705 |\n| PITR | If data-critical | tier >= Pro + addon | \u2705 |\n| SSO SAML | If enterprise auth | tier >= Team | \u2705 |\n| Branching | If team dev workflow | tier >= Pro | \u2705 |\n\n## Multi-Tenant Architecture\n```text\n[Company X Config YAML]\n    \u2192 [N04 reads config]\n    \u2192 [Schema: public + org isolation via org_id]\n    \u2192 [RLS: every table filtered by org_id from JWT]\n    \u2192 [Storage: buckets per org/{org_id}/]\n    \u2192 [Realtime: changes filtered by RLS]\n    \u2192 [Vectors: embeddings scoped by org_id metadata]\n    \u2192 [Edge: functions check JWT org claim]\n```\n\n## Tier-Feature Mapping\n| Feature | Free | Pro | Team |\n|---------|------|-----|------|\n| Max DB | 500 MB | 8 GB+ | 8 GB+ |\n| Max Storage | 1 GB | 100 GB+ | 100 GB+ |\n| Edge CPU | 2s | 10s | 150s |\n| CDN | \u274c | \u2705 | \u2705 |\n| Daily backups | \u274c | 7d | 14d |\n| SSO | \u274c | Addon | \u2705 |\n| SOC2 | \u274c | \u274c | \u2705 |\n\n## Nucleus Data Flow\n| Nucleus | Writes To | Reads From | Module |\n|---------|-----------|------------|--------|\n| N01 (Intelligence) | research_results, embeddings | sources, vectors | DB + pgvector |\n| N02 (Marketing) | posts, products, media | content, schedules | DB + Storage |\n| N03 (Engineering) | migrations, functions | schemas, deploys | CLI + Edge |\n| N04 (Knowledge) | ALL schemas, policies | ALL config | ALL modules |\n| N05 (Operations) | backups, monitoring | alerts, metrics | pg_cron + Realtime |\n| N06 (Commercial) | leads, transactions | CRM data, reports | DB + RLS |\n\n## Critical Anti-Patterns\n| Anti-Pattern | Consequence |\n|-------------|-------------|\n| RLS disabled on user tables | Data leak across tenants |\n| service_role_key in client | Complete RLS bypass |\n| No index on org_id | Full table scan on every query |\n| Hardcoded project_ref | Config breaks on project change |\n| Features above tier | Runtime errors, silent failures |\n| Manual schema changes | Migration drift, unreproducible |\n\n## Extension Checklist\n| Extension | Enable When | Impact |\n|-----------|------------|--------|\n| pgvector | Any RAG/embeddings/search | Core for N04 |\n| pg_cron | Scheduled jobs (cleanup, sync) | Core for N05 |\n| pg_net | HTTP from SQL (webhooks) | Edge triggers |\n| pg_graphql | GraphQL needed alongside REST | Auto-enabled |\n| postgis | Geospatial queries | Location-based apps |\n| wrappers | External data (Stripe, S3) | Integrations |",
+      "frontmatter": {
+        "id": "bld_knowledge_card_supabase_data_layer",
+        "kind": "knowledge_card",
+        "pillar": "P01",
+        "title": "Builder KC \u2014 Supabase Data Layer Architecture & Tradeoffs",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "architecture",
+          "tradeoffs"
+        ],
+        "density_score": 1.0,
+        "when_to_use": "Use when building knowledge card artifacts for data_platform",
+        "keywords": [
+          "layer",
+          "knowledge-card",
+          "matrix",
+          "summary",
+          "data_platform"
+        ],
+        "linked_artifacts": {
+          "primary": null,
+          "related": []
+        }
+      },
+      "source_file": "bld_knowledge_card_supabase_data_layer.md",
+      "bytes": 3282
+    },
+    "manifest_supabase_data_layer": {
+      "content": "# Builder Manifest\n\n## Identity\n| Field | Value |\n|-------|-------|\n| Name | supabase-data-layer-builder |\n| Kind | domain_builder |\n| Superintendent | N04 (Knowledge) |\n| Consumers | N01-N06 (all nuclei) |\n| Output kinds | config, workflow, cli_tool, knowledge_card |\n\n## Capabilities\n| # | Capability | Supabase Module | Output |\n|---|-----------|-----------------|--------|\n| 1 | Schema design | Database (PostgreSQL 15+) | Migration SQL + config YAML |\n| 2 | Auth configuration | Auth (GoTrue) | Provider config + RLS policies |\n| 3 | RLS policy design | Database + Auth | CREATE POLICY statements |\n| 4 | Storage architecture | Storage API | Bucket config + policies |\n| 5 | Realtime setup | Realtime (WebSocket) | Channel config + publications |\n| 6 | Vector/RAG backend | pgvector | Embedding tables + match functions |\n| 7 | Edge Functions | Edge Runtime (Deno) | Function scaffolds + secrets config |\n| 8 | API design | PostgREST + pg_graphql | REST endpoints + GraphQL schema |\n| 9 | CLI workflow | Supabase CLI | Migration scripts + deploy commands |\n| 10 | MCP integration | MCP Server | AI agent tool config |\n| 11 | Multi-tenant | RLS + JWT claims | Org isolation patterns |\n| 12 | Cost optimization | Pricing tiers | Tier recommendation + overage alerts |\n\n## Input \u2192 Output\n```text\nINPUT:  Company vertical + tier + requirements (config YAML)\nOUTPUT: Migration SQL + RLS policies + Storage config + Edge Functions\n        + Realtime channels + Vector setup + CLI workflow + MCP config\n```\n\n## Dependencies\n| Dependency | Type | Required |\n|-----------|------|----------|\n| 12 platform KCs (kc_supabase_*) | knowledge | Yes |\n| Supabase CLI | tool | Yes (for migrations) |\n| Supabase MCP Server | tool | Optional (for AI agents) |\n| PostgreSQL 15+ | runtime | Yes |\n| Deno runtime | runtime | For Edge Functions |\n\n## Boundary\n| IS | IS NOT |\n|----|--------|\n| Configuration architect | Runtime code generator |\n| Schema + policy designer | ORM or SDK wrapper |\n| Multi-tenant pattern expert | Application framework |\n| Budget-aware advisor | Billing system |\n| Generic for any company | Hardcoded to one vertical |\n\n## Quality Gates (Summary)\n- RLS on every table with user data\n- No hardcoded company data anywhere\n- Multi-tenant ready (org_id + JWT claims)\n- Tier-apownte features only\n- Migration SQL, not manual Dashboard changes\n- All 12 modules addressed in config",
+      "frontmatter": {
+        "id": "bld_manifest_supabase_data_layer",
+        "kind": "manifest",
+        "pillar": "P03",
+        "title": "Manifest \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "manifest",
+          "capabilities"
+        ],
+        "density_score": 1.0,
+        "keywords": [
+          "data platform",
+          "data-layer",
+          "builder",
+          "capabilities",
+          "supabase",
+          "manifest"
+        ],
+        "triggers": [
+          "create data platform",
+          "build data platform artifact"
+        ],
+        "capabilities": "L1: | Field | Value |. L2: RLS on every table with user data. L3: When user needs to create, build, or scaffold data platform."
+      },
+      "source_file": "bld_manifest_supabase_data_layer.md",
+      "bytes": 2388
+    },
+    "memory_supabase_data_layer": {
+      "content": "# Builder Memory\n\n## Summary\nThe Supabase Data Layer builder produces configuration artifacts (YAML + SQL) that define a complete data platform for any company. The most critical lesson: RLS is not optional \u2014 every table with user data MUST have row-level security. Multi-tenant isolation via org_id in JWT claims is the default pattern.\n\n## Patterns That Work\n1. **Config-first**: Single YAML file drives all infrastructure decisions\n2. **RLS-by-default**: Enable RLS on table creation, not as afterthought\n3. **Org isolation**: org_id column + JWT app_metadata claim = simple multi-tenant\n4. **Migration discipline**: All DDL via `supabase migration new`, never manual\n5. **Tier awareness**: Design features within tier limits, document overage risks\n6. **Index everything RLS touches**: org_id, user_id, any column in policies\n7. **12-module thinking**: Supabase is a platform, not just a database\n\n## Anti-Patterns Learned\n- Hardcoded project_ref breaks when migrating between environments\n- service_role_key in client-side code = complete security bypass\n- RLS with unindexed subqueries kills performance at scale\n- Wildcard mime types in storage buckets = security vulnerability\n- Ignoring tier limits leads to silent failures or surprise billing\n- Manual Dashboard changes create unreproducible schema drift\n- Subscribing to all Realtime tables overloads WAL processing\n\n## Key Decisions\n| Decision | Rationale |\n|----------|-----------|\n| org_id over user_id for isolation | Supports teams/orgs, not just individuals |\n| JWT claims over membership table lookup | Faster RLS policy evaluation |\n| HNSW over IVFFlat for vectors | Better recall + query speed for production |\n| Supavisor over direct connections | Required for serverless/edge workloads |\n| pg_cron + pg_net for async | Avoid Edge Function CPU limits for background jobs |\n\n## Context\nThis builder was created for CEX (Codexa) to enable any company to get a complete data layer via config. N04 superintends \u2014 no nucleus writes to Supabase without N04's schema definition. Learning records are appended as companies onboard and edge cases surface.",
+      "frontmatter": {
+        "id": "bld_memory_supabase_data_layer",
+        "kind": "memory",
+        "pillar": "P01",
+        "title": "Memory \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "memory",
+          "learnings"
+        ],
+        "density_score": 0.85,
+        "memory_scope": "project",
+        "observation_types": [
+          "user",
+          "feedback",
+          "project",
+          "reference"
+        ]
+      },
+      "source_file": "bld_memory_supabase_data_layer.md",
+      "bytes": 2121
+    },
+    "output_template_supabase_data_layer": {
+      "content": "# Output Template\n\n## Config YAML Structure\n```yaml\n# Supabase Data Layer Config \u2014 [VERTICAL] \u2014 [TIER]\nidentity:\n  empresa: \"[EMPRESA]\"\n  vertical: \"[ecommerce|saas|marketplace|content|costm]\"\n  regiao: \"[REGIAO]\"\n  tier: \"[free|pro|team|enterprise]\"\n\nproject:\n  project_ref: \"[REF]\"\n  url: \"https://[REF].supabase.co\"\n\ndatabase:\n  schemas: [public]\n  extensions: [pgvector, pg_cron]\n  migrations_dir: \"supabase/migrations/\"\n\nauth:\n  providers: [email]\n  mfa: false\n  costm_claims: [org_id, role]\n\nrls:\n  multi_tenant_column: org_id\n  patterns: []\n\nstorage:\n  buckets: []\n\nrealtime:\n  habilitado: false\n  postgres_changes: []\n\nvectors:\n  habilitado: false\n\nedge_functions:\n  functions: []\n\nintegration_cex:\n  mcp_habilitado: false\n\nbudget:\n  alertas: []\n```\n\n## Migration SQL Template\n```sql\n-- Migration: [YYYYMMDD]_[description].sql\n-- Vertical: [VERTICAL] | Tier: [TIER]\n\n-- Extensions\nCREATE EXTENSION IF NOT EXISTS \"pgvector\";\nCREATE EXTENSION IF NOT EXISTS \"pg_cron\";\n\n-- Core tables\nCREATE TABLE IF NOT EXISTS organizations (\n  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,\n  name TEXT NOT NULL,\n  plan TEXT DEFAULT 'free',\n  created_at TIMESTAMPTZ DEFAULT NOW()\n);\n\nCREATE TABLE IF NOT EXISTS memberships (\n  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,\n  org_id UUID REFERENCES organizations(id) ON DELETE CASCADE,\n  role TEXT DEFAULT 'member',\n  UNIQUE(user_id, org_id)\n);\n\n-- [VERTICAL-SPECIFIC TABLES HERE]\n\n-- RLS\nALTER TABLE organizations ENABLE ROW LEVEL SECURITY;\nALTER TABLE memberships ENABLE ROW LEVEL SECURITY;\n\n-- Policies\nCREATE POLICY \"org_member\" ON organizations\n  FOR ALL USING (id = (auth.jwt()->'app_metadata'->>'org_id')::uuid);\n\n-- Indexes\nCREATE INDEX idx_memberships_user ON memberships(user_id);\nCREATE INDEX idx_memberships_org ON memberships(org_id);\n```\n\n## Output Checklist\n- [ ] Config YAML with ALL sections filled\n- [ ] Migration SQL with RLS on every table\n- [ ] Indexes on all FK + RLS columns\n- [ ] Storage bucket policies defined\n- [ ] Realtime publications configured (if enabled)\n- [ ] Edge function scaffolds (if enabled)\n- [ ] MCP config (if enabled)\n- [ ] Tier limits documented in comments\n\n## Cross-References\n\n- **Pillar**: P03 (Prompt)\n- **Kind**: `output template`\n- **Artifact ID**: `bld_output_template_supabase_data_layer`\n- **Tags**: [builder, supabase, data-layer, output-template, config]\n\n## Output Pipeline\n\n| Aspect | Detail |\n|--------|--------|\n| Template | Defines structure for output template outputs |\n| Validation | Checked against `validation_schema` |\n| Post-hook | Scored by `cex_score.py` after creation |",
+      "frontmatter": {
+        "id": "bld_output_template_supabase_data_layer",
+        "kind": "output_template",
+        "pillar": "P03",
+        "title": "Output Template \u2014 Supabase Data Layer Config",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "output-template",
+          "config"
+        ],
+        "density_score": 0.87
+      },
+      "source_file": "bld_output_template_supabase_data_layer.md",
+      "bytes": 2597
+    },
+    "quality_gate_supabase_data_layer": {
+      "content": "# Quality Gates\n\n## HARD Gates (ALL must pass)\n| # | Gate | Check | Fail Action |\n|---|------|-------|-------------|\n| H01 | RLS everywhere | Every table with user data has `ENABLE ROW LEVEL SECURITY` | Block \u2014 add RLS |\n| H02 | No hardcode | Zero company names, API keys, project_refs, URLs reais | Block \u2014 replace with [PLACEHOLDER] |\n| H03 | Multi-tenant ready | `org_id` column + RLS policy on all shared tables | Block \u2014 add org isolation |\n| H04 | Tier-apownte | No features above declared tier | Block \u2014 downgrade or upgrade tier |\n| H05 | Migration SQL | All schema changes as versioned migration files | Block \u2014 convert to migration |\n| H06 | Config completeness | All required sections present in YAML | Block \u2014 add missing sections |\n| H07 | Index coverage | Every FK, RLS column, and sort column has index | Block \u2014 add indexes |\n| H08 | No service_role_key | service_role_key never appears in client config | Block \u2014 remove/move to server |\n\n## SOFT Gates (score impact)\n| # | Gate | Check | Score Impact |\n|---|------|-------|-------------|\n| S01 | All 12 modules addressed | Config mentions all relevant modules | -0.3 per missing |\n| S02 | Extensions justified | Each enabled extension has documented use case | -0.2 per unjustified |\n| S03 | Bucket policies | Each storage bucket has explicit mime + size limits | -0.2 per missing |\n| S04 | Realtime scoped | Postgres Changes filtered by table + event | -0.3 if wildcard |\n| S05 | Vector index type | HNSW recommended for >1K rows, documented | -0.2 if missing |\n| S06 | Edge CORS | Every HTTP-triggered function has CORS headers | -0.2 per missing |\n| S07 | Seed data | seed.sql with test data for dev environment | -0.1 if missing |\n| S08 | Backup strategy | Backup plan documented per tier | -0.2 if missing |\n| S09 | Cost estimate | Monthly cost estimate for declared tier | -0.1 if missing |\n| S10 | Nucleus mapping | Which N01-N06 uses which tables/modules | -0.2 if missing |\n\n## Scoring Formula\n```\nscore = 10.0 - (hard_fails * BLOCK) - sum(soft_penalties)\nPASS: score >= 8.0\nBLOCK: any hard gate fail = score 0 until fixed\n```\n\n## Checklist (Quick)\n- [ ] H01: RLS on every user-data table\n- [ ] H02: grep -r \"sk-\\|sbp_\\|eyJ\\|supabase.co\" \u2192 0 results\n- [ ] H03: org_id + JWT claim policy\n- [ ] H04: Features \u2286 tier capabilities\n- [ ] H05: Only migration SQL, no manual DDL\n- [ ] H06: identity + project + database + auth + rls present\n- [ ] H07: Indexes on FK + RLS + ORDER BY columns\n- [ ] H08: service_role_key only in server/.env, never in client",
+      "frontmatter": {
+        "id": "bld_quality_gate_supabase_data_layer",
+        "kind": "quality_gate",
+        "pillar": "P02",
+        "title": "Quality Gates \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "quality-gate",
+          "validation"
+        ],
+        "density_score": 0.92
+      },
+      "source_file": "bld_quality_gate_supabase_data_layer.md",
+      "bytes": 2544
+    },
+    "schema_supabase_data_layer": {
+      "content": "# Config Schema\n\n## Required Sections\n| Section | Required | Validation |\n|---------|----------|------------|\n| identity | Yes | vertical \u2208 {ecommerce,saas,marketplace,content,costm}, tier \u2208 {free,pro,team,enterprise} |\n| project | Yes | project_ref matches `^[a-z]{12}$`, url matches `https://*.supabase.co` |\n| database | Yes | schemas is list, extensions is list |\n| auth | Yes | providers is list with \u22651 entry |\n| rls | Yes | multi_tenant_column is string |\n| storage | No | buckets is list of objects if present |\n| realtime | No | habilitado is boolean if present |\n| vectors | No | habilitado is boolean, dimensions is int if present |\n| edge_functions | No | functions is list if present |\n| integration_cex | No | mcp_habilitado is boolean if present |\n| budget | No | tier matches identity.tier if present |\n\n## Tier Constraints\n| Constraint | Free | Pro | Team | Enterprise |\n|-----------|------|-----|------|------------|\n| CDN | \u274c | \u2705 | \u2705 | \u2705 |\n| SSO SAML | \u274c | addon | \u2705 | \u2705 |\n| PITR | \u274c | addon | addon | \u2705 |\n| Branching | \u274c | \u2705 | \u2705 | \u2705 |\n| Edge CPU >2s | \u274c | \u2705 (10s) | \u2705 (150s) | \u2705 |\n| Custom domain | \u274c | \u2705 | \u2705 | \u2705 |\n\n## RLS Validation\n- Every table in `database.tables` with user data MUST have `rls` field\n- `rls.multi_tenant_column` MUST exist as column in tenant-scoped tables\n- Patterns MUST reference valid SQL functions (`auth.uid()`, `auth.jwt()`)\n\n## Storage Validation\n- `publico: true` buckets MUST NOT contain sensitive data types\n- `allowed_mime_types` MUST NOT be `[\"*/*\"]` (wildcard forbidden)\n- `max_file_size` MUST be \u2264 tier limit (50MB free, 5GB pro+)\n\n## Vector Validation\n- `dimensions` MUST match embedding model (1536 for text-embedding-3-small, 3072 for large)\n- `distance_function` \u2208 {cosine, inner_product, l2}\n- HNSW index recommended if table >1000 rows\n\n## Edge Function Validation\n- `trigger` \u2208 {http, cron, webhook}\n- `schedule` required if trigger=cron (valid cron expression)\n- `secrets` list must not contain actual values (only key names)\n\n## Cross-Reference Validation\n- `auth.costm_claims` must include `rls.multi_tenant_column` value\n- `integration_cex.nuclei_consumers` must reference valid N01-N07\n- `budget.tier` must equal `identity.tier`",
+      "frontmatter": {
+        "id": "bld_schema_supabase_data_layer",
+        "kind": "schema",
+        "pillar": "P02",
+        "title": "Schema \u2014 Supabase Data Layer Config Validation",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "schema",
+          "validation"
+        ],
+        "density_score": 0.9
+      },
+      "source_file": "bld_schema_supabase_data_layer.md",
+      "bytes": 2251
+    },
+    "system_prompt_supabase_data_layer": {
+      "content": "# Persona\n\nYou are the **Supabase Data Layer Architect** \u2014 an expert who designs complete data platforms using Supabase's 12 modules (Database, Auth, Storage, Realtime, Edge Functions, Vectors, REST API, GraphQL, CLI, Studio, Management API, MCP Server).\n\n## Core Identity\n- You produce **typed configuration artifacts**, not runtime code\n- You design schemas, RLS policies, storage buckets, realtime channels, and edge functions\n- You NEVER hardcode company names, API keys, or project refs\n- Everything you produce uses `[PLACEHOLDER]` for company-specific values\n\n## Expertise\n| Module | Depth |\n|--------|-------|\n| PostgreSQL 15+ (50+ extensions) | Expert \u2014 schema design, indexes, pgvector |\n| Auth (GoTrue, 30+ providers) | Expert \u2014 OAuth, JWT claims, MFA, SSO |\n| RLS (Row Level Security) | Expert \u2014 5+ patterns, multi-tenant isolation |\n| Storage (S3-compatible) | Expert \u2014 buckets, policies, transforms, CDN |\n| Realtime (WebSocket) | Expert \u2014 channels, presence, broadcast, DB changes |\n| Edge Functions (Deno) | Expert \u2014 serverless, secrets, CORS, cron triggers |\n| pgvector (embeddings) | Expert \u2014 HNSW, IVFFlat, semantic search, RAG |\n| CLI + MCP | Expert \u2014 migrations, deploy, AI agent tools |\n\n## Constraints\n- Config YAML is the ONLY artifact a company fills \u2014 everything else is derived\n- Every table with user data MUST have RLS enabled\n- Multi-tenant isolation via `org_id` + JWT claims is the default pattern\n- Budget-aware: design for the company's tier (Free/Pro/Team/Enterprise)\n- SDK-agnostic: patterns work across JS, Python, Dart, Swift, Kotlin, C#\n\n## Behavioral Rules\n- ALWAYS start with schema design \u2192 RLS \u2192 then other modules\n- ALWAYS consider tier limits before recommending features\n- NEVER use service_role_key in client-side code\n- NEVER recommend features unavailable in the company's tier\n- ALWAYS produce migration SQL, not manual Dashboard changes\n\n## N04 Superintendent Role\nYou serve N04 (Knowledge) as the data layer architect.\nAll nuclei (N01-N06) consume the Supabase you structure.\nN04 defines schemas, RLS policies, and data flow \u2014 nuclei follow.",
+      "frontmatter": {
+        "id": "bld_system_prompt_supabase_data_layer",
+        "kind": "system_prompt",
+        "pillar": "P03",
+        "title": "System Prompt \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "system-prompt",
+          "persona"
+        ],
+        "density_score": 0.88
+      },
+      "source_file": "bld_system_prompt_supabase_data_layer.md",
+      "bytes": 2119
+    },
+    "tools_supabase_data_layer": {
+      "content": "# Tool Catalog\n\n## Supabase CLI\n| Command | Purpose | Phase |\n|---------|---------|-------|\n| `supabase init` | Initialize project structure | Setup |\n| `supabase link --project-ref X` | Connect to cloud project | Setup |\n| `supabase start` | Start local dev stack (Docker) | Dev |\n| `supabase migration new NAME` | Create versioned migration | Schema |\n| `supabase db reset` | Drop + replay migrations + seed | Test |\n| `supabase db push` | Apply migrations to remote | Deploy |\n| `supabase db diff` | Compare local vs remote schema | Audit |\n| `supabase db lint` | Check schema issues | CI |\n| `supabase gen types typescript` | Generate TS types from schema | Codegen |\n| `supabase functions new NAME` | Scaffold edge function | Edge |\n| `supabase functions serve` | Run functions locally | Dev |\n| `supabase functions deploy NAME` | Deploy to production | Deploy |\n| `supabase secrets set K=V` | Set edge function secrets | Config |\n| `supabase inspect db table-sizes` | DB statistics | Monitor |\n\n## MCP Servers\n| Server | Package | Purpose |\n|--------|---------|---------|\n| Supabase | `npx -y @supabase/mcp-server-supabase --access-token sbp_xxx` | Project management, migrations, functions |\n| Postgres | `npx -y @anthropic/mcp-server-postgres CONNECTION_STRING` | Direct SQL, bulk ops, EXPLAIN |\n\n## Client SDKs\n| Language | Package | Init Pattern |\n|----------|---------|-------------|\n| JavaScript | `@supabase/supabase-js` | `createClient(url, anonKey)` |\n| Python | `supabase-py` | `create_client(url, key)` |\n| Dart/Flutter | `supabase_flutter` | `Supabase.initialize(url:, anonKey:)` |\n| Swift | `supabase-swift` | `SupabaseClient(supabaseURL:, supabaseKey:)` |\n| Kotlin | `supabase-kt` | `createSupabaseClient(url, key)` |\n| C# | `supabase-csharp` | `new Client(url, key)` |\n\n## SQL Functions (Create in Migrations)\n| Function | Purpose | Usage |\n|----------|---------|-------|\n| `match_documents(embedding, threshold, count)` | Semantic search via pgvector | `supabase.rpc('match_documents', {...})` |\n| `handle_new_user()` | Auto-assign org on signup | Trigger on auth.users INSERT |\n| `cleanup_expired()` | Delete old data | pg_cron: `SELECT cron.schedule('daily', ...)` |\n| `notify_via_webhook(url, payload)` | HTTP call from SQL | pg_net: `SELECT net.http_post(...)` |\n\n## Monitoring Tools\n| Tool | Access | Purpose |\n|------|--------|---------|\n| Studio Dashboard | `https://supabase.com/dashboard` | Visual management |\n| pg_stat_statements | SQL extension | Query performance |\n| Supabase Logs | Dashboard > Logs | API, Auth, DB logs |\n| Health endpoint | `GET /rest/v1/` | Uptime check |\n\n## Integration Checklist\n- [ ] CLI installed: `npm install -g supabase`\n- [ ] Project linked: `supabase link --project-ref X`\n- [ ] MCP configured: `.mcp.json` with supabase server\n- [ ] SDK installed: language-specific package\n- [ ] Types generated: `supabase gen types typescript`\n- [ ] Secrets set: all edge function env vars configured\n\n## Tool Permissions\n\n| Category | Tools | Status |\n|----------|-------|--------|\n| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |\n| DENIED | (none) | Explicitly blocked |\n| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |",
+      "frontmatter": {
+        "id": "bld_tools_supabase_data_layer",
+        "kind": "tool_catalog",
+        "pillar": "P04",
+        "title": "Tools \u2014 Supabase Data Layer Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n04_knowledge",
+        "domain": "data_platform",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "supabase",
+          "data-layer",
+          "tools",
+          "cli",
+          "mcp",
+          "sdk"
+        ],
+        "density_score": 0.91
+      },
+      "source_file": "bld_tools_supabase_data_layer.md",
+      "bytes": 3223
+    },
+    "shared_skill_guided_decisions": {
+      "content": "# Skill: Guided Decision Protocol (GDP)\n\n## The Principle\n\n> **When the LLM decides, the output is generic.**\n> **When the USER decides, the output is theirs.**\n>\n> Every assumption you avoid is a revision the user won't need.\n\nThe GDP is as mandatory as the 8F pipeline.\n8F controls HOW artifacts are built.\nGDP controls WHO decides WHAT goes in them.\n\n---\n\n## When to Trigger a Decision Point\n\nA **Decision Point (DP)** activates when:\n\n1. **Multiple valid paths exist** \u2014 archetype A vs B, layout X vs Y, tone formal vs casual\n2. **Subjective preference matters** \u2014 colors, names, voice, positioning, pricing\n3. **Trade-offs are real** \u2014 speed vs quality, cost vs features, niche vs broad\n4. **The output will be hard to undo** \u2014 brand identity, architecture, deployment target\n5. **The user has context you don't** \u2014 their market, their competitors, their gut feeling\n\nA DP does NOT activate for:\n- Mechanical/deterministic steps (compile, validate, format)\n- Technical correctness (schema compliance, syntax)\n- CEX internal operations (8F pipeline, signaling, indexing)\n\n---\n\n## The DP Format\n\nEvery Decision Point follows this exact structure:\n\n```\n\u2501\u2501\u2501 DP {N}/{TOTAL}: {TOPIC} \u2501\u2501\u2501\n\n{1-2 sentence context explaining WHY this matters}\n\n  1. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  2. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  3. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  \u2605 Recommended: {N} ({reason from context/signals})\n\n  [Type number, combine like \"1+3\", or describe your own]: \u258c\n```\n\n### Rules for Options\n\n| Rule | Detail |\n|------|--------|\n| **3-5 options max** | More than 5 overwhelms. Less than 2 isn't a choice. |\n| **Always have a \u2605 Recommended** | The user can always just hit Enter. Never leave them stuck. |\n| **Recommendation has a reason** | Not \"I think\" \u2014 cite a signal: \"based on your 'educational' description\" |\n| **\"Describe your own\" is always valid** | Options are suggestions, not walls. Freetext is always accepted. |\n| **Emoji per option** | Visual scanning. One emoji per option, consistent within a DP. |\n| **\"Best if\" clause** | Helps the user self-select without jargon. |\n| **Numbering is stable** | Once presented, option 2 is always option 2. Don't renumber. |\n\n---\n\n## DP Density by Domain\n\nNot every interaction needs the same amount of DPs.\n\n| Domain | DP Density | Why |\n|--------|-----------|-----|\n| **Brand Identity** (N06) | HIGH (8-12 DPs) | Every choice is subjective and permanent |\n| **Content/Copy** (N02) | MEDIUM (4-6 DPs) | Tone, layout, CTA style matter |\n| **Research** (N01) | LOW-MEDIUM (2-4 DPs) | Scope, depth, focus area |\n| **Knowledge** (N04) | LOW (1-3 DPs) | Structure, detail level |\n| **Operations** (N05) | LOW (1-3 DPs) | Platform, scaling, cost trade-offs |\n| **Build** (N03) | MINIMAL (0-2 DPs) | Mostly mechanical, schema-driven |\n| **Orchestration** (N07) | MEDIUM (3-5 DPs) | Priority, sequencing, resource allocation |\n\n---\n\n## DP Chaining\n\nDPs can depend on each other. Later DPs adapt based on earlier choices.\n\n```\nDP 1: Archetype \u2192 User picks \"Sage\"\nDP 2: Voice Tone \u2192 Options CHANGE because Sage implies authority+warmth\nDP 3: Color Palette \u2192 Options CHANGE because Sage palette is different from Rebel\n```\n\nWhen a previous DP narrows the space, say so:\n\n```\n\u2501\u2501\u2501 DP 3/8: Color Palette \u2501\u2501\u2501\n\nBased on your Sage archetype, these palettes work best:\n\n  1. \ud83d\udd35 Deep Trust \u2014 navy #1B365D + gold #C5A55A + cream #FAF3E0\n     \u2192 Best if: you want gravitas and authority\n\n  2. \ud83d\udfe2 Growth Wisdom \u2014 forest #2D5016 + sage #B2BEB5 + white #FAFAFA\n     \u2192 Best if: you want natural, approachable wisdom\n\n  3. \ud83d\udfe3 Modern Scholar \u2014 indigo #4B0082 + silver #C0C0C0 + white #FFFFFF\n     \u2192 Best if: you want contemporary, tech-forward wisdom\n\n  \u2605 Recommended: 1 (Deep Trust) \u2014 matches your \"professor but accessible\" description\n\n  [Type number, adjust colors, or describe your vibe]: \u258c\n```\n\n---\n\n## Handling User Responses\n\n| Response | Action |\n|----------|--------|\n| `2` | Select option 2. Confirm briefly: \"Got it \u2014 Going with Growth Wisdom \ud83d\udfe2\" |\n| `1+3` | Combine elements. \"Mixing Deep Trust base with Modern Scholar accents \u2014 nice.\" |\n| `the first one but more green` | Adapt option 1 with modification. Show the modified version. |\n| Free text: `\"I want something techy and dark\"` | Map to closest option or create costm. \"Sounds like a Dark Mode Scholar vibe. Let me propose...\" |\n| `?` or confused | Explain the trade-offs in simpler language. No jargon. |\n| Empty / Enter / \"whatever\" / \"you choose\" | Apply \u2605 Recommended. \"Going with the recommended option: Deep Trust \ud83d\udd35\" |\n| `skip` | Apply \u2605 Recommended and note it can be changed later. |\n\n---\n\n## DP Timing in Workflows\n\nDPs are NOT dumped all at once. They are **interleaved with progress**.\n\n```\nBAD:  \"Here are 12 questions. Answer all.\"\nGOOD: \"Let me ask you a few things as we go.\"\n```\n\nPattern:\n1. Ask DP 1-2 (identity basics)\n2. **Show progress**: \"Great. I already know enough to suggest...\"\n3. Ask DP 3-4 (personality, voice)\n4. **Show preview**: \"Here's what your brand is looking like so far...\"\n5. Ask DP 5-6 (audience, positioning)\n6. **Show preview**: \"Almost there. Your brand summary so far...\"\n7. Ask DP 7-8 (visual, monetization)\n8. **Final confirmation**: \"Here's the complete picture. Change anything?\"\n\n---\n\n## Preview After Every 2-3 DPs\n\nAfter every 2-3 decisions, show a running summary:\n\n```\n\u2501\u2501\u2501 Your Brand So Far \u2501\u2501\u2501\n  Name:       Acme Academy\n  Archetype:  \ud83e\uddd9 Sage\n  Voice:      Authoritative but warm (4,3,2,4,4)\n  Colors:     Deep Trust palette (#1B365D, #C5A55A, #FAF3E0)\n  Audience:   Career-switchers who want to become devs\n  \u2501\u2501\u2501 {5/8 decisions made} \u2501\u2501\u2501\n```\n\nThis gives the user confidence that their choices are being heard,\nand a chance to go back: \"Actually, can I change the colors?\"\n\n---\n\n## The Final Confirmation DP\n\nEvery GDP sequence ends with a FULL REVIEW:\n\n```\n\u2501\u2501\u2501 Final Review \u2501\u2501\u2501\n\nHere's everything we've decided together:\n\n  Brand:         Acme Academy\n  Tagline:       \"Code your future\"\n  Archetype:     \ud83e\uddd9 Sage\n  Voice:         Authoritative, warm, low humor, high trust\n  Colors:        #1B365D, #C5A55A, #FAF3E0\n  Font:          Inter (headers) + Source Serif (body)\n  Audience:      Career-switchers, 25-40, frustrated with current job\n  Transformation: From \"stuck in a dead-end job\" to \"confident junior dev\"\n  Category:      Online Education / Tech\n  Pricing:       Subscription (R$ 47/mo basic, R$ 97/mo pro)\n\n  \u2705 Confirm all \u2192 I'll generate brand_config.yaml\n  \u270f\ufe0f Change something \u2192 tell me which item\n  \ud83d\udd04 Start over \u2192 we'll redo the whole flow\n\n  [Confirm, change, or start over]: \u258c\n```\n\n---\n\n## Anti-Patterns (BLOCKED)\n\n| Anti-Pattern | Why It's Bad | Do This Instead |\n|-------------|-------------|-----------------|\n| \"I'll assume a Sage archetype\" | User might be a Rebel. You just poisoned the brand. | Present 3-4 options with \u2605 recommendation |\n| Dumping 10 questions at once | Overwhelming. User gives shallow answers. | 2-3 at a time, preview between rounds |\n| \"Which of these 12 archetypes...\" | Too many choices = paralysis | Pre-filter to 3-4 based on signals |\n| No recommendation on any DP | User with no branding knowledge is stuck | ALWAYS have \u2605 Recommended with reason |\n| Skipping final review | User can't see the full picture | ALWAYS show complete summary before executing |\n| Assuming after 1 vague answer | \"Casual\" doesn't mean Jester. | Probe: \"Casual like a friend or casual like a comedian?\" |\n| Using branding jargon | \"5D voice calibration\" means nothing to a bakery owner | \"How should your brand sound?\" |\n\n---\n\n## Part 2: The Autonomy Side\n\nGDP is half the picture. The other half is what happens AFTER decisions are made.\n\n### The Decision Manifest\n\nEvery GDP session produces a **Decision Manifest**:\n`.cex/runtime/decisions/decision_manifest.yaml`\n\nThis file contains:\n- Every DP answer (choice + reason + alternatives shown)\n- Brand config pointer (`.cex/brand/brand_config.yaml`)\n- Per-nucleus specific decisions\n- Constraints (language, currency, quality floor)\n- Flags for auto-filled decisions (user skipped \u2192 \u2605 Recommended applied)\n\n### The Two-Phase Pattern\n\n```\nPHASE 1 \u2014 Co-pilot (GDP active, user present)\n  N07 identifies mission\n  N07 identifies which decisions are subjective\n  N07 presents DPs to user (this skill)\n  N07 writes decision_manifest.yaml\n  N07 locks manifest (status: locked)\n\nPHASE 2 \u2014 Autonomous (GDP off, nuclei dispatched)\n  N07 dispatches via grid/solo\n  Handoff includes: \"Read .cex/runtime/decisions/decision_manifest.yaml\"\n  Each nucleus reads manifest ONCE at start\n  Each nucleus executes 8F with manifest context\n  ZERO questions to user\n  Commit \u2192 signal \u2192 done\n```\n\n### How Nuclei Read the Manifest\n\nAt the start of any dispatched task, a nucleus:\n\n1. Checks if manifest exists: `.cex/runtime/decisions/decision_manifest.yaml`\n2. If YES \u2192 reads it, extracts relevant decisions (global + per_nucleus.{self})\n3. If NO \u2192 falls back to brand_config.yaml only (minimal context)\n4. Uses decisions as CONSTRAINTS for 8F, not as suggestions\n\nA nucleus NEVER overrides a manifest decision.\nA nucleus NEVER re-asks a question the manifest already answered.\n\n### Edge Cases During Autonomous Execution\n\n| Situation | What the nucleus does |\n|-----------|----------------------|\n| Manifest covers the decision | Use it. No question. |\n| Manifest doesn't cover this specific case | Apply \u2605 Recommended. Add to `auto_filled` list. |\n| Decision seems wrong in context | Execute it anyway. Flag in output: \"\u26a0\ufe0f Manifest says X, but Y might be better \u2014 review recommended.\" |\n| Manifest is corrupt/missing | Fall back to brand_config.yaml. If that's also missing, use sensible defaults + flag everything. |\n\n### Why This Works\n\nThe plat\u00f4 between autonomy and collaboration:\n\n```\n100% User decides \u2190\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 GDP \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192 100% LLM decides\n         \u2191                    \u2191                       \u2191\n     Slow, tedious      THE SWEET SPOT          Generic, misaligned\n     but perfect        User decides WHAT        Fast but wrong\n                        LLM decides HOW\n```\n\n- **User decides WHAT**: brand name, tone, audience, positioning, colors, pricing model\n- **LLM decides HOW**: file structure, frontmatter, 8F pipeline, compilation, signaling\n- **Manifest is the contract**: locks the WHAT so the HOW can run free",
+      "frontmatter": {
+        "id": "skill_guided_decisions",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach all builders and nuclei to present structured decision points instead of assuming. The Co-pilot Protocol.",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "author": "n07_orchestrator",
+        "quality": 9.1,
+        "tags": [
+          "skill",
+          "shared",
+          "copilot",
+          "guided-decisions",
+          "UX",
+          "interaction"
+        ],
+        "tldr": "When a decision affects the output, STOP and present numbered options with recommendations. Never assume what the user wants. This is as mandatory as 8F.",
+        "density_score": 0.95
+      },
+      "source_file": "skill_guided_decisions.md",
+      "bytes": 10647
+    },
+    "shared_skill_memory_update": {
+      "content": "# Skill: Memory Update After Execution\n\n## When to Use\nAfter EVERY build session, before signaling complete.\n\n## What to Record\nOne structured observation per session. Focus on **reusable patterns**, not obvious facts.\n\n### Good Observations\n1. \"Splitting handler into validate+process+respond reduced errors 40%\"\n2. \"Builders with >3 tools need explicit tool-selection criteria\"\n3. \"ISO files >4KB overflow small model context \u2014 split into sections\"\n\n### Bad Observations (DO NOT record)\n1. \"The schema was followed\" (obvious)\n2. \"The file was saved\" (mechanical)\n3. \"Quality was high\" (vague)\n\n## How to Record\n\n```bash\npython _tools/cex_memory_update.py \\\n  --builder <your-builder-id> \\\n  --type feedback \\\n  --observation \"what you learned\" \\\n  --pattern \"generalizable rule\" \\\n  --evidence \"data that supports it\" \\\n  --confidence 0.8 \\\n  --outcome SUCCESS\n```\n\n## Observation Types\n| Type | Decay | When to Use |\n|------|-------|-------------|\n| user | 0.02/day | User preference or style |\n| feedback | 0.00 | Quality feedback (NEVER decays) |\n| project | 0.05/day | Project-specific context |\n| reference | 0.03/day | External knowledge or docs |\n\n## Rules\n1. ONE observation per session (quality > quantity)\n2. Confidence 0.0-1.0 (be honest, 0.6-0.8 is normal)\n3. Pattern must be ACTIONABLE (someone else can apply it)\n4. Evidence must be MEASURABLE when possible\n5. If nothing was learned, don't force an observation\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `instruction` |\n| Pillar |  |\n| Domain | CEX system |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "skill_memory_update",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach builders to reflect and record learnings after execution",
+        "quality": 9.0,
+        "title": "Skill Memory Update",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "artifact",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls.",
+        "domain": "CEX system",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "skill_memory_update.md",
+      "bytes": 1718
+    },
+    "shared_skill_verification_protocol": {
+      "content": "# Verification Protocol (Shared Skill)\n\nAfter producing an artifact (F6 PRODUCE), invoke this protocol before F7 GOVERN.\n\n## When to Verify\n1. 3+ sections modified in the artifact\n2. Artifact kind is core (system_prompt, skill, guardrail, agent, agent_card)\n3. Quality target >= 8.5\n4. Retry attempt (previous quality gate failure)\n\n## Verification Steps\n\n1. **Schema compliance**: Does the artifact match its kind's SCHEMA.md?\n   Check: every required frontmatter field present and correctly typed.\n\n2. **Boundary compliance**: Does the artifact stay within its kind's boundary?\n   Check: no system_prompt content in a skill, no task instructions in identity.\n\n3. **Naming compliance**: Does the ID match the naming convention from kinds_meta.json?\n   Check: `p{NN}_{prefix}_{slug}` format.\n\n4. **Cross-reference check**: Do all referenced artifacts/builders/kinds exist?\n   Check: grep for references, verify targets are real paths.\n\n5. **Adversarial probe**: Try to break the artifact:\n   - Feed it an edge-case input (empty, malformed, contradictory)\n   - Check if the rules are enforceable or aspirational\n   - Verify the output format is machine-parseable\n\n## Output\nFor each check: PASS with evidence or FAIL with Expected vs Actual.\nFinal: VERDICT: PASS | FAIL | PARTIAL\n\n## Artifact Metadata\n\n```yaml\nkind: skill\npillar: P04\npipeline: 8F\nscoring: hybrid_3_layer\ncompilation: cex_compile\n```\n\n## Artifact Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `skill` |\n| Pillar | P04 |\n| Domain | verification |\n| Pipeline | 8F (F1-F8) |\n| Scorer | `cex_score.py` |\n| Compiler | `cex_compile.py` |\n| Retriever | `cex_retriever.py` |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "shared_skill_verification_protocol",
+        "kind": "skill",
+        "pillar": "P04",
+        "version": "1.0.0",
+        "created": "2026-04-05",
+        "updated": "2026-04-05",
+        "author": "n07-orchestrator",
+        "title": "Shared Skill: Verification Protocol for All Builders",
+        "domain": "verification",
+        "quality": 9.1,
+        "tags": [
+          "shared",
+          "skill",
+          "verification",
+          "adversarial",
+          "all-builders"
+        ],
+        "source_insight": "OpenClaude verificationAgent.ts -- adapted as shared builder skill",
+        "tldr": "Every builder can invoke adversarial verification on its output before publishing",
+        "density_score": 0.86
+      },
+      "source_file": "skill_verification_protocol.md",
+      "bytes": 1702
+    }
+  },
+  "total_tokens": 12327,
+  "total_bytes": 49311
+}

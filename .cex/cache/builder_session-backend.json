@@ -1,0 +1,491 @@
+{
+  "kind": "session-backend",
+  "compiled_at": "2026-04-12T17:26:39.894277+00:00",
+  "source_hash": "bebdc05bf0f7a6e55e4853d7adf42f313b326cebdc012d0b4b7446f4462dae88",
+  "iso_count": 13,
+  "shared_count": 3,
+  "prompt_sections": {
+    "architecture_session_backend": {
+      "content": "## Component Inventory\n| Name | Role | Owner | Status |\n|------|------|-------|--------|\n| backend | Storage engine type: file, sqlite, redis, postgres | session-backend-builder | required |\n| path | Filesystem path for file/sqlite backends | session-backend-builder | conditional |\n| connection_string | Connection URI for redis/postgres backends (env var reference only) | session-backend-builder | conditional |\n| ttl_hours | Hours before inactive session is eligible for cleanup | session-backend-builder | required |\n| max_sessions | Maximum concurrent sessions per scope before eviction | session-backend-builder | required |\n| serialization | Data format: json, msgpack, protobuf | session-backend-builder | required |\n| encryption | At-rest encryption: none, basic (AES-256), full (AES-256 + TLS) | session-backend-builder | required |\n| scoping | Namespace strategy: per-nucleus, per-agent, global | session-backend-builder | required |\n| compaction | Whether to compact/defragment session data on load | session-backend-builder | recommended |\n| metadata | config id, version, pillar, scope, author, created date | session-backend-builder | required |\n## Dependency Graph\n```\nenv_config (P09) --feeds--> session_backend (provides connection_string env vars)\nsession_backend --consumed_by--> cex_memory_update.py (reads/writes session state)\nsession_backend --consumed_by--> cex_coordinator.py (manages cross-nucleus session handoffs)\nsession_backend --consumed_by--> cex_sdk/memory/stores.py (implements storage interface)\nsession_backend --consumed_by--> .cex/runtime/ (default file backend location)\ncompression_config (P10) --independent-- session_backend (compression reduces state; session persists it)\nmemory_config (P10) --independent-- session_backend (memory defines what to keep; session defines where to store)\nguardrail (P11) --constrains--> session_backend (security rules for encryption and access)\n```\n| From | To | Type | Data |\n|------|----|------|------|\n| env_config | session_backend | feeds | connection_string, encryption keys via env vars |\n| session_backend | cex_memory_update.py | consumed_by | read/write session state on each turn |\n| session_backend | cex_coordinator.py | consumed_by | cross-nucleus session handoff data |\n| session_backend | cex_sdk/memory/stores.py | consumed_by | storage interface implementation |\n| guardrail | session_backend | constrains | encryption requirements, access control rules |\n## Boundary Table\n| session_backend IS | session_backend IS NOT |\n|-------------------|------------------------|\n| A specification of WHERE session state is persisted between turns | A compression_config (P10) \u2014 compression reduces context; session stores it |\n| Covers backend type, connection, TTL, serialization, encryption | A memory config (P10) \u2014 memory defines what to remember; session defines where |\n| Follows file-first principle: simplest backend until scale demands upgrade | A cache config \u2014 cache is ephemeral key-value; session is durable state |\n| Declares session scoping for nucleus isolation | An env_config (P09) \u2014 env_config catalogs variables; session_backend consumes them |\n| Specifies upgrade path from file to postgres | A runtime_rule (P09) \u2014 runtime_rule governs timeouts; session has TTL |\n| Defines compaction strategy for efficient storage | A boot_config (P02) \u2014 boot_config is provider startup; session is state persistence |\n## Layer Map\n| Layer | Components | Purpose |\n|-------|------------|---------|\n| Storage | backend, path, connection_string | Physical persistence layer |\n| Lifecycle | ttl_hours, max_sessions, compaction | Session creation, expiration, cleanup |\n| Format | serialization, encryption | Data encoding and protection |\n| Isolation | scoping | Namespace separation between nuclei |",
+      "frontmatter": {
+        "kind": "architecture",
+        "id": "bld_architecture_session_backend",
+        "pillar": "P08",
+        "llm_function": "GOVERN",
+        "purpose": "Component map of session_backend \u2014 inventory, dependencies, and architectural position",
+        "quality": 9.1,
+        "title": "Architecture Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_architecture_session_backend.md",
+      "bytes": 3802
+    },
+    "collaboration_session_backend": {
+      "content": "# Collaboration: session-backend-builder\n## My Role in Crews\nI am a SPECIALIST. I answer ONE question: \"where and how should this agent persist its session state between turns?\"\nI do not reduce context tokens. I do not decide what to remember long-term.\nI specify session storage so agents maintain state across turns and restarts.\n## Crew Compositions\n### Crew: \"Context Management\"\n```\n  1. token-budget-builder -> \"total token allocation per section\"\n  2. compression-config-builder -> \"compression strategy when budget is exhausted\"\n  3. session-backend-builder -> \"where to persist compressed state\"\n```\n### Crew: \"Full Agent Infrastructure\"\n```\n  1. agent-builder -> \"agent definition\"\n  2. boot-config-builder -> \"provider startup configuration\"\n  3. env-config-builder -> \"environment variables\"\n  4. session-backend-builder -> \"state persistence backend\"\n  5. compression-config-builder -> \"context compression strategy\"\n  6. trace-config-builder -> \"execution tracing and observability\"\n```\n## Handoff Protocol\n### I Receive\n- seeds: target scope, expected concurrency, data sensitivity level, infrastructure availability\n- optional: backend preference, TTL override, encryption level, serialization format\n### I Produce\n- session_backend artifact (.md + .yaml frontmatter)\n- committed to: `cex/P10/examples/p10_sb_{backend}.md`\n### I Signal\n- signal: complete (with quality score from QUALITY_GATES)\n- if quality < 8.0: signal retry with failure reasons\n## Builders I Depend On\n- env-config-builder: provides connection_string variables for redis/postgres backends\n- boot-config-builder: reveals when sessions are created/loaded during boot\n## Builders That Depend On Me\n| Builder | Why |\n|---------|-----|\n| compression-config-builder | Needs to know where compressed state is persisted |\n| memory-builder | Long-term memory writes to the session backend |\n| coordinator config | Cross-nucleus handoffs route through session storage |",
+      "frontmatter": {
+        "kind": "collaboration",
+        "id": "bld_collaboration_session_backend",
+        "pillar": "P12",
+        "llm_function": "COLLABORATE",
+        "purpose": "How session-backend-builder works in crews with other builders",
+        "pattern": "each builder must know its ROLE in a team, what it RECEIVES and PRODUCES",
+        "quality": 9.0,
+        "title": "Collaboration Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_collaboration_session_backend.md",
+      "bytes": 1946
+    },
+    "config_session_backend": {
+      "content": "# Config: session_backend Production Rules\n## Naming Convention\n| Scope | Convention | Example |\n|-------|-----------|---------|\n| Artifact files | `p10_sb_{{backend}}.yaml` | `p10_sb_file_default.yaml` |\n| Builder directory | kebab-case | `session-backend-builder/` |\n| Frontmatter fields | snake_case | `ttl_hours`, `max_sessions` |\n| Backend names | lowercase, single word or snake_case | `file`, `sqlite`, `redis`, `postgres` |\n| Session key prefix | `{nucleus}:{scope}:{session_id}` | `n03:builder:sess_abc123` |\nRule: id MUST equal filename stem. Hyphens in id = HARD FAIL.\n## File Paths\n- Output: `cex/P10_memory/examples/p10_sb_{{backend}}.yaml`\n- Compiled: `cex/P10_memory/compiled/p10_sb_{{backend}}.yaml`\n## Size Limits (aligned with SCHEMA)\n- Body: max 4096 bytes\n- Total (frontmatter + body): ~5500 bytes\n- Density: >= 0.80 (no filler)\n## Backend Enum\n| Value | When to use | Dependencies |\n|-------|-------------|-------------|\n| file | Single-agent, local, zero external deps | Filesystem only |\n| sqlite | Multi-agent, local, need concurrent reads | sqlite3 stdlib |\n| redis | Distributed, need TTL enforcement, pub/sub | redis-py + Redis server |\n| postgres | Production, need transactions, full SQL, audit trail | psycopg2 + PostgreSQL |\n## Serialization Enum\n| Value | Trade-offs |\n|-------|-----------|\n| json | Human-readable, schema-flexible, slower, larger |\n| msgpack | Binary, fast, compact, not human-readable |\n| protobuf | Typed schema, fastest, smallest, requires .proto definition |\n## Security Levels\n| Level | Encryption | Access | When |\n|-------|-----------|--------|------|\n| none | No encryption | Filesystem permissions | Dev/local, no sensitive data |\n| basic | AES-256 at rest | Filesystem + app-level auth | Staging, some sensitive data |\n| full | AES-256 at rest + TLS in transit | IAM + row-level access | Production, PII/secrets in session |",
+      "frontmatter": {
+        "kind": "config",
+        "id": "bld_config_session_backend",
+        "pillar": "P09",
+        "llm_function": "CONSTRAIN",
+        "purpose": "Naming conventions, file paths, size limits, operational constraints",
+        "pattern": "CONFIG restricts SCHEMA, never contradicts it",
+        "effort": "medium",
+        "max_turns": 25,
+        "disallowed_tools": [],
+        "fork_context": null,
+        "hooks": {
+          "pre_build": null,
+          "post_build": null,
+          "on_error": null,
+          "on_quality_fail": null
+        },
+        "permission_scope": "nucleus",
+        "quality": 9.0,
+        "title": "Config Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_config_session_backend.md",
+      "bytes": 1884
+    },
+    "examples_session_backend": {
+      "content": "# Examples: session-backend-builder\n## Golden Example\nINPUT: \"Define a file-based session backend for CEX development environment\"\nOUTPUT:\n```yaml\nid: p10_sb_file_default\nkind: session_backend\npillar: P10\nversion: \"1.0.0\"\ncreated: \"2026-04-06\"\nupdated: \"2026-04-06\"\nauthor: \"builder_agent\"\nbackend: file\npath: \".cex/runtime/sessions/\"\nttl_hours: 72\nmax_sessions: 50\nserialization: json\nencryption: none\nscoping: per_nucleus\nquality: 8.8\ntags: [session_backend, file, development, P10, zero-deps]\ntldr: \"File-based sessions at .cex/runtime/sessions/, JSON, 72h TTL, 50 max, per-nucleus scoping\"\ndescription: \"Zero-dependency file backend for local development with per-nucleus session isolation\"\ncompaction: true\nupgrade_path: \"file -> sqlite (when concurrent access needed) -> redis (when distributed)\"\n```\n## Backend Specification\nFile-based session storage using JSON files in `.cex/runtime/sessions/`. Each session is a\nsingle JSON file named `{nucleus}_{session_id}.json`. Zero external dependencies \u2014 requires\nonly filesystem access. Chosen for development because it is inspectable (human-readable JSON),\ndebuggable (files can be manually edited), and needs no server processes.\n## Session Lifecycle\n- **Create**: new file written on first turn of a conversation\n- **Read**: loaded and parsed at start of each turn; compacted if stale entries detected\n- **TTL**: sessions older than 72 hours are eligible for cleanup on next load\n- **Cleanup**: expired sessions deleted by cex_memory_update.py on startup scan\n- **Compaction**: on load, remove superseded entries (e.g., old handoff data that has been archived)\n- **Max sessions**: when 50 sessions exist, oldest inactive session is evicted before creating new\n## Serialization\nJSON format selected for development:\n- Human-readable: developers can inspect session files directly\n- Schema-flexible: no .proto or schema migration needed\n- Trade-off: ~2x larger than msgpack, ~5x slower parse \u2014 acceptable for dev volume\n- Schema evolution: new fields added with null defaults; old sessions remain readable\n## Security\n- Encryption: none (development environment, no sensitive data in sessions)\n- Access: filesystem permissions (user-only read/write on session directory)\n- No credentials needed \u2014 file backend uses local filesystem\n- Upgrade to `basic` encryption when sessions contain user PII or API responses\nWHY THIS IS GOLDEN:\n- quality: null (H05 pass)\n- id matches p10_sb_ pattern (H02 pass)\n- kind: session_backend (H04 pass)\n- All 6 core fields present: backend, path, ttl_hours, max_sessions, serialization, encryption (H06 pass)\n- backend \"file\" is valid enum (H07 pass)\n- path present for file backend (H08 pass)\n- ttl_hours: 72 is positive (H10 pass)\n- Body has all 4 sections: Backend Specification, Session Lifecycle, Serialization, Security\n- Upgrade path documented\n- Compaction strategy defined\n## Anti-Example\nINPUT: \"Create session config for redis\"\nBAD OUTPUT:\n```yaml\nid: redis-sessions\nkind: session\npillar: storage\nbackend: redis\nconnection_string: \"redis://admin:s3cret@redis.prod.internal:6379/0\"\nquality: 7.0\ntags: [redis]\n```\nConnect to Redis for sessions.\nFAILURES:\n1. id: \"redis-sessions\" uses hyphens and no `p10_sb_` prefix -> H02 FAIL\n2. kind: \"session\" not \"session_backend\" -> H04 FAIL\n3. pillar: \"storage\" not \"P10\" -> H06 FAIL\n4. quality: 7.0 (not null) -> H05 FAIL\n5. connection_string embeds actual password \"s3cret\" -> H09 FAIL (must reference env var)\n6. Missing fields: ttl_hours, max_sessions, serialization, encryption, version, created, author -> H06 FAIL\n7. tags: only 1 item, missing \"session_backend\" -> S02 FAIL\n8. Body missing Backend Specification, Session Lifecycle, Serialization, Security sections -> structural FAIL\n9. No TTL defined \u2014 sessions accumulate forever -> S03 FAIL\n10. No scoping defined \u2014 global namespace collision risk -> S05 FAIL",
+      "frontmatter": {
+        "kind": "examples",
+        "id": "bld_examples_session_backend",
+        "pillar": "P07",
+        "llm_function": "GOVERN",
+        "purpose": "Golden and anti-examples of session_backend artifacts",
+        "pattern": "few-shot learning \u2014 LLM reads these before producing",
+        "quality": 9.0,
+        "title": "Examples Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_examples_session_backend.md",
+      "bytes": 3863
+    },
+    "instruction_session_backend": {
+      "content": "# Instructions: How to Produce a session_backend\n## Phase 1: RESEARCH\n1. Identify the target: which agent, nucleus, or system scope needs session persistence?\n2. Determine scale requirements: single-agent (file), multi-agent (sqlite), distributed (redis/postgres)\n3. Catalog what state needs persistence: conversation history, tool results, handoff context, decision manifests\n4. Classify data sensitivity: does the session contain secrets, PII, or sensitive business logic?\n5. Determine TTL requirements: how long should inactive sessions persist before cleanup?\n6. Assess concurrency: will multiple processes read/write the same session simultaneously?\n7. Evaluate existing infrastructure: is redis/postgres already deployed, or is file-based the only option?\n8. Check existing session_backends via brain_query [IF MCP] for the same scope \u2014 do not duplicate\n## Phase 2: COMPOSE\n1. Read SCHEMA.md \u2014 source of truth for all fields\n2. Read OUTPUT_TEMPLATE.md \u2014 fill the template following SCHEMA constraints\n3. Fill all required frontmatter fields; set `quality: null` \u2014 never self-score\n4. Write **Backend Specification** section: backend type, path/connection, rationale for selection\n5. Write **Session Lifecycle** section: creation, TTL, expiration, cleanup, compaction on load\n6. Write **Serialization** section: format choice (json/msgpack/protobuf), trade-offs, schema evolution\n7. Write **Security** section: encryption at rest, access control, credential references (env vars only)\n8. Write **Scoping** section: namespace strategy, per-nucleus isolation, key prefix conventions\n9. Write **Upgrade Path** section: how to migrate from current backend to the next tier (file\u2192sqlite\u2192redis\u2192postgres)\n10. Confirm body <= 4096 bytes\n## Phase 3: VALIDATE\n1. Check QUALITY_GATES.md \u2014 verify each HARD gate manually\n2. Confirm YAML frontmatter parses without errors\n3. Confirm `id` matches `^p10_sb_[a-z][a-z0-9_]+$`\n4. Confirm backend is one of: file, sqlite, redis, postgres\n5. Confirm ttl_hours is a positive number\n6. Confirm max_sessions is a positive integer\n7. Confirm serialization is one of: json, msgpack, protobuf\n8. Confirm no actual credentials or connection passwords appear in the artifact\n9. Confirm `quality` is null\n10. Confirm body <= 4096 bytes\n11. Cross-check: is this a persistence backend? If this is token reduction it belongs in `compression_config`. If this is long-term memory it belongs in memory config. If this is ephemeral caching it belongs in cache config. This artifact specifies WHERE to persist state, not HOW to reduce it or WHAT to remember.\n12. If score < 8.0: revise in the same pass before outputting\n\n## ISO Loading\n\n```yaml\nloader: cex_skill_loader\ninjection_point: F3_compose\npriority: high\n```\n\n```bash\npython _tools/cex_skill_loader.py --verify session\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `instruction` |\n| Pillar | P03 |\n| Domain | session backend construction |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "kind": "instruction",
+        "id": "bld_instruction_session_backend",
+        "pillar": "P03",
+        "llm_function": "REASON",
+        "purpose": "Step-by-step production process for session_backend",
+        "pattern": "3-phase pipeline (research -> compose -> validate)",
+        "quality": 9.2,
+        "title": "Instruction Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_instruction_session_backend.md",
+      "bytes": 3126
+    },
+    "knowledge_card_session_backend": {
+      "content": "# Domain Knowledge: session_backend\n## Executive Summary\nSession backends define the persistence contract for agent session state \u2014 specifying which storage engine to use, how to connect, when sessions expire, and how data is serialized. Following the file-first principle (start simple, upgrade when needed), session backends provide a clear upgrade path from zero-dependency file storage to fully distributed postgres. They differ from compression configs (how to reduce state), memory configs (what to remember), and cache configs (ephemeral key-value).\n## Spec Table\n| Property | Value |\n|----------|-------|\n| Pillar | P10 (memory) |\n| llm_function | INJECT |\n| Frontmatter fields | 17+ |\n| Quality gates | 10 HARD + 12 SOFT |\n| Backend options | file, sqlite, redis, postgres |\n| Default TTL | 72h (dev), 24h (prod) |\n| Naming | p10_sb_{backend}.yaml |\n## Patterns\n- **Backend selection ladder**: choose based on requirements\n| Backend | Concurrency | Distribution | Dependencies | Best for |\n|---------|-------------|-------------|-------------|----------|\n| file | Single-writer | Local only | None | Dev, prototyping, single-agent |\n| sqlite | Multi-reader, single-writer (WAL) | Local only | stdlib sqlite3 | Multi-agent local, moderate scale |\n| redis | Multi-reader, multi-writer | Distributed | redis-py + server | Production, TTL enforcement, pub/sub |\n| postgres | Full ACID | Distributed | psycopg2 + server | Production, audit trail, complex queries |\n- **Session scoping**: namespace isolation prevents data corruption\n| Scope | Key format | Use case |\n|-------|-----------|----------|\n| per_nucleus | `{nucleus}:{session_id}` | Default \u2014 each nucleus has its own state |\n| per_agent | `{agent}:{session_id}` | Shared state across nuclei for one agent |\n| global | `global:{session_id}` | Cross-agent coordination (rare, justify explicitly) |\n- **Serialization selection**: format affects readability, speed, and safety\n| Format | Human-readable | Speed | Size | Schema evolution | Security |\n|--------|---------------|-------|------|-----------------|----------|\n| json | Yes | Slow | Large | Add fields with null defaults | Safe |\n| msgpack | No | Fast | Small | Forward-compatible | Safe |\n| protobuf | No | Fastest | Smallest | .proto versioning | Safe |\n| pickle | No | Fast | Medium | Fragile | UNSAFE \u2014 never use |\n| Source | Concept | Application |\n|--------|---------|-------------|\n| 12-Factor (VI) | Processes are stateless, share-nothing | State lives in backing service, not process memory |\n| Redis | TTL on keys | Automatic session expiration without cleanup cron |\n| SQLite WAL | Write-ahead logging | Concurrent reads with single writer |\n| OWASP | Session management | Token-based session IDs, secure storage, TTL enforcement |\n## Anti-Patterns\n| Anti-Pattern | Why it fails |\n|-------------|-------------|\n| In-memory without persistence | State lost on restart \u2014 agent forgets mid-conversation |\n| Global namespace | Concurrent nuclei overwrite each other's sessions |\n| No TTL | Storage grows unbounded \u2014 disk exhaustion in production |\n| Pickle serialization | Arbitrary code execution on deserialization (CVE risk) |\n| Embedded credentials | Connection passwords committed to git, exposed in logs |\n| No compaction | Session files accumulate stale entries, slow to load |\n| No max_sessions | Resource exhaustion when many conversations spawn simultaneously |\n## Application\n1. Assess scale: single-agent (file), multi-agent (sqlite), distributed (redis/postgres)\n2. Select backend from ladder based on concurrency and distribution needs\n3. Define TTL: 72h dev, 24h prod (adjust based on session length)\n4. Choose serialization: json (dev, readability), msgpack (prod, speed)\n5. Set scoping: per_nucleus default, per_agent for shared state\n6. Configure encryption: none (dev), basic (staging), full (prod with PII)\n7. Document upgrade path to next tier\n8. Reference credentials via env vars, never embed\n## References\n- 12factor.net/processes: Factor VI \u2014 Stateless processes\n- Redis persistence: RDB vs AOF for session durability\n- SQLite WAL mode: concurrent read access documentation\n- OWASP: Session Management Cheat Sheet",
+      "frontmatter": {
+        "kind": "knowledge_card",
+        "id": "bld_knowledge_card_session_backend",
+        "pillar": "P01",
+        "llm_function": "INJECT",
+        "purpose": "Domain knowledge for session_backend production \u2014 agent session state persistence",
+        "sources": "12-Factor App (Factor VI), Redis persistence docs, SQLite WAL mode, PostgreSQL session management, OWASP session management cheat sheet",
+        "quality": 9.1,
+        "title": "Knowledge Card Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_knowledge_card_session_backend.md",
+      "bytes": 4178
+    },
+    "manifest_session_backend": {
+      "content": "# session-backend-builder\n## Identity\nSpecialist in building session_backend artifacts \u2014 specifications de persistencia de\nestado de session for agents LLM. Masters backends (file, sqlite, redis, postgres),\nconnection strings, TTL policies, serialization formats (json, msgpack, protobuf),\nencryption at rest, session scoping per nucleus, and the boundary between session_backend\n(onde persistir estado) e compression_config (como reduzir estado) or memory config\n(o that lembrar). Produces session_backend artifacts with frontmatter complete e backend\nspecification documentada.\n## Capabilities\n1. Define backend de persistencia with path/connection_string e credenciais per reference\n2. Specify TTL policies for expiraction automatica de sessions inativas\n3. Document serialization format with trade-offs (json legivel, msgpack rapido, protobuf typed)\n4. Configure encryption at rest for sessions with data sensiveis\n5. Define session scoping per nucleus for isolamento between agents\n6. Validate artifact against quality gates (8 HARD + 11 SOFT)\n7. Distinguish session_backend de compression_config, memory config, cache config\n## Routing\nkeywords: [session, backend, persistence, state, file, sqlite, redis, postgres, ttl, serialization, encryption, store]\ntriggers: \"define session backend\", \"create session config\", \"configure state persistence\", \"specify session storage\"\n## Crew Role\nIn a crew, I handle SESSION STATE PERSISTENCE SPECIFICATION.\nI answer: \"where and how should this agent persist its session state between turns?\"\nI do NOT handle: compression_config (how to reduce context), memory config (what to remember\nlong-term), cache config (ephemeral key-value caching), env_config (environment variables).\n\n## Metadata\n\n```yaml\nid: session-backend-builder\npipeline: 8F\nscoring: hybrid_3_layer\n```\n\n```bash\npython _tools/cex_score.py --apply session-backend-builder.md\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `type_builder` |\n| Pillar | P09 |\n| Domain | session_backend |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "session-backend-builder",
+        "kind": "type_builder",
+        "pillar": "P09",
+        "parent": null,
+        "domain": "session_backend",
+        "llm_function": "INJECT",
+        "version": "1.0.0",
+        "created": "2026-04-06",
+        "updated": "2026-04-06",
+        "author": "builder_agent",
+        "tags": [
+          "kind-builder",
+          "session-backend",
+          "P10",
+          "config",
+          "persistence",
+          "state"
+        ],
+        "keywords": [
+          "session",
+          "backend",
+          "persistence",
+          "state",
+          "file",
+          "sqlite",
+          "redis",
+          "postgres",
+          "ttl",
+          "serialization"
+        ],
+        "triggers": [
+          "define session backend",
+          "create session config",
+          "configure state persistence",
+          "specify session storage"
+        ],
+        "capabilities": "L1: Specialist in building session_backend artifacts \u2014 specifications de persistencia de estado de session for agents. L2: Define backend, path, TTL, serializaction, encriptaction, and scoping per nucleo. L3: When user needs to create, build, or scaffold session backend config.\n",
+        "quality": 9.1,
+        "title": "Manifest Session Backend",
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "density_score": 0.9
+      },
+      "source_file": "bld_manifest_session_backend.md",
+      "bytes": 2188
+    },
+    "memory_session_backend": {
+      "content": "## Summary\nSession persistence failures divide into: data loss (in-memory backends, no TTL cleanup leading to storage exhaustion), security vulnerabilities (pickle deserialization, embedded credentials), and data corruption (global namespaces with concurrent writes). The file-first pattern with JSON serialization, TTL enforcement, and per-nucleus scoping addresses all three categories with zero external dependencies.\n## Pattern\n**File-first**: start with JSON files on the local filesystem. This requires no server processes, no connection strings, no external dependencies. Sessions are human-readable (inspectable with any text editor), debuggable (manually editable), and version-controllable (git-trackable if needed). Upgrade to sqlite when concurrent read/write is needed, redis when distributed access is needed, postgres when audit trails and transactions are required.\n**TTL enforcement**: every session must have a TTL. 72 hours for development (allows weekend breaks without losing context). 24 hours for production (prevents orphan accumulation). TTL is checked on load \u2014 expired sessions are deleted before the new session begins.\n**Per-nucleus scoping**: key format `{nucleus}:{scope}:{session_id}`. This guarantees N03's sessions never collide with N01's sessions even when sharing the same backend. Global namespace is only valid when explicitly justified (e.g., cross-nucleus coordination state).\n**Compaction on load**: when a session is loaded, remove entries that have been superseded (e.g., old handoff data that was archived, stale signals that were processed). This keeps session files lean without requiring a separate maintenance process.\n**Never pickle**: pickle allows arbitrary code execution on deserialization. Use JSON (human-readable, schema-flexible) for development or msgpack (binary, fast) for production. Protobuf if typed schema enforcement is needed.\n## Anti-Pattern\n1. In-memory without persistence: state lost on restart \u2014 agents forget mid-conversation.\n2. Global namespace: concurrent nuclei overwrite each other's sessions.\n3. No TTL: session directory grows unbounded \u2014 storage exhaustion in weeks.\n4. Pickle serialization: remote code execution vulnerability (CVE-rich attack surface).\n5. Embedded credentials in connection_string: secrets committed to git, exposed in logs.\n\n## Builder Context\n\nThis ISO operates within the `session-backend-builder` stack, one of 125\nspecialized builders in the CEX architecture. Each builder has 13 ISOs\ncovering system prompt, instruction, output template, quality gate,\nexamples, schema, config, tools, memory, manifest, constraints,\nvalidation schema, and runtime rules.\n\nThe builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3\n(Compose), merges them with relevant memory from `cex_memory_select.py`,\nand produces artifacts that must pass the quality gate at F7 (Filter).\n\n| Component | Purpose |\n|-----------|---------|\n| System prompt | Identity and behavioral rules |\n| Instruction | Step-by-step procedure |\n| Output template | Structural scaffold |\n| Quality gate | Scoring rubric |\n| Examples | Few-shot references |\n\n## Checklist\n\n1. Created via 8F pipeline\n2. Scored by cex_score across three layers\n3. Compiled by cex_compile for validation\n4. Retrieved by cex_retriever for injection\n5. Evolved by cex_evolve when quality drops\n\n## Reference\n\n```yaml\nid: p10_lr_session_backend_builder\npipeline: 8F\nscoring: hybrid_3_layer\ntarget: 9.0\n```\n\n```bash\npython _tools/cex_score.py --apply --verbose p10_lr_session_backend_builder.md\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | learning_record |\n| Pillar | P10 |\n| Pipeline | 8F \u2192 cex_score.py \u2192 cex_compile.py |\n| Target | 9.0+ density 0.85+ |",
+      "frontmatter": {
+        "id": "p10_lr_session_backend_builder",
+        "kind": "learning_record",
+        "pillar": "P10",
+        "version": "1.0.0",
+        "created": "2026-04-06",
+        "updated": "2026-04-06",
+        "author": "builder_agent",
+        "observation": "Session backends without TTL policies accumulate indefinitely \u2014 a 30-day dev run produced 2,400 orphan session files totaling 180MB before anyone noticed. In-memory backends (dict/defaultdict) lose all state on process restart, causing agents to 'forget' mid-conversation \u2014 this is not a valid session_backend. Pickle serialization enables arbitrary code execution on deserialization \u2014 a security vulnerability that has caused CVEs in production systems. Global namespaces without per-nucleus scoping cause session key collisions when multiple nuclei write to the same backend simultaneously, corrupting each other's state.",
+        "pattern": "Start with file/JSON backend (zero deps, human-readable, debuggable). Set TTL to 72h for dev, 24h for production. Use per-nucleus scoping with key prefix '{nucleus}:{scope}:{session_id}'. Never use pickle for serialization \u2014 use json (dev) or msgpack (prod). Define compaction on load to clean stale entries. Document upgrade path: file \u2192 sqlite (concurrent access) \u2192 redis (distributed) \u2192 postgres (audit trail).",
+        "evidence": "File-first approach reduced onboarding friction to zero \u2014 no Redis/Postgres setup needed for local dev. TTL enforcement at 72h kept session directory under 50MB across 6 months of active development. Per-nucleus scoping eliminated 100% of cross-contamination incidents (n=23 in multi-nucleus runs). JSON serialization caught 4 schema evolution bugs that would have been silent with binary formats. Upgrade from file to sqlite took 45 minutes when concurrent access was needed.",
+        "confidence": 0.82,
+        "outcome": "SUCCESS",
+        "domain": "session_backend",
+        "tags": [
+          "session-backend",
+          "persistence",
+          "state-management",
+          "file-first",
+          "ttl-policy",
+          "scoping",
+          "serialization-safety"
+        ],
+        "tldr": "File-first with JSON, TTL 72h dev / 24h prod, per-nucleus scoping, never pickle, compaction on load, clear upgrade path.",
+        "impact_score": 7.8,
+        "decay_rate": 0.03,
+        "agent_group": "edison",
+        "memory_scope": "project",
+        "observation_types": [
+          "user",
+          "feedback",
+          "project",
+          "reference"
+        ],
+        "quality": 9.2,
+        "title": "Memory Session Backend",
+        "density_score": 0.9
+      },
+      "source_file": "bld_memory_session_backend.md",
+      "bytes": 3737
+    },
+    "output_template_session_backend": {
+      "content": "# Output Template: session_backend\n```yaml\nid: p10_sb_{{backend_name}}\nkind: session_backend\npillar: P10\n\nversion: \"1.0.0\"\ncreated: \"{{YYYY-MM-DD}}\"\nupdated: \"{{YYYY-MM-DD}}\"\nauthor: \"{{who_produced}}\"\n\nbackend: {{file|sqlite|redis|postgres}}\npath: \"{{filesystem_path_if_file_or_sqlite}}\"\nconnection_string: \"{{env_var_reference_if_redis_or_postgres}}\"\nttl_hours: {{positive_number}}\n\nmax_sessions: {{positive_integer}}\nserialization: {{json|msgpack|protobuf}}\nencryption: {{none|basic|full}}\nscoping: {{per_nucleus|per_agent|global}}\n\nquality: null\ntags: [session_backend, {{tag_2}}, {{tag_3}}]\ntldr: \"{{dense_summary_max_160ch}}\"\ndescription: \"{{what_config_covers_max_200ch}}\"\n\ncompaction: {{true|false}}\nupgrade_path: \"{{current_backend}} -> {{next_backend}} (when {{trigger}})\"\n```\n## Backend Specification\n{{backend_type_description_and_rationale}}\n{{connection_details_or_path_description}}\n{{why_this_backend_fits_the_requirements}}\n## Session Lifecycle\n1. **Create**: {{when_and_how_sessions_are_created}}\n2. **Read**: {{how_sessions_are_loaded}}\n3. **TTL**: {{expiration_policy}}\n4. **Cleanup**: {{how_expired_sessions_are_removed}}\n5. **Compaction**: {{defragmentation_strategy}}\n6. **Max sessions**: {{eviction_policy_when_max_reached}}\n## Serialization\n{{format_choice_and_rationale}}\n1. Trade-off: {{size_vs_speed_vs_readability}}\n2. Schema evolution: {{how_old_sessions_remain_readable}}\n## Security\n1. Encryption: {{encryption_level_and_rationale}}\n2. Access: {{access_control_mechanism}}\n3. Credentials: {{env_var_references_only}}\n## Scoping\n1. Namespace: {{key_prefix_convention}}\n2. Isolation: {{how_cross_nucleus_contamination_is_prevented}}\n## Upgrade Path\n{{migration_steps_from_current_to_next_tier}}\n## References\n1. {{reference_1}}\n2. {{reference_2}}\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `output_template` |\n| Pillar | P05 |\n| Domain | session backend construction |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "kind": "output_template",
+        "id": "bld_output_template_session_backend",
+        "pillar": "P05",
+        "llm_function": "PRODUCE",
+        "purpose": "Template with {{vars}} that the LLM fills to produce a session_backend artifact",
+        "pattern": "every field here exists in SCHEMA.md \u2014 template derives, never invents",
+        "quality": 9.0,
+        "title": "Output Template Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_output_template_session_backend.md",
+      "bytes": 2090
+    },
+    "quality_gate_session_backend": {
+      "content": "# Gate: session_backend\n## Definition\n| Field     | Value |\n|-----------|-------|\n| metric    | Composite score from SOFT dimensions + all HARD gates pass |\n| threshold | >= 7.0 to publish; >= 9.5 golden |\n| operator  | AND (all HARD) + weighted_sum (SOFT) |\n| scope     | All artifacts where `kind: session_backend` |\n## HARD Gates\nAll must pass. Any single failure = REJECT regardless of SOFT score.\n| ID  | Check | Failure message |\n|-----|-------|----------------|\n| H01 | Frontmatter parses as valid YAML | \"Frontmatter YAML syntax error\" |\n| H02 | `id` matches `^p10_sb_[a-z][a-z0-9_]+$` | \"ID fails session_backend namespace regex\" |\n| H03 | `id` value equals filename stem | \"ID does not match filename\" |\n| H04 | `kind` equals literal `\"session_backend\"` | \"Kind is not 'session_backend'\" |\n| H05 | `quality` field is `null` | \"Quality must be null at authoring time\" |\n| H06 | All required fields present: id, kind, pillar, backend, ttl_hours, max_sessions, serialization, encryption, version, created, author, tags | \"Missing required field(s)\" |\n| H07 | `backend` is one of: file, sqlite, redis, postgres | \"Invalid backend type\" |\n| H08 | `path` present when backend is file or sqlite | \"File/sqlite backend requires path field\" |\n| H09 | `connection_string` references env var (not embedded credential) when backend is redis or postgres | \"Connection string must reference env var, never embed credentials\" |\n| H10 | `ttl_hours` is a positive number | \"TTL must be a positive number\" |\n## SOFT Scoring\nDimensions sum to 100%. Score each 0.0-10.0; multiply by weight.\n| Dimension | Weight | What to assess |\n|-----------|--------|----------------|\n| Backend rationale | 1.0 | Why this backend fits the scale and infrastructure requirements |\n| TTL policy justification | 1.0 | TTL hours explained relative to session length and storage constraints |\n| Serialization trade-offs | 1.0 | Format choice justified with performance/readability/schema trade-offs |\n| Encryption apownteness | 1.0 | Encryption level matches data sensitivity (PII = full, dev = none) |\n| Scoping strategy | 1.0 | Namespace isolation prevents cross-nucleus contamination |\n| Upgrade path clarity | 0.5 | Migration from current backend to next tier documented |\n| Compaction strategy | 0.5 | Session cleanup and defragmentation defined |\n| Concurrency handling | 1.0 | How concurrent read/write is handled (locks, WAL, atomic ops) |\n| Credential safety | 1.0 | All connection details reference env vars, no embedded secrets |\n| Max sessions rationale | 0.5 | max_sessions justified with resource calculation or capacity plan |\n| Boundary clarity | 0.5 | Explicitly not compression_config, memory config, or cache |\n| Documentation | 0.5 | tldr names the backend type and key limits (TTL, max_sessions) |\nWeight sum: 1.0+1.0+1.0+1.0+1.0+0.5+0.5+1.0+1.0+0.5+0.5+0.5 = 10.0 (100%)\n## Actions\n| Score | Tier | Action |\n|-------|------|--------|\n| >= 9.5 | GOLDEN | Publish to pool as golden exemplar |\n| >= 8.0 | PUBLISH | Publish to pool |\n| >= 7.0 | REVIEW | Flag for human review before publish |\n| < 7.0  | REJECT | Return to author with failure report |\n## Bypass\n| Field | Value |\n|-------|-------|\n| conditions | Prototype or spike where backend selection is exploratory and TTL is not yet calibrated |\n| approver | Infra lead approval required (written); credential safety never bypassed |",
+      "frontmatter": {
+        "id": "p11_qg_session_backend",
+        "kind": "quality_gate",
+        "pillar": "P11",
+        "title": "Gate: session_backend",
+        "version": "1.0.0",
+        "created": "2026-04-06",
+        "updated": "2026-04-06",
+        "author": "builder_agent",
+        "domain": "session_backend \u2014 session state persistence specifications with backend type, TTL, serialization, and encryption",
+        "quality": 9.0,
+        "tags": [
+          "quality-gate",
+          "session-backend",
+          "persistence",
+          "state",
+          "P11"
+        ],
+        "tldr": "Gates for session_backend artifacts: validates backend type, TTL, serialization, encryption, scoping, and credential safety.",
+        "density_score": 0.91
+      },
+      "source_file": "bld_quality_gate_session_backend.md",
+      "bytes": 3378
+    },
+    "schema_session_backend": {
+      "content": "# Schema: session_backend\n## Frontmatter Fields\n| Field | Type | Required | Default | Notes |\n|-------|------|----------|---------|-------|\n| id | string (p10_sb_{backend}) | YES | - | Namespace compliance |\n| kind | literal \"session_backend\" | YES | - | Type integrity |\n| pillar | literal \"P10\" | YES | - | Pillar assignment |\n| version | semver string | YES | \"1.0.0\" | Artifact versioning |\n| created | date YYYY-MM-DD | YES | - | Creation date |\n| updated | date YYYY-MM-DD | YES | - | Last update |\n| author | string | YES | - | Producer identity |\n| backend | enum: file, sqlite, redis, postgres | YES | - | Storage engine type |\n| path | string | COND | - | Required for file/sqlite; filesystem path |\n| connection_string | string | COND | - | Required for redis/postgres; env var reference |\n| ttl_hours | number > 0 | YES | - | Session expiration in hours |\n| max_sessions | integer > 0 | YES | - | Max concurrent sessions per scope |\n| serialization | enum: json, msgpack, protobuf | YES | - | Data format |\n| encryption | enum: none, basic, full | YES | - | At-rest encryption level |\n| quality | null | YES | null | Never self-score |\n| tags | list[string], len >= 3 | YES | - | Must include \"session_backend\" |\n| tldr | string <= 160ch | YES | - | Dense summary |\n| scoping | enum: per_nucleus, per_agent, global | REC | per_nucleus | Namespace strategy |\n| description | string <= 200ch | REC | - | What this config covers |\n| compaction | boolean | REC | false | Compact on load |\n| upgrade_path | string | REC | - | Next backend tier |\n## ID Pattern\nRegex: `^p10_sb_[a-z][a-z0-9_]+$`\nRule: id MUST equal filename stem.\n## Body Structure (required sections)\n1. `## Backend Specification` \u2014 engine type, connection, rationale\n2. `## Session Lifecycle` \u2014 creation, TTL, expiration, cleanup, compaction\n3. `## Serialization` \u2014 format, trade-offs, schema evolution\n4. `## Security` \u2014 encryption, access control, credential references\n## Constraints\n- max_bytes: 4096 (body only)\n- naming: p10_sb_{backend}.yaml\n- machine_format: yaml (compiled artifact)\n- id == filename stem\n- backend MUST be one of: file, sqlite, redis, postgres\n- path required when backend is file or sqlite\n- connection_string required when backend is redis or postgres\n- connection_string MUST reference env var, never embed actual credentials\n- quality: null always",
+      "frontmatter": {
+        "kind": "schema",
+        "id": "bld_schema_session_backend",
+        "pillar": "P06",
+        "llm_function": "CONSTRAIN",
+        "purpose": "Formal schema \u2014 SINGLE SOURCE OF TRUTH for session_backend",
+        "pattern": "TEMPLATE derives from this. CONFIG restricts this.",
+        "quality": 9.1,
+        "title": "Schema Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_schema_session_backend.md",
+      "bytes": 2359
+    },
+    "system_prompt_session_backend": {
+      "content": "## Identity\nYou are **session-backend-builder**, a specialized session persistence agent focused on producing session_backend artifacts that fully specify where and how an LLM agent stores its session state \u2014 including backend type, connection parameters, TTL policy, serialization format, encryption, and nucleus scoping.\nYou answer one question: where and how should this agent persist its session state between turns? Your output is a complete backend specification \u2014 not a compression strategy, not a long-term memory policy, not a cache config. A specification of which storage engine to use, how to connect, when sessions expire, and how data is serialized.\nYou apply the file-first principle: start with the simplest backend (file/JSON) and define clear upgrade paths to sqlite, redis, and postgres as scale demands grow. Each upgrade adds capabilities (concurrent access, TTL enforcement, distributed sessions) but also complexity (connection pools, migrations, monitoring).\nYou understand the P10 boundary: a session_backend specifies WHERE state is persisted. It is not a compression_config (P10 \u2014 HOW to reduce context), not a memory config (P10 \u2014 WHAT to remember long-term), not a cache config (ephemeral key-value), and not an env_config (P09 \u2014 environment variables).\n## Rules\n### Scope\n1. ALWAYS produce session_backend artifacts only \u2014 redirect compression_config, memory, cache, and env_config requests to the correct builder by name.\n2. ALWAYS declare `backend` (file | sqlite | redis | postgres) as the primary storage engine; do not leave backend unspecified.\n3. NEVER use in-memory without a persistence fallback \u2014 pure in-memory backends lose state on restart and are not valid session_backends.\n### Backend Specification Completeness\n4. ALWAYS specify for every session_backend: backend, path or connection_string, ttl_hours, max_sessions, serialization, encryption \u2014 all 6 core fields required.\n5. ALWAYS document `serialization` format (json | msgpack | protobuf) with trade-off rationale.\n6. ALWAYS specify `ttl_hours` for session expiration \u2014 sessions without TTL accumulate indefinitely and exhaust storage.\n7. ALWAYS include `max_sessions` to cap concurrent sessions per scope \u2014 unbounded sessions cause resource exhaustion.\n8. NEVER embed actual connection credentials in the artifact \u2014 reference environment variable names only.\n### Session Scoping\n9. ALWAYS define session scope: per-nucleus (each nucleus has its own session namespace), per-agent (shared across nuclei), or global.\n10. ALWAYS document namespace collision prevention \u2014 how session keys are prefixed or partitioned to avoid cross-nucleus contamination.\n11. NEVER use a global namespace without explicit justification \u2014 default to per-nucleus scoping.\n### Quality\n12. ALWAYS set `quality: null` in output frontmatter \u2014 never self-assign a score.\n13. ALWAYS validate id against `^p10_sb_[a-z][a-z0-9_]+$` before emitting; if any HARD gate fails, list failures before the artifact.\n## Output Format",
+      "frontmatter": {
+        "id": "p03_sp_session_backend_builder",
+        "kind": "system_prompt",
+        "pillar": "P03",
+        "version": "1.0.0",
+        "created": "2026-04-06",
+        "updated": "2026-04-06",
+        "author": "system-prompt-builder",
+        "title": "Session Backend Builder System Prompt",
+        "target_agent": "session-backend-builder",
+        "persona": "Session persistence specialist who designs state storage backends for LLM agents with upgrade paths, TTL policies, and nucleus-scoped isolation",
+        "rules_count": 13,
+        "tone": "technical",
+        "knowledge_boundary": "session state persistence backends (file/sqlite/redis/postgres), connection management, TTL policies, serialization formats, encryption at rest, session scoping, upgrade paths | NOT compression_config token reduction, memory long-term storage, cache ephemeral, env_config environment variables",
+        "domain": "session_backend",
+        "quality": 9.0,
+        "tags": [
+          "system_prompt",
+          "session_backend",
+          "persistence",
+          "state",
+          "P10"
+        ],
+        "safety_level": "standard",
+        "tools_listed": false,
+        "output_format_type": "markdown",
+        "tldr": "Produces session_backend artifacts: state persistence specs with backend type, connection, TTL, serialization, encryption, and scoping.",
+        "density_score": 0.86
+      },
+      "source_file": "bld_system_prompt_session_backend.md",
+      "bytes": 3022
+    },
+    "tools_session_backend": {
+      "content": "# Tools: session-backend-builder\n## Production Tools\n| Tool | Purpose | When | Status |\n|------|---------|------|--------|\n| brain_query [MCP] | Search existing session_backend artifacts in pool | Phase 1 (check duplicates) | CONDITIONAL |\n| cex_memory_update.py | Read/write session state \u2014 validates backend compatibility | Phase 1 (understand interface) | AVAILABLE |\n| cex_coordinator.py | Cross-nucleus session handoffs \u2014 validates scoping strategy | Phase 1 (understand coordination) | AVAILABLE |\n| validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |\n| cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |\n## Data Sources\n| Source | Path/URL | Data |\n|--------|----------|------|\n| CEX Schema | P10_memory/_schema.yaml | Field definitions, session_backend kind |\n| CEX Examples | P10_memory/examples/ | Real session_backend artifacts |\n| SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P10_session_backend |\n| TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, memory layer |\n| Runtime dir | .cex/runtime/ | Default file backend location |\n| SDK stores | cex_sdk/memory/stores.py | Storage interface implementation |\n| Memory update | _tools/cex_memory_update.py | Session state read/write interface |\n| Coordinator | _tools/cex_coordinator.py | Cross-nucleus coordination patterns |\n## Tool Permissions\n\n| Category | Tools | Status |\n|----------|-------|--------|\n| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |\n| DENIED | (none) | Explicitly blocked |\n| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |\n\n## Interim Validation\nNo automated validator exists yet. Manually check each QUALITY_GATES.md gate against\nthe produced artifact. Key checks: YAML parses, id pattern, backend enum valid,\npath/connection_string present for correct backend type, ttl_hours positive,\nno embedded credentials, body <= 4096 bytes, quality == null.",
+      "frontmatter": {
+        "kind": "tools",
+        "id": "bld_tools_session_backend",
+        "pillar": "P04",
+        "llm_function": "CALL",
+        "purpose": "Tools and APIs available for session_backend production",
+        "quality": 9.0,
+        "title": "Tools Session Backend",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "session_backend",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for session backend construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "session backend construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_tools_session_backend.md",
+      "bytes": 1952
+    },
+    "shared_skill_guided_decisions": {
+      "content": "# Skill: Guided Decision Protocol (GDP)\n\n## The Principle\n\n> **When the LLM decides, the output is generic.**\n> **When the USER decides, the output is theirs.**\n>\n> Every assumption you avoid is a revision the user won't need.\n\nThe GDP is as mandatory as the 8F pipeline.\n8F controls HOW artifacts are built.\nGDP controls WHO decides WHAT goes in them.\n\n---\n\n## When to Trigger a Decision Point\n\nA **Decision Point (DP)** activates when:\n\n1. **Multiple valid paths exist** \u2014 archetype A vs B, layout X vs Y, tone formal vs casual\n2. **Subjective preference matters** \u2014 colors, names, voice, positioning, pricing\n3. **Trade-offs are real** \u2014 speed vs quality, cost vs features, niche vs broad\n4. **The output will be hard to undo** \u2014 brand identity, architecture, deployment target\n5. **The user has context you don't** \u2014 their market, their competitors, their gut feeling\n\nA DP does NOT activate for:\n- Mechanical/deterministic steps (compile, validate, format)\n- Technical correctness (schema compliance, syntax)\n- CEX internal operations (8F pipeline, signaling, indexing)\n\n---\n\n## The DP Format\n\nEvery Decision Point follows this exact structure:\n\n```\n\u2501\u2501\u2501 DP {N}/{TOTAL}: {TOPIC} \u2501\u2501\u2501\n\n{1-2 sentence context explaining WHY this matters}\n\n  1. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  2. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  3. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  \u2605 Recommended: {N} ({reason from context/signals})\n\n  [Type number, combine like \"1+3\", or describe your own]: \u258c\n```\n\n### Rules for Options\n\n| Rule | Detail |\n|------|--------|\n| **3-5 options max** | More than 5 overwhelms. Less than 2 isn't a choice. |\n| **Always have a \u2605 Recommended** | The user can always just hit Enter. Never leave them stuck. |\n| **Recommendation has a reason** | Not \"I think\" \u2014 cite a signal: \"based on your 'educational' description\" |\n| **\"Describe your own\" is always valid** | Options are suggestions, not walls. Freetext is always accepted. |\n| **Emoji per option** | Visual scanning. One emoji per option, consistent within a DP. |\n| **\"Best if\" clause** | Helps the user self-select without jargon. |\n| **Numbering is stable** | Once presented, option 2 is always option 2. Don't renumber. |\n\n---\n\n## DP Density by Domain\n\nNot every interaction needs the same amount of DPs.\n\n| Domain | DP Density | Why |\n|--------|-----------|-----|\n| **Brand Identity** (N06) | HIGH (8-12 DPs) | Every choice is subjective and permanent |\n| **Content/Copy** (N02) | MEDIUM (4-6 DPs) | Tone, layout, CTA style matter |\n| **Research** (N01) | LOW-MEDIUM (2-4 DPs) | Scope, depth, focus area |\n| **Knowledge** (N04) | LOW (1-3 DPs) | Structure, detail level |\n| **Operations** (N05) | LOW (1-3 DPs) | Platform, scaling, cost trade-offs |\n| **Build** (N03) | MINIMAL (0-2 DPs) | Mostly mechanical, schema-driven |\n| **Orchestration** (N07) | MEDIUM (3-5 DPs) | Priority, sequencing, resource allocation |\n\n---\n\n## DP Chaining\n\nDPs can depend on each other. Later DPs adapt based on earlier choices.\n\n```\nDP 1: Archetype \u2192 User picks \"Sage\"\nDP 2: Voice Tone \u2192 Options CHANGE because Sage implies authority+warmth\nDP 3: Color Palette \u2192 Options CHANGE because Sage palette is different from Rebel\n```\n\nWhen a previous DP narrows the space, say so:\n\n```\n\u2501\u2501\u2501 DP 3/8: Color Palette \u2501\u2501\u2501\n\nBased on your Sage archetype, these palettes work best:\n\n  1. \ud83d\udd35 Deep Trust \u2014 navy #1B365D + gold #C5A55A + cream #FAF3E0\n     \u2192 Best if: you want gravitas and authority\n\n  2. \ud83d\udfe2 Growth Wisdom \u2014 forest #2D5016 + sage #B2BEB5 + white #FAFAFA\n     \u2192 Best if: you want natural, approachable wisdom\n\n  3. \ud83d\udfe3 Modern Scholar \u2014 indigo #4B0082 + silver #C0C0C0 + white #FFFFFF\n     \u2192 Best if: you want contemporary, tech-forward wisdom\n\n  \u2605 Recommended: 1 (Deep Trust) \u2014 matches your \"professor but accessible\" description\n\n  [Type number, adjust colors, or describe your vibe]: \u258c\n```\n\n---\n\n## Handling User Responses\n\n| Response | Action |\n|----------|--------|\n| `2` | Select option 2. Confirm briefly: \"Got it \u2014 Going with Growth Wisdom \ud83d\udfe2\" |\n| `1+3` | Combine elements. \"Mixing Deep Trust base with Modern Scholar accents \u2014 nice.\" |\n| `the first one but more green` | Adapt option 1 with modification. Show the modified version. |\n| Free text: `\"I want something techy and dark\"` | Map to closest option or create costm. \"Sounds like a Dark Mode Scholar vibe. Let me propose...\" |\n| `?` or confused | Explain the trade-offs in simpler language. No jargon. |\n| Empty / Enter / \"whatever\" / \"you choose\" | Apply \u2605 Recommended. \"Going with the recommended option: Deep Trust \ud83d\udd35\" |\n| `skip` | Apply \u2605 Recommended and note it can be changed later. |\n\n---\n\n## DP Timing in Workflows\n\nDPs are NOT dumped all at once. They are **interleaved with progress**.\n\n```\nBAD:  \"Here are 12 questions. Answer all.\"\nGOOD: \"Let me ask you a few things as we go.\"\n```\n\nPattern:\n1. Ask DP 1-2 (identity basics)\n2. **Show progress**: \"Great. I already know enough to suggest...\"\n3. Ask DP 3-4 (personality, voice)\n4. **Show preview**: \"Here's what your brand is looking like so far...\"\n5. Ask DP 5-6 (audience, positioning)\n6. **Show preview**: \"Almost there. Your brand summary so far...\"\n7. Ask DP 7-8 (visual, monetization)\n8. **Final confirmation**: \"Here's the complete picture. Change anything?\"\n\n---\n\n## Preview After Every 2-3 DPs\n\nAfter every 2-3 decisions, show a running summary:\n\n```\n\u2501\u2501\u2501 Your Brand So Far \u2501\u2501\u2501\n  Name:       Acme Academy\n  Archetype:  \ud83e\uddd9 Sage\n  Voice:      Authoritative but warm (4,3,2,4,4)\n  Colors:     Deep Trust palette (#1B365D, #C5A55A, #FAF3E0)\n  Audience:   Career-switchers who want to become devs\n  \u2501\u2501\u2501 {5/8 decisions made} \u2501\u2501\u2501\n```\n\nThis gives the user confidence that their choices are being heard,\nand a chance to go back: \"Actually, can I change the colors?\"\n\n---\n\n## The Final Confirmation DP\n\nEvery GDP sequence ends with a FULL REVIEW:\n\n```\n\u2501\u2501\u2501 Final Review \u2501\u2501\u2501\n\nHere's everything we've decided together:\n\n  Brand:         Acme Academy\n  Tagline:       \"Code your future\"\n  Archetype:     \ud83e\uddd9 Sage\n  Voice:         Authoritative, warm, low humor, high trust\n  Colors:        #1B365D, #C5A55A, #FAF3E0\n  Font:          Inter (headers) + Source Serif (body)\n  Audience:      Career-switchers, 25-40, frustrated with current job\n  Transformation: From \"stuck in a dead-end job\" to \"confident junior dev\"\n  Category:      Online Education / Tech\n  Pricing:       Subscription (R$ 47/mo basic, R$ 97/mo pro)\n\n  \u2705 Confirm all \u2192 I'll generate brand_config.yaml\n  \u270f\ufe0f Change something \u2192 tell me which item\n  \ud83d\udd04 Start over \u2192 we'll redo the whole flow\n\n  [Confirm, change, or start over]: \u258c\n```\n\n---\n\n## Anti-Patterns (BLOCKED)\n\n| Anti-Pattern | Why It's Bad | Do This Instead |\n|-------------|-------------|-----------------|\n| \"I'll assume a Sage archetype\" | User might be a Rebel. You just poisoned the brand. | Present 3-4 options with \u2605 recommendation |\n| Dumping 10 questions at once | Overwhelming. User gives shallow answers. | 2-3 at a time, preview between rounds |\n| \"Which of these 12 archetypes...\" | Too many choices = paralysis | Pre-filter to 3-4 based on signals |\n| No recommendation on any DP | User with no branding knowledge is stuck | ALWAYS have \u2605 Recommended with reason |\n| Skipping final review | User can't see the full picture | ALWAYS show complete summary before executing |\n| Assuming after 1 vague answer | \"Casual\" doesn't mean Jester. | Probe: \"Casual like a friend or casual like a comedian?\" |\n| Using branding jargon | \"5D voice calibration\" means nothing to a bakery owner | \"How should your brand sound?\" |\n\n---\n\n## Part 2: The Autonomy Side\n\nGDP is half the picture. The other half is what happens AFTER decisions are made.\n\n### The Decision Manifest\n\nEvery GDP session produces a **Decision Manifest**:\n`.cex/runtime/decisions/decision_manifest.yaml`\n\nThis file contains:\n- Every DP answer (choice + reason + alternatives shown)\n- Brand config pointer (`.cex/brand/brand_config.yaml`)\n- Per-nucleus specific decisions\n- Constraints (language, currency, quality floor)\n- Flags for auto-filled decisions (user skipped \u2192 \u2605 Recommended applied)\n\n### The Two-Phase Pattern\n\n```\nPHASE 1 \u2014 Co-pilot (GDP active, user present)\n  N07 identifies mission\n  N07 identifies which decisions are subjective\n  N07 presents DPs to user (this skill)\n  N07 writes decision_manifest.yaml\n  N07 locks manifest (status: locked)\n\nPHASE 2 \u2014 Autonomous (GDP off, nuclei dispatched)\n  N07 dispatches via grid/solo\n  Handoff includes: \"Read .cex/runtime/decisions/decision_manifest.yaml\"\n  Each nucleus reads manifest ONCE at start\n  Each nucleus executes 8F with manifest context\n  ZERO questions to user\n  Commit \u2192 signal \u2192 done\n```\n\n### How Nuclei Read the Manifest\n\nAt the start of any dispatched task, a nucleus:\n\n1. Checks if manifest exists: `.cex/runtime/decisions/decision_manifest.yaml`\n2. If YES \u2192 reads it, extracts relevant decisions (global + per_nucleus.{self})\n3. If NO \u2192 falls back to brand_config.yaml only (minimal context)\n4. Uses decisions as CONSTRAINTS for 8F, not as suggestions\n\nA nucleus NEVER overrides a manifest decision.\nA nucleus NEVER re-asks a question the manifest already answered.\n\n### Edge Cases During Autonomous Execution\n\n| Situation | What the nucleus does |\n|-----------|----------------------|\n| Manifest covers the decision | Use it. No question. |\n| Manifest doesn't cover this specific case | Apply \u2605 Recommended. Add to `auto_filled` list. |\n| Decision seems wrong in context | Execute it anyway. Flag in output: \"\u26a0\ufe0f Manifest says X, but Y might be better \u2014 review recommended.\" |\n| Manifest is corrupt/missing | Fall back to brand_config.yaml. If that's also missing, use sensible defaults + flag everything. |\n\n### Why This Works\n\nThe plat\u00f4 between autonomy and collaboration:\n\n```\n100% User decides \u2190\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 GDP \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192 100% LLM decides\n         \u2191                    \u2191                       \u2191\n     Slow, tedious      THE SWEET SPOT          Generic, misaligned\n     but perfect        User decides WHAT        Fast but wrong\n                        LLM decides HOW\n```\n\n- **User decides WHAT**: brand name, tone, audience, positioning, colors, pricing model\n- **LLM decides HOW**: file structure, frontmatter, 8F pipeline, compilation, signaling\n- **Manifest is the contract**: locks the WHAT so the HOW can run free",
+      "frontmatter": {
+        "id": "skill_guided_decisions",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach all builders and nuclei to present structured decision points instead of assuming. The Co-pilot Protocol.",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "author": "n07_orchestrator",
+        "quality": 9.1,
+        "tags": [
+          "skill",
+          "shared",
+          "copilot",
+          "guided-decisions",
+          "UX",
+          "interaction"
+        ],
+        "tldr": "When a decision affects the output, STOP and present numbered options with recommendations. Never assume what the user wants. This is as mandatory as 8F.",
+        "density_score": 0.95
+      },
+      "source_file": "skill_guided_decisions.md",
+      "bytes": 10647
+    },
+    "shared_skill_memory_update": {
+      "content": "# Skill: Memory Update After Execution\n\n## When to Use\nAfter EVERY build session, before signaling complete.\n\n## What to Record\nOne structured observation per session. Focus on **reusable patterns**, not obvious facts.\n\n### Good Observations\n1. \"Splitting handler into validate+process+respond reduced errors 40%\"\n2. \"Builders with >3 tools need explicit tool-selection criteria\"\n3. \"ISO files >4KB overflow small model context \u2014 split into sections\"\n\n### Bad Observations (DO NOT record)\n1. \"The schema was followed\" (obvious)\n2. \"The file was saved\" (mechanical)\n3. \"Quality was high\" (vague)\n\n## How to Record\n\n```bash\npython _tools/cex_memory_update.py \\\n  --builder <your-builder-id> \\\n  --type feedback \\\n  --observation \"what you learned\" \\\n  --pattern \"generalizable rule\" \\\n  --evidence \"data that supports it\" \\\n  --confidence 0.8 \\\n  --outcome SUCCESS\n```\n\n## Observation Types\n| Type | Decay | When to Use |\n|------|-------|-------------|\n| user | 0.02/day | User preference or style |\n| feedback | 0.00 | Quality feedback (NEVER decays) |\n| project | 0.05/day | Project-specific context |\n| reference | 0.03/day | External knowledge or docs |\n\n## Rules\n1. ONE observation per session (quality > quantity)\n2. Confidence 0.0-1.0 (be honest, 0.6-0.8 is normal)\n3. Pattern must be ACTIONABLE (someone else can apply it)\n4. Evidence must be MEASURABLE when possible\n5. If nothing was learned, don't force an observation\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `instruction` |\n| Pillar |  |\n| Domain | CEX system |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "skill_memory_update",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach builders to reflect and record learnings after execution",
+        "quality": 9.0,
+        "title": "Skill Memory Update",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "artifact",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls.",
+        "domain": "CEX system",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "skill_memory_update.md",
+      "bytes": 1718
+    },
+    "shared_skill_verification_protocol": {
+      "content": "# Verification Protocol (Shared Skill)\n\nAfter producing an artifact (F6 PRODUCE), invoke this protocol before F7 GOVERN.\n\n## When to Verify\n1. 3+ sections modified in the artifact\n2. Artifact kind is core (system_prompt, skill, guardrail, agent, agent_card)\n3. Quality target >= 8.5\n4. Retry attempt (previous quality gate failure)\n\n## Verification Steps\n\n1. **Schema compliance**: Does the artifact match its kind's SCHEMA.md?\n   Check: every required frontmatter field present and correctly typed.\n\n2. **Boundary compliance**: Does the artifact stay within its kind's boundary?\n   Check: no system_prompt content in a skill, no task instructions in identity.\n\n3. **Naming compliance**: Does the ID match the naming convention from kinds_meta.json?\n   Check: `p{NN}_{prefix}_{slug}` format.\n\n4. **Cross-reference check**: Do all referenced artifacts/builders/kinds exist?\n   Check: grep for references, verify targets are real paths.\n\n5. **Adversarial probe**: Try to break the artifact:\n   - Feed it an edge-case input (empty, malformed, contradictory)\n   - Check if the rules are enforceable or aspirational\n   - Verify the output format is machine-parseable\n\n## Output\nFor each check: PASS with evidence or FAIL with Expected vs Actual.\nFinal: VERDICT: PASS | FAIL | PARTIAL\n\n## Artifact Metadata\n\n```yaml\nkind: skill\npillar: P04\npipeline: 8F\nscoring: hybrid_3_layer\ncompilation: cex_compile\n```\n\n## Artifact Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `skill` |\n| Pillar | P04 |\n| Domain | verification |\n| Pipeline | 8F (F1-F8) |\n| Scorer | `cex_score.py` |\n| Compiler | `cex_compile.py` |\n| Retriever | `cex_retriever.py` |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "shared_skill_verification_protocol",
+        "kind": "skill",
+        "pillar": "P04",
+        "version": "1.0.0",
+        "created": "2026-04-05",
+        "updated": "2026-04-05",
+        "author": "n07-orchestrator",
+        "title": "Shared Skill: Verification Protocol for All Builders",
+        "domain": "verification",
+        "quality": 9.1,
+        "tags": [
+          "shared",
+          "skill",
+          "verification",
+          "adversarial",
+          "all-builders"
+        ],
+        "source_insight": "OpenClaude verificationAgent.ts -- adapted as shared builder skill",
+        "tldr": "Every builder can invoke adversarial verification on its output before publishing",
+        "density_score": 0.86
+      },
+      "source_file": "skill_verification_protocol.md",
+      "bytes": 1702
+    }
+  },
+  "total_tokens": 12898,
+  "total_bytes": 51592
+}

@@ -74,7 +74,7 @@ my_artifacts: '| Subdir | Count | What''s There |
   | `tools/` | 3 | `social_publisher_marketing.md` + `copy_analyzer.md` + `headline_scorer.md` |
 
 
-  Total source files: 66 · Total compiled: 56 · Grand total: 122+ files
+  Total source files: 65 · Total compiled: 53 · Grand total: 118+ files
 
 
   ---'
@@ -318,11 +318,11 @@ agent_card_summary: '┌──────────────────�
 
   ├─────────────────────────────────────────────────┤
 
-  │  📄 Source artifacts:  66                        │
+  │  Source artifacts:    65                         │
 
-  │  📦 Compiled:          56                        │
+  │  Compiled:            53                         │
 
-  │  📚 Total files:      122+                       │
+  │  Total files:        118+                        │
 
   │  🔧 Kinds buildable:  18 (9 primary)            │
 

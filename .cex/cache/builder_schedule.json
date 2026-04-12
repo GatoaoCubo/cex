@@ -1,0 +1,503 @@
+{
+  "kind": "schedule",
+  "compiled_at": "2026-04-12T17:26:39.852473+00:00",
+  "source_hash": "37037c5bbc26b9e165e4df7e1e8b7610b5e65880fb4e26a9e2c8b10715bc493a",
+  "iso_count": 13,
+  "shared_count": 3,
+  "prompt_sections": {
+    "architecture": {
+      "content": "## Component Inventory\n| Name | Role | Owner | Status |\n|------|------|-------|--------|\n| trigger | Temporal firing mechanism \u2014 cron, interval, event, manual, one_shot | schedule | required |\n| cron_expression | POSIX 5- or 6-field time pattern defining recurrence | schedule | required |\n| timezone | IANA timezone resolving clock-relative trigger times | schedule | required |\n| workflow_ref | Reference to the workflow artifact this schedule starts | schedule | required |\n| enabled | Active/paused flag controlling whether trigger fires | schedule | required |\n| catch_up | Backfill policy for missed intervals on restart | schedule | required |\n| max_concurrent | Cap on parallel in-flight runs of the triggered workflow | schedule | required |\n| jitter | Random delay window to stagger simultaneous trigger fires | schedule | optional |\n| start_date | Earliest date the schedule is allowed to fire | schedule | optional |\n| end_date | Latest date the schedule is allowed to fire | schedule | optional |\n| workflow | Execution logic started by this schedule | P13 | consumer |\n| guardrail | Execution constraints applied to triggered workflow runs | P11 | external |\n| monitor | Observability layer tracking schedule fires and outcomes | P12 | external |\n## Dependency Graph\n```\ntimezone       --produces--> trigger\ncron_expression --produces--> trigger\nenabled        --produces--> trigger\nstart_date     --produces--> trigger\nend_date       --produces--> trigger\ntrigger        --produces--> workflow_ref\ncatch_up       --depends-->  trigger\nmax_concurrent --depends-->  workflow_ref\njitter         --depends-->  trigger\nguardrail      --depends-->  workflow_ref\nmonitor        --depends-->  trigger\n```\n| From | To | Type | Data |\n|------|----|------|------|\n| timezone | trigger | produces | resolved wall-clock fire time |\n| cron_expression | trigger | produces | recurrence pattern |\n| enabled | trigger | produces | whether to fire or skip |\n| trigger | workflow_ref | produces | workflow start event |\n| catch_up | trigger | depends | backfill policy on restart |\n| max_concurrent | workflow_ref | depends | concurrency cap on workflow execution |\n| jitter | trigger | depends | randomized start delay |\n| guardrail | workflow_ref | depends | timeout and resource constraints |\n| monitor | trigger | depends | fire/skip/fail event stream |\n## Boundary Table\n| schedule IS | schedule IS NOT |\n|-------------|----------------|\n| Temporal trigger \u2014 answers WHEN | Workflow \u2014 answers WHAT (steps, logic) |\n| Declares cron/interval/event firing rule | Dispatch rule \u2014 routes keywords to workflows |\n| Fires workflow_ref and exits | Hook \u2014 reacts to events as side effects |\n| Stateless trigger definition | Daemon \u2014 persistent background process |\n| One schedule per workflow cadence | Skill \u2014 reusable multi-phase capability |\n## Layer Map\n| Layer | Components | Purpose |\n|-------|-----------|---------|\n| time-resolution | cron_expression, timezone | Compute exact UTC fire instants |\n| gate | enabled, start_date, end_date | Control whether trigger fires in window |\n| dispatch | trigger, workflow_ref | Start target workflow execution |\n| policy | catch_up, max_concurrent, jitter | Govern concurrency, backfill, and load |\n| governance | guardrail, monitor | Constrain and observe triggered runs |",
+      "frontmatter": {
+        "kind": "architecture",
+        "id": "bld_architecture_schedule",
+        "pillar": "P08",
+        "llm_function": "CONSTRAIN",
+        "purpose": "Component map of schedule \u2014 inventory, dependencies, and architectural position",
+        "quality": 9.1,
+        "title": "Architecture Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_architecture_schedule.md",
+      "bytes": 3326
+    },
+    "collaboration": {
+      "content": "# Collaboration: schedule-builder\n## My Role in Crews\nI am a SPECIALIST. I answer ONE question: \"when does this workflow run, at what cadence, in what timezone, with what overlap and catch-up policy?\"\nI do not define what the workflow does. I do not route keywords to workflows. I do not react to events as side effects.\nI specify temporal triggers so orchestrators, agents, and runtime schedulers know exactly when to start a workflow.\n## Crew Compositions\n### Crew: \"Scheduled Workflow System\"\n```\n  1. workflow-builder    -> \"workflow definition (steps, logic, outputs)\"\n  2. schedule-builder    -> \"temporal trigger (when, timezone, policy)\"\n  3. guardrail-builder   -> \"execution constraints (timeout, retry, resource caps)\"\n```\n### Crew: \"Orchestration Layer\"\n```\n  1. schedule-builder    -> \"when to start (cron, interval, event)\"\n  2. dispatch_rule-builder -> \"which workflow handles a message (keyword routing)\"\n  3. monitor-builder     -> \"observe fires, skips, failures, durations\"\n```\n### Crew: \"Data Pipeline\"\n```\n  1. schedule-builder    -> \"daily/hourly trigger for ETL workflow\"\n  2. workflow-builder    -> \"ETL steps (extract, transform, load)\"\n  3. hook-builder        -> \"post-load side effects (notify, invalidate cache)\"\n```\n## Handoff Protocol\n### I Receive\n- seeds: workflow_ref id, desired cadence, business timezone, domain context\n- optional: catch_up requirement, concurrency constraints, infrastructure sharing context\n### I Produce\n- schedule artifact (.md with YAML frontmatter)\n- committed to: `cex/P12_orchestration/examples/p12_sched_{name}.md`\n### I Signal\n- signal: complete (with quality score from QUALITY_GATES)\n- if quality < 8.0: signal retry with specific gate failures listed\n## Builders I Depend On\n| Builder | Why |\n|---------|-----|\n| workflow-builder | workflow_ref must resolve to an existing workflow artifact |\n## Builders That Depend On Me\n| Builder | Why |\n|---------|-----|\n| guardrail-builder | Guardrails apply timeout and resource caps to schedule-triggered runs |\n| monitor-builder | Monitors subscribe to schedule fire events to track execution history |\n| hook-builder | Hooks may fire on schedule completion events as post-run side effects |\n| instruction-builder | Recipes reference schedules as the activation mechanism for workflows |\n## Boundary Enforcement\nWhen a request arrives that is NOT a schedule, redirect explicitly:\n| Request | Correct builder | Reason |\n|---------|----------------|--------|\n| \"route keyword X to workflow Y\" | dispatch_rule-builder | That is routing, not timing |\n| \"define steps for the report\" | workflow-builder | That is execution logic, not trigger |\n| \"fire when file arrives in S3\" | hook-builder | That is event reaction, not cron schedule |\n| \"run this once on deploy\" | hook-builder | One-time deploy event, not a schedule |\n| \"keep polling every 5s forever\" | daemon-builder | Persistent loop, not a schedule artifact |",
+      "frontmatter": {
+        "kind": "collaboration",
+        "id": "bld_collaboration_schedule",
+        "pillar": "P12",
+        "llm_function": "COLLABORATE",
+        "purpose": "How schedule-builder works in crews with other builders",
+        "pattern": "each builder must know its ROLE in a team, what it RECEIVES and PRODUCES",
+        "quality": 9.1,
+        "title": "Collaboration Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_collaboration_schedule.md",
+      "bytes": 2922
+    },
+    "config": {
+      "content": "# Config: schedule Production Rules\n## Naming Convention\n| Scope | Convention | Example |\n|-------|-----------|---------|\n| Artifact files | `p12_sched_{name}.md` | `p12_sched_daily_report.md` |\n| Builder directory | kebab-case | `schedule-builder/` |\n| Frontmatter fields | snake_case | `trigger_type`, `workflow_ref`, `catch_up` |\n| Schedule slug (id) | snake_case, lowercase, no hyphens | `daily_report`, `weekly_sync` |\n| Workflow ref | matches target workflow id exactly | `p13_wf_daily_report` |\n| Cron fields | standard 5-field POSIX or 6-field with seconds | `0 9 * * MON-FRI` |\nRule: id MUST equal filename stem. Hyphens in id = HARD FAIL.\nRule: id prefix MUST be `p12_sc_`. File prefix MUST be `p12_sched_`.\n## File Paths\n- Output: `cex/P12_orchestration/examples/p12_sched_{name}.md`\n- Compiled: `cex/P12_orchestration/compiled/p12_sched_{name}.yaml`\n## Size Limits (aligned with SCHEMA)\n- Body: max 1024 bytes\n- Total (frontmatter + body): ~2000 bytes\n- Density: >= 0.80 (no filler)\n## Trigger Type Enum\n| Value | When to use |\n|-------|-------------|\n| cron | Fixed time expression (daily, weekly, monthly) |\n| interval | Every N minutes/hours regardless of clock time |\n| event | External event fires the trigger (file arrival, API call) |\n| manual | Human or API call only \u2014 no automatic firing |\n| one_shot | Single future execution, then disabled |\n## Timezone Rules\n| Rule | Detail |\n|------|--------|\n| Always declare timezone | UTC assumption breaks DST transitions |\n| Use IANA tz database names | \"America/Sao_Paulo\" not \"BRT-3\" |\n| Business schedules | Use local timezone of the business unit |\n| Data pipeline schedules | UTC preferred to avoid DST ambiguity |\n## Concurrency Defaults\n| max_concurrent | Default when |\n|---------------|-------------|\n| 1 | All schedules (prevent resource exhaustion) |\n| > 1 | Only when workflow is stateless and idempotent |\n| null | FORBIDDEN \u2014 always declare an explicit integer |",
+      "frontmatter": {
+        "kind": "config",
+        "id": "bld_config_schedule",
+        "pillar": "P09",
+        "llm_function": "CONSTRAIN",
+        "purpose": "Naming conventions, file paths, size limits, operational constraints",
+        "pattern": "CONFIG restricts SCHEMA, never contradicts it",
+        "effort": "medium",
+        "max_turns": 25,
+        "disallowed_tools": [],
+        "fork_context": null,
+        "hooks": {
+          "pre_build": null,
+          "post_build": null,
+          "on_error": null,
+          "on_quality_fail": null
+        },
+        "permission_scope": "nucleus",
+        "quality": 9.0,
+        "title": "Config Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_config_schedule.md",
+      "bytes": 1945
+    },
+    "examples": {
+      "content": "# Examples: schedule-builder\n## Golden Example\nINPUT: \"Create a schedule that runs the daily sales report workflow every weekday at 9 AM Sao Paulo time\"\nOUTPUT:\n```yaml\nid: p12_sc_daily_sales_report\nkind: schedule\npillar: P12\nversion: \"1.0.0\"\ncreated: \"2026-03-29\"\nupdated: \"2026-03-29\"\nauthor: \"builder_agent\"\nname: \"Daily Sales Report Schedule\"\ntrigger_type: cron\ncron: \"0 9 * * MON-FRI\"\nworkflow_ref: \"p13_wf_daily_sales_report\"\nquality: 8.9\ntags: [schedule, sales, daily-report, P12]\ntldr: \"Triggers daily-sales-report workflow at 9 AM Sao Paulo time, Mon-Fri. max_concurrent 1, catch_up false.\"\ntimezone: \"America/Sao_Paulo\"\nenabled: true\nstart_date: \"2026-04-01\"\nend_date: null\nmax_concurrent: 1\ncatch_up: false\njitter: \"0-60s\"\ndescription: \"Weekday morning trigger for sales report consolidation workflow. Fires after overnight ETL complete.\"\n```\n## Overview\nTriggers the daily sales report workflow each weekday morning in Sao Paulo business hours.\nDesigned to fire after overnight data pipeline complete (~8:30 AM) with 60s jitter buffer.\n## Trigger\n- Expression: `0 9 * * MON-FRI` \u2014 9:00 AM Monday through Friday\n- Timezone: America/Sao_Paulo (UTC-3, UTC-2 during summer time)\n- Enabled: true\n- Trigger type: cron\n## Workflow\n- Workflow: `p13_wf_daily_sales_report`\n- Expected duration: 8-12 minutes\n- Dependencies: overnight ETL must complete before 9 AM; upstream tables: orders, products, costmers\n## Policy\n- Catch-up: false \u2014 missed days are not backfilled; report is generated on next scheduled run\n- Max concurrent: 1 \u2014 workflow writes to shared reporting tables; parallel runs would corrupt output\n- Jitter: 0-60s \u2014 staggers start against other 9 AM schedules sharing the same DB cluster\n- On failure: alert \u2014 notify #data-alerts Slack channel; do not auto-retry (data consistency risk)\n\nWHY THIS IS GOLDEN:\n- quality: null (H05 pass)\n- id matches `^p12_sc_[a-z][a-z0-9_]+$` (H02 pass)\n- kind: schedule (H04 pass)\n- cron: valid 5-field expression (H07 pass)\n- trigger_type: cron (recognized enum, H08 pass)\n- workflow_ref non-empty (H09 pass)\n- body has all 4 sections: Overview, Trigger, Workflow, Policy (H10 pass)\n- timezone: explicit IANA name (SOFT pass)\n- catch_up declared with rationale (SOFT pass)\n- max_concurrent declared with rationale (SOFT pass)\n- jitter declared with thundering-herd rationale (SOFT pass)\n- on-failure declared in Policy (SOFT pass)\n- cron annotated in plain English (SOFT pass)\n\n## Anti-Example\nINPUT: \"Create a schedule for the report workflow\"\nBAD OUTPUT:\n```yaml\nid: report-schedule\nkind: trigger\npillar: orchestration\ncron: every day at 9\nworkflow_ref: report\nquality: 8.5\ntags: [schedule]\n```\nRuns the report every day.\nFAILURES:\n1. id: \"report-schedule\" has hyphens and no `p12_sc_` prefix -> H02 FAIL\n2. kind: \"trigger\" not \"schedule\" -> H04 FAIL\n3. pillar: \"orchestration\" not \"P12\" -> H06 FAIL\n4. cron: \"every day at 9\" is not a valid cron expression -> H07 FAIL\n5. quality: 8.5 (not null) -> H05 FAIL\n6. Missing fields: trigger_type, version, created, updated, author, tldr -> H06 FAIL\n7. tags: only 1 item, missing \"schedule\" (needs >= 3) -> SOFT FAIL\n8. No timezone declared \u2014 DST will shift schedule silently -> SOFT FAIL\n9. No Policy section \u2014 catch_up, max_concurrent, jitter all absent -> SOFT FAIL\n10. workflow_ref: \"report\" is not a resolvable id -> SOFT FAIL\n11. Body missing ## Trigger, ## Workflow, ## Policy sections -> H10 FAIL",
+      "frontmatter": {
+        "kind": "examples",
+        "id": "bld_examples_schedule",
+        "pillar": "P07",
+        "llm_function": "GOVERN",
+        "purpose": "Golden and anti-examples of schedule artifacts",
+        "pattern": "few-shot learning \u2014 LLM reads these before producing",
+        "quality": 9.1,
+        "title": "Examples Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_examples_schedule.md",
+      "bytes": 3415
+    },
+    "instruction": {
+      "content": "# Instructions: How to Produce a schedule\n## Phase 1: RESEARCH\n1. Identify the workflow to trigger \u2014 confirm workflow_ref id exists in the cex corpus\n2. Determine trigger_type: cron (fixed clock), interval (every N), event, manual, or one_shot\n3. Write the cron expression; annotate it in plain English immediately\n4. Confirm the IANA timezone relevant to the business domain (never assume UTC)\n5. Decide catch_up: will missed runs need backfill on restart? Default false unless justified\n6. Determine max_concurrent: is the workflow idempotent? If not, cap at 1\n7. Assess jitter need: does this schedule share infrastructure with other schedules?\n8. Define on-failure behavior: retry, alert, or skip \u2014 with rationale\n9. Check for existing schedule artifacts to avoid duplicate scheduling of same workflow\n10. Confirm schedule slug for id: snake_case, lowercase, no hyphens\n## Phase 2: COMPOSE\n1. Read SCHEMA.md \u2014 source of truth for all fields\n2. Read OUTPUT_TEMPLATE.md \u2014 fill {{vars}} following SCHEMA constraints\n3. Fill frontmatter: all required fields (quality: null \u2014 never self-score)\n4. Write ## Overview: what triggers, how often, why it exists\n5. Write ## Trigger: cron expression + plain-English explanation + timezone + enabled status\n6. Write ## Workflow: workflow_ref, expected duration, upstream dependencies\n7. Write ## Policy: catch_up, max_concurrent, jitter, on-failure \u2014 each with rationale\n8. Verify body <= 1024 bytes\n9. Verify id matches `^p12_sc_[a-z][a-z0-9_]+$`\n10. Verify file is named `p12_sched_{slug}.md`\n## Phase 3: VALIDATE\n1. Check QUALITY_GATES.md \u2014 verify each HARD gate manually\n2. Confirm YAML frontmatter parses without errors\n3. Confirm id matches `^p12_sc_` prefix and equals filename stem\n4. Confirm kind == schedule\n5. Confirm cron is a valid 5-field or 6-field expression\n6. Confirm workflow_ref is non-empty and references a known workflow\n7. Confirm trigger_type is one of: cron, interval, event, manual, one_shot\n8. SOFT gates: score against QUALITY_GATES.md\n9. Cross-check: does the body contain ONLY timing/policy logic (no workflow steps)?\n10. Revise if score < 8.0 before outputting\n\n## ISO Loading\n\n```yaml\nloader: cex_skill_loader\ninjection_point: F3_compose\npriority: high\n```\n\n```bash\npython _tools/cex_skill_loader.py --verify schedule\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `instruction` |\n| Pillar | P03 |\n| Domain | schedule construction |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "kind": "instruction",
+        "id": "bld_instruction_schedule",
+        "pillar": "P03",
+        "llm_function": "REASON",
+        "purpose": "Step-by-step production process for schedule",
+        "pattern": "3-phase pipeline (research -> compose -> validate)",
+        "quality": 9.1,
+        "title": "Instruction Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_instruction_schedule.md",
+      "bytes": 2612
+    },
+    "knowledge_card": {
+      "content": "# Domain Knowledge: schedule\n## Executive Summary\nSchedules are temporal trigger definitions that determine WHEN a workflow starts. They are not the workflow itself (what runs), not a routing rule (which workflow handles a message), and not a hook (event-driven side effect). A schedule fires at a declared time, passes control to workflow_ref, and exits. All execution logic lives in the workflow.\n## Spec Table\n| Property | Value |\n|----------|-------|\n| Pillar | P12 (Orchestration) |\n| llm_function | GOVERN (controls timing of workflow execution) |\n| layer | runtime |\n| core | false |\n| machine_format | yaml |\n| naming | p12_sched_{name}.md |\n| max_bytes | 1024 |\n| id_prefix | p12_sc |\n## Trigger Types\n| Type | Mechanism | When to use |\n|------|-----------|-------------|\n| cron | POSIX 5-field or 6-field expression | Fixed-clock recurrence (daily, weekly) |\n| interval | Every N time units from last run | Polling, heartbeat, rate-based |\n| event | External signal fires trigger | File arrival, webhook, queue message |\n| manual | No automatic firing | On-demand by human or API call |\n| one_shot | Single future execution, then disabled | Migration, one-time batch |\n## Cron Expression Reference\n| Expression | Meaning |\n|-----------|---------|\n| `0 9 * * MON-FRI` | 9:00 AM weekdays |\n| `0 0 * * *` | Midnight daily |\n| `0 */6 * * *` | Every 6 hours |\n| `0 9 1 * *` | 9:00 AM first of each month |\n| `*/15 * * * *` | Every 15 minutes |\n## Patterns\n- **Timezone-first**: always declare IANA timezone; UTC is a valid choice but must be explicit\n- **Catch-up semantics**: Airflow `catchup=True` backfills all missed intervals on restart \u2014 dangerous for large gaps; default false\n- **Dagster partition-aware**: ScheduleDefinition maps cron ticks to partition keys; schedule = WHEN, partition = WHAT DATA\n- **Temporal durable timer**: schedule creates durable workflow starts; overlap_policy controls concurrent runs\n- **Jitter pattern**: add random 0-Ns delay to stagger concurrent schedule starts across instances\n| Pattern | Example | When to use |\n|---------|---------|-------------|\n| Fixed clock | `0 9 * * MON-FRI` | Business-hours report generation |\n| Interval | every 5m | Polling, health-check workflows |\n| Event-driven | on file arrival | ETL pipelines triggered by upstream data |\n| One-shot | 2026-04-01 00:00 UTC | Migration, launch-day batch |\n## Anti-Patterns\n| Anti-Pattern | Why it fails |\n|-------------|-------------|\n| No timezone declared | DST transitions shift schedule by 1h silently |\n| catch_up: true on daily schedules | Restart after 30-day outage fires 30 runs simultaneously |\n| max_concurrent omitted | Slow workflow + fast schedule = unbounded parallelism |\n| No jitter on shared infra | All shards hit DB at same second \u2014 thundering herd |\n| Workflow logic in schedule | Coupling WHEN and WHAT makes both unmaintainable |\n| Cron without explanation | `0 0 */2 * *` is ambiguous \u2014 always annotate |\n## Application\n1. Identify cadence: fixed-clock, interval, event, or one-shot?\n2. Write cron expression, then annotate in plain English\n3. Declare IANA timezone explicit \u2014 never rely on server default\n4. Set catch_up: false unless backfill is explicitly required\n5. Set max_concurrent: 1 unless workflow is proven idempotent and stateless\n6. Add jitter if multiple schedule instances share infrastructure\n7. Declare on-failure behavior: retry, alert, or skip\n## References\n- Airflow: `schedule_interval`, `catchup`, `max_active_runs`, `timetable`\n- Dagster: `ScheduleDefinition`, `@schedule`, `cron_schedule`, `execution_timezone`\n- Temporal: `ScheduleSpec`, `SchedulePolicy`, `overlap_policy`, `jitter`\n- crontab.guru: interactive cron expression validator",
+      "frontmatter": {
+        "kind": "knowledge_card",
+        "id": "bld_knowledge_card_schedule",
+        "pillar": "P01",
+        "llm_function": "INJECT",
+        "purpose": "Domain knowledge for schedule production \u2014 temporal workflow trigger specification",
+        "sources": "Airflow timetables, Dagster ScheduleDefinition, Temporal schedule, POSIX cron",
+        "quality": 9.1,
+        "title": "Knowledge Card Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_knowledge_card_schedule.md",
+      "bytes": 3707
+    },
+    "manifest": {
+      "content": "# schedule-builder\n## Identity\nSpecialist in building schedule artifacts \u2014 definitions de gatilhos temporais que\niniciam workflows em momentos determinados. Masters cron expressions, timezone handling,\noverlap policies, catch-up semantics, and the boundary between schedule (WHEN to run),\ndispatch_rule (keyword routing), and workflow (o that rodar). Produces schedule artifacts\ncom frontmatter complete, trigger declared, workflow_ref resolvido, and policy defined.\n## Capabilities\n1. Define schedule with trigger_type (cron, interval, event, manual, one_shot)\n2. Specify cron expression with timezone correct\n3. Declare workflow_ref apontando for workflow existente\n4. Configure catch_up, max_concurrent, jitter, enabled\n5. Validate artifact against quality gates (HARD + SOFT)\n6. Distinguish schedule de dispatch_rule, workflow, hook, daemon\n## Routing\nkeywords: [schedule, cron, trigger, interval, timer, temporal, recurring, workflow-start, timetable]\ntriggers: \"create schedule\", \"define cron job\", \"set up recurring trigger\", \"schedule workflow run\"\n## Crew Role\nIn a crew, I handle TEMPORAL TRIGGER DEFINITION.\nI answer: \"when does this workflow run, at what cadence, in what timezone, with what overlap policy?\"\nI do NOT handle: workflow (what to run), dispatch_rule (keyword routing to workflows),\nhook (event-driven side effects), daemon (background persistent process), skill (reusable phases).\n\n## Metadata\n\n```yaml\nid: schedule-builder\npipeline: 8F\nscoring: hybrid_3_layer\n```\n\n```bash\npython _tools/cex_score.py --apply schedule-builder.md\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `type_builder` |\n| Pillar | P12 |\n| Domain | schedule |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "schedule-builder",
+        "kind": "type_builder",
+        "pillar": "P12",
+        "parent": null,
+        "domain": "schedule",
+        "llm_function": "GOVERN",
+        "version": "1.0.0",
+        "created": "2026-03-29",
+        "updated": "2026-03-29",
+        "author": "builder_agent",
+        "tags": [
+          "kind-builder",
+          "schedule",
+          "P12",
+          "orchestration",
+          "cron",
+          "temporal-trigger"
+        ],
+        "keywords": [
+          "schedule",
+          "cron",
+          "trigger",
+          "interval",
+          "timer",
+          "temporal",
+          "recurring",
+          "workflow-start"
+        ],
+        "triggers": [
+          "create schedule",
+          "define cron job",
+          "set up recurring trigger",
+          "schedule workflow run"
+        ],
+        "capabilities": "L1: Specialist in building schedule artifacts \u2014 definitions de gatilhos temporais . L2: Define schedule with trigger_type (cron, interval, event, manual, one_shot). L3: When user needs to create, build, or scaffold schedule.\n",
+        "quality": 9.1,
+        "title": "Manifest Schedule",
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "density_score": 0.9
+      },
+      "source_file": "bld_manifest_schedule.md",
+      "bytes": 1851
+    },
+    "memory": {
+      "content": "## Summary\nSchedules have three silent failure modes that only appear in production: timezone drift on DST transitions, catch-up bursts after downtime, and thundering herd from synchronized starts. All three are preventable at spec time with four field decisions: timezone (explicit IANA), catch_up (false by default), max_concurrent (1 by default), and jitter (0-Ns for shared infra).\n## Pattern\n**Defensive schedule defaults.**\nTimezone: always write full IANA name (\"America/Sao_Paulo\", \"UTC\"). Never write offset strings (\"UTC-3\", \"BRT\") \u2014 these do not handle DST.\nCatch-up: default false. Set true only when data partitions must be processed for every interval (e.g., daily ETL). If true: set max_concurrent low and add circuit-breaker in the workflow.\nMax-concurrent: default 1. Set > 1 only when workflow is stateless, idempotent, and writes to separate partitions. Document idempotency proof in ## Policy rationale.\nJitter: required when >= 2 schedules share a database, cache, or API rate limit. Range: 0 to (inter-schedule gap / number of schedules).\n## Anti-Pattern\n1. Omitting timezone (DST silent shift, off-by-1h errors, corrupted time-partitioned outputs).\n2. catch_up: true with no max_concurrent cap (restart after outage fires unbounded parallel runs).\n3. max_concurrent > 1 on workflows writing to shared state (parallel writes produce corrupt output).\n4. No jitter on co-located schedules (thundering herd \u2014 all N schedules hit DB at same millisecond).\n5. workflow_ref pointing to non-existent or renamed workflow (schedule fires but nothing runs).\n6. Cron expression without plain-English annotation (`0 0 */2 * *` is ambiguous without comment).\n\n## Builder Context\n\nThis ISO operates within the `schedule-builder` stack, one of 125\nspecialized builders in the CEX architecture. Each builder has 13 ISOs\ncovering system prompt, instruction, output template, quality gate,\nexamples, schema, config, tools, memory, manifest, constraints,\nvalidation schema, and runtime rules.\n\nThe builder loads ISOs via `cex_skill_loader.py` at pipeline stage F3\n(Compose), merges them with relevant memory from `cex_memory_select.py`,\nand produces artifacts that must pass the quality gate at F7 (Filter).\n\n| Component | Purpose |\n|-----------|---------|\n| System prompt | Identity and behavioral rules |\n| Instruction | Step-by-step procedure |\n| Output template | Structural scaffold |\n| Quality gate | Scoring rubric |\n| Examples | Few-shot references |\n\n## Checklist\n\n1. Created via 8F pipeline\n2. Scored by cex_score across three layers\n3. Compiled by cex_compile for validation\n4. Retrieved by cex_retriever for injection\n5. Evolved by cex_evolve when quality drops\n\n## Reference\n\n```yaml\nid: p10_lr_schedule_builder\npipeline: 8F\nscoring: hybrid_3_layer\ntarget: 9.0\n```\n\n```bash\npython _tools/cex_score.py --apply --verbose p10_lr_schedule_builder.md\n```\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `learning_record` |\n| Pillar | P10 |\n| Domain | schedule |\n| Pipeline | 8F |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Target | 9.0+ |\n| Density | 0.85+ |",
+      "frontmatter": {
+        "id": "p10_lr_schedule_builder",
+        "kind": "learning_record",
+        "pillar": "P10",
+        "version": "1.0.0",
+        "created": "2026-03-29",
+        "updated": "2026-03-29",
+        "author": "builder_agent",
+        "observation": "Schedules missing explicit timezone declarations fired 1 hour early or late during DST transitions, corrupting 3 downstream reports. Schedules with catch_up: true after a 14-day outage triggered 14 simultaneous workflow runs, overwhelming shared DB connections. Jitter of 0-60s on 8 concurrent schedules reduced peak DB load by 73%.",
+        "pattern": "Always declare IANA timezone. Default catch_up: false. Set max_concurrent: 1 unless workflow is proven idempotent. Add jitter when schedule shares infrastructure with others. Mirror workflow_ref exactly to target artifact id.",
+        "evidence": "DST incidents: 3 reports corrupted across 2 quarters. Catch-up burst: 14 simultaneous runs, DB connection pool exhausted, 6-minute outage. Jitter test: 8 schedules without jitter = 8 simultaneous DB hits; with 0-60s jitter = max 2 simultaneous hits.",
+        "confidence": 0.85,
+        "outcome": "SUCCESS",
+        "domain": "schedule",
+        "tags": [
+          "schedule",
+          "timezone",
+          "catch-up",
+          "jitter",
+          "concurrency",
+          "cron",
+          "DST",
+          "thundering-herd"
+        ],
+        "tldr": "Explicit IANA timezone is load-bearing. catch_up: false is safe default. Jitter prevents thundering herd. max_concurrent: 1 unless idempotency proven.",
+        "impact_score": 8.5,
+        "decay_rate": 0.03,
+        "agent_group": "edison",
+        "keywords": [
+          "schedule",
+          "timezone",
+          "catch up",
+          "jitter",
+          "concurrent",
+          "cron expression",
+          "DST",
+          "backfill",
+          "thundering herd",
+          "workflow ref"
+        ],
+        "memory_scope": "project",
+        "observation_types": [
+          "user",
+          "feedback",
+          "project",
+          "reference"
+        ],
+        "quality": 9.2,
+        "title": "Memory Schedule",
+        "density_score": 0.9
+      },
+      "source_file": "bld_memory_schedule.md",
+      "bytes": 3139
+    },
+    "output_template": {
+      "content": "# Output Template: schedule\n```yaml\nid: p12_sc_{{schedule_slug}}\nkind: schedule\npillar: P12\n\nversion: \"1.0.0\"\ncreated: \"{{YYYY-MM-DD}}\"\nupdated: \"{{YYYY-MM-DD}}\"\nauthor: \"{{who_produced}}\"\n\nname: \"{{human_readable_schedule_name}}\"\ntrigger_type: {{cron|interval|event|manual|one_shot}}\ncron: \"{{cron_expression}}\"\nworkflow_ref: \"{{workflow_id}}\"\n\nquality: null\ntags: [schedule, {{tag_2}}, {{tag_3}}]\ntldr: \"{{dense_summary_max_160ch}}\"\ntimezone: \"{{America/Sao_Paulo|UTC}}\"\n\nenabled: {{true|false}}\nstart_date: \"{{YYYY-MM-DD}}\"\nend_date: {{null|\"YYYY-MM-DD\"}}\nmax_concurrent: {{integer}}\n\ncatch_up: {{true|false}}\njitter: \"{{0-30s|none}}\"\ndescription: \"{{what_this_schedule_triggers_max_200ch}}\"\n```\n## Overview\n{{what_this_schedule_triggers_1_to_2_sentences}}\n{{frequency_and_primary_use_case}}\n## Trigger\n1. Expression: `{{cron_expression}}` \u2014 {{cron_plain_english_explanation}}\n2. Timezone: {{timezone}}\n3. Enabled: {{true|false}}\n4. Trigger type: {{cron|interval|event|manual|one_shot}}\n## Workflow\n1. Workflow: `{{workflow_ref}}`\n2. Expected duration: {{duration_estimate}}\n3. Dependencies: {{upstream_data_or_services_required}}\n## Policy\n1. Catch-up: {{true|false}} \u2014 {{catch_up_rationale}}\n2. Max concurrent: {{integer}} \u2014 {{concurrency_rationale}}\n3. Jitter: {{jitter_value}} \u2014 {{jitter_rationale}}\n4. On failure: {{retry|alert|skip}} \u2014 {{failure_handling_description}}\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `output_template` |\n| Pillar | P05 |\n| Domain | schedule construction |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "kind": "output_template",
+        "id": "bld_output_template_schedule",
+        "pillar": "P05",
+        "llm_function": "PRODUCE",
+        "purpose": "Template with {{vars}} that the LLM fills to produce a schedule artifact",
+        "pattern": "every field here exists in SCHEMA.md \u2014 template derives, never invents",
+        "quality": 9.0,
+        "title": "Output Template Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_output_template_schedule.md",
+      "bytes": 1694
+    },
+    "quality_gate": {
+      "content": "# Gate: schedule\n## Definition\n| Field | Value |\n|---|---|\n| metric | schedule artifact quality score |\n| threshold | 7.0 (publish >= 8.0, golden >= 9.5) |\n| operator | weighted_sum |\n| scope | all artifacts with `kind: schedule` |\n## HARD Gates\nAll must pass (AND logic). Any single failure = REJECT.\n| ID | Check | Fail Condition |\n|---|---|---|\n| H01 | Frontmatter parses as valid YAML | Parse error on frontmatter block |\n| H02 | ID matches `^p12_sc_[a-z][a-z0-9_]+$` | ID has hyphens, uppercase, or wrong prefix |\n| H03 | ID equals filename stem | `id: p12_sc_daily` but file is `p12_sched_weekly.md` |\n| H04 | Kind equals literal `schedule` | `kind: cron` or `kind: trigger` or any other value |\n| H05 | Quality field is null | `quality: 8.0` or any non-null value |\n| H06 | All required fields present | Missing `trigger_type`, `cron`, or `workflow_ref` |\n| H07 | Cron is valid 5-field or 6-field expression | `cron: \"every day\"` or malformed expression |\n| H08 | trigger_type is a recognized enum value | `trigger_type: scheduled` or unrecognized value |\n| H09 | workflow_ref is non-empty string | `workflow_ref: \"\"` or field absent |\n| H10 | Schedule is not a workflow definition | Body does not contain step execution logic \u2014 WHEN only, not WHAT |\n## SOFT Scoring\nWeights sum to 100%.\n| Dimension | Weight | Criteria |\n|---|---|---|\n| Cron expression clarity | 1.0 | Plain-English explanation of the cron expression in ## Trigger section |\n| Timezone declaration | 1.0 | Explicit IANA timezone; not defaulting silently to UTC |\n| Workflow ref traceability | 1.0 | workflow_ref resolves to a known workflow id in the cex corpus |\n| Policy completeness | 1.0 | catch_up, max_concurrent, jitter all declared with rationale |\n| Enabled status documented | 0.5 | enabled field present; paused schedules explain why |\n| Date range documented | 0.5 | start_date and end_date (or null) explicitly declared |\n| Failure handling declared | 1.0 | On-failure behavior in ## Policy (retry/alert/skip with reason) |\n| Jitter rationale | 0.5 | Jitter value explained \u2014 why this range prevents thundering herd |\n| Concurrency rationale | 1.0 | max_concurrent value justified relative to workflow idempotency |\n| Boundary clarity | 1.0 | Explicitly not a dispatch_rule, workflow, or hook \u2014 WHEN-only contract |\n| Domain specificity | 1.0 | Schedule names, tags, and description specific to the declared domain |\n| Catch-up semantics | 0.5 | catch_up false/true with explanation of backfill behavior |\n## Actions\n| Score | Tier | Action |\n|---|---|---|\n| >= 9.5 | Golden | Publish to pool as golden reference |\n| >= 8.0 | Publish | Publish to pool, add to routing index |\n| >= 7.0 | Review | Flag for improvement before publish |\n| < 7.0 | Reject | Return to author with specific gate failures |\n## Bypass\n| Field | Value |\n|---|---|\n| conditions | Placeholder schedule created during workflow scaffolding, not yet wired to real workflow |\n| approver | Author self-certification with comment noting workflow_ref is pending |\n| audit_trail | Bypass note in frontmatter comment with expiry date |\n| expiry | 7d \u2014 placeholder schedules must be wired or removed |\n| never_bypass | H01 (unparseable YAML), H05 (self-scored gates corrupt metrics), H07 (invalid cron fires at wrong time) |",
+      "frontmatter": {
+        "id": "p11_qg_schedule",
+        "kind": "quality_gate",
+        "pillar": "P11",
+        "title": "Gate: schedule",
+        "version": "1.0.0",
+        "created": "2026-03-29",
+        "updated": "2026-03-29",
+        "author": "builder_agent",
+        "domain": "workflow scheduling \u2014 temporal trigger definitions that start workflows at declared times",
+        "quality": 9.0,
+        "tags": [
+          "quality-gate",
+          "schedule",
+          "P12",
+          "cron",
+          "temporal-trigger",
+          "workflow-ref"
+        ],
+        "tldr": "Pass/fail gate for schedule artifacts: cron validity, timezone declaration, workflow_ref resolution, and policy completeness.",
+        "density_score": 0.9
+      },
+      "source_file": "bld_quality_gate_schedule.md",
+      "bytes": 3282
+    },
+    "schema": {
+      "content": "# Schema: schedule\n## Frontmatter Fields\n| Field | Type | Required | Default | Notes |\n|-------|------|----------|---------|-------|\n| id | string (p12_sc_{slug}) | YES | - | Namespace compliance |\n| kind | literal \"schedule\" | YES | - | Type integrity |\n| pillar | literal \"P12\" | YES | - | Pillar assignment |\n| version | semver string | YES | \"1.0.0\" | Artifact versioning |\n| created | date YYYY-MM-DD | YES | - | Creation date |\n| updated | date YYYY-MM-DD | YES | - | Last update |\n| author | string | YES | - | Producer identity |\n| name | string | YES | - | Human-readable schedule name |\n| trigger_type | enum: cron, interval, event, manual, one_shot | YES | - | Trigger mechanism |\n| cron | string (cron expression) | YES | - | e.g. \"0 9 * * MON-FRI\" |\n| workflow_ref | string | YES | - | ID of workflow to trigger |\n| quality | null | YES | null | Never self-score |\n| tags | list[string], len >= 3 | YES | - | Must include \"schedule\" |\n| tldr | string <= 160ch | YES | - | Dense summary |\n| timezone | string | REC | \"UTC\" | e.g. \"America/Sao_Paulo\" |\n| enabled | boolean | REC | true | Active or paused |\n| start_date | date YYYY-MM-DD | REC | - | Earliest trigger date |\n| end_date | date or null | REC | null | Latest trigger date |\n| max_concurrent | integer | REC | 1 | Max parallel runs |\n| catch_up | boolean | REC | false | Run missed schedules on restart |\n| jitter | string | REC | - | Random delay e.g. \"0-30s\" |\n| description | string <= 200ch | REC | - | What this schedule triggers |\n## ID Pattern\nRegex: `^p12_sc_[a-z][a-z0-9_]+$`\nRule: id MUST equal filename stem.\n## Body Structure (required sections)\n1. `## Overview` \u2014 what this schedule triggers, frequency, purpose\n2. `## Trigger` \u2014 cron expression explained, timezone, enabled status\n3. `## Workflow` \u2014 which workflow runs, expected duration, dependencies\n4. `## Policy` \u2014 catch-up, max concurrent, jitter, failure handling\n## Constraints\n- max_bytes: 1024 (body only \u2014 compact schedule spec)\n- naming: p12_sched_{name}.md (single file)\n- machine_format: yaml (compiled artifact)\n- id == filename stem\n- cron field MUST be valid 5-field or 6-field cron expression\n- workflow_ref MUST reference an existing workflow id\n- quality: null always\n- NO implementation code in body \u2014 spec only",
+      "frontmatter": {
+        "kind": "schema",
+        "id": "bld_schema_schedule",
+        "pillar": "P06",
+        "llm_function": "CONSTRAIN",
+        "purpose": "Formal schema \u2014 SINGLE SOURCE OF TRUTH for schedule",
+        "pattern": "TEMPLATE derives from this. CONFIG restricts this.",
+        "quality": 9.1,
+        "title": "Schema Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_schema_schedule.md",
+      "bytes": 2281
+    },
+    "system_prompt": {
+      "content": "## Identity\nYou are **schedule-builder**, a specialized scheduling agent focused on defining `schedule` artifacts \u2014 temporal triggers that determine WHEN a workflow runs.\nYou produce `schedule` artifacts (P12) that specify:\n- **Trigger**: cron expression or interval with IANA timezone and enabled status\n- **Workflow ref**: the exact workflow id this schedule starts\n- **Policy**: max_concurrent, catch_up, jitter, on-failure behavior\n- **Date range**: optional start_date and end_date bounding active window\nYou know the P12 boundary: schedules answer WHEN only. They do not define what steps execute (that is workflow), how to route keywords (that is dispatch_rule), or react to events as side effects (that is hook).\nSCHEMA.md is the source of truth. Artifact id must match `^p12_sc_[a-z][a-z0-9_]+$`. Body must not exceed 1024 bytes.\n## Rules\n**Scope**\n1. ALWAYS declare timezone explicitly using IANA names (\"America/Sao_Paulo\", \"UTC\") \u2014 silent UTC assumption breaks DST-sensitive business schedules.\n2. ALWAYS explain the cron expression in plain English in the ## Trigger section \u2014 `0 9 * * MON-FRI` must read \"9:00 AM Monday through Friday\".\n3. ALWAYS declare max_concurrent as an explicit integer \u2014 never omit; default 1 prevents resource exhaustion.\n4. ALWAYS specify catch_up true or false with a rationale \u2014 catch_up: true can trigger large backfill bursts on restart.\n5. ALWAYS reference workflow_ref as the exact id of an existing workflow artifact.\n**Quality**\n6. NEVER exceed `max_bytes: 1024` \u2014 schedule artifacts are compact trigger specs, not workflow definitions.\n7. NEVER include workflow step logic in the body \u2014 this artifact says WHEN, not WHAT.\n8. NEVER omit jitter for high-frequency or multi-instance schedules \u2014 thundering herd is a real production failure mode.\n**Safety**\n9. NEVER produce a schedule without an on-failure declaration in ## Policy \u2014 silent failure leaves orphaned workflow state.\n**Comms**\n10. ALWAYS redirect keyword routing to dispatch_rule-builder, workflow step logic to workflow-builder, and event-driven side effects to hook-builder \u2014 state the boundary reason explicitly.\n## Output Format\nProduce a compact Markdown artifact with YAML frontmatter followed by the schedule spec. Total body under 1024 bytes:\n```yaml\nid: p12_sc_{slug}\nkind: schedule\npillar: P12\nversion: 1.0.0\nquality: null\ntrigger_type: cron | interval | event | manual | one_shot\ncron: \"0 9 * * MON-FRI\"\nworkflow_ref: \"p13_wf_{slug}\"\ntimezone: \"America/Sao_Paulo\"\nmax_concurrent: 1\ncatch_up: false\n```\n```markdown\n## Trigger\n- Expression: `0 9 * * MON-FRI` \u2014 9:00 AM Monday through Friday\n- Timezone: America/Sao_Paulo\n## Policy\n- Catch-up: false \u2014 missed runs are skipped, not backfilled\n- Max concurrent: 1 \u2014 workflow is stateful; no parallel runs\n- Jitter: 0-30s \u2014 avoids thundering herd on shared infrastructure\n- On failure: alert \u2014 notify on-call, do not auto-retry\n```",
+      "frontmatter": {
+        "id": "p03_sp_schedule_builder",
+        "kind": "system_prompt",
+        "pillar": "P04",
+        "version": "1.0.0",
+        "created": "2026-03-29",
+        "updated": "2026-03-29",
+        "author": "system-prompt-builder",
+        "title": "Schedule Builder System Prompt",
+        "target_agent": "schedule-builder",
+        "persona": "Workflow scheduling specialist who defines temporal triggers \u2014 when workflows run, at what cadence, in what timezone, with what overlap and catch-up policy",
+        "rules_count": 10,
+        "tone": "technical",
+        "knowledge_boundary": "cron expressions, timezone handling, catch-up semantics, overlap policies, jitter, workflow_ref | NOT workflow steps (what runs), dispatch_rule (keyword routing), hook (event side-effects), and daemon (persistent background)",
+        "domain": "schedule",
+        "quality": 9.0,
+        "tags": [
+          "system_prompt",
+          "schedule",
+          "cron",
+          "temporal-trigger",
+          "P12"
+        ],
+        "safety_level": "standard",
+        "tools_listed": false,
+        "output_format_type": "markdown",
+        "tldr": "Defines temporal workflow triggers with cron expressions, IANA timezones, overlap policy, catch-up semantics, and jitter. Max 1024 bytes body.",
+        "density_score": 0.85
+      },
+      "source_file": "bld_system_prompt_schedule.md",
+      "bytes": 2926
+    },
+    "tools": {
+      "content": "# Tools: schedule-builder\n## Production Tools\n| Tool | Purpose | When | Status |\n|------|---------|------|--------|\n| brain_query [MCP] | Search existing schedule and workflow artifacts in pool | Phase 1 (resolve workflow_ref, check duplicates) | CONDITIONAL |\n| crontab_validate | Validate cron expression syntax and compute next N fire times | Phase 1 (verify expression before committing) | [PLANNED] |\n| validate_artifact.py | Generic artifact validator | Phase 3 | [PLANNED] |\n| cex_forge.py | Generate artifact from seeds | Alternative compose | [PLANNED] |\n## Data Sources\n| Source | Path/URL | Data |\n|--------|----------|------|\n| CEX Schema | P12_orchestration/_schema.yaml | Field definitions, schedule kind |\n| CEX Examples | P12_orchestration/examples/ | Real schedule artifacts |\n| SEED_BANK | archetypes/SEED_BANK.yaml | Seeds for P12_schedule |\n| TAXONOMY | archetypes/TAXONOMY_LAYERS.yaml | Layer position, runtime layer |\n| Workflow Index | P12_orchestration/workflows/ | Resolvable workflow_ref ids |\n## Cron Validation Reference\nKey checks to run manually before output:\n- Field count: exactly 5 (min hour dom month dow) or 6 (sec min hour dom month dow)\n- Range validity: min 0-59, hour 0-23, dom 1-31, month 1-12, dow 0-7\n- Step syntax: `*/N` valid; `N/M` valid; named months (JAN-DEC) and days (MON-SUN) valid\n- Next-fire sanity: compute next 3 execution times and confirm they match intent\n## Tool Permissions\n\n| Category | Tools | Status |\n|----------|-------|--------|\n| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |\n| DENIED | (none) | Explicitly blocked |\n| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |\n\n## Interim Validation\nNo automated validator exists yet. Manually check each QUALITY_GATES.md gate against\nthe produced artifact. Key checks: YAML parses, id pattern matches `^p12_sc_`, cron\nexpression is valid 5-field, workflow_ref non-empty, body <= 1024 bytes, quality == null,\nall four body sections present (Overview, Trigger, Workflow, Policy).",
+      "frontmatter": {
+        "kind": "tools",
+        "id": "bld_tools_schedule",
+        "pillar": "P04",
+        "llm_function": "CALL",
+        "purpose": "Tools and APIs available for schedule production",
+        "quality": 9.0,
+        "title": "Tools Schedule",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "schedule",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for schedule construction, demonstrating ideal structure and common pitfalls.",
+        "domain": "schedule construction",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "bld_tools_schedule.md",
+      "bytes": 2035
+    },
+    "shared_skill_guided_decisions": {
+      "content": "# Skill: Guided Decision Protocol (GDP)\n\n## The Principle\n\n> **When the LLM decides, the output is generic.**\n> **When the USER decides, the output is theirs.**\n>\n> Every assumption you avoid is a revision the user won't need.\n\nThe GDP is as mandatory as the 8F pipeline.\n8F controls HOW artifacts are built.\nGDP controls WHO decides WHAT goes in them.\n\n---\n\n## When to Trigger a Decision Point\n\nA **Decision Point (DP)** activates when:\n\n1. **Multiple valid paths exist** \u2014 archetype A vs B, layout X vs Y, tone formal vs casual\n2. **Subjective preference matters** \u2014 colors, names, voice, positioning, pricing\n3. **Trade-offs are real** \u2014 speed vs quality, cost vs features, niche vs broad\n4. **The output will be hard to undo** \u2014 brand identity, architecture, deployment target\n5. **The user has context you don't** \u2014 their market, their competitors, their gut feeling\n\nA DP does NOT activate for:\n- Mechanical/deterministic steps (compile, validate, format)\n- Technical correctness (schema compliance, syntax)\n- CEX internal operations (8F pipeline, signaling, indexing)\n\n---\n\n## The DP Format\n\nEvery Decision Point follows this exact structure:\n\n```\n\u2501\u2501\u2501 DP {N}/{TOTAL}: {TOPIC} \u2501\u2501\u2501\n\n{1-2 sentence context explaining WHY this matters}\n\n  1. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  2. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  3. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  \u2605 Recommended: {N} ({reason from context/signals})\n\n  [Type number, combine like \"1+3\", or describe your own]: \u258c\n```\n\n### Rules for Options\n\n| Rule | Detail |\n|------|--------|\n| **3-5 options max** | More than 5 overwhelms. Less than 2 isn't a choice. |\n| **Always have a \u2605 Recommended** | The user can always just hit Enter. Never leave them stuck. |\n| **Recommendation has a reason** | Not \"I think\" \u2014 cite a signal: \"based on your 'educational' description\" |\n| **\"Describe your own\" is always valid** | Options are suggestions, not walls. Freetext is always accepted. |\n| **Emoji per option** | Visual scanning. One emoji per option, consistent within a DP. |\n| **\"Best if\" clause** | Helps the user self-select without jargon. |\n| **Numbering is stable** | Once presented, option 2 is always option 2. Don't renumber. |\n\n---\n\n## DP Density by Domain\n\nNot every interaction needs the same amount of DPs.\n\n| Domain | DP Density | Why |\n|--------|-----------|-----|\n| **Brand Identity** (N06) | HIGH (8-12 DPs) | Every choice is subjective and permanent |\n| **Content/Copy** (N02) | MEDIUM (4-6 DPs) | Tone, layout, CTA style matter |\n| **Research** (N01) | LOW-MEDIUM (2-4 DPs) | Scope, depth, focus area |\n| **Knowledge** (N04) | LOW (1-3 DPs) | Structure, detail level |\n| **Operations** (N05) | LOW (1-3 DPs) | Platform, scaling, cost trade-offs |\n| **Build** (N03) | MINIMAL (0-2 DPs) | Mostly mechanical, schema-driven |\n| **Orchestration** (N07) | MEDIUM (3-5 DPs) | Priority, sequencing, resource allocation |\n\n---\n\n## DP Chaining\n\nDPs can depend on each other. Later DPs adapt based on earlier choices.\n\n```\nDP 1: Archetype \u2192 User picks \"Sage\"\nDP 2: Voice Tone \u2192 Options CHANGE because Sage implies authority+warmth\nDP 3: Color Palette \u2192 Options CHANGE because Sage palette is different from Rebel\n```\n\nWhen a previous DP narrows the space, say so:\n\n```\n\u2501\u2501\u2501 DP 3/8: Color Palette \u2501\u2501\u2501\n\nBased on your Sage archetype, these palettes work best:\n\n  1. \ud83d\udd35 Deep Trust \u2014 navy #1B365D + gold #C5A55A + cream #FAF3E0\n     \u2192 Best if: you want gravitas and authority\n\n  2. \ud83d\udfe2 Growth Wisdom \u2014 forest #2D5016 + sage #B2BEB5 + white #FAFAFA\n     \u2192 Best if: you want natural, approachable wisdom\n\n  3. \ud83d\udfe3 Modern Scholar \u2014 indigo #4B0082 + silver #C0C0C0 + white #FFFFFF\n     \u2192 Best if: you want contemporary, tech-forward wisdom\n\n  \u2605 Recommended: 1 (Deep Trust) \u2014 matches your \"professor but accessible\" description\n\n  [Type number, adjust colors, or describe your vibe]: \u258c\n```\n\n---\n\n## Handling User Responses\n\n| Response | Action |\n|----------|--------|\n| `2` | Select option 2. Confirm briefly: \"Got it \u2014 Going with Growth Wisdom \ud83d\udfe2\" |\n| `1+3` | Combine elements. \"Mixing Deep Trust base with Modern Scholar accents \u2014 nice.\" |\n| `the first one but more green` | Adapt option 1 with modification. Show the modified version. |\n| Free text: `\"I want something techy and dark\"` | Map to closest option or create costm. \"Sounds like a Dark Mode Scholar vibe. Let me propose...\" |\n| `?` or confused | Explain the trade-offs in simpler language. No jargon. |\n| Empty / Enter / \"whatever\" / \"you choose\" | Apply \u2605 Recommended. \"Going with the recommended option: Deep Trust \ud83d\udd35\" |\n| `skip` | Apply \u2605 Recommended and note it can be changed later. |\n\n---\n\n## DP Timing in Workflows\n\nDPs are NOT dumped all at once. They are **interleaved with progress**.\n\n```\nBAD:  \"Here are 12 questions. Answer all.\"\nGOOD: \"Let me ask you a few things as we go.\"\n```\n\nPattern:\n1. Ask DP 1-2 (identity basics)\n2. **Show progress**: \"Great. I already know enough to suggest...\"\n3. Ask DP 3-4 (personality, voice)\n4. **Show preview**: \"Here's what your brand is looking like so far...\"\n5. Ask DP 5-6 (audience, positioning)\n6. **Show preview**: \"Almost there. Your brand summary so far...\"\n7. Ask DP 7-8 (visual, monetization)\n8. **Final confirmation**: \"Here's the complete picture. Change anything?\"\n\n---\n\n## Preview After Every 2-3 DPs\n\nAfter every 2-3 decisions, show a running summary:\n\n```\n\u2501\u2501\u2501 Your Brand So Far \u2501\u2501\u2501\n  Name:       Acme Academy\n  Archetype:  \ud83e\uddd9 Sage\n  Voice:      Authoritative but warm (4,3,2,4,4)\n  Colors:     Deep Trust palette (#1B365D, #C5A55A, #FAF3E0)\n  Audience:   Career-switchers who want to become devs\n  \u2501\u2501\u2501 {5/8 decisions made} \u2501\u2501\u2501\n```\n\nThis gives the user confidence that their choices are being heard,\nand a chance to go back: \"Actually, can I change the colors?\"\n\n---\n\n## The Final Confirmation DP\n\nEvery GDP sequence ends with a FULL REVIEW:\n\n```\n\u2501\u2501\u2501 Final Review \u2501\u2501\u2501\n\nHere's everything we've decided together:\n\n  Brand:         Acme Academy\n  Tagline:       \"Code your future\"\n  Archetype:     \ud83e\uddd9 Sage\n  Voice:         Authoritative, warm, low humor, high trust\n  Colors:        #1B365D, #C5A55A, #FAF3E0\n  Font:          Inter (headers) + Source Serif (body)\n  Audience:      Career-switchers, 25-40, frustrated with current job\n  Transformation: From \"stuck in a dead-end job\" to \"confident junior dev\"\n  Category:      Online Education / Tech\n  Pricing:       Subscription (R$ 47/mo basic, R$ 97/mo pro)\n\n  \u2705 Confirm all \u2192 I'll generate brand_config.yaml\n  \u270f\ufe0f Change something \u2192 tell me which item\n  \ud83d\udd04 Start over \u2192 we'll redo the whole flow\n\n  [Confirm, change, or start over]: \u258c\n```\n\n---\n\n## Anti-Patterns (BLOCKED)\n\n| Anti-Pattern | Why It's Bad | Do This Instead |\n|-------------|-------------|-----------------|\n| \"I'll assume a Sage archetype\" | User might be a Rebel. You just poisoned the brand. | Present 3-4 options with \u2605 recommendation |\n| Dumping 10 questions at once | Overwhelming. User gives shallow answers. | 2-3 at a time, preview between rounds |\n| \"Which of these 12 archetypes...\" | Too many choices = paralysis | Pre-filter to 3-4 based on signals |\n| No recommendation on any DP | User with no branding knowledge is stuck | ALWAYS have \u2605 Recommended with reason |\n| Skipping final review | User can't see the full picture | ALWAYS show complete summary before executing |\n| Assuming after 1 vague answer | \"Casual\" doesn't mean Jester. | Probe: \"Casual like a friend or casual like a comedian?\" |\n| Using branding jargon | \"5D voice calibration\" means nothing to a bakery owner | \"How should your brand sound?\" |\n\n---\n\n## Part 2: The Autonomy Side\n\nGDP is half the picture. The other half is what happens AFTER decisions are made.\n\n### The Decision Manifest\n\nEvery GDP session produces a **Decision Manifest**:\n`.cex/runtime/decisions/decision_manifest.yaml`\n\nThis file contains:\n- Every DP answer (choice + reason + alternatives shown)\n- Brand config pointer (`.cex/brand/brand_config.yaml`)\n- Per-nucleus specific decisions\n- Constraints (language, currency, quality floor)\n- Flags for auto-filled decisions (user skipped \u2192 \u2605 Recommended applied)\n\n### The Two-Phase Pattern\n\n```\nPHASE 1 \u2014 Co-pilot (GDP active, user present)\n  N07 identifies mission\n  N07 identifies which decisions are subjective\n  N07 presents DPs to user (this skill)\n  N07 writes decision_manifest.yaml\n  N07 locks manifest (status: locked)\n\nPHASE 2 \u2014 Autonomous (GDP off, nuclei dispatched)\n  N07 dispatches via grid/solo\n  Handoff includes: \"Read .cex/runtime/decisions/decision_manifest.yaml\"\n  Each nucleus reads manifest ONCE at start\n  Each nucleus executes 8F with manifest context\n  ZERO questions to user\n  Commit \u2192 signal \u2192 done\n```\n\n### How Nuclei Read the Manifest\n\nAt the start of any dispatched task, a nucleus:\n\n1. Checks if manifest exists: `.cex/runtime/decisions/decision_manifest.yaml`\n2. If YES \u2192 reads it, extracts relevant decisions (global + per_nucleus.{self})\n3. If NO \u2192 falls back to brand_config.yaml only (minimal context)\n4. Uses decisions as CONSTRAINTS for 8F, not as suggestions\n\nA nucleus NEVER overrides a manifest decision.\nA nucleus NEVER re-asks a question the manifest already answered.\n\n### Edge Cases During Autonomous Execution\n\n| Situation | What the nucleus does |\n|-----------|----------------------|\n| Manifest covers the decision | Use it. No question. |\n| Manifest doesn't cover this specific case | Apply \u2605 Recommended. Add to `auto_filled` list. |\n| Decision seems wrong in context | Execute it anyway. Flag in output: \"\u26a0\ufe0f Manifest says X, but Y might be better \u2014 review recommended.\" |\n| Manifest is corrupt/missing | Fall back to brand_config.yaml. If that's also missing, use sensible defaults + flag everything. |\n\n### Why This Works\n\nThe plat\u00f4 between autonomy and collaboration:\n\n```\n100% User decides \u2190\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 GDP \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192 100% LLM decides\n         \u2191                    \u2191                       \u2191\n     Slow, tedious      THE SWEET SPOT          Generic, misaligned\n     but perfect        User decides WHAT        Fast but wrong\n                        LLM decides HOW\n```\n\n- **User decides WHAT**: brand name, tone, audience, positioning, colors, pricing model\n- **LLM decides HOW**: file structure, frontmatter, 8F pipeline, compilation, signaling\n- **Manifest is the contract**: locks the WHAT so the HOW can run free",
+      "frontmatter": {
+        "id": "skill_guided_decisions",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach all builders and nuclei to present structured decision points instead of assuming. The Co-pilot Protocol.",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "author": "n07_orchestrator",
+        "quality": 9.1,
+        "tags": [
+          "skill",
+          "shared",
+          "copilot",
+          "guided-decisions",
+          "UX",
+          "interaction"
+        ],
+        "tldr": "When a decision affects the output, STOP and present numbered options with recommendations. Never assume what the user wants. This is as mandatory as 8F.",
+        "density_score": 0.95
+      },
+      "source_file": "skill_guided_decisions.md",
+      "bytes": 10647
+    },
+    "shared_skill_memory_update": {
+      "content": "# Skill: Memory Update After Execution\n\n## When to Use\nAfter EVERY build session, before signaling complete.\n\n## What to Record\nOne structured observation per session. Focus on **reusable patterns**, not obvious facts.\n\n### Good Observations\n1. \"Splitting handler into validate+process+respond reduced errors 40%\"\n2. \"Builders with >3 tools need explicit tool-selection criteria\"\n3. \"ISO files >4KB overflow small model context \u2014 split into sections\"\n\n### Bad Observations (DO NOT record)\n1. \"The schema was followed\" (obvious)\n2. \"The file was saved\" (mechanical)\n3. \"Quality was high\" (vague)\n\n## How to Record\n\n```bash\npython _tools/cex_memory_update.py \\\n  --builder <your-builder-id> \\\n  --type feedback \\\n  --observation \"what you learned\" \\\n  --pattern \"generalizable rule\" \\\n  --evidence \"data that supports it\" \\\n  --confidence 0.8 \\\n  --outcome SUCCESS\n```\n\n## Observation Types\n| Type | Decay | When to Use |\n|------|-------|-------------|\n| user | 0.02/day | User preference or style |\n| feedback | 0.00 | Quality feedback (NEVER decays) |\n| project | 0.05/day | Project-specific context |\n| reference | 0.03/day | External knowledge or docs |\n\n## Rules\n1. ONE observation per session (quality > quantity)\n2. Confidence 0.0-1.0 (be honest, 0.6-0.8 is normal)\n3. Pattern must be ACTIONABLE (someone else can apply it)\n4. Evidence must be MEASURABLE when possible\n5. If nothing was learned, don't force an observation\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `instruction` |\n| Pillar |  |\n| Domain | CEX system |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "skill_memory_update",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach builders to reflect and record learnings after execution",
+        "quality": 9.0,
+        "title": "Skill Memory Update",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "artifact",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls.",
+        "domain": "CEX system",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "skill_memory_update.md",
+      "bytes": 1718
+    },
+    "shared_skill_verification_protocol": {
+      "content": "# Verification Protocol (Shared Skill)\n\nAfter producing an artifact (F6 PRODUCE), invoke this protocol before F7 GOVERN.\n\n## When to Verify\n1. 3+ sections modified in the artifact\n2. Artifact kind is core (system_prompt, skill, guardrail, agent, agent_card)\n3. Quality target >= 8.5\n4. Retry attempt (previous quality gate failure)\n\n## Verification Steps\n\n1. **Schema compliance**: Does the artifact match its kind's SCHEMA.md?\n   Check: every required frontmatter field present and correctly typed.\n\n2. **Boundary compliance**: Does the artifact stay within its kind's boundary?\n   Check: no system_prompt content in a skill, no task instructions in identity.\n\n3. **Naming compliance**: Does the ID match the naming convention from kinds_meta.json?\n   Check: `p{NN}_{prefix}_{slug}` format.\n\n4. **Cross-reference check**: Do all referenced artifacts/builders/kinds exist?\n   Check: grep for references, verify targets are real paths.\n\n5. **Adversarial probe**: Try to break the artifact:\n   - Feed it an edge-case input (empty, malformed, contradictory)\n   - Check if the rules are enforceable or aspirational\n   - Verify the output format is machine-parseable\n\n## Output\nFor each check: PASS with evidence or FAIL with Expected vs Actual.\nFinal: VERDICT: PASS | FAIL | PARTIAL\n\n## Artifact Metadata\n\n```yaml\nkind: skill\npillar: P04\npipeline: 8F\nscoring: hybrid_3_layer\ncompilation: cex_compile\n```\n\n## Artifact Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `skill` |\n| Pillar | P04 |\n| Domain | verification |\n| Pipeline | 8F (F1-F8) |\n| Scorer | `cex_score.py` |\n| Compiler | `cex_compile.py` |\n| Retriever | `cex_retriever.py` |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "shared_skill_verification_protocol",
+        "kind": "skill",
+        "pillar": "P04",
+        "version": "1.0.0",
+        "created": "2026-04-05",
+        "updated": "2026-04-05",
+        "author": "n07-orchestrator",
+        "title": "Shared Skill: Verification Protocol for All Builders",
+        "domain": "verification",
+        "quality": 9.1,
+        "tags": [
+          "shared",
+          "skill",
+          "verification",
+          "adversarial",
+          "all-builders"
+        ],
+        "source_insight": "OpenClaude verificationAgent.ts -- adapted as shared builder skill",
+        "tldr": "Every builder can invoke adversarial verification on its output before publishing",
+        "density_score": 0.86
+      },
+      "source_file": "skill_verification_protocol.md",
+      "bytes": 1702
+    }
+  },
+  "total_tokens": 12300,
+  "total_bytes": 49202
+}

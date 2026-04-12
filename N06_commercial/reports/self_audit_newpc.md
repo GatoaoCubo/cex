@@ -18,7 +18,7 @@ mission: NEWPC_SETUP
 |---|--------|--------|--------|-------|
 | 1 | **fetch** | `uvx mcp-server-fetch` | PASS | uvx works, dependencies downloaded successfully |
 | 2 | **markitdown** | `npx markitdown-mcp` | PASS | npx resolves and runs |
-| 3 | **stripe** | `npx @anthropic/mcp-stripe` | FAIL | Package `@anthropic/mcp-stripe` returns 404 on npm. Correct package is `@stripe/mcp` (v0.3.3). Config needs update. |
+| 3 | **stripe** | `npx @stripe/mcp` | BLOCKED | Package fixed to `@stripe/mcp`. Missing env: `STRIPE_SECRET_KEY` |
 | 4 | **hotmart** | `npx mcp-server-hotmart` | BLOCKED | Missing env: `HOTMART_CLIENT_ID`, `HOTMART_CLIENT_SECRET`, `HOTMART_BASIC_AUTH` |
 | 5 | **canva** | `npx @mcp_factory/canva-mcp-server` | BLOCKED | Missing env: `CANVA_CLIENT_ID`, `CANVA_CLIENT_SECRET` |
 | 6 | **notebooklm** | `npx notebooklm-mcp@latest` | PASS | v1.0.0 loads successfully |
@@ -34,14 +34,13 @@ mission: NEWPC_SETUP
 | `CANVA_CLIENT_ID` | NO | canva MCP |
 | `CANVA_CLIENT_SECRET` | NO | canva MCP |
 
-**Summary**: 3/6 PASS, 1/6 FAIL (wrong package), 2/6 BLOCKED (missing keys).
+**Summary**: 3/6 PASS, 3/6 BLOCKED (missing API keys).
 
 ### Action Required
 
-1. Fix `.mcp-n06.json`: change `@anthropic/mcp-stripe` to `@stripe/mcp`
-2. Set Stripe API key in environment
-3. Set Hotmart credentials in environment
-4. Set Canva credentials in environment
+1. Set `STRIPE_SECRET_KEY` in environment
+2. Set Hotmart credentials (`HOTMART_CLIENT_ID`, `HOTMART_CLIENT_SECRET`, `HOTMART_BASIC_AUTH`) in environment
+3. Set Canva credentials (`CANVA_CLIENT_ID`, `CANVA_CLIENT_SECRET`) in environment
 
 ---
 
@@ -135,11 +134,11 @@ P11 schema defines these kinds:
 
 **Recommendation**: Build `p11_bl_funnel_performance.md` -- detect conversion drops, suggest fixes, verify after change.
 
-### Gap 3: Stripe MCP Package Incorrect
+### Gap 3: Stripe API Key Not Set
 
-**Cost of inaction**: Payment integration is broken. Stripe is the primary revenue processing tool. Every minute without it = potential lost transaction data.
+**Cost of inaction**: `.mcp-n06.json` now correctly references `@stripe/mcp` (fixed). However, `STRIPE_SECRET_KEY` is still not set in environment. Payment integration remains non-functional until the key is configured.
 
-**Recommendation**: Update `.mcp-n06.json` to use `@stripe/mcp` (v0.3.3). Set `STRIPE_SECRET_KEY` in environment.
+**Recommendation**: Set `STRIPE_SECRET_KEY` in environment. Test with `npx -y @stripe/mcp` to verify connection.
 
 ---
 
@@ -147,10 +146,10 @@ P11 schema defines these kinds:
 
 | Metric | Value |
 |--------|-------|
-| MCP Servers | 3/6 operational |
+| MCP Servers | 3/6 operational (3 blocked: missing API keys) |
 | Python Tools | 3/3 operational |
 | Total Artifacts | 105 (72 source + 33 compiled) |
 | P11 Coverage | 1/6 kinds |
 | Agent Card | Needs count update |
-| Critical Fix | `.mcp-n06.json` Stripe package |
+| Critical Fix | Set 6 API keys (Stripe, Hotmart, Canva) |
 | Missing Keys | 6 API keys across 3 services |

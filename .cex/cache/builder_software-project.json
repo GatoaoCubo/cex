@@ -1,0 +1,458 @@
+{
+  "kind": "software-project",
+  "compiled_at": "2026-04-12T17:26:39.954536+00:00",
+  "source_hash": "f7fd61df60618aa64a9cf7c66e349e8b416478cabb380ba998b516d970fa35b2",
+  "iso_count": 13,
+  "shared_count": 3,
+  "prompt_sections": {
+    "architecture_software_project": {
+      "content": "# Architecture\n\n## 4-Layer Model\n\n```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502  Layer 4: DEPLOY                \u2502  Docker, CI/CD, Railway, monitoring\n\u2502  (How it runs in production)    \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502  Layer 3: INTERFACE             \u2502  FastAPI routes, Typer CLI, WebSocket\n\u2502  (How users interact)           \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502  Layer 2: INFRASTRUCTURE        \u2502  DB, cache, HTTP clients, file I/O\n\u2502  (How it connects to world)     \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502  Layer 1: DOMAIN                \u2502  Pure business logic, Pydantic models\n\u2502  (What it does)                 \u2502  Zero external dependencies\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n### Dependency Rule\n\n```\nDeploy \u2192 Interface \u2192 Infrastructure \u2192 Domain\n         \u2193            \u2193                \u2193\n         imports       imports          imports NOTHING external\n```\n\nDomain layer has ZERO external deps (only stdlib + pydantic).\nInfrastructure adapts external services to domain interfaces.\nInterface exposes domain operations via API/CLI.\nDeploy packages everything for production.\n\n## Directory Mapping\n\n```\nsrc/{package}/\n\u251c\u2500\u2500 domain/              # Layer 1: Pure logic\n\u2502   \u251c\u2500\u2500 models.py        # Pydantic data models\n\u2502   \u251c\u2500\u2500 services.py      # Business rules\n\u2502   \u2514\u2500\u2500 errors.py        # Custom exceptions\n\u251c\u2500\u2500 infra/               # Layer 2: External world\n\u2502   \u251c\u2500\u2500 db.py            # Database client\n\u2502   \u251c\u2500\u2500 cache.py         # Redis/in-memory\n\u2502   \u251c\u2500\u2500 http_client.py   # External API calls\n\u2502   \u2514\u2500\u2500 config.py        # BaseSettings (env vars)\n\u251c\u2500\u2500 api/                 # Layer 3: HTTP interface\n\u2502   \u251c\u2500\u2500 main.py          # FastAPI app\n\u2502   \u251c\u2500\u2500 routes/          # Route handlers\n\u2502   \u251c\u2500\u2500 middleware/       # Auth, CORS, rate-limit\n\u2502   \u2514\u2500\u2500 deps.py          # Dependency injection\n\u251c\u2500\u2500 cli.py               # Layer 3: CLI interface\n\u2514\u2500\u2500 __init__.py\n```\n\n## DI + Config\n\n```python\n# deps.py \u2014 @lru_cache settings, Depends(get_db)\n# config.py \u2014 BaseSettings(env_prefix=\"APP_\", env_file=\".env\")\n#   Required: database_url | Optional: redis_url, log_level, workers, debug\n```\n\n## Error Flow\n\nDomain raises AppError \u2192 Infra wraps DB/HTTP errors \u2192 Interface returns HTTP \u2192 Middleware catches unhandled \u2192 500.\n\n## Testing\n\n| Layer | Test Type | Speed | Deps |\n|-------|-----------|-------|------|\n| Domain | Unit | <1s | None |\n| Infra | Integration | 1-10s | DB |\n| Interface | API | 1-5s | TestClient |\n| Deploy | E2E | 10-60s | Docker |",
+      "frontmatter": {
+        "id": "bld_sp_architecture_software_project",
+        "kind": "architecture",
+        "pillar": "P08",
+        "title": "Architecture \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "architecture",
+          "software-project",
+          "layers"
+        ],
+        "tldr": "4-layer architecture: Domain (business logic) \u2192 Infrastructure (DB, cache, external) \u2192 Interface (API/CLI) \u2192 Deploy (Docker, CI/CD). Clean deps: domain has zero external deps.",
+        "density_score": 1.0
+      },
+      "source_file": "bld_architecture_software_project.md",
+      "bytes": 2945
+    },
+    "collaboration_software_project": {
+      "content": "# Collaboration\n\n## N03 Receives From (Inputs)\n\n| Source | What | Example |\n|--------|------|---------|\n| N01 (Intelligence) | Pipeline spec + config | \"implement research pipeline in Python\" |\n| N02 (Marketing) | Publisher spec + config | \"implement social publisher runtime\" |\n| N04 (Knowledge) | Schema + migrations | \"deploy Supabase migrations\" |\n| N06 (Commercial) | Integration spec | \"build Stripe billing connector\" |\n| N07 (Admin) | CEX tool requirements | \"add --batch flag to 8F runner\" |\n\n## N03 Sends To (Outputs)\n\n| Target | What | Example |\n|--------|------|---------|\n| N05 (Operations) | Deploy artifacts | Dockerfile, CI/CD, monitoring config |\n| N04 (Knowledge) | Migration files | SQL migrations for new features |\n| N07 (Admin) | Updated tools | New/improved _tools/cex_*.py |\n| All nuclei | Executable projects | src/ + tests/ + Dockerfile |\n\n## Handoff Protocol\n\n```yaml\n# .cex/runtime/handoffs/n03_task.md\ntask: implement research pipeline\nsource_nucleus: N01\nbuilder_spec: archetypes/builders/research-pipeline-builder/\ninstance_config: _instances/codexa/N01_intelligence/research_pipeline_config.md\noutput_type: pipeline_runner\nexpected_files:\n  - src/research_pipeline/pipeline.py\n  - src/research_pipeline/stages/\n  - tests/test_pipeline.py\n  - Dockerfile\n  - .github/workflows/ci.yml\n```\n\n## Collaboration Matrix\n\n```\nN01 \u2500\u2500spec\u2500\u2500\u2192 N03 \u2500\u2500code\u2500\u2500\u2192 N05 (deploy)\nN02 \u2500\u2500spec\u2500\u2500\u2192 N03 \u2500\u2500code\u2500\u2500\u2192 N05 (deploy)\nN04 \u2500\u2500schema\u2500\u2192 N03 \u2500\u2500migration\u2192 N04 (execute)\nN06 \u2500\u2500spec\u2500\u2500\u2192 N03 \u2500\u2500code\u2500\u2500\u2192 N05 (deploy)\nN07 \u2500\u2500req\u2500\u2500\u2500\u2192 N03 \u2500\u2500tool\u2500\u2500\u2192 N07 (integrate)\n```",
+      "frontmatter": {
+        "id": "bld_sp_collaboration_software_project",
+        "kind": "collaboration",
+        "pillar": "P11",
+        "title": "Collaboration \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "collaboration",
+          "software-project",
+          "cross-nucleus"
+        ],
+        "tldr": "Cross-nucleus collaboration: N03 receives specs from N01/N02/N04 and produces executable code. N03\u2192N05 for deploy ops. N03\u2192N07 for CEX tool maintenance.",
+        "density_score": 0.88
+      },
+      "source_file": "bld_collaboration_software_project.md",
+      "bytes": 1660
+    },
+    "config_software_project": {
+      "content": "# Config\n\n## Defaults\n\n```yaml\npython_version: \"3.12\"\nbuild_backend: hatchling\nline_length: 100\ntest_framework: pytest\ntest_coverage_minimum: 60\nlint_tool: ruff\ntype_checker: mypy\nformatter: ruff\ncontainer: docker-multi-stage\ndeploy_target: railway\nci_provider: github-actions\npackage_manager: uv\n```\n\n## Override via Instance Config\n\n```yaml\n# _instances/{name}/N03_engineering/software_project_config.md\nproject_name: my-app\nproject_type: api_service  # cli_tool | api_service | pipeline_runner\npython_version: \"3.11\"     # Override default\ndeploy_target: render      # Override railway\nextra_deps:\n  - celery>=5.3\n  - asyncpg>=0.29\nfeatures:\n  - auth\n  - cache\n  - rate_limit\n  - webhooks\n```\n\n## Environment Variables Pattern\n\n```\n# .env.example (template)\nAPP_DATABASE_URL=postgresql://user:pass@localhost:5432/dbname\nAPP_REDIS_URL=redis://localhost:6379/0\nAPP_API_KEYS=dev-key-123\nAPP_DEBUG=false\nAPP_LOG_LEVEL=info\nAPP_WORKERS=4\n```\n\n## Feature Flags\n\n| Feature | Default | Adds |\n|---------|---------|------|\n| auth | off | APIKeyMiddleware, JWT handler |\n| cache | off | Redis client, cache middleware |\n| rate_limit | off | TenantRateLimitMiddleware |\n| webhooks | off | Webhook routes, signature verification |\n| celery | off | Worker, beat, Redis broker |\n| monitoring | off | Prometheus metrics, health detail |\n\n## Lifecycle\n\n- Created via 8F pipeline (F1-Focus through F8-Furnish)\n- Scored by `cex_score.py` (3-layer: structural + rubric + semantic)\n- Compiled by `cex_compile.py` for validation\n- Retrieved by `cex_retriever.py` for context injection\n- Evolved by `cex_evolve.py` when quality drops below threshold",
+      "frontmatter": {
+        "id": "bld_sp_config_software_project",
+        "kind": "config",
+        "pillar": "P09",
+        "title": "Config \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "config",
+          "software-project",
+          "defaults"
+        ],
+        "tldr": "Default configuration: Python 3.12, hatchling, ruff, pytest, Docker multi-stage, Railway deploy, GitHub Actions CI. All overridable via instance config.",
+        "density_score": 0.88,
+        "effort": "medium",
+        "max_turns": 25,
+        "disallowed_tools": [],
+        "fork_context": null,
+        "hooks": {
+          "pre_build": null,
+          "post_build": null,
+          "on_error": null,
+          "on_quality_fail": null
+        },
+        "permission_scope": "nucleus"
+      },
+      "source_file": "bld_config_software_project.md",
+      "bytes": 1630
+    },
+    "examples_software_project": {
+      "content": "# Software Project Builder \u2014 Examples\n\n## Example 1: CLI Scoring Tool\n\n**Intent**: \"Build a CLI tool that scores CEX artifacts\"\n\n```toml\n# pyproject.toml\n[project]\nname = \"cex-scorer\"\nversion = \"1.0.0\"\ndependencies = [\"pydantic>=2.0\", \"typer>=0.9\", \"rich>=13.0\", \"pyyaml>=6.0\"]\n[project.scripts]\ncex-score = \"cex_scorer.cli:app\"\n[tool.ruff]\nline-length = 100\nselect = [\"E\", \"W\", \"F\", \"I\", \"B\", \"UP\"]\n```\n\n```python\n# cli.py \u2014 Typer+Rich entry point\napp = typer.Typer(help=\"Score CEX artifacts\")\n@app.command()\ndef score(path: str, verbose: bool = False):\n    result = score_artifact(path)\n    color = \"green\" if result.score >= 8.0 else \"yellow\"\n    Console().print(f\"[{color}]{result.score:.1f}[/{color}] {path}\")\n```\n\n```python\n# conftest.py \u2014 pytest fixtures\n@pytest.fixture\ndef sample_artifact(tmp_path):\n    f = tmp_path / \"test.md\"\n    f.write_text(\"---\\nid: t\\nkind: knowledge_card\\npillar: P01\\nquality: null\\n---\\n# T\\nBody.\")\n    return str(f)\n```\n\n## Example 2: API Service\n\n**Intent**: \"Build a FastAPI service for product management\"\n\n```toml\n# pyproject.toml\n[project]\nname = \"product-api\"\nversion = \"1.0.0\"\ndependencies = [\"fastapi>=0.100\", \"uvicorn[standard]>=0.23\", \"pydantic>=2.0\", \"httpx>=0.24\", \"asyncpg>=0.29\"]\n[project.scripts]\nproduct-api = \"product_api.cli:main\"\n```\n\n```python\n# models.py \u2014 Pydantic V2 with Field constraints\nclass Product(BaseModel):\n    model_config = {\"from_attributes\": True}\n    id: str\n    name: str = Field(..., min_length=1, max_length=300)\n    price: float = Field(..., gt=0)\n    sku: str = Field(..., pattern=r'^[A-Z0-9-]{3,20}$')\n# config.py \u2014 BaseSettings with env_prefix\nclass Settings(BaseSettings):\n    model_config = {\"env_prefix\": \"APP_\"}\n    database_url: str\n    debug: bool = False\n```\n\n```dockerfile\nFROM python:3.12-slim AS builder\nWORKDIR /build\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nFROM python:3.12-slim\nRUN useradd --uid 1000 appuser\nCOPY --from=builder /usr/local /usr/local\nCOPY --chown=appuser src/ ./src/\nUSER appuser\nCMD [\"uvicorn\", \"product_api.api.main:app\", \"--host\", \"0.0.0.0\"]\n```\n\n## Example 3: Pipeline Runner\n\n**Intent**: \"Build a pipeline runner for research processing\"\n\n```python\n# pipeline.py \u2014 Stage-based like CEX 8F\n@dataclass\nclass StageResult:\n    stage: str; success: bool; data: dict; error: str | None = None\nclass Stage:\n    name: str = \"base\"\n    async def execute(self, state: dict) -> StageResult: raise NotImplementedError\nclass IntentStage(Stage):\n    name = \"intent\"\n    async def execute(self, state):\n        return StageResult(self.name, True, {\"intent\": parse(state[\"input\"][\"query\"])})\nclass Pipeline:\n    def __init__(self, stages: list[Stage]): self.stages = stages\n    async def run(self, input_data: dict) -> dict:\n        state = {\"input\": input_data, \"stages\": []}\n        for stage in self.stages:\n            result = await stage.execute(state)\n            state[\"stages\"].append(result)\n            state[result.stage] = result.data\n            if not result.success: break\n        return state\n```\n\n```yaml\n# ci.yml \u2014 lint\u2192test\u2192build\nname: CI\non: [push, pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with: { python-version: '3.12' }\n      - run: pip install -e \".[dev]\"\n      - run: ruff check . && pytest --cov -m \"not slow\"\n```",
+      "frontmatter": {
+        "id": "bld_sp_examples_software_project",
+        "kind": "example",
+        "pillar": "P04",
+        "title": "Examples \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "examples",
+          "software-project",
+          "cli",
+          "api",
+          "pipeline"
+        ],
+        "tldr": "3 concrete project examples: CLI scoring tool (Typer+Rich), API service (FastAPI+Supabase+Stripe), Pipeline runner (stage-based like 8F). Each shows pyproject.toml + key files.",
+        "density_score": 0.9
+      },
+      "source_file": "bld_examples_software_project.md",
+      "bytes": 3399
+    },
+    "instruction_software_project": {
+      "content": "# Software Project Builder \u2014 Instruction\n\n## Build Pipeline (9 Steps)\n\n### Step 1: PARSE (F1) \u2014 Intent \u2192 Project Spec\n**Input**: Intent + ISOs + config \u2192 **Output**: `{name, type, python, deps, features}` YAML\n**Gate**: type \u2208 {cli_tool, api_service, pipeline_runner}\n### Step 2: SCAFFOLD (F2) \u2014 Spec \u2192 Directory\n**Output**: pyproject.toml + `src/{name}/` + `tests/conftest.py` + `.env.example`\n**Gate**: pyproject.toml has [build-system], [project], [tool.ruff], [tool.pytest]\n### Step 3: IMPLEMENT (F3) \u2014 Scaffold \u2192 Business Logic\n**Output per archetype**:\n- CLI tool: `cli.py` (Typer+Rich) \u2014 apply kc_pydantic_patterns\n- API service: `api/main.py` (FastAPI) + routes/ + middleware/ \u2014 apply kc_fastapi_patterns\n- Pipeline: `pipeline.py` (stage executor) \u2014 apply kc_error_handling_python\n**Gate**: `python -m py_compile` on all .py\n### Step 4: TEST (F4) \u2014 Implementation \u2192 Test Suite\n**Output**: `conftest.py` (fixtures) + `test_{module}.py` + `test_integration.py`\nApply kc_pytest_patterns: markers, parametrize, coverage \u226560%.\n**Gate**: `pytest --collect-only` finds >0 tests\n### Step 5: LINT (F5) \u2014 Code \u2192 Clean Code\n**Output**: Ruff + mypy config in pyproject.toml (from kc_ruff_uv)\n**Gate**: `ruff check .` returns 0 errors\n### Step 6: DOCKER (F6) \u2014 Project \u2192 Container\n**Output**: Dockerfile (multi-stage, non-root, healthcheck) + compose + .dockerignore\nApply kc_docker_patterns. **Gate**: valid Dockerfile syntax\n### Step 7: CI (F7) \u2014 Project \u2192 GitHub Actions\n**Output**: `.github/workflows/ci.yml` (lint\u2192test\u2192build, cache, matrix)\nApply kc_github_actions. **Gate**: valid YAML, correct job refs\n### Step 8: DEPLOY (F8) \u2014 Project \u2192 Deploy Config\n**Output**: railway.toml | render.yaml | Procfile \u2014 apply kc_deploy_paas\n**Gate**: Health check + start command configured\n### Step 9: REVIEW (F8b) \u2014 Quality Report (7D rubric)\nCorrectness \u00b7 Security \u00b7 Performance \u00b7 Readability \u00b7 Tests \u00b7 Docs \u00b7 Architecture\nApply kc_code_review. Each dimension: \u2705/\u26a0\ufe0f/\u274c with 1-line rationale.\n## Pipeline Map\n```\nPARSE\u2192SCAFFOLD\u2192IMPLEMENT\u2192TEST\u2192LINT\u2192DOCKER\u2192CI\u2192DEPLOY\u2192REVIEW\n F1      F2       F3       F4   F5    F6    F7   F8    F8b\n```\n\n## Cross-References\n\n- **Pillar**: P03 (Prompt)\n- **Kind**: `instruction`\n- **Artifact ID**: `bld_sp_instruction_software_project`\n- **Tags**: [builder, instruction, software-project, pipeline]\n\n## Builder Integration\n\n| Aspect | Detail |\n|--------|--------|\n| ISO | 1 of 13 builder ISOs |\n| Loader | `cex_skill_loader.py` |\n| Pipeline | Injected at F3 (Compose) |",
+      "frontmatter": {
+        "id": "bld_sp_instruction_software_project",
+        "kind": "instruction",
+        "pillar": "P03",
+        "title": "Instruction \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "instruction",
+          "software-project",
+          "pipeline"
+        ],
+        "tldr": "9-step build pipeline: PARSE\u2192SCAFFOLD\u2192IMPLEMENT\u2192TEST\u2192LINT\u2192DOCKER\u2192CI\u2192DEPLOY\u2192REVIEW. Each step has inputs, outputs, and validation gates.",
+        "density_score": 0.92
+      },
+      "source_file": "bld_instruction_software_project.md",
+      "bytes": 2572
+    },
+    "knowledge_card_software_project": {
+      "content": "# Software Project Knowledge\n\n## 3 Project Archetypes\n\n### 1. CLI Tool (Typer + Rich)\n```python\napp = typer.Typer(help=\"My CLI tool\")\nconsole = Console()\n@app.command()\ndef run(input: str, output: str = \"result.json\", verbose: bool = False):\n    \"\"\"Execute the pipeline.\"\"\"\n    result = process(input)\n    Path(output).write_text(json.dumps(result))\n    console.print(f\"[green]Done[/green]: {output}\")\n```\nEntry point: `[project.scripts] myapp = \"myapp.cli:app\"`\n### 2. API Service (FastAPI + Pydantic)\n```python\napp = FastAPI(title=\"My API\", version=\"1.0.0\")\napp.add_middleware(CORSMiddleware, ...)\napp.include_router(v1_router)\n@app.get(\"/health\")\nasync def health(): return {\"status\": \"healthy\", \"version\": \"1.0.0\"}\n```\nStack: FastAPI + Pydantic + asyncpg + Redis + Celery\n### 3. Pipeline Runner (Stage-based)\n```python\nclass Pipeline:\n    def __init__(self, config):\n        self.stages = [ParseStage, TransformStage, ValidateStage, OutputStage]\n    async def run(self, input_data):\n        state = {\"input\": input_data}\n        for stage_cls in self.stages:\n            state = await stage_cls(self.config).execute(state)\n            if state.get(\"error\"): break\n        return state\n```\nPattern: Each stage has `execute(state) \u2192 state`. Mirrors CEX 8F pipeline.\n\n## Tech Stack Decisions\n\n| Decision | Default | Why |\n|----------|---------|-----|\n| Build backend | Hatchling | Fastest, no C deps |\n| HTTP client | httpx | Async support, modern API |\n| CLI framework | Typer | Type hints \u2192 CLI args |\n| Validation | Pydantic V2 | FastAPI integration, performance |\n| API framework | FastAPI | Async, OpenAPI, Pydantic native |\n| Lint/format | Ruff | 100x faster than alternatives |\n| Test | pytest | Fixtures, parametrize, plugins |\n| Package manager | UV | 10-100x faster pip |\n| Container | Docker multi-stage | Minimal runtime image |\n| Deploy | Railway | Zero-config PaaS |\n\n## The Spec\u2192Code Bridge\n\nCEX builders produce **specifications** (typed .md artifacts).\nThis builder transforms those specs into **executable code**.\n\n```\nBuilder ISOs \u2192 describe WHAT the system does\n                \u2193\nSoftware Project Builder \u2192 creates HOW it runs\n                \u2193\nOutputs: pyproject.toml + src/ + tests/ + Dockerfile + CI/CD\n```\n\n### Mapping: Builder ISO \u2192 Project File\n\n| Builder ISO | Maps To |\n|-------------|---------|\n| bld_system_prompt | README.md + docstrings |\n| bld_instruction | src/{name}/pipeline.py (stage order) |\n| bld_architecture | src/{name}/ directory layout |\n| bld_config | src/{name}/config.py (BaseSettings) |\n| bld_schema | src/{name}/models.py (Pydantic) |\n| bld_quality_gate | tests/ + .github/workflows/ci.yml |\n| bld_error_handling | src/{name}/errors.py |\n| bld_tools | pyproject.toml [dependencies] |\n| bld_examples | tests/test_examples.py |\n\n## Dependency Tiers\n\n```toml\n# Tier 0: Zero deps (stdlib only)\ndependencies = []\n\n# Tier 1: Minimal (validation + HTTP)\ndependencies = [\"pydantic>=2.0\", \"httpx>=0.24\"]\n\n# Tier 2: CLI (add Typer + Rich)\ndependencies = [\"pydantic>=2.0\", \"typer>=0.9\", \"rich>=13.0\"]\n\n# Tier 3: API (add FastAPI + uvicorn)\ndependencies = [\"fastapi>=0.100\", \"uvicorn[standard]>=0.23\", \"pydantic>=2.0\"]\n\n# Tier 4: Full (add DB + cache + async)\ndependencies = [..., \"asyncpg>=0.29\", \"redis>=5.0\", \"celery>=5.3\"]\n```\n\n\n## Anti-Patterns\n\n- Applying this artifact without understanding the domain context\n- Treating this as a standalone reference without checking linked artifacts\n- Ignoring version constraints when integrating",
+      "frontmatter": {
+        "id": "bld_sp_knowledge_card_software_project",
+        "kind": "knowledge_card",
+        "pillar": "P01",
+        "title": "Knowledge Card \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "knowledge-card",
+          "software-project",
+          "python",
+          "patterns"
+        ],
+        "tldr": "Core knowledge for building Python projects: 3 project archetypes (CLI/API/pipeline), tech stack decisions, dependency tiers, the 'spec\u2192code' bridge pattern from codexa-core production system.",
+        "density_score": 1.0,
+        "when_to_use": "Apply when core knowledge for building python projects: 3 project archetypes (cli/api/pipeline), tech stack ...",
+        "keywords": [
+          "knowledge-card",
+          "project",
+          "software-engineering",
+          "rich",
+          "archetypes"
+        ],
+        "linked_artifacts": {
+          "primary": null,
+          "related": []
+        }
+      },
+      "source_file": "bld_knowledge_card_software_project.md",
+      "bytes": 3494
+    },
+    "manifest_software_project": {
+      "content": "# Software Project Builder \u2014 Manifest\n\n## Capabilities\n\n| Vertical | What It Does | Depends On |\n|----------|-------------|------------|\n| **Scaffold** | pyproject.toml, src layout, CLI entry points | kc_python_project_structure |\n| **Implement** | FastAPI routes, Pydantic models, business logic | kc_fastapi_patterns, kc_pydantic_patterns |\n| **Test** | pytest fixtures, conftest, parametrize, coverage | kc_pytest_patterns |\n| **Lint** | Ruff config, mypy, pre-commit hooks | kc_ruff_uv, kc_git_hooks_ci |\n| **Docker** | Multi-stage Dockerfile, compose, .dockerignore | kc_docker_patterns |\n| **CI/CD** | GitHub Actions workflows (lint\u2192test\u2192build\u2192deploy) | kc_github_actions |\n| **Deploy** | Railway, Render, nixpacks, Procfile | kc_deploy_paas |\n| **Review** | PR review rubric, GitHub MCP, code review | kc_code_review |\n\n## Knowledge Sources\n\n| KC | Pillar | Status |\n|----|--------|--------|\n| kc_python_project_structure | P01/platform | \u2705 |\n| kc_pytest_patterns | P01/platform | \u2705 |\n| kc_github_actions | P01/platform | \u2705 |\n| kc_docker_patterns | P01/platform | \u2705 |\n| kc_fastapi_patterns | P01/platform | \u2705 |\n| kc_pydantic_patterns | P01/platform | \u2705 |\n| kc_deploy_paas | P01/platform | \u2705 |\n| kc_ruff_uv | P01/platform | \u2705 |\n| kc_git_hooks_ci | P01/platform | \u2705 |\n| kc_code_review | P01/platform | \u2705 |\n| kc_error_handling_python | P01/platform | \u2705 |\n| kc_security_forctices | P01/platform | \u2705 |\n\n## Output Modes\n\n| Mode | When | Output |\n|------|------|--------|\n| **CLI tool** | `build cli-tool for X` | typer CLI + src/ + tests/ |\n| **API service** | `build api for X` | FastAPI + middleware + routes |\n| **Pipeline runner** | `build pipeline for X` | Stage-based executor (like 8F) |\n\n## Boundary\n\n- Max project complexity: 20 files\n- Does NOT implement domain logic (that's the domain builder's job)\n- Does NOT manage infrastructure (that's N05 Ops)\n- Does NOT write marketing copy (that's N02)\n- DOES create the skeleton, tests, CI/CD, Docker that domain builders fill",
+      "frontmatter": {
+        "id": "bld_sp_manifest_software_project",
+        "kind": "manifest",
+        "pillar": "P03",
+        "title": "Manifest \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "manifest",
+          "software-project",
+          "capabilities"
+        ],
+        "tldr": "Capability manifest: 8 verticals (scaffold, implement, test, lint, docker, ci, deploy, review), 12 platform KCs consumed, 23 CEX tools available, 3 output modes (CLI, API, pipeline).",
+        "density_score": 0.89,
+        "keywords": [
+          "software-engineering",
+          "manifest",
+          "software-project",
+          "builder",
+          "capabilities"
+        ],
+        "triggers": [
+          "create software-engineering",
+          "build software-engineering artifact"
+        ],
+        "capabilities": "L1: | Vertical | What It Does | Depends On |. L2: Max project complexity: 20 files. L3: When user needs to create, build, or scaffold software engineering."
+      },
+      "source_file": "bld_manifest_software_project.md",
+      "bytes": 2014
+    },
+    "memory_software_project": {
+      "content": "# Memory \u2014 Learnings\n\n## From codexa-core (Production)\n\n### L01: CORS Middleware Must Be Outermost\n**Problem**: Auth middleware returned 401/403 but browser blocked response (no CORS headers).\n**Solution**: Add CORSMiddleware LAST (FastAPI processes last-added first).\n**Impact**: All error responses now include CORS headers.\n\n### L02: Environment Variables Before App Import\n**Problem**: Tests importing app before setting env vars caused config errors.\n**Solution**: Set `os.environ[\"ENV\"] = \"test\"` BEFORE `from api.main import app`.\n**Impact**: Consistent test behavior, no env pollution.\n\n### L03: Multi-Stage Docker Saves 600MB\n**Problem**: Single-stage image was 800MB+ (includes gcc, build tools).\n**Solution**: Builder stage installs deps \u2192 Runtime stage copies only venv.\n**Impact**: 200MB runtime image, faster deploys, smaller attack surface.\n\n### L04: pytest Markers Save 80% CI Time\n**Problem**: Full test suite took 5min, blocking PRs.\n**Solution**: Mark slow/integration tests, run `pytest -m \"not slow\"` in CI.\n**Impact**: PR checks complete in 60s. Full suite runs nightly.\n\n### L05: Railway Rollback Is Instant\n**Problem**: Bad deploy broke production, manual fix took 20min.\n**Solution**: `railway rollback` reverts to previous build in <30s.\n**Impact**: Zero-downtime recovery for deploy failures.\n\n### L06: Hatchling Build Is Fastest\n**Problem**: setuptools build took 15s, required setup.py.\n**Solution**: Switch to hatchling (pure Python, no C compilation).\n**Impact**: Build in <2s, single pyproject.toml config.\n\n### L07: Body Size Limit Prevents OOM\n**Problem**: Large POST payloads caused API worker to OOM crash.\n**Solution**: Middleware checks Content-Length before processing.\n**Impact**: 413 response for >5MB payloads, no more OOM.\n\n### L08: Structured Logging with Request IDs\n**Problem**: Couldn't trace errors across middleware\u2192handler\u2192service.\n**Solution**: ContextVar-based request_id in every log line.\n**Impact**: Full request tracing with `grep request_id` in logs.\n\n## From CEX Tools Development\n\n### L09: `_clean_llm_output()` Is Essential\n**Problem**: LLM returned markdown with ```yaml blocks, breaking parsing.\n**Solution**: Strip everything before first `---` in 8F runner.\n**Impact**: 100% reliable artifact production.\n\n### L10: Score Normalization Prevents Inflation\n**Problem**: First scorer gave everything 9.5+.\n**Solution**: Normalized to 8.0-9.3 range with 5D heuristics.\n**Impact**: Meaningful quality differentiation.",
+      "frontmatter": {
+        "id": "bld_sp_memory_software_project",
+        "kind": "memory",
+        "pillar": "P10",
+        "title": "Memory \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.0,
+        "tags": [
+          "builder",
+          "memory",
+          "software-project",
+          "learnings"
+        ],
+        "tldr": "Learnings from codexa-core (145K lines): CORS must be outermost middleware, env vars before imports, multi-stage Docker cuts 600MB, pytest markers save CI time, Railway rollback is instant.",
+        "density_score": 0.89,
+        "memory_scope": "project",
+        "observation_types": [
+          "user",
+          "feedback",
+          "project",
+          "reference"
+        ]
+      },
+      "source_file": "bld_memory_software_project.md",
+      "bytes": 2483
+    },
+    "output_template_software_project": {
+      "content": "# Output Template\n\n## pyproject.toml\n\n```toml\n[build-system]\nrequires = [\"hatchling>=1.21.0\"]\nbuild-backend = \"hatchling.build\"\n\n[project]\nname = \"[PROJECT_NAME]\"\nversion = \"[VERSION]\"\ndescription = \"[DESCRIPTION]\"\nrequires-python = \">=3.10\"\ndependencies = [\n    [DEPENDENCIES]\n]\n\n[project.optional-dependencies]\ndev = [\"pytest>=7.0\", \"pytest-cov>=4.0\", \"ruff>=0.1.0\"]\n\n[project.scripts]\n[CLI_NAME] = \"[PACKAGE].cli:app\"\n\n[tool.ruff]\nline-length = 100\n[tool.ruff.lint]\nselect = [\"E\", \"W\", \"F\", \"I\", \"B\", \"UP\", \"SIM\"]\n\n[tool.pytest.ini_options]\ntestpaths = [\"tests\"]\naddopts = [\"-v\", \"--tb=short\", \"--strict-markers\"]\nmarkers = [\"slow: slow tests\", \"integration: external deps\"]\n```\n\n## src/[PACKAGE]/__init__.py\n\n```python\n\"\"\"[DESCRIPTION]\"\"\"\n__version__ = \"[VERSION]\"\n```\n\n## src/[PACKAGE]/config.py\n\n```python\nfrom pydantic_settings import BaseSettings\n\nclass Settings(BaseSettings):\n    model_config = {\"env_prefix\": \"[PREFIX]_\", \"env_file\": \".env\"}\n    [CONFIG_FIELDS]\n\nsettings = Settings()\n```\n\n## tests/conftest.py\n\n```python\nimport os\nimport pytest\nos.environ[\"ENV\"] = \"test\"\n[TEST_ENV_VARS]\n\n@pytest.fixture\ndef [MAIN_FIXTURE]():\n    [FIXTURE_BODY]\n```\n\n## Dockerfile\n\n```dockerfile\nFROM python:3.12-slim AS builder\nWORKDIR /build\nRUN python -m venv /opt/venv\nENV PATH=\"/opt/venv/bin:$PATH\"\nCOPY requirements.txt .\nRUN pip install --upgrade pip && pip install -r requirements.txt\n\nFROM python:3.12-slim\nRUN groupadd --gid 1000 app && useradd --uid 1000 --gid app app\nWORKDIR /app\nCOPY --from=builder /opt/venv /opt/venv\nENV PATH=\"/opt/venv/bin:$PATH\" PYTHONUNBUFFERED=1\nCOPY --chown=app:app src/ ./src/\nEXPOSE [PORT]\nHEALTHCHECK CMD curl -f http://localhost:[PORT]/health || exit 1\nUSER app\nCMD [START_COMMAND]\n```\n\n## .github/workflows/ci.yml\n\n```yaml\nname: CI\non: [push, pull_request]\nconcurrency:\n  group: ci-${{ github.ref }}\n  cancel-in-progress: true\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with: { python-version: '3.12', cache: 'pip' }\n      - run: pip install -e \".[dev]\"\n      - run: ruff check .\n      - run: pytest --cov -m \"not slow\"\n```\n\n## Cross-References\n\n- **Pillar**: P06 (Schema)\n- **Kind**: `output template`\n- **Artifact ID**: `bld_sp_output_template_software_project`\n- **Tags**: [builder, output-template, software-project]\n\n## Output Pipeline\n\n| Aspect | Detail |\n|--------|--------|\n| Template | Defines structure for output template outputs |\n| Validation | Checked against `validation_schema` |\n| Post-hook | Scored by `cex_score.py` after creation |",
+      "frontmatter": {
+        "id": "bld_sp_output_template_software_project",
+        "kind": "output_template",
+        "pillar": "P06",
+        "title": "Output Template \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "output-template",
+          "software-project"
+        ],
+        "tldr": "Standard output structure: pyproject.toml skeleton, src layout, conftest.py, Dockerfile, CI workflow. All [PLACEHOLDERS] for costmization.",
+        "density_score": 0.88
+      },
+      "source_file": "bld_output_template_software_project.md",
+      "bytes": 2579
+    },
+    "quality_gate_software_project": {
+      "content": "# Quality Gates\n\n## 8 Hard Gates\n\n| Gate | Check | Pass Criteria | Weight |\n|------|-------|---------------|--------|\n| **G1: Syntax** | `python -m py_compile` on all .py | 0 errors | BLOCK |\n| **G2: Tests** | `pytest --collect-only` | \u22653 tests found | BLOCK |\n| **G3: Lint** | `ruff check .` | 0 errors | BLOCK |\n| **G4: Secrets** | Scan for API keys, passwords | 0 matches in non-test files | BLOCK |\n| **G5: Docker** | Dockerfile has multi-stage + non-root | Both present | WARN |\n| **G6: CI** | .github/workflows/ci.yml valid YAML | Parses without error | WARN |\n| **G7: Health** | `/health` endpoint exists (API mode) | Returns 200 | WARN |\n| **G8: Deps** | `pip-audit` on dependencies | 0 critical CVEs | WARN |\n\n**BLOCK** = fails build, **WARN** = allows but flags\n\n## Scoring Rubric\n\n```\n9.0-9.3: All 8 gates pass + rich tests + full CI/CD + security scanning\n8.5-8.9: G1-G4 pass + Docker + CI present\n8.0-8.4: G1-G4 pass (syntax, tests, lint, no secrets)\n7.0-7.9: G1-G2 pass only (syntax valid, some tests)\n<7.0:    Syntax errors or no tests \u2192 REJECT\n```\n\n## Gate Details\n\n### G1: Syntax Validation\n\n```bash\nfind src/ -name \"*.py\" -exec python -m py_compile {} \\;\n# Must return 0 for all files\n```\n\n### G2: Test Collection\n\n```bash\npytest --collect-only tests/\n# Must find \u22653 test items\n# Must have conftest.py with \u22651 fixture\n```\n\n### G3: Lint\n\n```bash\nruff check . --output-format=json\n# Must return [] (empty issues list)\n```\n\n### G4: Secret Scanning\n\n```python\nPATTERNS = [\n    r'password\\s*=\\s*[\"\\'][^\"\\']+[\"\\']',\n    r'api_key\\s*=\\s*[\"\\'][^\"\\']+[\"\\']',\n    r'sk-[a-zA-Z0-9]{20,}',\n    r'ghp_[a-zA-Z0-9]{36}',\n    r'-----BEGIN (RSA |EC )?PRIVATE KEY-----',\n]\n# Scan all files except tests/ and .env.example\n```\n\n### G5: Docker Validation\n\n```python\ndef validate_dockerfile(content):\n    checks = {\n        \"multi_stage\": \"AS builder\" in content or \"AS build\" in content,\n        \"non_root\": \"USER \" in content and \"USER root\" not in content,\n        \"healthcheck\": \"HEALTHCHECK\" in content,\n        \"no_install_recommends\": \"--no-install-recommends\" in content,\n    }\n    return all(checks.values())\n```\n\n### G6: CI Validation\n\n```python\nimport yaml\nwith open(\".github/workflows/ci.yml\") as f:\n    ci = yaml.safe_load(f)\nassert \"jobs\" in ci\nassert any(j for j in ci[\"jobs\"] if \"test\" in j.lower() or \"lint\" in j.lower())\n```\n\n## Retry Policy\n\n- If G1-G3 fail: retry implementation (max 2 attempts)\n- If G4 fails: remove secrets, replace with env vars, retry\n- If G5-G8 fail: flag as warnings, allow build to proceed\n- After 2 retries: save as DRAFT with quality < 8.0\n\n## Actions\n| Score | Tier | Action |\n|-------|------|--------|\n| >= 9.5 | GOLDEN | Publish as exemplar |\n| >= 8.0 | PUBLISH | Ready for runtime |\n| >= 7.0 | REVIEW | Flag for review |\n| < 7.0  | REJECT | Rework required |\n\n## Bypass\n| Field | Value |\n|-------|-------|\n| conditions | Experimental software-engineering artifact under active A/B testing |\n| approver | Nucleus lead (written approval required) |\n| audit_trail | Log in records/audits/ with bypass reason and timestamp |\n| expiry | 48h \u2014 must pass all gates before expiry |\n| never_bypass | H01 (YAML parse), H05 (quality null) |",
+      "frontmatter": {
+        "id": "bld_sp_quality_gate_software_project",
+        "kind": "quality_gate",
+        "pillar": "P07",
+        "title": "Quality Gate \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "quality-gate",
+          "software-project",
+          "validation"
+        ],
+        "tldr": "8 hard gates for software projects: syntax valid, tests pass, lint clean, no secrets, Docker builds, CI valid, health endpoint exists, deps audited. Must pass all 8 for \u22658.0.",
+        "density_score": 1.0
+      },
+      "source_file": "bld_quality_gate_software_project.md",
+      "bytes": 3185
+    },
+    "schema_software_project": {
+      "content": "# Software Project Schema\n\n## Required Files\n\n| File | Required | Validation |\n|------|----------|------------|\n| pyproject.toml | \u2705 | Must have [build-system], [project], [tool.ruff] |\n| README.md | \u2705 | Must have install + usage sections |\n| src/{pkg}/__init__.py | \u2705 | Must exist |\n| tests/conftest.py | \u2705 | Must have \u22651 fixture |\n| .env.example | \u2705 | Must list all env vars |\n| Dockerfile | \u26a0\ufe0f | Required for API/pipeline, optional for CLI |\n| .github/workflows/ci.yml | \u26a0\ufe0f | Required if GitHub repo |\n\n## pyproject.toml Validation\n\n```yaml\nrequired_sections:\n  - build-system.requires\n  - build-system.build-backend\n  - project.name\n  - project.version\n  - project.dependencies\n  - tool.ruff\n  - tool.pytest.ini_options\n\nrequired_deps:\n  dev: [pytest, ruff]\n  api: [fastapi, uvicorn, pydantic]\n  cli: [typer]\n\nconstraints:\n  project.name: \"^[a-z][a-z0-9-]{2,40}$\"\n  project.version: \"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+$\"\n  tool.ruff.line-length: \">=80, <=120\"\n```\n\n## Directory Structure\n\n```yaml\nrequired_dirs:\n  - src/{package}/\n  - tests/\n\noptional_dirs:\n  - src/{package}/api/       # If API mode\n  - src/{package}/core/      # Business logic\n  - .github/workflows/       # If GitHub\n  - docs/                    # Documentation\n\nforbidden_patterns:\n  - \"*.pyc\"\n  - \"__pycache__/\"\n  - \".env\"          # Must be in .gitignore\n  - \"node_modules/\"\n```\n\n## Test Requirements\n\n```yaml\nminimum_tests: 3\nrequired_markers: [unit, integration]\nfixture_requirements:\n  - conftest.py must set ENV=test before app import\n  - At least 1 shared fixture\ncoverage:\n  minimum: 60\n  branch: true\n```\n\n## Docker Validation\n\n```yaml\ndockerfile:\n  must_have:\n    - multi-stage (FROM ... AS builder, FROM ... AS runtime)\n    - non-root USER\n    - HEALTHCHECK\n  must_not_have:\n    - \"COPY . .\"  (without .dockerignore)\n    - hardcoded secrets\n    - apt-get without --no-install-recommends\n```\n\n## Security Checks\n\n```yaml\nno_secrets:\n  patterns:\n    - \"password\\\\s*=\\\\s*['\\\"][^'\\\"]+['\\\"]\"\n    - \"api_key\\\\s*=\\\\s*['\\\"][^'\\\"]+['\\\"]\"\n    - \"sk-[a-zA-Z0-9]{20,}\"\n    - \"ghp_[a-zA-Z0-9]{36}\"\n  allowed_in:\n    - \".env.example\"  # Only as placeholders\n    - \"tests/\"        # Test-only keys\n```",
+      "frontmatter": {
+        "id": "bld_sp_schema_software_project",
+        "kind": "schema",
+        "pillar": "P02",
+        "title": "Schema \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "schema",
+          "software-project",
+          "validation"
+        ],
+        "tldr": "Validation schema for software projects: required files, pyproject.toml fields, directory structure, test requirements, Docker constraints.",
+        "density_score": 0.88
+      },
+      "source_file": "bld_schema_software_project.md",
+      "bytes": 2178
+    },
+    "system_prompt_software_project": {
+      "content": "# Software Project Builder \u2014 System Prompt\n\nYou are the **Software Project Builder**, a full-stack Python engineer within the CEX system.\n\n## Identity\n\nYou transform **builder specifications** (14 ISOs) and **instance configurations** into **complete, deployable Python projects**. You bridge the gap between CEX typed knowledge and executable code.\n\n## Core Capabilities\n\n1. **Project Scaffolding**: pyproject.toml, src layout, __init__.py, CLI entry points\n2. **Implementation**: FastAPI routes, Pydantic models, business logic, error handling\n3. **Testing**: pytest fixtures, conftest, parametrize, markers (unit/integration/e2e)\n4. **Linting**: Ruff config, mypy config, pre-commit hooks\n5. **Containerization**: Multi-stage Dockerfile, docker-compose, .dockerignore\n6. **CI/CD**: GitHub Actions (lint \u2192 test \u2192 build \u2192 deploy)\n7. **Deployment**: Railway, Render, nixpacks, Procfile\n8. **Security**: Bandit, gitleaks, pip-audit, trivy, secret management\n\n## Inputs You Consume\n\n| Input | Source | Purpose |\n|-------|--------|---------|\n| Builder ISOs (14 files) | `archetypes/builders/{kind}-builder/` | Domain knowledge, pipeline spec |\n| Instance config | `_instances/{name}/N0X_*/` | Company-specific settings |\n| Platform KCs | `P01_knowledge/library/platform/` | Technology patterns |\n| Kind KC | `P01_knowledge/library/kind/kc_{kind}.md` | Kind-specific knowledge |\n\n## Outputs You Produce\n\n```\nproject/\n\u251c\u2500\u2500 pyproject.toml          # Deps, build, lint, test config\n\u251c\u2500\u2500 README.md               # Usage, install, deploy\n\u251c\u2500\u2500 Dockerfile              # Multi-stage (builder \u2192 runtime)\n\u251c\u2500\u2500 docker-compose.yml      # Full stack (API + DB + cache)\n\u251c\u2500\u2500 .github/workflows/\n\u2502   \u251c\u2500\u2500 ci.yml              # Lint + test + build\n\u2502   \u2514\u2500\u2500 deploy.yml          # Deploy to Railway/Render\n\u251c\u2500\u2500 src/{package}/\n\u2502   \u251c\u2500\u2500 __init__.py\n\u2502   \u251c\u2500\u2500 __version__.py\n\u2502   \u251c\u2500\u2500 cli.py              # Typer CLI entry point\n\u2502   \u251c\u2500\u2500 core/               # Business logic\n\u2502   \u251c\u2500\u2500 api/                # FastAPI routes (if API)\n\u2502   \u2514\u2500\u2500 config.py           # Pydantic BaseSettings\n\u251c\u2500\u2500 tests/\n\u2502   \u251c\u2500\u2500 conftest.py\n\u2502   \u251c\u2500\u2500 test_core/\n\u2502   \u2514\u2500\u2500 test_api/\n\u2514\u2500\u2500 .env.example\n```\n\n## Constraints\n\n- Python \u2265 3.10, Hatchling build backend\n- Ruff for lint+format (no flake8/black/isort)\n- pytest with markers (unit, integration, e2e, slow)\n- Multi-stage Docker (builder \u2192 slim runtime, non-root user)\n- No hardcoded secrets (all via env vars + BaseSettings)\n- 8F pipeline mandatory on every artifact produced",
+      "frontmatter": {
+        "id": "bld_sp_system_prompt_software_project",
+        "kind": "system_prompt",
+        "pillar": "P03",
+        "title": "System Prompt \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "system-prompt",
+          "software-project",
+          "python",
+          "full-stack"
+        ],
+        "tldr": "Identity prompt for the Software Project Builder. Transforms CEX builder specs and configs into complete Python projects with tests, CI/CD, Docker, and deploy configs.",
+        "density_score": 0.9
+      },
+      "source_file": "bld_system_prompt_software_project.md",
+      "bytes": 2607
+    },
+    "tools_software_project": {
+      "content": "# Tools\n\n## Build Tools\n\n| Tool | Purpose | Install |\n|------|---------|---------|\n| **hatch** | Build backend (pyproject.toml \u2192 wheel) | `pip install hatch` |\n| **uv** | Fast package manager (10-100x pip) | `pip install uv` |\n| **pip** | Standard package installer (fallback) | Built-in |\n| **setuptools** | Legacy build (avoid for new projects) | Built-in |\n\n## Quality Tools\n\n| Tool | Purpose | Install |\n|------|---------|---------|\n| **ruff** | Lint + format (replaces flake8+black+isort) | `pip install ruff` |\n| **mypy** | Static type checking | `pip install mypy` |\n| **pytest** | Test framework + coverage | `pip install pytest pytest-cov` |\n| **pytest-asyncio** | Async test support | `pip install pytest-asyncio` |\n| **hypothesis** | Property-based testing | `pip install hypothesis` |\n\n## Deploy Tools\n\n| Tool | Purpose | Install |\n|------|---------|---------|\n| **docker** | Container build + run | System install |\n| **docker-compose** | Multi-container orchestration | System install |\n| **railway** | PaaS deploy CLI | `npm i -g @railway/cli` |\n| **supabase** | Database CLI (migrations, functions) | `npm i -g supabase` |\n\n## Security Tools\n\n| Tool | Purpose | Install |\n|------|---------|---------|\n| **bandit** | Python SAST | `pip install bandit` |\n| **gitleaks** | Secret detection in git history | GitHub Action |\n| **pip-audit** | Dependency vulnerability scan | `pip install pip-audit` |\n| **trivy** | Container vulnerability scan | GitHub Action |\n| **semgrep** | Multi-language SAST | GitHub Action |\n\n## MCP Tools (N03 Config)\n\n```json\n{\n  \"mcpServers\": {\n    \"github\": {\n      \"command\": \"cmd\",\n      \"args\": [\"/c\", \"npx\", \"-y\", \"@anthropic/mcp-server-github\"],\n      \"env\": { \"GITHUB_TOKEN\": \"${GITHUB_TOKEN}\" }\n    },\n    \"fetch\": {\n      \"command\": \"cmd\",\n      \"args\": [\"/c\", \"npx\", \"-y\", \"@anthropic/mcp-server-fetch\"]\n    }\n  }\n}\n```\n\n## CEX Tools (Internal)\n\n| Tool | Purpose |\n|------|---------|\n| cex_8f_runner | Build CEX artifacts via 8F pipeline |\n| cex_compile | Compile .md \u2192 .yaml |\n| cex_doctor | Health check |\n| cex_score | Quality scoring |\n| cex_hooks | Pre-commit validation |\n| cex_system_test | Full system test |\n\n## Tool Permissions\n\n| Category | Tools | Status |\n|----------|-------|--------|\n| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |\n| DENIED | (none) | Explicitly blocked |\n| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |",
+      "frontmatter": {
+        "id": "bld_sp_tools_software_project",
+        "kind": "tools",
+        "pillar": "P04",
+        "title": "Tools \u2014 Software Project Builder",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "updated": "2026-03-31",
+        "author": "n03_engineering",
+        "domain": "software-engineering",
+        "quality": 9.1,
+        "tags": [
+          "builder",
+          "tools",
+          "software-project",
+          "python-tooling"
+        ],
+        "tldr": "Tool inventory: 4 build tools (hatch, uv, pip, setuptools), 3 quality tools (ruff, mypy, pytest), 3 deploy tools (docker, railway, render), 3 security tools (bandit, gitleaks, pip-audit), 2 MCP tools (github, fetch).",
+        "density_score": 0.89
+      },
+      "source_file": "bld_tools_software_project.md",
+      "bytes": 2439
+    },
+    "shared_skill_guided_decisions": {
+      "content": "# Skill: Guided Decision Protocol (GDP)\n\n## The Principle\n\n> **When the LLM decides, the output is generic.**\n> **When the USER decides, the output is theirs.**\n>\n> Every assumption you avoid is a revision the user won't need.\n\nThe GDP is as mandatory as the 8F pipeline.\n8F controls HOW artifacts are built.\nGDP controls WHO decides WHAT goes in them.\n\n---\n\n## When to Trigger a Decision Point\n\nA **Decision Point (DP)** activates when:\n\n1. **Multiple valid paths exist** \u2014 archetype A vs B, layout X vs Y, tone formal vs casual\n2. **Subjective preference matters** \u2014 colors, names, voice, positioning, pricing\n3. **Trade-offs are real** \u2014 speed vs quality, cost vs features, niche vs broad\n4. **The output will be hard to undo** \u2014 brand identity, architecture, deployment target\n5. **The user has context you don't** \u2014 their market, their competitors, their gut feeling\n\nA DP does NOT activate for:\n- Mechanical/deterministic steps (compile, validate, format)\n- Technical correctness (schema compliance, syntax)\n- CEX internal operations (8F pipeline, signaling, indexing)\n\n---\n\n## The DP Format\n\nEvery Decision Point follows this exact structure:\n\n```\n\u2501\u2501\u2501 DP {N}/{TOTAL}: {TOPIC} \u2501\u2501\u2501\n\n{1-2 sentence context explaining WHY this matters}\n\n  1. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  2. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  3. {OPTION_EMOJI} {Option Name} \u2014 \"{short description}\"\n     \u2192 Best if: {when to pick this}\n\n  \u2605 Recommended: {N} ({reason from context/signals})\n\n  [Type number, combine like \"1+3\", or describe your own]: \u258c\n```\n\n### Rules for Options\n\n| Rule | Detail |\n|------|--------|\n| **3-5 options max** | More than 5 overwhelms. Less than 2 isn't a choice. |\n| **Always have a \u2605 Recommended** | The user can always just hit Enter. Never leave them stuck. |\n| **Recommendation has a reason** | Not \"I think\" \u2014 cite a signal: \"based on your 'educational' description\" |\n| **\"Describe your own\" is always valid** | Options are suggestions, not walls. Freetext is always accepted. |\n| **Emoji per option** | Visual scanning. One emoji per option, consistent within a DP. |\n| **\"Best if\" clause** | Helps the user self-select without jargon. |\n| **Numbering is stable** | Once presented, option 2 is always option 2. Don't renumber. |\n\n---\n\n## DP Density by Domain\n\nNot every interaction needs the same amount of DPs.\n\n| Domain | DP Density | Why |\n|--------|-----------|-----|\n| **Brand Identity** (N06) | HIGH (8-12 DPs) | Every choice is subjective and permanent |\n| **Content/Copy** (N02) | MEDIUM (4-6 DPs) | Tone, layout, CTA style matter |\n| **Research** (N01) | LOW-MEDIUM (2-4 DPs) | Scope, depth, focus area |\n| **Knowledge** (N04) | LOW (1-3 DPs) | Structure, detail level |\n| **Operations** (N05) | LOW (1-3 DPs) | Platform, scaling, cost trade-offs |\n| **Build** (N03) | MINIMAL (0-2 DPs) | Mostly mechanical, schema-driven |\n| **Orchestration** (N07) | MEDIUM (3-5 DPs) | Priority, sequencing, resource allocation |\n\n---\n\n## DP Chaining\n\nDPs can depend on each other. Later DPs adapt based on earlier choices.\n\n```\nDP 1: Archetype \u2192 User picks \"Sage\"\nDP 2: Voice Tone \u2192 Options CHANGE because Sage implies authority+warmth\nDP 3: Color Palette \u2192 Options CHANGE because Sage palette is different from Rebel\n```\n\nWhen a previous DP narrows the space, say so:\n\n```\n\u2501\u2501\u2501 DP 3/8: Color Palette \u2501\u2501\u2501\n\nBased on your Sage archetype, these palettes work best:\n\n  1. \ud83d\udd35 Deep Trust \u2014 navy #1B365D + gold #C5A55A + cream #FAF3E0\n     \u2192 Best if: you want gravitas and authority\n\n  2. \ud83d\udfe2 Growth Wisdom \u2014 forest #2D5016 + sage #B2BEB5 + white #FAFAFA\n     \u2192 Best if: you want natural, approachable wisdom\n\n  3. \ud83d\udfe3 Modern Scholar \u2014 indigo #4B0082 + silver #C0C0C0 + white #FFFFFF\n     \u2192 Best if: you want contemporary, tech-forward wisdom\n\n  \u2605 Recommended: 1 (Deep Trust) \u2014 matches your \"professor but accessible\" description\n\n  [Type number, adjust colors, or describe your vibe]: \u258c\n```\n\n---\n\n## Handling User Responses\n\n| Response | Action |\n|----------|--------|\n| `2` | Select option 2. Confirm briefly: \"Got it \u2014 Going with Growth Wisdom \ud83d\udfe2\" |\n| `1+3` | Combine elements. \"Mixing Deep Trust base with Modern Scholar accents \u2014 nice.\" |\n| `the first one but more green` | Adapt option 1 with modification. Show the modified version. |\n| Free text: `\"I want something techy and dark\"` | Map to closest option or create costm. \"Sounds like a Dark Mode Scholar vibe. Let me propose...\" |\n| `?` or confused | Explain the trade-offs in simpler language. No jargon. |\n| Empty / Enter / \"whatever\" / \"you choose\" | Apply \u2605 Recommended. \"Going with the recommended option: Deep Trust \ud83d\udd35\" |\n| `skip` | Apply \u2605 Recommended and note it can be changed later. |\n\n---\n\n## DP Timing in Workflows\n\nDPs are NOT dumped all at once. They are **interleaved with progress**.\n\n```\nBAD:  \"Here are 12 questions. Answer all.\"\nGOOD: \"Let me ask you a few things as we go.\"\n```\n\nPattern:\n1. Ask DP 1-2 (identity basics)\n2. **Show progress**: \"Great. I already know enough to suggest...\"\n3. Ask DP 3-4 (personality, voice)\n4. **Show preview**: \"Here's what your brand is looking like so far...\"\n5. Ask DP 5-6 (audience, positioning)\n6. **Show preview**: \"Almost there. Your brand summary so far...\"\n7. Ask DP 7-8 (visual, monetization)\n8. **Final confirmation**: \"Here's the complete picture. Change anything?\"\n\n---\n\n## Preview After Every 2-3 DPs\n\nAfter every 2-3 decisions, show a running summary:\n\n```\n\u2501\u2501\u2501 Your Brand So Far \u2501\u2501\u2501\n  Name:       Acme Academy\n  Archetype:  \ud83e\uddd9 Sage\n  Voice:      Authoritative but warm (4,3,2,4,4)\n  Colors:     Deep Trust palette (#1B365D, #C5A55A, #FAF3E0)\n  Audience:   Career-switchers who want to become devs\n  \u2501\u2501\u2501 {5/8 decisions made} \u2501\u2501\u2501\n```\n\nThis gives the user confidence that their choices are being heard,\nand a chance to go back: \"Actually, can I change the colors?\"\n\n---\n\n## The Final Confirmation DP\n\nEvery GDP sequence ends with a FULL REVIEW:\n\n```\n\u2501\u2501\u2501 Final Review \u2501\u2501\u2501\n\nHere's everything we've decided together:\n\n  Brand:         Acme Academy\n  Tagline:       \"Code your future\"\n  Archetype:     \ud83e\uddd9 Sage\n  Voice:         Authoritative, warm, low humor, high trust\n  Colors:        #1B365D, #C5A55A, #FAF3E0\n  Font:          Inter (headers) + Source Serif (body)\n  Audience:      Career-switchers, 25-40, frustrated with current job\n  Transformation: From \"stuck in a dead-end job\" to \"confident junior dev\"\n  Category:      Online Education / Tech\n  Pricing:       Subscription (R$ 47/mo basic, R$ 97/mo pro)\n\n  \u2705 Confirm all \u2192 I'll generate brand_config.yaml\n  \u270f\ufe0f Change something \u2192 tell me which item\n  \ud83d\udd04 Start over \u2192 we'll redo the whole flow\n\n  [Confirm, change, or start over]: \u258c\n```\n\n---\n\n## Anti-Patterns (BLOCKED)\n\n| Anti-Pattern | Why It's Bad | Do This Instead |\n|-------------|-------------|-----------------|\n| \"I'll assume a Sage archetype\" | User might be a Rebel. You just poisoned the brand. | Present 3-4 options with \u2605 recommendation |\n| Dumping 10 questions at once | Overwhelming. User gives shallow answers. | 2-3 at a time, preview between rounds |\n| \"Which of these 12 archetypes...\" | Too many choices = paralysis | Pre-filter to 3-4 based on signals |\n| No recommendation on any DP | User with no branding knowledge is stuck | ALWAYS have \u2605 Recommended with reason |\n| Skipping final review | User can't see the full picture | ALWAYS show complete summary before executing |\n| Assuming after 1 vague answer | \"Casual\" doesn't mean Jester. | Probe: \"Casual like a friend or casual like a comedian?\" |\n| Using branding jargon | \"5D voice calibration\" means nothing to a bakery owner | \"How should your brand sound?\" |\n\n---\n\n## Part 2: The Autonomy Side\n\nGDP is half the picture. The other half is what happens AFTER decisions are made.\n\n### The Decision Manifest\n\nEvery GDP session produces a **Decision Manifest**:\n`.cex/runtime/decisions/decision_manifest.yaml`\n\nThis file contains:\n- Every DP answer (choice + reason + alternatives shown)\n- Brand config pointer (`.cex/brand/brand_config.yaml`)\n- Per-nucleus specific decisions\n- Constraints (language, currency, quality floor)\n- Flags for auto-filled decisions (user skipped \u2192 \u2605 Recommended applied)\n\n### The Two-Phase Pattern\n\n```\nPHASE 1 \u2014 Co-pilot (GDP active, user present)\n  N07 identifies mission\n  N07 identifies which decisions are subjective\n  N07 presents DPs to user (this skill)\n  N07 writes decision_manifest.yaml\n  N07 locks manifest (status: locked)\n\nPHASE 2 \u2014 Autonomous (GDP off, nuclei dispatched)\n  N07 dispatches via grid/solo\n  Handoff includes: \"Read .cex/runtime/decisions/decision_manifest.yaml\"\n  Each nucleus reads manifest ONCE at start\n  Each nucleus executes 8F with manifest context\n  ZERO questions to user\n  Commit \u2192 signal \u2192 done\n```\n\n### How Nuclei Read the Manifest\n\nAt the start of any dispatched task, a nucleus:\n\n1. Checks if manifest exists: `.cex/runtime/decisions/decision_manifest.yaml`\n2. If YES \u2192 reads it, extracts relevant decisions (global + per_nucleus.{self})\n3. If NO \u2192 falls back to brand_config.yaml only (minimal context)\n4. Uses decisions as CONSTRAINTS for 8F, not as suggestions\n\nA nucleus NEVER overrides a manifest decision.\nA nucleus NEVER re-asks a question the manifest already answered.\n\n### Edge Cases During Autonomous Execution\n\n| Situation | What the nucleus does |\n|-----------|----------------------|\n| Manifest covers the decision | Use it. No question. |\n| Manifest doesn't cover this specific case | Apply \u2605 Recommended. Add to `auto_filled` list. |\n| Decision seems wrong in context | Execute it anyway. Flag in output: \"\u26a0\ufe0f Manifest says X, but Y might be better \u2014 review recommended.\" |\n| Manifest is corrupt/missing | Fall back to brand_config.yaml. If that's also missing, use sensible defaults + flag everything. |\n\n### Why This Works\n\nThe plat\u00f4 between autonomy and collaboration:\n\n```\n100% User decides \u2190\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 GDP \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192 100% LLM decides\n         \u2191                    \u2191                       \u2191\n     Slow, tedious      THE SWEET SPOT          Generic, misaligned\n     but perfect        User decides WHAT        Fast but wrong\n                        LLM decides HOW\n```\n\n- **User decides WHAT**: brand name, tone, audience, positioning, colors, pricing model\n- **LLM decides HOW**: file structure, frontmatter, 8F pipeline, compilation, signaling\n- **Manifest is the contract**: locks the WHAT so the HOW can run free",
+      "frontmatter": {
+        "id": "skill_guided_decisions",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach all builders and nuclei to present structured decision points instead of assuming. The Co-pilot Protocol.",
+        "version": "1.0.0",
+        "created": "2026-03-31",
+        "author": "n07_orchestrator",
+        "quality": 9.1,
+        "tags": [
+          "skill",
+          "shared",
+          "copilot",
+          "guided-decisions",
+          "UX",
+          "interaction"
+        ],
+        "tldr": "When a decision affects the output, STOP and present numbered options with recommendations. Never assume what the user wants. This is as mandatory as 8F.",
+        "density_score": 0.95
+      },
+      "source_file": "skill_guided_decisions.md",
+      "bytes": 10647
+    },
+    "shared_skill_memory_update": {
+      "content": "# Skill: Memory Update After Execution\n\n## When to Use\nAfter EVERY build session, before signaling complete.\n\n## What to Record\nOne structured observation per session. Focus on **reusable patterns**, not obvious facts.\n\n### Good Observations\n1. \"Splitting handler into validate+process+respond reduced errors 40%\"\n2. \"Builders with >3 tools need explicit tool-selection criteria\"\n3. \"ISO files >4KB overflow small model context \u2014 split into sections\"\n\n### Bad Observations (DO NOT record)\n1. \"The schema was followed\" (obvious)\n2. \"The file was saved\" (mechanical)\n3. \"Quality was high\" (vague)\n\n## How to Record\n\n```bash\npython _tools/cex_memory_update.py \\\n  --builder <your-builder-id> \\\n  --type feedback \\\n  --observation \"what you learned\" \\\n  --pattern \"generalizable rule\" \\\n  --evidence \"data that supports it\" \\\n  --confidence 0.8 \\\n  --outcome SUCCESS\n```\n\n## Observation Types\n| Type | Decay | When to Use |\n|------|-------|-------------|\n| user | 0.02/day | User preference or style |\n| feedback | 0.00 | Quality feedback (NEVER decays) |\n| project | 0.05/day | Project-specific context |\n| reference | 0.03/day | External knowledge or docs |\n\n## Rules\n1. ONE observation per session (quality > quantity)\n2. Confidence 0.0-1.0 (be honest, 0.6-0.8 is normal)\n3. Pattern must be ACTIONABLE (someone else can apply it)\n4. Evidence must be MEASURABLE when possible\n5. If nothing was learned, don't force an observation\n\n## Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `instruction` |\n| Pillar |  |\n| Domain | CEX system |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "skill_memory_update",
+        "kind": "instruction",
+        "scope": "shared",
+        "purpose": "Teach builders to reflect and record learnings after execution",
+        "quality": 9.0,
+        "title": "Skill Memory Update",
+        "version": "1.0.0",
+        "author": "n03_builder",
+        "tags": [
+          "artifact",
+          "builder",
+          "examples"
+        ],
+        "tldr": "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls.",
+        "domain": "CEX system",
+        "created": "2026-04-07",
+        "updated": "2026-04-07",
+        "density_score": 0.9
+      },
+      "source_file": "skill_memory_update.md",
+      "bytes": 1718
+    },
+    "shared_skill_verification_protocol": {
+      "content": "# Verification Protocol (Shared Skill)\n\nAfter producing an artifact (F6 PRODUCE), invoke this protocol before F7 GOVERN.\n\n## When to Verify\n1. 3+ sections modified in the artifact\n2. Artifact kind is core (system_prompt, skill, guardrail, agent, agent_card)\n3. Quality target >= 8.5\n4. Retry attempt (previous quality gate failure)\n\n## Verification Steps\n\n1. **Schema compliance**: Does the artifact match its kind's SCHEMA.md?\n   Check: every required frontmatter field present and correctly typed.\n\n2. **Boundary compliance**: Does the artifact stay within its kind's boundary?\n   Check: no system_prompt content in a skill, no task instructions in identity.\n\n3. **Naming compliance**: Does the ID match the naming convention from kinds_meta.json?\n   Check: `p{NN}_{prefix}_{slug}` format.\n\n4. **Cross-reference check**: Do all referenced artifacts/builders/kinds exist?\n   Check: grep for references, verify targets are real paths.\n\n5. **Adversarial probe**: Try to break the artifact:\n   - Feed it an edge-case input (empty, malformed, contradictory)\n   - Check if the rules are enforceable or aspirational\n   - Verify the output format is machine-parseable\n\n## Output\nFor each check: PASS with evidence or FAIL with Expected vs Actual.\nFinal: VERDICT: PASS | FAIL | PARTIAL\n\n## Artifact Metadata\n\n```yaml\nkind: skill\npillar: P04\npipeline: 8F\nscoring: hybrid_3_layer\ncompilation: cex_compile\n```\n\n## Artifact Properties\n\n| Property | Value |\n|----------|-------|\n| Kind | `skill` |\n| Pillar | P04 |\n| Domain | verification |\n| Pipeline | 8F (F1-F8) |\n| Scorer | `cex_score.py` |\n| Compiler | `cex_compile.py` |\n| Retriever | `cex_retriever.py` |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |",
+      "frontmatter": {
+        "id": "shared_skill_verification_protocol",
+        "kind": "skill",
+        "pillar": "P04",
+        "version": "1.0.0",
+        "created": "2026-04-05",
+        "updated": "2026-04-05",
+        "author": "n07-orchestrator",
+        "title": "Shared Skill: Verification Protocol for All Builders",
+        "domain": "verification",
+        "quality": 9.1,
+        "tags": [
+          "shared",
+          "skill",
+          "verification",
+          "adversarial",
+          "all-builders"
+        ],
+        "source_insight": "OpenClaude verificationAgent.ts -- adapted as shared builder skill",
+        "tldr": "Every builder can invoke adversarial verification on its output before publishing",
+        "density_score": 0.86
+      },
+      "source_file": "skill_verification_protocol.md",
+      "bytes": 1702
+    }
+  },
+  "total_tokens": 11813,
+  "total_bytes": 47252
+}
