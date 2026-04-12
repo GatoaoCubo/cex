@@ -1,0 +1,194 @@
+---
+id: self_audit_newpc_2026_04_12
+kind: context_doc
+title: N01 Self-Audit -- New PC Setup (2026-04-12)
+pillar: P01_knowledge
+nucleus: N01
+version: 1.0.0
+quality: null
+created: 2026-04-12
+mission: NEWPC_SETUP
+---
+
+# N01 Self-Audit -- New PC Setup
+
+**Machine**: Windows 11 Pro 10.0.26200
+**Date**: 2026-04-12
+**Python**: 3.14.4
+**Node**: npx 11.11.0
+**UV**: uvx 0.11.6
+
+---
+
+## Phase 1: MCP Server Verification
+
+| # | Server | Binary | API Key | Verdict | Notes |
+|---|--------|--------|---------|---------|-------|
+| 1 | firecrawl | npx 11.11.0 [OK] | FIRECRAWL_API_KEY **NOT SET** | **FAIL** | Binary works, key missing |
+| 2 | fetch | uvx 0.11.6 [OK] | n/a | **PASS** | No key required |
+| 3 | markitdown | npx 11.11.0 [OK] | n/a | **PASS** | No key required |
+| 4 | brave-search | npx 11.11.0 [OK] | BRAVE_API_KEY **NOT SET** | **FAIL** | Binary works, key missing |
+| 5 | notebooklm | npx 11.11.0 [OK] | n/a | **PASS** | No key required |
+
+**Score: 3/5 PASS**
+
+### Impact Analysis
+
+| Server | Research Capability Lost | Alternative |
+|--------|------------------------|-------------|
+| firecrawl | Structured web extraction (competitor sites, pricing pages) | fetch server (raw HTML, no structured extraction) |
+| brave-search | Real-time web search for competitive intelligence | Claude Code's built-in WebSearch tool (if available) |
+
+**Recommendation**: Set `FIRECRAWL_API_KEY` and `BRAVE_API_KEY` in system environment or `.env`. These are the two servers that power N01's competitive intelligence pipeline (discover -> extract).
+
+---
+
+## Phase 2: Python Tools Audit
+
+### Tool Health
+
+| Tool | --help | Runtime | Verdict |
+|------|--------|---------|---------|
+| cex_retriever.py | [OK] | **FAIL** (numpy+sklearn missing) | **DEGRADED** |
+| cex_compile.py | [OK] | [OK] | **PASS** |
+| cex_doctor.py | [OK] | [OK] | **PASS** |
+
+### Python Package Audit
+
+| Package | Status | Required By |
+|---------|--------|-------------|
+| tiktoken | [OK] installed | cex_token_budget.py |
+| anthropic | [OK] installed | API calls, scoring |
+| requests | [OK] installed | HTTP tools |
+| pyyaml | [OK] installed | All YAML processing |
+| **numpy** | **MISSING** | cex_retriever.py (TF-IDF vectors) |
+| **scikit-learn** | **MISSING** | cex_retriever.py (TfidfVectorizer) |
+| **scipy** | **MISSING** (implied) | sklearn dependency |
+
+**Fix command**:
+```bash
+pip install numpy scikit-learn
+```
+
+### Impact of Missing sklearn
+
+`cex_retriever.py` is the TF-IDF semantic search engine (2184 docs, 12K vocab). Without it:
+- F3 INJECT cannot find similar artifacts automatically
+- F5 CALL retriever queries fail
+- `cex_evolve.py` auto-research loop cannot discover improvement targets
+- Manual `--query` searches for competitive intel are unavailable
+
+**Severity**: HIGH -- this is the backbone of N01's knowledge retrieval pipeline.
+
+Compared to: `cex_compile.py` and `cex_doctor.py` work fine, so artifact production (F8) and validation (F7) are unaffected. The bottleneck is discovery (F3/F5).
+
+---
+
+## Phase 3: Artifact Inventory
+
+### Count by Subdirectory (source files only, excluding compiled/)
+
+| Subdirectory | Files | Types |
+|-------------|------:|-------|
+| output | 20 | Research deliverables, audits, benchmarks |
+| knowledge | 10 | KCs (intelligence domain, methods, tools) |
+| schemas | 6 | Contracts (citation, analysis, brief, depth, source, trend) |
+| quality | 5 | Quality gate, scoring rubrics, benchmark, eval dataset |
+| memory | 5 | Learning record, checkpoint, knowledge index, embedding, RAG |
+| tools | 4 | Research pipeline, scraping, search, MCP config |
+| orchestration | 4 | Dispatch rules, workflow, pipeline |
+| prompts | 3 | System prompt, template, chain |
+| agents | 3 | Main agent, competitor tracker, paper reviewer |
+| reports | 2 | Prior self-audits |
+| feedback | 1 | Quality gate |
+| architecture | 1 | Agent card |
+| compiled/ | 59 | YAML compiled versions (auto-generated) |
+| **TOTAL source** | **64** | |
+| **TOTAL with compiled** | **123** | |
+
+### Artifacts with `quality: null` (never scored)
+
+25 artifacts have never been peer-reviewed:
+
+| Category | Count | Files |
+|----------|------:|-------|
+| Agents | 2 | agent_competitor_tracker, agent_paper_reviewer |
+| Knowledge | 4 | kc_benchmark_tool_vs_llm, kc_cex_distribution_model, kc_token_optimization_map, kc_tool_first_patterns |
+| Memory | 3 | checkpoint, knowledge_index, learning_record |
+| Orchestration | 1 | workflow_notebooklm_pipeline |
+| Output | 6 | audit_pi_references, intent_resolution_benchmark, cf_dags_and_specs, content_factory_landscape, kc_quality_audit, report_input_intent_resolution |
+| Prompts | 1 | chain_kc_to_notebooklm |
+| Quality | 2 | p07_benchmark_research_quality, p07_eval_dataset_research_outputs |
+| Tools | 3 | mcp_server_config, scraping_config, search_config |
+
+**38% of source artifacts are unscored.** This is a quality debt that should be addressed in a scoring wave.
+
+Compared to: The agent card claims 53 artifacts. Actual source count is 64 (excluding README and agent card itself). The discrepancy likely reflects artifacts added since the last agent card update (2026-04-07).
+
+### KC Library Cross-Reference
+
+The `P01_knowledge/library/kind/` path referenced in CLAUDE.md does not exist on this machine. The 123 KC files are likely part of a git-managed directory that may not have been fully cloned or is located elsewhere.
+
+KCs found in N01's own `knowledge/` directory (4 relevant to domain):
+- `kc_benchmark_tool_vs_llm.md` -- tool vs LLM scoring comparison
+- `kc_cex_distribution_model.md` -- distribution model research
+- `kc_token_optimization_map.md` -- token budget optimization
+- `kc_tool_first_patterns.md` -- tool-first development patterns
+
+### 3 Identified Gaps
+
+| # | Gap | Impact | Priority | Comparison |
+|---|-----|--------|----------|------------|
+| 1 | **No requirements.txt / pyproject.toml** for N01 dependencies | New PC setup requires guessing which pip packages to install. numpy+sklearn gap would not exist if deps were declared. | **HIGH** | N05 (operations) should own a project-level requirements.txt |
+| 2 | **KC library missing from disk** | P01_knowledge/library/kind/ with 123 kind KCs is referenced in CLAUDE.md but absent. F2 BECOME and F3 INJECT cannot load builder knowledge cards. | **HIGH** | Blocks ALL nuclei, not just N01 |
+| 3 | **No `chunk_strategy` or `vector_store` artifacts** | Cannot configure RAG chunking or vector backends for long-document research. Semantic search over papers requires both. | **MEDIUM** | Partially mitigated by embedding_config but that only covers model selection, not chunking or storage |
+
+---
+
+## Phase 4: Agent Card Verification
+
+| Field | Agent Card Claims | Actual | Match? |
+|-------|-------------------|--------|--------|
+| Model | opus-4-6, 1M context | opus-4-6, 1M context | [OK] |
+| MCP servers | 5 (firecrawl, fetch, markitdown, brave-search, notebooklm) | 5 (matches .mcp-n01.json exactly) | [OK] |
+| Artifact count | 53 | 64 source files | **STALE** -- 11 artifacts added since last update |
+| Kinds buildable | 20 | 20 | [OK] |
+| Kinds with instances | 8 | 8 | [OK] |
+| Tools | 16 | 16 listed | [OK] |
+
+**Verdict**: Agent card is mostly accurate. Artifact count needs update (53 -> 64).
+
+---
+
+## Summary Scorecard
+
+| Phase | Score | Status |
+|-------|-------|--------|
+| MCP Servers | 3/5 | **DEGRADED** -- 2 API keys missing |
+| Python Tools | 2/3 | **DEGRADED** -- sklearn+numpy missing |
+| Artifact Inventory | 64 artifacts, 25 unscored | **OPERATIONAL** with quality debt |
+| Agent Card | 5/6 fields accurate | **STALE** artifact count |
+
+### Critical Actions (ordered by impact)
+
+| # | Action | Command | Blocks |
+|---|--------|---------|--------|
+| 1 | Install numpy + scikit-learn | `pip install numpy scikit-learn` | cex_retriever.py, cex_evolve.py |
+| 2 | Set FIRECRAWL_API_KEY | System env or .env | Competitive intelligence pipeline |
+| 3 | Set BRAVE_API_KEY | System env or .env | Real-time web search |
+| 4 | Verify KC library path | Check if P01_knowledge/library/kind/ should exist | F2/F3 builder knowledge injection |
+| 5 | Score 25 unscored artifacts | `python _tools/cex_score.py --apply` per file | Quality metrics |
+| 6 | Update agent card artifact count | Edit agent_card_n01.md | Accuracy |
+
+---
+
+## Environment Fingerprint
+
+```
+OS:      Windows 11 Pro 10.0.26200
+Python:  3.14.4
+Node:    npx 11.11.0
+UV:      uvx 0.11.6
+Git:     main branch, clean (6 untracked task files)
+Claude:  opus-4-6, 1M context
+```

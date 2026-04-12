@@ -25,7 +25,7 @@ density_score: 1.0
 
 8F is the reasoning protocol for every task -- research briefs, competitive grids, trend reports all pass F1-F8.
 
-**Comparative positioning**: N01 has closed its artifact gaps. With 53 artifacts, 3 agents, 4 tool configs, and 5 quality artifacts (including benchmark + eval dataset), N01 now matches N05's infrastructure maturity while maintaining unique depth in external research via 5 MCP servers and 6 schema contracts.
+**Comparative positioning**: N01 has 64 source artifacts, 3 agents, 4 tool configs, and 5 quality artifacts (including benchmark + eval dataset). N01 matches N05's infrastructure maturity while maintaining unique depth in external research via 5 MCP servers and 6 schema contracts.
 
 ## My Artifacts
 
@@ -42,7 +42,8 @@ density_score: 1.0
 | quality | 5 | Quality gate + 2 scoring rubrics + benchmark + eval dataset |
 | schemas | 6 | Contracts: citation format, competitive analysis, research brief, depth levels, source quality, trend detection |
 | tools | 4 | Research pipeline + scraping config + search config + MCP server orchestration |
-| **TOTAL** | **53** | |
+| reports | 3 | Self-audit reports (newpc, codex, prior) |
+| **TOTAL** | **64** | |
 
 ## Kinds I Can Build
 
@@ -165,7 +166,7 @@ Compared to: N03 builds primarily P03+P08 kinds (prompt/architecture), N05 build
 
 | Category | Count |
 |----------|------:|
-| Artifacts in N01_intelligence/ | 53 |
+| Artifacts in N01_intelligence/ | 64 |
 | Kinds I can build | 20 |
 | Kinds with instances | 8 |
 | Tools relevant to my work | 16 |
