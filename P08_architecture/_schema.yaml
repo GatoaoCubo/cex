@@ -61,6 +61,11 @@ kinds:
     - constraints (hard + soft)
     - scaling config
     - monitoring spec
+    trust_tiers:
+      sandboxed: "Read-only access. Cannot modify files or run destructive commands."
+      standard: "Read-write access. Can create/edit files in own nucleus directory."
+      privileged: "System-modify access. Can edit shared config, run deploys, kill processes."
+    required_trust: standard  # default tier for new agent cards
     llm_function: BECOME
     references:
     - A2A AgentCard (Google, 2024)

@@ -569,23 +569,39 @@ def compose_prompt(
         except ImportError:
             pass  # brand_inject not available, skip silently
 
-    # --- Knowledge Card Injection (semantic search via Supabase pgvector) ---
+    # ================================================================
+    # F3 INJECT: Synapse 8-Layer Context Envelope (A1 pattern)
+    #
+    # Canonical ordering ensures deterministic prompt structure:
+    #   L0 Rules     -- .claude/rules/ (already injected above via Wire 1)
+    #   L1 Global    -- brand config, nucleus identity (already injected above)
+    #   L2 Agent     -- builder specs (already injected above)
+    #   L3 Workflow   -- prior outputs from earlier pipeline steps
+    #   L4 Task      -- intent context, retry feedback
+    #   L5 (reserved) -- user session context (future)
+    #   L6 Retrieval -- KCs, memory, auto-retrieved context
+    #   L7 Commands  -- execution instructions (injected below)
+    # ================================================================
+
+    # --- L6 Retrieval: Knowledge Cards ---
     kc_block = _load_relevant_kcs(intent, parsed)
     if kc_block:
+        parts.append("## [L6] Knowledge Card Context")
         parts.append(kc_block)
 
-    # --- Builder Memory (per-builder, not shared) ---
+    # --- L6 Retrieval: Builder Memory ---
     memory_block = _load_builder_memories(builder_id, intent)
     if memory_block:
+        parts.append("## [L6] Builder Memory")
         parts.append(memory_block)
 
-    # --- F5 Auto-Retrieved Context (tool execution outputs) ---
+    # --- L6 Retrieval: Auto-Retrieved Context (F5 CALL outputs) ---
     if hasattr(state, "tool_results") and state.tool_results.get("enrichment_text"):
-        parts.append("## Auto-Retrieved Context (F5 CALL)")
+        parts.append("## [L6] Auto-Retrieved Context (F5 CALL)")
         parts.append(state.tool_results["enrichment_text"])
         parts.append("")
 
-    # --- Prior Outputs ---
+    # --- L3 Workflow: Prior Outputs ---
     # Only inject outputs from completed earlier steps (not current function)
     prior = {
         bid: out
@@ -595,7 +611,7 @@ def compose_prompt(
         and not out.content.startswith("[DRY-RUN]")
     }
     if prior:
-        parts.append("## Prior Builder Outputs")
+        parts.append("## [L3] Prior Builder Outputs")
         parts.append("These outputs were produced by earlier pipeline steps.")
         parts.append("Use them as context -- do not repeat their work.")
         parts.append("")
@@ -607,15 +623,15 @@ def compose_prompt(
             parts.append(content)
             parts.append("")
 
-    # --- Retry Feedback ---
+    # --- L4 Task: Retry Feedback ---
     if retry_feedback:
-        parts.append("## Retry Feedback")
+        parts.append("## [L4] Retry Feedback")
         parts.append("Your previous attempt did not pass the quality gate.")
         parts.append(retry_feedback)
         parts.append("")
 
-    # --- Execution Instructions ---
-    parts.append("## Execution Instructions")
+    # --- L7 Commands: Execution Instructions ---
+    parts.append("## [L7] Execution Instructions")
     parts.append(
         f"1. You are executing builder `{builder_id}` for pipeline function `{function_name}`."
     )

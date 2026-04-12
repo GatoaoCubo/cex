@@ -152,18 +152,34 @@ def _parse_soft_dimensions(gate_content: str) -> list[dict]:
 
 
 def _parse_hard_gates(gate_content: str) -> list[dict]:
-    """Extract hard gates from quality gate file."""
+    """Extract hard gates from quality gate file.
+
+    Supports optional severity column: | H01 | check | fail_cond | CRITICAL |
+    Severity levels: CRITICAL (blocks), HIGH (warns), MEDIUM (documents), LOW (ignored).
+    If no severity column, defaults to HIGH.
+    """
     gates = []
     for m in re.finditer(
-        r'^\|\s*(H\d+)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|',
+        r'^\|\s*(H\d+)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*(?:\|\s*(CRITICAL|HIGH|MEDIUM|LOW)\s*)?\|',
         gate_content, re.MULTILINE
     ):
+        severity = m.group(4).upper() if m.group(4) else "HIGH"
         gates.append({
             "id": m.group(1),
             "check": m.group(2).strip(),
             "fail_condition": m.group(3).strip(),
+            "severity": severity,
         })
     return gates
+
+
+# Severity weights for scoring impact
+SEVERITY_WEIGHTS = {
+    "CRITICAL": 1.0,   # full impact -- blocks publish
+    "HIGH": 0.7,       # strong impact -- warns
+    "MEDIUM": 0.3,     # partial impact -- documents
+    "LOW": 0.0,        # no scoring impact -- informational
+}
 
 
 def score_rubric(path: str) -> tuple[float, list[dict], list[str]]:
@@ -226,12 +242,20 @@ def score_rubric(path: str) -> tuple[float, list[dict], list[str]]:
         else:
             passed = True  # can't check programmatically, assume pass
 
-        if passed:
-            hard_pass += 1
-        else:
-            notes.append(f"FAIL {gate['id']}: {gate['check'][:50]}")
+        severity = gate.get("severity", "HIGH")
+        weight = SEVERITY_WEIGHTS.get(severity, 0.7)
 
-    hard_ratio = hard_pass / max(len(hard_gates), 1)
+        if passed:
+            hard_pass += weight
+        else:
+            if severity == "CRITICAL":
+                notes.append(f"BLOCK {gate['id']} [{severity}]: {gate['check'][:50]}")
+            elif severity != "LOW":
+                notes.append(f"FAIL {gate['id']} [{severity}]: {gate['check'][:50]}")
+
+    max_weight = sum(SEVERITY_WEIGHTS.get(g.get("severity", "HIGH"), 0.7)
+                     for g in hard_gates) or 1.0
+    hard_ratio = hard_pass / max_weight
 
     # Soft dimensions -- pattern-based scoring
     soft_dims = _parse_soft_dimensions(gate_content)
