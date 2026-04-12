@@ -26,7 +26,7 @@ You describe **intent** in 8 tokens. CEX compiles it into a **governed prompt** 
 
 - **132 artifact kinds** across 12 pillars, each with typed frontmatter and validation
 - **8-function pipeline** (8F): CONSTRAIN > BECOME > INJECT > REASON > CALL > PRODUCE > GOVERN > COLLABORATE
-- **121 builder factories**, each with 13 ISO files (schema, prompt, examples, quality gate, ...)
+- **128 builder factories**, each with 13 ISO files (schema, prompt, examples, quality gate, ...)
 - **Multi-provider routing**: Claude, GPT, Gemini, Ollama -- with health checks and automatic fallback
 - **Reverse compiler**: export your knowledge base to CLAUDE.md, .cursorrules, CustomGPT JSON
 - **Self-healing**: model updater detects stale versions, flywheel audits doc-vs-practice integrity
@@ -52,7 +52,7 @@ python _tools/cex_bootstrap.py              # Answer ~6 questions about your com
 python _tools/cex_8f_runner.py "create knowledge card about product pricing" --kind knowledge_card --execute
 
 # 5. Validate system health
-python _tools/cex_doctor.py                 # Builder integrity (121 builders)
+python _tools/cex_doctor.py                 # Builder integrity (128 builders)
 python _tools/cex_hooks.py validate-all     # Frontmatter validation
 python _tools/cex_flywheel_audit.py audit   # Full system audit (109 checks)
 ```
@@ -202,7 +202,7 @@ bash _spawn/dispatch.sh stop --all                              # Stop ALL (DANG
 ### Quality & Governance
 | Tool | Purpose |
 |------|---------|
-| `cex_doctor.py` | Builder health check (121 builders) |
+| `cex_doctor.py` | Builder health check (128 builders) |
 | `cex_hooks.py` | Pre/post validation + git hooks |
 | `cex_score.py` | Peer review scoring (--apply) |
 | `cex_flywheel_audit.py` | Full system audit (109 checks) |
@@ -260,7 +260,7 @@ cex/
   _tools/                52 Python CLI tools (cex_*.py)
   _spawn/                Dispatch scripts (solo, grid, monitor)
   _docs/                 Whitepaper, architecture docs
-  archetypes/            Builder templates (121 builders x 13 ISOs)
+  archetypes/            Builder templates (128 builders x 13 ISOs)
     builders/            One directory per kind
     _shared/             Shared skills across all builders
   boot/                  Boot scripts per nucleus (auto-generated)

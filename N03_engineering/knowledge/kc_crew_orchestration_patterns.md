@@ -1,6 +1,10 @@
 ---
-title: "Padrões de Orquestração de Equipes para Sistemas Multimodelo"
-kind: knowledge
+id: kc_crew_orchestration_patterns
+title: "Crew Orchestration Patterns for Multi-Model LLM Systems"
+kind: knowledge_card
+version: 1.0.0
+quality: null
+pillar: P01
 nucleus: N03
 description: "Análise comparativa de padrões de orquestração de equipes (crews) em sistemas multimodelo de LLMs, incluindo topologia estrela, malha, pipeline, hierárquica e híbrida."
 tags: [orquestração, LLM, padrões, equipes, multimodelo]
