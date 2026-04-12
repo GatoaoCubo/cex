@@ -66,12 +66,18 @@ foreach ($nuc in $nuclei) {
     # PS nested quoting breaks on special chars. Instead, use --read to load
     # the task file and --message with a short fixed instruction.
     $title = "$($nuc.ToUpper()) [AIDER+OLLAMA] - $mission"
+    # Pass task file as --file (editable+readable), context as --read
+    $fileArgs = @()
     $readArgs = @()
-    foreach ($cf in $existingFiles) { $readArgs += "--read $cf" }
+    if (Test-Path $taskFile) { $fileArgs += $taskFile }
+    foreach ($cf in $existingFiles) {
+        if ($cf -ne $taskFile) { $readArgs += "--read $cf" }
+    }
+    $fileStr = ($fileArgs | ForEach-Object { "--file $_" }) -join " "
     $readStr = $readArgs -join " "
 
     $envSetup = "`$env:OLLAMA_API_BASE = 'http://localhost:11434'"
-    $cmd = "$envSetup; Set-Location '$CEX_ROOT'; `$Host.UI.RawUI.WindowTitle = '$title'; aider --model $model --subtree-only --yes --auto-commits --no-show-model-warnings --message 'Read the n*_task.md file and execute the task described in it. Create all requested files.' $readStr"
+    $cmd = "$envSetup; Set-Location '$CEX_ROOT'; `$Host.UI.RawUI.WindowTitle = '$title'; aider --model $model --subtree-only --yes --auto-commits --no-show-model-warnings $fileStr $readStr --message 'Read n03_task.md carefully and execute every task in it. Create all files listed.'"
 
     $proc = Start-Process powershell -ArgumentList "-NoExit", "-Command", $cmd -PassThru
     "$($proc.Id) $nuc aider s_aider $(Get-Date -Format 'yyyy-MM-ddTHH:mm:ss')" | Add-Content $pidFile -Encoding utf8
