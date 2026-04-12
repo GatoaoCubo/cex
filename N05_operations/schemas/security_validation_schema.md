@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: security-operations
-quality: null
+quality: 9.0
 tags: [validator, security, operations, N05, schema, validation]
 tldr: "Security validation schema defining rules for secret detection, auth verification, input sanitization, and dependency auditing across the CEX codebase."
 density_score: 0.96

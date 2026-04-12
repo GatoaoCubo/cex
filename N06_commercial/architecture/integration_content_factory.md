@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: content-factory-integration
-quality: null
+quality: 8.9
 tags: [integration, content-factory, pricing, pipeline, checkout, stripe, hotmart, eduzz, brand-price-variables]
 tldr: "Integration spec connecting N06 pricing artifacts to N03 pipeline workflow. Covers: checkout flow via Stripe/Hotmart/Eduzz, credit system architecture, {{BRAND_PRICE_*}} variable injection, webhook event flow, subscription lifecycle, and cross-nucleus data contracts."
 density_score: 0.94

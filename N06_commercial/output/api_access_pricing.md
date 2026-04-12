@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: api-monetization
-quality: null
+quality: 8.9
 tags: [api, pricing, sdk, programmatic-access, tiers, monetization, developer, integration]
 tldr: "Pricing model for CEX SDK API access. 4 tiers (Dev/Startup/Business/Enterprise), usage-based billing, rate limits, SLA levels. Addresses Gap #1 from monetization audit: cex_sdk/ has 78 files but zero commercial layer."
 density_score: 0.95

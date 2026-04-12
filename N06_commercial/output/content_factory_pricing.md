@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: content-factory-pricing
-quality: null
+quality: 8.9
 tags: [pricing, content-factory, per-format, tiers, margins, revenue, monetization]
 tldr: "Per-format pricing for Content Factory outputs. 9 format types, 3 tiers (Free/Pro/Enterprise), real cost basis from validated stack, margin analysis per output, a-la-carte + bundle economics, revenue projections by format mix."
 density_score: 0.95

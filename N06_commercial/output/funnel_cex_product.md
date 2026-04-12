@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: product-funnel
-quality: null
+quality: 8.9
 tags: [funnel, AIDA, conversion, cex-product, acquisition, monetization]
 tldr: "Specific AIDA conversion funnel for CEX-as-product. 4 stages with exact touchpoints, content assets, metrics, and ownership. Not a generic pattern -- this is the executable funnel for launching CEX commercially."
 density_score: 0.94

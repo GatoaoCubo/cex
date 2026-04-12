@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: content-factory-funnel
-quality: null
+quality: 8.9
 tags: [funnel, content-factory, free-to-paid, lead-magnet, tripwire, core-offer, upsell, conversion]
 tldr: "4-stage sales funnel for Content Factory: Lead magnet (free podcast/flashcards) -> Tripwire (single ebook R$19) -> Core offer (Full Content Pack R$147) -> Upsell (monthly subscription R$497/mo). Each stage has conversion targets, assets, copy hooks, and nucleus ownership."
 density_score: 0.95

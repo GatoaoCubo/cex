@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: intent-resolution-depth-pricing
-quality: null
+quality: 8.9
 tags: [intent-resolution, depth-levels, pricing-gate, conversion, enterprise, L0-L7, monetization, competitive-moat]
 tldr: "Canonical specification for the 7-level intent resolution depth model (L0-L7). Each level adds measurable value, gated by pricing tier. L0-L2 free (demonstrate taxonomy magic), L3-L5 Pro (full 8F + brand + multi-source), L6-L7 Enterprise (multi-nucleus dispatch + custom taxonomy). Includes side-by-side L2 vs L5 output comparison, conversion trigger copy, and Enterprise ROI calculator."
 density_score: 0.94
