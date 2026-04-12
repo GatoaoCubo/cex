@@ -1,107 +1,113 @@
 ---
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
-kc_type: meta_kc
+kc_type: domain_kc
 pillar: P01
-title: "System Testing Patterns — Smoke, Integration, E2E, Regression"
+title: "System Testing Patterns — Selection, Tradeoffs, and Thresholds"
 version: "1.0.0"
 created: "2026-04-12"
 updated: "2026-04-12"
-author: "N04"
-domain: testing
+author: "knowledge-card-builder"
+domain: software_testing
+subdomain: system_testing
 quality: null
-tags: [system-test, integration-test, e2e, regression, smoke-test, validation, cex]
-tldr: "4 pattern families gate system quality: smoke (alive?), integration (contracts?), e2e (golden path?), regression (no drift?)."
-when_to_use: "Before deploy, after major refactors, as CI gate, or when validating multi-component flows."
-keywords: [system-test, smoke-test, integration-test, regression, e2e-test]
+tags: [system-testing, integration-testing, e2e, test-pyramid, smoke-test, regression, contract-testing, chaos-engineering, knowledge]
+tldr: "7 named system-test patterns with selection criteria: pyramid (70/20/10), smoke (< 5 min), regression (change guard), contract (API boundary), chaos (failure injection), golden-path (happy-path lock), mutation (suite sensitivity)."
+when_to_use: "Designing test suites, choosing test strategy, auditing coverage gaps at system or service boundary."
+keywords: [system-testing, test-pyramid, smoke-test, contract-test, chaos-engineering]
 long_tails:
-  - when to run smoke tests vs integration tests
-  - how to classify a system test failure by root cause
-  - what patterns cover multi-component validation in CI
+  - which test pattern to use for microservices API boundary validation
+  - how to detect flaky tests and ice cream cone anti-pattern
+  - when to use chaos testing vs regression testing
+  - test coverage targets for production system release gate
 axioms:
-  - ALWAYS run smoke before integration — a dead process cannot have contract bugs
-  - NEVER use unit mocks in e2e tests — mock boundaries invalidate golden path coverage
-  - IF regression baseline is missing THEN generate it before merging, not after
+  - ALWAYS build the pyramid bottom-up; fix unit gaps before adding e2e
+  - NEVER tolerate flaky tests — quarantine immediately, fix within 2 sprints
+  - IF microservices call each other THEN add contract tests before e2e
+  - IF deploy frequency > 10/day THEN smoke suite must run under 5 minutes
 linked_artifacts:
   primary: null
-  related: [p01_kc_cex_system_test_suite]
+  related: [p01_kc_rag_fundamentals]
 density_score: 0.87
 data_source: "https://martinfowler.com/articles/practical-test-pyramid.html"
 ---
 
-# System Testing Patterns — Smoke, Integration, E2E, Regression
+# System Testing Patterns — Selection, Tradeoffs, and Thresholds
 
 ## Quick Reference
 ```yaml
 topic: system_testing_patterns
-scope: multi-component validation (not unit tests)
-owner: N04 / N05
+scope: multi-component integration testing at runtime boundary
+owner: knowledge-card-builder
 criticality: high
-cex_tool: _tools/cex_system_test.py (54 tests)
+patterns: 7
+anti_patterns: 3
 ```
 
 ## Pattern Taxonomy
 
-| Pattern | Scope | Trigger | Pass Criteria | Typical Count |
-|---------|-------|---------|---------------|---------------|
-| Smoke | Process alive, config valid | Every deploy | Exit 0, no crash | 3-10 |
-| Integration | Component boundary contracts | PR merge, dependency bump | All contracts satisfied | 10-30 |
-| E2E | Full golden path, real I/O | Release gate, nightly | Output matches expected fixture | 5-15 |
-| Regression | No drift from baseline | Refactor, model update | Delta within threshold | 20-100 |
+| Pattern | Trigger | Coverage Focus | Relative Cost | Skip When |
+|---------|---------|----------------|---------------|-----------|
+| Test Pyramid | Always | Distribution rule | N/A | Never |
+| Smoke Test | Every deploy | Go/no-go gate | Low (< 5 min) | No deploy pipeline |
+| Regression Suite | Code change | Change-guard baseline | Medium | Prototype only |
+| Contract Test | API boundary change | Provider/consumer agreement | Medium | Monolith, no API versioning |
+| Chaos Test | Pre-production, gameday | Failure resilience | High | No on-call runbooks yet |
+| Golden Path Test | Release gate | Happy-path baseline lock | Low-medium | Exploratory phase |
+| Mutation Test | Suite quality audit | Test sensitivity | High (10-30x) | CI time < 10 min budget |
 
-## Smoke Tests
-- **Purpose**: fastest possible alive-check — is the system bootable?
-- **Checks**: process starts, config loads, DB reachable, required env vars set
-- **SLA**: must complete in < 30 s; if > 30 s, scope is wrong
-- **On failure**: stop pipeline immediately — no value running deeper tests
+## Core Patterns
 
-## Integration Tests
-- **Purpose**: validate contracts between two components at their boundary
-- **Boundary types**: API schema, event payload, DB row shape, file format
-- **Data**: use deterministic fixtures, never prod snapshots
-- **Anti-pattern**: testing internal state instead of the boundary output
+- **Test Pyramid**: Distribute 70% unit / 20% integration / 10% e2e; invert = fragility
+- **Smoke Test**: Minimal critical-path suite; deploy gate; pass = safe to proceed
+- **Regression Suite**: Baseline snapshot of known-good behavior; fail = change broke it
+- **Contract Test (Pact)**: Consumer defines expectations; provider verifies; decouples teams
+- **Chaos Test**: Inject latency, kill nodes, exhaust resources; measure MTTR and blast radius
+- **Golden Path Test**: Lock happy-path input → expected output; detects silent regressions
+- **Mutation Test**: Modify source (flip `>` to `>=`); if tests still pass, tests are weak
 
-## End-to-End (E2E) Tests
-- **Purpose**: validate complete user-facing flow from input to final output
-- **Coverage target**: golden path first; edge cases only after golden passes
-- **Environment**: real infra or hermetic replica — no mocks past the boundary
-- **Fixture strategy**: record-and-replay for external APIs; seed DB before each run
+## Selection Matrix
 
-## Regression Tests
-- **Purpose**: detect unintended drift from a known-good baseline snapshot
-- **Baseline storage**: commit snapshot artifacts alongside code (`tests/snapshots/`)
-- **Diff strategy**: exact match for deterministic outputs; tolerance for LLM outputs
-- **Update flow**: human approves diff → commit new baseline → CI green
+| Scenario | Recommended Pattern(s) |
+|----------|------------------------|
+| Greenfield service, first tests | Pyramid + Smoke |
+| Microservices with API versioning | Contract + Smoke + Regression |
+| High-frequency deploys (> 10/day) | Smoke (< 5 min) + Golden Path |
+| Post-incident, resilience required | Chaos + Regression |
+| Test suite not catching bugs | Mutation + Pyramid audit |
+| Release gate for production | Golden Path + Smoke + Regression |
+| Legacy monolith, no tests | Smoke first, Regression second |
 
-## Failure Classification
+## Key Thresholds
 
-| Failure Type | Root Cause Signal | Resolution Path |
-|-------------|-------------------|----------------|
-| Smoke fails | Process crash / missing config | Fix env or boot before any other work |
-| Integration fails | Schema mismatch / version skew | Align producer and consumer schemas |
-| E2E fails | Logic regression or infra gap | Reproduce locally, add unit test, fix |
-| Regression fails | Intentional change or model drift | Review diff, approve or revert |
-| Flaky | Timing, order dependence, external I/O | Isolate with retry budget, then fix root |
+| Metric | Target | Source |
+|--------|--------|--------|
+| Pyramid unit ratio | >= 70% | Fowler, 2018 |
+| Smoke suite duration | < 5 min | Google SRE practices |
+| E2E flakiness tolerance | 0% (quarantine) | DORA research |
+| Contract test coverage | 100% of public API endpoints | Pact docs |
+| Mutation score | >= 80% for critical paths | Pitest, 2022 |
+| Regression pass rate gate | 100% before merge | Industry standard |
 
-## Decision Matrix
+## Anti-Patterns
 
-| Situation | Use Pattern |
-|-----------|-------------|
-| First check after deploy | Smoke |
-| New API endpoint added | Integration |
-| Full feature shipped to user | E2E (golden path) |
-| Prompt or model version bumped | Regression |
-| CI gate for every PR | Smoke + Integration |
-| Nightly quality gate | All 4 in sequence |
-| CEX pipeline validation | `cex_system_test.py` (54 tests, covers all 4) |
+- **Ice Cream Cone**: 80% e2e, 10% integration, 10% unit — slow, brittle, expensive to fix
+- **Flaky Test Tolerance**: Retrying intermittent tests masks real failures; causes false confidence
+- **Missing Contract Tests**: E2E catches API breakage too late; contract catches at PR time
 
-## Golden Rules
-- ALWAYS run patterns in order: smoke -> integration -> e2e -> regression
-- NEVER let a flaky test block CI — quarantine it, file a ticket, fix within 48 h
-- ALWAYS tie regression baselines to a commit SHA, not a date
-- IF smoke fails in production THEN rollback immediately, do not debug in prod
+## Flow: Pattern Selection Decision
+
+```text
+[New Service?] --> Pyramid + Smoke
+[API Change?]  --> Contract Test first
+[Post-Deploy?] --> Smoke gate (< 5 min)
+[Incident?]    --> Chaos + Regression
+[Suite Weak?]  --> Mutation audit
+[Release?]     --> Golden Path + Smoke + Regression
+```
 
 ## References
+
 - Fowler, M. "Practical Test Pyramid": https://martinfowler.com/articles/practical-test-pyramid.html
-- CEX tool: `_tools/cex_system_test.py` — 54 tests across all 4 pattern families
-- Related: `_tools/cex_hooks.py` — pre-commit smoke gate integration
+- Pact Contract Testing: https://docs.pact.io/
+- DORA Metrics (flakiness): https://dora.dev/research/
