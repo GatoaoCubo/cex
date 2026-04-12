@@ -1,9 +1,10 @@
 ---
 id: multi_model_orchestration
 kind: knowledge_card
-title: Padrões de Orquestração Multi-Modelo para Agentes LLM
+title: Multi-Model Orchestration Patterns for LLM Agents
 version: 1.0.0
 quality: null
+pillar: null
 ---
 
 ### Padrões Industriais de Orquestração Multi-Modelo
@@ -16,7 +17,7 @@ quality: null
 
 **2. Roteamento por Complexidade da Tarefa**  
 - **LiteLLM**: Tarefas simples (classificação, resumo)  
-- **Not Diamond**: Tarefas moderadas (análise de dados, geração de código)  
+- **Not Diamond**: Tareños moderadas (análise de dados, geração de código)  
 - **Martian**: Tarefas complexas (planejamento estratégico, resolução de problemas)  
 - Métricas de complexidade: tokens de entrada, profundidade de raciocínio, risco de erro
 
