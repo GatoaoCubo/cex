@@ -22,7 +22,7 @@ tools:
   - "firecrawl MCP (competitor site extraction)"
   - "cex_retriever.py (find prior competitive research)"
   - "cex_memory_select.py (recall past competitor data)"
-quality: null
+quality: 9.0
 tags: [agent, competitor, tracker, intelligence, n01, competitive-analysis]
 tldr: "Specialized sub-agent for continuous competitive intelligence -- tracks competitors, builds grids, detects positioning changes, and flags emerging threats."
 density_score: 0.92

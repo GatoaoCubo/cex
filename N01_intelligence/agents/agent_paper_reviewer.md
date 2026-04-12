@@ -23,7 +23,7 @@ tools:
   - "fetch MCP (direct PDF download)"
   - "cex_retriever.py (find related internal knowledge)"
   - "cex_memory_update.py (store paper findings)"
-quality: null
+quality: 9.0
 tags: [agent, paper, reviewer, academic, research, n01, analysis]
 tldr: "Paper review sub-agent -- reads, evaluates, and extracts actionable knowledge from academic papers, whitepapers, and technical reports for integration into CEX knowledge base."
 density_score: 0.90

@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-08
 author: N01
 domain: benchmarking
-quality: null
+quality: 9.0
 tags: [benchmark, tool-first, LLM, heuristic, TF-IDF, accuracy, scoring, memory, evolve]
 tldr: "5 benchmarks comparing deterministic tools vs LLM calls. Memory selection already migrated to TF-IDF. L3 scoring heuristic achieves 83% LLM agreement. Evolve heuristics cover 7 of 12 common hypotheses."
 ---
