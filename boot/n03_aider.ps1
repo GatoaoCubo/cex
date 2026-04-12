@@ -57,5 +57,8 @@ $aiderCmd = "aider --model ollama_chat/qwen3:14b --no-auto-commits $fileArgs --m
 Write-Host "[CMD] $aiderCmd" -ForegroundColor DarkGray
 Write-Host ""
 
-# Run aider interactively
-aider --model ollama_chat/qwen3:14b --no-auto-commits @existingFiles
+# Set Ollama API base
+$env:OLLAMA_API_BASE = "http://localhost:11434"
+
+# Run aider (interactive with task context)
+aider --model ollama_chat/qwen3:14b --auto-commits --yes --subtree-only --no-show-model-warnings @existingFiles

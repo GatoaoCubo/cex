@@ -63,7 +63,14 @@ foreach ($nuc in $nuclei) {
 
     # Spawn in new window
     $title = "$($nuc.ToUpper()) [AIDER+OLLAMA] - $mission"
-    $cmd = "Set-Location '$CEX_ROOT'; `$Host.UI.RawUI.WindowTitle = '$title'; aider --model $model --no-auto-commits --yes $($contextArgs -join ' ')"
+    # Escape task content for CLI (truncate to 1500 chars to avoid arg limits)
+    $msgArg = ""
+    if ($taskContent) {
+        $safeMsg = ($taskContent -replace '"','\"' -replace "`n"," " -replace "`r","").Substring(0, [Math]::Min(1500, $taskContent.Length))
+        $msgArg = "--message `"$safeMsg`""
+    }
+    $envSetup = "`$env:OLLAMA_API_BASE = 'http://localhost:11434'"
+    $cmd = "$envSetup; Set-Location '$CEX_ROOT'; `$Host.UI.RawUI.WindowTitle = '$title'; aider --model $model --subtree-only --yes --auto-commits --no-show-model-warnings $($contextArgs -join ' ') $msgArg"
 
     $proc = Start-Process powershell -ArgumentList "-NoExit", "-Command", $cmd -PassThru
     "$($proc.Id) $nuc aider s_aider $(Get-Date -Format 'yyyy-MM-ddTHH:mm:ss')" | Add-Content $pidFile -Encoding utf8
