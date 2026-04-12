@@ -6,14 +6,21 @@ version: 1.0.0
 quality: null
 ---
 
-**Evaluation Metrics** are quantitative measures used to assess the performance of language models in tasks like translation, summarization, and generation.
+# LLM Evaluation Metrics
+
+**Evaluation metrics** quantify model performance in tasks like translation, summarization, and generation. Here's a comparison of key metrics:
 
 | Metric         | Description                              | When to Use                          |
 |----------------|------------------------------------------|--------------------------------------|
 | **BLEU**       | Measures n-gram overlap with references  | Machine translation, text generation |
-| **ROUGE**      | Focuses on recall of n-grams             | Summarization, text compression      |
-| **BERTScore**  | Uses semantic similarity via BERT        | Semantic understanding, paraphrasing |
-| **Human Eval** | Subjective assessment by human annotators| Quality judgment, creative tasks     |
-| **LLM-as-Judge** | Uses another model to score outputs    | Quick validation, large-scale testing|
+| **ROUGE**      | Focuses on recall of key phrases         | Summarization, text compression     |
+| **BERTScore**  | Uses semantic similarity via BERT        | Semantic equivalence checks         |
+| **Human Eval** | Expert ratings for fluency/accuracy      | Subjective quality assessment       |
+| **LLM-as-Judge** | Uses another LLM to score outputs     | Scalable quality assessment         |
 
-Use BLEU/ROUGE for objective comparisons, BERTScore for semantic alignment, and human eval/LLM-as-Judge for qualitative insights.
+**Best Practices**:  
+- Use BLEU/ROUGE for objective benchmarks  
+- Combine with human evaluation for subjective tasks  
+- BERTScore complements traditional metrics  
+- LLM-as-Judge enables scalable quality checks  
+- Always validate metrics against task-specific goals
