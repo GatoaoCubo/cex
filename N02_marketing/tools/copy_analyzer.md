@@ -8,7 +8,7 @@ created: 2026-04-07
 author: n02_marketing
 domain: copy_analysis
 nucleus: N02
-quality: null
+quality: 9.0
 tags: [cli-tool, copy-analyzer, N02, marketing, quality, readability]
 tldr: "Automated copy analysis pipeline: readability scoring, persuasion pattern detection, CTA quality grading, brand voice compliance, and funnel-stage alignment. The ruthless editor that catches what humans miss."
 density_score: 0.91

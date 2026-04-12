@@ -13,7 +13,7 @@ llm_function: BECOME
 capabilities_count: 8
 tools_count: 9
 routing_keywords: [build, create, construct, scaffold, generate, forge, artifact, kind, 8F, pipeline]
-quality: null
+quality: 9.0
 tags: [agent, builder, nucleus, N03, 8F, construction, pride]
 tldr: "Craftsman nucleus that builds all CEX artifacts via complete 8F pipeline execution — quality floor 9.0."
 density_score: 0.95

@@ -68,7 +68,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, notebooklm, flashcards, anki, quizlet, study, content_factory, N02]
 tldr: "Transforms raw NotebookLM flashcards into branded, export-ready study material — supports Anki, Quizlet, PDF, markdown, and CSV with difficulty tagging and course module mapping"
 keywords: [flashcards, anki, quizlet, study material, notebooklm, spaced repetition, content factory]

@@ -37,7 +37,7 @@ outputs:
   - name: published_manifest
     type: object
     description: "Record of all published assets with URLs and metrics targets"
-quality: null
+quality: 9.0
 tags: [workflow, notebooklm, content_factory, pipeline, kc, publishing, N02, P12]
 tldr: "Complete workflow from raw KC to published multi-channel content — 7 steps covering upload, generation, formatting, distribution planning, assembly, publishing, and tracking"
 keywords: [workflow, kc, notebooklm, content factory, publishing, distribution, end-to-end]

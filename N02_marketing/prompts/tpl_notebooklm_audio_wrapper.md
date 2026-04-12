@@ -63,7 +63,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, notebooklm, audio, podcast, wrapper, intro, outro, content_factory, N02]
 tldr: "Wraps NotebookLM Audio Overview output with branded intro/outro scripts — two A/B variants (formal authority vs casual peer) with per-channel adaptation"
 keywords: [audio overview, podcast, notebooklm, intro, outro, brand voice, wrapper, content factory]

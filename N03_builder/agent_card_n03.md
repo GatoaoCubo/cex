@@ -12,7 +12,7 @@ nucleus: N03
 sin: soberba
 virtue: "Inventive Pride"
 icon: "★"
-quality: null
+quality: 8.9
 tags: [agent-card, builder, N03, 8F, construction, pride]
 tldr: "N03 is the craftsman nucleus — builds all CEX artifacts via 8F pipeline with Inventive Pride."
 density_score: 0.95

@@ -8,7 +8,7 @@ created: 2026-04-07
 author: n02_marketing
 domain: headline_optimization
 nucleus: N02
-quality: null
+quality: 9.0
 tags: [cli-tool, headline-scorer, N02, marketing, optimization, 4U, headlines]
 tldr: "Scores headlines on 4 dimensions (Useful, Urgent, Unique, Ultra-specific), generates A/B variants, predicts relative CTR lift, and recommends the winner. Every headline enters a tournament — only the strongest survives."
 density_score: 0.92

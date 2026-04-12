@@ -68,7 +68,7 @@ variables:
 variable_syntax: mustache
 composable: true
 domain: content_factory
-quality: null
+quality: 9.1
 tags: [prompt_template, distribution, publishing, channels, social, content_factory, N02]
 tldr: "Generates a tactical distribution plan that maps NotebookLM content assets to specific channels, formats, posting times, and copy — turning one production run into a multi-channel campaign"
 keywords: [distribution, publishing, social media, youtube, spotify, linkedin, instagram, newsletter, content factory]

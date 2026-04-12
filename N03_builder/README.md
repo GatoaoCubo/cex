@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 8.9
 tags: [readme, N03, builder, fractal]
 tldr: "Fractal module for N03 Builder nucleus — mirrors 12 pillars scoped to artifact construction."
 ---
