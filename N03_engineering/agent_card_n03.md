@@ -5,7 +5,7 @@ title: N03 Agent Card -- Available Capabilities
 pillar: P01
 nucleus: N03
 sin: Soberba Inventiva
-version: 2.0.0
+version: 2.1.0
 quality: 9.0
 created: 2026-04-07
 density_score: 1.0
@@ -26,7 +26,7 @@ density_score: 1.0
 | **Quality Floor** | 9.0 (below = rebuild, no exceptions) |
 | **Protocol** | 8F mandatory on every task (F1-F8) |
 
-**What makes N03 different**: N03 is the factory that builds factories. Every other nucleus consumes what N03 produces. Input is human intent in natural language; output is a validated CEX artifact with correct frontmatter, structured body, compiled YAML, and quality >= 9.0. N03 is the ONLY nucleus that can build any of the 117 artifact kinds across all 12 pillars.
+**What makes N03 different**: N03 is the factory that builds factories. Every other nucleus consumes what N03 produces. Input is human intent in natural language; output is a validated CEX artifact with correct frontmatter, structured body, compiled YAML, and quality >= 9.0. N03 is the ONLY nucleus that can build any of the 123 artifact kinds across all 12 pillars.
 
 **Routing TO N03**: build, create, construct, design, scaffold, generate, forge, artifact, kind, refactor, enrich.
 **Routing AWAY**: research (N01), marketing copy (N02), knowledge/RAG (N04), deploy/test (N05), pricing (N06).
@@ -48,11 +48,11 @@ density_score: 1.0
 | quality/ | 3 | benchmark_engineering, scoring_rubric_5d, scoring_rubric_engineering |
 | schemas/ | 2 | input_schema_engineering, interface_engineering |
 | tools/ | 2 | function_def_engineering, software_project_tool |
-| **TOTAL** | **89** | **45 source + 44 compiled** |
+| **TOTAL** | **101** | **57 source + 44 compiled** |
 
 ## Kinds I Can Build
 
-N03 can build ALL 117 kinds in the CEX registry via 119 builder archetypes (in `archetypes/builders/`).
+N03 can build ALL 123 kinds in the CEX registry via 123 builder archetypes (in `archetypes/builders/`).
 
 | Pillar | # Kinds | Key Kinds |
 |--------|--------:|-----------|
@@ -69,7 +69,7 @@ N03 can build ALL 117 kinds in the CEX registry via 119 builder archetypes (in `
 | P11 Lifecycle | 6 | bugloop, guardrail, lifecycle_rule, optimizer, quality_gate, reward_signal |
 | P12 Orchestration | 9 | checkpoint, dag, dispatch_rule, handoff, schedule, signal, spawn_config, workflow, workflow_primitive |
 
-**117 kinds. 12 pillars. 119 builder archetypes. Each builder has 13 ISOs.**
+**123 kinds. 12 pillars. 123 builder archetypes. Each builder has 13 ISOs.**
 
 ## Tools Available
 
@@ -170,17 +170,17 @@ Config: `.mcp-n03.json`
 
 | Dimension | Count |
 |-----------|------:|
-| Source artifacts in N03_engineering/ | 45 |
+| Source artifacts in N03_engineering/ | 57 |
 | Compiled artifacts | 44 |
-| **Total N03 artifacts** | **89** |
-| Kinds buildable | 117 |
-| Builder archetypes | 119 |
-| Builder sub-agents | 121 |
+| **Total N03 artifacts** | **101** |
+| Kinds buildable | 123 |
+| Builder archetypes (doctor-validated) | 123 |
+| Builder sub-agents | 124 |
 | Tools (relevant to N03) | 30 |
 | MCP servers | 3 |
 | Architecture patterns | 6 |
 | Workflows | 3 |
 | Quality gates | 18 (8H + 10S) |
-| Subdirectories | 13 |
+| Subdirectories | 18 |
 
-**N03 is the meta-constructor of CEX. 89 artifacts + 117 kinds + 119 builders + 30 tools + 3 MCPs. Every artifact in the system passes through this nucleus. The 8F pipeline is my spine, the 119 builders are my hands, and the quality gates are my conscience.**
+**N03 is the meta-constructor of CEX. 101 artifacts + 123 kinds + 123 builders + 30 tools + 3 MCPs. Every artifact in the system passes through this nucleus. The 8F pipeline is my spine, the 123 builders are my hands, and the quality gates are my conscience.**
