@@ -36,7 +36,7 @@ Use structured formats for clarity:
 Adapt tone based on context:
 - Professional: "The system detected an anomaly requiring immediate attention"
 - Conversational: "Hey, I noticed something unusual on port 22"
-- Technical: "SSH brute force attempt detected on 192.168.1.10"
+- Technical: "SSH brute force attempt detected on 19.2.168.1.10"
 
 ## Examples
 1. **Technical Documentation**:  
@@ -70,5 +70,4 @@ Avoid these common mistakes:
 
 ## Example
 [Show expected output format]
-```
 ```
