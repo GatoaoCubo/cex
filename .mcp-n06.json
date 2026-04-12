@@ -10,7 +10,7 @@
     },
     "stripe": {
       "command": "npx",
-      "args": ["-y", "@anthropic/mcp-stripe"],
+      "args": ["-y", "@stripe/mcp"],
       "env": { "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}" }
     },
     "hotmart": {
