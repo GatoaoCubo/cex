@@ -37,6 +37,5 @@ Configure model parameters in `Modelfile` for:
 - Prompt templates
 - Safety settings
 
-Use `--model` flag to override default model settings during execution.
-
-5. Always validate Modelfile configurations before deployment
+Use --model flag to override default model settings during execution.
+```
