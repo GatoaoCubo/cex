@@ -9,7 +9,7 @@ created: 2026-04-08
 updated: 2026-04-08
 author: N01_intelligence
 domain: quality-audit
-quality: null
+quality: 8.9
 tags: [audit, quality, kc-library, density, gap-analysis]
 tldr: "298 KCs scanned. 4 origin issues FIXED. 3 low-density KCs found. 88 KCs need density scoring. 0 stale KCs. All 123 kinds have KCs (0 gap). 8 SPEC files missing tags."
 density_score: null

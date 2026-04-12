@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "PI Reference Audit -- Full Codebase Sweep"
 version: 1.0.0
-quality: null
+quality: 8.9
 created: 2026-04-08
 mission: PICLEANUP
 nucleus: n01

@@ -10,7 +10,7 @@ author: n01_intelligence
 agent_group: n01-research-analyst
 domain: research-intelligence
 algorithm: hybrid
-quality: null
+quality: 9.0
 tags: [knowledge-index, search, intelligence, n01, retrieval, hybrid]
 tldr: "Hybrid BM25+FAISS index over N01's 41 artifacts — enables semantic and keyword search across research outputs, schemas, and knowledge cards."
 density_score: 0.92

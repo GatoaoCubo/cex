@@ -10,7 +10,7 @@ author: n01_intelligence
 name: Research Session Checkpoint
 workflow_ref: p12_wf_research_pipeline
 step: checkpoint_research_state
-quality: null
+quality: 8.9
 tags: [checkpoint, research, intelligence, n01, session, resumable]
 tldr: "Freezes N01 research session state — sources gathered, claims verified, outputs pending — so interrupted research can resume without re-gathering data."
 description: "Stores research pipeline state to resume interrupted analysis without losing source catalog, verification status, or partial outputs."

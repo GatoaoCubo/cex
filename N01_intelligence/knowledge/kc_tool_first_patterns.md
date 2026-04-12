@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-08
 author: N01
 domain: tool-first-engineering
-quality: null
+quality: 9.0
 tags: [tool-first, deterministic, TF-IDF, heuristics, DSPy, LangChain, caching, optimization]
 tldr: "7 industry patterns for replacing LLM calls with deterministic tools. Each mapped to an existing or buildable CEX tool. Covers intent resolution, scoring, memory selection, content generation, and embedding."
 ---

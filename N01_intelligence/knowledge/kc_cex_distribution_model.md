@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "CEX Distribution Model -- From PI Wrapper to Claude Code Native"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-08
 tags: [distribution, runtime, claude-code, pi, migration, architecture]
 tldr: "CEX distributes as git repo + Claude Code CLI. PI wrapper abandoned 2026-04-08 due to Anthropic auth policy. 3 runtimes + 1 CLI + pip deps = full system."

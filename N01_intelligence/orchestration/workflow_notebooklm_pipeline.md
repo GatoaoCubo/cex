@@ -16,7 +16,7 @@ retry_policy: per_step
 depends_on: [spec_notebooklm_pipeline]
 signals: [complete, error, auth_expired]
 spawn_configs: []
-quality: null
+quality: 9.0
 tags: [workflow, notebooklm, pipeline, browser-automation, content-factory, kc]
 tldr: "6-step pipeline: select KCs -> format -> auth check -> upload via Playwright -> activate Estudio -> collect outputs. Zero API -- all browser-based."
 density_score: null

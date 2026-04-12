@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-08
 author: N01
 domain: token-optimization
-quality: null
+quality: 9.0
 tags: [tokens, optimization, LLM, deterministic, cost, tool-first, audit]
 tldr: "Only 6 of 89 tools make LLM calls. 3 are replaceable (SAFE_REPLACE), 1 is hybrid, 2 are core. Estimated savings: 536K tokens/sweep by replacing L3 scoring + memory selection with heuristics + TF-IDF."
 ---

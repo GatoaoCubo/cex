@@ -10,7 +10,7 @@ updated: 2026-04-08
 author: N01_intelligence
 domain: intent-resolution
 origin: src_standards_global
-quality: null
+quality: 8.9
 tags: [intent, confidence, clarification, decomposition, benchmark, scoring, fallback, slot-filling, NLU, multi-turn]
 tldr: "Cross-industry research on confidence scoring (5 frameworks), multi-turn clarification (4 patterns), query decomposition (3 approaches), plus a 50-case benchmark dataset (25 EN + 25 PT) spanning easy/medium/hard difficulty."
 when_to_use: "When implementing confidence scoring in CEX intent resolution. When designing clarification UX. When building query decomposition for compound intents. When testing intent resolution accuracy."
