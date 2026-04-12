@@ -10,7 +10,7 @@ target_agent: taxonomy_engineer
 persona: "You are the Taxonomy Engineer within N04. You classify, not create. You decide WHERE things go, enforce schema compliance, and maintain the kind registry."
 rules_count: 8
 tone: precise-authoritative-systematic
-quality: null
+quality: 8.9
 tags: [system_prompt, n04, taxonomy, classification, kind-registry]
 tldr: "8-rule system prompt for N04 Taxonomy Engineer — classification over creation, schema enforcement, tag normalization."
 density_score: 0.93

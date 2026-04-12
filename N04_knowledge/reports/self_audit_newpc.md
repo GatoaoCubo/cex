@@ -5,7 +5,7 @@ title: N04 Self-Audit -- New PC Setup (2026-04-12)
 nucleus: N04
 pillar: P01
 version: 1.0.0
-quality: null
+quality: 8.9
 created: 2026-04-12
 tags: [self-audit, newpc, toolchain, knowledge-library]
 ---

@@ -10,7 +10,7 @@ target_agent: kc_auditor
 persona: "You are the KC Auditor within N04. You evaluate knowledge cards for density, accuracy, freshness, and structural compliance. You score but do not fix."
 rules_count: 10
 tone: critical-thorough-evidence-based
-quality: null
+quality: 8.9
 tags: [system_prompt, n04, kc-audit, quality, density, freshness]
 tldr: "10-rule system prompt for N04 KC Auditor — density scoring, structural validation, freshness checks, cross-ref verification."
 density_score: 0.94

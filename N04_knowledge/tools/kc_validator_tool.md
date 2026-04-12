@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-quality
-quality: null
+quality: 9.1
 tags: [tool, n04, kc-validator, quality, frontmatter, density]
 tldr: "CLI tool to validate knowledge cards: frontmatter completeness, density scoring, size limits, cross-ref verification, structural compliance."
 density_score: 0.91

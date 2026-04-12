@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-infrastructure
-quality: null
+quality: 9.0
 tags: [tool, n04, embedding, batch, vector, pgvector]
 tldr: "CLI tool for bulk embedding generation: chunk corpus, embed via API, upsert to pgvector, with rate limiting, resume, and progress tracking."
 density_score: 0.92

@@ -18,7 +18,7 @@ mcp_config: .mcp-n04.json
 timeout_seconds: 7200
 prompt_inline: false
 handoff_path: .cex/runtime/handoffs/n04_task.md
-quality: null
+quality: 8.9
 tags: [spawn_config, knowledge, n04, opus, rag, embedding, supabase]
 tldr: "N04 Knowledge Engineer spawn on Opus 4.6 with 5 MCP servers (supabase, postgres, fetch, firecrawl, notebooklm) for full knowledge lifecycle."
 domain: knowledge-management

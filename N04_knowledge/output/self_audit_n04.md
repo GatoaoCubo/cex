@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-08
 author: n04_knowledge
 domain: meta
-quality: null
+quality: 8.9
 tags: [self-audit, n04, knowledge, mcp, rag, tooling]
 tldr: "Audit of N04 MCP config, RAG pipeline, tooling health, and gaps"
 when_to_use: "Review N04 capabilities and identify improvement areas"
