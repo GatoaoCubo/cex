@@ -77,7 +77,7 @@ foreach ($nuc in $nuclei) {
     $readStr = $readArgs -join " "
 
     $envSetup = "`$env:OLLAMA_API_BASE = 'http://localhost:11434'"
-    $cmd = "$envSetup; Set-Location '$CEX_ROOT'; `$Host.UI.RawUI.WindowTitle = '$title'; aider --model $model --subtree-only --yes --auto-commits --no-show-model-warnings $fileStr $readStr --message 'Read n03_task.md carefully and execute every task in it. Create all files listed.'"
+    $cmd = "$envSetup; Set-Location '$CEX_ROOT'; `$Host.UI.RawUI.WindowTitle = '$title'; aider --model $model --subtree-only --yes-always --auto-commits --no-show-model-warnings $fileStr $readStr --message 'Read n03_task.md carefully and execute every task in it. Create all files listed.'"
 
     $proc = Start-Process powershell -ArgumentList "-NoExit", "-Command", $cmd -PassThru
     "$($proc.Id) $nuc aider s_aider $(Get-Date -Format 'yyyy-MM-ddTHH:mm:ss')" | Add-Content $pidFile -Encoding utf8

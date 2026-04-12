@@ -1,0 +1,10 @@
+# Heavy dirs aider doesn't need to map
+.cex/cache/
+.cex/quality/
+.cex/runtime/
+compiled/
+cex_sdk/
+archetypes/builders/
+.git/
+node_modules/
+_external/
