@@ -62,6 +62,15 @@
     "naming": "p02_ax_{{rule}}.md",
     "pillar": "P02"
   },
+  "batch_config": {
+    "description": "Async batch processing config for bulk API operations (OpenAI Batch, Anthropic Batches)",
+    "boundary": "API-level async batch job config. NOT a schedule (cron-based) nor a workflow (multi-step). This is a single bulk request.",
+    "pillar": "P09",
+    "llm_function": "CALL",
+    "max_bytes": 2048,
+    "naming": "p09_bc_{{name}}.yaml",
+    "core": false
+  },
   "benchmark": {
     "boundary": "Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).",
     "core": false,
@@ -189,15 +198,6 @@
     "naming": "p03_constraint_{{scope}}.md",
     "pillar": "P03"
   },
-  "cost_budget": {
-    "description": "Token budget allocation, spend tracking, cost alerts per provider/model/nucleus",
-    "boundary": "Money and token economics. NOT a rate_limit_config (requests/sec) nor a token_budget tool (internal). This is the budget POLICY.",
-    "pillar": "P09",
-    "llm_function": "GOVERN",
-    "max_bytes": 3072,
-    "naming": "p09_cb_{{name}}.yaml",
-    "core": false
-  },
   "content_monetization": {
     "boundary": "Pipeline completo de monetizacao de conteudo: billing, credits, checkout, courses, ads, emails. NAO eh pricing_strategy (estrategia apenas) nem payment_integration (provider apenas).",
     "core": false,
@@ -224,6 +224,15 @@
     "max_bytes": 2048,
     "naming": "p03_cwc_{{model}}.yaml",
     "core": true
+  },
+  "cost_budget": {
+    "description": "Token budget allocation, spend tracking, cost alerts per provider/model/nucleus",
+    "boundary": "Money and token economics. NOT a rate_limit_config (requests/sec) nor a token_budget tool (internal). This is the budget POLICY.",
+    "pillar": "P09",
+    "llm_function": "GOVERN",
+    "max_bytes": 3072,
+    "naming": "p09_cb_{{name}}.yaml",
+    "core": false
   },
   "daemon": {
     "boundary": "Processo background persistente. NAO eh hook (evento unico) nem cli_tool (execucao pontual e termina).",
@@ -268,15 +277,6 @@
     "llm_function": "INJECT",
     "max_bytes": 4096,
     "naming": "p08_diag_{{scope}}.md",
-    "pillar": "P08"
-  },
-  "supervisor": {
-    "boundary": "",
-    "core": false,
-    "description": "Crew orchestrator that composes and coordinates multiple builders",
-    "llm_function": "",
-    "max_bytes": 2048,
-    "naming": "ex_director_{topic}.md",
     "pillar": "P08"
   },
   "dispatch_rule": {
@@ -370,15 +370,6 @@
     "naming": "p07_dataset_{{name}}.md",
     "pillar": "P07"
   },
-  "fallback_chain": {
-    "boundary": "Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing).",
-    "core": false,
-    "description": "Sequencia de fallback (model A > B > C)",
-    "llm_function": "GOVERN",
-    "max_bytes": 512,
-    "naming": "p02_fb_{{chain}}.yaml",
-    "pillar": "P02"
-  },
   "experiment_config": {
     "description": "A/B test and prompt experiment configuration with variants, metrics, and statistical analysis",
     "boundary": "Experiment config with variants and metrics. NOT a feature_flag (boolean toggle) nor a benchmark (one-time evaluation).",
@@ -387,6 +378,15 @@
     "max_bytes": 4096,
     "naming": "p09_ec_{{name}}.yaml",
     "core": false
+  },
+  "fallback_chain": {
+    "boundary": "Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing).",
+    "core": false,
+    "description": "Sequencia de fallback (model A > B > C)",
+    "llm_function": "GOVERN",
+    "max_bytes": 512,
+    "naming": "p02_fb_{{chain}}.yaml",
+    "pillar": "P02"
   },
   "feature_flag": {
     "boundary": "Flag de feature on/off com rollout gradual. NAO eh permission (acesso) nem env_config (variavel generica).",
@@ -397,15 +397,6 @@
     "naming": "p09_ff_{{feature}}.yaml",
     "pillar": "P09"
   },
-  "finetune_config": {
-    "description": "Fine-tuning job configuration: dataset, base model, adapter type (LoRA/PEFT), hyperparameters, eval metrics",
-    "boundary": "Training config. NOT a model_provider (runtime routing) nor a model_card (documentation). This defines HOW to train/adapt a model.",
-    "pillar": "P02",
-    "llm_function": "CONSTRAIN",
-    "max_bytes": 4096,
-    "naming": "p02_ft_{{name}}.yaml",
-    "core": false
-  },
   "few_shot_example": {
     "boundary": "Par input/output para few-shot learning. NAO eh golden_test (P07) que avalia qualidade, apenas exemplifica formato.",
     "core": true,
@@ -414,6 +405,15 @@
     "max_bytes": 1024,
     "naming": "p01_fse_{{topic}}.md + .yaml",
     "pillar": "P01"
+  },
+  "finetune_config": {
+    "description": "Fine-tuning job configuration: dataset, base model, adapter type (LoRA/PEFT), hyperparameters, eval metrics",
+    "boundary": "Training config. NOT a model_provider (runtime routing) nor a model_card (documentation). This defines HOW to train/adapt a model.",
+    "pillar": "P02",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 4096,
+    "naming": "p02_ft_{{name}}.yaml",
+    "core": false
   },
   "formatter": {
     "boundary": "Transformador de formato de saida. NAO eh parser (nao extrai dados) nem response_format (nao define o que o LLM ve).",
@@ -459,15 +459,6 @@
     "max_bytes": 4096,
     "naming": "p11_gr_{{scope}}.yaml",
     "pillar": "P11"
-  },
-  "batch_config": {
-    "description": "Async batch processing config for bulk API operations (OpenAI Batch, Anthropic Batches)",
-    "boundary": "API-level async batch job config. NOT a schedule (cron-based) nor a workflow (multi-step). This is a single bulk request.",
-    "pillar": "P09",
-    "llm_function": "CALL",
-    "max_bytes": 2048,
-    "naming": "p09_bc_{{name}}.yaml",
-    "core": false
   },
   "handoff": {
     "boundary": "Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03, prompt puro) nem signal (evento simples).",
@@ -541,14 +532,14 @@
     "naming": "p06_iface_{{contract}}.yaml",
     "pillar": "P06"
   },
-  "knowledge_graph": {
-    "description": "Graph-based knowledge schema with entity types, relation types, and traversal strategies for GraphRAG",
-    "boundary": "Relational knowledge structure. NOT an entity_memory (single entity recall) nor a knowledge_index (flat search). This defines RELATIONSHIPS between entities.",
-    "pillar": "P01",
-    "llm_function": "INJECT",
-    "max_bytes": 8192,
-    "naming": "p01_kg_{{name}}.md",
-    "core": false
+  "invariant": {
+    "boundary": "Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel) nem guardrail (P11, safety-focused).",
+    "core": true,
+    "description": "Lei operacional (inviolavel)",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 3072,
+    "naming": "p08_law_{{number}}.md",
+    "pillar": "P08"
   },
   "knowledge_card": {
     "boundary": "Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.",
@@ -558,6 +549,15 @@
     "max_bytes": 5120,
     "naming": "p01_kc_{{topic}}.md + .yaml",
     "pillar": "P01"
+  },
+  "knowledge_graph": {
+    "description": "Graph-based knowledge schema with entity types, relation types, and traversal strategies for GraphRAG",
+    "boundary": "Relational knowledge structure. NOT an entity_memory (single entity recall) nor a knowledge_index (flat search). This defines RELATIONSHIPS between entities.",
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "max_bytes": 8192,
+    "naming": "p01_kg_{{name}}.md",
+    "core": false
   },
   "knowledge_index": {
     "boundary": "Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).",
@@ -574,15 +574,6 @@
     "domain": "frontend",
     "description": "Complete production-ready landing page with 12 sections, responsive, dark mode, SEO",
     "naming": "p05_lp_{{name}}.html"
-  },
-  "invariant": {
-    "boundary": "Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel) nem guardrail (P11, safety-focused).",
-    "core": true,
-    "description": "Lei operacional (inviolavel)",
-    "llm_function": "CONSTRAIN",
-    "max_bytes": 3072,
-    "naming": "p08_law_{{number}}.md",
-    "pillar": "P08"
   },
   "learning_record": {
     "boundary": "Registro de aprendizado persistente. NAO eh session_state (efemero) nem axiom (imutavel, nao aprende).",
@@ -711,6 +702,15 @@
     "naming": "p04_notify_{{channel}}.md + .yaml",
     "pillar": "P04"
   },
+  "ontology": {
+    "description": "Formal taxonomy and ontology definitions (OWL, SKOS, schema.org patterns) for knowledge organization",
+    "boundary": "Formal classification structure. NOT a knowledge_graph (entity relations) nor a glossary_entry (single term). This defines the CLASSIFICATION SYSTEM itself.",
+    "pillar": "P01",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 8192,
+    "naming": "p01_ont_{{name}}.md",
+    "core": false
+  },
   "optimizer": {
     "boundary": "Otimizador de processo metric>action. NAO eh bugloop (correcao pontual) nem benchmark (P07, medicao passiva).",
     "core": false,
@@ -774,15 +774,6 @@
     "naming": "p04_plug_{{name}}.md + .yaml",
     "pillar": "P04"
   },
-  "prompt_compiler": {
-    "description": "Intent-to-artifact transmutation rules. Compiles vague user input into structured {kind, pillar, nucleus, verb} resolution. The behavioral seed that makes any LLM operating CEX a prompt compiler (DSPy term).",
-    "boundary": "Transmutation rules and mappings. NOT a router (routes between providers), NOT a dispatch_rule (routes tasks to agents), NOT a prompt_template (template with vars). This IS the layer that resolves WHAT the user wants before any routing happens.",
-    "pillar": "P03",
-    "llm_function": "CONSTRAIN",
-    "max_bytes": 16384,
-    "naming": "p03_pc_{{name}}.md",
-    "core": true
-  },
   "prompt_cache": {
     "description": "TTL, eviction, and invalidation config for cached LLM prompt/completion pairs",
     "boundary": "Cache config. NAO eh session_state (contexto efemero), memory_summary (historico), nem runtime_state (variaveis runtime).",
@@ -791,6 +782,15 @@
     "max_bytes": 2048,
     "naming": "p10_pc_{{name}}.yaml",
     "core": false
+  },
+  "prompt_compiler": {
+    "description": "Intent-to-artifact transmutation rules. Compiles vague user input into structured {kind, pillar, nucleus, verb} resolution. The behavioral seed that makes any LLM operating CEX a prompt compiler (DSPy term).",
+    "boundary": "Transmutation rules and mappings. NOT a router (routes between providers), NOT a dispatch_rule (routes tasks to agents), NOT a prompt_template (template with vars). This IS the layer that resolves WHAT the user wants before any routing happens.",
+    "pillar": "P03",
+    "llm_function": "CONSTRAIN",
+    "max_bytes": 16384,
+    "naming": "p03_pc_{{name}}.md",
+    "core": true
   },
   "prompt_template": {
     "boundary": "Template com variaveis. NAO eh user_prompt (fixo) nem system_prompt (identidade).",
@@ -1051,6 +1051,15 @@
     "naming": "p12_spawn_{{mode}}.yaml",
     "pillar": "P12"
   },
+  "streaming_config": {
+    "description": "SSE, WebSocket, and chunked response streaming configuration for real-time LLM output",
+    "boundary": "Transport-level streaming config. NOT a response_format (output structure) nor a rate_limit_config (throughput). This controls HOW output is delivered.",
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "max_bytes": 2048,
+    "naming": "p05_sc_{{name}}.yaml",
+    "core": false
+  },
   "supabase_data_layer": {
     "description": "Supabase-specific data layer — tables, RLS policies, edge functions, storage buckets, auth rules",
     "boundary": "Data layer Supabase. NAO eh db_connector (conexao generica) nem api_client (cliente REST).",
@@ -1059,6 +1068,15 @@
     "max_bytes": 8192,
     "naming": "p04_supabase_data_layer_{{slug}}.md + .yaml",
     "core": false
+  },
+  "supervisor": {
+    "boundary": "",
+    "core": false,
+    "description": "Crew orchestrator that composes and coordinates multiple builders",
+    "llm_function": "",
+    "max_bytes": 2048,
+    "naming": "ex_director_{topic}.md",
+    "pillar": "P08"
   },
   "system_prompt": {
     "boundary": "Identidade + regras + formato. Lido PRIMEIRO pelo LLM.",
