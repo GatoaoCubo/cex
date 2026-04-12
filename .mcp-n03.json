@@ -2,12 +2,12 @@
   "mcpServers": {
     "github": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@anthropic/mcp-server-github"],
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-github"],
       "env": { "GITHUB_TOKEN": "${GITHUB_TOKEN}" }
     },
     "fetch": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@anthropic/mcp-server-fetch"]
+      "args": ["/c", "npx", "-y", "@anthropic-ai/sdk-mcp-fetch"]
     },
     "canva": {
       "command": "npx",

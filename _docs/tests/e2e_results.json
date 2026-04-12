@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-04-08T19:27:10.634462+00:00",
+  "timestamp": "2026-04-12T14:15:46.891551+00:00",
   "version": "1.0.0",
   "summary": {
     "total": 3,
-    "passed": 0,
-    "failed": 3,
-    "avg_quality": null
+    "passed": 2,
+    "failed": 1,
+    "avg_quality": 9.0
   },
   "scenarios": [
     {
@@ -26,7 +26,7 @@
             {
               "check": "f1_constrain_fires",
               "passed": true,
-              "detail": "functions=['F1', 'F2', 'F3']"
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5']"
             },
             {
               "check": "f2_become_fires",
@@ -59,7 +59,9 @@
             "functions_fired": [
               "F1",
               "F2",
-              "F3"
+              "F3",
+              "F4",
+              "F5"
             ],
             "kind": "",
             "pillar": "",
@@ -83,7 +85,7 @@
             {
               "check": "f1_constrain_fires",
               "passed": true,
-              "detail": "functions=['F1', 'F2', 'F3']"
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5']"
             },
             {
               "check": "f2_become_fires",
@@ -116,7 +118,9 @@
             "functions_fired": [
               "F1",
               "F2",
-              "F3"
+              "F3",
+              "F4",
+              "F5"
             ],
             "kind": "",
             "pillar": "",
@@ -134,13 +138,13 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3025 chars)\r\n  [F1] bld_config loaded (2908 chars)\r\n  [F1] constraints: 8 "
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
               "passed": true,
-              "detail": "functions=['F1', 'F2', 'F3']"
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
@@ -154,46 +158,61 @@
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=439, has_prompt=False"
             },
             {
               "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
+              "passed": true,
+              "detail": "verdict=PASS gates=6/6"
             },
             {
               "check": "output_file_exists",
+              "passed": true,
+              "detail": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P02_model\\examples\\p02_agent_petshop_crm.md"
+            },
+            {
+              "check": "quality_floor",
+              "passed": true,
+              "detail": "score=9.1, floor=8.0"
+            },
+            {
+              "check": "gold_comparison",
               "passed": false,
-              "detail": "no path in trace"
+              "detail": "0/4 sections match"
             }
           ],
-          "score": null,
+          "score": 9.1,
           "trace": {
             "functions_fired": [
               "F1",
               "F2",
-              "F3"
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
             ],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
+            "kind": "agent",
+            "pillar": "P02",
+            "verdict": "PASS",
+            "gates_passed": 6,
+            "gates_total": 6,
             "retries": 0,
-            "artifact_words": 0,
-            "output_path": "",
+            "artifact_words": 439,
+            "output_path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P02_model\\examples\\p02_agent_petshop_crm.md",
             "has_prompt": false
           }
         }
       ],
-      "total_elapsed_ms": 23741
+      "total_elapsed_ms": 378771
     },
     {
       "name": "instagram",
       "input": "preciso de conteudo pro instagram",
       "mode": "full",
-      "status": "FAIL",
+      "status": "PASS",
       "checks": [],
       "kinds_tested": [
         {
@@ -201,13 +220,13 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (4075 chars)\r\n  [F1] bld_config loaded (3029 chars)\r\n  [F1] constraints: 5 "
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
               "passed": true,
-              "detail": "functions=['F1', 'F2', 'F3']"
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
@@ -221,35 +240,50 @@
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=1131, has_prompt=False"
             },
             {
               "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
+              "passed": true,
+              "detail": "verdict=PASS gates=6/6"
             },
             {
               "check": "output_file_exists",
+              "passed": true,
+              "detail": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P03_prompts\\examples\\p03_pt_instagram_content_v1.md"
+            },
+            {
+              "check": "quality_floor",
+              "passed": true,
+              "detail": "score=9.0, floor=8.0"
+            },
+            {
+              "check": "gold_comparison",
               "passed": false,
-              "detail": "no path in trace"
+              "detail": "0/4 sections match"
             }
           ],
-          "score": null,
+          "score": 9.0,
           "trace": {
             "functions_fired": [
               "F1",
               "F2",
-              "F3"
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
             ],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
+            "kind": "prompt_template",
+            "pillar": "P03",
+            "verdict": "PASS",
+            "gates_passed": 6,
+            "gates_total": 6,
             "retries": 0,
-            "artifact_words": 0,
-            "output_path": "",
+            "artifact_words": 1131,
+            "output_path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P03_prompts\\examples\\p03_pt_instagram_content_v1.md",
             "has_prompt": false
           }
         },
@@ -258,13 +292,13 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2791 chars)\r\n  [F1] bld_config loaded (2654 chars)\r\n  [F1] constraints: 7 "
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
               "passed": true,
-              "detail": "functions=['F1', 'F2', 'F3']"
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
@@ -278,46 +312,61 @@
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=192, has_prompt=False"
             },
             {
               "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
+              "passed": true,
+              "detail": "verdict=PASS gates=6/6"
             },
             {
               "check": "output_file_exists",
+              "passed": true,
+              "detail": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P12_orchestration\\examples\\p12_sc_instagram_content_weekly.md"
+            },
+            {
+              "check": "quality_floor",
+              "passed": true,
+              "detail": "score=8.7, floor=8.0"
+            },
+            {
+              "check": "gold_comparison",
               "passed": false,
-              "detail": "no path in trace"
+              "detail": "0/4 sections match"
             }
           ],
-          "score": null,
+          "score": 8.7,
           "trace": {
             "functions_fired": [
               "F1",
               "F2",
-              "F3"
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
             ],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
-            "output_path": "",
+            "kind": "schedule",
+            "pillar": "P12",
+            "verdict": "PASS",
+            "gates_passed": 6,
+            "gates_total": 6,
+            "retries": 1,
+            "artifact_words": 192,
+            "output_path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P12_orchestration\\examples\\p12_sc_instagram_content_weekly.md",
             "has_prompt": false
           }
         }
       ],
-      "total_elapsed_ms": 16663
+      "total_elapsed_ms": 130471
     },
     {
       "name": "docs",
       "input": "documenta esse projeto",
       "mode": "full",
-      "status": "FAIL",
+      "status": "PASS",
       "checks": [],
       "kinds_tested": [
         {
@@ -325,13 +374,13 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (3447 chars)\r\n  [F1] bld_config loaded (2388 chars)\r\n  [F1] constraints: 10"
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
               "passed": true,
-              "detail": "functions=['F1', 'F2', 'F3']"
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
@@ -345,35 +394,50 @@
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=817, has_prompt=False"
             },
             {
               "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
+              "passed": true,
+              "detail": "verdict=PASS gates=6/6"
             },
             {
               "check": "output_file_exists",
+              "passed": true,
+              "detail": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P01_knowledge\\examples\\p01_kc_cex_project_overview.md"
+            },
+            {
+              "check": "quality_floor",
+              "passed": true,
+              "detail": "score=9.1, floor=8.0"
+            },
+            {
+              "check": "gold_comparison",
               "passed": false,
-              "detail": "no path in trace"
+              "detail": "1/28 sections match"
             }
           ],
-          "score": null,
+          "score": 9.1,
           "trace": {
             "functions_fired": [
               "F1",
               "F2",
-              "F3"
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
             ],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
-            "output_path": "",
+            "kind": "knowledge_card",
+            "pillar": "P01",
+            "verdict": "PASS",
+            "gates_passed": 6,
+            "gates_total": 6,
+            "retries": 1,
+            "artifact_words": 817,
+            "output_path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P01_knowledge\\examples\\p01_kc_cex_project_overview.md",
             "has_prompt": false
           }
         },
@@ -382,13 +446,13 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2882 chars)\r\n  [F1] bld_config loaded (2343 chars)\r\n  [F1] constraints: 7 "
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
               "passed": true,
-              "detail": "functions=['F1', 'F2', 'F3']"
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
@@ -402,40 +466,55 @@
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=367, has_prompt=False"
             },
             {
               "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
+              "passed": true,
+              "detail": "verdict=PASS gates=6/6"
             },
             {
               "check": "output_file_exists",
+              "passed": true,
+              "detail": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P01_knowledge\\examples\\p01_ctx_cex_project.md"
+            },
+            {
+              "check": "quality_floor",
+              "passed": true,
+              "detail": "score=9.0, floor=8.0"
+            },
+            {
+              "check": "gold_comparison",
               "passed": false,
-              "detail": "no path in trace"
+              "detail": "0/28 sections match"
             }
           ],
-          "score": null,
+          "score": 9.0,
           "trace": {
             "functions_fired": [
               "F1",
               "F2",
-              "F3"
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
             ],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
-            "output_path": "",
+            "kind": "context_doc",
+            "pillar": "P01",
+            "verdict": "PASS",
+            "gates_passed": 6,
+            "gates_total": 6,
+            "retries": 2,
+            "artifact_words": 367,
+            "output_path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P01_knowledge\\examples\\p01_ctx_cex_project.md",
             "has_prompt": false
           }
         }
       ],
-      "total_elapsed_ms": 17331
+      "total_elapsed_ms": 230623
     }
   ]
 }

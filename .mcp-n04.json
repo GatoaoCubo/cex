@@ -6,7 +6,7 @@
     },
     "postgres": {
       "command": "npx",
-      "args": ["-y", "@anthropic/mcp-server-postgres", "${SUPABASE_POSTGRES_URL}"]
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${SUPABASE_POSTGRES_URL}"]
     },
     "fetch": {
       "command": "uvx",

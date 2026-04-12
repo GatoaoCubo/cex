@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-04-08T16:27:10.712590",
-  "pass": 54,
-  "fail": 4,
+  "timestamp": "2026-04-12T11:10:14.246160",
+  "pass": 48,
+  "fail": 10,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 90.8,
+  "elapsed_s": 283.4,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -14,12 +14,12 @@
     {
       "name": "tool:cex_8f_runner.py",
       "status": "PASS",
-      "detail": "71906B"
+      "detail": "73773B"
     },
     {
       "name": "tool:cex_intent.py",
       "status": "PASS",
-      "detail": "19955B"
+      "detail": "21430B"
     },
     {
       "name": "tool:cex_compile.py",
@@ -79,7 +79,7 @@
     {
       "name": "compile:all",
       "status": "PASS",
-      "detail": "376/376"
+      "detail": "378/378"
     },
     {
       "name": "builders:count",
@@ -94,32 +94,32 @@
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "62 artifacts (min 11)"
+      "detail": "66 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "62 artifacts (min 10)"
+      "detail": "67 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "55 artifacts (min 34)"
+      "detail": "59 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "68 artifacts (min 12)"
+      "detail": "73 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "59 artifacts (min 9)"
+      "detail": "63 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "69 artifacts (min 9)"
+      "detail": "73 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
@@ -129,12 +129,12 @@
     {
       "name": "quality:zero_null",
       "status": "FAIL",
-      "detail": "118 quality:null (awaiting peer review)"
+      "detail": "145 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "323 artifacts with quality score"
+      "detail": "322 artifacts with quality score"
     },
     {
       "name": "subagents:count",
@@ -153,37 +153,37 @@
     },
     {
       "name": "hooks:git_precommit",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
       "name": "boot:n01",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
       "name": "boot:n02",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
       "name": "boot:n03",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
       "name": "boot:n04",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
       "name": "boot:n05",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
       "name": "boot:n06",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
@@ -253,13 +253,13 @@
     },
     {
       "name": "runner:execute_pass",
-      "status": "FAIL",
-      "detail": "oning plan...\nERROR: No LLM provider available.\n  CLI-Claude: exit 1: \n  SDK-Ollama: pip install ollama\n  HTTP-Ollama: HTTP Error 404: Not Found\n  API: Paid APIs disabled (set CEX_USE_API=1 to allow)\n"
+      "status": "PASS",
+      "detail": "PASS"
     },
     {
       "name": "runner:learning_record",
       "status": "PASS",
-      "detail": "22 records"
+      "detail": "4 records"
     },
     {
       "name": "e2e:script_exists",
@@ -272,9 +272,9 @@
       "detail": ""
     },
     {
-      "name": "e2e:scenarios_pass",
+      "name": "e2e:runs",
       "status": "FAIL",
-      "detail": "0/3 scenarios passed"
+      "detail": "exit=-1, output=Command '['C:\\\\Users\\\\CEX\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\python.exe', 'C:\\\\Users\\\\CEX\\\\Documents\\\\GitHub\\\\cex\\\\_tools\\\\cex_e2e_test.py',"
     },
     {
       "name": "e2e:report_written",
@@ -289,12 +289,12 @@
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "16 dirty files"
+      "detail": "18 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "17bdf83f [N01] research: token optimization audit -- 89 tool"
+      "detail": "1afc225c [8F] agent: faz um CRM pra pet shop"
     }
   ]
 }

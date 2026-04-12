@@ -1,63 +1,134 @@
 id: p01_kc_system_testing_patterns
 kind: knowledge_card
 pillar: P01
-title: System Testing Patterns
-version: 1.0.0
-created: '2023-10-12'
-updated: '2023-10-12'
-author: Knowledge Distillation Specialist
-domain: Software Testing
-quality: 9.0
+title: 'System Testing Patterns: Scope, Coverage, and Failure Classification'
+version: 1.1.0
+created: '2026-04-12'
+updated: '2026-04-12'
+author: knowledge-card-builder
+domain: software-testing
+quality: null
 tags:
-- system_testing
-- testing_patterns
-- software_testing
+- testing
+- system-testing
+- integration
+- e2e
+- test-patterns
+- qa
+- coverage
 - knowledge
-tldr: System testing patterns provide structured approaches to validate software, ensuring robust performance and reliability.
-when_to_use: Apply these patterns during the software testing phase to ensure comprehensive validation.
+tldr: 6 test pattern types mapped by isolation, speed, confidence; scope decision matrix, order heuristics, 5 failure classes,
+  and coverage strategies.
+when_to_use: When designing test suites, classifying failures, choosing test scope, or auditing coverage gaps in a multi-layer
+  system.
 keywords:
-- system_testing
-- regression_testing
-- smoke_testing
+- system-testing
+- e2e
+- integration-test
+- test-coverage
+- failure-classification
 long_tails:
-- How to implement smoke testing in software development
-- Benefits of using regression testing patterns consistently
+- When to use end-to-end tests vs integration tests vs unit tests
+- How to classify test failures by ownership and resolution path
+- Execution order for test suites to maximize feedback speed
+- Coverage strategies for multi-layer artifact validation pipelines
 axioms:
-- ALWAYS apply regression tests after code changes
+- ALWAYS run fast isolated tests before slow integrated tests
+- NEVER report coverage percentage without specifying the coverage dimension
+- IF a test fails intermittently, classify as environment before blaming code
 linked_artifacts:
   primary: null
-  related: []
-density_score: 0.85
-data_source: https://www.softwaretestinghelp.com/types-of-software-testing/
-quick_reference: 'topic: System Testing Patterns
+  related:
+  - p07_qg_system_gate
+  - p01_kc_rag_fundamentals
+density_score: 0.88
+data_source: https://martinfowler.com/articles/practical-test-pyramid.html
+quick_reference: 'topic: system_testing_patterns
 
-  scope: Comprehensive testing strategies in software development
+  scope: multi-layer test design, failure classification, coverage
 
-  owner: Testing Team Lead
+  owner: knowledge-card-builder
 
   criticality: high'
-key_concepts:
-- 'Smoke Testing: Preliminary tests to check basic functionalities.'
-- 'Regression Testing: Ensures changes do not affect existing features.'
-- 'End-to-End Testing: Validates the complete workflow of the application.'
-strategy_phases:
-- 'Planning: Identify key areas for testing and relevant patterns to apply.'
-- 'Execution: Perform tests as per the selected patterns, documenting outcomes.'
-- 'Review: Analyze test results and refine strategies for improved coverage.'
-golden_rules:
-- ALWAYS prioritize smoke testing after each build to catch major bugs early.
-- NEVER skip regression testing after updates to prevent old bugs from resurfacing.
-- USE end-to-end testing before production to ensure all components interact correctly.
-flow: '[Requirements] -> [Select Patterns] -> [Execute Tests] -> [Analyze Results]'
-comparativo: '| Attribute           | Smoke Testing | Regression Testing |
+pattern_taxonomy: '| Pattern | Scope | Trigger | Isolation | Speed | Confidence Signal |
 
-  |---------------------|---------------|--------------------|
+  |---------|-------|---------|-----------|-------|-------------------|
 
-  | Focus               | Basic checks  | Existing features  |
+  | Unit | Single function/class | Logic change | Full | <1ms | Logic bugs |
 
-  | Frequency           | Regular       | On updates         |
+  | Integration | 2+ components, real deps | API/boundary change | Partial | 10-500ms | Contract bugs |
 
-  | Automation Potential| High          | Moderate           |'
+  | System (E2E) | Full stack, real env | Release gate | None | 1-60s | Regression |
+
+  | Smoke | Critical paths only | Deploy | None | <30s | Liveness |
+
+  | Contract | API schema, SLA boundary | Interface change | Mocked | ~100ms | Compatibility |
+
+  | Property | Input space, invariants | Algorithm change | Partial | varies | Edge cases |'
+test_scope_decision_matrix: '| Condition | Choose |
+
+  |-----------|--------|
+
+  | Logic, no I/O, no state | Unit |
+
+  | DB query, cache, or external call | Integration |
+
+  | User journey, multi-service flow | System/E2E |
+
+  | Post-deploy health check | Smoke |
+
+  | Cross-team API boundary | Contract |
+
+  | State machines, parsers, converters | Property |
+
+  | CI speed constraint (<5 min) | Unit + Smoke |
+
+  | Release gate | System + Smoke |'
+execution_order_heuristics: '| Rule | Rationale | Anti-pattern |
+
+  |------|-----------|-------------|
+
+  | Unit first, E2E last | Isolate logic failures early | E2E-first wastes 10min on a logic bug |
+
+  | Smoke before full suite | Fail fast on infra issues | Full suite on broken env = false failures |
+
+  | Stable before flaky | Deterministic signal before probabilistic | Mixed order = noisy CI dashboards |
+
+  | Shortest first per layer | Maximize parallel feedback | All long tests together = bottleneck |
+
+  | Independent before chained | Avoid cascade masking root cause | Sequential tests = ambiguous failures |'
+coverage_strategies: '| Strategy | Measures | Gap Risk | CEX Context |
+
+  |----------|----------|----------|-------------|
+
+  | Line/statement | Code executed | Misses branch logic | cex_system_test.py (54 tests) |
+
+  | Branch | Decision paths | Misses data-driven paths | Schema + frontmatter gate |
+
+  | Mutation | Test quality (kill rate) | Expensive, slow | Manual for core pipeline |
+
+  | Behavioral | User stories, contracts | Misses edge inputs | 12LP checklist (12 points) |
+
+  | Exploratory | Unknown unknowns | Unstructured, hard to repeat | cex_doctor.py scan |'
+failure_classification: '| Class | Diagnosis Signal | Ownership | Resolution |
+
+  |-------|-----------------|-----------|------------|
+
+  | Logic | Deterministic, reproducible | Author | Fix code, add unit test |
+
+  | Environment | Intermittent, env-dependent | Infra/DevOps | Pin deps, isolate env |
+
+  | Data | Specific input/fixture triggers | Author | Add fixture, sanitize data |
+
+  | Timing | Race condition, flaky under load | Author/Infra | Add retry, fix async order |
+
+  | Contract | Interface mismatch, schema drift | API owner | Align contract, add contract test |'
+cex_application:
+- '`cex_system_test.py`: 54 tests across integration + system scope'
+- '`cex_doctor.py`: smoke-style health check (builder + schema liveness)'
+- '`cex_hooks.py`: pre-commit gate (ASCII rule + frontmatter contract tests)'
+- 'F7 GOVERN: behavioral coverage via 12LP checklist + H01-H07 hard gates'
+- 'Failure triage: deterministic = logic class; intermittent = environment class'
 references:
-- 'Source: https://www.softwaretestinghelp.com/types-of-software-testing/'
-- 'Related artifact: None'
+- 'Fowler, M. "Practical Test Pyramid": https://martinfowler.com/articles/practical-test-pyramid.html'
+- 'Related: p07_qg_system_gate, cex_system_test.py (54 tests), cex_doctor.py'
