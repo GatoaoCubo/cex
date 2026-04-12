@@ -11,15 +11,15 @@ quality: null
 **What are vector databases?**  
 Specialized systems for storing, querying, and managing vector embeddings (numerical arrays) using approximate nearest-neighbor search algorithms.
 
-| Database   | Description                              | Pros                          | Cons                          | Use Case                          |
-|------------|------------------------------------------|-------------------------------|-------------------------------|-----------------------------------|
-| **FAISS**  | Facebook's library for efficient similarity search | High performance, scalability | Requires C++ integration     | Large-scale, high-performance needs |
-| **ChromaDB** | Simple, Python-first vector DB           | Easy setup, Python integration | Limited scalability            | Quick prototyping, small teams    |
-| **Pinecone** | Cloud-native vector DB service           | Managed cloud, auto-scaling   | Costlier for large datasets  | Cloud deployments, real-time apps |
-| **Qdrant** | Open-source vector DB with flexible APIs | Open-source, customizable     | Less mature ecosystem         | Custom configurations, hybrid setups |
+| Database   | Features                          | Use Case                          | Pros                          | Cons                          |
+|------------|-----------------------------------|-----------------------------------|-------------------------------|-------------------------------|
+| **FAISS**  | High-dimensional, scalable        | Large-scale ML inference         | Fast, memory-efficient        | Complex setup                 |
+| **ChromaDB** | Easy Python API, embeddable     | Prototyping, small teams         | Simple, real-time             | Limited scalability            |
+| **Pinecone** | Serverless, auto-scaling         | Production apps with high traffic| Fully managed, global reach   | Higher cost for large datasets|
+| **Qdrant** | Flexible vector types, open-source | Custom ML pipelines              | Open-source, customizable     | Requires manual scaling       |
 
 **When to use each:**  
-- **FAISS**: Prioritize speed and scalability with minimal infrastructure overhead.  
-- **ChromaDB**: Need rapid development with Python-centric workflows.  
-- **Pinecone**: Require cloud-managed solutions with auto-scaling.  
-- **Qdrant**: Want open-source flexibility with custom deployment options.  
+- **FAISS**: Requires fine-grained control over indexing and high-dimensional data  
+- **ChromaDB**: Prioritize rapid development with minimal infrastructure  
+- **Pinecone**: Need global scalability without operational overhead  
+- **Qdrant**: Require custom vector types or open-source flexibility  
