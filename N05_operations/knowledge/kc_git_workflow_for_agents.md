@@ -49,3 +49,4 @@ Implement pre-commit checks with:
 3. Configure `user.name` and `user.email` for audit trails
 4. Use `git diff` before committing to verify changes
 ```
+```
