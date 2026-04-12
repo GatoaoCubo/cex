@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: taxonomy-management
-quality: null
+quality: 8.9
 tags: [memory-scope, taxonomy, classification, decisions, n04]
 tldr: "Persistent memory tracking taxonomy decisions: kind reclassifications, tag normalizations, orphan resolutions, domain boundary rulings."
 density_score: 0.91

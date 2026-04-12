@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-infrastructure
-quality: null
+quality: 8.7
 tags: [glossary, embedding, vector, similarity]
 tldr: "A fixed-length float vector representing text semantics, enabling similarity search via cosine distance in vector stores."
 density_score: 0.96

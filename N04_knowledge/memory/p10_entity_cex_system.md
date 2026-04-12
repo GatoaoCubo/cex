@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: system-knowledge
-quality: null
+quality: 9.1
 tags: [entity-memory, cex, system, architecture, metadata]
 tldr: "Persistent entity memory tracking CEX system facts: 123 kinds, 12 pillars, 8 nuclei, 125 builders, 59 tools, 2184 artifacts."
 density_score: 0.95

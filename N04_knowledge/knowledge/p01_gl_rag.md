@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-infrastructure
-quality: null
+quality: 8.7
 tags: [glossary, rag, retrieval, augmented-generation]
 tldr: "Pattern that augments LLM prompts with retrieved documents from a knowledge base, reducing hallucination and grounding responses in facts."
 density_score: 0.97

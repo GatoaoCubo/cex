@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-retrieval
-quality: null
+quality: 9.1
 tags: [knowledge-index, bm25, sparse-retrieval, tf-idf, baseline]
 tldr: "BM25 sparse index over 2184 CEX artifacts — term frequency baseline for retrieval, benchmarking against future dense indexes."
 density_score: 0.92
