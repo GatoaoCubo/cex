@@ -1,3 +1,6 @@
-Create file: N03_engineering/knowledge/kc_yaml_frontmatter_standard.md
-Knowledge card about CEX YAML frontmatter standard. Cover: required fields (id, kind, title, version, quality), optional fields (pillar, tags, domain), validation rules, common mistakes.
-YAML frontmatter: id: kc_yaml_frontmatter_standard, kind: knowledge_card, title: "CEX YAML Frontmatter Standard", version: 1.0.0, quality: null, pillar: P01. English only. Under 100 lines.
+Create file: N03_engineering/knowledge/kc_aider_integration_patterns.md
+Knowledge card about integrating Aider CLI with multi-agent orchestration systems.
+Cover: --file vs --read, --yes-always for autonomy, --subtree-only for large repos,
+--auto-commits for git, --commit-language for i18n, Modelfile customization.
+Include YAML frontmatter: id: kc_aider_integration_patterns, kind: knowledge_card, title: "Aider CLI Integration Patterns", version: 1.0.0, quality: null, pillar: P01
+All content in English. Keep under 120 lines.
