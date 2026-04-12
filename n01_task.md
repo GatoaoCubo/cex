@@ -1,7 +1,6 @@
-Create file: N01_intelligence/knowledge/kc_overnight_evolve_pattern.md
-
-Write a knowledge card about the overnight evolve pattern for continuous AI improvement.
-Cover: 5-phase cycle (Python scoring, sweep, crew, cascade, grid).
-Include: convergence behavior, cost analysis ($0 local vs cloud), hardware requirements.
-Include YAML frontmatter: id: kc_overnight_evolve_pattern, kind: knowledge_card, title, version: 1.0.0, quality: null
-All content in English.
+Create file: N01_intelligence/knowledge/kc_model_context_protocol.md
+Knowledge card about MCP (Model Context Protocol) by Anthropic.
+Cover: what MCP is, server/client architecture, tool/resource/prompt primitives,
+how CEX uses MCP (.mcp-n0X.json configs), comparison with function calling.
+Include YAML frontmatter: id: kc_model_context_protocol, kind: knowledge_card, title: "Model Context Protocol (MCP)", version: 1.0.0, quality: null, pillar: P01
+All content in English. Keep under 120 lines.
