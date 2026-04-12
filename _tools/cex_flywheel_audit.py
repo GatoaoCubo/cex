@@ -64,7 +64,7 @@ def audit_L0():
     record("L0", "router_config.yaml",
            "WIRED" if (CEX_ROOT / ".cex" / "router_config.yaml").exists() else "PHANTOM")
 
-    boots = list((CEX_ROOT / "boot").glob("*.cmd"))
+    boots = list((CEX_ROOT / "boot").glob("*.ps1"))
     record("L0", "boot_scripts", "WIRED" if len(boots) >= 7 else "BROKEN", f"{len(boots)} scripts")
 
     record("L0", "dispatch.sh",

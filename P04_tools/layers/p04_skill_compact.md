@@ -1,0 +1,57 @@
+---
+id: p04_skill_compact
+kind: skill
+pillar: P04
+title: "Skill: Context Compaction"
+version: 1.0.0
+quality: null
+tags: [skill, compact, context, memory, optimization]
+tldr: "Context compaction skill for reducing context window usage when approaching token limits. Preserves critical information while discarding low-value content."
+domain: "tools"
+author: n03_builder
+created: "2026-04-12"
+updated: "2026-04-12"
+density_score: 0.91
+---
+
+# Context Compaction Procedures
+
+## Trigger Conditions
+
+Compaction activates when context usage exceeds 80% of the token budget.
+The check runs after every tool result is received.
+
+## Compaction Strategy (Priority Order)
+
+### Level 1: Trim Redundancy (saves 10-20%)
+- Remove duplicate information across tool results
+- Collapse repeated file reads into single reference
+- Strip verbose tool output formatting
+- Deduplicate error messages
+
+### Level 2: Summarize History (saves 20-40%)
+- Replace old conversation turns with summaries
+- Compress completed task details to one-line outcomes
+- Archive resolved decision points
+- Condense long code blocks to signatures + key logic
+
+### Level 3: Drop Low-Value Content (saves 30-50%)
+- Remove exploratory searches that found nothing useful
+- Drop tool results from abandoned approaches
+- Remove verbose system messages
+- Strip formatting from non-critical content
+
+### Level 4: Critical-Only Mode (saves 50-70%)
+- Retain only: current task, active files, recent decisions
+- Replace all history with structured summary
+- Keep only error messages that are unresolved
+- Maintain task list and completion status
+
+## Preservation Rules
+
+NEVER compact:
+- Current task description and requirements
+- Uncommitted code changes
+- Active error messages being debugged
+- User decisions and preferences from this session
+- File paths and line numbers of active work
