@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: artifact-quality-operations
-quality: null
+quality: 8.9
 tags: [quality_gate, artifact, operations, N05, frontmatter, compilation]
 tldr: "Artifact quality gate covering frontmatter validity, YAML compilation, density scoring, kind compliance, and cross-reference integrity."
 density_score: 0.97

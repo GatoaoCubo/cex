@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: architecture-operations
-quality: null
+quality: 8.9
 tags: [context_doc, architecture, operations, N05, railway, topology, ADR]
 tldr: "Architecture decision record for the 4-service Railway topology (api, frontend, dashboard, gateway) and its operational implications."
 density_score: 0.96

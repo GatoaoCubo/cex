@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: architecture-operations
-quality: null
+quality: 9.0
 tags: [context_doc, architecture, operations, N05, testing, strategy, ADR]
 tldr: "Architecture decision record for the multi-layer testing strategy covering unit, e2e, smoke, regression, benchmark, golden, and red-team evaluations."
 density_score: 0.96

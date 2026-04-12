@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: taxonomy-management
-quality: null
+quality: 8.9
 tags: [tool, n04, taxonomy, classification, kind-registry, tag-normalization]
 tldr: "CLI tool to build and maintain taxonomies: kind tree visualization, tag normalization, orphan detection, pillar coverage reports."
 density_score: 0.90

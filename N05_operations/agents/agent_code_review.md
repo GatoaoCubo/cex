@@ -16,7 +16,7 @@ routing_keywords: [review, code-review, PR, pull-request, diff, lint, sanitize, 
 tags: [agent, code-review, operations, N05, quality, lint, PR]
 tldr: Code Review Agent — owns code quality enforcement via PR review, lint gates, sanitization, pattern detection, and refactor guidance.
 density_score: 0.95
-quality: null
+quality: 9.0
 linked_artifacts:
   primary: quality_gate_operations
   related: [workflow_operations, system_prompt_operations]

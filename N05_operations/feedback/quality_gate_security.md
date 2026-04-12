@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: security-operations
-quality: null
+quality: 8.9
 tags: [quality_gate, security, operations, N05, red-team, auth]
 tldr: "Security validation gate covering secret management, auth flows, input sanitization, dependency vulnerabilities, and adversarial resilience."
 density_score: 0.98

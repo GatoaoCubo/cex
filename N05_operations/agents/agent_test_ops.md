@@ -16,7 +16,7 @@ routing_keywords: [test, eval, benchmark, regression, smoke, e2e, unit, golden, 
 tags: [agent, testing, operations, N05, eval, regression, benchmark]
 tldr: "Test Operations Agent -- owns all testing and evaluation across the pipeline, including unit, e2e, smoke, regression, golden, benchmark, and red-team evals."
 density_score: 0.95
-quality: null
+quality: 9.0
 linked_artifacts:
   primary: quality_gate_operations
   related: [workflow_operations, spawn_config_operations]

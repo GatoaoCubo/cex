@@ -16,7 +16,7 @@ routing_keywords: [deploy, rollback, railway-up, zero-downtime, blue-green, cana
 tags: [agent, deploy, operations, N05, railway, rollback, release]
 tldr: Deploy Operations Agent — owns the deploy lifecycle from pre-flight checks through cutover to post-deploy verification and rollback readiness.
 density_score: 0.95
-quality: null
+quality: 9.0
 linked_artifacts:
   primary: workflow_operations
   related: [quality_gate_operations, deploy_checklist_template, rollback_plan_template, env_contract_schema]
