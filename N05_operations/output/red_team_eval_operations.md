@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: security-operations
-quality: null
+quality: 9.0
 tags: [red_team_eval, security, operations, N05, adversarial, penetration]
 tldr: "Red team evaluation suite covering prompt injection, auth bypass, input fuzzing, rate limit evasion, env leakage, and error exploitation."
 density_score: 0.96

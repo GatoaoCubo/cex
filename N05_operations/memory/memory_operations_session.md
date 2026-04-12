@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: operations-memory
-quality: null
+quality: 8.9
 tags: [runtime_state, memory, operations, N05, session, context]
 tldr: "Persistent session memory for N05 operations tracking corrections, preferences, conventions, and accumulated context across sessions."
 density_score: 0.95

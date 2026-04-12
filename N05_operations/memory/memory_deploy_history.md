@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: deployment-operations
-quality: null
+quality: 8.9
 tags: [runtime_state, memory, operations, N05, deploy, history]
 tldr: "Persistent deploy history tracking every deployment with evidence, timing, health status, rollback events, and incident correlation."
 density_score: 0.95

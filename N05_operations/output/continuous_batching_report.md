@@ -4,7 +4,7 @@ kind: context_doc
 pillar: P01
 title: "Continuous Batching Verification Report"
 version: 1.0.0
-quality: null
+quality: 8.7
 created: 2026-04-08
 author: n05_operations
 tags: [continuous, batching, mission_runner, fine-tune, system-test]

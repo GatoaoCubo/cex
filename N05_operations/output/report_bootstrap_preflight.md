@@ -3,7 +3,7 @@ id: report_bootstrap_preflight
 kind: benchmark
 title: "Bootstrap Pre-Flight Validation Report"
 version: 1.0.0
-quality: null
+quality: 8.9
 created: 2026-04-08
 nucleus: n05
 mission: OPTIMIZE_FACTORY

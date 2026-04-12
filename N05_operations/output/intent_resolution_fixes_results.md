@@ -7,7 +7,7 @@ version: 1.0.0
 date: 2026-04-08
 nucleus: N05
 mission: INTENT_FIX
-quality: null
+quality: 8.9
 tags: [intent-resolution, cex-8f-motor, fixes, verification]
 ---
 

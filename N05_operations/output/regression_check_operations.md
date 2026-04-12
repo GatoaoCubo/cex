@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: regression-detection
-quality: null
+quality: 9.0
 tags: [regression_check, operations, N05, baseline, quality, delta]
 tldr: "Regression check suite comparing current state against golden baselines across performance, quality scores, artifact counts, and test results."
 density_score: 0.96

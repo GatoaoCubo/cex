@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: ci-cd-operations
-quality: null
+quality: 9.0
 tags: [hook_config, ci-cd, operations, N05, github-actions, pipeline]
 tldr: "GitHub Actions CI/CD pipeline with pre-commit hooks, artifact validation, system tests, quality gates, and Railway deploy automation."
 density_score: 0.96
