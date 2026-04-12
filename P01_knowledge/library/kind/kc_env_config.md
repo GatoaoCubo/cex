@@ -1,85 +1,55 @@
 ---
-id: p01_kc_env_config
+id: kc_env_config
 kind: knowledge_card
-type: kind
-pillar: P09
-title: "Env Config — Deep Knowledge for env_config"
+title: "Environment Configuration for LLM Systems"
 version: 1.0.0
-created: 2026-03-30
-updated: 2026-03-30
-author: commercial_agent
-domain: env_config
-quality: 9.1
-tags: [env_config, P09, GOVERN, kind-kc]
-tldr: "env_config is the versioned YAML spec of environment variables for a bounded scope — separating required from optional, documenting defaults, and pointing to secret_config rather than inlining credentials."
-when_to_use: "Building, reviewing, or reasoning about env_config artifacts"
-keywords: [environment_variables, configuration, system_config]
-feeds_kinds: [env_config]
-density_score: null
+quality: null
+pillar: P01
+language: English
 ---
 
-# Env Config
+# Environment Configuration for LLM Systems
 
-## Spec
-```yaml
-kind: env_config
-pillar: P09
-llm_function: GOVERN
-max_bytes: 4096
-naming: p09_env_{{scope}}.yaml
-core: true
-```
+## Key Configuration Elements
 
-## What It Is
-An env_config is the authoritative YAML spec of environment variables for a bounded scope — documenting required vars (system fails without them), optional vars (defaults available), and pointers to secret_config for credentials. It is NOT a boot_config (P02, per-provider startup), NOT a feature_flag (P09, binary on/off with rollout), NOT a path_config (P09, filesystem paths).
+1. **API Keys**  
+   - Store sensitive credentials in environment variables
+   - Use `.env` files with `.gitignore` protection
+   - Never hardcode keys in source code
 
-## Cross-Framework Map
-| Framework/Provider | Class/Concept | Notes |
-|-------------------|---------------|-------|
-| LangChain | Environment variables | `LANGCHAIN_API_KEY`, `LANGCHAIN_TRACING_V2` |
-| LlamaIndex | `Settings` + env vars | `OPENAI_API_KEY`, `LLAMA_INDEX_CACHE_DIR` |
-| CrewAI | Env vars + LLM config | `OPENAI_API_KEY`, `SERPER_API_KEY` for tool access |
-| DSPy | `dspy.configure()` + env | `OPENAI_API_KEY`, LM configuration via env |
-| Haystack | YAML config + env | API keys in env; component config in YAML pipeline |
-| OpenAI | Platform env vars | `OPENAI_API_KEY`, `OPENAI_ORG_ID` |
-| Anthropic | Env vars + beta headers | `ANTHROPIC_API_KEY`, model names, budget env flags |
+2. **Provider URLs**  
+   - Configure endpoints for different LLM providers:
+     ```env
+     OPENAI_API_URL=https://api.openai.com/v1
+     ANTHROPIC_API_URL=https://api.anthropic.com/v1
+     ```
 
-## Key Parameters
-| Parameter | Type | Default | Tradeoff |
-|-----------|------|---------|----------|
-| scope | string | required | system/agent_group/service — tighter = clearer ownership |
-| required | list[EnvVar] | required | System fails without these — zero defaults allowed |
-| optional | list[EnvVar] | [] | System degrades gracefully — always document default |
-| secret_refs | list[str] | [] | Names pointing to secret_config, never actual values |
+3. **Model Selection**  
+   - Set default models via environment variables:
+     ```env
+     DEFAULT_MODEL=gpt-4
+     CODEx_MODEL=code-davinci-002
+     ```
 
-## Patterns
-| Pattern | When to Use | Example |
-|---------|-------------|---------|
-| Prefix scoping | All vars prefixed by service | `organization_*`, `RAILWAY_*`, `ANTHROPIC_*` |
-| Secret separation | API keys as pointer, not value | `ANTHROPIC_API_KEY` → `p09_secret.md` |
-| Feature toggle | Boolean env vars enable features | `FIRECRAWL_ENABLED=true`, `organization_RLM_PROBING=true` |
+4. **Feature Flags**  
+   - Enable/disable features with flags:
+     ```env
+     ENABLE_STREAMING=true
+     USE_CACHING=false
+     ```
 
-## Anti-Patterns
-| Anti-Pattern | Why It Fails | Fix |
-|-------------|-------------|-----|
-| Inline secrets | API key values committed to YAML/git | Always use `secret_refs` pointer to secret_config |
-| Undocumented defaults | Optional vars without defaults cause silent degradation | Document every optional var's default value |
-| God env config | 50+ vars in one config with mixed scopes | Split by service scope; one file per agent_group/service |
+5. **Secrets Management**  
+   - Use encrypted secret managers for production
+   - Implement rotation policies for credentials
+   - Validate secrets during deployment
 
-## Integration Graph
-```
-secret_config, feature_flag --> [env_config] --> boot_config, runtime_rule
-                                      |
-                                 path_config, permission, agent_card
-```
+6. **.env Patterns**  
+   - Use consistent naming conventions
+   - Separate development/production environments
+   - Implement validation for required variables
 
-## Decision Tree
-- IF var controls feature on/off with rollout THEN feature_flag (not env_config)
-- IF var is a credential, key, or token THEN secret_config (not env_config)
-- IF var is a filesystem path THEN path_config (not env_config)
-- DEFAULT: env_config for all other system configuration variables
-
-## Quality Criteria
-- GOOD: required/optional split, scope defined, no credentials inline, defaults documented
-- GREAT: validation rules per var, deployment checklist linked, migration guide for renames
-- FAIL: API keys inline, no scope, missing defaults, required vs optional not distinguished
+## Best Practices
+- Use `.env.local` for local development
+- Store production secrets in secure vaults
+- Automate environment setup with CI/CD
+- Regularly audit configuration files
