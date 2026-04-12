@@ -9,7 +9,7 @@ updated: 2026-04-07
 author: n01_intelligence
 agent_group: n01-research-analyst
 domain: research-intelligence
-quality: null
+quality: 8.9
 tags: [tool-config, scraping, firecrawl, fetch, mcp, n01, rate-limits]
 tldr: "Scraping rules for N01 research -- rate limits, retry policy, content extraction priorities, and domain-specific selectors for firecrawl and fetch MCP servers."
 density_score: 0.93

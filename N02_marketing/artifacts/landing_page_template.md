@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n02_marketing
 domain: landing_pages
-quality: null
+quality: 9.0
 tags: [template, landing-page, conversion, funnel, CTA, N02]
 tldr: "Complete landing page templates for 4 funnel stages — hero sections, benefit stacks, social proof patterns, CTA blocks, and objection handlers. Every section earns the next scroll."
 density_score: 0.93

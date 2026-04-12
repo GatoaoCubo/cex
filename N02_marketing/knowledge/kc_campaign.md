@@ -5,7 +5,7 @@ pillar: P01
 title: "Campaign Architecture — From Brief to Conversion"
 domain: N02_marketing / Campaigns
 tags: [campaign, marketing, funnel, strategy, multichannel, conversion, launch, N02]
-quality: null
+quality: 9.1
 source: internal_distillation
 created: 2026-04-07
 author: n02_marketing

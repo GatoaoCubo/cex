@@ -9,7 +9,7 @@ updated: 2026-04-07
 author: n01_intelligence
 agent_group: n01-research-analyst
 domain: research-intelligence
-quality: null
+quality: 8.9
 tags: [tool-config, search, brave-search, mcp, n01, api, queries]
 tldr: "Search API configuration for N01 research -- Brave Search query patterns, result filtering, freshness constraints, and domain boosting for competitive intelligence."
 density_score: 0.91

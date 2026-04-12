@@ -5,7 +5,7 @@ pillar: P01
 title: "Email Sequence Strategy — Persuasion Architectures That Convert"
 domain: N02_marketing / Email Sequences
 tags: [email, sequence, automation, nurture, drip, funnel, conversion, N02]
-quality: null
+quality: 9.1
 source: internal_distillation
 created: 2026-04-07
 author: n02_marketing

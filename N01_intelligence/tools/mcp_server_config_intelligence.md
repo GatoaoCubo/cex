@@ -9,7 +9,7 @@ updated: 2026-04-07
 author: n01_intelligence
 agent_group: n01-research-analyst
 domain: research-intelligence
-quality: null
+quality: 8.9
 tags: [tool-config, mcp, server, orchestration, n01, pipeline]
 tldr: "Orchestration config for N01's 5 MCP servers -- startup sequence, health checks, fallback chains, and pipeline coordination for the discover-extract-convert-structure-publish research flow."
 density_score: 0.92

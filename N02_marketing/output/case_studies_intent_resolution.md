@@ -6,7 +6,7 @@ version: 1.0.0
 pillar: P01
 created: 2026-04-08
 author: n02_marketing
-quality: null
+quality: 8.9
 tags: [case-study, intent-resolution, 8F, before-after, onboarding, landing-page, mcp-server, pricing]
 density_score: 0.91
 ---

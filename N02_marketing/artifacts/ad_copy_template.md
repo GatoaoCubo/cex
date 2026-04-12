@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n02_marketing
 domain: advertising
-quality: null
+quality: 9.0
 tags: [template, ad-copy, facebook, google, linkedin, tiktok, instagram, N02]
 tldr: "Complete ad copy templates for 6 platforms — character limits, hook patterns, CTA formulas, and A/B variant structures. Each template is a loaded gun: point at audience, pull trigger."
 density_score: 0.94
