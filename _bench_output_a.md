@@ -6,38 +6,26 @@ version: 1.0.0
 quality: null
 ---
 
-# Prompt Caching Strategies
+**Prompt Caching** is a technique to store and reuse previously generated responses to identical or similar prompts, reducing computation time and resource usage.
 
-**What is prompt caching?**  
-A technique to store and reuse previously computed responses to identical or similar prompts, reducing redundant computation and improving efficiency.
+### 3 Strategies
+1. **TTL (Time-to-Live)**  
+   - Evicts entries after a fixed duration  
+   - Best for short-term, time-sensitive tasks  
+   - High performance for frequent reuse  
 
-## 3 Strategies
+2. **LRU (Least Recently Used)**  
+   - Evicts least recently accessed items  
+   - Ideal for dynamic workloads with varying access patterns  
+   - Balances memory and performance  
 
-### 1. **TTL (Time-to-Live)**  
-Evicts cached entries after a fixed duration.  
-- **Eviction**: Based on time  
-- **Memory Usage**: Low  
-- **Dynamic Data**: Best for static data  
-- **Use Case**: APIs with predictable request patterns  
+3. **Semantic**  
+   - Uses similarity metrics to identify duplicate prompts  
+   - Optimal for complex, context-dependent queries  
+   - Higher memory overhead but better accuracy  
 
-### 2. **LRU (Least Recently Used)**  
-Evicts the least recently accessed items.  
-- **Eviction**: Based on usage frequency  
-- **Memory Usage**: Moderate  
-- **Dynamic Data**: Suitable for mixed workloads  
-- **Use Case**: Systems with varying request patterns  
-
-### 3. **Semantic**  
-Evicts based on content similarity (e.g., vector similarity).  
-- **Eviction**: Based on semantic relevance  
-- **Memory Usage**: High  
-- **Dynamic Data**: Ideal for dynamic data  
-- **Use Case**: NLP tasks with semantically similar queries  
-
-## Comparison Table
-
-| Strategy | Eviction Method | Memory Usage | Dynamic Data | Use Case                     |
-|---------|------------------|--------------|--------------|------------------------------|
-| TTL     | Time-based       | Low          | ❌           | Static data                  |
-| LRU     | Usage-based      | Moderate     | ✅           | Mixed workloads              |
-| Semantic| Semantic-based   | High         | ✅           | Dynamic, semantically rich   |
+| Strategy | Eviction Method | Use Case                  | Performance | Memory Usage |
+|----------|------------------|---------------------------|-------------|--------------|
+| TTL      | Time-based       | API rate limiting         | ⭐⭐⭐⭐      | Low          |
+| LRU      | Access-based     | Web applications          | ⭐⭐⭐⭐      | Medium       |
+| Semantic | Similarity-based | Research, creative tasks  | ⭐⭐⭐        | High         |
