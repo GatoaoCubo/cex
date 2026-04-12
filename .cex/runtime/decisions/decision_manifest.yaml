@@ -46,3 +46,14 @@ agent_identity:
     - N05_operations/prompts/system_prompt_operations.md
     - N07_admin/agents/agent_admin.md
     - N07_admin/prompts/system_prompt_admin.md
+
+# New PC Setup (2026-04-12)
+newpc_setup:
+  brand_bootstrap: skip              # dev repo, no brand identity
+  user_project_artifacts: archive    # preserve in .cex/archive/examples/
+  setup_validator: full_tool         # cex_setup_validator.py (N05)
+  hygiene_tool: full_crud_with_gate  # cex_hygiene.py (N03) + pre-grid gate
+  doc_consolidation: full_rewrite    # QUICKSTART + spec_zero_install + ONBOARDING (N04)
+  power_settings: never_sleep        # disabled sleep/hibernate/screen timeout
+  mcp_migration: done                # @anthropic/* -> @modelcontextprotocol/*
+  missing_deps: fixed                # uv, numpy, scikit-learn installed
