@@ -1,42 +1,49 @@
 ---
-id: kc_model_context_protocol
-kind: knowledge_card
-title: "Model Context Protocol (MCP)"
-version: 1.0.0
-quality: 8.8
-pillar: P01
+title: Model Context Protocol
+date: 2023-10-15
+tags: [model, context, protocol]
 ---
 
-# Model Context Protocol (MCP)
+# Model Context Protocol
 
-## What is MCP?
-MCP (Model Context Protocol) is a communication protocol developed by Anthropic to enable structured context sharing between client applications and Claude models. It provides a standardized way to pass tools, resources, and prompts to models while maintaining context across interactions.
+This document defines the protocol for managing model context in intelligence operations.
 
-## Architecture
-MCP operates on a server/client model:
-- **Client**: Application requesting model interactions
-- **Server**: Anthropic's API endpoint handling requests
-- **Model**: Claude model executing tasks with provided context
+## Context Management
 
-## Primitives
-MCP defines three core primitives:
-1. **Tools**: Custom functions available to the model
-2. **Resources**: External data sources for reference
-3. **Prompts**: Structured instructions for model behavior
+### 1. Context Initialization
+- Load base context from pre-trained models
+- Initialize with domain-specific knowledge base
+- Set default context parameters
 
-## CEX Integration
-CEX uses MCP through `.mcp-n0X.json` configuration files:
-- Define tool/resource/prompt mappings for each nucleus (n01-n07)
-- Enable context persistence across multiple interactions
-- Support structured data passing without raw text
+### 2. Context Updating
+- Use `update_context()` method for incremental updates
+- Support batch updates for multiple contexts
+- Maintain version history for context changes
 
-## Comparison with Function Calling
-| Feature          | MCP                          | Function Calling              |
-|------------------|------------------------------|------------------------------|
-| Context Sharing  | ✅ Structured, persistent    | ❌ Limited to single request  |
-| Data Passing     | ✅ Type-safe, structured     | ✅ But requires explicit formatting |
-| Reusability      | ✅ Predefined tool/resource  | ❌ Requires per-call setup   |
-| Complexity       | ✅ Simplifies complex workflows | ✅ Effective for simple tasks |
+### 3. Context Querying
+- Use `query_context()` method for context retrieval
+- Support filtering by time range and relevance
+- Provide confidence scores for context matches
 
-MCP enables CEX to maintain consistent context across multiple nucleus interactions, improving efficiency and reducing errors in complex workflows.
+## Implementation
+
+```python
+class ModelContext:
+    def __init__(self, base_context):
+        self.context = base_context
+        self.version = 1
+
+    def update_context(self, new_context):
+        self.context = {**self.context, **new_context}
+        self.version += 1
+
+    def query_context(self, query):
+        # Implementation for context querying
+        pass
 ```
+
+## Best Practices
+
+- Regularly update context with new information
+- Maintain version control for context changes
+- Use confidence scores for context validation
