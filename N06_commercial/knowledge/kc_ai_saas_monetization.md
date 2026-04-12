@@ -20,8 +20,6 @@ pillar: P01
 
 | Model           | Revenue Potential | Scalability | Customer Acquisition | Example Use Case                  |
 |-----------------|-------------------|-------------|----------------------|-----------------------------------|
-| Per-Token       | High              | High        | Moderate             | Chatbot services                 |
-| Seat-Based      | Medium            | Medium      | High                 | Collaboration tools              |
 | Usage-Based     | High              | High        | Medium               | Analytics platforms              |
 | Freemium        | Medium            | High        | High                 | AI coding assistants             |
 | Enterprise Tiers| Very High         | Low         | Low                  | Customer success platforms       |
