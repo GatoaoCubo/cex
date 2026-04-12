@@ -9,36 +9,33 @@ pillar: P01
 
 # Aider CLI Integration Patterns
 
-## Core Integration Patterns
+## Core Integration Options
 
-### File Mode vs Read Mode
-- `--file <file>`: Process single file with full context awareness
-- `--read <dir>`: Analyze entire directory structure recursively
-- Auto-detects file types (markdown, code, documentation)
+**--file**  
+Use for single-file editing with context-aware suggestions.  
+**--read**  
+Read-only mode for analysis without modifications.
 
-### Autonomy Settings
-- `--yes-always`: Enable fully autonomous operation
-- `--no-prompt`: Disable all user interaction
-- `--auto-commits`: Automatic git commit integration
-  - Supports `--commit-language` for i18n compatibility
+**--yes-always**  
+Enable full autonomy for repetitive tasks (e.g., refactoring, formatting).
 
-### Repository Handling
-- `--subtree-only`: Limit analysis to specific repository subtree
-- `--ignore-glob`: Exclude patterns from analysis
-- `--follow-symlinks`: Resolve symbolic links during analysis
+**--subtree-only**  
+Focus on specific subdirectories in large repositories.
 
-### Modelfile Customization
-- `--modelfile <path>`: Specify custom Modelfile location
-- Supports:
-  - Model version specification
-  - Plugin configuration
-  - Context customization
-  - Environment variable injection
+## Git Integration
 
-## Best Practice Recommendations
-1. Use `--read` for multi-file repository analysis
-2. Combine with `--yes-always` for fully automated workflows
-3. Leverage `--commit-language` for multilingual commit messages
-4. Use `--subtree-only` to limit scope in large repositories
-5. Always validate Modelfile configurations before deployment
+**--auto-commits**  
+Automatically commit changes with semantic messages.  
+**--commit-language**  
+Specify commit message language (e.g., `en` for English, `pt` for Portuguese).
+
+## Modelfile Customization
+
+Configure model parameters in `Modelfile` for:
+- Language preferences
+- Token limits
+- Prompt templates
+- Safety settings
+
+Use `--model` flag to override default model settings during execution.
 ```
