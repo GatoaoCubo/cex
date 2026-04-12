@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: commercial-strategy
-quality: null
+quality: 9.0
 tags: [strategy, claude-native, distribution, monetization, pricing, commercial]
 tldr: "CEX distribution pivoted from PI wrapper (dead -- Anthropic blocks 3rd-party auth) to git clone + Claude Code native. Revenue shifts from wrapper subscription to templates, consulting, licensing, courses. Target customer changes from 'app users' to 'Claude Code power users'."
 density_score: 0.94

@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: competitive-moat-monetization
-quality: null
+quality: 8.9
 tags: [intent-resolution, competitive-moat, pricing, value-calculator, 8f-pipeline, monetization, case-study]
 tldr: "CEX's intent resolution (8F pipeline: 5 vague words -> production artifact) is the core competitive moat. No competitor auto-resolves kind+pillar+builder from natural language. This report quantifies the advantage: 12-47x time savings, 2.8x quality uplift, and maps it to a 3-tier pricing model (Free/Pro/Enterprise) gated on intent resolution depth."
 density_score: 0.93

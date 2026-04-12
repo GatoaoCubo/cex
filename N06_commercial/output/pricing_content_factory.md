@@ -9,7 +9,7 @@ updated: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: content-factory-pricing
-quality: null
+quality: 8.9
 tags: [pricing, content-factory, tiers, ai-only, human-reviewed, bundles, margins, competitor-benchmark]
 tldr: "Complete pricing model for Content Factory v1. Per-content-type pricing across 11 formats, 2-tier quality model (AI-only vs human-reviewed), 6 pre-built bundles with 19-22% discount, competitor benchmark against 10 players, 5 subscription tiers R$0-3997/mo, margin analysis 76-93%."
 density_score: 0.96

@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: commercial-audit
-quality: null
+quality: 9.0
 tags: [self-audit, N06, mcp, tools, claude-native, commercial]
 tldr: "N06 MCP audit: 2/6 servers working (fetch, notebooklm-partial), 2/6 need auth (canva, notebooklm), 2/6 not loaded (stripe, hotmart). Brand tools: 5/5 scripts exist. Claude Code features: --name, --continue already available."
 density_score: 0.92

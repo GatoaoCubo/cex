@@ -8,7 +8,7 @@ created: 2026-04-08
 author: n06_commercial
 nucleus: N06
 domain: content-factory-roi
-quality: null
+quality: 8.9
 tags: [roi, calculator, content-factory, cost-savings, break-even, revenue, hours-saved]
 tldr: "ROI calculator for Content Factory customers. Inputs: current hours/week on content, team size, hourly rate, content volume. Outputs: monthly savings (R$8K-45K), revenue potential, break-even point (1-3 days for all tiers). Includes manual vs CF comparison across 11 formats, ICP-specific scenarios, and token cost analysis."
 density_score: 0.95
