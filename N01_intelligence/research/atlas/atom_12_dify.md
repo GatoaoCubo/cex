@@ -3,9 +3,9 @@ id: atom_12_dify
 kind: knowledge_card
 pillar: P01
 title: "Dify (LangGenius) Platform -- Deep Vocabulary Atlas"
-version: 1.1.0
-quality: 8.8
-tags: [dify, langgenius, workflow, agent, rag, knowledge-pipeline, low-code, agentic-workflow, plugin-sdk, mcp-server, reverse-invocation]
+version: 1.2.0
+quality: null
+tags: [dify, langgenius, workflow, agent, rag, knowledge-pipeline, low-code, agentic-workflow, plugin-sdk, mcp-server, reverse-invocation, variable-syntax, agent-strategy]
 date: 2026-04-13
 sources:
   - https://docs.dify.ai/
@@ -24,6 +24,11 @@ sources:
   - https://dify.ai/blog/v1-6-0-built-in-two-way-mcp-support
   - https://docs.dify.ai/versions/3-0-x/en/user-guide/workflow/variables
   - https://legacy-docs.dify.ai/plugins/schema-definition/agent
+  - https://docs.dify.ai/en/develop-plugin/dev-guides-and-walkthroughs/agent-strategy-plugin
+  - https://docs.dify.ai/en/develop-plugin/features-and-specs/plugin-types/general-specifications
+  - https://docs.dify.ai/en/use-dify/nodes/template
+  - https://legacy-docs.dify.ai/guides/workflow/variables
+  - https://docs.dify.ai/en/use-dify/knowledge/knowledge-pipeline/create-knowledge-pipeline
 ---
 
 # Dify (LangGenius) Platform -- Deep Vocabulary Atlas
