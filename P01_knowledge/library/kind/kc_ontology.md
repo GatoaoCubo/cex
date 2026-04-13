@@ -3,7 +3,8 @@ id: kc_ontology
 kind: knowledge_card
 title: Ontology (P01)
 version: 1.0.0
-quality: null
+quality: 8.7
+density_score: 1.0
 ---
 
 # Ontology (P01)
