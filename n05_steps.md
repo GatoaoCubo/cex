@@ -11,7 +11,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: builder_steps
 domain: steps
-quality: 8.5
+quality: 9.1
 tags: [steps, p05, evolve, pattern, overnight]
 tldr: "Iterative refinement process with defined steps for automated improvement of knowledge artifacts"
 when_to_use: "Systematic improvement of knowledge artifacts, workflow optimization, or model performance tuning"
