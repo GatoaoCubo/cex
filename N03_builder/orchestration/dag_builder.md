@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: 8.9
+quality: 9.1
 tags: [dag, builder, N03, dependencies, orchestration, pipeline]
 tldr: "Dependency graph for N03 builder artifacts — identity before orchestration, schema before quality gate."
 density_score: 0.93
@@ -23,9 +23,7 @@ linked_artifacts:
 
 ## Purpose
 
-Defines the dependency order for building N03 fractal artifacts. Some artifacts
-reference others and must be built in sequence. Independent artifacts can be
-built in parallel within a grid dispatch.
+Defines the dependency order for building N03 fractal artifacts. Some artifacts reference others and must be built in sequence. Independent artifacts can be built in parallel within a grid dispatch.
 
 ## Dependency Graph
 
@@ -106,10 +104,20 @@ built in parallel within a grid dispatch.
 - `orchestration/spawn_config_builder.md` — spawn configuration
 - `memory/8f_pipeline_mastery.md` — learning record
 
+## Comparison of Build Waves
+
+| Wave | Dependencies | Artifacts Built | Parallelism | Purpose |
+|------|--------------|------------------|-------------|---------|
+| 0    | None         | README.md        | Full        | Module description |
+| 1    | Wave 0       | Agent, Prompt, Card | Full | Core definitions |
+| 2    | Wave 1       | Architecture, Knowledge, Schema | Full | Structural foundations |
+| 3    | Wave 2       | Quality Gate     | Sequential  | Validation layer |
+| 4    | Waves 1-3    | Dispatch, Workflow, Handoff, Signal | Partial | Orchestration rules |
+| 5    | Wave 4       | Spawn Config, Memory Records | Sequential | Final configuration |
+
 ## Parallel Opportunities
 
-Within each wave, all artifacts are independent and can be built in parallel.
-Cross-wave dependencies are strict — do not build Wave N+1 until Wave N completes.
+Within each wave, all artifacts are independent and can be built in parallel. Cross-wave dependencies are strict — do not build Wave N+1 until Wave N completes.
 
 ## References
 
@@ -118,8 +126,15 @@ Cross-wave dependencies are strict — do not build Wave N+1 until Wave N comple
 
 ## Boundary
 
-Grafo aciclico de dependencias entre tasks. NAO eh workflow (execucao direta) nem component_map (P08, componentes).
+Acyclic graph of dependencies between tasks. Not a workflow (direct execution) nor a component_map (P08, components).
 
+## Related Kinds
+
+- **Workflow**: Defines execution steps that depend on completed DAG artifacts
+- **Component Map**: Describes system components that require DAG completion for validation
+- **Quality Gate**: Enforces standards that must be satisfied before DAG progression
+- **Dispatch Rule**: Uses DAG outputs to determine task routing
+- **Artifact Schema**: Provides data structure definitions required by DAG nodes
 
 ## 8F Pipeline Function
 
