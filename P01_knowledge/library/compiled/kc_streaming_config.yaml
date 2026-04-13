@@ -5,117 +5,103 @@ kind: knowledge_card
 version: 1.1.0
 quality: 8.9
 density_score: 1.0
-boundary: This artifact defines the configuration parameters and best practices for streaming P01 knowledge artifacts. It
-  is not a general guide to streaming technologies, nor does it cover the implementation of streaming algorithms or the architecture
-  of P01 systems beyond configuration parameters.
+boundary: This artifact defines the configuration parameters and best practices for enabling and managing streaming processing
+  of P01 knowledge artifacts. It is not a general guide to streaming technologies, nor does it cover non-P01 artifact configurations.
 related_kinds:
-- 'knowledge_card: Provides foundational information on streaming parameters.'
-- 'configuration_guide: Offers detailed setup instructions for streaming systems.'
-- 'performance_tuning: Focuses on optimizing parameters for efficiency.'
-- 'error_handling: Covers strategies for managing failures in streaming processes.'
-- 'data_architecture: Explains the structure and flow of data in streaming systems.'
-overview: 'Streaming configuration enables efficient processing of large knowledge artifacts by breaking them into manageable
+- 'knowledge_card: Provides the foundational structure for this artifact.'
+- 'configuration_guide: Offers general principles applicable to this configuration.'
+- 'performance_tuning: Shares optimization strategies relevant to streaming parameters.'
+- 'error_handling: Details mechanisms for addressing failures in streaming processes.'
+- 'data_processing: Covers broader data handling techniques that inform streaming strategies.'
+overview: Streaming configuration enables efficient processing of large knowledge artifacts by breaking them into manageable
   chunks. This guide explains how to configure streaming parameters for P01 knowledge artifacts to optimize performance and
-  resource usage.
+  resource usage. Key benefits include reduced memory overhead, improved fault tolerance, and scalable throughput for large
+  datasets.
+core_configuration_parameters: '| Parameter | Type | Default | Description |
 
+  |----------|------|---------|-----|
 
-  | Key Benefit | Description | Impact on Performance |
+  | `streaming.enabled` | boolean | `true` | Enable or disable streaming for this artifact |
 
-  |------------|-------------|-----------------------|
+  | `streaming.chunk_size` | integer | `1024` | Maximum size of each chunk in bytes |
 
-  | Scalability | Handles large datasets without memory overload | Reduces risk of out-of-memory errors |
+  | `streaming.buffer_size` | integer | `4096` | Size of the internal buffer for chunking |
 
-  | Efficiency | Optimizes resource allocation | Improves throughput by 30-50% |
+  | `streaming.timeout` | integer | `30` | Timeout in seconds for chunk processing |
 
-  | Reliability | Retry mechanisms ensure data integrity | Minimizes data loss by 90% |
+  | `streaming.retry_limit` | integer | `3` | Maximum retry attempts for failed chunks |
 
-  | Visibility | Progress tracking provides real-time feedback | Enables proactive monitoring |
+  | `streaming.parallelism` | integer | `4` | Number of parallel processing threads |
 
-  | Flexibility | Dynamic vs fixed chunking strategies | Adaptable to varying data formats |'
-core_configuration_parameters: '| Parameter | Type | Default | Description | Use Case |
+  | `streaming.chunking_strategy` | string | `"dynamic"` | Strategy for chunking data (dynamic/static) |
 
-  |----------|------|---------|-------------|----------|
+  | `streaming.log_level` | string | `"info"` | Logging verbosity level (info/debug/error) |'
+use_cases: '| Use Case | Configuration | Description | Notes |
 
-  | `streaming.enabled` | boolean | `true` | Enable or disable streaming for this artifact | All scenarios |
+  |--|--|--|--|
 
-  | `streaming.chunk_size` | integer | `1024` | Maximum size of each chunk in bytes | Text: 1024-4096; Binary: 4096-8192 |
+  | Large Document Processing | `chunk_size: 4096`, `chunking_strategy: dynamic` | For documents over 1MB | Dynamic chunking
+  recommended |
 
-  | `streaming.buffer_size` | integer | `4096` | Size of the internal buffer for chunk processing | Memory-constrained systems
+  | Real-time Data Feeds | `chunk_size: 1024`, `timeout: 10` | Continuous data streams | Fixed chunking preferred |
+
+  | Batch Processing | `enabled: false` | Non-streaming jobs | No streaming parameters needed |
+
+  | High-throughput Systems | `parallelism: 8`, `buffer_size: 8192` | For systems with high data velocity | Requires sufficient
+  memory |
+
+  | Low-latency Applications | `timeout: 5`, `retry_limit: 1` | Time-sensitive data processing | Minimal retries to avoid
+  delays |'
+best_practices: '| Practice | Recommendation | Use Case | Notes |
+
+  |--|--|--|--|
+
+  | Chunk Size Optimization | 1024-4096 bytes for text, 8192+ for binary | Text processing | Avoid sizes >8192 bytes for text
   |
 
-  | `streaming.timeout` | integer | `30` | Maximum time in seconds for chunk processing | Real-time vs batch processing |
+  | Timeout Management | 2-3x expected processing time | Real-time apps | Shorter for real-time, longer for batch |
 
-  | `streaming.retry_attempts` | integer | `3` | Number of retry attempts for failed chunks | Network instability |
+  | Retry Strategy | 2-3 attempts for transient errors | Network issues | Avoid for persistent failures |
 
-  | `streaming.progress_interval` | integer | `5` | Frequency in seconds for progress updates | Long-running operations |
+  | Progress Monitoring | 2-10 seconds interval | Long-running ops | Monitor for progress and bottlenecks |
 
-  | `streaming.chunking_strategy` | string | `"fixed"` | Chunking algorithm: "fixed" or "dynamic" | Variable vs consistent
-  data formats |
-
-  | `streaming.parallel_processing` | boolean | `false` | Enable parallel chunk processing | Multi-core systems |'
-configuration_syntax: "streaming:\n  enabled: true\n  chunk_size: 2048\n  buffer_size: 8192\n  timeout: 60\n  retry_attempts:\
-  \ 5\n  progress_interval: 10\n  chunking_strategy: \"dynamic\"\n  parallel_processing: true"
-use_cases: ''
-1_large_document_processing: "For processing documents over 1MB in size:\nstreaming:\n  enabled: true\n  chunk_size: 4096\n\
-  \  buffer_size: 16384\n  timeout: 120\n  retry_attempts: 5\n  chunking_strategy: \"dynamic\"\n\n| Parameter | Value | Rationale\
-  \ |\n|----------|-------|-----------|\n| chunk_size | 4096 | Balances memory and throughput |\n| buffer_size | 16384 | Prevents\
-  \ memory overflow |\n| timeout | 120 | Accommodates large file transfers |"
-2_real_time_data_streaming: "For low-latency applications:\nstreaming:\n  enabled: true\n  chunk_size: 1024\n  buffer_size:\
-  \ 2048\n  timeout: 10\n  retry_attempts: 2\n  chunking_strategy: \"fixed\"\n\n| Parameter | Value | Rationale |\n|----------|-------|-----------|\n\
-  | chunk_size | 1024 | Ensures rapid data transfer |\n| timeout | 10 | Minimizes delay |\n| retry_attempts | 2 | Reduces\
-  \ overhead for critical systems |"
-3_batch_processing: "For non-time-sensitive tasks:\nstreaming:\n  enabled: true\n  chunk_size: 8192\n  buffer_size: 32768\n\
-  \  timeout: 300\n  retry_attempts: 3\n  chunking_strategy: \"dynamic\"\n\n| Parameter | Value | Rationale |\n|----------|-------|-----------|\n\
-  | chunk_size | 8192 | Maximizes data transfer efficiency |\n| buffer_size | 32768 | Handles large batch volumes |\n| timeout\
-  \ | 300 | Accommodates extended processing |"
-best_practices: '| Parameter | Recommended Value | Rationale | Use Case |
-
-  |----------|-------------------|-----------|----------|
-
-  | chunk_size | 2048 (text), 4096 (binary) | Balances memory and throughput | General use |
-
-  | buffer_size | 8192 | Prevents memory overflow | Memory-constrained systems |
-
-  | timeout | 60 (real-time), 300 (batch) | Adjusts to processing requirements | Time-sensitive vs batch |
-
-  | retry_attempts | 3 | Reduces data loss without overhead | Network-unstable environments |
-
-  | progress_interval | 5 | Enables real-time monitoring | Long-running operations |
-
-  | chunking_strategy | "dynamic" (variable data), "fixed" (consistent data) | Adapts to data patterns | Mixed data formats
+  | Chunking Strategy | "dynamic" for variable data, "static" for fixed | Mixed data formats | "fixed" for consistent data
   |
 
-  | parallel_processing | true (multi-core), false (single-core) | Optimizes resource utilization | Multi-core systems |'
-advanced_configuration: ''
-custom_chunking_strategy: "streaming:\n  chunking_strategy: \"dynamic\"\n  dynamic_chunking:\n    min_chunk_size: 512\n  \
-  \  max_chunk_size: 2048\n    threshold: 0.8\n\n| Parameter | Value | Rationale |\n|----------|-------|-----------|\n| min_chunk_size\
-  \ | 512 | Ensures small chunks for flexibility |\n| max_chunk_size | 2048 | Prevents excessive memory usage |\n| threshold\
-  \ | 0.8 | Triggers chunk size adjustment |"
-performance_tuning: "streaming:\n  parallel_processing: true\n  thread_count: 4\n  compression: \"gzip\"\n\n| Parameter |\
-  \ Value | Rationale |\n|----------|-------|-----------|\n| thread_count | 4 | Matches CPU core count |\n| compression |\
-  \ \"gzip\" | Reduces network bandwidth usage |"
-troubleshooting: '| Issue | Root Cause | Impact | Solution |
+  | Parallelism | Enable on multi-core systems | High-throughput | Disable on single-threaded systems |'
+configuration_examples: ''
+example_1_basic_streaming: "streaming:\n  enabled: true\n  chunk_size: 2048\n  chunking_strategy: dynamic\n  parallelism:\
+  \ 4"
+example_2_real_time_feed: "streaming:\n  enabled: true\n  chunk_size: 1024\n  timeout: 5\n  retry_limit: 1\n  chunking_strategy:\
+  \ static"
+example_3_batch_processing: "streaming:\n  enabled: false"
+troubleshooting: '| Issue | Solution | Cause | Prevention |
 
-  |------|------------|--------|---------|
+  |--|--|--|--|
 
-  | Chunk processing failures | Network instability, chunk corruption | Processing delays, data loss | Increase `retry_attempts`
-  and check network stability |
-
-  | High memory usage | Large `buffer_size`, small `chunk_size` | Increased memory consumption | Reduce `buffer_size` and
-  increase `chunk_size` |
-
-  | Slow processing | Suboptimal `chunk_size`, `timeout` | Reduced throughput | Optimize `chunk_size` and `timeout` parameters
+  | Chunk processing timeout | Increase `timeout` value | Network latency or slow processing | Monitor system performance
   |
 
-  | No progress updates | Long `progress_interval` | Lack of visibility | Decrease `progress_interval` to 1-2 seconds |
+  | Chunking fails | Check `chunk_size` and `chunking_strategy` | Invalid data format | Validate input data |
 
-  | Chunk size too small | Inefficient data transfer | Lower throughput | Increase `chunk_size` for better throughput |
+  | No progress reported | Verify `log_level` and `parallelism` | Logging disabled or insufficient threads | Enable debug
+  logs and adjust parallelism |
 
-  | Chunk size too large | Memory pressure | Potential out-of-memory errors | Decrease `chunk_size` to prevent memory issues
-  |'
-example_configuration: "streaming:\n  enabled: true\n  chunk_size: 2048\n  buffer_size: 8192\n  timeout: 60\n  retry_attempts:\
-  \ 3\n  progress_interval: 5\n  chunking_strategy: \"dynamic\"\n  parallel_processing: true\n\n| Parameter | Value | Purpose\
-  \ |\n|----------|-------|---------|\n| chunk_size | 2048 | Balances memory and throughput |\n| buffer_size | 8192 | Prevents\
-  \ memory overflow |\n| timeout | 60 | Accommodates general processing needs |\n| retry_attempts | 3 | Reduces data loss\
-  \ |\n| progress_interval | 5 | Enables real-time monitoring |\n| chunking_strategy | \"dynamic\" | Adapts to varying data\
-  \ formats |\n| parallel_processing | true | Optimizes resource utilization |"
+  | Memory overflow | Increase `buffer_size` or reduce `parallelism` | High memory usage | Optimize buffer size based on system
+  resources |
+
+  | Retry limit exceeded | Adjust `retry_limit` or investigate root cause | Persistent errors | Implement error logging and
+  alerts |'
+related_documentation: '| Documentation | Description | Link |
+
+  |--|--|--|
+
+  | P01 Knowledge Architecture | Overview of P01 artifact structure | P01 Knowledge Architecture |
+
+  | Streaming Best Practices | General guidelines for streaming | Streaming Best Practices |
+
+  | Performance Tuning Guide | Optimization strategies for systems | Performance Tuning Guide |
+
+  | Error Handling Patterns | Mechanisms for fault recovery | Error Handling Patterns |
+
+  | Data Processing Fundamentals | Core concepts in data handling | Data Processing Fundamentals |'
