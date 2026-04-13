@@ -17,27 +17,27 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
-1. Conduct literature review on existing reward model frameworks (e.g., reinforcement learning, governance KPIs).  
-2. Interview stakeholders to identify process/outcome prioritization thresholds.  
-3. Define success metrics (e.g., alignment with Pillar P07, GOVERN function benchmarks).  
-4. Collect historical data on reward outcomes from prior governance cycles.  
-5. Benchmark against industry-standard reward schemas (e.g., ISO 26000, COBIT).  
-6. Analyze risks in reward misalignment (e.g., incentive gaming, compliance gaps).  
+1. Define reward_model objectives: align with P07 governance metrics.  
+2. Gather stakeholder input: identify process/outcome prioritization weights.  
+3. Analyze historical data: extract reward triggers and scaling factors.  
+4. Review existing schemas: map to SCHEMA.md’s reward_model structure.  
+5. Identify edge cases: e.g., conflicting outcomes, zero-impact scenarios.  
+6. Validate assumptions: confirm alignment with domain-specific governance rules.  
 
 ## Phase 2: COMPOSE  
-1. Set up environment with SCHEMA.md constraints (e.g., JSON structure, field types).  
-2. Draft reward_model objectives in GOVERN function scope (e.g., "maximize process efficiency").  
-3. Map criteria to Pillar P07 outcomes (e.g., "audit trail completeness" → 1–5 scale).  
-4. Integrate data sources from Phase 1 (e.g., stakeholder interviews, historical metrics).  
-5. Use OUTPUT_TEMPLATE.md to structure sections: [Model ID], [Criteria], [Weights].  
-6. Assign quantitative weights to criteria (e.g., 30% process, 70% outcome).  
-7. Write validation rules (e.g., "no criteria > 100% weight").  
-8. Peer-review for schema compliance and domain accuracy.  
-9. Finalize artifact with version control (e.g., Git commit message: "reward_model_v1.2").  
+1. Set up environment: install dependencies from SCHEMA.md’s toolchain.  
+2. Define reward_model schema: use SCHEMA.md’s `reward_config` structure.  
+3. Map variables: assign process/outcome keys to `metrics` array in OUTPUT_TEMPLATE.md.  
+4. Write configuration: populate `weights`, `thresholds`, and `scaling_functions`.  
+5. Align with template: ensure `version` and `governance_rules` match OUTPUT_TEMPLATE.md.  
+6. Integrate validation: add `preconditions` and `postconditions` per SCHEMA.md.  
+7. Document parameters: describe each metric’s purpose in `metadata` section.  
+8. Test with sample data: simulate outcomes using OUTPUT_TEMPLATE.md’s examples.  
+9. Finalize model: export as YAML/JSON per SCHEMA.md’s format specifications.  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ Confirm schema alignment (SCHEMA.md fields: id, criteria, weights, version).  
-- [ ] ✅ Verify data accuracy (e.g., weights sum to 100%, no duplicates).  
-- [ ] ✅ Stakeholder approval on criteria prioritization.  
-- [ ] ✅ Benchmark against Phase 1 industry standards.  
-- [ ] ✅ Documentation completeness (OUTPUT_TEMPLATE.md sections filled).
+- [ ] ✅ Check schema compliance: validate against SCHEMA.md’s `reward_model` spec.  
+- [ ] ✅ Verify data alignment: ensure metrics match stakeholder-defined priorities.  
+- [ ] ✅ Test edge cases: confirm zero-impact and conflicting-outcome handling.  
+- [ ] ✅ Audit governance rules: ensure `governance_rules` align with P07 pillars.  
+- [ ] ✅ Peer review: cross-check with domain experts for logic consistency.
