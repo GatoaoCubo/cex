@@ -4,7 +4,7 @@ kind: instruction
 pillar: P03
 title: "Instruction: Doing Tasks"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [instruction, tasks, execution, workflow]
 tldr: "Core instruction block defining how CEX agents should approach and execute tasks. Covers task decomposition, tool usage, and completion criteria."
 domain: "prompt engineering"
