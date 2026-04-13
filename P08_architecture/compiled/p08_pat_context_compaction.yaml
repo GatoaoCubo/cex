@@ -17,19 +17,45 @@ author: n03_builder
 created: '2026-04-12'
 updated: '2026-04-12'
 density_score: 0.92
-body: "# Context Compaction Pattern\n\n## Problem\nLLM agents accumulate context during long sessions. As the context window\n\
-  fills, performance degrades and eventually the session must be compressed\nor restarted. Uncontrolled compaction loses critical\
-  \ information.\n\n## Solution\nA 4-level progressive compaction strategy that preserves high-value\ninformation while aggressively\
-  \ pruning low-value content.\n\n## Architecture\n\n```\nContext Window [============================----] 80% threshold\n\
-  \                    |\n                    v\n            Compaction Engine\n            ├── L1: Trim redundancy (10-20%\
-  \ savings)\n            ├── L2: Summarize history (20-40% savings)\n            ├── L3: Drop low-value (30-50% savings)\n\
-  \            └── L4: Critical-only (50-70% savings)\n```\n\n## Trigger Thresholds\n\n| Usage | Action | Automatic? |\n|-------|--------|-----------|\n\
-  | < 60% | No action | -- |\n| 60-80% | Monitor, warn | Yes |\n| 80-90% | L1 + L2 compaction | Yes |\n| 90-95% | L3 compaction\
-  \ | Yes |\n| > 95% | L4 emergency compaction | Yes |\n\n## Preservation Priority\n\n1. Current task + requirements (NEVER\
-  \ compact)\n2. Uncommitted changes (NEVER compact)\n3. Active error context (NEVER compact)\n4. User decisions this session\
-  \ (NEVER compact)\n5. Recent tool results (compact after use)\n6. Historical conversation (compact aggressively)\n7. Exploration\
-  \ results (drop if superseded)\n\n## Trade-offs\n\n| Benefit | Cost |\n|---------|------|\n| Extends session lifetime |\
-  \ May lose useful historical context |\n| Maintains performance | Summarization introduces information loss |\n| Automatic\
-  \ operation | Requires careful priority tuning |\n\n## Related Patterns\n\n- Memory Extraction: persist valuable context\
-  \ before compaction\n- Token Budget: pre-allocate context regions by function\n- Prompt Cache: reuse cached prefixes to\
-  \ reduce context pressure"
+problem: LLM agents accumulate context during long sessions. As the context window fills, performance degrades and eventually
+  the session must be compressed or restarted. Uncontrolled compaction loses critical information.
+solution: A 4-level progressive compaction strategy that preserves high-value information while aggressively pruning low-value
+  content.
+architecture: "Context Window [============================----] 80% threshold\n                    |\n                  \
+  \  v\n            Compaction Engine\n            ├── L1: Trim redundancy (10-20% savings)\n            ├── L2: Summarize\
+  \ history (20-40% savings)\n            ├── L3: Drop low-value (30-50% savings)\n            └── L4: Critical-only (50-70%\
+  \ savings)"
+trigger_thresholds: '| Usage | Action | Automatic? |
+
+  |-------|--------|-----------|
+
+  | < 60% | No action | -- |
+
+  | 60-80% | Monitor, warn | Yes |
+
+  | 80-90% | L1 + L2 compaction | Yes |
+
+  | 90-95% | L3 compaction | Yes |
+
+  | > 95% | L4 emergency compaction | Yes |'
+preservation_priority:
+- Current task + requirements (NEVER compact)
+- Uncommitted changes (NEVER compact)
+- Active error context (NEVER compact)
+- User decisions this session (NEVER compact)
+- Recent tool results (compact after use)
+- Historical conversation (compact aggressively)
+- Exploration results (drop if superseded)
+trade_offs: '| Benefit | Cost |
+
+  |---------|------|
+
+  | Extends session lifetime | May lose useful historical context |
+
+  | Maintains performance | Summarization introduces information loss |
+
+  | Automatic operation | Requires careful priority tuning |'
+related_patterns:
+- 'Memory Extraction: persist valuable context before compaction'
+- 'Token Budget: pre-allocate context regions by function'
+- 'Prompt Cache: reuse cached prefixes to reduce context pressure'

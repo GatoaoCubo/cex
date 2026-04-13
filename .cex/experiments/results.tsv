@@ -5843,3 +5843,29 @@ et
 2026-04-13 10:34:37	C:\Users\CEX\Documents\GitHub\cex\P04_tools\templates\tpl_retriever_business_intel.md	1	9.1	1.00	keep	added updated: 2026-04-13
 2026-04-13 10:34:37	C:\Users\CEX\Documents\GitHub\cex\P04_tools\templates\tpl_search_tool_business_discovery.md	1	9.1	1.00	keep	added updated: 2026-04-13
 2026-04-13 10:34:38	C:\Users\CEX\Documents\GitHub\cex\P08_architecture\layers\p08_ac_explore.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:38	C:\Users\CEX\Documents\GitHub\cex\P08_architecture\layers\p08_ac_plan.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:38	C:\Users\CEX\Documents\GitHub\cex\P08_architecture\layers\p08_ac_verification.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:39	C:\Users\CEX\Documents\GitHub\cex\P08_architecture\layers\p08_pat_context_compaction.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:39	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\layers\p11_gr_action_reversibility.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:39	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\layers\p11_gr_cyber_risk.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:40	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_learning_record_autonomy.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:40	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_brand_context_nucleus.md	1	8.7	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:40	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_crm_mission_plan.md	1	9.2	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:41	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_crm_pipeline_evidence.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:41	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_research_batch_cnae.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:41	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_research_batch_directories.md	1	9.0	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:42	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_research_batch_maps.md	1	9.0	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:42	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_research_batch_marketplaces.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:42	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_research_batch_reputation.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:43	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_research_batch_social.md	1	9.0	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:43	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_workflow_research_pipeline.md	1	9.2	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:43	C:\Users\CEX\Documents\GitHub\cex\P12_orchestration\templates\tpl_workflow_strategic_outreach.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:44	C:\Users\CEX\Documents\GitHub\cex\_docs\ROADMAP.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:44	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\port_plan_external_repos.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:44	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_claude_native_hardening.md	1	9.0	0.93	keep	added density_score: 0.93
+2026-04-13 10:34:45	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_infinite_bootstrap_loop.md	1	9.0	1.00	keep	tldr flagged for manual review
+2026-04-13 10:34:45	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_instance_extraction.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:45	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_seed_words.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:46	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\spec_zero_install.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:46	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\tpl_crm_admin_spec.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:46	C:\Users\CEX\Documents\GitHub\cex\_docs\specs\tpl_template_registry.md	1	9.1	1.00	keep	added updated: 2026-04-13

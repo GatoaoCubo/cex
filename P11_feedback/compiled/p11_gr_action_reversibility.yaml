@@ -19,13 +19,7 @@ author: n03_builder
 created: '2026-04-12'
 updated: '2026-04-12'
 density_score: 0.92
-body: '# Action Reversibility Guardrail
-
-
-  ## Classification Matrix
-
-
-  | Action Type | Reversibility | Gate |
+classification_matrix: '| Action Type | Reversibility | Gate |
 
   |------------|---------------|------|
 
@@ -49,45 +43,22 @@ body: '# Action Reversibility Guardrail
 
   | Send external message | Irreversible | CONFIRM |
 
-  | Publish content | Hard to retract | CONFIRM |
-
-
-  ## Enforcement Rules
-
-
-  ### ALLOW Actions
-
-  - Proceed without confirmation
-
-  - Log action for audit trail
-
-
-  ### CONFIRM Actions
-
-  - Present action description to user
-
-  - Show what will be affected (files, systems, people)
-
-  - Wait for explicit approval before proceeding
-
-  - If denied, suggest safer alternative
-
-
-  ### BLOCK Actions
-
-  - Do not execute under any circumstances
-
-  - Explain why the action is blocked
-
-  - Suggest reversible alternative
-
-  - Exception: user explicitly uses override language ("force push", "yes delete")
-
-
-  ## Safe Alternatives
-
-
-  | Risky Action | Safe Alternative |
+  | Publish content | Hard to retract | CONFIRM |'
+enforcement_rules: ''
+allow_actions:
+- Proceed without confirmation
+- Log action for audit trail
+confirm_actions:
+- Present action description to user
+- Show what will be affected (files, systems, people)
+- Wait for explicit approval before proceeding
+- If denied, suggest safer alternative
+block_actions:
+- Do not execute under any circumstances
+- Explain why the action is blocked
+- Suggest reversible alternative
+- 'Exception: user explicitly uses override language ("force push", "yes delete")'
+safe_alternatives: '| Risky Action | Safe Alternative |
 
   |-------------|-----------------|
 

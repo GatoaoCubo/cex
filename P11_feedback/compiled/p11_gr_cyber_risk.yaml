@@ -19,20 +19,9 @@ author: n03_builder
 created: '2026-04-12'
 updated: '2026-04-12'
 density_score: 0.93
-body: '# Cybersecurity Risk Guardrail
-
-
-  ## Scope
-
-  Applies to all generated code (.py, .ps1, .sh, .js, .ts) and
-
-  configuration files (.yaml, .json, .env, .toml) produced by any nucleus.
-
-
-  ## OWASP Top 10 Checks
-
-
-  | Risk | Check | Action on Detect |
+scope: Applies to all generated code (.py, .ps1, .sh, .js, .ts) and configuration files (.yaml, .json, .env, .toml) produced
+  by any nucleus.
+owasp_top_10_checks: '| Risk | Check | Action on Detect |
 
   |------|-------|-----------------|
 
@@ -54,13 +43,8 @@ body: '# Cybersecurity Risk Guardrail
 
   | A09 Logging Failures | Secrets in logs, missing audit trail | WARN |
 
-  | A10 SSRF | Unvalidated URL construction | BLOCK |
-
-
-  ## Secret Exposure Rules
-
-
-  NEVER include in generated code or committed files:
+  | A10 SSRF | Unvalidated URL construction | BLOCK |'
+secret_exposure_rules: 'NEVER include in generated code or committed files:
 
   - API keys, tokens, passwords (use env vars or secret_config)
 
@@ -68,20 +52,11 @@ body: '# Cybersecurity Risk Guardrail
 
   - Database connection strings with credentials
 
-  - OAuth client secrets
-
-
-  ## Code Generation Rules
-
-
-  1. Parameterize all SQL queries (no string concatenation)
-
-  2. Sanitize all user input before rendering (HTML escape, etc.)
-
-  3. Use subprocess with list args, never shell=True with user input
-
-  4. Validate file paths to prevent directory traversal
-
-  5. Set appropriate CORS, CSP, and security headers
-
-  6. Use HTTPS for all external API calls'
+  - OAuth client secrets'
+code_generation_rules:
+- Parameterize all SQL queries (no string concatenation)
+- Sanitize all user input before rendering (HTML escape, etc.)
+- Use subprocess with list args, never shell=True with user input
+- Validate file paths to prevent directory traversal
+- Set appropriate CORS, CSP, and security headers
+- Use HTTPS for all external API calls
