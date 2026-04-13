@@ -135,7 +135,7 @@ OpenClaude ships ~18 bundled steps as battle-tested implementations:
 This pattern generalizes: any steps can dispatch parallel sub-agents with typed foci.
 
 **Analysis scratchpad pattern** (from /audit):
-- <analysis>  tags create a private drafting space
+- <analysis> tags create a private drafting space
 - Forces structured thinking before output
 - Scratchpad is stripped from final result
 - Improves quality without consuming permanent context
