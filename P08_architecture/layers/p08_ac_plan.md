@@ -4,7 +4,7 @@ kind: agent_card
 pillar: P08
 title: "Agent Card: Planning Agent"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [agent_card, plan, architecture, design]
 tldr: "Agent card for the planning agent used to design implementation strategies. Produces step-by-step plans with file identification and trade-off analysis."
 domain: "architecture"
