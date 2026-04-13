@@ -118,6 +118,16 @@ pass_threshold: float
 reject_action: string
 ```
 
+## Comparison of Kind-Specific Fields
+
+| Kind          | Pillar | Required Fields                         | Example Use Case                          |
+|---------------|--------|-----------------------------------------|-------------------------------------------|
+| agent         | P02    | agent_group, capabilities_count         | Define agent capabilities for P02 tasks   |
+| system_prompt | P03    | target_agent, persona, rules_count      | Configure agent behavior for P03 prompts  |
+| knowledge_card| P01    | when_to_use, keywords, axioms           | Create knowledge cards for P01 queries    |
+| workflow      | P12    | steps_count, execution, agent_groups    | Orchestrate P12 workflows with agents     |
+| quality_gate  | P07    | gate_count, pass_threshold              | Implement P07 quality checks for artifacts|
+
 ## Validation Rules
 
 1. `id` must be unique across the entire repository
@@ -129,6 +139,18 @@ reject_action: string
 7. `version` must follow SemVer format
 8. `created` and `updated` must be valid ISO dates
 
+## Boundary
+
+This artifact defines the universal frontmatter contract for all CEX artifacts. It is NOT a data format itself, nor does it govern the content beyond YAML frontmatter. It establishes structural requirements but does not enforce semantic meaning of fields.
+
+## Related Kinds
+
+- **quality_gate**: Enforces schema validation rules through automated checks
+- **agent**: Uses schema fields to define capabilities and routing parameters
+- **kinds_meta**: Maintains registry of valid `kind` values referenced by this schema
+- **workflow**: Relies on schema for agent_group and execution parameters
+- **dispatch_rule**: Uses schema-defined `kind` and `pillar` for routing decisions
+
 ## Anti-Patterns
 
 - Setting `quality: 9.0` (builder self-scoring — forbidden)
@@ -136,25 +158,3 @@ reject_action: string
 - Using `pillar: knowledge` instead of `pillar: P01` (use codes)
 - Duplicating `id` across artifacts (must be globally unique)
 - Empty `tags: []` (minimum 3 tags required)
-
-## Boundary
-
-This artifact IS a universal frontmatter contract that defines structural requirements for all CEX artifacts. It IS NOT a specific kind's schema, nor is it a validation tool itself — it serves as the foundational contract that other schemas must extend.
-
-## Related Kinds
-
-- **quality_gate**: Defines validation thresholds that must align with this schema's `quality` field.
-- **agent**: Extends the universal schema with agent-specific fields like `agent_group` and `capabilities_count`.
-- **system_prompt**: Adds fields related to `target_agent` and `persona` for role-specific configurations.
-- **knowledge_card**: Includes `when_to_use` and `keywords` to define contextual relevance.
-- **workflow**: Specifies `steps_count` and `execution` type to model process logic.
-
-## Comparison of Kind-Specific Extensions
-
-| Kind         | Pillar | Required Fields                     | Example Values                                                                 |
-|--------------|--------|-------------------------------------|----------------------------------------------------------------------------------|
-| agent        | P02    | agent_group, capabilities_count     | "ops_team", 5                                                                  |
-| system_prompt| P03    | target_agent, persona               | "analyst_agent", "data_scientist"                                              |
-| knowledge_card| P01  | when_to_use, keywords               | "data analysis", ["statistics", "machine learning"]                            |
-| workflow     | P12    | steps_count, execution              | 7, "sequential"                                                                |
-| dispatch_rule| P12    | scope, keywords, agent_group        | "customer_support", ["help", "support"], "support_team"                       |
