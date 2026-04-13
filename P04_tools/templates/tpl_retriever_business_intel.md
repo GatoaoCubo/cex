@@ -4,7 +4,7 @@ kind: template
 pillar: P04
 title: "Retriever — Multi-Source Business Intelligence"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/P04 retriever artifacts
@@ -12,6 +12,7 @@ variables: [SOURCES, MERGE_STRATEGY, DEDUP_FIELDS, INDUSTRY, REGION]
 density_score: 0.95
 tags: [template, retriever, business-intelligence, merge, dedup, instance-extraction]
 tldr: "Multi-source business intelligence retriever — merge data from N sources with configurable dedup and quality scoring."
+updated: "2026-04-13"
 ---
 
 # Business Intelligence Retriever
