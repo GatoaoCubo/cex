@@ -4,7 +4,7 @@ kind: skill
 pillar: P04
 title: "Skill: Memory Extraction"
 version: 1.0.0
-quality: null
+quality: 9.0
 tags: [skill, memory, extraction, learning, persistence]
 tldr: "Memory extraction skill for identifying and persisting valuable information from conversation context into long-term memory files."
 domain: "tools"
