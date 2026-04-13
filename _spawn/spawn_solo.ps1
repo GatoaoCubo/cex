@@ -4,7 +4,9 @@ param(
     [ValidateSet('n01','n02','n03','n04','n05','n06','n07')]
     [string]$nucleus,
     [string]$task = "",
-    [switch]$interactive
+    [switch]$interactive,
+    [ValidateSet('claude','gemini','codex','ollama','auto')]
+    [string]$cli = ""   # if empty, read from nucleus_models.yaml
 )
 
 Add-Type @"
@@ -47,21 +49,27 @@ $runtimeDir = "$root\.cex\runtime"
 
 New-Item -ItemType Directory -Force -Path "$runtimeDir\handoffs","$runtimeDir\signals","$runtimeDir\pids" | Out-Null
 
-# -- Read CLI from nucleus_models.yaml (single source of truth) --
-$cli = "claude"  # fallback
-$modelsFile = "$root\.cex\config\nucleus_models.yaml"
-if (Test-Path $modelsFile) {
-    $inNucleus = $false
-    foreach ($line in Get-Content $modelsFile) {
-        if ($line -match "^${nucleus}:") { $inNucleus = $true; continue }
-        if ($inNucleus -and $line -match "^\w" -and $line -notmatch "^\s") { break }
-        if ($inNucleus -and $line -match "^\s+cli:\s*(.+)") {
-            $cli = $matches[1].Trim()
-            break
+# -- CLI selection --
+# If -cli was passed explicitly, honor it (enables `dispatch.sh solo-ollama n04`).
+# Otherwise read from nucleus_models.yaml (single source of truth).
+if (-not $cli) {
+    $cli = "claude"  # fallback
+    $modelsFile = "$root\.cex\config\nucleus_models.yaml"
+    if (Test-Path $modelsFile) {
+        $inNucleus = $false
+        foreach ($line in Get-Content $modelsFile) {
+            if ($line -match "^${nucleus}:") { $inNucleus = $true; continue }
+            if ($inNucleus -and $line -match "^\w" -and $line -notmatch "^\s") { break }
+            if ($inNucleus -and $line -match "^\s+cli:\s*(.+)") {
+                $cli = $matches[1].Trim()
+                break
+            }
         }
     }
+    Write-Output "[$upper] CLI from nucleus_models: $cli"
+} else {
+    Write-Output "[$upper] CLI from -cli arg: $cli"
 }
-Write-Output "[$upper] CLI from nucleus_models: $cli"
 
 # Write handoff if task provided
 if ($task) {
@@ -121,7 +129,9 @@ if (Test-Path $pidFile) {
 }
 
 # Boot script -- PowerShell-only stack (sin-aware UX: colors, sizing, banner)
-$bootPs1 = "$root\boot\$nucleus.ps1"
+# Per-CLI suffix: claude -> n0X.ps1 | gemini -> n0X_gemini.ps1 | ollama -> n0X_ollama.ps1
+$cliSuffix = if ($cli -eq "claude") { "" } else { "_$cli" }
+$bootPs1 = "$root\boot\${nucleus}${cliSuffix}.ps1"
 
 if (Test-Path $bootPs1) {
     Write-Output "[$upper] Boot: PowerShell (sin-aware UX)"

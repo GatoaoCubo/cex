@@ -63,6 +63,23 @@ case "$MODE" in
         echo "[DISPATCH] Grid: $MISSION (cli=codex)"
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -cli codex -interactive
         ;;
+    grid-ollama)
+        # Interactive 3x2 tiled windows, each running boot/n0X_ollama.ps1 -> ollama_nucleus.py
+        MISSION="${1:-DEFAULT}"
+        MODEL="${2:-qwen3:8b}"
+        echo "[DISPATCH] Grid: $MISSION (cli=ollama, model=$MODEL, interactive, cost=\$0)"
+        export OLLAMA_MODEL="$MODEL"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -cli ollama -interactive
+        ;;
+    solo-ollama)
+        # Interactive single window, boot/n0X_ollama.ps1 -> ollama_nucleus.py
+        NUCLEUS="${1:-n03}"
+        MODEL="${2:-qwen3:8b}"
+        TASK="${3:-}"
+        echo "[DISPATCH] Solo-Ollama: $NUCLEUS via $MODEL (interactive)"
+        export OLLAMA_MODEL="$MODEL"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus "$NUCLEUS" -task "$TASK" -cli ollama -interactive
+        ;;
     status)
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_monitor.ps1
         ;;
@@ -131,14 +148,16 @@ case "$MODE" in
         echo "[DONE] Ollama Grid complete: $MISSION"
         ;;
     *)
-        echo "Usage: bash _spawn/dispatch.sh {solo|grid|grid-gemini|grid-codex|ollama|ollama-grid|status|stop} [args]"
+        echo "Usage: bash _spawn/dispatch.sh {solo|grid|grid-gemini|grid-codex|grid-ollama|solo-ollama|ollama|ollama-grid|status|stop} [args]"
         echo ""
-        echo "  solo n03 \"task\"           Spawn 1 Claude Code nucleus"
-        echo "  grid MISSION              Spawn up to 6 Claude Code nuclei"
+        echo "  solo n03 \"task\"           Spawn 1 Claude Code nucleus (interactive)"
+        echo "  grid MISSION              Spawn up to 6 Claude Code nuclei (interactive 3x2)"
         echo "  grid-gemini MISSION       Spawn up to 6 Gemini CLI nuclei"
         echo "  grid-codex MISSION        Spawn up to 6 Codex CLI nuclei"
-        echo "  ollama n03 qwen3:8b       Run 1 nucleus via Ollama (free)"
-        echo "  ollama-grid MISSION ...   Run all nuclei via Ollama (free)"
+        echo "  solo-ollama n04 qwen3:8b \"task\"  Spawn 1 Ollama nucleus (interactive window)"
+        echo "  grid-ollama MISSION qwen3:8b     Spawn up to 6 Ollama nuclei (interactive 3x2, free)"
+        echo "  ollama n03 qwen3:8b       Run 1 nucleus via Ollama headless (cex_8f_runner)"
+        echo "  ollama-grid MISSION ...   Run all nuclei via Ollama headless"
         echo "  status                    Monitor running nuclei"
         echo "  stop                      Stop MY session's nuclei only"
         echo "  stop n03                  Stop only N03"

@@ -1,6 +1,6 @@
-# CEX N04 Ollama -- CEX-N04-KNOWLEDGE (Aider + Ollama)
-# Mirrors boot/n04.ps1 but uses aider CLI with local Ollama model
-# CLI: aider | Model: ollama/gemma4:26b (fallback: ollama/qwen3:14b)
+# CEX N04 Ollama -- CEX-N04-KNOWLEDGE (direct Ollama API)
+# Mirrors boot/n04.ps1 but uses direct Ollama API via _tools/ollama_nucleus.py
+# CLI: python | Model: qwen3:8b (default) -- aider replaced 2026-04-13
 # Sin: Knowledge Gluttony (Knowledge Gluttony)
 
 # --- UX: Window title with mission + sin + status ---
@@ -9,7 +9,7 @@ $nucleus = "n04"
 $sinName = "Knowledge Gluttony"
 
 # Detect model (env override or default)
-$ollamaModel = if ($env:OLLAMA_MODEL) { $env:OLLAMA_MODEL } else { "gemma4:26b" }
+$ollamaModel = if ($env:OLLAMA_MODEL) { $env:OLLAMA_MODEL } else { "qwen3:8b" }
 $modelShort = "ollama/$ollamaModel"
 
 # Detect mission from handoff file
@@ -65,7 +65,7 @@ Write-Host ""
 Write-Host "  [*] N04 Knowledge Gluttony - OLLAMA MODE" -ForegroundColor Cyan
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  Got MORE data to ingest-" -ForegroundColor DarkGray
-Write-Host "  $modelShort  |  aider CLI  |  LOCAL inference" -ForegroundColor DarkGray
+Write-Host "  $modelShort  |  direct API  |  LOCAL inference" -ForegroundColor DarkGray
 if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor Cyan }
 Write-Host ""
 
@@ -136,18 +136,15 @@ try {
     return
 }
 
-# --- Launch aider ---
-$aiderArgs = @(
-    "--model", $modelToUse,
-    "--no-git",
-    "--yes-always",
-    "--no-suggest-shell-commands",
-    "--message-file", $taskFile
-)
+# --- Launch direct API wrapper (ollama_nucleus.py) ---
+# aider replaced 2026-04-13: aider cannot parse full-file LLM output (expects SEARCH/REPLACE)
+# Wrapper calls localhost:11434/api/generate directly, parses response, writes file, compiles, signals.
 
-Write-Host "  [>>] Launching aider with $modelToUse" -ForegroundColor Cyan
+$env:CEX_TASK_FILE = $handoff  # pass handoff path to Python wrapper
+
+Write-Host "  [>>] Launching ollama_nucleus.py with $ollamaModel" -ForegroundColor Cyan
 Write-Host ""
 
 Set-CexTitle "RUNNING"
-& aider @aiderArgs
+& python "$cexRoot\_tools\ollama_nucleus.py" --nucleus N04 --model $ollamaModel --task-file $handoff
 Set-CexTitle "DONE"

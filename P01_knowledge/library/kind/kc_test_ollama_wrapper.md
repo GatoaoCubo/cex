@@ -1,0 +1,23 @@
+---
+id: kc_test_ollama_wrapper
+kind: knowledge_card
+pillar: P01
+title: Local Ollama Wrapper for CEX Nuclei
+version: 1.0.0
+quality: null
+---
+# Local Ollama Wrapper for CEX Nuclei
+
+## Definition
+The `_tools/ollama_nucleus.py` wrapper provides direct API integration with Ollama's local model server, enabling CEX nuclei to execute LLM inference without relying on external APIs. It replaces the previous `aider` integration by offering finer-grained control over model loading, context window management, and token streaming. The wrapper abstracts Ollama's REST API into a nucleus-specific interface, allowing nuclei to spin up dedicated model instances with custom parameters (e.g., temperature, stop sequences) while maintaining CEX's memory and execution isolation.
+
+## Example
+A nucleus boot script invokes the wrapper via:
+```python
+from _tools.ollama_nucleus import launch_model
+launch_model(model_name="llama3", num_threads=4, context_length=2048, callback=handle_response)
+```
+This triggers Ollama's `POST /api/generate` endpoint with the specified parameters, streaming tokens to the callback. The wrapper handles model loading, resource allocation, and error recovery, ensuring nuclei operate as independent, sandboxed processes.
+
+## CEX Integration
+The wrapper enables a 6-nucleus local grid by allowing each nucleus to host its own Ollama model instance. Through orchestrated resource allocation, CEX dynamically spawns nuclei with different models (e.g., `llama3`, `mistral`, `phi3`) on the same machine, leveraging CPU/GPU parallelism. This setup supports distributed task execution, model-parallel inference, and isolated experiment environments, all while maintaining CEX's core principles of memory safety and process isolation.

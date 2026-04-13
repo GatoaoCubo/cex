@@ -11,7 +11,7 @@ param(
     [int]$pollSeconds = 30,
     [int]$maxMinutes = 45,
     [int]$maxSlots = 6,
-    [ValidateSet('claude','gemini','codex','auto')]
+    [ValidateSet('claude','gemini','codex','ollama','auto')]
     [string]$cli = "claude"
 )
 

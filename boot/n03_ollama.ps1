@@ -1,6 +1,6 @@
 # CEX N03 Ollama -- CEX-N03-BUILDER (Aider + Ollama)
-# Mirrors boot/n03.ps1 but uses aider CLI with local Ollama model
-# CLI: aider | Model: ollama/gemma4:26b (fallback: ollama/qwen3:14b)
+# Mirrors boot/n03.ps1 but uses direct Ollama API via _tools/ollama_nucleus.py
+# CLI: python | Model: qwen3:8b (default) -- aider replaced 2026-04-13
 # Sin: Inventive Pride (Inventive Pride)
 
 # --- UX: Window title with mission + sin + status ---
@@ -9,7 +9,7 @@ $nucleus = "n03"
 $sinName = "Inventive Pride"
 
 # Detect model (env override or default)
-$ollamaModel = if ($env:OLLAMA_MODEL) { $env:OLLAMA_MODEL } else { "gemma4:26b" }
+$ollamaModel = if ($env:OLLAMA_MODEL) { $env:OLLAMA_MODEL } else { "qwen3:8b" }
 $modelShort = "ollama/$ollamaModel"
 
 # Detect mission from handoff file
@@ -65,7 +65,7 @@ Write-Host ""
 Write-Host "  [*] N03 Inventive Pride - OLLAMA MODE" -ForegroundColor Blue
 Write-Host "  ==================================================" -ForegroundColor DarkGray
 Write-Host "  Is this WORTHY of my signature-" -ForegroundColor DarkGray
-Write-Host "  $modelShort  |  aider CLI  |  LOCAL inference" -ForegroundColor DarkGray
+Write-Host "  $modelShort  |  direct API  |  LOCAL inference" -ForegroundColor DarkGray
 if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor Blue }
 Write-Host ""
 
@@ -136,18 +136,13 @@ try {
     return
 }
 
-# --- Launch aider ---
-$aiderArgs = @(
-    "--model", $modelToUse,
-    "--no-git",
-    "--yes-always",
-    "--no-suggest-shell-commands",
-    "--message-file", $taskFile
-)
+# --- Launch direct API wrapper (ollama_nucleus.py) ---
+# aider replaced 2026-04-13: aider cannot parse full-file LLM output (expects SEARCH/REPLACE)
+$env:CEX_TASK_FILE = $handoff
 
-Write-Host "  [>>] Launching aider with $modelToUse" -ForegroundColor Blue
+Write-Host "  [>>] Launching ollama_nucleus.py with $ollamaModel" -ForegroundColor Blue
 Write-Host ""
 
 Set-CexTitle "RUNNING"
-& aider @aiderArgs
+& python "$cexRoot\_tools\ollama_nucleus.py" --nucleus N03 --model $ollamaModel --task-file $handoff
 Set-CexTitle "DONE"
