@@ -17,26 +17,31 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
-| Name | Role | Owner | Status |  
-|------|------|-------|--------|  
-| RewardCalculator | Core logic for reward computation | DevOps | In Progress |  
-| DataIngestion | Collects user activity data | Data Team | Deployed |  
-| ValidationLayer | Ensures data integrity | QA | Pending |  
-| ConfigManager | Manages reward parameters | Admin | Stable |  
-| LoggingService | Tracks model performance | DevOps | In Progress |  
-| NotificationService | Alerts on reward discrepancies | Ops | Deployed |  
-| Database | Stores reward history | DB Team | Stable |  
-| UserInterface | Configures reward rules | UX Team | In Progress |  
+| ISO | llm_function | Purpose | Status |  
+|-----|-------------|---------|--------|  
+| bld_manifest_reward_model | BECOME | Builder identity: process/outcome reward specialist | Production |  
+| bld_system_prompt_reward_model | BECOME | Persona: governance-aligned reward designer | Production |  
+| bld_instruction_reward_model | REASON | 3-phase production (Research/Compose/Validate) | Production |  
+| bld_schema_reward_model | CONSTRAIN | Schema: id pattern ^p07_rwm_*, reward_type enum | Production |  
+| bld_quality_gate_reward_model | GOVERN | HARD gates (H01-H09) + SOFT scoring (D01-D09) | Production |  
+| bld_output_template_reward_model | PRODUCE | Frontmatter + body structure for reward_model artifact | Production |  
+| bld_examples_reward_model | INJECT | Golden (Dialogue Quality RM) + 2 anti-examples | Production |  
+| bld_knowledge_card_reward_model | INJECT | Domain KC: RLHF, Stiennon et al., ISO 23894 | Production |  
+| bld_tools_reward_model | CALL | Hugging Face evaluate, Ray, OpenAI eval API | Production |  
+| bld_collaboration_reward_model | COLLABORATE | Crew: upstream rl_algorithm, downstream scoring_rubric | Production |  
+| bld_config_reward_model | CONSTRAIN | Naming: p07_rwm_<name>_<ts>.md, max_turns=20 | Production |  
+| bld_memory_reward_model | INJECT | Learning record: 20-30% alignment improvement patterns | Production |  
+| bld_architecture_reward_model | CONSTRAIN | This file -- component map and ISO dependencies | Production |  
 
 ## Dependencies  
 | From | To | Type |  
 |------|----|------|  
-| DataIngestion | Database | Storage |  
-| RewardCalculator | ValidationLayer | Validation |  
-| ConfigManager | RewardCalculator | Configuration |  
-| LoggingService | RewardCalculator | Monitoring |  
-| NotificationService | LoggingService | Alerting |  
-| UserInterface | ConfigManager | Configuration |  
+| bld_instruction | bld_schema | Reads schema before compose phase |  
+| bld_instruction | bld_output_template | Fills template at F6 PRODUCE |  
+| bld_system_prompt | bld_manifest | Derives governance persona from identity section |  
+| bld_quality_gate | bld_schema | H02 enforces schema ID pattern ^p07_rwm_* |  
+| bld_examples | bld_knowledge_card | Examples demonstrate RLHF domain concepts |  
+| rl_algorithm-builder | reward_model-builder | rl_algorithm consumes reward_model's signal definitions |  
 
 ## Architectural Position  
-The reward_model sits at the intersection of user engagement and incentive systems in CEX, relying on real-time data ingestion, validation, and dynamic configuration to ensure fair and transparent reward distribution across trading and staking activities.
+reward_model-builder occupies P07 (Evaluation pillar) in the CEX taxonomy. It produces process/outcome reward specifications that encode governance objectives as measurable metrics. Upstream: scoring_rubric (rubric inputs), human evaluation (RLHF data). Downstream: rl_algorithm (consumes reward signal), guardrail (uses outcome metrics).

@@ -17,24 +17,31 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
-| Name | Role | Owner | Status |  
-|------|------|-------|--------|  
-| Strategy Orchestrator | Coordinates strategy execution | Strategy Team | In Dev |  
-| Rule Engine | Applies logical rules | Rules Team | Review |  
-| Data Validator | Ensures input integrity | Data Team | Production |  
-| Knowledge Base | Stores domain-specific data | Knowledge Team | In Dev |  
-| Conflict Resolver | Handles contradictory outcomes | Logic Team | In Dev |  
-| Logger | Tracks strategy events | Ops Team | Production |  
-| User Interface | Strategy configuration | UI Team | In Dev |  
+| ISO | llm_function | Purpose | Status |  
+|-----|-------------|---------|--------|  
+| bld_manifest_reasoning_strategy | BECOME | Builder identity, capabilities, routing | Production |  
+| bld_system_prompt_reasoning_strategy | BECOME | Persona injected at F2 — reasoning specialist | Production |  
+| bld_instruction_reasoning_strategy | REASON | 3-phase production process (Research/Compose/Validate) | Production |  
+| bld_schema_reasoning_strategy | CONSTRAIN | Formal field schema, ID pattern, body structure | Production |  
+| bld_quality_gate_reasoning_strategy | GOVERN | HARD gates (H01-H10) + SOFT scoring (D01-D08) | Production |  
+| bld_output_template_reasoning_strategy | PRODUCE | Frontmatter template + section stubs | Production |  
+| bld_examples_reasoning_strategy | INJECT | Golden example + 2 anti-examples with boundary notes | Production |  
+| bld_knowledge_card_reasoning_strategy | INJECT | Domain KC: reasoning paradigms, industry standards | Production |  
+| bld_tools_reasoning_strategy | CALL | Validation tools, external refs (PyTorch, LangChain) | Production |  
+| bld_collaboration_reasoning_strategy | COLLABORATE | Crew roles: upstream/downstream builders | Production |  
+| bld_config_reasoning_strategy | CONSTRAIN | Naming convention, paths, size limits | Production |  
+| bld_memory_reasoning_strategy | INJECT | Learning record: lessons from past builds | Production |  
+| bld_architecture_reasoning_strategy | CONSTRAIN | This file -- component map and dependencies | Production |  
 
 ## Dependencies  
 | From | To | Type |  
 |------|----|------|  
-| Strategy Orchestrator | Rule Engine | Uses |  
-| Strategy Orchestrator | Data Validator | Uses |  
-| Rule Engine | Knowledge Base | Queries |  
-| Conflict Resolver | Rule Engine | Uses |  
-| Logger | Strategy Orchestrator | Monitored by |  
+| bld_instruction | bld_schema | Reads schema before compose phase |  
+| bld_instruction | bld_output_template | Fills template at F6 PRODUCE |  
+| bld_system_prompt | bld_manifest | Derives persona from identity section |  
+| bld_quality_gate | bld_schema | H02 pattern enforces schema ID rule |  
+| bld_examples | bld_knowledge_card | Examples demonstrate KC domain concepts |  
+| bld_tools | bld_config | Tools must respect path/size config limits |  
 
 ## Architectural Position  
-The reasoning_strategy sits at the core of CEX decision-making, integrating rule-based logic, data validation, and conflict resolution to ensure compliance, risk control, and consistent trading outcomes across exchange operations.
+reasoning_strategy-builder occupies P03 (Prompt pillar) in the CEX taxonomy. It produces structured reasoning blueprints (deductive, inductive, abductive) consumed by agent prompts and chain orchestration. Upstream: knowledge_card (domain input). Downstream: prompt_template, chain, system_prompt (consumers of the strategy).
