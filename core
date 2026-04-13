@@ -1,7 +1,7 @@
 ---
 id: core
-kind: core
-type: system
+kind: knowledge_card
+type: kind
 pillar: P04
 llm_function: TOOL
 max_bytes: 4096
@@ -79,40 +79,4 @@ A core is a structured unit of system work with defined phases, trigger conditio
 | H01_phases_defined | phases array not empty | Cannot execute workflow |
 | H02_trigger_valid | trigger_type in allowed values | Cannot activate core |
 | H03_input_schema | Valid JSON schema format | Runtime parameter errors |
-| H04_output_format | Defined output structure | Unpredictable results |
-| H05_quality_floor | Score ≥ 8.5 | Artifact rejected for deployment |
-
-## Industry References
-| Standard | Organization | Description |
-|---------|-------------|-------------|
-| ISO/IEC 23894 | ISO | Reference architecture for AI systems |
-| IEEE P7003-2021 | IEEE | Standard for AI system quality assurance |
-| NIST AI Risk Management Framework | NIST | Guidelines for AI system governance |
-| GDPR | EU | Data protection regulations impacting core execution |
-
-## Practical Examples
-1. **System Optimization Core**  
-   - Trigger: `/optimize`  
-   - Phases: System analysis → Performance benchmark → System refactoring  
-   - Tools: Profiler, System monitor, Configuration manager  
-
-2. **Data Analysis Core**  
-   - Trigger: `crew.use_core('data_analysis')`  
-   - Phases: Data loading → Data cleaning → Statistical analysis  
-   - Tools: Pandas, NumPy, Visualization libraries  
-
-3. **Documentation Core**  
-   - Trigger: Event-driven (file change)  
-   - Phases: Content discovery → Structure analysis → Documentation generation  
-   - Tools: Markdown processor, API explorer, Version control  
-
-## Production Reference: OpenClaude Bundled Cores
-OpenClaude ships ~15 bundled cores as battle-tested implementations:
-
-| Core | Trigger | Pattern | CEX Equivalent |
-|-------|---------|---------|----------------|
-| /optimize | slash_command | 3-parallel-agent review | p04_core_optimize |
-| /benchmark | slash_command | adversarial verification | p04_core_benchmark |
-| /summarize | agent_invoked | 9-section summarization | p04_core_summarize |
-| /monitor | slash
-```
+| H04_output

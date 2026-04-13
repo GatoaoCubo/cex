@@ -144,4 +144,3 @@ This pattern generalizes: any steps can dispatch parallel sub-agents with typed 
 | Scratchpad steps | <analysis> block for private reasoning, stripped from output | p04_steps_compact |
 | Background extract | Runs silently after N turns, extracts persistent memories | p04_steps_memory_extract |
 | Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_steps_verify |
-```
