@@ -6,6 +6,7 @@ version: 1.0.0
 quality: 8.7
 pillar: P01
 density_score: 1.0
+updated: "2026-04-13"
 ---
 
 # Aider CLI Integration Patterns
