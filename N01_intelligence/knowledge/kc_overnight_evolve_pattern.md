@@ -3,8 +3,9 @@ id: kc_overnight_evolve_pattern
 kind: knowledge_card
 title: Overnight Evolve Pattern for Continuous AI Improvement
 version: 1.0.0
-quality: 8.6
+quality: 8.9
 pillar: P01
+density_score: 1.0
 ---
 
 # Overnight Evolve Pattern
