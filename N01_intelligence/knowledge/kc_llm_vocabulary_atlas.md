@@ -3,7 +3,7 @@ id: kc_llm_vocabulary_atlas
 kind: knowledge_card
 title: "LLM Vocabulary Atlas: Universal Term Registry"
 version: "1.0.0"
-quality: null
+quality: 8.8
 tags: [vocabulary, atlas, taxonomy, standards, protocols, global]
 pillar: P01
 domain: llm-agent-vocabulary
