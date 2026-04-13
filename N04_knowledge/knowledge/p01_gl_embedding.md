@@ -11,6 +11,7 @@ quality: 8.7
 tags: [glossary, embedding, vector, similarity]
 tldr: "A fixed-length float vector representing text semantics, enabling similarity search via cosine distance in vector stores."
 density_score: 0.96
+updated: "2026-04-13"
 ---
 
 # Embedding
