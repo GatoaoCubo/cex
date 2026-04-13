@@ -11,6 +11,7 @@ quality: 8.7
 tags: [glossary, knowledge-card, kc, p01]
 tldr: "A dense, structured document encoding a single concept with mandatory frontmatter, density ≥0.8, and machine-parseable format."
 density_score: 0.97
+updated: "2026-04-13"
 ---
 
 # Knowledge Card (KC)
