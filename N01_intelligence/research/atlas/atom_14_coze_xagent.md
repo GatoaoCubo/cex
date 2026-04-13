@@ -288,6 +288,61 @@ OUTER LOOP (Planner)
 
 Key difference: XAgent's loops are in-process (same runtime); CEX's loops are inter-process (filesystem + git + signals).
 
+**Dual-Loop State Machine (formal):**
+
+```
+OUTER LOOP (Planner)
+  States: INIT -> DECOMPOSING -> PLANNING -> DISPATCHING -> MONITORING -> REFINING -> COMPLETE | FAILED
+
+  INIT
+    -> DECOMPOSING   (task received)
+
+  DECOMPOSING
+    -> PLANNING      (subtasks + milestones generated)
+
+  PLANNING
+    -> DISPATCHING   (subtask queue ready)
+
+  DISPATCHING
+    -> MONITORING    (Actor activated for next subtask)
+
+  MONITORING
+    -> DISPATCHING   (Actor reported subtask success, more subtasks remain)
+    -> REFINING      (Actor reported subtask failure)
+    -> COMPLETE      (all subtasks succeeded)
+    -> FAILED        (max retries exceeded or unrecoverable error)
+
+  REFINING
+    -> PLANNING      (re-decompose around failed subtask)
+    -> FAILED        (refinement not possible)
+
+INNER LOOP (Actor) -- per subtask
+  States: IDLE -> REASONING -> ACTING -> OBSERVING -> REPORTING | ASKING
+
+  IDLE
+    -> REASONING     (subtask received from Planner)
+
+  REASONING  [Thought step in ReACT]
+    -> ACTING        (tool selected, arguments formed)
+    -> ASKING        (insufficient info detected)
+    -> REPORTING     (answer directly available, no tool needed)
+
+  ACTING  [Action step in ReACT]
+    -> OBSERVING     (tool call executed)
+
+  OBSERVING  [Observation step in ReACT]
+    -> REASONING     (observation processed, continue loop)
+    -> REPORTING     (task solved)
+
+  REPORTING
+    -> IDLE          (result returned to Planner)
+
+  ASKING  [AskForHumanHelp]
+    -> REASONING     (human response received as Observation)
+```
+
+**Inner loop max iterations**: configurable via `max_iter` in XAgent config (default: 10 per subtask). After max_iter, Actor reports failure to Planner.
+
 ### 3.5 ToolServer
 
 Containerized tool execution environment. Five tool categories:
@@ -302,18 +357,95 @@ Containerized tool execution environment. Five tool categories:
 
 **CEX mapping**: CEX nuclei have direct tool access (Claude Code's native tools + MCP servers). XAgent's Docker containerization provides stronger isolation. CEX's safety model relies on git (rollback) rather than containers (isolation).
 
+### 3.5a ToolServer Docker Implementation (Deep Dive)
+
+Source: https://xagent-doc.readthedocs.io/en/latest/source/ToolServer/README.html
+Source: https://github.com/OpenBMB/XAgent/blob/main/ToolServer/README.md
+
+**Three-tier containerized architecture:**
+
+```
+ToolServerManager   (port 8090)
+  -- Creates/manages ToolServerNode instances per XAgent session
+  -- Exposes REST API: POST /get_toolserver (allocate node), DELETE /release (free node)
+  -- Reads manager.yml for node lifecycle config
+  |
+  +-- ToolServerNode (one Docker container per Agent session)
+  |     -- Provides isolated execution environment
+  |     -- Exposes the 5 tool endpoints (file/notebook/browser/shell/rapidapi)
+  |     -- node.privileged: true (default) enables nested Docker-in-Docker
+  |
+  +-- ToolServerMonitor
+        -- Polls node health at configurable interval
+        -- Auto-removes idle nodes after idling_close_minutes (default: 30)
+        -- Prevents resource leak from abandoned sessions
+```
+
+**Docker Compose service map:**
+
+| Service | Image | Role |
+|---------|-------|------|
+| `toolserver_manager` | `xagent/toolserver-manager` | Node lifecycle manager |
+| `toolserver_monitor` | `xagent/toolserver-monitor` | Health + idle cleanup |
+| `toolserver_node` | `xagent/toolserver-node` | Tool execution sandbox |
+
+**Configuration files (assets/config/):**
+
+| File | Key settings |
+|------|-------------|
+| `manager.yml` | `node.privileged` (Docker-in-Docker), `node.image`, `node.mem_limit` |
+| `monitor.yml` | `idling_close_minutes`, `poll_interval_seconds` |
+| `node.yml` | `api_keys.bing_search`, `api_keys.rapid_api`, timeout overrides |
+| `docker-compose.yml` | `-t <seconds>` on ToolServerManager command = API timeout |
+
+**Security note (CVE-2026-3954):** Path traversal vulnerability in ToolServerNode's `/upload_file` endpoint allows arbitrary file write outside the container filesystem. Mitigation: disable `node.privileged`, pin to patched image version, restrict network egress.
+
+**Lifecycle sequence:**
+
+```
+XAgent startup
+  -> POST ToolServerManager /get_toolserver
+  -> Manager spawns ToolServerNode container
+  -> Node registers with Manager, returns endpoint URL
+  -> Actor uses Node URL for all tool calls during session
+  -> Session ends or idle timeout
+  -> Monitor detects idle -> DELETE /release
+  -> Manager kills + removes Node container
+```
+
+**CEX mapping**: CEX nuclei run in the host process with no container isolation. The ToolServer pattern (one sandbox per session) would map to one Docker container per nucleus dispatch. CEX could adopt this for production deployments to prevent nucleus tool calls from affecting host state.
+
 ### 3.6 AskForHumanHelp
 
 Explicit human-in-the-loop tool. When the Actor encounters insufficient information or ambiguous scenarios, it can invoke `AskForHumanHelp` to request guidance rather than proceeding with guesses.
+
+**Protocol implementation:**
+
+The tool is a standard XAgent tool, callable like any ToolServer tool. When invoked:
+1. Actor pauses inner loop execution
+2. System presents question to human via web UI or CLI prompt
+3. Human types response (no timeout -- waits indefinitely)
+4. Response is injected as an Observation into the ReACT loop
+5. Actor resumes from the Observation step
+
+**Typical information elicited:**
+- Preferred location / region ("Which city should I search in?")
+- Budget constraints ("What is your maximum budget?")
+- Culinary / preference details ("Do you have dietary restrictions?")
+- Ambiguous specification ("Did you mean the Python library or the CLI tool?")
+
+**NOT used for:** capability failures (tool errors, model refusals) -- those trigger retry logic, not human help.
 
 **CEX mapping**: GDP (Guided Decision Protocol). CEX's F4 REASON step includes a `NeedsUserDecision` gate that halts the pipeline when subjective decisions are required. The key difference: XAgent's human help is reactive (ask when stuck); CEX's GDP is proactive (ask before building).
 
 | Dimension | XAgent AskForHumanHelp | CEX GDP |
 |-----------|------------------------|---------|
-| Trigger | Actor stuck / ambiguous | F4 detects subjective decision |
-| Timing | During execution (reactive) | Before execution (proactive) |
+| Trigger | Actor stuck / ambiguous (reactive) | F4 detects subjective decision (proactive) |
+| Timing | During execution | Before execution |
 | Scope | Single subtask | Entire mission (decision manifest) |
-| Persistence | Per-session | `decision_manifest.yaml` (persisted) |
+| Persistence | Per-session only | `decision_manifest.yaml` (persisted) |
+| Resume mechanism | Observation injected into ReACT | Nucleus continues after GDP gate clears |
+| Who initiates | Actor autonomously | N07 enforces before dispatch |
 
 ## 4. Unique Concepts Not in CEX
 
@@ -323,21 +455,25 @@ Explicit human-in-the-loop tool. When the Actor encounters insufficient informat
 |---------|-------------|----------------------|
 | **NL2SQL Database node** | Natural language queries against structured databases | CEX is filesystem-only. Adding a DB layer with NL2SQL would enable structured analytics. |
 | **Card UI primitive** | Rich structured response components (title, image, CTA) | CEX output is Markdown-first. Cards would enhance P05 output kinds for web/app delivery. |
-| **Skills Marketplace** | Monetizable reusable skill modules | CEX builders are reusable but not marketplace-ready. Distribution model exists in spec but no runtime. |
+| **Skills Marketplace** | Monetizable reusable skill modules with Plugin Store | CEX builders are reusable but not marketplace-ready. `coze-py` SDK enables programmatic integration. |
 | **Message node (mid-workflow streaming)** | Output to user during workflow execution | CEX workflows run to completion. Mid-stream user feedback is a gap. |
 | **Question node (mid-workflow user input)** | Pause workflow for user input | GDP only gates at F4. A per-node pause/resume would add flexibility. |
 | **Intent Recognition node** | Built-in NLU classification within workflows | CEX has `cex_intent_resolver.py` but not as a composable workflow node. |
-| **Persistent Planning** | Days/weeks-long autonomous plans with proactive updates | CEX missions are session-scoped. True persistent plans (across sessions) need state serialization. |
+| **Persistent Planning (Agent Plan)** | Days/weeks-long plans with 6-state lifecycle (draft/approved/executing/paused/completed/failed) | CEX missions are session-scoped. True persistent plans need state serialization + push notifications. |
+| **Coze Studio self-hosting** | Go/Hertz backend, React+TS frontend, Docker Compose (4 services) | CEX has no web UI. Studio fills the visual workflow editor gap entirely. |
+| **Plugin auth model** | Three-mode: none / API key / OAuth2 + local test via ngrok | CEX MCP auth is simpler. OAuth2 support would unlock enterprise integrations. |
 
 ### 4.2 From XAgent
 
 | Concept | Description | CEX gap / opportunity |
 |---------|-------------|----------------------|
-| **Explicit Dual-Loop** | Formal inner/outer loop separation with milestone tracking | CEX has an implicit dual loop (N07 + nuclei) but no formal milestone protocol. |
+| **Formal Dual-Loop state machine** | 7-state outer loop (INIT->DECOMPOSING->PLANNING->DISPATCHING->MONITORING->REFINING->COMPLETE) + 6-state inner loop (IDLE->REASONING->ACTING->OBSERVING->REPORTING/ASKING) | CEX has an implicit dual loop (N07 + nuclei) but no formal state machine with named transitions. |
 | **Dynamic Dispatcher** | Route by task analysis, not fixed domain | CEX routes by pillar/nucleus domain. Dynamic routing by task complexity/type would improve flexibility. |
-| **Containerized ToolServer** | Docker-isolated tool execution | CEX tools run in host environment. Container isolation would improve safety for untrusted operations. |
+| **Containerized ToolServer** | Three-tier Docker: Manager + Monitor (auto-cleanup) + Node (per-session sandbox) | CEX tools run in host environment. Manager+Monitor pattern would prevent resource leaks from orphaned nuclei. |
 | **Milestone protocol** | Structured progress checkpoints within plans | CEX uses git commits as implicit milestones. Explicit milestone objects would improve observability. |
-| **ReACT inner loop** | Formal Reason-Act-Observe cycle per subtask | CEX's 8F is richer (8 steps vs 3) but less iterative. ReACT's observe-and-retry is more adaptive. |
+| **ReACT inner loop** | Formal Reason-Act-Observe cycle per subtask, max_iter configurable | CEX's 8F is richer (8 steps vs 3) but less iterative. ReACT's observe-and-retry is more adaptive. |
+| **Reactive AskForHumanHelp** | Mid-execution HITL: pauses ReACT, injects human answer as Observation | CEX GDP is proactive (pre-execution). Reactive mid-execution pause complements but does not replace GDP. |
+| **ToolServer session isolation** | One Docker container per agent session; idle cleanup via Monitor | CEX nuclei share host environment. Session isolation would prevent cross-nucleus state contamination. |
 
 ## 5. Architecture Comparison
 
