@@ -4,7 +4,7 @@ kind: instruction
 pillar: P03
 title: "Instruction: Action Execution Protocol"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [instruction, action, protocol, safety, reversibility]
 tldr: "Defines the action execution protocol covering blast radius assessment, reversibility checks, and confirmation requirements for risky operations."
 domain: "prompt engineering"
