@@ -23,9 +23,7 @@ linked_artifacts:
 
 ## Purpose
 
-Every CEX artifact must include valid YAML frontmatter. This schema defines
-the universal required fields and the extension mechanism for kind-specific fields.
-The builder validates every artifact against this contract at F7 GOVERN.
+Every CEX artifact must include valid YAML frontmatter. This schema defines the universal required fields and the extension mechanism for kind-specific fields. The builder validates every artifact against this contract at F7 GOVERN. Ensures consistency across 123+ artifact kinds while allowing domain-specific customization.
 
 ## Universal Required Fields
 
@@ -118,43 +116,35 @@ pass_threshold: float
 reject_action: string
 ```
 
-## Comparison of Kind-Specific Fields
-
-| Kind          | Pillar | Required Fields                         | Example Use Case                          |
-|---------------|--------|-----------------------------------------|-------------------------------------------|
-| agent         | P02    | agent_group, capabilities_count         | Define agent capabilities for P02 tasks   |
-| system_prompt | P03    | target_agent, persona, rules_count      | Configure agent behavior for P03 prompts  |
-| knowledge_card| P01    | when_to_use, keywords, axioms           | Create knowledge cards for P01 queries    |
-| workflow      | P12    | steps_count, execution, agent_groups    | Orchestrate P12 workflows with agents     |
-| quality_gate  | P07    | gate_count, pass_threshold              | Implement P07 quality checks for artifacts|
-
 ## Validation Rules
 
-1. `id` must be unique across the entire repository
-2. `kind` must exist in `.cex/kinds_meta.json`
-3. `pillar` must match the kind's registered pillar
-4. `quality` must be exactly `null` — never a number or string
-5. `tags` must contain 3-10 items, no duplicates
-6. `tldr` must be under 160 characters
-7. `version` must follow SemVer format
-8. `created` and `updated` must be valid ISO dates
-
-## Boundary
-
-This artifact defines the universal frontmatter contract for all CEX artifacts. It is NOT a data format itself, nor does it govern the content beyond YAML frontmatter. It establishes structural requirements but does not enforce semantic meaning of fields.
-
-## Related Kinds
-
-- **quality_gate**: Enforces schema validation rules through automated checks
-- **agent**: Uses schema fields to define capabilities and routing parameters
-- **kinds_meta**: Maintains registry of valid `kind` values referenced by this schema
-- **workflow**: Relies on schema for agent_group and execution parameters
-- **dispatch_rule**: Uses schema-defined `kind` and `pillar` for routing decisions
+| Rule # | Field        | Constraint                                                                 | Example Violation                                                                 |
+|-------|--------------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| 1     | id           | Globally unique across repository                                           | Duplicate `id: p06_schema_builder_artifact` in two artifacts                      |
+| 2     | kind         | Must exist in `.cex/kinds_meta.json`                                        | `kind: unknown_kind`                                                              |
+| 3     | pillar       | Must match kind's registered pillar                                         | `pillar: knowledge` instead of `pillar: P01`                                      |
+| 4     | quality      | Must be exactly `null`                                                      | `quality: 9.0` (self-scoring)                                                    |
+| 5     | tags         | 3-10 items, no duplicates                                                   | `tags: []` (empty) or `tags: [schema, schema]` (duplicates)                      |
+| 6     | tldr         | <160 characters                                                             | `tldr: "This is a very long summary that exceeds the 160-character limit"`      |
+| 7     | version      | Must follow SemVer format                                                   | `version: 2.0` (missing patch number)                                            |
+| 8     | created/updated | Valid ISO date (YYYY-MM-DD)                                               | `created: 2026-02-30` (invalid date)                                             |
 
 ## Anti-Patterns
 
-- Setting `quality: 9.0` (builder self-scoring — forbidden)
-- Omitting `tldr` (every artifact needs a one-liner)
-- Using `pillar: knowledge` instead of `pillar: P01` (use codes)
-- Duplicating `id` across artifacts (must be globally unique)
-- Empty `tags: []` (minimum 3 tags required)
+- **Self-scoring quality**: Setting `quality: 9.0` violates F7 GOVERN rules (must be `null`)
+- **Missing tldr**: Every artifact must have a one-liner summary (<160 chars)
+- **Invalid pillar**: Using `pillar: knowledge` instead of `pillar: P01` (use codes)
+- **Duplicate IDs**: `id` must be globally unique across the entire CEX repository
+- **Empty tags**: Minimum 3 tags required for discoverability (e.g., `tags: [schema, builder, N03]`)
+
+## Boundary
+
+This artifact IS the universal frontmatter contract for all CEX artifacts. It IS NOT the schema for the content within the artifact, but rather the metadata framework that every artifact must satisfy.
+
+## Related Kinds
+
+- **quality_gate**: Defines validation thresholds that reference this schema's `density_score` and `tags` fields
+- **agent**: Extends this schema with `agent_group` and `llm_function` fields for behavior specification
+- **workflow**: Uses this schema's `id` and `version` for dependency tracking in `depends_on` lists
+- **system_prompt**: Leverages `tags` and `domain` for categorization in knowledge repositories
+- **knowledge_card**: Relies on `tldr` for quick summary retrieval in search systems
