@@ -1,17 +1,17 @@
----  
-id: kc_test_signal_flow  
-kind: knowledge_card  
-pillar: P01  
-title: Signal Flow  
-version: 1.0.0  
-quality: null  
----  
+---
+id: kc_test_signal_flow
+kind: knowledge_card
+pillar: P01
+title: Signal Flow
+version: 1.0.0
+quality: null
+---
 
-## Definition  
-Signal Flow refers to the structured inter-nucleus completion signaling mechanism that coordinates data consistency and resource allocation across distributed nuclei. It enables nuclei to exchange status updates, confirm transaction completions, and synchronize state changes in real-time. This process ensures deterministic behavior in decentralized systems by eliminating data staleness and resolving conflicts through predefined signaling protocols.  
+## Definition
+Signal Flow refers to the structured inter-nucleus completion signaling mechanism that coordinates data consistency and resource allocation across distributed nuclei. It enables nuclei to exchange status updates, confirm transaction completions, and synchronize state changes in real-time. This process ensures deterministic behavior in decentralized systems by eliminating data staleness and resolving conflicts through predefined signaling protocols.
 
-## Example  
-In a distributed database cluster, Signal Flow operates as follows: When a write operation is finalized in one nucleus, it emits a "completion signal" via a consensus layer. Other nuclei receiving this signal update their local caches and propagate the change to dependent services. For instance, if Node A commits a transaction, it triggers a signal that prompts Node B to invalidate outdated entries, ensuring all nodes reflect the latest state without manual intervention.  
+## Example
+In a distributed database cluster, Signal Flow operates as follows: When a write operation is finalized in one nucleus, it emits a "completion signal" via a consensus layer. Other nuclei receiving this signal update their local caches and propagate the change to dependent services. For instance, if Node A commits a transaction, it triggers a signal that prompts Node B to invalidate outdated entries, ensuring all nodes reflect the latest state without manual intervention.
 
-## CEX Integration  
+## CEX Integration
 CEX platforms integrate Signal Flow through real-time event streaming and distributed ledger protocols. By embedding completion signals into transactional workflows, CEX ensures atomicity across nuclei. For example, smart contracts leverage Signal Flow to validate cross-nucleus dependencies, while load balancers use it to dynamically reroute traffic based on completion status. This integration reduces latency, minimizes error propagation, and enhances system resilience in high-throughput environments.
