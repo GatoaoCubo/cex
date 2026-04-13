@@ -5,7 +5,7 @@ pillar: P01
 domain: ai_safety
 title: "AI Safety & Guardrail Taxonomy -- Complete Vocabulary Atlas"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [safety, guardrails, taxonomy, red-team, constitutional-ai, owasp, aegis, controlarena]
 sources:
   - "Aegis 2.0 (arxiv 2501.09004) -- NAACL 2025"

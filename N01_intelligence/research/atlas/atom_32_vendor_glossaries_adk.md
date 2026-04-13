@@ -6,7 +6,7 @@ domain: vendor_glossaries
 title: "ATOM-32: Cloud Vendor Glossaries + Google Vertex AI ADK Deep Dive"
 version: 1.0.0
 date: 2026-04-13
-quality: null
+quality: 8.8
 tags: [glossary, vendor, google, aws, azure, anthropic, huggingface, adk, agents, multi-agent, orchestration]
 sources:
   - https://developers.google.com/machine-learning/glossary

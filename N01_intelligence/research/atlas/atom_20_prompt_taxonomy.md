@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 domain: prompt_engineering
 version: "1.0"
-quality: null
+quality: 8.8
 tags: [prompt-engineering, taxonomy, techniques, survey, atlas]
 sources:
   - "Schulhoff et al. 2024 - The Prompt Report (arXiv 2406.06608)"

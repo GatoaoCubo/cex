@@ -3,7 +3,7 @@ id: atom_11_agentscope
 kind: knowledge_card
 title: "Atomic Research: AgentScope (Alibaba Tongyi Lab)"
 version: "1.0.0"
-quality: null
+quality: 8.9
 tags: [agentscope, alibaba, tongyi, multi-agent, framework, atlas, vocabulary, chinese-ai]
 pillar: P01
 domain: llm-agent-frameworks

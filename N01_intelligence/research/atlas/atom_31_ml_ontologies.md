@@ -5,7 +5,7 @@ pillar: P01
 domain: ml_ontologies
 title: "Machine-Readable ML Ontologies and Taxonomies -- Deep Survey"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [ontology, taxonomy, RDF, OWL, JSON-LD, ML, AI, ingestion]
 created: 2026-04-13
 sources: 6

@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01_knowledge
 title: "Atomic Research 22: Agent Memory Taxonomy -- Complete Survey Synthesis"
 version: 1.0
-quality: null
+quality: 8.9
 tags: [memory, taxonomy, LLM-agents, episodic, semantic, procedural, skill-library, consolidation, RAG, survey]
 created: 2026-04-13
 author: n01_intelligence
