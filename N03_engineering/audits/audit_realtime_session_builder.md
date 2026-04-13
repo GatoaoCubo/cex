@@ -4,7 +4,7 @@ id: audit_realtime_session_builder
 pillar: P07
 llm_function: GOVERN
 purpose: Code review of the realtime-session-builder family (13 ISOs) produced by qwen3:8b
-quality: null
+quality: 8.9
 title: "Audit: realtime-session-builder"
 version: "1.0.0"
 author: n03_code_reviewer
