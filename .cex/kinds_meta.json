@@ -1,4 +1,13 @@
 {
+  "action_paradigm": {
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "naming": "p04_act_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "How agents execute actions in environments",
+    "boundary": "Action execution paradigm. NOT agent_computer_interface (specific protocol) nor cli_tool (CLI wrapper)."
+  },
   "action_prompt": {
     "boundary": "Tarefa especifica. O LLM EXECUTA isso.",
     "core": true,
@@ -26,6 +35,15 @@
     "naming": "p08_ac_{{agent_name}}.yaml",
     "pillar": "P08"
   },
+  "agent_computer_interface": {
+    "pillar": "P08",
+    "llm_function": "CALL",
+    "naming": "p08_aci_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "GUI/terminal interaction protocol for agents",
+    "boundary": "Agent-computer interface. NOT browser_tool (web automation) nor computer_use (screen control)."
+  },
   "agent_package": {
     "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) â€” agent_package eh o bundle portable.",
     "core": true,
@@ -34,6 +52,24 @@
     "max_bytes": 4096,
     "naming": "agents/{{agent_name}}/manifest.yaml",
     "pillar": "P02"
+  },
+  "agent_profile": {
+    "pillar": "P02",
+    "llm_function": "BECOME",
+    "naming": "p02_ap_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Agent persona and identity construction method",
+    "boundary": "Agent persona construction. NOT agent (full agent def) nor system_prompt (how agent speaks)."
+  },
+  "agentic_rag": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_ar_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Agent-driven retrieval augmented generation pattern",
+    "boundary": "Agentic RAG pattern. NOT retriever (simple retrieval) nor agent (agent definition)."
   },
   "api_client": {
     "boundary": "Cliente unidirecional tipado. NAO eh db_connector nem mcp_server.",
@@ -79,6 +115,24 @@
     "max_bytes": 4096,
     "naming": "p07_bm_{{metric}}.md + .yaml",
     "pillar": "P07"
+  },
+  "benchmark_suite": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_bs_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Composite benchmark definition with multiple tasks",
+    "boundary": "Benchmark suite. NOT benchmark (single benchmark) nor eval_framework (evaluation tooling)."
+  },
+  "bias_audit": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_ba_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Fairness evaluation methodology and results",
+    "boundary": "Fairness evaluation. NOT benchmark (general perf) nor eval_metric (single metric def)."
   },
   "boot_config": {
     "boundary": "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, agent_groups).",
@@ -161,6 +215,24 @@
     "naming": "p04_exec_{{runtime}}.md + .yaml",
     "pillar": "P04"
   },
+  "collaboration_pattern": {
+    "pillar": "P12",
+    "llm_function": "COLLABORATE",
+    "naming": "p12_collab_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Multi-agent coordination topology",
+    "boundary": "Coordination pattern. NOT workflow (execution sequence) nor handoff_protocol (handoff rules)."
+  },
+  "compliance_framework": {
+    "pillar": "P11",
+    "llm_function": "CONSTRAIN",
+    "naming": "p11_cfw_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Regulatory mapping and attestation for AI systems",
+    "boundary": "Regulatory compliance mapping. NOT safety_policy (org rules) nor threat_model (risk assessment)."
+  },
   "component_map": {
     "boundary": "Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 agent_group).",
     "core": false,
@@ -189,6 +261,15 @@
     "naming": "p04_cu_{{target}}.md + .yaml",
     "pillar": "P04"
   },
+  "consolidation_policy": {
+    "pillar": "P10",
+    "llm_function": "GOVERN",
+    "naming": "p10_cp_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Memory lifecycle management policy",
+    "boundary": "Memory lifecycle policy. NOT memory_scope (access rules) nor compression_config (token compression)."
+  },
   "constraint_spec": {
     "boundary": "Governa decoder. NAO eh validation_schema.",
     "core": true,
@@ -197,6 +278,15 @@
     "max_bytes": 2048,
     "naming": "p03_constraint_{{scope}}.md",
     "pillar": "P03"
+  },
+  "content_filter": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_cf_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Input/output content filtering pipeline config",
+    "boundary": "Content filtering pipeline. NOT guardrail (broad safety constraint) nor output_validator (schema check)."
   },
   "content_monetization": {
     "boundary": "Pipeline completo de monetizacao de conteudo: billing, credits, checkout, courses, ads, emails. NAO eh pricing_strategy (estrategia apenas) nem payment_integration (provider apenas).",
@@ -252,6 +342,15 @@
     "naming": "p12_dag_{{pipeline}}.yaml",
     "pillar": "P12"
   },
+  "dataset_card": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_dc_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Structured dataset documentation",
+    "boundary": "Dataset documentation. NOT eval_dataset (eval-specific data) nor knowledge_card (general knowledge)."
+  },
   "db_connector": {
     "boundary": "Acesso a dados estruturados. NAO eh api_client nem retriever.",
     "core": false,
@@ -279,6 +378,15 @@
     "naming": "p08_diag_{{scope}}.md",
     "pillar": "P08"
   },
+  "diff_strategy": {
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "naming": "p04_ds_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Change application and matching algorithm",
+    "boundary": "Diff matching strategy. NOT edit_format (format spec) nor parser (generic parsing)."
+  },
   "dispatch_rule": {
     "boundary": "Regra de despacho keyword>agent_group. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia).",
     "core": false,
@@ -297,6 +405,15 @@
     "naming": "p04_loader_{{format}}.md + .yaml",
     "pillar": "P04"
   },
+  "dual_loop_architecture": {
+    "pillar": "P08",
+    "llm_function": "REASON",
+    "naming": "p08_dl_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Outer/inner loop agent control architecture",
+    "boundary": "Dual-loop control. NOT workflow (linear flow) nor collaboration_pattern (multi-agent topology)."
+  },
   "e2e_eval": {
     "boundary": "Teste end-to-end de pipeline completo. NAO eh unit_eval (escopo isolado) nem benchmark (nao mede performance).",
     "core": false,
@@ -305,6 +422,15 @@
     "max_bytes": 4096,
     "naming": "p07_e2e_{{pipeline}}.md + .yaml",
     "pillar": "P07"
+  },
+  "edit_format": {
+    "pillar": "P06",
+    "llm_function": "CONSTRAIN",
+    "naming": "p06_ef_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "LLM-to-host file change format specification",
+    "boundary": "Edit format spec. NOT diff_strategy (matching algo) nor formatter (output formatting)."
   },
   "effort_profile": {
     "boundary": "effort_profile = QUAL modelo/thinking usar; runtime_rule = QUANDO/COMO executar",
@@ -370,6 +496,24 @@
     "naming": "p07_dataset_{{name}}.md",
     "pillar": "P07"
   },
+  "eval_framework": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_efw_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "End-to-end evaluation framework integration",
+    "boundary": "Eval framework. NOT benchmark_suite (benchmark collection) nor eval_metric (single metric)."
+  },
+  "eval_metric": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_em_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Individual evaluation metric definition",
+    "boundary": "Single metric def. NOT benchmark_suite (composite) nor scoring_rubric (qualitative rubric)."
+  },
   "experiment_config": {
     "description": "A/B test and prompt experiment configuration with variants, metrics, and statistical analysis",
     "boundary": "Experiment config with variants and metrics. NOT a feature_flag (boolean toggle) nor a benchmark (one-time evaluation).",
@@ -378,6 +522,15 @@
     "max_bytes": 4096,
     "naming": "p09_ec_{{name}}.yaml",
     "core": false
+  },
+  "experiment_tracker": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_et_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Experiment configuration and results tracking",
+    "boundary": "Experiment tracking. NOT benchmark (evaluation suite) nor experiment_config (single experiment settings)."
   },
   "fallback_chain": {
     "boundary": "Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing).",
@@ -451,6 +604,15 @@
     "naming": "p07_gt_{{case}}.md + .yaml",
     "pillar": "P07"
   },
+  "graph_rag_config": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_grc_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Graph-based RAG architecture configuration",
+    "boundary": "Graph RAG config. NOT knowledge_graph (graph instance) nor rag_source (document source)."
+  },
   "guardrail": {
     "boundary": "Restricao de seguranca e safety boundary. NAO eh permission (P09, acesso) nem law (P08, operacional).",
     "core": true,
@@ -505,6 +667,15 @@
     "naming": "p04_hook_config_{{topic}}.md + .yaml",
     "pillar": "P04"
   },
+  "incident_report": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_ir_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "AI incident documentation and post-mortem",
+    "boundary": "Incident post-mortem. NOT bugloop (auto-fix) nor learning_record (generic learning)."
+  },
   "input_schema": {
     "boundary": "Contrato de entrada que define dados requeridos. NAO eh validation_schema (saida) nem type_def (definicao abstrata).",
     "core": true,
@@ -540,6 +711,15 @@
     "max_bytes": 3072,
     "naming": "p08_law_{{number}}.md",
     "pillar": "P08"
+  },
+  "judge_config": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_jc_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "LLM judge configuration for automated evaluation",
+    "boundary": "Judge config. NOT llm_judge (judge instance) nor scoring_rubric (human rubric)."
   },
   "knowledge_card": {
     "boundary": "Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.",
@@ -620,6 +800,24 @@
     "naming": "p04_mcp_{{server}}.md + .yaml",
     "pillar": "P04"
   },
+  "memory_architecture": {
+    "pillar": "P10",
+    "llm_function": "INJECT",
+    "naming": "p10_marc_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Complete memory system architecture design",
+    "boundary": "Memory system design. NOT memory_type (single type) nor memory_scope (access scope)."
+  },
+  "memory_benchmark": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_mb_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Memory system quality evaluation suite",
+    "boundary": "Memory eval suite. NOT benchmark_suite (general benchmarks) nor memory_architecture (system design)."
+  },
   "memory_scope": {
     "boundary": "Qual memoria usar. NAO eh session_state.",
     "core": false,
@@ -656,6 +854,15 @@
     "naming": "p02_mm_{{agent}}.yaml",
     "pillar": "P02"
   },
+  "model_architecture": {
+    "pillar": "P02",
+    "llm_function": "BECOME",
+    "naming": "p02_ma_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Neural network architecture definition",
+    "boundary": "Architecture definition. NOT model_card (deployment spec) nor model_provider (API integration)."
+  },
   "model_card": {
     "boundary": "Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02, quem usa o modelo) nem boot_config (como inicia).",
     "core": false,
@@ -675,6 +882,15 @@
     "pillar": "P02",
     "sdk_module": "cex_sdk.models.providers"
   },
+  "model_registry": {
+    "pillar": "P10",
+    "llm_function": "GOVERN",
+    "naming": "p10_mr_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Model versioning and artifact tracking",
+    "boundary": "Model registry. NOT model_card (single model spec) nor checkpoint (training snapshot)."
+  },
   "multi_modal_config": {
     "description": "Input format, resolution, encoding, and routing rules for multi-modal LLM interactions",
     "boundary": "Modality config. NAO eh vision_tool (analise visual), audio_tool (processa audio), nem model_card (capabilities).",
@@ -683,6 +899,15 @@
     "max_bytes": 2048,
     "naming": "p04_mmc_{{capability}}.yaml",
     "core": false
+  },
+  "multimodal_prompt": {
+    "pillar": "P03",
+    "llm_function": "INJECT",
+    "naming": "p03_mmp_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Cross-modal prompt pattern for vision/audio/text",
+    "boundary": "Multimodal prompt. NOT prompt_technique (text-only) nor multi_modal_config (model settings)."
   },
   "naming_rule": {
     "boundary": "Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo).",
@@ -765,6 +990,15 @@
     "naming": "p09_perm_{{scope}}.yaml",
     "pillar": "P09"
   },
+  "planning_strategy": {
+    "pillar": "P03",
+    "llm_function": "REASON",
+    "naming": "p03_ps_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Agent planning approach definition",
+    "boundary": "Planning approach. NOT reasoning_strategy (prompt reasoning) nor workflow (execution flow)."
+  },
   "plugin": {
     "boundary": "Extensao plugavel ao sistema. NAO eh hook (evento especifico) nem skill (sem fases estruturadas).",
     "core": false,
@@ -773,6 +1007,15 @@
     "max_bytes": 2048,
     "naming": "p04_plug_{{name}}.md + .yaml",
     "pillar": "P04"
+  },
+  "procedural_memory": {
+    "pillar": "P10",
+    "llm_function": "INJECT",
+    "naming": "p10_pm_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Skill and procedure storage/retrieval system",
+    "boundary": "Procedural memory. NOT entity_memory (entity facts) nor knowledge_card (declarative knowledge)."
   },
   "prompt_cache": {
     "description": "TTL, eviction, and invalidation config for cached LLM prompt/completion pairs",
@@ -792,6 +1035,24 @@
     "naming": "p03_pc_{{name}}.md",
     "core": true
   },
+  "prompt_optimizer": {
+    "pillar": "P03",
+    "llm_function": "GOVERN",
+    "naming": "p03_po_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Automated prompt improvement and compilation tool",
+    "boundary": "Prompt optimizer. NOT prompt_compiler (CEX internal) nor optimizer (general optimization)."
+  },
+  "prompt_technique": {
+    "pillar": "P03",
+    "llm_function": "INJECT",
+    "naming": "p03_pt_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Specific prompting method or pattern",
+    "boundary": "Prompt technique. NOT prompt_template (reusable template) nor reasoning_strategy (reasoning-specific)."
+  },
   "prompt_template": {
     "boundary": "Template com variaveis. NAO eh user_prompt (fixo) nem system_prompt (identidade).",
     "core": true,
@@ -810,6 +1071,15 @@
     "naming": "p03_pv_{{version}}.md",
     "pillar": "P03"
   },
+  "prosody_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_prs_{{name}}.yaml",
+    "max_bytes": 2048,
+    "core": false,
+    "description": "Voice personality and emotion settings",
+    "boundary": "Prosody/emotion settings. NOT tts_provider (provider integration) nor agent_profile (agent persona)."
+  },
   "quality_gate": {
     "boundary": "Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico pass/fail) nem scoring_rubric (P07, define criterios).",
     "core": true,
@@ -818,6 +1088,15 @@
     "max_bytes": 4096,
     "naming": "p11_qg_{{gate}}.yaml",
     "pillar": "P11"
+  },
+  "quantization_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_qc_{{name}}.yaml",
+    "max_bytes": 2048,
+    "core": false,
+    "description": "Model quantization and compression settings",
+    "boundary": "Quantization settings. NOT compression_config (context compression) nor model_architecture (full arch)."
   },
   "rag_source": {
     "boundary": "Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas referencia com URL e freshness.",
@@ -836,6 +1115,24 @@
     "max_bytes": 1024,
     "naming": "p09_ratelimit_{{scope}}.md",
     "pillar": "P09"
+  },
+  "realtime_session": {
+    "pillar": "P09",
+    "llm_function": "CALL",
+    "naming": "p09_rs_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Live bidirectional session configuration",
+    "boundary": "Realtime session config. NOT transport_config (network layer) nor voice_pipeline (full architecture)."
+  },
+  "reasoning_strategy": {
+    "pillar": "P03",
+    "llm_function": "REASON",
+    "naming": "p03_rs_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Prompting technique for structured reasoning",
+    "boundary": "Reasoning technique. NOT prompt_technique (generic prompt pattern) nor thinking_config (budget settings)."
   },
   "reasoning_trace": {
     "added_version": "10.0.0",
@@ -864,6 +1161,24 @@
     "max_bytes": 2048,
     "naming": "p07_regcheck_{{target}}.md",
     "pillar": "P07"
+  },
+  "repo_map": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_rm_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Codebase context extraction strategy",
+    "boundary": "Repo context map. NOT component_map (system architecture) nor knowledge_index (search index)."
+  },
+  "reranker_config": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_rr_{{name}}.yaml",
+    "max_bytes": 2048,
+    "core": false,
+    "description": "Retrieval reranking model and strategy config",
+    "boundary": "Reranker config. NOT retriever_config (first-stage retrieval) nor retriever (retrieval logic)."
   },
   "research_pipeline": {
     "boundary": "Pipeline de pesquisa multi-fonte STORM+CRAG+CRITIC. NAO eh retriever (busca local) nem search_tool (busca web simples).",
@@ -901,6 +1216,15 @@
     "naming": "p01_retr_cfg_{{store}}.md",
     "pillar": "P01"
   },
+  "reward_model": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_rwm_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Process/outcome reward model configuration",
+    "boundary": "Reward model config. NOT rl_algorithm (training algo) nor scoring_rubric (human eval rubric)."
+  },
   "reward_signal": {
     "boundary": "Score. NAO eh quality_gate.",
     "core": true,
@@ -909,6 +1233,15 @@
     "max_bytes": 2048,
     "naming": "p11_reward_{{metric}}.md",
     "pillar": "P11"
+  },
+  "rl_algorithm": {
+    "pillar": "P02",
+    "llm_function": "BECOME",
+    "naming": "p02_rla_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Reinforcement learning training algorithm definition",
+    "boundary": "RL algorithm def. NOT training_method (broader training) nor reward_model (reward function)."
   },
   "router": {
     "boundary": "Roteamento task-to-agent_group. NAO eh dispatch_rule (P12, keyword>agent_group) nem fallback_chain (modelo>modelo).",
@@ -937,6 +1270,24 @@
     "naming": "p10_rs_{{agent}}.yaml",
     "pillar": "P10"
   },
+  "safety_policy": {
+    "pillar": "P11",
+    "llm_function": "CONSTRAIN",
+    "naming": "p11_sp_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Organizational AI safety governance rules",
+    "boundary": "Safety governance rules. NOT threat_model (risk assessment) nor compliance_framework (regulatory mapping)."
+  },
+  "sandbox_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_sb_{{name}}.yaml",
+    "max_bytes": 2048,
+    "core": false,
+    "description": "Isolated code execution environment config",
+    "boundary": "Sandbox/isolation config. NOT env_config (environment vars) nor code_executor (execution logic)."
+  },
   "schedule": {
     "boundary": "QUANDO rodar. NAO eh dispatch_rule.",
     "core": false,
@@ -955,6 +1306,15 @@
     "naming": "p07_sr_{{framework}}.md + .yaml",
     "pillar": "P07"
   },
+  "search_strategy": {
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "naming": "p04_ss_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Inference-time compute allocation strategy",
+    "boundary": "Search/inference strategy. NOT reasoning_strategy (prompt technique) nor retriever (document retrieval)."
+  },
   "search_tool": {
     "boundary": "Busca e retorna resultados ranqueados. NAO eh retriever (vector store local) nem document_loader (ingere arquivos).",
     "core": true,
@@ -972,6 +1332,15 @@
     "max_bytes": 1024,
     "naming": "p09_secret_{{scope}}.md",
     "pillar": "P09"
+  },
+  "self_improvement_loop": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_sil_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Agent/system self-evolution mechanism",
+    "boundary": "Self-improvement loop. NOT bugloop (bug-specific) nor learning_record (passive learning)."
   },
   "session_backend": {
     "added_version": "10.0.0",
@@ -1060,6 +1429,15 @@
     "naming": "p05_sc_{{name}}.yaml",
     "core": false
   },
+  "stt_provider": {
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "naming": "p04_stt_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Speech-to-text provider integration",
+    "boundary": "STT provider integration. NOT voice_pipeline (full arch) nor vad_config (detection settings)."
+  },
   "supabase_data_layer": {
     "description": "Supabase-specific data layer — tables, RLS policies, edge functions, storage buckets, auth rules",
     "boundary": "Data layer Supabase. NAO eh db_connector (conexao generica) nem api_client (cliente REST).",
@@ -1094,6 +1472,24 @@
     "description": "Short memorable phrase capturing brand essence — taglines, slogans, headlines",
     "naming": "p03_tl_{{topic}}.md"
   },
+  "thinking_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_thk_{{name}}.yaml",
+    "max_bytes": 2048,
+    "core": false,
+    "description": "Extended thinking and budget token settings",
+    "boundary": "Thinking budget config. NOT reasoning_strategy (technique) nor context_window_config (token limits)."
+  },
+  "threat_model": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_tm_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Structured hazard/risk assessment for AI systems",
+    "boundary": "Threat/risk assessment. NOT safety_policy (governance rules) nor guardrail (runtime filter)."
+  },
   "toolkit": {
     "added_version": "10.0.0",
     "core": true,
@@ -1114,6 +1510,42 @@
     "pillar": "P07",
     "sdk_module": "cex_sdk.tracing.exporter"
   },
+  "training_method": {
+    "pillar": "P02",
+    "llm_function": "BECOME",
+    "naming": "p02_trm_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Model training/adaptation technique definition",
+    "boundary": "Training technique. NOT rl_algorithm (RL-specific) nor finetune_config (runtime fine-tune settings)."
+  },
+  "trajectory_eval": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_te_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Agent trajectory evaluation methodology",
+    "boundary": "Trajectory evaluation. NOT benchmark (static eval) nor e2e_eval (end-to-end test)."
+  },
+  "transport_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_tc_{{name}}.yaml",
+    "max_bytes": 2048,
+    "core": false,
+    "description": "Network transport layer for realtime communication",
+    "boundary": "Transport layer config. NOT realtime_session (session lifecycle) nor streaming_config (LLM streaming)."
+  },
+  "tts_provider": {
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "naming": "p04_tts_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Text-to-speech provider integration",
+    "boundary": "TTS provider integration. NOT voice_pipeline (full arch) nor prosody_config (voice personality)."
+  },
   "type_def": {
     "boundary": "Definicao de tipo customizado no sistema. NAO eh input_schema (contrato de entrada) nem interface (contrato bilateral).",
     "core": true,
@@ -1131,6 +1563,15 @@
     "max_bytes": 4096,
     "naming": "p07_ue_{{target}}.md + .yaml",
     "pillar": "P07"
+  },
+  "vad_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_vad_{{name}}.yaml",
+    "max_bytes": 2048,
+    "core": false,
+    "description": "Voice activity detection settings",
+    "boundary": "VAD settings only. NOT voice_pipeline (full arch) nor stt_provider (transcription)."
   },
   "validation_schema": {
     "boundary": "Contrato formal aplicado pelo SISTEMA apos geracao. NAO eh response_format P05 (injetado no prompt, LLM ve).",
@@ -1169,6 +1610,24 @@
     "naming": "p04_vision_{{capability}}.md + .yaml",
     "pillar": "P04"
   },
+  "visual_workflow": {
+    "pillar": "P12",
+    "llm_function": "PRODUCE",
+    "naming": "p12_vw_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "GUI-based workflow editor configuration",
+    "boundary": "Visual workflow editor. NOT workflow (code-defined) nor dag (directed acyclic graph)."
+  },
+  "voice_pipeline": {
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "naming": "p04_vp_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "End-to-end voice agent architecture definition",
+    "boundary": "Voice pipeline architecture. NOT tts_provider (single provider) nor stt_provider (single provider)."
+  },
   "webhook": {
     "boundary": "Recebe ou envia eventos via HTTP. NAO eh api_client (request-response) nem notifier (delivery de mensagem).",
     "core": false,
@@ -1186,6 +1645,15 @@
     "max_bytes": 3072,
     "naming": "p12_wf_{{name}}.md + .yaml",
     "pillar": "P12"
+  },
+  "workflow_node": {
+    "pillar": "P12",
+    "llm_function": "PRODUCE",
+    "naming": "p12_wn_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Typed node in visual/programmatic workflow",
+    "boundary": "Workflow node type. NOT workflow (full workflow) nor visual_workflow (GUI editor config)."
   },
   "workflow_primitive": {
     "added_version": "10.0.0",
