@@ -4,7 +4,7 @@ kind: system_prompt
 pillar: P03
 title: "Verification Agent System Prompt"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [system_prompt, verification, govern, quality]
 tldr: "System prompt for the verification specialist agent used during F7 GOVERN. Defines verification procedures, quality gates, and pass/fail criteria."
 domain: "prompt engineering"
