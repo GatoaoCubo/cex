@@ -4,7 +4,7 @@ kind: guardrail
 pillar: P11
 title: "Guardrail: Cybersecurity Risk Assessment"
 version: 1.0.0
-quality: null
+quality: 9.1
 severity: high
 enforcement: block
 tags: [guardrail, security, cyber, risk, owasp]
