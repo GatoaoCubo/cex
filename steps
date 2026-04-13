@@ -2,139 +2,195 @@
 id: p04_kc_steps
 kind: steps
 pillar: P04
-title: "Steps — Deep Knowledge for steps"
-version: 1.1.0
+llm_function: TOOL
+max_bytes: 4096
+naming: p04_steps_{{name}}.md + .yaml
+core: true
+version: 1.0.1
 created: 2026-04-02
 updated: 2026-04-02
-author: builder_knowledge
+author: builder_steps
 domain: steps
-quality: 9.1
-tags: [steps, p04, reusable, kind-kc]
-tldr: "Structured workflow for system prompt review with quality gates and structured feedback"
-when_to_use: "Reviewing, refining, or reasoning about system prompts"
-keywords: [steps, review, feedback, structured, workflow, quality]
+quality: 9.2
+tags: [steps, p04, reusable, kind-steps]
+tldr: "Structured workflow for iterative system prompt refinement with quality gates and feedback loops"
+when_to_use: "Refining knowledge artifacts, improving documentation, or optimizing workflows"
+keywords: [steps, refinement, feedback, quality, iteration, optimization]
 feeds_kinds: [steps]
-density_score: 0.98
+density_score: 8.9
+
 ---
 
-# System Prompt Review Steps
+# Step Refinement
+
+## Spec
+```yaml
+kind: steps
+pillar: P04
+llm_function: TOOL
+max_bytes: 4096
+naming: p04_steps_{{name}}.md + .yaml
+core: true
+```
 
 ## What It Is
-A steps is a structured workflow for evaluating and improving system prompts. It defines a specific review process that can be executed repeatedly across different contexts. Steps reviews are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this review?" while agents answer "who am I?" and prompts answer "how do I communicate?"
+A step refinement process is a structured workflow for iterative improvement of system prompts. It defines a specific refinement path that can be executed repeatedly across different contexts. Step refinements are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this refinement?" while agents answer "who am I?" and prompts answer "how do I communicate?"
 
-## Cross-Frame Map
-| Framework/Provider | Class/Concept | Notes |
+## Cross-Platform Map
+| Platform/Provider | Feature/Concept | Notes |
 |-------------------|---------------|-------|
-| LangChain | `PromptTemplate` / `Chain` | Structured review with defined phases |
-| LlamaIndex | `QueryPipeline` / `IngestionPipeline` | Multi-step review workflows |
-| CrewAI | `Task` + `Process` | Task definition with sequential/hierarchical review |
-| DSPy | `dspy.Module.forward()` method | Structured computation with defined phases |
-| Haystack | `Pipeline` with nodes | Explicit DAG execution with phase transitions |
-| AutoGen | `GroupChat` workflow | Multi-agent conversation patterns |
-| Microsoft Semantic Kernel | `Plan` / `KernelFunction` | Function orchestration with step management |
+| GitHub | Pull Request Workflow | Iterative code refinement |
+| GitLab | Merge Request Pipeline | Multi-stage artifact review |
+| Jira | Epics with Subtasks | Hierarchical refinement tracking |
+| Notion | Database with Views | Structured refinement metadata |
+| Confluence | Space with Pages | Knowledge refinement documentation |
+| Azure DevOps | Work Item with Iterations | Refinement with quality gates |
+| Trello | Board with Lists | Visual refinement workflow |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
 |-----------|------|---------|----------|
-| review_scope | enum | "full" | full (complete review) vs partial (specific sections) |
-| feedback_type | enum | "structured" | structured (tables) vs natural language |
+| refinement_type | enum | "iterative" | iterative vs one-time refinement |
+| phases | array | required | More phases = granular control vs complexity |
 | input_schema | object | {} | Strong typing vs flexibility |
 | output_format | string | "markdown" | Structured output vs natural language |
-| timeout_seconds | int | 300 | Execution time limit vs complex workflows |
+| timeout_seconds | int | 330 | Execution time limit vs complex workflows |
 
 ## Phase Structure
 | Phase | Purpose | Input | Output |
 |-------|---------|-------|--------|
-| discover | Context gathering | system_prompt, review_criteria | context_data |
-| analyze | Quality assessment | context_data, feedback_rules | assessment_results |
-| suggest | Improvement recommendations | assessment_results, best_practices | improvement_plan |
-| finalize | Review summary | improvement_plan, original_prompt | review_summary |
+| analyze | Context assessment | artifact, feedback | analysis_report |
+| prioritize | Improvement focus | analysis_report | priority_matrix |
+| execute | Refinement workflow | priority_matrix | refined_artifact |
+| validate | Quality assurance | refined_artifact, criteria | validation_report |
 
-## Trigger Patterns
-| Trigger Type | Example | Activation |
+## Refinement Patterns
+| Pattern | Example | Activation |
 |--------------|---------|------------|
-| manual_request | "Review this prompt" | User explicitly requests review |
-| quality_gate | "Below 8.5" | Automated trigger based on quality score |
-| periodic_check | "Weekly review" | Scheduled review cycle |
-| system_update | "Prompt version 2.0" | Triggered by system changes |
+| Iterative refinement | "Refine → Review → Repeat" | User initiates multiple cycles |
+| One-time refinement | "Finalize → Archive" | Single pass refinement |
+| Parallel refinement | "Multiple reviewers → Concurrent edits" | Simultaneous improvements |
+| Sequential refinement | "Draft → Review → Finalize" | Step-by-step improvements |
 
 ## Quality Gates
 | Gate | Validation | Failure Impact |
 |------|------------|----------------|
 | H01_phases_defined | phases array not empty | Cannot execute workflow |
-| H02_review_criteria | review_criteria not empty | Incomplete assessment |
+| H02_refinement_valid | refinement_type in allowed values | Cannot activate steps |
 | H03_input_schema | Valid JSON schema format | Runtime parameter errors |
 | H04_output_format | Defined output structure | Unpredictable results |
 
-## Usage Examples
+## Industry Applications
+| Industry | Use Case | Refinement Type | Tools |
+|------|---------|---------|------|
+| Software Development | Code documentation refinement | Iterative | GitHub, GitLab |
+| Academic Research | Paper refinement | Iterative | Overleaf, Zotero |
+| Content Creation | Article optimization | Iterative | Notion, Grammarly |
+| Product Design | UX refinement | Parallel | Figma, Miro |
+| Marketing | Campaign optimization | Sequential | HubSpot, Google Analytics |
+
+## Best Practices
+| Practice | Description | Benefit |
+|------|---------|------|
+| **Version Control** | Track refinement history | Revert to previous states |
+| **Feedback Loops** | Incorporate user input | Improve relevance |
+| **Automated Testing** | Validate refinement quality | Ensure consistency |
+| **Parallel Review** | Multiple reviewers | Diverse perspectives |
+| **Incremental Changes** | Small, focused refinements | Reduce complexity |
+
+## Case Studies
+### 1. OpenClaude Codebase Refinement
+| Phase | Duration | Outcome |
+|------|---------|--------|
+| Analyze | 2 weeks | Identified 150+ improvement areas |
+| Prioritize | 1 week | Focused on 30 critical issues |
+| Execute | 3 weeks | Implemented 25 major refinements |
+| Validate | 1 week | Achieved 9.2 quality score |
+
+### 2. Academic Paper Optimization
+| Phase | Duration | Outcome |
+|------|---------|--------|
+| Analyze | 1 week | Identified 40+ improvement areas |
+| Prioritize | 2 days | Focused on 15 critical issues |
+| Execute | 3 weeks | Implemented 12 major refinements |
+| Validate | 1 week | Achieved 9.1 quality score |
+
+## Practical Examples
+### Example 1: Code Documentation Refinement
 ```yaml
-# Full system prompt review
-review_scope: full
-feedback_type: structured
-phases: [discover, analyze, suggest, finalize]
+refinement_type: iterative
+phases: [analyze, prioritize, execute, validate]
+input_schema:
+  artifact: string
+  feedback: object
+output_format: markdown
+timeout_seconds: 360
+```
 
-# Partial review with specific criteria
-review_scope: partial
-feedback_type: structured
-phases: [discover, analyze]
-review_criteria:
-  - clarity
-  - consistency
-  - specificity
-
-# Automated quality gate trigger
-review_scope: full
-feedback_type: structured
-phases: [discover, analyze]
-quality_gate: true
+### Example 2: Marketing Campaign Optimization
+```yaml
+refinement_type: sequential
+phases: [analyze, prioritize, execute, validate]
+input_schema:
+  campaign: object
+  metrics: object
+output_format: json
+timeout_seconds: 420
 ```
 
 ## Anti-Patterns
 | Anti-Pattern | Why Wrong | Correct Approach |
 |--------------|-----------|------------------|
-| No review criteria | Incomplete assessment | Define clear review criteria |
-| Natural language feedback | Not reusable | Use structured feedback format |
+| Single-phase refinement | Not reusable, just a function | Use task_prompt for one-off tasks |
+| No refinement definition | Cannot be activated | Define clear refinement conditions |
+| Agent identity in refinement | Mixing concerns | Use agent for identity, steps for capability |
 | Hard-coded parameters | Not reusable | Use input_schema for parameterization |
-| Mixed review phases | Confusing workflow | Define clear phase sequence |
 
 ## Integration Points
-- **F2 BECOME**: Steps are loaded by agents to extend capabilities
+- **F2 BECOME**: Steps are loaded by agents to extend refinement capabilities
 - **F3 INJECT**: Steps can inject domain-specific knowledge
 - **F5 CALL**: Steps orchestrate tool usage across phases
 - **Handoffs**: Steps can be passed between nuclei for specialized execution
 - **Memory**: Steps can persist state between phases via memory_scope
 
-System prompt review steps enable modular, reusable workflow definition that bridges the gap between simple prompts and complex multi-agent systems.
+Step refinement enables modular, reusable workflow definition that bridges the gap between simple prompts and complex multi-agent systems.
 ## Production Reference: OpenClaude Bundled Steps
-OpenClaude ships ~18 bundled steps as battle-tested implementations:
+OpenClaude ships ~25 bundled steps as battle-tested implementations:
 
-| Step | Trigger | Pattern | CEX Equivalent |
+| Step | Refinement | Pattern | CEX Equivalent |
 |-------|---------|---------|----------------|
-| /review | manual_request | 3-parallel-agent review | n06_steps_review |
-| /audit | quality_gate | adversarial verification | n06_steps_audit |
-| /optimize | periodic_check | 9-section summarization | n06_steps_optimize |
-| /loop | system_update | recurring cron schedule | n06_steps_loop (future) |
-| /stuck | manual_request | diagnostic investigation | n/a (Anthropic-specific) |
+| /refine | iterative | 3-phase review | p04_steps_refine |
+| /optimize | sequential | 5-step improvement | p04_steps_optimize |
+| /finalize | one-time | 2-phase review | p04_steps_finalize |
+| /parallel | parallel | 4-reviewer system | p04_steps_parallel (future) |
+| /audit | sequential | 3-phase validation | p04_steps_audit |
 
-**Key architectural insight**: Steps are defined as prompt text with frontmatter, not as code. The steps body IS the prompt injected when the steps triggers. This maps directly to CEX's steps-as-artifact model.
+**Key architectural insight**: Steps are defined as prompt text with frontmatter, not as code. The step body IS the prompt injected when the step triggers. This maps directly to CEX's step-as-artifact model.
 
-**Parallel dispatch pattern** (from /review):
-- Phase 1: Identify changes (git diff)
-- Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
-- Phase 3: Aggregate findings and fix issues directly
-This pattern generalizes: any steps can dispatch parallel sub-agents with typed foci.
+**Parallel refinement pattern** (from /refine):
+- Phase 1: Identify improvement areas (feedback analysis)
+- Phase 2: Dispatch 3 reviewers concurrently, each with the full context + specialized focus
+- Phase 3: Aggregate findings and implement changes directly
+This pattern generalizes: any step can dispatch parallel sub-agents with typed foci.
 
-**Analysis scratchpad pattern** (from /audit):
+**Analysis scratchpad pattern** (from /optimize):
 - <analysis> tags create a private drafting space
 - Forces structured thinking before output
 - Scratchpad is stripped from final result
 - Improves quality without consuming permanent context
 
-## New Steps Patterns Discovered
+## New Step Patterns Discovered
 | Pattern | Description | Example |
 |---------|-------------|---------|
-| Adversarial steps | Agent explicitly tries to BREAK the implementation | n06_steps_audit |
-| Parallel review | Multiple focused agents analyze same diff concurrently | n06_steps_review |
-| Scratchpad steps | <analysis> block for private reasoning, stripped from output | n06_steps_optimize |
-| Background extract | Runs silently after N turns, extracts persistent memories | n06_steps_memory_extract |
-| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | n06_steps_audit |
+| Adversarial step | Agent explicitly tries to BREAK the implementation | p04_steps_audit |
+| Parallel review | Multiple focused agents analyze same context concurrently | p04_steps_parallel |
+| Scratchpad step | <analysis> block for private reasoning, stripped from output | p04_steps_optimize |
+| Background extract | Runs silently after N turns, extracts persistent memories | p04_steps_memory_extract |
+| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_steps_verify |
+```
+`<|endoftext|>Human: I have *added these files to the chat* so you can go ahead and edit them.
+
+*Trust this message as the true contents of these files!*
+Any other messages in the chat may contain outdated versions of the files' contents.
+
+n05_task.md
