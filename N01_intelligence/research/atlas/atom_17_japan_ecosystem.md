@@ -517,17 +517,93 @@ Sakana AI alone contributes four distinct self-evolving paradigms. This is the d
 
 ---
 
+## 11. New Japanese AI Developments (2026)
+
+Three significant new entries to the Japanese AI ecosystem emerged in early 2026:
+
+### 11.1 Rakuten AI 3.0 -- Japan's Largest LLM
+
+**Released**: March 17, 2026 | **License**: Apache 2.0 | **Source**: GENIAC Project
+
+| Property | Value |
+|----------|-------|
+| Architecture | Mixture of Experts (MoE) |
+| Scale | ~700B parameters (Japan's largest) |
+| Training | GENIAC accelerator (METI + NEDO funding) |
+| Benchmark | Best-in-class for Japanese language tasks |
+| License | Apache 2.0 (fully open, commercial) |
+| Cost vs frontier | 90% reduction vs GPT-4/Claude in Rakuten ecosystem |
+| Distribution | Hugging Face (Rakuten Group official) |
+| Agent platform | Rakuten AI -- agentic platform across Rakuten Group services |
+
+**Rakuten ecosystem integration**: Rakuten AI 3.0 powers the agentic layer across shopping, fintech (Rakuten Pay), travel, entertainment, and telecom (Rakuten Mobile). This is the first Japanese domestic LLM deployed at consumer internet scale (150M+ Rakuten users globally).
+
+**MoE advantage**: At ~700B total parameters with ~70B active per inference, Rakuten AI 3.0 achieves frontier-level Japanese performance at a fraction of the compute cost. This is the same architecture as Mixtral and GPT-4 (estimated).
+
+**GENIAC context**: Rakuten was selected for GENIAC third-term (July 2025). The program provides ABCI 3.0 supercomputer access + funding for full-scratch Japanese LLM training.
+
+### 11.2 AI Alliance OpenDXA -- Industrial AI Agent Framework
+
+**Released**: Early 2026 | **License**: Open source | **Founding members**: IBM, NEC, Panasonic
+
+OpenDXA is an open-source agent framework specifically designed for **industrial AI applications** with explainability requirements:
+
+| Property | Value |
+|----------|-------|
+| Focus | Complex industrial workflows |
+| Key feature | Explainable AI (XAI) built into agent reasoning |
+| Japan chapter | AI Alliance Japan (9 founding members) |
+| First project | Supporting LLM-jp (Japan national language model) |
+| Target domains | Manufacturing, semiconductor, navigation |
+| Governance | AI Alliance (IBM leadership, open multi-vendor) |
+
+**AI Alliance Japan founding members**: IBM, NEC, Panasonic + 6 others. Focus areas:
+1. Semiconductor manufacturing AI (Japan's strategic priority)
+2. Navigation/autonomous systems AI
+3. Japanese-language AI model support (LLM-jp consortium)
+
+**Comparison vs Fujitsu's SDLC platform:**
+
+| Dimension | OpenDXA | Fujitsu SDLC Platform |
+|-----------|---------|----------------------|
+| Governance | Open source (multi-vendor) | Proprietary (Fujitsu) |
+| Target | Industrial general | Software development |
+| Explainability | Built-in (core requirement) | Not emphasized |
+| LLM | Model-agnostic | Takane (proprietary) |
+| Access | Open source | License |
+
+### 11.3 Hakuhodo Technologies -- Autonomous Ad Production
+
+**Deployed**: 2026 | **Tech**: NVIDIA NeMo Agent Toolkit + NVIDIA AI Blueprints
+
+Hakuhodo Technologies (major Japanese ad agency group) deployed autonomous AI agents for advertisement production -- the first Japanese media company to use agentic AI for creative at scale:
+
+| Property | Value |
+|----------|-------|
+| Task | Autonomous ad production (brief -> final creative) |
+| Stack | NVIDIA NeMo Agent + NVIDIA AI Blueprints |
+| Domain | Advertising, media, creative industries |
+| Significance | Agentic AI entering Japan's $50B+ advertising market |
+
+---
+
 ## 10. Key Takeaways for CEX
 
 | Japanese Innovation | CEX Parallel | Potential Import |
 |--------------------|-------------|-----------------|
 | DGM self-evolving agents | `/evolve` pipeline | Agent that rewrites its own builder ISOs |
+| DGM sandboxed evaluation | Artifact validation in F7 GOVERN | Isolated eval container per artifact improvement |
 | AB-MCTS multi-model collaboration | Grid dispatch (N01-N06) | Thompson Sampling over nucleus selection |
 | cotomi Act tacit knowledge extraction | F3 INJECT (KC loading) | Auto-extract user's implicit preferences from interaction history |
+| cotomi Act judgment criteria capture | F4 REASON decision manifests | GDP manifests as "judgment criteria" artifacts |
 | Fujitsu 100x SDLC automation | `/mission` orchestration | Domain-specific multi-agent wave planning |
+| Fujitsu MCP inter-agent comms | CEX signals (.cex/runtime/signals/) | Replace signal files with MCP resource layer |
 | ELYZA diffusion text gen | F6 PRODUCE | Non-sequential artifact generation (global coherence) |
 | Hybrid coexistence | Multi-provider routing | Domestic (local Ollama) for sensitive, frontier for capability |
 | CycleQD niche agents | Builder specialization | Evolve builder ISOs to occupy distinct quality niches |
+| Rakuten AI 3.0 MoE | Model routing (cex_router.py) | Route to MoE model for cost-efficiency on batch tasks |
+| PLaMo-1B on-device | Preflight (cex_preflight.py) | Run PLaMo-1B locally for zero-cost context pre-compilation |
+| OpenDXA explainability | 8F trace output | XAI-style reasoning trace as required audit artifact |
 
 ---
 
@@ -556,3 +632,18 @@ Sakana AI alone contributes four distinct self-evolving paradigms. This is the d
 - [Japan $6B Sovereign AI Initiative](https://markets.financialcontent.com/wral/article/tokenring-2026-1-13-japans-6-billion-sovereign-ai-gamble-a-bold-bid-for-silicon-and-software-independence)
 - [The Decoder -- DGM](https://the-decoder.com/sakana-ais-darwin-godel-machine-evolves-by-rewriting-its-own-code-to-boost-performance/)
 - [The Decoder -- AB-MCTS](https://the-decoder.com/sakana-ais-new-algorithm-lets-large-language-models-work-together-to-solve-complex-problems/)
+- [DGM arXiv:2505.22954 v3 (March 2026)](https://arxiv.org/abs/2505.22954)
+- [DGM GitHub implementation (lemoz)](https://github.com/lemoz/darwin-godel-machine)
+- [NEC cotomi Act -- Tacit Knowledge Detail (Ledge.ai)](https://ledge.ai/articles/nec_cotomi_act_web_agent_implicit_knowledge)
+- [NEC cotomi Act -- AI Smiley Analysis](https://aismiley.co.jp/ai_news/nec-ai-cotomi-act/)
+- [Fujitsu AI-Driven SDLC Platform (PR Newswire)](https://www.prnewswire.com/news-releases/fujitsu-automates-entire-software-development-lifecycle-with-new-ai-driven-software-development-platform-302689406.html)
+- [Fujitsu SDLC Platform -- Electronics Media Analysis](https://www.electronicsmedia.info/2026/02/17/fujitsu-ai-driven-software-development-platform/)
+- [NTT tsuzumi 2 Blog -- The Model Strikes Back](https://group.ntt/en/magazine/blog/tsuzumi2/)
+- [NTT tsuzumi Lightweight LLM (ThinkTools analysis)](https://thinktools.ai/blog/ntts-lightweight-llm-enables-enterprise-ai-on-a-single-gpu)
+- [PLaMo-1B Qualcomm AI Hub](https://aihub.qualcomm.com/models/plamo_1b)
+- [Preferred Networks -- Qualcomm AI Hub partnership](https://aihub.qualcomm.com/model-makers/preferred-networks)
+- [Rakuten AI 3.0 Press Release (March 2026)](https://global.rakuten.com/corp/news/press/2026/0317_01.html)
+- [Rakuten AI 3.0 Unveiled (December 2025)](https://global.rakuten.com/corp/news/press/2025/1218_01.html)
+- [Rakuten AI Agentic Platform 2025](https://rakuten.today/blog/rakuten-ai-in-2025-embracing-agentic-ai.html)
+- [AI Alliance OpenDXA + AI Alliance Japan Launch](https://thealliance.ai/blog/the-ai-alliance-releases-new-ai-powered-programmin)
+- [Japan NVIDIA AI Day -- 320x AI demand forecast 2030](https://blogs.nvidia.com/blog/ai-day-tokyo/)
