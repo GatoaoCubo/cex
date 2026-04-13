@@ -914,3 +914,425 @@ Cloud-hosted services from LlamaIndex Inc.
 ---
 
 *Research conducted 2026-04-13. Sources: LlamaIndex OSS docs, GitHub, LlamaCloud docs, DeepWiki, community articles.*
+
+---
+
+## 23. AgentWorkflow -- Deep Implementation Reference
+
+Source: https://developers.llamaindex.ai/python/framework/understanding/agent/multi_agent/
+
+### AgentWorkflow Constructor
+
+```python
+from llama_index.core.agent.workflow import AgentWorkflow, FunctionAgent, ReActAgent
+
+workflow = AgentWorkflow(
+    agents=[agent1, agent2, agent3],
+    root_agent="agent1",
+    initial_state={},
+    state_prompt="Current state: {state}\nUser: {msg}",
+    timeout=None,
+    verbose=False,
+)
+```
+
+### FunctionAgent / ReActAgent Parameters
+
+Both inherit from `BaseWorkflowAgent`. Use `FunctionAgent` for LLMs with native tool calls; `ReActAgent` for any LLM.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `name` | str | Agent identifier -- used in handoff routing |
+| `description` | str | Capability summary -- injected into other agents' handoff tool description |
+| `system_prompt` | str | Agent-specific prompt (merged with ChatHistory on activation) |
+| `tools` | list[BaseTool] | Tools available to this agent |
+| `can_handoff_to` | list[str] | Agent names this agent can transfer control to (defines collaboration graph) |
+| `llm` | BaseLLM | LLM for this specific agent (overrides global Settings) |
+
+### Handoff Mechanism Internals
+
+```
+1. Duty agent receives task
+2. LLM decides: generate answer OR invoke handoff tool
+3. Handoff tool matched from can_handoff_to list
+4. handoff() sets ctx.next_agent = target_name
+5. aggregate_tool_results() detects next_agent is set
+6. setup_agent() activates new agent: merge system_prompt + ChatHistory
+7. Loop restarts with new agent as duty agent
+```
+
+| Internal Method | Role |
+|----------------|------|
+| `init_run()` | Initialize Context + ChatMemory for session |
+| `setup_agent()` | Extract system_prompt, merge with history, activate duty agent |
+| `aggregate_tool_results()` | Consolidate tool outputs, detect handoff trigger |
+| `handoff()` | Sets ctx.next_agent; auto-injected as tool at runtime |
+
+### State Management
+
+```python
+workflow = AgentWorkflow(
+    agents=[...],
+    initial_state={"user_name": None, "task_status": "pending"},
+    state_prompt="State: {state}\nUser message: {msg}",
+)
+# Agents read/write state via Context
+state = await ctx.store.get("task_status")
+await ctx.store.set("task_status", "in_progress")
+```
+
+### Topology Patterns
+
+| Pattern | can_handoff_to config | Use Case |
+|---------|----------------------|----------|
+| Linear chain | A -> B -> C | Staged processing pipeline |
+| Hub-and-spoke | Coordinator -> [N agents] | Specialized skill routing |
+| Mesh | All -> all | Flexible peer negotiation |
+| Hierarchical | Manager -> Sub-managers -> Workers | Enterprise multi-tier flows |
+
+---
+
+## 24. PropertyGraphIndex -- Deep Implementation Reference
+
+Source: https://developers.llamaindex.ai/python/framework/module_guides/indexing/lpg_index_guide/
+
+### Constructor Parameters
+
+```python
+from llama_index.core import PropertyGraphIndex
+
+index = PropertyGraphIndex.from_documents(
+    documents,
+    kg_extractors=[SimpleLLMPathExtractor(llm=llm)],
+    property_graph_store=Neo4jPropertyGraphStore(...),
+    embed_model=OpenAIEmbedding(),
+    embed_kg_nodes=True,
+    show_progress=True,
+)
+```
+
+### Knowledge Graph Extractors
+
+| Class | Strategy | Schema Required? | Best For |
+|-------|----------|-----------------|---------|
+| `SimpleLLMPathExtractor` | LLM extracts (entity1, relation, entity2) triples | No | Exploratory RAG, wide coverage |
+| `DynamicLLMPathExtractor` | Schema hints + free-form expansion | Optional | Rich diverse graph with some consistency |
+| `SchemaLLMPathExtractor` | Strict allowed entity/relation types via Pydantic schema | Yes | Structured, consistent knowledge bases |
+| `ImplicitPathExtractor` | Node relationships without LLM calls | No | Fast, metadata-only, no inference |
+
+#### SimpleLLMPathExtractor Params
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `llm` | BaseLLM | Settings.llm | LLM for extraction |
+| `max_paths_per_chunk` | int | 10 | Max triples per text chunk |
+| `num_workers` | int | 4 | Async concurrency |
+| `show_progress` | bool | False | Progress bar |
+
+#### SchemaLLMPathExtractor Params
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `possible_entities` | list[str] | Allowed entity type names |
+| `possible_relations` | list[str] | Allowed relation type names |
+| `possible_relation_props` | list[str] | Allowed relation property names |
+| `strict` | bool | Reject triples outside schema if True |
+
+### PropertyGraph Retrievers
+
+| Retriever | Mechanism | Key Params |
+|-----------|-----------|------------|
+| `LLMSynonymRetriever` | LLM generates keywords/synonyms -> match node labels | `llm`, `max_keywords`, `path_depth` (int hops), `include_text` |
+| `VectorContextRetriever` | Embed query -> cosine sim vs node embeddings -> fetch connected paths | `embed_model`, `similarity_top_k`, `path_depth`, `include_text`, `include_properties` |
+| `TextToCypherRetriever` | LLM converts NL -> Cypher -> execute on graph store | `graph_schema`, `llm`, `cypher_validator` |
+| `CypherTemplateRetriever` | Fill slots in predefined Cypher template (safer than TextToCypher) | `cypher_template`, `template_vars`, `llm` |
+
+Default (if no sub_retrievers provided): `LLMSynonymRetriever` + `VectorContextRetriever` (when embeddings enabled).
+
+### Graph Store Backends
+
+| Class | Backend | Notes |
+|-------|---------|-------|
+| `SimplePropertyGraphStore` | In-memory | Dev/testing only |
+| `Neo4jPropertyGraphStore` | Neo4j | Production; Cypher + vector search |
+| `NebulaGraphStore` | NebulaGraph | Open-source distributed |
+| `FalkorDBPropertyGraphStore` | FalkorDB | Redis-based graph DB |
+| `KuzuPropertyGraphStore` | Kuzu | Embedded, no server required |
+| `MemgraphPropertyGraphStore` | Memgraph | Bolt protocol, Cypher-compatible |
+
+### Extraction + Retrieval Pipeline
+
+```
+Documents
+  -> kg_extractors (attach entity/relation metadata to each TextNode)
+  -> PropertyGraphStore (nodes: labeled entities + props; edges: relations + props)
+  -> sub_retrievers (LLMSynonym + VectorContext in parallel)
+  -> Retrieved (node_text, path_text, source_chunk)
+  -> ResponseSynthesizer
+  -> Final answer
+```
+
+---
+
+## 25. WorkflowCheckpointer -- Complete Reference
+
+Source: https://developers.llamaindex.ai/python/examples/workflow/checkpointing_workflows/
+
+### Constructor
+
+```python
+from llama_index.core.workflow import WorkflowCheckpointer
+checkpointer = WorkflowCheckpointer(workflow=my_workflow)
+```
+
+### Checkpoint Data Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `last_completed_step` | str | Name of step that just finished |
+| `input_event` | Event | Event that triggered the step |
+| `output_event` | Event | Event emitted by the step |
+| `ctx_snapshot` | bytes | Serialized Context state at checkpoint |
+| `run_id` | str | UUID of the containing run |
+
+### Run Methods
+
+| Method | Description |
+|--------|-------------|
+| `checkpointer.run(**kwargs)` | Full async run with auto-checkpointing after every step. Returns handler with `run_id`. |
+| `checkpointer.run_from(checkpoint, **kwargs)` | Resume from a checkpoint. Restores ctx_snapshot, skips already-completed steps. |
+
+```python
+# Full run
+handler = checkpointer.run(query="What is X?")
+result = await handler
+run_id = handler.run_id
+
+# Inspect checkpoints
+all_ckpts = checkpointer.checkpoints          # dict[run_id -> list[Checkpoint]]
+ckpts_for_run = checkpointer.checkpoints[run_id]
+
+# Resume from checkpoint index 2
+chosen_ckpt = ckpts_for_run[2]
+new_handler = checkpointer.run_from(checkpoint=chosen_ckpt, query="What is X?")
+result2 = await new_handler
+```
+
+### filter_checkpoints() Method
+
+Multiple filters use AND semantics.
+
+| Filter Param | Type | Matches by |
+|-------------|------|------------|
+| `last_completed_step` | str | Step name equality |
+| `output_event_type` | type[Event] | Output event class |
+| `input_event_type` | type[Event] | Input event class |
+
+```python
+ckpts = checkpointer.filter_checkpoints(
+    last_completed_step="gather",
+    output_event_type=ReadyEvent,
+)
+```
+
+### Checkpoint Storage Backends
+
+| Backend | Class | Durability |
+|---------|-------|-----------|
+| In-memory dict | Default | Lost on process exit |
+| DBOS Postgres | `DBOSWorkflowCheckpointer` | Durable, fault-tolerant |
+| Custom | Subclass `BaseWorkflowCheckpointer` | Implement `save()` + `load()` |
+
+### Human-in-the-Loop Pattern
+
+```python
+# Suspend on awaiting approval
+handler = checkpointer.run(query=query)
+async for event in handler.stream_events():
+    if isinstance(event, ApprovalNeededEvent):
+        approval_ckpt = checkpointer.filter_checkpoints(
+            output_event_type=ApprovalNeededEvent
+        )[-1]
+        break  # Suspend; persist approval_ckpt.run_id + index
+
+# Later: resume with human feedback injected
+handler = checkpointer.run_from(checkpoint=approval_ckpt, human_feedback="Approved.")
+```
+
+---
+
+## 26. Evaluation -- Scoring Formulas and Internals
+
+Source: https://developers.llamaindex.ai/python/framework/understanding/evaluating/evaluating/
+
+### Per-Evaluator Scoring Details
+
+| Evaluator | Score Type | Score Range | Passing Default | Formula |
+|-----------|-----------|------------|----------------|---------|
+| `FaithfulnessEvaluator` | Binary | {0.0, 1.0} | score == 1.0 | LLM: "Is response supported by context?" -> YES=1.0, NO=0.0 |
+| `RelevancyEvaluator` | Binary | {0.0, 1.0} | score == 1.0 | LLM: "Does response + context match query?" -> YES=1.0, NO=0.0 |
+| `CorrectnessEvaluator` | Continuous | 1.0 - 5.0 | >= 4.0 | LLM compares vs reference: 1=wrong, 3=partial, 5=perfect |
+| `SemanticSimilarityEvaluator` | Continuous | 0.0 - 1.0 | >= 0.8 | cosine_similarity(embed(response), embed(reference)) |
+| `AnswerRelevancyEvaluator` | Binary | {0.0, 1.0} | score == 1.0 | LLM: "Is answer directly relevant to the question?" |
+| `ContextRelevancyEvaluator` | Binary | {0.0, 1.0} | score == 1.0 | LLM: "Is retrieved context relevant to query?" |
+| `GuidelineEvaluator` | Binary | {0.0, 1.0} | score == 1.0 | LLM: evaluates response against user-defined guideline string |
+| `PairwiseComparisonEvaluator` | Categorical | {1, 2, 0} | -- | LLM: A vs B -> 1=A wins, 2=B wins, 0=tie |
+
+### EvaluationResult Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `query` | str | Original query |
+| `contexts` | list[str] | Source chunks used |
+| `response` | str | Generated response text |
+| `passing` | bool | True if score meets threshold |
+| `feedback` | str | LLM explanation for score |
+| `score` | float | Numeric score |
+| `pairwise_source` | str | For PairwiseComparison: which response was evaluated |
+
+### CorrectnessEvaluator Rubric (1-5)
+
+| Score | Meaning |
+|-------|---------|
+| 1 | Completely incorrect, irrelevant, or missing |
+| 2 | Mostly incorrect with minor relevant elements |
+| 3 | Partially correct -- missing key aspects |
+| 4 | Mostly correct, minor errors only |
+| 5 | Perfectly correct and complete |
+
+Default `score_threshold = 4.0` -> `passing = True`.
+
+### BatchEvalRunner
+
+```python
+from llama_index.core.evaluation import BatchEvalRunner
+
+runner = BatchEvalRunner(
+    evaluators={
+        "faithfulness": FaithfulnessEvaluator(),
+        "relevancy": RelevancyEvaluator(),
+        "correctness": CorrectnessEvaluator(),
+    },
+    workers=8,
+    show_progress=True,
+)
+
+results = await runner.aevaluate_queries(
+    query_engine,
+    queries=["What is X?", "How does Y work?"],
+)
+# Access: results["faithfulness"][0].score
+```
+
+---
+
+## 27. LlamaParse v2 -- Extended Parameter Reference
+
+Source: https://developers.llamaindex.ai/python/cloud/llamaparse/api-v2-guide/
+
+### v2 vs v1 Key Differences
+
+| Dimension | v1 | v2 |
+|-----------|----|----|
+| Mode selection | parsing_instruction + free-form | tier enum (fast/cost_effective/agentic/agentic_plus) |
+| Output format | Mixed flat params | Structured expand query param |
+| Config organization | Flat | Nested: input_options, output_options, processing_options |
+| File upload | Always multipart | Upload file -> get file_id -> parse by ID |
+| Version control | None | Explicit version string (e.g., "2024-12-01", "latest") |
+
+### Full Request Parameter Reference
+
+#### Top-Level (`POST /api/v2/parse` or `POST /api/v2/parse/upload`)
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `file_id` | str | One of | ID of pre-uploaded file |
+| `source_url` | str | One of | Remote URL to parse directly |
+| `tier` | enum | No | fast, cost_effective (default), agentic, agentic_plus |
+| `version` | str | No | Parser version string ("latest" or date string) |
+| `disable_cache` | bool | No | Force reprocess even if cached result exists |
+| `max_pages` | int | No | Maximum pages to process |
+| `target_pages` | list[int] | No | 1-based page numbers to process selectively |
+| `custom_prompt` | str | No | AI guidance (agentic tiers only) |
+| `webhook_url` | str | No | Callback URL on job completion |
+| `webhook_headers` | dict | No | Headers for webhook POST |
+| `webhook_events` | list[str] | No | Events: ["parse.success"] |
+
+#### `input_options`
+
+| Sub-parameter | Type | Description |
+|---------------|------|-------------|
+| `html.embed_extra_context` | bool | Embed surrounding HTML context into extracted text |
+| `spreadsheet.sheet_names` | list[str] | Specific sheets to parse (default: all) |
+| `spreadsheet.include_formulas` | bool | Include cell formulas in output |
+| `presentation.include_slide_notes` | bool | Extract presenter notes from PPTX |
+
+#### `output_options`
+
+| Sub-parameter | Type | Description |
+|---------------|------|-------------|
+| `markdown.output_tables_as_markdown` | bool | Render tables as Markdown grid |
+| `markdown.compact_markdown_tables` | bool | Remove padding whitespace in tables |
+| `markdown.markdown_table_multiline_separator` | str | Separator for multiline cell content |
+| `markdown.merge_continued_tables` | bool | Merge tables split across page breaks |
+| `markdown.annotate_links` | bool | Include hyperlinks in Markdown output |
+| `images_to_save` | list[str] | Extract: "screenshot", "figure", "table_image" |
+
+#### `processing_options`
+
+| Sub-parameter | Type | Description |
+|---------------|------|-------------|
+| `ignore.ignore_diagonal_text` | bool | Skip watermarks / rotated text |
+| `ignore.ignore_headers_and_footers` | bool | Strip running headers and footers |
+| `ignore.ignore_page_numbers` | bool | Strip page number lines |
+| `ocr_parameters.languages` | list[str] | BCP-47 codes: ["fr", "de", "ja"] |
+| `ocr_parameters.ocr_mode` | str | "auto" (default), "always", "never" |
+
+### `expand` Query Parameter
+
+Controls fields returned by `GET /api/v2/parse/{job_id}`. Multiple values comma-separated.
+
+| Value | Returns |
+|-------|---------|
+| `text` | Plain text extraction |
+| `markdown` | Markdown-formatted text |
+| `items` | Structured items tree (JSON) |
+| `metadata` | Document metadata (title, author, page count) |
+| `spatial_text` | Layout-preserving text with coordinates |
+| `tables_as_spreadsheet` | Tables as structured spreadsheet data |
+| `embedded_images` | Base64-encoded extracted images |
+
+### Spatial Text Sub-options
+
+| Option | Description |
+|--------|-------------|
+| `preserve_layout_alignment_across_pages` | Maintain column alignment across pages |
+| `preserve_very_small_text` | Include sub-8pt text (footnotes, captions) |
+| `do_not_unroll_columns` | Keep multi-column layout (no linearization) |
+
+### Python SDK Quick Reference
+
+```python
+from llama_parse import LlamaParse
+
+parser = LlamaParse(
+    api_key="...",
+    tier="agentic",
+    target_pages=[1, 2, 3],
+    languages=["en", "fr"],
+    custom_prompt="Extract all financial figures as structured data.",
+    output_tables_as_markdown=True,
+    images_to_save=["screenshot"],
+    result_type="markdown",    # SDK maps to expand param
+    num_workers=4,
+    verbose=True,
+    ignore_errors=False,
+)
+documents = parser.load_data("report.pdf")
+# async: documents = await parser.aload_data("report.pdf")
+```
+
+---
+
+*v1.0 research conducted 2026-04-13. v1.1 enrichment (sections 23-27) added 2026-04-13.*
+*Sources: LlamaIndex OSS docs (developers.llamaindex.ai), LlamaIndex blog, Neo4j labs, Mistral AI cookbooks, HuggingFace agents course, DataLeadsFuture analysis.*
