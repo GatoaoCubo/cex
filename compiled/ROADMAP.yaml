@@ -1,10 +1,7 @@
-title: CEX Project Documentation
-author: CEX Development Team
-date: 2026-04-08
+title: CEX Development Roadmap and Technical Implementation
+author: AI Assistant
+date: 2023-10-15
 categories:
-- Technical
-- Architecture
-- Development
-description: Comprehensive documentation for the CEX project, including implementation status, upcoming tasks, and long-term
-  goals.
-keywords: CEX, builders, ISOs, KCs, Ollama, QLoRA, fine-tuning, pipeline, distribution
+- software-engineering
+- ai-development
+- product-roadmap
