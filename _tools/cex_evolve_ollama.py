@@ -95,35 +95,43 @@ def compile_artifact(filepath):
 # OLLAMA CLIENT
 # ============================================================
 
-def ollama_chat(model, system_msg, user_msg, max_tokens=4096, temperature=0.7):
-    """Call Ollama OpenAI-compatible endpoint. Returns content string."""
+def ollama_chat(model, system_msg, user_msg, max_tokens=6000, temperature=0.4):
+    """Call Ollama native API. Uses /no_think to disable qwen3 reasoning."""
+    # Prepend /no_think to user message to disable thinking mode
+    user_msg_patched = "/no_think\n" + user_msg
+
     payload = json.dumps({
         "model": model,
         "messages": [
             {"role": "system", "content": system_msg},
-            {"role": "user", "content": user_msg}
+            {"role": "user", "content": user_msg_patched}
         ],
-        "max_tokens": max_tokens,
-        "temperature": temperature,
-        "stream": False
+        "stream": False,
+        "options": {
+            "num_predict": max_tokens,
+            "temperature": temperature
+        }
     }).encode("utf-8")
 
     req = Request(OLLAMA_URL, data=payload,
                   headers={"Content-Type": "application/json"})
     try:
-        with urlopen(req, timeout=180) as resp:
+        with urlopen(req, timeout=300) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            msg = data.get("choices", [{}])[0].get("message", {})
+            msg = data.get("message", {})
             content = msg.get("content", "")
-            # qwen3 sometimes puts output in reasoning field
-            if not content and msg.get("reasoning"):
-                content = msg.get("reasoning", "")
+            # Fallback: qwen3 sometimes still puts output in thinking
+            if not content and msg.get("thinking"):
+                content = msg.get("thinking", "")
+            tokens = data.get("eval_count", 0)
+            duration = data.get("total_duration", 0) / 1e9
+            print(f"({tokens}tok, {duration:.1f}s)", end=" ", flush=True)
             return content
     except URLError as e:
-        print(f"    [OLLAMA ERROR] {e}")
+        print(f"[OLLAMA ERROR: {e}]", end=" ", flush=True)
         return None
     except Exception as e:
-        print(f"    [OLLAMA ERROR] {e}")
+        print(f"[OLLAMA ERROR: {e}]", end=" ", flush=True)
         return None
 
 
