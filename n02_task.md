@@ -1,5 +1,5 @@
-Improve this artifact to 9.0+ quality: .\N04_knowledge\memory\taxonomy_memory_scope.md
-Current: 8.9 quality, 69 lines.
+Improve this artifact to 9.0+ quality: .\N04_knowledge\prompts\system_prompt_taxonomy.md
+Current: 8.9 quality, 57 lines.
 Target: 9.0+ quality, 80+ lines.
 
 INSTRUCTIONS:

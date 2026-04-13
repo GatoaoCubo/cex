@@ -1,5 +1,5 @@
-Improve this artifact to 9.0+ quality: .\N03_builder\README.md
-Current: 8.9 quality, 60 lines.
+Improve this artifact to 9.0+ quality: .\N04_knowledge\knowledge\p01_gl_embedding.md
+Current: 8.7 quality, 24 lines.
 Target: 9.0+ quality, 80+ lines.
 
 INSTRUCTIONS:

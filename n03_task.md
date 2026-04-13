@@ -1,5 +1,5 @@
-Improve this artifact to 9.0+ quality: .\N05_operations\architecture\adr_001_railway_topology.md
-Current: 8.9 quality, 72 lines.
+Improve this artifact to 9.0+ quality: .\N05_operations\knowledge\kc_ollama_deployment_guide.md
+Current: 8.8 quality, 50 lines.
 Target: 9.0+ quality, 80+ lines.
 
 INSTRUCTIONS:
