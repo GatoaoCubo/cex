@@ -1,0 +1,20 @@
+
+## Workflow Compliance Report
+```markdown
+# Compliance Report
+
+## 1. Audit Summary
+- Conducted: April 2026
+- Standards: ISO 9001, GDPR
+- Findings: 2 non-compliance issues identified
+
+## 2. Non-Compliance Issues
+| Issue | Description | Resolution |
+|------|------------|------------|
+| Standardization | Missing phase definitions | Completed workflow documentation |
+| Automation | Incomplete phase triggers | Updated automation rules |
+
+## 3. Recommendations
+- Implement automated validation checks
+- Conduct quarterly compliance audits
+- Expand workflow to new processes
