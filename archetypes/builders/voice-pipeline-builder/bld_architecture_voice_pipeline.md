@@ -38,4 +38,21 @@ density_score: 0.85
 | Security Layer | Data Storage | Control |  
 
 ## Architectural Position  
-The voice_pipeline is a core enabler in CEX, bridging raw voice data to actionable insights by integrating with user interfaces, model repositories, and data storage. It ensures scalable, secure voice processing across applications, aligning with CEX’s mission to prioritize user interaction and AI-driven analytics.
+voice_pipeline sits in P04 (Tools layer) as the system-level architecture for voice agent
+processing. It is consumed by deployment engineers who instantiate each pipeline stage with
+real providers. It sits above individual provider configs (stt_provider, tts_provider) and
+alongside realtime_session (live state management).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | voice_pipeline construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

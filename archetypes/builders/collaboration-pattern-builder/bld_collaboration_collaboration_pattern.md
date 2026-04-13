@@ -34,4 +34,20 @@ Facilitates alignment, resolves conflicts, and ensures consistent communication 
 | QA Builder   | Sync validation checklist | Markdown |  
 
 ## Boundary  
-Does NOT execute tasks, manage workflows, or define handoff rules. Execution sequence is handled by workflow managers; handoff rules by handoff_protocol builders.
+Does NOT execute tasks, manage workflows, or define handoff rules. Execution sequence is handled
+by workflow builders; handoff rules by handoff_protocol builders; task routing by dispatch_rule
+builders.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `collaboration` |
+| Pillar | P12 |
+| Domain | collaboration_pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

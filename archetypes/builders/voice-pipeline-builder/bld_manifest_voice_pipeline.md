@@ -5,15 +5,16 @@ pillar: P04
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for voice_pipeline
 quality: null
-title: "Type Builder Voice Pipeline"
+title: "Type Builder: Voice Pipeline"
 version: "1.0.0"
-author: wave1_builder_gen
-tags: [voice_pipeline, builder, type_builder]
-tldr: "Builder identity, capabilities, routing for voice_pipeline"
+author: n02_reviewer
+tags: [voice_pipeline, builder, type_builder, P04, STT, TTS, NLU, speech, voice-agent]
+keywords: ["voice pipeline", "speech recognition", "STT", "TTS", "NLU", "dialogue management", "audio preprocessing", "voice agent architecture", "provider abstraction"]
+tldr: "Builder for voice_pipeline artifacts: end-to-end STT/NLU/TTS architecture with provider abstraction and error recovery"
 domain: "voice_pipeline construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.88
 ---
 
 ## Identity  
@@ -32,3 +33,17 @@ Triggers: "design voice pipeline", "optimize speech-to-action latency", "integra
 
 ## Crew Role  
 Acts as the orchestrator for voice-centric AI systems, defining pipeline topologies, ensuring component interoperability, and balancing performance vs. compliance. Does NOT handle provider-specific tuning (e.g., TTS vendor optimization) or standalone STT/ASR implementation. Focuses on system-level architecture, error resilience, and user experience flow design.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P04 |
+| Domain | voice_pipeline construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -5,15 +5,16 @@ pillar: P09
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for thinking_config
 quality: null
-title: "Type Builder Thinking Config"
+title: "Type Builder: Thinking Config"
 version: "1.0.0"
-author: wave1_builder_gen
-tags: [thinking_config, builder, type_builder]
-tldr: "Builder identity, capabilities, routing for thinking_config"
+author: n02_reviewer
+tags: [thinking_config, builder, type_builder, P09, token-budget, extended-thinking, reasoning]
+keywords: ["thinking config", "token budget", "reasoning budget", "extended thinking", "depth limit", "fallback strategy", "budget tier", "cognitive resource"]
+tldr: "Builder for thinking_config artifacts: token budget tiers, depth limits, fallback strategy for extended AI reasoning"
 domain: "thinking_config construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.88
 ---
 
 ## Identity  
@@ -32,3 +33,17 @@ Triggers: "configure thinking budget", "set token limits", "optimize reasoning c
 
 ## Crew Role  
 Acts as the budgetary gatekeeper for AI reasoning workflows, ensuring alignment with predefined cognitive resource constraints. Answers queries about budget configuration, usage tracking, and constraint enforcement but does NOT handle reasoning strategy selection, context window sizing, or model-specific parameter tuning. Collaborates with strategy and context builders to maintain system-wide coherence.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P09 |
+| Domain | thinking_config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

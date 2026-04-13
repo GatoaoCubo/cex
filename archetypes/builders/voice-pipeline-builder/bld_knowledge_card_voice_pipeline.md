@@ -56,3 +56,17 @@ The architecture must balance real-time performance with scalability, often leve
 - Ignoring security risks in voice data transmission (e.g., unencrypted pipelines).  
 - Relying solely on single-provider APIs without fallback mechanisms.  
 - Neglecting user feedback loops for continuous pipeline improvement.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `knowledge_card` |
+| Pillar | P01 |
+| Domain | voice_pipeline construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

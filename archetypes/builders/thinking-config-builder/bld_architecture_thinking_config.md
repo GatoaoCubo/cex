@@ -36,4 +36,21 @@ density_score: 0.85
 | Validator | Schema Store | Data |  
 
 ## Architectural Position  
-thinking_config sits at the intersection of CEX operational integrity and dynamic configuration needs, enabling secure, scalable config management across trading, compliance, and infrastructure systems while aligning with P09's focus on resilience and automation.
+thinking_config sits in P09 (Config layer) as runtime parameters for extended AI reasoning
+resource allocation. It is consumed by LLM orchestrators (Claude API extended thinking
+controllers, chain-of-thought managers) that enforce budgets during inference. It sits
+alongside context_window_config (input length) and above reasoning_strategy (method selection).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | thinking_config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

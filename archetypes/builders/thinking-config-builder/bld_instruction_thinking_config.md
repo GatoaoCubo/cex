@@ -36,8 +36,24 @@ density_score: 0.85
 9. Finalize config with P09 compliance annotations  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ Check syntax against SCHEMA.md  
-[ ] ✅ Verify token limits match research data  
-[ ] ✅ Confirm constraint triggers are actionable  
-[ ] ✅ Test config in sandbox with sample inputs  
-[ ] ✅ Obtain stakeholder approval for deployment
+[ ] Check syntax against SCHEMA.md  
+[ ] Verify at least 3 budget tiers defined with numeric thresholds  
+[ ] Confirm fallback strategy documented for budget exhaustion  
+[ ] Confirm timeout upper bound is set  
+[ ] Verify boundary note distinguishes from reasoning_strategy and context_window_config  
+[ ] Validate id matches pattern: p09_thk_[a-z0-9_]+  
+[ ] Run H01-H08 quality gate checks before delivering  
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | thinking_config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

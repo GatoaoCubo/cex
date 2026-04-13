@@ -36,4 +36,20 @@ Orchestrates end-to-end voice pipeline workflows, integrating STT/TTS components
 | User Interface| Pipeline status       | Dashboard   |  
 
 ## Boundary  
-Does NOT implement STT/TTS algorithms (handled by providers), manage infrastructure (handled by DevOps), or enforce security policies (handled by Security team).
+Does NOT implement STT/TTS algorithms (handled by stt_provider/tts_provider builders), manage
+infrastructure configuration (handled by env_config/sandbox_config builders), or define session
+state (handled by realtime_session builder).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `collaboration` |
+| Pillar | P12 |
+| Domain | voice_pipeline construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

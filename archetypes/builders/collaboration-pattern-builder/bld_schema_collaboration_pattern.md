@@ -29,7 +29,7 @@ density_score: 0.85
 | updated      | date   | yes      | -       | ISO 8601                       |
 | author       | string | yes      | -       | Owner                          |
 | domain       | string | yes      | -       | Application domain             |
-| quality      | string | yes      | "draft" | Quality level                  |
+| quality      | null   | yes      | null    | Always null at authoring time; peer review assigns score |
 | tags         | list   | yes      | []      | Keywords                       |
 | tldr         | string | yes      | -       | Summary                        |
 | collaboration_type | string | yes | - | "cross-functional", "external", etc. |
@@ -73,3 +73,17 @@ density_score: 0.85
 - Governance_model must specify authority hierarchy.
 - Created and updated dates must be within 1 year of each other.
 - File size must not exceed 5120 bytes.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `schema` |
+| Pillar | P06 |
+| Domain | collaboration_pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

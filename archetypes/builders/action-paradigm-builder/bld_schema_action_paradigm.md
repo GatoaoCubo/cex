@@ -29,7 +29,7 @@ density_score: 0.85
 | updated    | date   | yes      | -       | Last update timestamp |  
 | author     | string | yes      | -       | Owner/creator |  
 | domain     | string | yes      | -       | Application domain |  
-| quality    | string | yes      | "draft"  | Quality status |  
+| quality    | null   | yes      | null     | Always null at authoring time; peer review assigns score |  
 | tags       | list   | yes      | []       | Keywords |  
 | tldr       | string | yes      | -       | Summary |  
 | action_type | string | yes      | -       | Action classification |  
@@ -65,3 +65,17 @@ density_score: 0.85
 - Versioning enforced for iterative updates.  
 - Tags must include at least one domain-specific keyword.  
 - TLDR must be under 256 characters.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `schema` |
+| Pillar | P06 |
+| Domain | action_paradigm construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

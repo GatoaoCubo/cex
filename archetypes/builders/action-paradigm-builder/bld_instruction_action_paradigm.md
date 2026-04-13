@@ -37,7 +37,22 @@ density_score: 0.85
 
 ## Phase 3: VALIDATE  
 1. [ ] Verify schema compliance with SCHEMA.md (all required fields present).  
-2. [ ] Test function CALL against environment simulations (success rate ≥90%).  
-3. [ ] Confirm action execution aligns with defined paradigms (no contradictions).  
-4. [ ] Validate edge cases (e.g., invalid states, unexpected environment inputs).  
-5. [ ] Obtain peer review approval for artifact accuracy and completeness.
+2. [ ] Confirm action_type is classified (reactive/deliberative/hierarchical/hybrid).  
+3. [ ] Verify preconditions and postconditions are defined for all actions.  
+4. [ ] Confirm failure recovery is documented for each action class.  
+5. [ ] Validate id matches pattern: p04_act_[a-z0-9_]+  
+6. [ ] Run H01-H08 quality gate checks before delivering.  
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | action_paradigm construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

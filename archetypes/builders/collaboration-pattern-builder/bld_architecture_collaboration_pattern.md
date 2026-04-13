@@ -35,4 +35,21 @@ density_score: 0.85
 | Logger | Orchestrator | Event Subscription |  
 
 ## Architectural Position  
-The collaboration_pattern-builder sits at the intersection of P12 and CEX core systems, enabling dynamic pattern creation and enforcement. It acts as a bridge between abstract collaboration rules and operational execution, ensuring alignment with CEX governance while facilitating real-time interaction across decentralized entities.
+collaboration_pattern sits in P12 (Orchestration layer) as the structural specification for
+multi-agent coordination topology. It is consumed by dispatch systems and agent orchestration
+frameworks that instantiate agent roles and channels. It sits above individual agent definitions
+(P02 agent) and alongside workflow (sequential execution) and dispatch_rule (task routing).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | collaboration_pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

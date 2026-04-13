@@ -51,3 +51,17 @@ Thinking_config artifacts define parameters governing AI system resource allocat
 - Failing to account for token inflation in complex reasoning chains.  
 - Not aligning budget thresholds with business SLAs or cost centers.  
 - Hardcoding token limits without dynamic adjustment for input variability.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `knowledge_card` |
+| Pillar | P01 |
+| Domain | thinking_config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

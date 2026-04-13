@@ -36,8 +36,24 @@ density_score: 0.85
 9. Finalize metadata (author, version, revision notes).  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ Confirm schema compliance (SCHEMA.md).  
-- [ ] ✅ Verify all agent roles and interactions are explicitly defined.  
-- [ ] ✅ Ensure protocol rules align with domain constraints.  
-- [ ] ✅ Test use_case_examples against OUTPUT_TEMPLATE.md.  
-- [ ] ✅ Confirm edge_case_handling covers failure scenarios.
+- [ ] Confirm schema compliance (SCHEMA.md).  
+- [ ] Verify all agent roles and interactions are explicitly defined.  
+- [ ] Ensure topology type is declared (mesh/hierarchical/peer-to-peer/hub-and-spoke).  
+- [ ] Confirm communication channels are named and directional.  
+- [ ] Verify conflict resolution mechanism is documented.  
+- [ ] Validate id matches pattern: p12_collab_[a-z0-9_]+  
+- [ ] Run H01-H08 quality gate checks before delivering.  
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | collaboration_pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

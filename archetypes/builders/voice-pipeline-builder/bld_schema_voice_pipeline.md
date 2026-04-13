@@ -29,7 +29,7 @@ density_score: 0.85
 | updated    | date   | yes      | -       | Last update date |  
 | author     | string | yes      | -       | Owner |  
 | domain     | string | yes      | -       | Application domain |  
-| quality    | string | yes      | "draft" | Quality status |  
+| quality    | null   | yes      | null    | Always null at authoring time; peer review assigns score |  
 | tags       | list   | yes      | []      | Keywords |  
 | tldr       | string | yes      | -       | Summary |  
 | language   | string | yes      | "en"    | Supported language |  
@@ -66,3 +66,17 @@ density_score: 0.85
 - Domain-specific fields (language, sample_rate) are mandatory  
 - Version must follow semantic versioning (e.g., 1.0.0)  
 - All dates must be ISO 8601 formatted (YYYY-MM-DD)
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `schema` |
+| Pillar | P06 |
+| Domain | voice_pipeline construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

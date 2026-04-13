@@ -37,4 +37,21 @@ density_score: 0.85
 | Validation Engine | Rule Compiler | Configuration |  
 
 ## Architectural Position  
-action_paradigm sits at the core of CEX operations, enabling automated, policy-driven execution of user actions while ensuring compliance, scalability, and auditability across trading, settlement, and risk management workflows.
+action_paradigm sits in P04 (Tools layer) as the behavioral specification for autonomous agent
+execution. It is consumed by execution engines (robotics middleware, agent frameworks, simulation
+platforms) that instantiate the paradigm at runtime. It sits above protocol interfaces (cli_tool,
+api_client) and below orchestration sequences (workflow, dispatch_rule).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `architecture` |
+| Pillar | P08 |
+| Domain | action_paradigm construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

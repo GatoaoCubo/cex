@@ -74,3 +74,17 @@ description: "Agents use HTTP requests to perform actions."
 ```
 ## Why it fails
 Confuses action execution paradigm with a specific communication protocol (agent_computer_interface). Focuses on API mechanics rather than agent behavior logic. Doesn't address how agents reason about actions or adapt to environment changes.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `examples` |
+| Pillar | P07 |
+| Domain | action_paradigm construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

@@ -29,7 +29,7 @@ density_score: 0.85
 | updated     | date   | yes      | -       | ISO 8601 last update date          |  
 | author      | string | yes      | -       | Author/owner                       |  
 | domain      | string | yes      | -       | Application domain                 |  
-| quality     | enum   | yes      | "draft"  | ["draft", "review", "approved"]    |  
+| quality     | null   | yes      | null     | Always null at authoring time; peer review assigns score |  
 | tags        | list   | yes      | []       | Keywords for categorization        |  
 | tldr        | string | yes      | -       | Summary of configuration purpose   |  
 | thinking_model | string | yes | "default" | AI model used for reasoning       |  
@@ -63,3 +63,17 @@ density_score: 0.85
 - `reasoning_depth` must be an integer between 1 and 5.  
 - `version` must follow semantic versioning (e.g., "1.2.3").  
 - `created` and `updated` dates must be in ISO 8601 format (YYYY-MM-DD).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `schema` |
+| Pillar | P06 |
+| Domain | thinking_config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

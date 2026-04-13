@@ -52,4 +52,18 @@ Action paradigms define how agents translate high-level goals into executable ac
 - **Overlooking partial observability** – Designing actions that depend on incomplete or noisy state data.  
 - **Poor error propagation** – Failing to handle cascading failures from failed actions.  
 - **Rigid action sequences** – Hardcoding action orders without adaptability to dynamic changes.  
-- **Neglecting resource limits** – Overloading execution engines with concurrent actions beyond capacity.
+- **Neglecting resource limits** -- Overloading execution engines with concurrent actions beyond capacity.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `knowledge_card` |
+| Pillar | P01 |
+| Domain | action_paradigm construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

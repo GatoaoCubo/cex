@@ -34,4 +34,20 @@ Allocates and enforces thinking budget constraints (e.g., time, computational re
 | Allocator     | Allocation plan    | CSV     |  
 
 ## Boundary  
-Does NOT define reasoning techniques (handled by `reasoning_strategy_builder`) or token limits (handled by `context_window_config_builder`).
+Does NOT define reasoning techniques (handled by reasoning_strategy builder) or input token
+limits (handled by context_window_config builder) or task effort profiles (handled by
+effort_profile builder).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `collaboration` |
+| Pillar | P12 |
+| Domain | thinking_config construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

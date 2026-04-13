@@ -36,4 +36,20 @@ Orchestrates action execution workflows, decomposing high-level goals into execu
 | ErrorHandler  | Failure reports    | JSON        |  
 
 ## Boundary  
-Does NOT execute actions directly (handled by Executor), manage user interfaces (handled by Agent-Computer Interface), or handle low-level system interactions (handled by CLI tools).
+Does NOT execute actions directly (handled by cli_tool/api_client builders), manage user interfaces
+(handled by agent_computer_interface builder), or handle sequential task ordering (handled by
+workflow builder).
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `collaboration` |
+| Pillar | P12 |
+| Domain | action_paradigm construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

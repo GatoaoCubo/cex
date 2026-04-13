@@ -36,8 +36,25 @@ density_score: 0.85
 9. Package artifact with Dockerfile and requirements.txt  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ Validate schema alignment with SCHEMA.md  
-[ ] ✅ Test end-to-end latency (<500ms) under load  
-[ ] ✅ Verify ASR accuracy (>92% WER on test dataset)  
-[ ] ✅ Confirm TTS naturalness (MOS score ≥4.2)  
-[ ] ✅ Ensure compliance with GDPR/CCPA data handling rules
+[ ] Validate schema alignment with SCHEMA.md  
+[ ] Confirm all 4 core stages present: STT, NLU, dialogue management, TTS  
+[ ] Verify audio preprocessing stage is documented  
+[ ] Confirm provider abstraction (no hardcoded vendor names at interface level)  
+[ ] Verify fallback chain documented for each stage  
+[ ] Confirm error recovery defined at each stage boundary  
+[ ] Validate id matches pattern: p04_vp_[a-z0-9_]+  
+[ ] Run H01-H08 quality gate checks before delivering  
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `instruction` |
+| Pillar | P03 |
+| Domain | voice_pipeline construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

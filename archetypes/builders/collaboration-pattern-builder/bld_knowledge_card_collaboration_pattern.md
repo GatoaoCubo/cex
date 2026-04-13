@@ -56,3 +56,17 @@ Key challenges include ensuring scalability, fault tolerance, and real-time resp
 - Poorly defined trust models leading to collusion or misinformation.  
 - Inadequate scalability testing, resulting in performance degradation under load.  
 - Hardcoding topology types instead of enabling dynamic reconfiguration.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `knowledge_card` |
+| Pillar | P01 |
+| Domain | collaboration_pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

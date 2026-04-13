@@ -3,37 +3,122 @@ kind: tools
 id: bld_tools_collaboration_pattern
 pillar: P04
 llm_function: CALL
-purpose: Tools available for collaboration_pattern production
+purpose: Tools available during collaboration_pattern artifact production
 quality: null
-title: "Tools Collaboration Pattern"
+title: "Tools: collaboration-pattern-builder"
 version: "1.0.0"
-author: wave1_builder_gen
-tags: [collaboration_pattern, builder, tools]
-tldr: "Tools available for collaboration_pattern production"
+author: n02_reviewer
+tags: [collaboration_pattern, builder, tools, P04]
+tldr: "Tool registry for collaboration_pattern builder: CEX pipeline tools and file system operations for pattern production."
 domain: "collaboration_pattern construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.88
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Generate code from collaboration patterns | Pattern implementation phase |  
-| cex_score.py | Evaluate pattern quality using metrics | Post-implementation review |  
-| cex_retriever.py | Fetch relevant patterns from knowledge base | Pattern selection stage |  
-| cex_doctor.py | Debug and optimize pattern logic | Error detection or performance issues |  
-| cex_validator.py | Check pattern consistency with rules | Pre-deployment validation |  
-| cex_analyzer.py | Extract insights from pattern usage | Post-deployment analysis |  
+# Tools -- collaboration-pattern-builder
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| val_consistency_checker.py | Ensure pattern alignment with domain rules | Validation cycles |  
-| val_performance_monitor.py | Track pattern efficiency in real-time | Runtime monitoring |  
-| val_compliance_scanner.py | Verify adherence to collaboration standards | Audits or regulatory checks |  
+## Tool Registry
 
-## External References  
-- CEX Framework (https://cex.io)  
-- Collaboration API (v2.1)  
-- Pattern Library (GitHub repo: pattern-libs)
+| Tool | Status | Tag | Purpose |
+|------|--------|-----|---------|
+| brain_query | CONDITIONAL | [MCP] | Discover existing collaboration topologies and coordination patterns |
+| Read | ACTIVE | [FS] | Read SCHEMA.md, OUTPUT_TEMPLATE.md, sibling examples |
+| Glob | ACTIVE | [FS] | Find existing p12_collab_* files in the pool |
+| Grep | ACTIVE | [FS] | Search for topology types or agent role patterns |
+| Write | ACTIVE | [FS] | Produce the final collaboration_pattern artifact |
+| Edit | ACTIVE | [FS] | Patch frontmatter or body sections during VALIDATE phase |
+
+## Tool Descriptions
+
+### brain_query [MCP] -- CONDITIONAL
+
+Available only when the Brain MCP server is running. Use to:
+- Find existing `collaboration_pattern` artifacts that overlap with the requested domain
+- Retrieve topology type vocabulary used in the pool
+- Identify conflict resolution strategies already documented
+
+```
+brain_query("collaboration pattern mesh hierarchical topology")
+brain_query("P12 kind:collaboration_pattern domain:{{domain}}")
+brain_query("multi-agent coordination channel protocol")
+```
+
+Mark results as advisory -- validate topology types against SCHEMA.md before adopting.
+
+### Read [FS] -- ACTIVE
+
+Read before composing:
+- `SCHEMA.md` -- source of truth for all field definitions
+- `OUTPUT_TEMPLATE.md` -- exact frontmatter and body structure to follow
+- `QUALITY_GATES.md` -- gate list to validate against
+- Sibling p12_collab_* files for naming and style reference
+
+### Glob [FS] -- ACTIVE
+
+```
+records/pool/**/p12_collab_*.md
+archetypes/builders/collaboration-pattern-builder/
+```
+
+Use to check for ID collisions before assigning a new `id`.
+
+### Grep [FS] -- ACTIVE
+
+```
+grep pattern: "topology"            -- verify topology vocabulary
+grep pattern: "communication channel"  -- check channel documentation patterns
+grep pattern: "kind: collaboration_pattern"  -- inventory existing patterns
+```
+
+### Write [FS] -- ACTIVE
+
+Final delivery tool. Write the completed artifact to its target path under `records/pool/` or
+the caller-specified output path.
+
+### Edit [FS] -- ACTIVE
+
+Use during VALIDATE phase to patch specific fields (quality score, updated date, topology type)
+without rewriting the full file.
+
+## Data Sources
+
+| Source | Content | When to use |
+|--------|---------|-------------|
+| SCHEMA.md | Field definitions, ID pattern, constraints | Every production run |
+| OUTPUT_TEMPLATE.md | Exact frontmatter + body structure | Every production run |
+| QUALITY_GATES.md | H01-H08 HARD gates | Every validation run |
+| KNOWLEDGE.md | Topology types, consensus algorithms, coordination protocols | When designing agent topology |
+| MEMORY.md | Common mistakes, anti-patterns | When stuck or producing a variant |
+| pool p12_collab_* files | Reference examples | When uncertain about style |
+
+## CEX Pipeline Tools
+
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile .md artifact to .yaml | After Write (F8) |
+| cex_score.py | Peer-review quality scoring | After production (F7) |
+| cex_retriever.py | Discover similar artifacts by TF-IDF | During F3 INJECT |
+| cex_doctor.py | Health check builder ISOs | Before dispatch |
+
+## Tool Permissions
+
+| Category | Tools | Status |
+|----------|-------|--------|
+| ALLOWED | Read, Write, Edit, Bash, Glob, Grep | Explicitly permitted |
+| DENIED | (none) | Explicitly blocked |
+| EFFECTIVE | Bash, Edit, Glob, Grep, Read, Write | ALLOWED minus DENIED |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `tools` |
+| Pillar | P04 |
+| Domain | collaboration_pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

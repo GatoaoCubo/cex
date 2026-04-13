@@ -5,15 +5,16 @@ pillar: P12
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for collaboration_pattern
 quality: null
-title: "Type Builder Collaboration Pattern"
+title: "Type Builder: Collaboration Pattern"
 version: "1.0.0"
-author: wave1_builder_gen
-tags: [collaboration_pattern, builder, type_builder]
-tldr: "Builder identity, capabilities, routing for collaboration_pattern"
+author: n02_reviewer
+tags: [collaboration_pattern, builder, type_builder, P12, coordination, topology, multi-agent]
+keywords: ["collaboration pattern", "coordination topology", "agent roles", "communication channels", "consensus mechanism", "mesh network", "multi-agent coordination", "conflict resolution"]
+tldr: "Builder for collaboration_pattern artifacts: multi-agent topology, named channels, conflict resolution for coordination design"
 domain: "collaboration_pattern construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.88
 ---
 
 ## Identity  
@@ -32,3 +33,17 @@ Triggers: requests for structural collaboration design, conflict in agent coordi
 
 ## Crew Role  
 Acts as the coordination architect in a team, defining how agents interact structurally without specifying execution sequences or handoff rules. Answers questions about pattern suitability, agent role distribution, and systemic alignment. Does NOT handle task-specific workflows, execution timing, or protocol-level handoff mechanics.
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `type_builder` |
+| Pillar | P12 |
+| Domain | collaboration_pattern construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |
