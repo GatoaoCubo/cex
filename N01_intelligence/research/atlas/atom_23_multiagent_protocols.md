@@ -2,7 +2,7 @@
 id: atom_23_multiagent_protocols
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.8
 title: "Multi-Agent Communication Protocols"
 tags: [protocols, multi-agent, framework-atlas]
 date: 2026-04-13

@@ -2,7 +2,7 @@
 id: atom_30_reasoning_thinking
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.8
 title: "Reasoning and Thinking Vocabulary"
 tags: [reasoning, thinking, cot, framework-atlas]
 date: 2026-04-13

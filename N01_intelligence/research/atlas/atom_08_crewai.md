@@ -2,7 +2,7 @@
 id: atom_08_crewai
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.8
 title: "CrewAI Deep Vocabulary Scrape"
 tags: [crewai, agent, framework-atlas]
 date: 2026-04-13

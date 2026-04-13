@@ -2,7 +2,7 @@
 id: atom_31_ml_ontologies
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.8
 title: "ML Ontologies and Taxonomies"
 tags: [ontology, taxonomy, nist, ml-schema, framework-atlas]
 date: 2026-04-13

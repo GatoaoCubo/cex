@@ -2,7 +2,7 @@
 id: atom_21_rag_taxonomy
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.8
 title: "RAG Taxonomy Surveys"
 tags: [rag, retrieval, chunking, framework-atlas]
 date: 2026-04-13
