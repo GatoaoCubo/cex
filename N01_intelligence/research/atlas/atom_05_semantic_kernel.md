@@ -1,0 +1,558 @@
+---
+id: atom_05_semantic_kernel
+kind: knowledge_card
+pillar: P01
+domain: agentic_frameworks
+title: "ATOM-05: Microsoft Semantic Kernel -- Full Vocabulary Atlas"
+version: 1.0.0
+date: 2026-04-13
+quality: 8.8
+tags: [semantic-kernel, microsoft, agent-framework, autogen, vocabulary, atlas]
+sources:
+  - https://learn.microsoft.com/en-us/semantic-kernel/overview/
+  - https://learn.microsoft.com/en-us/semantic-kernel/concepts/kernel
+  - https://learn.microsoft.com/en-us/semantic-kernel/concepts/plugins/
+  - https://learn.microsoft.com/en-us/semantic-kernel/concepts/ai-services/
+  - https://learn.microsoft.com/en-us/semantic-kernel/concepts/enterprise-readiness/filters
+  - https://learn.microsoft.com/en-us/semantic-kernel/concepts/vector-store-connectors/
+  - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/
+  - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-orchestration/
+  - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-types/chat-completion-agent
+  - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-types/assistant-agent
+  - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-types/azure-ai-agent
+  - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-types/responses-agent
+  - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/process/process-framework
+  - https://github.com/microsoft/semantic-kernel
+  - https://cloudsummit.eu/blog/microsoft-agent-framework-production-ready-convergence-autogen-semantic-kernel
+  - https://devblogs.microsoft.com/semantic-kernel/semantic-kernel-roadmap-h1-2025-accelerating-agents-processes-and-integration/
+---
+
+# ATOM-05: Microsoft Semantic Kernel -- Full Vocabulary Atlas
+
+## 1. Framework Identity
+
+| Property | Value |
+|----------|-------|
+| Name | Microsoft Semantic Kernel |
+| GitHub Stars | ~27,700 (Apr 2026) |
+| Languages | C#, Python, Java |
+| License | MIT |
+| First Release | 2023 |
+| Current Status | Production (v1.x+), part of Microsoft Agent Framework |
+| Parent Umbrella | Microsoft Agent Framework (Oct 2025 merger with AutoGen) |
+| Positioning | Model-agnostic SDK for building, orchestrating, and deploying AI agents |
+
+Semantic Kernel is a lightweight, open-source development kit that serves as enterprise-grade middleware
+for integrating LLMs into applications. It provides the Kernel (DI container) at its center, with
+Plugins, AI Services, Filters, Memory (Vector Stores), Agent Framework, and Process Framework as
+the major subsystems. Microsoft and Fortune 500 companies use it in production.
+
+---
+
+## 2. Full Type Registry
+
+### 2.1 Core Kernel
+
+| Term | Type | Description |
+|------|------|-------------|
+| `Kernel` | Class | Central DI container managing all services and plugins. The hub of every SK app. |
+| `Kernel.CreateBuilder()` | Factory | .NET builder pattern for configuring a Kernel before `.Build()`. |
+| `Kernel.builder()` | Factory | Java builder pattern. |
+| `KernelArguments` | Class | Parameter bag passed to functions and agents for execution settings. |
+| `KernelPluginCollection` | Class | Collection of plugins registered with the kernel. |
+| `KernelPluginFactory` | Class | Factory for creating `KernelPlugin` instances from objects, types, or OpenAPI specs. |
+| `KernelPlugin` | Class | A named group of `KernelFunction`s exposed to the AI for orchestration. |
+| `KernelFunction` | Class | Single callable unit within a plugin -- native code, prompt, or imported from OpenAPI/MCP. |
+| `@kernel_function` | Decorator (Python) | Marks a method as a kernel function with description metadata. |
+| `[KernelFunction]` | Attribute (C#) | Marks a method as a kernel function. |
+| `@DefineKernelFunction` | Annotation (Java) | Java equivalent of `@kernel_function`. |
+| `@KernelFunctionParameter` | Annotation (Java) | Metadata for function parameters in Java. |
+| `[Description]` | Attribute (C#) | Semantic description for functions/parameters consumed by the LLM. |
+| `FunctionChoiceBehavior` | Class | Controls how the LLM selects functions -- `Auto()`, `Required()`, `None()`. |
+| `FunctionChoiceBehavior.Auto()` | Config | Lets the LLM autonomously decide which functions to call. |
+| `FunctionCallContent` | Class | Represents a function call request from the LLM. |
+| `FunctionResultContent` | Class | Represents the result of a function call returned to the LLM. |
+| `FunctionResult` | Class | Wrapper for the result of a `KernelFunction` invocation. |
+| `InvocationContext` | Class (Java) | Wraps invocation settings including `ToolCallBehavior` and return mode. |
+| `InvocationReturnMode` | Enum (Java) | Controls what the agent returns -- e.g., `LAST_MESSAGE_ONLY`. |
+| `ToolCallBehavior` | Class (Java) | Java equivalent of `FunctionChoiceBehavior`. |
+
+### 2.2 AI Services
+
+| Term | Type | Description |
+|------|------|-------------|
+| `IChatCompletionService` | Interface (C#) | Core service for chat-based inference. |
+| `ChatCompletionService` | Interface (Java) | Java chat completion contract. |
+| `AzureChatCompletion` | Connector | Azure OpenAI chat completion connector. |
+| `OpenAIChatCompletion` | Connector | OpenAI direct API connector. |
+| Text Generation | Service | Text completion (non-chat) service. |
+| Embedding Generation | Service (Experimental) | Vector embedding generation. |
+| Text-to-Image | Service (Experimental) | Image generation from text prompts. |
+| Image-to-Text | Service (Experimental) | Image understanding / captioning. |
+| Text-to-Audio | Service (Experimental) | TTS service. |
+| Audio-to-Text | Service (Experimental) | STT / transcription service. |
+| Realtime | Service (Experimental, Python only) | Real-time streaming audio/video. |
+| Service Selector | Pattern | Logic for choosing among multiple registered AI services. |
+| `serviceId` | Parameter | String identifier for targeting a specific service in multi-service kernels. |
+
+### 2.3 Prompt Templates
+
+| Term | Type | Description |
+|------|------|-------------|
+| `PromptTemplateConfig` | Class | Configuration: template text, format, input variables, execution settings. |
+| `KernelPromptTemplate` | Class | Wraps a `PromptTemplateConfig` for rendering. |
+| `HandlebarsPromptTemplate` | Class | Handlebars-based template renderer. |
+| `InputVariable` | Class | Declares a named input with description, type, default, JSON schema. |
+| `PromptExecutionSettings` | Class | Base execution settings (temperature, top_p, etc.). |
+| `OpenAIPromptExecutionSettings` | Class | OpenAI-specific settings including `FunctionChoiceBehavior`. |
+| `AzureChatPromptExecutionSettings` | Class | Azure-specific execution settings. |
+| Template Formats | Enum-like | `"semantic-kernel"` (built-in), `"handlebars"`, `"jinja2"`, `"liquid"`. |
+| `{{$variable}}` | Syntax | SK template variable interpolation. |
+| `{{plugin.function}}` | Syntax | SK template function call. |
+
+### 2.4 Chat History & Content
+
+| Term | Type | Description |
+|------|------|-------------|
+| `ChatHistory` | Class | Ordered list of chat messages for multi-turn conversations. |
+| `ChatMessageContent` | Class | Single message with role, content, and metadata. |
+| `StreamingChatMessageContent` | Class | Streaming variant for token-by-token delivery. |
+| `AuthorRole` | Enum | `User`, `Assistant`, `System`, `Tool`. |
+| `AnnotationContent` | Class | Annotation items (e.g., Bing grounding links). |
+| `StreamingAnnotationContent` | Class | Streaming variant of annotation content. |
+| `AgentResponseItem<T>` | Class | Wraps agent response with thread context. |
+
+### 2.5 Filters (Middleware Pipeline)
+
+| Term | Type | Description |
+|------|------|-------------|
+| `IFunctionInvocationFilter` | Interface (C#) | Runs on every `KernelFunction` invocation -- logging, caching, error handling. |
+| `IPromptRenderFilter` | Interface (C#) | Runs before prompt rendering -- PII redaction, semantic caching, prompt modification. |
+| `IAutoFunctionInvocationFilter` | Interface (C#) | Runs during automatic function calling -- early termination, iteration control. |
+| `FunctionInvocationContext` | Class | Context passed to function invocation filters. |
+| `PromptRenderContext` | Class | Context passed to prompt render filters. |
+| `AutoFunctionInvocationContext` | Class | Context for auto-function filters -- includes chat history, function list, iteration count. |
+| `FilterTypes` | Enum (Python) | `FUNCTION_INVOCATION`, `PROMPT_RENDERING`, `AUTO_FUNCTION_INVOCATION`. |
+| `context.Terminate` | Property | Set `true` to stop auto-function-calling loop. |
+| `context.IsStreaming` | Property | Indicates streaming vs. non-streaming invocation mode. |
+| `context.RenderedPrompt` | Property | The rendered prompt text (modifiable in prompt render filter). |
+| `kernel.add_filter()` | Method (Python) | Registers a filter function with the kernel. |
+| `@kernel.filter()` | Decorator (Python) | Decorator-based filter registration. |
+
+### 2.6 Vector Store Connectors (Memory)
+
+| Term | Type | Description |
+|------|------|-------------|
+| `VectorStore` | Abstract Class | Cross-collection operations: list names, get collections. |
+| `VectorStoreCollection<TKey, TRecord>` | Abstract Class (C#) | Single collection: CRUD + vector search. Inherits `IVectorSearchable<TRecord>`. |
+| `IVectorSearchable<TRecord>` | Interface (C#) | Vector search capability -- `SearchAsync()`. |
+| `VectorSearchBase` | Class (Python) | Base for vector search with `VectorizedSearchMixin`, `VectorizableTextSearchMixin`. |
+| `VectorizedSearch<Record>` | Interface (Java) | Vector search by embedding vector. |
+| `VectorizableTextSearch<Record>` | Interface (Java) | Vector search by text (DB generates embedding). |
+| `VectorStoreField` | Annotation (Python) | Marks model fields as `'key'`, `'data'`, or `'vector'`. |
+| `[VectorStoreKey]` | Attribute (C#) | Marks the key field. |
+| `[VectorStoreData]` | Attribute (C#) | Marks a data field. Options: `IsIndexed`, `IsFullTextIndexed`. |
+| `[VectorStoreVector]` | Attribute (C#) | Marks a vector field with `Dimensions`, `DistanceFunction`, `IndexKind`. |
+| `@VectorStoreRecordKey` | Annotation (Java) | Java key field marker. |
+| `@VectorStoreRecordData` | Annotation (Java) | Java data field marker. |
+| `@VectorStoreRecordVector` | Annotation (Java) | Java vector field marker. |
+| `@vectorstoremodel` | Decorator (Python) | Marks a dataclass as a vector store model. |
+| `DistanceFunction` | Enum | `CosineSimilarity`, `DotProduct`, `EuclideanDistance`, etc. |
+| `IndexKind` | Enum | `Hnsw`, `Flat`, `IvfFlat`, etc. |
+| `VectorStoreRecordDefinition` | Class | Alternative to annotations for schema definition. |
+| `EnsureCollectionExistsAsync()` | Method | Creates collection if it does not exist. |
+| `Upsert` / `Get` / `Delete` | Methods | Standard CRUD operations on records. |
+| `SearchAsync` | Method | Perform vector similarity search. |
+| `create_search_function()` | Method (Python) | Creates a kernel function from a vector collection for RAG. |
+
+**Out-of-the-box connectors:**
+
+| Connector | Status |
+|-----------|--------|
+| Azure AI Search | GA |
+| Azure Cosmos DB (MongoDB, NoSQL) | Preview |
+| Chroma | Preview |
+| Elasticsearch | Preview |
+| Faiss | Preview |
+| In-Memory | Preview |
+| Milvus | Preview |
+| MongoDB | Preview |
+| Pinecone | Preview |
+| Postgres | Preview |
+| Qdrant | Preview |
+| Redis | Preview |
+| SQL Server | Preview |
+| SQLite | Preview |
+| Volatile (In-Memory) | Preview |
+| Weaviate | Preview |
+| JDBC (MySQL, PostgreSQL) | Preview (Java) |
+
+**Legacy memory stores** (deprecated, replaced by Vector Store abstraction):
+`IMemoryStore`, `MemoryRecord`, `ISemanticTextMemory` -- superseded by `VectorStore` + `VectorStoreCollection`.
+
+### 2.7 Enterprise Readiness
+
+| Term | Description |
+|------|-------------|
+| Telemetry | OpenTelemetry integration for distributed tracing. |
+| Hooks | Legacy event-based extensibility (replaced by Filters). |
+| Filters | Primary middleware pipeline for security, logging, responsible AI. |
+| Responsible AI | PII detection/redaction, content safety, prompt injection protection. |
+| Semantic Caching | Cache LLM responses by semantic similarity using filters + vector stores. |
+
+### 2.8 MCP Integration
+
+| Term | Description |
+|------|-------------|
+| `kernel.as_mcp_server()` | Exposes kernel functions as an MCP server (Python). |
+| MCP Plugin Import | Import plugins from an MCP server as native SK plugins. |
+| `KernelPromptTemplate` as MCP Prompt | Expose prompt templates as MCP Prompts. |
+| Stdio / SSE transport | Supported MCP transport protocols. |
+
+---
+
+## 3. Agent Framework (Detailed)
+
+### 3.1 Agent Types
+
+| Agent Type | Class | Backend | Status |
+|------------|-------|---------|--------|
+| Chat Completion Agent | `ChatCompletionAgent` | Any chat completion service | Release Candidate |
+| OpenAI Assistant Agent | `OpenAIAssistantAgent` | OpenAI Assistants API | Release Candidate |
+| Azure Assistant Agent | `AzureAssistantAgent` | Azure OpenAI Assistants API | Release Candidate |
+| Azure AI Agent | `AzureAIAgent` | Azure AI Agent Service (Foundry) | Experimental |
+| OpenAI Responses Agent | `OpenAIResponsesAgent` | OpenAI Responses API | Experimental |
+| Azure Responses Agent | `AzureResponsesAgent` | Azure OpenAI Responses API | Experimental |
+
+### 3.2 Agent Core Abstractions
+
+| Term | Type | Description |
+|------|------|-------------|
+| `Agent` | Base Class | Abstract base for all agents with `Id`, `Name`, `Instructions`. |
+| `AgentThread` | Abstract | Thread abstraction for conversation state management. |
+| `ChatHistoryAgentThread` | Class | Local in-memory thread for `ChatCompletionAgent`. |
+| `OpenAIAssistantAgentThread` | Class | Remote thread backed by OpenAI Assistants API. |
+| `AzureAIAgentThread` | Class | Thread backed by Azure AI Agent Service. |
+| `AssistantAgentThread` | Class (Python) | Alias/convenience for OpenAI assistant threads. |
+| `ResponsesAgentThread` | Class | Thread for Responses API with `previous_response_id` chaining. |
+| `AgentRegistry` | Class | Factory for creating agents from declarative YAML specs. |
+| `AgentResponseItem<T>` | Class | Response wrapper including thread reference. |
+| `invoke()` | Method | Non-streaming agent invocation returning `AsyncIterable`. |
+| `invoke_stream()` | Method | Streaming variant returning `AsyncIterable[StreamingChatMessageContent]`. |
+| `get_response()` | Method (Python) | Convenience single-response method. |
+| `on_intermediate_message` | Callback | Receives intermediate `FunctionCallContent`/`FunctionResultContent` during invocation. |
+
+### 3.3 Agent Tools (AzureAIAgent)
+
+| Tool | Class/Type | Description |
+|------|-----------|-------------|
+| Code Interpreter | `CodeInterpreterTool` / `CodeInterpreterToolDefinition` | Sandboxed Python execution. |
+| File Search | `FileSearchTool` / `FileSearchToolDefinition` | RAG over uploaded files via vector stores. |
+| OpenAPI | `OpenApiTool` / `OpenApiToolDefinition` | External API integration via OpenAPI spec. |
+| Azure AI Search | `AzureAISearchTool` / `AzureAISearchToolDefinition` | Search over Azure AI Search indices. |
+| Bing Grounding | `BingGroundingTool` | Web search grounding with citation annotations. |
+| Azure Functions | Integration | Serverless function execution. |
+| Kernel Plugins | `plugins=[...]` | SK plugins registered as agent tools. |
+
+### 3.4 Agent Tools (OpenAIResponsesAgent)
+
+| Tool | Description |
+|------|-------------|
+| Web Search | Built-in web search capability. |
+| File Search | File-based RAG. |
+| Computer Use | Experimental computer control tool. |
+| Kernel Plugins | SK plugins as function tools. |
+
+### 3.5 Declarative Agent Specs
+
+Agents can be defined in YAML and instantiated via `AgentRegistry.create_from_yaml()`:
+
+```yaml
+type: chat_completion_agent  # or openai_assistant, foundry_agent, openai_responses
+name: AgentName
+description: Agent description
+instructions: System prompt instructions
+tools:
+  - id: PluginName.function_name
+    type: function
+model:
+  id: ${ModelId}
+  options:
+    temperature: 0.7
+```
+
+Declarative `type` values: `chat_completion_agent`, `openai_assistant`, `foundry_agent`, `openai_responses`.
+
+---
+
+## 4. Agent Orchestration Patterns
+
+| Pattern | Class | Description |
+|---------|-------|-------------|
+| Concurrent | `ConcurrentOrchestration` | Broadcasts task to all agents; collects results independently. |
+| Sequential | `SequentialOrchestration` | Passes output from one agent to the next in order. |
+| Handoff | `HandoffOrchestration` | Dynamically passes control based on context or rules. |
+| Group Chat | `GroupChatOrchestration` | All agents in a shared conversation with a group manager. |
+| Magentic | `MagenticOrchestration` | Inspired by MagenticOne -- Orchestrator coordinates specialist workers. |
+
+### Orchestration Infrastructure
+
+| Term | Type | Description |
+|------|------|-------------|
+| `InProcessRuntime` | Class | In-process agent runtime for orchestration execution. |
+| `OrchestrationResult<T>` | Class | Wrapper for orchestration output. |
+| `runtime.start()` / `runtime.StartAsync()` | Method | Starts the orchestration runtime. |
+| `runtime.stop_when_idle()` / `runtime.RunUntilIdleAsync()` | Method | Waits for all agents to complete. |
+| `orchestration.invoke()` / `InvokeAsync()` | Method | Submits a task to the orchestration. |
+
+### Legacy Multi-Agent (deprecated, replaced by orchestration)
+
+| Term | Status | Description |
+|------|--------|-------------|
+| `AgentGroupChat` | Legacy | Group chat container for multi-agent collaboration. |
+| `AgentChannel` | Legacy | Communication channel between agents. |
+| `SelectionStrategy` | Legacy | Strategy for selecting next agent speaker. |
+| `TerminationStrategy` | Legacy | Strategy for ending group chat. |
+
+**Status**: Orchestration patterns are **Experimental**. All share a unified construction/invocation interface.
+
+---
+
+## 5. Process Framework
+
+| Term | Type | Description |
+|------|------|-------------|
+| Process | Concept | A structured sequence of steps achieving a business goal. |
+| Step | Concept | An activity with defined inputs/outputs within a process. |
+| Pattern | Concept | The sequence type dictating how steps execute. |
+| `KernelProcess` | Class | Runtime representation of a process. |
+| `KernelProcessStep` | Class | Runtime representation of a step. |
+| `ProcessBuilder` | Class | Fluent builder for defining process topology. |
+| Event-Driven Architecture | Pattern | Events trigger transitions between steps. |
+| State Management | Feature | Steps can maintain and persist state. |
+| Kernel Functions in Steps | Feature | Steps invoke one or more `KernelFunction`s. |
+| Open Telemetry | Feature | Full audit trail via OpenTelemetry. |
+| Reusability | Feature | Steps and processes are reusable across applications. |
+
+**Status**: Experimental. GA targeted Q2 2026.
+
+---
+
+## 6. AutoGen Merger -> Microsoft Agent Framework
+
+### Timeline
+
+| Date | Event |
+|------|-------|
+| Oct 1, 2025 | Microsoft Agent Framework public preview -- merges AutoGen + Semantic Kernel |
+| Oct 2025 | AutoGen enters maintenance mode (bug fixes only, no new features) |
+| May 2025 | Azure AI Foundry Agent Service GA (10,000+ orgs) |
+| Q1 2026 | Agent Framework 1.0 GA target (stable APIs, SOC 2, HIPAA) |
+| Q2 2026 | Process Framework GA |
+
+### What Came From Where
+
+| From AutoGen | From Semantic Kernel |
+|-------------|---------------------|
+| Multi-agent orchestration patterns | Kernel (DI container) |
+| Group chat collaboration | Plugin architecture |
+| Dynamic workflow generation | AI service connectors |
+| MagenticOne pattern (Orchestrator + specialists) | Thread-based state management |
+| Event-driven multi-agent models | Enterprise integration (telemetry, filters) |
+| Research-grade experimentation patterns | Production-grade stability and SLAs |
+
+### Vocabulary Migration
+
+| Old AutoGen Term | Old SK Term | New Agent Framework Term |
+|-----------------|-------------|-------------------------|
+| `AssistantAgent` | -- | `ChatAgent` / `AzureAIAgent` |
+| `FunctionTool` | `KernelFunction` | `@ai_function` / `KernelFunction` (still valid) |
+| Event-driven models | -- | Graph-based Workflow APIs |
+| -- | `Kernel` | Agent abstraction (Kernel still exists under the hood) |
+| -- | Plugins | Tools (via MCP or OpenAPI) |
+| Group chat | `AgentGroupChat` | `GroupChatOrchestration` |
+| -- | Conversations/Memory | Agent Threads |
+
+### AG2 Fork
+
+AG2 is the community fork of AutoGen 0.2 that inherited:
+- `autogen` and `pyautogen` PyPI packages
+- 20,000+ member Discord community
+- Backward compatibility with AutoGen 0.2 API
+- Independent governance and roadmap
+
+---
+
+## 7. NuGet / PyPI Package Map
+
+### .NET Packages
+
+| Package | Contents |
+|---------|----------|
+| `Microsoft.SemanticKernel` | Core Kernel, plugins, services, prompts |
+| `Microsoft.SemanticKernel.Agents.Abstractions` | Agent base abstractions |
+| `Microsoft.SemanticKernel.Agents.Core` | `ChatCompletionAgent` |
+| `Microsoft.SemanticKernel.Agents.OpenAI` | `OpenAIAssistantAgent` |
+| `Microsoft.SemanticKernel.Agents.AzureAI` | `AzureAIAgent` |
+| `Microsoft.SemanticKernel.Agents.Orchestration` | Orchestration patterns |
+| `Microsoft.SemanticKernel.Agents.Runtime.InProcess` | `InProcessRuntime` |
+| `Microsoft.SemanticKernel.Connectors.OpenAI` | OpenAI connector |
+| `Microsoft.SemanticKernel.Connectors.Qdrant` | Qdrant vector store |
+| `Microsoft.Extensions.VectorData.Abstractions` | Vector Store abstractions |
+
+### Python Package
+
+| Package | Contents |
+|---------|----------|
+| `semantic-kernel` | Everything: Kernel, agents, connectors, vector stores, orchestration |
+| `semantic_kernel.agents` | All agent types and orchestration |
+| `semantic_kernel.connectors.ai.open_ai` | OpenAI/Azure OpenAI connectors |
+| `semantic_kernel.data.vector` | Vector store abstractions |
+| `semantic_kernel.functions` | `@kernel_function`, `KernelArguments` |
+| `semantic_kernel.filters` | Filter types and contexts |
+| `semantic_kernel.prompt_template` | Template config and rendering |
+| `semantic_kernel.contents` | Chat content types |
+
+### Java Packages
+
+| Package | Contents |
+|---------|----------|
+| `semantickernel-api` | Core abstractions |
+| `semantickernel-agents-core` | `ChatCompletionAgent` |
+| `semantickernel-aiservices-openai` | OpenAI service integration |
+
+---
+
+## 8. Mapping to CEX Pillars
+
+| CEX Pillar | SK Equivalent | Key Terms |
+|------------|---------------|-----------|
+| **P01 Knowledge** | Vector Store Connectors, Memory | `VectorStore`, `VectorStoreCollection`, RAG, embedding generation, `ISemanticTextMemory` (legacy) |
+| **P02 Model** | AI Services, Kernel | `Kernel`, `IChatCompletionService`, service selectors, model connectors |
+| **P03 Prompt** | Prompt Templates | `PromptTemplateConfig`, `KernelPromptTemplate`, `HandlebarsPromptTemplate`, template formats |
+| **P04 Tools** | Plugins, MCP | `KernelPlugin`, `@kernel_function`, `kernel.as_mcp_server()`, OpenAPI imports |
+| **P05 Output** | Agent Responses | `ChatMessageContent`, `StreamingChatMessageContent`, `AgentResponseItem` |
+| **P06 Schema** | Data Models, Type Annotations | `VectorStoreField`, `[VectorStoreKey]`, `InputVariable`, JSON schema |
+| **P07 Evaluation** | Filters, Quality | `IPromptRenderFilter`, `IAutoFunctionInvocationFilter`, content safety filters |
+| **P08 Architecture** | Agent Framework | `Agent`, `AgentThread`, orchestration patterns, Process Framework |
+| **P09 Config** | Execution Settings | `PromptExecutionSettings`, `KernelArguments`, service configuration, `serviceId` |
+| **P10 Memory** | Vector Store + Chat History | `ChatHistory`, `VectorStoreCollection`, `AgentThread` (remote state) |
+| **P11 Feedback** | Filters Pipeline | `IFunctionInvocationFilter`, semantic caching, retry filters, PII detection |
+| **P12 Orchestration** | Agent Orchestration + Process Framework | `SequentialOrchestration`, `ConcurrentOrchestration`, `HandoffOrchestration`, `GroupChatOrchestration`, `MagenticOrchestration`, `InProcessRuntime` |
+
+---
+
+## 9. Complete Vocabulary Index (Alphabetical)
+
+| Term | Category | First Appeared |
+|------|----------|---------------|
+| `Agent` | Agent Framework | 2024 |
+| `AgentChannel` | Agent Framework (legacy) | 2024 |
+| `AgentGroupChat` | Agent Framework (legacy) | 2024 |
+| `AgentRegistry` | Agent Framework | 2025 |
+| `AgentResponseItem<T>` | Agent Framework | 2025 |
+| `AgentThread` | Agent Framework | 2025 |
+| `AnnotationContent` | Content Types | 2025 |
+| `AssistantAgentThread` | Agent Types | 2025 |
+| `AuthorRole` | Content Types | 2023 |
+| `AutoFunctionInvocationContext` | Filters | 2024 |
+| `AzureAIAgent` | Agent Types | 2025 |
+| `AzureAIAgentSettings` | Agent Config | 2025 |
+| `AzureAIAgentThread` | Agent Types | 2025 |
+| `AzureAISearchTool` | Agent Tools | 2025 |
+| `AzureAssistantAgent` | Agent Types (Python) | 2024 |
+| `AzureChatCompletion` | AI Services | 2023 |
+| `AzureChatPromptExecutionSettings` | Prompt Config | 2023 |
+| `AzureResponsesAgent` | Agent Types | 2025 |
+| `BingGroundingTool` | Agent Tools | 2025 |
+| `ChatCompletionAgent` | Agent Types | 2024 |
+| `ChatHistory` | Content Types | 2023 |
+| `ChatHistoryAgentThread` | Agent Types | 2025 |
+| `ChatMessageContent` | Content Types | 2023 |
+| `CodeInterpreterTool` | Agent Tools | 2024 |
+| `ConcurrentOrchestration` | Orchestration | 2025 |
+| `DistanceFunction` | Vector Store | 2024 |
+| `FileSearchTool` | Agent Tools | 2024 |
+| `FilterTypes` | Filters (Python) | 2024 |
+| `FunctionCallContent` | Content Types | 2024 |
+| `FunctionChoiceBehavior` | Kernel | 2024 |
+| `FunctionInvocationContext` | Filters | 2024 |
+| `FunctionResult` | Kernel | 2023 |
+| `FunctionResultContent` | Content Types | 2024 |
+| `GroupChatOrchestration` | Orchestration | 2025 |
+| `HandlebarsPromptTemplate` | Prompt Templates | 2024 |
+| `HandoffOrchestration` | Orchestration | 2025 |
+| `IAutoFunctionInvocationFilter` | Filters (C#) | 2024 |
+| `IChatCompletionService` | AI Services (C#) | 2023 |
+| `IFunctionInvocationFilter` | Filters (C#) | 2024 |
+| `IPromptRenderFilter` | Filters (C#) | 2024 |
+| `IVectorSearchable<T>` | Vector Store (C#) | 2024 |
+| `InProcessRuntime` | Orchestration | 2025 |
+| `IndexKind` | Vector Store | 2024 |
+| `InputVariable` | Prompt Templates | 2023 |
+| `InvocationContext` | Kernel (Java) | 2024 |
+| `Kernel` | Core | 2023 |
+| `KernelArguments` | Core | 2023 |
+| `KernelFunction` | Core | 2023 |
+| `KernelPlugin` | Core | 2023 |
+| `KernelPluginCollection` | Core | 2023 |
+| `KernelPluginFactory` | Core | 2023 |
+| `KernelProcess` | Process Framework | 2024 |
+| `KernelProcessStep` | Process Framework | 2024 |
+| `KernelPromptTemplate` | Prompt Templates | 2023 |
+| `MagenticOrchestration` | Orchestration | 2025 |
+| `OpenAIAssistantAgent` | Agent Types | 2024 |
+| `OpenAIAssistantAgentThread` | Agent Types | 2025 |
+| `OpenAIChatCompletion` | AI Services | 2023 |
+| `OpenAIChatPromptExecutionSettings` | Prompt Config | 2023 |
+| `OpenAIResponsesAgent` | Agent Types | 2025 |
+| `OpenApiTool` | Agent Tools | 2025 |
+| `OrchestrationResult<T>` | Orchestration | 2025 |
+| `ProcessBuilder` | Process Framework | 2024 |
+| `PromptExecutionSettings` | Prompt Config | 2023 |
+| `PromptRenderContext` | Filters | 2024 |
+| `PromptTemplateConfig` | Prompt Templates | 2023 |
+| `ResponsesAgentThread` | Agent Types | 2025 |
+| `SelectionStrategy` | Agent Framework (legacy) | 2024 |
+| `SequentialOrchestration` | Orchestration | 2025 |
+| `StreamingChatMessageContent` | Content Types | 2023 |
+| `TerminationStrategy` | Agent Framework (legacy) | 2024 |
+| `ToolCallBehavior` | Kernel (Java) | 2024 |
+| `VectorStore` | Vector Store | 2024 |
+| `VectorStoreCollection` | Vector Store | 2024 |
+| `VectorStoreField` | Vector Store (Python) | 2024 |
+| `VectorStoreRecordDefinition` | Vector Store | 2024 |
+| `@kernel_function` | Core (Python) | 2023 |
+| `@vectorstoremodel` | Vector Store (Python) | 2024 |
+| `kernel.as_mcp_server()` | MCP Integration | 2025 |
+
+---
+
+## 10. Key Design Principles
+
+1. **Kernel as DI Container**: Everything flows through the Kernel -- services, plugins, filters. Lightweight, transient, model-agnostic.
+2. **Plugin = Semantic Function Group**: Not just code -- plugins carry semantic descriptions for LLM function calling. Native, OpenAPI, and MCP sources.
+3. **Filters = Middleware**: Three-layer pipeline (function invocation, prompt render, auto-function invocation) replaces old hooks. Enterprise security layer.
+4. **Thread Abstraction**: Unified `AgentThread` interface hides backend differences (local, OpenAI, Azure, Responses API).
+5. **Orchestration Patterns**: Technology-agnostic coordination (Sequential, Concurrent, Handoff, Group Chat, Magentic) with unified invoke interface.
+6. **Vector Store Abstraction**: Model-first approach with annotations. Swap between 16+ database backends without code changes.
+7. **Declarative Agents**: YAML specs for portable, auditable agent definitions. Runtime-resolved tools and plugins.
+8. **MCP Native**: Bidirectional MCP -- export kernel as MCP server, import MCP servers as plugins.
+
+---
+
+## 11. Comparison: SK vs. CEX Architecture
+
+| Aspect | Semantic Kernel | CEX |
+|--------|----------------|-----|
+| Central Hub | `Kernel` (DI container) | `N07` (Orchestrator nucleus) |
+| Agent Definition | Agent classes + YAML specs | Builder ISOs (13 per kind) + agent cards |
+| Plugin System | `KernelPlugin` + `@kernel_function` | Builders (126) + `_tools/*.py` (79) |
+| Orchestration | 5 patterns (Concurrent, Sequential, Handoff, GroupChat, Magentic) | Grid dispatch + wave-based multi-nucleus |
+| Memory | Vector Store Connectors (16+ backends) | `P10_memory/` + `cex_retriever.py` (TF-IDF) |
+| Quality Gate | Filters pipeline | 8F F7 GOVERN (3-layer scoring) |
+| Template System | PromptTemplateConfig (SK/Handlebars/Jinja2/Liquid) | Prompt Compiler (`p03_pc_cex_universal.md`) |
+| Process Automation | Process Framework (Step/Process/Event) | 8F Pipeline (F1-F8) |
+| State Management | AgentThread (local/remote) | `.cex/runtime/` (handoffs, signals, PIDs) |
+| Middleware | 3 filter types | Pre/post hooks (`cex_hooks.py`) |
+| Multi-Model | Service selector + multiple AI services | `nucleus_models.yaml` + `cex_router.py` |

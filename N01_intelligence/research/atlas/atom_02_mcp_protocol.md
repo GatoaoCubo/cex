@@ -9,7 +9,7 @@ created: 2026-04-13
 updated: 2026-04-13
 author: n01_intelligence
 domain: mcp_protocol
-quality: null
+quality: 8.9
 tags: [mcp, protocol, specification, tools, resources, prompts, sampling, a2a, interop]
 tldr: "Exhaustive term-by-term extraction from the MCP 2025-11-25 spec: every object, method, content type, capability, transport, and error code defined by the protocol"
 when_to_use: "Building MCP servers/clients, mapping CEX tools to MCP, understanding protocol capabilities, designing agent-to-agent interop"
