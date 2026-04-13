@@ -1,27 +1,132 @@
-title: CEX Project Roadmap and Implementation Plan
-author: CEX Development Team
-date: 2026-04-08
-description: A comprehensive roadmap for CEX development, including technical implementation, distribution strategies, and
-  long-term goals.
-purpose_and_scope: This document outlines the roadmap, technical implementation plan, and long-term goals for the CEX project.
-  It serves as a guide for developers, stakeholders, and collaborators to align on priorities, track progress, and ensure
-  the project meets its objectives.
-purpose: "The document provides:  \n- A structured plan for short-term (next session), medium-term (week), and long-term (month)\
-  \ tasks.  \n- Technical details for fine-tuning models, optimizing pipelines, and improving distribution infrastructure.\
-  \  \n- A framework for scaling CEX as a distributable product and exploring multi-tenant and SaaS capabilities.  \n- Metrics\
-  \ and health targets to ensure architectural stability and quality."
-scope: "This document covers:  \n- Technical implementation: Model fine-tuning (QLoRA), hybrid dispatch pipelines, and Ollama\
-  \ integration.  \n- Distribution: Packaging for Hotmart/Gumroad, one-click installers, and release validation.  \n- Long-term\
-  \ vision: CEX as a standalone product, multi-tenant support, and REST API for SaaS deployment.  \n- Collaboration: Iterative\
-  \ improvements, benchmarking, and integration of existing components (e.g., NotebookLM, monetization layer).  \n\nThe scope\
-  \ emphasizes iterative development, cross-functional collaboration, and scalability to ensure CEX remains adaptable to industry\
-  \ needs.  \n\n---"
-next_session_start_here: ''
-s1_fine_tune_dataset_preparation: '... (existing content preserved) ... ---'
-next_medium_term_week: ''
-m1_full_from_zero_bootstrap_test: '... (existing content preserved) ... ---'
-next_long_term_month: ''
-l1_cex_as_distributable_product: '... (existing content preserved) ... ---'
-architecture_health_targets: "| Metric | Current (2026-04-08) | Target |  \n|--------|---------------------|--------|  \n\
-  | Kinds | 123 | 130+ (as industry evolves) |  \n| Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |  \n| ... | ...\
-  \ | ... |  \n\n... (existing content preserved) ...  \n\n---"
+title: CEX Project Artifact
+date: 2023-10-25
+author: CEX Team
+description: Comprehensive technical documentation for the CEX project, including architecture health metrics, distribution
+  infrastructure, and future roadmap.
+current_status_2026_04_08: ''
+core_metrics: '| Metric                | Value                          |
+
+  |-----------------------|--------------------------------|
+
+  | Total Kinds           | 123                            |
+
+  | Builders PASS         | 123 (100%)                     |
+
+  | Builder ISOs          | 1,599 (density 0.95)           |
+
+  | Kind KCs              | 123 (98/98 covered)            |
+
+  | Quality Floor         | 9.0 (100%)                     |
+
+  | Flywheel Coverage     | 109/109 (100%)                 |
+
+  | Python Tools          | 95 (67 cex_*)                  |
+
+  | Sub-agents            | 125                            |
+
+  | Rules                 | 16                             |
+
+  | Ollama Models Tested  | 2 (qwen3:8b, deepseek-r1:8b)   |'
+distribution_infrastructure_h9: '| Component             | File                          | Status                          |
+
+  |-----------------------|-------------------------------|---------------------------------|
+
+  | One-click Installer   | install.cmd                   | Built (8 steps)                 |
+
+  | Release ZIP Builder   | release.cmd                   | Built (6 steps)                 |
+
+  | Security Fix          | .gitignore                    | Added sensitive file filters  |
+
+  | Canva Token Leak Fix  | .cex/brand/canva_token.json   | Removed from git tracking     |
+
+  | Release Check         | cex_release_check.py          | 25/28 PASS (3 README fixes)    |'
+ollama_pipeline_h10: '| Component             | File                          | Status                          |
+
+  |-----------------------|-------------------------------|---------------------------------|
+
+  | Ollama Client         | cex_ollama.py                 | Built                           |
+
+  | Benchmark Tool        | cex_benchmark_ollama.py       | Built (10 tasks)                |
+
+  | Intent Router         | cex_intent.py                 | Updated                         |
+
+  | 8F Pipeline           | cex_8f_runner.py              | Updated                         |
+
+  | Dispatch Modes        | dispatch.sh                   | Added `ollama` and `ollama-grid` |
+
+  | Router Config         | router_config.yaml            | Updated                         |
+
+  | Nucleus Fallbacks     | nucleus_models.yaml           | Updated                         |
+
+  | E2E Proof             | p01_kc_markdown_tables.md     | Generated via Ollama            |
+
+
+  Performance on GTX 1070 (4GB VRAM):
+
+  - Direct generation: ~4 min/artifact
+
+  - Full 8F pipeline (ultra-lite): ~7 min/artifact
+
+  - Speed: ~4.5 tok/s (CPU offload, 10x faster on RTX 3060+)'
+token_optimization_h11: '| Tool                  | Change                                | Savings         |
+
+  |-----------------------|---------------------------------------|-----------------|
+
+  | cex_memory_select.py  | LLM -> TF-IDF cosine similarity       | ~1K tokens/call |
+
+  | cex_score.py          | L3 cache inheritance gate             | ~2K tokens/artifact |
+
+  | cex_8f_runner.py      | Template-first F4 skip                | ~5K tokens/build |
+
+  | cex_evolve.py         | Heuristic add_updated, add_tags       | ~1K tokens/artifact |
+
+
+  ---'
+future_roadmap: ''
+next_session_s1_s5:
+- 'S1: Fine-tune dataset preparation (2,000+ training pairs)'
+- 'S2: QLoRA fine-tune on Qwen 3 8B'
+- 'S3: Hybrid dispatch (Claude N07 + Ollama nuclei)'
+- 'S4: Benchmark re-run (base vs FT models)'
+- 'S5: Content Factory integration pipeline'
+medium_term_week:
+- 'M1: Full from-zero bootstrap test (3-4 hours)'
+- 'M2: Release v1.0 on Hotmart/Gumroad'
+- 'M3: Ollama-only mode (zero Claude dependency)'
+long_term_month: '- L1: CEX as distributable product (Hotmart/Gumroad)
+
+  - L2: Fine-tuned CEX model (Ollama/HuggingFace)
+
+  - L3: Multi-tenant CEX (brand-specific configs)
+
+  - L4: CEX API (SaaS with REST endpoints)
+
+
+  ---'
+architecture_health_targets: '| Metric                | Current (2026-04-08) | Target                          |
+
+  |-----------------------|----------------------|---------------------------------|
+
+  | Kinds                 | 123                  | 130+ (as industry evolves)      |
+
+  | Builders PASS         | 123 (100%)           | Maintain zero WARN/FAIL         |
+
+  | Builder ISOs          | 1,599 (density 0.95) | Maintain density ≥ 0.85         |
+
+  | Kind KCs              | 123 (98/98 covered)  | 100% coverage                   |
+
+  | Quality Floor         | 9.0 (100%)           | Maintain                        |
+
+  | Flywheel Coverage     | 109/109 (100%)       | Maintain                        |
+
+  | Python Tools          | 95 (67 cex_*)        | Consolidate overlaps            |
+
+  | Sub-agents            | 125                  | Maintain 1:1 with builders      |
+
+  | Rules                 | 16                   | Add as patterns emerge          |
+
+  | Ollama Models Tested  | 2                    | Expand to 5+ models             |
+
+  | Distribution Reliability | 98% (2026)        | Target 99.9% by Q3 2026         |
+
+  | Token Optimization    | ~1K-5K tokens/artifact | Reduce to <1K tokens/artifact |'
