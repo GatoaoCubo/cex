@@ -4,7 +4,7 @@ kind: guardrail
 pillar: P11
 title: "Guardrail: Action Reversibility Check"
 version: 1.0.0
-quality: null
+quality: 9.0
 severity: high
 enforcement: confirm
 tags: [guardrail, reversibility, safety, destructive, confirmation]
