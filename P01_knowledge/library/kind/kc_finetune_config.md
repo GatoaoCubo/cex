@@ -9,7 +9,7 @@ created: 2026-04-12
 updated: 2026-04-12
 author: n03_builder
 domain: finetune_config
-quality: null
+quality: 9.1
 tags: [finetune_config, p02, CONSTRAIN, kind-kc]
 tldr: "Defines how to fine-tune a base model -- adapter type, hyperparams, dataset, eval metrics, output path"
 when_to_use: "Building, reviewing, or reasoning about finetune_config artifacts"
