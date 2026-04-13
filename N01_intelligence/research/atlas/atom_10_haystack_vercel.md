@@ -2,16 +2,21 @@
 id: atom_10_haystack_vercel
 kind: knowledge_card
 title: "Atom 10: Haystack (deepset) + Vercel AI SDK -- Full Type Registry & CEX Mapping"
-version: 1.0.0
+version: 2.0.0
 date: 2026-04-13
 quality: 8.8
 pillar: P01
-tags: [haystack, deepset, vercel, ai-sdk, pipeline, rag, streaming, agents, type-registry]
+tags: [haystack, deepset, vercel, ai-sdk, pipeline, rag, streaming, agents, type-registry, serialization, middleware, wire-protocol]
 sources:
   - https://docs.haystack.deepset.ai/
   - https://ai-sdk.dev/
   - https://github.com/deepset-ai/haystack
   - https://github.com/vercel/ai
+  - https://docs.haystack.deepset.ai/docs/serialization
+  - https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat
+  - https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion
+  - https://ai-sdk.dev/docs/ai-sdk-core/middleware
+  - https://ai-sdk.dev/docs/ai-sdk-ui/stream-protocol
 ---
 
 # Atom 10: Haystack (deepset) + Vercel AI SDK

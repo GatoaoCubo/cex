@@ -1,135 +1,187 @@
-title: Voice Agent Architecture and Configuration Guide (Improved)
-author: AI Assistant
-date: 2023-10-15
-description: 'An enhanced, structured guide to voice agent architectures, configurations, and industry terminology. This version
-  improves clarity, cross-references, and technical accuracy while maintaining the original framework.
+title: Voice Agent Architecture and Configuration Reference
+author: AI Systems Engineering Team
+date: 2023-11-15
+description: Comprehensive guide to voice agent architectures, configuration patterns, and industry terminology mapping for
+  real-time and cascading systems.
+version: 2.1
+1_introduction: This document provides a technical reference for implementing voice agent systems, covering both codec-based
+  speech-to-speech (S2S) and cascading pipeline (STT→LLM→TTS) architectures. It includes configuration patterns, industry
+  terminology mapping, and performance metrics for real-time voice applications. ---
+2_core_architectures: ''
+2_1_codec_based_s2s:
+- 'LLM Output: Audio tokens generated via neural audio codecs (e.g., EnCodec, Mimi)'
+- 'Transport: WebRTC, WebSocket, or SIP-based streaming'
+- 'Advantages: Lower latency, native emotion modeling (eLLM), end-to-end prosody control'
+- 'Limitations: Limited LLM flexibility, vendor-specific codec dependencies'
+2_2_cascading_pipeline: '- Stage Chain: VAD → STT → LLM → TTS → Transport
 
-  '
-1_core_concepts_and_terminology: ''
-1_1_voice_agent_architectures: 'Voice agents operate using two primary architectures:
+  - Flexibility: Modular components (e.g., Deepgram, Cartesia, Pipecat)
 
-  - Codec-based Speech-to-Speech (S2S): LLMs generate audio tokens (e.g., EnCodec, Mimi) that are converted to waveforms via
-  vocoders (e.g., HIFIGAN).
+  - Use Cases: Enterprise IVR, telephony integration, complex tool calling
 
-  - Cascading Pipelines: STT → LLM → TTS sequential processing (e.g., Pipecat, LiveKit frameworks).'
-1_2_key_components: '- Neural Audio Codecs: EnCodec, Mimi, and Opus compress audio into discrete tokens for LLM processing.
-
-  - VAD (Voice Activity Detection): Detects speech presence (semantic vs. silence-based).
-
-  - Prosody Control: Manages pitch, rate, and emotional tone via SSML or prosody profiles.
-
-
-  ---'
-2_configuration_patterns: ''
-2_1_voice_agent_configuration_voice_agent_config:
-- 'Parameters:'
-- '`turn_detection`: Barge-in, full-duplex, or half-duplex settings.'
-- '`vad_mode`: Semantic or server-based VAD.'
-- '`session_params`: Timeout thresholds, language, and voice selection.'
-2_2_vad_configuration_vad_config:
-- 'Tuning Options:'
-- '`silence_duration_ms`: Silence threshold for endpointing.'
-- '`eagerness`: Sensitivity to overlapping speech.'
-- '`padding`: Buffer time for speech detection.'
-2_3_stt_tts_configuration:
-- 'STT Config (`stt_config`):'
-- Provider (Deepgram, Cartesia), language, and streaming mode.
-- '`confidence_threshold`: Minimum recognition confidence.'
-- 'TTS Config (`tts_config`):'
-- Voice ID, SSML support, and emotional style (e.g., "happy," "calm").
-2_4_audio_codec_settings_audio_codec_config: "- Parameters:\n  - Codec type (Opus, PCM, G.711).\n  - Bitrate, sample rate,\
-  \ and RVQ levels for tokenization.\n\n---"
-3_industry_terms_vs_cex_metaphors: '| Industry Term         | User-Facing Description                | CEX Mapping                         |
-
-  |----------------------|----------------------------------------|-------------------------------------|
-
-  | Barge-in         | "Interrupt the bot mid-speech"         | `voice_agent_config.interruption_handling` |
-
-  | Prosody Control  | "How the voice sounds"                 | `prosody_profile`                  |
-
-  | SSML             | "Markup for voice"                     | `prosody_profile.ssml_template`    |
-
-  | SIP Trunk        | "Phone line for the bot"               | `telephony_config`                 |
-
-  | Cascading Pipeline| "STT → LLM → TTS chain"                | `voice_pipeline`                   |
+  - Latency: Typically 500ms+ for full pipeline
 
 
   ---'
-4_architecture_decision_map: "User says: \"I want a voice agent\"\n                |\n    +-----------+-----------+\n    |\
+3_configuration_patterns: ''
+3_1_voice_agent_configuration_voice_agent_config: "persona: \"customer_support\"\nvad_mode: \"semantic\"\nturn_detection:\
+  \ \n  silence_threshold: 500\n  eagerness: 0.7\nsession_params:\n  max_concurrent_turns: 2\nvoice_selection:\n  style: \"\
+  calm\"\n  pitch_range: \"normal\""
+3_2_vad_configuration_vad_config: 'type: "semantic"
+
+  server_threshold: 0.6
+
+  client_padding: 100
+
+  silence_duration_ms: 800'
+3_3_stt_configuration_stt_config: 'provider: "deepgram"
+
+  model: "nova-2"
+
+  language: "en-US"
+
+  custom_vocabulary: ["account", "billing"]
+
+  streaming_mode: "async"
+
+  confidence_threshold: 0.75'
+3_4_tts_configuration_tts_config: 'provider: "cartesia"
+
+  voice_id: "professional_french"
+
+  ssml_support: true
+
+  speed: 1.2
+
+  emotion_style: "empathetic"
+
+  streaming_format: "opus"
+
+
+  ---'
+4_performance_metrics: '| Metric | Description | Typical Range |
+
+  |------|-------------|---------------|
+
+  | TTFA | Time to First Audio | 100-300ms (S2S), 500-800ms (cascading) |
+
+  | TTFB | Time to First Byte | 50-150ms (S2S), 200-400ms (cascading) |
+
+  | TTFT | Time to First Token | 50-100ms (LLM) |
+
+  | TTFW | Time to First Word | 200-400ms (TTS) |
+
+  | E2E Latency | End-to-end round trip | 500-1500ms (cascading), 200-600ms (S2S) |
+
+
+  ---'
+5_industry_terms_vs_cex_metaphors: '| Industry Term | User Intent | CEX Mapping |
+
+  |--------------|-------------|-------------|
+
+  | Barge-in | "Interrupt the bot" | `voice_agent_config.interruption_handling` |
+
+  | Prosody control | "Make the voice sound happy" | `prosody_profile.emotion_style` |
+
+  | SSML | "Markup for voice" | `prosody_profile.ssml_template` |
+
+  | Speech-to-speech | "Direct voice model" | S2S architecture pattern |
+
+  | Turn-taking | "Conversation flow" | `voice_agent_config.turn_detection` |
+
+  | Endpointing | "When did they stop talking?" | `vad_config.silence_duration_ms` |
+
+  | Cascading pipeline | "The STT-LLM-TTS chain" | `voice_pipeline` kind |
+
+
+  ---'
+6_transport_layer_configurations: ''
+6_1_webrtc:
+- 'Use Case: Browser-based voice agents'
+- 'Protocols: ICE, DTLS, RTP'
+- 'Codecs: Opus, G.711, PCM16'
+- 'NAT Traversal: STUN/TURN servers'
+6_2_sip_trunk:
+- 'Use Case: Enterprise telephony integration'
+- 'Components: PSTN gateway, IVR fallback'
+- 'Call Recording: Configurable via `telephony_config`'
+6_3_websocket: '- Use Case: Server-side voice agents
+
+  - Advantages: Persistent bidirectional connection
+
+  - Limitations: No native NAT traversal
+
+
+  ---'
+7_prosody_and_emotion_modeling: ''
+7_1_prosody_profile_prosody_profile: 'pitch_range: "wide"
+
+  rate: 1.1
+
+  volume: "medium"
+
+  emphasis_patterns: ["question", "exclamation"]
+
+  emotional_style: "empathetic"
+
+  ssml_template: "<prosody rate=''1.2''><emphasis level=''strong''>{text}</emphasis></prosody>"'
+7_2_emotion_detection: '- Models: Hume EVI, Gemini Live
+
+  - Expression Measures: Quantified signals per sentence
+
+  - Integration: `emotion_model_config` with top-K emotion mapping
+
+
+  ---'
+8_architecture_decision_map: "User says: \"I want a voice agent\"\n                |\n    +-----------+-----------+\n    |\
   \                       |\n Realtime (S2S)        Cascading (STT->LLM->TTS)\n    |                       |\n OpenAI gpt-realtime\
   \   Any LLM + Deepgram/Cartesia\n Gemini Live            Pipecat / LiveKit framework\n Hume EVI               Full tool\
   \ calling support\n    |                       |\n Lower latency          More control\n Limited LLM choice     Higher latency\n\
   \ Native emotion         Modular components\n    |                       |\n    +-----------+-----------+\n            \
   \    |\n         Transport choice\n                |\n    +-----------+-----------+-----------+\n    |           |     \
   \      |           |\n WebRTC     WebSocket     SIP       Hybrid\n (browser)  (server)    (phone)   (WebRTC+SIP)\n\n---"
-5_glossary_alphabetical: '| Term                | Category       | Definition                                                                 |
+9_glossary_alphabetical: '| Term | Category | Definition |
 
-  |---------------------|----------------|----------------------------------------------------------------------------|
+  |------|----------|------------|
 
-  | A/B Testing     | Evaluation     | Comparing agent variants with live traffic to optimize performance.        |
+  | TTFA | Metric | Time to First Audio in voice response |
 
-  | Barge-in        | Turn-taking    | User interrupts the model mid-speech (e.g., in a call center scenario).     |
+  | VAD | Component | Voice Activity Detection for turn management |
 
-  | Codec-based S2S | Architecture   | LLM generates audio tokens (e.g., EnCodec) for direct speech-to-speech.   |
+  | S2S | Architecture | Speech-to-speech codec-based system |
 
-  | DTLS            | Security       | Encryption protocol for WebRTC media streams.                              |
+  | Prosody | Feature | Control over speech rhythm, pitch, and emphasis |
 
-  | E2E Latency     | Metrics        | Total time from user input to agent response (measured in milliseconds).   |
+  | EVI | System | Emotion Voice Interface (Hume) |
 
-  | Emotion Detection| Prosody       | Classifying user emotion from voice signals (e.g., Hume''s Expression Measures). |
+  | LLM | Component | Large Language Model for text generation |
 
-  | G.711           | Codec          | 8kHz telephony audio format used in PSTN networks.                         |
+  | TTS | Component | Text-to-Speech synthesis engine |
 
-  | IVR             | Telephony      | Interactive Voice Response system for automated call handling.             |
+  | STT | Component | Speech-to-Text recognition engine |
 
-  | MOS             | Evaluation     | Mean Opinion Score (1-5) for audio quality assessment.                     |
+  | Codec | Technology | Audio encoding/decoding (e.g., EnCodec) |
 
-  | Opus            | Codec          | Royalty-free adaptive audio codec for real-time communication.             |
+  | IVR | Use Case | Interactive Voice Response system |
 
-  | PESQ            | Evaluation     | Algorithmic metric for speech quality (e.g., in VoIP systems).             |
-
-  | Prosody         | Voice          | Pitch, rhythm, stress, and intonation in speech.                           |
-
-  | SSML            | Prosody        | Speech Synthesis Markup Language for TTS customization.                    |
-
-  | VAD             | Signal Processing | Voice Activity Detection to identify speech vs. silence.                  |
-
-  | WebRTC          | Communication  | Open-source framework for real-time audio/video communication over the web.|
+  | PSTN | Network | Public Switched Telephone Network |
 
 
   ---'
-6_cross_reference_industry_terms_vs_cex_metaphors: ''
-6_1_example_prosody_profile:
-- 'Industry Term: Emotional tone in TTS.'
-- 'CEX Mapping: `tts_config.emotional_style` (e.g., "calm," "urgent").'
-- 'Implementation: SSML tags or custom prosody profiles.'
-6_2_example_voice_pipeline: '- Industry Term: STT → LLM → TTS workflow.
+10_appendix_configuration_validation_rules: '1. VAD Thresholds: Must be between 0.1-1.0 for semantic detection
 
-  - CEX Mapping: Configurable via `stt_config` and `tts_config`.
+  2. TTS Speed: Valid range 0.5-2.0
 
-  - Use Case: Call center agents with real-time transcription and response.
+  3. Emotion Style: Must be one of: "neutral", "empathetic", "urgent", "calm"
 
+  4. Codecs: Supported: opus, pcm16, g711
 
-  ---'
-7_best_practices: '- Use Semantic VAD for overlapping speech in group conversations.
-
-  - Prioritize Low Latency in S2S systems for real-time interactions.
-
-  - Validate Prosody Settings with user testing to ensure natural tone.
+  5. Transport Protocols: webRTC, websocket, sip
 
 
   ---'
-8_references: '- EnCodec: https://github.com/facebookresearch/encodec
-
-  - Hume AI: https://www.hume.ai
-
-  - WebRTC: https://webrtc.org
-
-  - SSML Specification: https://www.w3.org/TR/speech-synthesis/
-
-
-  ---
-
-
-  Note: This guide is intended for developers, product managers, and system architects working on voice agent systems. For
-  implementation details, refer to the linked resources and configuration examples.'
+11_references:
+- Hume EVI Documentation
+- Deepgram API Reference
+- Cartesia TTS SDK
+- OpenAI gpt-realtime API

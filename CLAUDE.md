@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 130 kinds · 126 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 79 tools
+> 130 kinds · 126 builders · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 80 tools
 
 ## Brand Identity
 
@@ -51,6 +51,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Setup Validator** | `_tools/cex_setup_validator.py` (new PC readiness check) |
 | **Hygiene Tool** | `_tools/cex_hygiene.py` (artifact CRUD, 8 rules) |
 | **Prompt Cache** | `_tools/cex_prompt_cache.py` + `.cex/cache/` (125 builders pre-compiled) |
+| **Preflight** | `_tools/cex_preflight.py` — hybrid local/cloud context pre-compiler (Ollama + Haiku) |
 | **Token Efficiency Map** | `N01_intelligence/reports/token_efficiency_gap_map.md` |
 | **Taxonomy Audit** | `N01_intelligence/reports/taxonomy_completeness_audit.md` |
 | **Port Plan (external repos)** | `_docs/specs/port_plan_external_repos.md` |
@@ -167,17 +168,19 @@ bash _spawn/dispatch.sh stop --dry-run    # preview what would die
 
 ## Nucleus Routing
 
-> All nuclei upgraded to Opus 1M context (2026-04-06). Config: `.cex/config/nucleus_models.yaml`
+> Budget-optimized: 2 Opus + 5 Sonnet + preflight (2026-04-13). Config: `.cex/config/nucleus_models.yaml`
 
-| Domain | Nucleus | CLI | Model | Context |
-|--------|---------|-----|-------|---------|
-| Research/analysis | N01 | claude | opus-4-6 | 1M |
-| Marketing/copy | N02 | claude | opus-4-6 | 1M |
-| Build/create | N03 | claude | opus-4-6 | 1M |
-| Knowledge/docs | N04 | claude | opus-4-6 | 1M |
-| Code/test/deploy | N05 | claude | opus-4-6 | 1M |
-| Brand/monetization | N06 | claude | opus-4-6 | 1M |
-| Orchestration | N07 | claude | opus-4-6 | 1M |
+| Domain | Nucleus | CLI | Model | Context | Tier |
+|--------|---------|-----|-------|---------| -----|
+| Research/analysis | N01 | claude | sonnet-4-6 | 200K | Sonnet |
+| Marketing/copy | N02 | claude | sonnet-4-6 | 200K | Sonnet |
+| Build/create | N03 | claude | opus-4-6 | 1M | **Opus** |
+| Knowledge/docs | N04 | claude | sonnet-4-6 | 200K | Sonnet |
+| Code/test/deploy | N05 | claude | sonnet-4-6 | 200K | Sonnet |
+| Brand/monetization | N06 | claude | sonnet-4-6 | 200K | Sonnet |
+| Orchestration | N07 | claude | opus-4-6 | 1M | **Opus** |
+
+> **Preflight**: `cex_preflight.py` pre-compiles context via local Ollama (qwen3:14b) or Haiku before nucleus boot. Reduces token burn ~70%.
 
 ## Constraints
 

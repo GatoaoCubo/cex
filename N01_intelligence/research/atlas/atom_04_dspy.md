@@ -16,8 +16,14 @@ sources:
   - https://dspy.ai/cheatsheet/
   - https://dspy.ai/learn/programming/adapters/
   - https://dspy.ai/api/optimizers/GEPA/overview/
+  - https://dspy.ai/api/optimizers/GEPA/GEPA_Advanced/
   - https://dspy.ai/api/optimizers/MIPROv2/
+  - https://dspy.ai/api/utils/configure_cache/
+  - https://dspy.ai/api/utils/configure/
+  - https://dspy.ai/production/
+  - https://dspy.ai/community/use-cases/
   - https://arxiv.org/abs/2310.03714
+  - https://arxiv.org/abs/2507.19457
 date: 2026-04-13
 ---
 

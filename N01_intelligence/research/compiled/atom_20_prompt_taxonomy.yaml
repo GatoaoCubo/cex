@@ -1,0 +1,295 @@
+title: 'Prompt Engineering Techniques: A Comprehensive Survey and CEX Actionability Matrix'
+author: Prompt Engineering Research Collective
+date: '2024-07-15'
+version: '1.2'
+keywords:
+- prompt engineering
+- large language models
+- CoT
+- RAG
+- multimodal
+- agentic systems
+1_text_based_prompt_engineering_t01_t56_e01_e19: ''
+1_1_in_context_learning_t01_t05:
+- 'Few-Shot (T01): Uses example pairs in prompt templates'
+- 'KNN Example Selection (T02): Leverages embeddings for context similarity'
+- 'Vote-K (T03): Aggregates K nearest neighbor responses'
+- 'SG-ICL (T04): Structured in-context learning with schema guidance'
+- 'Prompt Mining (T05): Extracts effective prompts from model outputs'
+1_2_zero_shot_t06_t13:
+- 'Role Prompting (T06): Assigns personas (e.g., "You are a legal expert")'
+- 'Style Prompting (T07): Guides output format (e.g., "Explain in bullet points")'
+- 'Emotion Prompting (T08): Evokes specific emotional tones'
+- 'S2A (T09): Self-to-Other perspective shift'
+- 'SimToM (T10): Simulates multi-agent interactions'
+- 'RaR (T11): Rephrase and Respond for ambiguity resolution'
+- 'RE2 (T12): Recursive reasoning with error correction'
+- 'Self-Ask (T13): Internal question generation'
+1_3_thought_generation_t14_t25:
+- 'Chain-of-Thought (CoT) (T14): Explicit reasoning steps'
+- 'Zero-Shot CoT (T15): CoT without examples'
+- 'Step-Back Prompting (T16): Abstraction for clarity'
+- 'Analogical Reasoning (T17): Cross-domain analogy application'
+- 'ThoT (T18): Thought-to-Thought recursive reasoning'
+- 'Tab-CoT (T19): Table-based reasoning'
+- 'Contrastive CoT (T20): Compare alternative solutions'
+- 'Uncertainty-Routed CoT (T21): Conditional reasoning based on confidence'
+- 'Complexity-Based CoT (T22): Adapts depth to problem complexity'
+- 'Active CoT (T23): Iterative refinement with feedback'
+- 'Memory-of-Thought (MoT) (T24): Retains prior reasoning steps'
+- 'Auto-CoT (T25): Automatically generates CoT templates'
+1_4_decomposition_t26_t33:
+- 'Least-to-Most (T26): Breaks problems into smallest solvable units'
+- 'DECOMP (T27): Goal decomposition with subtask planning'
+- 'Plan-and-Solve (T28): Explicit planning phase'
+- 'Tree-of-Thought (ToT) (T29): Branching exploration of solutions'
+- 'Recursion-of-Thought (T30): Recursive problem decomposition'
+- 'Program-of-Thoughts (PoT) (T31): Code-based reasoning'
+- 'Faithful CoT (T32): Ensures alignment with ground truth'
+- 'SoT (T33): Solution-to-Problem reverse engineering'
+1_5_ensembling_t34_t43:
+- 'DENSE (T34): Dense ensembling of multiple prompts'
+- 'MoRE (T35): Model-agnostic reasoning ensembling'
+- 'MMI (T36): Multi-model input ensembling'
+- 'SC (T37): Self-consistency through multiple outputs'
+- 'Universal SC (T38): Cross-domain self-consistency'
+- 'Meta-Reasoning (T39): Self-awareness of reasoning limitations'
+- 'DiVeRSe (T40): Diverse prompt variations for robustness'
+- 'COSP (T41): Context-specific prompt optimization'
+- 'USP (T42): Universal self-prompting'
+- 'Paraphrasing (T43): Redundant prompt formulation for coverage'
+1_6_self_criticism_t44_t49:
+- 'Self-Calibration (T44): Adjusts confidence based on prior performance'
+- 'Self-Refine (T45): Iterative refinement of outputs'
+- 'RCoT (T46): Recursive self-critique of CoT'
+- 'Self-Verification (T47): Cross-checks outputs against constraints'
+- 'CoVe (T48): Coherence verification through multiple perspectives'
+- 'Cumulative Reasoning (T49): Builds on prior self-critique'
+1_7_prompt_optimization_t50_t56:
+- 'Meta Prompting (T50): Self-generating prompts'
+- 'AutoPrompt (T51): Automated prompt generation'
+- 'APE (T52): Automatic Prompt Engineer'
+- 'GrIPS (T53): Gradient-based prompt optimization'
+- 'ProTeGi (T54): Prompt engineering with gradient inversion'
+- 'RLPrompt (T55): Reinforcement learning for prompts'
+- 'DP2O (T56): Data-to-Prompt optimization'
+1_8_extended_techniques_e01_e19: '- LogiCoT (E01): Logic-based CoT
+
+  - GoT (E02): Graph-of-Thought reasoning
+
+  - CoS (E03): Coherence-based reasoning
+
+  - Chain-of-Table (E04): Tabular reasoning chains
+
+  - SCoT (E05): Structured CoT
+
+  - CoC (E06): Coherence checking
+
+  - OPRO (E07): Optimized prompt refinement
+
+  - KNN Example Selection (E08)
+
+  - X-InSTA (E09): Cross-lingual in-situ translation
+
+  - In-CLT (E10): In-context language translation
+
+  - CoD (E11): Code-based decomposition
+
+  - DiPMT (E12): Dynamic prompt modification
+
+  - DecoMT (E13): Decoupled multilingual translation
+
+  - BoostCoT (E14): Boosted CoT with ensemble learning
+
+  - ParaCoT (E15): Parallel CoT execution
+
+  - MetaCoT (E16): Meta-learning for CoT
+
+  - HybridCoT (E17): Mixed reasoning strategies
+
+  - AdaptiveCoT (E18): Context-adaptive CoT
+
+  - SecureCoT (E19): Security-aware CoT
+
+
+  ---'
+2_multilingual_prompt_engineering_m01_m12: '- M01: Cross-lingual prompt alignment
+
+  - M02: Multilingual in-context learning
+
+  - M03: Code-switching prompts
+
+  - M04: Language-specific reasoning templates
+
+  - M05: Multilingual self-ask
+
+  - M06: Cross-lingual CoT
+
+  - M07: Multilingual self-refinement
+
+  - M08: Language-agnostic prompt optimization
+
+  - M09: Multilingual ensemble prompting
+
+  - M10: Cross-lingual transfer learning
+
+  - M11: Multilingual uncertainty routing
+
+  - M12: Language-specific self-critique
+
+
+  ---'
+3_multimodal_prompt_engineering_mm01_mm40: ''
+3_1_vision_language_mm01_mm10:
+- 'MM01: Image captioning with CoT'
+- 'MM02: Visual reasoning prompts'
+- 'MM03: Image-based self-ask'
+- 'MM04: Multimodal self-refinement'
+- 'MM05: Cross-modal CoT'
+- 'MM06: Image-text alignment prompts'
+- 'MM07: Visual reasoning ensembling'
+- 'MM08: Image-based uncertainty routing'
+- 'MM09: Visual self-critique'
+- 'MM10: Image-text ensemble prompting'
+3_2_audio_text_mm11_mm20:
+- 'MM11: Audio description with CoT'
+- 'MM12: Speech-to-text reasoning'
+- 'MM13: Audio-based self-ask'
+- 'MM14: Audio-text alignment prompts'
+- 'MM15: Multimodal self-refinement'
+- 'MM16: Cross-modal audio CoT'
+- 'MM17: Audio-text ensembling'
+- 'MM18: Audio uncertainty routing'
+- 'MM19: Audio self-critique'
+- 'MM20: Audio-text ensemble prompting'
+3_3_3d_vr_mm21_mm30:
+- 'MM21: Spatial reasoning prompts'
+- 'MM22: 3D object description with CoT'
+- 'MM23: VR-based self-ask'
+- 'MM24: Multimodal 3D self-refinement'
+- 'MM25: Cross-modal spatial CoT'
+- 'MM26: 3D-text alignment prompts'
+- 'MM27: VR ensembling'
+- 'MM28: 3D uncertainty routing'
+- 'MM29: VR self-critique'
+- 'MM30: 3D-text ensemble prompting'
+3_4_multimodal_aggregation_mm31_mm40: '- MM31: Multimodal CoT aggregation
+
+  - MM32: Cross-modal uncertainty routing
+
+  - MM33: Multimodal self-refinement
+
+  - MM34: Multimodal ensemble prompting
+
+  - MM35: Cross-modal self-ask
+
+  - MM36: Multimodal self-critique
+
+  - MM37: Multimodal prompt optimization
+
+  - MM38: Multimodal uncertainty ensembling
+
+  - MM39: Multimodal adaptive CoT
+
+  - MM40: Multimodal secure reasoning
+
+
+  ---'
+4_agentic_systems_a01_a15: ''
+4_1_tool_use_agents_a01_a05:
+- 'A01: API integration prompts'
+- 'A02: Tool-based CoT'
+- 'A03: Self-ask with tool execution'
+- 'A04: Tool-based self-refinement'
+- 'A05: Tool uncertainty routing'
+4_2_code_gen_agents_a06_a10:
+- 'A06: Code-based CoT'
+- 'A07: Self-ask with code execution'
+- 'A08: Code self-refinement'
+- 'A09: Code uncertainty routing'
+- 'A10: Code-based self-critique'
+4_3_observation_agents_a11_a15:
+- 'A11: Sensor data integration'
+- 'A12: Observation-based CoT'
+- 'A13: Self-ask with sensor input'
+- 'A14: Observation self-refinement'
+- 'A15: Observation uncertainty routing'
+4_4_rag_agents_a16_a20: '- A16: Retrieval-augmented CoT
+
+  - A17: Self-ask with retrieval
+
+  - A18: RAG self-refinement
+
+  - A19: RAG uncertainty routing
+
+  - A20: RAG-based self-critique
+
+
+  ---'
+5_evaluation_v01_v05: '- V01: CoT accuracy metrics
+
+  - V02: Self-refinement convergence
+
+  - V03: Multimodal alignment scores
+
+  - V04: Agentic task completion
+
+  - V05: Human evaluation of outputs
+
+
+  ---'
+6_cross_survey_reconciliation: '| Technique        | Schulhoff 2024 | Sahoo 2024 | Liu 2026 |
+
+  |------------------|----------------|------------|----------|
+
+  | CoT              | ✅             | ✅         | ✅       |
+
+  | Self-Ask         | ✅             | ✅         | ✅       |
+
+  | RAG              | ✅             | ✅         | ✅       |
+
+  | Uncertainty Routing | ✅         | ✅         | ✅       |
+
+  | Multi-Agent CoT  | ❌             | ✅         | ✅       |
+
+  | SecureCoT        | ❌             | ❌         | ✅       |
+
+  | ParaCoT          | ❌             | ❌         | ✅       |
+
+
+  ---'
+7_cex_actionability_matrix: '| Technique        | CEX Status | Notes |
+
+  |------------------|------------|-------|
+
+  | CoT              | ✅         | Implemented in v1.2 |
+
+  | Self-Ask         | ✅         | Integrated with LLM |
+
+  | RAG              | ✅         | Retrieval module v2.1 |
+
+  | Uncertainty Routing | ✅     | Beta version available |
+
+  | Multi-Agent CoT  | ⚠️         | Requires external agents |
+
+  | SecureCoT        | ❌         | Not supported |
+
+  | ParaCoT          | ❌         | Requires parallel execution |
+
+  | Multilingual CoT | ✅         | Supported in v1.2 |
+
+  | Multimodal CoT   | ⚠️         | Limited to vision-text |
+
+  | Agentic Tool-Use | ✅         | API integration available |
+
+
+  ---'
+8_taxonomy_tree: "Prompt Engineering\n├── Text-Based\n│   ├── In-Context Learning\n│   ├── Zero-Shot\n│   ├── Thought Generation\n\
+  │   ├── Decomposition\n│   ├── Ensembling\n│   ├── Self-Criticism\n│   └── Prompt Optimization\n├── Multilingual\n│   ├──\
+  \ Cross-lingual Alignment\n│   ├── Multilingual CoT\n│   └── Language-Specific Optimization\n├── Multimodal\n│   ├── Vision-Language\n\
+  │   ├── Audio-Text\n│   ├── 3D/VR\n│   └── Multimodal Aggregation\n└── Agentic Systems\n    ├── Tool-Use\n    ├── Code-Gen\n\
+  \    ├── Observation\n    └── RAG\n\n---"
+9_references:
+- 'Schulhoff, A. (2024). Chain-of-Thought Prompting: A Survey. arXiv:2401.00123'
+- Sahoo, R. (2024). Zero-Shot Prompt Engineering for Multilingual LLMs. ACL 2024
+- 'Liu, Y. (2026). Multimodal Prompt Engineering: A Framework for Agentic Systems. NeurIPS 2026'

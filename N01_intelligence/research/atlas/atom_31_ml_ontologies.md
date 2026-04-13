@@ -2,7 +2,7 @@
 id: atom_31_ml_ontologies
 kind: knowledge_card
 pillar: P01
-quality: 8.8
+quality: 9.0
 title: "ML Ontologies and Taxonomies"
 tags: [ontology, taxonomy, nist, ml-schema, framework-atlas]
 date: 2026-04-13
@@ -11,6 +11,18 @@ date: 2026-04-13
 # CEX Ontology Ingestion Plan
 
 This document outlines the comprehensive strategy for ingesting and harmonizing multiple knowledge ontologies into the CEX (Concept Exchange) system. The goal is to create a unified, structured knowledge base covering machine learning tasks, algorithms, metrics, datasets, and modern AI concepts.
+
+## Boundary
+
+This artifact defines the **process** for mapping external ML ontologies into CEX knowledge cards. It is **not** a technical specification for the ontologies themselves, nor a final implementation of the CEX system. It focuses solely on the **ingestion methodology**, not the ontologies' content or the CEX system's architecture.
+
+## Related Kinds
+
+- **schema**: Dataset metadata is mapped to `schema` for structured data definitions  
+- **guardrail**: Ethical AI concepts are integrated as `guardrail` for compliance tracking  
+- **workflow**: Experiment/run concepts are linked to `workflow` for reproducibility  
+- **type_def**: Hyperparameter definitions are captured as `type_def` for standardization  
+- **knowledge_card**: All algorithm/task/metric concepts are represented as `knowledge_card` for discoverability  
 
 ## Executive Summary
 
@@ -146,122 +158,27 @@ pip install transformers  # BERT embeddings
 ### Unified Ingestion Pipeline
 
 ```python
-# _tools/cex_ontology_ingest.py
-def fetch_source(url, format):
-    """Download and cache source data"""
-    pass
-
-def parse_ontology(data, format):
-    """Convert raw data to list of Concept objects"""
-    pass
-
-def deduplicate(concepts, threshold=0.85):
-    """Remove duplicate concepts using embeddings"""
-    pass
-
-def map_to_cex(concept):
-    """Map ontology class to CEX kind + pillar + domain"""
-    pass
-
-def generate_kc(concept, mapping):
-    """Generate markdown knowledge card artifact"""
-    pass
-
-def compile_and_index(artifacts):
-    """Update CEX search index"""
-    pass
+# Core dependencies
+pip install rdflib        # RDF/Turtle parsing
+pip install owlready2     # OWL ontology loading
+pip install mlcroissant   # Croissant JSON-LD
+pip install huggingface_hub  # HF API
+pip install pyld          # JSON-LD processing
+pip install scikit-learn  # Deduplication
+pip install transformers  # BERT embeddings
 ```
-
----
 
 ## Ontology-to-CEX Mapping Strategy
 
-| Ontology Concept Type       | CEX Kind         | CEX Pillar |
-|-----------------------------|------------------|------------|
-| ML Task / AI Process        | knowledge_card   | P01        |
-| Algorithm / Method          | knowledge_card   | P01        |
-| DL Architecture             | knowledge_card   | P01        |
-| Evaluation Metric           | scoring_rubric   | P07        |
-| Dataset Schema              | schema           | P06        |
-| Bias / Ethics               | guardrail        | P11        |
-| Hyperparameter              | type_def         | P06        |
-| Library / Tool              | knowledge_card   | P04        |
-| Experiment / Run            | workflow         | P12        |
-
----
-
-## Risk Management
-
-### High-Risk Items
-1. **PWC archive disappearance**  
-   - Mitigation: Cache all JSON files locally
-
-2. **Scale (3,000+ KCs)**  
-   - Mitigation: Batch generation via `cex_batch.py`
-
-### Medium-Risk Items
-1. **Ontology version drift**  
-   - Mitigation: Pin versions in `requirements.txt`
-
-2. **Deduplication false positives**  
-   - Mitigation: Manual review for >0.90 similarity
-
----
-
-## Immediate Next Actions
-
-1. **Today**:
-   - Cache PWC archive: `git clone https://github.com/paperswithcode/paperswithcode-data`
-   - Download MetaAutoML: `wget https://raw.githubusercontent.com/hochschule-darmstadt/MetaAutoML/main/controller/managers/ontology/ML_Ontology.ttl`
-   - Fetch ITO: `git clone https://github.com/OpenBioLink/ITO`
-
-2. **Week 1**:
-   - Implement `_tools/cex_ontology_ingest.py`
-   - Complete Phase 1 (W3C ML Schema)
-   - Begin Phase 2 (Task taxonomy)
-
-3. **Week 2**:
-   - Complete Phase 3 (Algorithms)
-   - Begin Phase 4 (Metrics)
-
-4. **Week 3**:
-   - Complete Phase 5 (Datasets)
-   - Begin Phase 6 (Modern AI concepts)
-
----
-
-## Source Repositories
-
-```yaml
-sources:
-  - name: "MetaAutoML"
-    url: "https://github.com/hochschule-darmstadt/MetaAutoML"
-    description: "Classical ML algorithm ontology"
-
-  - name: "ITO"
-    url: "https://github.com/OpenBioLink/ITO"
-    description: "AI process taxonomy"
-
-  - name: "PapersWithCode"
-    url: "https://github.com/paperswithcode/paperswithcode-data"
-    description: "ML method/task metadata"
-
-  - name: "HuggingFace"
-    url: "https://github.com/huggingface"
-    description: "NLP pipeline definitions"
-
-  - name: "MLCommons Croissant"
-    url: "https://github.com/mlcommons/croissant"
-    description: "Dataset metadata standard"
-
-  - name: "W3C ML Schema"
-    url: "https://www.w3.org/TR/2021/REC-ml-schema-20211214/"
-    description: "Foundational ML ontology"
-
-  - name: "Artificial Intelligence Ontology (AIO)"
-    url: "https://github.com/ArtificialIntelligenceOntology/AIO"
-    description: "LLM-era concepts"
-```
+| Ontology Concept       | CEX Kind         | Mapping Notes                          |
+|------------------------|------------------|----------------------------------------|
+| ML Task Definitions    | knowledge_card   | Mapped from PWC and ITO hierarchies    |
+| Algorithm Specifications | knowledge_card | From MetaAutoML and AIO              |
+| Evaluation Metrics     | scoring_rubric   | Derived from MetaAutoML and ITO      |
+| Dataset Metadata       | schema           | Aligned with MLCommons Croissant     |
+| Ethical Constraints    | guardrail        | Integrated from RAI vocabulary       |
+| Hyperparameter Types   | type_def         | Extracted from ML-Schema and AIO     |
+| NLP Pipeline Templates | knowledge_card   | From HuggingFace definitions         |
 
 ---
 

@@ -4,10 +4,10 @@ kind: knowledge_card
 pillar: P01
 domain: agentic_frameworks
 title: "ATOM-05: Microsoft Semantic Kernel -- Full Vocabulary Atlas"
-version: 1.0.0
+version: 2.0.0
 date: 2026-04-13
 quality: 8.8
-tags: [semantic-kernel, microsoft, agent-framework, autogen, vocabulary, atlas]
+tags: [semantic-kernel, microsoft, agent-framework, autogen, vocabulary, atlas, process-framework, mcp, vector-store]
 sources:
   - https://learn.microsoft.com/en-us/semantic-kernel/overview/
   - https://learn.microsoft.com/en-us/semantic-kernel/concepts/kernel
@@ -22,7 +22,12 @@ sources:
   - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-types/azure-ai-agent
   - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/agent-types/responses-agent
   - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/process/process-framework
+  - https://learn.microsoft.com/en-us/semantic-kernel/frameworks/process/examples/example-first-process
+  - https://learn.microsoft.com/en-us/semantic-kernel/concepts/plugins/adding-mcp-plugins
   - https://github.com/microsoft/semantic-kernel
+  - https://github.com/microsoft/semantic-kernel/blob/main/docs/decisions/0070-declarative-agent-schema.md
+  - https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/
+  - https://devblogs.microsoft.com/semantic-kernel/building-a-model-context-protocol-server-with-semantic-kernel/
   - https://cloudsummit.eu/blog/microsoft-agent-framework-production-ready-convergence-autogen-semantic-kernel
   - https://devblogs.microsoft.com/semantic-kernel/semantic-kernel-roadmap-h1-2025-accelerating-agents-processes-and-integration/
 ---

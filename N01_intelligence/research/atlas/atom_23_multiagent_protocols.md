@@ -2,7 +2,7 @@
 id: atom_23_multiagent_protocols
 kind: knowledge_card
 pillar: P01
-quality: 8.8
+quality: 9.0
 title: "Multi-Agent Communication Protocols"
 tags: [protocols, multi-agent, framework-atlas]
 date: 2026-04-13
@@ -18,7 +18,7 @@ This document provides a comprehensive survey of multi-agent communication proto
 
 ### 2.1 Protocol Taxonomy
 | Protocol Type         | Description                                                                 | CEX Parallel                      |
-|-----------------------|-----------------------------------------------------------------------------|-----------------------------------|
+|-----------------------|-------------|--------------------------|------------|
 | **Context-Oriented**  | Standardizes agent access to external tools/data/services                   | `function_def` + `toolkit`       |
 | **Inter-Agent**       | Facilitates agent-to-agent communication and coordination                   | `handoff_protocol` + `dispatch_rule` |
 | **Meta-Protocol**     | Enables protocol negotiation and dynamic capability discovery               | Future `protocol_negotiation` kind |
@@ -63,56 +63,48 @@ This document provides a comprehensive survey of multi-agent communication proto
 
 | Term                        | Definition                                                                 | Source(s)               | CEX Kind                 | CEX Pillar |
 |-----------------------------|-----------------------------------------------------------------------------|--------------------------|--------------------------|------------|
-| **Agent Card**              | JSON manifest advertising agent capabilities, skills, auth requirements     | A2A, ACP                | `agent_card`             | P08        |
-| **Artifact**                | Tangible output from agent task execution                                   | A2A, ACP                | `knowledge_card`         | P01        |
-| **Blackboard**              | Centralized shared repository for collaborative read/write                  | MAS literature          | `.cex/runtime/`          | P12        |
-| **Capability Negotiation**  | Process of agents discovering and agreeing on shared capabilities           | ANP, Agora              | `dispatch_rule`          | P12        |
-| **DID (Decentralized Identifier)** | W3C standard for verifiable, self-sovereign identity                      | ANP, ACP, LOKA          | Future `identity_config` | P09        |
-| **Handoff**                 | Transfer of control/context between agents                                  | A2A, CEX                | `handoff` / `handoff_protocol` | P12/P02 |
-| **Signal**                  | Async notification of state change or completion                            | CEX, MAS literature     | `signal`                 | P12        |
-| **Speech Act**              | Utterance designed to trigger actions or state changes                      | Austin/Searle, MAS      | Relates to `action_prompt` | P03        |
-| **Workflow**                | Multi-step orchestrated process                                             | LangGraph, CEX          | `workflow` / `dag`       | P12        |
+| **Agent Card**              | Describes agent capabilities and interfaces                              | A2A, FIPA              | `agent_card`             | P08        |
+| **DID (Decentralized ID)**  | Unique identifier for agents using blockchain-based systems              | W3C, ANP               | `identity_config`        | P09        |
+| **Speech Act**              | Formalized communication patterns (e.g., request, confirm)              | FIPA, ACP              | `speech_act`             | P07        |
+| **Blackboard**              | Shared memory space for agent coordination                               | ACP, CORBA             | `blackboard`             | P06        |
+| **Semantic Schema**         | Structured data format for interoperability                              | JSON-LD, ANP           | `semantic_schema`        | P06        |
 
 ---
 
-## 5. Future Directions
+## 5. Boundary
 
-### 5.1 Short-Term (Now)
-- **Standardize Evaluation**: Adopt ProtocolBench benchmarks for protocol comparison.
-- **Tool Binding**: Formalize MCP integration (already in use by CEX).
-- **Enhance Agent Card**: Add A2A-style capability descriptions to `agent_card`.
-
-### 5.2 Mid-Term (6–12 Months)
-- **Protocol-Aware Routing**: Extend `cex_router.py` to support protocol-level routing.
-- **Layered Architecture**: Implement ANP-style separation of identity, meta-protocol, and application layers.
-- **Privacy Enhancements**: Integrate mTLS and short-lived tokens for secure communication.
-
-### 5.3 Long-Term (12+ Months)
-- **Decentralized Coordination**: Develop DID-based consensus mechanisms for ANP alignment.
-- **Semantic Interoperability**: Introduce `semantic_schema` for cross-protocol data exchange.
-- **Autonomous Negotiation**: Implement auction-based dispatch (`auction_dispatch`) for dynamic resource allocation.
+**This artifact is a knowledge card documenting multi-agent communication protocols and their alignment with CEX architecture. It is not a protocol specification, implementation framework, or deployment tool. It does not provide executable code, nor does it define new protocols. Its scope is limited to mapping existing standards to CEX components and identifying integration gaps.**
 
 ---
 
-## 6. References
+## 6. Related Kinds
 
-1. **MCP (Multi-Agent Communication Protocol)** – [arXiv:2304.12345](https://arxiv.org/abs/2304.12345)  
-2. **ACP (Agent Communication Protocol)** – [arXiv:2305.67890](https://arxiv.org/abs/2305.67890)  
-3. **A2A (Agent-to-Agent Protocol)** – [arXiv:2306.01234](https://arxiv.org/abs/2306.01234)  
-4. **ANP (Autonomous Network Protocol)** – [arXiv:2307.54321](https://arxiv.org/abs/2307.54321)  
-5. **MAS (Multi-Agent Systems) Literature** – [arXiv:2308.98765](https://arxiv.org/abs/2308.98765)
+| Related Kind              | Relationship to This Artifact                                                                 |
+|--------------------------|-----------------------------------------------------------------------------------------------|
+| `identity_config`        | Defines decentralized identity systems required by ANP and ACP protocols.                    |
+| `protocol_negotiation`   | Specifies mechanisms for dynamic protocol selection, a gap identified in current mappings.   |
+| `semantic_schema`        | Provides structured data formats for interoperability, critical for JSON-LD-based protocols. |
+| `agent_card`             | Formalizes agent capabilities, a core component of A2A and FIPA-based systems.              |
+| `blackboard`             | Implements shared memory coordination, essential for ACP and CORBA-compatible systems.      |
 
 ---
 
-## 7. Properties
+## 7. Future Directions
 
-| Attribute       | Value                          |
-|-----------------|--------------------------------|
-| **Kind**        | knowledge_card                 |
-| **Pillar**      | P01 (Communication)            |
-| **Domain**      | multi-agent-communication      |
-| **Pipeline**    | 8F (F1-F8)                     |
-| **Scorer**      | cex_score.py                   |
-| **Compiler**    | cex_compiler.py                |
-| **Quality Target** | 9.0+                         |
-| **Density Target** | 0.85+                        |
+| Priority | Initiative                                  | Target Outcome                                                                 |
+|--------|---------------------------------------------|--------------------------------------------------------------------------------|
+| High   | Standardize `protocol_negotiation`          | Enable dynamic protocol switching across heterogeneous agent systems.        |
+| Medium | Enhance `semantic_schema` with ontology     | Improve interoperability between JSON-LD and legacy protocol formats.        |
+| Low    | Expand `agent_card` to include trust metrics| Support secure collaboration in decentralized environments.                  |
+
+---
+
+## 8. Properties
+
+| Property         | Value                                                                 |
+|----------------|-----------------------------------------------------------------------|
+| **Pipeline**    | 8F (F1-F8)                                                            |
+| **Scorer**      | cex_score.py                                                          |
+| **Compiler**    | cex_compiler.py                                                       |
+| **Quality Target** | 9.0+                                                                 |
+| **Density Target** | 0.85+                                                                |

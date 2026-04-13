@@ -3,16 +3,21 @@ id: atom_07_llamaindex
 kind: knowledge_card
 pillar: P01
 title: "ATOM-07: LlamaIndex Framework -- Complete Vocabulary Atlas"
-version: 1.0.0
+version: 1.1.0
 date: 2026-04-13
 quality: 8.8
-tags: [llamaindex, rag, framework, vocabulary, atlas, llm, agents, workflows]
+tags: [llamaindex, rag, framework, vocabulary, atlas, llm, agents, workflows, propertygraph, agentworkflow, llamaparse-v2]
 sources:
   - https://developers.llamaindex.ai/python/framework/
   - https://github.com/run-llama/llama_index
   - https://developers.llamaindex.ai/python/cloud/
   - https://deepwiki.com/run-llama/llama_index
-scope: "Complete vocabulary extraction: 300+ classes, 7-stage pipeline, 6 orchestration systems"
+  - https://developers.llamaindex.ai/python/framework/understanding/agent/multi_agent/
+  - https://developers.llamaindex.ai/python/cloud/llamaparse/api-v2-guide/
+  - https://developers.llamaindex.ai/python/framework/module_guides/indexing/lpg_index_guide/
+  - https://developers.llamaindex.ai/python/examples/workflow/checkpointing_workflows/
+  - https://developers.llamaindex.ai/python/framework/understanding/evaluating/evaluating/
+scope: "Complete vocabulary extraction: 300+ classes, 7-stage pipeline, 6 orchestration systems, AgentWorkflow deep dive, PropertyGraphIndex extractors+retrievers, LlamaParse v2 full API, WorkflowCheckpointer, evaluator scoring formulas"
 ---
 
 # ATOM-07: LlamaIndex Framework -- Complete Vocabulary Atlas

@@ -45,7 +45,7 @@ function Set-CexTitle($status) {
 Set-CexTitle "BOOTING"
 
 try {
-    # BackgroundColor removed: fills entire buffer on Clear-Host (display bug)
+    $Host.UI.RawUI.BackgroundColor = "DarkBlue"
     $Host.UI.RawUI.ForegroundColor = "White"
     if (-not $env:CEX_GRID) {
         # Solo mode: set buffer + window size. Grid mode: spawn_grid controls sizing.
@@ -91,8 +91,8 @@ $cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermi
 $cliArgs += "--append-system-prompt", "N03_engineering/agent_card_n03.md"
 $cliArgs += "--append-system-prompt", ".cex/config/context_self_select.md"
 $cliArgs += "--append-system-prompt", $sysPrompt
-$args += "--mcp-config", "C:\Users\PC\Documents\GitHub\cex-main\.mcp-n03.json"
-$args += "--settings", "C:\Users\PC\Documents\GitHub\cex-main\.claude/nucleus-settings/n03.json"
+$args += "--mcp-config", "C:\Users\CEX\Documents\GitHub\cex\.mcp-n03.json"
+$args += "--settings", "C:\Users\CEX\Documents\GitHub\cex\.claude/nucleus-settings/n03.json"
 $cliArgs += $initialMsg
 
 Set-CexTitle "RUNNING"

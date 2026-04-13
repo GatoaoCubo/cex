@@ -4,9 +4,9 @@ kind: knowledge_card
 pillar: P01
 domain: multi-agent orchestration
 title: "OpenAI Agents SDK -- Deep Vocabulary Atlas"
-version: 1.0.0
+version: 2.0.0
 quality: 8.8
-tags: [openai, agents-sdk, multi-agent, orchestration, swarm, a2a, vocabulary]
+tags: [openai, agents-sdk, multi-agent, orchestration, swarm, a2a, vocabulary, voice, changelog, temporal]
 sources:
   - https://openai.github.io/openai-agents-python/
   - https://github.com/openai/openai-agents-python
@@ -18,12 +18,19 @@ sources:
   - https://openai.github.io/openai-agents-python/tracing/
   - https://openai.github.io/openai-agents-python/sessions/
   - https://openai.github.io/openai-agents-python/voice/pipeline/
+  - https://openai.github.io/openai-agents-python/ref/voice/pipeline/
+  - https://openai.github.io/openai-agents-python/ref/voice/workflow/
   - https://openai.github.io/openai-agents-python/mcp/
   - https://openai.github.io/openai-agents-python/context/
   - https://openai.github.io/openai-agents-python/results/
+  - https://openai.github.io/openai-agents-python/ref/result/
   - https://openai.github.io/openai-agents-python/streaming/
   - https://openai.github.io/openai-agents-python/human_in_the_loop/
+  - https://openai.github.io/openai-agents-python/release/
+  - https://github.com/openai/openai-agents-python/releases
+  - https://temporal.io/blog/announcing-openai-agents-sdk-integration
 date_researched: 2026-04-13
+date_enriched: 2026-04-13
 sdk_version: v0.13.6
 python_requires: ">=3.10"
 lineage: "Swarm (Oct 2024, experimental) -> Agents SDK (Mar 2025, production)"

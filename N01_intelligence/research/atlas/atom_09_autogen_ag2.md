@@ -3,15 +3,21 @@ id: atom_09_autogen_ag2
 kind: knowledge_card
 pillar: P01
 title: "AutoGen / AG2 Framework -- Deep Vocabulary Atlas"
-version: 1.0.0
+version: 1.1.0
 quality: 8.8
-tags: [multi-agent, autogen, ag2, microsoft, orchestration, groupchat, swarm]
+tags: [multi-agent, autogen, ag2, microsoft, orchestration, groupchat, swarm, graphflow, declarative]
 date: 2026-04-13
 sources:
   - https://github.com/ag2ai/ag2
   - https://docs.ag2.ai/
-  - https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen/
+  - https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/group-chat/patterns/
+  - https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/group-chat/handoffs/
+  - https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/swarm/deprecation/
   - https://docs.ag2.ai/latest/docs/blog/2025/04/28/0.9-Release-Announcement/
+  - https://microsoft.github.io/autogen/stable//user-guide/agentchat-user-guide/graph-flow.html
+  - https://learn.microsoft.com/en-us/agent-framework/agents/declarative
+  - https://learn.microsoft.com/en-us/agent-framework/workflows/declarative
+  - https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen/
 ---
 
 # AutoGen / AG2 Framework -- Deep Vocabulary Atlas

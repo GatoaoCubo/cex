@@ -1,7 +1,11 @@
-title: Comprehensive RAG Configuration Guide with CEX Kind Mapping
-author: AI Research Team
-date: '2025-07-15'
-description: Detailed technical reference for RAG system components, configuration strategies, and CEX kind mappings across
-  all pillars of RAG architecture.
-keywords: RAG, Retrieval-Augmented Generation, CEX, configuration, knowledge indexing, chunking strategies, embedding models,
-  evaluation metrics
+id: atom_21_rag_taxonomy
+kind: knowledge_card
+pillar: P01
+quality: 8.8
+title: RAG Taxonomy Surveys
+tags:
+- rag
+- retrieval
+- chunking
+- framework-atlas
+date: 2026-04-13

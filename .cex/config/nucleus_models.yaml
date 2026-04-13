@@ -38,9 +38,9 @@ n07:
 # --- N01: Research & Intelligence ---
 n01:
   cli: claude
-  model: claude-opus-4-6
+  model: claude-sonnet-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 1000000
+  context: 200000
   domain: research
   mcps: ".mcp-n01.json"
   settings: ".claude/nucleus-settings/n01.json"
@@ -55,14 +55,14 @@ n01:
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: gemini->opus. 1M context + deepest reasoning for research. Fallback uses gemini-2.5-flash (pro has aggressive quota on free tier)."
+  notes: "2026-04-13: opus->sonnet. Budget optimization: 5 Sonnet + 2 Opus. Preflight handles context compilation. Fallback uses gemini-2.5-flash."
 
 # --- N02: Marketing & Copy ---
 n02:
   cli: claude
-  model: claude-opus-4-6
+  model: claude-sonnet-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 1000000
+  context: 200000
   domain: marketing
   mcps: ".mcp-n02.json"
   settings: ".claude/nucleus-settings/n02.json"
@@ -77,7 +77,7 @@ n02:
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: sonnet->opus. Full reasoning for brand strategy + creative."
+  notes: "2026-04-13: opus->sonnet. Creative copy is Sonnet sweet spot. Preflight pre-compiles context."
 
 # --- N03: Engineering & Builder ---
 n03:
@@ -104,9 +104,9 @@ n03:
 # --- N04: Knowledge & RAG ---
 n04:
   cli: claude
-  model: claude-opus-4-6
+  model: claude-sonnet-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 1000000
+  context: 200000
   domain: knowledge
   mcps: ".mcp-n04.json"
   settings: ".claude/nucleus-settings/n04.json"
@@ -121,14 +121,14 @@ n04:
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: gemini->opus. 1M context for full knowledge library + taxonomy."
+  notes: "2026-04-13: opus->sonnet. Supabase+complex arch needs Sonnet minimum. Preflight handles context."
 
 # --- N05: Operations & DevOps ---
 n05:
   cli: claude
-  model: claude-opus-4-6
+  model: claude-sonnet-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 1000000
+  context: 200000
   domain: operations
   mcps: ".mcp-n05.json"
   settings: ".claude/nucleus-settings/n05.json"
@@ -143,14 +143,14 @@ n05:
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: sonnet->opus. Full reasoning for code review + CI/CD. N05 fallback prefers codex (code-specialized)."
+  notes: "2026-04-13: opus->sonnet. Code review + CI/CD well-defined for Sonnet. Preflight pre-compiles."
 
 # --- N06: Commercial & Brand ---
 n06:
   cli: claude
-  model: claude-opus-4-6
+  model: claude-sonnet-4-6
   flags: "--dangerously-skip-permissions --permission-mode bypassPermissions --no-chrome"
-  context: 1000000
+  context: 200000
   domain: commercial
   mcps: ".mcp-n06.json"
   settings: ".claude/nucleus-settings/n06.json"
@@ -165,27 +165,69 @@ n06:
   fallback_local:
     cli: ollama
     model: qwen3:8b
-  notes: "UPGRADED 2026-04-06: sonnet->opus. Full reasoning for pricing + monetization."
+  notes: "2026-04-13: opus->sonnet. Pricing + monetization structured enough for Sonnet."
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # GRID LOAD DISTRIBUTION (6 simultaneous during /grid):
 #
-#   Claude/Opus: N01 + N02 + N03 + N04 + N05 + N06  = 6 (all opus-4-6, 1M ctx)
-#   N07 runs in claude (separate session, doesn't compete)
+#   Claude/Opus:  N03 + N07       = 2 (deep reasoning, quality-critical)
+#   Claude/Sonnet: N01 + N02 + N04 + N05 + N06 = 5 (structured tasks, 5x throughput)
+#   N07 runs in separate session (doesn't compete with grid)
 #
-# UPGRADED 2026-04-06: All nuclei -> opus-4-6 for maximum reasoning + 1M context
+# 2026-04-13: Budget optimization. 7 Opus -> 2 Opus + 5 Sonnet.
+# Rationale: Max subscription has token caps. Opus for reasoning-critical
+# (orchestration + 8F artifact construction). Sonnet for well-structured domains.
+# Preflight (local Ollama or Haiku) pre-compiles context to reduce token burn.
+#
 # Fallback principle: always cross-provider (claude -> gemini-flash -> codex -> ollama)
-# Fallback local: qwen3:32b (heavy: N01,N03) / qwen3:14b (light: N02,N04,N05,N06)
+# Fallback local: qwen3:14b (N03) / qwen3:8b (all others)
 #
 # 2026-04-11: Added fallback_chain (ordered list). Consumed by cex_cli_resolver.py
-# during `-cli auto` mode in spawn_grid.ps1. Gemini-2.5-pro replaced with
-# gemini-2.5-flash after pro quota exhaustion in SELF_AUDIT_GEMINI multi-CLI test
-# (pro free tier: ~few hundred RPM, 24h reset; flash: separate pool, higher ceiling).
+# during `-cli auto` mode in spawn_grid.ps1.
 #
 # 2026-04-12: Added ollama_api config for tools that call Ollama via OpenAI SDK.
 # Verified: qwen3:8b and qwen3:14b both respond at localhost:11434/v1.
-# Tools: cex_auto_research.py, cex_vector_store.py, cex_evolve.py (agent mode).
 # -----------------------------------------------------------------------------------
+
+# --- Preflight Configuration ---
+# Pre-compilation phase: cheap/local model assembles context BEFORE nucleus boots.
+# Reduces token burn on main model by 60-70%.
+# Tool: _tools/cex_preflight.py (reads this config)
+preflight:
+  enabled: true
+  # Strategy: "local" = Ollama only, "cloud" = Haiku only, "hybrid" = local-first + Haiku fallback
+  strategy: hybrid
+  local:
+    cli: ollama
+    model: qwen3:14b
+    fallback_model: qwen3:8b
+    base_url: "http://localhost:11434/v1"
+    timeout_seconds: 30
+    # Tasks the local model handles (zero Max tokens spent):
+    tasks:
+      - file_scanning        # list relevant files for the task
+      - iso_ranking           # rank 13 ISOs by relevance, pick top 3-5
+      - context_dedup         # remove redundant context across sources
+      - token_counting        # count tokens before assembly
+      - embedding_retrieval   # TF-IDF / embedding similarity search
+  cloud:
+    cli: claude
+    model: claude-haiku-4-5-20251001
+    # Haiku is ~60x cheaper than Opus per token
+    tasks:
+      - semantic_ranking      # when local model ranking is uncertain
+      - prompt_compression    # summarize verbose context into dense form
+      - relevance_scoring     # score KC/ISO relevance 0-1 for selection
+  # Budget: max tokens the preflight phase can consume on cloud model
+  cloud_token_budget: 4000
+  # Output: compiled prompt written to .cex/cache/preflight/{nucleus}_{task_hash}.json
+  cache_dir: ".cex/cache/preflight"
+  # Context reduction targets
+  targets:
+    max_isos_per_build: 5           # from 13 -> top 5 most relevant
+    max_kcs_per_build: 3            # from all -> top 3
+    max_context_tokens: 15000       # target ceiling after compilation
+    original_avg_tokens: 50000      # baseline before preflight
 
 # --- Ollama API (OpenAI-compatible endpoint for tool-level access) ---
 ollama_api:

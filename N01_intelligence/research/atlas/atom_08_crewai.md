@@ -4,8 +4,9 @@ kind: knowledge_card
 pillar: P01
 quality: 8.8
 title: "CrewAI Deep Vocabulary Scrape"
-tags: [crewai, agent, framework-atlas]
+tags: [crewai, agent, framework-atlas, v0.100+, lancedb, flows, events]
 date: 2026-04-13
+version: 2.0
 ---
 
 # CrewAI: A Comprehensive Guide to Agents, Tasks, and Workflows
