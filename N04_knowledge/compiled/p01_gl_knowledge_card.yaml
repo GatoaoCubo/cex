@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-management
-quality: 8.8
+quality: 8.7
 tags:
 - glossary
 - knowledge-card
@@ -16,91 +16,109 @@ tldr: A dense, structured document encoding a single concept with mandatory fron
   format.
 density_score: 0.97
 updated: '2026-04-13'
-boundary: A Knowledge Card is a focused, machine-parseable knowledge artifact that encodes a single concept with unambiguous
-  boundaries. It is NOT a knowledge card without minimum density (≤0.7), nor a context document without explicit scope. It
-  is NOT a narrative, a report, or a process flow. It is NOT a container for multiple concepts. It is NOT a living document
-  with versioning.
-8f_pipeline_function: "Primary function: INJECT  \nInput: Unstructured domain knowledge (text, diagrams, interviews)  \nOutput:\
-  \ Structured KC with YAML frontmatter and Markdown body  \nProcess:  \n1. Concept extraction (via NLP or manual curation)\
-  \  \n2. Density validation (≥0.8)  \n3. Frontmatter injection (id, kind, pillar, etc.)  \n4. Section ordering (H1 → Core\
-  \ → Tables → CEX Integration)  \n5. Machine-parseable formatting (YAML + Markdown)  \nExample: A 300-word interview transcript\
-  \ is distilled into a 250-byte KC with 4 sections and 3 tables."
-structure_requirements: '| Section | Required | Format | Content Type | Example |
+boundary: A Knowledge Card is a focused, high-density document encoding a single concept with strict formatting rules. It
+  is NOT a knowledge_card without minimum density, nor a context_doc without defined scope.
+8f_pipeline_function: 'Primary function: INJECT Knowledge Cards are injected into the CEX pipeline as atomic units of truth.
+  They enable rapid integration, validation, and deployment of domain-specific knowledge across systems.'
+structure_requirements: '| YAML Field       | Required | Description                                  | Example Value                     |
 
-  |--------|----------|--------|--------------|---------|
+  |------------------|----------|----------------------------------------------|-----------------------------------|
 
-  | H1 | Yes | Markdown | Concept title | `# Knowledge Card: Quantum Entanglement` |
+  | id               | ✅       | Unique identifier for the KC                 | p01_gl_knowledge_card           |
 
-  | Core | Yes | Markdown | Definition, use cases | "Quantum entanglement is a physical phenomenon..." |
+  | kind             | ✅       | Document type (e.g., glossary_entry)         | glossary_entry                  |
 
-  | Tables | Optional | Markdown | Data, comparisons | "Comparison of Entanglement Theories" |
+  | pillar           | ✅       | Strategic pillar (P01-P05)                   | P01                             |
 
-  | CEX Integration | Optional | YAML | Links to CEX artifacts | `see: kc_structure_contract.md` |'
-comparison_kc_vs_document_types: '| Attribute | Knowledge Card (KC) | Context Document | Knowledge Article | Data Sheet |
-  Process Map |
+  | title            | ✅       | Human-readable title                         | "Knowledge Card (KC)"           |
 
-  |----------|---------------------|------------------|-------------------|------------|-------------|
+  | version          | ✅       | Semantic version (e.g., 1.0.0)                | 1.0.0                           |
 
-  | Purpose | Encode single concept | Provide contextual background | Explain complex topics | Store structured data | Visualize
-  workflows |
+  | created          | ✅       | ISO date of creation                         | 2026-04-07                      |
 
-  | Density Requirement | ≥0.8 | N/A | ≤0.6 | N/A | N/A |
+  | author           | ✅       | Owner/creator                                | n04_knowledge                   |
 
-  | Structure | YAML + Markdown | Free-form text | Headings + paragraphs | Tables + charts | Diagrams |
+  | domain           | ✅       | Knowledge domain                             | knowledge-management            |
 
-  | Use Case | CEX integration | Background reading | Training materials | Data reference | Process automation |
+  | quality          | ✅       | Quality score (0-10)                         | 8.7                             |
 
-  | Example | `# Quantum Entanglement` | "History of Quantum Mechanics" | "How to Build a Quantum Computer" | "Particle Mass
-  Table" | "Entanglement Experiment Flow" |'
+  | tags             | ✅       | Keywords for search/organization             | [glossary, knowledge-card, kc]  |
+
+  | tldr             | ✅       | One-sentence summary                         | "A dense, structured..."        |
+
+  | density_score    | ✅       | Calculated density (0-1)                     | 0.97                            |
+
+  | updated          | ⚠️       | Last update date (optional)                  | 2026-04-13                      |'
+comparison_table_knowledge_card_vs_document_types: '| Document Type     | Purpose                          | Density Requirement
+  | Max Size  | Use Case                          |
+
+  |-------------------|----------------------------------|---------------------|-----------|-----------------------------------|
+
+  | Knowledge Card (KC) | Atomic concept encoding          | ≥0.8                | 2KB/4KB   | CEX integration, knowledge
+  atoms |
+
+  | Context Doc       | Broader contextual explanation   | ≥0.5                | 10KB      | Background for multiple concepts
+  |
+
+  | Fact Sheet        | Detailed reference               | ≥0.6                | 8KB       | Operational procedures           |
+
+  | Technical Spec    | System/component definition      | ≥0.7                | 6KB       | Engineering documentation        |
+
+  | White Paper       | Strategic/philosophical argument | ≥0.4                | 20KB      | Policy advocacy, research        |'
 related_kinds:
-- 'Context Document: Provides broader background for KCs but lacks density requirements.'
-- 'Knowledge Article: Explains complex topics with lower density (≤0.6) and narrative structure.'
-- 'Data Sheet: Stores structured data (tables, charts) without conceptual encoding.'
-- 'Process Map: Visualizes workflows or procedures, often linked to KCs for context.'
-- 'Glossary Entry: Defines terms but lacks the structured format and density of KCs.'
-density_validation: "Rule: Every sentence must contribute to concept encoding.  \nValidation Method: Remove sentence → KC\
-  \ loses value?  \nExamples:  \n- \"Quantum entanglement is a physical phenomenon\" → Valid (core definition).  \n- \"This\
-  \ is a very important concept\" → Invalid (vague, no value added).  \n- \"Entanglement occurs between particles\" → Valid\
-  \ (specific detail).  \n- \"Some people find this confusing\" → Invalid (subjective, no value).  \n- \"Entanglement is used\
-  \ in quantum computing\" → Valid (application context)."
-cex_integration: "Purpose: Enable machine-readable integration with CEX systems.  \nMethods:  \n- YAML frontmatter for metadata\
-  \ (id, kind, pillar, etc.)  \n- Markdown body for content (H1, Core, Tables)  \n- Links to related artifacts (`see:` field)\
-  \  \nExample:  \nsee: \n  - kc_structure_contract.md\n  - knowledge-card-builder\nOutcome: KCs become searchable, linkable,\
-  \ and reusable across CEX platforms."
-use_cases:
-- 'Training: KCs encode core concepts for AI training (e.g., "Quantum Entanglement").'
-- 'Integration: KCs link to CEX artifacts via `see:` field (e.g., `kc_structure_contract.md`).'
-- 'Automation: KCs enable process automation by encoding rules (e.g., "Data Validation Rules").'
-- 'Search: KCs are indexed by CEX search engines for fast retrieval.'
-- 'Collaboration: KCs standardize knowledge sharing across teams (e.g., "API Design Principles").'
-limitations:
-- 'Size: Max 2KB (focused) or 4KB (comprehensive).'
-- 'Scope: Single concept only (no multiple topics).'
-- 'Format: YAML + Markdown only (no diagrams or videos).'
-- 'Language: English only (no multilingual support).'
-- 'Versioning: No versioning (static content only).'
-best_practices:
-- 'Start with H1: Use concise title (e.g., `# Knowledge Card: Quantum Entanglement`).'
-- 'Write Core First: Define the concept in 1-2 sentences.'
-- 'Add Tables: Use tables for data, comparisons, or examples.'
-- 'Link to CEX: Use `see:` field to connect to related artifacts.'
-- 'Validate Density: Ensure every sentence adds value (≥0.8 density).'
-example_kc: "---\nid: p01_gl_quantum_entanglement\nkind: glossary_entry\npillar: P01\ntitle: \"Quantum Entanglement\"\nversion:\
-  \ 1.0.0\ncreated: 2026-04-07\nauthor: n04_knowledge\ndomain: physics\nquality: 8.9\ntags: [glossary, quantum, physics]\n\
-  tldr: \"A physical phenomenon where particles become correlated, affecting each other instantaneously.\"\ndensity_score:\
-  \ 0.95\nupdated: \"2026-04-13\"\n---\n\n# Quantum Entanglement\n\nTerm: Quantum Entanglement  \nAbbreviation: QE  \nSynonyms:\
-  \ entanglement, spooky action at a distance  \n\nDefinition: A physical phenomenon where pairs or groups of particles become\
-  \ correlated, such that the quantum state of each particle cannot be described independently of the state of the others,\
-  \ even when the particles are separated by large distances.  \n\nSee: `kc_structure_contract.md`, `quantum-computing-basics`\
-  \  \n\n## Boundary\n\nQuantum entanglement is a specific physical phenomenon. It is NOT a general theory of quantum mechanics,\
-  \ nor a philosophical interpretation. It is NOT a process or a tool.  \n\n## 8F Pipeline Function\n\nPrimary function: INJECT\
-  \  \nInput: Research papers, experimental data  \nOutput: Structured KC with YAML frontmatter and Markdown body  \nExample:\
-  \ A 500-word paper on entanglement is distilled into a 350-byte KC with 3 sections and 2 tables.  \n\n## Structure Requirements\n\
-  \n| Section | Required | Format | Content Type | Example |\n|--------|----------|--------|--------------|---------|\n| H1\
-  \ | Yes | Markdown | Concept title | `# Quantum Entanglement` |\n| Core | Yes | Markdown | Definition, use cases | \"Quantum\
-  \ entanglement is a physical phenomenon...\" |\n| Tables | Optional | Markdown | Data, comparisons | \"Comparison of Entanglement\
-  \ Theories\" |\n| CEX Integration | Optional | YAML | Links to CEX artifacts | `see: kc_structure_contract.md` |\n\n## Use\
-  \ Cases\n\n1. Training: KCs encode core concepts for AI training (e.g., \"Quantum Entanglement\").  \n2. Integration: KCs\
-  \ link to CEX artifacts via `see:` field (e.g., `kc_structure_contract.md`).  \n3. Automation: KCs enable process automation\
-  \ by encoding rules (e.g., \"Data Validation Rules\").  \n4. Search: KCs are indexed by CEX search engines for fast retrieval.\
-  \  \n5. Collaboration: KCs standardize knowledge sharing across teams (e.g., \"API Design Principles\").  "
+- 'Context Document: Provides broader context for multiple KCs, with lower density requirements.'
+- 'Fact Sheet: Contains detailed procedural or operational knowledge, often used in training.'
+- 'Technical Specification: Defines system/component behavior with higher engineering focus.'
+- 'White Paper: Advocates for strategic approaches, often used in policy or research contexts.'
+- 'Knowledge Bundle: Aggregates multiple KCs into a cohesive package for complex topics.'
+core_content_requirements:
+- 'Single Concept Focus: Must encode one concept without ambiguity.'
+- 'Machine-Readable: YAML frontmatter must validate against `kc_structure_contract.md`.'
+- 'Density Enforcement: Every sentence must contribute to the concept''s definition.'
+- 'Section Order: H1 → Core → Tables → CEX Integration (no deviations).'
+cex_integration: "Knowledge Cards are the foundation for:  \n- Automated Validation: Tools like `kc-validator` ensure compliance\
+  \ with structure and density.  \n- Search/Discovery: Tags and metadata enable precise retrieval in CEX repositories.  \n\
+  - Pipeline Injection: Used in `8F` workflows for rapid deployment of knowledge units."
+example_use_cases:
+- 'Glossary Entry: Define "Knowledge Card" with metadata for search.'
+- 'Technical Concept: Encode "Quantum Entanglement" with equations and references.'
+- 'Process Definition: Document "CI/CD Pipeline" with step-by-step integration.'
+- 'Policy Statement: Encode "Data Privacy Regulation" with legal citations.'
+- 'System Component: Define "Blockchain Consensus Mechanism" with technical specs.'
+density_optimization_techniques:
+- 'Remove Redundancy: Eliminate duplicate explanations or examples.'
+- 'Use Tables: Replace prose with tabular data (e.g., parameters, equations).'
+- 'Precise Language: Avoid vague terms; use domain-specific jargon.'
+- 'Frontmatter Utilization: Place metadata in YAML, not prose.'
+- 'Strict Sectioning: Keep H1, Core, Tables, and CEX Integration distinct.'
+quality_assurance:
+- 'Automated Checks: Tools like `kc-validator` enforce structure and density.'
+- 'Peer Review: Mandatory for all KCs above quality score 8.0.'
+- 'Version Control: Track changes with semantic versioning (e.g., 1.0.0 → 1.1.0).'
+- 'Density Metrics: Calculated using `density_score` field (0-1 scale).'
+- 'Continuous Monitoring: Repositories audit KCs quarterly for compliance.'
+evolution_of_knowledge_cards: '| Version | Date       | Change Description                          | Impact                          |
+
+  |---------|------------|---------------------------------------------|---------------------------------|
+
+  | 1.0.0   | 2026-04-07 | Initial release with core structure         | Foundation for CEX integration  |
+
+  | 1.1.0   | 2026-05-15 | Added density optimization techniques       | Improved quality assurance      |
+
+  | 1.2.0   | 2026-06-30 | Introduced automated validation tools       | Faster deployment cycles        |
+
+  | 1.3.0   | 2026-08-15 | Expanded use cases for technical concepts   | Broader adoption in engineering |
+
+  | 1.4.0   | 2026-10-01 | Added peer review requirements              | Enhanced accuracy and trust     |'
+limitations_and_best_practices:
+- 'Avoid Ambiguity: KCs must be unambiguous; use precise definitions.'
+- 'No Cross-References: Link to other KCs via tags, not internal references.'
+- 'Language Consistency: Use a single language (English) for global consistency.'
+- 'Avoid Over-Engineering: Keep complexity low for rapid deployment.'
+- 'Regular Updates: Review and update KCs annually to maintain relevance.'
+future_enhancements:
+- 'AI-Generated Drafts: Use LLMs for initial drafting, with human validation.'
+- 'Interactive Elements: Embed diagrams or code snippets for technical KCs.'
+- 'Multilingual Support: Expand to non-English domains with localized tags.'
+- 'Integration with Ontologies: Link KCs to external knowledge graphs.'
+- 'Real-Time Validation: Implement live checks during authoring.'
