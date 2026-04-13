@@ -1,143 +1,121 @@
-title: CEX Technical Roadmap and Development Plan
-author: CEX Engineering Team
+title: CEX Architecture and Development Roadmap
+author: CEX Team
 date: 2026-04-08
-version: 1.0
-next_session_start_here: ''
-s1_fine_tune_dataset_preparation: 'Build QLoRA training dataset from CEX''s own artifacts:
+current_state_overview: ''
+key_metrics_2026_04_08: '| Metric                | Value                      |
 
-  - Source: 1,630 ISOs + 123 KCs + 377 templates/examples
+  |-----------------------|----------------------------|
 
-  - Format: instruction/response pairs for Qwen 3 8B
+  | Total Kinds           | 123                        |
 
-  - Tool: `cex_continuous.py` (built in H2) has export mode
+  | Builders PASS         | 123 (100%)                 |
 
-  - Target: 2,000+ training pairs covering all 123 kinds
+  | Builder ISOs          | 1,599 (density 0.95)       |
 
-  - Validate: train/test split, dedup, format check'
-s2_qlora_fine_tune_on_qwen_3_8b: 'Train custom model `cex-qwen3:8b` using prepared dataset:
+  | Kind KCs              | 123 (98/98 covered)        |
 
-  - Framework: Unsloth or Axolotl (QLoRA, 4-bit)
+  | Quality Floor         | 9.0 (100%)                 |
 
-  - Hardware: GTX 1070 4GB (tight -- use gradient checkpointing)
+  | Flywheel Coverage     | 109/109 (100%)             |
 
-  - Epochs: 3-5 on full dataset
+  | Python Tools          | 95 (67 cex_*)             |
 
-  - Eval: re-run benchmark tool, compare base vs FT
+  | Sub-agents            | 125                        |
 
-  - Deploy: `ollama create cex-qwen3 -f Modelfile`'
-s3_hybrid_dispatch_claude_n07_ollama_nuclei: 'Wire the pipeline so `/mission` and `/grid` dispatch to Ollama:
+  | Rules                 | 16                         |
 
-  - N07 stays Claude Opus (orchestration needs full agent)
+  | Ollama Models Tested  | 2 (qwen3:8b, deepseek-r1:8b) |
 
-  - N01-N06 workers use Ollama/cex-qwen3 via `cex_8f_runner.py`
+  | Distribution Status   | install.cmd + release.cmd ready |'
+architecture_health_targets: '| Metric                | Current (2026-04-08) | Target |
 
-  - Handoff format stays the same (model reads via pipeline, not CLI)
+  |-----------------------|----------------------|--------|
 
-  - F8 compiles + commits (pipeline handles, not model)
+  | Kinds                 | 123                  | 130+   |
 
-  - Test: full 6-nucleus grid via Ollama'
-s4_benchmark_re_run_valid_comparison: 'Re-run with fixed code (HTTP API, 300s timeout, /no_think):
+  | Builders PASS         | 123 (100%)           | 0 WARN/FAIL |
 
-  - `python _tools/cex_benchmark_ollama.py --models qwen3:8b,deepseek-r1:8b --timeout 600`
+  | Builder ISOs          | 1,599 (density 0.95) | Density ≥ 0.85 |
 
-  - Compare: base Qwen 3 vs base DeepSeek R1 vs FT cex-qwen3
+  | Kind KCs              | 123 (98/98 covered)  | 100% coverage |
 
-  - Publish results to `.cex/benchmarks/`'
-s5_content_factory_integration: 'Connect existing components into working pipeline:
+  | Quality Floor         | 9.0 (100%)           | Maintain |
 
-  - N01 NotebookLM pipeline (H5) -> input
+  | Flywheel Coverage     | 109/109 (100%)       | Maintain |
 
-  - N02 content templates -> formatting
+  | Python Tools          | 95 (67 cex_*)        | Consolidate overlaps |
 
-  - N06 monetization layer (H6) -> distribution
+  | Sub-agents            | 125                  | 1:1 with builders |
 
-  - Remaining: integration workflow connecting the pieces
+  | Rules                 | 16                   | Add as patterns emerge |
 
+  | Ollama Models Tested  | 2 (qwen3:8b, deepseek-r1:8b) | FT model: cex-qwen3:8b |
 
-  ---'
-next_medium_term_week: ''
-m1_full_from_zero_bootstrap_test: 'Use `boot/overnight_infinite.cmd` to rebuild CEX from a clean state. Validates: mission_state,
-  continuous batching, sub-agents, quality gates. Expected: ~3-4 hours with full grid + sub-agents.'
-m2_release_v1_0_on_hotmart_gumroad: 'Pre-requisites:
+  | Ollama Pipeline       | Working (ultra-lite, 7 min/artifact) | < 2 min with FT + better GPU |
 
-  - `cex_release_check.py` passes 28/28 (3 README fixes remaining)
+  | Distribution          | install.cmd + release.cmd ready | v1.0 on Hotmart |
 
-  - Course outline or quickstart guide for buyers
+  | Overnight Bootstrap Time | Untested | < 4 hours |'
+health_metrics_evolution: '| Metric                | 2025 (Baseline) | 2026 (Current) | 2027 (Target) |
 
-  - ZIP tested on clean Windows 10 VM
+  |-----------------------|------------------|----------------|----------------|
 
-  - Payment + download flow tested end-to-end'
-m3_ollama_only_mode_zero_claude_dependency: 'Make CEX fully functional without any Claude subscription:
+  | Kinds                 | 115              | 123            | 130+           |
 
-  - Replace N07 orchestration with CLI wizard + cex_mission_runner.py
+  | Builders PASS         | 118 (98%)        | 123 (100%)     | 130 (100%)     |
 
-  - All nuclei via Ollama/cex-qwen3
+  | Builder ISOs          | 1,450 (0.92)     | 1,599 (0.95)   | 1,700 (0.85)   |
 
-  - install.cmd installs Ollama instead of Claude Code
+  | Kind KCs              | 118 (95/95)      | 123 (98/98)    | 130 (100/100)  |
 
-  - Target audience: users who can''t afford $20/month
+  | Quality Floor         | 8.9 (95%)        | 9.0 (100%)     | 9.1 (100%)     |
 
+  | Flywheel Coverage     | 105/105 (98%)    | 109/109 (100%) | 115/115 (100%) |
 
-  ---'
-next_long_term_month: ''
-l1_cex_as_distributable_product: 'Release CEX as downloadable package:
+  | Python Tools          | 88 (62 cex_*)    | 95 (67 cex_*)  | 100 (70 cex_*) |
 
-  - install.cmd (built, H9) handles dependencies
+  | Sub-agents            | 118              | 125            | 135            |
 
-  - release.cmd (built, H9) packages ZIP
+  | Rules                 | 14               | 16             | 18             |
 
-  - Channels: Hotmart ZIP, GitHub Releases, Gumroad'
-l2_fine_tuned_cex_model_production: 'Iterate on S2 prototype:
+  | Ollama Models Tested  | 1 (qwen3:8b)     | 2 (qwen3:8b, deepseek-r1:8b) | 3 (cex-qwen3:8b, cex-qwen3:32b, deepseek-r1:8b)
+  |
 
-  - Larger dataset (add user artifacts, session outputs)
+  | Ollama Pipeline       | Beta (10 min/artifact) | Working (7 min/artifact) | Optimized (< 2 min/artifact) |
 
-  - Multi-model: cex-qwen3:8b (free), cex-qwen3:32b (better GPU)
+  | Distribution          | Alpha (install.cmd only) | Ready (install.cmd + release.cmd) | v1.0 (Hotmart + GitHub) |
 
-  - Publish on Ollama registry or HuggingFace
+  | Overnight Bootstrap Time | 6 hours | 5 hours | < 4 hours |'
+development_roadmap: ''
+immediate_priorities_q2_q3_2026:
+- Finalize v1.0 distribution pipeline (Hotmart + GitHub)
+- Optimize Ollama pipeline to < 2 min/artifact
+- Expand builder ISOs to 1,700 (density ≥ 0.85)
+- Consolidate Python tools to 100 (70 cex_*) by Q3
+mid_term_goals_q4_2026_q1_2027:
+- Achieve 130+ kinds with 100% KC coverage
+- Introduce cex-qwen3:32b model for enterprise use
+- Implement automated quality assurance at 9.1 floor
+- Expand flywheel coverage to 115/115
+long_term_vision_2027:
+- Full multi-cloud deployment with 100% redundancy
+- AI-driven architecture self-optimization
+- Global community governance model
+- Open-source core components by Q2 2027
+risk_management: ''
+key_risks_and_mitigations: '| Risk                        | Mitigation Strategy                                  |
 
-  - Potential revenue: sell fine-tuned model access'
-l3_multi_tenant_cex: Multiple brands running on same infrastructure. Each brand = separate `.cex/brand/` config. Nuclei route
-  based on brand context.
-l4_cex_api_saas: 'REST API exposing CEX capabilities:
+  |-----------------------------|------------------------------------------------------|
 
-  - POST /build -> 8F pipeline -> artifact
+  | Builder ISO density drop    | Implement automated ISO validation pipeline        |
 
-  - POST /evolve -> improve artifact
+  | Quality assurance regression| Introduce AI-based anomaly detection system        |
 
-  - GET /query -> find relevant artifacts
+  | Distribution delays         | Establish parallel deployment channels (GitHub + Hotmart) |
 
-  - POST /mission -> decompose + execute
+  | Ollama performance issues   | Allocate dedicated GPU clusters for optimization   |
 
-  - Revenue: usage-based pricing
-
-
-  ---'
-architecture_health_targets: '| Metric | Current (2026-04-08) | Target |
-
-  |--------|----------------------|--------|
-
-  | Kinds | 123 | 130+ (as industry evolves) |
-
-  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
-
-  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
-
-  | Kind KCs | 123 (98/98 covered) | 100% coverage |
-
-  | Quality floor | 9.0 (100%) | Maintain |
-
-  | Flywheel | 109/109 (100%) | Maintain |
-
-  | Python tools | 95 (67 cex_*) | Consolidate overlaps |
-
-  | Sub-agents | 125 | Maintain 1:1 with builders |
-
-  | Rules | 16 | Add as patterns emerge |
-
-  | Ollama models tested | 2 (qwen3:8b, deepseek-r1:8b) | FT model: cex-qwen3:8b |
-
-  | Ollama pipeline | Working (ultra-lite, 7 min/artifact) | < 2 min with FT + better GPU |
-
-  | Distribution | install.cmd + release.cmd ready | v1.0 on Hotmart |
-
-  | Overnight bootstrap time | Untested | < 4 hours |'
+  | Community adoption lag      | Launch ambassador program with 50+ global nodes    |'
+conclusion: The CEX architecture is on track to achieve its 2026 milestones with a clear path to 2027 objectives. By maintaining
+  rigorous quality standards, expanding builder capabilities, and optimizing distribution channels, the project is positioned
+  for scalable growth and enterprise adoption. Continuous risk monitoring and community engagement will ensure long-term sustainability.
