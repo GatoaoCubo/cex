@@ -19,43 +19,44 @@ density_score: 0.85
 ## Definition  
 | metric | threshold | operator | scope |  
 |---|---|---|---|  
-| Configuration Validity | 100% | equals | All reward model YAMLs |  
+| Reward Model Validity | 100% | equals | All reward configurations |  
 
 ## HARD Gates  
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not match `^[a-zA-Z0-9_-]{3,20}$` |  
-| H03 | kind matches | kind is not `reward_model` |  
-| H04 | Reward scope defined | Missing `scope` field |  
-| H05 | Thresholds set | Missing `threshold` values |  
-| H06 | Operator valid | Operator not in `>=, >, <, <=, ==` |  
-| H07 | Version number present | Missing `version` field |  
-| H08 | Configuration non-empty | Empty configuration block |  
+| H02 | ID matches pattern | ID does not conform to `^[A-Z]{3}-[0-9]{4}$` |  
+| H03 | kind matches | `kind` ≠ `reward_model` |  
+| H04 | Reward parameters defined | Missing required parameters (e.g., `weight`, `threshold`) |  
+| H05 | Threshold numeric | Threshold is non-numeric or out of range |  
+| H06 | Outcome alignment | Outcomes not linked to measurable KPIs |  
+| H07 | Documentation exists | No README or configuration guide provided |  
+| H08 | Versioning applied | Missing `version` field or invalid format |  
+| H09 | No duplicate IDs | Duplicate ID detected in configuration |  
 
 ## SOFT Scoring  
 | Dim | Dimension | Weight | Scoring Guide |  
 |---|---|---|---|  
-| D01 | YAML structure | 0.15 | 1.0 if valid, 0.5 if partial, 0 otherwise |  
-| D02 | Metric clarity | 0.12 | 1.0 if unambiguous, 0.7 if vague, 0 otherwise |  
-| D03 | Threshold reasonableness | 0.10 | 1.0 if logical, 0.5 if questionable, 0 otherwise |  
-| D04 | Operator validity | 0.10 | 1.0 if standard, 0.5 if non-standard, 0 otherwise |  
-| D05 | Scope coverage | 0.15 | 1.0 if comprehensive, 0.7 if partial, 0 otherwise |  
-| D06 | Versioning | 0.10 | 1.0 if semantic, 0.5 if missing, 0 otherwise |  
-| D07 | Documentation | 0.10 | 1.0 if present, 0.5 if minimal, 0 otherwise |  
-| D08 | Audit trail | 0.18 | 1.0 if complete, 0.7 if partial, 0 otherwise |  
+| D01 | YAML Structure | 0.15 | 1.0 if valid, 0.5 if partial, 0.0 if invalid |  
+| D02 | ID Pattern | 0.10 | 1.0 if matches, 0.0 otherwise |  
+| D03 | Kind Consistency | 0.10 | 1.0 if correct, 0.0 otherwise |  
+| D04 | Reward Parameters | 0.15 | 1.0 if complete, 0.5 if partial, 0.0 if missing |  
+| D05 | Threshold Validity | 0.10 | 1.0 if numeric and valid, 0.0 otherwise |  
+| D06 | Outcome Alignment | 0.15 | 1.0 if aligned, 0.5 if weak, 0.0 if none |  
+| D07 | Documentation | 0.10 | 1.0 if present, 0.0 otherwise |  
+| D08 | Versioning | 0.10 | 1.0 if valid, 0.0 otherwise |  
+| D09 | Duplicate Checks | 0.05 | 1.0 if no duplicates, 0.0 otherwise |  
 
 ## Actions  
 | Score | Action |  
 |---|---|  
-| GOLDEN (>=9.5) | Automatically approve and deploy |  
-| PUBLISH (>=8.0) | Publish with minimal review |  
-| REVIEW (>=7.0) | Schedule review with technical lead |  
-| REJECT (<7.0) | Reject and require rework |  
+| GOLDEN (≥9.5) | Auto-approve and notify stakeholders |  
+| PUBLISH (≥8.0) | Require review by PM and QA |  
+| REVIEW (≥7.0) | Flag for feedback and minor fixes |  
+| REJECT (<7.0) | Block deployment; require rework |  
 
 ## Bypass  
 | conditions | approver | audit trail |  
 |---|---|---|  
-| Critical bug fix | CTO | Signed-off by CTO on [date] |  
-| Compliance exception | Compliance Officer | Approved by Compliance Officer on [date] |  
-| Emergency deployment | CTO | Emergency deployment log [ID] |
+| Emergency fix required | CTO | "Bypassed by [CTO] on [date] for critical issue" |  
+| Legacy system compatibility | CTO | "Bypassed by [CTO] on [date] for legacy integration" |
