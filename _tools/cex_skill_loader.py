@@ -40,21 +40,21 @@ SOURCE_PRIORITY = {
     "brand": 4,
 }
 
-# All 13 ISO file patterns per builder
+# All 13 ISO file patterns per builder (must match actual filenames on disk)
 ISO_PATTERNS = [
     "bld_manifest_{kind}.md",
     "bld_instruction_{kind}.md",
     "bld_system_prompt_{kind}.md",
-    "bld_memory_{kind}.md",
-    "bld_scoring_{kind}.md",
-    "bld_hooks_{kind}.md",
-    "bld_style_{kind}.md",
-    "bld_quality_{kind}.md",
-    "bld_template_{kind}.md",
-    "bld_examples_{kind}.md",
-    "bld_context_{kind}.md",
-    "bld_tools_{kind}.md",
     "bld_schema_{kind}.md",
+    "bld_output_template_{kind}.md",
+    "bld_examples_{kind}.md",
+    "bld_memory_{kind}.md",
+    "bld_tools_{kind}.md",
+    "bld_quality_gate_{kind}.md",
+    "bld_knowledge_card_{kind}.md",
+    "bld_architecture_{kind}.md",
+    "bld_collaboration_{kind}.md",
+    "bld_config_{kind}.md",
 ]
 
 # Stage-to-ISO mapping: which ISO prefixes are needed for each 8F stage.
