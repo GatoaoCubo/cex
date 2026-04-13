@@ -14,7 +14,7 @@ keywords: [prompt_compiler, intent, transmutation, resolution, kind-mapping, ver
 triggers: ["create intent resolution rules", "build prompt compiler", "map user input to kinds"]
 capabilities: >
   L1: Specialist in building `prompt_compiler` -- intent-to-artifact transmutation rules with kind/pillar/nucleus resolution. L2: Analyze user input patterns (PT+EN) and map to CEX taxonomy ({kind, pillar, nucleus, verb}). L3: When user needs to create, build, or scaffold prompt_compiler artifacts.
-quality: null
+quality: 9.0
 title: "Manifest Prompt Compiler"
 tldr: "Builder for intent-to-artifact transmutation rules that compile vague user input into structured CEX actions."
 density_score: 0.92
