@@ -1,101 +1,34 @@
-title: Input Schema for Content Orders
-author: N06 Commercial Nucleus
-date: 2023-10-05
-description: Contract defining required data for content order submission. Validates before burning credits.
-keywords: content pipeline, order schema, validation rules, credit calculation
+title: Input Schema for Content Order Pipeline
+description: Contract defining required data for content order processing
+generated_by: N06 Commercial Nucleus
 version: 1.3
-license: Internal Use Only
-1_schema_definition: "topic: \"Introduction to Python type hints for beginners\"\naudience:\n  segment: developer\n  skill_level:\
-  \ beginner\nformats:\n  - blog_post\n  - social_media_set\n# Credits: 8 + 12 = 20 (within free tier limits)\n\n---"
-2_validation_rules: ''
-2_1_pre_pipeline_gates: '| # | Rule | Error Code | Message |
-
-  |---|---|---|---|
-
-  | V1 | `topic.length >= 10` | TOPIC_TOO_SHORT | "Topic must be at least 10 characters. Be specific." |
-
-  | V2 | `audience` object present | AUDIENCE_MISSING | "Who is this for? Specify segment and skill_level." |
-
-  | V3 | `formats` has >= 1 item | NO_FORMATS | "Select at least 1 output format." |
-
-  | V4 | `course_config` present if `course_module` in formats | COURSE_CONFIG_MISSING | "Course module selected but no course_config
-  provided." |
-
-  | V5 | `billing.credits_available >= billing.credits_required` | INSUFFICIENT_CREDITS | "Not enough credits. Need {required},
-  have {available}." |
-
-  | V6 | `brand_config` file exists (if not ''auto'') | BRAND_NOT_FOUND | "Brand config file not found at specified path."
-  |
-
-  | V7 | No duplicate formats in array | DUPLICATE_FORMAT | "Format ''{format}'' listed twice." |
-
-  | V8 | `video_produced_*` requires tier >= creator | VIDEO_REQUIRES_PAID | "Video production requires Creator tier or above."
-  |
-
-  | V9 | `course_module` requires tier >= pro | COURSE_REQUIRES_PRO | "Course modules require Pro tier or above." |
-
-
-  ---'
-3_credit_calculation: "def calculate_credits(order):\n    CREDIT_MAP = {\n        \"blog_post\": 8,\n        \"social_media_set\"\
-  : 12,\n        \"video_script\": 5,\n        \"video_produced_short\": 25,\n        \"video_produced_long\": 45,\n     \
-  \   \"podcast_episode\": 10,\n        \"course_module\": 30,\n        \"ebook_chapter\": 10,\n        \"presentation\":\
-  \ 12,\n        \"email_sequence\": 8,\n        \"landing_page\": 15,\n    }\n    \n    base = sum(CREDIT_MAP[f] for f in\
-  \ order[\"formats\"])\n    \n    # Course modules multiply by count\n    if \"course_module\" in order[\"formats\"]:\n \
-  \       modules = order.get(\"course_config\", {}).get(\"modules\", 8)\n        base += CREDIT_MAP[\"course_module\"] *\
-  \ (modules - 1)  # first already counted\n    \n    # Rush surcharge\n    if order.get(\"delivery\", {}).get(\"priority\"\
-  ) == \"rush\":\n        base = int(base * 1.5)\n    \n    # Bundle discount (4+ formats = 20% off)\n    if len(order[\"\
-  formats\"]) >= 4:\n        base = int(base * 0.80)\n    \n    return base\n\n---"
-4_example_orders: ''
-4_1_minimal_order_free_tier: "topic: \"Introduction to Python type hints for beginners\"\naudience:\n  segment: developer\n\
-  \  skill_level: beginner\nformats:\n  - blog_post\n  - social_media_set\n# Credits: 8 + 12 = 20 (within free tier limits)"
-4_2_standard_order_pro_tier: "topic: \"How to build a content pipeline using CEX 8F\"\naudience:\n  segment: developer\n \
-  \ skill_level: intermediate\nformats:\n  - blog_post\n  - social_media_set\n  - video_produced_short\n  - podcast_episode\n\
-  \  - presentation\n  - email_sequence\nlanguage: pt-BR\ntone: technical\ndepth: standard\nsocial_config:\n  platforms: [instagram,\
-  \ linkedin, twitter_x, youtube]\n  posts_per_platform: 3\n  include_canva_designs: true\nvideo_config:\n  voice: elevenlabs_default\n\
-  \  subtitles: true\n  aspect_ratio: \"9:16\"\ndelivery:\n  priority: standard\n  auto_publish: false\n  output_format: all\n\
-  metadata:\n  campaign_name: \"CEX_launch_week1\"\n# Credits: (8+12+25+10+12+8) * 0.80 = 60 credits (bundle discount applied)"
-4_3_full_factory_order_studio_tier: "topic: \"Complete guide to pricing SaaS products in Brazil: strategy, psychology, competitors\"\
-  \naudience:\n  segment: executive\n  skill_level: advanced\nformats:\n  - blog_post\n  - social_media_set\n  - video_script\n\
-  \  - video_produced_short\n  - video_produced_long\n  - podcast_episode\n  - course_module\n  - ebook_chapter\n  - presentation\n\
-  \  - email_sequence\n  - landing_page\nlanguage: pt-BR\ntone: professional\ndepth: detailed\nsocial_config:\n  platforms:\
-  \ [instagram, linkedin, twitter_x, youtube, facebook]\n  posts_per_platform: 5\n  include_canva_designs: true\nvideo_config:\n\
-  \  voice: elevenlabs_default\n  subtitles: true\n  aspect_ratio: \"16:9\"\ndelivery:\n  priority: rush\n  auto_publish:\
-  \ true\n  output_format: all\nmetadata:\n  campaign_name: \"SaaS_Pricing_Guide\"\n# Credits: (8+12+5+25+45+10+30+10+12+8+15)\
-  \  1.5  0.80 = 344.4 credits\n\n---"
-5_order_lifecycle: "graph TD\n    A[Order Submission] --> B{Validation}\n    B -->|Success| C[Credit Check]\n    B -->|Failure|\
-  \ D[Error Response]\n    C -->|Success| E[Content Generation]\n    C -->|Failure| F[Payment Required]\n    E --> G[Delivery]\n\
-  \    G --> H[Completion]\n\n---"
-6_api_endpoint_mapping: '| Stage | Endpoint | Method | Description |
-
-  |------|----------|--------|-------------|
-
-  | Submit | `/api/v1/orders` | POST | Create new content order |
-
-  | Validate | `/api/v1/orders/{id}/validate` | GET | Check order validity |
-
-  | Credit Check | `/api/v1/orders/{id}/credits` | GET | Verify credit availability |
-
-  | Generate | `/api/v1/orders/{id}/generate` | POST | Initiate content generation |
-
-  | Deliver | `/api/v1/orders/{id}/deliver` | GET | Retrieve generated content |
-
-  | Status | `/api/v1/orders/{id}/status` | GET | Check order progress |
-
-
-  ---'
-7_related_kinds: '- validation_schema: Defines the structure and constraints for output artifacts, ensuring consistency after
-  content generation.
-
-  - content_producer: Implements the execution phase, generating content artifacts based on validated orders.
-
-  - pricing_engine: Calculates credit requirements and applies discounts/surcharges during the estimation phase.
-
-  - billing_system: Manages credit checks, payment authorizations, and refund calculations throughout the order lifecycle.
-
-  - orchestrator: Coordinates the pipeline stages, queuing orders and managing their execution order and progress tracking.
-
-
-  ---'
-8_boundary: Contrato de entrada que define dados requeridos. NÃO é validation_schema (saida) nem type_def (definição abstrata).
-  ---
-9_8f_pipeline_function: 'Primary function: CONSTRAIN'
+depends_on:
+- N05 (input validator)
+- N06 (pricing engine)
+- N03+N04 (content producers)
+- N07 (orchestrator)
+credits_8_12_25_10_12_8_0_80_60_credits_bundle_discount_applied: "### 3.3 Full Factory Order (Studio Tier)\n\ntopic: \"Complete\
+  \ guide to pricing SaaS products in Brazil: strategy, psychology, competitors\"\naudience:\n  segment: executive\n  skill_level:\
+  \ advanced\nformats:\n  - blog_post\n  - social_media_set\n  - video_script\n  - video_produced_short\n  - video_produced_long\n\
+  \  - podcast_episode\n  - course_module\n  - ebook_chapter\n  - presentation\n  - email_sequence\n  - landing_page\nlanguage:\
+  \ pt-BR\ntone: educational\ndepth: deep\ncourse_config:\n  modules: 6\n  include_quiz: true\n  include_certificate: true\n\
+  \  platform: hotmart\nsocial_config:\n  platforms: [instagram, linkedin, twitter_x, youtube, tiktok]\n  posts_per_platform:\
+  \ 5\n  include_canva_designs: true\nvideo_config:\n  voice: elevenlabs_default\n  subtitles: true\n  aspect_ratio: \"9:16\"\
+  \ndelivery:\n  priority: rush\n  notify_email: customer@example.com\n  auto_publish: false\n  output_format: all\nmetadata:\n\
+  \  campaign_name: \"saas_pricing_masterclass\"\n  reference_urls:\n    - \"https://example.com/competitor-pricing\"\n  notes:\
+  \ \"Focus on Brazilian market dynamics. Include PIX payment psychology.\""
+credits_base_330_5_extra_modules_150_480_bundle_20_384_rush_1_5x_576_credits: "---\n\n## 4. Order Lifecycle\n\n[SUBMIT] -->\
+  \ [VALIDATE] --> [ESTIMATE] --> [AUTHORIZE] --> [QUEUE] --> [EXECUTE] --> [DELIVER]\n               |               |  \
+  \             |\n               v               v               v\n          Reject if       Calculate        Check credits\n\
+  \          invalid        credits needed    or trigger\n          (V1-V9)                          checkout\n\n| Stage \
+  \      | Responsible Component | Description |\n|-------------|-----------------------|-------------|\n| Submit      | Content\
+  \ Management System | Order initiation |\n| Validate    | N05 (input validator) | Schema compliance check |\n| Estimate\
+  \    | N06 (pricing engine) | Credit calculation |\n| Authorize   | Billing Engine        | Payment verification |\n| Queue\
+  \       | N07 (orchestrator)    | Resource allocation |\n| Execute     | N03+N04 (content producers) | Artifact generation\
+  \ |\n| Deliver     | Delivery System       | Content distribution |\n\n---\n\n## 5. API Endpoint Mapping\n\n| Endpoint |\
+  \ Method | Description |\n|---------|--------|-------------|\n| `/orders` | POST | Submit new content order |\n| `/orders/{id}`\
+  \ | GET | Retrieve order status |\n| `/orders/{id}/validate` | POST | Manual validation trigger |\n| `/orders/{id}/cancel`\
+  \ | POST | Cancel in-progress order |\n| `/credits` | GET | Check available credits |\n\n---\n\n## Boundary\n\nContract\
+  \ defining required data for content order processing\n\n--- \n\n## 8F Pipeline Function\n\nPrimary function: CONSTRAIN\
+  \  \nEnsures input conforms to schema requirements before processing, maintaining system integrity and consistency across\
+  \ all components."
