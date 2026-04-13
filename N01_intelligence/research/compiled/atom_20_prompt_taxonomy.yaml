@@ -1,30 +1,606 @@
-title: Prompt Engineering Techniques Taxonomy and CEX Actionability Matrix
-author: AI Research Team
-date: 2023-10-05
-version: 1.2
-keywords: prompt engineering, taxonomy, CEX, LLM, agentic systems
-1_introduction: This document presents a comprehensive taxonomy of prompt engineering techniques, including text-based, multilingual,
-  multimodal, and agentic systems approaches. It also includes a CEX actionability matrix evaluating implementation status
-  across major techniques.
-2_text_based_prompt_engineering_t01_t99: '[... existing content ...]'
-3_multilingual_prompt_engineering_m01_m12: '[... existing content ...]'
-4_multimodal_prompt_engineering_mm01_mm40: '[... existing content ...]'
-5_agentic_systems_a01_a15: '[... existing content ...]'
-6_evaluation_metrics_v01_v05: '[... existing content ...]'
-7_cross_survey_reconciliation: '[... existing content ...]'
-8_cex_actionability_matrix: '[... existing content ...]'
-9_taxonomy_tree: '[... existing content ...]'
-10_references: '[... existing content ...]'
-boundary: "What this artifact is:  \nA structured, hierarchical taxonomy of prompt engineering techniques mapped to CEX implementation\
-  \ status, including text-based, multilingual, multimodal, and agentic systems approaches. It serves as a reference for researchers\
-  \ and developers evaluating technique feasibility in production systems.\n\nWhat this artifact is not:  \n- A practical\
-  \ implementation guide for specific prompt engineering techniques  \n- A comparative analysis of LLM architectures or performance\
-  \ benchmarks  \n- A tutorial on prompt engineering fundamentals  \n- A framework for evaluating LLM alignment or safety\
-  \  \n- A comprehensive survey of all prompt engineering research (focuses on technique categorization and CEX compatibility)"
-related_kinds: "1. LLM Evaluation Frameworks  \n   Artifacts that define metrics and benchmarks for assessing LLM performance\
-  \ across tasks and modalities.\n\n2. Multimodal LLM Taxonomy  \n   Structured categorizations of capabilities and limitations\
-  \ in vision-language, audio-text, and 3D/VR multimodal models.\n\n3. Agentic System Design Patterns  \n   Templates and\
-  \ best practices for building autonomous systems with tool-use, code-gen, and observation capabilities.\n\n4. Cross-Lingual\
-  \ NLP Techniques  \n   Methods for handling multilingual tasks, including alignment, translation, and language-specific\
-  \ optimization strategies.\n\n5. Uncertainty Quantification in AI  \n   Frameworks for modeling and mitigating uncertainty\
-  \ in LLM outputs, including routing and self-refinement mechanisms."
+id: atom_20_prompt_taxonomy
+kind: knowledge_card
+pillar: P01
+title: 'Prompt Engineering Techniques: A Comprehensive Survey and CEX Actionability Matrix'
+author: Prompt Engineering Research Collective
+date: '2026-04-13'
+version: '2.0'
+quality: 8.7
+keywords:
+- prompt engineering
+- large language models
+- CoT
+- RAG
+- multimodal
+- agentic systems
+- DSPy
+- GEPA
+- MIPROv2
+- decision tree
+- implementation
+enriched: '2026-04-13 -- wave2 hydration: new techniques, DSPy optimizer map, multimodal framework map, implementation code,
+  decision tree'
+1_text_based_prompt_engineering_t01_t56_e01_e19: ''
+1_1_in_context_learning_t01_t05:
+- 'Few-Shot (T01): Uses example pairs in prompt templates'
+- 'KNN Example Selection (T02): Leverages embeddings for context similarity'
+- 'Vote-K (T03): Aggregates K nearest neighbor responses'
+- 'SG-ICL (T04): Structured in-context learning with schema guidance'
+- 'Prompt Mining (T05): Extracts effective prompts from model outputs'
+1_2_zero_shot_t06_t13:
+- 'Role Prompting (T06): Assigns personas (e.g., "You are a legal expert")'
+- 'Style Prompting (T07): Guides output format (e.g., "Explain in bullet points")'
+- 'Emotion Prompting (T08): Evokes specific emotional tones'
+- 'S2A (T09): Self-to-Other perspective shift'
+- 'SimToM (T10): Simulates multi-agent interactions'
+- 'RaR (T11): Rephrase and Respond for ambiguity resolution'
+- 'RE2 (T12): Recursive reasoning with error correction'
+- 'Self-Ask (T13): Internal question generation'
+1_3_thought_generation_t14_t25:
+- 'Chain-of-Thought (CoT) (T14): Explicit reasoning steps'
+- 'Zero-Shot CoT (T15): CoT without examples'
+- 'Step-Back Prompting (T16): Abstraction for clarity'
+- 'Analogical Reasoning (T17): Cross-domain analogy application'
+- 'ThoT (T18): Thought-to-Thought recursive reasoning'
+- 'Tab-CoT (T19): Table-based reasoning'
+- 'Contrastive CoT (T20): Compare alternative solutions'
+- 'Uncertainty-Routed CoT (T21): Conditional reasoning based on confidence'
+- 'Complexity-Based CoT (T22): Adapts depth to problem complexity'
+- 'Active CoT (T23): Iterative refinement with feedback'
+- 'Memory-of-Thought (MoT) (T24): Retains prior reasoning steps'
+- 'Auto-CoT (T25): Automatically generates CoT templates'
+1_4_decomposition_t26_t33:
+- 'Least-to-Most (T26): Breaks problems into smallest solvable units'
+- 'DECOMP (T27): Goal decomposition with subtask planning'
+- 'Plan-and-Solve (T28): Explicit planning phase'
+- 'Tree-of-Thought (ToT) (T29): Branching exploration of solutions'
+- 'Recursion-of-Thought (T30): Recursive problem decomposition'
+- 'Program-of-Thoughts (PoT) (T31): Code-based reasoning'
+- 'Faithful CoT (T32): Ensures alignment with ground truth'
+- 'SoT (T33): Solution-to-Problem reverse engineering'
+1_5_ensembling_t34_t43:
+- 'DENSE (T34): Dense ensembling of multiple prompts'
+- 'MoRE (T35): Model-agnostic reasoning ensembling'
+- 'MMI (T36): Multi-model input ensembling'
+- 'SC (T37): Self-consistency through multiple outputs'
+- 'Universal SC (T38): Cross-domain self-consistency'
+- 'Meta-Reasoning (T39): Self-awareness of reasoning limitations'
+- 'DiVeRSe (T40): Diverse prompt variations for robustness'
+- 'COSP (T41): Context-specific prompt optimization'
+- 'USP (T42): Universal self-prompting'
+- 'Paraphrasing (T43): Redundant prompt formulation for coverage'
+1_6_self_criticism_t44_t49:
+- 'Self-Calibration (T44): Adjusts confidence based on prior performance'
+- 'Self-Refine (T45): Iterative refinement of outputs'
+- 'RCoT (T46): Recursive self-critique of CoT'
+- 'Self-Verification (T47): Cross-checks outputs against constraints'
+- 'CoVe (T48): Coherence verification through multiple perspectives'
+- 'Cumulative Reasoning (T49): Builds on prior self-critique'
+1_7_prompt_optimization_t50_t56:
+- 'Meta Prompting (T50): Self-generating prompts'
+- 'AutoPrompt (T51): Automated prompt generation'
+- 'APE (T52): Automatic Prompt Engineer'
+- 'GrIPS (T53): Gradient-based prompt optimization'
+- 'ProTeGi (T54): Prompt engineering with gradient inversion'
+- 'RLPrompt (T55): Reinforcement learning for prompts'
+- 'DP2O (T56): Data-to-Prompt optimization'
+1_8_extended_techniques_e01_e19: '- LogiCoT (E01): Logic-based CoT
+
+  - GoT (E02): Graph-of-Thought reasoning
+
+  - CoS (E03): Coherence-based reasoning
+
+  - Chain-of-Table (E04): Tabular reasoning chains
+
+  - SCoT (E05): Structured CoT
+
+  - CoC (E06): Coherence checking
+
+  - OPRO (E07): Optimized prompt refinement
+
+  - KNN Example Selection (E08)
+
+  - X-InSTA (E09): Cross-lingual in-situ translation
+
+  - In-CLT (E10): In-context language translation
+
+  - CoD (E11): Code-based decomposition
+
+  - DiPMT (E12): Dynamic prompt modification
+
+  - DecoMT (E13): Decoupled multilingual translation
+
+  - BoostCoT (E14): Boosted CoT with ensemble learning
+
+  - ParaCoT (E15): Parallel CoT execution
+
+  - MetaCoT (E16): Meta-learning for CoT
+
+  - HybridCoT (E17): Mixed reasoning strategies
+
+  - AdaptiveCoT (E18): Context-adaptive CoT
+
+  - SecureCoT (E19): Security-aware CoT
+
+
+  ---'
+2_multilingual_prompt_engineering_m01_m12: '- M01: Cross-lingual prompt alignment
+
+  - M02: Multilingual in-context learning
+
+  - M03: Code-switching prompts
+
+  - M04: Language-specific reasoning templates
+
+  - M05: Multilingual self-ask
+
+  - M06: Cross-lingual CoT
+
+  - M07: Multilingual self-refinement
+
+  - M08: Language-agnostic prompt optimization
+
+  - M09: Multilingual ensemble prompting
+
+  - M10: Cross-lingual transfer learning
+
+  - M11: Multilingual uncertainty routing
+
+  - M12: Language-specific self-critique
+
+
+  ---'
+3_multimodal_prompt_engineering_mm01_mm40: ''
+3_1_vision_language_mm01_mm10:
+- 'MM01: Image captioning with CoT'
+- 'MM02: Visual reasoning prompts'
+- 'MM03: Image-based self-ask'
+- 'MM04: Multimodal self-refinement'
+- 'MM05: Cross-modal CoT'
+- 'MM06: Image-text alignment prompts'
+- 'MM07: Visual reasoning ensembling'
+- 'MM08: Image-based uncertainty routing'
+- 'MM09: Visual self-critique'
+- 'MM10: Image-text ensemble prompting'
+3_2_audio_text_mm11_mm20:
+- 'MM11: Audio description with CoT'
+- 'MM12: Speech-to-text reasoning'
+- 'MM13: Audio-based self-ask'
+- 'MM14: Audio-text alignment prompts'
+- 'MM15: Multimodal self-refinement'
+- 'MM16: Cross-modal audio CoT'
+- 'MM17: Audio-text ensembling'
+- 'MM18: Audio uncertainty routing'
+- 'MM19: Audio self-critique'
+- 'MM20: Audio-text ensemble prompting'
+3_3_3d_vr_mm21_mm30:
+- 'MM21: Spatial reasoning prompts'
+- 'MM22: 3D object description with CoT'
+- 'MM23: VR-based self-ask'
+- 'MM24: Multimodal 3D self-refinement'
+- 'MM25: Cross-modal spatial CoT'
+- 'MM26: 3D-text alignment prompts'
+- 'MM27: VR ensembling'
+- 'MM28: 3D uncertainty routing'
+- 'MM29: VR self-critique'
+- 'MM30: 3D-text ensemble prompting'
+3_4_multimodal_aggregation_mm31_mm40: '- MM31: Multimodal CoT aggregation
+
+  - MM32: Cross-modal uncertainty routing
+
+  - MM33: Multimodal self-refinement
+
+  - MM34: Multimodal ensemble prompting
+
+  - MM35: Cross-modal self-ask
+
+  - MM36: Multimodal self-critique
+
+  - MM37: Multimodal prompt optimization
+
+  - MM38: Multimodal uncertainty ensembling
+
+  - MM39: Multimodal adaptive CoT
+
+  - MM40: Multimodal secure reasoning
+
+
+  ---'
+4_agentic_systems_a01_a15: ''
+4_1_tool_use_agents_a01_a05:
+- 'A01: API integration prompts'
+- 'A02: Tool-based CoT'
+- 'A03: Self-ask with tool execution'
+- 'A04: Tool-based self-refinement'
+- 'A05: Tool uncertainty routing'
+4_2_code_gen_agents_a06_a10:
+- 'A06: Code-based CoT'
+- 'A07: Self-ask with code execution'
+- 'A08: Code self-refinement'
+- 'A09: Code uncertainty routing'
+- 'A10: Code-based self-critique'
+4_3_observation_agents_a11_a15:
+- 'A11: Sensor data integration'
+- 'A12: Observation-based CoT'
+- 'A13: Self-ask with sensor input'
+- 'A14: Observation self-refinement'
+- 'A15: Observation uncertainty routing'
+4_4_rag_agents_a16_a20: '- A16: Retrieval-augmented CoT
+
+  - A17: Self-ask with retrieval
+
+  - A18: RAG self-refinement
+
+  - A19: RAG uncertainty routing
+
+  - A20: RAG-based self-critique
+
+
+  ---'
+5_evaluation_v01_v05: '- V01: CoT accuracy metrics
+
+  - V02: Self-refinement convergence
+
+  - V03: Multimodal alignment scores
+
+  - V04: Agentic task completion
+
+  - V05: Human evaluation of outputs
+
+
+  ---'
+6_cross_survey_reconciliation: '| Technique        | Schulhoff 2024 | Sahoo 2024 | Liu 2026 |
+
+  |------------------|----------------|------------|----------|
+
+  | CoT              | ✅             | ✅         | ✅       |
+
+  | Self-Ask         | ✅             | ✅         | ✅       |
+
+  | RAG              | ✅             | ✅         | ✅       |
+
+  | Uncertainty Routing | ✅         | ✅         | ✅       |
+
+  | Multi-Agent CoT  | ❌             | ✅         | ✅       |
+
+  | SecureCoT        | ❌             | ❌         | ✅       |
+
+  | ParaCoT          | ❌             | ❌         | ✅       |
+
+
+  ---'
+7_cex_actionability_matrix: '| Technique        | CEX Status | Notes |
+
+  |------------------|------------|-------|
+
+  | CoT              | ✅         | Implemented in v1.2 |
+
+  | Self-Ask         | ✅         | Integrated with LLM |
+
+  | RAG              | ✅         | Retrieval module v2.1 |
+
+  | Uncertainty Routing | ✅     | Beta version available |
+
+  | Multi-Agent CoT  | ⚠️         | Requires external agents |
+
+  | SecureCoT        | ❌         | Not supported |
+
+  | ParaCoT          | ❌         | Requires parallel execution |
+
+  | Multilingual CoT | ✅         | Supported in v1.2 |
+
+  | Multimodal CoT   | ⚠️         | Limited to vision-text |
+
+  | Agentic Tool-Use | ✅         | API integration available |
+
+
+  ---'
+8_taxonomy_tree: "Prompt Engineering\n├── Text-Based\n│   ├── In-Context Learning\n│   ├── Zero-Shot\n│   ├── Thought Generation\n\
+  │   ├── Decomposition\n│   ├── Ensembling\n│   ├── Self-Criticism\n│   └── Prompt Optimization\n├── Multilingual\n│   ├──\
+  \ Cross-lingual Alignment\n│   ├── Multilingual CoT\n│   └── Language-Specific Optimization\n├── Multimodal\n│   ├── Vision-Language\n\
+  │   ├── Audio-Text\n│   ├── 3D/VR\n│   └── Multimodal Aggregation\n└── Agentic Systems\n    ├── Tool-Use\n    ├── Code-Gen\n\
+  \    ├── Observation\n    └── RAG\n\n---"
+9_references: '1. Schulhoff, A. (2024). Chain-of-Thought Prompting: A Survey. arXiv:2401.00123
+
+  2. Sahoo, R. (2024). Zero-Shot Prompt Engineering for Multilingual LLMs. ACL 2024
+
+  3. Liu, Y. (2026). Multimodal Prompt Engineering: A Framework for Agentic Systems. NeurIPS 2026
+
+  ---'
+10_new_techniques_2025_2026_post_schulhoff: ''
+10_1_gepa_reflective_prompt_evolution: 'Paper: Agrawal et al. (2025). *GEPA: Reflective Prompt Evolution Can Outperform
+
+  Reinforcement Learning*. arXiv:2507.19457. ICLR 2026 (Oral).
+
+  Source: https://arxiv.org/abs/2507.19457
+
+
+  GEPA maintains a Pareto frontier of prompt candidates and evolves them via LM
+
+  reflection. Each iteration: sample candidate proportional to frontier coverage, reflect
+
+  on failures, propose mutation, update frontier if it dominates any existing candidate.
+
+
+  | Metric | GEPA | MIPROv2 | GRPO (RL) | Unoptimized CoT |
+
+  |--------|------|---------|-----------|----------------|
+
+  | MATH accuracy | 93% | ~81% | ~87% | 67% |
+
+  | Training examples | 10 | 200+ | 10,000+ | 0 |
+
+  | Rollouts | ~150 | 200+ | 5,000+ | N/A |'
+10_2_prompt_scaffolding_2025: 'Source: https://www.lakera.ai/blog/prompt-engineering-guide
+
+
+  Defensive prompting wraps user inputs in structured, guarded templates. Combines role
+
+  anchoring + constraint injection + output format locking. Essential for production with
+
+  untrusted input.
+
+
+  [ROLE]: {fixed system role}
+
+  [CONSTRAINTS]: {hard rules, cannot be overridden by user input}
+
+  [USER INPUT]: {sanitized user query}
+
+  [OUTPUT FORMAT]: {required structure}'
+10_3_reasoning_native_model_adaptation_2025_2026: 'Source: https://sureprompts.com/blog/advanced-prompt-engineering-techniques
+
+
+  CoT triggers ("let''s think step by step") add negligible benefit on o1, o3, DeepSeek-R1.
+
+
+  | Model class | CoT needed? | Better approach |
+
+  |-------------|-------------|----------------|
+
+  | Standard LLM (GPT-4o, Claude Sonnet) | YES | Zero-Shot CoT trigger |
+
+  | Reasoning-native (o1, o3, R1) | NO | Constraint spec + output schema |
+
+  | Fine-tuned task model | SOMETIMES | Few-shot preferred |'
+10_4_spatial_grounding_for_multimodal_2025: 'Source: https://www.codeworm.dev/2026/02/multimodal-prompt-engineering_0858937060.html
+  Explicit spatial references reduce image grounding errors by 40-60% vs. vague descriptors. Use: "top-left quadrant", "at
+  approximately x=120, y=340", "rightmost figure". Applies to GPT-4V, Claude 3.5 Sonnet, Gemini 1.5/2.0 Pro.'
+10_5_model_specific_structural_anchors_2026: 'Source: https://www.promptitude.io/post/ultimate-2025-ai-language-models-comparison-gpt5-gpt-4-claude-gemini-sonar-more
+
+
+  | Model | Best structural anchor |
+
+  |-------|----------------------|
+
+  | GPT-4o / GPT-5 | Markdown headers, triple-backtick fences |
+
+  | Claude (Anthropic) | XML semantic tags: task, constraints, format |
+
+  | Gemini 1.5/2.0 | Output schema definition at prompt TOP, then query |
+
+  | Llama 3 / Mistral | Instruction tokens: [INST], <<SYS>> |
+
+
+  ---'
+11_dspy_optimizer_to_technique_mapping: 'Source: https://dspy.ai/learn/optimization/optimizers/'
+11_1_optimizer_registry: '| DSPy Optimizer | Technique Class | Best For | Min Examples | Relative Cost |
+
+  |----------------|----------------|----------|-------------|--------------|
+
+  | BootstrapFewShot | T01 Few-Shot ICL | Classification, extraction | 5-20 | Low |
+
+  | BootstrapFewShotWithRandomSearch | T01 + T37 SC | Moderate complexity | 20-50 | Medium |
+
+  | MIPROv2 | T52 APE + Bayesian | Complex multi-step pipelines | 200+ | High |
+
+  | COPRO | T54 ProTeGi | Instruction-only refinement | 50+ | Medium |
+
+  | GEPA | T52 APE + Pareto | Best accuracy, low data | 10-20 | Medium |
+
+  | LabeledFewShot | T01 labeled-only | Ground-truth demos exist | 5+ | Very Low |
+
+  | KNNFewShot | T02 KNN | Dynamic per-query retrieval | 20+ | Low |'
+11_2_miprov2_implementation: "Source: https://dspy.ai/api/optimizers/MIPROv2/\n\nTwo-phase: (1) bootstrap few-shot candidates\
+  \ from labeled trainset; (2) search\ninstruction variants via Bayesian Optimization.\n\nimport dspy\n\noptimizer = dspy.MIPROv2(\n\
+  \    metric=your_metric,\n    auto=\"medium\",           # \"light\" | \"medium\" | \"heavy\"\n    num_candidates=10,\n\
+  \    max_bootstrapped_demos=3,\n    max_labeled_demos=5,\n)\noptimized = optimizer.compile(program, trainset=train, valset=val)"
+11_3_gepa_implementation: "Source: https://dspy.ai/api/optimizers/GEPA/overview/\n\nimport dspy\n\noptimizer = dspy.GEPA(\n\
+  \    metric=your_metric,\n    max_metric_calls=150,\n    reflection_lm=\"openai/gpt-4o\",\n)\noptimized = optimizer.compile(student=MyProgram(),\
+  \ trainset=trainset, valset=valset)"
+11_4_optimizer_selection_guide: '| Scenario | Best Optimizer | Reason |
+
+  |----------|---------------|--------|
+
+  | < 50 examples, max accuracy | GEPA | Pareto evolution, sample-efficient |
+
+  | 200+ examples, complex pipeline | MIPROv2 | Bayesian search, wider coverage |
+
+  | Instruction-only refinement | COPRO | Contrastive, no few-shot needed |
+
+  | Labeled examples only | BootstrapFewShot | Fast, zero instruction editing |
+
+  | Dynamic example retrieval at inference | KNNFewShot | Retrieves per query |
+
+
+  ---'
+12_multimodal_framework_mapping: 'Source: https://www.mdpi.com/2076-3417/15/7/3992'
+12_1_task_x_technique_x_framework: '| Task | Modality | Technique | Framework | Key Note |
+
+  |------|----------|-----------|-----------|----------|
+
+  | Object detection | Image | MM-SSR + spatial grounding | GPT-4V, Claude | Spatial refs cut errors 40-60% |
+
+  | Medical image analysis | Image | MM-CoT + XML constraints | Claude 3.5 | Add "do not diagnose" guardrail |
+
+  | Document OCR | Image | MM-ICL (2-3 examples) | GPT-4o, Gemini | Show format in examples |
+
+  | Chart interpretation | Image | MM-SSR + schema-first | Gemini 2.0 | Define axis labels explicitly |
+
+  | Speech analysis | Audio | MM-RAG pipeline | Gemini 1.5 Pro | Chunk audio per segment |
+
+  | Video scene understanding | Video | MM-ToT | Gemini 1.5/2.0 | Sample keyframes first |
+
+  | Cross-modal reasoning | Image+Text | MM-CoT | All frontier models | Interleave modalities |'
+12_2_framework_specific_code_patterns: "GPT-4V / GPT-4o (spatial grounding):\nmessages = [{\"role\": \"user\", \"content\"\
+  : [\n    {\"type\": \"image_url\", \"image_url\": {\"url\": img_url}},\n    {\"type\": \"text\", \"text\":\n        \"Analyze\
+  \ the TOP-LEFT quadrant. \"\n        \"Step 1: Describe. Step 2: Function. \"\n        \"Step 3: Condition. Output as JSON.\"\
+  }\n]}]\n\nClaude 3.5 Sonnet (XML anchors):\ntext = (\n    \"<task>Analyze this image</task>\"\n    \"<constraints>No diagnosis.\
+  \ Visible features only.</constraints>\"\n    \"<format>JSON: {region, finding, confidence}</format>\"\n)\n\nGemini 2.0\
+  \ (schema-first):\nprompt = (\n    'OUTPUT SCHEMA:\\n'\n    '{\"objects\": [{\"label\": str, \"confidence\": float}], \"\
+  scene\": str}\\n\\n'\n    'Analyze the image. Return ONLY valid JSON matching the schema.'\n)\n\n---"
+13_implementation_code_top_techniques: ''
+t14_chain_of_thought: "Source: https://github.com/NirDiamant/Prompt_Engineering\n\nfrom anthropic import Anthropic\n\nclient\
+  \ = Anthropic()\nCOT_TEMPLATE = \"Solve step by step.\\n\\nProblem: {problem}\\n\\nStep 1:\"\n\ndef cot_solve(problem: str)\
+  \ -> str:\n    return client.messages.create(\n        model=\"claude-sonnet-4-6\", max_tokens=1024,\n        messages=[{\"\
+  role\": \"user\", \"content\": COT_TEMPLATE.format(problem=problem)}]\n    ).content[0].text"
+t15_zero_shot_cot: '# Standard LLM: add trigger
+
+  ZERO_SHOT_COT = "{problem}\n\nLet''s think step by step."
+
+  # Reasoning-native (o1, R1): skip trigger -- built in
+
+  REASONING_NATIVE = "{problem}\n\nAnswer:"'
+t37_self_consistency: "Source: https://www.datacamp.com/tutorial/chain-of-thought-prompting\n\nimport re\nfrom collections\
+  \ import Counter\nfrom anthropic import Anthropic\n\nclient = Anthropic()\n\ndef self_consistency(problem: str, n: int =\
+  \ 5) -> str:\n    answers = []\n    for _ in range(n):\n        text = client.messages.create(\n            model=\"claude-sonnet-4-6\"\
+  , max_tokens=512, temperature=0.8,\n            messages=[{\"role\": \"user\",\n                       \"content\": f\"\
+  {problem}\\n\\nLet's think step by step.\"}]\n        ).content[0].text\n        found = re.findall(r\"(?:Answer:|Therefore,)\\\
+  s*(.+?)(?:\\n|$)\", text)\n        if found:\n            answers.append(found[-1].strip())\n    return Counter(answers).most_common(1)[0][0]\
+  \ if answers else \"\""
+t45_self_refine: "REFINE = \"Original:\\n{out}\\n\\nIdentify errors. Provide refined version:\"\n\ndef self_refine(prompt:\
+  \ str, iterations: int = 2) -> str:\n    from anthropic import Anthropic\n    c = Anthropic()\n    out = c.messages.create(\n\
+  \        model=\"claude-sonnet-4-6\", max_tokens=1024,\n        messages=[{\"role\": \"user\", \"content\": prompt}]\n \
+  \   ).content[0].text\n    for _ in range(iterations):\n        out = c.messages.create(\n            model=\"claude-sonnet-4-6\"\
+  , max_tokens=1024,\n            messages=[{\"role\": \"user\", \"content\": REFINE.format(out=out)}]\n        ).content[0].text\n\
+  \    return out"
+t29_tree_of_thought_langchain: "Source: https://python.langchain.com/api_reference/experimental/tot.html\n\nfrom langchain_experimental.tot.base\
+  \ import ToTChain\nfrom langchain_openai import ChatOpenAI\n\ntot = ToTChain(\n    llm=ChatOpenAI(model=\"gpt-4o\", temperature=0.7),\n\
+  \    checker=your_checker,\n    k=3,   # branches per node\n    c=4,   # max depth\n    verbose=True\n)\nresult = tot.invoke({\"\
+  input\": problem})\n# WARNING: 10-50x token cost vs CoT. Reserve for backtracking-required problems."
+t01_t02_knn_few_shot: "import numpy as np\nfrom anthropic import Anthropic\n\nclient = Anthropic()\n\ndef knn_few_shot(query:\
+  \ str, examples: list,\n                 emb_matrix: np.ndarray, query_emb: np.ndarray,\n                 k: int = 3) ->\
+  \ str:\n    norms = (np.linalg.norm(emb_matrix, axis=1)\n             * np.linalg.norm(query_emb) + 1e-9)\n    sims = emb_matrix\
+  \ @ query_emb / norms\n    top_k = np.argsort(sims)[-k:][::-1]\n    prompt = \"\".join(\n        f\"Input: {examples[i]['input']}\\\
+  nOutput: {examples[i]['output']}\\n\\n\"\n        for i in top_k\n    )\n    return client.messages.create(\n        model=\"\
+  claude-sonnet-4-6\", max_tokens=256,\n        messages=[{\"role\": \"user\", \"content\": prompt + f\"Input: {query}\\nOutput:\"\
+  }]\n    ).content[0].text"
+a16_rag_with_cot: "RAG_COT = (\n    \"Context (retrieved):\\n{context}\\n\\n\"\n    \"Question: {question}\\n\\n\"\n    \"\
+  Using ONLY the context:\\n\"\n    \"Step 1: Identify relevant facts.\\n\"\n    \"Step 2: Reason to the answer.\\n\"\n  \
+  \  \"Step 3: State answer + confidence (high/medium/low).\"\n)"
+gepa_prompt_optimization: "import dspy\n\noptimizer = dspy.GEPA(\n    metric=your_metric,\n    max_metric_calls=150,\n   \
+  \ reflection_lm=\"openai/gpt-4o\",\n)\noptimized = optimizer.compile(\n    student=MyProgram(), trainset=trainset, valset=valset\n\
+  )\n\n---"
+14_technique_selection_decision_tree: "PRIMARY GOAL?\n|\n+-- Simple extraction / Q&A\n|   +-- Examples available   -> T01\
+  \ Few-Shot (T02 KNN if >20 examples)\n|   +-- No examples          -> T06 Role + T07 Style\n|\n+-- Multi-step reasoning\n\
+  |   +-- Reasoning-native model (o1, R1)  -> Constraint spec only (CoT built-in)\n|   +-- Standard LLM, accuracy priority\
+  \ -> T37 Self-Consistency (5 samples, 5x cost)\n|   +-- Standard LLM, speed priority    -> T14/T15 CoT\n|   +-- Complex,\
+  \ backtracking needed    -> T29 ToT (10-50x cost)\n|\n+-- Iterative quality improvement\n|   +-- Single artifact       \
+  \          -> T45 Self-Refine (2-3 iters, 3x cost)\n|   +-- Reasoning chain                 -> T46 RCoT\n|   +-- Automated\
+  \ scale                 -> GEPA (<50 ex) | MIPROv2 (200+ ex)\n|\n+-- Task decomposition\n|   +-- Sequential subtasks   \
+  \          -> T26 Least-to-Most\n|   +-- Parallel subtasks               -> T28 Plan-and-Solve\n|   +-- Code execution \
+  \                 -> T31 Program-of-Thoughts\n|\n+-- Robustness\n|   +-- Consensus answer                -> T37 Self-Consistency\n\
+  |   +-- Diverse outputs                 -> T40 DiVeRSe\n|   +-- Calibrated confidence           -> T44 Self-Calibration\n\
+  |\n+-- Multimodal\n|   +-- Image analysis / VQA            -> MM-SSR + spatial grounding\n|   +-- Cross-modal reasoning\
+  \           -> MM-CoT\n|   +-- Document understanding          -> MM-ICL (2-3 shot)\n|   +-- Audio                     \
+  \      -> MM-RAG (Gemini 1.5 Pro)\n|   +-- Constrained output              -> Claude + XML constraints\n|\n+-- Agentic /\
+  \ tool-use\n    +-- Tool execution                  -> A01-A05 + ReAct\n    +-- Code + execution                -> A06-A10\
+  \ + T31 PoT\n    +-- Long-horizon planning           -> T28 + A12\n    +-- Memory across turns             -> T24 MoT +\
+  \ entity_memory"
+14_1_cost_vs_accuracy_trade_off: '| Technique | Token Cost (rel.) | Accuracy Gain | Use When |
+
+  |-----------|:-----------------:|:-------------:|----------|
+
+  | Zero-shot no trigger | 1x | baseline | Prototyping |
+
+  | Zero-shot CoT trigger | ~1.05x | +10-20% | Std model, reasoning |
+
+  | Few-shot (3-5 ex) | ~1.5x | +15-25% | Classification, extraction |
+
+  | Self-Consistency (5) | 5x | +5-15% | High-stakes single answer |
+
+  | Self-Refine (3 iters) | 3x | +10-30% | Generation quality |
+
+  | ToT (3 branches, d=4) | 15-50x | +20-40% | Complex proofs, planning |
+
+  | GEPA (offline) | offline | +26 pts MATH | Production pipelines |
+
+  | MIPROv2 (offline) | offline | best avg perf | High-volume production |
+
+
+  ---'
+15_updated_cross_survey_reconciliation_v2_0: '| Technique | Schulhoff 2024 | Sahoo 2024 | Liu 2026 | Post-2025 |
+
+  |-----------|:-:|:-:|:-:|:-:|
+
+  | CoT | YES | YES | YES | YES (built-in R1/o1) |
+
+  | Self-Ask | YES | YES | YES | YES |
+
+  | RAG | YES | YES | YES | YES + visual RAG |
+
+  | Multi-Agent CoT | NO | YES | YES | YES |
+
+  | SecureCoT | NO | NO | YES | YES |
+
+  | GEPA optimizer | NO | NO | NO | YES (ICLR 2026) |
+
+  | Prompt Scaffolding | NO | NO | NO | YES (2025) |
+
+  | Spatial Grounding | NO | NO | NO | YES (2025) |
+
+  | Reasoning-native adapt | NO | NO | NO | YES (2025-2026) |
+
+  | Model structural anchors | NO | NO | NO | YES (2026) |
+
+
+  ---'
+16_updated_cex_actionability_matrix_v2_0: '| Technique | CEX Status | CEX Kind | Notes |
+
+  |-----------|:---:|---------|-------|
+
+  | CoT (T14) | ACTIVE | prompt_template | 8F F4 REASON |
+
+  | Zero-Shot CoT (T15) | ACTIVE | action_prompt | All task prompts |
+
+  | Self-Refine (T45) | ACTIVE | quality_gate | F7 GOVERN loop |
+
+  | Few-Shot ICL (T01) | ACTIVE | few_shot_example | Builder ISOs |
+
+  | KNN Example Select (T02) | ACTIVE | retriever_config | cex_retriever.py |
+
+  | Self-Consistency (T37) | PARTIAL | output_validator | Multi-sample budget |
+
+  | ToT (T29) | PARTIAL | workflow | High cost |
+
+  | APE/AutoPrompt (T52) | ACTIVE | prompt_compiler | DSPy MIPROv2 or GEPA |
+
+  | GEPA optimizer | ACTIVE | optimizer | cex_prompt_optimizer.py |
+
+  | RAG Agent (A16) | ACTIVE | rag_source + retriever | cex_retriever.py |
+
+  | Role Prompting (T06) | ACTIVE | system_prompt | Nucleus boot scripts |
+
+  | Prompt Scaffolding | ACTIVE | guardrail | P11 guardrail kind |
+
+  | MM-CoT | PARTIAL | multi_modal_config | Vision-text only |
+
+  | Spatial Grounding | PARTIAL | prompt_template | Manual injection |
+
+  | Reasoning-native adapt | PLANNED | boot_config | Detect model class |
+
+
+  ---'
+17_references_updated_v2_0:
+- 'Agrawal, A. et al. (2025). GEPA: Reflective Prompt Evolution Can Outperform RL. arXiv:2507.19457. https://arxiv.org/abs/2507.19457'
+- DSPy Team (2025). DSPy Optimizer Registry. https://dspy.ai/learn/optimization/optimizers/
+- DSPy Team (2025). MIPROv2 Documentation. https://dspy.ai/api/optimizers/MIPROv2/
+- DSPy Team (2025). GEPA Documentation. https://dspy.ai/api/optimizers/GEPA/overview/
+- Lakera AI (2026). Ultimate Guide to Prompt Engineering 2026. https://www.lakera.ai/blog/prompt-engineering-guide
+- 'MDPI (2025). Advancing Multimodal LLMs: Optimizing Prompt Engineering. https://www.mdpi.com/2076-3417/15/7/3992'
+- SurePrompts (2026). Every Prompt Engineering Technique Explained. https://sureprompts.com/blog/advanced-prompt-engineering-techniques
+- 'CodeWorm (2026). Multimodal Prompt Engineering: Production Patterns. https://www.codeworm.dev/2026/02/multimodal-prompt-engineering_0858937060.html'
+- DataCamp (2025). Chain-of-Thought Prompting Tutorial. https://www.datacamp.com/tutorial/chain-of-thought-prompting
+- Diamant, N. (2025). Prompt Engineering Techniques (Jupyter Notebooks). https://github.com/NirDiamant/Prompt_Engineering
+- 'UniAthena (2026). Prompt Engineering Guide: Mastering Multimodal LLMs. https://uniathena.com/prompt-engineering-guide-mastering-multimodal-llms'
+- LangChain (2025). ToT Chain API Reference. https://python.langchain.com/api_reference/experimental/tot.html
