@@ -5,7 +5,7 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with {{vars}} that the LLM fills to produce a prompt_compiler artifact
 pattern: every field here exists in SCHEMA.md -- template derives, never invents
-quality: null
+quality: 9.1
 title: "Output Template Prompt Compiler"
 version: "1.0.0"
 author: n03_builder
