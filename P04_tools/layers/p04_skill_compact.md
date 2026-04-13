@@ -4,7 +4,7 @@ kind: skill
 pillar: P04
 title: "Skill: Context Compaction"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [skill, compact, context, memory, optimization]
 tldr: "Context compaction skill for reducing context window usage when approaching token limits. Preserves critical information while discarding low-value content."
 domain: "tools"
