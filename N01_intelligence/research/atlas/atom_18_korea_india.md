@@ -235,6 +235,34 @@ SKT's strategy: vertical integration from foundation model (A.X K1) through cons
 **Budget**: 240 billion won (~$175M USD) from Ministry of Science and ICT.
 **Goal**: Sovereign LLMs on domestic infrastructure, reducing dependence on US providers.
 
+### 1.7 Korea Sovereignty Controversy (Jan 2026): What Counts as "Independent" AI?
+
+The 240B won program hit turbulence in January 2026 when plagiarism allegations emerged against two of the five selected consortia.
+
+**The Naver Case**:
+
+| Dimension | Detail |
+|-----------|--------|
+| Allegation | HyperCLOVA X SEED 32B Think vision encoder = Alibaba Qwen2.4 encoder |
+| Evidence | Cosine similarity: 99.5%; Pearson correlation: 98.9% between encoder weight values |
+| Naver response | Acknowledged; called it "strategic adoption of a verified external encoder" for ecosystem compatibility |
+| Government position | Unclear -- no formal definition of what "developed from scratch" requires |
+
+**The Upstage Case**:
+
+| Dimension | Detail |
+|-----------|--------|
+| Allegation | Solar Open 100B copied Zhipu AI GLM-4.5-Air (Chinese model) |
+| Upstage response | Public verification session Jan 2, 2026, Gangnam: showed training logs, checkpoints, experimental data |
+| CEO statement | "Foundation model trained from scratch, built on original data" |
+| Outcome | Case closed quickly; hard questions remained open |
+
+**Broader implication -- the definition problem**:
+
+The controversy exposed the absence of a formal definition for "sovereign AI" in Korean policy. The government has not answered: Is component reuse (encoders, tokenizers) acceptable? What percentage of weights must be original? Does fine-tuning a foreign base count? This is not unique to Korea -- the EU AI Act and India's IndiaAI Mission face the same definitional gap. Any sovereign AI program that funds model development without defining "development from scratch" will face these disputes.
+
+**CEX relevance**: For N01 intelligence tracking, this is the canonical case study on sovereignty definitions. When benchmarking a model as "sovereign," verify: (1) base model origin, (2) encoder origin, (3) tokenizer origin, (4) training data origin. A model with 4/4 domestic is fully sovereign; 3/4 is hybrid. The Naver case = 2/4 (Korean base + Korean data + foreign vision encoder + foreign audio encoder in Omni-8B).
+
 ---
 
 ## 2. India: Voice-First + 22-Language Coverage
@@ -377,6 +405,21 @@ While Kruti is the consumer product, Krutrim-2 is the foundation model powering 
 
 ### 2.4 India 2026: New Sovereign Model Releases
 
+#### 2.4.0 India AI Impact Summit 2026 (Feb 16-21, New Delhi)
+
+Three sovereign AI models unveiled simultaneously at the India AI Impact Summit 2026, held February 16-21, New Delhi. Organized under the IndiaAI Mission (budget: INR 10,372 crore / $1.1B). Models: Sarvam (two models), BharatGen Param2, Gnani.ai Vachana.
+
+The summit marks the first coordinated sovereign AI release event outside the US/EU/China axis -- three models from one country in one week, all trained on domestic infrastructure. Comparable in strategic intent to China's coordinated DeepSeek/Qwen/Baidu releases, but with a different thesis: public infrastructure + voice-first vs commercial API dominance.
+
+**Sarvam "Vikram" (demo name)**: Sarvam's 30B model was showcased at the summit under the demonstration name "Vikram," honoring Vikram Sarabhai (eminent Indian physicist and astronomer who founded ISRO). Official release followed on March 6, 2026 under Apache 2.0 as Sarvam-30B. The naming is a deliberate cultural signal -- connecting India's AI sovereignty narrative to its space program legacy.
+
+| Model family | Demo/product name | Params | Official release |
+|-------------|------------------|--------|-----------------|
+| Sarvam 30B | Vikram (demo) | 30B (2.4B active) | March 6, 2026 -- Apache 2.0 |
+| Sarvam 105B | (no separate demo name) | 105B (10.3B active) | March 6, 2026 -- Apache 2.0 |
+| BharatGen PARAM-2 | PARAM-2 | 17B | Feb 2026 -- public digital good |
+| Gnani.ai Vachana | Inya VoiceOS | Speech models | Feb 2026 -- enterprise |
+
 **BharatGen PARAM-2** (Feb 2026, India AI Impact Summit, New Delhi):
 
 | Spec | Value |
@@ -423,6 +466,8 @@ Voice layer specialist. While Sarvam/Krutrim target full-stack LLMs, Gnani focus
 | Krutrim-2 | 12B | Dense (Mistral-NeMo) | Consumer + 22 languages | HuggingFace |
 | Tech Mahindra Project Indus | 8B | Not disclosed | Hindi education | Enterprise |
 | Gnani.ai Vachana | -- | Speech models | STT/TTS for Indic | Enterprise |
+
+**Gnani.ai Vachana -- Inya VoiceOS (2026 addition)**: Revealed at the summit: Vachana TTS can clone a human voice in 12 Indian languages using fewer than 10 seconds of audio. This is the voice cloning specification: 10-second sample -> multilingual voice clone across 12 Indic languages. Deployed inside India-only data centres for sovereignty compliance. The voice cloning capability positions Gnani for government and broadcast use cases where localized voice IDs are legally required.
 
 ---
 

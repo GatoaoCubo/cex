@@ -237,13 +237,31 @@ All of `AgentBase`, `MemoryBase`, `LongTermMemoryBase`, `Toolkit` inherit StateM
 
 ### 2.11 Hook System
 
-| Hook Type | Available On | Pre-Signature | Post-Signature |
-|-----------|-------------|---------------|----------------|
-| **pre_reply** / **post_reply** | AgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, output_msg) -> Msg\|None` |
-| **pre_observe** / **post_observe** | AgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, None) -> None` |
-| **pre_print** / **post_print** | AgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, output) -> Any` |
-| **pre_reasoning** / **post_reasoning** | ReActAgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, output) -> Any\|None` |
-| **pre_acting** / **post_acting** | ReActAgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, output) -> Any\|None` |
+**10 hooks across 5 core functions** (5 pre/post pairs):
+
+| # | Hook Name | Available On | What It Intercepts |
+|---|-----------|-------------|-------------------|
+| 1 | **pre_reply** | AgentBase+ | Before agent generates response |
+| 2 | **post_reply** | AgentBase+ | After agent response is generated |
+| 3 | **pre_observe** | AgentBase+ | Before agent receives broadcast message |
+| 4 | **post_observe** | AgentBase+ | After message stored in agent memory |
+| 5 | **pre_print** | AgentBase+ | Before console/queue output |
+| 6 | **post_print** | AgentBase+ | After output delivery |
+| 7 | **pre_reasoning** | ReActAgentBase+ | Before `_reasoning()` (thinking + tool selection) |
+| 8 | **post_reasoning** | ReActAgentBase+ | After reasoning step completes |
+| 9 | **pre_acting** | ReActAgentBase+ | Before `_acting()` (tool execution) |
+| 10 | **post_acting** | ReActAgentBase+ | After tool calls return results |
+
+**Canonical type signatures**:
+```python
+# Pre-hook (hooks 1, 3, 5, 7, 9)
+def pre_hook(self: AgentBase, kwargs: dict[str, Any]) -> dict[str, Any] | None:
+    ...  # return modified kwargs to replace, or None for pass-through
+
+# Post-hook (hooks 2, 4, 6, 8, 10)
+def post_hook(self: AgentBase, kwargs: dict[str, Any], output: Any) -> Any:
+    ...  # return replacement output, or None for pass-through
+```
 
 **Registration levels**:
 - Class-level (all instances): `AgentBase.register_class_hook(hook_type, hook_name, hook)`
@@ -252,20 +270,25 @@ All of `AgentBase`, `MemoryBase`, `LongTermMemoryBase`, `Toolkit` inherit StateM
 
 **Execution order**: Class hooks (insertion order) -> Instance hooks (insertion order) -> Core method -> Class post-hooks -> Instance post-hooks.
 
-**Storage implementation**: Six `OrderedDict` class attributes + six `OrderedDict` instance attributes per agent. Deterministic ordering for predictable distributed behavior.
+**Chaining behavior**: Non-`None` return propagates to next hook; all-`None` chain passes original args unchanged.
 
-**Pre-hook behavior**: Return modified `kwargs` dict to replace original; return `None` for pass-through.
-**Post-reply behavior**: Return new `Msg` to replace output for subsequent hooks and final return value.
+**Storage implementation**: Six `OrderedDict` class attributes + six `OrderedDict` instance attributes per agent. Deterministic ordering for predictable distributed behavior.
 
 **Critical constraint**: Never call the wrapped method inside its own hook (infinite loop).
 
-**ReMe integration**: `ReMeLight.pre_reasoning_hook()` is registered as a `pre_reasoning` hook on ReActAgent. Orchestration sequence: `compact_tool_result` -> `check_context` -> `compact_memory` -> `summary_memory` (async). This ensures context window never overflows before each reasoning step.
+**ReMe integration (5-step pre_reasoning sequence)**:
+`ReMeLight.pre_reasoning_hook()` is registered as a `pre_reasoning` hook on ReActAgent.
+Full execution order before each reasoning step:
+1. `compact_tool_result()` -- truncate long tool outputs, cache to `tool_result/<uuid>.txt`
+2. `check_context()` -- token-count current context via ContextChecker
+3. `compact_memory()` -- if threshold exceeded, generate structured summary (Goal/Progress/Decisions/NextSteps)
+4. `summary_memory()` (async) -- persist summary to `memory/YYYY-MM-DD.md`
+5. `mark_messages_compressed()` -- save raw dialog to `dialog/YYYY-MM-DD.jsonl`; mark with `_MemoryMark.COMPRESSED`
 
 **Registration code pattern**:
 ```python
 # Class-level -- applies to ALL instances of this class
 def audit_hook(agent, kwargs):
-    # modify or inspect kwargs
     return kwargs  # or None for pass-through
 
 AgentBase.register_class_hook(
@@ -299,15 +322,37 @@ Hints are injected as system messages per reasoning step.
 | Class | Purpose |
 |-------|---------|
 | **Task** | Evaluation unit: unique ID, input, ground truth, metrics, metadata |
-| **SolutionOutput** | Agent output: success flag, final output, complete trajectory |
-| **MetricBase** | Abstract metric interface |
-| **MetricResult** | Categorical/numerical metric with timestamp |
-| **BenchmarkBase** | Dataset of Tasks; implements iterator interface |
-| **GeneralEvaluator** | Sequential, debugging-focused evaluator |
-| **RayEvaluator** | Distributed evaluation using Ray |
+| **SolutionOutput** | Agent output: success flag, final output, complete trajectory + tool trajectory |
+| **MetricBase** | Abstract metric interface; `__call__(output: SolutionOutput) -> MetricResult` |
+| **MetricResult** | Categorical/numerical metric with score + message + timestamp |
+| **BenchmarkBase** | Dataset of Tasks; implements iterator interface for systematic agent testing |
+| **GeneralEvaluator** | Sequential, debugging-focused; iterates tasks, calls solution fn, persists via FileEvaluatorStorage |
+| **RayEvaluator** | Distributed via Ray; drop-in replacement for GeneralEvaluator; distributes tasks across CPU/GPU workers |
 | **EvaluatorStorageBase** | Persistent result storage with checkpoint resumption |
+| **OpenJudgeMetric** | Adapter wrapping OpenJudge's 50+ professional graders for subjective quality assessment |
 
-**ACEBench**: Built-in comprehensive benchmark for tool usage + collaboration capabilities.
+**ACEBench -- Full Specification** (arXiv:2501.12851):
+
+Dataset: **2,000 annotated entries** in Chinese + English parallel versions.
+
+| Category | Description | Evaluation Method | Metric |
+|----------|-------------|-------------------|--------|
+| **Normal** | Single-turn + multi-turn tool usage in unambiguous scenarios. Subtypes: atomic, similar-API, preference, multi-turn | AST parsing vs ground truth; multiple valid answer pools | Binary accuracy (1=match, 0=mismatch) |
+| **Special** | Imperfect instructions: missing parameters, format errors, task-function mismatches | 3 problem-identification capabilities assessed per case | Binary accuracy per capability |
+| **Agent** | Multi-turn, multi-step real-world simulations; GPT-4o as user simulator | End-to-End accuracy (instance attrs) + Process accuracy (n/m: actual/ideal function calls) | E2E accuracy + Process accuracy |
+
+**Overall accuracy formula**: Weighted combination using sqrt(sample_size) as coefficients across the 3 data types.
+
+**LLM leaderboard results** (combined CN+EN):
+| Model | Overall Accuracy |
+|-------|-----------------|
+| GPT-4o | 85.4% |
+| GPT-4-Turbo | 84.5% |
+| Qwen2.5-Coder-32B | 79.6% (best open-source) |
+
+**Key finding**: Fine-tuned tool models degrade significantly on Special data -- task-specific optimization causes generalization loss.
+
+**Integration**: Observability pipeline auto-collects OTel telemetry (LLM calls, tool usage, token counts) during evaluation runs.
 
 ### 2.14 Observability / Tracing
 
