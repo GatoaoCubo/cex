@@ -9,7 +9,7 @@ created: 2026-04-12
 updated: 2026-04-12
 author: n03_builder
 domain: experiment_config
-quality: null
+quality: 9.1
 tags: [experiment_config, P09, GOVERN, kind-kc]
 tldr: "experiment_config defines A/B tests on prompts, models, or parameters -- with variants, traffic splits, metrics, and statistical success criteria -- enabling data-driven prompt optimization."
 when_to_use: "Building, reviewing, or reasoning about experiment_config artifacts"
