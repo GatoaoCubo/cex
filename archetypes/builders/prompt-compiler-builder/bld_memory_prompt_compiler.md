@@ -6,7 +6,7 @@ llm_function: INJECT
 purpose: Accumulated production experience for prompt_compiler artifact generation
 memory_scope: project
 observation_types: [user, feedback, project, reference]
-quality: null
+quality: 8.9
 title: "Memory Prompt Compiler"
 version: "1.0.0"
 author: n03_builder
