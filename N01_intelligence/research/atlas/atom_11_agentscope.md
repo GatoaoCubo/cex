@@ -760,19 +760,110 @@ Concepts that originated in AgentScope or have distinct Chinese AI ecosystem con
 | v0.x | Feb 2024 | Original: Actor-based distribution, RPC, Placeholder, ASDiGraph |
 | v1.0 | Sep 2025 | Major rewrite: async-first, ContentBlock, Formatter abstraction, ReMe, Runtime split |
 | Runtime v1.0 | Dec 2025 | Agent-as-a-Service, sandbox types, A2A protocol, cross-framework compat |
-| Runtime v1.1 | Feb 2026 | FastAPI inheritance, distributed interrupt, async sandboxes |
+| Runtime v1.1 | Feb 2026 | FastAPI direct inheritance, Distributed Interrupt Service, async sandboxes, A2A Registry (Nacos) |
 
 ---
 
-## 13. Sources
+## 13. A2A Protocol Deep Dive
+
+A2A (Agent-to-Agent) protocol: open standard for cross-framework agent communication.
+AgentScope added native A2A support in Runtime v1.0 (Dec 2025).
+
+### 13.1 AgentCard Schema
+
+The AgentCard is the agent's "business card" -- a JSON file at `/.well-known/agent-card.json`.
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| `name` | string | Agent identifier |
+| `url` | string | RPC service endpoint |
+| `description` | string | Agent purpose/behavior |
+| `version` | string | Release version |
+| `capabilities` | object | Feature support configuration |
+| `default_input_modes` | array | Accepted formats (e.g., "text/plain") |
+| `default_output_modes` | array | Response formats |
+| `skills` | array | Available agent capability list |
+
+### 13.2 A2AChatFormatter
+
+`A2AChatFormatter` handles bidirectional protocol conversion:
+- AgentScope `Msg` -> A2A `Message` format (for sending to remote agents)
+- A2A `Message` -> `Msg` format (for receiving from remote agents)
+- A2A `Task` responses -> `Msg` (for task-oriented interactions)
+- Multimodal content: text, images, audio, video passthrough
+
+**Distinction from standard formatters**: Unlike provider-specific formatters
+(OpenAI/Anthropic/etc.), A2AChatFormatter handles protocol-level serialization
+to the JSON-RPC A2A wire format, not LLM API format.
+
+### 13.3 A2AAgent Implementation
+
+```python
+agent = A2AAgent(agent_card=agent_card)
+```
+
+Supported patterns:
+1. **Chatbot scenario**: Direct conversation with remote A2A agent
+2. **Tool function**: Encapsulate A2AAgent as a tool in Toolkit for handoff/router patterns
+
+**Behavior note**: `observe()` calls store messages locally and send them together during `reply()`.
+This batching differs from local agents where `observe()` and `reply()` are independent.
+
+### 13.4 Card Resolver Classes
+
+| Class | Backend | Purpose |
+|-------|---------|---------|
+| **FileAgentCardResolver** | Local JSON file | Load AgentCard from filesystem |
+| **WellKnownAgentCardResolver** | HTTP fetch | Fetch from `/.well-known/agent-card.json` at remote URL |
+| **NacosAgentCardResolver** | Nacos v3.1.0+ | Retrieve from Nacos Agent Registry |
+| **AgentCardResolverBase** | Abstract | Base class for custom resolvers |
+
+### 13.5 Protocol Flow
+
+```
+User message
+    |
+    v
+A2AAgent.reply()
+    |-- Batch observed messages + new message
+    |-- A2AChatFormatter: Msg list -> A2A JSON-RPC Message
+    |-- HTTP/SSE call to remote agent's /process endpoint
+    |
+    v
+Remote Agent (any A2A-compliant framework)
+    |-- Processes A2A Message
+    |-- Returns A2A Task response via SSE
+    |
+    v
+A2AChatFormatter: A2A Task response -> Msg
+    |
+    v
+Return to local pipeline
+```
+
+### 13.6 A2A vs MCP Positioning
+
+| Dimension | A2A | MCP |
+|-----------|-----|-----|
+| Target | Agent-to-Agent (peer interaction) | Model-to-Context (tool/data access) |
+| Protocol | JSON-RPC over HTTP/SSE | JSON-RPC over stdio/HTTP |
+| Discovery | AgentCard at .well-known/ | Tool schema from server |
+| Direction | Bidirectional (both sides are agents) | Unidirectional (model calls server) |
+| AgentScope support | A2AAgent + A2AChatFormatter | HttpStatelessClient + StatefulClientBase |
+
+---
+
+## 14. Sources
 
 - [GitHub: agentscope-ai/agentscope](https://github.com/agentscope-ai/agentscope)
 - [GitHub: agentscope-ai/agentscope-runtime](https://github.com/agentscope-ai/agentscope-runtime)
 - [GitHub: agentscope-ai/ReMe](https://github.com/agentscope-ai/ReMe)
 - [Paper: AgentScope v0.x (arXiv:2402.14034)](https://arxiv.org/abs/2402.14034)
 - [Paper: AgentScope 1.0 (arXiv:2508.16279)](https://arxiv.org/html/2508.16279v1)
+- [Paper: ACEBench (arXiv:2501.12851)](https://arxiv.org/abs/2501.12851)
 - [Docs: doc.agentscope.io](https://doc.agentscope.io/)
 - [Docs: docs.agentscope.io](https://docs.agentscope.io/)
+- [Runtime docs: runtime.agentscope.io](https://runtime.agentscope.io/)
 - [DeepWiki: agentscope-ai/agentscope](https://deepwiki.com/agentscope-ai/agentscope)
 - [DeepWiki: agentscope-ai/ReMe](https://deepwiki.com/agentscope-ai/ReMe)
 - [ReMe docs: reme.agentscope.io](https://reme.agentscope.io/)
