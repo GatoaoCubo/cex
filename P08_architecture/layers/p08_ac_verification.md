@@ -4,7 +4,7 @@ kind: agent_card
 pillar: P08
 title: "Agent Card: Verification Agent"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [agent_card, verification, govern, quality-assurance]
 tldr: "Agent card for the verification agent used in F7 GOVERN. Defines capabilities, tools, input/output contracts, and deployment constraints."
 domain: "architecture"

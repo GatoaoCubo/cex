@@ -17,68 +17,30 @@ author: n03_builder
 created: '2026-04-12'
 updated: '2026-04-12'
 density_score: 0.91
-body: '# Context Compaction Procedures
-
-
-  ## Trigger Conditions
-
-
-  Compaction activates when context usage exceeds 80% of the token budget.
-
-  The check runs after every tool result is received.
-
-
-  ## Compaction Strategy (Priority Order)
-
-
-  ### Level 1: Trim Redundancy (saves 10-20%)
-
-  - Remove duplicate information across tool results
-
-  - Collapse repeated file reads into single reference
-
-  - Strip verbose tool output formatting
-
-  - Deduplicate error messages
-
-
-  ### Level 2: Summarize History (saves 20-40%)
-
-  - Replace old conversation turns with summaries
-
-  - Compress completed task details to one-line outcomes
-
-  - Archive resolved decision points
-
-  - Condense long code blocks to signatures + key logic
-
-
-  ### Level 3: Drop Low-Value Content (saves 30-50%)
-
-  - Remove exploratory searches that found nothing useful
-
-  - Drop tool results from abandoned approaches
-
-  - Remove verbose system messages
-
-  - Strip formatting from non-critical content
-
-
-  ### Level 4: Critical-Only Mode (saves 50-70%)
-
-  - Retain only: current task, active files, recent decisions
-
-  - Replace all history with structured summary
-
-  - Keep only error messages that are unresolved
-
-  - Maintain task list and completion status
-
-
-  ## Preservation Rules
-
-
-  NEVER compact:
+trigger_conditions: Compaction activates when context usage exceeds 80% of the token budget. The check runs after every tool
+  result is received.
+compaction_strategy_priority_order: ''
+level_1_trim_redundancy_saves_10_20:
+- Remove duplicate information across tool results
+- Collapse repeated file reads into single reference
+- Strip verbose tool output formatting
+- Deduplicate error messages
+level_2_summarize_history_saves_20_40:
+- Replace old conversation turns with summaries
+- Compress completed task details to one-line outcomes
+- Archive resolved decision points
+- Condense long code blocks to signatures + key logic
+level_3_drop_low_value_content_saves_30_50:
+- Remove exploratory searches that found nothing useful
+- Drop tool results from abandoned approaches
+- Remove verbose system messages
+- Strip formatting from non-critical content
+level_4_critical_only_mode_saves_50_70:
+- 'Retain only: current task, active files, recent decisions'
+- Replace all history with structured summary
+- Keep only error messages that are unresolved
+- Maintain task list and completion status
+preservation_rules: 'NEVER compact:
 
   - Current task description and requirements
 

@@ -16,56 +16,24 @@ author: n03_builder
 created: '2026-04-12'
 updated: '2026-04-12'
 density_score: 0.92
-body: '# Doing Tasks
-
-
-  When you receive a task, follow this execution protocol:
-
-
-  ## Task Decomposition
-
-
-  1. **Parse intent**: Extract verb, object, domain from the request
-
-  2. **Map to CEX taxonomy**: Identify kind, pillar, and target nucleus
-
-  3. **Check dependencies**: Are prerequisite artifacts available?
-
-  4. **Plan approach**: Template-First (match >= 60%), hybrid, or fresh build
-
-
-  ## Tool Usage
-
-
-  - Use dedicated tools over shell commands (Read > cat, Grep > grep, Edit > sed)
-
-  - Run independent tool calls in parallel for efficiency
-
-  - Break complex work into discrete steps with clear inputs/outputs
-
-  - Validate tool results before proceeding to next step
-
-
-  ## Execution Standards
-
-
-  - Read existing code before modifying it
-
-  - Prefer editing existing files over creating new ones
-
-  - Do not add features beyond what was requested
-
-  - Do not add speculative abstractions or future-proofing
-
-  - Write safe, secure code -- check for OWASP Top 10 vulnerabilities
-
-  - Test the golden path and edge cases before reporting completion
-
-
-  ## Completion Criteria
-
-
-  A task is complete when:
+task_decomposition:
+- 'Parse intent: Extract verb, object, domain from the request'
+- 'Map to CEX taxonomy: Identify kind, pillar, and target nucleus'
+- 'Check dependencies: Are prerequisite artifacts available?'
+- 'Plan approach: Template-First (match >= 60%), hybrid, or fresh build'
+tool_usage:
+- Use dedicated tools over shell commands (Read > cat, Grep > grep, Edit > sed)
+- Run independent tool calls in parallel for efficiency
+- Break complex work into discrete steps with clear inputs/outputs
+- Validate tool results before proceeding to next step
+execution_standards:
+- Read existing code before modifying it
+- Prefer editing existing files over creating new ones
+- Do not add features beyond what was requested
+- Do not add speculative abstractions or future-proofing
+- Write safe, secure code -- check for OWASP Top 10 vulnerabilities
+- Test the golden path and edge cases before reporting completion
+completion_criteria: 'A task is complete when:
 
   1. All requested artifacts are created/modified
 

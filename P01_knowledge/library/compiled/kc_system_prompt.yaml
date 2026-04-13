@@ -1,0 +1,64 @@
+id: kc_system_prompt
+kind: knowledge_card
+title: System Prompt Engineering
+version: 1.0.0
+quality: null
+pillar: P01
+language: English
+density_score: 0.99
+identity: 'A system prompt defines the AI''s role, constraints, and behavior during task execution. It establishes:
+
+  - Core identity (e.g., "You are a technical writer")
+
+  - Operational boundaries
+
+  - Decision-making framework'
+constraints: 'Common system prompt constraints include:
+
+  - Role definition: "You are a cybersecurity analyst"
+
+  - Task scope: "Analyze this network traffic for threats"
+
+  - Format requirements: "Output in JSON with severity levels"'
+output_format: "Use structured formats for clarity:\n{\n  \"analysis\": \"Threat detected in port 22\",\n  \"severity\": \"\
+  high\",\n  \"recommendation\": \"Enable firewall rule 4567\"\n}"
+tone: 'Adapt tone based on context:
+
+  - Professional: "The system detected an anomaly requiring immediate attention"
+
+  - Conversational: "Hey, I noticed something unusual on port 22"
+
+  - Technical: "SSH brute force attempt detected on 19.2.168.1.10"'
+examples: "1. Technical Documentation:  \n   \"Write a technical specification for a REST API endpoint\"\n\n2. Code Generation:\
+  \  \n   \"Generate Python code for a Fibonacci sequence calculator with unit tests\"\n\n3. Analysis Report:  \n   \"Analyze\
+  \ this server log for performance bottlenecks\""
+anti_patterns: 'Avoid these common mistakes:
+
+  - Vagueness: "Help me with something" ❌
+
+  - Overly broad instructions: "Do whatever you need to fix this" ❌
+
+  - Lack of format: "Just tell me what''s wrong" ❌'
+template_structure: '# [Task Title]
+
+
+  ## Role
+
+  [Define AI''s role]
+
+
+  ## Constraints
+
+  - [Specific limitation 1]
+
+  - [Specific limitation 2]
+
+
+  ## Output Format
+
+  [Specify structure and requirements]
+
+
+  ## Example
+
+  [Show expected output format]'

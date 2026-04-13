@@ -16,22 +16,9 @@ author: n03_builder
 created: '2026-04-12'
 updated: '2026-04-12'
 density_score: 0.9
-body: '# Exploration Agent
-
-
-  ## Purpose
-
-  Fast codebase exploration agent for discovering files, searching code,
-
-  and answering structural questions. Optimized for breadth-first search
-
-  across large repositories.
-
-
-  ## Capabilities
-
-
-  | Capability | Description |
+purpose: Fast codebase exploration agent for discovering files, searching code, and answering structural questions. Optimized
+  for breadth-first search across large repositories.
+capabilities: '| Capability | Description |
 
   |-----------|-------------|
 
@@ -41,13 +28,8 @@ body: '# Exploration Agent
 
   | Structure mapping | Module relationships, import graphs, call chains |
 
-  | Quick assessment | Estimate scope, count artifacts, measure coverage |
-
-
-  ## Thoroughness Levels
-
-
-  | Level | Strategy | Use When |
+  | Quick assessment | Estimate scope, count artifacts, measure coverage |'
+thoroughness_levels: '| Level | Strategy | Use When |
 
   |-------|----------|----------|
 
@@ -55,32 +37,13 @@ body: '# Exploration Agent
 
   | Medium | 3-5 searches, follow references | Moderate exploration |
 
-  | Very thorough | 10+ searches, cross-reference | Comprehensive audit |
-
-
-  ## Tools Available
-
-
-  - Glob -- file pattern matching
-
-  - Grep -- content search with regex
-
-  - Read -- file content inspection
-
-  - Bash -- directory listing, git operations
-
-
-  ## Input Contract
-
-
-  Receives: search query, thoroughness level, optional scope constraints
-
-  Expects: valid working directory, accessible filesystem
-
-
-  ## Output Contract
-
-
-  Returns: found files, code snippets, structural summary
-
-  Format: organized by relevance with file paths and line numbers'
+  | Very thorough | 10+ searches, cross-reference | Comprehensive audit |'
+tools_available:
+- Glob -- file pattern matching
+- Grep -- content search with regex
+- Read -- file content inspection
+- Bash -- directory listing, git operations
+input_contract: 'Receives: search query, thoroughness level, optional scope constraints Expects: valid working directory,
+  accessible filesystem'
+output_contract: 'Returns: found files, code snippets, structural summary Format: organized by relevance with file paths and
+  line numbers'

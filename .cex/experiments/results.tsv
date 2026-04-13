@@ -5829,3 +5829,17 @@ et
 2026-04-13 10:34:32	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_n07_orchestrator.md	1	8.8	0.95	keep	added density_score: 0.95
 2026-04-13 10:34:32	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_ontology.md	1	8.7	1.00	keep	added density_score: 1.0
 2026-04-13 10:34:33	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_prompt_compiler.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:33	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_streaming_config.md	1	8.9	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:34	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_system_prompt.md	1	8.8	0.99	keep	added density_score: 0.99
+2026-04-13 10:34:34	C:\Users\CEX\Documents\GitHub\cex\P03_prompt\layers\p03_ins_action_protocol.md	1	9.1	0.98	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:34	C:\Users\CEX\Documents\GitHub\cex\P03_prompt\layers\p03_ins_doing_tasks.md	1	8.9	0.95	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:35	C:\Users\CEX\Documents\GitHub\cex\P03_prompt\layers\p03_pc_cex_universal.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:35	C:\Users\CEX\Documents\GitHub\cex\P03_prompt\layers\p03_sp_cex_core_identity.md	1	8.8	0.92	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:35	C:\Users\CEX\Documents\GitHub\cex\P03_prompt\layers\p03_sp_verification_agent.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:36	C:\Users\CEX\Documents\GitHub\cex\P04_tools\layers\p04_skill_compact.md	1	8.8	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:36	C:\Users\CEX\Documents\GitHub\cex\P04_tools\layers\p04_skill_memory_extract.md	1	9.0	0.98	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:36	C:\Users\CEX\Documents\GitHub\cex\P04_tools\layers\p04_skill_simplify.md	1	8.8	0.94	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:37	C:\Users\CEX\Documents\GitHub\cex\P04_tools\layers\p04_skill_verify.md	1	8.8	0.98	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:37	C:\Users\CEX\Documents\GitHub\cex\P04_tools\templates\tpl_retriever_business_intel.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:37	C:\Users\CEX\Documents\GitHub\cex\P04_tools\templates\tpl_search_tool_business_discovery.md	1	9.1	1.00	keep	added updated: 2026-04-13
+2026-04-13 10:34:38	C:\Users\CEX\Documents\GitHub\cex\P08_architecture\layers\p08_ac_explore.md	1	8.9	1.00	keep	polished formatting (whitespace cleanup)

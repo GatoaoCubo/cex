@@ -1,0 +1,87 @@
+title: Streaming Configuration for P01 Knowledge (P05)
+description: Comprehensive guide to configuring streaming parameters for P01 knowledge artifacts
+keywords: streaming, configuration, P01, knowledge, parameters, setup, optimization
+kind: knowledge_card
+version: 1.1.0
+quality: null
+density_score: 1.0
+overview: Streaming configuration enables efficient processing of large knowledge artifacts by breaking them into manageable
+  chunks. This guide explains how to configure streaming parameters for P01 knowledge artifacts to optimize performance and
+  resource usage.
+core_configuration_parameters: '| Parameter | Type | Default | Description |
+
+  |----------|------|---------|-------------|
+
+  | `streaming.enabled` | boolean | `true` | Enable or disable streaming for this artifact |
+
+  | `streaming.chunk_size` | integer | `1024` | Maximum size of each chunk in bytes |
+
+  | `streaming.buffer_size` | integer | `4096` | Size of the internal buffer for chunk processing |
+
+  | `streaming.timeout` | integer | `30` | Maximum time in seconds for chunk processing |
+
+  | `streaming.retry_attempts` | integer | `3` | Number of retry attempts for failed chunks |
+
+  | `streaming.progress_interval` | integer | `5` | Frequency in seconds for progress updates |
+
+  | `streaming.chunking_strategy` | string | `"fixed"` | Chunking algorithm: "fixed" or "dynamic" |
+
+  | `streaming.parallel_processing` | boolean | `false` | Enable parallel chunk processing |'
+configuration_syntax: "streaming:\n  enabled: true\n  chunk_size: 2048\n  buffer_size: 8192\n  timeout: 60\n  retry_attempts:\
+  \ 5\n  progress_interval: 10\n  chunking_strategy: \"dynamic\"\n  parallel_processing: true"
+use_cases: ''
+1_large_document_processing: "For processing documents over 1MB in size:\nstreaming:\n  enabled: true\n  chunk_size: 4096\n\
+  \  buffer_size: 16384\n  timeout: 120\n  retry_attempts: 3\n  progress_interval: 5\n  chunking_strategy: \"dynamic\""
+2_real_time_data_feeds: "For continuous data streams:\nstreaming:\n  enabled: true\n  chunk_size: 1024\n  buffer_size: 4096\n\
+  \  timeout: 30\n  retry_attempts: 2\n  progress_interval: 2\n  chunking_strategy: \"fixed\""
+3_batch_processing: "For non-streaming batch jobs:\nstreaming:\n  enabled: false"
+best_practices:
+- 'Chunk Size Optimization:'
+- For text processing, use 1024-4096 bytes
+- For binary data, use 4096-8192 bytes
+- Avoid sizes larger than 8192 bytes for text
+- 'Timeout Management:'
+- Set timeout to 2-3x the expected chunk processing time
+- Use shorter timeouts for real-time applications
+- 'Retry Strategy:'
+- Use 2-3 retry attempts for transient errors
+- Avoid excessive retries for persistent failures
+- 'Progress Monitoring:'
+- Set progress interval to 2-10 seconds
+- Monitor progress for long-running operations
+- 'Chunking Strategy:'
+- Use "dynamic" for variable-sized data
+- Use "fixed" for consistent data formats
+- 'Parallel Processing:'
+- Enable for multi-core systems
+- Disable for single-threaded environments
+advanced_configuration: ''
+custom_chunking_strategy: "streaming:\n  enabled: true\n  chunk_size: 2048\n  buffer_size: 8192\n  timeout: 60\n  retry_attempts:\
+  \ 3\n  progress_interval: 5\n  chunking_strategy: \"dynamic\""
+performance_tuning: "streaming:\n  enabled: true\n  chunk_size: 4096\n  buffer_size: 16384\n  timeout: 120\n  retry_attempts:\
+  \ 5\n  progress_interval: 3\n  parallel_processing: true"
+troubleshooting: '| Issue | Solution |
+
+  |------|---------|
+
+  | Chunk processing failures | Increase `retry_attempts` and check network stability |
+
+  | High memory usage | Reduce `buffer_size` and increase `chunk_size` |
+
+  | Slow processing | Optimize `chunk_size` and `timeout` parameters |
+
+  | No progress updates | Decrease `progress_interval` to 1-2 seconds |
+
+  | Chunk size too small | Increase `chunk_size` for better throughput |
+
+  | Chunk size too large | Decrease `chunk_size` to prevent memory issues |'
+related_documentation:
+- P01 Knowledge Architecture
+- Streaming Best Practices
+- Performance Optimization Guide
+- Error Handling in Streaming
+- Chunking Strategy Guide
+example_configuration: "streaming:\n  enabled: true\n  chunk_size: 2048\n  buffer_size: 8192\n  timeout: 60\n  retry_attempts:\
+  \ 3\n  progress_interval: 5\n  chunking_strategy: \"fixed\"\n  parallel_processing: true\n\nThis configuration is ideal\
+  \ for processing large text documents while maintaining good performance and reliability. The fixed chunking strategy ensures\
+  \ consistent processing, while parallel processing improves throughput."
