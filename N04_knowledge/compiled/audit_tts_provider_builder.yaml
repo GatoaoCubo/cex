@@ -1,0 +1,100 @@
+id: n04_audit_tts_provider_builder
+kind: knowledge_card
+pillar: P01
+title: 'Audit: tts_provider Builder (13 ISOs)'
+version: 1.0.0
+created: '2026-04-13'
+updated: '2026-04-13'
+author: N04 Knowledge Nucleus
+domain: builder quality audit
+quality: null
+tags:
+- audit
+- tts_provider
+- builder
+- HYBRID_REVIEW
+tldr: '13/13 ISOs audited. 3 surgical fixes. Critical: ElevenLabs and modern vendors added. Architecture correct.'
+audit_summary: '| Metric | Value |
+
+  |---|---|
+
+  | ISOs Audited | 13/13 |
+
+  | Passing (>=8.0, no fix) | 4 |
+
+  | Surgical Fix Applied | 3 |
+
+  | Full Rebuild | 0 |
+
+  | Critical Errors Fixed | 1 (missing dominant vendor) |'
+iso_scores_pre_fix_post_fix: '| ISO | Kind | Pre-fix Score | Post-fix Score | Action |
+
+  |---|---|---|---|---|
+
+  | bld_manifest | type_builder | 7.5 | 8.5 | SURGICAL: added ElevenLabs, XTTS, MOS framing |
+
+  | bld_instruction | instruction | 7.5 | 7.5 | LEAVE: process adequate |
+
+  | bld_system_prompt | system_prompt | 8.0 | 8.0 | PASS: specs real (<50ms, 50+ languages) |
+
+  | bld_knowledge_card | knowledge_card | 7.5 | 9.0 | SURGICAL: complete vendor matrix added |
+
+  | bld_schema | schema | 7.5 | 7.5 | LEAVE: structure valid |
+
+  | bld_quality_gate | quality_gate | 7.5 | 7.5 | LEAVE: gates adequate |
+
+  | bld_output_template | output_template | 7.0 | 7.0 | NOTE: minimal but functional |
+
+  | bld_examples | examples | 7.5 | 7.5 | LEAVE: Azure voices specifically named |
+
+  | bld_architecture | architecture | 7.5 | 7.5 | PASS: no domain confusion |
+
+  | bld_config | config | 7.5 | 7.5 | LEAVE: naming correct |
+
+  | bld_memory | learning_record | 7.5 | 7.5 | LEAVE: AWS Polly + Azure evidenced |
+
+  | bld_tools | tools | 7.0 | 7.0 | NOTE: Mozilla TTS outdated ref |
+
+  | bld_collaboration | collaboration | 7.5 | 7.5 | LEAVE: boundaries clear |'
+critical_errors_fixed: ''
+error_1_missing_dominant_market_vendor_high: 'Files: bld_manifest, bld_knowledge_card Issue: ElevenLabs is the dominant modern
+  TTS provider (highest MOS, voice cloning, most developer adoption as of 2024) but was completely absent. Also missing: OpenAI
+  TTS, Coqui XTTS v2, Piper TTS, Resemble.ai, Play.ht. Fix: Added complete vendor landscape with MOS benchmarks, TTFB latency,
+  and pricing data.'
+no_architecture_error: Unlike STT builder, TTS architecture correctly positions the provider within voice pipelines (no trading
+  system confusion).
+vendor_coverage_after_fix: '| Vendor | Mentioned | MOS Score | Pricing | Voice Cloning |
+
+  |---|---|---|---|---|
+
+  | ElevenLabs | YES (added) | 4.7/5 | YES | YES |
+
+  | OpenAI TTS | YES (added) | 4.5/5 | YES | NO |
+
+  | Google Cloud TTS | YES | 4.5/5 | YES | NO |
+
+  | Azure Neural TTS | YES | 4.4/5 | YES | YES |
+
+  | Amazon Polly | YES | 4.2/5 | YES | NO |
+
+  | Coqui XTTS v2 | YES (added) | 4.3/5 | self-hosted | YES |
+
+  | Piper TTS | YES (added) | 3.8/5 | self-hosted | NO |
+
+  | Bark (Suno) | YES (added) | N/A | self-hosted | partial |
+
+  | Resemble.ai | YES (added) | N/A | YES | YES |
+
+  | Play.ht | YES (added) | N/A | YES | YES |
+
+  | IBM Watson | YES (added) | N/A | YES | NO |'
+remaining_gaps:
+- 'bld_output_template.md is sparse -- missing: `mos_score`, `voice_cloning_support`, `ssml_support`, `streaming`, `ttfb_ms`
+  fields.'
+- bld_tools.md references Mozilla TTS -- outdated (project discontinued 2021, superseded by Coqui). Should reference Coqui
+  TTS, XTTS, Piper.
+- bld_quality_gate.md D7 scalability threshold (10k+ RPS) is unrealistically high -- most TTS providers are 10-100 RPS per
+  API key.
+- bld_schema.md default quality value should be `null` not "high".
+recommendation: TTS builder should cross-reference prosody_config builder (for SSML prosody control) and voice_pipeline builder
+  (for orchestration context). Recommend adding citation artifacts for ElevenLabs API docs and Coqui XTTS repo.
