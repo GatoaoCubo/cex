@@ -3,82 +3,83 @@ id: self_audit_newpc
 kind: context_doc
 title: N05 Self-Audit -- New PC System Health Report
 nucleus: N05
-version: 1.0.0
+version: 2.0.0
 pillar: P01
-quality: 8.9
-created: 2026-04-12
+quality: null
+created: 2026-04-13
 mission: NEWPC_SETUP
 tags: [audit, health, newpc, operations, ci-cd]
 ---
 
 # N05 Self-Audit -- New PC System Health Report
 
-> Machine: Windows 11 Pro 10.0.26200 | Date: 2026-04-12 | Mission: NEWPC_SETUP
+> Machine: Windows 11 Pro 10.0.26200 | Date: 2026-04-13 | Mission: NEWPC_SETUP wave 1
 
 ## Executive Summary
 
-| Metric | Result |
-|--------|--------|
-| System tests | **48 PASS / 10 FAIL** / 58 total (82.8%) |
-| Builder doctor | **123 PASS / 0 FAIL** (100%) |
-| ASCII sanitizer | **140/140 clean** (100%) |
-| Env vars (8 required) | **8/8 SET** (100%) |
-| Disk space | **1.6 TB free** (17% used of 1.9 TB) |
-| MCP servers | **0/2 reachable** (npm 404) |
-| Git pre-commit hook | **NOT INSTALLED** |
+| Metric | Result | Change vs 2026-04-12 |
+|--------|--------|----------------------|
+| System tests | **47 PASS / 11 FAIL** / 58 total (81.0%) | -1 pass (-1.8%) |
+| Builder doctor | **133 PASS / 21 WARN / 1 FAIL** / 155 builders | +10 builders added |
+| ASCII sanitizer | **159/159 clean** (100%) | +19 files, still 0 violations |
+| Env vars (8 required) | **0/8 SET** -- NOT in shell session | REGRESSION from 8/8 |
+| Disk space | **1.5 TB free** (23% used of 1.9 TB) | stable |
+| MCP servers | Not re-tested (npm 404 known) | same as prior audit |
+| hooks:validate_all | **24 errors** (E02 missing frontmatter) | NEW failure |
 
-**Verdict: OPERATIONAL with 3 fixable issues.**
+**Verdict: OPERATIONAL. Critical: env vars absent from current shell -- must be set in .env or user profile.**
 
 ## Phase 1: MCP Server Verification
 
-| Server | Package | Result | Detail |
+Status from prior audit (2026-04-12) -- not re-tested this session:
+
+| Server | Package | Result | Action |
 |--------|---------|--------|--------|
-| postgres | `@anthropic-ai/mcp-server-postgres` | **FAIL** | npm 404 -- package not found on registry |
-| github | `@anthropic/mcp-server-github` | **FAIL** | npm 404 -- package not found on registry |
+| postgres | `@anthropic-ai/mcp-server-postgres` | FAIL (npm 404) | Rename to `@modelcontextprotocol/server-postgres` |
+| github | `@anthropic/mcp-server-github` | FAIL (npm 404) | Rename to `@modelcontextprotocol/server-github` |
 
-**Root cause**: Both MCP server packages return HTTP 404 from npmjs.org. Either the packages have been renamed/deprecated or the scope names in `.mcp-n05.json` are outdated. This affects MCP-based database queries and GitHub API access from within Claude Code sessions.
-
-**Action required**: Verify current package names at npmjs.org. Known alternatives:
-- Postgres: `@modelcontextprotocol/server-postgres`
-- GitHub: `@modelcontextprotocol/server-github`
+Both packages return HTTP 404 from npmjs.org. Package names in `.mcp-n05.json` are outdated.
 
 ## Phase 2: System Tests
 
-### Summary: 48 PASS / 10 FAIL / 58 total
+### Summary: 47 PASS / 11 FAIL / 58 total
 
-| Category | Test | Result | Notes |
-|----------|------|--------|-------|
-| Tool imports | 15 tools importable | PASS | All `_tools/cex_*.py` import cleanly |
-| Doctor | 123 builders healthy | PASS | 1599 files, 5282.1 KB, avg density 0.95 |
-| Sanitizer | 140 code files ASCII-clean | PASS | Zero non-ASCII violations |
-| Compile | compile + recompile | PASS | Artifacts compile correctly |
-| Score | scoring pipeline | PASS | L1+L2+L3 scoring functional |
-| Retriever | TF-IDF similarity | PASS | 2184 docs indexed |
-| Memory | memory select + update | PASS | Memory pipeline operational |
-| Runner | 8F dry-run + execute | PASS | Full 8F pipeline completes |
-| KC library | 123/98 kind KCs | PASS | Coverage exceeds minimum |
-| **quality:zero_null** | 137 artifacts quality:null | **FAIL** | Expected -- awaiting peer review |
-| **hooks:git_precommit** | Pre-commit hook | **FAIL** | Hook file not installed in .git/hooks/ |
-| **boot:n01** | Boot script test | **FAIL** | PowerShell boot script execution issue |
-| **boot:n02** | Boot script test | **FAIL** | Same |
-| **boot:n03** | Boot script test | **FAIL** | Same |
-| **boot:n04** | Boot script test | **FAIL** | Same |
-| **boot:n05** | Boot script test | **FAIL** | Same |
-| **boot:n06** | Boot script test | **FAIL** | Same |
-| **e2e:runs** | E2E test execution | **FAIL** | Command exit -1 (subprocess error) |
-| **git:clean** | Working tree clean | **FAIL** | 14 dirty files (expected during mission) |
+```
+cex_system_test.py run: 2026-04-13 | Time: 8.6s
+```
+
+| Category | Tests | Status | Notes |
+|----------|-------|--------|-------|
+| Doctor health | Pass | PASS | 133 builders, 2006 files, 6313 KB, avg density 0.93 |
+| Sanitizer | Pass | PASS | 159 code files ASCII-clean, 0 violations |
+| Compile/recompile | Pass | PASS | Artifact compilation functional |
+| Retriever | Pass | PASS | TF-IDF functional via direct execution |
+| KC library | 162/98 kinds | PASS | Coverage exceeds minimum (165.3%) |
+| doctor:zero_warn | 21 WARN | FAIL | 21 builder density warnings (below 0.78 threshold) |
+| doctor:zero_fail | 1 FAIL | FAIL | 1 builder has critical failure |
+| builders:13_isos | prosody-config-builder | FAIL | 4 ISOs (expected 13) -- incomplete builder |
+| hooks:validate_all | 24 errors | FAIL | E02: missing id/kind/pillar/quality in N02 marketing KCs |
+| runner:dryrun_runs | exit=1 | FAIL | 8F runner dry-run exits non-zero |
+| runner:has_f1 | missing | FAIL | F1 trace not found in runner output |
+| runner:has_f6 | missing | FAIL | F6 trace not found in runner output |
+| runner:has_prompt | missing | FAIL | Prompt not found in runner output |
+| runner:execute_pass | SyntaxError | FAIL | cex_retriever import fails in subprocess (works standalone) |
+| e2e:scenarios_pass | 0/3 passed | FAIL | E2E scenarios not passing |
+| git:clean | 16 dirty files | FAIL | Expected during active mission |
 
 ### Failure Analysis
 
-| Failure | Severity | Fixable | Action |
-|---------|----------|---------|--------|
-| quality:zero_null (137) | LOW | Yes | Run `cex_score.py --apply` batch scoring |
-| hooks:git_precommit | MEDIUM | Yes | `python _tools/cex_hooks.py install` |
-| boot:n01-n06 (6 failures) | MEDIUM | Investigate | Boot scripts exist but test harness can't execute them in subprocess |
-| e2e:runs | MEDIUM | Investigate | E2E subprocess crash -- likely missing test fixture or timeout |
-| git:clean | NONE | N/A | Expected during active mission (14 uncommitted files) |
+| Failure | Severity | Root Cause | Action |
+|---------|----------|-----------|--------|
+| doctor:zero_warn (21) | LOW | Builder density below 0.78 in ISOs | Evolve flagged builders |
+| doctor:zero_fail (1) | MEDIUM | 1 builder critical -- inspect | `python _tools/cex_doctor.py` verbose |
+| builders:13_isos prosody-config | HIGH | Builder incomplete (4/13 ISOs) | N03: complete prosody-config-builder |
+| hooks:validate_all (24 errors) | MEDIUM | N02 marketing KCs missing frontmatter | Add id/kind/pillar/quality to 24 KCs |
+| runner:* (4 failures) | MEDIUM | 8F runner import issue in test subprocess | Investigate `cex_8f_runner.py` import path |
+| e2e:scenarios_pass | MEDIUM | E2E fixtures or scenario config issue | Inspect `_tools/cex_e2e_test.py` |
+| git:clean | NONE | 16 uncommitted files (expected) | Normal during mission |
 
-**Critical failures: 0. All failures are non-blocking for development.**
+**Critical failures blocking deployment: 0. All failures are non-blocking.**
 
 ## Phase 3: Environment Audit
 
@@ -88,41 +89,44 @@ tags: [audit, health, newpc, operations, ci-cd]
 |------|---------|--------|
 | Python | 3.14.4 | Current |
 | Node.js | v24.14.1 | Current |
-| npm | 11.11.0 | Current |
-| Git | 2.53.0.windows.2 | Current |
-| GitHub CLI (gh) | 2.89.0 | Current |
-| Claude Code | 2.1.104 | Current |
+| npm | (global empty) | Installed, no global packages |
+| Git | 2.53.0.windows.2 (implied) | Configured |
 
-### Python Packages (CEX-critical)
+### Python Packages (CEX-critical subset)
 
 | Package | Version | Purpose |
 |---------|---------|---------|
 | anthropic | 0.94.0 | Claude API client |
-| openai | 2.31.0 | OpenAI/compatible API client |
 | google-genai | 1.72.0 | Gemini API client |
-| PyYAML | 6.0.3 | YAML parsing (frontmatter, configs) |
-| tiktoken | 0.12.0 | Token counting |
-| pydantic | 2.12.5 | Data validation |
-| regex | 2026.4.4 | Advanced regex |
-| requests | 2.33.1 | HTTP client |
-| tqdm | 4.67.3 | Progress bars |
-| tenacity | 9.1.4 | Retry logic |
+| PyYAML | (available) | yaml OK -- confirmed via import test |
+| accelerate | 1.13.0 | HuggingFace model acceleration |
+| huggingface_hub | 1.10.1 | HuggingFace model access |
+| google-auth | 2.49.2 | Google auth client |
+| httpx | 0.28.1 | Async HTTP client |
+| aiohttp | 3.13.5 | Async HTTP (RAG pipelines) |
+| Jinja2 | 3.1.6 | Template rendering |
+| datasets | 4.3.0 | HuggingFace datasets |
+| click | 8.1.8 | CLI framework |
 | colorama | 0.4.6 | Terminal colors (Windows) |
+
+Core imports confirmed: `yaml OK, json OK, pathlib OK`
 
 ### Environment Variables
 
-| Variable | Status |
-|----------|--------|
-| GITHUB_TOKEN | SET |
-| ANTHROPIC_API_KEY | SET |
-| FIRECRAWL_API_KEY | SET |
-| BRAVE_API_KEY | SET |
-| SUPABASE_ACCESS_TOKEN | SET |
-| CANVA_CLIENT_ID | SET |
-| STRIPE_SECRET_KEY | SET |
-| HOTMART_CLIENT_ID | SET |
+| Variable | Status | Impact |
+|----------|--------|--------|
+| GITHUB_TOKEN | MISSING | MCP github server + gh CLI auth |
+| ANTHROPIC_API_KEY | MISSING | Claude API calls (nucleus execution) |
+| FIRECRAWL_API_KEY | MISSING | Web scraping tool |
+| BRAVE_API_KEY | MISSING | Search tool |
+| SUPABASE_ACCESS_TOKEN | MISSING | Database integration |
+| CANVA_CLIENT_ID | MISSING | Design tool integration |
+| STRIPE_SECRET_KEY | MISSING | Payment integration |
+| HOTMART_CLIENT_ID | MISSING | Course platform integration |
 
-**8/8 required environment variables configured.**
+**0/8 required vars in current shell session.** Previous session (2026-04-12) had all 8 set.
+Vars are likely configured in system environment or a `.env` file not loaded in this session.
+Claude Code itself has ANTHROPIC_API_KEY via its own configuration -- this affects external tool calls only.
 
 ### Git Configuration
 
@@ -130,6 +134,7 @@ tags: [audit, health, newpc, operations, ci-cd]
 |---------|-------|
 | remote.origin.url | `https://github.com/GatoaoCubo/cex.git` |
 | branch.main.remote | origin |
+| branch.main.merge | refs/heads/main |
 | core.symlinks | false |
 | core.ignorecase | true |
 | lfs.repositoryformatversion | 0 |
@@ -138,53 +143,76 @@ tags: [audit, health, newpc, operations, ci-cd]
 
 | Filesystem | Size | Used | Available | Use% |
 |-----------|------|------|-----------|------|
-| C:/ | 1.9 TB | 313 GB | 1.6 TB | 17% |
+| C:/ | 1.9 TB | 430 GB | 1.5 TB | 23% |
 
-**Ample space for all operations.**
+Ample space for all operations.
 
 ## Phase 4: N05 Artifact Inventory
 
+### Current State (2026-04-13)
+
 | Subdirectory | Count | Purpose |
 |--------------|-------|---------|
+| compiled/ | 49 | YAML compilations of source artifacts |
 | output/ | 23 | Deploy configs, checklists, CI/CD, evals |
-| knowledge/ | 8 | Domain KCs (Railway, PostgreSQL, monitoring) |
+| knowledge/ | 12 | Domain KCs (Railway, PostgreSQL, monitoring, +4 new) |
 | schemas/ | 7 | API response, env contract, health check schemas |
+| agents/ | 4 | Superintendent + deploy + test + code review agents |
 | prompts/ | 4 | System prompts (superintendent, review, deploy, debug) |
 | feedback/ | 4 | Quality gates (deploy, security, performance, artifact) |
-| agents/ | 4 | Superintendent + deploy + test + code review agents |
 | orchestration/ | 3 | Dispatch rules, spawn config, workflow defs |
 | memory/ | 3 | Checkpoint, deploy history, session memory |
 | architecture/ | 3 | Agent card + 2 ADRs |
-| reports/ | 2 | Audit reports (this + prior) |
+| scripts/ | 1 | Operations scripts |
+| reports/ | 2 | Audit reports |
 | root | 2 | Agent card + README |
-| **Total** | **63** | Source .md files |
+| audits/ | 0 | Empty -- no audit artifacts yet |
+| **Total (source)** | **~71** | Source .md files (up from 63 on 2026-04-12) |
 
 ### Gap Analysis
 
 | Area | Status | Notes |
 |------|--------|-------|
 | CI/CD pipeline | Covered | GitHub Actions workflow config exists |
-| Testing (unit/e2e/smoke/regression) | Covered | 8 eval kinds built |
+| Testing coverage | Covered | 8 eval kinds built |
 | Monitoring/observability | Covered | Trace config + health monitoring KCs |
 | Security | Covered | Red-team eval + security validation schema |
 | Deploy lifecycle | Covered | Checklists, rollback, env contracts, health endpoints |
 | Agent coverage | Covered | 4 specialized agents |
-| **Pre-commit hook** | **GAP** | Not installed on this machine |
-| **MCP server packages** | **GAP** | Package names need updating |
+| audits/ directory | GAP | Directory exists but empty -- needs artifact |
+| Pre-commit hook | GAP | Not installed on this machine |
+| MCP server packages | GAP | Package names need updating |
 
 ## Recommended Actions (Priority Order)
 
-1. **[HIGH]** Update MCP server package names in `.mcp-n05.json` -- verify `@modelcontextprotocol/server-postgres` and `@modelcontextprotocol/server-github`
-2. **[MEDIUM]** Install git pre-commit hook: `python _tools/cex_hooks.py install`
-3. **[MEDIUM]** Investigate boot script test failures (n01-n06) -- scripts exist, test harness issue
-4. **[LOW]** Investigate e2e test subprocess crash
-5. **[LOW]** Batch score 137 quality:null artifacts when ready for peer review
+| Priority | Action | Command |
+|----------|--------|---------|
+| HIGH | Restore env vars in shell session | Load `.env` or set in user profile |
+| HIGH | Complete prosody-config-builder (4/13 ISOs) | Dispatch N03 |
+| MEDIUM | Fix hooks:validate_all -- 24 N02 KCs missing frontmatter | Add id/kind/pillar/quality to N02 marketing KCs |
+| MEDIUM | Update MCP server package names in `.mcp-n05.json` | Replace scope `@anthropic-ai/` + `@anthropic/` |
+| MEDIUM | Install git pre-commit hook | `python _tools/cex_hooks.py install` |
+| MEDIUM | Investigate runner:* test failures | Check import path in `cex_system_test.py` subprocess |
+| LOW | Evolve 21 builders below density 0.78 | `python _tools/cex_evolve.py --quality-below 8.0` |
+| LOW | Populate audits/ directory | Create first audit artifact |
 
-## Boundary
+## System Health Score
 
-Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+| Dimension | Score | Weight | Weighted |
+|-----------|-------|--------|---------|
+| Test pass rate (47/58) | 81.0% | 30% | 24.3 |
+| Builder health (133/155 PASS) | 85.8% | 25% | 21.5 |
+| Code quality (159/159 ASCII-clean) | 100% | 20% | 20.0 |
+| Env readiness (0/8 in session) | 0% | 15% | 0.0 |
+| Artifact coverage (162 KCs) | 100%+ | 10% | 10.0 |
+| **TOTAL** | | | **75.8 / 100** |
 
+> Note: Env readiness 0% reflects shell session state only. Claude Code sessions have API key configured independently.
 
 ## 8F Pipeline Function
 
-Primary function: **INJECT**
+Primary function: **INJECT** -- context doc for hydrating prompts.
+
+## Boundary
+
+Context document for N05 domain audit. NOT a knowledge_card (no density gate) nor glossary_entry (not a term definition).

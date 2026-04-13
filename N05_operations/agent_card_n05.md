@@ -30,14 +30,16 @@ density_score: 1.0
 | agents | 4 | Railway superintendent + deploy ops + test ops + code review agents |
 | architecture | 3 | Agent card + ADR-001 (Railway topology) + ADR-002 (testing strategy) |
 | feedback | 4 | Quality gates: Railway deploy + security + performance + artifact quality |
-| knowledge | 8 | Domain KCs: Railway, health monitoring, deployments, Nixpacks, PostgreSQL, Uvicorn |
+| knowledge | 12 | Domain KCs: Railway, health monitoring, deployments, Nixpacks, PostgreSQL, Uvicorn + 4 new |
 | memory | 3 | Checkpoint + deploy history + operations session memory |
 | orchestration | 3 | Dispatch rules, spawn config, workflow definitions |
-| output | 17 | Deploy checklists, env contracts, health endpoints, middleware, Railway configs, CI/CD, smoke eval, benchmark, regression check, red-team eval |
+| output | 23 | Deploy checklists, env contracts, health endpoints, middleware, Railway configs, CI/CD, smoke eval, benchmark, regression check, red-team eval |
 | prompts | 4 | System prompts: superintendent + review + deploy + debug modes |
 | schemas | 7 | API response, env contract, health check, middleware, Railway TOML, startup sequence, security validation |
-| compiled | 40 | YAML compilations of source artifacts |
-| **Total** | **53** | **(source .md files, excluding compiled)** |
+| scripts | 1 | Operations scripts |
+| reports | 2 | System health + dependency map (NEWPC_SETUP audit) |
+| compiled | 49 | YAML compilations of source artifacts |
+| **Total** | **~71** | **(source .md files, excluding compiled -- updated 2026-04-13)** |
 
 ## Kinds I Build
 
@@ -128,10 +130,10 @@ density_score: 1.0
 
 | Category | Count |
 |----------|-------|
-| Source artifacts (.md) | 53 |
-| Compiled artifacts (.yaml) | 40 |
+| Source artifacts (.md) | ~71 |
+| Compiled artifacts (.yaml) | 49 |
 | Kinds I can build | 28 |
 | Tools relevant to my domain | 14 |
 | MCP servers | 2 |
 | Domain KCs (shared library) | 17 |
-| **Total cards** | **154** |
+| **Total cards** | **~181** |

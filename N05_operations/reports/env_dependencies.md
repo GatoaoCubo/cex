@@ -3,15 +3,15 @@ id: env_dependencies_newpc
 kind: context_doc
 title: N05 Environment Dependencies -- New PC Map
 nucleus: N05
-version: 1.0.0
+version: 2.0.0
 pillar: P01
-quality: 8.9
-created: 2026-04-12
+quality: null
+created: 2026-04-13
 mission: NEWPC_SETUP
 tags: [dependencies, environment, newpc, operations]
 ---
 
-# Environment Dependencies -- New PC (2026-04-12)
+# Environment Dependencies -- New PC (2026-04-13)
 
 > Complete dependency map for CEX development on Windows 11 Pro 10.0.26200
 
@@ -105,16 +105,18 @@ tags: [dependencies, environment, newpc, operations]
 
 ## Environment Variables
 
-| Variable | Status | Purpose |
-|----------|--------|---------|
-| GITHUB_TOKEN | SET | GitHub API (gh CLI, MCP server) |
-| ANTHROPIC_API_KEY | SET | Claude API (all nuclei) |
-| FIRECRAWL_API_KEY | SET | Web scraping (N01 research) |
-| BRAVE_API_KEY | SET | Brave Search API (N01 research) |
-| SUPABASE_ACCESS_TOKEN | SET | Supabase database access |
-| CANVA_CLIENT_ID | SET | Canva design API (N02 marketing) |
-| STRIPE_SECRET_KEY | SET | Stripe payments (N06 commercial) |
-| HOTMART_CLIENT_ID | SET | Hotmart marketplace (N06 commercial) |
+| Variable | Shell Session (2026-04-13) | Prior Session (2026-04-12) | Purpose |
+|----------|---------------------------|---------------------------|---------|
+| GITHUB_TOKEN | MISSING | SET | GitHub API (gh CLI, MCP server) |
+| ANTHROPIC_API_KEY | MISSING | SET | Claude API (all nuclei) |
+| FIRECRAWL_API_KEY | MISSING | SET | Web scraping (N01 research) |
+| BRAVE_API_KEY | MISSING | SET | Brave Search API (N01 research) |
+| SUPABASE_ACCESS_TOKEN | MISSING | SET | Supabase database access |
+| CANVA_CLIENT_ID | MISSING | SET | Canva design API (N02 marketing) |
+| STRIPE_SECRET_KEY | MISSING | SET | Stripe payments (N06 commercial) |
+| HOTMART_CLIENT_ID | MISSING | SET | Hotmart marketplace (N06 commercial) |
+
+**Note**: All 8 were SET in prior session. Current Claude Code session has ANTHROPIC_API_KEY via its own config -- nucleus execution is unaffected. Other vars affect external tool integrations only.
 
 ## MCP Servers (N05 config: .mcp-n05.json)
 
@@ -135,7 +137,7 @@ tags: [dependencies, environment, newpc, operations]
 
 | Drive | Total | Used | Free | Use% |
 |-------|-------|------|------|------|
-| C:/ | 1.9 TB | 313 GB | 1.6 TB | 17% |
+| C:/ | 1.9 TB | 430 GB | 1.5 TB | 23% |
 
 ## Compatibility Notes
 
