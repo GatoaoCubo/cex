@@ -4,7 +4,7 @@ kind: system_prompt
 pillar: P03
 title: "CEX Core Identity System Prompt"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [system_prompt, identity, core, cex]
 tldr: "Core identity block injected into every CEX agent prompt. Defines who the agent is, its operating principles, and includes Doing Tasks + Action Protocol instructions."
 domain: "prompt engineering"
