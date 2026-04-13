@@ -17,27 +17,27 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
-1. Identify governance objectives and stakeholder priorities for reward allocation.  
-2. Analyze historical data on process outcomes and reward distribution patterns.  
-3. Define quantifiable metrics for success (e.g., efficiency, compliance, user engagement).  
-4. Map incentive alignment between reward parameters and organizational goals.  
-5. Conduct interviews with governance bodies to refine reward criteria.  
-6. Document edge cases (e.g., conflicting outcomes, zero-sum scenarios).  
+1. Conduct literature review on existing reward model frameworks (e.g., reinforcement learning, governance KPIs).  
+2. Interview stakeholders to identify process/outcome prioritization thresholds.  
+3. Define success metrics (e.g., alignment with Pillar P07, GOVERN function benchmarks).  
+4. Collect historical data on reward outcomes from prior governance cycles.  
+5. Benchmark against industry-standard reward schemas (e.g., ISO 26000, COBIT).  
+6. Analyze risks in reward misalignment (e.g., incentive gaming, compliance gaps).  
 
 ## Phase 2: COMPOSE  
-1. Set up environment with SCHEMA.md-defined reward_model structure.  
-2. Define reward function parameters (e.g., weightings, thresholds) per SCHEMA.md.  
-3. Structure model into process and outcome evaluation modules.  
-4. Populate reward rules using OUTPUT_TEMPLATE.md formatting.  
-5. Integrate governance logic (e.g., veto clauses, escalation paths).  
-6. Write code for reward calculation engine with schema validation.  
-7. Embed audit trails for transparency in reward allocation.  
-8. Test against sample data from Phase 1 research.  
-9. Finalize documentation with schema and template references.  
+1. Set up environment with SCHEMA.md constraints (e.g., JSON structure, field types).  
+2. Draft reward_model objectives in GOVERN function scope (e.g., "maximize process efficiency").  
+3. Map criteria to Pillar P07 outcomes (e.g., "audit trail completeness" → 1–5 scale).  
+4. Integrate data sources from Phase 1 (e.g., stakeholder interviews, historical metrics).  
+5. Use OUTPUT_TEMPLATE.md to structure sections: [Model ID], [Criteria], [Weights].  
+6. Assign quantitative weights to criteria (e.g., 30% process, 70% outcome).  
+7. Write validation rules (e.g., "no criteria > 100% weight").  
+8. Peer-review for schema compliance and domain accuracy.  
+9. Finalize artifact with version control (e.g., Git commit message: "reward_model_v1.2").  
 
 ## Phase 3: VALIDATE  
-[ ] Verify schema compliance with SCHEMA.md  
-[ ] Confirm reward rules align with Phase 1 stakeholder inputs  
-[ ] Test edge cases from Phase 1 documentation  
-[ ] Validate output formatting against OUTPUT_TEMPLATE.md  
-[ ] Obtain governance body approval for final model
+- [ ] ✅ Confirm schema alignment (SCHEMA.md fields: id, criteria, weights, version).  
+- [ ] ✅ Verify data accuracy (e.g., weights sum to 100%, no duplicates).  
+- [ ] ✅ Stakeholder approval on criteria prioritization.  
+- [ ] ✅ Benchmark against Phase 1 industry standards.  
+- [ ] ✅ Documentation completeness (OUTPUT_TEMPLATE.md sections filled).

@@ -2,7 +2,7 @@
 id: atom_23_multiagent_protocols
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.8
 title: Agent Communication Protocol Landscape and CEX Integration Analysis
 subtitle: A Comprehensive Mapping of Protocol Features, CEX Alignment, and Implementation Gaps
 author: CEX Research Team
