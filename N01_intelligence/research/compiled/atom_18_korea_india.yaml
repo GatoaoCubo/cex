@@ -2,7 +2,7 @@ id: n01_atom_18_korea_india
 kind: knowledge_card
 pillar: P01
 title: 'Atom 18: Korean + Indian LLM Agent Ecosystems'
-version: 1.1.0
+version: 1.2.0
 created: 2026-04-13
 updated: 2026-04-13
 author: n01_intelligence
@@ -21,10 +21,15 @@ tags:
 - tokenizer
 - rl-training
 - benchmark
-tldr: Korea builds MCP platforms + MoE agents (PlayMCP, P-C-G, Solar Pro3, HyperCLOVA X Think); India builds voice-first multilingual
-  agents (Sarvam 105B, Krutrim-2, BharatGen PARAM-2, Indic LLM Arena). Both converge on 128-expert MoE + sovereign compute.
-  2026 adds Krutrim-2 12B and PARAM-2 17B.
-density_score: 0.94
+- omni-modal
+- sovereignty-controversy
+- peri-ln
+- vikram
+tldr: Korea builds MCP platforms + MoE agents (PlayMCP, P-C-G, Solar Pro3, HyperCLOVA X Think, SEED Omni-8B); India builds
+  voice-first multilingual agents (Sarvam 105B/Vikram-30B, Krutrim-2, BharatGen PARAM-2, Indic LLM Arena). Both converge on
+  128-expert MoE + sovereign compute. 2026 adds omni-modal Naver 8B, Korea sovereignty controversy (Naver Qwen encoder 99.5%
+  cosine), India AI Impact Summit Feb 2026 launches 3 sovereign models.
+density_score: 0.96
 1_korea_the_mcp_moe_agent_wave: ''
 1_1_kakao_kanana_2_playmcp: 'Kanana-2 (Dec 2025, open-source):
 
@@ -203,11 +208,115 @@ density_score: 0.94
   reasoning, coding, and instruction-following.
 
 
+  Architecture deep dive (Peri-LN + muP): HyperCLOVA X 32B Think uses a Peri-LN (Peripheral LayerNorm) Transformer scaled
+  with muP (maximal update parametrization). Peri-LN places layer normalization at both the entry and exit of each sub-layer,
+  improving gradient stability across depth. muP enables zero-shot hyperparameter transfer from small proxy models to the
+  full 32B scale -- learning rates and initialization calibrated on a 100M proxy generalize to 32B without re-tuning. This
+  is the same scaling methodology used by Cerebras/GPT-NeoX research and reduces the compute cost of hyperparameter search
+  at frontier scale.
+
+
+  Three-stage pre-training curriculum: Context window expands across stages (short -> medium -> 128K). Stage 1 trains on general
+  corpus at 4K context. Stage 2 adds long-context data at 32K. Stage 3 extends to 128K with rope scaling + synthetic long-doc
+  mixtures. This staged approach prevents the instability seen when training on long-context from scratch.
+
+
+  Post-training: RL from Verifiable Rewards (RLVR): Rather than RLHF from human preferences, HyperCLOVA X Think uses RLVR
+  -- RL training with rewards derived from verifiable answers (math correctness, code execution, factual verification). This
+  is the same paradigm as DeepSeek-R1 and o1: no human preference labels needed, just a ground-truth verifier. More scalable
+  for reasoning tasks where correctness is binary.
+
+
+  GPT-4.1 comparison on KCSAT STEM: The vision-augmented variant of HyperCLOVA X Think matches or exceeds GPT-4.1 on KCSAT
+  STEM -- Korea''s national college entrance exam science/math problems, which require joint vision+text reasoning on real
+  examination diagrams. Achieving top 4% of human examinees on math + STEM parity with GPT-4.1 with substantially lower training
+  compute is the key headline result.
+
+
   Additional size variant: 14B (HyperCLOVAX-SEED-Think-14B) for cost-sensitive deployments.
 
 
   tau-Bench Telecom specifics: Multi-step simulation of telecom customer service -- booking, troubleshooting, escalation.
-  87% is currently the highest published score among Korean models on this domain-specific agent benchmark.'
+  87% is currently the highest published score among Korean models on this domain-specific agent benchmark.
+
+
+  #### 1.2c HyperCLOVA X SEED Omni-8B (Dec 2025 -- Any-to-Any Multimodal)
+
+
+  Released Dec 26, 2025 alongside SEED Think-32B. A distinct model -- smaller, omni-modal, not reasoning-focused.
+
+
+  | Spec | Value |
+
+  |------|-------|
+
+  | Architecture | Decoder-only Transformer with modality-specific encoders + decoders |
+
+  | Params | 8B |
+
+  | Modalities (input) | Text + vision + audio |
+
+  | Modalities (output) | Text + vision (generation/editing) + speech (TTS) |
+
+  | Context | 32K tokens |
+
+  | Vision encoder | Alibaba Qwen2.5-VL (acknowledged external component) |
+
+  | Audio encoder | OpenAI Whisper (acknowledged external component) |
+
+  | License | Open-weight |
+
+  | Inference system | OmniServe (OpenAI-compatible API, GitHub: NAVER-Cloud-HyperCLOVA-X/OmniServe) |
+
+
+  Architecture pattern: Modality-specific encoders project visual/audio inputs into continuous embeddings, interleaved with
+  text tokens in a shared decoder-only backbone. Modality-specific decoders reconstruct images and audio from the shared sequence.
+  Single next-token prediction interface unifies all modalities -- no separate generation heads per modality, just token prediction
+  over an extended vocabulary that includes visual and audio tokens.
+
+
+  Korean TTS benchmark (MOS, 30 listeners):
+
+
+  | Model | MOS (Korean TTS) |
+
+  |-------|-----------------|
+
+  | HyperCLOVA X 8B Omni | 4.22 / 5 |
+
+  | Next-best rival (unnamed) | 3.40 / 5 |
+
+  | Gap | +0.82 |
+
+
+  A 0.82 MOS gap is substantial in voice quality evaluation (MOS scale 1-5). This positions Omni-8B as the Korean TTS quality
+  leader among open models.
+
+
+  Omni-8B vs Think-32B:
+
+
+  | Dimension | SEED Omni-8B | SEED Think-32B |
+
+  |-----------|-------------|---------------|
+
+  | Primary use | Omni-modal AI assistant | Reasoning + vision agent |
+
+  | Modalities | Text+vision+audio (in+out) | Text+vision (in), Text (out) |
+
+  | Params | 8B | 32B |
+
+  | Strengths | Voice output, multimodal generation | Deep reasoning, KCSAT, math |
+
+  | Context | 32K | 128K |
+
+
+  Transparency note: Naver explicitly acknowledges Qwen2.5-VL (Alibaba) as vision encoder and Whisper (OpenAI) as audio encoder.
+  This disclosure becomes significant in light of the Jan 2026 sovereignty controversy (see section 1.7 below).
+
+
+  CEX relevance: Any-to-any omni models at 8B scale are the new baseline for voice-enabled agent systems. OmniServe''s OpenAI-compatible
+  API is the production deployment pattern for multimodal agents.'
 1_3_upstage_solar_pro3: '| Spec | Value |
 
   |------|-------|
@@ -299,7 +408,58 @@ density_score: 0.94
 
   Budget: 240 billion won (~$175M USD) from Ministry of Science and ICT.
 
-  Goal: Sovereign LLMs on domestic infrastructure, reducing dependence on US providers.
+  Goal: Sovereign LLMs on domestic infrastructure, reducing dependence on US providers.'
+1_7_korea_sovereignty_controversy_jan_2026_what_counts_as_independent_ai: 'The 240B won program hit turbulence in January
+  2026 when plagiarism allegations emerged against two of the five selected consortia.
+
+
+  The Naver Case:
+
+
+  | Dimension | Detail |
+
+  |-----------|--------|
+
+  | Allegation | HyperCLOVA X SEED 32B Think vision encoder = Alibaba Qwen2.4 encoder |
+
+  | Evidence | Cosine similarity: 99.5%; Pearson correlation: 98.9% between encoder weight values |
+
+  | Naver response | Acknowledged; called it "strategic adoption of a verified external encoder" for ecosystem compatibility
+  |
+
+  | Government position | Unclear -- no formal definition of what "developed from scratch" requires |
+
+
+  The Upstage Case:
+
+
+  | Dimension | Detail |
+
+  |-----------|--------|
+
+  | Allegation | Solar Open 100B copied Zhipu AI GLM-4.5-Air (Chinese model) |
+
+  | Upstage response | Public verification session Jan 2, 2026, Gangnam: showed training logs, checkpoints, experimental data
+  |
+
+  | CEO statement | "Foundation model trained from scratch, built on original data" |
+
+  | Outcome | Case closed quickly; hard questions remained open |
+
+
+  Broader implication -- the definition problem:
+
+
+  The controversy exposed the absence of a formal definition for "sovereign AI" in Korean policy. The government has not answered:
+  Is component reuse (encoders, tokenizers) acceptable? What percentage of weights must be original? Does fine-tuning a foreign
+  base count? This is not unique to Korea -- the EU AI Act and India''s IndiaAI Mission face the same definitional gap. Any
+  sovereign AI program that funds model development without defining "development from scratch" will face these disputes.
+
+
+  CEX relevance: For N01 intelligence tracking, this is the canonical case study on sovereignty definitions. When benchmarking
+  a model as "sovereign," verify: (1) base model origin, (2) encoder origin, (3) tokenizer origin, (4) training data origin.
+  A model with 4/4 domestic is fully sovereign; 3/4 is hybrid. The Naver case = 2/4 (Korean base + Korean data + foreign vision
+  encoder + foreign audio encoder in Omni-8B).
 
 
   ---'
@@ -552,7 +712,38 @@ density_score: 0.94
   CEX relevance: The Language-Context-Safety triad is a transferable evaluation framework. Any non-English agent system needs
   equivalent dimensions. Code-mixing evaluation is particularly important -- real users do not speak "pure" languages. The
   Bradley-Terry methodology is directly applicable to CEX''s peer-review scoring layer for non-English artifacts.'
-2_4_india_2026_new_sovereign_model_releases: 'BharatGen PARAM-2 (Feb 2026, India AI Impact Summit, New Delhi):
+2_4_india_2026_new_sovereign_model_releases: '#### 2.4.0 India AI Impact Summit 2026 (Feb 16-21, New Delhi)
+
+
+  Three sovereign AI models unveiled simultaneously at the India AI Impact Summit 2026, held February 16-21, New Delhi. Organized
+  under the IndiaAI Mission (budget: INR 10,372 crore / $1.1B). Models: Sarvam (two models), BharatGen Param2, Gnani.ai Vachana.
+
+
+  The summit marks the first coordinated sovereign AI release event outside the US/EU/China axis -- three models from one
+  country in one week, all trained on domestic infrastructure. Comparable in strategic intent to China''s coordinated DeepSeek/Qwen/Baidu
+  releases, but with a different thesis: public infrastructure + voice-first vs commercial API dominance.
+
+
+  Sarvam "Vikram" (demo name): Sarvam''s 30B model was showcased at the summit under the demonstration name "Vikram," honoring
+  Vikram Sarabhai (eminent Indian physicist and astronomer who founded ISRO). Official release followed on March 6, 2026 under
+  Apache 2.0 as Sarvam-30B. The naming is a deliberate cultural signal -- connecting India''s AI sovereignty narrative to
+  its space program legacy.
+
+
+  | Model family | Demo/product name | Params | Official release |
+
+  |-------------|------------------|--------|-----------------|
+
+  | Sarvam 30B | Vikram (demo) | 30B (2.4B active) | March 6, 2026 -- Apache 2.0 |
+
+  | Sarvam 105B | (no separate demo name) | 105B (10.3B active) | March 6, 2026 -- Apache 2.0 |
+
+  | BharatGen PARAM-2 | PARAM-2 | 17B | Feb 2026 -- public digital good |
+
+  | Gnani.ai Vachana | Inya VoiceOS | Speech models | Feb 2026 -- enterprise |
+
+
+  BharatGen PARAM-2 (Feb 2026, India AI Impact Summit, New Delhi):
 
 
   | Spec | Value |
@@ -640,6 +831,12 @@ density_score: 0.94
   | Gnani.ai Vachana | -- | Speech models | STT/TTS for Indic | Enterprise |
 
 
+  Gnani.ai Vachana -- Inya VoiceOS (2026 addition): Revealed at the summit: Vachana TTS can clone a human voice in 12 Indian
+  languages using fewer than 10 seconds of audio. This is the voice cloning specification: 10-second sample -> multilingual
+  voice clone across 12 Indic languages. Deployed inside India-only data centres for sovereignty compliance. The voice cloning
+  capability positions Gnani for government and broadcast use cases where localized voice IDs are legally required.
+
+
   ---'
 3_comparative_analysis: ''
 3_1_korea_vs_india_strategic_posture: '| Dimension | Korea | India |
@@ -662,7 +859,16 @@ density_score: 0.94
 
   | Enterprise | SKT 2,000 internal agents | Sarvam API + enterprise |
 
-  | Evaluation | Domain-specific benchmarks (telecom, finance) | Indic LLM Arena (Language-Context-Safety) |'
+  | Evaluation | Domain-specific benchmarks (telecom, finance) | Indic LLM Arena (Language-Context-Safety) |
+
+  | Omni-modal | HyperCLOVA X 8B Omni (text+vision+audio in+out, Dec 2025) | Gnani.ai Vachana TTS (12-language voice cloning,
+  <10s sample) |
+
+  | Sovereignty dispute | YES: Naver Qwen encoder 99.5% cosine similarity (Jan 2026) | NO equivalent controversy; models more
+  explicitly built from scratch |
+
+  | MCP ecosystem | PlayMCP live (10K+ public MCP servers globally, AAIF governance) | No equivalent MCP platform; tool calling
+  via Sarvam API |'
 3_2_moe_as_universal_strategy: 'Both ecosystems converge on MoE as the cost-performance architecture for sovereign agents.
   Expanded with 2026 releases:
 
@@ -752,6 +958,21 @@ density_score: 0.94
 - Public AI infrastructure is a viable distribution model. PARAM-2's national digital good model avoids proprietary lock-in
   for government and public services. This contrasts with the commercial API model and has implications for regulated industries
   (healthcare, education, legal).
+- Omni-modal at 8B is the new voice-agent baseline. HyperCLOVA X 8B Omni delivers text+vision+audio in+out at 8B scale with
+  Korean TTS MOS 4.22/5. Any-to-any capability in a deployable open-weight model sets the floor for voice agent systems in
+  2026. Systems that separate STT+LLM+TTS into three models are already architecturally behind.
+- 'Sovereignty requires a multi-layer definition. The Korea controversy reveals that "sovereign AI" must specify: base architecture
+  origin, pre-training data origin, encoder/tokenizer origin, and fine-tuning compute origin. Models scoring 2/4 on these
+  dimensions (e.g., Korean base + Korean data, but foreign vision encoder + foreign audio encoder) should be classified as
+  hybrid-sovereign, not fully sovereign. This is the right framework for N01 competitive intelligence on any national AI program.'
+- RLVR (RL from Verifiable Rewards) is replacing RLHF for reasoning models. HyperCLOVA X Think, DeepSeek-R1, and o1 all use
+  verifiable reward signals (math, code, factual correctness) instead of human preference labels. This is both cheaper (no
+  labeling cost) and more scalable (programmatic verification). Expect the RLHF market to contract as RLVR-trained models
+  dominate reasoning benchmarks.
+- MCP ecosystem has reached protocol governance maturity. MCP donated to Linux Foundation's Agentic AI Foundation (AAIF) in
+  December 2025. Co-founded by Anthropic, Block, and OpenAI. Over 10,000 public MCP servers as of April 2026. PlayMCP in Korea
+  operates within this now-governance-mature ecosystem. The AAIF governance model (Linux Foundation) mirrors successful OS
+  foundations (CNCF, ASF) -- MCP is on a trajectory to become critical infrastructure, not a product.
 4_2_confidence_assessment: '| Claim | Confidence | Evidence |
 
   |-------|-----------|----------|
@@ -780,6 +1001,21 @@ density_score: 0.94
 
   | Krutrim-2 dense is a cost disadvantage vs MoE at same compute | HIGH | 12B dense = ~5x compute vs 2.4B active Sarvam 30B
   per token |
+
+  | HyperCLOVA X 8B Omni is the open-weight Korean TTS leader | HIGH | MOS 4.22 vs 3.40 next-best; 0.82 gap is statistically
+  large on 5-point scale |
+
+  | Naver''s vision encoder = Qwen encoder (>99% similarity) | HIGH | Cosine 99.5% + Pearson 98.9% from independent analysis;
+  Naver acknowledged |
+
+  | Korean national AI program will complete without disqualifying either consortium | MEDIUM | Government has not defined
+  "developed from scratch"; political pressure to succeed |
+
+  | RLVR will replace RLHF as standard reasoning alignment | HIGH | HyperCLOVA Think + DeepSeek-R1 + o1 all use RLVR; human
+  labeling cost is the bottleneck |
+
+  | Sarvam Vikram-30B official release (Apache 2.0) happened March 6, 2026 | HIGH | Multiple independent sources confirm date
+  and license |
 
 
   ---'
@@ -821,3 +1057,17 @@ sources:
 - India Sovereign AI Stack 2026 (Inc42)
 - Sarvam AI India Frugal AI (Rest of World)
 - Best Korean LLMs Leaderboard 2026
+- HyperCLOVA X 8B Omni arXiv
+- HyperCLOVA X 8B Omni HuggingFace
+- OmniServe GitHub (NAVER)
+- Korea National AI Plagiarism Controversy (Korea Times)
+- Upstage Sovereignty Dispute (KoreaTechDesk)
+- Korea Standards for National AI (UPI)
+- AI Summit 2026 Three Sovereign Models (FreePressJournal)
+- India AI Impact Summit 2026 Wikipedia
+- India Launches Three AI Models at AI Summit (Electronics For You)
+- Sarvam-30B HuggingFace
+- Sarvam 105B API Docs
+- MCP Registry Official Blog (Anthropic)
+- Sovereign AI in Asia 2026 (DigitalInAsia)
+- HyperCLOVA X 32B Think arXiv
