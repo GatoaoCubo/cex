@@ -1,0 +1,37 @@
+id: kc_pre_commit_hooks_for_ai
+kind: knowledge_card
+title: Pre-Commit Hooks for AI-Generated Code
+version: 1.0.0
+quality: 8.7
+pillar: P01
+language: en
+density_score: 1.0
+1_yaml_validation:
+- Validate file structure using YAML schema
+- Ensure proper indentation (2 spaces)
+- Check for missing/incorrect metadata fields
+- Verify versioning consistency
+2_ascii_enforcement:
+- 'Reject non-ASCII characters in:'
+- File names
+- Code comments
+- String literals
+- Use Unicode normalization (NFKC) for safe encoding
+3_frontmatter_checks:
+- 'Validate required fields: `id`, `kind`, `title`, `version`'
+- Check for valid YAML syntax
+- Ensure proper formatting of metadata values
+- Verify language code compliance (en/pt/ru/etc.)
+4_encoding_verification:
+- Confirm UTF-8 encoding with BOM
+- Scan for hidden control characters
+- Validate byte order mark (BOM) presence
+- Check for invalid Unicode sequences
+5_quality_gates:
+- 'Minimum quality score: 8.0/10.0'
+- Validate against P01 knowledge schema
+- Check for consistent terminology
+- Verify compliance with CEX standards
+- Ensure proper formatting and structure
+boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+8f_pipeline_function: 'Primary function: INJECT'
