@@ -7,7 +7,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: performance-operations
-quality: null
+quality: 8.9
 tags:
 - benchmark
 - performance
@@ -92,3 +92,5 @@ baseline_history: '| date | profile | health_p95 | search_p95 | create_p95 | not
   |------|---------|-----------|-----------|-----------|-------|
 
   | 2026-04-07 | baseline | TBD | TBD | TBD | Initial benchmark — baselines to be established |'
+boundary: Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).
+8f_pipeline_function: 'Primary function: GOVERN'
