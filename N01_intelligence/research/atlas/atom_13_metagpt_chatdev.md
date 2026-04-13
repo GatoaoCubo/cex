@@ -3,7 +3,7 @@ id: atom_13_metagpt_chatdev
 kind: knowledge_card
 title: "Atomic Research 13: MetaGPT + ChatDev (OpenBMB/Tsinghua)"
 version: "1.0.0"
-quality: null
+quality: 8.9
 tags: [metagpt, chatdev, openBMB, tsinghua, multi-agent, sops, dehallucination, chat-chain, atlas]
 pillar: P01
 domain: multi-agent-frameworks

@@ -5,7 +5,7 @@ pillar: P01
 domain: multi-agent orchestration
 title: "OpenAI Agents SDK -- Deep Vocabulary Atlas"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [openai, agents-sdk, multi-agent, orchestration, swarm, a2a, vocabulary]
 sources:
   - https://openai.github.io/openai-agents-python/

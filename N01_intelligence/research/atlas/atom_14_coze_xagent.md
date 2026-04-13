@@ -2,7 +2,7 @@
 id: atom_14_coze_xagent
 kind: knowledge_card
 pillar: P01
-quality: null
+quality: 8.9
 density_score: 0.91
 title: "Atomic Research 14: Coze (ByteDance) + XAgent (Tsinghua/OpenBMB)"
 version: 1.0.0

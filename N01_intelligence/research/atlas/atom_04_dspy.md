@@ -5,7 +5,7 @@ pillar: P01
 domain: framework_atlas
 title: "DSPy -- Stanford Framework for Programming (not Prompting) LMs"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [dspy, stanford, prompt-compilation, optimizer, signature, module, framework-atlas]
 sources:
   - https://dspy.ai/

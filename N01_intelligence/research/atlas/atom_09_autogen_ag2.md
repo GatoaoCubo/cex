@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "AutoGen / AG2 Framework -- Deep Vocabulary Atlas"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [multi-agent, autogen, ag2, microsoft, orchestration, groupchat, swarm]
 date: 2026-04-13
 sources:
