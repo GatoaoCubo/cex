@@ -3,10 +3,10 @@ id: kc_system_prompt
 kind: knowledge_card
 title: "System Prompt Engineering"
 version: 1.0.0
-quality: 9.0
+quality: 8.9
 pillar: P01
 language: English
-density_score: 0.99
+density_score: 0.95
 ---
 
 # System Prompt Engineering
@@ -24,37 +24,29 @@ Common system prompt constraints include:
 - Format requirements: "Output in JSON with severity levels"
 
 ## Output Format
-```markdown
-| Format Type | Structure | Example | Use Case |
-|-------------|-----------|---------|----------|
-| JSON        | Key-value pairs | {"analysis": "Threat detected", "severity": "high"} | Structured reporting |
-| XML         | Nested tags | <analysis><severity>high</severity></analysis> | Legacy system integration |
-| YAML        | Indented hierarchy | analysis: Threat detected severity: high | Configuration files |
-| Plain Text  | Unstructured | Threat detected in port 22 | Quick communication |
-| Markdown    | Formatted blocks | **Analysis**: Threat detected in port 22 | Documentation |
+Use structured formats for clarity:
+```json
+{
+  "analysis": "Threat detected in port 22",
+  "severity": "high",
+  "recommendation": "Enable firewall rule 4567"
+}
 ```
 
 ## Tone
-```markdown
-| Tone Type     | Example Statement                          | Use Case                     | Recommended Format       |
-|---------------|--------------------------------------------|------------------------------|--------------------------|
-| Professional  | "The system detected an anomaly requiring immediate attention" | Formal business contexts   | JSON/XML                 |
-| Conversational| "Hey, I noticed something unusual on port 22" | User-facing applications     | Natural language         |
-| Technical     | "SSH brute force attempt detected on 19.2.168.1.10" | Security analysis            | Structured logs          |
-| Educational   | "Explain the TCP/IP model in simple terms" | Teaching scenarios           | Step-by-step explanation |
-| Customer Support | "Help me resolve my account login issue" | Service desk interactions    | Empathetic language      |
-```
+Adapt tone based on context:
+- Professional: "The system detected an anomaly requiring immediate attention"
+- Conversational: "Hey, I noticed something unusual on port 22"
+- Technical: "SSH brute force attempt detected on 19.2.168.1.10"
 
 ## Examples
-```markdown
-| Example Type         | Prompt                                                                 | Role                        | Output Format        |
-|----------------------|------------------------------------------------------------------------|-----------------------------|----------------------|
-| Technical Documentation | "Write a technical specification for a REST API endpoint"           | API designer                | Markdown with tables |
-| Code Generation      | "Generate Python code for a Fibonacci sequence calculator with unit tests" | Software developer          | Code with comments   |
-| Analysis Report      | "Analyze this server log for performance bottlenecks"               | System administrator        | JSON with metrics    |
-| Data Analysis        | "Summarize the trends in this sales dataset"                        | Business analyst            | Table with visualizations |
-| Creative Writing     | "Write a short story about a cyberpunk detective"                   | Fiction author              | Narrative text       |
-```
+| Task Type           | Role                | Constraints                          | Output Format               |
+|---------------------|---------------------|--------------------------------------|-----------------------------|
+| Technical Docs      | Technical Writer    | Use markdown, avoid jargon           | Structured markdown         |
+| Code Generation     | Developer           | Python 3.10, include unit tests      | Code + test files           |
+| Security Analysis   | Cybersecurity Analyst | Scan for SQLi, output JSON          | JSON with risk scores       |
+| Customer Support    | Support Agent       | Use friendly tone, English only     | Text response               |
+| Data Processing     | Data Scientist      | Process CSV, output analysis in CSV | CSV with metadata           |
 
 ## Anti-Patterns
 Avoid these common mistakes:
@@ -81,11 +73,11 @@ Avoid these common mistakes:
 ```
 
 ## Boundary
-This artifact defines best practices for crafting system prompts to guide AI behavior. It is NOT a tool for automatically generating prompts, nor does it cover user-facing prompts or conversational AI design.
+This artifact defines how to structure system prompts to guide AI behavior. It does not dictate the AI's capabilities or the user's input requirements.
 
 ## Related Kinds
-- **Prompt Templates**: Provides reusable structures for system prompts (relationship: foundational framework)
-- **Instruction Tuning**: Focuses on refining AI behavior through iterative feedback (relationship: complementary technique)
-- **LLM Alignment**: Addresses ethical and safety constraints in AI outputs (relationship: overlapping constraints)
-- **Response Formatting**: Standardizes output structures for downstream applications (relationship: dependent component)
-- **Task-Specific Prompting**: Tailors prompts to narrow domains like coding or math (relationship: specialized application)
+- **Knowledge Card (Technical Writing)**: Provides templates for documenting system prompts  
+- **Prompt Template (Code Generation)**: Focuses on code-specific structure and syntax requirements  
+- **Constraint Framework (Cybersecurity)**: Defines security-specific limitations and compliance rules  
+- **Tone Guide (Customer Support)**: Focuses on language style and communication protocols  
+- **Format Specification (Data Processing)**: Details structured output requirements for analytical tasks
