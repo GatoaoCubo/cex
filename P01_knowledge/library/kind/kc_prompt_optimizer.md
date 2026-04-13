@@ -39,41 +39,31 @@ A prompt_optimizer defines **automated prompt improvement**: ingest a seed promp
 
 ## How It Differs From Similar Kinds
 
-| Kind | Distinction |
-|------|-------------|
-| **prompt_optimizer** (P03) | Improves a prompt via scored iteration |
-| prompt_compiler (P03) | Resolves intent into {kind, pillar, nucleus} |
-| prompt_template (P03) | Fills {{variables}} for generation |
-| optimizer (P11) | Generic optimization; target is not a prompt |
-| quality_gate (P07) | Pass/fail threshold only; no improvement loop |
+- **prompt_compiler** resolves intent (F1); prompt_optimizer improves prompts (F7)
+- **prompt_template** fills {{variables}}; prompt_optimizer rewrites the template itself
+- **optimizer** (P11) is generic; prompt_optimizer targets prompt text specifically
+- **quality_gate** only accepts/rejects; prompt_optimizer iterates to improve
 
 ## Optimization Loop
 
-| Stage | Action |
-|-------|--------|
-| 1 Baseline | Score seed on eval_dataset |
-| 2 Mutate | Generate N variants (reword, CoT, few-shot, persona) |
-| 3 Evaluate | Score each against scoring_rubric or llm_judge |
-| 4 Select | Keep top-k |
-| 5 Iterate | Re-mutate from winners until plateau or budget cap |
+1. **Baseline**: score seed on eval_dataset
+2. **Mutate**: generate N variants (reword, CoT, few-shot, persona)
+3. **Evaluate**: score each against scoring_rubric or llm_judge
+4. **Select + Iterate**: keep top-k, re-mutate until plateau or budget cap
 
 ## Industry References
 
-| System | Concept | Relationship |
-|--------|---------|-------------|
-| DSPy | teleprompter, MIPROv2 | Direct ancestor: compile signatures into tuned prompts |
-| APE (Zhou 2022) | Automatic Prompt Engineer | LLM proposes, LLM scores, iterate |
-| OPRO (Google 2023) | LLM as optimizer | Scored trajectories generate next prompt |
-| PromptBreeder (DeepMind) | Evolutionary mutation | Genetic-algorithm variant |
+- **DSPy** (Stanford): `teleprompter`, `MIPROv2` -- direct ancestor, compiles signatures into tuned prompts
+- **APE** (Zhou 2022): LLM proposes, LLM scores, iterate
+- **OPRO** (Google 2023): LLM as optimizer over prompt text via scored trajectories
+- **PromptBreeder** (DeepMind): evolutionary / genetic-algorithm variant of the same loop
 
 ## Key Design Decisions
 
-| Decision | Rule |
-|----------|------|
-| Scoring source | eval_dataset + scoring_rubric OR llm_judge |
-| Budget cap | max_iterations + max_tokens required |
-| Plateau detection | Stop if delta < threshold for N rounds |
-| Winner persistence | Save top variant as prompt_version |
+- **Scoring source**: eval_dataset + scoring_rubric, or llm_judge (deterministic first)
+- **Budget cap**: max_iterations + max_tokens required (prevents unbounded cost)
+- **Plateau detection**: stop if delta < threshold for N rounds
+- **Winner persistence**: save top variant as prompt_version (audit + rollback)
 
 ## Anti-Patterns
 
@@ -85,7 +75,5 @@ A prompt_optimizer defines **automated prompt improvement**: ingest a seed promp
 
 ## Application Checklist
 
-1. Baseline: seed + eval_dataset + initial score
-2. Enumerate mutation strategies; bind scoring; set budget caps
-3. Persist winner as prompt_version with score delta
-4. Validate body <= 5120 bytes; quality: null
+1. Baseline: seed + eval_dataset + initial score; enumerate mutations; bind scoring; set budget caps
+2. Persist winner as prompt_version with score delta; validate body <= 5120 bytes; quality: null
