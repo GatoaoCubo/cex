@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "NIST AI Vocabulary -- Complete Term Registry and Pillar Mapping"
 version: 0.3.0
-quality: 8.8
+quality: null
 tags: [nist, ai-rmf, trustworthy-ai, vocabulary, glossary, governance, fairness, risk-management, ai-100-3, ai-600-1, iso-42001, eu-ai-act, playbook, cross-framework]
 sources:
   - https://airc.nist.gov/glossary/
@@ -19,6 +19,9 @@ sources:
   - https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
   - https://artificialintelligenceact.eu/article/3/
   - https://www.standardfusion.com/blog/key-differences-between-iso-42001-and-nist-ai-rmf
+  - https://airc.nist.gov/docs/NIST_AI_RMF_to_ISO_IEC_42001_Crosswalk.pdf
+  - https://digital-strategy.ec.europa.eu/en/library/eu-us-terminology-and-taxonomy-artificial-intelligence
+  - https://incidentdatabase.ai/
 date: 2026-04-13
 updated: 2026-04-13
 document_ids:
