@@ -678,6 +678,191 @@ OBSERVE  ->  THINK  ->  ACT  ->  OBSERVE  ->  ...
 
 ---
 
+## 16. Claude Code Agent SDK -- API Reference
+
+The Claude Code SDK was renamed to the **Claude Agent SDK** (Q1 2026), with docs
+reorganized to reflect broader agent capabilities beyond coding tasks.
+
+### 16.1 Headless CLI (`-p` / `--print` flag)
+
+```bash
+# Single-shot: prompt via flag, output to stdout, exit
+claude -p "Review this diff and list all bugs" < diff.txt
+
+# Structured output (machine-readable)
+claude -p "List all TODO comments" --output-format json
+
+# Real-time streaming (newline-delimited JSON events)
+claude -p "Refactor this function" --output-format stream-json
+
+# Remote mode: headless server controlled via REST/WebSocket (Q1 2026)
+claude --remote --api-key $MY_API_KEY
+```
+
+| Flag | Behavior |
+|------|----------|
+| `-p` / `--print` | Non-interactive; print to stdout, exit |
+| `--output-format text` | Plain text (default) |
+| `--output-format json` | Final JSON result block |
+| `--output-format stream-json` | Newline-delimited JSON event stream |
+| `--remote` | Start headless server with REST + WebSocket API |
+| `--no-conversation` | Bare mode (recommended for scripts, future default for `-p`) |
+
+### 16.2 Python SDK
+
+```python
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions  # renamed from ClaudeCodeOptions
+
+async def main():
+    options = ClaudeAgentOptions(
+        max_turns=10,
+        system_prompt="You are a security-focused code reviewer.",
+        allowed_tools=["Read", "Grep", "Bash"],
+        include_partial_messages=True,  # required for streaming events
+    )
+    async for message in query(
+        prompt="Review all Python files in src/ for SQL injection",
+        options=options,
+    ):
+        if message.type == "assistant":
+            print(message.content)
+        elif message.type == "result":
+            print(f"Done. Cost: {message.usage}")
+
+asyncio.run(main())
+```
+
+Requirements: Python 3.10+, Node.js, Claude Code CLI installed.
+
+### 16.3 TypeScript SDK
+
+```typescript
+import { query, ClaudeAgentOptions } from "@anthropic-ai/claude-agent-sdk";
+
+const options: ClaudeAgentOptions = {
+  maxTurns: 10,
+  systemPrompt: "Security-focused code reviewer",
+  allowedTools: ["Read", "Grep"],
+};
+
+for await (const message of query({
+  prompt: "Find all hardcoded credentials in this repo",
+  options,
+})) {
+  if (message.type === "assistant") {
+    console.log(message.content);
+  }
+}
+```
+
+Simplified `send()` / `stream()` patterns available for single-call use.
+
+### 16.4 CI/CD Integration
+
+```yaml
+# .github/workflows/ai-review.yml
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install -g @anthropic-ai/claude-code
+      - run: claude -p "Review the diff for bugs" --output-format json
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+```
+
+### 16.5 SDK vs CLI Comparison
+
+| Dimension | CLI (`-p`) | SDK (Python/TS) | Remote (`--remote`) |
+|-----------|-----------|-----------------|---------------------|
+| Invocation | Shell command | Library call | HTTP / WebSocket |
+| Multi-turn | No | Yes (max_turns) | Yes (stateful) |
+| Streaming | `stream-json` flag | Event loop | WebSocket stream |
+| Subagents | Yes (default) | Yes (via tools) | Yes |
+| Best for | Scripts, CI/CD | Embedded agents | Server deployments |
+
+---
+
+## 17. Code Agent Selection Decision Tree
+
+### 17.1 By Primary Workflow
+
+```
+What is your primary workflow?
+  |
+  +-- IDE-based daily coding
+  |     -> Cursor (best UX, inline completions, background agents, $20/mo)
+  |     -> Windsurf (implicit memory, multi-pane, if Cascade flow matters)
+  |     -> GitHub Copilot (team already on GitHub, $10/mo flat)
+  |
+  +-- Terminal / CLI preference
+  |     -> Claude Code (best reasoning, 1M context, complex multi-file)
+  |     -> Aider (git-native, free, open source, strong edit formats)
+  |     -> Codex CLI (OpenAI ecosystem, open source Rust binary)
+  |
+  +-- Fully autonomous / fire-and-forget
+  |     -> Devin (most autonomous, full desktop env, PR output)
+  |     -> Cursor Background Agents (async VM on AWS, up to 8 parallel)
+  |     -> OpenHands (open source, Docker, CodeAct action space)
+  |
+  +-- Research / reproducible benchmarking
+        -> SWE-Agent (trajectory recording, YAML config, academic)
+        -> OpenHands (MIT license, reproducible Docker experiments)
+```
+
+### 17.2 By Project Type
+
+| Project Type | Agent | Reason |
+|-------------|-------|--------|
+| Small script / single file | Copilot, Aider | Simple edits; overkill to use heavy agents |
+| Daily feature development | Cursor | IDE completions + background agents |
+| Large repo, multi-file refactor | Claude Code | 1M context, no chunking |
+| End-to-end feature (0 to PR) | Devin / Cursor BG | Full VM, autonomous loop |
+| Open source / budget-constrained | Aider + open LLM | Free tool, BYOM pricing |
+| Security-sensitive code | Claude Code | Approval gates, no external upload |
+| Multi-language polyglot repo | Augment Code | 400K file semantic graph |
+| Research / trajectory collection | SWE-Agent | Reproducible YAML-driven experiments |
+| CEX artifact production | N03 (Claude SDK) | 8F pipeline, 1M context, 13 builder ISOs |
+
+### 17.3 By Autonomy Level
+
+| Level | Description | Best Agent |
+|-------|-------------|-----------|
+| Inline suggestion | Autocomplete while typing | Copilot, Cursor tab |
+| Interactive pair | LLM responds in conversation | Aider, Claude Code interactive |
+| Supervised | Reviews plan before execution | Cursor plan approval, Codex CLI |
+| Async autonomous | Runs in background, returns PR | Devin, Cursor BG Agents |
+| Multi-agent orchestration | Parallel waves, dependency-ordered | Claude Code SDK, CEX grid |
+
+### 17.4 Pricing Matrix (April 2026)
+
+| Tool | Base | Heavy Use | Model |
+|------|------|-----------|-------|
+| GitHub Copilot | $10/mo | Flat | GPT-4o (fixed) |
+| Aider | Free | LLM API cost | BYOM |
+| Cursor | $20/mo | Flat (usage limits) | Claude / GPT / Gemini |
+| Claude Code | $20/mo | $100-200/mo | Opus / Sonnet |
+| Devin | $20/mo | Variable (ACUs) | Proprietary |
+| OpenHands | Free (self-hosted) | Server + LLM | BYOM |
+| Codex CLI | Free (OSS) | API cost | OpenAI |
+
+### 17.5 CEX Internal Routing
+
+```
+Task arrives at N07
+  |
+  +-- Single artifact build  -> N03 (Claude SDK subagent, Opus-4.6 1M)
+  +-- Research / analysis    -> N01 (Claude SDK subagent, Sonnet-4.6 200K)
+  +-- Code review / test     -> N05 (Claude SDK subagent, Sonnet-4.6 200K)
+  +-- Brand / pricing        -> N06 (Claude SDK subagent, Sonnet-4.6 200K)
+  +-- Parallel wave (6 max)  -> grid dispatch (N01-N06 via spawn_grid.ps1)
+  +-- Overnight evolution    -> cex_evolve.py --mode agent (headless SDK loop)
+```
+
+---
+
 ## Sources
 
 - [Aider edit formats](https://aider.chat/docs/more/edit-formats.html)
