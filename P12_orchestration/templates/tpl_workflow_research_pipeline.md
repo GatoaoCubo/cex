@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "Workflow — Multi-Source Research Pipeline"
 version: 1.0.0
-quality: null
+quality: 9.2
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/P12 workflow artifacts
@@ -12,6 +12,7 @@ variables: [PIPELINE_NAME, STAGES, QUALITY_GATE, INDUSTRY, REGION, TARGET_COUNT]
 density_score: 0.95
 tags: [template, workflow, research-pipeline, multi-source, crm, instance-extraction]
 tldr: "End-to-end research pipeline workflow — from discovery through enrichment to validated CRM output."
+updated: "2026-04-13"
 ---
 
 # Workflow: {{PIPELINE_NAME | default: 'Research Pipeline'}}
