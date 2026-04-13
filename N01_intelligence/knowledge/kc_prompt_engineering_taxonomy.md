@@ -3,8 +3,9 @@ id: kc_prompt_engineering_taxonomy
 kind: knowledge_card
 title: "Prompt Engineering Taxonomy"
 version: 1.0.0
-quality: 8.8
+quality: 8.9
 pillar: P01
+density_score: 1.0
 ---
 
 # Prompt Engineering Taxonomy
