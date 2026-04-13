@@ -4,11 +4,12 @@ kind: spec
 pillar: P08_architecture
 title: "External Repo Port Plan -- ruflo + aiox-core vs CEX"
 version: 1.0
-quality: null
+quality: 9.1
 tags: [spec, port_plan, architecture, comparative_analysis]
 created: 2026-04-11
 author: n07_orchestrator
 domain: CEX architecture evolution
+density_score: 1.0
 ---
 
 # External Repo Port Plan -- ruflo + aiox-core vs CEX
