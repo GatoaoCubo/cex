@@ -9,7 +9,7 @@ created: "2026-04-12"
 updated: "2026-04-12"
 author: n03_builder
 domain: prompt_compiler
-quality: null
+quality: 9.2
 tags: [prompt_compiler, P03, CONSTRAIN, kind-kc, intent-resolution]
 tldr: "Intent-to-artifact transmutation rules compiling vague user input into structured {kind, pillar, nucleus, verb} tuples"
 when_to_use: "Building, reviewing, or reasoning about prompt_compiler artifacts"
