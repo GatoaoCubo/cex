@@ -1,214 +1,45 @@
-title: CEX Artifact Specification
-author: CEX Working Group
-date: 2023-10-15
-description: 'Comprehensive technical specification for the CEX (Component Exchange) framework,
-
-  covering 124 standardized kinds across 12 pillars, with cross-language term mapping,
-
-  ingestion roadmap, and evaluation metrics.
-
-  '
-1_executive_summary: 'This document defines the CEX framework''s technical architecture, including:
-
-  - 124 standardized artifact kinds
-
-  - 12 core technical pillars
-
-  - Cross-language terminology mapping
-
-  - Ingestion pipeline strategy
-
-  - Evaluation and feedback mechanisms
-
-
-  The framework supports multi-model, multi-lingual, and multi-domain systems through:
-
-  - 132 unique artifact kinds
-
-  - 62 core kinds with dual-pillar assignments
-
-  - 82 non-core kinds for specialized use cases
-
-
-  ---'
-2_technical_pillars_and_artifact_kinds: ''
-2_1_pillar_overview: '| Pillar | Domain | Primary Use Case | Key Kinds |
-
-  |--------|--------|------------------|-----------|
-
-  | P01 Knowledge | Information Management | Knowledge representation | `knowledge_card`, `embedding_config` |
-
-  | P02 Model | System Architecture | Model definition | `model_card`, `agent` |
-
-  | P03 Prompt | Natural Language Processing | Prompt engineering | `prompt_template`, `reasoning_trace` |
-
-  | P04 Tools | Functionality | Tool integration | `function_def`, `retriever` |
-
-  | P05 Output | User Interaction | Response formatting | `formatter`, `edit_format` |
-
-  | P06 Schema | Data Modeling | Type definitions | `input_schema`, `interface` |
-
-  | P07 Evaluation | Quality Assurance | Performance metrics | `benchmark`, `scoring_rubric` |
-
-  | P08 Architecture | System Design | Pattern definition | `component_map`, `pattern` |
-
-  | P09 Config | Operational Parameters | Configuration management | `feature_flag`, `sandbox_config` |
-
-  | P10 Memory | State Management | Memory persistence | `entity_memory`, `session_state` |
-
-  | P11 Feedback | Safety Controls | Risk mitigation | `guardrail`, `safety_taxonomy` |
-
-  | P12 Orchestration | Workflow Management | Process coordination | `workflow`, `handoff` |
-
-
-  ---'
-3_cross_language_term_mapping: ''
-3_1_terminology_table: '| English | Chinese (zh) | Japanese (ja) | Korean (ko) | CEX Kind |
-
-  |---------|--------------|----------------|-------------|----------|
-
-  | Agent | 智能体 / 代理 | エージェント | 에이전트 | `agent` |
-
-  | Tool | 工具 | ツール | 도구 | `function_def` |
-
-  | Memory | 记忆 | メモリ | 기억 | `entity_memory` |
-
-  | Workflow | 工作流 | ワークフロー | 워크플로우 | `workflow` |
-
-  | Retrieval | 检索 | 検索 | 검색 | `retriever` |
-
-  | Embedding | 向量化 | エンベディング | 임베딩 | `embedding_config` |
-
-  | Prompt | 提示词 | プロンプト | 프롬프트 | `prompt_template` |
-
-  | Knowledge Base | 知识库 | 知識ベース | 지식베이스 | `knowledge_card` |
-
-  | Fine-tuning | 微调 | ファインチューニング | 파인튜닝 | `finetune_config` |
-
-  | Guardrail | 防护栏 | ガードレール | 가드레일 | `guardrail` |
-
-  | Evaluation | 评估 | 評価 | 평가 | `scoring_rubric` |
-
-  | Pipeline | 流水线 | パイプライン | 파이프라인 | `workflow` |
-
-  | Handoff | 交接 | ハンドオフ | 핸드오프 | `handoff` |
-
-  | Router | 路由器 | ルーター | 라우터 | `router` |
-
-  | Supervisor | 监督者 / 管理员 | スーパバイザ | 슈퍼바이저 | `supervisor` |
-
-  | Role (MetaGPT) | 角色 | ロール | 역할 | `agent` |
-
-  | SOP (MetaGPT) | 标准操作流程 | SOP | 표준 운영 절차 | `workflow` |
-
-  | Action (MetaGPT) | 动作 | アクション | 액션 | `function_def` |
-
-  | Session | 会话 | セッション | 세션 | `session_state` |
-
-  | Streaming | 流式传输 | ストリーミング | 스트리밍 | `streaming_config` |
-
-
-  > Note: Actual CJK characters are stored in YAML data files. Romanized forms shown for ASCII compatibility.
-
-
-  ---'
+title: CEX Kind Taxonomy and Ingestion Roadmap
+author:
+- Your Name
+date:
+- Date
+1_introduction: "This document defines the CEX Kind Taxonomy—a structured framework for categorizing technical artifacts,\
+  \ configurations, and concepts across AI systems, workflows, and platforms. It includes:  \n- A comprehensive CEX Kind Taxonomy\
+  \ with 124 kinds across 12 pillars.  \n- A cross-language term map for multilingual alignment.  \n- An ingestion roadmap\
+  \ for integrating external standards and specifications.  \n- Strategic recommendations for artifact curation and pipeline\
+  \ optimization.  \n\n---"
+2_core_concepts: ''
+2_1_cex_kind_taxonomy: "The CEX Kind Taxonomy organizes technical artifacts into 12 pillars, each with core and non-core kinds.\
+  \ Key pillars include:  \n\n| Pillar | Core Kinds (6) | Non-Core Kinds (7) |  \n|--------|----------------|--------------------|\
+  \  \n| P01 Knowledge | `knowledge_card`, `embedding_config` | `retriever`, `glossary_entry` |  \n| P02 Model | `agent`,\
+  \ `model_card` | `agent_registry`, `finetune_config` |  \n| P03 Prompt | `prompt_template`, `reasoning_trace` | `thinking_budget`,\
+  \ `streaming_config` |  \n| P04 Tools | `function_def`, `tool_config` | `browser_session`, `dom_distiller` |  \n| P05 Output\
+  \ | `formatter`, `response_format` | `edit_format`, `output_parser` |  \n\nTotal Unique Kinds: 132 (62 core + 62 non-core).\
+  \  \n\n---"
+3_cross_platform_compatibility: ''
+3_1_cross_language_term_map: "A mapping of key terms across English, Chinese, Japanese, Korean, and CEX Kind:  \n\n| English\
+  \ | Chinese (zh) | Japanese (ja) | Korean (ko) | CEX Kind |  \n|---------|--------------|----------------|--------------|----------|\
+  \  \n| Agent | 智能体 / 代理 | エージェント | 에이전트 | `agent` |  \n| Tool | 工具 | ツール | 도구 | `function_def` |  \n| Memory | 记忆 | メモリ\
+  \ | 메모리 | `entity_memory` |  \n| Workflow | 工作流 | ワークフロー | 워크플로우 | `workflow` |  \n| Retrieval | 检索 | 検索 | 검색 | `retriever`\
+  \ |  \n\nNote: Romanized forms shown for readability. Actual CJK characters available in YAML data files.  \n\n---"
 4_ingestion_roadmap: ''
-4_1_prioritized_sources: '| Rank | Source | Format | Term Count | Action | Effort |
-
-  |------|--------|--------|------------|--------|--------|
-
-  | 1 | NIST AI Glossary (CSV) | CSV | 511 | Parse CSV -> `glossary_entry` | LOW |
-
-  | 2 | A2A .proto files | Protobuf | ~30 | Parse protobuf -> `interface` | LOW |
-
-  | 3 | MCP JSON Schema | JSON Schema | ~25 | Parse schema -> `input_schema` | LOW |
-
-  | 4 | OpenAI OpenAPI spec | OpenAPI 3.x | ~40 | Parse spec -> `api_client` | LOW |
-
-  | 5 | LangChain concepts docs | Markdown | ~60 | Parse h2/h3 -> `glossary_entry` | MEDIUM |
-
-  | 6 | LlamaIndex concepts docs | Markdown | ~40 | Parse h2/h3 -> `glossary_entry` | MEDIUM |
-
-  | 7 | Google ML Glossary | HTML | 500+ | Scrape dl/dt/dd -> `glossary_entry` | MEDIUM |
-
-  | 8 | ML Ontology (OWL/RDF) | RDF/OWL | 700 | Parse RDF -> `knowledge_card` | HIGH |
-
-  | 9 | OWL Ontology Definitions | OWL | 300+ | Parse OWL -> `schema` | HIGH |
-
-  | 10 | MetaGPT Documentation | Markdown | 200+ | Parse code blocks -> `function_def` | MEDIUM |
-
-
-  ---'
-5_evaluation_metrics: ''
-5_1_quality_assurance_framework: '| Metric | Target | Current | Methodology |
-
-  |--------|--------|---------|-------------|
-
-  | Artifact Coverage | 100% | 92% | Cross-referencing with industry standards |
-
-  | Language Support | 100% | 85% | Multi-lingual term mapping validation |
-
-  | Schema Consistency | 95% | 88% | Automated schema validation tools |
-
-  | Performance | <10ms | 12ms | Benchmarking against 100+ models |
-
-  | Safety Compliance | 100% | 95% | Guardrail penetration testing |
-
-
-  ---'
-6_appendix_cex_kind_coverage_summary: ''
-6_1_artifact_distribution: '| Pillar | Core Kinds | Non-Core Kinds | Total |
-
-  |--------|------------|----------------|-------|
-
-  | P01 | 8 | 12 | 20 |
-
-  | P02 | 7 | 9 | 16 |
-
-  | P03 | 10 | 15 | 25 |
-
-  | P04 | 12 | 18 | 30 |
-
-  | P05 | 6 | 8 | 14 |
-
-  | P06 | 9 | 11 | 20 |
-
-  | P07 | 7 | 10 | 17 |
-
-  | P08 | 6 | 7 | 13 |
-
-  | P09 | 8 | 12 | 20 |
-
-  | P10 | 7 | 9 | 16 |
-
-  | P11 | 6 | 8 | 14 |
-
-  | P12 | 7 | 10 | 17 |
-
-  | Total | 90 | 132 | 222 |
-
-
-  > Note: 62 kinds have dual-pillar assignments (e.g., `agent` spans P02 and P12).
-
-
-  ---'
-7_implementation_roadmap: ''
-7_1_phase_1_q4_2023:
-- Finalize 12 core pillars
-- Complete 80% of ingestion pipeline
-- Achieve 90% language coverage
-7_2_phase_2_q1_2024:
-- Implement schema validation framework
-- Expand to 15+ languages
-- Integrate with 50+ model providers
-7_3_phase_3_q2_2024: '- Achieve 100% artifact coverage
-
-  - Launch open-source repository
-
-  - Establish industry certification program
-
-
-  ---'
-8_conclusion: This specification provides a comprehensive foundation for the CEX framework, enabling interoperability across
-  diverse systems and domains. With 124 standardized kinds and a robust ingestion pipeline, the framework supports scalable,
-  secure, and efficient component exchange in AI and software ecosystems.
+4_1_prioritized_sources: "Ranked by signal density, machine-readability, and strategic value:  \n\n| Rank | Source | Format\
+  \ | Term Count | Action | Effort |  \n|------|--------|--------|------------|--------|--------|  \n| 1 | NIST AI Glossary\
+  \ (CSV) | CSV | 511 | Parse CSV → `glossary_entry` | LOW |  \n| 2 | A2A .proto files | Protobuf | ~30 | Parse → `interface`\
+  \ + `type_def` | LOW |  \n| 3 | MCP JSON Schema | JSON Schema | ~25 | Parse → `input_schema` + `function_def` | LOW |  \n\
+  | 4 | OpenAI OpenAPI spec | OpenAPI 3.x | ~40 | Parse → `api_client` + `type_def` | LOW |  \n| 5 | LangChain concepts docs\
+  \ | Markdown | ~60 | Parse h2/h3 → `glossary_entry` | MEDIUM |  \n| 6 | ML Ontology (OWL/RDF) | RDF | N/A | Parse → `glossary_entry`\
+  \ + `knowledge_card` | HIGH |"
+4_2_ingestion_pipeline: "Recommended workflow:  \n1. Fetch source files (CSV, Protobuf, JSON, Markdown).  \n2. Parse and normalize\
+  \ data using schema-specific parsers.  \n3. Map terms to CEX Kinds using the cross-language term map.  \n4. Validate against\
+  \ the CEX Kind Taxonomy.  \n5. Store in a unified artifact repository.  \n\n---"
+5_strategic_recommendations: ''
+5_1_artifact_curation:
+- Prioritize sources with high signal density (e.g., NIST, OpenAPI).
+- Validate cross-language mappings for consistency.
+- Automate ingestion pipelines for scalability.
+5_2_future_work: "- Expand the CEX Kind Taxonomy to include non-English standards.  \n- Integrate AI-driven term alignment\
+  \ for multilingual support.  \n- Develop tooling for real-time artifact validation.  \n\n---"
+6_conclusion: The CEX Kind Taxonomy provides a scalable framework for organizing technical artifacts. By leveraging the ingestion
+  roadmap and cross-language mappings, teams can ensure consistency, interoperability, and extensibility across AI systems
+  and platforms. --- End of Document
