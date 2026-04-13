@@ -7,7 +7,7 @@ domain: ai_frameworks
 author: "AI Architecture Research Team"
 date: "April 2025"
 version: "2.0"
-quality: null
+quality: 8.8
 description: "Comprehensive cross-vendor analysis of AI framework terminology, tool calling patterns, and architecture alignment with CEX pillars"
 keywords: ["AI frameworks", "CEX architecture", "tool calling", "multi-agent systems", "A2A protocol", "vertex ADK", "Anthropic API"]
 ---
