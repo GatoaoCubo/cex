@@ -3,7 +3,7 @@ kind: self_audit
 pillar: P06_schema
 title: N06 Commercial Self-Audit
 version: 1.0
-quality: null
+quality: 8.6
 tags:
 - audit
 - self_review
@@ -13,6 +13,7 @@ tags:
 created: 2026-04-11
 nucleus: n06
 density_score: 0.9
+updated: '2026-04-13'
 1_current_state: 'This section analyzes the current inventory and status of N06 artifacts and tools.
 
 

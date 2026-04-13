@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-infrastructure
-quality: null
+quality: 8.7
 tags:
 - glossary
 - embedding
@@ -14,3 +14,6 @@ tags:
 - similarity
 tldr: A fixed-length float vector representing text semantics, enabling similarity search via cosine distance in vector stores.
 density_score: 0.96
+updated: '2026-04-13'
+boundary: Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo).
+8f_pipeline_function: 'Primary function: INJECT'

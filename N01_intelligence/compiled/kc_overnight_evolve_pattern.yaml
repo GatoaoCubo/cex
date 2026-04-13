@@ -1,0 +1,42 @@
+id: kc_overnight_evolve_pattern
+kind: knowledge_card
+title: Overnight Evolve Pattern for Continuous AI Improvement
+version: 1.0.0
+quality: 8.9
+pillar: P01
+density_score: 1.0
+updated: '2026-04-13'
+5_phase_cycle: "1. Python Scoring  \n   Automated quality assessment using Python-based metrics (token efficiency, coherence,\
+  \ factual accuracy). Scores artifacts on 0-10 scale.\n\n2. Sweep  \n   Parallel execution of tasks across multiple models/providers.\
+  \ Identifies optimal parameters for each workload.\n\n3. Crew  \n   Distributed processing of independent tasks. Enables\
+  \ parallel execution of non-interdependent workstreams.\n\n4. Cascade  \n   Sequential execution with dependency resolution.\
+  \ Ensures outputs from earlier stages feed into subsequent processes.\n\n5. Grid  \n   Multi-dimensional parallelization\
+  \ across models, parameters, and workloads. Maximizes resource utilization for complex tasks."
+convergence_behavior: 'The pattern converges when:
+
+  - 3 consecutive cycles show <0.5% score improvement
+
+  - All tasks complete within ±15% of projected execution time
+
+  - Resource utilization stabilizes at 85-95% of capacity'
+cost_analysis: '| Metric          | Local ($0)       | Cloud (USD)      |
+
+  |-----------------|------------------|------------------|
+
+  | Execution       | 0.00             | 0.05-0.50/hour   |
+
+  | Storage         | 0.00             | 0.02/GB/month    |
+
+  | GPU Acceleration| Free (if available) | 0.10/hour        |
+
+  | Energy Efficiency | 100%           | 60-80%           |'
+hardware_requirements: '- Minimum: 16GB RAM, 4-core CPU, 500GB SSD
+
+  - Recommended: 32GB RAM, 8-core CPU, 1TB SSD, NVIDIA GPU (for accelerated model inference)
+
+  - Optimal: 64GB RAM, 16-core CPU, 2TB SSD, multi-GPU setup
+
+
+  This pattern enables 24/7 autonomous improvement cycles while maintaining cost efficiency and resource optimization.'
+boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+8f_pipeline_function: 'Primary function: INJECT'

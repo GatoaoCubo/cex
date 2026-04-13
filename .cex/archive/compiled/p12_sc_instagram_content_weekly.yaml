@@ -9,7 +9,7 @@ name: Instagram Content — Weekly Cadence
 trigger_type: cron
 cron: 0 8 * * 1,3,5
 workflow_ref: p12_wf_instagram_content_gen
-quality: null
+quality: 8.7
 tags:
 - schedule
 - instagram
