@@ -133,6 +133,48 @@ The staged approach mirrors o1/DeepSeek-R1: capability injection via SFT first, 
 
 **tau-Bench Telecom specifics**: Multi-step simulation of telecom customer service -- booking, troubleshooting, escalation. 87% is currently the highest published score among Korean models on this domain-specific agent benchmark.
 
+#### 1.2c HyperCLOVA X SEED Omni-8B (Dec 2025 -- Any-to-Any Multimodal)
+
+Released Dec 26, 2025 alongside SEED Think-32B. A distinct model -- smaller, omni-modal, not reasoning-focused.
+
+| Spec | Value |
+|------|-------|
+| Architecture | Decoder-only Transformer with modality-specific encoders + decoders |
+| Params | 8B |
+| Modalities (input) | Text + vision + audio |
+| Modalities (output) | Text + vision (generation/editing) + speech (TTS) |
+| Context | 32K tokens |
+| Vision encoder | Alibaba Qwen2.5-VL (acknowledged external component) |
+| Audio encoder | OpenAI Whisper (acknowledged external component) |
+| License | Open-weight |
+| Inference system | OmniServe (OpenAI-compatible API, GitHub: NAVER-Cloud-HyperCLOVA-X/OmniServe) |
+
+**Architecture pattern**: Modality-specific encoders project visual/audio inputs into continuous embeddings, interleaved with text tokens in a shared decoder-only backbone. Modality-specific decoders reconstruct images and audio from the shared sequence. Single next-token prediction interface unifies all modalities -- no separate generation heads per modality, just token prediction over an extended vocabulary that includes visual and audio tokens.
+
+**Korean TTS benchmark (MOS, 30 listeners)**:
+
+| Model | MOS (Korean TTS) |
+|-------|-----------------|
+| HyperCLOVA X 8B Omni | 4.22 / 5 |
+| Next-best rival (unnamed) | 3.40 / 5 |
+| Gap | +0.82 |
+
+A 0.82 MOS gap is substantial in voice quality evaluation (MOS scale 1-5). This positions Omni-8B as the Korean TTS quality leader among open models.
+
+**Omni-8B vs Think-32B**:
+
+| Dimension | SEED Omni-8B | SEED Think-32B |
+|-----------|-------------|---------------|
+| Primary use | Omni-modal AI assistant | Reasoning + vision agent |
+| Modalities | Text+vision+audio (in+out) | Text+vision (in), Text (out) |
+| Params | 8B | 32B |
+| Strengths | Voice output, multimodal generation | Deep reasoning, KCSAT, math |
+| Context | 32K | 128K |
+
+**Transparency note**: Naver explicitly acknowledges Qwen2.5-VL (Alibaba) as vision encoder and Whisper (OpenAI) as audio encoder. This disclosure becomes significant in light of the Jan 2026 sovereignty controversy (see section 1.7 below).
+
+**CEX relevance**: Any-to-any omni models at 8B scale are the new baseline for voice-enabled agent systems. OmniServe's OpenAI-compatible API is the production deployment pattern for multimodal agents.
+
 ### 1.3 Upstage Solar Pro3
 
 | Spec | Value |
