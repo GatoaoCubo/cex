@@ -28,12 +28,16 @@ n07:
   fallback_chain:
     - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
     - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   # Legacy single-fallback field -- kept for backward compat with older tools.
   fallback:
     cli: ollama
-    model: qwen3:8b
-  notes: "Maestro. Best reasoning for dispatch decisions."
+    model: gemma4:26b
+  fallback_local:
+    cli: ollama
+    model: gemma4:26b
+  notes: "Maestro. Best reasoning for dispatch decisions. Gemma4 MoE as local fallback (4B active, fits 16GB)."
 
 # --- N01: Research & Intelligence ---
 n01:
@@ -47,6 +51,7 @@ n01:
   fallback_chain:
     - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
     - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
@@ -54,7 +59,7 @@ n01:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:8b
+    model: gemma4:26b
   notes: "2026-04-13: opus->sonnet. Budget optimization: 5 Sonnet + 2 Opus. Preflight handles context compilation. Fallback uses gemini-2.5-flash."
 
 # --- N02: Marketing & Copy ---
@@ -69,6 +74,7 @@ n02:
   fallback_chain:
     - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
     - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
@@ -76,7 +82,7 @@ n02:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:8b
+    model: gemma4:26b
   notes: "2026-04-13: opus->sonnet. Creative copy is Sonnet sweet spot. Preflight pre-compiles context."
 
 # --- N03: Engineering & Builder ---
@@ -91,15 +97,16 @@ n03:
   fallback_chain:
     - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
     - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
-    - {cli: ollama, model: qwen3:8b,         flags: ""}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
+    - {cli: ollama, model: qwen3:14b,         flags: ""}
   fallback:
     cli: codex
     model: gpt-5-codex
     flags: "--dangerously-bypass-approvals-and-sandbox"
   fallback_local:
     cli: ollama
-    model: qwen3:14b
-  notes: "Already opus. 13 ISOs + 8F pipeline. Deepest reasoning. N03 fallback prefers codex (code-specialized) over gemini. Local upgraded to qwen3:14b (2026-04-12)."
+    model: gemma4:26b
+  notes: "Opus primary. Gemma4 MoE as local fallback (4B active, better than qwen3:14b). 2026-04-13."
 
 # --- N04: Knowledge & RAG ---
 n04:
@@ -113,6 +120,7 @@ n04:
   fallback_chain:
     - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
     - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
@@ -120,7 +128,7 @@ n04:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:8b
+    model: gemma4:26b
   notes: "2026-04-13: opus->sonnet. Supabase+complex arch needs Sonnet minimum. Preflight handles context."
 
 # --- N05: Operations & DevOps ---
@@ -157,6 +165,7 @@ n06:
   fallback_chain:
     - {cli: gemini, model: gemini-2.5-flash, flags: "--yolo"}
     - {cli: codex,  model: gpt-5-codex,      flags: "--dangerously-bypass-approvals-and-sandbox"}
+    - {cli: ollama, model: gemma4:26b,        flags: ""}
     - {cli: ollama, model: qwen3:8b,         flags: ""}
   fallback:
     cli: gemini
@@ -164,7 +173,7 @@ n06:
     flags: "--yolo"
   fallback_local:
     cli: ollama
-    model: qwen3:8b
+    model: gemma4:26b
   notes: "2026-04-13: opus->sonnet. Pricing + monetization structured enough for Sonnet."
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -234,8 +243,11 @@ ollama_api:
   base_url: "http://localhost:11434/v1"
   embed_url: "http://localhost:11434/api/embed"
   models:
-    light: "qwen3:8b"
+    primary: "gemma4:26b"
     heavy: "qwen3:14b"
+    light: "qwen3:8b"
   gpu: "RTX 5070 Ti"
-  notes: "Local inference, $0 cost. Use light for scoring, heavy for generation."
+  vram: "16GB"
+  parallel: 6  # OLLAMA_NUM_PARALLEL for concurrent grid inference
+  notes: "Gemma4 MoE (26B total, 4B active) as primary. Fits 16GB. 6x concurrent via OLLAMA_NUM_PARALLEL."
 

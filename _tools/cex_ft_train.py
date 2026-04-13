@@ -31,13 +31,13 @@ ADAPTERS_DIR = FT_DIR / "adapters"
 
 # Base model mappings: friendly name -> HuggingFace model ID
 BASE_MODELS = {
-    # Current best options for RTX 5070 Ti (16GB VRAM)
+    # Primary: Gemma 4 MoE (26B total, 4B active -- fits 16GB VRAM)
+    "gemma4:26b": "google/gemma-4-26b-a4b",
+    # Fallbacks
     "gemma3:27b": "google/gemma-3-27b-it",
     "gemma3:12b": "google/gemma-3-12b-it",
     "qwen3:14b": "Qwen/Qwen3-14B",
     "qwen3:8b": "Qwen/Qwen3-8B",
-    # Future: Gemma 4 when available
-    "gemma4:26b": "google/gemma-4-26b-a4b",
 }
 
 # Default QLoRA hyperparameters per nucleus
@@ -274,8 +274,8 @@ def main():
                         help="Target nucleus (e.g. N03)")
     parser.add_argument("--all", action="store_true",
                         help="Train all nuclei sequentially")
-    parser.add_argument("--base", default="qwen3:14b",
-                        help="Base model (default: qwen3:14b)")
+    parser.add_argument("--base", default="gemma4:26b",
+                        help="Base model (default: gemma4:26b)")
     parser.add_argument("--epochs", type=int, default=None,
                         help="Override epochs count")
     parser.add_argument("--dry-run", action="store_true",

@@ -21,6 +21,10 @@ model_list:
       api_key: os.environ/GEMINI_API_KEY
   - model_name: cex-n07
     litellm_params:
+      model: ollama/gemma4:26b
+      api_base: http://localhost:11434
+  - model_name: cex-n07
+    litellm_params:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
@@ -34,6 +38,10 @@ model_list:
     litellm_params:
       model: gemini/gemini-2.5-flash
       api_key: os.environ/GEMINI_API_KEY
+  - model_name: cex-n01
+    litellm_params:
+      model: ollama/gemma4:26b
+      api_base: http://localhost:11434
   - model_name: cex-n01
     litellm_params:
       model: ollama/qwen3:14b
@@ -51,6 +59,10 @@ model_list:
       api_key: os.environ/GEMINI_API_KEY
   - model_name: cex-n02
     litellm_params:
+      model: ollama/gemma4:26b
+      api_base: http://localhost:11434
+  - model_name: cex-n02
+    litellm_params:
       model: ollama/qwen3:8b
       api_base: http://localhost:11434
 
@@ -64,6 +76,10 @@ model_list:
     litellm_params:
       model: gemini/gemini-2.5-flash
       api_key: os.environ/GEMINI_API_KEY
+  - model_name: cex-n03
+    litellm_params:
+      model: ollama/gemma4:26b
+      api_base: http://localhost:11434
   - model_name: cex-n03
     litellm_params:
       model: ollama/qwen3:14b
@@ -81,6 +97,10 @@ model_list:
       api_key: os.environ/GEMINI_API_KEY
   - model_name: cex-n04
     litellm_params:
+      model: ollama/gemma4:26b
+      api_base: http://localhost:11434
+  - model_name: cex-n04
+    litellm_params:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
@@ -96,6 +116,10 @@ model_list:
       api_key: os.environ/GEMINI_API_KEY
   - model_name: cex-n05
     litellm_params:
+      model: ollama/gemma4:26b
+      api_base: http://localhost:11434
+  - model_name: cex-n05
+    litellm_params:
       model: ollama/qwen3:8b
       api_base: http://localhost:11434
 
@@ -109,6 +133,10 @@ model_list:
     litellm_params:
       model: gemini/gemini-2.5-flash
       api_key: os.environ/GEMINI_API_KEY
+  - model_name: cex-n06
+    litellm_params:
+      model: ollama/gemma4:26b
+      api_base: http://localhost:11434
   - model_name: cex-n06
     litellm_params:
       model: ollama/qwen3:8b
