@@ -30,7 +30,7 @@ core: true
 ```
 
 ## What It Is
-A system prompt review steps is a structured workflow for evaluating and improving system prompts. It defines a specific review process that can be executed repeatedly across different contexts. Steps reviews are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this review?" while agents answer "who am I?" and prompts answer "how do I communicate?"
+A steps is a structured workflow for evaluating and improving system prompts. It defines a specific review process that can be executed repeatedly across different contexts. Steps reviews are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this review?" while agents answer "who am I?" and prompts answer "how do I communicate?"
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
@@ -74,7 +74,7 @@ A system prompt review steps is a structured workflow for evaluating and improvi
 | H01_phases_defined | phases array not empty | Cannot execute workflow |
 | H02_review_criteria | review_criteria not empty | Incomplete assessment |
 | H03_input_schema | Valid JSON schema format | Runtime parameter errors |
-| H04_output_format | Defined output structure | Unpredictbed results |
+| H04_output_format | Defined output structure | Unpredictable results |
 
 ## Usage Examples
 ```yaml
@@ -131,20 +131,4 @@ OpenClaude ships ~18 bundled steps as battle-tested implementations:
 **Parallel dispatch pattern** (from /review):
 - Phase 1: Identify changes (git diff)
 - Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
-- Phase 3: Aggregate findings and fix issues directly
-This pattern generalizes: any steps can dispatch parallel sub-agents with typed foci.
-
-**Analysis scratchpad pattern** (from /optimize):
-- <analysis> tags create a private drafting space
-- Forces structured thinking before output
-- Scratchpad is stripped from final result
-- Improves quality without consuming permanent context
-
-## New Step Patterns Discovered
-| Pattern | Description | Example |
-|---------|-------------|---------|
-| Adversarial steps | Agent explicitly tries to BREAK the implementation | n06_steps_audit |
-| Parallel review | Multiple focused agents analyze same diff concurrently | n06_steps_review |
-| Scratchpad steps | <analysis> block for private reasoning, stripped from output | n06_steps_optimize |
-| Background extract | Runs silently after N turns, extracts persistent memories | n06_steps_memory_extract |
-| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | n06_steps_verify |
+- Phase
