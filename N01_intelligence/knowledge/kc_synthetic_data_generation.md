@@ -6,6 +6,7 @@ version: 1.0.0
 quality: 8.8
 pillar: P01
 language: English
+density_score: 1.0
 ---
 
 # Synthetic Data Generation for LLMs
