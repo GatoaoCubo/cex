@@ -1,0 +1,124 @@
+id: p01_kc_cost_budget
+kind: knowledge_card
+type: kind
+pillar: P09
+title: 'cost_budget: Token Economics and Spend Management'
+version: 1.0.0
+created: 2026-04-12
+updated: 2026-04-12
+author: n03_builder
+domain: cost_budget
+quality: null
+tags:
+- cost_budget
+- P09
+- CONSTRAIN
+- kind-kc
+tldr: cost_budget defines token budget allocation, USD spend caps, provider cost rates, and alert thresholds -- enabling per-nucleus,
+  per-mission, and per-model cost governance.
+when_to_use: Building, reviewing, or reasoning about cost_budget artifacts
+keywords:
+- token_economics
+- spend_tracking
+- cost_allocation
+feeds_kinds:
+- cost_budget
+density_score: 0.93
+linked_artifacts:
+  primary: null
+  related: []
+spec: 'kind: cost_budget
+
+  pillar: P09
+
+  llm_function: CONSTRAIN
+
+  max_bytes: 4096
+
+  naming: p09_cb_{{name}}.yaml
+
+  core: false'
+what_it_is: A cost_budget defines token budget allocation, USD spend tracking, cost alerts per provider/model/nucleus, and
+  rollover policies -- enabling financial governance of LLM operations. It is NOT a rate_limit_config (which governs requests-per-second
+  throughput, not monetary cost), NOT a context_window_config (which sizes the prompt, not the spend), NOT a token counting
+  utility (which measures usage, not budgets).
+cross_framework_map: '| Framework/Provider | Class/Concept | Notes |
+
+  |-------------------|---------------|-------|
+
+  | LiteLLM | `max_budget`, `BudgetManager` | Per-user/team budgets with spend tracking |
+
+  | Helicone | Cost dashboard + alerts | Real-time cost monitoring, per-request cost attribution |
+
+  | LangSmith | Cost tracking in traces | Per-run cost aggregation from trace metadata |
+
+  | OpenAI | Usage API + billing limits | Monthly hard cap, per-organization spend alerts |
+
+  | Anthropic | Usage API + rate tiers | Credit-based billing, tier-specific token limits |
+
+  | Portkey | `Budget` + `CostLimiter` | Per-virtual-key budgets with automatic cutoff |
+
+  | BerriAI/LiteLLM Proxy | `budgets` config | Team-level token/USD budgets with routing |
+
+  | Weights & Biases | W&B Launch cost tracking | Per-sweep/per-run cost attribution |'
+key_parameters: '| Parameter | Type | Default | Tradeoff |
+
+  |-----------|------|---------|----------|
+
+  | budget_period | enum | monthly | daily/weekly/monthly -- shorter = tighter control, more admin overhead |
+
+  | max_tokens | int | null | Hard token ceiling per period -- null = uncapped (risky) |
+
+  | max_cost_usd | float | required | USD hard cap -- the ultimate guardrail |
+
+  | provider_rates | map | required | Per-model input/output token prices -- stale rates = wrong projections |
+
+  | alert_thresholds | list[float] | [0.5, 0.8, 0.95] | Percentage triggers for warnings -- too many = alert fatigue |
+
+  | rollover | bool | false | Unused budget carries forward -- true = flexible but less predictable |
+
+  | scope | enum | global | global/per_nucleus/per_mission -- granularity vs. management complexity |
+
+  | fallback_on_exhaust | enum | block | block/downgrade/alert_only -- block is safest, downgrade preserves availability |'
+patterns: '| Pattern | When to Use | Example |
+
+  |---------|-------------|---------|
+
+  | Per-nucleus budget | Isolate spend by function | `n01: {max_cost_usd: 5.00}`, `n03: {max_cost_usd: 10.00}` |
+
+  | Per-mission budget | Cap total mission spend | `mission_X: {max_cost_usd: 50.00, max_tokens: 2_000_000}` |
+
+  | Tiered model routing | Route to cheaper model when budget low | `if remaining < 20%: route opus -> sonnet -> haiku` |
+
+  | Prompt caching savings | Track cache hit rate as cost reduction | `cache_savings: {enabled: true, target_hit_rate: 0.6}`
+  |
+
+  | Batch API discount | Use batch endpoints for non-urgent work | `batch_eligible: true, discount_pct: 50, max_latency: 24h`
+  |'
+anti_patterns: '| Anti-Pattern | Why It Fails | Fix |
+
+  |-------------|-------------|-----|
+
+  | No max_cost_usd | Runaway agents generate unbounded spend overnight | Always set a hard USD cap, even generous ones |
+
+  | Stale provider_rates | Cost projections diverge from actual bills | Update rates monthly or use provider API for live
+  pricing |
+
+  | Global-only budget | One nucleus exhausts budget, starves all others | Use per_nucleus scope with individual caps |
+
+  | Alert-only on exhaust | Alerts get ignored at 3 AM; spend continues | Use block or downgrade as fallback_on_exhaust |
+
+  | No input/output split | Output tokens cost 3-5x input -- flat rate underestimates | Always separate input_price and output_price
+  per model |'
+integration_graph: "rate_limit_config, env_config --> [cost_budget] --> runtime_rule, agent_card\n                       \
+  \                |\n                                  model_provider, experiment_config, feature_flag"
+decision_tree:
+- IF governing USD spend and token allocation THEN cost_budget
+- IF governing requests-per-second throughput THEN rate_limit_config
+- IF sizing the context window THEN context_window_config
+- IF simple on/off cost toggle THEN feature_flag
+- 'DEFAULT: cost_budget when financial governance of LLM operations is needed'
+quality_criteria:
+- 'GOOD: max_cost_usd, provider_rates, alert_thresholds all present'
+- 'GREAT: per-nucleus scope, input/output price split, fallback_on_exhaust=block, batch discount tracked'
+- 'FAIL: no max_cost_usd, stale provider_rates, global-only with multi-nucleus system'

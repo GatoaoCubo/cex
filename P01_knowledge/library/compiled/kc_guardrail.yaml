@@ -1,0 +1,42 @@
+id: kc_guardrail
+kind: knowledge_card
+title: LLM Safety Guardrails
+version: 1.0.0
+quality: null
+pillar: P01
+density_score: 1.0
+core_guardrail_types:
+- Input Validation
+- Filters malicious or harmful input
+- Detects format errors and invalid queries
+- Prevents prompt injection attacks
+- Output Filtering
+- Blocks harmful, biased, or inappropriate responses
+- Enforces content policies and guidelines
+- Removes sensitive information
+- Content Moderation
+- Monitors for hate speech, harassment, and violence
+- Filters explicit or graphic content
+- Enforces community standards
+- PII Detection
+- Identifies personally identifiable information
+- Anonymizes sensitive data
+- Protects user privacy
+- Toxicity Filtering
+- Detects hate speech and toxic language
+- Blocks discriminatory content
+- Promotes inclusive communication
+guardrail_comparison: '| Guardrail Type     | Purpose               | Techniques                          | Use Cases                        |
+
+  |--------------------|-----------------------|-------------------------------------|----------------------------------|
+
+  | Input Validation   | Prevent harmful input | Regex patterns, syntax checks       | Malicious query detection        |
+
+  | Output Filtering   | Block unsafe responses | Content policies, keyword filtering | Hate speech prevention           |
+
+  | Content Moderation | Enforce community standards | NLP-based moderation, classifiers | Hate speech, harassment detection
+  |
+
+  | PII Detection      | Protect user privacy   | Anonymization, redaction            | Sensitive data handling          |
+
+  | Toxicity Filtering | Prevent toxic output   | Sentiment analysis, toxicity scores | Discriminatory content blocking  |'

@@ -1,0 +1,32 @@
+id: kc_env_config
+kind: knowledge_card
+title: Environment Configuration for LLM Systems
+version: 1.0.0
+quality: null
+pillar: P01
+language: English
+density_score: 1.0
+key_configuration_elements:
+- API Keys
+- Store sensitive credentials in environment variables
+- Use `.env` files with `.gitignore` protection
+- Never hardcode keys in source code
+- Provider URLs
+- 'Configure endpoints for different LLM providers:'
+- Model Selection
+- 'Set default models via environment variables:'
+- Feature Flags
+- 'Enable/disable features with flags:'
+- Secrets Management
+- Use encrypted secret managers for production
+- Implement rotation policies for credentials
+- Validate secrets during deployment
+- .env Patterns
+- Use consistent naming conventions
+- Separate development/production environments
+- Implement validation for required variables
+best_practices:
+- Use `.env.local` for local development
+- Store production secrets in secure vaults
+- Automate environment setup with CI/CD
+- Regularly audit configuration files

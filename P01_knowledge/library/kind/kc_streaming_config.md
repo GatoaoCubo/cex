@@ -5,6 +5,7 @@ keywords: streaming, configuration, P01, knowledge, parameters, setup, optimizat
 kind: knowledge_card
 version: 1.1.0
 quality: null
+density_score: 1.0
 ---
 
 # Streaming Configuration for P01 Knowledge Artifacts (P05)

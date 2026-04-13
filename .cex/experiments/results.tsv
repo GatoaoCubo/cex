@@ -5790,3 +5790,42 @@ et
 2026-04-07 16:06:58	archetypes\builders\citation-builder\bld_quality_gate_citation.md	3	8.9	1.00	discard	polished formatting (whitespace cleanup)
 2026-04-07 16:06:59	archetypes\builders\citation-builder\bld_quality_gate_citation.md	4	8.9	1.00	discard	polished formatting (whitespace cleanup)
 2026-04-07 16:07:00	archetypes\builders\citation-builder\bld_quality_gate_citation.md	5	8.9	1.00	discard	polished formatting (whitespace cleanup)
+2026-04-13 10:34:20	C:\Users\CEX\Documents\GitHub\cex\.cex\archive\examples\p02_agent_petshop_crm.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:21	C:\Users\CEX\Documents\GitHub\cex\.cex\archive\examples\p03_pt_instagram_content_v1.md	1	9.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:21	C:\Users\CEX\Documents\GitHub\cex\.cex\archive\examples\p05_lp_pet_crm_v1.md	1	9.1	0.98	keep	added density_score: 0.98
+2026-04-13 10:34:21	C:\Users\CEX\Documents\GitHub\cex\.cex\archive\examples\p12_sc_instagram_content_weekly.md	1	8.7	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:22	C:\Users\CEX\Documents\GitHub\cex\.cex\archive\reports\self_audit_2026_04_11.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:22	C:\Users\CEX\Documents\GitHub\cex\.cex\archive\reports\self_audit_codex_2026_04_11.md	1	9.0	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:22	C:\Users\CEX\Documents\GitHub\cex\.cex\archive\reports\self_audit_gemini_2026_04_11.md	1	8.6	0.90	keep	added density_score: 0.9
+2026-04-13 10:34:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_architecture_prompt_compiler.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_collaboration_prompt_compiler.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:23	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_config_prompt_compiler.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_examples_prompt_compiler.md	1	9.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_instruction_prompt_compiler.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_knowledge_card_prompt_compiler.md	1	9.0	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:24	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_manifest_prompt_compiler.md	1	9.0	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_memory_prompt_compiler.md	1	8.9	0.77	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_output_template_prompt_compiler.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:25	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_quality_gate_prompt_compiler.md	1	9.0	1.00	keep	analyzed: add_tags: minimum 3 tags required
+2026-04-13 10:34:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_schema_prompt_compiler.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_system_prompt_prompt_compiler.md	1	9.0	0.86	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:26	C:\Users\CEX\Documents\GitHub\cex\archetypes\builders\prompt-compiler-builder\bld_tools_prompt_compiler.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:27	C:\Users\CEX\Documents\GitHub\cex\N06_commercial\architecture\agent_card_commercial.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-13 10:34:27	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\examples\p01_ctx_cex_project.md	1	9.0	1.00	keep	analyzed: fix_frontmatter: missing title
+2026-04-13 10:34:27	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\examples\p01_kc_cex_project_overview.md	1	9.1	1.00	keep	polished formatting (whitespace cleanup)
+2026-04-13 10:34:28	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\examples\p01_kc_system_testing_patterns.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-13 10:34:28	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\domain\kc_input_intent_resolution.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-13 10:34:28	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\domain\kc_template_catalog.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-13 10:34:29	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\domain\meta\kc_instance_variable_registry.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:29	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_batch_config.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:29	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_cost_budget.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:30	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_env_config.md	1	8.7	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:30	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_experiment_config.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:30	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_finetune_config.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:31	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_guardrail.md	1	8.8	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:31	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_hitl_config.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:31	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_knowledge_graph.md	1	9.1	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists
+2026-04-13 10:34:32	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_multi_model_orchestration.md	1	8.7	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:32	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_n07_orchestrator.md	1	8.8	0.95	keep	added density_score: 0.95
+2026-04-13 10:34:32	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_ontology.md	1	8.7	1.00	keep	added density_score: 1.0
+2026-04-13 10:34:33	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_prompt_compiler.md	1	9.2	1.00	keep	analyzed: reduce_prose: convert long prose sections into tables or bullet lists

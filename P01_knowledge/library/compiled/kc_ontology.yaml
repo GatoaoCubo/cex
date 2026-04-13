@@ -1,0 +1,34 @@
+id: kc_ontology
+kind: knowledge_card
+title: Ontology (P01)
+version: 1.0.0
+quality: null
+density_score: 1.0
+when_to_use_ontology_vs_alternatives: '| Use Case                  | Ontology               | Knowledge Graph        | Glossary
+  Entry         |
+
+  |---------------------------|------------------------|------------------------|------------------------|
+
+  | Formal taxonomies         | ✅ Yes                 | ⚠️ Limited             | ❌ No                  |
+
+  | Semantic interoperability   | ✅ Yes                 | ✅ Yes (limited)       | ❌ No                  |
+
+  | Machine-readable definitions | ✅ Yes (RDF/OWL)     | ✅ Yes (RDF triples)   | ❌ No                  |
+
+  | Human-readable explanations | ⚠️ Limited           | ⚠️ Limited             | ✅ Yes                 |'
+key_standards:
+- 'OWL (Web Ontology Language): For complex semantic relationships'
+- 'SKOS (Simple Knowledge Organization System): For hierarchical taxonomies'
+- 'schema.org: For general-purpose structured data'
+implementation_patterns:
+- Use OWL for domain-specific ontologies requiring logical inference
+- Use SKOS for controlled vocabularies and thesauri
+- Reference schema.org for general entity types
+- Map ontology classes to CEX knowledge cards using `@context` definitions
+validation: 'Use Ontology Validator to check:
+
+  - Class hierarchy consistency
+
+  - Property domain/range validity
+
+  - RDF triple completeness'
