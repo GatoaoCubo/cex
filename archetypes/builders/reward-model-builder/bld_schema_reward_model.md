@@ -18,52 +18,52 @@ density_score: 0.85
 
 ## Frontmatter Fields  
 ### Required  
-| Field | Type | Required | Default | Notes |  
-|-------|------|----------|---------|-------|  
-| id | string | yes | - | Regex: ^p07_rwm_[a-zA-Z0-9]+\.md$ |  
-| kind | string | yes | "reward_model" | - |  
-| pillar | string | yes | "P07" | - |  
-| title | string | yes | - | Human-readable name |  
-| version | string | yes | "1.0.0" | Semantic versioning |  
-| created | datetime | yes | - | ISO 8601 format |  
-| updated | datetime | yes | - | ISO 8601 format |  
-| author | string | yes | - | Responsible party |  
-| domain | string | yes | - | Application context (e.g., "staking") |  
-| quality | string | yes | "draft" | Status: draft/provisional/final |  
-| tags | list | yes | [] | Keywords for categorization |  
-| tldr | string | yes | - | One-sentence summary |  
-| reward_type | string | yes | - | "token", "fee", "staking" |  
-| distribution_mechanism | string | yes | - | "linear", "tiered", "time-locked" |  
+| Field         | Type   | Required | Default | Notes                              |  
+|---------------|--------|----------|---------|------------------------------------|  
+| id            | string | yes      | -       | Unique identifier                  |  
+| kind          | string | yes      | "reward_model" | CEX kind type              |  
+| pillar        | string | yes      | "P07"    | Pillar reference                   |  
+| title         | string | yes      | -       | Model name                         |  
+| version       | string | yes      | "1.0"    | Schema version                     |  
+| created       | date   | yes      | -       | Creation timestamp                 |  
+| updated       | date   | yes      | -       | Last update timestamp              |  
+| author        | string | yes      | -       | Author/owner                       |  
+| domain        | string | yes      | -       | Application domain (e.g., trading) |  
+| quality       | string | yes      | "draft"  | Review status                      |  
+| tags          | list   | yes      | []       | Keywords                           |  
+| tldr          | string | yes      | -       | Summary                            |  
+| reward_type   | string | yes      | -       | Type of reward (e.g., token, fiat) |  
+| calculation_method | string | yes | -       | Formula or logic                   |  
+| max_reward_amount | number | yes | 0       | Cap limit                          |  
 
 ### Recommended  
-| Field | Type | Notes |  
-|-------|------|-------|  
-| reference_url | string | Link to spec or code |  
-| implementation_status | string | "concept", "prototype", "live" |  
+| Field         | Type   | Notes                              |  
+|---------------|--------|------------------------------------|  
+| description   | string | Detailed model explanation         |  
+| example       | object | Sample input/output                |  
+| references    | list   | External documentation links       |  
 
 ## ID Pattern  
 ^p07_rwm_[a-zA-Z0-9]+\.md$  
 
 ## Body Structure  
 1. **Overview**  
-   - Purpose, scope, and context of the reward model.  
-
-2. **Mechanics**  
-   - Rules for reward calculation, distribution, and eligibility.  
-
-3. **Parameters**  
-   - Key variables (e.g., `activation_threshold`, `decay_rate`).  
-
-4. **Validation**  
-   - Constraints, edge cases, and error handling.  
-
-5. **Use Cases**  
-   - Scenarios where the model is applied (e.g., user retention, governance).  
+   - Purpose, scope, and use case.  
+2. **Calculation Method**  
+   - Formula, variables, and logic.  
+3. **Reward Parameters**  
+   - Thresholds, multipliers, and caps.  
+4. **Eligibility Criteria**  
+   - User conditions and restrictions.  
+5. **Distribution Schedule**  
+   - Timing and frequency of payouts.  
+6. **Compliance and Auditing**  
+   - Regulatory checks and validation.  
 
 ## Constraints  
-- ID must match regex pattern.  
-- `reward_type` must be one of: "token", "fee", "staking".  
-- `distribution_mechanism` must be one of: "linear", "tiered", "time-locked".  
-- `activation_threshold` ≥ 0.  
-- `decay_rate` ∈ [0, 1].  
-- Parameters must align with mechanics section.
+- `reward_type` must be one of: "token", "fiat", "utility".  
+- `calculation_method` must include a valid mathematical expression.  
+- `max_reward_amount` must be ≥ 0.  
+- `domain` must align with CEX operational areas.  
+- All timestamps must use ISO 8601 format.  
+- `version` must follow semantic versioning (e.g., "1.2.3").
