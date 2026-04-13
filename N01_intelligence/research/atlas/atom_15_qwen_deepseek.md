@@ -441,6 +441,43 @@ messages = [
 **Error when mishandled**: HTTP 400: "Missing `reasoning_content` field in the assistant
 message at message index [X]" OR HTTP 400 for unexpected `reasoning_content` in input.
 
+#### 2.3.2 reasoning_content: Streaming, budget_tokens, and Token Limits
+
+**Token limits**:
+- Default max `reasoning_content` length: ~32K tokens
+- Extended max: up to 64K tokens combined (reasoning + content)
+- If `max_tokens` is too low, reasoning may be truncated and final answer omitted
+- Recommended allocation: set `max_tokens` >= 8000 for tool-calling scenarios
+
+**budget_tokens parameter** (source: api-docs.deepseek.com/api-reference):
+- Controls how many tokens the model may allocate to the reasoning phase
+- Acts as a soft ceiling within the overall `max_tokens` budget
+- If set too low, reasoning is abbreviated -- acceptable for simple questions, risky for complex chains
+- If unset, the model manages allocation automatically (proportional to inferred task complexity)
+- Practical guidance: `budget_tokens` ~70% of `max_tokens` for balanced reasoning+answer
+
+**Streaming `reasoning_content`** (source: api-docs.deepseek.com/guides/reasoning_model):
+```python
+with client.chat.completions.create(
+    model="deepseek-reasoner",
+    messages=messages,
+    stream=True,
+    stream_options={"include_usage": True}  # required to get usage stats in final chunk
+) as stream:
+    for chunk in stream:
+        delta = chunk.choices[0].delta if chunk.choices else None
+        if delta and delta.reasoning_content:
+            print(f"[thinking] {delta.reasoning_content}", end="", flush=True)
+        if delta and delta.content:
+            print(f"[answer] {delta.content}", end="", flush=True)
+        if chunk.usage:  # final streaming chunk only
+            print(f"\nTotal tokens: {chunk.usage.total_tokens}")
+```
+
+**Note**: Without `stream_options={"include_usage": True}`, the final usage summary chunk
+is suppressed. Usage data (prompt_tokens, completion_tokens, total_tokens) is unavailable
+in mid-stream deltas -- it only arrives in the terminal chunk.
+
 ### 2.4 Strict Mode (Beta)
 
 Base URL: `https://api.deepseek.com/beta`

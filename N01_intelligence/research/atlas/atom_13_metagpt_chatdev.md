@@ -382,6 +382,58 @@ map to finite-state Pydantic models. For dynamic runtime prompt generation,
 `DataInterpreter` (v0.8) is preferred.
 Source: github.com/FoundationAgents/MetaGPT/issues/1439
 
+### 1.12 DataInterpreter: Dynamic Code Agent (v0.8, Feb 2024)
+
+Paper: Cheng, X. et al., "Data Interpreter: An LLM Agent For Data Science"
+(arXiv:2402.18679). Source: docs.deepwisdom.ai/main/en/guide/use_cases/agent/interpreter/intro.html
+
+**Two execution modes:**
+
+| Mode | Behavior | Best For |
+|------|----------|----------|
+| `react` | Think-act loop, decides tool per step | Short exploratory tasks |
+| `plan_and_act` | Full plan upfront, then execute steps | Multi-step data pipelines |
+
+**Core tools available to DataInterpreter:**
+
+| Tool | Capability |
+|------|-----------|
+| `ExecuteNbCode` | Write + run Python in Jupyter cells; captures output + errors |
+| `BrowserTool` | Web search, page navigation, content extraction |
+| `Terminal` | OS-level commands, file I/O, process management |
+| `StableDiffusion` | Text-to-image via local SD or API |
+| `@tool` decorator | User-defined functions registered as custom tools |
+
+**Tool selection -- BM25ToolRecommender:**
+Given a task description, retrieves top-k relevant tools by BM25 keyword
+matching against tool docstrings. BM25 (not dense embeddings) chosen for
+speed and reliability on short tool descriptions.
+
+**_write_and_exec_code() core loop (max_retries=3):**
+```
+1. _think(): LLM selects next tool + writes code
+2. ExecuteNbCode.run(code): execute in Jupyter kernel
+3. If error: inject traceback into memory, retry with correction
+4. If success: append output to working_memory, continue plan
+```
+
+**Benchmark results vs GPT-4 + CoT (arXiv:2402.18679):**
+
+| Benchmark | DataInterpreter | GPT-4 + CoT | Delta |
+|-----------|-----------------|-------------|-------|
+| InfiAgent (data analysis) | 71.2% | 57.3% | +24.3% |
+| MATH (competition math) | 81.4% | 72.6% | +12.1% |
+| SciCode (open-ended) | 48.7% | 38.2% | +27.5% |
+
+**Incremental development (v0.5+ `--inc` flag):**
+```
+metagpt "Add a scoring feature" --project-path ./existing_app
+```
+PM identifies delta requirements vs existing `docs/prds`. Architect generates
+only changed components. Engineer implements delta files only -- untouched
+files remain unchanged. Prevents full-project regeneration on minor additions.
+Source: docs.deepwisdom.ai/v0.5/en/guide/in_depth_guides/incremental_development.html
+
 ---
 
 ## 2. ChatDev: Chat Chain + Communicative Dehallucination
