@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "Research Batch — Reputation + Professional Registry Enrichment"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/crm_mission/batch_e_reputation.md
@@ -12,6 +12,7 @@ variables: [PLATFORMS, REVIEW_SOURCES, MIN_RATING, PROFESSIONAL_REGISTRY, INDUST
 density_score: 0.95
 tags: [template, research-batch, reputation, enrichment, professional-registry, crm, instance-extraction]
 tldr: "Reputation enrichment + professional registry discovery — add quality signals and discover regulated businesses."
+updated: "2026-04-13"
 ---
 
 # BATCH E — Reputation + Professional Registry
