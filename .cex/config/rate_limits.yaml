@@ -1,0 +1,71 @@
+# CEX Rate Limit Configuration
+# Derived from empirical testing: 32 concurrent Sonnet sessions on Max subscription
+# Date: 2026-04-13
+# Test: atlas_wave2 — 32 N01 Sonnet instances, 5s spawn interval
+#
+# Results:
+#   - 28/32 completed (87.5% success rate)
+#   - 4 hit 429 rate limit (atoms 04, 06, 11, 18)
+#   - Completion window: ~10 minutes for all 28
+#   - Pattern: failures were atoms 04,06,11,18 (spread across grid, not sequential)
+#     suggesting API-side concurrency limit, not burst limit
+
+# --- Claude Max Subscription Limits (empirical) ---
+claude_max:
+  # Concurrent sessions that reliably work without 429
+  sonnet:
+    safe_concurrent: 20        # 28/32 worked, but 4 failed. 20 is conservative safe.
+    max_tested: 32             # 28 succeeded, 4 got 429
+    success_rate_at_32: 0.875  # 87.5%
+    spawn_interval_seconds: 5  # minimum between spawns
+    notes: "32 concurrent Sonnet sessions on Max: 87.5% success. 429s appear random (not sequential), suggesting server-side concurrency cap ~25-28."
+
+  opus:
+    safe_concurrent: 5         # estimated: Opus is ~5x more expensive per token
+    max_tested: 7              # 6 nuclei + N07 worked in prior sessions
+    spawn_interval_seconds: 10 # more conservative for Opus
+    notes: "7 concurrent Opus sessions worked (2026-04-12 mega session). Opus has lower throughput cap."
+
+  haiku:
+    safe_concurrent: 50        # estimated: Haiku is ~60x cheaper than Opus
+    spawn_interval_seconds: 2  # can be aggressive
+    notes: "Not tested at scale yet. Theoretical based on pricing tier."
+
+# --- Dispatch Strategy Recommendations ---
+strategy:
+  # For 32-parallel workloads (atlas-style):
+  wave_32:
+    model: sonnet
+    spawn_interval: 5
+    expect_failures: 4         # ~12.5% will 429
+    retry_failed: true
+    retry_delay: 60            # wait 1 min then retry failed atoms
+    max_retries: 2
+
+  # For 6-nucleus grid (standard /grid):
+  grid_6:
+    model: sonnet              # was opus, optimized 2026-04-13
+    spawn_interval: 5
+    expect_failures: 0         # 6 is well within limits
+    retry_failed: false
+
+  # For budget-safe massive parallel:
+  wave_safe:
+    model: sonnet
+    max_concurrent: 20         # stay under 429 threshold
+    spawn_interval: 5
+    batch_size: 20             # launch 20, wait for completion, launch next batch
+    notes: "For >20 tasks, batch in waves of 20. Zero 429s expected."
+
+# --- Recovery Protocol ---
+recovery:
+  on_429:
+    action: retry_with_backoff
+    initial_delay: 60          # seconds
+    backoff_multiplier: 2      # 60s, 120s, 240s
+    max_retries: 3
+    fallback_model: null       # could fallback to haiku for context assembly
+  on_quota_exhausted:
+    action: pause_and_notify
+    check_interval: 300        # check every 5 min if quota reset
+    fallback: ollama           # switch to local model

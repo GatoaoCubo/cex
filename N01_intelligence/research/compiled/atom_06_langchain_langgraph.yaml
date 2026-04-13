@@ -3,7 +3,7 @@ kind: knowledge_card
 pillar: P01
 domain: agentic-frameworks
 title: LangChain LCEL + LangGraph + LangSmith -- Complete Vocabulary Atlas
-version: 2.0.0
+version: 2.1.0
 quality: 8.8
 tags:
 - langchain
@@ -18,6 +18,10 @@ tags:
 - pregel
 - hitl
 - datasets
+- store-api
+- sdk-reference
+- task-parallelism
+- experiments
 sources:
 - https://docs.langchain.com/oss/python/langgraph/graph-api
 - https://docs.langchain.com/langsmith/observability-concepts
@@ -579,6 +583,21 @@ date: 2026-04-13
   | `END` edge traversed | Explicit terminal node reached |
 
   | `interrupt(value)` called | Pause -- checkpoint written, caller receives state |'
+3_8_2_task_level_parallelism_inside_a_super_step: "When multiple nodes are activated within the same super-step (via `Send`\
+  \ fan-out\nor parallel conditional edges), LangGraph executes them as concurrent tasks.\n\nConcurrency mechanism:\n\n| Invocation\
+  \ mode | Parallelism |\n|----------------|-------------|\n| `graph.invoke(...)` (sync) | `ThreadPoolExecutor` via `ContextThreadPoolExecutor`\
+  \ |\n| `graph.ainvoke(...)` (async) | `asyncio.gather` -- true coroutine parallelism |\n\nFan-out + reduce pattern:\n\n\
+  # Map phase: Send creates N tasks in ONE super-step\ndef dispatch_node(state):\n    return [Send(\"worker\", {\"item\":\
+  \ x}) for x in state[\"items\"]]\n\n# Each worker runs concurrently -- isolated state copies\ndef worker_node(state):\n\
+  \    return {\"results\": [process(state[\"item\"])]}\n\n# Reduce phase: reducer merges N results in NEXT super-step\n#\
+  \ Requires Annotated reducer on the aggregation key:\n# results: Annotated[list, operator.add]\n\nIsolation guarantee:\n\
+  - Each `Send` task receives its own state copy\n- Updates from concurrent tasks are COLLECTED then merged atomically\n-\
+  \ A task exception does NOT abort sibling tasks in async mode\n- `recursion_limit` counts super-steps, NOT individual tasks\
+  \ -- 100 Send tasks = 1 step\n\nScheduler internals (Pregel.stream):\n\n| Phase | What happens |\n|-------|-------------|\n\
+  | 1. Preprocess | Resolve active nodes from pending channel writes |\n| 2. Collect tasks | Build Task objects for all active\
+  \ nodes this step |\n| 3. Execute | Run tasks via ThreadPool (sync) or gather (async) |\n| 4. Apply writes | Apply all updates\
+  \ atomically via reducers |\n| 5. Checkpoint | Write state snapshot to checkpointer |\n| 6. Yield | Surface values/updates/messages\
+  \ to caller |\n| 7. Loop | Back to step 1 with new active-node set |"
 3_9_persistence_checkpointing: '| Class | Purpose |
 
   |-------|---------|
@@ -1111,10 +1130,43 @@ date: 2026-04-13
 
   | Store namespace | `entity_memory` | P10 |
 
-  | Streaming (SSE) | `streaming_config` | P09 |
-
-
-  ---'
+  | Streaming (SSE) | `streaming_config` | P09 |'
+8_9_python_sdk_full_method_reference_langgraph_sdk: "Complete method table for `LangGraphClient` (async) / `SyncLangGraphClient`.\n\
+  \n#### Threads namespace\n\n| Method | Signature | Returns |\n|--------|-----------|---------|\n| `create` | `(metadata=None,\
+  \ config=None, if_exists=\"raise\")` | Thread |\n| `get` | `(thread_id)` | Thread |\n| `update` | `(thread_id, metadata=None)`\
+  \ | Thread |\n| `delete` | `(thread_id)` | None |\n| `search` | `(metadata=None, status=None, limit=10, offset=0)` | list[Thread]\
+  \ |\n| `copy` | `(thread_id)` | Thread |\n| `get_state` | `(thread_id, checkpoint_id=None, subgraphs=False)` | ThreadState\
+  \ |\n| `update_state` | `(thread_id, values, as_node=None, checkpoint_id=None)` | dict |\n| `get_history` | `(thread_id,\
+  \ limit=10, before=None, metadata=None)` | Iterator[ThreadState] |\n| `patch_state` | `(thread_id, metadata)` | dict |\n\
+  \n#### Runs namespace\n\n| Method | Signature | Returns |\n|--------|-----------|---------|\n| `create` | `(thread_id, assistant_id,\
+  \ *, input, config, metadata, stream_mode, interrupt_before, interrupt_after, multitask_strategy)` | Run |\n| `stream` |\
+  \ `(thread_id, assistant_id, *, input, stream_mode, config, ...)` | AsyncIterator[StreamPart] |\n| `wait` | `(thread_id,\
+  \ assistant_id, *, input, config, ...)` | dict |\n| `get` | `(thread_id, run_id)` | Run |\n| `list` | `(thread_id, *, limit=10,\
+  \ offset=0)` | list[Run] |\n| `cancel` | `(thread_id, run_id, *, wait=False, action=\"interrupt\")` | None |\n| `join` |\
+  \ `(thread_id, run_id)` | dict |\n| `join_stream` | `(thread_id, run_id)` | AsyncIterator[StreamPart] |\n| `delete` | `(thread_id,\
+  \ run_id)` | None |\n\nMultitask strategies (when thread has a run in progress):\n\n| Strategy | Behavior |\n|----------|---------|\n\
+  | `\"reject\"` | Raise error (default) |\n| `\"enqueue\"` | Queue behind current run |\n| `\"interrupt\"` | Cancel current,\
+  \ start new |\n| `\"rollback\"` | Cancel current, restore prior state, start new |\n\n#### Assistants namespace\n\n| Method\
+  \ | Signature | Returns |\n|--------|-----------|---------|\n| `create` | `(graph_id, config=None, metadata=None, name=None)`\
+  \ | Assistant |\n| `get` | `(assistant_id)` | Assistant |\n| `update` | `(assistant_id, config=None, metadata=None, name=None)`\
+  \ | Assistant |\n| `delete` | `(assistant_id)` | None |\n| `search` | `(metadata=None, graph_id=None, limit=10, offset=0)`\
+  \ | list[Assistant] |\n| `get_schemas` | `(assistant_id)` | dict (input/output/config schemas) |\n| `get_subgraphs` | `(assistant_id,\
+  \ namespace=None, recurse=False)` | dict[str, SubgraphSchemas] |\n| `create_version` | `(assistant_id, config=None, metadata=None)`\
+  \ | Assistant |\n| `get_versions` | `(assistant_id, metadata=None, limit=10, offset=0)` | list[AssistantVersion] |\n| `set_latest`\
+  \ | `(assistant_id, version)` | Assistant |\n\n#### Crons namespace\n\n| Method | Signature | Returns |\n|--------|-----------|---------|\n\
+  | `create` | `(assistant_id, schedule, payload=None, metadata=None)` | Cron |\n| `create_for_thread` | `(thread_id, assistant_id,\
+  \ schedule, payload=None)` | Cron |\n| `delete` | `(cron_id)` | None |\n| `search` | `(thread_id=None, assistant_id=None,\
+  \ limit=10, offset=0)` | list[Cron] |\n\nSchedule format: standard cron string, e.g., `\"0 9   1\"` = every Monday at 09:00\
+  \ UTC.\n\n#### Store namespace (SDK)\n\n| Method | Signature | Returns |\n|--------|-----------|---------|\n| `put_item`\
+  \ | `(namespace: tuple[str, ...], key: str, value: dict)` | None |\n| `get_item` | `(namespace: tuple[str, ...], key: str)`\
+  \ | Item |\n| `delete_item` | `(namespace: tuple[str, ...], key: str)` | None |\n| `search_items` | `(namespace_prefix:\
+  \ tuple, query: str=None, limit: int=10, offset: int=0)` | list[Item] |\n| `list_namespaces` | `(prefix: tuple=None, suffix:\
+  \ tuple=None, max_depth: int=None, limit: int=10)` | list[tuple] |\n\nItem schema:\n\n| Field | Type | Description |\n|-------|------|-------------|\n\
+  | `namespace` | tuple[str, ...] | Hierarchical path, e.g., `(\"users\", \"u123\", \"preferences\")` |\n| `key` | str | Identifier\
+  \ within namespace |\n| `value` | dict | Arbitrary JSON payload |\n| `created_at` | datetime | Creation timestamp |\n| `updated_at`\
+  \ | datetime | Last-write timestamp |\n\n#### StreamPart schema\n\nclass StreamPart:\n    event: str    # \"values\" | \"\
+  updates\" | \"messages\" | \"error\" | \"end\" | custom\n    data: Any     # shape depends on stream_mode; \"end\" has data=None\n\
+  \n---"
 9_langsmith_dataset_management_api_deep_dive: ''
 9_1_client_initialization: "from langsmith import Client\nimport os\n\nclient = Client(\n    api_url=\"https://api.smith.langchain.com\"\
   ,  # default SaaS endpoint\n    api_key=os.environ[\"LANGSMITH_API_KEY\"],\n)"
@@ -1208,4 +1260,149 @@ date: 2026-04-13
 
   | Multi-agent | Command + Send primitives | Hierarchical crews | GroupChat | Orchestrator pattern |
 
-  | Evaluation | LangSmith datasets + evaluate() | Custom | Custom | Promptflow |'
+  | Evaluation | LangSmith datasets + evaluate() | Custom | Custom | Promptflow |
+
+  | Long-term memory | InMemoryStore / PostgresStore | Custom dict | Memory DB | SK memory |
+
+  | Task parallelism | asyncio.gather + Send fan-out | CrewAI parallel tasks | Async GroupChat | SK parallel steps |
+
+
+  ---'
+11_langgraph_store_api_cross_thread_long_term_memory: '`BaseStore` / `InMemoryStore` provides persistent key-value memory
+  that survives across threads and graph invocations. Distinct from `Checkpointer` (which stores checkpoint-scoped state per
+  thread).'
+11_1_in_graph_store_access: "from langgraph.store.memory import InMemoryStore\nfrom langgraph.store.postgres import PostgresStore\
+  \  # production\n\n# Pass store at compile time\nstore = InMemoryStore()\ngraph = graph_builder.compile(store=store)\n\n\
+  # Access inside a node via config or InjectedStore annotation\ndef memory_node(state, config):\n    store = config.get(\"\
+  store\")  # BaseStore instance\n    items = store.search((\"users\", state[\"user_id\"]), query=\"preferences\")\n    return\
+  \ {\"context\": [i.value for i in items]}\n\n# Or via InjectedStore annotation (preferred):\nfrom langgraph.prebuilt import\
+  \ InjectedStore\nfrom langchain_core.tools import tool\n\n@tool\ndef save_memory(content: str, store: Annotated[BaseStore,\
+  \ InjectedStore()]) -> str:\n    store.put((\"memories\", \"shared\"), content[:20], {\"text\": content})\n    return \"\
+  saved\""
+11_2_basestore_interface: '| Method | Signature | Returns |
+
+  |--------|-----------|---------|
+
+  | `put` | `(namespace: tuple[str, ...], key: str, value: dict, index: list[str]=None)` | None |
+
+  | `get` | `(namespace: tuple[str, ...], key: str)` | Item or None |
+
+  | `delete` | `(namespace: tuple[str, ...], key: str)` | None |
+
+  | `search` | `(namespace_prefix: tuple[str, ...], *, query: str=None, limit: int=10, offset: int=0, filter: dict=None)`
+  | list[Item] |
+
+  | `list_namespaces` | `(*, prefix: tuple=None, suffix: tuple=None, max_depth: int=None, limit: int=100)` | list[tuple[str,
+  ...]] |
+
+  | `aput` | async variant of `put` | None |
+
+  | `aget` | async variant of `get` | Item or None |
+
+  | `adelete` | async variant of `delete` | None |
+
+  | `asearch` | async variant of `search` | list[Item] |
+
+  | `alist_namespaces` | async variant of `list_namespaces` | list[tuple] |
+
+  | `batch` | `(ops: Iterable[Op])` | list[Result] -- atomic batch ops |
+
+  | `abatch` | async variant of `batch` | list[Result] |'
+11_3_namespace_design_patterns: 'Namespaces are tuples. Convention: `(domain, entity_id, category)`.
+
+
+  | Pattern | Namespace | Purpose |
+
+  |---------|-----------|---------|
+
+  | User preferences | `("users", user_id, "prefs")` | Per-user settings |
+
+  | Shared facts | `("facts", "global")` | System-wide knowledge |
+
+  | Agent working memory | `("agents", agent_id, "scratchpad")` | Per-agent temp state |
+
+  | Conversation summaries | `("threads", thread_id, "summary")` | Compressed history |
+
+  | Org-scoped memory | `("org", org_id, "policies")` | Multi-tenant isolation |
+
+
+  Semantic search: When `PostgresStore` with `pgvector` is used, `query=` performs
+
+  approximate nearest-neighbor search over embedded `value` fields specified in `index`.'
+11_4_backends: '| Backend | Class | Production ready | Semantic search |
+
+  |---------|-------|-----------------|-----------------|
+
+  | In-memory | `InMemoryStore` | Dev/test only | No |
+
+  | PostgreSQL | `PostgresStore` | Yes | Yes (pgvector) |
+
+  | Redis | `RedisStore` (community) | Yes | With RediSearch |
+
+  | Custom | Implement `BaseStore` | User-managed | User-managed |'
+11_5_cex_pillar_mapping_store: '| Store Concept | CEX Kind | Pillar |
+
+  |--------------|----------|--------|
+
+  | `BaseStore` | `entity_memory` | P10 |
+
+  | Namespace | `memory_scope` | P10 |
+
+  | `put` / `get` / `search` | `retriever_config` | P01 |
+
+  | PostgresStore + pgvector | `embedding_config` | P01 |
+
+  | `batch` ops | `workflow` (atomic ops) | P12 |
+
+
+  ---'
+12_langsmith_experiments_api: 'Experiments are named evaluation runs against a dataset. Source: https://docs.smith.langchain.com/evaluation/how_to_guides/run_experiments_programmatically'
+12_1_experiment_concepts: '| Term | Definition |
+
+  |------|------------|
+
+  | Experiment | One `evaluate()` call -- a batch of target fn runs against a dataset |
+
+  | Experiment prefix | Human-readable name prefix (e.g., `"gpt-4o-v2"`) |
+
+  | ExperimentResults | Object returned by `evaluate()` -- iterable of `ExperimentResultRow` |
+
+  | ExperimentResultRow | Single example result: `run`, `example`, `evaluation_results` |
+
+  | ComparativeExperiment | Side-by-side comparison of 2+ experiments on same dataset |'
+12_2_running_experiments: "from langsmith import evaluate, aevaluate\n\n# Sync -- blocks until complete\nresults = evaluate(\n\
+  \    target_fn,                        # Callable or Runnable\n    data=\"my-dataset\",                # Dataset name, ID,\
+  \ or list[Example]\n    evaluators=[correctness_fn],      # Per-example scorers\n    summary_evaluators=[aggregate_fn],#\
+  \ Whole-experiment scorers\n    experiment_prefix=\"my-run\",       # Appears in UI as \"my-run-<timestamp>\"\n    metadata={\"\
+  model\": \"gpt-4o\"},     # Stored with every run\n    max_concurrency=4,                # Parallel example evaluation\n\
+  \    num_repetitions=1,                # Run each example N times\n    blocking=True,                    # False = fire-and-forget\n\
+  \    load_nested=False,                # Include nested runs in results\n)\n\n# Async -- preferred for large datasets\n\
+  results = await aevaluate(target_fn, data=\"my-dataset\", evaluators=[fn])"
+12_3_summary_evaluator_pattern: "from langsmith.schemas import Example, Run\nfrom langsmith.evaluation import EvaluationResult,\
+  \ EvaluationResults\n\ndef agg_score(runs: list[Run], examples: list[Example]) -> EvaluationResults:\n    avg = sum(r.feedback_stats[\"\
+  correctness\"][\"avg\"] for r in runs) / len(runs)\n    return EvaluationResults(results=[EvaluationResult(key=\"avg_correctness\"\
+  , score=avg)])"
+12_4_comparative_experiments: "from langsmith import evaluate\n\n# Run two experiments then compare\nexp1 = evaluate(fn_v1,\
+  \ data=\"my-dataset\", experiment_prefix=\"v1\")\nexp2 = evaluate(fn_v2, data=\"my-dataset\", experiment_prefix=\"v2\")\n\
+  \n# Compare in UI: annotate both with same dataset to enable side-by-side view\n# Programmatic comparison:\nfrom langsmith\
+  \ import Client\nclient = Client()\nresults = client.get_pairwise_evaluations(\n    [exp1.experiment_name, exp2.experiment_name]\n\
+  )"
+12_5_online_evaluation_real_time_llm_judge: "# Configure online evaluator on LangSmith project (SDK or UI)\nclient.create_evaluator(\n\
+  \    project_name=\"my-project\",\n    criteria=\"Is the response helpful? Reply YES or NO.\",\n    evaluator_type=\"LangChainStringEvaluator\"\
+  ,\n    name=\"helpfulness\",\n    feedback_key=\"helpfulness\",\n)\n# Fires after every traced run -- no code changes needed\
+  \ in application"
+12_6_cex_mapping_experiments: '| LangSmith Concept | CEX Kind | Pillar |
+
+  |------------------|----------|--------|
+
+  | Experiment | `benchmark` | P07 |
+
+  | Per-example evaluator | `llm_judge` or `scoring_rubric` | P07 |
+
+  | Summary evaluator | `scoring_rubric` (aggregate) | P07 |
+
+  | ComparativeExperiment | `benchmark` (multi-variant) | P07 |
+
+  | Online evaluator | `llm_judge` (streaming) | P07 |
+
+  | ExperimentResultRow | `eval_dataset` row | P07 |'

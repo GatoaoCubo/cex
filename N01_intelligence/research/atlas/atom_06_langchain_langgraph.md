@@ -4,9 +4,9 @@ kind: knowledge_card
 pillar: P01
 domain: agentic-frameworks
 title: "LangChain LCEL + LangGraph + LangSmith -- Complete Vocabulary Atlas"
-version: 2.0.0
+version: 2.1.0
 quality: 8.8
-tags: [langchain, langgraph, langsmith, lcel, runnable, stategraph, observability, agent-framework, langgraph-platform, pregel, hitl, datasets]
+tags: [langchain, langgraph, langsmith, lcel, runnable, stategraph, observability, agent-framework, langgraph-platform, pregel, hitl, datasets, store-api, sdk-reference, task-parallelism, experiments]
 sources:
   - https://docs.langchain.com/oss/python/langgraph/graph-api
   - https://docs.langchain.com/langsmith/observability-concepts
@@ -431,6 +431,52 @@ by sequential edges run in **separate super-steps**.
 | `recursion_limit` exceeded | `GraphRecursionError` raised |
 | `END` edge traversed | Explicit terminal node reached |
 | `interrupt(value)` called | Pause -- checkpoint written, caller receives state |
+
+### 3.8.2 Task-Level Parallelism Inside a Super-Step
+
+When multiple nodes are activated within the **same super-step** (via `Send` fan-out
+or parallel conditional edges), LangGraph executes them as concurrent tasks.
+
+**Concurrency mechanism:**
+
+| Invocation mode | Parallelism |
+|----------------|-------------|
+| `graph.invoke(...)` (sync) | `ThreadPoolExecutor` via `ContextThreadPoolExecutor` |
+| `graph.ainvoke(...)` (async) | `asyncio.gather` -- true coroutine parallelism |
+
+**Fan-out + reduce pattern:**
+
+```python
+# Map phase: Send creates N tasks in ONE super-step
+def dispatch_node(state):
+    return [Send("worker", {"item": x}) for x in state["items"]]
+
+# Each worker runs concurrently -- isolated state copies
+def worker_node(state):
+    return {"results": [process(state["item"])]}
+
+# Reduce phase: reducer merges N results in NEXT super-step
+# Requires Annotated reducer on the aggregation key:
+# results: Annotated[list, operator.add]
+```
+
+**Isolation guarantee:**
+- Each `Send` task receives its own state copy
+- Updates from concurrent tasks are COLLECTED then merged atomically
+- A task exception does NOT abort sibling tasks in async mode
+- `recursion_limit` counts super-steps, NOT individual tasks -- 100 Send tasks = 1 step
+
+**Scheduler internals (Pregel.stream):**
+
+| Phase | What happens |
+|-------|-------------|
+| 1. Preprocess | Resolve active nodes from pending channel writes |
+| 2. Collect tasks | Build Task objects for all active nodes this step |
+| 3. Execute | Run tasks via ThreadPool (sync) or gather (async) |
+| 4. Apply writes | Apply all updates atomically via reducers |
+| 5. Checkpoint | Write state snapshot to checkpointer |
+| 6. Yield | Surface values/updates/messages to caller |
+| 7. Loop | Back to step 1 with new active-node set |
 
 ### 3.9 Persistence & Checkpointing
 
@@ -978,6 +1024,102 @@ async for chunk in client.runs.stream(
 | Store namespace | `entity_memory` | P10 |
 | Streaming (SSE) | `streaming_config` | P09 |
 
+### 8.9 Python SDK Full Method Reference (langgraph-sdk)
+
+Complete method table for `LangGraphClient` (async) / `SyncLangGraphClient`.
+
+#### Threads namespace
+
+| Method | Signature | Returns |
+|--------|-----------|---------|
+| `create` | `(metadata=None, config=None, if_exists="raise")` | Thread |
+| `get` | `(thread_id)` | Thread |
+| `update` | `(thread_id, metadata=None)` | Thread |
+| `delete` | `(thread_id)` | None |
+| `search` | `(metadata=None, status=None, limit=10, offset=0)` | list[Thread] |
+| `copy` | `(thread_id)` | Thread |
+| `get_state` | `(thread_id, checkpoint_id=None, subgraphs=False)` | ThreadState |
+| `update_state` | `(thread_id, values, as_node=None, checkpoint_id=None)` | dict |
+| `get_history` | `(thread_id, limit=10, before=None, metadata=None)` | Iterator[ThreadState] |
+| `patch_state` | `(thread_id, metadata)` | dict |
+
+#### Runs namespace
+
+| Method | Signature | Returns |
+|--------|-----------|---------|
+| `create` | `(thread_id, assistant_id, *, input, config, metadata, stream_mode, interrupt_before, interrupt_after, multitask_strategy)` | Run |
+| `stream` | `(thread_id, assistant_id, *, input, stream_mode, config, ...)` | AsyncIterator[StreamPart] |
+| `wait` | `(thread_id, assistant_id, *, input, config, ...)` | dict |
+| `get` | `(thread_id, run_id)` | Run |
+| `list` | `(thread_id, *, limit=10, offset=0)` | list[Run] |
+| `cancel` | `(thread_id, run_id, *, wait=False, action="interrupt")` | None |
+| `join` | `(thread_id, run_id)` | dict |
+| `join_stream` | `(thread_id, run_id)` | AsyncIterator[StreamPart] |
+| `delete` | `(thread_id, run_id)` | None |
+
+**Multitask strategies (when thread has a run in progress):**
+
+| Strategy | Behavior |
+|----------|---------|
+| `"reject"` | Raise error (default) |
+| `"enqueue"` | Queue behind current run |
+| `"interrupt"` | Cancel current, start new |
+| `"rollback"` | Cancel current, restore prior state, start new |
+
+#### Assistants namespace
+
+| Method | Signature | Returns |
+|--------|-----------|---------|
+| `create` | `(graph_id, config=None, metadata=None, name=None)` | Assistant |
+| `get` | `(assistant_id)` | Assistant |
+| `update` | `(assistant_id, config=None, metadata=None, name=None)` | Assistant |
+| `delete` | `(assistant_id)` | None |
+| `search` | `(metadata=None, graph_id=None, limit=10, offset=0)` | list[Assistant] |
+| `get_schemas` | `(assistant_id)` | dict (input/output/config schemas) |
+| `get_subgraphs` | `(assistant_id, namespace=None, recurse=False)` | dict[str, SubgraphSchemas] |
+| `create_version` | `(assistant_id, config=None, metadata=None)` | Assistant |
+| `get_versions` | `(assistant_id, metadata=None, limit=10, offset=0)` | list[AssistantVersion] |
+| `set_latest` | `(assistant_id, version)` | Assistant |
+
+#### Crons namespace
+
+| Method | Signature | Returns |
+|--------|-----------|---------|
+| `create` | `(assistant_id, schedule, payload=None, metadata=None)` | Cron |
+| `create_for_thread` | `(thread_id, assistant_id, schedule, payload=None)` | Cron |
+| `delete` | `(cron_id)` | None |
+| `search` | `(thread_id=None, assistant_id=None, limit=10, offset=0)` | list[Cron] |
+
+Schedule format: standard cron string, e.g., `"0 9 * * 1"` = every Monday at 09:00 UTC.
+
+#### Store namespace (SDK)
+
+| Method | Signature | Returns |
+|--------|-----------|---------|
+| `put_item` | `(namespace: tuple[str, ...], key: str, value: dict)` | None |
+| `get_item` | `(namespace: tuple[str, ...], key: str)` | Item |
+| `delete_item` | `(namespace: tuple[str, ...], key: str)` | None |
+| `search_items` | `(namespace_prefix: tuple, query: str=None, limit: int=10, offset: int=0)` | list[Item] |
+| `list_namespaces` | `(prefix: tuple=None, suffix: tuple=None, max_depth: int=None, limit: int=10)` | list[tuple] |
+
+**Item schema:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `namespace` | tuple[str, ...] | Hierarchical path, e.g., `("users", "u123", "preferences")` |
+| `key` | str | Identifier within namespace |
+| `value` | dict | Arbitrary JSON payload |
+| `created_at` | datetime | Creation timestamp |
+| `updated_at` | datetime | Last-write timestamp |
+
+#### StreamPart schema
+
+```python
+class StreamPart:
+    event: str    # "values" | "updates" | "messages" | "error" | "end" | custom
+    data: Any     # shape depends on stream_mode; "end" has data=None
+```
+
 ---
 
 ## 9. LangSmith Dataset Management API (Deep Dive)
@@ -1105,3 +1247,184 @@ def correctness_evaluator(run: Run, example: Example) -> EvaluationResult:
 | Observability | LangSmith (native) | LangSmith / custom | OTel compatible | Azure AppInsights |
 | Multi-agent | Command + Send primitives | Hierarchical crews | GroupChat | Orchestrator pattern |
 | Evaluation | LangSmith datasets + evaluate() | Custom | Custom | Promptflow |
+| Long-term memory | InMemoryStore / PostgresStore | Custom dict | Memory DB | SK memory |
+| Task parallelism | asyncio.gather + Send fan-out | CrewAI parallel tasks | Async GroupChat | SK parallel steps |
+
+---
+
+## 11. LangGraph Store API -- Cross-Thread Long-Term Memory
+
+`BaseStore` / `InMemoryStore` provides persistent key-value memory that survives
+across threads and graph invocations. Distinct from `Checkpointer` (which stores
+checkpoint-scoped state per thread).
+
+### 11.1 In-Graph Store Access
+
+```python
+from langgraph.store.memory import InMemoryStore
+from langgraph.store.postgres import PostgresStore  # production
+
+# Pass store at compile time
+store = InMemoryStore()
+graph = graph_builder.compile(store=store)
+
+# Access inside a node via config or InjectedStore annotation
+def memory_node(state, config):
+    store = config.get("store")  # BaseStore instance
+    items = store.search(("users", state["user_id"]), query="preferences")
+    return {"context": [i.value for i in items]}
+
+# Or via InjectedStore annotation (preferred):
+from langgraph.prebuilt import InjectedStore
+from langchain_core.tools import tool
+
+@tool
+def save_memory(content: str, store: Annotated[BaseStore, InjectedStore()]) -> str:
+    store.put(("memories", "shared"), content[:20], {"text": content})
+    return "saved"
+```
+
+### 11.2 BaseStore Interface
+
+| Method | Signature | Returns |
+|--------|-----------|---------|
+| `put` | `(namespace: tuple[str, ...], key: str, value: dict, index: list[str]=None)` | None |
+| `get` | `(namespace: tuple[str, ...], key: str)` | Item or None |
+| `delete` | `(namespace: tuple[str, ...], key: str)` | None |
+| `search` | `(namespace_prefix: tuple[str, ...], *, query: str=None, limit: int=10, offset: int=0, filter: dict=None)` | list[Item] |
+| `list_namespaces` | `(*, prefix: tuple=None, suffix: tuple=None, max_depth: int=None, limit: int=100)` | list[tuple[str, ...]] |
+| `aput` | async variant of `put` | None |
+| `aget` | async variant of `get` | Item or None |
+| `adelete` | async variant of `delete` | None |
+| `asearch` | async variant of `search` | list[Item] |
+| `alist_namespaces` | async variant of `list_namespaces` | list[tuple] |
+| `batch` | `(ops: Iterable[Op])` | list[Result] -- atomic batch ops |
+| `abatch` | async variant of `batch` | list[Result] |
+
+### 11.3 Namespace Design Patterns
+
+Namespaces are tuples. Convention: `(domain, entity_id, category)`.
+
+| Pattern | Namespace | Purpose |
+|---------|-----------|---------|
+| User preferences | `("users", user_id, "prefs")` | Per-user settings |
+| Shared facts | `("facts", "global")` | System-wide knowledge |
+| Agent working memory | `("agents", agent_id, "scratchpad")` | Per-agent temp state |
+| Conversation summaries | `("threads", thread_id, "summary")` | Compressed history |
+| Org-scoped memory | `("org", org_id, "policies")` | Multi-tenant isolation |
+
+**Semantic search:** When `PostgresStore` with `pgvector` is used, `query=` performs
+approximate nearest-neighbor search over embedded `value` fields specified in `index`.
+
+### 11.4 Backends
+
+| Backend | Class | Production ready | Semantic search |
+|---------|-------|-----------------|-----------------|
+| In-memory | `InMemoryStore` | Dev/test only | No |
+| PostgreSQL | `PostgresStore` | Yes | Yes (pgvector) |
+| Redis | `RedisStore` (community) | Yes | With RediSearch |
+| Custom | Implement `BaseStore` | User-managed | User-managed |
+
+### 11.5 CEX Pillar Mapping (Store)
+
+| Store Concept | CEX Kind | Pillar |
+|--------------|----------|--------|
+| `BaseStore` | `entity_memory` | P10 |
+| Namespace | `memory_scope` | P10 |
+| `put` / `get` / `search` | `retriever_config` | P01 |
+| PostgresStore + pgvector | `embedding_config` | P01 |
+| `batch` ops | `workflow` (atomic ops) | P12 |
+
+---
+
+## 12. LangSmith Experiments API
+
+Experiments are named evaluation runs against a dataset.
+Source: https://docs.smith.langchain.com/evaluation/how_to_guides/run_experiments_programmatically
+
+### 12.1 Experiment Concepts
+
+| Term | Definition |
+|------|------------|
+| **Experiment** | One `evaluate()` call -- a batch of target fn runs against a dataset |
+| **Experiment prefix** | Human-readable name prefix (e.g., `"gpt-4o-v2"`) |
+| **ExperimentResults** | Object returned by `evaluate()` -- iterable of `ExperimentResultRow` |
+| **ExperimentResultRow** | Single example result: `run`, `example`, `evaluation_results` |
+| **ComparativeExperiment** | Side-by-side comparison of 2+ experiments on same dataset |
+
+### 12.2 Running Experiments
+
+```python
+from langsmith import evaluate, aevaluate
+
+# Sync -- blocks until complete
+results = evaluate(
+    target_fn,                        # Callable or Runnable
+    data="my-dataset",                # Dataset name, ID, or list[Example]
+    evaluators=[correctness_fn],      # Per-example scorers
+    summary_evaluators=[aggregate_fn],# Whole-experiment scorers
+    experiment_prefix="my-run",       # Appears in UI as "my-run-<timestamp>"
+    metadata={"model": "gpt-4o"},     # Stored with every run
+    max_concurrency=4,                # Parallel example evaluation
+    num_repetitions=1,                # Run each example N times
+    blocking=True,                    # False = fire-and-forget
+    load_nested=False,                # Include nested runs in results
+)
+
+# Async -- preferred for large datasets
+results = await aevaluate(target_fn, data="my-dataset", evaluators=[fn])
+```
+
+### 12.3 Summary Evaluator Pattern
+
+```python
+from langsmith.schemas import Example, Run
+from langsmith.evaluation import EvaluationResult, EvaluationResults
+
+def agg_score(runs: list[Run], examples: list[Example]) -> EvaluationResults:
+    avg = sum(r.feedback_stats["correctness"]["avg"] for r in runs) / len(runs)
+    return EvaluationResults(results=[EvaluationResult(key="avg_correctness", score=avg)])
+```
+
+### 12.4 Comparative Experiments
+
+```python
+from langsmith import evaluate
+
+# Run two experiments then compare
+exp1 = evaluate(fn_v1, data="my-dataset", experiment_prefix="v1")
+exp2 = evaluate(fn_v2, data="my-dataset", experiment_prefix="v2")
+
+# Compare in UI: annotate both with same dataset to enable side-by-side view
+# Programmatic comparison:
+from langsmith import Client
+client = Client()
+results = client.get_pairwise_evaluations(
+    [exp1.experiment_name, exp2.experiment_name]
+)
+```
+
+### 12.5 Online Evaluation (real-time LLM judge)
+
+```python
+# Configure online evaluator on LangSmith project (SDK or UI)
+client.create_evaluator(
+    project_name="my-project",
+    criteria="Is the response helpful? Reply YES or NO.",
+    evaluator_type="LangChainStringEvaluator",
+    name="helpfulness",
+    feedback_key="helpfulness",
+)
+# Fires after every traced run -- no code changes needed in application
+```
+
+### 12.6 CEX Mapping (Experiments)
+
+| LangSmith Concept | CEX Kind | Pillar |
+|------------------|----------|--------|
+| Experiment | `benchmark` | P07 |
+| Per-example evaluator | `llm_judge` or `scoring_rubric` | P07 |
+| Summary evaluator | `scoring_rubric` (aggregate) | P07 |
+| ComparativeExperiment | `benchmark` (multi-variant) | P07 |
+| Online evaluator | `llm_judge` (streaming) | P07 |
+| ExperimentResultRow | `eval_dataset` row | P07 |
