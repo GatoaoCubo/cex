@@ -1,4 +1,16 @@
+id: atom_13_metagpt_chatdev
+kind: knowledge_card
 title: 'MetaGPT vs. ChatDev: A Comparative Analysis with CEX Mapping'
+version: 1.0.0
+quality: null
+tags:
+- metagpt
+- chatdev
+- multi-agent
+- software-development
+- cex-mapping
+pillar: P01
+domain: llm-agent-frameworks
 author: AI Research Collaborative
 date: '2024-07-15'
 1_introduction: This document provides a comprehensive comparison between MetaGPT and ChatDev, two leading multi-agent frameworks
