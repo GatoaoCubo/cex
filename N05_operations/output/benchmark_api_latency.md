@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: performance-operations
-quality: 8.7
+quality: 8.9
 tags: [benchmark, performance, operations, N05, latency, api, load-test]
 tldr: "API latency benchmark suite with baseline targets, statistical methodology, regression detection, and reproducible load test configurations."
 density_score: 0.96
@@ -110,7 +110,6 @@ hey -n 500 -c 10 -m GET https://api.example.railway.app/health
 ## Boundary
 
 Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).
-
 
 ## 8F Pipeline Function
 
