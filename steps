@@ -15,7 +15,7 @@ tldr: "Reusable capability with structured phases, triggers, and lifecycle manag
 when_to_use: "Building, reviewing, or reasoning about steps artifacts"
 keywords: [steps, phases, trigger, reusable, capability, workflow, lifecycle]
 feeds_kinds: [steps]
-density_score: 0.92
+density_score: null
 ---
 
 # Steps
@@ -67,7 +67,7 @@ Steps is a reusable capability with structured phases, trigger conditions, and l
 | slash_command | "/commit", "/deploy" | User types exact command |
 | keyword_match | "debug", "optimize" | Natural language contains keywords |
 | event_driven | file_change, time_schedule | System event occurs |
-| agent_invoked | crew.use_steps("data_analysis") | Programmatic call from agent |
+| agent_invoked | crew.use_steps("analyze") | Programmatic call from agent |
 
 ## Quality Gates
 | Gate | Validation | Failure Impact |
@@ -81,17 +81,17 @@ Steps is a reusable capability with structured phases, trigger conditions, and l
 ```yaml
 # User-invocable steps (slash command)
 trigger_type: user_invocable
-slash_command: "/review"
+slash_command: "/execute"
 phases: [discover, analyze, report]
 
 # Agent-only steps (programmatic)
 trigger_type: agent_only
-invoke_pattern: "crew.use_steps('data_analysis')"
+invoke_pattern: "crew.use_steps('data_processing')"
 phases: [load, transform, analyze, export]
 
 # Event-driven steps
 trigger_type: event_driven
-event_pattern: "file_change:*.ts"
+event_pattern: "file_change:*.py"
 phases: [detect, lint, test, notify]
 ```
 
@@ -115,24 +115,24 @@ Steps enable modular, reusable workflow definition that bridges the gap between 
 OpenClaude ships ~18 bundled steps as battle-tested implementations:
 
 | Steps | Trigger | Pattern | CEX Equivalent |
-|------|--------|---------|----------------|
-| /review | slash_command | 3-parallel-agent review | p04_steps_review |
-| /optimize | slash_command | adversarial verification | p04_steps_optimize |
-| /summarize | agent_invoked | 9-section summarization | p04_steps_summarize |
-| /monitor | slash_command | recurring cron schedule | p04_steps_monitor |
+|--------|--------|---------|----------------|
+| /execute | slash_command | 3-parallel-agent review | p04_steps_execute |
+| /validate | slash_command | adversarial verification | p04_steps_validate |
+| /compact | agent_invoked | 9-section summarization | p04_steps_compact |
+| /loop | slash_command | recurring cron schedule | p04_steps_loop (future) |
 | /stuck | slash_command | diagnostic investigation | n/a (Anthropic-specific) |
 
 **Key architectural insight**: Steps are defined as prompt text with frontmatter,
 not as code. The steps body IS the prompt injected when the steps triggers. This
 maps directly to CEX's steps-as-artifact model.
 
-**Parallel dispatch pattern** (from /review):
+**Parallel dispatch pattern** (from /execute):
 - Phase 1: Identify changes (git diff)
 - Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
 - Phase 3: Aggregate findings and fix issues directly
 This pattern generalizes: any steps can dispatch parallel sub-agents with typed foci.
 
-**Analysis scratchpad pattern** (from /optimize):
+**Analysis scratchpad pattern** (from /compact):
 - <analysis> tags create a private drafting space
 - Forces structured thinking before output
 - Scratchpad is stripped from final result
@@ -141,8 +141,9 @@ This pattern generalizes: any steps can dispatch parallel sub-agents with typed 
 ## New Steps Patterns Discovered
 | Pattern | Description | Example |
 |---------|-------------|---------|
-| Adversarial steps | Agent explicitly tries to BREAK the implementation | p04_steps_optimize |
-| Parallel review | Multiple focused agents analyze same diff concurrently | p04_steps_review |
-| Scratchpad steps | <analysis> block for private reasoning, stripped from output | p04_steps_optimize |
+| Adversarial steps | Agent explicitly tries to BREAK the implementation | p04_steps_validate |
+| Parallel review | Multiple focused agents analyze same diff concurrently | p04_steps_execute |
+| Scratchpad steps | <analysis> block for private reasoning, stripped from output | p04_steps_compact |
 | Background extract | Runs silently after N turns, extracts persistent memories | p04_steps_memory_extract |
-| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_steps_optimize |
+| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_steps_validate |
+```

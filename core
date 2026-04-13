@@ -146,3 +146,6 @@ This pattern generalizes: any core can dispatch parallel sub-agents with typed f
 | Scratchpad core | <analysis> block for private reasoning, stripped from output | p04_core_summarize |
 | Background extract | Runs silently after N turns, extracts persistent memories | p04_core_memory_extract |
 | Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_core_benchmark |
+```
+
+phases
