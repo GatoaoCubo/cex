@@ -306,12 +306,16 @@ def evolve_one(filepath, model, target=9.0):
 
     # Keep or discard
     if new_quality > quality:
-        # KEEP
-        subprocess.run(["git", "add", str(filepath)], capture_output=True,
-                       cwd=str(CEX_ROOT))
-        msg = f"[evolve-ollama] {filepath.name}: {quality:.1f} -> {new_quality:.1f}"
-        subprocess.run(["git", "commit", "-m", msg], capture_output=True,
-                       cwd=str(CEX_ROOT))
+        # KEEP -- retry git ops in case of lock contention
+        for attempt in range(3):
+            r1 = subprocess.run(["git", "add", str(filepath)],
+                                capture_output=True, cwd=str(CEX_ROOT))
+            msg = f"[evolve-ollama] {filepath.name}: {quality:.1f} -> {new_quality:.1f}"
+            r2 = subprocess.run(["git", "commit", "-m", msg],
+                                capture_output=True, text=True, cwd=str(CEX_ROOT))
+            if r2.returncode == 0:
+                break
+            time.sleep(2 + attempt * 3)  # backoff: 2s, 5s, 8s
         return new_quality, "improved"
     else:
         # DISCARD
