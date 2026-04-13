@@ -6,7 +6,7 @@ pillar: P01
 version: "1.0"
 created: "2026-04-07"
 updated: "2026-04-07"
-quality: null
+quality: 9.1
 tags: [instance, variables, templates, mustache, extraction, registry, N01]
 tldr: "Registry of 67 {{mustache}} variables extracted from gato-ao-cubo branch. 7 categories, 44 BRAND_* (existing) + 23 new CRM/pipeline/dashboard vars. Maps instance → archetype separation."
 density_score: 1.0
