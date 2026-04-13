@@ -9,7 +9,7 @@ created: 2026-04-12
 updated: 2026-04-12
 author: n03_builder
 domain: batch_config
-quality: null
+quality: 9.1
 tags: [batch_config, p09, CALL, kind-kc]
 tldr: "Configures API-level asynchronous batch processing -- input format, completion window, polling, cost discount"
 when_to_use: "Building, reviewing, or reasoning about batch_config artifacts"
