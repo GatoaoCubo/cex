@@ -471,6 +471,396 @@ DSPy is runtime prompt optimization. CEX is build-time artifact optimization.
 
 ---
 
+## 10. GEPA Deep Dive (v2.6+)
+
+### Full Parameter Table
+
+| Parameter | Type | Default | Purpose |
+|-----------|------|---------|---------|
+| `auto` | `'light'\|'medium'\|'heavy'` | -- | Budget preset (choose one of the three budget params) |
+| `max_full_evals` | int | -- | Budget by full evaluation count |
+| `max_metric_calls` | int | -- | Budget by total metric invocations |
+| `reflection_lm` | LM | required | LM used to reflect on traces and propose new instructions |
+| `reflection_minibatch_size` | int | 3 | Examples per reflection batch |
+| `candidate_selection_strategy` | `'pareto'\|'current_best'` | `'pareto'` | How to select next candidate to optimize |
+| `skip_perfect_score` | bool | True | Skip examples already scoring 1.0 |
+| `add_format_failure_as_feedback` | bool | False | Include format errors in feedback text |
+| `instruction_proposer` | ProposalFn | None | Custom proposer (overrides reflection_lm default) |
+| `component_selector` | `str\|callable` | `'round_robin'` | Which modules get optimized each iteration |
+| `use_merge` | bool | True | Enable system-aware crossover of module lineages |
+| `max_merge_invocations` | int | 5 | Max merge operations during run |
+| `num_threads` | int | None | Parallel evaluation threads |
+| `failure_score` | float | 0.0 | Score assigned to failed evaluations |
+| `perfect_score` | float | 1.0 | Threshold for perfect score detection |
+| `log_dir` | str | None | Directory to write iteration logs |
+| `track_stats` | bool | False | Track per-iteration statistics |
+| `track_best_outputs` | bool | False | Record best prediction per input |
+| `use_wandb` | bool | False | Log to Weights & Biases |
+| `use_mlflow` | bool | False | Log to MLflow |
+| `seed` | int | 0 | Reproducibility seed |
+
+### Pareto Frontier Mechanics
+
+GEPA maintains a **Pareto frontier** of candidate programs rather than a single best.
+Two candidates are Pareto-incomparable if neither strictly dominates the other across all examples.
+This enables diverse optimization lineages that may excel in different sub-domains before merging.
+
+| Strategy | Behavior |
+|----------|----------|
+| `'pareto'` (default) | Sample from full frontier -- preserves diversity |
+| `'current_best'` | Always extend from highest-scoring candidate -- faster convergence |
+
+### Merge / Crossover (`use_merge=True`)
+
+When `use_merge=True`, GEPA performs **system-aware merge** operations:
+1. Identify two candidates from distinct lineages (Pareto-incomparable)
+2. Combine best-performing modules: module A from program X + module B from program Y
+3. Evaluate merged candidate; add to Pareto frontier if competitive
+4. Repeat up to `max_merge_invocations` times
+
+Analogous to crossover in genetic algorithms but at LM module granularity.
+
+### ScoreWithFeedback Protocol
+
+GEPA accepts richer metrics than scalars. `GEPAFeedbackMetric` protocol signature:
+
+```python
+def metric(
+    gold: dspy.Example,
+    pred: dspy.Prediction,
+    trace=None,
+    pred_name=None,
+    pred_trace=None
+) -> Union[float, ScoreWithFeedback]:
+    score = evaluate_quality(gold, pred)
+    feedback = f"Missing claims: {find_gaps(gold, pred)}"
+    return ScoreWithFeedback(score=score, feedback=feedback)
+
+optimizer = dspy.GEPA(
+    reflection_lm=dspy.LM("openai/gpt-4o", temperature=1.0, max_tokens=32000),
+    max_metric_calls=100
+)
+optimized = optimizer.compile(program, trainset=trainset, metric=metric)
+```
+
+Textual feedback gives the reflection LM visibility into WHY a prediction failed,
+not just that it failed. This is the key advantage over scalar-only metrics.
+
+### Reflection LM Guidance
+
+| Factor | Recommendation |
+|--------|---------------|
+| Model quality | Frontier model required (gpt-4o, claude-opus, etc.) |
+| Temperature | 0.9-1.0 for instruction diversity |
+| Max tokens | 32000+ to allow detailed reasoning |
+| Separation | Use a stronger model than the task LM |
+| Production cost | Runs at optimize-time only, not at inference |
+
+### Custom Instruction Proposer Interface
+
+```python
+def my_proposer(
+    candidate: dict[str, str],                              # current instructions per module
+    reflective_dataset: dict[str, list[ReflectiveExample]], # traces with feedback
+    components_to_update: list[str]                         # which modules to update
+) -> dict[str, str]:                                        # new instructions per module
+    ...
+
+optimizer = dspy.GEPA(reflection_lm=lm, instruction_proposer=my_proposer)
+```
+
+`ReflectiveExample` fields: `Inputs`, `Generated_Outputs` (dict or error string), `Feedback` (str).
+Built-in alternative: `MultiModalInstructionProposer` for image-containing inputs.
+
+### Component Selector Options
+
+| Value | Behavior |
+|-------|----------|
+| `'round_robin'` (default) | One module per iteration, cycling sequentially |
+| `'all'` | All modules updated simultaneously each iteration |
+| Custom callable | `fn(state, trajectories, scores, idx, candidate) -> list[str]` |
+
+### Inference-Time Search Mode
+
+GEPA can identify best predictions over a trainset without optimizing instructions:
+
+```python
+optimizer = dspy.GEPA(
+    reflection_lm=lm, max_metric_calls=200,
+    track_stats=True, track_best_outputs=True
+)
+# valset=trainset turns GEPA into a per-input oracle finder
+optimized = optimizer.compile(program, trainset=trainset, valset=trainset, metric=metric)
+# optimized.track_best_outputs_ -> per-input best predictions (useful for distillation)
+```
+
+---
+
+## 11. Adapter System -- Internal Mechanics
+
+### ChatAdapter (Default)
+
+Internal format uses `[[ ## field_name ## ]]` markers. Non-primitive output types
+include JSON schema in the system message. Terminal marker: `[[ ## completed ## ]]`.
+
+**Auto-fallback:** If structural parsing fails, ChatAdapter retries automatically with JSONAdapter.
+
+```python
+# Debugging
+adapter = dspy.ChatAdapter()
+messages = adapter.format(signature, demos=[], inputs={"question": "..."})
+system_msg = adapter.format_system_message(signature)
+dspy.inspect_history(n=3)  # last N LM interactions with full prompt+response
+```
+
+### JSONAdapter
+
+Uses `response_format={"type": "json_object"}` on compatible APIs.
+Output = single JSON object with all output field names as keys.
+No field markers = lower output token count = lower latency.
+
+**Compatibility:**
+
+| Provider | JSON mode |
+|----------|-----------|
+| OpenAI GPT-4o family | YES (native) |
+| Anthropic Claude | YES (via tool use or instruction) |
+| Google Gemini | YES |
+| Ollama / small open-source | NO -- use ChatAdapter |
+
+**Best for:** Complex nested types (list[dict], Pydantic models), latency-sensitive production.
+
+### TwoStepAdapter
+
+Two LM calls per module invocation:
+1. Free-form reasoning (no format constraint)
+2. Structured extraction from the reasoning output
+
+**Use case:** Reasoning models (o1, o3, DeepSeek-R1) that degrade under structured output constraints.
+**Tradeoff:** 2x LM calls = 2x latency + cost.
+
+### Adapter Selection Guide
+
+| Situation | Adapter |
+|-----------|---------|
+| General use, unknown model | ChatAdapter (default) |
+| GPT-4o / Claude, latency matters | JSONAdapter |
+| Reasoning models (o1, o3, R1) | TwoStepAdapter |
+| XML-native pipeline | XMLAdapter |
+| Reliability > speed | ChatAdapter (has auto-fallback) |
+| Complex nested output types | JSONAdapter |
+
+---
+
+## 12. Caching System
+
+### configure_cache API
+
+```python
+dspy.configure_cache(
+    enable_disk_cache=True,           # persistent file-based caching
+    enable_memory_cache=True,         # RAM-based caching
+    disk_cache_dir=None,              # default: ~/.dspy_cache
+    disk_size_limit_bytes=None,       # default: DISK_CACHE_LIMIT constant
+    memory_max_entries=1_000_000      # max RAM cache entries
+)
+```
+
+### Two-Tier Architecture
+
+| Tier | Backend | Persistence | Limit |
+|------|---------|-------------|-------|
+| L1: Memory | RAM dict | Session only | `memory_max_entries` entries |
+| L2: Disk | File system | Cross-session | `disk_size_limit_bytes` bytes |
+
+Lookup order: L1 hit -> return. L1 miss -> check L2 -> populate L1 + return. L2 miss -> LM call -> populate both.
+
+### Common Configurations
+
+```python
+# Disable all caching (benchmarking or forced-fresh runs)
+dspy.configure_cache(enable_disk_cache=False, enable_memory_cache=False)
+
+# Memory-only (no disk I/O, session-scoped)
+dspy.configure_cache(enable_disk_cache=False)
+
+# Unbounded memory (large-scale optimization runs)
+import math
+dspy.configure_cache(memory_max_entries=math.inf)
+
+# Custom disk location + large limit
+dspy.configure_cache(
+    disk_cache_dir="/mnt/ssd/dspy_cache",
+    disk_size_limit_bytes=100 * 1024**3
+)
+```
+
+### Production Notes
+
+| Note | Detail |
+|------|--------|
+| Cost reduction | MIPROv2/GEPA: 1000+ LM calls; cache cuts cost 60-90% on repeated evals |
+| Checkpointing | Disk cache survives process restarts -- optimizer runs resume implicitly |
+| Thread safety | Both tiers handle concurrent reads/writes from optimizer worker threads |
+| CI/CD | Disable disk cache to prevent stale cache affecting test results |
+| Cache keys | Deterministic: model name + all request params (messages, temperature, max_tokens) |
+
+---
+
+## 13. dspy.settings / configure API -- Complete Reference
+
+### Full configure() Parameter Table
+
+| Parameter | Type | Default | Purpose |
+|-----------|------|---------|---------|
+| `lm` | `dspy.LM` | None | Default language model for all modules |
+| `adapter` | Adapter | None | Prompt formatter (default: ChatAdapter) |
+| `rm` | retriever | None | Default retrieval model for `dspy.Retrieve` |
+| `callbacks` | list | `[]` | Observability hooks (pre/post LM and module calls) |
+| `track_usage` | bool | False | Record token usage per LM call |
+| `async_max_workers` | int | 8 | Thread pool size for async operations |
+| `num_threads` | int | 8 | Parallelism for `dspy.Parallel` and optimizer evaluation |
+| `max_errors` | int | 10 | Error threshold before halting parallel execution |
+| `disable_history` | bool | False | Suppress LM call history recording |
+| `max_history_size` | int | 10000 | Max entries in `dspy.inspect_history()` |
+| `allow_tool_async_sync_conversion` | bool | False | Allow async tools in sync contexts |
+| `provide_traceback` | bool | False | Include Python stack traces in LM error messages |
+| `warn_on_type_mismatch` | bool | True | Warn when input type does not match signature field type |
+
+### Thread Safety Rules
+
+```
+configure() is SINGLE-THREADED:
+  Only the thread that first calls configure() may call it again.
+  Worker threads calling configure() raise RuntimeError.
+
+Use dspy.context() for thread-local overrides:
+  Safe to call from any thread.
+  Scoped to the with-block; restores previous settings on exit.
+```
+
+### configure vs context -- Usage Patterns
+
+```python
+# Global -- applies to entire process
+dspy.configure(lm=dspy.LM("openai/gpt-4o"), adapter=dspy.JSONAdapter())
+
+# Local -- applies to this block only, then reverts
+with dspy.context(lm=dspy.LM("openai/gpt-4o-mini")):
+    result = cheap_module(question="...")
+# original lm restored after block
+
+# Per-module override (highest specificity)
+module = dspy.Predict("question -> answer")
+module.set_lm(dspy.LM("anthropic/claude-haiku-4-5-20251001"))
+```
+
+### Callbacks (Observability Hooks)
+
+```python
+class MyCallback(dspy.BaseCallback):
+    def on_lm_start(self, call_id, inputs, instance): ...
+    def on_lm_end(self, call_id, outputs, instance): ...
+    def on_module_start(self, call_id, inputs, instance): ...
+    def on_module_end(self, call_id, outputs, instance): ...
+
+dspy.configure(callbacks=[MyCallback()])
+```
+
+Use for: latency measurement, cost tracking, logging, A/B experiment tagging.
+
+### Token Usage Tracking
+
+```python
+dspy.configure(track_usage=True)
+result = program(question="...")
+print(dspy.settings.lm.history[-1]["usage"])  # {"prompt_tokens": N, "completion_tokens": M}
+```
+
+### settings Object (read-only access)
+
+```python
+dspy.settings.lm          # current LM
+dspy.settings.adapter     # current adapter
+dspy.settings.num_threads # current parallelism
+# All configure() keys accessible as attributes on dspy.settings
+```
+
+---
+
+## 14. Production Deployment
+
+### Saving and Loading Optimized Programs
+
+```python
+# Save after optimization
+optimized_program.save("optimized_rag.json")   # JSON: instructions + demos (human-inspectable)
+optimized_program.save("optimized_rag.pkl")    # Pickle: full state including fine-tuned weights
+
+# Load in production (program structure must match saved structure)
+program = MyRAGProgram()
+program.load("optimized_rag.json")
+```
+
+### Async Production Pattern
+
+```python
+import asyncio, dspy
+
+dspy.configure(lm=dspy.LM("openai/gpt-4o"), async_max_workers=16)
+
+async def serve(questions):
+    tasks = [dspy.asyncify(program)(question=q) for q in questions]
+    return await asyncio.gather(*tasks)
+```
+
+### MLflow Integration
+
+```python
+import mlflow, dspy
+
+mlflow.dspy.autolog()           # auto-logs traces, metrics, programs via OpenTelemetry
+
+with mlflow.start_run():
+    optimized = optimizer.compile(program, trainset=trainset, metric=metric)
+    mlflow.dspy.log_model(optimized, "model")   # register artifact for serving
+
+loaded = mlflow.dspy.load_model("runs:/<run_id>/model")   # production loading
+```
+
+### Production Case Studies (vs Alternatives)
+
+| Company | Use Case | Domain | Outcome vs Alternative |
+|---------|----------|--------|------------------------|
+| JetBlue | Chatbot pipeline optimization | Travel / CX | Multi-bot deployment via Databricks (vs hand-tuned prompts) |
+| Replit | Code diff synthesis ("Code Repair") | DevTools | Production LLM pipeline (vs manual engineering) |
+| Moody's | RAG, LLM-as-Judge, workflow agents | Finance | Financial workflow automation (vs rule-based systems) |
+| RadiantLogic | Query routing, text-to-SQL, context extraction | Enterprise data | AI Data Assistant (vs traditional NLU) |
+| Haize Labs | Automated LLM red-teaming | AI Safety | Automated coverage (vs manual red-team exercises) |
+| PingCAP | Knowledge graph construction | Database/NLP | Wikipedia-scale KG (vs human annotation) |
+
+### Research Benchmarks vs Baselines
+
+| Study | Method | Result vs Baseline |
+|-------|--------|--------------------|
+| UMD Suicide Detection | DSPy + optimizer | +40% over 20-hour expert human prompt engineering |
+| WangLab MEDIQA | DSPy pipeline | +20 points over next-best system (winning submission) |
+| STORM | DSPy modules | Wikipedia-quality articles from scratch (vs retrieval-only) |
+| PATH | DSPy + 10 gold labels | Full IR model training with minimal supervision |
+| IReRa | DSPy extreme classification | >10,000 label classification (vs fine-tuned classifiers) |
+
+### Production Invariants
+
+| Invariant | Reason |
+|-----------|--------|
+| Enable caching | Optimizer: 1000+ LM calls; cache cuts cost 60-90% |
+| Separate task LM from reflection LM | Reflection needs frontier model; task LM can be cheaper |
+| Save as JSON, not pickle | Portable, no pickle risk, human-inspectable, version-safe |
+| Use `dspy.context()` in workers | configure() raises RuntimeError in non-main threads |
+| Set `num_threads` <= API RPM | Default 8 may exceed free-tier rate limits |
+
+---
+
 ## Properties
 
 | Property | Value |
