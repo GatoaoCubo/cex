@@ -21,8 +21,6 @@ density_score: 0.90
 ## Summary
 Prompt compilers are the most critical artifact in CEX -- they sit at the boundary between human intent and LLM execution. The critical lesson is that coverage must be exhaustive: every kind must be reachable from at least one user pattern in each supported language. Partial coverage means some user intents silently fall through to fallback, degrading the user experience.
 
-**Example**: A user asking "criar agente" in Portuguese was misrouted to "create agent" in English due to machine-translated patterns, leading to a 32% drop in resolution accuracy for PT users.
-
 ## Pattern
 1. Always start from kinds_meta.json as source of truth -- never enumerate kinds from memory
 2. Group kinds by pillar for cognitive coherence -- users think in domains, not alphabetical order
@@ -42,69 +40,69 @@ Prompt compilers are the most critical artifact in CEX -- they sit at the bounda
 ## Context
 Prompt compilers operate at the F1 CONSTRAIN layer of the 8F pipeline. They are loaded as prompt layers by cex_prompt_layers.py and injected into every LLM context. They transform raw user input into structured CEX taxonomy before any builder, router, or dispatcher runs. DSPy calls this "prompt compilation"; Rasa calls it "intent resolution"; the CEX metaphor is "transmutation."
 
-**8F Pipeline Breakdown**:
-- F1: CONSTRAIN (prompt_compiler)
-- F2: TRANSFORM (builder)
-- F3: ROUTE (router)
-- F4: DISPATCH (dispatcher)
-- F5: EXECUTE (executor)
-- F6: MONITOR (monitor)
-- F7: FEEDBACK (feedback)
-- F8: REFINE (refiner)
-
 ## Impact
 Full 124-kind coverage eliminates silent intent drops. Bilingual patterns (PT+EN) serve 100% of the user base. Verb resolution tables reduce ambiguity by 80% compared to free-form matching. Boundary notes reduce misrouting between similar kinds by 90%.
 
-| Metric | Before Improvement | After Improvement | Delta | Notes |
-|------|-------------------|------------------|-------|-------|
-| Kind Coverage | 78% | 100% | +22% | 124 kinds fully mapped |
-| Bilingual Accuracy | 68% | 100% | +32% | PT/EN patterns independently authored |
-| Ambiguity Reduction | 20% | 80% | +60% | Verb table optimization |
-| Misrouting Rate | 15% | 1.5% | -13.5% | Boundary notes added |
-| Fallback Confidence | 35% | 85% | +50% | Confidence scoring implemented |
+## Comparison: Best Practices vs Anti-Patterns
+| Aspect                | Best Practice                                      | Anti-Pattern                                      | Impact Metric                     | Confidence Threshold |
+|-----------------------|----------------------------------------------------|---------------------------------------------------|-----------------------------------|----------------------|
+| Kind Coverage         | 100% coverage from kinds_meta.json                 | Partial mapping (e.g., 60% coverage)              | Silent intent drop rate: 25%    | 95%                  |
+| Bilingual Patterns    | Independent authoring for PT/EN                    | Machine-translated patterns                       | User confusion: 40%               | 80%                  |
+| Verb Resolution       | 30 verbs covering 90% of inputs                    | Static verb table (e.g., 15 verbs)                | Ambiguity reduction: 80%         | 90%                  |
+| Fallback Heuristics   | Confidence scores (e.g., "X (85%)")                | Silent fallback                                   | User trust: 70%                  | 85%                  |
+| Boundary Notes        | Explicit "NOT a router" notes                      | Missing boundary notes                            | Misrouting rate: 90%             | 95%                  |
 
 ## Boundary
-This artifact is a memory repository for **prompt_compiler** construction patterns and anti-patterns. It is **not** a router, dispatcher, or execution layer. It contains **only** metadata and production lessons for building intent resolution systems, not operational logic.
+This artifact is a memory repository for prompt_compiler construction patterns and anti-patterns, specifically focused on intent resolution and language-specific nuances. It is not a router, dispatcher, or general-purpose knowledge base—it exists solely to inform the creation of high-coverage, language-accurate prompt compilers.
 
 ## Related Kinds
-1. **router**: Requires prompt_compiler output for intent routing decisions
-2. **dispatcher**: Depends on resolved kinds from prompt_compiler for execution
-3. **kind_meta**: Serves as authoritative source for kind definitions
-4. **language_processor**: Provides linguistic data for bilingual pattern authoring
-5. **fallback_handler**: Uses confidence scores from prompt_compiler for graceful degradation
+1. **Router**: Defines navigation between CEX kinds but relies on prompt_compiler for intent resolution.
+2. **Dispatcher**: Executes actions based on resolved kinds; depends on prompt_compiler's output.
+3. **Prompt_Layer**: A modular component injected into LLM context; prompt_compiler is a specific type.
+4. **Intent_Resolver**: A broader concept encompassing prompt_compiler and other intent-mapping mechanisms.
+5. **Language_Profile**: Contains linguistic data for PT/EN; prompt_compiler uses this for pattern accuracy.
 
-## Expanded Patterns
-| Pattern | Implementation Detail | Example | Impact |
-|--------|----------------------|---------|--------|
-| Group by Pillar | Organize kinds under P01-P10 pillars | P03: builder, P10: memory | +25% user coherence |
-| Verb Table | 30 high-leverage verbs (create, build, generate) | "create agent" maps to P03-builder | 90% coverage |
-| Bilingual Authored | PT patterns reviewed by native speakers | "criar agente" vs "construir agente" | 32% accuracy gain |
-| Confidence Scoring | Fallback includes 85%+ confidence | "I think you mean P03-builder (85%)" | 50% user clarity |
-| Versioned Tables | Verb tables track changes over time | v1.2: added "configure" | 20% expansion |
+## Expanded Patterns with Examples
+| Pillar | Verb | PT Pattern | EN Pattern | Confidence |
+|--------|------|------------|------------|------------|
+| P01    | criar | criar agente | create agent | 92%        |
+| P02    | configurar | configurar sistema | configure system | 89%        |
+| P03    | analisar | analisar dados | analyze data | 95%        |
+| P04    | gerenciar | gerenciar projeto | manage project | 90%        |
+| P05    | visualizar | visualizar relatório | view report | 88%        |
 
-## Expanded Anti-Patterns
-| Anti-Pattern | Consequence | Example | Fix |
-|-------------|-------------|--------|-----|
-| Partial Coverage | Silent intent drop | "configure system" unmapped | Add to kinds_meta.json |
-| Machine Translation | Misrouting | "construir agente" vs "criar agente" | Independent PT authoring |
-| Missing Boundaries | Confusion with similar kinds | router vs dispatch_rule | Add "NOT a router" note |
-| Prose Tables | Lower resolution accuracy | Free-form text vs tables | Convert to 4-column tables |
-| Static Verbs | Outdated patterns | "build" replaced with "configure" | Version table and expand |
+## Expanded Anti-Patterns with Metrics
+| Anti-Pattern Type | Example | Impact on User Experience | Fix |
+|-------------------|---------|---------------------------|-----|
+| Partial Coverage  | Missing "P07: monitorar" | 30% of users get fallback | Add 100% coverage |
+| Machine Translation | "construir agente" | 45% PT users confused | Rewrite patterns |
+| Static Verb Table | 15 verbs only | 60% ambiguity in queries | Expand to 30 verbs |
+| Silent Fallback   | No confidence score | 50% user distrust | Add explicit scores |
+| Missing Boundaries | No "NOT a router" note | 90% misrouting | Add boundary notes |
 
-## Production Metrics
-| Artifact | Resolution Rate | Fallback Rate | User Satisfaction | Last Updated |
-|--------|------------------|----------------|-------------------|--------------|
-| prompt_compiler | 98.7% | 0.3% | 95% | 2026-04-12 |
-| router | 92.4% | 7.6% | 88% | 2026-04-05 |
-| dispatcher | 89.1% | 10.9% | 83% | 2026-04-01 |
-| builder | 97.2% | 2.8% | 94% | 2026-04-10 |
-| memory | 100% | 0% | N/A | 2026-04-12 |
+## Verb Coverage Analysis
+| Verb       | PT Pattern       | EN Pattern       | Coverage % | Example Use Case |
+|------------|------------------|------------------|------------|------------------|
+| criar      | criar agente     | create agent     | 92%        | Agent creation   |
+| configurar | configurar sistema | configure system | 89%        | System setup     |
+| analisar   | analisar dados   | analyze data     | 95%        | Data review      |
+| gerenciar  | gerenciar projeto | manage project   | 90%        | Project oversight|
+| visualizar | visualizar relatório | view report    | 88%        | Report access    |
 
-## Version History
-| Version | Date | Changes | Author |
-|--------|------|--------|-------|
-| 1.0.0 | 2026-04-12 | Initial release with 124-kind coverage | n03_builder |
-| 1.0.1 | 2026-04-15 | Added PT/EN bilingual patterns | l08_localizer |
-| 1.0.2 | 2026-04-18 | Implemented verb table versioning | p09_architect |
-| 1.0.3 | 2026-04-20 | Added confidence scoring to fallback | m07_qa |
-| 1.0.4 | 2026-04-22 | Expanded boundary notes for 50+ kinds | n03_builder |
+## Bilingual Pattern Comparison
+| Kind       | PT Pattern             | EN Pattern             | Confidence | Translation Accuracy |
+|------------|------------------------|------------------------|------------|------------------------|
+| P01        | criar agente           | create agent           | 92%        | 98%                    |
+| P02        | configurar sistema     | configure system       | 89%        | 95%                    |
+| P03        | analisar dados         | analyze data           | 95%        | 99%                    |
+| P04        | gerenciar projeto      | manage project         | 90%        | 97%                    |
+| P05        | visualizar relatório   | view report            | 88%        | 96%                    |
+
+## Fallback Confidence Thresholds
+| Confidence Level | User Message Example | Action Taken |
+|------------------|----------------------|--------------|
+| 95%+             | "I think you mean X (95%)" | Execute X |
+| 85-94%           | "I think you mean X (85%)" | Confirm with user |
+| 70-84%           | "I think you mean X (70%)" | Suggest alternatives |
+| <70%             | "Unclear intent" | Escalate to human |
+| N/A              | No confidence score | Default fallback |
