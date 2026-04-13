@@ -7,7 +7,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: null
+quality: 8.9
 tags:
 - dag
 - builder
@@ -62,8 +62,31 @@ wave_4_depends_on_waves_1_3:
 wave_5_depends_on_wave_4:
 - '`orchestration/spawn_config_builder.md` — spawn configuration'
 - '`memory/8f_pipeline_mastery.md` — learning record'
+comparison_of_build_waves: '| Wave | Dependencies | Artifacts Built | Parallelism | Purpose |
+
+  |------|--------------|------------------|-------------|---------|
+
+  | 0    | None         | README.md        | Full        | Module description |
+
+  | 1    | Wave 0       | Agent, Prompt, Card | Full | Core definitions |
+
+  | 2    | Wave 1       | Architecture, Knowledge, Schema | Full | Structural foundations |
+
+  | 3    | Wave 2       | Quality Gate     | Sequential  | Validation layer |
+
+  | 4    | Waves 1-3    | Dispatch, Workflow, Handoff, Signal | Partial | Orchestration rules |
+
+  | 5    | Wave 4       | Spawn Config, Memory Records | Sequential | Final configuration |'
 parallel_opportunities: Within each wave, all artifacts are independent and can be built in parallel. Cross-wave dependencies
   are strict — do not build Wave N+1 until Wave N completes.
 references:
 - 'N07 master DAG: N07_admin/orchestration/dag_admin.md'
 - 'Workflow: N03_builder/orchestration/workflow_builder.md'
+boundary: Acyclic graph of dependencies between tasks. Not a workflow (direct execution) nor a component_map (P08, components).
+related_kinds:
+- 'Workflow: Defines execution steps that depend on completed DAG artifacts'
+- 'Component Map: Describes system components that require DAG completion for validation'
+- 'Quality Gate: Enforces standards that must be satisfied before DAG progression'
+- 'Dispatch Rule: Uses DAG outputs to determine task routing'
+- 'Artifact Schema: Provides data structure definitions required by DAG nodes'
+8f_pipeline_function: 'Primary function: PRODUCE'
