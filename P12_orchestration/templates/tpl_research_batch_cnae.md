@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "Research Batch — Tax Registry / Business Classification Deep Harvest"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/crm_mission/batch_f_cnae_deep.md
@@ -12,6 +12,7 @@ variables: [CNAE_CODES, REGION, LEGAL_SOURCES, CITIES, SIC_CODES, NAICS_CODES, O
 density_score: 0.95
 tags: [template, research-batch, tax-registry, cnae, cnpj, crm, instance-extraction]
 tldr: "Tax registry business discovery — systematic code × city sweep via government/open data sources."
+updated: "2026-04-13"
 ---
 
 # BATCH F — Tax Registry / Business Classification Deep Harvest
