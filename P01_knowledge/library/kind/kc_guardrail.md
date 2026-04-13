@@ -3,8 +3,9 @@ id: kc_guardrail
 kind: knowledge_card
 title: "LLM Safety Guardrails"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 1.0
 ---
 
 # LLM Safety Guardrails
