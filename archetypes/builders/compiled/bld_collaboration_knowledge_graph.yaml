@@ -1,0 +1,79 @@
+kind: collaboration
+id: bld_collaboration_knowledge_graph
+pillar: P12
+llm_function: COLLABORATE
+purpose: How knowledge-graph-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: null
+title: 'Collaboration: knowledge-graph-builder'
+version: 1.0.0
+author: n03_builder
+tags:
+- knowledge_graph
+- builder
+- collaboration
+- P12
+tldr: 'knowledge-graph-builder is a schema specialist: receives domain + entity seeds, produces graph schema, feeds retriever-config
+  and entity-memory builders.'
+domain: knowledge graph construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+my_role_in_crews: 'I am a SCHEMA SPECIALIST. I answer ONE question: "what entity types and relation types does this domain
+  need, with what extraction logic, storage backend, and traversal strategy?" I do not store entity instances (entity-memory-builder
+  handles that). I do not configure vector indices (knowledge-index-builder handles that). I do not point to external sources
+  (rag-source-builder handles that). I define the relational schema that makes graph-based knowledge retrieval possible.'
+crew_compositions: ''
+crew_full_graphrag_pipeline: "  1. rag-source-builder      -> \"external document sources to index\"\n  2. chunk-strategy-builder\
+  \  -> \"how to split documents before extraction\"\n  3. embedding-config-builder -> \"vector model for hybrid retrieval\"\
+  \n  4. knowledge-graph-builder  -> \"graph schema: entities, relations, traversal\"\n  5. retriever-config-builder -> \"\
+  hybrid retrieval config combining graph + vector\""
+crew_agent_knowledge_base: "  1. knowledge-card-builder   -> \"domain knowledge cards for agent injection\"\n  2. knowledge-graph-builder\
+  \  -> \"relational graph schema for multi-hop reasoning\"\n  3. entity-memory-builder    -> \"per-entity state storage using\
+  \ graph schema\"\n  4. agent-builder            -> \"agent that uses graph for reasoning\""
+crew_domain_intelligence: "  1. knowledge-graph-builder  -> \"graph schema for competitive/domain intel\"\n  2. knowledge-index-builder\
+  \  -> \"vector index of graph nodes\"\n  3. knowledge-card-builder   -> \"key facts and summaries from graph communities\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: domain name, initial entity type ideas, sample text or documents'
+- 'optional: target storage backend, query patterns needed, downstream consumers'
+- 'optional: framework preference (GraphRAG, LlamaIndex, LightRAG, Neo4j)'
+i_produce:
+- knowledge_graph artifact (.md + .yaml frontmatter)
+- 'committed to: `P01_knowledge/examples/p01_kg_{domain}.md`'
+i_signal:
+- 'signal: complete (with quality score from quality gate)'
+- 'if quality < 8.0: signal retry with failure reasons from HARD gate checks'
+builders_i_depend_on: '| Builder | Why |
+
+  |---------|-----|
+
+  | chunk-strategy-builder | Chunked text is input to extraction pipeline |
+
+  | embedding-config-builder | Vector model reference for hybrid retrieval integration |'
+builders_that_depend_on_me: '| Builder | Why |
+
+  |---------|-----|
+
+  | retriever-config-builder | References knowledge_graph as retrieval backend |
+
+  | entity-memory-builder | Uses entity types from graph schema for state structure |
+
+  | knowledge-index-builder | Indexes graph nodes for vector similarity queries |
+
+  | agent-builder | Agents traverse graph schema during multi-hop reasoning |'
+signal_format: 'nucleus: n03
+
+  kind: knowledge_graph
+
+  artifact: P01_knowledge/examples/p01_kg_{domain}.md
+
+  status: complete
+
+  quality_gate: pass
+
+  score: null
+
+  gates_passed: 12/12
+
+  timestamp: "{{ISO8601}}"'
