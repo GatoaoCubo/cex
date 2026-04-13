@@ -3,7 +3,7 @@ id: p04_kc_steps
 kind: steps
 pillar: P04
 title: "Steps — Deep Knowledge for steps"
-version: 1.0.0
+version: 1.1.0
 created: 2026-04-02
 updated: 2026-04-02
 author: builder_knowledge
@@ -14,25 +14,15 @@ tldr: "Structured workflow for system prompt review with quality gates and struc
 when_to_use: "Reviewing, refining, or reasoning about system prompts"
 keywords: [steps, review, feedback, structured, workflow, quality]
 feeds_kinds: [steps]
-density_score: 0.95
+density_score: 0.98
 ---
 
 # System Prompt Review Steps
 
-## Spec
-```yaml
-kind: steps
-pillar: P04
-llm_function: TOOL
-max_bytes: 4096
-naming: p04_steps_{{name}}.md + .yaml
-core: true
-```
-
 ## What It Is
 A steps is a structured workflow for evaluating and improving system prompts. It defines a specific review process that can be executed repeatedly across different contexts. Steps reviews are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this review?" while agents answer "who am I?" and prompts answer "how do I communicate?"
 
-## Cross-Framework Map
+## Cross-Frame Map
 | Framework/Provider | Class/Concept | Notes |
 |-------------------|---------------|-------|
 | LangChain | `PromptTemplate` / `Chain` | Structured review with defined phases |
@@ -131,4 +121,20 @@ OpenClaude ships ~18 bundled steps as battle-tested implementations:
 **Parallel dispatch pattern** (from /review):
 - Phase 1: Identify changes (git diff)
 - Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
-- Phase
+- Phase 3: Aggregate findings and fix issues directly
+This pattern generalizes: any steps can dispatch parallel sub-agents with typed foci.
+
+**Analysis scratchpad pattern** (from /audit):
+- <analysis> tags create a private drafting space
+- Forces structured thinking before output
+- Scratchpad is stripped from final result
+- Improves quality without consuming permanent context
+
+## New Steps Patterns Discovered
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| Adversarial steps | Agent explicitly tries to BREAK the implementation | n06_steps_audit |
+| Parallel review | Multiple focused agents analyze same diff concurrently | n06_steps_review |
+| Scratchpad steps | <analysis> block for private reasoning, stripped from output | n06_steps_optimize |
+| Background extract | Runs silently after N turns, extracts persistent memories | n06_steps_memory_extract |
+| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | n06_steps_audit |
