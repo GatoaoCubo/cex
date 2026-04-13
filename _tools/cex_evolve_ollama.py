@@ -35,6 +35,10 @@ from urllib.error import URLError
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
+# Force unbuffered output for background execution
+import functools
+print = functools.partial(print, flush=True)
+
 CEX_ROOT = Path(__file__).resolve().parent.parent
 os.chdir(str(CEX_ROOT))
 
