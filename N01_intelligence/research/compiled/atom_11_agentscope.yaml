@@ -1,0 +1,1055 @@
+id: atom_11_agentscope
+kind: knowledge_card
+title: 'Atomic Research: AgentScope (Alibaba Tongyi Lab)'
+version: 1.0.0
+quality: 8.9
+tags:
+- agentscope
+- alibaba
+- tongyi
+- multi-agent
+- framework
+- atlas
+- vocabulary
+- chinese-ai
+pillar: P01
+domain: llm-agent-frameworks
+density_score: 0.95
+sources:
+- https://github.com/agentscope-ai/agentscope
+- https://arxiv.org/abs/2402.14034
+- https://arxiv.org/html/2508.16279v1
+- https://arxiv.org/abs/2501.12851
+- https://doc.agentscope.io/
+- https://docs.agentscope.io/
+- https://github.com/agentscope-ai/agentscope-runtime
+- https://runtime.agentscope.io/
+- https://github.com/agentscope-ai/ReMe
+- https://deepwiki.com/agentscope-ai/agentscope
+1_architecture_overview: 'AgentScope uses a three-layer architecture with three independent modules:
+
+
+  | Layer | Module | Purpose |
+
+  |-------|--------|---------|
+
+  | Core Framework | `agentscope` | Agent development "language": agents, messages, pipelines, tools, memory |
+
+  | Runtime | `agentscope-runtime` | Production deployment: Agent-as-a-Service, sandboxing, state persistence |
+
+  | Studio | AgentScope Studio | Observability UI: tracing, evaluation, chat interface, Friday copilot |
+
+
+  Design philosophy: developer-centric, procedure-oriented message exchange,
+
+  async-first (Python 3.10+ asyncio), convention-over-configuration.
+
+
+  Original (v0.x) used an Actor-based distributed model with RPC and placeholder
+
+  mechanism for automatic parallelism. v1.0 shifted to FastAPI-based Agent-as-a-Service.
+
+
+  ---'
+2_full_type_registry: ''
+2_1_message_types: '| Type | Class | Fields | Purpose |
+
+  |------|-------|--------|---------|
+
+  | Msg | `Msg` | `name`, `role`, `content`, `metadata`, `id`, `timestamp`, `invocation_id` | Universal data container for
+  all agent communication |
+
+  | ChatResponse | `ChatResponse` | `content` (ContentBlock seq), `id`, `created_at`, `type` ("chat"), `usage`, `metadata`
+  | Unified LLM response wrapper across providers |
+
+  | ServiceResponse | `ServiceResponse` | (status, content) | Return type from service functions (tools) |
+
+  | ChatUsage | `ChatUsage` | `prompt_tokens`, `completion_tokens`, `total_tokens` | Token accounting per LLM call |
+
+
+  Msg.role values: `"user"`, `"assistant"`, `"system"`
+
+
+  Msg.content: Either a plain string OR a list of `ContentBlock` objects (multimodal).'
+2_2_contentblock_types_typeddicts: '| Block Type | Fields | Purpose |
+
+  |------------|--------|---------|
+
+  | TextBlock | `{"type": "text", "text": str}` | Plain text content |
+
+  | ThinkingBlock | `{"type": "thinking", "thinking": str}` | Chain-of-thought / reasoning trace |
+
+  | ToolUseBlock | `{"type": "tool_use", "id": str, "name": str, "input": dict}` | Tool invocation request |
+
+  | ToolResultBlock | `{"type": "tool_result", "id": str, "name": str, "output": str\|list}` | Tool execution result |
+
+  | ImageBlock | `{"type": "image", "source": URLSource\|Base64Source}` | Image content |
+
+  | AudioBlock | `{"type": "audio", "source": URLSource\|Base64Source}` | Audio content |
+
+  | VideoBlock | `{"type": "video", "source": URLSource\|Base64Source}` | Video content |
+
+
+  Media source types: URLSource (URL reference), Base64Source (inline encoded).'
+2_3_agent_classes: '| Class | Parent | Purpose | Key Methods |
+
+  |-------|--------|---------|-------------|
+
+  | AgentBase | `StateModule` | Abstract root of all agents | `reply()`, `observe()`, `print()`, `handle_interrupt()` |
+
+  | ReActAgentBase | `AgentBase` | Adds reasoning/acting separation | `_reasoning()`, `_acting()` |
+
+  | ReActAgent | `ReActAgentBase` | Production ReAct implementation with 5 components | Model + Formatter + Memory + Toolkit
+  + optional LTM |
+
+  | UserAgent | `AgentBase` | Human-in-the-loop proxy | Collects human input in pipelines |
+
+  | A2AAgent | `AgentBase` | Remote agent proxy via A2A protocol | Card resolvers, protocol adaptation |
+
+  | DialogAgent | `AgentBase` | Role-customizable via system prompt | Simple conversational agent |
+
+  | DictDialogAgent | `AgentBase` | Dictionary-format structured responses | JSON output agent |
+
+  | VoiceAgent | `AgentBase` | Voice I/O agent | TTS + realtime audio |
+
+  | RealtimeVoiceAgent | `AgentBase` | Streaming voice conversations | WebRTC/event-based |
+
+  | DeepResearchAgent | `ReActAgentBase` | Multi-step research with reflection | Query expansion, tree-structured ReAct |
+
+  | BrowserAgent | `ReActAgentBase` | Web automation via Playwright MCP | Subtask decomposition, multi-tab, long-page chunking
+  |
+
+  | MetaPlannerAgent | `ReActAgentBase` | Dual-mode: lightweight ReAct or planning-execution | `RoadmapManager`, `WorkerManager`,
+  dynamic worker instantiation |
+
+  | ProgrammerAgent | `AgentBase` | Code generation + execution | (v0.x, may be deprecated in v1.0) |
+
+  | TextToImageAgent | `AgentBase` | Image generation | (v0.x, may be deprecated in v1.0) |
+
+
+  Agent lifecycle: `observe()` -> `reply()` -> optional `handle_interrupt()` (async cancellation).'
+2_4_pipeline_orchestration_classes: '| Class/Function | Type | Purpose |
+
+  |----------------|------|---------|
+
+  | SequentialPipeline | Class | Chain agents in order; output of N becomes input of N+1 |
+
+  | sequential_pipeline() | Function | Functional equivalent of SequentialPipeline |
+
+  | FanoutPipeline | Class | Distribute same input to multiple agents concurrently |
+
+  | fanout_pipeline() | Function | Functional equivalent; `enable_gather=True` for concurrent, `False` for sequential |
+
+  | MsgHub | Async context manager | Broadcast messages among participant group |
+
+  | ChatRoom | Class | Realtime voice agent orchestration with event forwarding |
+
+  | stream_printing_messages() | Async generator | Yields `(Msg, bool)` tuples for UI streaming; `bool` = is_last_chunk |
+
+
+  MsgHub methods: `add(agent)`, `delete(agent)`, `broadcast(msg)`, `set_auto_broadcast(bool)`
+
+
+  MsgHub behavior: On context entry, each participant subscribes to all others'' outputs
+
+  via `observe()`. When any participant calls `reply()`, the result auto-broadcasts to
+
+  all other participants. Dynamic add/delete mid-session is supported.
+
+
+  Conditional/Iterative patterns (v0.x, documented but not explicitly classed in v1.0):
+
+  - if-else pipelines
+
+  - switch-case pipelines
+
+  - while-loop pipelines
+
+  - for-loop pipelines
+
+
+  Routing mechanisms (v1.0):
+
+  - Structured output routing (Pydantic `Literal` types)
+
+  - Tool-based routing (agents wrapped as tool functions)
+
+  - Agent-as-tool pattern (factory function registered as tool)'
+2_5_model_classes: '| Class | Purpose |
+
+  |-------|---------|
+
+  | ChatModelBase | Abstract interface for all chat LLMs |
+
+  | DashScopeChatModel | Alibaba DashScope / Qwen models |
+
+  | OpenAIChatModel | OpenAI GPT models |
+
+  | GeminiChatModel | Google Gemini models |
+
+  | AnthropicChatModel | Anthropic Claude models |
+
+  | OllamaChatModel | Local Ollama models |
+
+  | TTSModelBase | Text-to-speech synthesis |
+
+  | EmbeddingModelBase | Semantic embedding models |
+
+  | RealtimeModelBase | Streaming/realtime model interface |
+
+
+  Supported providers (v1.0): OpenAI, DeepSeek, vLLM, DashScope, Anthropic, Gemini, Ollama.'
+2_6_formatter_classes: 'Formatters convert `Msg` history to provider-specific API formats.
+
+
+  | Chat Formatter | MultiAgent Formatter | Provider |
+
+  |----------------|---------------------|----------|
+
+  | DashScopeChatFormatter | DashScopeMultiAgentFormatter | Alibaba DashScope |
+
+  | OpenAIChatFormatter | OpenAIMultiAgentFormatter | OpenAI |
+
+  | AnthropicChatFormatter | AnthropicMultiAgentFormatter | Anthropic |
+
+  | GeminiChatFormatter | GeminiMultiAgentFormatter | Google Gemini |
+
+  | OllamaChatFormatter | OllamaMultiAgentFormatter | Ollama |
+
+  | DeepSeekChatFormatter | DeepSeekMultiAgentFormatter | DeepSeek |
+
+  | A2AChatFormatter | -- | Agent-to-Agent protocol |
+
+
+  Rule: Use `ChatFormatter` for 2-party conversations. Use `MultiAgentFormatter`
+
+  for 3+ participants (adds name prefixes + history wrapping for speaker identification).'
+2_7_memory_classes: '| Class | Layer | Backend | Purpose |
+
+  |-------|-------|---------|---------|
+
+  | MemoryBase | Abstract | -- | Base interface for all memory |
+
+  | InMemoryMemory | Short-term | In-process | Default buffer for dialogue history |
+
+  | AsyncSQLAlchemyMemory | Short-term | SQLite/PostgreSQL/MySQL | Async DB-backed storage |
+
+  | RedisMemory | Short-term | Redis | Distributed session state |
+
+  | LongTermMemoryBase | Long-term | Abstract | Cross-session persistence base |
+
+  | Mem0LongTermMemory | Long-term | Mem0 | Semantic indexing via mem0 library |
+
+  | ReMePersonalLongTermMemory | Long-term | ReMe | Personal memory with profile management |
+
+
+  Short-term memory methods: `add()`, `delete()`, `delete_by_mark()`, `size()`, `clear()`,
+
+  `get_memory()`, `update_messages_mark()`, `update_compressed_summary()`, `state_dict()`, `load_state_dict()`
+
+
+  Long-term memory methods (dual-mode):
+
+  - Developer-controlled: `record()`, `retrieve()`
+
+  - Agent-controlled: `record_to_memory()`, `retrieve_from_memory()`
+
+
+  LTM control modes on ReActAgent: `agent_control`, `static_control`, `both`
+
+
+  Mark system: String labels on messages for categorization/filtering (unique to AgentScope).'
+2_8_memory_compression: '| Component | Purpose |
+
+  |-----------|---------|
+
+  | CompressionConfig | Triggers auto-compression when token count exceeds threshold |
+
+  | SummarySchema | Pydantic BaseModel structuring compressed memory |
+
+  | keep_recent | Parameter preserving N most recent messages uncompressed |
+
+
+  SummarySchema fields: `task_overview`, `current_state`, `important_discoveries`,
+
+  `next_steps`, `context_to_preserve`
+
+
+  Compression types (from paper): "dynamic compression" (real-time semantic extraction),
+
+  "hybrid compression" (combining summarization + selective retention).'
+2_9_tool_system: '| Class/Function | Purpose |
+
+  |----------------|---------|
+
+  | Toolkit | Central tool manager: registration, schema generation, execution |
+
+  | ToolFunction | Wrapper around callable with metadata |
+
+  | register_tool_function() | Register a Python function as agent tool |
+
+  | execute_tool_function() | Unified async generator for heterogeneous tool outputs |
+
+  | register_mcp_client() | Register an MCP protocol client |
+
+  | create_tool_group() | Group-wise tool management (mitigates paradox-of-choice) |
+
+  | update_tool_groups() | Update active tool groups |
+
+  | reset_equipped_tools() | Dynamic tool provisioning at runtime |
+
+  | execute_python_code | Built-in: sandboxed Python execution |
+
+  | execute_shell_command | Built-in: shell command execution |
+
+  | HttpStatelessClient | MCP stateless client for transactional services |
+
+  | StatefulClientBase | MCP stateful client for persistent connections |
+
+  | get_callable_function() | Extract MCP tools as local callable functions |
+
+
+  Tool vs Service Function: Service functions return `ServiceResponse`. Tools are
+
+  "processed service functions" with JSON schema descriptions for LLM understanding.
+
+  The ServiceFactory auto-converts services to OpenAI-compatible JSON schema format.
+
+
+  parallel_tool_calls: Parameter enabling parallel tool execution via `asyncio.gather()`.'
+2_10_state_management: '| Class/Method | Purpose |
+
+  |--------------|---------|
+
+  | StateModule | Base class for all stateful components (agents, memory, toolkit) |
+
+  | register_state(attr_name, custom_to_json, custom_from_json) | Mark attribute for serialization |
+
+  | state_dict() | Export state as dictionary |
+
+  | load_state_dict(state_dict, strict) | Restore from saved state |
+
+  | SessionBase | Abstract session persistence |
+
+  | JSONSession | JSON file-based session storage |
+
+  | RedisSession | Redis-backed session for distributed deployments |
+
+
+  Automatic nesting: StateModule children are auto-included in parent''s `state_dict()`.
+
+  All of `AgentBase`, `MemoryBase`, `LongTermMemoryBase`, `Toolkit` inherit StateModule.'
+2_11_hook_system: "10 hooks across 5 core functions (5 pre/post pairs):\n\n| # | Hook Name | Available On | What It Intercepts\
+  \ |\n|---|-----------|-------------|-------------------|\n| 1 | pre_reply | AgentBase+ | Before agent generates response\
+  \ |\n| 2 | post_reply | AgentBase+ | After agent response is generated |\n| 3 | pre_observe | AgentBase+ | Before agent\
+  \ receives broadcast message |\n| 4 | post_observe | AgentBase+ | After message stored in agent memory |\n| 5 | pre_print\
+  \ | AgentBase+ | Before console/queue output |\n| 6 | post_print | AgentBase+ | After output delivery |\n| 7 | pre_reasoning\
+  \ | ReActAgentBase+ | Before `_reasoning()` (thinking + tool selection) |\n| 8 | post_reasoning | ReActAgentBase+ | After\
+  \ reasoning step completes |\n| 9 | pre_acting | ReActAgentBase+ | Before `_acting()` (tool execution) |\n| 10 | post_acting\
+  \ | ReActAgentBase+ | After tool calls return results |\n\nCanonical type signatures:\n# Pre-hook (hooks 1, 3, 5, 7, 9)\n\
+  def pre_hook(self: AgentBase, kwargs: dict[str, Any]) -> dict[str, Any] | None:\n    ...  # return modified kwargs to replace,\
+  \ or None for pass-through\n\n# Post-hook (hooks 2, 4, 6, 8, 10)\ndef post_hook(self: AgentBase, kwargs: dict[str, Any],\
+  \ output: Any) -> Any:\n    ...  # return replacement output, or None for pass-through\n\nRegistration levels:\n- Class-level\
+  \ (all instances): `AgentBase.register_class_hook(hook_type, hook_name, hook)`\n- Instance-level (single agent): `agent.register_instance_hook(hook_type,\
+  \ hook_name, hook)`\n- Removal: `remove_class_hook()`, `remove_instance_hook()`, `clear_class_hooks()`, `clear_instance_hooks()`\n\
+  \nExecution order: Class hooks (insertion order) -> Instance hooks (insertion order) -> Core method -> Class post-hooks\
+  \ -> Instance post-hooks.\n\nChaining behavior: Non-`None` return propagates to next hook; all-`None` chain passes original\
+  \ args unchanged.\n\nStorage implementation: Six `OrderedDict` class attributes + six `OrderedDict` instance attributes\
+  \ per agent. Deterministic ordering for predictable distributed behavior.\n\nCritical constraint: Never call the wrapped\
+  \ method inside its own hook (infinite loop).\n\nReMe integration (5-step pre_reasoning sequence):\n`ReMeLight.pre_reasoning_hook()`\
+  \ is registered as a `pre_reasoning` hook on ReActAgent.\nFull execution order before each reasoning step:\n1. `compact_tool_result()`\
+  \ -- truncate long tool outputs, cache to `tool_result/<uuid>.txt`\n2. `check_context()` -- token-count current context\
+  \ via ContextChecker\n3. `compact_memory()` -- if threshold exceeded, generate structured summary (Goal/Progress/Decisions/NextSteps)\n\
+  4. `summary_memory()` (async) -- persist summary to `memory/YYYY-MM-DD.md`\n5. `mark_messages_compressed()` -- save raw\
+  \ dialog to `dialog/YYYY-MM-DD.jsonl`; mark with `_MemoryMark.COMPRESSED`\n\nRegistration code pattern:\n# Class-level --\
+  \ applies to ALL instances of this class\ndef audit_hook(agent, kwargs):\n    return kwargs  # or None for pass-through\n\
+  \nAgentBase.register_class_hook(\n    hook_type=\"pre_reply\",\n    hook_name=\"audit\",\n    hook=audit_hook,\n)\n\n# Instance-level\
+  \ -- applies to ONE specific agent\nagent.register_instance_hook(\n    hook_type=\"post_reply\",\n    hook_name=\"log_msg\"\
+  ,\n    hook=lambda agent, kwargs, msg: msg,\n)"
+2_12_planning_system: '| Class | Purpose |
+
+  |-------|---------|
+
+  | PlanNotebook | Structured task planning integration with ReActAgent |
+
+  | Plan | Hierarchical task plan |
+
+  | SubTask | Individual task unit within a plan |
+
+  | RoadmapManager | Hierarchical decomposition in MetaPlannerAgent |
+
+  | WorkerManager | Dynamic worker instantiation in MetaPlannerAgent |
+
+
+  Hints are injected as system messages per reasoning step.'
+2_13_evaluation_framework: '| Class | Purpose |
+
+  |-------|---------|
+
+  | Task | Evaluation unit: unique ID, input, ground truth, metrics, metadata |
+
+  | SolutionOutput | Agent output: success flag, final output, complete trajectory + tool trajectory |
+
+  | MetricBase | Abstract metric interface; `call(output: SolutionOutput) -> MetricResult` |
+
+  | MetricResult | Categorical/numerical metric with score + message + timestamp |
+
+  | BenchmarkBase | Dataset of Tasks; implements iterator interface for systematic agent testing |
+
+  | GeneralEvaluator | Sequential, debugging-focused; iterates tasks, calls solution fn, persists via FileEvaluatorStorage
+  |
+
+  | RayEvaluator | Distributed via Ray; drop-in replacement for GeneralEvaluator; distributes tasks across CPU/GPU workers
+  |
+
+  | EvaluatorStorageBase | Persistent result storage with checkpoint resumption |
+
+  | OpenJudgeMetric | Adapter wrapping OpenJudge''s 50+ professional graders for subjective quality assessment |
+
+
+  ACEBench -- Full Specification (arXiv:2501.12851):
+
+
+  Dataset: 2,000 annotated entries in Chinese + English parallel versions.
+
+
+  | Category | Description | Evaluation Method | Metric |
+
+  |----------|-------------|-------------------|--------|
+
+  | Normal | Single-turn + multi-turn tool usage in unambiguous scenarios. Subtypes: atomic, similar-API, preference, multi-turn
+  | AST parsing vs ground truth; multiple valid answer pools | Binary accuracy (1=match, 0=mismatch) |
+
+  | Special | Imperfect instructions: missing parameters, format errors, task-function mismatches | 3 problem-identification
+  capabilities assessed per case | Binary accuracy per capability |
+
+  | Agent | Multi-turn, multi-step real-world simulations; GPT-4o as user simulator | End-to-End accuracy (instance attrs)
+  + Process accuracy (n/m: actual/ideal function calls) | E2E accuracy + Process accuracy |
+
+
+  Overall accuracy formula: Weighted combination using sqrt(sample_size) as coefficients across the 3 data types.
+
+
+  LLM leaderboard results (combined CN+EN):
+
+  | Model | Overall Accuracy |
+
+  |-------|-----------------|
+
+  | GPT-4o | 85.4% |
+
+  | GPT-4-Turbo | 84.5% |
+
+  | Qwen2.5-Coder-32B | 79.6% (best open-source) |
+
+
+  Key finding: Fine-tuned tool models degrade significantly on Special data -- task-specific optimization causes generalization
+  loss.
+
+
+  Integration: Observability pipeline auto-collects OTel telemetry (LLM calls, tool usage, token counts) during evaluation
+  runs.'
+2_14_observability_tracing: '| Component | Purpose |
+
+  |-----------|---------|
+
+  | @trace_llm | Decorator for ChatModelBase calls |
+
+  | @trace_reply | Decorator for AgentBase.reply() |
+
+  | @trace_format | Decorator for FormatterBase.format() |
+
+  | @trace | Generic span wrapper |
+
+  | agentscope.init() | Entry point: sets metadata, logging, OTLP config |
+
+
+  Backends: AgentScope Studio, Alibaba CloudMonitor, Arize-Phoenix, Langfuse.
+
+  Protocol: OpenTelemetry (OTel).'
+2_15_rag_components: '| Class | Purpose |
+
+  |-------|---------|
+
+  | KnowledgeBase | Semantic retrieval interface |
+
+  | SimpleKnowledgeBase | Basic implementation |
+
+  | VectorStore | Embedding storage abstraction |
+
+  | DocumentReader | Multi-format file parser |
+
+
+  Supports LlamaIndex and LangChain as backend RAG frameworks.
+
+  Knowledge Bank = collection of knowledge containers, configured via JSON.'
+2_16_configuration: '| Component | Purpose |
+
+  |-----------|---------|
+
+  | model_configs | JSON: model parameters, API endpoints, provider details |
+
+  | agent_configs | JSON: agent characteristics, system prompts, tool bindings |
+
+  | agentscope.init() | Loads configs, sets file storage, logging, supported platforms |
+
+  | _ConfigCls | Thread-safe ContextVar: `run_id`, `project`, `name`, `created_at`, `trace_enabled` |
+
+
+  ---'
+3_agentscope_runtime_production_layer: 'Separate package: `agentscope-runtime` (v1.0 Dec 2025, v1.1 Feb 2026).'
+3_1_core_classes: '| Class | Purpose |
+
+  |-------|---------|
+
+  | AgentApp | Primary abstraction -- directly inherits FastAPI (v1.1+) |
+
+  | RedisSession | State persistence: conversation history, agent snapshots, multi-session coordination |
+
+  | A2ARegistry | Abstract base for service registration/discovery backends |
+
+  | A2ATransportsProperties | Transport endpoint descriptor: host/port/path, TLS flags, protocol type |
+
+  | AgentCardWithRuntimeConfig | Configuration bundle: agent_card + registry list + task_timeout |
+
+
+  AgentApp lifecycle: Init (lifespan) -> Query (`@agent_app.query()`) -> Shutdown.
+
+  Primary endpoint: `/process` via SSE streaming.
+
+
+  v1.1 key change: AgentApp now directly inherits FastAPI (not factory pattern).
+
+  Enables seamless access to the full FastAPI ecosystem (middleware, routers, dependency injection).'
+3_2_sandbox_types: '| Sandbox | Sync | Async (v1.1) | Purpose |
+
+  |---------|------|--------------|---------|
+
+  | BaseSandbox | Yes | BaseSandboxAsync | Python/shell execution |
+
+  | GuiSandbox | Yes | GuiSandboxAsync | Desktop GUI interaction |
+
+  | FilesystemSandbox | Yes | FilesystemSandboxAsync | File operations |
+
+  | BrowserSandbox | Yes | BrowserSandboxAsync | Web automation |
+
+  | MobileSandbox | Yes | MobileSandboxAsync | Mobile app testing |
+
+  | TrainingSandbox | Yes | -- | ML model training |
+
+  | AgentbaySandbox | Yes | -- | Specialized environment |
+
+
+  Container backends: Docker (default), gVisor, BoxLite, Kubernetes, Alibaba Cloud ACK.
+
+
+  v1.1 async sandboxes: `run_ipython_cell` and `run_shell_command` enhanced for non-blocking
+
+  concurrent execution in async programs. Enables parallel tool calls across multiple sandboxes.'
+3_3_distributed_interrupt_service_v1_1_new: 'New service enabling:
+
+  - Manual task preemption during long-running agent execution
+
+  - Customizable state persistence before interrupt
+
+  - Recovery logic injection on resume
+
+  - Greater developer control over multi-step agentic workflows'
+3_4_a2a_registry_service_v1_1: 'Plugin-based service registration and discovery. Agents register with centralized registries
+
+  (e.g., Nacos) on startup. Configured via `a2a_config` parameter in AgentApp.
+
+
+  | Component | Purpose |
+
+  |-----------|---------|
+
+  | A2ARegistry | Abstract base class; requires `registry_name()` + `register()` |
+
+  | NacosRegistry | Nacos v3.1.0+ dynamic service discovery backend |
+
+  | A2ATransportsProperties | host/port/path + TLS + transport type (JSONRPC) |
+
+
+  Registration flow (async, non-blocking):
+
+  1. Agent Card Publication -- metadata (name, version, capabilities)
+
+  2. Endpoint Registration -- connection info + protocol config
+
+  3. Background execution -- failures log warnings without blocking startup
+
+
+  Nacos env vars: `A2A_REGISTRY_ENABLED`, `NACOS_SERVER_ADDR`, auth credentials.
+
+  Custom registries: inherit `A2ARegistry`, implement required methods.'
+3_5_framework_compatibility: '| Framework | Messages | Tools |
+
+  |-----------|----------|-------|
+
+  | AgentScope | Full | Full |
+
+  | LangGraph | Full | In Progress |
+
+  | Microsoft Agent | Full | Full |
+
+  | Agno | Full | Full |
+
+  | AutoGen | In Progress | Full |'
+3_6_response_streaming_format: 'JSON lines via SSE with fields: `sequence_number`, `object`, `status`, payload. Compatible
+  with OpenAI SDK response format. ---'
+4_reme_memory_system: 'Separate package: `agentscope-ai/ReMe` ("Remember Me, Refine Me").'
+4_1_architecture_layers: '| Layer | Purpose |
+
+  |-------|---------|
+
+  | ReMe Class | Public API methods |
+
+  | Handler Layer | Low-level operations |
+
+  | Agent Layer | Specialized memory agents |
+
+  | Storage Layer | Vector stores, embeddings, profile files |'
+4_2_core_classes: '| Class | Purpose |
+
+  |-------|---------|
+
+  | ReMeLight | File-based memory management (lightweight) |
+
+  | ReMe | Vector-based memory management (full) |
+
+  | ReMeApp | Service wrapper: HTTP / MCP / Python API |
+
+  | ReMeInMemoryMemory | Extends AgentScope''s InMemoryMemory with token-aware management |
+
+  | Application | Lifecycle orchestrator for services |
+
+  | ServiceContext | Runtime registry holding component instances |'
+4_3_memory_type_agents: '| Agent Type | Agent Classes | Purpose |
+
+  |------------|---------------|---------|
+
+  | Personal Memory | PersonalSummarizer, PersonalRetriever, ProfileHandler | User preferences, habits, profile JSON |
+
+  | Procedural Memory | ProceduralSummarizer, ProceduralRetriever | Task success/failure patterns, lessons learned |
+
+  | Tool Memory | ParseToolCallResultOp, SummaryToolMemoryOp, ToolRetriever | Tool usage patterns, cost metrics, execution
+  guidelines |
+
+  | Working Memory | ReMeInMemoryMemory, Compactor, ContextChecker | Short-term context, token management, compression |'
+4_4_storage: '| Component | Purpose |
+
+  |-----------|---------|
+
+  | FileStore | MEMORY.md + daily journal files (`memory/YYYY-MM-DD.md`) |
+
+  | FileWatcher | Auto-indexes markdown files on filesystem changes |
+
+  | ToolResultCompactor | Caches truncated tool outputs |
+
+  | BaseVectorStore | Interface for vector backends |
+
+  | Vector backends | Local, ChromaDB, Qdrant, Elasticsearch |
+
+  | MemoryHandler | Converts memory objects to VectorNode entries |'
+4_5_memory_schema_objects: '| Schema | Source | Purpose |
+
+  |--------|--------|---------|
+
+  | PersonalMemory | `reme_ai/schema/memory.py:157-172` | User preference memory |
+
+  | TaskMemory | `reme_ai/schema/memory.py:93-104` | Task execution memory |
+
+  | ToolMemory | `reme_ai/schema/memory.py:205-220` | Tool usage memory |'
+4_6_search_retrieval:
+- 'MemorySearch: Hybrid vector + BM25 ranking (`vector_weight` default 0.7)'
+- 'retrieve_memory(): Semantic search with LLM synthesis + time-aware filtering'
+- Per-memory-type retrievers with metadata filtering
+4_7_flow_orchestration: 'Expression-based flows: `>>` (sequential), `|` (parallel).
+
+  Named flows: `retrieve_personal_memory`, `summary_task_memory`, etc.
+
+  BaseOp: Template method pattern for all operations, with lazy-loaded properties.'
+4_8_registry_pattern: 'RegistryFactory: Singleton mapping backends to implementations. Per-type registries: `llms`, `as_llms`,
+  `embedding_models`, `vector_stores`, `file_stores`. Registration via `@R.<registry>.register(name)` decorator.'
+4_9_token_management: '| Component | Purpose |
+
+  |-----------|---------|
+
+  | TokenCounter | Pluggable token counting implementations |
+
+  | rule_token_counter | AgentScope model compatibility |
+
+  | hf_token_counter_utils | Hugging Face tokenizer support |
+
+  | memory_compact_threshold | Triggers compaction when exceeded |
+
+  | max_messages_in_context | Message window retention limit |
+
+  | truncate_text_utils | Automatic token-aware truncation |'
+4_10_file_storage_layout: ".reme/\n  MEMORY.md                  # Long-term facts and insights\n  profile/<user>.json    \
+  \    # Personal memory profiles\nmemory/\n  YYYY-MM-DD.md              # Daily interaction journals (compressed summaries)\n\
+  dialog/\n  YYYY-MM-DD.jsonl           # Raw conversation records (full fidelity, JSONL format)\ntool_result/\n  <uuid>.txt\
+  \                 # Cached/truncated tool outputs (TTL-managed)\n\nTwo-track persistence: `memory/` stores human-readable\
+  \ summarized insights;\n`dialog/` stores full raw JSONL for replay/audit. Messages marked `_MemoryMark.COMPRESSED`\nindicate\
+  \ the summary exists in `memory/`; raw record is in `dialog/`.\n\nMemory mark taxonomy:\n| Mark | Value | Meaning |\n|------|-------|---------|\n\
+  | `_MemoryMark.HINT` | \"hint\" | Temporary contextual guidance injected per step |\n| `_MemoryMark.COMPRESSED` | \"compressed\"\
+  \ | Message replaced by summary; raw in dialog/ |\n\n---"
+5_distributed_architecture_v0_x_actor_model: 'The original paper (2402.14034) described an Actor-based distributed system:
+
+
+  | Component | Purpose |
+
+  |-----------|---------|
+
+  | to_dist() | Convert local agent to distributed agent (single function call) |
+
+  | AgentServerLauncher | Remote machine: receives requests, auto-initializes agents |
+
+  | Placeholder | Novel data structure: allows main process to continue without blocking |
+
+  | RPC | Inter-agent communication protocol |
+
+  | ASDiGraph | DAG representation for multi-agent workflow graphs |
+
+
+  Placeholder mechanism: Preserves information for later value retrieval. Main process
+
+  continues execution; temporary blocking only occurs when actual values are needed for
+
+  decision-making (conditionals).
+
+
+  DAG node types: Model nodes, Service nodes, Agent nodes, Pipeline nodes, Message nodes, Copy nodes.
+
+
+  Execution modes: Direct-run (topological order) or To-Python compiler (DAG -> Python script).
+
+
+  v1.0 replaced this with FastAPI-based Agent-as-a-Service (AgentScope Runtime).
+
+
+  ---'
+6_fault_tolerance: '| Error Type | Resolution |
+
+  |------------|------------|
+
+  | Accessibility errors | Auto-retry with configurable max_retries |
+
+  | Rule-resolvable errors | Rule-based correction without LLM call |
+
+  | Model-resolvable errors | LLM self-critique / pairwise critique |
+
+  | Unresolvable errors | Human-augmented critique |
+
+
+  Customizable handlers: `parse_func`, `fault_handler`, `max_retries` parameters.
+
+  Response parsers: Markdown fenced code blocks, JSON objects, tagged contents.
+
+
+  ---'
+7_unique_chinese_origin_concepts: 'Concepts that originated in AgentScope or have distinct Chinese AI ecosystem context:
+
+
+  | Concept | Description | Unique Aspect |
+
+  |---------|-------------|---------------|
+
+  | DashScope integration | Native Alibaba Cloud LLM API | First-class Qwen model support; all Chinese models via DashScope
+  |
+
+  | Mark system | String labels on messages for categorization | Unique per-message tagging not seen in Western frameworks
+  |
+
+  | Service vs Tool distinction | Services return ServiceResponse; Tools are "processed services" with JSON schema | Explicit
+  separation (most frameworks conflate these) |
+
+  | Placeholder mechanism | Non-blocking data structure for distributed agents | Novel contribution for automatic parallelism
+  |
+
+  | ReMe ("Remember Me, Refine Me") | 4-type memory taxonomy: personal, procedural, tool, working | More granular than Western
+  memory systems (LangChain has 1-2 types) |
+
+  | Group-wise tool management | Tool groups to mitigate "paradox of choice" | Addresses tool overload problem explicitly
+  |
+
+  | Friday | Built-in Studio copilot agent | Meta-agent that helps build agents |
+
+  | Dynamic compression | Real-time semantic extraction during conversations | Distinguished from batch summarization |
+
+  | Hybrid compression | Combining summarization + selective retention | Two-strategy memory compression |
+
+  | ACEBench | Multi-domain evaluation for tool usage + collaboration | Chinese ecosystem-specific benchmark |
+
+  | Tuner module | Model adaptation/finetuning integration | Native finetuning loop inside agent framework |
+
+  | Trinity-RFT | Agentic RL (reinforcement learning from trajectories) | RL integrated directly into agent framework |
+
+  | ASDiGraph | DAG compiler: JSON -> Python script for agent workflows | Visual-to-code compilation |
+
+  | Knowledge Bank | Collection of knowledge containers with weighted fusion | Multi-RAG-object result fusion |
+
+  | ModelScope ecosystem | Integration with Alibaba''s model hub | Chinese model ecosystem bridge |
+
+  | Tongyi (Tongyi Qianwen) | Alibaba''s foundational model family | Deep integration: DashScope API is the native provider
+  |
+
+
+  ---'
+8_cex_kind_mapping: '| AgentScope Concept | CEX Kind | CEX Pillar | Notes |
+
+  |-------------------|----------|------------|-------|
+
+  | AgentBase / ReActAgent | `agent` | P02 | Direct mapping |
+
+  | A2AAgent | `handoff_protocol` | P02/P06 | A2A protocol proxy |
+
+  | Msg | `message_type` | P06 | Universal message container |
+
+  | ContentBlock (TextBlock, ToolUseBlock, etc.) | `type_def` | P06 | Typed message content blocks |
+
+  | SequentialPipeline | `chain` | P03 | Sequential agent composition |
+
+  | FanoutPipeline | `workflow` | P12 | Concurrent fan-out |
+
+  | MsgHub | `workflow_primitive` | P12 | Broadcast orchestration |
+
+  | ChatRoom | `workflow_primitive` | P12 | Realtime voice orchestration |
+
+  | ChatModelBase + providers | `model_provider` | P02 | Multi-provider abstraction |
+
+  | FormatterBase + providers | `formatter` | P05 | Provider-specific formatting |
+
+  | Toolkit / ToolFunction | `toolkit` / `function_def` | P04 | Tool management |
+
+  | MCP integration | `mcp_server` | P04 | MCP client support |
+
+  | InMemoryMemory | `memory_scope` | P10 | Short-term buffer |
+
+  | RedisMemory | `memory_scope` | P10 | Distributed short-term |
+
+  | LongTermMemoryBase / Mem0 | `entity_memory` | P10 | Cross-session persistence |
+
+  | ReMe | `entity_memory` + `memory_summary` | P10 | 4-type memory taxonomy |
+
+  | CompressionConfig / SummarySchema | `memory_summary` | P10 | Memory compression |
+
+  | StateModule / state_dict | `session_state` | P10 | Agent state persistence |
+
+  | JSONSession / RedisSession | `session_state` | P10 | Session storage backends |
+
+  | Hook system (pre/post_reply, etc.) | `hook` | P04/P07 | Non-invasive extensibility |
+
+  | PlanNotebook / Plan / SubTask | `action_prompt` | P03 | Hierarchical task planning |
+
+  | MetaPlannerAgent | `agent` + `workflow` | P02/P12 | Dual-mode planning agent |
+
+  | DeepResearchAgent | `research_pipeline` | P04 | Tree-structured research |
+
+  | BrowserAgent | `browser_tool` | P04 | Web automation |
+
+  | Task / SolutionOutput / MetricBase | `benchmark` / `scoring_rubric` | P07 | Evaluation framework |
+
+  | ACEBench | `benchmark` | P07 | Built-in agent benchmark |
+
+  | KnowledgeBase / VectorStore | `knowledge_index` / `vector_store` | P01/P10 | RAG components |
+
+  | DocumentReader | `document_loader` | P04 | File ingestion |
+
+  | ServiceFactory | `function_def` | P04 | Service-to-tool conversion |
+
+  | AgentApp (Runtime) | `agent_card` | P08 | Agent-as-a-Service deployment |
+
+  | Sandbox types | `code_executor` | P04 | Secure execution environments |
+
+  | @trace decorators | `trace_config` | P07 | OpenTelemetry observability |
+
+  | agentscope.init() | `boot_config` | P02 | Framework initialization |
+
+  | model_configs / agent_configs | `env_config` | P09 | Runtime configuration |
+
+  | Placeholder (v0.x distributed) | `workflow_primitive` | P12 | Non-blocking async data |
+
+  | AgentServerLauncher (v0.x) | `deployment_config` | P08 | Distributed agent server |
+
+  | to_dist() (v0.x) | -- | -- | Local-to-distributed conversion (no CEX equivalent) |
+
+
+  ---'
+9_protocol_support: '| Protocol | Support Level | Implementation |
+
+  |----------|--------------|----------------|
+
+  | A2A (Agent-to-Agent) | Native (Dec 2025) | A2AAgent + A2AChatFormatter |
+
+  | MCP (Model Context Protocol) | Native | HttpStatelessClient, StatefulClientBase, get_callable_function |
+
+  | OpenAI API | Compatible | Response format, tool calling schema |
+
+  | SSE (Server-Sent Events) | Native | AgentApp streaming via /process endpoint |
+
+  | OpenTelemetry | Native | @trace decorators, OTLP export |
+
+  | FastAPI | Native (Runtime) | AgentApp extends FastAPI directly |
+
+
+  ---'
+10_comparison_agentscope_vs_major_frameworks: '| Dimension | AgentScope | LangGraph | CrewAI | AutoGen |
+
+  |-----------|------------|-----------|--------|---------|
+
+  | Message type | `Msg` (typed ContentBlocks) | dict-based | string | dict-based |
+
+  | Multi-agent broadcast | MsgHub (auto) | Manual edges | Implicit crew | GroupChat |
+
+  | Memory compression | Dynamic + Hybrid | Manual | None built-in | None built-in |
+
+  | Tool management | Toolkit + groups | ToolNode | Tool decorator | FunctionMap |
+
+  | State persistence | StateModule (nested) | Checkpointer | None built-in | None built-in |
+
+  | Distributed mode | Actor/Placeholder (v0.x), FastAPI (v1.0) | None | None | None |
+
+  | Formatter abstraction | Per-provider Chat + MultiAgent | None (tied to provider) | None | None |
+
+  | Hook system | 10 hook types, class + instance | Interrupts only | None | None |
+
+  | Planning | PlanNotebook + MetaPlanner | Subgraph | Hierarchical Crew | None built-in |
+
+  | Evaluation | ACEBench + MetricBase + Ray | None built-in | None built-in | None built-in |
+
+  | Voice/Realtime | Native (VoiceAgent, ChatRoom) | None | None | None |
+
+  | Sandbox execution | 7 sandbox types | None | None | Docker only |
+
+
+  ---'
+11_key_architectural_insights: "1. Formatter as first-class concern: AgentScope is the only framework that\n   treats provider-specific\
+  \ message formatting as an explicit, pluggable layer.\n   This is architecturally significant -- it means the same agent\
+  \ code works\n   across providers without modification.\n\n2. Mark-based message filtering: The `mark` system on messages\
+  \ enables\n   fine-grained memory queries without separate index structures. No other\n   major framework has this.\n\n\
+  3. Service vs Tool separation: Explicitly distinguishing raw service functions\n   from LLM-consumable tools (with JSON\
+  \ schema) is a clean architectural boundary\n   that most frameworks blur.\n\n4. ReMe's 4-type memory: Personal + Procedural\
+  \ + Tool + Working memory is\n   the most granular memory taxonomy in any agent framework. Most have at most\n   \"short-term\"\
+  \ and \"long-term\".\n\n5. Non-blocking Placeholder: The v0.x distributed architecture's Placeholder\n   mechanism for automatic\
+  \ parallelism is a genuine novelty -- it allows\n   centralized sequential code to execute with distributed parallelism.\n\
+  \n6. Group-wise tool management: Explicitly addressing \"paradox of choice\"\n   (too many tools degrade LLM performance)\
+  \ via tool groups is a practical\n   insight not found in other frameworks.\n\n7. Dual-mode LTM control: Agent-controlled\
+  \ vs developer-controlled memory\n   access acknowledges that different use cases need different control points.\n\n8. Hook-based\
+  \ extensibility via metaclass: The 10-hook system with class/instance\n   separation and OrderedDict ordering is the most\
+  \ sophisticated hook system\n   in any agent framework.\n\n---"
+12_version_history: '| Version | Date | Key Changes |
+
+  |---------|------|-------------|
+
+  | v0.x | Feb 2024 | Original: Actor-based distribution, RPC, Placeholder, ASDiGraph |
+
+  | v1.0 | Sep 2025 | Major rewrite: async-first, ContentBlock, Formatter abstraction, ReMe, Runtime split |
+
+  | Runtime v1.0 | Dec 2025 | Agent-as-a-Service, sandbox types, A2A protocol, cross-framework compat |
+
+  | Runtime v1.1 | Feb 2026 | FastAPI direct inheritance, Distributed Interrupt Service, async sandboxes, A2A Registry (Nacos)
+  |
+
+
+  ---'
+13_a2a_protocol_deep_dive: 'A2A (Agent-to-Agent) protocol: open standard for cross-framework agent communication. AgentScope
+  added native A2A support in Runtime v1.0 (Dec 2025).'
+13_1_agentcard_schema: 'The AgentCard is the agent''s "business card" -- a JSON file at `/.well-known/agent-card.json`.
+
+
+  | Field | Type | Purpose |
+
+  |-------|------|---------|
+
+  | `name` | string | Agent identifier |
+
+  | `url` | string | RPC service endpoint |
+
+  | `description` | string | Agent purpose/behavior |
+
+  | `version` | string | Release version |
+
+  | `capabilities` | object | Feature support configuration |
+
+  | `default_input_modes` | array | Accepted formats (e.g., "text/plain") |
+
+  | `default_output_modes` | array | Response formats |
+
+  | `skills` | array | Available agent capability list |'
+13_2_a2achatformatter: '`A2AChatFormatter` handles bidirectional protocol conversion:
+
+  - AgentScope `Msg` -> A2A `Message` format (for sending to remote agents)
+
+  - A2A `Message` -> `Msg` format (for receiving from remote agents)
+
+  - A2A `Task` responses -> `Msg` (for task-oriented interactions)
+
+  - Multimodal content: text, images, audio, video passthrough
+
+
+  Distinction from standard formatters: Unlike provider-specific formatters
+
+  (OpenAI/Anthropic/etc.), A2AChatFormatter handles protocol-level serialization
+
+  to the JSON-RPC A2A wire format, not LLM API format.'
+13_3_a2aagent_implementation: 'agent = A2AAgent(agent_card=agent_card)
+
+
+  Supported patterns:
+
+  1. Chatbot scenario: Direct conversation with remote A2A agent
+
+  2. Tool function: Encapsulate A2AAgent as a tool in Toolkit for handoff/router patterns
+
+
+  Behavior note: `observe()` calls store messages locally and send them together during `reply()`.
+
+  This batching differs from local agents where `observe()` and `reply()` are independent.'
+13_4_card_resolver_classes: '| Class | Backend | Purpose |
+
+  |-------|---------|---------|
+
+  | FileAgentCardResolver | Local JSON file | Load AgentCard from filesystem |
+
+  | WellKnownAgentCardResolver | HTTP fetch | Fetch from `/.well-known/agent-card.json` at remote URL |
+
+  | NacosAgentCardResolver | Nacos v3.1.0+ | Retrieve from Nacos Agent Registry |
+
+  | AgentCardResolverBase | Abstract | Base class for custom resolvers |'
+13_5_protocol_flow: "User message\n    |\n    v\nA2AAgent.reply()\n    |-- Batch observed messages + new message\n    |--\
+  \ A2AChatFormatter: Msg list -> A2A JSON-RPC Message\n    |-- HTTP/SSE call to remote agent's /process endpoint\n    |\n\
+  \    v\nRemote Agent (any A2A-compliant framework)\n    |-- Processes A2A Message\n    |-- Returns A2A Task response via\
+  \ SSE\n    |\n    v\nA2AChatFormatter: A2A Task response -> Msg\n    |\n    v\nReturn to local pipeline"
+13_6_a2a_vs_mcp_positioning: '| Dimension | A2A | MCP |
+
+  |-----------|-----|-----|
+
+  | Target | Agent-to-Agent (peer interaction) | Model-to-Context (tool/data access) |
+
+  | Protocol | JSON-RPC over HTTP/SSE | JSON-RPC over stdio/HTTP |
+
+  | Discovery | AgentCard at .well-known/ | Tool schema from server |
+
+  | Direction | Bidirectional (both sides are agents) | Unidirectional (model calls server) |
+
+  | AgentScope support | A2AAgent + A2AChatFormatter | HttpStatelessClient + StatefulClientBase |
+
+
+  ---'
+14_sources:
+- 'GitHub: agentscope-ai/agentscope'
+- 'GitHub: agentscope-ai/agentscope-runtime'
+- 'GitHub: agentscope-ai/ReMe'
+- 'Paper: AgentScope v0.x (arXiv:2402.14034)'
+- 'Paper: AgentScope 1.0 (arXiv:2508.16279)'
+- 'Paper: ACEBench (arXiv:2501.12851)'
+- 'Docs: doc.agentscope.io'
+- 'Docs: docs.agentscope.io'
+- 'Runtime docs: runtime.agentscope.io'
+- 'DeepWiki: agentscope-ai/agentscope'
+- 'DeepWiki: agentscope-ai/ReMe'
+- 'ReMe docs: reme.agentscope.io'
+- 'MarkTechPost: Production AgentScope Workflows'
+- 'Alibaba Cloud Blog: Upgraded AgentScope'

@@ -12,9 +12,11 @@ sources:
   - "https://github.com/agentscope-ai/agentscope"
   - "https://arxiv.org/abs/2402.14034"
   - "https://arxiv.org/html/2508.16279v1"
+  - "https://arxiv.org/abs/2501.12851"
   - "https://doc.agentscope.io/"
   - "https://docs.agentscope.io/"
   - "https://github.com/agentscope-ai/agentscope-runtime"
+  - "https://runtime.agentscope.io/"
   - "https://github.com/agentscope-ai/ReMe"
   - "https://deepwiki.com/agentscope-ai/agentscope"
 ---
