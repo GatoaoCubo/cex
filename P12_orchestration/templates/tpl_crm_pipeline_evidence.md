@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "CRM Pipeline Evidence — Mission Report Template"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/N07_admin/output/output_crm_pipeline_evidence.md
@@ -12,6 +12,7 @@ variables: [BRAND_NAME, PIPELINE_NAME, BATCHES, FINAL_STATS, CITIES, TARGET_COUN
 density_score: 0.95
 tags: [template, pipeline-evidence, mission-report, crm, consolidation, instance-extraction]
 tldr: "Mission completion evidence report — batch status, final stats, distribution, pipeline architecture lessons."
+updated: "2026-04-13"
 ---
 
 # {{PIPELINE_NAME}} — Pipeline Evidence
