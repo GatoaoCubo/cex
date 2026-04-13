@@ -3,11 +3,12 @@ id: token_efficiency_gap_map
 kind: knowledge_card
 title: Token Efficiency Gap Map -- CEX Cost Optimization Playbook
 version: 1.0.0
-quality: 8.8
+quality: 9.0
 pillar: P01
 created: 2026-04-12
 tags: [efficiency, cost, tokens, optimization, tiered-execution, python-first]
 nucleus: N01
+density_score: 1.0
 ---
 
 # Token Efficiency Gap Map
