@@ -6,138 +6,62 @@ quality: 9.2
 pillar: P01
 density_score: 0.95
 updated: '2026-04-13'
-core_integration_options: "| Flag           | Purpose                          | Usage Scenario                          |\
-  \ Example Command                          | Notes                                  |\n|----------------|----------------------------------|-----------------------------------------|------------------------------------------|----------------------------------------|\n\
-  | `--file`       | Single-file editing              | Code refinement, quick fixes            | `aider --file src/main.py`\
-  \               | Maintains context-aware suggestions    |\n| `--read`       | Read-only analysis               | Code review,\
-  \ documentation generation   | `aider --read README.md`                 | No file modifications allowed          |\n| `--yes-always`\
-  \ | Full autonomy for repetitive tasks | Bulk refactoring, formatting            | `aider --yes-always --file *.py`    \
-  \     | Overrides safety checks                |\n| `--subtree-only` | Focus on specific directories  | Large repo navigation\
-  \                   | `aider --subtree-only src/services/`     | Limits processing to subdirectory      |\n| `--model` \
-  \     | Model parameter override         | Custom model configurations             | `aider --model gpt-4 --file test.py`\
-  \     | Takes precedence over Modelfile        |\n\nKey Use Cases  \n- `--file` is optimal for isolated code changes (e.g.,\
-  \ fixing a single bug)  \n- `--yes-always` reduces friction in CI/CD pipelines requiring bulk formatting  \n- `--subtree-only`\
-  \ improves performance in monorepos with 1000+ files"
-git_integration: "--auto-commits  \nEnables semantic commit generation with AI-curated messages. Supports:  \n- Conventional\
-  \ Commit format (feat, fix, docs)  \n- Automatic branch naming (`feature/username/commit-summary`)  \n- Commit history pruning\
-  \ (via `--prune-commits` flag)  \n\n--commit-language  \nLanguage-specific commit message generation:  \n| Language | Example\
-  \ Commit Message                          |  \n|---------|-------------------------------------------------|  \n| English\
-  \ | `feat: add user authentication flow`            |  \n| Spanish | `feat: agregar flujo de autenticación de usuario` |\
-  \  \n| Portuguese | `feat: adicionar fluxo de autenticação de usuário` |  \n\nAdvanced Configuration  \n- `--commit-template`:\
-  \ Custom template for commit messages  \n- `--signoff`: Adds `Signed-off-by` line for DCO compliance"
-modelfile_customization: "Parameter Configuration  \n| Parameter         | Default Value | Description                   \
-  \           | Example Use Case                     |  \n|-------------------|---------------|------------------------------------------|--------------------------------------|\
-  \  \n| `max_tokens`      | 2048          | Controls response length                 | Increase for complex code generation\
-  \ |  \n| `temperature`     | 0.7           | Creativity control (0.0-1.0)           | Lower for deterministic output   \
-  \    |  \n| `safety_checks`   | enabled       | Enables content filtering                | Disable for experimental workflows\
-  \   |  \n| `prompt_template` | default       | Custom prompt structure                  | Tailor for domain-specific tasks\
-  \     |  \n\nBest Practices  \n- Store `Modelfile` in `.aider/` directory for project-wide consistency  \n- Use `--model`\
-  \ flag to override settings during ad-hoc sessions  \n- Lock model versions with `model_version: \"gpt-4.0\"` for reproducibility"
-boundary: This artifact represents distilled, versioned knowledge about Aider CLI integration strategies. It is NOT a configuration
-  template, executable script, or instructional guide. Focuses on static patterns, not dynamic workflows.
-8f_pipeline_function: "Primary function: INJECT  \nInjects AI-generated code changes into the development pipeline with: \
-  \ \n- Context-aware suggestions (via `--file`)  \n- Automated commit generation (`--auto-commits`)  \n- Model parameter\
-  \ customization (via `Modelfile`)  \n\nPipeline Stages  \n1. Input: Code file or directory  \n2. Processing: AI analysis\
-  \ with context  \n3. Output: Proposed changes with commit message  \n4. Validation: Safety checks and user confirmation\
-  \  \n5. Commit: Automatic version control update  \n6. Feedback: Performance metrics logging  \n7. Iteration: Loop for refinement"
+core_integration_options: "| Flag          | Purpose                                  | Autonomy Level | Typical Use Case\
+  \                     | Example Command                          |\n|---------------|------------------------------------------|----------------|--------------------------------------|------------------------------------------|\n\
+  | `--file`      | Single-file editing with context         | Low            | Code review, quick fixes             | `aider\
+  \ --file src/main.py`             |\n| `--read`      | Read-only analysis                       | None           | Security\
+  \ audits, documentation       | `aider --read --file README.md`        |\n| `--yes-always`| Full autonomy for repetitive\
+  \ tasks       | High           | Refactoring, formatting              | `aider --yes-always --file utils.py`   |\n| `--subtree-only`\
+  \ | Focus on specific subdirectories     | Medium         | Large repo maintenance               | `aider --subtree-only\
+  \ --file docs/`    |\n\nKey Considerations:  \n- `--file` is optimal for isolated changes but lacks context beyond the file.\
+  \  \n- `--yes-always` requires strict validation to prevent unintended modifications.  \n- `--subtree-only` reduces computational\
+  \ load in monorepos but may miss cross-file dependencies."
+git_integration: "| Feature             | Description                                  | Language Support | Default Behavior\
+  \                     | Configuration Example                  |\n|--------------------|----------------------------------------------|------------------|--------------------------------------|----------------------------------------|\n\
+  | `--auto-commits`   | Enables semantic commit messages             | 15+ languages    | English (en)                  \
+  \       | `--auto-commits --commit-language pt`  |\n| `--commit-language`| Sets commit message language                \
+  \ | 15+ languages    | Auto-detected from repo              | `--commit-language en`                 |\n| `--branch`   \
+  \      | Specifies target branch for commits          | N/A              | Current branch                       | `--branch\
+  \ feature/new-ui`              |\n| `--dry-run`        | Simulates commits without modifying history  | N/A            \
+  \  | Disabled by default                  | `--dry-run --auto-commits`             |\n\nBest Practices:  \n- Use `--auto-commits`\
+  \ with `--commit-language` for multilingual teams.  \n- Combine `--dry-run` with `--yes-always` to validate complex workflows.\
+  \  \n- Avoid `--auto-commits` on production branches without explicit approval."
+modelfile_customization: "model:\n  name: \"gpt-4o\"\n  temperature: 0.7\n  max_tokens: 1500\n  safety: \"strict\"\n  prompt_template:\
+  \ \"You are a code reviewer. Analyze {file} and suggest improvements.\"\n\nConfiguration Parameters:  \n- `temperature`:\
+  \ Controls creativity (0.0-1.0). Lower values = deterministic.  \n- `max_tokens`: Limits response length (min 500, max 4000).\
+  \  \n- `safety`: Enforces content policies (strict/medium/none).  \n- `prompt_template`: Customizes model behavior per use\
+  \ case.  \n\nUse Cases:  \n- `temperature: 0.2` for code generation requiring consistency.  \n- `max_tokens: 2000` for complex\
+  \ refactoring tasks.  \n- `safety: medium` for internal tools with relaxed policies."
+8f_pipeline_function: "Primary Function: INJECT  \nInjects model-generated content into the codebase via CLI, Git, or API.\
+  \  \nSecondary Functions:  \n- VALIDATE: Checks code against Modelfile constraints.  \n- TRANSFORM: Applies formatting rules\
+  \ defined in the project.  \n- PUBLISH: Deploys changes to staging environments.  \n\nPipeline Flow:  \n1. User initiates\
+  \ command (e.g., `aider --file src/app.py`).  \n2. Model generates suggestions based on Modelfile parameters.  \n3. Changes\
+  \ are validated against safety and token limits.  \n4. Approved changes are injected into the working directory.  \n5. Auto-commits\
+  \ trigger if enabled."
+boundary: This artifact is a distilled, versioned knowledge card. It is NOT a configuration template, instruction manual,
+  or executable code. It provides static guidance for CLI integration patterns.
 related_kinds:
-- 'integration_pattern: Defines reusable workflows for CLI tools'
-- 'git_workflow: Describes version control strategies with AI integration'
-- 'model_configuration: Specifies AI model parameters and tuning'
-- 'cli_tool: Represents command-line interface implementations'
-- 'code_refactoring: Focuses on automated code improvement techniques'
-performance_metrics: "| Metric               | Baseline | Optimized | Improvement |  \n|----------------------|----------|-----------|-------------|\
-  \  \n| Commit accuracy      | 82%      | 94%       | +15%        |  \n| Processing speed     | 1.2s     | 0.8s      | -33%\
-  \        |  \n| Safety check passes  | 78%      | 91%       | +17%        |  \n| User satisfaction    | 7.2/10   | 8.9/10\
-  \    | +24%        |  \n| Error rate           | 12%      | 5%        | -58%        |  \n\nOptimization Techniques  \n-\
-  \ Model fine-tuning for domain-specific code  \n- Cache-optimized context loading  \n- Parallelized commit generation"
-use_case_comparisons: "| Scenario                | `--file` Mode                  | `--subtree-only` Mode           | `--yes-always`\
-  \ Mode             |  \n|-------------------------|--------------------------------|----------------------------------|----------------------------------|\
-  \  \n| Small codebase          | Optimal (100% efficiency)      | Overkill (resource waste)        | Risky (no safety checks)\
-  \         |  \n| Monorepo navigation     | Inefficient (context overload) | Optimal (focused processing)     | Not recommended\
-  \                  |  \n| CI/CD pipeline          | Limited (manual confirmation)  | Limited (directory focus)        |\
-  \ Optimal (automated workflow)     |  \n| Code review             | Not applicable                 | Not applicable    \
-  \               | Not applicable                   |  \n| Bulk refactoring        | Not recommended                | Not\
-  \ recommended                  | Optimal (autonomous execution)   |  \n\nPerformance Benchmarks  \n- `--file` mode: 1.5x\
-  \ faster than `--subtree-only` for single files  \n- `--yes-always` reduces manual intervention by 80% in CI/CD  \n- `--auto-commits`\
-  \ improves commit message quality by 35%"
-advanced_topics: "Security Considerations  \n- `--yes-always` should be disabled in production environments  \n- Use `--commit-language`\
-  \ with caution for multilingual teams  \n- Regularly audit `Modelfile` configurations for drift  \n\nScalability Patterns\
-  \  \n- Clustered execution for large repositories  \n- Model version pinning for reproducible pipelines  \n- Distributed\
-  \ commit generation across branches  \n\nLimitations  \n- Does not support real-time collaboration  \n- Limited to text-based\
-  \ code analysis  \n- Requires manual intervention for complex refactorings  \n\nFuture Enhancements  \n- Integration with\
-  \ code review tools (e.g., GitHub PRs)  \n- Support for binary file analysis  \n- AI-assisted documentation generation \
-  \ \n\nComparative Analysis  \n\n| Feature                | Aider CLI                          | Traditional IDEs       \
-  \            | Static Analysis Tools            |  \n|------------------------|------------------------------------|------------------------------------|----------------------------------|\
-  \  \n| Real-time suggestions  | Yes (via `--file`)                 | Yes                                | No           \
-  \                    |  \n| Commit automation      | Yes (`--auto-commits`)           | No                             \
-  \    | No                               |  \n| Model customization    | Yes (`Modelfile`)                | No          \
-  \                       | No                               |  \n| Safety checks          | Yes (configurable)          \
-  \     | Yes                                | Yes                              |  \n| Performance            | 1.2s avg processing\
-  \ time         | 2.5s avg processing time         | 0.5s avg processing time         |  \n\nAdoption Trends  \n- 68% of\
-  \ DevOps teams use `--auto-commits` for CI/CD  \n- 42% of developers configure `Modelfile` for model tuning  \n- 29% of\
-  \ organizations use `--subtree-only` for monorepo management  \n\nBest Practice Checklist  \n- [ ] Use `--file` for isolated\
-  \ code changes  \n- [ ] Enable `--auto-commits` in CI/CD pipelines  \n- [ ] Lock model versions in `Modelfile`  \n- [ ]\
-  \ Disable `--yes-always` in production  \n- [ ] Regularly audit commit history for quality  \n\nError Handling  \n- `--file`\
-  \ mode fails gracefully on syntax errors  \n- `--auto-commits` rolls back on invalid messages  \n- `Modelfile` errors trigger\
-  \ fallback configurations  \n\nCommunity Feedback  \n- 78% of users request more customization options  \n- 65% want improved\
-  \ error reporting  \n- 52% suggest better integration with CI/CD tools  \n\nImplementation Examples  \n- `Modelfile` snippet\
-  \ for Python projects:  \n  model: gpt-4\n  max_tokens: 3000\n  safety_checks: enabled\n  prompt_template: \"Please generate\
-  \ {language} code for {task}\"\n- Git integration workflow:  \n  aider --auto-commits --commit-language=pt --file src/main.py\n\
-  \nPerformance Optimization  \n- Use `--subtree-only` for large repositories (reduces memory usage by 40%)  \n- Enable `--yes-always`\
-  \ only in controlled environments  \n- Cache frequently used model configurations  \n\nLimitations and Workarounds  \n-\
-  \ Cannot handle binary files: Use external tools for preprocessing  \n- Limited to text-based analysis: Combine with static\
-  \ analysis tools  \n- No real-time collaboration: Use in conjunction with code review platforms  \n\nVersioning Strategy\
-  \  \n- Track `Modelfile` changes in version control  \n- Use semantic versioning for integration patterns  \n- Lock dependencies\
-  \ for reproducible pipelines  \n\nSummary Table  \n\n| Aspect               | Description                              \
-  \        | Example                                  |  \n|----------------------|--------------------------------------------------|------------------------------------------|\
-  \  \n| Primary Function     | Code injection with AI assistance                | `aider --file src/main.py`            \
-  \   |  \n| Key Feature          | Semantic commit generation                       | `--auto-commits`                  \
-  \       |  \n| Configuration        | Model parameter tuning                           | `Modelfile`                   \
-  \           |  \n| Optimization         | Performance improvements via subtree focus       | `--subtree-only`          \
-  \               |  \n| Limitation           | No real-time collaboration                       | Use with code review tools\
-  \               |  \n| Best Practice        | Lock model versions for reproducibility          | `model_version: \"gpt-4.0\"\
-  `               |  \n\nFuture Roadmap  \n- Enhanced collaboration features  \n- Binary file support  \n- Integration with\
-  \ cloud-based IDEs  \n- AI-assisted documentation generation  \n- Real-time code analysis dashboards  \n\nCommunity Resources\
-  \  \n- GitHub repository: https://github.com/aider-cli  \n- Documentation: https://aider-cli.readthedocs.io  \n- Forums:\
-  \ https://community.aider-cli.org  \n\nPerformance Benchmarks  \n- `--file` mode: 1.2s avg processing time  \n- `--auto-commits`:\
-  \ 0.8s avg commit generation  \n- `Modelfile` configuration: 0.3s avg load time  \n- `--subtree-only`: 1.5s avg processing\
-  \ time  \n- `--yes-always`: 2.0s avg execution time  \n\nError Handling Best Practices  \n- Use `--file` for isolated changes\
-  \ to avoid cascading errors  \n- Enable safety checks in production environments  \n- Regularly audit `Modelfile` configurations\
-  \ for drift  \n- Use `--commit-language` with caution for multilingual teams  \n- Implement fallback configurations for\
-  \ critical workflows  \n\nAdoption Statistics  \n- 68% of DevOps teams use `--auto-commits`  \n- 42% of developers configure\
-  \ `Modelfile`  \n- 29% of organizations use `--subtree-only`  \n- 15% of teams use `--yes-always` in CI/CD  \n- 8% of users\
-  \ request more customization options  \n\nComparative Analysis Table  \n\n| Feature                | Aider CLI         \
-  \                 | Traditional IDEs                   | Static Analysis Tools            |  \n|------------------------|------------------------------------|------------------------------------|----------------------------------|\
-  \  \n| Real-time suggestions  | Yes (via `--file`)                 | Yes                                | No           \
-  \                    |  \n| Commit automation      | Yes (`--auto-commits`)           | No                             \
-  \    | No                               |  \n| Model customization    | Yes (`Modelfile`)                | No          \
-  \                       | No                               |  \n| Safety checks          | Yes (configurable)          \
-  \     | Yes                                | Yes                              |  \n| Performance            | 1.2s avg processing\
-  \ time         | 2.5s avg processing time         | 0.5s avg processing time         |  \n\nCommunity Feedback Summary \
-  \ \n- 78% of users request more customization options  \n- 65% want improved error reporting  \n- 52% suggest better integration\
-  \ with CI/CD tools  \n- 42% of developers want more model tuning options  \n- 29% of organizations want better monorepo\
-  \ support  \n\nImplementation Checklist  \n- [ ] Use `--file` for isolated code changes  \n- [ ] Enable `--auto-commits`\
-  \ in CI/CD pipelines  \n- [ ] Lock model versions in `Modelfile`  \n- [ ] Disable `--yes-always` in production  \n- [ ]\
-  \ Regularly audit commit history for quality  \n- [ ] Use `--subtree-only` for large repositories  \n- [ ] Implement fallback\
-  \ configurations for critical workflows  \n- [ ] Enable safety checks in production environments  \n- [ ] Regularly audit\
-  \ `Modelfile` configurations for drift  \n- [ ] Use `--commit-language` with caution for multilingual teams  \n\nPerformance\
-  \ Optimization Checklist  \n- [ ] Use `--subtree-only` for large repositories  \n- [ ] Enable `--yes-always` only in controlled\
-  \ environments  \n- [ ] Cache frequently used model configurations  \n- [ ] Lock model versions for reproducibility  \n\
-  - [ ] Regularly audit `Modelfile` configurations for drift  \n- [ ] Use `--file` for isolated changes to avoid cascading\
-  \ errors  \n- [ ] Implement fallback configurations for critical workflows  \n- [ ] Enable safety checks in production environments\
-  \  \n- [ ] Use `--commit-language` with caution for multilingual teams  \n- [ ] Regularly audit commit history for quality\
-  \  \n\nSummary  \nThis artifact provides a comprehensive overview of Aider CLI integration strategies, including performance\
-  \ metrics, use case comparisons, and best practices. It focuses on static patterns and is not a configuration template or\
-  \ instructional guide. Key features include semantic commit generation, model parameter tuning, and performance optimization\
-  \ techniques. Limitations include the lack of real-time collaboration and support for binary files. Future enhancements\
-  \ include improved error reporting, better integration with CI/CD tools, and enhanced collaboration features. Community\
-  \ feedback highlights the need for more customization options and better integration with existing development tools. Implementation\
-  \ best practices emphasize the use of `--file` for isolated changes, `--auto-commits` in CI/CD pipelines, and `Modelfile`\
-  \ configuration for model tuning. Performance optimization techniques include the use of `--subtree-only` for large repositories\
-  \ and caching of frequently used model configurations. Error handling best practices recommend enabling safety checks in\
-  \ production environments and implementing fallback configurations for critical workflows. Adoption statistics show that\
-  \ 68% of DevOps teams use `--auto-commits`, 42% of developers configure `Modelfile`, and 29% of organizations use `--subtree-only`.\
-  \ Comparative analysis highlights the advantages of Aider CLI over traditional IDEs and static analysis tools in terms of\
-  \ real-time suggestions, commit automation, and model customization. Community resources include the GitHub repository,\
-  \ documentation, and forums for further information and support."
+- 'knowledge_card: Shares structured, versioned knowledge (this artifact).'
+- 'configuration_template: Defines Modelfile parameters for model behavior.'
+- 'pipeline_spec: Describes 8F Pipeline stages (INJECT, VALIDATE, etc.).'
+- 'integration_guide: Documents broader CLI tooling workflows.'
+- 'model_definition: Specifies model capabilities and constraints.'
+advanced_use_cases: '| Scenario                          | Integration Pattern        | Required Flags               | Outcome                                  |
+  Example                                  |
+
+  |----------------------------------|----------------------------|------------------------------|------------------------------------------|------------------------------------------|
+
+  | Refactoring legacy code          | `--yes-always` + `--file`  | `--yes-always --file legacy.js` | Fully automated refactoring              |
+  Replaces `console.log` with logging lib  |
+
+  | Multilingual commit messages     | `--auto-commits` + `--commit-language` | `--auto-commits --commit-language pt` | Portuguese
+  commit messages               | `feat: adicionar novo componente`        |
+
+  | Subtree maintenance in monorepos | `--subtree-only` + `--branch` | `--subtree-only --branch feature/ui` | Isolated changes
+  in `ui/` directory      | Updates only `ui/` without touching core |
+
+  | Dry-run validation               | `--dry-run` + `--yes-always` | `--dry-run --yes-always --file test.py` | Simulates
+  full execution without changes | Shows potential conflicts                |
+
+  | Custom prompt injection          | `--model` + `--prompt-template` | `--model gpt-4o --prompt-template "You are a security
+  auditor"` | Tailored model behavior                  | Analyzes code for vulnerabilities        |'
