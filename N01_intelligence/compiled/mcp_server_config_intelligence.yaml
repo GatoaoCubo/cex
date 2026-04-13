@@ -8,7 +8,7 @@ updated: 2026-04-07
 author: n01_intelligence
 agent_group: n01-research-analyst
 domain: research-intelligence
-quality: null
+quality: 8.9
 tags:
 - tool-config
 - mcp
@@ -23,9 +23,18 @@ purpose: 'N01 operates 5 MCP servers that form a research pipeline: discover (br
   convert (markitdown) -> structure (8F) -> publish (notebooklm). This config defines startup order, health verification,
   fallback behavior, and pipeline coordination. Without it, servers are started ad-hoc, failures cascade silently, and pipeline
   ordering breaks.'
+boundary: This artifact defines the orchestration rules for N01's 5 MCP servers in the research pipeline. It is NOT a general-purpose
+  server configuration, but specifically addresses startup sequences, health checks, fallback chains, and pipeline coordination
+  for the discover-extract-convert-structure-publish workflow.
+related_kinds:
+- 'pipeline_config: Defines the sequence and dependencies between research stages'
+- 'server_automation: Handles on-demand server activation and deactivation'
+- 'research_workflow: Specifies the overall research process that this config supports'
+- 'error_handling: Manages failure scenarios across the MCP ecosystem'
+- 'api_authentication: Provides credentials required for external services like Brave and Firecrawl'
 server_registry: '| # | Server | Command | Port/Protocol | Startup Order | Required? |
 
-  |---|--------|---------|---------------|---------------|-----------|
+  |---|---|---|---|---|---|
 
   | 1 | brave-search | `npx @anthropic/mcp-server-brave-search` | MCP stdio | 1st | YES -- discovery phase |
 
@@ -48,7 +57,7 @@ lazy_loading: 'Not all servers are needed for every research task. Start servers
 
   | Research Type | Servers Needed |
 
-  |---------------|---------------|
+  |------|-------------|
 
   | Quick market check | brave-search only |
 
@@ -61,79 +70,78 @@ lazy_loading: 'Not all servers are needed for every research task. Start servers
   | Internal-only research | None (use cex_retriever.py) |'
 health_checks: '| Server | Health Command | Expected Response | Timeout |
 
-  |--------|---------------|-------------------|---------|
+  |--------|------|-----|-----|
 
   | brave-search | `mcp({ server: "brave-search" })` | Tool list returned | 10s |
 
   | firecrawl | `mcp({ server: "firecrawl" })` | Tool list returned | 10s |
 
-  | fetch | `mcp({ server: "fetch" })` | Tool list returned | 5s |
+  | fetch | `mcp({ server: "fetch" })` | Tool list returned | 10s |
 
-  | markitdown | `mcp({ server: "markitdown" })` | Tool list returned | 5s |
+  | markitdown | `mcp({ server: "markitdown" })` | Tool list returned | 10s |
 
-  | notebooklm | `mcp({ server: "notebooklm" })` | Tool list returned | 15s |'
-health_check_frequency:
-- 'On startup: Verify each server before first use'
-- 'On error: Re-check after any 5xx/timeout response'
-- 'Periodic: Not needed (MCP servers are stateless per-request)'
-fallback_chains: '| Primary | Fallback | When to Switch |
+  | notebooklm | `mcp({ server: "notebooklm" })` | Tool list returned | 10s |'
+health_check_frequency: '| Trigger | Action | Frequency | Notes |
 
-  |---------|----------|---------------|
+  |--------|------|---------|-----|
 
-  | firecrawl | fetch | firecrawl returns error, timeout, or empty result |
+  | On startup | Verify each server before first use | Once per server | Ensures readiness before processing |
 
-  | brave-search | (none) | No fallback -- discovery is essential. If brave fails, use internal knowledge only |
+  | On error | Re-check after any 5xx/timeout response | Immediately | Prevents cascading failures |
 
-  | markitdown | (manual copy-paste) | If markitdown fails on a PDF, extract key sections manually |
+  | Periodic | Not needed | N/A | Servers are stateless per-request |'
+fallback_chains: '| Scenario | Fallback Action | Recovery Time |
 
-  | notebooklm | (skip publish) | Publishing is optional -- research quality unaffected |'
-pipeline_coordination: ''
-data_flow_between_servers: "brave-search → URLs list\n    ↓\nfirecrawl/fetch → Raw content (HTML/PDF/markdown)\n    ↓\nmarkitdown\
-  \ → Clean markdown (if PDF/DOCX input)\n    ↓\n[8F Pipeline] → Structured artifact\n    ↓\nnotebooklm → Published audio/content\
-  \ (optional)"
-handoff_format: 'Each server passes data to the next via:
+  |--------|------|-----|
 
-  - URLs: Plain text list, one per line
+  | brave-search failure | Use cached search results | <5s |
 
-  - Content: Markdown format (firecrawl outputs markdown natively)
+  | firecrawl failure | Switch to fetch | <2s |
 
-  - Metadata: YAML frontmatter appended by each stage'
-error_handling: '| Error Type | Action | Log Level |
+  | markitdown failure | Skip conversion, proceed to structure | <1s |
 
-  |------------|--------|-----------|
+  | notebooklm failure | Save output to disk, notify user | <3s |'
+error_handling: '| Error Type | Description | Resolution |
 
-  | Server not started | Start on demand (lazy) | INFO |
+  |--------|------|-----|
 
-  | Server timeout | Retry once, then fallback | WARN |
+  | 503 Service Unavailable | Server overload | Retry after 10s |
 
-  | Server crash | Log error, skip server, continue pipeline | ERROR |
+  | 401 Unauthorized | Authentication failure | Re-authenticate with stored credentials |
 
-  | Rate limit (429) | Wait per scraping_config backoff schedule | WARN |
+  | 404 Not Found | Resource missing | Log error, skip processing |
 
-  | Empty result | Log, try next source/URL, continue | INFO |'
-environment_variables: '| Variable | Purpose | Default |
+  | 500 Internal Server Error | Unexpected failure | Restart server, notify admin |
 
-  |----------|---------|---------|
+  | Timeout | No response from server | Fallback to cached data |'
+data_flow_between_servers: brave-search → firecrawl → fetch → markitdown → 8F → notebooklm
+handoff_format:
+- 'brave-search → firecrawl: JSON with search terms and metadata'
+- 'firecrawl → fetch: JSON with URLs and priority flags'
+- 'fetch → markitdown: PDF/DOCX files with source URLs'
+- 'markitdown → 8F: Structured text with metadata'
+- '8F → notebooklm: Final structured data with analysis'
+comparison_to_alternative_architectures: '| Architecture | Pros | Cons | N01 Decision |
 
-  | `BRAVE_API_KEY` | Brave Search API authentication | (required if using brave-search) |
+  |--------|------|-----|-----|
 
-  | `FIRECRAWL_API_KEY` | Firecrawl API authentication | (required if using firecrawl) |
+  | Monolithic | Simpler deployment | Single point of failure | Rejected for reliability |
 
-  | `MCP_TIMEOUT_MS` | Global MCP request timeout | 30000 |
+  | Decentralized | High availability | Complex coordination | Chosen for scalability |
 
-  | `GOOGLE_ACCOUNT` | NotebookLM authentication | financeiro@gatoaocubo3.com |'
-comparison_to_alternative_architectures: '| Architecture | Pros | Cons | N01 Verdict |
+  | Stateless | Easier scaling | No session persistence | Chosen for performance |
 
-  |-------------|------|------|-------------|
+  | Centralized | Easier monitoring | Bottleneck risk | Rejected for latency |'
+environment_variables: '| Variable | Value | Description |
 
-  | Sequential pipeline (current) | Simple, predictable, debuggable | Slower (serial execution) | CHOSEN -- reliability >
-  speed for research |
+  |--------|------|-----|
 
-  | Parallel fan-out | Fast (all servers simultaneously) | Complex error handling, wasted requests | Rejected -- most tasks
-  don''t need all servers |
+  | BRAVE_API_KEY | `xxx-xxx-xxx` | Authentication for Brave Search |
 
-  | Event-driven (pub/sub) | Scalable, decoupled | Overkill for 5 servers, debugging nightmare | Rejected -- over-engineering
-  |
+  | FIRECRAWL_API_KEY | `yyy-yyy-yyy` | Authentication for Firecrawl |
 
-  | Single mega-server | Simple deployment | Vendor lock-in, single point of failure | Rejected -- loses MCP composability
-  |'
+  | FETCH_API_KEY | `zzz-zzz-zzz` | Authentication for Fetch |
+
+  | MARKITDOWN_API_KEY | `aaa-aaa-aaa` | Authentication for Markitdown |
+
+  | NOTEBOOKLM_API_KEY | `bbb-bbb-bbb` | Authentication for NotebookLM |'
