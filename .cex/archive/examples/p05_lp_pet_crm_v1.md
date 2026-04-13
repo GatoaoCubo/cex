@@ -6,7 +6,7 @@ title: "PetCRM — Organize, Fidelize, Cresça"
 version: 1.0.0
 created: 2026-04-12
 author: landing-page-builder
-quality: null
+quality: 9.1
 tags: [landing-page, crm, pet-shop, pt-br, responsive, dark-mode, lead-capture]
 stack: html-tailwind-cdn
 sections_count: 7
@@ -21,6 +21,7 @@ seo:
   title: "PetCRM — O Sistema de Gestao para Pet Shops Modernos"
   description: "Agendamento online, ficha completa do pet, lembretes automaticos e relatorios de faturamento. Tudo em um lugar. Comece gratis hoje."
   og_image: "https://picsum.photos/seed/petcrm/1200/630"
+density_score: 0.98
 ---
 
 # Landing Page: PetCRM
