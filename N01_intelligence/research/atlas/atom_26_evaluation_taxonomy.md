@@ -4,7 +4,7 @@ kind: knowledge_card
 type: research_atom
 pillar: P01
 title: "LLM Evaluation & Benchmark Taxonomy -- Complete Vocabulary Atlas"
-version: 1.1.0
+version: 2.0.0
 created: 2026-04-13
 updated: 2026-04-13T14:45:00
 author: n01_intelligence
@@ -1117,3 +1117,219 @@ For CEX's 32-atom Atlas: budget ~4 hours for full DeepResearchEval sweep.
 - [DeepResearchEval: Automated Framework for Deep Research Task Evaluation](https://arxiv.org/abs/2601.09688)
 - [Demystifying Evals for AI Agents (Anthropic)](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
 - [Best LLM Evaluation Tools for AI Agents 2026 (Confident AI)](https://www.confident-ai.com/knowledge-base/compare/best-llm-evaluation-tools-for-ai-agents)
+
+
+---
+
+## 14. AutoRubric Implementation Deep-Dive
+
+*Implementation-level detail for integrating AutoRubric-style evaluation into CEX pipelines.*
+*Source: arxiv 2603.00077 (March 2026)*
+
+### 14.1 Full Pipeline Architecture
+
+```
+INPUTS
+  task_description    -- what was the task asking for?
+  expected_behavior   -- rubric seed or reference output
+  generated_output    -- candidate response to evaluate
+        |
+        v
+PHASE 1: CRITERION GENERATION
+  Prompt: list N independent criteria, each with type/weight/penalty flag
+  Optimal: 5-12 criteria; more than 15 degrades inter-rater agreement
+        |
+        v
+PHASE 2: PER-CRITERION ATOMIC SCORING (parallelizable)
+  Per criterion: verdict-balanced few-shot (3-5 examples, NO reasoning chains)
+  Binary  -> {MET, UNMET, CANNOT_ASSESS}
+  Ordinal -> {L1, L2, ..., LK}
+  Nominal -> {CAT_A, CAT_B, ...}
+        |
+        v
+PHASE 3: AGGREGATION
+  Binary:  v_i = 1 if MET, 0 if UNMET, None if CANNOT_ASSESS
+  Ordinal: v_i = (level_index - 1) / (K - 1)
+  weighted_sum = sum(v_i * w_i for i where v_i is not None)
+  denominator  = sum(w_i for i where w_i > 0)
+  score = max(0.0, min(1.0, weighted_sum / denominator))
+  Note: negative weights reduce score but do NOT reduce denominator
+```
+
+### 14.2 Key Formulas
+
+**Weighted Composite Score**:
+```
+score = max(0.0, min(1.0,
+    sum(v_i * w_i for i in criteria if v_i is not None)
+    / sum(w_i for i in criteria if w_i > 0)
+))
+```
+
+**CANNOT_ASSESS Disposition**:
+```
+SKIP:    exclude from numerator and denominator (optional criteria)
+ZERO:    v_i = 0, keep in denominator (strict mode, high-stakes)
+PARTIAL: v_i = 0.5, keep in denominator (exploratory mode)
+FAIL:    abort, escalate to human (safety-critical pipelines)
+```
+
+**Inter-Rater Reliability**:
+```
+# Cohen's Kappa (binary/nominal)
+kappa = (P_observed - P_expected) / (1 - P_expected)
+
+# Quadratic-Weighted Kappa (ordinal)
+kappa_qw = 1 - sum(W_ij * O_ij) / sum(W_ij * E_ij)
+W_ij = (i - j)^2 / (N_levels - 1)^2
+```
+
+**Pass@k Unbiased Estimator**:
+```
+pass_at_k = 1 - product((n-c-i)/(n-i) for i in range(k))
+where n = total samples, c = correct samples, k = budget
+```
+
+### 14.3 Reliability by Criterion Type vs Alternatives
+
+| Criterion Type | AutoRubric Accuracy | AutoRubric Kappa | vs G-Eval holistic | vs Prometheus 2 |
+|---------------|--------------------|-----------------|--------------------|-----------------|
+| Binary | 87% | 0.642 | +14pp, +0.18 kappa | Comparable on structured tasks |
+| Ordinal (3-level) | 79% | 0.549 | +6pp | Prometheus wins on open-ended |
+| Ordinal (5-level) | 74% | 0.571 | +1pp | Comparable |
+| Nominal | 81% overall | asymmetric | +8pp macro avg | Varies by category |
+
+**Key finding**: Binary criteria most reliable -- use for hard gates.
+Reasoning-chain few-shot increases hallucination by 12% vs verdict-only.
+
+### 14.4 Calibration Protocol
+
+```
+Step 1: Curate verdict-balanced examples
+  - Binary: 1-2 MET + 1-2 UNMET + 0-1 CANNOT_ASSESS
+  - Ordinal: 1 example per level (K examples total)
+  - CRITICAL: NO reasoning chains (+12% hallucination if included)
+  - Include: criterion text + evidence snippet + verdict only
+
+Step 2: Validate calibration on 20+ held-out labeled items
+  - Binary target: accuracy >= 80%, kappa >= 0.50
+  - Ordinal target: quadratic kappa >= 0.55
+  - If below: add examples or split into simpler sub-criteria
+
+Step 3: Anchor to CEX reference artifacts
+  - golden_test (quality 9.5+) = top-score anchor
+  - quality_gate failing artifact = bottom-score anchor
+```
+
+### 14.5 AutoRubric-to-CEX Mapping
+
+| AutoRubric Component | CEX Equivalent | Location |
+|---------------------|---------------|----------|
+| Criterion generation | scoring_rubric frontmatter | P07_evaluation/ |
+| Per-criterion atomic eval | L2 Rubric in cex_score.py | _tools/cex_score.py |
+| Weighted composite | L2 layer (30% weight) | scoring logic |
+| CANNOT_ASSESS SKIP | density_score: null handling | artifact frontmatter |
+| Verdict-balanced few-shot | golden_test kind (P07) | calibration artifacts |
+| Multi-judge ensemble | llm_judge panel config | P07 judge configs |
+| kappa / Cronbach alpha | NOT YET IN CEX | Gap: add --reliability flag |
+
+---
+
+## 15. CLASSic & CLEAR: Full Scoring Formulas
+
+*Implementation-level formulas for enterprise agent evaluation.*
+
+### 15.1 CLASSic Dimensional Formulas (ICLR 2025 Workshop)
+
+**Cost (C)**: `C_score = max(0.0, 1.0 - (actual_cost_per_task / budget_cost_per_task))`
+
+**Latency (L)**: `L_score = 1.0 - clip((actual_latency - sla_latency) / sla_latency, 0.0, 1.0)`
+(1.0 if within SLA, 0.0 if 2x SLA or worse)
+
+**Accuracy (A)**: `A_score = count(tasks_completed_correctly) / total_tasks`
+
+**Security (S1)**: `S1_score = 1.0 - (security_incidents / total_interactions)` (target >= 0.99)
+
+**Stability (S2)**:
+```
+cv = std(task_success_per_run) / mean(task_success_per_run)
+S2_score = 1.0 - clip(cv, 0.0, 1.0)   # target >= 0.90 (< 10% CV)
+```
+
+**CLASSic Composite**:
+```
+CLASSic = w_C*C + w_L*L + w_A*A + w_S1*S1 + w_S2*S2
+
+Default (equal):      0.2 each
+Customer support:     C=0.2, L=0.3, A=0.2, S1=0.15, S2=0.15
+Code/engineering:     C=0.1, L=0.1, A=0.5, S1=0.1,  S2=0.2
+Financial/regulated:  C=0.1, L=0.1, A=0.3, S1=0.3,  S2=0.2
+
+Production gate: CLASSic >= 0.85
+```
+
+### 15.2 CLEAR Dimensional Formulas (arxiv 2511.14136)
+
+**Cost -- Cost-Normalized Accuracy (CNA)**:
+```
+CNA = (task_accuracy / cost_per_task) * 100
+CNA_norm = clip(CNA / CNA_baseline / 2.0, 0.0, 1.0)
+```
+
+**Latency -- SLA Compliance Rate (SCR)**:
+```
+SCR = count(tasks_within_sla) / total_tasks
+
+SLA thresholds: support=3s, code=30s, reasoning=120s, docs=300s, research=600s
+```
+
+**Assurance -- Policy Adherence Score (PAS)**:
+```
+PAS = 1.0 - (policy_violations / total_policy_critical_actions)
+targets: regulated >= 0.99, standard >= 0.95
+```
+
+**Reliability -- Pass@k** (unbiased estimator):
+```
+pass_at_k = 1.0 - product((n-c-i)/(n-i) for i in range(k))
+
+Targets: mission-critical pass@8 >= 0.80, standard pass@3 >= 0.70
+```
+
+**CLEAR Composite**:
+```
+CLEAR = 0.2*CNA_norm + 0.2*SCR + 0.2*E + 0.2*PAS + 0.2*pass_at_k
+
+Enterprise gate: CLEAR >= 0.85 | Mission-critical: CLEAR >= 0.90
+```
+
+### 15.3 CLASSic vs CLEAR vs CEX 3-Layer
+
+| Property | CLASSic | CLEAR | CEX 3-Layer |
+|----------|---------|-------|-------------|
+| Cost metric | Budget ratio | CNA (value-linked) | cex_token_budget.py |
+| Latency | SLA deviation | SCR (% within SLA) | Router latency (indirect) |
+| Quality | Task success rate | Domain accuracy (E) | L1+L2+L3 composite |
+| Security | Explicit S1 | Embedded in PAS | Guardrail kinds (P11) |
+| Reliability | CV-based stability | Pass@k probabilistic | quality_gate threshold |
+| Composite target | >= 0.85 | >= 0.85 | >= 9.0 (10pt scale) |
+| Best for | Security + regulated | ROI + reliability | Artifact quality workflow |
+
+### 15.4 Practical Thresholds Reference Card
+
+| Metric | Minimum | Production | Target | Golden |
+|--------|---------|-----------|--------|--------|
+| CLASSic composite | 0.70 | 0.80 | 0.85 | 0.95 |
+| CLEAR composite | 0.70 | 0.80 | 0.85 | 0.90 |
+| CNA vs baseline | 0.8x | 1.0x | 1.5x | 2.0x+ |
+| PAS | 0.90 | 0.95 | 0.99 | 1.00 |
+| pass@3 | 0.50 | 0.70 | 0.80 | 0.95 |
+| pass@8 | 0.60 | 0.75 | 0.85 | 0.98 |
+| Cohen kappa | 0.40 | 0.50 | 0.60 | 0.80 |
+| CEX quality gate | 7.0 | 8.0 | 9.0 | 9.5 |
+
+**CEX Integration Recommendations**:
+- Use CLASSic for N07 nucleus dispatch evaluation (security + stability dimensions)
+- Use CLEAR CNA to measure token efficiency per nucleus via cex_token_budget.py
+- Use CLEAR pass@k as reliability gate in cex_evolve.py (pass@3 >= 0.70 before promoting artifact)
+- Use CEX 3-layer for all artifact-level quality scoring (native, most granular)
