@@ -271,7 +271,7 @@ def evolve_one(filepath, model, target=9.0):
     result = ollama_chat(model, SYSTEM_PROMPT, user_prompt,
                          max_tokens=6000, temperature=0.4)
 
-    if not result or len(result) < 50:
+    if not result or len(result.strip()) < 20:
         return None, "empty response"
 
     # Clean: extract markdown if wrapped in code block
