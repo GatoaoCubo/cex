@@ -1,0 +1,33 @@
+---
+kind: learning_record
+id: p10_lr_threat_model_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for threat_model construction
+quality: null
+title: "Learning Record Threat Model"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [threat_model, builder, learning_record]
+tldr: "Learned patterns and pitfalls for threat_model construction"
+domain: "threat_model construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Observation  
+Common issues include incomplete threat scenarios, siloed input from narrow stakeholders, and over-reliance on generic templates that ignore AI-specific attack vectors (e.g., data poisoning, model inversion).  
+
+## Pattern  
+Effective models use structured frameworks (e.g., STRIDE, MITRE ATT&CK) tailored to AI systems, integrate cross-functional input (security, engineering, domain experts), and emphasize iterative refinement through scenario-based validation.  
+
+## Evidence  
+Reviewed artifacts from healthcare and finance domains showed improved coverage when threat models explicitly addressed adversarial training data and inference-time evasion techniques.  
+
+## Recommendations  
+- Prioritize AI-specific threat categories (e.g., data integrity, model robustness) over generic templates.  
+- Involve diverse stakeholders early to identify non-technical risks (e.g., reputational, legal).  
+- Use iterative workshops to refine scenarios and validate assumptions with red-team exercises.  
+- Link threats directly to mitigation strategies (e.g., differential privacy, input validation).  
+- Document assumptions and limitations to enable model evolution as AI systems mature.
