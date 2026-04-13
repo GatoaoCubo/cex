@@ -7,6 +7,7 @@ quality: 8.6
 pillar: P01
 language: en
 density_score: 1.0
+updated: "2026-04-13"
 ---
 
 # Pre-Commit Hooks for AI-Generated Code
