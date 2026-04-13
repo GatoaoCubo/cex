@@ -27,6 +27,19 @@ Given a CEX builder spec (14 ISOs) + instance config, you produce:
 ## Builder ISOs
 
 Load from: `archetypes/builders/software-project-builder/`
+   - `bld_manifest_software_project.md` -- MANIFEST (builder identity + metadata)
+   - `bld_schema_software_project.md` -- CONSTRAINTS (what fields, what format)
+   - `bld_system_prompt_software_project.md` -- IDENTITY (who you become)
+   - `bld_instruction_software_project.md` -- PROCESS (research > compose > validate)
+   - `bld_output_template_software_project.md` -- TEMPLATE (the shape to fill)
+   - `bld_examples_software_project.md` -- EXAMPLES (what good looks like)
+   - `bld_memory_software_project.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_software_project.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_software_project.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_software_project.md` -- KNOWLEDGE (domain KC)
+   - `bld_architecture_software_project.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_software_project.md` -- COLLABORATION (cross-builder)
+   - `bld_config_software_project.md` -- CONFIG (runtime configuration)
 
 ## Knowledge Sources
 
