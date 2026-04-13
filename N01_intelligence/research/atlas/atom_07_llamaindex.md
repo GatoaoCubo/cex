@@ -5,7 +5,7 @@ pillar: P01
 title: "ATOM-07: LlamaIndex Framework -- Complete Vocabulary Atlas"
 version: 1.0.0
 date: 2026-04-13
-quality: null
+quality: 8.8
 tags: [llamaindex, rag, framework, vocabulary, atlas, llm, agents, workflows]
 sources:
   - https://developers.llamaindex.ai/python/framework/

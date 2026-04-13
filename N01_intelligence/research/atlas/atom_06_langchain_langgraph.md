@@ -5,7 +5,7 @@ pillar: P01
 domain: agentic-frameworks
 title: "LangChain LCEL + LangGraph + LangSmith -- Complete Vocabulary Atlas"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [langchain, langgraph, langsmith, lcel, runnable, stategraph, observability, agent-framework]
 sources:
   - https://docs.langchain.com/oss/python/langgraph/graph-api
