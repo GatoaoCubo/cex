@@ -19,43 +19,43 @@ density_score: 0.85
 ## Definition  
 | metric | threshold | operator | scope |  
 |---|---|---|---|  
-| latency | 50ms | <= | per query |  
-| resource utilization | 80% | <= | system-wide |  
-| fallback strategy | defined | == | per model |  
+| Compute Allocation Efficiency | 90% | ≥ | All inference nodes |  
 
 ## HARD Gates  
 | ID | Check | Fail Condition |  
 |---|---|---|  
-| H01 | YAML valid | syntax errors |  
-| H02 | ID matches pattern | invalid ID format |  
-| H03 | kind matches | kind != "search_strategy" |  
-| H04 | strategy defined | strategy is null |  
-| H05 | allowed types | strategy not in ["static", "dynamic"] |  
-| H06 | fallback defined | fallback is null |  
-| H07 | priority validation | priority < 0 or > 10 |  
+| H01 | YAML valid | Invalid YAML syntax |  
+| H02 | ID matches pattern | ID does not match `P04-[A-Z]{3}-\d{3}` |  
+| H03 | kind matches | kind ≠ `search_strategy` |  
+| H04 | Resource limits defined | Missing CPU/RAM limits |  
+| H05 | Strategy validity | Strategy not in `static`, `dynamic`, or `adaptive` |  
+| H06 | Versioning present | No version field in metadata |  
+| H07 | Documentation included | Missing user-facing documentation |  
+| H08 | Performance threshold | Latency > 500ms under load |  
 
 ## SOFT Scoring  
 | Dim | Dimension | Weight | Scoring Guide |  
 |---|---|---|---|  
-| D01 | Efficiency | 0.20 | 1.0 (optimal) to 0.0 (inefficient) |  
-| D02 | Fairness | 0.15 | 1.0 (balanced) to 0.0 (biased) |  
-| D03 | Scalability | 0.15 | 1.0 (linear) to 0.0 (nonlinear) |  
-| D04 | Latency consistency | 0.10 | 1.0 (stable) to 0.0 (spiky) |  
-| D05 | Resource utilization | 0.10 | 1.0 (optimal) to 0.0 (wasteful) |  
-| D06 | Fallback reliability | 0.10 | 1.0 (always works) to 0.0 (fails) |  
-| D07 | Documentation | 0.10 | 1.0 (complete) to 0.0 (missing) |  
+| D01 | Strategy clarity | 0.15 | Clear objective and constraints |  
+| D02 | Resource optimization | 0.12 | Efficient use of compute resources |  
+| D03 | Scalability | 0.10 | Handles 10x load increase |  
+| D04 | Error handling | 0.08 | Graceful fallback on failure |  
+| D05 | Documentation | 0.15 | Complete and actionable |  
+| D06 | Versioning | 0.08 | Semantic versioning compliant |  
+| D07 | Performance | 0.12 | Meets SLA under stress |  
+| D08 | Compliance | 0.10 | Adheres to security/privacy policies |  
+| D09 | Innovation | 0.08 | Novel approach to allocation |  
+| D10 | Maintainability | 0.02 | Easy to update/monitor |  
 
 ## Actions  
 | Score | Action |  
 |---|---|  
-| GOLDEN >=9.5 | Auto-approve and deploy |  
-| PUBLISH >=8.0 | Manual review required |  
-| REVIEW >=7.0 | Senior engineer approval |  
-| REJECT <7.0 | Reject and require rework |  
+| ≥9.5 | Automatically approve and deploy |  
+| ≥8.0 | Schedule for review by domain experts |  
+| ≥7.0 | Request changes and resubmit |  
+| <7.0 | Reject and require redesign |  
 
 ## Bypass  
 | conditions | approver | audit trail |  
 |---|---|---|  
-| urgent production fix | CTO | "emergency bypass" |  
-| legacy system compatibility | architecture lead | "legacy exception" |  
-| experimental strategy | research lead | "R&D override" |
+| Critical production issue | CTO | Bypass logged with justification |
