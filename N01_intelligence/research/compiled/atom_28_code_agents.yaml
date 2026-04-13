@@ -925,6 +925,366 @@ proposed_new_cex_kinds_8: '| Proposed Kind | Pillar | Description | Boundary | I
   \ SDK subagent, Sonnet-4.6 200K)\n  +-- Brand / pricing        -> N06 (Claude SDK subagent, Sonnet-4.6 200K)\n  +-- Parallel\
   \ wave (6 max)  -> grid dispatch (N01-N06 via spawn_grid.ps1)\n  +-- Overnight evolution    -> cex_evolve.py --mode agent\
   \ (headless SDK loop)\n\n---"
+18_aider_repo_map_pagerank_algorithm_specification: ''
+18_1_architecture: "The repo map converts a codebase into a token-budgeted, PageRank-ranked symbol graph that fits inside\
+  \ the model context window while maximizing relevance to the current chat.\n\nSource files\n    |\n[Tree-sitter] -- language\
+  \ detection + AST parsing (130+ languages)\n    |\n[Tag Extraction] -- definitions (@name.definition.) + references (@name.reference.)\n\
+  \    |\n[Graph Builder] -- directed edges: referencing_file -> defining_file\n    |\n[Personalization Vector] -- chat files\
+  \ + mentioned identifiers get 100x boost\n    |\n[NetworkX PageRank] -- biased random walk favoring chat-relevant files\n\
+  \    |\n[Token Budget Enforcer] -- accumulate files descending by score, stop at limit\n    |\n[to_tree()] -- render as\
+  \ indented symbol list, inject into system prompt"
+18_2_graph_construction_rules: '| Condition | Edge Direction | Weight |
+
+  |-----------|---------------|--------|
+
+  | File B references an identifier defined in file A | B -> A | 1.0 |
+
+  | File A has definitions but receives zero incoming references | A -> A (self-loop) | 0.1 |
+
+
+  Self-loops prevent isolated definition files from scoring zero and disappearing from the map.'
+18_3_personalization_vector: 'The PageRank personalization vector biases the random walk toward files relevant to the current
+  conversation:
+
+
+  | File Category | Boost Value |
+
+  |--------------|-------------|
+
+  | Files open in current chat | `100 / len(chat_fnames)` |
+
+  | Files whose identifiers were mentioned by user | `100 / len(mentioned_fnames)` |
+
+  | All other files | `1 / len(all_fnames)` |
+
+
+  This means a chat file with 10 files open gets 10x boost vs its neighbors, while unmentioned files contribute baseline noise
+  only.'
+18_4_tree_sitter_query_system: "Location: `aider/queries/{language}/tags.scm`\n\n; Example Python query file\n(function_definition\n\
+  \  name: (identifier) @name.definition.function)\n\n(decorated_definition\n  definition: (function_definition\n    name:\
+  \ (identifier) @name.definition.function))\n\n(call\n  function: (identifier) @name.reference.call)\n\n(call\n  function:\
+  \ (attribute\n    attribute: (identifier) @name.reference.call))\n\n| Capture Pattern | Purpose |\n|----------------|---------|\n\
+  | `@name.definition.*` | Functions, classes, structs, traits, impls, modules |\n| `@name.reference.*` | Calls, type usage,\
+  \ imports, attribute access |\n\n- 130+ languages supported via tree-sitter detection\n- 40+ languages have dedicated `.scm`\
+  \ query files for full definition/reference extraction\n- Fallback: Pygments lexer extracts bare identifiers when no `.scm`\
+  \ query exists"
+18_5_token_budget_algorithm: "target_tokens = min(\n    max_map_tokens  map_mul_no_files,    # default: 1024  8 = 8192\n \
+  \   max_context_window - 4096             # reserve space for other prompt components\n)\n\n| Parameter | Default | CLI\
+  \ Override |\n|-----------|---------|-------------|\n| `max_map_tokens` | 1024 | `--map-tokens N` |\n| `map_mul_no_files`\
+  \ | 8 | `--map-multiplier-no-files N` |\n| Reserved padding | 4096 | Hardcoded |\n\nToken counting uses sampling on large\
+  \ texts to avoid O(n) overhead per file."
+18_6_caching_system: '| Property | Value |
+
+  |----------|-------|
+
+  | Backend | `diskcache.Cache` (SQLite-backed) |
+
+  | Location | `.aider.tags.cache.v{VERSION}/` at repo root |
+
+  | Cache key | Absolute file path (string) |
+
+  | Cache value | `{"mtime": float, "data": [Tag, ...]}` |
+
+  | Invalidation | `mtime != current file modification time` |
+
+  | Version bump | When tag extraction logic changes (prevents stale AST data) |'
+18_7_refresh_strategies: '| Strategy | Trigger | Use Case |
+
+  |----------|---------|---------|
+
+  | `auto` (default) | File changes OR user mentions identifier | Standard development |
+
+  | `always` | Before every LLM call | Maximum accuracy, slower |
+
+  | `files` | Only when chat files change | Stable codebase, targeted edits |
+
+  | `manual` | Never (user-triggered only) | Testing, performance-critical pipelines |'
+18_8_full_ranking_pipeline: "# Step 1: Tag extraction per file\ntags = get_ranked_tags(fnames, chat_fnames, mentioned_idents)\n\
+  # -> Uses tree-sitter queries; builds defines={} and references={} dicts\n\n# Step 2: Graph building\nG = nx.DiGraph()\n\
+  for ref_file in references:\n    for ident in references[ref_file]:\n        for def_file in defines.get(ident, []):\n \
+  \           G.add_edge(ref_file, def_file, weight=1.0)\n# Self-loop for isolated definition files\nfor f in defines:\n \
+  \   if f not in G:\n        G.add_edge(f, f, weight=0.1)\n\n# Step 3: PageRank with personalization\npersonalization = build_personalization_vector(chat_fnames,\
+  \ mentioned_fnames)\nscores = nx.pagerank(G, personalization=personalization)\n\n# Step 4: Format output within token budget\n\
+  output = to_tree(sorted(scores, key=scores.get, reverse=True), token_budget)\n\n---"
+19_cursor_cloud_agents_vm_architecture_deep: ''
+19_1_infrastructure_specifications: '| Property | Value |
+
+  |----------|-------|
+
+  | Cloud provider | AWS |
+
+  | Base OS | Ubuntu (isolated per agent) |
+
+  | Provisioning | On-demand at task start |
+
+  | Lifetime | Task duration + async review buffer |
+
+  | Code storage | VM disk (ephemeral; cleared on agent termination) |
+
+  | Custom environments | Dockerfile supported for project-specific system requirements |
+
+  | Parallel agents | Unlimited (no hard cap as of Q1 2026) |'
+19_2_capability_timeline: '| Date | Milestone |
+
+  |------|----------|
+
+  | Mid-2025 | Background agents launch with Cursor 1.0 |
+
+  | Feb 2026 | Cloud Agents v2: full Ubuntu desktop + Chromium browser per VM |
+
+  | Mar 2026 | Self-hosted Cloud Agents for enterprise (code stays on-prem) |'
+19_3_network_access_policy: 'Three outbound connectivity modes, configurable per user; enterprise admins can lock org-wide
+  defaults:
+
+
+  | Mode | Allowed Destinations |
+
+  |------|---------------------|
+
+  | Allow all | Unrestricted internet |
+
+  | Default + allowlist | Preconfigured safe domains + custom entries |
+
+  | Allowlist only | ONLY explicitly permitted domains (maximum isolation) |'
+19_4_security_model: '| Mechanism | Implementation |
+
+  |-----------|---------------|
+
+  | VM isolation | Each agent in its own isolated VM; cross-agent access blocked |
+
+  | Commit signing | HSM-backed Ed25519 keys; GitHub/GitLab display "Verified" badge automatically |
+
+  | Secrets at rest | AES-256 encrypted on VM disk |
+
+  | Secrets in transit | TLS 1.3 |
+
+  | Secret scanning | "Redacted" mode scans commit messages and staged files; blocks any containing secrets |
+
+  | Privacy Mode | ON = code not used for model training; OFF = prompts + dev environments collectible |
+
+  | Prompt injection risk | Auto-executing agents can be tricked into exfiltrating data; mitigate with allowlist-only network
+  |'
+19_5_agent_capabilities_february_2026: 'Each cloud agent VM provides:
+
+
+  | Capability | Available |
+
+  |-----------|----------|
+
+  | Terminal (full shell) | Yes |
+
+  | Browser (Chromium) | Yes (Cloud Agents v2) |
+
+  | Desktop GUI (computer use) | Yes (Cloud Agents v2) |
+
+  | Repo clone + dep install | Yes |
+
+  | Test execution | Yes |
+
+  | Feature branch creation | Yes |
+
+  | PR push on completion | Yes |
+
+  | Session video recording | Yes |
+
+  | MCP server (HTTP + stdio) | Yes |'
+19_6_self_hosted_option_enterprise_march_2026: '| Property | Self-Hosted | Cloud (AWS) |
+
+  |----------|-------------|-------------|
+
+  | Code leaves customer network | Never | Stored on AWS VM disk |
+
+  | Isolated VMs | Yes (on-prem infra) | Yes (AWS) |
+
+  | Full desktop + browser | Yes | Yes |
+
+  | Secrets exposure surface | Internal only | Encrypted at rest (AWS) |
+
+  | Model routing control | Customer-controlled | Cursor-controlled |
+
+  | Compliance use cases | SOC 2, HIPAA possible | Standard Cursor terms |'
+19_7_background_agent_vs_cloud_agent_comparison: '| Feature | Background Agent (Original) | Cloud Agent (Feb 2026+) |
+
+  |---------|----------------------------|------------------------|
+
+  | VM type | Lightweight cloud container | Full Ubuntu VM |
+
+  | Browser | No | Yes (Chromium) |
+
+  | Desktop GUI | No | Yes |
+
+  | Video recording | No | Yes |
+
+  | Self-hosted option | No | Yes (enterprise) |
+
+  | Parallel limit | 8 | Unlimited |
+
+  | Network policy | Fixed | Configurable (3 modes) |
+
+  | Commit signing | No | HSM Ed25519 |
+
+
+  ---'
+20_edit_format_reference_9_families_with_code_examples: ''
+family_1_whole_file: "LLM returns the complete file content verbatim.\n\nshow_greeting.py\nimport sys\n\ndef greeting(name):\n\
+  \    print(\"Hey\", name)\n\nif name == \"main\":\n    greeting(sys.argv[1])\n\nTrade-off: Zero matching errors; expensive\
+  \ for large files; LLM may elide sections with `# ... rest unchanged`.\n\n---"
+family_2_search_replace_block_diff: 'Conflict-marker blocks identify exact old and new content within a file.
+
+
+  mathweb/flask/app.py
+
+  <<<<<<< SEARCH
+
+  from flask import Flask
+
+  =======
+
+  import math
+
+  from flask import Flask
+
+  >>>>>>> REPLACE
+
+
+  Multiple blocks per file allowed. Match cascade: exact -> whitespace-insensitive -> Levenshtein fuzzy.
+
+
+  ---'
+family_3_diff_fenced_gemini_variant: 'File path placed inside the code fence. Gemini models cannot reliably emit content before
+  a fence.
+
+
+  mathweb/flask/app.py
+
+  <<<<<<< SEARCH
+
+  from flask import Flask
+
+  =======
+
+  import math
+
+  from flask import Flask
+
+  >>>>>>> REPLACE
+
+
+  Used by Aider when `--model gemini-*` is active; functionally identical to Family 2.
+
+
+  ---'
+family_4_unified_diff_udiff: "Standard `diff -U0` format with `@@` context hunks.\n\n--- mathweb/flask/app.py\n+++ mathweb/flask/app.py\n\
+  @@ -1,3 +1,4 @@\n+import math\n from flask import Flask\n from flask import render_template\n\nUsed with GPT-4 Turbo family\
+  \ to suppress lazy output. Highest LLM difficulty; requires correct surrounding context lines.\n\n---"
+family_5_editor_diff_editor_whole_architect_mode: 'Two-model pipeline: architect reasons, editor produces edits. Prompt is
+  stripped to edit-only instructions.
+
+
+  # Architect (large model) output:
+
+  Add ''import math'' before the flask import in app.py.
+
+
+  # Editor (same or smaller model) receives ONLY:
+
+  Edit app.py to add math import before flask import.
+
+
+  # Editor produces (editor-diff format):
+
+  mathweb/flask/app.py
+
+  <<<<<<< SEARCH
+
+  from flask import Flask
+
+  =======
+
+  import math
+
+  from flask import Flask
+
+  >>>>>>> REPLACE
+
+
+  CEX parallel: N07 (architect) -> N03 (editor).
+
+
+  ---'
+family_6_openai_patch_format: 'Codex CLI proprietary format. No line numbers; uses context lines for matching.
+
+
+  * Begin Patch
+
+  * Update File: mathweb/flask/app.py
+
+  @@
+
+  -from flask import Flask
+
+  +import math
+
+  +from flask import Flask
+
+  * End Patch
+
+
+  Robust to line-number drift. Codex CLI-specific; not interoperable with other tools.
+
+
+  ---'
+family_7_tool_based_edits_function_calling: "LLM invokes structured tool calls. No text markers; edits are atomic JSON operations.\n\
+  \n{\n  \"tool\": \"Edit\",\n  \"input\": {\n    \"file_path\": \"mathweb/flask/app.py\",\n    \"old_string\": \"from flask\
+  \ import Flask\",\n    \"new_string\": \"import math\\nfrom flask import Flask\"\n  }\n}\n\nUsed by Claude Code (Agent SDK)\
+  \ and OpenHands CodeAct. Requires tool execution infrastructure; validated at the API boundary.\n\n---"
+family_8_sketch_apply_model_two_phase: 'Primary LLM sketches the change in natural language; a dedicated 7B apply model merges
+  the sketch into the actual file.
+
+
+  # Phase 1 (primary LLM sketch -- free-form natural language or rough diff):
+
+  "Insert ''import math'' as the first import in app.py, before flask"
+
+
+  # Phase 2 (apply model -- Morph Fast Apply 7B or Cursor internal):
+
+  [Modified file bytes written directly; no intermediate format exposed to user]
+
+
+  Performance (Morph A100): 10,500 tokens/second. Accuracy: 98% on edit benchmarks vs ~85% for search/replace.
+
+
+  ---'
+family_9_semantic_edit_ast_aware: "Transformations target AST nodes, not text bytes. Immune to whitespace/comment drift and\
+  \ false positives.\n\n# Conceptual wire format (Morph internal representation):\nSemanticEdit(\n  target_file=\"mathweb/flask/app.py\"\
+  ,\n  operation=INSERT_BEFORE,\n  anchor=ImportStatement(module=\"flask\"),\n  content=ImportStatement(module=\"math\")\n\
+  )\n\nProviders: Morph (proprietary). Language coverage: subset of tree-sitter languages. Eliminates text-matching failure\
+  \ mode entirely.\n\n---"
+edit_format_comparison_matrix: '| Format | Token Cost | Match Failure Risk | LLM Difficulty | Best For |
+
+  |--------|-----------|-------------------|----------------|---------|
+
+  | Whole file (F1) | High | None | Low | Small files, full rewrites |
+
+  | Search/replace (F2) | Low-Medium | Code drift | Medium | Targeted edits, stable code |
+
+  | Diff-fenced (F3) | Low-Medium | Code drift | Medium | Gemini models |
+
+  | Unified diff (F4) | Low | Wrong context | High | Large diffs, GPT-4 family |
+
+  | Editor-diff/whole (F5) | Medium | Two-model desync | Low | Architect mode, CEX N07->N03 |
+
+  | OpenAI patch (F6) | Low | Ambiguous context | Medium | Codex CLI pipelines |
+
+  | Tool-based (F7) | Medium | None (validated) | Low | Production agents, audit trails |
+
+  | Sketch+apply (F8) | Medium | Apply model miss | Very Low | Speed-critical pipelines |
+
+  | Semantic (F9) | Low | None (AST-level) | Very Low | Future-proof, scope-safe edits |
+
+
+  ---'
 sources:
 - Aider edit formats
 - Codex CLI features
