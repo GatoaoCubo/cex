@@ -5,7 +5,7 @@ title: "Aider CLI Integration Patterns"
 version: 1.0.0
 quality: 9.1
 pillar: P01
-density_score: 0.95
+density_score: 0.92
 updated: "2026-04-13"
 ---
 
@@ -20,34 +20,32 @@ Read-only mode for analysis without modifications.
 **--yes-always**  
 Enable full autonomy for repetitive tasks (e.g., refactoring, formatting).  
 **--subtree-only**  
-Focus on specific subdirectories in large repositories.
+Focus on specific subdirectories in large repositories.  
 
-### Comparison: CLI Flag Use Cases
-
-| Flag           | Purpose                          | Use Case                          | Example Command                          | Recommended For               |
-|----------------|----------------------------------|-----------------------------------|------------------------------------------|-------------------------------|
-| `--file`       | File-level code editing          | Fixing syntax errors in a single file | `aider --file src/main.py`               | Quick bug fixes               |
-| `--read`       | Analysis without modification    | Code review or documentation      | `aider --read README.md`                 | Documentation validation      |
-| `--yes-always` | Automation of repetitive tasks   | Bulk formatting or refactoring    | `aider --yes-always --file *.py`         | CI/CD pipelines               |
-| `--subtree-only`| Subdirectory focus             | Large monorepo maintenance        | `aider --subtree-only packages/utils/`   | Module-specific improvements  |
-| `--auto-commits`| Git integration automation     | Semantic versioning workflows     | `aider --auto-commits --commit-language=pt` | Multilingual teams            |
+### Use Case Expansion
+| Flag         | Purpose                          | Use Case Example                     | Autonomy Level | Example Command |
+|--------------|----------------------------------|--------------------------------------|----------------|-----------------|
+| `--file`     | Context-aware editing            | Fixing a specific bug in `main.py` | Low            | `aider --file main.py` |
+| `--read`     | Analysis only                    | Code quality audit                 | None           | `aider --read --file utils.py` |
+| `--yes-always` | Full autonomy                  | Bulk formatting of 100+ files      | High           | `aider --yes-always --file src/` |
+| `--subtree-only` | Subdirectory focus           | Refactoring a microservice module  | Medium         | `aider --subtree-only --file services/auth/` |
+| `--auto-commits` | Git integration              | CI/CD pipeline code updates        | Medium         | `aider --auto-commits --file features/new_feature/` |
 
 ## Git Integration
 
 **--auto-commits**  
 Automatically commit changes with semantic messages.  
 **--commit-language**  
-Specify commit message language (e.g., `en` for English, `pt` for Portuguese).
+Specify commit message language (e.g., `en` for English, `pt` for Portuguese).  
 
 ### Git Workflow Examples
-
-| Feature              | Behavior                          | Commit Message Example               | Use Case                              |
-|---------------------|-----------------------------------|--------------------------------------|---------------------------------------|
-| `--auto-commits`    | Commits changes automatically     | `feat: add user authentication`      | Continuous integration                |
-| `--commit-language=pt`| Portuguese messages             | `refactor: otimizar função de login`| Multinational development teams       |
-| `--yes-always`      | Confirm all Git operations        | `chore: update dependencies`         | Automated dependency management       |
-| `--subtree-only`    | Limited to specific directories   | `docs: update README in utils/`      | Modular repository maintenance        |
-| `--read`            | No commits, only analysis         | N/A                                  | Pre-commit code quality checks        |
+| Feature           | Description                          | Language Support | Commit Message Example                  | Use Case                     |
+|-------------------|--------------------------------------|------------------|-----------------------------------------|------------------------------|
+| `--auto-commits`  | Auto-commit with semantic messages   | All              | `feat: add user authentication`        | CI/CD pipeline integration   |
+| `--commit-language` | Language-specific messages         | 10+ languages    | `pt: corrigir bug de validação`        | Multinational development    |
+| `--branch`        | Specify target branch                | All              | `main`, `develop`, `feature/x`         | Multi-branch workflows       |
+| `--pr`            | Create pull requests automatically   | All              | `pr: merge feature/x into develop`     | GitOps automation            |
+| `--diff`          | Show diffs before committing         | All              | `diff: show changes in src/`           | Code review preparation      |
 
 ## Modelfile Customization
 
@@ -59,79 +57,58 @@ Configure model parameters in `Modelfile` for:
 
 Use `--model` flag to override default model settings during execution.
 
-### Sample Modelfile Configuration
-
+### Sample Modelfile Configurations
 ```yaml
-model: codellama:70b
-language: python
-max_tokens: 2048
-safety_level: medium
-prompt_template: "Act as a senior Python developer"
+model:
+  name: "gpt-4o"
+  temperature: 0.7
+  max_tokens: 2048
+  language: "en"
+  safety:
+    enabled: true
+    filters: ["toxicity", "nsfw"]
 ```
 
-### Model Configuration Impact
-
-| Parameter         | Default Value | Impact on Performance                          | Example Use Case                     |
-|------------------|---------------|------------------------------------------------|--------------------------------------|
-| `max_tokens`     | 1024          | Longer context allows complex refactoring      | Large-scale codebase maintenance     |
-| `safety_level`   | high          | Blocks risky operations (e.g., code deletion)  | Production environment safeguards    |
-| `language`       | auto          | Language-specific suggestions (e.g., Python)   | Multilingual codebases               |
-| `prompt_template`| generic       | Customized role behavior (e.g., "senior dev")  | Domain-specific code improvements    |
-| `model`          | codellama:7b  | Larger models handle complex logic             | AI-driven architecture design        |
+### Parameter Comparison
+| Parameter         | Default Value | Description                          | Impact on Performance |
+|-------------------|---------------|--------------------------------------|-----------------------|
+| `temperature`     | 0.8           | Controls randomness                  | Higher = more creative |
+| `max_tokens`      | 1024          | Maximum response length              | Higher = more detailed |
+| `language`        | "en"          | Primary language for responses       | Affects accuracy      |
+| `safety.enabled`  | true          | Enables content filtering            | Reduces harmful output |
+| `safety.filters`  | ["nsfw"]      | Types of content to filter           | Customizable          |
 
 ## Boundary
 
-Distilled, static, versioned knowledge. Not instruction, template, or configuration.
+This artifact is a static, versioned knowledge repository for CLI integration patterns. It is not a configuration template, executable code, or instructional manual.
 
 ## 8F Pipeline Function
 
 Primary function: **INJECT**  
-Injects intelligence into code workflows through:
-1. Context-aware suggestions
-2. Automated refactoring
-3. Semantic commit generation
-4. Language-specific analysis
-5. Safety-gated modifications
-6. Cross-repo dependency tracking
-7. Real-time code validation
-8. Configuration-driven behavior
+Injects code suggestions, refactors, and analysis directly into the development workflow through CLI integration.
+
+### Injection Scenarios
+| Scenario              | Trigger Condition             | Injection Type        | Example Outcome                     |
+|-----------------------|-------------------------------|-----------------------|-------------------------------------|
+| Code completion       | User types partial code       | Suggestion            | Auto-complete function parameters   |
+| Refactoring           | `--yes-always` flag enabled   | Full code rewrite     | Automatic renaming of variables     |
+| Error fixing          | Compilation error detected    | Patch suggestion      | Suggests `try-catch` block addition |
+| Documentation         | `--read` mode with `--doc`    | Inline comments       | Adds JSDoc to function definitions  |
+| Optimization          | `--auto-commits` with `--opt` | Performance tweaks    | Suggests memoization for slow functions |
 
 ## Related Kinds
 
-- **integration_patterns**: Broader category of CLI integration strategies  
-- **git_operations**: Specializes in version control workflow automation  
-- **model_configuration**: Focuses on AI model parameter tuning  
-- **cli_commands**: General category of command-line interface tools  
-- **workflow_automation**: Encompasses end-to-end CI/CD integration scenarios
+1. **CLI Configuration Templates**  
+   Defines reusable CLI parameter structures for consistent integration across projects.
 
-## Advanced Use Cases
+2. **Git Workflow Automation**  
+   Focuses on automating Git operations like branching, merging, and PR creation.
 
-### Scenario: Refactoring in Monorepos
+3. **Model Parameter Specifications**  
+   Standardizes model configuration parameters for AI-assisted development tools.
 
-| Step | Tool | Action | Outcome |
-|------|------|--------|---------|
-| 1    | `--subtree-only` | Limit scope to `packages/core/` | Isolated changes reduce risk |
-| 2    | `--yes-always` | Enable bulk refactoring | 15 files updated in 30s |
-| 3    | `--auto-commits` | Commit with `refactor:` prefix | Semantic history tracking |
-| 4    | `--commit-language=ja` | Japanese commit messages | Team collaboration in Japan |
+4. **Code Refactoring Pipelines**  
+   Specializes in automated code restructuring and optimization workflows.
 
-### Performance Metrics
-
-| Task Type | Time (s) | Accuracy (%) | Resource Usage |
-|-----------|----------|--------------|----------------|
-| Code completion | 0.8 | 98.2 | 12% CPU |
-| Refactoring | 3.2 | 95.7 | 28% CPU |
-| Commit generation | 0.5 | 99.1 | 8% CPU |
-| Safety checks | 1.1 | 100 | 15% CPU |
-| Cross-repo analysis | 7.4 | 92.3 | 45% CPU |
-
-## Best Practices
-
-1. **Use `--subtree-only`** for large repositories to avoid unnecessary processing  
-2. **Combine `--yes-always` with safety_level=medium** for controlled automation  
-3. **Set `language` explicitly** for multilingual codebases  
-4. **Leverage `--commit-language`** for international teams  
-5. **Monitor resource usage** during complex operations like cross-repo analysis  
-6. **Backup Modelfile configurations** before overriding with `--model`  
-7. **Use `--read` for pre-commit validation** to catch issues early  
-8. **Document custom prompt templates** for team consistency
+5. **Language-Specific Linters**  
+   Tailors linting rules and suggestions based on programming language syntax and conventions.
