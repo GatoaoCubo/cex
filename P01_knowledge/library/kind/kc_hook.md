@@ -2,23 +2,20 @@
 id: p01_kc_hook
 kind: knowledge_card
 type: kind
-pillar: P01
+pillar: P04
 title: "Hook — Deep Knowledge for hook"
 version: 1.0.0
-created: 2026-03-30
-updated: 2026-03-30
-author: marketing_agent
+created: 2026-04-02
+updated: 2026-04-02
+author: builder_knowledge
 domain: hook
 quality: 9.1
-tags: [hook, P04, GOVERN, kind-kc]
-tldr: "Executable code triggered on a pre/post pipeline event — synchronous, short-lived, scoped to one event boundary, with side effects but no persistent state"
+tags: [hook, p04, reusable, kind-kc]
+tldr: "Reusable capability with structured phases, triggers, and lifecycle management for repeatable workflows"
 when_to_use: "Building, reviewing, or reasoning about hook artifacts"
-keywords: [hook, pre-post, event, middleware, lifecycle]
+keywords: [hook, phases, trigger, reusable, capability, workflow, lifecycle]
 feeds_kinds: [hook]
-density_score: 1.0
-linked_artifacts:
-  primary: null
-  related: []
+density_score: null
 ---
 
 # Hook
@@ -27,59 +24,99 @@ linked_artifacts:
 ```yaml
 kind: hook
 pillar: P04
-llm_function: GOVERN
-max_bytes: 1024
-naming: p04_hook_{{name}}.md
+llm_function: TOOL
+max_bytes: 4096
+naming: p04_hook_{{name}}.md + .yaml
 core: true
 ```
 
 ## What It Is
-A hook is executable code that fires on a well-defined pre/post pipeline event (e.g., PreToolUse, PostLLMCall, SessionStart). It runs synchronously in the calling context and exits after producing a side effect (log, block, modify). It is NOT a lifecycle_rule (P11, which is a declarative config rule) nor a daemon (which is a persistent background process that runs indefinitely between events).
+A hook is a reusable capability with structured phases, trigger conditions, and lifecycle management. It defines a specific workflow that can be executed repeatedly across different contexts. Hooks are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A hook answers "what phases execute to achieve this capability?" while agents answer "who am I?" and prompts answer "how do I communicate?"
 
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
-|---|---|---|
-| LangChain | on_llm_start / on_tool_end callbacks | AsyncCallbackHandler; event-driven |
-| LlamaIndex | QueryEventHandler, on_retrieve | Event hooks on pipeline steps |
-| CrewAI | step_callback, task_callback | Per-step and per-task hook injection |
-| DSPy | Teleprompter callbacks | Optimization-phase hooks |
-| Haystack | Pipeline event hooks | ComponentBase lifecycle events |
-| OpenAI | n/a (no native hook system) | Wrapper pattern required |
-| Anthropic | Claude Code hooks (settings.json) | 10 events: PreToolUse, PostToolUse, etc. |
+|-------------------|---------------|-------|
+| LangChain | `Chain` / `RunnableSequence` | Sequential execution with defined steps |
+| LlamaIndex | `QueryPipeline` / `IngestionPipeline` | Multi-step workflows with phase management |
+| CrewAI | `Task` + `Process` | Task definition with sequential/hierarchical execution |
+| DSPy | `dspy.Module.forward()` method | Structured computation with defined phases |
+| Haystack | `Pipeline` with nodes | Explicit DAG execution with phase transitions |
+| AutoGen | `GroupChat` workflow | Multi-agent conversation patterns |
+| Microsoft Semantic Kernel | `Plan` / `KernelFunction` | Function orchestration with step management |
 
 ## Key Parameters
 | Parameter | Type | Default | Tradeoff |
-|---|---|---|---|
-| trigger_event | str | required | Scoped to exactly 1 event type |
-| timeout_ms | int | 5000 | Lower = safe; higher = feature-rich |
-| on_error | str | log | skip / abort / retry |
+|-----------|------|---------|----------|
+| trigger_type | enum | "user_invocable" | user_invocable (slash commands) vs agent_only (programmatic) |
+| phases | array | required | More phases = granular control vs complexity |
+| input_schema | object | {} | Strong typing vs flexibility |
+| output_format | string | "markdown" | Structured output vs natural language |
+| timeout_seconds | int | 300 | Execution time limit vs complex workflows |
 
-## Patterns
-| Pattern | When to Use | Example |
-|---|---|---|
-| Audit log hook | All tool calls | Append to audit.jsonl on PostToolUse |
-| Guard hook | Before LLM call | Check token budget in PreLLMCall |
+## Phase Structure
+| Phase | Purpose | Input | Output |
+|-------|---------|-------|--------|
+| discover | Context gathering | user_input, environment | context_data |
+| configure | Parameter setup | context_data, user_preferences | configuration |
+| execute | Main workflow | configuration, tools | raw_results |
+| validate | Quality assurance | raw_results, criteria | validated_output |
+
+## Trigger Patterns
+| Trigger Type | Example | Activation |
+|--------------|---------|------------|
+| slash_command | "/commit", "/deploy" | User types exact command |
+| keyword_match | "debug", "optimize" | Natural language contains keywords |
+| event_driven | file_change, time_schedule | System event occurs |
+| agent_invoked | crew.use_hook("analyze") | Programmatic call from agent |
+
+## Quality Gates
+| Gate | Validation | Failure Impact |
+|------|------------|----------------|
+| H01_phases_defined | phases array not empty | Cannot execute workflow |
+| H02_trigger_valid | trigger_type in allowed values | Cannot activate hook |
+| H03_input_schema | Valid JSON schema format | Runtime parameter errors |
+| H04_output_format | Defined output structure | Unpredictable results |
+
+## Usage Examples
+```yaml
+# User-invocable hook (slash command)
+trigger_type: user_invocable
+slash_command: "/review"
+phases: [discover, analyze, report]
+
+# Agent-only hook (programmatic)
+trigger_type: agent_only
+invoke_pattern: "crew.use_hook('data_analysis')"
+phases: [load, transform, analyze, export]
+
+# Event-driven hook
+trigger_type: event_driven
+event_pattern: "file_change:*.py"
+phases: [detect, lint, test, notify]
+```
 
 ## Anti-Patterns
-| Anti-Pattern | Why It Fails | Fix |
-|---|---|---|
-| Blocking I/O in hook | Stalls pipeline on every event | Async write or fire-and-forget queue |
-| Stateful hook via class vars | Race conditions in parallel calls | Pass context through event payload only |
+| Anti-Pattern | Why Wrong | Correct Approach |
+|--------------|-----------|------------------|
+| Single-phase hook | Not reusable, just a function | Use action_prompt for one-off tasks |
+| No trigger definition | Cannot be activated | Define clear trigger conditions |
+| Agent identity in hook | Mixing concerns | Use agent for identity, hook for capability |
+| Hard-coded parameters | Not reusable | Use input_schema for parameterization |
 
-## Integration Graph
-```
-[pipeline_event] --> [hook] --> [side_effect / modified_context]
-                       |
-                [trigger_event, script_path, timeout]
-```
+## Integration Points
+- **F2 BECOME**: Hooks are loaded by agents to extend capabilities
+- **F3 INJECT**: Hooks can inject domain-specific knowledge
+- **F5 CALL**: Hooks orchestrate tool usage across phases
+- **Handoffs**: Hooks can be passed between nuclei for specialized execution
+- **Memory**: Hooks can persist state between phases via memory_scope
 
-## Decision Tree
-- IF rule is declarative config THEN use lifecycle_rule (P11)
-- IF process must persist across events THEN use daemon
-- IF hook needs to call multiple systems THEN decompose into separate hooks
-- DEFAULT: hook for any single-event executable callback with side effects
+Hooks enable modular, reusable workflow definition that bridges the gap between simple prompts and complex multi-agent systems.
+## Production Reference: OpenClaude Bundled Hooks
+OpenClaude ships ~18 bundled hooks as battle-tested implementations:
 
-## Quality Criteria
-- GOOD: single trigger_event, idempotent, logs errors with context
-- GREAT: async-safe, timeout guarded, structured output, tested in isolation
-- FAIL: multiple trigger_events in one hook, blocking I/O, no error handling
+| Hook | Trigger | Pattern | CEX Equivalent |
+|-------|---------|---------|----------------|
+| /simplify | slash_command | 3-parallel-agent review | p04_hook_simplify |
+| /verify | slash_command | adversarial verification | p04_hook_verify |
+| /compact | agent_invoked | 9-section summarization | p04_hook_compact |
+| /loop | slash
