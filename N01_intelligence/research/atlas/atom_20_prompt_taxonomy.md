@@ -7,7 +7,8 @@ author: "Prompt Engineering Research Collective"
 date: "2026-04-13"
 version: "2.0"
 quality: 8.7
-keywords: ["prompt engineering", "large language models", "CoT", "RAG", "multimodal", "agentic systems", "DSPy", "GEPA", "MIPROv2"]
+keywords: ["prompt engineering", "large language models", "CoT", "RAG", "multimodal", "agentic systems", "DSPy", "GEPA", "MIPROv2", "decision tree", "implementation"]
+enriched: "2026-04-13 -- wave2 hydration: new techniques, DSPy optimizer map, multimodal framework map, implementation code, decision tree"
 ---
 
 # Prompt Engineering Techniques: A Comprehensive Survey and CEX Actionability Matrix

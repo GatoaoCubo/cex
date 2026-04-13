@@ -23,6 +23,9 @@ sources:
   - https://docs.vllm.ai/en/latest/features/tool_calling/
   - https://github.com/vllm-project/vllm/issues/19056
   - https://github.com/NousResearch/Hermes-Function-Calling
+  - https://kili-technology.com/blog/data-story-deepseek-v3-2
+  - https://deepwiki.com/QwenLM/Qwen-Agent/5.3-mcp-tool-integration
+  - https://lawwu.github.io/til/posts/2025-05-02-qwen3-chat-prompt-template/index.html
 ---
 
 # Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs
@@ -222,14 +225,49 @@ Config structure:
 
 #### 1.6.1 MCP Manager Singleton: Implementation Architecture
 
-**Singleton pattern** (`MCPManager._instance` class variable):
+**Singleton pattern** (`MCPManager._instance` class variable, `__new__` method):
 ```python
-# Initialization internals
-self.loop = asyncio.new_event_loop()
-self.loop_thread = threading.Thread(target=loop.run_forever, daemon=True)
-self.loop_thread.start()
-self.clients = {}   # client_id -> MCPClient
-self.processes = [] # subprocess handles for cleanup
+class MCPManager:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(self):
+        if hasattr(self, "_initialized"):
+            return  # guard against re-init on repeated MCPManager() calls
+        self._initialized = True
+        self.loop = asyncio.new_event_loop()
+        self.loop_thread = threading.Thread(target=self.loop.run_forever, daemon=True)
+        self.loop_thread.start()
+        self.clients = {}   # client_id -> MCPClient
+        self.processes = [] # subprocess handles for cleanup
+        atexit.register(self._cleanup)
+```
+
+**Subprocess monkey-patching** (lines 57-71): For stdio-based MCP servers, the manager monkey-patches `subprocess.Popen` during server startup to intercept and record all spawned process handles. This ensures every child process is tracked in `self.processes` for coordinated cleanup on exit -- without this, orphaned server processes survive the Python process.
+
+**Atexit cleanup sequence** (registered in `__init__`):
+```python
+def _cleanup(self):
+    # 1. Gracefully close all MCPClient sessions (async, 1-second window)
+    future = asyncio.run_coroutine_threadsafe(self._close_all_clients(), self.loop)
+    try:
+        future.result(timeout=1.0)
+    except Exception:
+        pass  # proceed to force-kill regardless
+    # 2. Force-terminate remaining stdio subprocesses
+    for proc in self.processes:
+        try:
+            proc.terminate()
+        except Exception:
+            pass
+    # 3. Stop background event loop
+    self.loop.call_soon_threadsafe(self.loop.stop)
+    # 4. Wait for loop thread to fully exit
+    self.loop_thread.join(timeout=5.0)
 ```
 
 **Cross-thread execution via run_coroutine_threadsafe**:
@@ -473,6 +511,27 @@ logic, and data science. Iterative execution with output validation.
 **General Agent**: "Hard to solve but easy to verify" task design. Categories include
 travel planning, multi-step reasoning. Iterative difficulty escalation with human annotators
 and verification agents ensuring data quality.
+
+**Search agent verification pipeline** (5-stage hard-negative filtering):
+1. Sample long-tail informative entities from large-scale web corpora
+2. Question-construction agent explores entity using configurable search tools
+3. Multiple answer-generation agents produce diverse candidate responses
+4. Verification agent retains ONLY samples where: ground truth is correct AND all model-generated candidates are verifiably incorrect
+5. Result: questions that are "hard to solve, easy to verify" -- oracle has answer, model cannot trivially succeed
+
+**Code agent correctness filter** (zero-tolerance dual check):
+```
+ACCEPT if: patch produces non-zero false-to-positive tests (issue fixed)
+REJECT if: any pass-to-fail tests (regression introduced)
+# Both conditions enforced simultaneously -- correctness AND non-regression
+```
+
+**RL training (GRPO -- Group Relative Policy Optimization)**:
+- Algorithm: GRPO (Group Relative Policy Optimization, DeepSeek's RL variant)
+- Reward types: rule-based outcome rewards (code: tests pass/fail) + generative reward models (search: answer quality scoring)
+- Design principle: all tasks must be "hard to solve, easy to verify" -- enables scalable RL without expensive human labeling at each step
+- Unified training: reasoning + agentic tasks + human alignment in single RL stage (not separate phases)
+- Cold-start: DeepSeek-V3 methodology used to unify reasoning and tool-use within single trajectories BEFORE full RL begins
 
 **Training methodology**:
 - All domains support both thinking and non-thinking modes simultaneously

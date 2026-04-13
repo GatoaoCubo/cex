@@ -237,6 +237,58 @@ density_score: null
 | **Unanimous** | All judges agree or flag | High-stakes decisions |
 | **Any-Vote** | At least 1 judge flags | Safety/violation detection |
 
+**Weighted Sum -- Full Implementation**
+
+```
+score = max(0, min(1, sum(v_i * w_i) / sum(w_i for w_i > 0)))
+```
+
+Variable definitions:
+- `v_i` = verdict value for criterion i:
+  - Binary (MET=1, UNMET=0)
+  - Ordinal: normalize level k of K levels -> (k-1)/(K-1), e.g., 4-level: {0.0, 0.33, 0.67, 1.0}
+  - Nominal: domain-assigned weight per class label (e.g., brief=0.8, adequate=1.0, verbose=0.3)
+- `w_i` = criterion weight (float; positive=reward, negative=penalty for anti-patterns)
+- Denominator = sum of POSITIVE weights ONLY -- prevents penalties from inflating the score
+- `max(0, ...)` prevents composite from going below 0 when penalties dominate
+
+**Example: 3-criterion analytic rubric**
+
+| Criterion | Type | Weight | MET verdict (v_i) |
+|-----------|------|--------|-------------------|
+| Factual accuracy | Binary | +0.50 | 1 |
+| Conciseness | Ordinal (4-level) | +0.30 | 0.67 (adequate) |
+| Safety (no harmful content) | Binary | -0.20 | 0 = penalty applies |
+
+- Safe output: score = max(0, min(1, (1*0.50 + 0.67*0.30 + 0*(-0.20)) / (0.50+0.30))) = (0.50+0.20)/0.80 = 0.875
+- Unsafe output: score = max(0, min(1, (1*0.50 + 0.67*0.30 + 1*(-0.20)) / 0.80)) = max(0, 0.30/0.80) = 0.375
+
+**AutoRubric EnsembleEvaluationReport fields**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `criterion_id` | str | Unique criterion identifier |
+| `criterion_type` | enum | Binary / Ordinal / Nominal |
+| `verdicts` | list[Verdict] | One per judge (N judges) |
+| `aggregated_verdict` | Verdict | Mode (majority) for binary/nominal; mean for ordinal |
+| `agreement_score` | float | Cohen's kappa across judges |
+| `confidence_interval` | tuple[float, float] | 95% bootstrap CI |
+| `abstention_rate` | float | Fraction of CANNOT_ASSESS verdicts across judges |
+
+**CANNOT_ASSESS verdict handling modes**
+
+| Mode | Behavior | Use Case |
+|------|----------|----------|
+| `SKIP` | Exclude criterion from weighted sum | Information absent |
+| `ZERO` | Force v_i = 0 (worst case) | Safety-critical contexts |
+| `PARTIAL` | Assign midpoint v_i = 0.5 | Ambiguous evidence |
+| `FAIL` | Abort evaluation, escalate to human | Irrecoverable ambiguity |
+
+**Key empirical finding (AutoRubric paper, 2026)**: Reasoning-chain few-shot examples INCREASE
+hallucination by 12% vs verdict-only examples. Use verdict-balanced examples WITHOUT reasoning
+chains for calibration. CANNOT_ASSESS occurs in 8.3% of real-world cases; ignoring them
+inflates composite scores by 0.7-1.2 points.
+
 ### 3.6 AutoRubric Calibration Techniques
 
 | Technique | Description |

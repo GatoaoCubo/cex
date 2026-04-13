@@ -847,3 +847,261 @@ Application code
 | @task | Functional API: work unit decorator |
 | @traceable | LangSmith: trace arbitrary function |
 | @tool | LangChain: create tool from function |
+| NodeInterrupt | Internal exception raised by interrupt() -- do not catch in user code |
+| BSP | Bulk Synchronous Parallel -- the Pregel execution model |
+| Assistant | LangGraph Platform: named versioned config of a graph |
+| Thread (Platform) | LangGraph Platform: conversation container across runs |
+| Run (Platform) | LangGraph Platform: single graph invocation |
+| Cron | LangGraph Platform: scheduled periodic run |
+| Store | LangGraph Platform: cross-thread long-term memory (key-value namespace) |
+| DataType.kv | LangSmith dataset type: arbitrary key-value (most common) |
+| evaluate() | LangSmith: sync evaluation function against a dataset |
+| aevaluate() | LangSmith: async evaluation function (preferred for large datasets) |
+
+---
+
+## 8. LangGraph Platform (Cloud Deployment)
+
+LangGraph Platform (GA: 2025) is the production infrastructure layer for deploying
+stateful, long-running agents. Built on top of the Agent Server, it provides
+REST API, persistence, scheduling, and streaming capabilities.
+Source: https://blog.langchain.dev/langgraph-platform-ga/
+
+### 8.1 Deployment Tiers
+
+| Tier | Who manages infra | Where data runs | Cost |
+|------|------------------|-----------------|------|
+| **Self-Hosted Lite** | You | Your infra | Free (up to 1M nodes executed) |
+| **Self-Hosted Enterprise** | You | Your infra | Enterprise license |
+| **BYOC (Bring Your Own Cloud)** | LangChain managed | Your cloud account | Enterprise |
+| **Cloud SaaS** | LangChain fully managed | LangChain cloud | Plus/Enterprise plan |
+
+### 8.2 Agent Server Architecture
+
+```
+                    CONTROL PLANE (LangSmith)
+                    +---------------------------+
+                    | - Deployment management   |
+                    | - Auth (X-Api-Key header) |
+                    | - Studio UI               |
+                    +---------------------------+
+                              |
+                    DATA PLANE (Agent Server)
+                    +---------------------------+
+                    | LangGraph Server          |
+                    |  - REST API (/docs)       |
+                    |  - Task queue workers     |
+                    |                           |
+                    | PostgreSQL (persistent)   |
+                    |  - Assistants             |
+                    |  - Threads                |
+                    |  - Runs                   |
+                    |  - Store (long-term mem)  |
+                    |                           |
+                    | Redis (ephemeral)         |
+                    |  - Queue coordination     |
+                    |  - Worker communication   |
+                    +---------------------------+
+```
+
+### 8.3 REST API Resource Groups
+
+| Resource | Endpoint prefix | Definition |
+|----------|----------------|------------|
+| **Assistants** | `/assistants` | Named, versioned config of a graph (graph_id + config + metadata) |
+| **Threads** | `/threads` | Conversation container -- accumulates state across runs |
+| **Thread Runs** | `/threads/{id}/runs` | Invoke a graph on a thread (stateful) |
+| **Stateless Runs** | `/runs` | Invoke graph with no state persistence |
+| **Crons** | `/crons` | Schedule periodic runs with cron expression |
+| **Store** | `/store` | Long-term memory namespace operations (cross-thread KV) |
+| **Meta** | `/info`, `/ok` | Server health + version metadata |
+
+### 8.4 Run Execution Modes
+
+| Mode | API call | Behavior |
+|------|----------|---------|
+| **Synchronous** | `POST /runs/wait` | Blocks until complete, returns final state |
+| **Streaming** | `POST /runs/stream` | Server-Sent Events (SSE) with intermediate values |
+| **Background** | `POST /runs` | Returns run_id immediately; poll for status |
+| **Cron** | `POST /crons` | Scheduled background run on cron expression |
+
+### 8.5 Streaming Event Types (SSE)
+
+| Stream mode | Content |
+|-------------|---------|
+| `values` | Full state snapshot after each super-step |
+| `updates` | Incremental state updates from each node |
+| `messages` | Token-level streaming from model nodes |
+| `events` | LangChain callback events (on_llm_start, on_chain_end, etc.) |
+| `debug` | Internal debug events |
+| `custom` | Custom events via `stream_writer` in node |
+
+### 8.6 LangGraph CLI
+
+```bash
+langgraph dev          # Local dev server with hot reload
+langgraph build        # Build Docker image for deployment
+langgraph deploy       # Deploy to LangSmith Cloud SaaS
+langgraph up           # Start via Docker Compose (self-hosted)
+langgraph dockerfile   # Generate Dockerfile for custom builds
+```
+
+### 8.7 Python SDK (langgraph-sdk)
+
+```python
+from langgraph_sdk import get_client
+
+client = get_client(
+    url="http://localhost:2024",   # local dev or deployed URL
+    api_key="lsv2_..."             # LangSmith API key (X-Api-Key header)
+)
+
+# Create a thread + stream a run
+thread = await client.threads.create()
+async for chunk in client.runs.stream(
+    thread["thread_id"],
+    assistant_id="my-agent",
+    input={"messages": [{"role": "user", "content": "Hello"}]},
+    stream_mode="values",
+):
+    print(chunk.data)
+```
+
+### 8.8 CEX Pillar Mapping (LangGraph Platform)
+
+| Platform Concept | CEX Kind | Pillar |
+|-----------------|----------|--------|
+| Assistant | `agent_card` | P08 |
+| Thread | `session_state` | P10 |
+| Run (background) | `spawn_config` | P12 |
+| Cron job | `schedule` | P12 |
+| Store namespace | `entity_memory` | P10 |
+| Streaming (SSE) | `streaming_config` | P09 |
+
+---
+
+## 9. LangSmith Dataset Management API (Deep Dive)
+
+### 9.1 Client Initialization
+
+```python
+from langsmith import Client
+import os
+
+client = Client(
+    api_url="https://api.smith.langchain.com",  # default SaaS endpoint
+    api_key=os.environ["LANGSMITH_API_KEY"],
+)
+```
+
+### 9.2 Dataset Operations
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `create_dataset` | `name, description="", data_type=DataType.kv` | Dataset |
+| `read_dataset` | `dataset_id=None, dataset_name=None` | Dataset |
+| `list_datasets` | `dataset_name=None, data_type=None, metadata=None` | Iterator[Dataset] |
+| `delete_dataset` | `dataset_id` | None |
+| `clone_public_dataset` | `token_or_url, source_api_url=None` | Dataset |
+
+**Dataset data types (DataType enum):**
+
+| Value | Use case |
+|-------|----------|
+| `DataType.kv` | Arbitrary key-value inputs/outputs (most common) |
+| `DataType.llm` | LLM completion pairs (prompt_text -> completion_text) |
+| `DataType.chat` | Chat message pairs (messages list -> generation) |
+
+### 9.3 Example (Row) Operations
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `create_example` | `inputs, outputs=None, dataset_id, metadata=None` | Example |
+| `create_examples` | `inputs, outputs=None, dataset_id, metadata=None` | CreateExamplesResponse |
+| `list_examples` | `dataset_id=None, as_of=None, splits=None, metadata=None` | Iterator[Example] |
+| `read_example` | `example_id` | Example |
+| `update_example` | `example_id, inputs=None, outputs=None, metadata=None` | Example |
+| `delete_examples` | `example_ids: list[UUID]` | None |
+
+**Batch creation (preferred for large datasets):**
+
+```python
+# Single request for multiple rows
+client.create_examples(
+    inputs=[{"question": q} for q in questions],
+    outputs=[{"answer": a} for a in answers],
+    dataset_id=dataset.id,
+    metadata=[{"source": "v1"} for _ in questions],
+)
+```
+
+### 9.4 Evaluation API
+
+| Function | Import | Purpose |
+|----------|--------|---------|
+| `evaluate` | `from langsmith import evaluate` | Sync evaluation on dataset |
+| `aevaluate` | `from langsmith import aevaluate` | Async evaluation (preferred for large sets) |
+| `client.evaluate` | SDK v1.x+ preferred method | Same as above via Client |
+
+**evaluate() parameters:**
+
+```python
+from langsmith import evaluate
+
+results = evaluate(
+    target,                       # Callable or LangChain Runnable
+    data,                         # Dataset name/ID or list[Example]
+    evaluators=[correctness_fn],  # list[Callable] -- per-example scorers
+    summary_evaluators=[agg_fn],  # list[Callable] -- aggregate scorers
+    metadata={"model": "gpt-4o"}, # Stored with experiment
+    experiment_prefix="my-run-v1",
+    max_concurrency=4,            # Parallel example evaluation
+    num_repetitions=1,            # Run each example N times
+    blocking=True,                # Wait for all results
+)
+```
+
+**Evaluator function signature:**
+
+```python
+from langsmith.schemas import Run, Example
+from langsmith.evaluation import EvaluationResult
+
+def correctness_evaluator(run: Run, example: Example) -> EvaluationResult:
+    score = 1.0 if run.outputs["answer"] == example.outputs["answer"] else 0.0
+    return EvaluationResult(key="correctness", score=score)
+```
+
+### 9.5 Dataset Versioning
+
+| Feature | API |
+|---------|-----|
+| Tag a version | `client.create_tag(dataset_id, name="v1.0")` |
+| Pin eval to version | `data="my-dataset:v1.0"` in `evaluate()` |
+| List examples at version | `client.list_examples(dataset_id, as_of="v1.0")` |
+
+### 9.6 CEX Pillar Mapping (LangSmith Datasets)
+
+| LangSmith Concept | CEX Kind | Pillar |
+|-------------------|----------|--------|
+| Dataset | `benchmark` | P07 |
+| Example (row) | `eval_dataset` entry | P07 |
+| Evaluator function | `llm_judge` or `scoring_rubric` | P07 |
+| Annotation queue | `quality_gate` | P11 |
+| Experiment result | `benchmark` (output) | P07 |
+| Summary evaluator | `scoring_rubric` (aggregate) | P07 |
+
+---
+
+## 10. Comparative Context (vs. Alternatives)
+
+| Dimension | LangGraph | CrewAI | AutoGen | Semantic Kernel |
+|-----------|-----------|--------|---------|-----------------|
+| Graph model | Pregel BSP (super-steps) | Role-based crews | Conversation protocol | Plugin + planner |
+| State management | TypedDict + reducers | Agent memory dicts | ConversableAgent vars | SKContext |
+| HITL | interrupt() / resume | Manual callback | Human proxy agent | Plan interrupts |
+| Persistence | Checkpointer (Postgres/SQLite) | Memory backends | Memory DB | SK memory store |
+| Cloud deployment | LangGraph Platform (GA 2025) | Self-managed | AutoGen Studio | Azure AI Foundry |
+| Observability | LangSmith (native) | LangSmith / custom | OTel compatible | Azure AppInsights |
+| Multi-agent | Command + Send primitives | Hierarchical crews | GroupChat | Orchestrator pattern |
+| Evaluation | LangSmith datasets + evaluate() | Custom | Custom | Promptflow |
