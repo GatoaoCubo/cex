@@ -7,7 +7,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-management
-quality: 9.2
+quality: 9.1
 tags: [glossary, knowledge-card, kc, p01]
 tldr: "A dense, structured document encoding a single concept with mandatory frontmatter, density ≥0.8, and machine-parseable format."
 density_score: 0.97
@@ -26,118 +26,180 @@ updated: "2026-04-13"
 
 ## Boundary
 
-A Knowledge Card is a self-contained, high-density knowledge unit that defines a single concept with unambiguous boundaries. It is NOT a knowledge_card without minimum density, nor a context_doc without explicit scope.  
+Short definition of domain term. NOT a knowledge_card (without minimum density) or context_doc (without scope).  
+
+## Core Content
+
+### Key Properties
+- **Single Concept Focus**: Encodes one idea, entity, or process (e.g., "quantum entanglement" vs. "quantum mechanics").
+- **Machine-Readable**: YAML frontmatter enables automated indexing, search, and integration.
+- **Density Constraint**: ≥0.8 information density (no fluff, no redundancy).
+- **Versioning**: Tracks updates via `version` field (e.g., 1.0.0 → 1.1.0).
+- **Scoping**: Explicitly defines boundaries (e.g., "applies to P01 only").
+
+### Technical Constraints
+- **Size Limits**: Focused (2KB) vs. Comprehensive (4KB).
+- **Format**: Strict Markdown with YAML frontmatter (no HTML, no images).
+- **Encoding**: UTF-8, ASCII-compatible.
+- **Validation**: Must pass `kc_validator` tool (see `kc_structure_contract.md`).
+- **Licensing**: CC-BY-4.0 unless otherwise specified.
+
+### Use Cases
+- **Knowledge Injection**: Populates CEX knowledge graphs.
+- **Training Data**: Feeds AI models with precise, structured data.
+- **API Documentation**: Serves as schema for REST/GraphQL endpoints.
+- **Onboarding**: Accelerates new team member learning curves.
+- **Cross-System Sync**: Ensures consistency across CEX tools.
 
 ## 8F Pipeline Function
 
 Primary function: **INJECT**  
-- **Input**: Raw knowledge fragments, domain-specific data, or user queries  
-- **Output**: Structured KC with validated YAML frontmatter and content  
-- **Mechanism**:  
-  1. Parses unstructured text into concept clusters  
-  2. Applies density filters (removes redundant/ambiguous content)  
-  3. Maps to YAML schema (id, kind, pillar, etc.)  
-  4. Validates against `kc_structure_contract.md`  
-  5. Injects into CEX knowledge graph for downstream use  
+
+**Inputs**:  
+- Raw domain knowledge (e.g., technical specs, business rules).  
+- Existing KCs for alignment.  
+
+**Process**:  
+1. **Extract**: Identify core concept from source material.  
+2. **Transform**: Apply density constraints, structure, and validation.  
+3. **Load**: Inject into CEX knowledge graph via API or CLI.  
+
+**Outputs**:  
+- Validated KC file (`.md`).  
+- Graph database updates.  
+- Audit trail for versioning.  
 
 **Example**:  
-A user query about "quantum entanglement" is parsed into a KC with:  
-- `id`: p01_physics_quantum_entanglement  
-- `pillar`: P01  
-- `density_score`: 0.92  
-- `tables`: [quantum states, measurement outcomes]  
+A KC on "blockchain consensus" would inject nodes into the "distributed systems" graph, linking to "Proof of Work," "Proof of Stake," and "Smart Contracts."  
 
-## Structure Requirements
+**Constraints**:  
+- No circular references in graph.  
+- All links must exist in CEX.  
+- No duplicate concepts (enforced by `kc_validator`).  
 
-| Section       | Content Type         | Mandatory | Format           | Example                                                                 |
-|---------------|----------------------|-----------|------------------|-------------------------------------------------------------------------|
-| YAML Frontmatter | Metadata             | ✅        | YAML             | `id`, `kind`, `pillar`, `density_score`, `created`, `updated`         |
-| H1            | Concept Title        | ✅        | Markdown         | "Quantum Entanglement"                                                 |
-| Core          | Concept Definition   | ✅        | Dense prose      | "A physical phenomenon where pairs of particles become correlated..." |
-| Tables        | Data/Relationships   | ❌        | Markdown tables  | Comparison of entangled vs. non-entangled states                      |
-| CEX Integration | System hooks        | ❌        | Code blocks      | `@inject` or `@reference` annotations                                 |
+## Comparison: KC vs. Document Types
 
-## Comparison: Knowledge Card vs. Alternative Formats
-
-| Document Type     | Purpose                        | Structure Complexity | Density Requirement | Use Case                              | Example                                                                 |
-|-------------------|--------------------------------|----------------------|---------------------|---------------------------------------|-------------------------------------------------------------------------|
-| Knowledge Card (KC) | Atomic concept encoding        | High                 | ≥0.8                | CEX knowledge graph injection         | `p01_physics_quantum_entanglement`                                      |
-| Context Doc       | Broader contextual framework   | Medium               | ≥0.5                | System-level knowledge mapping        | `p01_physics_quantum_mechanics_overview`                              |
-| Process Doc       | Workflow or procedure          | Medium               | ≥0.6                | Operational guidance                  | `p02_engineering_software_deployment_process`                         |
-| Reference Doc     | Comprehensive resource         | Low                  | ≥0.4                | Long-form documentation               | `p03_biology_human_genome_reference`                                  |
-| Tutorial Doc      | Step-by-step learning path     | Low                  | ≥0.3                | Skill acquisition                     | `p04_programming_python_beginner_tutorial`                            |
+| Document Type      | Purpose                        | Density Score | Format           | Use Case                          |
+|--------------------|--------------------------------|---------------|------------------|-----------------------------------|
+| Knowledge Card (KC) | Atomic concept encoding        | ≥0.8          | Markdown + YAML  | CEX integration, AI training      |
+| Context Doc        | Broad contextual explanation   | 0.5–0.7       | Markdown         | Background reading, documentation |
+| Knowledge Article  | Detailed tutorial or guide     | 0.6–0.8       | Markdown         | User onboarding, process guides   |
+| Concept Map        | Visual relationship overview   | 0.4–0.6       | Diagram + text   | Learning, brainstorming           |
+| Taxonomy Entry     | Hierarchical classification    | 0.7–0.9       | Structured JSON  | Metadata tagging, search indexing |
 
 ## Related Kinds
 
-1. **Context Doc**: Provides broader contextual frameworks that KCs are embedded within.  
-2. **Process Doc**: Details workflows that may reference multiple KCs for execution.  
-3. **Reference Doc**: Contains comprehensive resources that may include KCs as subsections.  
-4. **Tutorial Doc**: Uses KCs as building blocks for step-by-step learning.  
-5. **Integration Doc**: Specifies how KCs are mapped to system APIs or CEX pipelines.  
+- **Context Document**: Provides broader context for KCs (e.g., "blockchain in finance" vs. "blockchain consensus").  
+- **Knowledge Article**: Expands on KC concepts with tutorials or workflows (e.g., "Implementing Proof of Work").  
+- **Concept Map**: Visualizes relationships between KCs (e.g., linking "quantum entanglement" to "quantum computing").  
+- **Taxonomy Entry**: Defines classification hierarchies (e.g., "P01 > Physics > Quantum Mechanics").  
+- **Integration Specification**: Describes how KCs connect to external systems (e.g., API endpoints, databases).  
 
-## Density Optimization Techniques
+## Examples
 
-| Technique                | Description                                                                 | Example                                                                 | Impact on Density |
-|-------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|-------------------|
-| Sentence Filtering      | Removes redundant or ambiguous phrases                                    | "It is important to note that..." → "Note: ..."                         | +0.05             |
-| Data Table Conversion   | Replaces prose lists with structured tables                                 | "List of states: | 1. State A | 2. State B" → Table with 2 columns     | +0.10             |
-| Frontmatter Expansion   | Adds metadata fields that improve machine parsing                          | Adding `domain`, `pillar`, `tags`                                       | +0.03             |
-| Cross-Reference Removal | Eliminates external links that reduce focus                               | Remove "See also: ..."                                                  | +0.08             |
-| Verbosity Reduction     | Uses abbreviations and concise phrasing                                     | "Quantum entanglement is a phenomenon where..." → "Quantum entanglement: phenomenon where..." | +0.07             |
+### Example 1: Focused KC (2KB)
+```markdown
+---
+id: p01_gl_kc_quantum_entanglement
+kind: glossary_entry
+pillar: P01
+title: "Quantum Entanglement"
+version: 1.0.0
+author: n04_physics
+domain: quantum-mechanics
+density_score: 0.92
+tags: [quantum, entanglement, p01]
+---
 
-## CEX Integration Patterns
+# Quantum Entanglement
 
-| Integration Type      | Description                                                                 | Example                                                                 | KC Annotation     |
-|-----------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|-------------------|
-| Direct Injection      | KC is directly injected into CEX knowledge graph                          | `@inject: p01_physics_quantum_entanglement`                             | `@inject`         |
-| Reference Linking     | KC is linked to other KCs or documents via metadata                       | `related: [p01_physics_quantum_mechanics, p02_engineering_photonics]` | `@reference`      |
-| API Mapping           | KC defines API endpoints or system hooks                                    | `api: /quantum/entanglement/data`                                       | `@api`            |
-| Pipeline Trigger      | KC contains triggers for downstream processing                            | `trigger: p02_engineering_simulation_quantum`                         | `@trigger`        |
-| Validation Rule       | KC defines constraints for other documents                                | `validate: p03_biology_gene_expression`                                 | `@validate`       |
+**Term**: Quantum Entanglement  
+**Synonyms**: EPR paradox, spooky action  
 
-## Quality Assurance Metrics
+**Definition**: A phenomenon where particles become correlated such that the state of one instantly influences the state of another, regardless of distance.  
 
-| Metric               | Target Value | Current Value | Description                                                                 |
-|----------------------|--------------|---------------|-----------------------------------------------------------------------------|
-| Density Score        | ≥0.8         | 0.97          | Ratio of signal content to total words                                      |
-| Frontmatter Completeness | 100%       | 100%          | All required YAML fields present                                            |
-| Table Count          | 0–3          | 2             | Structured data representation                                              |
-| Annotation Coverage  | 100%         | 100%          | All integration hooks properly annotated                                    |
-| KB Size (focused)    | ≤2KB         | 1.8KB         | Optimized for single-concept injection                                      |
-| KB Size (comprehensive) | ≤4KB      | 3.9KB         | Expanded with supplementary data                                            |
+**See**: `p01_gl_kc_quantum_superposition`  
 
-## Evolution History
+## Core Content
 
-| Version | Date       | Changes Made                                  | Impact on CEX System                  |
-|---------|------------|-----------------------------------------------|---------------------------------------|
-| 1.0.0   | 2026-04-07 | Initial release with YAML frontmatter schema  | Enabled first-phase knowledge graph   |
-| 1.1.0   | 2026-05-01 | Added density scoring algorithm             | Improved metadata consistency         |
-| 1.2.0   | 2026-06-15 | Introduced CEX integration annotations      | Enhanced system interoperability      |
-| 1.3.0   | 2026-07-20 | Added multi-language support                | Expanded global knowledge coverage    |
-| 1.4.0   | 2026-08-10 | Optimized for AI parsing                    | Improved LLM integration accuracy     |
+- **Key Properties**: Non-local correlations, no faster-than-light signaling.  
+- **Mathematical Basis**: Bell's theorem, entangled state equations.  
+- **Applications**: Quantum cryptography, quantum teleportation.  
+```
 
-## Use Cases in CEX
+### Example 2: Comprehensive KC (4KB)
+```markdown
+---
+id: p01_gl_kc_blockchain_consenus
+kind: glossary_entry
+pillar: P01
+title: "Blockchain Consensus"
+version: 1.2.1
+author: n04_blockchain
+domain: distributed-systems
+density_score: 0.85
+tags: [blockchain, consensus, p01]
+---
 
-1. **Knowledge Injection**: KCs are injected into CEX knowledge graph for AI training and query resolution.  
-2. **System Integration**: KCs define API endpoints, validation rules, and pipeline triggers.  
-3. **Education**: KCs are used as building blocks in tutorial docs and learning paths.  
-4. **Cross-Referencing**: KCs link to other KCs, context docs, and reference materials.  
-5. **Quality Assurance**: KCs are validated against `kc_structure_contract.md` for consistency.  
+# Blockchain Consensus
+
+**Term**: Blockchain Consensus  
+**Synonyms**: Consensus algorithm, distributed agreement  
+
+**Definition**: Mechanisms ensuring all nodes in a blockchain network agree on the validity of transactions and the state of the ledger.  
+
+**See**: `p01_gl_kc_proof_of_work`, `p01_gl_kc_proof_of_stake`  
+
+## Core Content
+
+### Key Properties
+- **Types**: Proof of Work (PoW), Proof of Stake (PoS), Delegated Proof of Stake (DPoS).  
+- **Security**: Prevents double-spending, Sybil attacks.  
+- **Scalability**: Varies by algorithm (e.g., PoW: low; PoS: high).  
+
+### Technical Constraints
+- **Latency**: PoW (10+ mins), PoS (seconds).  
+- **Energy Use**: PoW (high), PoS (low).  
+- **Validator Requirements**: PoW (computing power), PoS (staked tokens).  
+
+### Use Cases
+- **Bitcoin**: PoW.  
+- **Ethereum 2.0**: PoS.  
+- **EOS**: DPoS.  
+
+## CEX Integration
+- **Graph Nodes**: "Consensus Algorithm" → "Proof of Work," "Proof of Stake."  
+- **API Endpoints**: `/v1/consensus/validate`, `/v1/consensus/ledger`.  
+```
 
 ## Best Practices
 
-- **Single Concept Focus**: Ensure each KC addresses one concept only.  
-- **Frontmatter First**: Always start with YAML metadata for machine parsing.  
-- **Density Optimization**: Use tables and annotations to maximize signal content.  
-- **Version Control**: Track changes with version numbers and update dates.  
-- **Cross-Validation**: Reference other KCs or context docs for completeness.  
+1. **Frontmatter First**: Always include `id`, `kind`, `pillar`, `version`, `author`, `domain`, `density_score`, `tags`.  
+2. **Density Checks**: Use `kc_validator` to ensure ≥0.8 density.  
+3. **Linking**: Reference related KCs via `See` field.  
+4. **Versioning**: Update `version` for changes (e.g., 1.0.0 → 1.1.0).  
+5. **Validation**: Run through `kc_structure_contract.md` before publishing.  
 
 ## Common Pitfalls
 
-| Pitfall                        | Solution                                                                 | Impact on Density |
-|-------------------------------|--------------------------------------------------------------------------|-------------------|
-| Overly broad definitions      | Narrow scope to a single concept                                         | -0.15             |
-| Missing frontmatter fields    | Complete all required YAML metadata                                      | -0.20             |
-| Redundant explanations        | Remove duplicate or verbose content                                      | -0.10             |
-| Inconsistent formatting       | Use standardized headers and table structures                          | -0.05             |
-| Excessive linking             | Limit external references to essential documents                         | -0.08             |
+- **Too Broad**: "Blockchain" instead of "Blockchain Consensus."  
+- **Low Density**: Fluffy explanations without actionable data.  
+- **Invalid Format**: Missing YAML frontmatter or incorrect Markdown.  
+- **Circular Links**: KCs referencing each other without clear hierarchy.  
+- **Outdated Info**: Failing to update `version` or `density_score`.  
+
+## Tools
+
+- **kc_validator**: Validates structure, density, and format.  
+- **kc_builder**: GUI tool for creating KCs.  
+- **kc_grapher**: Visualizes KC relationships in CEX.  
+- **kc_search**: Full-text search across all KCs.  
+- **kc_exporter**: Exports KCs to JSON, XML, or CSV.  
+
+## Future Work
+
+- **AI-Generated KCs**: Automate creation from unstructured text.  
+- **Multilingual Support**: Translate KCs into 10+ languages.  
+- **Real-Time Sync**: Auto-update KCs from live data streams.  
+- **Interactive KCs**: Embed videos, code snippets, or simulations.  
+- **Density Optimization**: Use NLP to refine prose for higher density.
