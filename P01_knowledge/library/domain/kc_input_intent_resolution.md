@@ -10,7 +10,7 @@ updated: 2026-04-08
 author: N04_knowledge
 domain: intent_resolution
 origin: src_cross_framework
-quality: null
+quality: 9.1
 tags: [intent-resolution, input-processing, query-rewriting, slot-filling, disambiguation, transmutation, permanent]
 tldr: "Intent resolution is the systematic process of converting ambiguous, incomplete, or imprecise user input into structured, executable system actions. It bridges the gap between human desire and machine specification."
 when_to_use: "When building input processing pipelines, designing user-facing agent interfaces, implementing query understanding, or debugging why a system misinterprets user requests."
