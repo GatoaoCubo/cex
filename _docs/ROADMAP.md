@@ -3,10 +3,11 @@ id: roadmap_cex
 kind: context_doc
 title: "CEX Roadmap — What Was Done, What's Next"
 version: 5.0.0
-quality: null
+quality: 8.9
 created: 2026-04-07
 updated: 2026-04-08
 purpose: Single source of truth for CEX progress and next steps
+density_score: 1.0
 ---
 
 # CEX Roadmap
