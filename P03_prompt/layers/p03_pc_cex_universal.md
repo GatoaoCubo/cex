@@ -10,7 +10,7 @@ title: "CEX Universal Prompt Compiler"
 domain: intent_resolution
 coverage: 124
 languages: [pt-br, en]
-quality: null
+quality: 9.2
 tags: [prompt_compiler, intent-resolution, cex, bilingual, transmutation]
 tldr: "Resolves natural language input into {kind, pillar, nucleus, verb} for all 124 CEX kinds in PT-BR and EN"
 density_score: 0.93
