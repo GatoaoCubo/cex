@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-management
-quality: 8.7
+quality: 8.8
 tags:
 - glossary
 - knowledge-card
@@ -16,5 +16,91 @@ tldr: A dense, structured document encoding a single concept with mandatory fron
   format.
 density_score: 0.97
 updated: '2026-04-13'
-boundary: Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo).
-8f_pipeline_function: 'Primary function: INJECT'
+boundary: A Knowledge Card is a focused, machine-parseable knowledge artifact that encodes a single concept with unambiguous
+  boundaries. It is NOT a knowledge card without minimum density (≤0.7), nor a context document without explicit scope. It
+  is NOT a narrative, a report, or a process flow. It is NOT a container for multiple concepts. It is NOT a living document
+  with versioning.
+8f_pipeline_function: "Primary function: INJECT  \nInput: Unstructured domain knowledge (text, diagrams, interviews)  \nOutput:\
+  \ Structured KC with YAML frontmatter and Markdown body  \nProcess:  \n1. Concept extraction (via NLP or manual curation)\
+  \  \n2. Density validation (≥0.8)  \n3. Frontmatter injection (id, kind, pillar, etc.)  \n4. Section ordering (H1 → Core\
+  \ → Tables → CEX Integration)  \n5. Machine-parseable formatting (YAML + Markdown)  \nExample: A 300-word interview transcript\
+  \ is distilled into a 250-byte KC with 4 sections and 3 tables."
+structure_requirements: '| Section | Required | Format | Content Type | Example |
+
+  |--------|----------|--------|--------------|---------|
+
+  | H1 | Yes | Markdown | Concept title | `# Knowledge Card: Quantum Entanglement` |
+
+  | Core | Yes | Markdown | Definition, use cases | "Quantum entanglement is a physical phenomenon..." |
+
+  | Tables | Optional | Markdown | Data, comparisons | "Comparison of Entanglement Theories" |
+
+  | CEX Integration | Optional | YAML | Links to CEX artifacts | `see: kc_structure_contract.md` |'
+comparison_kc_vs_document_types: '| Attribute | Knowledge Card (KC) | Context Document | Knowledge Article | Data Sheet |
+  Process Map |
+
+  |----------|---------------------|------------------|-------------------|------------|-------------|
+
+  | Purpose | Encode single concept | Provide contextual background | Explain complex topics | Store structured data | Visualize
+  workflows |
+
+  | Density Requirement | ≥0.8 | N/A | ≤0.6 | N/A | N/A |
+
+  | Structure | YAML + Markdown | Free-form text | Headings + paragraphs | Tables + charts | Diagrams |
+
+  | Use Case | CEX integration | Background reading | Training materials | Data reference | Process automation |
+
+  | Example | `# Quantum Entanglement` | "History of Quantum Mechanics" | "How to Build a Quantum Computer" | "Particle Mass
+  Table" | "Entanglement Experiment Flow" |'
+related_kinds:
+- 'Context Document: Provides broader background for KCs but lacks density requirements.'
+- 'Knowledge Article: Explains complex topics with lower density (≤0.6) and narrative structure.'
+- 'Data Sheet: Stores structured data (tables, charts) without conceptual encoding.'
+- 'Process Map: Visualizes workflows or procedures, often linked to KCs for context.'
+- 'Glossary Entry: Defines terms but lacks the structured format and density of KCs.'
+density_validation: "Rule: Every sentence must contribute to concept encoding.  \nValidation Method: Remove sentence → KC\
+  \ loses value?  \nExamples:  \n- \"Quantum entanglement is a physical phenomenon\" → Valid (core definition).  \n- \"This\
+  \ is a very important concept\" → Invalid (vague, no value added).  \n- \"Entanglement occurs between particles\" → Valid\
+  \ (specific detail).  \n- \"Some people find this confusing\" → Invalid (subjective, no value).  \n- \"Entanglement is used\
+  \ in quantum computing\" → Valid (application context)."
+cex_integration: "Purpose: Enable machine-readable integration with CEX systems.  \nMethods:  \n- YAML frontmatter for metadata\
+  \ (id, kind, pillar, etc.)  \n- Markdown body for content (H1, Core, Tables)  \n- Links to related artifacts (`see:` field)\
+  \  \nExample:  \nsee: \n  - kc_structure_contract.md\n  - knowledge-card-builder\nOutcome: KCs become searchable, linkable,\
+  \ and reusable across CEX platforms."
+use_cases:
+- 'Training: KCs encode core concepts for AI training (e.g., "Quantum Entanglement").'
+- 'Integration: KCs link to CEX artifacts via `see:` field (e.g., `kc_structure_contract.md`).'
+- 'Automation: KCs enable process automation by encoding rules (e.g., "Data Validation Rules").'
+- 'Search: KCs are indexed by CEX search engines for fast retrieval.'
+- 'Collaboration: KCs standardize knowledge sharing across teams (e.g., "API Design Principles").'
+limitations:
+- 'Size: Max 2KB (focused) or 4KB (comprehensive).'
+- 'Scope: Single concept only (no multiple topics).'
+- 'Format: YAML + Markdown only (no diagrams or videos).'
+- 'Language: English only (no multilingual support).'
+- 'Versioning: No versioning (static content only).'
+best_practices:
+- 'Start with H1: Use concise title (e.g., `# Knowledge Card: Quantum Entanglement`).'
+- 'Write Core First: Define the concept in 1-2 sentences.'
+- 'Add Tables: Use tables for data, comparisons, or examples.'
+- 'Link to CEX: Use `see:` field to connect to related artifacts.'
+- 'Validate Density: Ensure every sentence adds value (≥0.8 density).'
+example_kc: "---\nid: p01_gl_quantum_entanglement\nkind: glossary_entry\npillar: P01\ntitle: \"Quantum Entanglement\"\nversion:\
+  \ 1.0.0\ncreated: 2026-04-07\nauthor: n04_knowledge\ndomain: physics\nquality: 8.9\ntags: [glossary, quantum, physics]\n\
+  tldr: \"A physical phenomenon where particles become correlated, affecting each other instantaneously.\"\ndensity_score:\
+  \ 0.95\nupdated: \"2026-04-13\"\n---\n\n# Quantum Entanglement\n\nTerm: Quantum Entanglement  \nAbbreviation: QE  \nSynonyms:\
+  \ entanglement, spooky action at a distance  \n\nDefinition: A physical phenomenon where pairs or groups of particles become\
+  \ correlated, such that the quantum state of each particle cannot be described independently of the state of the others,\
+  \ even when the particles are separated by large distances.  \n\nSee: `kc_structure_contract.md`, `quantum-computing-basics`\
+  \  \n\n## Boundary\n\nQuantum entanglement is a specific physical phenomenon. It is NOT a general theory of quantum mechanics,\
+  \ nor a philosophical interpretation. It is NOT a process or a tool.  \n\n## 8F Pipeline Function\n\nPrimary function: INJECT\
+  \  \nInput: Research papers, experimental data  \nOutput: Structured KC with YAML frontmatter and Markdown body  \nExample:\
+  \ A 500-word paper on entanglement is distilled into a 350-byte KC with 3 sections and 2 tables.  \n\n## Structure Requirements\n\
+  \n| Section | Required | Format | Content Type | Example |\n|--------|----------|--------|--------------|---------|\n| H1\
+  \ | Yes | Markdown | Concept title | `# Quantum Entanglement` |\n| Core | Yes | Markdown | Definition, use cases | \"Quantum\
+  \ entanglement is a physical phenomenon...\" |\n| Tables | Optional | Markdown | Data, comparisons | \"Comparison of Entanglement\
+  \ Theories\" |\n| CEX Integration | Optional | YAML | Links to CEX artifacts | `see: kc_structure_contract.md` |\n\n## Use\
+  \ Cases\n\n1. Training: KCs encode core concepts for AI training (e.g., \"Quantum Entanglement\").  \n2. Integration: KCs\
+  \ link to CEX artifacts via `see:` field (e.g., `kc_structure_contract.md`).  \n3. Automation: KCs enable process automation\
+  \ by encoding rules (e.g., \"Data Validation Rules\").  \n4. Search: KCs are indexed by CEX search engines for fast retrieval.\
+  \  \n5. Collaboration: KCs standardize knowledge sharing across teams (e.g., \"API Design Principles\").  "
