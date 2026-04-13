@@ -1,263 +1,16 @@
 ---
-id: n06_input_schema_content_order
-kind: input_schema
-pillar: P06
-title: "Input Schema -- Content Factory Order"
-version: 1.0.0
-created: 2026-04-08
-author: n06_commercial
-nucleus: N06
-domain: content-factory-ordering
-quality: 8.9
-tags: [input-schema, content-factory, order, brief, customer, checkout]
-tldr: "Complete input schema for Content Factory orders. Defines every field a customer submits to produce content: topic, audience, formats, brand config, delivery preferences, billing. Validates before pipeline execution."
-density_score: 0.93
-depends_on:
-  - spec_content_factory_v1
-  - n06_content_factory_pricing
-linked_artifacts:
-  primary: n06_content_factory_pricing
-  related:
-    - spec_content_factory_v1
-    - n06_kc_content_monetization
-    - p12_dag_cf_master
+title: Input Schema for Content Order Validation
+description: Contract defining required data for content pipeline execution
+generator: N06 Commercial Nucleus
+version: 1.3.2
+depends_on: 
+  - N05 (input validator)
+  - N06 (pricing engine)
+  - N07 (orchestrator)
+  - N03+N04 (producers)
+  - N05 (ops)
+pipeline_stage: 1 (submit)
 ---
-
-# Input Schema -- Content Factory Order
-
-> What a customer submits to order content. Every field has a purpose.
-> Incomplete orders get rejected at validation, not halfway through the pipeline.
-
----
-
-## 1. Schema Definition (YAML)
-
-```yaml
-content_order:
-  # === REQUIRED FIELDS ===
-  
-  topic:
-    type: string
-    required: true
-    min_length: 10
-    max_length: 500
-    description: "What the content is about. Be specific."
-    examples:
-      - "How to use the 8F pipeline in CEX to build typed knowledge artifacts"
-      - "React Server Components vs Client Components for mid-level devs"
-      - "Pricing strategies for SaaS in the Brazilian market"
-    validation: "Must be a declarative topic, not a command. Reject: 'make me content'"
-
-  audience:
-    type: object
-    required: true
-    description: "Who consumes this content. Determines tone, depth, vocabulary."
-    properties:
-      segment:
-        type: string
-        required: true
-        enum: [developer, marketer, executive, student, general, custom]
-        description: "Primary audience segment"
-      skill_level:
-        type: string
-        required: true
-        enum: [beginner, intermediate, advanced, expert]
-        description: "Technical depth calibration"
-      custom_description:
-        type: string
-        required: false
-        max_length: 300
-        description: "Free-text audience description when segment=custom"
-    examples:
-      - { segment: developer, skill_level: intermediate }
-      - { segment: custom, skill_level: beginner, custom_description: "Brazilian solopreneurs launching their first digital product" }
-
-  formats:
-    type: array
-    required: true
-    min_items: 1
-    max_items: 11
-    items:
-      type: string
-      enum:
-        - blog_post
-        - social_media_set
-        - video_script
-        - video_produced_short   # 90s
-        - video_produced_long    # 5min
-        - podcast_episode
-        - course_module
-        - ebook_chapter
-        - presentation
-        - email_sequence
-        - landing_page
-    description: "Which output formats to produce. Order does not matter."
-    presets:
-      lite: [blog_post, social_media_set, email_sequence]
-      standard: [blog_post, social_media_set, email_sequence, video_produced_short, podcast_episode, presentation]
-      complete: [blog_post, social_media_set, email_sequence, video_produced_short, podcast_episode, presentation, course_module, ebook_chapter, landing_page]
-      full_factory: [blog_post, social_media_set, video_script, video_produced_short, video_produced_long, podcast_episode, course_module, ebook_chapter, presentation, email_sequence, landing_page]
-
-  # === OPTIONAL FIELDS (with smart defaults) ===
-
-  brand_config:
-    type: string
-    required: false
-    default: "auto"
-    description: "Path to brand_config.yaml or 'auto' to use .cex/brand/brand_config.yaml"
-    validation: "File must exist and pass brand_validate.py"
-
-  language:
-    type: string
-    required: false
-    default: "pt-BR"
-    enum: [pt-BR, en, es, fr, de]
-    description: "Primary content language"
-
-  tone:
-    type: string
-    required: false
-    default: "from_brand_config"
-    enum: [technical, casual, formal, provocative, educational, inspirational, from_brand_config]
-    description: "Override brand voice tone for this specific order"
-
-  depth:
-    type: string
-    required: false
-    default: "standard"
-    enum: [brief, standard, deep, exhaustive]
-    description: "Content depth. Brief=overview, deep=tutorial, exhaustive=reference"
-    mapping:
-      brief: "500-800 words/blog, 5 slides, 60s video"
-      standard: "1200-1800 words/blog, 12 slides, 90s video"
-      deep: "2500-3500 words/blog, 20 slides, 3min video"
-      exhaustive: "4000-6000 words/blog, 30 slides, 5min video"
-
-  course_config:
-    type: object
-    required: false
-    description: "Only required when formats includes course_module"
-    properties:
-      modules:
-        type: integer
-        min: 1
-        max: 12
-        default: 8
-      include_quiz:
-        type: boolean
-        default: true
-      include_certificate:
-        type: boolean
-        default: false
-      platform:
-        type: string
-        enum: [hotmart, self_hosted, youtube, none]
-        default: hotmart
-
-  social_config:
-    type: object
-    required: false
-    description: "Only required when formats includes social_media_set"
-    properties:
-      platforms:
-        type: array
-        items:
-          type: string
-          enum: [instagram, linkedin, twitter_x, youtube, tiktok, facebook]
-        default: [instagram, linkedin, twitter_x]
-      posts_per_platform:
-        type: integer
-        min: 1
-        max: 7
-        default: 3
-      include_canva_designs:
-        type: boolean
-        default: true
-
-  video_config:
-    type: object
-    required: false
-    description: "Only for video_produced_short or video_produced_long"
-    properties:
-      voice:
-        type: string
-        enum: [elevenlabs_default, elevenlabs_custom, notebooklm, none]
-        default: elevenlabs_default
-      subtitles:
-        type: boolean
-        default: true
-      aspect_ratio:
-        type: string
-        enum: ["16:9", "9:16", "1:1"]
-        default: "9:16"
-
-  delivery:
-    type: object
-    required: false
-    properties:
-      priority:
-        type: string
-        enum: [standard, rush]
-        default: standard
-        description: "Rush = process immediately (costs 1.5x credits)"
-      notify_email:
-        type: string
-        format: email
-        required: false
-        description: "Email for delivery notification"
-      auto_publish:
-        type: boolean
-        default: false
-        description: "Publish to configured channels on completion"
-      output_format:
-        type: string
-        enum: [markdown, html, pdf, all]
-        default: markdown
-
-  # === BILLING FIELDS (auto-populated by checkout) ===
-
-  billing:
-    type: object
-    required: false
-    description: "Populated by checkout system, not by customer directly"
-    properties:
-      customer_id:
-        type: string
-        description: "Stripe/MP customer ID"
-      tier:
-        type: string
-        enum: [free, creator, pro, studio, factory]
-      credits_available:
-        type: integer
-        description: "Current balance in credits"
-      credits_required:
-        type: integer
-        description: "Estimated cost for this order (calculated at validation)"
-      payment_method:
-        type: string
-        enum: [subscription, credit_pack, pix, card]
-
-  # === METADATA ===
-
-  metadata:
-    type: object
-    required: false
-    properties:
-      campaign_name:
-        type: string
-        max_length: 100
-        description: "Group orders by campaign for analytics"
-      reference_urls:
-        type: array
-        items:
-          type: string
-          format: uri
-        max_items: 5
-        description: "URLs for research context (competitor pages, source material)"
-      notes:
-        type: string
-        max_length: 1000
-        description: "Free-text instructions for the pipeline"
 ```
 
 ---
@@ -431,56 +184,45 @@ metadata:
 | SUBMIT | Customer (UI/API/CLI) | Raw order payload |
 | VALIDATE | N05 (input validator) | Validated order or error codes |
 | ESTIMATE | N06 (pricing engine) | credits_required, estimated_time |
-| AUTHORIZE | N06 (billing) | Payment confirmed or checkout_url |
-| QUEUE | N07 (orchestrator) | Position in pipeline, ETA |
-| EXECUTE | N03+N04 (producers) | Content artifacts per format |
-| DELIVER | N05 (ops) | Files + notification + optional auto-publish |
+| AUTHORIZE | N06 (billing engine) | Payment authorization status |
+| QUEUE | N07 (orchestrator) | Scheduled execution time |
+| EXECUTE | N03+N04 (producers) | Generated content artifacts |
+| DELIVER | N05 (ops) | Delivered content to end user |
 
 ---
 
-## 5. API Endpoint Mapping
+## Related Kinds
 
-```yaml
-endpoints:
-  create_order:
-    method: POST
-    path: /api/v1/orders
-    body: content_order (this schema)
-    response: { order_id, credits_required, estimated_time, status }
-    
-  get_order:
-    method: GET
-    path: /api/v1/orders/{order_id}
-    response: { order, status, outputs[], progress_pct }
-    
-  list_orders:
-    method: GET
-    path: /api/v1/orders?status={status}&campaign={campaign}
-    response: { orders[], total, page }
-    
-  cancel_order:
-    method: DELETE
-    path: /api/v1/orders/{order_id}
-    response: { refunded_credits }
-    constraints: "Only cancellable if status=queued. In-progress orders: partial refund."
-    
-  estimate_order:
-    method: POST
-    path: /api/v1/orders/estimate
-    body: content_order (partial -- topic + formats minimum)
-    response: { credits_required, estimated_time, available_credits }
-```
+- **validation_schema**: Defines output validation rules, ensuring generated content meets quality and format standards. Complements this schema by validating artifacts post-production.
+- **type_def**: Abstract data definitions used across the system. This schema references type_def for consistent data modeling.
+- **pricing_engine**: Handles credit calculations and cost estimation. Directly integrated with this schema's credit calculation logic.
+- **orchestrator**: Manages pipeline stages (queue, execute). Relies on this schema for order validation before execution.
+- **billing_engine**: Manages payment methods and credit checks. Works with the billing section of this schema to authorize orders.
 
 ---
-
-*Generated by N06 Commercial Nucleus -- Content Order Schema*
-*Every field earns its place. No optional bloat. Validates before burning credits.*
-
-## Boundary
-
-Contrato de entrada que define dados requeridos. NAO eh validation_schema (saida) nem type_def (definicao abstrata).
-
 
 ## 8F Pipeline Function
 
-Primary function: **CONSTRAIN**
+**Stage 1 (submit)**: Input validation and credit authorization  
+**Constraint Type**: Hard constraint (order rejected if validation fails)  
+**Dependencies**: N05, N06, N07  
+**Output**: Validated order ready for execution
+
+---
+
+## Boundary
+
+**Input Contract**:  
+- Required fields: `topic`, `audience`, `formats`  
+- Optional fields: `language`, `tone`, `depth`, `delivery`, `metadata`  
+- Constraints: Tier-based access control, credit limits, format-specific rules  
+
+**Output Contract**:  
+- Validated order object with error codes if invalid  
+- Credit requirement calculation  
+- Execution readiness status  
+
+**System Interface**:  
+- REST API endpoint: `/api/v1/order/validate`  
+- Expected response format: JSON with `valid`, `errors`, `credits_required` fields  
+- Error codes: 400 (invalid input), 402 (insufficient credits), 500 (system error)
