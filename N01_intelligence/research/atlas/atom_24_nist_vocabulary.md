@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "NIST AI Vocabulary -- Complete Term Registry and Pillar Mapping"
 version: 0.3.0
-quality: 8.8
+quality: null
 tags: [nist, ai-rmf, trustworthy-ai, vocabulary, glossary, governance, fairness, risk-management, ai-100-3, ai-600-1, iso-42001, eu-ai-act, playbook, cross-framework]
 sources:
   - https://airc.nist.gov/glossary/
@@ -827,3 +827,258 @@ cross-disciplinary domains the glossary intentionally bridges:
 
 7. **Living document**: The glossary was released in beta (spreadsheet format) with
    updates ongoing. Last update: August 4, 2024.
+
+---
+
+## 8. AI RMF Playbook -- Practical Implementation Guidance
+
+The NIST AI RMF Playbook (https://airc.nist.gov/airmf-resources/playbook/) translates
+the abstract framework into action-oriented subcategories with suggested tasks. Available
+in PDF, CSV, Excel, and JSON formats. Each subcategory is numbered: GOVERN 1.1, MAP 2.3, etc.
+
+### 8.1 GOVERN Function -- Organizational Culture
+
+The GOVERN function establishes the foundational culture and policies.
+
+| Subcategory | Focus | Key Suggested Actions |
+|-------------|-------|----------------------|
+| GOVERN 1.1 | Policies, processes, procedures | Create written AI policies; align with legal/regulatory requirements; document scope |
+| GOVERN 1.2 | Accountability and roles | Define AI governance roles; assign ownership for risk decisions; establish chains |
+| GOVERN 1.3 | Organizational risk tolerance | Document risk appetite; calibrate against mission priorities; revisit annually |
+| GOVERN 1.4 | Organizational teams | Form cross-functional AI risk teams: legal, ethics, IT, domain experts |
+| GOVERN 1.5 | Organizational risk awareness | Train staff on AI risks; conduct awareness programs; embed risk culture |
+| GOVERN 1.6 | Policies for AI development | Require risk documentation before model deployment; mandate testing protocols |
+| GOVERN 1.7 | Processes for third-party risk | Assess vendor AI components; require supplier documentation; audit supply chain |
+| GOVERN 2.1 | Accountability structures | Executive sponsorship; board-level oversight mechanisms for AI trust |
+| GOVERN 4.1 | Organizational capabilities | Build internal AI expertise; establish centers of excellence |
+| GOVERN 5.1 | Organizational risk posture | Conduct enterprise-wide AI risk inventory; prioritize by impact |
+| GOVERN 6.1 | Incident response policies | Pre-define escalation procedures; create response playbooks; run tabletop exercises |
+| GOVERN 6.2 | Incident response protocols | Establish public communication procedures; document timelines; test protocols |
+
+### 8.2 MAP Function -- Contextualize Risks
+
+The MAP function identifies what the AI system is, who uses it, and what could go wrong.
+
+| Subcategory | Focus | Key Suggested Actions |
+|-------------|-------|----------------------|
+| MAP 1.1 | Context and categorization | Document system purpose, intended use, beneficial uses, deployment environment |
+| MAP 1.5 | Organizational risk | Identify applicable laws and regulations; map to compliance requirements |
+| MAP 1.6 | Stakeholder identification | List all affected parties: users, operators, impacted communities, third parties |
+| MAP 2.1 | Intended purpose | Formally document system goals; define out-of-scope uses; document failure modes |
+| MAP 2.3 | AI lifecycle stages | Map through all phases: design, development, testing, deployment, monitoring, retirement |
+| MAP 3.5 | Risk sources | Identify data quality issues, model limitations, human factors, systemic risks |
+| MAP 5.1 | AI impact to people | Assess impacts on protected classes; quantify disparate impact; document mitigation |
+| MAP 5.2 | Risk prioritization | Rank risks by probability x impact; document accepted vs. mitigated risks |
+
+### 8.3 MEASURE Function -- Quantify and Monitor
+
+The MEASURE function applies quantitative and qualitative tools to assess AI risk.
+
+| Subcategory | Focus | Key Suggested Actions |
+|-------------|-------|----------------------|
+| MEASURE 1.1 | Measurement approaches | Define metrics before deployment; establish baselines; specify acceptable ranges |
+| MEASURE 2.1 | Test and evaluation planning | Create T&E plans; define test populations; establish statistical significance thresholds |
+| MEASURE 2.2 | Fairness testing | Test for disparate impact across demographic groups; document methodology and results |
+| MEASURE 2.3 | Explainability assessment | Evaluate interpretability of outputs; test counterfactual explanations |
+| MEASURE 2.5 | Privacy risk measurement | Conduct membership inference testing; assess re-identification risk |
+| MEASURE 2.6 | Robustness testing | Run adversarial perturbation tests; evaluate performance under distribution shift |
+| MEASURE 2.7 | Transparency documentation | Produce model cards; document training data provenance; publish known limitations |
+| MEASURE 4.1 | Production monitoring | Establish continuous monitoring pipelines; set drift detection thresholds; alert on anomalies |
+| MEASURE 4.2 | Performance tracking | Track model performance KPIs over time; document degradation; trigger re-evaluation |
+
+### 8.4 MANAGE Function -- Address and Monitor Risks
+
+The MANAGE function allocates resources and responds to mapped and measured risks.
+
+| Subcategory | Focus | Key Suggested Actions |
+|-------------|-------|----------------------|
+| MANAGE 1.1 | Risk response plans | Develop risk treatment plans: accept, mitigate, transfer, avoid |
+| MANAGE 1.3 | Residual risk documentation | Document accepted residual risks; obtain stakeholder sign-off |
+| MANAGE 2.2 | Risk prioritization | Allocate remediation resources to highest-impact risks first |
+| MANAGE 3.1 | Risk remediation | Implement controls; re-test after remediation; track control effectiveness |
+| MANAGE 3.2 | Incident response execution | Execute incident response procedures; contain, investigate, remediate, recover |
+| MANAGE 4.1 | Residual risk management | Maintain risk register; schedule periodic reviews; adapt to evolving conditions |
+| MANAGE 4.2 | Continuous improvement | Apply lessons learned; update policies; track effectiveness of governance changes |
+
+### 8.5 Stop-Build Authority
+
+A critical NIST playbook concept enabling proactive governance:
+
+Organizations should establish **stop-build authority** -- a defined escalation path
+allowing any team member to halt AI development or deployment if unacceptable risks
+are discovered. This prevents sunk-cost bias from overriding safety signals.
+
+**Implementation**: Assign stop-build authority to specific roles (AI Ethics Officer, CISO,
+CRO). Define trigger conditions (e.g., fairness metric exceeds threshold, security
+vulnerability discovered, regulatory interpretation changes). Document override procedures.
+
+---
+
+## 9. NIST AI 600-1 -- GenAI Profile Implementation Mitigations
+
+Expanding Section 3 with implementation-level mitigations for each of the 12 risk categories.
+Source: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
+
+| # | Risk Category | Implementation Mitigations | Testing Approach |
+|---|--------------|---------------------------|-----------------|
+| 1 | CBRN Access | Content filtering; access controls to specialized capabilities; red-team with SMEs | Adversarial prompt testing; capability elicitation assessment |
+| 2 | Confabulation | Output validation pipelines; uncertainty quantification; human review for high-stakes; RAG grounding | Factuality benchmarks (TruthfulQA, HaluEval); citation accuracy |
+| 3 | Data Privacy | Training data governance; differential privacy; PII scrubbing; inference attack testing | Membership inference attacks; canary insertion tests |
+| 4 | Environmental Impact | Compute monitoring dashboards; inference optimization (quantization, distillation); carbon accounting | Energy per inference; model efficiency metrics |
+| 5 | Harmful Bias | Fairness testing across demographics; model collapse monitoring; diverse training data curation | Disparate impact ratio; demographic parity; counterfactual fairness |
+| 6 | Human-AI Interaction | UI design preventing automation bias; clear AI disclosure; adjustable reliance levels | User studies; automation bias measurement; task performance testing |
+| 7 | Information Integrity | Deepfake detection; source attribution; watermarking AI-generated content | Synthetic media detection rates; provenance tracing accuracy |
+| 8 | Information Security | Prompt injection defenses; model extraction countermeasures; access logging | Prompt injection red-teaming; model inversion attacks; API abuse testing |
+| 9 | Intellectual Property | Training data licensing audit; output similarity screening; provenance documentation | Copyright similarity detection; memorization probing |
+| 10 | Obscene/Degrading Content | Multi-layer content classifiers; human moderation for edge cases; clear content policies | Adversarial prompting for policy bypass; false positive/negative rates |
+| 11 | Dangerous/Violent Content | Safety classifiers; constitutional AI techniques; output review for extremism | Red-team adversarial testing; hate speech detection benchmarks |
+| 12 | Value Chain Integration | Vendor AI risk assessments; SBOM for AI; third-party audit requirements | Dependency mapping; API security testing; SLA compliance monitoring |
+
+### 9.1 TEVV Framework (Test, Evaluate, Verify, Validate)
+
+NIST AI 600-1 emphasizes the TEVV cycle for GenAI systems:
+
+| Phase | Focus | Key Activities |
+|-------|-------|----------------|
+| **Test** | Discover failures | Red-teaming, adversarial probing, unit testing of safety controls |
+| **Evaluate** | Measure performance | Benchmark comparison, fairness metric calculation, risk scoring |
+| **Verify** | Confirm requirements met | Trace from risk to control to test evidence; document coverage |
+| **Validate** | Confirm fitness for purpose | User acceptance testing; stakeholder review; real-world pilot |
+
+---
+
+## 10. ISO/IEC 42001:2023 Cross-Reference
+
+ISO/IEC 42001 is the first international standard for AI Management Systems (AIMS),
+published November 2023. Source: https://www.iso.org/standard/81230.html
+
+### 10.1 ISO 42001 vs NIST RMF -- Key Structural Differences
+
+| Dimension | NIST AI RMF | ISO/IEC 42001 | Practitioner Impact |
+|-----------|-------------|---------------|---------------------|
+| **Nature** | Voluntary framework | Certifiable standard (third-party audit) | ISO enables external certification; NIST does not |
+| **Structure** | 4 functions (Govern, Map, Measure, Manage) | 10 clauses (ISO management system structure) | ISO uses Plan-Do-Check-Act; NIST uses risk cycle |
+| **Compliance** | Self-assessment acceptable | Conformity assessment available | ISO certification demonstrates systematic governance |
+| **Scope** | Risk management focus | Full management system: policy, objectives, operations, improvement | ISO covers organizational governance beyond risk |
+| **Controls** | Outcome-based guidance | Prescriptive Annex A (38 controls) | ISO Annex A provides concrete baseline control set |
+
+### 10.2 ISO 42001 -- 10 Clause Structure
+
+| Clause | Title | NIST RMF Alignment |
+|--------|-------|-------------------|
+| 1 | Scope | -- (applicability boundaries) |
+| 2 | Normative References | -- (standards citations) |
+| 3 | Terms and Definitions | Vocabulary alignment with NIST AI 100-3 |
+| 4 | Context of the Organization | GOVERN -- understand context, stakeholders, scope |
+| 5 | Leadership | GOVERN -- executive accountability, policy commitment |
+| 6 | Planning | MAP + MEASURE -- risk identification, objectives |
+| 7 | Support | MANAGE -- resources, competence, awareness, communication |
+| 8 | Operation | MANAGE -- operational planning, AI system lifecycle controls |
+| 9 | Performance Evaluation | MEASURE -- monitoring, analysis, internal audit |
+| 10 | Improvement | GOVERN -- nonconformity, corrective action, continual improvement |
+
+### 10.3 ISO 42001 Annex A -- 38 Controls by Area
+
+| Control Area | Controls | Examples |
+|-------------|---------|---------|
+| AI governance | 6 | Policies, roles, accountability structures |
+| Risk management | 8 | Risk assessment methodology, treatment plans, residual risk |
+| Data management | 6 | Data provenance, quality, lifecycle |
+| AI system development | 8 | Design requirements, testing, change management |
+| Human oversight | 4 | Human review mechanisms, override capabilities |
+| Third-party management | 3 | Supplier assessment, contractual requirements |
+| Incident management | 3 | Response procedures, reporting, lessons learned |
+
+### 10.4 NIST Terms vs ISO 42001 Terms
+
+| NIST Term | ISO 42001 Equivalent | Key Difference |
+|-----------|---------------------|----------------|
+| AI Actor | Interested parties (clause 4.2) | ISO uses broader stakeholder lens |
+| AI RMF Profile | AIMS scope (clause 4.3) | ISO scope defines coverage; NIST profile tailors functions |
+| Trustworthiness | AI system objectives (clause 6.2) | ISO frames as measurable objectives; NIST as characteristics |
+| Impact Assessment | AI impact assessment (Annex A A.6.1.6) | ISO mandates documentation; NIST recommends it |
+| Governance | Management system (all clauses) | ISO governance is the whole standard; NIST is one of 4 functions |
+
+---
+
+## 11. EU AI Act -- Terminology Cross-Reference
+
+The EU AI Act (Regulation EU 2024/1689, effective August 2024) establishes legally binding
+definitions that differ from NIST's voluntary framework vocabulary.
+Source: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng
+
+### 11.1 Core EU AI Act Definitions vs NIST
+
+| Term | NIST Definition | EU AI Act Definition (Article 3) | Key Difference |
+|------|-----------------|----------------------------------|----------------|
+| **AI System** | Engineered system generating outputs influencing environments | Machine-based system operating with varying autonomy, may show adaptiveness, producing outputs for explicit or implicit objectives | EU definition is narrower and legally precise; excludes pure rule-based systems |
+| **High-Risk AI** | Not defined; risk determined by MAP function | AI systems in Annex III (biometrics, critical infrastructure, employment, education, law enforcement, migration, justice) | EU creates statutory list; NIST leaves determination to organizations |
+| **GPAI Model** | Foundation Model (NIST AI 600-1) | General-purpose AI model trained on large data, exhibiting significant generality | EU legal category with compliance obligations; NIST term is descriptive |
+| **Systemic Risk** | Not formally defined | Risk specific to high-capability GPAI models (>10^25 FLOPs) with potential for widespread EU-level adverse effects | EU introduces quantitative threshold; NIST has no equivalent |
+| **Provider** | Developer (NIST AI 100-3) | Natural/legal person placing AI system on market or putting into service | EU "provider" = NIST "developer"; legal accountability attached |
+| **Deployer** | Operator (contextual) | Natural/legal person using AI system under own authority | EU "deployer" = NIST "operator"; compliance obligations attached |
+| **Conformity Assessment** | Not applicable | Process verifying AI system meets applicable requirements before market placement | EU requires this for high-risk systems; NIST does not |
+
+### 11.2 EU AI Act Risk Tiers
+
+| Tier | EU AI Act Definition | NIST Equivalent | CEX Pillar |
+|------|---------------------|-----------------|------------|
+| **Prohibited** | Subliminal manipulation, exploitation of vulnerabilities, social scoring, real-time biometric surveillance in public spaces | No equivalent -- NIST does not prohibit | P11 Feedback (ethics) |
+| **High-Risk** | Annex III: biometrics, critical infrastructure, education, employment, essential services, law enforcement, migration, justice | High probability x high impact on NIST MAP function | P11 Feedback (risk) |
+| **Limited-Risk** | Transparency obligations: chatbot disclosure, deepfake labeling, emotion recognition disclosure | Moderate risk on NIST MAP function | P08 Architecture (transparency) |
+| **Minimal-Risk** | No specific obligations: spam filters, AI in video games, recommendation systems | Low risk on NIST MAP function | General baseline |
+
+### 11.3 GPAI Model Requirements (Articles 51-55)
+
+For GPAI models with systemic risk (>10^25 FLOPs training compute):
+
+| Requirement | Description | NIST Equivalent |
+|-------------|-------------|-----------------|
+| Model evaluation | Standardized tests and adversarial testing | MEASURE 2.6 (robustness) |
+| Adversarial testing | Red-teaming before public release | NIST AI 600-1 red-teaming guidance |
+| Incident reporting | Serious incidents reported to AI Office within 15 days | MANAGE 3.2 (incident response) |
+| Cybersecurity measures | Adequate protection for model weights and architecture | MEASURE 2.5 + GOVERN 1.7 |
+| Energy efficiency | Compute and energy consumption reporting | NIST AI 600-1 environmental impact |
+
+### 11.4 Compliance Workflow: NIST + ISO 42001 + EU AI Act
+
+```
+Step 1 -- Inventory (NIST MAP 1.1):
+  Document all AI systems in use or development.
+
+Step 2 -- Classify (EU AI Act tiers):
+  Prohibited? -> Stop.
+  High-Risk Annex III? -> Full EU compliance required.
+  GPAI >10^25 FLOPs? -> Systemic risk tier.
+
+Step 3 -- Govern (ISO 42001 clauses 4-5):
+  Establish AIMS scope, leadership commitment, accountability roles.
+
+Step 4 -- Risk assess (NIST MAP + MEASURE):
+  Apply GOVERN/MAP/MEASURE/MANAGE cycle for all AI systems.
+
+Step 5 -- Control (ISO 42001 Annex A):
+  Implement 38 controls proportionate to risk tier.
+
+Step 6 -- Certify (EU AI Act Article 43):
+  High-risk: conformity assessment (self or third-party).
+  ISO 42001 certification supports but does not substitute.
+
+Step 7 -- Monitor (NIST MEASURE 4.1 + ISO 42001 clause 9):
+  Continuous performance monitoring, drift detection, incident management.
+```
+
+---
+
+## 12. Multi-Framework Comparison Matrix
+
+| Dimension | NIST AI RMF | ISO/IEC 42001 | EU AI Act |
+|-----------|-------------|---------------|-----------|
+| **Jurisdiction** | Global (voluntary) | Global (certifiable) | EU (legally binding) |
+| **Mandate** | Voluntary | Voluntary (certification optional) | Mandatory for EU market |
+| **Primary Output** | Risk assessments and profiles | Management system and certification | Regulatory compliance |
+| **Enforcement** | None | Certification bodies | National market surveillance authorities |
+| **Penalty** | None | Loss of certification | Up to 3-7% global turnover (high-risk violations) |
+| **Vocabulary Source** | AI 100-3 (511 terms) | ISO 22989, ISO 42001 Clause 3 | Regulation 2024/1689 Article 3 (65+ definitions) |
+| **Update Frequency** | Living document | Standards revision (~5 years) | Implementing acts (ongoing) |
+| **CEX Integration** | Primary reference (8F pipeline) | Governance scaffold (P11/P12) | Compliance layer (P11 Feedback) |
