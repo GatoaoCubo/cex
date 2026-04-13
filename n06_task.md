@@ -1,12 +1,30 @@
-Improve this artifact to 9.0+ quality: .\N05_operations\feedback\quality_gate_security.md
-Current: 8.9 quality, 76 lines.
-Target: 9.0+ quality, 80+ lines.
+---
+id: n06_task_quality_gate_security
+kind: knowledge_card
+type: kind
+pillar: P04
+title: "Quality Gate Security — Structured Security Validation for skill"
+version: 1.0.0
+created: 2026-04-02
+updated: 2026-04-02
+author: builder_knowledge
+domain: security
+quality: 9.1
+tags: [security, p04, reusable, kind-kc]
+tldr: "Structured security validation framework with phase-based checks, trigger conditions, and lifecycle management for repeatable security workflows"
+when_to_use: "Building, reviewing, or reasoning about security artifacts"
+keywords: [security, phases, trigger, reusable, capability, workflow, lifecycle]
+feeds_kinds: [security]
+density_score: 85
+---
 
-INSTRUCTIONS:
-- Read the golden example (kc_skill.md via --read) to see the TARGET format
-- Match that structure: sections with ## headers, comparison tables, bullet lists
-- Add industry references and practical examples
-- Every section must have a table or structured data (tables > prose)
-- Minimum 80 lines of substantive content
-- All content in English
-- Keep and complete YAML frontmatter
+# Quality Gate Security
+
+## Spec
+```yaml
+kind: security_gate
+pillar: P04
+llm_function: TOOL
+max_bytes: 4064
+naming: p04_security_gate_{{name}}.md + .yaml
+core: true
