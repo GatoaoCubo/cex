@@ -363,6 +363,29 @@ score = max(0, min(1, (1.0*2.0 + 0.5*1.0 + (-1.0)*0.5) / (2.0+1.0)))
 
 Failure mode: asymmetric recall on rare nominal categories -- 18% lower recall on minority class.
 
+### 3.6b AutoRubric-R1V: Multimodal Extension (arxiv 2510.14738)
+
+Extension of AutoRubric principles to multimodal RLVR (Reinforcement Learning with Verifiable Rewards):
+
+| Component | Description |
+|-----------|-------------|
+| **Compare-and-compose aggregation** | Distills consistent reasoning checkpoints from multiple successful trajectories |
+| **Process-level rubric construction** | Builds problem-specific rubrics without human annotation or teacher models |
+| **Spurious step filtering** | Retains only consistent, essential reasoning steps across independent trajectories |
+| **Dual reward signal** | Combines rubric-based process rewards + final outcome rewards in GRPO training |
+
+**Performance** (Qwen2.5-VL-7B-IT base, 6 multimodal benchmarks):
+
+| Metric | AutoRubric-R1V | Vanilla GRPO | Base Model | VL-Rethinker |
+|--------|---------------|-------------|-----------|--------------|
+| Avg absolute improvement | +7.52% | baseline | 0% | +3.1% |
+| Reasoning inconsistency rate | 12.6% | 21.8% | 14.7% | 15.5% |
+| Rank among open-source | SOTA | - | - | 2nd |
+
+**CEX implication**: AutoRubric-R1V's process-level supervision applies to N07 nucleus evaluation --
+each reasoning step in a nucleus run can be scored via compare-and-compose over multiple
+successful N07 dispatches. F1-F8 steps map directly to rubric checkpoints.
+
 ### 3.7 Psychometric Reliability Metrics
 
 | Metric | Purpose |
