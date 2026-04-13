@@ -1,5 +1,5 @@
-Improve this artifact to 9.0+ quality: .\N01_intelligence\knowledge\kc_prompt_engineering_taxonomy.md
-Current: 8.8 quality, 56 lines.
+Improve this artifact to 9.0+ quality: .\N04_knowledge\agents\agent_taxonomy_engineer.md
+Current: 8.9 quality, 62 lines.
 Target: 9.0+ quality, 80+ lines.
 
 INSTRUCTIONS:

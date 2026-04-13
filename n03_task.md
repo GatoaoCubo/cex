@@ -1,5 +1,5 @@
-Improve this artifact to 9.0+ quality: .\N03_builder\README.md
-Current: 8.9 quality, 60 lines.
+Improve this artifact to 9.0+ quality: .\N06_commercial\knowledge\kc_ai_saas_monetization.md
+Current: 8.8 quality, 26 lines.
 Target: 9.0+ quality, 80+ lines.
 
 INSTRUCTIONS:
