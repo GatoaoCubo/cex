@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "Research Batch — Maps / Business Profile Deep Harvest"
 version: 1.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/crm_mission/batch_b_google_maps.md
@@ -12,6 +12,7 @@ variables: [REGION, CATEGORIES, CITIES, RADIUS_KM, MAPS_PROVIDER, OUTPUT_FILE, S
 density_score: 0.95
 tags: [template, research-batch, maps, google-maps, crm, instance-extraction]
 tldr: "Maps-based business discovery — systematic category × city matrix via Google Maps or equivalent provider."
+updated: "2026-04-13"
 ---
 
 # BATCH B — Maps / Business Profile Deep Harvest
