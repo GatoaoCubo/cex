@@ -6,7 +6,7 @@ pillar: P01
 title: "LLM Evaluation & Benchmark Taxonomy -- Complete Vocabulary Atlas"
 version: 1.1.0
 created: 2026-04-13
-updated: 2026-04-13
+updated: 2026-04-13T14:45:00
 author: n01_intelligence
 domain: evaluation_benchmarks
 quality: 8.9
@@ -1111,3 +1111,9 @@ For CEX's 32-atom Atlas: budget ~4 hours for full DeepResearchEval sweep.
 - [BrowseComp by OpenAI](https://openai.com/index/browsecomp/) (2026)
 - [FRAMES: Factuality Retrieval Reasoning Eval](https://arxiv.org/abs/2409.12941) (2025)
 - [LiveBench: Contamination-Free Evaluation](https://livebench.ai/) (2025-2026 rolling)
+- [AutoRubric-R1V: Rubric-Based Generative Rewards for Faithful Multimodal Reasoning](https://arxiv.org/abs/2510.14738)
+- [Survey on Evaluation of LLM-based Agents](https://arxiv.org/abs/2503.16416) (March 2026)
+- [Evaluation and Benchmarking of LLM Agents: A Survey](https://arxiv.org/abs/2507.21504) (KDD 2026)
+- [DeepResearchEval: Automated Framework for Deep Research Task Evaluation](https://arxiv.org/abs/2601.09688)
+- [Demystifying Evals for AI Agents (Anthropic)](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+- [Best LLM Evaluation Tools for AI Agents 2026 (Confident AI)](https://www.confident-ai.com/knowledge-base/compare/best-llm-evaluation-tools-for-ai-agents)

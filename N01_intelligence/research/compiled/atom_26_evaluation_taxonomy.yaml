@@ -5,7 +5,7 @@ pillar: P01
 title: LLM Evaluation & Benchmark Taxonomy -- Complete Vocabulary Atlas
 version: 1.1.0
 created: 2026-04-13
-updated: 2026-04-13
+updated: 2026-04-13 14:45:00
 author: n01_intelligence
 domain: evaluation_benchmarks
 quality: 8.9
@@ -334,17 +334,30 @@ density_score: null
   | Scoring Guidelines | Decision rules for adjacent scores |
 
   | Negative Weights | Penalties for anti-patterns (counters leniency bias) |'
-3_5_autorubric_aggregation_strategies: '| Strategy | Formula | When |
-
-  |----------|---------|------|
-
-  | Weighted Sum | score = max(0, min(1, Sum(v_i * w_i) / Sum(w_i>0))) | Default composite |
-
-  | Majority Vote | Mode of N judges per criterion | Multi-judge ensemble |
-
-  | Unanimous | All judges agree or flag | High-stakes decisions |
-
-  | Any-Vote | At least 1 judge flags | Safety/violation detection |'
+3_5_autorubric_aggregation_strategies: "| Strategy | Formula | When |\n|----------|---------|------|\n| Weighted Sum | score\
+  \ = max(0, min(1, Sum(v_i * w_i) / Sum(w_i>0))) | Default composite |\n| Majority Vote | Mode of N judges per criterion\
+  \ | Multi-judge ensemble |\n| Unanimous | All judges agree or flag | High-stakes decisions |\n| Any-Vote | At least 1 judge\
+  \ flags | Safety/violation detection |\n\nWeighted Sum -- Full Implementation\n\nscore = max(0, min(1, sum(v_i * w_i) /\
+  \ sum(w_i for w_i > 0)))\n\nVariable definitions:\n- `v_i` = verdict value for criterion i:\n  - Binary (MET=1, UNMET=0)\n\
+  \  - Ordinal: normalize level k of K levels -> (k-1)/(K-1), e.g., 4-level: {0.0, 0.33, 0.67, 1.0}\n  - Nominal: domain-assigned\
+  \ weight per class label (e.g., brief=0.8, adequate=1.0, verbose=0.3)\n- `w_i` = criterion weight (float; positive=reward,\
+  \ negative=penalty for anti-patterns)\n- Denominator = sum of POSITIVE weights ONLY -- prevents penalties from inflating\
+  \ the score\n- `max(0, ...)` prevents composite from going below 0 when penalties dominate\n\nExample: 3-criterion analytic\
+  \ rubric\n\n| Criterion | Type | Weight | MET verdict (v_i) |\n|-----------|------|--------|-------------------|\n| Factual\
+  \ accuracy | Binary | +0.50 | 1 |\n| Conciseness | Ordinal (4-level) | +0.30 | 0.67 (adequate) |\n| Safety (no harmful content)\
+  \ | Binary | -0.20 | 0 = penalty applies |\n\n- Safe output: score = max(0, min(1, (1*0.50 + 0.67*0.30 + 0*(-0.20)) / (0.50+0.30)))\
+  \ = (0.50+0.20)/0.80 = 0.875\n- Unsafe output: score = max(0, min(1, (1*0.50 + 0.67*0.30 + 1*(-0.20)) / 0.80)) = max(0,\
+  \ 0.30/0.80) = 0.375\n\nAutoRubric EnsembleEvaluationReport fields\n\n| Field | Type | Description |\n|-------|------|-------------|\n\
+  | `criterion_id` | str | Unique criterion identifier |\n| `criterion_type` | enum | Binary / Ordinal / Nominal |\n| `verdicts`\
+  \ | list[Verdict] | One per judge (N judges) |\n| `aggregated_verdict` | Verdict | Mode (majority) for binary/nominal; mean\
+  \ for ordinal |\n| `agreement_score` | float | Cohen's kappa across judges |\n| `confidence_interval` | tuple[float, float]\
+  \ | 95% bootstrap CI |\n| `abstention_rate` | float | Fraction of CANNOT_ASSESS verdicts across judges |\n\nCANNOT_ASSESS\
+  \ verdict handling modes\n\n| Mode | Behavior | Use Case |\n|------|----------|----------|\n| `SKIP` | Exclude criterion\
+  \ from weighted sum | Information absent |\n| `ZERO` | Force v_i = 0 (worst case) | Safety-critical contexts |\n| `PARTIAL`\
+  \ | Assign midpoint v_i = 0.5 | Ambiguous evidence |\n| `FAIL` | Abort evaluation, escalate to human | Irrecoverable ambiguity\
+  \ |\n\nKey empirical finding (AutoRubric paper, 2026): Reasoning-chain few-shot examples INCREASE\nhallucination by 12%\
+  \ vs verdict-only examples. Use verdict-balanced examples WITHOUT reasoning\nchains for calibration. CANNOT_ASSESS occurs\
+  \ in 8.3% of real-world cases; ignoring them\ninflates composite scores by 0.7-1.2 points."
 3_6_autorubric_calibration_techniques: '| Technique | Description |
 
   |-----------|-------------|
@@ -379,6 +392,42 @@ density_score: null
   \ panel |\n\nReliability Benchmarks (AutoRubric paper)\n\n| Criterion Type | Cohen's Kappa | Accuracy vs Human |\n|----------------|---------------|-------------------|\n\
   | Binary | 0.642 | 87.3% |\n| Ordinal (3-5 levels) | 0.549-0.719 | 76-83% |\n| Nominal | variable | 81.2% overall |\n\n\
   Failure mode: asymmetric recall on rare nominal categories -- 18% lower recall on minority class."
+3_6b_autorubric_r1v_multimodal_extension_arxiv_2510_14738: 'Extension of AutoRubric principles to multimodal RLVR (Reinforcement
+  Learning with Verifiable Rewards):
+
+
+  | Component | Description |
+
+  |-----------|-------------|
+
+  | Compare-and-compose aggregation | Distills consistent reasoning checkpoints from multiple successful trajectories |
+
+  | Process-level rubric construction | Builds problem-specific rubrics without human annotation or teacher models |
+
+  | Spurious step filtering | Retains only consistent, essential reasoning steps across independent trajectories |
+
+  | Dual reward signal | Combines rubric-based process rewards + final outcome rewards in GRPO training |
+
+
+  Performance (Qwen2.5-VL-7B-IT base, 6 multimodal benchmarks):
+
+
+  | Metric | AutoRubric-R1V | Vanilla GRPO | Base Model | VL-Rethinker |
+
+  |--------|---------------|-------------|-----------|--------------|
+
+  | Avg absolute improvement | +7.52% | baseline | 0% | +3.1% |
+
+  | Reasoning inconsistency rate | 12.6% | 21.8% | 14.7% | 15.5% |
+
+  | Rank among open-source | SOTA | - | - | 2nd |
+
+
+  CEX implication: AutoRubric-R1V''s process-level supervision applies to N07 nucleus evaluation --
+
+  each reasoning step in a nucleus run can be scored via compare-and-compose over multiple
+
+  successful N07 dispatches. F1-F8 steps map directly to rubric checkpoints.'
 3_7_psychometric_reliability_metrics: '| Metric | Purpose |
 
   |--------|---------|
@@ -614,6 +663,27 @@ density_score: null
   Default weights: 0.20 each (equal weighting = no domain assumption).
 
   Normalization per dimension: min-max over evaluation set. Cost and Latency inverted (lower is better).
+
+
+  Validated empirical findings (300 enterprise tasks, 6 agents, N=15 expert judges):
+
+
+  | Finding | Metric | Value |
+
+  |---------|--------|-------|
+
+  | Cost gap from accuracy-only optimization | CNA ratio vs cost-aware agents | 4.4x -- 10.8x more expensive |
+
+  | Reliability drop: single run vs 8-run | pass@1 vs pass@8 | 60% -> 25% (35pp gap) |
+
+  | CLEAR vs accuracy-only production predictor | Spearman rho | CLEAR: 0.83 vs accuracy-only: 0.41 |
+
+  | 50x cost variation | CNA range across agents at similar accuracy | Confirmed |
+
+
+  Key insight: An agent with 70% accuracy but optimized for cost delivers better business value
+
+  (higher CNA) than an 80% accuracy agent with 10x cost, in most enterprise use cases.
 
 
   CLEAR vs CLASSic Comparison
@@ -1160,7 +1230,79 @@ density_score: null
   - Key metric: End-to-end faithfulness (not just retrieval quality)
 
   - CEX relevance: maps to D4 Domain Accuracy + RAG faithfulness in evaluation pipeline'
-13_6_evaluation_anti_patterns_found_in_2026_studies: '| Anti-Pattern | Discovered In | Effect | Mitigation |
+13_6_survey_evaluation_of_llm_based_agents_arxiv_2503_16416_march_2026: 'First comprehensive survey of evaluation methodologies
+  for LLM agents. Key taxonomy:
+
+
+  4-Dimensional Taxonomy (what to evaluate x how to evaluate):
+
+
+  | Dimension | Sub-components |
+
+  |-----------|---------------|
+
+  | Fundamental capabilities | Planning, tool use, self-reflection, memory |
+
+  | Application-specific | Web agents, SWE agents, scientific agents, conversational agents |
+
+  | Generalist agents | Agents spanning multiple domains |
+
+  | Evaluation frameworks | Infrastructure, tooling, dataset construction |
+
+
+  Critical gaps identified by the survey:
+
+  1. Cost-efficiency evaluation largely absent from existing benchmarks
+
+  2. Safety and robustness assessment inconsistent across frameworks
+
+  3. Benchmarks favor static tasks; production deployments are dynamic'
+13_7_survey_evaluation_and_benchmarking_of_llm_agents_arxiv_2507_21504_kdd_2026: '2-Dimensional Taxonomy (objectives x process):
+
+
+  | Axis | Elements |
+
+  |------|---------|
+
+  | Objectives (What) | Agent behavior, capabilities, reliability, safety |
+
+  | Process (How) | Interaction modes, datasets/benchmarks, metric computation, tooling |
+
+
+  Active benchmark categories covered: Coding/SWE (SWE-bench, ScienceAgentBench, CORE-Bench,
+
+  PaperBench, AppWorld), Web/Computer (BrowserGym, WebArena, WebCanvas, VisualWebArena, MMInA,
+
+  AssistantBench), Multi-environment (AgentBench, GAIA, OSWorld).
+
+
+  Key trend: Shift from static fixed tasks to continuously updated contamination-resistant benchmarks.
+
+  Contamination occurs within 6 months for most fixed benchmarks -- rolling releases are required.'
+13_8_deepresearcheval_arxiv_2601_09688_january_2026: 'Automated framework for evaluating long-form deep research reports (not
+  QA pairs):
+
+
+  | Component | Description |
+
+  |-----------|-------------|
+
+  | Page-as-unit paradigm | Page is the basic evaluation unit; detects local failures per page |
+
+  | Adaptive scoring | Per-page logical quality assessment via LLM judge |
+
+  | Paged-RAG mechanism | Retrieval-augmented fact verification against configurable reference DB |
+
+  | Reference DB | Constructible from any document corpus; verifies claims against sources |
+
+
+  Cost: ~433 seconds per full-length deep research report (Qwen-Plus API), suitable for offline batch eval.
+
+
+  CEX mapping: Applicable to N01 research atom quality assessment when atoms exceed 5K bytes.
+
+  For CEX''s 32-atom Atlas: budget ~4 hours for full DeepResearchEval sweep.'
+13_10_evaluation_anti_patterns_found_in_2026_studies: '| Anti-Pattern | Discovered In | Effect | Mitigation |
 
   |--------------|--------------|--------|------------|
 
@@ -1194,3 +1336,9 @@ sources:
 - BrowseComp by OpenAI (2026)
 - 'FRAMES: Factuality Retrieval Reasoning Eval (2025)'
 - 'LiveBench: Contamination-Free Evaluation (2025-2026 rolling)'
+- 'AutoRubric-R1V: Rubric-Based Generative Rewards for Faithful Multimodal Reasoning'
+- Survey on Evaluation of LLM-based Agents (March 2026)
+- 'Evaluation and Benchmarking of LLM Agents: A Survey (KDD 2026)'
+- 'DeepResearchEval: Automated Framework for Deep Research Task Evaluation'
+- Demystifying Evals for AI Agents (Anthropic)
+- Best LLM Evaluation Tools for AI Agents 2026 (Confident AI)
