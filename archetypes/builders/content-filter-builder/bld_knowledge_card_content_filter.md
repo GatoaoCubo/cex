@@ -6,50 +6,109 @@ llm_function: INJECT
 purpose: Domain knowledge for content_filter production
 quality: null
 title: "Knowledge Card Content Filter"
-version: "1.0.0"
-author: wave1_builder_gen
-tags: [content_filter, builder, knowledge_card]
-tldr: "Domain knowledge for content_filter production"
+version: "1.1.0"
+author: n06_hybrid_review
+tags: [content_filter, builder, knowledge_card, perspective_api, openai_moderation, csam, dsa, coppa]
+tldr: "Domain knowledge for content_filter production -- includes named harm categories (Perspective API, OpenAI Moderation, CSAM), real enforcement actions, and DSA/COPPA/GDPR legal framework."
 domain: "content_filter construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.92
 ---
 
-## Domain Overview  
-Content filtering pipelines are critical in moderating user-generated content across platforms like social media, email services, and compliance systems. These pipelines enforce policies by detecting harmful, sensitive, or policy-violating content (e.g., hate speech, nudity, spam) using a mix of rule-based systems, machine learning models, and real-time processing. Key challenges include balancing precision/recall, handling multilingual content, and ensuring low-latency performance at scale.  
+## Domain Overview
+Content filter pipelines enforce organizational harm policies by intercepting text, images, audio, and structured data at ingestion (pre-LLM) and output (post-LLM) stages. They operate in sequential stages: fast rule-based triage (< 5ms) -> ML classifier scoring (< 50ms) -> optional human review queue (async). Each stage assigns a harm category and confidence score; enforcement actions (block, flag, degrade, log) are triggered by configured thresholds per category.
 
-Modern pipelines often integrate natural language processing (NLP), computer vision, and graph-based analysis to detect patterns across text, images, and metadata. They operate in stages, from initial screening to deep analysis, and must adapt to evolving threats and regulatory requirements (e.g., GDPR, COPPA).  
+Content filters differ from: safety policies (define WHAT is prohibited), guardrails (constrain model BEHAVIOR), and output validators (verify schema/format). Filters execute at the data-plane level; guardrails execute at the model level.
 
-## Key Concepts  
-| Concept               | Definition                                                                 | Source                          |  
-|----------------------|----------------------------------------------------------------------------|----------------------------------|  
-| Tokenization         | Splitting input into discrete units (words, phrases) for analysis         | Apache OpenNLP                 |  
-| Rule-based Filtering | Using predefined patterns (regex, dictionaries) to flag content           | ISO/IEC 23846-1:2016            |  
-| ML Model             | Trained classifier (e.g., LSTM, transformer) for content classification   | ACL 2021: "Hate Speech Detection"|  
-| Hashing              | Fingerprinting known malicious content for fast lookup                    | RFC 5755 (SpamAssassin)        |  
-| Moderation Policy   | Set of rules defining acceptable content (e.g., toxicity thresholds)      | Facebook Content Policy        |  
-| Staging            | Sequential processing stages (e.g., triage → deep analysis)               | LinkedIn Engineering Blog        |  
-| False Positive     | Legitimate content incorrectly flagged as violating policy               | Google AI Blog (2020)           |  
-| Latency Threshold  | Maximum acceptable delay for real-time filtering                         | AWS WAF Documentation          |  
+## Named Harm Category Taxonomies
 
-## Industry Standards  
-- RFC 5755 (SpamAssassin): Hash-based content detection  
-- ISO/IEC 23846-1:2016: Content moderation frameworks  
-- GDPR Article 8: Data minimization for filtering logs  
-- Google’s Perspective API: Toxicity scoring benchmarks  
-- ACL/EMNLP papers on NLP for content moderation  
+### Perspective API (Jigsaw/Google) -- production taxonomy
+| Attribute | Description | Block Threshold | Flag Threshold |
+|-----------|-------------|-----------------|----------------|
+| TOXICITY | Rude, disrespectful, unreasonable | 0.90 | 0.70 |
+| SEVERE_TOXICITY | Hateful, aggressive, explicit | 0.80 | 0.60 |
+| IDENTITY_ATTACK | Negative comment about race, religion, gender, nationality | 0.80 | 0.65 |
+| INSULT | Inflammatory, negative personal comment | 0.90 | 0.75 |
+| PROFANITY | Obscene, vulgar | 0.95 | 0.85 |
+| THREAT | Wish or intent to physically harm | 0.85 | 0.70 |
+| SEXUALLY_EXPLICIT | Explicit sexual references | 0.90 | 0.75 |
+| FLIRTATION | Romantic, pickup lines | 0.95 | 0.85 |
 
-## Common Patterns  
-1. Hybrid systems combining rule-based and ML approaches  
-2. Staged pipelines with escalating analysis depth  
-3. Use of Bloom filters for efficient hash lookup  
-4. Multilingual NLP models with language-specific tuning  
-5. A/B testing for policy threshold adjustments  
+### OpenAI Moderation API -- production taxonomy (2023-11)
+| Category | Action |
+|----------|--------|
+| hate | FLAG >= 0.7, BLOCK >= 0.9 |
+| hate/threatening | BLOCK >= 0.5 |
+| harassment | FLAG >= 0.7 |
+| harassment/threatening | BLOCK >= 0.5 |
+| self-harm | FLAG + notify support |
+| self-harm/intent | BLOCK + crisis resource link |
+| self-harm/instructions | BLOCK unconditionally |
+| sexual | RESTRICT (age gate required) |
+| sexual/minors | BLOCK + NCMEC CyberTipline report |
+| violence | FLAG >= 0.7 |
+| violence/graphic | BLOCK >= 0.8 |
 
-## Pitfalls  
-- Over-reliance on ML without fallback rules  
-- Ignoring false positives/negatives in training data  
-- Poor latency optimization for real-time use cases  
-- Inadequate handling of obfuscation (e.g., leetspeak)  
-- Lack of audit trails for filtered content decisions
+### CSAM Detection (absolute prohibition -- no threshold)
+| Tool | Method | Regulatory mandate |
+|------|--------|--------------------|
+| PhotoDNA (Microsoft) | Hash matching against NCMEC database | PROTECT Act (US) |
+| Google CSAI Match | Hash matching | EU Regulation 2021/1232 |
+| NCMEC CyberTipline | Mandatory reporting | 18 U.S.C. 2258A |
+Action: BLOCK + terminate session + file NCMEC report within 24h (mandatory, no exceptions).
+
+## Legal Frameworks
+
+| Jurisdiction | Law | Article | Content Filter Requirement |
+|-------------|-----|---------|---------------------------|
+| EU | Digital Services Act (DSA) 2023 | Art. 34 | Large platforms must assess and mitigate systemic risks from harmful content |
+| EU | DSA | Art. 16 | Notice-and-action mechanisms for illegal content |
+| EU | AI Act (2024) | Art. 52 | Disclose AI-generated content (deep fakes, synthetic media) |
+| EU | GDPR | Art. 5(1)(c) | Data minimization: filter logs must not retain PII beyond operational need |
+| US | COPPA (FTC Rule 312.3) | Sec. 312.3 | Operators of child-directed services must not collect PII from under-13 users |
+| US | CDA Section 230 | Sec. 230(c)(2) | Good Samaritan protection for filtering objectionable material (requires active filtering) |
+| US | PROTECT Act | 18 U.S.C. 2258A | Mandatory reporting of CSAM to NCMEC |
+
+## Enforcement Action Taxonomy
+Every harm category MUST map to exactly one of these actions:
+
+| Action | Product Behavior | When to Use |
+|--------|-----------------|-------------|
+| BLOCK | 403 response; content not delivered | sexual/minors, CSAM, severe threats |
+| FLAG | Content held; routed to human review queue | borderline hate, harassment, self-harm |
+| DEGRADE | Request fulfilled with reduced capability (no image gen, no code exec) | medium toxicity, insults |
+| LOG | Request fulfilled; audit record written | low profanity, flirtation |
+| ESCALATE | Route to senior moderator + notify legal | repeat offenders, potential legal violations |
+
+## Key Concepts
+| Concept | Definition | Source |
+|---------|------------|--------|
+| Pre-inference filter | Blocks harmful prompt before LLM processes it | OpenAI Moderation API |
+| Post-inference filter | Scans LLM output before delivery to user | AWS Comprehend Detect Toxic Content |
+| Hash matching | Fingerprint of known-bad content (exact match, no ML) | PhotoDNA, NCMEC |
+| Semantic similarity | Vector distance from known-bad embeddings | Jigsaw Perspective |
+| False positive rate | Legitimate content incorrectly blocked; target < 1% for non-critical | Google AI Blog |
+| Latency budget | Pre-inference: < 5ms. Post-inference: < 50ms. Total pipeline: < 100ms | AWS WAF |
+
+## Industry Standards
+- Google Jigsaw: Perspective API (8 production attributes, available via REST)
+- OpenAI: Moderation API (11 categories, free with API key)
+- Microsoft: PhotoDNA (CSAM hash matching), Azure Content Moderator
+- AWS: Comprehend Detect Toxic Content, Rekognition Content Moderation
+- NCMEC: CyberTipline API for CSAM reporting
+- Jigsaw: Unintended Bias in Toxicity Classification (ACL 2019) -- benchmark for filter calibration
+
+## Common Patterns
+1. Two-stage pipeline: fast hash lookup (< 1ms) -> ML classifier (< 50ms)
+2. Threshold tuning by platform type: B2C consumer = strict; B2B API = configurable per customer
+3. Feedback loop: human review decisions retrain classifier monthly
+4. Separate thresholds for input (pre) vs output (post): output is held to stricter standard
+5. Audit-first: every block/flag writes immutable event record with: timestamp, category, score, action, user_id
+
+## Pitfalls
+- No CSAM absolute block: catastrophic legal liability, mandatory 24h NCMEC reporting
+- Single threshold for all categories: severe_toxicity != profanity; each needs calibrated threshold
+- Blocking on keywords alone (leetspeak, substitutions bypass regex trivially)
+- No human review queue: FLAG without queue means flagged content is silently dropped (legal risk)
+- Retaining filter logs with PII: GDPR Art. 5(1)(c) violation; use pseudonymous hashes

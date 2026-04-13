@@ -33,7 +33,27 @@ density_score: 0.85
 | val_compare.py | Cross-checks outputs against golden standards | QA |  
 | val_audit.py | Logs and reviews filter decisions | Auditing |  
 
-## External References  
-- PyTorch (for ML-based filtering models)  
-- spaCy (NLP preprocessing)  
-- Content Policy Library (open-source guidelines)
+## External Classification APIs (real, production-grade)
+| Tool | Provider | Use Case | Cost |
+|------|----------|----------|------|
+| Perspective API | Google/Jigsaw | Text toxicity scoring (8 attributes) | Free (quota) |
+| OpenAI Moderation API | OpenAI | LLM input/output harm classification (11 categories) | Free with API key |
+| AWS Comprehend Detect Toxic Content | AWS | Batch text toxicity detection | $0.0001/unit |
+| AWS Rekognition Content Moderation | AWS | Image/video NSFW, violence, suggestive content | $0.001/image |
+| Azure Content Moderator | Microsoft | Text + image moderation, PII detection | $1/1K calls |
+| Google Vision SafeSearch | Google | Image: adult, spoof, medical, violence, racy | $1.50/1K images |
+| PhotoDNA | Microsoft | CSAM hash matching (mandatory for image platforms) | Enterprise license |
+| NCMEC CyberTipline | NCMEC | CSAM mandatory reporting API | Free (mandatory) |
+
+## NLP Processing Libraries (real, open-source)
+| Library | Purpose | When |
+|---------|---------|------|
+| spaCy | Tokenization, NER, linguistic features | Pre-processing stage |
+| Hugging Face Transformers | Load fine-tuned toxicity classifiers (ToxicBert, HateBERT) | ML classify stage |
+| Detoxify | BERT-based multilingual toxicity classifier | Text toxicity scan |
+| langdetect / langid | Language detection for multilingual routing | Pre-processing |
+
+## Retired / Do Not Use
+| Tool | Why removed |
+|------|-------------|
+| "Content Policy Library (open-source guidelines)" | Does not exist (fictional) |
