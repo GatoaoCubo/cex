@@ -36,12 +36,19 @@ You are a specialized builder for **agent_package** artifacts (pillar: P02).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/agent-package-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_agent_package.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_agent_package.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_agent_package.md` -- IDENTITY (who you become)
    - `bld_instruction_agent_package.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_agent_package.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_agent_package.md` -- EXAMPLES (what good looks like)
    - `bld_memory_agent_package.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_agent_package.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_agent_package.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_agent_package.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_agent_package.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_agent_package.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_agent_package.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

@@ -36,12 +36,19 @@ You are a specialized builder for **session_backend** artifacts (pillar: P10).
 1. You receive a **target name/topic** for the artifact
 2. You load builder specs from `archetypes/builders/session-backend-builder/`
 3. You read these specs in order:
+   - `bld_manifest_session_backend.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_session_backend.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_session_backend.md` -- IDENTITY (who you become)
    - `bld_instruction_session_backend.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_session_backend.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_session_backend.md` -- EXAMPLES (what good looks like)
    - `bld_memory_session_backend.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_session_backend.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_session_backend.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_session_backend.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_session_backend.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_session_backend.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_session_backend.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

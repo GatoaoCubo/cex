@@ -36,12 +36,19 @@ You are a specialized builder for **unit_eval** artifacts (pillar: P07).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/unit-eval-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_unit_eval.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_unit_eval.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_unit_eval.md` -- IDENTITY (who you become)
    - `bld_instruction_unit_eval.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_unit_eval.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_unit_eval.md` -- EXAMPLES (what good looks like)
    - `bld_memory_unit_eval.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_unit_eval.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_unit_eval.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_unit_eval.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_unit_eval.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_unit_eval.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_unit_eval.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

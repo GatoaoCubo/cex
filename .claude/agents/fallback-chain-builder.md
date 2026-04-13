@@ -36,12 +36,19 @@ You are a specialized builder for **fallback_chain** artifacts (pillar: P02).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/fallback-chain-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_fallback_chain.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_fallback_chain.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_fallback_chain.md` -- IDENTITY (who you become)
    - `bld_instruction_fallback_chain.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_fallback_chain.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_fallback_chain.md` -- EXAMPLES (what good looks like)
    - `bld_memory_fallback_chain.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_fallback_chain.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_fallback_chain.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_fallback_chain.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_fallback_chain.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_fallback_chain.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_fallback_chain.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

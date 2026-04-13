@@ -36,12 +36,19 @@ You are a specialized builder for **formatter** artifacts (pillar: P05).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/formatter-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_formatter.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_formatter.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_formatter.md` -- IDENTITY (who you become)
    - `bld_instruction_formatter.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_formatter.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_formatter.md` -- EXAMPLES (what good looks like)
    - `bld_memory_formatter.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_formatter.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_formatter.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_formatter.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_formatter.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_formatter.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_formatter.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

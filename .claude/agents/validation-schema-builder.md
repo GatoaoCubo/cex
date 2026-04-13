@@ -36,12 +36,19 @@ You are a specialized builder for **validation_schema** artifacts (pillar: P06).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/validation-schema-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_validation_schema.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_validation_schema.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_validation_schema.md` -- IDENTITY (who you become)
    - `bld_instruction_validation_schema.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_validation_schema.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_validation_schema.md` -- EXAMPLES (what good looks like)
    - `bld_memory_validation_schema.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_validation_schema.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_validation_schema.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_validation_schema.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_validation_schema.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_validation_schema.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_validation_schema.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

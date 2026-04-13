@@ -36,12 +36,19 @@ You are a specialized builder for **knowledge_card** artifacts (pillar: P01).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/knowledge-card-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_knowledge_card.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_knowledge_card.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_knowledge_card.md` -- IDENTITY (who you become)
    - `bld_instruction_knowledge_card.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_knowledge_card.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_knowledge_card.md` -- EXAMPLES (what good looks like)
    - `bld_memory_knowledge_card.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_knowledge_card.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_knowledge_card.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_knowledge_card.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_knowledge_card.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_knowledge_card.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_knowledge_card.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

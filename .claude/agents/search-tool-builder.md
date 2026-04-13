@@ -36,12 +36,19 @@ You are a specialized builder for **search_tool** artifacts (pillar: P04).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/search-tool-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_search_tool.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_search_tool.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_search_tool.md` -- IDENTITY (who you become)
    - `bld_instruction_search_tool.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_search_tool.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_search_tool.md` -- EXAMPLES (what good looks like)
    - `bld_memory_search_tool.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_search_tool.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_search_tool.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_search_tool.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_search_tool.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_search_tool.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_search_tool.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

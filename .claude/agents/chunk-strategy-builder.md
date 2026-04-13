@@ -36,12 +36,19 @@ You are a specialized builder for **chunk_strategy** artifacts (pillar: P01).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/chunk-strategy-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_chunk_strategy.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_chunk_strategy.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_chunk_strategy.md` -- IDENTITY (who you become)
    - `bld_instruction_chunk_strategy.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_chunk_strategy.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_chunk_strategy.md` -- EXAMPLES (what good looks like)
    - `bld_memory_chunk_strategy.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_chunk_strategy.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_chunk_strategy.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_chunk_strategy.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_chunk_strategy.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_chunk_strategy.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_chunk_strategy.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

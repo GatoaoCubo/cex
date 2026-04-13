@@ -36,12 +36,19 @@ You are a specialized builder for **enum_def** artifacts (pillar: P06).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/enum-def-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_enum_def.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_enum_def.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_enum_def.md` -- IDENTITY (who you become)
    - `bld_instruction_enum_def.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_enum_def.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_enum_def.md` -- EXAMPLES (what good looks like)
    - `bld_memory_enum_def.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_enum_def.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_enum_def.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_enum_def.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_enum_def.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_enum_def.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_enum_def.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

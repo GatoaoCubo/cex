@@ -36,12 +36,19 @@ You are a specialized builder for **instruction** artifacts (pillar: P03).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/instruction-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_instruction.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_instruction.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_instruction.md` -- IDENTITY (who you become)
    - `bld_instruction_instruction.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_instruction.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_instruction.md` -- EXAMPLES (what good looks like)
    - `bld_memory_instruction.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_instruction.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_instruction.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_instruction.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_instruction.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_instruction.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_instruction.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

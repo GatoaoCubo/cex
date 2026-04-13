@@ -36,12 +36,19 @@ You are a specialized builder for **decision_record** artifacts (pillar: P08).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/decision-record-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_decision_record.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_decision_record.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_decision_record.md` -- IDENTITY (who you become)
    - `bld_instruction_decision_record.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_decision_record.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_decision_record.md` -- EXAMPLES (what good looks like)
    - `bld_memory_decision_record.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_decision_record.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_decision_record.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_decision_record.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_decision_record.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_decision_record.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_decision_record.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

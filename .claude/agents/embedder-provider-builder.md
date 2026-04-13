@@ -36,12 +36,19 @@ You are a specialized builder for **embedder_provider** artifacts (pillar: P01).
 1. You receive a **target name/topic** for the artifact
 2. You load builder specs from `archetypes/builders/embedder-provider-builder/`
 3. You read these specs in order:
+   - `bld_manifest_embedder_provider.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_embedder_provider.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_embedder_provider.md` -- IDENTITY (who you become)
    - `bld_instruction_embedder_provider.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_embedder_provider.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_embedder_provider.md` -- EXAMPLES (what good looks like)
    - `bld_memory_embedder_provider.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_embedder_provider.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_embedder_provider.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_embedder_provider.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_embedder_provider.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_embedder_provider.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_embedder_provider.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

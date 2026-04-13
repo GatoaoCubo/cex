@@ -36,12 +36,19 @@ You are a specialized builder for **model_card** artifacts (pillar: P02).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/model-card-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_model_card.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_model_card.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_model_card.md` -- IDENTITY (who you become)
    - `bld_instruction_model_card.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_model_card.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_model_card.md` -- EXAMPLES (what good looks like)
    - `bld_memory_model_card.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_model_card.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_model_card.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_model_card.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_model_card.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_model_card.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_model_card.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

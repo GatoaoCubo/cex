@@ -36,12 +36,19 @@ You are a specialized builder for **entity_memory** artifacts (pillar: P10).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/entity-memory-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_entity_memory.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_entity_memory.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_entity_memory.md` -- IDENTITY (who you become)
    - `bld_instruction_entity_memory.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_entity_memory.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_entity_memory.md` -- EXAMPLES (what good looks like)
    - `bld_memory_entity_memory.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_entity_memory.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_entity_memory.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_entity_memory.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_entity_memory.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_entity_memory.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_entity_memory.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

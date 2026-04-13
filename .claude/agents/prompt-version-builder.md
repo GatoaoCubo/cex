@@ -36,12 +36,19 @@ You are a specialized builder for **prompt_version** artifacts (pillar: P03).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/prompt-version-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_prompt_version.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_prompt_version.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_prompt_version.md` -- IDENTITY (who you become)
    - `bld_instruction_prompt_version.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_prompt_version.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_prompt_version.md` -- EXAMPLES (what good looks like)
    - `bld_memory_prompt_version.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_prompt_version.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_prompt_version.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_prompt_version.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_prompt_version.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_prompt_version.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_prompt_version.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

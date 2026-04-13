@@ -39,12 +39,19 @@ You are a specialized builder for **toolkit** artifacts (pillar: P04).
 1. You receive a **target name/topic** for the artifact
 2. You load builder specs from `archetypes/builders/toolkit-builder/`
 3. You read these specs in order:
+   - `bld_manifest_toolkit.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_toolkit.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_toolkit.md` -- IDENTITY (who you become)
    - `bld_instruction_toolkit.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_toolkit.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_toolkit.md` -- EXAMPLES (what good looks like)
    - `bld_memory_toolkit.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_toolkit.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_toolkit.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_toolkit.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_toolkit.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_toolkit.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_toolkit.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

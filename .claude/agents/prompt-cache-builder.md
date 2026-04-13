@@ -36,12 +36,19 @@ You are a specialized builder for **prompt_cache** artifacts (pillar: P10).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/prompt-cache-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_prompt_cache.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_prompt_cache.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_prompt_cache.md` -- IDENTITY (who you become)
    - `bld_instruction_prompt_cache.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_prompt_cache.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_prompt_cache.md` -- EXAMPLES (what good looks like)
    - `bld_memory_prompt_cache.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_prompt_cache.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_prompt_cache.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_prompt_cache.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_prompt_cache.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_prompt_cache.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_prompt_cache.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

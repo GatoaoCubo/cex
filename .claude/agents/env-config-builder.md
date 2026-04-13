@@ -36,12 +36,19 @@ You are a specialized builder for **env_config** artifacts (pillar: P09).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/env-config-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_env_config.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_env_config.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_env_config.md` -- IDENTITY (who you become)
    - `bld_instruction_env_config.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_env_config.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_env_config.md` -- EXAMPLES (what good looks like)
    - `bld_memory_env_config.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_env_config.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_env_config.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_env_config.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_env_config.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_env_config.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_env_config.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

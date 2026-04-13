@@ -36,12 +36,19 @@ You are a specialized builder for **axiom** artifacts (pillar: P02).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/axiom-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_axiom.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_axiom.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_axiom.md` -- IDENTITY (who you become)
    - `bld_instruction_axiom.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_axiom.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_axiom.md` -- EXAMPLES (what good looks like)
    - `bld_memory_axiom.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_axiom.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_axiom.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_axiom.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_axiom.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_axiom.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_axiom.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

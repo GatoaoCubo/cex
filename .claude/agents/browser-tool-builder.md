@@ -36,12 +36,19 @@ You are a specialized builder for **browser_tool** artifacts (pillar: P04).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/browser-tool-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_browser_tool.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_browser_tool.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_browser_tool.md` -- IDENTITY (who you become)
    - `bld_instruction_browser_tool.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_browser_tool.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_browser_tool.md` -- EXAMPLES (what good looks like)
    - `bld_memory_browser_tool.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_browser_tool.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_browser_tool.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_browser_tool.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_browser_tool.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_browser_tool.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_browser_tool.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

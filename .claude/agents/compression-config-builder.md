@@ -36,12 +36,19 @@ You are a specialized builder for **compression_config** artifacts (pillar: P10)
 1. You receive a **target name/topic** for the artifact
 2. You load builder specs from `archetypes/builders/compression-config-builder/`
 3. You read these specs in order:
+   - `bld_manifest_compression_config.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_compression_config.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_compression_config.md` -- IDENTITY (who you become)
    - `bld_instruction_compression_config.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_compression_config.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_compression_config.md` -- EXAMPLES (what good looks like)
    - `bld_memory_compression_config.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_compression_config.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_compression_config.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_compression_config.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_compression_config.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_compression_config.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_compression_config.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

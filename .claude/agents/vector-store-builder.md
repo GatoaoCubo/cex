@@ -36,12 +36,19 @@ You are a specialized builder for **vector_store** artifacts (pillar: P01).
 1. You receive a **target name/topic** for the artifact
 2. You load builder specs from `archetypes/builders/vector-store-builder/`
 3. You read these specs in order:
+   - `bld_manifest_vector_store.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_vector_store.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_vector_store.md` -- IDENTITY (who you become)
    - `bld_instruction_vector_store.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_vector_store.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_vector_store.md` -- EXAMPLES (what good looks like)
    - `bld_memory_vector_store.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_vector_store.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_vector_store.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_vector_store.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_vector_store.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_vector_store.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_vector_store.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

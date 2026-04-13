@@ -36,12 +36,19 @@ You are a specialized builder for **mental_model** artifacts (pillar: P02).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/mental-model-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_mental_model.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_mental_model.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_mental_model.md` -- IDENTITY (who you become)
    - `bld_instruction_mental_model.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_mental_model.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_mental_model.md` -- EXAMPLES (what good looks like)
    - `bld_memory_mental_model.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_mental_model.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_mental_model.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_mental_model.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_mental_model.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_mental_model.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_mental_model.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

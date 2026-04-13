@@ -36,12 +36,19 @@ You are a specialized builder for **session_state** artifacts (pillar: P10).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/session-state-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_session_state.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_session_state.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_session_state.md` -- IDENTITY (who you become)
    - `bld_instruction_session_state.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_session_state.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_session_state.md` -- EXAMPLES (what good looks like)
    - `bld_memory_session_state.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_session_state.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_session_state.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_session_state.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_session_state.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_session_state.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_session_state.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

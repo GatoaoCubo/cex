@@ -36,12 +36,19 @@ You are a specialized builder for **regression_check** artifacts (pillar: P07).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/regression-check-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_regression_check.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_regression_check.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_regression_check.md` -- IDENTITY (who you become)
    - `bld_instruction_regression_check.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_regression_check.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_regression_check.md` -- EXAMPLES (what good looks like)
    - `bld_memory_regression_check.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_regression_check.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_regression_check.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_regression_check.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_regression_check.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_regression_check.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_regression_check.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

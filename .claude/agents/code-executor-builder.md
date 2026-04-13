@@ -36,12 +36,19 @@ You are a specialized builder for **code_executor** artifacts (pillar: P04).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/code-executor-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_code_executor.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_code_executor.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_code_executor.md` -- IDENTITY (who you become)
    - `bld_instruction_code_executor.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_code_executor.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_code_executor.md` -- EXAMPLES (what good looks like)
    - `bld_memory_code_executor.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_code_executor.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_code_executor.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_code_executor.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_code_executor.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_code_executor.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_code_executor.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

@@ -36,12 +36,19 @@ You are a specialized builder for **constraint_spec** artifacts (pillar: P03).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/constraint-spec-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_constraint_spec.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_constraint_spec.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_constraint_spec.md` -- IDENTITY (who you become)
    - `bld_instruction_constraint_spec.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_constraint_spec.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_constraint_spec.md` -- EXAMPLES (what good looks like)
    - `bld_memory_constraint_spec.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_constraint_spec.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_constraint_spec.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_constraint_spec.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_constraint_spec.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_constraint_spec.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_constraint_spec.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

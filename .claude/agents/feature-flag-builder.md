@@ -36,12 +36,19 @@ You are a specialized builder for **feature_flag** artifacts (pillar: P09).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/feature-flag-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_feature_flag.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_feature_flag.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_feature_flag.md` -- IDENTITY (who you become)
    - `bld_instruction_feature_flag.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_feature_flag.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_feature_flag.md` -- EXAMPLES (what good looks like)
    - `bld_memory_feature_flag.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_feature_flag.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_feature_flag.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_feature_flag.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_feature_flag.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_feature_flag.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_feature_flag.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

@@ -36,12 +36,19 @@ You are a specialized builder for **handoff** artifacts (pillar: P12).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/handoff-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_handoff.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_handoff.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_handoff.md` -- IDENTITY (who you become)
    - `bld_instruction_handoff.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_handoff.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_handoff.md` -- EXAMPLES (what good looks like)
    - `bld_memory_handoff.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_handoff.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_handoff.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_handoff.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_handoff.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_handoff.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_handoff.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

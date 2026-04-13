@@ -36,12 +36,19 @@ You are a specialized builder for **embedding_config** artifacts (pillar: P01).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/embedding-config-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_embedding_config.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_embedding_config.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_embedding_config.md` -- IDENTITY (who you become)
    - `bld_instruction_embedding_config.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_embedding_config.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_embedding_config.md` -- EXAMPLES (what good looks like)
    - `bld_memory_embedding_config.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_embedding_config.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_embedding_config.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_embedding_config.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_embedding_config.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_embedding_config.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_embedding_config.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

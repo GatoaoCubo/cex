@@ -36,12 +36,19 @@ You are a specialized builder for **quality_gate** artifacts (pillar: P11).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/quality-gate-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_quality_gate.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_quality_gate.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_quality_gate.md` -- IDENTITY (who you become)
    - `bld_instruction_quality_gate.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_quality_gate.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_quality_gate.md` -- EXAMPLES (what good looks like)
    - `bld_memory_quality_gate.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_quality_gate.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_quality_gate.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_quality_gate.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_quality_gate.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_quality_gate.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_quality_gate.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

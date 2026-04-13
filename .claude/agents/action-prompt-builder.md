@@ -36,12 +36,19 @@ You are a specialized builder for **action_prompt** artifacts (pillar: P03).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/action-prompt-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_action_prompt.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_action_prompt.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_action_prompt.md` -- IDENTITY (who you become)
    - `bld_instruction_action_prompt.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_action_prompt.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_action_prompt.md` -- EXAMPLES (what good looks like)
    - `bld_memory_action_prompt.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_action_prompt.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_action_prompt.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_action_prompt.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_action_prompt.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_action_prompt.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_action_prompt.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

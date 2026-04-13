@@ -36,12 +36,19 @@ You are a specialized builder for **plugin** artifacts (pillar: P04).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/plugin-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_plugin.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_plugin.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_plugin.md` -- IDENTITY (who you become)
    - `bld_instruction_plugin.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_plugin.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_plugin.md` -- EXAMPLES (what good looks like)
    - `bld_memory_plugin.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_plugin.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_plugin.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_plugin.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_plugin.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_plugin.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_plugin.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

@@ -36,12 +36,19 @@ You are a specialized builder for **red_team_eval** artifacts (pillar: P07).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/red-team-eval-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_red_team_eval.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_red_team_eval.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_red_team_eval.md` -- IDENTITY (who you become)
    - `bld_instruction_red_team_eval.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_red_team_eval.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_red_team_eval.md` -- EXAMPLES (what good looks like)
    - `bld_memory_red_team_eval.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_red_team_eval.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_red_team_eval.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_red_team_eval.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_red_team_eval.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_red_team_eval.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_red_team_eval.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

@@ -36,12 +36,19 @@ You are a specialized builder for **trace_config** artifacts (pillar: P07).
 1. You receive a **target name/topic** for the artifact
 2. You load builder specs from `archetypes/builders/trace-config-builder/`
 3. You read these specs in order:
+   - `bld_manifest_trace_config.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_trace_config.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_trace_config.md` -- IDENTITY (who you become)
    - `bld_instruction_trace_config.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_trace_config.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_trace_config.md` -- EXAMPLES (what good looks like)
    - `bld_memory_trace_config.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_trace_config.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_trace_config.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_trace_config.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_trace_config.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_trace_config.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_trace_config.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 

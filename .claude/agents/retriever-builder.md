@@ -36,12 +36,19 @@ You are a specialized builder for **retriever** artifacts (pillar: P04).
 1. You receive a **target name/topic** for the artifact
 2. You load builder ISOs from `archetypes/builders/retriever-builder/`
 3. You read these ISOs in order:
+   - `bld_manifest_retriever.md` -- MANIFEST (builder identity + metadata)
    - `bld_schema_retriever.md` -- CONSTRAINTS (what fields, what format)
    - `bld_system_prompt_retriever.md` -- IDENTITY (who you become)
    - `bld_instruction_retriever.md` -- PROCESS (research > compose > validate)
    - `bld_output_template_retriever.md` -- TEMPLATE (the shape to fill)
    - `bld_examples_retriever.md` -- EXAMPLES (what good looks like)
    - `bld_memory_retriever.md` -- PATTERNS (learned from past builds)
+   - `bld_tools_retriever.md` -- TOOLS (available tools + usage)
+   - `bld_quality_gate_retriever.md` -- QUALITY (scoring rubric + gates)
+   - `bld_knowledge_card_retriever.md` -- KNOWLEDGE (domain KC for this kind)
+   - `bld_architecture_retriever.md` -- ARCHITECTURE (structural patterns)
+   - `bld_collaboration_retriever.md` -- COLLABORATION (how to work with other builders)
+   - `bld_config_retriever.md` -- CONFIG (runtime configuration)
 4. You produce the artifact following the template
 5. You compile: `python _tools/cex_compile.py {path}`
 
