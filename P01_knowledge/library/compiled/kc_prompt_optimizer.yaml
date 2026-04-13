@@ -44,69 +44,32 @@ what_it_is: 'A prompt_optimizer defines automated prompt improvement: ingest a s
   emit a higher-performing variant. It formalizes the optimization policy -- what to mutate, how to score, when to stop --
   so optimization is reproducible rather than ad hoc. Lineage: DSPy (compile-time optimization), APE (Zhou 2022), OPRO (Google
   2023, LLMs as optimizers).'
-how_it_differs_from_similar_kinds: '| Kind | Distinction |
-
-  |------|-------------|
-
-  | prompt_optimizer (P03) | Improves a prompt via scored iteration |
-
-  | prompt_compiler (P03) | Resolves intent into {kind, pillar, nucleus} |
-
-  | prompt_template (P03) | Fills {{variables}} for generation |
-
-  | optimizer (P11) | Generic optimization; target is not a prompt |
-
-  | quality_gate (P07) | Pass/fail threshold only; no improvement loop |'
-optimization_loop: '| Stage | Action |
-
-  |-------|--------|
-
-  | 1 Baseline | Score seed on eval_dataset |
-
-  | 2 Mutate | Generate N variants (reword, CoT, few-shot, persona) |
-
-  | 3 Evaluate | Score each against scoring_rubric or llm_judge |
-
-  | 4 Select | Keep top-k |
-
-  | 5 Iterate | Re-mutate from winners until plateau or budget cap |'
-industry_references: '| System | Concept | Relationship |
-
-  |--------|---------|-------------|
-
-  | DSPy | teleprompter, MIPROv2 | Direct ancestor: compile signatures into tuned prompts |
-
-  | APE (Zhou 2022) | Automatic Prompt Engineer | LLM proposes, LLM scores, iterate |
-
-  | OPRO (Google 2023) | LLM as optimizer | Scored trajectories generate next prompt |
-
-  | PromptBreeder (DeepMind) | Evolutionary mutation | Genetic-algorithm variant |'
-key_design_decisions: '| Decision | Rule |
-
-  |----------|------|
-
-  | Scoring source | eval_dataset + scoring_rubric OR llm_judge |
-
-  | Budget cap | max_iterations + max_tokens required |
-
-  | Plateau detection | Stop if delta < threshold for N rounds |
-
-  | Winner persistence | Save top variant as prompt_version |'
-anti_patterns: '| Anti-Pattern | Why It Fails |
-
-  |-------------|-------------|
-
-  | No baseline score | Cannot detect regression |
-
-  | Single metric | Overfits, degrades real quality |
-
-  | No budget cap | Unbounded API cost |
-
-  | Mutate production prompt | Breaks live traffic; use shadow eval |
-
-  | Ignore variance | One lucky run != true improvement |'
+how_it_differs_from_similar_kinds:
+- prompt_compiler resolves intent (F1); prompt_optimizer improves prompts (F7)
+- prompt_template fills {{variables}}; prompt_optimizer rewrites the template itself
+- optimizer (P11) is generic; prompt_optimizer targets prompt text specifically
+- quality_gate only accepts/rejects; prompt_optimizer iterates to improve
+optimization_loop:
+- 'Baseline: score seed on eval_dataset'
+- 'Mutate: generate N variants (reword, CoT, few-shot, persona)'
+- 'Evaluate: score each against scoring_rubric or llm_judge'
+- 'Select + Iterate: keep top-k, re-mutate until plateau or budget cap'
+industry_references:
+- 'DSPy (Stanford): `teleprompter`, `MIPROv2` -- direct ancestor, compiles signatures into tuned prompts'
+- 'APE (Zhou 2022): LLM proposes, LLM scores, iterate'
+- 'OPRO (Google 2023): LLM as optimizer over prompt text via scored trajectories'
+- 'PromptBreeder (DeepMind): evolutionary / genetic-algorithm variant of the same loop'
+key_design_decisions:
+- 'Scoring source: eval_dataset + scoring_rubric, or llm_judge (deterministic first)'
+- 'Budget cap: max_iterations + max_tokens required (prevents unbounded cost)'
+- 'Plateau detection: stop if delta < threshold for N rounds'
+- 'Winner persistence: save top variant as prompt_version (audit + rollback)'
+anti_patterns:
+- No baseline score (cannot detect regression)
+- Single metric (overfits, degrades real quality)
+- No budget cap (unbounded API cost)
+- Mutate on production prompt (breaks live traffic; use shadow eval)
+- Ignore variance (one lucky run != true improvement)
 application_checklist:
-- 'Baseline: seed + eval_dataset + initial score'
-- Enumerate mutation strategies; bind scoring; set budget caps
-- Persist winner as prompt_version with score delta
-- 'Validate body <= 5120 bytes; quality: null'
+- 'Baseline: seed + eval_dataset + initial score; enumerate mutations; bind scoring; set budget caps'
+- 'Persist winner as prompt_version with score delta; validate body <= 5120 bytes; quality: null'
