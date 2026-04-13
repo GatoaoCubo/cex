@@ -3,7 +3,7 @@ id: atom_15_qwen_deepseek
 kind: knowledge_card
 title: "Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs"
 version: "1.1.0"
-quality: null
+quality: 8.9
 tags: [qwen, deepseek, tool-calling, function-calling, mcp, reasoning, agent-framework, hermes, strict-mode, agentic-training]
 pillar: P01
 domain: llm-agent-tooling

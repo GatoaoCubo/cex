@@ -468,6 +468,65 @@ Key identifiers:
 | `interrupt_after=[nodes]` | Pause after specified nodes |
 | `Command(resume=value)` | Resume execution with user input |
 
+### 3.10.1 Interrupt/Resume -- Implementation Detail
+
+**Interrupt types:**
+
+| Mode | Declaration | When triggered |
+|------|-------------|----------------|
+| **Static** | `compile(interrupt_before=["node_a"])` | Before/after specified node, always |
+| **Dynamic** | `interrupt(value)` inside node body | Conditional, based on state at runtime |
+
+**Dynamic interrupt pattern:**
+
+```python
+from langgraph.types import interrupt
+
+def human_review_node(state):
+    # Pause here -- surface data to caller
+    decision = interrupt({
+        "question": "Approve this action?",
+        "context": state["proposed_action"]
+    })
+    # Execution resumes here; decision = value passed in Command(resume=...)
+    return {"approved": decision == "approve"}
+```
+
+**Resume flow:**
+
+```python
+# Invoke hits interrupt -- returns state snapshot
+result = graph.invoke(input_data, config)
+# result["__interrupt__"] contains the interrupt value surfaced above
+
+# User inspects and decides, then resume:
+graph.invoke(Command(resume="approve"), config)
+# config MUST have the same thread_id to restore from checkpoint
+```
+
+**Multiple interrupts in one node:**
+LangGraph tracks a `resume` list per task. On resume, execution restarts
+from the top of the node. Each `interrupt()` call is matched index-based
+against the resume list -- consumed interrupts are skipped, first unconsumed halts.
+
+**Persistence requirement:**
+`interrupt` requires a `checkpointer` in `compile()`. Without it, a
+`GraphInterruptException` is raised. The checkpointer stores full graph
+state including all pending resume values.
+
+**State inspection during interrupt:**
+
+```python
+# Read frozen state while graph is paused
+state_snapshot = graph.get_state(config)
+# state_snapshot.tasks contains pending interrupt info
+```
+
+**Internal mechanism:**
+`NodeInterrupt` exception is raised by `interrupt()` internally, caught by
+the Pregel engine, which writes a checkpoint and surfaces the value to the
+caller. Do NOT catch `NodeInterrupt` in user code.
+
 ### 3.11 Functional API (alternative to StateGraph)
 
 | Decorator | Purpose |

@@ -2,8 +2,8 @@
 id: atom_13_metagpt_chatdev
 kind: knowledge_card
 title: "Atomic Research 13: MetaGPT + ChatDev (OpenBMB/Tsinghua)"
-version: "2.0.0"
-quality: 8.9
+version: "3.0.0"
+quality: 8.6
 tags: [metagpt, chatdev, openBMB, tsinghua, multi-agent, sops, dehallucination, chat-chain, atlas, macnet, ier, react-loop, message-pool]
 pillar: P01
 domain: multi-agent-frameworks
@@ -18,6 +18,7 @@ sources:
   - "github.com/OpenBMB/ChatDev"
   - "docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html"
   - "github.com/geekan/MetaGPT-docs"
+  - "arxiv.org/html/2312.17025v2 (ECL full paper)"
 ---
 
 # Atomic Research 13: MetaGPT + ChatDev
@@ -104,7 +105,7 @@ class Message(BaseModel):
     role: str                           # "user"|"assistant"|"system"
     cause_by: type[Action]              # WHICH Action produced this
     sent_from: str                      # Role name that sent it
-    send_to: set[str]                   # target Roles (empty = broadcast)
+    send_to: set[str]                   # target Roles (default: MESSAGE_ROUTE_TO_ALL = broadcast)
 ```
 
 **Routing mechanics:**

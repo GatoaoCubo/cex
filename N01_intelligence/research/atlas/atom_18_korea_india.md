@@ -394,16 +394,22 @@ Voice layer specialist. While Sarvam/Krutrim target full-stack LLMs, Gnani focus
 
 ### 3.2 MoE as Universal Strategy
 
-Both ecosystems converge on MoE as the cost-performance architecture for sovereign agents:
+Both ecosystems converge on MoE as the cost-performance architecture for sovereign agents. Expanded with 2026 releases:
 
-| Model | Total | Active | Ratio |
-|-------|-------|--------|-------|
-| Kakao Kanana-2 | 32B | 3B | 10.7:1 |
-| Upstage Solar Pro3 | 102B | 12B | 8.5:1 |
-| Sarvam 105B | 105B | 10.3B | 10.2:1 |
-| Sarvam 30B | 30B | 2.4B | 12.5:1 |
+| Model | Total | Active | Ratio | Attention | Expert count |
+|-------|-------|--------|-------|-----------|-------------|
+| Kakao Kanana-2 | 32B | 3B | 10.7:1 | MLA | 128 (6 routed + 2 shared) |
+| Upstage Solar Pro3 | 102B | 12B | 8.5:1 | -- | -- |
+| Sarvam 105B | 105B | 10.3B | 10.2:1 | MLA | 128 (sigmoid routing) |
+| Sarvam 30B | 30B | 2.4B | 12.5:1 | GQA | 128 (sigmoid routing) |
+| BharatGen PARAM-2 | 17B | -- | -- | -- | MoE (unspecified) |
+| Krutrim-2 | 12B | 12B (dense) | 1:1 | -- | None (dense) |
 
-MoE ratios of 8-12:1 are the sweet spot -- frontier reasoning at mid-tier inference cost. This is particularly important for sovereign deployments where domestic compute is constrained.
+**Convergence pattern**: MoE with 128 experts appears in Kanana-2, Sarvam 30B, and Sarvam 105B independently. This is not coincidence -- 128 experts is the DeepSeek-V2/V3 sweet spot where expert specialization is high enough to matter but routing overhead is manageable.
+
+**MLA as long-context standard**: Both Kanana-2 and Sarvam 105B (the flagship models) use MLA. DeepSeek-V2 introduced MLA in 2024; by 2026 it is adopted by Korea and India's top models. Confirms MLA is becoming the attention mechanism of choice for sovereign frontier models.
+
+MoE ratios of 8-12:1 (for routed-only count) are the sweet spot -- frontier reasoning at mid-tier inference cost. This is particularly important for sovereign deployments where domestic compute is constrained.
 
 ### 3.3 Key Patterns for CEX
 
@@ -412,11 +418,16 @@ MoE ratios of 8-12:1 are the sweet spot -- frontier reasoning at mid-tier infere
 | MCP marketplace | PlayMCP (Kakao) | P04_tools: MCP server registry with auth bridging |
 | Role-separated agents | P-C-G (Korean research) | 8F pipeline: F4=Planner, F5=Caller, F6=Generator |
 | Korean-first value policy | P-C-G paper | Non-English agent value handling in cex_router.py |
-| Voice-first input | Krutrim/Kruti | P05_output: voice modality for agent interaction |
+| Voice-first input | Krutrim/Kruti, Gnani.ai | P05_output: voice modality for agent interaction |
 | 22-language tokenizer | Sarvam AI | P01_knowledge: multilingual tokenizer efficiency |
 | Language-Context-Safety eval | Indic LLM Arena | P07_evaluation: culture-aware scoring rubric |
+| Bradley-Terry ranking | Indic LLM Arena | P07_evaluation: pairwise comparison for peer scoring |
 | Code-mix fluency | AI4Bharat | P03_prompt: Hinglish/Tanglish prompt handling |
+| Sigmoid expert routing | Sarvam (pre-training) | P09_config: expert routing for MoE inference configs |
+| Shared + routed experts | Kanana-2 (DeepSeek-style) | P02_model: dual expert design in agent model configs |
+| Asynchronous GRPO + adaptive sampling | Sarvam RL | P07_evaluation: RL training signal for reward_signal artifacts |
 | Sovereign compute | Both ecosystems | P09_config: domestic infra routing preference |
+| Public AI infrastructure | BharatGen PARAM-2 | P12_orchestration: multi-tenant model dispatch for public services |
 
 ---
 

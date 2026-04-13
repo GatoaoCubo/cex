@@ -1381,3 +1381,596 @@ Vercel AI SDK = narrow, deep API for streaming LLM interactions.
 - Vercel AI SDK GitHub: https://github.com/vercel/ai
 - Haystack integrations: https://haystack.deepset.ai/integrations
 - AI SDK providers: https://ai-sdk.dev/docs/ai-sdk-core/providers-and-models
+
+---
+
+## 1.4 Pipeline Serialization Format (YAML)
+
+Haystack pipelines are data, not code. `pipeline.dumps()` / `pipeline.loads()` round-trip
+through a canonical YAML schema. Every component must implement `to_dict()` / `from_dict()`
+for the pipeline serializer to reconstruct it.
+
+### 1.4.1 Schema Structure
+
+```yaml
+# Top-level fields
+max_runs_per_component: 100          # int, default 100; caps loops
+metadata: {}                         # dict, arbitrary pipeline metadata
+components:                          # dict of named component definitions
+  <component_name>:
+    type: <fully.qualified.class>    # e.g. haystack.components.preprocessors.document_cleaner.DocumentCleaner
+    init_parameters:                 # dict of constructor args (primitives + nested objects)
+      <param>: <value>
+connections:                         # list of typed edges
+  - sender: <comp_name>.<output>     # e.g. embedder.embedding
+    receiver: <comp_name>.<input>    # e.g. retriever.query_embedding
+```
+
+### 1.4.2 Serialization API
+
+```python
+from haystack import Pipeline
+
+# Serialize
+yaml_str: str = pipeline.dumps()            # -> YAML string
+pipeline.dump(file_obj)                     # -> write to file
+
+# Deserialize
+pipeline = Pipeline.loads(yaml_str)
+pipeline = Pipeline.load(file_obj)
+
+# Dict round-trip (lower-level)
+d: dict = pipeline.to_dict()
+pipeline = Pipeline.from_dict(d, callbacks=DeserializationCallbacks())
+```
+
+`DeserializationCallbacks` allow patching components during reconstruction
+(e.g. injecting secrets, swapping implementations without changing YAML).
+
+### 1.4.3 Full Serialized Pipeline Example (RAG)
+
+```yaml
+max_runs_per_component: 100
+metadata:
+  name: basic-rag
+  description: Embedding RAG pipeline
+components:
+  text_embedder:
+    type: haystack_integrations.components.embedders.openai.text_embedder.OpenAITextEmbedder
+    init_parameters:
+      model: text-embedding-3-small
+      dimensions: 1536
+  retriever:
+    type: haystack_integrations.components.retrievers.pinecone.embedding_retriever.PineconeEmbeddingRetriever
+    init_parameters:
+      document_store:
+        type: haystack_integrations.document_stores.pinecone.document_store.PineconeDocumentStore
+        init_parameters:
+          index: my-index
+          namespace: ""
+          dimension: 1536
+          metric: cosine
+      top_k: 5
+      filter_policy: replace
+  prompt_builder:
+    type: haystack.components.builders.prompt_builder.PromptBuilder
+    init_parameters:
+      template: |
+        Answer using the documents below.
+        Documents: {% for doc in documents %}{{ doc.content }}{% endfor %}
+        Question: {{ question }}
+  llm:
+    type: haystack_integrations.components.generators.openai.chat.chat_generator.OpenAIChatGenerator
+    init_parameters:
+      model: gpt-4o-mini
+      generation_kwargs:
+        temperature: 0.1
+        max_tokens: 512
+connections:
+  - sender: text_embedder.embedding
+    receiver: retriever.query_embedding
+  - sender: retriever.documents
+    receiver: prompt_builder.documents
+  - sender: prompt_builder.prompt
+    receiver: llm.prompt
+```
+
+### 1.4.4 Component `to_dict()` Contract
+
+Any custom component MUST implement:
+
+```python
+@component
+class MyComponent:
+    def to_dict(self) -> dict:
+        return default_to_dict(self, param1=self.param1, param2=self.param2)
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return default_from_dict(cls, data)
+```
+
+`default_to_dict` injects `type` as the fully qualified class name automatically.
+
+### 1.4.5 AsyncPipeline
+
+`AsyncPipeline` is a drop-in replacement that executes independent branches in parallel:
+
+```python
+from haystack import AsyncPipeline
+
+pipeline = AsyncPipeline()
+pipeline.add_component("embedder", embedder)
+pipeline.add_component("retriever", retriever)
+pipeline.connect("embedder.embedding", "retriever.query_embedding")
+result = await pipeline.run({"embedder": {"text": "query"}})
+```
+
+Branches with no shared dependency run concurrently. Components with input dependencies
+wait for their upstream outputs before starting.
+
+---
+
+## 1.5 Retriever Config Params (All 28+ Implementations)
+
+All retrievers share this interface pattern:
+- **Constructor**: receives `document_store` (mandatory) + retrieval strategy params
+- **run()**: receives `query` or `query_embedding` (mandatory) + `top_k`, `filters` (optional)
+- **Output**: `{"documents": List[Document]}`
+
+`filters` always uses Haystack logical filter syntax:
+
+```python
+filters = {
+  "operator": "AND",
+  "conditions": [
+    {"field": "meta.lang", "operator": "==", "value": "en"},
+    {"field": "meta.score", "operator": ">=", "value": 0.8},
+  ]
+}
+```
+
+`FilterPolicy` enum: `FilterPolicy.REPLACE` (run() filters override constructor) or
+`FilterPolicy.MERGE` (run() filters AND-merged with constructor filters).
+
+### 1.5.1 BM25 / Keyword Retrievers
+
+| Retriever | Constructor Params | run() Params |
+|-----------|-------------------|--------------|
+| InMemoryBM25Retriever | `document_store`, `filters=None`, `top_k=10`, `scale_score=True`, `filter_policy=REPLACE` | `query: str`, `filters`, `top_k`, `scale_score` |
+| ElasticsearchBM25Retriever | `document_store`, `filters={}`, `fuzziness="AUTO"`, `top_k=10`, `scale_score=True`, `filter_policy=REPLACE` | `query`, `filters`, `fuzziness`, `top_k` |
+| OpenSearchBM25Retriever | `document_store`, `filters={}`, `fuzziness="AUTO"`, `top_k=10`, `scale_score=True`, `custom_query=None` | `query`, `filters`, `top_k` |
+| PgvectorKeywordRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query`, `filters`, `top_k` |
+| WeaviateBM25Retriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query`, `filters`, `top_k` |
+| AzureAISearchBM25Retriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query`, `filters`, `top_k` |
+| MongoDBAtlasFullTextRetriever | `document_store`, `filters=None`, `top_k=10` | `query`, `filters`, `top_k` |
+
+### 1.5.2 Embedding / Dense Retrievers
+
+| Retriever | Constructor Params | run() Params | Notes |
+|-----------|-------------------|--------------|-------|
+| InMemoryEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `scale_score=True`, `return_embedding=False`, `filter_policy=REPLACE` | `query_embedding: List[float]`, `filters`, `top_k`, `scale_score`, `return_embedding` | L2/cosine |
+| ElasticsearchEmbeddingRetriever | `document_store`, `filters={}`, `top_k=10`, `num_candidates=100`, `filter_policy=REPLACE` | `query_embedding`, `filters`, `top_k`, `num_candidates` | ES kNN |
+| OpenSearchEmbeddingRetriever | `document_store`, `filters={}`, `top_k=10`, `filter_policy=REPLACE`, `custom_query=None` | `query_embedding`, `filters`, `top_k` | approx kNN |
+| PgvectorEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`, `filters`, `top_k` | exact/HNSW per store config |
+| ChromaEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | Chroma query() |
+| PineconeEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`, `filters`, `top_k` | Pinecone query() |
+| QdrantEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `return_embedding=False`, `score_threshold=None` | `query_embedding`, `filters`, `top_k`, `score_threshold` | Qdrant nearest |
+| WeaviateEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE`, `distance=None`, `certainty=None` | `query_embedding`, `filters`, `top_k` | nearVector |
+| AzureAISearchEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`, `filters`, `top_k` | Azure vector search |
+| MongoDBAtlasEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`, `filters`, `top_k` | Atlas Vector Search |
+| AstraEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | DataStax Astra |
+| FAISSEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | FAISS flat/IVF/HNSW |
+| ArcadeDBEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | ArcadeDB vector |
+| ValkeyEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10` | `query_embedding`, `filters`, `top_k` | Valkey VSEARCH |
+
+### 1.5.3 Hybrid Retrievers
+
+Hybrid = BM25 + vector in one call; merged by RRF or weighted sum. Requires a single query
+string AND a query embedding -- both must be supplied to `run()`.
+
+| Retriever | Constructor Params | run() Params | Merge Strategy |
+|-----------|-------------------|--------------|----------------|
+| AzureAISearchHybridRetriever | `document_store`, `filters=None`, `top_k=10`, `filter_policy=REPLACE` | `query_embedding`, `query: str`, `filters`, `top_k` | Azure native hybrid |
+| OpenSearchHybridRetriever | `document_store`, `filters={}`, `top_k=10`, `bm25_weight=0.5`, `embedding_weight=0.5` | `query_embedding`, `query`, `filters`, `top_k` | Weighted sum |
+| QdrantHybridRetriever | `document_store`, `filters=None`, `top_k=10`, `return_embedding=False` | `query_embedding: List[float]`, `sparse_embedding: SparseEmbedding`, `filters`, `top_k` | RRF |
+| WeaviateHybridRetriever | `document_store`, `filters=None`, `top_k=10`, `alpha=0.75`, `filter_policy=REPLACE` | `query_embedding`, `query`, `filters`, `top_k`, `alpha` | alpha=1.0 pure vector; alpha=0.0 pure BM25 |
+
+### 1.5.4 Sparse Embedding
+
+| Retriever | Constructor Params | run() Params | Input Type |
+|-----------|-------------------|--------------|------------|
+| QdrantSparseEmbeddingRetriever | `document_store`, `filters=None`, `top_k=10`, `return_embedding=False`, `score_threshold=None` | `query_sparse_embedding: SparseEmbedding`, `filters`, `top_k` | `{indices: List[int], values: List[float]}` |
+
+`SparseEmbedding` matches output of `FastembedSparseTextEmbedder` or `SentenceTransformersSparseTextEmbedder`.
+
+### 1.5.5 Advanced / Specialized Retrievers
+
+| Retriever | Constructor Params | run() Params | Notes |
+|-----------|-------------------|--------------|-------|
+| FilterRetriever | `document_store`, `filters=None` | `filters` | No ranking; pure metadata filter |
+| AutoMergingRetriever | `document_store`, `threshold=0.5` | `matched_leaf_documents: List[Document]` | Merges child chunks into parent when >= threshold matched |
+| MultiQueryTextRetriever | `document_store`, `top_k=10`, `retriever_params={}` | `queries: List[str]`, `filters`, `top_k` | Fan-out BM25; deduplicates by doc ID |
+| MultiQueryEmbeddingRetriever | `document_store`, `top_k=10`, `retriever_params={}` | `query_embeddings: List[List[float]]`, `filters`, `top_k` | Fan-out embedding; deduplicates |
+| SentenceWindowRetriever | `document_store`, `window_size=3` | `retrieved_documents: List[Document]` | Expands to +/- window_size sentences |
+| SnowflakeTableRetriever | `user`, `account`, `api_key`, `database`, `db_schema`, `warehouse`, `login_timeout=30` | `query: str` | NL -> SQL on Snowflake |
+| ChromaQueryTextRetriever | `document_store`, `filters=None`, `top_k=10` | `query: str`, `filters`, `top_k` | Chroma text query (internal embedding) |
+
+---
+
+## 2.3 Vercel AI SDK Middleware System
+
+### 2.3.1 Architecture
+
+Middleware wraps `LanguageModelV3` via `wrapLanguageModel()`, intercepting calls before/after
+the model without changing call-site code. Multiple middlewares form an onion: first in list
+is outermost (first to see params, last to see results).
+
+### 2.3.2 `wrapLanguageModel()` API
+
+```typescript
+import { wrapLanguageModel } from "ai";
+
+const wrapped = wrapLanguageModel({
+  model: openai("gpt-4.1"),          // base LanguageModelV3
+  middleware: myMiddleware,           // or: [mw1, mw2, mw3]
+  modelId?: "custom-id",             // override model.modelId
+  providerId?: "custom-provider",    // override model.provider
+});
+// wrapped is a LanguageModelV3 -- drop-in replacement
+```
+
+Execution order with `[mw1, mw2]`:
+- transformParams: `mw1 -> mw2 -> model`
+- results: `model -> mw2 -> mw1`
+
+### 2.3.3 `LanguageModelV3Middleware` Interface
+
+```typescript
+interface LanguageModelV3Middleware {
+  // Runs before BOTH generate and stream calls.
+  transformParams?: (options: {
+    params: LanguageModelV3CallOptions;
+    type: "generate" | "stream";
+  }) => Promise<LanguageModelV3CallOptions>;
+
+  // Intercept non-streaming doGenerate().
+  wrapGenerate?: (options: {
+    doGenerate: () => Promise<LanguageModelV3GenerateResult>;
+    doStream: () => Promise<{ stream: ReadableStream<LanguageModelV3StreamPart>; rawCall: RawCallResponse }>;
+    params: LanguageModelV3CallOptions;
+    model: LanguageModelV3;
+  }) => Promise<LanguageModelV3GenerateResult>;
+
+  // Intercept streaming doStream().
+  wrapStream?: (options: {
+    doGenerate: () => Promise<LanguageModelV3GenerateResult>;
+    doStream: () => Promise<{ stream: ReadableStream<LanguageModelV3StreamPart>; rawCall: RawCallResponse }>;
+    params: LanguageModelV3CallOptions;
+    model: LanguageModelV3;
+  }) => Promise<{ stream: ReadableStream<LanguageModelV3StreamPart>; rawCall: RawCallResponse }>;
+}
+```
+
+All three methods are optional. Pass context via `params.providerMetadata.yourKey`.
+
+### 2.3.4 Built-in Middlewares
+
+**extractReasoningMiddleware** -- strips `<think>` blocks into separate reasoning field:
+
+```typescript
+import { extractReasoningMiddleware, wrapLanguageModel } from "ai";
+
+wrapLanguageModel({
+  model: deepseek("deepseek-r1"),
+  middleware: extractReasoningMiddleware({
+    tagName: "think",           // default: "think"
+    startWithReasoning: false,  // prepend reasoning to generation if true
+  }),
+});
+// result.reasoning / result.reasoningText populated
+```
+
+**simulateStreamingMiddleware** -- makes non-streaming models stream:
+
+```typescript
+import { simulateStreamingMiddleware } from "ai";
+
+wrapLanguageModel({
+  model: nonStreamingModel,
+  middleware: simulateStreamingMiddleware(),
+});
+// wrapStream() calls doGenerate() internally, emits fake stream parts
+```
+
+**defaultSettingsMiddleware** -- apply model defaults per-app:
+
+```typescript
+import { defaultSettingsMiddleware } from "ai";
+
+wrapLanguageModel({
+  model: openai("gpt-4.1"),
+  middleware: defaultSettingsMiddleware({
+    settings: {
+      temperature: 0.2,
+      maxOutputTokens: 1024,
+      providerOptions: {
+        openai: { store: false },
+      },
+    },
+  }),
+});
+```
+
+**addToolInputExamplesMiddleware** -- inject tool examples into descriptions:
+
+```typescript
+import { addToolInputExamplesMiddleware } from "ai";
+
+wrapLanguageModel({
+  model: provider("model"),
+  middleware: addToolInputExamplesMiddleware({
+    prefix: "Input Examples:",
+    format: (example, index) => `${index + 1}. ${JSON.stringify(example.input)}`,
+    remove: true,   // strip inputExamples from schema after injection
+  }),
+});
+```
+
+**extractJsonMiddleware** -- strip markdown code fences from JSON responses:
+
+```typescript
+import { extractJsonMiddleware } from "ai";
+
+wrapLanguageModel({
+  model: provider("model"),
+  middleware: extractJsonMiddleware(),
+});
+```
+
+### 2.3.5 Custom Middleware Pattern
+
+```typescript
+const loggingMiddleware: LanguageModelV3Middleware = {
+  transformParams: async ({ params, type }) => {
+    console.log(`[${type}] messages: ${params.prompt?.length ?? 0}`);
+    return params;
+  },
+  wrapGenerate: async ({ doGenerate, params }) => {
+    const t0 = Date.now();
+    const result = await doGenerate();
+    console.log(`generate: ${Date.now() - t0}ms, tokens: ${result.usage?.totalTokens}`);
+    return result;
+  },
+  wrapStream: async ({ doStream }) => {
+    const { stream, ...rest } = await doStream();
+    const transform = new TransformStream();
+    stream.pipeTo(transform.writable);
+    return { stream: transform.readable, ...rest };
+  },
+};
+```
+
+---
+
+## 2.4 DataStreamProtocol -- Complete Wire Format
+
+Wire format between Vercel AI SDK server helpers and `useChat`/`useCompletion` clients.
+Built on Server-Sent Events (SSE) + JSON per part.
+
+### 2.4.1 Transport Layer
+
+```
+HTTP/1.1 200 OK
+Content-Type: text/event-stream
+x-vercel-ai-ui-message-stream: v1    # REQUIRED -- signals protocol version v1
+Cache-Control: no-cache
+Transfer-Encoding: chunked
+
+data: {"type":"start","messageId":"msg_abc123"}
+data: {"type":"text-start","id":"txt_1"}
+data: {"type":"text-delta","id":"txt_1","delta":"Hello"}
+data: {"type":"text-delta","id":"txt_1","delta":" world"}
+data: {"type":"text-end","id":"txt_1"}
+data: {"type":"finish"}
+data: [DONE]
+```
+
+### 2.4.2 All Part Types
+
+**Message lifecycle:**
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| `start` | `messageId: string` | Opens a new message frame |
+| `finish` | _(none)_ | Closes the message frame |
+| `abort` | `reason?: string` | Client-side abort notification |
+
+**Text content (start/delta/end pattern):**
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| `text-start` | `id: string` | Opens a text block |
+| `text-delta` | `id: string`, `delta: string` | Appends text fragment |
+| `text-end` | `id: string` | Closes text block |
+
+**Reasoning (models with extended thinking):**
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| `reasoning-start` | `id: string` | Opens reasoning block |
+| `reasoning-delta` | `id: string`, `delta: string` | Appends reasoning fragment |
+| `reasoning-end` | `id: string` | Closes reasoning block |
+
+**Tool execution:**
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| `tool-input-start` | `toolCallId`, `toolName` | Opens tool input streaming |
+| `tool-input-delta` | `toolCallId`, `inputTextDelta: string` | Streams tool arg JSON fragment |
+| `tool-input-available` | `toolCallId`, `toolName`, `input: object` | Complete tool args ready |
+| `tool-output-available` | `toolCallId`, `output: unknown` | Tool execution result |
+
+**Sources and media:**
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| `source-url` | `sourceId`, `url`, `title?`, `providerMetadata?` | URL citation |
+| `source-document` | `sourceId`, `mediaType`, `title?`, `data?` | Document citation |
+| `file` | `url`, `mediaType` | Generated file attachment |
+
+**Custom data and control:**
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| `data-<suffix>` | `data: unknown`, `transient?: boolean` | App-defined; `transient=true` = not persisted to message history |
+| `error` | `errorText: string` | Error during generation |
+
+**Step boundaries (agentic multi-step):**
+
+| Type | Fields | Description |
+|------|--------|-------------|
+| `start-step` | `messageId?` | Opens an agent step |
+| `finish-step` | `messageId?`, `isContinued: boolean` | `isContinued=true` means more steps follow |
+
+### 2.4.3 Server-Side Emission
+
+```typescript
+// Next.js Route Handler
+export async function POST(req: Request) {
+  const result = streamText({
+    model: openai("gpt-4o"),
+    messages: await req.json(),
+  });
+  return result.toUIMessageStreamResponse({
+    sendReasoning: true,
+    sendSources: true,
+    headers: { "X-Custom": "value" },
+    onError: (err) => err.message,   // transform errors before sending
+  });
+}
+```
+
+### 2.4.4 Custom Data Parts
+
+```typescript
+// Server: write data parts alongside text
+const response = createDataStreamResponse({
+  execute: async (writer) => {
+    writer.writeData({ status: "processing" });          // -> data-* part
+    writer.writeMessageAnnotation({ hitRate: 0.87 });    // -> annotation on message
+    const result = await streamText({ model, prompt });
+    result.mergeIntoDataStream(writer);
+  },
+});
+
+// Client: receive via onData
+useChat({
+  onData: (items) => items.forEach(i => console.log(i)),
+});
+```
+
+---
+
+## 2.5 Complete useChat API (v5 / SDK 5.x)
+
+### 2.5.1 Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `api` | `string` | `"/api/chat"` | Endpoint URL |
+| `chat` | `Chat<UIMessage>` | -- | Reuse existing Chat instance |
+| `transport` | `ChatTransport` | DefaultChatTransport | Custom transport layer |
+| `id` | `string` | random UUID | Stable ID; same ID shares state across components |
+| `messages` | `UIMessage[]` | `[]` | Initial message history |
+| `messageMetadataSchema` | `FlexibleSchema` | -- | Validation schema for message.metadata |
+| `dataPartSchemas` | `UIDataTypesToSchemas` | -- | Schemas for data-* part validation |
+| `generateId` | `IdGenerator` | nanoid | Custom ID generator |
+| `credentials` | `RequestCredentials` | -- | Fetch credentials mode |
+| `headers` | `Record<string,string>` | -- | Extra request headers |
+| `body` | `object` | -- | Extra request body fields |
+| `fetch` | `FetchFunction` | global fetch | Custom fetch implementation |
+| `prepareSendMessagesRequest` | `(options) => RequestOptions` | -- | Customize request before send |
+| `prepareReconnectToStreamRequest` | `(options) => RequestOptions` | -- | Customize reconnect |
+| `onToolCall` | `async ({ toolCall }) => result` | -- | Client-side tool handler |
+| `sendAutomaticallyWhen` | `(message) => boolean` | -- | Auto-send after stream if condition met |
+| `onFinish` | `(message: UIMessage) => void` | -- | Called on response completion |
+| `onError` | `(error: Error) => void` | -- | Error handler |
+| `onData` | `(data: unknown[]) => void` | -- | Called when data-* parts arrive |
+| `experimental_throttle` | `number` | -- | UI re-render throttle in ms |
+| `resume` | `boolean` | `false` | Reconnect to in-progress generation on mount |
+
+### 2.5.2 Return Values
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | `string` | Chat identifier |
+| `messages` | `UIMessage[]` | Full conversation history |
+| `status` | `"ready" \| "submitted" \| "streaming" \| "error"` | Current request state |
+| `error` | `Error \| undefined` | Active error |
+| `sendMessage` | `async (msg) => void` | Submit a new user message |
+| `regenerate` | `async (options?) => void` | Regenerate last assistant message |
+| `stop` | `() => void` | Abort the current stream |
+| `clearError` | `() => void` | Reset error state |
+| `resumeStream` | `() => void` | Resume an interrupted stream |
+| `addToolOutput` | `(toolCallId: string, result: unknown) => void` | Inject tool result |
+| `addToolApprovalResponse` | `(toolCallId: string, approved: boolean) => void` | Respond to needsApproval |
+| `setMessages` | `(messages: UIMessage[]) => void` | Overwrite messages locally |
+
+### 2.5.3 sendMessage Options
+
+```typescript
+sendMessage({
+  text: string;
+  files?: FileList | FileUIPart[];
+  metadata?: unknown;        // validated against messageMetadataSchema
+  messageId?: string;        // custom ID; else generateId() used
+});
+```
+
+---
+
+## 2.6 Complete useCompletion API
+
+Single-turn text completion (no conversation history).
+
+### 2.6.1 Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `api` | `string` | `"/api/completion"` | API endpoint |
+| `id` | `string` | random | Shared state identifier across components |
+| `initialInput` | `string` | -- | Pre-fill the prompt input |
+| `initialCompletion` | `string` | -- | Pre-fill the completion output |
+| `credentials` | `"omit" \| "same-origin" \| "include"` | `"same-origin"` | Fetch credentials |
+| `headers` | `Record<string,string>` | -- | Extra request headers |
+| `body` | `object` | -- | Extra request body fields |
+| `streamProtocol` | `"text" \| "data"` | `"data"` | Stream interpretation mode |
+| `fetch` | `FetchFunction` | global fetch | Custom fetch |
+| `onFinish` | `(prompt: string, completion: string) => void` | -- | Completion callback |
+| `onError` | `(error: Error) => void` | -- | Error handler |
+| `experimental_throttle` | `number` | -- | UI update throttle ms |
+
+### 2.6.2 Return Values
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `completion` | `string` | Current completion text |
+| `input` | `string` | Current input value |
+| `setInput` | `Dispatch<SetStateAction<string>>` | Update input state |
+| `handleInputChange` | `(event: any) => void` | onChange handler for input |
+| `handleSubmit` | `(event?: FormEvent) => void` | onSubmit handler for form |
+| `complete` | `async (prompt, options?) => string \| null` | Programmatic trigger |
+| `setCompletion` | `(text: string) => void` | Override completion manually |
+| `stop` | `() => void` | Abort in-progress stream |
+| `error` | `Error \| undefined` | Active error |
+| `isLoading` | `boolean` | Whether request is in flight |
+
+### 2.6.3 `streamProtocol` Difference
+
+| Mode | Server returns | Client parses |
+|------|---------------|---------------|
+| `"data"` | DataStreamProtocol SSE | Parses all part types, extracts text |
+| `"text"` | Plain text stream | Appends raw chunks directly |
+
+Use `"text"` for simple backends; `"data"` to receive annotations and metadata.
