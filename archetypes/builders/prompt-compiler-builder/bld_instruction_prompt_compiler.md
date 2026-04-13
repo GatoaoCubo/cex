@@ -15,7 +15,7 @@ prerequisites:
   - "Target languages identified (minimum PT-BR + EN)"
 validation_method: checklist
 domain: prompt_compiler
-quality: null
+quality: 9.1
 tags: [instruction, prompt_compiler, P03, intent-resolution]
 idempotent: true
 atomic: false
