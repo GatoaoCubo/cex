@@ -11,6 +11,7 @@ quality: 8.8
 tags: [glossary, taxonomy, classification, hierarchy]
 tldr: "A hierarchical classification system organizing CEX's 123 kinds across 12 pillars with canonical tags, enforced by kind registry and schema contracts."
 density_score: 0.96
+updated: "2026-04-13"
 ---
 
 # Taxonomy
