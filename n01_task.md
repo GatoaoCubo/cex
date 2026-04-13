@@ -1,4 +1,4 @@
-Create: P01_knowledge/library/kind/kc_trajectory_eval.md
-KC about trajectory_eval. Description: Agent trajectory evaluation methodology
-YAML: id: kc_trajectory_eval, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
+Create: P01_knowledge/library/kind/kc_incident_report.md
+KC about incident_report. Description: AI incident documentation and post-mortem
+YAML: id: kc_incident_report, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
 English only. Under 80 lines.
