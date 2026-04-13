@@ -6,8 +6,8 @@ llm_function: CALL
 purpose: Tools available for compliance_framework production
 quality: null
 title: "Tools Compliance Framework"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [compliance_framework, builder, tools]
 tldr: "Tools available for compliance_framework production"
 domain: "compliance_framework construction"
@@ -35,6 +35,9 @@ density_score: 0.85
 | val_simulator.py | Simulates compliance scenarios | Testing phases |  
 
 ## External References  
-- OpenC2 (Open Command and Control) for standardized compliance protocols  
-- PyOpenSSL for cryptographic validation  
-- JSON Schema for data structure validation
+- EU AI Act text: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689  
+- GDPR text: https://gdpr.eu/tag/gdpr/  
+- NIST AI RMF: https://airc.nist.gov/Home  
+- ISO/IEC 42001:2023 AI Management Systems standard  
+- OneTrust / TrustArc: GRC platforms for automated compliance mapping  
+- IAPP: International Association of Privacy Professionals -- regulatory guidance

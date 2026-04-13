@@ -6,8 +6,8 @@ llm_function: REASON
 purpose: Step-by-step production process for threat_model
 quality: null
 title: "Instruction Threat Model"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [threat_model, builder, instruction]
 tldr: "Step-by-step production process for threat_model"
 domain: "threat_model construction"
@@ -17,27 +17,31 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
-1. Identify AI system components (data flows, algorithms, interfaces).  
-2. Enumerate threat sources (adversarial actors, environmental risks).  
-3. Map attack vectors (data poisoning, model inversion, inference attacks).  
-4. Assess vulnerability surfaces (training data, deployment environments).  
-5. Review regulatory requirements (GDPR, AI Act, industry standards).  
-6. Document historical incidents (similar systems, past breaches).  
+1. Identify AI system components: enumerate data flows, APIs, model endpoints, training pipelines, and interfaces.  
+2. Build asset inventory: classify each component by sensitivity (Critical/High/Medium/Low) and owner.  
+3. Enumerate threat actors: external attackers (nation-state, criminal, researcher), malicious insiders, automated bots.  
+4. Map AI-specific attack vectors: data poisoning (AML.T0020), model inversion (AML.T0024), adversarial examples (AML.T0015), model extraction (AML.T0005).  
+5. Review prior incidents: search CVE database, MITRE ATT&CK for AI, and internal incident history.  
+6. Identify regulatory context: GDPR Art. 32, EU AI Act Art. 9, NIST AI RMF GOVERN function.  
 
-## Phase 2: COMPOSE  
-1. Outline sections per SCHEMA.md (Scope, Threats, Mitigations).  
-2. Define AI system boundaries and stakeholders.  
-3. List threats using OUTPUT_TEMPLATE.md format (likelihood, impact).  
-4. Map each threat to technical and governance controls.  
-5. Prioritize risks using quantitative scoring (e.g., CVSS for AI).  
-6. Reference mitigations from industry frameworks (NIST, ISO/IEC 23894).  
-7. Include scenario analyses (e.g., adversarial example injection).  
-8. Validate alignment with Pillar P11 governance objectives.  
-9. Finalize document with version control and authorship metadata.  
+## Phase 2: COMPOSE (STRIDE per component)  
+1. For each asset, apply STRIDE systematically:  
+   - S (Spoofing): Can an attacker impersonate a user, service, or data source?  
+   - T (Tampering): Can training data, model weights, or outputs be modified?  
+   - R (Repudiation): Can actions be denied -- is there sufficient audit logging?  
+   - I (Information Disclosure): Can sensitive data or model internals be extracted?  
+   - D (Denial of Service): Can the system be overwhelmed or degraded?  
+   - E (Elevation of Privilege): Can an attacker gain unauthorized model or system access?  
+2. For each threat, assign: Likelihood (H/M/L), Impact (H/M/L), CVSS base score (0-10).  
+3. Map each threat to MITRE ATT&CK or MITRE ATLAS technique ID.  
+4. Assign mitigations from NIST CSF (Identify/Protect/Detect/Respond/Recover), ISO 27001 Annex A, or OWASP Top 10.  
+5. Prioritize by risk = Likelihood x Impact; Critical risks require immediate mitigation plan with owner and due date.  
+6. Add AI-specific addendum per MITRE ATLAS if ML models are in scope.  
 
 ## Phase 3: VALIDATE  
-[ ] [ ] Verify all SCHEMA.md fields are populated.  
-[ ] [ ] Confirm threat descriptions align with OUTPUT_TEMPLATE.md.  
-[ ] [ ] Conduct peer review for technical accuracy.  
-[ ] [ ] Ensure mitigations address high-priority risks.  
-[ ] [ ] Check compliance with Pillar P11 governance criteria.
+- [ ] All 6 STRIDE categories addressed for each in-scope asset.  
+- [ ] Every threat has a CVSS score and MITRE technique ID.  
+- [ ] Mitigations are actionable (specific control, owner, due date) -- not generic ("add more security").  
+- [ ] AI-specific threats (data poisoning, model inversion) addressed if ML pipeline is in scope.  
+- [ ] At least one peer review or red team exercise referenced as validation evidence.  
+- [ ] Document signed off by security lead and approved by compliance officer.

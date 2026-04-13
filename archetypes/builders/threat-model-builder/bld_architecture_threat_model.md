@@ -6,8 +6,8 @@ llm_function: CONSTRAIN
 purpose: Component map of threat_model -- inventory, dependencies
 quality: null
 title: "Architecture Threat Model"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [threat_model, builder, architecture]
 tldr: "Component map of threat_model -- inventory, dependencies"
 domain: "threat_model construction"
@@ -38,4 +38,4 @@ density_score: 0.85
 | User Interface    | Model Validator   | API    |  
 
 ## Architectural Position  
-The threat_model-builder sits within the CEX ecosystem as a security-centric module, integrating with compliance systems, audit logs, and external APIs to ensure threat models align with regulatory standards and operational workflows. It relies on centralized data stores and validation engines to maintain consistency across the exchange's risk management framework.
+The threat_model-builder sits within the CEX P11 Feedback pillar as the pre-deployment risk analysis module. It feeds into downstream builders: compliance_framework (regulatory gap mapping), guardrail (runtime controls), and red_team_eval (adversarial validation). Outputs are structured STRIDE documents consumed by security architects and compliance officers. It does NOT perform runtime monitoring (trace_config) or auto-remediation (bugloop).

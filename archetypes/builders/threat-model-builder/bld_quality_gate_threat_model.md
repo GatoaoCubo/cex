@@ -6,8 +6,8 @@ llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for threat_model
 quality: null
 title: "Quality Gate Threat Model"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [threat_model, builder, quality_gate]
 tldr: "Quality gate with HARD and SOFT scoring for threat_model"
 domain: "threat_model construction"
@@ -25,32 +25,33 @@ density_score: 0.85
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML valid | Invalid syntax or structure |  
-| H02 | ID matches pattern | ID does not follow `THREAT-XXXX` format |  
+| H02 | ID matches pattern | ID does not match `^p11_tm_[a-zA-Z0-9_-]+$` |  
 | H03 | kind matches | `threat_model` not specified |  
-| H04 | Risk categories defined | Missing critical, high, medium, low |  
+| H04 | STRIDE categories present | Missing one or more of S/T/R/I/D/E sections |  
 | H05 | Threat actors identified | No explicit threat actor enumeration |  
-| H06 | Mitigation strategies present | Missing or incomplete mitigation plans |  
-| H07 | Validation method documented | No peer review or simulation evidence |  
+| H06 | Risk scoring present | No likelihood/impact scores or CVSS ratings |  
+| H07 | Mitigation strategies mapped | Each threat lacks at least one mapped control |  
+| H08 | Framework citation | No MITRE ATT&CK, NIST CSF, or ISO 27001 reference |  
 
 ## SOFT Scoring  
 | Dim | Dimension | Weight | Scoring Guide |  
 |---|---|---|---|  
-| D1 | Completeness | 0.15 | 100% coverage = 1.0 |  
-| D2 | Depth | 0.15 | Detailed analysis = 1.0 |  
-| D3 | Clarity | 0.10 | Unambiguous language = 1.0 |  
-| D4 | Alignment with standards | 0.10 | ISO/IEC 23894 compliance = 1.0 |  
-| D5 | Threat actor coverage | 0.10 | All relevant actors = 1.0 |  
-| D6 | Mitigation effectiveness | 0.10 | Feasible and actionable = 1.0 |  
-| D7 | Validation | 0.10 | Peer-reviewed = 1.0 |  
-| D8 | Documentation | 0.10 | Full traceability = 1.0 |  
+| D1 | STRIDE completeness | 0.20 | All 6 STRIDE categories addressed = 1.0 |  
+| D2 | Threat depth | 0.20 | CVSS/likelihood-impact scored per threat = 1.0 |  
+| D3 | Framework alignment | 0.15 | MITRE ATT&CK + NIST CSF citations = 1.0 |  
+| D4 | Mitigation effectiveness | 0.15 | Actionable controls mapped per threat = 1.0 |  
+| D5 | Threat actor coverage | 0.10 | All relevant actors enumerated = 1.0 |  
+| D6 | Asset inventory | 0.10 | All in-scope assets catalogued = 1.0 |  
+| D7 | Validation evidence | 0.05 | Peer review or red team sign-off = 1.0 |  
+| D8 | Documentation traceability | 0.05 | Full audit trail with assumptions = 1.0 |  
 
 ## Actions  
-| Score | Action |  
-|---|---|  
-| GOLDEN | >=9.5 | Approve and deploy |  
-| PUBLISH | >=8.0 | Peer review required |  
-| REVIEW | >=7.0 | Revisions mandatory |  
-| REJECT | <7.0 | Discard and rework |  
+| Label | Score | Action |  
+|---|---|---|  
+| GOLDEN | >=9.5 | Approve and publish to knowledge library |  
+| PUBLISH | >=8.0 | Red team peer review required |  
+| REVIEW | >=7.0 | Revisions mandatory before use |  
+| REJECT | <7.0 | Discard and rework from F1 |  
 
 ## Bypass  
 | conditions | approver | audit trail |  

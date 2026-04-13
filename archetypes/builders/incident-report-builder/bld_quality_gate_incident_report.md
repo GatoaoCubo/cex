@@ -6,8 +6,8 @@ llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for incident_report
 quality: null
 title: "Quality Gate Incident Report"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [incident_report, builder, quality_gate]
 tldr: "Quality gate with HARD and SOFT scoring for incident_report"
 domain: "incident_report construction"
@@ -39,14 +39,13 @@ density_score: 0.85
 (Table: Dim | Dimension | Weight | Scoring Guide)  
 | Dim | Dimension               | Weight | Scoring Guide                                      |  
 |-----|-------------------------|--------|----------------------------------------------------|  
-| D1  | Completeness            | 0.15   | 1.0 (complete) to 0.0 (missing critical data)      |  
-| D2  | Clarity                 | 0.15   | 1.0 (clear) to 0.0 (ambiguous or vague)            |  
-| D3  | Root cause analysis     | 0.20   | 1.0 (precise) to 0.0 (no analysis)                 |  
-| D4  | Action items            | 0.15   | 1.0 (specific) to 0.0 (no items)                   |  
-| D5  | Timeline accuracy       | 0.10   | 1.0 (precise timestamps) to 0.0 (no timeline)       |  
-| D6  | Stakeholder impact      | 0.10   | 1.0 (detailed) to 0.0 (no impact described)         |  
-| D7  | Lessons learned         | 0.10   | 1.0 (actionable) to 0.0 (no lessons)                |  
-| D8  | Sign-off validity       | 0.15   | 1.0 (valid signatures) to 0.0 (no sign-off)         |  
+| D1  | Completeness            | 0.15   | All required sections present = 1.0 |  
+| D2  | Root cause analysis     | 0.25   | 5-Whys complete, contributing factors mapped = 1.0 |  
+| D3  | Action items            | 0.20   | Specific, owned, and dated items = 1.0 |  
+| D4  | Timeline accuracy       | 0.15   | All NIST SP 800-61 phases with timestamps = 1.0 |  
+| D5  | Stakeholder impact      | 0.10   | Quantified user + business impact = 1.0 |  
+| D6  | Lessons learned         | 0.10   | Systemic gaps identified and linked to actions = 1.0 |  
+| D7  | Sign-off validity       | 0.05   | All required roles signed = 1.0 |  
 
 ## Actions  
 (Table: Score | Action)  

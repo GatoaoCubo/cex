@@ -6,8 +6,8 @@ llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for threat_model
 quality: null
 title: "Schema Threat Model"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [threat_model, builder, schema]
 tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for threat_model"
 domain: "threat_model construction"
@@ -46,18 +46,16 @@ density_score: 0.85
 ^p11_tm_[a-zA-Z0-9_-]+\.md$  
 
 ## Body Structure  
-1. **Overview**  
-   - Purpose, scope, and context of the threat model.  
-2. **Threat Agents**  
-   - List of potential adversaries and their capabilities.  
-3. **Vulnerabilities**  
-   - Identified weaknesses and attack vectors.  
-4. **Mitigations**  
-   - Controls and countermeasures in place.  
-5. **Impact Analysis**  
-   - Potential consequences of successful attacks.  
-6. **References**  
-   - Links to related documents, tools, or standards.  
+1. **Scope and System Description** -- boundaries, stakeholders, out-of-scope items  
+2. **Asset Inventory** -- assets with sensitivity classification and owner  
+3. **Threat Actors** -- actor table with motivation, capability, access level  
+4. **STRIDE Threat Analysis** -- one subsection per STRIDE category (S/T/R/I/D/E), each with threat table and mitigations  
+5. **Risk Priority Matrix** -- all threats ranked by risk score (likelihood x impact)  
+6. **Mitigation Strategies** -- controls mapped to threats with NIST CSF/ISO 27001 references  
+7. **AI-Specific Threat Addendum** -- MITRE ATLAS threats if ML pipeline in scope  
+8. **Assumptions and Limitations** -- what was assumed or excluded  
+9. **Open Issues** -- unresolved risks with owner and due date  
+10. **References** -- STRIDE, MITRE ATT&CK, MITRE ATLAS, NIST AI RMF, ISO/IEC 23894  
 
 ## Constraints  
 - All required fields must be present and valid.  

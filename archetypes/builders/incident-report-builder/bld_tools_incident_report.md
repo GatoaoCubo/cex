@@ -6,8 +6,8 @@ llm_function: CALL
 purpose: Tools available for incident_report production
 quality: null
 title: "Tools Incident Report"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [incident_report, builder, tools]
 tldr: "Tools available for incident_report production"
 domain: "incident_report construction"
@@ -35,6 +35,8 @@ density_score: 0.85
 | val_scorer.py | Reconfirms severity scores | During review |  
 
 ## External References  
-- Jinja2 (templating)  
-- Pandas (data handling)  
-- Loguru (logging framework)
+- NIST SP 800-61 Rev. 2: Computer Security Incident Handling Guide (process framework)  
+- PagerDuty / Opsgenie: Incident alerting and on-call management  
+- Jira / Linear: Action item tracking with owner + due date  
+- Grafana / Datadog: Timeline reconstruction from metrics  
+- Loguru: Structured logging for timeline evidence collection

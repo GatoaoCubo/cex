@@ -6,8 +6,8 @@ llm_function: CONSTRAIN
 purpose: Component map of compliance_framework -- inventory, dependencies
 quality: null
 title: "Architecture Compliance Framework"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [compliance_framework, builder, architecture]
 tldr: "Component map of compliance_framework -- inventory, dependencies"
 domain: "compliance_framework construction"
@@ -37,4 +37,4 @@ density_score: 0.85
 | Compliance Reporter | Audit Logger | Reporting |  
 
 ## Architectural Position  
-The compliance_framework sits at the intersection of CEX operational systems and regulatory requirements, ensuring real-time policy enforcement, auditability, and reporting. It integrates with trading, user management, and risk modules, acting as a central guardian for Pillar P11's governance objectives.
+The compliance_framework-builder sits within CEX's P11 Feedback pillar as the external regulatory mapping module. It consumes outputs from threat_model (risk exposure data), incident_report (breach notifications triggering GDPR Art. 33 obligations), and safety_policy (internal rules to cross-reference). It produces compliance attestations consumed by audit processes, legal teams, and external regulators. Covers GDPR, EU AI Act, NIST AI RMF, ISO 42001, HIPAA, and sector-specific regulations. Does NOT enforce runtime safety (guardrail) or detect threats (threat_model).

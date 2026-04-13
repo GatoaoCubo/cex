@@ -6,8 +6,8 @@ llm_function: CALL
 purpose: Tools available for threat_model production
 quality: null
 title: "Tools Threat Model"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [threat_model, builder, tools]
 tldr: "Tools available for threat_model production"
 domain: "threat_model construction"
@@ -16,25 +16,25 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Production Tools  
+## CEX Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles threat model components into executable format | During model deployment |  
-| cex_score.py | Assigns risk scores based on threat likelihood and impact | Post-attack simulation |  
-| cex_retriever.py | Fetches external data (e.g., CVEs, IoCs) for model enrichment | During model training |  
-| cex_doctor.py | Diagnoses model inconsistencies or missing dependencies | Pre-deployment validation |  
-| cex_exporter.py | Exports models to standard formats (e.g., JSON, XML) | For integration with third-party tools |  
-| cex_analyzer.py | Analyzes model performance against real-world scenarios | Post-deployment monitoring |  
+| cex_compile.py | Compiles threat model artifact to YAML + validates frontmatter | After draft completion |  
+| cex_score.py | Runs 3-layer quality scoring (structural + rubric + semantic) | Post-draft before publish |  
+| cex_retriever.py | Finds similar threat models and relevant KCs for F3 injection | During F3 INJECT phase |  
+| cex_doctor.py | Validates artifact structure, required fields, and ID patterns | Pre-commit validation |  
 
-## Validation Tools  
+## External Security Tools (reference integration)  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| val_checker.py | Validates model compliance with industry standards | Pre-deployment |  
-| val_simulator.py | Simulates attack paths to test model accuracy | During testing |  
-| val_reporter.py | Generates audit reports for stakeholders | Post-validation |  
-| val_comparator.py | Compares model outputs against baseline benchmarks | Continuous improvement |  
+| MITRE ATT&CK Navigator | Maps threats to ATT&CK techniques, visualize coverage | During threat enumeration |  
+| OWASP Threat Dragon | Diagrammatic STRIDE threat modeling with export | During Phase 1 RESEARCH |  
+| Microsoft Threat Modeling Tool | Automated STRIDE analysis for system diagrams | During Phase 2 COMPOSE |  
+| Shodan / Censys | Attack surface discovery for external assets | Scope validation |  
 
 ## External References  
-- MITRE ATT&CK Framework (threat taxonomy)  
-- OpenVAS (vulnerability scanning integration)  
-- NIST Cybersecurity Framework (compliance alignment)
+- MITRE ATT&CK: https://attack.mitre.org (enterprise threat taxonomy)  
+- MITRE ATLAS: https://atlas.mitre.org (AI/ML adversarial tactics)  
+- OWASP ASVS: Application Security Verification Standard  
+- NIST NVD: https://nvd.nist.gov (CVE database for vulnerability scoring)  
+- CVSS Calculator: https://www.first.org/cvss/calculator/4-0

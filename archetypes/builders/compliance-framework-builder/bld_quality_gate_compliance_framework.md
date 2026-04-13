@@ -6,8 +6,8 @@ llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for compliance_framework
 quality: null
 title: "Quality Gate Compliance Framework"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [compliance_framework, builder, quality_gate]
 tldr: "Quality gate with HARD and SOFT scoring for compliance_framework"
 domain: "compliance_framework construction"
@@ -25,14 +25,14 @@ density_score: 0.85
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not conform to `P11-\d{3}` |  
+| H02 | ID matches pattern | ID does not match `^p11_cfw_[a-zA-Z0-9_]+$` |  
 | H03 | kind matches | `kind` ≠ `compliance_framework` |  
-| H04 | Regulatory frameworks mapped | Missing required regulatory framework entries |  
-| H05 | Attestation provided | No signed attestation document |  
-| H06 | Documentation completeness | Missing key compliance documentation |  
-| H07 | Third-party audit | No audit report from certified body |  
-| H08 | Data privacy alignment | Non-compliance with GDPR/CCPA |  
-| H09 | Bias mitigation plan | No documented bias mitigation strategy |  
+| H04 | Regulatory frameworks mapped | No specific regulation (GDPR/AI Act/NIST/ISO42001) cited by name and article |  
+| H05 | Attestation provided | Missing signed attestation with date and compliance officer name |  
+| H06 | Gap analysis present | No gap analysis section or all gaps marked as N/A without justification |  
+| H07 | Regulatory mapping table | No table linking system components to regulation articles |  
+| H08 | Data privacy provisions | Missing GDPR/CCPA/LGPD data subject rights section when personal data processed |  
+| H09 | Bias mitigation evidence | No bias audit or fairness metric when AI Act Art. 10 applies |  
 | H10 | Version control | No version history for regulatory mappings |  
 
 ## SOFT Scoring  

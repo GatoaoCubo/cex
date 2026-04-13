@@ -6,8 +6,8 @@ llm_function: CONSTRAIN
 purpose: Component map of incident_report -- inventory, dependencies
 quality: null
 title: "Architecture Incident Report"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n05_ops
 tags: [incident_report, builder, architecture]
 tldr: "Component map of incident_report -- inventory, dependencies"
 domain: "incident_report construction"
@@ -38,4 +38,4 @@ density_score: 0.85
 | UserInterface | Formatter | Control |  
 
 ## Architectural Position  
-Incident_report-builder sits within CEX's risk management layer, integrating with data pipelines, validation systems, and storage to ensure transparent, auditable incident documentation across trading and operations.
+Incident_report-builder sits within CEX's P11 Feedback pillar as the post-incident documentation module. It consumes outputs from monitoring (trace_config), triage (bugloop), and knowledge systems (learning_record). Post-mortem reports feed upstream into compliance_framework (regulatory breach obligations), threat_model (updated threat surfaces from real incidents), and the knowledge library (P01). Follows NIST SP 800-61 incident lifecycle: Preparation -> Detection -> Containment -> Eradication -> Recovery -> Post-Incident.
