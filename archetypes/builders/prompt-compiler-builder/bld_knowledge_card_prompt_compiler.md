@@ -5,7 +5,7 @@ pillar: P03
 llm_function: INJECT
 purpose: Domain knowledge for prompt_compiler production -- atomic searchable facts
 sources: prompt-compiler-builder MANIFEST.md + SCHEMA.md
-quality: null
+quality: 9.0
 title: "Knowledge Card Prompt Compiler"
 version: "1.0.0"
 author: n03_builder
