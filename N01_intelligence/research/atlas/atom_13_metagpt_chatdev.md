@@ -327,6 +327,58 @@ Source: arXiv:2308.00352v6, section 3; github.com/geekan/MetaGPT-docs
 | **React mode** | Configurable agent execution strategy (REACT/BY_ORDER/PLAN_AND_ACT) | State machine / execution engine |
 | **Dual-representation Message** | content (string) + instruct_content (Pydantic) per message | Schema-first API with human-readable fallback |
 
+### 1.11 API Evolution: v0.5 -> v0.7 -> v0.8
+
+Significant breaking changes. Source: github.com/FoundationAgents/MetaGPT/releases
+
+| Version | Released | Key Change | Migration Impact |
+|---------|----------|-----------|-----------------|
+| v0.5.0 | 2023-Q4 | Incremental development (`--inc` flag) | New: project evolution without full rebuild |
+| v0.7.0 | Feb 2024 | `Role._init_actions` removed -> `Role.set_actions()` | Breaking: all subclasses must update |
+| v0.7.0 | Feb 2024 | Global `CONFIG` singleton removed -> per-role `Config` instances | Breaking: no more `from metagpt.config import CONFIG` |
+| v0.7.0 | Feb 2024 | `Context` class introduced | Unified config + repo + workspace per Role instance |
+| v0.7.0 | Feb 2024 | `mark_as_readable` / `mark_as_writable` decorators on Env | Explicit env access control; replaces implicit role permissions |
+| v0.7.0 | Feb 2024 | `ActionNode` from Pydantic BaseModel | Structured sub-action trees with schema enforcement + retry |
+| v0.8.0 | Mar 2024 | Data Interpreter agent (notebook + browser + shell) | SOTA on ML/math/open-ended tasks; standalone agent |
+| v0.8.0 | Mar 2024 | RAG module (index + retrieve + rank) | Optional import; adds retrieval-augmented role context |
+| v0.8.0 | Mar 2024 | Claude, QianFan, DashScope, Yi LLM providers | Config `llm.api_type` field selects provider |
+
+**Context class (v0.7+)** -- per-role isolated execution environment:
+
+```python
+class Context(BaseModel):
+    config: Config          # LLM settings + runtime configuration
+    repo: RepoManager       # Git-aware file repository access
+    workspace: WorkSpace    # Task-specific working directory
+```
+
+Each `Role` gets its own `Context`, enabling concurrent roles with
+different LLM providers or configurations in the same `Team`.
+
+**ActionNode (v0.7+)** -- schema-enforced sub-action step:
+
+Unlike raw `Action._aask()` (returns unstructured string), `ActionNode.fill()`
+calls `_aask_v1()` which enforces a Pydantic schema on LLM output via
+retry-with-repair (up to N retries if validation fails):
+
+```python
+class WritePRD(Action):
+    async def run(self, requirements: str) -> PRD:
+        # ActionNode chain: each node = one schema-enforced LLM call
+        prd = await PRD_ACTION_NODE.fill(requirements, self.llm)
+        return prd
+
+# ActionNode constructed from Pydantic model (v0.7+):
+PRD_ACTION_NODE = ActionNode.from_pydantic(PRDModel)
+# from_pydantic() auto-generates prompt instructions from Pydantic
+# field descriptions -- Pydantic docstrings -> prompt compilation
+```
+
+`ActionNode` is the recommended pattern for SOP scenarios where outputs
+map to finite-state Pydantic models. For dynamic runtime prompt generation,
+`DataInterpreter` (v0.8) is preferred.
+Source: github.com/FoundationAgents/MetaGPT/issues/1439
+
 ---
 
 ## 2. ChatDev: Chat Chain + Communicative Dehallucination
@@ -450,6 +502,21 @@ Paper: Qian et al., "Experiential Co-Learning of Software-Developing Agents"
 | **Co-Tracking** | Joint exploration by instructor + assistant | Directed chain graph G=(N,E) of solution states; each node is a code snapshot |
 | **Co-Memorizing** | Mine shortcuts from trajectories | Deduplicate graph, score nodes, extract non-adjacent high-gain paths |
 | **Co-Reasoning** | Use experience pools for unseen tasks | Few-shot retrieval from instructor/assistant pools |
+
+**Formal graph definition (arXiv:2312.17025v2):**
+
+```
+G = (N, E) where:
+  N = {r_j | r_j in R} union {r_0}
+      r_0   = initial empty codebase (before any instruction)
+      r_j   = code snapshot after j-th instruction is applied
+  E = {(r_j, i_{j+1}, r_{j+1})}
+      i_{j+1} = instruction that transforms r_j -> r_{j+1}
+```
+
+Graph deduplication: MD5 hashing of code snapshots detects identical
+states; duplicate nodes are merged to prevent shortcut mining over
+circular paths. This bounds the graph size regardless of interaction length.
 
 ### 3.2 Shortcut Experiences
 

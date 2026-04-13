@@ -540,12 +540,87 @@ Task config: `@task(name=, retry_policy=, cache_policy=)`.
 
 ### 3.12 Prebuilt Components
 
+#### create_react_agent -- Full Parameter Reference
+
+```python
+from langgraph.prebuilt import create_react_agent
+
+graph = create_react_agent(
+    model,                       # BaseChatModel -- the LLM backbone
+    tools,                       # list[BaseTool | Callable]
+    prompt=None,                 # str | SystemMessage | Callable | Runnable
+    response_format=None,        # type[BaseModel] -- structured final output
+    pre_model_hook=None,         # node fn inserted BEFORE model call
+    post_model_hook=None,        # node fn inserted AFTER model call
+    state_schema=MessagesState,  # TypedDict -- default uses messages reducer
+    context_schema=None,         # TypedDict for read-only runtime context
+    checkpointer=None,           # BaseCheckpointSaver -- enables memory/HIL
+    store=None,                  # BaseStore -- cross-thread long-term memory
+)
+```
+
+| Parameter | Type | Purpose |
+|-----------|------|---------|
+| `model` | BaseChatModel | The LLM backbone |
+| `tools` | list | Tools the agent can call |
+| `prompt` | str / SystemMessage / Callable / Runnable | Prepended context; string auto-converts to SystemMessage |
+| `response_format` | Pydantic type | Force structured final response via `with_structured_output` |
+| `pre_model_hook` | node function | Before model call -- use for message trimming, token budget |
+| `post_model_hook` | node function | After model call -- use for HITL approval before tool execution |
+| `state_schema` | TypedDict | Extend MessagesState with custom fields |
+| `context_schema` | TypedDict | Read-only context injected via `config["context"]` |
+| `checkpointer` | BaseCheckpointSaver | Required for multi-turn memory and interrupt/resume |
+| `store` | BaseStore | Long-term memory across threads |
+
+#### ToolNode -- Full Parameter Reference
+
+```python
+from langgraph.prebuilt import ToolNode
+
+tool_node = ToolNode(
+    tools,                    # list[BaseTool]
+    name="tools",             # node name registered in graph
+    tags=None,                # LangSmith tags attached to tool runs
+    handle_tool_errors=True,  # True: catch errors -> ToolMessage(is_error=True)
+                              # str: use as error message template
+                              # Callable: custom error handler fn
+    messages_key="messages",  # state key where messages list lives
+)
+```
+
+**ToolNode behavior:**
+- Reads last AIMessage from `state[messages_key]`
+- Extracts all `tool_calls` from that AIMessage
+- Executes all tool calls IN PARALLEL (asyncio.gather under async)
+- Returns list of ToolMessages, one per tool call
+- With `handle_tool_errors=True`: exceptions become ToolMessage with `is_error=True`
+
+#### Tool Injection Annotations
+
+| Annotation | Source | Purpose |
+|-----------|--------|---------|
+| `InjectedToolArg` | langchain_core | Hidden from LLM schema -- injected by runtime (e.g., user_id) |
+| `InjectedToolCallId` | langchain_core | Auto-injects current `tool_call_id` into tool |
+| `InjectedState` | langgraph.prebuilt | Inject full graph state into tool args at call time |
+| `InjectedStore` | langgraph.prebuilt | Inject BaseStore instance into tool for memory ops |
+
+#### Other Prebuilt Components
+
 | Component | Purpose |
 |-----------|---------|
-| `create_react_agent(model, tools)` | Prebuilt ReAct agent graph |
-| `ToolNode(tools)` | Node that executes tool calls |
-| `MessagesState` | Prebuilt state with messages reducer |
-| `CachePolicy(key_func=, ttl=)` | Node caching configuration |
+| `MessagesState` | TypedDict: `{messages: Annotated[list[AnyMessage], add_messages]}` |
+| `CachePolicy(key_func=, ttl=)` | Cache node outputs; key_func maps state to cache key |
+| `ValidationNode(tools)` | Validate tool call schemas before execution; raises ToolException on invalid |
+| `tools_condition(state)` | Router function: if last AIMessage has tool_calls -> "tools" else -> END |
+
+#### Human-in-the-Loop Prebuilt Types (LangGraph Studio)
+
+| Type | Purpose |
+|------|---------|
+| `HumanInterruptConfig` | Configure what triggers human review in Studio |
+| `ActionRequest` | Proposed action surfaced to human reviewer |
+| `HumanInterrupt` | Event type emitted when graph hits HITL gate |
+| `InterruptDecision` | Human decision: accept / reject / edit / respond |
 
 ### 3.13 Advanced Patterns
 

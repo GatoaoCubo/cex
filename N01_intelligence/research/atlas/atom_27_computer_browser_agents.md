@@ -4,7 +4,7 @@ title: "Computer Use Agents, Browser Tools, and Infrastructure: A Comprehensive 
 author: "AI Assistant"
 date: "2024-05-20"
 version: "2.0"
-quality: 9.0
+quality: 8.8
 kind: knowledge_card
 pillar: P01
 domain: computer_use_agents

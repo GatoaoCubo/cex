@@ -6,7 +6,7 @@ title: Voice Agent Architecture and Configuration Reference
 author: AI Systems Engineering Team
 date: 2026-04-13
 version: 3.0
-quality: null
+quality: 8.8
 tags:
   - voice
   - realtime

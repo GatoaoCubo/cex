@@ -441,9 +441,17 @@ MoE ratios of 8-12:1 (for routed-only count) are the sweet spot -- frontier reas
 
 3. **Voice-first is not optional for non-English markets**. Krutrim's architecture decision reflects a billion-user reality: typing in English is a barrier. Agent systems targeting global markets need voice input as a primary modality.
 
-4. **22-language tokenizer efficiency is a moat**. Sarvam's custom tokenizer reduces cost per token for underserved languages. This makes multilingual agents economically viable at scale.
+4. **22-language tokenizer efficiency is a moat**. Sarvam's custom tokenizer reduces cost per token for underserved languages by 3-5x (fertility: 1.4-2.1 vs 4-8 for global models). This makes multilingual agents economically viable at scale.
 
 5. **Code-mixing is the real evaluation frontier**. Pure language benchmarks miss how people actually talk. Hinglish, Tanglish, and similar code-mixed varieties are the true test of multilingual models.
+
+6. **Multi-turn tool use is the weak link in Korean models**. Kanana-2's BFCL gap (75.6% single-turn vs 34.3% multi-turn) reveals that current Korean models excel at single-shot tool calls but degrade significantly over conversation turns. This is the key capability gap for production agentic deployments.
+
+7. **Sigmoid routing prevents expert collapse**. Sarvam's use of sigmoid (not softmax) for MoE gating is an implementation detail with large training stability implications. When building or configuring MoE models, sigmoid routing should be the default for sovereign models trained on limited compute.
+
+8. **India is bifurcating into general sovereign + domain specialists**. Sarvam/PARAM-2 cover general-purpose, while Project Indus (education Hindi), MahaGPT (governance), and Gnani.ai (voice) target verticals. The ecosystem is maturing past "one model to rule them all."
+
+9. **Public AI infrastructure is a viable distribution model**. PARAM-2's national digital good model avoids proprietary lock-in for government and public services. This contrasts with the commercial API model and has implications for regulated industries (healthcare, education, legal).
 
 ### 4.2 Confidence Assessment
 
@@ -451,10 +459,14 @@ MoE ratios of 8-12:1 (for routed-only count) are the sweet spot -- frontier reas
 |-------|-----------|----------|
 | Korea leads Asia in MCP adoption | HIGH | PlayMCP live, Kakao ecosystem integration |
 | P-C-G is production-viable for Korean agents | MEDIUM | Paper only, no production deployment reported |
-| Sarvam 105B is competitive with global models | HIGH | MMLU 90.6, Math500 98.6, Apache 2.0 release |
+| Sarvam 105B is competitive with global models | HIGH | MMLU 90.6, Math500 98.6, GPQA 78.7, Apache 2.0 release |
+| Krutrim-2 surpasses models 5-10x its size on Indic tasks | MEDIUM | Claimed by Ola, not independently benchmarked vs Sarvam |
 | Krutrim/Kruti will scale to 100M+ users | LOW | 100K downloads, 13 languages, unproven distribution |
 | Both governments will sustain funding | HIGH | $175M (Korea) + $1.1B (India) already committed |
-| MoE 8-12:1 ratio is the sovereign architecture standard | HIGH | 4/4 major models use this ratio |
+| MoE 128-expert design is the sovereign architecture standard | HIGH | 3/3 top sovereign models independently choose 128 experts |
+| MLA superseding GQA for flagship models | HIGH | Kanana-2 + Sarvam 105B both use MLA; GQA relegated to smaller variants |
+| Bradley-Terry is the right ranking framework for human evals | HIGH | AI4Bharat + Chatbot Arena + LMSYS all use it; chess ratings proven |
+| Krutrim-2 dense is a cost disadvantage vs MoE at same compute | HIGH | 12B dense = ~5x compute vs 2.4B active Sarvam 30B per token |
 
 ---
 
@@ -481,4 +493,19 @@ MoE ratios of 8-12:1 (for routed-only count) are the sweet spot -- frontier reas
 - [Kruti Agentic AI Analysis](https://aufaittechnologies.com/blog/kruti-agentic-ai-india-launch/)
 - [AI4Bharat Indic LLM Arena Blog](https://ai4bharat.iitm.ac.in/blog/indic-llm-arena)
 - [Indic LLM Arena Platform](https://arena.ai4bharat.org/)
+- [Indic LLM Arena Analytics Vidhya Review](https://www.analyticsvidhya.com/blog/2025/11/indic-llm-arena/)
 - [South Korea LLM Powerhouses Overview](https://www.marktechpost.com/2025/08/21/meet-south-koreas-llm-powerhouses-hyperclova-ax-solar-pro-and-more/)
+- [HyperCLOVA X 32B Think Technical Report (arXiv)](https://arxiv.org/abs/2601.03286)
+- [HyperCLOVA X SEED Think 32B HuggingFace](https://huggingface.co/naver-hyperclovax/HyperCLOVAX-SEED-Think-32B)
+- [HyperCLOVA X SEED Think 14B HuggingFace](https://huggingface.co/naver-hyperclovax/HyperCLOVAX-SEED-Think-14B)
+- [Kanana-2-30b-a3b-thinking HuggingFace](https://huggingface.co/kakaocorp/kanana-2-30b-a3b-thinking)
+- [Kanana-2-30b-a3b-instruct HuggingFace](https://huggingface.co/kakaocorp/kanana-2-30b-a3b-instruct)
+- [Sarvam 30B and 105B Technical Blog](https://www.sarvam.ai/blogs/sarvam-30b-105b)
+- [Sarvam 105B Open Source (buildfastwithai)](https://www.buildfastwithai.com/blogs/sarvam-105b-india-s-open-source-llm-for-22-indian-languages-2026)
+- [Krutrim-2: Best-in-Class Indic LLM](https://tech.olakrutrim.com/krutrim-2-a-best-in-class-large-language-model-for-indic-languages/)
+- [Krutrim-2 HuggingFace](https://huggingface.co/krutrim-ai-labs/Krutrim-2-instruct)
+- [BharatGen PARAM-2 Launch (BharatGen blog)](https://bharatgen.com/param-2-launch-bharatgen-sovereign-ai-22-languages/)
+- [BharatGen PARAM-2 at AI Impact Summit 2026 (DQ India)](https://www.dqindia.com/esdm/bharatgen-unveils-17b-parameter-sovereign-multilingual-ai-model-at-india-ai-impact-summit-2026-11132799)
+- [India Sovereign AI Stack 2026 (Inc42)](https://inc42.com/features/from-llms-to-verticalisation-indias-sovereign-ai-stack-takes-shape/)
+- [Sarvam AI India Frugal AI (Rest of World)](https://restofworld.org/2026/india-frugal-ai-sarvam-krutrim-sovereign/)
+- [Best Korean LLMs Leaderboard 2026](https://benchlm.ai/leaderboards/korean-llm)
