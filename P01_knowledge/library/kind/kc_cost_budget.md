@@ -9,7 +9,7 @@ created: 2026-04-12
 updated: 2026-04-12
 author: n03_builder
 domain: cost_budget
-quality: null
+quality: 9.1
 tags: [cost_budget, P09, CONSTRAIN, kind-kc]
 tldr: "cost_budget defines token budget allocation, USD spend caps, provider cost rates, and alert thresholds -- enabling per-nucleus, per-mission, and per-model cost governance."
 when_to_use: "Building, reviewing, or reasoning about cost_budget artifacts"
