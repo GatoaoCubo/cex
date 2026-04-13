@@ -6,7 +6,7 @@ version: 1.0.0
 created: 2026-04-07
 author: n04_knowledge
 domain: knowledge-management
-quality: 8.7
+quality: 8.8
 tags:
 - glossary
 - knowledge-card
@@ -16,109 +16,113 @@ tldr: A dense, structured document encoding a single concept with mandatory fron
   format.
 density_score: 0.97
 updated: '2026-04-13'
-boundary: A Knowledge Card is a focused, high-density document encoding a single concept with strict formatting rules. It
-  is NOT a knowledge_card without minimum density, nor a context_doc without defined scope.
-8f_pipeline_function: 'Primary function: INJECT Knowledge Cards are injected into the CEX pipeline as atomic units of truth.
-  They enable rapid integration, validation, and deployment of domain-specific knowledge across systems.'
-structure_requirements: '| YAML Field       | Required | Description                                  | Example Value                     |
+boundary: A Knowledge Card is a domain-specific, machine-parseable artifact with strict density requirements. It is not a
+  knowledge_card (without minimum density), context_doc (without scope), or general documentation. It must encode exactly
+  one concept with no ambiguity.
+8f_pipeline_function: "Primary function: INJECT  \n- Input: Unstructured domain knowledge  \n- Output: Structured KC with\
+  \ frontmatter, tables, and CEX integration  \n- Constraints:  \n  - Density score ≥0.8  \n  - Max 4KB (comprehensive)  \n\
+  \  - YAML frontmatter required  \n  - No markdown beyond H1 and tables  \n- Tools: `kc_builder`, `density_analyzer`, `schema_validator`"
+core: ''
+concept_encoding_principles: '| Principle | Description | Example | Constraint |
 
-  |------------------|----------|----------------------------------------------|-----------------------------------|
+  |---------|-------------|---------|----------|
 
-  | id               | ✅       | Unique identifier for the KC                 | p01_gl_knowledge_card           |
+  | Single Concept | Encodes exactly one domain concept | "Quantum Entanglement" | No multiple concepts |
 
-  | kind             | ✅       | Document type (e.g., glossary_entry)         | glossary_entry                  |
+  | Density Optimization | Every sentence adds value | "Entanglement violates classical locality" | "If deleted, KC loses
+  value" |
 
-  | pillar           | ✅       | Strategic pillar (P01-P05)                   | P01                             |
+  | Machine Parseability | YAML frontmatter required | `id: p01_gl_knowledge_card` | Schema validation mandatory |
 
-  | title            | ✅       | Human-readable title                         | "Knowledge Card (KC)"           |
+  | Contextual Scope | Defined by domain and pillar | "P01: Knowledge Management" | No cross-domain concepts |
 
-  | version          | ✅       | Semantic version (e.g., 1.0.0)                | 1.0.0                           |
-
-  | created          | ✅       | ISO date of creation                         | 2026-04-07                      |
-
-  | author           | ✅       | Owner/creator                                | n04_knowledge                   |
-
-  | domain           | ✅       | Knowledge domain                             | knowledge-management            |
-
-  | quality          | ✅       | Quality score (0-10)                         | 8.7                             |
-
-  | tags             | ✅       | Keywords for search/organization             | [glossary, knowledge-card, kc]  |
-
-  | tldr             | ✅       | One-sentence summary                         | "A dense, structured..."        |
-
-  | density_score    | ✅       | Calculated density (0-1)                     | 0.97                            |
-
-  | updated          | ⚠️       | Last update date (optional)                  | 2026-04-13                      |'
-comparison_table_knowledge_card_vs_document_types: '| Document Type     | Purpose                          | Density Requirement
-  | Max Size  | Use Case                          |
-
-  |-------------------|----------------------------------|---------------------|-----------|-----------------------------------|
-
-  | Knowledge Card (KC) | Atomic concept encoding          | ≥0.8                | 2KB/4KB   | CEX integration, knowledge
-  atoms |
-
-  | Context Doc       | Broader contextual explanation   | ≥0.5                | 10KB      | Background for multiple concepts
-  |
-
-  | Fact Sheet        | Detailed reference               | ≥0.6                | 8KB       | Operational procedures           |
-
-  | Technical Spec    | System/component definition      | ≥0.7                | 6KB       | Engineering documentation        |
-
-  | White Paper       | Strategic/philosophical argument | ≥0.4                | 20KB      | Policy advocacy, research        |'
-related_kinds:
-- 'Context Document: Provides broader context for multiple KCs, with lower density requirements.'
-- 'Fact Sheet: Contains detailed procedural or operational knowledge, often used in training.'
-- 'Technical Specification: Defines system/component behavior with higher engineering focus.'
-- 'White Paper: Advocates for strategic approaches, often used in policy or research contexts.'
-- 'Knowledge Bundle: Aggregates multiple KCs into a cohesive package for complex topics.'
-core_content_requirements:
-- 'Single Concept Focus: Must encode one concept without ambiguity.'
-- 'Machine-Readable: YAML frontmatter must validate against `kc_structure_contract.md`.'
-- 'Density Enforcement: Every sentence must contribute to the concept''s definition.'
-- 'Section Order: H1 → Core → Tables → CEX Integration (no deviations).'
-cex_integration: "Knowledge Cards are the foundation for:  \n- Automated Validation: Tools like `kc-validator` ensure compliance\
-  \ with structure and density.  \n- Search/Discovery: Tags and metadata enable precise retrieval in CEX repositories.  \n\
-  - Pipeline Injection: Used in `8F` workflows for rapid deployment of knowledge units."
-example_use_cases:
-- 'Glossary Entry: Define "Knowledge Card" with metadata for search.'
-- 'Technical Concept: Encode "Quantum Entanglement" with equations and references.'
-- 'Process Definition: Document "CI/CD Pipeline" with step-by-step integration.'
-- 'Policy Statement: Encode "Data Privacy Regulation" with legal citations.'
-- 'System Component: Define "Blockchain Consensus Mechanism" with technical specs.'
+  | CEX Integration | Must include integration spec | `integration: cex-001` | Valid CEX version required |'
 density_optimization_techniques:
-- 'Remove Redundancy: Eliminate duplicate explanations or examples.'
-- 'Use Tables: Replace prose with tabular data (e.g., parameters, equations).'
-- 'Precise Language: Avoid vague terms; use domain-specific jargon.'
-- 'Frontmatter Utilization: Place metadata in YAML, not prose.'
-- 'Strict Sectioning: Keep H1, Core, Tables, and CEX Integration distinct.'
-quality_assurance:
-- 'Automated Checks: Tools like `kc-validator` enforce structure and density.'
-- 'Peer Review: Mandatory for all KCs above quality score 8.0.'
-- 'Version Control: Track changes with semantic versioning (e.g., 1.0.0 → 1.1.0).'
-- 'Density Metrics: Calculated using `density_score` field (0-1 scale).'
-- 'Continuous Monitoring: Repositories audit KCs quarterly for compliance.'
-evolution_of_knowledge_cards: '| Version | Date       | Change Description                          | Impact                          |
+- 'Eliminate redundancy: "Entanglement is a quantum phenomenon" → "Quantum entanglement"'
+- 'Use tables for data: Replace prose with structured data (see below)'
+- 'Frontmatter prioritization: Place metadata first'
+- 'Concise definitions: "Non-local correlation between particles"'
+- 'Avoid explanation: Focus on facts, not interpretation'
+comparison_kc_vs_other_document_types: '| Document Type | Purpose | Density Score | Max Size | Primary Use Case |
 
-  |---------|------------|---------------------------------------------|---------------------------------|
+  |--------------|---------|----------------|----------|-------------------|
 
-  | 1.0.0   | 2026-04-07 | Initial release with core structure         | Foundation for CEX integration  |
+  | Knowledge Card (KC) | Atomic concept encoding | ≥0.8 | 2KB (focused) | CEX integration, AI training |
 
-  | 1.1.0   | 2026-05-15 | Added density optimization techniques       | Improved quality assurance      |
+  | Context Document (CD) | Broad contextual explanation | 0.5-0.7 | 10KB+ | Human-readable documentation |
 
-  | 1.2.0   | 2026-06-30 | Introduced automated validation tools       | Faster deployment cycles        |
+  | Knowledge Graph Node (KGN) | Graph-based concept representation | 0.6-0.8 | 5KB | Semantic linking, visualization |
 
-  | 1.3.0   | 2026-08-15 | Expanded use cases for technical concepts   | Broader adoption in engineering |
+  | CEX Integration Spec | CEX compatibility definition | 0.9 | 1KB | System interoperability |
 
-  | 1.4.0   | 2026-10-01 | Added peer review requirements              | Enhanced accuracy and trust     |'
-limitations_and_best_practices:
-- 'Avoid Ambiguity: KCs must be unambiguous; use precise definitions.'
-- 'No Cross-References: Link to other KCs via tags, not internal references.'
-- 'Language Consistency: Use a single language (English) for global consistency.'
-- 'Avoid Over-Engineering: Keep complexity low for rapid deployment.'
-- 'Regular Updates: Review and update KCs annually to maintain relevance.'
-future_enhancements:
-- 'AI-Generated Drafts: Use LLMs for initial drafting, with human validation.'
-- 'Interactive Elements: Embed diagrams or code snippets for technical KCs.'
-- 'Multilingual Support: Expand to non-English domains with localized tags.'
-- 'Integration with Ontologies: Link KCs to external knowledge graphs.'
-- 'Real-Time Validation: Implement live checks during authoring.'
+  | Fact Sheet | General information summary | 0.4-0.6 | 15KB+ | Public communication |'
+cex_integration: ''
+required_fields:
+- '`integration`: CEX version (e.g., `cex-001`)'
+- '`schema`: JSON schema reference (e.g., `kc_schema_v1.0.0`)'
+- '`tooling`: Required tools for processing (e.g., `kc_builder`, `schema_validator`)'
+- '`pipeline`: 8F pipeline stage (e.g., `INJECT`)'
+- '`density_score`: Calculated value (≥0.8)'
+example_integration: 'integration: cex-001
+
+  schema: kc_schema_v1.0.0
+
+  tooling: ["kc_builder", "density_analyzer"]
+
+  pipeline: INJECT
+
+  density_score: 0.97'
+related_kinds:
+- 'Glossary Entry: Provides definitions but lacks density requirements and CEX integration'
+- 'Context Document: Broader in scope but lower density (0.5-0.7)'
+- 'Knowledge Graph Node: Structured for graph linking but less focused on single concepts'
+- 'CEX Integration Specification: Defines compatibility rules but not content encoding'
+- 'Fact Sheet: General-purpose documentation with no strict density or structure'
+use_cases: ''
+domain_specific_applications: '| Domain | Use Case | KC Example | Density | Size |
+
+  |-------|----------|------------|---------|------|
+
+  | Physics | Quantum Entanglement | "Quantum entanglement" | 0.97 | 2KB |
+
+  | Medicine | COVID-19 Vaccination | "mRNA vaccine mechanism" | 0.89 | 3KB |
+
+  | Finance | Black-Scholes Model | "Option pricing formula" | 0.85 | 4KB |
+
+  | Law | GDPR Compliance | "Data subject rights" | 0.82 | 3.5KB |
+
+  | Engineering | Finite Element Analysis | "Mesh discretization" | 0.88 | 3KB |'
+cex_pipeline_integration:
+- 'Stage: INJECT'
+- 'Input: Unstructured domain knowledge (e.g., research papers, technical manuals)'
+- 'Output: Structured KC with frontmatter, tables, and CEX integration'
+- 'Tools: `kc_builder`, `density_analyzer`, `schema_validator`'
+- 'Validation: Must pass schema checks and density scoring'
+density_scoring_matrix: '| Score Range | Description | Example | Use Case |
+
+  |------------|-------------|---------|----------|
+
+  | ≥0.9 | Highly dense, minimal redundancy | "Quantum entanglement" | AI training, CEX integration |
+
+  | 0.8-0.89 | Dense, minor redundancy | "mRNA vaccine mechanism" | Human-readable documentation |
+
+  | 0.7-0.79 | Moderate density | "Data subject rights" | Public communication |
+
+  | 0.6-0.69 | Low density | "Finite element analysis" | General reference |
+
+  | <0.6 | Not a KC | General documentation | Not applicable |'
+best_practices:
+- 'Start with the core concept: "Quantum entanglement"'
+- 'Add structured data: Replace prose with tables (see above)'
+- 'Validate density: Use `density_analyzer` tool'
+- 'Include CEX integration: Ensure `integration` field is present'
+- 'Use YAML frontmatter: Mandatory for all KCs'
+tools_and_validation:
+- 'kc_builder: Converts unstructured knowledge to KC format'
+- 'density_analyzer: Calculates density score (≥0.8 required)'
+- 'schema_validator: Ensures YAML frontmatter compliance'
+- '8F Pipeline: Processes KCs through INJECT stage'
+- 'CEX Compatibility: Must use valid CEX version (e.g., `cex-001`)'
+conclusion: A Knowledge Card is the atomic unit of knowledge in CEX, designed for high-density encoding, machine parsing,
+  and seamless integration. It must adhere to strict formatting, density, and CEX compatibility rules. By following best practices
+  and using validation tools, KCs ensure consistency, interoperability, and value across the CEX ecosystem.
