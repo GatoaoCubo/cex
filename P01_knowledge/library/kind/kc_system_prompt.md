@@ -3,9 +3,10 @@ id: kc_system_prompt
 kind: knowledge_card
 title: "System Prompt Engineering"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: English
+density_score: 0.99
 ---
 
 # System Prompt Engineering
