@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "Research Batch — Social Media Discovery"
 version: 1.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/crm_mission/batch_c_social_discovery.md
@@ -12,6 +12,7 @@ variables: [INDUSTRY, PLATFORMS, HASHTAGS, REGION, CITIES, OUTPUT_FILE, SIGNAL_T
 density_score: 0.95
 tags: [template, research-batch, social-media, instagram, facebook, crm, instance-extraction]
 tldr: "Social media business discovery — find informal and micro businesses via hashtag mining and profile scraping."
+updated: "2026-04-13"
 ---
 
 # BATCH C — Social Media Discovery
