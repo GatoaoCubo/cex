@@ -13,7 +13,7 @@ rules_count: 14
 tone: technical
 knowledge_boundary: "Intent resolution, query rewriting, prompt compilation (DSPy), NLU pattern matching, bilingual mapping (PT-BR+EN), kind taxonomy, verb canonicalization, ambiguity resolution, fallback heuristics | Does NOT: route between providers (router P02), dispatch tasks to agents (dispatch_rule P12), fill prompt variables (prompt_template P03)"
 domain: prompt_compiler
-quality: null
+quality: 9.0
 tags: [system_prompt, prompt_compiler, P03]
 safety_level: standard
 tools_listed: false
