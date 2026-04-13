@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "Workflow — Strategic Outreach Campaign"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/N02_marketing/p12_wf_gato_strategic_outreach.md
@@ -12,6 +12,7 @@ variables: [BRAND_NAME, CHANNELS, OUTREACH_STAGES, SEGMENTS, TARGET_COUNT, REGIO
 density_score: 0.95
 tags: [template, workflow, outreach, campaign, lead-nurturing, b2b, instance-extraction]
 tldr: "Multi-channel outreach campaign workflow — convert CRM prospects into brand partners via segmented communication."
+updated: "2026-04-13"
 ---
 
 # {{BRAND_NAME}} — Strategic Outreach Campaign
