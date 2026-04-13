@@ -3,9 +3,10 @@ id: kc_pre_commit_hooks_for_ai
 kind: knowledge_card
 title: "Pre-Commit Hooks for AI-Generated Code"
 version: 1.0.0
-quality: 8.7
+quality: 8.6
 pillar: P01
 language: en
+density_score: 1.0
 ---
 
 # Pre-Commit Hooks for AI-Generated Code
