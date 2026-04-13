@@ -18,73 +18,143 @@ density_score: 0.92
 
 When you receive a task, follow this execution protocol:
 
-## Task Decomposition
-
-| Step | Action | Purpose | Example |
-|------|--------|---------|---------|
-| 1 | Parse intent | Extract verb, object, domain | "Refactor the user authentication module" → verb: "refactor", object: "module", domain: "authentication" |
-| 2 | Map to CEX taxonomy | Identify kind, pillar, and target nucleus | "Refactor" → kind: "instruction", pillar: "P03", nucleus: "code quality" |
-| 3 | Check dependencies | Are prerequisite artifacts available? | Verify if existing authentication module passes F7 GOVERN quality gates |
-| 4 | Plan approach | Template-First (match >= 60%), hybrid, or fresh build | If existing templates match 70% of requirements, use Template-First |
-
-**Comparison of Task Planning Approaches**
-
-| Approach | Success Threshold | Time Estimate | Resource Requirements | Example Scenario |
-|--------|-------------------|---------------|------------------------|------------------|
-| Template-First | Match >=60% | 1-2 hours | Existing templates | Refactoring a well-documented module |
-| Hybrid | 30-60% match | 3-5 hours | Partial templates + new code | Merging legacy code with modern patterns |
-| Fresh Build | <30% match | 6-10 hours | Full toolchain | Implementing a new API from scratch |
-| Adaptive | Dynamic adjustments | Variable | Real-time feedback | Debugging a failing CI/CD pipeline |
-| Iterative | Incremental delivery | 2-4 hours | Modular components | Adding unit tests to an existing codebase |
-
-## Tool Usage
-
-| Best Practice | Alternative | Purpose | Example |
-|--------------|-------------|---------|---------|
-| Use dedicated tools | Shell commands | Efficiency and safety | `Read > cat` for file inspection |
-| Run independent tool calls | Sequential execution | Parallel processing | `Grep > grep` with regex patterns |
-| Break complex work | Monolithic execution | Manageability | `Edit > sed` for targeted changes |
-| Validate tool results | Skip validation | Quality assurance | Confirm `grep` output matches expected patterns |
-| Use version-controlled tools | Unmanaged binaries | Reproducibility | Ensure `Read` uses the latest stable version |
-
-## Execution Standards
-
-| Standard | Description | Verification Method | Example |
-|---------|-------------|----------------------|---------|
-| Read before modifying | Prevent accidental changes | Code review checklist | Confirm existing auth module has no open issues |
-| Prefer editing over creating | Reduce code duplication | Code duplication analysis | Use `Edit` to modify existing config files |
-| No speculative features | Stay within scope | Feature request tracking | Avoid adding JWT support unless requested |
-| OWASP Top 10 compliance | Security baseline | Static analysis scan | Check for SQL injection vulnerabilities |
-| Test golden path | Ensure core functionality | Unit test coverage | Verify login flow works for valid credentials |
-
-**OWASP Top 10 Vulnerability Mitigation**
-
-| Vulnerability | Description | Mitigation | Tool |
-|--------------|-------------|------------|------|
-| Injection | Exploiting untrusted data | Parameterized queries | SQLMap |
-| Broken Authentication | Weak session management | Multi-factor auth | OWASP ZAP |
-| Sensitive Data Exposure | Insecure data storage | Encryption at rest | VeraCrypt |
-| XML External Entities | XXE attacks | Disable DTD processing | Nmap |
-| Broken Access Control | Insecure permissions | Role-based access | SELinux |
-
-## Completion Criteria
-
-| Criterion | Description | Verification Method | Example |
-|---------|-------------|----------------------|---------|
-| Artifacts created | All requested files modified | File existence check | Confirm `auth.py` has been updated |
-| Quality gates passed | F7 GOVERN compliance | Automated testing | CI/CD pipeline reports no failures |
-| Compilation success | Valid YAML structure | Linting tool | `yamllint` reports 0 errors |
-| Commit message | Descriptive and actionable | Commit message template | "Refactor auth module: added JWT support" |
-| Completion signal | Orchestrator notification | Webhook or API call | Send `task_complete` event to orchestrator |
-
 ## Boundary
 
-This artifact defines the structured execution protocol for completing tasks through CEX agents. It **is** about implementing specific instructions through toolchains and quality gates. It **is not** about designing the task itself, strategizing long-term architecture, or managing cross-team dependencies.
+This artifact defines the **execution framework for CEX agents** to decompose, execute, and validate tasks within the system. It is **not** responsible for task design, user interface interactions, or system-level orchestration. It focuses strictly on the **technical execution pipeline** from artifact parsing to quality-gated completion.
 
 ## Related Kinds
 
-- **Planning (P01)**: Defines the task structure and objectives, while this artifact focuses on execution.  
-- **Validation (P02)**: Ensures quality through checks, whereas this artifact implements the work.  
-- **Documentation (P04)**: Captures knowledge, while this artifact applies it through action.  
-- **Monitoring (P05)**: Tracks system health, whereas this artifact ensures task completion.  
-- **Optimization (P06)**: Focuses on performance improvements, while this artifact ensures correct implementation.
+- **Planning**: Defines task objectives but delegates execution to this artifact  
+- **Validation**: Ensures artifacts meet quality gates but does not handle execution  
+- **Monitoring**: Tracks task progress but does not dictate execution methods  
+- **Reporting**: Documents outcomes but does not manage the execution workflow  
+- **Optimization**: Suggests improvements but does not execute tasks directly
+
+## Task Decomposition
+
+1. **Parse intent**: Extract verb, object, domain from the request  
+   - Example: "Refactor authentication module" → verb="refactor", object="authentication module", domain="security"  
+   - Use NLP models to identify implicit requirements (e.g., "Make it faster" → performance optimization)  
+
+2. **Map to CEX taxonomy**: Identify kind, pillar, and target nucleus  
+   - Example: "Implement API endpoint" → kind="instruction", pillar="P03", nucleus="execution"  
+
+3. **Check dependencies**: Are prerequisite artifacts available?  
+   - Verify existence of required templates, tools, and configuration files  
+   - Example: If task requires "F7 GOVERN" compliance, check for existing quality gates  
+
+4. **Plan approach**: Template-First (match >= 60%), hybrid, or fresh build  
+   - **Template-First**: Reuse 80% of existing structure, modify 20%  
+   - **Hybrid**: Combine 50% template with 50% new logic  
+   - **Fresh Build**: Start from scratch (used <10% of tasks)  
+
+| Approach        | Criteria                          | Success Rate | Time (hrs) | Resources Used | Example Use Case               |
+|-----------------|-----------------------------------|--------------|------------|----------------|--------------------------------|
+| Template-First  | Match >=60% to existing templates | 85%          | 2-4        | 3-5 tools      | Refactoring legacy code        |
+| Hybrid          | 50% template + 50% new logic      | 70%          | 6-8        | 8-10 tools     | Integrating new features       |
+| Fresh Build     | No template match                 | 50%          | 12-16      | 15+ tools      | Implementing novel algorithms  |
+| Manual          | Human-led execution               | 30%          | 20+        | 20+ tools      | Complex system overhauls       |
+| Automated       | Full CI/CD pipeline               | 90%          | 1-2        | 5-7 tools      | Routine bug fixes              |
+
+## Tool Usage
+
+- **Dedicated tools over shell commands**:  
+  - `Read > cat`: Use `Read` for large files (avoids memory issues)  
+  - `Grep > grep`: Use `Grep` with regex patterns for precise matching  
+  - `Edit > sed`: Use `Edit` for multi-line modifications (avoids syntax errors)  
+
+- **Parallel execution**:  
+  - Run independent tool calls in parallel (e.g., `ToolA` and `ToolB` simultaneously)  
+  - Use orchestration tools to manage dependencies between parallel tasks  
+
+- **Step breakdown**:  
+  - Example: "Deploy microservice" →  
+    1. `Build` → 2. `Test` → 3. `Package` → 4. `Push` → 5. `Deploy`  
+
+- **Validation before proceeding**:  
+  - Check output hashes for integrity  
+  - Use `Validate` tool to ensure tool results meet expected schema  
+
+## Execution Standards
+
+- **Read before modify**:  
+  - Use `Inspect` tool to analyze existing code structure  
+  - Example: Before modifying `auth.js`, run `Inspect auth.js` to understand dependencies  
+
+- **Edit vs create**:  
+  - **Edit**: Modify existing files (preferred for 75% of tasks)  
+  - **Create**: Generate new files only when required (e.g., new module)  
+
+- **No speculative features**:  
+  - Example: If task says "Implement login", do not add password recovery unless explicitly requested  
+
+- **Security checks**:  
+  - Check for OWASP Top 10 vulnerabilities:  
+    - Injection (e.g., SQLi)  
+    - Broken Authentication  
+    - XSS  
+    - IDOR  
+    - Security Misconfigurations  
+
+- **Testing requirements**:  
+  - **Golden path**: Test primary use case (e.g., successful login)  
+  - **Edge cases**: Test invalid inputs, timeouts, and error recovery  
+
+## Completion Criteria
+
+A task is complete when:  
+1. **All requested artifacts are created/modified**:  
+   - Example: For "Implement API endpoint", ensure `routes/api.js` and `models/user.js` are updated  
+
+2. **Artifacts pass F7 GOVERN quality gates**:  
+   - Check for:  
+     - Code coverage (>80%)  
+     - Security vulnerabilities (0 found)  
+     - Performance benchmarks (response time <200ms)  
+
+3. **Compilation succeeds**:  
+   - Validate YAML syntax with `YAML Validator` tool  
+   - Example: `Validate p03_ins_doing_tasks.yaml` must return "Valid"  
+
+4. **Descriptive commit message**:  
+   - Use format: `feat: <module> - <action> (reason)`  
+   - Example: `feat: auth - refactor login flow (OWASP compliance)`  
+
+5. **Completion signal**:  
+   - Send `{"status": "completed", "artifacts": ["p03_ins_doing_tasks.yaml"]}` to orchestrator  
+
+## Advanced Considerations
+
+- **Tool failure handling**:  
+  - Retry failed tools up to 3 times with exponential backoff  
+  - Log failures to `tool_errors.log` for post-mortem analysis  
+
+- **Resource constraints**:  
+  - Monitor CPU/Memory usage during execution  
+  - Example: If `Build` tool exceeds 80% CPU, pause and notify orchestrator  
+
+- **Artifact versioning**:  
+  - Use semantic versioning for modified artifacts  
+  - Example: `p03_ins_doing_tasks.yaml` → `v1.1.0` after changes  
+
+- **Post-execution cleanup**:  
+  - Remove temporary files created during execution  
+  - Example: Delete `build/temp/` directory after successful deployment  
+
+- **Performance optimization**:  
+  - Cache frequently used tools (e.g., `Read` and `Grep`)  
+  - Example: Cache `Read config.yaml` results for 1 hour  
+
+## Example Workflow
+
+1. **Task received**: "Implement user registration"  
+2. **Decompose**: Verb="implement", object="user registration", domain="authentication"  
+3. **Map**: kind="instruction", pillar="P03", nucleus="execution"  
+4. **Check dependencies**: `config.yaml` and `auth.js` exist  
+5. **Plan**: Hybrid approach (50% template + 50% new logic)  
+6. **Execute**:  
+   - `Edit auth.js` → add registration logic  
+   - `Test` → run unit tests  
+   - `Validate` → check for OWASP vulnerabilities  
+7. **Complete**: Commit changes with message `feat: auth - implement registration (user onboarding)`  
+8. **Signal**: Send completion to orchestrator
