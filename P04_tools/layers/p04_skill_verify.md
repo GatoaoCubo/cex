@@ -4,7 +4,7 @@ kind: skill
 pillar: P04
 title: "Skill: Verification Protocol"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [skill, verification, quality, validation]
 tldr: "Verification skill defining step-by-step procedures for artifact validation. Used by F7 GOVERN and the verification agent."
 domain: "tools"
