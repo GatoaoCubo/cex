@@ -1,0 +1,74 @@
+---
+id: p04_kc_quality_gate
+kind: knowledge_card
+type: kind
+pillar: P04
+title: "Quality Gate — Deep Knowledge for quality gates"
+version: 1.0.0
+created: 2026-04-02
+updated: 2026-04-02
+author: builder_knowledge
+domain: quality_gate
+quality: 9.1
+tags: [quality_gate, p04, reusable, kind-kc]
+tldr: "Reusable quality assurance framework with structured phases, trigger conditions, and lifecycle management for repeatable validation"
+when_to_use: "Building, reviewing, or reasoning about quality gate artifacts"
+keywords: [quality_gate, phases, trigger, reusable, capability, workflow, lifecycle]
+feeds_kinds: [quality_gate]
+density_score: 0.92
+---
+
+# Quality Gate
+
+## Spec
+```yaml
+kind: quality_gate
+pillar: P04
+llm_function: TOOL
+max_bytes: 4096
+naming: p04_quality_gate_{{name}}.md + .yaml
+core: true
+```
+
+## What It Is
+A quality gate is a reusable framework for enforcing quality standards across workflows. It defines a specific validation process that can be executed repeatedly across different contexts. Quality gates are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A quality gate answers "what phases execute to achieve this validation?" while agents answer "who am I?" and prompts answer "how do I communicate?"
+
+## Cross-Platform Map
+| Framework/Provider | Class/Concept | Notes |
+|-------------------|---------------|-------|
+| LangChain | `ValidationChain` | Sequential validation with defined steps |
+| LlamaIndex | `ValidationPipeline` | Multi-step validation with phase management |
+| CrewAI | `QualityCheck` | Task definition with sequential/hierarchical validation |
+| DSPy | `dspy.Module.validate()` method | Structured validation with defined phases |
+| Haystack | `ValidationPipeline` | Explicit DAG execution with phase transitions |
+| AutoGen | `QualityValidator` | Multi-agent validation patterns |
+| Microsoft Semantic Kernel | `QualityCheck` / `KernelFunction` | Function orchestration with step management |
+
+## Key Parameters
+| Parameter | Type | Default | Tradeoff |
+|-----------|------|---------|----------|
+| trigger_type | enum | "user_invocable" | user_invocable (slash commands) vs agent_only (programmatic) |
+| phases | array | required | More phases = granular control vs complexity |
+| input_schema | object | {} | Strong typing vs flexibility |
+| output_format | string | "json" | Structured output vs natural language |
+| timeout_seconds | int | 300 | Execution time limit vs complex workflows |
+| quality_floor | number | 8.5 | Higher floor = stricter validation vs flexibility |
+| dependencies | array | [] | Explicit dependencies vs implicit flow |
+| concurrency | enum | "serial" | Parallel execution vs resource contention |
+
+## Phase Structure
+| Phase | Purpose | Input | Output |
+|-------|---------|-------|--------|
+| validate | Quality assessment | artifact, criteria | validation_results |
+| score | Quality scoring | validation_results, metrics | quality_score |
+| approve | Decision making | quality_score, thresholds | approval_status |
+| reject | Failure handling | approval_status, reasons | rejection_details |
+
+## Trigger Patterns
+| Trigger Type | Example | Activation |
+|--------------|---------|------------|
+| slash_command | "/validate", "/approve" | User types exact command |
+| keyword_match | "quality", "score" | Natural language contains keywords |
+| event_driven | quality_change, time_schedule | System event occurs |
+| agent_inv
+```
