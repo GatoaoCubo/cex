@@ -10,7 +10,7 @@ name: "Instagram Content — Weekly Cadence"
 trigger_type: cron
 cron: "0 8 * * 1,3,5"
 workflow_ref: "p12_wf_instagram_content_gen"
-quality: null
+quality: 8.7
 tags: [schedule, instagram, social, marketing]
 tldr: "Triggers Instagram content generation Mon/Wed/Fri at 08:00 BRT. max_concurrent 1, catch_up false."
 timezone: "America/Sao_Paulo"
@@ -21,6 +21,7 @@ max_concurrent: 1
 catch_up: false
 jitter: "0-60s"
 description: "Weekday trigger for Instagram content generation. Fires before peak engagement (12h-22h BRT)."
+density_score: 1.0
 ---
 
 ## Overview
