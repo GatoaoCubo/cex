@@ -29,7 +29,7 @@ density_score: 0.85
 | updated       | date   | yes      | -       | Last update timestamp              |  
 | author        | string | yes      | -       | Author/owner                       |  
 | domain        | string | yes      | -       | Application domain (e.g., trading) |  
-| quality       | string | yes      | "draft"  | Review status                      |  
+| quality       | null   | yes      | null     | Never self-score -- peer review only |  
 | tags          | list   | yes      | []       | Keywords                           |  
 | tldr          | string | yes      | -       | Summary                            |  
 | reward_type   | string | yes      | -       | Type of reward (e.g., token, fiat) |  

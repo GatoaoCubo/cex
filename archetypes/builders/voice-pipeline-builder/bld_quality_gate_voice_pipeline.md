@@ -1,63 +1,94 @@
 ---
 kind: quality_gate
-id: p04_qg_voice_pipeline
+id: p11_qg_voice_pipeline
 pillar: P11
 llm_function: GOVERN
-purpose: Quality gate with HARD and SOFT scoring for voice_pipeline
+purpose: Quality gate with HARD and SOFT scoring for voice_pipeline artifacts
 quality: null
-title: "Quality Gate Voice Pipeline"
+title: "Quality Gate: Voice Pipeline"
 version: "1.0.0"
-author: wave1_builder_gen
-tags: [voice_pipeline, builder, quality_gate]
-tldr: "Quality gate with HARD and SOFT scoring for voice_pipeline"
+author: n02_reviewer
+tags: [voice_pipeline, builder, quality_gate, P11]
+tldr: "Quality gate for voice pipeline architecture artifacts defining STT/NLU/TTS components, flow, and error handling."
 domain: "voice_pipeline construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.88
 ---
 
-## Definition  
-| metric | threshold | operator | scope |  
-|---|---|---|---|  
-| Architecture completeness | 100% | ≥ | End-to-end voice agent components |  
+## Definition
 
-## HARD Gates  
-| ID | Check | Fail Condition |  
-|---|---|---|  
-| H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not conform to `^[a-z0-9]+_[a-z0-9]+$` |  
-| H03 | kind matches | `kind` ≠ `voice_pipeline` |  
-| H04 | Required fields present | Missing `components`, `flow`, or `dependencies` |  
-| H05 | Component consistency | Components not aligned with defined architecture |  
-| H06 | Versioning | No version or invalid semver format |  
-| H07 | Security checks | Missing encryption or authentication in pipeline |  
-| H08 | Performance metrics | No latency or throughput thresholds defined |  
-| H09 | Error handling | No defined fallback or recovery mechanisms |  
-| H10 | Documentation | Missing or incomplete component descriptions |  
+A `voice_pipeline` artifact defines the end-to-end architecture for voice agent processing:
+STT, NLU, dialogue management, TTS components, their data flows, and error recovery strategies.
+It describes system-level architecture -- NOT provider-specific tuning or implementation code.
 
-## SOFT Scoring  
-| Dim | Dimension | Weight | Scoring Guide |  
-|---|---|---|---|  
-| D01 | Architecture clarity | 0.15 | Clear, documented flow and dependencies |  
-| D02 | Component modularity | 0.15 | Reusable, decoupled components |  
-| D03 | Scalability | 0.10 | Handles concurrent users and load |  
-| D04 | Security | 0.12 | Encryption, authentication, access controls |  
-| D05 | Performance | 0.10 | Latency ≤ 500ms, throughput ≥ 100 TPS |  
-| D06 | Error resilience | 0.10 | Fallback, retry, and recovery logic |  
-| D07 | Documentation | 0.10 | Complete, up-to-date component specs |  
-| D08 | Compliance | 0.18 | Adheres to CEX and industry standards |  
+Scope: files with `kind: voice_pipeline`. Does NOT apply to stt_provider (single STT config),
+tts_provider (single TTS config), or realtime_session (live session state).
 
-## Actions  
-| Score | Action |  
-|---|---|  
-| GOLDEN (≥9.5) | Promote to production, no further review |  
-| PUBLISH (≥8.0) | Release with monitoring and post-deployment checks |  
-| REVIEW (≥7.0) | Request changes, re-evaluate after fixes |  
-| REJECT (<7.0) | Halt deployment, mandatory redesign and re-validation |  
+## HARD Gates
 
-## Bypass  
-| conditions | approver | audit trail |  
-|---|---|---|  
-| Critical production outage | CTO or Lead Architect | Written approval + incident report |  
-| Emergency fix required | Senior Engineer | Change log + post-bypass review |  
-| Legacy system migration | Architecture Committee | Formal waiver request + impact analysis |
+Failure on any single gate means REJECT regardless of soft score.
+
+| ID  | Predicate | How to test |
+|-----|-----------|-------------|
+| H01 | Frontmatter parses as valid YAML | `yaml.safe_load(frontmatter)` raises no error |
+| H02 | `id` matches namespace `p04_vp_*` | `id.startswith("p04_vp_")` is true |
+| H03 | `id` equals filename stem | `Path(file).stem == id` |
+| H04 | `kind` equals literal `voice_pipeline` | string equality check |
+| H05 | `quality` is null at authoring time | `quality is None` |
+| H06 | All required frontmatter fields present and non-empty | id, kind, pillar, title, version, created, updated, author, domain, tags, tldr all present |
+| H07 | At least 2 pipeline components declared (STT and TTS minimum) | component list has >= 2 entries |
+| H08 | Data flow direction declared between components | body defines input/output or flow between stages |
+
+## SOFT Scoring
+
+Score each dimension 0 (absent or fails) to 1 (present and passes). Weights are 0.5 or 1.0.
+
+| #  | Dimension | Weight |
+|----|-----------|--------|
+| 1  | `density_score` field present and >= 0.80 | 1.0 |
+| 2  | All 4 core stages present: STT, NLU, dialogue management, TTS | 1.0 |
+| 3  | Fallback and error recovery mechanisms documented | 1.0 |
+| 4  | Multi-provider or provider-agnostic design declared | 1.0 |
+| 5  | Latency budget or performance targets specified | 0.5 |
+| 6  | Audio preprocessing stage documented | 0.5 |
+| 7  | Tags include `voice_pipeline` | 0.5 |
+| 8  | Boundary note: distinguishes from stt_provider, tts_provider, and realtime_session | 1.0 |
+| 9  | At least one concrete domain use case or deployment scenario | 1.0 |
+| 10 | Privacy/compliance requirements referenced (GDPR, HIPAA) | 0.5 |
+| 11 | `tldr` is <= 160 characters | 0.5 |
+
+**Formula**: `final_score = (sum of score_i * weight_i) / (sum of weight_i) * 10`
+Weight total: 9.0. Score range: 0.0 to 10.0.
+
+## Actions
+
+| Tier | Threshold | Action |
+|------|-----------|--------|
+| GOLDEN | >= 9.5 | Publish to pool; add to curated pipeline library |
+| PUBLISH | >= 8.0 | Publish to pool; mark production-ready |
+| REVIEW | >= 7.0 | Return to author with scored dimension feedback; one revision cycle |
+| REJECT | < 7.0 | Block from pool; full rewrite required |
+
+## Bypass
+
+| Field | Value |
+|-------|-------|
+| condition | Pipeline is a proof-of-concept with documented lifespan under 30 days |
+| approver | Domain lead must approve in writing |
+| audit_log | Record in `records/pool/audits/bypasses.md` with date, approver, reason |
+| expiry | 30 days from bypass grant; pipeline must be retired or brought to full compliance |
+
+## Properties
+
+| Property | Value |
+|----------|-------|
+| Kind | `quality_gate` |
+| Pillar | P11 |
+| Domain | voice_pipeline construction |
+| Pipeline | 8F (F1-F8) |
+| Scorer | cex_score.py |
+| Compiler | cex_compile.py |
+| Retriever | cex_retriever.py |
+| Quality target | 9.0+ |
+| Density target | 0.85+ |

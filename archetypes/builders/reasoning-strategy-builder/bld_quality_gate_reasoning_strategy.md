@@ -25,7 +25,7 @@ density_score: 0.85
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not conform to `PXX-YYYY` |  
+| H02 | ID matches pattern | ID does not match `^p03_rs_[a-zA-Z0-9]+$` |  
 | H03 | kind matches | `reasoning_strategy` not specified |  
 | H04 | Required fields present | Missing `prompt_template` or `validation_rules` |  
 | H05 | Valid reasoning steps | Steps not aligned with P03 pillar |  

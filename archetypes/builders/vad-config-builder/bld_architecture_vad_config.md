@@ -37,4 +37,4 @@ density_score: 0.85
 | Dependency Resolver | Builder Engine | Reference |  
 
 ## Architectural Position  
-vad_config resides in the infrastructure layer of the CEX ecosystem, ensuring configuration consistency across trading, risk, and compliance systems. It acts as a central hub for defining, validating, and deploying VAD parameters, interfacing with core exchange modules and external audit tools while enforcing P09 compliance standards.
+vad_config resides in the audio preprocessing layer of the CEX ecosystem, defining detection thresholds and sensitivity settings that gate audio into downstream STT providers. It acts as the first filter in voice pipelines -- separating speech from silence/noise -- and interfaces with stt_provider_builder (downstream consumer) and voice_pipeline_builder (orchestrator) while enforcing P09 configuration standards.

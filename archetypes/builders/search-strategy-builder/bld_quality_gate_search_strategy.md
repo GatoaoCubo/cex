@@ -25,7 +25,7 @@ density_score: 0.85
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not match `P04-[A-Z]{3}-\d{3}` |  
+| H02 | ID matches pattern | ID does not match `^p04_ss_[a-zA-Z0-9_-]+$` |  
 | H03 | kind matches | kind ≠ `search_strategy` |  
 | H04 | Resource limits defined | Missing CPU/RAM limits |  
 | H05 | Strategy validity | Strategy not in `static`, `dynamic`, or `adaptive` |  

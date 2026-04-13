@@ -2,39 +2,50 @@
 kind: tools
 id: bld_tools_dual_loop_architecture
 pillar: P04
+parent: dual-loop-architecture-builder
 llm_function: CALL
-purpose: Tools available for dual_loop_architecture production
+purpose: Tools the dual_loop_architecture builder invokes -- scheduler, bridge, critic, router
 quality: null
 title: "Tools Dual Loop Architecture"
 version: "1.0.0"
 author: wave1_builder_gen
-tags: [dual_loop_architecture, builder, tools]
-tldr: "Tools available for dual_loop_architecture production"
+tags: [dual_loop_architecture, builder, tools, scheduler, memory_bridge]
+keywords: [tick_scheduler, memory_bridge, critic, trajectory_log, plan_slot, router]
+tldr: "Tools for building dual-loop agents: tick scheduler, memory bridge, trajectory log, critic, model router."
 domain: "dual_loop_architecture construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.88
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Generates executable code from specifications | Code generation phase |  
-| cex_score.py | Evaluates output quality using predefined metrics | Post-generation validation |  
-| cex_retriever.py | Fetches external data for input processing | Pre-processing stage |  
-| cex_doctor.py | Diagnoses and fixes code errors | Debugging workflows |  
-| cex_optimizer.py | Refines code for efficiency and performance | Optimization phase |  
-| cex_validator.py | Ensures compliance with architectural constraints | Final verification |  
+## Runtime Tools (what the produced artifact consumes)
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| val_consistency_checker.py | Verifies internal logic consistency | Post-production |  
-| val_security_scanner.py | Detects vulnerabilities in generated code | Security review |  
-| val_perf_tester.py | Measures runtime performance | Deployment prep |  
-| val_compliance_checker.py | Ensures adherence to standards | Certification phase |  
+| Tool | Purpose | When | Owner loop |
+|------|---------|------|------------|
+| tick_scheduler | Drives InnerLoopRunner at fixed tick_ms cadence; also fires outer cadence_s | boot | both |
+| memory_bridge | Read/write shared state: PlanSlot, trajectory, scratchpad | every tick + every plan | both |
+| trajectory_log | Append-only ring buffer of (obs, action, reward) for critic/planner | per inner tick | inner w, outer r |
+| plan_slot_swap | Atomic pointer swap so inner never reads a half-written plan | on outer plan commit | outer w, inner r |
+| critic_fn | Scores trajectory window, emits regret signal to trigger early re-plan | outer cadence or on-demand | outer |
+| model_router | Routes inner calls to fast tier (Sonnet/Haiku/mini), outer to reasoning tier (Opus/o1) | every LLM call | both |
+| budget_governor | Halts outer loop when token/cost/time cap hit; inner keeps running on last plan | outer cadence | outer |
+| signal_bus | mpsc channel for outer -> inner plan pushes and inner -> outer critique asks | async | both |
 
-## External References  
-- TensorFlow (for ML model integration)  
-- Git (version control for code artifacts)  
-- PyTorch (alternative ML framework support)
+## Build-time Tools (what the builder uses to PRODUCE the artifact)
+
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile produced .md spec to runnable yaml + stub code | F8 COLLABORATE |
+| cex_score.py | 5D quality scoring (density, specificity, correctness, completeness, consistency) | F7 GOVERN |
+| cex_retriever.py | Pull similar dual-loop specs + KCs (Reflexion, OODA, SoT) for F3 INJECT | F3 INJECT |
+| cex_doctor.py | Check frontmatter, ID pattern p08_dl_*, byte budget, required fields | F7 GOVERN |
+| cex_schema_hydrate.py | Expand bld_schema into full frontmatter template | F1 CONSTRAIN |
+| signal_writer.py | Emit completion signal with quality score to N07 | F8 COLLABORATE |
+
+## External References
+
+- LangGraph (graph-based dual-loop: supervisor + worker)
+- AutoGen (GroupChat with fast responder + slow reviewer)
+- Reflexion codebase (github.com/noahshinn/reflexion)
+- OpenAI o1/o3 (reasoning tier for outer loop)
+- Anthropic extended thinking (slow outer-loop mode on Opus)

@@ -25,7 +25,7 @@ density_score: 0.85
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not conform to `^[A-Z]{3}-[0-9]{4}$` |  
+| H02 | ID matches pattern | ID does not match `^p07_rwm_[a-zA-Z0-9]+$` |  
 | H03 | kind matches | `kind` ≠ `reward_model` |  
 | H04 | Reward parameters defined | Missing required parameters (e.g., `weight`, `threshold`) |  
 | H05 | Threshold numeric | Threshold is non-numeric or out of range |  

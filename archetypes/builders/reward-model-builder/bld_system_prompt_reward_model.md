@@ -2,7 +2,7 @@
 kind: system_prompt
 id: p03_sp_reward_model_builder
 pillar: P03
-llm_function: INJECT
+llm_function: BECOME
 purpose: System prompt defining reward_model-builder persona and rules
 quality: null
 title: "System Prompt Reward Model"

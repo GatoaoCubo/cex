@@ -29,7 +29,7 @@ density_score: 0.85
 | updated      | datetime   | yes      | -       | Last modification |  
 | author       | string     | yes      | -       | Creator |  
 | domain       | string     | yes      | -       | Application domain |  
-| quality      | integer    | yes      | 0-100   | Quality score |  
+| quality      | null       | yes      | null    | Never self-score -- peer review only |  
 | tags         | array      | yes      | []      | Keywords |  
 | tldr         | string     | yes      | -       | Summary |  
 | reasoning_type | enum     | yes      | ["deductive", "inductive", "abductive"] | Reasoning method |  
@@ -62,4 +62,4 @@ density_score: 0.85
 - **Domain Alignment**: `domain` must match predefined taxonomies.  
 - **Validation Method**: Must be a recognized technique (e.g., "peer review", "empirical testing").  
 - **Depth Range**: `strategy_depth` must be between 1 (basic) and 5 (highly complex).  
-- **Quality Range**: `quality` must be an integer between 0 and 100.
+- **Quality**: `quality` must always be null -- never self-score, peer review assigns value.

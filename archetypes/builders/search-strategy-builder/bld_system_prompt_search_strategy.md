@@ -2,7 +2,7 @@
 kind: system_prompt
 id: p03_sp_search_strategy_builder
 pillar: P03
-llm_function: INJECT
+llm_function: BECOME
 purpose: System prompt defining search_strategy-builder persona and rules
 quality: null
 title: "System Prompt Search Strategy"

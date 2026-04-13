@@ -17,7 +17,15 @@ density_score: 0.85
 ---
 
 ## Domain Overview  
-Speech-to-text (STT) provider integration focuses on connecting applications to third-party speech recognition services, enabling transcription of audio inputs. Key players include cloud providers (AWS Transcribe, Google Speech-to-Text, Azure Speech Service) and specialized vendors (NVIDIA Riva, CMU Sphinx). Integration typically involves API calls, streaming protocols, and handling language-specific models. Use cases span virtual assistants, customer service call analytics, and IoT devices. Challenges include latency, accuracy trade-offs, and compliance with data privacy regulations (e.g., GDPR).  
+Speech-to-text (STT) provider integration connects applications to third-party ASR services, enabling transcription of audio inputs at varying latency and accuracy tiers. The market splits into cloud hyperscalers and specialized vendors:
+
+**Cloud hyperscalers**: AWS Transcribe (WER ~5-8% English), Google Speech-to-Text v2 (WER ~4-6%, streaming latency ~200ms), Azure Speech Service (WER ~4-7%, custom models via Azure AI).
+
+**Specialized vendors**: Deepgram (Nova-2 model, WER ~3-4%, 200ms streaming latency, $0.0043/min), OpenAI Whisper (open-source, large-v3 WER ~2.7% on LibriSpeech, no streaming), AssemblyAI (Conformer-2, WER ~4%, real-time streaming at $0.0065/min), Rev.ai (WER ~4.5%, human+AI hybrid option), Speechmatics (WER ~3.5%, 49+ languages).
+
+**On-premise/self-hosted**: NVIDIA Riva (NeMo-based, GPU-accelerated, <100ms on A100), Kaldi (legacy toolkit, high customizability), Vosk (offline, lightweight for embedded), faster-whisper (CTranslate2 optimized Whisper, 4x faster inference).
+
+Use cases span voice assistants, call center analytics, meeting transcription, accessibility tooling, and IoT voice commands. Key challenges: latency vs. accuracy trade-off, multilingual support, speaker diarization, data privacy (GDPR, HIPAA audio retention rules).  
 
 ## Key Concepts  
 | Concept                | Definition                                                                 | Source                     |  
@@ -32,6 +40,18 @@ Speech-to-text (STT) provider integration focuses on connecting applications to 
 | Error Handling        | Mechanisms for managing API failures, timeouts, and invalid audio inputs     | REST API Best Practices    |  
 | Billing Model         | Pricing structure (e.g., per-minute, per-character) for STT service usage    | AWS Pricing Docs           |  
 | Provider-Specific Features | Customizable parameters (e.g., speaker diarization, noise suppression)     | Azure Speech Service Docs  |  
+
+## Vendor Benchmark Matrix (2024)  
+| Provider | WER (en-US) | Streaming Latency | Price (USD/min) | Diarization | Languages |
+|---|---|---|---|---|---|
+| Deepgram Nova-2 | ~3-4% | ~200ms | $0.0043 | Yes | 30+ |
+| OpenAI Whisper large-v3 | ~2.7% | No streaming | open-source | No | 99+ |
+| Google STT v2 | ~4-6% | ~200ms | $0.016 | Yes | 125+ |
+| AWS Transcribe | ~5-8% | ~300ms | $0.024 | Yes | 37+ |
+| Azure Speech | ~4-7% | ~200ms | $0.016 | Yes | 100+ |
+| AssemblyAI Conformer-2 | ~4% | ~300ms | $0.0065 | Yes | 17+ |
+| Rev.ai | ~4.5% | ~400ms | $0.020 | Yes | 36+ |
+| NVIDIA Riva (on-prem) | ~3-5% | <100ms | self-hosted | Yes | 9 |
 
 ## Industry Standards  
 - ITU-T P.501: Speech recognition system evaluation  

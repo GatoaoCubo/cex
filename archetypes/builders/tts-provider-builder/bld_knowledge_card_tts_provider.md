@@ -17,9 +17,26 @@ density_score: 0.85
 ---
 
 ## Domain Overview  
-Text-to-speech (TTS) provider integration enables systems to convert text into spoken audio via third-party APIs. Key use cases include virtual assistants, audiobooks, and accessibility tools. Modern TTS providers leverage neural networks (e.g., Tacotron, WaveGlow) to generate natural-sounding speech, supporting multiple languages, accents, and emotional prosody. Integration focuses on API compatibility, latency optimization, and handling provider-specific formats like SSML or JSON.  
+Text-to-speech (TTS) provider integration converts text into spoken audio via third-party APIs or self-hosted models. The market has bifurcated into cloud APIs (high quality, instant availability) and generative open-source models (voice cloning, zero-shot synthesis).
 
-The industry emphasizes low-latency, high-fidelity output, with providers competing on metrics like MOS (Mean Opinion Score) and supported languages. Challenges include managing API rate limits, ensuring audio format consistency (e.g., WAV, MP3), and aligning with platform-specific requirements (e.g., iOS vs. Android).  
+**Cloud APIs -- commercial**:
+- **ElevenLabs**: State-of-the-art voice quality. Turbo v2.5 model, ~300ms latency, voice cloning from 1min sample. $0.30/1K chars (Starter), $0.18/1K (Creator). Supports 29 languages. MOS ~4.7/5.
+- **OpenAI TTS**: 6 voices (alloy/echo/fable/onyx/nova/shimmer), streaming via HTTP chunks, $0.015/1K chars (tts-1), $0.030/1K (tts-1-hd). Simple REST API, no SSML.
+- **Google Cloud TTS**: 380+ voices, 50+ languages. Neural2 voices (MOS ~4.5), Studio voices (MOS ~4.7). $4/1M chars (Standard), $16/1M chars (Neural2), $160/1M chars (Studio).
+- **Azure Cognitive Services TTS**: 500+ neural voices, 140 languages. Custom Neural Voice (speaker cloning). $0.016/1K chars (Neural). Real-time streaming via WebSockets.
+- **Amazon Polly**: 60+ voices, 29 languages. Neural TTS (NTTS) + standard. $4/1M chars (NTTS), $0.004/1K chars standard. SSML support, brand voice customization.
+- **IBM Watson TTS**: 30+ voices, 13 languages. On-premise deployment option (CloudPak). $0.02/1K chars.
+- **Resemble.ai**: Real-time API (<500ms), voice cloning, emotion control. $0.006/sec audio.
+- **Play.ht**: 900+ AI voices, 142 languages, real-time streaming. $0.001/word.
+
+**Open-source / self-hosted**:
+- **Coqui TTS (XTTS v2)**: Multi-speaker, voice cloning, 17 languages, runs on consumer GPU (4GB VRAM). Apache 2.0.
+- **Bark** (Suno AI): Generative audio model, supports non-verbal sounds, music. Not real-time (2-30s generation). MIT.
+- **Tortoise-TTS**: High quality but slow (30-120s). Best for offline quality.
+- **Piper TTS**: Fast, lightweight, ONNX-based. <100ms on CPU. Ideal for embedded/edge.
+- **StyleTTS2**: SOTA open-source, human-level quality. Research-grade.
+
+Integration focuses on API compatibility, latency optimization, and SSML support. MOS (Mean Opinion Score) is the standard quality benchmark (4.0+ = good, 4.5+ = excellent, 4.7+ = near-human).  
 
 ## Key Concepts  
 | Concept          | Definition                                                                 | Source                          |  
@@ -36,6 +53,17 @@ The industry emphasizes low-latency, high-fidelity output, with providers compet
 | Webhooks         | Callbacks for asynchronous job status updates                             | Twilio TTS Integration          |  
 | Error Handling   | Mechanisms for retrying failed requests or fallback synthesis             | RFC 7231                        |  
 | Billing Model    | Pricing structure (e.g., per-character, per-minute)                       | Google Cloud TTS Pricing        |  
+
+## Vendor Benchmark Matrix (2024)  
+| Provider | MOS Score | Latency (TTFB) | Price (USD) | Voice Cloning | Languages |
+|---|---|---|---|---|---|
+| ElevenLabs Turbo v2.5 | ~4.7/5 | ~300ms | $0.30/1K chars | Yes (1min sample) | 29 |
+| OpenAI TTS-1-HD | ~4.5/5 | ~400ms | $0.030/1K chars | No | 57 |
+| Google Neural2 | ~4.5/5 | ~200ms | $0.016/1K chars | No | 50+ |
+| Azure Neural | ~4.4/5 | ~200ms | $0.016/1K chars | Yes (Custom) | 140+ |
+| Amazon Polly NTTS | ~4.2/5 | ~250ms | $0.004/1K chars | No | 29 |
+| Coqui XTTS v2 | ~4.3/5 | ~500ms (GPU) | self-hosted | Yes (6sec sample) | 17 |
+| Piper TTS | ~3.8/5 | <100ms (CPU) | self-hosted | No | 35+ |
 
 ## Industry Standards  
 - SSML (W3C)  

@@ -27,7 +27,7 @@ density_score: 0.85
 | ID   | Check                  | Fail Condition                          |  
 |------|------------------------|-----------------------------------------|  
 | H01  | YAML valid             | Invalid YAML syntax                     |  
-| H02  | ID matches pattern     | ID does not match `rl_[a-z0-9]+`      |  
+| H02  | ID matches pattern     | ID does not match `^p02_rla_[a-zA-Z0-9_]+$` |  
 | H03  | Kind matches           | Kind != `rl_algorithm`                 |  
 | H04  | Parameters complete    | Missing required algorithm parameters  |  
 | H05  | Hyperparameters valid  | Hyperparameters outside defined ranges |  

@@ -37,4 +37,4 @@ density_score: 0.85
 | Provider API | Registry | Data |  
 
 ## Architectural Position  
-stt_provider sits at the interface between user voice inputs and CEX trading systems, translating audio into structured text for order execution. It ensures real-time compliance, integrates with order management, and relies on centralized validation to maintain security and accuracy across the exchange.
+stt_provider sits at the interface between user voice inputs and downstream NLP/processing pipelines. It translates raw audio into structured transcription output (text, timestamps, confidence scores) consumed by voice assistants, call analytics, and accessibility tools. Relies on centralized validation for format compliance and integrates with voice_pipeline and vad_config builders for end-to-end speech processing.

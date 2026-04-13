@@ -29,7 +29,7 @@ density_score: 0.85
 | updated      | date   | yes      | -       | Last update date |  
 | author       | string | yes      | -       | Author name |  
 | domain       | string | yes      | -       | Application domain |  
-| quality      | string | yes      | "draft" | Quality status |  
+| quality      | null   | yes      | null    | Never self-score -- peer review only |  
 | tags         | list   | yes      | []      | Keywords |  
 | tldr         | string | yes      | -       | Summary |  
 | strategy_type| string | yes      | -       | Strategy category |  
@@ -63,5 +63,5 @@ density_score: 0.85
 - Parameters must be validated for type and range.  
 - No duplicate strategy IDs within the same pillar.  
 - Versioning required for all updates.  
-- Quality must be "approved" before deployment.  
+- Quality must be null -- never self-score; peer review assigns the score before deployment.  
 - Tags must include at least one domain-related keyword.

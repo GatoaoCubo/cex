@@ -35,6 +35,20 @@ Modern VAD systems leverage machine learning models (e.g., neural networks) or r
 | Endpoint Detection    | Identifies start/end points of speech segments for precise segmentation  | IEEE Signal Processing Mag  |  
 | Language-Specific Tuning | Adjusts thresholds for phonetic characteristics of target languages     | Interspeech 2019 paper      |  
 
+## VAD Engine Comparison Matrix  
+| Engine | Type | Latency | CPU/GPU | Aggressiveness | WER Impact | License |
+|---|---|---|---|---|---|---|
+| WebRTC VAD | Energy-based | <5ms | CPU only | 0-3 (int mode) | Low | BSD |
+| Silero VAD | Neural (LSTM) | ~10ms | CPU/GPU | Threshold 0.0-1.0 | Very Low | MIT |
+| Kaldi VAD | GMM/Energy | ~20ms | CPU only | Configurable | Low | Apache 2.0 |
+| py-webrtcvad | Python binding | <5ms | CPU only | 0-3 | Low | MIT |
+| Auditok | Energy | <5ms | CPU only | dB threshold | Medium | MIT |
+| NVIDIA Riva VAD | Neural | <5ms (GPU) | GPU required | Threshold | Very Low | Commercial |
+
+**Silero VAD** (recommended default for 2024): JSILERO-VAD v4 model, 1MB size, ONNX runtime, 8kHz/16kHz, threshold param 0.0-1.0, false positive rate <5% on NOIZEUS. Used in production by LiveKit, daily.co.
+
+**WebRTC VAD** (recommended for low-latency edge): Google-authored, aggressiveness 0-3, frame sizes 10/20/30ms at 8/16/32/48kHz, well-understood tradeoffs.
+
 ## Industry Standards  
 - ITU-T P.501: Voice activity detection for telephony  
 - WebRTC VAD: Open-source implementation for real-time communication  

@@ -65,5 +65,7 @@ density_score: 0.85
 - All required fields must be present  
 - ID must follow naming convention  
 - Version must use semantic format  
-- Sensitivity range: 0.1–1.0  
-- Threshold range: 0.5–1.0
+- Sensitivity range: 0.1-1.0 (probability score; 0.5 = 50% confidence floor)
+- Threshold (energy): -70 to -10 dBFS (noise floor reference, NOT a 0-1 probability)
+- aggressiveness: integer {0, 1, 2, 3} per WebRTC VAD standard
+- frame_size_ms: {10, 20, 30} for WebRTC compatibility; 20ms default

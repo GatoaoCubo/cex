@@ -2,7 +2,7 @@
 kind: system_prompt
 id: p03_sp_rl_algorithm_builder
 pillar: P03
-llm_function: INJECT
+llm_function: BECOME
 purpose: System prompt defining rl_algorithm-builder persona and rules
 quality: null
 title: "System Prompt Rl Algorithm"
