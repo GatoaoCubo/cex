@@ -38,7 +38,7 @@ if hasattr(sys.stdout, "reconfigure"):
 CEX_ROOT = Path(__file__).resolve().parent.parent
 os.chdir(str(CEX_ROOT))
 
-OLLAMA_URL = "http://localhost:11434/v1/chat/completions"
+OLLAMA_URL = "http://localhost:11434/api/chat"
 SKIP_DIRS = {'.git', 'node_modules', '.cex/cache', 'compiled', '_external'}
 
 # ============================================================
