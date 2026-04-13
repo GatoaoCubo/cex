@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: n05_operations
 domain: observability-operations
-quality: 8.9
+quality: 9.1
 tags: [trace_config, observability, operations, N05, telemetry, monitoring]
 tldr: "Trace configuration for N05 operations covering deploy telemetry, test execution traces, health check monitoring, and signal flow observability."
 density_score: 0.96
@@ -18,16 +18,25 @@ density_score: 0.96
 
 ## Overview
 
-This trace configuration defines observability instrumentation for all N05
-operations. Every deploy, test execution, health check, and inter-nucleus
-signal is traceable. No operation runs in the dark.
+This trace configuration defines observability instrumentation for all N05 operations. Every deploy, test execution, health check, and inter-nucleus signal is traceable. No operation runs in the dark.
+
+## Boundary
+
+This artifact defines the trace configuration for N05 operations, specifying how to instrument and monitor deploy, test, health, and signal activities. It is not a technical implementation of the tracing system, but rather the policy and structure for what should be traced, how data is captured, and how traces are stored and used.
+
+## Related Kinds
+
+- **observability_policies**: Defines the rules and criteria for when and how traces are used in decision-making processes.
+- **telemetry_data_models**: Structures the format and content of the data captured in each trace, ensuring consistency across systems.
+- **deployment_workflows**: Integrates trace configurations to monitor and log the execution of deployment steps.
+- **signal_orchestration**: Relies on signal traces to ensure proper coordination and debugging of inter-nucleus communication.
 
 ## Trace Points
 
 ### Deploy Traces
 
 | trace_id | trigger | data_captured | retention |
-|----------|---------|---------------|-----------|
+|------|---------|------|-------|
 | DEPLOY_PRE | Pre-flight check start | env_vars_count, railway_toml_hash, migration_status | 90d |
 | DEPLOY_EXEC | `railway up` invocation | build_duration_ms, nixpacks_cache_hit, service_name | 90d |
 | DEPLOY_HEALTH | Health check poll | response_code, response_time_ms, health_json_hash | 90d |
@@ -37,7 +46,7 @@ signal is traceable. No operation runs in the dark.
 ### Test Traces
 
 | trace_id | trigger | data_captured | retention |
-|----------|---------|---------------|-----------|
+|------|---------|------|-------|
 | TEST_UNIT | Unit eval start/end | test_count, pass_count, fail_count, duration_ms | 30d |
 | TEST_E2E | E2E eval start/end | scenario_count, service_topology, fixture_setup_ms | 30d |
 | TEST_SMOKE | Smoke eval execution | critical_path_count, pass_rate, deploy_context | 30d |
@@ -47,7 +56,7 @@ signal is traceable. No operation runs in the dark.
 ### Signal Traces
 
 | trace_id | trigger | data_captured | retention |
-|----------|---------|---------------|-----------|
+|------|---------|------|-------|
 | SIG_EMIT | Signal written | source_nucleus, signal_type, quality_score, timestamp | 30d |
 | SIG_RECV | Signal consumed | consumer_nucleus, signal_id, latency_ms | 30d |
 | SIG_TIMEOUT | Signal poll timeout | expected_source, wait_duration_s, retry_count | 90d |
@@ -55,7 +64,7 @@ signal is traceable. No operation runs in the dark.
 ### Health Traces
 
 | trace_id | trigger | data_captured | retention |
-|----------|---------|---------------|-----------|
+|------|---------|------|-------|
 | HEALTH_POLL | Periodic health check | endpoint, response_ms, status_code, body_hash | 7d |
 | HEALTH_DEGRADE | Health degradation | endpoint, previous_status, current_status, delta_ms | 90d |
 | HEALTH_RECOVER | Health recovery | endpoint, downtime_ms, recovery_trigger | 90d |
@@ -63,7 +72,7 @@ signal is traceable. No operation runs in the dark.
 ## Sampling Configuration
 
 | trace_category | sample_rate | reason |
-|----------------|-------------|--------|
+|------|------|-------|
 | DEPLOY_* | 100% | Every deploy is traced — no exceptions |
 | TEST_* | 100% | Every test run is traced for regression detection |
 | SIG_* | 100% | Signal flow is critical for orchestration debugging |
@@ -73,7 +82,7 @@ signal is traceable. No operation runs in the dark.
 ## Storage
 
 | field | value |
-|-------|-------|
+|-------|-----|
 | format | JSON lines (.jsonl) |
 | location | `.cex/runtime/traces/` |
 | rotation | Daily, compressed after 7 days |
@@ -92,3 +101,18 @@ signal is traceable. No operation runs in the dark.
 ## 8F Pipeline Function
 
 Primary function: **GOVERN**
+
+The GOVERN function ensures trace configurations are enforced across all operations, including:
+- Enforcing sampling rates (e.g., 100% for critical traces)
+- Validating data capture completeness (e.g., ensuring all deploy phases are logged)
+- Maintaining storage policies (e.g., 90d retention for deploy traces)
+- Applying alert rules (e.g., triggering rollback assessments on health failures)
+- Integrating with observability policies to align trace usage with operational goals
+
+| Responsibility | Impact | Example |
+|--------------|--------|--------|
+| Sampling control | Reduces storage overhead | 10% sampling for HEALTH_POLL |
+| Data validation | Ensures trace completeness | All deploy phases must be logged |
+| Alert activation | Enables proactive remediation | Triggers rollback on health degradation |
+| Policy alignment | Ensures trace usage consistency | Aligns with observability_policies |
+| Storage management | Prevents data sprawl | Auto-purge beyond retention |
