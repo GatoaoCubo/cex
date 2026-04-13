@@ -17,23 +17,21 @@ density_score: 0.85
 ---
 
 ## Crew Role  
-Designs structured reasoning approaches, ensuring logical coherence, adaptability, and alignment with team objectives.  
+Designs structured reasoning approaches to solve complex problems, ensuring alignment with team objectives and technical constraints.  
 
 ## Receives From  
-| Builder       | What                  | Format      |  
-|---------------|-----------------------|-------------|  
-| Problem Analyst | Problem definitions   | JSON        |  
-| Data Curator  | Dataset metadata      | CSV         |  
-| Evaluator     | Strategy performance  | Metrics log |  
-| Strategy Librarian | Existing strategies | YAML        |  
+| Builder              | What                  | Format          |  
+|----------------------|-----------------------|-----------------|  
+| Problem_Definition_Builder | Problem scope & constraints | Structured document |  
+| Knowledge_Base_Builder     | Relevant data sources   | Dataset schema  |  
+| Feedback_Collector         | Prior strategy outcomes | Feedback report |  
 
 ## Produces For  
-| Builder       | What                  | Format      |  
-|---------------|-----------------------|-------------|  
-| Execution Engine | Reasoning strategy  | Structured config |  
-| Evaluator     | Testable strategy     | JSON        |  
-| Strategy Librarian | Documented strategy | Markdown    |  
-| Problem Analyst | Strategy refinements  | Feedback log |  
+| Builder              | What                  | Format          |  
+|----------------------|-----------------------|-----------------|  
+| Solution_Architect   | Strategy implementation plan | Technical spec |  
+| Evaluation_Framework_Builder | Metrics for success | Assessment config |  
+| Documentation_Builder | Strategy rationale    | Technical doc   |  
 
 ## Boundary  
-Does NOT handle prompt engineering (prompt_technique) or resource allocation (thinking_config). Prompt_technique is managed by a prompt engineer; thinking_config by a resource manager.
+Does NOT handle prompt engineering (prompt_technique) or resource allocation (thinking_config). Prompt engineering is managed by Prompt_Engineer; resource allocation by Resource_Allocator.

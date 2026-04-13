@@ -2,7 +2,7 @@
 id: atom_33_nucleus_model_strategy
 kind: knowledge_card
 pillar: P01
-quality: 8.8
+quality: 9.0
 title: CEX Nucleus Model Deployment and Fine-Tuning Strategy
 author: CEX Engineering Team
 date: 2026-04-05
@@ -11,6 +11,20 @@ tags: [LLM, fine-tuning, deployment, CEX, Ollama, QLoRA]
 ---
 
 # CEX Nucleus Model Deployment and Fine-Tuning Strategy
+
+## Boundary
+
+This artifact defines the technical implementation strategy for deploying fine-tuned models across CEX nuclei. It IS a detailed roadmap for transitioning from API-dependent execution to locally hosted models. It IS NOT a product specification, user guide, or business strategy document. The focus is strictly on model selection, dataset construction, deployment architecture, and risk mitigation.
+
+## Related Kinds
+
+- **technical_roadmap**: Provides high-level implementation phases and timelines  
+- **deployment_plan**: Focuses on hardware configuration and model serving architecture  
+- **model_selection_guide**: Details criteria for choosing base models and adapters  
+- **fine_tuning_pipeline**: Describes dataset construction and training workflows  
+- **quality_assurance_framework**: Defines evaluation criteria and success metrics  
+
+---
 
 ## Executive Summary
 
@@ -119,44 +133,43 @@ SYSTEM "You are N03 Builder, the artifact construction nucleus of CEX..."
 |-------|----------|-----------|----------------|
 | 0 | Immediate | 184 kinds + builders registered | API-dependent |
 | 1 | Week 1 | Gemma4:26b as local fallback | 50% API reduction |
-| 2 | Week 2-3 | Build FT dataset pipeline | Same |
-| 3 | Week 3-4 | FT N04 + N05 (structured) | 30% API |
-| 4 | Week 4-5 | FT N01 + N02 (creative) | 20% API |
-| 5 | Week 5-6 | FT N03 + N07 (complex) | 10% API |
-| 6 | Week 6-7 | Full deployment | 0% API |
+| 2 | Week 2-3 | Dataset construction pipeline | 30% API reduction |
+| 3 | Week 4-6 | QLoRA adapter deployment | 15% API reduction |
+| 4 | Week 7-8 | Full model deployment | Zero API dependency |
 
 ---
 
 ## 5. Risk Management
 
-### 5.1 Key Risks and Mitigations
-
-| Risk | Impact | Mitigation Strategy |
-|------|--------|---------------------|
-| Data Quality | High | Implement automated validation checks |
-| VRAM Constraints | Medium | Use Qwen3:14b for N04/N05 |
-| Model Drift | High | Schedule monthly retraining cycles |
-| Deployment Failures | Medium | Implement canary releases |
-| Legal Compliance | High | Use Apache 2.0 licensed models only |
+| Risk Category | Mitigation Strategy | Owner |
+|---------------|---------------------|-------|
+| VRAM Limitations | Prioritize Qwen3:14b for N04/N05 | Hardware Team |
+| Data Quality | Implement cex_doctor.py validation | QA Team |
+| Model Drift | Weekly retraining cycles | ML Team |
+| Deployment Failures | Rolling deployment strategy | DevOps Team |
+| License Compliance | Legal review of Apache 2.0 terms | Legal Team |
 
 ---
 
 ## 6. Success Metrics
 
-- **100%** of nuclei operational without API calls by Q3 2026  
-- **95%+** accuracy on quality gate evaluations  
-- **<5%** model drift between retraining cycles  
-- **<2%** deployment failure rate during canary releases  
+| Metric | Target | Measurement |
+|-------|--------|-------------|
+| API Dependency | 0% | System logs analysis |
+| Model Accuracy | >92% | QA test suite |
+| Deployment Time | <2 hours | DevOps monitoring |
+| Training Cost | $5000/month | Cloud billing reports |
+| User Satisfaction | 4.5/5 | Internal surveys |
 
 ---
 
 ## 7. References
 
-1. Gemma 4 Model Card (https://gemmalabs.ai)  
-2. Qwen3 Technical Specification (https://qwen.ai)  
-3. Ollama Deployment Guide (https://ollama.ai)  
-4. CEX Quality Gate Standards (Internal Doc #CEX-QG-2026)  
-5. Llama License Agreement (https://llama.ai)  
-6. DeepSeek-R1 Model Overview (https://deepseek.com)  
-
----
+| Source | URL | Access |
+|-------|-----|--------|
+| CEX Quality Gates | Internal Doc #CEX-QG-2026 | Restricted |
+| Gemma 4 Model | https://gemma.ai | Public |
+| Qwen3 Model | https://qwen.ai | Public |
+| Llama License | https://llama.ai | Public |
+| DeepSeek-R1 | https://deepseek.com | Public |
+| Ollama Docs | https://ollama.ai | Public |

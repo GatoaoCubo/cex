@@ -1,3 +1,7 @@
+id: atom_33_nucleus_model_strategy
+kind: knowledge_card
+pillar: P01
+quality: 8.8
 title: CEX Nucleus Model Deployment and Fine-Tuning Strategy
 author: CEX Engineering Team
 date: 2026-04-05
@@ -9,6 +13,14 @@ tags:
 - CEX
 - Ollama
 - QLoRA
+boundary: This artifact defines the technical implementation strategy for deploying fine-tuned models across CEX nuclei. It
+  IS a detailed roadmap for transitioning from API-dependent execution to locally hosted models. It IS NOT a product specification,
+  user guide, or business strategy document. The focus is strictly on model selection, dataset construction, deployment architecture,
+  and risk mitigation.
+related_kinds: "- technical_roadmap: Provides high-level implementation phases and timelines  \n- deployment_plan: Focuses\
+  \ on hardware configuration and model serving architecture  \n- model_selection_guide: Details criteria for choosing base\
+  \ models and adapters  \n- fine_tuning_pipeline: Describes dataset construction and training workflows  \n- quality_assurance_framework:\
+  \ Defines evaluation criteria and success metrics  \n\n---"
 executive_summary: This document outlines the technical roadmap for transitioning CEX's 184 nuclei from API-dependent model
   execution to locally deployed, fine-tuned models. The strategy leverages Gemma 4 26B A4B as the base model for most nuclei,
   with Qwen3 14B used where VRAM constraints require smaller models. The plan includes dataset construction, fine-tuning pipelines,
@@ -88,37 +100,58 @@ executive_summary: This document outlines the technical roadmap for transitionin
 
   | 1 | Week 1 | Gemma4:26b as local fallback | 50% API reduction |
 
-  | 2 | Week 2-3 | Build FT dataset pipeline | Same |
+  | 2 | Week 2-3 | Dataset construction pipeline | 30% API reduction |
 
-  | 3 | Week 3-4 | FT N04 + N05 (structured) | 30% API |
+  | 3 | Week 4-6 | QLoRA adapter deployment | 15% API reduction |
 
-  | 4 | Week 4-5 | FT N01 + N02 (creative) | 20% API |
-
-  | 5 | Week 5-6 | FT N03 + N07 (complex) | 10% API |
-
-  | 6 | Week 6-7 | Full deployment | 0% API |
+  | 4 | Week 7-8 | Full model deployment | Zero API dependency |
 
 
   ---'
-5_risk_management: ''
-5_1_key_risks_and_mitigations: '| Risk | Impact | Mitigation Strategy |
+5_risk_management: '| Risk Category | Mitigation Strategy | Owner |
 
-  |------|--------|---------------------|
+  |---------------|---------------------|-------|
 
-  | Data Quality | High | Implement automated validation checks |
+  | VRAM Limitations | Prioritize Qwen3:14b for N04/N05 | Hardware Team |
 
-  | VRAM Constraints | Medium | Use Qwen3:14b for N04/N05 |
+  | Data Quality | Implement cex_doctor.py validation | QA Team |
 
-  | Model Drift | High | Schedule monthly retraining cycles |
+  | Model Drift | Weekly retraining cycles | ML Team |
 
-  | Deployment Failures | Medium | Implement canary releases |
+  | Deployment Failures | Rolling deployment strategy | DevOps Team |
 
-  | Legal Compliance | High | Use Apache 2.0 licensed models only |
+  | License Compliance | Legal review of Apache 2.0 terms | Legal Team |
 
 
   ---'
-6_success_metrics: "- 100% of nuclei operational without API calls by Q3 2026  \n- 95%+ accuracy on quality gate evaluations\
-  \  \n- <5% model drift between retraining cycles  \n- <2% deployment failure rate during canary releases  \n\n---"
-7_references: "1. Gemma 4 Model Card (https://gemmalabs.ai)  \n2. Qwen3 Technical Specification (https://qwen.ai)  \n3. Ollama\
-  \ Deployment Guide (https://ollama.ai)  \n4. CEX Quality Gate Standards (Internal Doc #CEX-QG-2026)  \n5. Llama License\
-  \ Agreement (https://llama.ai)  \n6. DeepSeek-R1 Model Overview (https://deepseek.com)  \n\n---"
+6_success_metrics: '| Metric | Target | Measurement |
+
+  |-------|--------|-------------|
+
+  | API Dependency | 0% | System logs analysis |
+
+  | Model Accuracy | >92% | QA test suite |
+
+  | Deployment Time | <2 hours | DevOps monitoring |
+
+  | Training Cost | $5000/month | Cloud billing reports |
+
+  | User Satisfaction | 4.5/5 | Internal surveys |
+
+
+  ---'
+7_references: '| Source | URL | Access |
+
+  |-------|-----|--------|
+
+  | CEX Quality Gates | Internal Doc #CEX-QG-2026 | Restricted |
+
+  | Gemma 4 Model | https://gemma.ai | Public |
+
+  | Qwen3 Model | https://qwen.ai | Public |
+
+  | Llama License | https://llama.ai | Public |
+
+  | DeepSeek-R1 | https://deepseek.com | Public |
+
+  | Ollama Docs | https://ollama.ai | Public |'
