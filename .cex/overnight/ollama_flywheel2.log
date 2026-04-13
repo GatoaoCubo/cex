@@ -1,0 +1,8 @@
+============================================================
+CEX EVOLVE OLLAMA FLYWHEEL
+  Model: qwen3:14b | Target: 9.0
+  Batch: 3 | Max cycles: 100
+============================================================
+
+--- Cycle 1 | 86 targets remaining ---
+  [8.7] N03_engineering\knowledge\kc_aider_integration_patterns.md 
