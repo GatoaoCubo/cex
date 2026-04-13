@@ -15,7 +15,7 @@ tldr: "Reusable capability with structured phases, triggers, and lifecycle manag
 when_to_use: "Building, reviewing, or reasoning about steps artifacts"
 keywords: [steps, phases, trigger, reusable, capability, workflow, lifecycle]
 feeds_kinds: [steps]
-density_score: null
+density_score: 0.85
 ---
 
 # Steps
