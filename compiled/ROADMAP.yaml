@@ -1,115 +1,7 @@
-title: CEX Artifact Roadmap and Architecture Health
+title: CEX Artifact
 author: CEX Team
 date: 2026-04-08
 version: 1.0
-next_completed_tasks_h1_h11: ''
-h1_fine_tune_dataset_preparation: 'Build QLoRA training dataset from CEX''s own artifacts:
-
-  - Source: 1,630 ISOs + 123 KCs + 377 templates/examples
-
-  - Format: instruction/response pairs for Qwen 3 8B
-
-  - Tool: `cex_continuous.py` (built in H2) has export mode
-
-  - Target: 2,000+ training pairs covering all 123 kinds
-
-  - Validate: train/test split, dedup, format check'
-h2_qlora_fine_tune_on_qwen_3_8b: 'Train custom model `cex-qwen3:8b` using prepared dataset:
-
-  - Framework: Unsloth or Axolotl (QLoRA, 4-bit)
-
-  - Hardware: GTX 1070 4GB (tight -- use gradient checkpointing)
-
-  - Epochs: 3-5 on full dataset
-
-  - Eval: re-run benchmark tool, compare base vs FT
-
-  - Deploy: `ollama create cex-qwen3 -f Modelfile`'
-h3_hybrid_dispatch_claude_n07_ollama_nuclei: 'Wire the pipeline so `/mission` and `/grid` dispatch to Ollama:
-
-  - N07 stays Claude Opus (orchestration needs full agent)
-
-  - N01-N06 workers use Ollama/cex-qwen3 via `cex_8f_runner.py`
-
-  - Handoff format stays the same (model reads via pipeline, not CLI)
-
-  - F8 compiles + commits (pipeline handles, not model)
-
-  - Test: full 6-nucleus grid via Ollama'
-h4_benchmark_re_run_valid_comparison: 'Re-run with fixed code (HTTP API, 300s timeout, /no_think):
-
-  - `python _tools/cex_benchmark_ollama.py --models qwen3:8b,deepseek-r1:8b --timeout 600`
-
-  - Compare: base Qwen 3 vs base DeepSeek R1 vs FT cex-qwen3
-
-  - Publish results to `.cex/benchmarks/`'
-h5_content_factory_integration: 'Connect existing components into working pipeline:
-
-  - N01 NotebookLM pipeline (H5) -> input
-
-  - N02 content templates -> formatting
-
-  - N06 monetization layer (H6) -> distribution
-
-  - Remaining: integration workflow connecting the pieces'
-h6_distribution_infrastructure: '| Component | File | Status |
-
-  |------|---|--------|
-
-  | One-click installer | install.cmd | Built (8 steps: winget, Git, Python, Node, Claude, repo, deps, PS policy) |
-
-  | Release ZIP builder | release.cmd | Built (6 steps: doctor, compile, sanitize, git archive, verify, checksum) |
-
-  | Security fix | .gitignore | Added `/*_token.json`, `/*_credentials.json`, `_releases/` |
-
-  | Canva token leak | .cex/brand/canva_token.json | Removed from git tracking |
-
-  | Release check | cex_release_check.py | 25/28 PASS (3 cosmetic README fixes) |'
-h7_ollama_pipeline: 'Free local model support for CEX. Models run on user''s hardware, zero API cost.
-
-
-  | Component | File | Status |
-
-  |------|---|--------|
-
-  | Ollama client | cex_ollama.py | Built (health, list, generate, artifact retry, /no_think) |
-
-  | Benchmark tool | cex_benchmark_ollama.py | Built (10 tasks, HTTP API, scoring) |
-
-  | Intent router | cex_intent.py | Updated (model_override, CEX_FORCE_OLLAMA, CEX_OLLAMA_MODEL) |
-
-  | 8F pipeline | cex_8f_runner.py | Updated (--model, F4 skip, ultra-lite F6: 15->5 sections) |
-
-  | Dispatch modes | dispatch.sh | Added `ollama` and `ollama-grid` modes |
-
-  | Router config | router_config.yaml | Updated (qwen3:8b, deepseek-r1:8b) |
-
-  | Nucleus fallbacks | nucleus_models.yaml | Updated (fallback_local -> qwen3:8b) |
-
-  | E2E proof | p01_kc_markdown_tables.md | Generated via Ollama, F7: 6/6 PASS |
-
-
-  Performance on GTX 1070 (4GB VRAM):
-
-  - Direct generation: ~4 min per artifact
-
-  - Full 8F pipeline (ultra-lite): ~7 min per artifact
-
-  - Speed: ~4.5 tok/s (CPU offload, 10x faster on RTX 3060+)'
-h8_token_optimization_4_tools: '| Tool | Change | Savings |
-
-  |------|--------|--|
-
-  | cex_memory_select.py | LLM -> TF-IDF cosine similarity | ~1K tokens/call |
-
-  | cex_score.py | L3 cache inheritance gate | ~2K tokens/artifact |
-
-  | cex_8f_runner.py | Template-first F4 skip | ~5K tokens/build |
-
-  | cex_evolve.py | Heuristic add_updated, add_tags | ~1K tokens/artifact |
-
-
-  ---'
 next_session_start_here: ''
 s1_fine_tune_dataset_preparation: 'Build QLoRA training dataset from CEX''s own artifacts:
 
@@ -163,62 +55,97 @@ s5_content_factory_integration: 'Connect existing components into working pipeli
 
 
   ---'
-next_medium_term_m1_m3: ''
-m1_release_v2_0_with_ollama_integration:
-- Full support for local model inference
-- Enhanced security via encrypted model storage
-- User-facing dashboard for model performance monitoring
-m2_monetization_layer_expansion:
-- Add support for third-party content creators
-- Integrate with blockchain-based attribution systems
-- Implement revenue-sharing models for contributors
-m3_enterprise_grade_deployment: '- Kubernetes-based orchestration
+next_medium_term_week: ''
+m1_full_from_zero_bootstrap_test: 'Use `boot/overnight_infinite.cmd` to rebuild CEX from a clean state. Validates: mission_state,
+  continuous batching, sub-agents, quality gates. Expected: ~3-4 hours with full grid + sub-agents.'
+m2_release_v1_0_on_hotmart_gumroad: 'Pre-requisites:
 
-  - Multi-tenant isolation
+  - `cex_release_check.py` passes 28/28 (3 README fixes remaining)
 
-  - SLA guarantees for mission-critical workloads
+  - Course outline or quickstart guide for buyers
 
+  - ZIP tested on clean Windows 10 VM
 
-  ---'
-next_long_term_l1_l4: ''
-l1_ai_native_architecture_redesign:
-- Transition to fully decentralized model training
-- Implement self-healing infrastructure
-- Integrate with quantum computing research initiatives
-l2_global_content_marketplace:
-- Launch cross-platform content exchange
-- Implement AI-powered content curation
-- Establish international content moderation standards
-l3_cognitive_augmentation_layer:
-- Develop brain-computer interface prototypes
-- Create immersive learning environments
-- Implement neural feedback loops for continuous improvement
-l4_interplanetary_deployment: '- Establish lunar data centers
+  - Payment + download flow tested end-to-end'
+m3_ollama_only_mode_zero_claude_dependency: 'Make CEX fully functional without any Claude subscription:
 
-  - Develop radiation-hardened hardware
+  - Replace N07 orchestration with CLI wizard + cex_mission_runner.py
 
-  - Implement autonomous maintenance systems
+  - All nuclei via Ollama/cex-qwen3
+
+  - install.cmd installs Ollama instead of Claude Code
+
+  - Target audience: users who can''t afford $20/month
 
 
   ---'
-architecture_health_targets: '| Metric | Target | Current | Notes |
+next_long_term_month: ''
+l1_cex_as_distributable_product: 'Release CEX as downloadable package:
 
-  |------|------|------|------|
+  - install.cmd (built, H9) handles dependencies
 
-  | Model accuracy | ≥95% | 92.3% | QLoRA fine-tuning expected to improve this |
+  - release.cmd (built, H9) packages ZIP
 
-  | System uptime | 99.99% | 99.85% | Redundancy improvements in progress |
+  - Channels: Hotmart ZIP, GitHub Releases, Gumroad'
+l2_fine_tuned_cex_model_production: 'Iterate on S2 prototype:
 
-  | Latency (p99) | <200ms | 220ms | Ollama integration expected to reduce this |
+  - Larger dataset (add user artifacts, session outputs)
 
-  | Memory usage | ≤8GB | 7.8GB | Optimized tokenization algorithms in use |
+  - Multi-model: cex-qwen3:8b (free), cex-qwen3:32b (better GPU)
 
-  | Scalability | 100k concurrent users | 50k | Kubernetes cluster expansion planned |
+  - Publish on Ollama registry or HuggingFace
 
-  | Security compliance | ISO 27001 | Achieved | Regular audits ongoing |
+  - Potential revenue: sell fine-tuned model access'
+l3_multi_tenant_cex: Multiple brands running on same infrastructure. Each brand = separate `.cex/brand/` config. Nuclei route
+  based on brand context.
+l4_cex_api_saas: 'REST API exposing CEX capabilities:
 
-  | Code coverage | ≥85% | 82% | Unit tests in progress |
+  - POST /build -> 8F pipeline -> artifact
 
-  | Documentation completeness | 100% | 95% | API reference being finalized |
+  - POST /evolve -> improve artifact
 
-  | User satisfaction | ≥90% | 88% | UX improvements in development |'
+  - GET /query -> find relevant artifacts
+
+  - POST /mission -> decompose + execute
+
+  - Revenue: usage-based pricing
+
+
+  ---'
+architecture_health_targets: '| Metric | Current (2026-04-08) | Target |
+
+  |--------|----------------------|--------|
+
+  | Kinds | 123 | 130+ (as industry evolves) |
+
+  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
+
+  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
+
+  | Kind KCs | 123 (98/98 covered) | 100% coverage |
+
+  | Quality floor | 9.0 (100%) | Maintain |
+
+  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
+
+  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
+
+  | Kind KCs | 123 (98/98 covered) | 100% coverage |
+
+  | Quality floor | 9.0 (100%) | Maintain |
+
+  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
+
+  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
+
+  | Kind KCs | 123 (98/98 covered) | 100% coverage |
+
+  | Quality floor | 9.0 (100%) | Maintain |
+
+  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
+
+  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
+
+  | Kind KCs | 123 (98/98 covered) | 100% coverage |
+
+  | Quality floor | 9.0 (100%) | Maintain |'
