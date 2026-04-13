@@ -5,14 +5,14 @@ kind: knowledge_card
 version: 1.1.0
 quality: 8.9
 density_score: 1.0
-boundary: This artifact defines configuration parameters for streaming P01 knowledge artifacts. It is not a guide for implementing
-  streaming protocols or a reference for non-P01 configurations.
+boundary: This artifact defines configuration parameters and best practices for streaming P01 knowledge artifacts. It does
+  not cover general streaming concepts or configurations outside the P01 knowledge framework.
 related_kinds:
-- 'knowledge_card: Provides foundational configuration structure for all artifact types'
-- 'streaming_protocol: Defines low-level communication standards for data transfer'
-- 'performance_tuning: Offers optimization strategies for system resource allocation'
-- 'error_handling: Covers mechanisms for detecting and resolving stream failures'
-- 'chunking_strategy: Explains algorithms for dividing data into processable units'
+- 'knowledge_card: Provides general knowledge about streaming configurations'
+- 'configuration_guide: Offers detailed setup instructions for various systems'
+- 'performance_tuning: Focuses on optimizing system performance metrics'
+- 'error_handling: Covers strategies for managing and resolving errors'
+- 'chunking_strategy: Explains different methods for dividing data into chunks'
 overview: Streaming configuration enables efficient processing of large knowledge artifacts by breaking them into manageable
   chunks. This guide explains how to configure streaming parameters for P01 knowledge artifacts to optimize performance and
   resource usage.
@@ -37,57 +37,75 @@ core_configuration_parameters: '| Parameter | Type | Default | Description |
   | `streaming.parallel_processing` | boolean | `false` | Enable parallel chunk processing |'
 configuration_syntax: "streaming:\n  enabled: true\n  chunk_size: 2048\n  buffer_size: 8192\n  timeout: 60\n  retry_attempts:\
   \ 5\n  progress_interval: 10\n  chunking_strategy: \"dynamic\"\n  parallel_processing: true"
-use_cases: ''
-1_large_document_processing: "For processing documents over 1MB in size:\n\n| Parameter | Value | Purpose |\n|----------|-------|---------|\n\
-  | `chunk_size` | 4096 | Optimized for large text documents |\n| `buffer_size` | 16384 | Handles high memory demands |\n\
-  | `timeout` | 120 | Allows for longer processing times |\n| `chunking_strategy` | `\"dynamic\"` | Adapts to variable document\
-  \ structures |\n\nstreaming:\n  enabled: true\n  chunk_size: 4096\n  buffer_size: 16384\n  timeout: 120\n  retry_attempts:\
-  \ 3\n  progress_interval: 5\n  chunking_strategy: \"dynamic\""
-2_real_time_data_feeds: "For continuous data streams:\n\n| Parameter | Value | Purpose |\n|----------|-------|---------|\n\
-  | `chunk_size` | 1024 | Ensures low-latency processing |\n| `buffer_size` | 2048 | Minimizes memory overhead |\n| `timeout`\
-  \ | 10 | Prevents stalled connections |\n| `chunking_strategy` | `\"fixed\"` | Maintains consistent data intervals |\n\n\
-  streaming:\n  enabled: true\n  chunk_size: 1024\n  buffer_size: 2048\n  timeout: 10\n  retry_attempts: 2\n  progress_interval:\
-  \ 1\n  chunking_strategy: \"fixed\""
-3_batch_processing: "For non-urgent, bulk data transfers:\n\n| Parameter | Value | Purpose |\n|----------|-------|---------|\n\
-  | `chunk_size` | 8192 | Maximizes throughput |\n| `buffer_size` | 32768 | Accommodates large datasets |\n| `timeout` | 60\
-  \ | Allows for extended processing |\n| `chunking_strategy` | `\"fixed\"` | Simplifies batch management |\n\nstreaming:\n\
-  \  enabled: true\n  chunk_size: 8192\n  buffer_size: 32768\n  timeout: 60\n  retry_attempts: 1\n  progress_interval: 30\n\
-  \  chunking_strategy: \"fixed\""
-best_practices: '| Practice | Recommendation | Rationale |
+use_cases: '| Use Case | Chunk Size | Buffer Size | Timeout | Retry Attempts | Progress Interval | Chunking Strategy | Notes
+  |
 
-  |--------|----------------|-----------|
+  |--|--|--|--|--|--|--|--|
 
-  | Chunk Size Optimization | 1024-4096 for text, 4096-8192 for binary | Prevents memory issues and improves throughput |
+  | Large Document Processing | 4096 | 16384 | 120 | 3 | 5 | dynamic | For documents >1MB |
 
-  | Timeout Management | 2-3x expected processing time | Balances reliability and responsiveness |
+  | Real-time Data Feeds | 1024 | 4096 | 30 | 2 | 2 | fixed | Continuous stream handling |
 
-  | Retry Strategy | 2-3 attempts for transient errors | Avoids infinite loops on persistent failures |
+  | Batch Processing | N/A | N/A | N/A | N/A | N/A | N/A | Non-streaming jobs |
 
-  | Parallel Processing | Enable for multi-core systems | Reduces overall processing time |
+  | High Throughput | 8192 | 32768 | 60 | 5 | 3 | dynamic | For parallel systems |
 
-  | Chunking Strategy | Use "dynamic" for variable data, "fixed" for predictable data | Ensures consistency and adaptability
-  |'
-advanced_configuration: ''
-dynamic_vs_fixed_chunking_strategy: "| Parameter | Dynamic | Fixed | Description |\n|----------|---------|-------|-------------|\n\
-  | `chunk_size` | Auto-adjusts | Static | Dynamic adapts to data patterns |\n| `buffer_size` | Auto-scales | Static | Fixed\
-  \ requires manual tuning |\n| Use Case | Unpredictable data | Predictable data | Dynamic improves efficiency for variable\
-  \ workloads |\n\n# Dynamic Strategy\nstreaming:\n  chunking_strategy: \"dynamic\"\n  chunk_size: 2048\n  buffer_size: 8192\n\
-  \n# Fixed Strategy\nstreaming:\n  chunking_strategy: \"fixed\"\n  chunk_size: 4096\n  buffer_size: 16384"
-troubleshooting: '| Issue | Solution | Prevention |
+  | Low Latency | 512 | 2048 | 15 | 1 | 1 | fixed | Real-time applications |'
+best_practices: '| Practice | Recommendation | Rationale | Example |
 
-  |------|----------|------------|
+  |--|--|--|--|
 
-  | Timeout errors | Increase `timeout` value | Monitor system load and adjust accordingly |
+  | Chunk Size Optimization | Text: 1024-4096 bytes; Binary: 4096-8192 bytes | Balances memory and throughput | `chunk_size:
+  2048` |
 
-  | Memory leaks | Reduce `buffer_size` | Avoid excessive buffering for small datasets |
+  | Timeout Management | 2-3x expected processing time | Prevents stalled operations | `timeout: 60` |
 
-  | Stuck processes | Check `retry_attempts` | Limit retries for non-recoverable errors |
+  | Retry Strategy | 2-3 attempts for transient errors | Avoids overloading systems | `retry_attempts: 3` |
 
-  | Inconsistent data | Use "dynamic" chunking | Ensures uniform processing for variable data |'
-example_configuration: "streaming:\n  enabled: true\n  chunk_size: 2048\n  buffer_size: 8192\n  timeout: 60\n  retry_attempts:\
-  \ 3\n  progress_interval: 10\n  chunking_strategy: \"dynamic\"\n  parallel_processing: true"
-related_documentation:
-- Streaming Protocol Specification
-- Performance Tuning Guidelines
-- Error Handling Best Practices
-- Chunking Strategy Comparison
+  | Progress Monitoring | 2-10 seconds interval | Enables real-time tracking | `progress_interval: 5` |
+
+  | Chunking Strategy | Dynamic for variable data, fixed for structured data | Matches data patterns | `chunking_strategy:
+  "dynamic"` |
+
+  | Parallel Processing | Enable on multi-core systems | Maximizes resource utilization | `parallel_processing: true` |'
+advanced_configuration: '| Scenario | Configuration | Description |
+
+  |--|--|--|
+
+  | Memory-constrained systems | `buffer_size: 2048` | Reduces memory footprint |
+
+  | High-latency networks | `timeout: 120` | Prevents premature failures |
+
+  | Data integrity-critical systems | `retry_attempts: 5` | Ensures reliability |
+
+  | Real-time analytics | `progress_interval: 1` | Enables granular monitoring |
+
+  | Legacy system compatibility | `chunking_strategy: "fixed"` | Ensures backward compatibility |'
+troubleshooting: '| Issue | Solution | Prevalence |
+
+  |--|--|--|
+
+  | Chunking errors | Validate `chunk_size` and `chunking_strategy` | High |
+
+  | Timeout failures | Increase `timeout` value | Medium |
+
+  | Stalled progress | Check `progress_interval` and network stability | Medium |
+
+  | Resource exhaustion | Adjust `buffer_size` and `parallel_processing` | High |
+
+  | Configuration conflicts | Ensure YAML syntax is valid | Low |'
+example_configuration: "streaming:\n  enabled: true\n  chunk_size: 4096\n  buffer_size: 16384\n  timeout: 120\n  retry_attempts:\
+  \ 3\n  progress_interval: 5\n  chunking_strategy: \"dynamic\"\n  parallel_processing: true"
+performance_metrics: '| Metric | Target | Tool | Frequency |
+
+  |--|--|--|--|
+
+  | Throughput | >1000 chunks/sec | Monitoring dashboard | Real-time |
+
+  | Latency | <50ms | Profiling tool | Per operation |
+
+  | Error rate | <0.1% | Logging system | Hourly |
+
+  | Resource utilization | <80% | System monitor | Minute-level |
+
+  | Configuration drift | 0% | Version control | Commit-based |'
