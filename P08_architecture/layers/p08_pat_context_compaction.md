@@ -4,7 +4,7 @@ kind: pattern
 pillar: P08
 title: "Pattern: Context Compaction Strategy"
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [pattern, context, compaction, memory, optimization]
 tldr: "Architectural pattern for managing context window limits. Defines 4-level compaction strategy with preservation rules and trigger thresholds."
 domain: "architecture"
