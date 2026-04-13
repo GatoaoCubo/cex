@@ -152,3 +152,4 @@ Quero vender luminaria LED touch no ML. Nao tenho marca.
 - Also known as: marketplace strategy prompt, buy box optimization, catalog creation guide
 - Keywords: mercado livre, catalogo proprio, buy box, estrategia marketplace, INPI
 - LangChain: PromptTemplate | OpenAI: System Prompt | Anthropic: System Message
+```
