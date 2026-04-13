@@ -4,7 +4,7 @@ id: bld_architecture_prompt_compiler
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of prompt_compiler -- inventory, dependencies, and position
-quality: null
+quality: 9.1
 title: "Architecture Prompt Compiler"
 version: "1.0.0"
 author: n03_builder
