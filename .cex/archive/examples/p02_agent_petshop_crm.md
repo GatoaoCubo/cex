@@ -14,7 +14,7 @@ capabilities_count: 5
 tools_count: 3
 iso_files_count: 10
 routing_keywords: [crm, pet-shop, customer-management, pet-profiles, appointments, purchase-history]
-quality: null
+quality: 9.1
 tags: [agent, crm, pet_shop, pet_retail, P02]
 tldr: "Persistent CRM agent for pet shops -- manages customers, pet profiles, appointments, and purchase history."
 density_score: 0.87
