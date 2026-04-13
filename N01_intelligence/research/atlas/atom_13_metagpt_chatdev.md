@@ -3,7 +3,7 @@ id: atom_13_metagpt_chatdev
 kind: knowledge_card
 title: "MetaGPT vs. ChatDev: A Comparative Analysis with CEX Mapping"
 version: "1.0.0"
-quality: null
+quality: 8.8
 tags: [metagpt, chatdev, multi-agent, software-development, cex-mapping]
 pillar: P01
 domain: llm-agent-frameworks

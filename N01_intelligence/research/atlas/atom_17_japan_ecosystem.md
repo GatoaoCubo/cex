@@ -5,7 +5,7 @@ pillar: P01
 domain: japanese_llm_agent_ecosystem
 title: "ATOM-17: Japanese LLM & Agent Ecosystem -- Deep Dive"
 version: 1.1.0
-quality: null
+quality: 8.8
 tags: [japan, llm, agents, self-evolving, diffusion, sovereign-ai, sakana, nec, ntt, fujitsu, plamo, elyza, cyberagent, rakuten, ai-alliance, llm-jp, plamo-edge, tsuzumi-architecture]
 created: 2026-04-13
 updated: 2026-04-13
