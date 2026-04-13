@@ -548,6 +548,18 @@ CLEAR = w_C * normalize(C) + w_L * normalize(L) + w_E * E + w_A * A + w_R * R
 Default weights: 0.20 each (equal weighting = no domain assumption).
 Normalization per dimension: min-max over evaluation set. Cost and Latency inverted (lower is better).
 
+**Validated empirical findings** (300 enterprise tasks, 6 agents, N=15 expert judges):
+
+| Finding | Metric | Value |
+|---------|--------|-------|
+| Cost gap from accuracy-only optimization | CNA ratio vs cost-aware agents | 4.4x -- 10.8x more expensive |
+| Reliability drop: single run vs 8-run | pass@1 vs pass@8 | 60% -> 25% (35pp gap) |
+| CLEAR vs accuracy-only production predictor | Spearman rho | CLEAR: 0.83 vs accuracy-only: 0.41 |
+| 50x cost variation | CNA range across agents at similar accuracy | Confirmed |
+
+**Key insight**: An agent with 70% accuracy but optimized for cost delivers better business value
+(higher CNA) than an 80% accuracy agent with 10x cost, in most enterprise use cases.
+
 **CLEAR vs CLASSic Comparison**
 
 | Aspect | CLASSic | CLEAR |
@@ -1019,7 +1031,57 @@ Source: [FRAMES: Factuality, Retrieval, And Reasoning Evaluation for Multi-step 
 - Key metric: End-to-end faithfulness (not just retrieval quality)
 - CEX relevance: maps to D4 Domain Accuracy + RAG faithfulness in evaluation pipeline
 
-### 13.6 Evaluation Anti-Patterns Found in 2026 Studies
+### 13.6 Survey: Evaluation of LLM-based Agents (arxiv 2503.16416, March 2026)
+
+First comprehensive survey of evaluation methodologies for LLM agents. Key taxonomy:
+
+**4-Dimensional Taxonomy** (what to evaluate x how to evaluate):
+
+| Dimension | Sub-components |
+|-----------|---------------|
+| **Fundamental capabilities** | Planning, tool use, self-reflection, memory |
+| **Application-specific** | Web agents, SWE agents, scientific agents, conversational agents |
+| **Generalist agents** | Agents spanning multiple domains |
+| **Evaluation frameworks** | Infrastructure, tooling, dataset construction |
+
+Critical gaps identified by the survey:
+1. Cost-efficiency evaluation largely absent from existing benchmarks
+2. Safety and robustness assessment inconsistent across frameworks
+3. Benchmarks favor static tasks; production deployments are dynamic
+
+### 13.7 Survey: Evaluation and Benchmarking of LLM Agents (arxiv 2507.21504, KDD 2026)
+
+**2-Dimensional Taxonomy** (objectives x process):
+
+| Axis | Elements |
+|------|---------|
+| **Objectives (What)** | Agent behavior, capabilities, reliability, safety |
+| **Process (How)** | Interaction modes, datasets/benchmarks, metric computation, tooling |
+
+Active benchmark categories covered: Coding/SWE (SWE-bench, ScienceAgentBench, CORE-Bench,
+PaperBench, AppWorld), Web/Computer (BrowserGym, WebArena, WebCanvas, VisualWebArena, MMInA,
+AssistantBench), Multi-environment (AgentBench, GAIA, OSWorld).
+
+**Key trend**: Shift from static fixed tasks to continuously updated contamination-resistant benchmarks.
+Contamination occurs within 6 months for most fixed benchmarks -- rolling releases are required.
+
+### 13.8 DeepResearchEval (arxiv 2601.09688, January 2026)
+
+Automated framework for evaluating long-form deep research reports (not QA pairs):
+
+| Component | Description |
+|-----------|-------------|
+| **Page-as-unit paradigm** | Page is the basic evaluation unit; detects local failures per page |
+| **Adaptive scoring** | Per-page logical quality assessment via LLM judge |
+| **Paged-RAG mechanism** | Retrieval-augmented fact verification against configurable reference DB |
+| **Reference DB** | Constructible from any document corpus; verifies claims against sources |
+
+**Cost**: ~433 seconds per full-length deep research report (Qwen-Plus API), suitable for offline batch eval.
+
+**CEX mapping**: Applicable to N01 research atom quality assessment when atoms exceed 5K bytes.
+For CEX's 32-atom Atlas: budget ~4 hours for full DeepResearchEval sweep.
+
+### 13.10 Evaluation Anti-Patterns Found in 2026 Studies
 
 | Anti-Pattern | Discovered In | Effect | Mitigation |
 |--------------|--------------|--------|------------|

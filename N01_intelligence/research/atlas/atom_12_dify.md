@@ -1128,3 +1128,8 @@ Each field: `variable_name`, `display_name`, `required/optional`, `default_value
 | Document Extractor | `text` | string or array[string] |
 | List Operator | `result`, `first_record`, `last_record` | array, item, item |
 | Variable Aggregator | `output` | type of active branch |
+
+
+---
+
+## 14. Plugin SDK -- Implementation Reference

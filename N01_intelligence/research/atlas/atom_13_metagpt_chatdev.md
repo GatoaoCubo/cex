@@ -2,23 +2,26 @@
 id: atom_13_metagpt_chatdev
 kind: knowledge_card
 title: "Atomic Research 13: MetaGPT + ChatDev (OpenBMB/Tsinghua)"
-version: "3.0.0"
+version: "4.0.0"
 quality: 8.6
-tags: [metagpt, chatdev, openBMB, tsinghua, multi-agent, sops, dehallucination, chat-chain, atlas, macnet, ier, react-loop, message-pool]
+tags: [metagpt, chatdev, openBMB, tsinghua, multi-agent, sops, dehallucination, chat-chain, atlas, macnet, ier, react-loop, message-pool, action-node, data-interpreter, experience-pools]
 pillar: P01
 domain: multi-agent-frameworks
-density_score: 0.95
+density_score: 0.97
 sources:
   - "arXiv:2308.00352 (MetaGPT)"
   - "arXiv:2307.07924 (ChatDev)"
   - "arXiv:2312.17025 (Experiential Co-Learning)"
   - "arXiv:2405.04219 (IER)"
   - "arXiv:2406.07155 (MacNet)"
-  - "github.com/FoundationAgents/MetaGPT"
+  - "arXiv:2402.18679 (Data Interpreter)"
+  - "github.com/FoundationAgents/MetaGPT (v0.8.2)"
   - "github.com/OpenBMB/ChatDev"
   - "docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html"
+  - "docs.deepwisdom.ai/main/en/guide/use_cases/agent/interpreter/intro.html"
   - "github.com/geekan/MetaGPT-docs"
   - "arxiv.org/html/2312.17025v2 (ECL full paper)"
+  - "metagpt/roles/di/data_interpreter.py"
 ---
 
 # Atomic Research 13: MetaGPT + ChatDev

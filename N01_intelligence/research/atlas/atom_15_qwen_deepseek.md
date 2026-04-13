@@ -601,6 +601,11 @@ Temperature, top_p, presence_penalty, frequency_penalty, logprobs, top_logprobs 
 | **DeepSeek Sparse Attention** | DeepSeek V3.2 | Efficient attention for long-context tool-use scenarios |
 | **MAX_LLM_CALL_PER_RUN** | Qwen-Agent | Hard cap at 8 LLM calls per agent run (prevents infinite loops) |
 | **use_raw_api** | Qwen-Agent | Bypass prompt engineering, use vLLM native tool parsing directly |
+| **GRPO** | DeepSeek V3.2 | Group Relative Policy Optimization -- RL unifying reasoning + agentic + alignment in single stage |
+| **MCPManager `__new__`** | Qwen-Agent | Python singleton via `__new__` + `_initialized` guard + asyncio daemon + atexit cleanup |
+| **subprocess monkey-patch** | Qwen-Agent | Intercepts all `Popen` calls during stdio MCP server startup for coordinated process cleanup |
+| **Hard-to-solve, easy-to-verify** | DeepSeek V3.2 | Task design principle: scalable RL without per-step human evaluation |
+| **vLLM token ID 9207 bug** | vLLM/Qwen3 | Hermes streaming parser truncates on special `}` token -- use non-streaming mode as workaround |
 
 ---
 

@@ -32,6 +32,9 @@ sources:
 - https://docs.vllm.ai/en/latest/features/tool_calling/
 - https://github.com/vllm-project/vllm/issues/19056
 - https://github.com/NousResearch/Hermes-Function-Calling
+- https://kili-technology.com/blog/data-story-deepseek-v3-2
+- https://deepwiki.com/QwenLM/Qwen-Agent/5.3-mcp-tool-integration
+- https://lawwu.github.io/til/posts/2025-05-02-qwen3-chat-prompt-template/index.html
 1_qwen_agent_framework: ''
 1_1_architecture_overview: 'Qwen-Agent is a Python framework built on three atomic components:
 
@@ -172,9 +175,21 @@ sources:
   \ for cross-thread execution\n- Install: `pip install -U \"qwen-agent[gui,rag,code_interpreter,mcp]\"`\n\nConfig structure:\n\
   {\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@anthropic/mcp-filesystem\"\
   ],\n      \"env\": {\"ALLOWED_DIRS\": \"/data\"}\n    }\n  }\n}\n\n#### 1.6.1 MCP Manager Singleton: Implementation Architecture\n\
-  \nSingleton pattern (`MCPManager._instance` class variable):\n# Initialization internals\nself.loop = asyncio.new_event_loop()\n\
-  self.loop_thread = threading.Thread(target=loop.run_forever, daemon=True)\nself.loop_thread.start()\nself.clients = {} \
-  \  # client_id -> MCPClient\nself.processes = [] # subprocess handles for cleanup\n\nCross-thread execution via run_coroutine_threadsafe:\n\
+  \nSingleton pattern (`MCPManager._instance` class variable, `new` method):\nclass MCPManager:\n    _instance = None\n\n\
+  \    def new(cls, args, *kwargs):\n        if cls._instance is None:\n            cls._instance = super().new(cls)\n   \
+  \     return cls._instance\n\n    def init(self):\n        if hasattr(self, \"_initialized\"):\n            return  # guard\
+  \ against re-init on repeated MCPManager() calls\n        self._initialized = True\n        self.loop = asyncio.new_event_loop()\n\
+  \        self.loop_thread = threading.Thread(target=self.loop.run_forever, daemon=True)\n        self.loop_thread.start()\n\
+  \        self.clients = {}   # client_id -> MCPClient\n        self.processes = [] # subprocess handles for cleanup\n  \
+  \      atexit.register(self._cleanup)\n\nSubprocess monkey-patching (lines 57-71): For stdio-based MCP servers, the manager\
+  \ monkey-patches `subprocess.Popen` during server startup to intercept and record all spawned process handles. This ensures\
+  \ every child process is tracked in `self.processes` for coordinated cleanup on exit -- without this, orphaned server processes\
+  \ survive the Python process.\n\nAtexit cleanup sequence (registered in `init`):\ndef _cleanup(self):\n    # 1. Gracefully\
+  \ close all MCPClient sessions (async, 1-second window)\n    future = asyncio.run_coroutine_threadsafe(self._close_all_clients(),\
+  \ self.loop)\n    try:\n        future.result(timeout=1.0)\n    except Exception:\n        pass  # proceed to force-kill\
+  \ regardless\n    # 2. Force-terminate remaining stdio subprocesses\n    for proc in self.processes:\n        try:\n   \
+  \         proc.terminate()\n        except Exception:\n            pass\n    # 3. Stop background event loop\n    self.loop.call_soon_threadsafe(self.loop.stop)\n\
+  \    # 4. Wait for loop thread to fully exit\n    self.loop_thread.join(timeout=5.0)\n\nCross-thread execution via run_coroutine_threadsafe:\n\
   future = asyncio.run_coroutine_threadsafe(\n    mcp_client.call_tool(tool_name, args),\n    self.loop\n)\nresult = future.result()\
   \  # blocks caller thread until coroutine completes\n\nConnection lifecycle:\n1. `connect()` -- initialize MCPClient based\
   \ on transport type\n   - `stdio` transport: triggered by `command` field in config (spawns subprocess)\n   - `SSE` transport:\
@@ -304,7 +319,19 @@ sources:
   \ data).\n\nCode Interpreter: Jupyter-based environments focused on problems spanning mathematics,\nlogic, and data science.\
   \ Iterative execution with output validation.\n\nGeneral Agent: \"Hard to solve but easy to verify\" task design. Categories\
   \ include\ntravel planning, multi-step reasoning. Iterative difficulty escalation with human annotators\nand verification\
-  \ agents ensuring data quality.\n\nTraining methodology:\n- All domains support both thinking and non-thinking modes simultaneously\n\
+  \ agents ensuring data quality.\n\nSearch agent verification pipeline (5-stage hard-negative filtering):\n1. Sample long-tail\
+  \ informative entities from large-scale web corpora\n2. Question-construction agent explores entity using configurable search\
+  \ tools\n3. Multiple answer-generation agents produce diverse candidate responses\n4. Verification agent retains ONLY samples\
+  \ where: ground truth is correct AND all model-generated candidates are verifiably incorrect\n5. Result: questions that\
+  \ are \"hard to solve, easy to verify\" -- oracle has answer, model cannot trivially succeed\n\nCode agent correctness filter\
+  \ (zero-tolerance dual check):\nACCEPT if: patch produces non-zero false-to-positive tests (issue fixed)\nREJECT if: any\
+  \ pass-to-fail tests (regression introduced)\n# Both conditions enforced simultaneously -- correctness AND non-regression\n\
+  \nRL training (GRPO -- Group Relative Policy Optimization):\n- Algorithm: GRPO (Group Relative Policy Optimization, DeepSeek's\
+  \ RL variant)\n- Reward types: rule-based outcome rewards (code: tests pass/fail) + generative reward models (search: answer\
+  \ quality scoring)\n- Design principle: all tasks must be \"hard to solve, easy to verify\" -- enables scalable RL without\
+  \ expensive human labeling at each step\n- Unified training: reasoning + agentic tasks + human alignment in single RL stage\
+  \ (not separate phases)\n- Cold-start: DeepSeek-V3 methodology used to unify reasoning and tool-use within single trajectories\
+  \ BEFORE full RL begins\n\nTraining methodology:\n- All domains support both thinking and non-thinking modes simultaneously\n\
   - Six specialized training domains: mathematics, programming, general logical reasoning,\n  general agentic tasks, agentic\
   \ coding, agentic search\n- Post-training: over 10% of pre-training compute dedicated to reinforcement learning\n- Key innovation:\
   \ reasoning integrated INTO tool execution (not sequential think-then-act)"
@@ -393,6 +420,19 @@ sources:
   | MAX_LLM_CALL_PER_RUN | Qwen-Agent | Hard cap at 8 LLM calls per agent run (prevents infinite loops) |
 
   | use_raw_api | Qwen-Agent | Bypass prompt engineering, use vLLM native tool parsing directly |
+
+  | GRPO | DeepSeek V3.2 | Group Relative Policy Optimization -- RL unifying reasoning + agentic + alignment in single stage
+  |
+
+  | MCPManager `new` | Qwen-Agent | Python singleton via `new` + `_initialized` guard + asyncio daemon + atexit cleanup |
+
+  | subprocess monkey-patch | Qwen-Agent | Intercepts all `Popen` calls during stdio MCP server startup for coordinated process
+  cleanup |
+
+  | Hard-to-solve, easy-to-verify | DeepSeek V3.2 | Task design principle: scalable RL without per-step human evaluation |
+
+  | vLLM token ID 9207 bug | vLLM/Qwen3 | Hermes streaming parser truncates on special `}` token -- use non-streaming mode
+  as workaround |
 
 
   ---'
