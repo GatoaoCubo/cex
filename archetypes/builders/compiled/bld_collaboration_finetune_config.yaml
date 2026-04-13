@@ -1,0 +1,63 @@
+kind: collaboration
+id: bld_collaboration_finetune_config
+pillar: P12
+llm_function: COLLABORATE
+purpose: How finetune-config-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: null
+title: Collaboration Finetune Config
+version: 1.0.0
+author: n03_builder
+tags:
+- finetune_config
+- builder
+- collaboration
+- P02
+tldr: 'finetune-config-builder role in crews: receives base model + task + dataset seeds, produces training job spec.'
+domain: finetune_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+my_role_in_crews: 'I am a SPECIALIST. I answer ONE question: "how should this model be adapted -- which base model, which
+  dataset, which adapter, and which hyperparameters?" I do not configure runtime routing. I do not document trained models.
+  I do not define agents. I specify training jobs so they can be handed to a framework and executed.'
+crew_compositions: ''
+crew_model_adaptation_pipeline: "  1. knowledge-card-builder -> \"document base model capabilities and limitations\"\n  2.\
+  \ finetune-config-builder -> \"specify training job: adapter, dataset, hyperparameters\"\n  3. model-card-builder -> \"\
+  document trained adapter: capabilities, eval results, usage\"\n  4. model-provider-builder -> \"configure runtime routing\
+  \ to serve the adapted model\""
+crew_custom_domain_model: "  1. agent-builder -> \"define agent persona and capabilities\"\n  2. finetune-config-builder ->\
+  \ \"adapt base model to domain task\"\n  3. boot-config-builder -> \"configure provider startup with trained adapter\"\n\
+  \  4. benchmark-builder -> \"define post-training evaluation suite\""
+crew_preference_alignment: "  1. finetune-config-builder (SFT) -> \"initial supervised fine-tune on demonstrations\"\n  2.\
+  \ finetune-config-builder (reward) -> \"train reward model from preference data\"\n  3. finetune-config-builder (RLHF/DPO)\
+  \ -> \"align policy with reward signal\"\n  4. model-card-builder -> \"document aligned model\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: base_model (HF model ID), task_type (sft/dpo/etc), dataset path or identifier'
+- 'optional: compute constraints (VRAM budget), quality targets, framework preference'
+- 'optional: existing finetune_config IDs to NOT duplicate'
+i_produce:
+- finetune_config artifact (.md + .yaml frontmatter)
+- 'committed to: `P02_model/examples/p02_ft_{name}.yaml`'
+i_signal:
+- 'signal: complete (with quality score from QUALITY_GATES)'
+- 'if quality < 8.0: signal retry with failure reasons listed'
+builders_i_depend_on: '| Builder | Why |
+
+  |---------|-----|
+
+  | knowledge-card-builder | Documents base model capabilities I need to understand before specifying adapter |
+
+  | dataset-builder (if exists) | Defines dataset format and field schema I reference in Dataset section |'
+builders_that_depend_on_me: '| Builder | Why |
+
+  |---------|-----|
+
+  | model-card-builder | Documents the trained adapter produced by running my config |
+
+  | model-provider-builder | Routes inference requests to the model I specify how to train |
+
+  | boot-config-builder | Loads the adapter I specify at provider startup |
+
+  | benchmark-builder | Evaluates the model produced by running my training config |'

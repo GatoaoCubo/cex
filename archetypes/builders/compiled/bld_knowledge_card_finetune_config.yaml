@@ -1,0 +1,140 @@
+kind: knowledge_card
+id: bld_knowledge_card_finetune_config
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for finetune_config production -- LLM fine-tuning specification
+sources: LoRA paper (Hu et al. 2021), QLoRA paper (Dettmers et al. 2023), HuggingFace TRL docs, Axolotl docs
+quality: null
+title: Knowledge Card Finetune Config
+version: 1.0.0
+author: n03_builder
+tags:
+- finetune_config
+- builder
+- knowledge
+- P02
+- lora
+- qlora
+- training
+tldr: 'Domain knowledge for finetune_config: adapter taxonomy, hyperparameter baselines, dataset formats, eval strategies.'
+domain: finetune_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+executive_summary: 'Fine-tuning configs specify how a pre-trained LLM is adapted to a target task. They define the base model,
+  adaptation method (adapter type), training dataset, hyperparameters, and evaluation strategy. The key decision is adapter
+  type: full fine-tune (most powerful, most expensive), LoRA (parameter-efficient via low-rank matrices), QLoRA (LoRA + 4-bit
+  quantization for consumer GPUs). finetune_config is NOT a model_provider (runtime API routing) and NOT a model_card (post-training
+  docs).'
+spec_table: '| Property | Value |
+
+  |----------|-------|
+
+  | Pillar | P02 (Model) |
+
+  | llm_function | CONSTRAIN |
+
+  | Frontmatter fields | 15+ |
+
+  | Quality gates | 12 HARD + 12 SOFT |
+
+  | Adapter types | lora, qlora, full, prefix_tuning, p_tuning |
+
+  | Task types | sft, dpo, rlhf, orpo, reward_modeling |
+
+  | Naming | p02_ft_{name}.yaml |'
+adapter_taxonomy: '| Adapter | Mechanism | VRAM | Quality | When |
+
+  |---------|-----------|------|---------|------|
+
+  | full | All parameters updated | Very high | Best | Large GPU cluster |
+
+  | lora | Low-rank matrices injected into attention/MLP | Medium | Near-full | Single A100 / multi-GPU |
+
+  | qlora | LoRA + 4-bit base quantization | Low | Near-LoRA | Consumer 24GB GPU |
+
+  | prefix_tuning | Trainable prefix tokens prepended | Low | Moderate | Few-shot task adaptation |
+
+  | p_tuning | Virtual tokens via MLP reparameterization | Low | Moderate | Classification tasks |'
+lora_key_parameters: '| Parameter | Range | Effect |
+
+  |-----------|-------|--------|
+
+  | rank (r) | 4-128 | Higher rank = more capacity, more VRAM, slower |
+
+  | lora_alpha | 2*r typical | Scales the LoRA update; alpha/r = effective learning rate scale |
+
+  | lora_dropout | 0.0-0.1 | Regularization; 0.05 standard for SFT |
+
+  | target_modules | see model | Which projection matrices get LoRA adapters |'
+target_modules_by_architecture: '| Architecture | Recommended target_modules |
+
+  |-------------|---------------------------|
+
+  | Llama 2/3 | q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj |
+
+  | Mistral | q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj |
+
+  | Qwen2 | q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj |
+
+  | Phi-3 | q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj |
+
+  | Gemma | q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj |'
+hyperparameter_baselines: '| Parameter | SFT baseline | DPO baseline |
+
+  |-----------|-------------|-------------|
+
+  | learning_rate | 2e-4 (LoRA), 1e-5 (full) | 5e-7 (DPO paper) |
+
+  | warmup_ratio | 0.03 | 0.1 |
+
+  | lr_scheduler | cosine | linear |
+
+  | weight_decay | 0.01 | 0.0 |
+
+  | max_grad_norm | 1.0 | 1.0 |
+
+  | optim (QLoRA) | paged_adamw_8bit | paged_adamw_8bit |'
+dataset_formats: '| Format | Fields | Framework |
+
+  |--------|--------|-----------|
+
+  | Alpaca | instruction, input, output | TRL SFTTrainer |
+
+  | ShareGPT | conversations: [{role, content}] | TRL SFTTrainer |
+
+  | Preference | prompt, chosen, rejected | TRL DPOTrainer |
+
+  | Completion | text (full formatted) | TRL SFTTrainer (completion_only_collator) |'
+anti_patterns: '| Anti-Pattern | Why it fails |
+
+  |-------------|-------------|
+
+  | target_modules: "all" or default | Framework defaults change; explicit list ensures reproducibility |
+
+  | No gradient_accumulation_steps | Effective batch size unclear; results not reproducible |
+
+  | Placeholder hyperparameters (TBD) | Config cannot be executed; requires second revision pass |
+
+  | Credentials in base_model field | Tokens committed to repo; security violation |
+
+  | No eval_strategy | Training runs without evaluation; overfitting undetected |
+
+  | learning_rate without warmup | NaN loss spikes on cold start for large models |'
+boundary_table: '| finetune_config IS | finetune_config IS NOT |
+
+  |-------------------|----------------------|
+
+  | Training job specification: how to adapt a model | model_provider (P02): runtime API routing config |
+
+  | Covers adapter type, hyperparameters, dataset | model_card: post-training model documentation |
+
+  | Consumed by training frameworks (TRL, Axolotl, Unsloth) | boot_config: per-provider startup parameters |
+
+  | Defines evaluation during training | benchmark (P07): post-training evaluation results |'
+references:
+- 'Hu et al. 2021: "LoRA: Low-Rank Adaptation of Large Language Models" (arXiv 2106.09685)'
+- 'Dettmers et al. 2023: "QLoRA: Efficient Finetuning of Quantized LLMs" (arXiv 2305.14314)'
+- 'HuggingFace TRL: huggingface.co/docs/trl (SFTTrainer, DPOTrainer)'
+- 'Axolotl: github.com/axolotl-ai-cloud/axolotl (YAML config format)'
+- 'Unsloth: github.com/unslothai/unsloth (QLoRA memory optimizations)'

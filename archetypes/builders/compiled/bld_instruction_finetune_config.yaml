@@ -1,0 +1,62 @@
+kind: instruction
+id: bld_instruction_finetune_config
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for finetune_config
+pattern: 3-phase pipeline (research -> compose -> validate)
+quality: null
+title: Instruction Finetune Config
+version: 1.0.0
+author: n03_builder
+tags:
+- finetune_config
+- builder
+- instruction
+- P02
+tldr: '3-phase process: research base model + adapter + dataset, compose all sections, validate gates.'
+domain: finetune_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+phase_1_research:
+- 'Identify the target task: instruction following, chat, code generation, classification, preference alignment (SFT/DPO/RLHF/ORPO)'
+- 'Select base model: model ID (HuggingFace hub or local path), architecture family (Llama, Mistral, Qwen, Phi, Gemma), parameter
+  count'
+- 'Determine adapter type based on compute budget:'
+- 'Full GPU farm (A100 80GB+): consider full fine-tune'
+- 'Single GPU (24GB): LoRA or prefix_tuning'
+- 'Consumer GPU (8-16GB VRAM): QLoRA (4-bit quantization)'
+- 'Catalog dataset: source path or identifier, size (rows), format (Alpaca/ShareGPT/custom), field names, language'
+- 'Determine hyperparameters: start from documented baselines for the base model family'
+- 'Define evaluation strategy: metrics (eval_loss, BLEU, ROUGE, accuracy), eval frequency, held-out split size'
+- Check existing finetune_configs via brain_query [IF MCP] -- do not duplicate a config that already covers this base model
+  + task
+phase_2_compose:
+- Read SCHEMA.md -- source of truth for all fields
+- Read OUTPUT_TEMPLATE.md -- fill the template following SCHEMA constraints
+- 'Fill all required frontmatter fields; set `quality: null` -- never self-score'
+- 'Write Overview section: target task, base model choice rationale, adapter type justification (1 sentence each)'
+- 'Write Base Model section: table with model_id, architecture, param_count, license, quantization (if any)'
+- 'Write Dataset section: table with path/identifier, size, format, field_mapping (instruction/input/output or user/assistant),
+  language, preprocessing steps'
+- 'Write Adapter Config section: all adapter parameters in table -- for LoRA: rank, alpha, dropout, target_modules; for QLoRA:
+  add bits, quantization_type'
+- 'Write Hyperparameters section: table with all training hyperparameters and their values'
+- 'Write Evaluation section: table with eval metrics, checkpoint strategy, save_total_limit, early_stopping (if any)'
+- Confirm body <= 4096 bytes
+phase_3_validate:
+- Check QUALITY_GATES.md -- verify each HARD gate manually
+- Confirm YAML frontmatter parses without errors
+- Confirm `id` matches `^p02_ft_[a-z][a-z0-9_]+$`
+- Confirm adapter_type is from the allowed enum (lora, qlora, full, prefix_tuning, p_tuning)
+- Confirm all required hyperparameters have explicit numeric values (no TBD or null)
+- Confirm LoRA/QLoRA configs include rank, alpha, dropout, target_modules
+- Confirm dataset section includes format and field_mapping
+- Confirm at least one eval_metric is specified
+- Confirm no credentials, API keys, or tokens appear in any field
+- Confirm `quality` is null
+- Confirm body <= 4096 bytes
+- 'Cross-check: is this a training specification? If this configures runtime API routing it belongs in `model_provider`. If
+  it documents a trained model it belongs in `model_card`. If it starts a provider it belongs in `boot_config`. This artifact
+  specifies HOW to train/adapt, not HOW to serve.'
+- 'If score < 8.0: revise in the same pass before outputting'
