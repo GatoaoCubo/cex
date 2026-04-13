@@ -3,9 +3,10 @@ id: kc_prompt_engineering_taxonomy
 kind: knowledge_card
 title: "Prompt Engineering Taxonomy"
 version: 1.0.0
-quality: 8.9
+quality: 9.0
 pillar: P01
 density_score: 1.0
+updated: "2026-04-13"
 ---
 
 # Prompt Engineering Taxonomy
