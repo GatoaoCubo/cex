@@ -1,0 +1,218 @@
+title: CEX Ontology Ingestion Plan
+author: CEX Ontology Team
+date: 2023-10-15
+version: 1.0
+executive_summary: 'The CEX system will integrate data from 7+ authoritative sources, including:
+
+  - MetaAutoML (classical ML algorithms)
+
+  - ITO (AI process taxonomy)
+
+  - PapersWithCode (method/task metadata)
+
+  - HuggingFace (NLP pipelines)
+
+  - MLCommons Croissant (dataset metadata)
+
+  - W3C ML Schema (foundational ontology)
+
+  - Artificial Intelligence Ontology (AIO) (LLM-era concepts)
+
+
+  The result will be a 3,000+ concept knowledge base with:
+
+  - Hierarchical task taxonomy
+
+  - Algorithm/architecture definitions
+
+  - Evaluation metrics
+
+  - Dataset metadata schema
+
+  - Ethical AI guardrails'
+phase_plan: ''
+phase_1_foundation_layer_week_1: 'Goal: Establish ontology backbone from W3C ML Schema
+
+
+  Key Deliverables:
+
+  - 25 foundational `knowledge_card` concepts
+
+  - Ontology alignment with CEX pillars
+
+  - Schema for future concept mapping
+
+
+  Tools:
+
+  - `rdflib` for RDF parsing
+
+  - `owlready2` for OWL processing
+
+
+  Output: `P01_knowledge/library/ml/` directory with foundational concepts
+
+
+  ---'
+phase_2_task_taxonomy_weeks_1_2: "Goal: Build comprehensive ML task hierarchy\n\nSources:\n- ITO (1,100+ AI process classes)\n\
+  - PWC (3,000+ tasks)\n- HuggingFace (75 pipeline tags)\n\nStrategy:\n- Use Levenshtein distance + BERT embeddings for deduplication\n\
+  - Create 3-level hierarchy:\n  1. HF pipeline tags (top-level)\n  2. ITO mid-level classes\n  3. PWC task leaves\n\nOutput:\
+  \ ~2,000 deduplicated task `knowledge_card`s\n\n---"
+phase_3_algorithm_architecture_taxonomy_week_2: 'Goal: Cover classical ML and deep learning
+
+
+  Sources:
+
+  - MetaAutoML (120 algorithms)
+
+  - AIO (DL architectures)
+
+  - PWC (665 methods)
+
+
+  Mapping:
+
+  - Classical ML: MetaAutoML + ML-Schema `Algorithm` class
+
+  - DL architectures: AIO Networks/Layers branches
+
+
+  Output: ~500 algorithm/architecture `knowledge_card`s
+
+
+  ---'
+phase_4_metrics_evaluation_weeks_2_3: 'Goal: Create comprehensive evaluation library
+
+
+  Sources:
+
+  - MetaAutoML (120 metrics)
+
+  - ITO (1,995 performance properties)
+
+  - ML-Schema (EvaluationMeasure)
+
+
+  Categorization:
+
+  - Classification / Regression / Generation / Ranking
+
+  - Include computation formulas where available
+
+
+  Output: ~200 `scoring_rubric` concepts
+
+
+  ---'
+phase_5_dataset_vocabulary_week_3: 'Goal: Adopt MLCommons Croissant as dataset metadata standard
+
+
+  Mapping:
+
+  - `cr:Dataset` → `knowledge_card` (dataset domain)
+
+  - `cr:RecordSet` → `schema` (data structure)
+
+  - `cr:Field` → `type_def` (data type)
+
+
+  Ethics Integration:
+
+  - Import RAI vocabulary as 10 `guardrail` concepts
+
+
+  Output: Dataset metadata schema + ethical guardrails
+
+
+  ---'
+phase_6_modern_ai_concepts_weeks_3_4: 'Goal: Capture LLM-era concepts from AIO
+
+
+  Focus Areas:
+
+  - Transformer variants (BERT, GPT, etc.)
+
+  - Attention mechanisms
+
+  - Fine-tuning strategies (LoRA, QLoRA)
+
+  - Prompt engineering
+
+  - AI bias types
+
+
+  Output: ~300 modern AI `knowledge_card`s
+
+
+  ---'
+technical_implementation: ''
+tools_dependencies: '# Core dependencies
+
+  pip install rdflib        # RDF/Turtle parsing
+
+  pip install owlready2     # OWL ontology loading
+
+  pip install mlcroissant   # Croissant JSON-LD
+
+  pip install huggingface_hub  # HF API
+
+  pip install pyld          # JSON-LD processing
+
+  pip install scikit-learn  # Deduplication
+
+  pip install transformers  # BERT embeddings'
+unified_ingestion_pipeline: "# _tools/cex_ontology_ingest.py\ndef fetch_source(url, format):\n    \"\"\"Download and cache\
+  \ source data\"\"\"\n    pass\n\ndef parse_ontology(data, format):\n    \"\"\"Convert raw data to list of Concept objects\"\
+  \"\"\n    pass\n\ndef deduplicate(concepts, threshold=0.85):\n    \"\"\"Remove duplicate concepts using embeddings\"\"\"\
+  \n    pass\n\ndef map_to_cex(concept):\n    \"\"\"Map ontology class to CEX kind + pillar + domain\"\"\"\n    pass\n\ndef\
+  \ generate_kc(concept, mapping):\n    \"\"\"Generate markdown knowledge card artifact\"\"\"\n    pass\n\ndef compile_and_index(artifacts):\n\
+  \    \"\"\"Update CEX search index\"\"\"\n    pass\n\n---"
+ontology_to_cex_mapping_strategy: '| Ontology Concept Type       | CEX Kind         | CEX Pillar |
+
+  |-----------------------------|------------------|------------|
+
+  | ML Task / AI Process        | knowledge_card   | P01        |
+
+  | Algorithm / Method          | knowledge_card   | P01        |
+
+  | DL Architecture             | knowledge_card   | P01        |
+
+  | Evaluation Metric           | scoring_rubric   | P07        |
+
+  | Dataset Schema              | schema           | P06        |
+
+  | Bias / Ethics               | guardrail        | P11        |
+
+  | Hyperparameter              | type_def         | P06        |
+
+  | Library / Tool              | knowledge_card   | P04        |
+
+  | Experiment / Run            | workflow         | P12        |
+
+
+  ---'
+risk_management: ''
+high_risk_items:
+- PWC archive disappearance
+- 'Mitigation: Cache all JSON files locally'
+- Scale (3,000+ KCs)
+- 'Mitigation: Batch generation via `cex_batch.py`'
+medium_risk_items: "1. Ontology version drift  \n   - Mitigation: Pin versions in `requirements.txt`\n\n2. Deduplication false\
+  \ positives  \n   - Mitigation: Manual review for >0.90 similarity\n\n---"
+immediate_next_actions: "1. Today:\n   - Cache PWC archive: `git clone https://github.com/paperswithcode/paperswithcode-data`\n\
+  \   - Download MetaAutoML: `wget https://raw.githubusercontent.com/hochschule-darmstadt/MetaAutoML/main/controller/managers/ontology/ML_Ontology.ttl`\n\
+  \   - Fetch ITO: `git clone https://github.com/OpenBioLink/ITO`\n\n2. Week 1:\n   - Implement `_tools/cex_ontology_ingest.py`\n\
+  \   - Complete Phase 1 (W3C ML Schema)\n   - Begin Phase 2 (Task taxonomy)\n\n3. Week 2:\n   - Complete Phase 3 (Algorithms)\n\
+  \   - Begin Phase 4 (Metrics)\n\n4. Week 3:\n   - Complete Phase 5 (Datasets)\n   - Begin Phase 6 (Modern AI concepts)\n\
+  \n---"
+source_repositories: "sources:\n  - name: \"MetaAutoML\"\n    url: \"https://github.com/hochschule-darmstadt/MetaAutoML\"\n\
+  \    description: \"Classical ML algorithm ontology\"\n\n  - name: \"ITO\"\n    url: \"https://github.com/OpenBioLink/ITO\"\
+  \n    description: \"AI process taxonomy\"\n\n  - name: \"PapersWithCode\"\n    url: \"https://github.com/paperswithcode/paperswithcode-data\"\
+  \n    description: \"ML method/task metadata\"\n\n  - name: \"HuggingFace\"\n    url: \"https://github.com/huggingface\"\
+  \n    description: \"NLP pipeline definitions\"\n\n  - name: \"MLCommons Croissant\"\n    url: \"https://github.com/mlcommons/croissant\"\
+  \n    description: \"Dataset metadata standard\"\n\n  - name: \"W3C ML Schema\"\n    url: \"https://www.w3.org/TR/2021/REC-ml-schema-20211214/\"\
+  \n    description: \"Foundational ML ontology\"\n\n  - name: \"Artificial Intelligence Ontology (AIO)\"\n    url: \"https://github.com/ArtificialIntelligenceOntology/AIO\"\
+  \n    description: \"LLM-era concepts\"\n\n---"
+conclusion: This plan establishes a robust framework for integrating diverse ML knowledge sources into the CEX system. By
+  following this structured approach, we will create a comprehensive, interoperable knowledge base that supports research,
+  development, and ethical AI practices across the ML ecosystem.

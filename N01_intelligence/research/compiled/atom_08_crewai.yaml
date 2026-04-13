@@ -1,0 +1,88 @@
+title: 'CrewAI: A Comprehensive Guide to Agents, Tasks, and Workflows'
+author: CrewAI Team
+date: '2023-10-15'
+description: An in-depth exploration of CrewAI's architecture, concepts, and implementation details, covering agents, tasks,
+  crews, flows, memory, knowledge, tools, and more.
+introduction: CrewAI is an open-source framework designed to enable the creation of autonomous, collaborative AI agents. This
+  document serves as a technical reference, detailing the core components, workflows, and implementation patterns of the CrewAI
+  ecosystem. It covers agents, tasks, crews, flows, memory systems, knowledge integration, tooling, event handling, and enterprise
+  deployment options. ---
+core_concepts: ''
+agents: "Agents are autonomous entities defined by:\n- Role: Function and expertise (e.g., \"Data Analyst\")\n- Goal: Specific\
+  \ objective to achieve\n- Backstory: Contextual narrative shaping behavior\n- Tools: Capabilities for task execution\n-\
+  \ Reasoning: Reflective planning mechanism\n- Memory: Access to historical data and knowledge\n\nfrom crewai import Agent\n\
+  \ndata_analyst = Agent(\n    role=\"Data Analyst\",\n    goal=\"Analyze financial datasets to identify trends\",\n    backstory=\"\
+  Experienced in statistical analysis and data visualization\",\n    tools=[\"Python\", \"Pandas\", \"Tableau\"]\n)"
+tasks: "Tasks represent units of work with:\n- Description: Statement of work\n- Expected Output: Specification for completion\n\
+  - Dependencies: Context from other task outputs\n- Guardrails: Validation rules with retry logic\n\nfrom crewai import Task\n\
+  \nanalyze_data = Task(\n    description=\"Perform exploratory data analysis on the dataset\",\n    expected_output=\"Summary\
+  \ statistics and visualizations\",\n    dependencies=[data_preprocessing_task],\n    guardrail=\"Ensure results meet statistical\
+  \ significance thresholds\"\n)"
+crews: "Crews orchestrate agents and tasks through process enums:\n- Sequential: Tasks executed in order\n- Hierarchical:\
+  \ Manager agent delegates tasks\n- Consensual: Collaborative decision-making\n\nfrom crewai import Crew\n\nfinancial_analysis_crew\
+  \ = Crew(\n    agents=[data_analyst, report_writer],\n    tasks=[analyze_data, generate_report],\n    process=\"sequential\"\
+  \n)"
+flows: "Event-driven orchestrators with:\n- @start: Entry point decorators\n- @listen: React to method outputs\n- @router:\
+  \ Conditional branching\n- @persist: State persistence\n- @human_feedback: Human input integration\n\nfrom crewai import\
+  \ Flow\n\nfinancial_flow = Flow(\n    name=\"Quarterly Analysis\",\n    entry_points=[@start(\"initiate_analysis\")],\n\
+  \    routers=[@router(\"data_quality_check\", condition=check_data_quality)]\n)\n\n---"
+advanced_features: ''
+knowledge_integration:
+- 'RAG Sources: ChromaDB-powered retrieval'
+- 'Knowledge Cards: Structured domain knowledge'
+- 'Embedder Configuration: Custom vector embedding strategies'
+- 'Chunking Strategy: TF-IDF-based text segmentation'
+memory_systems: "Unified memory with:\n- Scopes: Contextual restrictions (e.g., \"financial\")\n- Composite Scoring: Semantic\
+  \ + recency + importance\n- Persistence: LanceDB + SQLite\n\nfrom crewai import Memory\n\nanalysis_memory = Memory(\n  \
+  \  scope=\"financial\",\n    scoring_strategy=\"composite\",\n    persistence=\"lancedb\"\n)"
+tooling: "- BaseTool: Abstract class for tool creation\n- @tool: Function-based tool decorators\n- LangChain Compatibility:\
+  \ Seamless integration\n\nfrom crewai import BaseTool\n\nclass DataValidator(BaseTool):\n    @tool\n    def validate_dataset(self,\
+  \ dataset):\n        \"\"\"Check dataset quality and completeness\"\"\"\n        # Implementation details\n\n---"
+enterprise_capabilities: ''
+crewai_amp_cloud:
+- 'Pricing Tiers: $99/month (Starter) to $120,000/year (Enterprise)'
+- 'Features:'
+- Auto-scaling agent pools
+- Real-time monitoring
+- Advanced security controls
+- Custom LLM integrations
+deployment_options: "- CLI Commands:\n  crewai create -t agent -n \"Data Analyst\"\n  crewai run -c financial_analysis_crew\n\
+  \  crewai test -p \"financial\"\n  crewai deploy -e production\n\n- CI/CD Integration: N05 operations pipeline\n\n---"
+technical_architecture: ''
+comparison_with_cex: '| Dimension          | CrewAI                          | CEX                             |
+
+  |--------------------|----------------------------------|----------------------------------|
+
+  | Composition Unit | Agent (role+goal+backstory)     | Nucleus (domain+sin+builder ISOs) |
+
+  | Orchestration   | Crew (sequential/hierarchical)  | N07 + mission_runner (wave-based) |
+
+  | State Management| FlowState (Pydantic)           | Git + .cex/runtime/ (file-based) |
+
+  | Memory System   | Unified Memory (LanceDB)        | 4-type memory (correction/preference/convention/context) |
+
+  | Knowledge       | RAG (ChromaDB)                  | Knowledge Cards + retriever (TF-IDF) |
+
+  | Quality Control | crewai test (score 1-10)        | 3-layer scoring (structural+rubric+semantic) |
+
+
+  ---'
+glossary: 'A2A: Agent-to-Agent protocol for cross-service delegation BaseEvent: Base class for all CrewAI events CrewOutput:
+  Execution result (raw, pydantic, json_dict) FlowState: State object managed by Flow MemoryScope: Branch restriction for
+  memory operations RecallFlow: Multi-step deep memory retrieval @router: Flow decorator for conditional branching TaskOutput:
+  Task execution result object @tool: Decorator for function-based tool creation ---'
+sources:
+- CrewAI Documentation -- Agents
+- CrewAI Documentation -- Tasks
+- CrewAI Documentation -- Crews
+- CrewAI Documentation -- Flows
+- CrewAI Documentation -- Knowledge
+- CrewAI Documentation -- Memory
+- CrewAI Documentation -- Tools
+- CrewAI Documentation -- Events
+- CrewAI Documentation -- CLI
+- CrewAI Documentation -- Testing
+- CrewAI Documentation -- Planning
+- CrewAI Documentation -- LLM Connections
+- CrewAI GitHub Repository
+- CrewAI Pricing

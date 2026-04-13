@@ -1,0 +1,182 @@
+title: Computer Use Agent (CUA) Technical Reference
+author: AI Assistant
+date: '2025-04-05'
+description: Comprehensive technical reference for computer use agents, browser tools, and related infrastructure, including
+  definitions, distinctions, and implementation frameworks.
+1_core_concepts: ''
+1_1_computer_use_agent_cua: 'A CUA is an AI system capable of performing tasks on a computer interface (GUI, CLI, or web)
+  by interacting with the operating system, applications, and user environment. Key capabilities include:
+
+  - GUI Automation: Mouse, keyboard, and screen interaction.
+
+  - Web Navigation: Browser-based task execution.
+
+  - Vision-Based Grounding: Object and action recognition via screenshots.
+
+  - Session Management: Recording, replaying, and isolating tasks.'
+1_2_browser_tool: 'A specialized CUA focused on web page interaction via the DOM (Document Object Model). Browser tools typically:
+
+  - Use headless browsers (e.g., Playwright, Puppeteer).
+
+  - Leverage Chrome DevTools Protocol (CDP) for low-level control.
+
+  - Support DOM distillation (stripping irrelevant elements for efficiency).'
+1_3_vision_tool: 'A CUA component that analyzes screenshots for object detection, OCR, and action localization. Common techniques
+  include:
+
+  - Set-of-Mark (SoM): Overlaying semantic annotations on screenshots.
+
+  - GUI-Actor/UGround: Coordinate-free visual grounding strategies.
+
+
+  ---'
+2_key_implementation_frameworks: ''
+2_1_stagehand:
+- 'Language: TypeScript/Python.'
+- 'Features:'
+- '`act`, `extract`, `observe`, and `agent` primitives.'
+- DOM + vision integration.
+- Supports OSWorld and WebArena benchmarks.
+- 'GitHub: Stagehand.'
+2_2_browser_use:
+- 'Language: Python.'
+- 'Features:'
+- LLM + Playwright feedback loop.
+- HTML + screenshot observation.
+- High flexibility for custom workflows.
+- 'GitHub: browser-use.'
+2_3_playwright_mcp:
+- 'Language: Python.'
+- 'Features:'
+- A11y tree with element references.
+- Focus on accessibility and semantic grounding.
+- 'GitHub: Playwright MCP.'
+2_4_webvoyager: '- Approach: SoM + 3-phase (plan/act/validate) workflow.
+
+  - Use Case: Research agent for complex GUI tasks.
+
+
+  ---'
+3_infrastructure_environment: ''
+3_1_desktop_sandbox:
+- 'Purpose: Safe execution of agent tasks.'
+- 'Technologies:'
+- Docker, Firecracker, microVM.
+- 'Virtual Display: Xvfb for headless rendering.'
+3_2_session_recording:
+- 'Tools:'
+- 'CDP Screencast: Real-time video capture.'
+- 'DOM-Based Replay: Action logs for debugging.'
+- 'Use Cases: Agent training, auditing, and debugging.'
+3_3_browser_fingerprinting: "- Purpose: Avoid bot detection by mimicking human behavior.\n- Techniques:\n  - Realistic user\
+  \ agent strings.\n  - JavaScript execution patterns.\n  - CAPTCHA solving integration.\n\n---"
+4_benchmarking_evaluation: ''
+4_1_osworld:
+- 'Focus: Full desktop OS tasks (e.g., file management, application use).'
+- 'Tools: Anthropic CU, OpenAI CUA.'
+4_2_webarena:
+- 'Focus: Web-only browser tasks (e.g., e-commerce, form filling).'
+- 'Tools: Stagehand, browser-use.'
+4_3_browsergym: '- Role: Unified framework for agent evaluation.
+
+  - Includes: WebArena, WorkArena, and custom benchmarks.
+
+
+  ---'
+5_cex_kind_mapping: ''
+5_1_existing_kinds: '| CEX Kind         | Pillar | Boundary                                                                 |
+  Coverage                                      |
+
+  |------------------|--------|--------------------------------------------------------------------------|-----------------------------------------------|
+
+  | `computer_use`   | P04    | GUI automation (screen, keyboard, mouse) — NOT browser_tool, NOT cli_tool | Anthropic CU,
+  OpenAI CUA, OSWorld agents      |
+
+  | `browser_tool`   | P04    | Web page interaction via DOM — NOT computer_use, NOT search_tool         | Stagehand, browser-use,
+  Playwright MCP        |
+
+  | `vision_tool`    | P04    | Visual analysis, OCR, screenshot interpretation — NOT browser_tool       | SoM overlay, GUI
+  grounding, screenshot analysis |'
+5_2_proposed_new_kinds: '| Proposed Kind             | Pillar | Description                                                                 |
+  Boundary                                                                 | Rationale                                                                 |
+
+  |--------------------------|--------|-----------------------------------------------------------------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------|
+
+  | `gui_grounding_config`   | P04    | Configuration for visual grounding strategy (SoM, coordinate, ref-based)    | Grounding
+  strategy config. NOT vision_tool (runtime analysis)            | SoM, GUI-Actor, UGround each need different overlay/ref
+  configs.          |
+
+  | `agent_benchmark`        | P07    | Benchmark definition for evaluating agent performance (tasks, metrics)      | Benchmark
+  definition. NOT scoring_rubric (per-artifact quality)          | OSWorld, WebArena, BrowserGym need structured definitions.                |
+
+  | `session_recording`      | P10    | Session replay configuration: what to capture, storage, playback format     | Recording
+  config. NOT trace_config (LLM call traces)                     | Browserbase, AgentTrek, and debug workflows need session
+  capture specs.   |
+
+  | `sandbox_config`         | P09    | Desktop/browser sandbox environment specification (VM type, isolation)      | Environment
+  isolation config. NOT env_config (runtime variables)         | Docker containers, Firecracker microVMs need environment
+  specs.           |
+
+  | `dom_distillation_config`| P04    | DOM processing pipeline config: what to strip, what to enrich, output format | DOM
+  processing config. NOT browser_tool (page interaction)               | Agent-E, Playwright MCP, BrowserGym use different
+  DOM distillation.       |'
+5_3_kind_relationship_graph: "gui_grounding_config\n                          |\n                    [grounding strategy]\n\
+  \                          |\n        +---------+-------+-------+---------+\n        |         |               |       \
+  \  |\n  computer_use  browser_tool  vision_tool   |\n   (P04)         (P04)        (P04)        |\n     |             |\
+  \             |          |\n     |     dom_distillation_config         |\n     |          (P04)                      |\n\
+  \     |                                     |\n  sandbox_config              session_recording\n     (P09)             \
+  \          (P10)\n                                   |\n                            agent_benchmark\n                  \
+  \             (P07)\n\n---"
+6_key_distinctions: '| Pair                         | Difference                                                                 |
+
+  |------------------------------|----------------------------------------------------------------------------|
+
+  | computer_use vs. browser_tool | `computer_use` handles general GUI tasks; `browser_tool` focuses on web-based DOM interaction.
+  |
+
+  | SoM vs. GUI-Actor/UGround   | SoM uses annotations; GUI-Actor/UGround uses coordinate-free visual grounding. |
+
+  | OSWorld vs. WebArena        | OSWorld targets desktop OS tasks; WebArena focuses on web-based workflows.  |
+
+
+  ---'
+7_sources: '- Stagehand GitHub
+
+  - browser-use GitHub
+
+  - Playwright MCP GitHub
+
+  - OSWorld Benchmark
+
+  - WebArena Benchmark
+
+  - BrowserGym Framework
+
+  - Chrome DevTools Protocol Docs
+
+
+  ---'
+8_glossary: '- SoM: Set-of-Mark — Semantic annotations on screenshots for visual grounding.
+
+  - CDP: Chrome DevTools Protocol — API for browser automation.
+
+  - DOM Distillation: Process of simplifying web pages by removing irrelevant elements.
+
+  - Headless Browser: Browser without a GUI, used for automation.
+
+
+  ---'
+9_appendices: ''
+9_1_example_use_cases:
+- 'CUA: Automating data entry in a desktop application.'
+- 'Browser Tool: Scraping product data from an e-commerce site.'
+- 'Vision Tool: Identifying UI elements in a screenshot for action localization.'
+9_2_limitations: '- Vision Tool Accuracy: Dependent on image quality and object recognition models.
+
+  - Browser Tool Isolation: Requires sandboxing to prevent unintended side effects.
+
+
+  ---'
+10_conclusion: This document serves as a foundational reference for developers, researchers, and practitioners working with
+  computer use agents. By standardizing terminology, mapping implementation frameworks, and clarifying distinctions, it aims
+  to accelerate innovation in GUI automation, web navigation, and vision-based task execution.

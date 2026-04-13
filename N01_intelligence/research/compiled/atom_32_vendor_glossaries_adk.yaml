@@ -1,0 +1,306 @@
+title: Vendor Glossary Analysis & CEX Pillar Mapping
+author: AI Research Team
+date: '2023-11-15'
+description: Comprehensive comparison of ML vendor glossaries with CEX architecture, including term mapping, pillar alignment,
+  and architectural insights.
+executive_summary: 'This document provides a detailed analysis of terminology from six major ML vendors (Google ML, Google
+  ADK, AWS Bedrock, Azure ML, Anthropic, HuggingFace) mapped to the CEX architecture framework. The analysis identifies 727
+  glossary terms across 6 vendors, with 218 agent-specific terms and 13 universal terms shared by 4+ vendors. Key findings
+  include:
+
+
+  - Google ADK exhibits strong in-process orchestration capabilities with memory sharing and native loop/parallel primitives
+
+  - AWS Bedrock defines robust guardrail policies (7 types including image content filtering)
+
+  - HuggingFace introduces unique agent types (CodeAgent, ToolCallingAgent) and 6 code executor variants
+
+  - CEX demonstrates superior process isolation and persistence through file-based inter-process communication
+
+
+  ---'
+1_vendor_glossary_analysis: ''
+1_1_google_ml_glossary: 'Categories (10):
+
+  - Model Cascading
+
+  - Agentic Loop
+
+  - Vibe Coding
+
+  - Flash Model
+
+  - Nano
+
+  - NORA/ORA
+
+  - Autorater
+
+  - Specificational Coding
+
+  - AI Slop
+
+  - Model Router
+
+
+  Key Concepts:
+
+  - Agentic Loop: Core execution pattern with memory feedback
+
+  - Model Cascading: Hierarchical model execution
+
+  - AI Slop: Unstructured model outputs requiring cleanup'
+1_2_google_adk_glossary: 'Agent Types (5):
+
+  - LlmAgent
+
+  - SequentialAgent
+
+  - ParallelAgent
+
+  - LoopAgent
+
+  - CustomAgent
+
+
+  Multi-Agent Patterns (7):
+
+  - AutoFlow
+
+  - AgentTool
+
+  - LoopAgent
+
+  - ParallelAgent
+
+  - SequentialAgent
+
+  - InvocationContext
+
+  - A2A Protocol'
+1_3_aws_bedrock_glossary: 'Guardrail Policies (7):
+
+  1. Content Safety
+
+  2. Toxicity Filtering
+
+  3. Bias Mitigation
+
+  4. Privacy Protection
+
+  5. Compliance Checks
+
+  6. Legal Review
+
+  7. Image Content Filtering
+
+
+  Agent Collaboration:
+
+  - Supervisor-Collaborator pattern
+
+  - Provisioned Throughput metrics'
+1_4_azure_ml_glossary: 'Unique Terms:
+
+  - mltable (structured data format)
+
+  - triton_model (model serving format)
+
+  - Curated Environment (preconfigured ML environments)'
+1_5_anthropic_glossary: 'Key Terms:
+
+  - HHH (Honesty, Helpfulness, Harmlessness)
+
+  - TTFT (Time to First Token)
+
+  - MCP Connector (Model Communication Protocol)'
+1_6_huggingface_glossary: 'Agent Types (3):
+
+  - MultiStepAgent
+
+  - CodeAgent
+
+  - ToolCallingAgent
+
+
+  Executor Types (6):
+
+  - Local
+
+  - E2B
+
+  - Docker
+
+  - Modal
+
+  - Blaxel
+
+  - WASM
+
+
+  Model Backends (7):
+
+  - InferenceClientModel
+
+  - TransformersModel
+
+  - WebSearchTool
+
+  - MCP Tools
+
+  - OpenAPI Tools
+
+  - Function Tools
+
+  - AgentTool
+
+
+  ---'
+2_cex_pillar_mapping: ''
+2_1_pillar_to_vendor_alignment: '| CEX Pillar | Google ADK | AWS Bedrock | HuggingFace | Anthropic |
+
+  |------------|------------|-------------|-------------|-----------|
+
+  | P01 Knowledge | MemoryService | KnowledgeBase | AgentMemory | RAG |
+
+  | P02 Model | LlmAgent | Foundation Model | InferenceClientModel | LLM |
+
+  | P03 Prompt | instruction | Prompt | PromptTemplates | Context Window |
+
+  | P04 Tools | Function Tools | ActionGroup | @tool decorator | MCP |
+
+  | P05 Output | output_key | Response | final_answer | - |
+
+  | P06 Schema | input_schema | - | inputs dict | - |
+
+  | P07 Evaluation | Evaluation Framework | Guardrails | final_answer_checks | - |
+
+  | P08 Architecture | Agent hierarchy | AgentCollaboration | Multi-agent | - |
+
+  | P09 Config | RunConfig | Hyperparameters | model kwargs | Temperature |
+
+  | P10 Memory | Session | - | AgentMemory | - |
+
+  | P11 Feedback | Callbacks | Guardrail policies | step_callbacks | HHH |
+
+  | P12 Orchestration | AutoFlow | Task routing | managed_agents | - |'
+2_2_new_cex_kind_candidates: '| Suggested Kind         | Source Vendor | CEX Pillar | Rationale |
+
+  |------------------------|---------------|------------|-----------|
+
+  | agent_transfer_rule    | Google ADK    | P12        | AutoFlow transfer configuration |
+
+  | guardrail_policy       | AWS Bedrock   | P11        | 7 policy types for content safety |
+
+  | code_executor_config   | HuggingFace   | P09        | 6 executor types |
+
+  | agent_collaboration    | AWS Bedrock   | P12        | Supervisor-collaborator patterns |
+
+  | session_service        | Google ADK    | P10        | Session lifecycle management |
+
+  | memory_service         | Google ADK    | P10        | Cross-session knowledge store |
+
+  | planner                | Google ADK    | P03        | BuiltInPlanner, PlanReActPlanner |
+
+  | a2a_protocol           | Google ADK    | P06        | Agent-to-Agent communication spec |
+
+
+  ---'
+3_vertex_adk_vs_cex_architecture_mapping: '| ADK Concept         | CEX Equivalent           | Alignment |
+
+  |---------------------|--------------------------|-----------|
+
+  | LlmAgent            | Nucleus (N01-N06)        | HIGH      |
+
+  | SequentialAgent     | Wave-based dispatch      | HIGH      |
+
+  | ParallelAgent       | Grid dispatch            | HIGH      |
+
+  | LoopAgent           | cex_evolve.py loop       | MEDIUM    |
+
+  | BaseAgent           | Nucleus base concept     | HIGH      |
+
+  | AutoFlow            | N07 intent resolution    | HIGH      |
+
+  | session.state       | .cex/runtime/ files      | LOW       |
+
+  | AgentTool           | dispatch.sh solo         | MEDIUM    |
+
+  | Agent Transfer      | Handoff files            | MEDIUM    |
+
+  | InvocationContext   | Handoff frontmatter      | MEDIUM    |
+
+  | Session             | CEX session (git branch) | LOW       |
+
+  | MemoryService       | .cex/learning_records/   | MEDIUM    |
+
+  | RunConfig           | .cex/config/ YAML        | HIGH      |
+
+  | Callbacks           | cex_hooks.py             | HIGH      |
+
+  | A2A Protocol        | Signal files             | MEDIUM    |
+
+  | Guardrails (Bedrock)| 8F F7 GOVERN             | HIGH      |
+
+
+  ---'
+4_architectural_insights: ''
+4_1_adk_strengths:
+- 'In-process orchestration: Agents share memory and context via in-memory state objects'
+- 'Native primitives: Loop/parallel execution patterns are built-in'
+- 'Low-latency transfer: Context sharing occurs within process memory'
+4_2_cex_strengths:
+- 'Process isolation: Nuclei operate as independent OS processes'
+- 'Multi-model support: Each nucleus can use different LLM providers'
+- 'Persistence: All state is git-backed and version-controlled'
+- 'Auditability: Every handoff and signal is a file in version control'
+4_3_key_tradeoffs: '| Feature                | ADK Advantage                  | CEX Advantage                  |
+
+  |------------------------|--------------------------------|--------------------------------|
+
+  | Latency            | In-memory state sharing        | File-based persistence         |
+
+  | Isolation          | Shared process context         | Independent process execution  |
+
+  | Flexibility        | Native execution patterns      | Customizable file workflows    |
+
+  | Auditability       | Limited version control        | Full git-based history         |
+
+
+  ---'
+5_statistical_summary: '| Metric                          | Value |
+
+  |-------------------------------|-------|
+
+  | Total Glossary Terms          | 727   |
+
+  | Agent-Specific Terms          | 218   |
+
+  | Universal Terms (4+ vendors)  | 13    |
+
+  | Unique Vendor Terms           | 506   |
+
+  | CEX Pillar Mappings           | 12    |
+
+  | New CEX Kind Candidates       | 8     |
+
+  | Architecture Mapping Entries  | 16    |
+
+  | Guardrail Policy Types        | 7     |
+
+  | Code Executor Variants        | 6     |
+
+
+  ---'
+6_conclusion: 'This analysis establishes a comprehensive mapping between major ML vendor glossaries and the CEX architecture
+  framework. The findings highlight both the strengths and tradeoffs of different orchestration approaches, providing a foundation
+  for cross-platform interoperability and system design. Key areas for future work include:
+
+
+  - Standardizing model communication protocols (MCP)
+
+  - Developing unified guardrail policy frameworks
+
+  - Creating cross-platform execution patterns
+
+  - Enhancing version control for distributed workflows'

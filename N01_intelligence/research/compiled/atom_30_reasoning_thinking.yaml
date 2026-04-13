@@ -1,0 +1,164 @@
+title: Comprehensive Guide to Reasoning Approaches, Training Methods, and Inference-Time Compute
+author: AI Research Collective
+date: '2023-10-15'
+kind: knowledge_card
+pillar: P01
+domain: reasoning, inference-time compute, thinking models
+pipeline: 8F (F1-F8)
+density: '0.92'
+1_introduction: This document provides a structured overview of reasoning approaches, training methodologies, and inference-time
+  compute strategies critical to modern large language models (LLMs). It integrates technical concepts, model capabilities,
+  and pipeline-stage mappings to enable systematic reasoning system design and evaluation. ---
+2_core_concepts: ''
+2_1_reasoning: 'Definition: A cognitive process involving problem-solving, logical deduction, and multi-step planning. In
+  LLMs, it manifests as explicit reasoning traces (e.g., `think` blocks), structured thought processes (e.g., Tree of Thoughts),
+  or implicit knowledge application.
+
+
+  Key Properties:
+
+  - Visibility: Varies by model (e.g., `reasoning.effort` in o-series, `thinking_level` in Gemini).
+
+  - Budget Control: Governed by parameters like `budget_tokens`, `effort`, or `thinking_budget`.
+
+  - Tool Integration: Supports interleaved reasoning (ReAct), persisted reasoning items (OpenAI), or standard tool use.'
+2_2_thinking: 'Definition: The computational process of generating internal reasoning steps, often visible as `think` blocks
+  or `reasoning_trace` artifacts. Thinking is distinct from final output generation and is critical for auditability and verification.
+
+
+  Types:
+
+  - Sequential: CoT, Zero-shot CoT, Auto-CoT.
+
+  - Multi-Path: Self-Consistency, CISC.
+
+  - Structured: ToT, GoT, AoT.
+
+  - Agentic: ReAct, Reflexion, Self-Refine.
+
+
+  ---'
+3_training_approaches: ''
+3_1_reinforcement_learning_rl:
+- 'RLHF: Reinforcement Learning from Human Feedback (e.g., o1/o3).'
+- 'RLVR: Reinforcement Learning with Verifiable Rewards (math/code correctness).'
+- 'RLAIF: Reinforcement Learning from AI Feedback (Anthropic).'
+- 'Constitutional AI (CAI): Training via ethical constraints (e.g., alignment with human values).'
+3_2_policy_optimization:
+- 'PPO: Proximal Policy Optimization.'
+- 'GRPO: Group Relative Policy Optimization (DeepSeek R1).'
+- 'DPO: Direct Preference Optimization.'
+- 'KTO: Kahneman-Tversky Optimization.'
+- 'ODPO: Offset Direct Preference Optimization.'
+3_3_reward_modeling:
+- 'ORM: Outcome Reward Model (evaluates final results).'
+- 'PRM: Process Reward Model (evaluates step-by-step reasoning).'
+- 'PAV: Process Advantage Verifier (enhances PRM with advantage scoring).'
+- 'R-PRM: Enhanced PRM with domain-specific rubrics.'
+3_4_distillation:
+- 'CoT Distillation: Transfer reasoning patterns from teacher models.'
+- 'Curriculum Distillation: Gradual complexity increase in training data.'
+- 'Multi-Teacher Distillation: Aggregates knowledge from multiple models.'
+3_5_self_training: '- STaR: Self-Taught Reasoner (iterative training with generated data).
+
+  - RFT: Rejection Sampling Fine-Tuning.
+
+  - Rejection Sampling: Filters low-quality training examples.
+
+
+  ---'
+4_inference_time_compute_strategies: ''
+4_1_search_based_methods:
+- 'Tree Search: MCTS, LATS, SR-MCTS, rStar.'
+- 'Beam Search: Reasoning beam search, diverse beam search.'
+- 'Best-of-N: Parallel sampling + verifier selection.'
+- 'Lookahead: Forward simulation + PRM scoring.'
+4_2_prompting_based_methods:
+- 'Sequential: CoT, Zero-shot CoT, Auto-CoT, PoT, ThoT.'
+- 'Multi-Path: Self-Consistency, CISC, Universal Self-Consistency.'
+- 'Structured: ToT, GoT, AoT.'
+- 'Decomposition: Least-to-Most, Plan-and-Solve, Skeleton-of-Thought.'
+- 'Agentic: ReAct, Reflexion, Self-Refine, MIRROR.'
+4_3_hybrid_approaches: '- MCTS + PRM: rStar-Math, AlphaProof.
+
+  - Self-Play + Verification: Mutual improvement loops.
+
+  - Extended Thinking: Anthropic adaptive thinking, OpenAI reasoning effort.
+
+
+  ---'
+5_8f_pipeline_integration: '| 8F Stage | Reasoning Concept | Application |
+
+  |---------|------------------|-------------|
+
+  | F1 CONSTRAIN | Compute Budget Allocation | Sets `budget_tokens`, `effort`, or `thinking_budget` based on task complexity.
+  |
+
+  | F2 BECOME | Reasoning Strategy Selection | Uses `reasoning_strategy` to choose CoT, ToT, MCTS, etc. |
+
+  | F3 INJECT | Context-Grounded Reasoning | Injects KCs, examples, and prior traces as context. |
+
+  | F4 REASON | Core Reasoning Execution | Executes extended thinking (CoT, ToT) with full budget. |
+
+  | F5 CALL | Tool-Augmented Reasoning | Implements ReAct (interleaved thinking + tool calls). |
+
+  | F6 PRODUCE | Generation with Reasoning Trace | Outputs both reasoning trace (`reasoning_trace`) and final artifact. |
+
+  | F7 GOVERN | PRM / Verification Chain | Applies PRM to score steps; triggers verification if score < threshold. |
+
+  | F8 COLLABORATE | Reasoning Persistence | Stores `reasoning_trace` as artifact; feeds reward signals for training. |
+
+
+  ---'
+6_model_comparison_matrix: '| Dimension | Anthropic Claude | OpenAI o-series | DeepSeek R1 | Google Gemini |
+
+  |---------|------------------|------------------|-------------|----------------|
+
+  | Reasoning Visibility | Summarized thinking (default) | Hidden by default; summary available | Full `think` tags visible
+  | Configurable via `thinking_level` |
+
+  | Budget Control | `budget_tokens` or `effort` (adaptive) | `reasoning.effort` (6 levels) | No explicit budget (model-controlled)
+  | `thinking_budget` or `thinking_level` |
+
+  | Multi-Turn Continuity | Thinking signatures (encrypted) | Persisted reasoning items | Think tags in conversation history
+  | Thought signatures (encrypted) |
+
+  | Tool-Use Integration | Interleaved thinking between tool calls | Reasoning items around function calls | Standard (no
+  special interleaving) | Standard |
+
+  | Training Approach | Inference-time thinking (not RL-trained) | RL-trained (RLHF + RLVR) | RL-trained (GRPO) | Inference-time
+  thinking (not RL-trained) |
+
+  | Open Source | No | No | Yes (R1) | No |
+
+
+  ---'
+7_taxonomy_of_reasoning_approaches: "Reasoning Approaches\n├── Prompting-Based\n│   ├── Sequential (CoT, Zero-shot CoT)\n\
+  │   ├── Multi-Path (Self-Consistency, CISC)\n│   ├── Structured (ToT, GoT, AoT)\n│   └── Decomposition (Least-to-Most)\n\
+  ├── Search-Based\n│   ├── Tree Search (MCTS, LATS)\n│   ├── Beam Search\n│   └── Lookahead\n├── Agentic\n│   ├── ReAct\n\
+  │   ├── Reflexion\n│   └── Self-Refine\n└── Hybrid\n    ├── MCTS + PRM (rStar-Math)\n    └── Self-Play + Verification\n\n\
+  ---"
+8_glossary: '- CoT: Chain-of-Thought (explicit reasoning steps).
+
+  - ToT: Tree-of-Thoughts (structured branching reasoning).
+
+  - PRM: Process Reward Model (evaluates reasoning steps).
+
+  - ORM: Outcome Reward Model (evaluates final results).
+
+  - R-PRM: Enhanced PRM with domain-specific rubrics.
+
+  - CISC: Contrastive Self-Consistency (multi-path reasoning).
+
+  - MCTS: Monte Carlo Tree Search (search-based planning).
+
+  - ReAct: Reasoning + Acting (tool-augmented reasoning).
+
+  - rStar: Reinforcement Learning + Tree Search (math-focused).
+
+
+  ---'
+9_conclusion: This guide synthesizes the latest advancements in reasoning, training, and inference strategies for LLMs. By
+  leveraging the 8F pipeline, models can systematically integrate reasoning capabilities while ensuring alignment with ethical,
+  computational, and performance constraints. Future work should focus on cross-model benchmarking and open-source tooling
+  for reasoning verification.
