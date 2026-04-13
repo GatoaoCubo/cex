@@ -3,11 +3,12 @@ id: spec_claude_native_hardening
 kind: context_doc
 title: "Mission CLAUDE_NATIVE: Harden CEX for Claude Code Runtime"
 version: 1.0.0
-quality: null
+quality: 9.0
 created: 2026-04-08
 mission: CLAUDE_NATIVE
 waves: 3
 nuclei: [n01, n02, n03, n04, n05, n06]
+density_score: 0.93
 ---
 
 # Mission: CLAUDE_NATIVE_HARDENING
