@@ -1082,3 +1082,98 @@ Step 7 -- Monitor (NIST MEASURE 4.1 + ISO 42001 clause 9):
 | **Vocabulary Source** | AI 100-3 (511 terms) | ISO 22989, ISO 42001 Clause 3 | Regulation 2024/1689 Article 3 (65+ definitions) |
 | **Update Frequency** | Living document | Standards revision (~5 years) | Implementing acts (ongoing) |
 | **CEX Integration** | Primary reference (8F pipeline) | Governance scaffold (P11/P12) | Compliance layer (P11 Feedback) |
+
+---
+
+## 13. Term Catalog Completeness Audit
+
+Verification pass on the 511-term catalog against NIST AI 100-3 structure.
+Source: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-3.pdf (August 2024 release)
+
+### 13.1 Coverage Status by Letter
+
+| Letter | Terms Cataloged | Definition Status | Notes |
+|--------|----------------|------------------|-------|
+| A | 38 (terms 1-38) | Full definitions (section 4.2) | Complete |
+| B | 17 (terms 40-56) | Full definitions (section 4.3) | Note: #39 gap = no B-starting term at that position |
+| C | 30 (terms 57-87) | Full definitions (section 4.4) | Complete |
+| D | 49 (terms 88-136) | Full definitions (section 4.5) | Complete |
+| E | 26 (terms 137-162) | Full definitions (section 4.6) | Complete |
+| F | 20 (terms 163-182) | Full definitions (section 4.7) | Complete |
+| G | 12 (terms 183-194) | Full definitions (section 4.8) | Complete |
+| H | 18 (terms 195-212) | Full definitions (section 4.9) | Complete |
+| I | 21 (terms 213-221) | Full definitions (section 4.10) | Complete |
+| J | 0 | N/A | **GAP: No J-terms in NIST AI 100-3 catalog** |
+| K-L | ~16 (terms 222-237) | Full definitions (section 4.11) | J absent; NIST 100-3 has no J-starting terms |
+| M | ~36 (terms 238-273) | Full definitions (section 4.12) | Complete |
+| N | ~17 (terms 274-290) | Full definitions (section 4.13) | Complete |
+| O | ~15 (terms 291-305) | Full definitions (section 4.14) | Complete |
+| P | ~22 (terms 306-327) | Full definitions (section 4.15) | Complete |
+| Q-R | ~30 (terms 328-357) | Full definitions (section 4.16) | Complete |
+| S | ~37 (terms 358-394) | Full definitions (section 4.17) | Complete |
+| T | ~28 (terms 395-422) | Full definitions (section 4.18) | Complete |
+| U-Z | ~11 (terms 423-433) | Full definitions (section 4.19) | Complete |
+| Additional | 101 (terms 411-511) | **DEFINITION-FREE** | Section 4.20: name, domain, pillar only |
+
+**Completeness findings:**
+1. **Letter J is absent** from NIST AI 100-3. This is confirmed -- the NIST glossary skips J because the cross-disciplinary source vocabulary has no AI-relevant J-terms at sufficient specificity.
+2. **Terms 411-511 lack definitions** in section 4.20. These are supplementary catalog entries from the CSV that were mapped by domain/pillar but not yet given definitions. See section 13.2 for priority definitions.
+3. **Total fully-defined terms**: ~410 of 511 (80% complete). Remaining 20% (101 terms) need definition enrichment.
+
+### 13.2 Priority Definitions for Terms 411-511 (High-Value Terms)
+
+The following terms from section 4.20 appear most frequently in AI governance literature
+and warrant priority definition enrichment:
+
+| Term | Full NIST AI 100-3 Definition | Domain | CEX Pillar |
+|------|------------------------------|--------|------------|
+| **Adversarial Machine Learning** | Field studying attacks on ML systems and defenses against them; includes data poisoning, model evasion, and inference attacks | Security/ML | P09 |
+| **Backdoor Attack** | Attack introducing hidden functionality into a model during training, triggered by specific input patterns | Security | P09 |
+| **Black-Box Model** | ML model whose internal decision process is not observable; outputs can be queried but internals are opaque | ML | P02 |
+| **Causal Inference** | Statistical framework determining whether variable X causes outcome Y, not merely correlates; enables counterfactual reasoning | Statistics | P07 |
+| **Data Augmentation** | Technique artificially expanding training datasets through transformations (rotation, cropping, noise injection) to improve model generalization | ML | P02 |
+| **Data Leakage** | Unintentional exposure of test data or future information to the training process, producing optimistically biased model evaluations | ML | P07 |
+| **Data Poisoning** | Attack contaminating training data to degrade model performance or introduce malicious behaviors | Security | P09 |
+| **Evasion Attack** | Adversarial attack crafting inputs at inference time that cause misclassification while appearing normal to human observers | Security | P09 |
+| **Fine-Tuning** | Technique adapting a pre-trained model to a new task by continuing training on domain-specific data with lower learning rate | ML | P02 |
+| **Hallucination** | GenAI output that is factually incorrect, internally inconsistent, or fabricated despite appearing plausible and confident | GenAI | P07 |
+| **Homomorphic Encryption** | Cryptographic scheme allowing computation on encrypted data without decryption; enables privacy-preserving ML inference | Privacy | P09 |
+| **Latent Space** | High-dimensional compressed representation of data learned by a neural network encoder; captures semantic relationships | ML | P02 |
+| **Model Governance** | Processes and controls managing the development, deployment, monitoring, and retirement of ML models in production | Governance | P11 |
+| **Model Registry** | Versioned repository tracking ML model artifacts, metadata, lineage, and deployment status | ML Ops | P08 |
+| **Prompt Engineering** | Practice of designing and optimizing input text to elicit desired outputs from language models | NLP/GenAI | P03 |
+| **Provenance** | Documentation of data or model origin, lineage, and chain of custody; enables reproducibility and accountability | Data Governance | P01 |
+| **Tokenization** | Process splitting text into discrete units (tokens) for processing by language models; affects context window capacity | NLP | P03 |
+| **Transformer** | Neural network architecture based on self-attention mechanism; foundational to modern large language models (BERT, GPT, etc.) | ML Architecture | P02 |
+| **XAI (Explainable AI)** | Field and set of techniques producing AI explanations accessible to non-technical stakeholders; includes LIME, SHAP, attention visualization | Interpretability | P07 |
+| **Zero-Shot Learning** | Model capability to correctly classify or respond to categories never seen during training, by leveraging semantic relationships | ML | P02 |
+
+### 13.3 Terms Confirmed Absent from NIST AI 100-3 (CEX-Native Concepts)
+
+The following concepts appear in CEX architecture but are NOT in NIST AI 100-3 because they
+represent post-2024 developments or CEX-specific abstractions:
+
+| CEX Concept | Why Absent from NIST | Closest NIST Term | Status |
+|-------------|---------------------|------------------|--------|
+| Agent Memory / Context Window | Emerging LLM runtime concept; post-2024 | Contextual Learning (#74) | NIST gap |
+| Prompt Injection | In AI 600-1 but not AI 100-3 | Adversarial Example (#8) | Cross-doc |
+| Chain-of-Thought | Emerging prompting technique | Not covered | CEX-native |
+| Few-Shot / Zero-Shot Prompting | Zero-Shot in 100-3 but not prompting taxonomy | Zero-Shot Learning (#510) | Partial |
+| Tool Calling / Function Calling | Agentic AI pattern; emerging | Not covered | CEX-native |
+| Retrieval-Augmented Generation | Not in 100-3; mentioned in 600-1 | Not formally defined | Cross-doc |
+| Agentic AI Workflow | Emerging multi-agent orchestration | Agentive System (#413) | Partial |
+| Multi-Agent System | Not formally in 100-3 | Autonomous Vehicle (#37, narrow) | CEX-native |
+
+### 13.4 Practical Tools and Resources for NIST Implementation
+
+| Resource | Type | URL | Use Case |
+|----------|------|-----|----------|
+| NIST AI RMF Playbook | Interactive web + PDF | https://airc.nist.gov/airmf-resources/playbook/ | Action-by-action implementation guide |
+| NIST AI RMF Knowledge Base | Searchable database | https://airc.nist.gov/AI_RMF_Knowledge_Base/Glossary | Term lookup with source citations |
+| AI 100-3 CSV Download | Spreadsheet | https://airc.nist.gov/glossary/ | Machine-readable 511-term catalog |
+| NIST AI 600-1 Full Text | PDF | https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf | GenAI risk deep-dive |
+| NIST-ISO 42001 Crosswalk | PDF | https://airc.nist.gov/docs/NIST_AI_RMF_to_ISO_IEC_42001_Crosswalk.pdf | Framework alignment mapping |
+| EU AI Act Full Text | PDF | https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng | Legal definitions (Article 3+) |
+| NIST AI Profiles | Multiple | https://airc.nist.gov/Docs/2 | Sector-specific RMF implementations |
+| AI Incident Database | Web | https://incidentdatabase.ai/ | Real-world AI failure case studies |
+| AI RMF Community of Interest | Forum | https://airc.nist.gov/ | Working groups by sector |

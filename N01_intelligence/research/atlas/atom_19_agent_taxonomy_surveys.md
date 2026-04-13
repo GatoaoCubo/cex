@@ -643,9 +643,395 @@ Agentic AI System
 
 ---
 
+## 8. Action Paradigm Deep Dive -- Implementations and Comparisons
+
+The 5 action paradigms in Arunkumar 2026 represent a progression from structured API calls to full embodied physical control. Each paradigm has distinct tooling, benchmarks, and failure modes.
+
+### 8.1 Paradigm 1: API-Based Actions
+
+**Definition**: Agent invokes external tools via structured interfaces defined by schemas. The LLM generates function-call JSON; a dispatcher routes to the correct API.
+
+| Dimension | Detail |
+|-----------|--------|
+| **Representative papers** | Toolformer (arXiv:2302.04761), Gorilla (arXiv:2305.15334), ToolBench (arXiv:2307.16789) |
+| **How Toolformer works** | Self-supervised: model inserts API calls into its own training text, keeps them only if they reduce perplexity -- zero human annotation |
+| **How Gorilla works** | Fine-tuned LLaMA on API documentation pairs; retrieval-aware training reduces hallucinated API names |
+| **Action space** | Discrete: finite set of function signatures with typed parameters |
+| **Orchestration layer** | MCP (Model Context Protocol), LangChain tool registry, OpenAI function-calling |
+| **Key failure mode** | Hallucinated API names or parameter types not in schema (Gorilla cuts this ~70%) |
+| **Benchmark** | ToolBench: 16,000 real-world APIs across 49 categories; measures solvable rate and win rate vs. ChatGPT |
+| **CEX mapping** | P04 Tools: api_client, cli_tool, mcp_server kinds |
+
+### 8.2 Paradigm 2: Code-as-Action
+
+**Definition**: Agent generates executable code (Python, JavaScript, shell) as the action primitive. Code runs in a sandboxed interpreter; stdout/stderr return as observation.
+
+| Dimension | Detail |
+|-----------|--------|
+| **Representative papers** | CodeAct (arXiv:2402.01030), Voyager (arXiv:2305.16291), LATM (arXiv:2305.17126) |
+| **How CodeAct works** | Unified action space: ALL agent actions expressed as Python. State persists across turns via Python interpreter session. Superior to JSON actions on AlfWorld (+20%), WebArena (+4%) |
+| **How Voyager works** | Lifelong learning in Minecraft: LLM writes JavaScript skills, stores in skill library, retrieves them for new tasks. Acquires 3.3x more unique items than AutoGPT |
+| **How LATM works** | Language models as Tool Makers: powerful LLM writes tools once; weaker cached LLM calls them repeatedly. Reduces cost by 10-100x |
+| **Action space** | Continuous (arbitrary code), but sandboxed |
+| **Execution environment** | Python REPL (CodeAct), Minecraft API (Voyager), Docker container (OpenHands) |
+| **Key failure mode** | Infinite loops, unconstrained resource usage if sandbox not enforced |
+| **Benchmark** | M3ToolEval, InterCode; Voyager uses unique item acquisition and tech-tree distance |
+| **CEX mapping** | P04 Tools: code_executor kind; boot scripts in boot/n0X.ps1 use code-as-action pattern |
+
+**Comparison vs. API-based**:
+
+| Property | API-based | Code-as-Action |
+|----------|-----------|----------------|
+| Action space | Finite, schema-defined | Infinite, any valid code |
+| Composability | Limited to defined APIs | Arbitrary (loops, conditions, recursion) |
+| Debuggability | Call-by-call tracing | Full interpreter traceback |
+| Safety surface | API allowlist | Sandbox boundary (broader, harder to enforce) |
+| Skill reuse | Via tool registry | Via skill library (Voyager pattern) |
+
+### 8.3 Paradigm 3: Agent Computer Interface (ACI)
+
+**Definition**: Agent operates shell, terminal, IDE, and developer tools directly. Actions are bash commands, file edits, test runs -- the same workflow a human developer uses.
+
+| Dimension | Detail |
+|-----------|--------|
+| **Representative papers** | SWE-agent (arXiv:2405.15793), Claude Code (Anthropic, 2025), Devin (Cognition, 2024) |
+| **How SWE-agent works** | Custom ACI with 5 commands: open, scroll, search_file, edit, submit. Linter feedback on every edit. Trajectory recorded as YAML for replay/analysis |
+| **SWE-agent ACI commands** | open {file}, scroll_down, search_file {pattern}, edit {line_range} {content}, python {file}, submit |
+| **How Claude Code works** | 6 primitive tools: Read, Write, Edit, Bash, Glob, Grep. Agent spawns sub-agents for parallelism. CLAUDE.md as persistent memory |
+| **Action space** | Shell + file system + process management |
+| **State representation** | File tree, current file view, bash history, test output |
+| **Key failure mode** | Missing edit context (edit without read), infinite retry loops on failing tests |
+| **Benchmark** | SWE-bench (2294 GitHub issues): resolved %, pass@1. SWE-bench Verified (500 human-verified). SWE-bench Pro (harder, fewer free solves) |
+| **2026 SOTA** | Claude 3.7 Sonnet: 70.3% on SWE-bench Verified (Feb 2026) |
+| **CEX mapping** | atom_28 cross-ref: SWE-agent IS the ACI paradigm; Claude Code IS the CEX execution environment |
+
+**ACI vs. API comparison**:
+
+| Property | API-based | ACI |
+|----------|-----------|-----|
+| Target | External services | Local developer environment |
+| State | Stateless calls | Stateful (filesystem, processes) |
+| Tooling | Schema-defined | Arbitrary shell commands |
+| Audience | Product agents | Software engineering agents |
+| Primary benchmark | ToolBench | SWE-bench |
+
+### 8.4 Paradigm 4: Computer Use Actions
+
+**Definition**: Agent controls GUI applications via screenshots, mouse coordinates, keyboard input. Operates at the pixel level; no special API access required.
+
+| Dimension | Detail |
+|-----------|--------|
+| **Representative systems** | Claude Computer Use (Anthropic, Oct 2024), OpenAI Operator (Jan 2025), SeeAct (OSU, 2024) |
+| **How Claude Computer Use works** | Captures desktop screenshot -> VLM reasons about next action -> outputs mouse_move / click / type / key / screenshot. Action loop continues until goal met or max steps |
+| **How SeeAct works** | Screen-annotated HTML + screenshot -> LLM generates SeeAct interleaved grounding -> maps semantic description to screen element |
+| **Action primitives** | mouse_move(x,y), click(button), type(text), key(combo), screenshot(), scroll(direction, amount) |
+| **Action space** | Continuous 2D coordinates + discrete key events |
+| **Key challenges** | Coordinate drift across screen resolutions, CAPTCHA bypass attempts, security (arbitrary app control) |
+| **Benchmark** | OSWorld (369 tasks, real Ubuntu desktop), WindowsAgentArena (154 tasks, Windows 11), ScreenSpot (element grounding) |
+| **2026 state** | Claude Computer Use on OSWorld: ~38.1% (best published as of Apr 2026). Human baseline: ~72.4% |
+| **CEX mapping** | P04 Tools: browser_tool kind; N05 can invoke via cex_computer_use_builder |
+
+**Computer Use vs. ACI comparison**:
+
+| Property | ACI | Computer Use |
+|----------|-----|--------------|
+| Access method | Shell API | Screenshot + mouse/keyboard |
+| Requires app cooperation | Yes (must have CLI) | No (any GUI app) |
+| State visibility | Structured (file tree, stdout) | Unstructured (pixels) |
+| Error recovery | Traceback | Visual only |
+| Security model | File system permissions | Full desktop control |
+| Primary use case | Dev tools, codebases | Web apps, desktop GUIs |
+
+### 8.5 Paradigm 5: Embodied VLA (Vision-Language-Action)
+
+**Definition**: Agent produces continuous motor control signals (torque, velocity, gripper position) conditioned on visual observations and language instructions. Bridges digital intelligence with physical robotics.
+
+| Dimension | Detail |
+|-----------|--------|
+| **Representative papers** | RT-2 (arXiv:2307.15818), Gemini Robotics (DeepMind, Jan 2026), pi0 (Physical Intelligence, 2024) |
+| **How RT-2 works** | Fine-tuned PaLM-E on web data + robot demonstrations. Tokenizes robot actions as text tokens (discretized motor values). Enables zero-shot generalization to unseen objects |
+| **How Gemini Robotics works** | Gemini 2.0 + action expert head. Two variants: Gemini Robotics (dexterous manipulation) + Gemini Robotics-ER (extended reach, spatial reasoning). Cross-embodiment transfer |
+| **Action space** | Continuous: 7-DOF arm deltas, gripper open/close, mobile base velocity |
+| **Key challenges** | Embodiment gap (simulation-to-real), latency (<100ms for manipulation), data scarcity for edge cases |
+| **Benchmark** | RT-2 eval (success rate on novel instruction-object pairs), LIBERO (96 tasks, manipulation), DROID (robot deployment diversity) |
+| **Cross-embodiment** | Gemini Robotics transfers policies across Aloha2, KUKA iiwa, UR5 with single model |
+| **CEX mapping** | No direct CEX kind yet; closest: vision_tool + code_executor composite |
+
+**5-Paradigm Summary Comparison**:
+
+| Paradigm | Action Type | State | Benchmark | 2026 SOTA |
+|----------|-------------|-------|-----------|-----------|
+| API-based | JSON function call | Stateless | ToolBench solvable-rate | Gorilla-7B: 70.3% |
+| Code-as-Action | Executable code | Interpreter session | M3ToolEval, InterCode | CodeAct: 74.4% AlfWorld |
+| ACI (shell/IDE) | Bash + file ops | Filesystem | SWE-bench Verified | Claude 3.7: 70.3% |
+| Computer Use | Mouse/keyboard | Screen pixels | OSWorld | Claude: 38.1% |
+| Embodied VLA | Motor primitives | Physical world | LIBERO, DROID | Gemini Robotics: SOTA |
+
+---
+
+## 9. POMDP Formalization -- Control Loop Analysis
+
+Arunkumar 2026 provides the first published POMDP-based formal model for agentic AI. This section expands the formalization with control loop mechanics and per-component analysis.
+
+### 9.1 Formal Model: A = <S, O, M, T, pi>
+
+| Symbol | Name | Type | Description |
+|--------|------|------|-------------|
+| **S** | State space | Set | All possible world configurations + agent internal states |
+| **O** | Observation function | Partial mapping S -> Z | Agent observes Z (partial view of S) via sensors/encoders |
+| **M** | Memory | Updatable store | M_t = f(M_{t-1}, o_t, r_t) -- updated each step by observation + feedback |
+| **T** | Thought/plan | Probabilistic inference | T_t ~ p(T | M_t, o_t) -- LLM infers plan from memory + current observation |
+| **pi** | Policy | Action selector | a_t = pi(T_t, M_t) -- selects action conditioned on reasoning trace |
+
+**Partial observability** is the key distinction from classic MDP: the agent never sees S directly. It only receives o_t (screenshot, stdout, API response) and must maintain M to compensate for the missing state.
+
+### 9.2 The Agentic Control Loop (One Full Iteration)
+
+```
+t=0: Initialize M_0 (system prompt, task description, few-shot examples)
+     |
+     v
+PERCEIVE:   o_t = Encoder(s_t)      -- multimodal encoders process environment
+     |
+     v
+REMEMBER:   M_t = Update(M_{t-1}, o_t, r_{t-1})  -- store observation + last reward
+     |
+     v
+PLAN:       T_t ~ LLM(M_t, o_t)    -- generate chain-of-thought + action plan
+     |
+     v
+ACT:        a_t = pi(T_t, M_t)     -- select and execute action
+     |
+     v
+OBSERVE:    r_t, o_{t+1} = Env(a_t) -- environment responds with reward + new obs
+     |
+     +---> back to PERCEIVE (t = t+1)
+     |
+     v (terminal condition)
+TERMINATE: task_success | max_steps_exceeded | agent_abort
+```
+
+### 9.3 Memory Update Function Analysis
+
+The memory update M_t = f(M_{t-1}, o_t, r_t) varies dramatically by memory architecture:
+
+| Architecture | Update Function | Retention Policy | System |
+|-------------|-----------------|------------------|--------|
+| **Stream** | Append o_t to context | Truncate oldest | GPT-4 default |
+| **Reflection** | Periodic: summarize last N -> high-level insight | Keep summary, discard raw | Generative Agents |
+| **Exponential decay** | Score(m) = score(m) * e^(-lambda * delta_t) | Prune if score < threshold | MemoryBank |
+| **Paging** | Virtualize: active page in context, rest on disk | Controller-driven eviction | MemGPT |
+| **Semantic compression** | Cluster semantically similar -> centroid | Keep cluster label + examples | MemInsight |
+| **Learned pruning** | RL policy decides what to keep/discard | Policy-guided retention | MemAgent |
+
+### 9.4 Planning as Probabilistic Inference
+
+The thought distribution T_t ~ p(T | M_t, o_t) is shaped by the planning algorithm:
+
+| Algorithm | Search topology | Inference style | Latency | Backtracking |
+|-----------|----------------|-----------------|---------|--------------|
+| **Chain-of-Thought** | Linear | Single-pass | Low | None |
+| **ReAct** | Linear loop | Interleaved thought-action | Medium | None (retry only) |
+| **Reflexion** | Cyclical | NL critique stored in M | Medium | Via memory |
+| **Tree of Thoughts** | Tree | External branching + BFS/DFS | High | Yes |
+| **LATS (MCTS)** | Graph/tree | Value function + simulation | Very High | Yes + pruning |
+| **Reasoning Models (o1/o3)** | Implicit tree | Internalized inference-time search | High (hidden) | Yes (internal) |
+| **ReAcTree** | Hierarchical | Recursive sub-agent spawning | Very High | Per sub-agent |
+
+**POMDP perspective**: more sophisticated search algorithms explore more of the belief space but at quadratic cost. Reasoning models (o1/o3) internalize this search, hiding the topology from external observation.
+
+---
+
+## 10. CLASSic Framework -- Dimensional Depth
+
+Arunkumar 2026's CLASSic evaluation framework is the first structured multi-dimensional evaluation for agentic systems. This section expands each dimension with metrics and failure taxonomy.
+
+### 10.1 Cost (C)
+
+**What it measures**: Economic efficiency of agent task completion.
+
+| Metric | Formula | Typical range |
+|--------|---------|---------------|
+| Token-per-task | Total tokens / tasks completed | 1K-100K tokens/task |
+| Hierarchical overhead | Multi-agent total tokens / single-agent tokens | 1.5-10x overhead |
+| Cost-per-solved-issue | $/issue (SWE-bench) | $0.50-$15/issue |
+| Skill reuse ratio | Tasks solved via cached skills / total tasks | 0% (no reuse) to 80%+ (Voyager) |
+
+**Cost reduction strategies**: skill libraries (Voyager), LATM (write once, call many), prompt caching, smaller editor models (Cursor Apply at 7B), speculative decoding.
+
+### 10.2 Latency (L)
+
+**What it measures**: Wall-clock time from task receipt to completion, including real-world operational constraints.
+
+| Metric | Description | Acceptable range |
+|--------|-------------|-----------------|
+| End-to-end task latency | Clock time for full task | <60s (UI tasks), <10min (code tasks) |
+| Agent-loop latency | Time per perceive-plan-act cycle | <5s per step |
+| Tool call overhead | Latency added per external API call | <500ms per call |
+| Async parallelism gain | Speedup from parallel sub-agents | 2-6x for grid dispatch |
+
+**Latency benchmarks**: tau-bench uses time pressure scenarios to test real-world constraint handling. OSWorld measures steps-to-completion, not just success.
+
+**System 2 -> System 1 distillation**: Arunkumar 2026 identifies this as the key latency optimization: expensive reasoning model solutions (System 2) distilled into fast, specialized models (System 1). Example: Cursor Apply model (7B, trained on LLM edits) achieves 98% accuracy at 10.5K tok/s.
+
+### 10.3 Accuracy (A)
+
+**What it measures**: Task success rate across multi-step, tool-using, long-horizon scenarios.
+
+| Dimension | Metric | Baseline (human) |
+|-----------|--------|-----------------|
+| Multi-step tool use | Correct tool sequence / total sequences | ~90% human |
+| State tracking | World state correctly maintained at step T | Degrades with horizon |
+| Long-horizon recovery | Recover from failure mid-task | Human: ~85%, Agents: 30-50% |
+| Instruction following | Task completion per exact instruction | Varies by domain |
+
+**Key accuracy benchmarks by domain**:
+
+| Domain | Benchmark | 2026 Best Agent | Human |
+|--------|-----------|-----------------|-------|
+| Software engineering | SWE-bench Verified | 70.3% (Claude 3.7) | ~100% |
+| Desktop control | OSWorld | 38.1% (Claude) | 72.4% |
+| Multi-step tool use | tau-bench | ~60-70% | ~85% |
+| Mathematical reasoning | FrontierMath | ~25% (o3) | Expert-level |
+| API chaining | ToolBench | ~60% (ToolLLaMA) | ~90% |
+
+### 10.4 Security (S)
+
+**What it measures**: Resistance to adversarial manipulation and degree of access control.
+
+| Threat | Description | Mitigation |
+|--------|-------------|-----------|
+| **Prompt injection** | Malicious instructions in external content hijack agent | Input sanitization, compartmentalization |
+| **Indirect injection** | Injections in retrieved documents or web pages | Content provenance tracking, scratchpad isolation |
+| **Tool misuse** | Agent invoked outside intended scope | Allowlists, tool permissions per task |
+| **Data exfiltration** | Agent leaks sensitive context to external APIs | Outbound filtering, audit logging |
+| **Privilege escalation** | Agent requests elevated permissions beyond task scope | Least-privilege sandboxing, human-in-loop for risky ops |
+| **Supply chain** | Compromised tools/APIs affect agent behavior | Tool provenance + signature verification |
+
+**Security evaluation maturity**: As of 2026, only a handful of benchmarks address agent security systematically (AgentHarm, PrivacyLens). Most benchmarks measure accuracy only.
+
+**CEX application**: N07 dispatch uses session-isolated PIDs; stop command is session-aware to prevent cross-session interference.
+
+### 10.5 Stability (St)
+
+**What it measures**: Consistency and predictability of agent behavior across runs, environments, and edge cases.
+
+| Metric | Description | Target |
+|--------|-------------|--------|
+| Run variance | Std dev of success rate across 5 runs | <5% for production |
+| Failure mode distribution | Categorized failure types and frequencies | No single mode >30% |
+| Compliance rate | Tasks completed within policy constraints | >95% |
+| Infinite loop rate | % of runs entering retry loop with no progress | <2% |
+| Graceful degradation | Fails safely when max steps exceeded | 100% |
+
+**Stability failure taxonomy** (from OSWorld + SWE-bench analysis):
+1. Hallucinated state -- agent believes task is done when it isn't
+2. Stuck retry -- same failed action repeated without plan revision
+3. Context overflow -- loses track of task after long trajectory
+4. Tool chaining error -- correct individual calls, wrong sequence
+5. Ambiguity paralysis -- refuses to act on underspecified instructions
+
+**Cross-run consistency**: Reasoning models (o1/o3) show lower variance than standard CoT because their internal search is more exhaustive. Trade-off: higher latency.
+
+---
+
+## 11. Cross-Reference: Agent Taxonomy vs. Code Agents (atom_28)
+
+The 5 action paradigms from Arunkumar 2026 map precisely onto the platforms documented in atom_28 (Code Agent Vocabulary Atlas). This section provides the explicit mapping.
+
+### 11.1 Platform-to-Paradigm Mapping
+
+| Platform (atom_28) | Paradigm | Action mechanism | Benchmark |
+|-------------------|----------|-----------------|-----------|
+| Claude Code | ACI | Read, Write, Edit, Bash, Glob, Grep tools | SWE-bench Verified |
+| Codex CLI | ACI + Code-as-Action | Bash + patch format | Internal |
+| Aider | ACI | Diff formats + bash commands | SWE-bench |
+| Cursor | ACI + Computer Use | IDE API + Apply model | Internal |
+| Devin | ACI + Computer Use | Full desktop env + browser | SWE-bench |
+| SWE-Agent | ACI | Custom ACI (open, scroll, edit, submit) | SWE-bench (origin) |
+| OpenHands (CodeAct) | Code-as-Action | Python interpreter as unified action space | AlfWorld, WebArena |
+| Augment Code | ACI | Semantic dependency graph + edits | Internal |
+| Gemini Robotics | Embodied VLA | Motor primitives + vision | LIBERO, DROID |
+
+### 11.2 Edit Formats as Action Paradigm Variants
+
+The edit format taxonomy in atom_28 is a specialization of the Code-as-Action / ACI paradigms for software engineering:
+
+| Edit Format (atom_28) | Paradigm | Action type | Failure mode |
+|----------------------|----------|-------------|--------------|
+| Whole file | Code-as-Action | Return entire file as action | Expensive; lazy elision |
+| Search/replace blocks | ACI | Surgical patch as action | Pattern match drift |
+| Unified diff (udiff) | ACI | Standard diff as action | LLM format compliance |
+| Tool-based edits | ACI | Structured function call (Read+Edit) | Requires tool infra |
+| Sketch + Apply model | ACI + Code-as-Action | Two-phase: plan then apply | Two-model latency |
+
+### 11.3 ACI Vocabulary Alignment
+
+Terms that appear in both atom_19 (taxonomy) and atom_28 (code agents) with identical meaning:
+
+| Term | atom_19 source | atom_28 mapping |
+|------|---------------|-----------------|
+| Agent Computer Interface (ACI) | Arunkumar 2026 | SWE-agent architecture section |
+| Code-as-Action | Arunkumar 2026 | OpenHands/CodeAct platform entry |
+| Skill Accumulation | Arunkumar 2026 | Voyager skill library entry |
+| Continual Learning | Xi 2023 | Voyager/Minecraft lifelong learning |
+| Workflow Graph | Arunkumar 2026 | LangGraph pattern in atom_28 |
+| Architect mode | (not in atom_19) | Aider two-phase pattern (maps to N07/N03 split in CEX) |
+
+---
+
+## 12. Emerging 2026 Research -- Jan-Apr Updates
+
+New papers and systems published Jan-Apr 2026 that extend or challenge the Arunkumar taxonomy.
+
+### 12.1 New Survey Papers and Systems (2026)
+
+| Paper / System | Date | Key contribution | Extends which paradigm |
+|----------------|------|-----------------|----------------------|
+| **Gemini Robotics** (DeepMind) | Jan 2026 | Cross-embodiment VLA, dexterous manipulation SOTA | Embodied VLA |
+| **OpenAI Operator** | Jan 2026 | Computer Use paradigm enters production; API for app control | Computer Use |
+| **Agent-FLAN** (Alibaba) | Feb 2026 | Fine-tuning recipe for instruction-following agents; +10% on AgentBench | Weight updates learning paradigm |
+| **Claude 3.7 Sonnet** | Feb 2026 | 70.3% SWE-bench Verified; extended thinking mode maps to Reflexion | ACI SOTA |
+| **TradingAgents** | Feb 2026 | Market simulation via adversarial multi-agent; emergent economic behavior | Mesh topology collaboration |
+| **A2A Protocol** (Google) | Mar 2026 | Standardizes inter-agent communication; complements MCP for tools | Multi-agent collaboration |
+| **MCP 2.0** (Anthropic/community) | Q1 2026 | OAuth scoping + audit; strengthens CLASSic Security dimension | API-based security |
+| **AgentRM** | Mar 2026 | Process reward model for agents; prefer intermediate step quality over final outcome | Skill accumulation + CLASSic |
+| **Gemini 2.5 Pro** (Google) | Apr 2026 | 1M context; changes memory strategy (less paging needed) | Memory architecture |
+| **SWE-bench Pro** | Apr 2026 | Harder variant: private test cases, anti-gaming measures | ACI benchmark evolution |
+| **MARBLE** | 2026 | Unified multi-env benchmark: 12 environments, emergent behavior metrics | CLASSic Accuracy dimension |
+
+### 12.2 Taxonomy Gaps Identified
+
+Based on Jan-Apr 2026 research, three areas are inadequately covered by the three foundational surveys:
+
+1. **Agent-to-Agent communication protocols**: Wang/Xi/Arunkumar treat multi-agent interaction as high-level topologies. A2A and MCP 2.0 show the need for a sub-taxonomy of inter-agent message formats, trust models, and capability negotiation. **Gap**: no taxonomy of agent-to-agent trust surface analogous to the CLASSic Security dimension.
+
+2. **Process Reward Models (PRMs) for agents**: All three surveys treat evaluation as outcome-based. AgentRM (2026) shows process-level reward modeling changes both training and inference-time search in ways the POMDP model does not capture. The POMDP reward r_t is assumed scalar; PRMs introduce dense, step-level reward shaping.
+
+3. **Hybrid digital-physical agents**: Embodied VLA and Computer Use are categorized separately in Arunkumar 2026, but Gemini Robotics and Devin show that agents increasingly cross both boundaries within a single task (web research -> robot assembly). No current taxonomy covers this hybrid action space.
+
+### 12.3 Convergence Since 2023
+
+| Taxonomy dimension | 2023 state | 2026 state (new convergence) |
+|-------------------|-----------|------------------------------|
+| Tool protocol | Proprietary per-system APIs | MCP as emerging standard (all major vendors) |
+| Multi-agent communication | Ad hoc (AutoGen, CAMEL each invent own) | A2A protocol proposed as standard |
+| Edit format | 6+ competing formats (Aider, Codex, etc.) | Tool-based edits (Claude Code model) gaining adoption |
+| Evaluation | Benchmark zoo | CLASSic + SWE-bench Verified as near-universal references |
+| Memory | Flat or simple reflection | 6-architecture taxonomy (stream, reflection, decay, paging, compression, learned) |
+
+---
+
 ## Sources
 
 - [Wang et al. 2023 - A Survey on LLM-based Autonomous Agents](https://arxiv.org/abs/2308.11432)
 - [Xi et al. 2023 - The Rise and Potential of LLM-Based Agents](https://arxiv.org/abs/2309.07864)
 - [Arunkumar et al. 2026 - Agentic AI: Architectures, Taxonomies, and Evaluation](https://arxiv.org/abs/2601.12560)
+- [Schick et al. 2023 - Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761)
+- [Patil et al. 2023 - Gorilla: Large Language Model Connected with Massive APIs](https://arxiv.org/abs/2305.15334)
+- [Wang et al. 2024 - CodeAct: Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030)
+- [Wang et al. 2023 - Voyager: An Open-Ended Embodied Agent with LLMs](https://arxiv.org/abs/2305.16291)
+- [Yang et al. 2024 - SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering](https://arxiv.org/abs/2405.15793)
+- [Brohan et al. 2023 - RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control](https://arxiv.org/abs/2307.15818)
 - [LLM-Agent-Paper-List (GitHub)](https://github.com/WooooDyy/LLM-Agent-Paper-List)
+- [CEX atom_28 - Code Agent Vocabulary Atlas](N01_intelligence/research/atlas/atom_28_code_agents.md)

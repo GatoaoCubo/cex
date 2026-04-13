@@ -155,6 +155,25 @@ patch the parser to handle ID 9207 as literal `}`.
 - `<|im_start|>tool` -- tool response injection (`<tool_response>`)
 - Token ID 151668 -- closing `</think>` tag; parser uses this to split reasoning from output
 
+#### 1.4.2 Qwen3 Context Management: Rolling Checkpoint and No Default System Prompt
+
+**No default system prompt**: Qwen3 ships WITHOUT a built-in system prompt (unlike Qwen2.5
+which included "You are a helpful assistant" by default). Operators MUST inject the system
+message explicitly or tool schemas will not be present in context.
+Source: lawwu.github.io/til/posts/2025-05-02-qwen3-chat-prompt-template/
+
+**Rolling checkpoint algorithm** (chat template, Hugging Face blog on Qwen3 template):
+1. Traverse messages in REVERSE order
+2. Find the latest non-tool-call user turn (the "checkpoint")
+3. All messages BEFORE the checkpoint: `<think>` blocks compressed or removed to save tokens
+4. All messages AT/AFTER the checkpoint: full `<think>` blocks preserved
+5. Effect: prevents unbounded reasoning-token growth in long conversations
+
+**Implication**: In a 10-turn conversation, only the current active reasoning block is fully
+preserved. Prior `reasoning_content` from earlier turns is pruned from context. CEX sessions
+relying on Qwen3 should not depend on recovering full CoT from previous turns -- only
+`content` fields are reliable across turn boundaries.
+
 ### 1.5 reasoning_content Field
 
 For reasoning models (QwQ, QvQ, Qwen3), messages carry an optional `reasoning_content` field separate from `content`.
