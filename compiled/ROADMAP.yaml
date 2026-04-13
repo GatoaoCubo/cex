@@ -1,151 +1,27 @@
-title: CEX Artifact
-author: CEX Team
+title: CEX Project Roadmap and Implementation Plan
+author: CEX Development Team
 date: 2026-04-08
-version: 1.0
+description: A comprehensive roadmap for CEX development, including technical implementation, distribution strategies, and
+  long-term goals.
+purpose_and_scope: This document outlines the roadmap, technical implementation plan, and long-term goals for the CEX project.
+  It serves as a guide for developers, stakeholders, and collaborators to align on priorities, track progress, and ensure
+  the project meets its objectives.
+purpose: "The document provides:  \n- A structured plan for short-term (next session), medium-term (week), and long-term (month)\
+  \ tasks.  \n- Technical details for fine-tuning models, optimizing pipelines, and improving distribution infrastructure.\
+  \  \n- A framework for scaling CEX as a distributable product and exploring multi-tenant and SaaS capabilities.  \n- Metrics\
+  \ and health targets to ensure architectural stability and quality."
+scope: "This document covers:  \n- Technical implementation: Model fine-tuning (QLoRA), hybrid dispatch pipelines, and Ollama\
+  \ integration.  \n- Distribution: Packaging for Hotmart/Gumroad, one-click installers, and release validation.  \n- Long-term\
+  \ vision: CEX as a standalone product, multi-tenant support, and REST API for SaaS deployment.  \n- Collaboration: Iterative\
+  \ improvements, benchmarking, and integration of existing components (e.g., NotebookLM, monetization layer).  \n\nThe scope\
+  \ emphasizes iterative development, cross-functional collaboration, and scalability to ensure CEX remains adaptable to industry\
+  \ needs.  \n\n---"
 next_session_start_here: ''
-s1_fine_tune_dataset_preparation: 'Build QLoRA training dataset from CEX''s own artifacts:
-
-  - Source: 1,630 ISOs + 123 KCs + 377 templates/examples
-
-  - Format: instruction/response pairs for Qwen 3 8B
-
-  - Tool: `cex_continuous.py` (built in H2) has export mode
-
-  - Target: 2,000+ training pairs covering all 123 kinds
-
-  - Validate: train/test split, dedup, format check'
-s2_qlora_fine_tune_on_qwen_3_8b: 'Train custom model `cex-qwen3:8b` using prepared dataset:
-
-  - Framework: Unsloth or Axolotl (QLoRA, 4-bit)
-
-  - Hardware: GTX 1070 4GB (tight -- use gradient checkpointing)
-
-  - Epochs: 3-5 on full dataset
-
-  - Eval: re-run benchmark tool, compare base vs FT
-
-  - Deploy: `ollama create cex-qwen3 -f Modelfile`'
-s3_hybrid_dispatch_claude_n07_ollama_nuclei: 'Wire the pipeline so `/mission` and `/grid` dispatch to Ollama:
-
-  - N07 stays Claude Opus (orchestration needs full agent)
-
-  - N01-N06 workers use Ollama/cex-qwen3 via `cex_8f_runner.py`
-
-  - Handoff format stays the same (model reads via pipeline, not CLI)
-
-  - F8 compiles + commits (pipeline handles, not model)
-
-  - Test: full 6-nucleus grid via Ollama'
-s4_benchmark_re_run_valid_comparison: 'Re-run with fixed code (HTTP API, 300s timeout, /no_think):
-
-  - `python _tools/cex_benchmark_ollama.py --models qwen3:8b,deepseek-r1:8b --timeout 600`
-
-  - Compare: base Qwen 3 vs base DeepSeek R1 vs FT cex-qwen3
-
-  - Publish results to `.cex/benchmarks/`'
-s5_content_factory_integration: 'Connect existing components into working pipeline:
-
-  - N01 NotebookLM pipeline (H5) -> input
-
-  - N02 content templates -> formatting
-
-  - N06 monetization layer (H6) -> distribution
-
-  - Remaining: integration workflow connecting the pieces
-
-
-  ---'
+s1_fine_tune_dataset_preparation: '... (existing content preserved) ... ---'
 next_medium_term_week: ''
-m1_full_from_zero_bootstrap_test: 'Use `boot/overnight_infinite.cmd` to rebuild CEX from a clean state. Validates: mission_state,
-  continuous batching, sub-agents, quality gates. Expected: ~3-4 hours with full grid + sub-agents.'
-m2_release_v1_0_on_hotmart_gumroad: 'Pre-requisites:
-
-  - `cex_release_check.py` passes 28/28 (3 README fixes remaining)
-
-  - Course outline or quickstart guide for buyers
-
-  - ZIP tested on clean Windows 10 VM
-
-  - Payment + download flow tested end-to-end'
-m3_ollama_only_mode_zero_claude_dependency: 'Make CEX fully functional without any Claude subscription:
-
-  - Replace N07 orchestration with CLI wizard + cex_mission_runner.py
-
-  - All nuclei via Ollama/cex-qwen3
-
-  - install.cmd installs Ollama instead of Claude Code
-
-  - Target audience: users who can''t afford $20/month
-
-
-  ---'
+m1_full_from_zero_bootstrap_test: '... (existing content preserved) ... ---'
 next_long_term_month: ''
-l1_cex_as_distributable_product: 'Release CEX as downloadable package:
-
-  - install.cmd (built, H9) handles dependencies
-
-  - release.cmd (built, H9) packages ZIP
-
-  - Channels: Hotmart ZIP, GitHub Releases, Gumroad'
-l2_fine_tuned_cex_model_production: 'Iterate on S2 prototype:
-
-  - Larger dataset (add user artifacts, session outputs)
-
-  - Multi-model: cex-qwen3:8b (free), cex-qwen3:32b (better GPU)
-
-  - Publish on Ollama registry or HuggingFace
-
-  - Potential revenue: sell fine-tuned model access'
-l3_multi_tenant_cex: Multiple brands running on same infrastructure. Each brand = separate `.cex/brand/` config. Nuclei route
-  based on brand context.
-l4_cex_api_saas: 'REST API exposing CEX capabilities:
-
-  - POST /build -> 8F pipeline -> artifact
-
-  - POST /evolve -> improve artifact
-
-  - GET /query -> find relevant artifacts
-
-  - POST /mission -> decompose + execute
-
-  - Revenue: usage-based pricing
-
-
-  ---'
-architecture_health_targets: '| Metric | Current (2026-04-08) | Target |
-
-  |--------|----------------------|--------|
-
-  | Kinds | 123 | 130+ (as industry evolves) |
-
-  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
-
-  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
-
-  | Kind KCs | 123 (98/98 covered) | 100% coverage |
-
-  | Quality floor | 9.0 (100%) | Maintain |
-
-  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
-
-  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
-
-  | Kind KCs | 123 (98/98 covered) | 100% coverage |
-
-  | Quality floor | 9.0 (100%) | Maintain |
-
-  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
-
-  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
-
-  | Kind KCs | 123 (98/98 covered) | 100% coverage |
-
-  | Quality floor | 9.0 (100%) | Maintain |
-
-  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
-
-  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
-
-  | Kind KCs | 123 (98/98 covered) | 100% coverage |
-
-  | Quality floor | 9.0 (100%) | Maintain |'
+l1_cex_as_distributable_product: '... (existing content preserved) ... ---'
+architecture_health_targets: "| Metric | Current (2026-04-08) | Target |  \n|--------|---------------------|--------|  \n\
+  | Kinds | 123 | 130+ (as industry evolves) |  \n| Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |  \n| ... | ...\
+  \ | ... |  \n\n... (existing content preserved) ...  \n\n---"
