@@ -1,8 +1,8 @@
 id: atom_13_metagpt_chatdev
 kind: knowledge_card
 title: 'Atomic Research 13: MetaGPT + ChatDev (OpenBMB/Tsinghua)'
-version: 2.0.0
-quality: 8.9
+version: 3.0.0
+quality: 8.6
 tags:
 - metagpt
 - chatdev
@@ -30,6 +30,7 @@ sources:
 - github.com/OpenBMB/ChatDev
 - docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html
 - github.com/geekan/MetaGPT-docs
+- arxiv.org/html/2312.17025v2 (ECL full paper)
 1_metagpt_sops_as_structured_communication: ''
 1_1_core_thesis: '"Code = SOP(Team)" -- encode real-world Standard Operating Procedures into prompt sequences so LLM agents
   produce structured documents, not chat messages. Eliminates the "Hi, how are you?" overhead of conversational multi-agent
@@ -61,15 +62,16 @@ sources:
   \                       # UUID, auto-generated\n    content: str                        # payload (PRD text, code, etc.)\n\
   \    instruct_content: Optional[BaseModel]  # structured Pydantic output\n    role: str                           # \"user\"\
   |\"assistant\"|\"system\"\n    cause_by: type[Action]              # WHICH Action produced this\n    sent_from: str    \
-  \                  # Role name that sent it\n    send_to: set[str]                   # target Roles (empty = broadcast)\n\
-  \nRouting mechanics:\n- `cause_by` is the subscription key: `Role._watch([ActionType])` subscribes\n  to all messages where\
-  \ `cause_by` matches a watched Action type\n- `send_to` enables unicast; empty set broadcasts to all subscribers\n- `instruct_content`\
-  \ carries structured Pydantic models alongside the\n  human-readable `content` string -- dual representation per message\n\
-  \nRoleContext (`self.rc`) -- the per-agent working state:\n\nclass RoleContext(BaseModel):\n    env: Environment       \
-  \    # reference to shared workspace\n    memory: Memory             # short-term message list\n    state: int         \
-  \        # current action index (by_order mode)\n    todo: Action               # action selected for this cycle\n    watch:\
-  \ set[type[Action]]   # subscribed action types\n    news: list[Message]        # unread messages from latest _observe\n\
-  \    react_mode: RoleReactMode  # REACT | BY_ORDER | PLAN_AND_ACT\n    max_react_loop: int        # default=1 for BY_ORDER"
+  \                  # Role name that sent it\n    send_to: set[str]                   # target Roles (default: MESSAGE_ROUTE_TO_ALL\
+  \ = broadcast)\n\nRouting mechanics:\n- `cause_by` is the subscription key: `Role._watch([ActionType])` subscribes\n  to\
+  \ all messages where `cause_by` matches a watched Action type\n- `send_to` enables unicast; empty set broadcasts to all\
+  \ subscribers\n- `instruct_content` carries structured Pydantic models alongside the\n  human-readable `content` string\
+  \ -- dual representation per message\n\nRoleContext (`self.rc`) -- the per-agent working state:\n\nclass RoleContext(BaseModel):\n\
+  \    env: Environment           # reference to shared workspace\n    memory: Memory             # short-term message list\n\
+  \    state: int                 # current action index (by_order mode)\n    todo: Action               # action selected\
+  \ for this cycle\n    watch: set[type[Action]]   # subscribed action types\n    news: list[Message]        # unread messages\
+  \ from latest _observe\n    react_mode: RoleReactMode  # REACT | BY_ORDER | PLAN_AND_ACT\n    max_react_loop: int      \
+  \  # default=1 for BY_ORDER"
 1_3c_react_modes_role_execution_strategies: "Three execution modes via `self._set_react_mode()`.\nSource: docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html\n\
   \n| Mode | Behavior | Use Case | Action Selection |\n|------|----------|----------|-----------------|\n| `REACT` | Alternates\
   \ _think -> _act; LLM picks action each turn | Dynamic tasks needing mid-stream reasoning | LLM at each step |\n| `BY_ORDER`\
@@ -188,10 +190,30 @@ sources:
   | React mode | Configurable agent execution strategy (REACT/BY_ORDER/PLAN_AND_ACT) | State machine / execution engine |
 
   | Dual-representation Message | content (string) + instruct_content (Pydantic) per message | Schema-first API with human-readable
-  fallback |
-
-
-  ---'
+  fallback |'
+1_11_api_evolution_v0_5_v0_7_v0_8: "Significant breaking changes. Source: github.com/FoundationAgents/MetaGPT/releases\n\n\
+  | Version | Released | Key Change | Migration Impact |\n|---------|----------|-----------|-----------------|\n| v0.5.0 |\
+  \ 2023-Q4 | Incremental development (`--inc` flag) | New: project evolution without full rebuild |\n| v0.7.0 | Feb 2024\
+  \ | `Role._init_actions` removed -> `Role.set_actions()` | Breaking: all subclasses must update |\n| v0.7.0 | Feb 2024 |\
+  \ Global `CONFIG` singleton removed -> per-role `Config` instances | Breaking: no more `from metagpt.config import CONFIG`\
+  \ |\n| v0.7.0 | Feb 2024 | `Context` class introduced | Unified config + repo + workspace per Role instance |\n| v0.7.0\
+  \ | Feb 2024 | `mark_as_readable` / `mark_as_writable` decorators on Env | Explicit env access control; replaces implicit\
+  \ role permissions |\n| v0.7.0 | Feb 2024 | `ActionNode` from Pydantic BaseModel | Structured sub-action trees with schema\
+  \ enforcement + retry |\n| v0.8.0 | Mar 2024 | Data Interpreter agent (notebook + browser + shell) | SOTA on ML/math/open-ended\
+  \ tasks; standalone agent |\n| v0.8.0 | Mar 2024 | RAG module (index + retrieve + rank) | Optional import; adds retrieval-augmented\
+  \ role context |\n| v0.8.0 | Mar 2024 | Claude, QianFan, DashScope, Yi LLM providers | Config `llm.api_type` field selects\
+  \ provider |\n\nContext class (v0.7+) -- per-role isolated execution environment:\n\nclass Context(BaseModel):\n    config:\
+  \ Config          # LLM settings + runtime configuration\n    repo: RepoManager       # Git-aware file repository access\n\
+  \    workspace: WorkSpace    # Task-specific working directory\n\nEach `Role` gets its own `Context`, enabling concurrent\
+  \ roles with\ndifferent LLM providers or configurations in the same `Team`.\n\nActionNode (v0.7+) -- schema-enforced sub-action\
+  \ step:\n\nUnlike raw `Action._aask()` (returns unstructured string), `ActionNode.fill()`\ncalls `_aask_v1()` which enforces\
+  \ a Pydantic schema on LLM output via\nretry-with-repair (up to N retries if validation fails):\n\nclass WritePRD(Action):\n\
+  \    async def run(self, requirements: str) -> PRD:\n        # ActionNode chain: each node = one schema-enforced LLM call\n\
+  \        prd = await PRD_ACTION_NODE.fill(requirements, self.llm)\n        return prd\n\n# ActionNode constructed from Pydantic\
+  \ model (v0.7+):\nPRD_ACTION_NODE = ActionNode.from_pydantic(PRDModel)\n# from_pydantic() auto-generates prompt instructions\
+  \ from Pydantic\n# field descriptions -- Pydantic docstrings -> prompt compilation\n\n`ActionNode` is the recommended pattern\
+  \ for SOP scenarios where outputs\nmap to finite-state Pydantic models. For dynamic runtime prompt generation,\n`DataInterpreter`\
+  \ (v0.8) is preferred.\nSource: github.com/FoundationAgents/MetaGPT/issues/1439\n\n---"
 2_chatdev_chat_chain_communicative_dehallucination: ''
 2_1_core_thesis: 'Software development as multi-turn chat between role-playing agents. Language is the unifying bridge --
   agents guided in WHAT to communicate (chat chain) and HOW to communicate (communicative dehallucination). Paper: Qian et
@@ -278,17 +300,15 @@ sources:
   ---'
 3_experiential_co_learning_chatdev_extension: 'Paper: Qian et al., "Experiential Co-Learning of Software-Developing Agents"
   (arXiv:2312.17025, 2023). Integrated into ChatDev Jan 2024.'
-3_1_three_modules: '| Module | What it Does | Mechanism |
-
-  |--------|-------------|-----------|
-
-  | Co-Tracking | Joint exploration by instructor + assistant | Directed chain graph G=(N,E) of solution states; each node
-  is a code snapshot |
-
-  | Co-Memorizing | Mine shortcuts from trajectories | Deduplicate graph, score nodes, extract non-adjacent high-gain paths
-  |
-
-  | Co-Reasoning | Use experience pools for unseen tasks | Few-shot retrieval from instructor/assistant pools |'
+3_1_three_modules: "| Module | What it Does | Mechanism |\n|--------|-------------|-----------|\n| Co-Tracking | Joint exploration\
+  \ by instructor + assistant | Directed chain graph G=(N,E) of solution states; each node is a code snapshot |\n| Co-Memorizing\
+  \ | Mine shortcuts from trajectories | Deduplicate graph, score nodes, extract non-adjacent high-gain paths |\n| Co-Reasoning\
+  \ | Use experience pools for unseen tasks | Few-shot retrieval from instructor/assistant pools |\n\nFormal graph definition\
+  \ (arXiv:2312.17025v2):\n\nG = (N, E) where:\n  N = {r_j | r_j in R} union {r_0}\n      r_0   = initial empty codebase (before\
+  \ any instruction)\n      r_j   = code snapshot after j-th instruction is applied\n  E = {(r_j, i_{j+1}, r_{j+1})}\n   \
+  \   i_{j+1} = instruction that transforms r_j -> r_{j+1}\n\nGraph deduplication: MD5 hashing of code snapshots detects identical\n\
+  states; duplicate nodes are merged to prevent shortcut mining over\ncircular paths. This bounds the graph size regardless\
+  \ of interaction length."
 3_2_shortcut_experiences: 'A "shortcut" is an accelerated path between non-adjacent solution states:
 
 
@@ -309,14 +329,25 @@ sources:
   Pseudo-instruction generation: compare source and target code states
 
   to produce a synthetic instruction describing the direct transformation.'
-3_3_experience_pools: 'Two separate key-value stores:
+3_3_experience_pools: 'Two separate key-value stores (paper notation: M_I / M_A):
 
-  - Instructor pool (S_i): current_solution -> instruction (what to tell the assistant)
+  - M_I -- Instructor pool (S_i): {(r_i, r_i->r_j)} -- current state maps to shortcut instruction
 
-  - Assistant pool (S_a): instruction -> resulting_solution (how to respond)
+  - M_A -- Assistant pool (S_a): {(r_i->r_j, r_j)} -- shortcut instruction maps to target state
 
 
-  Indexed via dense vector embeddings. Retrieved via top-k similarity search.'
+  Where r_i->r_j denotes the pseudo-instruction bridging non-adjacent states.
+
+
+  Indexed via dense vector embeddings (text-embedding-ada-002).
+
+  Retrieval function: k(q, M) = top-k cosine similarity search.
+
+  - k_code = 1 (one code-embedding-based exemplar per query)
+
+  - k_text = 2 (two text-embedding-based exemplars per query)
+
+  - Combined: 3 few-shot examples injected as context per inference step'
 3_4_co_reasoning_at_inference: '1. Instructor receives current code state sj
 
   2. Retrieves top-k matching instructions from S_i (k_code=1, k_text=2)
@@ -328,7 +359,40 @@ sources:
   5. Iterates until task complete
 
 
-  Result: comprehensive metric jumps from 0.4267 (vanilla ChatDev) to 0.7304.'
+  Granular metric breakdown (NLDD dataset, ChatGPT-3.5, arXiv:2312.17025v2):
+
+
+  | Metric | Vanilla ChatDev | + Co-Learning | Delta |
+
+  |--------|-----------------|---------------|-------|
+
+  | Completeness (alpha) | 0.6131 | 0.9497 | +54.9% |
+
+  | Executability (beta) | 0.6890 | 0.9400 | +36.4% |
+
+  | Autonomy (alpha*beta*gamma) | 0.3340 | 0.7100 | +112.6% |
+
+
+  Autonomy = alpha  beta  gamma where gamma captures task correctness.
+
+  Overall comprehensive score: 0.4267 (vanilla) -> 0.7304 (co-learning).
+
+
+  Experimental configuration:
+
+  - Base model: ChatGPT-3.5 (gpt-3.5-turbo)
+
+  - Max interaction rounds: 5 per chat phase
+
+  - Embedding model: text-embedding-ada-002 (code + text)
+
+  - Deduplication: MD5 hash of code snapshots
+
+  - Information gain threshold: epsilon = 0.90
+
+  - Dataset: NLDD (Natural Language Driven Development), 4:1:1 train/val/test
+
+  - Execution environment: Python 3.11.4'
 3_5_iterative_experience_refinement_ier_may_2024: "Extension of Co-Learning. Paper: arXiv:2405.04219 (OpenBMB, May 2024).\n\
   \nProblem with base Co-Learning: experience pools grow unbounded, accumulating\nlow-quality or rarely-used entries that\
   \ degrade retrieval precision.\n\nIER adds four operations across task batches:\n\n| Operation | Description | When |\n\
@@ -491,3 +555,6 @@ references:
 - 'MetaGPT Docs (multi-agent 101): https://docs.deepwisdom.ai/main/en/guide/tutorials/multi_agent_101.html'
 - 'ChatDev GitHub: https://github.com/OpenBMB/ChatDev'
 - 'ChatDev MacNet branch: https://github.com/OpenBMB/ChatDev/tree/macnet'
+- 'ECL paper (HTML): https://arxiv.org/html/2312.17025v2'
+- 'MetaGPT Releases: https://github.com/FoundationAgents/MetaGPT/releases'
+- 'MetaGPT Agent Communication: https://docs.deepwisdom.ai/main/en/guide/in_depth_guides/agent_communication.html'

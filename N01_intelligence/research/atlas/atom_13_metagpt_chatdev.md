@@ -537,11 +537,17 @@ to produce a synthetic instruction describing the direct transformation.
 
 ### 3.3 Experience Pools
 
-Two separate key-value stores:
-- **Instructor pool (S_i)**: current_solution -> instruction (what to tell the assistant)
-- **Assistant pool (S_a)**: instruction -> resulting_solution (how to respond)
+Two separate key-value stores (paper notation: M_I / M_A):
+- **M_I -- Instructor pool (S_i)**: {(r_i, r_i->r_j)} -- current state maps to shortcut instruction
+- **M_A -- Assistant pool (S_a)**: {(r_i->r_j, r_j)} -- shortcut instruction maps to target state
 
-Indexed via dense vector embeddings. Retrieved via top-k similarity search.
+Where r_i->r_j denotes the pseudo-instruction bridging non-adjacent states.
+
+Indexed via dense vector embeddings (text-embedding-ada-002).
+Retrieval function: k(q, M) = top-k cosine similarity search.
+- k_code = 1 (one code-embedding-based exemplar per query)
+- k_text = 2 (two text-embedding-based exemplars per query)
+- Combined: 3 few-shot examples injected as context per inference step
 
 ### 3.4 Co-Reasoning at Inference
 
@@ -551,7 +557,25 @@ Indexed via dense vector embeddings. Retrieved via top-k similarity search.
 4. Assistant receives instruction, retrieves matching solutions from S_a
 5. Iterates until task complete
 
-Result: comprehensive metric jumps from 0.4267 (vanilla ChatDev) to 0.7304.
+**Granular metric breakdown (NLDD dataset, ChatGPT-3.5, arXiv:2312.17025v2):**
+
+| Metric | Vanilla ChatDev | + Co-Learning | Delta |
+|--------|-----------------|---------------|-------|
+| Completeness (alpha) | 0.6131 | 0.9497 | +54.9% |
+| Executability (beta) | 0.6890 | 0.9400 | +36.4% |
+| Autonomy (alpha*beta*gamma) | 0.3340 | 0.7100 | +112.6% |
+
+Autonomy = alpha * beta * gamma where gamma captures task correctness.
+Overall comprehensive score: 0.4267 (vanilla) -> 0.7304 (co-learning).
+
+**Experimental configuration:**
+- Base model: ChatGPT-3.5 (gpt-3.5-turbo)
+- Max interaction rounds: 5 per chat phase
+- Embedding model: text-embedding-ada-002 (code + text)
+- Deduplication: MD5 hash of code snapshots
+- Information gain threshold: epsilon = 0.90
+- Dataset: NLDD (Natural Language Driven Development), 4:1:1 train/val/test
+- Execution environment: Python 3.11.4
 
 ### 3.5 Iterative Experience Refinement (IER, May 2024)
 
@@ -734,3 +758,6 @@ Collaboration" -- GUI-based no-code agent graph editor wraps MacNet.
 - MetaGPT Docs (multi-agent 101): https://docs.deepwisdom.ai/main/en/guide/tutorials/multi_agent_101.html
 - ChatDev GitHub: https://github.com/OpenBMB/ChatDev
 - ChatDev MacNet branch: https://github.com/OpenBMB/ChatDev/tree/macnet
+- ECL paper (HTML): https://arxiv.org/html/2312.17025v2
+- MetaGPT Releases: https://github.com/FoundationAgents/MetaGPT/releases
+- MetaGPT Agent Communication: https://docs.deepwisdom.ai/main/en/guide/in_depth_guides/agent_communication.html

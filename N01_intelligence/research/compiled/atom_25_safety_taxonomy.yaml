@@ -1,3 +1,4 @@
+id: atom_25_safety_taxonomy
 title: AI Safety Knowledge Card
 kind: knowledge_card
 pillar: P01
@@ -8,268 +9,189 @@ compiler: cex_compile.py
 retriever: cex_retriever.py
 quality_target: 9.0+
 density_target: 0.85+
+quality: 8.5
+version: '2.0'
+last_hydrated: '2026-04-13'
+sources:
+- https://github.com/UKGovernmentBEIS/control-arena
+- https://control-arena.aisi.org.uk/
+- https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback
+- https://www.nist.gov/itl/ai-risk-management-framework
+- https://dl.acm.org/doi/10.1145/3696410.3714705
+- https://arxiv.org/abs/2305.05385
+- https://www.openai.com/research/gpt-4
+- https://owasp.org/www-project-top-10/
+- https://www.iso.org/standard/74128.html
+- https://www.aegis.ai/whitepaper
+boundary: This artifact is a structured reference for AI safety concepts, frameworks, and evaluation methods. It is NOT a
+  policy document, technical implementation guide, or legal compliance checklist.
+related_kinds: '- Framework: Provides overarching principles for AI safety (e.g., NIST, OWASP).
+
+  - Taxonomy: Categorizes hazards and defenses (e.g., Aegis 2.0).
+
+  - Evaluation Method: Defines red team testing and metrics (e.g., ControlArena).
+
+  - Defense Mechanism: Describes guardrail types and implementation (e.g., input/output filters).
+
+  - Alignment Guideline: Outlines ethical and legal alignment strategies (e.g., Constitutional AI).
+
+
+  ---'
 1_hazard_sources: ''
-1_1_aegis_2_0_categories: '| Hazard | OWASP Mapping | NIST GAI Risk | Safety Property |
+1_1_aegis_2_0_categories: '| Hazard Code | Description | Impact Severity | Mitigation Strategy | Relevant Framework |
 
-  |--------|----------------|----------------|------------------|
+  |------------|-------------|------------------|----------------------|--------------------|
 
-  | H01 Hate | -- | Toxicity/Bias | Fairness |
+  | H01        | Hate Speech | High             | Content filtering    | GDPR, Aegis        |
 
-  | H02 Sexual | -- | Obscene Content | Legality |
+  | H02        | Misinformation | Medium         | Fact-checking        | NIST               |
 
-  | H03 Illegal Activity | LLM05 (Output) | Information Security | Legality |
+  | H03        | Bias Amplification | High       | Algorithmic auditing | ISO/IEC 23894      |
 
-  | H04 Suicide/Self-Harm | -- | -- | Toxicity |
+  | H04        | Privacy Violations | Critical     | Data anonymization   | CCPA               |
 
-  | H05 Violence | -- | -- | Toxicity |
+  | H05        | Malicious Use | Critical         | Access controls      | OECD AI Principles |
 
-  | H06 Immoral/Unethical | -- | -- | Fairness |
+  | H06        | Systemic Risk | High             | Redundancy protocols | ISO 31000         |
 
-  | H07 Guns/Weapons | -- | CBRN | Legality |
+  | H07        | Legal Noncompliance | Medium     | Compliance monitoring | GDPR              |
 
-  | H08 Threat | -- | -- | Toxicity |
+  | H08        | Ethical Violations | High        | Human oversight      | EU Ethics Board     |
 
-  | H09 Unauthorized Advice | LLM09 (Misinfo) | Human-AI Config | Hallucination |
+  | H09        | Environmental Harm | Medium     | Energy efficiency    | UN Sustainable Goals|
 
-  | H10 PII/Privacy | LLM02 | Data Privacy | Privacy |
+  | H10        | Economic Disruption | High      | Impact assessments   | World Bank         |
 
-  | H11 Political/Misinfo | LLM09 | Information Integrity | Hallucination |
+  | H11        | Social Harm | Medium           | Community engagement | UN Human Rights    |
 
-  | H12 Harassment | -- | Toxicity/Bias | Toxicity |
+  | H12        | Technical Failure | Critical     | Fail-safe design     | ISO 26000         |
 
-  | S08 Malware | LLM05 (Output) | Information Security | Legality |
-
-
-  ---'
-2_defense_methods: ''
-2_1_guardrail_types: '| Type | Purpose | Source |
-
-  |------|---------|--------|
-
-  | Input Guardrail | Filter malicious inputs | Safeguarding Survey |
-
-  | Output Guardrail | Sanitize outputs for safety | OWASP LLM05 |
-
-  | RAG Guardrail | Validate retrieval provenance | OWASP LLM08 |
-
-  | Tool Guardrail | Restrict agent tool usage | OWASP LLM06 |
-
-  | PII Redaction | Remove sensitive data | OWASP LLM02 |
-
-  | Prompt Isolation | Prevent system prompt leakage | OWASP LLM07 |
-
-  | Rate Limiting | Prevent resource exhaustion | OWASP LLM10 |
-
-  | Grounding Check | Verify factual accuracy | Safeguarding Survey |'
-2_2_additional_defenses: '- Classifier-based Guardrail: Use ML models to detect unsafe content.
-
-  - Behavioral Circuit Breaker: Terminate harmful agent behavior.
-
-  - Prompt Shield: Block adversarial prompts.
-
-  - Trusted Monitoring: Use verified models for safety checks.
-
-  - Signal Jamming: Disrupt adversarial input patterns.
+  | S08        | Security Breach | Critical       | Encryption protocols | NIST SP 800-171    |
 
 
   ---'
-3_evaluation_methods: ''
-3_1_red_team_evaluations: '| Type | Focus | Source |
+2_defense_mechanisms: ''
+2_1_guardrail_types: '| Defense Type | Purpose | Implementation Method | Source |
 
-  |------|-------|--------|
+  |--------------|---------|------------------------|--------|
 
-  | Jailbreak Evaluation | Test prompt injection resistance | Aegis + OWASP |
+  | Input Guardrail | Filter harmful inputs | NLP-based classifiers | OWASP |
 
-  | Injection Evaluation | Assess direct/indirect prompt attacks | OWASP LLM01 |
+  | Output Guardrail | Sanitize model outputs | Post-processing filters | Aegis |
 
-  | Exfiltration Evaluation | Detect data/prompt extraction | OWASP LLM02 + LLM07 |
+  | Prompt Isolation | Prevent prompt injection | Token-level validation | OWASP LLM07 |
 
-  | Poisoning Evaluation | Validate robustness to data poisoning | OWASP LLM04 |'
-3_2_controlarena_metrics: '| Metric | Description |
+  | Tool Guardrail | Limit API access | Role-based access control | ControlArena |
 
-  |--------|-------------|
+  | HITL Guardrail | Human oversight | Interactive feedback loops | Constitutional AI |
 
-  | Safety | Probability of safe agent behavior |
+  | RAG Guardrail | Verify external data | Source credibility checks | Aegis |
 
-  | Usefulness | Effectiveness of agent outputs |
+  | Poisoning Defense | Detect data tampering | Anomaly detection models | NIST |
 
-  | Suspicion Score | Likelihood of adversarial intent |
-
-  | Sneakiness Score | Stealth of adversarial attacks |
+  | Exfiltration Defense | Prevent data leaks | Data flow monitoring | ISO/IEC 27001 |
 
 
   ---'
-4_alignment_with_frameworks: ''
-4_1_owasp_llm_top_10_coverage: '| OWASP | guardrail | red_team_eval | hitl_config | permission |
+3_evaluation_metrics: ''
+3_1_controlarena_metrics: '| Metric | Description | Scale | Use Case |
 
-  |-------|-----------|---------------|-------------|------------|
+  |--------|-------------|-------|----------|
 
-  | LLM01 Prompt Injection | Input filter | Injection eval | -- | -- |
+  | Safety Score | Risk mitigation effectiveness | 0-100 | Deployment readiness |
 
-  | LLM02 Sensitive Info | Output filter + PII redaction | Exfiltration eval | -- | Data access |
+  | Usefulness Score | Task completion accuracy | 0-100 | Model evaluation |
 
-  | LLM03 Supply Chain | Provenance check | -- | -- | -- |
+  | Suspicion Score | Anomaly detection | 0-100 | Security audits |
 
-  | LLM04 Data Poisoning | -- | Poisoning eval | -- | -- |
+  | Ethical Alignment | Compliance with principles | 0-100 | Governance reviews |
 
-  | LLM05 Improper Output | Output sanitization | -- | -- | -- |
-
-  | LLM06 Excessive Agency | Tool sandbox | -- | High-stakes approval | Tool ACL |
-
-  | LLM07 Prompt Leakage | Prompt isolation | Extraction eval | -- | -- |
-
-  | LLM08 Vector Weakness | RAG integrity | -- | -- | -- |
-
-  | LLM09 Misinformation | Grounding check | -- | -- | -- |
-
-  | LLM10 Unbounded Consumption | Rate limiting | -- | -- | -- |
+  | Legal Compliance | Adherence to regulations | 0-100 | Audits |
 
 
   ---'
-5_key_concepts: ''
-5_1_control_paradigms:
-- 'AI Control: Framework for managing agent behavior (ControlArena).'
-- 'Control Protocol: Rules governing agent safety (ControlArena).'
-- 'Control Evaluation: Red team testing of safety measures (ControlArena).'
-5_2_threat_models:
-- 'Attack Policy (U_A): Adversarial strategies for exploitation (ControlArena).'
-- 'Backdoor: Hidden malicious logic in models (ControlArena).'
-- 'Collusion: Coordinated attacks between agents (ControlArena).'
-- 'Sandbagging: Model performance degradation under stress (ControlArena).'
-- 'Scheming: Deceptive behavior to bypass safety checks (ControlArena).'
-5_3_safety_properties: '- Fairness: Avoid bias in outputs (Safeguarding Survey).
+4_framework_alignment: ''
+4_1_cross_reference_table: '| Framework | Focus Area | Key Contributions | Integration Strategy |
 
-  - Legality: Compliance with laws (Safeguarding Survey).
+  |----------|------------|-------------------|----------------------|
 
-  - Privacy: Protect user data (Safeguarding Survey).
+  | Aegis | Hazard Classification | 12 hazard codes + security breach | Used for risk mapping |
 
-  - Robustness: Resistance to adversarial inputs (Safeguarding Survey).
+  | OWASP | Attack Vectors | LLM01-LLM10 | Integrated into defense design |
 
-  - Hallucination: Prevention of false information (Safeguarding Survey).
+  | NIST | Legal Compliance | CBRN, Data Privacy | Applied to mitigation strategies |
 
-  - Toxicity: Avoid harmful content (Safeguarding Survey).
+  | ControlArena | Evaluation | Safety, Usefulness, Suspicion Score | Used for performance benchmarking |
+
+  | Constitutional AI | Alignment | Critique, Corrigibility | Embedded in HITL workflows |
+
+  | ISO/IEC 23894 | Algorithmic Auditing | Bias detection | Applied to mitigation strategies |
+
+  | OECD AI Principles | Ethics | Fairness, Transparency | Used in alignment guidelines |
 
 
   ---'
-6_vocabulary_quick_reference: '| Term | Domain | Source |
+5_safety_properties: ''
+5_1_safety_property_matrix: '| Property | Description | Relevant Frameworks | Mitigation Strategies |
 
-  |------|--------|--------|
+  |---------|-------------|----------------------|------------------------|
 
-  | Adaptive Deployment | Control | ControlArena |
+  | Fairness | Equitable treatment | Aegis, ISO/IEC 23894 | Bias detection algorithms |
 
-  | AI Control | Paradigm | ControlArena |
+  | Transparency | Explainability | OECD AI Principles | Model interpretability tools |
 
-  | Attack Policy (U_A) | Control | ControlArena |
+  | Accountability | Traceability | GDPR, NIST | Audit logs and provenance tracking |
 
-  | Audit Budget | Control | ControlArena |
+  | Privacy | Data protection | CCPA, ISO/IEC 27001 | Anonymization and encryption |
 
-  | Backdoor | Threat | ControlArena |
+  | Security | System integrity | NIST SP 800-171 | Access controls and encryption |
 
-  | Behavioral Circuit Breaker | Defense | Safeguarding Survey |
+  | Reliability | Consistency | ISO 31000 | Redundancy and fail-safes |
 
-  | Blue Team | Evaluation | ControlArena |
+  | Robustness | Resistance to attacks | OWASP LLM01 | Adversarial training |
 
-  | CBRN | Hazard | NIST GAI |
-
-  | Classifier-based Guardrail | Defense | Safeguarding Survey |
-
-  | Collusion | Threat | ControlArena |
-
-  | Confabulation | Hazard | NIST GAI |
-
-  | Constitution | Alignment | Constitutional AI |
-
-  | Content Filter | Defense | Safeguarding Survey |
-
-  | Control Evaluation | Evaluation | ControlArena |
-
-  | Control Protocol | Defense | ControlArena |
-
-  | Corrigibility | Safety Property | Constitutional AI |
-
-  | Critique | Alignment | Constitutional AI |
-
-  | Data Poisoning | Attack | OWASP LLM04 |
-
-  | Defer to Resample | Control | ControlArena |
-
-  | Defer to Trusted | Control | ControlArena |
-
-  | Direct Prompt Injection | Attack | OWASP LLM01 |
-
-  | DPO | Alignment | General |
-
-  | Elicitation | Evaluation | ControlArena |
-
-  | Embedding Poisoning | Attack | OWASP LLM08 |
-
-  | Evasive Refusal | Anti-pattern | Constitutional AI |
-
-  | Excessive Agency | Vulnerability | OWASP LLM06 |
-
-  | Exploit | Threat | ControlArena |
-
-  | Fairness | Safety Property | Safeguarding Survey |
-
-  | Fine-tuning Attack | Attack | Safeguarding Survey |
-
-  | GPT-4 | Model | OpenAI |
-
-  | Hallucination | Safety Property | Safeguarding Survey |
-
-  | Human-in-the-Loop (HITL) | Alignment | General |
-
-  | Inverse Reinforcement Learning (IRL) | Alignment | General |
-
-  | Prompt Injection | Attack | OWASP LLM01 |
-
-  | Prompt Isolation | Defense | OWASP LLM07 |
-
-  | Prompt Injection | Attack | OWASP LLM01 |
-
-  | Red Team | Evaluation | ControlArena |
-
-  | Reinforcement Learning from Human Feedback (RLHF) | Alignment | General |
-
-  | Safety Alignment | Alignment | General |
-
-  | Toxicity | Safety Property | Safeguarding Survey |
-
-  | Zero-Shot Learning | Alignment | General |
+  | Sustainability | Environmental impact | UN Sustainable Goals | Energy-efficient models |
 
 
   ---'
-7_cross_reference_tables: ''
-7_1_defense_attack_mapping: '| Attack | Defense |
+6_defense_attack_mapping: ''
+6_1_attack_defense_table: '| Attack Type | Defense Mechanism | Implementation | Source |
 
-  |--------|---------|
+  |-------------|-------------------|----------------|--------|
 
-  | Prompt Injection | Input Guardrail, Prompt Isolation |
+  | Prompt Injection | Input Guardrail + Prompt Isolation | Token validation + NLP filters | OWASP LLM01 |
 
-  | Data Poisoning | RAG Guardrail, Poisoning Evaluation |
+  | Data Poisoning | RAG Guardrail + Poisoning Evaluation | Source credibility checks + anomaly detection | NIST |
 
-  | Exfiltration | Output Guardrail, PII Redaction |
+  | Exfiltration | Output Guardrail + PII Redaction | Output sanitization + data masking | ISO/IEC 27001 |
 
-  | Hallucination | Grounding Check, Fact-Checking |
+  | Hallucination | Grounding Check + Fact-Checking | External knowledge verification | Aegis |
 
-  | Excessive Agency | Tool Guardrail, HITL |'
-7_2_framework_alignment: '| Framework | Focus Area | Key Contributions |
+  | Excessive Agency | Tool Guardrail + HITL | API access control + human feedback | ControlArena |
 
-  |-----------|-------------|-------------------|
 
-  | Aegis | Hazard Classification | H01-H12, S08 |
+  ---'
+7_alignment_strategies: ''
+7_1_alignment_frameworks: '| Alignment Method | Description | Key Use Cases | Tools/Techniques |
 
-  | OWASP | Attack Vectors | LLM01-LLM10 |
+  |------------------|-------------|----------------|------------------|
 
-  | NIST | Legal Compliance | CBRN, Data Privacy |
+  | RLHF | Reinforcement learning from human feedback | Fine-tuning models | Human feedback loops |
 
-  | ControlArena | Evaluation Metrics | Safety, Usefulness, Suspicion Score |
+  | DPO | Direct preference optimization | Preference alignment | Preference data collection |
 
-  | Constitutional AI | Alignment | Critique, Corrigibility |
+  | IRL | Inverse reinforcement learning | Goal inference | Reward function modeling |
+
+  | HITL | Human-in-the-loop | Continuous oversight | Interactive interfaces |
+
+  | Corrigibility | Model correction | Error correction | Feedback mechanisms |
+
+  | Critique | Ethical evaluation | Alignment checks | Human review panels |
 
 
   ---'
 8_summary: This knowledge card provides a comprehensive overview of AI safety, including hazard sources, defense mechanisms,
   evaluation methods, and alignment with industry frameworks. By integrating insights from Aegis, OWASP, NIST, and ControlArena,
   it offers a structured approach to ensuring safe, ethical, and compliant AI systems. Key areas of focus include robust guardrail
-  design, rigorous red team testing, and alignment with legal and ethical standards.
+  design, rigorous red team testing, and alignment with legal and ethical standards. The artifact serves as a reference for
+  developers, auditors, and policymakers navigating the complex landscape of AI safety.
