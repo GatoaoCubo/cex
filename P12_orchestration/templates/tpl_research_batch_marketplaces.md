@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "Research Batch — Marketplace & Delivery Discovery"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/crm_mission/batch_d_marketplaces.md
@@ -12,6 +12,7 @@ variables: [INDUSTRY, MARKETPLACES, SEARCH_TERMS, CITIES, OUTPUT_FILE, SIGNAL_TA
 density_score: 0.95
 tags: [template, research-batch, marketplaces, delivery, e-commerce, crm, instance-extraction]
 tldr: "Marketplace business discovery — find digitally active sellers via iFood, Rappi, Mercado Livre, Shopee, etc."
+updated: "2026-04-13"
 ---
 
 # BATCH D — Marketplace & Delivery Discovery
