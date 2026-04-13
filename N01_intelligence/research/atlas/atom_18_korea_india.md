@@ -486,6 +486,9 @@ Voice layer specialist. While Sarvam/Krutrim target full-stack LLMs, Gnani focus
 | **Consumer product** | KakaoTalk + Naver integration | Kruti (Ola) voice assistant |
 | **Enterprise** | SKT 2,000 internal agents | Sarvam API + enterprise |
 | **Evaluation** | Domain-specific benchmarks (telecom, finance) | Indic LLM Arena (Language-Context-Safety) |
+| **Omni-modal** | HyperCLOVA X 8B Omni (text+vision+audio in+out, Dec 2025) | Gnani.ai Vachana TTS (12-language voice cloning, <10s sample) |
+| **Sovereignty dispute** | YES: Naver Qwen encoder 99.5% cosine similarity (Jan 2026) | NO equivalent controversy; models more explicitly built from scratch |
+| **MCP ecosystem** | PlayMCP live (10K+ public MCP servers globally, AAIF governance) | No equivalent MCP platform; tool calling via Sarvam API |
 
 ### 3.2 MoE as Universal Strategy
 
@@ -548,6 +551,14 @@ MoE ratios of 8-12:1 (for routed-only count) are the sweet spot -- frontier reas
 
 9. **Public AI infrastructure is a viable distribution model**. PARAM-2's national digital good model avoids proprietary lock-in for government and public services. This contrasts with the commercial API model and has implications for regulated industries (healthcare, education, legal).
 
+10. **Omni-modal at 8B is the new voice-agent baseline**. HyperCLOVA X 8B Omni delivers text+vision+audio in+out at 8B scale with Korean TTS MOS 4.22/5. Any-to-any capability in a deployable open-weight model sets the floor for voice agent systems in 2026. Systems that separate STT+LLM+TTS into three models are already architecturally behind.
+
+11. **Sovereignty requires a multi-layer definition**. The Korea controversy reveals that "sovereign AI" must specify: base architecture origin, pre-training data origin, encoder/tokenizer origin, and fine-tuning compute origin. Models scoring 2/4 on these dimensions (e.g., Korean base + Korean data, but foreign vision encoder + foreign audio encoder) should be classified as hybrid-sovereign, not fully sovereign. This is the right framework for N01 competitive intelligence on any national AI program.
+
+12. **RLVR (RL from Verifiable Rewards) is replacing RLHF for reasoning models**. HyperCLOVA X Think, DeepSeek-R1, and o1 all use verifiable reward signals (math, code, factual correctness) instead of human preference labels. This is both cheaper (no labeling cost) and more scalable (programmatic verification). Expect the RLHF market to contract as RLVR-trained models dominate reasoning benchmarks.
+
+13. **MCP ecosystem has reached protocol governance maturity**. MCP donated to Linux Foundation's Agentic AI Foundation (AAIF) in December 2025. Co-founded by Anthropic, Block, and OpenAI. Over 10,000 public MCP servers as of April 2026. PlayMCP in Korea operates within this now-governance-mature ecosystem. The AAIF governance model (Linux Foundation) mirrors successful OS foundations (CNCF, ASF) -- MCP is on a trajectory to become critical infrastructure, not a product.
+
 ### 4.2 Confidence Assessment
 
 | Claim | Confidence | Evidence |
@@ -562,6 +573,11 @@ MoE ratios of 8-12:1 (for routed-only count) are the sweet spot -- frontier reas
 | MLA superseding GQA for flagship models | HIGH | Kanana-2 + Sarvam 105B both use MLA; GQA relegated to smaller variants |
 | Bradley-Terry is the right ranking framework for human evals | HIGH | AI4Bharat + Chatbot Arena + LMSYS all use it; chess ratings proven |
 | Krutrim-2 dense is a cost disadvantage vs MoE at same compute | HIGH | 12B dense = ~5x compute vs 2.4B active Sarvam 30B per token |
+| HyperCLOVA X 8B Omni is the open-weight Korean TTS leader | HIGH | MOS 4.22 vs 3.40 next-best; 0.82 gap is statistically large on 5-point scale |
+| Naver's vision encoder = Qwen encoder (>99% similarity) | HIGH | Cosine 99.5% + Pearson 98.9% from independent analysis; Naver acknowledged |
+| Korean national AI program will complete without disqualifying either consortium | MEDIUM | Government has not defined "developed from scratch"; political pressure to succeed |
+| RLVR will replace RLHF as standard reasoning alignment | HIGH | HyperCLOVA Think + DeepSeek-R1 + o1 all use RLVR; human labeling cost is the bottleneck |
+| Sarvam Vikram-30B official release (Apache 2.0) happened March 6, 2026 | HIGH | Multiple independent sources confirm date and license |
 
 ---
 

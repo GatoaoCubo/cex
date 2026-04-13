@@ -398,16 +398,22 @@ Separate package: `agentscope-runtime` (v1.0 Dec 2025, v1.1 Feb 2026).
 
 | Class | Purpose |
 |-------|---------|
-| **AgentApp** | Primary abstraction extending FastAPI directly |
+| **AgentApp** | Primary abstraction -- directly inherits FastAPI (v1.1+) |
 | **RedisSession** | State persistence: conversation history, agent snapshots, multi-session coordination |
+| **A2ARegistry** | Abstract base for service registration/discovery backends |
+| **A2ATransportsProperties** | Transport endpoint descriptor: host/port/path, TLS flags, protocol type |
+| **AgentCardWithRuntimeConfig** | Configuration bundle: agent_card + registry list + task_timeout |
 
 **AgentApp lifecycle**: Init (lifespan) -> Query (`@agent_app.query()`) -> Shutdown.
 Primary endpoint: `/process` via SSE streaming.
 
+**v1.1 key change**: AgentApp now directly inherits FastAPI (not factory pattern).
+Enables seamless access to the full FastAPI ecosystem (middleware, routers, dependency injection).
+
 ### 3.2 Sandbox Types
 
-| Sandbox | Sync | Async | Purpose |
-|---------|------|-------|---------|
+| Sandbox | Sync | Async (v1.1) | Purpose |
+|---------|------|--------------|---------|
 | **BaseSandbox** | Yes | **BaseSandboxAsync** | Python/shell execution |
 | **GuiSandbox** | Yes | **GuiSandboxAsync** | Desktop GUI interaction |
 | **FilesystemSandbox** | Yes | **FilesystemSandboxAsync** | File operations |
@@ -418,7 +424,37 @@ Primary endpoint: `/process` via SSE streaming.
 
 Container backends: Docker (default), gVisor, BoxLite, Kubernetes, Alibaba Cloud ACK.
 
-### 3.3 Framework Compatibility
+**v1.1 async sandboxes**: `run_ipython_cell` and `run_shell_command` enhanced for non-blocking
+concurrent execution in async programs. Enables parallel tool calls across multiple sandboxes.
+
+### 3.3 Distributed Interrupt Service (v1.1 NEW)
+
+New service enabling:
+- Manual task preemption during long-running agent execution
+- Customizable state persistence before interrupt
+- Recovery logic injection on resume
+- Greater developer control over multi-step agentic workflows
+
+### 3.4 A2A Registry Service (v1.1)
+
+Plugin-based service registration and discovery. Agents register with centralized registries
+(e.g., Nacos) on startup. Configured via `a2a_config` parameter in AgentApp.
+
+| Component | Purpose |
+|-----------|---------|
+| **A2ARegistry** | Abstract base class; requires `registry_name()` + `register()` |
+| **NacosRegistry** | Nacos v3.1.0+ dynamic service discovery backend |
+| **A2ATransportsProperties** | host/port/path + TLS + transport type (JSONRPC) |
+
+**Registration flow** (async, non-blocking):
+1. Agent Card Publication -- metadata (name, version, capabilities)
+2. Endpoint Registration -- connection info + protocol config
+3. Background execution -- failures log warnings without blocking startup
+
+**Nacos env vars**: `A2A_REGISTRY_ENABLED`, `NACOS_SERVER_ADDR`, auth credentials.
+Custom registries: inherit `A2ARegistry`, implement required methods.
+
+### 3.5 Framework Compatibility
 
 | Framework | Messages | Tools |
 |-----------|----------|-------|
@@ -428,7 +464,7 @@ Container backends: Docker (default), gVisor, BoxLite, Kubernetes, Alibaba Cloud
 | Agno | Full | Full |
 | AutoGen | In Progress | Full |
 
-### 3.4 Response Streaming Format
+### 3.6 Response Streaming Format
 
 JSON lines via SSE with fields: `sequence_number`, `object`, `status`, payload.
 Compatible with OpenAI SDK response format.
@@ -523,10 +559,22 @@ Registration via `@R.<registry>.register(name)` decorator.
   MEMORY.md                  # Long-term facts and insights
   profile/<user>.json        # Personal memory profiles
 memory/
-  YYYY-MM-DD.md              # Daily interaction journals
+  YYYY-MM-DD.md              # Daily interaction journals (compressed summaries)
+dialog/
+  YYYY-MM-DD.jsonl           # Raw conversation records (full fidelity, JSONL format)
 tool_result/
-  <uuid>.txt                 # Cached/truncated tool outputs
+  <uuid>.txt                 # Cached/truncated tool outputs (TTL-managed)
 ```
+
+**Two-track persistence**: `memory/` stores human-readable summarized insights;
+`dialog/` stores full raw JSONL for replay/audit. Messages marked `_MemoryMark.COMPRESSED`
+indicate the summary exists in `memory/`; raw record is in `dialog/`.
+
+**Memory mark taxonomy**:
+| Mark | Value | Meaning |
+|------|-------|---------|
+| `_MemoryMark.HINT` | "hint" | Temporary contextual guidance injected per step |
+| `_MemoryMark.COMPRESSED` | "compressed" | Message replaced by summary; raw in dialog/ |
 
 ---
 
