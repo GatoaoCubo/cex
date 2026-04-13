@@ -3,9 +3,10 @@ id: kc_env_config
 kind: knowledge_card
 title: "Environment Configuration for LLM Systems"
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
 language: English
+density_score: 1.0
 ---
 
 # Environment Configuration for LLM Systems
