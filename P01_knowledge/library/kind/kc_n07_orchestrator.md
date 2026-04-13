@@ -3,9 +3,10 @@ id: kc_n07_orchestrator
 kind: knowledge_card
 title: "N07 Orchestrator — Autonomous Agent Coordination"
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: English
+density_score: 0.95
 ---
 
 # N07 Orchestrator — Autonomous Agent Coordination
