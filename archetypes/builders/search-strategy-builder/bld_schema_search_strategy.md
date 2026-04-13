@@ -24,44 +24,44 @@ density_score: 0.85
 | kind         | string | yes      | "search_strategy" | CEX kind |  
 | pillar       | string | yes      | "P04"    | Pillar classification |  
 | title        | string | yes      | -       | Strategy name |  
-| version      | string | yes      | "1.0"    | Schema version |  
-| created      | date   | yes      | -       | ISO 8601 format |  
-| updated      | date   | yes      | -       | ISO 8601 format |  
-| author       | string | yes      | -       | Creator |  
+| version      | string | yes      | "1.0"   | Version number |  
+| created      | date   | yes      | -       | Creation date |  
+| updated      | date   | yes      | -       | Last update date |  
+| author       | string | yes      | -       | Author name |  
 | domain       | string | yes      | -       | Application domain |  
-| quality      | string | yes      | "draft"  | Review status |  
+| quality      | string | yes      | "draft" | Quality status |  
 | tags         | list   | yes      | []      | Keywords |  
 | tldr         | string | yes      | -       | Summary |  
-| strategy_type| string | yes      | -       | "keyword", "semantic", etc. |  
-| target_entity| string | yes      | -       | "data", "documents", etc. |  
+| strategy_type| string | yes      | -       | Strategy category |  
+| target_entity| string | yes      | -       | Target entity |  
 
 ### Recommended  
-| Field              | Type   | Notes |  
-|--------------------|--------|-------|  
-| coverage_criteria  | string | Scope details |  
-| efficiency_metric  | string | Performance metric |  
+| Field           | Type   | Notes |  
+|------------------|--------|-------|  
+| last_reviewed  | date   | Last review date |  
+| related_strategies | list | Linked strategies |  
 
 ## ID Pattern  
-^p04_ss_[a-zA-Z0-9_]+\.md$  
+^p04_ss_[a-zA-Z0-9_-]+\.md$  
 
 ## Body Structure  
 1. **Overview**  
-   - Purpose, scope, and use case.  
-2. **Methodology**  
-   - Algorithm, heuristics, or rules applied.  
-3. **Parameters**  
-   - Configurable inputs (e.g., depth, filters).  
-4. **Evaluation**  
-   - Metrics, validation, and success criteria.  
+   - Purpose and scope of the strategy.  
+2. **Objectives**  
+   - Specific goals and success criteria.  
+3. **Methodology**  
+   - Step-by-step approach and algorithms.  
+4. **Parameters**  
+   - Configurable variables and their ranges.  
 5. **Constraints**  
-   - Limitations or edge cases.  
-6. **Examples**  
-   - Use cases or sample queries.  
+   - Limitations and edge cases.  
+6. **Evaluation Metrics**  
+   - KPIs and validation methods.  
 
 ## Constraints  
-- ID must follow regex pattern.  
-- Required fields must be present and non-empty.  
-- Dates must use ISO 8601 format.  
-- strategy_type must be from predefined enum.  
-- Body sections must be non-empty and ordered.  
-- Total markdown size must not exceed 4096 bytes.
+- Strategy must align with domain-specific requirements.  
+- Parameters must be validated for type and range.  
+- No duplicate strategy IDs within the same pillar.  
+- Versioning required for all updates.  
+- Quality must be "approved" before deployment.  
+- Tags must include at least one domain-related keyword.
