@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "N04 Knowledge Nucleus"
 domain: "builder quality audit"
-quality: null
+quality: 8.9
 tags: [audit, stt_provider, builder, HYBRID_REVIEW]
 tldr: "13/13 ISOs audited. 11 surgical fixes, 2 left as-is. Critical: architecture domain error fixed, vendor matrix added."
 ---
