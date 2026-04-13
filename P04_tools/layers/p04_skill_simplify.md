@@ -4,7 +4,7 @@ kind: skill
 pillar: P04
 title: "Skill: Code Simplification"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [skill, simplify, refactor, code-quality]
 tldr: "Code simplification skill for reviewing changed code for reuse opportunities, quality issues, and efficiency improvements."
 domain: "tools"
