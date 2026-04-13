@@ -5,6 +5,7 @@ version: 1.0.0
 quality: 8.8
 pillar: P01
 density_score: 1.0
+updated: '2026-04-13'
 core_functions_f1_f8:
 - 'F1: Intent Parsing'
 - Convert natural language input to structured task parameters

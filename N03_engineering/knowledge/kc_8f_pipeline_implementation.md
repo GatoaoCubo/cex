@@ -5,6 +5,7 @@ title: "8F Pipeline Implementation Guide"
 version: 1.0.0
 quality: 8.8
 pillar: P01
+density_score: 1.0
 ---
 
 # 8F Pipeline Implementation Guide
