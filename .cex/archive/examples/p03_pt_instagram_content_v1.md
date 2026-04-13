@@ -41,7 +41,7 @@ variables:
 variable_syntax: "mustache"
 composable: false
 domain: social-media
-quality: null
+quality: 9.0
 tags: [instagram, social-media, content, copywriting, n02, marketing]
 tldr: "Generates format-aware Instagram copy for any brand and topic with configurable tone, CTA, and hashtag volume."
 keywords: [instagram, content, copywriting, carrossel, reels, stories, social, hook, cta]
