@@ -4,7 +4,7 @@ kind: agent_card
 pillar: P08
 title: "Agent Card: Exploration Agent"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [agent_card, explore, codebase, discovery]
 tldr: "Agent card for the exploration agent specialized in codebase discovery. Defines search strategies, tool usage patterns, and output formats."
 domain: "architecture"
