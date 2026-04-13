@@ -159,3 +159,348 @@ This artifact is a structured reference for AI safety concepts, frameworks, and 
 ## 8. Summary
 
 This knowledge card provides a comprehensive overview of AI safety, including hazard sources, defense mechanisms, evaluation methods, and alignment with industry frameworks. By integrating insights from Aegis, OWASP, NIST, and ControlArena, it offers a structured approach to ensuring safe, ethical, and compliant AI systems. Key areas of focus include robust guardrail design, rigorous red team testing, and alignment with legal and ethical standards. The artifact serves as a reference for developers, auditors, and policymakers navigating the complex landscape of AI safety.
+
+---
+
+## 9. ControlArena Implementation (UK AISI)
+
+**Source**: https://github.com/UKGovernmentBEIS/control-arena
+**Docs**: https://control-arena.aisi.org.uk/
+**Blog**: https://www.aisi.gov.uk/blog/introducing-controlarena-a-library-for-running-ai-control-experiments
+
+### 9.1 What It Is
+
+ControlArena is an open-source Python library by the UK AI Security Institute (AISI) for running AI control experiments. Built on top of the Inspect AI evaluation library. Used by Anthropic, Google DeepMind, and Redwood Research. Supports AI Control Hackathon 2026 (co-organized with Redwood Research).
+
+### 9.2 Installation
+
+```bash
+pip install control-arena
+
+git clone https://github.com/UKGovernmentBEIS/control-arena.git
+cd control-arena
+pip install -e .
+
+pip install inspect-ai
+```
+
+### 9.3 Running Evaluations
+
+```python
+from inspect_ai import eval, eval_set
+
+result = eval(task, model="anthropic/claude-sonnet-4-20250514")
+
+results = eval_set(tasks, model="openai/gpt-4.1-mini-2025-04-14",
+                   max_retries=3, cache=True)
+```
+
+### 9.4 Control Protocols
+
+| Protocol | Description | Use Case |
+|----------|-------------|----------|
+| Defer to Trusted | Route high-stakes decisions to trusted model | Production safety |
+| Defer to Resample | Regenerate on suspicion signal | Quality assurance |
+| Adaptive Deployment | Adjust oversight level by risk score | Dynamic safety |
+| Audit Budget | Limit expensive checks to X% of calls | Cost-aware safety |
+| Blue Team | Honest agent trying to complete task | Control baseline |
+| Red Team (U_A) | Adversarial attack policy simulation | Threat modeling |
+
+### 9.5 Metrics
+
+| Metric | Type | Interpretation |
+|--------|------|----------------|
+| Safety Score | P(safe) 0-1 | Probability of no unsafe action in episode |
+| Usefulness Score | P(useful) 0-1 | Task completion rate |
+| Suspicion Score | 0-1 | Likelihood of adversarial intent |
+| Sneakiness Score | 0-1 | Stealth level of adversarial attacks |
+
+---
+
+## 10. Guardrail Frameworks: Setup Guide
+
+### 10.1 Framework Comparison
+
+| Framework | Tier | Install | Self-hosted? | Multimodal? |
+|-----------|------|---------|--------------|-------------|
+| NeMo Guardrails (NVIDIA) | Open-source | pip | Yes | Yes |
+| Guardrails.ai | Open-source | pip/npm | Yes | Partial |
+| LlamaGuard (Meta) | Open-source model | pip/hf | Yes | Yes (v3+) |
+| Aegis (NVIDIA) | Dataset + model | hf | Yes | No |
+| Azure Content Safety | Cloud API | SDK | No | Yes |
+| AWS Bedrock Guardrails | Cloud API | boto3 | No | Yes |
+| Google SafetySettings | Cloud API | SDK | No | Yes |
+| OpenAI Moderation API | Cloud API | SDK | No | Yes (omni) |
+
+### 10.2 NeMo Guardrails
+
+**Repo**: https://github.com/NVIDIA-NeMo/Guardrails
+**Docs**: https://docs.nvidia.com/nemo/guardrails/latest/index.html
+
+```bash
+pip install nemoguardrails
+pip install "nemoguardrails[nvidia]"
+```
+
+Features: Colang DSL, Aegis Protocol integration, denied topics, sensitive info/word/image filters, Inspect AI integration.
+
+### 10.3 Guardrails.ai
+
+**Repo**: https://github.com/guardrails-ai/guardrails
+**Docs**: https://www.guardrailsai.com/docs/guardrails_ai/installation
+
+```bash
+pip install guardrails-ai
+guardrails configure
+```
+
+Features: Validators from Guardrails Hub, PII detection, enterprise AI guardrails, OpenAPI client SDKs.
+
+### 10.4 LlamaGuard (Meta)
+
+**Models**: LG3-8B (https://huggingface.co/meta-llama/Llama-Guard-3-8B), LG4-12B (https://huggingface.co/meta-llama/Llama-Guard-4-12B)
+
+```bash
+pip install vllm
+pip install llama-cpp-python
+CMAKE_ARGS="-DLLAMA_CUBLAS=on" pip install llama-cpp-python
+```
+
+Features: MLCommons hazard taxonomy, multilingual, vision (LG3 11B), malicious code detection.
+
+### 10.5 Aegis (NVIDIA)
+
+**Dataset**: https://huggingface.co/datasets/nvidia/Aegis-AI-Content-Safety-Dataset-2.0
+
+```python
+from transformers import pipeline
+classifier = pipeline("text-classification",
+                      model="nvidia/Aegis-AI-Content-Safety-LlamaGuard-Permissive-1.0")
+```
+
+Features: 35,000 human-annotated samples, H01-H12+S08 taxonomy, zero-trust identity layer.
+
+### 10.6 Azure Content Safety
+
+**Docs**: https://learn.microsoft.com/en-us/azure/ai-services/content-safety/
+
+```bash
+pip install azure-ai-contentsafety azure-identity
+```
+
+Features: Text + image moderation, blocklist management, multi-language SDKs.
+
+### 10.7 AWS Bedrock Guardrails
+
+**Docs**: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
+
+```python
+import boto3
+bedrock = boto3.client("bedrock")
+guardrail = bedrock.create_guardrail(
+    name="my-guardrail",
+    contentPolicyConfig={"filtersConfig": [
+        {"type": "SEXUAL", "inputStrength": "HIGH", "outputStrength": "HIGH"}
+    ]},
+    sensitiveInformationPolicyConfig={"piiEntitiesConfig": [
+        {"type": "EMAIL", "action": "ANONYMIZE"}
+    ]}
+)
+```
+
+Features: Content filters, denied topics, PII filtering, CloudFormation support.
+
+### 10.8 Google SafetySettings
+
+**Docs**: https://ai.google.dev/gemini-api/docs/safety-settings
+
+```python
+import google.generativeai as genai
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-pro",
+    safety_settings=[
+        {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+        {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_HIGH_AND_ABOVE"},
+        {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"}
+    ]
+)
+```
+
+Features: 4 adjustable harm categories, core protections always active (child safety).
+
+### 10.9 OpenAI Moderation API
+
+**Docs**: https://platform.openai.com/docs/api-reference/moderations
+
+```python
+from openai import OpenAI
+client = OpenAI()
+moderation = client.moderations.create(
+    model="omni-moderation-latest",
+    input="text to classify"
+)
+if moderation.results[0].flagged:
+    print({k: v for k, v in moderation.results[0].categories.__dict__.items() if v})
+```
+
+Features: Free endpoint, omni-moderation (text + images), scores per category.
+
+---
+
+## 11. Constitutional AI: Principles to NIST Mapping
+
+**Constitution (2026)**: https://www.anthropic.com/news/claudes-constitution
+**CAI paper**: https://arxiv.org/abs/2212.08073
+
+### 11.1 CAI Priority Hierarchy
+
+The 2026 Constitution (23,000 words, 58 principles) defines strict priority order.
+When conflicts arise: Safety > Ethics > Guidelines > Helpfulness.
+
+| Priority | Principle Category | Description |
+|----------|--------------------|-------------|
+| 1 | Broadly Safe | No undermining human oversight mechanisms |
+| 2 | Broadly Ethical | Honest, good values, avoids harmful actions |
+| 3 | Anthropic Compliant | Follows specific Anthropic guidelines |
+| 4 | Genuinely Helpful | Benefits operators and users |
+
+### 11.2 CAI to NIST AI RMF Mapping
+
+| CAI Category | NIST AI RMF Function | NIST GAI Risk | CEX Guardrail Kind |
+|---|---|---|---|
+| Broadly Safe -- Corrigibility | GOVERN 1.1 (AI Risk Policy) | Human-AI Configuration | hitl_config |
+| Broadly Safe -- No deception | MAP 1.5 (Identify Limitations) | Confabulation | guardrail (output) |
+| Broadly Safe -- Support oversight | GOVERN 1.4 (Accountability) | Oversight Mechanisms | permission |
+| Broadly Ethical -- Honesty | MEASURE 2.5 (Trustworthiness) | Confabulation/Hallucination | guardrail (grounding) |
+| Broadly Ethical -- Non-maleficence | MAP 2.2 (Risk Context) | CBRN / Toxicity | guardrail (input) |
+| Broadly Ethical -- Fairness | MANAGE 1.3 (Risk Response) | Bias/Toxicity | guardrail (output) |
+| Compliant -- Data Privacy | MAP 1.6 (Privacy Risks) | Data Privacy/PII | permission (data) |
+| Compliant -- Legal | GOVERN 5.1 (Governance) | Information Security | guardrail (legal) |
+| Helpful -- No evasive refusal | MEASURE 2.1 (Performance) | -- | quality_gate |
+
+### 11.3 Constitutional Classifiers (2025)
+
+Source: https://www.anthropic.com/research/constitutional-classifiers
+
+CAI principles operationalized as training-time classifiers defend against universal jailbreaks.
+Results vs. vanilla RLHF: significantly higher jailbreak resistance on AdvBench/HarmBench,
+maintained helpfulness on MMLU (< 2% degradation), generalizes across attack types.
+
+### 11.4 C3AI Research Finding (2025)
+
+Source: https://dl.acm.org/doi/10.1145/3696410.3714705
+
+Positively-framed, behavior-based principles outperform negatively-framed or trait-based ones.
+CEX implication: write guardrail rules as "Do X" not "Don't Y", describe behaviors not traits.
+
+---
+
+## 12. 2025-2026 Safety Research: Key Papers
+
+### 12.1 Benchmarks
+
+| Paper | Key Contribution | Source |
+|-------|-----------------|--------|
+| International AI Safety Report 2026 | 100+ experts, 30+ countries | https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026 |
+| International AI Safety Report 2025 | Risk taxonomies, eval methods | https://arxiv.org/abs/2510.13653 |
+| AI Safety Index Winter 2025 | Comparative rankings across labs | https://futureoflife.org/ai-safety-index-winter-2025/ |
+| TrustLLM Benchmark | 6 dimensions: truthfulness, safety, fairness, robustness, privacy, ethics | Multi-venue 2025 |
+| Stanford AIR-Bench 2024 | Aligned with EU AI Act, NIST | Stanford CRFM |
+
+### 12.2 Guardrails Research
+
+| Paper | Finding | Source |
+|-------|---------|--------|
+| Diverse AI Safety Dataset (Ghosh et al. 2025) | New taxonomy from real-world harm reports | arXiv 2025 |
+| Polyguard (Kumar et al. 2025) | Multilingual safety for 17 languages | arXiv 2025 |
+| OMNIGUARD (Verma et al. 2025) | Cross-modal safety moderation | arXiv 2025 |
+| Proof-of-Guardrail in AI Agents | What to trust from guardrail attestations | https://arxiv.org/html/2603.05786 |
+| Safeguarding LLMs: A Survey (Springer 2025) | Taxonomy + defenses comprehensive review | https://link.springer.com/article/10.1007/s10462-025-11389-2 |
+
+---
+
+## 13. CEX Safety Implementation Checklist
+
+### 13.1 Pre-Deployment Checklist
+
+```
+INPUT LAYER
+[ ] Input guardrail configured (blocks H01-H12, S08)
+[ ] Prompt injection filter active (OWASP LLM01)
+[ ] PII detection on user inputs (OWASP LLM02)
+[ ] Token budget enforced (OWASP LLM10)
+[ ] Rate limiting per user/session (OWASP LLM10)
+
+OUTPUT LAYER
+[ ] Output sanitization for harmful content (OWASP LLM05)
+[ ] Hallucination/grounding check enabled (OWASP LLM09)
+[ ] PII redaction before response (OWASP LLM02)
+[ ] Prompt isolation (no system prompt leakage) (OWASP LLM07)
+
+AGENT/TOOL LAYER
+[ ] Tool ACL defined (minimum permissions) (OWASP LLM06)
+[ ] HITL triggers for high-stakes actions (OWASP LLM06)
+[ ] RAG provenance validation (OWASP LLM08)
+[ ] Supply chain provenance check on models (OWASP LLM03)
+
+ALIGNMENT LAYER
+[ ] CAI priority order enforced: Safety > Ethics > Guidelines > Helpful
+[ ] Corrigibility: agent supports human oversight
+[ ] No deceptive outputs enabled
+[ ] No evasive refusals (helpfulness floor maintained)
+[ ] Guardrail rules written as "Do X", not "Don't Y"
+
+EVALUATION LAYER
+[ ] ControlArena red team eval scheduled (monthly minimum)
+[ ] Jailbreak evaluation baseline documented
+[ ] Safety/Usefulness trade-off measured and logged
+[ ] Regression check after every model update
+```
+
+### 13.2 Guardrail Selection by Scenario
+
+| Scenario | Recommended Guardrail | Reason |
+|----------|----------------------|--------|
+| Open-source, self-hosted, Python | NeMo Guardrails | Most configurable, Aegis integration |
+| Enterprise SaaS on Azure | Azure Content Safety | Native Azure, compliance |
+| AWS-native deployment | AWS Bedrock Guardrails | CloudFormation, IAM |
+| Google Cloud / Vertex AI | Google SafetySettings | Built-in Gemini integration |
+| OpenAI-based pipelines | OpenAI Moderation API | Free, same provider, omni |
+| Meta LLaMA self-hosted | LlamaGuard 4 12B | Same model family, no external API |
+| Custom taxonomy needed | Guardrails.ai | Hub ecosystem, custom validators |
+| Research / eval pipeline | ControlArena | Built for control experiments |
+
+### 13.3 CEX Nucleus Safety Matrix
+
+| Nucleus | Primary Risk | Guardrail Layer | CAI Category |
+|---------|-------------|-----------------|--------------|
+| N01 Research | Hallucination, misinfo | Grounding check, citation required | Broadly Ethical (honesty) |
+| N02 Marketing | Deceptive claims | Output filter, legal review | Broadly Ethical (non-maleficence) |
+| N03 Builder | Code injection, supply chain | Tool sandbox, provenance check | Broadly Safe (oversight) |
+| N04 Knowledge | Data poisoning, embedding attack | RAG integrity, source validation | Broadly Ethical (honesty) |
+| N05 Operations | Privilege escalation, code exec | Permission ACL, HITL for deploy | Broadly Safe (corrigibility) |
+| N06 Commercial | Misleading pricing, fraud | Legal compliance check | Compliant (legal) |
+| N07 Orchestrator | Excessive agency, collusion | HITL for multi-nucleus dispatch | Broadly Safe (human oversight) |
+
+---
+
+## 14. Vocabulary Additions (v2.0)
+
+| Term | Domain | Source |
+|------|--------|--------|
+| Broadly Ethical | CAI Priority | Anthropic Constitution 2026 |
+| Broadly Safe | CAI Priority | Anthropic Constitution 2026 |
+| C3AI Framework | Alignment Research | ACM Web Conf 2025 |
+| CAI Priority Hierarchy | Alignment | Anthropic Constitution 2026 |
+| Constitutional Classifier | Defense | Anthropic 2025 |
+| Genuinely Helpful | CAI Priority | Anthropic Constitution 2026 |
+| Guardrails Hub | Tooling | Guardrails.ai |
+| International AI Safety Report 2026 | Benchmark | Bengio et al. 2026 |
+| Llama Guard 4 | Defense Model | Meta 2025 |
+| MLCommons Hazard Taxonomy | Standard | MLCommons 2025 |
+| NIST-AI-600-1 | Standard | NIST 2024 |
+| omni-moderation-latest | Model | OpenAI 2025 |
+| Polyguard | Defense | Kumar et al. 2025 |
+| Proof-of-Guardrail | Attestation | arXiv 2026 |
+| TrustLLM | Benchmark | Multi-institution 2025 |
+| Universal Jailbreak | Attack | Research 2025 |

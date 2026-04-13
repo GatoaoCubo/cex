@@ -2,19 +2,21 @@
 id: atom_15_qwen_deepseek
 kind: knowledge_card
 title: "Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs"
-version: "1.1.0"
+version: "1.2.0"
 quality: 8.9
-tags: [qwen, deepseek, tool-calling, function-calling, mcp, reasoning, agent-framework, hermes, strict-mode, agentic-training]
+tags: [qwen, deepseek, tool-calling, function-calling, mcp, reasoning, agent-framework, hermes, strict-mode, agentic-training, grpo, budget-tokens, rolling-checkpoint]
 pillar: P01
 domain: llm-agent-tooling
-density_score: 0.95
+density_score: 0.97
 sources:
   - https://github.com/QwenLM/Qwen-Agent
   - https://api-docs.deepseek.com/guides/tool_calls
   - https://api-docs.deepseek.com/guides/thinking_mode
   - https://api-docs.deepseek.com/guides/reasoning_model
+  - https://api-docs.deepseek.com/api-reference
   - https://deepwiki.com/QwenLM/Qwen-Agent
   - https://deepwiki.com/QwenLM/Qwen-Agent/4.4-mcp-integration
+  - https://deepwiki.com/QwenLM/Qwen-Agent/5.3-mcp-tool-integration
   - https://deepwiki.com/QwenLM/Qwen3/4.3-function-calling-and-tool-use
   - https://chat-deep.ai/docs/deepseek-tool-calls/
   - https://api-docs.deepseek.com/news/news251201
@@ -24,8 +26,8 @@ sources:
   - https://github.com/vllm-project/vllm/issues/19056
   - https://github.com/NousResearch/Hermes-Function-Calling
   - https://kili-technology.com/blog/data-story-deepseek-v3-2
-  - https://deepwiki.com/QwenLM/Qwen-Agent/5.3-mcp-tool-integration
   - https://lawwu.github.io/til/posts/2025-05-02-qwen3-chat-prompt-template/index.html
+  - https://huggingface.co/blog/qwen-3-chat-template-deep-dive
 ---
 
 # Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs

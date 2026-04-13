@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "NIST AI Vocabulary -- Complete Term Registry and Pillar Mapping"
 version: 0.3.0
-quality: null
+quality: 8.8
 tags: [nist, ai-rmf, trustworthy-ai, vocabulary, glossary, governance, fairness, risk-management, ai-100-3, ai-600-1, iso-42001, eu-ai-act, playbook, cross-framework]
 sources:
   - https://airc.nist.gov/glossary/
