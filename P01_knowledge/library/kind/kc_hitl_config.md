@@ -9,7 +9,7 @@ created: 2026-04-12
 updated: 2026-04-12
 author: n03_builder
 domain: hitl_config
-quality: null
+quality: 9.1
 tags: [hitl_config, p11, GOVERN, kind-kc]
 tldr: "Configures human-in-the-loop review gates -- when to escalate, who reviews, approval flow, timeout behavior"
 when_to_use: "Building, reviewing, or reasoning about hitl_config artifacts"
