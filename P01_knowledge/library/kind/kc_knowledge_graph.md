@@ -9,7 +9,7 @@ created: 2026-04-12
 updated: 2026-04-12
 author: n03_builder
 domain: knowledge_graph
-quality: null
+quality: 9.1
 tags: [knowledge_graph, p01, INJECT, kind-kc]
 tldr: "Defines entity types, relation types, extraction logic, storage backend, and traversal strategies for graph-based knowledge"
 when_to_use: "Building, reviewing, or reasoning about knowledge_graph artifacts"
