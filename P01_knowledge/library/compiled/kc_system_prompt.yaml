@@ -2,7 +2,7 @@ id: kc_system_prompt
 kind: knowledge_card
 title: System Prompt Engineering
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: English
 density_score: 0.99
@@ -20,18 +20,51 @@ constraints: 'Common system prompt constraints include:
   - Task scope: "Analyze this network traffic for threats"
 
   - Format requirements: "Output in JSON with severity levels"'
-output_format: "Use structured formats for clarity:\n{\n  \"analysis\": \"Threat detected in port 22\",\n  \"severity\": \"\
-  high\",\n  \"recommendation\": \"Enable firewall rule 4567\"\n}"
-tone: 'Adapt tone based on context:
+output_format: '| Format Type | Structure | Example | Use Case |
 
-  - Professional: "The system detected an anomaly requiring immediate attention"
+  |-------------|-----------|---------|----------|
 
-  - Conversational: "Hey, I noticed something unusual on port 22"
+  | JSON        | Key-value pairs | {"analysis": "Threat detected", "severity": "high"} | Structured reporting |
 
-  - Technical: "SSH brute force attempt detected on 19.2.168.1.10"'
-examples: "1. Technical Documentation:  \n   \"Write a technical specification for a REST API endpoint\"\n\n2. Code Generation:\
-  \  \n   \"Generate Python code for a Fibonacci sequence calculator with unit tests\"\n\n3. Analysis Report:  \n   \"Analyze\
-  \ this server log for performance bottlenecks\""
+  | XML         | Nested tags | <analysis><severity>high</severity></analysis> | Legacy system integration |
+
+  | YAML        | Indented hierarchy | analysis: Threat detected severity: high | Configuration files |
+
+  | Plain Text  | Unstructured | Threat detected in port 22 | Quick communication |
+
+  | Markdown    | Formatted blocks | Analysis: Threat detected in port 22 | Documentation |'
+tone: '| Tone Type     | Example Statement                          | Use Case                     | Recommended Format       |
+
+  |---------------|--------------------------------------------|------------------------------|--------------------------|
+
+  | Professional  | "The system detected an anomaly requiring immediate attention" | Formal business contexts   | JSON/XML                 |
+
+  | Conversational| "Hey, I noticed something unusual on port 22" | User-facing applications     | Natural language         |
+
+  | Technical     | "SSH brute force attempt detected on 19.2.168.1.10" | Security analysis            | Structured logs          |
+
+  | Educational   | "Explain the TCP/IP model in simple terms" | Teaching scenarios           | Step-by-step explanation |
+
+  | Customer Support | "Help me resolve my account login issue" | Service desk interactions    | Empathetic language      |'
+examples: '| Example Type         | Prompt                                                                 | Role                        |
+  Output Format        |
+
+  |----------------------|------------------------------------------------------------------------|-----------------------------|----------------------|
+
+  | Technical Documentation | "Write a technical specification for a REST API endpoint"           | API designer                |
+  Markdown with tables |
+
+  | Code Generation      | "Generate Python code for a Fibonacci sequence calculator with unit tests" | Software developer          |
+  Code with comments   |
+
+  | Analysis Report      | "Analyze this server log for performance bottlenecks"               | System administrator        |
+  JSON with metrics    |
+
+  | Data Analysis        | "Summarize the trends in this sales dataset"                        | Business analyst            |
+  Table with visualizations |
+
+  | Creative Writing     | "Write a short story about a cyberpunk detective"                   | Fiction author              |
+  Narrative text       |'
 anti_patterns: 'Avoid these common mistakes:
 
   - Vagueness: "Help me with something" ❌
@@ -62,3 +95,11 @@ template_structure: '# [Task Title]
   ## Example
 
   [Show expected output format]'
+boundary: This artifact defines best practices for crafting system prompts to guide AI behavior. It is NOT a tool for automatically
+  generating prompts, nor does it cover user-facing prompts or conversational AI design.
+related_kinds:
+- 'Prompt Templates: Provides reusable structures for system prompts (relationship: foundational framework)'
+- 'Instruction Tuning: Focuses on refining AI behavior through iterative feedback (relationship: complementary technique)'
+- 'LLM Alignment: Addresses ethical and safety constraints in AI outputs (relationship: overlapping constraints)'
+- 'Response Formatting: Standardizes output structures for downstream applications (relationship: dependent component)'
+- 'Task-Specific Prompting: Tailors prompts to narrow domains like coding or math (relationship: specialized application)'
