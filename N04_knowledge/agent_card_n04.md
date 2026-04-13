@@ -43,9 +43,9 @@ N04 is the knowledge backbone of CEX. While N01 researches and N03 builds, N04 i
 | quality | 2 | Quality gate + scoring rubric for knowledge artifacts |
 | schemas | 7 | Contracts: database schema, embedding, export format, freshness, KC structure, naming convention, taxonomy |
 | tools | 4 | Supabase data layer + utilities |
-| compiled | 67 | YAML compilations of source artifacts |
-| reports | 4 | Self-audit reports (prior runs + newpc) |
-| **TOTAL** | **71 source + 67 compiled** | |
+| compiled | 65 | YAML compilations of source artifacts |
+| reports | 1 | Self-audit report (newpc 2026-04-13) |
+| **TOTAL** | **69 source + 65 compiled** | |
 
 ## Kinds I Build
 
@@ -189,8 +189,8 @@ N04 has the most MCP servers of any nucleus (5) because knowledge work requires 
 
 | Category | Count |
 |----------|------:|
-| Source artifacts (in N04_knowledge/) | 71 |
-| Compiled artifacts (.yaml) | 67 |
+| Source artifacts (in N04_knowledge/) | 69 |
+| Compiled artifacts (.yaml) | 65 |
 | Kinds I can build | 22 |
 | Sub-agent builders (in .claude/agents/) | 20 |
 | Tools in my toolkit | 19 |

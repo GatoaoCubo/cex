@@ -3,10 +3,11 @@ id: extraction_synapse_stack
 kind: knowledge_card
 pillar: P01_knowledge
 title: "Extraction: Synapse 8-Layer Context Stack from aiox-core"
-version: 1.0
-quality: 8.9
+version: 1.1
+quality: null
 tags: [extraction, synapse, context, layers, prompt_composition, aiox, port]
 created: 2026-04-12
+updated: 2026-04-13
 author: n01_intelligence
 domain: prompt composition architecture
 source: SynkraAI/aiox-core

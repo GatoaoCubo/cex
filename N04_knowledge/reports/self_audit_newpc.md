@@ -1,19 +1,20 @@
 ---
 id: self_audit_newpc
 kind: context_doc
-title: N04 Self-Audit -- New PC Setup (2026-04-12)
+title: N04 Self-Audit -- New PC Setup (2026-04-13)
 nucleus: N04
 pillar: P01
-version: 1.0.0
-quality: 8.9
+version: 1.1.0
+quality: null
 created: 2026-04-12
+updated: 2026-04-13
 tags: [self-audit, newpc, toolchain, knowledge-library]
 ---
 
 # N04 Self-Audit -- New PC Setup
 
-**Date**: 2026-04-12
-**Machine**: Windows 11 Pro 10.0.26200 (fresh install)
+**Date**: 2026-04-13 (v1.1 re-run; v1.0 was 2026-04-12)
+**Machine**: Windows 11 Pro 10.0.26200
 **Mission**: NEWPC_SETUP wave 1
 
 ---
@@ -46,16 +47,19 @@ FIRECRAWL_API_KEY=<from firecrawl.dev dashboard>
 
 ### 2.1 KC Count
 
-| Metric | Expected | Actual | Status |
-|--------|----------|--------|--------|
-| KC files in `P01_knowledge/library/kind/` | 123 | 123 | PASS |
-| Frontmatter validity (id, kind, title) | 123/123 | 123/123 | PASS |
+| Metric | Expected (handoff) | Actual | Status |
+|--------|-------------------|--------|--------|
+| KC files in `P01_knowledge/library/kind/` | 123 | **162** | PASS (+39 new kinds since handoff) |
+| Frontmatter validity (id, kind, title) | 123/123 | **162/162** | PASS |
+| Encoding errors (UTF-8) | 0 | 0 | PASS |
+
+**Note (v1.1)**: 39 new KCs added since v1.0 -- consistent with taxonomy expansion sprint (April 2026). All new KCs have valid UTF-8 frontmatter.
 
 ### 2.2 Tool Verification
 
 | Tool | Command | Status | Notes |
 |------|---------|--------|-------|
-| `cex_retriever.py` | `--query "agent" --top 5` | PASS | 5 results returned. Top score 0.5425. TF-IDF index operational. |
+| `cex_retriever.py` | `--query "agent" --top 5` | PASS | 5 results returned. Top score 0.54. TF-IDF index operational. (v1.0 reported SyntaxError -- false alarm; confirmed PASS in v1.1) |
 | `cex_compile.py` | `--help` | PASS | CLI operational. Supports md->yaml + reverse compilation. |
 | `cex_doctor.py` | (full run) | PASS | 123 PASS, 0 WARN, 0 FAIL. 1599 files, 5282KB, avg density 0.95. |
 
@@ -87,14 +91,15 @@ FIRECRAWL_API_KEY=<from firecrawl.dev dashboard>
 | tools | 4 | -- | Supabase data layer + utilities |
 | architecture | 4 | -- | Agent cards + capability maps |
 | agents | 4 | -- | Agent definitions |
-| reports | 3 | -- | Self-audit reports (prior runs) |
+| reports | 1 | -- | Self-audit reports (this file; others archived or compiled) |
 | prompts | 3 | -- | System prompts |
 | quality | 2 | -- | Quality gate + scoring rubric |
 | feedback | 2 | -- | Quality feedback records |
-| compiled | -- | 67 | YAML compilations of source artifacts |
-| **TOTAL** | **71** | **67** | |
+| audits | **0** | -- | **EMPTY subdir -- gap** |
+| compiled | -- | 65 | YAML compilations of source artifacts |
+| **TOTAL** | **69** | **65** | |
 
-**Note**: Source count grew from 43 (last agent card) to 71 since prior audit. Agent card needs update.
+**Note (v1.1)**: v1.0 counted 71 source / 67 compiled. v1.1 actual: 69 source / 65 compiled (-2 each, likely archived). `audits/` subdir exists but has zero artifacts.
 
 ### 3.2 Coverage Assessment
 
@@ -143,17 +148,19 @@ P01 defines 9 kinds. N04 coverage:
 
 ### Accuracy Check
 
-| Field | Card Says | Actual | Match? |
-|-------|-----------|--------|--------|
-| Source artifacts | 43 | 71 | OUTDATED |
-| Compiled artifacts | 42 | 67 | OUTDATED |
-| KC count in P01 | 123 | 123 | Match |
+| Field | Card Says | Actual (v1.1) | Match? |
+|-------|-----------|---------------|--------|
+| Source artifacts | 71 | 69 | STALE (-2) |
+| Compiled artifacts | 67 | 65 | STALE (-2) |
+| Reports count | 4 | 1 | STALE (-3) |
+| KC count in P01 (kind KCs) | 20 domain | 162 total | Card scoped to domain KCs; full count is 162 |
+| P01 compiled examples | 197 | 197 | Match |
 | MCP servers | 5 | 5 | Match |
 | Kinds I build | 22 | 22 | Match |
 | Tools listed | 19 | 19 | Match |
-| Gaps listed | 12 | Still valid | Match |
+| Gaps (kc_validator, embed_batch) | listed as gaps | **now present** | Card gaps section outdated -- these were built |
 
-**Verdict**: Agent card artifact counts are stale (43->71 source, 42->67 compiled). The counts table and the "TOTAL CARDS" section need update. Structure and capability descriptions remain accurate.
+**Verdict (v1.1)**: Agent card counts are slightly stale. Structure and capability descriptions accurate. Gaps section lists items that have since been built (kc_validator_tool.md, embedding_batch_processor_tool.md).
 
 ---
 
@@ -161,11 +168,11 @@ P01 defines 9 kinds. N04 coverage:
 
 | Phase | Result |
 |-------|--------|
-| MCP Servers | 2/5 PASS (3 need env vars) |
-| Knowledge Library | PASS (123 KCs, all frontmatter valid, tools operational) |
-| Artifact Inventory | 71 source + 67 compiled. 3 gaps identified. |
-| Agent Card | Structurally accurate, counts outdated |
-| Doctor | 123 PASS, 0 WARN, 0 FAIL |
+| MCP Servers | 2/5 PASS (fetch + notebooklm OK; 3 need env vars) |
+| Knowledge Library | PASS (162 KCs, all UTF-8 frontmatter valid, tools operational) |
+| P01 Structure | PASS (6/6 subdirs present) |
+| Artifact Inventory | 69 source + 65 compiled. `audits/` empty. 3 tooling gaps. |
+| Agent Card | Structurally accurate; minor count staleness; gaps section outdated |
 
 ### Blockers (user action needed)
 
