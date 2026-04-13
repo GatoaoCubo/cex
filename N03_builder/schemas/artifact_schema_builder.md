@@ -8,7 +8,7 @@ created: 2026-04-07
 updated: 2026-04-07
 author: builder_agent
 domain: construction
-quality: 8.9
+quality: 9.1
 tags: [schema, builder, N03, frontmatter, validation, contract]
 tldr: "Universal frontmatter schema that every CEX artifact must satisfy — 11 required fields + kind-specific extensions."
 density_score: 0.95
@@ -136,3 +136,25 @@ reject_action: string
 - Using `pillar: knowledge` instead of `pillar: P01` (use codes)
 - Duplicating `id` across artifacts (must be globally unique)
 - Empty `tags: []` (minimum 3 tags required)
+
+## Boundary
+
+This artifact IS a universal frontmatter contract that defines structural requirements for all CEX artifacts. It IS NOT a specific kind's schema, nor is it a validation tool itself — it serves as the foundational contract that other schemas must extend.
+
+## Related Kinds
+
+- **quality_gate**: Defines validation thresholds that must align with this schema's `quality` field.
+- **agent**: Extends the universal schema with agent-specific fields like `agent_group` and `capabilities_count`.
+- **system_prompt**: Adds fields related to `target_agent` and `persona` for role-specific configurations.
+- **knowledge_card**: Includes `when_to_use` and `keywords` to define contextual relevance.
+- **workflow**: Specifies `steps_count` and `execution` type to model process logic.
+
+## Comparison of Kind-Specific Extensions
+
+| Kind         | Pillar | Required Fields                     | Example Values                                                                 |
+|--------------|--------|-------------------------------------|----------------------------------------------------------------------------------|
+| agent        | P02    | agent_group, capabilities_count     | "ops_team", 5                                                                  |
+| system_prompt| P03    | target_agent, persona               | "analyst_agent", "data_scientist"                                              |
+| knowledge_card| P01  | when_to_use, keywords               | "data analysis", ["statistics", "machine learning"]                            |
+| workflow     | P12    | steps_count, execution              | 7, "sequential"                                                                |
+| dispatch_rule| P12    | scope, keywords, agent_group        | "customer_support", ["help", "support"], "support_team"                       |
