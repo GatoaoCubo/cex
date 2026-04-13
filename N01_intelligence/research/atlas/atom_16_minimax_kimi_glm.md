@@ -2,23 +2,31 @@
 id: atom_16_minimax_kimi_glm
 kind: knowledge_card
 pillar: P01
-title: "MiniMax M2 + Kimi K2.5 + GLM-5.1 -- Chinese Agentic Tool-Calling Paradigms"
-version: 0.1.0
+title: "MiniMax M2/M2.7 + Kimi K2.5 + GLM-5.1 -- Chinese Agentic Tool-Calling Paradigms"
+version: 0.2.0
 quality: 8.8
-tags: [minimax, kimi, moonshot, zhipu, glm, tool-calling, interleaved-thinking, agent-swarm, all-tools, cispo, chinese-ai]
+tags: [minimax, kimi, moonshot, zhipu, glm, tool-calling, interleaved-thinking, agent-swarm, all-tools, cispo, parl, chinese-ai, self-evolution, decentralized-agents]
 sources:
   - https://www.minimax.io/news/why-is-interleaved-thinking-important-for-m2
   - https://platform.minimax.io/docs/guides/text-m2-function-call
   - https://www.minimax.io/news/post-training-experience-and-insights-for-agent-models
   - https://github.com/MiniMax-AI/MiniMax-M2
   - https://www.minimax.io/news/minimax-m25
+  - https://www.minimax.io/news/minimax-m27-en
+  - https://arxiv.org/pdf/2506.13585
+  - https://swift.readthedocs.io/en/latest/Instruction/GRPO/AdvancedResearch/CISPO.html
+  - https://github.com/MiniMax-AI/Mini-Agent
   - https://github.com/MoonshotAI/Kimi-K2.5
-  - https://www.codecademy.com/article/kimi-k-2-5-complete-guide-to-moonshots-ai-model
+  - https://arxiv.org/html/2602.02276v1
+  - https://www.kimi.com/blog/kimi-k2-5
   - https://medium.com/@kimi_moonshot/meet-ok-computer-the-agent-mode-in-kimi-2fb0dbf05ce0
-  - https://arxiv.org/html/2406.12793v1
-  - https://cirra.ai/articles/glm-4-6-tool-calling-mcp-analysis
+  - https://aiagentindex.mit.edu/2025/kimi-ok-computer/
   - https://www.analyticsvidhya.com/blog/2026/04/glm-5-1/
+  - https://lushbinary.com/blog/glm-5-1-vectordbbench-6000-tool-calls-21k-qps/
+  - https://lushbinary.com/blog/glm-5-1-developer-guide-long-horizon-agentic-coding/
   - https://www.emergentmind.com/topics/cispo-algorithm
+  - https://developer.nvidia.com/blog/minimax-m2-7-advances-scalable-agentic-workflows-on-nvidia-platforms-for-complex-ai-applications/
+  - https://www.marktechpost.com/2026/04/12/minimax-just-open-sourced-minimax-m2-7-a-self-evolving-agent-model-that-scores-56.22-on-swe-pro-and-57.0-on-terminal-bench-2/
 date: 2026-04-13
 ---
 

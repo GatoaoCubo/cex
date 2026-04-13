@@ -825,6 +825,310 @@ Any bidirectional channel preserving JSON-RPC format and lifecycle requirements.
 
 ---
 
+## 16. TypeScript SDK -- Implementation Reference
+
+> **Package**: `@modelcontextprotocol/sdk` (npm)
+> **Source**: https://github.com/modelcontextprotocol/typescript-sdk
+> **API Docs v1**: https://ts.sdk.modelcontextprotocol.io/
+> **API Docs v2**: https://ts.sdk.modelcontextprotocol.io/v2/
+> **Requires**: `zod` >= 3.25 for schema validation
+
+### 16.1 Core Classes
+
+| Class | Import Path | Role |
+|-------|-------------|------|
+| `McpServer` | `@modelcontextprotocol/sdk/server/mcp.js` | High-level server -- recommended for most use cases |
+| `Server` | `@modelcontextprotocol/sdk/server/index.js` | Low-level server -- full protocol control |
+| `Client` | `@modelcontextprotocol/sdk/client/index.js` | High-level client with helper methods |
+| `StdioServerTransport` | `@modelcontextprotocol/sdk/server/stdio.js` | stdio transport for local subprocess servers |
+| `StreamableHTTPServerTransport` | `@modelcontextprotocol/sdk/server/streamableHttp.js` | HTTP transport (modern standard for remote servers) |
+| `NodeStreamableHTTPServerTransport` | `@modelcontextprotocol/sdk/server/node.js` | Node.js HTTP adapter |
+| `ResourceTemplate` | `@modelcontextprotocol/sdk/server/mcp.js` | RFC 6570 URI template for dynamic resources |
+
+### 16.2 McpServer -- Construction
+
+```typescript
+// Minimal
+const server = new McpServer({ name: 'my-server', version: '1.0.0' });
+
+// With instructions (surfaced to clients via initialize response)
+const server = new McpServer(
+  { name: 'db-server', version: '1.0.0' },
+  { instructions: 'Always call list_tables before running queries...' }
+);
+```
+
+### 16.3 Transport Setup
+
+```typescript
+// stdio (local subprocess)
+const transport = new StdioServerTransport();
+await server.connect(transport);
+
+// Streamable HTTP (remote/deployed)
+const transport = new NodeStreamableHTTPServerTransport({
+  sessionIdGenerator: () => randomUUID()
+});
+await server.connect(transport);
+```
+
+### 16.4 Tool Registration
+
+```typescript
+// Basic tool with Zod input + output schema
+server.registerTool(
+  'fetch-url',
+  {
+    title: 'Fetch URL',
+    description: 'Fetches a URL and returns its content',
+    inputSchema: z.object({ url: z.string().url() }),
+    outputSchema: z.object({ body: z.string(), status: z.number() })
+  },
+  async ({ url }) => {
+    const res = await fetch(url);
+    const output = { body: await res.text(), status: res.status };
+    return {
+      content: [{ type: 'text', text: JSON.stringify(output) }],
+      structuredContent: output
+    };
+  }
+);
+
+// Tool with annotations (behavioral hints for UI/clients)
+server.registerTool('delete-file', {
+  description: 'Delete a file',
+  inputSchema: z.object({ path: z.string() }),
+  annotations: { title: 'Delete File', destructiveHint: true, idempotentHint: true }
+}, async ({ path }) => ({
+  content: [{ type: 'text', text: `Deleted ${path}` }]
+}));
+
+// Error handling: return isError:true instead of throwing
+async ({ url }) => {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return { content: [{ type: 'text', text: `HTTP ${res.status}` }], isError: true };
+  } catch (err) {
+    return { content: [{ type: 'text', text: `Failed: ${err}` }], isError: true };
+  }
+}
+// Note: outputSchema validation is skipped when isError:true
+```
+
+### 16.5 Resource Registration
+
+```typescript
+// Static resource
+server.registerResource(
+  'config',
+  'config://app',
+  { title: 'Application Config', mimeType: 'text/plain' },
+  async (uri) => ({ contents: [{ uri: uri.href, text: 'Config content' }] })
+);
+
+// Dynamic resource with RFC 6570 URI template
+server.registerResource(
+  'user-profile',
+  new ResourceTemplate('user://{userId}/profile', {
+    list: async () => ({
+      resources: [
+        { uri: 'user://123/profile', name: 'Alice' },
+        { uri: 'user://456/profile', name: 'Bob' }
+      ]
+    })
+  }),
+  { title: 'User Profile', mimeType: 'application/json' },
+  async (uri, { userId }) => ({
+    contents: [{ uri: uri.href, text: JSON.stringify({ userId }) }]
+  })
+);
+```
+
+### 16.6 Prompt Registration
+
+```typescript
+// Basic prompt with Zod args schema
+server.registerPrompt(
+  'review-code',
+  {
+    title: 'Code Review',
+    description: 'Review code for best practices',
+    argsSchema: z.object({ code: z.string() })
+  },
+  ({ code }) => ({
+    messages: [{ role: 'user', content: { type: 'text', text: `Review:\n${code}` } }]
+  })
+);
+
+// With completable arguments (server-side autocompletion support)
+server.registerPrompt('review-code', {
+  title: 'Code Review',
+  argsSchema: z.object({
+    language: completable(
+      z.string().describe('Programming language'),
+      (value) => ['typescript', 'python', 'rust', 'go'].filter(l => l.startsWith(value))
+    )
+  })
+}, ({ language }) => ({ /* ... */ }));
+```
+
+### 16.7 Client Helper Methods
+
+```typescript
+const client = new Client({ name: 'my-client', version: '1.0.0' });
+await client.connect(new StdioClientTransport({ command: 'node', args: ['server.js'] }));
+
+// Discovery
+const { tools }     = await client.listTools();
+const { resources } = await client.listResources();
+const { prompts }   = await client.listPrompts();
+
+// Invocation
+const result   = await client.callTool({ name: 'fetch-url', arguments: { url: 'https://example.com' } });
+const content  = await client.readResource({ uri: 'config://app' });
+const messages = await client.getPrompt({ name: 'review-code', arguments: { code: '...' } });
+```
+
+### 16.8 Middleware / Framework Packages
+
+| Package | Framework | Purpose |
+|---------|-----------|---------|
+| `@modelcontextprotocol/node` | Node.js core HTTP | Drop-in HTTP handler |
+| `@modelcontextprotocol/express` | Express.js | Route-level MCP middleware |
+| `@modelcontextprotocol/hono` | Hono | Edge-runtime MCP adapter |
+
+---
+
+## 17. Reference Server Implementations
+
+### 17.1 Active Servers (`modelcontextprotocol/servers`)
+
+> Source: https://github.com/modelcontextprotocol/servers
+
+| Server | Path | Description | CEX Kind |
+|--------|------|-------------|----------|
+| **Everything** | `src/everything` | All-primitive reference + test server (tools + resources + prompts) | `mcp_server` (P04) |
+| **Fetch** | `src/fetch` | Web URL -> LLM-ready text conversion | `browser_tool` (P04) |
+| **Filesystem** | `src/filesystem` | Secure file ops with configurable access controls | `cli_tool` (P04) |
+| **Git** | `src/git` | Read, search, manipulate Git repositories | `cli_tool` (P04) |
+| **Memory** | `src/memory` | Knowledge graph-based persistent memory (entities + relations) | `entity_memory` (P10) |
+| **Sequential Thinking** | `src/sequentialthinking` | Dynamic reflective problem-solving via thought sequences | `chain` (P03) |
+| **Time** | `src/time` | Time and timezone conversion | `cli_tool` (P04) |
+
+### 17.2 Filesystem Server Tool Inventory
+
+> Full source: https://github.com/modelcontextprotocol/servers/blob/main/src/filesystem/index.ts
+
+| Tool | Destructive? | Description |
+|------|-------------|-------------|
+| `read_text_file` | NO | Read file with optional head/tail line range |
+| `read_media_file` | NO | Read image/audio as base64 + MIME type |
+| `read_multiple_files` | NO | Batch read with per-file error handling |
+| `write_file` | YES | Create or completely overwrite a file |
+| `edit_file` | YES | Targeted replacement with git-style diff |
+| `create_directory` | NO | Create directory + parents recursively |
+| `list_directory` | NO | List with [FILE]/[DIR] prefixes |
+| `list_directory_with_sizes` | NO | Listing with sizes, sortable by name or size |
+| `directory_tree` | NO | Recursive JSON tree view |
+| `move_file` | YES | Rename or relocate files/directories |
+| `search_files` | NO | Glob-pattern recursive search |
+| `get_file_info` | NO | Metadata: size, timestamps, permissions |
+| `list_allowed_directories` | NO | Show configured access roots |
+
+> Security: only directories explicitly passed at launch (`--allow` flags) are accessible.
+> `read_file` is deprecated -- use `read_text_file`.
+
+### 17.3 Archived Servers (`modelcontextprotocol/servers-archived`)
+
+> Source: https://github.com/modelcontextprotocol/servers-archived
+> No longer maintained by MCP steering group; some adopted by community.
+
+| Server | Description | Community Status | CEX Kind |
+|--------|-------------|-----------------|----------|
+| **PostgreSQL** | Read-only SQL access + schema inspection | Archived | `db_connector` (P04) |
+| **GitHub** | Repos, issues, PRs via GitHub API | Archived | `api_client` (P04) |
+| **Slack** | Channel management + messaging | Maintained by Zencoder | `api_client` (P04) |
+| **GitLab** | GitLab API integration | Archived | `api_client` (P04) |
+| **Google Drive** | Drive file access + search | Archived | `document_loader` (P04) |
+| **AWS KB Retrieval** | AWS Knowledge Bases RAG | Archived | `retriever` (P01) |
+| **Brave Search** | Web + local search via Brave API | Archived | `search_tool` (P04) |
+
+### 17.4 CEX-to-MCP Implementation Mapping
+
+| CEX Kind | MCP Server | Primitive | Notes |
+|----------|-----------|-----------|-------|
+| `cli_tool` | filesystem, git, time | Tools | Stateless command execution |
+| `browser_tool` | fetch | Tools | URL -> LLM-ready content |
+| `db_connector` | postgres (archived) | Tools | Read-only SQL + schema introspection |
+| `api_client` | github, slack, gitlab | Tools + Resources | REST API wrappers |
+| `search_tool` | brave-search (archived) | Tools | Search result resources |
+| `document_loader` | google-drive (archived) | Resources | File listing + reading |
+| `retriever` | aws-kb-retrieval (archived) | Tools | RAG over indexed corpus |
+| `entity_memory` | memory | Tools | Knowledge graph CRUD |
+| `chain` | sequentialthinking | Tools | Multi-step reasoning patterns |
+| `mcp_server` | everything | Tools + Resources + Prompts | All-primitive reference |
+
+---
+
+## 18. MCP Inspector -- Developer Tool
+
+> **Source**: https://github.com/modelcontextprotocol/inspector
+> **Docs**: https://modelcontextprotocol.io/docs/tools/inspector
+> **Analogy**: Postman for MCP servers -- interactive debug UI without a full AI client
+
+### 18.1 Architecture
+
+| Component | Technology | Role |
+|-----------|-----------|------|
+| **MCP Inspector Client (MCPI)** | React web app | UI at `http://localhost:6274` |
+| **MCP Proxy (MCPP)** | Node.js server | Protocol bridge between browser and MCP server |
+
+### 18.2 Launch Commands
+
+```bash
+# No installation needed -- npx downloads and runs latest
+
+# npm package server
+npx -y @modelcontextprotocol/inspector npx @modelcontextprotocol/server-filesystem /path/to/dir
+
+# PyPI package server
+npx @modelcontextprotocol/inspector uvx mcp-server-git --repository ~/repos/myrepo.git
+
+# Local TypeScript server
+npx @modelcontextprotocol/inspector node path/to/server/index.js
+
+# Local Python server
+npx @modelcontextprotocol/inspector uv --directory path/to/server run my-package args...
+```
+
+### 18.3 UI Panels
+
+| Panel | Features |
+|-------|---------|
+| **Server Connection** | Select transport (stdio / SSE / streamable-http), customize CLI args + env vars |
+| **Resources tab** | List resources, view metadata (MIME, description), inspect contents, test subscriptions |
+| **Prompts tab** | Display templates, show args + descriptions, test with custom args, preview rendered messages |
+| **Tools tab** | List tools with JSON schemas, invoke with custom inputs, view execution results |
+| **Notifications pane** | Real-time log stream, all server notifications with timestamps |
+
+### 18.4 Transport Support Matrix
+
+| Transport | Use Case | Inspector Mode |
+|-----------|----------|----------------|
+| `stdio` | Local dev (default) | Spawns server as subprocess |
+| `SSE` | Legacy HTTP+SSE servers | Connects to running endpoint |
+| `streamable-http` | Modern deployed servers | HTTP POST + SSE stream |
+
+### 18.5 Recommended Dev Workflow
+
+1. Launch Inspector with your server, verify basic connectivity
+2. Check capability negotiation in Notifications pane
+3. Make code changes, rebuild, reconnect Inspector
+4. Test each primitive type (tools / resources / prompts) in order
+5. Test edge cases: invalid inputs, missing required args, concurrent calls, error codes
+
+---
+
 ## Properties
 
 | Property | Value |

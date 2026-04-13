@@ -4,15 +4,23 @@ kind: knowledge_card
 pillar: P01
 domain: agent-taxonomy
 title: "Agent Taxonomy Surveys: Three Foundational Frameworks Compared"
-version: 1.0.0
+version: 2.0.0
 quality: 8.8
 status: active
 created: 2026-04-13
+updated: 2026-04-13
 sources:
   - "Wang et al. 2023 — A Survey on Large Language Model based Autonomous Agents (arXiv:2308.11432)"
   - "Xi et al. 2023 — The Rise and Potential of Large Language Model Based Agents: A Survey (arXiv:2309.07864)"
   - "Arunkumar et al. 2026 — Agentic AI: Architectures, Taxonomies, and Evaluation (arXiv:2601.12560)"
-tags: [agent, taxonomy, survey, architecture, multi-agent, planning, memory, reasoning, tools]
+  - "Schick et al. 2023 — Toolformer: Language Models Can Teach Themselves to Use Tools (arXiv:2302.04761)"
+  - "Patil et al. 2023 — Gorilla: Large Language Model Connected with Massive APIs (arXiv:2305.15334)"
+  - "Wang et al. 2024 — CodeAct: Executable Code Actions Elicit Better LLM Agents (arXiv:2402.01030)"
+  - "Wang et al. 2023 — Voyager: An Open-Ended Embodied Agent with LLMs (arXiv:2305.16291)"
+  - "Yang et al. 2024 — SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering (arXiv:2405.15793)"
+  - "Brohan et al. 2023 — RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control (arXiv:2307.15818)"
+  - "CEX atom_28 — Code Agent Vocabulary Atlas (internal)"
+tags: [agent, taxonomy, survey, architecture, multi-agent, planning, memory, reasoning, tools, pomdp, classic-eval, action-paradigms, code-agents, 2026]
 ---
 
 # Agent Taxonomy Surveys: Three Foundational Frameworks Compared

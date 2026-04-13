@@ -2,12 +2,11 @@
 id: atom_21_rag_taxonomy
 kind: knowledge_card
 pillar: P01
-quality: 9.0
+quality: 8.8
 title: "RAG Taxonomy Surveys"
-tags: [rag, retrieval, chunking, framework-atlas]
+tags: [rag, retrieval, chunking, reranking, agentic-rag, graph-rag, late-chunking, framework-atlas]
 date: 2026-04-13
 ---
-```
 
 # Comprehensive RAG Configuration Guide with CEX Kind Mapping
 

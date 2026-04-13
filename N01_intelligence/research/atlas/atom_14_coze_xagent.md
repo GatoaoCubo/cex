@@ -3,12 +3,12 @@ id: atom_14_coze_xagent
 kind: knowledge_card
 pillar: P01
 quality: 8.9
-density_score: 0.91
+density_score: 0.93
 title: "Atomic Research 14: Coze (ByteDance) + XAgent (Tsinghua/OpenBMB)"
-version: 1.0.0
+version: 2.0.0
 author: N01
-tags: [coze, xagent, bytedance, tsinghua, openbmb, multi-agent, workflow, dual-loop, atlas]
-tldr: "Coze is ByteDance's visual agent platform with 13 workflow node types, multi-agent orchestration, and persistent planning. XAgent is Tsinghua/OpenBMB's autonomous agent with a Dispatcher-Planner-Actor triad and dual-loop (outer=planning, inner=execution) mechanism. Both contribute novel patterns CEX can absorb."
+tags: [coze, xagent, bytedance, tsinghua, openbmb, multi-agent, workflow, dual-loop, atlas, toolserver, docker, persistent-planning, skills-marketplace]
+tldr: "Coze is ByteDance's visual agent platform (Go/Hertz backend, React+TypeScript frontend, Docker Compose self-hosting) with 13 workflow node types, Skills Marketplace API, and persistent planning. XAgent is Tsinghua/OpenBMB's autonomous agent with Dispatcher-Planner-Actor triad, dual-loop state machine (outer=planning, inner=ReACT execution), Docker-containerized ToolServer (Manager+Monitor+Node tiers), and AskForHumanHelp HITL protocol."
 domain: intelligence
 created: 2026-04-13
 updated: 2026-04-13
@@ -17,6 +17,13 @@ sources:
   - https://github.com/OpenBMB/XAgent
   - https://aixsociety.com/bytedances-coze-2-0-transforming-ai-from-chat-tool-to-intelligent-work-partner/
   - https://blog.x-agent.net/blog/xagent/
+  - https://docs.coze.com/guides/plugin_tools
+  - https://docs.coze.com/guides/use_local_plugin
+  - https://github.com/coze-dev/coze-py
+  - https://xagent-doc.readthedocs.io/en/latest/source/ToolServer/README.html
+  - https://github.com/OpenBMB/XAgent/blob/main/ToolServer/README.md
+  - https://jimmysong.io/blog/open-source-ai-agent-workflow-comparison/
+  - https://test-news.aibase.com/news/19989
 ---
 
 # Atomic Research 14: Coze (ByteDance) + XAgent (Tsinghua/OpenBMB)

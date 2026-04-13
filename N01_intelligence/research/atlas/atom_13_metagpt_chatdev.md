@@ -91,6 +91,108 @@ class SimpleWriteCode(Action):
 - Role-specific: Product Managers use web search; Engineers execute code
 - Integrated directly into Action execution
 
+### 1.3b Message Class: Full API (v0.9+)
+
+The `Message` class is the atomic communication unit. All routing flows
+through its metadata fields. Source: github.com/geekan/MetaGPT-docs/agent_communication.md
+
+```python
+class Message(BaseModel):
+    id: str                             # UUID, auto-generated
+    content: str                        # payload (PRD text, code, etc.)
+    instruct_content: Optional[BaseModel]  # structured Pydantic output
+    role: str                           # "user"|"assistant"|"system"
+    cause_by: type[Action]              # WHICH Action produced this
+    sent_from: str                      # Role name that sent it
+    send_to: set[str]                   # target Roles (empty = broadcast)
+```
+
+**Routing mechanics:**
+- `cause_by` is the subscription key: `Role._watch([ActionType])` subscribes
+  to all messages where `cause_by` matches a watched Action type
+- `send_to` enables unicast; empty set broadcasts to all subscribers
+- `instruct_content` carries structured Pydantic models alongside the
+  human-readable `content` string -- dual representation per message
+
+**RoleContext (`self.rc`) -- the per-agent working state:**
+
+```python
+class RoleContext(BaseModel):
+    env: Environment           # reference to shared workspace
+    memory: Memory             # short-term message list
+    state: int                 # current action index (by_order mode)
+    todo: Action               # action selected for this cycle
+    watch: set[type[Action]]   # subscribed action types
+    news: list[Message]        # unread messages from latest _observe
+    react_mode: RoleReactMode  # REACT | BY_ORDER | PLAN_AND_ACT
+    max_react_loop: int        # default=1 for BY_ORDER
+```
+
+### 1.3c React Modes: Role Execution Strategies
+
+Three execution modes via `self._set_react_mode()`.
+Source: docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html
+
+| Mode | Behavior | Use Case | Action Selection |
+|------|----------|----------|-----------------|
+| `REACT` | Alternates _think -> _act; LLM picks action each turn | Dynamic tasks needing mid-stream reasoning | LLM at each step |
+| `BY_ORDER` | Runs registered actions sequentially, no LLM selection | Deterministic SOP pipelines | Pre-defined order |
+| `PLAN_AND_ACT` | LLM plans full sequence once, then executes steps | Long-horizon tasks needing upfront decomposition | Plan once, act many |
+
+**`_observe` -> `_think` -> `_act` internals:**
+
+```
+_observe():
+  1. Pull Messages from Environment matching self.rc.watch
+  2. Deduplicate vs self.rc.memory (seen-filter)
+  3. Store new messages in self.rc.news
+  4. Return count (0 = nothing to do, skip cycle)
+
+_think():
+  1. BY_ORDER: pop next registered action -> self.rc.todo
+  2. REACT: LLM selects from registered actions given self.rc.news context
+  3. PLAN_AND_ACT: generate plan on first call; pop next step on subsequent
+
+_act():
+  1. Execute self.rc.todo.run() with memory context
+  2. Wrap result: Message(content=rsp, cause_by=type(self.rc.todo))
+  3. Publish Message to Environment (-> message pool)
+  4. Append to self.rc.memory
+```
+
+**max_react_loop:** Default=1 for BY_ORDER (one output per activation,
+assembly-line model). Set to N for REACT mode to enable multi-turn debugging
+(Engineer retries code up to N times before handing off).
+
+### 1.3d Environment Class: Message Pool Implementation
+
+The `Environment` is the shared pub-sub broker.
+Source: arXiv:2308.00352v6 + MetaGPT-docs agent_communication.md
+
+```python
+class Environment(BaseModel):
+    roles: dict[str, Role]             # all active roles
+    history: str                       # text log of all messages
+    memory: Memory                     # global message pool (all messages)
+
+    def publish_message(self, message: Message) -> bool:
+        # 1. Add message to global memory (pool)
+        self.memory.add(message)
+        # 2. Append to text history
+        self.history += f"\n{message}"
+        # 3. Deliver to subscribed roles
+        for role in self.roles.values():
+            role.put_message(message)   # role buffers if cause_by in watch
+        return True
+```
+
+**Pool properties:**
+- Single source of truth: all agents read from the same pool
+- Subscription filter: `role.put_message()` checks `cause_by in self.rc.watch`
+  before buffering -- agents only see messages relevant to their subscriptions
+- No point-to-point: eliminates N^2 peer routing; all communication is O(N)
+- Ordered: history log preserves global causal order of all messages
+
 ### 1.4 Role Definitions (Software Company SOP)
 
 | Role | Actions | Structured Output |

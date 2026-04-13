@@ -237,23 +237,50 @@ All of `AgentBase`, `MemoryBase`, `LongTermMemoryBase`, `Toolkit` inherit StateM
 
 ### 2.11 Hook System
 
-| Hook Type | Available On | Phase |
-|-----------|-------------|-------|
-| **pre_reply** / **post_reply** | AgentBase+ | Before/after `reply()` |
-| **pre_observe** / **post_observe** | AgentBase+ | Before/after `observe()` |
-| **pre_print** / **post_print** | AgentBase+ | Before/after `print()` |
-| **pre_reasoning** / **post_reasoning** | ReActAgentBase+ | Before/after `_reasoning()` |
-| **pre_acting** / **post_acting** | ReActAgentBase+ | Before/after `_acting()` |
+| Hook Type | Available On | Pre-Signature | Post-Signature |
+|-----------|-------------|---------------|----------------|
+| **pre_reply** / **post_reply** | AgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, output_msg) -> Msg\|None` |
+| **pre_observe** / **post_observe** | AgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, None) -> None` |
+| **pre_print** / **post_print** | AgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, output) -> Any` |
+| **pre_reasoning** / **post_reasoning** | ReActAgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, output) -> Any\|None` |
+| **pre_acting** / **post_acting** | ReActAgentBase+ | `(self, kwargs) -> dict\|None` | `(self, kwargs, output) -> Any\|None` |
 
-**Registration levels**: Class-level (all instances) via `register_class_hook()`,
-Instance-level (single agent) via `register_instance_hook()`.
+**Registration levels**:
+- Class-level (all instances): `AgentBase.register_class_hook(hook_type, hook_name, hook)`
+- Instance-level (single agent): `agent.register_instance_hook(hook_type, hook_name, hook)`
+- Removal: `remove_class_hook()`, `remove_instance_hook()`, `clear_class_hooks()`, `clear_instance_hooks()`
 
-**Execution order**: Class hooks first, then instance hooks, in insertion order (OrderedDict).
+**Execution order**: Class hooks (insertion order) -> Instance hooks (insertion order) -> Core method -> Class post-hooks -> Instance post-hooks.
 
-**Pre-hook signature**: `(self, kwargs) -> dict | None`
-**Post-hook signature**: `(self, kwargs, output) -> Any | None`
+**Storage implementation**: Six `OrderedDict` class attributes + six `OrderedDict` instance attributes per agent. Deterministic ordering for predictable distributed behavior.
 
-**Critical constraint**: Never call the core function inside its own hook (infinite loop).
+**Pre-hook behavior**: Return modified `kwargs` dict to replace original; return `None` for pass-through.
+**Post-reply behavior**: Return new `Msg` to replace output for subsequent hooks and final return value.
+
+**Critical constraint**: Never call the wrapped method inside its own hook (infinite loop).
+
+**ReMe integration**: `ReMeLight.pre_reasoning_hook()` is registered as a `pre_reasoning` hook on ReActAgent. Orchestration sequence: `compact_tool_result` -> `check_context` -> `compact_memory` -> `summary_memory` (async). This ensures context window never overflows before each reasoning step.
+
+**Registration code pattern**:
+```python
+# Class-level -- applies to ALL instances of this class
+def audit_hook(agent, kwargs):
+    # modify or inspect kwargs
+    return kwargs  # or None for pass-through
+
+AgentBase.register_class_hook(
+    hook_type="pre_reply",
+    hook_name="audit",
+    hook=audit_hook,
+)
+
+# Instance-level -- applies to ONE specific agent
+agent.register_instance_hook(
+    hook_type="post_reply",
+    hook_name="log_msg",
+    hook=lambda agent, kwargs, msg: msg,
+)
+```
 
 ### 2.12 Planning System
 

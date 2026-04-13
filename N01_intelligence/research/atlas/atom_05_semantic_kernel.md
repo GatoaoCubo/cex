@@ -170,27 +170,98 @@ the major subsystems. Microsoft and Fortune 500 companies use it in production.
 | `SearchAsync` | Method | Perform vector similarity search. |
 | `create_search_function()` | Method (Python) | Creates a kernel function from a vector collection for RAG. |
 
-**Out-of-the-box connectors:**
+**Out-of-the-box connectors (status as of Apr 2026):**
 
-| Connector | Status |
-|-----------|--------|
-| Azure AI Search | GA |
-| Azure Cosmos DB (MongoDB, NoSQL) | Preview |
-| Chroma | Preview |
-| Elasticsearch | Preview |
-| Faiss | Preview |
-| In-Memory | Preview |
-| Milvus | Preview |
-| MongoDB | Preview |
-| Pinecone | Preview |
-| Postgres | Preview |
-| Qdrant | Preview |
-| Redis | Preview |
-| SQL Server | Preview |
-| SQLite | Preview |
-| Volatile (In-Memory) | Preview |
-| Weaviate | Preview |
-| JDBC (MySQL, PostgreSQL) | Preview (Java) |
+| Connector | .NET Status | Python Status | Java Status | NuGet Package | Key Type |
+|-----------|-------------|---------------|-------------|---------------|----------|
+| Azure AI Search | GA | RC | Preview | `...Connectors.AzureAISearch` | `string` |
+| Azure Cosmos DB MongoDB | Preview | Preview | -- | `...Connectors.AzureCosmosDBMongoDB` | `string` |
+| Azure Cosmos DB NoSQL | Preview | Preview | -- | `...Connectors.AzureCosmosDBNoSQL` | `string` |
+| Chroma | Preview | Preview | -- | `...Connectors.Chroma` | `string` |
+| Elasticsearch | Preview | Preview | -- | `...Connectors.Elasticsearch` | `string` |
+| Faiss | -- | Preview | -- | (Python only, in-process) | `int` |
+| In-Memory / Volatile | Preview | RC | -- | `...Connectors.InMemory` | any |
+| Milvus | Preview | Preview | -- | `...Connectors.Milvus` | `string` |
+| MongoDB Atlas | Preview | Preview | -- | `...Connectors.MongoDB` | `string` |
+| Pinecone | Preview | Preview | -- | `...Connectors.Pinecone` | `string` |
+| Postgres + pgvector | Preview | RC | -- | `...Connectors.Postgres` | `string`/`long` |
+| Qdrant | Preview | RC | -- | `...Connectors.Qdrant` | `Guid`/`ulong` |
+| Redis | Preview | Preview | -- | `...Connectors.Redis` | `string` |
+| SQL Server | Preview | -- | -- | `...Connectors.SqlServer` | `string` |
+| SQLite | Preview | Preview | -- | `...Connectors.Sqlite` | `string` |
+| Weaviate | Preview | Preview | -- | `...Connectors.Weaviate` | `Guid` |
+| JDBC MySQL | -- | -- | Preview | `semantickernel-data-jdbc` | `string` |
+| JDBC PostgreSQL | -- | -- | Preview | `semantickernel-data-jdbc` | `string` |
+
+All package names are prefixed `Microsoft.SemanticKernel` and require `--prerelease` flag except Azure AI Search.
+
+**Connection pattern -- C# (Qdrant example):**
+
+```csharp
+// Via VectorStore abstraction
+var vectorStore = new QdrantVectorStore(new QdrantClient("localhost"), ownsClient: true);
+var collection = vectorStore.GetCollection<ulong, Hotel>("skhotels");
+await collection.EnsureCollectionExistsAsync();
+
+// Via Kernel DI (recommended for app integration)
+builder.Services.AddQdrantVectorStore("localhost");
+```
+
+**Connection pattern -- Python (collection-first):**
+
+```python
+from semantic_kernel.connectors.qdrant import QdrantCollection
+
+collection = QdrantCollection[str, Hotel](
+    record_type=Hotel,
+    collection_name="skhotels",
+    # host="localhost", port=6333  optional, defaults to localhost
+)
+await collection.ensure_collection_exists()
+```
+
+**Data model annotation schema -- field-level config:**
+
+| C# Attribute | Python VectorStoreField arg | Description |
+|---|---|---|
+| `[VectorStoreKey]` | `VectorStoreField('key')` | Primary key |
+| `[VectorStoreData(IsIndexed = true)]` | `VectorStoreField('data', is_filterable=True)` | Filterable data |
+| `[VectorStoreData(IsFullTextIndexed = true)]` | `VectorStoreField('data', is_full_text_searchable=True)` | Full-text indexed |
+| `[VectorStoreVector(Dimensions: N, DistanceFunction = X, IndexKind = Y)]` | `VectorStoreField('vector', dimensions=N, distance_function=X, index_kind=Y)` | Vector field |
+
+**DistanceFunction values:** `CosineSimilarity`, `DotProduct`, `EuclideanDistance`, `ManhattanDistance`, `HammingDistance`
+
+**IndexKind values:** `Hnsw`, `Flat`, `IvfFlat`, `DiskAnn`, `QuantizedFlat`
+
+**Schema-without-annotations alternative (VectorStoreRecordDefinition -- C#):**
+
+```csharp
+var definition = new VectorStoreRecordDefinition
+{
+    Properties = new List<VectorStoreRecordProperty>
+    {
+        new VectorStoreRecordKeyProperty("HotelId", typeof(ulong)),
+        new VectorStoreRecordDataProperty("HotelName", typeof(string)) { IsIndexed = true },
+        new VectorStoreRecordVectorProperty("DescriptionEmbedding", typeof(ReadOnlyMemory<float>))
+            { Dimensions = 1536, DistanceFunction = DistanceFunction.CosineSimilarity, IndexKind = IndexKind.Hnsw }
+    }
+};
+var collection = vectorStore.GetCollection<ulong, Hotel>("skhotels", definition);
+```
+
+**RAG via create_search_function (Python):**
+
+```python
+collection.create_search_function(
+    function_name="hotel_search",
+    description="Search hotels by description",
+    search_type="vector",           # or "keyword_hybrid"
+    parameters=[...],               # KernelParameterMetadata list
+    string_mapper=lambda x: f"{x.record.hotel_name}: {x.record.description}",
+)
+# Registers the function directly on the kernel for LLM function calling
+kernel.add_plugin(collection, plugin_name="memory")
+```
 
 **Legacy memory stores** (deprecated, replaced by Vector Store abstraction):
 `IMemoryStore`, `MemoryRecord`, `ISemanticTextMemory` -- superseded by `VectorStore` + `VectorStoreCollection`.
@@ -205,14 +276,82 @@ the major subsystems. Microsoft and Fortune 500 companies use it in production.
 | Responsible AI | PII detection/redaction, content safety, prompt injection protection. |
 | Semantic Caching | Cache LLM responses by semantic similarity using filters + vector stores. |
 
-### 2.8 MCP Integration
+### 2.8 MCP Integration (Bidirectional Bridge)
 
-| Term | Description |
-|------|-------------|
-| `kernel.as_mcp_server()` | Exposes kernel functions as an MCP server (Python). |
-| MCP Plugin Import | Import plugins from an MCP server as native SK plugins. |
-| `KernelPromptTemplate` as MCP Prompt | Expose prompt templates as MCP Prompts. |
-| Stdio / SSE transport | Supported MCP transport protocols. |
+SK is a bidirectional MCP bridge: it can act as an MCP **host** (consuming MCP servers as plugins) and as an MCP **server** (exposing SK functions to any MCP client).
+
+#### Direction 1: MCP Server -> SK Plugin (Consuming MCP)
+
+| Term | Type | Description |
+|------|------|-------------|
+| `MCPStdioPlugin` | Class (Python) | Connects to a local MCP server via subprocess stdio transport. |
+| `MCPSsePlugin` | Class (Python) | Connects to a remote MCP server via SSE over HTTPS. |
+| `MCPStreamableHttpPlugin` | Class (Python) | Connects via HTTP streaming (newer MCP transport). |
+| `load_tools` | Option (bool) | Load tools from MCP server on connect (default: True). |
+| `load_prompts` | Option (bool) | Load prompt templates from MCP server (default: True). |
+| `request_timeout` | Option (float) | Per-request timeout in seconds for MCP calls. |
+
+**Python -- import a local MCP server (stdio):**
+
+```python
+from semantic_kernel.connectors.mcp import MCPStdioPlugin
+
+# pip install semantic-kernel[mcp]
+async with MCPStdioPlugin(
+    name="Github",
+    description="Github Plugin",
+    command="docker",
+    args=["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
+          "ghcr.io/github/github-mcp-server"],
+    env={"GITHUB_PERSONAL_ACCESS_TOKEN": "..."},
+) as github_plugin:
+    kernel.add_plugin(github_plugin)
+```
+
+**Python -- import a remote MCP server (SSE):**
+
+```python
+from semantic_kernel.connectors.mcp import MCPSsePlugin
+
+async with MCPSsePlugin(
+    name="RemoteTools",
+    description="Remote MCP Tools",
+    url="http://localhost:8080",
+    load_prompts=False,     # skip if server has no prompts
+    request_timeout=30.0,
+) as remote_plugin:
+    kernel.add_plugin(remote_plugin)
+```
+
+#### Direction 2: SK -> MCP Server (Exposing SK)
+
+| Term | Type | Description |
+|------|------|-------------|
+| `.AddMcpServer()` | Extension (C#) | Registers SK functions as MCP tools in ASP.NET DI. |
+| `.WithStdioServerTransport()` | Extension (C#) | Adds stdio transport (for Claude Desktop / local MCP clients). |
+| `.WithTools(kernel)` | Extension (C#) | Exposes all kernel plugin functions as MCP tools. |
+| `kernel.as_mcp_server()` | Method (Python) | Returns an MCP server instance exposing kernel functions. |
+
+**C# -- expose SK plugins as MCP server:**
+
+```csharp
+// Register SK plugin
+kernelBuilder.Plugins.AddFromType<DateTimeUtils>();
+Kernel kernel = kernelBuilder.Build();
+
+// Build MCP server
+var builder = Host.CreateEmptyApplicationBuilder(settings: null);
+builder.Services
+    .AddMcpServer()
+    .WithStdioServerTransport()  // or .WithHttpTransport() for SSE
+    .WithTools(kernel);           // all KernelFunctions become MCP Tools
+
+await builder.Build().RunAsync();
+```
+
+**MCP Tool Schema Auto-generation:** `[KernelFunction]` + `[Description]` attributes are automatically converted to MCP Tool JSON Schema, enabling seamless discovery by any MCP host (Claude Desktop, Cursor, VS Code).
+
+**Supported MCP transports:** `stdio` (local processes), `SSE` (HTTP server-sent events), `StreamableHttp` (newer streaming HTTP).
 
 ---
 
@@ -268,25 +407,131 @@ the major subsystems. Microsoft and Fortune 500 companies use it in production.
 | Computer Use | Experimental computer control tool. |
 | Kernel Plugins | SK plugins as function tools. |
 
-### 3.5 Declarative Agent Specs
+### 3.5 Declarative Agent Specs (Full YAML Schema)
 
-Agents can be defined in YAML and instantiated via `AgentRegistry.create_from_yaml()`:
+Agents are defined in YAML and instantiated via `AgentRegistry.create_from_yaml()` (Python) or loaded via `AgentRegistry` factory (C#). Schema ADR: `docs/decisions/0070-declarative-agent-schema.md`.
+
+**Top-level schema (all agent types):**
+
+| Field | Type | Required | Default | Description |
+|-------|------|----------|---------|-------------|
+| `type` | string | No | `chat_completion_agent` | Agent type identifier |
+| `name` | string | Yes | -- | Unique agent name/identifier |
+| `description` | string | No | -- | Human-readable purpose description |
+| `instructions` | string | No | -- | System prompt / behavior guidance |
+| `model` | object | No | -- | Model configuration block |
+| `tools` | list | No | `[]` | List of tools (for assistant-type agents) |
+| `metadata` | object | No | `{}` | Arbitrary key-value pairs |
+
+**`type` allowed values:**
+
+| Value | Agent Class | Backend |
+|-------|-------------|---------|
+| `chat_completion_agent` | `ChatCompletionAgent` | Any IChatCompletionService |
+| `openai_assistant` | `OpenAIAssistantAgent` | OpenAI Assistants API |
+| `azure_assistant` | `AzureAssistantAgent` | Azure OpenAI Assistants API |
+| `foundry_agent` | `AzureAIAgent` | Azure AI Foundry Agent Service |
+| `openai_responses` | `OpenAIResponsesAgent` | OpenAI Responses API |
+| `bedrock_agent` | `BedrockAgent` | Amazon Bedrock Agent Service |
+| *(custom)* | (registered type) | via `@register_agent_type` decorator |
+
+**`model` block schema:**
 
 ```yaml
-type: chat_completion_agent  # or openai_assistant, foundry_agent, openai_responses
-name: AgentName
-description: Agent description
-instructions: System prompt instructions
-tools:
-  - id: PluginName.function_name
-    type: function
 model:
-  id: ${ModelId}
+  id: gpt-4o-mini            # Model deployment name or model ID
   options:
-    temperature: 0.7
+    temperature: 0.4          # float 0.0-2.0
+    top_p: 1.0                # float 0.0-1.0
+    max_tokens: 2048          # int
+    function_choice_behavior: # ChatCompletionAgent only
+      type: auto              # auto | required | none
+      functions:              # restrict to specific functions (optional)
+        - PluginName.FunctionName
 ```
 
-Declarative `type` values: `chat_completion_agent`, `openai_assistant`, `foundry_agent`, `openai_responses`.
+**ChatCompletionAgent -- minimal spec:**
+
+```yaml
+type: chat_completion_agent
+name: Parrot
+instructions: Repeat the user message in pirate voice.
+```
+
+**ChatCompletionAgent -- full spec with function restrictions:**
+
+```yaml
+name: RestaurantHost
+description: Answers menu questions and takes reservations
+model:
+  id: gpt-4o-mini
+  options:
+    temperature: 0.4
+    function_choice_behavior:
+      type: auto
+      functions:
+        - MenuPlugin.GetSpecials
+        - MenuPlugin.GetItemPrice
+        - ReservationPlugin.BookTable
+instructions: |
+  You are a friendly restaurant host. Answer questions about the menu
+  and help guests make reservations.
+metadata:
+  version: "1.2"
+  owner: "restaurant-team"
+```
+
+**OpenAIAssistantAgent spec (tools as JSON schema strings):**
+
+```yaml
+name: DataAnalyst
+type: openai_assistant
+description: Analyzes CSV data files
+model:
+  id: gpt-4o
+  options:
+    temperature: 0.2
+tools:
+  - type: code_interpreter      # built-in tool
+  - type: file_search           # built-in tool
+  - type: function
+    name: MenuPlugin-GetSpecials
+    description: List today's menu specials
+    parameters: '{"type":"object","properties":{},"required":[]}'
+  - type: function
+    name: MenuPlugin-GetItemPrice
+    description: Get the price of a menu item
+    parameters: '{"type":"object","properties":{"menuItem":{"type":"string","description":"The menu item name"}},"required":["menuItem"]}'
+instructions: Analyze uploaded files and answer data questions.
+```
+
+**Registering custom agent types (Python):**
+
+```python
+from semantic_kernel.agents import register_agent_type, Agent
+
+@register_agent_type("my_custom_agent")
+class MyCustomAgent(Agent):
+    ...
+
+# Now usable in YAML:
+# type: my_custom_agent
+```
+
+**Runtime instantiation:**
+
+```python
+from semantic_kernel.agents import AgentRegistry
+
+agent = await AgentRegistry.create_from_yaml(
+    yaml_str=open("agent_spec.yaml").read(),
+    kernel=kernel,                    # kernel with pre-loaded plugins
+)
+# OR from file:
+agent = await AgentRegistry.create_from_file("agent_spec.yaml", kernel=kernel)
+```
+
+**Key constraint:** Tools referenced in YAML must already exist as plugins in the `Kernel` instance at instantiation time. The loader does NOT create functions from spec -- it resolves by name.
 
 ---
 

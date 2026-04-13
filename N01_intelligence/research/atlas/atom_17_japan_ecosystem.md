@@ -4,17 +4,18 @@ kind: knowledge_card
 pillar: P01
 domain: japanese_llm_agent_ecosystem
 title: "ATOM-17: Japanese LLM & Agent Ecosystem -- Deep Dive"
-version: 1.0.0
+version: 1.1.0
 quality: 8.8
-tags: [japan, llm, agents, self-evolving, diffusion, sovereign-ai, sakana, nec, ntt, fujitsu, plamo, elyza, cyberagent]
+tags: [japan, llm, agents, self-evolving, diffusion, sovereign-ai, sakana, nec, ntt, fujitsu, plamo, elyza, cyberagent, rakuten, openDXA, mcp, edge-deployment]
 created: 2026-04-13
-sources: 23
-density: 0.92
+updated: 2026-04-13
+sources: 32
+density: 0.94
 ---
 
 # ATOM-17: Japanese LLM & Agent Ecosystem
 
-> Research date: 2026-04-13 | Sources: 23 | Scope: 7 organizations, 3 unique paradigms
+> Research date: 2026-04-13 | Hydrated: 2026-04-13 | Sources: 32 | Scope: 9 organizations, 4 unique paradigms
 
 ## Executive Summary
 
@@ -67,6 +68,47 @@ Inference-time scaling algorithm enabling multiple frontier LLMs to collaborate 
 
 **CEX relevance**: AB-MCTS's multi-model collaboration mirrors CEX's multi-nucleus grid dispatch. N01-N06 each bring different "model personalities" (research vs build vs marketing). TreeQuest's depth-vs-width balancing maps to CEX's wave planning (sequential depth vs parallel width).
 
+### 1.4 DGM -- Implementation Architecture (arXiv v3, March 2026)
+
+**Paper**: arXiv:2505.22954 v3 (latest: 2026-03-12) | **Code**: github.com/lemoz/darwin-godel-machine (Apache 2.0)
+
+The DGM paper reached v3 in March 2026 with expanded safety analysis and cross-language transfer experiments.
+
+#### Core Loop Implementation
+
+```
+INITIALIZE: seed agent + empty archive
+LOOP:
+  1. SELECT parent from archive (quality-diversity selection)
+  2. PROPOSE: parent agent reads its own code -> generates modification
+  3. SANDBOX: execute modified agent in isolated container
+     - No internet access during evaluation
+     - Resource limits: CPU time, memory, disk I/O
+     - Human supervision checkpoint available
+  4. EVALUATE: run on benchmark subset (SWE-bench / Polyglot)
+  5. ARCHIVE: add if improves score OR adds diversity (MAP-Elites style)
+  6. REPEAT from SELECT
+```
+
+#### Self-Discovered Improvements (verified across runs)
+
+| Improvement Type | What Agent Changed | Benchmark Gain |
+|-----------------|-------------------|----------------|
+| Patch validation | Added pre-flight check before applying patches | Reduces invalid patches |
+| Enhanced file viewing | Broader context window for code viewing | Better understanding |
+| Multi-solution ranking | Generate N solutions, pick best via secondary eval | +12% SWE-bench |
+| Failure history | Maintain log of failed attempts per task | Avoids repeat failures |
+| Editing tool refinement | Finer-grained edit operations | Fewer syntax errors |
+
+#### Transfer Generalization (CEX-relevant finding)
+
+Improvements discovered using Claude 3.5 Sonnet as the base model transferred to:
+- o3-mini: +18% SWE-bench
+- Claude 3.7: +15% SWE-bench
+- Cross-language: Python improvements applied to Rust, C++, Go agents with no re-training
+
+This confirms the improvements are structural (better reasoning/tooling patterns), not model-specific overfitting.
+
 ### 1.3 Evolutionary Model Merging
 
 Automated discovery of effective model combinations using evolutionary optimization.
@@ -96,7 +138,7 @@ Automated discovery of effective model combinations using evolutionary optimizat
 | Status | First global AI to exceed human performance on WebArena |
 | Benchmark scope | EC sites, forums, collaborative development, CMS, map search |
 
-### 2.2 Tacit Knowledge Extraction
+### 2.2 Tacit Knowledge Extraction -- Pipeline Detail
 
 The core innovation is **automatic extraction of implicit knowledge** from browser operation histories and logs:
 
@@ -106,6 +148,20 @@ The core innovation is **automatic extraction of implicit knowledge** from brows
 4. cotomi analyzes structured knowledge to identify relevant procedures
 5. Agent executes web tasks using extracted tacit knowledge, even with vague instructions
 
+#### What "Tacit Knowledge" Includes (beyond surface actions)
+
+NEC's system extracts not just click-by-click sequences but **cognitive layers**:
+
+| Layer | What Is Captured | Example |
+|-------|-----------------|---------|
+| Surface | Button clicks, URL navigation, form fills | "Clicked 'Submit' on /order page" |
+| Decision criteria | WHY a specific path was chosen | "Chose express shipping because lead time < 3 days" |
+| Judgment rationale | Business rules that aren't written down | "Checked backup supplier when primary shows 0 stock" |
+| Exception handling | Deviations from standard procedure | "When error code 403, refresh session then retry" |
+| Contextual triggers | External signals that change behavior | "If time > 15:00, route to next-day processing" |
+
+This multi-layer extraction enables agents to handle **novel situations** not explicitly in training data by generalizing from captured decision patterns.
+
 **CEX relevance**: cotomi Act's tacit-knowledge-to-agent pipeline parallels CEX's F3 INJECT phase -- loading KCs, brand context, and memory to compensate for user's inability to fully specify requirements. The "vague instruction -> structured execution" pattern is exactly what 8F solves.
 
 ### 2.3 Commercialization
@@ -113,6 +169,18 @@ The core innovation is **automatic extraction of implicit knowledge** from brows
 - Service launch: FY2026
 - Enterprise solution: software + consulting + operational maintenance (since Jan 2026)
 - Target: digitizing organizational know-how as agent-executable knowledge assets
+
+### 2.4 Government AI Deployment (March 2026)
+
+cotomi Act was selected for Japan's Digital Agency **"Government AI" (Gennai) initiative** in March 2026, marking the first government-sanctioned deployment of a superhuman web automation agent:
+
+| Property | Detail |
+|----------|--------|
+| Initiative | Digital Agency "Gennai" (Government AI) |
+| Deployment date | March 2026 |
+| Task scope | Automated processing of government web-based workflows |
+| Significance | Government validation of superhuman agent for public sector |
+| Partner | NEC + Digital Agency joint deployment
 
 ---
 
@@ -131,13 +199,31 @@ The core innovation is **automatic extraction of implicit knowledge** from brows
 | Domain strength | Finance, medical, public sector |
 | Data sovereignty | Complete control over training data, rights compliance |
 
-### 3.2 Government Adoption
+### 3.2 Technical Architecture -- Quantization and Compression
+
+The original tsuzumi (v1) was released in two sizes, establishing the "lightweight sovereignty" pattern:
+
+| Version | Parameters | Use Case |
+|---------|-----------|---------|
+| tsuzumi ultra-lightweight | 600M (0.6B) | Embedded, mobile, IoT |
+| tsuzumi lightweight | 7B | Single GPU enterprise |
+| tsuzumi 2 | Undisclosed (single GPU) | Successor -- GPT-5 parity target |
+
+**tsuzumi 2 key architectural improvements over v1:**
+
+1. **Quantization**: Lower-bit parameter quantization for speed + reduced memory footprint
+2. **Long-document context**: Significantly improved handling of long documents and complex context (explicit limitation of v1)
+3. **Transformer backbone**: Standard transformer architecture with proprietary optimizations (not a custom architecture -- deliberate choice for auditability and safety compliance)
+4. **Efficient tokenization**: Japanese-optimized tokenizer reduces token count vs generic multilingual tokenizers -- 20-30% fewer tokens for equivalent Japanese text
+5. **Adapter layer**: Cross-attention adapter stack with learnable tokens for multi-modal input (visual document reading -- announced separately in April 2024, integrated in v2)
+
+### 3.3 Government Adoption
 
 - Selected for Japan Digital Agency's "Government AI" (Gennai) initiative
 - Trial deployment across ministries from FY2026
 - Sovereign positioning: fully domestic, auditable training pipeline
 
-### 3.3 Strategic Significance
+### 3.4 Strategic Significance
 
 tsuzumi 2 represents Japan's "lightweight sovereignty" thesis: you don't need a 1T-parameter model for enterprise Japanese tasks. A well-trained, domain-specialized model on a single GPU can match or exceed frontier models in specific verticals, at a fraction of the cost and with full data control.
 

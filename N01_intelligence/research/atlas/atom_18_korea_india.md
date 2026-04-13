@@ -3,20 +3,21 @@ id: n01_atom_18_korea_india
 kind: knowledge_card
 pillar: P01
 title: "Atom 18: Korean + Indian LLM Agent Ecosystems"
-version: 1.0.0
+version: 1.1.0
 created: 2026-04-13
+updated: 2026-04-13
 author: n01_intelligence
 domain: research-intelligence
 quality: 8.9
-tags: [atom, korea, india, sovereign-ai, mcp, voice-first, multilingual, agent, moe]
-tldr: "Korea builds MCP platforms + MoE agents (PlayMCP, P-C-G, Solar Pro3); India builds voice-first multilingual agents (Sarvam 105B, Krutrim Kruti, Indic LLM Arena). Both pursue sovereign AI with government backing."
-density_score: 0.92
+tags: [atom, korea, india, sovereign-ai, mcp, voice-first, multilingual, agent, moe, tokenizer, rl-training, benchmark]
+tldr: "Korea builds MCP platforms + MoE agents (PlayMCP, P-C-G, Solar Pro3, HyperCLOVA X Think); India builds voice-first multilingual agents (Sarvam 105B, Krutrim-2, BharatGen PARAM-2, Indic LLM Arena). Both converge on 128-expert MoE + sovereign compute. 2026 adds Krutrim-2 12B and PARAM-2 17B."
+density_score: 0.94
 ---
 
 # Atom 18: Korean + Indian LLM Agent Ecosystems
 
-**Scope**: Sovereign LLM programs, agent architectures, MCP platforms, voice-first design, multilingual coverage.
-**Period**: 2025-Q2 to 2026-Q2 | **Sources**: 25+ | **Date**: 2026-04-13
+**Scope**: Sovereign LLM programs, agent architectures, MCP platforms, voice-first design, multilingual coverage, RL training pipelines, tokenizer design.
+**Period**: 2025-Q2 to 2026-Q2 | **Sources**: 35+ | **Date**: 2026-04-13 (v1.1 enriched)
 
 ---
 
@@ -53,6 +54,41 @@ Kanana-2 uses MoE + MLA to run 32B total params with only 3B active -- extreme e
 | Target | Full agentic AI ecosystem differentiation by end of 2026 |
 
 **CEX relevance**: PlayMCP is the MCP pattern applied at platform scale -- a marketplace for MCP servers with single-auth bridging to multiple AI clients. This validates the MCP-as-interop thesis. The Toolbox feature (select tools, use across ChatGPT/Claude) is the user-facing MCP aggregator pattern.
+
+#### 1.1b Kanana-2 Architecture Deep Dive
+
+Full internal configuration (from HuggingFace model card):
+
+| Parameter | Value |
+|-----------|-------|
+| Total layers | 48 |
+| Dense layers | 1 (first layer, no expert routing) |
+| Vocabulary size | 128,256 tokens |
+| Total experts per FFN layer | 128 |
+| Selected experts per token | 6 (routed) + 2 (shared, always active) |
+| Effective active params | ~3B (8 experts x small FFN each) |
+| Native context | 32,768 tokens |
+| Extended context | 128K via YaRN (rope_scaling factor 4.0) |
+| Attention type | MLA (Multi-head Latent Attention) |
+| Reasoning parser compat | deepseek_r1 (vLLM --reasoning-parser flag) |
+
+**Expert routing**: 6 routed + 2 shared per token. Shared experts fire on every token regardless of routing decision -- they carry cross-domain knowledge that all tokens need. The 6 routed experts handle token-specific specialization. This dual design (shared + routed) is adapted from DeepSeek-V2/V3 MoE architecture and reduces routing instability compared to pure top-K selection.
+
+**MLA mechanism**: Compresses key-value cache into low-rank latent vectors, dramatically reducing KV-cache memory at inference. Critical for long-context agent deployments where KV cache is the memory bottleneck.
+
+**Benchmark scores (Kanana-2-30b-a3b-thinking)**:
+
+| Benchmark | Score | Context |
+|-----------|-------|---------|
+| MMLU-Pro | 75.3% | Multi-domain reasoning |
+| GPQA Diamond | 61.3% | Graduate-level science |
+| AIME 2024 | 78.3% | Math competition |
+| AIME 2025 | 72.7% | Math competition (newer) |
+| LiveCodeBench | 60.8% | Live coding eval |
+| BFCL-v3 Live Tool Calling | 75.6% | Function-calling accuracy |
+| BFCL-v3 Multi-Turn | 34.3% | Multi-turn tool use |
+
+**Tool-calling gap**: BFCL-v3 single-turn (75.6%) vs multi-turn (34.3%) reveals a 41-point drop in multi-turn tool use. This is the key weakness for agentic deployments where conversations span many turns with accumulated tool context.
 
 ### 1.2 Naver HyperCLOVA X Think
 

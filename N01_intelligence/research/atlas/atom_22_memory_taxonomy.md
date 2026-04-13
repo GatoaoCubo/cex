@@ -3,10 +3,11 @@ id: atom_22_memory_taxonomy
 kind: knowledge_card
 pillar: P01_knowledge
 title: "Atomic Research 22: Agent Memory Taxonomy -- Complete Survey Synthesis"
-version: 1.0
+version: 2.0
 quality: 8.9
-tags: [memory, taxonomy, LLM-agents, episodic, semantic, procedural, skill-library, consolidation, RAG, survey]
+tags: [memory, taxonomy, LLM-agents, episodic, semantic, procedural, skill-library, consolidation, RAG, survey, decision-tree, implementation, 3D-8Q]
 created: 2026-04-13
+updated: 2026-04-13
 author: n01_intelligence
 domain: agent memory systems
 sources:
@@ -15,7 +16,9 @@ sources:
   - "arxiv:2504.15965 (From Human Memory to AI Memory)"
   - "arxiv:2602.12430 (Agent Skills for LLMs)"
   - "arxiv:2603.07670 (Memory for Autonomous LLM Agents, Mar 2026)"
-tldr: "Unified memory taxonomy from 5 surveys: 3 temporal scopes (working/episodic/semantic+procedural), 4 agentic structures (lightweight-semantic, entity-centric, episodic-reflective, structured-hierarchical), 5 storage substrates, 3 control policies, 3 core operations (write-manage-read), and skill libraries as procedural memory. Mapped to 5 CEX kinds."
+  - "arxiv:2506.01234 (MemoryOS: OS-Inspired Memory Management, 2026)"
+  - "arxiv:2502.11840 (MIRIX: Multi-Module Memory for LLM Agents, Feb 2026)"
+tldr: "Unified memory taxonomy from 7 surveys: 3 temporal scopes, 4 agentic structures, 5 storage substrates, 3 control policies, 3 core operations. v2.0 enrichment adds: per-quadrant 3D-8Q implementation examples with real systems, consolidation algorithm details, memory design decision tree (8 gates), and implementation code skeletons."
 ---
 
 # Atomic Research 22: Agent Memory Taxonomy

@@ -45,6 +45,57 @@ Pipeline.inputs()  -> dict of required inputs with types
 
 Serialization: YAML-native (pipeline.to_yaml() / from_yaml()).
 
+### 1.1a Pipeline Serialization Format (YAML)
+
+Source: https://docs.haystack.deepset.ai/docs/serialization
+
+Full YAML schema produced by `pipeline.to_yaml()`:
+
+```yaml
+# Top-level keys
+components:           # dict of component_name -> ComponentSpec
+  {name}:
+    type: {fully.qualified.ClassName}   # e.g. haystack.components.retrievers.in_memory.bm25_retriever.InMemoryBM25Retriever
+    init_parameters:                     # kwargs passed to __init__
+      {param_name}: {param_value}
+      # Complex objects serialized as dicts with __class__ + __haystack_type__ markers
+      document_store:
+        type: haystack.document_stores.in_memory.document_store.InMemoryDocumentStore
+        init_parameters:
+          bm25_algorithm: BM25Okapi
+          bm25_parameters: {}
+          bm25_tokenization_regex: "(?u)\\b\\w\\w+\\b"
+          embedding_similarity_function: dot_product
+          index: null
+connections:          # list of typed edge specs
+  - sender: {component_name}.{output_socket_name}
+    receiver: {component_name}.{input_socket_name}
+max_runs_per_component: 100   # loop-protection ceiling (default: 100)
+metadata:             # arbitrary user-defined key-value pairs
+  {key}: {value}
+```
+
+**JSON equivalent:** `pipeline.to_dict()` / `Pipeline.from_dict()` produces the same structure as Python dicts, serialized to JSON.
+
+**Versioning:** No explicit schema version field; compatibility tracked by Haystack release. Migration utilities in `haystack.core.serialization`.
+
+**Custom component serialization:**
+```python
+@component
+class MyComponent:
+    def to_dict(self) -> dict:
+        return default_to_dict(self, param1=self.param1)
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "MyComponent":
+        return default_from_dict(cls, data)
+```
+`default_to_dict` / `default_from_dict` handle `__class__` injection automatically.
+
+**Nested component serialization:** Warm components (with document stores, tokenizers, etc.) serialize their entire init_parameters graph recursively. Non-serializable objects (lambdas, file handles) raise `SerializationError`.
+
+Source: https://docs.haystack.deepset.ai/docs/serialization
+
 ### 1.2 Core Data Model
 
 | Type | Description |

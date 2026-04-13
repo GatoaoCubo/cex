@@ -4,7 +4,7 @@ kind: knowledge_card
 type: research_atom
 pillar: P01
 title: "LLM Evaluation & Benchmark Taxonomy -- Complete Vocabulary Atlas"
-version: 1.0.0
+version: 1.1.0
 created: 2026-04-13
 updated: 2026-04-13
 author: n01_intelligence
