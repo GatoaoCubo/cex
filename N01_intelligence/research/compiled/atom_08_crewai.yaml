@@ -1,8 +1,18 @@
-title: 'CrewAI: A Comprehensive Guide to Agents, Tasks, and Workflows'
-author: CrewAI Team
-date: '2023-10-15'
-description: An in-depth exploration of CrewAI's architecture, concepts, and implementation details, covering agents, tasks,
-  crews, flows, memory, knowledge, tools, and more.
+id: atom_08_crewai
+kind: knowledge_card
+pillar: P01
+quality: 8.8
+title: CrewAI Deep Vocabulary Scrape
+tags:
+- crewai
+- agent
+- framework-atlas
+- v0.100+
+- lancedb
+- flows
+- events
+date: 2026-04-13
+version: 2.0
 introduction: CrewAI is an open-source framework designed to enable the creation of autonomous, collaborative AI agents. This
   document serves as a technical reference, detailing the core components, workflows, and implementation patterns of the CrewAI
   ecosystem. It covers agents, tasks, crews, flows, memory systems, knowledge integration, tooling, event handling, and enterprise
@@ -71,18 +81,745 @@ glossary: 'A2A: Agent-to-Agent protocol for cross-service delegation BaseEvent: 
   Execution result (raw, pydantic, json_dict) FlowState: State object managed by Flow MemoryScope: Branch restriction for
   memory operations RecallFlow: Multi-step deep memory retrieval @router: Flow decorator for conditional branching TaskOutput:
   Task execution result object @tool: Decorator for function-based tool creation ---'
-sources:
-- CrewAI Documentation -- Agents
-- CrewAI Documentation -- Tasks
-- CrewAI Documentation -- Crews
-- CrewAI Documentation -- Flows
-- CrewAI Documentation -- Knowledge
-- CrewAI Documentation -- Memory
-- CrewAI Documentation -- Tools
-- CrewAI Documentation -- Events
-- CrewAI Documentation -- CLI
-- CrewAI Documentation -- Testing
-- CrewAI Documentation -- Planning
-- CrewAI Documentation -- LLM Connections
-- CrewAI GitHub Repository
-- CrewAI Pricing
+sources: '- CrewAI Documentation -- Agents
+
+  - CrewAI Documentation -- Tasks
+
+  - CrewAI Documentation -- Crews
+
+  - CrewAI Documentation -- Flows
+
+  - CrewAI Documentation -- Knowledge
+
+  - CrewAI Documentation -- Memory
+
+  - CrewAI Documentation -- Tools
+
+  - CrewAI Documentation -- Events
+
+  - CrewAI Documentation -- CLI
+
+  - CrewAI Documentation -- Testing
+
+  - CrewAI Documentation -- Planning
+
+  - CrewAI Documentation -- LLM Connections
+
+  - CrewAI GitHub Repository
+
+  - CrewAI Pricing
+
+
+  ---'
+enrichment_v2_0_implementation_level_detail_v0_100: '---'
+agent_parameters_complete_reference: ''
+required: '| Parameter | Type | Description |
+
+  |-----------|------|-------------|
+
+  | `role` | str | Function and expertise label |
+
+  | `goal` | str | Individual objective |
+
+  | `backstory` | str | Context/personality enrichment |'
+execution_control: '| Parameter | Type | Default | Description |
+
+  |-----------|------|---------|-------------|
+
+  | `llm` | Union[str, LLM, Any] | `OPENAI_MODEL_NAME` env or `gpt-4` | Primary LLM |
+
+  | `function_calling_llm` | Optional[Any] | None | Separate model for tool calling |
+
+  | `max_iter` | int | 20 | Max reasoning iterations |
+
+  | `max_rpm` | Optional[int] | None | Rate limit (requests/minute) |
+
+  | `max_execution_time` | Optional[int] | None | Timeout in seconds |
+
+  | `max_retry_limit` | int | 2 | Error retry count |
+
+  | `verbose` | bool | False | Logging verbosity |
+
+  | `cache` | bool | True | Cache tool results |
+
+  | `reasoning` | bool | False | Enable pre-task reflection |
+
+  | `max_reasoning_attempts` | Optional[int] | None | Cap planning iterations |
+
+  | `inject_date` | bool | False | Auto-inject current date |
+
+  | `date_format` | str | `%Y-%m-%d` | datetime format string |
+
+  | `multimodal` | bool | False | Enable image/text processing |
+
+  | `respect_context_window` | bool | True | Auto-summarize on token overflow |
+
+  | `allow_delegation` | bool | False | Allow delegating to other agents |
+
+  | `step_callback` | Optional[Any] | None | Called after each step |
+
+  | `system_template` | Optional[str] | None | Custom system prompt |
+
+  | `prompt_template` | Optional[str] | None | Custom input format |
+
+  | `response_template` | Optional[str] | None | Custom response format |
+
+  | `knowledge_sources` | Optional[List] | None | Per-agent knowledge bases |
+
+  | `embedder` | Optional[Dict] | None | Custom embedder config |
+
+
+  Deprecated in v0.100+: `allow_code_execution`, `code_execution_mode` -- use E2B or Modal sandbox services.'
+yaml_configuration_agents_yaml: "# config/agents.yaml\nresearcher:\n  role: >\n    {topic} Senior Research Analyst\n  goal:\
+  \ >\n    Uncover cutting-edge developments in {topic}\n  backstory: >\n    You work at a leading tech think tank specializing\
+  \ in {topic}.\n\ndata_analyst:\n  role: >\n    Financial Data Analyst\n  goal: >\n    Analyze datasets to identify trends\
+  \ and anomalies\n  backstory: >\n    Experienced in statistical analysis and quantitative modeling.\n\nVariables (`{topic}`)\
+  \ resolved at `crew.kickoff(inputs={'topic': 'AI'})`."
+crewbase_yaml_binding_pattern: "from crewai import Agent, Crew, Task, Process\nfrom crewai.project import CrewBase, agent,\
+  \ crew, task\n\n@CrewBase\nclass ResearchCrew:\n    agents_config = 'config/agents.yaml'\n    tasks_config  = 'config/tasks.yaml'\n\
+  \n    @agent\n    def researcher(self) -> Agent:\n        return Agent(config=self.agents_config['researcher'], verbose=True)\n\
+  \n    @task\n    def research_task(self) -> Task:\n        return Task(config=self.tasks_config['research_task'])\n\n  \
+  \  @crew\n    def crew(self) -> Crew:\n        return Crew(agents=self.agents, tasks=self.tasks,\n                    process=Process.sequential,\
+  \ verbose=True)\n\nPython method names MUST match YAML keys.\n\n---"
+task_parameters_complete_reference: '| Parameter | Type | Default | Description |
+
+  |-----------|------|---------|-------------|
+
+  | `description` | str | Required | Task specification |
+
+  | `expected_output` | str | Required | Completion criteria |
+
+  | `name` | Optional[str] | None | Identifier for logging |
+
+  | `agent` | Optional[BaseAgent] | None | Assigned executor |
+
+  | `tools` | List[BaseTool] | [] | Available tools |
+
+  | `context` | Optional[List[Task]] | None | Dependency task outputs |
+
+  | `async_execution` | Optional[bool] | False | Non-blocking execution |
+
+  | `human_input` | Optional[bool] | False | Require manual review |
+
+  | `markdown` | Optional[bool] | False | Format output as Markdown |
+
+  | `output_file` | Optional[str] | None | Save output to path |
+
+  | `create_directory` | Optional[bool] | True | Auto-create parent dirs |
+
+  | `output_json` | Optional[Type[BaseModel]] | None | Pydantic JSON output |
+
+  | `output_pydantic` | Optional[Type[BaseModel]] | None | Structured Pydantic output |
+
+  | `callback` | Optional[Any] | None | Post-completion function |
+
+  | `guardrail` | Optional[Callable] | None | Single validator |
+
+  | `guardrails` | Optional[List[Callable]] | None | Multiple validators |
+
+  | `guardrail_max_retries` | Optional[int] | 3 | Retry attempts on failure |
+
+  | `config` | Optional[Dict] | None | Custom settings |'
+yaml_configuration_tasks_yaml: "research_task:\n  description: >\n    Conduct thorough research on {topic}. Use web search\
+  \ and academic sources.\n  expected_output: >\n    A 3-paragraph brief with key facts, trends, and citations.\n  agent:\
+  \ researcher\n  markdown: true\n  output_file: output/research_{topic}.md\n\nanalysis_task:\n  description: >\n    Analyze\
+  \ the research brief and produce financial projections.\n  expected_output: >\n    Financial model in JSON with projections\
+  \ for 3 years.\n  agent: data_analyst\n  output_json: FinancialModel"
+guardrails_three_implementation_patterns: "Pattern 1 -- Deterministic function:\nfrom crewai.tasks.task_output import TaskOutput\n\
+  from typing import Tuple, Any\n\ndef validate_word_count(result: TaskOutput) -> Tuple[bool, Any]:\n    if len(result.raw.split())\
+  \ <= 200:\n        return (True, result.raw)\n    return (False, \"Output exceeds 200 words.\")\n\nPattern 2 -- LLM-evaluated\
+  \ string:\nTask(guardrail=\"Must be professional tone, under 200 words, no bullet points\")\n\nPattern 3 -- Mixed multi-guardrail\
+  \ list:\nTask(guardrails=[validate_word_count, \"Must cite at least 2 sources\"],\n     guardrail_max_retries=5)"
+taskoutput_fields: '| Field | Type | Content |
+
+  |-------|------|---------|
+
+  | `raw` | str | String output |
+
+  | `json_dict` | Dict | Dictionary form |
+
+  | `pydantic` | BaseModel | Validated model instance |
+
+  | `summary` | str | First 10 words auto-generated |
+
+  | `messages` | List | Full LLM conversation history |
+
+
+  ---'
+crew_parameters_complete_reference: '| Parameter | Type | Default | Description |
+
+  |-----------|------|---------|-------------|
+
+  | `agents` | List[Agent] | Required | Crew members |
+
+  | `tasks` | List[Task] | Required | Work units |
+
+  | `process` | Process | sequential | Execution strategy |
+
+  | `verbose` | bool | False | Logging |
+
+  | `manager_llm` | LLM | None | LLM for hierarchical manager |
+
+  | `manager_agent` | Agent | None | Custom manager agent |
+
+  | `function_calling_llm` | LLM | None | Crew-wide tool-call LLM |
+
+  | `memory` | Memory | None | Shared memory instance |
+
+  | `cache` | bool | True | Cache tool results |
+
+  | `embedder` | Dict | OpenAI | Embedder configuration |
+
+  | `max_rpm` | int | None | Rate limit |
+
+  | `planning` | bool | False | Enable AgentPlanner |
+
+  | `planning_llm` | LLM | None | LLM for planning step |
+
+  | `step_callback` | Callable | None | After each step |
+
+  | `task_callback` | Callable | None | After each task |
+
+  | `output_log_file` | bool/str | None | Log file (`.json` ext = JSON format) |
+
+  | `share_crew` | bool | False | Opt-in telemetry |
+
+  | `knowledge_sources` | List | None | Crew-level knowledge |
+
+  | `stream` | bool | False | Enable streaming output |'
+process_types: '| Value | Behavior |
+
+  |-------|----------|
+
+  | `Process.sequential` | Tasks execute in list order |
+
+  | `Process.hierarchical` | Manager agent delegates; needs `manager_llm` or `manager_agent` |'
+kickoff_methods: '| Method | Type | Description |
+
+  |--------|------|-------------|
+
+  | `kickoff(inputs={})` | Sync | Standard execution |
+
+  | `kickoff_for_each(inputs=[])` | Sync | Sequential per item |
+
+  | `akickoff(inputs={})` | Native async | True async/await |
+
+  | `akickoff_for_each(inputs=[])` | Native async | Async per item |
+
+  | `kickoff_async(inputs={})` | Thread-based | `asyncio.to_thread` wrapper |
+
+  | `kickoff_for_each_async(inputs=[])` | Thread-based | Thread-based iteration |'
+crewoutput_fields: '| Field | Type | Content |
+
+  |-------|------|---------|
+
+  | `raw` | str | Final string output |
+
+  | `pydantic` | BaseModel | Structured output |
+
+  | `json_dict` | Dict | JSON representation |
+
+  | `tasks_output` | List[TaskOutput] | Per-task results |
+
+  | `token_usage` | Dict | LLM performance metrics |
+
+
+  ---'
+unified_memory_system_v0_100: ''
+architecture: v0.100+ consolidates short-term, long-term, entity, and external memory types into a single `Memory` class with
+  LLM-powered scope inference. Breaking change from prior multi-type API.
+storage_backends: '| Backend | Purpose | Default Path |
+
+  |---------|---------|-------------|
+
+  | LanceDB | Vector + metadata | `./.crewai/memory` (env: `CREWAI_STORAGE_DIR`) |
+
+  | SQLite | Flow state (`@persist`) | Alongside LanceDB |
+
+  | Custom | Implement `StorageBackend` protocol | Any |
+
+
+  Concurrent writes: shared locking with automatic retry.'
+embedding_providers_11: '| Provider | Default Model | Use Case |
+
+  |----------|--------------|----------|
+
+  | OpenAI | text-embedding-3-small | Default |
+
+  | Ollama | mxbai-embed-large | Local/offline |
+
+  | Azure OpenAI | text-embedding-ada-002 | Enterprise |
+
+  | Google AI/Vertex | gemini-embedding-001 | GCP |
+
+  | Cohere | -- | Semantic search |
+
+  | VoyageAI | -- | High accuracy |
+
+  | AWS Bedrock | -- | AWS ecosystem |
+
+  | Hugging Face | -- | Open-source |
+
+  | Jina | -- | Multilingual |
+
+  | IBM WatsonX | -- | Enterprise |
+
+  | Custom callable | -- | Full control |'
+composite_scoring_weights: '| Parameter | Default | Effect |
+
+  |-----------|---------|--------|
+
+  | `semantic_weight` | 0.5 | Vector similarity |
+
+  | `recency_weight` | 0.3 | Temporal decay |
+
+  | `importance_weight` | 0.2 | Saved importance |
+
+  | `recency_half_life_days` | 30 | Decay period |
+
+  | `consolidation_threshold` | 0.85 | Duplicate detection |
+
+  | `batch_dedup_threshold` | 0.98 | Near-duplicate drop (cosine) |
+
+  | `query_analysis_threshold` | 200 | LLM-skip threshold (chars) |
+
+
+  Formula: `score = semantic_weight  similarity + recency_weight  decay + importance_weight * importance`'
+hierarchical_scopes: 'Filesystem-like tree: `/`, `/project/alpha`, `/agent/researcher`. LLM auto-suggests placement. `MemorySlice`
+  enables views across multiple disjoint scopes; optional `read_only=True`.'
+recallflow_modes: '| Mode | Latency | Method |
+
+  |------|---------|--------|
+
+  | Shallow | ~200ms | Direct vector search, no LLM calls |
+
+  | Deep (default) | Varies | Query analysis + scope selection + parallel vector search |
+
+
+  LLM skipped automatically for queries under 200 characters.'
+memory_api: 'from crewai.memory import Memory
+
+
+  mem = Memory(semantic_weight=0.5, recency_weight=0.3, importance_weight=0.2)
+
+
+  # Store
+
+  mem.remember("Project deadline 2026-05-01", scope="/project/alpha")
+
+  mem.remember_many(["fact1", "fact2"])   # Non-blocking background thread
+
+
+  # Retrieve
+
+  results = mem.recall("project deadline", depth="deep", limit=5)
+
+  facts   = mem.extract_memories("Long meeting notes text ...")
+
+
+  # Delete / admin
+
+  mem.forget(scope="/project/alpha")
+
+  mem.tree()
+
+  mem.info("/project")
+
+  mem.list_records(scope="/project/alpha")
+
+  mem.reset()
+
+  mem.drain_writes()
+
+  mem.close()
+
+
+  CLI: `crewai memory` (TUI), `crewai memory --storage-path ./dir`'
+non_blocking_guarantee: '`remember_many()` returns immediately. Every `recall()` auto-calls `drain_writes()` before searching.
+  Crew shutdown flushes pending saves in `finally`.'
+privacy: 'mem.remember("Sensitive data", source="user:alice", private=True)
+
+  # Visible only when source matches; admin override: recall(include_private=True)'
+memory_in_crews_agents_flows: '| Context | Usage |
+
+  |---------|-------|
+
+  | `Crew(memory=True)` | Shared across all agents |
+
+  | `Agent(memory=True)` | Per-agent scoped view |
+
+  | Flow instance | `self.remember()`, `self.recall()`, `self.extract_memories()` |'
+failure_resilience_no_exceptions_raised_for_analysis_failures: '- Save analysis failure: stores at `/`, importance 0.5
+
+  - Extract failure: full content as single record
+
+  - Query analysis failure: falls back to vector search
+
+  - Storage/embedder failures DO propagate
+
+
+  ---'
+flow_system_complete_decorator_reference: ''
+start_entry_points: "from crewai.flow.flow import Flow, start, listen, router, persist\n\nclass MyFlow(Flow):\n    @start()\n\
+  \    def begin(self):\n        return \"initial data\"\n\n    @start(\"begin\")                              # Fires after\
+  \ 'begin' method\n    def begin_after(self): pass\n\n    @start(lambda self: self.state.get(\"ready\")) # Callable condition\n\
+  \    def begin_if_ready(self): pass"
+listen_reactive_triggers: "    @listen(\"begin\")              # By name string; receives output as arg\n    def process(self,\
+  \ output):\n        return f\"processed: {output}\"\n\n    @listen(begin)                # Direct reference\n    def process_ref(self,\
+  \ output): pass"
+router_conditional_branching: "    @router(begin)\n    def route(self):\n        return \"success\" if self.state.get(\"quality\"\
+  , 0) > 8 else \"failed\"\n\n    @listen(\"success\")\n    def on_success(self): pass\n\n    @listen(\"failed\")\n    def\
+  \ on_failed(self): pass"
+persist_state_persistence: "@persist\nclass MyFlow(Flow): pass          # Class-level: all methods persisted\n\nclass MyFlow(Flow):\n\
+  \    @persist\n    @start()\n    def start_method(self): pass  # Method-level\nDefault backend: SQLiteFlowPersistence. Custom\
+  \ backends supported."
+human_feedback_hitl_v1_8_0: "    @human_feedback(\n        message=\"Please review and approve the report:\",\n        emit=[\"\
+  approved\", \"needs_revision\", \"rejected\"],\n        llm=\"gpt-4o-mini\",\n        default_outcome=\"needs_revision\"\
+  \n    )\n    @listen(\"generate_report\")\n    def review(self):\n        pass\n\n    @listen(\"approved\")\n    def finalize(self):\n\
+  \        feedback = self.last_human_feedback.feedback\n        history  = self.human_feedback_history"
+conditional_logic_or_and_and: "from crewai.flow.flow import or_, and_\n\n    @listen(or_(method_a, method_b))    # Fires when\
+  \ EITHER completes\n    def on_either(self, result): pass\n\n    @listen(and_(method_a, method_b))   # Fires only when BOTH\
+  \ complete\n    def on_both(self): pass"
+flowstate_variants: "Unstructured (dict):\nclass MyFlow(Flow):\n    @start()\n    def begin(self):\n        self.state[\"\
+  counter\"] = 0\n        self.state[\"id\"]      # Auto-generated UUID\n\nStructured (Pydantic):\nclass MyState(BaseModel):\n\
+  \    counter: int = 0\n    message: str = \"\"\n\nclass MyFlow(Flow[MyState]):   # 'id' field auto-added\n    @start()\n\
+  \    def begin(self):\n        self.state.counter += 1"
+execution_methods: "result = flow.kickoff()\nresult = flow.kickoff(inputs={\"topic\": \"AI\"})\nresult = await flow.kickoff_async()\n\
+  \n# Visualization\nflow.plot(\"my_flow\")           # Generates my_flow.html\n# crewai flow plot\n\n# Streaming\nclass MyFlow(Flow):\n\
+  \    stream = True\n\nstreaming = flow.kickoff()\nfor chunk in streaming:\n    print(chunk.content, end=\"\", flush=True)\n\
+  result = streaming.result"
+built_in_flow_memory_methods: "class MyFlow(Flow):\n    @start()\n    def begin(self):\n        self.remember(\"Project started\"\
+  , scope=\"/project\", importance=0.9)\n        memories = self.recall(\"project\", limit=5, depth=\"deep\")\n        facts\
+  \    = self.extract_memories(\"Long raw text ...\")\n\n---"
+event_system_80_event_types: All events inherit from `BaseEvent` with `timestamp` and `type` fields.
+registration_pattern: "from crewai.utilities.events import BaseEventListener, crewai_event_bus\nfrom crewai.utilities.events.crew_events\
+  \ import CrewKickoffStartedEvent\n\nclass MyListener(BaseEventListener):\n    def setup_listeners(self, crewai_event_bus):\n\
+  \        @crewai_event_bus.on(CrewKickoffStartedEvent)\n        def on_start(source, event):\n            print(f\"Crew\
+  \ started at {event.timestamp}\")\n\nlistener = MyListener()   # MUST instantiate -- prevents garbage collection\n\n# Temporary\
+  \ handlers for tests\nwith crewai_event_bus.scoped_handlers():\n    pass"
+crew_events_10: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `CrewKickoffStartedEvent` | inputs |
+
+  | `CrewKickoffCompletedEvent` | output, token_usage |
+
+  | `CrewKickoffFailedEvent` | error |
+
+  | `CrewTestStartedEvent` | n_iterations, model |
+
+  | `CrewTestCompletedEvent` | results |
+
+  | `CrewTestFailedEvent` | error |
+
+  | `CrewTestResultEvent` | scores |
+
+  | `CrewTrainStartedEvent` | n_iterations, filename |
+
+  | `CrewTrainCompletedEvent` | -- |
+
+  | `CrewTrainFailedEvent` | error |'
+agent_events_9: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `AgentExecutionStartedEvent` | agent_role, task_description |
+
+  | `AgentExecutionCompletedEvent` | agent_role, output |
+
+  | `AgentExecutionErrorEvent` | agent_role, error |
+
+  | `LiteAgentExecutionStartedEvent` | agent_info, tools, messages |
+
+  | `LiteAgentExecutionCompletedEvent` | agent_info, output |
+
+  | `LiteAgentExecutionErrorEvent` | agent_info, error |
+
+  | `AgentEvaluationStartedEvent` | -- |
+
+  | `AgentEvaluationCompletedEvent` | score |
+
+  | `AgentEvaluationFailedEvent` | error |'
+task_events_4: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `TaskStartedEvent` | task_name, description |
+
+  | `TaskCompletedEvent` | task_name, output |
+
+  | `TaskFailedEvent` | task_name, error |
+
+  | `TaskEvaluationEvent` | task_name, score, feedback |'
+tool_events_6: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `ToolUsageStartedEvent` | tool_name, input |
+
+  | `ToolUsageFinishedEvent` | tool_name, output, duration_ms |
+
+  | `ToolUsageErrorEvent` | tool_name, error |
+
+  | `ToolValidateInputErrorEvent` | tool_name, validation_error |
+
+  | `ToolExecutionErrorEvent` | tool_name, error |
+
+  | `ToolSelectionErrorEvent` | available_tools, error |'
+llm_events_5: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `LLMCallStartedEvent` | model, messages, temperature |
+
+  | `LLMCallCompletedEvent` | model, response, token_usage |
+
+  | `LLMCallFailedEvent` | model, error |
+
+  | `LLMStreamChunkEvent` | chunk_content |
+
+  | `LLMThinkingChunkEvent` | thinking_content |'
+flow_events_9: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `FlowCreatedEvent` | flow_name |
+
+  | `FlowStartedEvent` | flow_name, inputs |
+
+  | `FlowFinishedEvent` | flow_name, output |
+
+  | `FlowPausedEvent` | feedback_message, possible_outcomes |
+
+  | `FlowPlotEvent` | output_path |
+
+  | `MethodExecutionStartedEvent` | method_name |
+
+  | `MethodExecutionFinishedEvent` | method_name, output |
+
+  | `MethodExecutionFailedEvent` | method_name, error |
+
+  | `MethodExecutionPausedEvent` | method_name, pause_reason |'
+human_in_loop_events_4: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `FlowInputRequestedEvent` | question, metadata |
+
+  | `FlowInputReceivedEvent` | response (null = timed out) |
+
+  | `HumanFeedbackRequestedEvent` | message, emit_options |
+
+  | `HumanFeedbackReceivedEvent` | outcome, feedback |'
+memory_events_9: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `MemoryQueryStartedEvent` | query, limit, score_threshold |
+
+  | `MemoryQueryCompletedEvent` | results_count, duration_ms |
+
+  | `MemoryQueryFailedEvent` | error |
+
+  | `MemorySaveStartedEvent` | content_preview, scope |
+
+  | `MemorySaveCompletedEvent` | record_id, scope, duration_ms |
+
+  | `MemorySaveFailedEvent` | error |
+
+  | `MemoryRetrievalStartedEvent` | -- |
+
+  | `MemoryRetrievalCompletedEvent` | records_count |
+
+  | `MemoryRetrievalFailedEvent` | error |'
+knowledge_events_6: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `KnowledgeRetrievalStartedEvent` | query |
+
+  | `KnowledgeRetrievalCompletedEvent` | results_count |
+
+  | `KnowledgeQueryStartedEvent` | query |
+
+  | `KnowledgeQueryCompletedEvent` | -- |
+
+  | `KnowledgeQueryFailedEvent` | error |
+
+  | `KnowledgeSearchQueryFailedEvent` | error |'
+mcp_events_7: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `MCPConnectionStartedEvent` | server_name, url, transport_type, timeout, reconnecting |
+
+  | `MCPConnectionCompletedEvent` | duration_ms |
+
+  | `MCPConnectionFailedEvent` | error_type (timeout/authentication/network) |
+
+  | `MCPToolExecutionStartedEvent` | tool_name, server_name |
+
+  | `MCPToolExecutionCompletedEvent` | tool_name, duration_ms |
+
+  | `MCPToolExecutionFailedEvent` | tool_name, error |
+
+  | `MCPConfigFetchFailedEvent` | server_name, error |'
+llm_guardrail_events_3: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `LLMGuardrailStartedEvent` | retry_count |
+
+  | `LLMGuardrailCompletedEvent` | -- |
+
+  | `LLMGuardrailFailedEvent` | error |'
+reasoning_and_observation_events_9: '| Event | Key Fields |
+
+  |-------|-----------|
+
+  | `AgentReasoningStartedEvent` | -- |
+
+  | `AgentReasoningCompletedEvent` | plan |
+
+  | `AgentReasoningFailedEvent` | error |
+
+  | `StepObservationStartedEvent` | -- |
+
+  | `StepObservationCompletedEvent` | observation |
+
+  | `StepObservationFailedEvent` | error |
+
+  | `PlanRefinementEvent` | refined_plan |
+
+  | `PlanReplanTriggeredEvent` | reason |
+
+  | `GoalAchievedEarlyEvent` | -- |'
+a2a_events_30: '| Category | Events |
+
+  |----------|--------|
+
+  | Delegation | `A2ADelegationStartedEvent`, `A2ADelegationCompletedEvent`, `A2AParallelDelegationStartedEvent`, `A2AParallelDelegationCompletedEvent`
+  |
+
+  | Conversation | `A2AConversationStartedEvent`, `A2AMessageSentEvent`, `A2AResponseReceivedEvent`, `A2AConversationCompletedEvent`
+  |
+
+  | Streaming | `A2AStreamingStartedEvent`, `A2AStreamingChunkEvent` |
+
+  | Polling/Push | `A2APollingStartedEvent`, `A2APollingStatusEvent`, `A2APushNotificationRegisteredEvent`, `A2APushNotificationReceivedEvent`,
+  `A2APushNotificationSentEvent`, `A2APushNotificationTimeoutEvent` |
+
+  | Connection | `A2AAgentCardFetchedEvent`, `A2AAuthenticationFailedEvent`, `A2AConnectionErrorEvent`, `A2ATransportNegotiatedEvent`,
+  `A2AContentTypeNegotiatedEvent` |
+
+  | Artifacts | `A2AArtifactReceivedEvent` |
+
+  | Server Tasks | `A2AServerTaskStartedEvent`, `A2AServerTaskCompletedEvent`, `A2AServerTaskCanceledEvent`, `A2AServerTaskFailedEvent`
+  |
+
+  | Context Lifecycle | `A2AContextCreatedEvent`, `A2AContextExpiredEvent`, `A2AContextIdleEvent`, `A2AContextCompletedEvent`,
+  `A2AContextPrunedEvent` |
+
+
+  ---'
+cli_complete_reference_v0_140_0: '| Command | Flags | Purpose |
+
+  |---------|-------|---------|
+
+  | `crewai create crew NAME` | -- | Scaffold crew project |
+
+  | `crewai create flow NAME` | -- | Scaffold flow project |
+
+  | `crewai run` | -- | Auto-detect crew/flow from pyproject.toml |
+
+  | `crewai chat` | -- | Interactive REPL (requires `chat_llm`) |
+
+  | `crewai test` | `-n` iterations (default 3), `-m` model (default gpt-4o-mini) | Evaluate performance |
+
+  | `crewai train` | `-n` iterations (default 5), `-f` filename (default trained_agents_data.pkl) | Iterative improvement
+  |
+
+  | `crewai replay` | `-t TASK_ID` | Resume from task |
+
+  | `crewai log-tasks-outputs` | -- | View recent kickoff outputs |
+
+  | `crewai reset-memories` | `-l -s -e -k -kn -akn -a` | Clear memory stores |
+
+  | `crewai memory` | `--storage-path PATH` | Terminal TUI memory browser |
+
+  | `crewai traces enable/disable/status` | -- | Manage execution traces |
+
+  | `crewai version` | `--tools` | Show versions |
+
+  | `crewai config list/set/reset` | `KEY VALUE` | Settings in ~/.config/crewai/settings.json |
+
+  | `crewai flow plot` | -- | Interactive HTML flow visualization |
+
+  | `crewai login` | -- | OAuth2 device flow for AMP |
+
+  | `crewai deploy create/push/status/logs/list/remove` | -- | AMP deployment lifecycle |
+
+  | `crewai org list/current/switch` | `ORG_ID` | Organization management |
+
+
+  Config keys: `enterprise_base_url`, `oauth2_provider`, `oauth2_audience`, `oauth2_client_id`, `oauth2_domain`.
+
+  Auth note (v0.140.0+): Google login / accounts created after July 3, 2025 require updated library.
+
+
+  ---'
+enterprise_tier_crewai_amp_cloud_updated: '| Tier | Price | Features |
+
+  |------|-------|----------|
+
+  | Starter | $99/month | Auto-scaling, basic monitoring, standard LLMs |
+
+  | Pro | Custom | Advanced security, custom LLM integrations |
+
+  | Enterprise | $120,000/year | Full SLA, SSO/SAML, audit logs, dedicated infra, on-premises option |
+
+
+  Enterprise-only: SAML/SSO, audit logging, dedicated agent pools, on-premises deployment, OAuth2 org management via `crewai
+  org`.
+
+
+  ---'
+updated_cex_comparison_v2_0: '| Dimension | CrewAI | CEX |
+
+  |-----------|--------|-----|
+
+  | Composition unit | Agent (role + goal + backstory) | Nucleus (domain + sin lens + 13 builder ISOs) |
+
+  | Orchestration | Crew (sequential/hierarchical) + Flow (event-driven) | N07 + mission_runner (wave-based, session-tagged
+  PIDs) |
+
+  | State management | FlowState: dict OR Pydantic BaseModel | Git + `.cex/runtime/` (file-based, git-backed) |
+
+  | Memory system | Unified Memory (LanceDB, scope inference, composite scoring) | 4-type memory (correction/preference/convention/context)
+  |
+
+  | Knowledge | RAG (ChromaDB/custom) + Knowledge sources per agent | Knowledge Cards + TF-IDF retriever (2184 docs, 12K vocab)
+  |
+
+  | Quality control | `crewai test` + LLM guardrails + HITL | 3-layer scoring (structural 30% + rubric 30% + semantic 40%)
+  |
+
+  | Configuration | YAML (agents.yaml + tasks.yaml) + CrewBase | ISOs (13 per builder kind) + kinds_meta.json |
+
+  | Event system | 80+ typed events via crewai_event_bus | Signal writer (nucleus-level completion signals) |
+
+  | Deployment | AMP Cloud CLI deploy | boot/*.ps1 (local), dispatch.sh (session-aware) |
+
+  | Multi-agent protocol | A2A (30+ events, agent cards, push notifications) | Handoff files (n0X_task.md) + 8F pipeline |
+
+
+  ---'
+sources_v2_0:
+- CrewAI Memory (Unified, v0.100+)
+- CrewAI Events (80+ types)
+- CrewAI Flows (Decorators + State)
+- CrewAI Agents (Full Parameters)
+- CrewAI Tasks (Full Parameters)
+- CrewAI Crews (Methods + Config)
+- CrewAI CLI (v0.140.0+)
