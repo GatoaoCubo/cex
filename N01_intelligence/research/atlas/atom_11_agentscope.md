@@ -1,0 +1,660 @@
+---
+id: atom_11_agentscope
+kind: knowledge_card
+title: "Atomic Research: AgentScope (Alibaba Tongyi Lab)"
+version: "1.0.0"
+quality: null
+tags: [agentscope, alibaba, tongyi, multi-agent, framework, atlas, vocabulary, chinese-ai]
+pillar: P01
+domain: llm-agent-frameworks
+density_score: 0.95
+sources:
+  - "https://github.com/agentscope-ai/agentscope"
+  - "https://arxiv.org/abs/2402.14034"
+  - "https://arxiv.org/html/2508.16279v1"
+  - "https://doc.agentscope.io/"
+  - "https://docs.agentscope.io/"
+  - "https://github.com/agentscope-ai/agentscope-runtime"
+  - "https://github.com/agentscope-ai/ReMe"
+  - "https://deepwiki.com/agentscope-ai/agentscope"
+---
+
+# Atomic Research: AgentScope (Alibaba Tongyi Lab)
+
+Deep-dive extraction of AgentScope's complete vocabulary, type system, architecture,
+and unique concepts. Covers AgentScope Core (v1.0, Sep 2025), AgentScope Runtime (v1.1,
+Feb 2026), and ReMe memory system. Origin: Alibaba Tongyi Lab (Dawei Gao et al.).
+
+Papers: arXiv:2402.14034 (original, Feb 2024), arXiv:2508.16279 (v1.0, Aug 2025).
+
+---
+
+## 1. Architecture Overview
+
+AgentScope uses a **three-layer architecture** with three independent modules:
+
+| Layer | Module | Purpose |
+|-------|--------|---------|
+| Core Framework | `agentscope` | Agent development "language": agents, messages, pipelines, tools, memory |
+| Runtime | `agentscope-runtime` | Production deployment: Agent-as-a-Service, sandboxing, state persistence |
+| Studio | AgentScope Studio | Observability UI: tracing, evaluation, chat interface, Friday copilot |
+
+Design philosophy: **developer-centric**, procedure-oriented message exchange,
+async-first (Python 3.10+ asyncio), convention-over-configuration.
+
+Original (v0.x) used an **Actor-based distributed model** with RPC and placeholder
+mechanism for automatic parallelism. v1.0 shifted to FastAPI-based Agent-as-a-Service.
+
+---
+
+## 2. Full Type Registry
+
+### 2.1 Message Types
+
+| Type | Class | Fields | Purpose |
+|------|-------|--------|---------|
+| **Msg** | `Msg` | `name`, `role`, `content`, `metadata`, `id`, `timestamp`, `invocation_id` | Universal data container for all agent communication |
+| **ChatResponse** | `ChatResponse` | `content` (ContentBlock seq), `id`, `created_at`, `type` ("chat"), `usage`, `metadata` | Unified LLM response wrapper across providers |
+| **ServiceResponse** | `ServiceResponse` | (status, content) | Return type from service functions (tools) |
+| **ChatUsage** | `ChatUsage` | `prompt_tokens`, `completion_tokens`, `total_tokens` | Token accounting per LLM call |
+
+**Msg.role** values: `"user"`, `"assistant"`, `"system"`
+
+**Msg.content**: Either a plain string OR a list of `ContentBlock` objects (multimodal).
+
+### 2.2 ContentBlock Types (TypedDicts)
+
+| Block Type | Fields | Purpose |
+|------------|--------|---------|
+| **TextBlock** | `{"type": "text", "text": str}` | Plain text content |
+| **ThinkingBlock** | `{"type": "thinking", "thinking": str}` | Chain-of-thought / reasoning trace |
+| **ToolUseBlock** | `{"type": "tool_use", "id": str, "name": str, "input": dict}` | Tool invocation request |
+| **ToolResultBlock** | `{"type": "tool_result", "id": str, "name": str, "output": str\|list}` | Tool execution result |
+| **ImageBlock** | `{"type": "image", "source": URLSource\|Base64Source}` | Image content |
+| **AudioBlock** | `{"type": "audio", "source": URLSource\|Base64Source}` | Audio content |
+| **VideoBlock** | `{"type": "video", "source": URLSource\|Base64Source}` | Video content |
+
+Media source types: **URLSource** (URL reference), **Base64Source** (inline encoded).
+
+### 2.3 Agent Classes
+
+| Class | Parent | Purpose | Key Methods |
+|-------|--------|---------|-------------|
+| **AgentBase** | `StateModule` | Abstract root of all agents | `reply()`, `observe()`, `print()`, `handle_interrupt()` |
+| **ReActAgentBase** | `AgentBase` | Adds reasoning/acting separation | `_reasoning()`, `_acting()` |
+| **ReActAgent** | `ReActAgentBase` | Production ReAct implementation with 5 components | Model + Formatter + Memory + Toolkit + optional LTM |
+| **UserAgent** | `AgentBase` | Human-in-the-loop proxy | Collects human input in pipelines |
+| **A2AAgent** | `AgentBase` | Remote agent proxy via A2A protocol | Card resolvers, protocol adaptation |
+| **DialogAgent** | `AgentBase` | Role-customizable via system prompt | Simple conversational agent |
+| **DictDialogAgent** | `AgentBase` | Dictionary-format structured responses | JSON output agent |
+| **VoiceAgent** | `AgentBase` | Voice I/O agent | TTS + realtime audio |
+| **RealtimeVoiceAgent** | `AgentBase` | Streaming voice conversations | WebRTC/event-based |
+| **DeepResearchAgent** | `ReActAgentBase` | Multi-step research with reflection | Query expansion, tree-structured ReAct |
+| **BrowserAgent** | `ReActAgentBase` | Web automation via Playwright MCP | Subtask decomposition, multi-tab, long-page chunking |
+| **MetaPlannerAgent** | `ReActAgentBase` | Dual-mode: lightweight ReAct or planning-execution | `RoadmapManager`, `WorkerManager`, dynamic worker instantiation |
+| **ProgrammerAgent** | `AgentBase` | Code generation + execution | (v0.x, may be deprecated in v1.0) |
+| **TextToImageAgent** | `AgentBase` | Image generation | (v0.x, may be deprecated in v1.0) |
+
+**Agent lifecycle**: `observe()` -> `reply()` -> optional `handle_interrupt()` (async cancellation).
+
+### 2.4 Pipeline / Orchestration Classes
+
+| Class/Function | Type | Purpose |
+|----------------|------|---------|
+| **SequentialPipeline** | Class | Chain agents in order; output of N becomes input of N+1 |
+| **sequential_pipeline()** | Function | Functional equivalent of SequentialPipeline |
+| **FanoutPipeline** | Class | Distribute same input to multiple agents concurrently |
+| **fanout_pipeline()** | Function | Functional equivalent; `enable_gather=True` for concurrent, `False` for sequential |
+| **MsgHub** | Async context manager | Broadcast messages among participant group |
+| **ChatRoom** | Class | Realtime voice agent orchestration with event forwarding |
+| **stream_printing_messages()** | Async generator | Yields `(Msg, bool)` tuples for UI streaming; `bool` = is_last_chunk |
+
+**MsgHub methods**: `add(agent)`, `delete(agent)`, `broadcast(msg)`, `set_auto_broadcast(bool)`
+
+**MsgHub behavior**: On context entry, each participant subscribes to all others' outputs
+via `observe()`. When any participant calls `reply()`, the result auto-broadcasts to
+all other participants. Dynamic add/delete mid-session is supported.
+
+**Conditional/Iterative patterns** (v0.x, documented but not explicitly classed in v1.0):
+- if-else pipelines
+- switch-case pipelines
+- while-loop pipelines
+- for-loop pipelines
+
+**Routing mechanisms** (v1.0):
+- Structured output routing (Pydantic `Literal` types)
+- Tool-based routing (agents wrapped as tool functions)
+- Agent-as-tool pattern (factory function registered as tool)
+
+### 2.5 Model Classes
+
+| Class | Purpose |
+|-------|---------|
+| **ChatModelBase** | Abstract interface for all chat LLMs |
+| **DashScopeChatModel** | Alibaba DashScope / Qwen models |
+| **OpenAIChatModel** | OpenAI GPT models |
+| **GeminiChatModel** | Google Gemini models |
+| **AnthropicChatModel** | Anthropic Claude models |
+| **OllamaChatModel** | Local Ollama models |
+| **TTSModelBase** | Text-to-speech synthesis |
+| **EmbeddingModelBase** | Semantic embedding models |
+| **RealtimeModelBase** | Streaming/realtime model interface |
+
+Supported providers (v1.0): OpenAI, DeepSeek, vLLM, DashScope, Anthropic, Gemini, Ollama.
+
+### 2.6 Formatter Classes
+
+Formatters convert `Msg` history to provider-specific API formats.
+
+| Chat Formatter | MultiAgent Formatter | Provider |
+|----------------|---------------------|----------|
+| **DashScopeChatFormatter** | **DashScopeMultiAgentFormatter** | Alibaba DashScope |
+| **OpenAIChatFormatter** | **OpenAIMultiAgentFormatter** | OpenAI |
+| **AnthropicChatFormatter** | **AnthropicMultiAgentFormatter** | Anthropic |
+| **GeminiChatFormatter** | **GeminiMultiAgentFormatter** | Google Gemini |
+| **OllamaChatFormatter** | **OllamaMultiAgentFormatter** | Ollama |
+| **DeepSeekChatFormatter** | **DeepSeekMultiAgentFormatter** | DeepSeek |
+| **A2AChatFormatter** | -- | Agent-to-Agent protocol |
+
+**Rule**: Use `ChatFormatter` for 2-party conversations. Use `MultiAgentFormatter`
+for 3+ participants (adds name prefixes + history wrapping for speaker identification).
+
+### 2.7 Memory Classes
+
+| Class | Layer | Backend | Purpose |
+|-------|-------|---------|---------|
+| **MemoryBase** | Abstract | -- | Base interface for all memory |
+| **InMemoryMemory** | Short-term | In-process | Default buffer for dialogue history |
+| **AsyncSQLAlchemyMemory** | Short-term | SQLite/PostgreSQL/MySQL | Async DB-backed storage |
+| **RedisMemory** | Short-term | Redis | Distributed session state |
+| **LongTermMemoryBase** | Long-term | Abstract | Cross-session persistence base |
+| **Mem0LongTermMemory** | Long-term | Mem0 | Semantic indexing via mem0 library |
+| **ReMePersonalLongTermMemory** | Long-term | ReMe | Personal memory with profile management |
+
+**Short-term memory methods**: `add()`, `delete()`, `delete_by_mark()`, `size()`, `clear()`,
+`get_memory()`, `update_messages_mark()`, `update_compressed_summary()`, `state_dict()`, `load_state_dict()`
+
+**Long-term memory methods (dual-mode)**:
+- Developer-controlled: `record()`, `retrieve()`
+- Agent-controlled: `record_to_memory()`, `retrieve_from_memory()`
+
+**LTM control modes** on ReActAgent: `agent_control`, `static_control`, `both`
+
+**Mark system**: String labels on messages for categorization/filtering (unique to AgentScope).
+
+### 2.8 Memory Compression
+
+| Component | Purpose |
+|-----------|---------|
+| **CompressionConfig** | Triggers auto-compression when token count exceeds threshold |
+| **SummarySchema** | Pydantic BaseModel structuring compressed memory |
+| **keep_recent** | Parameter preserving N most recent messages uncompressed |
+
+**SummarySchema fields**: `task_overview`, `current_state`, `important_discoveries`,
+`next_steps`, `context_to_preserve`
+
+Compression types (from paper): "dynamic compression" (real-time semantic extraction),
+"hybrid compression" (combining summarization + selective retention).
+
+### 2.9 Tool System
+
+| Class/Function | Purpose |
+|----------------|---------|
+| **Toolkit** | Central tool manager: registration, schema generation, execution |
+| **ToolFunction** | Wrapper around callable with metadata |
+| **register_tool_function()** | Register a Python function as agent tool |
+| **execute_tool_function()** | Unified async generator for heterogeneous tool outputs |
+| **register_mcp_client()** | Register an MCP protocol client |
+| **create_tool_group()** | Group-wise tool management (mitigates paradox-of-choice) |
+| **update_tool_groups()** | Update active tool groups |
+| **reset_equipped_tools()** | Dynamic tool provisioning at runtime |
+| **execute_python_code** | Built-in: sandboxed Python execution |
+| **execute_shell_command** | Built-in: shell command execution |
+| **HttpStatelessClient** | MCP stateless client for transactional services |
+| **StatefulClientBase** | MCP stateful client for persistent connections |
+| **get_callable_function()** | Extract MCP tools as local callable functions |
+
+**Tool vs Service Function**: Service functions return `ServiceResponse`. Tools are
+"processed service functions" with JSON schema descriptions for LLM understanding.
+The **ServiceFactory** auto-converts services to OpenAI-compatible JSON schema format.
+
+**parallel_tool_calls**: Parameter enabling parallel tool execution via `asyncio.gather()`.
+
+### 2.10 State Management
+
+| Class/Method | Purpose |
+|--------------|---------|
+| **StateModule** | Base class for all stateful components (agents, memory, toolkit) |
+| **register_state(attr_name, custom_to_json, custom_from_json)** | Mark attribute for serialization |
+| **state_dict()** | Export state as dictionary |
+| **load_state_dict(state_dict, strict)** | Restore from saved state |
+| **SessionBase** | Abstract session persistence |
+| **JSONSession** | JSON file-based session storage |
+| **RedisSession** | Redis-backed session for distributed deployments |
+
+**Automatic nesting**: StateModule children are auto-included in parent's `state_dict()`.
+All of `AgentBase`, `MemoryBase`, `LongTermMemoryBase`, `Toolkit` inherit StateModule.
+
+### 2.11 Hook System
+
+| Hook Type | Available On | Phase |
+|-----------|-------------|-------|
+| **pre_reply** / **post_reply** | AgentBase+ | Before/after `reply()` |
+| **pre_observe** / **post_observe** | AgentBase+ | Before/after `observe()` |
+| **pre_print** / **post_print** | AgentBase+ | Before/after `print()` |
+| **pre_reasoning** / **post_reasoning** | ReActAgentBase+ | Before/after `_reasoning()` |
+| **pre_acting** / **post_acting** | ReActAgentBase+ | Before/after `_acting()` |
+
+**Registration levels**: Class-level (all instances) via `register_class_hook()`,
+Instance-level (single agent) via `register_instance_hook()`.
+
+**Execution order**: Class hooks first, then instance hooks, in insertion order (OrderedDict).
+
+**Pre-hook signature**: `(self, kwargs) -> dict | None`
+**Post-hook signature**: `(self, kwargs, output) -> Any | None`
+
+**Critical constraint**: Never call the core function inside its own hook (infinite loop).
+
+### 2.12 Planning System
+
+| Class | Purpose |
+|-------|---------|
+| **PlanNotebook** | Structured task planning integration with ReActAgent |
+| **Plan** | Hierarchical task plan |
+| **SubTask** | Individual task unit within a plan |
+| **RoadmapManager** | Hierarchical decomposition in MetaPlannerAgent |
+| **WorkerManager** | Dynamic worker instantiation in MetaPlannerAgent |
+
+Hints are injected as system messages per reasoning step.
+
+### 2.13 Evaluation Framework
+
+| Class | Purpose |
+|-------|---------|
+| **Task** | Evaluation unit: unique ID, input, ground truth, metrics, metadata |
+| **SolutionOutput** | Agent output: success flag, final output, complete trajectory |
+| **MetricBase** | Abstract metric interface |
+| **MetricResult** | Categorical/numerical metric with timestamp |
+| **BenchmarkBase** | Dataset of Tasks; implements iterator interface |
+| **GeneralEvaluator** | Sequential, debugging-focused evaluator |
+| **RayEvaluator** | Distributed evaluation using Ray |
+| **EvaluatorStorageBase** | Persistent result storage with checkpoint resumption |
+
+**ACEBench**: Built-in comprehensive benchmark for tool usage + collaboration capabilities.
+
+### 2.14 Observability / Tracing
+
+| Component | Purpose |
+|-----------|---------|
+| **@trace_llm** | Decorator for ChatModelBase calls |
+| **@trace_reply** | Decorator for AgentBase.reply() |
+| **@trace_format** | Decorator for FormatterBase.format() |
+| **@trace** | Generic span wrapper |
+| **agentscope.init()** | Entry point: sets metadata, logging, OTLP config |
+
+Backends: AgentScope Studio, Alibaba CloudMonitor, Arize-Phoenix, Langfuse.
+Protocol: OpenTelemetry (OTel).
+
+### 2.15 RAG Components
+
+| Class | Purpose |
+|-------|---------|
+| **KnowledgeBase** | Semantic retrieval interface |
+| **SimpleKnowledgeBase** | Basic implementation |
+| **VectorStore** | Embedding storage abstraction |
+| **DocumentReader** | Multi-format file parser |
+
+Supports LlamaIndex and LangChain as backend RAG frameworks.
+Knowledge Bank = collection of knowledge containers, configured via JSON.
+
+### 2.16 Configuration
+
+| Component | Purpose |
+|-----------|---------|
+| **model_configs** | JSON: model parameters, API endpoints, provider details |
+| **agent_configs** | JSON: agent characteristics, system prompts, tool bindings |
+| **agentscope.init()** | Loads configs, sets file storage, logging, supported platforms |
+| **_ConfigCls** | Thread-safe ContextVar: `run_id`, `project`, `name`, `created_at`, `trace_enabled` |
+
+---
+
+## 3. AgentScope Runtime (Production Layer)
+
+Separate package: `agentscope-runtime` (v1.0 Dec 2025, v1.1 Feb 2026).
+
+### 3.1 Core Classes
+
+| Class | Purpose |
+|-------|---------|
+| **AgentApp** | Primary abstraction extending FastAPI directly |
+| **RedisSession** | State persistence: conversation history, agent snapshots, multi-session coordination |
+
+**AgentApp lifecycle**: Init (lifespan) -> Query (`@agent_app.query()`) -> Shutdown.
+Primary endpoint: `/process` via SSE streaming.
+
+### 3.2 Sandbox Types
+
+| Sandbox | Sync | Async | Purpose |
+|---------|------|-------|---------|
+| **BaseSandbox** | Yes | **BaseSandboxAsync** | Python/shell execution |
+| **GuiSandbox** | Yes | **GuiSandboxAsync** | Desktop GUI interaction |
+| **FilesystemSandbox** | Yes | **FilesystemSandboxAsync** | File operations |
+| **BrowserSandbox** | Yes | **BrowserSandboxAsync** | Web automation |
+| **MobileSandbox** | Yes | **MobileSandboxAsync** | Mobile app testing |
+| **TrainingSandbox** | Yes | -- | ML model training |
+| **AgentbaySandbox** | Yes | -- | Specialized environment |
+
+Container backends: Docker (default), gVisor, BoxLite, Kubernetes, Alibaba Cloud ACK.
+
+### 3.3 Framework Compatibility
+
+| Framework | Messages | Tools |
+|-----------|----------|-------|
+| AgentScope | Full | Full |
+| LangGraph | Full | In Progress |
+| Microsoft Agent | Full | Full |
+| Agno | Full | Full |
+| AutoGen | In Progress | Full |
+
+### 3.4 Response Streaming Format
+
+JSON lines via SSE with fields: `sequence_number`, `object`, `status`, payload.
+Compatible with OpenAI SDK response format.
+
+---
+
+## 4. ReMe Memory System
+
+Separate package: `agentscope-ai/ReMe` ("Remember Me, Refine Me").
+
+### 4.1 Architecture Layers
+
+| Layer | Purpose |
+|-------|---------|
+| **ReMe Class** | Public API methods |
+| **Handler Layer** | Low-level operations |
+| **Agent Layer** | Specialized memory agents |
+| **Storage Layer** | Vector stores, embeddings, profile files |
+
+### 4.2 Core Classes
+
+| Class | Purpose |
+|-------|---------|
+| **ReMeLight** | File-based memory management (lightweight) |
+| **ReMe** | Vector-based memory management (full) |
+| **ReMeApp** | Service wrapper: HTTP / MCP / Python API |
+| **ReMeInMemoryMemory** | Extends AgentScope's InMemoryMemory with token-aware management |
+| **Application** | Lifecycle orchestrator for services |
+| **ServiceContext** | Runtime registry holding component instances |
+
+### 4.3 Memory Type Agents
+
+| Agent Type | Agent Classes | Purpose |
+|------------|---------------|---------|
+| Personal Memory | **PersonalSummarizer**, **PersonalRetriever**, **ProfileHandler** | User preferences, habits, profile JSON |
+| Procedural Memory | **ProceduralSummarizer**, **ProceduralRetriever** | Task success/failure patterns, lessons learned |
+| Tool Memory | **ParseToolCallResultOp**, **SummaryToolMemoryOp**, **ToolRetriever** | Tool usage patterns, cost metrics, execution guidelines |
+| Working Memory | **ReMeInMemoryMemory**, **Compactor**, **ContextChecker** | Short-term context, token management, compression |
+
+### 4.4 Storage
+
+| Component | Purpose |
+|-----------|---------|
+| **FileStore** | MEMORY.md + daily journal files (`memory/YYYY-MM-DD.md`) |
+| **FileWatcher** | Auto-indexes markdown files on filesystem changes |
+| **ToolResultCompactor** | Caches truncated tool outputs |
+| **BaseVectorStore** | Interface for vector backends |
+| Vector backends | Local, ChromaDB, Qdrant, Elasticsearch |
+| **MemoryHandler** | Converts memory objects to VectorNode entries |
+
+### 4.5 Memory Schema Objects
+
+| Schema | Source | Purpose |
+|--------|--------|---------|
+| **PersonalMemory** | `reme_ai/schema/memory.py:157-172` | User preference memory |
+| **TaskMemory** | `reme_ai/schema/memory.py:93-104` | Task execution memory |
+| **ToolMemory** | `reme_ai/schema/memory.py:205-220` | Tool usage memory |
+
+### 4.6 Search / Retrieval
+
+- **MemorySearch**: Hybrid vector + BM25 ranking (`vector_weight` default 0.7)
+- **retrieve_memory()**: Semantic search with LLM synthesis + time-aware filtering
+- Per-memory-type retrievers with metadata filtering
+
+### 4.7 Flow Orchestration
+
+Expression-based flows: `>>` (sequential), `|` (parallel).
+Named flows: `retrieve_personal_memory`, `summary_task_memory`, etc.
+**BaseOp**: Template method pattern for all operations, with lazy-loaded properties.
+
+### 4.8 Registry Pattern
+
+**RegistryFactory**: Singleton mapping backends to implementations.
+Per-type registries: `llms`, `as_llms`, `embedding_models`, `vector_stores`, `file_stores`.
+Registration via `@R.<registry>.register(name)` decorator.
+
+### 4.9 Token Management
+
+| Component | Purpose |
+|-----------|---------|
+| **TokenCounter** | Pluggable token counting implementations |
+| **rule_token_counter** | AgentScope model compatibility |
+| **hf_token_counter_utils** | Hugging Face tokenizer support |
+| **memory_compact_threshold** | Triggers compaction when exceeded |
+| **max_messages_in_context** | Message window retention limit |
+| **truncate_text_utils** | Automatic token-aware truncation |
+
+### 4.10 File Storage Layout
+
+```
+.reme/
+  MEMORY.md                  # Long-term facts and insights
+  profile/<user>.json        # Personal memory profiles
+memory/
+  YYYY-MM-DD.md              # Daily interaction journals
+tool_result/
+  <uuid>.txt                 # Cached/truncated tool outputs
+```
+
+---
+
+## 5. Distributed Architecture (v0.x Actor Model)
+
+The original paper (2402.14034) described an Actor-based distributed system:
+
+| Component | Purpose |
+|-----------|---------|
+| **to_dist()** | Convert local agent to distributed agent (single function call) |
+| **AgentServerLauncher** | Remote machine: receives requests, auto-initializes agents |
+| **Placeholder** | Novel data structure: allows main process to continue without blocking |
+| **RPC** | Inter-agent communication protocol |
+| **ASDiGraph** | DAG representation for multi-agent workflow graphs |
+
+**Placeholder mechanism**: Preserves information for later value retrieval. Main process
+continues execution; temporary blocking only occurs when actual values are needed for
+decision-making (conditionals).
+
+**DAG node types**: Model nodes, Service nodes, Agent nodes, Pipeline nodes, Message nodes, Copy nodes.
+
+**Execution modes**: Direct-run (topological order) or To-Python compiler (DAG -> Python script).
+
+v1.0 replaced this with FastAPI-based Agent-as-a-Service (AgentScope Runtime).
+
+---
+
+## 6. Fault Tolerance
+
+| Error Type | Resolution |
+|------------|------------|
+| Accessibility errors | Auto-retry with configurable max_retries |
+| Rule-resolvable errors | Rule-based correction without LLM call |
+| Model-resolvable errors | LLM self-critique / pairwise critique |
+| Unresolvable errors | Human-augmented critique |
+
+**Customizable handlers**: `parse_func`, `fault_handler`, `max_retries` parameters.
+**Response parsers**: Markdown fenced code blocks, JSON objects, tagged contents.
+
+---
+
+## 7. Unique Chinese-Origin Concepts
+
+Concepts that originated in AgentScope or have distinct Chinese AI ecosystem context:
+
+| Concept | Description | Unique Aspect |
+|---------|-------------|---------------|
+| **DashScope integration** | Native Alibaba Cloud LLM API | First-class Qwen model support; all Chinese models via DashScope |
+| **Mark system** | String labels on messages for categorization | Unique per-message tagging not seen in Western frameworks |
+| **Service vs Tool distinction** | Services return ServiceResponse; Tools are "processed services" with JSON schema | Explicit separation (most frameworks conflate these) |
+| **Placeholder mechanism** | Non-blocking data structure for distributed agents | Novel contribution for automatic parallelism |
+| **ReMe ("Remember Me, Refine Me")** | 4-type memory taxonomy: personal, procedural, tool, working | More granular than Western memory systems (LangChain has 1-2 types) |
+| **Group-wise tool management** | Tool groups to mitigate "paradox of choice" | Addresses tool overload problem explicitly |
+| **Friday** | Built-in Studio copilot agent | Meta-agent that helps build agents |
+| **Dynamic compression** | Real-time semantic extraction during conversations | Distinguished from batch summarization |
+| **Hybrid compression** | Combining summarization + selective retention | Two-strategy memory compression |
+| **ACEBench** | Multi-domain evaluation for tool usage + collaboration | Chinese ecosystem-specific benchmark |
+| **Tuner module** | Model adaptation/finetuning integration | Native finetuning loop inside agent framework |
+| **Trinity-RFT** | Agentic RL (reinforcement learning from trajectories) | RL integrated directly into agent framework |
+| **ASDiGraph** | DAG compiler: JSON -> Python script for agent workflows | Visual-to-code compilation |
+| **Knowledge Bank** | Collection of knowledge containers with weighted fusion | Multi-RAG-object result fusion |
+| **ModelScope ecosystem** | Integration with Alibaba's model hub | Chinese model ecosystem bridge |
+| **Tongyi (Tongyi Qianwen)** | Alibaba's foundational model family | Deep integration: DashScope API is the native provider |
+
+---
+
+## 8. CEX Kind Mapping
+
+| AgentScope Concept | CEX Kind | CEX Pillar | Notes |
+|-------------------|----------|------------|-------|
+| AgentBase / ReActAgent | `agent` | P02 | Direct mapping |
+| A2AAgent | `handoff_protocol` | P02/P06 | A2A protocol proxy |
+| Msg | `message_type` | P06 | Universal message container |
+| ContentBlock (TextBlock, ToolUseBlock, etc.) | `type_def` | P06 | Typed message content blocks |
+| SequentialPipeline | `chain` | P03 | Sequential agent composition |
+| FanoutPipeline | `workflow` | P12 | Concurrent fan-out |
+| MsgHub | `workflow_primitive` | P12 | Broadcast orchestration |
+| ChatRoom | `workflow_primitive` | P12 | Realtime voice orchestration |
+| ChatModelBase + providers | `model_provider` | P02 | Multi-provider abstraction |
+| FormatterBase + providers | `formatter` | P05 | Provider-specific formatting |
+| Toolkit / ToolFunction | `toolkit` / `function_def` | P04 | Tool management |
+| MCP integration | `mcp_server` | P04 | MCP client support |
+| InMemoryMemory | `memory_scope` | P10 | Short-term buffer |
+| RedisMemory | `memory_scope` | P10 | Distributed short-term |
+| LongTermMemoryBase / Mem0 | `entity_memory` | P10 | Cross-session persistence |
+| ReMe | `entity_memory` + `memory_summary` | P10 | 4-type memory taxonomy |
+| CompressionConfig / SummarySchema | `memory_summary` | P10 | Memory compression |
+| StateModule / state_dict | `session_state` | P10 | Agent state persistence |
+| JSONSession / RedisSession | `session_state` | P10 | Session storage backends |
+| Hook system (pre/post_reply, etc.) | `hook` | P04/P07 | Non-invasive extensibility |
+| PlanNotebook / Plan / SubTask | `action_prompt` | P03 | Hierarchical task planning |
+| MetaPlannerAgent | `agent` + `workflow` | P02/P12 | Dual-mode planning agent |
+| DeepResearchAgent | `research_pipeline` | P04 | Tree-structured research |
+| BrowserAgent | `browser_tool` | P04 | Web automation |
+| Task / SolutionOutput / MetricBase | `benchmark` / `scoring_rubric` | P07 | Evaluation framework |
+| ACEBench | `benchmark` | P07 | Built-in agent benchmark |
+| KnowledgeBase / VectorStore | `knowledge_index` / `vector_store` | P01/P10 | RAG components |
+| DocumentReader | `document_loader` | P04 | File ingestion |
+| ServiceFactory | `function_def` | P04 | Service-to-tool conversion |
+| AgentApp (Runtime) | `agent_card` | P08 | Agent-as-a-Service deployment |
+| Sandbox types | `code_executor` | P04 | Secure execution environments |
+| @trace decorators | `trace_config` | P07 | OpenTelemetry observability |
+| agentscope.init() | `boot_config` | P02 | Framework initialization |
+| model_configs / agent_configs | `env_config` | P09 | Runtime configuration |
+| Placeholder (v0.x distributed) | `workflow_primitive` | P12 | Non-blocking async data |
+| AgentServerLauncher (v0.x) | `deployment_config` | P08 | Distributed agent server |
+| to_dist() (v0.x) | -- | -- | Local-to-distributed conversion (no CEX equivalent) |
+
+---
+
+## 9. Protocol Support
+
+| Protocol | Support Level | Implementation |
+|----------|--------------|----------------|
+| **A2A (Agent-to-Agent)** | Native (Dec 2025) | A2AAgent + A2AChatFormatter |
+| **MCP (Model Context Protocol)** | Native | HttpStatelessClient, StatefulClientBase, get_callable_function |
+| **OpenAI API** | Compatible | Response format, tool calling schema |
+| **SSE (Server-Sent Events)** | Native | AgentApp streaming via /process endpoint |
+| **OpenTelemetry** | Native | @trace decorators, OTLP export |
+| **FastAPI** | Native (Runtime) | AgentApp extends FastAPI directly |
+
+---
+
+## 10. Comparison: AgentScope vs Major Frameworks
+
+| Dimension | AgentScope | LangGraph | CrewAI | AutoGen |
+|-----------|------------|-----------|--------|---------|
+| Message type | `Msg` (typed ContentBlocks) | dict-based | string | dict-based |
+| Multi-agent broadcast | MsgHub (auto) | Manual edges | Implicit crew | GroupChat |
+| Memory compression | Dynamic + Hybrid | Manual | None built-in | None built-in |
+| Tool management | Toolkit + groups | ToolNode | Tool decorator | FunctionMap |
+| State persistence | StateModule (nested) | Checkpointer | None built-in | None built-in |
+| Distributed mode | Actor/Placeholder (v0.x), FastAPI (v1.0) | None | None | None |
+| Formatter abstraction | Per-provider Chat + MultiAgent | None (tied to provider) | None | None |
+| Hook system | 10 hook types, class + instance | Interrupts only | None | None |
+| Planning | PlanNotebook + MetaPlanner | Subgraph | Hierarchical Crew | None built-in |
+| Evaluation | ACEBench + MetricBase + Ray | None built-in | None built-in | None built-in |
+| Voice/Realtime | Native (VoiceAgent, ChatRoom) | None | None | None |
+| Sandbox execution | 7 sandbox types | None | None | Docker only |
+
+---
+
+## 11. Key Architectural Insights
+
+1. **Formatter as first-class concern**: AgentScope is the only framework that
+   treats provider-specific message formatting as an explicit, pluggable layer.
+   This is architecturally significant -- it means the same agent code works
+   across providers without modification.
+
+2. **Mark-based message filtering**: The `mark` system on messages enables
+   fine-grained memory queries without separate index structures. No other
+   major framework has this.
+
+3. **Service vs Tool separation**: Explicitly distinguishing raw service functions
+   from LLM-consumable tools (with JSON schema) is a clean architectural boundary
+   that most frameworks blur.
+
+4. **ReMe's 4-type memory**: Personal + Procedural + Tool + Working memory is
+   the most granular memory taxonomy in any agent framework. Most have at most
+   "short-term" and "long-term".
+
+5. **Non-blocking Placeholder**: The v0.x distributed architecture's Placeholder
+   mechanism for automatic parallelism is a genuine novelty -- it allows
+   centralized sequential code to execute with distributed parallelism.
+
+6. **Group-wise tool management**: Explicitly addressing "paradox of choice"
+   (too many tools degrade LLM performance) via tool groups is a practical
+   insight not found in other frameworks.
+
+7. **Dual-mode LTM control**: Agent-controlled vs developer-controlled memory
+   access acknowledges that different use cases need different control points.
+
+8. **Hook-based extensibility via metaclass**: The 10-hook system with class/instance
+   separation and OrderedDict ordering is the most sophisticated hook system
+   in any agent framework.
+
+---
+
+## 12. Version History
+
+| Version | Date | Key Changes |
+|---------|------|-------------|
+| v0.x | Feb 2024 | Original: Actor-based distribution, RPC, Placeholder, ASDiGraph |
+| v1.0 | Sep 2025 | Major rewrite: async-first, ContentBlock, Formatter abstraction, ReMe, Runtime split |
+| Runtime v1.0 | Dec 2025 | Agent-as-a-Service, sandbox types, A2A protocol, cross-framework compat |
+| Runtime v1.1 | Feb 2026 | FastAPI inheritance, distributed interrupt, async sandboxes |
+
+---
+
+## 13. Sources
+
+- [GitHub: agentscope-ai/agentscope](https://github.com/agentscope-ai/agentscope)
+- [GitHub: agentscope-ai/agentscope-runtime](https://github.com/agentscope-ai/agentscope-runtime)
+- [GitHub: agentscope-ai/ReMe](https://github.com/agentscope-ai/ReMe)
+- [Paper: AgentScope v0.x (arXiv:2402.14034)](https://arxiv.org/abs/2402.14034)
+- [Paper: AgentScope 1.0 (arXiv:2508.16279)](https://arxiv.org/html/2508.16279v1)
+- [Docs: doc.agentscope.io](https://doc.agentscope.io/)
+- [Docs: docs.agentscope.io](https://docs.agentscope.io/)
+- [DeepWiki: agentscope-ai/agentscope](https://deepwiki.com/agentscope-ai/agentscope)
+- [DeepWiki: agentscope-ai/ReMe](https://deepwiki.com/agentscope-ai/ReMe)
+- [ReMe docs: reme.agentscope.io](https://reme.agentscope.io/)
+- [MarkTechPost: Production AgentScope Workflows](https://www.marktechpost.com/2026/04/01/how-to-build-production-ready-agentscope-workflows-with-react-agents-custom-tools-multi-agent-debate-structured-output-and-concurrent-pipelines/)
+- [Alibaba Cloud Blog: Upgraded AgentScope](https://www.alibabacloud.com/blog/multilingual-cosyvoice-3-upgraded-agentscope-for-production-grade-ai-agents-enterprise-ready-ai-coding_602746)
