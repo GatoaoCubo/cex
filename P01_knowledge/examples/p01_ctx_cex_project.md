@@ -8,7 +8,7 @@ updated: "2026-04-12"
 author: context-doc-builder
 domain: cex_system
 scope: "CEX typed knowledge system — architecture, nuclei, pipeline, and conventions for agent orientation"
-quality: null
+quality: 9.0
 tags: [context-doc, cex, architecture, orchestration]
 tldr: "CEX: 123 kinds, 12 pillars, 8 nuclei (N01-N07), 8F pipeline. N07 orchestrates; N03 builds. GDP before dispatch."
 keywords: [cex, nuclei, 8f, pipeline, kinds, pillars, dispatch]
