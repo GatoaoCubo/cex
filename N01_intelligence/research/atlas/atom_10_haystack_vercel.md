@@ -948,25 +948,161 @@ No tool calls, no data parts -- raw text only.
 
 #### 2.2.6 UI Hooks (React)
 
+Source: https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat
+
 | Hook | Purpose |
 |------|---------|
 | `useChat()` | Full chat UI state management + streaming |
 | `useCompletion()` | Single-turn text completion |
 | `useObject()` | Streaming structured object generation |
 
-**useChat return:**
+**useChat -- full parameter API:**
+
+```typescript
+useChat({
+  // Identity & routing
+  id?: string,                     // chat ID -- stable across re-renders
+  api?: string,                    // default: "/api/chat"
+
+  // Initial state
+  initialMessages?: UIMessage[],
+  initialInput?: string,
+
+  // Request customization
+  body?: Record<string, unknown>,  // extra JSON fields merged into POST body
+  headers?: Record<string, string>,
+  credentials?: RequestCredentials, // "include" | "omit" | "same-origin"
+  sendExtraMessageFields?: boolean, // send id/createdAt in message POST
+
+  // Protocol
+  streamProtocol?: "data" | "text", // default: "data"
+  maxSteps?: number,                // agentic loop: steps per user message
+
+  // Callbacks
+  onResponse?: (response: Response) => void | Promise<void>,
+  onFinish?: (message: UIMessage, options: {
+    usage: { promptTokens: number; completionTokens: number; totalTokens: number };
+    finishReason: FinishReason;
+  }) => void,
+  onError?: (error: Error) => void,
+  onToolCall?: ({ toolCall: ToolCall }) => void | unknown | Promise<unknown>,
+
+  // Performance
+  experimental_throttle?: number,  // ms between UI re-renders during streaming
+
+  // Advanced
+  experimental_prepareRequestBody?: (options: {
+    messages: UIMessage[];
+    id: string;
+    requestBody?: Record<string, unknown>;
+  }) => Record<string, unknown>,
+
+  fetch?: typeof globalThis.fetch,  // custom fetch impl
+})
+```
+
+**useChat return object:**
 
 ```typescript
 {
+  // State
   messages: UIMessage[],
+  input: string,
   status: "ready" | "submitted" | "streaming" | "error",
   error?: Error,
-  sendMessage: (message) => void,
-  regenerate: () => void,
-  stop: () => void,
-  addToolOutput: (toolCallId, result) => void,
-  setMessages: (messages) => void,
   id: string,
+  data?: JSONValue[],              // data parts from stream (type 2)
+
+  // Actions
+  sendMessage: (message: CreateMessage | string) => void,
+  append: (message: Message | CreateMessage) => Promise<string | null | undefined>,
+  reload: () => Promise<string | null | undefined>,  // regenerate last assistant msg
+  stop: () => void,               // abort in-flight stream
+  addToolResult: ({ toolCallId: string; result: unknown }) => void,
+
+  // State setters
+  setMessages: Dispatch<SetStateAction<UIMessage[]>>,
+  setInput: Dispatch<SetStateAction<string>>,
+  setData: Dispatch<SetStateAction<JSONValue[] | undefined>>,
+
+  // Form helpers
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
+  handleSubmit: (
+    event?: React.FormEvent<HTMLFormElement>,
+    options?: { experimental_attachments?: FileList | File[] }
+  ) => void,
+}
+```
+
+**useCompletion -- full parameter API:**
+
+Source: https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion
+
+```typescript
+useCompletion({
+  api?: string,                   // default: "/api/completion"
+  id?: string,
+  initialInput?: string,
+  initialCompletion?: string,
+  body?: Record<string, unknown>,
+  headers?: Record<string, string>,
+  credentials?: RequestCredentials,
+  streamProtocol?: "data" | "text",  // default: "data"
+  onResponse?: (response: Response) => void | Promise<void>,
+  onFinish?: (prompt: string, completion: string) => void,
+  onError?: (error: Error) => void,
+  experimental_throttle?: number,
+  fetch?: typeof globalThis.fetch,
+})
+```
+
+**useCompletion return object:**
+
+```typescript
+{
+  completion: string,            // accumulated completion text
+  input: string,
+  isLoading: boolean,
+  error?: Error,
+  data?: JSONValue[],            // data parts from stream
+
+  // Actions
+  complete: (prompt: string, options?: {
+    headers?: Record<string, string>;
+    body?: Record<string, unknown>;
+  }) => Promise<string | null | undefined>,
+  stop: () => void,
+  setCompletion: Dispatch<SetStateAction<string>>,
+  setInput: Dispatch<SetStateAction<string>>,
+
+  // Form helpers
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
+  handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void,
+}
+```
+
+**useObject -- full parameter API:**
+
+```typescript
+useObject({
+  api?: string,                  // default: "/api/use-object"
+  id?: string,
+  schema: ZodSchema,             // Zod schema for the target object shape
+  initialValue?: DeepPartial<T>,
+  headers?: Record<string, string>,
+  credentials?: RequestCredentials,
+  fetch?: typeof globalThis.fetch,
+  onFinish?: (result: { object: T | undefined; error: Error | undefined }) => void,
+  onError?: (error: Error) => void,
+})
+
+// Returns:
+{
+  object: DeepPartial<T> | undefined,   // partial object during streaming
+  isLoading: boolean,
+  error?: Error,
+  stop: () => void,
+  submit: (input: unknown) => void,
 }
 ```
 
@@ -989,6 +1125,114 @@ const result = await generateText({
 ```
 
 No separate Agent class -- the loop is implicit in generateText/streamText when maxSteps > 1.
+
+#### 2.2.8 Middleware System
+
+Source: https://ai-sdk.dev/docs/ai-sdk-core/middleware
+
+Middleware wraps a `LanguageModelV4` to intercept `doGenerate` and `doStream` calls.
+Used for: logging, caching, rate limiting, prompt injection, reasoning extraction.
+
+**Core API:**
+
+```typescript
+import { wrapLanguageModel, type LanguageModelMiddleware } from "ai";
+
+const wrappedModel = wrapLanguageModel({
+  model: anthropic("claude-opus-4-6"),
+  middleware: myMiddleware,   // single middleware
+  // OR
+  middleware: [mw1, mw2],    // array -- applied left to right
+});
+```
+
+**Middleware interface:**
+
+```typescript
+interface LanguageModelMiddleware {
+  // Transform non-streaming calls
+  wrapGenerate?: (options: {
+    doGenerate: () => ReturnType<LanguageModelV4["doGenerate"]>,
+    doStream:   () => ReturnType<LanguageModelV4["doStream"]>,
+    params:     Parameters<LanguageModelV4["doGenerate"]>[0],
+    model:      LanguageModelV4,
+  }) => ReturnType<LanguageModelV4["doGenerate"]>;
+
+  // Transform streaming calls
+  wrapStream?: (options: {
+    doGenerate: () => ReturnType<LanguageModelV4["doGenerate"]>,
+    doStream:   () => ReturnType<LanguageModelV4["doStream"]>,
+    params:     Parameters<LanguageModelV4["doStream"]>[0],
+    model:      LanguageModelV4,
+  }) => ReturnType<LanguageModelV4["doStream"]>;
+
+  transformParams?: {
+    (options: { params: LanguageModelV4CallOptions; type: "generate" | "stream" })
+      : Promise<LanguageModelV4CallOptions> | LanguageModelV4CallOptions,
+  };
+}
+```
+
+**Built-in middleware:**
+
+| Middleware | Import | Purpose |
+|------------|--------|---------|
+| `extractReasoningMiddleware` | `ai` | Extract `<think>` tags as reasoning field |
+| `simulateStreamingMiddleware` | `ai` | Convert non-streaming response to stream |
+| `defaultSettingsMiddleware` | `ai` | Override model default params |
+
+**extractReasoningMiddleware config:**
+
+```typescript
+extractReasoningMiddleware({
+  tagName: "think",         // tag to extract (default: "think")
+  separator: "\n",          // separator between reasoning and text
+  startWithReasoning: false, // true = reasoning precedes text
+})
+```
+
+**Custom logging middleware example:**
+
+```typescript
+const loggingMiddleware: LanguageModelMiddleware = {
+  wrapGenerate: async ({ doGenerate, params }) => {
+    console.log("Prompt:", params.prompt);
+    const result = await doGenerate();
+    console.log("Response:", result.text);
+    return result;
+  },
+  wrapStream: async ({ doStream, params }) => {
+    console.log("Stream start:", params.prompt);
+    const { stream, ...rest } = await doStream();
+    return {
+      stream: stream.pipeThrough(new TransformStream({
+        transform(chunk, controller) {
+          if (chunk.type === "text-delta") console.log(chunk.textDelta);
+          controller.enqueue(chunk);
+        },
+      })),
+      ...rest,
+    };
+  },
+};
+```
+
+**Custom caching middleware example:**
+
+```typescript
+const cacheMiddleware: LanguageModelMiddleware = {
+  wrapGenerate: async ({ doGenerate, params }) => {
+    const cacheKey = JSON.stringify(params);
+    const cached = cache.get(cacheKey);
+    if (cached) return cached;
+    const result = await doGenerate();
+    cache.set(cacheKey, result);
+    return result;
+  },
+};
+```
+
+**Middleware composition order:** leftmost = outermost wrapper (called first on input, last on output).
 
 ---
 
