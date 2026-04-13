@@ -3,14 +3,15 @@ id: extraction_trust_tiers
 kind: knowledge_card
 pillar: P01_knowledge
 title: "Extraction: Trust Tiers (Capability-Based Access) from ruflo"
-version: 1.0
+version: 1.1
 quality: 8.9
 tags: [extraction, trust, capability, access_control, ruflo, port]
 created: 2026-04-12
+updated: 2026-04-13
 author: n01_intelligence
 domain: dispatch security
 source: ruvnet/ruflo v3.5
-tldr: "ruflo uses capability-based access (not fixed tiers) with 7 capabilities, workload limits, claim lifecycle, and work stealing. CEX should adopt a simpler 3-tier model mapped to agent_card + dispatch guard."
+tldr: "ruflo has TWO trust systems: (a) agent capability claims system (AgentDB) and (b) CapabilityAlgebra typed permission objects with delegation, attestation, and constraint enforcement (guidance package). CEX should adopt simplified 3-tier model from (a), with optional CapabilityAlgebra concepts for future hardening."
 ---
 
 # Extraction: Trust Tiers (R3) from ruflo
@@ -213,7 +214,63 @@ def check_trust(task_requirements: list[str], nucleus_card: dict) -> bool:
 4. **Memory access levels** -- CEX nuclei own their N0x_*/ dirs; no cross-access needed
 5. **Command injection prevention** -- CEX nuclei run in Claude Code sandbox
 
-## 5. Key Code References in ruflo
+## 5. CapabilityAlgebra — Advanced Trust Model (v1.1 finding)
+
+`v3/@claude-flow/guidance/src/capabilities.ts` contains a full typed capability
+permission system going beyond simple capability arrays:
+
+### Capability object structure
+
+```typescript
+// capabilities.ts:52-81 -- typed permission object
+interface Capability {
+  id: string;                         // UUID
+  scope: CapabilityScope;             // 'tool' | 'memory' | 'network' | 'file' | 'model' | 'system'
+  resource: string;                   // target (tool name, path pattern, namespace)
+  actions: string[];                  // 'read' | 'write' | 'execute' | 'delete'
+  constraints: CapabilityConstraint[]; // rate-limit | budget | time-window | condition | scope-restriction
+  grantedBy: string;                  // agent or authority that issued it
+  grantedTo: string;                  // agent it's granted to
+  expiresAt: number | null;           // TTL for temporary grants
+  delegatable: boolean;               // can sub-agents inherit this?
+  revoked: boolean;
+  attestations: Attestation[];        // cryptographic proof of audit/verification
+  parentCapabilityId: string | null;  // delegation chain parent
+}
+```
+
+### Authority levels (authority.ts:42)
+
+```typescript
+type AuthorityLevel = 'agent' | 'human' | 'institutional' | 'regulatory';
+// Irreversibility classification for action safety:
+type IrreversibilityClass = 'reversible' | 'costly-reversible' | 'irreversible';
+type ProofLevel = 'standard' | 'elevated' | 'maximum';
+```
+
+### TrustLevel (transfer/types.ts:22)
+
+```typescript
+// Used for plugin marketplace trust rating:
+type TrustLevel = 'official' | 'verified' | 'community' | 'unverified' | 'untrusted';
+```
+
+### What this means for CEX
+
+| ruflo concept | CEX equivalent | Port? |
+|---------------|---------------|-------|
+| `CapabilityScope` (6 scopes) | Not needed — nuclei own dirs | Skip |
+| `Attestation` (cryptographic proof) | Aligns with R5 proof chain | Wave 3 |
+| `delegatable` flag | Relevant if sub-agents inherit caps | Future |
+| `constraints` (rate-limit, budget) | aligns with `rate_limit_config` kind | Future |
+| `AuthorityLevel` (agent/human) | Maps to CEX GDP (human decides WHAT) | Already implemented |
+| `IrreversibilityClass` | Maps to CEX "risky actions" documentation | Partially implemented |
+| `TrustLevel` (5-level marketplace) | Relevant only if CEX opens a plugin store | Wave 3 |
+
+**Conclusion**: CapabilityAlgebra is more sophisticated than needed for CEX Wave 1.
+Stick with 3-tier model (sandboxed/audited/privileged). Revisit in Wave 3.
+
+## 6. Key Code References in ruflo
 
 | File (relative to ruflo/) | What it contains |
 |---------------------------|-----------------|
@@ -222,6 +279,9 @@ def check_trust(task_requirements: list[str], nucleus_card: dict) -> bool:
 | `v3/@claude-flow/claims/src/domain/rules.ts` | canClaimIssue(), canStealClaim(), capacity checks |
 | `v3/@claude-flow/security/src/safe-executor.ts` | Allowlist model, blocked patterns, sudo prevention |
 | `v3/@claude-flow/memory/src/types.ts` | AccessLevel enum (private/team/swarm/public/system) |
+| `v3/@claude-flow/guidance/src/capabilities.ts` | CapabilityAlgebra, Capability interface, delegation |
+| `v3/@claude-flow/guidance/src/authority.ts` | AuthorityLevel, IrreversibilityClass, ProofLevel |
+| `v3/@claude-flow/cli/src/transfer/types.ts` | TrustLevel enum (5-level marketplace trust) |
 
 ## Boundary
 

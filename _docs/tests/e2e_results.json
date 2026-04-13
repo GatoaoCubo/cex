@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-12T17:00:57.334799+00:00",
+  "timestamp": "2026-04-13T23:41:19.396684+00:00",
   "version": "1.0.0",
   "summary": {
     "total": 3,
@@ -21,21 +21,21 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=1 stderr=  [F1] bld_schema loaded (2144 chars)\r\n  [F1] bld_config loaded (2133 chars)\r\n  [F1] constraints: 5 "
+              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
             },
             {
               "check": "f1_constrain_fires",
-              "passed": true,
-              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5']"
+              "passed": false,
+              "detail": "functions=[]"
             },
             {
               "check": "f2_become_fires",
-              "passed": true,
+              "passed": false,
               "detail": ""
             },
             {
               "check": "f3_inject_fires",
-              "passed": true,
+              "passed": false,
               "detail": ""
             },
             {
@@ -56,13 +56,7 @@
           ],
           "score": null,
           "trace": {
-            "functions_fired": [
-              "F1",
-              "F2",
-              "F3",
-              "F4",
-              "F5"
-            ],
+            "functions_fired": [],
             "kind": "",
             "pillar": "",
             "verdict": "UNKNOWN",
@@ -80,7 +74,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=3221225794 stderr="
+              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
             },
             {
               "check": "f1_constrain_fires",
@@ -133,7 +127,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=3221225794 stderr="
+              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
             },
             {
               "check": "f1_constrain_fires",
@@ -181,7 +175,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 164693
+      "total_elapsed_ms": 330
     },
     {
       "name": "instagram",
@@ -196,7 +190,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=3221225794 stderr="
+              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
             },
             {
               "check": "f1_constrain_fires",
@@ -249,7 +243,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=3221225794 stderr="
+              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
             },
             {
               "check": "f1_constrain_fires",
@@ -297,7 +291,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 8
+      "total_elapsed_ms": 227
     },
     {
       "name": "docs",
@@ -312,7 +306,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=3221225794 stderr="
+              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
             },
             {
               "check": "f1_constrain_fires",
@@ -365,7 +359,7 @@
             {
               "check": "runner_exits_clean",
               "passed": false,
-              "detail": "exit=3221225794 stderr="
+              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
             },
             {
               "check": "f1_constrain_fires",
@@ -413,7 +407,7 @@
           }
         }
       ],
-      "total_elapsed_ms": 8
+      "total_elapsed_ms": 223
     }
   ]
 }

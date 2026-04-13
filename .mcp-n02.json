@@ -2,7 +2,7 @@
   "mcpServers": {
     "markitdown": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "markitdown-mcp"]
+      "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
     },
     "browser": {
       "command": "cmd",

@@ -8,7 +8,7 @@ author: context-doc-builder
 domain: cex_system
 scope: 'In scope: CEX architecture, 12 pillars, 8 nuclei roles, 8F pipeline steps, core conventions, key file locations. Out
   of scope: brand configuration, individual artifact schemas, nucleus-specific build rules, SDK runtime internals.'
-quality: null
+quality: 9.0
 tags:
 - context-doc
 - cex

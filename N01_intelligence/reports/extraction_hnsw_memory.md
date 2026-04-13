@@ -3,14 +3,15 @@ id: extraction_hnsw_memory
 kind: knowledge_card
 pillar: P01_knowledge
 title: "Extraction: HNSW Vector Memory from ruflo"
-version: 1.0
+version: 1.1
 quality: 8.9
 tags: [extraction, hnsw, vector, retriever, ruflo, port]
 created: 2026-04-12
+updated: 2026-04-13
 author: n01_intelligence
 domain: retrieval architecture
 source: ruvnet/ruflo v3.5
-tldr: "ruflo implements HNSW via agentdb + @ruvector/micro-hnsw-wasm with M=16, efConstruction=200, 1536-dim cosine. CEX can add HNSW as L2 layer behind existing TF-IDF."
+tldr: "ruflo implements HNSW via agentdb + @ruvector/micro-hnsw-wasm with M=16, efConstruction=200, 1536-dim cosine. Two implementations: full HNSWIndex (multi-level graph) and HnswLite (BFS fallback). CEX adds HNSW as L2 layer behind existing TF-IDF."
 ---
 
 # Extraction: HNSW Vector Memory (R1) from ruflo
@@ -195,16 +196,55 @@ Query
 | Query latency | <50ms | <5ms (after warm) | <60ms (both layers) |
 | Accuracy at scale | Degrades >10K docs | Stable to 1M | Stable to 50K |
 
-## 7. Key Code References in ruflo
+## 7. HnswLite — Lighter Alternative (v1.1 finding)
+
+`v3/@claude-flow/memory/src/hnsw-lite.ts` is a pure-TypeScript simplified variant
+that auto-degrades to brute-force for small corpora:
+
+```typescript
+// HnswLite constructor (hnsw-lite.ts:14)
+constructor(dimensions: number, m: number, efConstruction: number, metric: string)
+
+// Auto-fallback: brute-force when corpus <= k*2 (hnsw-lite.ts:63)
+if (this.vectors.size <= k * 2) {
+  return this.bruteForce(query, k, threshold);
+}
+
+// neighbor pruning: keeps top M neighbors by similarity (hnsw-lite.ts:131-148)
+private pruneNeighbors(id: string): void { ... }
+```
+
+**CEX relevance**: HnswLite is the correct model for `cex_retriever_hnsw.py` at ~2200
+docs — simple, no heap overhead, brute-force path active when corpus is small.
+
+## 8. Benchmark Performance Data (v1.1 finding)
+
+From `v3/@claude-flow/memory/benchmarks/hnsw-indexing.bench.ts`:
+
+| Operation | Benchmark setup | Target |
+|-----------|----------------|--------|
+| Single insert | dimensions=384, 500 iterations | <10ms |
+| Batch (100 vectors) | 20 iterations, per-vector cost | <1ms/vector |
+| Batch (1000 vectors) | 5 iterations, per-vector cost | <0.5ms/vector |
+| Search (1000 vectors, k=10) | ef=50, 500 iterations | <5ms |
+| Remove + re-add (100 items) | 100 iterations | <5ms |
+| M=8 vs M=32 build (500 vectors) | Measured ratio | M=32 is ~2x slower |
+| ef=100 vs ef=400 build | Measured ratio | ef=400 is ~3x slower |
+
+Note: benchmark uses **dimensions=384** (MiniLM), not 1536 (OpenAI). For CEX with
+local Ollama `nomic-embed-text` (768-dim), performance will be between these values.
+
+## 9. Key Code References in ruflo
 
 | File (relative to ruflo/) | What it contains |
 |---------------------------|-----------------|
-| `v3/@claude-flow/memory/src/hnsw-index.ts` | Full HNSW implementation (BFS, heaps, layers) |
+| `v3/@claude-flow/memory/src/hnsw-index.ts` | Full HNSW implementation (multi-level BFS, heaps) |
+| `v3/@claude-flow/memory/src/hnsw-lite.ts` | Simplified HNSW (BFS + brute-force fallback) |
 | `v3/@claude-flow/memory/src/types.ts` | HNSWConfig, SearchOptions, DistanceMetric types |
 | `v3/@claude-flow/memory/src/agentdb-backend.ts` | Default config values, batch insert logic |
 | `v3/@claude-flow/memory/src/hybrid-backend.ts` | Dual-backend routing (semantic/exact/hybrid) |
 | `v3/@claude-flow/memory/src/agentdb-adapter.ts` | Embedding generation interface |
-| `v3/@claude-flow/memory/benchmarks/hnsw-indexing.bench.ts` | Performance benchmarks |
+| `v3/@claude-flow/memory/benchmarks/hnsw-indexing.bench.ts` | Performance benchmarks, param tuning guide |
 | `v3/plugins/ruvector-upstream/src/bridges/hnsw.ts` | WASM bridge (fallback chain) |
 
 ## Boundary

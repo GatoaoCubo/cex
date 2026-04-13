@@ -405,7 +405,7 @@ def main():
     parser.add_argument("--query", "-q", help="Search query")
     parser.add_argument("--kind", "-k", help="Filter by kind")
     parser.add_argument("--pillar", "-p", help="Filter by pillar")
-    parser.add_argument("--top-k", "-k", type=int, default=5, help="Maximum results")
+    parser.add_argument("--top-k", "-n", type=int, default=5, help="Maximum results")
     parser.add_argument("--min-score", "-s", type=float, default=0.05, help="Minimum similarity score")
     parser.add_argument("--stats", action="store_true", help="Show index statistics")
     parser.add_argument("--examples", "-e", help="Find examples for kind")
@@ -486,4 +486,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```

@@ -2,49 +2,35 @@
 id: self_audit_newpc_n02
 kind: context_doc
 pillar: P08
-title: "N02 Self-Audit -- New PC Setup (2026-04-12)"
+title: "N02 Self-Audit -- New PC Setup (2026-04-13)"
 nucleus: N02
-version: 1.1.0
+version: 1.2.0
 quality: 8.9
 created: 2026-04-12
+updated: 2026-04-13
 mission: NEWPC_SETUP
 ---
 
 # N02 Self-Audit -- New PC Setup
 
 > Fresh Windows 11 machine. Everything verified from scratch.
-> Date: 2026-04-12 | Model: opus-4-6 (1M context) | CLI: claude
+> Updated: 2026-04-13 | Model: opus-4-6 (1M context) | CLI: claude
 
 ---
 
 ## Phase 1: MCP Server Verification
 
-| Server | Config Package | Actual Status | Verdict | Fix Required |
-|--------|---------------|---------------|---------|-------------- |
-| **markitdown** | `markitdown-mcp` | 404 on npm. `markitdown-mcp-npx` exists and starts correctly. | FAIL | Update `.mcp-n02.json` args to `markitdown-mcp-npx` |
-| **browser (puppeteer)** | `@anthropic-ai/mcp-server-puppeteer` | 404 on npm. `@modelcontextprotocol/server-puppeteer` exists (deprecated but functional). | FAIL | Update `.mcp-n02.json` to `@modelcontextprotocol/server-puppeteer` or find maintained fork |
-| **canva** | `@mcp_factory/canva-mcp-server` | Package untested (env vars missing). `CANVA_CLIENT_ID`=NOT SET, `CANVA_CLIENT_SECRET`=NOT SET. | FAIL | Set env vars first, then verify package |
-| **notebooklm** | `notebooklm-mcp@latest` | Starts. Banner: "NotebookLM MCP Server v1.0.0" | PASS | None |
+| Server | Config Package | Status | Verdict | Action Taken |
+|--------|---------------|--------|---------|--------------|
+| **markitdown** | `markitdown-mcp-npx` | Package corrected in config. | FIXED | Updated `.mcp-n02.json` from `markitdown-mcp` (404) to `markitdown-mcp-npx`. |
+| **browser (puppeteer)** | `@modelcontextprotocol/server-puppeteer` | Package corrected in config (was fixed in prior session). | PASS | Config already uses correct package. |
+| **canva** | `@mcp_factory/canva-mcp-server` | `CANVA_CLIENT_ID`=NOT SET, `CANVA_CLIENT_SECRET`=NOT SET. Package untested. | BLOCKED | Env vars required. Not a code issue. |
+| **notebooklm** | `notebooklm-mcp@latest` | Starts. Banner: "NotebookLM MCP Server v1.0.0" | PASS | None. |
 
-**MCP Score: 1/4 PASS** -- 2 packages have wrong names in config, 1 needs env vars.
+**MCP Score: 2/4 PASS** -- markitdown now fixed. Browser already fixed. Canva blocked on env vars.
 
-### Recommended `.mcp-n02.json` Fixes
-
-```json
-{
-  "markitdown": {
-    "command": "cmd",
-    "args": ["/c", "npx", "-y", "markitdown-mcp-npx"]
-  },
-  "browser": {
-    "command": "cmd",
-    "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-puppeteer"]
-  }
-}
-```
-
-> **Note**: `@modelcontextprotocol/server-puppeteer` is marked deprecated.
-> Watch for a maintained replacement. The Puppeteer MCP ecosystem is fragmenting.
+> Delta from v1.1.0 (2026-04-12): markitdown package corrected in this session. Browser was already corrected.
+> Note: `@modelcontextprotocol/server-puppeteer` is marked deprecated upstream. Monitor for maintained replacement.
 
 ---
 
@@ -66,52 +52,37 @@ No missing pip packages detected for these entry points.
 
 ### By Subdirectory
 
-| Subdirectory | .md Count | Role |
-|-------------|-----------|------|
-| `agents/` | 1 | Agent identity |
-| `architecture/` | 1 | P08 agent card |
-| `artifacts/` | 3 | Templates (ad, email, landing page) |
-| `compiled/` | 56 yaml | Auto-compiled artifacts |
-| `config/` | 2 | A/B testing + brand override |
-| `feedback/` | 1 | Quality gate for marketing |
-| `knowledge/` | 14 | Domain KCs (visual, email, campaign, etc.) |
-| `memory/` | 2 | Campaign performance + copy insights |
-| `orchestration/` | 5 | Dispatch rules + handoffs + workflows |
-| `output/` | 16 | Landing pages, emails, social, reports |
-| `prompts/` | 7 | System prompt + action prompt + templates |
-| `quality/` | 1 | Scoring rubric |
-| `reports/` | 3 (+1) | Self-audits (prior + this one) |
-| `schemas/` | 5 | Design tokens, a11y, responsive, tailwind |
-| `tools/` | 3 | Copy analyzer + headline scorer + social publisher |
-| `workflows/` | 1 | KC-to-content workflow |
+| Subdirectory | .md Count | Delta vs v1.1 | Role |
+|-------------|-----------|---------------|------|
+| `agents/` | 1 | -- | Agent identity |
+| `architecture/` | 1 | -- | P08 agent card |
+| `artifacts/` | 3 | -- | Templates (ad, email, landing page) |
+| `compiled/` | ~53 yaml | -- | Auto-compiled artifacts |
+| `config/` | 2 | -- | A/B testing + brand override |
+| `feedback/` | 1 | -- | Quality gate for marketing |
+| `knowledge/` | 17 | +3 | Domain KCs -- 3 new: developer_experience_patterns, llm_agent_frameworks_comparison, open_source_ai_ecosystem |
+| `memory/` | 2 | -- | Campaign performance + copy insights |
+| `orchestration/` | 5 | -- | Dispatch rules + handoffs + workflows |
+| `output/` | 16 | +3 | Landing pages, emails, social, reports |
+| `prompts/` | 7 | +3 | System prompt + action prompt + templates (3 notebooklm/distribution tpls added) |
+| `quality/` | 1 | -- | Scoring rubric |
+| `reports/` | 1 | -- | This self-audit |
+| `schemas/` | 5 | -- | Design tokens, a11y, responsive, tailwind |
+| `tools/` | 3 | -- | Copy analyzer + headline scorer + social publisher |
+| `workflows/` | 1 | -- | KC-to-content workflow |
 
-**Total source .md: 65** | **Compiled .yaml: 53** | **Grand total: 118+ files**
-
-> Agent card states 66 source / 56 compiled / 122 total -- **slightly high**.
-> Verified 2026-04-12: 65 source / 53 compiled / 118 total.
+**Total source .md: 68** (+3 vs v1.1.0) | **Compiled: ~53** | **Root: 2** (README + agent_card)
 
 ### Artifacts with `quality: null` (never scored)
 
-16 artifacts still carry `quality: null`:
+Down from 16 in v1.1.0 to **4 remaining**:
 
 1. `architecture/agent_card_marketing.md`
-2. `artifacts/ad_copy_template.md`
-3. `artifacts/landing_page_template.md`
-4. `feedback/quality_gate_marketing.md`
-5. `knowledge/kc_campaign.md`
-6. `knowledge/kc_email_sequence.md`
-7. `output/case_studies_intent_resolution.md`
-8. `output/output_sdk_validation_self_audit.md`
-9. `output/report_intent_resolution_value_prop.md`
-10. `prompts/tpl_content_distribution_plan.md`
-11. `prompts/tpl_notebooklm_audio_wrapper.md`
-12. `prompts/tpl_notebooklm_flashcard_format.md`
-13. `tools/copy_analyzer.md`
-14. `tools/headline_scorer.md`
-15. `workflows/wf_kc_to_content.md`
-16. `reports/self_audit_newpc.md` (this file)
+2. `feedback/quality_gate_marketing.md`
+3. `output/output_sdk_validation_self_audit.md`
+4. `reports/self_audit_newpc.md` (this file)
 
-**25% of source artifacts are unscored.** Peer review needed.
+**6% of source artifacts are unscored.** Significant improvement from 25% last session.
 
 ### Cross-Reference: Marketing-Related KCs in P01
 
@@ -127,35 +98,35 @@ No missing pip packages detected for these entry points.
 | `kc_system_prompt.md` | system_prompt | YES -- agent prompts |
 | `kc_tagline.md` | tagline | YES -- brand copy |
 
-**9 relevant KCs available in P01.** Good coverage of primary kinds.
+**9 relevant KCs available in P01.** Full coverage of primary kinds.
 
 ### 3 Identified Gaps
 
 | # | Gap | Impact | Recommendation |
 |---|-----|--------|---------------|
-| 1 | **No video/reel script kind** | Short-form video dominates social (TikTok, Reels, Shorts). N02 has no artifact type for video scripts, hooks, or caption sequences. | Request N03 build a `video_script` kind or adapt `prompt_template` with video-specific ISOs. |
-| 2 | **No SEO audit tooling** | Landing pages and content lack keyword density checks, meta tag validation, schema.org markup guidance. Copy that seduces humans but starves search engines. | Build `seo_audit` tool or integrate with existing `copy_analyzer.md` as an SEO extension. |
-| 3 | **No competitor copy analysis workflow** | N01 does competitor research but there's no structured handoff for *copy-specific* competitive intelligence (headlines, CTAs, tone mapping). | Create `wf_competitor_copy_analysis.md` workflow with N01-to-N02 handoff protocol. |
+| 1 | **No video/reel script kind** | Short-form video (TikTok, Reels, Shorts) dominates social distribution. No artifact type for hooks, scripts, caption sequences, or B-roll callouts. | Request N03 build a `video_script` kind with ISOs for hook formats, pacing, and CTA placement. |
+| 2 | **No SEO audit tooling** | Landing pages and content lack keyword density checks, meta tag validation, schema.org markup. Copy that seduces humans but starves search engines loses half its reach. | Extend `copy_analyzer.md` with SEO scoring extension or build standalone `seo_audit` tool. |
+| 3 | **No competitor copy analysis workflow** | N01 delivers competitor research but no structured N01-to-N02 handoff exists for copy-specific intel: headline patterns, CTA strategies, tone fingerprinting. | Create `wf_competitor_copy_analysis.md` with formal N01 ingestion protocol. |
 
 ---
 
 ## Phase 4: Agent Card Audit
 
-| Field | Agent Card Says | Reality | Match? |
-|-------|----------------|---------|--------|
-| Model | opus-4-6 (1M context) | opus-4-6 (1M context) | YES |
-| CLI | claude | claude | YES |
-| Source artifacts | 66 | 65 | CLOSE -- minor drift |
-| Compiled | 56 | 53 | CLOSE -- minor drift |
-| Total files | 122+ | 118+ | CLOSE -- minor drift |
-| MCP: markitdown | Ready | FAIL (wrong package name) | NO |
-| MCP: browser | Ready | FAIL (wrong package name) | NO |
-| MCP: canva | Ready (needs env) | FAIL (env not set) | PARTIAL |
-| MCP: notebooklm | Ready | PASS | YES |
-| Knowledge Cards | 14 | 14 | YES |
-| Kinds buildable | 18 | 18 | YES |
+| Field | Agent Card Says | Reality | Match? | Fix? |
+|-------|----------------|---------|--------|------|
+| Model | opus-4-6 (1M context) | opus-4-6 (1M context) | YES | None |
+| CLI | claude | claude | YES | None |
+| Source artifacts | 65 | 68 | NO | Update count |
+| Knowledge Cards | 14 | 17 | NO | Update count + list 3 new KCs |
+| Prompts | 4 | 7 | NO | Update count + list 3 new templates |
+| MCP: markitdown | FAIL (wrong pkg) | FIXED (markitdown-mcp-npx) | UPDATED | Reflected in agent card |
+| MCP: browser | FAIL (wrong pkg) | PASS (correct pkg) | UPDATED | Reflected in agent card |
+| MCP: canva | FAIL (env not set) | STILL BLOCKED | YES | No change |
+| MCP: notebooklm | PASS | PASS | YES | None |
+| Kinds buildable | 18 | 18 | YES | None |
+| quality: null count | 16 | 4 | IMPROVED | Agent card updated |
 
-**Agent card needs update**: artifact counts and MCP server statuses are stale.
+**Agent card updated in this session.** Counts reconciled, MCP statuses corrected.
 
 ---
 
@@ -163,31 +134,27 @@ No missing pip packages detected for these entry points.
 
 | Phase | Score | Notes |
 |-------|-------|-------|
-| MCP Servers | 1/4 PASS | 2 wrong package names, 1 missing env vars |
+| MCP Servers | 2/4 PASS | markitdown fixed this session; browser already fixed; canva blocked on env vars |
 | Python Tools | 3/3 PASS | All operational |
-| Artifact Inventory | 65 source / 53 compiled | 16 unscored (25%), 3 gaps identified |
-| Agent Card | CLOSE | Counts slightly high, MCP status accurate |
+| Artifact Inventory | 68 source / 53 compiled | 4 unscored (6%), 3 capability gaps identified |
+| Agent Card | UPDATED | Counts reconciled, MCP statuses corrected |
 
-### Priority Actions
+### Priority Actions (Remaining)
 
-1. **FIX** `.mcp-n02.json` -- correct `markitdown` and `browser` package names
-2. **SET** `CANVA_CLIENT_ID` and `CANVA_CLIENT_SECRET` environment variables
-3. **SCORE** 18 unscored artifacts via `cex_score.py --apply`
-4. **UPDATE** `agent_card_n02.md` with correct counts and MCP status
-5. **BUILD** video script capability (gap #1 -- highest impact)
-6. **BUILD** SEO audit tool extension (gap #2)
-7. **BUILD** competitor copy analysis workflow (gap #3)
+1. **SET** `CANVA_CLIENT_ID` + `CANVA_CLIENT_SECRET` -- unlocks Canva MCP (design output)
+2. **SCORE** 4 remaining unscored artifacts via `cex_score.py --apply`
+3. **BUILD** video script capability -- highest distribution impact (gap #1)
+4. **BUILD** SEO audit extension -- doubles reach of every landing page (gap #2)
+5. **BUILD** competitor copy analysis workflow -- feeds N02 with N01 intel (gap #3)
 
 ---
 
-> *Every word that leaves this nucleus doesn't just inform -- it seduces.
-> But seduction without infrastructure is just a whisper in an empty room.
-> Fix the plumbing. Then turn up the heat.*
+> *Infrastructure is foreplay. Fix the plumbing first -- then turn up the heat.*
+> *Every word that leaves this nucleus doesn't just inform. It seduces.*
 
 ## Boundary
 
 Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
-
 
 ## 8F Pipeline Function
 

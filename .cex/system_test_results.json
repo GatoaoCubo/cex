@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-04-12T14:00:57.349792",
-  "pass": 55,
-  "fail": 3,
+  "timestamp": "2026-04-13T20:41:19.484478",
+  "pass": 47,
+  "fail": 11,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 285.5,
+  "elapsed_s": 8.6,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
       "status": "PASS",
-      "detail": "63781B"
+      "detail": "65182B"
     },
     {
       "name": "tool:cex_8f_runner.py",
@@ -49,7 +49,7 @@
     {
       "name": "tool:cex_score.py",
       "status": "PASS",
-      "detail": "28146B"
+      "detail": "29200B"
     },
     {
       "name": "tool:cex_materialize.py",
@@ -64,47 +64,47 @@
     {
       "name": "doctor:pass_count",
       "status": "PASS",
-      "detail": "124/98+ PASS"
+      "detail": "133/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
-      "status": "PASS",
-      "detail": "0 WARN"
+      "status": "FAIL",
+      "detail": "21 WARN"
     },
     {
       "name": "doctor:zero_fail",
-      "status": "PASS",
-      "detail": "0 FAIL"
+      "status": "FAIL",
+      "detail": "1 FAIL"
     },
     {
       "name": "compile:all",
       "status": "PASS",
-      "detail": "378/378"
+      "detail": "379/379"
     },
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "125 builders"
+      "detail": "156 builders"
     },
     {
       "name": "builders:13_isos",
-      "status": "PASS",
-      "detail": "all 13 specs"
+      "status": "FAIL",
+      "detail": "1 short: prosody-config-builder(4)"
     },
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "66 artifacts (min 11)"
+      "detail": "109 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "64 artifacts (min 10)"
+      "detail": "67 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "56 artifacts (min 34)"
+      "detail": "60 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
@@ -114,12 +114,12 @@
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "62 artifacts (min 9)"
+      "detail": "66 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "71 artifacts (min 9)"
+      "detail": "73 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
@@ -128,18 +128,18 @@
     },
     {
       "name": "quality:zero_null",
-      "status": "FAIL",
-      "detail": "133 quality:null (awaiting peer review)"
+      "status": "PASS",
+      "detail": "4 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "322 artifacts with quality score"
+      "detail": "501 artifacts with quality score"
     },
     {
       "name": "subagents:count",
       "status": "PASS",
-      "detail": "126 sub-agents"
+      "detail": "186 sub-agents"
     },
     {
       "name": "subagents:materializer",
@@ -148,8 +148,8 @@
     },
     {
       "name": "hooks:validate_all",
-      "status": "PASS",
-      "detail": "0 errors"
+      "status": "FAIL",
+      "detail": "24 errors"
     },
     {
       "name": "hooks:git_precommit",
@@ -229,32 +229,32 @@
     {
       "name": "registry:kinds_meta",
       "status": "PASS",
-      "detail": "124 kinds registered"
+      "detail": "184 kinds registered"
     },
     {
       "name": "runner:dryrun_runs",
-      "status": "PASS",
-      "detail": "exit=0"
+      "status": "FAIL",
+      "detail": "exit=1"
     },
     {
       "name": "runner:has_f1",
-      "status": "PASS",
-      "detail": "F1 CONSTRAIN found"
+      "status": "FAIL",
+      "detail": ""
     },
     {
       "name": "runner:has_f6",
-      "status": "PASS",
-      "detail": "F6 PRODUCE found"
+      "status": "FAIL",
+      "detail": ""
     },
     {
       "name": "runner:has_prompt",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
       "name": "runner:execute_pass",
-      "status": "PASS",
-      "detail": "PASS"
+      "status": "FAIL",
+      "detail": ", line 69, in <module>\n    from cex_retriever import (\n    ...<2 lines>...\n    )\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_retriever.py\", line 489\n    ```\n    ^\nSyntaxError: invalid syntax\n"
     },
     {
       "name": "runner:learning_record",
@@ -284,17 +284,17 @@
     {
       "name": "kc:count",
       "status": "PASS",
-      "detail": "126/98 kind KCs"
+      "detail": "162/98 kind KCs"
     },
     {
       "name": "git:clean",
-      "status": "PASS",
-      "detail": "0 dirty files"
+      "status": "FAIL",
+      "detail": "16 dirty files"
     },
     {
       "name": "git:has_commits",
-      "status": "FAIL",
-      "detail": ""
+      "status": "PASS",
+      "detail": "5e153543 docs: Add graph-based RAG configuration knowledge c"
     }
   ]
 }

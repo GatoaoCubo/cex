@@ -40,19 +40,19 @@ density_score: 1.0
 | `agents/` | 1 | `agent_marketing.md` — minha identidade e instruções operacionais |
 | `architecture/` | 1 | `agent_card_marketing.md` — card P08 com routing e capabilities |
 | `artifacts/` | 3 | `email_sequence_template.md` + `landing_page_template.md` + `ad_copy_template.md` |
-| `compiled/` | 48 | YAML compilados de todos os artefatos fonte (auto-gerado) |
+| `compiled/` | 53 | YAML compilados de todos os artefatos fonte (auto-gerado) |
 | `config/` | 2 | `ab_testing_framework.md` + `brand_override_config.md` |
 | `feedback/` | 1 | `quality_gate_marketing.md` — gates de qualidade para copy |
-| `knowledge/` | 14 | KCs especializados: a11y, campaign, color theory, CSS animation, email HTML, email sequence, component library, responsive layouts, shadcn/radix, tailwind, typography, visual hierarchy, marketing KC, social publishing KC |
+| `knowledge/` | 17 | KCs especializados: a11y, campaign, color theory, CSS animation, email HTML, email sequence, component library, responsive layouts, shadcn/radix, tailwind, typography, visual hierarchy, marketing KC, social publishing KC + developer_experience_patterns, llm_agent_frameworks_comparison, open_source_ai_ecosystem |
 | `memory/` | 2 | `campaign_performance_memory.md` + `copy_optimization_insights.md` |
 | `orchestration/` | 5 | Dispatch rules (marketing + social), cross-nucleus handoffs, workflow marketing, weekly fashion content workflow |
-| `output/` | 13 | Landing pages, emails, social cards, dashboard UI, readme hero, style guide, visual report, competitive positioning, monetization launch, SDK validation, content factory actions |
-| `prompts/` | 4 | System prompt, action prompt, prompt template, brand voice templates |
+| `output/` | 16 | Landing pages, emails, social cards, dashboard UI, readme hero, style guide, visual report, competitive positioning, monetization launch, SDK validation, content factory actions + 3 added |
+| `prompts/` | 7 | System prompt, action prompt, prompt template, brand voice templates + tpl_content_distribution_plan, tpl_notebooklm_audio_wrapper, tpl_notebooklm_flashcard_format |
 | `quality/` | 1 | `scoring_rubric_marketing.md` — rubrica de avaliação para copy |
 | `schemas/` | 5 | a11y checklist, design tokens, HTML output schema, responsive breakpoints, tailwind palette contract |
 | `tools/` | 3 | `social_publisher_marketing.md` + `copy_analyzer.md` + `headline_scorer.md` |
 
-**Total source files: 65** · **Total compiled: 53** · **Grand total: 118+ files**
+**Total source files: 68** · **Total compiled: 53** · **Grand total: 121+ files**
 
 ---
 
@@ -152,9 +152,9 @@ density_score: 1.0
 
 | Server | Command | What It Does | Status |
 |--------|---------|-------------|--------|
-| **markitdown** | `npx markitdown-mcp-npx` | Converte documentos (PDF, DOCX, PPTX) para Markdown | FAIL -- config has wrong package (`markitdown-mcp` is 404). Fix: use `markitdown-mcp-npx` |
-| **browser** | `npx @modelcontextprotocol/server-puppeteer` | Navegação web, screenshots, scraping | FAIL -- config has wrong package (`@anthropic-ai/mcp-server-puppeteer` is 404). Fix: use `@modelcontextprotocol/server-puppeteer` (deprecated, watch for replacement) |
-| **canva** | `npx @mcp_factory/canva-mcp-server` | Cria designs (posts, stories, thumbnails) via Canva Business API | FAIL -- `CANVA_CLIENT_ID` and `CANVA_CLIENT_SECRET` NOT SET |
+| **markitdown** | `npx markitdown-mcp-npx` | Converte documentos (PDF, DOCX, PPTX) para Markdown | PASS -- config fixed 2026-04-13 |
+| **browser** | `npx @modelcontextprotocol/server-puppeteer` | Navegação web, screenshots, scraping | PASS -- correct package in config (deprecated upstream, monitor for replacement) |
+| **canva** | `npx @mcp_factory/canva-mcp-server` | Cria designs (posts, stories, thumbnails) via Canva Business API | BLOCKED -- `CANVA_CLIENT_ID` and `CANVA_CLIENT_SECRET` NOT SET |
 | **notebooklm** | `npx notebooklm-mcp@latest` | Google NotebookLM: flashcards, audio summaries, quizzes | PASS -- v1.0.0 starts correctly |
 
 ---
@@ -213,6 +213,8 @@ density_score: 1.0
 | MCP browser wrong package | Config says `@anthropic-ai/mcp-server-puppeteer` (404). Correct: `@modelcontextprotocol/server-puppeteer` (deprecated) | Update `.mcp-n02.json` + find maintained fork | ⏳ Config task |
 | Canva env vars pendentes | MCP Canva precisa `CANVA_CLIENT_ID` + `CANVA_CLIENT_SECRET` configurados | Configurar .env | ⏳ Config task |
 | No video/reel script kind | Short-form video dominates social -- no artifact type for scripts | Request N03 build `video_script` kind | ⏳ Gap |
+| No SEO audit tooling | Copy sem validacao SEO perde metade do alcance | Extend `copy_analyzer.md` or build `seo_audit` tool | ⏳ Gap |
+| No competitor copy analysis workflow | N01 research sem handoff copy-especifico para N02 | Create `wf_competitor_copy_analysis.md` | ⏳ Gap |
 | No A/B test history | Framework existe mas sem dados de testes anteriores | Executar primeiro teste | ⏳ Operacional |
 
 ---
@@ -224,24 +226,24 @@ density_score: 1.0
 │  N02 — LUXÚRIA CRIATIVA ♥                       │
 │  "Isso SEDUZ o público?"                        │
 ├─────────────────────────────────────────────────┤
-│  Source artifacts:    65                         │
+│  Source artifacts:    68                         │
 │  Compiled:            53                         │
-│  Total files:        118+                        │
-│  🔧 Kinds buildable:  18 (9 primary)            │
-│  🛠️  Tools relevant:   22                        │
-│  🔌 MCP Servers:       4                         │
-│  🧠 Knowledge Cards:  14                         │
-│  💾 Memory slots:      2 active                  │
-│  📐 Schemas:           5                         │
-│  ⚡ Model:             opus-4-6 (1M ctx)         │
+│  Total files:        121+                        │
+│  Kinds buildable:    18 (9 primary)              │
+│  Tools relevant:     22                          │
+│  MCP Servers:        4 (2 PASS, 1 BLOCKED)       │
+│  Knowledge Cards:    17                          │
+│  Memory slots:       2 active                    │
+│  Schemas:            5                           │
+│  Model:              opus-4-6 (1M ctx)           │
 ├─────────────────────────────────────────────────┤
 │  STRENGTHS: Deep visual knowledge, full prompt   │
 │  arsenal, memory-driven learning, A/B native,    │
 │  4 MCP integrations, brand voice system,         │
-│  3 artifact templates, 3 tools, 14 KCs           │
+│  3 artifact templates, 3 tools, 17 KCs           │
 │                                                  │
 │  GAPS: Brand not bootstrapped (user action),     │
-│  Canva env pending (config task)                 │
+│  Canva env pending, video script kind missing    │
 └─────────────────────────────────────────────────┘
 ```
 
