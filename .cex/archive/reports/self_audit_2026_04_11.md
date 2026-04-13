@@ -4,10 +4,11 @@ kind: self_audit
 pillar: P11
 title: N06 Commercial Self-Audit
 version: 1.0
-quality: null
+quality: 9.1
 tags: [audit, self_review, n06, commercial, brand]
 created: 2026-04-11
 nucleus: n06
+density_score: 1.0
 ---
 
 # N06 Commercial -- Self-Audit 2026-04-11
