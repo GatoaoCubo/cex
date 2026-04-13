@@ -2,10 +2,7 @@
 id: p04_kc_steps
 kind: steps
 pillar: P04
-llm_function: TOOL
-max_bytes: 4096
-naming: p04_steps_{{name}}.md + .yaml
-core: true
+title: "Steps — Deep Knowledge for steps"
 version: 1.0.0
 created: 2026-04-02
 updated: 2026-04-02
@@ -21,6 +18,16 @@ density_score: 0.95
 ---
 
 # System Prompt Review Steps
+
+## Spec
+```yaml
+kind: steps
+pillar: P04
+llm_function: TOOL
+max_bytes: 4096
+naming: p04_steps_{{name}}.md + .yaml
+core: true
+```
 
 ## What It Is
 A system prompt review steps is a structured workflow for evaluating and improving system prompts. It defines a specific review process that can be executed repeatedly across different contexts. Steps reviews are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this review?" while agents answer "who am I?" and prompts answer "how do I communicate?"
@@ -67,7 +74,7 @@ A system prompt review steps is a structured workflow for evaluating and improvi
 | H01_phases_defined | phases array not empty | Cannot execute workflow |
 | H02_review_criteria | review_criteria not empty | Incomplete assessment |
 | H03_input_schema | Valid JSON schema format | Runtime parameter errors |
-| H04_output_format | Defined output structure | Unpredictable results |
+| H04_output_format | Defined output structure | Unpredictbed results |
 
 ## Usage Examples
 ```yaml
