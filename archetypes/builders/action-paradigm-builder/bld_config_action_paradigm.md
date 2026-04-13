@@ -1,0 +1,36 @@
+---
+kind: config
+id: bld_config_action_paradigm
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for action_paradigm production
+quality: null
+title: "Config Action Paradigm"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [action_paradigm, builder, config]
+tldr: "Naming, paths, limits for action_paradigm production"
+domain: "action_paradigm construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Naming Convention  
+Pattern: p04_act_<name> (lowercase alphanumeric, underscores allowed)  
+Examples: p04_act_data_flow, p04_act_error_handler  
+
+## Paths  
+Base: /artifacts/p04/actions/  
+Per-action: /artifacts/p04/actions/<name>/  
+
+## Limits  
+max_bytes: 4096  
+max_turns: 10  
+effort_level: 3  
+
+## Hooks  
+pre_build: null  
+post_build: null  
+on_error: null  
+on_quality_fail: null
