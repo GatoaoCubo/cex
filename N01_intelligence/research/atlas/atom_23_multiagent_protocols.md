@@ -99,6 +99,259 @@ This document provides a comprehensive survey of multi-agent communication proto
 
 ---
 
+## 9. Protocol Landscape: 16 Protocols Mapped
+
+Sources: [arxiv:2505.02279](https://arxiv.org/abs/2505.02279) | [arxiv:2504.16736](https://arxiv.org/pdf/2504.16736) | [DigitalOcean survey](https://www.digitalocean.com/community/tutorials/agent-communication-protocols-explained)
+
+### 9.1 Modern Protocols (2024-2026)
+
+| # | Protocol | Origin | Transport | Auth | State | Status | CEX Parallel |
+|---|----------|--------|-----------|------|-------|--------|--------------|
+| 1 | **MCP** (Model Context Protocol) | Anthropic, Nov 2024 | JSON-RPC over HTTP/stdio | OAuth2 | Stateless | Active | `function_def` + `toolkit` |
+| 2 | **A2A** (Agent2Agent) | Google, Apr 2025 | HTTP + SSE + JSON-RPC (v0.3: gRPC) | Agent Cards + signed certs | Stateful (task lifecycle) | Active (Linux Foundation) | `handoff_protocol` + `dispatch_rule` |
+| 3 | **ACP** (Agent Communication Protocol) | IBM, May 2025 | RESTful HTTP, multipart MIME | DID-based | Stateful, async streams | Merged into A2A Sep 2025 | `proposal` + `session_state` |
+| 4 | **ANP** (Agent Network Protocol) | Open community, 2025 | DID-over-HTTP, JSON-LD | W3C DID | Stateless | Active | N/A (gap: `identity_config`) |
+| 5 | **Agora** | Univ. of Oxford, 2024 | LLM-mediated, Protocol Docs | None | Negotiated | Research | N/A (gap: `protocol_negotiation`) |
+| 6 | **LMOS** | Eclipse Foundation, 2024 | HTTP, event bus | IAM | Stateful | Active | `workflow` |
+| 7 | **Coral Protocol** | Community, 2025 | WebSocket + REST | JWT | Stateful | Experimental | `handoff` + `signal` |
+| 8 | **OpenAI Swarm** | OpenAI, 2024 | In-process function calls | API key | Stateless | Experimental | `dispatch_rule` |
+
+### 9.2 Historical Protocols (1990s-2000s)
+
+| # | Protocol | Origin | Transport | Auth | State | Status | Notes |
+|---|----------|--------|-----------|------|-------|--------|-------|
+| 9 | **KQML** | DARPA, 1993 | TCP sockets | None | Stateless | Legacy | Communicative acts: ASK, TELL, ACHIEVE. Verbose encoding. |
+| 10 | **FIPA-ACL** | FIPA, 2000 | TCP/IP, IIOP | PKI optional | Stateful | Legacy std | Formal BDI semantics. Precise pre/post-conditions. |
+| 11 | **JADE** | FIPA ref impl. | IIOP, HTTP | ACL encoding | Stateful | Maintained | Java container. FIPA-compliant message handling APIs. |
+| 12 | **JACK** | AOS | Proprietary | BDI engine | Stateful | Commercial | BDI architecture for real-time systems. |
+
+### 9.3 Framework-Embedded Protocols (2023-2025)
+
+| # | Protocol | Framework | Mechanism | State | Notes |
+|---|----------|-----------|-----------|-------|-------|
+| 13 | **AutoGen Protocol** | Microsoft AutoGen | ConversableAgent message passing | Stateful (GroupChat) | Event-driven, hierarchical or round-robin. |
+| 14 | **LangGraph State Protocol** | LangChain, 2024 | Graph state transitions + checkpoints | Stateful | Persistence via StateGraph. CEX parallel: `workflow` |
+| 15 | **CrewAI Task Protocol** | CrewAI, 2024 | Role-based task delegation | Stateful (crew context) | Hierarchical process + process memory. |
+| 16 | **Semantic Kernel Agent** | Microsoft, 2024 | Plugin + kernel invocation | Stateful (thread) | Multi-agent orchestration via AgentGroupChat. |
+
+---
+
+## 10. ProtocolBench: Evaluation Results
+
+Sources: [ProtocolBench paper (Hongyi Du et al.)](https://hongyi-du.github.io/publication/protocolbench/) | [OpenReview](https://openreview.net/forum?id=lqNqKUG2dn) | [MultiAgentBench (arxiv:2503.01935)](https://arxiv.org/abs/2503.01935)
+
+### 10.1 Benchmark Architecture
+
+ProtocolBench uses a three-layer architecture:
+1. **Scenario Layer**: 4 task families -- GAIA Document QA, Streaming Queue, Collaborative Coding, Fail-Storm Recovery
+2. **Protocol Adapter Layer**: Pluggable adapters for A2A, ACP, ANP, Agora -- identical task logic, isolated protocol behavior
+3. **Telemetry Layer**: Per-turn latency, byte overhead, task success rate, resilience metrics
+
+### 10.2 Quantitative Results
+
+| Metric | Range Across Protocols | Best Protocol | Notes |
+|--------|------------------------|---------------|-------|
+| Task completion time | Up to 36% variance | ACP (async streaming) | Agora highest (LLM negotiation overhead) |
+| Communication overhead | Up to 3.5s difference | MCP (stateless) | ANP highest (DID resolution per turn) |
+| Fail-Storm recovery | Statistically significant | A2A (SSE + lifecycle) | ANP weakest (no built-in state recovery) |
+| Collaborative coding success | -- | Agora | Natural language PDs reduce structural errors |
+
+### 10.3 Scenario-Protocol Fit Matrix
+
+| Scenario | Best Protocol | Reason |
+|----------|--------------|--------|
+| Document QA (hierarchical aggregation) | A2A | Task lifecycle + Agent Cards for capability routing |
+| Streaming Queue (high-throughput API) | ACP | RESTful async + MIME multipart = low-overhead streaming |
+| Collaborative Coding | Agora | LLM-mediated Protocol Documents = flexible negotiation |
+| Fail-Storm Recovery (cyclic node failures) | A2A | Stateful task lifecycle + SSE reconnect semantics |
+
+### 10.4 Key Finding
+
+> **Protocol choice is not neutral.** A 36% task completion time delta and 3.5s overhead spread mean wrong protocol selection is a first-order performance problem, not configuration noise.
+>
+> Comparison baseline: MCP (stateless tool calls, no overhead management) vs A2A (full lifecycle, ~2.1s overhead) vs ANP (~3.5s overhead per turn due to DID resolution) vs Agora (variable, LLM negotiation cost amortizes over long sessions).
+
+---
+
+## 11. ProtocolRouter: Adaptive Protocol Selection Algorithm
+
+Sources: [ProtocolBench paper](https://hongyi-du.github.io/publication/protocolbench/) | [arxiv:2503.07686](https://arxiv.org/abs/2503.07686)
+
+### 11.1 Architecture
+
+ProtocolRouter is a **learnable routing system** proposed alongside ProtocolBench. It dynamically selects the optimal protocol at runtime based on observed conditions.
+
+```
+Input Signals                ProtocolRouter               Output
+-------------                --------------               ------
+Task type (QA/code/stream)        |
+Agent count + topology  -->  Feature Extractor       -->  A2A / ACP / ANP / Agora
+Current latency metrics           |
+Failure rate (recent)       Policy Network (RL)
+Bandwidth available               |
+                            Confidence >= 0.85?
+                            YES: commit   NO: fallback to default
+```
+
+### 11.2 Algorithm: APBDA (Adaptive Priority-Based Dijkstra's Algorithm)
+
+Source: [arxiv:2503.07686](https://arxiv.org/html/2503.07686)
+
+The routing algorithm integrates multi-dimensional cost functions with RL-adaptive weights:
+
+| Parameter | Initial Weight | RL Update Method | CEX Observable |
+|-----------|---------------|------------------|----------------|
+| Task complexity | 0.30 | Q-learning on completion time | Handoff byte count |
+| Agent capability match | 0.25 | Policy gradient on success rate | Nucleus signal score |
+| Current latency | 0.20 | TD-error on observed vs predicted | git log timestamp delta |
+| Reliability (failure rate) | 0.15 | Q-learning on error rate | `.cex/runtime/signals/` |
+| Bandwidth | 0.10 | Direct measurement | N/A (not tracked in CEX) |
+
+Cost: `C(path) = sum_i(w_i * factor_i)` -- weights update via RL after each routing decision.
+
+### 11.3 CEX Gap Analysis
+
+`cex_router.py` implements a **static version** of this pattern (4 providers x 7 nuclei + YAML fallback chains). ProtocolRouter's adaptive weight update is the industry evolution:
+
+| CEX Current | ProtocolRouter Target | Gap |
+|-------------|----------------------|-----|
+| YAML `fallback_chain` | RL-weighted cost function | No adaptive learning |
+| Static model assignment | Dynamic per-task selection | No runtime adaptation |
+| Binary fail/succeed signal | Continuous score feedback | Coarse signal resolution |
+
+**Recommended next artifact**: `cex_router_adaptive.py` -- exponential moving average of per-nucleus latency + success rate updates routing weights every N cycles.
+
+---
+
+## 12. A2A Protocol: Task Lifecycle and Implementation Detail
+
+Sources: [A2A Specification v0.3](https://a2a-protocol.org/latest/specification/) | [Google Blog](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) | [Google Cloud Blog](https://cloud.google.com/blog/products/ai-machine-learning/agent2agent-protocol-is-getting-an-upgrade)
+
+### 12.1 Task State Machine
+
+```
+submitted
+    |
+    v
+working <--------+
+    |            |
+    v            |
+input-required --+--> [structured input received]
+    |
+    v
+completed | failed | canceled
+```
+
+Each state transition emits an SSE event. Clients subscribe at any point and replay from last known state.
+
+### 12.2 Agent Card Structure (JSON)
+
+Agent Cards served at `/.well-known/agent.json`:
+
+```
+{
+  "name": "DataFetcherAgent",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "stateTransitionHistory": true
+  },
+  "skills": [
+    { "id": "fetch_json", "inputModes": ["text"], "outputModes": ["application/json"] }
+  ],
+  "authentication": { "schemes": ["Bearer"] }
+}
+```
+
+CEX `agent_card` (P08) maps directly. Identified gaps: missing `capabilities.streaming` and `skills[].inputModes` fields.
+
+### 12.3 v0.3 Feature Summary
+
+| Feature | Detail | Impact |
+|---------|--------|--------|
+| gRPC support | Binary protocol option | 2-5x throughput for high-frequency task dispatch |
+| Signed security cards | Cryptographic signature on Agent Cards | Trust verification without DID overhead |
+| Python SDK expansion | Async task polling, streaming helpers | Reduces boilerplate for CEX nucleus integration |
+| Linux Foundation governance | Apache 2.0, 50+ partner contributors | Long-term standard, safe to build on |
+
+### 12.4 ACP Merger into A2A (September 2025)
+
+Source: [IBM Research](https://research.ibm.com/blog/agent-communication-protocol-ai) | [ACP course retirement notice](https://learn.deeplearning.ai/courses/acp-agent-communication-protocol/information)
+
+> "Starting September 1, 2025, the ACP team joined forces with Google's A2A team under the Linux Foundation. ACP is winding down active development and contributing its multipart MIME and async streaming semantics to A2A."
+
+**CEX Impact**:
+- The `proposal` kind (maps to ACP structured messages) now aligns to A2A `input-required` state
+- ACP async streaming is absorbed into A2A v0.3+
+- ACP-based integrations should target A2A endpoints going forward
+- IBM BeeAI framework continues development but uses A2A wire protocol
+
+---
+
+## 13. Protocol Selection Decision Tree
+
+```
+What is the primary interaction pattern?
+|
++-- Tool/data access (agent needs external resource)
+|       --> MCP (JSON-RPC, stdio/HTTP, tool invocation)
+|
++-- Task delegation (one agent assigns work to another)
+|       |
+|       +-- Enterprise context, same org
+|       |       --> A2A (task lifecycle, Agent Cards, SSE)
+|       |
+|       +-- Cross-org, internet-scale discovery
+|               --> ANP (DID-based, JSON-LD, decentralized)
+|
++-- Structured message (multipart, multimodal payload)
+|       --> A2A v0.3+ (absorbed ACP multipart semantics)
+|
++-- Unknown schema, agents must negotiate protocol
+|       --> Agora (LLM-mediated Protocol Documents)
+|
++-- In-process orchestration, single framework
+        |
+        +-- Sequential pipeline with state checkpoints
+        |       --> LangGraph State Protocol
+        |
+        +-- Role-based crew, specialized agents
+        |       --> CrewAI Task Protocol
+        |
+        +-- Event-driven group conversation
+                --> AutoGen Protocol / Semantic Kernel
+```
+
+### 13.1 CEX Dispatch Path Alignment
+
+| CEX Dispatch Path | Recommended Protocol | Reasoning |
+|-------------------|---------------------|-----------|
+| N07 -> N0x (intra-system) | A2A Task Lifecycle (logical model) | Stateful, SSE-like signals match task state machine |
+| N0x -> external tool | MCP | Standard tool invocation contract |
+| N0x -> external agent (future) | A2A Agent Card discovery | Cross-org capability advertisement |
+| `git commit` as signal | ANP-inspired DID event | Immutable, verifiable event record |
+| `.proposal.md` | A2A `input-required` state | Agent suspends pending structured input |
+| `cex_router.py` | ProtocolRouter APBDA | Adaptive weight selection over fallback chains |
+
+---
+
+## 14. Extended Protocol Comparison Matrix
+
+| Feature | MCP | A2A | ANP | Agora | FIPA-ACL |
+|---------|-----|-----|-----|-------|----------|
+| Transport | JSON-RPC/HTTP | HTTP+SSE+gRPC | DID/HTTP | LLM | TCP/IIOP |
+| Identity | None | Agent Card | W3C DID | None | PKI opt. |
+| Task Lifecycle | No | Yes (5 states) | No | Negotiated | Yes (FIPA-SL) |
+| Semantic Interop | No | Partial | JSON-LD | Natural lang | Ontology/OWL |
+| Streaming | No | SSE | No | No | No |
+| Decentralized | No | No | Yes | No | No |
+| Standard body | Anthropic | Linux Foundation | Open | Oxford | FIPA (defunct) |
+| Production-ready | Yes | Yes | Experimental | Research | Legacy |
+| ProtocolBench rank | -- | #1 (resilience) | #4 | #1 (coding) | N/A |
+| CEX adoption | Now (toolkit) | Now (handoff model) | Future | Future | N/A |
+
+---
+
 ## 8. Properties
 
 | Property         | Value                                                                 |
@@ -108,3 +361,4 @@ This document provides a comprehensive survey of multi-agent communication proto
 | **Compiler**    | cex_compiler.py                                                       |
 | **Quality Target** | 9.0+                                                                 |
 | **Density Target** | 0.85+                                                                |
+| **Key Sources** | arxiv:2505.02279, arxiv:2503.07686, a2a-protocol.org, research.ibm.com/acp, ProtocolBench (Hongyi Du), arxiv:2504.16736 |

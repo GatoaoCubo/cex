@@ -3,7 +3,7 @@ id: atom_15_qwen_deepseek
 kind: knowledge_card
 title: "Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs"
 version: "1.1.0"
-quality: 8.9
+quality: null
 tags: [qwen, deepseek, tool-calling, function-calling, mcp, reasoning, agent-framework, hermes, strict-mode, agentic-training]
 pillar: P01
 domain: llm-agent-tooling
@@ -164,6 +164,39 @@ For reasoning models (QwQ, QvQ, Qwen3), messages carry an optional `reasoning_co
 
 Token ID `151668` marks the closing `</think>` tag for parser detection.
 
+#### 1.5.1 reasoning_content Lifecycle: Full Multi-Turn Message Structure
+
+**Qwen3 -- multi-turn tool-calling with reasoning**:
+
+Turn 1 assistant response (from API):
+```json
+{
+  "role": "assistant",
+  "reasoning_content": "I need to call fn_a to get X...",
+  "content": null,
+  "tool_calls": [{"id": "call_1", "function": {"name": "fn_a", "arguments": "{}"}}]
+}
+```
+
+Turn 2 request (include reasoning_content during active tool loop, strip for new question):
+```json
+[
+  {"role": "user", "content": "Original question"},
+  {"role": "assistant", "reasoning_content": "I need to call fn_a...", "content": null, "tool_calls": [...]},
+  {"role": "tool", "tool_call_id": "call_1", "content": "tool result"}
+]
+```
+
+**Rules**:
+- INCLUDE `reasoning_content` in history while tool loop is in progress
+- STRIP `reasoning_content` when starting a new user question (HTTP 400 otherwise)
+- `enable_thinking=False` in `chat_template_kwargs` disables reasoning for simple tasks
+- Context preservation: Qwen generates fresh CoT each turn; does NOT accumulate prior reasoning
+
+**OpenAI o-series comparison**: OpenAI does NOT expose raw `reasoning_content` to API users.
+They expose `reasoning_summary` (model-generated summary). Attempting to extract raw CoT
+may violate their AUP. DeepSeek and Qwen both expose full raw `reasoning_content`.
+
 ### 1.6 MCP Integration
 
 Qwen-Agent has first-class MCP support via `mcp_manager` singleton:
@@ -186,6 +219,48 @@ Config structure:
   }
 }
 ```
+
+#### 1.6.1 MCP Manager Singleton: Implementation Architecture
+
+**Singleton pattern** (`MCPManager._instance` class variable):
+```python
+# Initialization internals
+self.loop = asyncio.new_event_loop()
+self.loop_thread = threading.Thread(target=loop.run_forever, daemon=True)
+self.loop_thread.start()
+self.clients = {}   # client_id -> MCPClient
+self.processes = [] # subprocess handles for cleanup
+```
+
+**Cross-thread execution via run_coroutine_threadsafe**:
+```python
+future = asyncio.run_coroutine_threadsafe(
+    mcp_client.call_tool(tool_name, args),
+    self.loop
+)
+result = future.result()  # blocks caller thread until coroutine completes
+```
+
+**Connection lifecycle**:
+1. `connect()` -- initialize MCPClient based on transport type
+   - `stdio` transport: triggered by `command` field in config (spawns subprocess)
+   - `SSE` transport: triggered by `url` field (HTTP streaming)
+   - `streamable-http`: triggered by `url` + `type == "streamable-http"`
+2. `discover_tools()` -- query server for available tools, build registry
+3. `call_tool()` -- submit via `run_coroutine_threadsafe`, block for result
+4. `disconnect()` -- clean up connection and subprocess
+
+**Automatic reconnection protocol**:
+1. Ping session before each tool call
+2. On ping failure: create new MCPClient with same ID
+3. Reconnect using stored config parameters
+4. Replace stale entry in `self.clients` dict
+5. Retry original tool call on fresh connection
+- SSE timeout: `sse_read_timeout` (default 300 seconds)
+
+**Thread safety**: Singleton prevents race conditions on manager access. All async operations
+isolated in daemon thread. `future.result()` synchronizes caller. No shared state mutation
+outside the event loop thread.
 
 ### 1.7 LLM Backends
 
@@ -267,6 +342,48 @@ Turn 1.N: Model outputs final content (no more tool_calls)
 2. For new user questions: REMOVE old `reasoning_content` from prior turns (API returns 400 error if `reasoning_content` appears in input)
 3. Max tokens: 64K including reasoning content
 
+#### 2.3.1 DeepSeek reasoning_content Lifecycle: Complete Message Sequence
+
+**Within a single question (tool loop in progress)**:
+```python
+# Turn 1: model returns tool call with reasoning
+resp = client.chat.completions.create(
+    model="deepseek-reasoner",
+    messages=[{"role": "user", "content": "What is EUR/USD rate?"}],
+    tools=[...]
+)
+# resp.choices[0].message has: reasoning_content + tool_calls + content=None
+
+# Turn 2: pass back the FULL assistant message including reasoning_content
+messages = [
+    {"role": "user", "content": "What is EUR/USD rate?"},
+    resp.choices[0].message,  # includes reasoning_content -- REQUIRED during loop
+    {"role": "tool", "tool_call_id": "call_abc", "content": "1.0842"}
+]
+resp2 = client.chat.completions.create(model="deepseek-reasoner", messages=messages, tools=[...])
+# resp2.choices[0].message.content = final answer (no more tool_calls)
+```
+
+**Starting a new question (strip old reasoning)**:
+```python
+# WRONG -- 400 error: reasoning_content in input for new question
+messages = [
+    {"role": "user", "content": "Previous question"},
+    {"role": "assistant", "reasoning_content": "...", "content": "Previous answer"},
+    {"role": "user", "content": "New question"}  # 400 if prior msg has reasoning_content
+]
+
+# CORRECT -- strip reasoning_content from prior assistant turns
+messages = [
+    {"role": "user", "content": "Previous question"},
+    {"role": "assistant", "content": "Previous answer"},  # reasoning_content stripped
+    {"role": "user", "content": "New question"}
+]
+```
+
+**Error when mishandled**: HTTP 400: "Missing `reasoning_content` field in the assistant
+message at message index [X]" OR HTTP 400 for unexpected `reasoning_content` in input.
+
 ### 2.4 Strict Mode (Beta)
 
 Base URL: `https://api.deepseek.com/beta`
@@ -278,12 +395,91 @@ Set `"strict": true` on function definitions. Enforces JSON Schema compliance:
 - `pattern` and `format` supported for strings
 - `minLength`/`maxLength` NOT supported
 
+#### 2.4.1 Strict Mode: Full JSON Schema Support Matrix
+
+**Enabling strict mode** (beta endpoint required):
+```python
+client = OpenAI(base_url="https://api.deepseek.com/beta", api_key="...")
+tools = [{
+    "type": "function",
+    "function": {
+        "strict": True,        # enable strict validation
+        "name": "get_weather",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "city": {"type": "string", "pattern": "^[A-Z][a-z]+$"},
+                "format": {"type": "string", "enum": ["celsius", "fahrenheit"]}
+            },
+            "required": ["city", "format"],    # ALL properties must be listed
+            "additionalProperties": False       # REQUIRED in strict mode
+        }
+    }
+}]
+```
+
+**Full support matrix**:
+
+| JSON Schema Feature | Strict Supported | Notes |
+|--------------------|-----------------|-------|
+| `object` | Yes | Must declare all props in `required` + `additionalProperties: false` |
+| `string` | Yes | Base type |
+| `number` | Yes | Supports `minimum`, `maximum`, `exclusiveMinimum`, `exclusiveMaximum`, `multipleOf` |
+| `integer` | Yes | Same numeric constraints as number |
+| `boolean` | Yes | Standard |
+| `array` | Yes | `minItems`/`maxItems` NOT supported |
+| `enum` | Yes | Restricts to predefined values |
+| `anyOf` | Yes | Multiple valid type alternatives |
+| `$ref` | Yes | Reusable schema module references |
+| `$def` | Yes | Recursive structure definitions |
+| `pattern` (string regex) | Yes | Validated at inference time |
+| `format` (string) | Yes | email, hostname, ipv4, ipv6, uuid |
+| `minLength` / `maxLength` | **No** | Not supported |
+| `minItems` / `maxItems` | **No** | Not supported |
+| `additionalProperties: true` | **No** | Must be false |
+
+**Error format**: HTTP 400 returned if schema does not conform or uses unsupported features.
+Server validates schema at request time, not at generation time.
+
+**Performance**: Strict mode adds inference-time schema validation overhead but guarantees
+100% compliance with declared schema -- eliminates post-processing validation failures.
+
 ### 2.5 Agentic Training Pipeline
 
-V3.2 introduced massive agent training data synthesis:
-- 1,800+ environments
-- 85,000+ complex instructions
-- Improved tool-use compliance and generalization
+V3.2 introduced massive agent training data synthesis (source: arXiv 2512.02556):
+- **1,827 distinct environments** (not just "1,800+")
+- **85,000+ complex instructions** across 4 agent categories
+- Improved tool-use compliance and generalization across all task types
+
+#### 2.5.1 Training Data Breakdown by Category
+
+| Category | Count | Source Method |
+|----------|-------|--------------|
+| Code Agent | 24,667 | GitHub issue-PR pairs, filtered by heuristics + LLM judgment |
+| Search Agent | 50,275 | Multi-agent pipeline sampling long-tail entities across domains |
+| Code Interpreter | 5,908 | Jupyter Notebook environments (math, logic, data science) |
+| General Agent | 4,417 | Synthesized from 1,827 task-oriented environments |
+| **Total** | **85,267** | |
+
+**Code Agent**: Built from millions of GitHub issue-PR pairs. Each environment requires
+executable setup with dependency resolution and test validation.
+
+**Search Agent**: Multi-language, multi-difficulty. QA pairs verified through search tool
+validation. Largest category (59% of training data).
+
+**Code Interpreter**: Jupyter-based environments focused on problems spanning mathematics,
+logic, and data science. Iterative execution with output validation.
+
+**General Agent**: "Hard to solve but easy to verify" task design. Categories include
+travel planning, multi-step reasoning. Iterative difficulty escalation with human annotators
+and verification agents ensuring data quality.
+
+**Training methodology**:
+- All domains support both thinking and non-thinking modes simultaneously
+- Six specialized training domains: mathematics, programming, general logical reasoning,
+  general agentic tasks, agentic coding, agentic search
+- Post-training: over 10% of pre-training compute dedicated to reinforcement learning
+- Key innovation: reasoning integrated INTO tool execution (not sequential think-then-act)
 
 ### 2.6 Model Architecture (V3.2)
 

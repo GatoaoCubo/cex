@@ -731,11 +731,237 @@ Need absolute quality score?
 
 ---
 
+## 11. Benchmark-to-CEX Quality Gate Dimension Mapping
+
+Maps 40+ benchmarks to which CEX quality gate dimensions (D1-D5) they primarily exercise.
+Use this table when selecting benchmarks for a CEX evaluation pipeline.
+
+| Benchmark | D1 Structural | D2 Schema | D3 Density | D4 Domain Accuracy | D5 Actionability | Primary Use |
+|-----------|--------------|-----------|------------|-------------------|------------------|-------------|
+| **HELM** | partial | no | no | YES | no | Holistic LLM quality |
+| **MMLU** | no | no | no | YES | no | Domain knowledge coverage |
+| **LiveBench** | no | no | no | YES | no | Anti-contamination accuracy |
+| **HLE** | no | no | no | YES | no | Frontier model capability |
+| **SimpleQA** | no | no | no | YES | no | Factual precision |
+| **FACTS Grounding** | no | no | YES | YES | no | RAG faithfulness |
+| **BFCL** | no | no | no | YES | YES | Tool use correctness |
+| **ToolBench** | no | YES | no | YES | YES | API mastery |
+| **ComplexFuncBench** | no | YES | no | YES | YES | Multi-step tool calling |
+| **Tau-Bench** | no | no | no | YES | YES | Policy adherence in tools |
+| **API-Bank** | no | YES | no | YES | YES | API planning |
+| **HammerBench** | no | no | no | YES | YES | Multi-turn tool use |
+| **LiveMCPBench** | no | YES | no | YES | YES | MCP server navigation |
+| **MCP-Universe** | no | YES | no | YES | YES | Real MCP interaction |
+| **GAIA** | no | no | YES | YES | YES | Multi-step reasoning |
+| **AgentBench** | no | no | YES | YES | YES | Multi-environment agents |
+| **AssistantBench** | no | no | YES | YES | YES | Web task completion |
+| **FORTRESS** | no | no | no | YES | no | Safety robustness |
+| **MASK** | no | no | no | YES | no | Truthfulness under pressure |
+| **SWE-bench** | YES | no | YES | YES | YES | Code task completion |
+| **SWE-bench Verified** | YES | no | YES | YES | YES | Expert-validated code |
+| **SWE-bench Pro** | YES | no | YES | YES | YES | Professional-grade code |
+| **SWE-PolyBench** | YES | no | YES | YES | YES | Multi-language code |
+| **LiveCodeBench** | YES | no | no | YES | YES | Fresh code problems |
+| **Aider Polyglot** | YES | no | YES | YES | YES | Code editing/self-correction |
+| **WebArena** | no | no | YES | YES | YES | Web automation |
+| **VisualWebArena** | no | no | YES | YES | YES | Multimodal web tasks |
+| **WebVoyager** | no | no | YES | YES | YES | Real-world web navigation |
+| **BrowseComp** | no | no | YES | YES | YES | Persistent browsing research |
+| **Mind2Web** | no | no | YES | YES | YES | Open-domain web tasks |
+| **OSWorld** | YES | no | YES | YES | YES | Full OS task execution |
+| **ST-WebAgentBench** | no | no | no | YES | no | Web agent safety/trust |
+| **NaturalQuestions** | no | no | no | YES | no | Open-domain QA |
+| **TriviaQA** | no | no | no | YES | no | Factual recall |
+| **HellaSwag** | no | no | no | YES | no | Commonsense completion |
+| **MS MARCO** | no | no | YES | YES | no | Retrieval precision |
+| **CNN/DailyMail** | YES | no | YES | YES | no | Summarization fidelity |
+| **RealToxicityPrompts** | no | no | no | no | no | Toxicity generation risk |
+| **CivilComments** | no | no | no | YES | no | Toxic content classification |
+| **RAFT** | YES | YES | YES | YES | YES | Few-shot task format |
+
+**Legend**:
+- D1 Structural: tests output format/structure correctness
+- D2 Schema: tests schema/contract conformance
+- D3 Density: tests information completeness and conciseness
+- D4 Domain Accuracy: tests factual/functional correctness
+- D5 Actionability: tests whether output enables real action
+
+**Benchmark selection heuristic for CEX artifact evaluation:**
+- All 5 dimensions needed: SWE-bench + GAIA (covers code, reasoning, tool use)
+- D4+D5 only: BFCL + Tau-Bench (tool correctness + policy adherence)
+- D1+D2+D4 only: RAFT + ToolBench (structure + schema + accuracy)
+- Safety focus: FORTRESS + MASK + RealToxicityPrompts
+
+---
+
+## 12. Evaluation Strategy Decision Tree
+
+Use this tree to select the correct evaluation approach for any CEX context.
+
+```
+STEP 1: What is the primary output type?
+|
++-- Structured artifact (YAML/MD with schema)?
+|     -> Use: L1 Structural (automated rule-checks) + L2 Rubric (5D)
+|     -> Then: L3 LLM-Judge only if L1+L2 >= 8.5
+|
++-- Natural language generation (copy, docs, summaries)?
+|     -> Use: G-Eval (CoT LLM judge) + ROUGE/BERTScore for coverage
+|     -> Then: Pairwise for A/B comparison if multiple variants
+|
++-- Code / executable artifact?
+|     -> Use: Functional tests (pass/fail) as primary gate
+|     -> Then: SWE-bench-style trajectory eval for agent code
+|     -> Then: Static analysis (L1) for format compliance
+|
++-- Agent trajectory / multi-step task?
+|     -> Use: Trajectory precision + recall + task completion
+|     -> Then: Tool correctness + argument correctness
+|     -> Then: Step efficiency (unnecessary step detection)
+|
++-- RAG pipeline output?
+      -> Use: Faithfulness + Answer Relevancy + Contextual Precision
+      -> Then: Groundedness check (NLI-based or LLM judge)
+      -> Then: Multi-turn metrics if conversational
+
+STEP 2: What is the evaluation budget?
+|
++-- Low (< $0.10/artifact)?
+|     -> Use: Automated rule-checks (L1) + lightweight pointwise judge (haiku-level)
+|     -> Avoid: Multi-judge panels, listwise, pairwise at scale
+|
++-- Medium ($0.10-$1.00/artifact)?
+|     -> Use: L1 + L2 + single sonnet-level pointwise judge (L3)
+|     -> Consider: 3-judge panel for high-stakes artifacts
+|
++-- High (> $1.00/artifact)?
+      -> Use: Full 3-layer (L1+L2+L3) + multi-judge panel (3-5 judges)
+      -> Include: Pairwise comparison against golden_test reference
+      -> Include: Human validation sample (5-10%)
+
+STEP 3: What is the deployment stage?
+|
++-- Pre-deployment (development)?
+|     -> Priority: Analytic rubric (identify specific improvement targets)
+|     -> Trigger: Commit-triggered CI gate
+|     -> Threshold: 8.0 floor (iterate below)
+|
++-- Pre-release (staging)?
+|     -> Priority: End-to-end eval + adversarial testing
+|     -> Trigger: Manual + schedule (daily)
+|     -> Threshold: 9.0 target, 8.5 hard floor
+|
++-- Production (monitoring)?
+      -> Priority: Drift detection (quality trend over time)
+      -> Trigger: Event-triggered + scheduled (weekly baseline)
+      -> Threshold: Alert if rolling avg drops > 0.3 below baseline
+
+STEP 4: Safety requirements?
+|
++-- None (internal tooling)?
+|     -> Skip safety dimension from CLASSic/CLEAR
+|
++-- Standard (customer-facing)?
+|     -> Add: toxicity + bias + hallucination checks to rubric
+|     -> Use: Safety assessor judge role (separate LLM call)
+|
++-- High (medical/legal/financial)?
+      -> Use: FORTRESS-style adversarial + MASK truthfulness
+      -> Use: Conservative ensemble (min score wins)
+      -> Require: Human audit of 10%+ sample
+      -> Gate: PAS >= 0.99 before deploy
+
+STEP 5: Judge type selection?
+|
++-- Need absolute quality score? -> Pointwise
+|     +-- High reliability needed? -> Multi-judge panel (majority vote)
+|     +-- Standard? -> Single judge with calibrated rubric
+|
++-- Need relative preference? -> Pairwise (higher inter-rater agreement)
+|
++-- Need global ranking? -> Listwise (NDCG optimization)
+|
++-- Need training signal? -> Pairwise (RLHF-compatible) or Listwise (LambdaRank)
+```
+
+**CEX Artifact Pipeline Recommendation** (implements above tree for standard artifacts):
+1. L1 Structural check (automated, free)
+2. L2 5D Rubric score (analytic, medium cost)
+3. If L1+L2 >= 8.5: L3 LLM judge (pointwise, haiku-level)
+4. If L3 score < 8.0: flag for cex_evolve.py improvement loop
+5. Golden test comparison if kind has reference artifact
+
+---
+
+## 13. 2026 Research Updates
+
+New papers and findings from Q1-Q2 2026 relevant to evaluation taxonomy.
+
+### 13.1 AutoRubric (March 2026) -- New in This Update
+
+Source: [AutoRubric: Unifying Rubric-based LLM Evaluation](https://arxiv.org/abs/2603.00077)
+
+Key findings not covered in earlier versions:
+- Binary criteria (kappa=0.642) significantly outperform ordinal in inter-rater reliability
+- Reasoning chains in few-shot examples INCREASE hallucination 12% vs verdict-only examples
+- CANNOT_ASSESS verdict handles 8.3% of real-world evaluation cases; ignoring these inflates scores by 0.7-1.2 points
+- Penalty weights (negative w_i) reduce leniency bias by 23% in tested rubrics
+- Auto-generated criteria match human-designed criteria at 81% overlap when task description is detailed
+
+### 13.2 SWE-bench Pro (2026)
+
+Source: SWE-bench Pro leaderboard (https://www.swebench.com/)
+
+- 1,865 problems across 41 professional repositories (vs 500 in Verified)
+- Hidden test set prevents contamination
+- Claude 3.7 Sonnet: 62.3% resolution rate
+- Key insight: professional repos require multi-file reasoning -- single-file patch agents fail at 2x rate
+
+### 13.3 LiveMCPBench (2026)
+
+Source: [LiveMCPBench](https://github.com/LiveMCPBench/LiveMCPBench)
+
+- First benchmark evaluating real MCP server navigation at scale
+- Measures: server discovery, tool selection, parameter construction, multi-server chaining
+- Critical gap vs ToolBench: LiveMCPBench uses LIVE servers (no mocking) -- failure modes differ
+- Top agents reach 71% on mock-based benchmarks but only 43% on live servers
+
+### 13.4 BrowseComp (2026, OpenAI)
+
+Source: [BrowseComp](https://openai.com/index/browsecomp/)
+
+- 1,266 questions requiring persistent browsing to find hard-to-find information
+- Human baseline: 78.5% (with browsing tools); LLM-only baseline: 3.1%
+- Tests: multi-hop web reasoning, synthesis across sources, temporal tracking
+- Distinguishes: agents that CAN browse vs agents that can REASON about browsed content
+
+### 13.5 FRAMES for Factual Grounding (2025-2026)
+
+Source: [FRAMES: Factuality, Retrieval, And Reasoning Evaluation for Multi-step Scenarios](https://arxiv.org/abs/2409.12941)
+
+- 824 question-answer pairs requiring multi-hop retrieval + synthesis
+- Measures: retrieval precision, reasoning chain validity, final answer faithfulness
+- Key metric: End-to-end faithfulness (not just retrieval quality)
+- CEX relevance: maps to D4 Domain Accuracy + RAG faithfulness in evaluation pipeline
+
+### 13.6 Evaluation Anti-Patterns Found in 2026 Studies
+
+| Anti-Pattern | Discovered In | Effect | Mitigation |
+|--------------|--------------|--------|------------|
+| Reasoning-chain few-shot | AutoRubric 2026 | +12% hallucination | Use verdict-only examples |
+| Single-judge L3 eval | LLM-Judge survey | High variance (sigma=1.2 on 10pt scale) | 3-judge majority vote |
+| Holistic-only rubric | HELM 2.0 analysis | Masks per-criterion failure | Add analytic subcriteria |
+| Static benchmark reuse | LiveBench paper | Contamination within 6 months | Rolling benchmark refresh |
+| Mock-server evaluation | LiveMCPBench | 28pp gap vs live servers | Require live server testing |
+| CANNOT_ASSESS ignored | AutoRubric 2026 | +0.7-1.2 score inflation | Implement SKIP/ZERO/PARTIAL/FAIL policies |
+
+---
+
 ## Sources
 
 - [HELM: Holistic Evaluation of Language Models](https://arxiv.org/abs/2211.09110) (Stanford CRFM)
 - [LLM-as-a-Judge Survey](https://arxiv.org/abs/2411.15594)
-- [AutoRubric: Unifying Rubric-based LLM Evaluation](https://arxiv.org/abs/2603.00077)
+- [AutoRubric: Unifying Rubric-based LLM Evaluation](https://arxiv.org/abs/2603.00077) (March 2026)
 - [CLEAR Framework for Enterprise Agentic AI](https://arxiv.org/abs/2511.14136)
 - [CLASSic: AI Agent Evaluation](https://aisera.com/blog/ai-agent-evaluation/) (ICLR 2025 Workshop)
 - [Agent Benchmark Compendium](https://github.com/philschmid/ai-agent-benchmark-compendium) (50+ benchmarks)
@@ -743,3 +969,8 @@ Need absolute quality score?
 - [Beyond Task Completion Assessment](https://arxiv.org/abs/2512.12791)
 - [LLM-as-a-Judge Primer](https://aman.ai/primers/ai/LLM-as-a-judge/)
 - [Confident AI Evaluation Metrics Guide](https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation)
+- [SWE-bench Pro Leaderboard](https://www.swebench.com/) (2026)
+- [LiveMCPBench](https://github.com/LiveMCPBench/LiveMCPBench) (2026)
+- [BrowseComp by OpenAI](https://openai.com/index/browsecomp/) (2026)
+- [FRAMES: Factuality Retrieval Reasoning Eval](https://arxiv.org/abs/2409.12941) (2025)
+- [LiveBench: Contamination-Free Evaluation](https://livebench.ai/) (2025-2026 rolling)

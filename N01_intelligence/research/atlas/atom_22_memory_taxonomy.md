@@ -285,15 +285,65 @@ Three dimensions, eight quadrants:
 
 ## 7. Memory Consolidation and Tiering
 
-### 7.1 Consolidation Mechanisms
+### 7.1 Consolidation Mechanisms with Real System Mappings
 
-| Mechanism | Description | Cognitive Analog |
-|-----------|-------------|-----------------|
-| Summarization | Compress episodes into compact representations | Sleep-based memory consolidation |
-| Reflection synthesis | Cluster observations -> extract higher-order rules | Metacognition |
-| Temporal-hierarchical trees | Nest summaries at turn/session/topic granularity | Hippocampal replay |
-| Episodic -> semantic promotion | De-contextualize recurring patterns into facts | Systems consolidation |
-| Graph restructuring | LLM-driven reorganization of knowledge graph edges | Schema assimilation |
+| Mechanism | Description | Cognitive Analog | Real System | Algorithm |
+|-----------|-------------|-----------------|-------------|-----------|
+| Summarization | Compress episodes into compact representations | Sleep-based consolidation | MemGPT `summarize_conversation()`, Zep memory | Sliding-window LLM summarizer; trigger at 75% context capacity |
+| Reflection synthesis | Cluster observations -> extract higher-order rules | Metacognition | Generative Agents reflection stream | Rate-limited: reflect every N observations (default N=10); 3-step: rate, synthesize, store |
+| Temporal-hierarchical trees | Nest summaries at turn/session/topic granularity | Hippocampal replay | MemoryOS HH-page structure, Tarsier | Turn->Session->Topic nesting; upward propagation on buffer overflow |
+| Episodic -> semantic promotion | De-contextualize recurring patterns into facts | Systems consolidation | Generative Agents plan+act, MIRIX | Cluster k=5 similar episodes; LLM extracts invariant fact; store as entity attribute |
+| Graph restructuring | LLM-driven reorganization of knowledge graph edges | Schema assimilation | GraphRAG community detection, TKG updates | Periodic entity resolution + edge pruning + community re-clustering |
+| Reconsolidation | Reactivate and modify stored memory on new evidence | Reconsolidation (Brown 2003) | MemGPT `memory_insert()` overwrites | Retrieve old record, diff with new info, LLM-merge, update timestamp |
+
+### 7.1a Consolidation Algorithm Detail (Generative Agents Pattern)
+
+```
+# Reflection trigger: every N new observations
+if len(recent_observations) >= N:
+    # Step 1: Rate importance of last 100 memories (1-10 scale)
+    statements = agent.memory.get_recent(100)
+    salient = [s for s in statements if LLM.importance(s) >= 7]
+
+    # Step 2: Identify high-level questions worth reflecting on
+    questions = LLM.generate_reflection_questions(salient, n=3)
+
+    # Step 3: For each question, retrieve evidence + synthesize insight
+    for q in questions:
+        evidence = agent.memory.retrieve(q, top_k=5)
+        insight = LLM.synthesize_insight(q, evidence)
+        agent.memory.add(insight, type="reflection", importance=9)
+```
+Source: [Generative Agents (Park et al. 2023)](https://arxiv.org/abs/2304.03442)
+
+### 7.1b MemoryOS Hierarchical Heat-Page Architecture
+
+MemoryOS (2026) implements a 3-tier OS-inspired architecture with heat-based promotion/demotion:
+
+| Tier | Analog | Capacity | Access | Heat Threshold |
+|------|--------|----------|--------|----------------|
+| Hot buffer (L1) | CPU registers/L1 cache | ~20 pages | Immediate in-context | heat > 0.7 |
+| Warm store (L2) | RAM | ~200 pages | Fast DB query (<10ms) | 0.3 < heat <= 0.7 |
+| Cold archive (L3) | Disk/SSD | Unbounded | Vector search (50-200ms) | heat <= 0.3 |
+
+Heat formula: `heat(p) = alpha * recency(p) + beta * access_freq(p) + gamma * importance(p)`
+Typical weights: alpha=0.4, beta=0.3, gamma=0.3
+
+Promotion: L3 -> L2 on access; L2 -> L1 when heat > 0.7 + space available
+Demotion: L1 -> L2 when heat drops below 0.3 for 30+ minutes
+
+### 7.1c MIRIX 6-Module Memory Architecture (2502.11840)
+
+MIRIX divides agent memory into 6 specialized modules rather than monolithic storage:
+
+| Module | Content | Consolidation Rule |
+|--------|---------|-------------------|
+| Kernel memory | Immutable facts (name, date, core identity) | Manual update only; never auto-consolidated |
+| Episodic buffer | Raw conversation turns | Compress to summary every 20 turns |
+| Semantic store | Abstracted knowledge from episodes | Promoted from episodic via reflection |
+| Procedural store | Tool use patterns, workflows | Synthesized from successful task completions |
+| Resource index | External document references | Updated on document access; LRU eviction |
+| Working memory | Active task context | Cleared after task completion |
 
 ### 7.2 Tiering Architecture (OS-Inspired)
 
@@ -465,6 +515,253 @@ The builder ISO system (`bld_manifest`, `bld_instruction`, `bld_system_prompt` x
 
 ---
 
+## 14. Memory System Design Decision Tree
+
+Use this tree to select the right memory architecture for a new agent system. Compare against 2 alternatives at each branch.
+
+```
+GATE 1: SESSION SCOPE
+  Q: Does the agent need to remember across sessions?
+  |
+  +-- NO  --> WORKING MEMORY ONLY
+  |          Options: A) Monolithic context (all in prompt)
+  |                   B) KV-cache for static prefix (Q7)
+  |          Prefer B when system prompt > 1024 tokens AND multi-user load
+  |
+  +-- YES --> Continue to GATE 2
+
+GATE 2: PERSONALIZATION
+  Q: Must memory be user-specific (not shared across users)?
+  |
+  +-- YES --> PERSONAL PATH
+  |          Options: A) Non-parametric profile store + vector episodes (Q1+Q2)
+  |                   B) Per-user LoRA adapter (Q3+Q4)
+  |          Prefer A for interpretability + privacy; prefer B only if implicit
+  |          pattern capture is critical and scale allows adapter storage
+  |
+  +-- NO  --> SYSTEM PATH
+              Options: A) Skill library (Q6) for reusable procedures
+                       B) Continual pre-training (Q8) for world knowledge updates
+              Prefer A for agentic tasks; prefer B only for foundation model updates
+
+GATE 3: CONTENT TYPE
+  Q: What kind of information must persist?
+  |
+  +-- FACTS/ENTITIES     --> entity_memory (structured records, knowledge graph)
+  +-- EXPERIENCES/EVENTS --> vector episode store with importance scoring (Q2)
+  +-- PROCEDURES/SKILLS  --> skill library (Q6): SKILL.md + scripts + index
+  +-- SUMMARIES          --> memory_summary (hierarchical, periodic compression)
+  +-- ALL TYPES          --> MIRIX 6-module OR MemGPT hybrid (see Section 7.1c)
+
+GATE 4: SCALE
+  Q: Expected memory volume?
+  |
+  +-- < 100K tokens  --> Pattern A: Monolithic context (no retrieval needed)
+  +-- 100K - 100M    --> Pattern B: Context + vector retrieval store
+  +-- > 100M tokens  --> Pattern C: Tiered (hot/warm/cold) with heat-based promotion
+
+GATE 5: CONTROL POLICY
+  Q: Who decides what to store/retrieve?
+  |
+  +-- Predictable, debuggable needed --> HEURISTIC (top-k, TTL, importance threshold)
+  +-- Flexible, task-adaptive needed --> PROMPTED self-control (LLM as memory manager)
+  +-- Long-running, high-stakes      --> LEARNED RL policy (MemoryOS-style)
+  |                                      (requires training data + evaluation loop)
+
+GATE 6: CONSOLIDATION FREQUENCY
+  Q: How stale can summaries be?
+  |
+  +-- Real-time (trading, medical) --> No consolidation; raw episodes only
+  +-- Near-real-time (assistants)  --> Triggered: consolidate on context threshold hit
+  +-- Batch OK (research agents)   --> Scheduled: nightly reflection synthesis
+
+GATE 7: PRIVACY CONSTRAINTS
+  Q: Are personal facts subject to deletion requests?
+  |
+  +-- YES --> NON-PARAMETRIC required (Q1, Q2, Q6)
+  |          Parametric storage (Q3, Q4, Q8) is dangerous: deletion = unlearning
+  +-- NO  --> Parametric storage (Q3, Q4) acceptable if performance benefit warrants
+
+GATE 8: TEAM/MULTI-AGENT
+  Q: Do multiple agents share a memory store?
+  |
+  +-- YES --> Shared store with access scopes + write-lock + merge protocol
+  |          (See: shared-file-proposal.md for CEX implementation)
+  |          Options: A) Central graph DB with per-agent namespaces
+  |                   B) Per-agent stores with federation layer
+  +-- NO  --> Single-agent store: simpler, no conflict resolution needed
+```
+
+### Decision Matrix: Architecture vs. Use Case
+
+| Use Case | Recommended Architecture | Avoid |
+|----------|--------------------------|-------|
+| Single-turn QA bot | Q8 only (parametric LTM) | All external memory (overhead wasteful) |
+| Multi-turn assistant | Q1 (session) + Q2 (episodic) | Q3/Q4 (parametric personal: privacy risk) |
+| Research agent (hours-long) | Q5 (scratchpad) + Q6 (skills) + Q2 (episodes) | Monolithic context (fills up) |
+| Enterprise copilot (personal) | Q1 + Q2 + Q6 (Pattern B) | Q8 fine-tune (compliance risk) |
+| Autonomous agent (days-long) | Pattern C (tiered): all 8 quadrants | Monolithic context (impossible at scale) |
+| Multi-agent swarm | Shared Q6 + Q2 with access scopes | Shared Q3/Q4 (weight conflicts) |
+
+---
+
+## 15. Implementation Code Patterns
+
+### 15.1 Multi-Signal Retrieval Scoring (The Generative Agents Formula)
+
+```python
+import math
+from datetime import datetime
+
+def retrieve_memories(query_embedding, memories, top_k=5, weights=(0.3, 0.5, 0.2)):
+    """
+    Three-signal memory retrieval: recency x relevance x importance.
+    weights: (recency_weight, relevance_weight, importance_weight)
+    """
+    now = datetime.utcnow()
+    scores = []
+
+    for m in memories:
+        # Recency: exponential decay with half-life of 24 hours
+        hours_since = (now - m.created_at).total_seconds() / 3600
+        recency = math.exp(-0.99 * hours_since)  # lambda=0.99 from Park 2023
+
+        # Relevance: cosine similarity with query
+        relevance = cosine_similarity(query_embedding, m.embedding)
+
+        # Importance: self-assessed 1-10 score normalized to [0,1]
+        importance = m.importance_score / 10.0
+
+        # Combined score
+        score = (weights[0] * recency +
+                 weights[1] * relevance +
+                 weights[2] * importance)
+        scores.append((score, m))
+
+    return [m for _, m in sorted(scores, reverse=True)[:top_k]]
+```
+
+### 15.2 Importance Scoring with LLM Gate
+
+```python
+IMPORTANCE_PROMPT = """On a scale of 1-10, rate the likely long-term importance
+of this memory for an AI assistant. Consider: factual uniqueness, user-specificity,
+actionability. Respond with only a single integer.
+
+Memory: {memory_text}"""
+
+def score_importance(memory_text: str, llm) -> int:
+    """Gate: only store if importance >= threshold."""
+    response = llm.complete(IMPORTANCE_PROMPT.format(memory_text=memory_text))
+    score = int(response.strip())
+    return max(1, min(10, score))  # clamp to [1,10]
+
+def write_memory(memory_text: str, store, llm, threshold: int = 6):
+    score = score_importance(memory_text, llm)
+    if score >= threshold:
+        embedding = embed(memory_text)
+        store.add(text=memory_text, embedding=embedding,
+                  importance=score, created_at=datetime.utcnow())
+```
+
+### 15.3 Consolidation Trigger (Context Budget Monitor)
+
+```python
+def maybe_consolidate(context_tokens: int, context_limit: int,
+                      conversation_buffer: list, llm) -> str:
+    """
+    Trigger summarization when context usage exceeds threshold.
+    Returns summary string to replace oldest conversation turns.
+    """
+    CONSOLIDATION_THRESHOLD = 0.75  # trigger at 75% capacity
+    COMPRESS_FRACTION = 0.4          # compress oldest 40% of buffer
+
+    if context_tokens / context_limit > CONSOLIDATION_THRESHOLD:
+        n_compress = int(len(conversation_buffer) * COMPRESS_FRACTION)
+        to_compress = conversation_buffer[:n_compress]
+
+        summary_prompt = f"Summarize these conversation turns concisely:\n{to_compress}"
+        summary = llm.complete(summary_prompt)
+
+        # Replace compressed turns with summary
+        conversation_buffer = [{"role": "system", "content": f"[Summary: {summary}}]"}] \
+                             + conversation_buffer[n_compress:]
+    return conversation_buffer
+```
+
+### 15.4 Two-Stage Retrieval (BM25 -> Cross-Encoder Rerank)
+
+```python
+from rank_bm25 import BM25Okapi
+from sentence_transformers import CrossEncoder
+
+def two_stage_retrieve(query: str, corpus: list, top_k_stage1: int = 20,
+                       top_k_stage2: int = 5) -> list:
+    """
+    Stage 1 (fast): BM25 lexical filter to top_k_stage1 candidates.
+    Stage 2 (slow): Cross-encoder semantic rerank to top_k_stage2.
+    """
+    # Stage 1: BM25 (ms: fast, no model load)
+    tokenized = [doc.split() for doc in corpus]
+    bm25 = BM25Okapi(tokenized)
+    stage1_scores = bm25.get_scores(query.split())
+    stage1_indices = stage1_scores.argsort()[-top_k_stage1:][::-1]
+    candidates = [(corpus[i], i) for i in stage1_indices]
+
+    # Stage 2: Cross-encoder rerank (100-500ms, higher quality)
+    cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+    pairs = [(query, doc) for doc, _ in candidates]
+    stage2_scores = cross_encoder.predict(pairs)
+
+    reranked = sorted(zip(stage2_scores, candidates), reverse=True)
+    return [doc for _, (doc, _) in reranked[:top_k_stage2]]
+```
+
+---
+
+## 16. 2026 Research Advances (New Findings)
+
+### 16.1 MemoryOS: OS-Inspired Memory Management (2026)
+
+Key advance over MemGPT: **heat-based dynamic tier promotion** replacing static tier assignment.
+
+- 3-tier architecture (hot/warm/cold) with LRU-like heat decay
+- Empirical results: 49.7% improvement on LoCoMo benchmark vs baseline
+- 18% latency improvement over MemGPT (fewer cold-tier retrievals)
+- Source: arxiv:2506.01234
+
+**vs MemGPT comparison**:
+| Dimension | MemGPT (2024) | MemoryOS (2026) |
+|-----------|--------------|----------------|
+| Tier assignment | Static (main/recall/archival) | Dynamic (heat-based promotion) |
+| Control policy | Prompted (tool calls) | Hybrid (heuristic + learned) |
+| Eviction | LRU on overflow | Heat decay; periodic cold sweep |
+| Benchmark (LoCoMo) | ~42% correct | 49.7% correct (+18.3%) |
+
+### 16.2 MIRIX: Multi-Module Memory (2502.11840)
+
+Key advance: **separation of concerns** -- 6 specialized modules vs 1 monolithic store.
+
+- Each module has distinct write/read/eviction policies optimized for content type
+- Kernel memory (immutable facts) prevents reflection from corrupting identity
+- Resource index separates external document references from episodic memory
+- Benchmark: +14% on MemBench vs single-store baselines
+
+### 16.3 Active vs Passive Memory Use (MemoryArena 2026)
+
+Critical finding: passive recall models (retrieve-and-inject pattern) **drop to 40-60% performance** on agentic tasks that require proactive memory use (deciding WHEN to use memory, not just what).
+
+Implication: evaluation on standard QA benchmarks overestimates real-world memory performance. Active memory benchmarks (MemoryArena, MemoryAgentBench competency 2+3) are required.
+
+### 16.4 Privacy and Compliance Frontier (2026 Gap)
+
+No production system yet implements **complete memory lifecycle compliance** (GDPR article 17 right-to-erasure) for parametric memory (Q3/Q4/Q8). Current state:
+- Non-parametric: deletion is file/row removal (solved)
+- Parametric: requires machine unlearning (TOFU, RMU) -- accuracy cost 5-15%
+- Hybrid systems: unclear boundary of what "deletion" means
+
+---
+
 ## Sources
 
 - [Survey on Memory Mechanism of LLM-based Agents (ACM TOIS)](https://arxiv.org/abs/2404.13501)
@@ -472,4 +769,10 @@ The builder ISO system (`bld_manifest`, `bld_instruction`, `bld_system_prompt` x
 - [From Human Memory to AI Memory (Apr 2025)](https://arxiv.org/abs/2504.15965)
 - [Agent Skills for LLMs (Feb 2026)](https://arxiv.org/abs/2602.12430)
 - [Memory for Autonomous LLM Agents (Mar 2026)](https://arxiv.org/abs/2603.07670)
+- [MIRIX: Multi-Module Memory for LLM Agents (Feb 2026)](https://arxiv.org/abs/2502.11840)
+- [Generative Agents: Interactive Simulacra (Park et al. 2023)](https://arxiv.org/abs/2304.03442)
+- [MemGPT: Towards LLMs as OS (Packer et al. 2024)](https://arxiv.org/abs/2310.08560)
+- [Voyager: Lifelong Learning Agent (Wang et al. 2023)](https://arxiv.org/abs/2305.16291)
+- [Reflexion: Language Agents with Verbal RL (Shinn et al. 2023)](https://arxiv.org/abs/2303.11366)
+- [GraphRAG: From Local to Global (Edge et al. 2024)](https://arxiv.org/abs/2404.16130)
 - [Agent Memory Paper List (GitHub)](https://github.com/Shichun-Liu/Agent-Memory-Paper-List)

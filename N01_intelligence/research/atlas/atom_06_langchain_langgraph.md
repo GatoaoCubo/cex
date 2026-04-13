@@ -387,6 +387,51 @@ Metadata injected into config:
 | `langgraph_path` | Execution path taken |
 | `langgraph_checkpoint_ns` | Checkpoint namespace |
 
+### 3.8.1 Pregel Execution Model -- Deep Dive
+
+LangGraph's runtime (`Pregel` class) implements the **Bulk Synchronous Parallel (BSP)**
+model from Google's 2010 Pregel paper for large-scale graph computation.
+
+**Node Activation Lifecycle (one super-step):**
+
+```
+1. All nodes start INACTIVE at graph entry
+2. Input routed via START edge activates first node(s)
+3. ACTIVE nodes execute: read full state -> emit partial update dict
+4. Updates COLLECTED (not yet applied) -- isolation within step
+5. Super-step ends: all updates applied atomically via reducers
+6. Checkpoint written after step (enables interrupt/resume)
+7. Nodes with pending incoming messages become ACTIVE for next step
+8. Repeat until no ACTIVE nodes OR recursion_limit exceeded
+```
+
+**Transactional Guarantee:**
+Super-steps in parallel branches are atomic. If any node in a parallel branch
+raises an unhandled exception, NO updates from that super-step are applied --
+all-or-nothing prevents partial state corruption.
+
+**Channel Types (state key semantics):**
+
+| Channel type | Behavior | Default reducer |
+|-------------|----------|-----------------|
+| LastValue | Last-write-wins per key (default) | None (overwrite) |
+| Topic | Append-only with dedup by ID | `add_messages` |
+| BinaryOperatorAggregate | User-defined merge function | Custom fn(a, b) -> c |
+| EphemeralValue | Cleared after each super-step | -- |
+
+**Concurrency rule:** Nodes connected by `Send` (fan-out) or via parallel
+conditional edges run in the **same super-step** (concurrent). Nodes connected
+by sequential edges run in **separate super-steps**.
+
+**Termination conditions:**
+
+| Condition | Trigger |
+|-----------|---------|
+| No active nodes | Normal completion -- returns final state |
+| `recursion_limit` exceeded | `GraphRecursionError` raised |
+| `END` edge traversed | Explicit terminal node reached |
+| `interrupt(value)` called | Pause -- checkpoint written, caller receives state |
+
 ### 3.9 Persistence & Checkpointing
 
 | Class | Purpose |

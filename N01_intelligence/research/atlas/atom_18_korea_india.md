@@ -207,9 +207,48 @@ SKT's strategy: vertical integration from foundation model (A.X K1) through cons
 
 **Tokenizer design**: Custom tokenizer optimized for all 22 Indian languages across 12 scripts. Significantly outperforms competing tokenizers on fertility scores (tokens per word) for low-resource languages like Odia, Santali, Manipuri. This is the foundational innovation -- efficient tokenization makes multilingual inference affordable.
 
-**Training pipeline**: Three-stage -- pre-training (sigmoid-based expert routing), SFT (curated prompts), RL (asynchronous GRPO with adaptive curriculum). All stages developed and executed in-house on domestic compute.
+**Tokenizer fertility benchmark** (tokens per word; lower = better):
 
-**Inference optimization**: 3-6x throughput on H100; 1.5-3x on L40S. Apple Silicon MXFP4 delivers 20-40% higher throughput. Disaggregated serving architecture.
+| Tokenizer | Average | Low-resource (Odia/Santali/Manipuri) |
+|-----------|---------|--------------------------------------|
+| GPT-4 / Llama-3 (global models) | 4-8 | 6-12 (degraded) |
+| Sarvam custom tokenizer | 1.4-2.1 | 1.6-2.3 (maintains parity) |
+| Improvement | ~3-5x | ~3-5x |
+
+A 4x fertility reduction means 4x fewer tokens per inference call on Indian-language queries -- direct cost reduction that makes commercial viability feasible without US-scale compute budgets.
+
+**Training pipeline** (three-stage, all in-house):
+
+| Stage | Key Technical Detail |
+|-------|---------------------|
+| Pre-training (12T tokens) | Sigmoid-based expert routing (not softmax). Improves expert load balancing; reduces routing collapse during training. |
+| SFT | Curated open + synthetic prompts. Safety fine-tuning uses India-specific risk taxonomy + internal model spec inspired by frontier model constitutions. |
+| RL (GRPO) | Asynchronous GRPO. Adaptive sampling: dynamically allocates rollouts based on information-gain metric from current pass rate per prompt. |
+
+**Sigmoid vs softmax routing**: Standard MoE uses softmax gating, where probability mass is normalized across all experts. Sigmoid gating treats each expert independently (binary-like decision), preventing the "rich get richer" collapse where a few experts receive most routing decisions. This is the same technique DeepSeek-V2 uses to maintain expert utilization diversity.
+
+**Architecture contrast (30B vs 105B)**:
+
+| Spec | Sarvam 30B | Sarvam 105B |
+|------|-----------|------------|
+| Attention | GQA (Grouped Query Attention) | MLA (Multi-head Latent Attention) |
+| Training tokens | 16T | 12T |
+| Experts | 128 | 128 |
+| Active params | 2.4B | 10.3B |
+
+The 30B uses GQA (standard KV-cache reduction), while 105B uses MLA (deeper compression). This reflects the same attention evolution seen in DeepSeek-V2 to V3: MLA is preferable at larger scale where KV memory becomes the bottleneck.
+
+**Additional benchmark scores**:
+
+| Benchmark | 105B | 30B |
+|-----------|------|-----|
+| GPQA Diamond | 78.7 | -- |
+| Indian language (avg) | 90% | -- |
+| Math500 | 98.6 | 97.0 |
+| HumanEval | -- | 92.1 |
+| LiveCodeBench v6 | -- | 70.0 |
+
+**Inference optimization**: 3-6x throughput on H100; 1.5-3x on L40S. Apple Silicon MXFP4 delivers 20-40% higher throughput. 105B uses vocabulary parallelism + disaggregated serving for long-context efficiency.
 
 **30B companion model**: 30B total / 2.4B active params, GQA, 128 experts. Trained on 16T tokens. HumanEval: 92.1, LiveCodeBench v6: 70.0.
 
@@ -231,6 +270,26 @@ SKT's strategy: vertical integration from foundation model (A.X K1) through cons
 
 **Scaling challenge**: 100K downloads is modest. The 13-to-24 language expansion and Ola's existing ride-hailing distribution (massive install base) are the growth levers.
 
+#### 2.2b Krutrim-2: Foundation Model (12B, 22 Languages)
+
+While Kruti is the consumer product, Krutrim-2 is the foundation model powering it -- released separately as open-weight.
+
+| Spec | Value |
+|------|-------|
+| Architecture | Dense Transformer (Mistral-NeMo base) |
+| Params | 12B |
+| Context | 128K tokens |
+| Languages | English + 22 Indian languages |
+| Training period | Dec 2024 - Jan 2025 |
+| Training data | Curated English, Indic, code, math, books, synthetic mix |
+| Alignment | SFT (cross-task instruction following) + DPO (human preference alignment) |
+| Claim | Best-in-class on Indic tasks; surpasses models 5-10x its size |
+| License | Available on HuggingFace |
+
+**Multi-stage training**: Context size and batch size varied at each stage for stable training. The multi-stage approach (not a single continuous run) allows curriculum-style data mixing -- earlier stages focus on language breadth, later stages on reasoning depth.
+
+**Dense vs MoE**: Unlike Sarvam (MoE), Krutrim-2 uses a dense architecture (Mistral-NeMo). Trade-off: simpler deployment, no expert routing overhead, but higher per-token compute than equivalent MoE. At 12B dense, comparable to Sarvam 30B active (2.4B) in inference cost? No -- 12B dense is ~5x more compute per token than 2.4B active. Krutrim prioritizes simplicity and hardware compatibility over efficiency.
+
 ### 2.3 AI4Bharat Indic LLM Arena
 
 **The Language-Context-Safety Evaluation Triad**:
@@ -241,17 +300,79 @@ SKT's strategy: vertical integration from foundation model (A.X K1) through cons
 | **Context** | Cultural and regional appropriateness, local knowledge | Gift suggestions for housewarming reflect Indian practices, not Western norms; agriculture/finance/healthcare region-specific queries |
 | **Safety** | India-specific harms: regional bias, communal misinformation, caste-based stereotypes | Detecting caste stereotypes, communal tension amplification, regional discrimination |
 
-**Scoring**: Human-in-the-loop via anonymous side-by-side comparisons. Bradley-Terry model for statistically robust rankings from user votes. Not automated metrics -- humans judge cultural nuance.
+**Battle protocol** (step-by-step):
+
+1. User inputs a prompt in any Indian language or code-mixed variety
+2. System routes to two anonymous models simultaneously (Model A, Model B)
+3. User sees both responses -- model identities hidden
+4. User votes: A wins / B wins / Tie
+5. Bradley-Terry algorithm processes accumulated votes into statistically robust rankings
+6. After thousands of battles: leaderboard with confidence intervals
+
+**Why Bradley-Terry**: Simple win-rate rankings are biased by uneven matchup distributions (some models get easier opponents). Bradley-Terry fits a probabilistic model to the full pairwise comparison matrix, producing rankings that account for the strength of opponents. The same statistical framework used by chess rating systems (Elo is a special case).
+
+**Anonymization enforces fairness**: Model identity hidden during voting eliminates brand bias -- judges cannot favor GPT-4 because they "know" it is GPT-4. This is critical given the prestige gap between global API providers and Indian models.
 
 **Phases**:
 
 | Phase | Scope | Status |
 |-------|-------|--------|
-| Phase 1 | Text across multiple Indian languages + code-mixed | Live |
-| Phase 2 | Vision + audio (omni-modal) | Planned |
+| Phase 1 | Text across multiple Indian languages + code-mixed | Live (since Nov 2025) |
+| Phase 2 | Vision + audio (omni-modal evaluation) | Planned |
 | Phase 3 | Agentic tasks: PDFs, web search, tool-calls | Planned |
 
-**CEX relevance**: The Language-Context-Safety triad is a transferable evaluation framework. Any non-English agent system needs equivalent dimensions. Code-mixing evaluation is particularly important -- real users do not speak "pure" languages.
+**Infrastructure**: Supported by Google Cloud. IIT Madras (AI4Bharat lab) operates it as a national public resource.
+
+**CEX relevance**: The Language-Context-Safety triad is a transferable evaluation framework. Any non-English agent system needs equivalent dimensions. Code-mixing evaluation is particularly important -- real users do not speak "pure" languages. The Bradley-Terry methodology is directly applicable to CEX's peer-review scoring layer for non-English artifacts.
+
+### 2.4 India 2026: New Sovereign Model Releases
+
+**BharatGen PARAM-2** (Feb 2026, India AI Impact Summit, New Delhi):
+
+| Spec | Value |
+|------|-------|
+| Architecture | MoE |
+| Params | 17B |
+| Languages | 22 scheduled Indian languages |
+| Training data | Bharat Data Sagar initiative (India-centric curated dataset) |
+| License | National public digital good (not proprietary) |
+| Operator | BharatGen (government-backed) |
+| Deployment | Governance, healthcare, education, finance, citizen services |
+| Live demo | MahaGPT -- built with MITRA + Maharashtra government for urban development workflows |
+
+PARAM-2 is differentiated from Sarvam/Krutrim by its public infrastructure model: distributed as a national digital good, not a commercial API. Any state government, hospital, or school can integrate it without proprietary lock-in. This is the "public AI infrastructure" thesis -- AI as a utility, not a product.
+
+**Tech Mahindra Project Indus** (2026):
+
+| Spec | Value |
+|------|-------|
+| Params | 8B |
+| Language focus | Hindi-first |
+| Domain | Education (digital classrooms, adaptive tutoring) |
+| Architecture | Not disclosed |
+
+Vertical specialization: 8B is far smaller than Sarvam/PARAM-2, but domain focus (education Hindi) may outperform general models on that vertical. Confirms the India market is bifurcating: general-purpose sovereign LLMs (Sarvam, PARAM-2) + domain-specialized fine-tunes (Project Indus, MahaGPT).
+
+**Gnani.ai Vachana** (2026):
+
+| Product | Type | Detail |
+|---------|------|--------|
+| Vachana STT | Speech-to-text | Optimized for Indic languages |
+| Vachana TTS | Text-to-speech | Optimized for Indic languages |
+| Infrastructure | India-only data centres | Sovereign compute requirement |
+
+Voice layer specialist. While Sarvam/Krutrim target full-stack LLMs, Gnani focuses on the voice modality exclusively -- the entry point for rural/semi-urban users who cannot type. STT + TTS as building blocks for any voice-first agent.
+
+**India 2026 Model Landscape Summary**:
+
+| Model | Params | Architecture | Specialty | Open? |
+|-------|--------|-------------|-----------|-------|
+| Sarvam 105B | 105B (10.3B active) | MoE + MLA | Full-stack, 22 languages | Apache 2.0 |
+| Sarvam 30B | 30B (2.4B active) | MoE + GQA | Full-stack, 22 languages | Apache 2.0 |
+| BharatGen PARAM-2 | 17B | MoE | Sovereign governance | Public digital good |
+| Krutrim-2 | 12B | Dense (Mistral-NeMo) | Consumer + 22 languages | HuggingFace |
+| Tech Mahindra Project Indus | 8B | Not disclosed | Hindi education | Enterprise |
+| Gnani.ai Vachana | -- | Speech models | STT/TTS for Indic | Enterprise |
 
 ---
 

@@ -568,37 +568,230 @@ agent = await AgentRegistry.create_from_file("agent_spec.yaml", kernel=kernel)
 
 ---
 
-## 5. Process Framework
+## 5. Process Framework (Full API Reference)
+
+**Status**: Experimental as of Apr 2026. GA targeted Q2 2026. Subject to breaking changes.
+
+### 5.1 Core Concepts
 
 | Term | Type | Description |
 |------|------|-------------|
-| Process | Concept | A structured sequence of steps achieving a business goal. |
-| Step | Concept | An activity with defined inputs/outputs within a process. |
-| Pattern | Concept | The sequence type dictating how steps execute. |
-| `KernelProcess` | Class | Runtime representation of a process. |
-| `KernelProcessStep` | Class | Runtime representation of a step. |
-| `ProcessBuilder` | Class | Fluent builder for defining process topology. |
-| Event-Driven Architecture | Pattern | Events trigger transitions between steps. |
-| State Management | Feature | Steps can maintain and persist state. |
-| Kernel Functions in Steps | Feature | Steps invoke one or more `KernelFunction`s. |
-| Open Telemetry | Feature | Full audit trail via OpenTelemetry. |
-| Reusability | Feature | Steps and processes are reusable across applications. |
+| Process | Concept | A structured sequence of steps achieving a specific business goal. |
+| Step | Concept | An activity with defined inputs/outputs. Must contain at least one `KernelFunction`. |
+| Pattern | Concept | Sequence type: sequential, parallel, fan-in/fan-out, map-reduce. |
+| Event | Concept | Triggers transitions between steps. Steps emit events; other steps listen for them. |
+| State | Concept | Stateful steps persist data across invocations (checkpoint/restore). |
 
-**Status**: Experimental. GA targeted Q2 2026.
+### 5.2 Type Registry
+
+| Term | Type | Description |
+|------|------|-------------|
+| `KernelProcess` | Class | The built process object ready for execution. |
+| `KernelProcessStep` | Class | Base for stateless steps. Subclass this and add `[KernelFunction]` methods. |
+| `KernelProcessStep<TState>` | Generic Class (C#) | Base for stateful steps with typed state `TState`. |
+| `KernelProcessStep[TState]` | Generic Class (Python) | Python stateful step base. |
+| `KernelProcessStepState<TState>` | Class | Carries the persistent state into/out of `ActivateAsync`. |
+| `KernelProcessStepContext` | Class | Injected into KernelFunctions -- allows manual event emission. |
+| `ProcessBuilder` | Class | Fluent API for wiring steps and events. |
+| `KernelProcessEvent` | Class | Event message with `Id` (string) and `Data` (any serializable object). |
+
+### 5.3 ProcessBuilder API
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `AddStepFromType<T>` (C#) | `-> ProcessStepBuilder` | Registers a step type; returns a builder handle. |
+| `add_step` (Python) | `add_step(StepClass) -> ProcessStepBuilder` | Registers a step type. |
+| `OnInputEvent` (C#) | `OnInputEvent(string id) -> ProcessStepEdgeBuilder` | Routes external events by ID into the process. |
+| `on_input_event` (Python) | `on_input_event(id) -> ProcessStepEdgeBuilder` | Python equivalent. |
+| `Build` / `build` | `-> KernelProcess` | Compiles the wired process into a runnable artifact. |
+
+### 5.4 Step Edge Builder (Event Routing)
+
+| Method | Description |
+|--------|-------------|
+| `SendEventTo(target)` / `send_event_to(target)` | Routes event data to a target step. |
+| `OnFunctionResult()` / `on_function_result()` | Fires when a KernelFunction returns (captures return value). |
+| `OnEvent(eventId)` / `on_event(eventId)` | Fires when a step manually emits a named event. |
+| `function_name=` | Disambiguate target function when step has multiple KernelFunctions. |
+| `parameter_name=` | Disambiguate target parameter when function has multiple inputs. |
+
+### 5.5 Step State Management
+
+Steps can be stateless (`KernelProcessStep`) or stateful (`KernelProcessStep<TState>`):
+
+```csharp
+// C# -- stateful step with persisted ChatHistory
+public class GenerateDocumentationStep : KernelProcessStep<DocumentationState>
+{
+    private DocumentationState _state = new();
+
+    // Called on step activation -- restore persisted state
+    override public ValueTask ActivateAsync(KernelProcessStepState<DocumentationState> state)
+    {
+        this._state = state.State!;
+        this._state.ChatHistory ??= new ChatHistory(systemPrompt);
+        return base.ActivateAsync(state);
+    }
+
+    [KernelFunction]
+    public async Task GenerateDocumentationAsync(
+        Kernel kernel,
+        KernelProcessStepContext context,   // injected -- enables EmitEventAsync
+        string productInfo)
+    {
+        this._state.ChatHistory!.AddUserMessage(productInfo);
+        var response = await kernel.GetRequiredService<IChatCompletionService>()
+            .GetChatMessageContentAsync(this._state.ChatHistory!);
+        await context.EmitEventAsync("DocumentationGenerated", response.Content);
+    }
+}
+```
+
+```python
+# Python -- stateful step with pydantic model
+class DocumentationState(BaseModel):
+    chat_history: ChatHistory | None = None
+
+class GenerateDocumentationStep(KernelProcessStep[DocumentationState]):
+    state: DocumentationState = Field(default_factory=DocumentationState)
+
+    async def activate(self, state: KernelProcessStepState[DocumentationState]):
+        self.state = state.state
+        if self.state.chat_history is None:
+            self.state.chat_history = ChatHistory(system_message=system_prompt)
+
+    @kernel_function
+    async def generate_documentation(
+        self,
+        context: KernelProcessStepContext,   # injected
+        product_info: str,
+        kernel: Kernel                       # injected
+    ) -> None:
+        self.state.chat_history.add_user_message(product_info)
+        response = await chat_service.get_chat_message_content(...)
+        await context.emit_event(process_event="documentation_generated", data=str(response))
+```
+
+### 5.6 Process Execution
+
+**C# (StartAsync):**
+
+```csharp
+var process = processBuilder.Build();
+await process.StartAsync(
+    kernel,
+    new KernelProcessEvent { Id = "Start", Data = "Product Name" }
+);
+```
+
+**Python (async context manager):**
+
+```python
+from semantic_kernel.processes.local_runtime import KernelProcessEvent, start
+
+async with await start(
+    process=kernel_process,
+    kernel=kernel,
+    initial_event=KernelProcessEvent(id="Start", data="Product Name"),
+) as process_context:
+    final_state = await process_context.get_state()
+```
+
+### 5.7 Supported Execution Patterns
+
+| Pattern | Description |
+|---------|-------------|
+| Sequential | A -> B -> C (default; OnFunctionResult chain) |
+| Parallel / Fan-Out | A -> [B, C, D] simultaneously (SendEventTo multiple targets) |
+| Fan-In | [B, C, D] -> E (step waits for all upstream events) |
+| Map-Reduce | Distribute over collection, aggregate results |
+| Conditional | Step emits different events based on logic (OnEvent discrimination) |
+| Loop / Retry | Step emits event back to itself or to an upstream step |
+| Human-in-the-Loop | Process pauses; external event resumes it |
+
+### 5.8 Deployment Options
+
+| Option | Package | Description |
+|--------|---------|-------------|
+| Local (in-process) | `Microsoft.SemanticKernel.Process.LocalRuntime` v1.46.0-alpha | Default; runs in memory, no external dependencies |
+| Dapr | `Microsoft.SemanticKernel.Process.Runtime.Dapr` v1.46.0-alpha | Distributed sidecar; enables cloud-scale stateful processes |
+| Orleans | (experimental) | .NET Orleans actor model; cluster-based distributed execution |
+
+**Python local runtime:**
+
+```bash
+pip install semantic-kernel==1.20.0   # includes processes support
+```
+
+### 5.9 Process Framework vs. Orchestration Patterns
+
+| Dimension | Process Framework | Agent Orchestration Patterns |
+|-----------|------------------|-----------------------------|
+| Control flow | Code-defined step graph | Agent-runtime managed |
+| State | Explicit per-step state + checkpointing | Thread-based conversation state |
+| Trigger | External event (`KernelProcessEvent`) | Direct `invoke()` call |
+| Cloud scale | Dapr / Orleans runtimes | InProcessRuntime only (Apr 2026) |
+| Primary use | Business process automation | Multi-agent collaboration |
+| Status | Experimental | Experimental |
 
 ---
 
-## 6. AutoGen Merger -> Microsoft Agent Framework
+## 6. AutoGen Merger -> Microsoft Agent Framework 1.0
 
 ### Timeline
 
 | Date | Event |
 |------|-------|
+| May 2025 | Azure AI Foundry Agent Service GA (10,000+ orgs) |
 | Oct 1, 2025 | Microsoft Agent Framework public preview -- merges AutoGen + Semantic Kernel |
 | Oct 2025 | AutoGen enters maintenance mode (bug fixes only, no new features) |
-| May 2025 | Azure AI Foundry Agent Service GA (10,000+ orgs) |
-| Q1 2026 | Agent Framework 1.0 GA target (stable APIs, SOC 2, HIPAA) |
-| Q2 2026 | Process Framework GA |
+| Q1 2026 | **Agent Framework 1.0 GA** (.NET + Python) -- stable APIs, long-term support |
+| Q2 2026 | Process Framework GA target |
+
+### Agent Framework 1.0 -- GA Features
+
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Single Agent + Service Connectors | GA | Core agent class with all provider connectors |
+| Multi-agent orchestration (5 patterns) | GA | Sequential, Concurrent, Handoff, GroupChat, Magentic |
+| Graph-based workflow engine | GA | Deterministic, repeatable, checkpointable processes |
+| Declarative agents + workflows (YAML) | GA | `AgentRegistry.create_from_yaml()` |
+| MCP tool discovery | GA | Import/export via MCPStdioPlugin, MCPStreamableHttpPlugin |
+| Pluggable memory architecture | GA | Conversational history + key-value + vector retrieval |
+| Middleware hooks | GA | Intercept and transform agent behavior |
+| Checkpointing + hydration | GA | Long-running process resume from checkpoint |
+
+### Agent Framework 1.0 -- Preview Features (not GA)
+
+| Feature | Description |
+|---------|-------------|
+| DevUI | Browser-based local debugger for visualizing agent execution |
+| Foundry Hosted Agent | Managed agents on Microsoft Foundry or Azure Durable Functions |
+| Foundry Tools / Memory / Observability | Deep integration with managed Azure ecosystems |
+| AG-UI / CopilotKit / ChatKit | Frontend adapters for streaming agent output |
+| Skills | Reusable domain capability packages |
+| GitHub Copilot SDK + Claude Code SDK | Agent harness integrations |
+| A2A Protocol | Agent-to-Agent cross-runtime collaboration (announced, not released) |
+
+### First-Party Model Connectors (1.0 GA)
+
+| Provider | Connector |
+|---------|-----------|
+| Microsoft Azure OpenAI | `AzureChatCompletion` |
+| OpenAI | `OpenAIChatCompletion` |
+| Microsoft Foundry | `FoundryChatClient` |
+| Anthropic Claude | First-party connector (added in 1.0) |
+| Amazon Bedrock | `BedrockAgent` + connector |
+| Google Gemini | First-party connector (added in 1.0) |
+| Ollama (local) | First-party connector (added in 1.0) |
+
+### Package Names (1.0)
+
+| Language | Package | Class |
+|----------|---------|-------|
+| .NET | `Microsoft.Agents.AI` | `Agent` |
+| .NET | `Microsoft.Agents.AI.OpenAI` (prerelease) | OpenAI adapter |
+| Python | `agent-framework` (PyPI) | `Agent`, `FoundryChatClient` |
 
 ### What Came From Where
 
@@ -609,27 +802,35 @@ agent = await AgentRegistry.create_from_file("agent_spec.yaml", kernel=kernel)
 | Dynamic workflow generation | AI service connectors |
 | MagenticOne pattern (Orchestrator + specialists) | Thread-based state management |
 | Event-driven multi-agent models | Enterprise integration (telemetry, filters) |
-| Research-grade experimentation patterns | Production-grade stability and SLAs |
+| Research-grade experimentation | Production-grade stability and SLAs |
 
-### Vocabulary Migration
+### Vocabulary Migration Guide
 
-| Old AutoGen Term | Old SK Term | New Agent Framework Term |
-|-----------------|-------------|-------------------------|
-| `AssistantAgent` | -- | `ChatAgent` / `AzureAIAgent` |
-| `FunctionTool` | `KernelFunction` | `@ai_function` / `KernelFunction` (still valid) |
-| Event-driven models | -- | Graph-based Workflow APIs |
-| -- | `Kernel` | Agent abstraction (Kernel still exists under the hood) |
-| -- | Plugins | Tools (via MCP or OpenAPI) |
-| Group chat | `AgentGroupChat` | `GroupChatOrchestration` |
-| -- | Conversations/Memory | Agent Threads |
+| Old AutoGen Term | Old SK Term | Agent Framework 1.0 Term | Notes |
+|-----------------|-------------|--------------------------|-------|
+| `AssistantAgent` | -- | `ChatAgent` / `AzureAIAgent` | Depends on backend |
+| `FunctionTool` | `KernelFunction` | `@ai_function` / `KernelFunction` | Both valid in SK path |
+| Event-driven models | -- | Graph-based Workflow APIs | Process Framework |
+| -- | `Kernel` | `Agent` abstraction | Kernel still exists under hood |
+| -- | Plugins | Tools (MCP or OpenAPI) | Plugins also still valid in SK |
+| Group chat | `AgentGroupChat` (legacy) | `GroupChatOrchestration` | Unified orchestration API |
+| -- | Conversations / Memory | Agent Threads | `AgentThread` hierarchy |
+| `UserProxyAgent` | -- | Human-in-the-loop callback | `on_intermediate_message` |
+| `MultimodalConversableAgent` | -- | `ChatCompletionAgent` + multimodal service | Any multimodal IChatCompletionService |
 
-### AG2 Fork
+### Migration Resources
 
-AG2 is the community fork of AutoGen 0.2 that inherited:
-- `autogen` and `pyautogen` PyPI packages
+- **SK -> Agent Framework migration guide**: Microsoft Learn (step-by-step)
+- **AutoGen 0.2 -> Agent Framework migration guide**: walkthrough + analysis tool
+- **AG2 fork**: community-maintained AutoGen 0.2 compatible fork (`autogen` / `pyautogen` on PyPI, 20K+ Discord members, independent roadmap)
+
+### AG2 Community Fork
+
+AG2 inherited from AutoGen 0.2:
+- `autogen` and `pyautogen` PyPI package names
 - 20,000+ member Discord community
-- Backward compatibility with AutoGen 0.2 API
-- Independent governance and roadmap
+- Backward compatibility with AutoGen 0.2 API surface
+- Independent governance and roadmap (not Microsoft-controlled)
 
 ---
 

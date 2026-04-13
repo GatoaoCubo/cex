@@ -8,8 +8,8 @@ created: 2026-04-13
 author: N01
 domain: code-agents
 quality: 8.9
-tags: [code-agent, edit-format, repo-map, sandbox, SWE-bench, Claude-Code, Codex, Aider, Cursor, Devin, Windsurf, OpenHands, subagent, lint-fix-loop, spec-to-code]
-tldr: "Complete vocabulary of the code agent ecosystem (2024-2026): 9 major platforms, 6 edit format families, 4 sandbox models, 3 context strategies, 2 inter-agent protocols. Maps 140+ terms to CEX kinds and proposes 8 new kinds."
+tags: [code-agent, edit-format, repo-map, sandbox, SWE-bench, Claude-Code, Codex, Aider, Cursor, Devin, Windsurf, OpenHands, subagent, lint-fix-loop, spec-to-code, claude-agent-sdk, pagerank, vm-isolation, decision-tree]
+tldr: "Complete vocabulary of the code agent ecosystem (2024-2026): 9 major platforms, 9 edit format families with code examples, 4 sandbox models, 3 context strategies, 2 inter-agent protocols. Maps 140+ terms to CEX kinds and proposes 8 new kinds. Includes Agent SDK API, Aider PageRank internals, Cursor VM architecture, and agent selection decision tree."
 ---
 
 # Code Agent Vocabulary Atlas
@@ -60,7 +60,87 @@ The mechanism by which an LLM communicates file changes to the host system.
 | **Fast Apply model** | Cursor, Morph | Dedicated small model (7B) trained for code merge at 10.5K tok/s |
 | **Speculative decoding** | Morph Fast Apply | CUDA-kernel-level optimization for apply speed |
 
-### 2.3 Architect Mode (Two-Phase Editing)
+### 2.3 Concrete Format Examples (All 9 Families)
+
+**1. Whole file** — LLM returns the complete file after changes:
+```
+show_greeting.py
+` ` `python
+import sys
+def greeting(name):
+    print("Hey", name)
+if __name__ == '__main__':
+    greeting(sys.argv[1])
+` ` `
+```
+
+**2. Search/replace (Aider `diff`)** — most common Aider format:
+```
+mathweb/flask/app.py
+` ` `python
+<<<<<<< SEARCH
+from flask import Flask
+=======
+import math
+from flask import Flask
+>>>>>>> REPLACE
+` ` `
+```
+
+**3. Unified diff (`udiff`)** — standard `-U0` variant:
+```diff
+--- mathweb/flask/app.py
++++ mathweb/flask/app.py
+@@ ... @@
+-class MathWeb:
++import sympy
++
++class MathWeb:
+```
+
+**4. Diff-fenced** — search/replace with filepath inside fence (Gemini variant):
+```python
+# filepath: mathweb/flask/app.py
+<<<<<<< SEARCH
+from flask import Flask
+=======
+import math
+from flask import Flask
+>>>>>>> REPLACE
+```
+
+**5. Editor-diff / editor-whole** — Same syntax as formats 2/1 but produced by a second, smaller model in Aider architect mode. Architect outputs plan; editor model produces final diffs.
+
+**6. OpenAI patch (Codex):**
+```
+*** Begin Patch
+*** Update File: src/utils.py
+@@ def add(a, b):
+-    return a + b
++    return int(a) + int(b)
+*** End Patch
+```
+No line-number dependency; context lines anchor the hunk.
+
+**7. Tool-based edits (Claude Code, OpenHands):**
+```json
+{"tool": "Edit", "file_path": "src/utils.py",
+ "old_string": "return a + b",
+ "new_string": "return int(a) + int(b)"}
+```
+Structured function call. Atomic. No diff syntax needed.
+
+**8. Sketch + Apply model (Cursor):**
+- Primary LLM outputs a "sketch" (loose prose description of the change)
+- Dedicated 7B apply model reads sketch + original file, produces merged output at 10.5K tok/s
+
+**9. Semantic edit (Morph):**
+- LLM specifies the change at the AST level (e.g., rename parameter in function scope)
+- Apply model transforms the AST -- scope-aware, 98% accuracy, robust to code evolution
+
+---
+
+### 2.4 Architect Mode (Two-Phase Editing)
 
 Aider pioneered this pattern; Cursor and others adopted it.
 
