@@ -3,10 +3,11 @@ id: spec_zero_install
 kind: context_doc
 title: "CEX Zero-Install: Dependencies and Bootstrap on Fresh Machine"
 version: 2.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 updated: 2026-04-08
 purpose: Everything needed to run CEX on a PC with nothing installed
+density_score: 1.0
 ---
 
 # CEX Zero-Install Spec
