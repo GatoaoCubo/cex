@@ -6,7 +6,7 @@ nucleus: N06
 pillar: P01
 sin: Avareza Estrategica
 version: 1.2.0
-quality: null
+quality: 8.9
 created: 2026-04-07
 updated: 2026-04-13
 density_score: 1.0

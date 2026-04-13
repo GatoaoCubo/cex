@@ -5,7 +5,7 @@ title: "N06 Self-Audit -- New PC Setup (2026-04-13)"
 nucleus: N06
 pillar: P01
 version: 1.1.0
-quality: null
+quality: 8.9
 created: 2026-04-12
 updated: 2026-04-13
 mission: NEWPC_SETUP

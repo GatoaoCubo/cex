@@ -2,8 +2,8 @@ id: extraction_trust_tiers
 kind: knowledge_card
 pillar: P01_knowledge
 title: 'Extraction: Trust Tiers (Capability-Based Access) from ruflo'
-version: 1.0
-quality: null
+version: 1.1
+quality: 8.9
 tags:
 - extraction
 - trust
@@ -12,11 +12,13 @@ tags:
 - ruflo
 - port
 created: 2026-04-12
+updated: 2026-04-13
 author: n01_intelligence
 domain: dispatch security
 source: ruvnet/ruflo v3.5
-tldr: ruflo uses capability-based access (not fixed tiers) with 7 capabilities, workload limits, claim lifecycle, and work
-  stealing. CEX should adopt a simpler 3-tier model mapped to agent_card + dispatch guard.
+tldr: 'ruflo has TWO trust systems: (a) agent capability claims system (AgentDB) and (b) CapabilityAlgebra typed permission
+  objects with delegation, attestation, and constraint enforcement (guidance package). CEX should adopt simplified 3-tier
+  model from (a), with optional CapabilityAlgebra concepts for future hardening.'
 1_key_finding_capability_based_not_tier_based: 'ruflo does NOT implement traditional fixed trust tiers (Tier 1/2/3).
 
   Instead it uses a gradient capability model with 5 enforcement dimensions:
@@ -136,7 +138,50 @@ what_not_to_port_from_ruflo:
 - Workload percentage -- CEX tracks PID liveness, not load
 - Memory access levels -- CEX nuclei own their N0x_*/ dirs; no cross-access needed
 - Command injection prevention -- CEX nuclei run in Claude Code sandbox
-5_key_code_references_in_ruflo: '| File (relative to ruflo/) | What it contains |
+5_capabilityalgebra_advanced_trust_model_v1_1_finding: '`v3/@claude-flow/guidance/src/capabilities.ts` contains a full typed
+  capability permission system going beyond simple capability arrays:'
+capability_object_structure: "// capabilities.ts:52-81 -- typed permission object\ninterface Capability {\n  id: string; \
+  \                        // UUID\n  scope: CapabilityScope;             // 'tool' | 'memory' | 'network' | 'file' | 'model'\
+  \ | 'system'\n  resource: string;                   // target (tool name, path pattern, namespace)\n  actions: string[];\
+  \                  // 'read' | 'write' | 'execute' | 'delete'\n  constraints: CapabilityConstraint[]; // rate-limit | budget\
+  \ | time-window | condition | scope-restriction\n  grantedBy: string;                  // agent or authority that issued\
+  \ it\n  grantedTo: string;                  // agent it's granted to\n  expiresAt: number | null;           // TTL for temporary\
+  \ grants\n  delegatable: boolean;               // can sub-agents inherit this?\n  revoked: boolean;\n  attestations: Attestation[];\
+  \        // cryptographic proof of audit/verification\n  parentCapabilityId: string | null;  // delegation chain parent\n\
+  }"
+authority_levels_authority_ts_42: 'type AuthorityLevel = ''agent'' | ''human'' | ''institutional'' | ''regulatory'';
+
+  // Irreversibility classification for action safety:
+
+  type IrreversibilityClass = ''reversible'' | ''costly-reversible'' | ''irreversible'';
+
+  type ProofLevel = ''standard'' | ''elevated'' | ''maximum'';'
+trustlevel_transfer_types_ts_22: '// Used for plugin marketplace trust rating:
+
+  type TrustLevel = ''official'' | ''verified'' | ''community'' | ''unverified'' | ''untrusted'';'
+what_this_means_for_cex: '| ruflo concept | CEX equivalent | Port? |
+
+  |---------------|---------------|-------|
+
+  | `CapabilityScope` (6 scopes) | Not needed — nuclei own dirs | Skip |
+
+  | `Attestation` (cryptographic proof) | Aligns with R5 proof chain | Wave 3 |
+
+  | `delegatable` flag | Relevant if sub-agents inherit caps | Future |
+
+  | `constraints` (rate-limit, budget) | aligns with `rate_limit_config` kind | Future |
+
+  | `AuthorityLevel` (agent/human) | Maps to CEX GDP (human decides WHAT) | Already implemented |
+
+  | `IrreversibilityClass` | Maps to CEX "risky actions" documentation | Partially implemented |
+
+  | `TrustLevel` (5-level marketplace) | Relevant only if CEX opens a plugin store | Wave 3 |
+
+
+  Conclusion: CapabilityAlgebra is more sophisticated than needed for CEX Wave 1.
+
+  Stick with 3-tier model (sandboxed/audited/privileged). Revisit in Wave 3.'
+6_key_code_references_in_ruflo: '| File (relative to ruflo/) | What it contains |
 
   |---------------------------|-----------------|
 
@@ -148,4 +193,12 @@ what_not_to_port_from_ruflo:
 
   | `v3/@claude-flow/security/src/safe-executor.ts` | Allowlist model, blocked patterns, sudo prevention |
 
-  | `v3/@claude-flow/memory/src/types.ts` | AccessLevel enum (private/team/swarm/public/system) |'
+  | `v3/@claude-flow/memory/src/types.ts` | AccessLevel enum (private/team/swarm/public/system) |
+
+  | `v3/@claude-flow/guidance/src/capabilities.ts` | CapabilityAlgebra, Capability interface, delegation |
+
+  | `v3/@claude-flow/guidance/src/authority.ts` | AuthorityLevel, IrreversibilityClass, ProofLevel |
+
+  | `v3/@claude-flow/cli/src/transfer/types.ts` | TrustLevel enum (5-level marketplace trust) |'
+boundary: Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+8f_pipeline_function: 'Primary function: INJECT'

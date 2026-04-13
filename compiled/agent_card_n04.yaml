@@ -63,11 +63,11 @@ my_artifacts: '| Subdir | Count | Purpose |
 
   | tools | 4 | Supabase data layer + utilities |
 
-  | compiled | 67 | YAML compilations of source artifacts |
+  | compiled | 65 | YAML compilations of source artifacts |
 
-  | reports | 4 | Self-audit reports (prior runs + newpc) |
+  | reports | 1 | Self-audit report (newpc 2026-04-13) |
 
-  | TOTAL | 71 source + 67 compiled | |'
+  | TOTAL | 69 source + 65 compiled | |'
 kinds_i_build: '22 kinds across 4 pillars fall within N04''s domain (P01 Knowledge + P10 Memory + select P02/P04):'
 p01_knowledge_10_kinds: '| Kind | Naming Pattern | Builder |
 
@@ -249,9 +249,9 @@ cards_in_my_agent_card: '| Category | Count |
 
   |----------|------:|
 
-  | Source artifacts (in N04_knowledge/) | 71 |
+  | Source artifacts (in N04_knowledge/) | 69 |
 
-  | Compiled artifacts (.yaml) | 67 |
+  | Compiled artifacts (.yaml) | 65 |
 
   | Kinds I can build | 22 |
 

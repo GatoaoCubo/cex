@@ -5,7 +5,7 @@ title: N05 Self-Audit -- New PC System Health Report
 nucleus: N05
 version: 2.0.0
 pillar: P01
-quality: null
+quality: 8.9
 created: 2026-04-13
 mission: NEWPC_SETUP
 tags: [audit, health, newpc, operations, ci-cd]

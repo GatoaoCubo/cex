@@ -35,13 +35,13 @@ my_artifacts: '| Subdir | Count | Purpose |
 
   | feedback | 4 | Quality gates: Railway deploy + security + performance + artifact quality |
 
-  | knowledge | 8 | Domain KCs: Railway, health monitoring, deployments, Nixpacks, PostgreSQL, Uvicorn |
+  | knowledge | 12 | Domain KCs: Railway, health monitoring, deployments, Nixpacks, PostgreSQL, Uvicorn + 4 new |
 
   | memory | 3 | Checkpoint + deploy history + operations session memory |
 
   | orchestration | 3 | Dispatch rules, spawn config, workflow definitions |
 
-  | output | 17 | Deploy checklists, env contracts, health endpoints, middleware, Railway configs, CI/CD, smoke eval, benchmark,
+  | output | 23 | Deploy checklists, env contracts, health endpoints, middleware, Railway configs, CI/CD, smoke eval, benchmark,
   regression check, red-team eval |
 
   | prompts | 4 | System prompts: superintendent + review + deploy + debug modes |
@@ -49,9 +49,13 @@ my_artifacts: '| Subdir | Count | Purpose |
   | schemas | 7 | API response, env contract, health check, middleware, Railway TOML, startup sequence, security validation
   |
 
-  | compiled | 40 | YAML compilations of source artifacts |
+  | scripts | 1 | Operations scripts |
 
-  | Total | 53 | (source .md files, excluding compiled) |'
+  | reports | 2 | System health + dependency map (NEWPC_SETUP audit) |
+
+  | compiled | 49 | YAML compilations of source artifacts |
+
+  | Total | ~71 | (source .md files, excluding compiled -- updated 2026-04-13) |'
 kinds_i_build: '| Kind | Pillar | Domain Relevance |
 
   |------|--------|-----------------|
@@ -188,9 +192,9 @@ cards_in_my_agent_card: '| Category | Count |
 
   |----------|-------|
 
-  | Source artifacts (.md) | 53 |
+  | Source artifacts (.md) | ~71 |
 
-  | Compiled artifacts (.yaml) | 40 |
+  | Compiled artifacts (.yaml) | 49 |
 
   | Kinds I can build | 28 |
 
@@ -200,4 +204,4 @@ cards_in_my_agent_card: '| Category | Count |
 
   | Domain KCs (shared library) | 17 |
 
-  | Total cards | 154 |'
+  | Total cards | ~181 |'
