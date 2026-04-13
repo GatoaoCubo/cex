@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "Research Batch — Industry Directory Scraping"
 version: 1.0.0
-quality: null
+quality: 9.0
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/crm_mission/batch_a_diretorios_pet.md
@@ -12,6 +12,7 @@ variables: [INDUSTRY, REGION, DIRECTORY_SOURCES, SEARCH_QUERIES, CITIES, OUTPUT_
 density_score: 0.95
 tags: [template, research-batch, directories, crm, instance-extraction]
 tldr: "Directory-based business discovery batch — scrape industry-specific portals and local listings for contact data."
+updated: "2026-04-13"
 ---
 
 # BATCH A — {{INDUSTRY}} Directory Discovery
