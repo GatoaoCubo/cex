@@ -18,24 +18,50 @@ density_score: 0.85
 
 ## Frontmatter Fields  
 ### Required  
-| Field             | Type       | Required | Default      | Notes                                      |  
-|-------------------|------------|----------|--------------|--------------------------------------------|  
-| id                | string     | yes      |              | Unique identifier                          |  
-| kind              | string     | yes      | "search_strategy" | CEX kind                                 |  
-| pillar            | string     | yes      | "P04"        | Pillar number                              |  
-| title             | string     | yes      |              | Descriptive title                          |  
-| version           | string     | yes      | "1.0.0"      | Semantic version                           |  
-| created           | datetime   | yes      |              | ISO 8601 date                              |  
-| updated           | datetime   | yes      |              | ISO 8601 date                              |  
-| author            | string     | yes      |              | Responsible party                          |  
-| domain            | string     | yes      |              | Application area                           |  
-| quality           | string     | yes      | "draft"      | Quality level (draft, reviewed, approved)  |  
-| tags              | array      | yes      |              | Keywords                                   |  
-| tldr              | string     | yes      |              | Summary (≤255 chars)                       |  
-| algorithm_type    | string     | yes      |              | e.g., Boolean, Vector                      |  
-| data_sources      | array      | yes      |              | Sources used (e.g., SQL, NoSQL)            |  
-| optimization_goal | string     | yes      |              | e.g., speed, accuracy                      |  
-| query_language    | string     | yes      |              | e.g., SQL, Lucene                          |  
+| Field        | Type   | Required | Default | Notes |  
+|--------------|--------|----------|---------|-------|  
+| id           | string | yes      | -       | Unique identifier |  
+| kind         | string | yes      | "search_strategy" | CEX kind |  
+| pillar       | string | yes      | "P04"    | Pillar classification |  
+| title        | string | yes      | -       | Strategy name |  
+| version      | string | yes      | "1.0"    | Schema version |  
+| created      | date   | yes      | -       | ISO 8601 format |  
+| updated      | date   | yes      | -       | ISO 8601 format |  
+| author       | string | yes      | -       | Creator |  
+| domain       | string | yes      | -       | Application domain |  
+| quality      | string | yes      | "draft"  | Review status |  
+| tags         | list   | yes      | []      | Keywords |  
+| tldr         | string | yes      | -       | Summary |  
+| strategy_type| string | yes      | -       | "keyword", "semantic", etc. |  
+| target_entity| string | yes      | -       | "data", "documents", etc. |  
 
 ### Recommended  
-| Field              | Type
+| Field              | Type   | Notes |  
+|--------------------|--------|-------|  
+| coverage_criteria  | string | Scope details |  
+| efficiency_metric  | string | Performance metric |  
+
+## ID Pattern  
+^p04_ss_[a-zA-Z0-9_]+\.md$  
+
+## Body Structure  
+1. **Overview**  
+   - Purpose, scope, and use case.  
+2. **Methodology**  
+   - Algorithm, heuristics, or rules applied.  
+3. **Parameters**  
+   - Configurable inputs (e.g., depth, filters).  
+4. **Evaluation**  
+   - Metrics, validation, and success criteria.  
+5. **Constraints**  
+   - Limitations or edge cases.  
+6. **Examples**  
+   - Use cases or sample queries.  
+
+## Constraints  
+- ID must follow regex pattern.  
+- Required fields must be present and non-empty.  
+- Dates must use ISO 8601 format.  
+- strategy_type must be from predefined enum.  
+- Body sections must be non-empty and ordered.  
+- Total markdown size must not exceed 4096 bytes.
