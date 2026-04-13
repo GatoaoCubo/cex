@@ -3,15 +3,15 @@ id: n01_atom_18_korea_india
 kind: knowledge_card
 pillar: P01
 title: "Atom 18: Korean + Indian LLM Agent Ecosystems"
-version: 1.1.0
+version: 1.2.0
 created: 2026-04-13
 updated: 2026-04-13
 author: n01_intelligence
 domain: research-intelligence
 quality: 8.9
-tags: [atom, korea, india, sovereign-ai, mcp, voice-first, multilingual, agent, moe, tokenizer, rl-training, benchmark]
-tldr: "Korea builds MCP platforms + MoE agents (PlayMCP, P-C-G, Solar Pro3, HyperCLOVA X Think); India builds voice-first multilingual agents (Sarvam 105B, Krutrim-2, BharatGen PARAM-2, Indic LLM Arena). Both converge on 128-expert MoE + sovereign compute. 2026 adds Krutrim-2 12B and PARAM-2 17B."
-density_score: 0.94
+tags: [atom, korea, india, sovereign-ai, mcp, voice-first, multilingual, agent, moe, tokenizer, rl-training, benchmark, omni-modal, sovereignty-controversy, peri-ln, vikram]
+tldr: "Korea builds MCP platforms + MoE agents (PlayMCP, P-C-G, Solar Pro3, HyperCLOVA X Think, SEED Omni-8B); India builds voice-first multilingual agents (Sarvam 105B/Vikram-30B, Krutrim-2, BharatGen PARAM-2, Indic LLM Arena). Both converge on 128-expert MoE + sovereign compute. 2026 adds omni-modal Naver 8B, Korea sovereignty controversy (Naver Qwen encoder 99.5% cosine), India AI Impact Summit Feb 2026 launches 3 sovereign models."
+density_score: 0.96
 ---
 
 # Atom 18: Korean + Indian LLM Agent Ecosystems
@@ -120,6 +120,14 @@ The staged approach mirrors o1/DeepSeek-R1: capability injection via SFT first, 
 **KCSAT 2026**: Evaluated on Korea's national college entrance exam (Math, 2026 version) -- requires integrating textual instructions with complex diagrams. Result: top 4% of human examinees. More rigorous than MATH-500 because it tests visual+textual co-reasoning on real examination material.
 
 **Artificial Analysis Intelligence Index**: Score 44 -- above EXAONE 4.0 32B (prior Korean leader). Index aggregates across reasoning, coding, and instruction-following.
+
+**Architecture deep dive (Peri-LN + muP)**: HyperCLOVA X 32B Think uses a Peri-LN (Peripheral LayerNorm) Transformer scaled with muP (maximal update parametrization). Peri-LN places layer normalization at both the entry and exit of each sub-layer, improving gradient stability across depth. muP enables zero-shot hyperparameter transfer from small proxy models to the full 32B scale -- learning rates and initialization calibrated on a 100M proxy generalize to 32B without re-tuning. This is the same scaling methodology used by Cerebras/GPT-NeoX research and reduces the compute cost of hyperparameter search at frontier scale.
+
+**Three-stage pre-training curriculum**: Context window expands across stages (short -> medium -> 128K). Stage 1 trains on general corpus at 4K context. Stage 2 adds long-context data at 32K. Stage 3 extends to 128K with rope scaling + synthetic long-doc mixtures. This staged approach prevents the instability seen when training on long-context from scratch.
+
+**Post-training: RL from Verifiable Rewards (RLVR)**: Rather than RLHF from human preferences, HyperCLOVA X Think uses RLVR -- RL training with rewards derived from verifiable answers (math correctness, code execution, factual verification). This is the same paradigm as DeepSeek-R1 and o1: no human preference labels needed, just a ground-truth verifier. More scalable for reasoning tasks where correctness is binary.
+
+**GPT-4.1 comparison on KCSAT STEM**: The vision-augmented variant of HyperCLOVA X Think matches or exceeds GPT-4.1 on KCSAT STEM -- Korea's national college entrance exam science/math problems, which require joint vision+text reasoning on real examination diagrams. Achieving top 4% of human examinees on math + STEM parity with GPT-4.1 with substantially lower training compute is the key headline result.
 
 **Additional size variant**: 14B (HyperCLOVAX-SEED-Think-14B) for cost-sensitive deployments.
 
