@@ -10,7 +10,7 @@ updated: "2026-04-12"
 author: knowledge-card-builder
 domain: software_testing
 subdomain: system_testing
-quality: null
+quality: 9.1
 tags: [system-testing, integration-testing, e2e, test-pyramid, smoke-test, regression, contract-testing, chaos-engineering, knowledge]
 tldr: "7 named system-test patterns with selection criteria: pyramid (70/20/10), smoke (< 5 min), regression (change guard), contract (API boundary), chaos (failure injection), golden-path (happy-path lock), mutation (suite sensitivity)."
 when_to_use: "Designing test suites, choosing test strategy, auditing coverage gaps at system or service boundary."
