@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "CRM Admin Panel — Specification Template"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo commit 1744e921 (CRM_ADMIN mission)
@@ -12,6 +12,7 @@ variables: [BRAND_NAME, DB_PROVIDER, TABLES, MAP_PROVIDER, AUTH_METHOD, FRAMEWOR
 density_score: 0.95
 tags: [template, crm, admin, specification, fullstack, instance-extraction]
 tldr: "CRM admin panel spec — database schema, frontend components, map integration, auth. Any brand fills slots."
+updated: "2026-04-13"
 ---
 
 # CRM Admin Panel — {{BRAND_NAME}}
