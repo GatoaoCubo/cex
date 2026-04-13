@@ -1,9 +1,11 @@
 ---
 id: p04_kc_steps
-kind: knowledge_card
-type: kind
+kind: steps
 pillar: P04
-title: "Steps — Deep Knowledge for steps"
+llm_function: TOOL
+max_bytes: 4096
+naming: p04_steps_{{name}}.md + .yaml
+core: true
 version: 1.0.0
 created: 2026-04-02
 updated: 2026-04-02
@@ -11,20 +13,131 @@ author: builder_knowledge
 domain: steps
 quality: 9.1
 tags: [steps, p04, reusable, kind-kc]
-tldr: "Reusable capability with structured phases, triggers, and lifecycle management for repeatable workflows"
-when_to_use: "Building, reviewing, or reasoning about steps artifacts"
-keywords: [steps, phases, trigger, reusable, capability, workflow, lifecycle]
+tldr: "Structured workflow for system prompt review with quality gates and structured feedback"
+when_to_use: "Reviewing, refining, or reasoning about system prompts"
+keywords: [steps, review, feedback, structured, workflow, quality]
 feeds_kinds: [steps]
-density_score: 8.9
+density_score: 0.95
 ---
 
-# Steps
+# System Prompt Review Steps
 
-## Spec
+## What It Is
+A system prompt review steps is a structured workflow for evaluating and improving system prompts. It defines a specific review process that can be executed repeatedly across different contexts. Steps reviews are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this review?" while agents answer "who am I?" and prompts answer "how do I communicate?"
+
+## Cross-Framework Map
+| Framework/Provider | Class/Concept | Notes |
+|-------------------|---------------|-------|
+| LangChain | `PromptTemplate` / `Chain` | Structured review with defined phases |
+| LlamaIndex | `QueryPipeline` / `IngestionPipeline` | Multi-step review workflows |
+| CrewAI | `Task` + `Process` | Task definition with sequential/hierarchical review |
+| DSPy | `dspy.Module.forward()` method | Structured computation with defined phases |
+| Haystack | `Pipeline` with nodes | Explicit DAG execution with phase transitions |
+| AutoGen | `GroupChat` workflow | Multi-agent conversation patterns |
+| Microsoft Semantic Kernel | `Plan` / `KernelFunction` | Function orchestration with step management |
+
+## Key Parameters
+| Parameter | Type | Default | Tradeoff |
+|-----------|------|---------|----------|
+| review_scope | enum | "full" | full (complete review) vs partial (specific sections) |
+| feedback_type | enum | "structured" | structured (tables) vs natural language |
+| input_schema | object | {} | Strong typing vs flexibility |
+| output_format | string | "markdown" | Structured output vs natural language |
+| timeout_seconds | int | 300 | Execution time limit vs complex workflows |
+
+## Phase Structure
+| Phase | Purpose | Input | Output |
+|-------|---------|-------|--------|
+| discover | Context gathering | system_prompt, review_criteria | context_data |
+| analyze | Quality assessment | context_data, feedback_rules | assessment_results |
+| suggest | Improvement recommendations | assessment_results, best_practices | improvement_plan |
+| finalize | Review summary | improvement_plan, original_prompt | review_summary |
+
+## Trigger Patterns
+| Trigger Type | Example | Activation |
+|--------------|---------|------------|
+| manual_request | "Review this prompt" | User explicitly requests review |
+| quality_gate | "Below 8.5" | Automated trigger based on quality score |
+| periodic_check | "Weekly review" | Scheduled review cycle |
+| system_update | "Prompt version 2.0" | Triggered by system changes |
+
+## Quality Gates
+| Gate | Validation | Failure Impact |
+|------|------------|----------------|
+| H01_phases_defined | phases array not empty | Cannot execute workflow |
+| H02_review_criteria | review_criteria not empty | Incomplete assessment |
+| H03_input_schema | Valid JSON schema format | Runtime parameter errors |
+| H04_output_format | Defined output structure | Unpredictable results |
+
+## Usage Examples
 ```yaml
-kind: steps
-pillar: P04
-llm_function: TOOL
-max_bytes: 4096
-naming: p04_steps_{{name}}.md + .yaml
-core: true
+# Full system prompt review
+review_scope: full
+feedback_type: structured
+phases: [discover, analyze, suggest, finalize]
+
+# Partial review with specific criteria
+review_scope: partial
+feedback_type: structured
+phases: [discover, analyze]
+review_criteria:
+  - clarity
+  - consistency
+  - specificity
+
+# Automated quality gate trigger
+review_scope: full
+feedback_type: structured
+phases: [discover, analyze]
+quality_gate: true
+```
+
+## Anti-Patterns
+| Anti-Pattern | Why Wrong | Correct Approach |
+|--------------|-----------|------------------|
+| No review criteria | Incomplete assessment | Define clear review criteria |
+| Natural language feedback | Not reusable | Use structured feedback format |
+| Hard-coded parameters | Not reusable | Use input_schema for parameterization |
+| Mixed review phases | Confusing workflow | Define clear phase sequence |
+
+## Integration Points
+- **F2 BECOME**: Steps are loaded by agents to extend capabilities
+- **F3 INJECT**: Steps can inject domain-specific knowledge
+- **F5 CALL**: Steps orchestrate tool usage across phases
+- **Handoffs**: Steps can be passed between nuclei for specialized execution
+- **Memory**: Steps can persist state between phases via memory_scope
+
+System prompt review steps enable modular, reusable workflow definition that bridges the gap between simple prompts and complex multi-agent systems.
+## Production Reference: OpenClaude Bundled Steps
+OpenClaude ships ~18 bundled steps as battle-tested implementations:
+
+| Step | Trigger | Pattern | CEX Equivalent |
+|-------|---------|---------|----------------|
+| /review | manual_request | 3-parallel-agent review | n06_steps_review |
+| /audit | quality_gate | adversarial verification | n06_steps_audit |
+| /optimize | periodic_check | 9-section summarization | n06_steps_optimize |
+| /loop | system_update | recurring cron schedule | n06_steps_loop (future) |
+| /stuck | manual_request | diagnostic investigation | n/a (Anthropic-specific) |
+
+**Key architectural insight**: Steps are defined as prompt text with frontmatter, not as code. The steps body IS the prompt injected when the steps triggers. This maps directly to CEX's steps-as-artifact model.
+
+**Parallel dispatch pattern** (from /review):
+- Phase 1: Identify changes (git diff)
+- Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
+- Phase 3: Aggregate findings and fix issues directly
+This pattern generalizes: any steps can dispatch parallel sub-agents with typed foci.
+
+**Analysis scratchpad pattern** (from /optimize):
+- <analysis> tags create a private drafting space
+- Forces structured thinking before output
+- Scratchpad is stripped from final result
+- Improves quality without consuming permanent context
+
+## New Step Patterns Discovered
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| Adversarial steps | Agent explicitly tries to BREAK the implementation | n06_steps_audit |
+| Parallel review | Multiple focused agents analyze same diff concurrently | n06_steps_review |
+| Scratchpad steps | <analysis> block for private reasoning, stripped from output | n06_steps_optimize |
+| Background extract | Runs silently after N turns, extracts persistent memories | n06_steps_memory_extract |
+| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | n06_steps_verify |
