@@ -2,7 +2,7 @@ id: atom_15_qwen_deepseek
 kind: knowledge_card
 title: 'Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs'
 version: 1.1.0
-quality: null
+quality: 8.9
 tags:
 - qwen
 - deepseek
@@ -152,7 +152,41 @@ sources:
 
   - `<|im_start|>tool` -- tool response injection (`<tool_response>`)
 
-  - Token ID 151668 -- closing `</think>` tag; parser uses this to split reasoning from output'
+  - Token ID 151668 -- closing `</think>` tag; parser uses this to split reasoning from output
+
+
+  #### 1.4.2 Qwen3 Context Management: Rolling Checkpoint and No Default System Prompt
+
+
+  No default system prompt: Qwen3 ships WITHOUT a built-in system prompt (unlike Qwen2.5
+
+  which included "You are a helpful assistant" by default). Operators MUST inject the system
+
+  message explicitly or tool schemas will not be present in context.
+
+  Source: lawwu.github.io/til/posts/2025-05-02-qwen3-chat-prompt-template/
+
+
+  Rolling checkpoint algorithm (chat template, Hugging Face blog on Qwen3 template):
+
+  1. Traverse messages in REVERSE order
+
+  2. Find the latest non-tool-call user turn (the "checkpoint")
+
+  3. All messages BEFORE the checkpoint: `<think>` blocks compressed or removed to save tokens
+
+  4. All messages AT/AFTER the checkpoint: full `<think>` blocks preserved
+
+  5. Effect: prevents unbounded reasoning-token growth in long conversations
+
+
+  Implication: In a 10-turn conversation, only the current active reasoning block is fully
+
+  preserved. Prior `reasoning_content` from earlier turns is pruned from context. CEX sessions
+
+  relying on Qwen3 should not depend on recovering full CoT from previous turns -- only
+
+  `content` fields are reliable across turn boundaries.'
 1_5_reasoning_content_field: "For reasoning models (QwQ, QvQ, Qwen3), messages carry an optional `reasoning_content` field\
   \ separate from `content`.\n\nthought_in_content parameter:\n- `True`: content = `<think>reasoning</think>answer` (single\
   \ field)\n- `False`: separate `reasoning_content` and `content` fields\n\nCritical: When using function calling, the client\
@@ -285,7 +319,23 @@ sources:
   \ has reasoning_content\n]\n\n# CORRECT -- strip reasoning_content from prior assistant turns\nmessages = [\n    {\"role\"\
   : \"user\", \"content\": \"Previous question\"},\n    {\"role\": \"assistant\", \"content\": \"Previous answer\"},  # reasoning_content\
   \ stripped\n    {\"role\": \"user\", \"content\": \"New question\"}\n]\n\nError when mishandled: HTTP 400: \"Missing `reasoning_content`\
-  \ field in the assistant\nmessage at message index [X]\" OR HTTP 400 for unexpected `reasoning_content` in input."
+  \ field in the assistant\nmessage at message index [X]\" OR HTTP 400 for unexpected `reasoning_content` in input.\n\n####\
+  \ 2.3.2 reasoning_content: Streaming, budget_tokens, and Token Limits\n\nToken limits:\n- Default max `reasoning_content`\
+  \ length: ~32K tokens\n- Extended max: up to 64K tokens combined (reasoning + content)\n- If `max_tokens` is too low, reasoning\
+  \ may be truncated and final answer omitted\n- Recommended allocation: set `max_tokens` >= 8000 for tool-calling scenarios\n\
+  \nbudget_tokens parameter (source: api-docs.deepseek.com/api-reference):\n- Controls how many tokens the model may allocate\
+  \ to the reasoning phase\n- Acts as a soft ceiling within the overall `max_tokens` budget\n- If set too low, reasoning is\
+  \ abbreviated -- acceptable for simple questions, risky for complex chains\n- If unset, the model manages allocation automatically\
+  \ (proportional to inferred task complexity)\n- Practical guidance: `budget_tokens` ~70% of `max_tokens` for balanced reasoning+answer\n\
+  \nStreaming `reasoning_content` (source: api-docs.deepseek.com/guides/reasoning_model):\nwith client.chat.completions.create(\n\
+  \    model=\"deepseek-reasoner\",\n    messages=messages,\n    stream=True,\n    stream_options={\"include_usage\": True}\
+  \  # required to get usage stats in final chunk\n) as stream:\n    for chunk in stream:\n        delta = chunk.choices[0].delta\
+  \ if chunk.choices else None\n        if delta and delta.reasoning_content:\n            print(f\"[thinking] {delta.reasoning_content}\"\
+  , end=\"\", flush=True)\n        if delta and delta.content:\n            print(f\"[answer] {delta.content}\", end=\"\"\
+  , flush=True)\n        if chunk.usage:  # final streaming chunk only\n            print(f\"\\nTotal tokens: {chunk.usage.total_tokens}\"\
+  )\n\nNote: Without `stream_options={\"include_usage\": True}`, the final usage summary chunk\nis suppressed. Usage data\
+  \ (prompt_tokens, completion_tokens, total_tokens) is unavailable\nin mid-stream deltas -- it only arrives in the terminal\
+  \ chunk."
 2_4_strict_mode_beta: "Base URL: `https://api.deepseek.com/beta`\n\nSet `\"strict\": true` on function definitions. Enforces\
   \ JSON Schema compliance:\n- Supported types: object, string, number, integer, boolean, array, enum, anyOf, $ref, $def\n\
   - ALL object properties must be in `required`\n- `additionalProperties` must be `false`\n- `pattern` and `format` supported\

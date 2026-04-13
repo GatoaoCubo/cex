@@ -611,6 +611,29 @@ REJECT if: any pass-to-fail tests (regression introduced)
 
 **Note**: The 128K BPE vocabulary is confirmed from the V3 technical report. The 151K figure may refer to a different tokenizer variant or total special tokens count -- the official HuggingFace model card does not confirm 151K.
 
+#### 2.6.1 V3.2-Speciale Benchmark Performance
+
+V3.2-Speciale is the high-compute variant of DeepSeek-V3.2, unlocked by extended reasoning budget:
+
+| Benchmark | Score | Context |
+|-----------|-------|---------|
+| IMO 2025 | Gold medal | International Mathematical Olympiad |
+| IOI 2025 | Gold medal | International Olympiad in Informatics |
+| Tau2Bench (agentic RL) | Significant gain over SFT-only | Airline + retail tool-use scenarios |
+| MCP-Mark | Improved | Model Context Protocol tool-calling fidelity |
+| MCP-Universe | Improved | Out-of-domain MCP tool generalization |
+| SWE-bench Verified | SOTA (open-source) | Real-world GitHub issue repair |
+
+**V3.2 vs V3 agentic benchmark** (Tau2Bench): RL-trained V3.2 substantially outperforms
+V3 SFT-only baseline on held-out (not seen in training) agentic environments, demonstrating
+that GRPO generalizes beyond training distribution -- not just memorization.
+Source: arXiv 2512.02556, kili-technology.com/blog/data-story-deepseek-v3-2
+
+**V3.2 vs competitors on coding agents** (SWE-bench):
+- Outperforms all open-weight models
+- Competitive with GPT-4o and Claude 3.5 Sonnet on code repair tasks
+- V3.2-Speciale closes gap to GPT-5 on mathematical olympiad benchmarks
+
 ### 2.7 Unsupported Parameters in Reasoning Mode
 
 Temperature, top_p, presence_penalty, frequency_penalty, logprobs, top_logprobs -- all silently ignored or error in reasoning mode. FIM (Fill-in-Middle) also unsupported.
