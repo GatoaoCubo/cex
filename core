@@ -28,3 +28,53 @@ llm_function: TOOL
 max_bytes: 4096
 naming: p04_core_{{name}}.md + .yaml
 core: true
+```
+
+## What It Is
+A core is a structured unit of system work with defined phases, trigger conditions, and quality assurance mechanisms. It defines a specific workflow that can be executed repeatedly across different contexts. Cores are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A core answers "what phases execute to achieve this work?" while agents answer "who am I?" and prompts answer "how do I communicate?"
+
+## Cross-Platform Map
+| Framework/Provider | Class/Concept | Notes |
+|-------------------|---------------|-------|
+| LangChain | `RunnableSequence` | Sequential execution with defined steps |
+| LlamaIndex | `QueryPipeline` | Multi-step workflows with phase management |
+| CrewAI | `Task` + `Process` | Task definition with sequential/hierarchical execution |
+| DSPy | `dspy.Module.forward()` method | Structured computation with defined phases |
+| Haystack | `Pipeline` with nodes | Explicit DAG execution with phase transitions |
+| AutoGen | `GroupChat` workflow | Multi-agent conversation patterns |
+| Microsoft Semantic Kernel | `Plan` / `KernelFunction` | Function orchestration with step management |
+
+## Key Parameters
+| Parameter | Type | Default | Tradeoff |
+|-----------|------|---------|----------|
+| trigger_type | enum | "user_invocable" | user_invocable (slash commands) vs agent_only (programmatic) |
+| phases | array | required | More phases = granular control vs complexity |
+| input_schema | object | {} | Strong typing vs flexibility |
+| output_format | string | "markdown" | Structured output vs natural language |
+| timeout_seconds | int | 30,000 | Execution time limit vs complex workflows |
+
+## Phase Structure
+| Phase | Purpose | Input | Output |
+|-------|---------|-------|--------|
+| discover | Context gathering | user_input, environment | context_data |
+| configure | Parameter setup | context_data, user_preferences | configuration |
+| execute | Main workflow | configuration, tools | raw_results |
+| validate | Quality assurance | raw_results, criteria | validated_output |
+| archive | Long-term storage | validated_output, metadata | archived_artifact |
+
+## Trigger Patterns
+| Trigger Type | Example | Activation |
+|--------------|---------|------------|
+| slash_command | "/optimize", "/analyze" | User types exact command |
+| keyword_match | "debug", "benchmark" | Natural language contains keywords |
+| event_driven | file_change, time_schedule | System event occurs |
+| agent_invoked | crew.use_core("analyze") | Programmatic call from agent |
+
+## Quality Gates
+| Gate | Validation | Failure Impact |
+|------|------------|----------------|
+| H01_phases_defined | phases array not empty | Cannot execute workflow |
+| H02_trigger_valid | trigger_type in allowed values | Cannot activate core |
+| H03_input_schema | Valid JSON schema format | Runtime parameter errors |
+| H04_output
+```
