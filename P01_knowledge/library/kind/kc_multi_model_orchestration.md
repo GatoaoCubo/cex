@@ -3,8 +3,9 @@ id: multi_model_orchestration
 kind: knowledge_card
 title: Multi-Model Orchestration Patterns for LLM Agents
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: null
+density_score: 1.0
 ---
 
 ### Padrões Industriais de Orquestração Multi-Modelo
