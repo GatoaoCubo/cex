@@ -227,6 +227,15 @@ The original tsuzumi (v1) was released in two sizes, establishing the "lightweig
 
 tsuzumi 2 represents Japan's "lightweight sovereignty" thesis: you don't need a 1T-parameter model for enterprise Japanese tasks. A well-trained, domain-specialized model on a single GPU can match or exceed frontier models in specific verticals, at a fraction of the cost and with full data control.
 
+**Competitive comparison vs. alternatives:**
+
+| Model | Size | Single GPU? | Japanese? | Data sovereignty? |
+|-------|------|-------------|-----------|------------------|
+| tsuzumi 2 | 7B (est.) | YES | World-top (comparable) | Full (Japan-only) |
+| Llama 3.1 8B | 8B | YES | Moderate | None (Meta-controlled) |
+| GPT-4o mini | Unknown | NO (API only) | Good | None |
+| Gemma 2 9B | 9B | YES | Moderate | None (Google) |
+
 ---
 
 ## 4. Fujitsu Takane -- Multi-Agent SDLC Platform
@@ -250,6 +259,40 @@ tsuzumi 2 represents Japan's "lightweight sovereignty" thesis: you don't need a 
 - MCP support for existing system integration
 - Inter-agent communication for coordinated multi-agent operation
 - Takane LLM with 94% memory reduction via quantization
+
+### 4.3 MCP Integration -- Technical Architecture
+
+Fujitsu's MCP implementation enables the multi-agent SDLC platform to connect to **existing enterprise legacy systems** without rewriting interfaces:
+
+```
+[Takane LLM Core]
+      |
+      | MCP protocol layer
+      |
+      +-- [Requirements Agent] <--> ERP/ticket systems (MCP server)
+      +-- [Design Agent]       <--> Architecture docs (MCP server)
+      +-- [Implementation Agent] <--> Git repos (MCP server)
+      +-- [Test Agent]         <--> CI/CD pipelines (MCP server)
+      |
+      | Inter-agent communication bus
+      |
+[Coordinator Agent] -- synthesizes outputs across agents
+```
+
+**Why MCP is critical for Fujitsu's use case:**
+
+| Challenge | MCP Solution |
+|-----------|-------------|
+| 67 types of legacy medical software | Each system exposes MCP server interface |
+| Agents need shared context | MCP resources shared across agent tree |
+| No custom integration per system | Standard MCP server wraps any existing API |
+| Audit trail required | MCP call logs satisfy medical compliance |
+
+**Live deployment data (January 2026 medical fee revision):**
+- Input: medical fee regulation changes (legal documents)
+- Output: working code modifications across 67 software systems
+- Time: 4 hours (vs 3 person-months conventional)
+- Method: Requirements Agent parsed regulations -> Design Agent produced specs -> Implementation Agent wrote code -> Test Agent validated
 
 ### 4.3 Sector Expansion
 
@@ -284,6 +327,34 @@ tsuzumi 2 represents Japan's "lightweight sovereignty" thesis: you don't need a 
 - **PLaMo Translate**: Selected for Japan Digital Agency's Gennai project (FY2026+)
 - **Edge deployment**: PLaMo Lite targets automotive and manufacturing -- unique positioning
 - **Agent capabilities**: PLaMo 2.1 Prime includes automated tool calling (Oct 2025)
+
+### 5.3 PLaMo Lite -- Edge Deployment Specifications
+
+PLaMo-1B is the first released model in the PLaMo Lite SLM series, enabling on-device inference for industrial applications:
+
+| Property | Value |
+|----------|-------|
+| Parameters | 1 billion |
+| Pretraining tokens | 4 trillion |
+| Deployment target | Snapdragon 8 Elite (Qualcomm) |
+| Throughput on device | 68.21 tokens/second |
+| Time to first token | 0.031 - 1.006 seconds |
+| Precision | w4a16 (4-bit weights, 16-bit activations) |
+| Runtime | QNN_CONTEXT_BINARY (Qualcomm Neural Network) |
+| Distribution | Qualcomm AI Hub + Hugging Face |
+
+**Target edge platforms:**
+
+| Platform | Application | Key Requirement |
+|----------|------------|-----------------|
+| Automotive (Snapdragon Cockpit Elite) | In-vehicle AI assistant, navigation | <1s TTFT, offline operation |
+| Industrial robots | Task instruction understanding | Real-time response, EMI resistance |
+| Manufacturing equipment | Anomaly detection reporting | On-device (no cloud latency) |
+| PCs (on-premises) | Enterprise AI without cloud data exposure | Data sovereignty |
+
+**PFCI (Preferred Computing Infrastructure)**: PFN's joint venture with cloud providers, launching early 2026, will offer AI cloud services on MN-Core series hardware -- enabling PLaMo Prime/2.1 at scale for organizations that cannot run edge-only.
+
+**PLaMo on Qualcomm AI Hub**: PFN is listed as an official Qualcomm AI Hub model-maker, signaling a formal partnership for automotive + mobile SLM distribution.
 
 ### 5.3 Government Presence
 

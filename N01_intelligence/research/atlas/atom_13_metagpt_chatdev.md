@@ -247,7 +247,74 @@ team.run_project("Build a snake game")
 await team.run(n_round=5)
 ```
 
-### 1.9 Unique Concepts
+### 1.9 SOP-to-Prompt Compilation Process
+
+MetaGPT's "meta-programming" is the process of encoding a real-world SOP
+into executable prompt sequences. Three transformation stages:
+
+**Stage 1: Role Profiling (SOP -> Agent Identity)**
+```
+SOP Step: "Product Manager writes PRD"
+         |
+         v
+Profile Prompt: "You are a professional product manager at a software company.
+Your goal is to design a concise, usable, and efficient product. Never ask for
+clarification; make all decisions yourself. Output must be structured."
+```
+Each SOP role maps to a system-level identity prompt injected into every call.
+
+**Stage 2: Action Templating (SOP Step -> Prompt Template)**
+```
+SOP Step: "PM performs competitive analysis"
+         |
+         v
+Action Template:
+  PROMPT_TEMPLATE = """
+  Role: {profile}
+  ATTENTION: Use markdown, be professional.
+  ## Context
+  Requirements: {requirements}
+  ## Format example
+  {format_example}
+  -----
+  Role: {role}; Requirements: ...
+  ## {constraint}
+  """
+```
+Templates enforce output FORMAT (competitive quadrant, user stories, etc.)
+so downstream agents receive structured data, not free text.
+
+**Stage 3: Document Schema Enforcement (Output -> Typed Artifact)**
+
+Each Action's output maps to a Pydantic model:
+
+| SOP Document | Pydantic Model | Key Fields |
+|-------------|---------------|-----------|
+| PRD | `PRD` | `goals`, `user_stories`, `requirement_pool`, `competitive_quadrant_chart` |
+| System Design | `SystemDesign` | `implementation_approach`, `file_list`, `data_structures`, `api_design` |
+| Task List | `Tasks` | `required_packages`, `task_list` (file-granular) |
+| Code Review | `CodeSummary` | `LGTM`, `comments` |
+
+The Pydantic model lives in `instruct_content`; the string version in `content`.
+Downstream agents parse `instruct_content` for machine-readable fields,
+and optionally read `content` for context. This dual representation
+prevents schema failures when downstream agents receive malformed output.
+
+**Summary: SOP -> Prompt Compilation Pipeline**
+
+```
+Real-world SOP
+  1. Role profiling     -> system prompt per role (identity injection)
+  2. Action templating  -> PROMPT_TEMPLATE per action (format enforcement)
+  3. Schema binding     -> Pydantic model per output (type safety)
+  4. Watch registration -> _watch([ActionType]) per role (dependency wiring)
+  5. Team assembly      -> Team.hire([roles]) (graph construction)
+                       ===
+  Executable multi-agent workflow
+```
+Source: arXiv:2308.00352v6, section 3; github.com/geekan/MetaGPT-docs
+
+### 1.10 Unique Concepts
 
 | Concept | Description | Industry Parallel |
 |---------|-------------|-------------------|
@@ -256,6 +323,8 @@ await team.run(n_round=5)
 | **Shared message pool** | Pub-sub environment replacing point-to-point dialogue | Message broker (Kafka/RabbitMQ pattern) |
 | **Assembly line paradigm** | Sequential role activation with intermediate verification | CI/CD pipeline with stage gates |
 | **Executable feedback** | Code execution results fed back into generation loop | Test-driven development (TDD) |
+| **React mode** | Configurable agent execution strategy (REACT/BY_ORDER/PLAN_AND_ACT) | State machine / execution engine |
+| **Dual-representation Message** | content (string) + instruct_content (Pydantic) per message | Schema-first API with human-readable fallback |
 
 ---
 
@@ -416,6 +485,75 @@ Indexed via dense vector embeddings. Retrieved via top-k similarity search.
 
 Result: comprehensive metric jumps from 0.4267 (vanilla ChatDev) to 0.7304.
 
+### 3.5 Iterative Experience Refinement (IER, May 2024)
+
+Extension of Co-Learning. Paper: arXiv:2405.04219 (OpenBMB, May 2024).
+
+**Problem with base Co-Learning:** experience pools grow unbounded, accumulating
+low-quality or rarely-used entries that degrade retrieval precision.
+
+**IER adds four operations across task batches:**
+
+| Operation | Description | When |
+|-----------|-------------|------|
+| **Acquisition** | Extract shortcut experiences from completed tasks | After each task |
+| **Utilization** | Retrieve relevant experiences as few-shot context | During task execution |
+| **Propagation** | Share high-quality experiences to related tasks | Between task batches |
+| **Elimination** | Discard low-quality or stale experiences | Periodic heuristic pass |
+
+**Two refinement patterns:**
+
+```
+Successive pattern:  experiences from latest task batch only
+                     (focus on recency, avoid stale context)
+
+Cumulative pattern:  integrate all historical task batch experiences
+                     (full history, higher recall, more retrieval noise)
+```
+
+**Heuristic elimination rules:**
+- Prioritize frequently-retrieved experiences (usage count > threshold)
+- Discard experiences with quality score below floor
+- Remove experiences unused across N consecutive task batches (staleness)
+
+**Result:** IER further improves over base Co-Learning on sequential task benchmarks.
+Successive pattern outperforms cumulative when task distribution shifts over time.
+
+### 3.6 MacNet: Multi-Agent Collaboration Networks (June 2024)
+
+Paper: arXiv:2406.07155 (OpenBMB, June 2024). ChatDev DAG extension.
+
+**Problem with Chat Chain:** linear instructor-assistant topology limits
+parallelism and cannot model non-sequential agent dependencies.
+
+**MacNet replaces the linear chain with a DAG:**
+
+```
+Chat Chain (v1.0):   A -> B -> C -> D -> E (strictly sequential)
+
+MacNet (v2.0):       A -+-> B -> D -+-> G
+                        |           |
+                        +-> C -> E -+-> H
+                                |
+                                +-> F (parallel branches)
+```
+
+**Key properties:**
+- Directed acyclic graph: no circular dependencies, no infinite loops
+- 1000+ agents: macroscale coordination without exceeding context limits
+  (solved via topology-aware message routing -- agents only receive
+  messages from their DAG predecessors)
+- Topology-agnostic: supports chain, tree, mesh, ring, and hybrid topologies
+- `generate_graph.py`: utility to generate custom graph structures
+
+**Context limit solution:**
+MacNet routes messages along DAG edges only; each agent receives the
+concatenated outputs of its immediate predecessors, not the full history.
+This keeps per-agent context bounded regardless of total agent count.
+
+**ChatDev 2.0 impact:** rebranded as "Dev All through LLM-powered Multi-Agent
+Collaboration" -- GUI-based no-code agent graph editor wraps MacNet.
+
 ---
 
 ## 4. Head-to-Head Comparison
@@ -423,17 +561,22 @@ Result: comprehensive metric jumps from 0.4267 (vanilla ChatDev) to 0.7304.
 | Dimension | MetaGPT | ChatDev |
 |-----------|---------|---------|
 | **Communication** | Structured documents via pub-sub | Natural language chat chains |
-| **Agent interaction** | N-to-pool (shared message pool) | 1-to-1 (instructor-assistant pairs) |
+| **Agent interaction** | N-to-pool (shared message pool) | 1-to-1 instructor-assistant pairs |
 | **Workflow model** | Assembly line with SOPs | Waterfall decomposed into chat subtasks |
+| **Topology** | Fixed roles, sequential activation | DAG via MacNet (v2.0); chain in v1.0 |
 | **Hallucination control** | Structured output schemas + executable feedback | Communicative dehallucination (role reversal) |
-| **Verification** | Intermediate document standards at each stage | Code review chat + dynamic testing chat |
-| **Learning** | Long-term memory for future projects | Experiential co-learning with shortcut pools |
+| **Verification** | Intermediate document schemas at each stage | Code review chat + dynamic testing chat |
+| **Learning** | Long-term memory for future projects | Co-Learning + IER (shortcut pools + elimination) |
 | **Executability score** | 3.75 (SoftwareDev benchmark) | 2.25 (same benchmark) |
 | **Human revision cost** | 0.83 interventions/project | 2.50 interventions/project |
 | **Code execution** | Engineers run + debug iteratively (3 retries) | Python 3.11.4 sandbox, temperature=0.2 |
-| **Composition API** | `Team.hire([roles])` + `team.run()` | Config-driven phase chains (YAML) |
+| **Scale** | 5-7 fixed roles per project | 1000+ agents (MacNet DAG) |
+| **Message routing** | cause_by subscription filter | DAG edge routing (predecessor outputs only) |
+| **Composition API** | `Team.hire([roles])` + `team.run()` | Config-driven phase chains (YAML) + graph editor |
+| **React modes** | REACT / BY_ORDER / PLAN_AND_ACT | Instructor-Assistant (fixed per subtask) |
 | **Origin** | DeepWisdom / Tsinghua | OpenBMB / Tsinghua |
 | **License** | MIT | Apache 2.0 |
+| **Latest research** | Data Interpreter (arXiv:2402.18679) | MacNet + IER (arXiv:2406.07155, 2405.04219) |
 
 ---
 
@@ -515,6 +658,11 @@ Result: comprehensive metric jumps from 0.4267 (vanilla ChatDev) to 0.7304.
 - Hong, S. et al. (2024). "MetaGPT: Meta Programming for a Multi-Agent Collaborative Framework." ICLR 2024. arXiv:2308.00352.
 - Qian, C. et al. (2024). "ChatDev: Communicative Agents for Software Development." ACL 2024. arXiv:2307.07924.
 - Qian, C. et al. (2023). "Experiential Co-Learning of Software-Developing Agents." arXiv:2312.17025.
-- MetaGPT GitHub: https://github.com/geekan/MetaGPT
-- MetaGPT Docs: https://docs.deepwisdom.ai/main/en/guide/tutorials/multi_agent_101.html
+- Qian, C. et al. (2024). "Iterative Experience Refinement of Software-Developing Agents." arXiv:2405.04219.
+- Qian, C. et al. (2024). "Scaling LLM-based Multi-Agent Collaboration." MacNet. arXiv:2406.07155.
+- MetaGPT GitHub (FoundationAgents): https://github.com/FoundationAgents/MetaGPT
+- MetaGPT Docs (agent communication): https://github.com/geekan/MetaGPT-docs/blob/main/src/en/guide/in_depth_guides/agent_communication.md
+- MetaGPT Docs (think & act): https://docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html
+- MetaGPT Docs (multi-agent 101): https://docs.deepwisdom.ai/main/en/guide/tutorials/multi_agent_101.html
 - ChatDev GitHub: https://github.com/OpenBMB/ChatDev
+- ChatDev MacNet branch: https://github.com/OpenBMB/ChatDev/tree/macnet

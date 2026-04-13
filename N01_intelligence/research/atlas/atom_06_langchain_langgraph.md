@@ -4,15 +4,23 @@ kind: knowledge_card
 pillar: P01
 domain: agentic-frameworks
 title: "LangChain LCEL + LangGraph + LangSmith -- Complete Vocabulary Atlas"
-version: 1.0.0
+version: 2.0.0
 quality: 8.8
-tags: [langchain, langgraph, langsmith, lcel, runnable, stategraph, observability, agent-framework]
+tags: [langchain, langgraph, langsmith, lcel, runnable, stategraph, observability, agent-framework, langgraph-platform, pregel, hitl, datasets]
 sources:
   - https://docs.langchain.com/oss/python/langgraph/graph-api
   - https://docs.langchain.com/langsmith/observability-concepts
   - https://reference.langchain.com/python/langchain_core/
   - https://docs.langchain.com/oss/python/langgraph/use-functional-api
   - https://langchain-ai.github.io/langgraph/reference/agents/
+  - https://langchain-ai.github.io/langgraph/cloud/reference/api/api_ref.html
+  - https://docs.langchain.com/langgraph-platform/deployment-options
+  - https://docs.langchain.com/langgraph-platform/langgraph-server
+  - https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/
+  - https://docs.langchain.com/oss/python/langgraph/interrupts
+  - https://docs.smith.langchain.com/evaluation/how_to_guides/manage_datasets_programmatically
+  - https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client
+  - https://blog.langchain.dev/langgraph-platform-ga/
 date: 2026-04-13
 ---
 

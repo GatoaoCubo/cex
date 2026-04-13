@@ -1,0 +1,493 @@
+id: atom_13_metagpt_chatdev
+kind: knowledge_card
+title: 'Atomic Research 13: MetaGPT + ChatDev (OpenBMB/Tsinghua)'
+version: 2.0.0
+quality: 8.9
+tags:
+- metagpt
+- chatdev
+- openBMB
+- tsinghua
+- multi-agent
+- sops
+- dehallucination
+- chat-chain
+- atlas
+- macnet
+- ier
+- react-loop
+- message-pool
+pillar: P01
+domain: multi-agent-frameworks
+density_score: 0.95
+sources:
+- arXiv:2308.00352 (MetaGPT)
+- arXiv:2307.07924 (ChatDev)
+- arXiv:2312.17025 (Experiential Co-Learning)
+- arXiv:2405.04219 (IER)
+- arXiv:2406.07155 (MacNet)
+- github.com/FoundationAgents/MetaGPT
+- github.com/OpenBMB/ChatDev
+- docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html
+- github.com/geekan/MetaGPT-docs
+1_metagpt_sops_as_structured_communication: ''
+1_1_core_thesis: '"Code = SOP(Team)" -- encode real-world Standard Operating Procedures into prompt sequences so LLM agents
+  produce structured documents, not chat messages. Eliminates the "Hi, how are you?" overhead of conversational multi-agent
+  systems. Paper: Hong et al., "MetaGPT: Meta Programming for a Multi-Agent Collaborative Framework" (arXiv:2308.00352, ICLR
+  2024).'
+1_2_two_layer_architecture: '| Layer | Components | Purpose |
+
+  |-------|-----------|---------|
+
+  | Foundational | Environment, Memory, Role, Action, Tools | Individual agent operations + system-wide info exchange |
+
+  | Collaboration | Shared Message Pool, Publish-Subscribe, SOPs | Multi-agent coordination via structured outputs |'
+1_3_foundational_components: "#### Environment (Shared Workspace)\n- Central message pool -- single source of truth\n- All\
+  \ agents publish structured outputs to the pool\n- Any agent retrieves needed information directly (no peer queries)\n-\
+  \ Eliminates one-to-one communication bottlenecks\n\n#### Role (Agent Abstraction)\n- `class Role` -- binds profile, actions,\
+  \ memory, constraints, goals\n- React-style behavior loop: `_observe` -> `_think` -> `_act`\n- Subscribes to upstream message\
+  \ types via `_watch([ActionType])`\n- Each role has a domain-specific prompt prefix embedding expertise\n\nclass SimpleCoder(Role):\n\
+  \    def init(self, **kwargs):\n        super().init(**kwargs)\n        self._watch([UserRequirement])  # subscribe to upstream\n\
+  \        self.set_actions([SimpleWriteCode])  # register actions\n\n#### Action (Task Execution Unit)\n- `class Action`\
+  \ -- modular subtask with prompt template + `run()` method\n- Output encapsulated in `Message(content, role, cause_by)`\
+  \ for routing\n- `cause_by` metadata enables subscription filtering\n\nclass SimpleWriteCode(Action):\n    async def run(self,\
+  \ instruction: str):\n        prompt = self.PROMPT_TEMPLATE.format(instruction=instruction)\n        rsp = await self._aask(prompt)\n\
+  \        return parse_code(rsp)\n\n#### Memory\n- Short-term: `self.rc.memory` stores every observed `Message` in a list\n\
+  - Long-term: summarized learnings from completed projects for future constraint updates\n- Retrieved via `get_memories()`\
+  \ during `_act` phase\n\n#### Tools\n- Role-specific: Product Managers use web search; Engineers execute code\n- Integrated\
+  \ directly into Action execution"
+1_3b_message_class_full_api_v0_9: "The `Message` class is the atomic communication unit. All routing flows\nthrough its metadata\
+  \ fields. Source: github.com/geekan/MetaGPT-docs/agent_communication.md\n\nclass Message(BaseModel):\n    id: str      \
+  \                       # UUID, auto-generated\n    content: str                        # payload (PRD text, code, etc.)\n\
+  \    instruct_content: Optional[BaseModel]  # structured Pydantic output\n    role: str                           # \"user\"\
+  |\"assistant\"|\"system\"\n    cause_by: type[Action]              # WHICH Action produced this\n    sent_from: str    \
+  \                  # Role name that sent it\n    send_to: set[str]                   # target Roles (empty = broadcast)\n\
+  \nRouting mechanics:\n- `cause_by` is the subscription key: `Role._watch([ActionType])` subscribes\n  to all messages where\
+  \ `cause_by` matches a watched Action type\n- `send_to` enables unicast; empty set broadcasts to all subscribers\n- `instruct_content`\
+  \ carries structured Pydantic models alongside the\n  human-readable `content` string -- dual representation per message\n\
+  \nRoleContext (`self.rc`) -- the per-agent working state:\n\nclass RoleContext(BaseModel):\n    env: Environment       \
+  \    # reference to shared workspace\n    memory: Memory             # short-term message list\n    state: int         \
+  \        # current action index (by_order mode)\n    todo: Action               # action selected for this cycle\n    watch:\
+  \ set[type[Action]]   # subscribed action types\n    news: list[Message]        # unread messages from latest _observe\n\
+  \    react_mode: RoleReactMode  # REACT | BY_ORDER | PLAN_AND_ACT\n    max_react_loop: int        # default=1 for BY_ORDER"
+1_3c_react_modes_role_execution_strategies: "Three execution modes via `self._set_react_mode()`.\nSource: docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html\n\
+  \n| Mode | Behavior | Use Case | Action Selection |\n|------|----------|----------|-----------------|\n| `REACT` | Alternates\
+  \ _think -> _act; LLM picks action each turn | Dynamic tasks needing mid-stream reasoning | LLM at each step |\n| `BY_ORDER`\
+  \ | Runs registered actions sequentially, no LLM selection | Deterministic SOP pipelines | Pre-defined order |\n| `PLAN_AND_ACT`\
+  \ | LLM plans full sequence once, then executes steps | Long-horizon tasks needing upfront decomposition | Plan once, act\
+  \ many |\n\n`_observe` -> `_think` -> `_act` internals:\n\n_observe():\n  1. Pull Messages from Environment matching self.rc.watch\n\
+  \  2. Deduplicate vs self.rc.memory (seen-filter)\n  3. Store new messages in self.rc.news\n  4. Return count (0 = nothing\
+  \ to do, skip cycle)\n\n_think():\n  1. BY_ORDER: pop next registered action -> self.rc.todo\n  2. REACT: LLM selects from\
+  \ registered actions given self.rc.news context\n  3. PLAN_AND_ACT: generate plan on first call; pop next step on subsequent\n\
+  \n_act():\n  1. Execute self.rc.todo.run() with memory context\n  2. Wrap result: Message(content=rsp, cause_by=type(self.rc.todo))\n\
+  \  3. Publish Message to Environment (-> message pool)\n  4. Append to self.rc.memory\n\nmax_react_loop: Default=1 for BY_ORDER\
+  \ (one output per activation,\nassembly-line model). Set to N for REACT mode to enable multi-turn debugging\n(Engineer retries\
+  \ code up to N times before handing off)."
+1_3d_environment_class_message_pool_implementation: "The `Environment` is the shared pub-sub broker.\nSource: arXiv:2308.00352v6\
+  \ + MetaGPT-docs agent_communication.md\n\nclass Environment(BaseModel):\n    roles: dict[str, Role]             # all active\
+  \ roles\n    history: str                       # text log of all messages\n    memory: Memory                     # global\
+  \ message pool (all messages)\n\n    def publish_message(self, message: Message) -> bool:\n        # 1. Add message to global\
+  \ memory (pool)\n        self.memory.add(message)\n        # 2. Append to text history\n        self.history += f\"\\n{message}\"\
+  \n        # 3. Deliver to subscribed roles\n        for role in self.roles.values():\n            role.put_message(message)\
+  \   # role buffers if cause_by in watch\n        return True\n\nPool properties:\n- Single source of truth: all agents read\
+  \ from the same pool\n- Subscription filter: `role.put_message()` checks `cause_by in self.rc.watch`\n  before buffering\
+  \ -- agents only see messages relevant to their subscriptions\n- No point-to-point: eliminates N^2 peer routing; all communication\
+  \ is O(N)\n- Ordered: history log preserves global causal order of all messages"
+1_4_role_definitions_software_company_sop: '| Role | Actions | Structured Output |
+
+  |------|---------|-------------------|
+
+  | Product Manager | Requirement analysis, competitive analysis | PRD (user stories, requirements pool, competitive quadrant
+  chart) |
+
+  | Architect | System design, interface specification | System design doc (file lists, data structures, class diagrams, sequence
+  flows) |
+
+  | Project Manager | Task decomposition, work assignment | Task distribution (by file/module, with dependencies) |
+
+  | Engineer | Code implementation, iterative debugging | Code files following architectural contracts |
+
+  | QA Engineer | Test formulation, bug detection | Unit test suites with expected behaviors |'
+1_5_publish_subscribe_communication: "ProductManager --[PRD]--> Message Pool\n    Architect watches [PRD] --> reads pool -->\
+  \ produces SystemDesign\n        ProjectManager watches [SystemDesign] --> produces TaskList\n            Engineer watches\
+  \ [TaskList] --> produces Code\n                QAEngineer watches [Code] --> produces Tests\n\nKey: agents activate ONLY\
+  \ after receiving prerequisite dependencies.\nNo polling, no chat -- subscription-driven activation."
+1_6_sops_as_prompt_sequences: 'Instead of emergent conversation, MetaGPT hardcodes the software development
+
+  waterfall into sequential role activations:
+
+
+  1. Requirement Analysis (PM) -> structured PRD
+
+  2. Technical Design (Architect) -> system components + interfaces
+
+  3. Task Decomposition (PM) -> granular file-level assignments
+
+  4. Implementation (Engineer) -> code per spec
+
+  5. Quality Assurance (QA) -> test cases + execution feedback
+
+
+  Each step produces a DOCUMENT, not a chat reply. Documents have schemas.'
+1_7_executable_feedback_mechanism: 'After code generation, Engineers write and execute unit tests iteratively:
+
+  - Max 3 retry iterations
+
+  - Tests run in actual environment (not simulated)
+
+  - +4.2% Pass@1 on HumanEval, +5.4% on MBPP vs no-feedback baseline
+
+  - Human revision cost: 0.83 interventions/project (vs 2.5 for ChatDev)'
+1_8_team_composition_api: 'team = Team()
+
+  team.hire([ProductManager(), Architect(), Engineer(), QAEngineer()])
+
+  team.invest(investment=3.0)  # budget in dollars
+
+  team.run_project("Build a snake game")
+
+  await team.run(n_round=5)'
+1_9_sop_to_prompt_compilation_process: "MetaGPT's \"meta-programming\" is the process of encoding a real-world SOP\ninto executable\
+  \ prompt sequences. Three transformation stages:\n\nStage 1: Role Profiling (SOP -> Agent Identity)\nSOP Step: \"Product\
+  \ Manager writes PRD\"\n         |\n         v\nProfile Prompt: \"You are a professional product manager at a software company.\n\
+  Your goal is to design a concise, usable, and efficient product. Never ask for\nclarification; make all decisions yourself.\
+  \ Output must be structured.\"\nEach SOP role maps to a system-level identity prompt injected into every call.\n\nStage\
+  \ 2: Action Templating (SOP Step -> Prompt Template)\nSOP Step: \"PM performs competitive analysis\"\n         |\n     \
+  \    v\nAction Template:\n  PROMPT_TEMPLATE = \"\"\"\n  Role: {profile}\n  ATTENTION: Use markdown, be professional.\n \
+  \ ## Context\n  Requirements: {requirements}\n  ## Format example\n  {format_example}\n  -----\n  Role: {role}; Requirements:\
+  \ ...\n  ## {constraint}\n  \"\"\"\nTemplates enforce output FORMAT (competitive quadrant, user stories, etc.)\nso downstream\
+  \ agents receive structured data, not free text.\n\nStage 3: Document Schema Enforcement (Output -> Typed Artifact)\n\n\
+  Each Action's output maps to a Pydantic model:\n\n| SOP Document | Pydantic Model | Key Fields |\n|-------------|---------------|-----------|\n\
+  | PRD | `PRD` | `goals`, `user_stories`, `requirement_pool`, `competitive_quadrant_chart` |\n| System Design | `SystemDesign`\
+  \ | `implementation_approach`, `file_list`, `data_structures`, `api_design` |\n| Task List | `Tasks` | `required_packages`,\
+  \ `task_list` (file-granular) |\n| Code Review | `CodeSummary` | `LGTM`, `comments` |\n\nThe Pydantic model lives in `instruct_content`;\
+  \ the string version in `content`.\nDownstream agents parse `instruct_content` for machine-readable fields,\nand optionally\
+  \ read `content` for context. This dual representation\nprevents schema failures when downstream agents receive malformed\
+  \ output.\n\nSummary: SOP -> Prompt Compilation Pipeline\n\nReal-world SOP\n  1. Role profiling     -> system prompt per\
+  \ role (identity injection)\n  2. Action templating  -> PROMPT_TEMPLATE per action (format enforcement)\n  3. Schema binding\
+  \     -> Pydantic model per output (type safety)\n  4. Watch registration -> _watch([ActionType]) per role (dependency wiring)\n\
+  \  5. Team assembly      -> Team.hire([roles]) (graph construction)\n                       ===\n  Executable multi-agent\
+  \ workflow\nSource: arXiv:2308.00352v6, section 3; github.com/geekan/MetaGPT-docs"
+1_10_unique_concepts: '| Concept | Description | Industry Parallel |
+
+  |---------|-------------|-------------------|
+
+  | SOPs-as-prompts | Real-world procedures encoded as prompt sequences governing agent behavior | Process mining -> prompt
+  compilation |
+
+  | Structured communication | Documents/diagrams instead of natural language chat between agents | Contract-first API design
+  |
+
+  | Shared message pool | Pub-sub environment replacing point-to-point dialogue | Message broker (Kafka/RabbitMQ pattern)
+  |
+
+  | Assembly line paradigm | Sequential role activation with intermediate verification | CI/CD pipeline with stage gates |
+
+  | Executable feedback | Code execution results fed back into generation loop | Test-driven development (TDD) |
+
+  | React mode | Configurable agent execution strategy (REACT/BY_ORDER/PLAN_AND_ACT) | State machine / execution engine |
+
+  | Dual-representation Message | content (string) + instruct_content (Pydantic) per message | Schema-first API with human-readable
+  fallback |
+
+
+  ---'
+2_chatdev_chat_chain_communicative_dehallucination: ''
+2_1_core_thesis: 'Software development as multi-turn chat between role-playing agents. Language is the unifying bridge --
+  agents guided in WHAT to communicate (chat chain) and HOW to communicate (communicative dehallucination). Paper: Qian et
+  al., "ChatDev: Communicative Agents for Software Development" (arXiv:2307.07924, ACL 2024).'
+2_2_waterfall_to_chat_chain_decomposition: "ChatDev adopts the waterfall model but decomposes each phase into atomic\nchat\
+  \ subtasks between an Instructor and an Assistant:\n\nWATERFALL PHASE          CHAT SUBTASKS\n-----------------        -------------------------\n\
+  Design Phase     -----> Requirements Chat (CEO<->CTO)\n                         Architecture Chat (CTO<->Programmer)\nCoding\
+  \ Phase     -----> Code Writing Chat (Programmer<->CTO)\n                         Code Completion Chat (Programmer<->Reviewer)\n\
+  Testing Phase    -----> Code Review (Reviewer<->Programmer) [static]\n                         System Test (Tester<->Programmer)\
+  \ [dynamic]\nDocumenting      -----> Documentation Chat\n\nEach subtask: T = tau(chat(Instructor, Assistant))\n- tau extracts\
+  \ the solution (code or text) from dialogue\n- Max communication rounds bounded per phase"
+2_3_role_definitions: '| Role | Function | Typical Pairing |
+
+  |------|----------|-----------------|
+
+  | CEO | Overall requirements, project direction | Instructor for design |
+
+  | CTO | Technical architecture decisions | Instructor/Assistant flexibly |
+
+  | CPO | Product requirements refinement | Instructor for requirements |
+
+  | Programmer | Code implementation | Assistant for most phases |
+
+  | Reviewer | Code quality, bug identification | Instructor for code review |
+
+  | Tester | Dynamic system validation | Instructor for testing |
+
+  | Art Designer | Visual asset generation | Assistant for UI |'
+2_4_instructor_assistant_paradigm: 'Every chat subtask has exactly two agents with asymmetric roles:
+
+
+  - Instructor (I): initiates direction with instructions (->)
+
+  - Assistant (A): responds with solutions (~>)
+
+  - Multi-turn: I->A, A~>I, I->A, A~>I, ... until consensus
+
+
+  Vanilla:    <I->A, A~>I> (repeat)
+
+  Enhanced:   <I->A, <A->I, I~>A> (repeat), A~>I> (repeat)
+
+
+  The "enhanced" pattern IS communicative dehallucination (see below).'
+2_5_communicative_dehallucination: "The unique mechanism. When an assistant receives vague instructions that\nwould cause\
+  \ hallucinated code:\n\n1. Assistant REVERSES roles -- becomes temporary instructor\n2. Proactively REQUESTS specific details\
+  \ from the original instructor\n3. Gets clarification BEFORE generating the formal response\n4. Resumes assistant role with\
+  \ now-precise instructions\n\nStandard:  Instructor gives vague spec -> Assistant hallucinates code\nDehalluc:  Instructor\
+  \ gives vague spec -> Assistant asks \"what exactly?\"\n           -> Instructor clarifies -> Assistant produces precise\
+  \ code\n\nThis is NOT self-reflection (agent talks to itself). It is communicative --\nthe assistant explicitly queries\
+  \ the instructor for missing information,\ncreating finer-grained information exchange.\n\nResult: reduces incomplete, unexecutable,\
+  \ and inaccurate code generation."
+2_6_memory_system: '| Type | Scope | Content |
+
+  |------|-------|---------|
+
+  | Short-term | Within a phase | Current chat dialogue history |
+
+  | Long-term | Cross-phase | Solutions from prior phases (M-tilde) bridging to next phase |
+
+
+  Long-term memories enable "smooth transition between subtasks" -- the coding
+
+  phase inherits the design phase''s architecture decisions.'
+2_7_inception_prompting: To sustain multi-turn communication and prevent premature termination, ChatDev uses inception prompting
+  -- system-level instructions that keep agents in their roles and maintain dialogue momentum until genuine consensus.
+2_8_unique_concepts: '| Concept | Description | Industry Parallel |
+
+  |---------|-------------|-------------------|
+
+  | Chat Chain | Waterfall phases decomposed into atomic instructor-assistant chat subtasks | Pipeline of pair-programming
+  sessions |
+
+  | Communicative Dehallucination | Role reversal where assistant requests clarification before responding | Rubber-duck debugging
+  / requirements elicitation |
+
+  | Instructor-Assistant paradigm | Asymmetric 2-agent dialogue per subtask | Pair programming (driver/navigator) |
+
+  | Inception prompting | System prompts sustaining role-play across multi-turn dialogue | System prompt anchoring |
+
+  | Cross-phase memory | Prior phase solutions as long-term context for next phase | Build artifacts as pipeline inputs |
+
+
+  ---'
+3_experiential_co_learning_chatdev_extension: 'Paper: Qian et al., "Experiential Co-Learning of Software-Developing Agents"
+  (arXiv:2312.17025, 2023). Integrated into ChatDev Jan 2024.'
+3_1_three_modules: '| Module | What it Does | Mechanism |
+
+  |--------|-------------|-----------|
+
+  | Co-Tracking | Joint exploration by instructor + assistant | Directed chain graph G=(N,E) of solution states; each node
+  is a code snapshot |
+
+  | Co-Memorizing | Mine shortcuts from trajectories | Deduplicate graph, score nodes, extract non-adjacent high-gain paths
+  |
+
+  | Co-Reasoning | Use experience pools for unseen tasks | Few-shot retrieval from instructor/assistant pools |'
+3_2_shortcut_experiences: 'A "shortcut" is an accelerated path between non-adjacent solution states:
+
+
+  Normal:    s0 -> s1 -> s2 -> s3 -> s4 (5 steps)
+
+  Shortcut:  s0 --------> s3           (1 step, pseudo-instruction generated)
+
+
+  Node scoring: omega(sj) = sim(sj, task)  sim(sj, s_final)  [[sj]]
+
+  - sim() = semantic similarity via text-embedding-ada-002
+
+  - [[sj]] = 1 if code compiles, 0 otherwise
+
+  - Information gain threshold: epsilon >= 0.90
+
+
+  Pseudo-instruction generation: compare source and target code states
+
+  to produce a synthetic instruction describing the direct transformation.'
+3_3_experience_pools: 'Two separate key-value stores:
+
+  - Instructor pool (S_i): current_solution -> instruction (what to tell the assistant)
+
+  - Assistant pool (S_a): instruction -> resulting_solution (how to respond)
+
+
+  Indexed via dense vector embeddings. Retrieved via top-k similarity search.'
+3_4_co_reasoning_at_inference: '1. Instructor receives current code state sj
+
+  2. Retrieves top-k matching instructions from S_i (k_code=1, k_text=2)
+
+  3. Uses retrieved instructions as few-shot examples
+
+  4. Assistant receives instruction, retrieves matching solutions from S_a
+
+  5. Iterates until task complete
+
+
+  Result: comprehensive metric jumps from 0.4267 (vanilla ChatDev) to 0.7304.'
+3_5_iterative_experience_refinement_ier_may_2024: "Extension of Co-Learning. Paper: arXiv:2405.04219 (OpenBMB, May 2024).\n\
+  \nProblem with base Co-Learning: experience pools grow unbounded, accumulating\nlow-quality or rarely-used entries that\
+  \ degrade retrieval precision.\n\nIER adds four operations across task batches:\n\n| Operation | Description | When |\n\
+  |-----------|-------------|------|\n| Acquisition | Extract shortcut experiences from completed tasks | After each task\
+  \ |\n| Utilization | Retrieve relevant experiences as few-shot context | During task execution |\n| Propagation | Share\
+  \ high-quality experiences to related tasks | Between task batches |\n| Elimination | Discard low-quality or stale experiences\
+  \ | Periodic heuristic pass |\n\nTwo refinement patterns:\n\nSuccessive pattern:  experiences from latest task batch only\n\
+  \                     (focus on recency, avoid stale context)\n\nCumulative pattern:  integrate all historical task batch\
+  \ experiences\n                     (full history, higher recall, more retrieval noise)\n\nHeuristic elimination rules:\n\
+  - Prioritize frequently-retrieved experiences (usage count > threshold)\n- Discard experiences with quality score below\
+  \ floor\n- Remove experiences unused across N consecutive task batches (staleness)\n\nResult: IER further improves over\
+  \ base Co-Learning on sequential task benchmarks.\nSuccessive pattern outperforms cumulative when task distribution shifts\
+  \ over time."
+3_6_macnet_multi_agent_collaboration_networks_june_2024: "Paper: arXiv:2406.07155 (OpenBMB, June 2024). ChatDev DAG extension.\n\
+  \nProblem with Chat Chain: linear instructor-assistant topology limits\nparallelism and cannot model non-sequential agent\
+  \ dependencies.\n\nMacNet replaces the linear chain with a DAG:\n\nChat Chain (v1.0):   A -> B -> C -> D -> E (strictly\
+  \ sequential)\n\nMacNet (v2.0):       A -+-> B -> D -+-> G\n                        |           |\n                    \
+  \    +-> C -> E -+-> H\n                                |\n                                +-> F (parallel branches)\n\n\
+  Key properties:\n- Directed acyclic graph: no circular dependencies, no infinite loops\n- 1000+ agents: macroscale coordination\
+  \ without exceeding context limits\n  (solved via topology-aware message routing -- agents only receive\n  messages from\
+  \ their DAG predecessors)\n- Topology-agnostic: supports chain, tree, mesh, ring, and hybrid topologies\n- `generate_graph.py`:\
+  \ utility to generate custom graph structures\n\nContext limit solution:\nMacNet routes messages along DAG edges only; each\
+  \ agent receives the\nconcatenated outputs of its immediate predecessors, not the full history.\nThis keeps per-agent context\
+  \ bounded regardless of total agent count.\n\nChatDev 2.0 impact: rebranded as \"Dev All through LLM-powered Multi-Agent\n\
+  Collaboration\" -- GUI-based no-code agent graph editor wraps MacNet.\n\n---"
+4_head_to_head_comparison: '| Dimension | MetaGPT | ChatDev |
+
+  |-----------|---------|---------|
+
+  | Communication | Structured documents via pub-sub | Natural language chat chains |
+
+  | Agent interaction | N-to-pool (shared message pool) | 1-to-1 instructor-assistant pairs |
+
+  | Workflow model | Assembly line with SOPs | Waterfall decomposed into chat subtasks |
+
+  | Topology | Fixed roles, sequential activation | DAG via MacNet (v2.0); chain in v1.0 |
+
+  | Hallucination control | Structured output schemas + executable feedback | Communicative dehallucination (role reversal)
+  |
+
+  | Verification | Intermediate document schemas at each stage | Code review chat + dynamic testing chat |
+
+  | Learning | Long-term memory for future projects | Co-Learning + IER (shortcut pools + elimination) |
+
+  | Executability score | 3.75 (SoftwareDev benchmark) | 2.25 (same benchmark) |
+
+  | Human revision cost | 0.83 interventions/project | 2.50 interventions/project |
+
+  | Code execution | Engineers run + debug iteratively (3 retries) | Python 3.11.4 sandbox, temperature=0.2 |
+
+  | Scale | 5-7 fixed roles per project | 1000+ agents (MacNet DAG) |
+
+  | Message routing | cause_by subscription filter | DAG edge routing (predecessor outputs only) |
+
+  | Composition API | `Team.hire([roles])` + `team.run()` | Config-driven phase chains (YAML) + graph editor |
+
+  | React modes | REACT / BY_ORDER / PLAN_AND_ACT | Instructor-Assistant (fixed per subtask) |
+
+  | Origin | DeepWisdom / Tsinghua | OpenBMB / Tsinghua |
+
+  | License | MIT | Apache 2.0 |
+
+  | Latest research | Data Interpreter (arXiv:2402.18679) | MacNet + IER (arXiv:2406.07155, 2405.04219) |
+
+
+  ---'
+5_cex_mapping: ''
+5_1_concept_to_cex_translation: '| MetaGPT/ChatDev Concept | CEX Equivalent | CEX Location |
+
+  |--------------------------|----------------|--------------|
+
+  | Role (MetaGPT) | Nucleus (N01-N07) | `N0x_*/agent_card_n0x.md` |
+
+  | Action (MetaGPT) | 8F pipeline function (F1-F8) | `.claude/rules/8f-reasoning.md` |
+
+  | Environment / Message Pool | `.cex/runtime/` (signals, handoffs, proposals) | `.cex/runtime/` |
+
+  | Publish-Subscribe | Signal writer + handoff files | `_tools/signal_writer.py` |
+
+  | SOPs-as-prompts | Builder ISOs (13 per kind) | `archetypes/builders/{kind}-builder/` |
+
+  | Structured output | Typed artifacts with YAML frontmatter | `P{01-12}_*/_schema.yaml` |
+
+  | Team.hire() | `bash _spawn/dispatch.sh grid` | `_spawn/dispatch.sh` |
+
+  | Chat Chain (ChatDev) | Wave-based dispatch (sequential phases) | `cex_mission_runner.py` |
+
+  | Instructor-Assistant | N07 handoff -> nucleus execution | `.cex/runtime/handoffs/` |
+
+  | Communicative Dehallucination | GDP (Guided Decision Protocol) | `.claude/rules/guided-decisions.md` |
+
+  | Experience Pool | Memory system (entity_memory, learning_record) | `P10_memory/`, `.cex/learning_records/` |
+
+  | Shortcut mining | `cex_evolve.py` heuristic pass | `_tools/cex_evolve.py` |
+
+  | Long-term memory | Knowledge Cards (KCs) | `P01_knowledge/library/kind/kc_*.md` |
+
+  | QA Engineer role | F7 GOVERN quality gate | 8F pipeline step 7 |
+
+  | Product Manager PRD | Mission plan + spec | `.cex/runtime/plans/` |
+
+  | Executable feedback | `cex_doctor.py` + `cex_system_test.py` | `_tools/cex_doctor.py` |'
+5_2_what_cex_could_adopt: '| Pattern | From | Value for CEX | Effort |
+
+  |---------|------|---------------|--------|
+
+  | Pub-sub message pool | MetaGPT | Replace file-based signals with in-memory message broker for faster inter-nucleus coordination
+  | High (architecture change) |
+
+  | Communicative dehallucination | ChatDev | Nuclei could request clarification from N07 mid-task instead of guessing when
+  handoff is ambiguous | Medium (signal protocol extension) |
+
+  | Experience pools with shortcut mining | ChatDev Co-Learning | Mine learning_records for reusable instruction-solution
+  pairs, inject as few-shot context | Medium (new tool) |
+
+  | Executable feedback loop | MetaGPT | Extend F7 GOVERN to run generated code and feed errors back to F6 PRODUCE (already
+  partial via cex_doctor) | Low (extend existing) |
+
+  | Structured document schemas per role | MetaGPT | Enforce output schemas per nucleus (not just per kind) -- e.g., N01 always
+  outputs intelligence_brief format | Low (schema extension) |'
+5_3_key_architectural_differences: '| Aspect | MetaGPT/ChatDev | CEX |
+
+  |--------|-----------------|-----|
+
+  | Agent count | 5-7 fixed roles | 7 nuclei, each with 125 sub-agent builders |
+
+  | Communication | Shared pool / chat pairs | File-based (handoffs, signals, proposals) |
+
+  | Task decomposition | Per-project (dynamic) | Per-kind (typed, 130 kinds) |
+
+  | Quality control | Executable tests | 3-layer scoring (structural + rubric + semantic) |
+
+  | Learning | Experience pools (ChatDev) / long-term memory (MetaGPT) | learning_records + knowledge_cards + memory_age decay
+  |
+
+  | Process model | Waterfall (both) | Wave-based parallel dispatch |
+
+
+  ---'
+6_key_takeaways: "1. SOPs beat chat. MetaGPT's structured communication outperforms ChatDev's\n   conversational approach\
+  \ by 67% on executability (3.75 vs 2.25). CEX already\n   follows this philosophy with typed artifacts and builder ISOs.\n\
+  \n2. Dehallucination is under-explored in CEX. ChatDev's communicative\n   dehallucination (assistant requests clarification)\
+  \ maps to GDP but only at\n   the N07 level. Extending this to nucleus-to-nucleus mid-task queries would\n   reduce wasted\
+  \ dispatch cycles.\n\n3. Experience mining is the next frontier. ChatDev's co-learning framework\n   (+71% comprehensive\
+  \ metric) suggests CEX's learning_records could be mined\n   for shortcut-oriented experiences and injected as few-shot\
+  \ examples during\n   F3 INJECT.\n\n4. Pub-sub > file signals. Both frameworks use in-memory communication.\n   CEX's file-based\
+  \ signals work but introduce I/O latency. A lightweight\n   pub-sub layer (even file-watching with inotify/ReadDirectoryChanges)\
+  \ would\n   reduce coordination overhead.\n\n5. Executable feedback is table stakes. Both frameworks run generated code.\n\
+  \   CEX's F7 GOVERN should evolve to include code execution for code-producing\n   kinds (landing_page, mcp_server, cli_tool,\
+  \ api_client).\n\n---"
+references:
+- 'Hong, S. et al. (2024). "MetaGPT: Meta Programming for a Multi-Agent Collaborative Framework." ICLR 2024. arXiv:2308.00352.'
+- 'Qian, C. et al. (2024). "ChatDev: Communicative Agents for Software Development." ACL 2024. arXiv:2307.07924.'
+- Qian, C. et al. (2023). "Experiential Co-Learning of Software-Developing Agents." arXiv:2312.17025.
+- Qian, C. et al. (2024). "Iterative Experience Refinement of Software-Developing Agents." arXiv:2405.04219.
+- Qian, C. et al. (2024). "Scaling LLM-based Multi-Agent Collaboration." MacNet. arXiv:2406.07155.
+- 'MetaGPT GitHub (FoundationAgents): https://github.com/FoundationAgents/MetaGPT'
+- 'MetaGPT Docs (agent communication): https://github.com/geekan/MetaGPT-docs/blob/main/src/en/guide/in_depth_guides/agent_communication.md'
+- 'MetaGPT Docs (think & act): https://docs.deepwisdom.ai/main/en/guide/tutorials/agent_think_act.html'
+- 'MetaGPT Docs (multi-agent 101): https://docs.deepwisdom.ai/main/en/guide/tutorials/multi_agent_101.html'
+- 'ChatDev GitHub: https://github.com/OpenBMB/ChatDev'
+- 'ChatDev MacNet branch: https://github.com/OpenBMB/ChatDev/tree/macnet'

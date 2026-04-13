@@ -221,6 +221,275 @@ Source: https://docs.haystack.deepset.ai/docs/serialization
 | SnowflakeTableRetriever | SQL queries against Snowflake tables |
 | ChromaQueryTextRetriever | Chroma native query API |
 
+#### 1.3.3a Retriever Config Params (Implementation Detail)
+
+Source: https://docs.haystack.deepset.ai/docs/retrievers
+
+**Common params shared by all retrievers:**
+- `filters: Optional[Dict]` -- metadata filter dict (REPLACE or MERGE via FilterPolicy)
+- `top_k: int = 10` -- max documents returned
+- `filter_policy: FilterPolicy` -- REPLACE (default) or MERGE
+
+**InMemoryBM25Retriever**
+```python
+InMemoryBM25Retriever(
+    document_store: InMemoryDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    scale_score: bool = False,     # normalize BM25 score to [0,1]
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+)
+```
+
+**ElasticsearchBM25Retriever**
+```python
+ElasticsearchBM25Retriever(
+    document_store: ElasticsearchDocumentStore,
+    filters: Optional[Dict] = None,
+    fuzziness: str = "AUTO",       # ES fuzziness: AUTO, 0, 1, 2
+    top_k: int = 10,
+    scale_score: bool = False,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    raise_on_failure: bool = True,
+)
+```
+
+**OpenSearchBM25Retriever**
+```python
+OpenSearchBM25Retriever(
+    document_store: OpenSearchDocumentStore,
+    filters: Optional[Dict] = None,
+    fuzziness: str = "AUTO",
+    top_k: int = 10,
+    scale_score: bool = False,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    all_terms_must_match: bool = False,  # AND vs OR for query terms
+    raise_on_failure: bool = True,
+)
+```
+
+**PgvectorKeywordRetriever**
+```python
+PgvectorKeywordRetriever(
+    document_store: PgvectorDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    # Uses PostgreSQL full-text search (tsvector / tsquery)
+)
+```
+
+**WeaviateBM25Retriever**
+```python
+WeaviateBM25Retriever(
+    document_store: WeaviateDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    move_to: Optional[Dict] = None,        # concept vector boost {concepts, objects, force}
+    move_away_from: Optional[Dict] = None, # concept avoidance
+)
+```
+
+**InMemoryEmbeddingRetriever**
+```python
+InMemoryEmbeddingRetriever(
+    document_store: InMemoryDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    scale_score: bool = False,
+    return_embedding: bool = False,  # include embedding vector in result doc
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+)
+# Input socket: query_embedding(List[float])
+```
+
+**ElasticsearchEmbeddingRetriever**
+```python
+ElasticsearchEmbeddingRetriever(
+    document_store: ElasticsearchDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    num_candidates: Optional[int] = None,  # ANN candidate pool (default: 10*top_k)
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    raise_on_failure: bool = True,
+)
+```
+
+**PgvectorEmbeddingRetriever**
+```python
+PgvectorEmbeddingRetriever(
+    document_store: PgvectorDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    vector_function: Optional[str] = None,  # "l2_distance" | "max_inner_product" | "cosine_distance"
+)
+```
+
+**ChromaEmbeddingRetriever**
+```python
+ChromaEmbeddingRetriever(
+    document_store: ChromaDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    # ChromaDocumentStore handles HNSW index params internally
+)
+```
+
+**QdrantEmbeddingRetriever**
+```python
+QdrantEmbeddingRetriever(
+    document_store: QdrantDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    scale_score: bool = False,
+    return_embedding: bool = False,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+)
+```
+
+**WeaviateEmbeddingRetriever**
+```python
+WeaviateEmbeddingRetriever(
+    document_store: WeaviateDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    distance: Optional[float] = None,    # max vector distance threshold
+    certainty: Optional[float] = None,   # min cosine similarity [0,1]
+    move_to: Optional[Dict] = None,
+    move_away_from: Optional[Dict] = None,
+)
+```
+
+**QdrantHybridRetriever**
+```python
+QdrantHybridRetriever(
+    document_store: QdrantDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    return_embedding: bool = False,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+)
+# Inputs: query_embedding(List[float]) + query_sparse_embedding(SparseEmbedding)
+# SparseEmbedding: { indices: List[int], values: List[float] }
+```
+
+**AzureAISearchHybridRetriever**
+```python
+AzureAISearchHybridRetriever(
+    document_store: AzureAISearchDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    # Uses Reciprocal Rank Fusion (RRF) in Azure for BM25+vector blend
+)
+```
+
+**OpenSearchHybridRetriever**
+```python
+OpenSearchHybridRetriever(
+    document_store: OpenSearchDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    normalization_technique: str = "min_max",      # or "l2"
+    combination_technique: str = "arithmetic_mean", # or "geometric_mean", "harmonic_mean"
+    combination_weights: Optional[List[float]] = None,  # [bm25_weight, embedding_weight]
+)
+```
+
+**WeaviateHybridRetriever**
+```python
+WeaviateHybridRetriever(
+    document_store: WeaviateDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    alpha: float = 0.5,   # 0=BM25 only, 1=vector only, 0.5=equal blend
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+    fusion_type: Optional[str] = None,  # "rankedFusion" | "relativeScoreFusion"
+)
+```
+
+**QdrantSparseEmbeddingRetriever**
+```python
+QdrantSparseEmbeddingRetriever(
+    document_store: QdrantDocumentStore,
+    filters: Optional[Dict] = None,
+    top_k: int = 10,
+    scale_score: bool = False,
+    return_embedding: bool = False,
+    filter_policy: FilterPolicy = FilterPolicy.REPLACE,
+)
+# Input: query_sparse_embedding(SparseEmbedding) -- SPLADE / BM25s vectors
+```
+
+**FilterRetriever**
+```python
+FilterRetriever(
+    document_store: BaseDocumentStore,
+    filters: Optional[Dict] = None,
+    # No vector search. Metadata filter operators: eq, ne, gt, gte, lt, lte, in, not in
+    # Logical: AND, OR, NOT (nested dicts)
+)
+```
+
+**AutoMergingRetriever**
+```python
+AutoMergingRetriever(
+    document_store: BaseDocumentStore,
+    threshold: float = 0.5,  # fraction of child matches to trigger parent return
+)
+# Input: matched_documents(List[Document]) from any upstream retriever
+# Output: documents -- swaps child chunks for parent if threshold met
+```
+
+**SentenceWindowRetriever**
+```python
+SentenceWindowRetriever(
+    document_store: BaseDocumentStore,
+    window_size: int = 3,  # sentences before + after the matched sentence
+)
+# Input: retrieved_documents(List[Document])
+# Output: context_windows(List[Document]) with expanded content field
+```
+
+**MultiQueryTextRetriever**
+```python
+MultiQueryTextRetriever(
+    retriever: InMemoryBM25Retriever,  # any BM25-compatible retriever
+    llm: BaseChatGenerator,
+    query_count: int = 4,              # number of sub-queries to generate
+    include_original: bool = True,     # prepend original query to generated set
+    system_prompt: Optional[str] = None,
+)
+# LLM generates query_count rephrasings; runs N BM25 retrievals; deduplicates
+```
+
+**SnowflakeTableRetriever**
+```python
+SnowflakeTableRetriever(
+    user: str,
+    account: str,
+    api_key: Secret,          # Haystack Secret (env var, AWS SM, Azure KV)
+    database: Optional[str] = None,
+    db_schema: Optional[str] = None,
+    warehouse: Optional[str] = None,
+    login_timeout: Optional[int] = None,
+)
+# Input: query(str) -- NL2SQL via companion LLM or raw SQL
+# Output: documents(List[Document]) -- each row as Document
+```
+
+**FilterPolicy enum:**
+```python
+class FilterPolicy(Enum):
+    REPLACE = "replace"  # component filter replaces init filter
+    MERGE   = "merge"    # logical AND merge of init + runtime filters
+```
+
 #### 1.3.4 Embedders
 
 **Text Embedders (query-time):**
@@ -607,21 +876,73 @@ interface LanguageModelV4 {
 
 **DataStreamProtocol:** Wire format for streaming custom data alongside text.
 
+Source: https://ai-sdk.dev/docs/ai-sdk-ui/stream-protocol
+
+The protocol is **newline-delimited lines**, each line formatted as:
+```
+{type_code}:{json_value}\n
+```
+
+**Complete type code table:**
+
+| Code | Type | Payload shape | Notes |
+|------|------|--------------|-------|
+| `0` | text-delta | `"chunk string"` | Raw text token |
+| `1` | tool-call | `{toolCallId, toolName, args}` | Complete tool invocation |
+| `2` | data | `[...JSONValue]` | Array of arbitrary JSON |
+| `3` | error | `"error message string"` | Error from server |
+| `8` | message-annotations | `[...JSONValue]` | Annotation array |
+| `9` | tool-call-streaming-start | `{toolCallId, toolName}` | Begin streaming args |
+| `a` | tool-call-delta | `{toolCallId, argsTextDelta}` | Partial args chunk |
+| `b` | tool-result | `{toolCallId, result}` | Tool execution result |
+| `c` | step-start | `{messageId, stepType}` | stepType: "initial"\|"continue" |
+| `d` | finish-step | `{finishReason, usage?, isContinued}` | Per-step completion |
+| `e` | finish-message | `{finishReason, usage}` | Full message done |
+| `f` | file | `{url, mediaType}` | File output |
+| `g` | reasoning | `"reasoning text chunk"` | Extended thinking |
+| `h` | source | `{sourceType, id, url, title, ...}` | Citation source |
+
+**Wire format examples:**
+
+```
+0:"Hello"
+0:" world"
+9:{"toolCallId":"abc","toolName":"get_weather"}
+a:{"toolCallId":"abc","argsTextDelta":"{\"city\":\""}
+a:{"toolCallId":"abc","argsTextDelta":"Paris\"}"}
+1:{"toolCallId":"abc","toolName":"get_weather","args":{"city":"Paris"}}
+b:{"toolCallId":"abc","result":{"temp":22,"unit":"C"}}
+0:"The weather in Paris is 22C."
+d:{"finishReason":"tool-calls","usage":{"promptTokens":45,"completionTokens":12},"isContinued":false}
+e:{"finishReason":"stop","usage":{"promptTokens":78,"completionTokens":38}}
+```
+
+**Server-side helpers:**
+
 ```typescript
-// Server: attach custom data to stream
-result.toUIMessageStream({
+// Stream to Response
+return result.toUIMessageStreamResponse();  // Content-Type: text/event-stream
+
+// Pipe to Node.js response
+result.pipeUIMessageStreamToResponse(res, {
+  headers: { "X-Custom": "value" },
   sendReasoning: true,
   sendSources: true,
-  onError: (error) => string,
-})
+  onError: (error) => error.message,  // returns string to send as error part
+});
 
-// Client: consume via useChat hook
-useChat({
-  onToolCall: async ({ toolCall }) => result,
-  onFinish: (message) => void,
-  onData: (data) => void,
-})
+// Manual data appending
+const dataStream = createDataStream({
+  execute: async (writer) => {
+    writer.writeData({ progress: 50 });        // type 2
+    writer.writeMessageAnnotation({ id: "x" }); // type 8
+  },
+});
 ```
+
+**Text stream protocol (simpler alternative):**
+Plain `text/plain` with `streamProtocol: "text"` in useChat.
+No tool calls, no data parts -- raw text only.
 
 **Stream part types:** text-delta, tool-call, tool-call-streaming-start, tool-call-delta, tool-result, reasoning, source, file, data, error, finish, step-start, step-finish.
 

@@ -2,21 +2,27 @@
 id: atom_15_qwen_deepseek
 kind: knowledge_card
 title: "Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs"
-version: "1.0.0"
+version: "1.1.0"
 quality: 8.9
-tags: [qwen, deepseek, tool-calling, function-calling, mcp, reasoning, agent-framework]
+tags: [qwen, deepseek, tool-calling, function-calling, mcp, reasoning, agent-framework, hermes, strict-mode, agentic-training]
 pillar: P01
 domain: llm-agent-tooling
-density_score: 0.92
+density_score: 0.95
 sources:
   - https://github.com/QwenLM/Qwen-Agent
   - https://api-docs.deepseek.com/guides/tool_calls
   - https://api-docs.deepseek.com/guides/thinking_mode
+  - https://api-docs.deepseek.com/guides/reasoning_model
   - https://deepwiki.com/QwenLM/Qwen-Agent
+  - https://deepwiki.com/QwenLM/Qwen-Agent/4.4-mcp-integration
   - https://deepwiki.com/QwenLM/Qwen3/4.3-function-calling-and-tool-use
   - https://chat-deep.ai/docs/deepseek-tool-calls/
   - https://api-docs.deepseek.com/news/news251201
   - https://huggingface.co/deepseek-ai/DeepSeek-V3.2
+  - https://arxiv.org/abs/2512.02556
+  - https://docs.vllm.ai/en/latest/features/tool_calling/
+  - https://github.com/vllm-project/vllm/issues/19056
+  - https://github.com/NousResearch/Hermes-Function-Calling
 ---
 
 # Atomic Research 15: Qwen-Agent + DeepSeek Tool-Calling Specs
@@ -108,6 +114,43 @@ Tool responses:
 {result_data}
 </tool_response>
 ```
+
+#### 1.4.1 Hermes NousFnCallPrompt: Full System Prompt Format
+
+The NousFnCallPrompt injects a structured preamble into the system message:
+
+```
+You are a function-calling AI. Tools are provided inside <tools>...</tools>.
+When appropriate, call a tool by emitting a <tool_call>{...}</tool_call> JSON object.
+After a tool responds (as <tool_response>), continue reasoning inside <think>
+and produce the final answer.
+```
+
+**Parallel calls** are emitted as consecutive `<tool_call>` blocks in a single assistant turn:
+```xml
+<tool_call>
+{"name": "fn_a", "arguments": {"x": 1}}
+</tool_call>
+<tool_call>
+{"name": "fn_b", "arguments": {"y": 2}}
+</tool_call>
+```
+
+**vLLM serving command** with Hermes parser enabled:
+```bash
+vllm serve Qwen/Qwen3-8B --enable-auto-tool-choice --tool-call-parser hermes
+```
+
+**Known tokenizer bug (vLLM issue #19056)**: Qwen3's tokenizer has a special token `}` with
+token ID 9207. The Hermes streaming parser (`extract_tool_calls_streaming`) truncates on this
+token, producing broken JSON output in tool calls. Workaround: use non-streaming mode or
+patch the parser to handle ID 9207 as literal `}`.
+
+**ChatML message roles for tool flow**:
+- `<|im_start|>system` -- tool schema injection
+- `<|im_start|>assistant` -- tool call emission (`<tool_call>`)
+- `<|im_start|>tool` -- tool response injection (`<tool_response>`)
+- Token ID 151668 -- closing `</think>` tag; parser uses this to split reasoning from output
 
 ### 1.5 reasoning_content Field
 

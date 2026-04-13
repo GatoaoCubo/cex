@@ -247,6 +247,70 @@ density_score: null
 | **Option Shuffling** | Deterministic per-item seeds to counter position bias |
 | **CANNOT_ASSESS Verdict** | Native abstention handling (SKIP/ZERO/PARTIAL/FAIL) |
 
+### 3.6b AutoRubric Implementation Pipeline (arxiv 2603.00077)
+
+Five-stage pipeline for automatic rubric construction and application:
+
+**Stage 1 -- Criterion Generation**
+
+Input: task_description + reference_outputs (3-5 gold samples).
+Prompt instructs LLM to generate criteria with type (Binary/Ordinal/Nominal), weight, and 3 anchored examples.
+Output: JSON array of criterion objects.
+
+**Stage 2 -- Criterion Typing and Weight Assignment**
+
+| Criterion Type | Score Range | Aggregation Rule | Typical Weight |
+|----------------|-------------|------------------|----------------|
+| Binary | {0, 1} | MET=1, UNMET=0, CANNOT_ASSESS=skip | 1.0 (blocking) or 0.5 |
+| Ordinal (3-level) | {0, 0.5, 1} | poor=0, fair=0.5, good=1.0 | 0.3-0.7 |
+| Ordinal (5-level) | {0, 0.25, 0.5, 0.75, 1} | linear normalization | 0.2-0.5 |
+| Nominal | varies | category_weight[label] | 0.1-0.3 |
+
+**Stage 3 -- Per-Criterion Atomic Evaluation**
+
+One LLM call per criterion (prevents halo conflation).
+Critical: verdict-balanced few-shot (1 positive + 1 negative + 1 edge case minimum).
+Reasoning chains in examples INCREASE hallucination rate by 12% -- use verdicts only (AutoRubric ablation).
+
+**Stage 4 -- Score Aggregation Formula**
+
+```
+score = max(0, min(1, sum(v_i * w_i) / sum(w_i for w_i > 0 if v_i != SKIP)))
+```
+
+Where:
+- v_i = normalized verdict value for criterion i
+- w_i = weight (positive=reward, negative=penalty for anti-patterns)
+- Denominator: sum of POSITIVE weights only (penalties subtract via negative v*w)
+- CANNOT_ASSESS verdicts: handled per policy (SKIP/ZERO/PARTIAL/FAIL)
+
+Concrete example with 3 criteria (factual_accuracy=MET, completeness=fair, verbosity=penalty):
+```
+score = max(0, min(1, (1.0*2.0 + 0.5*1.0 + (-1.0)*0.5) / (2.0+1.0)))
+      = max(0, min(1, 2.0 / 3.0))
+      = 0.667
+```
+
+**Stage 5 -- Multi-Judge Ensemble Options**
+
+| Strategy | Formula | Use When |
+|----------|---------|----------|
+| majority_vote | mode(verdicts) | Classification tasks |
+| mean_score | mean(scores) | Regression scoring |
+| conservative | min(scores) | Safety-critical decisions |
+| optimistic | max(scores) | Creative output evaluation |
+| weighted | sum(score_j * weight_j) / sum(weights) | Heterogeneous judge panel |
+
+**Reliability Benchmarks (AutoRubric paper)**
+
+| Criterion Type | Cohen's Kappa | Accuracy vs Human |
+|----------------|---------------|-------------------|
+| Binary | 0.642 | 87.3% |
+| Ordinal (3-5 levels) | 0.549-0.719 | 76-83% |
+| Nominal | variable | 81.2% overall |
+
+Failure mode: asymmetric recall on rare nominal categories -- 18% lower recall on minority class.
+
 ### 3.7 Psychometric Reliability Metrics
 
 | Metric | Purpose |
@@ -348,25 +412,78 @@ density_score: null
 
 ### 5.1 CLASSic Framework (ICLR 2025 Workshop)
 
-| Dimension | Sub-Metrics |
-|-----------|-------------|
-| **Cost (C)** | Cost per task, infrastructure costs, token consumption, scaling costs |
-| **Latency (L)** | Time to first response, planning latency, execution latency, throughput |
-| **Accuracy (A)** | Task completion rate, step-level accuracy, precision/recall, reflection accuracy |
-| **Security (S)** | Threat detection rate, session security, tool/data security, model integrity, policy compliance |
-| **Stability (S)** | Response consistency, error rates, cross-task consistency, dynamic workload performance |
+| Dimension | Sub-Metrics | Raw Metric Type |
+|-----------|-------------|-----------------|
+| **Cost (C)** | Cost per task, infrastructure costs, token consumption, scaling costs | USD or token count |
+| **Latency (L)** | Time to first response, planning latency, execution latency, throughput | ms or tasks/sec |
+| **Accuracy (A)** | Task completion rate, step-level accuracy, precision/recall, reflection accuracy | 0.0-1.0 |
+| **Security (S)** | Threat detection rate, session security, tool/data security, model integrity, policy compliance | 0.0-1.0 |
+| **Stability (S)** | Response consistency, error rates, cross-task consistency, dynamic workload performance | 0.0-1.0 |
+
+**CLASSic Composite Score**
+
+Each dimension is min-max normalized to [0, 1] before aggregation. Latency and Cost are inverted (lower is better):
+
+```
+C_norm = 1 - (C_raw - C_min) / (C_max - C_min)        # invert: lower cost = better
+L_norm = 1 - (L_raw - L_min) / (L_max - L_min)        # invert: lower latency = better
+A_norm = (A_raw - A_min) / (A_max - A_min)             # higher accuracy = better
+S_sec_norm = (S_sec_raw - S_min) / (S_max - S_min)     # higher security = better
+S_stab_norm = (S_stab_raw - S_min) / (S_max - S_min)  # higher stability = better
+
+CLASSic = w_C*C_norm + w_L*L_norm + w_A*A_norm + w_S*S_sec_norm + w_Stab*S_stab_norm
+```
+
+Recommended enterprise weights (typical production deployment):
+- w_A = 0.40 (accuracy dominates for task-based agents)
+- w_S = 0.25 (security elevated for enterprise)
+- w_Stab = 0.20 (stability for SLA compliance)
+- w_C = 0.08 (cost secondary when accuracy is paramount)
+- w_L = 0.07 (latency secondary for async tasks)
+
+Agentic use case adjustments: real-time customer support -> swap A/L weights; batch analytics -> lower w_L.
 
 ### 5.2 CLEAR Framework (arxiv 2511.14136)
 
-| Dimension | Key Metric | Formula / Threshold |
-|-----------|-----------|---------------------|
-| **Cost (C)** | Cost-Normalized Accuracy (CNA) | Accuracy / Cost x 100 |
-| **Latency (L)** | SLA Compliance Rate (SCR) | % tasks within time threshold (3s support, 30s code) |
-| **Efficacy (E)** | Domain-specific accuracy | Functional correctness varies by use case |
-| **Assurance (A)** | Policy Adherence Score (PAS) | 1 - (violations / total policy-critical actions) |
-| **Reliability (R)** | Pass@k | Probability of k consecutive successes (pass@8 >= 80% for mission-critical) |
+| Dimension | Key Metric | Formula |
+|-----------|-----------|---------|
+| **Cost (C)** | Cost-Normalized Accuracy (CNA) | CNA = (Accuracy / TotalCost) * 100 |
+| **Latency (L)** | SLA Compliance Rate (SCR) | SCR = count(tasks <= threshold) / total_tasks |
+| **Efficacy (E)** | Domain-specific accuracy | E = correct_tasks / total_tasks (domain-specific) |
+| **Assurance (A)** | Policy Adherence Score (PAS) | PAS = 1 - (policy_violations / total_policy_critical_actions) |
+| **Reliability (R)** | Pass@k | Pass@k = 1 - (1 - p)^k where p = per-attempt success probability |
 
-**Composite**: CLEAR = wC*Cnorm + wL*Lnorm + wE*E + wA*A + wR*R (default 0.2 each)
+**SLA Thresholds by domain** (CLEAR paper defaults):
+- Customer support: <= 3 seconds
+- Code generation: <= 30 seconds
+- Data analysis: <= 120 seconds
+- Batch processing: <= 600 seconds
+
+**Pass@k Targets**:
+- Pass@1 >= 0.90: standard production gate
+- Pass@8 >= 0.80: mission-critical (nuclear, medical, financial)
+- Pass@3 >= 0.95: developer tooling
+
+**CLEAR Composite Formula**
+
+```
+CLEAR = w_C * normalize(C) + w_L * normalize(L) + w_E * E + w_A * A + w_R * R
+```
+
+Default weights: 0.20 each (equal weighting = no domain assumption).
+Normalization per dimension: min-max over evaluation set. Cost and Latency inverted (lower is better).
+
+**CLEAR vs CLASSic Comparison**
+
+| Aspect | CLASSic | CLEAR |
+|--------|---------|-------|
+| Primary focus | Production operations | Enterprise deployment readiness |
+| Security handling | Explicit dimension (S) | Embedded in Assurance (A) |
+| Reliability | Part of Stability | Explicit dimension (R) via Pass@k |
+| Cost metric | Raw cost score | CNA (normalized by accuracy) |
+| Latency metric | Raw latency | SCR (SLA compliance binary) |
+| Weight default | Unequal (A=0.40) | Equal (0.20 each) |
+| Best for | Operating deployed agents | Selecting/certifying new agents |
 
 ### 5.3 Four-Pillar Agent Assessment (arxiv 2512.12791)
 

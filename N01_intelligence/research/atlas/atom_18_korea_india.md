@@ -104,6 +104,27 @@ Full internal configuration (from HuggingFace model card):
 
 Key contribution: controllable reasoning via optional "thinking mode" -- the model can switch between fast inference and deep chain-of-thought on demand. Agent tool-use at 87% on domain-specific Korean benchmark signals production-grade capability for Korean enterprise.
 
+#### 1.2b HyperCLOVA X Think: Post-Training Pipeline
+
+**Technical report**: arXiv:2601.03286 (HyperCLOVA X 32B Think, Jan 2026)
+
+Post-training proceeds in two stages:
+
+| Stage | Goal | Method |
+|-------|------|--------|
+| Stage 1: Multimodal SFT | Inject vision-language capability | Supervised fine-tuning on vision+text pairs |
+| Stage 2: RL alignment | Reasoning + agentic + human alignment | Multiple RL methods (paper details) |
+
+The staged approach mirrors o1/DeepSeek-R1: capability injection via SFT first, then alignment refinement via RL. Not end-to-end -- SFT grounds multimodal understanding before RL begins.
+
+**KCSAT 2026**: Evaluated on Korea's national college entrance exam (Math, 2026 version) -- requires integrating textual instructions with complex diagrams. Result: top 4% of human examinees. More rigorous than MATH-500 because it tests visual+textual co-reasoning on real examination material.
+
+**Artificial Analysis Intelligence Index**: Score 44 -- above EXAONE 4.0 32B (prior Korean leader). Index aggregates across reasoning, coding, and instruction-following.
+
+**Additional size variant**: 14B (HyperCLOVAX-SEED-Think-14B) for cost-sensitive deployments.
+
+**tau-Bench Telecom specifics**: Multi-step simulation of telecom customer service -- booking, troubleshooting, escalation. 87% is currently the highest published score among Korean models on this domain-specific agent benchmark.
+
 ### 1.3 Upstage Solar Pro3
 
 | Spec | Value |

@@ -154,18 +154,71 @@ Three dimensions, eight quadrants:
 | **Form** | Parametric vs Non-Parametric | Embedded in weights vs stored externally |
 | **Time** | Short-Term vs Long-Term | Session-scoped vs cross-session |
 
-### Complete Eight-Quadrant Map
+### Complete Eight-Quadrant Map with Implementation Examples
 
-| Q | Object | Form | Time | Role | Function |
-|---|--------|------|------|------|----------|
-| I | Personal | Non-Parametric | Short-Term | Working Memory | Real-time context supplementation |
-| II | Personal | Non-Parametric | Long-Term | Episodic Memory | Cross-session personalization |
-| III | Personal | Parametric | Short-Term | Working Memory | Temporarily enhanced understanding |
-| IV | Personal | Parametric | Long-Term | Semantic Memory | Knowledge integration into weights |
-| V | System | Non-Parametric | Short-Term | Working Memory | Complex reasoning scratchpad |
-| VI | System | Non-Parametric | Long-Term | Procedural Memory | Historical experiences for refinement |
-| VII | System | Parametric | Short-Term | Working Memory | KV-Cache, prompt caching |
-| VIII | System | Parametric | Long-Term | Semantic Memory | Foundational knowledge base (pre-training) |
+| Q | Object | Form | Time | Role | Real System | Implementation Pattern |
+|---|--------|------|------|------|-------------|----------------------|
+| I | Personal | Non-Parametric | Short-Term | Working Memory | ChatGPT memory injection, MemGPT user-context | Fetch user profile at session start; inject as system prompt prefix block |
+| II | Personal | Non-Parametric | Long-Term | Episodic Memory | Generative Agents (Park 2023), Claude memory tool | Vector store of (episode_text, timestamp, importance); retrieved by embedding sim + recency decay |
+| III | Personal | Parametric | Short-Term | Working Memory | LoRA hot-swap per user, prefix tuning | Load per-user LoRA adapter (r=8, ~1MB) at session init; unload after session |
+| IV | Personal | Parametric | Long-Term | Semantic Memory | Personalized fine-tuning, EWC continual learning | Nightly LoRA fine-tune on user history; merge with EWC regularization to prevent forgetting |
+| V | System | Non-Parametric | Short-Term | Working Memory | ReAct trajectory, CoT scratchpad, Reflexion buffer | Append (obs, act) pairs to in-context buffer; compress oldest 30% when >50% context budget |
+| VI | System | Non-Parametric | Long-Term | Procedural Memory | Voyager skill lib, Claude Code /skills, CEX builders | File store of SKILL.md + scripts; TF-IDF/embedding index; top-k retrieved on task NL match |
+| VII | System | Parametric | Short-Term | Working Memory | KV-cache, Anthropic prompt cache, vLLM paged attn | Cache fixed prefix tokens; reuse KV pairs across requests; 5-min TTL; ~90% latency reduction |
+| VIII | System | Parametric | Long-Term | Semantic Memory | GPT-4 weights, RLHF policy, continual pre-training | Pre-training encodes world knowledge; update via fine-tune or RLHF; frozen at deployment |
+
+### Per-Quadrant Deep Implementation Notes
+
+#### Q1 -- Personal, Non-Parametric, Short-Term (Session User Profile)
+- **Storage**: Key-value store `{user_id: {name, preferences, timezone, format_prefs, recent_topics}}`
+- **Retrieval trigger**: Every new session start; optional re-injection on topic-shift detection
+- **Token cost**: ~200-500 tokens per profile after compression
+- **MemGPT implementation**: `conversation_search()` + `archival_memory_search()` inject ranked user facts before each LLM call
+- **CEX equivalent**: CLAUDE.md brand context + `.cex/runtime/decisions/decision_manifest.yaml`
+
+#### Q2 -- Personal, Non-Parametric, Long-Term (Episodic/Personalization Store)
+- **Write formula**: `if LLM.importance_score(episode) >= 7: store(embed(episode), timestamp, score, user_id)`
+- **Read formula**: `score = 0.3 * recency_decay(t) + 0.5 * cos_sim(embed(query), embed(episode)) + 0.2 * importance`
+  where `recency_decay(t) = exp(-lambda * hours_since_creation)`
+- **Generative Agents**: Lambda=0.995/hour; top-3 by combined score injected as memory stream
+- **Scale**: Efficient up to ~100K episodes per user with HNSW index; beyond that needs sharding
+
+#### Q3 -- Personal, Parametric, Short-Term (Per-User Adapter)
+- **Mechanism**: LoRA adapter (rank=8, ~1MB) per user; stored in model registry
+- **Load latency**: ~50ms for adapter merge; unload is free (in-memory only)
+- **Tradeoff vs Q1**: Q3 is non-interpretable but captures implicit patterns Q1 misses; 10x storage cost
+- **Production blocker**: Cold-start (no adapter for new users); privacy isolation requirements
+
+#### Q4 -- Personal, Parametric, Long-Term (Personalized Weights)
+- **Mechanism**: EWC regularization: `L = L_task + lambda * sum(F_i * (theta_i - theta_i*)^2)` where F_i = Fisher info
+- **Update schedule**: Nightly batch; requires 100+ new interactions before fine-tune worthwhile
+- **Privacy risk**: Personal facts encoded in shared weight space; deletion requires unlearning (TOFU benchmark)
+- **Alternative**: Isolated LoRA adapters per user (Q3 + persistence = Q4 without weight sharing risk)
+
+#### Q5 -- System, Non-Parametric, Short-Term (Reasoning Scratchpad)
+- **Formats**: `<think>...</think>` blocks (Claude), `reasoning_effort` output (OpenAI o-series), CoT prefixes
+- **Buffer management**: Sliding window (keep last N turns) or importance-sampled compression
+- **Reflexion pattern**: Evaluator produces verbal feedback -> stored in scratchpad -> Actor uses on retry
+- **CEX equivalent**: N07's 8F reasoning trace in context during task execution
+
+#### Q6 -- System, Non-Parametric, Long-Term (Skill Library / Procedural Store)
+- **File structure**: `skills/{skill_name}/SKILL.md` (L1 metadata) + `run.py` (L2) + `appendix/` (L3)
+- **Index**: TF-IDF or sentence-transformer embeddings over skill descriptions
+- **Voyager retrieval**: `query_program_info(task_description)` -> GPT-4 code generation from top-5 skills
+- **Acquisition**: Human-authored (62k stars), RL-discovered (SAGE: 8.9% improvement, 59% fewer tokens), autonomous synthesis
+- **CEX equivalent**: `archetypes/builders/{kind}-builder/` (13 ISOs = L1/L2/L3 progressive disclosure)
+
+#### Q7 -- System, Parametric, Short-Term (KV-Cache / Prompt Cache)
+- **Anthropic implementation**: Cache after min 1024 tokens; 5-min TTL; cache_control breakpoint API
+- **Cost**: Cached tokens = 10% of input price; write cost = same as uncached; break-even at 2+ reuses
+- **vLLM paged attention**: Pages of KV blocks (typically 16 tokens/page); LRU eviction under memory pressure
+- **Best practice**: Put static system prompt + instructions first (cache-stable); dynamic user content last
+
+#### Q8 -- System, Parametric, Long-Term (Foundation Knowledge)
+- **Encoding**: Attention patterns in transformer weights encode factual associations at training time
+- **Probe accuracy**: GPT-4 class models recall factual associations with ~85% accuracy on PopQA (no retrieval)
+- **Limitation**: Knowledge cutoff; hallucination on low-frequency facts; cannot be updated at inference
+- **Update paths**: Full fine-tune (expensive, catastrophic forgetting risk) vs continual pre-training with EWC vs RAG (Q2/Q6 preferred for dynamic facts)
 
 ---
 

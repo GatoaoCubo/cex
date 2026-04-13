@@ -135,6 +135,102 @@ Long-running autonomous plans that execute over days/weeks. The agent breaks com
 
 **CEX mapping**: `/mission` + `cex_mission_runner.py` + overnight loops. CEX's mission system supports multi-wave autonomous execution. Coze's "Agent Plan" is the consumer-facing equivalent.
 
+**Agent Plan state lifecycle:**
+
+| State | Description | Trigger |
+|-------|-------------|---------|
+| `draft` | Plan generated, awaiting user approval | Bot receives complex multi-step objective |
+| `approved` | User reviewed and accepted plan | User clicks "Approve" or sends confirmation |
+| `executing` | Bot autonomously executing task queue | After approval |
+| `paused` | Waiting for user input at a Question node | Bot hits ambiguity requiring human decision |
+| `completed` | All tasks finished, final report sent | All subtasks resolved |
+| `failed` | Unrecoverable error | Tool timeout, permission denied, model error |
+
+Key implementation characteristics:
+- Plans survive session boundaries (state persisted server-side)
+- Proactive push notifications when milestones complete
+- Strategy adaptation on feedback: if a subtask fails, the planner re-decomposes
+- Integration with Coze Skills: each plan step can invoke a marketplace skill module
+
+**Comparison vs CEX mission runner:**
+
+| Dimension | Coze Agent Plan | CEX cex_mission_runner.py |
+|-----------|----------------|--------------------------|
+| Persistence | Cross-session (cloud DB) | In-process (wave polling) |
+| Human gate | Question node (mid-plan) | GDP at F4 (pre-execution) |
+| Proactive updates | Push notifications | git log + signal polling |
+| Failure recovery | Re-decompose subtask | Quality gate retry (max 2) |
+| Session scope | Unlimited (days/weeks) | Session-scoped (hours) |
+
+### 2.13 Coze Studio Self-Hosting Architecture
+
+Open-sourced July 25, 2025 under Apache 2.0. Coze Studio is the self-hosted edition of the Coze platform.
+Source: https://test-news.aibase.com/news/19989
+
+**Technology stack:**
+
+| Layer | Technology |
+|-------|-----------|
+| Backend | Go + Hertz framework (microservices, DDD) |
+| Frontend | React + TypeScript monorepo (Rush + PNPM) |
+| Data | PostgreSQL/MySQL + Redis + Elasticsearch |
+| Deployment | Docker Compose (coze-server + db + redis + elasticsearch) |
+| Min hardware | 2 cores, 4 GB RAM |
+
+**Service decomposition (Docker Compose):**
+```
+coze-server   -- Main application server (Go/Hertz)
+db            -- Relational database (PostgreSQL)
+redis         -- Session + cache layer
+elasticsearch -- Knowledge base full-text + vector search
+```
+
+**Coze Loop** (co-released): Evaluation and testing harness for bots. Provides dataset-driven batch testing, quality scoring, and regression tracking. Closest CEX equivalent: `cex_score.py` + `cex_quality_monitor.py`.
+
+**CEX mapping**: CEX has no self-hosting web UI. Coze Studio fills the "visual workflow editor" gap that CEX's YAML-first approach leaves open. The DDD microservices architecture mirrors CEX's pillar-based separation of concerns.
+
+### 2.14 Plugin Development API
+
+Coze defines a **Plugin** as a named collection of **Tools**. Each Tool is one API endpoint.
+Source: https://docs.coze.com/guides/plugin_tools
+
+**Plugin creation flow:**
+1. Register plugin (name, description, icon)
+2. Add tools -- each tool maps to one REST endpoint (URL + method + auth)
+3. Define input/output schema (JSON Schema)
+4. Set auth: none / API key / OAuth2
+
+**Local Plugin via API** (self-hosted / test mode):
+- Run a local HTTP server that Coze calls via ngrok tunnel or public URL
+- Allows testing tools locally before publishing to Plugin Store
+- Auth via shared secret header
+- Source: https://docs.coze.com/guides/use_local_plugin
+
+**Python SDK (`coze-py`) -- programmatic access:**
+Source: https://github.com/coze-dev/coze-py
+
+```python
+from cozepy import Coze, TokenAuth
+
+client = Coze(auth=TokenAuth(token="PAT_xxx"), base_url="https://api.coze.com")
+
+# Trigger a workflow run
+run = client.workflows.runs.create(
+    workflow_id="wf_xxx",
+    parameters={"input": "user text"}
+)
+
+# Stream chat with a bot
+for event in client.chat.stream(
+    bot_id="bot_xxx",
+    user_id="user_001",
+    additional_messages=[{"role": "user", "content": "analyze this"}]
+):
+    print(event.message.content)
+```
+
+**CEX mapping**: `api_client` (P04) + `mcp_server` (P04). The Plugin auth model (API key / OAuth2 / local) is richer than CEX's current MCP auth pattern. `coze-py` is the programmatic surface CEX nuclei would use to call Coze bots as tools.
+
 ## 3. XAgent -- Core Concepts
 
 ### 3.1 Dispatcher

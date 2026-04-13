@@ -693,5 +693,300 @@ The SDK implements five established multi-agent patterns:
 
 ---
 
-*Research conducted 2026-04-13. SDK version v0.13.6.*
+---
+
+## 12. Breaking Changes Changelog (v0.1 -- v0.13)
+
+Source: https://openai.github.io/openai-agents-python/release/ + GitHub releases
+
+| Version | Breaking Change | Migration |
+|---------|----------------|-----------|
+| v0.1.0 | `MCPServer.list_tools()` signature expanded -- added required `run_context` and `agent` params | Update any custom MCP server subclasses |
+| v0.2.0 | Methods accepting `Agent` now accept `AgentBase` (typing-only change) | Adjust type hints if using strict typing |
+| v0.3.0 | Realtime API migrated to `gpt-realtime` model and GA interface | Update RealtimeAgent model strings |
+| v0.4.0 | `openai` package v1.x no longer supported -- requires `openai>=2.0` | `pip install "openai>=2.0"` |
+| v0.6.0 | Handoff history now packaged as single assistant message; default transcript includes introductory context before conversation block | Audit handoff history consumers |
+| v0.7.0 | Nested handoff history no longer default -- was enabled, now opt-in | Add `RunConfig(nest_handoff_history=True)` to restore |
+| v0.7.0 | `reasoning.effort` default changed to `"none"` for `gpt-5.1`/`gpt-5.2` (was `"low"`) | Set `model_settings=ModelSettings(reasoning={"effort":"low"})` explicitly if needed |
+| v0.8.0 | Sync function tools now run via `asyncio.to_thread()` on worker threads (not event loop thread) | Migrate thread-local state dependencies to async |
+| v0.8.0 | MCP error handling now configurable -- default returns model-visible error instead of failing run | Set `mcp_config={"failure_error_function": None}` to restore fail-fast |
+| v0.9.0 | Python 3.9 support dropped (EOL) | Upgrade runtime to Python >= 3.10 |
+| v0.9.0 | `Agent#as_tool()` return type narrowed from `Tool` to `FunctionTool` | Update type annotations that relied on broader `Tool` union |
+| v0.10.0 -- v0.13.x | No public-interface breaking changes | -- |
+
+**Release cadence note**: Minor version bumps (Y in 0.Y.x) signal possible breaking changes to public non-beta APIs. Pin to 0.Y.x to avoid unintended breaks.
+
+---
+
+## 13. Voice Pipeline -- Full Implementation Reference
+
+### 13.1 VoicePipelineConfig (complete fields)
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `model_provider` | `VoiceModelProvider` | `OpenAIVoiceModelProvider()` | STT + TTS provider |
+| `tracing_disabled` | `bool` | `False` | Disable all pipeline tracing |
+| `tracing` | `TracingConfig \| None` | `None` | Tracing config (reuses main tracing system) |
+| `trace_include_sensitive_data` | `bool` | `True` | Include text content in traces |
+| `trace_include_sensitive_audio_data` | `bool` | `True` | Include audio bytes in traces |
+| `workflow_name` | `str` | `"Voice Agent"` | Trace workflow label |
+| `group_id` | `str` | `gen_group_id()` | Links multiple traces from same conversation |
+| `trace_metadata` | `dict[str, Any] \| None` | `None` | Extra trace metadata |
+| `stt_settings` | `STTModelSettings` | `STTModelSettings()` | Speech-to-text config |
+| `tts_settings` | `TTSModelSettings` | `TTSModelSettings()` | Text-to-speech config |
+
+### 13.2 STTModelSettings
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| `language` | `str \| None` | BCP-47 language code hint (e.g. "en", "pt") |
+| `prompt` | `str \| None` | Context/hint for transcription accuracy |
+| `temperature` | `float \| None` | Randomness in transcription (0.0 = deterministic) |
+| `turn_detection` | `dict \| None` | Activity detection config for StreamedAudioInput |
+
+### 13.3 TTSModelSettings
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| `voice` | `str \| None` | Voice selection (defaults to `DEFAULT_VOICE` constant) |
+| `instructions` | `str \| None` | Extra instructions passed to speech API |
+
+### 13.4 OpenAIVoiceModelProvider (constructor params)
+
+| Parameter | Type | Purpose |
+|-----------|------|---------|
+| `api_key` | `str \| None` | OpenAI API key (falls back to env) |
+| `base_url` | `str \| None` | Custom endpoint URL |
+| `openai_client` | `AsyncOpenAI \| None` | Pre-built client instance |
+| `organization` | `str \| None` | OpenAI organization ID |
+| `project` | `str \| None` | OpenAI project ID |
+
+Methods: `get_stt_model(model_name)` -> `STTModel`, `get_tts_model(model_name)` -> `TTSModel`
+
+### 13.5 OpenAISTTModel (implementation)
+
+| Member | Detail |
+|--------|--------|
+| Constructor | `model: str`, `openai_client: AsyncOpenAI` |
+| `model_name` | Property: returns model string |
+| `transcribe(audio, settings)` | Async: transcribes complete AudioInput, returns text |
+| `create_session(settings)` | Async: creates streaming transcription session for StreamedAudioInput |
+| Output format | Plain text string from Whisper-family models |
+
+Supported models: `whisper-1`, `gpt-4o-audio-preview`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`
+
+### 13.6 OpenAITTSModel (implementation)
+
+| Member | Detail |
+|--------|--------|
+| Constructor | `model: str`, `openai_client: AsyncOpenAI` |
+| `model_name` | Property: returns model string |
+| `run(text, settings)` | Async generator: yields 1024-byte PCM chunks at 24kHz mono |
+| Audio format | PCM signed 16-bit, 24000 Hz, 1 channel |
+
+### 13.7 SingleAgentVoiceWorkflow
+
+`SingleAgentVoiceWorkflow` wraps a single text-based `Agent` for use in a `VoicePipeline`.
+It handles session state, tool integration, and multi-turn handoffs within the voice loop.
+
+```python
+from agents.voice import SingleAgentVoiceWorkflow, VoicePipeline, AudioInput
+
+# Any text agent works -- same as a non-voice agent
+agent = Agent(
+    name="Assistant",
+    instructions="You are a helpful voice assistant. Be concise.",
+    model="gpt-4.1",
+    tools=[get_weather],
+    handoffs=[spanish_agent],   # handoffs work in voice too
+)
+
+pipeline = VoicePipeline(
+    workflow=SingleAgentVoiceWorkflow(agent),
+    config=VoicePipelineConfig(
+        stt_settings=STTModelSettings(language="en"),
+        tts_settings=TTSModelSettings(voice="alloy"),
+    ),
+)
+
+# Push-to-talk mode
+audio_input = AudioInput(buffer=pcm_bytes)
+result = await pipeline.run(audio_input)
+
+# Stream audio output
+async for event in result.stream():
+    if event.type == "voice_stream_event_audio":
+        speaker.write(event.data)       # 1024-byte PCM chunk
+    elif event.type == "voice_stream_event_lifecycle":
+        print(event.event)              # "turn_started" or "turn_ended"
+```
+
+### 13.8 Custom VoiceWorkflow
+
+For multi-agent or conditional voice flows, subclass `VoiceWorkflowBase`:
+
+```python
+from agents.voice import VoiceWorkflowBase, VoiceWorkflowCallbacks
+
+class MyVoiceWorkflow(VoiceWorkflowBase):
+    async def run(self, transcription: str, callbacks: VoiceWorkflowCallbacks):
+        # Route to different agents based on transcription
+        result = await Runner.run(routing_agent, transcription)
+        await callbacks.on_text(result.final_output)
+```
+
+### 13.9 Voice Pipeline Limitations (as of v0.13.6)
+
+- No built-in interruption support for `StreamedAudioInput` (user cannot interrupt mid-speech)
+- `RealtimeAgent` (gpt-realtime-1.5) is a separate path -- does NOT use VoicePipeline
+- Voice tracing spans: `transcription_span`, `speech_span`, `speech_group_span` auto-created
+- Install: `pip install "openai-agents[voice]"` (WebSockets optional dep)
+
+---
+
+## 14. Responses API Integration Map
+
+The Responses API is the primary (recommended) transport for the SDK. Key integration points:
+
+### 14.1 Server-Managed Conversation State
+
+Two mutually exclusive strategies for cross-turn continuity via OpenAI servers (no local session needed):
+
+| Strategy | Parameter | How It Works |
+|----------|-----------|-------------|
+| Response chaining | `previous_response_id` | Pass `result.last_response_id` to next `Runner.run()` call |
+| Auto-chaining | `auto_previous_response_id=True` | SDK automatically threads response IDs across turns |
+| Named conversation | `conversation_id` | Server creates a named resource; reuse same ID across workers/services |
+
+**Constraint**: `conversation_id` and `previous_response_id` are mutually exclusive. Neither can combine with local `Session` in the same run.
+
+### 14.2 Response-Chaining Pattern
+
+```python
+config = RunConfig(auto_previous_response_id=True)
+
+# Turn 1
+result = await Runner.run(agent, "Hello", run_config=config)
+
+# Turn 2 -- SDK automatically links to previous response
+result = await Runner.run(agent, "Follow up", run_config=config)
+# result.last_response_id tracks the chain
+```
+
+### 14.3 call_model_input_filter
+
+Hook executed immediately before each LLM call. Receives fully prepared items (including session history) and can trim, inject, or transform:
+
+```python
+def trim_old_items(ctx, agent, input_data):
+    # Keep only last 10 items to reduce token burn
+    return ModelInputData(input=input_data.input[-10:])
+
+config = RunConfig(call_model_input_filter=trim_old_items)
+```
+
+### 14.4 Responses API-Only Features
+
+| Feature | Why Responses-only |
+|---------|-------------------|
+| `ToolSearchTool` | Deferred tool loading via server |
+| `conversation_id` | Server-managed conversation resource |
+| `previous_response_id` | Response chain pointer |
+| `store=True` in ModelSettings | Server-side response storage |
+| `truncation="auto"` in ModelSettings | Server drops oldest items on overflow |
+| `HostedMCPTool` | Remote MCP via server-side execution |
+| WebSocket transport | `OpenAIResponsesWSModel` + `ResponsesWebSocketSession` |
+
+### 14.5 Responses API vs Chat Completions Compatibility
+
+| Capability | Responses API | Chat Completions |
+|-----------|---------------|-----------------|
+| SDK recommended | YES | Fallback only |
+| Hosted tools | YES | NO |
+| MCP (hosted) | YES | NO |
+| should_replay_reasoning_content | NO | YES (v0.10+) |
+| Response chaining | YES | NO |
+| Structured outputs | YES | YES |
+| Streaming | YES | YES |
+| Default model | gpt-4.1 | gpt-4.1 |
+
+---
+
+## 15. Third-Party Adapters & Community Extensions
+
+### 15.1 Official Third-Party Adapters (bundled in SDK)
+
+| Adapter | Install | Model Prefix | Status |
+|---------|---------|-------------|--------|
+| LiteLLM | `openai-agents[litellm]` | `litellm/...` | Beta (best-effort) |
+| Any-LLM | `openai-agents[any-llm]` | `any-llm/...` | Beta (best-effort) |
+
+**LiteLLM usage** -- routes to 100+ providers (Anthropic, Gemini, Bedrock, etc.):
+
+```python
+from agents.extensions.models.litellm_provider import LitellmModel
+
+agent = Agent(
+    model=LitellmModel(model="anthropic/claude-3-5-sonnet"),
+    instructions="...",
+)
+# Or via MultiProvider prefix:
+# model="litellm/anthropic/claude-3-5-sonnet"
+```
+
+**Any-LLM usage** -- adapter-managed routing with compatibility layers:
+
+```python
+from agents.extensions.models.anyllm_provider import AnyLLMModel
+
+agent = Agent(model=AnyLLMModel(model="gpt-4o"), instructions="...")
+```
+
+**Recent update (v0.10+)**: `should_replay_reasoning_content` flag on Chat Completions integrations enables reasoning-content replay for DeepSeek/vLLM chains via LiteLLM.
+
+### 15.2 MultiProvider Prefix Routing
+
+`MultiProvider` enables prefix-based routing in a single grid -- different agents can use different providers:
+
+```python
+from agents import MultiProvider
+
+provider = MultiProvider(openai_api_key="...", openai_base_url="...")
+# Use: model="openai/gpt-4.1" or model="litellm/anthropic/claude-3-opus"
+config = RunConfig(model_provider=provider)
+```
+
+Config options: `openai_prefix_mode` ("error" | "ignore"), `unknown_prefix_mode` ("error" | "ignore")
+
+### 15.3 Community Observability Integrations
+
+| Integration | Method | What It Captures |
+|-------------|--------|-----------------|
+| Logfire (Pydantic) | Custom `TracingProcessor` | All spans + agent events |
+| LangSmith | Custom `TracingProcessor` | Traces mapped to LangSmith run format |
+| Braintrust | Custom `TracingProcessor` | Evals + traces |
+| OpenTelemetry | Bridge processor | Standard OTEL spans for Jaeger/Tempo/etc. |
+
+### 15.4 Temporal Workflow Integration
+
+As of 2026, Temporal.io announced an official integration for durable, fault-tolerant agent workflows:
+
+- Source: https://temporal.io/blog/announcing-openai-agents-sdk-integration
+- Wraps `Runner.run()` calls as Temporal Activities
+- Provides retry policies, timeouts, and versioning for multi-step agent pipelines
+- Enables long-running HITL workflows with persistent `RunState` across Temporal checkpoints
+
+### 15.5 Install Extras Matrix
+
+| Extra | Package | What It Enables |
+|-------|---------|----------------|
+| `[voice]` | WebSockets | VoicePipeline + StreamedAudioInput |
+| `[litellm]` | litellm | 100+ provider routing |
+| `[any-llm]` | any-llm | Any-LLM adapter |
+| `[all]` | all above | Full feature set |
+
+---
+
+*Research conducted 2026-04-13. Enriched 2026-04-13 (Wave 2 hydration). SDK version v0.13.6.*
+*Sources: official docs at openai.github.io/openai-agents-python, release page, GitHub releases, Temporal blog.*
 *Next atom candidates: Google ADK (atom_04), LangGraph (atom_05), CrewAI (atom_06).*

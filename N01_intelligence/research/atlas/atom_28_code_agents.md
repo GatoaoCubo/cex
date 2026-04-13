@@ -91,6 +91,47 @@ How agents understand the repository beyond the current file.
 
 The repo map provides **symbol-level visibility** without loading full file content. Aider automatically selects relevant context based on the current chat.
 
+#### 3.1a PageRank Algorithm — Implementation Detail
+
+The repo map is the core reason Aider achieves higher edit accuracy than agents using naive file inclusion. The algorithm runs in 5 stages:
+
+**Stage 1 — Tag extraction via tree-sitter**
+Each supported language has a `tags.scm` query file defining what counts as a *definition* (function/class declared) vs. a *reference* (called/imported). Tree-sitter parses all files into ASTs; the query files extract tagged symbols with line numbers. 130+ languages supported.
+
+**Stage 2 — Multigraph construction**
+A directed multigraph is built:
+- Node = file or symbol
+- Edge = reference from one symbol to another
+- Self-loop edges (weight=0.1) added for definitions with zero references (prevents isolated nodes from being ignored by PageRank)
+
+**Stage 3 — Personalized PageRank via NetworkX**
+```python
+# Simplified from aider/repomap.py
+import networkx as nx
+
+G = build_reference_graph(tags)           # multigraph
+personalization = {f: 1.0 for f in chat_files}  # files in current chat
+ranked = nx.pagerank(G, personalization=personalization, weight="weight")
+# Result: dict {symbol -> float score}, higher = more central
+```
+Files currently in the chat window receive boosted personalization scores, causing their callers/callees to rank higher — context expands outward from current work.
+
+**Stage 4 — Token budget allocation via binary search**
+The ranked symbol list is too large for the context window. Aider uses binary search over the inclusion threshold to find the largest subset that fits the token budget (configurable via `--map-tokens`, default 1024).
+
+**Stage 5 — Compact text output**
+Selected symbols are rendered as a tree outline (file path + function signatures only, no bodies). This gives the LLM structural awareness of 10K+ symbol codebases in ~1K tokens.
+
+| Metric | Value |
+|--------|-------|
+| Languages supported | 130+ |
+| Default map token budget | 1,024 tokens |
+| Graph algorithm | NetworkX `pagerank()` with personalization |
+| Self-loop weight (isolated nodes) | 0.1 |
+| Benchmark improvement vs no map | Significantly higher edit accuracy |
+
+Source: [Building a better repository map with tree-sitter](https://aider.chat/2023/10/22/repomap.html)
+
 ### 3.2 Codebase Indexing (Cursor, Augment)
 
 | Approach | Vendor | Scale | Method |
@@ -166,18 +207,52 @@ How agents execute code safely.
 User starts task in Cursor
   |
   v
-Cloud VM provisioned (Ubuntu)
+Cloud VM provisioned (Ubuntu on AWS)
   |-- Repo cloned from GitHub
-  |-- Dependencies installed
+  |-- Dockerfile applied (custom base image, optional)
+  |-- setup.sh executed (deps installed, services started)
   |-- Agent works on feature branch
   |-- Tests executed in VM
-  |-- Video recording of session
+  |-- Video recording of session (since Feb 2026)
+  |-- Browser / Computer Use access (since Feb 2026)
   |
   v
 PR created on GitHub
   |-- User reviews in Cursor or GitHub
   |-- Up to 8 parallel agents
 ```
+
+#### VM Isolation Specification
+
+| Property | Value |
+|----------|-------|
+| Infrastructure | AWS (Ubuntu-based VMs) |
+| Network | Full internet access (configurable) |
+| Storage | Ephemeral VM disk; output via PR |
+| Configuration file | `.cursor/environment.json` (committable) |
+| Custom base image | Dockerfile supported |
+| Post-checkout setup | `setup.sh` script |
+| Docker-in-Docker | Supported via `sudo service docker start` in setup.sh |
+| Parallel agents | Up to 8 per project |
+| Computer Use | Browser + video recording (Feb 2026 update) |
+| Secrets injection | Via Cursor settings, NOT in Dockerfile |
+
+**`.cursor/environment.json` example:**
+```json
+{
+  "build": {
+    "dockerfile": ".cursor/Dockerfile"
+  },
+  "startScript": ".cursor/setup.sh"
+}
+```
+
+**Key isolation properties vs alternatives:**
+- More persistent than Codex sandbox (VM survives across steps; Codex resets per command)
+- More capable than Claude Code worktree (full OS, not just filesystem branch)
+- Less controllable than OpenHands Docker (no direct container config beyond Dockerfile)
+
+Source: [Cursor Background Agents docs](https://docs.cursor.com/en/background-agent)
 
 ---
 
