@@ -1,0 +1,61 @@
+kind: collaboration
+id: bld_collaboration_cost_budget
+pillar: P12
+llm_function: COLLABORATE
+purpose: How cost-budget-builder works in crews with other builders
+pattern: each builder must know its ROLE in a team, what it RECEIVES and PRODUCES
+quality: null
+title: Collaboration Cost Budget
+version: 1.0.0
+author: n03_builder
+tags:
+- cost_budget
+- builder
+- collaboration
+- P12
+tldr: 'cost-budget-builder crew roles: receives provider list and spend targets, produces budget catalog with alert policy.'
+domain: cost budget construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+my_role_in_crews: 'I am a SPECIALIST. I answer ONE question: "what budget limits and alert thresholds does this scope need,
+  with what reset policy and overage behavior?" I do not configure request throughput (rate_limit_config). I do not define
+  feature toggles. I govern spend so LLM deployments stay within financial boundaries without surprise billing.'
+crew_compositions: ''
+crew_provider_deployment_configuration: "  1. boot-config-builder     -> \"provider startup configuration\"\n  2. rate-limit-config-builder\
+  \ -> \"request throughput limits (RPM/TPM)\"\n  3. cost-budget-builder      -> \"spend limits per provider/model (USD/tokens)\"\
+  \n  4. env-config-builder       -> \"environment variables for provider auth\""
+crew_multi_provider_cost_governance: "  1. agent-builder            -> \"agent definition and model selection\"\n  2. cost-budget-builder\
+  \      -> \"budget per provider used by agent\"\n  3. fallback-chain-builder   -> \"degradation if budget exhausted\"\n\
+  \  4. trace-config-builder     -> \"spend observability and alert channels\""
+crew_finops_setup: "  1. cost-budget-builder      -> \"budget limits and alert thresholds\"\n  2. rate-limit-config-builder\
+  \ -> \"throughput caps\"\n  3. guardrail-builder        -> \"safety rules including spend guardrails\"\n  4. workflow-builder\
+  \         -> \"workflow gates on budget availability\""
+handoff_protocol: ''
+i_receive:
+- 'seeds: scope (global, provider name, model slug), provider list'
+- 'optional: spend targets (USD/month), token volume estimates, alert channels, escalation contacts'
+i_produce:
+- cost_budget artifact (.md + compiled .yaml)
+- 'committed to: `P09_config/examples/p09_cb_{name}.md`'
+i_signal:
+- 'signal: complete (with quality score from QUALITY_GATES)'
+- 'if quality < 8.0: signal retry with failure reasons'
+builders_i_depend_on: '| Builder | Why |
+
+  |---------|-----|
+
+  | boot-config-builder | Reveals which providers are active in the deployment |
+
+  | trace-config-builder | Provides alert channel definitions (webhook URLs, log paths) |'
+builders_that_depend_on_me: '| Builder | Why |
+
+  |---------|-----|
+
+  | fallback-chain-builder | Fallback chain may trigger when cost_budget is exhausted |
+
+  | workflow-builder | Workflow steps gate on budget availability before calling LLM |
+
+  | agent-builder | Agent card references cost_budget for its provider spend governance |
+
+  | guardrail-builder | Spend guardrails reference cost_budget thresholds for enforcement |'

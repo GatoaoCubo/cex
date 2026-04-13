@@ -1,0 +1,90 @@
+kind: config
+id: bld_config_cost_budget
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming conventions, file paths, size limits, operational constraints
+pattern: CONFIG restricts SCHEMA, never contradicts it
+effort: medium
+max_turns: 20
+disallowed_tools: []
+fork_context: null
+hooks:
+  pre_build: null
+  post_build: null
+  on_error: null
+  on_quality_fail: null
+permission_scope: nucleus
+quality: null
+title: Config Cost Budget
+version: 1.0.0
+author: n03_builder
+tags:
+- cost_budget
+- builder
+- config
+- P09
+tldr: 'Naming, path, and size constraints for cost_budget production: p09_cb_{name_slug}.yaml, 3072 bytes max.'
+domain: cost budget construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+naming_convention: '| Scope | Convention | Example |
+
+  |-------|-----------|---------|
+
+  | Artifact files | `p09_cb_{name_slug}.yaml` | `p09_cb_anthropic.yaml` |
+
+  | Builder directory | kebab-case | `cost-budget-builder/` |
+
+  | Frontmatter fields | snake_case | `reset_policy`, `overage_action` |
+
+  | Name slug | snake_case, lowercase, no hyphens | `anthropic`, `global`, `claude_opus` |
+
+  | Provider names | lowercase, official slug | `anthropic`, `openai`, `google`, `ollama` |
+
+  | Model slugs | lowercase with hyphens | `claude-opus-4-6`, `gpt-4o`, `gemini-2.5-pro` |
+
+
+  Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL (use underscores in id).'
+file_paths:
+- 'Output: `P09_config/examples/p09_cb_{name_slug}.md`'
+- 'Compiled: `P09_config/compiled/p09_cb_{name_slug}.yaml`'
+size_limits_aligned_with_schema:
+- 'Body: max 3072 bytes'
+- 'Total (frontmatter + body): ~4200 bytes'
+- 'Density: >= 0.85 (no filler; tables over prose)'
+reset_policy_enum: '| Value | When to use |
+
+  |-------|-------------|
+
+  | daily | Interactive services billed or monitored daily |
+
+  | weekly | Batch jobs on weekly cadence |
+
+  | monthly | SaaS products on monthly billing cycle |
+
+  | rolling_7d | 7-day rolling window to avoid month-boundary spikes |
+
+  | rolling_30d | 30-day rolling window for smoother cap enforcement |
+
+  | none | One-time project budget that must not be reset |'
+overage_action_enum: '| Value | Behavior |
+
+  |-------|----------|
+
+  | block | Hard stop: raise BudgetExceededError before API call |
+
+  | warn | Soft alert: allow call, notify ops channel, continue |
+
+  | log | Silent audit: allow call, write to cost audit log only |'
+currency_conventions: '| Unit | Field value | Numeric type |
+
+  |------|-------------|--------------|
+
+  | US Dollars | USD | float, 2 decimal places |
+
+  | Raw tokens | token_units | integer |
+
+
+  Rule: do not mix USD and token_units in the same budget catalog without explicit rationale.'
+metadata: python _tools/cex_score.py --apply bld_config_cost_budget.md
