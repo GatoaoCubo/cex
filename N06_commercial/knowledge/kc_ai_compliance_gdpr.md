@@ -3,8 +3,9 @@ id: kc_ai_compliance_gdpr
 kind: knowledge_card
 title: "AI Compliance and GDPR for LLM Apps"
 version: 1.0.0
-quality: 8.7
+quality: 8.8
 pillar: P01
+density_score: 0.98
 ---
 
 # AI Compliance and GDPR for LLM Applications
