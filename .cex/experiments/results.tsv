@@ -8749,3 +8749,4 @@ et
 2026-04-13 10:49:02	C:\Users\CEX\Documents\GitHub\cex\N04_knowledge\knowledge\p01_gl_rag.md	2	8.7	0.84	discard	analyzed: increase_density: remove filler words, compress prose into tables
 2026-04-13 10:49:02	C:\Users\CEX\Documents\GitHub\cex\N04_knowledge\knowledge\p01_gl_rag.md	3	8.7	0.84	discard	analyzed: increase_density: remove filler words, compress prose into tables
 2026-04-13 10:49:02	C:\Users\CEX\Documents\GitHub\cex\N01_intelligence\reports\taxonomy_completeness_audit.md	1	9.1	1.00	keep	added density_score: 1.0
+2026-04-13 10:49:06	C:\Users\CEX\Documents\GitHub\cex\.cex\archive\reports\self_audit_gemini_2026_04_11.md	1	8.6	0.90	discard	tldr flagged for manual review
