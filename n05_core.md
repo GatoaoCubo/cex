@@ -11,7 +11,7 @@ created: 2026-04-02
 updated: 2026-04-02
 author: builder_core
 domain: core
-quality: 8.7
+quality: 9.1
 tags: [core, p05, evolve, pattern, overnight]
 tldr: "Structured framework for automated refinement through iterative cycles with quality gates and feedback mechanisms"
 when_to_use: "Systematic improvement of knowledge artifacts, workflow optimization, or model performance tuning"
