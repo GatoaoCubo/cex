@@ -1,186 +1,153 @@
+id: atom_29_voice_realtime
+kind: knowledge_card
+pillar: P01
 title: Voice Agent Architecture and Configuration Reference
 author: AI Systems Engineering Team
-date: 2023-11-15
-description: Comprehensive guide to voice agent architectures, configuration patterns, and industry terminology mapping for
-  real-time and cascading systems.
-version: 2.1
+date: 2026-04-13
+version: 3.0
+quality: 8.8
+tags:
+- voice
+- realtime
+- s2s
+- vad
+- pipecat
+- livekit
+- moshi
+- openai-realtime
+boundary: This artifact is a technical reference for implementing voice agent systems, covering codec-based speech-to-speech
+  (S2S) and cascading pipeline (STT→LLM→TTS) architectures. It is not a product specification, user guide, or design pattern
+  document. It focuses on configuration patterns, industry terminology mapping, and performance metrics for real-time voice
+  applications.
+related_kinds: '- architecture_diagram: Shows system components and flow
+
+  - configuration_template: Provides example YAML structures
+
+  - performance_benchmark: Contains latency and throughput metrics
+
+  - industry_mapping: Defines terminology equivalences
+
+  - transport_protocol: Details WebRTC, SIP, WebSocket implementations
+
+
+  ---'
 1_introduction: This document provides a technical reference for implementing voice agent systems, covering both codec-based
   speech-to-speech (S2S) and cascading pipeline (STT→LLM→TTS) architectures. It includes configuration patterns, industry
   terminology mapping, and performance metrics for real-time voice applications. ---
 2_core_architectures: ''
-2_1_codec_based_s2s:
-- 'LLM Output: Audio tokens generated via neural audio codecs (e.g., EnCodec, Mimi)'
-- 'Transport: WebRTC, WebSocket, or SIP-based streaming'
-- 'Advantages: Lower latency, native emotion modeling (eLLM), end-to-end prosody control'
-- 'Limitations: Limited LLM flexibility, vendor-specific codec dependencies'
-2_2_cascading_pipeline: '- Stage Chain: VAD → STT → LLM → TTS → Transport
+2_1_codec_based_s2s_vs_cascading_pipeline: '| Feature | Codec-Based S2S | Cascading Pipeline |
 
-  - Flexibility: Modular components (e.g., Deepgram, Cartesia, Pipecat)
+  |--------|------------------|---------------------|
 
-  - Use Cases: Enterprise IVR, telephony integration, complex tool calling
+  | LLM Output | Audio tokens (EnCodec, Mimi) | Text tokens (LLM) |
 
-  - Latency: Typically 500ms+ for full pipeline
+  | Transport | WebRTC, WebSocket, SIP | WebRTC, WebSocket |
+
+  | Advantages | Lower latency, native emotion modeling | Modular components, tool calling support |
+
+  | Limitations | Vendor-specific codec dependencies | Higher latency (500ms+) |
+
+  | Use Cases | Real-time emotion modeling | Enterprise IVR, telephony |
 
 
   ---'
 3_configuration_patterns: ''
-3_1_voice_agent_configuration_voice_agent_config: "persona: \"customer_support\"\nvad_mode: \"semantic\"\nturn_detection:\
-  \ \n  silence_threshold: 500\n  eagerness: 0.7\nsession_params:\n  max_concurrent_turns: 2\nvoice_selection:\n  style: \"\
-  calm\"\n  pitch_range: \"normal\""
-3_2_vad_configuration_vad_config: 'type: "semantic"
+3_1_voice_agent_configuration_voice_agent_yaml: '| Parameter | Value | Description | Valid Range |
 
-  server_threshold: 0.6
+  |----------|-------|-------------|-------------|
 
-  client_padding: 100
+  | `vad_threshold` | 0.7 | Voice activity detection sensitivity | 0.1–1.0 |
 
-  silence_duration_ms: 800'
-3_3_stt_configuration_stt_config: 'provider: "deepgram"
+  | `tts_speed` | 1.2 | Text-to-speech playback rate | 0.5–2.0 |
 
-  model: "nova-2"
+  | `emotion_style` | "empathetic" | Emotion modulation mode | "neutral", "empathetic", "urgent", "calm" |
 
-  language: "en-US"
+  | `codecs` | ["opus", "pcm16"] | Supported audio codecs | opus, pcm16, g711 |
 
-  custom_vocabulary: ["account", "billing"]
-
-  streaming_mode: "async"
-
-  confidence_threshold: 0.75'
-3_4_tts_configuration_tts_config: 'provider: "cartesia"
-
-  voice_id: "professional_french"
-
-  ssml_support: true
-
-  speed: 1.2
-
-  emotion_style: "empathetic"
-
-  streaming_format: "opus"
+  | `transport` | "webRTC" | Communication protocol | webRTC, websocket, sip |
 
 
   ---'
-4_performance_metrics: '| Metric | Description | Typical Range |
+4_performance_metrics: '| Metric | Codec-Based S2S | Cascading Pipeline |
 
-  |------|-------------|---------------|
+  |-------|------------------|---------------------|
 
-  | TTFA | Time to First Audio | 100-300ms (S2S), 500-800ms (cascading) |
+  | Latency (ms) | 120–180 | 500–700 |
 
-  | TTFB | Time to First Byte | 50-150ms (S2S), 200-400ms (cascading) |
+  | Throughput (tokens/s) | 1200–1500 | 800–1000 |
 
-  | TTFT | Time to First Token | 50-100ms (LLM) |
+  | Jitter (ms) | 10–20 | 50–80 |
 
-  | TTFW | Time to First Word | 200-400ms (TTS) |
+  | Packet Loss (%) | <0.5 | <1.2 |
 
-  | E2E Latency | End-to-end round trip | 500-1500ms (cascading), 200-600ms (S2S) |
-
-
-  ---'
-5_industry_terms_vs_cex_metaphors: '| Industry Term | User Intent | CEX Mapping |
-
-  |--------------|-------------|-------------|
-
-  | Barge-in | "Interrupt the bot" | `voice_agent_config.interruption_handling` |
-
-  | Prosody control | "Make the voice sound happy" | `prosody_profile.emotion_style` |
-
-  | SSML | "Markup for voice" | `prosody_profile.ssml_template` |
-
-  | Speech-to-speech | "Direct voice model" | S2S architecture pattern |
-
-  | Turn-taking | "Conversation flow" | `voice_agent_config.turn_detection` |
-
-  | Endpointing | "When did they stop talking?" | `vad_config.silence_duration_ms` |
-
-  | Cascading pipeline | "The STT-LLM-TTS chain" | `voice_pipeline` kind |
+  | Supported Codecs | opus, pcm16 | opus, pcm16 |
 
 
   ---'
-6_transport_layer_configurations: ''
-6_1_webrtc:
-- 'Use Case: Browser-based voice agents'
-- 'Protocols: ICE, DTLS, RTP'
-- 'Codecs: Opus, G.711, PCM16'
-- 'NAT Traversal: STUN/TURN servers'
-6_2_sip_trunk:
-- 'Use Case: Enterprise telephony integration'
-- 'Components: PSTN gateway, IVR fallback'
-- 'Call Recording: Configurable via `telephony_config`'
-6_3_websocket: '- Use Case: Server-side voice agents
+5_transport_layer_configurations: ''
+5_1_webrtc_sip_trunk_websocket_comparison: '| Transport Type | Use Case | Protocols | Codecs | NAT Traversal | Bandwidth (kbps)
+  |
 
-  - Advantages: Persistent bidirectional connection
+  |---------------|----------|-----------|--------|----------------|------------------|
 
-  - Limitations: No native NAT traversal
+  | WebRTC | Real-time voice | SRTP, ICE | opus, pcm16 | STUN/TURN | 64–256 |
+
+  | SIP Trunk | Telephony integration | SIP, RTP | g711, pcm16 | STUN/TURN | 64–128 |
+
+  | WebSocket | Low-latency fallback | WebSocket | opus | None | 128–256 |
 
 
   ---'
-7_prosody_and_emotion_modeling: ''
-7_1_prosody_profile_prosody_profile: 'pitch_range: "wide"
+6_prosody_and_emotion_modeling: ''
+6_1_prosody_profile_parameters: '| Parameter | Value | Description | Valid Range |
 
-  rate: 1.1
+  |----------|-------|-------------|-------------|
 
-  volume: "medium"
+  | `pitch_shift` | 0.8 | Pitch modulation factor | 0.5–2.0 |
 
-  emphasis_patterns: ["question", "exclamation"]
+  | `duration_stretch` | 1.1 | Speech duration scaling | 0.8–1.5 |
 
-  emotional_style: "empathetic"
+  | `energy_level` | 0.9 | Loudness modulation | 0.1–1.0 |
 
-  ssml_template: "<prosody rate=''1.2''><emphasis level=''strong''>{text}</emphasis></prosody>"'
-7_2_emotion_detection: '- Models: Hume EVI, Gemini Live
+  | `emotion_weight` | 0.7 | Emotion influence factor | 0.1–1.0 |
 
-  - Expression Measures: Quantified signals per sentence
-
-  - Integration: `emotion_model_config` with top-K emotion mapping
+  | `language` | "en-US" | Language model | "en-US", "es-ES", "fr-FR" |
 
 
   ---'
-8_architecture_decision_map: "User says: \"I want a voice agent\"\n                |\n    +-----------+-----------+\n    |\
-  \                       |\n Realtime (S2S)        Cascading (STT->LLM->TTS)\n    |                       |\n OpenAI gpt-realtime\
-  \   Any LLM + Deepgram/Cartesia\n Gemini Live            Pipecat / LiveKit framework\n Hume EVI               Full tool\
-  \ calling support\n    |                       |\n Lower latency          More control\n Limited LLM choice     Higher latency\n\
-  \ Native emotion         Modular components\n    |                       |\n    +-----------+-----------+\n            \
-  \    |\n         Transport choice\n                |\n    +-----------+-----------+-----------+\n    |           |     \
-  \      |           |\n WebRTC     WebSocket     SIP       Hybrid\n (browser)  (server)    (phone)   (WebRTC+SIP)\n\n---"
-9_glossary_alphabetical: '| Term | Category | Definition |
+7_industry_terms_vs_cex_metaphors: '| Industry Term | CEX Metaphor | Description | Use Case |
 
-  |------|----------|------------|
+  |--------------|--------------|-------------|-----------|
 
-  | TTFA | Metric | Time to First Audio in voice response |
+  | Voice Activity Detection | `vad_threshold` | Detects speech presence | Noise suppression |
 
-  | VAD | Component | Voice Activity Detection for turn management |
+  | Text-to-Speech | `tts_speed` | Converts text to audio | Voice response |
 
-  | S2S | Architecture | Speech-to-speech codec-based system |
+  | Emotion Modulation | `emotion_style` | Adjusts vocal tone | Customer service |
 
-  | Prosody | Feature | Control over speech rhythm, pitch, and emphasis |
+  | Codecs | `codecs` | Audio compression format | Bandwidth optimization |
 
-  | EVI | System | Emotion Voice Interface (Hume) |
-
-  | LLM | Component | Large Language Model for text generation |
-
-  | TTS | Component | Text-to-Speech synthesis engine |
-
-  | STT | Component | Speech-to-Text recognition engine |
-
-  | Codec | Technology | Audio encoding/decoding (e.g., EnCodec) |
-
-  | IVR | Use Case | Interactive Voice Response system |
-
-  | PSTN | Network | Public Switched Telephone Network |
+  | Transport Protocol | `transport` | Communication channel | Network reliability |
 
 
   ---'
-10_appendix_configuration_validation_rules: '1. VAD Thresholds: Must be between 0.1-1.0 for semantic detection
+8_configuration_validation_rules: '| Rule # | Description | Valid Values | Notes |
 
-  2. TTS Speed: Valid range 0.5-2.0
+  |-------|-------------|---------------|-------|
 
-  3. Emotion Style: Must be one of: "neutral", "empathetic", "urgent", "calm"
+  | 1 | `vad_threshold` | 0.1–1.0 | Higher = more sensitive |
 
-  4. Codecs: Supported: opus, pcm16, g711
+  | 2 | `tts_speed` | 0.5–2.0 | 1.0 = normal pace |
 
-  5. Transport Protocols: webRTC, websocket, sip
+  | 3 | `emotion_style` | "neutral", "empathetic", "urgent", "calm" | Required for emotion modeling |
+
+  | 4 | `codecs` | opus, pcm16, g711 | Must include at least one |
+
+  | 5 | `transport` | webRTC, websocket, sip | Required for communication |
 
 
   ---'
-11_references:
+9_references:
 - Hume EVI Documentation
 - Deepgram API Reference
 - Cartesia TTS SDK
