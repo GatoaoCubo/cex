@@ -1,150 +1,69 @@
 title: CEX Architecture and Roadmap
-author: CEX Team
+author: The CEX Team
 date: 2026-04-08
-purpose: CEX is a modular, self-contained AI development framework designed to enable scalable, customizable, and distributable
-  AI solutions. It combines lightweight agent orchestration, fine-tunable models, and production-ready deployment tools to
-  empower developers, businesses, and end-users to build, deploy, and monetize AI workflows with minimal infrastructure overhead.
-audience:
-- 'Developers: Building AI applications, fine-tuning models, or integrating CEX into existing workflows.'
-- 'Businesses: Deploying AI solutions for content generation, automation, or customer-facing tools.'
-- 'End-users: Accessing AI-powered services via SaaS APIs or pre-packaged tools.'
-- 'Researchers: Experimenting with model fine-tuning, benchmarking, and distributed AI pipelines.'
-next_start_here: ''
-s1_fine_tune_dataset_preparation: 'Build QLoRA training dataset from CEX''s own artifacts:
-
-  - Source: 1,630 ISOs + 123 KCs + 377 templates/examples
-
-  - Format: instruction/response pairs for Qwen 3 8B
-
-  - Tool: `cex_continuous.py` (built in H2) has export mode
-
-  - Target: 2,000+ training pairs covering all 123 kinds
-
-  - Validate: train/test split, dedup, format check'
-s2_qlora_fine_tune_on_qwen_3_8b: 'Train custom model `cex-qwen3:8b` using prepared dataset:
-
-  - Framework: Unsloth or Axolotl (QLoRA, 4-bit)
-
-  - Hardware: GTX 1070 4GB (tight -- use gradient checkpointing)
-
-  - Epochs: 3-5 on full dataset
-
-  - Eval: re-run benchmark tool, compare base vs FT
-
-  - Deploy: `ollama create cex-qwen3 -f Modelfile`'
-s3_hybrid_dispatch_claude_n07_ollama_nuclei: 'Wire the pipeline so `/mission` and `/grid` dispatch to Ollama:
-
-  - N07 stays Claude Opus (orchestration needs full agent)
-
-  - N01-N06 workers use Ollama/cex-qwen3 via `cex_8f_runner.py`
-
-  - Handoff format stays the same (model reads via pipeline, not CLI)
-
-  - F8 compiles + commits (pipeline handles, not model)
-
-  - Test: full 6-nucleus grid via Ollama'
-s4_benchmark_re_run_valid_comparison: 'Re-run with fixed code (HTTP API, 300s timeout, /no_think):
-
-  - `python _tools/cex_benchmark_ollama.py --models qwen3:8b,deepseek-r1:8b --timeout 600`
-
-  - Compare: base Qwen 3 vs base DeepSeek R1 vs FT cex-qwen3
-
-  - Publish results to `.cex/benchmarks/`'
-s5_content_factory_integration: 'Connect existing components into working pipeline:
-
-  - N01 NotebookLM pipeline (H5) -> input
-
-  - N02 content templates -> formatting
-
-  - N06 monetization layer (H6) -> distribution
-
-  - Remaining: integration workflow connecting the pieces
-
-
-  ---'
-next_medium_term_week: ''
-m1_full_from_zero_bootstrap_test: 'Use `boot/overnight_infinite.cmd` to rebuild CEX from a clean state. Validates: mission_state,
-  continuous batching, sub-agents, quality gates. Expected: ~3-4 hours with full grid + sub-agents.'
-m2_release_v1_0_on_hotmart_gumroad: 'Pre-requisites:
-
-  - `cex_release_check.py` passes 28/28 (3 README fixes remaining)
-
-  - Course outline or quickstart guide for buyers
-
-  - ZIP tested on clean Windows 10 VM
-
-  - Payment + download flow tested end-to-end'
-m3_ollama_only_mode_zero_claude_dependency: 'Make CEX fully functional without any Claude subscription:
-
-  - Replace N07 orchestration with CLI wizard + cex_mission_runner.py
-
-  - All nuclei via Ollama/cex-qwen3
-
-  - install.cmd installs Ollama instead of Claude Code
-
-  - Target audience: users who can''t afford $20/month
-
-
-  ---'
-next_long_term_month: ''
-l1_cex_as_distributable_product: 'Release CEX as downloadable package:
-
-  - install.cmd (built, H9) handles dependencies
-
-  - release.cmd (built, H9) packages ZIP
-
-  - Channels: Hotmart ZIP, GitHub Releases, Gumroad'
-l2_fine_tuned_cex_model_production: 'Iterate on S2 prototype:
-
-  - Larger dataset (add user artifacts, session outputs)
-
-  - Multi-model: cex-qwen3:8b (free), cex-qwen3:32b (better GPU)
-
-  - Publish on Ollama registry or HuggingFace
-
-  - Potential revenue: sell fine-tuned model access'
-l3_multi_tenant_cex: Multiple brands running on same infrastructure. Each brand = separate `.cex/brand/` config. Nuclei route
-  based on brand context.
-l4_cex_api_saas: 'REST API exposing CEX capabilities:
-
-  - POST /build -> 8F pipeline -> artifact
-
-  - POST /evolve -> improve artifact
-
-  - GET /query -> find relevant artifacts
-
-  - POST /mission -> decompose + execute
-
-  - Revenue: usage-based pricing
-
-
-  ---'
-architecture_health_targets: '| Metric | Current (2026-04-08) | Target |
-
-  |--------|----------------------|--------|
-
-  | Kinds | 123 | 130+ (as industry evolves) |
-
-  | Builders PASS | 123 (100%) | Maintain zero WARN/FAIL |
-
-  | Builder ISOs | 1,599 (density 0.95) | Maintain density >= 0.85 |
-
-  | Kind KCs | 123 (98/98 covered) | 100% coverage |
-
-  | Quality floor | 9.0 (100%) | Maintain |
-
-  | Flywheel | 109/109 (100%) | Maintain |
-
-  | Python tools | 95 (67 cex_*) | Consolidate overlaps |
-
-  | Sub-agents | 125 | Maintain 1:1 with builders |
-
-  | Rules | 16 | Add as patterns emerge |
-
-  | Ollama models tested | 2 (qwen3:8b, deepseek-r1:8b) | FT model: cex-qwen3:8b |
-
-  | Ollama pipeline | Working (ultra-lite, 7 min/artifact) | < 2 min with FT + better GPU |
-
-  | Distribution | install.cmd + release.cmd ready | v1.0 on Hotmart |
-
-  | Overnight bootstrap time | Untested | < 4 hours |'
+description: 'This document outlines the current state of the CEX architecture, tools, and roadmap for future development.
+  It includes details on builders, ISOs, KCs, distribution, optimization, and long-term goals.  '
+current_state: ''
+builders_isos_and_kcs:
+- 'Kinds: 123 (target: 130+ as industry evolves)'
+- 'Builders PASS: 123 (100%)'
+- 'Builder ISOs: 1,599 (density 0.95)'
+- 'Kind KCs: 123 (98/98 covered)'
+- 'Quality floor: 9.0 (100%)'
+- 'Flywheel: 109/109 (100%)'
+- 'Python tools: 95 (67 cex_*)'
+- 'Sub-agents: 125 (1:1 with builders)'
+- 'Rules: 16 (add as patterns emerge)'
+- 'Ollama models tested: 2 (qwen3:8b, deepseek-r1:8b)'
+- 'Ollama pipeline: Working (ultra-lite, 7 min/artifact)'
+- 'Distribution: install.cmd + release.cmd ready'
+- 'Overnight bootstrap time: Untested (target: <4 hours)'
+tools_and_optimization: ''
+distribution_infrastructure: "| Component | File | Status |  \n|----------|------|--------|  \n| One-click installer | install.cmd\
+  \ | Built (8 steps: winget, Git, Python, Node, Claude, repo, deps, PS policy) |  \n| Release ZIP builder | release.cmd |\
+  \ Built (6 steps: doctor, compile, sanitize, git archive, verify, checksum) |  \n| Security fix | .gitignore | Added `/*_token.json`,\
+  \ `/*_credentials.json`, `_releases/` |  \n| Canva token leak | .cex/brand/canva_token.json | Removed from git tracking\
+  \ |  \n| Release check | cex_release_check.py | 25/28 PASS (3 cosmetic README fixes) |"
+ollama_pipeline: "Free local model support for CEX. Models run on user's hardware, zero API cost.  \n\n| Component | File\
+  \ | Status |  \n|----------|------|--------|  \n| Ollama client | cex_ollama.py | Built (health, list, generate, artifact\
+  \ retry, /no_think) |  \n| Benchmark tool | cex_benchmark_ollama.py | Built (10 tasks, HTTP API, scoring) |  \n| Intent\
+  \ router | cex_intent.py | Updated (model_override, CEX_FORCE_OLLAMA, CEX_OLLAMA_MODEL) |  \n| 8F pipeline | cex_8f_runner.py\
+  \ | Updated (--model, F4 skip, ultra-lite F6: 15->5 sections) |  \n| Dispatch modes | dispatch.sh | Added `ollama` and `ollama-grid`\
+  \ modes |  \n| Router config | router_config.yaml | Updated (qwen3:8b, deepseek-r1:8b) |  \n| Nucleus fallbacks | nucleus_models.yaml\
+  \ | Updated (fallback_local -> qwen3:8b) |  \n| E2E proof | p01_kc_markdown_tables.md | Generated via Ollama, F7: 6/6 PASS\
+  \ |  \n\nPerformance on GTX 1070 (4GB VRAM):  \n- Direct generation: ~4 min per artifact  \n- Full 8F pipeline (ultra-lite):\
+  \ ~7 min per artifact  \n- Speed: ~4.5 tok/s (CPU offload, 10x faster on RTX 3060+)"
+token_optimization: "| Tool | Change | Savings |  \n|------|--------|--------|  \n| cex_memory_select.py | LLM -> TF-IDF cosine\
+  \ similarity | ~1K tokens/call |  \n| cex_score.py | L3 cache inheritance gate | ~2K tokens/artifact |  \n| cex_8f_runner.py\
+  \ | Template-first F4 skip | ~5K tokens/build |  \n| cex_evolve.py | Heuristic add_updated, add_tags | ~1K tokens/artifact\
+  \ |  \n\n---"
+roadmap: ''
+next_session: "#### S1: Fine-tune dataset preparation  \nBuild QLoRA training dataset from CEX's own artifacts:  \n- Source:\
+  \ 1,630 ISOs + 123 KCs + 377 templates/examples  \n- Format: instruction/response pairs for Qwen 3 8B  \n- Tool: `cex_continuous.py`\
+  \ (built in H2) has export mode  \n- Target: 2,000+ training pairs covering all 123 kinds  \n- Validate: train/test split,\
+  \ dedup, format check  \n\n#### S2: QLoRA fine-tune on Qwen 3 8B  \nTrain custom model `cex-qwen3:8b` using prepared dataset:\
+  \  \n- Framework: Unsloth or Axolotl (QLoRA, 4-bit)  \n- Hardware: GTX 1070 4GB (tight -- use gradient checkpointing)  \n\
+  - Epochs: 3-5 on full dataset  \n- Eval: re-run benchmarks, compare with base model  \n- Deploy: integrate into `cex_intent.py`\
+  \ and `cex_8f_runner.py`  \n\n#### S3: Hybrid model testing  \n- Test hybrid models (local + cloud) for latency-sensitive\
+  \ tasks  \n- Update `dispatch.sh` to prioritize local models for low-latency tasks  \n\n---"
+medium_term_goals: "#### M1: Distribution expansion  \n- Add support for ARM64 and RISC-V architectures  \n- Optimize `install.cmd`\
+  \ for edge devices (e.g., Raspberry Pi)  \n\n#### M2: Community contributions  \n- Open-source core components (e.g., `cex_ollama.py`,\
+  \ `cex_score.py`)  \n- Create GitHub repository with CI/CD pipeline  \n\n---"
+long_term_vision: "#### L1: AI-native architecture  \n- Replace ISOs with AI-generated documentation (e.g., using LLMs)  \n\
+  - Automate KC updates via real-time monitoring of builder outputs  \n\n#### L2: Cross-platform integration  \n- Integrate\
+  \ with Kubernetes for containerized deployments  \n- Support for cloud providers (AWS, GCP, Azure)  \n\n---"
+architecture_health_targets: "| Metric | Current | Target | Notes |  \n|-------|---------|--------|-------|  \n| Kinds | 123\
+  \ | 130+ | Expand to cover new use cases |  \n| Builders PASS | 123 (100%) | 130+ (100%) | Ensure 100% coverage for all\
+  \ kinds |  \n| Builder ISOs | 1,599 (density 0.95) | 1,800 (density 0.98) | Increase density for better redundancy |  \n\
+  | Kind KCs | 123 (98/98) | 130+ (100%) | Ensure 100% coverage for all kinds |  \n| Quality floor | 9.0 (100%) | 9.5 (100%)\
+  \ | Raise quality standards for all components |  \n| Flywheel | 109/109 (100%) | 120/120 (100%) | Expand flywheel to include\
+  \ new tools |  \n| Python tools | 95 (67 cex_*) | 110 (75 cex_*) | Increase toolset for automation |  \n| Sub-agents | 125\
+  \ (1:1 with builders) | 130+ (1:1 with builders) | Scale sub-agents to match builder growth |  \n| Rules | 16 | 20 | Add\
+  \ rules for edge cases and security |  \n| Ollama models tested | 2 (qwen3:8b, deepseek-r1:8b) | 5 (qwen3:8b, deepseek-r1:8b,\
+  \ llama3:70b, mistral:7b, phi3:3b) | Expand model support for versatility |  \n| Ollama pipeline | Working (ultra-lite,\
+  \ 7 min/artifact) | Optimized (ultra-lite, 3 min/artifact) | Reduce latency for real-time use cases |  \n| Distribution\
+  \ | install.cmd + release.cmd ready | ARM64/RISC-V support, edge device optimization | Expand to new platforms |  \n| Overnight\
+  \ bootstrap time | Untested | <4 hours | Ensure robustness for CI/CD pipelines |  \n\n---"
+conclusion: This document provides a comprehensive overview of the current state of the CEX architecture, tools, and roadmap
+  for future development. By focusing on expanding the builder and KC ecosystem, optimizing the Ollama pipeline, and preparing
+  for cross-platform integration, the CEX team aims to deliver a robust, scalable, and future-proof system.
