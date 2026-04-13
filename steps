@@ -15,7 +15,7 @@ tldr: "Reusable capability with structured phases, triggers, and lifecycle manag
 when_to_use: "Building, reviewing, or reasoning about steps artifacts"
 keywords: [steps, phases, trigger, reusable, capability, workflow, lifecycle]
 feeds_kinds: [steps]
-density_score: null
+density_score: 0.92
 ---
 
 # Steps
@@ -36,7 +36,7 @@ Steps is a reusable capability with structured phases, trigger conditions, and l
 ## Cross-Framework Map
 | Framework/Provider | Class/Concept | Notes |
 |-------------------|---------------|-------|
-| LangChain | `RunnableSequence` | Sequential execution with defined steps |
+| LangChain | `Chain` / `RunnableSequence` | Sequential execution with defined steps |
 | LlamaIndex | `QueryPipeline` / `IngestionPipeline` | Multi-step workflows with phase management |
 | CrewAI | `Task` + `Process` | Task definition with sequential/hierarchical execution |
 | DSPy | `dspy.Module.forward()` method | Structured computation with defined phases |
@@ -115,7 +115,7 @@ Steps enable modular, reusable workflow definition that bridges the gap between 
 OpenClaude ships ~18 bundled steps as battle-tested implementations:
 
 | Steps | Trigger | Pattern | CEX Equivalent |
-|--------|--------|---------|----------------|
+|------|--------|---------|----------------|
 | /review | slash_command | 3-parallel-agent review | p04_steps_review |
 | /optimize | slash_command | adversarial verification | p04_steps_optimize |
 | /summarize | agent_invoked | 9-section summarization | p04_steps_summarize |
@@ -126,7 +126,23 @@ OpenClaude ships ~18 bundled steps as battle-tested implementations:
 not as code. The steps body IS the prompt injected when the steps triggers. This
 maps directly to CEX's steps-as-artifact model.
 
-**Parallel execution pattern** (from /review):
+**Parallel dispatch pattern** (from /review):
 - Phase 1: Identify changes (git diff)
 - Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
-- Phase
+- Phase 3: Aggregate findings and fix issues directly
+This pattern generalizes: any steps can dispatch parallel sub-agents with typed foci.
+
+**Analysis scratchpad pattern** (from /optimize):
+- <analysis> tags create a private drafting space
+- Forces structured thinking before output
+- Scratchpad is stripped from final result
+- Improves quality without consuming permanent context
+
+## New Steps Patterns Discovered
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| Adversarial steps | Agent explicitly tries to BREAK the implementation | p04_steps_optimize |
+| Parallel review | Multiple focused agents analyze same diff concurrently | p04_steps_review |
+| Scratchpad steps | <analysis> block for private reasoning, stripped from output | p04_steps_optimize |
+| Background extract | Runs silently after N turns, extracts persistent memories | p04_steps_memory_extract |
+| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_steps_optimize |

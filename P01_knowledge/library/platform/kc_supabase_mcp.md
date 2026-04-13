@@ -2,129 +2,147 @@
 id: p01_kc_supabase_mcp
 kind: knowledge_card
 type: platform
-pillar: P01
-title: "Supabase MCP Server — AI Agent Tools for Database Management"
+pillar: P04
+title: "Supabase MCP — Deep Knowledge for platform"
 version: 1.0.0
-created: 2026-03-31
-updated: 2026-03-31
-author: n04_knowledge
-domain: data_platform
-quality: 9.0
-tags: [supabase, mcp, ai-agent, tools, schema, rls, migrations, platform]
-tldr: "@supabase/mcp-server-supabase: 20+ tools para AI agents gerenciarem Supabase — list tables, execute SQL, manage RLS, deploy functions, tudo via MCP protocol"
-when_to_use: "Quando conectar AI agents (Claude, Cursor, pi) ao Supabase via MCP"
-keywords: [supabase-mcp, mcp-server, ai-agent-tools, model-context-protocol]
-long_tails:
-  - Como configurar Supabase MCP server no Claude Desktop
-  - Quais tools o Supabase MCP server disponibiliza
-  - Como usar MCP para criar migrations automaticamente com AI
-axioms:
-  - SEMPRE use service_role_key no MCP (agent precisa de acesso completo)
-  - NUNCA exponha MCP server para internet — stdio only, local
-  - SEMPRE revise SQL gerado pelo agent antes de aplicar em produção
-linked_artifacts:
-  primary: null
-  related: [p01_kc_supabase_cli, p01_kc_supabase_database]
-density_score: 0.88
-data_source: "https://github.com/supabase/mcp-server-supabase"
+created: 2026-04-02
+updated: 2026-04-02
+author: builder_knowledge
+domain: platform
+quality: 9.1
+tags: [platform, p04, reusable, kind-kc]
+tldr: "Reusable capability with structured phases, triggers, and lifecycle management for repeatable workflows"
+when_to_use: "Building, reviewing, or reasoning about platform artifacts"
+keywords: [platform, phases, trigger, reusable, capability, workflow, lifecycle]
+feeds_kinds: [platform]
+density_score: 0.92
 ---
 
-# Supabase MCP Server
+# Supabase MCP
 
-## Quick Reference
+## Spec
 ```yaml
-topic: supabase_mcp_server
-scope: @supabase/mcp-server-supabase, AI agent tools, MCP protocol
-owner: n04_knowledge
-criticality: high
-package: @supabase/mcp-server-supabase (npx)
-transport: stdio (local only)
+kind: platform
+pillar: P04
+llm_function: TOOL
+max_bytes: 4096
+naming: p04_platform_{{name}}.md + .yaml
+core: true
 ```
 
-## Configuração MCP
-```json
-{
-  "mcpServers": {
-    "supabase": {
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp-server-supabase", "--access-token", "sbp_xxx"],
-      "env": {}
-    }
-  }
-}
+## What It Is
+A platform is a reusable capability with structured phases, trigger conditions, and lifecycle management. It defines a specific workflow that can be executed repeatedly across different contexts. Platforms are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A platform answers "what phases execute to achieve this capability?" while agents answer "who am I?" and prompts answer "how do I communicate?"
+
+## Cross-Framework Map
+| Framework/Provider | Class/Concept | Notes |
+|-------------------|---------------|-------|
+| LangChain | `Chain` / `RunnableSequence` | Sequential execution with defined steps |
+| LlamaIndex | `QueryPipeline` / `IngestionPipeline` | Multi-step workflows with phase management |
+| CrewAI | `Task` + `Process` | Task definition with sequential/hierarchical execution |
+| DSPy | `dspy.Module.forward()` method | Structured computation with defined phases |
+| Haystack | `Pipeline` with nodes | Explicit DAG execution with phase transitions |
+| AutoGen | `GroupChat` workflow | Multi-agent conversation patterns |
+| Microsoft Semantic Kernel | `Plan` / `KernelFunction` | Function orchestration with step management |
+
+## Key Parameters
+| Parameter | Type | Default | Tradeoff |
+|-----------|------|---------|----------|
+| trigger_type | enum | "user_invocable" | user_invocable (slash commands) vs agent_only (programmatic) |
+| phases | array | required | More phases = granular control vs complexity |
+| input_schema | object | {} | Strong typing vs flexibility |
+| output_format | string | "markdown" | Structured output vs natural language |
+| timeout_seconds | int | 300 | Execution time limit vs complex workflows |
+
+## Phase Structure
+| Phase | Purpose | Input | Output |
+|-------|---------|-------|--------|
+| discover | Context gathering | user_input, environment | context_data |
+| configure | Parameter setup | context_data, user_preferences | configuration |
+| execute | Main workflow | configuration, tools | raw_results |
+| validate | Quality assurance | raw_results, criteria | validated_output |
+
+## Trigger Patterns
+| Trigger Type | Example | Activation |
+|--------------|---------|------------|
+| slash_command | "/commit", "/deploy" | User types exact command |
+| keyword_match | "debug", "optimize" | Natural language contains keywords |
+| event_driven | file_change, time_schedule | System event occurs |
+| agent_invoked | crew.use_platform("analyze") | Programmatic call from agent |
+
+## Quality Gates
+| Gate | Validation | Failure Impact |
+|------|------------|----------------|
+| H01_phases_defined | phases array not empty | Cannot execute workflow |
+| H02_trigger_valid | trigger_type in allowed values | Cannot activate platform |
+| H03_input_schema | Valid JSON schema format | Runtime parameter errors |
+| H04_output_format | Defined output structure | Unpredictable results |
+
+## Usage Examples
+```yaml
+# User-invocable platform (slash command)
+trigger_type: user_invocable
+slash_command: "/deploy"
+phases: [discover, analyze, report]
+
+# Agent-only platform (programmatic)
+trigger_type: agent_only
+invoke_pattern: "crew.use_platform('data_analysis')"
+phases: [load, transform, analyze, export]
+
+# Event-driven platform
+trigger_type: event_driven
+event_pattern: "file_change:*.py"
+phases: [detect, lint, test, notify]
 ```
-
-## Tools Disponíveis
-| Tool | Funcao | Categoria |
-|------|--------|-----------|
-| list_projects | Lista projetos da org | Project |
-| get_project | Detalhes de um projeto | Project |
-| get_cost | Custos do projeto | Project |
-| list_tables | Lista tabelas com colunas e types | Schema |
-| list_extensions | Lista extensions habilitadas | Schema |
-| list_migrations | Lista migrations aplicadas | Schema |
-| apply_migration | Aplica SQL migration | Schema |
-| execute_sql | Executa SQL arbitrário (SELECT, DDL) | SQL |
-| get_logs | Logs do projeto (API, Auth, DB) | Monitoring |
-| list_edge_functions | Lista edge functions deployadas | Functions |
-| create_edge_function | Cria nova edge function | Functions |
-| list_secrets | Lista secrets (nomes, sem valores) | Functions |
-| create_branch | Cria branch do DB | Branching |
-| list_branches | Lista branches existentes | Branching |
-| list_organizations | Lista organizações | Org |
-| get_organization | Detalhes de uma org | Org |
-
-## Fluxo de Uso com AI Agent
-```text
-[User] "cria tabela de produtos com RLS"
-    → [AI Agent] chama list_tables (ver schema atual)
-    → [AI Agent] gera SQL migration
-    → [AI Agent] chama apply_migration (aplica)
-    → [AI Agent] chama execute_sql (verifica)
-    → [User] recebe confirmação + schema atualizado
-```
-
-## MCP Servers Complementares
-| MCP Server | Quando Usar |
-|------------|-------------|
-| @supabase/mcp-server-supabase | Gestão: projetos, migrations, functions, logs |
-| @anthropic/mcp-server-postgres | SQL direto, queries complexas, bulk ops |
-| Combinar ambos | Cobertura total (gestão + data) |
-
-## Capacidades do Agent com MCP
-| Tarefa | Tools Usadas |
-|--------|-------------|
-| Criar schema completo | list_tables → apply_migration (DDL) |
-| Adicionar RLS policies | execute_sql (CREATE POLICY) |
-| Debug query lenta | get_logs → execute_sql (EXPLAIN ANALYZE) |
-| Deploy edge function | create_edge_function |
-| Criar branch para feature | create_branch → apply_migration |
-| Auditar schema | list_tables → list_extensions → execute_sql |
-
-## Segurança
-| Aspecto | Recomendação |
-|---------|-------------|
-| Access token | Personal access token (sbp_*), não project key |
-| Escopo | Token tem acesso a TODA a org — cuidado |
-| Transporte | stdio (local) — nunca expor via rede |
-| SQL review | SEMPRE revise SQL gerado antes de apply em prod |
-| Branching | Teste migrations em branch antes de main |
 
 ## Anti-Patterns
-| Anti-Pattern | Risco | Fix |
-|-------------|-------|-----|
-| MCP exposto via HTTP | Acesso total ao DB para internet | Manter stdio only |
-| apply_migration direto em prod | Sem teste, sem rollback | Usar branch primeiro |
-| Agent sem supervisão | DROP TABLE acidental | Human review obrigatório |
-| Token shared entre envs | Dev acessa prod | Tokens separados por env |
+| Anti-Pattern | Why Wrong | Correct Approach |
+|--------------|-----------|------------------|
+| Single-phase platform | Not reusable, just a function | Use action_prompt for one-off tasks |
+| No trigger definition | Cannot be activated | Define clear trigger conditions |
+| Agent identity in platform | Mixing concerns | Use agent for identity, platform for capability |
+| Hard-coded parameters | Not reusable | Use input_schema for parameterization |
 
-## Golden Rules
-- CONFIGURE MCP separado para dev e prod (tokens distintos)
-- REVISE todo SQL gerado pelo agent antes de apply em produção
-- USE branches para testar migrations via MCP antes de main
-- COMBINE Supabase MCP (gestão) + Postgres MCP (queries) para cobertura total
+## Integration Points
+- **F2 BECOME**: Platforms are loaded by agents to extend capabilities
+- **F3 INJECT**: Platforms can inject domain-specific knowledge
+- **F5 CALL**: Platforms orchestrate tool usage across phases
+- **Handoffs**: Platforms can be passed between nuclei for specialized execution
+- **Memory**: Platforms can persist state between phases via memory_scope
 
-## References
-- Package: https://www.npmjs.com/package/@supabase/mcp-server-supabase
-- GitHub: https://github.com/supabase/mcp-server-supabase
-- MCP Protocol: https://modelcontextprotocol.io/
+Platforms enable modular, reusable workflow definition that bridges the gap between simple prompts and complex multi-agent systems.
+## Production Reference: OpenClaude Bundled Platforms
+OpenClaude ships ~18 bundled platforms as battle-tested implementations:
+
+| Platform | Trigger | Pattern | CEX Equivalent |
+|-------|---------|---------|----------------|
+| /deploy | slash_command | 3-parallel-agent review | p04_platform_deploy |
+| /audit | slash_command | adversarial verification | p04_platform_audit |
+| /optimize | agent_invoked | 9-section summarization | p04_platform_optimize |
+| /schedule | slash_command | recurring cron schedule | p04_platform_schedule (future) |
+| /diagnose | slash_command | diagnostic investigation | n/a (Anthropic-specific) |
+
+**Key architectural insight**: Platforms are defined as prompt text with frontmatter,
+not as code. The platform body IS the prompt injected when the platform triggers. This
+maps directly to CEX's platform-as-artifact model.
+
+**Parallel dispatch pattern** (from /deploy):
+- Phase 1: Identify changes (git diff)
+- Phase 2: Dispatch 3 agents concurrently, each with the full diff + specialized focus
+- Phase 3: Aggregate findings and fix issues directly
+This pattern generalizes: any platform can dispatch parallel sub-agents with typed foci.
+
+**Analysis scratchpad pattern** (from /optimize):
+- <analysis> tags create a private drafting space
+- Forces structured thinking before output
+- Scratchpad is stripped from final result
+- Improves quality without consuming permanent context
+
+## New Platform Patterns Discovered
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| Adversarial platform | Agent explicitly tries to BREAK the implementation | p04_platform_audit |
+| Parallel review | Multiple focused agents analyze same diff concurrently | p04_platform_deploy |
+| Scratchpad platform | <analysis> block for private reasoning, stripped from output | p04_platform_optimize |
+| Background extract | Runs silently after N turns, extracts persistent memories | p04_platform_memory_extract |
+| Rationalization counter | Lists excuses the agent will generate, pre-emptively counters | p04_platform_audit |
