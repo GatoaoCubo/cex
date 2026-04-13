@@ -9,6 +9,7 @@ tags: [audit, self_review, n06, commercial, brand]
 created: 2026-04-11
 nucleus: n06
 density_score: 0.9
+updated: "2026-04-13"
 ---
 
 # N06 Commercial Self-Audit Report (GEMINI RUN)
