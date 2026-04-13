@@ -3,7 +3,7 @@ id: atom_23_multiagent_protocols
 kind: knowledge_card
 title: "Multi-Agent Communication Protocols: Architecture, Paradigms & Interoperability"
 version: "1.0.0"
-quality: null
+quality: 8.8
 tags: [multi-agent, protocols, MCP, ACP, A2A, ANP, communication, architecture, interoperability, ProtocolBench]
 pillar: P01
 domain: multi-agent-communication

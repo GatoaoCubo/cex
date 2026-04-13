@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "A2A Protocol -- Complete Term Registry and Architecture Atlas"
 version: 0.3.0
-quality: null
+quality: 8.8
 tags: [a2a, agent-to-agent, google, protocol, interoperability, json-rpc, grpc, agent-card]
 sources:
   - https://a2a-protocol.org/latest/specification/

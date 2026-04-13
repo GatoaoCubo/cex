@@ -4,7 +4,7 @@ kind: knowledge_card
 title: "Atom 10: Haystack (deepset) + Vercel AI SDK -- Full Type Registry & CEX Mapping"
 version: 1.0.0
 date: 2026-04-13
-quality: null
+quality: 8.8
 pillar: P01
 tags: [haystack, deepset, vercel, ai-sdk, pipeline, rag, streaming, agents, type-registry]
 sources:
