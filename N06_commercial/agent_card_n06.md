@@ -5,10 +5,10 @@ title: "N06 Agent Card -- Available Capabilities"
 nucleus: N06
 pillar: P01
 sin: Avareza Estrategica
-version: 1.1.0
-quality: 8.9
+version: 1.2.0
+quality: null
 created: 2026-04-07
-updated: 2026-04-12
+updated: 2026-04-13
 density_score: 1.0
 ---
 
@@ -39,7 +39,7 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 | `architecture/` | 5 | `agent_card_commercial.md`, `integration_content_factory.md`, `pattern_brand_pipeline.md`, `pattern_pricing_framework.md`, `pattern_funnel_architecture.md` |
 | `compiled/` | 33 | Auto-compiled YAML mirrors of source artifacts |
 | `feedback/` | 1 | `quality_gate_commercial.md` — N06 quality gate |
-| `knowledge/` | 12 | Brand KCs: archetypes, book patterns, frameworks, monetization models, naming, propagation, tokens pipeline, voice systems, competitive positioning, ICP frameworks, + 2 knowledge cards |
+| `knowledge/` | 14 | Brand KCs: archetypes, book patterns, frameworks, monetization models, naming, propagation, tokens pipeline, voice systems, competitive positioning, ICP frameworks, + AI compliance, SaaS monetization, + 2 knowledge cards |
 | `memory/` | 3 | `brand_decisions_memory.md` — GDP decision log, `pricing_optimization_memory.md` — pricing experiments + metrics, `commercial_learning_record.md` — 10 lessons learned |
 | `orchestration/` | 4 | Dispatch rules + workflows for commercial & content monetization |
 | `output/` | 26 | Brand book, brand config, pricing pages, funnels (CEX + content factory), competitive analysis, monetization plans, visual identity, strategy docs, audits |
@@ -48,7 +48,7 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 | `reports/` | 3 | Self-audit reports (2026-04-11 x2, newpc 2026-04-12) |
 | `schemas/` | 5 | Brand audit, brand book, brand config, brand voice contract, content order input schema |
 | `tools/` | 3 | `content_monetization_tool.md` — monetization pipeline, `pricing_experiment_tool.md` — A/B testing framework, `funnel_diagnostic_tool.md` — leak detection + fix prioritization |
-| **TOTAL** | **105** | **72 source + 33 compiled** |
+| **TOTAL** | **107** | **74 source + 33 compiled** |
 
 ---
 
@@ -159,11 +159,11 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 │  N06 Commercial Nucleus — Avareza Estratégica   │
 │  "Quanto RENDE cada decisão?"                   │
 ├─────────────────────────────────────────────────┤
-│  72 source artifacts + 33 compiled = 105 total  │
+│  74 source artifacts + 33 compiled = 107 total  │
 │  2 dedicated builders + 9 cross-domain kinds    │
 │  18 tools (5 brand + 11 system + 2 N06)         │
 │  6 MCP servers (Stripe, Hotmart, Canva, ...)    │
-│  12 domain KCs                                  │
+│  14 domain KCs                                  │
 │  5 brand schemas                                │
 │  6 prompts                                      │
 │  26 output artifacts                            │

@@ -1,63 +1,73 @@
-id: self_audit_newpc_2026_04_12
+id: self_audit_newpc_2026_04_13
 kind: context_doc
-title: N06 Self-Audit -- New PC Setup (2026-04-12)
+title: N06 Self-Audit -- New PC Setup (2026-04-13)
 nucleus: N06
 pillar: P01
-version: 1.0.0
+version: 1.1.0
 quality: null
 created: 2026-04-12
+updated: 2026-04-13
 mission: NEWPC_SETUP
 phase_1_mcp_server_verification: '| # | Server | Binary | Status | Notes |
 
   |---|--------|--------|--------|-------|
 
-  | 1 | fetch | `uvx mcp-server-fetch` | PASS | uvx works, dependencies downloaded successfully |
+  | 1 | fetch | `uvx mcp-server-fetch` | PASS | uvx works, --help responds correctly |
 
-  | 2 | markitdown | `npx markitdown-mcp` | PASS | npx resolves and runs |
+  | 2 | markitdown | `npx markitdown-mcp` | PASS | node v24.14.1, npx 11.11.0 operational |
 
-  | 3 | stripe | `npx @stripe/mcp` | BLOCKED | Package fixed to `@stripe/mcp`. Missing env: `STRIPE_SECRET_KEY` |
+  | 3 | stripe | `npx @stripe/mcp` | BLOCKED | Package correct (@stripe/mcp). Missing env: `STRIPE_SECRET_KEY` |
 
   | 4 | hotmart | `npx mcp-server-hotmart` | BLOCKED | Missing env: `HOTMART_CLIENT_ID`, `HOTMART_CLIENT_SECRET`, `HOTMART_BASIC_AUTH`
   |
 
   | 5 | canva | `npx @mcp_factory/canva-mcp-server` | BLOCKED | Missing env: `CANVA_CLIENT_ID`, `CANVA_CLIENT_SECRET` |
 
-  | 6 | notebooklm | `npx notebooklm-mcp@latest` | PASS | v1.0.0 loads successfully |'
-api_keys_status: '| Key | Set? | Required By |
+  | 6 | notebooklm | `npx notebooklm-mcp@latest` | PASS | node runtime confirmed, npx resolves |'
+api_keys_status: '| Key | Set? | Required By | Revenue Impact |
 
-  |-----|------|-------------|
+  |-----|------|-------------|----------------|
 
-  | `STRIPE_SECRET_KEY` | NO | stripe MCP |
+  | `STRIPE_SECRET_KEY` | NO | stripe MCP | HIGH -- blocks payment integration, subscription data |
 
-  | `HOTMART_CLIENT_ID` | NO | hotmart MCP |
+  | `HOTMART_CLIENT_ID` | NO | hotmart MCP | HIGH -- blocks course sales + affiliate tracking |
 
-  | `HOTMART_CLIENT_SECRET` | NO | hotmart MCP |
+  | `HOTMART_CLIENT_SECRET` | NO | hotmart MCP | HIGH |
 
-  | `HOTMART_BASIC_AUTH` | NO | hotmart MCP |
+  | `HOTMART_BASIC_AUTH` | NO | hotmart MCP | HIGH |
 
-  | `CANVA_CLIENT_ID` | NO | canva MCP |
+  | `CANVA_CLIENT_ID` | NO | canva MCP | MEDIUM -- blocks brand asset automation |
 
-  | `CANVA_CLIENT_SECRET` | NO | canva MCP |
+  | `CANVA_CLIENT_SECRET` | NO | canva MCP | MEDIUM |
 
 
-  Summary: 3/6 PASS, 3/6 BLOCKED (missing API keys).'
-action_required: '1. Set `STRIPE_SECRET_KEY` in environment
+  Summary: 3/6 PASS, 3/6 BLOCKED (missing API keys only -- no binary failures).'
+runtime_versions: '| Binary | Version | Status |
 
-  2. Set Hotmart credentials (`HOTMART_CLIENT_ID`, `HOTMART_CLIENT_SECRET`, `HOTMART_BASIC_AUTH`) in environment
+  |--------|---------|--------|
 
-  3. Set Canva credentials (`CANVA_CLIENT_ID`, `CANVA_CLIENT_SECRET`) in environment
+  | node | v24.14.1 | OK |
+
+  | npx | 11.11.0 | OK |
+
+  | uvx | (latest) | OK |'
+action_required: '1. Set `STRIPE_SECRET_KEY` in environment (highest priority -- enables payment data)
+
+  2. Set Hotmart credentials (enables course sales tracking)
+
+  3. Set Canva credentials (enables brand asset automation)
 
 
   ---'
-phase_2_python_tools_audit: '| Tool | Status | Output |
+phase_2_python_tools_audit: '| Tool | Status | Notes |
 
-  |------|--------|--------|
+  |------|--------|-------|
 
-  | `cex_compile.py` | PASS | Shows usage, no import errors |
+  | `cex_compile.py` | PASS | Parses args, no import errors. Supports `--all`, `--target`, `--lp` |
 
-  | `cex_score.py` | PASS | Shows usage, no import errors |
+  | `cex_score.py` | PASS | CEX Hybrid Scorer loads. Supports `--apply`, `--hybrid`, `--verbose` |
 
-  | `cex_doctor.py` | PASS | Runs header, no import errors |
+  | `cex_doctor.py` | PASS | v2.0 initializes. Naming v2.0 + Density + 13-File Completeness mode ready |
 
 
   All 3 core Python tools functional. No dependency issues on fresh PC.
@@ -65,7 +75,7 @@ phase_2_python_tools_audit: '| Tool | Status | Output |
 
   ---'
 phase_3_artifact_inventory: ''
-count_by_subdirectory: '| Subdir | .md files | .yaml (compiled) | Total | Domain Focus |
+count_by_subdirectory_2026_04_13: '| Subdir | .md files | .yaml (compiled) | Total | Domain Focus |
 
   |--------|----------:|------------------:|------:|--------------|
 
@@ -73,50 +83,55 @@ count_by_subdirectory: '| Subdir | .md files | .yaml (compiled) | Total | Domain
 
   | `architecture/` | 5 | -- | 5 | Patterns (brand, pricing, funnel), integration |
 
-  | `compiled/` | -- | 33 | 33 | Auto-compiled mirrors |
+  | `compiled/` | -- | 33 | 33 | Auto-compiled YAML mirrors |
 
   | `feedback/` | 1 | -- | 1 | Quality gate |
 
-  | `knowledge/` | 12 | -- | 12 | Brand KCs, monetization, ICP, competitive |
+  | `knowledge/` | 14 | -- | 14 | Brand KCs + AI compliance + SaaS monetization |
 
-  | `memory/` | 3 | -- | 3 | Decisions, pricing, learning record |
+  | `memory/` | 3 | -- | 3 | Decisions, pricing experiments, learning record |
 
   | `orchestration/` | 4 | -- | 4 | Dispatch rules, workflows |
 
-  | `output/` | 26 | -- | 26 | Brand book, pricing, funnels, audits, strategies |
+  | `output/` | 26 | -- | 26 | Brand books, pricing, funnels, audits, strategies |
 
   | `prompts/` | 6 | -- | 6 | Brand discovery, audit, config extraction |
 
   | `quality/` | 1 | -- | 1 | Scoring rubric |
 
-  | `reports/` | 2+1 | -- | 3 | Self-audits (this file included) |
+  | `reports/` | 1 | -- | 1 | This file |
 
   | `schemas/` | 5 | -- | 5 | Brand audit/book/config/voice/input |
 
   | `tools/` | 3 | -- | 3 | Monetization, pricing experiment, funnel diagnostic |
 
-  | TOTAL | 71+1 | 33 | 105 | |'
-monetization_specific_artifacts: '| Category | Artifacts | Revenue Relevance |
+  | root | 2 | -- | 2 | README.md + agent_card_n06.md |
 
-  |----------|-----------|-------------------|
-
-  | Pricing | `pattern_pricing_framework.md`, `pricing_experiment_tool.md`, `output_pricing_page.md`, `pricing_content_factory.md`,
-  `api_access_pricing.md`, `content_factory_pricing.md` | Direct: defines how money is made |
-
-  | Funnels | `pattern_funnel_architecture.md`, `funnel_diagnostic_tool.md`, `funnel_cex_product.md`, `funnel_content_factory.md`
-  | Direct: conversion pipeline |
-
-  | Courses | `kc_brand_monetization_models.md`, `content_monetization_tool.md`, `output_monetization_business_plan.md` |
-  Direct: course/content revenue |
-
-  | Brand | 12 brand KCs + 5 brand tools + 4 schemas + 6 prompts | Indirect: brand premium = pricing power |
-
-  | Competitive | `kc_competitive_positioning.md`, `output_competitive_map.md`, `output_competitive_business.md` | Strategic:
-  market positioning |'
-cross_reference_with_p11_feedback_monetization: 'P11 schema defines these kinds:
+  | TOTAL | 74 | 33 | 107 | |
 
 
-  | P11 Kind | N06 Has? | Notes |
+  Growth since 2026-04-12: +2 KCs in knowledge/ (`kc_ai_compliance_gdpr.md`, `kc_ai_saas_monetization.md`).'
+monetization_specific_artifacts: '| Category | Count | Key Artifacts | Revenue Relevance |
+
+  |----------|------:|---------------|-------------------|
+
+  | Pricing | 6 | pricing_framework, pricing_experiment_tool, output_pricing_page, pricing_content_factory, api_access_pricing,
+  content_factory_pricing | Direct: defines margin structure |
+
+  | Funnels | 4 | funnel_architecture, funnel_diagnostic_tool, funnel_cex_product, funnel_content_factory | Direct: conversion
+  pipeline |
+
+  | Courses/Content | 3 | kc_brand_monetization_models, content_monetization_tool, output_monetization_business_plan | Direct:
+  course/content revenue |
+
+  | Brand | 27 | 12 KCs + 5 tools + 5 schemas + 6 prompts | Indirect: brand premium = pricing power |
+
+  | AI Monetization | 1 | kc_ai_saas_monetization (NEW) | Direct: SaaS model patterns |
+
+  | Compliance | 1 | kc_ai_compliance_gdpr (NEW) | Risk: prevents revenue-killing compliance failures |
+
+  | Competitive | 3 | kc_competitive_positioning + 2 output maps | Strategic: market positioning |'
+cross_reference_with_p11_feedback_monetization: '| P11 Kind | N06 Has? | Notes |
 
   |----------|----------|-------|
 
@@ -133,57 +148,75 @@ cross_reference_with_p11_feedback_monetization: 'P11 schema defines these kinds:
   | `reward_signal` | NO | No continuous quality signal for commercial output |
 
 
-  Gap: N06 has 1/6 P11 kinds. The feedback layer is thin for commercial domain.
+  P11 Coverage: 1/6 kinds. The feedback layer remains thin for commercial domain.
 
 
   ---'
-phase_4_agent_card_accuracy_check: '| Agent Card Claim | Verified | Actual |
+phase_4_agent_card_accuracy_check: '| Agent Card Claim (v1.1.0) | Verified | Actual |
 
-  |-----------------|----------|--------|
+  |--------------------------|----------|--------|
 
-  | 55 source + 19 compiled = 74 | OUTDATED | 72 source + 33 compiled = 105 |
+  | 72 source + 33 compiled = 105 | OUTDATED | 74 source + 33 compiled = 107 |
 
-  | 12 domain KCs | CORRECT | 12 in `knowledge/` |
+  | 12 domain KCs | OUTDATED | 14 KCs (2 new: AI compliance, SaaS monetization) |
 
-  | 6 MCP servers | CORRECT | 6 configured (1 wrong package) |
+  | 6 MCP servers | CORRECT | 6 configured |
 
-  | 3 memory artifacts | CORRECT | 3 in `memory/` |
+  | 3 memory artifacts | CORRECT | 3 in memory/ |
 
-  | 4 brand schemas | OUTDATED | 5 schemas (added `input_schema_content_order.md`) |
+  | 5 brand schemas | CORRECT | 5 schemas |
 
-  | 15 output artifacts | OUTDATED | 26 output artifacts |
+  | 26 output artifacts | CORRECT | 26 |
 
-  | 2 prior self-audit reports | CORRECT | 2 in `reports/` |
+  | 6 prompts | CORRECT | 6 |
 
 
-  Agent card needs update: artifact counts have grown significantly since v1.0.0.
+  Agent card needs count update: knowledge/ is now 14, total is 107.
 
 
   ---'
 3_commercial_gaps_identified: ''
-gap_1_no_pricing_guardrails_p11_guardrail: 'Cost of inaction: Without min-margin and max-discount guardrails, pricing decisions
-  can erode revenue. A 5% margin undercut across 100 deals = significant revenue leak. Recommendation: Build `p11_gr_pricing_guardrails.yaml`
-  -- floor margins, discount caps, bundle rules.'
-gap_2_no_commercial_bugloop_p11_bugloop: 'Cost of inaction: When a funnel underperforms (conversion < threshold), there is
-  no automated detect-fix-verify cycle. Manual diagnosis wastes N06 context. Recommendation: Build `p11_bl_funnel_performance.md`
+gap_1_no_pricing_guardrails_p11_guardrail: 'ROI of inaction: Without min-margin and max-discount guardrails, pricing decisions
+  can erode revenue. A 5% margin undercut across 100 deals = significant revenue leak. No guard = no floor. Recommendation:
+  Build `N06_commercial/feedback/p11_gr_pricing_guardrails.md` -- floor margins, discount caps, bundle rules. Estimated build
+  cost: 1 artifact, N06 solo, 8F pipeline.'
+gap_2_no_commercial_bugloop_p11_bugloop: 'ROI of inaction: When a funnel underperforms (conversion < threshold), there is
+  no automated detect-fix-verify cycle. Every manual diagnosis = N06 context burn + human time. Recommendation: Build `N06_commercial/feedback/p11_bl_funnel_performance.md`
   -- detect conversion drops, suggest fixes, verify after change.'
-gap_3_stripe_api_key_not_set: 'Cost of inaction: `.mcp-n06.json` now correctly references `@stripe/mcp` (fixed). However,
-  `STRIPE_SECRET_KEY` is still not set in environment. Payment integration remains non-functional until the key is configured.
-  Recommendation: Set `STRIPE_SECRET_KEY` in environment. Test with `npx -y @stripe/mcp` to verify connection. ---'
-summary: '| Metric | Value |
+gap_3_3_payment_design_mcps_non_functional_api_keys_missing: 'ROI of inaction: Stripe MCP = no payment data = pricing decisions
+  without revenue feedback. Hotmart MCP = no course sales data = content monetization flying blind. Canva MCP = no automated
+  brand assets = manual design bottleneck.
 
-  |--------|-------|
 
-  | MCP Servers | 3/6 operational (3 blocked: missing API keys) |
+  Recommendation:
 
-  | Python Tools | 3/3 operational |
+  1. Set `STRIPE_SECRET_KEY` in environment (immediate)
 
-  | Total Artifacts | 105 (72 source + 33 compiled) |
+  2. Set Hotmart credentials (immediate)
 
-  | P11 Coverage | 1/6 kinds |
+  3. Set Canva credentials (medium priority)
 
-  | Agent Card | Needs count update |
 
-  | Critical Fix | Set 6 API keys (Stripe, Hotmart, Canva) |
+  ---'
+summary: '| Metric | Value | Delta |
 
-  | Missing Keys | 6 API keys across 3 services |'
+  |--------|-------|-------|
+
+  | MCP Servers | 3/6 operational | -- (same as 2026-04-12) |
+
+  | Python Tools | 3/3 operational | -- |
+
+  | Total Source Artifacts | 74 .md | +2 from 2026-04-12 |
+
+  | Total Compiled | 33 .yaml | -- |
+
+  | Grand Total | 107 | +2 |
+
+  | P11 Coverage | 1/6 kinds | -- |
+
+  | API Keys Missing | 6 (3 services) | -- |
+
+  | Agent Card Accuracy | NEEDS UPDATE | knowledge/: 12->14, total: 105->107 |'
+boundary: Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define
+  termo).
+8f_pipeline_function: 'Primary function: INJECT'
