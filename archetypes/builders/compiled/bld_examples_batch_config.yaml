@@ -1,0 +1,189 @@
+kind: examples
+id: bld_examples_batch_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of batch_config artifacts
+pattern: few-shot learning -- LLM reads these before producing
+quality: null
+title: Examples Batch Config
+version: 1.0.0
+author: n03_builder
+tags:
+- batch_config
+- builder
+- examples
+- P09
+tldr: Golden and anti-examples for batch_config construction, demonstrating ideal structure and common pitfalls.
+domain: batch config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+golden_example: 'INPUT: "Configure a batch job for bulk document classification using OpenAI"
+
+
+  OUTPUT:
+
+  id: p09_bc_doc_classifier
+
+  kind: batch_config
+
+  pillar: P09
+
+  version: "1.0.0"
+
+  created: "2026-04-13"
+
+  updated: "2026-04-13"
+
+  author: "builder_agent"
+
+  provider: "openai"
+
+  model: "gpt-4o-mini"
+
+  endpoint: "/v1/chat/completions"
+
+  max_requests: 5000
+
+  completion_window: "24h"
+
+  cost_cap_usd: 20.00
+
+  concurrency: 100
+
+  retry_policy: "max 3 retries, exponential backoff starting 2s"
+
+  input_format: "jsonl"
+
+  output_format: "jsonl"
+
+  quality: null
+
+  tags: [batch_config, openai, document-classification, P09]
+
+  tldr: "OpenAI Batch API config for doc classification: 5K requests/batch, 24h window, $20 cap, gpt-4o-mini"
+
+  description: "Bulk document classification batch job using OpenAI Batch API with cost controls and retry policy"'
+overview: 'Classifies up to 5,000 documents per batch run using OpenAI Batch API at ~50% cost reduction vs sync. Triggered
+  by: scheduled pipeline after document ingestion completes. Credential env var: `OPENAI_API_KEY`'
+job_parameters: '| Parameter | Value | Description |
+
+  |-----------|-------|-------------|
+
+  | provider | openai | OpenAI Batch API |
+
+  | model | gpt-4o-mini | Cost-efficient model for classification |
+
+  | endpoint | /v1/chat/completions | Standard chat completions endpoint |
+
+  | max_requests | 5000 | Max documents per batch submission |
+
+  | completion_window | 24h | OpenAI SLA for batch completion |
+
+  | concurrency | 100 | Max in-flight requests at one time |'
+cost_controls: '| Control | Value | Notes |
+
+  |---------|-------|-------|
+
+  | cost_cap_usd | $20.00 | Job halts if projected spend exceeds cap |
+
+  | sync_api_discount | ~50% | Batch pricing vs synchronous equivalent |
+
+  | token_budget | 1024 tokens | Max tokens per request (256 input + 768 output) |
+
+  | alert_threshold_usd | $15.00 | Alert when 75% of cap is reached |'
+retry_and_error_policy: '| Setting | Value | Description |
+
+  |---------|-------|-------------|
+
+  | max_retries | 3 | Retries per failed request |
+
+  | backoff | exponential | 2s, 4s, 8s wait before retries |
+
+  | backoff_base_s | 2 | Base wait in seconds |
+
+  | partial_failure | continue | Process remaining requests if some fail |
+
+  | dead_letter | s3://batch-errors/doc_classifier/ | Failed requests stored for manual review |'
+input_output_format: '- Input format: JSONL -- each line: `{"custom_id": "doc-001", "method": "POST", "url": "/v1/chat/completions",
+  "body": {...}}`
+
+  - Output format: JSONL -- each line: `{"id": "batch_req_...", "custom_id": "doc-001", "response": {...}, "error": null}`
+
+  - Input path: `s3://batch-jobs/input/doc_classifier_{{date}}.jsonl`
+
+  - Output path: `s3://batch-jobs/output/doc_classifier_{{date}}.jsonl`
+
+
+  WHY THIS IS GOLDEN:
+
+  - quality: null (H05 pass)
+
+  - id matches p09_bc_ pattern (H02 pass)
+
+  - kind: batch_config (H04 pass)
+
+  - provider is valid enum value: openai (H06 pass)
+
+  - completion_window >= 1h (H08 pass)
+
+  - cost_cap_usd set: $20.00 (H09 pass)
+
+  - No actual API keys in artifact, only env var name (H10 pass)
+
+  - All 5 required body sections present (H07 pass)
+
+  - tags: 4 items, includes "batch_config" (S02 pass)
+
+  - tldr: 91 chars <= 160 (S01 pass)
+
+
+  ---'
+anti_example: 'INPUT: "Create batch config for OpenAI calls"
+
+
+  BAD OUTPUT:
+
+  id: openai-batch
+
+  kind: batch
+
+  pillar: config
+
+  model: gpt-4o
+
+  api_key: sk-proj-abc123xyz
+
+  quality: 8.5
+
+  tags: [openai]
+
+
+  Just call the OpenAI batch endpoint with your requests.
+
+  Set api_key to your key.
+
+
+  FAILURES:
+
+  1. id: "openai-batch" uses hyphens and no `p09_bc_` prefix -> H02 FAIL
+
+  2. kind: "batch" not "batch_config" -> H04 FAIL
+
+  3. pillar: "config" not "P09" -> H06 FAIL
+
+  4. quality: 8.5 (not null) -> H05 FAIL
+
+  5. api_key contains actual credential value "sk-proj-abc123xyz" -> H10 FAIL (security violation)
+
+  6. Missing required fields: provider, endpoint, max_requests, completion_window -> H06 FAIL
+
+  7. tags: only 1 item, missing "batch_config" -> S02 FAIL
+
+  8. Body missing all 5 required sections -> H07 FAIL
+
+  9. No cost_cap_usd defined -- financial control failure -> H09 FAIL
+
+  10. No retry policy defined -> S05 FAIL
+
+  11. completion_window not set -- async SLA unknown -> H08 FAIL'
