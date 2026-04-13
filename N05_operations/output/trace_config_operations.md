@@ -88,3 +88,7 @@ signal is traceable. No operation runs in the dark.
 | HEALTH_DOWN | HEALTH_POLL 3 consecutive failures | Signal N07 + trigger rollback assessment |
 | TEST_REGRESS | TEST_REGRESS delta > 10% degradation | Block deploy, flag for review |
 | SIG_LOST | SIG_TIMEOUT retry_count > 3 | Signal N07 crash detection |
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

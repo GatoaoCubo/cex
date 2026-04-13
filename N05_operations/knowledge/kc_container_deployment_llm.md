@@ -98,3 +98,12 @@ resource "kubernetes_horizontal_pod_autoscaler" "llm_scaler" {
 - Use image scanning for vulnerabilities
 - Set appropriate resource limits
 ```
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

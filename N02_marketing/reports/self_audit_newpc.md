@@ -183,3 +183,12 @@ No missing pip packages detected for these entry points.
 > *Every word that leaves this nucleus doesn't just inform -- it seduces.
 > But seduction without infrastructure is just a whisper in an empty room.
 > Fix the plumbing. Then turn up the heat.*
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

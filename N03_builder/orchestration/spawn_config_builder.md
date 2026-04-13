@@ -90,3 +90,12 @@ If opus-4-6 is unavailable:
 - Model config: `.cex/config/nucleus_models.yaml`
 - N07 spawn config: N07_admin/orchestration/spawn_config_admin.md
 - Dispatch script: `_spawn/dispatch.sh`
+
+## Boundary
+
+Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

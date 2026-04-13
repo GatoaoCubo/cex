@@ -24,3 +24,12 @@ pillar: P01
 | Freemium        | Medium            | High        | High                 | AI coding assistants             |
 | Enterprise Tiers| Very High         | Low         | Low                  | Customer success platforms       |
 ```
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

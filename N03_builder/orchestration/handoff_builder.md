@@ -111,3 +111,12 @@ python -c "from _tools.signal_writer import write_signal; write_signal('n03', 'c
 - Signal protocol: N03_builder/orchestration/signal_builder.md
 - Dispatch rules: N03_builder/orchestration/dispatch_rule_builder.md
 - Workflow: N03_builder/orchestration/workflow_builder.md
+
+## Boundary
+
+Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03, prompt puro) nem signal (evento simples).
+
+
+## 8F Pipeline Function
+
+Primary function: **COLLABORATE**

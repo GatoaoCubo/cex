@@ -197,3 +197,12 @@ Claude:    opus-4-6, 1M context
 Retriever: 2983 docs, 17142 vocab terms
 Doctor:    124 PASS | 0 WARN | 0 FAIL
 ```
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

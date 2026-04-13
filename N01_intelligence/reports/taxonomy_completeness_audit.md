@@ -309,3 +309,7 @@ The 12 Pillars were cross-referenced against 8 industry frameworks (62 concepts 
 - **Builder alignment**: 124 builder dirs vs. 124 kinds_meta.json entries, name normalization (hyphen->underscore)
 - **Audit date**: 2026-04-12
 - **Auditor**: N01 Intelligence (Analytical Envy lens)
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.

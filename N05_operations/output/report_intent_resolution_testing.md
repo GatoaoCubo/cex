@@ -437,3 +437,12 @@ And join `de`-linked words before object lookup.
 7. **P3**: Metaphor bridge + PT phrases (2hr) -- polish
 
 **Estimated total effort: ~7 hours for P0+P1+P2. Expected accuracy after: 85-90%.**
+
+## Boundary
+
+Atual vs anterior. NAO eh benchmark.
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

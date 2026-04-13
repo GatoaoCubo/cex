@@ -102,3 +102,12 @@ Tasks that DO NOT need an LLM -- run .py instead.
 | P2 | Result memoization (hash -> cache) | MEDIUM | 1h |
 | P3 | Ollama overnight evolve mode | MEDIUM | 3h |
 | P3 | Anthropic prompt caching integration | LOW (Max plan) | 2h |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

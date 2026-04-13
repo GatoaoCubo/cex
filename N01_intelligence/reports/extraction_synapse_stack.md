@@ -271,3 +271,12 @@ class F3Envelope:
 | `core/synapse/context/context-tracker.js` | Bracket calculation |
 | `core/synapse/output/formatter.js` | XML output assembly |
 | `.claude/skills/synapse/references/layers.md` | Layer reference docs |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

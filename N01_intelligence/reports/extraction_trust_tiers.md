@@ -222,3 +222,12 @@ def check_trust(task_requirements: list[str], nucleus_card: dict) -> bool:
 | `v3/@claude-flow/claims/src/domain/rules.ts` | canClaimIssue(), canStealClaim(), capacity checks |
 | `v3/@claude-flow/security/src/safe-executor.ts` | Allowlist model, blocked patterns, sudo prevention |
 | `v3/@claude-flow/memory/src/types.ts` | AccessLevel enum (private/team/swarm/public/system) |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

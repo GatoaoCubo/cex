@@ -56,3 +56,12 @@ The CEX system supports multiple dispatch modes for task execution. Each mode ha
 - **Throughput**: Low for dependent task sequences
 - **Best Use**: Validation pipelines, step-by-step transformations
 ```
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

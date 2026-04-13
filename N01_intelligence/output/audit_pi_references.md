@@ -140,3 +140,12 @@ fix 18 source files manually, recompile to fix 8 compiled files. Net: 18 manual 
 5. Recompile: `python _tools/cex_compile.py --all`
 6. Regenerate: `python _tools/cex_retriever.py` (rebuild index)
 7. Regenerate: `python _tools/cex_system_test.py` (fresh test results)
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

@@ -163,3 +163,12 @@ All ISOs present: manifest, instruction, system_prompt, examples, knowledge_card
 N03's builder infrastructure is **fully operational** on this new PC. The 123 builders, 1,599 ISOs, and 0.95 average density represent a mature, well-maintained construction system. The only blockers are environment variables for MCP servers (user action required) and the SQLite index for cex_query.py.
 
 **Infrastructure: HEALTHY. Ready for dispatch.**
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

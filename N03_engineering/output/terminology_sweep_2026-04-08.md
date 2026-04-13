@@ -69,3 +69,12 @@ These are scattered across individual builder ISOs (not templates). Breakdown:
 1. **High**: 8 remaining _builder-builder meta files (19 occurrences) -- these propagate
 2. **Medium**: 10 individual manifests with Portuguese in capabilities text
 3. **Low**: 4 example files with Portuguese in comments
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

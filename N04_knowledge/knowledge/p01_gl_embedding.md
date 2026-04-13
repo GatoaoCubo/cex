@@ -22,3 +22,12 @@ density_score: 0.96
 **Definition**: A fixed-length array of floating-point numbers (typically 384–3072 dimensions) that represents the semantic meaning of a text passage. Produced by embedding models (OpenAI `text-embedding-3-*`, Voyage `voyage-3`, local SBERT). Stored in vector databases (pgvector, FAISS). Retrieved via cosine similarity, dot product, or L2 distance. The numeric substrate of RAG pipelines.
 
 **See**: `embedding_config`, `embedder_provider`, `vector_store`
+
+## Boundary
+
+Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

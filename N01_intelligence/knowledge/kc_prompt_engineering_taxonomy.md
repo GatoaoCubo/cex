@@ -54,3 +54,12 @@ This knowledge card explores core prompt engineering paradigms and their charact
 | ReAct            | Reasoning + action execution | Complex problem solving  | Iterative approach      |
 | Self-consistency | Cross-verified reasoning     | High-stakes decisions    | Error reduction         |
 ```
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

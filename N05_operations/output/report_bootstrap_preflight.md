@@ -152,3 +152,12 @@ Exit codes: 0 = GO, 1 = NO-GO (blockers), 2 = GO with caution (warnings)
 
 **GO** -- All 6 components pass validation. The overnight bootstrap infrastructure
 is ready for a real from-zero rebuild. No blockers found. All integration points verified.
+
+## Boundary
+
+Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

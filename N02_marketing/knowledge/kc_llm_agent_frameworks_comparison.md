@@ -17,3 +17,12 @@ pillar: P01
 | **DSPy**     | Pipeline orchestration, tool integration | Powerful for complex task chains      | Limited community, niche use cases       |
 | **CEX**      | 8F pipeline, GDP protocol, auto-research | Comprehensive, self-healing            | Requires setup, steeper learning curve   |
 ```
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

@@ -129,3 +129,12 @@ N05 has solid artifact coverage (45+ files) but **tooling infrastructure is brok
 2. Add fetch MCP server to .mcp-n05.json
 3. Remove or configure postgres MCP server
 4. Consider --effort max for code review dispatches
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

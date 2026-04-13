@@ -95,3 +95,12 @@ For mixed artifacts (e.g., branded pricing page), average both.
 | Pass | 8.0-8.9 | Publish, note improvements |
 | Review | 7.0-7.9 | Revise weak dimensions |
 | Fail | < 7.0 | Reject, re-build |
+
+## Boundary
+
+Criterio de avaliacao com framework. NAO eh benchmark (nao mede) nem quality_gate (P11, nao bloqueia).
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

@@ -206,3 +206,12 @@ Query
 | `v3/@claude-flow/memory/src/agentdb-adapter.ts` | Embedding generation interface |
 | `v3/@claude-flow/memory/benchmarks/hnsw-indexing.bench.ts` | Performance benchmarks |
 | `v3/plugins/ruvector-upstream/src/bridges/hnsw.ts` | WASM bridge (fallback chain) |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

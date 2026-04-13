@@ -64,3 +64,12 @@ defects:
     severity: critical|major|minor
 recommendation: pass|rewrite|split|archive
 ```
+
+## Boundary
+
+Identidade + regras + formato. Lido PRIMEIRO pelo LLM.
+
+
+## 8F Pipeline Function
+
+Primary function: **BECOME**

@@ -58,3 +58,12 @@ pillar: P01
 - Use versioned output formats for compatibility  
 - Implement circuit breakers for failing subtasks  
 - Maintain audit trail for all decisions and changes
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

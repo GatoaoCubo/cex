@@ -80,3 +80,12 @@ python -c "from _tools.signal_writer import write_signal; write_signal('n04', 'c
 # Commit
 git add -A && git commit -m "[N04] <description>"
 ```
+
+## Boundary
+
+Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

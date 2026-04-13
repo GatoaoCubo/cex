@@ -50,3 +50,12 @@ Implement pre-commit checks with:
 4. Use `git diff` before committing to verify changes
 ```
 ```
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

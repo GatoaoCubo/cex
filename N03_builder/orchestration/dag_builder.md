@@ -115,3 +115,12 @@ Cross-wave dependencies are strict — do not build Wave N+1 until Wave N comple
 
 - N07 master DAG: N07_admin/orchestration/dag_admin.md
 - Workflow: N03_builder/orchestration/workflow_builder.md
+
+## Boundary
+
+Grafo aciclico de dependencias entre tasks. NAO eh workflow (execucao direta) nem component_map (P08, componentes).
+
+
+## 8F Pipeline Function
+
+Primary function: **PRODUCE**

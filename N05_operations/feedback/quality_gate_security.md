@@ -74,3 +74,12 @@ Pass condition: all hard gates pass AND `security_score >= 0.90`
 | >= 8.0 | PUBLISH | Ready for runtime |
 | >= 7.0 | REVIEW | Security review required |
 | < 7.0  | REJECT | Security rework mandatory |
+
+## Boundary
+
+Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico pass/fail) nem scoring_rubric (P07, define criterios).
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

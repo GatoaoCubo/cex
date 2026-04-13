@@ -87,3 +87,12 @@ An artifact is orphaned if ANY of:
 | Pillar balance | `stdev(artifacts_per_pillar) / mean` | <0.5 |
 | Tag entropy | `-Σ p(tag) log p(tag))` | >4.0 (diverse) |
 | Orphan rate | `orphans / total_artifacts` | <5% |
+
+## Boundary
+
+Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem daemon (nao persiste em background).
+
+
+## 8F Pipeline Function
+
+Primary function: **CALL**

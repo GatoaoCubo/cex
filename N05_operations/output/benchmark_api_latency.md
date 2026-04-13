@@ -106,3 +106,12 @@ hey -n 500 -c 10 -m GET https://api.example.railway.app/health
 | date | profile | health_p95 | search_p95 | create_p95 | notes |
 |------|---------|-----------|-----------|-----------|-------|
 | 2026-04-07 | baseline | TBD | TBD | TBD | Initial benchmark — baselines to be established |
+
+## Boundary
+
+Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

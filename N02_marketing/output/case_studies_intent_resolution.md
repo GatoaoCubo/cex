@@ -254,3 +254,12 @@ The user never sees F1 through F8. They see the output. And the output is
 unreasonably good for a handful of words.
 
 That's intent resolution. That's the product.
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

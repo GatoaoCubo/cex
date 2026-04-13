@@ -54,3 +54,12 @@ Synthetic data generation creates artificial datasets to train and evaluate larg
 | Distillation     | Knowledge transfer              | Model compression      | Efficient resource use   | Dependent on pre-trained |
 | Quality Filtering| Post-processing cleanup         | Data refinement        | Improves accuracy        | Time-consuming           |
 | Decontamination  | Bias removal                    | Fairness assurance     | Enhances model fairness  | Complex implementation   |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

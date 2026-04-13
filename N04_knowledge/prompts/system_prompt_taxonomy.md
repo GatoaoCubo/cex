@@ -55,3 +55,12 @@ You normalize tags, detect misclassifications, and enforce domain boundaries.
 5. Cross-reference builder alignment
 6. Produce report: correct / misclassified / orphan / missing-tags
 ```
+
+## Boundary
+
+Identidade + regras + formato. Lido PRIMEIRO pelo LLM.
+
+
+## 8F Pipeline Function
+
+Primary function: **BECOME**

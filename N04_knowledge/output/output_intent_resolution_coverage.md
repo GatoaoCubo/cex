@@ -174,3 +174,12 @@ Added Section 8: "Intent Resolution & Input Processing Concepts" with 8 rows map
 - CEX implementation
 
 Concepts covered: intent classification, query rewriting, context assembly, slot filling, input normalization, intent-to-kind mapping, prompt composition, disambiguation.
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

@@ -53,3 +53,12 @@ The open source AI ecosystem in 2026 is characterized by rapid innovation and di
 | **Hugging Face**| Cloud, Self-hosted    | Free tier; paid for higher limits |
 | **Together.ai**| Cloud, Self-hosted    | Free tier; business plans        |
 | **Groq**       | Cloud, Self-hosted    | Free tier; production plans      |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

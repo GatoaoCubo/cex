@@ -99,3 +99,12 @@ density_score: null
 | 5 | Build firecrawl-to-KC pipeline | LOW | 1 hour |
 | 6 | Build notebooklm audio overview automation | LOW | 1 hour |
 | 7 | Clean orphan pillar codes from index | LOW | 10 min |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

@@ -153,3 +153,12 @@ P11 schema defines these kinds:
 | Agent Card | Needs count update |
 | Critical Fix | Set 6 API keys (Stripe, Hotmart, Canva) |
 | Missing Keys | 6 API keys across 3 services |
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

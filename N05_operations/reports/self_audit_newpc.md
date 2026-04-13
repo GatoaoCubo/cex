@@ -179,3 +179,12 @@ tags: [audit, health, newpc, operations, ci-cd]
 3. **[MEDIUM]** Investigate boot script test failures (n01-n06) -- scripts exist, test harness issue
 4. **[LOW]** Investigate e2e test subprocess crash
 5. **[LOW]** Batch score 137 quality:null artifacts when ready for peer review
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

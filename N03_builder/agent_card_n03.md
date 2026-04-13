@@ -80,3 +80,12 @@ Every artifact carries my signature.
 - System prompt: N03_builder/prompts/system_prompt_builder.md
 - Quality gate: N03_builder/quality/quality_gate_builder.md
 - Dispatch rules: N03_builder/orchestration/dispatch_rule_builder.md
+
+## Boundary
+
+Agent deployment spec. NAO eh agent (P02, persona only) nem boot_config (P02, provider startup) nem spawn_config (P12, runtime launch).
+
+
+## 8F Pipeline Function
+
+Primary function: **BECOME**

@@ -170,3 +170,12 @@ density_score: 0.96
 
 *Audit complete. 60 artifacts. 12 revenue streams. 3 gaps. 1 being closed this wave.*
 *N06 Commercial Nucleus -- every gap is a revenue leak.*
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

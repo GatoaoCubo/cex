@@ -143,3 +143,12 @@ tags: [dependencies, environment, newpc, operations]
 - Node v24.14.1 is current LTS. npx functional for MCP server on-demand install.
 - Windows terminal defaults to cp1252. ASCII-only code rule prevents UnicodeEncodeError.
 - Git LFS configured but no tracked patterns detected (no large binaries in repo).
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

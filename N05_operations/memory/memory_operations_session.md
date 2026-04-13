@@ -72,3 +72,12 @@ approaches), conventions (established patterns), and accumulated context
 | commits_made | 4 (this session) |
 | gates_passed | 14/14 pre-commit checks |
 | gates_failed | 1 (tldr colon — fixed) |
+
+## Boundary
+
+Estado mental variavel acumulado em runtime. NAO eh mental_model P02 (identidade fixa do agente, imutavel) nem session_state (efemero, snapshot).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

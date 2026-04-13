@@ -83,3 +83,12 @@ Este documento explora os principais padrões de orquestração de equipes (crew
 
 ## Conclusão
 A escolha do padrão de orquestração depende das necessidades específicas do sistema, incluindo escalabilidade, complexidade e requisitos de comunicação. Sistemas multimodelo frequentemente beneficiam-se de abordagens híbridas para equilibrar controle e flexibilidade.
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

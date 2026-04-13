@@ -67,3 +67,12 @@ Tracks all classification decisions made during taxonomy maintenance. Prevents r
 | "What's the canonical tag for Z?" | Search convention records for synonym |
 | "Has this orphan been resolved before?" | Search orphan-resolution records |
 | "What boundaries has N04 set?" | Filter domain-boundary decisions by `decided_by: n04_*` |
+
+## Boundary
+
+Qual memoria usar. NAO eh session_state.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

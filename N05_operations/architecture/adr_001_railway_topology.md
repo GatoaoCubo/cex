@@ -70,3 +70,12 @@ Adopt a 4-service topology on Railway:
 | Microservices (10+ services) | Over-engineering for current scale |
 | Docker Compose | Railway-native is simpler, no container management |
 | Kubernetes | Overkill for 4 services, Railway handles infra |
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

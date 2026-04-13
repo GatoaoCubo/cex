@@ -259,3 +259,12 @@ All patterns that boost LLM performance from imprecise input, organized by mecha
 | Wei et al., Chain-of-Thought Prompting (NeurIPS) | Paper | 2022 |
 | Khattab et al., DSPy: Compiling Declarative Language Model Calls | Paper | 2024 |
 | Zheng et al., Take a Step Back: Evoking Reasoning via Abstraction | Paper | 2023 |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

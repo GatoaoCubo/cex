@@ -87,3 +87,12 @@ These are SDK spec documents, not standard KCs. No action needed.
 1. **Batch density scoring**: Run `/evolve` or `cex_score.py` on the 88 null-density KCs to establish baselines
 2. **Improve 3 low-density KCs**: Expand with industry data (see table above)
 3. **Monitor**: Re-run this audit after each major mission wave
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

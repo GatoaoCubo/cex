@@ -65,3 +65,12 @@ Every text that enters the vector store passes through your configuration decisi
 4. Measure: Recall@5, Recall@10, MRR, latency_p50, latency_p99
 5. Compare against TF-IDF baseline (`cex_retriever.py`)
 6. Document results in `N04_knowledge/output/output_embedding_benchmark.md`
+
+## Boundary
+
+Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt (P03, como fala).
+
+
+## 8F Pipeline Function
+
+Primary function: **BECOME**

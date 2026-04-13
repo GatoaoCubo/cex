@@ -181,3 +181,12 @@ The lens is **monetization-first**: pricing is optimized, funnels are metrified,
 ```
 
 **ROI of this agent card**: Self-awareness is free. Ignorance of capabilities costs missed revenue opportunities, duplicated work, and misrouted tasks. This agent card pays for itself every time N07 routes correctly to N06.
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

@@ -91,3 +91,12 @@ After 10+ deploys, analyze for:
 | entries_kept | Last 100 deploys |
 | archive | Monthly archive to `.cex/runtime/archive/deploys/` |
 | cleanup | Auto-purge entries older than 365 days |
+
+## Boundary
+
+Estado mental variavel acumulado em runtime. NAO eh mental_model P02 (identidade fixa do agente, imutavel) nem session_state (efemero, snapshot).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

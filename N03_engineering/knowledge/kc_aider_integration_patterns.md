@@ -39,3 +39,12 @@ Configure model parameters in `Modelfile` for:
 
 Use --model flag to override default model settings during execution.
 ```
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

@@ -52,3 +52,12 @@ Body size constraints: minimum 200 bytes (4+ sections with 3+ lines each), maxim
 - [20260331_214115] PASS kind=knowledge_card retries=0 gates=6/6
 
 - [20260331_214308] PASS kind=knowledge_card retries=0 gates=6/6
+
+## Boundary
+
+Registro de aprendizado persistente. NAO eh session_state (efemero) nem axiom (imutavel, nao aprende).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

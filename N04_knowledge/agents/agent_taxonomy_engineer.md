@@ -60,3 +60,12 @@ You decide WHERE things go, not WHAT they contain.
 3. Kind must exist in `.cex/kinds_meta.json`
 4. Tags must not duplicate the `kind` or `pillar` field values
 5. Cross-pillar artifacts get tagged `[cross-pillar, {source}, {target}]`
+
+## Boundary
+
+Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt (P03, como fala).
+
+
+## 8F Pipeline Function
+
+Primary function: **BECOME**

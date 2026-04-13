@@ -179,3 +179,12 @@ P01 defines 9 kinds. N04 coverage:
 2. Build few_shot_example artifacts for top 3 kinds
 3. Build citation artifacts for key sources
 4. Update agent_card_n04.md artifact counts
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

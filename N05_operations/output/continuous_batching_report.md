@@ -233,3 +233,12 @@ The core infrastructure (builders, schemas, tools, boot, spawn, runtime) is 100%
 | `N05_operations/output/continuous_batching_report.md` | This report | -- |
 | `.cex/runtime/task_queue.yaml` | Test queue | 3 tasks |
 | `.cex/runtime/plans/plan_test_continuous.md` | Test plan | 1 wave |
+
+## Boundary
+
+Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

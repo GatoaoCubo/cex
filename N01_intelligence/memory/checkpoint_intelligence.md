@@ -82,3 +82,12 @@ This checkpoint captures the state of an N01 research session mid-execution, ena
 | Resume risk | Data staleness | Service drift |
 | Rollback | Re-gather stale sources | Revert deploy |
 | Criticality | Medium (rework) | High (downtime) |
+
+## Boundary
+
+Estado salvo. NAO eh signal.
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

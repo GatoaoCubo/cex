@@ -420,3 +420,12 @@ Based on this research, the recommended implementation order (compared against 2
 | [Dropbox DSPy Optimization](https://dropbox.tech/machine-learning/optimizing-dropbox-dash-relevance-judge-with-dspy) | Engineering blog | 2025 |
 | [Building Production-Grade Semantic Router 2026](https://atul4u.medium.com/building-a-production-grade-semantic-router-the-smart-way-to-route-ai-prompts-f303e6d2ae7e) | Industry article | 2026 |
 | [Embedding Intent Classification <1ms](https://medium.com/@durgeshrathod.777/intent-classification-in-1ms-how-we-built-a-lightning-fast-classifier-with-embeddings-db76bfb6d964) | Engineering blog | 2025 |
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

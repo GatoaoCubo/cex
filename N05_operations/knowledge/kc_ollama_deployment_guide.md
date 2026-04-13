@@ -48,3 +48,12 @@ COPY modelfile.modelfile /modelfile
 3. Monitor resource usage with `ollama stats`
 4. Implement rate limiting for public APIs
 ```
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**

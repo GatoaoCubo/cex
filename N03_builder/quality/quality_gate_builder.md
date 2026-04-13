@@ -105,3 +105,12 @@ The builder DOES enforce structural, syntactic, and pipeline compliance.
 - Schema validation: N03_builder/schemas/artifact_schema_builder.md
 - Agent definition: N03_builder/agents/agent_builder.md
 - Quality tools: `_tools/cex_hooks.py`, `_tools/cex_score.py`
+
+## Boundary
+
+Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico pass/fail) nem scoring_rubric (P07, define criterios).
+
+
+## 8F Pipeline Function
+
+Primary function: **GOVERN**

@@ -119,3 +119,12 @@ python _tools/cex_signal_watch.py --nucleus n03
 - Handoff contract: N03_builder/orchestration/handoff_builder.md
 - N07 signal protocol: N07_admin/orchestration/signal_admin.md
 - Signal writer: `_tools/signal_writer.py`
+
+## Boundary
+
+Sinal simples entre agentes (complete, error). NAO eh handoff (instrucao completa) nem interface (P06, contrato).
+
+
+## 8F Pipeline Function
+
+Primary function: **COLLABORATE**

@@ -41,3 +41,12 @@ language: en
 - Check for consistent terminology
 - Verify compliance with CEX standards
 - Ensure proper formatting and structure
+
+## Boundary
+
+Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.
+
+
+## 8F Pipeline Function
+
+Primary function: **INJECT**
