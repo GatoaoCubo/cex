@@ -3,8 +3,9 @@ id: kc_llm_agent_frameworks
 kind: knowledge_card
 title: "LLM Agent Frameworks Comparison"
 version: 1.0.0
-quality: 8.6
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # LLM Agent Frameworks Comparison
