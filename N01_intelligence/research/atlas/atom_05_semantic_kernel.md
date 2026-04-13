@@ -976,6 +976,20 @@ AG2 inherited from AutoGen 0.2:
 | `@kernel_function` | Core (Python) | 2023 |
 | `@vectorstoremodel` | Vector Store (Python) | 2024 |
 | `kernel.as_mcp_server()` | MCP Integration | 2025 |
+| `KernelProcess` | Process Framework | 2024 |
+| `KernelProcessEvent` | Process Framework | 2024 |
+| `KernelProcessStep` | Process Framework | 2024 |
+| `KernelProcessStep<TState>` | Process Framework | 2024 |
+| `KernelProcessStepContext` | Process Framework | 2024 |
+| `KernelProcessStepState<TState>` | Process Framework | 2024 |
+| `MCPSsePlugin` | MCP Integration (Python) | 2025 |
+| `MCPStdioPlugin` | MCP Integration (Python) | 2025 |
+| `MCPStreamableHttpPlugin` | MCP Integration (Python) | 2025 |
+| `ProcessBuilder` | Process Framework | 2024 |
+| `@register_agent_type` | Agent Framework (Python) | 2025 |
+| `.AddMcpServer()` | MCP Integration (.NET) | 2025 |
+| `.WithStdioServerTransport()` | MCP Integration (.NET) | 2025 |
+| `.WithTools(kernel)` | MCP Integration (.NET) | 2025 |
 
 ---
 
@@ -1000,10 +1014,123 @@ AG2 inherited from AutoGen 0.2:
 | Agent Definition | Agent classes + YAML specs | Builder ISOs (13 per kind) + agent cards |
 | Plugin System | `KernelPlugin` + `@kernel_function` | Builders (126) + `_tools/*.py` (79) |
 | Orchestration | 5 patterns (Concurrent, Sequential, Handoff, GroupChat, Magentic) | Grid dispatch + wave-based multi-nucleus |
-| Memory | Vector Store Connectors (16+ backends) | `P10_memory/` + `cex_retriever.py` (TF-IDF) |
+| Memory | Vector Store Connectors (18+ backends) | `P10_memory/` + `cex_retriever.py` (TF-IDF) |
 | Quality Gate | Filters pipeline | 8F F7 GOVERN (3-layer scoring) |
 | Template System | PromptTemplateConfig (SK/Handlebars/Jinja2/Liquid) | Prompt Compiler (`p03_pc_cex_universal.md`) |
 | Process Automation | Process Framework (Step/Process/Event) | 8F Pipeline (F1-F8) |
 | State Management | AgentThread (local/remote) | `.cex/runtime/` (handoffs, signals, PIDs) |
 | Middleware | 3 filter types | Pre/post hooks (`cex_hooks.py`) |
 | Multi-Model | Service selector + multiple AI services | `nucleus_models.yaml` + `cex_router.py` |
+| MCP Support | Native bidirectional (MCPStdioPlugin + .WithTools) | Via N05 tool integrations |
+| Declarative Agents | YAML spec + AgentRegistry (7 types) | Handoff files + agent cards |
+| Process Runtimes | Local + Dapr + Orleans | In-process only (single machine) |
+
+---
+
+## 12. Competitive Comparison: SK vs. LangChain vs. LlamaIndex
+
+### Agent + Orchestration
+
+| Dimension | Semantic Kernel | LangChain | LlamaIndex |
+|-----------|----------------|-----------|------------|
+| Primary language | C#, Python, Java | Python, JS | Python |
+| Agent paradigm | Event-driven + typed steps | Chain-based / LCEL | Query pipeline + agents |
+| Orchestration patterns | 5 named (Concurrent, Sequential, Handoff, GroupChat, Magentic) | LangGraph (graph-based) | Workflow (event-driven, similar to SK Process) |
+| Process / workflow engine | Process Framework (Dapr/Orleans) | LangGraph Cloud (hosted) | LlamaIndex Workflow |
+| Declarative agents | YAML via AgentRegistry | LangGraph human-in-loop / state machines | AgentRunner config |
+| Human-in-the-loop | Process Framework pause/resume | LangGraph `interrupt()` | Query engine callbacks |
+| Multi-agent | 5 orchestration classes | LangGraph multi-agent graphs | AgentWorkflow |
+
+### Memory / Vector Store
+
+| Dimension | Semantic Kernel | LangChain | LlamaIndex |
+|-----------|----------------|-----------|------------|
+| Vector store abstraction | Unified `VectorStore` + 18 connectors | 60+ vector store integrations | 40+ vector stores |
+| Embedding generation | Via `IEmbeddingGenerationService` | Via `Embeddings` base class | Via `EmbedModel` |
+| RAG approach | `IVectorSearchable` -> Text Search -> RAG | `VectorStoreRetriever` -> `RetrievalQA` | `VectorStoreIndex` -> `QueryEngine` |
+| Memory types | Vector + Chat History + AgentThread | Buffer, Summary, Vector, Entity memories | Chat memory + vector index |
+| Schema-first | Yes (annotations / record definition) | No (document-oriented) | No (node-oriented) |
+
+### Enterprise Readiness
+
+| Dimension | Semantic Kernel | LangChain | LlamaIndex |
+|-----------|----------------|-----------|------------|
+| Observability | OpenTelemetry native | LangSmith (proprietary) | LlamaTrace / Arize |
+| Security middleware | 3 filter types (PII, content safety, semantic cache) | Custom callbacks | Callbacks only |
+| MCP support | Native bidirectional (Apr 2026) | MCP via community packages | MCP via community packages |
+| Multi-language | C# + Python + Java | Python + JS | Python only |
+| Microsoft ecosystem | Deep (Azure OpenAI, Foundry, CosmosDB) | No native Azure integration | No native Azure integration |
+| License | MIT | MIT | MIT |
+| Production readiness | GA (1.0 Apr 2026) | GA (v0.3 stable) | GA (v0.12 stable) |
+
+### When to Choose SK vs. Alternatives
+
+| Choose SK when... | Choose LangChain when... | Choose LlamaIndex when... |
+|-------------------|-------------------------|--------------------------|
+| C# / .NET is your primary stack | Python-first, broad community | Document-heavy RAG is the core use case |
+| Deep Azure / Microsoft integration needed | LangSmith observability is critical | Query pipeline composition is the primary pattern |
+| Enterprise security filters are required | Maximum ecosystem breadth needed | Index abstraction over multiple data sources |
+| Process Framework for business automation | LangGraph for stateful multi-agent graphs | Already using LlamaIndex's node/document model |
+| Declarative YAML agent portability | Fast prototyping with minimal boilerplate | LlamaParse for complex PDF ingestion |
+
+---
+
+## 13. Package Installation Reference
+
+### Install by feature (Python)
+
+```bash
+# Core SK
+pip install semantic-kernel
+
+# With MCP support
+pip install semantic-kernel[mcp]
+
+# Specific vector store extras
+pip install semantic-kernel[qdrant]
+pip install semantic-kernel[redis]
+pip install semantic-kernel[chroma]
+pip install semantic-kernel[pinecone]
+pip install semantic-kernel[weaviate]
+pip install semantic-kernel[azure_cosmos_db]
+
+# Process Framework (included in main package)
+# semantic_kernel.processes
+
+# Agent Framework 1.0 (Microsoft Agent Framework)
+pip install agent-framework
+```
+
+### Install by feature (.NET)
+
+```bash
+# Core
+dotnet add package Microsoft.SemanticKernel
+
+# Agents
+dotnet add package Microsoft.SemanticKernel.Agents.Core
+dotnet add package Microsoft.SemanticKernel.Agents.OpenAI
+dotnet add package Microsoft.SemanticKernel.Agents.AzureAI
+dotnet add package Microsoft.SemanticKernel.Agents.Orchestration
+dotnet add package Microsoft.SemanticKernel.Agents.Runtime.InProcess
+
+# Process Framework
+dotnet add package Microsoft.SemanticKernel.Process.LocalRuntime --version 1.46.0-alpha
+dotnet add package Microsoft.SemanticKernel.Process.Runtime.Dapr --version 1.46.0-alpha
+
+# Vector Store abstractions
+dotnet add package Microsoft.Extensions.VectorData.Abstractions
+
+# Vector Store connectors (each separate, most need --prerelease)
+dotnet add package Microsoft.SemanticKernel.Connectors.Qdrant --prerelease
+dotnet add package Microsoft.SemanticKernel.Connectors.Postgres --prerelease
+dotnet add package Microsoft.SemanticKernel.Connectors.AzureAISearch
+dotnet add package Microsoft.SemanticKernel.Connectors.InMemory --prerelease
+
+# MCP server (C# -- uses official MCP SDK)
+dotnet add package ModelContextProtocol
+
+# Agent Framework 1.0 (.NET)
+dotnet add package Microsoft.Agents.AI
+dotnet add package Microsoft.Agents.AI.OpenAI --prerelease
+```

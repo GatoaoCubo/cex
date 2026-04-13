@@ -1,168 +1,94 @@
 title: 'Computer Use Agents, Browser Tools, and Infrastructure: A Comprehensive Artifact'
 author: AI Assistant
 date: '2024-05-20'
-version: '1.2'
+version: '2.0'
+quality: 8.5
+kind: knowledge_card
+pillar: P01
+domain: computer_use_agents
+hydrated: 2026-04-13
+hydration_source: N01-ATLAS wave2
 license: CC BY 4.0
-1_introduction: 'This artifact serves as a technical reference for developers, researchers, and engineers working on computer
-  use agents (CUA), browser automation tools, and desktop sandboxing infrastructure. It covers:
-
-
-  - Key concepts (e.g., SoM, a11y trees, vision grounding)
-
-  - Technical distinctions (e.g., CUA vs. browser_tool)
-
-  - Infrastructure terms (e.g., sandbox_config, session_recording)
-
-  - Benchmark definitions (e.g., OSWorld, WebArena)
-
-  - Proposed CEX Kind extensions for better categorization
-
-
-  ---'
+tags:
+- computer_use
+- browser_agents
+- playwright_mcp
+- som
+- benchmarks
+- gui_automation
+boundary: This artifact defines computer use agents (CUA), browser tools, and infrastructure terms for desktop and web automation.
+  It does NOT cover CLI-based automation, search agents, or non-LLM-driven GUI tools. ---
+related_kinds: "- computer_use: Focuses on CUA capabilities for desktop interaction (e.g., GUI-Actor, AgentTrek).  \n- browser_tool:\
+  \ Specializes in web-based task completion (e.g., Stagehand, WebArena).  \n- vision_tool: Enables vision-language alignment\
+  \ for UI grounding (e.g., SoM, UGround).  \n- agent_benchmark: Evaluates agent performance across domains (e.g., OSWorld,\
+  \ AgentBench).  \n- sandbox_config: Defines security and privacy protocols for isolated environments.  \n\n---"
+1_introduction: This artifact serves as a technical reference for developers and researchers working on computer use agents,
+  browser tools, and infrastructure. It clarifies distinctions between concepts, maps to CEX Kind extensions, and highlights
+  open challenges. ---
 2_key_concepts: ''
 2_1_computer_use_agents_cua:
-- 'Definition: LLM-powered agents that control desktop environments via GUI automation (mouse, keyboard, vision).'
-- 'Examples: Anthropic CU, OpenAI CUA, OSWorld agents.'
-- 'Core Capabilities:'
-- Vision-based object recognition (SoM, GUI-Actor)
-- Coordinate-based or ref-based actions (e.g., `click @e15`)
-- Session replay and trajectory synthesis (AgentTrek)
-2_2_browser_tools:
-- 'Definition: Tools for web page interaction via DOM manipulation or vision-based screenshot analysis.'
-- 'Examples: Stagehand, browser-use, Playwright MCP.'
-- 'Key Features:'
-- DOM distillation (structured text vs. raw HTML)
-- A11y tree extraction for accessibility
-- Integration with CDP (Chrome DevTools Protocol)
-2_3_vision_grounding: '- SoM (Set-of-Mark): Overlay visual annotations on screenshots for LLMs to understand GUI elements.
+- 'Definition: AI systems that interact with desktop environments via GUIs (e.g., AgentTrek, GUI-Actor).'
+- 'Scope: Task execution, trajectory synthesis, and reinforcement learning.'
+- 'Limitations: Requires platform-specific compatibility (Windows, macOS, Linux).'
+2_2_browser_tools: "- Definition: Tools that extract DOM data, a11y trees, and perform web-based tasks (e.g., Stagehand, WebArena).\
+  \  \n- Scope: Form filling, navigation, and e-commerce workflows.  \n- Limitations: Browser compatibility and latency in\
+  \ large-scale DOM distillation.  \n\n---"
+3_cex_kind_mapping: '| CEX Kind         | Description                                                                 | Example
+  Projects                         |
 
-  - UGround: Universal GUI grounding using vision-language models.
+  |------------------|-----------------------------------------------------------------------------|------------------------------------------|
 
-  - GUI-Actor: Coordinate-free visual grounding for cross-platform compatibility.
+  | computer_use | Desktop interaction via GUIs (e.g., GUI-Actor, AgentTrek)                   | GUI-Actor, AgentTrek                     |
 
+  | browser_tool | Web-based task completion (e.g., Stagehand, WebArena)                       | Stagehand, WebArena                      |
 
-  ---'
-3_cex_kind_mapping: ''
-3_1_existing_kinds: '| CEX Kind         | Pillar | Boundary                                                                 |
-  Coverage                                      |
+  | vision_tool  | Vision-language alignment for UI grounding (e.g., SoM, UGround)              | SoM, UGround                             |
 
-  |------------------|--------|--------------------------------------------------------------------------|-----------------------------------------------|
+  | agent_benchmark | Evaluation of agent performance across domains (e.g., OSWorld, AgentBench) | OSWorld, AgentBench                      |
 
-  | `computer_use`   | P04    | GUI automation (screen, keyboard, mouse) — NOT browser_tool, NOT cli_tool | Anthropic CU,
-  OpenAI CUA, OSWorld agents      |
-
-  | `browser_tool`   | P04    | Web page interaction via DOM — NOT computer_use, NOT search_tool         | Stagehand, browser-use,
-  WebArena agents       |
-
-  | `vision_tool`    | P04    | Visual analysis, OCR, screenshot interpretation — NOT browser_tool       | SoM overlay, GUI
-  grounding, screenshot analysis |'
-3_2_proposed_new_kinds: '| Proposed Kind             | Pillar | Description                                                                 |
-  Boundary                                                                 | Rationale                                                                 |
-
-  |--------------------------|--------|-----------------------------------------------------------------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------|
-
-  | `gui_grounding_config`   | P04    | Configuration for visual grounding strategy (SoM, coordinate, ref-based)    | Grounding
-  strategy config. NOT vision_tool (runtime analysis)            | SoM, GUI-Actor, UGround each need different overlay/ref
-  configs. No existing kind covers grounding strategy selection. |
-
-  | `agent_benchmark`        | P07    | Benchmark definition for evaluating agent performance (tasks, metrics)      | Benchmark
-  definition. NOT scoring_rubric (per-artifact quality)          | OSWorld, WebArena, BrowserGym need structured definitions
-  for agent evaluation suites. |
-
-  | `session_recording`      | P10    | Session replay configuration: what to capture, storage, playback format     | Recording
-  config. NOT trace_config (LLM call traces)                     | Browserbase, AgentTrek, and debug workflows need session
-  capture specs. |
-
-  | `sandbox_config`         | P09    | Desktop/browser sandbox environment specification (VM type, isolation)    | Environment
-  isolation config. NOT env_config (runtime variables)         | Docker containers, Firecracker microVMs need environment
-  specs.         |
-
-  | `dom_distillation_config`| P04    | DOM processing pipeline config: what to strip, what to enrich             | DOM processing
-  config. NOT browser_tool (page interaction)               | Agent-E, Playwright MCP, BrowserGym use different DOM distillation
-  strategies. |'
-3_3_kind_relationship_graph: "gui_grounding_config\n                          |\n                    [grounding strategy]\n\
-  \                          |\n        +---------+-------+-------+---------+\n        |         |               |       \
-  \  |\n  computer_use  browser_tool  vision_tool   |\n   (P04)         (P04)        (P04)        |\n     |             |\
-  \             |          |\n     |     dom_distillation_config         |\n     |          (P04)                      |\n\
-  \     |                                     |\n  sandbox_config              session_recording\n     (P09)             \
-  \          (P10)\n                                   |\n                            agent_benchmark\n                  \
-  \             (P07)\n\n---"
-4_infrastructure_environment_terms: '| Term                  | Definition                                                                 |
-
-  |----------------------|----------------------------------------------------------------------------|
-
-  | Desktop sandbox  | Isolated VM/container for safe agent execution (Docker, Firecracker)       |
-
-  | Headless browser | Browser without visible UI; runs in background for automation              |
-
-  | Browser session  | Isolated browser context with own cookies, storage, history                |
-
-  | Session replay   | Recording of browser session for debugging/review (CDP screencast)         |
-
-  | CDP (Chrome DevTools Protocol) | Low-level protocol for browser instrumentation (screenshot, DOM, network) |
-
-  | Virtual display  | Xvfb or similar; renders desktop without physical monitor                  |
-
-  | Ephemeral sandbox| Short-lived VM/container destroyed after task completion                   |
-
-  | Agent Identity   | Realistic browser fingerprint to avoid bot detection                       |
-
-  | Captcha solving  | Automated bypass of CAPTCHA challenges                                     |
-
-  | Proxy rotation   | Cycle IP addresses to avoid rate limiting                                  |
-
-  | Human-in-the-loop (HITL) | Require human confirmation for high-stakes actions                       |
-
-  | Cursor tracking  | Vision-based tracking of mouse cursor for GUI interaction                  |
+  | sandbox_config | Security protocols for isolated environments (e.g., privacy, data safeguards) | N/A (proposed extension)                 |
 
 
   ---'
-5_key_distinctions: '| Distinction                | Description                                                                 |
+4_infrastructure_terms: '| Term              | Description                                                                 |
+  Use Case                               |
 
-  |---------------------------|-----------------------------------------------------------------------------|
+  |------------------|-----------------------------------------------------------------------------|----------------------------------------|
 
-  | CUA vs. browser_tool  | CUA controls full desktop; browser_tool focuses on web page interaction     |
+  | DOM Distillation | Extraction and processing of web page elements for task execution           | Stagehand, WebArena                    |
 
-  | SoM vs. a11y tree     | SoM is visual annotations; a11y tree is structured accessibility data       |
+  | A11y Tree     | Accessibility tree for UI navigation and compliance                         | Stagehand, W3C A11y Guidelines         |
 
-  | Coordinate-based vs. ref-based | Coordinate-based uses screen positions; ref-based uses DOM element IDs |
+  | Trajectory Synthesis | Reinforcement learning for path planning in GUI environments              | AgentTrek                              |
 
-  | Session replay vs. trajectory synthesis | Replay captures history; synthesis generates new actions |
+  | Vision-Language Alignment | Mapping visual UI elements to text descriptions (e.g., SoM, UGround)       | GUI-Actor, UGround                     |
 
-  | Sandbox_config vs. env_config | Sandbox_config defines isolation; env_config defines runtime variables |
-
-
-  ---'
-6_benchmark_definitions: ''
-6_1_osworld:
-- 'Purpose: Evaluate full-desktop automation capabilities.'
-- 'Tasks: File management, application launching, multi-step workflows.'
-- 'Metrics: Task completion rate, time-to-complete, error rate.'
-6_2_webarena:
-- 'Purpose: Benchmark web-based task completion.'
-- 'Tasks: Form filling, navigation, e-commerce checkout.'
-- 'Metrics: Task success rate, latency, browser compatibility.'
-6_3_agentbench: '- Purpose: General-purpose agent evaluation across domains.
-
-  - Tasks: Reasoning, planning, multi-agent collaboration.
-
-  - Metrics: Accuracy, robustness, generalization.
+  | Sandboxed Environments | Isolated execution spaces for security and privacy (e.g., CUA testing)     | Proposed extension                     |
 
 
   ---'
-7_challenges_and_open_problems: '1. Cross-platform compatibility: Ensuring CUA works on Windows, macOS, Linux.
+5_challenges_and_open_problems: '| Challenge                        | Description                                                                 |
+  Example Tools/Projects                 |
 
-  2. Vision-language alignment: Improving SoM and UGround accuracy for diverse UIs.
+  |--------------------------------|-----------------------------------------------------------------------------|----------------------------------------|
 
-  3. Privacy and security: Safeguarding data in sandboxed environments.
+  | Cross-platform compatibility | Ensuring CUA works on Windows, macOS, Linux                                 | GUI-Actor,
+  AgentTrek                   |
 
-  4. Scalability: Handling large-scale DOM distillation and session replay.
+  | Vision-language alignment   | Improving accuracy of SoM and UGround for diverse UIs                       | UGround, GUI-Actor                     |
 
-  5. Human-in-the-loop integration: Balancing automation with user oversight.
+  | Privacy and security        | Safeguarding data in sandboxed environments                                 | Proposed sandbox_config
+  extension      |
+
+  | Scalability                 | Handling large-scale DOM distillation and session replay                    | Stagehand,
+  WebArena                    |
+
+  | Human-in-the-loop integration | Balancing automation with user oversight                                  | AgentTrek,
+  OSWorld                     |
 
 
   ---'
-8_tools_and_projects: '| Project         | Description                                                                 | Link                                                                 |
+6_tools_and_projects: '| Project         | Description                                                                 | Link                                                                 |
 
   |----------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
 
@@ -178,37 +104,27 @@ license: CC BY 4.0
 
 
   ---'
-9_future_directions: '- Unified agent frameworks: Combining CUA and browser_tool capabilities.
-
-  - Zero-shot adaptation: Agents that generalize to unseen tasks and environments.
-
-  - Ethical AI: Ensuring transparency and accountability in automation.
-
-  - Quantum computing integration: Exploring quantum algorithms for complex planning.
-
-
-  ---'
-10_conclusion: This artifact provides a comprehensive overview of the technical landscape for computer use agents, browser
-  tools, and related infrastructure. By clarifying key concepts, distinctions, and proposed CEX Kind extensions, it aims to
-  guide developers and researchers toward more robust and interoperable systems. ---
-11_references: ''
-11_1_academic_papers:
+7_future_directions: "- Unified agent frameworks: Combining CUA and browser_tool capabilities (e.g., cross-platform GUI-Actor\
+  \ integration).  \n- Zero-shot adaptation: Agents that generalize to unseen tasks (e.g., AgentTrek with UGround).  \n- Ethical\
+  \ AI: Ensuring transparency in automation (e.g., sandbox_config for privacy).  \n- Quantum computing integration: Exploring\
+  \ quantum algorithms for complex planning (e.g., OSWorld benchmarks).  \n\n---"
+8_conclusion: This artifact provides a comprehensive overview of the technical landscape for computer use agents, browser
+  tools, and infrastructure. By clarifying key concepts, distinctions, and proposed CEX Kind extensions, it aims to guide
+  developers and researchers toward more robust and interoperable systems. ---
+9_references: ''
+9_1_academic_papers:
 - 'SoM: Set-of-Mark for Vision-Language Alignment'
 - 'UGround: Universal GUI Grounding with Vision-Language Models'
 - 'AgentTrek: Reinforcement Learning for Trajectory Synthesis'
-11_2_projects:
+9_2_projects:
 - 'Stagehand: https://stagehand.dev'
 - 'GUI-Actor: https://github.com/gui-actor'
 - 'OSWorld: https://osworld.org'
-11_3_standards: '- W3C A11y Guidelines: https://www.w3.org/WAI/standards-guidelines/
-
-  - Chrome DevTools Protocol: https://chromedevtools.github.io/devtools-protocol/
-
-
-  ---'
-12_license: This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this
+9_3_standards: "- W3C A11y Guidelines: https://www.w3.org/WAI/standards-guidelines/  \n- Chrome DevTools Protocol: https://chromedevtools.github.io/devtools-protocol/\
+  \  \n\n---"
+10_license: This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this
   license, visit https://creativecommons.org/licenses/by/4.0/. ---
-13_version_history: '| Version | Date       | Changes                                                                 |
+11_version_history: '| Version | Date       | Changes                                                                 |
 
   |--------|------------|-------------------------------------------------------------------------|
 
@@ -216,4 +132,7 @@ license: CC BY 4.0
 
   | 1.1    | 2024-04-01 | Added infrastructure terms, benchmarks, and future directions           |
 
-  | 1.2    | 2024-05-20 | Enhanced clarity, updated references, and added tool examples           |'
+  | 1.2    | 2024-05-20 | Enhanced clarity, updated references, and added tool examples           |
+
+
+  ---'
