@@ -4,7 +4,7 @@ kind: template
 pillar: P04
 title: "Search Tool — Business Discovery Configuration"
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/P04 search artifacts
@@ -12,6 +12,7 @@ variables: [INDUSTRY, REGION, SEARCH_PROVIDERS, VERTICALS, CITIES]
 density_score: 0.95
 tags: [template, search-tool, business-discovery, research, instance-extraction]
 tldr: "Search tool configuration for multi-source business discovery — optimized queries by vertical and region."
+updated: "2026-04-13"
 ---
 
 # Business Discovery — Search Configuration
