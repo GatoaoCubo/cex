@@ -4,7 +4,7 @@ kind: template
 pillar: P12
 title: "CRM Full Harvest — Mission Plan Template"
 version: 1.0.0
-quality: null
+quality: 9.2
 created: 2026-04-07
 author: n03_builder
 origin: gato-ao-cubo/crm_mission/MISSION_PLAN.md
@@ -12,6 +12,7 @@ variables: [BRAND_NAME, INDUSTRY, REGION, TARGET_COUNT, BATCH_SOURCES, CITIES, P
 density_score: 0.95
 tags: [template, crm, mission-plan, research, instance-extraction]
 tldr: "Universal CRM research mission plan — any brand fills {{mustache}} slots to orchestrate multi-batch contact discovery."
+updated: "2026-04-13"
 ---
 
 # Mission: {{PIPELINE_NAME}} — CRM Research Plan
