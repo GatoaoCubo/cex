@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "Dify (LangGenius) Platform -- Deep Vocabulary Atlas"
 version: 1.2.0
-quality: null
+quality: 8.8
 tags: [dify, langgenius, workflow, agent, rag, knowledge-pipeline, low-code, agentic-workflow, plugin-sdk, mcp-server, reverse-invocation, variable-syntax, agent-strategy]
 date: 2026-04-13
 sources:
