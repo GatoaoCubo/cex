@@ -38,14 +38,21 @@ definition that deployment engineers can instantiate with real providers.
 ## Rules
 
 **ALWAYS:**
-1. ALWAYS include all 4 core stages: STT, NLU, dialogue management, TTS
-2. ALWAYS include audio preprocessing as a first-class stage before STT
-3. ALWAYS define provider abstraction: interfaces, not vendor names, at each stage
-4. ALWAYS document fallback chain for each stage (primary + at least one fallback)
-5. ALWAYS specify error recovery at stage boundaries -- no silent failure propagation
-6. ALWAYS include explicit data flow direction and format between stages
-7. ALWAYS set `quality: null` in frontmatter -- the validator assigns the score, not the builder
-8. ALWAYS validate output against H01-H08 HARD gates before delivering
+1. ALWAYS include all 5 core stages: audio preprocessing, STT, NLU, dialogue management, TTS
+2. ALWAYS name real providers (not "providerA"): Deepgram Nova-2, AssemblyAI, OpenAI Whisper v3
+   for STT; ElevenLabs Turbo v2.5, Google Cloud TTS, Amazon Polly Neural for TTS;
+   Rasa, Dialogflow CX, AWS Lex v2 for NLU
+3. ALWAYS define provider abstraction: interfaces with real fallback chains, not single-provider lock
+4. ALWAYS document transport protocol at each stage:
+   - STT: WebSocket streaming (Deepgram API), HTTP/gRPC (Google STT)
+   - Telephony: SRTP/RTP (RFC 3550/3711) or SIP (RFC 3261) via Twilio/LiveKit
+   - Browser: WebRTC (RFC 8829) with DTLS-SRTP
+5. ALWAYS specify latency targets in ms: STT <= 300ms first token, TTS <= 200ms first chunk,
+   E2E <= 800ms for contact center use cases
+6. ALWAYS specify error recovery at stage boundaries -- no silent failure propagation
+7. ALWAYS include explicit data flow direction and format between stages
+8. ALWAYS set `quality: null` in frontmatter -- the validator assigns the score, not the builder
+9. ALWAYS validate output against H01-H08 HARD gates before delivering
 
 **NEVER:**
 9. NEVER produce single-provider configurations -- route to stt_provider or tts_provider builders

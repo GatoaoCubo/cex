@@ -4,7 +4,7 @@ kind: audit_report
 nucleus: n06
 mission: HYBRID_REVIEW2
 pillar: P11
-quality: null
+quality: 8.9
 title: "HYBRID_REVIEW2 N06 -- diff_strategy Builder Final Report"
 version: "1.0.0"
 created: "2026-04-13"

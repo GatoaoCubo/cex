@@ -25,9 +25,9 @@ density_score: 0.85
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not match `repo-[a-z0-9]{8}` |  
-| H03 | kind matches | kind ≠ `repo_map` |  
-| H04 | Required fields present | Missing `name`, `path`, or `language` |  
+| H02 | ID matches pattern | ID does not match `^p01_rm_[a-zA-Z0-9_]+$` (schema pattern) |
+| H03 | kind matches | kind != `repo_map` |
+| H04 | Token budget defined | Missing `token_budget` field |  
 | H05 | Unique IDs | Duplicate ID detected |  
 | H06 | URL valid | `url` field invalid or unreachable |  
 | H07 | Versioning correct | Version format ≠ `vX.Y.Z` |  

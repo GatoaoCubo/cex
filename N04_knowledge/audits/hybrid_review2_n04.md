@@ -5,7 +5,7 @@ nucleus: n04
 mission: HYBRID_REVIEW2
 wave: review
 pillar: P01
-quality: null
+quality: 8.9
 title: "HYBRID_REVIEW2 N04 Audit: transport_config + edit_format (26 ISOs)"
 version: "1.0.0"
 author: n04_hybrid_review2
