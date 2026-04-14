@@ -73,12 +73,23 @@ WAVE4_KINDS = [
     "white_label_config", "usage_quota", "customer_segment",
 ]
 
+WAVE5_KINDS = [
+    "quickstart_guide", "api_reference", "pitch_deck",
+    "roi_calculator", "case_study", "playground_config",
+    "sdk_example", "competitive_matrix", "interactive_demo",
+    "integration_guide", "sales_playbook", "changelog",
+    "sandbox_spec", "discovery_questions",
+    "healthcare_vertical", "fintech_vertical", "legal_vertical",
+    "product_tour",
+]
+
 WAVE_MAP = {
     "1": WAVE1_KINDS,
     "2": WAVE2_KINDS,
     "3": WAVE3_KINDS,
     "4": WAVE4_KINDS,
-    "all": WAVE1_KINDS + WAVE2_KINDS + WAVE3_KINDS + WAVE4_KINDS,
+    "5": WAVE5_KINDS,
+    "all": WAVE1_KINDS + WAVE2_KINDS + WAVE3_KINDS + WAVE4_KINDS + WAVE5_KINDS,
 }
 
 # ============================================================

@@ -1826,5 +1826,167 @@
     "core": false,
     "description": "Customer segment/ICP definition artifact with firmographics and needs",
     "boundary": "ICP artifact. NOT user_journey (path) nor persona (not-a-kind)."
+  },
+  "quickstart_guide": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_qs_{{name}}.md",
+    "max_bytes": 8192,
+    "core": false,
+    "description": "Quickstart guide artifact for product/API onboarding in under 5 minutes",
+    "boundary": "Quickstart doc. NOT integration_guide (deep) nor sdk_example (code-only)."
+  },
+  "api_reference": {
+    "pillar": "P06",
+    "llm_function": "CONSTRAIN",
+    "naming": "p06_ar_{{name}}.md",
+    "max_bytes": 8192,
+    "core": false,
+    "description": "API reference doc with endpoints, params, responses, auth, examples",
+    "boundary": "API docs. NOT schema (internal) nor sdk_example (code-only)."
+  },
+  "pitch_deck": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_pd_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Sales pitch deck with problem/solution/traction/ask slide structure",
+    "boundary": "Pitch deck. NOT case_study (narrative) nor pricing_page (tier detail)."
+  },
+  "roi_calculator": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_roi_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "ROI calculator spec with inputs, formulas, TCO comparison for economic buyers",
+    "boundary": "ROI calc. NOT cost_budget (ops) nor usage_report (actual)."
+  },
+  "case_study": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_cs_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Customer case study with challenge/solution/outcome/quote narrative",
+    "boundary": "Case study. NOT pitch_deck (all-purpose) nor testimonial (quote only)."
+  },
+  "playground_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_pg_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Playground/sandbox config for interactive product evaluation",
+    "boundary": "Playground spec. NOT sandbox_spec (isolation) nor interactive_demo (UI)."
+  },
+  "sdk_example": {
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "naming": "p04_sdk_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "SDK code example showing canonical integration patterns per language",
+    "boundary": "SDK example. NOT api_reference (schema) nor integration_guide (narrative)."
+  },
+  "competitive_matrix": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_cm_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Competitive feature matrix for sales battle cards and procurement evals",
+    "boundary": "Competitive doc. NOT customer_segment (ICP) nor pitch_deck (narrative)."
+  },
+  "interactive_demo": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_id_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Interactive product demo script with guided-tour steps and talk track",
+    "boundary": "Demo script. NOT playground_config (env) nor product_tour (in-app)."
+  },
+  "integration_guide": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_ig_{{name}}.md",
+    "max_bytes": 8192,
+    "core": false,
+    "description": "Deep integration guide for platform partners and paid-tier onboarding",
+    "boundary": "Integration guide. NOT quickstart_guide (5min) nor api_reference (schema)."
+  },
+  "sales_playbook": {
+    "pillar": "P03",
+    "llm_function": "PRODUCE",
+    "naming": "p03_sp_{{name}}.md",
+    "max_bytes": 8192,
+    "core": false,
+    "description": "Sales playbook with personas, discovery flow, objection handling, close patterns",
+    "boundary": "Sales playbook. NOT pitch_deck (deck) nor discovery_questions (subset)."
+  },
+  "changelog": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_ch_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Product changelog entry with semver, features, fixes, breaking changes",
+    "boundary": "Changelog. NOT decision_record (rationale) nor release_notes (prose)."
+  },
+  "sandbox_spec": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_sb_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Isolated sandbox environment spec for enterprise pilot procurement gates",
+    "boundary": "Sandbox spec. NOT playground_config (interactive) nor env_config (prod)."
+  },
+  "discovery_questions": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_dq_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "MEDDIC/BANT discovery question bank per buyer persona and deal stage",
+    "boundary": "Discovery qs. NOT sales_playbook (broad) nor customer_segment (ICP)."
+  },
+  "healthcare_vertical": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_hv_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Healthcare industry vertical: HIPAA, HL7/FHIR, PHI handling, use cases",
+    "boundary": "Healthcare vertical KC. NOT compliance_checklist (audit) nor case_study (ref)."
+  },
+  "fintech_vertical": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_fv_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Fintech industry vertical: SOC2+PCI-DSS, KYC/AML, fraud detection, use cases",
+    "boundary": "Fintech vertical KC. NOT compliance_checklist (audit) nor case_study (ref)."
+  },
+  "legal_vertical": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_lv_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Legal industry vertical: privilege, billable hour, contract analysis, use cases",
+    "boundary": "Legal vertical KC. NOT compliance_checklist (audit) nor case_study (ref)."
+  },
+  "product_tour": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_pt_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "In-app product tour walkthrough with step/tooltip/trigger spec",
+    "boundary": "Product tour. NOT interactive_demo (sales) nor onboarding_flow (activation)."
   }
 }
