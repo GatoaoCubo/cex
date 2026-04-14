@@ -1,7 +1,7 @@
 ---
 id: kc_customer_segment
 kind: knowledge_card
-title: Customer Segment/ICP Definition Artifact
+title: Customer Segment/ICP Definition
 version: 1.0.0
 quality: null
 pillar: P01
