@@ -35,13 +35,15 @@ The concept is rooted in fields like reinforcement learning, meta-learning, and 
 | Modular Self-Assessment | Decomposing self-evaluation into isolated components | Goertzel (2006) |  
 | Dynamic Prioritization | Adjusting improvement priorities based on system state | Zhang et al. (2020) |  
 
-## Industry Standards  
-- ISO/IEC 23894:2021 (AI Trustworthiness)  
-- RFC 8611 (ML Metrics for Evaluation)  
-- NeurIPS Workshops on Meta-Learning  
-- IEEE P7000 Series (Ethical AI)  
-- ML-Kits Framework (Google)  
-- DARPA’s Lifelong Learning Machines (LLM) Program  
+## Industry Standards and Key Papers
+- ISO/IEC 23894:2021 (AI Risk Management -- Guidance on AI Trustworthiness)
+- IEEE P7000 Series (Ethical AI system design standards)
+- STaR: Bootstrapping Reasoning with Reasoning (Zelikman et al., NeurIPS 2022)
+- DSPy: Compiling Declarative LM Calls into Self-Improving Pipelines (Khattab et al., 2023)
+- Self-Refine: Iterative Refinement with Self-Feedback (Madaan et al., NeurIPS 2023)
+- Constitutional AI: Harmlessness from AI Feedback (Bai et al., Anthropic 2022)
+- AlphaCode 2 (DeepMind, 2023): Self-improvement via competitive programming feedback loops
+- DARPA Lifelong Learning Machines (L2M) Program: Continual learning without catastrophic forgetting
 
 ## Common Patterns  
 1. **Continuous Evaluation Loop** – Periodic performance checks against benchmarks.  

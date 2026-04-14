@@ -6,62 +6,70 @@ llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for memory_benchmark
 quality: null
 title: "Schema Memory Benchmark"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+version: "1.1.0"
+author: n05_operations
 tags: [memory_benchmark, builder, schema]
-tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for memory_benchmark"
+tldr: "Formal schema for AI agent memory benchmark artifacts"
 domain: "memory_benchmark construction"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.87
 ---
 
-## Frontmatter Fields  
-### Required  
-| Field     | Type   | Required | Default | Notes |  
-|-----------|--------|----------|---------|-------|  
-| id        | string | yes      |         |       |  
-| kind      | string | yes      |         |       |  
-| pillar    | string | yes      |         |       |  
-| title     | string | yes      |         |       |  
-| version   | string | yes      | 1.0     |       |  
-| created   | date   | yes      |         |       |  
-| updated   | date   | yes      |         |       |  
-| author    | string | yes      |         |       |  
-| domain    | string | yes      | memory  |       |  
-| quality   | null   | yes      | null    | Never self-score; peer review assigns |  
-| tags      | list   | yes      |         |       |  
-| tldr      | string | yes      |         |       |  
-| capacity  | number | yes      |         | MB    |  
-| latency   | number | yes      |         | ms    |  
+## Frontmatter Fields
 
-### Recommended  
-| Field      | Type   | Notes |  
-|------------|--------|-------|  
-| accuracy   | number | %     |  
-| workload   | string |       |  
+### Required
 
-## ID Pattern  
-^p07_mb_[a-z][a-z0-9_]+.md$  
+| Field          | Type   | Required | Default | Notes                                          |
+|----------------|--------|----------|---------|------------------------------------------------|
+| id             | string | yes      |         | Must match ID Pattern below                    |
+| kind           | string | yes      |         | Fixed: "memory_benchmark"                      |
+| pillar         | string | yes      |         | Fixed: "P07"                                   |
+| title          | string | yes      |         | Human-readable benchmark name                  |
+| version        | string | yes      | "1.0.0" | Semantic versioning                            |
+| created        | date   | yes      |         | ISO 8601                                       |
+| updated        | date   | yes      |         | ISO 8601                                       |
+| author         | string | yes      |         | Primary contributor                            |
+| domain         | string | yes      |         | Application domain (e.g., "multi-turn recall") |
+| quality        | null   | yes      | null    | Never self-score; peer review assigns          |
+| tags           | list   | yes      | []      | Keywords for categorization                    |
+| tldr           | string | yes      |         | One-sentence summary                           |
+| memory_type    | string | yes      |         | "in_context" | "external_store" | "hybrid"     |
+| eval_distance  | string | yes      |         | Turn/token range tested (e.g., "5-100 turns")  |
 
-## Body Structure  
-1. **Overview**  
-   - Description of the memory benchmark purpose and scope.  
-2. **Metrics**  
-   - Key performance indicators (e.g., throughput, error rate).  
-3. **Workload**  
-   - Data patterns, access types, and stress scenarios.  
-4. **Constraints**  
-   - Hardware, software, and environmental limitations.  
-5. **Results**  
-   - Expected output format and validation criteria.  
-6. **Notes**  
-   - Additional context, caveats, or references.  
+### Recommended
 
-## Constraints  
-- All metrics must be measurable and repeatable.  
-- Capacity must not exceed 5120 MB.  
-- Latency thresholds must align with industry standards.  
-- Workloads must be defined in ASCII-compatible formats.  
-- Results must include statistical confidence intervals.  
-- Tags must use lowercase alphanumeric characters and underscores.
+| Field           | Type   | Notes                                          |
+|-----------------|--------|------------------------------------------------|
+| reference_bench | string | Established benchmark this extends (LOCOMO...) |
+| metric_count    | number | Number of distinct metrics defined             |
+| dataset         | string | Source dataset for test conversations          |
+
+## ID Pattern
+
+^p07_mb_[a-z][a-z0-9_]+.md$
+
+## Body Structure
+
+1. **Overview**
+   - Purpose, scope, and target AI memory system type.
+2. **Metrics**
+   - Each metric: name, formula, scale (0-1 or 0-100), primary tool.
+3. **Test Protocol**
+   - Conversation generation, fact planting depth, query turn distance.
+4. **Reference Benchmarks**
+   - Alignment with LOCOMO, LongMemEval, MemGPT, MT-Bench-101, or equivalent.
+5. **Evaluation Criteria**
+   - Pass/fail thresholds, comparison baseline, hallucination budget.
+6. **Notes**
+   - Caveats, scope limitations, known failure modes.
+
+## Constraints
+
+- ID must conform to: ^p07_mb_[a-z][a-z0-9_]+.md$
+- All required fields must be present and non-null
+- version must follow semantic versioning
+- memory_type must be one of: in_context, external_store, hybrid
+- File size must not exceed 5120 bytes
+- quality field must be assigned by peer review only
+- NO hardware memory fields (capacity_mb, dram_latency, bandwidth_gbps, ecc_rate)

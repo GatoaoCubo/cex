@@ -17,45 +17,40 @@ density_score: 0.85
 ---
 
 ## Domain Overview  
-Graph-based RAG (Retrieval-Augmented Generation) architectures combine knowledge graphs with retrieval systems to enhance contextual understanding and reasoning in AI applications. These configurations define how graph structures (e.g., nodes, edges, embeddings) are integrated with RAG pipelines for querying, ranking, and generating responses. Industry adoption grows as enterprises seek to leverage structured data for complex tasks like semantic search, recommendation systems, and conversational AI, requiring precise configuration of graph traversal, indexing, and embedding alignment.  
+GraphRAG (Graph Retrieval-Augmented Generation) is a distinct architecture from traditional KG-QA (Knowledge Graph Question Answering). Traditional KG-QA executes SPARQL/Cypher queries against structured triples. GraphRAG (Edge et al., Microsoft 2024) instead builds a text-derived knowledge graph via LLM entity extraction, then performs community detection (Leiden algorithm) to create hierarchical summaries, enabling global sensemaking queries that flat vector RAG cannot answer.
 
-Configuration artifacts like `graph_rag_config` ensure compatibility between graph databases (e.g., Neo4j, Amazon Neptune) and RAG frameworks (e.g., LangChain, Haystack), balancing scalability, latency, and accuracy. Key challenges include aligning graph schema with embedding models, managing dynamic data updates, and optimizing query performance across heterogeneous data sources.  
+The `graph_rag_config` artifact defines the pipeline parameters: entity extraction model, community detection settings, graph store backend, and query mode (local vs global). Local mode traverses entity neighborhoods; global mode synthesizes across community summaries. This distinction drives all key configuration decisions.
 
 ## Key Concepts  
-| Concept                | Definition                                                                 | Source                                  |  
-|-----------------------|----------------------------------------------------------------------------|-----------------------------------------|  
-| Graph Schema          | Structural definition of nodes, edges, and properties in the knowledge graph. | Neo4j Documentation                     |  
-| Indexing Strategy     | Method for creating indexes on graph elements to accelerate query retrieval.  | Elasticsearch Graph Plugin              |  
-| Embedding Model       | Neural network architecture for mapping graph entities to vector spaces.      | Sentence Transformers (Sentence-BERT)   |  
-| Query Rewriting       | Transformation of user queries into graph-compatible traversal patterns.      | Microsoft Semantic Kernel             |  
-| Traversal Policy      | Rules governing depth, breadth, or priority in graph exploration.             | Apache Jena SPARQL 1.1                |  
-| Ranking Function      | Algorithm to score relevance of retrieved graph nodes to the query.           | BM25, PageRank                          |  
-| Caching Mechanism     | Strategy for storing frequently accessed graph data to reduce latency.        | Redis Graph                           |  
-| Scalability Metric    | Measurement of system performance under increasing graph size or query load.  | IEEE Paper: "Scaling Graph Databases"   |  
-| Error Handling        | Protocols for managing incomplete or inconsistent graph data during retrieval. | RFC 7807: Problem Details for HTTP APIs |  
-| Security Protocol     | Encryption and access control mechanisms for graph data and RAG pipelines.    | OAuth 2.0, TLS 1.3                      |  
+| Concept | Definition | Source |  
+|---|---|---|  
+| GraphRAG (MS) | LLM-driven entity extraction + Leiden community detection + map-reduce summarization | Edge et al., Microsoft 2024 |  
+| Leiden Algorithm | Community detection that maximizes modularity; used by MS GraphRAG for hierarchical clustering | Traag et al. 2019 |  
+| Entity Extraction | LLM-driven extraction of named entities and relations from source docs into graph nodes/edges | Neo4j LLM Graph Builder |  
+| Local Query Mode | Traverses entity neighborhoods for specific entity-centric questions | MS GraphRAG docs |  
+| Global Query Mode | Map-reduce across community summaries for broad thematic questions | MS GraphRAG docs |  
+| Community Summaries | LLM-generated summaries for each detected graph community; the key RAG unit | Edge et al. 2024 |  
+| KG-QA (traditional) | Structured query execution over pre-defined ontology triples (SPARQL, Cypher) | W3C SPARQL 1.1 |  
+| Graph Store | Backend persistence for nodes/edges (Neo4j, Cosmos DB, NetworkX for dev) | MS GraphRAG config |  
 
 ## Industry Standards  
-- W3C RDF and SPARQL standards for graph data representation  
-- Neo4j’s Cypher query language for graph traversal  
-- Elasticsearch’s graph analysis plugin for indexing  
-- Hugging Face Transformers for embedding model alignment  
-- Apache Jena for RDF triple store integration  
-- Microsoft Semantic Kernel for RAG pipeline orchestration  
-- OpenAPI Specification for API-driven graph-RAG interactions  
-- IEEE 1850-2020: Graph Database Performance Benchmarks  
-- RFC 8555: Let’s Encrypt for secure graph data transmission  
+- Microsoft GraphRAG (github.com/microsoft/graphrag, Edge et al. 2024)  
+- Leiden community detection (Traag et al. 2019, scikit-network/graspologic)  
+- Neo4j LLM Graph Builder (entity extraction to property graph)  
+- LangChain GraphRAG chain (graph_chain.invoke with entity resolution)  
+- LlamaIndex KnowledgeGraphIndex (triplet extraction + graph store)  
+- W3C RDF/SPARQL (traditional KG-QA, distinct from GraphRAG)  
 
 ## Common Patterns  
-1. Hybrid indexing: Combine graph traversal with vector similarity search.  
-2. Dynamic schema evolution: Allow incremental updates to graph schemas without retraining.  
-3. Query caching: Store results of frequent graph-RAG queries to reduce latency.  
-4. Incremental embedding updates: Re-train embeddings for new graph nodes without full reprocessing.  
-5. Multi-hop reasoning: Configure traversal policies to support complex, multi-step queries.  
+1. **Local vs global query routing**: Route entity-specific queries to local mode, thematic queries to global mode.  
+2. **Entity extraction prompt tuning**: Customize extraction prompt per domain (legal, medical, technical).  
+3. **Community level selection**: Level 0 = fine-grained, Level 2 = coarse thematic; configure per query type.  
+4. **Hybrid GraphRAG + vector**: Use graph communities for global context, vector store for precise retrieval.  
+5. **Incremental graph update**: Re-run entity extraction only on changed documents, not full corpus.  
 
 ## Pitfalls  
-- Overly rigid graph schemas that hinder dynamic data integration.  
-- Ignoring query latency by neglecting index optimization for large-scale graphs.  
-- Misaligned embedding spaces between graph entities and RAG models.  
-- Lack of versioning for graph-RAG configurations, causing deployment inconsistencies.  
-- Inadequate security measures for exposing graph data via RAG APIs.
+- Conflating GraphRAG with traditional KG-QA: GraphRAG builds graph from unstructured text via LLM, not from pre-existing ontologies.  
+- Using global mode for entity-specific queries: global mode is expensive (map-reduce), wrong tool for lookup questions.  
+- Missing Leiden settings: default resolution parameter affects community granularity; must be tuned per corpus size.  
+- Skipping entity extraction validation: hallucinated entities degrade community quality; validate extraction samples.  
+- Treating community summaries as verbatim facts: they are LLM-generated summaries, require source attribution.

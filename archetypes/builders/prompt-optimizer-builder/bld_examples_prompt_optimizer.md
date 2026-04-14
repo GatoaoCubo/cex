@@ -17,49 +17,54 @@ density_score: 0.85
 ---
 
 ## Golden Example
+
+A properly structured CEX prompt_optimizer artifact shows the before/after transformation with documented rationale:
+
+```yaml
 ---
-tool: PromptHero Prompt Optimizer
-version: 2.1.0
-description: "Automated prompt refinement and compilation for LLMs"
+id: p03_po_chain_of_thought_boost.md
+kind: prompt_optimizer
+pillar: P03
+quality: null
+title: "Chain-of-Thought Boost for Reasoning Tasks"
+version: "1.0.0"
+domain: "analytical reasoning"
+method: DSPy signature optimization
+tags: [prompt_optimizer, chain_of_thought, reasoning]
+---
+```
+
+**Original prompt:**
+> "Explain this concept."
+
+**Pass 1 -- Specificity (APE-style candidate generation):**
+> "Explain [CONCEPT] in three steps, using concrete examples for each step."
+> Rationale: Forces structured output; reduces abstraction drift.
+
+**Pass 2 -- Constraint injection (OPRO-style refinement):**
+> "Explain [CONCEPT] in exactly three steps. Each step must include: (1) the principle, (2) a real-world example, (3) a common misconception to avoid."
+> Rationale: Prevents hallucination by forcing grounding per step.
+
+**Optimized prompt:** Pass 2 output. Measurable gain: specificity +40%, hallucination risk -30% vs. baseline.
+
+## Anti-Example 1: Vendor tool catalog entry
+```yaml
+---
+tool: PromptHero Optimizer v2.1
 vendor: PromptHero Inc.
-license: Apache-2.0
+description: "Automated prompt refinement via API"
 ---
-**Functionality**  
-Optimizes prompts via context-aware rephrasing, query expansion, and intent alignment. Integrates with Anthropic's Claude 3 for real-time feedback. Example: Converts "Write a story" → "Write a 500-word sci-fi story about AI ethics with a twist ending."
+```
+**Why it fails:** Describes a third-party product, not a CEX kind artifact. Missing frontmatter kind/pillar fields. No optimization passes documented. Not a produced artifact -- a vendor reference.
 
-**Use Case**  
-Enhances query precision for Meta's Llama 3, reducing hallucinations by 37% in enterprise NLP pipelines.
-
-## Anti-Example 1: Conflating with prompt_compiler
+## Anti-Example 2: No transformation documented
+```yaml
 ---
-tool: CEX Internal Prompt Compiler
-version: 1.0.0
-description: "Compiles prompts into executable code for LLMs"
-vendor: CEX Engineering
-license: Proprietary
+id: p03_po_vague_boost.md
+kind: prompt_optimizer
+description: "Makes prompts better"
 ---
-**Functionality**  
-Generates code templates from natural language prompts. Example: Converts "Sort this data" → Python script with Pandas.
+```
+**Optimized prompt:** "An improved version of your input."
 
-**Use Case**  
-Used in CEX's internal data processing workflows.
-
-## Why it fails  
-Violates the boundary by conflating prompt compilation (code generation) with optimization (query refinement). Not applicable to general prompt_optimizer CEX kind.
-
-## Anti-Example 2: Vague Description
----
-tool: Generic Prompt Enhancer
-version: 0.5.0
-description: "Improves prompts somehow"
-vendor: Unknown Vendor
-license: Not specified
----
-**Functionality**  
-"Enhances prompts through unspecified methods."
-
-**Use Case**  
-"Used by some companies for unclear purposes."
-
-## Why it fails  
-Lacks specificity in optimization techniques (e.g., no mention of rephrasing, alignment, or integration with LLMs). Fails to meet CEX kind requirements for actionable, well-defined functionality.
+**Why it fails:** Zero specificity on optimization technique. No before/after comparison. No rationale. Fails H04 (must have 2+ passes) and H06 (rationale required per pass).
