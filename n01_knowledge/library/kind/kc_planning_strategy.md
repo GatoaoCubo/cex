@@ -7,37 +7,30 @@ quality: null
 pillar: P01
 ---
 
-# Planning Strategy
+A planning strategy is a structured approach for defining and executing complex workflows through phase-based decomposition. This framework enables agents to systematically break down goals into actionable tasks while maintaining alignment with quality standards and system constraints.
 
-## Overview
-A planning strategy defines the systematic approach to task decomposition, resource allocation, and execution sequencing in agent systems. It provides a framework for transforming high-level goals into actionable steps while optimizing for efficiency and adaptability.
+## Core Components
+- **Phase-based decomposition**: Divides tasks into sequential stages with defined inputs/outputs
+- **Trigger conditions**: Activates specific phases based on contextual cues or user input
+- **Quality gates**: Ensures minimum quality thresholds (≥8.0) at each phase boundary
+- **Resource allocation**: Optimizes tool usage and computational budgets across phases
 
-## Core Principles
-1. **Goal Decomposition**: Breaks complex objectives into manageable subtasks
-2. **Resource Optimization**: Allocates computational and temporal resources efficiently
-3. **Risk Assessment**: Identifies potential failures and mitigation paths
-4. **Adaptive Adjustment**: Dynamically updates plans based on real-time feedback
+## Operational Phases
+1. **Decomposition** - Break goal into subtasks using guided decision protocols
+2. **Prioritization** - Rank tasks by impact, complexity, and resource requirements
+3. **Execution** - Deploy subtasks through the 8F pipeline (Find, Frame, Format, Focus, Flow, Finalize, Feedback, Fix)
+4. **Iteration** - Refine approach based on real-time feedback and quality metrics
 
-## Implementation Framework
-- **Planning Engine**: Translates goals into executable task sequences
-- **Execution Monitor**: Tracks progress against planned milestones
-- **Feedback Loop**: Integrates real-time data for plan refinement
-- **Dynamic Replanning**: Automatically adjusts strategies when deviations occur
+## Integration Points
+- **F2 BECOME**: Aligns with agent capability definitions for task delegation
+- **F3 INJECT**: Incorporates domain-specific knowledge during planning
+- **F5 CALL**: Orchestrate tool usage across phases via technical authority protocols
+- **Memory**: Persists planning decisions between phases for contextual continuity
 
-## Key Benefits
-- Enhances task execution efficiency
-- Improves adaptability to changing conditions
-- Optimizes resource utilization
-- Reduces risk of operational failures
+## Applications
+- **AI Systems**: Structured approach to model training and reinforcement learning
+- **Software Development**: Agile planning with sprint-based phase execution
+- **Operational Workflows**: Industrial process optimization through phased execution
+- **Research Projects**: Systematic exploration of hypotheses through iterative planning
 
-## Use Cases
-- Complex multi-step workflows
-- Dynamic environment adaptation
-- Collaborative task execution
-- Long-term project management
-
-## Technical Considerations
-- Ensure modular design for flexible integration
-- Implement real-time adaptation capabilities
-- Balance planning depth with computational cost
-- Maintain compatibility with existing system architectures
+This strategy enables autonomous systems to evolve their planning capabilities while maintaining governance through the GDP protocol, ensuring all decisions undergo structured evaluation before execution.
