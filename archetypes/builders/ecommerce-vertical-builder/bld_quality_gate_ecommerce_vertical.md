@@ -16,54 +16,45 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Definition  
-(Table: metric, threshold, operator, scope)  
-| metric | threshold | operator | scope |  
-|---|---|---|---|  
-| checkout_success_rate | 95% | >= | all |  
-| pci_compliance_status | 100% | == | all |  
-| fraud_detection_rate | 90% | >= | all |  
-| recommendation_accuracy | 85% | >= | all |  
-| use_case_coverage | 100% | == | all |  
+## Definition
+| Metric | Threshold | Operator | Scope |
+|--------|-----------|----------|-------|
+| required field completeness | 100% | == | all frontmatter fields |
+| domain section coverage | 100% | == | all body sections present |
+| industry standard citations | >=2 | >= | PCI-DSS, OWASP, or equivalent |
+| use case specificity | >=3 | >= | named ecommerce use cases |
 
-## HARD Gates  
-(Table: ID | Check | Fail Condition)  
-| ID | Check | Fail Condition |  
-|---|---|---|  
-| H01 | YAML frontmatter valid | invalid YAML syntax |  
-| H02 | ID matches ^p01_ev_[a-z][a-z0-9_]+.md$ | invalid schema ID pattern |  
-| H03 | kind field matches 'ecommerce_vertical' | kind field mismatch |  
-| H04 | PCI-DSS compliance achieved | PCI-DSS audit fails |  
-| H05 | checkout latency <= 2s | latency exceeds 2s |  
-| H06 | fraud detection rate >= 90% | rate below 90% |  
-| H07 | recommendation engine accuracy >= 85% | accuracy below 85% |  
-| H08 | use case coverage == 100% | missing use cases |  
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+| H02 | ID matches ^p01_ev_[a-z][a-z0-9_]+.md$ | ID format mismatch |
+| H03 | kind field = ecommerce_vertical | Kind field incorrect or missing |
+| H04 | product_category field present and non-empty | Missing product category |
+| H05 | PCI-DSS section present in body | No compliance section found |
+| H06 | At least one recommendation engine pattern documented | Missing ML/recommendation content |
+| H07 | At least one fraud detection mechanism described | Missing fraud prevention content |
+| H08 | At least 3 ecommerce-domain use cases named | Fewer than 3 use cases or generic placeholders |
 
-## SOFT Scoring  
-(Table: Dim | Dimension | Weight | Scoring Guide)  
-| Dim | Dimension | Weight | Scoring Guide |  
-|---|---|---|---|  
-| D01 | Checkout experience | 0.15 | 1.0 = seamless, 0.0 = broken |  
-| D02 | Security (PCI-DSS) | 0.20 | 1.0 = fully compliant, 0.0 = non-compliant |  
-| D03 | Fraud prevention | 0.15 | 1.0 = 100% detection, 0.0 = 0% detection |  
-| D04 | Recommendation quality | 0.15 | 1.0 = 100% accuracy, 0.0 = 0% accuracy |  
-| D05 | Use case coverage | 0.10 | 1.0 = 100% coverage, 0.0 = 0% coverage |  
-| D06 | Performance (latency) | 0.10 | 1.0 = <=2s, 0.0 = >5s |  
-| D07 | Error rate | 0.15 | 1.0 = 0% errors, 0.0 = >5% errors |  
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D01 | PCI-DSS depth (tokenization, scope reduction, v4.0 specifics) | 0.20 | Full v4.0 coverage = 1.0, partial = 0.5, absent = 0 |
+| D02 | Recommendation engine technical depth (algorithm, data signals) | 0.20 | Named algorithm + data signals = 1.0, generic = 0.5, absent = 0 |
+| D03 | Fraud detection specificity (behavioral biometrics, velocity, ML model) | 0.20 | 3+ techniques named = 1.0, 1-2 = 0.5, absent = 0 |
+| D04 | Checkout UX coverage (abandonment recovery, A/B, multi-currency) | 0.20 | All 3 = 1.0, 2 = 0.7, <2 = 0 |
+| D05 | Industry citation quality (PCI-DSS, OWASP, Baymard, ACM RecSys) | 0.20 | >=3 citations = 1.0, 1-2 = 0.5, 0 = 0 |
 
-## Actions  
-(Table: Score | Action)  
-| Score | Action |  
-|---|---|  
-| GOLDEN | >=9.5 | Auto-approve and deploy |  
-| PUBLISH | >=8.0 | Publish with no changes |  
-| REVIEW | >=7.0 | Manual review required |  
-| REJECT | <7.0 | Reject and fix |  
+## Actions
+| Label | Score | Action |
+|-------|-------|--------|
+| GOLDEN | >=9.5 | Auto-publish to ecommerce vertical library |
+| PUBLISH | >=8.0 | Publish after technical review |
+| REVIEW | >=7.0 | Require domain expert review |
+| REJECT | <7.0 | Reject and rebuild with missing sections |
 
-## Bypass  
-(Table: conditions, approver, audit trail)  
-| conditions | approver | audit trail |  
-|---|---|---|  
-| Critical bug fix | CTO | documented in JIRA |  
-| Regulatory override | CISO | signed waiver |  
-| Performance exception | CPO | load test report |
+## Bypass
+| Conditions | Approver | Audit Trail |
+|------------|----------|-------------|
+| Emergency platform migration content | Principal Engineer | documented in incident log |
+| Regulatory compliance override | Security Lead | signed waiver + post-mortem |

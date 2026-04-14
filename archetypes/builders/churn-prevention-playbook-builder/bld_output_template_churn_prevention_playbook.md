@@ -16,30 +16,79 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-```markdown
 ```yaml
 ---
-id: p03_cpp_{{name}}.md <!-- Churn prevention playbook ID -->
-title: {{playbook_title}} <!-- Title of the playbook -->
-description: {{playbook_description}} <!-- Summary of the playbook's purpose -->
-author: {{author}} <!-- Author's name -->
-quality: null <!-- Must remain null -->
-created_at: {{date}} <!-- Creation date (YYYY-MM-DD) -->
-updated_at: {{date}} <!-- Last update date (YYYY-MM-DD) -->
+id: p03_cpp_{{name}}.md
+kind: churn_prevention_playbook
+pillar: P03
+title: "Churn Prevention Playbook: {{segment}} -- {{trigger_event}}"
+version: "1.0.0"
+created: "{{date}}"
+updated: "{{date}}"
+author: "{{author}}"
+domain: "churn_prevention_playbook construction"
+quality: null
+tags: [churn_prevention_playbook, {{segment_tag}}, {{trigger_tag}}]
+tldr: "Playbook for detecting and saving at-risk {{segment}} accounts via {{primary_intervention}}"
+target_user_segment: "{{segment}}"      # e.g., enterprise, mid-market, SMB
+intervention_type: "{{intervention}}"   # e.g., csa_outreach, automated_email, exec_sponsor
+risk_score: {{risk_score}}              # 0-100 churn risk at trigger
 ---
-```
 
-## Action Plan
+# Health Score Model
+| Component       | Weight | Red Threshold | Yellow Threshold | Data Source     |
+|-----------------|--------|---------------|------------------|-----------------|
+| Product usage   | 0.30   | <20% WAU      | 20-50% WAU       | Product analytics|
+| NPS score       | 0.25   | detractor (0-6)| passive (7-8)   | NPS survey      |
+| Support tickets | 0.20   | >3 open P1    | >1 open P1       | Zendesk/Jira    |
+| QBR engagement  | 0.15   | missed 2+     | missed 1         | Calendar/CRM    |
+| Contract stage  | 0.10   | <60 days      | 60-90 days       | Salesforce      |
 
-| Action | Description |
-|-------|-------------|
-| {{action_1}} | <!-- Specific churn mitigation step --> |
-| {{action_2}} | <!-- Customer retention strategy --> |
+# Intervention Triggers
+| Risk Band    | Health Score | Trigger Event                        | Owner           | SLA     |
+|--------------|--------------|--------------------------------------|-----------------|---------|
+| Red          | <40          | Immediate save-the-account outreach  | CSM + VP CS     | 24h     |
+| Yellow       | 40-60        | Proactive health review call         | CSM             | 48h     |
+| Pre-renewal  | Any          | Contract within {{renewal_days}} days| CSM Manager     | 72h     |
 
-```python
-# Example: Churn risk scoring
-def calculate_churn_risk(user_data):
-    # {{code_comment}} <!-- Add logic here -->
-    return risk_score
-```
+# Save-the-Account Script
+## Opening
+"{{opening_script}}"  # Acknowledge issue without blame, reference specific value delivered
+
+## Discovery Questions
+1. "{{discovery_q1}}"  # Identify root churn reason (product, budget, champion, competitor)
+2. "{{discovery_q2}}"
+3. "{{discovery_q3}}"
+
+## Objection Handlers
+| Objection           | Response Script                               |
+|---------------------|-----------------------------------------------|
+| Budget constraint   | "{{budget_objection_response}}"               |
+| Product gap         | "{{product_objection_response}}"              |
+| Competitor offer    | "{{competitor_objection_response}}"           |
+| Champion departure  | "{{champion_objection_response}}"             |
+
+## Close
+"{{close_script}}"  # Define mutual success criteria and next step with date
+
+# Win-Back Sequence (post-churn)
+| Day  | Channel     | Message Theme                              | CTA                     |
+|------|-------------|--------------------------------------------|-------------------------|
+| 30   | Email + Call| Acknowledge, no pressure                   | Schedule 15-min call    |
+| 60   | Email       | New value prop or feature since departure  | Request feedback        |
+| 90   | Executive   | Final offer with decision authority        | Formal re-engagement    |
+
+# Escalation Path
+| Trigger                         | Escalate To         | SLA      | Method          |
+|---------------------------------|---------------------|----------|-----------------|
+| Save attempt failed (>2 tries)  | VP Customer Success | 24h      | Direct call     |
+| ARR > {{high_value_threshold}}  | Executive sponsor   | Same day | Video call      |
+| Champion departure              | CSM Manager         | 48h      | Email + Gainsight CTA|
+
+# Gainsight CTA Configuration
+playbook_name: "{{gainsight_playbook_name}}"
+trigger_condition: "health_score < {{red_threshold}} OR days_since_login > {{inactivity_days}}"
+assignee: "{{csm_role}}"
+due_date_sla: "{{sla_days}} days"
+success_criteria: "{{success_definition}}"  # e.g., renewal signed, health_score restored to >70
 ```

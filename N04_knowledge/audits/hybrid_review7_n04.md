@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW7 N04 Audit: code_of_conduct + github_issue_template + app_directory_entry"
 version: "1.0.0"
-quality: null
+quality: 8.9
 tags: [audit, hybrid_review7, wave6, community, code_of_conduct, github_issue_template, app_directory_entry]
 domain: audit quality assurance
 created: "2026-04-14"

@@ -16,22 +16,23 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Aggregates customer data for analysis | During data collection |  
-| cex_score.py | Calculates churn risk scores | After data preprocessing |  
-| cex_retriever.py | Fetches customer interaction history | When building intervention strategies |  
-| cex_doctor.py | Diagnoses playbook inconsistencies | During validation phase |  
+## Production Tools
+| Tool                  | Purpose                                         | When                     |
+|-----------------------|-------------------------------------------------|--------------------------|
+| cex_compile.py        | Compile .md to .yaml                            | After every save         |
+| cex_score.py          | Apply peer-review quality score                 | Post-production          |
+| cex_retriever.py      | Find similar churn playbook artifacts           | During F3 INJECT         |
+| cex_doctor.py         | Diagnose schema and frontmatter issues          | Pre-publish validation   |
+| cex_wave_validator.py | Validate domain keywords and ISO completeness  | Post-build CI gate       |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| data_validator.py | Checks data quality and completeness | Before model training |  
-| model_checker.py | Validates churn prediction accuracy | After model deployment |  
-| playbook_linter.py | Ensures playbook structure compliance | During playbook finalization |  
+## Validation Tools
+| Tool                  | Purpose                                         | When                     |
+|-----------------------|-------------------------------------------------|--------------------------|
+| cex_schema_hydrate.py | Enforce schema constraints on frontmatter       | Pre-commit               |
+| cex_hooks.py          | Pre-commit ASCII and schema checks              | git commit               |
 
-## External References  
-- Salesforce CRM (customer interaction tracking)  
-- Google Analytics (behavioral data analysis)  
-- Scikit-learn (machine learning model integration)
+## External References
+- Gainsight CS Platform: health score, CTA automation, playbook execution API
+- ChurnZero: risk score signals and outreach sequence automation
+- Salesforce CRM: account health tracking, escalation logging, save activity records
+- Totango: SuccessBloc-based intervention playbook integration

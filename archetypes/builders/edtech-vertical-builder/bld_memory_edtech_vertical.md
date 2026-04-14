@@ -1,6 +1,6 @@
 ---
-kind: learning_record
-id: p10_lr_edtech_vertical_builder
+kind: memory
+id: p10_mem_edtech_vertical_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for edtech_vertical construction
@@ -8,7 +8,7 @@ quality: null
 title: "Learning Record Edtech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
-tags: [edtech_vertical, builder, learning_record]
+tags: [edtech_vertical, builder, memory]
 tldr: "Learned patterns and pitfalls for edtech_vertical construction"
 domain: "edtech_vertical construction"
 created: "2026-04-14"

@@ -25,7 +25,7 @@ density_score: 0.85
 6. Identify coverage gaps where proof points are weak or missing.
 
 ## Phase 2: COMPOSE
-1. Reference SCHEMA.md for required fields (company_overview, market_position, product_strengths, competitive_landscape, roadmap, analyst_questions).
+1. Reference bld_schema_analyst_briefing.md for required fields (company_overview, market_position, product_strengths, competitive_landscape, roadmap, analyst_questions).
 2. Write a concise company overview (max 150 words) positioning the vendor within the analyst's target market.
 3. Articulate market position with Gartner/Forrester/IDC framework language (e.g., "Visionary," "Leader," "Strong Performer").
 4. List 5-7 quantified product strengths mapped to analyst evaluation criteria.

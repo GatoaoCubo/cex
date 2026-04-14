@@ -16,25 +16,21 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Aggregates learning modules into course packages | Course deployment |  
-| cex_score.py | Automates grading of formative assessments | Real-time student feedback |  
-| cex_retriever.py | Fetches curated content from external repositories | Content curation workflows |  
-| cex_doctor.py | Diagnoses inconsistencies in course metadata | Pre-deployment validation |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile edtech_vertical YAML/MD artifacts to registry | After artifact generation |
+| cex_score.py | Score artifact quality (5D rubric) against quality gate | Post-generation quality check |
+| cex_retriever.py | Fetch similar edtech artifacts for reference | During F3 INJECT phase |
+| cex_doctor.py | Diagnose schema compliance and frontmatter issues | Pre-validation checks |
+| cex_wave_validator.py | Validate builder ISO set completeness and D01-D15 defects | Builder audit cycle |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| val_content.py | Checks alignment of learning objectives with activities | Curriculum design phase |  
-| val_access.py | Ensures compliance with accessibility standards | Pre-publishing |  
-| val_linter.py | Enforces code style in interactive elements | Development sprints |  
-
-## External References  
-- LMS API (e.g., Moodle, Canvas) for integration  
-- OpenEdX content authoring framework  
-- Khan Academy's assessment analytics library
+## External References
+- IMS Global LTI 1.3 specification (imsglobal.org/spec/lti/v1p3): LMS integration standard
+- 1EdTech xAPI (Experience API) specification: learning activity tracking
+- FERPA guidance (studentprivacy.ed.gov): educational record privacy
+- COPPA FTC guidelines (ftc.gov/coppa): under-13 data collection rules
+- Canvas LTI Developer Keys + Moodle External Tool documentation: LMS integration guides
 
 ## Domain Scope
 These tools support edtech vertical artifact production, including LMS integration testing, accessibility compliance checks, and student data anonymization workflows specific to edtech use cases.

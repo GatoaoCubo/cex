@@ -1,6 +1,6 @@
 ---
-kind: learning_record
-id: p10_lr_expansion_play_builder
+kind: memory
+id: p10_mem_expansion_play_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for expansion_play construction
@@ -8,7 +8,7 @@ quality: null
 title: "Learning Record Expansion Play"
 version: "1.0.0"
 author: wave6_n06
-tags: [expansion_play, builder, learning_record, upsell, NRR, land-and-expand]
+tags: [expansion_play, builder, memory, upsell, NRR, land-and-expand]
 tldr: "Learned patterns and pitfalls for expansion_play construction"
 domain: "expansion_play construction"
 created: "2026-04-14"

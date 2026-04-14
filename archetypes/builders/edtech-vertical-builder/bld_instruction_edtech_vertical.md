@@ -36,8 +36,9 @@ density_score: 0.85
 9. Finalize artifact with regulatory citations and LMS vendor examples.  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ Verify FERPA/COPPA alignment with regulatory text.  
-- [ ] ✅ Confirm LTI integration matches IMS Global specifications.  
-- [ ] ✅ Ensure data privacy protocols address encryption and access logs.  
-- [ ] ✅ Validate use cases against real-world EdTech deployment scenarios.  
-- [ ] ✅ Check markdown syntax and template structure consistency.
+- [ ] Verify FERPA data minimization: only collect student records necessary for stated purpose.
+- [ ] Confirm COPPA parental consent mechanism is explicit for users under 13.
+- [ ] Confirm LTI 1.3 OAuth 2.0 launch flow uses IMS Global Security Framework v1.0.
+- [ ] Confirm 1EdTech xAPI or Caliper standard cited for learning analytics data.
+- [ ] Verify district procurement path: state ed-tech approval list or ISTE certification noted.
+- [ ] Confirm artifact adheres to bld_schema_edtech_vertical.md ID pattern and required fields.

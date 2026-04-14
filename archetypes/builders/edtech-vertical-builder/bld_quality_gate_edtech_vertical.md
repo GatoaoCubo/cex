@@ -36,17 +36,15 @@ density_score: 0.85
 | H06 | COPPA opt-in mechanisms implemented | No explicit parental consent flows |  
 | H07 | FERPA data minimization enforced | Unnecessary student data collected |  
 
-## SOFT Scoring  
-| Dim | Dimension | Weight | Scoring Guide |  
-|---|---|---|---|  
-| D01 | Data Privacy Practices | 0.15 | 1.0 = Full compliance |  
-| D02 | LTI Integration Quality | 0.12 | 1.0 = Seamless LMS compatibility |  
-| D03 | COPPA/FERPA Alignment | 0.15 | 1.0 = Full regulatory adherence |  
-| D04 | Use Case Relevance | 0.10 | 1.0 = Direct alignment with education needs |  
-| D05 | Performance | 0.10 | 1.0 = <100ms latency for critical flows |  
-| D06 | Scalability | 0.10 | 1.0 = 1M+ concurrent users supported |  
-| D07 | Security | 0.10 | 1.0 = Zero critical vulnerabilities |  
-| D08 | User Experience | 0.18 | 1.0 = 95%+ user satisfaction |  
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D01 | FERPA data minimization specificity | 0.20 | Named records + purpose limitation cited = 1.0, general reference = 0.5, absent = 0 |
+| D02 | LTI 1.3 integration depth | 0.20 | OAuth 2.0 + IMS Security Framework v1.0 cited = 1.0, LTI 1.3 named = 0.5, absent = 0 |
+| D03 | COPPA consent mechanism detail | 0.15 | Parental consent flow described + FTC guidelines cited = 1.0, referenced = 0.5, absent = 0 |
+| D04 | 1EdTech standards coverage | 0.15 | xAPI or Caliper cited for analytics = 1.0, referenced = 0.5, absent = 0 |
+| D05 | District procurement path | 0.15 | State ed-tech approval list or ISTE certification cited = 1.0, generic = 0.5, absent = 0 |
+| D06 | Use case specificity (K-12 vs Higher Ed vs vocational) | 0.15 | Target demographic + scenario named = 1.0, partial = 0.5, none = 0 |
 
 ## Actions  
 | Score | Action |  

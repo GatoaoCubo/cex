@@ -36,8 +36,9 @@ density_score: 0.85
 9. Finalize artifact with metadata (version, author, compliance status).  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ Verify FedRAMP and FISMA requirements are fully addressed.  
-- [ ] ✅ Confirm CJIS data classification aligns with artifact controls.  
-- [ ] ✅ Ensure Section 508 compliance checks are explicitly documented.  
-- [ ] ✅ Validate GSA contract references match current procurement terms.  
-- [ ] ✅ Confirm artifact adheres to SCHEMA.md and OUTPUT_TEMPLATE.md.
+- [ ] Verify FedRAMP authorization level (Moderate or High) is explicitly stated.
+- [ ] Confirm FISMA categorization (Low/Moderate/High) matches artifact scope.
+- [ ] Ensure CJIS Security Policy version (SP 20-01) is cited for law enforcement data.
+- [ ] Validate Section 508 WCAG 2.1 AA criteria are mapped to specific UI requirements.
+- [ ] Confirm GSA Schedule or StateRAMP reference is present for procurement path.
+- [ ] Confirm artifact adheres to bld_schema_govtech_vertical.md ID pattern and required fields.

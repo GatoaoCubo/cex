@@ -1,6 +1,6 @@
 ---
-kind: learning_record
-id: p10_lr_ecommerce_vertical_builder
+kind: memory
+id: p10_mem_ecommerce_vertical_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for ecommerce_vertical construction

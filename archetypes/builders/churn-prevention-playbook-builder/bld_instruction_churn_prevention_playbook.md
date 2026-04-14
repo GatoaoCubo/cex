@@ -25,14 +25,14 @@ density_score: 0.85
 6. Identify win-back window: 30/60/90-day post-churn re-engagement viability.
 
 ## Phase 2: COMPOSE
-1. Reference SCHEMA.md for required frontmatter (id, kind, pillar, health_score_model).
+1. Reference bld_schema_churn_prevention_playbook.md for required frontmatter (id, kind, pillar, health_score_model).
 2. Write health score definition: components, weights, thresholds.
 3. Define intervention triggers: score delta, days-inactive, days-to-renewal.
 4. Write save-the-account script sections: opening, discovery, objection handlers, close.
 5. Write win-back sequence: 30-day (acknowledge), 60-day (new value prop), 90-day (final offer).
 6. Map Gainsight CTAs: trigger conditions, assignee, due date SLA.
 7. Define success criteria: what constitutes a "save" (renewal signed, health restored).
-8. Reference OUTPUT_TEMPLATE.md for section structure.
+8. Reference bld_output_template_churn_prevention_playbook.md for section structure.
 9. Cross-reference nps_survey kind for detractor signal integration.
 
 ## Phase 3: VALIDATE

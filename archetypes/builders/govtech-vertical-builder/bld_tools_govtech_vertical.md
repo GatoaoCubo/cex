@@ -16,26 +16,21 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Aggregates and standardizes raw gov data | Data ingestion |  
-| cex_score.py | Evaluates compliance with policy benchmarks | Policy validation |  
-| cex_retriever.py | Fetches public records via API/OCR | Document processing |  
-| cex_doctor.py | Diagnoses data quality issues | Pre-deployment checks |  
-| cex_reporter.py | Generates audit trails and summaries | Post-processing |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile govtech_vertical YAML/MD artifacts to registry | After artifact generation |
+| cex_score.py | Score artifact quality (5D rubric) against quality gate | Post-generation quality check |
+| cex_retriever.py | Fetch similar govtech artifacts for reference | During F3 INJECT phase |
+| cex_doctor.py | Diagnose schema compliance and frontmatter issues | Pre-validation checks |
+| cex_wave_validator.py | Validate builder ISO set completeness and D01-D15 defects | Builder audit cycle |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| val_integrity_checker.py | Verifies data consistency across systems | Cross-departmental sync |  
-| val_compliance_scanner.py | Checks adherence to legal frameworks | Regulatory updates |  
-| val_security_audit.py | Identifies vulnerabilities in data flows | System onboarding |  
-
-## External References  
-- [OpenRefine](https://openrefine.org/) (data cleaning)  
-- [CKAN](https://ckan.org/) (open data portal framework)  
-- [egov](https://egov.io/) (e-governance platform)
+## External References
+- FedRAMP Marketplace (marketplace.fedramp.gov): authorized cloud services registry
+- NIST SP 800-53 Rev. 5: security and privacy control catalog
+- CJIS Security Policy v5.9.1 (SP 20-01): law enforcement data protection
+- GSA System for Award Management (sam.gov): vendor registration and contract data
+- StateRAMP Authorized Products List: state-level FedRAMP equivalent
 
 ## Domain Scope
 These tools support govtech vertical artifact production, including FedRAMP authorization validation, CJIS compliance checks, and GSA-approved template management specific to govtech use cases.

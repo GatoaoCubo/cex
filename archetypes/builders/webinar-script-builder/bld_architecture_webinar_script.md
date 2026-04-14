@@ -33,7 +33,7 @@ All 13 ISOs of the webinar-script-builder with role, pillar, and status.
 | 9 | bld_architecture_webinar_script.md | architecture | P08 | CONSTRAIN | Component inventory, dependency map, system position |
 | 10 | bld_collaboration_webinar_script.md | collaboration | P12 | COLLABORATE | Crew roles, receives-from, produces-for, boundary |
 | 11 | bld_config_webinar_script.md | config | P09 | CONSTRAIN | Naming, paths, limits, hooks |
-| 12 | bld_memory_webinar_script.md | learning_record | P10 | INJECT | Observed patterns, evidence, and builder recommendations |
+| 12 | bld_memory_webinar_script.md | memory | P10 | INJECT | Observed patterns, evidence, and builder recommendations |
 | 13 | bld_tools_webinar_script.md | tools | P04 | CALL | Production tools, validation tools, external platform references |
 
 ---

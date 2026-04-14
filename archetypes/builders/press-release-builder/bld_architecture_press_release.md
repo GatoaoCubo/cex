@@ -31,7 +31,7 @@ density_score: 0.85
 | Architecture | bld_architecture_press_release.md | architecture | P08 | CONSTRAIN | active |
 | Collaboration | bld_collaboration_press_release.md | collaboration | P12 | COLLABORATE | active |
 | Config | bld_config_press_release.md | config | P09 | CONSTRAIN | active |
-| Memory | bld_memory_press_release.md | learning_record | P10 | INJECT | active |
+| Memory | bld_memory_press_release.md | memory | P10 | INJECT | active |
 | Tools | bld_tools_press_release.md | tools | P04 | CALL | active |
 
 ## Dependencies

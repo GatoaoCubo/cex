@@ -33,12 +33,13 @@ Playbooks integrate customer success (CS) workflows, leveraging tools like CRM s
 | At-Risk Account | Customer showing signs of potential churn | Forrester |  
 | Retention KPIs | Metrics like retention rate, win-back rate, and CSAT | PwC |  
 
-## Industry Standards  
-- Gartner Customer Success Maturity Model  
-- ISO/IEC 20000-1:2018 (IT service management)  
-- NIST SP 800-63 (Authentication and identity management)  
-- "Predictive Analytics for Churn" (Eric Siegel, 2015)  
-- Telecommunications Management Network (TMN) framework  
+## Industry Standards
+- Gainsight CS Maturity Model: health score design, CTA automation, playbook execution
+- ChurnZero Playbook Framework: risk score segmentation and automated outreach sequences
+- Totango SuccessBLOCs: structured intervention playbook design and outcome tracking
+- Bain & Company Customer Loyalty Practice: NPS-to-retention signal integration
+- TSIA Customer Success Research: save-the-account script patterns and win-back cadences
+- "Predictive Analytics for Churn" (Eric Siegel, 2015): leading-indicator signal selection
 
 ## Common Patterns  
 1. Proactive outreach based on usage pattern anomalies  

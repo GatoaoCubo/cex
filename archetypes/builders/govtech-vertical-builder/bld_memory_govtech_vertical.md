@@ -1,6 +1,6 @@
 ---
-kind: learning_record
-id: p10_lr_govtech_vertical_builder
+kind: memory
+id: p10_mem_govtech_vertical_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for govtech_vertical construction
@@ -8,7 +8,7 @@ quality: null
 title: "Learning Record Govtech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
-tags: [govtech_vertical, builder, learning_record]
+tags: [govtech_vertical, builder, memory]
 tldr: "Learned patterns and pitfalls for govtech_vertical construction"
 domain: "govtech_vertical construction"
 created: "2026-04-14"
