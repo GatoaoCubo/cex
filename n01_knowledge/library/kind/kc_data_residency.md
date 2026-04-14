@@ -1,7 +1,7 @@
 ---
 id: kc_data_residency
 kind: knowledge_card
-title: Data Residency Configuration
+title: Data Residency Configuration for GDPR and Regional Compliance
 version: 1.0.0
 quality: null
 pillar: P01
@@ -12,35 +12,26 @@ pillar: P01
 Data residency refers to the physical location of data storage and processing. Organizations must configure data residency to comply with regulations like GDPR and regional data sovereignty laws.
 
 ## Key Considerations
-1. **GDPR Compliance**: EU data must be stored and processed within the EU unless explicit consent allows transfers to countries with adequate data protection.
-2. **Regional Requirements**: 
-   - US: Follow CCPA/CPRA for California residents
-   - Canada: Adhere to PIPEDA regulations
-   - Asia: Comply with China's Data Security Law and Japan's APPI
-3. **Data Flow Mapping**: Document all data movement paths between storage locations and processing centers.
-4. **Encryption**: Implement strong encryption for data in transit and at rest across all regions.
-5. **Audit Trails**: Maintain detailed records of data access and modification activities.
+- **Data Sovereignty**: Ensure data is stored in jurisdictions compliant with local laws
+- **Transfer Mechanisms**: Use approved data transfer methods between regions
+- **Access Controls**: Implement strict access policies for cross-border data flows
+- **Audit Trails**: Maintain detailed records of data movement and storage locations
 
-## Configuration Recommendations
-- Use regional data centers for location-specific data
-- Implement strict access controls based on data sensitivity
-- Regularly review compliance status with legal counsel
-- Maintain documentation of all data processing activities
+## GDPR Compliance
+- Article 4(13) requires data controllers to ensure adequate protection for international transfers
+- GDPR Article 33 mandates data protection impact assessments for high-risk transfers
+- Must maintain records of processing activities (Article 30)
 
-## YAML Structure
-```yaml
-data_residency:
-  region: EU/US/ASIA
-  compliance:
-    gdpr: true/false
-    ccpa: true/false
-    pipl: true/false
-  storage:
-    locations: [list of data centers]
-    encryption: AES-256
-  access:
-    controls: [role-based permissions]
-    audit: true/false
-```
+## Regional Compliance
+- **EU/EEA**: Follow GDPR guidelines for data localization
+- **US**: Comply with CLOUD Act and EU-US Privacy Shield framework
+- **Other Regions**: Adhere to local data protection laws (e.g., Brazil's LGPD, India's PDPA)
 
-This configuration ensures legal compliance while maintaining operational efficiency across global data operations.
+## Best Practices
+1. Conduct data mapping to identify residency requirements
+2. Use data residency tools for automated compliance tracking
+3. Regularly review and update residency configurations
+4. Document all data storage and transfer activities
+5. Perform compliance audits quarterly
+
+Data residency configurations should be reviewed annually to ensure alignment with evolving regulatory requirements.
