@@ -16,24 +16,28 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Compiles integration code | Building guide |  
-| cex_score.py | Evaluates integration compatibility | Assessing integrations |  
-| cex_retriever.py | Fetches external data sources | Gathering integration examples |  
-| cex_doctor.py | Diagnoses integration errors | Debugging workflows |  
-| cex_validator.py | Ensures compliance with standards | Validating outputs |  
-| cex_analyzer.py | Identifies integration patterns | Optimizing performance |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile .md artifact to .yaml | Post-write (F8) |
+| cex_retriever.py | TF-IDF similarity over 2184 docs | Find prior integration_guide artifacts (F3) |
+| cex_score.py | 3-layer scoring (structural + rubric + semantic) | Quality gate (F7) |
+| cex_doctor.py | Builder health check across 13 ISOs | Pre-dispatch validation |
+| cex_hygiene.py | Frontmatter + ASCII + naming enforcement | Pre-commit (F7) |
+| cex_prompt_optimizer.py | Analyze builder ISOs for drift | When quality < 9.0 |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| val_checker.py | Verifies syntax correctness | Code review |  
-| val_formatter.py | Standardizes output format | Preparing documentation |  
-| val_linter.py | Enforces style guidelines | Final validation |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_wave_validator.py | D01-D15 defect checks across ISOs | After bulk generation |
+| cex_sanitize.py --check | ASCII-only enforcement on .py/.ps1 | Pre-commit hook |
+| cex_hooks.py pre-commit | YAML frontmatter + schema compliance | Git pre-commit |
 
-## External References  
-- OpenAPI (API specification framework)  
-- PyTest (testing framework)  
-- Sphinx (documentation generator)
+## External References
+- Diataxis framework (How-To guide quadrant, not reference/tutorial/explanation)
+- Auth0 quickstarts + deep-dive integration patterns
+- OAuth 2.1 / OIDC / SAML 2.0 federated identity standards
+- Salesforce AppExchange partner certification checklist
+- Slack app directory submission requirements
+- OpenAPI 3.1 (API contract reference)
+- Webhook vs polling trade-off analysis (Stripe, GitHub, Shopify patterns)

@@ -16,22 +16,27 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|---|---|---|  
-| cex_compile.py | Generate sandbox spec from source | Pre-deployment |  
-| cex_score.py | Evaluate spec compliance | Post-validation |  
-| cex_retriever.py | Fetch external data for spec | During spec building |  
-| cex_doctor.py | Debug and repair spec issues | On error detection |  
+## Production Tools
+| Tool | Purpose | When |
+|---|---|---|
+| cex_compile.py | Compile .md artifact to .yaml | Post-write (F8) |
+| cex_retriever.py | TF-IDF similarity over 2184 docs | Find prior sandbox_spec artifacts (F3) |
+| cex_score.py | 3-layer scoring (structural + rubric + semantic) | Quality gate (F7) |
+| cex_doctor.py | Builder health check across 13 ISOs | Pre-dispatch validation |
+| cex_hygiene.py | Frontmatter + ASCII + naming enforcement | Pre-commit (F7) |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|---|---|---|  
-| val_checker.py | Verify spec consistency | Pre-validation |  
-| val_linter.py | Check syntax and formatting | During development |  
-| val_comparator.py | Compare specs across versions | Post-update |  
+## Validation Tools
+| Tool | Purpose | When |
+|---|---|---|
+| cex_wave_validator.py | D01-D15 defect checks across ISOs | After bulk generation |
+| cex_sanitize.py --check | ASCII-only enforcement on .py/.ps1 | Pre-commit hook |
+| cex_hooks.py pre-commit | YAML frontmatter + schema compliance | Git pre-commit |
 
-## External References  
-- CEX Framework (spec validation)  
-- Sandbox Validator (compliance checks)  
-- JSON Schema (data structure validation)
+## External References
+- PCI-DSS v4.0 sandbox isolation requirements (test/cardholder env separation)
+- gVisor (Google user-space kernel sandbox)
+- Firecracker (AWS micro-VM, <125ms boot, KVM-based)
+- Stripe test mode (dual-key pattern: test_ vs live_ prefixes)
+- HIPAA 164.312 technical safeguards (sandbox audit controls)
+- NIST SP 800-190 container security guide
+- ISO/IEC 27001:2022 A.8.31 separation of development, test, production
