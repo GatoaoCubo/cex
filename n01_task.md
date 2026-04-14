@@ -1,4 +1,0 @@
-Improve this file: P01_knowledge/library/kind\kc_agent_name_service_record.md
-Currently only 19 lines. Expand to at least 60 lines.
-Add more detail, tables, examples. Fix frontmatter if needed.
-English only.

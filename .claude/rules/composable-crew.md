@@ -71,6 +71,36 @@ The crew layer adds:
 - **F7 GOVERN coordination**: a charter-level quality gate runs after all roles complete
 - **F8 COLLABORATE coordination**: role handoffs go through a2a Task signals
 
+## Grid + Crew composition
+
+The three dispatch modes stack:
+
+| Layer | What it runs | Parallelism |
+|-------|--------------|-------------|
+| **solo** | One builder, one artifact | none |
+| **crew** | N roles with handoffs (sequential / hierarchical / consensus) | intra-crew only |
+| **grid** | N solo builders OR N crew instances | full cross-cell |
+| **grid of crews** | N parallel crew instances, each with its own charter | crews run in parallel; roles inside each crew follow their topology |
+
+Example -- ship 3 product launches on the same day:
+
+```
+N07 dispatches a grid with 3 cells:
+  cell_1: cex_crew.py run product_launch --charter charter_prod_A.md --execute
+  cell_2: cex_crew.py run product_launch --charter charter_prod_B.md --execute
+  cell_3: cex_crew.py run product_launch --charter charter_prod_C.md --execute
+
+Each cell runs the same 4-role sequential crew (research -> copy -> design -> QA)
+but grounded on a different charter (different product, deadline, budget).
+
+Total concurrency: 3 crews x (1 active role at a time each) = 3 LLM calls in flight.
+If you switch the crew to `process: consensus`, concurrency becomes 3 x 4 = 12.
+```
+
+Grid+crew is the highest-leverage composition CEX offers: you parallelize
+entire packages, not just individual artifacts, while keeping coherence
+within each package via the crew's handoff protocol.
+
 ## When crews are NOT the answer
 
 - **1 artifact, 1 kind** -> solo builder, not a crew
