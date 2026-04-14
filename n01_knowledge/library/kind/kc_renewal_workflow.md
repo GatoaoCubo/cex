@@ -10,31 +10,31 @@ pillar: P01
 # Renewal Workflow
 
 ## Stages
-1. **Initiation**: Triggered by contract expiration date (CRM alert)
-2. **Review**: Legal & finance team assess terms (3 business days)
-3. **Approval**: Senior management sign-off (5 business days)
-4. **Execution**: Contract renewal via e-signature (2 business days)
-5. **Post-Renewal**: Account manager confirm details (1 business day)
+- **Initiation**: Triggered by contract expiration date
+- **Review**: Legal team validates terms (3 business days)
+- **Approval**: Executive sign-off required (5 business days)
+- **Execution**: Automated contract generation (24h)
+- **Monitoring**: Post-renewal compliance checks (weekly)
 
 ## Owners
-- **Account Manager**: Initiation, post-renewal follow-up
-- **Legal Team**: Review, contract amendments
-- **Finance Team**: Budget approval, payment terms
-- **Operations**: Escalation management
+- **Initiation**: Contract Manager (CM)
+- **Review**: Legal Department (LD)
+- **Approval**: C-Suite (CS)
+- **Execution**: Automation Engine (AE)
+- **Monitoring**: Compliance Team (CT)
 
 ## Automation
-- CRM auto-alert 30 days before expiration
-- Email templates for renewal requests
-- E-signature integration for approved contracts
+- Auto-sent reminders 30/15/7 days before expiration
+- AI-generated renewal templates with clause suggestions
+- Integration with CRM for client history analysis
 
 ## Escalation
-- 7-day grace period for unresolved issues
-- Escalate to C-level executives if unresolved after 10 days
-- SLA: 24-hour response for critical issues
+- 2nd-level support: Contract Specialist (CS)
+- 33rd-level support: Legal Counsel (LC)
+- Critical issues: Escalated to Executive Committee (EC) within 24h
 
 ## Contract Amendments
-- Track changes in version history
-- Require legal review for price/term modifications
-- Maintain audit trail of all amendments
-- Auto-generate amendment summary report
-```
+- Track all changes with version control
+- Store amendments in encrypted archive
+- Generate audit trail for regulatory compliance
+- Auto-notify stakeholders of material changes
