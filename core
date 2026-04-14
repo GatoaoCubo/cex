@@ -1,76 +1,48 @@
 ---
-id: kc_marketplace_app_manifest
+id: kc_churn_prevention_playbook
 kind: knowledge_card
-title: Marketplace App Manifest Specification
+title: Churn Prevention Playbook
 version: 1.0.0
 quality: null
 pillar: P01
-language: en
 ---
 
-# Marketplace App Manifest Specification
+# Churn Prevention Playbook
 
-## Overview
-This document defines the structure and metadata requirements for apps listed in Claude/LangChain/HuggingFace marketplaces. The manifest serves as a standardized metadata file for app discovery, permission management, and pricing configuration.
+## Signal Detection
+- Monitor usage patterns (e.g., 30% drop in activity)
+- Track support ticket volume (e.g., 2x increase in escalations)
+- Analyze payment behavior (e.g., missed payments, subscription pauses)
 
-## Core Metadata
-- **name**: Required string (max 100 chars)
-- **description**: Brief functionality summary (max 250 chars)
-- **author**: Developer/organization name
-- **version**: Semver format (e.g., 1.0.0)
-- **license**: Open source license type (MIT, Apache, etc.)
-- **keywords**: Array of 3-5 relevant tags
+## Intervention Triggers
+- First warning: 7-day email reminder with usage insights
+- Second warning: Personalized call from account manager
+- Final notice: Credit line reduction with exit survey
 
-## Permission Configuration
-- **access**: 
-  - `public` (default)
-  - `private` (requires authentication)
-  - `premium` (subscription required)
-- **scopes**: Array of API permissions (e.g., `read_user`, `write_data`)
-- **rate_limits**: 
-  - `requests_per_minute`: Integer
-  - `user_specific`: Boolean
+## Save-the-Account Scripts
+1. **Immediate Action**: 
+   - Send personalized email with tailored benefits
+   - Offer 1:1 session with product expert
+   - Provide exclusive discount (e.g., 15% for 3 months)
 
-## Pricing Model
-- **type**: 
-  - `free`
-  - `paid` (one-time fee)
-  - `subscription` (recurring)
-- **price**: Decimal value (for paid models)
-- **currency**: ISO 4217 code (e.g., USD, EUR)
-- **discounts**: 
-  - `early_bird`: Percentage off
-  - `volume`: Tiered pricing structure
+2. **Escalation Protocol**:
+   - Schedule urgent call with CSM team
+   - Present tailored renewal proposal
+   - Offer flexible payment options
 
-## Example Manifest
-```yaml
-name: "TextSummarizer"
-description: "AI-powered document summarization tool"
-author: "NLP Labs"
-version: "1.2.0"
-license: "MIT"
-keywords:
-  - summarization
-  - NLP
-  - text processing
-access: public
-scopes:
-  - read_document
-  - generate_summary
-rate_limits:
-  requests_per_minute: 100
-  user_specific: true
-type: subscription
-price: 9.99
-currency: USD
-discounts:
-  early_bird: 20
-  volume:
-    100: 8.99
-    500: 7.99
-```
+3. **Last Chance**:
+   - Share success stories of retained clients
+   - Provide exit interview opportunity
+   - Offer data migration assistance
 
-## Compliance
-- Must include open source license
-- All pricing models require explicit user consent
-- Rate limits must be documented in API docs
+## Metrics to Track
+- Churn rate reduction
+- Customer retention score
+- Net promoter score (NPS)
+- Cost per retention vs. acquisition
+
+## Tools Required
+- Customer success platform
+- CRM integration
+- Analytics dashboard
+- Email automation system
