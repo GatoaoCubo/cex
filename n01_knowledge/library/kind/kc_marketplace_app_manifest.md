@@ -5,11 +5,12 @@ title: Marketplace App Manifest Spec
 version: 1.0.0
 quality: null
 pillar: P01
+description: |
+  Standardized metadata format for AI apps on Claude, LangChain, and HuggingFace marketplaces. Defines required fields for visibility, security, and monetization across platforms.
 ---
-
 # Marketplace App Manifest Specification
 
-This document defines the metadata structure for apps listed on Claude, LangChain, and HuggingFace marketplaces. The manifest enables platform-specific metadata, permission declarations, and pricing models.
+This document specifies the required metadata structure for AI applications listed on major marketplaces. The manifest enables platform-agnostic metadata, permission declarations, and pricing models.
 
 ## Core Structure
 ```yaml
@@ -17,10 +18,8 @@ manifest_version: "1.0.0"
 app_id: "marketplace:app:uuid"
 name:
   en: "App Name"
-  other_langs: {...}
 description:
   en: "Brief functionality summary"
-  other_langs: {...}
 ```
 
 ## Required Fields
@@ -86,5 +85,4 @@ platforms:
     model: "claude-3-5-son00"
   huggingface:
     model_id: "t5-small"
-```
 ```
