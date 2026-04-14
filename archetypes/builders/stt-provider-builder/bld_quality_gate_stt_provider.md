@@ -25,7 +25,7 @@ density_score: 0.85
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML valid | Invalid YAML syntax |  
-| H02 | ID matches pattern | ID does not match `stt-[a-z0-9]{8}` |  
+| H02 | ID matches pattern | ID does not match `^p04_stt_[a-zA-Z0-9]+$` (schema source of truth) |  
 | H03 | kind matches | kind ≠ `stt_provider` |  
 | H04 | Latency ≤ 500ms | Latency > 500ms for 99% of requests |  
 | H05 | Error rate ≤ 1% | Error rate > 1% |  

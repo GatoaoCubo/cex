@@ -29,7 +29,7 @@ density_score: 0.85
 | updated      | datetime   | yes      | -       | ISO 8601 format                |  
 | author       | string     | yes      | -       | Owner/organization             |  
 | domain       | string     | yes      | -       | Service domain (e.g., "health")|  
-| quality      | string     | yes      | "draft"  | Quality status                 |  
+| quality      | null       | yes      | null     | MUST be null -- peer review assigns |
 | tags         | array      | yes      | []      | Keywords                       |  
 | tldr         | string     | yes      | -       | Summary                        |  
 | language_support | array  | yes      | []      | Supported languages            |  

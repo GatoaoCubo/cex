@@ -6,38 +6,43 @@ llm_function: REASON
 purpose: Step-by-step production process for prosody_config
 quality: null
 title: "Instruction Prosody Config"
-version: "1.0.0"
-author: wave1_builder_gen
-tags: [prosody_config, builder, instruction]
-tldr: "Step-by-step production process for prosody_config"
+version: "1.1.0"
+author: n03_hybrid_review2
+tags: [prosody_config, builder, instruction, ssml]
+tldr: "Step-by-step production process -- determine emission path, map emotions, emit SSML or native payload"
 domain: "prosody_config construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.90
 ---
 
-## Phase 1: RESEARCH  
-1. Analyze existing voice personality profiles for emotional range and tone consistency.  
-2. Identify key prosodic parameters (pitch, rhythm, stress, pause) affecting emotional expression.  
-3. Study linguistic and cultural nuances in speech patterns for target demographics.  
-4. Benchmark against industry-standard emotion classification frameworks (e.g., Ekman, Plutchik).  
-5. Collect user feedback on preferred voice personas for constrained use cases (e.g., customer service).  
-6. Document technical constraints (e.g., TTS engine limitations, audio bitrate requirements).  
+## Phase 1: RESEARCH
+1. Identify target tts_provider(s) -- SSML-compliant (Azure/Google/AWS/IBM) vs native-only (ElevenLabs/Cartesia/Hume/PlayHT).
+2. Load provider matrix from KC; select emission path per target.
+3. Gather emotion requirements -- name each emotion, map to circumplex (valence, arousal).
+4. Check language/locale (BCP-47) -- pitch/rate norms differ across locales.
+5. Review existing prosody_config artifacts in P09 for reusable baselines (template-first).
+6. Document numeric ranges: pitch in Hz or %, rate 50-200%, volume in dB or enum.
 
-## Phase 2: COMPOSE  
-1. Set up working directory with SCHEMA.md and OUTPUT_TEMPLATE.md as reference files.  
-2. Define core emotional states (e.g., calm, urgent, empathetic) and map to prosodic ranges.  
-3. Assign numerical values to pitch (Hz), duration (ms), and intensity (dB) per emotional state.  
-4. Write config blocks for each persona, ensuring alignment with schema-defined fields.  
-5. Apply constraints: limit pitch variation to ±15% of baseline, pauses < 500ms unless specified.  
-6. Use OUTPUT_TEMPLATE.md to structure YAML keys (e.g., `emotion: {state}`, `prosody: {pitch: ...}`).  
-7. Validate parameter interoperability with downstream systems (e.g., TTS, voice cloning APIs).  
-8. Add metadata for versioning, author, and use-case scope in config header.  
-9. Finalize by cross-referencing with research notes and schema compliance checks.  
+## Phase 2: COMPOSE
+1. Write frontmatter: id (p09_prs_*), kind, pillar=P09, version (semver), quality: null, emission enum.
+2. Define `baseline` block with neutral pitch/rate/volume.
+3. For each emotion, add a named entry under `emotions:` keyed by slug.
+4. If emission=ssml: emit `ssml:` multiline block wrapping `{{text}}` with `<prosody>`, `<break>`, `<emphasis>`.
+5. If emission=elevenlabs: emit `voice_settings: {stability, similarity_boost, style, use_speaker_boost}`.
+6. If emission=playht: emit `emotion:` enum from [female_happy, male_happy, female_sad, ...] + `speed`.
+7. If emission=cartesia: emit `text_template` with inline `[emotion]` and `[pause:Nms]` directives.
+8. If emission=hume: emit free-text `description:` (e.g., "excited whisper at moderate pace").
+9. Declare `target_providers:` array so downstream validators know which rendering paths to exercise.
+10. Never embed API keys, model weights, agent persona text, or audio bytes.
 
-## Phase 3: VALIDATE  
-- [ ] ✅ Schema validation: `yamllint` confirms no syntax errors or schema mismatches.  
-- [ ] ✅ Constraint enforcement: All prosodic values fall within defined technical limits.  
-- [ ] ✅ Emotional accuracy: User tests confirm persona alignment with intended emotion.  
-- [ ] ✅ Cross-platform compatibility: Config works across TTS engines (e.g., Amazon Polly, Azure).  
-- [ ] ✅ Documentation completeness: All parameters and constraints are traceable to research.
+## Phase 3: VALIDATE
+- [ ] `quality: null` in frontmatter (peer review assigns).
+- [ ] `id` matches `^p09_prs_[a-z0-9_-]+\.yaml$`.
+- [ ] `emission` enum present and consistent with payload shape.
+- [ ] SSML strings parse against W3C SSML 1.1 (when emission=ssml).
+- [ ] Numeric ranges within provider limits (ElevenLabs sliders 0.0-1.0, pitch +/-50%).
+- [ ] No tts_provider keys, no agent_profile text, no secrets.
+- [ ] At least one emotion variant differs measurably from baseline.
+- [ ] `target_providers` declared and reachable via tts_provider artifacts.
+- [ ] Round-trip render test passes on primary target provider.
