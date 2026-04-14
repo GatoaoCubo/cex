@@ -1,0 +1,53 @@
+kind: schema
+id: bld_schema_eval_framework
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for eval_framework
+quality: null
+title: Schema Eval Framework
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- eval_framework
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for eval_framework
+domain: eval_framework construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|  \n\
+  | id         | string | yes      |         | Must match ID Pattern |  \n| kind       | string | yes      |         | Always\
+  \ \"eval_framework\" |  \n| pillar     | string | yes      |         | Always \"P07\" |  \n| title      | string | yes \
+  \     |         | Human-readable name |  \n| version    | string | yes      | \"1.0\"   | Semantic versioning |  \n| created\
+  \    | date   | yes      |         | ISO 8601 format |  \n| updated    | date   | yes      |         | ISO 8601 format |\
+  \  \n| author     | string | yes      |         | Maintainer name |  \n| domain     | string | yes      |         | Application\
+  \ domain (e.g., \"NLP\") |  \n| quality    | null   | yes      | null    | Never self-score; peer review assigns |  \n|\
+  \ tags       | array  | yes      | []      | Keywords for discovery |  \n| tldr       | string | yes      |         | One-sentence\
+  \ summary |  \n| framework_type | string | yes |         | Type of evaluation framework (e.g., \"benchmark\", \"test_suite\"\
+  ) |  \n| evaluation_criteria | array | yes | [] | Core criteria evaluated |"
+recommended: "| Field          | Type   | Notes |  \n|----------------|--------|-------|  \n| license        | string | Open\
+  \ source license |  \n| dependencies   | array  | Required libraries/tools |  \n| compatibility  | string | System/tech\
+  \ requirements |  \n| references     | array  | Citations or links |"
+id_pattern: ^p07_efw_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose, scope, and intended use of the framework.
+- Evaluation Criteria
+- Detailed description of metrics and success indicators.
+- Metrics
+- Quantitative and qualitative measures tracked.
+- Use Cases
+- Scenarios where the framework is applied.
+- Compatibility
+- Supported platforms, languages, or systems.
+- References
+- Documentation, papers, or tools related to the framework.
+constraints:
+- ID must match exact regex pattern.
+- Quality field must be assigned by peer review, not self-scored.
+- Domain-specific fields (framework_type, evaluation_criteria) are mandatory.
+- Version must follow semantic versioning (e.g., "1.2.3").
+- Tags must be lowercase, alphanumeric, and underscore-separated.
+- File size must not exceed 5120 bytes.
