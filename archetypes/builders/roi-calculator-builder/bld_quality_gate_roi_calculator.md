@@ -26,7 +26,7 @@ density_score: 0.85
 | ID             | Check                          | Fail Condition                              |  
 |----------------|--------------------------------|---------------------------------------------|  
 | H01            | YAML frontmatter valid         | Missing or invalid frontmatter              |  
-| H02            | ID matches pattern             | ID does not match ^p11_roi_[a-z][a-z0-9_]+.yaml$ |  
+| H02            | ID matches pattern             | ID does not match ^p11_roi_[a-z][a-z0-9_]+$ |  
 | H03            | kind field matches 'roi_calculator' | kind field invalid                          |  
 | H04            | Input parameters defined       | Missing required input fields               |  
 | H05            | ROI formula mathematically valid | Formula errors or undefined variables       |  

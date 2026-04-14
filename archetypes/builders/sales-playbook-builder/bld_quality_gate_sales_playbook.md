@@ -37,14 +37,14 @@ density_score: 0.85
 ## SOFT Scoring  
 | Dim | Dimension | Weight | Scoring Guide |  
 |---|---|---|---|  
-| D01 | Clarity | 0.15 | 1-5 (readability) |  
-| D02 | Completeness | 0.20 | 1-5 (coverage) |  
-| D03 | Alignment | 0.15 | 1-5 (strategy match) |  
-| D04 | Practicality | 0.15 | 1-5 (actionable steps) |  
-| D05 | Objection depth | 0.10 | 1-5 (coverage) |  
-| D06 | Close effectiveness | 0.10 | 1-5 (conversion) |  
-| D07 | Versioning | 0.10 | 1-5 (tracking) |  
-| D08 | Stakeholder feedback | 0.15 | 1-5 (approval) |  
+| D01 | Clarity | 0.15 | 1.0=concise/role-aligned, 0.5=vague |  
+| D02 | Completeness | 0.20 | 1.0=all sections, 0.7=minor gaps |  
+| D03 | Alignment | 0.15 | 1.0=matches GTM strategy, 0.5=misaligned |  
+| D04 | Practicality | 0.15 | 1.0=field-ready, 0.5=academic |  
+| D05 | Objection depth | 0.10 | 1.0=3+ rebuttals/category, 0.5=generic |  
+| D06 | Close effectiveness | 0.10 | 1.0=persona-specific patterns, 0.5=generic |  
+| D07 | Versioning | 0.05 | 1.0=versioned+changelog, 0.5=none |  
+| D08 | Stakeholder feedback | 0.10 | 1.0=peer-approved, 0.5=draft |  
 
 ## Actions  
 | Score | Action |  

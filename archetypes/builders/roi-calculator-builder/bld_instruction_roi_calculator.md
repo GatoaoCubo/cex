@@ -25,8 +25,8 @@ density_score: 0.85
 6. Validate data sources for accuracy (financial databases, vendor quotes).  
 
 ## Phase 2: COMPOSE  
-1. Define schema in SCHEMA.md: specify input types, units, and constraints.  
-2. Map inputs to ROI/TCO formulas using OUTPUT_TEMPLATE.md structure.  
+1. Define schema in bld_schema_roi_calculator.md: specify input types, units, and constraints.  
+2. Map inputs to ROI/TCO formulas using bld_output_template_roi_calculator.md structure.  
 3. Write formula logic for dynamic calculations (e.g., compound annual growth rate).  
 4. Build TCO comparison table with columns: cost category, baseline, alternative, delta.  
 5. Populate template with placeholder values for user input fields.  

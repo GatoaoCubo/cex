@@ -25,8 +25,8 @@ density_score: 0.85
 6. Compile research into a structured dataset with persona, stage, and question categories.  
 
 ## Phase 2: COMPOSE  
-1. Use SCHEMA.md to define artifact structure: persona, stage, question, intent (MEDDIC/BANT), and response type.  
-2. Reference OUTPUT_TEMPLATE.md for formatting: headers, bullet points, and alignment with sales playbooks.  
+1. Use bld_schema_discovery_questions.md to define artifact structure: persona, stage, question, intent (MEDDIC/BANT), and response type.  
+2. Reference bld_output_template_discovery_questions.md for formatting: headers, bullet points, and alignment with sales playbooks.  
 3. Write open-ended questions targeting persona-specific challenges (e.g., “What metrics define success for your team?”).  
 4. Ensure each question maps to a MEDDIC/BANT criterion (e.g., Budget, Authority, Need).  
 5. Group questions by deal stage, prioritizing early-stage questions for qualification.  
@@ -36,8 +36,8 @@ density_score: 0.85
 9. Finalize artifact with metadata (e.g., version, author, last reviewed date).  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ Confirm alignment with SCHEMA.md and OUTPUT_TEMPLATE.md structure.  
-- [ ] ✅ Verify 100% coverage of personas and deal stages in the artifact.  
-- [ ] ✅ Test questions with 2–3 stakeholders for clarity and relevance.  
-- [ ] ✅ Ensure MEDDIC/BANT criteria are explicitly addressed in question intent.  
-- [ ] ✅ Obtain approval from sales leadership and subject-matter experts.
+- [ ] Confirm alignment with bld_schema_discovery_questions.md and bld_output_template_discovery_questions.md structure.  
+- [ ] Verify 100% coverage of personas and deal stages in the artifact.  
+- [ ] Test questions with 2–3 stakeholders for clarity and relevance.  
+- [ ] Ensure MEDDIC/BANT criteria are explicitly addressed in question intent.  
+- [ ] Obtain approval from sales leadership and subject-matter experts.

@@ -39,14 +39,14 @@ density_score: 0.85
 (Table: Dim | Dimension | Weight | Scoring Guide)  
 | Dim | Dimension | Weight | Scoring Guide |  
 |---|---|---|---|  
-| D01 | Script completeness | 0.15 | 1.0 = 100% complete |  
-| D02 | User experience | 0.15 | 1.0 = seamless interaction |  
-| D03 | Clarity | 0.10 | 1.0 = no ambiguity |  
-| D04 | Engagement | 0.10 | 1.0 = high user retention |  
-| D05 | Accessibility | 0.10 | 1.0 = WCAG 2.1 AA compliant |  
-| D06 | Localization | 0.10 | 1.0 = all languages supported |  
-| D07 | Performance | 0.10 | 1.0 = <2s load time |  
-| D08 | Device compatibility | 0.10 | 1.0 = works on all targets |  
+| D01 | Script completeness | 0.20 | 1.0 = all steps, talk track, and objection map present |
+| D02 | User experience | 0.20 | 1.0 = seamless guided flow, no dead ends |
+| D03 | Clarity | 0.15 | 1.0 = no ambiguity, active voice throughout |
+| D04 | Engagement | 0.15 | 1.0 = compelling proof points and CTA present |
+| D05 | Accessibility | 0.10 | 1.0 = WCAG 2.1 AA compliant |
+| D06 | Localization | 0.05 | 1.0 = all target locales supported |
+| D07 | Performance | 0.05 | 1.0 = <2s load time per step |
+| D08 | Device compatibility | 0.10 | 1.0 = desktop and mobile verified |
 
 ## Actions  
 (Table: Score | Action)  

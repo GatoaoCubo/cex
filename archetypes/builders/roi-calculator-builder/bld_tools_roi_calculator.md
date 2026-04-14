@@ -19,20 +19,18 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles ROI model components | During model setup |  
-| cex_score.py | Calculates ROI scores from inputs | After data ingestion |  
-| cex_retriever.py | Fetches historical financial data | For baseline comparisons |  
-| cex_doctor.py | Debugs ROI calculation errors | During validation phase |  
-| cex_optimizer.py | Optimizes parameter configurations | For performance tuning |  
+| cex_compile.py | Compile artifact after production | F8 COLLABORATE |  
+| cex_score.py | Score artifact quality (5D dimensions) | F7 GOVERN |  
+| cex_retriever.py | Retrieve similar ROI calculator artifacts for reuse | F3 INJECT |  
+| cex_doctor.py | Validate builder health, check ISO completeness | F7 GOVERN |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| roi_validator.py | Checks data integrity and consistency | Pre-calculation |  
-| roi_analyzer.py | Audits ROI model performance | Post-calculation |  
-| roi_stress_test.py | Simulates edge cases for robustness | During QA |  
+| cex_wave_validator.py | Structural YAML + frontmatter validation | Post-production |  
+| cex_hooks.py | Pre-commit ASCII and schema checks | Pre-commit |  
 
 ## External References  
-- NumPy: For numerical computations  
-- Pandas: For data manipulation  
-- Matplotlib: For result visualization
+- Forrester TEI (Total Economic Impact) methodology  
+- Gartner TCO framework  
+- IFRS/GAAP NPV calculation standards

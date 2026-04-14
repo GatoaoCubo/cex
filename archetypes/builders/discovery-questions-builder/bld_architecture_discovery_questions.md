@@ -19,19 +19,19 @@ density_score: 0.85
 ## Component Inventory  
 | ISO Name             | Role                          | Pillar | Status |  
 |----------------------|-------------------------------|--------|--------|  
-| bld_manifest         | Defines builder structure     | P01    | Active |  
-| bld_instruction      | Specifies task parameters     | P01    | Active |  
-| bld_system_prompt    | Sets LLM interaction rules    | P01    | Active |  
-| bld_schema           | Enforces data format          | P01    | Active |  
-| bld_quality_gate     | Validates output compliance   | P01    | Active |  
-| bld_output_template  | Structures final responses    | P01    | Active |  
-| bld_examples         | Provides training samples     | P01    | Active |  
+| bld_manifest         | Defines builder structure     | P11    | Active |  
+| bld_instruction      | Specifies task parameters     | P03    | Active |  
+| bld_system_prompt    | Sets LLM interaction rules    | P03    | Active |  
+| bld_schema           | Enforces data format          | P06    | Active |  
+| bld_quality_gate     | Validates output compliance   | P11    | Active |  
+| bld_output_template  | Structures final responses    | P05    | Active |  
+| bld_examples         | Provides training samples     | P07    | Active |  
 | bld_knowledge_card   | Embeds domain-specific info   | P01    | Active |  
-| bld_architecture     | Maps builder components       | P01    | Active |  
-| bld_collaboration    | Manages team input workflows  | P01    | Active |  
-| bld_config           | Stores runtime parameters     | P01    | Active |  
-| bld_memory           | Tracks session context        | P01    | Active |  
-| bld_tools            | Integrates external utilities | P01    | Active |  
+| bld_architecture     | Maps builder components       | P08    | Active |  
+| bld_collaboration    | Manages team input workflows  | P12    | Active |  
+| bld_config           | Stores runtime parameters     | P09    | Active |  
+| bld_memory           | Tracks session context        | P10    | Active |  
+| bld_tools            | Integrates external utilities | P04    | Active |  
 
 ## Dependencies  
 | From              | To                  | Type       |  

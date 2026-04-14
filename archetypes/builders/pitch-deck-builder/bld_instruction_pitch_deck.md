@@ -25,19 +25,19 @@ density_score: 0.85
 6. Define the ask (funding amount, use of funds, exit expectations).  
 
 ## Phase 2: COMPOSE  
-1. Use SCHEMA.md to structure slides: Problem, Solution, Traction, Ask.  
+1. Use bld_schema_pitch_deck.md to structure slides: Problem, Solution, Traction, Ask.  
 2. Write problem slide: 1 sentence headline, 3 supporting data points.  
 3. Write solution slide: 1 core feature, 2 technical differentiators.  
 4. Write traction slide: 1 metric headline, 2 visual charts (e.g., growth, adoption).  
 5. Write ask slide: 1 funding target, 2 use-of-funds bullet points.  
-6. Reference OUTPUT_TEMPLATE.md for slide layout, fonts, and color codes.  
+6. Reference bld_output_template_pitch_deck.md for slide layout, fonts, and color codes.  
 7. Add visuals: 1 diagram per problem/solution, 1 customer testimonial.  
 8. Insert 1-2 icons per slide for visual hierarchy (e.g., rocket for growth).  
 9. Proofread for conciseness (max 10 words per bullet, no jargon).  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ Peer review: Does each slide align with SCHEMA.md?  
-[ ] ✅ Data accuracy: Are metrics sourced from verified reports?  
-[ ] ✅ Consistency: Does design match OUTPUT_TEMPLATE.md?  
-[ ] ✅ Clarity: Can a non-expert explain the problem/solution in 1 minute?  
-[ ] ✅ Approval: Signed off by CEO and CTO for technical and business claims.
+- [ ] Peer review: Does each slide align with bld_schema_pitch_deck.md?
+- [ ] Data accuracy: Are metrics sourced from verified reports?
+- [ ] Consistency: Does design match bld_output_template_pitch_deck.md?
+- [ ] Clarity: Can a non-expert explain the problem/solution in 1 minute?
+- [ ] Approval: Signed off by CEO and CTO for technical and business claims.

@@ -6,8 +6,8 @@ llm_function: CALL
 purpose: Tools available for product_tour production
 quality: null
 title: "Tools Product Tour"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+version: "1.0.1"
+author: n02_marketing
 tags: [product_tour, builder, tools]
 tldr: "Tools available for product_tour production"
 domain: "product_tour construction"
@@ -16,25 +16,24 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool              | Purpose                  | When                          |  
-|-------------------|--------------------------|-------------------------------|  
-| cex_compile.py    | Assembles tour components | During tour construction      |  
-| cex_score.py      | Evaluates tour quality    | Post-creation validation      |  
-| cex_retriever.py  | Fetches tour data         | When loading tour assets      |  
-| cex_doctor.py     | Debugs tour errors        | During troubleshooting      |  
-| cex_analyzer.py   | Analyzes user interaction | After tour deployment         |  
-| cex_optimizer.py  | Refines tour flow         | During iterative improvements |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compiles product_tour artifact and validates frontmatter | After draft complete |
+| cex_score.py | Scores tour spec against quality gate dimensions | After each draft |
+| cex_retriever.py | Fetches comparable tour specs and onboarding KCs | Research phase |
+| cex_doctor.py | Validates structural integrity and required step fields | Pre-commit |
 
-## Validation Tools  
-| Tool              | Purpose                  | When                          |  
-|-------------------|--------------------------|-------------------------------|  
-| val_checker.py    | Validates tour structure  | Pre-deployment checks         |  
-| val_simulator.py  | Tests tour scenarios      | During QA phases              |  
-| val_reporter.py   | Generates validation logs | After testing                 |  
-| val_comparator.py | Compares tour versions    | During A/B testing            |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_hooks.py | Pre-commit gate: ASCII check + frontmatter validation | On git add |
+| cex_hygiene.py | Artifact CRUD enforcement: naming, kind, quality=null | Post-generation |
 
-## External References  
-- Tour.js (interactive tour framework)  
-- Storybook (UI component validation)  
-- Lodash (utility functions for data processing)
+## External References (informational, not CEX tools)
+| Resource | Purpose |
+|----------|---------|
+| Pendo / Appcues / WalkMe | In-app tour patterns: tooltip triggers, spotlight overlays, beacon positioning |
+| Intercom Product Tours | Tooltip sequencing and empty-state coaching patterns |
+| WCAG 2.1 AA guidelines | Accessibility compliance checklist for tour elements |
+| time-to-value (TTV) metric | Onboarding activation benchmark: steps-to-aha-moment measurement |

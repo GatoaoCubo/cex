@@ -45,7 +45,7 @@ density_score: 0.85
 | example_use_case | string | Sample application |
 
 ## ID Pattern
-^p11_roi_[a-z][a-z0-9_]+.yaml$
+^p11_roi_[a-z][a-z0-9_]+$
 
 ## Body Structure
 1. **Calculation Methodology**  

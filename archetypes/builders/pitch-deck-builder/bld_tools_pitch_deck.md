@@ -6,8 +6,8 @@ llm_function: CALL
 purpose: Tools available for pitch_deck production
 quality: null
 title: "Tools Pitch Deck"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+version: "1.0.1"
+author: n02_marketing
 tags: [pitch_deck, builder, tools]
 tldr: "Tools available for pitch_deck production"
 domain: "pitch_deck construction"
@@ -16,25 +16,24 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Aggregates slides, data, and visuals into a cohesive deck | Final assembly |  
-| cex_score.py | Evaluates content clarity and impact using NLP | Draft review |  
-| cex_retriever.py | Pulls market data, competitor info, and benchmarks | Research phase |  
-| cex_doctor.py | Detects inconsistencies in financials or logic | Validation stage |  
-| cex_visualizer.py | Generates charts, diagrams, and icons | Design iteration |  
-| cex_formatter.py | Ensures slide layouts, fonts, and colors align with brand guidelines | Branding phase |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compiles pitch_deck artifact and validates frontmatter | After draft complete |
+| cex_score.py | Scores deck against quality gate dimensions | After each draft |
+| cex_retriever.py | Fetches comparable pitch decks and market data KCs | Research phase |
+| cex_doctor.py | Validates structural integrity and required slide presence | Pre-commit |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| val_grammar_check.py | Audits text for grammatical errors | Final proofreading |  
-| val_data_source.py | Verifies accuracy of cited data | Research validation |  
-| val_compliance.py | Checks adherence to legal/industry standards | Pre-submission |  
-| val_consistency.py | Ensures uniformity in messaging across slides | Draft review |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_hooks.py | Pre-commit gate: ASCII check + frontmatter validation | On git add |
+| cex_hygiene.py | Artifact CRUD enforcement: naming, kind, quality=null | Post-generation |
 
-## External References  
-- SlideDeckAI (AI-powered slide generation)  
-- PitchMetrics (pitch deck analytics platform)  
-- DataVizPro (custom visualization library)
+## External References (informational, not CEX tools)
+| Resource | Purpose |
+|----------|---------|
+| Sequoia pitch deck template | 10-slide structure reference (problem/why now/solution/market/product/biz model/traction/team/financials/ask) |
+| Y Combinator application | Traction metrics benchmarks and narrative framing |
+| Guy Kawasaki 10/20/30 rule | Slide count, duration, and font-size discipline |
+| Crunchbase / PitchBook | Market size and competitive landscape data sources |

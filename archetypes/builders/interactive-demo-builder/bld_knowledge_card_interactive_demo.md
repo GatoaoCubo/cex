@@ -31,13 +31,30 @@ Interactive demos are critical for product onboarding, marketing, and training, 
 | Modular Components    | Reusable demo segments for scalability and maintenance                   | Component-Based UI Design (2019)      |  
 | Analytics Integration | Embedding tracking to measure user behavior and demo effectiveness      | Google Analytics for Firebase         |  
 
-## Industry Standards  
-- ISO/IEC 25010:2011 (System and Software Quality Requirements)  
-- W3C Web Content Accessibility Guidelines (WCAG 2.1)  
-- IEEE 12207-2017 (Software Lifecycle Processes)  
-- "The User is Always Right" (Jakob Nielsen, 1994)  
-- Interactive Fiction Technology Foundation (IFTF) Standards  
-- Common UI Patterns (UX Design Patterns, 2020)  
+## Platform Patterns (Demo Platforms)
+| Platform | Model | Key Pattern |
+|---|---|---|
+| Demostack | HTML-cloned sandbox | Full product replica; sales team customizes per prospect |
+| Reprise | Live-capture overlay | Record prod UI; add branching overlays on top |
+| Navattic | No-code click-through | Screenshot-based; embed in website/email |
+| Arcade | Screenshot walkthroughs | Fastest to build; best for top-of-funnel |
+| Supademo | Screenshot + annotation | Built-in analytics on step drop-off |
+
+## Presales SE Playbook Structure
+A demo script is not a feature tour. It follows a sales narrative:
+1. **Discovery** -- confirm pain points before showing product
+2. **Setup** -- position the demo context ("Let me show you how X solves Y")
+3. **Core demo** -- 3-5 features maximum, each tied to a discovered pain
+4. **Proof** -- customer reference, metric, or third-party validation
+5. **Objection handling** -- pre-planned responses to common pushback
+6. **CTA** -- clear next step (trial, POC, follow-up call)
+
+## Industry Standards
+- MEDDIC / MEDDPIC qualification framework (demo targeting)
+- W3C Web Content Accessibility Guidelines (WCAG 2.1)
+- Presales Collective best practices (talk track templates)
+- Challenger Sale methodology (teach-tailor-take-control)
+- ISO/IEC 25010:2011 (quality attributes for interactive systems)  
 
 ## Common Patterns  
 1. Linear progression: Sequential steps with minimal user choice.  

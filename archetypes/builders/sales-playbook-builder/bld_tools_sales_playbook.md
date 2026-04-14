@@ -19,21 +19,19 @@ density_score: 0.85
 ## Production Tools
 | Tool | Purpose | When |
 |---|---|---|
-| cex_compile.py | Aggregates playbook content into structured format | During initial playbook creation |
-| cex_score.py | Assigns relevance scores to playbook elements | When prioritizing content |
-| cex_retriever.py | Fetches data from CRM/external sources | When populating playbook with real-time data |
-| cex_doctor.py | Identifies gaps in playbook completeness | During QA reviews |
-| cex_analyzer.py | Parses user feedback for playbook improvements | After customer interactions |
-| cex_optimizer.py | Automates playbook language refinement | Before final approval |
+| cex_compile.py | Compile artifact after production | F8 COLLABORATE |
+| cex_score.py | Score artifact quality (5D dimensions) | F7 GOVERN |
+| cex_retriever.py | Retrieve similar sales playbook artifacts for reuse | F3 INJECT |
+| cex_doctor.py | Validate builder health, ISO completeness | F7 GOVERN |
 
 ## Validation Tools
 | Tool | Purpose | When |
 |---|---|---|
-| val_integrity_check.py | Verifies consistency across playbook modules | After content updates |
-| val_compliance_scan.py | Ensures adherence to sales policies | Before deployment |
-| val_performance_audit.py | Tracks playbook usage effectiveness | Monthly performance reviews |
+| cex_wave_validator.py | Structural YAML + frontmatter validation | Post-production |
+| cex_hooks.py | Pre-commit ASCII and schema checks | Pre-commit |
 
 ## External References
-- Salesforce Einstein (AI-driven sales insights)
-- HubSpot Playbook API (integration with marketing data)
-- Playbook Pro by Gong (conversation analytics)
+- HubSpot Sales Playbook methodology (persona-driven content)
+- MEDDPICC qualification framework (Miller Heiman Group)
+- Challenger Sale (Adamson & Dixon) - insight-based selling
+- Gong.io conversation analytics (close pattern data)

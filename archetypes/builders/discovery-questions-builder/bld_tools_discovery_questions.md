@@ -19,21 +19,19 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles discovery questions into structured formats | Pre-deployment |  
-| cex_score.py | Scores questions based on clarity and relevance | Iteration phase |  
-| cex_retriever.py | Retrieves contextual data for question validation | Research stage |  
-| cex_doctor.py | Diagnoses logical gaps in question frameworks | Final review |  
-| cex_analyzer.py | Analyzes question patterns for bias or redundancy | Iteration phase |  
-| cex_optimizer.py | Refines questions for maximum insight yield | Deployment prep |  
+| cex_compile.py | Compile artifact after production | F8 COLLABORATE |  
+| cex_score.py | Score artifact quality (5D dimensions) | F7 GOVERN |  
+| cex_retriever.py | Retrieve similar discovery question artifacts | F3 INJECT |  
+| cex_doctor.py | Validate builder health, ISO completeness | F7 GOVERN |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| val_checker.py | Validates question syntax and grammar | Drafting |  
-| val_formatter.py | Ensures consistency in question phrasing | Iteration |  
-| val_validator.py | Cross-checks alignment with project goals | Final review |  
+| cex_wave_validator.py | Structural YAML + frontmatter validation | Post-production |  
+| cex_hooks.py | Pre-commit ASCII and schema checks | Pre-commit |  
 
 ## External References  
-- DiscoveryKit (framework for structured inquiry)  
-- QuestionFlow (tool for workflow mapping)  
-- DataProbe (data alignment verification system)
+- MEDDIC (Metrics/Economic-Buyer/Decision-Criteria/Decision-Process/Identify-Pain/Champion)  
+- BANT (Budget/Authority/Need/Timeline) - SiriusDecisions framework  
+- SPIN Selling - Neil Rackham methodology  
+- Challenger Sale - Adamson & Dixon framework

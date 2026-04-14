@@ -35,15 +35,31 @@ The structure adheres to venture capital (VC) norms, where clarity and confidenc
 | Competitive Advantage| Sustainable edge over rivals (e.g., IP, network effects)                   | Porter’s Five Forces           |  
 | Go-to-Market Strategy| Plan for customer acquisition, pricing, and distribution                   | Harvard Business Review        |  
 
-## Industry Standards  
-- Business Model Canvas (Osterwalder & Pigneur)  
-- Lean Startup (Eric Ries)  
-- TAM/SAM/SOM framework (Standard & Poor’s)  
-- Customer Development Model (Steve Blank)  
-- Value Proposition Canvas (Alain Chesnais)  
-- Porter’s Five Forces (Michael Porter)  
-- Go-to-Market Strategy (Harvard Business Review)  
-- Y Combinator Fundraising Milestones  
+## Narrative Arc (mandatory through-line)
+problem -> why now -> solution -> market -> product -> business model -> traction -> team -> financials -> ask
+
+## Slide Framework Reference
+| Framework | Structure | Best For |
+|---|---|---|
+| Sequoia Capital template | problem/why-now/solution/market/product/biz-model/traction/team/financials/ask (10 slides) | Series A/B fundraising |
+| Y Combinator (YC) structure | problem/solution/why-now/market/traction/team/ask (7 slides, compressed) | Pre-seed/seed |
+| Guy Kawasaki 10/20/30 rule | 10 slides, 20 minutes, 30pt minimum font | Demo Day / short-form pitches |
+| Airbnb original deck | Social proof + market size emphasis | Consumer marketplace |
+
+## Why Now? (mandatory slide)
+The "Why Now?" slide is the most differentiated and most frequently missing slide.
+It answers: what has changed in the world that makes this the right moment?
+Catalysts: regulatory shifts, technology unlock (LLMs, new API), behavioral change post-pandemic, incumbent exit.
+
+## Industry Standards
+- Sequoia Capital pitch deck template (10-slide structure, 2005 memo)
+- Y Combinator application and fundraising milestones
+- Guy Kawasaki 10/20/30 rule
+- Business Model Canvas (Osterwalder & Pigneur)
+- Lean Startup (Eric Ries)
+- TAM/SAM/SOM framework
+- Customer Development Model (Steve Blank)
+- Porter’s Five Forces (competitive moat analysis)  
 
 ## Common Patterns  
 1. Problem/solution narrative with data-driven validation  

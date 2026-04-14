@@ -25,19 +25,19 @@ density_score: 0.85
 6. Benchmark competitor sales materials for gap analysis  
 
 ## Phase 2: COMPOSE  
-1. Outline playbook structure per SCHEMA.md (persona, flow, objections, close)  
+1. Outline playbook structure per bld_schema_sales_playbook.md (persona, flow, objections, close)  
 2. Define personas with roles, pain points, and decision-making criteria  
 3. Create discovery flow with 3-5 stages and probing questions per stage  
 4. List 10-15 objections with tailored responses and counterarguments  
 5. Detail 3-5 close patterns with triggers, scripts, and success metrics  
-6. Align content with OUTPUT_TEMPLATE.md formatting rules  
+6. Align content with bld_output_template_sales_playbook.md formatting rules  
 7. Embed product demos and case studies as supporting materials  
 8. Conduct peer review for clarity and alignment with sales strategy  
 9. Finalize with executive approval and version control  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ All personas include role, goals, and pain points  
-- [ ] ✅ Discovery flow covers qualification to proposal stages  
-- [ ] ✅ Objection handling includes 3+ response variants per category  
-- [ ] ✅ Close patterns reference measurable outcomes  
-- [ ] ✅ Template compliance verified with SCHEMA.md
+- [ ] All personas include role, goals, and pain points  
+- [ ] Discovery flow covers qualification to proposal stages  
+- [ ] Objection handling includes 3+ response variants per category  
+- [ ] Close patterns reference measurable outcomes  
+- [ ] Template compliance verified with bld_schema_sales_playbook.md

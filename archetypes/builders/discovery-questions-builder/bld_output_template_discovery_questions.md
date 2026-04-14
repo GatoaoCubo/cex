@@ -18,31 +18,58 @@ density_score: 0.85
 
 ```yaml
 ---
-id: p01_dq_{{name}}.md
-name: {{name}}
+id: p01_dq_{{slug}}
+kind: discovery_questions
 pillar: P01
-description: {{description}}
+title: "{{title}}"
+version: "1.0.0"
+author: "{{author}}"
+created: "{{created}}"
+updated: "{{updated}}"
+domain: "{{domain}}"
 quality: null
-related_entities: {{related_entities}}
-discovery_type: discovery_questions
+tags: [{{tags}}]
+tldr: "{{tldr}}"
+question_type: "{{question_type}}"
+target_audience: "{{target_audience}}"
 ---
 ```
 
-<!-- id: p01_dq_[a-z][a-z0-9_]+.md$ -->
-<!-- name: Human-readable question name -->
-<!-- description: Brief purpose of this discovery question -->
-<!-- related_entities: List of entities this question applies to -->
-<!-- discovery_type: Must be "discovery_questions" -->
+<!-- slug: lowercase-underscore identifier, e.g. saas_cfo_stage2 -->
+<!-- title: Descriptive name, e.g. "CFO ROI Discovery - Stage 2" -->
+<!-- domain: Sales domain context, e.g. "SaaS enterprise", "manufacturing" -->
+<!-- question_type: "open-ended" | "probing" | "qualification" -->
+<!-- target_audience: Buyer persona, e.g. "CFO", "IT Director", "Champion" -->
 
-| Question | Expected Answer Type |
-|---------|---------------------|
-| What data sources are available? | List of databases/APIs |
-| How is data quality validated? | Process description |
+## Personas
 
-```python
-# Example validation code
-def validate_data(source):
-    if source not in APPROVED_SOURCES:
-        raise ValueError("Invalid data source")
-    return True
-```
+| Persona | Role | Pain Points | Decision Criteria |
+|---------|------|-------------|-------------------|
+| {{persona_1}} | {{role_1}} | {{pain_1}} | {{criteria_1}} |
+| {{persona_2}} | {{role_2}} | {{pain_2}} | {{criteria_2}} |
+
+## Discovery Questions by Stage
+
+### Stage 1: Qualification (BANT)
+| Framework | Question | Intent |
+|-----------|----------|--------|
+| Budget | {{q_budget}} | Uncover spend authority |
+| Authority | {{q_authority}} | Identify decision-maker |
+| Need | {{q_need}} | Surface pain points |
+| Timeline | {{q_timeline}} | Establish urgency |
+
+### Stage 2: Solution Fit (MEDDIC)
+| Criterion | Question | Expected Insight |
+|-----------|----------|-----------------|
+| Metrics | {{q_metrics}} | Quantify success criteria |
+| Economic Buyer | {{q_economic_buyer}} | Confirm budget authority |
+| Decision Criteria | {{q_decision_criteria}} | Understand evaluation factors |
+| Identify Pain | {{q_pain}} | Deepen problem understanding |
+| Champion | {{q_champion}} | Validate internal sponsor |
+
+### Stage 3: Closing / Negotiation
+| Scenario | Question | Goal |
+|----------|----------|------|
+| Urgency probe | {{q_urgency}} | Surface timeline drivers |
+| Objection test | {{q_objection}} | Pre-handle blockers |
+| Commitment | {{q_commitment}} | Move to next step |

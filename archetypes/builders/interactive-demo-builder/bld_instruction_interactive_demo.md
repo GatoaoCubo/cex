@@ -25,10 +25,10 @@ density_score: 0.85
 6. Gather feedback from stakeholders on demo scope  
 
 ## Phase 2: COMPOSE  
-1. Outline demo structure using SCHEMA.md's `demo_flow` format  
+1. Outline demo structure using bld_schema_interactive_demo.md `demo_flow` format  
 2. Write talk track for each guided-tour step (max 2 sentences)  
 3. Embed interactive elements (buttons, sliders) with event handlers  
-4. Align content with OUTPUT_TEMPLATE.md's `step_template` format  
+4. Align content with bld_output_template_interactive_demo.md `step_template` format  
 5. Add branching logic for user-driven exploration paths  
 6. Integrate product API endpoints for real-time data display  
 7. Write error-handling scripts for failed interactions  
@@ -37,7 +37,7 @@ density_score: 0.85
 
 ## Phase 3: VALIDATE  
 - [ ] Conduct usability testing with 5+ users  
-- [ ] Verify alignment with SCHEMA.md's required fields  
+- [ ] Verify alignment with bld_schema_interactive_demo.md required fields  
 - [ ] Confirm interactive elements function across devices  
 - [ ] Validate talk track matches scripted user scenarios  
 - [ ] Ensure compliance with P05 accessibility standards
