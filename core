@@ -1,45 +1,78 @@
 ---
-id: kc_edtech_vertical
+id: kc_marketplace_app_manifest
 kind: knowledge_card
-title: Education/EdTech Industry Vertical
+title: Marketplace App Manifest Specification
 version: 1.0.0
 quality: null
 pillar: P01
 language: en
 ---
 
-# Education/EdTech Industry Vertical
+# Marketplace App Manifest Specification
 
-## Key Regulations
-- **FERPA (Family Educational Rights and Privacy Act)**: Protects student privacy in U.S. education institutions. Schools must get parental consent before sharing student records.
-- **COPPA (Children's Online Privacy Protection Act)**: Controls data collection from children under 13, requiring parental consent for online tracking and data sharing.
+## Overview
+This document defines the structure and metadata requirements for apps listed in Claude/LangChain/HuggingFace marketplaces. The manifest serves as a standardized metadata file for app discovery, permission management, and pricing configuration.
 
-## LMS Integration (LTI)
-- **Learning Tools Interoperability (LTI)**: Standard protocol for connecting Learning Management Systems (LMS) with external educational tools.
-- Enables single sign-on, gradebook sync, and content sharing across platforms.
+## Core Metadata
+- **name**: Required string (max 100 chars)
+- **description**: Brief functionality summary (max 250 chars)
+- **author**: Developer/organization name
+- **version**: Semver format (e.g., 1.0.0)
+- **license**: Open source license type (MIT, Apache, etc.)
+- **keywords**: Array of 3-5 relevant tags
 
-## Data Privacy Frameworks
-- **Student Data Privacy (SDP)**: Holistic approach to protecting sensitive information in K-12 and higher education.
-- Includes encryption standards, access controls, and audit trails for compliance verification.
+## Permission Configuration
+- **access**: 
+  - `public` (default)
+  - `private` (requires authentication)
+  - `premium` (subscription required)
+- **scopes**: Array of API permissions (e.g., `read_user`, `write_data`)
+- **rate_limits**: 
+  - `requests_per_minute`: Integer
+  - `user_specific`: Boolean
 
-## Industry Use Cases
-1. **Online Learning Platforms**  
-   - Host secure virtual classrooms with student authentication  
-   - Track progress in real-time while meeting GDPR/CCPA standards  
+## Pricing Model
+- **type**: 
+  - `free`
+  - `paid` (one-time fee)
+  - `subscription` (recurring)
+- **price**: Decimal value (for paid models)
+- **currency**: ISO 4217 code (e.g., USD, EUR)
+- **discounts**: 
+  - `early_bird`: Percentage off
+  - `volume`: Tiered pricing structure
 
-2. **Student Information Systems**  
-   - Centralized databases for academic records and financial aid  
-   - Automated reporting with role-based access controls  
+## Example Manifest
+```yaml
+name: "TextSummarizer"
+description: "AI-powered document summarization tool"
+author: "NLP Labs"
+version: "1.2.0"
+license: "MIT"
+keywords:
+  - summarization
+  - NLP
+  - text processing
+access: public
+scopes:
+  - read_document
+  - generate_summary
+rate_limits:
+  requests_per_minute: 100
+  user_specific: true
+type: subscription
+price: 9.99
+currency: USD
+discounts:
+  early_bird: 20
+  volume:
+    100: 8.99
+    500: 7.99
+```
 
-3. **EdTech Analytics Tools**  
-   - Analyze behavioral data for personalized learning experiences  
-   - Use anonymized datasets for predictive modeling  
-
-4. **Virtual Labs & Simulations**  
-   - Create secure environments for STEM experimentation  
-   - Encrypt data for sensitive research projects  
-
-## Compliance Challenges
-- Balancing data utility with privacy protection  
-- Navigating evolving regulations like the EU's GDPR  
-- Maintaining interoperability across diverse educational ecosystems  
+## Compliance
+- Must include open source license
+- All pricing models require explicit user consent
+- Rate limits must be documented in API docs
+```
+```
