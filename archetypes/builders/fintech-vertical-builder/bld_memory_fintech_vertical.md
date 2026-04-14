@@ -1,14 +1,14 @@
 ---
-kind: learning_record
-id: p10_lr_fintech_vertical_builder
+kind: memory
+id: p10_mem_fintech_vertical_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for fintech_vertical construction
 quality: null
-title: "Learning Record Fintech Vertical"
+title: "Memory Fintech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
-tags: [fintech_vertical, builder, learning_record]
+tags: [fintech_vertical, builder, memory]
 tldr: "Learned patterns and pitfalls for fintech_vertical construction"
 domain: "fintech_vertical construction"
 created: "2026-04-14"

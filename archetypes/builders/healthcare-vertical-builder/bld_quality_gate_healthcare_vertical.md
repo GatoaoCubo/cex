@@ -21,19 +21,19 @@ density_score: 0.85
 |---|---|---|---|  
 | Healthcare vertical compliance | 100% | = | All healthcare-related content |  
 
-## HARD Gates  
-| ID | Check | Fail Condition |  
-|---|---|---|  
-| H01 | YAML frontmatter valid | Invalid YAML syntax or missing fields |  
-| H02 | ID matches pattern ^p01_hv_[a-z][a-z0-9_]+.md$ | ID does not conform to schema |  
-| H03 | kind field matches 'healthcare_vertical' | kind field is incorrect |  
-| H04 | HIPAA compliance documented | Missing HIPAA compliance proof |  
-| H05 | PHI handling procedures defined | No PHI handling guidelines |  
-| H06 | HL7/FHIR standards adhered | Non-compliant with HL7/FHIR |  
-| H07 | Use case alignment verified | Use cases not mapped to healthcare needs |  
-| H08 | Data encryption enforced | PHI data not encrypted at rest/transit |  
-| H09 | Audit logging implemented | No audit trails for PHI access |  
-| H10 | Access controls enforced | Role-based access not configured |  
+## HARD Gates
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing fields |
+| H02 | ID matches pattern ^p01_hv_[a-z][a-z0-9_]+.md$ | ID does not conform to schema |
+| H03 | kind field matches 'healthcare_vertical' | kind field is incorrect |
+| H04 | HIPAA Privacy + Security Rule compliance section present | Missing HIPAA compliance section |
+| H05 | PHI handling procedures defined including de-identification method (Safe Harbor or Expert Determination) | No PHI handling or de-identification guidelines |
+| H06 | HL7 v2.x or FHIR R4 interoperability documented | No interoperability standard referenced |
+| H07 | Use case mapped to specific clinical workflow (not generic IT) | Use cases not healthcare-specific |
+| H08 | Data encryption specification present (AES-256 at rest, TLS 1.2+ in transit) | Missing encryption specification |
+| H09 | Audit logging requirements documented per 45 CFR 164.312(b) | No audit trail requirements |
+| H10 | Role-based access control (RBAC) documented | No access control specification |  
 
 ## SOFT Scoring  
 | Dim | Dimension | Weight | Scoring Guide |  

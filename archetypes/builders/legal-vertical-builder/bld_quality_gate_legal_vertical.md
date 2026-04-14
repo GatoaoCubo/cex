@@ -24,19 +24,19 @@ density_score: 0.85
 | Contract analysis coverage | 90% | >= | Use cases |  
 | Privilege log completeness | 100% | >= | Legal files |  
 
-## HARD Gates  
-| ID | Check | Fail Condition |  
-|---|---|---|  
-| H01 | YAML frontmatter valid | Invalid YAML syntax |  
-| H02 | ID matches ^p01_lv_[a-z][a-z0-9_]+.md$ | Invalid schema ID pattern |  
-| H03 | kind field matches 'legal_vertical' | Incorrect kind value |  
-| H04 | Legal data classification meets standards | Missing classification tags |  
-| H05 | Contract analysis accuracy >=95% | Below threshold |  
-| H06 | Privilege logs 100% complete | Missing logs |  
-| H07 | Billable hour tracking accuracy >=95% | Inaccurate entries |  
-| H08 | Use cases mapped to legal workflows | Unmapped use cases |  
-| H09 | Contract templates compliant with regulations | Non-compliant templates |  
-| H10 | Audit trails for legal actions exist | Missing audit logs |  
+## HARD Gates
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | Invalid YAML syntax |
+| H02 | ID matches ^p01_lv_[a-z][a-z0-9_]+.md$ | Invalid schema ID pattern |
+| H03 | kind field matches 'legal_vertical' | Incorrect kind value |
+| H04 | Attorney-client privilege AND work-product doctrine both addressed | Missing privilege or work-product section |
+| H05 | EDRM model phases referenced for any eDiscovery use case | eDiscovery use case present without EDRM mapping |
+| H06 | ABA Model Rule 5.3 compliance addressed for AI/non-lawyer assistant use cases | AI use case without Rule 5.3 documentation |
+| H07 | Billable hour tracking uses UTBMS task codes | Billing section without UTBMS codes |
+| H08 | Legal hold / document retention procedures documented | No legal hold or retention policy |
+| H09 | DMS integration pattern referenced (iManage, NetDocuments, or equivalent) | Document workflow with no DMS specification |
+| H10 | Audit trails for legal actions documented | Missing audit log requirements |  
 
 ## SOFT Scoring  
 | Dim | Dimension | Weight | Scoring Guide |  

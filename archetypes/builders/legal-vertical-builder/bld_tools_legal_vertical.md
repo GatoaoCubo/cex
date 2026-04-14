@@ -16,24 +16,21 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool              | Purpose                          | When                              |  
-|-------------------|----------------------------------|-----------------------------------|  
-| cex_compile.py    | Compile legal documents          | During document assembly          |  
-| cex_score.py      | Assess compliance risks          | Pre-submission review             |  
-| cex_retriever.py  | Fetch relevant case law        | Research phase                    |  
-| cex_doctor.py     | Flag legal inconsistencies       | Quality assurance                 |  
-| cex_analyzer.py   | Parse and categorize clauses   | Document breakdown                |  
-| cex_contractor.py | Generate standard contracts    | Template-based drafting           |  
+## Production Tools
+| Tool | Purpose (legal context) | When |
+|---|---|---|
+| cex_compile.py | Compile legal_vertical artifact to YAML + validate frontmatter | After authoring |
+| cex_score.py | Score artifact against H01-H10 gates and 7D SOFT dimensions | Before publish |
+| cex_retriever.py | Retrieve similar privilege/billing/contract artifacts from knowledge library | During research |
+| cex_doctor.py | Health-check builder ISO completeness and frontmatter validity | QA pass |
 
-## Validation Tools  
-| Tool              | Purpose                          | When                              |  
-|-------------------|----------------------------------|-----------------------------------|  
-| val_regulator.py  | Validate against regulations     | Compliance checks                 |  
-| val_consistency.py| Check internal document logic  | Post-edit verification            |  
-| val_citation.py   | Verify legal reference accuracy| Citation review                   |  
+## Validation Tools
+| Tool | Purpose | When |
+|---|---|---|
+| cex_wave_validator.py | Validate all 13 ISOs in builder directory | Post-build |
+| cex_hygiene.py | Enforce naming, frontmatter, ASCII rules | Pre-commit |
 
-## External References  
-- LexisNexis for legal research databases  
-- Unified Legal Ontology (ULO) for structured data mapping  
-- PyLaw (Python legal text processing framework)
+## External References
+- Westlaw / LexisNexis -- primary law research
+- iManage / NetDocuments -- DMS integration reference patterns
+- Relativity / Everlaw -- eDiscovery platform integration

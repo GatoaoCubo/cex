@@ -17,21 +17,20 @@ density_score: 0.85
 ---
 
 ## Production Tools
-Tool | Purpose | When  
---- | --- | ---  
-cex_compile.py | Compiles medical data into structured formats | During data ingestion  
-cex_score.py | Scores patient risk profiles using clinical models | During diagnostic workflows  
-cex_retriever.py | Retrieves relevant medical literature/protocols | During treatment planning  
-cex_doctor.py | Simulates clinical decision-making for case reviews | During quality assurance  
+| Tool | Purpose (healthcare context) | When |
+|---|---|---|
+| cex_compile.py | Compile healthcare_vertical artifact to YAML + validate frontmatter | After authoring |
+| cex_score.py | Score artifact against H01-H10 gates and 8D SOFT dimensions | Before publish |
+| cex_retriever.py | Retrieve similar HIPAA/FHIR artifacts from knowledge library | During research |
+| cex_doctor.py | Health-check builder ISO completeness and frontmatter validity | QA pass |
 
 ## Validation Tools
-Tool | Purpose | When  
---- | --- | ---  
-val_ehr_checker.py | Validates EHR data integrity and completeness | During data preprocessing  
-val_model_eval.py | Evaluates model performance on clinical benchmarks | During training cycles  
-val_compliance.py | Ensures adherence to HIPAA/FDA regulations | During deployment  
+| Tool | Purpose | When |
+|---|---|---|
+| cex_wave_validator.py | Validate all 13 ISOs in builder directory | Post-build |
+| cex_hygiene.py | Enforce naming, frontmatter, ASCII rules | Pre-commit |
 
-## External References  
-- HL7 FHIR (Healthcare data standard)  
-- PyTorch (Medical AI model framework)  
-- SMART on FHIR (Interoperability platform)
+## External References
+- HL7 FHIR R4 Validator (https://validator.fhir.org/) -- conformance testing
+- SMART on FHIR -- EHR app authorization
+- CDC PHIN VADS -- vocabulary server for SNOMED-CT/LOINC lookups

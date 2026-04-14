@@ -24,20 +24,21 @@ density_score: 0.85
 5. Evaluate risks in non-compliant data processing for healthcare applications.  
 6. Review industry benchmarks for healthcare data privacy and security.  
 
-## Phase 2: COMPOSE  
-1. Align artifact structure with SCHEMA.md's healthcare-specific data models.  
-2. Define PHI fields using FHIR resources (e.g., Patient, Encounter).  
-3. Implement HIPAA-compliant encryption protocols in data transmission layers.  
-4. Write use cases for telemedicine and remote patient monitoring.  
-5. Reference HL7 v2.x messaging formats for legacy system integration.  
-6. Embed audit logging requirements per HIPAA audit controls.  
-7. Use OUTPUT_TEMPLATE.md to format artifact with metadata headers.  
-8. Validate terminology against SNOMED-CT and LOINC standards.  
-9. Finalize artifact with compliance checklists and versioning metadata.  
+## Phase 2: COMPOSE
+1. Align artifact structure with bld_schema_healthcare_vertical.md's data models.
+2. Define PHI fields using FHIR resources (e.g., Patient, Encounter, Observation).
+3. Implement HIPAA-compliant encryption protocols (AES-256 at rest, TLS 1.2+ in transit).
+4. Write use cases for telemedicine, remote patient monitoring, and clinical decision support.
+5. Reference HL7 v2.x messaging formats (ADT, ORU) for legacy system integration.
+6. Embed audit logging requirements per HIPAA Security Rule (45 CFR 164.312(b)).
+7. Use bld_output_template_healthcare_vertical.md to format artifact with metadata headers.
+8. Validate terminology against SNOMED-CT and LOINC standards.
+9. Finalize artifact with BAA requirements, Safe Harbor de-identification, and versioning metadata.
 
-## Phase 3: VALIDATE  
-- [ ] ✅ Confirm HIPAA compliance in data storage and transmission.  
-- [ ] ✅ Verify HL7/FHIR conformance using FHIR Validator tool.  
-- [ ] ✅ Ensure PHI fields are anonymized in sample datasets.  
-- [ ] ✅ Test use cases against SCHEMA.md's validation rules.  
-- [ ] ✅ Cross-check artifact against OUTPUT_TEMPLATE.md structure.
+## Phase 3: VALIDATE
+- [ ] [OK] Confirm HIPAA Privacy + Security Rule compliance (45 CFR 164).
+- [ ] [OK] Verify HL7/FHIR R4 conformance using FHIR Validator tool.
+- [ ] [OK] Ensure PHI de-identification follows Safe Harbor (18 identifiers removed per 45 CFR 164.514(b)).
+- [ ] [OK] Test use cases against bld_schema_healthcare_vertical.md validation rules.
+- [ ] [OK] Cross-check artifact against bld_output_template_healthcare_vertical.md structure.
+- [ ] [OK] Verify BAA requirements documented if covered entity relationship exists.

@@ -17,21 +17,21 @@ density_score: 0.85
 ---
 
 ## Component Inventory
-| ISO Name              | Role                          | Pillar | Status |
-|-----------------------|-------------------------------|--------|--------|
-| bld_manifest          | Defines system structure      | P01    | Active |
-| bld_instruction       | Provides operational guidelines | P01    | Active |
-| bld_system_prompt     | Sets AI behavior parameters   | P01    | Active |
-| bld_schema            | Defines data models           | P01    | Active |
-| bld_quality_gate      | Enforces compliance rules     | P01    | Active |
-| bld_output_template   | Structures final outputs      | P01    | Active |
-| bld_examples          | Provides reference cases      | P01    | Active |
-| bld_knowledge_card    | Stores clinical knowledge     | P01    | Active |
-| bld_architecture      | Defines system topology       | P01    | Active |
-| bld_collaboration     | Manages stakeholder workflows | P01    | Active |
-| bld_config            | Centralizes system settings   | P01    | Active |
-| bld_memory            | Manages persistent state      | P01    | Active |
-| bld_tools             | Integrates domain-specific utilities | P01 | Active |
+| ISO Name              | Role                                  | Pillar | Kind             | Status |
+|-----------------------|---------------------------------------|--------|------------------|--------|
+| bld_manifest          | Builder identity, capabilities        | P01    | type_builder     | Active |
+| bld_instruction       | Step-by-step production process       | P03    | instruction      | Active |
+| bld_system_prompt     | Agent persona and rules               | P03    | system_prompt    | Active |
+| bld_schema            | Formal schema, naming, constraints    | P06    | schema           | Active |
+| bld_quality_gate      | HARD+SOFT scoring gates               | P11    | quality_gate     | Active |
+| bld_output_template   | Output structure with placeholders    | P05    | output_template  | Active |
+| bld_examples          | Reference artifacts for in-context use| P01    | knowledge_card   | Active |
+| bld_knowledge_card    | Domain knowledge for INJECT phase     | P01    | knowledge_card   | Active |
+| bld_architecture      | Component map and dependencies        | P08    | architecture     | Active |
+| bld_collaboration     | Cross-nucleus handoff patterns        | P12    | collaboration    | Active |
+| bld_config            | Naming, paths, limits                 | P09    | config           | Active |
+| bld_memory            | Learned patterns and pitfalls         | P10    | memory           | Active |
+| bld_tools             | CEX tools + external references       | P04    | tools            | Active |
 
 ## Dependencies
 | From            | To                  | Type       |

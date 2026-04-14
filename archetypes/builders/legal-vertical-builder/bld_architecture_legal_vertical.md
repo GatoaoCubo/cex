@@ -16,22 +16,22 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Component Inventory  
-| ISO Name             | Role                                      | Pillar | Status  |  
-|----------------------|-------------------------------------------|--------|---------|  
-| bld_manifest         | Defines legal document structure          | P01    | Active  |  
-| bld_instruction      | Encodes procedural legal workflows        | P01    | Active  |  
-| bld_system_prompt    | Sets AI behavior for legal tasks          | P01    | Active  |  
-| bld_schema           | Standardizes legal data formats           | P01    | Active  |  
-| bld_quality_gate     | Enforces legal compliance checks          | P01    | Active  |  
-| bld_output_template  | Formats legal deliverables                | P01    | Active  |  
-| bld_examples         | Provides legal case reference templates   | P01    | Active  |  
-| bld_knowledge_card   | Stores legal domain-specific knowledge    | P01    | Active  |  
-| bld_architecture     | Maps legal system integration points      | P01    | Active  |  
-| bld_collaboration    | Manages multi-party legal workflows       | P01    | Active  |  
-| bld_config           | Centralizes legal system parameters       | P01    | Active  |  
-| bld_memory           | Tracks legal context and history          | P01    | Active  |  
-| bld_tools            | Integrates legal-specific utilities       | P01    | Active  |  
+## Component Inventory
+| ISO Name             | Role                                      | Pillar | Kind             | Status |
+|----------------------|-------------------------------------------|--------|------------------|--------|
+| bld_manifest         | Builder identity, capabilities            | P01    | type_builder     | Active |
+| bld_instruction      | Step-by-step production process           | P03    | instruction      | Active |
+| bld_system_prompt    | Agent persona and rules                   | P03    | system_prompt    | Active |
+| bld_schema           | Formal schema, naming, constraints        | P06    | schema           | Active |
+| bld_quality_gate     | HARD+SOFT scoring gates                   | P11    | quality_gate     | Active |
+| bld_output_template  | Output structure with placeholders        | P05    | output_template  | Active |
+| bld_examples         | Reference artifacts for in-context use    | P01    | knowledge_card   | Active |
+| bld_knowledge_card   | Domain knowledge for INJECT phase         | P01    | knowledge_card   | Active |
+| bld_architecture     | Component map and dependencies            | P08    | architecture     | Active |
+| bld_collaboration    | Cross-nucleus handoff patterns            | P12    | collaboration    | Active |
+| bld_config           | Naming, paths, limits                     | P09    | config           | Active |
+| bld_memory           | Learned patterns and pitfalls             | P10    | memory           | Active |
+| bld_tools            | CEX tools + external references           | P04    | tools            | Active |  
 
 ## Dependencies  
 | From           | To              | Type       |  

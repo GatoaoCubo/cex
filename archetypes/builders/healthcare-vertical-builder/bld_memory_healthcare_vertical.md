@@ -1,14 +1,14 @@
 ---
-kind: learning_record
-id: p10_lr_healthcare_vertical_builder
+kind: memory
+id: p10_mem_healthcare_vertical_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for healthcare_vertical construction
 quality: null
-title: "Learning Record Healthcare Vertical"
+title: "Memory Healthcare Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
-tags: [healthcare_vertical, builder, learning_record]
+tags: [healthcare_vertical, builder, memory]
 tldr: "Learned patterns and pitfalls for healthcare_vertical construction"
 domain: "healthcare_vertical construction"
 created: "2026-04-14"

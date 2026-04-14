@@ -24,20 +24,22 @@ density_score: 0.85
 5. Interview stakeholders for pain points in compliance and fraud prevention.  
 6. Benchmark competitors’ approaches to security and regulatory alignment.  
 
-## Phase 2: COMPOSE  
-1. Align artifact structure with SCHEMA.md’s compliance section.  
-2. Draft SOC2+PCI-DSS controls using OUTPUT_TEMPLATE.md’s control matrix.  
-3. Write KYC/AML workflows with example data formats (e.g., JSON for customer onboarding).  
-4. Detail fraud detection algorithms with pseudocode and performance metrics.  
-5. Embed use cases (e.g., “detecting synthetic identity fraud in 10ms”).  
-6. Reference SCHEMA.md’s data governance section for artifact consistency.  
-7. Integrate PCI-DSS scope definitions (e.g., cardholder data environments).  
-8. Cross-check artifact against OUTPUT_TEMPLATE.md’s compliance checklist.  
-9. Finalize with stakeholder-approved terminology and regulatory citations.  
+## Phase 2: COMPOSE
+1. Align artifact structure with bld_schema_fintech_vertical.md’s compliance section.
+2. Draft SOC2 Type II + PCI-DSS v4.0 controls using bld_output_template_fintech_vertical.md’s control matrix.
+3. Write KYC/AML workflows with example data formats (e.g., JSON for customer onboarding, FinCEN CIP fields).
+4. Detail fraud detection algorithms (Sift/Sardine integration patterns) with performance metrics.
+5. Embed use cases (e.g., “OFAC SDN list screening at onboarding”, “detecting synthetic identity fraud”).
+6. Reference bld_schema_fintech_vertical.md’s data governance section for artifact consistency.
+7. Integrate PCI-DSS v4.0 scope definitions (cardholder data environments, tokenization).
+8. Add FFIEC Cybersecurity Assessment Tool (CAT) mapping and ISO 20022 message types where relevant.
+9. Cross-check artifact against bld_output_template_fintech_vertical.md’s compliance checklist.
+10. Finalize with SOX Section 404 controls documentation if applicable.
 
-## Phase 3: VALIDATE  
-- [ ] ✅ Verify SOC2+PCI-DSS alignment via third-party audit tools.  
-- [ ] ✅ Confirm KYC/AML workflows pass mock regulatory stress tests.  
-- [ ] ✅ Ensure fraud detection logic matches schema-defined thresholds.  
-- [ ] ✅ Validate use cases against real-world fintech incident reports.  
-- [ ] ✅ Conduct peer review for clarity and adherence to OUTPUT_TEMPLATE.md.
+## Phase 3: VALIDATE
+- [ ] [OK] Verify SOC2 Type II + PCI-DSS v4.0 alignment with bld_schema_fintech_vertical.md.
+- [ ] [OK] Confirm KYC/AML workflows include OFAC sanctions screening and FinCEN CIP fields.
+- [ ] [OK] Ensure fraud detection logic references Sift/Sardine or equivalent behavioral scoring.
+- [ ] [OK] Validate use cases against bld_output_template_fintech_vertical.md structure.
+- [ ] [OK] Confirm SOFT weights in bld_quality_gate_fintech_vertical.md sum to 1.00.
+- [ ] [OK] Conduct peer review for clarity and adherence to bld_output_template_fintech_vertical.md.
