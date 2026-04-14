@@ -63,7 +63,7 @@ ISO_SPECS = [
      "Builder identity, capabilities, routing for {kind}"),
     ("bld_instruction_{k}.md", "instruction", "P03", "REASON",
      "Step-by-step production process for {kind}"),
-    ("bld_system_prompt_{k}.md", "system_prompt", "P03", "INJECT",
+    ("bld_system_prompt_{k}.md", "system_prompt", "P03", "BECOME",
      "System prompt defining {kind}-builder persona and rules"),
     ("bld_schema_{k}.md", "schema", "P06", "CONSTRAIN",
      "Formal schema -- SINGLE SOURCE OF TRUTH for {kind}"),
