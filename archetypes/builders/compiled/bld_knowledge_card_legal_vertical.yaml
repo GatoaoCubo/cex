@@ -24,21 +24,48 @@ domain_overview: The legal vertical centers on specialized workflows critical to
   support, M&A due diligence, and compliance with regulatory frameworks. Legal tech innovations increasingly target automation
   in these areas, balancing efficiency with adherence to ethical and procedural standards. However, domain-specific nuances—such
   as privilege carve-outs or jurisdiction-specific contract laws—require careful integration into tools and workflows.
-key_concepts: "| Concept | Definition | Source |  \n|---|---|---|  \n| Attorney-Client Privilege | Legal protection for communications\
-  \ between clients and attorneys | ABA Model Rule 1.6 |  \n| Billable Hour | Unit of time charged to clients for legal services\
-  \ | ABA Formal Opinion 11-453 |  \n| Contract Lifecycle Management (CLM) | End-to-end process for contract creation, execution,\
-  \ and analysis | Gartner CLM Market Guide 2023 |  \n| Privilege Log | Document recording claims of privilege in discovery\
-  \ | Federal Rule of Civil Procedure 26(b)(5)(A) |  \n| Legal Tech Stack | Suite of tools for legal workflow automation |\
-  \ LegalTech NYC 2023 Whitepaper |  \n| Clause Library | Repository of standardized contract clauses | Harvard Law Review\
-  \ (2022) |  \n| E-Discovery | Process of identifying and producing electronically stored information | Sedona Conference\
-  \ Principles |  \n| Legal Spend Analytics | Analysis of law firm billing patterns for cost optimization | Deloitte Legal\
-  \ Spend Report 2023 |"
+key_concepts: '| Concept | Definition | Source |
+
+  |---|---|---|
+
+  | Attorney-Client Privilege | Legal protection for confidential communications between clients and legal counsel | ABA Model
+  Rule 1.6 |
+
+  | Work-Product Doctrine | Protection for materials prepared in anticipation of litigation by or for attorneys | FRCP 26(b)(3)
+  / Hickman v. Taylor |
+
+  | Billable Hour / UTBMS | Unit of time charged to clients; UTBMS (Uniform Task-Based Management System) codes standardize
+  task categories | ABA Formal Opinion 11-453; UTBMS Code Set |
+
+  | Privilege Log | Document-level record of claims of privilege in discovery, with description without waiving privilege
+  | FRCP 26(b)(5)(A) |
+
+  | EDRM | Electronic Discovery Reference Model -- 9-phase framework (Information Governance through Presentation) | Sedona
+  Conference / EDRM.net |
+
+  | ABA Rule 5.3 | Supervising attorney responsibility for non-lawyer assistants (including AI tools) to ensure ethical compliance
+  | ABA Model Rules 5.3 |
+
+  | Legal Hold | Suspension of normal document retention/destruction to preserve ESI for anticipated litigation | FRCP 37(e)
+  / Zubulake v. UBS Warburg |
+
+  | iManage / NetDocuments | Leading Document Management Systems (DMS) for law firms; integrate with billing and matter management
+  | iManage Work 10 / NetDocuments ndMirror |
+
+  | Matter-Centric Billing | Organizing all time, costs, and documents under a single matter file for client billing transparency
+  | ILTA Practice Management Standards 2022 |
+
+  | CLM | Contract Lifecycle Management -- end-to-end contract creation, execution, and obligation tracking | Gartner CLM
+  Market Guide 2023 |'
 industry_standards:
-- ABA Model Rules of Professional Conduct
-- ISO/IEC 27001 (information security for legal data)
-- Sedona Conference Global Justice Initiative
-- LegalTech Adoption Framework (2023)
-- FTC Guidelines on Data Security for Legal Firms
+- ABA Model Rules of Professional Conduct (Rules 1.1, 1.3, 1.6, 5.3)
+- FRCP (Federal Rules of Civil Procedure) -- 26, 34, 37(e) for eDiscovery
+- EDRM (Electronic Discovery Reference Model)
+- Sedona Conference Principles (ESI, cooperation, international e-discovery)
+- UTBMS Code Set (task-based billing)
+- ISO/IEC 27001:2022 (information security for legal data)
+- ILTA (International Legal Technology Association) standards
+- State bar ethics opinions on AI use in legal practice
 common_patterns:
 - Use privilege logs to document and manage claims of confidentiality.
 - Implement time-tracking systems with granular task categorization for billable hour accuracy.
@@ -46,8 +73,12 @@ common_patterns:
 - Integrate CLM platforms with ERP systems for end-to-end contract visibility.
 - Apply jurisdiction-specific templates in contract generation to avoid legal gaps.
 pitfalls:
-- Overlooking privilege exceptions (e.g., crime-fraud doctrine) in discovery processes.
-- Relying on manual billable hour tracking without audit trails.
-- Failing to validate AI-generated contract analyses against jurisdictional laws.
-- Neglecting to update clause libraries with evolving regulatory requirements.
-- Underestimating the cost of non-compliance with data security standards (e.g., ISO 27001).
+- Overlooking privilege exceptions (crime-fraud doctrine, common-interest doctrine) in discovery.
+- Conflating attorney-client privilege with work-product doctrine -- different scope and waiver rules.
+- Relying on manual billable hour tracking without UTBMS codes; leads to billing disputes.
+- Failing to issue legal hold notices promptly -- FRCP 37(e) spoliation sanctions risk.
+- Deploying AI contract analysis without ABA Rule 5.3 supervision policy for the supervising attorney.
+- Missing EDRM phases in eDiscovery workflow design (especially Information Governance and Preservation).
+- Not integrating with iManage or NetDocuments DMS -- matters become ungoverned file systems.
+- Neglecting state bar ethics opinions on AI use -- many states have issued specific guidance.
+- Underestimating UTBMS code set complexity (L-codes for litigation, A-codes for transactional work).

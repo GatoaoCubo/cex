@@ -24,15 +24,20 @@ phase_1_research:
 - Benchmark contract analysis tools against legal tech industry standards
 - Document regulatory frameworks affecting billable hour reporting
 phase_2_compose:
-- Align artifact structure with SCHEMA.md's legal_vertical hierarchy
-- Write privilege section using OUTPUT_TEMPLATE.md's "confidentiality" block
-- Implement billable hour tracking logic in JSON format per schema
-- Extract contract analysis patterns from 50+ sample NDAs and SLAs
-- Embed use case examples in "litigation" and "compliance" subsections
-- Inject function INJECT into contract clause validation workflow
-- Cross-reference schema requirements with OUTPUT_TEMPLATE.md's metadata fields
-- Format legal terms using ISO 18325-1:2019 terminology standards
-- Finalize artifact with P01 pillar metadata and legal_vertical classification
-phase_3_validate: '[ ] ✅ Verify schema compliance with SCHEMA.md''s required fields [ ] ✅ Confirm billable hour calculations
-  match industry benchmarks [ ] ✅ Ensure privilege section passes redaction test scenarios [ ] ✅ Validate contract analysis
-  outputs against template structure [ ] ✅ Confirm alignment with legal_vertical use case requirements'
+- Align artifact structure with bld_schema_legal_vertical.md's legal_vertical hierarchy.
+- Write privilege section covering attorney-client privilege (ABA Rule 1.6) and work-product doctrine (FRCP 26(b)(3)).
+- Implement billable hour tracking logic with UTBMS task/activity codes in JSON format per schema.
+- Extract contract analysis patterns from sample NDAs and SLAs; map to EDRM model for eDiscovery use cases.
+- Embed use case examples in "litigation", "compliance", and "matter management" subsections.
+- Reference ABA Model Rule 5.3 (supervision of non-lawyer assistants) for AI tool use cases.
+- Cross-reference schema requirements with bld_output_template_legal_vertical.md metadata fields.
+- Add iManage/NetDocuments DMS integration patterns for document management.
+- Include legal hold / litigation hold procedures and document retention policies.
+- Finalize artifact with P01 pillar metadata and legal_vertical classification.
+phase_3_validate:
+- '[ ] [OK] Verify schema compliance with bld_schema_legal_vertical.md''s required fields.'
+- '[ ] [OK] Confirm billable hour calculations use UTBMS codes and match industry benchmarks.'
+- '[ ] [OK] Ensure privilege section covers both A-C privilege and work-product doctrine.'
+- '[ ] [OK] Validate eDiscovery workflows against EDRM model phases.'
+- '[ ] [OK] Confirm ABA Rule 5.3 compliance documented for AI assistant use cases.'
+- '[ ] [OK] Validate contract analysis outputs against bld_output_template_legal_vertical.md structure.'

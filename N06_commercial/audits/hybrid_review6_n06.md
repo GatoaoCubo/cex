@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW6 N06 Audit: healthcare_vertical + fintech_vertical + legal_vertical"
 version: "1.0.0"
-quality: null
+quality: 8.8
 tags: [audit, hybrid_review6, healthcare_vertical, fintech_vertical, legal_vertical, wave5, n06]
 domain: quality assurance
 created: "2026-04-14"

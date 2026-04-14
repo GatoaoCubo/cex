@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: HYBRID_REVIEW6 N01 Audit -- quickstart_guide + api_reference + sdk_example
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [audit, hybrid_review6, wave5, developer-docs, quickstart_guide, api_reference, sdk_example]
 domain: generator quality assurance
 created: "2026-04-14"

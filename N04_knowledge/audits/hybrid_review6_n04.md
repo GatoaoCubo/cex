@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW6: N04 Audit -- changelog, case_study, competitive_matrix (39 ISOs)"
 version: "1.0.0"
-quality: null
+quality: 8.8
 author: n04_knowledge
 tags: [audit, hybrid_review6, wave5, changelog, case_study, competitive_matrix]
 domain: builder quality assurance

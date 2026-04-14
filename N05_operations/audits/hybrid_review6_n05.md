@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW6 N05 Audit: roi_calculator + discovery_questions + sales_playbook"
 version: "1.0.0"
-quality: null
+quality: 8.9
 tags: [audit, hybrid_review6, n05, sales_enablement, roi_calculator, discovery_questions, sales_playbook]
 domain: "builder quality assurance"
 created: "2026-04-14"

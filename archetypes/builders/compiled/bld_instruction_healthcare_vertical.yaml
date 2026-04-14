@@ -24,18 +24,19 @@ phase_1_research:
 - Evaluate risks in non-compliant data processing for healthcare applications.
 - Review industry benchmarks for healthcare data privacy and security.
 phase_2_compose:
-- Align artifact structure with SCHEMA.md's healthcare-specific data models.
-- Define PHI fields using FHIR resources (e.g., Patient, Encounter).
-- Implement HIPAA-compliant encryption protocols in data transmission layers.
-- Write use cases for telemedicine and remote patient monitoring.
-- Reference HL7 v2.x messaging formats for legacy system integration.
-- Embed audit logging requirements per HIPAA audit controls.
-- Use OUTPUT_TEMPLATE.md to format artifact with metadata headers.
+- Align artifact structure with bld_schema_healthcare_vertical.md's data models.
+- Define PHI fields using FHIR resources (e.g., Patient, Encounter, Observation).
+- Implement HIPAA-compliant encryption protocols (AES-256 at rest, TLS 1.2+ in transit).
+- Write use cases for telemedicine, remote patient monitoring, and clinical decision support.
+- Reference HL7 v2.x messaging formats (ADT, ORU) for legacy system integration.
+- Embed audit logging requirements per HIPAA Security Rule (45 CFR 164.312(b)).
+- Use bld_output_template_healthcare_vertical.md to format artifact with metadata headers.
 - Validate terminology against SNOMED-CT and LOINC standards.
-- Finalize artifact with compliance checklists and versioning metadata.
+- Finalize artifact with BAA requirements, Safe Harbor de-identification, and versioning metadata.
 phase_3_validate:
-- '[ ] ✅ Confirm HIPAA compliance in data storage and transmission.'
-- '[ ] ✅ Verify HL7/FHIR conformance using FHIR Validator tool.'
-- '[ ] ✅ Ensure PHI fields are anonymized in sample datasets.'
-- '[ ] ✅ Test use cases against SCHEMA.md''s validation rules.'
-- '[ ] ✅ Cross-check artifact against OUTPUT_TEMPLATE.md structure.'
+- '[ ] [OK] Confirm HIPAA Privacy + Security Rule compliance (45 CFR 164).'
+- '[ ] [OK] Verify HL7/FHIR R4 conformance using FHIR Validator tool.'
+- '[ ] [OK] Ensure PHI de-identification follows Safe Harbor (18 identifiers removed per 45 CFR 164.514(b)).'
+- '[ ] [OK] Test use cases against bld_schema_healthcare_vertical.md validation rules.'
+- '[ ] [OK] Cross-check artifact against bld_output_template_healthcare_vertical.md structure.'
+- '[ ] [OK] Verify BAA requirements documented if covered entity relationship exists.'

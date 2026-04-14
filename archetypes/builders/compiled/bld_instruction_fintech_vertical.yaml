@@ -24,18 +24,20 @@ phase_1_research:
 - Interview stakeholders for pain points in compliance and fraud prevention.
 - Benchmark competitors’ approaches to security and regulatory alignment.
 phase_2_compose:
-- Align artifact structure with SCHEMA.md’s compliance section.
-- Draft SOC2+PCI-DSS controls using OUTPUT_TEMPLATE.md’s control matrix.
-- Write KYC/AML workflows with example data formats (e.g., JSON for customer onboarding).
-- Detail fraud detection algorithms with pseudocode and performance metrics.
-- Embed use cases (e.g., “detecting synthetic identity fraud in 10ms”).
-- Reference SCHEMA.md’s data governance section for artifact consistency.
-- Integrate PCI-DSS scope definitions (e.g., cardholder data environments).
-- Cross-check artifact against OUTPUT_TEMPLATE.md’s compliance checklist.
-- Finalize with stakeholder-approved terminology and regulatory citations.
+- Align artifact structure with bld_schema_fintech_vertical.md’s compliance section.
+- Draft SOC2 Type II + PCI-DSS v4.0 controls using bld_output_template_fintech_vertical.md’s control matrix.
+- Write KYC/AML workflows with example data formats (e.g., JSON for customer onboarding, FinCEN CIP fields).
+- Detail fraud detection algorithms (Sift/Sardine integration patterns) with performance metrics.
+- Embed use cases (e.g., “OFAC SDN list screening at onboarding”, “detecting synthetic identity fraud”).
+- Reference bld_schema_fintech_vertical.md’s data governance section for artifact consistency.
+- Integrate PCI-DSS v4.0 scope definitions (cardholder data environments, tokenization).
+- Add FFIEC Cybersecurity Assessment Tool (CAT) mapping and ISO 20022 message types where relevant.
+- Cross-check artifact against bld_output_template_fintech_vertical.md’s compliance checklist.
+- Finalize with SOX Section 404 controls documentation if applicable.
 phase_3_validate:
-- '[ ] ✅ Verify SOC2+PCI-DSS alignment via third-party audit tools.'
-- '[ ] ✅ Confirm KYC/AML workflows pass mock regulatory stress tests.'
-- '[ ] ✅ Ensure fraud detection logic matches schema-defined thresholds.'
-- '[ ] ✅ Validate use cases against real-world fintech incident reports.'
-- '[ ] ✅ Conduct peer review for clarity and adherence to OUTPUT_TEMPLATE.md.'
+- '[ ] [OK] Verify SOC2 Type II + PCI-DSS v4.0 alignment with bld_schema_fintech_vertical.md.'
+- '[ ] [OK] Confirm KYC/AML workflows include OFAC sanctions screening and FinCEN CIP fields.'
+- '[ ] [OK] Ensure fraud detection logic references Sift/Sardine or equivalent behavioral scoring.'
+- '[ ] [OK] Validate use cases against bld_output_template_fintech_vertical.md structure.'
+- '[ ] [OK] Confirm SOFT weights in bld_quality_gate_fintech_vertical.md sum to 1.00.'
+- '[ ] [OK] Conduct peer review for clarity and adherence to bld_output_template_fintech_vertical.md.'

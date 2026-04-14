@@ -18,13 +18,31 @@ updated: '2026-04-14'
 density_score: 0.85
 definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| Healthcare vertical compliance | 100% | =\
   \ | All healthcare-related content |"
-hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | Invalid YAML syntax or missing\
-  \ fields |  \n| H02 | ID matches pattern ^p01_hv_[a-z][a-z0-9_]+.md$ | ID does not conform to schema |  \n| H03 | kind field\
-  \ matches 'healthcare_vertical' | kind field is incorrect |  \n| H04 | HIPAA compliance documented | Missing HIPAA compliance\
-  \ proof |  \n| H05 | PHI handling procedures defined | No PHI handling guidelines |  \n| H06 | HL7/FHIR standards adhered\
-  \ | Non-compliant with HL7/FHIR |  \n| H07 | Use case alignment verified | Use cases not mapped to healthcare needs |  \n\
-  | H08 | Data encryption enforced | PHI data not encrypted at rest/transit |  \n| H09 | Audit logging implemented | No audit\
-  \ trails for PHI access |  \n| H10 | Access controls enforced | Role-based access not configured |"
+hard_gates: '| ID | Check | Fail Condition |
+
+  |---|---|---|
+
+  | H01 | YAML frontmatter valid | Invalid YAML syntax or missing fields |
+
+  | H02 | ID matches pattern ^p01_hv_[a-z][a-z0-9_]+.md$ | ID does not conform to schema |
+
+  | H03 | kind field matches ''healthcare_vertical'' | kind field is incorrect |
+
+  | H04 | HIPAA Privacy + Security Rule compliance section present | Missing HIPAA compliance section |
+
+  | H05 | PHI handling procedures defined including de-identification method (Safe Harbor or Expert Determination) | No PHI
+  handling or de-identification guidelines |
+
+  | H06 | HL7 v2.x or FHIR R4 interoperability documented | No interoperability standard referenced |
+
+  | H07 | Use case mapped to specific clinical workflow (not generic IT) | Use cases not healthcare-specific |
+
+  | H08 | Data encryption specification present (AES-256 at rest, TLS 1.2+ in transit) | Missing encryption specification
+  |
+
+  | H09 | Audit logging requirements documented per 45 CFR 164.312(b) | No audit trail requirements |
+
+  | H10 | Role-based access control (RBAC) documented | No access control specification |'
 soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | HIPAA compliance | 0.15 | 100%\
   \ = 1.0, 50% = 0.5 |  \n| D02 | PHI handling | 0.15 | 100% = 1.0, 50% = 0.5 |  \n| D03 | HL7/FHIR adherence | 0.12 | 100%\
   \ = 1.0, 75% = 0.75 |  \n| D04 | Use case coverage | 0.12 | 100% = 1.0, 75% = 0.75 |  \n| D05 | Data encryption | 0.10 |\

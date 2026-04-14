@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW6 N02 Audit: pitch_deck + interactive_demo + product_tour"
 version: "1.0.0"
-quality: null
+quality: 8.9
 author: n02_marketing
 tags: [audit, hybrid_review6, pitch_deck, interactive_demo, product_tour, wave5]
 domain: quality assurance
