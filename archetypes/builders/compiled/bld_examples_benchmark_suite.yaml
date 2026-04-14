@@ -1,0 +1,35 @@
+kind: examples
+id: bld_examples_benchmark_suite
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of benchmark_suite artifacts
+quality: null
+title: Examples Benchmark Suite
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- benchmark_suite
+- builder
+- examples
+tldr: Golden and anti-examples of benchmark_suite artifacts
+domain: benchmark_suite construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nname: \"MMLU_Benchmark_Suite\"\nkind: benchmark_suite\ndescription: \"A comprehensive benchmark suite\
+  \ evaluating language models on 10+ academic disciplines\"\ntasks:\n  - name: \"Natural_Language_Reasoning\"\n    description:\
+  \ \"Tests logical reasoning in natural language tasks\"\n    metrics: [\"accuracy\", \"F1_score\"]\n    models: [\"HuggingFace/T5\"\
+  , \"Meta/Llama-2\", \"Anthropic/Claude-2\"]\n  - name: \"Mathematical_Reasoning\"\n    description: \"Evaluates mathematical\
+  \ problem-solving capabilities\"\n    metrics: [\"accuracy\", \"perplexity\"]\n    models: [\"Google/PaLM-2\", \"Anthropic/Claude-2\"\
+  , \"HuggingFace/CodeLlama\"]\n  - name: \"Code_Execution\"\n    description: \"Assesses code generation and execution accuracy\"\
+  \n    metrics: [\"execution_success\", \"code_quality\"]\n    models: [\"HuggingFace/CodeLlama\", \"Anthropic/Claude-2\"\
+  , \"Meta/Llama-2\"]"
+anti_example_1_single_task_benchmark: "---\nname: \"SingleTaskBenchmark\"\nkind: benchmark_suite\ndescription: \"Evaluates\
+  \ text generation quality on a single task\"\ntasks:\n  - name: \"Text_Generation\"\n    description: \"Tests model ability\
+  \ to generate coherent text\"\n    metrics: [\"perplexity\", \"human_rating\"]\n    models: [\"HuggingFace/GPT-2\"]"
+why_it_fails: This is an evaluation framework (MLPerf) not a benchmark suite. The 'benchmark_suite' kind should define specific
+  tasks to evaluate model capabilities, not general-purpose evaluation infrastructure.
+anti_example_2_evaluation_framework_confusion: "---\nname: \"MLPerf_Evaluation\"\nkind: benchmark_suite\ndescription: \"MLPerf\
+  \ benchmarking framework for AI performance evaluation\"\ntasks:\n  - name: \"Inference_Speed\"\n    description: \"Measures\
+  \ model inference throughput\"\n    metrics: [\"queries_per_second\", \"latency\"]\n    models: [\"MLPerf_Reference_Implementations\"\
+  ]"

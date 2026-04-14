@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_benchmark_suite
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for benchmark_suite production
+quality: null
+title: Output Template Benchmark Suite
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- benchmark_suite
+- builder
+- output_template
+tldr: Template with vars for benchmark_suite production
+domain: benchmark_suite construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
