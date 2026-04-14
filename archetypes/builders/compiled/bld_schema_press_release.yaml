@@ -1,0 +1,113 @@
+kind: schema
+id: bld_schema_press_release
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Define frontmatter fields, ID pattern, body structure, and size constraints for press_release artifacts
+quality: null
+title: Press Release Schema
+version: 1.0.0
+author: n02_wave6
+tags:
+- press_release
+- builder
+- schema
+tldr: Frontmatter spec, ID pattern, section order, and word/byte constraints for press_release kind
+domain: press_release construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: '| Field | Required | Type | Description | Example |
+
+  |---|---|---|---|---|
+
+  | id | YES | string | Unique artifact ID, matches filename without extension | p05_pr_saas_launch_q2 |
+
+  | kind | YES | enum | Must be "press_release" | press_release |
+
+  | pillar | YES | enum | Must be "P05" | P05 |
+
+  | title | YES | string | Headline of the press release in title case | "Acme Corp Launches AI-Powered Widget" |
+
+  | version | YES | semver | Artifact version | 1.0.0 |
+
+  | created | YES | ISO date | Creation date YYYY-MM-DD | 2026-04-14 |
+
+  | updated | YES | ISO date | Last update date YYYY-MM-DD | 2026-04-14 |
+
+  | author | YES | string | Nucleus or person ID | n02_wave6 |
+
+  | domain | YES | string | Artifact domain | press_release construction |
+
+  | quality | YES | null or float | null until peer-reviewed | null |
+
+  | tags | YES | list | Minimum: [press_release, <topic>] | [press_release, saas, product_launch] |
+
+  | tldr | YES | string | One-sentence summary of the announcement | "Acme Corp announces AI widget launch." |
+
+  | headline | YES | string | The press release headline, ALL CAPS | "ACME CORP LAUNCHES AI-POWERED WIDGET" |
+
+  | dateline | YES | string | City, State, Date | "SAN FRANCISCO, Calif., April 14, 2026" |
+
+  | embargo_date | NO | ISO datetime or null | Embargo deadline; null if immediate release | 2026-04-21T09:00:00-05:00 |'
+id_pattern: '^p05_pr_[a-z][a-z0-9_]+\.md$
+
+
+  Examples of valid IDs:
+
+
+  - p05_pr_saas_launch_q2.md
+
+  - p05_pr_partnership_acme_beta.md
+
+  - p05_pr_funding_series_a.md
+
+
+  Examples of invalid IDs:
+
+
+  - pr_saas_launch.md (missing pillar prefix)
+
+  - p05_saas_launch.md (missing kind segment "pr_")
+
+  - p05_pr_SaaS_launch.md (uppercase not allowed)'
+body_structure: 'Sections must appear in this exact order:
+
+
+  | Order | Section | Required | Notes |
+
+  |---|---|---|---|
+
+  | 1 | Release status line | YES | "FOR IMMEDIATE RELEASE" or embargo notice |
+
+  | 2 | Headline | YES | ALL CAPS, under 80 characters |
+
+  | 3 | Dateline | YES | CITY, State, Date -- format |
+
+  | 4 | Lede | YES | One paragraph, under 35 words, answers 5 Ws |
+
+  | 5 | Body paragraph 1 | YES | Supporting detail, 60-80 words |
+
+  | 6 | Body paragraph 2 | YES | Secondary context, 60-80 words |
+
+  | 7 | Quote block | YES | Minimum one quote with full attribution |
+
+  | 8 | End mark | YES | "###" on its own line |
+
+  | 9 | About boilerplate | YES | "About [Company]:" header + paragraph |
+
+  | 10 | Media Contact | YES | Name, email, phone |'
+constraints: '| Constraint | Limit | Enforcement |
+
+  |---|---|---|
+
+  | max_bytes | 4096 | H01 hard gate |
+
+  | Headline length | 80 characters max | H04 hard gate |
+
+  | Lede length | 35 words max | H06 hard gate |
+
+  | Body word count | 300-500 words | D01 soft score |
+
+  | Quote minimum | 1 attributed quote | H07 hard gate |
+
+  | Contact fields | name + email + phone | H08 hard gate |'
