@@ -1,0 +1,46 @@
+kind: schema
+id: bld_schema_course_module
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for course_module
+quality: null
+title: Schema Course Module
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- course_module
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for course_module
+domain: course_module construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field       | Type   | Required | Default | Notes                              |  \n|-------------|--------|----------|---------|------------------------------------|\
+  \  \n| id          | string | yes      | null    | Must match ID Pattern              |  \n| kind        | string | yes\
+  \      | \"course_module\" | Fixed value                  |  \n| pillar      | string | yes      | \"P05\"   | Fixed value\
+  \                        |  \n| title       | string | yes      | null    | Human-readable name                |  \n| version\
+  \     | string | yes      | \"1.0\"   | Semantic versioning                |  \n| created     | date   | yes      | null\
+  \    | ISO 8601                           |  \n| updated     | date   | yes      | null    | ISO 8601                  \
+  \         |  \n| author      | string | yes      | null    | Creator                            |  \n| domain      | string\
+  \ | yes      | null    | e.g., \"math\", \"cs\"                 |  \n| quality     | null   | yes      | null    | Never\
+  \ self-score; peer review assigns |  \n| tags        | array  | yes      | []      | Keywords for search               \
+  \ |  \n| tldr        | string | yes      | null    | Summary (max 250 chars)            |  \n| learning_outcomes | array\
+  \ | yes | [] | List of learning objectives        |  \n| prerequisites | array | yes | [] | Required prior knowledge   \
+  \        |"
+recommended: "| Field             | Type   | Notes                  |  \n|-------------------|--------|------------------------|\
+  \  \n| difficulty_level  | string | e.g., \"beginner\", \"advanced\" |  \n| estimated_time    | string | e.g., \"4 hours\"\
+  \        |"
+id_pattern: ^p05_cm_[a-z][a-z0-9_]+.md$
+body_structure: "1. Overview  \n   Brief description of the module’s purpose and scope.  \n\n2. Learning Outcomes  \n   Detailed\
+  \ list of skills or knowledge students will gain.  \n\n3. Prerequisites  \n   Required background knowledge or prior modules.\
+  \  \n\n4. Content Structure  \n   Breakdown of lessons, activities, and resources.  \n\n5. Assessment Methods  \n   Evaluation\
+  \ strategies (e.g., quizzes, projects)."
+constraints:
+- ID must match ^p05_cm_[a-z][a-z0-9_]+.md$ exactly.
+- Version must follow semantic versioning (e.g., 1.0.0).
+- All required fields must be present and non-null.
+- Domain-specific fields (learning_outcomes, prerequisites) must be arrays.
+- File size must not exceed 8192 bytes.
+- Tags must be lowercase, alphanumeric, and underscore-separated.

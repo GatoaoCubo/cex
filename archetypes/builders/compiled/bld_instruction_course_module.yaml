@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_course_module
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for course_module
+quality: null
+title: Instruction Course Module
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- course_module
+- builder
+- instruction
+tldr: Step-by-step production process for course_module
+domain: course_module construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify target audience and learning outcomes for the module.
+- Analyze existing course materials for gaps and redundancies.
+- Research subject matter expertise and industry standards.
+- Define assessment types (e.g., quizzes, projects) aligned with objectives.
+- Gather feedback from stakeholders on module scope.
+- Document required resources (e.g., videos, datasets).
+phase_2_compose:
+- Outline module structure using SCHEMA.md (title, objectives, content).
+- Draft learning objectives using action verbs (e.g., "analyze," "design").
+- Write instructional content with SCORM-compliant formatting.
+- Align assessments with objectives (e.g., formative, summative).
+- Use OUTPUT_TEMPLATE.md for consistent section headings and metadata.
+- Embed interactive elements (e.g., drag-and-drop, branching scenarios).
+- 'Ensure compliance with schema fields: `module_id`, `duration`, `prerequisites`.'
+- Add metadata tags for searchability (e.g., `topic`, `difficulty_level`).
+- Proofread for clarity, grammar, and alignment with research phase outputs.
+phase_3_validate:
+- '[ ] ✅ Verify learning objectives match assessments and content.'
+- '[ ] ✅ Confirm SCHEMA.md fields are complete and accurate.'
+- '[ ] ✅ Test interactive elements for functionality and accessibility.'
+- '[ ] ✅ Validate against OUTPUT_TEMPLATE.md formatting rules.'
+- '[ ] ✅ Obtain stakeholder approval for final artifact.'

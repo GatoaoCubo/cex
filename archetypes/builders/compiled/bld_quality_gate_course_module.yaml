@@ -1,0 +1,40 @@
+kind: quality_gate
+id: p05_qg_course_module
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for course_module
+quality: null
+title: Quality Gate Course Module
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- course_module
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for course_module
+domain: course_module construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| metric               | threshold | operator | scope         |  \n|----------------------|-----------|----------|---------------|\
+  \  \n| Completion Rate      | 85%       | >=       | Course Module |  \n| Assessment Pass Rate | 75%       | >=       |\
+  \ Course Module |  \n| Engagement Time      | 15 min    | >=       | Per Lesson    |"
+hard_gates: "| ID   | Check                     | Fail Condition                              |  \n|------|---------------------------|---------------------------------------------|\
+  \  \n| H01  | YAML frontmatter valid    | Invalid or missing YAML frontmatter         |  \n| H02  | ID matches pattern \
+  \       | ID does not match ^p05_cm_[a-z][a-z0-9_]+.md$ |  \n| H03  | kind field matches 'course_module' | kind field not\
+  \ 'course_module'        |  \n| H04  | Learning objectives present | Missing or incomplete learning objectives |  \n| H05\
+  \  | Assessments included      | No formative or summative assessments       |  \n| H06  | Content length >= 10 min  | Content\
+  \ duration < 10 minutes               |  \n| H07  | Accessibility compliance  | Missing captions or screen reader support\
+  \   |"
+soft_scoring: "| Dim | Dimension               | Weight | Scoring Guide                          |  \n|-----|-------------------------|--------|----------------------------------------|\
+  \  \n| D01 | Learning Objectives Clarity | 0.15   | Clear, measurable, aligned to outcomes |  \n| D02 | Assessment Alignment\
+  \    | 0.15   | Assessments match learning objectives  |  \n| D03 | Content Quality         | 0.20   | Accurate, engaging,\
+  \ up-to-date         |  \n| D04 | Engagement Design       | 0.10   | Interactive elements, pacing           |  \n| D05 |\
+  \ Accessibility           | 0.10   | WCAG compliance, inclusive design      |  \n| D06 | Multimedia Use          | 0.10\
+  \   | Relevant videos, diagrams, audio       |  \n| D07 | Peer Review Feedback    | 0.10   | Incorporates reviewer suggestions\
+  \       |  \n| D08 | Feedback Mechanism      | 0.10   | Includes learner feedback channels     |"
+actions: "| Score     | Action                   |  \n|-----------|--------------------------|  \n| GOLDEN    | Approve for\
+  \ publication  |  \n| PUBLISH   | Publish with minor edits |  \n| REVIEW    | Request revisions        |  \n| REJECT   \
+  \ | Reject and rework        |"
+bypass: "| conditions                          | approver       | audit trail                   |  \n|-------------------------------------|----------------|-------------------------------|\
+  \  \n| Urgent release required by business | Senior Manager | Documented in change log      |"

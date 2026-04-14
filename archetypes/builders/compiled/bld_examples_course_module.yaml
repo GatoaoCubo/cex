@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_course_module
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of course_module artifacts
+quality: null
+title: Examples Course Module
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- course_module
+- builder
+- examples
+tldr: Golden and anti-examples of course_module artifacts
+domain: course_module construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\ntitle: \"Introduction to Data Science\"\nvendor: \"edX\"\nversion: \"2.1\"\ntype: course_module\n---\n\
+  Learning Objectives  \n- Understand fundamental statistical concepts  \n- Apply Python for data analysis  \n- Interpret\
+  \ machine learning model outputs  \n\nContent  \nWeek 1: Statistics basics (mean, median, variance)  \nWeek 2: Python libraries\
+  \ (Pandas, NumPy)  \nWeek 3: Supervised learning algorithms  \n\nAssessments  \n- Weekly quizzes via Quizizz  \n- Final\
+  \ project: Analyze a public dataset using Jupyter Notebooks  \n- Peer reviews on Moodle  \n\nReferences  \n- \"Python for\
+  \ Data Analysis\" by Wes McKinney  \n- edX course materials"
+anti_example_1_missing_core_elements: "---\ntitle: \"Quick Python Guide\"  \nvendor: \"Udemy\"  \nversion: \"1.0\"  \ntype:\
+  \ course_module  \n---\nContent  \n- Basics of syntax  \n- Loops and functions  \n\nAssessments  \n- No assessments listed"
+why_it_fails: Includes prompt templates, which are explicitly excluded from the course_module boundary.
+anti_example_2_boundary_violation: "---\ntitle: \"Prompt Engineering Basics\"  \nvendor: \"Coursera\"  \nversion: \"0.5\"\
+  \  \ntype: course_module  \n---\nLearning Objectives  \n- Create effective prompts for AI models  \n\nContent  \n- Prompt\
+  \ templates for different tasks  \n- Example: \"Act as a {role} and {task}\"  \n\nAssessments  \n- Self-assessment checklist"
