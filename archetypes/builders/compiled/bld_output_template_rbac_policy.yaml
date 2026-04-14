@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_rbac_policy
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for rbac_policy production
+quality: null
+title: Output Template Rbac Policy
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- rbac_policy
+- builder
+- output_template
+tldr: Template with vars for rbac_policy production
+domain: rbac_policy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

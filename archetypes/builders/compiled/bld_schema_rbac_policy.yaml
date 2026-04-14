@@ -1,0 +1,53 @@
+kind: schema
+id: bld_schema_rbac_policy
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for rbac_policy
+quality: null
+title: Schema Rbac Policy
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- rbac_policy
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for rbac_policy
+domain: rbac_policy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes                              |  \n|-----------|--------|----------|---------|------------------------------------|\
+  \  \n| id        | string | yes      |         | Must match ID Pattern              |  \n| kind      | string | yes    \
+  \  |         | Always \"rbac_policy\"               |  \n| pillar    | string | yes      |         | Always \"P09\"    \
+  \                   |  \n| title     | string | yes      |         | Policy name                        |  \n| version \
+  \  | string | yes      | \"1.0\"   | Semantic versioning                |  \n| created   | date   | yes      |         |\
+  \ ISO 8601                           |  \n| updated   | date   | yes      |         | ISO 8601                         \
+  \  |  \n| author    | string | yes      |         | Owner                              |  \n| domain    | string | yes \
+  \     |         | Policy scope (e.g., \"finance\")     |  \n| quality   | null   | yes      | null    | Never self-score;\
+  \ peer review assigns |  \n| tags      | list   | yes      | []      | Keywords (e.g., \"access\", \"audit\") |  \n| tldr\
+  \      | string | yes      |         | One-sentence policy summary        |  \n| roles     | list   | yes      | []    \
+  \  | Defined roles (e.g., \"admin\")      |  \n| resources | list   | yes      | []      | Protected resources (e.g., \"\
+  db\")   |"
+recommended: "| Field         | Type   | Notes                          |  \n|---------------|--------|--------------------------------|\
+  \  \n| description   | string | Detailed policy explanation    |  \n| references    | list   | Linked documents or standards\
+  \  |  \n| examples      | list   | Use-case scenarios             |"
+id_pattern: ^p09_rbac_[a-z][a-z0-9_]+.yaml$
+body_structure:
+- Policy Overview
+- Purpose, scope, and stakeholders.
+- Roles and Permissions
+- Role definitions and associated actions.
+- Resource Scope
+- Resources protected by the policy.
+- Enforcement Rules
+- Conditions for access control.
+- Audit Trail
+- Logging and monitoring requirements.
+constraints:
+- File size must not exceed 4096 bytes.
+- Role names must be unique within the domain.
+- Resources must follow hierarchical naming conventions.
+- Permissions must align with least-privilege principles.
+- All policies must include a valid `tldr` summary.
+- ID must conform to the specified regex pattern.
