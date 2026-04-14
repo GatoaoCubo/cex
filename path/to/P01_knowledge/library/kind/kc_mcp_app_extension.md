@@ -9,34 +9,36 @@ pillar: P01
 
 # MCP Apps Extension (SEP-1865)
 
-## Overview
-MCP Apps Extension (SEP-1865) defines a standardized framework for creating and managing sandboxed applications within the CEX ecosystem. It enables developers to build modular, secure, and isolated applications that integrate seamlessly with the platform.
-
-## Key Concepts
-- **App Manifest**: A JSON file describing the app's metadata, capabilities, and permissions.
-- **Lifecycle Events**: Install, launch, and terminate events trigger specific actions during app interaction.
-- **Capabilities**: Define the app's functionality (e.g., data access, UI components).
-- **Permission Grants**: Explicit user authorization for sensitive operations.
-- **Sandboxed Iframe**: Isolated execution environment for app UI components.
+## App Manifest
+JSON file defining app metadata, capabilities, and permissions. Includes:
+- Name, version, and unique identifier
+- Required permissions and lifecycle hooks
+- Capability declarations for sandboxed execution
+- Security settings and isolation parameters
 
 ## Lifecycle
-1. **Install**: App is registered with the system and permissions are requested.
-2. **Launch**: User initiates app execution, triggering the launch event.
-3. **Terminate**: App is closed or suspended, triggering the terminate event.
+Three core events govern app behavior:
+1. **Install** - Platform registration and permission requests
+2. **Launch** - User-initiated execution with context setup
+3. **Terminate** - Graceful shutdown and resource cleanup
 
 ## Capabilities
-- **Data Access**: Read/write permissions for specific data types.
-- **UI Components**: Custom UI elements rendered in sandboxed iframes.
-- **Event Handling**: Respond to platform events (e.g., user actions, system signals).
+Declared in manifest to request:
+- Network access controls
+- File system operations
+- UI component rendering
+- Inter-process communication
+- Device sensor access
 
-## Permissions
-- **User Consent**: Required for sensitive operations (e.g., data access, network requests).
-- **Granular Control**: Fine-grained permission management for different app features.
+## Security
+- **Sandboxed Iframe**: Isolated execution environment
+- **Permission Grants**: Granular access control model
+- **Data Isolation**: Prevents cross-app resource sharing
+- **Secure Communication**: Encrypted inter-process channels
 
-## Sandboxed Iframe
-- **Isolation**: Apps run in isolated environments to prevent cross-app interference.
-- **Security**: Restricts access to system resources and prevents malicious activity.
-- **Communication**: Secure messaging between the host and sandboxed components.
-
-## Conclusion
-MCP Apps Extension provides a robust framework for building secure, modular applications. By leveraging sandboxed iframes and granular permissions, developers can create powerful extensions that integrate seamlessly with the CEX platform while maintaining system integrity.
+## Compliance
+Ensures:
+- Platform-specific security boundaries
+- Data privacy protections
+- Interoperability standards
+- Audit trail capabilities
