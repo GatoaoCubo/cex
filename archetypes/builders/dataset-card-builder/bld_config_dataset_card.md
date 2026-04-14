@@ -17,19 +17,25 @@ density_score: 0.85
 ---
 
 ## Naming Convention
-Pattern: p01_dc_{{name}}.md
+Pattern: p01_dc_{{name}}.md (dataset card id)
 Examples: p01_dc_train.md, p01_dc_validation.md
 
 ## Paths
-Artifacts: ./artifacts/p01/
+Artifacts: ./artifacts/p01/dataset_cards/
+Source metadata: ./artifacts/p01/dataset_sources/
+Card registry: ./artifacts/p01/dataset_card_registry.yaml
 
 ## Limits
 max_bytes: 5120
 max_turns: 10
 effort_level: medium
 
+## Card Fields (HuggingFace dataset_card schema)
+required: [dataset_name, source, license, task_categories, languages, size]
+optional: [pii_handling, data_collection, annotation_process]
+
 ## Hooks
-pre_build: null
-post_build: null
+pre_build: validate_dataset_source_accessibility
+post_build: register_dataset_card
 on_error: null
 on_quality_fail: null
