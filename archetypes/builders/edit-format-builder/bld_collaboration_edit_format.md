@@ -6,32 +6,53 @@ llm_function: COLLABORATE
 purpose: How edit_format-builder works in crews with other builders
 quality: null
 title: "Collaboration Edit Format"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n04_hybrid_review2
 tags: [edit_format, builder, collaboration]
 tldr: "How edit_format-builder works in crews with other builders"
 domain: "edit_format construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.88
 ---
 
-## Crew Role  
-Structures and standardizes edit operations for consistent application across systems.  
+## Crew Role
 
-## Receives From  
-| Builder     | What               | Format      |  
-|-------------|--------------------|-------------|  
-| Parser      | Raw user edits     | JSON        |  
-| Validator   | Edit rules         | YAML        |  
-| Merger      | Conflicting edits  | XML         |  
+Defines the wire format specification that LLMs use to express file edits. Owns the syntax
+contract between LLM output and host application tools. Receives format requirements from
+upstream orchestration; produces format specs consumed by LLM system prompts, host appliers,
+and validation pipelines.
 
-## Produces For  
-| Builder     | What                  | Format      |  
-|-------------|-----------------------|-------------|  
-| Formatter   | Structured edits      | JSON        |  
-| Merger      | Resolved edit conflicts | XML       |  
-| Tracker     | Edit audit logs       | CSV         |  
+## Receives From
 
-## Boundary  
-Does NOT handle diff algorithms (handled by diff_strategy) or output formatting (handled by formatter). Conflict resolution logic is managed by merger, not this builder.
+| Builder | What | Format |
+|---------|------|--------|
+| diff_strategy_builder | Matching strategy constraints (affects which format_types are safe) | KC reference |
+| code_executor_builder | Tool compatibility requirements (which formats the executor can apply) | config |
+| prompt_template_builder | LLM instruction context (how format spec is injected into prompts) | prompt |
+| agent_card_builder | Agent capability declaration (which formats the agent supports) | YAML |
+
+## Produces For
+
+| Builder | What | Format |
+|---------|------|--------|
+| system_prompt_builder | Format rules injected into LLM system prompt | Markdown section |
+| diff_strategy_builder | Declared format_type informs which matching strategy is needed | reference |
+| code_executor_builder | Format spec enables applier to validate and execute edits | spec |
+| output_validator_builder | Validation rules for checking LLM edit output conformance | rules |
+| prompt_template_builder | Compatible_tools list and syntax examples for prompt injection | data |
+
+## Boundary
+
+Does NOT own:
+- Diff algorithm selection or matching logic (diff_strategy_builder)
+- Code style, indentation, formatting of changed content (formatter_builder)
+- Conflict resolution between concurrent edits (diff_strategy_builder)
+- Semantic analysis of whether the edit is correct (code_executor_builder)
+- File system operations, git commits, backup (operations layer)
+
+Owns:
+- The exact delimiter/marker syntax for each format_type
+- Application rules (what MUST happen when applying each format)
+- Validation rules (what constitutes a conforming LLM response)
+- Compatible tools mapping

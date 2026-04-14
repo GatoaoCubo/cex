@@ -6,65 +6,84 @@ llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for transport_config
 quality: null
 title: "Schema Transport Config"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n04_hybrid_review2
 tags: [transport_config, builder, schema]
 tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for transport_config"
 domain: "transport_config construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.90
 ---
 
-## Frontmatter Fields  
-### Required  
-| Field      | Type   | Required | Default | Notes |  
-|------------|--------|----------|---------|-------|  
-| id         | string | yes      | -       | Unique identifier |  
-| kind       | string | yes      | "transport_config" | CEX kind |  
-| pillar     | string | yes      | "P09"    | Pillar classification |  
-| title      | string | yes      | -       | Configuration title |  
-| version    | string | yes      | "1.0"   | Schema version |  
-| created    | date   | yes      | -       | Creation timestamp |  
-| updated    | date   | yes      | -       | Last update timestamp |  
-| author     | string | yes      | -       | Author/owner |  
-| domain     | string | yes      | -       | Operational domain (e.g., "network") |  
-| quality    | string | yes      | "draft" | Quality status |  
-| tags       | list   | yes      | []      | Metadata tags |  
-| tldr       | string | yes      | -       | Summary of purpose |  
-| transport_type | string | yes | - | Type of transport (e.g., "TCP", "UDP") |  
-| protocol   | string | yes      | -       | Supported protocol version |  
+## Frontmatter Fields
 
-### Recommended  
-| Field         | Type   | Notes |  
-|---------------|--------|-------|  
-| description   | string | Detailed purpose |  
-| notes         | list   | Additional context |  
-| examples      | list   | Sample configurations |  
+### Required
 
-## ID Pattern  
-^p09_tc_[a-z0-9_]+\.yaml$  
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string | yes | - | Matches `^p09_tc_[a-z0-9_]+$` |
+| kind | string | yes | "transport_config" | CEX kind |
+| pillar | string | yes | "P09" | Pillar classification |
+| title | string | yes | - | Configuration title |
+| version | string | yes | "1.0.0" | Semantic versioning |
+| created | date | yes | - | ISO 8601 creation date |
+| updated | date | yes | - | ISO 8601 last update |
+| author | string | yes | - | Author or nucleus ID |
+| domain | string | yes | - | Operational domain |
+| quality | null | yes | null | Never self-score; peer review assigns |
+| tags | list | yes | [] | Lowercase alphanumeric tags |
+| tldr | string | yes | - | One-line summary |
+| transport_type | enum | yes | - | See transport_type enum below |
 
-## Body Structure  
-1. **Transport Type**  
-   Define supported transport mechanisms and their parameters.  
+### Recommended
 
-2. **Protocol Configuration**  
-   Specify protocol-specific settings (e.g., port ranges, encryption).  
+| Field | Type | Notes |
+|-------|------|-------|
+| protocol | string | Specific protocol version (e.g., "rfc6455", "grpc-over-http2") |
+| description | string | Detailed purpose and context |
+| notes | string | Additional context, tradeoffs |
 
-3. **Bandwidth Limits**  
-   Set maximum throughput and latency thresholds.  
+## Transport Type Enum
 
-4. **Security Settings**  
-   Include authentication, encryption, and access control rules.  
+```
+transport_type: webrtc | websocket | sse | grpc_streaming | quic | tcp | udp | http2
+```
 
-5. **Compliance Requirements**  
-   List regulatory or organizational standards (e.g., GDPR, ISO).  
+## ID Pattern
 
-## Constraints  
-- Max file size: 2048 bytes  
-- All required fields must be present and valid  
-- ID must match naming pattern  
-- Transport_type must be from predefined enum  
-- Protocol must align with transport_type  
-- Security settings must include at least one authentication method
+```
+^p09_tc_[a-z0-9_]+$
+```
+
+Examples: `p09_tc_webrtc_media`, `p09_tc_ws_events`, `p09_tc_grpc_inference`
+
+## Body Structure
+
+1. **Transport Type Declaration**
+   State `transport_type` and primary `protocol` reference.
+
+2. **Protocol-Specific Parameters**
+   All mandatory fields for the declared `transport_type` (see system_prompt for per-protocol mandatory fields).
+
+3. **Security Configuration**
+   TLS/DTLS version, certificate paths (for server configs), DTLS role (for WebRTC).
+
+4. **Resilience Parameters**
+   Keepalive, heartbeat, ping/pong intervals, reconnection/retry policy with backoff.
+
+5. **QoS and Performance**
+   DSCP marking, message size limits, flow control windows, congestion control algorithm.
+
+6. **Notes**
+   Deployment context, NAT topology assumptions, known limitations.
+
+## Constraints
+
+- `quality` MUST be null (never "draft", "review", or a numeric score)
+- `transport_type` MUST be from the enum above
+- All required fields must be present and non-empty
+- ID MUST match naming pattern
+- WebRTC configs MUST include at least one TURN server entry
+- All encrypted transports MUST specify TLS version >= 1.2
+- Max file size: 4096 bytes (configs can be verbose; expanded from 2048)

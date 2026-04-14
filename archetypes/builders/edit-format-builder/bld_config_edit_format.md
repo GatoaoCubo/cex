@@ -6,32 +6,39 @@ llm_function: CONSTRAIN
 purpose: Naming, paths, limits for edit_format production
 quality: null
 title: "Config Edit Format"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n04_hybrid_review2
 tags: [edit_format, builder, config]
 tldr: "Naming, paths, limits for edit_format production"
 domain: "edit_format construction"
 created: "2026-04-13"
 updated: "2026-04-13"
-density_score: 0.85
+density_score: 0.88
 ---
 
-## Naming Convention  
-Pattern: `p06_ef_{{name}}.md`  
-Examples:  
-- `p06_ef_report.md`  
-- `p06_ef_summary.md`  
+## Naming Convention
 
-## Paths  
-Storage: `/artifacts/p06/{{name}}.md`  
+Pattern: `p06_ef_{{name}}.md`
 
-## Limits  
-- max_bytes: 4096  
-- max_turns:  
-- effort_level:  
+Examples:
+- `p06_ef_search_replace.md`
+- `p06_ef_unified_diff.md`
+- `p06_ef_whole_file.md`
+- `p06_ef_json_patch.md`
 
-## Hooks  
-- pre_build: null  
-- post_build: null  
-- on_error: null  
-- on_quality_fail: null
+## Paths
+
+Storage: `P06_schema/edit_formats/p06_ef_{{name}}.md`
+
+## Limits
+
+- `max_bytes`: 4096
+- `max_turns`: 3
+- `effort_level`: 2
+
+## Hooks
+
+- `pre_build`: null
+- `post_build`: `python _tools/cex_compile.py {path}`
+- `on_error`: null
+- `on_quality_fail`: null
