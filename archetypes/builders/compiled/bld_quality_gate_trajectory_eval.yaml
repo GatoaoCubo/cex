@@ -1,0 +1,36 @@
+kind: quality_gate
+id: p07_qg_trajectory_eval
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for trajectory_eval
+quality: null
+title: Quality Gate Trajectory Eval
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- trajectory_eval
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for trajectory_eval
+domain: trajectory_eval construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| trajectory_coverage | 95% | >= | all episodes\
+  \ |  \n| divergence_from_optimal | 10% | <= | all episodes |  \n| reward_consistency | 0.95 | >= | all episodes |"
+hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| p07_te_trajectory_coverage.md | Trajectory coverage meets\
+  \ threshold | <95% coverage in any episode |  \n| p07_te_divergence_check.md | Divergence from optimal path | >10% deviation\
+  \ in any episode |  \n| p07_te_reward_consistency.md | Reward consistency across episodes | <0.95 correlation coefficient\
+  \ |  \n| p07_te_collision_check.md | No collisions in trajectory | Collision detected in any episode |  \n| p07_te_smoothness_check.md\
+  \ | Trajectory smoothness | Jerk exceeds 2.0 m/s³ in any segment |  \n| p07_te_goal_reachability.md | Goal reachability\
+  \ | <90% success rate in goal completion |  \n| p07_te_time_efficiency.md | Time efficiency | >15% longer than optimal path\
+  \ |"
+soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| 1 | Coverage | 0.15 | 1.0 for 95%+ |\
+  \  \n| 2 | Divergence | 0.12 | 1.0 for <=10% |  \n| 3 | Consistency | 0.10 | 1.0 for 0.95+ |  \n| 4 | Smoothness | 0.08\
+  \ | 1.0 for jerk <2.0 |  \n| 5 | Collision | 0.07 | 1.0 for no collisions |  \n| 6 | Reward | 0.10 | 1.0 for 0.95+ |  \n\
+  | 7 | Completeness | 0.15 | 1.0 for 90%+ success |  \n| 8 | Adaptability | 0.13 | 1.0 for dynamic path adjustments |"
+actions: "| Score | Action |  \n|---|---|  \n| >=9.5 | GOLDEN |  \n| >=8.0 | PUBLISH |  \n| >=7.0 | REVIEW |  \n| <7.0 | REJECT\
+  \ |"
+bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Critical safety override | Senior engineer | Signed\
+  \ approval + timestamp |  \n| Experimental trajectory | Lead researcher | Lab log entry |  \n| Simulated environment only\
+  \ | QA lead | Simulation config hash |"
