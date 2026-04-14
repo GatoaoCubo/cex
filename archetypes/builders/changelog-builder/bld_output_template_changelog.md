@@ -6,48 +6,79 @@ llm_function: PRODUCE
 purpose: Template with vars for changelog production
 quality: null
 title: "Output Template Changelog"
-version: "1.0.0"
+version: "1.1.0"
 author: wave1_builder_gen_v2
 tags: [changelog, builder, output_template]
-tldr: "Template with vars for changelog production"
+tldr: "Keep a Changelog format template for changelog artifact production"
 domain: "changelog construction"
 created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
 
-```markdown
 ```yaml
 ---
-id: p01_ch_{{name}}.md
-title: {{changelog_title}}
-version: {{version_number}}
-date: {{release_date}}
-author: {{maintainer_name}}
+id: p01_ch_{{slug}}.md
+kind: changelog
+pillar: P01
+title: "{{product_name}} Changelog"
+version: "{{semver}}"
+release_date: "{{YYYY-MM-DD}}"
+author: "{{maintainer_name}}"
+domain: "{{product_domain}}"
 quality: null
-description: {{summary_of_changes}}
+tags: [{{tag1}}, {{tag2}}]
+tldr: "{{one_sentence_summary_of_changes}}"
 ---
 ```
 
-<!-- changelog_title: Title of the changelog entry -->
-<!-- version_number: Semantic version (e.g., 1.2.3) -->
-<!-- release_date: YYYY-MM-DD -->
-<!-- maintainer_name: Name of the maintainer -->
-<!-- summary_of_changes: Brief description of updates -->
+<!-- slug: lowercase, underscores (e.g., myapp_v2_1_0) -->
+<!-- semver: MAJOR.MINOR.PATCH per semver.org (no leading v) -->
+<!-- release_date: ISO 8601 YYYY-MM-DD -->
 
-### Changes
-| Version | Date       | Description                  |
-|---------|------------|------------------------------|
-| {{version}} | {{date}} | {{change_description}}       |
+## [Unreleased]
+<!-- In-progress changes not yet versioned -->
 
-<!-- change_description: Summary of key updates -->
+## [{{semver}}] - {{YYYY-MM-DD}}
 
-### Example Config
-```yaml
-# Configuration snippet
-{{config_key}}: {{config_value}}
-```
+### Added
+- {{added_entry_1}} (#{{issue_or_pr_id}})
+- {{added_entry_2}}
 
-<!-- config_key: Key name in config file -->
-<!-- config_value: Value for the config key -->
-```
+<!-- Added: new capabilities, endpoints, fields, or behaviors -->
+
+### Changed
+- {{changed_entry_1}} (#{{issue_or_pr_id}})
+
+<!-- Changed: modifications to existing behavior, not new features -->
+
+### Deprecated
+- {{deprecated_entry_1}} -- removal scheduled for {{target_version}}
+
+<!-- Deprecated: features still present but slated for removal -->
+
+### Removed
+- BREAKING: {{removed_entry_1}} -- migrate using {{migration_guide_link}}
+
+<!-- Removed: features deleted in this release -->
+
+### Fixed
+- {{fixed_entry_1}} (fixes #{{issue_id}})
+- {{fixed_entry_2}}
+
+<!-- Fixed: bug fixes, regression patches -->
+
+### Security
+- {{security_entry_1}} (CVE-{{cve_id}}, affects {{versions_range}})
+
+<!-- Security: vulnerability patches; always include CVE ID if available -->
+
+## Migration Guide (MAJOR versions only)
+
+**From {{prev_major}}.x to {{semver}}:**
+1. {{migration_step_1}}
+2. {{migration_step_2}}
+3. Verify with: `{{verification_command}}`
+
+## [{{prev_semver}}] - {{prev_date}}
+<!-- Previous release entries follow same structure -->

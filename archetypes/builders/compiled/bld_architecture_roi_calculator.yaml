@@ -22,29 +22,29 @@ component_inventory: '| ISO Name            | Role                          | Pi
 
   | bld_manifest        | Builder configuration         | P11    | Active  |
 
-  | bld_instruction     | Task execution guidelines     | P11    | Active  |
+  | bld_instruction     | Task execution guidelines     | P03    | Active  |
 
-  | bld_system_prompt   | LLM interaction framework     | P11    | Active  |
+  | bld_system_prompt   | LLM interaction framework     | P03    | Active  |
 
-  | bld_schema          | Data structure definition     | P11    | Active  |
+  | bld_schema          | Data structure definition     | P06    | Active  |
 
   | bld_quality_gate    | Validation rules              | P11    | Active  |
 
-  | bld_output_template | Result formatting             | P11    | Active  |
+  | bld_output_template | Result formatting             | P05    | Active  |
 
-  | bld_examples        | Sample input/output           | P11    | Active  |
+  | bld_examples        | Sample input/output           | P07    | Active  |
 
-  | bld_knowledge_card  | Domain-specific knowledge     | P11    | Active  |
+  | bld_knowledge_card  | Domain-specific knowledge     | P01    | Active  |
 
-  | bld_architecture    | Builder system design         | P11    | Active  |
+  | bld_architecture    | Builder system design         | P08    | Active  |
 
-  | bld_collaboration   | Multi-builder coordination    | P11    | Active  |
+  | bld_collaboration   | Multi-builder coordination    | P12    | Active  |
 
-  | bld_config          | Runtime parameter management  | P11    | Active  |
+  | bld_config          | Runtime parameter management  | P09    | Active  |
 
-  | bld_memory          | State retention mechanism    | P11    | Active  |
+  | bld_memory          | State retention mechanism     | P10    | Active  |
 
-  | bld_tools           | Utility functions             | P11    | Active  |'
+  | bld_tools           | Utility functions             | P04    | Active  |'
 dependencies: '| From              | To                  | Type         |
 
   |-------------------|---------------------|--------------|

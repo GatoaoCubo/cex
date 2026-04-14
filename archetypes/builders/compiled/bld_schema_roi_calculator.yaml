@@ -61,7 +61,7 @@ recommended: '| Field | Type | Notes |
   | validation_status | string | "pending"/"approved" |
 
   | example_use_case | string | Sample application |'
-id_pattern: ^p11_roi_[a-z][a-z0-9_]+.yaml$
+id_pattern: ^p11_roi_[a-z][a-z0-9_]+$
 body_structure: "1. Calculation Methodology  \n   Detailed description of ROI formula and logic\n\n2. Input Parameters  \n\
   \   List of required variables with data types and ranges\n\n3. Output Metrics  \n   Definition of calculated values and\
   \ their units\n\n4. Assumptions  \n   Conditions and limitations of the model\n\n5. Validation Procedures  \n   Steps for\

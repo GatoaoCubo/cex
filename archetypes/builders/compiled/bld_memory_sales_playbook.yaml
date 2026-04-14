@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_sales_playbook_builder
+kind: memory
+id: p10_mem_sales_playbook_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for sales_playbook construction
 quality: null
-title: Learning Record Sales Playbook
+title: Memory Sales Playbook Builder
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - sales_playbook
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for sales_playbook construction
 domain: sales_playbook construction
 created: '2026-04-14'

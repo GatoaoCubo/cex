@@ -23,11 +23,12 @@ hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML fr
   \ kind |  \n| H04 | personas section present | missing personas |  \n| H05 | discovery flow structured | unstructured flow\
   \ |  \n| H06 | objection handling strategies | missing strategies |  \n| H07 | close patterns documented | missing patterns\
   \ |  \n| H08 | aligned with company strategy | misalignment detected |"
-soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | Clarity | 0.15 | 1-5 (readability)\
-  \ |  \n| D02 | Completeness | 0.20 | 1-5 (coverage) |  \n| D03 | Alignment | 0.15 | 1-5 (strategy match) |  \n| D04 | Practicality\
-  \ | 0.15 | 1-5 (actionable steps) |  \n| D05 | Objection depth | 0.10 | 1-5 (coverage) |  \n| D06 | Close effectiveness\
-  \ | 0.10 | 1-5 (conversion) |  \n| D07 | Versioning | 0.10 | 1-5 (tracking) |  \n| D08 | Stakeholder feedback | 0.15 | 1-5\
-  \ (approval) |"
+soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | Clarity | 0.15 | 1.0=concise/role-aligned,\
+  \ 0.5=vague |  \n| D02 | Completeness | 0.20 | 1.0=all sections, 0.7=minor gaps |  \n| D03 | Alignment | 0.15 | 1.0=matches\
+  \ GTM strategy, 0.5=misaligned |  \n| D04 | Practicality | 0.15 | 1.0=field-ready, 0.5=academic |  \n| D05 | Objection depth\
+  \ | 0.10 | 1.0=3+ rebuttals/category, 0.5=generic |  \n| D06 | Close effectiveness | 0.10 | 1.0=persona-specific patterns,\
+  \ 0.5=generic |  \n| D07 | Versioning | 0.05 | 1.0=versioned+changelog, 0.5=none |  \n| D08 | Stakeholder feedback | 0.10\
+  \ | 1.0=peer-approved, 0.5=draft |"
 actions: "| Score | Action |  \n|---|---|  \n| >=9.5 | GOLDEN |  \n| >=8.0 | PUBLISH |  \n| >=7.0 | REVIEW |  \n| <7.0 | REJECT\
   \ |"
 bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| executive approval | CTO | documented |"

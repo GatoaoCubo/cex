@@ -6,50 +6,51 @@ llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for competitive_matrix
 quality: null
 title: "Quality Gate Competitive Matrix"
-version: "1.0.0"
+version: "1.1.0"
 author: wave1_builder_gen_v2
 tags: [competitive_matrix, builder, quality_gate]
-tldr: "Quality gate with HARD and SOFT scoring for competitive_matrix"
+tldr: "Quality gate with HARD and SOFT scoring for competitive_matrix artifacts"
 domain: "competitive_matrix construction"
 created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Definition  
-(Table: metric, threshold, operator, scope)  
-- metric: completeness, threshold: 100%, operator: >=, scope: all features  
-- metric: accuracy, threshold: 95%, operator: >=, scope: data sources  
+## Definition
+| metric | threshold | operator | scope |
+|--------|-----------|----------|-------|
+| ID pattern | ^p01_cm_[a-z][a-z0-9_]+\\.md$ | matches | all competitive_matrix files |
 
-## HARD Gates  
-(Table: ID | Check | Fail Condition)  
-H01: YAML frontmatter valid  
-H02: ID matches pattern ^p01_cm_[a-z][a-z0-9_]+.md$  
-H03: kind field matches 'competitive_matrix'  
-H04: All competitors listed in matrix  
-H05: Data sources cited and up-to-date  
-H06: Metrics aligned with business goals  
-H07: Matrix consistent across departments  
-H08: Clear differentiation vs. competitors  
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | YAML frontmatter valid | invalid YAML syntax |
+| H02 | ID matches pattern ^p01_cm_[a-z][a-z0-9_]+\\.md$ | ID does not match pattern |
+| H03 | kind field equals "competitive_matrix" | kind != "competitive_matrix" |
+| H04 | Feature parity grid present with 3+ competitors | fewer than 3 competitors in matrix |
+| H05 | All data sources cited with access date | unverified or undated data |
+| H06 | Battle card section present for primary competitor | no us-vs-them comparison present |
+| H07 | No subjective language without data support | unsubstantiated claims (e.g., "best", "leading") |
 
-## SOFT Scoring  
-(Table: Dim | Dimension | Weight | Scoring Guide)  
-Dim1: Completeness | 0.15 | 100% coverage  
-Dim2: Accuracy | 0.15 | 95%+ verified data  
-Dim3: Relevance | 0.10 | 80%+ aligned to use cases  
-Dim4: Clarity | 0.10 | 90%+ understandable  
-Dim5: Differentiation | 0.15 | 85%+ unique value  
-Dim6: Strategy alignment | 0.10 | 90%+ aligned to goals  
-Dim7: Usability | 0.10 | 85%+ actionable  
-Dim8: Consistency | 0.15 | 95%+ cross-departmental  
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D1 | Completeness | 0.20 | All features mapped to all competitors = 1.0; gaps = proportional |
+| D2 | Data accuracy | 0.20 | Primary sources cited, dated within 12 months = 1.0; outdated/secondary = 0.5 |
+| D3 | Differentiation clarity | 0.15 | Win reasons explicit per capability = 1.0; vague = 0.0 |
+| D4 | Battle card usability | 0.15 | Objection + counter present for primary competitor = 1.0; missing = 0.0 |
+| D5 | MQ positioning | 0.15 | Gartner-style quadrant placement with rationale = 1.0; absent = 0.0 |
+| D6 | Anti-FUD coverage | 0.15 | At least 3 factual FUD counters with sources = 1.0; none = 0.0 |
 
-## Actions  
-(Table: Score | Action)  
-GOLDEN: >=9.5 | Auto-publish  
-PUBLISH: >=8.0 | Review by PM  
-REVIEW: >=7.0 | Flag for QA  
-REJECT: <7.0 | Revise and resubmit  
+## Actions
+| Score | Action |
+|-------|--------|
+| >= 9.5 | Auto-publish to sales portal |
+| >= 8.0 | Review by PM then publish |
+| >= 7.0 | Flag for QA revision |
+| < 7.0 | Revise and resubmit |
 
-## Bypass  
-(Table: conditions, approver, audit trail)  
-- conditions: Urgent business need, approver: CTO, audit trail: email log
+## Bypass
+| conditions | approver | audit trail |
+|------------|----------|-------------|
+| Urgent RFP deadline with incomplete competitor data | CTO | Email log with RFP reference and deadline |

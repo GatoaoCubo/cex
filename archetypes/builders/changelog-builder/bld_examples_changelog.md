@@ -6,55 +6,74 @@ llm_function: GOVERN
 purpose: Golden and anti-examples of changelog artifacts
 quality: null
 title: "Examples Changelog"
-version: "1.0.0"
+version: "1.1.0"
 author: wave1_builder_gen_v2
 tags: [changelog, builder, examples]
-tldr: "Golden and anti-examples of changelog artifacts"
+tldr: "Golden and anti-examples of changelog artifacts -- Keep a Changelog format, SemVer 2.0"
 domain: "changelog construction"
 created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Golden Example (changelog entry)
-**Version:** v2.7.1  
-**Date:** 2023-11-15  
+## Golden Example (Keep a Changelog format)
 
-### Features  
-- Added support for real-time collaboration in [Notion](https://www.notion.so) via API v3.  
-- Introduced [GraphQL](https://graphql.org) query optimization in [Hasura](https://hasura.io) for faster data fetching.  
+```yaml
+---
+id: p01_ch_myapp_2_7_1.md
+kind: changelog
+pillar: P01
+title: "MyApp Changelog"
+version: "2.7.1"
+release_date: "2024-01-15"
+author: "jsmith"
+domain: "saas-platform"
+quality: null
+tags: [security, fix]
+tldr: "Patch: fix race condition in auth, patch TLS requirement for Docker clients"
+---
+```
 
-### Fixes  
-- Resolved a race condition in [PostgreSQL](https://www.postgresql.org) 15.2 that caused transaction rollbacks under high load.  
-- Fixed incorrect token expiration logic in [Auth0](https://auth0.com) SDK v2.1.  
+## [2.7.1] - 2024-01-15
 
-### Breaking Changes  
-- Removed deprecated `v1` endpoints in [Stripe](https://stripe.com) API; migrate to `v2` as described in [docs](https://stripe.com/docs/api).  
-- [Docker](https://docker.com) 24.0 now requires TLS 1.3; older clients will fail with `SSL_ERROR`.  
+### Fixed
+- Fix race condition in PostgreSQL 15.2 transaction handling under high load (fixes #4521)
+- Fix incorrect token expiration logic in Auth0 SDK v2.1 integration (fixes #4489)
 
-## Anti-Example 1: Missing Semver and Categorization  
-**Version:** 2.7.1  
-**Date:** 2023-11-15  
-- Added real-time collaboration in Notion.  
-- Fixed PostgreSQL transaction issues.  
-- Removed old Stripe endpoints.  
+### Security
+- Patch TLS requirement: Docker 24.0 now enforces TLS 1.3; older clients receive SSL_ERROR (CVE-2023-44487, affects < 2.7.1)
 
-## Why it fails  
-Lacks semver formatting (e.g., `v2.7.1` vs `2.7.1` is minor), no categorization (features, fixes, breaking changes), and missing context (e.g., "TLS 1.3" requirement).  
+---
 
-## Anti-Example 2: Overly Vague Descriptions  
-**Version:** v2.7.1  
-**Date:** 2023-11-15  
+## [2.7.0] - 2024-01-10
 
-### Features  
-- Improved performance.  
-- Added new functionality.  
+### Added
+- Add real-time collaboration support via Notion API v3 (PR #4401)
+- Add GraphQL query optimization in Hasura for improved data fetch latency
 
-### Fixes  
-- Fixed some bugs.  
+### Changed
+- Change authentication token refresh interval from 60m to 30m for security hardening
 
-### Breaking Changes  
-- Some APIs changed.  
+### Deprecated
+- Deprecate v1 REST endpoints -- removal scheduled for 3.0.0
 
-## Why it fails  
-Descriptions are too generic ("improved performance" vs "GraphQL query optimization"). No specific tools/vendors named, and no actionable details for users to migrate or adopt changes.
+### Removed
+- BREAKING: Remove deprecated `/api/v1/` endpoints -- migrate to `/api/v2/` per migration guide
+
+## Anti-Example 1: Missing Keep a Changelog sections and vague entries
+**Version:** v2.7.1
+**Date:** 2024-01-15
+- Added real-time collaboration in Notion.
+- Fixed PostgreSQL transaction issues.
+- Removed old Stripe endpoints.
+
+**Why it fails:** Uses informal section-free list. No Added/Changed/Fixed/Security structure. Entries vague ("transaction issues" vs the specific race condition). No issue IDs. No CVE for the security patch.
+
+## Anti-Example 2: Wrong version bump + no migration for MAJOR
+**Version:** 2.8.0
+
+### Features
+- Removed legacy /api/v1/ endpoints.
+- Added new auth system.
+
+**Why it fails:** Removing endpoints is a BREAKING change requiring MAJOR bump (3.0.0 not 2.8.0). Section is called "Features" not "Removed" (KAC standard). No Migration section for the breaking removal. Version uses 2-part not SemVer 3-part format.

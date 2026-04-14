@@ -16,14 +16,13 @@ domain: roi_calculator construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles ROI model components\
-  \ | During model setup |  \n| cex_score.py | Calculates ROI scores from inputs | After data ingestion |  \n| cex_retriever.py\
-  \ | Fetches historical financial data | For baseline comparisons |  \n| cex_doctor.py | Debugs ROI calculation errors |\
-  \ During validation phase |  \n| cex_optimizer.py | Optimizes parameter configurations | For performance tuning |"
-validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| roi_validator.py | Checks data integrity and\
-  \ consistency | Pre-calculation |  \n| roi_analyzer.py | Audits ROI model performance | Post-calculation |  \n| roi_stress_test.py\
-  \ | Simulates edge cases for robustness | During QA |"
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compile artifact after production\
+  \ | F8 COLLABORATE |  \n| cex_score.py | Score artifact quality (5D dimensions) | F7 GOVERN |  \n| cex_retriever.py | Retrieve\
+  \ similar ROI calculator artifacts for reuse | F3 INJECT |  \n| cex_doctor.py | Validate builder health, check ISO completeness\
+  \ | F7 GOVERN |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_wave_validator.py | Structural YAML + frontmatter\
+  \ validation | Post-production |  \n| cex_hooks.py | Pre-commit ASCII and schema checks | Pre-commit |"
 external_references:
-- 'NumPy: For numerical computations'
-- 'Pandas: For data manipulation'
-- 'Matplotlib: For result visualization'
+- Forrester TEI (Total Economic Impact) methodology
+- Gartner TCO framework
+- IFRS/GAAP NPV calculation standards

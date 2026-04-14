@@ -6,10 +6,10 @@ llm_function: PRODUCE
 purpose: Template with vars for competitive_matrix production
 quality: null
 title: "Output Template Competitive Matrix"
-version: "1.0.0"
+version: "1.1.0"
 author: wave1_builder_gen_v2
 tags: [competitive_matrix, builder, output_template]
-tldr: "Template with vars for competitive_matrix production"
+tldr: "Feature-parity grid + battle card + Gartner MQ positioning template for competitive matrix"
 domain: "competitive_matrix construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -18,33 +18,83 @@ density_score: 0.85
 
 ```yaml
 ---
-id: p01_cm_{{name}}.md
-name: {{matrix_name}}
+id: p01_cm_{{slug}}.md
+kind: competitive_matrix
 pillar: P01
-description: {{matrix_description}}
+title: "{{market_segment}} Competitive Matrix"
+version: "1.0.0"
+author: "{{analyst_name}}"
+domain: "{{market_domain}}"
 quality: null
-last_updated: {{date}}
+tags: [{{market_tag}}, competitive_matrix, battle_card]
+tldr: "{{our_product}} vs {{competitor_count}} competitors on {{dimension_count}} dimensions"
+competitors: [{{competitor_1}}, {{competitor_2}}, {{competitor_3}}]
+metrics: [{{metric_1}}, {{metric_2}}, {{metric_3}}]
+analysis_date: "{{YYYY-MM-DD}}"
+key_insights: "{{top_differentiator_one_sentence}}"
 ---
 ```
 
-<!-- id: ID following p01_cm_[a-z][a-z0-9_]+.md pattern -->
-<!-- name: Title of the competitive matrix -->
-<!-- pillar: Always "P01" -->
-<!-- description: Summary of the matrix purpose -->
-<!-- quality: Must be "null" -->
-<!-- last_updated: Date in YYYY-MM-DD format -->
+## Market Context
+| Field | Value |
+|-------|-------|
+| Segment | {{market_segment}} |
+| Analysis Date | {{YYYY-MM-DD}} |
+| Data Sources | {{source_list}} |
+| Analyst | {{analyst_name}} |
 
-| Competitor | Market Share | Technology | Customer Support | Pricing | Notes         |
-|------------|--------------|------------|------------------|---------|---------------|
-| CEX A      | 30%          | High       | 24/7             | Low     | <!-- Add details --> |
-| CEX B      | 25%          | Medium     | 12/7             | Medium  | <!-- Add details --> |
+## Feature Parity Grid
+<!-- Rows = capabilities, Cols = us + competitors. Use: Yes / No / Partial / Roadmap -->
 
-```yaml
-sample_data:
-  competitors:
-    - name: "CEX A"
-      metrics:
-        market_share: 30
-        technology: "High"
-        pricing: "Low"
-```
+| Capability | {{our_product}} | {{competitor_1}} | {{competitor_2}} | {{competitor_3}} | Notes |
+|------------|-----------------|------------------|------------------|------------------|-------|
+| {{feature_1}} | {{val}} | {{val}} | {{val}} | {{val}} | {{note}} |
+| {{feature_2}} | {{val}} | {{val}} | {{val}} | {{val}} | {{note}} |
+| {{feature_3}} | {{val}} | {{val}} | {{val}} | {{val}} | {{note}} |
+
+<!-- feature_n: specific capability, not vague category -->
+<!-- val: Yes / No / Partial / Roadmap (Q{{quarter}} {{year}}) -->
+
+## Gartner MQ Positioning (Qualitative)
+<!-- Completeness of Vision x Ability to Execute per Gartner MQ methodology -->
+
+| Vendor | Ability to Execute (1-5) | Completeness of Vision (1-5) | Quadrant |
+|--------|--------------------------|------------------------------|----------|
+| {{our_product}} | {{score}} | {{score}} | {{Leaders/Challengers/Visionaries/Niche}} |
+| {{competitor_1}} | {{score}} | {{score}} | {{quadrant}} |
+| {{competitor_2}} | {{score}} | {{score}} | {{quadrant}} |
+
+## Battle Card: Us vs {{primary_competitor}}
+<!-- Sales-ready, one-competitor-at-a-time comparison -->
+
+| Dimension | {{our_product}} | {{primary_competitor}} | Win Reason |
+|-----------|-----------------|------------------------|------------|
+| {{capability_1}} | {{our_strength}} | {{their_weakness}} | {{why_we_win}} |
+| {{capability_2}} | {{our_strength}} | {{their_weakness}} | {{why_we_win}} |
+| Pricing | {{our_pricing}} | {{their_pricing}} | {{pricing_rationale}} |
+| Support | {{our_support}} | {{their_support}} | {{support_rationale}} |
+| Integrations | {{our_count}}+ | {{their_count}}+ | {{integration_rationale}} |
+
+**Their likely objection:** "{{competitor_objection}}"
+**Our counter:** "{{objection_counter}}"
+
+## Pricing Comparison
+| Vendor | Entry Tier | Mid Tier | Enterprise | Pricing Model |
+|--------|-----------|----------|------------|---------------|
+| {{our_product}} | {{price}} | {{price}} | {{price}} | {{per_user/flat/usage}} |
+| {{competitor_1}} | {{price}} | {{price}} | {{price}} | {{model}} |
+| {{competitor_2}} | {{price}} | {{price}} | {{price}} | {{model}} |
+
+## Strategic Insights
+**Our top differentiators:**
+1. {{differentiator_1}} -- vs {{competitor_benefiting_from}}
+2. {{differentiator_2}} -- vs {{competitor_benefiting_from}}
+3. {{differentiator_3}} -- vs {{competitor_benefiting_from}}
+
+**Gaps to address:**
+- {{gap_1}} ({{competitor_leading_here}} leads here)
+- {{gap_2}} ({{competitor_leading_here}} leads here)
+
+**Anti-FUD guide:**
+<!-- Factual responses to common competitor FUD claims -->
+- If prospect says "{{competitor_fud_claim}}": respond with "{{factual_response_with_source}}"

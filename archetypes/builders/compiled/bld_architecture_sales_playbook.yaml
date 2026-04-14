@@ -20,31 +20,31 @@ component_inventory: '| ISO Name             | Role                          | P
 
   |----------------------|-------------------------------|--------|---------|
 
-  | bld_manifest         | Playbook structure definition | P03    | Active  |
+  | bld_manifest         | Playbook structure definition | P11    | Active  |
 
   | bld_instruction      | Sales process guidance        | P03    | Active  |
 
   | bld_system_prompt    | LLM interaction framework     | P03    | Active  |
 
-  | bld_schema           | Data model specification      | P03    | Active  |
+  | bld_schema           | Data model specification      | P06    | Active  |
 
-  | bld_quality_gate     | Validation rules              | P03    | Active  |
+  | bld_quality_gate     | Validation rules              | P11    | Active  |
 
-  | bld_output_template  | Formatting standards          | P03    | Active  |
+  | bld_output_template  | Formatting standards          | P05    | Active  |
 
-  | bld_examples         | Use case repository           | P03    | Active  |
+  | bld_examples         | Use case repository           | P07    | Active  |
 
-  | bld_knowledge_card   | Domain-specific insights      | P03    | Active  |
+  | bld_knowledge_card   | Domain-specific insights      | P01    | Active  |
 
-  | bld_architecture     | System blueprint              | P03    | Active  |
+  | bld_architecture     | System blueprint              | P08    | Active  |
 
-  | bld_collaboration    | Team coordination logic       | P03    | Active  |
+  | bld_collaboration    | Team coordination logic       | P12    | Active  |
 
-  | bld_config           | Parameter management          | P03    | Active  |
+  | bld_config           | Parameter management          | P09    | Active  |
 
-  | bld_memory           | Context retention mechanism   | P03    | Active  |
+  | bld_memory           | Context retention mechanism   | P10    | Active  |
 
-  | bld_tools            | Utility functions             | P03    | Active  |'
+  | bld_tools            | Utility functions             | P04    | Active  |'
 dependencies: '| From              | To                  | Type        |
 
   |-------------------|---------------------|-------------|

@@ -24,8 +24,8 @@ phase_1_research:
 - Map dependencies between variables (e.g., scaling effects on TCO).
 - Validate data sources for accuracy (financial databases, vendor quotes).
 phase_2_compose:
-- 'Define schema in SCHEMA.md: specify input types, units, and constraints.'
-- Map inputs to ROI/TCO formulas using OUTPUT_TEMPLATE.md structure.
+- 'Define schema in bld_schema_roi_calculator.md: specify input types, units, and constraints.'
+- Map inputs to ROI/TCO formulas using bld_output_template_roi_calculator.md structure.
 - Write formula logic for dynamic calculations (e.g., compound annual growth rate).
 - 'Build TCO comparison table with columns: cost category, baseline, alternative, delta.'
 - Populate template with placeholder values for user input fields.

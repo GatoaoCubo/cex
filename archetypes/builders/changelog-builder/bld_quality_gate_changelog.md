@@ -6,48 +6,51 @@ llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for changelog
 quality: null
 title: "Quality Gate Changelog"
-version: "1.0.0"
+version: "1.1.0"
 author: wave1_builder_gen_v2
 tags: [changelog, builder, quality_gate]
-tldr: "Quality gate with HARD and SOFT scoring for changelog"
+tldr: "Quality gate with HARD and SOFT scoring for changelog artifacts"
 domain: "changelog construction"
 created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Definition  
-(metric, threshold, operator, scope)  
-Schema ID pattern, ^p01_ch_[a-z][a-z0-9_]+.md$, matches, all changelog files  
+## Definition
+| metric | threshold | operator | scope |
+|--------|-----------|----------|-------|
+| ID pattern | ^p01_ch_[a-z][a-z0-9_]+\\.md$ | matches | all changelog files |
 
-## HARD Gates  
-(ID | Check | Fail Condition)  
-H01 | YAML frontmatter valid | invalid YAML syntax  
-H02 | ID matches pattern ^p01_ch_[a-z][a-z0-9_]+.md$ | invalid filename format  
-H03 | kind field matches 'changelog' | kind ≠ 'changelog'  
-H04 | semver version present | missing version field  
-H05 | features section exists | missing 'features' list  
-H06 | fixes section exists | missing 'fixes' list  
-H07 | breaking changes section exists | missing 'breaking_changes' list  
-H08 | no markdown in sections | markdown detected in features/fixes/breaking_changes  
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | YAML frontmatter valid | invalid YAML syntax |
+| H02 | ID matches pattern ^p01_ch_[a-z][a-z0-9_]+\\.md$ | ID does not match pattern |
+| H03 | kind field equals "changelog" | kind != "changelog" |
+| H04 | version field present and SemVer X.Y.Z | missing or non-SemVer version |
+| H05 | At least one of: Added/Changed/Fixed/Removed/Deprecated/Security section present | no change sections found |
+| H06 | MAJOR version bump includes Migration section | MAJOR bump without migration guide |
+| H07 | No fabricated issue IDs (issue refs must be integers or alphanumeric) | fictional issue ID format |
 
-## SOFT Scoring  
-(Dim | Dimension | Weight | Scoring Guide)  
-Clarity | Readability of entries | 0.15 | 1.0=clear, 0.0=ambiguous  
-Completeness | All required sections filled | 0.20 | 1.0=all present, 0.0=missing  
-Structure | Consistent formatting | 0.15 | 1.0=uniform, 0.0=disjointed  
-Consistency | Semver alignment with code | 0.15 | 1.0=matches, 0.0=conflicting  
-Semver Accuracy | Correct version bump | 0.10 | 1.0=correct, 0.0=incorrect  
-Date Format | ISO 8601 date | 0.10 | 1.0=valid, 0.0=invalid  
-Summary Quality | Concise summary present | 0.15 | 1.0=clear, 0.0=missing  
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D1 | Section completeness | 0.20 | All 6 Keep a Changelog sections present = 1.0; fewer = proportional |
+| D2 | Entry precision | 0.20 | Entries are specific and actionable = 1.0; vague = 0.0 |
+| D3 | SemVer alignment | 0.15 | Version bump type matches changes = 1.0; mismatch = 0.0 |
+| D4 | Breaking change clarity | 0.15 | BREAKING: prefix + migration steps = 1.0; unlabeled = 0.0 |
+| D5 | Traceability | 0.15 | Issue/PR IDs linked = 1.0; no references = 0.0 |
+| D6 | Imperative language | 0.15 | "Add X", "Fix Y" = 1.0; passive/nominal = 0.5 |
 
-## Actions  
-(Score | Action)  
-GOLDEN | >=9.5 | Auto-publish  
-PUBLISH | >=8.0 | Auto-publish  
-REVIEW | >=7.0 | Require review  
-REJECT | <7.0 | Block release  
+## Actions
+| Score | Action |
+|-------|--------|
+| >= 9.5 | Auto-publish |
+| >= 8.0 | Publish |
+| >= 7.0 | Require review |
+| < 7.0 | Block release |
 
-## Bypass  
-(conditions, approver, audit trail)  
-Urgent hotfix with CTO approval, CTO, audit log entry with timestamp and reason
+## Bypass
+| conditions | approver | audit trail |
+|------------|----------|-------------|
+| Urgent hotfix with breaking customer impact | CTO | Audit log entry with timestamp and justification |

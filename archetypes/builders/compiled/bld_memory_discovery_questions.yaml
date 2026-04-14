@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_discovery_questions_builder
+kind: memory
+id: p10_mem_discovery_questions_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for discovery_questions construction
 quality: null
-title: Learning Record Discovery Questions
+title: Memory Discovery Questions Builder
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - discovery_questions
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for discovery_questions construction
 domain: discovery_questions construction
 created: '2026-04-14'

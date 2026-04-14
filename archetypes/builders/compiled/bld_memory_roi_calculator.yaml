@@ -1,16 +1,16 @@
-kind: learning_record
-id: p10_lr_roi_calculator_builder
+kind: memory
+id: p10_mem_roi_calculator_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for roi_calculator construction
 quality: null
-title: Learning Record Roi Calculator
+title: Memory Roi Calculator Builder
 version: 1.0.0
 author: wave1_builder_gen_v2
 tags:
 - roi_calculator
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for roi_calculator construction
 domain: roi_calculator construction
 created: '2026-04-14'

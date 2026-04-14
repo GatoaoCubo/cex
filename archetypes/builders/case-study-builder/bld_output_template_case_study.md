@@ -6,10 +6,10 @@ llm_function: PRODUCE
 purpose: Template with vars for case_study production
 quality: null
 title: "Output Template Case Study"
-version: "1.0.0"
+version: "1.1.0"
 author: wave1_builder_gen_v2
 tags: [case_study, builder, output_template]
-tldr: "Template with vars for case_study production"
+tldr: "Challenge-Solution-Outcome template with pullquote, ROI call-out, and KPI table"
 domain: "case_study construction"
 created: "2026-04-14"
 updated: "2026-04-14"
@@ -18,31 +18,71 @@ density_score: 0.85
 
 ```yaml
 ---
-id: p05_cs_{{name}}.md <!-- Filename following p05_cs_[a-z][a-z0-9_]+.md -->
-title: {{title}} <!-- Case study title -->
-description: {{description}} <!-- Summary of the study's purpose -->
-author: {{author}} <!-- Author name -->
-date: {{date}} <!-- Publication date (YYYY-MM-DD) -->
-quality: null <!-- Always null -->
-keywords: {{keywords}} <!-- Comma-separated relevant terms -->
+id: p05_cs_{{slug}}.md
+kind: case_study
+pillar: P05
+title: "{{customer_name}}: {{outcome_headline}}"
+version: "1.0.0"
+author: "{{content_author}}"
+domain: "{{industry}}"
+quality: null
+tags: [{{industry_tag}}, {{product_tag}}, case_study]
+tldr: "{{one_sentence_result}} -- {{customer_name}}, {{champion_title}}"
+context: "{{challenge_summary_50_words}}"
+outcome: "{{primary_kpi_result}}"
 ---
 ```
 
-## Overview
-{{overview}} <!-- Brief context and objectives -->
+<!-- slug: lowercase_underscores (e.g., healthtech_aws_2024) -->
+<!-- outcome_headline: "Reduced Downtime 85% with X" -->
 
-## Key Findings
-| Metric       | Value   | Description              |
-|--------------|---------|--------------------------|
-| {{metric1}}  | {{val1}}| {{desc1}}                |
-| {{metric2}}  | {{val2}}| {{desc2}}                |
+## Company Snapshot
+| Field | Value |
+|-------|-------|
+| Company | {{customer_name}} |
+| Industry | {{industry}} |
+| Size | {{employee_count}} employees |
+| Region | {{region}} |
+| Champion | {{champion_name}}, {{champion_title}} |
+| Product Used | {{cex_product}} |
 
-## Recommendations
-```python
-# Sample code block
-def {{function_name}}():
-    {{code_logic}}  # Placeholder for implementation
-```
+## The Challenge
+<!-- 150-200 words. Before-state, pain context, business stakes. -->
+{{challenge_narrative}}
 
-## Conclusion
-{{conclusion}} <!-- Summary of implications and next steps -->
+**Key pain points:**
+- {{pain_point_1}}
+- {{pain_point_2}}
+- {{pain_point_3}}
+
+## The Solution
+<!-- Named features, deployment timeline, integrations. -->
+{{solution_narrative}}
+
+**Implementation:**
+- Timeline: {{deployment_weeks}} weeks
+- Key features: {{feature_list}}
+- Integrations: {{integration_list}}
+
+## The Outcome
+<!-- 3+ KPIs with before/after comparison. -->
+{{outcome_narrative}}
+
+| Metric | Before | After | Change |
+|--------|--------|-------|--------|
+| {{kpi_1_name}} | {{kpi_1_before}} | {{kpi_1_after}} | {{kpi_1_delta}} |
+| {{kpi_2_name}} | {{kpi_2_before}} | {{kpi_2_after}} | {{kpi_2_delta}} |
+| {{kpi_3_name}} | {{kpi_3_before}} | {{kpi_3_after}} | {{kpi_3_delta}} |
+
+## ROI Call-Out
+> **{{roi_headline_metric}}** in {{roi_timeframe}}
+> Source: {{roi_source}} ({{roi_date}})
+
+## Customer Pullquote
+> "{{pullquote_text_50_80_words}}"
+>
+> -- {{champion_name}}, {{champion_title}}, {{customer_name}}
+
+## Lessons Learned
+<!-- 50-100 words. Transferable insight for similar customers. -->
+{{lessons_learned}}

@@ -24,8 +24,9 @@ phase_1_research:
 - Interview 3–5 stakeholders per persona to validate pain points and decision drivers.
 - Compile research into a structured dataset with persona, stage, and question categories.
 phase_2_compose:
-- 'Use SCHEMA.md to define artifact structure: persona, stage, question, intent (MEDDIC/BANT), and response type.'
-- 'Reference OUTPUT_TEMPLATE.md for formatting: headers, bullet points, and alignment with sales playbooks.'
+- 'Use bld_schema_discovery_questions.md to define artifact structure: persona, stage, question, intent (MEDDIC/BANT), and
+  response type.'
+- 'Reference bld_output_template_discovery_questions.md for formatting: headers, bullet points, and alignment with sales playbooks.'
 - Write open-ended questions targeting persona-specific challenges (e.g., “What metrics define success for your team?”).
 - Ensure each question maps to a MEDDIC/BANT criterion (e.g., Budget, Authority, Need).
 - Group questions by deal stage, prioritizing early-stage questions for qualification.
@@ -34,8 +35,8 @@ phase_2_compose:
 - Cross-check against research data to ensure coverage of all personas and stages.
 - Finalize artifact with metadata (e.g., version, author, last reviewed date).
 phase_3_validate:
-- '[ ] ✅ Confirm alignment with SCHEMA.md and OUTPUT_TEMPLATE.md structure.'
-- '[ ] ✅ Verify 100% coverage of personas and deal stages in the artifact.'
-- '[ ] ✅ Test questions with 2–3 stakeholders for clarity and relevance.'
-- '[ ] ✅ Ensure MEDDIC/BANT criteria are explicitly addressed in question intent.'
-- '[ ] ✅ Obtain approval from sales leadership and subject-matter experts.'
+- '[ ] Confirm alignment with bld_schema_discovery_questions.md and bld_output_template_discovery_questions.md structure.'
+- '[ ] Verify 100% coverage of personas and deal stages in the artifact.'
+- '[ ] Test questions with 2–3 stakeholders for clarity and relevance.'
+- '[ ] Ensure MEDDIC/BANT criteria are explicitly addressed in question intent.'
+- '[ ] Obtain approval from sales leadership and subject-matter experts.'

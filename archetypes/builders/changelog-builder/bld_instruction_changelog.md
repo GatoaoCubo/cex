@@ -6,7 +6,7 @@ llm_function: REASON
 purpose: Step-by-step production process for changelog
 quality: null
 title: "Instruction Changelog"
-version: "1.0.0"
+version: "1.1.0"
 author: wave1_builder_gen_v2
 tags: [changelog, builder, instruction]
 tldr: "Step-by-step production process for changelog"
@@ -16,28 +16,35 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Phase 1: RESEARCH  
-1. Identify latest version using semver (e.g., `v1.2.3`).  
-2. Extract feature additions from code commits and PRs.  
-3. List bug fixes from issue trackers and test results.  
-4. Document breaking changes affecting API/UX from release notes.  
-5. Cross-reference with previous changelogs for consistency.  
-6. Verify semver compliance (major/minor/patch) based on changes.  
+## Phase 1: RESEARCH
+1. Identify the version being documented using SemVer (MAJOR.MINOR.PATCH per semver.org).
+2. Determine version bump type: MAJOR (breaking changes), MINOR (new features), PATCH (fixes only).
+3. Collect Added entries: new features or capabilities introduced.
+4. Collect Changed entries: modifications to existing functionality.
+5. Collect Deprecated entries: features flagged for future removal with removal timeline.
+6. Collect Removed entries: features deleted in this release.
+7. Collect Fixed entries: bug fixes with issue IDs and PR references.
+8. Collect Security entries: vulnerability patches with CVE references where applicable.
+9. Cross-reference previous changelog entries for consistent terminology.
 
-## Phase 2: COMPOSE  
-1. Create new changelog entry in SCHEMA.md format.  
-2. Set version header (e.g., `## v1.2.3 - 2023-10-01`).  
-3. Populate `Features` section with user-facing improvements.  
-4. Detail `Fixes` with issue IDs and resolved problems.  
-5. Highlight `Breaking Changes` with migration steps.  
-6. Use OUTPUT_TEMPLATE.md for markdown syntax and structure.  
-7. Ensure semver tags align with version header.  
-8. Validate section headings match SCHEMA.md requirements.  
-9. Proofread for clarity, grammar, and alignment with product goals.  
+## Phase 2: COMPOSE
+1. Create new entry per bld_schema_changelog.md field spec.
+2. Set version header: `## [X.Y.Z] - YYYY-MM-DD` (Keep a Changelog format).
+3. Maintain `## [Unreleased]` section at top for in-progress changes.
+4. Populate `### Added` section with new capabilities (imperative: "Add X").
+5. Populate `### Changed` section with modified behavior (imperative: "Change Y").
+6. Populate `### Deprecated` section with removal notices and target version.
+7. Populate `### Removed` section with deleted features (imperative: "Remove Z").
+8. Populate `### Fixed` section with issue ID and resolution (imperative: "Fix A").
+9. Populate `### Security` section with CVE ID and affected versions.
+10. For MAJOR versions, add `### Migration` section with step-by-step upgrade path.
+11. Prefix breaking-change entries with "BREAKING:" for scanner visibility.
+12. Use bld_output_template_changelog.md for markdown structure.
 
-## Phase 3: VALIDATE  
-- [ ] ✅ Semver format matches `vX.Y.Z` in header and tags.  
-- [ ] ✅ All required sections (`Features`, `Fixes`, `Breaking Changes`) present.  
-- [ ] ✅ Changes categorized correctly per impact (e.g., no fixes in features).  
-- [ ] ✅ Template syntax (bold, links, lists) adheres to OUTPUT_TEMPLATE.md.  
-- [ ] ✅ Peer review confirms accuracy and completeness.
+## Phase 3: VALIDATE
+- [ ] SemVer format X.Y.Z (no leading `v`) in frontmatter version field.
+- [ ] All 6 Keep a Changelog sections present (Added/Changed/Deprecated/Removed/Fixed/Security).
+- [ ] MAJOR bump includes Migration section with actionable steps.
+- [ ] Breaking change entries prefixed with "BREAKING:".
+- [ ] Each entry uses imperative mood: "Add X", "Fix Y", "Remove Z".
+- [ ] Peer review confirms accuracy against issue tracker and PRs.
