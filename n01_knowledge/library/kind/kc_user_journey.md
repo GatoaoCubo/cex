@@ -25,8 +25,30 @@ This framework helps businesses:
 - Improve customer retention  
 - Measure conversion effectiveness  
 
+## Metrics to Track
+- Awareness stage conversion rate  
+- Consideration phase engagement time  
+- Decision funnel drop-off points  
+- Post-purchase satisfaction scores  
+- Net Promoter Score (NPS)  
+
+## Tools for Analysis
+- Customer journey mapping software  
+- Heatmaps and session recordings  
+- CRM analytics dashboards  
+- A/B testing platforms  
+- Survey tools for post-purchase feedback  
+
 ## Best Practices
 - Map each stage to specific touchpoints  
 - Use data analytics to track progress  
 - Continuously refine the journey based on feedback  
 - Align all departments with the customer-centric approach  
+
+## Example
+A SaaS product's user journey might include:  
+1. Awareness: Content marketing and social media  
+2. Consideration: Free trial sign-up and demo requests  
+3. Decision: Paid subscription conversion  
+4. Action: Onboarding process and first use  
+5. Post-Purchase: Support interactions and feature adoption  
