@@ -1,4 +1,4 @@
-Create: P01_knowledge/library/kind/kc_pricing_page.md
-KC about pricing_page. Description: Pricing page artifact with tier comparison and conversion copy
-YAML: id: kc_pricing_page, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
+Create: P01_knowledge/library/kind/kc_sso_config.md
+KC about sso_config. Description: SSO/SAML/OIDC identity provider integration configuration
+YAML: id: kc_sso_config, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
 English only. Under 80 lines.
