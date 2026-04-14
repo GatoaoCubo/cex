@@ -61,6 +61,42 @@ LLM_MODEL = "sonnet"
 LLM_MAX_TOKENS = 8000
 FORK_OUTPUT_DIR = CEX_ROOT / ".cex" / "temp" / "fork_outputs"
 
+_FM_RE = re.compile(r"^---\n(.*?)\n---", re.DOTALL)
+
+
+def _parse_md_frontmatter(text: str) -> dict:
+    """Minimal YAML frontmatter parser (no PyYAML dep required).
+
+    Supports: scalar keys, simple lists (indented "- value"), block scalars
+    of a single line. Complex nested structures fall back to raw strings.
+    Used by load_from_crew_template to read crew/role/charter metadata.
+    """
+    m = _FM_RE.match(text)
+    if not m:
+        return {}
+    fm: dict = {}
+    key = None
+    for line in m.group(1).splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if line.startswith("  - ") and key:
+            val = line[4:].strip().strip('"').strip("'")
+            if not isinstance(fm.get(key), list):
+                fm[key] = []
+            fm[key].append(val)
+        elif ":" in line and not line.startswith(" "):
+            k, _, v = line.partition(":")
+            k = k.strip()
+            v = v.strip()
+            key = k
+            if not v:
+                fm[k] = []
+            else:
+                fm[k] = v.strip('"').strip("'")
+    return fm
+
+
 # ---------------------------------------------------------------------------
 # Prompt Layers (compiled artifacts from pillar directories)
 # ---------------------------------------------------------------------------
@@ -662,6 +698,201 @@ class CrewRunner:
         self.parsed = plan.get("parsed", {})
         self.functions = plan.get("functions", [])
         self.quality_target = self.parsed.get("quality", 9.0)
+
+    # ------------------------------------------------------------------
+    # Composable-crew loader (Phase 2 of crew-wiring mini-wave)
+    # ------------------------------------------------------------------
+    @classmethod
+    def load_from_crew_template(
+        cls,
+        crew_path: Path,
+        charter_path: Path | None = None,
+        cex_root: Path = CEX_ROOT,
+    ) -> dict:
+        """Parse a crew_template.md + optional team_charter.md into a runnable plan.
+
+        crew_template.md shape (from archetypes/builders/crew-template-builder):
+          frontmatter: crew_name, purpose, process, handoff_protocol_id, ...
+          body `## Roles` table: | Role | Role Assignment ID | Reason |
+
+        Each `Role Assignment ID` (e.g. `p02_ra_researcher.md`) is resolved by:
+          1. sibling dir of crew file (e.g. N02_marketing/crews/)
+          2. cex_root glob N0*/crews/<id>
+          3. cex_root glob P02_*/**/<id>
+
+        The role_assignment's frontmatter `agent_id` points to a builder
+        or nucleus agent -- that becomes a builder entry in the plan.
+
+        Returns a plan dict compatible with CrewRunner.run().
+        """
+        import re as _re
+
+        # --- 1. Parse crew_template ---
+        text = crew_path.read_text(encoding="utf-8", errors="replace")
+        fm = _parse_md_frontmatter(text)
+        body = text.split("---", 2)[-1] if text.startswith("---") else text
+
+        crew_name = fm.get("crew_name", crew_path.stem)
+        process = (fm.get("process") or "sequential").strip().lower()
+        purpose = fm.get("purpose", f"Execute crew {crew_name}")
+        handoff_proto = fm.get("handoff_protocol_id", "a2a-task")
+
+        # --- 2. Parse `## Roles` table ---
+        roles: list[dict] = []
+        in_roles = False
+        for line in body.splitlines():
+            low = line.strip().lower()
+            if low.startswith("## "):
+                in_roles = low.startswith("## roles")
+                continue
+            if not in_roles:
+                continue
+            if not line.strip().startswith("|"):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) < 3:
+                continue
+            # skip header + separator rows
+            if cells[0].lower() in ("role", "---", ":---"):
+                continue
+            if _re.match(r"^[-: ]+$", cells[0]):
+                continue
+            roles.append(
+                {"role_name": cells[0], "assignment_id": cells[1], "reason": cells[2]}
+            )
+
+        if not roles:
+            raise ValueError(
+                f"crew_template {crew_path.name} has no `## Roles` rows -- "
+                "cannot build plan"
+            )
+
+        # --- 3. Resolve each role_assignment.md ---
+        resolved: list[dict] = []
+        search_dirs = [
+            crew_path.parent,
+            *sorted((cex_root).glob("N0*/crews")),
+            *sorted((cex_root).glob("P02_*")),
+        ]
+        for role in roles:
+            aid = role["assignment_id"].strip()
+            # strip template placeholder braces if any
+            aid = _re.sub(r"\{\{.*?\}\}", "", aid).strip()
+            if not aid or aid.startswith("<!--"):
+                continue
+            ra_path = None
+            for d in search_dirs:
+                candidate = d / aid
+                if candidate.exists():
+                    ra_path = candidate
+                    break
+                # glob fallback for pillar subdirs
+                matches = list(d.rglob(aid)) if d.is_dir() else []
+                if matches:
+                    ra_path = matches[0]
+                    break
+            ra_fm: dict = {}
+            agent_id = None
+            if ra_path and ra_path.exists():
+                ra_text = ra_path.read_text(encoding="utf-8", errors="replace")
+                ra_fm = _parse_md_frontmatter(ra_text)
+                agent_id = ra_fm.get("agent_id")
+            # fallback: derive agent from role_name
+            if not agent_id:
+                agent_id = (
+                    ra_fm.get("role_name", role["role_name"])
+                    .lower()
+                    .replace(" ", "-")
+                    + "-builder"
+                )
+            resolved.append(
+                {
+                    "role_name": role["role_name"],
+                    "assignment_id": aid,
+                    "assignment_path": str(ra_path.resolve().relative_to(cex_root.resolve()))
+                    if ra_path
+                    else None,
+                    "agent_id": agent_id,
+                    "goal": ra_fm.get("goal", ""),
+                    "backstory": ra_fm.get("backstory", ""),
+                    "tools": ra_fm.get("tools", []),
+                }
+            )
+
+        # --- 4. Optional charter merge ---
+        charter_fm: dict = {}
+        if charter_path and charter_path.exists():
+            charter_fm = _parse_md_frontmatter(
+                charter_path.read_text(encoding="utf-8", errors="replace")
+            )
+
+        # --- 5. Build plan.functions ---
+        # sequential -> one step per role (ordered)
+        # hierarchical -> one step, manager first then workers parallel
+        # consensus -> one step, all parallel
+        parallel = process != "sequential"
+        builders = []
+        for i, r in enumerate(resolved):
+            agent_slug = (
+                r["agent_id"]
+                .replace(".md", "")
+                .split("/")[-1]
+            )
+            builders.append(
+                {
+                    "id": agent_slug,
+                    "tier": "primary",
+                    "active": True,
+                    "reason": f"role '{r['role_name']}' bound via {r['assignment_id']}",
+                    "role_name": r["role_name"],
+                    "order": i,
+                    "goal": r["goal"],
+                    "backstory": r["backstory"],
+                }
+            )
+
+        function_entry = {
+            "name": "CREW",
+            "position": 6,  # PRODUCE slot
+            "builders": builders,
+            "deps": [],
+            "parallel": parallel,
+            "estimated_tokens": 4096 * len(builders),
+            "process": process,
+        }
+
+        plan = {
+            "intent": purpose,
+            "parsed": {
+                "verb": "execute",
+                "object": crew_name,
+                "domain": "crew",
+                "quality": charter_fm.get("quality_gate", 9.0),
+                "multi_object": False,
+            },
+            "classified_kinds": [],
+            "functions": [function_entry],
+            "total_builders": len(builders),
+            "estimated_tokens": 4096 * len(builders),
+            "turn_budgets": {b["id"]: 25 for b in builders},
+            "warnings": [],
+            "crew_meta": {
+                "crew_name": crew_name,
+                "process": process,
+                "handoff_protocol": handoff_proto,
+                "roles": resolved,
+                "charter": {
+                    "mission": charter_fm.get("mission_statement", ""),
+                    "deliverables": charter_fm.get("deliverables", []),
+                    "deadline": charter_fm.get("deadline", ""),
+                    "budget": charter_fm.get("budget", {}),
+                }
+                if charter_fm
+                else None,
+                "source_template": str(crew_path.relative_to(cex_root)),
+            },
+        }
+        return plan
 
     def _get_active_builders(self, step: dict) -> list[dict]:
         """Filter to only active builders in a step."""
