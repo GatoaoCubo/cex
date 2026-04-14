@@ -249,9 +249,12 @@ function Launch-Nucleus($handoff) {
             if ($hwnd -ne [IntPtr]::Zero) { break }
         }
         if ($hwnd -ne [IntPtr]::Zero) {
-            # bRepaint=$false: avoid forced WM_PAINT after Claude TUI has started
-            # rendering into alt-screen-buffer (caused visual overlap / bleed).
-            [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $false) | Out-Null
+            # bRepaint=$true: TUI needs WM_SIZE to adapt alt-screen-buffer to
+            # final window dimensions. Without repaint, Claude renders at
+            # initial (smaller) window size and leaves bottom/side dead zones.
+            # Previous "overlap" was caused by banner+DarkBlue bg in boot scripts
+            # (fixed by cex_fix_boot_banner.py), not by forced repaint itself.
+            [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
         } else {
             Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
         }
