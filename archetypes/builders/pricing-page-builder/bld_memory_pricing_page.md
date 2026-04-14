@@ -1,6 +1,6 @@
 ---
-kind: learning_record
-id: p10_lr_pricing_page_builder
+kind: memory
+id: p10_mem_pricing_page_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for pricing_page construction
