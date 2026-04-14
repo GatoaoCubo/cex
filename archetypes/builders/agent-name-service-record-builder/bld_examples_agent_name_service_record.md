@@ -21,8 +21,10 @@ density_score: 0.85
 ## Golden Example: GoDaddy Customer-Service Agent
 
 **Scenario**: Production ANS registry-record for a GoDaddy customer-service agent
-that supports both MCP and A2A protocols, has a valid PKI-cert, and exposes 3 capabilities.
-This record would pass all 8 hard gates and score 9.5+ on soft dimensions.
+that supports both MCP and A2A protocol-adapter entries, has a valid PKI-cert reference,
+exposes 3 capabilities, and registers a discovery-endpoint per CNCF AgentDNS spec.
+Salesforce MuleSoft Agent Fabric follows the same pattern for its A2A-first agents.
+This record passes all 8 hard gates and scores 9.5+ on soft dimensions.
 
 ```markdown
 ---

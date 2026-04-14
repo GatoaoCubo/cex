@@ -21,6 +21,8 @@ density_score: 0.85
 ## Crew Role
 
 This builder is the **ANS registration specialist** in the multi-agent crew.
+It handles IETF ANS and CNCF AgentDNS registry-record construction for production
+operators including GoDaddy and Salesforce MuleSoft Agent Fabric.
 It translates agent definitions (agent_card, agent) into registry-records that
 make agents discoverable across IETF ANS and CNCF AgentDNS networks.
 

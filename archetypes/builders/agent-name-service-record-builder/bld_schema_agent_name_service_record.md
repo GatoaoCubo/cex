@@ -61,7 +61,7 @@ density_score: 0.85
 
 ## protocol_adapters Array
 
-**Minimum cardinality**: 1 entry. Each entry is an object:
+**Minimum cardinality**: 1 entry. Each entry is a protocol-adapter object:
 
 | Field | Type | Required | Validation |
 |-------|------|----------|-----------|

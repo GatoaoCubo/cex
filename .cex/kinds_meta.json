@@ -3452,5 +3452,47 @@
     "spec_version": "CNCF KAR v1.35 (GA 2025-11)",
     "last_reviewed": "2026-04-14",
     "deprecated_by": null
+  },
+  "conformity_assessment": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_ca_{{system}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "EU AI Act Annex IV conformity assessment for high-risk AI systems (Article 43, Aug-2026 deadline)",
+    "boundary": "Annex IV technical documentation package. NOT compliance_framework (general) nor threat_model (risk only).",
+    "status": "stable",
+    "upstream_source": "EU AI Act 2024/1689 Annex IV",
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
+  },
+  "agent_name_service_record": {
+    "pillar": "P04",
+    "llm_function": "CALL",
+    "naming": "p04_ans_{{agent_name}}.md",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "IETF ANS + CNCF AgentDNS registry record for agent discovery: name, endpoint, PKI cert, protocol adapters",
+    "boundary": "Agent discovery record (DNS-like). NOT agent_card (capabilities) nor transport_config (protocol only).",
+    "status": "stable",
+    "upstream_source": "IETF draft-narajala-ans-00 + CNCF AgentDNS",
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
+  },
+  "agent_grounding_record": {
+    "pillar": "P10",
+    "llm_function": "PRODUCE",
+    "naming": "p10_gr_{{inference_id}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Per-inference provenance record: tool calls, RAG chunks, model signature, output hash, OTel/C2PA traceability",
+    "boundary": "Per-inference grounding record. NOT trace_config (raw OTel spans) nor model_card (training provenance).",
+    "status": "stable",
+    "upstream_source": "OTel GenAI semconv v1.37 + C2PA v2.3",
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   }
 }

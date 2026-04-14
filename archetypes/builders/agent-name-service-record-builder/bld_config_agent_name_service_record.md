@@ -18,6 +18,10 @@ density_score: 0.85
 
 # Agent Name Service Record Builder -- Config
 
+> Runtime configuration for producing IETF ANS / CNCF AgentDNS registry-records.
+> Artifacts declare discovery-endpoint URLs, protocol-adapter entries, and PKI-cert
+> references for GoDaddy, Salesforce, and other registry operators.
+
 ## Naming Convention
 
 | Asset | Pattern | Regex | Example |

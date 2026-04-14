@@ -122,7 +122,8 @@ vague version strings (e.g., `mcp: latest`).
 **Evidence**: GoDaddy production integration documentation explicitly recommends
 pinning MCP to `2024-11-05` and A2A to `0.3` for stable inter-agent communication.
 
-**Recommendation**: Always pin protocol versions in `protocol_adapters[].version`.
+**Recommendation**: Always pin protocol versions in `protocol_adapters[].version` and
+ensure the discovery-endpoint follows the `/.well-known/agent/{label}` convention.
 Use the values from the knowledge card protocol table as defaults.
 
 ---

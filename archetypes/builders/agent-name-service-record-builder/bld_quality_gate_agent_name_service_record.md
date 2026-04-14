@@ -18,6 +18,11 @@ density_score: 0.85
 
 # Agent Name Service Record Builder -- Quality Gate
 
+> Governs IETF ANS / CNCF AgentDNS registry-record quality. Hard gates enforce
+> DNS-like ANS name format, protocol-adapter presence, discovery-endpoint validity.
+> Soft dimensions score PKI-cert completeness and capability richness for GoDaddy,
+> Salesforce, and CNCF registry operators.
+
 ## Hard Gates (H01-H08)
 
 **All 8 must pass. Any single failure blocks publication.**

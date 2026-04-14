@@ -18,6 +18,10 @@ density_score: 0.85
 
 # Agent Name Service Record Builder -- Architecture
 
+> This builder produces `agent_name_service_record` artifacts: IETF ANS / CNCF AgentDNS
+> registry-records that advertise agent discovery-endpoint URLs, protocol-adapter declarations,
+> PKI-cert references, and capability metadata. Operators: GoDaddy, Salesforce, CNCF.
+
 ## Component Inventory (13 ISOs)
 
 | # | ISO file | Kind | Pillar | LLM function | Purpose |
