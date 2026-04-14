@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW4 N01 Audit: trajectory_eval + self_improvement_loop + prompt_technique"
 version: "1.0.0"
-quality: null
+quality: 8.9
 tags: [audit, hybrid_review4, wave3, trajectory_eval, self_improvement_loop, prompt_technique]
 domain: "generator quality assurance"
 created: "2026-04-14"

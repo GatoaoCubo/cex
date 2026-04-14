@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW4 N04 Audit: reranker_config + graph_rag_config + agentic_rag"
 version: "1.0.0"
-quality: null
+quality: 8.9
 tags: [audit, hybrid_review4, reranker_config, graph_rag_config, agentic_rag, wave3, n04]
 domain: "builder quality assurance"
 created: "2026-04-14"

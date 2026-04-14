@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P07
 title: "HYBRID_REVIEW4 N05 Audit: benchmark_suite, eval_metric, memory_benchmark"
 version: "1.0.0"
-quality: null
+quality: 8.9
 tags: [audit, hybrid_review4, benchmark_suite, eval_metric, memory_benchmark, wave3, n05]
 domain: "quality assurance"
 created: "2026-04-14"
