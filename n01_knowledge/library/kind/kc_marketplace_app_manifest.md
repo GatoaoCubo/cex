@@ -1,7 +1,7 @@
 ---
 id: kc_marketplace_app_manifest
 kind: knowledge_card
-title: Marketplace App Manifest Specification
+title: Marketplace App Manifest Spec
 version: 1.0.0
 quality: null
 pillar: P01
@@ -9,79 +9,63 @@ pillar: P01
 
 # Marketplace App Manifest Specification
 
-This document defines the standardized metadata format for AI applications listed on Claude, LangChain, and HuggingFace marketplaces. The manifest enables platform-agnostic metadata, permission declarations, and pricing models.
+This document defines the required metadata structure for apps listed on Claude, LangChain, and HuggingFace marketplaces. The manifest contains:
 
-## Core Structure
-```yaml
-manifest_version: "1.0.0"
-app_id: "marketplace:app:uuid"
-name:
-  en: "App Name"
-description:
-  en: "Brief functionality summary"
-```
+## Core Metadata
+- **name**: App display name (max 100 chars)
+- **description**: 3-5 sentence summary of app functionality
+- **version**: Semver format (e.g. 1.2.3)
+- **license**: Open source license type (MIT, Apache, GPL, etc)
+- **keywords**: 3-5 relevant search terms
 
-## Required Fields
-- `manifest_version` (string): Required format "x.y.z"
-- `app_id` (string): Unique identifier across all marketplaces
-- `name` (object): Primary language (en) and optional translations
-- `description` (object): Primary language (en) and optional translations
-
-## Optional Enhancements
-- `icon_url` (string): URL to app icon
-- `tags` (array): Keyword categories for discovery
-- `license` (string): Open source/license type
-- `dependencies` (array): Required runtime dependencies
-
-## Permissions
-```yaml
-permissions:
-  access: ["read", "write", "execute"]
-  data: ["user_data", "system_logs"]
-  network: ["public", "private"]
-```
+## Platform Configuration
+- **platforms**: Array of supported platforms (claude, langchain, huggingface)
+- **permissions**: Object defining access controls
+  - **read**: Array of allowed data types
+  - **write**: Array of allowed data types
+  - **execute**: Array of allowed operations
 
 ## Pricing Model
-```yaml
-pricing:
-  type: "free" | "paid" | "subscription"
-  currency: "USD" | "EUR" | "GBP"
-  price: 0.99
-  discount: 0.15
-```
+- **free**: Boolean indicating free availability
+- **premium**: Object for paid features
+  - **price**: Decimal value
+  - **currency**: ISO 4217 code
+  - **interval**: monthly/annual
 
-## Platform-Specific Metadata
-```yaml
-platforms:
-  claude:
-    model: "claude-3-5-sonnet"
-    max_tokens: 2048
-  langchain:
-    framework: "langchain:0.2.1"
-    pipeline: "llm+chain"
-  huggingface:
-    model_id: "bert-base-uncased"
-    task_type: "text2text"
-```
+## Technical Specs
+- **dependencies**: Object of required libraries
+  - **langchain**: Version range
+  - **huggingface**: Version range
+  - **claude**: Version range
+- **entrypoint**: Main function identifier
+- **framework**: Technology stack (e.g. React, FastAPI, TensorFlow)
+
+## Compliance
+- **terms_of_service**: URL to legal terms
+- **privacy_policy**: URL to data usage policy
+- **security_contact**: Email for security issues
 
 ## Example
 ```yaml
-manifest_version: "1.0.0"
-app_id: "marketplace:app:42"
-name:
-  en: "Text Summarizer"
-description:
-  en: "AI-powered text summarization tool"
+name: "Text2SQL Generator"
+description: "Convert natural language queries to SQL for database interaction"
+version: 1.1.0
+license: MIT
+keywords: ["sql", "nlp", "database"]
+platforms: ["claude", "langchain"]
 permissions:
-  access: ["read", "write"]
-  data: ["user_data"]
+  read: ["user_data", "query_history"]
+  write: ["execution_logs"]
+  execute: ["generate_sql"]
 pricing:
-  type: "paid"
-  currency: "USD"
-  price: 2.99
-platforms:
-  claude:
-    model: "claude-3-5-son00"
-  huggingface:
-    model_id: "t5-small"
+  free: true
+dependencies:
+  langchain: "^0.2.0"
+  huggingface: "^4.3.2"
+entrypoint: "generate_sql"
+framework: "FastAPI"
+terms_of_service: "https://example.com/tos"
+privacy_policy: "https://example.com/privacy"
+security_contact: "security@example.com"
+```
 ```
