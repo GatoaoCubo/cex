@@ -37,17 +37,16 @@ density_score: 0.85
 | H07      | scope defined          | scope field is missing or empty                     |  
 
 ## SOFT Scoring  
-(Table: Dim | Dimension | Weight | Scoring Guide)  
-| Dim | Dimension   | Weight | Scoring Guide                                      |  
-|-----|-------------|--------|----------------------------------------------------|  
-| D1  | Clarity     | 0.15   | Clear definition (1.0) vs ambiguous (0.0)          |  
-| D2  | Relevance   | 0.15   | Directly tied to business goal (1.0) vs irrelevant |  
-| D3  | Precision   | 0.12   | Measurable (1.0) vs vague (0.0)                    |  
-| D4  | Consistency | 0.10   | Aligns with existing metrics (1.0) vs conflicting  |  
-| D5  | Documentation | 0.10 | Full context provided (1.0) vs incomplete        |  
-| D6  | Uniqueness  | 0.08   | No duplication (1.0) vs redundant (0.0)            |  
-| D7  | Scope       | 0.10   | Covers critical use case (1.0) vs limited          |  
-| D8  | Alignment   | 0.10   | Supports evaluation goals (1.0) vs misaligned      |  
+| Dim | Dimension     | Weight | Scoring Guide                                      |  
+|-----|---------------|--------|----------------------------------------------------|  
+| D1  | Clarity       | 0.15   | Clear definition (1.0) vs ambiguous (0.0)          |  
+| D2  | Relevance     | 0.20   | Directly tied to task goal (1.0) vs irrelevant     |  
+| D3  | Precision     | 0.15   | Measurable with formula (1.0) vs vague (0.0)       |  
+| D4  | Consistency   | 0.10   | Aligns with existing metrics (1.0) vs conflicting  |  
+| D5  | Documentation | 0.10   | Full context provided (1.0) vs incomplete          |  
+| D6  | Uniqueness    | 0.10   | No duplication (1.0) vs redundant (0.0)            |  
+| D7  | Scope         | 0.10   | Covers critical use case (1.0) vs limited          |  
+| D8  | Alignment     | 0.10   | Supports evaluation goals (1.0) vs misaligned      |  
 
 ## Actions  
 (Table: Score | Action)  

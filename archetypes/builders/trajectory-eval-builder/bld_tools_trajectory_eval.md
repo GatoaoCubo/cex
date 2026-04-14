@@ -6,34 +6,32 @@ llm_function: CALL
 purpose: Tools available for trajectory_eval production
 quality: null
 title: "Tools Trajectory Eval"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+version: "1.1.0"
+author: n01_hybrid_review4
 tags: [trajectory_eval, builder, tools]
-tldr: "Tools available for trajectory_eval production"
+tldr: "Real CEX tools for producing trajectory_eval artifacts."
 domain: "trajectory_eval construction"
 created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Compiles trajectory data into standardized format | Pre-processing |  
-| cex_score.py | Calculates evaluation metrics (e.g., smoothness, accuracy) | Post-processing |  
-| cex_retriever.py | Retrieves relevant trajectory data from storage | Data analysis |  
-| cex_doctor.py | Diagnoses inconsistencies in trajectory logs | Validation phase |  
-| cex_validator.py | Validates data integrity and format compliance | Quality checks |  
-| cex_visualizer.py | Visualizes trajectories for debugging | Reporting |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile .md artifact to .yaml | After saving |
+| cex_score.py | Apply peer-review quality score | Post-production |
+| cex_retriever.py | Find similar trajectory_eval artifacts for reference | Before composing |
+| cex_doctor.py | Validate artifact health (frontmatter, kind, pillar) | During validation |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_linter.py | Checks syntax and structure of trajectory files | Code review |  
-| cex_consistency_checker.py | Ensures temporal and spatial data consistency | Validation |  
-| cex_performance_analyzer.py | Analyzes computational efficiency of trajectory algorithms | Optimization |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_wave_validator.py | Structural checks: domain keywords, required fields | Pre-commit |
+| cex_hygiene.py | Artifact CRUD hygiene: naming, orphan detection | Post-production |
 
-## External References  
-- TrajectoryEval Framework (official library for trajectory evaluation)  
-- Waymo Open Dataset (standardized trajectory data format)  
-- CARLA Simulation (for testing trajectory algorithms in virtual environments)
+## External References
+- AgentBench: github.com/THUDM/AgentBench (step-level LLM agent evaluation framework)
+- WebArena: github.com/web-arena-x/webarena (web navigation trajectory benchmark)
+- SWE-bench: github.com/princeton-nlp/SWE-bench (software engineering agent benchmark)
+- tau-bench: github.com/sierra-research/tau-bench (tool-agent-user trajectory evaluation)

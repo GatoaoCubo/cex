@@ -26,7 +26,7 @@ density_score: 0.85
 |-----------|---------------------------|-----------------------------------------------------|  
 | H01       | YAML frontmatter valid    | Invalid YAML syntax or missing required fields      |  
 | H02       | ID matches pattern        | ID does not match ^p12_vw_[a-z][a-z0-9_]+.md$      |  
-| H03       | kind field matches        | kind ≠ 'visual_workflow'                            |  
+| H03       | kind field matches        | kind != 'visual_workflow'                           |  
 | H04       | Required fields present   | Missing 'name' or 'description' in metadata         |  
 | H05       | Workflow steps valid      | Invalid step type or missing required attributes    |  
 | H06       | Tool compatibility        | Unsupported tool referenced in workflow             |  
@@ -45,12 +45,12 @@ density_score: 0.85
 | D08       | Data Integrity    | 0.15   | No data loss during workflow execution             |  
 
 ## Actions  
-| Score     | Action                          |  
-|-----------|---------------------------------|  
-| GOLDEN    | Automated approval, deploy      |  
-| PUBLISH   | Manual review, schedule deploy  |  
-| REVIEW    | QA validation required          |  
-| REJECT    | Reject, fix all critical issues |  
+| Score  | Action                          |  
+|--------|---------------------------------|  
+| >=9.5  | GOLDEN -- automated approval    |  
+| >=8.0  | PUBLISH -- manual review        |  
+| >=7.0  | REVIEW -- QA validation needed  |  
+| <7.0   | REJECT -- fix critical issues   |  
 
 ## Bypass  
 | conditions                          | approver   | audit trail              |  

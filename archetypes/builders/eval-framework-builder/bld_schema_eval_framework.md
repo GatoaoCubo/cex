@@ -3,72 +3,75 @@ kind: schema
 id: bld_schema_eval_framework
 pillar: P06
 llm_function: CONSTRAIN
-purpose: Formal schema -- SINGLE SOURCE OF TRUTH for eval_framework
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for eval_framework artifacts
 quality: null
 title: "Schema Eval Framework"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+version: "1.1.0"
+author: n03_hybrid_review4
 tags: [eval_framework, builder, schema]
-tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for eval_framework"
+tldr: "Schema for a named eval framework -- aligned with EleutherAI lm-eval-harness, OpenAI Evals, HELM, BIG-Bench, DeepEval canonical patterns."
 domain: "eval_framework construction"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.92
 ---
 
-## Frontmatter Fields  
-### Required  
-| Field      | Type   | Required | Default | Notes |  
-|------------|--------|----------|---------|-------|  
-| id         | string | yes      |         | Must match ID Pattern |  
-| kind       | string | yes      |         | Always "eval_framework" |  
-| pillar     | string | yes      |         | Always "P07" |  
-| title      | string | yes      |         | Human-readable name |  
-| version    | string | yes      | "1.0"   | Semantic versioning |  
-| created    | date   | yes      |         | ISO 8601 format |  
-| updated    | date   | yes      |         | ISO 8601 format |  
-| author     | string | yes      |         | Maintainer name |  
-| domain     | string | yes      |         | Application domain (e.g., "NLP") |  
-| quality    | null   | yes      | null    | Never self-score; peer review assigns |  
-| tags       | array  | yes      | []      | Keywords for discovery |  
-| tldr       | string | yes      |         | One-sentence summary |  
-| framework_type | string | yes |         | Type of evaluation framework (e.g., "benchmark", "test_suite") |  
-| evaluation_criteria | array | yes | [] | Core criteria evaluated |  
+## Frontmatter Fields
 
-### Recommended  
-| Field          | Type   | Notes |  
-|----------------|--------|-------|  
-| license        | string | Open source license |  
-| dependencies   | array  | Required libraries/tools |  
-| compatibility  | string | System/tech requirements |  
-| references     | array  | Citations or links |  
+### Required
 
-## ID Pattern  
-^p07_efw_[a-z][a-z0-9_]+.md$  
+| Field | Type | Required | Default | Notes |
+|-------|------|----------|---------|-------|
+| id | string | yes | -- | Must match ID Pattern below |
+| kind | string | yes | "eval_framework" | Must equal "eval_framework" |
+| pillar | string | yes | "P07" | Must equal "P07" |
+| title | string | yes | -- | Descriptive name |
+| version | string | yes | "1.0.0" | Semantic version |
+| created | date | yes | -- | ISO 8601 |
+| updated | date | yes | -- | ISO 8601 |
+| author | string | yes | -- | Owner |
+| domain | string | yes | -- | Application domain (NLP, code, safety, reasoning, RAG, agent) |
+| quality | null | yes | null | NEVER self-score; peer review assigns |
+| tags | array | yes | [] | Keywords |
+| tldr | string | yes | -- | One-sentence summary |
+| framework_type | enum | yes | -- | One of: benchmark, task_suite, red_team, rag_eval, agent_eval, judge_eval |
+| tasks | array | yes | [] | Task ids or dataset refs (lm-eval-harness task names, HELM scenarios, etc.) |
+| metrics | array | yes | [] | Metric names (exact_match, f1, rouge_l, pass_at_k, bleu, accuracy, g_eval_score, faithfulness) |
+| runner | string | yes | -- | Execution backend (lm-eval-harness, openai-evals, helm, deepeval, custom) |
 
-## Body Structure  
-1. **Overview**  
-   - Purpose, scope, and intended use of the framework.  
+### Recommended
 
-2. **Evaluation Criteria**  
-   - Detailed description of metrics and success indicators.  
+| Field | Type | Notes |
+|-------|------|-------|
+| adapter | string | Model I/O adapter (chat, completion, logprobs, tool_use) |
+| fewshot_k | integer | Number of few-shot examples; 0 for zero-shot |
+| sample_size | integer | Items sampled from each task; null for full |
+| seed | integer | Reproducibility seed |
+| prompt_template_ref | string | Reference to prompt_template artifact id |
+| dependencies | array | Required libraries with versions |
+| references | array | Citations (papers, leaderboards) |
 
-3. **Metrics**  
-   - Quantitative and qualitative measures tracked.  
+## ID Pattern
 
-4. **Use Cases**  
-   - Scenarios where the framework is applied.  
+Regex: `^p07_efw_[a-z][a-z0-9_]+\.md$`
 
-5. **Compatibility**  
-   - Supported platforms, languages, or systems.  
+Examples: `p07_efw_mmlu_core.md`, `p07_efw_helm_nlp.md`, `p07_efw_rag_ragas.md`
 
-6. **References**  
-   - Documentation, papers, or tools related to the framework.  
+## Body Structure (required sections)
 
-## Constraints  
-- ID must match exact regex pattern.  
-- Quality field must be assigned by peer review, not self-scored.  
-- Domain-specific fields (framework_type, evaluation_criteria) are mandatory.  
-- Version must follow semantic versioning (e.g., "1.2.3").  
-- Tags must be lowercase, alphanumeric, and underscore-separated.  
+1. **Overview** -- purpose, target capability, canonical reference.
+2. **Tasks** -- each task: id, dataset source, size, example item.
+3. **Metrics** -- each metric: name, formula or reference, aggregation (mean/macro/micro).
+4. **Runner & Adapter** -- execution stack, input/output format, model requirements.
+5. **Reproducibility** -- seed, version pins, prompt template reference.
+6. **References** -- papers, leaderboards, prior implementations.
+
+## Constraints
+
+- framework_type is an enum; no free-form values.
+- tasks array MUST be non-empty.
+- metrics array MUST be non-empty AND contain at least one metric name recognized by the runner.
+- If runner == "lm-eval-harness", tasks must reference real task registry names.
+- If framework_type == "rag_eval", metrics SHOULD include faithfulness or answer_relevance.
 - File size must not exceed 5120 bytes.
+- quality is assigned by peer review; always null at authoring time.

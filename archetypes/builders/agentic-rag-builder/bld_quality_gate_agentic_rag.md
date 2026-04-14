@@ -17,38 +17,32 @@ density_score: 0.85
 ---
 
 ## Definition  
-(Table: metric, threshold, operator, scope)  
-| metric         | threshold | operator | scope         |  
-|----------------|-----------|----------|---------------|  
-| Retrieval Accuracy | 95%       | >=       | All queries   |  
-| Response Latency | 500ms     | <=       | Production    |  
-| Agent Policy Alignment | 100%   | ==       | All outputs   |  
+| metric | threshold | operator | scope |  
+|---|---|---|---|  
+| ID pattern | ^p01_ar_[a-z][a-z0-9_]+.md$ | matches | artifact filename |  
 
 ## HARD Gates  
-(Table: ID | Check | Fail Condition)  
-| ID             | Check                         | Fail Condition                                |  
-|----------------|-------------------------------|-----------------------------------------------|  
-| H01            | YAML frontmatter valid        | Invalid YAML syntax or missing fields         |  
-| H02            | ID matches ^p01_ar_[a-z][a-z0-9_]+.md$ | ID does not conform to schema pattern        |  
-| H03            | kind field matches 'agentic_rag' | kind field is not 'agentic_rag'              |  
-| H04            | Agent configuration present     | Missing agent configuration file              |  
-| H05            | Retrieval sources validated     | Unverified or insecure data sources used      |  
-| H06            | Response alignment with knowledge | Output contradicts verified knowledge       |  
-| H07            | Error handling implemented      | No fallback or error recovery mechanism       |  
-| H08            | Logging enabled                 | Missing audit logs for agent decisions        |  
+| ID  | Check | Fail Condition |  
+|-----|-------|----------------|  
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |  
+| H02 | ID matches ^p01_ar_[a-z][a-z0-9_]+.md$ | ID does not conform to schema pattern |  
+| H03 | kind field equals 'agentic_rag' | kind field is not 'agentic_rag' |  
+| H04 | agent_type field present and non-empty | Missing or empty agent_type field |  
+| H05 | knowledge_source field present and non-empty | Missing or empty knowledge_source field |  
+| H06 | Execution workflow section present | Missing ## Execution Workflow section |  
+| H07 | Reflection loop documented (retrieve->reflect->re-query) | No reflection loop specification |  
+| H08 | Fallback strategy defined | No fallback behavior for retrieval failure |  
 
 ## SOFT Scoring  
-(Table: Dim | Dimension | Weight | Scoring Guide)  
-| Dim | Dimension               | Weight | Scoring Guide                                      |  
-|-----|-------------------------|--------|----------------------------------------------------|  
-| D01 | Retrieval Accuracy      | 0.20   | 95%+ = 1.0, 90% = 0.8, 80% = 0.5, <80% = 0.0        |  
-| D02 | Latency                 | 0.15   | 500ms = 1.0, 600ms = 0.75, 700ms = 0.5, >700ms = 0.0 |  
-| D03 | Policy Alignment        | 0.15   | 100% = 1.0, 90% = 0.8, 80% = 0.5, <80% = 0.0        |  
-| D04 | Error Handling          | 0.10   | Full = 1.0, partial = 0.5, none = 0.0               |  
-| D05 | Logging Completeness    | 0.10   | Full = 1.0, partial = 0.5, none = 0.0               |  
-| D06 | User Experience         | 0.10   | Seamless = 1.0, minor issues = 0.75, major = 0.5     |  
-| D07 | Scalability             | 0.10   | Handles 10k+ reqs = 1.0, 5k = 0.75, <5k = 0.5       |  
-| D08 | Security Compliance     | 0.10   | Fully compliant = 1.0, partial = 0.5, none = 0.0     |  
+| Dim | Dimension | Weight | Scoring Guide |  
+|-----|-----------|--------|---------------|  
+| D01 | Schema Completeness | 0.20 | All required frontmatter fields present and typed correctly |  
+| D02 | Agent Loop Clarity | 0.20 | retrieve->reflect->re-query cycle explicitly documented |  
+| D03 | Retrieval Strategy | 0.15 | Retriever type, similarity metric, top-k defined |  
+| D04 | Knowledge Source Provenance | 0.15 | Source type, format, access method documented |  
+| D05 | Error and Fallback Coverage | 0.10 | CRAG-style corrective fallback or equivalent |  
+| D06 | Tool Plan Coverage | 0.10 | Agent tools listed against bld_config_agentic_rag.md registry |  
+| D07 | Documentation Quality | 0.10 | Usage examples and section headers complete |  
 
 ## Actions  
 (Table: Score | Action)  

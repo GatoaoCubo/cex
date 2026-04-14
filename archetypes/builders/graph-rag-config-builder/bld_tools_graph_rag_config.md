@@ -19,19 +19,22 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles graph_rag_config from YAML/JSON | During config build |  
-| cex_score.py | Scores config validity against graph metrics | Post-validation |  
-| cex_retriever.py | Fetches external graph data for config | During data integration |  
-| cex_doctor.py | Diagnoses config errors and suggests fixes | On config failure |  
+| cex_compile.py | Compile graph_rag_config artifact to .yaml | After authoring |  
+| cex_score.py | Peer-review score via 5D rubric | After compile |  
+| cex_retriever.py | Find similar existing graph_rag_config artifacts | During F3 INJECT |  
+| cex_doctor.py | Validate builder ISO health | Pre-dispatch |  
+| cex_wave_validator.py | Validate all ISOs in builder directory | Post-build |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| schema_checker.py | Validates config schema compliance | Pre-deployment |  
-| consistency_validator.py | Ensures graph node/edge consistency | Post-retrieval |  
-| performance_tester.py | Benchmarks config execution speed | Pre-production |  
+| cex_hooks.py | Pre-commit quality gate enforcement | Before git commit |  
+| cex_sanitize.py | Check ASCII compliance in code files | Pre-commit |  
+| cex_hygiene.py | Artifact CRUD rules (frontmatter, naming) | Periodic cleanup |  
 
 ## External References  
-- GraphRAG (https://github.com/microsoft/graphrag)  
-- Neo4j (graph database framework)  
-- LangChain (LLM integration toolkit)
+- Microsoft GraphRAG (github.com/microsoft/graphrag, Edge et al. 2024)  
+- Neo4j LLM Graph Builder (community detection via Leiden algorithm)  
+- LangChain GraphRAG integration (graph Q&A chain)  
+- Graspologic (hierarchical community detection, used by MS GraphRAG)  
+- LlamaIndex KnowledgeGraphIndex (triplet extraction + graph store)

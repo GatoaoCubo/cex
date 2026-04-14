@@ -16,13 +16,14 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p07_te_<name>`  
-Examples: `p07_te_eval_01`, `p07_te_test_case`  
+## Naming Convention
+Pattern: `p07_te_<agent>_<task_slug>`
+Examples: `p07_te_gpt4o_webArena_045`, `p07_te_claude_swebench_12`
+Scope: trajectory_eval artifacts for LLM agent step-level path analysis
 
-## Paths  
-Artifacts: `/mnt/cex/trajectories/p07/te/<name>/artifacts`  
-Logs: `/mnt/cex/trajectories/p07/te/<name>/logs`  
+## Paths
+Artifacts: `P07_evaluation/trajectory_eval/`
+Logs: `.cex/runtime/logs/trajectory_eval/`  
 
 ## Limits  
 max_bytes: 5120  

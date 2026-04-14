@@ -55,8 +55,8 @@ density_score: 0.85
 
 ## Constraints  
 - ID must match ^p03_mmp_[a-z][a-z0-9_]+.md$  
-- Total size ≤ 4096 bytes  
+- Total size <= 4096 bytes  
 - All required fields must be present  
 - Quality field is peer-reviewed only  
 - ASCII-only characters required  
-- ≤ 80 lines total
+- <= 80 lines total
