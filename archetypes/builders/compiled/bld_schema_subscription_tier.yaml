@@ -1,0 +1,52 @@
+kind: schema
+id: bld_schema_subscription_tier
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for subscription_tier
+quality: null
+title: Schema Subscription Tier
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- subscription_tier
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for subscription_tier
+domain: subscription_tier construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type       | Required | Default | Notes                              |  \n|------------|------------|----------|---------|------------------------------------|\
+  \  \n| id         | string     | yes      | null    | Must match ID Pattern              |  \n| kind       | string    \
+  \ | yes      | null    | Always \"subscription_tier\"         |  \n| pillar     | string     | yes      | null    | Always\
+  \ \"P11\"                       |  \n| title      | string     | yes      | null    | Human-readable name              \
+  \  |  \n| version    | integer    | yes      | 1       | Schema version                     |  \n| created    | datetime\
+  \   | yes      | null    | ISO 8601                           |  \n| updated    | datetime   | yes      | null    | ISO\
+  \ 8601                           |  \n| author     | string     | yes      | null    | Creator identifier              \
+  \   |  \n| domain     | string     | yes      | null    | \"subscription_tier\"                |  \n| quality    | null\
+  \       | yes      | null    | Never self-score; peer review assigns |  \n| tags       | list       | yes      | []    \
+  \  | Keywords for categorization        |  \n| tldr       | string     | yes      | null    | Summary of tier benefits \
+  \          |  \n| tier_level | string     | yes      | null    | \"bronze\", \"silver\", \"gold\", etc.   |  \n| benefits\
+  \   | list       | yes      | []      | Perks included in tier             |  \n| price      | object     | yes      | {}\
+  \      | { \"currency\": \"USD\", \"amount\": 9.99 } |  \n| exclusive_content | bool | yes      | false   | Access to premium\
+  \ materials        |"
+recommended: "| Field          | Type   | Notes                          |  \n|----------------|--------|--------------------------------|\
+  \  \n| currency       | string | ISO 4217 code (e.g., \"USD\")    |  \n| max_users      | integer| Limit for concurrent\
+  \ users     |  \n| trial_period   | integer| Days before charge             |  \n| renewal_policy | string | \"monthly\"\
+  , \"yearly\", \"one-time\" |"
+id_pattern: ^p11_st_[a-z][a-z0-9_]+.yaml$
+body_structure:
+- 'Tier Level: Define the subscription level (e.g., "gold").'
+- 'Benefits: List features or services included.'
+- 'Pricing: Specify cost structure and currency.'
+- 'Exclusive Content: Boolean flag for premium access.'
+- 'Trial Period: Duration of free trial (if applicable).'
+- 'Renewal Policy: Frequency of billing cycles.'
+constraints:
+- 'Tier_level must be one of: "bronze", "silver", "gold", "platinum".'
+- Price must include "currency" and "amount" fields.
+- Benefits must be a non-empty list of strings.
+- Exclusive_content must be a boolean.
+- Trial_period must be ≥ 0 if specified.
+- Renewal_policy must be "monthly", "yearly", or "one-time".
