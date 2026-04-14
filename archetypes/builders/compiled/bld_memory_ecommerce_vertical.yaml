@@ -1,5 +1,5 @@
-kind: learning_record
-id: p10_lr_ecommerce_vertical_builder
+kind: memory
+id: p10_mem_ecommerce_vertical_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for ecommerce_vertical construction
@@ -28,3 +28,5 @@ recommendations:
 - Design recommendation engines with user intent segmentation (e.g., browse vs. cart abandonment).
 - Use modular, reusable components for cart/checkout to accelerate deployment.
 - Continuously test recommendation accuracy against A/B metrics (CTR, conversion).
+domain_scope: This learning record applies to ecommerce vertical artifact construction, covering cart abandonment recovery,
+  checkout optimization, recommendation engines, and payment compliance patterns specific to the ecommerce domain.

@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW7 N01 Audit: analyst_briefing + ecommerce_vertical + faq_entry"
 version: "1.0.0"
-quality: null
+quality: 8.9
 tags: [audit, hybrid_review7, analyst_briefing, ecommerce_vertical, faq_entry, wave6]
 domain: generator quality assurance
 created: "2026-04-14"

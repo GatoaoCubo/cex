@@ -1,5 +1,5 @@
-kind: learning_record
-id: p10_lr_expansion_play_builder
+kind: memory
+id: p10_mem_expansion_play_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for expansion_play construction
@@ -10,7 +10,7 @@ author: wave6_n06
 tags:
 - expansion_play
 - builder
-- learning_record
+- memory
 - upsell
 - NRR
 - land-and-expand

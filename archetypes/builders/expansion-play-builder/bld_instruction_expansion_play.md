@@ -25,7 +25,7 @@ density_score: 0.85
 6. Pull QBR history: last expansion conversation, customer health score, champion strength.
 
 ## Phase 2: COMPOSE
-1. Reference SCHEMA.md for required fields (account_id, trigger_type, expansion_type, NRR_target).
+1. Reference bld_schema_expansion_play.md for required fields (account_id, trigger_type, expansion_type, NRR_target).
 2. Define the expansion motion: seat upsell, tier upgrade, add-on cross-sell, or usage-based ramp.
 3. Write the AE/CSM talk track: value narrative, business case, ROI calculation.
 4. Set trigger thresholds and automation rules (e.g., alert when seat utilization > 80% for 14 days).

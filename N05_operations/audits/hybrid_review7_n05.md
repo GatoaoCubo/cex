@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW7 N05 Audit: nps_survey + churn_prevention_playbook + renewal_workflow"
 version: "1.0.0"
-quality: null
+quality: 8.9
 mission: HYBRID_REVIEW7
 wave: review
 nucleus: n05

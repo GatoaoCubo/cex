@@ -1,5 +1,5 @@
-kind: learning_record
-id: p10_lr_govtech_vertical_builder
+kind: memory
+id: p10_mem_govtech_vertical_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for govtech_vertical construction
@@ -10,7 +10,7 @@ author: wave1_builder_gen_v2
 tags:
 - govtech_vertical
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for govtech_vertical construction
 domain: govtech_vertical construction
 created: '2026-04-14'
@@ -28,3 +28,5 @@ recommendations:
 - Use GSA-approved templates as a baseline for documentation and procurement artifacts.
 - Conduct joint workshops between compliance and product teams to align on CJIS-specific data security requirements.
 - Maintain a centralized repository of approved FedRAMP and FISMA artifacts to reduce duplication.
+domain_scope: This learning record applies to govtech vertical artifact construction, covering FedRAMP/FISMA compliance, Section
+  508 accessibility, open data standards, and procurement documentation patterns specific to the govtech domain.

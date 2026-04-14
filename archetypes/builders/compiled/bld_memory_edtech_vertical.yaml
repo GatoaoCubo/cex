@@ -1,5 +1,5 @@
-kind: learning_record
-id: p10_lr_edtech_vertical_builder
+kind: memory
+id: p10_mem_edtech_vertical_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for edtech_vertical construction
@@ -10,7 +10,7 @@ author: wave1_builder_gen_v2
 tags:
 - edtech_vertical
 - builder
-- learning_record
+- memory
 tldr: Learned patterns and pitfalls for edtech_vertical construction
 domain: edtech_vertical construction
 created: '2026-04-14'
@@ -28,3 +28,5 @@ recommendations:
 - Define use cases with explicit data flow diagrams to identify privacy risks early.
 - Include automated data anonymization features for non-essential student information.
 - Collaborate with legal teams to validate use cases against evolving regulatory standards.
+domain_scope: This learning record applies to edtech vertical artifact construction, covering LMS integration, FERPA/COPPA
+  compliance, adaptive learning systems, and student data privacy patterns specific to the edtech domain.

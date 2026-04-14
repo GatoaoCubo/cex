@@ -25,8 +25,8 @@ density_score: 0.85
 6. Document stakeholder needs for vertical-specific inject functions.  
 
 ## Phase 2: COMPOSE  
-1. Align artifact structure with SCHEMA.md (govtech_vertical, P01).  
-2. Use OUTPUT_TEMPLATE.md to draft overview and compliance sections.  
+1. Align artifact structure with bld_schema_govtech_vertical.md (govtech_vertical, P01).  
+2. Use bld_output_template_govtech_vertical.md to draft overview and compliance sections.  
 3. Populate FedRAMP and FISMA requirements in "Regulatory Alignment" block.  
 4. Detail CJIS data security protocols in "Technical Controls" section.  
 5. Embed Section 508 accessibility checks in "User Experience" module.  

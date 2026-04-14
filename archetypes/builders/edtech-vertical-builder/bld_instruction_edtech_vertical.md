@@ -25,12 +25,12 @@ density_score: 0.85
 6. Evaluate existing LMS APIs for compatibility and security features.  
 
 ## Phase 2: COMPOSE  
-1. Define artifact structure per SCHEMA.md (sections: compliance, integration, privacy).  
-2. Write FERPA/COPPA compliance section with data minimization examples.  
-3. Draft LTI integration specs (OAuth 2.0, resource links, tool configuration).  
-4. Outline student data privacy protocols (encryption, access controls).  
-5. Develop use case scenarios (e.g., secure grade sync, third-party tool access).  
-6. Reference OUTPUT_TEMPLATE.md for formatting (headers, bullet points, code blocks).  
+1. Define artifact structure per bld_schema_edtech_vertical.md (focus_area, target_demographic, compliance fields).  
+2. Write FERPA/COPPA compliance section: name records type, data minimization approach, and parental consent flow.  
+3. Draft LTI 1.3 integration specs: OAuth 2.0 + IMS Security Framework v1.0, resource links, tool configuration per Canvas/Moodle/Blackboard.  
+4. Outline student data privacy protocols: AES-256 encryption, pseudonymization approach, access control model.  
+5. Develop use case scenarios (e.g., secure grade sync via xAPI, COPPA-compliant onboarding for K-12).  
+6. Reference bld_output_template_edtech_vertical.md for formatting (headers, tables, regulatory sections).  
 7. Embed LTI code snippets (e.g., tool launch URL, placement options).  
 8. Cross-reference schema elements with template placeholders.  
 9. Finalize artifact with regulatory citations and LMS vendor examples.  
