@@ -1,0 +1,28 @@
+kind: examples
+id: bld_examples_stt_provider
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of stt_provider artifacts
+quality: null
+title: Examples Stt Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- stt_provider
+- builder
+- examples
+tldr: Golden and anti-examples of stt_provider artifacts
+domain: stt_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "kind: stt_provider\nname: google_stt\ndescription: Integration with Google Cloud Speech-to-Text API\nparameters:\n\
+  \  provider: google\n  api_key: \"AIzaSyD...\"\n  endpoint: \"https://speech.googleapis.com/v1p1beta1/audio:recognize\"\n\
+  \  language: \"en-US\"\n  sample_rate: 16000\nusage:\n  - command: transcribe\n    input: audio_file.wav\n    output: text_result.txt"
+anti_example_1_missing_critical_parameters: "kind: stt_provider\nname: broken_stt\ndescription: Incomplete STT config\nparameters:\n\
+  \  provider: azure\n  endpoint: \"https://speech.azure.com/recognize\""
+why_it_fails: Includes VAD parameters (vad_threshold, silence_timeout) which belong to voice_pipeline configuration, violating
+  boundary constraints and causing scope confusion.
+anti_example_2_mixing_vad_config: "kind: stt_provider\nname: mixed_stt\ndescription: STT with VAD settings\nparameters:\n\
+  \  provider: aws\n  api_key: \"AKIAXXXXX\"\n  endpoint: \"https://transcribe.aws.com\"\n  vad_threshold: 0.5\n  silence_timeout:\
+  \ 2.0"

@@ -9,7 +9,7 @@ builders_reviewed: [voice-pipeline-builder, realtime-session-builder]
 iso_count: 26
 source_model: qwen3:14b (Wave 2 first 10 kinds)
 pillar: P04
-quality: null
+quality: 8.6
 ---
 
 # HYBRID_REVIEW2: N01 Audit Summary (26 ISOs, 2 Voice Builders)

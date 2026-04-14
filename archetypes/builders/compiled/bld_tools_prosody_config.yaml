@@ -1,0 +1,31 @@
+kind: tools
+id: bld_tools_prosody_config
+pillar: P04
+llm_function: CALL
+purpose: Tools available for prosody_config production
+quality: null
+title: Tools Prosody Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- prosody_config
+- builder
+- tools
+tldr: Tools available for prosody_config production
+domain: prosody_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles prosody config into\
+  \ executable format | Deployment |  \n| cex_score.py | Scores config quality based on metrics | Optimization |  \n| cex_retriever.py\
+  \ | Fetches external data for config generation | Data integration |  \n| cex_doctor.py | Diagnoses config issues and suggests\
+  \ fixes | Debugging |  \n| cex_validator.py | Validates config syntax and structure | Pre-deployment |  \n| cex_optimizer.py\
+  \ | Automates config parameter tuning | Performance tuning |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_schema_checker.py | Ensures config conforms\
+  \ to schema | Pre-deployment |  \n| val_linter.py | Checks for style and best practice violations | Code review |  \n| val_comparator.py\
+  \ | Compares configs across environments | CI/CD |  \n| val_perf_tester.py | Simulates load to test config resilience |\
+  \ Stress testing |"
+external_references:
+- Prosody (XMPP server framework)
+- YAML/JSON schema validation libraries
+- Pytest (for validation tool testing)

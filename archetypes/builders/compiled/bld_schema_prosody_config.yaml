@@ -1,0 +1,45 @@
+kind: schema
+id: bld_schema_prosody_config
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for prosody_config
+quality: null
+title: Schema Prosody Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- prosody_config
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for prosody_config
+domain: prosody_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|  \n\
+  | id         | string | yes      | -       | Unique identifier |  \n| kind       | string | yes      | \"prosody_config\"\
+  \ | CEX kind |  \n| pillar     | string | yes      | \"P09\"    | Pillar classification |  \n| title      | string | yes\
+  \      | -       | Configuration title |  \n| version    | string | yes      | \"1.0.0\" | Semver MAJOR.MINOR.PATCH |\n\
+  | created    | date   | yes      | -       | Creation timestamp |  \n| updated    | date   | yes      | -       | Last update\
+  \ timestamp |  \n| author     | string | yes      | -       | Author/owner |  \n| domain     | string | yes      | -   \
+  \    | Application domain |  \n| quality    | null   | yes      | null    | MUST be null -- peer review assigns |\n| tags\
+  \       | list   | yes      | []      | Metadata tags |\n| tldr       | string | yes      | -       | Summary |\n| language\
+  \   | string | yes      | \"en\"    | BCP-47 language tag (e.g., en-US, pt-BR) |\n| emission   | enum   | yes      | \"\
+  ssml\"  | ssml \\| elevenlabs \\| playht \\| cartesia \\| hume \\| azure_mstts |\n| intonation | string | yes      | \"\
+  neutral\" | Intonation profile name |"
+recommended: "| Field              | Type   | Notes |  \n|--------------------|--------|-------|  \n| example_usage      |\
+  \ string | Sample configuration |  \n| validation_rules   | list   | Validation criteria |  \n| compatibility      | string\
+  \ | System compatibility |  \n| revision_history   | list   | Schema changes |"
+id_pattern: ^p09_prs_[a-z0-9_-]+\.yaml$
+body_structure: "1. Language Specification  \n   Define target language and dialect.  \n2. Intonation Rules  \n   Parameters\
+  \ for pitch, contour, and emphasis.  \n3. Stress and Accent Patterns  \n   Syllable stress rules and accent placement. \
+  \ \n4. Rhythm and Timing  \n   Duration, pauses, and tempo guidelines.  \n5. Validation Criteria  \n   Constraints for schema\
+  \ compliance.  \n6. Example Configurations  \n   Sample YAML snippets for reference."
+constraints:
+- 'Max file size: 2048 bytes'
+- Required fields must be present and non-empty
+- ID must match naming pattern
+- YAML must use ASCII-only characters
+- Version follows semantic versioning (e.g., 1.0.0)
+- All domain-specific fields must align with prosody modeling standards

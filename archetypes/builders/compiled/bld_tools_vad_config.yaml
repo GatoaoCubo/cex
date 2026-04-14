@@ -1,0 +1,30 @@
+kind: tools
+id: bld_tools_vad_config
+pillar: P04
+llm_function: CALL
+purpose: Tools available for vad_config production
+quality: null
+title: Tools Vad Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- vad_config
+- builder
+- tools
+tldr: Tools available for vad_config production
+domain: vad_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+production_tools: "| Tool              | Purpose                  | When                          |  \n|-------------------|--------------------------|-------------------------------|\
+  \  \n| cex_compile.py    | Compiles config templates | During config generation      |  \n| cex_score.py      | Scores config\
+  \ validity    | Post-validation checks        |  \n| cex_retriever.py  | Fetches external data     | When external dependencies\
+  \ needed |  \n| cex_doctor.py     | Diagnoses config issues   | During troubleshooting        |"
+validation_tools: "| Tool              | Purpose                  | When                          |  \n|-------------------|--------------------------|-------------------------------|\
+  \  \n| vad_validator.py  | Validates config syntax   | Pre-deployment                |  \n| vad_analyzer.py   | Analyzes\
+  \ config performance | Post-deployment monitoring  |  \n| vad_tester.py     | Simulates config scenarios | During stress\
+  \ testing       |"
+external_references:
+- Python ConfigParser
+- JSON Schema (for schema validation)
+- PyTest (for unit testing)

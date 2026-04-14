@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_stt_provider
+pillar: P12
+llm_function: COLLABORATE
+purpose: How stt_provider-builder works in crews with other builders
+quality: null
+title: Collaboration Stt Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- stt_provider
+- builder
+- collaboration
+tldr: How stt_provider-builder works in crews with other builders
+domain: stt_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: Configures and integrates STT provider APIs, ensuring compatibility with system interfaces and handling credential
+  management.
+receives_from: "| Builder       | What                  | Format   |  \n|---------------|-----------------------|----------|\
+  \  \n| config_manager| Provider credentials  | JSON     |  \n| audio_engine  | Audio format specs    | YAML     |  \n| test_suite\
+  \    | Sample audio files    | WAV      |"
+produces_for: "| Builder       | What                  | Format       |  \n|---------------|-----------------------|--------------|\
+  \  \n| voice_pipeline| STT integration code  | Python module|  \n| config_manager| Provider config files | JSON        \
+  \ |  \n| test_suite    | Integration test logs | TXT          |"
+boundary: Does NOT handle voice_pipeline end-to-end processing (handled by voice_pipeline builder) or VAD sensitivity thresholds
+  (handled by vad_config builder).

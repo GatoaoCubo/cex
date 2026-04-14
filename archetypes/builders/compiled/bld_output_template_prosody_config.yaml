@@ -1,0 +1,30 @@
+kind: output_template
+id: bld_output_template_prosody_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for prosody_config production
+quality: null
+title: Output Template Prosody Config
+version: 1.1.0
+author: n03_hybrid_review2
+tags:
+- prosody_config
+- builder
+- output_template
+- ssml
+tldr: 'Two-shape template: SSML emission or provider-native emission'
+domain: prosody_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.88
+shape_a_ssml_emission_azure_google_aws_ibm: "---\nid: p09_prs_{{slug}}\nkind: prosody_config\npillar: P09\nversion: 1.0.0\n\
+  quality: null\nemission: ssml\nlanguage: {{bcp47}}\n---\nbaseline:\n  pitch: \"{{baseline_pitch|+0%}}\"\n  rate: \"{{baseline_rate|100%}}\"\
+  \n  volume: \"{{baseline_volume|medium}}\"\nemotions:\n  {{emotion_name}}:\n    ssml: |\n      <prosody pitch=\"{{pitch_delta}}\"\
+  \ rate=\"{{rate_delta}}\" volume=\"{{volume_level}}\">\n        <break time=\"{{break_ms}}ms\"/>\n        <emphasis level=\"\
+  {{emphasis_level}}\">{{text}}</emphasis>\n      </prosody>\ntarget_providers: [{{providers_csv}}]"
+shape_b_provider_native_emission_elevenlabs_playht_cartesia_hume: "---\nid: p09_prs_{{slug}}\nkind: prosody_config\npillar:\
+  \ P09\nversion: 1.0.0\nquality: null\nemission: {{elevenlabs|playht|cartesia|hume}}\nlanguage: {{bcp47}}\n---\nprovider:\
+  \ {{provider}}\nmodel_id: {{model_id}}\n# ElevenLabs shape\nvoice_settings:\n  stability: {{0.0-1.0}}\n  similarity_boost:\
+  \ {{0.0-1.0}}\n  style: {{0.0-1.0}}\n  use_speaker_boost: {{true|false}}\n# Cartesia shape (use instead of voice_settings)\n\
+  text_template: \"[{{emotion_tag}}] {{text}} [pause:{{ms}}ms]\"\nspeed: {{slow|normal|fast}}\n# PlayHT shape\nemotion: {{female_happy|male_sad|...}}\n\
+  speed: {{0.5-2.0}}\ntarget_providers: [{{providers_csv}}]"

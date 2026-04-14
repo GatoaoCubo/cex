@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P07
 title: "Wave 2 empirical quality distribution (149 ISOs)"
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [wave2, quality, empirical, gen_v2_hardening]
 ---
 

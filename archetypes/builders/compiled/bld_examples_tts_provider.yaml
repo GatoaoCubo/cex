@@ -1,0 +1,28 @@
+kind: examples
+id: bld_examples_tts_provider
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of tts_provider artifacts
+quality: null
+title: Examples Tts Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- tts_provider
+- builder
+- examples
+tldr: Golden and anti-examples of tts_provider artifacts
+domain: tts_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+golden_example: "name: tts_provider\ndescription: Integrates with Azure Cognitive Services Text-to-Speech\nversion: 1.2.0\n\
+  parameters:\n  - name: api_key\n    type: string\n    description: Azure API key for TTS service\n  - name: endpoint\n \
+  \   type: string\n    format: uri\n    description: Azure TTS endpoint URL\n  - name: voice\n    type: string\n    enum:\
+  \ [\"en-US-JennyNeural\", \"fr-FR-DeniseNeural\"]\n    description: Voice model to use"
+anti_example_1_missing_critical_parameters: "name: tts_provider\ndescription: Incomplete TTS integration\nversion: 0.1.0\n\
+  parameters:\n  - name: voice\n    type: string\n    enum: [\"en-US-JennyNeural\"]"
+why_it_fails: Violates boundary constraints by including prosody_config parameters which belong to voice_pipeline, not tts_provider.
+  Mixes integration configuration with voice personality settings.
+anti_example_2_mixing_responsibilities: "name: tts_provider\ndescription: Overloaded TTS configuration\nversion: 1.0.0\nparameters:\n\
+  \  - name: prosody_config\n    type: object\n    properties:\n      pitch: number\n      rate: number"

@@ -1,0 +1,51 @@
+kind: schema
+id: bld_schema_tts_provider
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for tts_provider
+quality: null
+title: Schema Tts Provider
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- tts_provider
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for tts_provider
+domain: tts_provider construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes |  \n|------------|--------|----------|---------|-------|  \n\
+  | id         | string | yes      | -       | Unique identifier |  \n| kind       | string | yes      | \"tts_provider\"\
+  \ | CEX kind |  \n| pillar     | string | yes      | \"P04\"    | Pillar classification |  \n| title      | string | yes\
+  \      | -       | Human-readable name |  \n| version    | string | yes      | \"1.0.0\"  | Schema version |  \n| created\
+  \    | date   | yes      | -       | Creation timestamp |  \n| updated    | date   | yes      | -       | Last update timestamp\
+  \ |  \n| author     | string | yes      | -       | Owner/creator |  \n| domain     | string | yes      | -       | Operational\
+  \ domain (e.g., \"medical\") |  \n| quality    | null   | yes      | null    | Never self-score; peer review assigns value\
+  \ |  \n| tags       | list   | yes      | []      | Keywords for categorization |  \n| tldr       | string | yes      |\
+  \ -       | Summary of purpose |  \n| voice_samples | list | yes | [] | Audio sample references |  \n| supported_languages\
+  \ | list | yes | [] | Languages supported |"
+recommended: "| Field              | Type   | Notes |  \n|--------------------|--------|-------|  \n| license            |\
+  \ string | Legal terms |  \n| documentation_url  | string | Link to docs |  \n| example_usage      | string | Sample API\
+  \ call |"
+id_pattern: '`^p04_tts_[a-zA-Z0-9_-]{1,}$`'
+body_structure:
+- Overview
+- Description of the TTS provider's purpose and scope.
+- Technical Specifications
+- Audio format support, latency, and API protocols.
+- Compliance
+- Regulatory standards (e.g., GDPR, HIPAA).
+- Usage Examples
+- Code snippets or API endpoints for integration.
+- Quality Assurance
+- Testing methodologies and performance metrics.
+constraints:
+- ID must follow `p04_tts_{{name}}` naming convention.
+- All required fields must be present and non-empty.
+- Supported languages must be ISO 639-1 compliant.
+- Versioning must use semantic versioning (e.g., "1.2.3").
+- Compliance section must reference at least one standard.
+- Voice samples must link to verified storage (e.g., AWS S3).

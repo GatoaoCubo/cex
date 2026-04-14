@@ -1,0 +1,32 @@
+kind: tools
+id: bld_tools_edit_format
+pillar: P04
+llm_function: CALL
+purpose: Tools available for edit_format production
+quality: null
+title: Tools Edit Format
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- edit_format
+- builder
+- tools
+tldr: Tools available for edit_format production
+domain: edit_format construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles format definitions\
+  \ into executable rules | During format deployment |  \n| cex_score.py | Scores data against format rules for compliance\
+  \ | During validation phases |  \n| cex_retriever.py | Retrieves format templates from external repositories | When initializing\
+  \ new formats |  \n| cex_doctor.py | Diagnoses format rule conflicts and suggests fixes | During rule editing |  \n| cex_formatter.py\
+  \ | Applies format rules to transform raw data | During data preprocessing |  \n| cex_validator.py | Validates format rule\
+  \ syntax and semantics | Before rule deployment |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_checker.py | Ensures format rules meet\
+  \ quality standards | During rule review |  \n| val_analyzer.py | Analyzes rule coverage across data types | During format\
+  \ design |  \n| val_comparator.py | Compares format outputs against golden standards | During testing |  \n| val_profiler.py\
+  \ | Profiles rule performance on large datasets | During optimization |"
+external_references:
+- LintTools (static analysis framework)
+- FormatX (cross-format compatibility library)
+- JSON Schema (standard for data structure validation)

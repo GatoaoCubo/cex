@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_repo_map
+pillar: P12
+llm_function: COLLABORATE
+purpose: How repo_map-builder works in crews with other builders
+quality: null
+title: Collaboration Repo Map
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- repo_map
+- builder
+- collaboration
+tldr: How repo_map-builder works in crews with other builders
+domain: repo_map construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+crew_role: Creates and maintains a consistent, cross-repo context map for navigation and dependency tracking. Ensures alignment
+  between repo structures, ownership, and purpose.
+receives_from: "| Builder | What | Format |  \n|---|---|---|  \n| Repo configurer | Repo metadata (name, owner, purpose) |\
+  \ YAML |  \n| Dependency tracker | Cross-repo dependency graph | JSON |  \n| CI/CD system | Repo event triggers (create,\
+  \ delete) | Webhook |"
+produces_for: "| Builder | What | Format |  \n|---|---|---|  \n| Repo navigator | Visual repo map (graph, hierarchy) | JSON\
+  \ |  \n| Documentation team | Repo context summary | Markdown |  \n| Dependency analyzer | Normalized dependency graph |\
+  \ DOT |"
+boundary: Does NOT handle system architecture (component_map-builder), search index (knowledge_index-builder), or CI/CD pipeline
+  orchestration (CI/CD team).

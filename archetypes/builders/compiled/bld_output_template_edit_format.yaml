@@ -1,0 +1,57 @@
+kind: output_template
+id: bld_output_template_edit_format
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for edit_format production
+quality: null
+title: Output Template Edit Format
+version: 1.1.0
+author: n04_hybrid_review2
+tags:
+- edit_format
+- builder
+- output_template
+tldr: Template with vars for edit_format production -- whole_file, unified_diff, search_replace, json_patch variants
+domain: edit_format construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+variant_a_whole_file_format: "---\nid: p06_ef_{{name}}\nkind: edit_format\npillar: P06\ntitle: \"{{title}}\"\nversion: \"\
+  1.0.0\"\nformat_type: whole_file\nedit_scope: whole_file\ncreated: \"{{date}}\"\nupdated: \"{{date}}\"\nauthor: \"{{author}}\"\
+  \ndomain: \"{{domain}}\"\nquality: null\ntags: [edit_format, whole_file]\ntldr: \"{{tldr}}\"\ncompatible_tools: [aider,\
+  \ claude-projects, cursor]\n---\n\n## Overview\n\n{{description}}. LLM returns the complete file content. Host replaces\
+  \ the file verbatim.\nBest for: new files, small files (<100 lines), or large-scale rewrites.\n\n## Format Specification\n\
+  \nThe LLM MUST output the target file path on a line by itself, followed immediately by\na fenced code block containing\
+  \ the entire new file content:\n\n{{file_path}}\n{{entire_file_content}}\n\nNo diff markers. No partial content. The entire\
+  \ file, start to finish.\n\n## Application Rules\n\n1. Host receives the file path and complete content.\n2. If file exists:\
+  \ overwrite entirely.\n3. If file does not exist: create with full content.\n4. No matching required -- zero ambiguity.\n\
+  \n## Validation Rules\n\n- File path MUST be present and non-empty\n- Content block MUST be non-empty\n- Language tag MUST\
+  \ match file extension\n- No partial content or placeholder comments allowed\n\n## Examples\n\nValid:\nsrc/utils/helper.py\n\
+  def greet(name):\n    return f\"Hello, {name}\"\n\nInvalid (partial content):\nsrc/utils/helper.py\n# ... existing code\
+  \ ...\ndef greet(name):\n    return f\"Hello, {name}\"\nReason: `# ... existing code ...` is a placeholder -- the host cannot\
+  \ apply this as-is.\n\n---"
+variant_b_search_replace_block_format: "---\nid: p06_ef_{{name}}\nkind: edit_format\npillar: P06\ntitle: \"{{title}}\"\nversion:\
+  \ \"1.0.0\"\nformat_type: search_replace\nedit_scope: {{edit_scope}}\ncreated: \"{{date}}\"\nupdated: \"{{date}}\"\nauthor:\
+  \ \"{{author}}\"\ndomain: \"{{domain}}\"\nquality: null\ntags: [edit_format, search_replace]\ntldr: \"{{tldr}}\"\ncompatible_tools:\
+  \ [aider, cursor]\n---\n\n## Overview\n\n{{description}}. Context-anchored replacement using SEARCH/REPLACE block pairs.\n\
+  Best for: targeted edits without line numbers, multi-file changes, resilient application.\n\n## Format Specification\n\n\
+  {{file_path}}\n<<<<<<< SEARCH\n{{exact_content_to_find}}\n=======\n{{new_content_to_replace_with}}\n>>>>>>> REPLACE\n\n\
+  Multiple blocks per response are applied sequentially top-to-bottom.\n\n## Application Rules\n\n1. SEARCH block MUST match\
+  \ file content EXACTLY (whitespace, indentation, line endings).\n2. If SEARCH not found: raise error, do NOT silently skip.\n\
+  3. Apply blocks in order -- do not re-sort.\n4. Empty REPLACE = delete the matched content.\n5. Empty SEARCH = insert REPLACE\
+  \ content at beginning of file.\n\n## Validation Rules\n\n- Each block MUST have both SEARCH and REPLACE sections\n- SEARCH\
+  \ content MUST not contain the `=======` delimiter unescaped\n- File path MUST precede the first block\n\n## Examples\n\n\
+  Valid:\nsrc/auth/login.py\n<<<<<<< SEARCH\n    password_hash = md5(password)\n=======\n    password_hash = bcrypt.hashpw(password.encode(),\
+  \ bcrypt.gensalt())\n>>>>>>> REPLACE\n\nInvalid (line numbers instead of content):\nsrc/auth/login.py\n<<<<<<< SEARCH\n\
+  line 42\n=======\n    password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt())\n>>>>>>> REPLACE\nReason: SEARCH\
+  \ must contain actual file content, not line number references.\n\n---"
+variant_c_unified_diff_format: "---\nid: p06_ef_{{name}}\nkind: edit_format\npillar: P06\ntitle: \"{{title}}\"\nversion: \"\
+  1.0.0\"\nformat_type: unified_diff\nedit_scope: {{edit_scope}}\ncreated: \"{{date}}\"\nupdated: \"{{date}}\"\nauthor: \"\
+  {{author}}\"\ndomain: \"{{domain}}\"\nquality: null\ntags: [edit_format, unified_diff]\ntldr: \"{{tldr}}\"\ncompatible_tools:\
+  \ [git-apply, patch, aider]\n---\n\n## Overview\n\n{{description}}. Standard unified diff (`diff -u` output). Git-compatible.\n\
+  Best for: git workflows, code review tools, standard patch application.\n\n## Format Specification\n\n--- a/{{file_path}}\n\
+  +++ b/{{file_path}}\n@@ -{{start_line}},{{original_lines}} +{{start_line}},{{new_lines}} @@\n {{context_line}}\n-{{removed_line}}\n\
+  +{{added_line}}\n {{context_line}}\n\n## Application Rules\n\n1. Apply via `git apply` or `patch -p1`.\n2. Context lines\
+  \ (no prefix) MUST match existing file for hunk anchoring.\n3. Multiple hunks applied top-to-bottom; line offsets adjust\
+  \ automatically.\n\n## Validation Rules\n\n- `---` and `+++` headers MUST be present\n- Each hunk MUST start with `@@ -n,m\
+  \ +n,m @@`\n- At least 3 context lines around each change (unless at file start/end)"

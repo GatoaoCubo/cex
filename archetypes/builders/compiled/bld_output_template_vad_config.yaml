@@ -1,0 +1,22 @@
+kind: output_template
+id: bld_output_template_vad_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for vad_config production
+quality: null
+title: Output Template Vad Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- vad_config
+- builder
+- output_template
+tldr: Template with vars for vad_config production
+domain: vad_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+tune_per_environment: "quiet_room:\n  sensitivity: 0.3\n  aggressiveness: 1\nnoisy_office:\n  sensitivity: 0.6\n  aggressiveness:\
+  \ 2\ncall_center:\n  sensitivity: 0.75\n  aggressiveness: 3\n\n## Validation Rules\n- sensitivity MUST be in range [0.1,\
+  \ 1.0]\n- aggressiveness MUST be integer in {0, 1, 2, 3} (WebRTC standard)\n- frame_size_ms MUST be one of {10, 20, 30}\
+  \ for WebRTC compatibility\n- noise_floor_db MUST be in range [-70, -10] dBFS\n\n## Notes\n{{notes_content}}"

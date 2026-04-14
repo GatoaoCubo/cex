@@ -1,0 +1,20 @@
+kind: output_template
+id: bld_output_template_sandbox_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for sandbox_config production
+quality: null
+title: Output Template Sandbox Config
+version: 1.1.0
+author: n05_ops
+tags:
+- sandbox_config
+- builder
+- output_template
+tldr: 'Sandbox config template: resource limits (CPU/RAM/disk/timeout), network policy, filesystem scope, isolation mechanism'
+domain: sandbox_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.9
+nsjail_cfg: 'time_limit: {{timeout_seconds}} rlimit_cpu: {{cpu_limit_int}} rlimit_as: {{memory_bytes}} log_fd: 2 mount { src:
+  "{{sandbox_root}}" dst: "/" is_bind: true rw: false }'

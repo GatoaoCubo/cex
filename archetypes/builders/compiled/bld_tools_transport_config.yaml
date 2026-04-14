@@ -1,0 +1,31 @@
+kind: tools
+id: bld_tools_transport_config
+pillar: P04
+llm_function: CALL
+purpose: Tools available for transport_config production
+quality: null
+title: Tools Transport Config
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- transport_config
+- builder
+- tools
+tldr: Tools available for transport_config production
+domain: transport_config construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles transport configurations\
+  \ into executable formats | Deployment |  \n| cex_score.py | Evaluates configuration performance against metrics | Optimization\
+  \ |  \n| cex_retriever.py | Fetches historical transport data for analysis | Preprocessing |  \n| cex_doctor.py | Diagnoses\
+  \ configuration errors and suggests fixes | Debugging |  \n| cex_validator.py | Ensures compliance with transport protocol\
+  \ standards | Validation |  \n| cex_optimizer.py | Automates parameter tuning for efficiency | Scaling |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_checker.py | Validates syntax and structure\
+  \ of config files | Testing |  \n| val_analyzer.py | Detects anomalies in transport behavior | Auditing |  \n| val_simulator.py\
+  \ | Simulates config execution in controlled environments | Verification |  \n| val_reporter.py | Generates compliance and\
+  \ performance reports | Review |"
+external_references:
+- PyTorch (for ML-based transport modeling)
+- Apache Kafka (for real-time data streaming)
+- Docker (for containerized config deployment)

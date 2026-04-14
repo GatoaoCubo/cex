@@ -1,0 +1,91 @@
+kind: knowledge_card
+id: bld_knowledge_card_edit_format
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for edit_format production
+quality: null
+title: Knowledge Card Edit Format
+version: 1.1.0
+author: n04_hybrid_review2
+tags:
+- edit_format
+- builder
+- knowledge_card
+- aider
+- cursor
+- diff
+- search-replace
+tldr: 'LLM-to-host file edit formats: Aider WHOLE/DIFF/UDIFF, search-replace blocks, unified diff'
+domain: edit_format construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.92
+domain_overview: 'Edit formats define the structured syntax LLMs use to communicate file modifications to
+
+  host systems (code editors, CI pipelines, auto-apply tools). The format must be: unambiguous
+
+  (the tool applies exactly what the LLM intended), resilient (handles whitespace drift, line
+
+  number changes), and parseable (simple regex/parser can extract and apply changes). Unlike
+
+  diff_strategy (which computes HOW differences are detected), edit_format defines the WIRE
+
+  FORMAT the LLM emits.
+
+
+  Four primary format families dominate production LLM coding tools:
+
+  1. WHOLE file (Aider WHOLE mode, Claude Projects file artifacts)
+
+  2. Unified diff (UDIFF, standard `diff -u` output)
+
+  3. Search-replace blocks (Aider search/replace, Cursor apply)
+
+  4. Structured patch (JSON Patch RFC 6902, language-server edits)'
+aider_edit_formats_primary_reference: Aider exposes four edit format modes. Understanding these is essential for edit_format
+  artifacts.
+whole_mode: "LLM returns the entire file content. Host system replaces the file verbatim.\n\nfilename.py\ndef foo():\n   \
+  \ return 42\n\n- Pros: Simple, unambiguous, no hunk matching needed\n- Cons: High token cost for large files; wastes tokens\
+  \ on unchanged lines\n- Use when: File is small (<100 lines) or most content is changing\n\n### DIFF Mode (Aider custom\
+  \ format)\n\nLLM returns hunks using `<<<<<<< ORIGINAL` / `=======` / `>>>>>>> UPDATED` markers.\n\nfilename.py\n<<<<<<<\
+  \ ORIGINAL\ndef old_function():\n    return 1\n=======\ndef new_function():\n    return 42\n>>>>>>> UPDATED\n\n- Pros: Explicit\
+  \ before/after; easy for humans to review\n- Cons: Requires fuzzy matching if file drifted from context\n- Use when: Medium\
+  \ files, precise replacement of specific blocks\n\n### UDIFF Mode (Unified Diff)\n\nStandard Unix unified diff format (`diff\
+  \ -u`). LLM emits `---`/`+++`/`@@` headers with `+`/`-` lines.\n\n--- a/filename.py\n+++ b/filename.py\n@@ -10,7 +10,7 @@\n\
+  \ def foo():\n-    return 1\n+    return 42\n\n- Pros: Standard format (git-compatible), minimal tokens, industry-universal\n\
+  - Cons: Line numbers can drift; requires context to anchor hunks\n- Use when: Small targeted changes, git-workflow integration\n\
+  \n### UDIFF-SIMPLE Mode\n\nSimplified unified diff without context lines. Only the `+`/`-` lines, no `@@ -n,m @@` headers.\n\
+  \n--- a/filename.py\n+++ b/filename.py\n-    return 1\n+    return 42\n\n- Use when: Simple single-hunk changes; reduces\
+  \ token output\n\n## Search-Replace Block Format (Cursor Apply, Aider Search/Replace)\n\nThe most resilient format for LLM\
+  \ edits. No line numbers needed.\n\npath/to/file.py\n<<<<<<< SEARCH\n    old code that must match exactly\n    (including\
+  \ whitespace and indentation)\n=======\n    new code to replace it with\n>>>>>>> REPLACE\n\nProperties:\n- SEARCH block\
+  \ must match file content EXACTLY (case, whitespace, indentation)\n- If SEARCH block not found exactly, apply tool should\
+  \ raise error (not silently skip)\n- Multiple SEARCH/REPLACE blocks in one response = sequential application\n- Empty SEARCH\
+  \ = insert at start of file; empty REPLACE = delete the match\n\nCursor apply format uses the same pattern with slightly\
+  \ different markers:\n<<<<<<< SEARCH\nold code\n=======\nnew code\n>>>>>>> REPLACE\n\n## Structured Edit Formats\n\n###\
+  \ JSON Patch (RFC 6902)\n\nStructured operations for JSON/YAML config files.\n\n[\n  { \"op\": \"replace\", \"path\": \"\
+  /version\", \"value\": \"2.0.0\" },\n  { \"op\": \"add\", \"path\": \"/dependencies/lodash\", \"value\": \"^4.17\" },\n\
+  \  { \"op\": \"remove\", \"path\": \"/scripts/test-old\" }\n]\n\nOperations: `add`, `remove`, `replace`, `move`, `copy`,\
+  \ `test`\nReference: RFC 6902 (not 6943 -- 6943 does not exist)\n\n### Language Server Protocol (LSP) TextEdit\n\nUsed by\
+  \ VS Code, Neovim, JetBrains for in-editor apply.\n\n{\n  \"range\": {\n    \"start\": { \"line\": 10, \"character\": 4\
+  \ },\n    \"end\": { \"line\": 10, \"character\": 15 }\n  },\n  \"newText\": \"new_function_name\"\n}\n\n## Key Concepts\n\
+  \n| Concept | Definition | Source |\n|---------|-----------|--------|\n| Hunk | Contiguous block of changed lines with context\
+  \ | Git diff format |\n| Search-replace block | SEARCH/REPLACE marker pair for context-anchored edits | Aider docs |\n|\
+  \ Unified diff | Standard `-u` diff format: --- / +++ headers + @@ hunks | POSIX diff |\n| WHOLE mode | Full file replacement\
+  \ -- highest token cost, lowest ambiguity | Aider docs |\n| Fuzzy matching | Finding SEARCH block even with minor whitespace\
+  \ drift | Aider core |\n| JSON Patch | RFC 6902 structured operations for JSON/YAML documents | RFC 6902 |\n| LSP TextEdit\
+  \ | Range-based in-editor modification | LSP spec v3.17 |\n| Context lines | Unchanged lines surrounding a hunk -- anchor\
+  \ for application | diff manual |\n| Conflict marker | <<<<<< / ====== / >>>>>> merge conflict syntax | Git |\n\n## Industry\
+  \ Standards\n\n| Standard | Notes |\n|----------|-------|\n| RFC 6902 | JSON Patch -- `add`, `remove`, `replace`, `move`,\
+  \ `copy`, `test` |\n| POSIX diff -u | Unified diff format -- `---`, `+++`, `@@ -n,m +n,m @@` |\n| LSP spec v3.17 | TextEdit,\
+  \ WorkspaceEdit for editor-level changes |\n| Aider edit formats | WHOLE / DIFF / UDIFF / SEARCH-REPLACE (see aider.chat/docs)\
+  \ |\n| Cursor apply | Search-replace variant with triple-backtick fencing |\n| RFC 5261 | XML Patch -- analogous to JSON\
+  \ Patch for XML |\n\n## Common Patterns\n\n1. Default to search-replace for LLM coding agents -- no line number drift, explicit\
+  \ context\n2. WHOLE for new files -- nothing to match, full content is always correct\n3. Unified diff for git integration\
+  \ -- output can be piped to `git apply` directly\n4. Multiple hunks per response -- apply sequentially top-to-bottom to\
+  \ avoid offset shifts\n5. Include file path in every format -- host tool needs path to locate file\n\n## Pitfalls\n\n- Using\
+  \ line numbers as anchors -- they change with every edit and cause misapplication\n- SEARCH block with loose whitespace\
+  \ matching -- exact match is required for reliability\n- Missing file path in WHOLE mode -- host cannot determine target\
+  \ file\n- Applying hunks out of order -- later hunks have shifted line numbers after earlier ones apply\n- Confusing edit_format\
+  \ (wire format) with diff_strategy (algorithm) -- they are separate concerns\n- Citing RFC 6943 for JSON Patch -- that RFC\
+  \ does not exist; correct reference is RFC 6902"

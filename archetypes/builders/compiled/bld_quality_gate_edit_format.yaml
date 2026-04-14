@@ -1,0 +1,35 @@
+kind: quality_gate
+id: p06_qg_edit_format
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for edit_format
+quality: null
+title: Quality Gate Edit Format
+version: 1.0.0
+author: wave1_builder_gen
+tags:
+- edit_format
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for edit_format
+domain: edit_format construction
+created: '2026-04-13'
+updated: '2026-04-13'
+density_score: 0.85
+definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| File Format Compliance | 100% | equals |\
+  \ All host files |"
+hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML Valid | Invalid YAML syntax |  \n| H02 | ID\
+  \ matches pattern | ID does not match [a-zA-Z0-9_]+ |  \n| H03 | kind matches | kind ≠ \"edit_format\" |  \n| H04 | Required\
+  \ fields present | Missing 'action' or 'path' |  \n| H05 | Syntax valid | Malformed JSON or YAML |  \n| H06 | File size\
+  \ limit | Size > 10MB |  \n| H07 | Metadata present | Missing 'author' or 'timestamp' |  \n| H08 | Checksum valid | SHA-256\
+  \ mismatch |"
+soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | YAML Structure | 0.15 | 1.0 for\
+  \ valid, 0.5 for minor issues |  \n| D02 | ID Pattern | 0.15 | 1.0 for match, 0.0 for mismatch |  \n| D03 | Kind Consistency\
+  \ | 0.10 | 1.0 for correct, 0.0 for incorrect |  \n| D04 | Metadata Completeness | 0.15 | 1.0 for full, 0.5 for partial\
+  \ |  \n| D05 | Syntax Quality | 0.15 | 1.0 for clean, 0.0 for errors |  \n| D06 | File Size | 0.05 | 1.0 for ≤10MB, 0.0\
+  \ for >10MB |  \n| D07 | Checksum Validity | 0.10 | 1.0 for valid, 0.0 for invalid |  \n| D08 | Documentation | 0.15 | 1.0\
+  \ for clear, 0.5 for vague |"
+actions: "| Score | Action |  \n|---|---|  \n| ≥9.5 | Automatically merge and notify |  \n| ≥8.0 | Schedule for review | \
+  \ \n| ≥7.0 | Request changes |  \n| <7.0 | Block and require fixes |"
+bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Critical hotfix with emergency approval | Senior Architect\
+  \ | Email confirmation, system log entry |"

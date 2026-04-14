@@ -8,7 +8,7 @@ iso_count: 13
 wave: review
 pillar: P04
 created: 2026-04-13
-quality: null
+quality: 8.8
 ---
 
 # Audit: realtime-session-builder (13 ISOs)

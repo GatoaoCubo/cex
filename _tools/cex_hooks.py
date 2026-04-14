@@ -482,6 +482,46 @@ def check_yaml_valid(staged_files: list[str]) -> int:
     return errors
 
 
+def check_wave_validator(staged_files: list[str]) -> int:
+    """Run cex_wave_validator.py on staged builder ISOs.
+
+    Catches 7 systemic defects (llm_function mismatch, self-scored quality,
+    id pattern issues, missing domain keywords, foreign-domain leakage,
+    unresolved placeholders, incomplete frontmatter).
+    Returns error count (0 = clean, 1 = any failures).
+    """
+    iso_staged = [f for f in staged_files
+                  if f.endswith(".md")
+                  and "archetypes/builders/" in f.replace("\\", "/")
+                  and Path(f).name.startswith("bld_")]
+    if not iso_staged:
+        return 0
+
+    validator = CEX_ROOT / "_tools" / "cex_wave_validator.py"
+    if not validator.exists():
+        print("  wave_validator_check: SKIP (cex_wave_validator.py not found)")
+        return 0
+
+    print("  wave_validator_check: validating %d staged ISO(s)..." % len(iso_staged))
+    try:
+        result = subprocess.run(
+            [sys.executable, str(validator), "--staged"],
+            capture_output=True, text=True, timeout=60,
+        )
+        out = result.stdout.strip()
+        if out:
+            for line in out.split("\n"):
+                print("    " + line)
+        if result.returncode != 0:
+            print("    [FAIL] cex_wave_validator found ISO defects")
+            return 1
+        print("  wave_validator_check: PASS")
+        return 0
+    except Exception as e:
+        print("  wave_validator_check: SKIP (%s)" % e)
+        return 0
+
+
 def run_pre_commit() -> int:
     """Pre-commit hook: validate staged files.
 
@@ -491,6 +531,7 @@ def run_pre_commit() -> int:
     3. PowerShell parse: AST validation for staged .ps1
     4. YAML validation: syntax check for staged .yaml/.yml
     5. Sanitize check: cex_sanitize.py --check on staged _tools/*.py
+    6. Wave validator: 7 systemic checks on staged builder ISOs
     """
     try:
         result = subprocess.run(
@@ -536,6 +577,9 @@ def run_pre_commit() -> int:
 
     # 5. Sanitize check -- cex_sanitize.py on staged _tools/*.py
     errors += check_sanitize(all_staged)
+
+    # 6. Wave validator -- 7 systemic checks on staged builder ISOs
+    errors += check_wave_validator(all_staged)
 
     if errors:
         print(f"\npre-commit: BLOCKED -- {errors} error(s). Fix before committing.")
