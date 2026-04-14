@@ -1,0 +1,163 @@
+kind: collaboration
+id: bld_collaboration_agent_name_service_record
+pillar: P12
+llm_function: COLLABORATE
+purpose: Crew contracts defining what this builder receives from and produces for other kinds
+quality: null
+title: Agent Name Service Record Builder -- Collaboration
+version: 1.0.0
+author: wave7_n05
+tags:
+- agent_name_service_record
+- builder
+- collaboration
+tldr: 'Receives from: agent_card, secret_config, transport_config. Produces for: search_tool, lifecycle_rule, agent_card.'
+domain: agent_name_service_record construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: 'This builder is the ANS registration specialist in the multi-agent crew.
+
+  It handles IETF ANS and CNCF AgentDNS registry-record construction for production
+
+  operators including GoDaddy and Salesforce MuleSoft Agent Fabric.
+
+  It translates agent definitions (agent_card, agent) into registry-records that
+
+  make agents discoverable across IETF ANS and CNCF AgentDNS networks.
+
+
+  | Role attribute | Value |
+
+  |---------------|-------|
+
+  | Nucleus | N03 (Build/Create) or N05 (Operations/Deploy) |
+
+  | Phase | Late in agent lifecycle -- after agent_card is drafted |
+
+  | Blocking | Yes -- downstream discovery depends on this record |
+
+  | Parallel-safe | Yes -- one ANS record per agent, no shared state |'
+receives_from: '| Source kind | Pillar | Field extracted | Why needed |
+
+  |------------|--------|----------------|-----------|
+
+  | agent_card | P08 | `capabilities[]` array | Maps to `capability_advertisement.skills` |
+
+  | agent_card | P08 | `endpoint_url` | Primary endpoint for ANS record |
+
+  | agent_card | P08 | `protocol_support[]` | Seeds `protocol_adapters` entries |
+
+  | agent_card | P08 | `agent_name` or `id` | Converted to DNS-like ANS name |
+
+  | secret_config | P09 | `tls_cert_reference` or `pki_cert_id` | Becomes `pki_cert_reference` field |
+
+  | secret_config | P09 | `cert_issuer`, `cert_fingerprint` | Populates PKI-cert reference format |
+
+  | transport_config | P04 | Per-protocol endpoint URLs | Populates `protocol_adapters[].endpoint` |
+
+  | transport_config | P04 | Auth methods per protocol | Populates `protocol_adapters[].auth` |'
+produces_for: '| Target kind | Pillar | Field produced | How used |
+
+  |------------|--------|---------------|---------|
+
+  | search_tool | P04 | `discovery_endpoint` URL | Indexed for runtime agent lookup |
+
+  | lifecycle_rule | P12 | `lifecycle.expires` + `renewal_policy` | Triggers record renewal workflows |
+
+  | agent_card | P08 | `agent_name` (ANS name) | Back-reference in agent card for self-identification |
+
+  | workflow | P12 | `registry_id` (UUID) | References this record in multi-agent orchestration specs |
+
+  | knowledge_index | P10 | Full record content | Indexed for semantic agent discovery |'
+handoff_contract: ''
+incoming_handoff_from_n07_or_n03: 'When this builder receives a build task, the handoff MUST include:
+
+
+  ## Task
+
+  Build an ANS registry-record for agent: {agent_name_or_description}
+
+
+  ## Required context
+
+  - agent_card path: {path_to_agent_card}
+
+  - secret_config path: {path_to_secret_config} (if PKI cert available)
+
+  - transport_config path: {path_to_transport_config} (if available)
+
+  - registry_operator: {godaddy|salesforce|cncf|self}
+
+
+  ## Expected output
+
+  - File: P04_tools/p04_ans_{agent_slug}.md
+
+  - Kind: agent_name_service_record
+
+  - Quality target: 9.0+'
+outgoing_signal_on_completion: 'from _tools.signal_writer import write_signal
+
+  write_signal(''n03'', ''complete'', 9.0)
+
+  # or n05 if deployed from operations nucleus'
+outgoing_handoff_to_lifecycle_rule: 'After producing the ANS record, notify the lifecycle management system:
+
+
+  ## Lifecycle alert
+
+  ANS record created: {agent_name}
+
+  Expires: {lifecycle.expires}
+
+  Renewal policy: {renewal_policy}
+
+  Renewal trigger: 30 days before expiry
+
+  Action required: re-register with registry_operator={operator}'
+boundary_definition: '| In scope | Out of scope |
+
+  |----------|-------------|
+
+  | Constructing ANS registry-records | Agent logic, behavior, or code |
+
+  | Declaring protocol-adapter entries | Implementing protocol adapters |
+
+  | Embedding PKI-cert references | Generating or renewing PKI certificates |
+
+  | Setting discovery-endpoint URLs | Building the discovery endpoint server |
+
+  | Managing lifecycle metadata | Executing renewal workflows (that is lifecycle_rule) |
+
+  | CNCF AgentDNS format compliance | Operating the AgentDNS registry infrastructure |
+
+  | Capability advertisement tables | Defining what capabilities the agent DOES (that is agent_card) |'
+concurrency_notes: '| Scenario | Safe? | Notes |
+
+  |----------|-------|-------|
+
+  | Two agents registered simultaneously | YES | Different ANS names = different files |
+
+  | Same agent, two registry operators | YES | Different registry_operator values = different records |
+
+  | Updating existing ANS record | YES (solo) | Update `updated` date, bump version |
+
+  | Updating existing ANS record during grid | PROPOSAL | Write `.proposal.md` per shared-file-proposal rule |
+
+  | Batch registration (10+ agents) | YES | One file per agent, no shared state |'
+integration_with_8f_pipeline: '| 8F Stage | This builder''s action |
+
+  |----------|----------------------|
+
+  | F2 BECOME | Load all 13 ISOs from this directory |
+
+  | F3 INJECT | Read agent_card + secret_config + transport_config |
+
+  | F4 REASON | Phase 1 RESEARCH checklist from bld_instruction |
+
+  | F6 PRODUCE | Fill bld_output_template with resolved data |
+
+  | F7 GOVERN | Run bld_quality_gate H01-H08 + 5D scoring |
+
+  | F8 COLLABORATE | Compile, score, signal, notify lifecycle_rule |'
