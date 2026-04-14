@@ -21,20 +21,23 @@ Central orchestrator for aggregating, versioning, and indexing model
 artifacts, metadata, and lineage into a unified, searchable catalog.
 
 ## Receives From
-| Builder | What | Format |
+
+| Nucleus | What | Format |
 | :--- | :--- | :--- |
-| checkpoint_builder | Model weights & artifacts | .bin, .safetensors |
-| model_card_builder | Model performance metrics | .json, .yaml |
-| data_lineage_builder | Dataset & feature references | .manifest, .parquet |
+| N01 Research | Training run reports, benchmark results, dataset lineage refs | knowledge_card, .yaml |
+| N03 Build | New model artifact entries (weights URI, config, tokenizer) | model_registry draft, .yaml |
+| N04 Knowledge | Domain taxonomy updates, embedding model provenance | knowledge_card, chunk_strategy |
+| N05 Operations | Evaluation outputs, CI test results, deployment configs | eval_metric, env_config |
 
 ## Produces For
-| Builder | What | Format |
+
+| Nucleus | What | Format |
 | :--- | :--- | :--- |
-| deployment_engine | Model lookup & deployment URI | REST API, URI |
-| monitoring_agent | Model version & drift targets | JSON, Prometheus |
-| audit_service | Provenance & compliance logs | Structured Logs |
+| N05 Operations | Registry lookup for deployment: model URI + stage + version | model_registry entry |
+| N04 Knowledge | Embedding model provenance for RAG pipelines | model_registry reference |
+| N07 Orchestrator | Registry status reports for mission gates | knowledge_card |
 
 ## Boundary
-Does not generate weights (checkpoint_builder).
-Does not define single model specs (model_card_builder).
-Does not manage live inference (deployment_engine).
+Does not generate raw model weights (checkpoint kind -- N03 scope).
+Does not define qualitative model specs (model_card kind -- N04 scope).
+Does not manage live inference endpoints (deploy config -- N05 scope).

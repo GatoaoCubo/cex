@@ -17,23 +17,25 @@ density_score: 0.85
 ---
 
 ## Component Inventory
-| Name | Role | Owner | Status |
+
+| Name | Role | CEX Nucleus | Status |
 | :--- | :--- | :--- | :--- |
-| Registry API | Interface | Core Team | Active |
-| Metadata Store | Storage | Data Eng | Active |
-| Artifact Repo | Blob Storage | ML Ops | Active |
-| Schema Validator | Validation | ML Ops | Beta |
-| Version Controller | Logic | Core Team | Active |
-| Audit Logger | Compliance | Security | Active |
+| Registry Entry | Versioned artifact record (frontmatter + lineage) | N04 Knowledge | Active |
+| Schema Validator | Frontmatter + field validation (cex_compile.py) | N05 Operations | Active |
+| Artifact URI Store | Pointer to weights/config/tokenizer on blob storage | N03 Build | Active |
+| Quality Gate | 5D scoring, HARD/SOFT gates (cex_score.py) | N07 Orchestrator | Active |
+| Audit Trail | Git history + commit messages per registry entry | N05 Operations | Active |
+| Lineage Graph | base_model -> parent_version -> training_pipeline chain | N01 Research | Active |
 
 ## Dependencies
+
 | From | To | Type |
 | :--- | :--- | :--- |
-| Registry API | Metadata Store | Data Access |
-| Registry API | Artifact Repo | Blob Access |
-| Schema Validator | Registry API | Integration |
-| Version Controller | Metadata Store | State Sync |
-| Audit Logger | Registry API | Event Stream |
+| Schema Validator | Registry Entry | Validation gate (pre-publish) |
+| Registry Entry | Artifact URI Store | Reference (blob pointer) |
+| Quality Gate | Registry Entry | Score gate (blocks publish < 7.0) |
+| Audit Trail | Registry Entry | Event stream (git commit) |
+| Lineage Graph | Registry Entry | Provenance anchor (base_model ref) |
 
 ## Architectural Position
 The model_registry-builder serves as the central source of truth within the CEX ecosystem, acting as the bridge between experimental ML training pipelines and production inference services. Positioned within the P10 pillar, it provides standardized model versioning, lineage tracking, and lifecycle management, ensuring all downstream deployment components consume validated and audited model artifacts.

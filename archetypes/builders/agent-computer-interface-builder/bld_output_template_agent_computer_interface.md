@@ -16,36 +16,56 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-```yaml
-id: {{aci_id}}
-name: {{aci_name}}
-version: {{aci_version}}
-pillar: P08
-type: agent_computer_interface
-description: {{aci_description}}
-protocol: {{aci_protocol}}
-capabilities:
-  - {{capability_1}}
-  - {{capability_2}}
-auth_method: {{auth_method}}
-```
+Copy this template. Replace every `{{placeholder}}` with real content. Remove placeholder text.
+Use tables over prose. All sections are required.
 
-# `{{aci_name}}` Interface Specification
+```markdown
+---
+id: p08_aci_{{name}}
+kind: agent_computer_interface
+pillar: P08
+title: "{{Interface display name}}"
+version: "1.0.0"
+created: "{{YYYY-MM-DD}}"
+updated: "{{YYYY-MM-DD}}"
+author: "{{author}}"
+domain: "{{terminal|browser|gui|api|file_system|code_execution}}"
+protocol: "{{json_rpc|cli|rest|grpc|mcp}}"
+quality: null
+tags: [agent_computer_interface, {{domain}}, {{protocol}}]
+tldr: "{{One-sentence description of what computing environment this ACI exposes}}"
+---
+
+# `{{Interface display name}}` -- ACI Specification
 
 ## Overview
-`{{aci_summary}}`
+| Attribute | Value |
+|-----------|-------|
+| Interface type | {{terminal / browser / GUI / API / file_system}} |
+| Protocol | {{JSON-RPC 2.0 / CLI / REST / gRPC / MCP}} |
+| Transport | {{Unix socket / HTTP / stdio / TCP}} |
+| Auth method | {{none / token / mTLS / API key}} |
+| Scope | {{What computing environment this ACI exposes}} |
 
-## Protocol & Communication
-`{{aci_protocol_details}}`
+## Action Space
+| Action | Input Schema | Output Schema | Error States |
+|--------|-------------|--------------|--------------|
+| {{action_name}} | {{input fields + types}} | {{output fields + types}} | {{timeout / not_found / forbidden}} |
 
-## Functional Capabilities
-`{{aci_capabilities_list}}`
+## Observation Schema
+| Field | Type | Source | Notes |
+|-------|------|--------|-------|
+| {{field_name}} | {{string/int/bool}} | {{stdout/response_body/accessibility_tree}} | {{when present}} |
 
-## Endpoint Mapping
-`{{aci_endpoint_definitions}}`
+## Error Protocol
+| Code | Meaning | Recovery |
+|------|---------|---------|
+| {{error_code}} | {{human description}} | {{retry / fallback / abort}} |
 
-## Security & Authentication
-`{{aci_security_implementation}}`
-
-## Error Handling
-`{{aci_error_codes}}`
+## Security & Sandboxing
+| Constraint | Value | Enforcement |
+|-----------|-------|------------|
+| Execution scope | {{what is allowed}} | {{sandbox / allowlist / firewall}} |
+| Auth required | {{yes/no}} | {{mechanism}} |
+| Rate limit | {{requests/min}} | {{enforced by}} |
+```

@@ -3,37 +3,57 @@ kind: architecture
 id: bld_architecture_dataset_card
 pillar: P08
 llm_function: CONSTRAIN
-purpose: Component map of dataset_card -- inventory, dependencies
+purpose: 13-ISO component map of the dataset-card-builder
 quality: null
 title: "Architecture Dataset Card"
-version: "1.0.0"
-author: wave1_builder_gen
+version: "1.1.0"
+author: n03_hybrid_review3
 tags: [dataset_card, builder, architecture]
-tldr: "Component map of dataset_card -- inventory, dependencies"
+tldr: "13-ISO builder structure (manifest, system_prompt, instruction, schema, output_template, quality_gate, tools, examples, config, memory, knowledge_card, architecture, collaboration)"
 domain: "dataset_card construction"
 created: "2026-04-13"
-updated: "2026-04-13"
-density_score: 0.85
+updated: "2026-04-14"
+density_score: 0.90
 ---
 
-## Component Inventory
-| Name | Role | Owner | Status |
-| :--- | :--- | :--- | :--- |
-| Template Engine | Markdown Rendering | Core | Active |
-| Metadata Parser | Schema Extraction | Data Eng | Active |
-| Schema Validator | Data Integrity | QA | Active |
-| S3 Connector | Artifact Storage | Infra | Active |
-| UI/CLI Interface | User Interface | Product | Beta |
-| Markdown Generator | File Assembly | Core | Active |
+## Component Inventory (the 13 ISOs)
+| # | ISO File | Kind | Pillar | LLM Function | Role |
+| :-- | :--- | :--- | :--- | :--- | :--- |
+| 1 | bld_manifest_dataset_card.md | type_builder | P01 | BECOME | Identity, capabilities, routing |
+| 2 | bld_system_prompt_dataset_card.md | system_prompt | P03 | BECOME | Persona + scope + quality rules |
+| 3 | bld_instruction_dataset_card.md | instruction | P03 | REASON | DISCOVER -> STRUCTURE -> GOVERN -> EMIT phases |
+| 4 | bld_schema_dataset_card.md | schema | P06 | CONSTRAIN | Frontmatter fields, ID regex, body structure |
+| 5 | bld_output_template_dataset_card.md | output_template | P05 | PRODUCE | Body skeleton with guided placeholders |
+| 6 | bld_quality_gate_dataset_card.md | quality_gate | P11 | GOVERN | HARD H01-H07 + SOFT D1-D9 (weights=1.00) |
+| 7 | bld_tools_dataset_card.md | tools | P04 | CALL | Real cex_* tools + HF/Croissant refs |
+| 8 | bld_examples_dataset_card.md | examples | P07 | GOVERN | Gold-standard exemplars |
+| 9 | bld_config_dataset_card.md | config | P09 | CONSTRAIN | Runtime settings, size caps |
+| 10 | bld_memory_dataset_card.md | memory | P10 | INJECT | Retrieved context per F3 |
+| 11 | bld_knowledge_card_dataset_card.md | knowledge_card | P01 | INJECT | Domain knowledge card |
+| 12 | bld_architecture_dataset_card.md | architecture | P08 | CONSTRAIN | This file |
+| 13 | bld_collaboration_dataset_card.md | collaboration | P12 | COLLABORATE | Downstream nuclei handoff |
 
-## Dependencies
+## ISO Dependencies (build-time load order)
 | From | To | Type |
 | :--- | :--- | :--- |
-| Template Engine | Metadata Parser | Data Flow |
-| Schema Validator | Template Engine | Validation |
-| Markdown Generator | S3 Connector | Persistence |
-| UI/CLI Interface | Schema Validator | Input Check |
-| Metadata Parser | Dataset Registry | Source |
+| system_prompt | manifest | identity inheritance |
+| instruction | schema | must satisfy constraints |
+| output_template | schema | placeholders -> fields |
+| quality_gate | schema | HARD gates check schema fields |
+| examples | output_template | filled instances |
+| tools | instruction | tools called per phase |
 
 ## Architectural Position
-The dataset_card-builder acts as the standardization layer within the CEX ecosystem, bridging raw data ingestion and model training readiness. By automating metadata extraction and documentation, it ensures all datasets within the P01 pillar are auditable, transparent, and compliant with enterprise governance standards for downstream ML pipelines.
+The dataset-card-builder is one of 126 kind-builders in CEX. It produces dataset_card artifacts (pillar P01, `p01_dc_*.md`) via the 8F pipeline. It depends on no other builder at runtime. It is consumed by N04 (knowledge indexing) and N01 (dataset intelligence).
+
+## Pipeline Mapping
+| 8F | Uses ISO |
+| :--- | :--- |
+| F1 CONSTRAIN | schema, architecture |
+| F2 BECOME | manifest, system_prompt |
+| F3 INJECT | knowledge_card, memory |
+| F4 REASON | instruction |
+| F5 CALL | tools |
+| F6 PRODUCE | output_template, examples |
+| F7 GOVERN | quality_gate |
+| F8 COLLABORATE | collaboration |

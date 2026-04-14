@@ -17,23 +17,25 @@ density_score: 0.85
 ---
 
 ## Crew Role
-Architects the structured communication protocol and schema that enables an agent to interact with a specific software environment via defined commands and state updates.
+Architects the structured communication protocol and schema that enables an agent to interact with
+a specific computing environment via defined commands and state updates. Part of the P08
+architecture layer; consumed at F2 BECOME by downstream builder agents.
 
 ## Receives From
-| Builder | What | Format |
+| Builder (CEX) | What | Format |
 | :--- | :--- | :--- |
-| System Architect | System capabilities | JSON/Spec |
-| Domain Expert | Functional requirements | Markdown |
-| Security Auditor | Access constraints | YAML/Policy |
+| agent-builder (P02) | Agent capability requirements | YAML/Markdown |
+| mcp-server-builder (P04) | Available tool definitions | JSON Schema |
+| sandbox-config-builder (P09) | Security boundaries, execution constraints | YAML |
 
 ## Produces For
-| Builder | What | Format |
+| Builder (CEX) | What | Format |
 | :--- | :--- | :--- |
-| Agent Developer | Interface definition | OpenAPI/Schema |
-| Integration Engineer | Implementation glue | Python/TS |
-| Testing Agent | Mock response sets | JSON/CSV |
+| computer-use-builder (P08) | ACI extends with GUI-level control | Markdown/Schema |
+| browser-tool-builder (P04) | Boundary handoff for web interactions | Markdown |
+| agent-computer-interface-builder | Output artifact: agent_computer_interface | Markdown |
 
 ## Boundary
-Does NOT perform web automation or DOM scraping (handled by browser_tool).
-Does NOT perform visual/pixel-based screen control (handled by computer_use).
-Does NOT implement the underlying business logic (handled by domain_logic_agent).
+Does NOT perform web automation or DOM scraping (handled by browser-tool-builder).
+Does NOT perform visual/pixel-based screen control (handled by computer-use-builder).
+Does NOT define agent identity or persona (handled by agent-builder).

@@ -25,7 +25,7 @@ status: production
 lifecycle:
   stage: active
   deprecated: false
-  last_updated: 202    3-10-12
+  last_updated: 2023-10-12
 lineage:
   base_model: "transformer-base-v1"
   parent_version: "2.3.9"

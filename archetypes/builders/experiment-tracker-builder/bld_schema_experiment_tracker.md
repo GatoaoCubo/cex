@@ -29,7 +29,7 @@ density_score: 0.85
 | updated | datetime | Y | N/A | Last modification |
 | author | string | Y | N/A | Document owner |
 | domain | string | Y | N/A | Functional area |
-| quality | string | Y | high | Data reliability |
+| quality | number\|null | Y | null | Peer-review score; null until scored (never self-assign) |
 | tags | list | Y | [] | Metadata tags |
 | tldr | string | Y | N/A | Executive summary |
 | hypothesis | string | Y | N/A | Core assumption |

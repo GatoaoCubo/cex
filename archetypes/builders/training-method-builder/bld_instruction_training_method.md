@@ -29,8 +29,8 @@ density_score: 0.90
 5. Define evaluation strategy: metrics, validation frequency, convergence criteria
 6. Check existing training_method artifacts via retriever -- avoid duplicating a spec that covers the same paradigm and domain
 ## Phase 2: COMPOSE
-1. Read SCHEMA.md -- source of truth for all required fields
-2. Read OUTPUT_TEMPLATE.md -- fill the template following SCHEMA constraints
+1. Read bld_schema_training_method.md -- source of truth for all required fields
+2. Read bld_output_template_training_method.md -- fill the template following schema constraints
 3. Fill all required frontmatter: id, kind, pillar, title, version, learning_paradigm, compute_intensity, quality: null
 4. Write **Overview** section: paradigm choice rationale, target model type, compute justification (1 sentence each)
 5. Write **Learning Paradigm** section: table with paradigm type, objective function, label requirements, typical use cases
@@ -40,7 +40,7 @@ density_score: 0.90
 9. Write **Evaluation** section: table with metrics, validation strategy, convergence criteria
 10. Confirm body <= 4096 bytes
 ## Phase 3: VALIDATE
-1. Check QUALITY_GATES.md -- verify each HARD gate manually
+1. Check bld_quality_gate_training_method.md -- verify each HARD gate manually
 2. Confirm YAML frontmatter parses without errors
 3. Confirm `id` matches naming pattern (e.g., `p02_tm_[a-z][a-z0-9_]+`)
 4. Confirm `learning_paradigm` is from allowed enum: supervised, unsupervised, reinforcement, self_supervised, transfer, hybrid

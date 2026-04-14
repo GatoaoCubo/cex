@@ -21,7 +21,7 @@ Pattern: p10_mr_{name}
 Examples: p10_mr_gpt4, p10_mr_claude_sonnet
 
 ## Paths
-Artifacts: ./registry/p10/artifacts/
+Artifacts: P10_memory/registry/
 
 ## Limits
 max_bytes: 4096

@@ -16,23 +16,22 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Production Tools
+## CEX Tools (real -- in _tools/)
+
 | Tool | Purpose | When |
 | :--- | :--- | :--- |
-| cex_compile.py | Bundles model artifacts | Post-training |
-| cex_score.py | Computes performance metrics | Post-compilation |
-| cex_retriever.py | Fetches models from registry | Inference |
-| cex_doctor.py | Checks registry integrity | Maintenance |
-| cex_deploy.py | Promotes models to production | Deployment |
+| cex_compile.py | Compiles artifact .md to .yaml, validates frontmatter | After saving registry entry |
+| cex_score.py | Scores artifact quality (D1-D5, 5-dimension) | After compile, before publish |
+| cex_retriever.py | TF-IDF similarity search across 2184+ artifacts | Find similar registry entries |
+| cex_doctor.py | Health check: frontmatter, schema, pillar placement | Maintenance, CI gate |
+| cex_hygiene.py | Artifact CRUD with 8 hygiene rules enforced | Cleanup, deduplication |
 
-## Validation Tools
-| Tool | Purpose | When |
+## External References (industry standards, not CEX tools)
+
+| Platform | Registry Concept | Key Fields |
 | :--- | :--- | :--- |
-| val_schema.py | Validates metadata format | Pre-registration |
-| val_drift.py | Detects model drift | Monitoring |
-| val_security.py | Scans for vulnerabilities | Pre-deployment |
-
-## External References
-* MLflow
-* DVC
-* Kubernetes
+| MLflow Model Registry | registered_model, model_version, stage, alias | name, version, stage, tags |
+| W&B Artifacts | artifact, type, version, aliases (latest/best) | name, type, version, metadata |
+| SageMaker Model Registry | model_package, model_package_group, approval_status | ModelPackageGroupName, ModelApprovalStatus |
+| Vertex AI Model Registry | model resource, version, evaluation metrics | displayName, versionId, deployedModels |
+| HuggingFace Hub | model_id, safetensors, GGUF variants, model card | modelId, sha, tags, cardData |

@@ -25,14 +25,10 @@ density_score: 0.85
 | cex_doctor.py | Debug config mismatches | Deployment prep |
 | cex_optimizer.py | Fine-tune bit-width | Optimization loop |
 
-## Validation Tools
-| Tool | Purpose | When |
-| :--- | :--- | :--- |
-| val_metrics.py | Compute perplexity/loss | Validation phase |
-| param_check.py | Verify weight alignment | Pre-deployment |
-| dist_analyzer.py | Analyze weight shifts | Calibration |
-
 ## External References
-* AutoGPTQ
-* bitsandbytes
-* TensorRT-LLM
+| Library | Purpose | When |
+| :--- | :--- | :--- |
+| AutoGPTQ | GPTQ quantization via Python API | GPTQ config validation |
+| AutoAWQ | AWQ quantization via Python API | AWQ config validation |
+| bitsandbytes | int8/int4 quantization (nf4, fp4) | bitsandbytes config |
+| llama.cpp / GGUF | GGUF format generation and inference | GGUF config |

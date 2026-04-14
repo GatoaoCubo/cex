@@ -25,19 +25,20 @@ density_score: 0.85
 6. Identify optimal calibration dataset for scale estimation.
 
 ## Phase 2: COMPOSE
-1. Initialize artifact structure using OUTPUT_TEMPLATE.md.
-2. Map quantization parameters to types in SCHEMA.md.
+1. Initialize artifact structure using bld_output_template_quantization_config.md.
+2. Map quantization parameters to types in bld_schema_quantization_config.md.
 3. Define 'bits' parameter based on precision research.
 4. Configure 'group_size' for weight-clustering density.
-5. Specify 'quant_type' (e.g., 'nf4') per SCHEMA.md.
-6. Implement 'desc_act' settings for activation scaling.
+5. Specify 'quant_type' (e.g., 'nf4') per bld_schema_quantization_config.md.
+6. Implement 'desc_act' settings for activation scaling (GPTQ only).
 7. Set 'zero_point' and 'scale' calculation logic.
 8. Define 'compute_dtype' for dequantization kernels.
-9. Finalize the JSON/YAML block for the CONSTRAIN function.
+9. Set id following naming convention from bld_config_quantization_config.md (p09_qc_*).
 
 ## Phase 3: VALIDATE
-- [ ] Verify all keys strictly match SCHEMA.md definitions.
-- [ ] Check bit-width compatibility with target hardware.
-- [ ] Ensure numerical ranges for scales are within bounds.
-- [ ] Confirm no unsupported quantization methods are listed.
-- [ ] Validate structural integrity against OUTPUT_TEMPLATE.md.
+- [ ] Verify all keys strictly match bld_schema_quantization_config.md definitions.
+- [ ] Check id follows p09_qc_* pattern (HARD gate H02).
+- [ ] Confirm quant_type in {GPTQ, AWQ, GGUF, int8, int4, nf4} (HARD gate H04).
+- [ ] Confirm bits in {2, 3, 4, 8} (HARD gate H05).
+- [ ] Confirm calibration_dataset present for GPTQ/AWQ methods (HARD gate H07).
+- [ ] Validate structural integrity against bld_output_template_quantization_config.md.

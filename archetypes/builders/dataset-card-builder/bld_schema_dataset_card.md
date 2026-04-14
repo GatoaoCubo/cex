@@ -28,7 +28,7 @@ density_score: 0.85
 | updated | datetime | Yes | N/A | Last modification |
 | author | string | Yes | N/A | Data owner/creator |
 | domain | string | Yes | N/A | Data domain/category |
-| quality | string | Yes | high | Reliability score |
+| quality | number\|null | Yes | null | Peer-review score; null until scored (never self-assign) |
 | tags | list | Yes | [] | Metadata keywords |
 | tldr | string | Yes | N/A | One-sentence summary |
 | license | string | Yes | MIT | Usage permissions |

@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW3 Commercial Summary: Wave 2 ML Kinds (N06)"
 version: 1.0.0
-quality: null
+quality: 8.3
 tags: [audit, hybrid_review3, commercial, wave2, ml_kinds, gemma4]
 domain: commercial assessment
 created: "2026-04-14"

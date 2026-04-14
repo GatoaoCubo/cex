@@ -1,5 +1,5 @@
 ---
-kind: learning_record
+kind: memory
 id: p10_lr_agent_computer_interface_builder
 pillar: P10
 llm_function: INJECT
