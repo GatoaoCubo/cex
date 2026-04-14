@@ -47,14 +47,14 @@ density_score: 0.85
 | D07 | Visual clarity | 0.10 | 1.0 (clear) to 0.0 (unclear) |  
 | D08 | Stakeholder alignment | 0.10 | 1.0 (aligned) to 0.0 (disaligned) |  
 
-## Actions  
-(Table: Score | Action)  
-| Score | Action |  
-|---|---|  
-| GOLDEN | >=9.5 | Auto-publish with celebration |  
-| PUBLISH | >=8.0 | Publish to production |  
-| REVIEW | >=7.0 | Require stakeholder review |  
-| REJECT | <7.0 | Reject and rework |  
+## Actions
+(Table: Score | Action)
+| Score | Action |
+|---|---|
+| GOLDEN (>=9.5) | Auto-publish to production |
+| PUBLISH (>=8.0) | Publish with brief UX review |
+| REVIEW (>=7.0) | Require stakeholder review |
+| REJECT (<7.0) | Reject; rework required |
 
 ## Bypass  
 (Table: conditions, approver, audit trail)  

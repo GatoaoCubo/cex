@@ -24,15 +24,18 @@ phase_1_research:
 - Log 50+ user interactions across channels (website, app, email).
 - Synthesize insights into persona-specific journey stages.
 phase_2_compose:
-- 'Structure artifact using SCHEMA.md: stages, emotions, actions.'
+- 'Structure artifact using bld_schema_user_journey.md: stages, emotions, actions.'
 - Write "Awareness" stage with triggers (ads, SEO) and user goals.
 - Map "Consideration" touchpoints (product demos, reviews).
 - Detail "Conversion" barriers (pricing, UX friction).
 - Add "Post-purchase" retention strategies (onboarding, support).
-- Reference OUTPUT_TEMPLATE.md for formatting (tables, flowcharts).
+- Reference bld_output_template_user_journey.md for formatting (tables, flowcharts).
 - Insert empathy maps for each persona (emotions, needs, pain points).
 - Align with business KPIs (e.g., CAC, LTV) in conversion metrics.
 - Finalize narrative with actionable insights for each journey phase.
-phase_3_validate: '[ ] [ ] Stakeholders confirm alignment with business goals. [ ] [ ] Users validate journey accuracy via
-  usability testing. [ ] [ ] Cross-check against SCHEMA.md for completeness. [ ] [ ] Ensure OUTPUT_TEMPLATE.md formatting
-  is consistent. [ ] [ ] Secure sign-off from UX, marketing, and product teams.'
+phase_3_validate:
+- '[ ] [OK] Stakeholders confirm alignment with business goals.'
+- '[ ] [OK] Users validate journey accuracy via usability testing.'
+- '[ ] [OK] Cross-check against bld_schema_user_journey.md for completeness.'
+- '[ ] [OK] Formatting consistent with bld_output_template_user_journey.md.'
+- '[ ] [OK] Journey covers all stages: awareness, consideration, conversion, retention, advocacy.'

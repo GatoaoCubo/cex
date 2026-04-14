@@ -23,8 +23,8 @@ hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID | Check | Fail Conditi
   \ mismatch |  \n| H03 | kind field matches 'customer_segment' | Incorrect kind value |  \n| H04 | Firmographics defined\
   \ | Missing firmographic data (e.g., industry, size) |  \n| H05 | Needs documented | No explicit customer needs or pain\
   \ points |  \n| H06 | ICP alignment verified | No alignment with Ideal Customer Profile |  \n| H07 | Data sources cited\
-  \ | No references to data sources for segment definition |  \n| H08 | Stakeholder approval | No signed-off validation from\
-  \ business stakeholders |"
+  \ | No references to data sources for segment definition |  \n| H08 | ICP scoring methodology documented | No scoring weights\
+  \ or ranking logic present in artifact |"
 soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|\
   \  \n| D01 | Completeness of firmographics | 0.15 | 1.0 = All attributes present |  \n| D02 | ICP alignment | 0.20 | 1.0\
   \ = Perfect match |  \n| D03 | Data accuracy | 0.15 | 1.0 = Verified by 3+ sources |  \n| D04 | Stakeholder input | 0.10\

@@ -1,5 +1,5 @@
-kind: learning_record
-id: p10_lr_referral_program_builder
+kind: memory
+id: p10_mem_referral_program_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for referral_program construction

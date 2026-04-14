@@ -1,5 +1,5 @@
-kind: learning_record
-id: p10_lr_onboarding_flow_builder
+kind: memory
+id: p10_mem_onboarding_flow_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for onboarding_flow construction
