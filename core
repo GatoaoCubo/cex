@@ -1,52 +1,55 @@
 ---
-id: kc_subscription_tier
+id: kc_integration_guide
 kind: knowledge_card
-title: Subscription Tier
+title: Integration Guide
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-# Subscription Tier
+# Integration Guide
 
 ## Purpose
-Define SaaS subscription tiers with pricing models, feature matrices, and implementation guidelines. This includes tier categorization, revenue tracking, and customer segmentation.
+Provide platform partners and paid-tier users with technical specifications, API endpoints, and onboarding workflows for seamless system integration. Covers authentication, data synchronization, and compliance requirements.
 
 ## Structure
-1. **Pricing Models** - Tiered pricing (e.g., $9/mo, $29/mo, $99/mo)
-2. **Feature Matrix** - Core vs premium features (e.g., storage, support, integrations)
-3. **Implementation** - Technical specifications for tier rollout
-4. **Metrics** - Conversion rates, churn rates, revenue per tier
+1. **Onboarding Workflow** - Step-by-step integration process (e.g., API key registration, sandbox testing)
+2. **Technical Requirements** - Supported protocols, rate limits, and error codes
+3. **API Endpoints** - RESTful endpoints for data exchange (e.g., /v1/integrate, /v1/validate)
+4. **Security Guidelines** - OAuth 2.0 implementation, encryption standards, and audit trails
+5. **Compliance** - GDPR, SOC2, and data residency requirements
 
 ## Content Guidelines
-- Use 💳 for pricing icons
-- Add 🚀 to highlight premium features
-- Include "Most Valuable" badge for top tier
-- Use 2-3 sample pricing tiers
-- Add 📊 for data visualization suggestions
+- Use 🔐 for security icons
+- Add 📡 to highlight API endpoints
+- Include "Partner Portal" badge for integration management
+- Use 2-3 sample API requests
+- Add 📊 for performance benchmarking suggestions
 
 ## Example
 ```
-💳 Pricing Models:
-- Basic: $9/mo (Most Valuable)
-- Pro: $29/mo
-- Enterprise: $99/mo
+🔐 Onboarding Workflow:
+1. Register API key in Partner Portal
+2. Validate credentials via /v1/validate endpoint
+3. Test sandbox integration with sample data
+4. Monitor logs in /v1/logs for troubleshooting
 
-🚀 Feature Matrix:
-Core: 10GB storage • 24/7 support • 1 integration
-Premium: 100GB storage • Priority support • 5 integrations
-Enterprise: 1TB storage • Dedicated support • 20 integrations
+📡 API Endpoints:
+- POST /v1/integrate (OAuth 2.0 required)
+- GET /v1/status (check integration health)
+- DELETE /v1/revoke (remove access)
 
-📊 Implementation:
-- Use API-based tier switching
-- Track revenue per plan
-- Monitor churn by tier
+📊 Performance Benchmarks:
+- 99.9% uptime SLA
+- <50ms latency for API calls
+- 10,000+ concurrent connections
 ```
 
 ## Optimization Tips
-- Add heatmaps for feature adoption
-- Include conversion funnels by tier
-- Use animated charts for revenue tracking
-- Add "Pause Subscription" CTA button
-- Include 30-day billing cycle validation
+- Add flowcharts for integration stages
+- Include error code reference tables
+- Use animated API request demos
+- Add "Integration Health Check" dashboard
+- Include 30-day trial period for new partners
+```
 ```
