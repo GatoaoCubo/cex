@@ -25,19 +25,19 @@ density_score: 0.85
 6. Verify compliance with company policies and legal requirements.  
 
 ## Phase 2: COMPOSE  
-1. Outline structure: question, answer, links, metric (per SCHEMA.md).  
+1. Outline structure: question, answer, related_topics, metric (per bld_schema_faq_entry.md).  
 2. Draft question using active voice, avoiding jargon.  
-3. Write canonical answer with step-by-step guidance (max 3 paragraphs).  
+3. Write canonical answer with step-by-step guidance (max 3 paragraphs, <=150 words).  
 4. Embed hyperlinked references to related resources (validate URLs).  
 5. Calculate support deflection metric using historical resolution data.  
-6. Apply OUTPUT_TEMPLATE.md formatting for consistency.  
-7. Review for clarity, conciseness, and alignment with brand tone.  
-8. Cross-check technical terms against product documentation.  
+6. Apply bld_output_template_faq_entry.md formatting for consistency.  
+7. Add Schema.org FAQPage structured data snippet for rich-results eligibility.  
+8. Review for clarity, conciseness, and alignment with brand tone.  
 9. Finalize artifact with metadata (author, date, version).  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ All required fields (question, answer, links, metric) present.  
-- [ ] ✅ Answer resolves issue without ambiguity or missing steps.  
-- [ ] ✅ Links are functional and relevant to the topic.  
-- [ ] ✅ Support deflection metric is accurate and up-to-date.  
-- [ ] ✅ Artifact adheres to SCHEMA.md and OUTPUT_TEMPLATE.md specs.
+- [ ] All required fields (question, answer, related_topics, metric) present per bld_schema_faq_entry.md.  
+- [ ] Answer resolves issue without ambiguity or missing steps.  
+- [ ] Schema.org FAQPage snippet included in output template.  
+- [ ] Support deflection metric is accurate and up-to-date.  
+- [ ] Artifact adheres to bld_schema_faq_entry.md and bld_output_template_faq_entry.md specs.

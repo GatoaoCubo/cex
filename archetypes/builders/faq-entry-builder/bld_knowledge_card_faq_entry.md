@@ -22,22 +22,22 @@ FAQ entries are structured artifacts used in customer support systems to central
 ## Key Concepts  
 | Concept | Definition | Source |  
 |---|---|---|  
-| Canonical Answer | Authoritative, unambiguous response to a question | ISO/IEC 25010:2011 (System Quality Requirements) |  
-| Support Deflection | Reduction in agent-handled tickets via self-service | Gartner "Customer Self-Service" Report (2022) |  
-| Question Normalization | Standardizing phrasing to group similar queries | NISTIR 8259 (AI/ML Ethics Guidelines) |  
-| Link Taxonomy | Hierarchical categorization of related resources | RFC 7159 (JSON Data Interchange) |  
-| Answer Confidence Score | Metric quantifying answer reliability (0–1) | ACM CHI 2021: "Trust in AI Systems" |  
-| Multilingual Support | Duplicate entries translated for global audiences | ISO 639-1 (Language Codes) |  
-| Answer Versioning | Tracking changes to canonical answers over time | Git (Version Control System) |  
-| Accessibility Compliance | Ensuring content meets WCAG 2.1 standards | W3C WCAG 2.1 (2018) |  
+| FAQPage | Schema.org structured data type enabling Google rich results (expandable Q&A in SERPs) | Schema.org/FAQPage |  
+| Rich Results | Enhanced Google SERP listings; FAQPage eligible when all questions visible on page | Google Search Central |  
+| Canonical Answer | Authoritative, unambiguous response; max 150 words for optimal self-service resolution rate | ISO/IEC 25010:2011 |  
+| Support Deflection | Reduction in agent-handled tickets via self-service; measured as % resolved without agent | Gartner "Customer Self-Service" Report (2022) |  
+| Question Normalization | Standardizing phrasing using imperative verbs ("How do I...") to group similar queries | Knowledge Management Institute |  
+| Answer Versioning | Tracking changes to canonical answers over time; use updated field + changelog | Git / KB platform versioning |  
+| Accessibility Compliance | Ensuring content meets WCAG 2.1 standards (plain language, no jargon, alt text) | W3C WCAG 2.1 (2018) |  
+| Deflection Rate | % of support inquiries resolved via self-service FAQ without agent escalation | Zendesk Support Benchmark Report |  
 
 ## Industry Standards  
+- Schema.org FAQPage (structured data for Google rich results eligibility)  
+- Google Search Central: FAQ rich results requirements (max 100 chars per Q, 1000 chars per A)  
 - ISO/IEC 25010:2011 (System Quality Requirements)  
-- RFC 7159 (JSON Data Interchange)  
-- NIST SP 800-63B (Authentication and Lifecycle Management)  
-- ACID Properties (Database Transaction Standards)  
 - WCAG 2.1 (Web Accessibility Guidelines)  
-- DAML-ONT (Knowledge Representation Ontology)  
+- Zendesk/Intercom KB structure patterns (self-service deflection best practices)  
+- Gartner "Customer Self-Service" Report (support deflection benchmarks)  
 
 ## Common Patterns  
 1. Use imperative verbs in questions (e.g., "How do I reset my password?").  

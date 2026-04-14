@@ -23,11 +23,11 @@ component_inventory: '| ISO Name              | Role                            
 
   |-----------------------|------------------------------------|--------|---------|
 
-  | bld_manifest          | Builder identity and routing       | P05    | Active  |
+  | bld_manifest          | Builder identity and routing       | P11    | Active  |
 
   | bld_instruction       | Production process (3 phases)      | P03    | Active  |
 
-  | bld_system_prompt     | LLM persona and rules              | P12    | Active  |
+  | bld_system_prompt     | LLM persona and rules              | P03    | Active  |
 
   | bld_schema            | Renewal workflow data structure    | P06    | Active  |
 

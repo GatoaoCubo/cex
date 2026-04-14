@@ -16,40 +16,45 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Definition  
-(metric | threshold | operator | scope)  
-support_deflection_metric | 20% | > | per entry  
+## Definition
+| Metric | Threshold | Operator | Scope |
+|--------|-----------|----------|-------|
+| support_deflection_metric | 20% | > | per entry |
+| canonical answer length | <=150 words | <= | answer field |
+| required field completeness | 100% | == | all frontmatter fields |
 
-## HARD Gates  
-(ID | Check | Fail Condition)  
-H01 | YAML frontmatter valid | invalid YAML  
-H02 | ID matches ^p01_faq_[a-z][a-z0-9_]+.md$ | invalid pattern  
-H03 | kind field matches 'faq_entry' | incorrect kind  
-H04 | question field exists and is non-empty | missing or empty question  
-H05 | canonical answer exists and is non-empty | missing or empty answer  
-H06 | related_links are valid URLs | invalid or missing URLs  
-H07 | support_deflection_metric is numeric | non-numeric value  
-H08 | no duplicate questions in same document | duplicate question found  
+## HARD Gates
+| ID | Check | Fail Condition |
+|----|-------|----------------|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+| H02 | ID matches ^p01_faq_[a-z][a-z0-9_]+.md$ | ID format mismatch |
+| H03 | kind field = faq_entry | Kind field incorrect or missing |
+| H04 | question field exists and is non-empty | Missing or empty question |
+| H05 | answer field exists and is non-empty | Missing or empty canonical answer |
+| H06 | related_topics array present and non-empty | Missing related topics list |
+| H07 | support_deflection_metric is numeric | Non-numeric value or absent |
+| H08 | Schema.org FAQPage snippet present in output | Missing structured data |
 
-## SOFT Scoring  
-(Dim | Dimension | Weight | Scoring Guide)  
-Clarity | Question phrasing | 0.15 | Clear, concise, user-focused  
-Completeness | Answer covers all aspects | 0.15 | Full resolution, no ambiguity  
-Usability | Links and formatting | 0.10 | Valid links, proper markdown  
-Accuracy | Factually correct | 0.15 | Aligned with policies/operations  
-Consistency | Tone and style | 0.10 | Matches brand guidelines  
-Support Deflection | Metric relevance | 0.15 | Directly ties to support reduction  
-Accessibility | Language simplicity | 0.10 | Avoids jargon, plain English  
-Formatting | Adheres to schema | 0.10 | Correct structure, no errors  
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D01 | Question clarity (imperative verb, user language, specific) | 0.20 | All 3 criteria met = 1.0, 2 = 0.6, <2 = 0 |
+| D02 | Answer completeness (resolves root cause, no follow-up needed) | 0.20 | Full resolution = 1.0, partial = 0.5, vague = 0 |
+| D03 | Schema.org FAQPage compliance (correct type, acceptedAnswer) | 0.20 | Fully compliant = 1.0, partial = 0.5, absent = 0 |
+| D04 | Support deflection metric present and quantified | 0.15 | Numeric with % = 1.0, present unquantified = 0.5, absent = 0 |
+| D05 | Related topics coverage (>=2 valid links) | 0.15 | >=2 = 1.0, 1 = 0.5, 0 = 0 |
+| D06 | Accessibility (no jargon, plain language, WCAG compliant) | 0.10 | All criteria met = 1.0, partial = 0.5 |
 
-## Actions  
-(Score | Action)  
-GOLDEN | >=9.5 | Auto-publish, no review  
-PUBLISH | >=8.0 | Publish after approval  
-REVIEW | >=7.0 | Require editorial review  
-REJECT | <7.0 | Reject, rework required  
+## Actions
+| Label | Score | Action |
+|-------|-------|--------|
+| GOLDEN | >=9.5 | Auto-publish, no review |
+| PUBLISH | >=8.0 | Publish after editorial approval |
+| REVIEW | >=7.0 | Require editorial review |
+| REJECT | <7.0 | Reject, rework required |
 
-## Bypass  
-(conditions | approver | audit trail)  
-Urgent support fix | Senior Editor | Ticket #12345  
-Legacy entry update | Product Manager | Change log v2.1
+## Bypass
+| Conditions | Approver | Audit Trail |
+|------------|----------|-------------|
+| Urgent support fix (<2h deadline) | Senior Editor | Incident ticket ID |
+| Legacy entry critical update | Product Manager | Change log entry |

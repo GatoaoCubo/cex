@@ -17,21 +17,19 @@ density_score: 0.85
 ---
 
 ## Production Tools
-| Tool               | Purpose                                    | When                            |
-|--------------------|--------------------------------------------|---------------------------------|
-| cex_compile.py     | Compile renewal workflow YAML artifacts    | After artifact generation       |
-| cex_score.py       | Score stage completeness and GRR model     | Post-generation quality check   |
-| cex_retriever.py   | Fetch similar renewal workflows            | During F3 INJECT phase          |
-| cex_doctor.py      | Diagnose schema compliance issues          | Pre-validation checks           |
-| cex_validator.py   | Enforce frontmatter schema rules           | Data ingestion and post-build   |
+| Tool                  | Purpose                                        | When                          |
+|-----------------------|------------------------------------------------|-------------------------------|
+| cex_compile.py        | Compile .md to .yaml                           | After every save              |
+| cex_score.py          | Apply peer-review quality score                | Post-production               |
+| cex_retriever.py      | Fetch similar renewal workflow artifacts       | During F3 INJECT              |
+| cex_doctor.py         | Diagnose schema and frontmatter issues         | Pre-publish validation        |
+| cex_wave_validator.py | Validate domain keywords and ISO completeness  | Post-build CI gate            |
 
 ## Validation Tools
-| Tool               | Purpose                                    | When                            |
-|--------------------|--------------------------------------------|---------------------------------|
-| val_check.py       | Verify stage owner and escalation coverage | Pre-deployment                  |
-| val_audit.py       | Cross-reference GRR model scenarios        | Monthly RevOps reviews          |
-| val_comparator.py  | Detect duplicate renewal workflows         | Before creating new workflow    |
-| val_sanitizer.py   | Clean invalid contract IDs or date formats | Data preprocessing              |
+| Tool                  | Purpose                                        | When                          |
+|-----------------------|------------------------------------------------|-------------------------------|
+| cex_schema_hydrate.py | Enforce schema constraints on frontmatter      | Pre-commit                    |
+| cex_hooks.py          | Pre-commit ASCII and schema checks             | git commit                    |
 
 ## External Integrations
 | System             | Purpose                                    | Integration Type                |

@@ -28,7 +28,7 @@ density_score: 0.85
 | created   | string | yes      | null    | ISO 8601 date                      |  
 | updated   | string | yes      | null    | ISO 8601 date                      |  
 | author    | string | yes      | null    | Author name                        |  
-| domain    | string | yes      | null    | Contextual domain (e.g., `trading`) |  
+| domain    | string | yes      | null    | Contextual domain (e.g., `billing`, `account_management`, `product`) |  
 | quality   | null   | yes      | null    | Never self-score; peer review assigns |  
 | tags      | array  | yes      | `[]`    | Keywords for searchability         |  
 | tldr      | string | yes      | null    | Summary of answer                  |  
@@ -55,7 +55,7 @@ density_score: 0.85
    Detailed, structured response.  
 
 3. **Category**  
-   Contextual grouping (e.g., `security`, `trading`).  
+   Contextual grouping (e.g., `getting_started`, `billing`, `troubleshooting`, `account`, `security`).  
 
 4. **Related Topics**  
    List of linked FAQ entries.  

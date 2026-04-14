@@ -19,9 +19,9 @@ density_score: 0.85
 ## Component Inventory
 | ISO Name              | Role                               | Pillar | Status  |
 |-----------------------|------------------------------------|--------|---------|
-| bld_manifest          | Builder identity and routing       | P05    | Active  |
+| bld_manifest          | Builder identity and routing       | P11    | Active  |
 | bld_instruction       | Production process (3 phases)      | P03    | Active  |
-| bld_system_prompt     | LLM persona and rules              | P12    | Active  |
+| bld_system_prompt     | LLM persona and rules              | P03    | Active  |
 | bld_schema            | Renewal workflow data structure    | P06    | Active  |
 | bld_quality_gate      | GRR/stage completion validation    | P11    | Active  |
 | bld_output_template   | Renewal stage document formatting  | P05    | Active  |
