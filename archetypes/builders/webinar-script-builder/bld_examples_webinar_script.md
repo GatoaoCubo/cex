@@ -122,4 +122,4 @@ and the workflow goes live immediately."
 | No fallback note | If live demo environment fails, presenter has no recovery instruction |
 | Passive voice narration ("you will see") | Weak demo energy -- use active imperative: "Click Workflows. You will see three templates." |
 
-**Fix**: Add [SLIDE X] cue before each logical step. Add [SCREEN: action] for each click. Add [SPEAKER NOTE: pause after publish, let attendees see the confirmation screen]. Add fallback: [SPEAKER NOTE: If demo environment unavailable, switch to recording at {{recording_url}}].
+**Fix**: Add [SLIDE X] cue before each logical step. Add [SCREEN: action] for each click. Add [SPEAKER NOTE: pause after publish, let attendees see the confirmation screen]. Add fallback: [SPEAKER NOTE: If demo environment unavailable, switch to pre-recorded demo video].
