@@ -1,14 +1,14 @@
 ---
-kind: learning_record
-id: p10_lr_prompt_technique_builder
+kind: memory
+id: p10_mem_prompt_technique_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for prompt_technique construction
 quality: null
-title: "Learning Record Prompt Technique"
+title: "Memory Prompt Technique"
 version: "1.0.0"
 author: wave1_builder_gen_v2
-tags: [prompt_technique, builder, learning_record]
+tags: [prompt_technique, builder, memory]
 tldr: "Learned patterns and pitfalls for prompt_technique construction"
 domain: "prompt_technique construction"
 created: "2026-04-14"

@@ -25,19 +25,19 @@ density_score: 0.85
 6. Document requirements for real-time validation and error highlighting  
 
 ## Phase 2: COMPOSE  
-1. Set up project structure using SCHEMA.md for data model alignment  
-2. Define node types in `config/nodes.yaml` per SCHEMA.md specifications  
-3. Implement canvas rendering with SVG for scalable workflow diagrams  
-4. Code drag-and-drop handlers using OUTPUT_TEMPLATE.md event hooks  
-5. Create property panels for node configuration (inputs/outputs)  
-6. Integrate validation rules from SCHEMA.md into workflow engine  
-7. Add persistence layer for saving/load workflows as JSON  
-8. Implement zoom/pan controls for complex workflow layouts  
+1. Define node schema using bld_schema_visual_workflow.md for data model alignment  
+2. Specify node types (trigger, action, condition, output) with input/output ports  
+3. Define edge schema: connection type, data type, cardinality  
+4. Map workflow DSL to visual representation (Mermaid-compatible node/edge schema)  
+5. Apply bld_output_template_visual_workflow.md for final artifact structure  
+6. Integrate validation rules from bld_schema_visual_workflow.md into workflow engine  
+7. Add persistence layer: serialize/deserialize workflow as JSON  
+8. Document visual layout conventions: left-to-right flow, color-coded node types  
 9. Finalize artifact with versioning and export capabilities  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ Verify schema compliance for all node types  
-[ ] ✅ Test drag-and-drop with 100+ node load scenarios  
-[ ] ✅ Confirm error highlighting for invalid connections  
-[ ] ✅ Validate export/import roundtrip integrity  
-[ ] ✅ Ensure documentation matches OUTPUT_TEMPLATE.md specs
+[ ] Frontmatter complete and valid YAML  
+[ ] Node schema complete with all required fields  
+[ ] Edge connections validated (no orphaned nodes)  
+[ ] Conforms to bld_output_template_visual_workflow.md structure  
+[ ] Compatible with at least one DSL standard (Mermaid, LangGraph, n8n)

@@ -25,18 +25,18 @@ density_score: 0.85
 6. Document security constraints for sensitive graph data  
 
 ## Phase 2: COMPOSE  
-1. Initialize config with SCHEMA.md's base structure  
-2. Define node types per OUTPUT_TEMPLATE.md's entity hierarchy  
+1. Initialize config with bld_schema_graph_rag_config.md base structure  
+2. Define node types per bld_output_template_graph_rag_config.md entity hierarchy  
 3. Map data sources to graph injection endpoints  
 4. Configure edge weighting parameters (confidence, relevance)  
 5. Implement query injection patterns from schema  
 6. Set retrieval path limits (max hops, depth)  
 7. Embed validation hooks per schema constraints  
-8. Write config using OUTPUT_TEMPLATE.md's syntax  
+8. Write config using bld_output_template_graph_rag_config.md syntax  
 9. Add metadata for versioning and dependency tracking  
 
 ## Phase 3: VALIDATE  
-- [ ] Schema compliance check against SCHEMA.md  
+- [ ] Schema compliance check against bld_schema_graph_rag_config.md  
 - [ ] Data integrity verification (node/edge consistency)  
 - [ ] Injection point stress testing with sample queries  
 - [ ] Retrieval accuracy benchmarking (precision/recall)  

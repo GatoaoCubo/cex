@@ -1,14 +1,14 @@
 ---
-kind: learning_record
-id: p10_lr_trajectory_eval_builder
+kind: memory
+id: p10_mem_trajectory_eval_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for trajectory_eval construction
 quality: null
-title: "Learning Record Trajectory Eval"
+title: "Memory Trajectory Eval"
 version: "1.0.0"
 author: wave1_builder_gen_v2
-tags: [trajectory_eval, builder, learning_record]
+tags: [trajectory_eval, builder, memory]
 tldr: "Learned patterns and pitfalls for trajectory_eval construction"
 domain: "trajectory_eval construction"
 created: "2026-04-14"

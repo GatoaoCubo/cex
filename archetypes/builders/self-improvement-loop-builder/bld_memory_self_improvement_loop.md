@@ -1,14 +1,14 @@
 ---
-kind: learning_record
-id: p10_lr_self_improvement_loop_builder
+kind: memory
+id: p10_mem_self_improvement_loop_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for self_improvement_loop construction
 quality: null
-title: "Learning Record Self Improvement Loop"
+title: "Memory Self Improvement Loop"
 version: "1.0.0"
 author: wave1_builder_gen_v2
-tags: [self_improvement_loop, builder, learning_record]
+tags: [self_improvement_loop, builder, memory]
 tldr: "Learned patterns and pitfalls for self_improvement_loop construction"
 domain: "self_improvement_loop construction"
 created: "2026-04-14"

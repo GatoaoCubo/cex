@@ -5,39 +5,50 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for memory_architecture
 quality: null
-title: "Instruction Memory Architecture"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+title: "Instruction: memory_architecture-builder"
+version: "2.0.0"
+author: n06_commercial
 tags: [memory_architecture, builder, instruction]
-tldr: "Step-by-step production process for memory_architecture"
-domain: "memory_architecture construction"
+tldr: "8F production process for LLM agent memory architecture: load schema, define layers, specify backends, map eviction policy, add tier matrix"
+domain: "LLM agent memory systems"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.90
 ---
 
-## Phase 1: RESEARCH  
-1. Analyze memory hierarchy (cache, RAM, storage) for latency/throughput tradeoffs.  
-2. Evaluate DRAM, SRAM, and non-volatile memory (NVM) technologies for use case compatibility.  
-3. Study access patterns (sequential, random, burst) to define bandwidth requirements.  
-4. Investigate error correction codes (ECC, parity) and reliability metrics.  
-5. Benchmark existing architectures for performance bottlenecks.  
-6. Document memory addressing schemes (linear, segmented, virtual).  
+## Phase 1: RESEARCH
 
-## Phase 2: COMPOSE  
-1. Define memory layers per SCHEMA.md (e.g., L1/L2/L3 cache, main memory).  
-2. Map components to OUTPUT_TEMPLATE.md’s structure (modules, interfaces, parameters).  
-3. Outline data flow between memory controllers and processors.  
-4. Specify cache coherence protocols (MESI, MOESI) in detail.  
-5. Detail ECC implementation for error detection/correction.  
-6. Integrate memory bandwidth calculations (transfer rate, latency).  
-7. Write module descriptions using OUTPUT_TEMPLATE.md’s terminology.  
-8. Align memory hierarchy with SCHEMA.md’s abstraction levels.  
-9. Finalize artifact with cross-references to schema and template.  
+1. Identify the agent type and primary use case (customer support, research, coding, etc.).
+2. Determine which memory layers are required: working (always), episodic (if multi-session),
+   semantic (if fact-heavy), procedural (if skill-driven).
+3. Map the agent's target commercial tier (free/pro/enterprise) against the tier matrix
+   in bld_knowledge_card_memory_architecture.md.
+4. Review reference architectures: MemGPT/Letta for hierarchical design, Zep for
+   temporal graphs, mem0 for selective extraction, Cognee for knowledge graphs.
+5. Identify storage constraints: vector DB provider, graph DB availability, KV store limits.
+6. Check bld_schema_memory_architecture.md for required frontmatter and body structure.
 
-## Phase 3: VALIDATE  
-- [ ] ✅ Schema compliance: All modules match SCHEMA.md’s definitions.  
-- [ ] ✅ Technical accuracy: Latency/bandwidth claims match research benchmarks.  
-- [ ] ✅ Use case alignment: Memory design supports P10’s INJECT function.  
-- [ ] ✅ Peer review: No logical inconsistencies in hierarchy or protocols.  
-- [ ] ✅ Output format: OUTPUT_TEMPLATE.md’s structure fully implemented.
+## Phase 2: COMPOSE
+
+1. Write frontmatter per bld_schema_memory_architecture.md (all required fields, quality: null).
+2. Write Overview section: agent type, memory goals, which layers are active and why.
+3. Write Memory Layer Definitions table:
+   - Columns: Layer | Backend | Retention | Tier Required | Notes
+   - Row per active layer with concrete backend (e.g., "pgvector", "Neo4j", "Redis").
+4. Write Storage Backends section: one subsection per active layer with backend config.
+5. Write Read Pipeline: step-by-step retrieval flow from query to context injection.
+6. Write Write Pipeline: step-by-step extraction/classification/storage after generation.
+7. Write Eviction Policy: per-layer strategy (LRU, LFU, TTL, importance score).
+8. Write Commercial Tier Matrix: FREE vs. PRO vs. ENTERPRISE feature differences.
+9. Write Integration Points: cross-reference consolidation_policy and procedural_memory kinds.
+
+## Phase 3: VALIDATE
+
+- [ ] Schema compliance: all required frontmatter fields present, ID matches pattern.
+- [ ] Domain accuracy: all content describes LLM agent memory, not hardware memory.
+- [ ] Layer completeness: working layer present; other layers justified or excluded.
+- [ ] Tier matrix present: FREE/PRO/ENTERPRISE differentiation explicit.
+- [ ] Industry references: at least one system cited (MemGPT, Zep, mem0, Cognee, LangMem).
+- [ ] Eviction policy specified: no layer left with unbounded retention.
+- [ ] quality: null in frontmatter (never self-score).
+- [ ] No Unicode characters in body (ASCII only per ascii-code-rule.md).

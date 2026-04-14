@@ -25,19 +25,19 @@ density_score: 0.85
 6. Document findings in a research summary for stakeholder alignment.  
 
 ## Phase 2: COMPOSE  
-1. Set up environment with dependencies from SCHEMA.md.  
-2. Define reranker_config structure using SCHEMA.md fields.  
+1. Set up environment with dependencies from bld_schema_reranker_config.md.  
+2. Define reranker_config structure using bld_schema_reranker_config.md fields.  
 3. Select model type (e.g., `bert`, `dpr`) and version.  
 4. Configure hyperparameters (e.g., `top_k`, `temperature`).  
 5. Implement reranking strategy logic (e.g., `hybrid`, `threshold`).  
-6. Integrate with retrieval pipeline using OUTPUT_TEMPLATE.md.  
+6. Integrate with retrieval pipeline using bld_output_template_reranker_config.md.  
 7. Add metadata (e.g., `created_by`, `last_modified`).  
 8. Write inline comments explaining non-obvious configurations.  
 9. Finalize config file with validation checks enabled.  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ Validate schema compliance with SCHEMA.md  
-[ ] ✅ Confirm model compatibility with system requirements  
-[ ] ✅ Test reranking strategy on sample data  
-[ ] ✅ Verify performance metrics (e.g., NDCG, latency)  
-[ ] ✅ Ensure documentation matches OUTPUT_TEMPLATE.md
+[ ] Validate schema compliance with bld_schema_reranker_config.md  
+[ ] Confirm model compatibility with system requirements  
+[ ] Test reranking strategy on sample data  
+[ ] Verify performance metrics (e.g., NDCG, latency)  
+[ ] Ensure documentation matches bld_output_template_reranker_config.md

@@ -25,19 +25,19 @@ density_score: 0.85
 6. Evaluate prior prompt templates for adaptability.  
 
 ## Phase 2: COMPOSE  
-1. Initialize schema with `modalities` array (ref: SCHEMA.md).  
+1. Initialize schema with `modalities` array (ref: bld_schema_multimodal_prompt.md).  
 2. Define `vision` parameters: resolution, object labels, spatial relations.  
 3. Define `audio` parameters: duration, frequency ranges, semantic tags.  
 4. Define `text` parameters: language, sentiment, entity references.  
 5. Align modalities via `cross_ref` keys (e.g., `vision.id == audio.object_id`).  
-6. Structure prompt using `INJECT` syntax (ref: OUTPUT_TEMPLATE.md).  
+6. Structure prompt using `INJECT` syntax (ref: bld_output_template_multimodal_prompt.md).  
 7. Embed example triples: `<modality>:<value>:<context>`.  
-8. Validate schema compliance with SCHEMA.md validation rules.  
+8. Validate schema compliance with bld_schema_multimodal_prompt.md validation rules.  
 9. Finalize with modality-specific placeholders for runtime injection.  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ All modalities present in `modalities` array  
-[ ] ✅ Cross-modal references resolve consistently  
-[ ] ✅ Technical constraints match dataset capabilities  
-[ ] ✅ Example triples align with domain use cases  
-[ ] ✅ Output conforms to OUTPUT_TEMPLATE.md structure
+[ ] All modalities present in `modalities` array  
+[ ] Cross-modal references resolve consistently  
+[ ] Technical constraints match dataset capabilities  
+[ ] Example triples align with domain use cases  
+[ ] Output conforms to bld_output_template_multimodal_prompt.md structure
