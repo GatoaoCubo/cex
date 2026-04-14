@@ -1,0 +1,32 @@
+kind: examples
+id: bld_examples_subscription_tier
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of subscription_tier artifacts
+quality: null
+title: Examples Subscription Tier
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- subscription_tier
+- builder
+- examples
+tldr: Golden and anti-examples of subscription_tier artifacts
+domain: subscription_tier construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nkind: subscription_tier\nname: Notion Team Plan\nprovider: Notion\npricing: \"$15/user/month\"\nfeatures:\n\
+  \  - Unlimited pages\n  - Collaborative editing\n  - Priority support\n  - 5GB storage\nbilling_cycle: monthly\nlimitations:\n\
+  \  - No advanced analytics\n  - Limited integrations\n\nNotion's Team Plan offers scalable collaboration tools for small\
+  \ teams. Pricing is transparent with a monthly billing cycle. Features include real-time editing and storage, but lacks\
+  \ advanced analytics for data-driven teams."
+anti_example_1_missing_pricing: "---\nkind: subscription_tier\nname: Slack Premium\nprovider: Slack\nfeatures:\n  - Unlimited\
+  \ messages\n  - Custom emojis\n  - Advanced security\nbilling_cycle: annual"
+? why_it_fails_no_pricing_details_make_the_tier_definition_incomplete_users_cannot_evaluate_cost_benefit_without_knowing_the_price
+: ''
+anti_example_2_content_monetization_mix: "---\nkind: subscription_tier\nname: Substack Creator Tier\nprovider: Substack\n\
+  pricing: \"$10/reader/month\"\nfeatures:\n  - Custom domain\n  - Email analytics\n  - Affiliate program access\nbilling_cycle:\
+  \ yearly"
+? why_it_fails_focuses_on_content_monetization_affiliate_programs_rather_than_saas_subscription_features_violates_boundary_conditions_by_conflating_pricing_models
+: ''

@@ -1,0 +1,41 @@
+kind: quality_gate
+id: p11_qg_subscription_tier
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for subscription_tier
+quality: null
+title: Quality Gate Subscription Tier
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- subscription_tier
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for subscription_tier
+domain: subscription_tier construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| metric                | threshold       | operator | scope         |  \n|-----------------------|------------------|----------|---------------|\
+  \  \n| Tier uniqueness       | 100%             | ==       | All tiers     |  \n| Pricing consistency   | 0%           \
+  \    | <=       | All tiers     |  \n| Feature completeness  | 95%              | >=       | Feature matrix|"
+hard_gates: "| ID      | Check                     | Fail Condition                                      |  \n|---------|---------------------------|-----------------------------------------------------|\
+  \  \n| H01     | YAML frontmatter valid    | Missing or invalid frontmatter                      |  \n| H02     | ID matches\
+  \ pattern        | ID does not match ^p11_st_[a-z][a-z0-9_]+.yaml$    |  \n| H03     | kind field matches        | kind\
+  \ != 'subscription_tier'                         |  \n| H04     | Tier names are unique     | Duplicate tier names detected\
+  \                       |  \n| H05     | Pricing >= 0              | Negative or missing pricing                       \
+  \  |  \n| H06     | Free tier exists          | No tier with 'free' in name or pricing 0            |  \n| H07     | Feature\
+  \ matrix complete   | Missing required feature categories                 |"
+soft_scoring: "| Dim       | Dimension             | Weight | Scoring Guide                                      |  \n|-----------|------------------------|--------|----------------------------------------------------|\
+  \  \n| D01       | Pricing clarity        | 0.15   | Clear, transparent pricing (1.0)                   |  \n| D02     \
+  \  | Feature completeness   | 0.15   | All features mapped (1.0)                          |  \n| D03       | Tier differentiation\
+  \   | 0.15   | Clear tier distinctions (1.0)                     |  \n| D04       | User experience        | 0.15   | Seamless\
+  \ onboarding (1.0)                          |  \n| D05       | Compliance             | 0.10   | Meets legal/contractual\
+  \ requirements (1.0)         |  \n| D06       | Scalability            | 0.15   | Supports future growth (1.0)         \
+  \              |  \n| D07       | Documentation          | 0.15   | Full tier documentation (1.0)                      |"
+actions: "| Score     | Action                          |  \n|-----------|----------------------------------|  \n| GOLDEN\
+  \    | Auto-publish                     |  \n| PUBLISH   | Manual review required           |  \n| REVIEW    | Escalate\
+  \ to product team         |  \n| REJECT    | Block deployment, fix required   |"
+bypass: "| conditions                  | approver | audit trail           |  \n|-----------------------------|----------|------------------------|\
+  \  \n| Emergency release needed    | CTO      | Documented in JIRA     |  \n| Legacy system compatibility | CTO      | Approved\
+  \ by legal      |"
