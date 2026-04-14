@@ -1,0 +1,29 @@
+kind: tools
+id: bld_tools_roi_calculator
+pillar: P04
+llm_function: CALL
+purpose: Tools available for roi_calculator production
+quality: null
+title: Tools Roi Calculator
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- roi_calculator
+- builder
+- tools
+tldr: Tools available for roi_calculator production
+domain: roi_calculator construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles ROI model components\
+  \ | During model setup |  \n| cex_score.py | Calculates ROI scores from inputs | After data ingestion |  \n| cex_retriever.py\
+  \ | Fetches historical financial data | For baseline comparisons |  \n| cex_doctor.py | Debugs ROI calculation errors |\
+  \ During validation phase |  \n| cex_optimizer.py | Optimizes parameter configurations | For performance tuning |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| roi_validator.py | Checks data integrity and\
+  \ consistency | Pre-calculation |  \n| roi_analyzer.py | Audits ROI model performance | Post-calculation |  \n| roi_stress_test.py\
+  \ | Simulates edge cases for robustness | During QA |"
+external_references:
+- 'NumPy: For numerical computations'
+- 'Pandas: For data manipulation'
+- 'Matplotlib: For result visualization'

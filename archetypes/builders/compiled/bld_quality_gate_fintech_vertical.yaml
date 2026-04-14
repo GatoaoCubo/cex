@@ -1,0 +1,36 @@
+kind: quality_gate
+id: p01_qg_fintech_vertical
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for fintech_vertical
+quality: null
+title: Quality Gate Fintech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- fintech_vertical
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for fintech_vertical
+domain: fintech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| Fintech industry vertical | SOC2+PCI-DSS,\
+  \ KYC/AML, fraud detection, use cases | must meet | entire system |"
+hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | Invalid or missing YAML\
+  \ frontmatter |  \n| H02 | ID matches pattern ^p01_fv_[a-z][a-z0-9_]+.md$ | ID does not conform to schema |  \n| H03 | kind\
+  \ field matches 'fintech_vertical' | kind field is incorrect |  \n| H04 | SOC2+PCI-DSS compliance | Missing or failed compliance\
+  \ audit |  \n| H05 | KYC/AML processes implemented | No automated KYC/AML checks |  \n| H06 | Fraud detection system active\
+  \ | Fraud detection module not deployed |  \n| H07 | Data encryption at rest and in transit | Missing encryption protocols\
+  \ |  \n| H08 | Audit trail logging enabled | No tamper-proof audit logs |"
+soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | SOC2+PCI-DSS compliance | 0.20\
+  \ | 1.00 = fully compliant |  \n| D02 | KYC/AML automation | 0.15 | 1.00 = 100% automated checks |  \n| D03 | Fraud detection\
+  \ accuracy | 0.15 | 1.00 = <0.1% false positives |  \n| D04 | Data security | 0.15 | 1.00 = AES-256 and TLS 1.3 |  \n| D05\
+  \ | Audit trail completeness | 0.10 | 1.00 = 100% traceable events |  \n| D06 | Third-party compliance | 0.10 | 1.00 = all\
+  \ vendors SOC2 certified |  \n| D07 | User onboarding speed | 0.10 | 1.00 = <5s KYC verification |"
+actions: "| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Auto-publish with CTO approval |  \n| PUBLISH | >=8.0 | Publish\
+  \ after QA sign-off |  \n| REVIEW | >=7.0 | Escalate to compliance team |  \n| REJECT | <7.0 | Block deployment, fix required\
+  \ |"
+bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Emergency hotfix | CTO | Documented in incident report\
+  \ |"

@@ -1,0 +1,33 @@
+kind: quality_gate
+id: p05_qg_case_study
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for case_study
+quality: null
+title: Quality Gate Case Study
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- case_study
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for case_study
+domain: case_study construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| ID | ^p05_cs_[a-z][a-z0-9_]+.md$ | matches\
+  \ | H02 |"
+hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | invalid YAML |  \n| H02\
+  \ | ID matches pattern ^p05_cs_[a-z][a-z0-9_]+.md$ | invalid schema ID |  \n| H03 | kind field matches 'case_study' | incorrect\
+  \ kind |  \n| H04 | Challenge section present | missing challenge |  \n| H05 | Solution section present | missing solution\
+  \ |  \n| H06 | Outcome section present | missing outcome |  \n| H07 | Customer quote present | missing quote |"
+soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| 1 | Narrative structure | 0.15 | Clear\
+  \ challenge/solution/outcome flow |  \n| 2 | Clarity | 0.15 | Concise, jargon-free language |  \n| 3 | Customer quote |\
+  \ 0.15 | Direct, attributable quote |  \n| 4 | Relevance | 0.15 | Aligns with CEX use case |  \n| 5 | Uniqueness | 0.10\
+  \ | Distinct from other case studies |  \n| 6 | Formatting | 0.10 | Proper headers, bullet points |  \n| 7 | Engagement\
+  \ | 0.10 | Compelling story, emotional impact |  \n| 8 | Data accuracy | 0.10 | Verified metrics, sources cited |"
+actions: "| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Highlight as exemplar |  \n| PUBLISH | >=8.0 | Deploy to public\
+  \ repo |  \n| REVIEW | >=7.0 | Request minor edits |  \n| REJECT | <7.0 | Discard, rework required |"
+bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Strategic customer request | CTO | Note in audit log\
+  \ |"

@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_case_study
+pillar: P12
+llm_function: COLLABORATE
+purpose: How case_study-builder works in crews with other builders
+quality: null
+title: Collaboration Case Study
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- case_study
+- builder
+- collaboration
+tldr: How case_study-builder works in crews with other builders
+domain: case_study construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Coordinates research, synthesizes stakeholder input, and structures case study content into a narrative document
+  with analysis, outcomes, and actionable insights.
+receives_from: "| Builder       | What                  | Format        |  \n|---------------|-----------------------|---------------|\
+  \  \n| Researcher    | Raw data              | Document      |  \n| Interviewer   | Client interviews     | Transcripts\
+  \   |  \n| Marketing     | Brand guidelines      | Style guide   |"
+produces_for: "| Builder       | What                  | Format        |  \n|---------------|-----------------------|---------------|\
+  \  \n| Designer      | Case study document   | PDF           |  \n| Executive     | Summary report        | Document   \
+  \   |  \n| Client        | Presentation deck     | Slides        |"
+boundary: Does NOT handle data analysis (done by data analysts) or create pitch decks/testimonials. Pitch decks go to pitch_deck-builder;
+  testimonials go to testimonial-builder.

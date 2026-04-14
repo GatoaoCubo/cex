@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_competitive_matrix
+pillar: P12
+llm_function: COLLABORATE
+purpose: How competitive_matrix-builder works in crews with other builders
+quality: null
+title: Collaboration Competitive Matrix
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- competitive_matrix
+- builder
+- collaboration
+tldr: How competitive_matrix-builder works in crews with other builders
+domain: competitive_matrix construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Analyzes competitor data, structures features/benefits, and generates visual comparison matrices for strategic
+  decision-making.
+receives_from: "| Builder         | What               | Format     |  \n|----------------|--------------------|------------|\
+  \  \n| market_research| Competitor list    | CSV        |  \n| product_specs  | Feature definitions| JSON       |  \n| sales_team\
+  \     | Market trends      | API        |"
+produces_for: "| Builder         | What                  | Format     |  \n|----------------|-----------------------|------------|\
+  \  \n| strategy_team  | Competitive matrix    | Markdown   |  \n| product_team   | Gap analysis report   | PDF        |\
+  \  \n| sales_team     | Benchmarking data     | CSV        |"
+boundary: Does NOT handle customer segment analysis (ICP) or narrative content (pitch_deck). Handled by customer_segment_builder
+  and pitch_deck_builder respectively.

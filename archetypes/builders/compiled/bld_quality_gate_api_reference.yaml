@@ -1,0 +1,32 @@
+kind: quality_gate
+id: p06_qg_api_reference
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for api_reference
+quality: null
+title: Quality Gate Api Reference
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- api_reference
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for api_reference
+domain: api_reference construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "(metric | threshold | operator | scope)  \nSchema ID | ^p06_ar_[a-z][a-z0-9_]+.md$ | matches | all files"
+hard_gates: "(ID | Check | Fail Condition)  \nH01 | YAML frontmatter valid | invalid YAML  \nH02 | ID matches ^p06_ar_[a-z][a-z0-9_]+.md$\
+  \ | invalid pattern  \nH03 | kind field matches 'api_reference' | incorrect kind  \nH04 | All endpoints listed | missing\
+  \ endpoint  \nH05 | Parameters/responses documented | incomplete spec  \nH06 | Authentication methods specified | missing\
+  \ auth details  \nH07 | Examples provided for all endpoints | no examples  \nH08 | Consistent formatting (YAML/Markdown)\
+  \ | inconsistent syntax"
+soft_scoring: "(Dim | Dimension | Weight | Scoring Guide)  \nD01 | Completeness | 0.20 | 100% endpoints/params/responses \
+  \ \nD02 | Clarity | 0.15 | Readable descriptions/examples  \nD03 | Consistency | 0.15 | Uniform structure/formatting  \n\
+  D04 | Examples | 0.10 | 100% endpoints with examples  \nD05 | Auth details | 0.10 | Full auth method coverage  \nD06 | Versioning\
+  \ | 0.10 | API version specified  \nD07 | Structure | 0.10 | Valid table/section hierarchy  \nD08 | Language | 0.10 | English/technical\
+  \ accuracy"
+actions: "(Score | Action)  \nGOLDEN | Auto-publish to prod  \nPUBLISH | Review for minor edits  \nREVIEW | Fix critical issues\
+  \  \nREJECT | Rewrite documentation"
+bypass: "(conditions | approver | audit trail)  \nSenior engineer approval | CTO | Requires written justification"

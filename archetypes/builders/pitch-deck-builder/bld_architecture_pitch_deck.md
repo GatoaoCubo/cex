@@ -1,0 +1,46 @@
+---
+kind: architecture
+id: bld_architecture_pitch_deck
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of pitch_deck -- inventory, dependencies
+quality: null
+title: "Architecture Pitch Deck"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [pitch_deck, builder, architecture]
+tldr: "Component map of pitch_deck -- inventory, dependencies"
+domain: "pitch_deck construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Component Inventory
+| ISO Name             | Role                          | Pillar | Status  |
+|----------------------|-------------------------------|--------|---------|
+| bld_manifest         | Core structure definition     | P05    | Active  |
+| bld_instruction      | User input parsing            | P05    | Active  |
+| bld_system_prompt    | LLM guidance framework        | P05    | Active  |
+| bld_schema           | Data format specification     | P05    | Active  |
+| bld_quality_gate     | Output validation rules       | P05    | Active  |
+| bld_output_template  | Slide layout engine           | P05    | Active  |
+| bld_examples         | Training data repository      | P05    | Active  |
+| bld_knowledge_card   | Domain-specific facts         | P05    | Active  |
+| bld_architecture     | System blueprint              | P05    | Active  |
+| bld_collaboration    | Multi-user editing protocol   | P05    | Active  |
+| bld_config           | Parameter storage             | P05    | Active  |
+| bld_memory           | Session state management      | P05    | Active  |
+| bld_tools            | External API integrations     | P05    | Active  |
+
+## Dependencies
+| From              | To                  | Type         |
+|-------------------|---------------------|--------------|
+| bld_instruction   | bld_system_prompt   | data         |
+| bld_output_template | bld_schema        | reference    |
+| bld_quality_gate  | bld_examples        | validation   |
+| bld_collaboration | bld_memory          | state        |
+| bld_tools         | CEX API             | external     |
+
+## Architectural Position
+pitch_deck operates as a specialized builder ISO within CEX pillar P05, enabling structured creation of investment pitch decks through modular components that enforce quality gates, maintain collaborative workflows, and integrate with external tools while adhering to domain-specific schemas and knowledge frameworks.

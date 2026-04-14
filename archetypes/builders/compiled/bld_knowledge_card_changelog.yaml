@@ -1,0 +1,56 @@
+kind: knowledge_card
+id: bld_knowledge_card_changelog
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for changelog production
+quality: null
+title: Knowledge Card Changelog
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- changelog
+- builder
+- knowledge_card
+tldr: Domain knowledge for changelog production
+domain: changelog construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: Changelogs are structured records of changes made to a software product, enabling transparency for users
+  and developers. They align with semantic versioning (semver) to communicate the nature and impact of updates, such as new
+  features, bug fixes, or breaking changes. Industry practices emphasize clarity, consistency, and traceability, often linking
+  entries to issue trackers or pull requests. Changelogs differ from release notes by focusing on technical details rather
+  than user-facing prose, and from decision records by omitting rationale.
+key_concepts: "| Concept           | Definition                                                                 | Source \
+  \                             |  \n|-------------------|----------------------------------------------------------------------------|-------------------------------------|\
+  \  \n| Semver            | Versioning scheme (MAJOR.MINOR.PATCH) indicating compatibility impact     | Semver Specification\
+  \ |  \n| Feature           | New functionality added without breaking existing behavior                | Keep a Changelog\
+  \                  |  \n| Fix               | Resolution of a bug or regression                                        \
+  \   | Keep a Changelog                  |  \n| Breaking Change   | Alteration requiring user code modifications        \
+  \                      | Semver Specification              |  \n| Deprecation       | Marking a feature for removal in a\
+  \ future release                         | Keep a Changelog                  |  \n| Version Bump      | Incrementing version\
+  \ numbers per semver rules                             | Semver Specification              |  \n| Backward Compatibility\
+  \ | Ensuring new versions work with older ones                            | Semver Specification              |  \n| Maintenance\
+  \ Release | Patch-level update addressing bugs without new features                 | Keep a Changelog                 \
+  \ |  \n| Minor Release     | Addition of features without breaking compatibility                       | Semver Specification\
+  \              |  \n| Major Release     | Introduction of breaking changes or new major features                    | Semver\
+  \ Specification              |  \n| Unreleased        | Changes not yet included in a versioned release                \
+  \           | Keep a Changelog                  |"
+industry_standards:
+- Keep a Changelog
+- Semantic Versioning 2.0.0
+- RFC 822 (for structured metadata, indirectly relevant)
+- Atom/RSS feeds for changelog syndication
+- GitHub Releases API (standardized format for versioned artifacts)
+common_patterns:
+- Use semver to label versions and categorize changes.
+- Group entries by type (Features, Fixes, Breaking Changes).
+- Link each entry to a ticket or PR for traceability.
+- Maintain a single, canonical changelog file.
+- Include deprecation notices with removal schedules.
+pitfalls:
+- Inconsistent formatting across releases.
+- Omitting breaking changes or failing to highlight them.
+- Using vague language (e.g., "improved performance" without specifics).
+- Not aligning version numbers with semver rules.
+- Forgetting to update the changelog for hotfixes or minor releases.

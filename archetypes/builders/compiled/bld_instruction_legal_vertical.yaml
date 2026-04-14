@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_legal_vertical
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for legal_vertical
+quality: null
+title: Instruction Legal Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- legal_vertical
+- builder
+- instruction
+tldr: Step-by-step production process for legal_vertical
+domain: legal_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze privilege logs for attorney-client confidentiality patterns
+- Map billable hour tracking methods across law firm accounting systems
+- Audit contract clauses for recurring legal terminology in M&A agreements
+- Identify use cases for privilege in litigation discovery processes
+- Benchmark contract analysis tools against legal tech industry standards
+- Document regulatory frameworks affecting billable hour reporting
+phase_2_compose:
+- Align artifact structure with SCHEMA.md's legal_vertical hierarchy
+- Write privilege section using OUTPUT_TEMPLATE.md's "confidentiality" block
+- Implement billable hour tracking logic in JSON format per schema
+- Extract contract analysis patterns from 50+ sample NDAs and SLAs
+- Embed use case examples in "litigation" and "compliance" subsections
+- Inject function INJECT into contract clause validation workflow
+- Cross-reference schema requirements with OUTPUT_TEMPLATE.md's metadata fields
+- Format legal terms using ISO 18325-1:2019 terminology standards
+- Finalize artifact with P01 pillar metadata and legal_vertical classification
+phase_3_validate: '[ ] ✅ Verify schema compliance with SCHEMA.md''s required fields [ ] ✅ Confirm billable hour calculations
+  match industry benchmarks [ ] ✅ Ensure privilege section passes redaction test scenarios [ ] ✅ Validate contract analysis
+  outputs against template structure [ ] ✅ Confirm alignment with legal_vertical use case requirements'

@@ -1,0 +1,31 @@
+kind: tools
+id: bld_tools_discovery_questions
+pillar: P04
+llm_function: CALL
+purpose: Tools available for discovery_questions production
+quality: null
+title: Tools Discovery Questions
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- discovery_questions
+- builder
+- tools
+tldr: Tools available for discovery_questions production
+domain: discovery_questions construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles discovery questions\
+  \ into structured formats | Pre-deployment |  \n| cex_score.py | Scores questions based on clarity and relevance | Iteration\
+  \ phase |  \n| cex_retriever.py | Retrieves contextual data for question validation | Research stage |  \n| cex_doctor.py\
+  \ | Diagnoses logical gaps in question frameworks | Final review |  \n| cex_analyzer.py | Analyzes question patterns for\
+  \ bias or redundancy | Iteration phase |  \n| cex_optimizer.py | Refines questions for maximum insight yield | Deployment\
+  \ prep |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_checker.py | Validates question syntax\
+  \ and grammar | Drafting |  \n| val_formatter.py | Ensures consistency in question phrasing | Iteration |  \n| val_validator.py\
+  \ | Cross-checks alignment with project goals | Final review |"
+external_references:
+- DiscoveryKit (framework for structured inquiry)
+- QuestionFlow (tool for workflow mapping)
+- DataProbe (data alignment verification system)

@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_case_study
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for case_study
+quality: null
+title: Instruction Case Study
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- case_study
+- builder
+- instruction
+tldr: Step-by-step production process for case_study
+domain: case_study construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify target customer and confirm participation
+- 'Collect customer data: industry, role, pain points'
+- Document specific challenge and business impact
+- 'Gather solution details: product usage, implementation steps'
+- 'Quantify outcomes: metrics, ROI, time-to-value'
+- Record direct quote from customer (150-200 words)
+phase_2_compose:
+- 'Structure narrative using SCHEMA.md: Challenge → Solution → Outcome'
+- Write 200-word challenge section with problem context
+- 'Detail solution: product features, deployment timeline'
+- Quantify outcomes with 3+ measurable KPIs
+- Insert customer quote in OUTPUT_TEMPLATE.md's designated block
+- 'Add company-specific data: industry, location, role'
+- Include 1-2 technical implementation details
+- Edit for clarity, conciseness, and brand alignment
+- Add visual placeholder for customer logo/photo
+phase_3_validate: '[ ] ✅ All SCHEMA.md fields populated [ ] ✅ Quote meets word count and tone guidelines [ ] ✅ Metrics align
+  with customer-provided data [ ] ✅ Template formatting matches OUTPUT_TEMPLATE.md [ ] ✅ Approved by customer and product
+  teams'

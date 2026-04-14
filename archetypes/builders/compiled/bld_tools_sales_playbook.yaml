@@ -1,0 +1,46 @@
+kind: tools
+id: bld_tools_sales_playbook
+pillar: P04
+llm_function: CALL
+purpose: Tools available for sales_playbook production
+quality: null
+title: Tools Sales Playbook
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sales_playbook
+- builder
+- tools
+tldr: Tools available for sales_playbook production
+domain: sales_playbook construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: '| Tool | Purpose | When |
+
+  |---|---|---|
+
+  | cex_compile.py | Aggregates playbook content into structured format | During initial playbook creation |
+
+  | cex_score.py | Assigns relevance scores to playbook elements | When prioritizing content |
+
+  | cex_retriever.py | Fetches data from CRM/external sources | When populating playbook with real-time data |
+
+  | cex_doctor.py | Identifies gaps in playbook completeness | During QA reviews |
+
+  | cex_analyzer.py | Parses user feedback for playbook improvements | After customer interactions |
+
+  | cex_optimizer.py | Automates playbook language refinement | Before final approval |'
+validation_tools: '| Tool | Purpose | When |
+
+  |---|---|---|
+
+  | val_integrity_check.py | Verifies consistency across playbook modules | After content updates |
+
+  | val_compliance_scan.py | Ensures adherence to sales policies | Before deployment |
+
+  | val_performance_audit.py | Tracks playbook usage effectiveness | Monthly performance reviews |'
+external_references:
+- Salesforce Einstein (AI-driven sales insights)
+- HubSpot Playbook API (integration with marketing data)
+- Playbook Pro by Gong (conversation analytics)

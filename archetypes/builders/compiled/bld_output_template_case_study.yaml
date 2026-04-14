@@ -1,0 +1,28 @@
+kind: output_template
+id: bld_output_template_case_study
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for case_study production
+quality: null
+title: Output Template Case Study
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- case_study
+- builder
+- output_template
+tldr: Template with vars for case_study production
+domain: case_study construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+overview: '{{overview}} <!-- Brief context and objectives -->'
+key_findings: '| Metric       | Value   | Description              |
+
+  |--------------|---------|--------------------------|
+
+  | {{metric1}}  | {{val1}}| {{desc1}}                |
+
+  | {{metric2}}  | {{val2}}| {{desc2}}                |'
+recommendations: "# Sample code block\ndef {{function_name}}():\n    {{code_logic}}  # Placeholder for implementation"
+conclusion: '{{conclusion}} <!-- Summary of implications and next steps -->'

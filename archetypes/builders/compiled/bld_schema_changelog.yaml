@@ -1,0 +1,50 @@
+kind: schema
+id: bld_schema_changelog
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for changelog
+quality: null
+title: Schema Changelog
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- changelog
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for changelog
+domain: changelog construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type             | Required | Default | Notes                              |  \n|-----------|------------------|----------|---------|------------------------------------|\
+  \  \n| id        | string           | yes      |         | Must match ID Pattern              |  \n| kind      | string\
+  \           | yes      |         | Always \"changelog\"                 |  \n| pillar    | string           | yes      |\
+  \         | P01                                |  \n| title     | string           | yes      |         | Human-readable\
+  \ name                |  \n| version   | string           | yes      |         | Semantic version (e.g., v1.2.3)    |  \n\
+  | created   | datetime         | yes      |         | ISO 8601                           |  \n| updated   | datetime   \
+  \      | yes      |         | ISO 8601                           |  \n| author    | string           | yes      |      \
+  \   | Maintainer username                |  \n| domain    | string           | yes      |         | CEX-specific context\
+  \               |  \n| quality   | null             | yes      | null    | Never self-score; peer review assigns |  \n|\
+  \ tags      | list<string>     | yes      |         | Keywords (e.g., \"security\", \"feature\") |  \n| tldr      | string\
+  \           | yes      |         | Summary of changes (≤200 chars)    |  \n| changes   | list<string>     | yes      | \
+  \        | List of updates/fixes              |  \n| impact    | string           | yes      |         | User-facing effect\
+  \ (e.g., \"minor\") |"
+recommended: "| Field           | Type             | Notes                          |  \n|------------------|------------------|--------------------------------|\
+  \  \n| related_issues   | list<string>     | Linked issue IDs (e.g., \"CEX-123\") |  \n| reviewers        | list<string>\
+  \     | Peer reviewers                 |  \n| deprecated       | boolean          | Whether prior versions are deprecated\
+  \ |"
+id_pattern: ^p01_ch_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview – Summary of the changelog’s scope.
+- Changes – Detailed list of updates, features, or fixes.
+- Impact – Analysis of user or system implications.
+- Deprecations – Removed features or APIs.
+- Reviewers – Names and roles of peer reviewers.
+constraints:
+- All required fields must be present and valid.
+- ID must match exact regex pattern.
+- Version must follow semantic versioning.
+- Quality must be assigned by peer review, not self-assigned.
+- TLDR must be ≤200 characters and ASCII-only.
+- Body sections must be ordered and non-empty.

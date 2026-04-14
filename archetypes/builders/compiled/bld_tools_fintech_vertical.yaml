@@ -1,0 +1,31 @@
+kind: tools
+id: bld_tools_fintech_vertical
+pillar: P04
+llm_function: CALL
+purpose: Tools available for fintech_vertical production
+quality: null
+title: Tools Fintech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- fintech_vertical
+- builder
+- tools
+tldr: Tools available for fintech_vertical production
+domain: fintech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Generate code for vertical-specific\
+  \ features | On new vertical setup |  \n| cex_score.py | Evaluate compliance and risk scores | During onboarding |  \n|\
+  \ cex_retriever.py | Fetch market data and user info | Real-time trading |  \n| cex_doctor.py | Diagnose system health and\
+  \ errors | Post-deployment |  \n| cex_validator.py | Validate transaction integrity | Pre-block confirmation |  \n| cex_deployer.py\
+  \ | Automate deployment of vertical modules | Post-testing |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_data_integrity.py | Check data consistency\
+  \ across systems | Daily audits |  \n| val_compliance_checker.py | Ensure adherence to regulations | Pre-launch |  \n| val_perf_analyzer.py\
+  \ | Benchmark system performance | Stress testing |  \n| val_security_audit.py | Scan for vulnerabilities | Quarterly reviews\
+  \ |"
+external_references:
+- Apache Kafka (real-time data pipelines)
+- Hyperledger Fabric (blockchain for compliance)
+- RegTech AI (regulatory compliance frameworks)

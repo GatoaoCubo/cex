@@ -1,0 +1,31 @@
+kind: examples
+id: bld_examples_changelog
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of changelog artifacts
+quality: null
+title: Examples Changelog
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- changelog
+- builder
+- examples
+tldr: Golden and anti-examples of changelog artifacts
+domain: changelog construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: 'Version: v2.7.1 Date: 2023-11-15'
+features:
+- Improved performance.
+- Added new functionality.
+fixes:
+- Fixed some bugs.
+breaking_changes:
+- Some APIs changed.
+anti_example_1_missing_semver_and_categorization: "Version: 2.7.1  \nDate: 2023-11-15  \n- Added real-time collaboration in\
+  \ Notion.  \n- Fixed PostgreSQL transaction issues.  \n- Removed old Stripe endpoints."
+why_it_fails: Descriptions are too generic ("improved performance" vs "GraphQL query optimization"). No specific tools/vendors
+  named, and no actionable details for users to migrate or adopt changes.
+anti_example_2_overly_vague_descriptions: 'Version: v2.7.1 Date: 2023-11-15'

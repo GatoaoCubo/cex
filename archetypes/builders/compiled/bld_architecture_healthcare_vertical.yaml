@@ -1,0 +1,64 @@
+kind: architecture
+id: bld_architecture_healthcare_vertical
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of healthcare_vertical -- inventory, dependencies
+quality: null
+title: Architecture Healthcare Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- healthcare_vertical
+- builder
+- architecture
+tldr: Component map of healthcare_vertical -- inventory, dependencies
+domain: healthcare_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name              | Role                          | Pillar | Status |
+
+  |-----------------------|-------------------------------|--------|--------|
+
+  | bld_manifest          | Defines system structure      | P01    | Active |
+
+  | bld_instruction       | Provides operational guidelines | P01    | Active |
+
+  | bld_system_prompt     | Sets AI behavior parameters   | P01    | Active |
+
+  | bld_schema            | Defines data models           | P01    | Active |
+
+  | bld_quality_gate      | Enforces compliance rules     | P01    | Active |
+
+  | bld_output_template   | Structures final outputs      | P01    | Active |
+
+  | bld_examples          | Provides reference cases      | P01    | Active |
+
+  | bld_knowledge_card    | Stores clinical knowledge     | P01    | Active |
+
+  | bld_architecture      | Defines system topology       | P01    | Active |
+
+  | bld_collaboration     | Manages stakeholder workflows | P01    | Active |
+
+  | bld_config            | Centralizes system settings   | P01    | Active |
+
+  | bld_memory            | Manages persistent state      | P01    | Active |
+
+  | bld_tools             | Integrates domain-specific utilities | P01 | Active |'
+dependencies: '| From            | To                  | Type       |
+
+  |-----------------|---------------------|------------|
+
+  | bld_config      | bld_schema          | Reference  |
+
+  | bld_system_prompt | bld_knowledge_card | Dependency |
+
+  | bld_quality_gate | bld_output_template | Validation |
+
+  | bld_instruction | bld_tools           | Execution  |
+
+  | bld_memory      | bld_config          | Configuration |'
+architectural_position: healthcare_vertical-builder operates as a specialized implementation layer within CEX P01, translating
+  clinical requirements into compliant, interoperable systems using FHIR and HL7 standards. It ensures secure data handling,
+  integrates with EHR workflows, and aligns with HIPAA and GDPR through embedded quality gates and knowledge cards, positioning
+  it as a critical enabler for healthcare-specific AI deployment.

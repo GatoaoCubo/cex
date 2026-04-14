@@ -1,0 +1,51 @@
+kind: schema
+id: bld_schema_sales_playbook
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for sales_playbook
+quality: null
+title: Schema Sales Playbook
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sales_playbook
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for sales_playbook
+domain: sales_playbook construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes                              |  \n|------------|--------|----------|---------|------------------------------------|\
+  \  \n| id         | string | yes      | null    | Must match ID Pattern              |  \n| kind       | string | yes  \
+  \    | \"sales_playbook\" | Fixed value                  |  \n| pillar     | string | yes      | \"P03\"    | Fixed value\
+  \                        |  \n| title      | string | yes      | null    | Descriptive name                   |  \n| version\
+  \    | string | yes      | \"1.0\"   | Semantic versioning                |  \n| created    | date   | yes      | null \
+  \   | ISO 8601 format                    |  \n| updated    | date   | yes      | null    | ISO 8601 format             \
+  \       |  \n| author     | string | yes      | null    | Owner of the playbook              |  \n| domain     | string\
+  \ | yes      | null    | Business unit or product area      |  \n| quality    | null   | yes      | null    | Never self-score;\
+  \ peer review assigns |  \n| tags       | list   | yes      | []      | Keywords for search/filter         |  \n| tldr \
+  \      | string | yes      | null    | One-sentence summary               |  \n| target_audience | string | yes | null |\
+  \ Primary customer segment           |  \n| key_metrics | list   | yes | [] | Success indicators                 |"
+recommended: "| Field         | Type   | Notes                  |  \n|---------------|--------|------------------------| \
+  \ \n| approval_date | date   | Date of peer approval  |  \n| review_cycle  | string | Quarterly/Annual       |"
+id_pattern: ^p03_sp_[a-z][a-z0-9_]+.md$
+body_structure:
+- Introduction
+- Purpose, scope, and objectives of the playbook.
+- Target Audience
+- Detailed customer personas and use cases.
+- Sales Strategy
+- Tactics, objection handling, and value propositions.
+- Key Metrics
+- Performance KPIs and success criteria.
+- Playbook Updates
+- Version history and change log.
+constraints:
+- ID must match ^p03_sp_[a-z][a-z0-9_]+.md$ exactly.
+- All required fields must be present and valid.
+- Version must follow semantic versioning (e.g., 1.0.0).
+- Quality field must be assigned by peer review, not self-scored.
+- Domain-specific fields (target_audience, key_metrics) must align with business context.
+- File size must not exceed 8192 bytes.

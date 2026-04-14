@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_integration_guide
+pillar: P12
+llm_function: COLLABORATE
+purpose: How integration_guide-builder works in crews with other builders
+quality: null
+title: Collaboration Integration Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- integration_guide
+- builder
+- collaboration
+tldr: How integration_guide-builder works in crews with other builders
+domain: integration_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Creates and maintains comprehensive integration guides, ensuring alignment with product capabilities and developer
+  needs. Collaborates with API, product, and support teams to validate accuracy and completeness.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| API Team      | API specifications    | JSON        |  \n| Product Team  | Integration scenarios | Markdown    |\
+  \  \n| Support Team  | Common user issues    | Ticket system |"
+produces_for: "| Builder           | What                  | Format      |  \n|-------------------|-----------------------|-------------|\
+  \  \n| Product Team      | Integration guides    | Markdown    |  \n| Developer Portal  | Diagrams and workflows| SVG  \
+  \       |  \n| Support Team      | Troubleshooting notes | Markdown    |"
+boundary: Does NOT handle code implementation (dev teams), quickstart tutorials (quickstart_guide-builder), or API schema
+  details (api_reference-builder).

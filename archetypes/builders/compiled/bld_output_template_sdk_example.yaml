@@ -1,0 +1,36 @@
+kind: output_template
+id: bld_output_template_sdk_example
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for sdk_example production
+quality: null
+title: Output Template Sdk Example
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sdk_example
+- builder
+- output_template
+tldr: Template with vars for sdk_example production
+domain: sdk_example construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+example_usage: 'from {{sdk_name}} import Client
+
+
+  client = Client(api_key="your_key")
+
+  response = client.get_data(endpoint="/v1/example")
+
+  print(response.json())'
+parameter_table: '| Name      | Type   | Description                  |
+
+  |-----------|--------|------------------------------|
+
+  | api_key   | string | Authentication credential    |
+
+  | endpoint  | string | API endpoint path            |
+
+  | timeout   | int    | Request timeout in seconds   |'
+sample_response: "{\n  \"status\": \"success\",\n  \"data\": {\"example_field\": \"value\"}\n}"

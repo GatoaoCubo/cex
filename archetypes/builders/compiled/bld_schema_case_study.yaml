@@ -1,0 +1,44 @@
+kind: schema
+id: bld_schema_case_study
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for case_study
+quality: null
+title: Schema Case Study
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- case_study
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for case_study
+domain: case_study construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes |  \n|-----------|--------|----------|---------|-------|  \n\
+  | id        | string | yes      |         |       |  \n| kind      | string | yes      |         |       |  \n| pillar \
+  \   | string | yes      |         |       |  \n| title     | string | yes      |         |       |  \n| version   | string\
+  \ | yes      |         |       |  \n| created   | date   | yes      |         |       |  \n| updated   | date   | yes  \
+  \    |         |       |  \n| author    | string | yes      |         |       |  \n| domain    | string | yes      |   \
+  \      |       |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      |\
+  \ array  | yes      |         |       |  \n| tldr      | string | yes      |         |       |  \n| context   | string |\
+  \ yes      |         | Case background |  \n| outcome   | string | yes      |         | Key result |"
+recommended: "| Field              | Type   | Notes |  \n|--------------------|--------|-------|  \n| references         |\
+  \ array  |       |  \n| methodology        | string |       |  \n| impact_assessment  | string |       |"
+id_pattern: ^p05_cs_[a-z][a-z0-9_]+.md$
+body_structure:
+- Introduction
+- Context
+- Analysis
+- Outcomes
+- Lessons Learned
+- Stakeholders
+constraints:
+- ID must match ^p05_cs_[a-z][a-z0-9_]+.md$
+- File size must not exceed 6144 bytes
+- All required fields must be present
+- Quality field must be peer-reviewed, not self-assigned
+- Domain-specific fields (context, outcome) must be non-empty
+- ASCII-only characters required

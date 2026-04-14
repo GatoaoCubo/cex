@@ -1,0 +1,30 @@
+kind: tools
+id: bld_tools_integration_guide
+pillar: P04
+llm_function: CALL
+purpose: Tools available for integration_guide production
+quality: null
+title: Tools Integration Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- integration_guide
+- builder
+- tools
+tldr: Tools available for integration_guide production
+domain: integration_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles integration code\
+  \ | Building guide |  \n| cex_score.py | Evaluates integration compatibility | Assessing integrations |  \n| cex_retriever.py\
+  \ | Fetches external data sources | Gathering integration examples |  \n| cex_doctor.py | Diagnoses integration errors |\
+  \ Debugging workflows |  \n| cex_validator.py | Ensures compliance with standards | Validating outputs |  \n| cex_analyzer.py\
+  \ | Identifies integration patterns | Optimizing performance |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_checker.py | Verifies syntax correctness\
+  \ | Code review |  \n| val_formatter.py | Standardizes output format | Preparing documentation |  \n| val_linter.py | Enforces\
+  \ style guidelines | Final validation |"
+external_references:
+- OpenAPI (API specification framework)
+- PyTest (testing framework)
+- Sphinx (documentation generator)

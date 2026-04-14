@@ -1,0 +1,30 @@
+kind: tools
+id: bld_tools_quickstart_guide
+pillar: P04
+llm_function: CALL
+purpose: Tools available for quickstart_guide production
+quality: null
+title: Tools Quickstart Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- quickstart_guide
+- builder
+- tools
+tldr: Tools available for quickstart_guide production
+domain: quickstart_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Assembles guide components\
+  \ into a cohesive document | Initial build |  \n| cex_score.py | Evaluates guide quality using predefined metrics | Post-creation\
+  \ validation |  \n| cex_retriever.py | Fetches external data/dependencies for inclusion | During content integration | \
+  \ \n| cex_doctor.py | Diagnoses and fixes common guide structure issues | Debugging phase |  \n| cex_formatter.py | Standardizes\
+  \ markdown, code blocks, and citations | Final formatting pass |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| validator_check.py | Ensures syntax and link\
+  \ integrity | Pre-deployment |  \n| validator_consistency.py | Verifies cross-page terminology alignment | Multi-page guides\
+  \ |  \n| validator_accessibility.py | Tests compliance with WCAG standards | Accessibility audits |"
+external_references:
+- Sphinx (documentation generation)
+- Jupyter (interactive code examples)
+- Markdown (standard formatting language)

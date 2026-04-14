@@ -1,0 +1,38 @@
+kind: quality_gate
+id: p05_qg_integration_guide
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for integration_guide
+quality: null
+title: Quality Gate Integration Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- integration_guide
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for integration_guide
+domain: integration_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "(Table: metric, threshold, operator, scope)  \nmetric | threshold | operator | scope  \n--- | --- | --- | ---\
+  \  \nCompleteness | 100% | equals | all platform partners"
+hard_gates: "(Table: ID | Check | Fail Condition)  \nID | Check | Fail Condition  \n--- | --- | ---  \nH01 | YAML frontmatter\
+  \ valid | invalid YAML syntax  \nH02 | ID matches pattern ^p05_ig_[a-z][a-z0-9_]+.md$ | invalid filename pattern  \nH03\
+  \ | kind field matches 'integration_guide' | incorrect kind value  \nH04 | API endpoint coverage ≥ 95% | missing critical\
+  \ endpoints  \nH05 | Error handling examples ≥ 3 | insufficient error scenarios  \nH06 | Authentication methods ≥ 2 | missing\
+  \ required auth protocols  \nH07 | Sample code in ≥ 2 languages | no code examples  \nH08 | Versioning documented | no versioning\
+  \ info  \nH09 | Partner onboarding steps ≥ 5 | incomplete onboarding process  \nH10 | Compliance info (KYC/AML) included\
+  \ | missing regulatory details"
+soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \nDim | Dimension | Weight | Scoring Guide  \n--- | ---\
+  \ | --- | ---  \nD01 | Clarity | 0.15 | 1.0 (clear) to 0.0 (ambiguous)  \nD02 | Completeness | 0.15 | 1.0 (full) to 0.0\
+  \ (incomplete)  \nD03 | Technical accuracy | 0.15 | 1.0 (correct) to 0.0 (errors)  \nD04 | Compliance alignment | 0.10 |\
+  \ 1.0 (compliant) to 0.0 (non-compliant)  \nD05 | Usability | 0.10 | 1.0 (user-friendly) to 0.0 (poor)  \nD06 | Code example\
+  \ quality | 0.10 | 1.0 (working) to 0.0 (non-functional)  \nD07 | Partner onboarding flow | 0.10 | 1.0 (smooth) to 0.0 (broken)\
+  \  \nD08 | Versioning clarity | 0.10 | 1.0 (clear) to 0.0 (confusing)  \nD09 | Language support | 0.05 | 1.0 (≥3 languages)\
+  \ to 0.0 (none)"
+actions: "(Table: Score | Action)  \nScore | Action  \n--- | ---  \nGOLDEN | ≥9.5 | Auto-publish and notify partners  \nPUBLISH\
+  \ | ≥8.0 | Publish to platform  \nREVIEW | ≥7.0 | Flag for QA review  \nREJECT | <7.0 | Reject and request revisions"
+bypass: "(Table: conditions, approver, audit trail)  \nconditions | approver | audit trail  \n--- | --- | ---  \nUrgent partner\
+  \ request | CTO | ticket #12345  \nRegulatory exception | Legal team | legal review #67890"

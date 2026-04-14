@@ -1,0 +1,27 @@
+kind: collaboration
+id: bld_collaboration_interactive_demo
+pillar: P12
+llm_function: COLLABORATE
+purpose: How interactive_demo-builder works in crews with other builders
+quality: null
+title: Collaboration Interactive Demo
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- interactive_demo
+- builder
+- collaboration
+tldr: How interactive_demo-builder works in crews with other builders
+domain: interactive_demo construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Creates interactive demo scripts by integrating user stories, technical specs, and design assets into cohesive,
+  executable demo flows. Acts as a bridge between content creators and engineers.
+receives_from: "| Builder | What | Format |  \n|---|---|---|  \n| Content Writer | Script outline & user flows | Markdown\
+  \ |  \n| Design Team | Visual assets & UI components | ZIP (images, Figma files) |  \n| Engineering Team | Technical constraints\
+  \ & API specs | JSON (schema, endpoints) |"
+produces_for: "| Builder | What | Format |  \n|---|---|---|  \n| Content Writer | Demo script with annotated interactions\
+  \ | Markdown |  \n| Engineering Team | Interactive element definitions | JSON (event handlers, state logic) |  \n| QA Team\
+  \ | Demo preview link & test scenarios | URL + CSV (test cases) |"
+boundary: Does NOT handle hosting/deployment (DevOps), user testing (QA Team), or asset storage management (Design Team).

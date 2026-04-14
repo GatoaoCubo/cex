@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_legal_vertical
+pillar: P12
+llm_function: COLLABORATE
+purpose: How legal_vertical-builder works in crews with other builders
+quality: null
+title: Collaboration Legal Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- legal_vertical
+- builder
+- collaboration
+tldr: How legal_vertical-builder works in crews with other builders
+domain: legal_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Assembles structured legal frameworks, templates, and regulatory-compliant documents for vertical-specific use
+  cases.
+receives_from: "| Builder       | What                  | Format  |  \n|---------------|-----------------------|---------|\
+  \  \n| Template Repo | Legal document templates | JSON    |  \n| Regulator     | Regulatory guidelines  | XML     |  \n\
+  | Case Law DB   | Precedent data         | CSV     |"
+produces_for: "| Builder       | What                  | Format  |  \n|---------------|-----------------------|---------|\
+  \  \n| Legal Team    | Customized contracts   | PDF     |  \n| Compliance    | Framework checklists   | YAML    |  \n| Risk\
+  \ Mgmt     | Scenario analyses      | DOCX    |"
+boundary: Does NOT handle audit trails (compliance_checklist) or case study analysis (case_study). Audits and case studies
+  are managed by their respective specialized builders.

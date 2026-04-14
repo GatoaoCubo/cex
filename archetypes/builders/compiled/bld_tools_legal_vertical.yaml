@@ -1,0 +1,32 @@
+kind: tools
+id: bld_tools_legal_vertical
+pillar: P04
+llm_function: CALL
+purpose: Tools available for legal_vertical production
+quality: null
+title: Tools Legal Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- legal_vertical
+- builder
+- tools
+tldr: Tools available for legal_vertical production
+domain: legal_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool              | Purpose                          | When                              |  \n|-------------------|----------------------------------|-----------------------------------|\
+  \  \n| cex_compile.py    | Compile legal documents          | During document assembly          |  \n| cex_score.py    \
+  \  | Assess compliance risks          | Pre-submission review             |  \n| cex_retriever.py  | Fetch relevant case\
+  \ law        | Research phase                    |  \n| cex_doctor.py     | Flag legal inconsistencies       | Quality assurance\
+  \                 |  \n| cex_analyzer.py   | Parse and categorize clauses   | Document breakdown                |  \n| cex_contractor.py\
+  \ | Generate standard contracts    | Template-based drafting           |"
+validation_tools: "| Tool              | Purpose                          | When                              |  \n|-------------------|----------------------------------|-----------------------------------|\
+  \  \n| val_regulator.py  | Validate against regulations     | Compliance checks                 |  \n| val_consistency.py|\
+  \ Check internal document logic  | Post-edit verification            |  \n| val_citation.py   | Verify legal reference accuracy|\
+  \ Citation review                   |"
+external_references:
+- LexisNexis for legal research databases
+- Unified Legal Ontology (ULO) for structured data mapping
+- PyLaw (Python legal text processing framework)

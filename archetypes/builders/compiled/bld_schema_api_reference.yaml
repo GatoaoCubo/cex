@@ -1,0 +1,52 @@
+kind: schema
+id: bld_schema_api_reference
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for api_reference
+quality: null
+title: Schema Api Reference
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- api_reference
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for api_reference
+domain: api_reference construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes                          |  \n|-----------|--------|----------|---------|--------------------------------|\
+  \  \n| id        | string | yes      |         | Must match ID Pattern          |  \n| kind      | string | yes      | \
+  \        | Fixed to \"api_reference\"       |  \n| pillar    | string | yes      |         | Fixed to \"P06\"          \
+  \       |  \n| title     | string | yes      |         | Human-readable API name        |  \n| version   | string | yes\
+  \      |         | Semantic version (e.g., \"v1.2\")|  \n| created   | date   | yes      |         | ISO 8601 format   \
+  \             |  \n| updated   | date   | yes      |         | ISO 8601 format                |  \n| author    | string\
+  \ | yes      |         | Maintainer name                |  \n| domain    | string | yes      |         | API domain (e.g.,\
+  \ \"exchange\")  |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags    \
+  \  | array  | yes      | []      | Keywords (e.g., [\"REST\", \"WebSocket\"]) |  \n| tldr      | string | yes      |   \
+  \      | One-sentence API summary       |  \n| endpoint  | string | yes      |         | Base URL (e.g., \"https://api.example.com\"\
+  ) |  \n| authentication | string | yes |         | Method (e.g., \"API Key\", \"OAuth2\") |"
+recommended: "| Field         | Type   | Notes                  |  \n|---------------|--------|------------------------| \
+  \ \n| deprecated    | bool   | Mark if deprecated     |  \n| example_url   | string | Example endpoint       |  \n| swagger_url\
+  \   | string | Swagger/OpenAPI spec   |"
+id_pattern: ^p06_ar_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose, scope, and use cases.
+- Authentication
+- Required headers, tokens, or keys.
+- Endpoints
+- List of endpoints with methods, paths, and parameters.
+- Rate Limiting
+- Throttling rules and quotas.
+- Versioning
+- Supported versions and deprecation policy.
+constraints:
+- 'ID must match exact regex: ^p06_ar_[a-z][a-z0-9_]+.md$'
+- All required fields must be present and non-null
+- Version must follow semantic versioning (e.g., "v1.0.0")
+- Endpoints must use absolute URLs
+- Authentication must specify a valid method
+- Rate limits must include numerical thresholds and reset intervals

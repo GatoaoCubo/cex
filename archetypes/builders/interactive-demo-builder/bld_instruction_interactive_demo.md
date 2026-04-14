@@ -1,0 +1,43 @@
+---
+kind: instruction
+id: bld_instruction_interactive_demo
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for interactive_demo
+quality: null
+title: "Instruction Interactive Demo"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [interactive_demo, builder, instruction]
+tldr: "Step-by-step production process for interactive_demo"
+domain: "interactive_demo construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Phase 1: RESEARCH  
+1. Conduct user interviews to identify key demo interaction points  
+2. Analyze competitor demos for common interaction patterns  
+3. Define demo objectives and success metrics (e.g., conversion rates)  
+4. Map user journey through product features with wireframes  
+5. Evaluate technical constraints (e.g., API limits, load times)  
+6. Gather feedback from stakeholders on demo scope  
+
+## Phase 2: COMPOSE  
+1. Outline demo structure using SCHEMA.md's `demo_flow` format  
+2. Write talk track for each guided-tour step (max 2 sentences)  
+3. Embed interactive elements (buttons, sliders) with event handlers  
+4. Align content with OUTPUT_TEMPLATE.md's `step_template` format  
+5. Add branching logic for user-driven exploration paths  
+6. Integrate product API endpoints for real-time data display  
+7. Write error-handling scripts for failed interactions  
+8. Add accessibility features (keyboard navigation, ARIA labels)  
+9. Finalize with demo metadata (duration, target audience)  
+
+## Phase 3: VALIDATE  
+- [ ] Conduct usability testing with 5+ users  
+- [ ] Verify alignment with SCHEMA.md's required fields  
+- [ ] Confirm interactive elements function across devices  
+- [ ] Validate talk track matches scripted user scenarios  
+- [ ] Ensure compliance with P05 accessibility standards

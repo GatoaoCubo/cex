@@ -1,0 +1,31 @@
+kind: tools
+id: bld_tools_changelog
+pillar: P04
+llm_function: CALL
+purpose: Tools available for changelog production
+quality: null
+title: Tools Changelog
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- changelog
+- builder
+- tools
+tldr: Tools available for changelog production
+domain: changelog construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Aggregates change logs from\
+  \ multiple sources | Pre-release |  \n| cex_score.py | Prioritizes changes based on impact | Pre-release |  \n| cex_retriever.py\
+  \ | Fetches version-specific data from repositories | During build |  \n| cex_doctor.py | Validates consistency across changelog\
+  \ entries | Pre-release |  \n| cex_formatter.py | Standardizes markdown syntax and structure | Post-compile |  \n| cex_publisher.py\
+  \ | Deploys changelogs to documentation platforms | Post-release |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_syntax_checker.py | Ensures markdown compliance\
+  \ | Pre-release |  \n| val_link_linter.py | Verifies internal/external links | Pre-release |  \n| val_version_comparator.py\
+  \ | Detects version number mismatches | During build |  \n| val_duplicate_finder.py | Identifies redundant entries | Pre-release\
+  \ |"
+external_references:
+- Git (version control for tracking changes)
+- Markdown (standard for formatting)
+- Keep a Changelog (community guidelines)

@@ -1,0 +1,53 @@
+kind: schema
+id: bld_schema_interactive_demo
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for interactive_demo
+quality: null
+title: Schema Interactive Demo
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- interactive_demo
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for interactive_demo
+domain: interactive_demo construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field      | Type   | Required | Default | Notes                              |  \n|------------|--------|----------|---------|------------------------------------|\
+  \  \n| id         | string | yes      | null    | Must match ID Pattern              |  \n| kind       | string | yes  \
+  \    | null    | Always \"interactive_demo\"          |  \n| pillar     | string | yes      | null    | Always \"P05\" \
+  \                      |  \n| title      | string | yes      | null    | Descriptive title                  |  \n| version\
+  \    | string | yes      | \"1.0\"   | Semantic versioning                |  \n| created    | date   | yes      | null \
+  \   | ISO 8601 format                    |  \n| updated    | date   | yes      | null    | ISO 8601 format             \
+  \       |  \n| author     | string | yes      | null    | Author name                        |  \n| domain     | string\
+  \ | yes      | null    | Application domain (e.g., \"AI\")    |  \n| quality    | null   | yes      | null    | Never self-score;\
+  \ peer review assigns |  \n| tags       | list   | yes      | []      | Keywords for categorization        |  \n| tldr \
+  \      | string | yes      | null    | One-sentence summary               |  \n| demo_url   | string | yes      | null \
+  \   | Live demo link                     |  \n| interactive_elements | list | yes | [] | Features like clickables, sliders\
+  \ |"
+recommended: "| Field              | Type   | Notes                  |  \n|--------------------|--------|------------------------|\
+  \  \n| demo_duration      | string | Estimated interaction time |  \n| target_audience    | string | Intended user group\
+  \    |  \n| prerequisites      | list   | Skills/tools required  |"
+id_pattern: ^p05_id_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose and scope of the demo
+- Interactive Elements
+- Detailed description of user-facing features
+- User Feedback
+- Mechanisms for collecting input
+- Technical Requirements
+- Hardware/software dependencies
+- Demo URL
+- Direct link to live/demo environment
+constraints:
+- ID must match ^p05_id_[a-z][a-z0-9_]+.md$ exactly
+- File size must not exceed 6144 bytes
+- All required fields must be present and valid
+- Quality field must be assigned by peer review, not self-scored
+- Domain-specific fields (demo_url, interactive_elements) must be non-empty
+- Markdown must use ASCII characters only and stay under 80 lines

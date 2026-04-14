@@ -1,0 +1,66 @@
+kind: architecture
+id: bld_architecture_fintech_vertical
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of fintech_vertical -- inventory, dependencies
+quality: null
+title: Architecture Fintech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- fintech_vertical
+- builder
+- architecture
+tldr: Component map of fintech_vertical -- inventory, dependencies
+domain: fintech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name             | Role                                | Pillar | Status  |
+
+  |----------------------|-------------------------------------|--------|---------|
+
+  | bld_manifest         | Defines the structure               | P01    | Active  |
+
+  | bld_instruction      | Standardizes input format           | P01    | Active  |
+
+  | bld_system_prompt    | Encapsulates LLM interaction rules  | P01    | Active  |
+
+  | bld_schema           | Enforces data structure consistency | P01    | Active  |
+
+  | bld_quality_gate     | Validates output compliance         | P01    | Active  |
+
+  | bld_output_template  | Formats final deliverables          | P01    | Active  |
+
+  | bld_examples         | Provides reference implementations  | P01    | Active  |
+
+  | bld_knowledge_card   | Stores domain-specific knowledge    | P01    | Active  |
+
+  | bld_architecture     | Defines system-level blueprints     | P01    | Active  |
+
+  | bld_collaboration    | Manages cross-team workflows        | P01    | Active  |
+
+  | bld_config           | Centralizes runtime parameters      | P01    | Active  |
+
+  | bld_memory           | Maintains session state             | P01    | Active  |
+
+  | bld_tools            | Integrates external utilities       | P01    | Active  |'
+dependencies: '| From              | To                  | Type        |
+
+  |-------------------|---------------------|-------------|
+
+  | bld_instruction   | bld_schema          | Data        |
+
+  | bld_quality_gate  | bld_output_template | Validation  |
+
+  | bld_memory        | bld_tools           | Storage     |
+
+  | bld_config        | External Config Tool| Integration |
+
+  | bld_collaboration | bld_knowledge_card  | Reference   |
+
+  | bld_architecture  | bld_manifest        | Definition  |'
+architectural_position: The fintech_vertical-builder operates as the foundational layer within the CEX P01 ecosystem, enabling
+  rapid deployment of vertical-specific fintech solutions through standardized ISOs. It ensures compliance with regulatory
+  frameworks, integrates with cross-pillar tools, and maintains consistency across use cases via shared schemas, quality gates,
+  and collaborative workflows.

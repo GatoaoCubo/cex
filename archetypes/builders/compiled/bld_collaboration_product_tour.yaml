@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_product_tour
+pillar: P12
+llm_function: COLLABORATE
+purpose: How product_tour-builder works in crews with other builders
+quality: null
+title: Collaboration Product Tour
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- product_tour
+- builder
+- collaboration
+tldr: How product_tour-builder works in crews with other builders
+domain: product_tour construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Designs and manages non-interactive product tours to educate users on key features without sales or activation
+  focus.
+receives_from: "| Builder     | What                  | Format      |  \n|-------------|-----------------------|-------------|\
+  \  \n| Content Team| Feature descriptions  | Markdown    |  \n| Design Team | Visual assets         | PNG/SVG     |  \n\
+  | Engineering | Technical constraints | JSON spec   |"
+produces_for: "| Builder     | What                  | Format      |  \n|-------------|-----------------------|-------------|\
+  \  \n| Engineering | Tour implementation   | JSON        |  \n| Design Team | Storyboard            | Figma       |  \n\
+  | Support Team| User guide            | PDF         |"
+boundary: Does NOT handle interactive demos (sales) or onboarding flows (activation). Interactive demos are managed by `interactive_demo-builder`;
+  onboarding flows by `onboarding_flow-builder`. Technical implementation is handled by Engineering, not this builder.

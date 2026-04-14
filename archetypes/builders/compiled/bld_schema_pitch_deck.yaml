@@ -1,0 +1,42 @@
+kind: schema
+id: bld_schema_pitch_deck
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for pitch_deck
+quality: null
+title: Schema Pitch Deck
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- pitch_deck
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for pitch_deck
+domain: pitch_deck construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
+  \ Pattern |  \n| kind | string | yes | \"pitch_deck\" |  |  \n| pillar | string | yes | \"P05\" |  |  \n| title | string\
+  \ | yes |  |  |  \n| version | string | yes | \"1.0\" |  |  \n| created | datetime | yes |  | ISO 8601 format |  \n| updated\
+  \ | datetime | yes |  | ISO 8601 format |  \n| author | string | yes |  |  |  \n| domain | string | yes |  |  |  \n| quality\
+  \ | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] |  |  \n| tldr | string | yes\
+  \ |  |  |  \n| audience | string | yes |  | Target audience |  \n| investment_ask | string | yes |  | Funding request |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| summary | string | Brief overview |  \n| key_metrics | list |\
+  \ Critical performance indicators |"
+id_pattern: ^p05_pd_[a-z][a-z0-9_]+.md$
+body_structure:
+- Executive Summary
+- Problem & Solution
+- Market Opportunity
+- Business Model
+- Team
+- Financials
+constraints:
+- File size must not exceed 6144 bytes
+- ID must match ^p05_pd_[a-z][a-z0-9_]+.md$
+- All required fields must be present
+- Quality field must be peer-reviewed, not self-assigned
+- Domain-specific fields (audience, investment_ask) must be populated
+- ASCII characters only; no markdown in body content

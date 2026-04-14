@@ -1,0 +1,36 @@
+kind: quality_gate
+id: p01_qg_healthcare_vertical
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for healthcare_vertical
+quality: null
+title: Quality Gate Healthcare Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- healthcare_vertical
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for healthcare_vertical
+domain: healthcare_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| Healthcare vertical compliance | 100% | =\
+  \ | All healthcare-related content |"
+hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | Invalid YAML syntax or missing\
+  \ fields |  \n| H02 | ID matches pattern ^p01_hv_[a-z][a-z0-9_]+.md$ | ID does not conform to schema |  \n| H03 | kind field\
+  \ matches 'healthcare_vertical' | kind field is incorrect |  \n| H04 | HIPAA compliance documented | Missing HIPAA compliance\
+  \ proof |  \n| H05 | PHI handling procedures defined | No PHI handling guidelines |  \n| H06 | HL7/FHIR standards adhered\
+  \ | Non-compliant with HL7/FHIR |  \n| H07 | Use case alignment verified | Use cases not mapped to healthcare needs |  \n\
+  | H08 | Data encryption enforced | PHI data not encrypted at rest/transit |  \n| H09 | Audit logging implemented | No audit\
+  \ trails for PHI access |  \n| H10 | Access controls enforced | Role-based access not configured |"
+soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | HIPAA compliance | 0.15 | 100%\
+  \ = 1.0, 50% = 0.5 |  \n| D02 | PHI handling | 0.15 | 100% = 1.0, 50% = 0.5 |  \n| D03 | HL7/FHIR adherence | 0.12 | 100%\
+  \ = 1.0, 75% = 0.75 |  \n| D04 | Use case coverage | 0.12 | 100% = 1.0, 75% = 0.75 |  \n| D05 | Data encryption | 0.10 |\
+  \ 100% = 1.0, 50% = 0.5 |  \n| D06 | Audit logging | 0.10 | 100% = 1.0, 50% = 0.5 |  \n| D07 | Access controls | 0.10 |\
+  \ 100% = 1.0, 50% = 0.5 |  \n| D08 | Documentation completeness | 0.16 | 100% = 1.0, 50% = 0.5 |"
+actions: "| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Auto-approve for production |  \n| PUBLISH | >=8.0 | Manual\
+  \ review required |  \n| REVIEW | >=7.0 | Escalate to compliance team |  \n| REJECT | <7.0 | Block deployment |"
+bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Emergency fix with CTO approval | CTO | Documented\
+  \ in Jira |  \n| Regulatory change with legal sign-off | Legal team | Signed waiver |"

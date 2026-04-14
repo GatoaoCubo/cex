@@ -1,0 +1,32 @@
+kind: examples
+id: bld_examples_product_tour
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of product_tour artifacts
+quality: null
+title: Examples Product Tour
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- product_tour
+- builder
+- examples
+tldr: Golden and anti-examples of product_tour artifacts
+domain: product_tour construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\ntitle: \"Tour: Analytics Dashboard Features\"\nkind: product_tour\nvendor: Pendo\ndescription: \"Guided\
+  \ walkthrough of key analytics dashboard features for new users\"\n---\nSteps:\n1. Step 1: Filter Bar\n   - Trigger: User\
+  \ clicks \"Add Filter\" button\n   - Tooltip: \"Use this bar to narrow down data by date, region, or user segment\"\n2.\
+  \ Step 2: Visualization Panel\n   - Trigger: User hovers over chart\n   - Tooltip: \"Click to edit chart type (bar, line,\
+  \ pie) or export as PNG\"\n3. Step 3: Export Options\n   - Trigger: User clicks \"Export\" dropdown\n   - Tooltip: \"Download\
+  \ data as CSV, PDF, or share via email\""
+anti_example_1_confusing_with_onboarding_flow: "---\ntitle: \"Tour: First Login Setup\"\nkind: onboarding_flow\nvendor: Intercom\n\
+  description: \"Walkthrough for completing user profile during first login\"\n---\nSteps:\n1. Step 1: Name Input\n   - Trigger:\
+  \ User arrives at profile page\n   - Tooltip: \"Enter your full name to personalize your experience\""
+why_it_fails: No trigger defined - the tour cannot be activated automatically or contextually. Triggers are essential for
+  timed or event-based tours.
+anti_example_2_missing_trigger_logic: "---\ntitle: \"Tour: Collaboration Tools\"\nkind: product_tour\nvendor: UserGuiding\n\
+  description: \"Showcase collaboration features\"\n---\nSteps:\n1. Step 1: Comment Section\n   - Tooltip: \"Add comments\
+  \ to specific data points for team discussion\""

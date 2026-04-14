@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_discovery_questions
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of discovery_questions artifacts
+quality: null
+title: Examples Discovery Questions
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- discovery_questions
+- builder
+- examples
+tldr: Golden and anti-examples of discovery_questions artifacts
+domain: discovery_questions construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\ntitle: \"Discovery Questions for Mid-Market SaaS Buyer (Deal Stage: Needs Analysis)\"\npersona: \"IT\
+  \ Director at a mid-sized healthcare provider\"\ndeal_stage: \"Needs Analysis\"\nquestions:\n  - \"What are your current\
+  \ challenges with patient data management in compliance with HIPAA regulations?\"\n  - \"How many hours per week does your\
+  \ IT team spend manually reconciling data across systems?\"\n  - \"What specific KPIs would you use to measure success if\
+  \ we implemented a cloud-based EHR solution?\"\n  - \"Who are the key stakeholders involved in evaluating new healthcare\
+  \ IT solutions?\"\n  - \"What is your current annual budget allocation for digital transformation initiatives?\"\n\n---"
+anti_example_1_vague_and_broad_questions: "questions:\n  - \"What are your goals for the next year?\"\n  - \"How do you see\
+  \ technology impacting your business?\"\n  - \"What challenges are you facing?\""
+? why_it_fails_questions_lack_specificity_to_the_buyer_persona_e_g_it_director_and_deal_stage_e_g_needs_analysis_they_are_too_generic_to_uncover_actionable_insights_about_hipaa_compliance_or_ehr_implementation_needs
+: ''
+anti_example_2_sales_playbook_content: "questions:\n  - \"Our solution reduces manual data entry by 70% – would that interest\
+  \ you?\"\n  - \"We offer 24/7 support – how important is uptime to your operations?\"\n  - \"Our competitors charge 3x more\
+  \ – are you looking for cost savings?\""
+? why_it_fails_these_are_sales_pitches_disguised_as_discovery_questions_they_assume_product_knowledge_rather_than_uncovering_the_buyer_s_needs_violating_the_meddic_bant_principle_of_focusing_on_the_customer_s_situation
+: ''

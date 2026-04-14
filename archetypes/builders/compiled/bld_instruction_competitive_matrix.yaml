@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_competitive_matrix
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for competitive_matrix
+quality: null
+title: Instruction Competitive Matrix
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- competitive_matrix
+- builder
+- instruction
+tldr: Step-by-step production process for competitive_matrix
+domain: competitive_matrix construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify target competitors and their product/service offerings.
+- Gather feature data from public specs, customer reviews, and sales demos.
+- Map customer requirements for sales battle cards and procurement evals.
+- Analyze pricing models, SLAs, and integration capabilities.
+- Document unique value propositions and differentiators.
+- Validate data sources for accuracy and relevance.
+phase_2_compose:
+- 'Define matrix structure: rows=features, cols=competitors + self.'
+- Populate rows with prioritized features (e.g., scalability, security).
+- Fill columns with competitive benchmarks (e.g., yes/no, rating scales).
+- Align data with SCHEMA.md (e.g., feature categories, metadata fields).
+- Use OUTPUT_TEMPLATE.md to format headers, footers, and annotations.
+- Insert value propositions and differentiators in dedicated columns.
+- Add procurement-specific metrics (e.g., TCO, implementation time).
+- Cross-reference with sales battle card templates for consistency.
+- Finalize with clear legends and notes for evaluators.
+phase_3_validate:
+- '[ ] ✅ All features mapped to customer requirements (Phase 1, Step 3).'
+- '[ ] ✅ Data sources cited and verified for accuracy (Phase 1, Step 6).'
+- '[ ] ✅ Schema alignment confirmed (Phase 2, Step 4).'
+- '[ ] ✅ Template formatting matches OUTPUT_TEMPLATE.md (Phase 2, Step 5).'
+- '[ ] ✅ Stakeholders confirm usability for sales/procurement scenarios.'

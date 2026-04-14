@@ -1,0 +1,43 @@
+kind: schema
+id: bld_schema_competitive_matrix
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for competitive_matrix
+quality: null
+title: Schema Competitive Matrix
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- competitive_matrix
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for competitive_matrix
+domain: competitive_matrix construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes |  \n|-----------|--------|----------|---------|-------|  \n\
+  | id        | string | yes      |         |       |  \n| kind      | string | yes      |         |       |  \n| pillar \
+  \   | string | yes      |         |       |  \n| title     | string | yes      |         |       |  \n| version   | string\
+  \ | yes      |         |       |  \n| created   | date   | yes      |         |       |  \n| updated   | date   | yes  \
+  \    |         |       |  \n| author    | string | yes      |         |       |  \n| domain    | string | yes      |   \
+  \      |       |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      |\
+  \ list   | yes      |         |       |  \n| tldr      | string | yes      |         |       |  \n| competitors | list |\
+  \ yes      |         |       |  \n| metrics   | list   | yes      |         |       |  \n| analysis_date | date | yes  \
+  \    |         |       |  \n| key_insights | string | yes      |         |       |"
+recommended: "| Field         | Type   | Notes |  \n|---------------|--------|-------|  \n| source        | string |     \
+  \  |  \n| methodology   | string |       |  \n| reviewers     | list   |       |"
+id_pattern: ^p01_cm_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Competitor Analysis
+- Key Metrics
+- Strategic Insights
+- Recommendations
+constraints:
+- ID must match ^p01_cm_[a-z][a-z0-9_]+.md$
+- '`analysis_date` must be ISO 8601 format'
+- '`quality` field must be assigned by peer review'
+- Tags must follow domain-specific conventions
+- File size must not exceed 5120 bytes
