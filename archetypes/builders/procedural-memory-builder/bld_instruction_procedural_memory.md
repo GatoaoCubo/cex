@@ -5,39 +5,49 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for procedural_memory
 quality: null
-title: "Instruction Procedural Memory"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+title: "Instruction: procedural_memory-builder"
+version: "2.0.0"
+author: n06_commercial
 tags: [procedural_memory, builder, instruction]
-tldr: "Step-by-step production process for procedural_memory"
-domain: "procedural_memory construction"
+tldr: "8F production process for LLM agent procedural memory: load schema, define skill namespace, format, storage backend, verification strategy, reflexion notes, tier matrix"
+domain: "LLM agent procedural memory"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.90
 ---
 
-## Phase 1: RESEARCH  
-1. Analyze cognitive neuroscience studies on procedural memory encoding in humans.  
-2. Reverse-engineer existing skill acquisition systems (e.g., robotics, AI training modules).  
-3. Map neural pathways for motor and cognitive skill retention (e.g., basal ganglia, cerebellum).  
-4. Benchmark performance of current procedural memory storage architectures.  
-5. Identify gaps in retrieval latency and error rates under high-load scenarios.  
-6. Document domain-specific injection triggers (e.g., sensory input, contextual cues).  
+## Phase 1: RESEARCH
 
-## Phase 2: COMPOSE  
-1. Define schema in SCHEMA.md: memory ID, skill type, encoding layer, retrieval priority.  
-2. Write injection routines using OUTPUT_TEMPLATE.md: binary encoding for motor skills, symbolic for cognitive.  
-3. Implement hierarchical storage layers (short-term, long-term, contextual).  
-4. Code retrieval algorithms with priority-based conflict resolution.  
-5. Integrate with P10 system APIs for real-time skill deployment.  
-6. Add metadata tags for skill versioning and dependency tracking.  
-7. Embed error-correction logic for partial memory degradation.  
-8. Optimize for parallel injection across distributed nodes.  
-9. Validate schema compatibility with legacy procedural memory systems.  
+1. Identify the parent memory_architecture artifact (which tier is active, what backends).
+2. Determine skill format needed: code (Voyager/Code-as-policies), YAML (workflow SOPs),
+   natural language (Reflexion notes), or structured JSON.
+3. Map the target commercial tier (free/pro/enterprise) against the tier matrix
+   in bld_knowledge_card_procedural_memory.md.
+4. Review reference systems: Voyager (Wang 2023) for skill library design, Reflexion
+   (Shinn 2023) for self-note patterns, ExpeL (Zhao 2023) for experience extraction.
+5. Design the skill namespace: `domain.task.subtask` hierarchy for scalable lookup.
+6. Check bld_schema_procedural_memory.md for required frontmatter and body structure.
 
-## Phase 3: VALIDATE  
-- [ ] Unit test injection/retrieval latency (≤5ms for critical skills)  
-- [ ] Stress-test concurrent memory writes (10k+ operations/sec)  
-- [ ] Verify schema alignment with SCHEMA.md and OUTPUT_TEMPLATE.md  
-- [ ] Confirm retrieval accuracy under degraded input (95%+ success rate)  
-- [ ] Audit security: prevent unauthorized memory injection/override
+## Phase 2: COMPOSE
+
+1. Write frontmatter per bld_schema_procedural_memory.md (all required fields, quality: null).
+2. Write Overview: agent type, tier, what skill domain this covers.
+3. Write Skill Definitions table:
+   - Columns: Skill ID | Name | Format | Storage Key | Verification | Tier Required
+   - Row per skill or skill category
+4. Write Skill Namespace section: hierarchy, key pattern, example lookups.
+5. Write Storage Backend section: KV store config, encoding format, retrieval method.
+6. Write Verification Strategy: how skills are tested before storage (Voyager pattern).
+7. Write Reflexion Notes section: how failure-derived self-notes are stored and retrieved.
+8. Write Commercial Tier Matrix: FREE/PRO/ENTERPRISE capability comparison.
+
+## Phase 3: VALIDATE
+
+- [ ] Schema compliance: all required frontmatter fields present, ID matches pattern.
+- [ ] LLM-domain grounding: content references Voyager/Reflexion/ExpeL, not robotics motors.
+- [ ] skill_format field present and valid.
+- [ ] Verification strategy defined (or explicitly excluded with reason for non-code formats).
+- [ ] Tier matrix present: FREE/PRO/ENTERPRISE differentiation explicit.
+- [ ] Free tier: states "no procedural memory" or graceful degradation.
+- [ ] quality: null in frontmatter (never self-score).
+- [ ] No Unicode characters (ASCII only per ascii-code-rule.md).
