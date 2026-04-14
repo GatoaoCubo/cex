@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW3 Master Summary: N01 (agent_computer_interface + training_method)"
 version: 1.0.0
-quality: null
+quality: 8.5
 tags: [audit, hybrid_review3, n01, master_summary, gemma4, wave2]
 domain: AI research quality assurance
 created: "2026-04-14"

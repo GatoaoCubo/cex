@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW3 Audit: quantization_config (N05)"
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [audit, hybrid_review3, quantization_config, gemma4, wave2]
 domain: ML ops quality assurance
 created: "2026-04-13"

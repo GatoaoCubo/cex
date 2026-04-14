@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW3 Audit: model_registry (N04)"
 version: 1.0.0
-quality: null
+quality: 8.7
 tags: [audit, hybrid_review3, model_registry, gemma4, wave2]
 domain: knowledge catalog quality assurance
 created: "2026-04-13"
