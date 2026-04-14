@@ -1,4 +1,48 @@
-Create: P01_knowledge/library/kind/kc_contributor_guide.md
-KC about contributor_guide. Description: OSS CONTRIBUTING.md spec: dev setup, PR flow, coding standards, review process, CLA
-YAML: id: kc_contributor_guide, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
-English only. Under 80 lines.
+---
+id: kc_github_issue_template
+kind: knowledge_card
+title: GitHub Issue Template
+version: 1.0.0
+quality: null
+pillar: P01
+---
+
+# GitHub Issue Template
+
+## Purpose
+Standardized template for reporting bugs, requesting features, or asking questions. Includes required fields and labels for efficient issue categorization.
+
+## Template Structure
+
+### Bug Report
+**Required Fields:**
+- Summary of the issue
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots/Logs
+- Environment details (OS, browser, etc.)
+
+**Labels:** bug, priority, reproducible
+
+### Feature Request
+**Required Fields:**
+- Proposed feature name
+- Description of the feature
+- Use case scenarios
+- Alternative solutions considered
+
+**Labels:** feature, enhancement, discussion
+
+### Question
+**Required Fields:**
+- Clear question statement
+- Context/Background
+- Relevant code snippets (if applicable)
+
+**Labels:** question, support, clarification
+
+## Best Practices
+- Use clear, concise language
+- Follow the issue type-specific format
+- Add relevant labels for quick triage
+- Keep descriptions focused on the problem, not solutions
