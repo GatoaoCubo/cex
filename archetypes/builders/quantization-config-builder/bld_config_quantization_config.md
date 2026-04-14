@@ -16,6 +16,10 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
+## Domain
+quantization_config artifacts define bits, precision, and quant_type parameters
+for model weight compression. Pillar: P09 (Config).
+
 ## Naming Convention
 Pattern: p09_qc_{{name}}.yaml
 Examples:
@@ -23,7 +27,7 @@ Examples:
 - p09_qc_mistral.yaml
 
 ## Paths
-Artifacts: /storage/p09/quantized_outputs/
+Artifacts: P09_config/quantization/
 
 ## Limits
 - max_bytes: 2048
