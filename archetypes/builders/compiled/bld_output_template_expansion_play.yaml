@@ -1,0 +1,21 @@
+kind: output_template
+id: bld_output_template_expansion_play
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for expansion_play production
+quality: null
+title: Output Template Expansion Play
+version: 1.0.0
+author: wave6_n06
+tags:
+- expansion_play
+- builder
+- output_template
+- upsell
+- NRR
+- land-and-expand
+tldr: Template with vars for expansion_play production
+domain: expansion_play construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
