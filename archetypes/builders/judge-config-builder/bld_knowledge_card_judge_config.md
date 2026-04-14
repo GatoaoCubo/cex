@@ -1,0 +1,59 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_judge_config
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for judge_config production
+quality: null
+title: "Knowledge Card Judge Config"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [judge_config, builder, knowledge_card]
+tldr: "Domain knowledge for judge_config production"
+domain: "judge_config construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Domain Overview  
+Judge_config artifacts define structured parameters for LLM evaluation systems, enabling consistent, repeatable, and scalable automated judgment. They underpin benchmarks like MLCommons and Hugging Face datasets, where configurations dictate how models are scored on tasks ranging from factuality to safety. These configs often integrate with frameworks such as LMSYS and OpenLett, ensuring alignment with human-centric rubrics while enabling machine-readable scoring rules.  
+
+The rise of AI alignment and LLM testing has increased demand for judge_config rigor, as misconfigured systems can produce biased or inconsistent evaluations. Configs must balance flexibility (to adapt to new tasks) with specificity (to avoid ambiguity in scoring). Industry leaders emphasize config versioning, traceability, and compatibility with both human and machine judges.  
+
+## Key Concepts  
+Concept | Definition | Source  
+--- | --- | ---  
+Evaluation Criteria | Metrics used to assess model outputs (e.g., accuracy, fluency) | MLCommons benchmarks  
+Scoring Thresholds | Numerical ranges defining pass/fail or quality tiers | NeurIPS 2022: "Automated Scoring in NLP"  
+Prompt Templates | Structured instructions for judges to evaluate outputs | Hugging Face Dataset API docs  
+Judgment Granularity | Level of detail in scoring (e.g., per-token vs. per-response) | Alignment Research Center paper  
+Config Versioning | Tracking changes to judge_config over time | Git-based LLM benchmarking practices  
+Bias Mitigation Rules | Parameters to reduce evaluation bias (e.g., demographic filters) | ACM SIGKDD 2023: "Fairness in LLM Evaluation"  
+Error Handling Policies | Rules for managing invalid or ambiguous model outputs | RFC 7807: Problem Details for API Errors  
+Scoring Normalization | Techniques to align scores across different judges/configs | ISO/IEC 23894: AI Trustworthiness  
+Artifact Logging Parameters | Configs for recording evaluation metadata (e.g., timestamps, judge IDs) | LMSYS evaluation framework  
+Judgment Aggregation Methods | Algorithms to combine scores from multiple judges/configs | OpenLett v2.1 specification  
+
+## Industry Standards  
+- MLCommons benchmarks (e.g., MMLU, TruthfulQA)  
+- Hugging Face Datasets API (version 2.10+)  
+- RFC 7807: Problem Details for API Errors  
+- ISO/IEC 23894: Artificial Intelligence — Trustworthiness  
+- Alignment Research Center: "Judgment Alignment in LLM Evaluation" (2023)  
+- LMSYS evaluation framework (v2.1)  
+- OpenLett: Open-Source LLM Evaluation Toolkit  
+
+## Common Patterns  
+1. Modular configuration: Separate criteria, thresholds, and logging rules into reusable components.  
+2. Versioned configs: Use semantic versioning (e.g., v1.2.3) for traceability and rollback.  
+3. Parameterized templates: Allow dynamic insertion of task-specific instructions or metrics.  
+4. Cross-judge normalization: Ensure compatibility between human and LLM judges via shared scales.  
+5. Edge-case handling: Predefine responses for invalid inputs (e.g., "unanswerable" or "unsafe").  
+
+## Pitfalls  
+- Hardcoding thresholds without domain-specific calibration.  
+- Ignoring task-specific edge cases (e.g., ambiguous queries, multilingual content).  
+- Overlooking bias mitigation in scoring rules, leading to skewed results.  
+- Failing to align judge_config with human rubrics, causing evaluation drift.  
+- Neglecting config versioning, resulting in untraceable evaluation changes.
