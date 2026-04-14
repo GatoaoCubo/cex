@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_trajectory_eval
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for trajectory_eval
+quality: null
+title: Instruction Trajectory Eval
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- trajectory_eval
+- builder
+- instruction
+tldr: Step-by-step production process for trajectory_eval
+domain: trajectory_eval construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Review existing agent trajectory evaluation frameworks (e.g., RL benchmarks, safety metrics).
+- 'Define evaluation criteria: success rate, deviation from policy, resource usage, and ethical compliance.'
+- Analyze case studies of agent failures in real-world deployments.
+- Collect annotated trajectory datasets for training and validation.
+- Benchmark against P07 governance standards for AI system accountability.
+- Interview domain experts to identify unmet evaluation needs.
+phase_2_compose:
+- Set up artifact structure using SCHEMA.md’s hierarchical framework.
+- Write introduction aligning with OUTPUT_TEMPLATE.md’s scope section.
+- 'Detail methodology: metric definitions, data sources, and evaluation workflows.'
+- Map governance principles (P07) to evaluation stages (e.g., risk mitigation).
+- Embed trajectory analysis examples from Phase 1 datasets.
+- Reference SCHEMA.md for compliance with artifact metadata standards.
+- Draft validation protocols (e.g., cross-agent comparisons, edge case testing).
+- Format tables and figures per OUTPUT_TEMPLATE.md’s visual guidelines.
+- Finalize artifact with peer review and schema validation.
+phase_3_validate:
+- '[ ] Conduct peer review for clarity and governance alignment.'
+- '[ ] Verify data accuracy against Phase 1 datasets.'
+- '[ ] Ensure schema compliance (SCHEMA.md) and template adherence (OUTPUT_TEMPLATE.md).'
+- '[ ] Test artifact with sample trajectories for usability.'
+- '[ ] Obtain stakeholder approval for deployment.'
