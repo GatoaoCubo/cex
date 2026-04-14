@@ -82,5 +82,11 @@ $cliArgs = @("--dangerously-bypass-approvals-and-sandbox", "--model", "gpt-5-cod
 $cliArgs += "-C", $cexRoot
 
 Set-CexTitle "RUNNING"
+# [CEX_COLOR_RESET] Prevent RawUI color bleed into child CLI TUI
+try {
+    $Host.UI.RawUI.BackgroundColor = "Black"
+    $Host.UI.RawUI.ForegroundColor = "Gray"
+    [Console]::ResetColor()
+} catch {}
 & codex exec @cliArgs $initialMsg
 Set-CexTitle "DONE"

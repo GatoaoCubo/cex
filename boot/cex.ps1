@@ -96,5 +96,11 @@ $cliArgs += "--append-system-prompt", $sysPrompt
 $cliArgs += $initialMsg
 
 Set-CexTitle "RUNNING"
+# [CEX_COLOR_RESET] Prevent RawUI color bleed into child CLI TUI
+try {
+    $Host.UI.RawUI.BackgroundColor = "Black"
+    $Host.UI.RawUI.ForegroundColor = "Gray"
+    [Console]::ResetColor()
+} catch {}
 & claude @cliArgs
 Set-CexTitle "DONE"
