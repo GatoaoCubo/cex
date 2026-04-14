@@ -1,46 +1,29 @@
 ---
-id: kc_role_assignment
+id: kc_fhir_agent_capability
 kind: knowledge_card
-title: Role Assignment in CEX Agents
+title: HL7 FHIR R5 AI Agent Capability Declaration
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-Role assignment in CEX agents follows CrewAI-style binding patterns with these core elements:
+A HL7 FHIR R5 AI Agent Capability Declaration defines clear standards for AI agents operating in healthcare systems via SMART on FHIR. It includes:
 
-1. **Role Definition**  
-   - Unique identifier (e.g., "n03-builder")
-   - Functional purpose (e.g., "artifact creation")
-   - Technical constraints (e.g., "opus-4-6 model")
+1. **SMART on FHIR Scopes** - Access permissions for reading/writing FHIR resources (e.g., Patient, Observation)
+2. **PHI Handling** - Mandatory encryption of protected health information (PHI) in transit and at rest
+3. **CDS Hooks** - Integration with systems providing clinical decision support based on evidence
+4. **AI Transparency** - Requirements to document AI model origins, bias mitigation, and decision explainability
 
-2. **Agent Configuration**  
-   - Model parameters (temperature, max_tokens)
-   - Context window size
-   - Memory type (short/long term)
-   - Permission levels (control_request types)
+This declaration ensures:
+- Compliance with data protection laws like HIPAA and GDPR
+- Compatibility between different electronic health record (EHR) systems
+- Tracking of AI decisions in healthcare
+- Secure access control to sensitive patient data
 
-3. **Responsibilities**  
-   - Task execution boundaries
-   - Error handling protocols
-   - Quality thresholds (e.g., 8.0+ score)
-   - Token budget allocation
+Key components include:
+- CapabilityStatement assertions in FHIR
+- Security context for data access
+- API version compatibility guarantees
+- Detailed documentation about used AI models
 
-4. **Delegation Rules**  
-   - Task routing logic (e.g., N01→N03 for analysis→creation)
-   - Priority queues (high/medium/low)
-   - Parallel processing limits
-   - Chain-of-thought requirements
-
-5. **Backstory Context**  
-   - Historical task performance
-   - Previous decision patterns
-   - Brand alignment metrics
-   - Taxonomy audit scores
-
-This binding ensures autonomous operation while maintaining governance through:
-- 8F pipeline compliance
-- GDP protocol checks
-- Quality gate enforcement
-- Memory decay management
-- Taxonomy consistency
+This declaration enables secure AI integration in healthcare while maintaining patient data confidentiality and regulatory compliance.
