@@ -1,0 +1,37 @@
+---
+kind: config
+id: bld_config_quantization_config
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for quantization_config production
+quality: null
+title: "Config Quantization Config"
+version: "1.0.0"
+author: wave1_builder_gen
+tags: [quantization_config, builder, config]
+tldr: "Naming, paths, limits for quantization_config production"
+domain: "quantization_config construction"
+created: "2026-04-13"
+updated: "2026-04-13"
+density_score: 0.85
+---
+
+## Naming Convention
+Pattern: p09_qc_{{name}}.yaml
+Examples:
+- p09_qc_llama3.yaml
+- p09_qc_mistral.yaml
+
+## Paths
+Artifacts: /storage/p09/quantized_outputs/
+
+## Limits
+- max_bytes: 2048
+- max_turns: 10
+- effort_level: medium
+
+## Hooks
+- pre_build: null
+- post_build: null
+- on_error: null
+- on_quality_fail: null
