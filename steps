@@ -19,18 +19,10 @@ density_score: 0.95
 
 # System Prompt Review Steps
 
-## Spec
-```yaml
-kind: steps
-pillar: P04
-llm_function: TOOL
-max_bytes: 4096
-naming: p04_steps_{{name}}.md + .yaml
-core: true
-```
+Hey! 🚀 Let's break down how to review and improve system prompts like a pro. 
 
 ## What It Is
-A steps is a structured workflow for evaluating and improving system prompts. It defines a specific review process that can be executed repeatedly across different contexts. Steps reviews are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this review?" while agents answer "who am I?" and prompts answer "how do I communicate?"
+A *steps* is a structured workflow for evaluating and improving system prompts. It defines a specific review process that can be executed repeatedly across different contexts. Steps reviews are NOT agents (P02, which define identity/persona) nor system_prompts (P03, which define communication style). A steps answers "what phases execute to achieve this review?" while agents answer "who am I?" and prompts answer "how do I communicate?"
 
 ## Cross-Platform Map
 | Framework/Provider | Class/Concept | Notes |
