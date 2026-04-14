@@ -36,7 +36,11 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **N00 Genesis (archetype)** | `N00_genesis/` + `P{01-12}_*/` + `archetypes/` |
 | **Pillar schemas** | `P{01-12}_*/_schema.yaml` (all descriptions in EN) |
 | **Kind KCs** | `P01_knowledge/library/kind/kc_{kind}.md` (131 files) |
-| **Kind registry** | `.cex/kinds_meta.json` (128 kinds) |
+| **Kind registry** | `.cex/kinds_meta.json` (257 kinds) |
+| **Composable-crew rule** | `.claude/rules/composable-crew.md` (5 WAVE8 primitives + grid-of-crews) |
+| **Crew CLI** | `_tools/cex_crew.py` (list/show/run) |
+| **Example crew** | `N02_marketing/crews/p12_ct_product_launch.md` (4-role sequential) |
+| **Nucleus defs** | `N0[0-7]_*/architecture/nucleus_def_n0[0-7].md` (8 machine-readable identities) |
 | **Terminology** | `_docs/specs/spec_metaphor_dictionary.md` + Rosetta Stone KC |
 | **N07 tech authority** | `.claude/rules/n07-technical-authority.md` |
 | **Infinite loop spec** | `_docs/specs/spec_infinite_bootstrap_loop.md` |
@@ -101,6 +105,22 @@ User decides WHAT → LLM builds HOW → verify together.
 | `/doctor` | Full diagnostics |
 | `/consolidate` | Post-dispatch: verify + score + clean |
 | `/evolve [file\|all]` | **AutoResearch**: autonomous artifact improvement loop |
+| `/crew list\|show\|run <name>` | **Composable crew (WAVE8)**: list/inspect/run multi-role teams (sequential\|hierarchical\|consensus) |
+
+### Composable Crews (WAVE8)
+
+Crews = 1 coherent package from N roles with handoffs. Use when solo-builder is too shallow and grid is too parallel.
+
+```bash
+python _tools/cex_crew.py list                      # discover registered crews
+python _tools/cex_crew.py show product_launch       # inspect resolved plan
+python _tools/cex_crew.py run product_launch \
+    --charter N02_marketing/crews/team_charter_launch_demo.md
+python _tools/cex_crew.py run product_launch \
+    --charter ... --execute                         # real LLM calls
+```
+
+**5 WAVE8 primitives**: `crew_template` (P12) · `role_assignment` (P02) · `capability_registry` (P08) · `nucleus_def` (P02) · `team_charter` (P12). See `.claude/rules/composable-crew.md` for authoring + **grid-of-crews** composition.
 
 ## Tools (run with `--help`)
 
