@@ -1,61 +1,47 @@
 ---
 id: kc_fhir_agent_capability
 kind: knowledge_card
-title: FHIR Agent Capability Declaration
+title: HL7 FHIR R5 AI Agent Capability Declaration
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-# FHIR Agent Capability Declaration (HL7 FHIR R5)
+# HL7 FHIR R5 AI Agent Capability Declaration
 
-## Overview
-This card defines AI agent capabilities for SMART on FHIR R5 compliance, including:
-- FHIR API scopes
-- PHI handling protocols
-- CDS Hooks integration
-- AI Transparency extension support
+## SMART on FHIR Scopes
+Declare supported SMART scopes:  
+- Read (read patient data)  
+- Write (modify patient data)  
+- Execute (run clinical actions)  
+- Manage (control access/permissions)  
 
-## Core Capabilities
+## PHI Handling
+Specify data usage policies:  
+- De-identified data only  
+- Anonymized data only  
+- Limited PHI access (with consent)  
+- Data retention periods  
 
-### 1. SMART on FHIR Scopes
-- Access to FHIR resources (Patient, Encounter, Observation)
-- Read/write capabilities for clinical data
-- Secure authentication via OAuth 2.0
-- Scope management for data access
+## CDS Hooks Integration
+Support for clinical decision support:  
+- Pre-authorization hooks  
+- Order entry hooks  
+- Diagnostic suggestion hooks  
+- Medication reconciliation hooks  
 
-### 2. PHI Handling
-- HIPAA-compliant data processing
-- Anonymization protocols for de-identification
-- Access control for protected health information
-- Audit trail for data access
+## AI Transparency Extension
+Mandatory metadata requirements:  
+- Model version (e.g., v1.2.3)  
+- Training data sources  
+- Bias mitigation methods  
+- Explainability protocols (e.g., SHAP, LIME)  
+- Audit trail for AI decisions  
 
-### 3. CDS Hooks Integration
-- Clinical decision support integration
-- Real-time alert generation
-- Context-aware recommendations
-- Interoperability with EHR systems
+## Purpose
+This declaration enables:  
+1. Interoperability with FHIR-compliant systems  
+2. Trust establishment with healthcare providers  
+3. Compliance with HIPAA and GDPR standards  
+4. Transparent AI operations in clinical workflows  
 
-### 4. AI Transparency
-- Explainable AI (XAI) capabilities
-- Model provenance tracking
-- Bias detection mechanisms
-- Audit logs for AI decisions
-
-## Compliance Standards
-- HL7 FHIR R5 specification compliance
-- HIPAA privacy rule adherence
-- ONC certification criteria
-- AI transparency framework alignment
-
-## Use Cases
-- Clinical decision support
-- Patient data analysis
-- Interoperability testing
-- AI model validation
-
-## Implementation Notes
-- Requires FHIR server integration
-- Must implement SMART on FHIR authentication
-- Supports both read and write operations
-- Includes audit logging for compliance
