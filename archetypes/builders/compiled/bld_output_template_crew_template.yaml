@@ -1,0 +1,20 @@
+kind: output_template
+id: bld_output_template_crew_template
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for crew_template production
+quality: null
+title: Output Template Crew Template
+version: 1.0.0
+author: n03_wave8_builder
+tags:
+- crew_template
+- builder
+- output_template
+- composable
+- crewai
+tldr: Template with vars for crew_template production
+domain: crew_template construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.87

@@ -1,0 +1,44 @@
+kind: examples
+id: bld_examples_role_assignment
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of role_assignment artifacts
+quality: null
+title: Examples Role Assignment
+version: 1.0.0
+author: n03_wave8_builder
+tags:
+- role_assignment
+- builder
+- examples
+- composable
+- crewai
+tldr: Golden and anti-examples of role_assignment artifacts
+domain: role_assignment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.87
+golden_example: "---\nid: p02_ra_domain_researcher.md\nkind: role_assignment\npillar: P02\nrole_name: domain_researcher\n\
+  agent_id: .claude/agents/research-pipeline-builder.md\ngoal: Produce 8-12 citable sources per brief with confidence score\
+  \ >= 0.75 avg.\nbackstory: You are a senior market intelligence analyst with 10y in AI/SaaS competitive research. You triangulate\
+  \ primary sources (SEC filings, GitHub, product docs) before citing any claim.\ncrewai_equivalent: \"Agent(role='Domain\
+  \ Researcher', goal=..., backstory=...)\"\nquality: null\n---\n\n## Responsibilities\n1. Accept research brief (topic, scope,\
+  \ deadline); return 8-12 sources.\n2. Validate each source against freshness (<= 12 months) and authority heuristics.\n\
+  3. Output citation objects with url, confidence, snippet, fetched_at.\n4. Surface gaps/contradictions in a `caveats` block.\n\
+  \n## Tools Allowed\n- WebSearch\n- WebFetch\n- cex_retriever\n- -cex_compile  <!-- writer, not editor -->\n\n## Delegation\
+  \ Policy\ncan_delegate_to: [peer_reviewer]\nconditions:\n  on_source_count_below: 6"
+anti_example_1_inline_agent_identity: '---
+
+  kind: role_assignment
+
+  role_name: writer
+
+  agent_id: "You are a helpful writer agent with tools..."
+
+  ---'
+why_it_fails: '`can_delegate_to` leaks agent_ids instead of role_names. Fails H07. Breaks crew portability -- swapping the
+  underlying agent requires rewriting every role that delegates to it. Always name roles (e.g., `researcher`, `editor`), not
+  agents.'
+anti_example_2_delegation_by_agent_id_portability_break: "---\nrole_name: manager\nagent_id: .claude/agents/supervisor-builder.md\n\
+  ---\n## Delegation Policy\ncan_delegate_to:\n  - .claude/agents/research-pipeline-builder.md   # agent_id, not role_name\n\
+  \  - .claude/agents/changelog-builder.md"

@@ -1,0 +1,73 @@
+kind: architecture
+id: bld_architecture_crew_template
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of crew_template -- inventory, dependencies
+quality: null
+title: Architecture Crew Template
+version: 1.0.0
+author: n03_wave8_builder
+tags:
+- crew_template
+- builder
+- architecture
+- composable
+- crewai
+tldr: Component map of crew_template -- inventory, dependencies
+domain: crew_template construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.87
+component_inventory: '| ISO Name              | Role                          | Pillar | Status  |
+
+  |-----------------------|-------------------------------|--------|---------|
+
+  | bld_manifest          | Builder identity              | P12    | Active  |
+
+  | bld_instruction       | Production phases             | P03    | Active  |
+
+  | bld_system_prompt     | LLM persona + rules           | P03    | Active  |
+
+  | bld_schema            | Frontmatter + body contract   | P06    | Active  |
+
+  | bld_quality_gate      | HARD/SOFT scoring             | P11    | Active  |
+
+  | bld_output_template   | Concrete template             | P05    | Active  |
+
+  | bld_examples          | Golden + anti-examples        | P07    | Active  |
+
+  | bld_knowledge_card    | Domain knowledge              | P01    | Active  |
+
+  | bld_architecture      | This file                     | P08    | Active  |
+
+  | bld_collaboration     | Crew/workflow wiring          | P12    | Active  |
+
+  | bld_config            | Naming, limits                | P09    | Active  |
+
+  | bld_memory            | Learning record               | P10    | Active  |
+
+  | bld_tools             | Production + validation tools | P04    | Active  |'
+dependencies: '| From              | To                       | Type         |
+
+  |-------------------|--------------------------|--------------|
+
+  | bld_manifest      | bld_config               | configuration|
+
+  | bld_instruction   | bld_system_prompt        | dependency   |
+
+  | bld_output_template | bld_schema             | dependency   |
+
+  | bld_quality_gate  | bld_examples             | validation   |
+
+  | bld_collaboration | role-assignment-builder  | composition  |
+
+  | bld_collaboration | handoff-protocol-builder | composition  |
+
+  | bld_collaboration | supervisor-builder       | runtime      |
+
+  | bld_tools         | cex_compile.py           | integration  |'
+architectural_position: 'crew_template is the composable-crew primitive of CEX P12 orchestration. It sits between role_assignment
+  (atomic role binding, P02) and supervisor (runtime crew executor, P12). Together they form the CrewAI-equivalent stack:
+  role_assignment = Agent class, crew_template = Crew blueprint, supervisor = Crew.kickoff(). Templates are declarative and
+  portable; instantiation is runtime-specific. Any nucleus (N01-N07) can instantiate a crew_template to spawn a coordinated
+  team at dispatch time, enabling cross-nucleus team composition without custom orchestrator code.'

@@ -1,0 +1,20 @@
+kind: output_template
+id: bld_output_template_role_assignment
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for role_assignment production
+quality: null
+title: Output Template Role Assignment
+version: 1.0.0
+author: n03_wave8_builder
+tags:
+- role_assignment
+- builder
+- output_template
+- composable
+- crewai
+tldr: Template with vars for role_assignment production
+domain: role_assignment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.86

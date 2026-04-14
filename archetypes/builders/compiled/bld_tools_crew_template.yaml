@@ -1,0 +1,52 @@
+kind: tools
+id: bld_tools_crew_template
+pillar: P04
+llm_function: CALL
+purpose: Tools available for crew_template production
+quality: null
+title: Tools Crew Template
+version: 1.0.0
+author: n03_wave8_builder
+tags:
+- crew_template
+- builder
+- tools
+- composable
+- crewai
+tldr: Tools available for crew_template production
+domain: crew_template construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.86
+production_tools: '| Tool              | Purpose                                  | When                      |
+
+  |-------------------|------------------------------------------|---------------------------|
+
+  | cex_compile.py    | Compile crew_template .md to .yaml blueprint | F8 COLLABORATE        |
+
+  | cex_retriever.py  | Find similar crew templates (reuse)      | F3 INJECT                 |
+
+  | cex_query.py      | Discover role_assignment refs            | F1 CONSTRAIN              |
+
+  | cex_doctor.py     | Validate all role refs resolve           | F7 GOVERN                 |
+
+  | cex_score.py      | Peer-review scoring (HARD + SOFT)        | F7 GOVERN                 |
+
+  | signal_writer.py  | Signal N07 on completion                 | F8 COLLABORATE            |'
+validation_tools: '| Tool                  | Purpose                                    | When          |
+
+  |-----------------------|--------------------------------------------|---------------|
+
+  | cex_validate_refs.py  | Resolve p02_ra_* references                | Pre-commit    |
+
+  | cex_process_lint.py   | Check topology vs dependency graph         | F7 GOVERN     |
+
+  | cex_memory_scope.py   | Flag over-shared memory_scope              | F7 GOVERN     |
+
+  | cex_success_linter.py | Require measurable success_criteria       | F7 GOVERN     |'
+external_references:
+- CrewAI Process API docs (`crewai.process.Process`)
+- Microsoft Agent Framework GroupChat patterns (MAF v1.0 preview)
+- OpenAI Agents SDK v0.6+ handoff/transfer functions
+- Google A2A v0.3.0 Task lifecycle specification
+- LangGraph StateGraph conditional edges (consensus equivalent)
