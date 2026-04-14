@@ -9,29 +9,23 @@ pillar: P01
 
 # Data Residency Configuration for GDPR and Regional Compliance
 
-Data residency refers to the physical location of data storage and processing. Organizations must configure data residency to comply with regulations like GDPR and regional data sovereignty laws.
+Data residency ensures data is stored and processed in jurisdictions compliant with GDPR and regional regulations. This configuration is critical for legal compliance and risk mitigation.
 
-## Key Considerations
-- **Data Sovereignty**: Ensure data is stored in jurisdictions compliant with local laws
-- **Transfer Mechanisms**: Use approved data transfer methods between regions
-- **Access Controls**: Implement strict access policies for cross-border data flows
-- **Audit Trails**: Maintain detailed records of data movement and storage locations
-
-## GDPR Compliance
-- Article 4(13) requires data controllers to ensure adequate protection for international transfers
-- GDPR Article 33 mandates data protection impact assessments for high-risk transfers
-- Must maintain records of processing activities (Article 30)
-
-## Regional Compliance
-- **EU/EEA**: Follow GDPR guidelines for data localization
-- **US**: Comply with CLOUD Act and EU-US Privacy Shield framework
-- **Other Regions**: Adhere to local data protection laws (e.g., Brazil's LGPD, India's PDPA)
+## Key Requirements
+- **GDPR Compliance**: Store EU citizen data within the EU or in equivalent jurisdictions. Maintain records of data processing activities (Article 30).
+- **Regional Laws**: Adhere to data localization laws (e.g., China's Data Security Law, Brazil's LGPD, India's PDPA).
+- **Cross-Border Transfers**: Use SCCs, BCRs, or Privacy Shield certifications for data movement between regions.
+- **Data Controllers**: Ensure processors follow residency requirements and document data flow maps.
 
 ## Best Practices
-1. Conduct data mapping to identify residency requirements
-2. Use data residency tools for automated compliance tracking
-3. Regularly review and update residency configurations
-4. Document all data storage and transfer activities
-5. Perform compliance audits quarterly
+- Map residency requirements by region (EU, US, APAC, etc.).
+- Use automated tools to monitor storage locations and flag non-compliant transfers.
+- Store only necessary data in highly regulated regions.
+- Conduct annual compliance audits and update configurations as regulations evolve.
 
-Data residency configurations should be reviewed annually to ensure alignment with evolving regulatory requirements.
+## Examples
+- **EU**: Store data in EU servers or use EU-based cloud providers.
+- **China**: Implement data localization with domestic storage solutions.
+- **US**: Comply with CLOUD Act requirements for data access by US authorities.
+
+This configuration helps organizations avoid legal penalties and align data handling with global regulatory standards.
