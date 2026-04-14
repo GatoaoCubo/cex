@@ -4,7 +4,7 @@ id: bld_knowledge_card_repo_map
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for repo_map production
-quality: null
+quality: 9.2
 title: "Knowledge Card Repo Map"
 version: "1.1.0"
 author: n05_ops

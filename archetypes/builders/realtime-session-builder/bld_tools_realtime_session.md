@@ -4,7 +4,7 @@ id: bld_tools_realtime_session
 pillar: P04
 llm_function: CALL
 purpose: Tools available during realtime_session artifact production
-quality: null
+quality: 9.1
 title: "Tools: realtime-session-builder"
 version: "1.1.0"
 author: n01_audit

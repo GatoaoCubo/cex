@@ -4,7 +4,7 @@ id: bld_instruction_prosody_config
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for prosody_config
-quality: null
+quality: 8.9
 title: "Instruction Prosody Config"
 version: "1.1.0"
 author: n03_hybrid_review2

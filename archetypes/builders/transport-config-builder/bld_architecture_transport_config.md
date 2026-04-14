@@ -4,7 +4,7 @@ id: bld_architecture_transport_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of transport_config -- inventory, dependencies
-quality: null
+quality: 9.1
 title: "Architecture Transport Config"
 version: "1.1.0"
 author: n04_hybrid_review2

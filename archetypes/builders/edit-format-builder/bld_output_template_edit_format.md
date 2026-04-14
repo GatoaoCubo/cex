@@ -4,7 +4,7 @@ id: bld_output_template_edit_format
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for edit_format production
-quality: null
+quality: 9.1
 title: "Output Template Edit Format"
 version: "1.1.0"
 author: n04_hybrid_review2

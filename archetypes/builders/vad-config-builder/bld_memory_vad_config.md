@@ -4,7 +4,7 @@ id: p10_lr_vad_config_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for vad_config construction
-quality: null
+quality: 8.7
 title: "Learning Record Vad Config"
 version: "1.0.0"
 author: wave1_builder_gen

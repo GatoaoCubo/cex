@@ -4,7 +4,7 @@ id: repo-map-builder
 pillar: P01
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for repo_map
-quality: null
+quality: 8.8
 title: "Type Builder Repo Map"
 version: "1.0.0"
 author: wave1_builder_gen

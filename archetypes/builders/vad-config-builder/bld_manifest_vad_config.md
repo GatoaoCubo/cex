@@ -4,7 +4,7 @@ id: vad-config-builder
 pillar: P09
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for vad_config
-quality: null
+quality: 8.8
 title: "Type Builder Vad Config"
 version: "1.0.0"
 author: wave1_builder_gen

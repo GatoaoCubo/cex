@@ -4,7 +4,7 @@ id: p09_qg_transport_config
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for transport_config
-quality: null
+quality: 9.0
 title: "Quality Gate Transport Config"
 version: "1.1.0"
 author: n04_hybrid_review2

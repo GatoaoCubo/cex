@@ -4,7 +4,7 @@ id: bld_architecture_edit_format
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of edit_format -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Edit Format"
 version: "1.1.0"
 author: n04_hybrid_review2

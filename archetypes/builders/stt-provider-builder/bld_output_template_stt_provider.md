@@ -4,7 +4,7 @@ id: bld_output_template_stt_provider
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for stt_provider production
-quality: null
+quality: 8.9
 title: "Output Template Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

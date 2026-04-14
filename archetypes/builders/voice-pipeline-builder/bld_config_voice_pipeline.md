@@ -4,7 +4,7 @@ id: bld_config_voice_pipeline
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for voice_pipeline production
-quality: null
+quality: 8.8
 title: "Config Voice Pipeline"
 version: "1.0.0"
 author: wave1_builder_gen

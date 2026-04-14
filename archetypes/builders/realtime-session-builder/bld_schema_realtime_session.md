@@ -4,7 +4,7 @@ id: bld_schema_realtime_session
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema for realtime_session (LLM bidirectional streaming) -- SINGLE SOURCE OF TRUTH
-quality: null
+quality: 9.2
 title: "Schema Realtime Session"
 version: "1.1.0"
 author: n03_rewrite

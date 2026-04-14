@@ -4,7 +4,7 @@ id: bld_architecture_prosody_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of prosody_config -- inventory, dependencies
-quality: null
+quality: 8.9
 title: "Architecture Prosody Config"
 version: "1.0.0"
 author: wave1_builder_gen

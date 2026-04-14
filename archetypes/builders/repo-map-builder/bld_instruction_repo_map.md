@@ -4,7 +4,7 @@ id: bld_instruction_repo_map
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for repo_map
-quality: null
+quality: 9.1
 title: "Instruction Repo Map"
 version: "1.1.0"
 author: n05_ops

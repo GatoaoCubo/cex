@@ -4,7 +4,7 @@ id: p03_sp_repo_map_builder
 pillar: P03
 llm_function: INJECT
 purpose: System prompt defining repo_map-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Repo Map"
 version: "1.0.0"
 author: wave1_builder_gen

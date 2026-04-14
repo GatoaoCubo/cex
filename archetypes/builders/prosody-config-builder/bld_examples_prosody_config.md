@@ -4,7 +4,7 @@ id: bld_examples_prosody_config
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of prosody_config artifacts
-quality: null
+quality: 9.0
 title: "Examples Prosody Config"
 version: "1.1.0"
 author: n03_hybrid_review2

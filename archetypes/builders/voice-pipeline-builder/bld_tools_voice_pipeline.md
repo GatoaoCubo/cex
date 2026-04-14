@@ -4,7 +4,7 @@ id: bld_tools_voice_pipeline
 pillar: P04
 llm_function: CALL
 purpose: Tools available during voice_pipeline artifact production
-quality: null
+quality: 9.1
 title: "Tools: voice-pipeline-builder"
 version: "1.0.0"
 author: n02_reviewer

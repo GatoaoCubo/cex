@@ -4,7 +4,7 @@ id: p06_qg_edit_format
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for edit_format
-quality: null
+quality: 9.0
 title: "Quality Gate Edit Format"
 version: "1.0.0"
 author: wave1_builder_gen

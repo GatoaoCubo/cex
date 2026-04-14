@@ -4,7 +4,7 @@ id: bld_collaboration_repo_map
 pillar: P12
 llm_function: COLLABORATE
 purpose: How repo_map-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Repo Map"
 version: "1.0.0"
 author: wave1_builder_gen

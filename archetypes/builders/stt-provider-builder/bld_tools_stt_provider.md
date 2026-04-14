@@ -4,7 +4,7 @@ id: bld_tools_stt_provider
 pillar: P04
 llm_function: CALL
 purpose: Tools available for stt_provider production
-quality: null
+quality: 8.9
 title: "Tools Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

@@ -4,7 +4,7 @@ id: realtime-session-builder
 pillar: P04
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for realtime_session
-quality: null
+quality: 9.1
 title: "Type Builder Realtime Session"
 version: "1.0.0"
 author: wave1_builder_gen

@@ -4,7 +4,7 @@ id: bld_schema_repo_map
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for repo_map
-quality: null
+quality: 9.1
 title: "Schema Repo Map"
 version: "1.0.0"
 author: wave1_builder_gen

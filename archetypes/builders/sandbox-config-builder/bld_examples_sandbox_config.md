@@ -4,7 +4,7 @@ id: bld_examples_sandbox_config
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of sandbox_config artifacts
-quality: null
+quality: 9.0
 title: "Examples Sandbox Config"
 version: "1.1.0"
 author: n05_ops

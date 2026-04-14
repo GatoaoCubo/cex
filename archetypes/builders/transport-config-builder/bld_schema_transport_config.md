@@ -4,7 +4,7 @@ id: bld_schema_transport_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for transport_config
-quality: null
+quality: 9.1
 title: "Schema Transport Config"
 version: "1.1.0"
 author: n04_hybrid_review2

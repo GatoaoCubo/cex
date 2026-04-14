@@ -4,7 +4,7 @@ id: bld_tools_diff_strategy
 pillar: P04
 llm_function: CALL
 purpose: Tools available for diff_strategy production
-quality: null
+quality: 9.1
 title: "Tools Diff Strategy"
 version: "1.1.0"
 author: n06_audit_hybrid_review2

@@ -4,7 +4,7 @@ id: p03_sp_transport_config_builder
 pillar: P03
 llm_function: INJECT
 purpose: System prompt defining transport_config-builder persona and rules
-quality: null
+quality: 9.1
 title: "System Prompt Transport Config"
 version: "1.1.0"
 author: n04_hybrid_review2

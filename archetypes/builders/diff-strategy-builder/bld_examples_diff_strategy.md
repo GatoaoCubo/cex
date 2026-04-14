@@ -4,7 +4,7 @@ id: bld_examples_diff_strategy
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of diff_strategy artifacts
-quality: null
+quality: 9.1
 title: "Examples Diff Strategy"
 version: "1.1.0"
 author: n06_audit_hybrid_review2

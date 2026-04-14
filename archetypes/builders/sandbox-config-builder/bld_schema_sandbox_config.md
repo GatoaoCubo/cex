@@ -4,7 +4,7 @@ id: bld_schema_sandbox_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for sandbox_config
-quality: null
+quality: 9.1
 title: "Schema Sandbox Config"
 version: "1.0.0"
 author: wave1_builder_gen

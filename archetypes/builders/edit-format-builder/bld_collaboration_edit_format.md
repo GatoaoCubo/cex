@@ -4,7 +4,7 @@ id: bld_collaboration_edit_format
 pillar: P12
 llm_function: COLLABORATE
 purpose: How edit_format-builder works in crews with other builders
-quality: null
+quality: 9.0
 title: "Collaboration Edit Format"
 version: "1.1.0"
 author: n04_hybrid_review2

@@ -4,7 +4,7 @@ id: bld_examples_stt_provider
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of stt_provider artifacts
-quality: null
+quality: 8.8
 title: "Examples Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

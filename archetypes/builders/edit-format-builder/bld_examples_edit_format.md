@@ -4,7 +4,7 @@ id: bld_examples_edit_format
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of edit_format artifacts
-quality: null
+quality: 9.1
 title: "Examples Edit Format"
 version: "1.1.0"
 author: n04_hybrid_review2

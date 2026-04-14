@@ -4,7 +4,7 @@ id: bld_architecture_stt_provider
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of stt_provider -- inventory, dependencies
-quality: null
+quality: 8.9
 title: "Architecture Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

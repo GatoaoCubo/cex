@@ -4,7 +4,7 @@ id: p03_sp_diff_strategy_builder
 pillar: P03
 llm_function: INJECT
 purpose: System prompt defining diff_strategy-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Diff Strategy"
 version: "1.0.0"
 author: wave1_builder_gen

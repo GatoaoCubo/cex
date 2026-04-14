@@ -4,7 +4,7 @@ id: bld_knowledge_card_tts_provider
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for tts_provider production
-quality: null
+quality: 9.2
 title: "Knowledge Card Tts Provider"
 version: "1.0.0"
 author: wave1_builder_gen

@@ -4,7 +4,7 @@ id: bld_collaboration_diff_strategy
 pillar: P12
 llm_function: COLLABORATE
 purpose: How diff_strategy-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Diff Strategy"
 version: "1.0.0"
 author: wave1_builder_gen

@@ -4,7 +4,7 @@ id: p04_qg_diff_strategy
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for diff_strategy
-quality: null
+quality: 9.1
 title: "Quality Gate Diff Strategy"
 version: "1.1.0"
 author: n06_audit_hybrid_review2

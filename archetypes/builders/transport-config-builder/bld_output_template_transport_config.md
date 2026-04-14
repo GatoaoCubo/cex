@@ -4,7 +4,7 @@ id: bld_output_template_transport_config
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for transport_config production
-quality: null
+quality: 9.0
 title: "Output Template Transport Config"
 version: "1.1.0"
 author: n04_hybrid_review2

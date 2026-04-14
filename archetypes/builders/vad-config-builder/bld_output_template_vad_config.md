@@ -4,7 +4,7 @@ id: bld_output_template_vad_config
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for vad_config production
-quality: null
+quality: 9.0
 title: "Output Template Vad Config"
 version: "1.0.0"
 author: wave1_builder_gen

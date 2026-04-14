@@ -4,7 +4,7 @@ id: bld_architecture_voice_pipeline
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of voice_pipeline -- ISO inventory, dependencies, pillar position
-quality: null
+quality: 9.1
 title: "Architecture: voice-pipeline-builder"
 version: "1.1.0"
 author: n01_audit

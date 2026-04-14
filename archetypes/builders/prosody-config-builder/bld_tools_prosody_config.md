@@ -4,7 +4,7 @@ id: bld_tools_prosody_config
 pillar: P04
 llm_function: CALL
 purpose: Tools available for prosody_config production
-quality: null
+quality: 8.9
 title: "Tools Prosody Config"
 version: "1.0.0"
 author: wave1_builder_gen

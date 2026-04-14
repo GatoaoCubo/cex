@@ -4,7 +4,7 @@ id: p09_qg_prosody_config
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for prosody_config
-quality: null
+quality: 9.1
 title: "Quality Gate Prosody Config"
 version: "1.0.0"
 author: wave1_builder_gen

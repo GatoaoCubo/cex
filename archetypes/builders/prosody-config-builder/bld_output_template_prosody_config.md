@@ -4,7 +4,7 @@ id: bld_output_template_prosody_config
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for prosody_config production
-quality: null
+quality: 8.8
 title: "Output Template Prosody Config"
 version: "1.1.0"
 author: n03_hybrid_review2

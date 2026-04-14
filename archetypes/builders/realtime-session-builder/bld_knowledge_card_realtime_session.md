@@ -4,7 +4,7 @@ id: bld_knowledge_card_realtime_session
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for realtime_session production
-quality: null
+quality: 9.2
 title: "Knowledge Card: Realtime Session (LLM Streaming)"
 version: "1.1.0"
 author: n01_audit

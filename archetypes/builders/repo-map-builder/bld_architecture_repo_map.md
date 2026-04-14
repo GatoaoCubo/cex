@@ -4,7 +4,7 @@ id: bld_architecture_repo_map
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of repo_map -- inventory, dependencies
-quality: null
+quality: 8.9
 title: "Architecture Repo Map"
 version: "1.0.0"
 author: wave1_builder_gen

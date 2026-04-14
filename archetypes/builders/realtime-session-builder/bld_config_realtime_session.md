@@ -4,7 +4,7 @@ id: bld_config_realtime_session
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for realtime_session production
-quality: null
+quality: 8.7
 title: "Config: realtime-session-builder"
 version: "1.1.0"
 author: n01_audit

@@ -6,7 +6,7 @@ llm_function: INJECT
 purpose: Accumulated production experience for realtime_session artifact generation
 memory_scope: project
 observation_types: [user, feedback, project, reference]
-quality: null
+quality: 9.2
 title: "Memory: realtime-session-builder"
 version: "1.1.0"
 author: n01_audit

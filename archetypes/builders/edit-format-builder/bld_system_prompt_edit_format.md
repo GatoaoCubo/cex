@@ -4,7 +4,7 @@ id: p03_sp_edit_format_builder
 pillar: P03
 llm_function: INJECT
 purpose: System prompt defining edit_format-builder persona and rules
-quality: null
+quality: 9.1
 title: "System Prompt Edit Format"
 version: "1.1.0"
 author: n04_hybrid_review2

@@ -4,7 +4,7 @@ id: bld_knowledge_card_prosody_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for prosody_config production
-quality: null
+quality: 9.2
 title: "Knowledge Card Prosody Config"
 version: "1.1.0"
 author: n03_hybrid_review2

@@ -4,7 +4,7 @@ id: bld_output_template_sandbox_config
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for sandbox_config production
-quality: null
+quality: 9.1
 title: "Output Template Sandbox Config"
 version: "1.1.0"
 author: n05_ops

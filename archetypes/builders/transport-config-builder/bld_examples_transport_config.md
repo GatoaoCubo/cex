@@ -4,7 +4,7 @@ id: bld_examples_transport_config
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of transport_config artifacts
-quality: null
+quality: 9.0
 title: "Examples Transport Config"
 version: "1.1.0"
 author: n04_hybrid_review2

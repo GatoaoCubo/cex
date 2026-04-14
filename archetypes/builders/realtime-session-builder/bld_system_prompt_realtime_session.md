@@ -4,7 +4,7 @@ id: p03_sp_realtime_session_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining realtime_session-builder persona and rules
-quality: null
+quality: 9.2
 title: "System Prompt: realtime-session-builder"
 version: "1.1.0"
 author: n01_audit

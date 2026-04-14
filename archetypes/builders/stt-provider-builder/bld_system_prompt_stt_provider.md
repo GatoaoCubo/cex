@@ -4,7 +4,7 @@ id: p03_sp_stt_provider_builder
 pillar: P03
 llm_function: INJECT
 purpose: System prompt defining stt_provider-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

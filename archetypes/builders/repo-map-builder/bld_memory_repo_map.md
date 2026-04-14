@@ -4,7 +4,7 @@ id: p10_lr_repo_map_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for repo_map construction
-quality: null
+quality: 8.7
 title: "Learning Record Repo Map"
 version: "1.0.0"
 author: wave1_builder_gen

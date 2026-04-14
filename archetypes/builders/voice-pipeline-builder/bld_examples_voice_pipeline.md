@@ -4,7 +4,7 @@ id: bld_examples_voice_pipeline
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of voice_pipeline artifacts (real provider names, not placeholders)
-quality: null
+quality: 9.1
 title: "Examples: voice-pipeline-builder"
 version: "1.1.0"
 author: n01_audit

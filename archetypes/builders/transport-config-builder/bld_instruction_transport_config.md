@@ -4,7 +4,7 @@ id: bld_instruction_transport_config
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for transport_config
-quality: null
+quality: 8.8
 title: "Instruction Transport Config"
 version: "1.0.0"
 author: wave1_builder_gen

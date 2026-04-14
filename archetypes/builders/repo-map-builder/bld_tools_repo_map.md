@@ -4,7 +4,7 @@ id: bld_tools_repo_map
 pillar: P04
 llm_function: CALL
 purpose: Tools available for repo_map production
-quality: null
+quality: 9.1
 title: "Tools Repo Map"
 version: "1.1.0"
 author: n05_ops

@@ -4,7 +4,7 @@ id: bld_architecture_diff_strategy
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of diff_strategy -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Diff Strategy"
 version: "1.1.0"
 author: n06_audit_hybrid_review2

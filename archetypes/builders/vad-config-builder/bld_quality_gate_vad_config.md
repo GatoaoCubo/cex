@@ -4,7 +4,7 @@ id: p09_qg_vad_config
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for vad_config
-quality: null
+quality: 9.0
 title: "Quality Gate Vad Config"
 version: "1.0.0"
 author: wave1_builder_gen

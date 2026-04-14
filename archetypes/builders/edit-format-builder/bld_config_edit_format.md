@@ -4,7 +4,7 @@ id: bld_config_edit_format
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for edit_format production
-quality: null
+quality: 8.6
 title: "Config Edit Format"
 version: "1.1.0"
 author: n04_hybrid_review2

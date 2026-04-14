@@ -4,7 +4,7 @@ id: bld_config_diff_strategy
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for diff_strategy production
-quality: null
+quality: 8.6
 title: "Config Diff Strategy"
 version: "1.0.0"
 author: wave1_builder_gen

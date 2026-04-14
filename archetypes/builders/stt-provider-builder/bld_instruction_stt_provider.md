@@ -4,7 +4,7 @@ id: bld_instruction_stt_provider
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for stt_provider
-quality: null
+quality: 8.9
 title: "Instruction Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

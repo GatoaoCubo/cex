@@ -4,7 +4,7 @@ id: bld_examples_realtime_session
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of realtime_session artifacts (LLM streaming, not video conf)
-quality: null
+quality: 9.1
 title: "Examples: realtime-session-builder"
 version: "1.1.0"
 author: n01_audit

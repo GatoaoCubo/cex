@@ -4,7 +4,7 @@ id: bld_examples_repo_map
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of repo_map artifacts
-quality: null
+quality: 9.1
 title: "Examples Repo Map"
 version: "1.1.0"
 author: n05_ops

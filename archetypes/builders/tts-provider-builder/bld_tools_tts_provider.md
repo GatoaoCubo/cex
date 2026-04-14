@@ -4,7 +4,7 @@ id: bld_tools_tts_provider
 pillar: P04
 llm_function: CALL
 purpose: Tools available for tts_provider production
-quality: null
+quality: 8.9
 title: "Tools Tts Provider"
 version: "1.0.0"
 author: wave1_builder_gen

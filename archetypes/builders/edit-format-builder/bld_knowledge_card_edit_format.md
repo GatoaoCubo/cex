@@ -4,7 +4,7 @@ id: bld_knowledge_card_edit_format
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for edit_format production
-quality: null
+quality: 9.2
 title: "Knowledge Card Edit Format"
 version: "1.1.0"
 author: n04_hybrid_review2

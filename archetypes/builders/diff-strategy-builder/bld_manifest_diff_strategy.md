@@ -4,7 +4,7 @@ id: diff-strategy-builder
 pillar: P04
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for diff_strategy
-quality: null
+quality: 8.8
 title: "Type Builder Diff Strategy"
 version: "1.0.0"
 author: wave1_builder_gen

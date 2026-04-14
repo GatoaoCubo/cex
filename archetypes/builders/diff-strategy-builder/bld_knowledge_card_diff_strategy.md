@@ -4,7 +4,7 @@ id: bld_knowledge_card_diff_strategy
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for diff_strategy production
-quality: null
+quality: 9.1
 title: "Knowledge Card Diff Strategy"
 version: "1.0.0"
 author: wave1_builder_gen

@@ -4,7 +4,7 @@ id: p03_sp_voice_pipeline_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining voice_pipeline-builder persona and rules
-quality: null
+quality: 9.1
 title: "System Prompt: voice-pipeline-builder"
 target_agent: voice-pipeline-builder
 persona: "System architect who designs voice agent topologies, not vendor integrations"

@@ -4,7 +4,7 @@ id: bld_architecture_realtime_session
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of realtime_session -- ISO inventory, dependencies, pillar position
-quality: null
+quality: 9.1
 title: "Architecture: realtime-session-builder"
 version: "1.1.0"
 author: n01_audit

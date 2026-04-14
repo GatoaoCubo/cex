@@ -4,7 +4,7 @@ id: bld_tools_sandbox_config
 pillar: P04
 llm_function: CALL
 purpose: Tools available for sandbox_config production
-quality: null
+quality: 9.0
 title: "Tools Sandbox Config"
 version: "1.1.0"
 author: n05_ops

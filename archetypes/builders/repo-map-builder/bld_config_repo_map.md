@@ -4,7 +4,7 @@ id: bld_config_repo_map
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for repo_map production
-quality: null
+quality: 8.6
 title: "Config Repo Map"
 version: "1.0.0"
 author: wave1_builder_gen

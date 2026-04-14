@@ -4,7 +4,7 @@ id: bld_config_stt_provider
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for stt_provider production
-quality: null
+quality: 8.6
 title: "Config Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

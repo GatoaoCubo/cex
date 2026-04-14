@@ -4,7 +4,7 @@ id: edit-format-builder
 pillar: P06
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for edit_format
-quality: null
+quality: 8.8
 title: "Type Builder Edit Format"
 version: "1.0.0"
 author: wave1_builder_gen

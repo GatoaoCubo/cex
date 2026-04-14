@@ -4,7 +4,7 @@ id: bld_collaboration_realtime_session
 pillar: P12
 llm_function: COLLABORATE
 purpose: How realtime_session-builder works in crews with other builders
-quality: null
+quality: 9.0
 title: "Collaboration: realtime-session-builder"
 version: "1.1.0"
 author: n01_audit

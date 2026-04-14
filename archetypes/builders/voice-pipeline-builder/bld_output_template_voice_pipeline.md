@@ -4,7 +4,7 @@ id: bld_output_template_voice_pipeline
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with guided frontmatter and body sections for voice_pipeline production
-quality: null
+quality: 9.1
 title: "Output Template: voice-pipeline-builder"
 version: "1.1.0"
 author: n01_audit

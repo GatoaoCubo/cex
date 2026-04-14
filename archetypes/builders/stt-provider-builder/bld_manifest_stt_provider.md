@@ -4,7 +4,7 @@ id: stt-provider-builder
 pillar: P04
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for stt_provider
-quality: null
+quality: 8.8
 title: "Type Builder Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

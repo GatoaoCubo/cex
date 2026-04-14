@@ -4,7 +4,7 @@ id: bld_knowledge_card_voice_pipeline
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for voice_pipeline production
-quality: null
+quality: 9.2
 title: "Knowledge Card: Voice Pipeline"
 version: "1.1.0"
 author: n01_audit

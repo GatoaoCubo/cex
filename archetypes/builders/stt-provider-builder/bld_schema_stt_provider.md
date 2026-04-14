@@ -4,7 +4,7 @@ id: bld_schema_stt_provider
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for stt_provider
-quality: null
+quality: 9.1
 title: "Schema Stt Provider"
 version: "1.0.0"
 author: wave1_builder_gen

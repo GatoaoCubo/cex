@@ -4,7 +4,7 @@ id: bld_schema_edit_format
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for edit_format
-quality: null
+quality: 9.2
 title: "Schema Edit Format"
 version: "1.1.0"
 author: n04_hybrid_review2

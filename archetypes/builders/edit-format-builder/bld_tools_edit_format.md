@@ -4,7 +4,7 @@ id: bld_tools_edit_format
 pillar: P04
 llm_function: CALL
 purpose: Tools available for edit_format production
-quality: null
+quality: 8.9
 title: "Tools Edit Format"
 version: "1.0.0"
 author: wave1_builder_gen

@@ -4,7 +4,7 @@ id: p04_qg_realtime_session
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate (HARD + SOFT) for realtime_session artifacts
-quality: null
+quality: 9.1
 title: "Quality Gate Realtime Session"
 version: "1.1.0"
 author: n03_rewrite

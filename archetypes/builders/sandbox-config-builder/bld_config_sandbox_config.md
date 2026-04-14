@@ -4,7 +4,7 @@ id: bld_config_sandbox_config
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for sandbox_config production
-quality: null
+quality: 8.6
 title: "Config Sandbox Config"
 version: "1.0.0"
 author: wave1_builder_gen

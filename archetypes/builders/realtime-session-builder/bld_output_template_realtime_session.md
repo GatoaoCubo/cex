@@ -4,7 +4,7 @@ id: bld_output_template_realtime_session
 pillar: P05
 llm_function: PRODUCE
 purpose: Concrete template for realtime_session (OpenAI Realtime / Gemini Live / Anthropic streaming)
-quality: null
+quality: 9.1
 title: "Output Template Realtime Session"
 version: "1.1.0"
 author: n03_rewrite

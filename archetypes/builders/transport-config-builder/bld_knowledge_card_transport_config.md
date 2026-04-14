@@ -4,7 +4,7 @@ id: bld_knowledge_card_transport_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for transport_config production
-quality: null
+quality: 9.2
 title: "Knowledge Card Transport Config"
 version: "1.1.0"
 author: n04_hybrid_review2

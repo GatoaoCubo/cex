@@ -4,7 +4,7 @@ id: bld_instruction_realtime_session
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for realtime_session
-quality: null
+quality: 9.1
 title: "Instruction: realtime-session-builder"
 version: "1.1.0"
 author: n01_audit

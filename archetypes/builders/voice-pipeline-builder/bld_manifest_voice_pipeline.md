@@ -4,7 +4,7 @@ id: voice-pipeline-builder
 pillar: P04
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for voice_pipeline
-quality: null
+quality: 9.1
 title: "Type Builder: Voice Pipeline"
 version: "1.0.0"
 author: n02_reviewer

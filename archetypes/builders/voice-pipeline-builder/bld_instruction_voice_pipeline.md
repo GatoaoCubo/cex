@@ -4,7 +4,7 @@ id: bld_instruction_voice_pipeline
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for voice_pipeline
-quality: null
+quality: 9.0
 title: "Instruction Voice Pipeline"
 version: "1.0.0"
 author: wave1_builder_gen
