@@ -3587,5 +3587,14 @@
     "core": false,
     "llm_function": "CONSTRAIN",
     "boundary": "Discovery catalog. NOT a handoff (P02) or agent card (P08/agent_card). Does not dispatch or execute agents."
+  },
+  "team_charter": {
+    "pillar": "P12",
+    "description": "Mission contract for a specific crew instance. Bridges GDP decisions (WHAT) to autonomous crew execution (HOW). Fields: charter_id, crew_template_ref, mission_statement, deliverables, success_metrics, budget, deadline, stakeholders, quality_gate, escalation_protocol, termination_criteria.",
+    "naming": "p12_tc_{{mission}}_v{{n}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "llm_function": "COLLABORATE",
+    "boundary": "Governance contract only. NOT a handoff (N07 authors those), NOT a crew_template (reusable), NOT a dispatch_rule (routing logic)."
   }
 }

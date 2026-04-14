@@ -1,0 +1,19 @@
+kind: output_template
+id: bld_output_template_capability_registry
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for capability_registry production
+quality: null
+title: Output Template Capability Registry
+version: 1.0.0
+author: n04_wave8
+tags:
+- capability_registry
+- builder
+- output_template
+- agent-discovery
+tldr: Template with vars for capability_registry production
+domain: capability_registry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

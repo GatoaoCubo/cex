@@ -1,0 +1,79 @@
+kind: architecture
+id: bld_architecture_capability_registry
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of capability_registry -- inventory, dependencies
+quality: null
+title: Architecture Capability Registry
+version: 1.0.0
+author: n04_wave8
+tags:
+- capability_registry
+- builder
+- architecture
+- agent-discovery
+tldr: Component map of capability_registry -- inventory, dependencies
+domain: capability_registry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name                      | Role                                     | Pillar | Status  |
+
+  |-------------------------------|------------------------------------------|--------|---------|
+
+  | bld_manifest_capability_registry    | Builder identity and routing          | P08    | Active  |
+
+  | bld_instruction_capability_registry | Step-by-step production process       | P03    | Active  |
+
+  | bld_system_prompt_capability_registry| LLM persona and rules                | P03    | Active  |
+
+  | bld_schema_capability_registry      | Data structure definition             | P06    | Active  |
+
+  | bld_quality_gate_capability_registry| Validation rules                      | P11    | Active  |
+
+  | bld_output_template_capability_registry| Formatting specification           | P05    | Active  |
+
+  | bld_examples_capability_registry    | Golden and anti-examples              | P07    | Active  |
+
+  | bld_knowledge_card_capability_registry| Domain knowledge injection          | P01    | Active  |
+
+  | bld_architecture_capability_registry| System blueprint (this file)         | P08    | Active  |
+
+  | bld_collaboration_capability_registry| Workflow coordination               | P12    | Active  |
+
+  | bld_config_capability_registry      | Naming, paths, limits                 | P09    | Active  |
+
+  | bld_memory_capability_registry      | Learned patterns and pitfalls         | P10    | Active  |
+
+  | bld_tools_capability_registry       | External integrations                 | P04    | Active  |'
+dependencies: '| From                          | To                                      | Type         |
+
+  |-------------------------------|------------------------------------------|--------------|
+
+  | bld_instruction               | bld_schema                              | depends-on   |
+
+  | bld_instruction               | bld_system_prompt                       | depends-on   |
+
+  | bld_output_template           | bld_schema                              | implements   |
+
+  | bld_quality_gate              | bld_examples                            | validates-against |
+
+  | bld_quality_gate              | bld_schema                              | enforces     |
+
+  | bld_collaboration             | bld_memory                              | informs      |
+
+  | bld_tools                     | .claude/agents/ (external)              | indexes      |
+
+  | bld_tools                     | N0x_*/agents/ (external)               | indexes      |
+
+  | bld_tools                     | cex_query.py (external)                 | integrates   |'
+data_flow: ".claude/agents/*-builder.md        -->  capability-registry-builder\nN0x_*/agents/agent_*.md            -->  capability-registry-builder\n\
+  N0x_*/agent_card_n0x.md           -->  capability-registry-builder\n                                         |\n       \
+  \                       bld_instruction (scan + extract)\n                                         |\n                 \
+  \             bld_schema (normalize + validate)\n                                         |\n                          \
+  \    bld_output_template (render registry)\n                                         |\n                    p08_cr_{{name}}.md\
+  \ (output: queryable registry)\n                                         |\n                              N07 crew orchestrator\
+  \ (consumer)"
+architectural_position: capability_registry occupies the CONSTRAIN position in P08 (Architecture). It answers "who?" before
+  dispatch answers "how?" -- the prerequisite query layer that prevents blind routing. It is consumed by N07 at F1 CONSTRAIN
+  and by any crew that needs ranked agent selection before executing a wave.

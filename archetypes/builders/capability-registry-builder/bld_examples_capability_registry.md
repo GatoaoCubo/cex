@@ -76,3 +76,25 @@ Missing input_schema, output_schema, cost_tokens, quality_baseline, availability
 
 ### Why it fails:
 The landing-page-builder has `quality: null` (unscored). Inventing a score of 8.5 misleads N07 into preferring this builder over genuinely scored alternatives. Use "unscored" when source has null.
+
+## Anti-Example 4: Flat List Without Layer Separation
+
+```markdown
+| capability_name | provider_agent | availability |
+|----------------|----------------|--------------|
+| Build landing page | .claude/agents/landing-page-builder.md | active |
+| Knowledge management | N04_knowledge/agents/agent_knowledge.md | active |
+| Orchestration | N07_admin/agent_card_n07.md | active |
+```
+
+### Why it fails:
+All three agent layers mixed in one flat table. Builder sub-agents, nucleus domain agents, and nucleus cards have different invocation paths: sub-agents are invoked as Claude Code sub-agents; domain agents via dispatch.sh; nucleus cards describe the nucleus itself. Mixing them causes routing errors where N07 attempts to dispatch a builder sub-agent path as a nucleus boot.
+
+## Key Distinctions
+| Aspect | Good Registry Entry | Bad Registry Entry |
+|--------|--------------------|--------------------|
+| provider_agent | Validated path to existing file | Path to non-existent file |
+| quality_baseline | "unscored" when source is null | Invented numeric score |
+| keyword_index | >= 5 domain-derived terms | 1-2 generic terms |
+| availability | "active" / "deprecated" / "experimental" | Missing or free-text |
+| layer | Entries in correct section (builder / nucleus / card) | Mixed flat list |
