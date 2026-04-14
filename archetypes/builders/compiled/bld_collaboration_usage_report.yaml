@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_usage_report
+pillar: P12
+llm_function: COLLABORATE
+purpose: How usage_report-builder works in crews with other builders
+quality: null
+title: Collaboration Usage Report
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- usage_report
+- builder
+- collaboration
+tldr: How usage_report-builder works in crews with other builders
+domain: usage_report construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Aggregates, normalizes, and formats usage analytics data into actionable reports for stakeholders. Focuses on query
+  patterns, resource consumption, and user activity metrics.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Data Collector| Raw usage logs        | JSON        |  \n| API Gateway   | Request metadata      | Protobuf    |\
+  \  \n| Analytics DB  | Pre-aggregated metrics| Parquet     |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Dashboard     | Interactive reports   | HTML/JS     |  \n| BI Tool       | Exported datasets     | CSV         |\
+  \  \n| Alert System  | Anomaly summaries     | JSON        |"
+boundary: Does NOT enforce cost limits (handled by cost_analyzer) or configure telemetry (handled by trace_collector). Excludes
+  infrastructure health or error tracking.

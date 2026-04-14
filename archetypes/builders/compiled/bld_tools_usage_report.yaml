@@ -1,0 +1,30 @@
+kind: tools
+id: bld_tools_usage_report
+pillar: P04
+llm_function: CALL
+purpose: Tools available for usage_report production
+quality: null
+title: Tools Usage Report
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- usage_report
+- builder
+- tools
+tldr: Tools available for usage_report production
+domain: usage_report construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Aggregates raw usage data\
+  \ | Data collection phase |  \n| cex_score.py | Calculates usage metrics | Post-processing |  \n| cex_retriever.py | Fetches\
+  \ external data sources | Integration required |  \n| cex_doctor.py | Diagnoses report inconsistencies | Validation stage\
+  \ |  \n| cex_analyzer.py | Identifies usage patterns | Insight generation |  \n| cex_formatter.py | Structures output for\
+  \ delivery | Finalization |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_checker.py | Validates data integrity |\
+  \ Pre-processing |  \n| val_validator.py | Ensures metric consistency | Post-scoring |  \n| val_reporter.py | Logs validation\
+  \ results | QA phase |"
+external_references:
+- pandas (data manipulation)
+- Jupyter (interactive analysis)
+- Apache Airflow (orchestration)
