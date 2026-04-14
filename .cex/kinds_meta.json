@@ -58,7 +58,7 @@
   "agent_card": {
     "boundary": "Agent deployment spec. NAO eh agent (P02, persona only) nem boot_config (P02, provider startup) nem spawn_config (P12, runtime launch).",
     "core": false,
-    "description": "Deployment spec for autonomous agent — identity, model, tools, boot, dispatch, constraints",
+    "description": "Deployment spec for autonomous agent \u2014 identity, model, tools, boot, dispatch, constraints",
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "p08_ac_{{agent_name}}.yaml",
@@ -112,9 +112,9 @@
     "deprecated_by": null
   },
   "agent_package": {
-    "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) â€” agent_package eh o bundle portable.",
+    "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) \u00e2\u20ac\u201d agent_package eh o bundle portable.",
     "core": true,
-    "description": "Pacote portable de agente AI (ISO format) â€” self-contained, LLM-agnostic",
+    "description": "Pacote portable de agente AI (ISO format) \u00e2\u20ac\u201d self-contained, LLM-agnostic",
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "agents/{{agent_name}}/manifest.yaml",
@@ -268,7 +268,7 @@
   "axiom": {
     "boundary": "Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel) nem instruction (P03, flexivel).",
     "core": true,
-    "description": "Principio fundamental imutavel â€” parte da identidade profunda da entidade",
+    "description": "Principio fundamental imutavel \u00e2\u20ac\u201d parte da identidade profunda da entidade",
     "llm_function": "BECOME",
     "max_bytes": 3072,
     "naming": "p02_ax_{{rule}}.md",
@@ -703,7 +703,7 @@
   "content_monetization": {
     "boundary": "Pipeline completo de monetizacao de conteudo: billing, credits, checkout, courses, ads, emails. NAO eh pricing_strategy (estrategia apenas) nem payment_integration (provider apenas).",
     "core": false,
-    "description": "Config-driven content monetization pipeline — PARSE>PRICING>CREDITS>CHECKOUT>COURSES>ADS>EMAILS>VALIDATE>DEPLOY",
+    "description": "Config-driven content monetization pipeline \u2014 PARSE>PRICING>CREDITS>CHECKOUT>COURSES>ADS>EMAILS>VALIDATE>DEPLOY",
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
     "naming": "p04_cm_{{name}}.md",
@@ -3032,7 +3032,7 @@
     "deprecated_by": null
   },
   "software_project": {
-    "description": "Complete software project definition — architecture, dependencies, build, deployment, repo structure",
+    "description": "Complete software project definition \u2014 architecture, dependencies, build, deployment, repo structure",
     "boundary": "Projeto completo. NAO eh component_map (P08, visao parcial) nem agent_package (P02, pacote de agente).",
     "pillar": "P02",
     "llm_function": "BECOME",
@@ -3116,7 +3116,7 @@
     "deprecated_by": null
   },
   "supabase_data_layer": {
-    "description": "Supabase-specific data layer — tables, RLS policies, edge functions, storage buckets, auth rules",
+    "description": "Supabase-specific data layer \u2014 tables, RLS policies, edge functions, storage buckets, auth rules",
     "boundary": "Data layer Supabase. NAO eh db_connector (conexao generica) nem api_client (cliente REST).",
     "pillar": "P04",
     "llm_function": "CALL",
@@ -3161,7 +3161,7 @@
     "pillar": "P03",
     "builder": "tagline-builder",
     "domain": "marketing",
-    "description": "Short memorable phrase capturing brand essence — taglines, slogans, headlines",
+    "description": "Short memorable phrase capturing brand essence \u2014 taglines, slogans, headlines",
     "naming": "p03_tl_{{topic}}.md",
     "status": "stable",
     "upstream_source": null,

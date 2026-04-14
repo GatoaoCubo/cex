@@ -522,6 +522,55 @@ def check_wave_validator(staged_files: list[str]) -> int:
         return 0
 
 
+def check_kinds_meta_ascii(staged_files: list) -> int:
+    """Auto-sanitize .cex/kinds_meta.json to pure ASCII if staged.
+
+    Python 3.14 on Windows defaults to cp1252 for open() without encoding=.
+    Non-ASCII bytes in kinds_meta.json crash any code that reads it without
+    encoding='utf-8' kwarg. Re-serialize with ensure_ascii=True (escapes
+    non-ASCII to \\uXXXX) to make the file cp1252-safe.
+    """
+    import json as _json
+    target = ".cex/kinds_meta.json"
+    if target not in staged_files and target.replace("/", "\\") not in staged_files:
+        return 0
+    path = CEX_ROOT / ".cex" / "kinds_meta.json"
+    if not path.exists():
+        return 0
+    try:
+        raw = path.read_bytes()
+    except Exception:
+        return 0
+    # Detect non-ASCII bytes
+    if all(b < 128 for b in raw):
+        return 0  # Already clean
+    # Decode + re-serialize
+    for enc in ("utf-8", "cp1252", "latin-1"):
+        try:
+            s = raw.decode(enc)
+            break
+        except UnicodeDecodeError:
+            continue
+    else:
+        print(f"  [FAIL] kinds_meta.json: unable to decode")
+        return 1
+    try:
+        d = _json.loads(s)
+    except _json.JSONDecodeError as e:
+        print(f"  [FAIL] kinds_meta.json: invalid JSON ({e})")
+        return 1
+    out = _json.dumps(d, ensure_ascii=True, indent=2, sort_keys=False)
+    path.write_text(out, encoding="utf-8")
+    # Re-stage the sanitized file
+    try:
+        subprocess.run(["git", "add", target], check=True, timeout=10,
+                       capture_output=True)
+        print(f"  [AUTO-FIX] kinds_meta.json sanitized to ASCII ({len(d)} kinds)")
+    except Exception as e:
+        print(f"  [WARN] kinds_meta.json sanitized but re-stage failed: {e}")
+    return 0
+
+
 def run_pre_commit() -> int:
     """Pre-commit hook: validate staged files.
 
@@ -580,6 +629,9 @@ def run_pre_commit() -> int:
 
     # 6. Wave validator -- 7 systemic checks on staged builder ISOs
     errors += check_wave_validator(all_staged)
+
+    # 7. Auto-sanitize kinds_meta.json (cp1252-safe via ensure_ascii=True)
+    errors += check_kinds_meta_ascii(all_staged)
 
     if errors:
         print(f"\npre-commit: BLOCKED -- {errors} error(s). Fix before committing.")
