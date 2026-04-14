@@ -1,0 +1,85 @@
+kind: schema
+id: bld_schema_safety_hazard_taxonomy
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for safety_hazard_taxonomy
+quality: null
+title: Schema Safety Hazard Taxonomy
+version: 1.0.0
+author: n01_wave7
+tags:
+- safety_hazard_taxonomy
+- builder
+- schema
+- MLCommons
+- AILuminate
+- Llama-Guard
+- hazard-category
+- CBRN
+- severity-level
+- response-template
+- taxonomy
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for safety_hazard_taxonomy
+domain: safety_hazard_taxonomy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field | Type | Required | Default | Notes |
+
+  |-------|------|----------|---------|-------|
+
+  | id | string | yes | | Pattern: p11_sht_{{scope}}.md |
+
+  | kind | string | yes | | Must be: safety_hazard_taxonomy |
+
+  | pillar | string | yes | | Must be: P11 |
+
+  | title | string | yes | | Include "Safety Hazard Taxonomy" and scope |
+
+  | version | string | yes | | Taxonomy version |
+
+  | created | date | yes | | ISO 8601 |
+
+  | updated | date | yes | | ISO 8601 |
+
+  | author | string | yes | | Team responsible |
+
+  | domain | string | yes | | Deployment domain / scope |
+
+  | quality | null | yes | null | Never self-score |
+
+  | tags | array | yes | | Include: MLCommons, AILuminate, hazard-category minimum |
+
+  | tldr | string | yes | | One-line taxonomy scope description |
+
+  | taxonomy_scope | string | yes | | full-12 or subset with justification |
+
+  | source_standard | string | yes | | MLCommons AILuminate v1.0 |
+
+  | classifier_alignment | string | yes | | Llama Guard 4 (Meta, 2025) |'
+recommended: '| Field | Type | Notes |
+
+  |-------|------|-------|
+
+  | deployment_context | string | Consumer API / Enterprise / Internal |
+
+  | jurisdiction | string | Regional legal context |
+
+  | categories_included | array | List if subset (taxonomy_scope != full-12) |'
+id_pattern: ^p11_sht_[a-z][a-z0-9_]+\.md$
+body_structure:
+- Taxonomy Overview -- Scope declaration, source standards, classifier alignment, version rationale
+- 'Hazard Category Definitions -- Per category: code, Llama Guard label, definition, boundary conditions, false-positive risks'
+- 'Severity Level Matrix -- Per category: 4 rows (low/medium/high/critical) with criteria and response template'
+- Response Template Catalog -- SAFE_COMPLETE / WARN_PARTIAL / REFUSE_EXPLAIN / HARD_REFUSE definitions
+- Cross-Category Boundaries -- Table of adjacent category pairs with disambiguation rules
+- 'Regulatory Mapping -- Per category: applicable laws (GDPR, CSAM statutes, CBRN export controls)'
+constraints:
+- 'taxonomy_scope must declare: full-12 OR list of included categories with justification.'
+- All included categories must have Llama Guard 4 label mapped.
+- CBRN category (S8) must include Chemical/Biological/Radiological/Nuclear sub-categories.
+- Each category requires 4 severity level definitions.
+- 'Response template: HARD_REFUSE required for critical severity on all categories.'
+- source_standard must reference MLCommons AILuminate v1.0 or later.
+- classifier_alignment must reference Llama Guard version if specified.

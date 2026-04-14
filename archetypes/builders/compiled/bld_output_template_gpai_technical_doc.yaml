@@ -1,0 +1,26 @@
+kind: output_template
+id: bld_output_template_gpai_technical_doc
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for gpai_technical_doc production
+quality: null
+title: Output Template GPAI Technical Doc
+version: 1.0.0
+author: n01_wave7
+tags:
+- gpai_technical_doc
+- builder
+- output_template
+- GPAI
+- EU-AI-Act
+- Annex-IV
+- Article-53
+- training-data
+- compute-budget
+- downstream-limit
+- technical-documentation
+tldr: Template with vars for gpai_technical_doc production
+domain: gpai_technical_doc construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

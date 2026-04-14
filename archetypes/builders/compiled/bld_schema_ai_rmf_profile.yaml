@@ -1,0 +1,85 @@
+kind: schema
+id: bld_schema_ai_rmf_profile
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for ai_rmf_profile
+quality: null
+title: Schema AI RMF Profile
+version: 1.0.0
+author: n01_wave7
+tags:
+- ai_rmf_profile
+- builder
+- schema
+- NIST
+- AI-RMF
+- GOVERN
+- MAP
+- MEASURE
+- MANAGE
+- GenAI-profile
+- 600-1
+- action-ID
+- risk-category
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for ai_rmf_profile
+domain: ai_rmf_profile construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: '| Field | Type | Required | Default | Notes |
+
+  |-------|------|----------|---------|-------|
+
+  | id | string | yes | | Pattern: p11_rmf_{{profile}}.md |
+
+  | kind | string | yes | | Must be: ai_rmf_profile |
+
+  | pillar | string | yes | | Must be: P11 |
+
+  | title | string | yes | | Include "AI RMF GenAI Profile" in title |
+
+  | version | string | yes | | Semantic version of profile |
+
+  | created | date | yes | | ISO 8601 |
+
+  | updated | date | yes | | ISO 8601 |
+
+  | author | string | yes | | Profile author / team |
+
+  | domain | string | yes | | AI system domain being profiled |
+
+  | quality | null | yes | null | Never self-score |
+
+  | tags | array | yes | | Include: NIST, AI-RMF, 600-1 minimum |
+
+  | tldr | string | yes | | One-line profile summary |
+
+  | profile_scope | string | yes | | System name + deployment context |
+
+  | review_date | date | yes | | Next scheduled review date |
+
+  | profiler | string | yes | | Team / individual responsible |'
+recommended: '| Field | Type | Notes |
+
+  |-------|------|-------|
+
+  | system_type | string | GenAI, recommendation, classification, etc. |
+
+  | deployment_context | string | Cloud/on-prem, B2B/B2C, sector |
+
+  | nist_version | string | AI-RMF 1.0, AI 600-1 |'
+id_pattern: ^p11_rmf_[a-z][a-z0-9_]+\.md$
+body_structure:
+- 'Function Coverage -- Table: Function | Action-IDs | Implementation Status'
+- 'Risk Category Severity Matrix -- Table: Category | Severity | Controlling Action-IDs | Response'
+- 'Crosswalk Table -- Columns: AI-RMF Action-ID | Description | ISO 42001 Control | EU AI Act Ref'
+- Gap Analysis -- Action-IDs with no implementation assigned + remediation plan
+- 'Evidence Pointers -- Per action-ID: link to policy doc, test result, audit log'
+constraints:
+- All 4 functions must appear in Function Coverage table.
+- All 12 GenAI risk categories from AI 600-1 must appear in Risk Category Severity Matrix.
+- 'Action-ID format: {prefix}-{digit}.{digit} where prefix in [GV, MP, MS, MG].'
+- 'implementation_status must be one of: Implemented / Partial / Planned / Not Applicable.'
+- 'severity must be one of: Low / Moderate / High / Critical.'
+- review_date must be in ISO 8601 format and within 12 months of created date.

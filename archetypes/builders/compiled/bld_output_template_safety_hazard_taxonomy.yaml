@@ -1,0 +1,26 @@
+kind: output_template
+id: bld_output_template_safety_hazard_taxonomy
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for safety_hazard_taxonomy production
+quality: null
+title: Output Template Safety Hazard Taxonomy
+version: 1.0.0
+author: n01_wave7
+tags:
+- safety_hazard_taxonomy
+- builder
+- output_template
+- MLCommons
+- AILuminate
+- Llama-Guard
+- hazard-category
+- CBRN
+- severity-level
+- response-template
+- taxonomy
+tldr: Template with vars for safety_hazard_taxonomy production
+domain: safety_hazard_taxonomy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
