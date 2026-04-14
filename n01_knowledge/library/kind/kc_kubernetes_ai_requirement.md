@@ -9,13 +9,30 @@ pillar: P01
 
 # Kubernetes AI Requirement (KAR) Conformance Artifact
 
-This document outlines the technical requirements for Kubernetes AI conformance, ensuring compatibility with CNCF standards. Key components include:
+The CNCF Kubernetes AI Requirement (KAR) defines conformance criteria for AI workloads in Kubernetes environments. Key requirements include:
 
-- **GPU Topology Awareness**: Support for GPU resource discovery, allocation, and monitoring across nodes
-- **InfiniBand Integration**: Native support for high-speed interconnects in distributed training workloads
-- **Multi-GPU Instances (MIG)**: Enable multi-tenant GPU usage with isolated compute partitions
-- **Dedicated Resource Allocation (DRA)**: Guarantee resource availability for critical AI workloads
-- **Checkpoint PVCs**: Persistent volume claims for model checkpoint storage across node failures
-- **Multi-Node Training**: Support for distributed training across heterogeneous hardware configurations
+1. **GPU Topology Awareness**  
+   - Support for GPU device discovery and resource allocation  
+   - GPU affinity and NUMA node awareness  
 
-Architectural requirements ensure consistent performance metrics, resource isolation, and fault tolerance across diverse AI workloads. Compliance validation verifies implementation against these specifications through automated testing frameworks.
+2. **InfiniBand Integration**  
+   - RDMA support for high-speed inter-node communication  
+   - RoCEv2 protocol compatibility  
+
+3. **Multi-GPU Support**  
+   - MIG (Multi-Instance GPU) capability  
+   - DRA (Dedicated Resource Allocation) enforcement  
+
+4. **Persistent Storage**  
+   - Checkpoint PVCs for model state persistence  
+   - Volume lifecycle management for training jobs  
+
+5. **Multi-Node Training**  
+   - Distributed training framework compatibility  
+   - Network partition tolerance and recovery  
+
+6. **Resource Monitoring**  
+   - Real-time GPU utilization tracking  
+   - InfiniBand latency monitoring  
+
+This artifact provides a standardized framework for validating Kubernetes distributions' ability to support AI workloads with specific hardware and network requirements.
