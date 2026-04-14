@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_eval_metric
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for eval_metric
+quality: null
+title: Instruction Eval Metric
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- eval_metric
+- builder
+- instruction
+tldr: Step-by-step production process for eval_metric
+domain: eval_metric construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify domain-specific KPIs aligned with P07 governance goals.
+- Analyze historical data to determine baseline metric thresholds.
+- Define success criteria (e.g., accuracy, fairness, scalability).
+- Survey stakeholders for metric prioritization and weighting.
+- Review existing evaluation frameworks for compatibility.
+- Document data sources and quality requirements.
+phase_2_compose:
+- Set up environment with SCHEMA.md dependencies.
+- Name metric using `P07_<DOMAIN>_<MEASURE>` convention.
+- 'Map metric to SCHEMA.md fields: `id`, `description`, `formula`.'
+- Write calculation logic in Python (reference OUTPUT_TEMPLATE.md).
+- Implement edge case handling (e.g., null values, outliers).
+- 'Embed metadata: governance owner, data lineage, version.'
+- Validate against OUTPUT_TEMPLATE.md structure.
+- Add unit tests for formula and edge cases.
+- Finalize artifact with governance approval.
+phase_3_validate:
+- '[ ] ✅ Schema compliance (SCHEMA.md)'
+- '[ ] ✅ Formula passes unit tests'
+- '[ ] ✅ Edge cases handled (nulls, outliers)'
+- '[ ] ✅ Metric aligns with P07 governance goals'
+- '[ ] ✅ Stakeholder approval for definition and weights'
