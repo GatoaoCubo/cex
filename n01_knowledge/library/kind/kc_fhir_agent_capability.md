@@ -10,38 +10,38 @@ pillar: P01
 # HL7 FHIR R5 AI Agent Capability Declaration
 
 ## SMART on FHIR Scopes
-Declare supported SMART scopes:  
-- Read (read patient data)  
-- Write (modify patient data)  
-- Execute (run clinical actions)  
-- Manage (control access/permissions)  
+Declare supported scopes:  
+- Read (patient data access)  
+- Write (data modification)  
+- Execute (clinical actions)  
+- Manage (access control)  
 
 ## PHI Handling
-Specify data usage policies:  
+Specify data policies:  
 - De-identified data only  
 - Anonymized data only  
 - Limited PHI access (with consent)  
-- Data retention periods  
+- Retention periods defined  
 
 ## CDS Hooks Integration
-Support for clinical decision support:  
+Support for:  
 - Pre-authorization hooks  
 - Order entry hooks  
 - Diagnostic suggestion hooks  
 - Medication reconciliation hooks  
 
 ## AI Transparency Extension
-Mandatory metadata requirements:  
+Mandatory metadata:  
 - Model version (e.g., v1.2.3)  
 - Training data sources  
 - Bias mitigation methods  
-- Explainability protocols (e.g., SHAP, LIME)  
-- Audit trail for AI decisions  
+- Explainability protocols (SHAP, LIME)  
+- Audit trail for decisions  
 
 ## Purpose
-This declaration enables:  
-1. Interoperability with FHIR-compliant systems  
-2. Trust establishment with healthcare providers  
-3. Compliance with HIPAA and GDPR standards  
-4. Transparent AI operations in clinical workflows  
-
+Enables:  
+1. FHIR-compliant interoperability  
+2. HIPAA/GDPR compliance  
+3. Transparent clinical AI operations  
+4. Secure healthcare data processing
+```
