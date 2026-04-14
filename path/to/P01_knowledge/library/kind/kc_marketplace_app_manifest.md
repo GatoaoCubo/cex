@@ -1,0 +1,55 @@
+---
+id: kc_marketplace_app_manifest
+kind: knowledge_card
+title: Marketplace App Manifest Spec
+version: 1.0.0
+quality: null
+pillar: P01
+---
+
+# Marketplace App Manifest Spec
+
+## Metadata
+- **app_name**: Required string (e.g., "claude-ai-agent")
+- **description**: 140-character summary of core functionality
+- **author**: Creator/organization name
+- **version**: Semver format (e.g., "0.2.1")
+- **license**: Open source license type (MIT, Apache, etc.)
+- **keywords**: Array of 3-5 relevant tags
+
+## Permissions
+- **data_access**: 
+  - `read`: Access to user data (e.g., "read:email")
+  - `write`: Modify user data (e.g., "write:documents")
+  - `delete`: Remove user data (e.g., "delete:cache")
+- **api_usage**: 
+  - `rate_limit`: Max requests per minute
+  - `endpoint`: Specific API endpoints allowed
+- **third_party**: 
+  - `integration`: Approved third-party services
+  - `sandbox`: Isolated environment for testing
+
+## Pricing
+- **model**: 
+  - `pay_per_use`: Based on API calls
+  - `subscription`: Monthly/yearly plans
+  - `freemium`: Free tier + premium upgrades
+- **tiers**: 
+  - `basic`: Core features (e.g., 100 API calls/month)
+  - `pro`: Advanced features (e.g., 1000 API calls/month)
+  - `enterprise`: Custom SLA and support
+- **payment**: 
+  - `stripe`: Credit card processing
+  - `paypal`: Alternative payment method
+  - `bank_transfer`: Direct bank transfer
+
+## Additional Fields
+- **dependencies**: 
+  - `libraries`: Required frameworks (e.g., "langchain@0.2.1")
+  - `models`: AI models required (e.g., "huggingface/gpt2")
+- **security**: 
+  - `encryption`: Data protection standards
+  - `auth`: Authentication methods (OAuth2, JWT)
+- **compliance**: 
+  - `gdpr`: EU data protection compliance
+  - `ccpa`: California privacy law compliance
