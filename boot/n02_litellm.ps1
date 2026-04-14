@@ -9,9 +9,8 @@ $sinName = "Creative Lust"
 
 $proxyUrl = if ($env:LITELLM_BASE_URL) { $env:LITELLM_BASE_URL } else { "http://localhost:4000" }
 
-# Detect mission from handoff
 $mission = ""
-$handoff = "$cexRoot\.cexuntime\handoffs\${nucleus}_task.md"
+$handoff = "$cexRoot\.cex\runtime\handoffs\${nucleus}_task.md"
 if (Test-Path $handoff) {
     $content = Get-Content $handoff -Head 10 -EA SilentlyContinue
     foreach ($line in $content) {
@@ -41,7 +40,6 @@ $env:CEX_NUCLEUS = "N02"
 $env:CEX_ROOT    = $cexRoot
 Set-Location $env:CEX_ROOT
 
-# --- Probe proxy ---
 Write-Host "  [>>] Probing LiteLLM proxy at $proxyUrl ..." -ForegroundColor DarkGray
 try {
     $h = Invoke-RestMethod -Uri "$proxyUrl/health/liveliness" -TimeoutSec 5 -EA Stop
@@ -53,7 +51,6 @@ try {
     return
 }
 
-# --- Verify task handoff exists ---
 if (-not (Test-Path $handoff)) {
     Write-Host "  [WARN] No handoff at $handoff" -ForegroundColor Yellow
     Write-Host "  Drop a task there or the runner will exit." -ForegroundColor Yellow
