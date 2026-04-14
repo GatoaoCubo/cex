@@ -1,0 +1,30 @@
+kind: tools
+id: bld_tools_benchmark_suite
+pillar: P04
+llm_function: CALL
+purpose: Tools available for benchmark_suite production
+quality: null
+title: Tools Benchmark Suite
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- benchmark_suite
+- builder
+- tools
+tldr: Tools available for benchmark_suite production
+domain: benchmark_suite construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles benchmark components\
+  \ into executable suites | Pre-execution setup |  \n| cex_score.py | Evaluates performance metrics against baseline thresholds\
+  \ | Post-execution analysis |  \n| cex_retriever.py | Fetches external datasets or dependencies for benchmarks | Suite initialization\
+  \ |  \n| cex_doctor.py | Diagnoses configuration errors or missing dependencies | Pre-execution validation |  \n| cex_analyzer.py\
+  \ | Parses execution logs for anomalies or patterns | Post-execution debugging |  \n| cex_runner.py | Orchestrates parallel\
+  \ execution of benchmark tasks | Execution phase |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_validator.py | Ensures benchmark suite\
+  \ compliance with schema standards | Pre-deployment |  \n| val_linter.py | Checks code quality and style consistency in\
+  \ benchmark scripts | Development |  \n| val_comparer.py | Cross-verifies results across multiple execution runs | Post-execution\
+  \ |  \n| val_auditor.py | Tracks usage statistics and license compliance for external tools | Deployment |"
+external_references: "- pytest: For unit testing individual benchmark components  \n-基准库 (Benchmark Library): For standardized\
+  \ metric calculations  \n- coverage.py: For measuring code coverage during benchmark execution"
