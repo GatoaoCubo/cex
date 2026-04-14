@@ -1,6 +1,7 @@
 ---
 id: n02_audit_thinking_config_builder
 kind: audit_report
+pillar: P07
 nucleus: n02
 mission: HYBRID_REVIEW
 kind_audited: thinking_config

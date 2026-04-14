@@ -1,7 +1,10 @@
 ---
+id: embedding_config_intelligence
+kind: embedding_config
+pillar: P01
 title: Embedding Configuration for Intelligence
-date: 2023-10-15
 tags: [intelligence, embedding, configuration]
+quality: null
 ---
 
 # Embedding Configuration for Intelligence

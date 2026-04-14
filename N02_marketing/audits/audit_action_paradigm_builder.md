@@ -1,6 +1,7 @@
 ---
 id: n02_audit_action_paradigm_builder
 kind: audit_report
+pillar: P07
 nucleus: n02
 mission: HYBRID_REVIEW
 kind_audited: action_paradigm

@@ -1,7 +1,10 @@
 ---
+id: kc_developer_experience_patterns
+kind: knowledge_card
+pillar: P01
 title: Developer Experience Patterns
-date: 2023-10-15
 tags: [developer, experience, patterns]
+quality: null
 ---
 
 # Developer Experience Patterns

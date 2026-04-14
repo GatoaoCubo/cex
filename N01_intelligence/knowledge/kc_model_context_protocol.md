@@ -1,7 +1,10 @@
 ---
+id: kc_model_context_protocol
+kind: knowledge_card
+pillar: P01
 title: Model Context Protocol
-date: 2023-10-15
 tags: [model, context, protocol]
+quality: null
 ---
 
 # Model Context Protocol

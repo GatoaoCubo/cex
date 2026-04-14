@@ -1,7 +1,10 @@
 ---
+id: knowledge_card_marketing
+kind: knowledge_card
+pillar: P01
 title: Knowledge Card Marketing
-date: 2023-10-15
 tags: [knowledge, card, marketing]
+quality: null
 ---
 
 # Knowledge Card Marketing

@@ -1,7 +1,10 @@
 ---
+id: kc_visual_hierarchy_principles
+kind: knowledge_card
+pillar: P01
 title: Visual Hierarchy Principles
-date: 2023-10-15
 tags: [visual, hierarchy, design]
+quality: null
 ---
 
 # Visual Hierarchy Principles

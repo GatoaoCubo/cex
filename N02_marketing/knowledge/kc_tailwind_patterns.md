@@ -1,7 +1,10 @@
 ---
+id: kc_tailwind_patterns
+kind: knowledge_card
+pillar: P01
 title: Tailwind Patterns
-date: 2023-10-15
 tags: [tailwind, patterns, design]
+quality: null
 ---
 
 # Tailwind Patterns
