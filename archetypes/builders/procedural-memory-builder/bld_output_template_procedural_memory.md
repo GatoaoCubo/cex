@@ -5,56 +5,106 @@ pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for procedural_memory production
 quality: null
-title: "Output Template Procedural Memory"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+title: "Output Template: procedural_memory"
+version: "2.0.0"
+author: n06_commercial
 tags: [procedural_memory, builder, output_template]
-tldr: "Template with vars for procedural_memory production"
-domain: "procedural_memory construction"
+tldr: "Template for LLM agent procedural memory artifacts: skill definitions table, namespace, backend, verification, reflexion notes, tier matrix"
+domain: "LLM agent procedural memory"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.90
 ---
 
 ```yaml
 ---
-id: p10_pm_{{name}}.md
-name: {{name}}
+id: p10_pm_{{agent_slug}}
 kind: procedural_memory
 pillar: P10
+title: "Procedural Memory: {{agent_name}}"
+version: "1.0.0"
+created: "{{date}}"
+updated: "{{date}}"
+author: "{{author}}"
+domain: "{{agent_domain}}"
 quality: null
-description: {{description}}
-tags: [{{tag1}}, {{tag2}}]
-created_at: {{created_at}}
+tags: [procedural_memory, {{agent_slug}}, {{tier}}]
+tldr: "{{one_sentence_summary}}"
+tier: "{{tier}}"
+skill_format: "{{skill_format}}"
+skill_count: {{skill_count}}
+verification: "{{verification}}"
+namespace_pattern: "{{namespace_pattern}}"
+storage_backend: "{{storage_backend}}"
+reflexion_enabled: {{true_or_false}}
 ---
 ```
 
-<!-- id: Unique identifier following p10_pm_[a-z][a-z0-9_]+.md -->
-<!-- name: Human-readable memory name -->
-<!-- description: Brief purpose of this procedural memory -->
-<!-- tags: Relevant categorization labels -->
-<!-- created_at: ISO 8601 timestamp -->
+<!-- id: Unique identifier following ^p10_pm_[a-z][a-z0-9_]+ -->
+<!-- agent_slug: snake_case agent name (e.g., coding_assistant_v2) -->
+<!-- tier: free | pro | enterprise -->
+<!-- skill_format: code | yaml | natural_language | json | mixed -->
+<!-- skill_count: integer count of skills defined (0 for free tier) -->
+<!-- verification: unit_test | test_case | human_review | ci_pipeline | none -->
+<!-- namespace_pattern: key hierarchy (e.g., "coding.{task}") -->
+<!-- storage_backend: redis | postgresql | filesystem | in_memory -->
 
-## Procedural Memory Overview
-| Step | Action | Outcome |
-|------|--------|---------|
-| 1    | {{action1}} | {{result1}} |
-| 2    | {{action2}} | {{result2}} |
+## Overview
 
-```python
-# Example procedural workflow
-def {{function_name}}():
-    """{{description}}"""
-    try:
-        {{code_block}}
-    except Exception as e:
-        print(f"Error: {e}")
-```
+{{agent_name}} procedural memory for {{agent_domain}}. Tier: {{tier}}.
+Skill format: {{skill_format}}. Reference design: Voyager (Wang 2023) skill library.
+{{free_tier_note}}
 
-<!-- action1: First operational step -->
-<!-- result1: Expected outcome of first step -->
-<!-- action2: Second operational step -->
-<!-- result2: Expected outcome of second step -->
-<!-- function_name: CamelCase function identifier -->
-<!-- description: Function purpose in 1 line -->
-<!-- code_block: 1-3 lines of core implementation -->
+<!-- free_tier_note: For free tier only: "Free tier: no procedural memory. Agent reasons from scratch on each task." -->
+<!-- For PRO/ENTERPRISE: remove free_tier_note and proceed with sections below. -->
+
+## Skill Definitions
+
+| Skill ID | Name | Format | Storage Key | Verification | Tier Required |
+|----------|------|--------|-------------|-------------|---------------|
+| {{skill_id_1}} | {{skill_name_1}} | {{skill_format}} | {{namespace_pattern}}.{{task_1}} | {{verification}} | {{tier_req_1}} |
+| {{skill_id_2}} | {{skill_name_2}} | {{skill_format}} | {{namespace_pattern}}.{{task_2}} | {{verification}} | {{tier_req_2}} |
+
+<!-- Add rows per skill. Remove section entirely for free tier. -->
+
+## Skill Namespace
+
+- Pattern: `{{namespace_pattern}}`
+- Example keys: `{{example_key_1}}`, `{{example_key_2}}`
+- Lookup method: {{lookup_method}} (exact | semantic | hybrid)
+- Conflict resolution: latest_wins | version_pinned | manual_review
+
+## Storage Backend
+
+- Backend: {{storage_backend}}
+- Encoding: {{encoding}} (e.g., JSON, YAML, raw code string)
+- Key expiry: {{ttl_days}} days (or null for persistent)
+- Max skills: {{max_skills}} (null = unlimited for enterprise)
+
+## Verification Strategy
+
+Reference: Voyager (Wang 2023) verify-before-store pattern.
+- Method: {{verification}}
+- On failure: {{failure_action}} (reject | quarantine | human_review)
+- Test coverage target: {{test_coverage}}%
+- Sandbox: {{sandbox_type}} (e.g., Docker, E2B, none)
+
+## Reflexion Notes
+
+<!-- Optional section. Include if reflexion_enabled: true -->
+- Storage: co-located with skill in {{storage_backend}}, key suffix `.reflexion`
+- Format: natural language paragraph describing past failures and lessons
+- Retrieval: retrieved alongside the skill on every invocation
+- Max length: {{reflexion_max_chars}} characters
+
+## Commercial Tier Matrix
+
+| Feature | Free | Pro | Enterprise |
+|---------|------|-----|------------|
+| Skill library | None | Up to {{pro_skill_limit}} skills | Unlimited |
+| Skill format | N/A | {{pro_skill_format}} | {{enterprise_skill_format}} |
+| Verification | N/A | {{pro_verification}} | CI pipeline + audit |
+| Cross-agent sharing | N/A | Within workspace | Cross-org with ACL |
+| Skill versioning | N/A | Latest only | Full history + rollback |
+| Reflexion notes | None | Per-session | Persistent + searchable |
+| Access control | N/A | None | Role-based skill ACL |
