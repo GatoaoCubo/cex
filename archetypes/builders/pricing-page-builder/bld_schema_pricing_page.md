@@ -30,7 +30,7 @@ density_score: 0.85
 | author     | string | yes      | null    | Author name                        |  
 | domain     | string | yes      | null    | "pricing"                          |  
 | quality    | null   | yes      | null    | Never self-score; peer review assigns |  
-| tags       | array  | yes      | null    | Keywords (e.g., "crypto", "fiat")  |  
+| tags       | array  | yes      | null    | Keywords (e.g., "saas", "freemium", "b2b") |  
 | tldr       | string | yes      | null    | Summary of pricing structure       |  
 | pricing_model | string | yes | null | "flat", "tiered", "dynamic"        |  
 | currency   | string | yes      | null    | ISO 4217 code (e.g., "USD")        |  

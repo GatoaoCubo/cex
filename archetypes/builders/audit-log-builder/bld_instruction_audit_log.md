@@ -25,19 +25,19 @@ density_score: 0.85
 6. Document audit control objectives from SOC2 Trust Service Criteria  
 
 ## Phase 2: COMPOSE  
-1. Define log schema in SCHEMA.md with fields: timestamp, actor, action, resource, outcome, hash  
+1. Define log schema in bld_schema_audit_log.md with fields: timestamp, actor, action, resource, outcome, hash  
 2. Specify immutability via cryptographic hash chaining in log entries  
-3. Map SOC2 controls (e.g., CC7.1, CC11.2) to audit log events in CONTROL_MAP.md  
-4. Write log configuration using OUTPUT_TEMPLATE.md format with YAML anchors  
-5. Implement tamper-evident storage (e.g., write-once filesystem, blockchain anchoring)  
+3. Map SOC2 controls (e.g., CC7.1, CC11.2) to audit log events in bld_knowledge_card_audit_log.md  
+4. Write log configuration using bld_output_template_audit_log.md format with YAML anchors  
+5. Implement tamper-evident storage (e.g., write-once filesystem, WORM storage anchoring)  
 6. Embed log retention policy as a top-level attribute in the artifact  
 7. Add metadata for SOC2 attestation scope and audit trail scope  
-8. Reference SCHEMA.md in the artifact's $schema property  
+8. Reference bld_schema_audit_log.md in the artifact's $schema property  
 9. Finalize with cryptographic signature of the configuration file  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ Verify schema compliance using JSON Schema validator  
-[ ] ✅ Confirm immutability mechanisms prevent log modification  
-[ ] ✅ Validate retention policy aligns with SOC2 Type II requirements  
-[ ] ✅ Ensure all mapped controls are represented in log events  
-[ ] ✅ Confirm artifact passes SOC2 attestation checklist for audit logs
+[ ] [OK] Verify schema compliance using JSON Schema validator  
+[ ] [OK] Confirm immutability mechanisms prevent log modification  
+[ ] [OK] Validate retention policy aligns with SOC2 Type II requirements  
+[ ] [OK] Ensure all mapped controls are represented in log events  
+[ ] [OK] Confirm artifact passes SOC2 attestation checklist for audit logs

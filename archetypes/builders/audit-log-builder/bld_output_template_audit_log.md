@@ -18,7 +18,7 @@ density_score: 0.85
 
 ```yaml
 ---
-id: p11_al_{{name}}.yaml
+id: p11_al_{{name}}.md
 name: {{audit_log_name}}
 description: <!-- Brief description of the audit log purpose -->
 version: {{version}}

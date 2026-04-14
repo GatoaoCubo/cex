@@ -45,16 +45,48 @@ Usage reports are critical for SaaS and cloud providers to track resource consum
 - GDPR Article 30 (2018)  
 - ELK Stack Documentation (2022)  
 
+## Showback vs. Chargeback  
+Critical distinction for enterprise billing and FinOps alignment:  
+
+| Model | Definition | Who Pays | Use Case |  
+|-------|-----------|----------|----------|  
+| **Showback** | Usage visibility only -- teams see what they consume but are not billed internally | Central IT / Finance | Cost awareness, optimization culture |  
+| **Chargeback** | Internal billing -- departments are invoiced for actual consumption | Each business unit | Cost accountability, P&L per team |  
+| **Hybrid** | Showback for new services, chargeback for mature services | Mixed | Gradual FinOps maturity rollout |  
+
+- Every usage_report artifact must declare `billing_model: showback | chargeback | hybrid`.  
+- Chargeback reports require: department_id, cost_center, allocation_rule, invoice_period.  
+- Showback reports require: team_id, resource_label, consumption_summary.  
+
+## Department Allocation Rules  
+| Rule Type | Logic | Example |  
+|-----------|-------|---------|  
+| Proportional | Allocate cost by % of total usage | Team A used 40% of API calls -> 40% of total cost |  
+| Fixed quota | Pre-allocated budget per department | Marketing: $5,000/mo cap |  
+| Actual metered | Bill exactly what was consumed | Per-API-call billing at $0.001/call |  
+| Tiered commitment | Volume discount at thresholds | >1M calls/mo = $0.0008/call |  
+
+## Data Export Integrations (MUST reference in usage_report)  
+| Platform | Use Case | Config Key |  
+|----------|----------|------------|  
+| Snowflake Data Share | Cross-org data access without copying | `snowflake_share_name` |  
+| Databricks Delta Lake | Usage data lakehouse for analytics | `databricks_table_path` |  
+| Metabase | Self-serve CFO/manager dashboards | `metabase_dashboard_id` |  
+| Looker | Embedded analytics for enterprise portals | `looker_explore_url` |  
+| CSV export | Manual reporting, audit submissions | `csv_export_enabled: true` |  
+
 ## Common Patterns  
-1. Time-based aggregation (e.g., hourly, daily intervals)  
-2. Normalization of heterogeneous usage metrics  
-3. Multi-dimensional filtering (e.g., by user, region, service)  
-4. Anomaly detection for outlier usage patterns  
-5. Hierarchical reporting (e.g., per-user → per-team → organization-wide)  
+1. Time-based aggregation with ISO 8601 intervals (hourly, daily, monthly).  
+2. Normalization to standard units: requests -> thousands, bytes -> GB, seconds -> hours.  
+3. Multi-dimensional filtering: user_id, team_id, region, service_name, cost_center.  
+4. Anomaly detection for outlier usage patterns (>2 standard deviations = flag).  
+5. Hierarchical rollup: per-user -> per-team -> per-department -> organization-wide.  
+6. Showback vs. chargeback mode declared explicitly in report metadata.  
+7. Data share to Snowflake/Databricks for cross-org FinOps integration.  
 
 ## Pitfalls  
-- Over-aggregation leading to loss of actionable detail  
-- Inconsistent time zone handling across global users  
-- Ignoring normalization, causing skewed billing or analytics  
-- Lack of audit trails for usage data modifications  
-- Misalignment between usage metrics and billing models (e.g., pro-rata vs. flat-rate)
+- Conflating showback and chargeback -- each has different authorization and approval flows.  
+- Over-aggregation leading to loss of actionable per-team detail.  
+- Inconsistent time zone handling across global users (always store in UTC, display in local).  
+- Missing allocation_rule for chargeback (causes finance disputes at month-end).  
+- No CSV export option (audit teams always need raw data access).

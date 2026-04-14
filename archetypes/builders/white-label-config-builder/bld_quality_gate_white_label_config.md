@@ -1,6 +1,6 @@
 ---
 kind: quality_gate
-id: p09_qg_white_label_config
+id: p11_qg_white_label_config
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for white_label_config
@@ -33,16 +33,15 @@ density_score: 0.85
 | H07 | allowed_domains field valid  | allowed_domains missing or not a list             |  
 
 ## SOFT Scoring  
-| Dim | Dimension                  | Weight | Scoring Guide                                      |  
-|-----|----------------------------|--------|----------------------------------------------------|  
-| D01 | Branding completeness      | 0.15   | 100% complete = 1.0; missing fields = 0.5          |  
-| D02 | API key security           | 0.15   | Encrypted keys = 1.0; plaintext = 0.2              |  
-| D03 | Customization options      | 0.10   | 5+ custom fields = 1.0; <3 = 0.5                   |  
-| D04 | Branding guideline compliance | 0.10 | 100% compliant = 1.0; 1 error = 0.7                |  
-| D05 | Performance metrics        | 0.10   | Latency < 200ms = 1.0; >500ms = 0.3                |  
-| D06 | Error handling             | 0.10   | 100% covered = 1.0; 50% covered = 0.5              |  
-| D07 | Documentation quality      | 0.10   | Complete = 1.0; partial = 0.6                      |  
-| D08 | User experience            | 0.10   | 5+ UX checks passed = 1.0; <3 = 0.4                |  
+| Dim | Dimension                  | Weight | Scoring Guide                                                          |  
+|-----|----------------------------|--------|------------------------------------------------------------------------|  
+| D01 | Branding completeness      | 0.15   | 1.0=logo+colors+favicon+custom domain all defined; 0.5=partial; 0.0=none |  
+| D02 | Reseller model accuracy    | 0.15   | 1.0=sub-account+margins+OEM licensing defined; 0.5=partial; 0.0=absent  |  
+| D03 | Customization depth        | 0.15   | 1.0=theming API+custom emails+co-branded UI; 0.5=one element; 0.0=none  |  
+| D04 | Compliance settings        | 0.15   | 1.0=GDPR+regional flags defined; 0.5=one standard; 0.0=absent           |  
+| D05 | Schema validation          | 0.15   | 1.0=SemVer+strict types+backward compat; 0.5=partial; 0.0=absent        |  
+| D06 | Security posture           | 0.10   | 1.0=encrypted secrets+RBAC+audit trail; 0.5=partial; 0.0=plaintext      |  
+| D07 | Documentation quality      | 0.15   | 1.0=all fields documented+changelog; 0.5=partial; 0.0=absent            |  
 
 ## Actions  
 | Score   | Action                          |  

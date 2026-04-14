@@ -54,6 +54,37 @@ The domain intersects with multi-tenancy, API management, and software compositi
 4. **Runtime Injection** – Load reseller configs at deployment via environment variables.  
 5. **Policy-Driven Validation** – Enforce schema rules for reseller input consistency.  
 
+## Stripe Connect Sub-Account Model  
+White-label platforms commonly use Stripe Connect to manage reseller billing:  
+- **Platform account**: owns product, sets pricing floors, collects platform fees (1-3% typical).  
+- **Connected (sub) account**: reseller's Stripe account, receives payouts minus platform fee.  
+- **Charge types**: Direct charges (reseller controls UX), Destination charges (platform controls UX), Separate charges + transfers (split billing).  
+- **OEM licensing model**: platform licenses product to reseller at wholesale price; reseller sets retail price. Margin = retail - wholesale - platform fee.  
+- Config artifact must specify: `stripe_connect_type`, `platform_fee_percent`, `reseller_margin_floor`, `payout_schedule`.  
+
+## Branding Components (MUST configure in every white_label_config)  
+| Component | Config Key | Notes |  
+|-----------|------------|-------|  
+| Custom domain | `custom_domain` | e.g., app.reseller.com -- requires DNS CNAME |  
+| Branded email sender | `email_from_domain` | e.g., noreply@reseller.com -- requires SPF/DKIM |  
+| Logo (header) | `logo_url` | PNG/SVG, min 200x50px |  
+| Favicon | `favicon_url` | ICO/PNG 32x32 |  
+| Primary color | `brand_color_primary` | HEX, used in buttons/links |  
+| Co-branded footer | `cobrand_text` | "Powered by [Platform]" or fully white-labeled |  
+| Theming API | `theme_api_enabled` | Exposes CSS variable overrides to reseller |  
+
+## Common Patterns  
+1. **Configuration as Code** -- Store white-label settings in versioned YAML files.  
+2. **Modular UI Frameworks** -- CSS variable injection via theming API for runtime branding.  
+3. **Abstraction Layers** -- Isolate reseller logic from core application code.  
+4. **Stripe Connect sub-accounts** -- Platform fee model with connected account payouts.  
+5. **Policy-Driven Validation** -- Enforce schema rules for reseller input consistency.  
+6. **Custom domain provisioning** -- Automated CNAME + SSL cert issuance per reseller.  
+7. **OEM licensing tiers** -- Wholesale price + margin floor + retail pricing freedom for reseller.  
+
 ## Pitfalls  
-- **Hardcoding Branding** – Embedding reseller-specific data directly into core code.  
-- **Insecure Credential Handling**
+- **Hardcoding Branding** -- Embedding reseller-specific data directly into core code.  
+- **Insecure Credential Handling** -- Storing Stripe Connect keys or API tokens in plaintext config.  
+- **Missing reseller margin floor** -- Allowing resellers to price below cost, eroding platform revenue.  
+- **Single custom domain** -- Not supporting multiple domains per reseller (multi-brand accounts).  
+- **No theming API versioning** -- CSS variable changes breaking existing reseller themes on deploy.

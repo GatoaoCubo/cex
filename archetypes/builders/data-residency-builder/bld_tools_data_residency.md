@@ -19,21 +19,14 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles data residency policies into enforceable rules | During policy creation |  
-| cex_score.py | Scores compliance against residency requirements | Post-policy validation |  
-| cex_retriever.py | Retrieves data residency metadata from storage systems | During data access requests |  
-| cex_doctor.py | Diagnoses residency violations in datasets | During audits or compliance checks |  
-| cex_transformer.py | Transforms data to meet residency constraints | Before cross-border transfers |  
-| cex_logger.py | Logs residency-related events for audit trails | Continuously during operations |  
-
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| validator_check.py | Validates policy syntax and semantics | Pre-deployment |  
-| consistency_checker.py | Ensures policy alignment across systems | During multi-system integration |  
-| formatter.py | Standardizes residency metadata formats | When ingesting external data |  
+| cex_compile.py | Compiles data_residency artifact to .yaml | After each save |  
+| cex_score.py | Scores artifact against 5D quality dimensions | Post-production |  
+| cex_retriever.py | Retrieves similar residency specs and KCs | During F3 INJECT |  
+| cex_doctor.py | Validates builder ISO completeness and structure | During F7 GOVERN |  
+| cex_hygiene.py | Enforces frontmatter rules and naming conventions | During F7 GOVERN |  
 
 ## External References  
-- GDPR (General Data Protection Regulation)  
-- OpenPolicyAgent (for policy enforcement)  
-- PyResidency (Python library for residency analysis)
+- GDPR Articles 44-50 (third-country transfers)  
+- Schrems II ruling (C-311/18) and EU-US Data Privacy Framework 2023  
+- ISO/IEC 27701:2019 (Privacy Information Management)  
+- AWS Data Residency, Azure Sovereign Regions (regional data plane references)

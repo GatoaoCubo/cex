@@ -25,12 +25,12 @@ density_score: 0.85
 6. Consult stakeholders to prioritize quota enforcement for critical services.  
 
 ## Phase 2: COMPOSE  
-1. Reference SCHEMA.md to define `usage_quota` fields (e.g., `quota_limit`, `reset_interval`).  
+1. Reference bld_schema_usage_quota.md to define `usage_quota` fields (e.g., `quota_limit`, `reset_interval`).  
 2. Set initial quota thresholds using P09 guidelines for resource allocation.  
 3. Map metrics to monitored resources (e.g., CPU, memory, API calls).  
 4. Write enforcement logic for exceeding thresholds (e.g., rate limiting, blocking).  
 5. Implement fair-use exceptions for legitimate high-usage scenarios.  
-6. Use OUTPUT_TEMPLATE.md to structure quota configuration files (YAML/JSON).  
+6. Use bld_output_template_usage_quota.md to structure quota configuration files (YAML/JSON).  
 7. Integrate with monitoring tools for real-time quota tracking.  
 8. Document enforcement rules in a policy repository.  
 9. Test artifact against sample workloads to ensure constraint accuracy.  

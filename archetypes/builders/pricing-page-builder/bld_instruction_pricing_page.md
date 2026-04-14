@@ -25,10 +25,10 @@ density_score: 0.85
 6. Benchmark industry-standard pricing metrics (e.g., cost per feature, ROI benchmarks).  
 
 ## Phase 2: COMPOSE  
-1. Outline structure using SCHEMA.md: header, tier comparison table, feature breakdown, CTA.  
+1. Outline structure using bld_schema_pricing_page.md: header, tier comparison table, feature breakdown, CTA.  
 2. Define tier names (e.g., Basic, Pro, Enterprise) and corresponding pricing.  
 3. Write value propositions for each tier, emphasizing USPs and ROI.  
-4. Draft conversion copy (e.g., "Upgrade to unlock X feature") aligned with OUTPUT_TEMPLATE.md.  
+4. Draft conversion copy (e.g., "Upgrade to unlock X feature") aligned with bld_output_template_pricing_page.md.  
 5. Populate tier comparison table with features, pricing, and benefits.  
 6. Insert pricing table with currency, billing cycles, and discounts.  
 7. Add CTAs (e.g., "Start free trial," "Contact sales") for each tier.  
@@ -36,8 +36,8 @@ density_score: 0.85
 9. Review for clarity, conciseness, and alignment with research findings.  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ Tier comparison table accurately reflects feature differences.  
-[ ] ✅ Conversion copy includes clear value propositions and CTAs.  
-[ ] ✅ Pricing aligns with research benchmarks and customer personas.  
-[ ] ✅ Mobile responsiveness tested for tables and CTAs.  
-[ ] ✅ Accessibility checked (e.g., contrast ratios, screen reader compatibility).
+[ ] [OK] Tier comparison table accurately reflects feature differences.  
+[ ] [OK] Conversion copy includes clear value propositions and CTAs.  
+[ ] [OK] Pricing aligns with research benchmarks and customer personas.  
+[ ] [OK] Mobile responsiveness tested for tables and CTAs.  
+[ ] [OK] Accessibility checked (e.g., contrast ratios, screen reader compatibility).

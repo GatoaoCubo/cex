@@ -43,8 +43,8 @@ sections:
 **Example Table:**
 | Requirement         | Status | Notes         |
 |---------------------|--------|---------------|
-| KYC Verification    | ✅     | <!-- Pass/fail indicator --> |
-| Transaction Limits  | ❌     | <!-- Compliance status --> |
+| KYC Verification    | PASS   | <!-- Pass/fail indicator --> |
+| Transaction Limits  | FAIL   | <!-- Compliance status --> |
 
 **Example Code Block:**
 ```python

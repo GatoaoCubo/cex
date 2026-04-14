@@ -25,13 +25,13 @@ density_score: 0.85
 6. Document stakeholder approval workflows for policy changes.  
 
 ## Phase 2: COMPOSE  
-1. Use SCHEMA.md to structure policy JSON with `role`, `resource`, `action`, `tenant`.  
+1. Use bld_schema_rbac_policy.md to structure policy JSON with `role`, `resource`, `action`, `tenant`.  
 2. Define base roles (e.g., `tenant_admin`, `service_user`).  
 3. Assign permissions via `allow`/`deny` rules per resource type.  
 4. Scope policies to tenant identifiers (e.g., `tenant_id: "abc123"`).  
-5. Reference OUTPUT_TEMPLATE.md for required fields: `policy_id`, `version`, `created_by`.  
+5. Reference bld_output_template_rbac_policy.md for required fields: `policy_id`, `version`, `created_by`.  
 6. Embed multi-tenant isolation rules using `tenant_scope` enum.  
-7. Validate against schema using JSON schema validator.  
+7. Validate against bld_schema_rbac_policy.md using JSON schema validator.  
 8. Write policy in YAML format with `---` separators.  
 9. Add comments for audit trails and change logs.  
 

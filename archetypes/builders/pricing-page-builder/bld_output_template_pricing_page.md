@@ -19,14 +19,29 @@ density_score: 0.85
 ```yaml
 ---
 id: p05_pp_{{name}}.md
+kind: pricing_page
 pillar: P05
 quality: null
 title: {{title}}
 description: {{description}}
-pricing_tier: {{tier}}
-currency: {{currency}}
+pricing_model: {{flat|tiered|freemium}}
+currency: {{USD|EUR|BRL}}
+tags: [pricing_page, {{product_name}}, {{tier_style}}]
+tldr: "{{one_sentence_summary}}"
+domain: pricing_page construction
+created: {{YYYY-MM-DD}}
+updated: {{YYYY-MM-DD}}
+author: {{author_name}}
 ---
 ```
+
+<!-- GUIDANCE:
+  - name: lowercase slug, e.g. "acme_saas" -> id becomes p05_pp_acme_saas.md
+  - pricing_model: flat (single price), tiered (3+ tiers), freemium (free + paid)
+  - currency: ISO 4217 code. Default USD for SaaS
+  - Most Popular tier: mark with badge in table (see golden example)
+  - CTA per tier: action-oriented verb ("Start Free", "Get Pro", "Contact Sales")
+-->
 
 <!-- Pricing Tiers Table -->
 | Tier | Price ({{currency}}) | Features |

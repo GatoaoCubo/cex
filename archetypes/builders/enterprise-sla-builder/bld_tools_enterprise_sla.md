@@ -19,22 +19,23 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles SLA terms into executable rules | During SLA creation |  
-| cex_score.py | Scores SLA compliance against metrics | Post-deployment monitoring |  
-| cex_retriever.py | Retrieves SLA clauses for audit or enforcement | During compliance checks |  
-| cex_doctor.py | Diagnoses SLA rule conflicts or ambiguities | Pre-deployment validation |  
-| cex_analyzer.py | Analyzes SLA performance trends over time | Monthly reporting cycles |  
-| cex_optimizer.py | Suggests SLA adjustments for cost-efficiency | Quarterly reviews |  
+| cex_compile.py | Compile SLA artifact to YAML + register in index | After authoring |  
+| cex_score.py | Score artifact quality (5D + HARD gates) | After compile |  
+| cex_retriever.py | Retrieve similar SLA artifacts for template reuse | During F3 INJECT |  
+| cex_doctor.py | Validate all ISOs in builder for structural health | Post-build audit |  
+| cex_wave_validator.py | Batch-validate full enterprise-sla-builder (39 ISOs) | CI gate |  
+| cex_hygiene.py | Enforce 8 hygiene rules (frontmatter, density, IDs) | Pre-commit |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| sla_validator.py | Checks SLA syntax and legal compliance | Pre-deployment |  
-| sla_simulator.py | Tests SLA scenarios under stress conditions | UAT phase |  
-| sla_reporter.py | Generates compliance dashboards | Monthly reporting |  
-| sla_comparator.py | Compares SLA versions for drift detection | Post-upgrade audits |  
+| cex_hooks.py | Pre-commit hook: block non-ASCII + schema violations | On git add |  
+| cex_sanitize.py | ASCII sanitize .py/.ps1 in builder scope | After code edits |  
+| cex_feedback.py | Track quality trends + archive low-score artifacts | After scoring |  
 
 ## External References  
-- OpenAPI Specification (for API SLA definitions)  
-- Prometheus (for real-time SLA metric collection)  
-- ISO/IEC 27001 (for information security SLA frameworks)
+- ITIL 4 (Service Level Management framework)  
+- ISO/IEC 20000-1:2018 (IT Service Management SLA requirements)  
+- Google SRE Book: Error Budgets and SLO/SLI/SLA distinction  
+- Prometheus (uptime and latency monitoring reference)  
+- PagerDuty (incident escalation and SLA breach alerting)

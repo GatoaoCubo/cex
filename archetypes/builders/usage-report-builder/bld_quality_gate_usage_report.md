@@ -1,6 +1,6 @@
 ---
 kind: quality_gate
-id: p07_qg_usage_report
+id: p11_qg_usage_report
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for usage_report

@@ -25,9 +25,9 @@ density_score: 0.85
 6. Document jurisdictional risks and mitigation strategies.  
 
 ## Phase 2: COMPOSE  
-1. Define artifact scope using SCHEMA.md (data_residency).  
+1. Define artifact scope using bld_schema_data_residency.md (data_residency).  
 2. Specify data classification (sensitive, non-sensitive).  
-3. Assign residency regions per OUTPUT_TEMPLATE.md.  
+3. Assign residency regions per bld_output_template_data_residency.md.  
 4. Configure encryption standards (AES-256, TLS 1.3).  
 5. Define access control policies (role-based, geo-fencing).  
 6. Implement audit logging for data movement.  
@@ -36,8 +36,8 @@ density_score: 0.85
 9. Finalize artifact with versioning and metadata.  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ Schema alignment (SCHEMA.md)  
-- [ ] ✅ Regional residency rules enforced  
-- [ ] ✅ Encryption and access controls verified  
-- [ ] ✅ Legal compliance confirmed  
-- [ ] ✅ Artifact approved by governance team
+- [ ] [OK] Schema alignment (SCHEMA.md)  
+- [ ] [OK] Regional residency rules enforced  
+- [ ] [OK] Encryption and access controls verified  
+- [ ] [OK] Legal compliance confirmed  
+- [ ] [OK] Artifact approved by governance team

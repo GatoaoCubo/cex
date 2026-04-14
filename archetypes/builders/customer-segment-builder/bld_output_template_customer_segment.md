@@ -19,38 +19,76 @@ density_score: 0.85
 ```yaml
 ---
 id: p02_cs_{{segment_name}}.md
-name: {{segment_name}}
-description: {{segment_description}}
+kind: customer_segment
+pillar: P02
+title: "{{segment_title}}"
+version: "1.0"
+created: {{created_at}}
+updated: {{updated_at}}
+author: {{author}}
+domain: "{{domain}}"
 quality: null
-created_at: {{created_at}}
-updated_at: {{updated_at}}
+tags: [{{tags}}]
+tldr: "{{one_sentence_summary}}"
+customer_type: "{{customer_type}}"
+segmentation_criteria: [{{criteria_list}}]
 ---
 ```
 
 <!-- id: Generated filename following p02_cs_[a-z][a-z0-9_]+.md pattern -->
-<!-- name: Segment identifier (e.g., "high_net_worth") -->
-<!-- description: Brief explanation of segment characteristics -->
-<!-- quality: Always null for customer segments -->
-<!-- created_at: ISO 8601 timestamp (e.g., "2023-09-01T12:00:00Z") -->
-<!-- updated_at: ISO 8601 timestamp (e.g., "2023-09-02T14:30:00Z") -->
+<!-- segment_title: Human-readable name (e.g., "Mid-Market SaaS B2B") -->
+<!-- customer_type: "B2B", "B2C", or "B2B2C" -->
+<!-- criteria_list: e.g., "industry", "company_size", "revenue_range" -->
+<!-- quality: Always null -- peer review assigns -->
 
-| Segment Name       | Description                  | Target              | Example         |
-|--------------------|------------------------------|---------------------|-----------------|
-| high_net_worth     | Customers with $1M+ AUM      | Institutional       | {{example_data}}|
-| retail             | Individual retail clients    | Retail              | {{example_data}}|
+## Overview
+{{segment_overview}}
 
-```json
-{
-  "segment": "{{segment_name}}",
-  "criteria": {
-    "min_aum": {{min_aum}},
-    "geography": ["{{region}}"],
-    "assets": ["{{asset_type}}"]
-  }
-}
-```
+<!-- segment_overview: 2-3 sentences describing who this segment is and why they matter -->
 
-<!-- example_data: Replace with actual customer data examples -->
-<!-- min_aum: Numeric value for minimum asset threshold -->
-<!-- region: ISO 3166-1 alpha-2 country code (e.g., "US") -->
-<!-- asset_type: Type of financial instrument (e.g., "equity") -->
+## Firmographics
+
+| Attribute | Value | Source |
+|-----------|-------|--------|
+| Industry vertical | {{industry}} | {{data_source}} |
+| Company size | {{employee_range}} | {{data_source}} |
+| Annual revenue | {{revenue_range}} | {{data_source}} |
+| Geography | {{geography}} | {{data_source}} |
+| Tech stack | {{tech_indicators}} | {{data_source}} |
+
+<!-- industry: e.g., "SaaS", "Healthcare", "Manufacturing" -->
+<!-- employee_range: e.g., "50-500 employees" -->
+<!-- revenue_range: e.g., "$5M-$50M ARR" -->
+<!-- geography: e.g., "North America, Western Europe" -->
+<!-- tech_indicators: technographic signals (e.g., "Salesforce, Slack") -->
+
+## Customer Needs (Jobs-to-be-Done)
+
+| Job | Pain Point | Success Metric |
+|-----|-----------|----------------|
+| {{job_1}} | {{pain_1}} | {{metric_1}} |
+| {{job_2}} | {{pain_2}} | {{metric_2}} |
+
+## ICP Signals
+
+| Signal Type | Indicator | Score Weight |
+|-------------|-----------|-------------|
+| BANT - Budget | {{budget_signal}} | {{weight}} |
+| BANT - Authority | {{authority_signal}} | {{weight}} |
+| BANT - Need | {{need_signal}} | {{weight}} |
+| BANT - Timeline | {{timeline_signal}} | {{weight}} |
+| PLG signal | {{product_led_signal}} | {{weight}} |
+
+## Use Cases
+
+1. {{use_case_1}}
+2. {{use_case_2}}
+3. {{use_case_3}}
+
+## Key Metrics
+
+| Metric | Target | Benchmark |
+|--------|--------|-----------|
+| CAC | {{cac_target}} | {{industry_benchmark}} |
+| LTV | {{ltv_target}} | {{industry_benchmark}} |
+| LTV:CAC ratio | {{ratio_target}} | 3:1 (industry standard) |

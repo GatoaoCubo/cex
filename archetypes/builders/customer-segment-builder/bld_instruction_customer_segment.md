@@ -25,19 +25,19 @@ density_score: 0.85
 6. Validate with stakeholders: Confirm assumptions with sales, product, and customer success.  
 
 ## Phase 2: COMPOSE  
-1. Outline structure: Use SCHEMA.md headers (e.g., Segment Name, Firmographics, Needs).  
-2. Populate firmographics: Include industry verticals, company size ranges, and geographic focus.  
-3. Detail customer needs: Specify use cases, desired outcomes, and success metrics.  
-4. Define constraints: List technical, financial, or regulatory limitations for the segment.  
-5. Align with ICP: Cross-reference with OUTPUT_TEMPLATE.md for consistency.  
-6. Add examples: Include 2–3 representative customer profiles (e.g., SaaS startup, enterprise retailer).  
-7. Review for clarity: Ensure language is actionable and free of jargon.  
-8. Finalize artifact: Format per SCHEMA.md and OUTPUT_TEMPLATE.md guidelines.  
-9. Document sources: Cite research data, interviews, and validation steps.  
+1. Outline structure: Use bld_schema_customer_segment.md headers (e.g., Segment Name, Firmographics, Needs).
+2. Populate firmographics: Include industry verticals, company size ranges, and geographic focus.
+3. Detail customer needs: Specify use cases, desired outcomes, and success metrics.
+4. Define constraints: List technical, financial, or regulatory limitations for the segment.
+5. Align with ICP: Cross-reference with bld_output_template_customer_segment.md for consistency.
+6. Add examples: Include 2-3 representative customer profiles (e.g., SaaS startup, enterprise retailer).
+7. Review for clarity: Ensure language is actionable and free of jargon.
+8. Finalize artifact: Format per bld_schema_customer_segment.md and bld_output_template_customer_segment.md guidelines.
+9. Document sources: Cite research data, interviews, and validation steps.
 
-## Phase 3: VALIDATE  
-- [ ] ✅ All data aligns with SCHEMA.md and OUTPUT_TEMPLATE.md  
-- [ ] ✅ Firmographics and needs are specific, measurable, and actionable  
-- [ ] ✅ Stakeholders approve final artifact (sign-off required)  
-- [ ] ✅ No contradictions with existing product constraints or roadmaps  
-- [ ] ✅ Artifact is reusable for marketing, sales, and product planning
+## Phase 3: VALIDATE
+- [ ] [OK] All data aligns with bld_schema_customer_segment.md and bld_output_template_customer_segment.md
+- [ ] [OK] Firmographics and needs are specific, measurable, and actionable
+- [ ] [OK] No contradictions with existing product constraints or roadmaps
+- [ ] [OK] Data sources cited and stakeholder review scheduled
+- [ ] [OK] Artifact is reusable for marketing, sales, and product planning

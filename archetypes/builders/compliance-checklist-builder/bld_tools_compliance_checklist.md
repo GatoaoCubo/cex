@@ -19,19 +19,14 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Aggregates checklist items from sources | During checklist assembly |  
-| cex_score.py | Evaluates compliance against criteria | Post-assessment review |  
-| cex_retriever.py | Fetches regulatory data for inclusion | When updating checklist content |  
-| cex_doctor.py | Diagnoses checklist inconsistencies | During validation phase |  
-
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| val_checker.py | Validates checklist structure | Pre-deployment |  
-| rule_linter.py | Ensures syntax and formatting standards | During development |  
-| sim_validator.py | Simulates compliance scenarios | Testing edge cases |  
+| cex_compile.py | Compiles checklist artifact to .yaml | After each save |  
+| cex_score.py | Scores artifact against 5D quality dimensions | Post-production |  
+| cex_retriever.py | Retrieves similar checklists and regulatory KCs | During F3 INJECT |  
+| cex_doctor.py | Validates builder ISO completeness and structure | During F7 GOVERN |  
+| cex_hygiene.py | Enforces frontmatter rules and naming conventions | During F7 GOVERN |  
 
 ## External References  
-- JSON Schema (data validation framework)  
-- OpenAPI (API compliance standards)  
-- RegTech DB (regulatory reference database)
+- SOC2 Trust Services Criteria (AICPA TSC 2017)  
+- ISO/IEC 27001:2022 Annex A controls  
+- GDPR Articles 5-32 (controller obligations)  
+- HIPAA Security Rule 45 CFR Part 164

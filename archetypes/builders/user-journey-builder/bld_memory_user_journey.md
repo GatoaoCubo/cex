@@ -1,11 +1,11 @@
 ---
-kind: learning_record
-id: p10_lr_user_journey_builder
+kind: memory
+id: p10_mem_user_journey_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for user_journey construction
 quality: null
-title: "Learning Record User Journey"
+title: "Memory User Journey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [user_journey, builder, learning_record]

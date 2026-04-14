@@ -17,11 +17,11 @@ density_score: 0.85
 ---
 
 ## Definition  
-| metric         | threshold | operator | scope        |  
-|----------------|-----------|----------|--------------|  
-| API calls/day  | 1000000   | <=       | per user     |  
-| Data transfer  | 5TB       | <=       | per account  |  
-| Burst capacity | 200%      | <=       | per hour     |  
+| metric              | threshold | operator | scope              |  
+|---------------------|-----------|----------|--------------------|  
+| required fields     | 4         | >=       | per artifact       |  
+| quota_limit present | true      | ==       | frontmatter        |  
+| reset_interval set  | true      | ==       | frontmatter        |  
 
 ## HARD Gates  
 | ID             | Check                          | Fail Condition                                      |  
@@ -30,16 +30,16 @@ density_score: 0.85
 | H02            | ID matches ^p09_uq_[a-z][a-z0-9_]+.yaml$ | ID does not match schema pattern                   |  
 | H03            | kind field matches 'usage_quota' | kind is not 'usage_quota'                          |  
 | H04            | Quota limits defined           | Missing or incomplete quota limits                 |  
-| H05            | Rate limiting configured       | No rate limiting rules specified                   |  
-| H06            | Fair-use policy enforced       | No mechanism to detect or penalize abuse         |  
-| H07            | Logging enabled                | Missing audit logs for quota enforcement         |  
-| H08            | Error handling defined         | No error responses for quota exceedance          |  
+| H05            | enforcement_policy field present | enforcement_policy missing or not "hard"/"soft" |  
+| H06            | reset_interval is ISO 8601 duration | reset_interval format invalid (not P1D, PT1H, etc.) |  
+| H07            | quota_limit is positive number | quota_limit <= 0 or missing                      |  
+| H08            | usage_metric field present     | usage_metric field missing or empty              |  
 
 ## SOFT Scoring  
 | Dim        | Dimension               | Weight | Scoring Guide                                      |  
 |------------|-------------------------|--------|----------------------------------------------------|  
-| D01        | Quota accuracy          | 0.15   | 1.0 if precise, 0.5 if approximate, 0.0 if missing |  
-| D02        | Fairness enforcement    | 0.15   | 1.0 if balanced, 0.5 if partial, 0.0 if absent     |  
+| D01        | Quota accuracy          | 0.20   | 1.0 if precise thresholds+units, 0.5 if approximate, 0.0 if missing |  
+| D02        | Fairness enforcement    | 0.20   | 1.0 if balanced+documented, 0.5 if partial, 0.0 if absent |  
 | D03        | Logging completeness    | 0.10   | 1.0 if full, 0.5 if partial, 0.0 if missing        |  
 | D04        | Scalability             | 0.10   | 1.0 if adaptive, 0.5 if static, 0.0 if non-functional |  
 | D05        | User notification       | 0.10   | 1.0 if clear, 0.5 if vague, 0.0 if absent          |  

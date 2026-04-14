@@ -25,19 +25,19 @@ density_score: 0.85
 6. Synthesize insights into persona-specific journey stages.  
 
 ## Phase 2: COMPOSE  
-1. Structure artifact using SCHEMA.md: stages, emotions, actions.  
-2. Write "Awareness" stage with triggers (ads, SEO) and user goals.  
-3. Map "Consideration" touchpoints (product demos, reviews).  
-4. Detail "Conversion" barriers (pricing, UX friction).  
-5. Add "Post-purchase" retention strategies (onboarding, support).  
-6. Reference OUTPUT_TEMPLATE.md for formatting (tables, flowcharts).  
-7. Insert empathy maps for each persona (emotions, needs, pain points).  
-8. Align with business KPIs (e.g., CAC, LTV) in conversion metrics.  
-9. Finalize narrative with actionable insights for each journey phase.  
+1. Structure artifact using bld_schema_user_journey.md: stages, emotions, actions.
+2. Write "Awareness" stage with triggers (ads, SEO) and user goals.
+3. Map "Consideration" touchpoints (product demos, reviews).
+4. Detail "Conversion" barriers (pricing, UX friction).
+5. Add "Post-purchase" retention strategies (onboarding, support).
+6. Reference bld_output_template_user_journey.md for formatting (tables, flowcharts).
+7. Insert empathy maps for each persona (emotions, needs, pain points).
+8. Align with business KPIs (e.g., CAC, LTV) in conversion metrics.
+9. Finalize narrative with actionable insights for each journey phase.
 
-## Phase 3: VALIDATE  
-[ ] [ ] Stakeholders confirm alignment with business goals.  
-[ ] [ ] Users validate journey accuracy via usability testing.  
-[ ] [ ] Cross-check against SCHEMA.md for completeness.  
-[ ] [ ] Ensure OUTPUT_TEMPLATE.md formatting is consistent.  
-[ ] [ ] Secure sign-off from UX, marketing, and product teams.
+## Phase 3: VALIDATE
+- [ ] [OK] Stakeholders confirm alignment with business goals.
+- [ ] [OK] Users validate journey accuracy via usability testing.
+- [ ] [OK] Cross-check against bld_schema_user_journey.md for completeness.
+- [ ] [OK] Formatting consistent with bld_output_template_user_journey.md.
+- [ ] [OK] Journey covers all stages: awareness, consideration, conversion, retention, advocacy.

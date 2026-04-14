@@ -19,22 +19,18 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Generates referral program structure | Program initialization |  
-| cex_score.py | Calculates referral performance metrics | Post-campaign analysis |  
-| cex_retriever.py | Fetches user/referral data from CEX | Data integration phase |  
-| cex_doctor.py | Validates program compliance with CEX rules | Pre-launch checks |  
-| cex_generator.py | Creates referral materials (emails, links) | Campaign setup |  
-| cex_tracker.py | Monitors real-time referral activity | Program execution |  
+| cex_compile.py | Compile artifact after save | F8 COLLABORATE |  
+| cex_score.py | Score artifact against 5D rubric | F7 GOVERN |  
+| cex_retriever.py | Fetch similar referral_program artifacts for Template-First | F3 INJECT |  
+| cex_doctor.py | Validate builder health and ISO completeness | Post-edit check |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| val_compliance_checker.py | Ensures rules align with CEX policies | Pre-deployment |  
-| val_data_integrity.py | Verifies consistency of referral data | Post-import |  
-| val_simulator.py | Tests edge cases in referral logic | QA phase |  
-| val_auditor.py | Reviews program for fraud risks | Ongoing monitoring |  
+| cex_wave_validator.py | Validate builder ISO set (13-file check, frontmatter gates) | Pre-commit |  
+| cex_hygiene.py | Artifact CRUD rules, naming pattern enforcement | Post-save |  
 
 ## External References  
-- Django (for backend API integration)  
-- Pandas (for data analysis)  
-- ReferralHero SDK (CEX-specific referral tools)
+- Dropbox Refer-a-Friend (2-sided reward model, k-factor benchmark)  
+- PayPal $10/$10 (double-sided incentive, activation-gated payout)  
+- Tesla Referral Program (milestone bonuses, exclusivity tiers)

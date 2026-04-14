@@ -19,22 +19,19 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles usage quotas from raw data | Initializing quotas |  
-| cex_score.py | Scores resource usage against thresholds | Monitoring active systems |  
-| cex_retriever.py | Retrieves historical quota data | Auditing or reporting |  
-| cex_doctor.py | Diagnoses quota violations and suggests fixes | Resolving overage issues |  
-| cex_analyzer.py | Analyzes quota trends and predicts future usage | Capacity planning |  
-| cex_validator.py | Validates quota configurations for consistency | Deploying new quota rules |  
+| cex_compile.py | Compile artifact .md to .yaml | After save |  
+| cex_score.py --apply | Peer review scoring (D1-D5 weighted) | Before publish |  
+| cex_doctor.py | Builder health check (validates all 13 ISOs) | Post-build |  
+| cex_retriever.py | TF-IDF similarity search (find similar artifacts) | F3 INJECT |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| val_checker.py | Verifies quota calculations for accuracy | Testing quota logic |  
-| val_simulator.py | Simulates usage scenarios to test quota limits | Stress-testing systems |  
-| val_reporter.py | Generates validation reports for stakeholders | Post-validation review |  
-| val_debugger.py | Debugs inconsistent quota behavior | Troubleshooting errors |  
+| cex_wave_validator.py | Validates frontmatter + kind/pillar/llm_function | CI gate |  
+| cex_hooks.py pre-commit | ASCII enforcement + schema check | Pre-commit |  
+| cex_hygiene.py | Artifact CRUD + 8-rule enforcement | Pre-commit |  
 
 ## External References  
-- QuotaManager API (for real-time quota tracking)  
-- UsageAnalytics Framework (for data aggregation)  
-- PolicyEngine Library (for rule-based quota enforcement)
+- Token bucket / leaky bucket algorithms -- RFC 6585 + IETF rate-limiting headers  
+- Stripe metered billing -- tiered quota + usage-based pricing model  
+- AWS API Gateway throttling -- 429 + X-RateLimit-Remaining + retry-after headers

@@ -19,14 +19,23 @@ density_score: 0.85
 ```yaml
 ---
 id: p11_rp_{{name}}.yaml
-name: {{referral_program_name}} <!-- Program name -->
+kind: referral_program
+pillar: P11
 quality: null
-pillars:
-  - P11
-description: {{program_description}} <!-- Brief overview -->
+title: {{program_title}}
+name: {{referral_program_name}}
+description: {{program_description}}
+viral_coefficient_target: {{k_factor_float}}
+reward_model: {{double_sided|single_sided|tiered}}
+tags: [referral_program, {{product_name}}, plg]
+tldr: "{{one_sentence_summary}}"
+domain: referral_program construction
+created: {{YYYY-MM-DD}}
+updated: {{YYYY-MM-DD}}
+author: {{author_name}}
 rules:
-  - {{rule_1}} <!-- Rule text -->
-  - {{rule_2}} <!-- Rule text -->
+  - {{rule_1}}
+  - {{rule_2}}
 ---
 ## Referral Tiers
 | Tier | Referrals Required | Reward |

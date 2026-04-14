@@ -17,35 +17,32 @@ density_score: 0.85
 ---
 
 ## Definition  
-| metric             | threshold     | operator | scope         |  
-|--------------------|---------------|----------|---------------|  
-| Uptime             | 99.9%         | >=       | Production    |  
-| Latency            | 100ms         | <=       | All services  |  
-| Support response   | 1 hour        | <=       | SLA team      |  
-| SLA coverage       | 95%           | >=       | Enterprise    |  
+| metric             | threshold                         | operator | scope              |  
+|--------------------|-----------------------------------|----------|--------------------|  
+| artifact_id        | ^p11_sla_[a-z][a-z0-9_]+.md$     | matches  | all artifact files |  
 
 ## HARD Gates  
-| ID           | Check                        | Fail Condition                              |  
-|--------------|------------------------------|---------------------------------------------|  
-| H01          | YAML frontmatter valid       | Invalid YAML syntax or missing fields       |  
-| H02          | ID matches ^p11_sla_[a-z][a-z0-9_]+.md$ | ID does not conform to schema pattern      |  
-| H03          | kind field matches 'enterprise_sla' | kind field is incorrect                     |  
-| H04          | Uptime >=99.9%               | Uptime <99.9%                               |  
-| H05          | Latency <=100ms              | Latency >100ms                              |  
-| H06          | Support response <=1 hour    | Support response >1 hour                    |  
-| H07          | SLA coverage >=95%           | SLA coverage <95%                           |  
-| H08          | SLA documentation exists     | Missing required SLA documentation          |  
+| ID  | Check                                    | Fail Condition                                        |  
+|-----|------------------------------------------|-------------------------------------------------------|  
+| H01 | YAML frontmatter valid                   | Invalid YAML syntax or missing required fields        |  
+| H02 | ID matches ^p11_sla_[a-z][a-z0-9_]+.md$ | ID does not conform to schema naming pattern          |  
+| H03 | kind field = 'enterprise_sla'            | kind field is absent or incorrect                     |  
+| H04 | service_level_objective field present    | service_level_objective missing or empty              |  
+| H05 | compliance_requirements field is a list  | compliance_requirements absent or not a list          |  
+| H06 | SLO section present in body              | Body lacks Service Level Objectives section           |  
+| H07 | Escalation Procedures section present    | Body lacks escalation procedures section              |  
+| H08 | quality field = null                     | quality is non-null (self-score violation)            |  
 
 ## SOFT Scoring  
-| Dim       | Dimension              | Weight | Scoring Guide                              |  
-|-----------|------------------------|--------|--------------------------------------------|  
-| D1        | Uptime reliability     | 0.20   | 1.00=99.99%, 0.50=99.5%, 0.00=99.0%         |  
-| D2        | Latency consistency    | 0.15   | 1.00=50ms, 0.50=150ms, 0.00=250ms           |  
-| D3        | Support responsiveness | 0.15   | 1.00=30min, 0.50=1.5hr, 0.00=3hr            |  
-| D4        | SLA coverage           | 0.15   | 1.00=100%, 0.50=90%, 0.00=80%               |  
-| D5        | Documentation quality  | 0.10   | 1.00=complete, 0.50=partial, 0.00=missing    |  
-| D6        | Compliance             | 0.10   | 1.00=fully compliant, 0.00=non-compliant    |  
-| D7        | Review process         | 0.15   | 1.00=automated, 0.50=manual, 0.00=no review  |  
+| Dim | Dimension                   | Weight | Scoring Guide                                        |  
+|-----|-----------------------------|--------|------------------------------------------------------|  
+| D1  | SLO specificity             | 0.20   | 1.00=numeric SLO+credits+RPO/RTO, 0.50=numeric SLO only, 0.00=vague |  
+| D2  | Uptime math accuracy        | 0.15   | 1.00=both 99.9% and 99.99% with downtime minutes, 0.50=one tier, 0.00=absent |  
+| D3  | Error budget coverage       | 0.15   | 1.00=error budget + burn rate defined, 0.50=partial, 0.00=absent |  
+| D4  | Penalty and credit clauses  | 0.15   | 1.00=tiered credits with calculation formula, 0.50=flat credit, 0.00=absent |  
+| D5  | Standards citations         | 0.10   | 1.00=ITIL4+ISO20000+SRE cited, 0.50=one standard, 0.00=none |  
+| D6  | Escalation path depth       | 0.10   | 1.00=Tier1-3 with timelines, 0.50=partial, 0.00=absent |  
+| D7  | Completeness (all sections) | 0.15   | 1.00=all 5 body sections present, 0.50=3-4, 0.00=<3  |  
 
 ## Actions  
 | Score      | Action                   |  

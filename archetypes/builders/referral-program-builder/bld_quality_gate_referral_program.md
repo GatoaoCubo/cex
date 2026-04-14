@@ -40,13 +40,13 @@ density_score: 0.85
 (Table: Dim | Dimension | Weight | Scoring Guide)  
 | Dim | Dimension | Weight | Scoring Guide |  
 |---|---|---|---|  
-| D1 | Viral coefficient design | 0.20 | 1.0–1.5 (1.0), 0.5–1.0 (0.5), <0.5 (0) |  
-| D2 | Reward clarity | 0.15 | Clear (1.0), Ambiguous (0.5), Missing (0) |  
-| D3 | User experience | 0.15 | Seamless (1.0), Moderate (0.5), Poor (0) |  
-| D4 | Legal compliance | 0.15 | Fully compliant (1.0), Partial (0.5), Non-compliant (0) |  
-| D5 | Scalability | 0.10 | Scalable (1.0), Limited (0.5), Non-scalable (0) |  
-| D6 | Conversion rate | 0.10 | ≥10% (1.0), 5–10% (0.5), <5% (0) |  
-| D7 | Tracking accuracy | 0.10 | 100% (1.0), 75–99% (0.5), <75% (0) |  
+| D1 | Viral coefficient design | 0.20 | 1.0-1.5 (1.0), 0.5-1.0 (0.5), <0.5 (0) |
+| D2 | Reward clarity | 0.15 | Clear (1.0), Ambiguous (0.5), Missing (0) |
+| D3 | User experience | 0.15 | Seamless (1.0), Moderate (0.5), Poor (0) |
+| D4 | Legal compliance | 0.15 | Fully compliant (1.0), Partial (0.5), Non-compliant (0) |
+| D5 | Scalability | 0.10 | Scalable (1.0), Limited (0.5), Non-scalable (0) |
+| D6 | Conversion rate | 0.10 | >=10% (1.0), 5-10% (0.5), <5% (0) |
+| D7 | Tracking accuracy | 0.15 | 100% (1.0), 75-99% (0.5), <75% (0) |  
 
 ## Actions  
 (Table: Score | Action)  

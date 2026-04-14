@@ -19,20 +19,19 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| rbac_compile.py | Compiles policy rules into enforceable format | During policy deployment |  
-| rbac_validator.py | Validates syntax and structure of policy files | Pre-deployment |  
-| rbac_analyzer.py | Analyzes policy for conflicts or redundancies | Post-editing |  
-| rbac_generator.py | Generates base policy templates from role definitions | Initial setup |  
-| rbac_formatter.py | Standardizes policy file formatting | Pre-commit checks |  
+| cex_compile.py | Compile artifact .md to .yaml | After save |  
+| cex_score.py --apply | Peer review scoring (D1-D5 weighted) | Before publish |  
+| cex_doctor.py | Builder health check (validates all 13 ISOs) | Post-build |  
+| cex_hygiene.py | Artifact CRUD + 8-rule enforcement | Pre-commit |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| rbac_linter.py | Checks for syntax and style compliance | Pre-deployment |  
-| rbac_tester.py | Simulates access control scenarios | Post-deployment |  
-| rbac_comparator.py | Compares policy versions for drift | Audits |  
+| cex_wave_validator.py | Validates frontmatter + kind/pillar/llm_function | CI gate |  
+| cex_hooks.py pre-commit | ASCII enforcement + schema check | Pre-commit |  
+| cex_retriever.py | TF-IDF similarity search (find similar artifacts) | F3 INJECT |  
 
 ## External References  
-- OpenPolicyAgent (OPA) for dynamic policy enforcement  
-- JSON Web Token (JWT) for role-based authentication  
-- Casbin for RBAC model implementation
+- OPA (Open Policy Agent) -- rego rule enforcement for RBAC policies  
+- Casbin -- RBAC model library (Node, Go, Python)  
+- NIST SP 800-162 -- attribute-based access control standard

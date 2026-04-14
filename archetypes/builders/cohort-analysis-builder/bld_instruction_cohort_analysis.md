@@ -25,19 +25,19 @@ density_score: 0.85
 6. Document assumptions and edge cases (e.g., overlapping cohorts, missing data).  
 
 ## Phase 2: COMPOSE  
-1. Align artifact structure with SCHEMA.md (cohort definition, metrics, methodology).  
-2. Specify cohort parameters (e.g., start date, segmentation rules).  
-3. Write objective section: "Measure retention and LTV for [product/service] users."  
-4. Detail data pipeline: ETL steps for cohort identification and metric aggregation.  
-5. Populate survival analysis section with formulae (e.g., retention rate = active / total).  
-6. Embed LTV calculation logic (e.g., CLV = average revenue × retention period).  
-7. Reference OUTPUT_TEMPLATE.md for visualization placement (e.g., cohort heatmaps).  
-8. Add governance controls: data quality checks, cohort validation rules.  
-9. Finalize with appendices: schema diagrams, data dictionary, and calculation proofs.  
+1. Align artifact structure with bld_schema_cohort_analysis.md (cohort definition, metrics, methodology).
+2. Specify cohort parameters (e.g., start date, segmentation rules).
+3. Write objective section: "Measure retention and LTV for [product/service] users."
+4. Detail data pipeline: ETL steps for cohort identification and metric aggregation.
+5. Populate survival analysis section with formulae (e.g., retention rate = active / total).
+6. Embed LTV calculation logic (e.g., CLV = average revenue x retention period).
+7. Reference bld_output_template_cohort_analysis.md for visualization placement (e.g., cohort heatmaps).
+8. Add governance controls: data quality checks, cohort validation rules.
+9. Finalize with appendices: schema diagrams, data dictionary, and calculation proofs.
 
-## Phase 3: VALIDATE  
-- [ ] ✅ Cohort definitions match SCHEMA.md and business requirements  
-- [ ] ✅ Retention/LTV metrics align with domain-specific KPIs  
-- [ ] ✅ Survival curves and LTV projections pass statistical validity tests  
-- [ ] ✅ Visualizations (heatmaps, trend lines) reflect accurate data transformations  
-- [ ] ✅ Artifact complies with P07 governance standards (data provenance, audit trails)
+## Phase 3: VALIDATE
+- [ ] [OK] Cohort definitions match bld_schema_cohort_analysis.md and business requirements
+- [ ] [OK] Retention/LTV metrics align with domain-specific KPIs
+- [ ] [OK] Survival curves and LTV projections pass statistical validity tests
+- [ ] [OK] Visualizations (heatmaps, trend lines) reflect accurate data transformations
+- [ ] [OK] Artifact complies with governance standards (data provenance, audit trails)

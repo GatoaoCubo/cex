@@ -18,7 +18,7 @@ density_score: 0.85
 
 ```yaml
 ---
-id: p09_dr_{{name}}.yaml
+id: p09_dr_{{name}}.md
 name: {{name}}
 description: {{description}}
 regions: {{regions}}

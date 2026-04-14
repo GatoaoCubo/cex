@@ -7,53 +7,63 @@ purpose: Quality gate with HARD and SOFT scoring for ab_test_config
 quality: null
 title: "Quality Gate Ab Test Config"
 version: "1.0.0"
-author: wave1_builder_gen_v2
+author: n03_builder
 tags: [ab_test_config, builder, quality_gate]
-tldr: "Quality gate with HARD and SOFT scoring for ab_test_config"
+tldr: "Artifact-level quality gate: validates ab_test_config YAML structure, hypothesis completeness, and statistical plan integrity (not runtime experiment metrics)."
 domain: "ab_test_config construction"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.87
 ---
 
-## Definition  
-| metric | threshold | operator | scope |  
-|---|---|---|---|  
-| Config validity | 100% | == | All fields |  
+## Definition
+| metric | threshold | operator | scope |
+|---|---|---|---|
+| schema_fields_present | 100% | == | frontmatter |
+| variant_traffic_sum | 100 | == | variants list |
+| score_minimum | 8.0 | >= | artifact |
 
-## HARD Gates  
-| ID | Check | Fail Condition |  
-|---|---|---|  
-| H01 | YAML frontmatter valid | Missing or invalid YAML frontmatter |  
-| H02 | ID matches pattern ^p11_abt_[a-z][a-z0-9_]+.yaml$ | ID does not conform to schema |  
-| H03 | kind field matches 'ab_test_config' | kind field is incorrect |  
-| H04 | experiment_name present | Missing experiment_name |  
-| H05 | variant_groups defined with ≥2 variants | <2 variants or invalid structure |  
-| H06 | metrics defined with valid types (e.g., conversion_rate) | Missing or invalid metric types |  
-| H07 | duration ≥ 7 days | Duration <7 days |  
-| H08 | traffic_split percentages sum to 100% | Sum ≠ 100% or negative values |  
+## HARD Gates
+| ID | Check | Fail Condition |
+|---|---|---|
+| H01 | YAML frontmatter valid | Missing or malformed YAML |
+| H02 | ID matches `^p11_abt_[a-z][a-z0-9_]+\.yaml$` | ID does not conform |
+| H03 | `kind` field == `ab_test_config` | kind is wrong or missing |
+| H04 | `hypothesis` present, non-empty, contains "if"+"then" structure | Hypothesis missing or malformed |
+| H05 | `variants` list has >= 2 entries AND exactly one `is_control: true` | <2 variants or missing/multiple control |
+| H06 | `variants[].traffic_pct` integers summing to 100 | Non-integer or sum != 100 |
+| H07 | `primary_metric` object with `{name, type, direction, aggregation}` | Missing required keys |
+| H08 | `guardrail_metrics` list present (may be empty only if decision_record justifies) | Field absent |
+| H09 | `minimum_detectable_effect` present AND `sample_size_per_variant` present | Power plan incomplete |
+| H10 | `statistical_method` in {frequentist_fixed, frequentist_sequential, bayesian} | Invalid or missing method |
+| H11 | `quality: null` in frontmatter | Self-scored (must be null) |
 
-## SOFT Scoring  
-| Dim | Dimension | Weight | Scoring Guide |  
-|---|---|---|---|  
-| D1 | Objective clarity | 0.15 | Clear, measurable goals (1.0) |  
-| D2 | Statistical power | 0.12 | ≥80% power (1.0) |  
-| D3 | Sample size | 0.10 | Adequate for confidence (1.0) |  
-| D4 | Variant alignment | 0.15 | Variants logically distinct (1.0) |  
-| D5 | Metric relevance | 0.10 | Metrics directly tied to goals (1.0) |  
-| D6 | Duration合理性 | 0.10 | Aligns with business cycle (1.0) |  
-| D7 | Rollout strategy | 0.10 | Safe, reversible (1.0) |  
-| D8 | Audit trail completeness | 0.18 | Full approval history (1.0) |  
+## SOFT Scoring
+| Dim | Dimension | Weight | Scoring Guide |
+|---|---|---|---|
+| D1 | Hypothesis clarity | 0.15 | 1.0: if/then/because + mechanism; 0.5: if/then only; 0.0: outcome-only |
+| D2 | OEC specificity | 0.12 | 1.0: name+type+direction+aggregation; 0.5: name+direction; 0.0: name only |
+| D3 | Guardrail coverage | 0.12 | 1.0: 2-3 guardrails covering retention+performance+revenue; 0.5: 1 guardrail; 0.0: none |
+| D4 | Power analysis rigor | 0.13 | 1.0: alpha+power+baseline+MDE+n shown; 0.5: some; 0.0: none |
+| D5 | Variant exclusivity | 0.10 | 1.0: mutual_exclusion_group set; 0.5: disjoint but unlabeled; 0.0: overlap risk |
+| D6 | Randomization integrity | 0.08 | 1.0: unit+seed+sticky hash documented; 0.5: unit only; 0.0: unspecified |
+| D7 | Stopping-rule discipline | 0.10 | 1.0: sequential method OR fixed horizon + peek policy; 0.0: ad-hoc stop |
+| D8 | Analysis pre-registration | 0.10 | 1.0: subgroups+SRM+novelty window declared; 0.5: partial; 0.0: absent |
+| D9 | Interoperability | 0.05 | 1.0: field names match Optimizely/Statsig/GrowthBook; 0.0: custom jargon |
+| D10 | Reversibility | 0.05 | 1.0: kill-switch + rollout ramp; 0.0: all-or-nothing |
 
-## Actions  
-| Score | Action |  
-|---|---|  
-| ≥9.5 | GOLDEN: Auto-publish |  
-| ≥8.0 | PUBLISH: Deploy |  
-| ≥7.0 | REVIEW: QA check |  
-| <7.0 | REJECT: Fix required |  
+Weights sum = 1.00.
 
-## Bypass  
-| conditions | approver | audit trail |  
-|---|---|---|  
-| Emergency fix | Senior PM + Data Scientist | "Bypassed due to critical issue" |
+## Actions
+| Score | Action |
+|---|---|
+| >= 9.5 | GOLDEN: approve for publication |
+| >= 8.0 | PUBLISH: deploy to experimentation platform |
+| >= 7.0 | REVIEW: return to author with scored rubric |
+| < 7.0 | REJECT: rebuild -- power analysis or hypothesis missing |
+
+## Bypass
+| condition | approver | audit trail |
+|---|---|---|
+| Emergency rollback experiment | Head of Product + Data Science | Documented in incident log |
+| Holdout / marketing test exempt from full OEC | Head of Data Science | Decision record required |

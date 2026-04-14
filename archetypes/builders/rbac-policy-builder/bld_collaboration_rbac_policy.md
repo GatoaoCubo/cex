@@ -20,18 +20,18 @@ density_score: 0.85
 Designs, validates, and maintains Role-Based Access Control (RBAC) policies to enforce least-privilege access models across systems.  
 
 ## Receives From  
-| Builder        | What                  | Format      |  
-|----------------|-----------------------|-------------|  
-| Security Architect | Policy templates      | YAML        |  
-| Compliance Officer | Regulatory requirements | JSON        |  
-| System Administrator | Existing role definitions | Text doc  |  
+| Builder                    | What                              | Format  |  
+|----------------------------|-----------------------------------|---------|  
+| permission-builder         | Permission definitions + scopes   | YAML    |  
+| guardrail-builder          | Safety boundaries + deny rules    | YAML    |  
+| env-config-builder         | Environment and tenant context    | YAML    |  
 
 ## Produces For  
-| Builder        | What                  | Format      |  
-|----------------|-----------------------|-------------|  
-| Security Architect | Policy drafts        | YAML        |  
-| Compliance Officer | Compliance reports   | PDF         |  
-| System Administrator | Role manifests       | JSON        |  
+| Builder                    | What                              | Format  |  
+|----------------------------|-----------------------------------|---------|  
+| agent-profile-builder      | Role bindings for agent personas  | YAML    |  
+| sandbox-config-builder     | Sandbox access control rules      | YAML    |  
+| compliance-framework-builder | RBAC policy compliance mapping  | YAML    |  
 
 ## Boundary  
-Does NOT handle permission assignments (handled by Permission Manager) or identity configuration (handled by Identity Provider). Policy enforcement is managed by Access Control Engine.
+Does NOT handle secret storage (secret-config-builder), SSO federation (sso-config-builder), or authentication flows. Policy enforcement integration is handled downstream by the agent runtime.

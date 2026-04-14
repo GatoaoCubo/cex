@@ -16,25 +16,25 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool              | Purpose                  | When                          |  
-|-------------------|--------------------------|-------------------------------|  
-| cex_compile.py    | Assembles journey modules | During initial build          |  
-| cex_score.py      | Evaluates journey quality | Post-iteration validation     |  
-| cex_retriever.py  | Fetches user data         | Pre-journey analysis          |  
-| cex_doctor.py     | Debugs workflow errors    | During testing phase          |  
-| cex_analyzer.py   | Identifies pain points    | After user feedback collection|  
-| cex_optimizer.py  | Refines touchpoint timing | Pre-deployment tuning         |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile artifact YAML from source .md | After draft is written |
+| cex_score.py | Peer-review scoring (hybrid 3-layer) | After artifact is saved |
+| cex_retriever.py | TF-IDF similarity search across knowledge base | During F3 INJECT phase |
+| cex_doctor.py | Builder health check -- validates ISOs and schema | Before dispatch |
+| cex_hygiene.py | Artifact CRUD, enforce 8 hygiene rules | Ongoing quality control |
+| cex_memory_select.py | Keyword + LLM memory injection | During F3 INJECT phase |
 
-## Validation Tools  
-| Tool              | Purpose                  | When                          |  
-|-------------------|--------------------------|-------------------------------|  
-| val_check.py      | Validates consistency     | Post-editing                  |  
-| val_validator.py  | Enforces rule compliance  | During QA                     |  
-| val_simulator.py  | Tests edge cases          | Pre-release                   |  
-| val_auditor.py    | Checks regulatory adherence| Pre-deployment                |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_wave_validator.py | Structural ISO validation (frontmatter, kind, schema) | After each builder wave |
+| cex_hooks.py | Pre/post commit validation + ASCII check | On git commit |
+| cex_quality_monitor.py | Quality snapshots + regression detection | Post-wave monitoring |
 
-## External References  
-- Nielsen's Heuristics (UX design framework)  
-- MJM (Customer Journey Mapping tool)  
-- Google Analytics (Behavioral data integration)
+## External References
+- Nielsen Norman Group (NNg) Journey Mapping methodology
+- Forrester Customer Journey Map (CJM) framework
+- AIDA framework (Awareness, Interest, Desire, Action) -- Lewis (1898)
+- AARRR Pirate Metrics (McClure, 2007): Acquisition, Activation, Retention, Revenue, Referral

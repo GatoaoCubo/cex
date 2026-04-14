@@ -16,24 +16,25 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool              | Purpose                  | When                          |  
-|-------------------|--------------------------|-------------------------------|  
-| cex_compile.py    | Aggregate cohort data    | Data integration phase        |  
-| cex_score.py      | Assign risk scores       | Analysis modeling             |  
-| cex_retriever.py  | Fetch external datasets  | Preprocessing                 |  
-| cex_doctor.py     | Validate data quality    | QA verification               |  
-| cex_validator.py  | Check cohort consistency | Post-processing               |  
-| cex_reporter.py   | Generate analysis outputs| Final reporting               |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile artifact YAML from source .md | After draft is written |
+| cex_score.py | Peer-review scoring (hybrid 3-layer) | After artifact is saved |
+| cex_retriever.py | TF-IDF similarity search across knowledge base | During F3 INJECT phase |
+| cex_doctor.py | Builder health check -- validates ISOs and schema | Before dispatch |
+| cex_hygiene.py | Artifact CRUD, enforce 8 hygiene rules | Ongoing quality control |
+| cex_memory_select.py | Keyword + LLM memory injection | During F3 INJECT phase |
 
-## Validation Tools  
-| Tool           | Purpose               | When                  |  
-|----------------|-----------------------|-----------------------|  
-| val_check.py   | Data integrity tests  | Pre-validation        |  
-| val_cross.py   | Cross-cohort checks   | Comparative analysis  |  
-| val_audit.py   | Track changes         | Version control       |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_wave_validator.py | Structural ISO validation (frontmatter, kind, schema) | After each builder wave |
+| cex_hooks.py | Pre/post commit validation + ASCII check | On git commit |
+| cex_quality_monitor.py | Quality snapshots + regression detection | Post-wave monitoring |
 
-## External References  
-- pandas (data manipulation)  
-- scikit-learn (ML modeling)  
-- SQL (database querying)
+## External References
+- Mixpanel Cohort Analysis (cohort grouping by event)
+- Amplitude Retention Chart (day-N retention curves: D1/D7/D30/D90)
+- BG/NBD model (Fader & Hardie, 2009) for LTV prediction
+- Kaplan-Meier survival analysis (standard churn modeling)

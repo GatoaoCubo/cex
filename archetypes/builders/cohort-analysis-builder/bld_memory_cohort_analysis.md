@@ -1,11 +1,11 @@
 ---
-kind: learning_record
-id: p10_lr_cohort_analysis_builder
+kind: memory
+id: p10_mem_cohort_analysis_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for cohort_analysis construction
 quality: null
-title: "Learning Record Cohort Analysis"
+title: "Memory Cohort Analysis"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [cohort_analysis, builder, learning_record]

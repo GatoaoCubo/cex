@@ -1,11 +1,11 @@
 ---
-kind: learning_record
-id: p10_lr_customer_segment_builder
+kind: memory
+id: p10_mem_customer_segment_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for customer_segment construction
 quality: null
-title: "Learning Record Customer Segment"
+title: "Memory Customer Segment"
 version: "1.0.0"
 author: wave1_builder_gen_v2
 tags: [customer_segment, builder, learning_record]

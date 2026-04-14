@@ -25,18 +25,18 @@ density_score: 0.85
 6. Confirm compliance with regulatory requirements (e.g., GDPR, HIPAA).  
 
 ## Phase 2: COMPOSE  
-1. Set up working directory with SCHEMA.md and OUTPUT_TEMPLATE.md as references.  
+1. Set up working directory with bld_schema_sso_config.md and bld_output_template_sso_config.md as references.  
 2. Define artifact structure: `idp_config`, `protocol`, `attribute_mapping`, `constraints`.  
 3. Populate `idp_config` with metadata URLs, entity IDs, and certificate fingerprints.  
 4. Specify protocol version (SAML 2.0, OIDC 1.0) and message signing requirements.  
 5. Map user attributes to application claims (e.g., `user.email` → `email`).  
 6. Apply constraints: token lifetime (e.g., `max_age=3600`), encryption algorithms (e.g., `RSA256`).  
-7. Validate against SCHEMA.md using a JSON schema validator (e.g., jsonschema).  
-8. Use OUTPUT_TEMPLATE.md to format final configuration (YAML or JSON).  
+7. Validate against bld_schema_sso_config.md using a JSON schema validator (e.g., jsonschema).  
+8. Use bld_output_template_sso_config.md to format final configuration (YAML or JSON).  
 9. Add comments for audit trails (e.g., `last_modified`, `author`).  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ Check syntax compliance with SCHEMA.md (no schema errors).  
+- [ ] [OK] Check syntax compliance with bld_schema_sso_config.md (no schema errors).  
 - [ ] ✅ Verify protocol compatibility (SAML/OIDC endpoints match IDP metadata).  
 - [ ] ✅ Confirm attribute mappings align with application requirements.  
 - [ ] ✅ Ensure constraints (e.g., `max_age`, `encryption`) meet security policies.  
