@@ -7,23 +7,23 @@ quality: null
 pillar: P01
 ---
 
-The HL7 FHIR R5 AI Agent Capability Declaration defines standardized requirements for AI agents interacting with healthcare systems via SMART on FHIR. It includes:
+A declaração de capacidade do agente AI HL7 FHIR R5 define padrões claros para agentes de IA que trabalham com sistemas de saúde via SMART on FHIR. Ela abrange:
 
-1. **SMART on FHIR Scopes** - OAuth2 scopes for read/write access to FHIR resources (e.g., Patient, Observation)
-2. **PHI Handling** - Mandatory encryption of protected health information (PHI) in transit and at rest
-3. **CDS Hooks** - Integration with clinical decision support systems for evidence-based recommendations
-4. **AI Transparency** - Metadata requirements for model provenance, bias mitigation, and explainability
+1. **Escopos SMART on FHIR** - Permissões de acesso para leitura e escrita de recursos FHIR (ex: Paciente, Observação)
+2. **Tratamento de PHI** - Criptografia obrigatória de informações de saúde protegidas (PHI) em trânsito e em repouso
+3. **CDS Hooks** - Integração com sistemas que fornecem recomendações clínicas baseadas em evidências
+4. **Transparência da IA** - Requisitos para documentar origem dos modelos de IA, mitigação de viés e explicabilidade das decisões
 
-This declaration ensures:
-- Compliance with HIPAA and GDPR data protection standards
-- Interoperability across EHR systems
-- Audit trails for AI-driven clinical decisions
-- Secure access control for sensitive health data
+Essa declaração garante:
+- Conformidade com leis de proteção de dados como HIPAA e GDPR
+- Compatibilidade entre diferentes sistemas de registros eletrônicos de saúde (EHR)
+- Rastreamento de decisões feitas por IA no setor de saúde
+- Controle de acesso seguro a dados sensíveis de pacientes
 
-Key components include:
-- Capability assertions in FHIR CapabilityStatement
-- Security context for data access
-- Versioned API compatibility guarantees
-- Evidence-based AI model documentation
+Componentes-chave incluem:
+- Afirmações de capacidade em CapabilityStatement do FHIR
+- Contexto de segurança para acesso a dados
+- Garantias de compatibilidade de APIs versão por versão
+- Documentação detalhada sobre modelos de IA utilizados
 
-The declaration enables trusted AI integration in healthcare while maintaining patient data confidentiality and regulatory compliance.
+Essa declaração permite a integração segura de IA no setor de saúde, mantendo a confidencialidade dos dados dos pacientes e seguindo regulamentações.
