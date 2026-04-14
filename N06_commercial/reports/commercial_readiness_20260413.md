@@ -228,7 +228,7 @@ most valuable nucleus commercially.
 | Quality baseline | Wave 2 mean 8.96, median 9.0, 0 compilation failures | 90% | agent-computer-interface-builder partial (7 ISOs) |
 | Developer docs | KCs present per kind; no public-facing docs site | 40% | No developer portal, no quickstart guide |
 | Pricing page | No CEX pricing page exists | 5% | No subscription_tier kind, no landing_page built |
-| Enterprise features | guardrail + safety_policy + compliance_framework registered | 35% | Builders not yet generated (Wave 1 coverage) |
+| Enterprise features | guardrail + safety_policy + compliance_framework + enterprise_sla + white_label_config + usage_report builders complete | 38% | Wave 4 adds 3 ENTERPRISE builders (9.2/10 each): SLA, white-label, usage reporting |
 | Demo assets | No working demo, no sandbox, no playground | 10% | Requires code deployment (N05 scope) |
 | Sales enablement | No pitch deck, no case studies, no ROI calculator | 5% | N02 + N06 must co-build this |
 | Open source story | Repo exists; no README-driven docs | 25% | No CONTRIBUTING.md, no example gallery |
