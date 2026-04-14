@@ -36,25 +36,23 @@ density_score: 0.85
 | H08 | query_transformer field valid | Invalid or missing query_transformer |  
 
 ## SOFT Scoring  
-(Table: Dim | Dimension | Weight | Scoring Guide)  
 | Dim | Dimension | Weight | Scoring Guide |  
 |---|---|---|---|  
-| D01 | Schema Completeness | 0.15 | 100% required fields present |  
-| D02 | Configuration Validity | 0.15 | Valid parameters and values |  
-| D03 | Security Compliance | 0.15 | Encryption and access controls |  
-| D04 | Performance Optimization | 0.15 | Efficient query handling |  
-| D05 | Scalability | 0.10 | Supports growth without degradation |  
+| D01 | Schema Completeness | 0.20 | 100% required fields present |  
+| D02 | Configuration Validity | 0.20 | Valid parameters and values |  
+| D03 | Graph Model Fidelity | 0.15 | Correct community detection and entity extraction config |  
+| D04 | Retrieval Strategy Quality | 0.15 | Multi-hop, hybrid vector+graph strategy defined |  
+| D05 | Scalability | 0.10 | Configurable traversal depth and query latency thresholds |  
 | D06 | Usability | 0.10 | Clear documentation and parameters |  
-| D07 | Documentation | 0.15 | Full API and usage guides |  
+| D07 | Documentation | 0.10 | Usage guides and examples present |  
 
 ## Actions  
-(Table: Score | Action)  
 | Score | Action |  
 |---|---|  
-| GOLDEN | >=9.5 | Auto-approve and deploy |  
-| PUBLISH | >=8.0 | Review and publish |  
-| REVIEW | >=7.0 | Manual review required |  
-| REJECT | <7.0 | Reject and fix |  
+| >=9.5 | GOLDEN |  
+| >=8.0 | PUBLISH |  
+| >=7.0 | REVIEW |  
+| <7.0 | REJECT |  
 
 ## Bypass  
 (Table: conditions, approver, audit trail)  

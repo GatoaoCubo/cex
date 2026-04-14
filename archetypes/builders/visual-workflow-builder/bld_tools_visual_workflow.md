@@ -19,22 +19,22 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |---|---|---|  
-| cex_compile.py | Compile workflow into executable code | During deployment |  
-| cex_score.py | Evaluate workflow efficiency and accuracy | Post-execution analysis |  
-| cex_retriever.py | Fetch external data sources for workflow inputs | During runtime |  
-| cex_doctor.py | Diagnose and repair workflow errors | Debugging phase |  
-| cex_optimizer.py | Optimize workflow performance | Pre-deployment tuning |  
-| cex_validator.py | Validate workflow structure and syntax | Development stage |  
+| cex_compile.py | Compile visual_workflow artifact to YAML output | After F6 PRODUCE |  
+| cex_score.py | Score artifact against 5D quality dimensions | After generation |  
+| cex_retriever.py | Retrieve similar visual_workflow examples for F3 INJECT | During context assembly |  
+| cex_doctor.py | Validate builder ISO completeness and frontmatter | During F7 GOVERN |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |---|---|---|  
-| cex_linter.py | Check workflow syntax and style guidelines | Code review |  
-| cex_auditor.py | Ensure compliance with workflow policies | Security checks |  
-| cex_simulator.py | Simulate workflow execution for validation | Testing phase |  
-| cex_tester.py | Run unit and integration tests on workflows | QA validation |  
+| cex_hooks.py | Pre-commit validation: ASCII check, frontmatter, schema | Before F8 COLLABORATE |  
+| cex_wave_validator.py | Validate all 13 ISOs in builder package | During audit cycles |  
 
-## External References  
-- **Graphviz**: For visualizing workflow diagrams  
-- **Docker**: For containerizing workflow components  
-- **Apache Airflow**: For orchestrating complex workflows
+## Industry Reference Platforms  
+| Platform | Contribution to visual_workflow design |  
+|----------|---------------------------------------|  
+| Mermaid | Text-based diagram DSL -- node/edge schema reference |  
+| LangGraph Studio (LangChain) | Visual agent graph editor, state node pattern |  
+| Flowise | Open-source drag-and-drop LLM flow builder |  
+| n8n | Node-based workflow automation, trigger/action pattern |  
+| Dify | Visual LLM pipeline with typed input/output ports |

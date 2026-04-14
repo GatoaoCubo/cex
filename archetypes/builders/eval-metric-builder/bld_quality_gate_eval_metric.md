@@ -17,11 +17,12 @@ density_score: 0.85
 ---
 
 ## Definition  
-(Table: metric, threshold, operator, scope)  
-| metric       | threshold | operator | scope        |  
-|--------------|-----------|----------|--------------|  
-| accuracy     | 0.95      | >=       | model output |  
-| latency      | 100ms     | <=       | API endpoint |  
+| metric          | threshold | operator | scope        |  
+|-----------------|-----------|----------|--------------|  
+| frontmatter     | valid     | ==       | artifact     |  
+| section_count   | >=4       | >=       | body         |  
+| metric_type     | defined   | ==       | frontmatter  |  
+| id_pattern      | matches   | ==       | frontmatter  |  
 
 ## HARD Gates  
 (Table: ID | Check | Fail Condition)  

@@ -40,14 +40,14 @@ density_score: 0.85
 |---|---|---|---|  
 | D01 | Model Clarity | 0.10 | Clear model type and purpose |  
 | D02 | Strategy Validity | 0.15 | Strategy aligns with use case |  
-| D03 | Parameter Completeness | 0.12 | All required parameters defined |  
+| D03 | Parameter Completeness | 0.15 | All required parameters defined |  
 | D04 | Versioning | 0.10 | Semver compliant and documented |  
 | D05 | Description Quality | 0.10 | Concise and actionable |  
 | D06 | Enablement | 0.08 | Correct 'enabled' state |  
-| D07 | Priority | 0.08 | Logical priority value |  
+| D07 | Priority | 0.07 | Logical priority value |  
 | D08 | Documentation | 0.10 | Includes usage examples |  
-| D09 | Performance Metrics | 0.10 | Includes latency/accuracy benchmarks |  
-| D10 | Error Handling | 0.10 | Defines fallback behavior |  
+| D09 | Performance Metrics | 0.08 | Includes latency/accuracy benchmarks |  
+| D10 | Error Handling | 0.07 | Defines fallback behavior |  
 
 ## Actions  
 | Score | Action |  

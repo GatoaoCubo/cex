@@ -17,12 +17,12 @@ density_score: 0.85
 ---
 
 ## Definition  
-| metric       | threshold | operator | scope        |  
-|--------------|-----------|----------|--------------|  
-| task_count   | >=3       | >=       | system       |  
-| accuracy     | 95%       | >=       | component    |  
-| latency      | 100ms     | <=       | system       |  
-| coverage     | 100%      | ==       | component    |  
+| metric          | threshold | operator | scope        |  
+|-----------------|-----------|----------|--------------|  
+| frontmatter     | valid     | ==       | artifact     |  
+| task_count      | >=3       | >=       | body         |  
+| section_count   | >=4       | >=       | body         |  
+| id_pattern      | matches   | ==       | frontmatter  |  
 
 ## HARD Gates  
 | ID         | Check                  | Fail Condition                                      |  

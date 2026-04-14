@@ -19,22 +19,22 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Integrates text, image, and audio inputs into a unified prompt | During multimodal content creation |  
-| cex_score.py | Evaluates prompt quality using multimodal alignment metrics | After initial prompt generation |  
-| cex_retriever.py | Fetches relevant external data (e.g., images, videos) for prompt context | When contextual data is required |  
-| cex_doctor.py | Diagnoses and fixes multimodal prompt inconsistencies | During debugging or validation phases |  
-| cex_optimizer.py | Refines prompts for efficiency and cross-modal coherence | Before deployment or iteration |  
-| cex_synthesizer.py | Combines modalities into a structured output format (e.g., JSON, HTML) | For final output preparation |  
+| cex_compile.py | Compile multimodal prompt artifact to YAML output | After F6 PRODUCE |  
+| cex_score.py | Score prompt against 5D quality dimensions | After initial generation |  
+| cex_retriever.py | Retrieve similar multimodal prompt examples for F3 INJECT | During context assembly |  
+| cex_doctor.py | Validate builder ISO completeness and frontmatter compliance | During F7 GOVERN |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| val_consistency_check.py | Ensures alignment between text and non-text modalities | During validation cycles |  
-| val_quality_eval.py | Assesses clarity and relevance of multimodal prompts | Post-generation quality checks |  
-| val_alignment_test.py | Verifies model adherence to prompt instructions across modalities | After training or updates |  
-| val_robustness_test.py | Tests prompt resilience against noisy or incomplete inputs | For edge case handling |  
+| cex_hooks.py | Pre-commit validation: ASCII check, frontmatter, schema | Before F8 COLLABORATE |  
+| cex_wave_validator.py | Validate all 13 ISOs in builder package | During audit cycles |  
 
-## External References  
-- Hugging Face Transformers (multimodal model support)  
-- LangChain (for integration with external data sources)  
-- OpenCV (image preprocessing for visual modalities)
+## Industry Reference Models  
+| Model | Role in multimodal_prompt design |  
+|-------|----------------------------------|  
+| GPT-4V (OpenAI) | Image+text fusion, spatial reasoning prompts |  
+| Claude 3 vision (Anthropic) | Chart/document understanding prompt patterns |  
+| Gemini Pro Vision (Google) | Cross-modal grounding and interleaved content |  
+| LLaVA (Haotian Liu 2023) | Visual instruction tuning prompt format |  
+| Florence-2 (Microsoft) | Image+text unified prompt architecture |

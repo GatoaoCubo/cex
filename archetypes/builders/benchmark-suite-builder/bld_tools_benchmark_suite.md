@@ -19,22 +19,19 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles benchmark components into executable suites | Pre-execution setup |  
-| cex_score.py | Evaluates performance metrics against baseline thresholds | Post-execution analysis |  
-| cex_retriever.py | Fetches external datasets or dependencies for benchmarks | Suite initialization |  
-| cex_doctor.py | Diagnoses configuration errors or missing dependencies | Pre-execution validation |  
-| cex_analyzer.py | Parses execution logs for anomalies or patterns | Post-execution debugging |  
-| cex_runner.py | Orchestrates parallel execution of benchmark tasks | Execution phase |  
+| cex_compile.py | Compile benchmark_suite artifact after save | F8 COLLABORATE |  
+| cex_score.py | Score artifact against quality gate (--apply flag) | F7 GOVERN |  
+| cex_retriever.py | Find similar benchmark_suite artifacts for reuse | F3 INJECT |  
+| cex_doctor.py | Validate builder health and ISO completeness | F7 GOVERN |  
+| cex_wave_validator.py | Run schema + frontmatter validation on builder ISOs | Pre-commit |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| val_validator.py | Ensures benchmark suite compliance with schema standards | Pre-deployment |  
-| val_linter.py | Checks code quality and style consistency in benchmark scripts | Development |  
-| val_comparer.py | Cross-verifies results across multiple execution runs | Post-execution |  
-| val_auditor.py | Tracks usage statistics and license compliance for external tools | Deployment |  
+| python -m pytest | Run unit tests for benchmark suite artifacts | CI gate |  
+| python _tools/cex_hooks.py pre-commit | Pre-commit hook: ASCII check + frontmatter | Before git add |  
 
 ## External References  
-- pytest: For unit testing individual benchmark components  
--基准库 (Benchmark Library): For standardized metric calculations  
-- coverage.py: For measuring code coverage during benchmark execution
+- MLPerf (mlcommons.org): Reference suite for AI benchmarking standards  
+- lm-evaluation-harness (EleutherAI): Framework for LLM benchmark execution  
+- pytest-benchmark: For measuring benchmark execution performance

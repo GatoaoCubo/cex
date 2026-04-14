@@ -19,22 +19,19 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles metric configurations into executable code | During metric setup |  
-| cex_score.py | Applies scoring logic to evaluation data | After data processing |  
-| cex_retriever.py | Fetches benchmark datasets for evaluation | When initializing metrics |  
-| cex_doctor.py | Debugs inconsistencies in metric outputs | During validation phase |  
-| cex_validator.py | Ensures metric compliance with spec standards | Before deployment |  
-| cex_formatter.py | Converts raw scores into human-readable reports | For final output delivery |  
+| cex_compile.py | Compile eval_metric artifact after save | F8 COLLABORATE |  
+| cex_score.py | Score artifact against quality gate (--apply flag) | F7 GOVERN |  
+| cex_retriever.py | Find similar eval_metric artifacts for template reuse | F3 INJECT |  
+| cex_doctor.py | Validate builder health and ISO completeness | F7 GOVERN |  
+| cex_wave_validator.py | Run schema + frontmatter validation on builder ISOs | Pre-commit |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| metric_validator.py | Checks metric consistency across datasets | During testing |  
-| benchmark_comparator.py | Compares results against reference benchmarks | For accuracy verification |  
-| visualizer.py | Generates plots for metric performance trends | When analyzing results |  
-| stress_tester.py | Tests edge cases in metric calculations | During robustness checks |  
+| python -m pytest | Run unit tests for eval_metric artifacts | CI gate |  
+| python _tools/cex_hooks.py pre-commit | Pre-commit hook: ASCII check + frontmatter | Before git add |  
 
 ## External References  
-- Hugging Face Datasets: For benchmark data handling  
-- MLflow: For experiment tracking and metric logging  
-- SciPy: For statistical validation of scores
+- evaluate (huggingface.co/docs/evaluate): Standard NLP metric library (BLEU, ROUGE, BERTScore)  
+- scikit-learn metrics (sklearn.metrics): F1, precision, recall, ROC-AUC  
+- sacrebleu: Reproducible BLEU scoring with standardized tokenization

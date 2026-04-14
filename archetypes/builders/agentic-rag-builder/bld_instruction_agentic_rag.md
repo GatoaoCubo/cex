@@ -25,19 +25,19 @@ density_score: 0.85
 6. Validate data provenance for hallucination-resistant injection  
 
 ## Phase 2: COMPOSE  
-1. Define agent state schema in SCHEMA.md (include memory, context, intent)  
+1. Define agent state schema in bld_schema_agentic_rag.md (include memory, context, intent)  
 2. Implement retrieval module with vector DB and filter syntax  
-3. Write agent planner using P01 decision tree templates  
-4. Code injection handler with priority-based trigger evaluation  
-5. Integrate RAG results into agent's decision context  
-6. Use OUTPUT_TEMPLATE.md for structured response formatting  
-7. Add fallback logic for retrieval failures  
+3. Write agent planner using ReAct or Self-RAG retrieve->reflect->re-query loop  
+4. Configure reflection triggers: low-confidence retrieval, contradictory evidence  
+5. Integrate RAG results into agent decision context with provenance tracking  
+6. Use bld_output_template_agentic_rag.md for structured response formatting  
+7. Add fallback logic for retrieval failures (CRAG corrective fallback)  
 8. Embed domain-specific prompt engineering in injection pipelines  
 9. Conduct unit tests for each RAG-agent interaction layer  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ Schema compliance with SCHEMA.md  
-[ ] ✅ Agent retrieves >95% relevant docs under load  
-[ ] ✅ Injection triggers fire at defined thresholds  
-[ ] ✅ Output matches OUTPUT_TEMPLATE.md structure  
-[ ] ✅ Hallucination rate <1% in validation corpus
+[ ] Schema compliance with bld_schema_agentic_rag.md  
+[ ] Retrieve->reflect->re-query loop terminates within max_reflection_iterations  
+[ ] Injection triggers fire at defined thresholds  
+[ ] Output matches bld_output_template_agentic_rag.md structure  
+[ ] Fallback chain activates on retrieval failure

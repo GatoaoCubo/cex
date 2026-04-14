@@ -6,51 +6,58 @@ llm_function: INJECT
 purpose: Domain knowledge for trajectory_eval production
 quality: null
 title: "Knowledge Card Trajectory Eval"
-version: "1.0.0"
-author: wave1_builder_gen_v2
-tags: [trajectory_eval, builder, knowledge_card]
-tldr: "Domain knowledge for trajectory_eval production"
+version: "1.1.0"
+author: n01_hybrid_review4
+tags: [trajectory_eval, builder, knowledge_card, llm_agent, step_eval]
+tldr: "Domain knowledge for evaluating LLM agent decision trajectories: step-level scoring, path analysis, task completion measurement."
 domain: "trajectory_eval construction"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.87
 ---
 
-## Domain Overview  
-Trajectory evaluation focuses on quantifying the quality of agent paths in dynamic environments, emphasizing real-time decision-making and adaptability. It is critical in autonomous systems (e.g., robotics, self-driving cars) where agents must navigate complex, changing scenarios while adhering to safety, efficiency, and compliance constraints. Unlike static benchmarks, trajectory evaluation emphasizes continuous assessment of motion planning outputs, such as smoothness, collision avoidance, and adherence to dynamic obstacles.  
+## Domain Overview
+Trajectory evaluation in the LLM agent context measures the quality of an agent's sequential
+decision-making path across a multi-step task. Unlike static benchmarks that score final outputs,
+trajectory eval scores EACH step: was the observation interpreted correctly? Was the tool call
+necessary and accurate? Did the reasoning chain maintain goal alignment throughout?
 
-Key applications include autonomous vehicle path validation, drone navigation, and industrial automation. Evaluation often involves simulating agent behavior against synthetic or real-world environments, measuring deviations from optimal paths, and ensuring robustness under uncertainty. This domain intersects with motion planning, control theory, and safety-critical systems engineering.  
+Key applications include autonomous coding agents (SWE-bench), web navigation agents (WebArena),
+computer-use agents (OSWorld), and API-calling agents (tau-bench). Trajectory eval bridges
+offline benchmark scores and production monitoring by decomposing task performance into
+granular, diagnosable step records.
 
-## Key Concepts  
-| Concept                  | Definition                                                                 | Source                                  |  
-|-------------------------|----------------------------------------------------------------------------|-----------------------------------------|  
-| Trajectory Smoothness   | Measure of curvature and acceleration consistency along a path             | [1] Trajectory Optimization (2020)      |  
-| Collision Avoidance     | Proximity to obstacles over time; often quantified via safety margins     | ISO 17380:2017 (Autonomous Vehicles)    |  
-| Trajectory Completeness | Probability of reaching a goal state within a time horizon                 | ROS 2 Navigation Stack Documentation    |  
-| Time-to-Collision       | Predicted time until potential contact with obstacles                    | [2] Trautman & Krafft (2011)           |  
-| Path Deviation          | Distance from a reference trajectory (e.g., optimal or human-driven)     | [3] MPC for Autonomous Vehicles (2019)  |  
-| Energy Efficiency       | Power consumption or fuel usage along a trajectory                       | IEEE 1508 (Safety-Critical Systems)     |  
-| Dynamic Obstacle Handling | Ability to replan in response to moving obstacles                       | [4] Multi-Agent Pathfinding (2021)      |  
-| Trajectory Replanning   | Frequency and effectiveness of path adjustments during execution         | ISO 26262:2018 (Functional Safety)      |  
+## Key Concepts
+| Concept | Definition | Source |
+|--------|------------|--------|
+| Step-level evaluation | Scoring each (observation, reasoning, action) triple individually | AgentBench (Liu et al. 2023) |
+| Task success rate | Binary or partial-credit completion of the final goal | SWE-bench (Jimenez et al. 2024) |
+| Path efficiency | Steps taken / minimum steps required (closer to 1.0 = better) | WebArena (Zhou et al. 2023) |
+| Tool call accuracy | Precision/recall of tool invocations vs. ground-truth trace | tau-bench (Yao et al. 2024) |
+| Trajectory completeness | Fraction of required sub-goals reached before terminal state | OSWorld (Xie et al. 2024) |
+| Backtrack rate | Frequency of redundant or reversed actions in the trajectory | AgentBench (Liu et al. 2023) |
+| Reasoning consistency | Degree to which step-level reasoning aligns with the stated goal | Self-Refine (Madaan et al. 2023) |
+| Grounding accuracy | Correctness of environment observations fed into the next step | WebArena (Zhou et al. 2023) |
 
-## Industry Standards  
-- ISO 17380:2017 (Autonomous Vehicle Safety Requirements)  
-- ISO 26262:2018 (Functional Safety for Automotive Systems)  
-- ROS 2 Navigation Stack (Open Source Robotics Foundation)  
-- Open Motion Planning Library (OMPL)  
-- IEEE 1508-2017 (Certification of Safety-Critical Systems)  
-- Trautman, J., & Krafft, O. (2011). "Multi-Agent Path Planning." *ICRA*  
+## Industry Standards and Benchmarks
+- **AgentBench** (Liu et al., 2023): Multi-environment LLM-as-agent benchmark; step-level reward signals.
+- **WebArena** (Zhou et al., 2023): Web navigation trajectories scored on task_success + efficiency.
+- **SWE-bench** (Jimenez et al., 2024): Software engineering agent eval; trajectory = patch + test cycle.
+- **OSWorld** (Xie et al., 2024): GUI agent trajectories across 369 computer tasks.
+- **tau-bench** (Yao et al., 2024): Tool-agent-user trajectories for retail/airline task simulation.
+- **MT-Bench** (Zheng et al., 2023): Multi-turn conversation quality via LLM-as-judge.
+- **GAIA** (Mialon et al., 2023): General AI assistant benchmark with tool-use trajectories.
 
-## Common Patterns  
-1. Use reference trajectories (e.g., human-driven paths) for deviation comparison.  
-2. Incorporate real-time sensor data for dynamic obstacle simulation.  
-3. Apply probabilistic models (e.g., Bayesian filters) to quantify uncertainty.  
-4. Modularize evaluation into subcomponents (e.g., safety, efficiency).  
-5. Leverage simulation environments (e.g., CARLA, Gazebo) for reproducibility.  
+## Common Patterns
+1. **Ground-truth trace comparison**: Compare agent trajectory step-by-step against an expert trace.
+2. **LLM-as-judge scoring**: Use a judge model to score reasoning quality at each step (MT-Bench pattern).
+3. **Partial credit rubrics**: Award partial scores for correct sub-goals even if final goal fails.
+4. **Backtrack detection**: Flag and penalize revisiting already-failed states.
+5. **Tool provenance tracking**: Log all tool calls with inputs/outputs for replay and diff analysis.
 
-## Pitfalls  
-- Overlooking dynamic obstacle interactions in static test scenarios.  
-- Using overly simplistic metrics (e.g., Euclidean distance) without temporal context.  
-- Ignoring computational constraints (e.g., replanning latency).  
-- Failing to validate against real-world sensor noise and edge cases.  
-- Not accounting for multi-agent coordination in crowded environments.
+## Pitfalls
+- Confusing trajectory_eval (LLM agent step eval) with robotic path planning (Euclidean distance, jerk).
+- Using only final-state success as the metric -- misses diagnostic value of step-level analysis.
+- Ignoring partial task completion (e.g., agent got 8/10 steps right but scored 0% for missing final step).
+- Allowing hallucinated tool outputs to propagate unchecked through the trajectory.
+- Comparing trajectories without controlling for environment stochasticity (seed, state).
