@@ -46,3 +46,5 @@ All requests must follow the JSON-RPC 2.0 format.
 
 ## Error Codes
 - -3
+| Anti-pattern: missing action_space | Always define what actions the ACI exposes |
+| Anti-pattern: no error handling spec | Document tool failure / timeout behavior |
