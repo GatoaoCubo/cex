@@ -4,7 +4,7 @@ kind: nucleus_def
 pillar: P02
 nucleus_id: N00
 role: genesis
-sin_lens: "Integridade Arquetipica (Archetypal Integrity)"
+sin_lens: "n/a (archetype, pre-sin)"
 cli_binding: reference-only
 model_tier: none
 model_specific: n/a
@@ -34,7 +34,7 @@ density_score: 0.85
 |-------|-------|
 | Nucleus ID | N00 |
 | Role | genesis (archetype, reference-only) |
-| Sin Lens | Integridade Arquetipica |
+| Sin Lens | n/a (N00 is archetype, not a spawnable nucleus) |
 | CLI Binding | none (never spawned) |
 | Model Tier | n/a |
 | Context | n/a |
