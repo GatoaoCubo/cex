@@ -2,10 +2,13 @@
   "version": "1.0",
   "generated": "cex_capability_index.py",
   "counts": {
-    "total": 282,
+    "total": 295,
     "builder_subagent": 259,
     "domain_agent": 16,
-    "nucleus_card": 7
+    "nucleus_card": 7,
+    "role_assignment": 4,
+    "crew_template": 1,
+    "nucleus_def": 8
   },
   "indexes": {
     "by_kind": {
@@ -204,7 +207,8 @@
         "course-module-builder"
       ],
       "crew_template": [
-        "crew-template-builder"
+        "crew-template-builder",
+        "p12_ct_product_launch.md"
       ],
       "customer_segment": [
         "customer-segment-builder"
@@ -477,7 +481,15 @@
         "nps-survey-builder"
       ],
       "nucleus_def": [
-        "nucleus-def-builder"
+        "nucleus-def-builder",
+        "p02_nd_n00.md",
+        "p02_nd_n01.md",
+        "p02_nd_n02.md",
+        "p02_nd_n03.md",
+        "p02_nd_n04.md",
+        "p02_nd_n05.md",
+        "p02_nd_n06.md",
+        "p02_nd_n07.md"
       ],
       "oauth_app_config": [
         "oauth-app-config-builder"
@@ -624,7 +636,11 @@
         "roi-calculator-builder"
       ],
       "role_assignment": [
-        "role-assignment-builder"
+        "role-assignment-builder",
+        "p02_ra_copywriter.md",
+        "p02_ra_designer.md",
+        "p02_ra_market_researcher.md",
+        "p02_ra_qa_reviewer.md"
       ],
       "router": [
         "router-builder"
@@ -812,38 +828,53 @@
         "p02_agent_competitor_tracker",
         "n01_agent_intelligence",
         "p02_agent_paper_reviewer",
-        "agent_card_n01"
+        "agent_card_n01",
+        "p02_nd_n01.md"
       ],
       "n02": [
         "p02_agent_visual_frontend_marketing",
-        "agent_card_n02"
+        "agent_card_n02",
+        "p02_ra_copywriter.md",
+        "p02_ra_designer.md",
+        "p02_ra_market_researcher.md",
+        "p02_ra_qa_reviewer.md",
+        "p12_ct_product_launch.md",
+        "p02_nd_n02.md"
       ],
       "n03": [
         "p02_agent_builder_constructor",
         "p02_agent_builder_nucleus",
-        "p08_agent_card_n03_builder"
+        "p08_agent_card_n03_builder",
+        "p02_nd_n03.md"
       ],
       "n04": [
         "n04_agent_embedding_engineer",
         "n04_agent_ingestion_engineer",
         "n04_agent_knowledge",
         "n04_agent_taxonomy_engineer",
-        "agent_card_n04"
+        "agent_card_n04",
+        "p02_nd_n04.md"
       ],
       "n05": [
         "p02_agent_code_review",
         "p02_agent_deploy_ops",
         "p02_agent_railway_superintendent",
         "p02_agent_test_ops",
-        "agent_card_n05"
+        "agent_card_n05",
+        "p02_nd_n05.md"
       ],
       "n06": [
         "p02_agent_commercial_nucleus",
-        "agent_card_n06"
+        "agent_card_n06",
+        "p02_nd_n06.md"
       ],
       "n07": [
         "p02_agent_admin_orchestrator",
-        "agent_card_n07"
+        "agent_card_n07",
+        "p02_nd_n07.md"
+      ],
+      "n00": [
+        "p02_nd_n00.md"
       ]
     },
     "by_domain": {
@@ -1174,6 +1205,45 @@
       ],
       "n07": [
         "agent_card_n07"
+      ],
+      "copywriter": [
+        "p02_ra_copywriter.md"
+      ],
+      "designer": [
+        "p02_ra_designer.md"
+      ],
+      "market_researcher": [
+        "p02_ra_market_researcher.md"
+      ],
+      "qa_reviewer": [
+        "p02_ra_qa_reviewer.md"
+      ],
+      "product_launch": [
+        "p12_ct_product_launch.md"
+      ],
+      "genesis": [
+        "p02_nd_n00.md"
+      ],
+      "intelligence": [
+        "p02_nd_n01.md"
+      ],
+      "marketing": [
+        "p02_nd_n02.md"
+      ],
+      "builder": [
+        "p02_nd_n03.md"
+      ],
+      "knowledge": [
+        "p02_nd_n04.md"
+      ],
+      "operations": [
+        "p02_nd_n05.md"
+      ],
+      "commercial": [
+        "p02_nd_n06.md"
+      ],
+      "orchestrator": [
+        "p02_nd_n07.md"
       ]
     }
   },
@@ -7270,6 +7340,218 @@
       "tools_allowed": [],
       "model_tier": null,
       "description": "N07 Orchestrator -- Capability Manifest"
+    },
+    {
+      "id": "p02_ra_copywriter.md",
+      "name": "Role Assignment -- copywriter",
+      "source": "role_assignment",
+      "path": "N02_marketing/crews/p02_ra_copywriter.md",
+      "nucleus": "n02",
+      "kind": "role_assignment",
+      "domain": "copywriter",
+      "capabilities": [
+        "Produce launch copy (tagline + headline + 3 body variants) grounded on market_researcher brief, quality >= 9.0"
+      ],
+      "tools_allowed": [],
+      "agent_id": ".claude/agents/tagline-builder.md",
+      "description": "Produce launch copy (tagline + headline + 3 body variants) grounded on market_researcher brief, quality >= 9.0"
+    },
+    {
+      "id": "p02_ra_designer.md",
+      "name": "Role Assignment -- designer",
+      "source": "role_assignment",
+      "path": "N02_marketing/crews/p02_ra_designer.md",
+      "nucleus": "n02",
+      "kind": "role_assignment",
+      "domain": "designer",
+      "capabilities": [
+        "Produce visual assets spec (hero + social + email header) grounded on copywriter's copy pack, quality >= 9.0"
+      ],
+      "tools_allowed": [],
+      "agent_id": ".claude/agents/landing-page-builder.md",
+      "description": "Produce visual assets spec (hero + social + email header) grounded on copywriter's copy pack, quality >= 9.0"
+    },
+    {
+      "id": "p02_ra_market_researcher.md",
+      "name": "Role Assignment -- market_researcher",
+      "source": "role_assignment",
+      "path": "N02_marketing/crews/p02_ra_market_researcher.md",
+      "nucleus": "n02",
+      "kind": "role_assignment",
+      "domain": "market_researcher",
+      "capabilities": [
+        "Produce a positioning brief grounded on >=3 competitors and >=2 audience segments, quality >= 9.0"
+      ],
+      "tools_allowed": [],
+      "agent_id": ".claude/agents/knowledge-card-builder.md",
+      "description": "Produce a positioning brief grounded on >=3 competitors and >=2 audience segments, quality >= 9.0"
+    },
+    {
+      "id": "p02_ra_qa_reviewer.md",
+      "name": "Role Assignment -- qa_reviewer",
+      "source": "role_assignment",
+      "path": "N02_marketing/crews/p02_ra_qa_reviewer.md",
+      "nucleus": "n02",
+      "kind": "role_assignment",
+      "domain": "qa_reviewer",
+      "capabilities": [
+        "Enforce quality gate 9.0 on all 3 upstream deliverables; reject or accept with scored report"
+      ],
+      "tools_allowed": [],
+      "agent_id": ".claude/agents/quality-gate-builder.md",
+      "description": "Enforce quality gate 9.0 on all 3 upstream deliverables; reject or accept with scored report"
+    },
+    {
+      "id": "p12_ct_product_launch.md",
+      "name": "Product Launch Crew Template",
+      "source": "crew_template",
+      "path": "N02_marketing/crews/p12_ct_product_launch.md",
+      "nucleus": "n02",
+      "kind": "crew_template",
+      "domain": "product_launch",
+      "capabilities": [
+        "Coordinate a 4-role crew that ships a new product launch package -- positioning, copy, assets, and QA gate"
+      ],
+      "tools_allowed": [],
+      "process": "sequential",
+      "description": "Coordinate a 4-role crew that ships a new product launch package -- positioning, copy, assets, and QA gate"
+    },
+    {
+      "id": "p02_nd_n00.md",
+      "name": "Nucleus Def N00",
+      "source": "nucleus_def",
+      "path": "N00_genesis/architecture/nucleus_def_n00.md",
+      "nucleus": "n00",
+      "kind": "nucleus_def",
+      "domain": "genesis",
+      "capabilities": "[]",
+      "tools_allowed": [],
+      "model_tier": "none",
+      "sin_lens": "n/a (archetype, pre-sin)",
+      "description": "N00 is the archetype: 12 pillar schemas + kinds registry + golden examples. Not spawnable."
+    },
+    {
+      "id": "p02_nd_n01.md",
+      "name": "Nucleus Def N01",
+      "source": "nucleus_def",
+      "path": "N01_intelligence/architecture/nucleus_def_n01.md",
+      "nucleus": "n01",
+      "kind": "nucleus_def",
+      "domain": "intelligence",
+      "capabilities": [
+        "taxonomy_audit",
+        "competitor_scan"
+      ],
+      "tools_allowed": [],
+      "model_tier": "sonnet",
+      "sin_lens": "Inveja Analitica (Analytical Envy)",
+      "description": "N01 is the research nucleus: knowledge_cards, market analysis, papers, benchmarks. Claude Sonnet 200K."
+    },
+    {
+      "id": "p02_nd_n02.md",
+      "name": "Nucleus Def N02",
+      "source": "nucleus_def",
+      "path": "N02_marketing/architecture/nucleus_def_n02.md",
+      "nucleus": "n02",
+      "kind": "nucleus_def",
+      "domain": "marketing",
+      "capabilities": [
+        "product_launch",
+        "campaign_sprint",
+        "brand_refresh"
+      ],
+      "tools_allowed": [],
+      "model_tier": "sonnet",
+      "sin_lens": "Luxuria Criativa (Creative Lust)",
+      "description": "N02 is the marketing nucleus: ad copy, taglines, landing pages, brand voice."
+    },
+    {
+      "id": "p02_nd_n03.md",
+      "name": "Nucleus Def N03",
+      "source": "nucleus_def",
+      "path": "N03_engineering/architecture/nucleus_def_n03.md",
+      "nucleus": "n03",
+      "kind": "nucleus_def",
+      "domain": "builder",
+      "capabilities": [
+        "builder_bootstrap",
+        "kind_genesis"
+      ],
+      "tools_allowed": [],
+      "model_tier": "opus",
+      "sin_lens": "Soberba Inventiva (Inventive Pride)",
+      "description": "N03 is the builder nucleus: constructs all CEX artifacts via 8F. Claude Opus 1M context."
+    },
+    {
+      "id": "p02_nd_n04.md",
+      "name": "Nucleus Def N04",
+      "source": "nucleus_def",
+      "path": "N04_knowledge/architecture/nucleus_def_n04.md",
+      "nucleus": "n04",
+      "kind": "nucleus_def",
+      "domain": "knowledge",
+      "capabilities": [
+        "index_refresh",
+        "rag_reweight",
+        "taxonomy_audit"
+      ],
+      "tools_allowed": [],
+      "model_tier": "sonnet",
+      "sin_lens": "Gula do Conhecimento (Knowledge Gluttony)",
+      "description": "N04 is the knowledge nucleus: RAG, KCs, embeddings, taxonomy, retrieval. Also owns capability_registry (P08)."
+    },
+    {
+      "id": "p02_nd_n05.md",
+      "name": "Nucleus Def N05",
+      "source": "nucleus_def",
+      "path": "N05_operations/architecture/nucleus_def_n05.md",
+      "nucleus": "n05",
+      "kind": "nucleus_def",
+      "domain": "operations",
+      "capabilities": [
+        "incident_response",
+        "release_gate",
+        "perf_audit"
+      ],
+      "tools_allowed": [],
+      "model_tier": "sonnet",
+      "sin_lens": "Ira (Gating Wrath)",
+      "description": "N05 is the operations nucleus: tests, deploys, CI/CD, quality gates, tools. Owns nucleus_def authoring."
+    },
+    {
+      "id": "p02_nd_n06.md",
+      "name": "Nucleus Def N06",
+      "source": "nucleus_def",
+      "path": "N06_commercial/architecture/nucleus_def_n06.md",
+      "nucleus": "n06",
+      "kind": "nucleus_def",
+      "domain": "commercial",
+      "capabilities": [
+        "pricing_refresh",
+        "launch_monetization",
+        "course_bundle"
+      ],
+      "tools_allowed": [],
+      "model_tier": "sonnet",
+      "sin_lens": "Avareza Estrategica (Strategic Greed)",
+      "description": "N06 is the commercial nucleus: pricing, courses, funnels, CLV. Also owns team_charter (P12 GOVERN)."
+    },
+    {
+      "id": "p02_nd_n07.md",
+      "name": "Nucleus Def N07",
+      "source": "nucleus_def",
+      "path": "N07_admin/architecture/nucleus_def_n07.md",
+      "nucleus": "n07",
+      "kind": "nucleus_def",
+      "domain": "orchestrator",
+      "capabilities": [
+        "grid_of_crews",
+        "mission_plan"
+      ],
+      "tools_allowed": [],
+      "model_tier": "opus",
+      "sin_lens": "Preguica (Orchestrating Sloth)",
+      "description": "N07 is the orchestrator: dispatches nuclei, assembles crews, consolidates waves. Claude Opus 1M context."
     }
   ]
 }

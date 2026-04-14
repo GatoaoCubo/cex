@@ -162,11 +162,84 @@ def scan_nucleus_cards() -> list[dict]:
     return entries
 
 
+def scan_role_assignments() -> list[dict]:
+    """Parse N0*/crews/p02_ra_*.md (role_assignment bindings for composable crews)."""
+    entries: list[dict] = []
+    for p in sorted(ROOT.glob("N0*_*/crews/p02_ra_*.md")):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        fm = parse_fm(text)
+        nucleus = p.parents[1].name[:3].lower()
+        entries.append({
+            "id": fm.get("id", p.stem),
+            "name": fm.get("title", p.stem),
+            "source": "role_assignment",
+            "path": str(p.relative_to(ROOT)).replace("\\", "/"),
+            "nucleus": nucleus,
+            "kind": "role_assignment",
+            "domain": fm.get("role_name", "unknown"),
+            "capabilities": [fm.get("goal", "")],
+            "tools_allowed": fm.get("tools", []) if isinstance(fm.get("tools"), list) else [],
+            "agent_id": fm.get("agent_id", ""),
+            "description": fm.get("goal", fm.get("title", "")),
+        })
+    return entries
+
+
+def scan_crew_templates() -> list[dict]:
+    """Parse N0*/crews/p12_ct_*.md (crew_template recipes)."""
+    entries: list[dict] = []
+    for p in sorted(ROOT.glob("N0*_*/crews/p12_ct_*.md")):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        fm = parse_fm(text)
+        nucleus = p.parents[1].name[:3].lower()
+        entries.append({
+            "id": fm.get("id", p.stem),
+            "name": fm.get("title", p.stem),
+            "source": "crew_template",
+            "path": str(p.relative_to(ROOT)).replace("\\", "/"),
+            "nucleus": nucleus,
+            "kind": "crew_template",
+            "domain": fm.get("crew_name", p.stem),
+            "capabilities": [fm.get("purpose", "")],
+            "tools_allowed": [],
+            "process": fm.get("process", "sequential"),
+            "description": fm.get("purpose", fm.get("tldr", "")),
+        })
+    return entries
+
+
+def scan_nucleus_defs() -> list[dict]:
+    """Parse N0*/architecture/nucleus_def_*.md (machine-readable nucleus identities)."""
+    entries: list[dict] = []
+    for p in sorted(ROOT.glob("N0*_*/architecture/nucleus_def_*.md")):
+        text = p.read_text(encoding="utf-8", errors="replace")
+        fm = parse_fm(text)
+        nucleus_id = fm.get("nucleus_id", "").lower() or p.stem[-3:].lower()
+        entries.append({
+            "id": fm.get("id", p.stem),
+            "name": fm.get("title", p.stem),
+            "source": "nucleus_def",
+            "path": str(p.relative_to(ROOT)).replace("\\", "/"),
+            "nucleus": nucleus_id,
+            "kind": "nucleus_def",
+            "domain": fm.get("role", "unknown"),
+            "capabilities": fm.get("crew_templates_exposed", []),
+            "tools_allowed": [],
+            "model_tier": fm.get("model_tier"),
+            "sin_lens": fm.get("sin_lens", ""),
+            "description": fm.get("tldr", fm.get("title", "")),
+        })
+    return entries
+
+
 def build_registry() -> dict:
     builders = scan_builder_subagents()
     domains = scan_domain_agents()
     cards = scan_nucleus_cards()
-    all_entries = builders + domains + cards
+    roles = scan_role_assignments()
+    crews = scan_crew_templates()
+    defs_ = scan_nucleus_defs()
+    all_entries = builders + domains + cards + roles + crews + defs_
     # Indexes for fast lookup
     by_kind: dict[str, list[str]] = {}
     by_nucleus: dict[str, list[str]] = {}
@@ -186,6 +259,9 @@ def build_registry() -> dict:
             "builder_subagent": len(builders),
             "domain_agent": len(domains),
             "nucleus_card": len(cards),
+            "role_assignment": len(roles),
+            "crew_template": len(crews),
+            "nucleus_def": len(defs_),
         },
         "indexes": {
             "by_kind": by_kind,
@@ -230,7 +306,10 @@ def main() -> int:
     print(f"[INDEX] total={reg['counts']['total']} "
           f"builders={reg['counts']['builder_subagent']} "
           f"domains={reg['counts']['domain_agent']} "
-          f"cards={reg['counts']['nucleus_card']}")
+          f"cards={reg['counts']['nucleus_card']} "
+          f"roles={reg['counts'].get('role_assignment', 0)} "
+          f"crews={reg['counts'].get('crew_template', 0)} "
+          f"defs={reg['counts'].get('nucleus_def', 0)}")
     print(f"[INDEX] kinds indexed: {len(reg['indexes']['by_kind'])}")
     print(f"[INDEX] nuclei indexed: {len(reg['indexes']['by_nucleus'])}")
 
