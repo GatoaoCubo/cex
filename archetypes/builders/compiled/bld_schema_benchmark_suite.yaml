@@ -1,0 +1,53 @@
+kind: schema
+id: bld_schema_benchmark_suite
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for benchmark_suite
+quality: null
+title: Schema Benchmark Suite
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- benchmark_suite
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for benchmark_suite
+domain: benchmark_suite construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
+  \ ID Pattern |  \n| kind | string | yes | \"benchmark_suite\" | Fixed value |  \n| pillar | string | yes | \"P07\" | Fixed\
+  \ value |  \n| title | string | yes | null | Human-readable name |  \n| version | string | yes | \"1.0.0\" | Semantic versioning\
+  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
+  | author | string | yes | null | Primary contributor |  \n| domain | string | yes | null | Application domain (e.g., \"\
+  NLP\") |  \n| quality | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] | Keywords\
+  \ for categorization |  \n| tldr | string | yes | null | One-sentence summary |  \n| benchmark_type | string | yes | null\
+  \ | E.g., \"performance\", \"accuracy\" |  \n| metrics | list | yes | [] | Quantitative evaluation criteria |  \n| reference_dataset\
+  \ | string | yes | null | Dataset used for benchmarking |  \n| implementation_language | string | yes | null | E.g., \"\
+  Python\", \"Rust\" |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| license | string | Legal terms for reuse |  \n| dependencies\
+  \ | list | Required libraries/frameworks |  \n| notes | string | Additional context or limitations |  \n| citation | string\
+  \ | Academic or technical reference |"
+id_pattern: ^p07_bs_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose, scope, and intended use cases.
+- Benchmark Metrics
+- Detailed description of each metric and its significance.
+- Reference Dataset
+- Source, structure, and preprocessing steps.
+- Implementation Details
+- Code structure, dependencies, and execution environment.
+- Usage Instructions
+- Steps to reproduce results and validate benchmarks.
+- Evaluation Criteria
+- Success thresholds, comparison baselines, and validation methods.
+constraints:
+- 'ID must conform to regex: ^p07_bs_[a-z][a-z0-9_]+.md$'
+- All required fields must be present and non-null
+- Version must follow semantic versioning (e.g., "1.2.3")
+- Metrics and tags must be human-readable and machine-parsable
+- File size must not exceed 5120 bytes
+- Quality field must be assigned by peer review, not self-reported
