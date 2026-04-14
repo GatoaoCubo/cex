@@ -24,7 +24,7 @@ The field intersects with prompt engineering, a discipline formalized by OpenAI 
 ## Key Concepts  
 | Concept | Definition | Source |  
 |---|---|---|  
-| Chain-of-Thought (CoT) | Induces step-by-step reasoning via explicit intermediate steps | Brown et al. 2020 (https://arxiv.org/abs/2005.14140) |  
+| Chain-of-Thought (CoT) | Induces step-by-step reasoning via explicit intermediate steps | Wei et al. 2022 (NeurIPS 2022, arxiv.org/abs/2201.11903) |  
 | Role-playing | Assigns a persona or expertise to guide model behavior | OpenAI Prompt Engineering Guide (2023) |  
 | Few-shot Learning | Uses examples within the prompt to infer task patterns | Brown et al. 2020 (https://arxiv.org/abs/2005.14140) |  
 | Prompt Injection | Embeds hidden instructions to manipulate model outputs | Carlini et al. 2023 (https://arxiv.org/abs/2304.06136) |  
@@ -33,12 +33,14 @@ The field intersects with prompt engineering, a discipline formalized by OpenAI 
 | Instruction Tuning | Refines model behavior via human-annotated examples | Zou et al. 2022 (https://arxiv.org/abs/2212.05458) |  
 | Alignment Verification | Ensures outputs conform to ethical or domain-specific rules | Anthropic Alignment Papers (2023) |  
 
-## Industry Standards  
-- **Prompt Engineering Manifesto** (OpenAI, 2023)  
-- **Hugging Face Transformers Documentation** (2023)  
-- **ISO/IEC 23894:2021** (AI Trustworthiness)  
-- **RLHF (Reinforcement Learning from Human Feedback)** (Stiennon et al., 2020)  
-- **Microsoft Prompt Tuning Framework** (2022)  
+## Industry Standards and Key Papers
+- Wei et al. (2022): Chain-of-Thought Prompting Elicits Reasoning in LLMs. NeurIPS 2022.
+- Yao et al. (2022): ReAct: Synergizing Reasoning and Acting in Language Models. ICLR 2023.
+- Yao et al. (2023): Tree of Thoughts: Deliberate Problem Solving with LLMs. NeurIPS 2023.
+- Wang et al. (2022): Self-Consistency Improves Chain of Thought Reasoning in LLMs. ICLR 2023.
+- Dhuliawala et al. (2023): Chain-of-Verification Reduces Hallucination in LLMs.
+- OpenAI Prompt Engineering Guide (2023): Practical guide on few-shot, CoT, role prompting.
+- ISO/IEC 23894:2021 (AI Risk Management -- Guidance on AI Trustworthiness)
 
 ## Common Patterns  
 1. **Chain-of-Thought**: Encourage step-by-step reasoning with explicit markers (e.g., "Reason step by step").  

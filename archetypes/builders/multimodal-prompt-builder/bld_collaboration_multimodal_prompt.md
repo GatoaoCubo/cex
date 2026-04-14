@@ -20,18 +20,18 @@ density_score: 0.85
 Synthesizes multimodal prompts by integrating text, image, and audio inputs into cohesive instructions for AI models. Acts as a bridge between content creators and technical teams.  
 
 ## Receives From  
-| Builder       | What               | Format     |  
-|---------------|--------------------|------------|  
-| Content Curator | Raw text snippets  | .txt       |  
-| Media Team    | Image assets       | .jpg/.png  |  
-| Data Scientist | Audio recordings   | .wav/.mp3  |  
+| Builder             | What                              | Format   |  
+|---------------------|-----------------------------------|----------|  
+| multi_modal_config  | Modality constraints and settings | YAML     |  
+| knowledge_card      | Domain context for grounding      | Markdown |  
+| embedding_config    | Token embedding specifications    | YAML     |  
 
 ## Produces For  
-| Builder       | What               | Format     |  
-|---------------|--------------------|------------|  
-| Model Trainer | Structured prompts | JSON       |  
-| Review Team   | Prompt drafts      | Markdown   |  
-| Evaluation Team | Test cases       | CSV        |  
+| Builder             | What                              | Format   |  
+|---------------------|-----------------------------------|----------|  
+| prompt_template     | Multimodal prompt structures      | Markdown |  
+| llm_judge           | Test cases for cross-modal eval   | Markdown |  
+| benchmark           | Evaluation scenarios with inputs  | Markdown |  
 
 ## Boundary  
 Does NOT handle model-specific configuration (handled by `multi_modal_config`) or text-only prompt optimization (handled by `prompt_technique`).

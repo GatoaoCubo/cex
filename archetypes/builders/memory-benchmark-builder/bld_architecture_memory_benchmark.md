@@ -17,21 +17,21 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
-| ISO Name             | Role                          | Pillar | Status  |  
-|----------------------|-------------------------------|--------|---------|  
-| bld_manifest         | Benchmark definition          | P07    | Active  |  
-| bld_instruction      | Task specification            | P07    | Active  |  
-| bld_system_prompt    | LLM input template            | P07    | Active  |  
-| bld_schema           | Data structure definition     | P07    | Active  |  
-| bld_quality_gate     | Validation rules              | P07    | Active  |  
-| bld_output_template  | Result formatting             | P07    | Active  |  
-| bld_examples         | Sample input/output           | P07    | Active  |  
-| bld_knowledge_card   | Contextual information        | P07    | Active  |  
-| bld_architecture     | System design blueprint       | P07    | Active  |  
-| bld_collaboration    | Inter-component coordination  | P07    | Active  |  
-| bld_config           | Parameter configuration       | P07    | Active  |  
-| bld_memory           | Memory usage tracking         | P07    | Active  |  
-| bld_tools            | Benchmarking utilities        | P07    | Active  |  
+| ISO Name             | Role                           | Pillar | Status  |  
+|----------------------|--------------------------------|--------|---------|  
+| bld_manifest         | Builder identity and routing   | P07    | Active  |  
+| bld_instruction      | Step-by-step production guide  | P03    | Active  |  
+| bld_system_prompt    | Builder persona and rules      | P03    | Active  |  
+| bld_schema           | Formal data contract (SSOT)    | P06    | Active  |  
+| bld_quality_gate     | HARD/SOFT scoring gates        | P11    | Active  |  
+| bld_output_template  | Output skeleton with vars      | P05    | Active  |  
+| bld_examples         | Sample input/output pairs      | P07    | Active  |  
+| bld_knowledge_card   | Domain knowledge injection     | P01    | Active  |  
+| bld_architecture     | ISO inventory and deps         | P08    | Active  |  
+| bld_collaboration    | Crew coordination protocol     | P12    | Active  |  
+| bld_config           | Runtime configuration          | P09    | Active  |  
+| bld_memory           | Learned patterns (memory ISO)  | P10    | Active  |  
+| bld_tools            | Tool registry for F5 CALL      | P04    | Active  |  
 
 ## Dependencies  
 | From              | To                  | Type         |  
@@ -44,4 +44,8 @@ density_score: 0.85
 | bld_examples      | bld_instruction     | Reference    |  
 
 ## Architectural Position  
-memory_benchmark operates as a core component in CEX pillar P07, specializing in evaluating memory efficiency and performance under load. It integrates with system design (bld_architecture) and resource tracking (bld_memory) to ensure benchmarks align with CEX requirements, while collaborating with configuration (bld_config) and validation (bld_quality_gate) to maintain accuracy and scalability in memory-critical operations.
+memory_benchmark operates in CEX pillar P07 as a specialized evaluation builder targeting AI agent
+memory quality: retention, recall, consistency, and hallucination rate across multi-turn
+conversations. It integrates with eval-metric-builder (atomic metrics) and benchmark-suite-builder
+(composite suite assembly), while drawing on bld_knowledge_card for grounding in real benchmarks
+(LOCOMO, LongMemEval, MemGPT). Not to be confused with hardware memory profiling tools.

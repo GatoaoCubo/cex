@@ -34,12 +34,14 @@ Reranking addresses limitations of first-stage retrievers, such as lexical misma
 | Late Interaction | Neural model architecture that processes query and document jointly | Xiong et al., 2020 (ColBERT) |  
 
 ## Industry Standards  
-- Microsoft MAUVE (Machine Learning for Search) evaluation framework  
+- Cohere Rerank v3 (cohere.com/rerank -- production cross-encoder API, supports multilingual)  
+- BGE reranker (BAAI/bge-reranker-large via HuggingFace -- open-source cross-encoder)  
+- ColBERT v2 (Khattab & Zaharia 2020 -- late-interaction model, Stanford NLP, RAGatouille wrapper)  
+- ms-marco cross-encoders (cross-encoder/ms-marco-MiniLM-L-6-v2 -- BEIR benchmark leader)  
+- RankGPT (Sun et al. 2023 -- GPT-4 listwise reranking via sliding window)  
+- RankVicuna (Pradeep et al. 2023 -- open-source listwise reranker)  
+- TREC (Text REtrieval Conference) evaluation guidelines (NDCG@10, MAP, MRR)  
 - FAISS (Facebook AI Similarity Search) for efficient vector retrieval  
-- Hugging Face Transformers library for model deployment  
-- Elasticsearch Rerank API (based on BM25 and neural models)  
-- TREC (Text REtrieval Conference) evaluation guidelines  
-- Neural IR paper (Chen et al., 2020) for hybrid systems  
 
 ## Common Patterns  
 1. Use hybrid scoring (e.g., BM25 + neural) for robustness.  

@@ -24,22 +24,21 @@ Prompt optimization differs from general optimization by focusing on linguistic 
 ## Key Concepts  
 | Concept | Definition | Source |  
 |--------|------------|-------|  
-| Prompt Engineering | Designing inputs to guide LLM outputs effectively | Sheng et al. (2021) |  
-| Instruction Tuning | Fine-tuning models using task-specific prompts | Zou et al. (2022) |  
+| DSPy signatures | Declarative prompt specification + compiled optimization | Khattab et al. (Stanford, 2023) |  
+| OPRO | Optimization by prompting -- LLM generates and scores candidates | Yang et al. (DeepMind, 2023) |  
+| APE | Automatic prompt engineer -- candidate generation via LLM + scoring | Zhou et al. (2023) |  
+| PromptWizard | Feedback-driven iterative prompt refinement with critique | Microsoft Research (2024) |  
 | Prompt Templates | Structured formats for consistent input generation | Liu et al. (2023) |  
 | Prompt Compression | Reducing prompt length without losing efficacy | Chen et al. (2023) |  
-| Prompt Hallucination | Generation of factually incorrect outputs from ambiguous prompts | Rajani et al. (2022) |  
-| LoRA (Low-Rank Adaptation) | Efficient parameter updates for prompt optimization | Hu et al. (2021) |  
-| Adapters | Modular components to modify prompt behavior | Pfeiffer et al. (2020) |  
-| Prompt Evaluation Metrics | BLEU, ROUGE, and task-specific accuracy benchmarks | Papineni et al. (2002) |  
+| Instruction Tuning | Fine-tuning models using task-specific prompts | Wei et al. (2022) |  
+| Prompt Evaluation Metrics | Task-specific accuracy, BLEU, ROUGE for pass scoring | Papineni et al. (2002) |  
 
 ## Industry Standards  
-- Prompt Engineering Working Group (ML Commons)  
-- Prompt Tuning Framework (Microsoft P-Tuning v2)  
-- LoRA Paper (Hu et al., 2021)  
-- Prompt Compression RFC (Hugging Face, 2023)  
-- Prompt Evaluation Benchmark (ACL 2023 Workshop)  
-- Prompt Hallucination Detection Framework (Meta, 2023)  
+- DSPy framework (Stanford NLP, 2023): systematic compilation of prompt pipelines  
+- OPRO (DeepMind, 2023): LLM-as-optimizer for prompt search  
+- APE (Zhou et al., 2023): automatic prompt engineer benchmark  
+- PromptWizard (Microsoft, 2024): feedback-loop prompt refinement  
+- P-Tuning v2 (Microsoft): parameter-efficient prompt optimization  
 
 ## Common Patterns  
 1. Iterative refinement using A/B testing for prompt variants  

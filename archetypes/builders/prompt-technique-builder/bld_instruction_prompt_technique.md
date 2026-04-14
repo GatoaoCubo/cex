@@ -25,19 +25,19 @@ density_score: 0.85
 6. Ensure alignment with Pillar P03’s injection-specific constraints.  
 
 ## Phase 2: COMPOSE  
-1. Define artifact structure using SCHEMA.md’s `prompt_technique` fields.  
-2. Align function (`INJECT`) with schema-defined parameters and outputs.  
-3. Write technique name (e.g., “Role Injection with Contextual Anchors”).  
-4. Describe mechanism: how injection triggers desired model behavior.  
-5. Specify parameters (e.g., anchor phrases, injection depth, domain tags).  
-6. Include example prompts from OUTPUT_TEMPLATE.md’s `examples` section.  
-7. Format artifact with YAML headers per SCHEMA.md’s metadata rules.  
-8. Validate against OUTPUT_TEMPLATE.md’s structure and syntax.  
+1. Define artifact structure using bld_schema_prompt_technique.md’s `prompt_technique` fields.
+2. Align function (PRODUCE) with schema-defined parameters and outputs.
+3. Write technique name (e.g., “Role Injection with Contextual Anchors”).
+4. Describe mechanism: how the technique elicits desired model behavior.
+5. Specify parameters (e.g., anchor phrases, context depth, domain tags).
+6. Include example prompts from bld_output_template_prompt_technique.md’s `examples` section.
+7. Format artifact with YAML headers per bld_schema_prompt_technique.md’s metadata rules.
+8. Validate against bld_output_template_prompt_technique.md’s structure and syntax.
 9. Finalize artifact with versioning and authorship metadata.  
 
-## Phase 3: VALIDATE  
-- [ ] ✅ Artifact conforms to SCHEMA.md’s required fields and types.  
-- [ ] ✅ Example prompts produce expected outputs in target domain.  
-- [ ] ✅ Parameters are clearly defined and injectable via schema.  
-- [ ] ✅ Technique adheres to P03’s injection-specific constraints.  
-- [ ] ✅ No conflicts with existing techniques in the same domain.
+## Phase 3: VALIDATE
+- [ ] Artifact conforms to bld_schema_prompt_technique.md’s required fields and types.
+- [ ] Example prompts produce expected outputs in target domain.
+- [ ] Parameters are clearly defined and match schema.
+- [ ] Technique adheres to P03 prompt-specific constraints.
+- [ ] No conflicts with existing techniques in the same domain.

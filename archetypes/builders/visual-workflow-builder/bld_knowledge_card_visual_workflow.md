@@ -26,7 +26,7 @@ Industry adoption spans tools like Figma for UI/UX design, Apache NiFi for data 
 |---|---|---|  
 | Node-Based Interface | Workflow elements represented as modular nodes connected by edges | *Visual Design Patterns* (Tidwell, 2001) |  
 | Drag-and-Drop (DnD) | User interaction paradigm for placing and connecting workflow components | *Direct Manipulation* (Shneiderman, 1992) |  
-| Real-Time Collaboration | Concurrent editing by multiple users with conflict resolution | *Google Docs Architecture* (RFC 7525) |  
+| Real-Time Collaboration | Concurrent editing via CRDT or OT algorithms | *CRDT: Conflict-Free Replicated Data Types* (Shapiro 2011) |  
 | Undo/Redo Stack | Mechanism to revert or reapply user actions | *GUI Programming* (O’Reilly, 2003) |  
 | Visual Programming Language (VPL) | Workflow logic expressed through graphical symbols | *VPLs in Education* (ICPC, 2018) |  
 | Accessibility Compliance | Adherence to WCAG 2.1 for screen readers and keyboard navigation | *Web Content Accessibility Guidelines* (W3C) |  
@@ -40,7 +40,7 @@ Industry adoption spans tools like Figma for UI/UX design, Apache NiFi for data 
 - WCAG 2.1 (Web Content Accessibility Guidelines)  
 - IEEE 12207 (Software Life Cycle Processes)  
 - ISO/IEC 25010 (System Quality Requirements)  
-- RFC 7525 (Real-Time Collaboration Protocols)  
+- CRDT / Operational Transformation (real-time collaboration algorithms)  
 - JSON Schema (RFC 8259)  
 
 ## Common Patterns  
