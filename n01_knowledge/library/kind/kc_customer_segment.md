@@ -3,15 +3,25 @@ id: kc_customer_segment
 kind: knowledge_card
 title: Customer Segment Definition
 version: 1.0.0
+quality: null
 pillar: P01
+language: en
 ---
 
-Customer segmentation defines distinct groups of customers based on shared characteristics, needs, and behaviors. This artifact establishes the framework for identifying and analyzing customer segments using firmographics (business size, industry, location) and psychographics (needs, preferences, pain points).
+# Customer Segment Definition
 
-Key elements:
-1. **Firmographics**: Business structure, revenue, employee count, industry vertical
-2. **Psychographics**: Decision-making criteria, product usage patterns, service requirements
-3. **Segmentation strategies**: Demographic, geographic, behavioral, and benefit-based approaches
-4. **Use cases**: Targeted marketing, product development, resource allocation
+Customer segments are distinct groups of customers with similar needs, characteristics, and behaviors. This artifact defines the ideal customer profile (ICP) for a product/service, including:
 
-This definition serves as the foundation for creating ICP (Ideal Customer Profile) criteria and tailoring business strategies to specific market segments. Segmentation enables more effective resource allocation and personalized customer engagement.
+## Firmographics
+- Industry: Technology, Healthcare, Finance, etc.
+- Company size: 50-250 employees
+- Revenue range: $2M - $10M annual revenue
+- Geographic location: North America, Europe
+
+## Needs
+- Pain points: Operational inefficiencies, compliance risks, customer acquisition costs
+- Goals: Scale operations, reduce risk exposure, improve customer retention
+- Decision criteria: ROI, implementation time, vendor expertise
+
+## Example
+Tech startup in healthcare with 50 employees, $2M revenue, targeting hospitals with 200+ beds. Prioritizes solutions that reduce administrative overhead and improve patient outcomes.
