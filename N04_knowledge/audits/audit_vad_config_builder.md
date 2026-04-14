@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "N04 Knowledge Nucleus"
 domain: "builder quality audit"
-quality: null
+quality: 8.9
 tags: [audit, vad_config, builder, HYBRID_REVIEW]
 tldr: "13/13 ISOs audited. 4 surgical fixes. Critical: architecture domain error + schema/gate inconsistency fixed. Silero VAD engine matrix added."
 ---

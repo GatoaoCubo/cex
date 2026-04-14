@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: n05_ops
 domain: security_operations
-quality: null
+quality: 8.9
 tags: [incident_report, audit, post-mortem, nist, sre, n05]
 tldr: "8 pass, 4 fix, 1 rebuild -- primary gaps: output template had no post-mortem structure, quality gate weights summed to 1.10, config had max_turns=0"
 ---

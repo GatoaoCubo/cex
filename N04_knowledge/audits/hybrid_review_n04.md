@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "N04 Knowledge Nucleus"
 domain: "builder quality audit"
-quality: null
+quality: 8.9
 tags: [audit, HYBRID_REVIEW, wave2, stt_provider, tts_provider, vad_config, n04]
 tldr: "39/39 ISOs audited. 16 fixes applied (14 surgical, 0 rebuilds). 3 critical domain errors fixed. Vendor gaps filled for all 3 builders."
 ---

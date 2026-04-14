@@ -9,7 +9,7 @@ builder: reasoning-strategy-builder
 kind_reviewed: reasoning_strategy
 pillar: P03
 iso_count: 13
-quality: null
+quality: 8.8
 ---
 
 # Audit: reasoning-strategy-builder (13 ISOs)

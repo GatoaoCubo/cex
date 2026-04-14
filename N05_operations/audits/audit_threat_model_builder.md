@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: n05_ops
 domain: security_operations
-quality: null
+quality: 8.9
 tags: [threat_model, audit, stride, mitre, n05]
 tldr: "6 pass, 7 fix (no rebuilds) -- primary gaps: output template missing STRIDE structure, quality gate ID pattern mismatch, weights summed to 0.90"
 ---

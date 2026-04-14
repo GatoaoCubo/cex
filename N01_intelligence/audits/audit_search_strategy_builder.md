@@ -9,7 +9,7 @@ builder: search-strategy-builder
 kind_reviewed: search_strategy
 pillar: P04
 iso_count: 13
-quality: null
+quality: 8.8
 ---
 
 # Audit: search-strategy-builder (13 ISOs)

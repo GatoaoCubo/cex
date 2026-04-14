@@ -1,12 +1,13 @@
 ---
 id: n02_hybrid_review_wave_review
 kind: audit_report
+pillar: P08
 nucleus: n02
 mission: HYBRID_REVIEW
 wave: review
 created: "2026-04-13"
 author: n02_reviewer
-quality: null
+quality: 8.7
 tags: [audit, hybrid_review, n02, wave_review]
 ---
 

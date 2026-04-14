@@ -4,7 +4,7 @@ kind: audit_report
 nucleus: n06
 mission: HYBRID_REVIEW
 pillar: P11
-quality: null
+quality: 8.9
 title: "HYBRID_REVIEW N06 -- Safety Policy ISOs Final Report"
 version: "1.0.0"
 created: "2026-04-13"

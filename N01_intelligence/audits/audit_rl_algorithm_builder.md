@@ -9,7 +9,7 @@ builder: rl-algorithm-builder
 kind_reviewed: rl_algorithm
 pillar: P02
 iso_count: 13
-quality: null
+quality: 8.8
 ---
 
 # Audit: rl-algorithm-builder (13 ISOs)

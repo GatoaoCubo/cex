@@ -9,7 +9,7 @@ builder: reward-model-builder
 kind_reviewed: reward_model
 pillar: P07
 iso_count: 13
-quality: null
+quality: 8.8
 ---
 
 # Audit: reward-model-builder (13 ISOs)
