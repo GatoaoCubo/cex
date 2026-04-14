@@ -1,0 +1,29 @@
+kind: collaboration
+id: bld_collaboration_self_improvement_loop
+pillar: P12
+llm_function: COLLABORATE
+purpose: How self_improvement_loop-builder works in crews with other builders
+quality: null
+title: Collaboration Self Improvement Loop
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- self_improvement_loop
+- builder
+- collaboration
+tldr: How self_improvement_loop-builder works in crews with other builders
+domain: self_improvement_loop construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Coordinates iterative refinement of processes, goals, and strategies through active feedback integration and adaptive
+  planning.
+receives_from: "| Builder       | What               | Format      |  \n|---------------|--------------------|-------------|\
+  \  \n| Feedback_Collector | User performance data | Structured JSON |  \n| Goal_Setter   | Target milestones   | Plain text\
+  \  |  \n| Analyzer      | Improvement insights | Markdown    |  \n| Planner       | Actionable steps    | YAML        |"
+produces_for: "| Builder       | What                   | Format      |  \n|---------------|------------------------|-------------|\
+  \  \n| Executor      | Updated task sequences | JSON        |  \n| Reporter      | Progress summaries     | Markdown   \
+  \ |  \n| Goal_Setter   | Revised objectives     | Plain text  |  \n| Analyzer      | Next-phase hypotheses  | YAML     \
+  \   |"
+boundary: Does NOT handle bug-specific fixes (handled by `bugloop`), passive learning (handled by `learning_record`), or external
+  system integrations (handled by `interface_builder`).

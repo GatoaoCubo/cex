@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_agentic_rag
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for agentic_rag
+quality: null
+title: Instruction Agentic Rag
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- agentic_rag
+- builder
+- instruction
+tldr: Step-by-step production process for agentic_rag
+domain: agentic_rag construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify domain-specific knowledge sources and injection triggers
+- Map agent decision trees to RAG retrieval boundaries
+- Benchmark existing RAG frameworks for agent compatibility
+- Document injection point semantics (e.g., query rewriting, context fusion)
+- Analyze latency tradeoffs between retrieval depth and agent reasoning
+- Validate data provenance for hallucination-resistant injection
+phase_2_compose:
+- Define agent state schema in SCHEMA.md (include memory, context, intent)
+- Implement retrieval module with vector DB and filter syntax
+- Write agent planner using P01 decision tree templates
+- Code injection handler with priority-based trigger evaluation
+- Integrate RAG results into agent's decision context
+- Use OUTPUT_TEMPLATE.md for structured response formatting
+- Add fallback logic for retrieval failures
+- Embed domain-specific prompt engineering in injection pipelines
+- Conduct unit tests for each RAG-agent interaction layer
+phase_3_validate: '[ ] ✅ Schema compliance with SCHEMA.md [ ] ✅ Agent retrieves >95% relevant docs under load [ ] ✅ Injection
+  triggers fire at defined thresholds [ ] ✅ Output matches OUTPUT_TEMPLATE.md structure [ ] ✅ Hallucination rate <1% in validation
+  corpus'

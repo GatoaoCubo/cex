@@ -1,0 +1,40 @@
+---
+kind: tools
+id: bld_tools_multimodal_prompt
+pillar: P04
+llm_function: CALL
+purpose: Tools available for multimodal_prompt production
+quality: null
+title: "Tools Multimodal Prompt"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [multimodal_prompt, builder, tools]
+tldr: "Tools available for multimodal_prompt production"
+domain: "multimodal_prompt construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Production Tools  
+| Tool | Purpose | When |  
+|------|---------|------|  
+| cex_compile.py | Integrates text, image, and audio inputs into a unified prompt | During multimodal content creation |  
+| cex_score.py | Evaluates prompt quality using multimodal alignment metrics | After initial prompt generation |  
+| cex_retriever.py | Fetches relevant external data (e.g., images, videos) for prompt context | When contextual data is required |  
+| cex_doctor.py | Diagnoses and fixes multimodal prompt inconsistencies | During debugging or validation phases |  
+| cex_optimizer.py | Refines prompts for efficiency and cross-modal coherence | Before deployment or iteration |  
+| cex_synthesizer.py | Combines modalities into a structured output format (e.g., JSON, HTML) | For final output preparation |  
+
+## Validation Tools  
+| Tool | Purpose | When |  
+|------|---------|------|  
+| val_consistency_check.py | Ensures alignment between text and non-text modalities | During validation cycles |  
+| val_quality_eval.py | Assesses clarity and relevance of multimodal prompts | Post-generation quality checks |  
+| val_alignment_test.py | Verifies model adherence to prompt instructions across modalities | After training or updates |  
+| val_robustness_test.py | Tests prompt resilience against noisy or incomplete inputs | For edge case handling |  
+
+## External References  
+- Hugging Face Transformers (multimodal model support)  
+- LangChain (for integration with external data sources)  
+- OpenCV (image preprocessing for visual modalities)

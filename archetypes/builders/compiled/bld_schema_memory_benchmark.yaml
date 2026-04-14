@@ -1,0 +1,50 @@
+kind: schema
+id: bld_schema_memory_benchmark
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for memory_benchmark
+quality: null
+title: Schema Memory Benchmark
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_benchmark
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for memory_benchmark
+domain: memory_benchmark construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes |  \n|-----------|--------|----------|---------|-------|  \n\
+  | id        | string | yes      |         |       |  \n| kind      | string | yes      |         |       |  \n| pillar \
+  \   | string | yes      |         |       |  \n| title     | string | yes      |         |       |  \n| version   | string\
+  \ | yes      | 1.0     |       |  \n| created   | date   | yes      |         |       |  \n| updated   | date   | yes  \
+  \    |         |       |  \n| author    | string | yes      |         |       |  \n| domain    | string | yes      | memory\
+  \  |       |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      | list\
+  \   | yes      |         |       |  \n| tldr      | string | yes      |         |       |  \n| capacity  | number | yes\
+  \      |         | MB    |  \n| latency   | number | yes      |         | ms    |"
+recommended: "| Field      | Type   | Notes |  \n|------------|--------|-------|  \n| accuracy   | number | %     |  \n| workload\
+  \   | string |       |"
+id_pattern: ^p07_mb_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Description of the memory benchmark purpose and scope.
+- Metrics
+- Key performance indicators (e.g., throughput, error rate).
+- Workload
+- Data patterns, access types, and stress scenarios.
+- Constraints
+- Hardware, software, and environmental limitations.
+- Results
+- Expected output format and validation criteria.
+- Notes
+- Additional context, caveats, or references.
+constraints:
+- All metrics must be measurable and repeatable.
+- Capacity must not exceed 5120 MB.
+- Latency thresholds must align with industry standards.
+- Workloads must be defined in ASCII-compatible formats.
+- Results must include statistical confidence intervals.
+- Tags must use lowercase alphanumeric characters and underscores.

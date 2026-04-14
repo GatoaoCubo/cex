@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_workflow_node
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of workflow_node artifacts
+quality: null
+title: Examples Workflow Node
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- workflow_node
+- builder
+- examples
+tldr: Golden and anti-examples of workflow_node artifacts
+domain: workflow_node construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: workflow_node\ntype: llm\nname: text_generation_node\ndescription: \"Generates text using a Hugging\
+  \ Face transformer model\"\ninputs:\n  - name: prompt\n    type: string\n    description: \"Input prompt for text generation\"\
+  \n  - name: temperature\n    type: float\n    description: \"Sampling temperature for model output\"\noutputs:\n  - name:\
+  \ generated_text\n    type: string\n    description: \"Model's generated text response\"\nconfiguration:\n  model: \"HuggingFace/llama-3-8b\"\
+  \n  api_key: \"hf_abc123\"\n  max_tokens: 200"
+anti_example_1_missing_type_specification: "kind: workflow_node\nname: data_processor\ndescription: \"Handles data transformation\
+  \ tasks\"\ninputs:\n  - name: raw_data\n    type: any\noutputs:\n  - name: processed_data\n    type: any"
+why_it_fails: A database node should only produce database-related outputs. Adding an `llm_summary` output implies this node
+  is also performing LLM processing, violating the single-responsibility principle for workflow nodes.
+anti_example_2_mixing_node_types: "kind: workflow_node\ntype: database\nname: user_retriever\ndescription: \"Fetches user\
+  \ data from PostgreSQL\"\ninputs:\n  - name: user_id\n    type: integer\noutputs:\n  - name: user_data\n    type: object\n\
+  \  - name: llm_summary\n    type: string"

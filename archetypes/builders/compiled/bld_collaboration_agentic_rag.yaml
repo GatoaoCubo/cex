@@ -1,0 +1,29 @@
+kind: collaboration
+id: bld_collaboration_agentic_rag
+pillar: P12
+llm_function: COLLABORATE
+purpose: How agentic_rag-builder works in crews with other builders
+quality: null
+title: Collaboration Agentic Rag
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- agentic_rag
+- builder
+- collaboration
+tldr: How agentic_rag-builder works in crews with other builders
+domain: agentic_rag construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Orchestrates the Agentic RAG workflow by integrating retrieval, generation, and feedback loops, ensuring alignment
+  between data sources, query intent, and output quality.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Data Source   | Raw document content  | CSV/SQL     |  \n| User Interface| Query intent          | Text        |\
+  \  \n| Retrieval     | Ranked document snippets| JSON        |  \n| Feedback Loop | User evaluation data  | YAML       \
+  \ |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Generation    | Contextual response   | Text        |  \n| Metadata Store| Query-document mapping| JSON        |\
+  \  \n| UI/UX         | Structured output     | HTML/Markdown|  \n| Optimization  | Performance metrics   | CSV         |"
+boundary: Does NOT handle raw data preprocessing (Data Engineers), agent behavior definition (Agent Developers), or end-user
+  interface design (UI/UX Team).

@@ -1,0 +1,62 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_workflow_node
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for workflow_node production
+quality: null
+title: "Knowledge Card Workflow Node"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [workflow_node, builder, knowledge_card]
+tldr: "Domain knowledge for workflow_node production"
+domain: "workflow_node construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Domain Overview  
+Workflow nodes are fundamental building blocks in systems that model processes as directed acyclic graphs (DAGs). They encapsulate specific operations, data transformations, or control logic within larger workflows, enabling modularity and reusability. Common applications include data pipeline orchestration (e.g., Apache Airflow), visual programming (e.g., KNIME), and business process management (BPMN). Nodes typically define inputs/outputs, execution semantics, and metadata for integration with surrounding systems.  
+
+The distinction between a workflow node and a full workflow is critical: nodes are atomic, self-contained units, while workflows coordinate multiple nodes. This separation aligns with microservices principles, allowing nodes to be developed, tested, and deployed independently. Standards like WfMC’s XPDL and BPMN 2.0 provide formal definitions for node behavior and interoperability.  
+
+## Key Concepts  
+| Concept             | Definition                                                                 | Source                          |  
+|---------------------|----------------------------------------------------------------------------|---------------------------------|  
+| Node Type           | Classification defining a node’s purpose (e.g., transform, decision).      | BPMN 2.0                        |  
+| Port                | Interface for data flow between nodes (input/output).                      | Apache Airflow Documentation    |  
+| Execution Context   | Runtime environment variables and dependencies for a node.                 | Workflow Management Coalition   |  
+| Data Schema         | Formal structure defining input/output data formats (e.g., JSON Schema).   | JSON Schema Specification       |  
+| Error Handling      | Mechanism for propagating and resolving failures within a node.            | WfMC Interoperability Standards |  
+| Serialization       | Method for converting node state to portable formats (e.g., XGBoost).      | Apache Flink Documentation      |  
+| Versioning          | Tracking changes to node definitions over time (e.g., Docker image tags).  | Docker Best Practices           |  
+| Dependency Injection| Injection of external services or configurations into a node.              | Spring Framework Documentation  |  
+| State Persistence   | Saving transient node state for resuming execution (e.g., checkpointing).  | Apache Flink Documentation      |  
+| Logging             | Structured recording of node activity for debugging and auditing.          | ELK Stack Documentation         |  
+
+## Industry Standards  
+- BPMN 2.0 (Business Process Model and Notation)  
+- Apache Airflow (DAG and operator definitions)  
+- WfMC XPDL (XML Process Definition Language)  
+- JSON Schema (data validation for ports)  
+- XGBoost (serialization for ML nodes)  
+- Docker (versioning and containerization)  
+- Spring Framework (dependency injection)  
+- Apache Flink (state persistence)  
+- ELK Stack (logging standards)  
+
+## Common Patterns  
+1. Input/output port typing for strict data validation  
+2. Use of JSON Schema for defining port data formats  
+3. State checkpointing for fault tolerance  
+4. Error propagation via standardized exception hierarchies  
+5. Versioned node definitions with semantic versioning  
+6. Dependency injection for external service integration  
+
+## Pitfalls  
+- Forgetting to validate input/output types, leading to runtime failures  
+- Overlooking error handling, causing workflow interruptions  
+- Poor versioning practices creating compatibility issues  
+- Tight coupling between nodes and external systems  
+- Inadequate logging making debugging and auditing difficult

@@ -1,0 +1,41 @@
+kind: quality_gate
+id: p07_qg_memory_benchmark
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for memory_benchmark
+quality: null
+title: Quality Gate Memory Benchmark
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_benchmark
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for memory_benchmark
+domain: memory_benchmark construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| metric         | threshold     | operator | scope        |  \n|----------------|---------------|----------|--------------|\
+  \  \n| memory latency | <= 100ns      | <=       | per test case|  \n| bandwidth      | >= 50GB/s     | >=       | system\
+  \ wide  |  \n| error rate     | <= 0.01%      | <=       | per cycle    |"
+hard_gates: "| ID           | Check                  | Fail Condition                          |  \n|--------------|------------------------|-----------------------------------------|\
+  \  \n| H01          | YAML frontmatter valid | Invalid YAML syntax or missing fields   |  \n| H02          | ID matches\
+  \ pattern     | ID does not match ^p07_mb_[a-z][a-z0-9_]+.md$ |  \n| H03          | kind field matches     | kind != 'memory_benchmark'\
+  \              |  \n| H04          | latency threshold met  | latency > 100ns for any test case       |  \n| H05       \
+  \   | bandwidth threshold met| bandwidth < 50GB/s system wide          |  \n| H06          | error rate threshold   | error\
+  \ rate > 0.01% per cycle            |  \n| H07          | allocation success     | <99% allocation success rate        \
+  \    |"
+soft_scoring: "| Dim | Dimension        | Weight | Scoring Guide                          |  \n|-----|------------------|--------|----------------------------------------|\
+  \  \n| D01 | Latency          | 0.15   | 0.0 (100ns+) to 1.0 (<=50ns)           |  \n| D02 | Bandwidth        | 0.20   |\
+  \ 0.0 (25GB/s) to 1.0 (>=75GB/s)         |  \n| D03 | Error Rate       | 0.15   | 0.0 (1%+) to 1.0 (<=0.001%)          \
+  \  |  \n| D04 | Allocation       | 0.10   | 0.0 (50%) to 1.0 (>=99.9%)             |  \n| D05 | Stability        | 0.10\
+  \   | 0.0 (crash) to 1.0 (no crashes)        |  \n| D06 | Scalability      | 0.10   | 0.0 (100GB) to 1.0 (>=500GB)     \
+  \      |  \n| D07 | Consistency      | 0.10   | 0.0 (5% drift) to 1.0 (<=0.1% drift)   |  \n| D08 | Security         | 0.10\
+  \   | 0.0 (vulnerability) to 1.0 (none)      |"
+actions: "| Score   | Action       |  \n|---------|--------------|  \n| >=9.5   | GOLDEN       |  \n| >=8.0   | PUBLISH  \
+  \    |  \n| >=7.0   | REVIEW       |  \n| <7.0    | REJECT       |"
+bypass: "| conditions                          | approver         | audit trail              |  \n|------------------------------------|------------------|--------------------------|\
+  \  \n| Critical production issue          | CTO              | documented in JIRA       |  \n| Third-party hardware limitation\
+  \    | Hardware Lead    | signed waiver            |  \n| Regulatory override                | Compliance Head  | legal\
+  \ review record      |"

@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_workflow_node
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for workflow_node
+quality: null
+title: Instruction Workflow Node
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- workflow_node
+- builder
+- instruction
+tldr: Step-by-step production process for workflow_node
+domain: workflow_node construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze schema requirements from SCHEMA.md for node typing rules
+- Identify required input/output ports and their data types
+- Review existing workflow_node implementations in P12 pillar
+- Document visual representation standards (colors, icons, connectors)
+- Study error handling patterns in workflow_node lifecycle methods
+- Map node behavior to programmatic execution flow diagrams
+phase_2_compose:
+- Create node class with typed identifier per SCHEMA.md
+- Implement port definitions using OUTPUT_TEMPLATE.md structure
+- Write initialization method for visual configuration
+- Code execution logic with input/output validation
+- Add error propagation handlers for failure states
+- Implement serialization methods for workflow storage
+- Integrate with UI framework for drag-and-drop placement
+- Write unit tests for edge case scenarios
+- Finalize documentation in node's metadata block
+phase_3_validate: '[ ] [ ] Verify schema compliance with SCHEMA.md [ ] [ ] Test port type mismatches in execution [ ] [ ]
+  Confirm visual rendering matches design specs [ ] [ ] Validate error handling in all lifecycle stages [ ] [ ] Ensure compatibility
+  with P12 workflow engine'

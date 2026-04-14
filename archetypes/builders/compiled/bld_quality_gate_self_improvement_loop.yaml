@@ -1,0 +1,37 @@
+kind: quality_gate
+id: p11_qg_self_improvement_loop
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for self_improvement_loop
+quality: null
+title: Quality Gate Self Improvement Loop
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- self_improvement_loop
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for self_improvement_loop
+domain: self_improvement_loop construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "(Table: metric, threshold, operator, scope)  \n| metric | threshold | operator | scope |  \n|---|---|---|---|\
+  \  \n| learning_rate_stability | 0.95 | >= | system |  \n| feedback_loop_integrity | 100% | == | all updates |  \n| model_drift_detection\
+  \ | 0.1 | <= | training data |"
+hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID | Check | Fail Condition |  \n|---|---|---|  \n| p11_sil_h01 | YAML\
+  \ frontmatter valid | syntax errors or missing fields |  \n| p11_sil_h02 | ID matches ^p11_sil_[a-z][a-z0-9_]+.md$ | invalid\
+  \ ID format |  \n| p11_sil_h03 | kind field matches 'self_improvement_loop' | mismatched kind |  \n| p11_sil_h04 | learning\
+  \ rate stability >= 0.95 | < 0.95 |  \n| p11_sil_h05 | feedback loop integrity == 100% | < 100% |  \n| p11_sil_h06 | model\
+  \ drift detection <= 0.1 | > 0.1 |  \n| p11_sil_h07 | training data freshness >= 90% | < 90% |  \n| p11_sil_h08 | error\
+  \ recovery rate >= 99% | < 99% |"
+soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|\
+  \  \n| D1 | Adaptability | 0.15 | 1.0 = full self-correction |  \n| D2 | Feedback quality | 0.15 | 1.0 = actionable insights\
+  \ |  \n| D3 | Resource efficiency | 0.10 | 1.0 = optimal compute use |  \n| D4 | Security | 0.15 | 1.0 = no vulnerabilities\
+  \ |  \n| D5 | Consistency | 0.10 | 1.0 = stable performance |  \n| D6 | Scalability | 0.15 | 1.0 = handles growth |  \n\
+  | D7 | Innovation | 0.10 | 1.0 = novel improvements |  \n| D8 | Auditability | 0.10 | 1.0 = full traceability |"
+actions: "(Table: Score | Action)  \n| Score | Action |  \n|---|---|  \n| GOLDEN >=9.5 | Auto-publish with celebration | \
+  \ \n| PUBLISH >=8.0 | Review and deploy |  \n| REVIEW >=7.0 | Manual inspection required |  \n| REJECT <7.0 | Halt and investigate\
+  \ |"
+bypass: "(Table: conditions, approver, audit trail)  \n| conditions | approver | audit trail |  \n|---|---|---|  \n| Emergency\
+  \ override | CTO | logged in system |  \n| Legacy system compatibility | Architect | change control board |"

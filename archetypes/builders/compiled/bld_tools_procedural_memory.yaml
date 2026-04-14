@@ -1,0 +1,32 @@
+kind: tools
+id: bld_tools_procedural_memory
+pillar: P04
+llm_function: CALL
+purpose: Tools available for procedural_memory production
+quality: null
+title: Tools Procedural Memory
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- procedural_memory
+- builder
+- tools
+tldr: Tools available for procedural_memory production
+domain: procedural_memory construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Translates procedural steps\
+  \ into executable code | During memory encoding |  \n| cex_score.py | Evaluates memory performance against benchmarks |\
+  \ Post-execution validation |  \n| cex_retriever.py | Fetches contextual data for memory recall | During procedural execution\
+  \ |  \n| cex_doctor.py | Diagnoses memory corruption or inefficiencies | Debugging phases |  \n| cex_executor.py | Simulates\
+  \ procedural memory operations | Testing environments |  \n| cex_optimizer.py | Refines memory pathways for speed | Optimization\
+  \ cycles |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_checker.py | Verifies memory consistency\
+  \ across states | After updates |  \n| val_profiler.py | Tracks resource usage during execution | Performance tuning | \
+  \ \n| val_validator.py | Ensures compliance with procedural rules | Deployment checks |  \n| val_analyzer.py | Traces memory\
+  \ lineage for debugging | Error investigation |"
+external_references:
+- PyTorch (for dynamic computation graphs)
+- LLVM (for low-level memory optimization)
+- Git (for versioned memory state tracking)

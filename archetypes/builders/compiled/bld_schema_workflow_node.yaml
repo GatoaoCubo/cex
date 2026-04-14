@@ -1,0 +1,53 @@
+kind: schema
+id: bld_schema_workflow_node
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for workflow_node
+quality: null
+title: Schema Workflow Node
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- workflow_node
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for workflow_node
+domain: workflow_node construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes                              |  \n|-----------|--------|----------|---------|------------------------------------|\
+  \  \n| id        | string | yes      | null    | Unique identifier                  |  \n| kind      | string | yes    \
+  \  | null    | Must be 'workflow_node'            |  \n| pillar    | string | yes      | null    | Must be 'P12'       \
+  \               |  \n| title     | string | yes      | null    | Descriptive name                   |  \n| version   | string\
+  \ | yes      | null    | Semantic version (e.g., 1.0.0)     |  \n| created   | date   | yes      | null    | ISO 8601 timestamp\
+  \                 |  \n| updated   | date   | yes      | null    | ISO 8601 timestamp                 |  \n| author    |\
+  \ string | yes      | null    | Creator                            |  \n| domain    | string | yes      | null    | Workflow\
+  \ domain (e.g., 'data')     |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n\
+  | tags      | array  | yes      | null    | Keywords for categorization        |  \n| tldr      | string | yes      | null\
+  \    | One-sentence summary               |  \n| input_type | string | yes      | null    | Expected input format      \
+  \        |  \n| output_type | string | yes      | null    | Expected output format             |"
+recommended: "| Field         | Type   | Notes                  |  \n|---------------|--------|------------------------| \
+  \ \n| dependencies  | array  | Required workflow nodes |  \n| status        | string | Active/Deprecated      |"
+id_pattern: ^p12_wn_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose, scope, and context of the workflow node.
+- Inputs/Outputs
+- Detailed description of input_type and output_type.
+- Execution
+- Steps, tools, or systems involved in processing.
+- Dependencies
+- List of required workflow nodes or external resources.
+- Status
+- Current lifecycle state (e.g., active, deprecated).
+- Metadata
+- Additional technical or operational details.
+constraints:
+- Input_type and output_type must conform to standardized formats.
+- Dependencies must reference valid workflow_node IDs.
+- Status transitions require approval from the domain owner.
+- Versioning follows semantic versioning (SemVer) rules.
+- Quality must be assigned by at least two peer reviewers.
+- File size must not exceed 4096 bytes.

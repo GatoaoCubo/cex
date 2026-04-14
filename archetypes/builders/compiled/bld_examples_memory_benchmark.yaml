@@ -1,0 +1,152 @@
+kind: examples
+id: bld_examples_memory_benchmark
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of memory_benchmark artifacts
+quality: null
+title: Examples Memory Benchmark
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_benchmark
+- builder
+- examples
+tldr: Golden and anti-examples of memory_benchmark artifacts
+domain: memory_benchmark construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: '---
+
+  title: "DDR4 Memory Latency Evaluation"
+
+  description: "Benchmark for assessing latency in DDR4 memory modules under varying load conditions"
+
+  authors: ["Jane Doe", "John Smith"]
+
+  date: "2023-11-15"
+
+  version: "1.2"
+
+  keywords: ["memory benchmark", "latency", "DDR4", "Intel", "MemTest86"]
+
+  ---
+
+
+  Objective: Measure random access latency in DDR4-3200 modules across 4K-16MB data sizes.
+
+
+  Methodology:
+
+  - Hardware: Intel Xeon Silver 4314, 2x DDR4-3200 32GB ECC
+
+  - Tools: MemTest86 v8.1, Intel Memory Bandwidth Benchmark v4.0
+
+  - Workloads: 100% random read/write, 10% sequential, 50% mixed
+
+
+  Metrics:
+
+  - Average latency (ns)
+
+  - Latency variance (%)
+
+  - Bandwidth (GB/s)
+
+
+  Setup:
+
+  - OS: Ubuntu 22.04 LTS
+
+  - Kernel: 5.15.0
+
+  - Memory configuration: 2x 16GB (non-ECC) vs 2x 16GB (ECC)
+
+
+  Results:
+
+  - ECC modules showed 12% higher latency under 16MB load
+
+  - MemTest86 detected 3 errors in non-ECC configuration'
+anti_example_1_general_benchmark_confusion: '---
+
+  title: "System Performance Test"
+
+  description: "Evaluates overall system performance"
+
+  authors: ["Bob Builder"]
+
+  date: "2023-11-10"
+
+  version: "0.5"
+
+  keywords: ["benchmark", "system", "CPU", "GPU"]
+
+  ---
+
+
+  Objective: Measure system performance across multiple workloads.
+
+
+  Methodology:
+
+  - Tools: Geekbench 6, 3DMark
+
+  - Workloads: CPU, GPU, storage
+
+
+  Metrics:
+
+  - Overall score (points)
+
+  - CPU score
+
+  - GPU score
+
+
+  Setup:
+
+  - OS: Windows 11
+
+  - Hardware: Generic "ProviderA" system'
+? why_it_fails_focuses_on_general_system_performance_rather_than_memory_specific_metrics_uses_vague_vendor_names_and_lacks_memory_related_workloads_or_evaluation_criteria
+: ''
+anti_example_2_architecture_specification: '---
+
+  title: "Memory Controller Design"
+
+  description: "Specification for a high-performance memory controller"
+
+  authors: ["Alice Architect"]
+
+  date: "2023-11-12"
+
+  version: "1.0"
+
+  keywords: ["memory architecture", "controller", "DDR5"]
+
+  ---
+
+
+  Objective: Define a memory controller for DDR5-6000 modules.
+
+
+  Methodology:
+
+  - Design: 8-channel interleaving
+
+  - Features: ECC support, error correction
+
+
+  Metrics:
+
+  - Bandwidth (GB/s)
+
+  - Latency (cycles)
+
+
+  Setup:
+
+  - Target: 128GB system with 8x DDR5-6000'
+? why_it_fails_describes_memory_architecture_design_rather_than_evaluation_focuses_on_system_specifications_not_benchmarking_methodology_or_results
+: ''

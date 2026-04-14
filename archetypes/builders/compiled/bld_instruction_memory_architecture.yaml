@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_memory_architecture
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for memory_architecture
+quality: null
+title: Instruction Memory Architecture
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_architecture
+- builder
+- instruction
+tldr: Step-by-step production process for memory_architecture
+domain: memory_architecture construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze memory hierarchy (cache, RAM, storage) for latency/throughput tradeoffs.
+- Evaluate DRAM, SRAM, and non-volatile memory (NVM) technologies for use case compatibility.
+- Study access patterns (sequential, random, burst) to define bandwidth requirements.
+- Investigate error correction codes (ECC, parity) and reliability metrics.
+- Benchmark existing architectures for performance bottlenecks.
+- Document memory addressing schemes (linear, segmented, virtual).
+phase_2_compose:
+- Define memory layers per SCHEMA.md (e.g., L1/L2/L3 cache, main memory).
+- Map components to OUTPUT_TEMPLATE.md’s structure (modules, interfaces, parameters).
+- Outline data flow between memory controllers and processors.
+- Specify cache coherence protocols (MESI, MOESI) in detail.
+- Detail ECC implementation for error detection/correction.
+- Integrate memory bandwidth calculations (transfer rate, latency).
+- Write module descriptions using OUTPUT_TEMPLATE.md’s terminology.
+- Align memory hierarchy with SCHEMA.md’s abstraction levels.
+- Finalize artifact with cross-references to schema and template.
+phase_3_validate:
+- '[ ] ✅ Schema compliance: All modules match SCHEMA.md’s definitions.'
+- '[ ] ✅ Technical accuracy: Latency/bandwidth claims match research benchmarks.'
+- '[ ] ✅ Use case alignment: Memory design supports P10’s INJECT function.'
+- '[ ] ✅ Peer review: No logical inconsistencies in hierarchy or protocols.'
+- '[ ] ✅ Output format: OUTPUT_TEMPLATE.md’s structure fully implemented.'

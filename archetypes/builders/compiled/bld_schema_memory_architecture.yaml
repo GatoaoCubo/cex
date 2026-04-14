@@ -1,0 +1,50 @@
+kind: schema
+id: bld_schema_memory_architecture
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for memory_architecture
+quality: null
+title: Schema Memory Architecture
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_architecture
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for memory_architecture
+domain: memory_architecture construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
+  \ ID pattern |  \n| kind | string | yes | \"memory_architecture\" | Fixed value |  \n| pillar | string | yes | \"P10\" |\
+  \ Fixed value |  \n| title | string | yes | null | Descriptive name |  \n| version | string | yes | \"1.0\" | Schema version\
+  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
+  | author | string | yes | null | Responsible party |  \n| domain | string | yes | \"memory\" | Technical domain |  \n| quality\
+  \ | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] | Keywords for categorization\
+  \ |  \n| tldr | string | yes | null | Summary in 1-2 sentences |  \n| memory_type | string | yes | null | E.g., RAM, ROM\
+  \ |  \n| capacity | integer | yes | null | Bytes |  \n| access_time | float | yes | null | Nanoseconds |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| error_rate | float | Percentage (e.g., 0.01%) |  \n| manufacturer\
+  \ | string | Vendor name |  \n| technology | string | E.g., DRAM, SRAM |"
+id_pattern: ^p10_marc_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose and scope of the memory architecture.
+- Memory Types
+- Classification (volatile/non-volatile, cache/main).
+- Performance Metrics
+- Capacity, speed, latency, and error rates.
+- Integration
+- Compatibility with hardware/software ecosystems.
+- Scalability
+- Expansion capabilities and limitations.
+- Security
+- Data protection mechanisms (e.g., ECC, encryption).
+constraints:
+- Memory capacity must be specified in bytes (integer).
+- Access time must be in nanoseconds (float).
+- Error rate must be a percentage (float, 0–100).
+- All memory types must be standardized (e.g., JEDEC).
+- Documentation must include manufacturer and technology details.
+- Versioning required for updates (YYYY-MM-DD format).

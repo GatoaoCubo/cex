@@ -1,0 +1,30 @@
+kind: collaboration
+id: bld_collaboration_procedural_memory
+pillar: P12
+llm_function: COLLABORATE
+purpose: How procedural_memory-builder works in crews with other builders
+quality: null
+title: Collaboration Procedural Memory
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- procedural_memory
+- builder
+- collaboration
+tldr: How procedural_memory-builder works in crews with other builders
+domain: procedural_memory construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Manages procedural memory tasks, such as skill acquisition, habit formation, and motor pattern encoding. Coordinates
+  with other builders to ensure seamless integration of learned procedures into autonomous systems.
+receives_from: "| Builder          | What                          | Format      |  \n|------------------|-------------------------------|-------------|\
+  \  \n| knowledge_card_builder | Declarative steps for procedures | JSON        |  \n| entity_memory_builder  | Contextual\
+  \ entity references   | YAML        |  \n| task_scheduler_builder | Action sequences to memorize   | ProtocolBuf |  \n|\
+  \ sensor_data_processor  | Real-time feedback for refinement | CSV        |"
+produces_for: "| Builder          | What                          | Format      |  \n|------------------|-------------------------------|-------------|\
+  \  \n| action_executor_builder | Encoded procedural routines   | Binary      |  \n| habit_former_builder    | Reinforcement\
+  \ triggers        | JSON        |  \n| skill_assessor_builder  | Proficiency metrics           | XML         |  \n| feedback_loop_builder\
+  \   | Error correction protocols    | ProtocolBuf |"
+boundary: Does NOT handle declarative knowledge (knowledge_card), entity facts (entity_memory), or high-level decision-making
+  (planning_builder). Those are managed by respective builders.

@@ -1,0 +1,37 @@
+kind: quality_gate
+id: p01_qg_reranker_config
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for reranker_config
+quality: null
+title: Quality Gate Reranker Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- reranker_config
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for reranker_config
+domain: reranker_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| metric | threshold | operator | scope |  \n|---|---|---|---|  \n| Schema ID | ^p01_rr_[a-z][a-z0-9_]+.yaml$\
+  \ | matches | H02 |"
+hard_gates: "| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter valid | Invalid YAML frontmatter\
+  \ |  \n| H02 | ID matches pattern ^p01_rr_[a-z][a-z0-9_]+.yaml$ | ID does not match schema pattern |  \n| H03 | kind field\
+  \ matches 'reranker_config' | kind field is not 'reranker_config' |  \n| H04 | 'model_type' field present | Missing 'model_type'\
+  \ |  \n| H05 | 'strategy' is in [valid_strategies] | Invalid strategy value |  \n| H06 | 'parameters' is non-empty object\
+  \ | Missing or invalid parameters |  \n| H07 | 'version' follows semver | Invalid version format |  \n| H08 | 'description'\
+  \ is non-empty string | Missing or empty description |  \n| H09 | 'enabled' is boolean | Invalid enabled value |  \n| H10\
+  \ | 'priority' is integer ≥0 | Invalid priority value |"
+soft_scoring: "| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|  \n| D01 | Model Clarity | 0.10 | Clear model\
+  \ type and purpose |  \n| D02 | Strategy Validity | 0.15 | Strategy aligns with use case |  \n| D03 | Parameter Completeness\
+  \ | 0.12 | All required parameters defined |  \n| D04 | Versioning | 0.10 | Semver compliant and documented |  \n| D05 |\
+  \ Description Quality | 0.10 | Concise and actionable |  \n| D06 | Enablement | 0.08 | Correct 'enabled' state |  \n| D07\
+  \ | Priority | 0.08 | Logical priority value |  \n| D08 | Documentation | 0.10 | Includes usage examples |  \n| D09 | Performance\
+  \ Metrics | 0.10 | Includes latency/accuracy benchmarks |  \n| D10 | Error Handling | 0.10 | Defines fallback behavior |"
+actions: "| Score | Action |  \n|---|---|  \n| ≥9.5 | GOLDEN |  \n| ≥8.0 | PUBLISH |  \n| ≥7.0 | REVIEW |  \n| <7.0 | REJECT\
+  \ |"
+bypass: "| conditions | approver | audit trail |  \n|---|---|---|  \n| Emergency fix required | Senior Engineer | Reason,\
+  \ date, approver signature |"

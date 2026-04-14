@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_prompt_optimizer
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for prompt_optimizer
+quality: null
+title: Instruction Prompt Optimizer
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- prompt_optimizer
+- builder
+- instruction
+tldr: Step-by-step production process for prompt_optimizer
+domain: prompt_optimizer construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze existing prompt frameworks for common inefficiencies
+- Identify 10+ governance-related prompt failure modes in P03 domain
+- Study optimization techniques from NLP literature (2020-2024)
+- Benchmark 5+ existing prompt compilation tools for performance metrics
+- Collect user feedback on current prompt governance workflows
+- Document schema requirements from SCHEMA.md for artifact compatibility
+phase_2_compose:
+- Define input/output schema using SCHEMA.md specifications
+- Set up Python environment with transformers and langchain libraries
+- Implement core prompt parsing function with token counting
+- Develop optimization engine using beam search for variant generation
+- Integrate schema validation layer from OUTPUT_TEMPLATE.md
+- Add governance rules engine for compliance checks
+- Implement feedback loop for iterative prompt refinement
+- 'Create CLI interface with command: `prompt_optimizer optimize --input`'
+- Finalize artifact with versioning and metadata tagging
+phase_3_validate: '[ ] ✅ Test with 50+ sample prompts from P03 domain [ ] ✅ Verify output quality against human-optimized
+  benchmarks [ ] ✅ Confirm schema compliance with SCHEMA.md requirements [ ] ✅ Conduct user testing with 10+ domain experts
+  [ ] ✅ Benchmark performance against industry standards (latency, accuracy)'

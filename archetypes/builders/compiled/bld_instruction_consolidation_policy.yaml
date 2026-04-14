@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_consolidation_policy
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for consolidation_policy
+quality: null
+title: Instruction Consolidation Policy
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- consolidation_policy
+- builder
+- instruction
+tldr: Step-by-step production process for consolidation_policy
+domain: consolidation_policy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze current memory allocation patterns across systems.
+- Identify stakeholders and their memory usage priorities.
+- Review existing consolidation policies for conflicts or gaps.
+- Benchmark memory utilization thresholds for critical workloads.
+- Evaluate hardware/software constraints affecting consolidation.
+- Document findings into a policy requirements matrix.
+phase_2_compose:
+- Set up environment with SCHEMA.md and OUTPUT_TEMPLATE.md.
+- 'Define policy scope: memory pools, lifecycle stages, and triggers.'
+- Map schema fields to policy parameters (e.g., `max_memory_usage`, `eviction_priority`).
+- Draft policy rules using template syntax for memory reclamation.
+- Align governance clauses with P10 Pillar compliance standards.
+- Specify consolidation thresholds for underutilized memory segments.
+- Embed audit trails for policy enforcement and exceptions.
+- Validate template variables against schema validation rules.
+- Finalize artifact with versioning and change control metadata.
+phase_3_validate: '[ ] [ ] Verify schema compliance using `validate_policy.py` script. [ ] [ ] Conduct stakeholder review
+  for alignment with P10 governance. [ ] [ ] Simulate policy execution against memory stress test scenarios. [ ] [ ] Audit
+  for adherence to memory lifecycle governance rules. [ ] [ ] Approve artifact with signed-off validation checklist.'

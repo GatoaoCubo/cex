@@ -1,0 +1,31 @@
+kind: tools
+id: bld_tools_prompt_technique
+pillar: P04
+llm_function: CALL
+purpose: Tools available for prompt_technique production
+quality: null
+title: Tools Prompt Technique
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- prompt_technique
+- builder
+- tools
+tldr: Tools available for prompt_technique production
+domain: prompt_technique construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles prompt templates\
+  \ into executable formats | During deployment |  \n| cex_score.py | Evaluates prompt effectiveness using metrics | After\
+  \ iteration |  \n| cex_retriever.py | Fetches relevant data for prompt context | When training data is needed |  \n| cex_doctor.py\
+  \ | Diagnoses and fixes prompt flaws | During debugging |  \n| cex_optimizer.py | Refines prompts for efficiency and accuracy\
+  \ | Post-initial design |  \n| cex_analyzer.py | Breaks down prompt structure for review | During validation |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_tester.py | Tests prompt robustness against\
+  \ edge cases | Pre-deployment |  \n| val_benchmark.py | Compares prompt performance against baselines | During iteration\
+  \ |  \n| val_debugger.py | Identifies logical errors in prompt logic | When outputs fail |  \n| val_checker.py | Ensures\
+  \ compliance with ethical guidelines | Before release |"
+external_references:
+- Hugging Face Transformers (for model integration)
+- LangChain (for workflow orchestration)
+- Prompt Engineering Toolkit (for advanced technique libraries)

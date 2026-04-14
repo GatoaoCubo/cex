@@ -1,0 +1,31 @@
+kind: tools
+id: bld_tools_self_improvement_loop
+pillar: P04
+llm_function: CALL
+purpose: Tools available for self_improvement_loop production
+quality: null
+title: Tools Self Improvement Loop
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- self_improvement_loop
+- builder
+- tools
+tldr: Tools available for self_improvement_loop production
+domain: self_improvement_loop construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Translates loop definitions\
+  \ into executable code | Initial setup |  \n| cex_score.py | Evaluates loop effectiveness using metrics | Iterative refinement\
+  \ |  \n| cex_retriever.py | Fetches external data to inform loop decisions | Data-driven phases |  \n| cex_doctor.py | Diagnoses\
+  \ and suggests fixes for loop failures | Error detection |  \n| cex_analyzer.py | Breaks down loop components for detailed\
+  \ inspection | Debugging |  \n| cex_optimizer.py | Adjusts parameters to improve loop efficiency | Performance tuning |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_validator.py | Checks loop consistency\
+  \ and adherence to rules | Pre-deployment |  \n| cex_monitor.py | Tracks loop behavior in real-time | Runtime |  \n| cex_feedback.py\
+  \ | Collects user input to refine loop goals | Post-iteration |  \n| cex_stress_test.py | Simulates edge cases to test loop\
+  \ robustness | Validation cycles |"
+external_references:
+- CEX Framework (Core Execution eXchange)
+- SMART Goals methodology
+- Google's Performance Lab (for metric design)

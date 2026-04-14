@@ -1,0 +1,29 @@
+kind: output_template
+id: bld_output_template_memory_benchmark
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for memory_benchmark production
+quality: null
+title: Output Template Memory Benchmark
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_benchmark
+- builder
+- output_template
+tldr: Template with vars for memory_benchmark production
+domain: memory_benchmark construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+test_cases: '| Test Case         | Memory Usage (MB) |
+
+  |-------------------|-------------------|
+
+  | {{test_case_1}}   | {{value_1}}       |
+
+  | {{test_case_2}}   | {{value_2}}       |'
+sample_code: "def allocate_memory(size_mb):\n    # Allocate and measure memory usage\n    buffer = bytearray(size_mb  1024\
+  \  1024)\n    return len(buffer) / (1024 * 1024)\n\n<!-- Replace {{name}} with benchmark identifier following p07_mb_[a-z][a-z0-9_]+\
+  \ pattern -->\n<!-- {{benchmark_name}}: Human-readable benchmark title -->\n<!-- {{test_case_1}}, {{value_1}}: Specific\
+  \ test scenario and measured memory -->"

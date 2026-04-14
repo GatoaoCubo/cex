@@ -1,0 +1,32 @@
+kind: examples
+id: bld_examples_self_improvement_loop
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of self_improvement_loop artifacts
+quality: null
+title: Examples Self Improvement Loop
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- self_improvement_loop
+- builder
+- examples
+tldr: Golden and anti-examples of self_improvement_loop artifacts
+domain: self_improvement_loop construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "title: Autonomous Reinforcement Learning System\nkind: self_improvement_loop\ntools: \n  - TensorFlow\n \
+  \ - Ray\n  - Prometheus\nbody: \n  - Agent deploys a reinforcement learning model in a simulated trading environment.\n\
+  \  - Model generates trades based on real-time market data.\n  - Performance metrics (profit, risk ratio) are logged to\
+  \ Prometheus.\n  - Every 24 hours, Ray orchestrates a hyperparameter tuning job using Bayesian optimization.\n  - New model\
+  \ versions are tested in a staging environment.\n  - Top-performing models replace the current version in production.\n\
+  \  - Loop repeats with updated reward functions derived from latest market trends."
+anti_example_1_no_feedback_mechanism: "title: Static Model Re-deployment\nkind: self_improvement_loop\ntools: \n  - TensorFlow\n\
+  body: \n  - Model trains on historical data once.\n  - Every month, same model is re-deployed without new data or evaluation.\n\
+  \  - No metrics collected, no performance comparison."
+why_it_fails: Focuses on immediate recovery rather than systemic improvement. The loop addresses symptoms (crashes) but not
+  underlying issues in the system design or code.
+anti_example_2_bug_specific_loop: "title: Crash Recovery Loop\nkind: self_improvement_loop\ntools: \n  - Kubernetes\nbody:\
+  \ \n  - System monitors for container crashes.\n  - On crash, restarts container with same configuration.\n  - Logs are\
+  \ stored but never analyzed for root causes."

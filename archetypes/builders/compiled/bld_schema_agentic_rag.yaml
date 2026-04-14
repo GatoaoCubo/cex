@@ -1,0 +1,48 @@
+kind: schema
+id: bld_schema_agentic_rag
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for agentic_rag
+quality: null
+title: Schema Agentic Rag
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- agentic_rag
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for agentic_rag
+domain: agentic_rag construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
+  \ ID Pattern |  \n| kind | string | yes | \"agentic_rag\" | CEX type |  \n| pillar | string | yes | \"P01\" | Strategic\
+  \ focus area |  \n| title | string | yes | null | Descriptive name |  \n| version | string | yes | \"1.0\" | Schema version\
+  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
+  | author | string | yes | null | Responsible party |  \n| domain | string | yes | \"agentic_rag\" | Application domain |\
+  \  \n| quality | null | yes | null | Peer-reviewed score |  \n| tags | list | yes | [] | Metadata keywords |  \n| tldr |\
+  \ string | yes | null | Summary (≤200 chars) |  \n| agent_type | string | yes | null | Agent specialization |  \n| knowledge_source\
+  \ | string | yes | null | Data origin |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| last_reviewed | datetime | Last peer review date |  \n| reviewers\
+  \ | list | Peer reviewers |"
+id_pattern: ^p01_ar_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose, scope, and use case for agentic_rag.
+- Agent Configuration
+- Parameters, capabilities, and constraints.
+- Knowledge Sources
+- Integration details and data provenance.
+- Execution Workflow
+- Step-by-step operational logic.
+- Compliance
+- Regulatory and ethical considerations.
+constraints:
+- File name must match ID Pattern exactly.
+- Total size must not exceed 5120 bytes.
+- Quality field must be assigned by peer review only.
+- Domain-specific fields (agent_type, knowledge_source) are mandatory.
+- Version must follow semantic versioning (e.g., 1.0.0).
+- All datetime fields must use ISO 8601 format.

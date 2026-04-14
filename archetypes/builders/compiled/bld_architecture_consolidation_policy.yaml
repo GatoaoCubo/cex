@@ -1,0 +1,36 @@
+kind: architecture
+id: bld_architecture_consolidation_policy
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of consolidation_policy -- inventory, dependencies
+quality: null
+title: Architecture Consolidation Policy
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- consolidation_policy
+- builder
+- architecture
+tldr: Component map of consolidation_policy -- inventory, dependencies
+domain: consolidation_policy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: "| ISO Name              | Role                          | Pillar | Status  |  \n|-----------------------|-------------------------------|--------|---------|\
+  \  \n| bld_manifest          | Policy structure definition   | P10    | Active  |  \n| bld_instruction       | Directive\
+  \ formulation         | P10    | Active  |  \n| bld_system_prompt     | AI behavior guidance          | P10    | Active\
+  \  |  \n| bld_schema            | Data format specification     | P10    | Active  |  \n| bld_quality_gate      | Compliance\
+  \ validation         | P10    | Active  |  \n| bld_output_template   | Policy rendering blueprint    | P10    | Active \
+  \ |  \n| bld_examples          | Use case references           | P10    | Active  |  \n| bld_knowledge_card    | Contextual\
+  \ information        | P10    | Active  |  \n| bld_architecture      | Structural policy mapping     | P10    | Active \
+  \ |  \n| bld_collaboration     | Stakeholder alignment         | P10    | Active  |  \n| bld_config            | Configuration\
+  \ management      | P10    | Active  |  \n| bld_memory            | Historical policy tracking    | P10    | Active  | \
+  \ \n| bld_tools             | Policy execution utilities    | P10    | Active  |"
+dependencies: "| From              | To              | Type           |  \n|-------------------|-----------------|----------------|\
+  \  \n| bld_manifest      | bld_config      | Configuration  |  \n| bld_instruction   | bld_system_prompt | Input      |\
+  \  \n| bld_quality_gate  | bld_schema      | Validation     |  \n| bld_output_template | bld_examples  | Reference     \
+  \ |  \n| bld_tools         | Policy Engine   | External       |  \n| bld_memory        | bld_config      | Storage     \
+  \   |"
+architectural_position: consolidation_policy acts as the central orchestrator within the CEX P10 pillar, integrating builder
+  ISOs to standardize policy creation, enforce quality gates, and ensure alignment with architectural principles across execution
+  environments. It bridges domain-specific logic with system-wide governance, enabling consistent policy deployment and auditability.

@@ -1,0 +1,35 @@
+kind: architecture
+id: bld_architecture_agentic_rag
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of agentic_rag -- inventory, dependencies
+quality: null
+title: Architecture Agentic Rag
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- agentic_rag
+- builder
+- architecture
+tldr: Component map of agentic_rag -- inventory, dependencies
+domain: agentic_rag construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: "| ISO Name             | Role                          | Pillar | Status  |  \n|----------------------|-------------------------------|--------|---------|\
+  \  \n| bld_manifest         | Core configuration container  | P01    | Active  |  \n| bld_instruction      | Task definition\
+  \ interface     | P01    | Active  |  \n| bld_system_prompt    | LLM behavior specification    | P01    | Active  |  \n\
+  | bld_schema           | Data structure definition     | P01    | Active  |  \n| bld_quality_gate     | Output validation\
+  \ engine      | P01    | Active  |  \n| bld_output_template  | Response formatting blueprint | P01    | Active  |  \n| bld_examples\
+  \         | Training data repository      | P01    | Active  |  \n| bld_knowledge_card   | Contextual information hub  \
+  \  | P01    | Active  |  \n| bld_architecture     | System blueprint definition   | P01    | Active  |  \n| bld_collaboration\
+  \    | Multi-agent coordination      | P01    | Active  |  \n| bld_config           | Parameter management          | P01\
+  \    | Active  |  \n| bld_memory           | State retention mechanism    | P01    | Active  |  \n| bld_tools          \
+  \  | Utility function library      | P01    | Active  |"
+dependencies: "| From           | To               | Type       |  \n|----------------|------------------|------------|  \n\
+  | bld_config     | bld_schema       | Reference  |  \n| bld_instruction| bld_system_prompt| Input      |  \n| bld_quality_gate|\
+  \ bld_output_template | Validation |  \n| bld_memory     | bld_tools        | Utilization|  \n| bld_manifest   | bld_instruction\
+  \  | Dependency |"
+architectural_position: agentic_rag operates as the knowledge orchestration layer within CEX P01, enabling dynamic retrieval-augmented
+  generation through structured component interactions. It bridges raw data (bld_knowledge_card) with executable logic (bld_instruction),
+  ensuring compliance via bld_quality_gate while maintaining adaptability through bld_config and bld_memory.

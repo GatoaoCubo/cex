@@ -1,0 +1,50 @@
+kind: schema
+id: bld_schema_visual_workflow
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for visual_workflow
+quality: null
+title: Schema Visual Workflow
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- visual_workflow
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for visual_workflow
+domain: visual_workflow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
+  \ ID Pattern |  \n| kind | string | yes | \"visual_workflow\" | Fixed value |  \n| pillar | string | yes | \"P12\" | Fixed\
+  \ value |  \n| title | string | yes | null | Descriptive name |  \n| version | string | yes | \"1.0\" | Semantic versioning\
+  \ |  \n| created | datetime | yes | null | ISO 8601 format |  \n| updated | datetime | yes | null | ISO 8601 format |  \n\
+  | author | string | yes | null | Owner's identifier |  \n| domain | string | yes | null | Application context |  \n| quality\
+  \ | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes | [] | Keywords for search |  \n\
+  | tldr | string | yes | null | Summary in 1 sentence |  \n| diagram_type | string | yes | null | E.g., flowchart, UML |\
+  \  \n| input_output | string | yes | null | Data flow description |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| tooling | string | Software used for creation |  \n| revision_history\
+  \ | list | Track changes |"
+id_pattern: ^p12_vw_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose, scope, and audience.
+- Diagram Specification
+- Type, symbols, and conventions.
+- Input/Output
+- Data sources, formats, and transformations.
+- Tooling
+- Software, libraries, and dependencies.
+- Version History
+- Changes, approvals, and authors.
+- Access Control
+- Permissions and usage policies.
+constraints:
+- ID must match ^p12_vw_[a-z][a-z0-9_]+.md$ exactly.
+- File size must not exceed 5120 bytes.
+- '`quality` field must be assigned by peer review, not self-scored.'
+- '`diagram_type` must be one of: flowchart, UML, ERD, sequence.'
+- '`input_output` must describe data flow explicitly.'
+- All required fields must be present and valid.

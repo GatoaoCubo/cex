@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_workflow_node
+pillar: P12
+llm_function: COLLABORATE
+purpose: How workflow_node-builder works in crews with other builders
+quality: null
+title: Collaboration Workflow Node
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- workflow_node
+- builder
+- collaboration
+tldr: How workflow_node-builder works in crews with other builders
+domain: workflow_node construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Defines individual workflow nodes, their behavior, and integration points. Ensures nodes adhere to contract standards
+  for execution and data passing.
+receives_from: "| Builder       | What               | Format     |  \n|---------------|--------------------|------------|\
+  \  \n| Config Builder | Node configuration | JSON       |  \n| DependencyMgr | Required libraries | YAML       |  \n| ValidationMgr\
+  \ | Schema rules       | SchemaDef  |"
+produces_for: "| Builder       | What               | Format     |  \n|---------------|--------------------|------------|\
+  \  \n| Orchestrator  | Node definition    | JSON       |  \n| RuntimeEngine | Execution plan     | Protobuf   |  \n| Registry\
+  \      | Metadata           | YAML       |"
+boundary: Does NOT handle full workflow orchestration (Orchestrator), UI configuration (Visual Workflow Builder), or cross-node
+  dependency resolution (DependencyMgr).

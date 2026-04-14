@@ -1,0 +1,44 @@
+kind: quality_gate
+id: p03_qg_prompt_technique
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for prompt_technique
+quality: null
+title: Quality Gate Prompt Technique
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- prompt_technique
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for prompt_technique
+domain: prompt_technique construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "(Table: metric, threshold, operator, scope)  \n| metric         | threshold              | operator | scope \
+  \                 |  \n|----------------|------------------------|----------|------------------------|  \n| Prompt Pattern\
+  \ | ^p03_pt_[a-z][a-z0-9_]+.md$ | matches  | Schema ID (H02)        |"
+hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID      | Check                          | Fail Condition         \
+  \                             |  \n|---------|--------------------------------|-----------------------------------------------------|\
+  \  \n| H01     | YAML frontmatter valid         | Invalid YAML syntax or missing required fields      |  \n| H02     | ID\
+  \ matches pattern             | ID does not match ^p03_pt_[a-z][a-z0-9_]+.md$      |  \n| H03     | kind field matches 'prompt_technique'\
+  \ | kind field is not 'prompt_technique'              |  \n| H04     | Prompt technique is unique     | Duplicate technique\
+  \ ID or name detected             |  \n| H05     | Description is non-empty       | Description field is missing or blank\
+  \               |  \n| H06     | No harmful patterns detected   | Contains banned keywords or unsafe templates        |\
+  \  \n| H07     | Example usage provided         | No example usage or example is incomplete           |"
+soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension         | Weight | Scoring Guide   \
+  \                                                              |  \n|-----|-------------------|--------|-------------------------------------------------------------------------------|\
+  \  \n| D1  | Clarity           | 0.15   | Clear, concise, and actionable (1.0) vs. vague (0.0)                         |\
+  \  \n| D2  | Originality       | 0.15   | Novel approach (1.0) vs. derivative or generic (0.0)                         |\
+  \  \n| D3  | Alignment         | 0.15   | Fully aligns with CEX guidelines (1.0) vs. partial or no alignment (0.0)     |\
+  \  \n| D4  | Safety            | 0.15   | No risks identified (1.0) vs. moderate/high risks (0.0)                      |\
+  \  \n| D5  | Formatting        | 0.10   | Adheres to schema (1.0) vs. formatting errors (0.0)                          |\
+  \  \n| D6  | Example Quality   | 0.15   | Realistic, complete example (1.0) vs. placeholder or missing (0.0)           |\
+  \  \n| D7  | Adaptability      | 0.15   | Works across use cases (1.0) vs. limited scope (0.0)                         |"
+actions: "(Table: Score | Action)  \n| Score      | Action                          |  \n|------------|---------------------------------|\
+  \  \n| GOLDEN     | Auto-publish and archive        |  \n| PUBLISH    | Manual review by domain expert  |  \n| REVIEW  \
+  \   | Flag for stakeholder feedback   |  \n| REJECT     | Reject and require rework       |"
+bypass: "(Table: conditions, approver, audit trail)  \n| conditions                          | approver         | audit trail\
+  \                          |  \n|-----------------------------------|------------------|--------------------------------------|\
+  \  \n| Exception for experimental use    | Senior Engineer  | Note in audit trail with justification |"

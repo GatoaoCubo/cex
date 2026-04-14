@@ -1,0 +1,23 @@
+kind: output_template
+id: bld_output_template_memory_architecture
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for memory_architecture production
+quality: null
+title: Output Template Memory Architecture
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_architecture
+- builder
+- output_template
+tldr: Template with vars for memory_architecture production
+domain: memory_architecture construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+example_memory_hierarchy: "| Level | Type   | Capacity | Access Time |\n|-------|--------|----------|-------------|\n| L1\
+  \    | SRAM   | 32KB     | 1ns         |\n| L2    | SRAM   | 256KB    | 5ns         |\n| L3    | DRAM   | 4GB      | 50ns\
+  \        |\n\n// Pseudocode for memory access\nvoid fetch_data(address) {\n    if (L1.contains(address)) {\n        return\
+  \ L1.read(address);\n    } else if (L2.contains(address)) {\n        return L2.read(address);\n    } else {\n        return\
+  \ L3.read(address);\n    }\n}"

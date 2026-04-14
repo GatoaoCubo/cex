@@ -1,0 +1,54 @@
+kind: schema
+id: bld_schema_procedural_memory
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for procedural_memory
+quality: null
+title: Schema Procedural Memory
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- procedural_memory
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for procedural_memory
+domain: procedural_memory construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field     | Type   | Required | Default | Notes                          |  \n|-----------|--------|----------|---------|--------------------------------|\
+  \  \n| id        | string | yes      | null    | Unique identifier              |  \n| kind      | string | yes      | null\
+  \    | Must be \"procedural_memory\"    |  \n| pillar    | string | yes      | null    | Must be \"P10\"               \
+  \   |  \n| title     | string | yes      | null    | Descriptive title              |  \n| version   | string | yes    \
+  \  | \"1.0\"   | Schema version                 |  \n| created   | date   | yes      | null    | ISO 8601 format       \
+  \         |  \n| updated   | date   | yes      | null    | ISO 8601 format                |  \n| author    | string | yes\
+  \      | null    | Creator name                   |  \n| domain    | string | yes      | null    | Application domain  \
+  \           |  \n| quality   | null   | yes      | null    | Never self-score; peer review assigns |  \n| tags      | list\
+  \   | yes      | []      | Keywords                       |  \n| tldr      | string | yes      | null    | Summary (max\
+  \ 256 chars)        |  \n| steps     | list   | yes      | []      | Ordered procedural steps       |  \n| conditions| list\
+  \   | yes      | []      | Preconditions/trigger events   |"
+recommended: "| Field       | Type   | Notes                  |  \n|-------------|--------|------------------------|  \n|\
+  \ outcome     | string | Expected result        |  \n| validation  | string | Verification method    |  \n| examples   \
+  \ | list   | Use-case illustrations |  \n| dependencies| list   | Required prerequisites |"
+id_pattern: ^p10_pm_[a-z][a-z0-9_]+.md$
+body_structure:
+- Introduction
+- Purpose and scope of the procedural memory.
+- Steps
+- Detailed, ordered sequence of actions.
+- Conditions
+- Triggers, inputs, or environmental requirements.
+- Outcome
+- Measurable result or state change.
+- Validation
+- Criteria for confirming correctness.
+- Examples
+- Real-world or hypothetical use cases.
+constraints:
+- Steps must be ordered and unambiguous.
+- Conditions must be testable and specific.
+- Outcome must align with domain goals.
+- Validation must reference measurable metrics.
+- File size must not exceed 4096 bytes.
+- Tags must use lowercase alphanumeric and underscores.

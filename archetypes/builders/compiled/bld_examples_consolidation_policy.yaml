@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_consolidation_policy
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of consolidation_policy artifacts
+quality: null
+title: Examples Consolidation Policy
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- consolidation_policy
+- builder
+- examples
+tldr: Golden and anti-examples of consolidation_policy artifacts
+domain: consolidation_policy construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "title: \"PyTorch Memory Consolidation Policy for Large Language Models\"\nkind: consolidation_policy\nvendor:\
+  \ Meta\nversion: 1.13.1\ndescription: \"Memory lifecycle management for PyTorch-based LLM inference workloads\"\n\nbody:\n\
+  \  memory_retention:\n    - stage: \"inference\"\n      duration: \"session_lifetime\"\n      strategy: \"reference_counting\"\
+  \n  eviction:\n    - trigger: \"memory_pressure\"\n      threshold: \"90% GPU utilization\"\n      action: \"evict_low_priority_tensors\"\
+  \n  garbage_collection:\n    - interval: \"every 100ms\"\n    - strategy: \"mark_and_sweep\"\n  logging:\n    - level: \"\
+  debug\"\n    - metrics: [\"resident_memory\", \"cached_tensors\", \"eviction_rate\"]"
+anti_example_1_confusing_with_memory_scope: "title: \"Incorrect Memory Scope Policy\"\nkind: consolidation_policy\nvendor:\
+  \ HuggingFace\nversion: 4.28.0\ndescription: \"Access control for model parameters\"\n\nbody:\n  access:\n    - role: \"\
+  inference\"\n      permissions: [\"read\", \"write\"]\n    - role: \"training\"\n      permissions: [\"read\", \"write\"\
+  , \"modify\"]"
+why_it_fails: Lacks essential policies for memory retention, eviction strategies, and monitoring metrics. A complete policy
+  must define full lifecycle management from allocation to deallocation.
+anti_example_2_missing_critical_policies: "title: \"Incomplete Memory Policy\"\nkind: consolidation_policy\nvendor: Google\n\
+  version: 2.5.0\ndescription: \"Basic memory management for TPU workloads\"\n\nbody:\n  garbage_collection:\n    - interval:\
+  \ \"every 5s\""

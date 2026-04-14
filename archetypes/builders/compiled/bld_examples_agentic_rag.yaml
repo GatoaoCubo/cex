@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_agentic_rag
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of agentic_rag artifacts
+quality: null
+title: Examples Agentic Rag
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- agentic_rag
+- builder
+- examples
+tldr: Golden and anti-examples of agentic_rag artifacts
+domain: agentic_rag construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\ncex_kind: agentic_rag\nname: LegalDocAssistant\ndescription: Agent-driven RAG for contract review using\
+  \ real tools\ntools:\n  - langchain\n  - weaviate\n  - openai/gpt-4\n---\nWorkflow:\n1. User submits contract text to LangChain\
+  \ agent\n2. Agent queries Weaviate vector store for relevant legal precedents\n3. Agent synthesizes findings with GPT-4\
+  \ to generate risk assessment\n4. Agent proposes amendments with cited precedents"
+anti_example_1_missing_agent_logic: "---\ncex_kind: agentic_rag\nname: SimpleRetriever\ndescription: Basic document search\
+  \ without generation\ntools:\n  - elasticsearch\n  - openai/text-embedding-ada-002\n---\nWorkflow:\n1. User submits query\n\
+  2. Elasticsearch returns matching documents\n3. Results displayed verbatim to user"
+why_it_fails: No retrieval component - agent operates solely on pre-trained knowledge without augmenting with external data
+  sources
+anti_example_2_missing_retrieval_component: "---\ncex_kind: agentic_rag\nname: PureAgent\ndescription: Chatbot with no external\
+  \ data access\ntools:\n  - langchain\n  - openai/gpt-4\n---\nWorkflow:\n1. User asks question\n2. GPT-4 generates response\
+  \ from training data\n3. Response delivered without external validation"

@@ -1,0 +1,38 @@
+---
+kind: config
+id: bld_config_procedural_memory
+pillar: P09
+llm_function: CONSTRAIN
+purpose: Naming, paths, limits for procedural_memory production
+quality: null
+title: "Config Procedural Memory"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [procedural_memory, builder, config]
+tldr: "Naming, paths, limits for procedural_memory production"
+domain: "procedural_memory construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Naming Convention  
+Pattern: p10_pm_{{name}}.md  
+Examples: p10_pm_memory.md, p10_pm_index.md  
+{{name}}: Descriptive identifier (alphanumeric, underscores)  
+
+## Paths  
+Artifacts: /data/procedural_memory/p10/{{name}}.md  
+Cache: /tmp/p10_pm_cache/  
+Logs: /var/log/p10_pm/  
+
+## Limits  
+max_bytes: 4096  
+max_turns: 10  
+effort_level: 3  
+
+## Hooks  
+pre_build: null  
+post_build: null  
+on_error: null  
+on_quality_fail: null

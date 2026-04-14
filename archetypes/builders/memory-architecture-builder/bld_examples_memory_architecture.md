@@ -1,0 +1,60 @@
+---
+kind: examples
+id: bld_examples_memory_architecture
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of memory_architecture artifacts
+quality: null
+title: "Examples Memory Architecture"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [memory_architecture, builder, examples]
+tldr: "Golden and anti-examples of memory_architecture artifacts"
+domain: "memory_architecture construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Golden Example
+---
+title: "Enterprise Memory Architecture with Intel Optane and DDR4"
+description: "Hybrid memory system integrating persistent and volatile memory"
+vendor: "Intel Corporation"
+tools: ["Intel Memory Latency Checker", "Micron Memory Test Tool"]
+---
+This architecture combines Intel Optane DC Persistent Memory Module 300 series (3D XPoint technology) with DDR4-2666 RDIMMs. The design includes:
+- 3-level hierarchy: CPU caches (L3) → DDR4 → Optane PMem
+- Memory controller with Intel's Persistent Memory Development Kit
+- ECC support across all memory types
+- Interconnect via UPI 3.0 for multi-socket scalability
+- Error correction using Intel's Memory Protection Technology
+- Power management with dynamic voltage scaling
+
+## Anti-Example 1: Single Memory Type Focus
+---
+title: "DDR4-Only Memory System"
+description: "Monolithic DRAM-based architecture"
+vendor: "Generic Vendor"
+tools: ["Generic Memory Tester"]
+---
+This design exclusively uses DDR4-2400 RDIMMs without any persistent memory or cache hierarchy. It lacks:
+- Memory tiering strategy
+- Error correction beyond standard ECC
+- Support for non-volatile data retention
+- Scalability beyond 2TB
+Why it fails: Fails to address memory hierarchy requirements, resulting in poor performance for workloads requiring persistent storage and limited scalability.
+
+## Anti-Example 2: Ignored Reliability Features
+---
+title: "Basic Memory Configuration"
+description: "Minimalist DRAM setup"
+vendor: "Unspecified Manufacturer"
+tools: ["Basic Memory Diagnostic"]
+---
+This architecture uses standard DDR3-1600 UDIMMs with no:
+- Error correction (no ECC)
+- Redundancy mechanisms
+- Temperature monitoring
+- Power fail protection
+Why it fails: Vulnerable to data corruption, lacks reliability features required for enterprise systems, and cannot meet modern memory reliability standards.

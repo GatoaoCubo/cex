@@ -1,0 +1,44 @@
+kind: quality_gate
+id: p10_qg_memory_architecture
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for memory_architecture
+quality: null
+title: Quality Gate Memory Architecture
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_architecture
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for memory_architecture
+domain: memory_architecture construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "| Metric               | Threshold       | Operator | Scope        |  \n|----------------------|------------------|----------|--------------|\
+  \  \n| Design completeness  | 100%             | >=       | System       |  \n| Latency              | 10ms            \
+  \ | <=       | Component    |  \n| Error rate           | 0.01%            | <=       | System       |  \n| Redundancy \
+  \          | 2x               | >=       | Component    |"
+hard_gates: "| ID                  | Check                          | Fail Condition                              |  \n|---------------------|--------------------------------|---------------------------------------------|\
+  \  \n| H01                 | YAML frontmatter valid         | Invalid YAML syntax or missing fields       |  \n| H02   \
+  \              | ID matches pattern             | ID does not conform to ^p10_marc_[a-z][a-z0-9_]+.md$ |  \n| H03      \
+  \           | kind field matches 'memory_architecture' | kind field is incorrect or missing         |  \n| p10_marc_hier_design\
+  \ | Memory hierarchy defined       | Missing cache, RAM, or persistent storage layers |  \n| p10_marc_redun_spec | Redundancy\
+  \ specifications      | No explicit redundancy strategy documented |  \n| p10_marc_access_pat | Access pattern compatibility\
+  \   | Incompatible with workload requirements     |  \n| p10_marc_sec_design | Security mechanisms present    | Missing\
+  \ encryption or access control        |  \n| p10_marc_perf_test  | Performance benchmarks exist   | No latency or throughput\
+  \ testing data       |"
+soft_scoring: "| Dim       | Dimension             | Weight | Scoring Guide                              |  \n|-----------|-----------------------|--------|--------------------------------------------|\
+  \  \n| D1        | Design completeness   | 0.20   | 100% complete = 1.0                        |  \n| D2        | Performance\
+  \           | 0.15   | Meets all latency/error thresholds = 1.0   |  \n| D3        | Reliability           | 0.15   | Full\
+  \ redundancy = 1.0                      |  \n| D4        | Security              | 0.10   | Encryption + access control\
+  \ = 1.0          |  \n| D5        | Scalability           | 0.10   | Supports future capacity = 1.0             |  \n| D6\
+  \        | Documentation         | 0.10   | Full spec + diagrams = 1.0                 |  \n| D7        | Testing      \
+  \         | 0.20   | Benchmarks + stress tests = 1.0            |"
+actions: "| Score     | Action         |  \n|-----------|----------------|  \n| >=9.5     | GOLDEN         |  \n| >=8.0  \
+  \   | PUBLISH        |  \n| >=7.0     | REVIEW         |  \n| <7.0      | REJECT         |"
+bypass: "| Conditions                          | Approver | Audit Trail              |  \n|------------------------------------|----------|--------------------------|\
+  \  \n| Emergency fix for critical failure | CTO      | Incident report + sign-off |  \n| Legacy system upgrade         \
+  \     | CTO + CISO | Risk assessment + sign-off |  \n| Prototype phase with limited scope | CTO      | Prototype approval\
+  \ + sign-off |"

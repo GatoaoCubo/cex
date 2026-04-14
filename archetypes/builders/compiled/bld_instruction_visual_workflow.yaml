@@ -1,0 +1,38 @@
+kind: instruction
+id: bld_instruction_visual_workflow
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for visual_workflow
+quality: null
+title: Instruction Visual Workflow
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- visual_workflow
+- builder
+- instruction
+tldr: Step-by-step production process for visual_workflow
+domain: visual_workflow construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze existing GUI workflow tools for feature parity
+- Identify user interaction patterns for drag-and-drop node placement
+- Map workflow elements (tasks, triggers, conditions) to visual components
+- Study UI/UX principles for hierarchical workflow visualization
+- Evaluate technical constraints (browser compatibility, performance)
+- Document requirements for real-time validation and error highlighting
+phase_2_compose:
+- Set up project structure using SCHEMA.md for data model alignment
+- Define node types in `config/nodes.yaml` per SCHEMA.md specifications
+- Implement canvas rendering with SVG for scalable workflow diagrams
+- Code drag-and-drop handlers using OUTPUT_TEMPLATE.md event hooks
+- Create property panels for node configuration (inputs/outputs)
+- Integrate validation rules from SCHEMA.md into workflow engine
+- Add persistence layer for saving/load workflows as JSON
+- Implement zoom/pan controls for complex workflow layouts
+- Finalize artifact with versioning and export capabilities
+phase_3_validate: '[ ] ✅ Verify schema compliance for all node types [ ] ✅ Test drag-and-drop with 100+ node load scenarios
+  [ ] ✅ Confirm error highlighting for invalid connections [ ] ✅ Validate export/import roundtrip integrity [ ] ✅ Ensure documentation
+  matches OUTPUT_TEMPLATE.md specs'

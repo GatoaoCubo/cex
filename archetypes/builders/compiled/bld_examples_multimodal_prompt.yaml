@@ -1,0 +1,32 @@
+kind: examples
+id: bld_examples_multimodal_prompt
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of multimodal_prompt artifacts
+quality: null
+title: Examples Multimodal Prompt
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- multimodal_prompt
+- builder
+- examples
+tldr: Golden and anti-examples of multimodal_prompt artifacts
+domain: multimodal_prompt construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "model: \"Salesforce/blip\"\nmodalities: [image, text, audio]\ntask: \"Generate a caption for an image and\
+  \ describe the corresponding audio\"\nprompt: |\n  [Image: A cat sitting on a windowsill]\n  [Audio: Meowing sound]\n  Describe\
+  \ this scene and the audio in detail."
+anti_example_1_text_only_prompt: 'model: "Salesforce/blip"
+
+  modalities: [text]
+
+  task: "Generate a caption"
+
+  prompt: "Describe this image of a cat on a windowsill"'
+why_it_fails: Includes model parameters (max_tokens, temperature) which belong to multi_modal_config, not the actual multimodal
+  prompt content.
+anti_example_2_model_configuration: "model: \"Salesforce/blip\"\nmodalities: [image, text]\ntask: \"Generate caption\"\nprompt:\
+  \ |\n  [Image: Cat on windowsill]\n  max_tokens: 50\n  temperature: 0.7"

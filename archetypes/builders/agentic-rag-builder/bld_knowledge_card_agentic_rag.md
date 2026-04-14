@@ -1,0 +1,62 @@
+---
+kind: knowledge_card
+id: bld_knowledge_card_agentic_rag
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for agentic_rag production
+quality: null
+title: "Knowledge Card Agentic Rag"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [agentic_rag, builder, knowledge_card]
+tldr: "Domain knowledge for agentic_rag production"
+domain: "agentic_rag construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Domain Overview  
+Agentic RAG combines retrieval-augmented generation (RAG) with autonomous agent capabilities, enabling systems to dynamically retrieve, reason, and generate responses in complex, evolving environments. It is critical in domains requiring real-time decision-making, such as healthcare diagnostics, financial risk analysis, and autonomous systems. Unlike static RAG, agentic variants incorporate feedback loops, memory, and goal-oriented behavior to adapt to contextual shifts. This pattern aligns with trends in AI agents that merge symbolic reasoning with sub-symbolic learning, as seen in multi-agent systems and cognitive architectures.  
+
+The rise of large language models (LLMs) has amplified the need for agentic RAG to address limitations in hallucination, data freshness, and alignment with external knowledge. By embedding agents with retrieval capabilities, systems can balance generative flexibility with factual grounding, a key requirement in regulated industries like legal and pharmaceutical sectors. This approach also supports explainability through traceable retrieval steps, aligning with AI governance frameworks.  
+
+## Key Concepts  
+| Concept | Definition | Source |  
+|--------|------------|--------|  
+| Retrieval-Augmented Generation (RAG) | Framework for enhancing LLM outputs with external knowledge | Lewis et al. (2020) |  
+| Agent-based Systems | Autonomous entities with goal-directed behavior and memory | Wooldridge (2002) |  
+| Knowledge Graphs | Structured repositories for semantic retrieval and reasoning | RDF/OWL standards |  
+| Prompt Engineering | Designing inputs to guide LLMs toward desired outputs | Shu et al. (2023) |  
+| ISO/IEC 23894 | AI trustworthiness standard emphasizing transparency and accountability | ISO/IEC |  
+| Memory Management | Mechanisms for storing and retrieving agent experiences | Santoro et al. (2018) |  
+| Multi-Agent Coordination | Synchronization of multiple agents for collaborative tasks | Stone & Veloso (2000) |  
+| Dynamic Contextual Adaptation | Real-time adjustment of retrieval strategies based on environment | Amershi et al. (2019) |  
+| Latent Space Alignment | Ensuring consistency between retrieved data and generative models | Chen et al. (2021) |  
+| Ethical AI Frameworks | Guidelines for mitigating bias and ensuring fairness | IEEE P7000 |  
+
+## Industry Standards  
+- ISO/IEC 23894:2021 (AI Trustworthiness)  
+- "Retrieval-Augmented Generation" (Lewis et al., 2020)  
+- AgentSpeak (Agent Programming Language)  
+- FAIR Principles (Findable, Accessible, Interoperable, Reusable)  
+- "Transformer" (Vaswani et al., 2017)  
+- Hugging Face Transformers Library  
+- "Prompt Engineering for Large Language Models" (Shu et al., 2023)  
+- "Memory-Augmented Neural Networks" (Santoro et al., 2018)  
+- IEEE P7000 Series (Ethical AI)  
+- "Multi-Agent Reinforcement Learning" (Li et al., 2020)  
+
+## Common Patterns  
+1. Dynamic retrieval based on agent-defined contextual filters  
+2. Agent state tracking via episodic memory for long-term coherence  
+3. Hybrid reasoning combining symbolic knowledge graphs and LLMs  
+4. Continuous learning loops with feedback from retrieval outcomes  
+5. Secure data access protocols for regulated knowledge sources  
+
+## Pitfalls  
+- Over-reliance on static data sources without real-time updates  
+- Ignoring agent autonomy leading to biased or unaligned outputs  
+- Poor memory management causing inconsistent retrieval behavior  
+- Misalignment between retrieval scope and generative intent  
+- Insufficient security measures for sensitive knowledge access

@@ -1,0 +1,47 @@
+---
+kind: architecture
+id: bld_architecture_procedural_memory
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of procedural_memory -- inventory, dependencies
+quality: null
+title: "Architecture Procedural Memory"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [procedural_memory, builder, architecture]
+tldr: "Component map of procedural_memory -- inventory, dependencies"
+domain: "procedural_memory construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Component Inventory
+| ISO Name           | Role                          | Pillar | Status  |
+|--------------------|-------------------------------|--------|---------|
+| bld_manifest       | Core procedural definition    | P10    | Active  |
+| bld_instruction    | Task-specific guidance        | P10    | Active  |
+| bld_system_prompt  | LLM alignment framework       | P10    | Active  |
+| bld_schema         | Data structure specification  | P10    | Active  |
+| bld_quality_gate   | Validation checkpoint         | P10    | Active  |
+| bld_output_template| Format standardization        | P10    | Active  |
+| bld_examples       | Training sample repository    | P10    | Active  |
+| bld_knowledge_card | Domain-specific knowledge     | P10    | Active  |
+| bld_architecture   | System blueprint              | P10    | Active  |
+| bld_collaboration  | Multi-agent coordination      | P10    | Active  |
+| bld_config         | Runtime parameter store       | P10    | Active  |
+| bld_memory         | State persistence layer       | P10    | Active  |
+| bld_tools          | Execution utility suite       | P10    | Active  |
+
+## Dependencies
+| From              | To                  | Type        |
+|-------------------|---------------------|-------------|
+| bld_manifest      | bld_config          | configuration|
+| bld_instruction   | bld_system_prompt   | dependency  |
+| bld_quality_gate  | bld_schema          | validation  |
+| bld_output_template | bld_examples     | reference   |
+| bld_memory        | bld_tools           | integration |
+| bld_collaboration | bld_architecture    | orchestration|
+
+## Architectural Position
+procedural_memory serves as the execution backbone of CEX P10, enabling structured knowledge construction through ISO-driven workflows. It ensures procedural consistency across memory, instruction, and validation layers while maintaining alignment with system architecture and quality standards.

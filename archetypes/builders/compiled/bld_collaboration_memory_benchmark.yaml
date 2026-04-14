@@ -1,0 +1,26 @@
+kind: collaboration
+id: bld_collaboration_memory_benchmark
+pillar: P12
+llm_function: COLLABORATE
+purpose: How memory_benchmark-builder works in crews with other builders
+quality: null
+title: Collaboration Memory Benchmark
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- memory_benchmark
+- builder
+- collaboration
+tldr: How memory_benchmark-builder works in crews with other builders
+domain: memory_benchmark construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Generates and validates memory-specific benchmark tests, ensuring alignment with evaluation criteria and data integrity.
+receives_from: "| Builder       | What                  | Format  |  \n|---------------|-----------------------|---------|\
+  \  \n| scenario_gen | Test scenarios        | JSON    |  \n| config_mgr    | Memory config params  | YAML    |  \n| data_prov\
+  \     | Synthetic memory data | CSV     |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| eval_suite    | Memory benchmark suite| JSON        |  \n| report_gen    | Evaluation report     | Markdown    |\
+  \  \n| metrics_agg   | Performance metrics   | Parquet     |"
+boundary: Does NOT handle system architecture design (memory_architecture) or general-purpose benchmarks (benchmark_suite).

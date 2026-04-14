@@ -1,0 +1,48 @@
+kind: schema
+id: bld_schema_self_improvement_loop
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for self_improvement_loop
+quality: null
+title: Schema Self Improvement Loop
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- self_improvement_loop
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for self_improvement_loop
+domain: self_improvement_loop construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
+  \ Pattern |  \n| kind | string | yes | \"self_improvement_loop\" |  |  \n| pillar | string | yes | \"P11\" |  |  \n| title\
+  \ | string | yes |  | Descriptive name |  \n| version | string | yes | \"1.0\" |  |  \n| created | datetime | yes |  | ISO\
+  \ 8601 format |  \n| updated | datetime | yes |  | ISO 8601 format |  \n| author | string | yes |  |  |  \n| domain | string\
+  \ | yes | \"self_improvement\" |  |  \n| quality | null | yes | null | Never self-score; peer review assigns |  \n| tags\
+  \ | list | yes | [] | Keywords for categorization |  \n| tldr | string | yes |  | Summary of purpose |  \n| loop_stages\
+  \ | list | yes | [] | Sequential steps in the loop |  \n| metrics | dict | yes | {} | Quantifiable outcomes |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| feedback_sources | list | External/peer inputs |  \n| review_cycle\
+  \ | string | Frequency of evaluation |"
+id_pattern: ^p11_sil_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Purpose of the self-improvement loop
+- Alignment with organizational goals
+- Stages
+- Detailed breakdown of `loop_stages` (e.g., assessment, planning, execution, review)
+- Metrics
+- Definition of `metrics` (e.g., KPIs, success criteria)
+- Feedback Mechanisms
+- Sources and integration of `feedback_sources`
+- Review Process
+- Frequency (`review_cycle`), responsible parties, and outcomes
+constraints:
+- '`loop_stages` must be sequential and actionable'
+- '`metrics` must be quantifiable and time-bound'
+- '`feedback_sources` must include at least two distinct channels'
+- '`review_cycle` must be specified in ISO 8601 duration format'
+- All fields must adhere to ASCII encoding
+- Total file size must not exceed 5120 bytes
