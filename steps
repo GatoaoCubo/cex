@@ -34,4 +34,3 @@ A *steps* is a structured workflow for evaluating and improving system prompts. 
 | Haystack | `Pipeline` with nodes | Explicit DAG execution with phase transitions |
 | AutoGen | `GroupChat` workflow | Multi-agent conversation patterns |
 | Microsoft Semantic Kernel | `Plan` / `Kernel
-```
