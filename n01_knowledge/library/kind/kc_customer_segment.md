@@ -5,32 +5,30 @@ title: Customer Segment Definition
 version: 1.0.0
 quality: null
 pillar: P01
-description: Customer segment/ICP definition artifact with firmographics and needs
 ---
 
-# Customer Segment Definition
+Customer segments are distinct groups of customers with similar needs, characteristics, and behaviors. This definition includes:
 
-A customer segment is a group of customers with similar characteristics, needs, and behaviors. This definition includes:
+1. **Firmographics** (demographic data):
+   - Industry type (e.g., SaaS, manufacturing)
+   - Company size (employee count, revenue range)
+   - Geographic location (country, region, city)
+   - Organizational structure (startup, enterprise, mid-market)
 
-## Firmographics
-- Industry: Technology, Healthcare, Finance, etc.
-- Company size: Small (1-50 employees), Medium (51-500), Large (501+)
-- Location: Geographic regions (North America, Europe, Asia-Pacific)
-- Revenue range: $0-$500K, $500K-$1M, $1M+
-- Technology stack: Cloud-native, On-premises, Hybrid
+2. **Psychographics** (behavioral data):
+   - Buying patterns (frequency, volume, timing)
+   - Decision-making processes (internal vs external)
+   - Pain points (operational, financial, strategic)
+   - Goals (growth, efficiency, innovation)
 
-## Needs Analysis
-- Pain points: 
-  - Operational inefficiencies
-  - Customer acquisition costs
-  - Product integration challenges
-- Goals:
-  - Scalable solutions
-  - Cost optimization
-  - Market expansion
-- Decision criteria:
-  - ROI timelines
-  - Integration capabilities
-  - Vendor ecosystem compatibility
+3. **Technographic** (technology usage):
+   - Current tech stack (CRM, ERP, analytics tools)
+   - Digital maturity (automation level, integration depth)
+   - Data infrastructure (on-premise, cloud, hybrid)
 
-This segment definition serves as a foundation for targeted marketing, product development, and sales strategies.
+4. **Need-based segmentation**:
+   - Functional needs (product features, service levels)
+   - Strategic needs (market expansion, cost reduction)
+   - Operational needs (process optimization, compliance)
+
+This artifact provides the foundation for targeted marketing, product development, and resource allocation. Segmentation should be data-driven, validated through market research, and regularly updated to reflect evolving customer dynamics.
