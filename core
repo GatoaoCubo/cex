@@ -1,55 +1,99 @@
 ---
 id: kc_integration_guide
 kind: knowledge_card
-title: Integration Guide
+title: Integration Guide for Platform Partners and Paid-Tier Onboarding
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-# Integration Guide
+# Integration Guide for Platform Partners and Paid-Tier Onboarding
 
-## Purpose
-Provide platform partners and paid-tier users with technical specifications, API endpoints, and onboarding workflows for seamless system integration. Covers authentication, data synchronization, and compliance requirements.
+This guide provides step-by-step instructions for integrating with our platform, tailored for platform partners and paid-tier users. It covers API setup, authentication, data formats, and best practices, incorporating structured workflows from CEX's 8F pipeline and phase-based review patterns.
 
-## Structure
-1. **Onboarding Workflow** - Step-by-step integration process (e.g., API key registration, sandbox testing)
-2. **Technical Requirements** - Supported protocols, rate limits, and error codes
-3. **API Endpoints** - RESTful endpoints for data exchange (e.g., /v1/integrate, /v1/validate)
-4. **Security Guidelines** - OAuth 2.0 implementation, encryption standards, and audit trails
-5. **Compliance** - GDPR, SOC2, and data residency requirements
+## Key Concepts
+- **API Endpoints**: Core integration points for data exchange
+- **Authentication**: OAuth 2.0 with JWT tokens
+- **Data Formats**: JSON API with HAL+JSON format
+- **Rate Limits**: 100 requests/minute for free tier, 1000/minute for paid
+- **8F Pipeline**: Full execution flow for structured workflows
+- **GDP Enforcement**: Guided decision protocol for quality gates
 
-## Content Guidelines
-- Use 🔐 for security icons
-- Add 📡 to highlight API endpoints
-- Include "Partner Portal" badge for integration management
-- Use 2-3 sample API requests
-- Add 📊 for performance benchmarking suggestions
+## Integration Steps (Structured Workflow)
+1. **Account Setup**  
+   - Create API credentials in the developer console
+   - Enable required API scopes
+   - Register for CEX 8F pipeline access
 
-## Example
+2. **Authentication Flow**  
+   - Obtain client ID and secret
+   - Implement OAuth 2.0 client credentials grant
+   - Store JWT tokens securely with rotation
+   - Use CEX GDP enforcement for token validation
+
+3. **API Integration**  
+   - Use `/api/v1/integrate` endpoint for initial setup
+   - Implement webhooks for real-time updates
+   - Use `/api/v1/data` for bulk operations
+   - Apply phase-based review patterns for data validation
+
+4. **Testing & Validation**  
+   - Use sandbox environment for testing
+   - Validate responses against schema
+   - Monitor API health metrics
+   - Execute quality gates from CEX's 8F pipeline
+
+## Best Practices
+- **Security**: Always use HTTPS and token rotation
+- **Performance**: Batch requests where possible
+- **Monitoring**: Implement error logging and retries
+- **Documentation**: Keep API versioning consistent
+- **Integration**: Use SDK patterns for multi-language support
+
+## Troubleshooting
+- **401 Unauthorized**: Check token validity via GDP enforcement
+- **429 Too Many Requests**: Implement rate limiting with backoff
+- **500 Internal Server Error**: Contact support with logs
+- **Connection Issues**: Verify network permissions and firewall rules
+
+## SDK Integration Patterns
+### Python
+```python
+from cex_sdk import CEXClient
+
+client = CEXClient(
+    api_key="your_api_key",
+    model="claude-3-5-sonnet",
+    timeout=30
+)
 ```
-🔐 Onboarding Workflow:
-1. Register API key in Partner Portal
-2. Validate credentials via /v1/validate endpoint
-3. Test sandbox integration with sample data
-4. Monitor logs in /v1/logs for troubleshooting
 
-📡 API Endpoints:
-- POST /v1/integrate (OAuth 2.0 required)
-- GET /v1/status (check integration health)
-- DELETE /v1/revoke (remove access)
+### JavaScript
+```javascript
+const client = new CEXClient({
+    apiKey: "your_api_key",
+    model: "gpt-4",
+    timeout: 30
+});
 
-📊 Performance Benchmarks:
-- 99.9% uptime SLA
-- <50ms latency for API calls
-- 10,000+ concurrent connections
+const response = await client.runPrompt({
+    prompt: "What is the capital of France?",
+    temperature: 0.7
+});
 ```
 
-## Optimization Tips
-- Add flowcharts for integration stages
-- Include error code reference tables
-- Use animated API request demos
-- Add "Integration Health Check" dashboard
-- Include 30-day trial period for new partners
+### Java
+```java
+CEXClient client = new CEXClient.Builder()
+    .setApiKey("your_api_key")
+    .setModel("codex-3")
+    .setTimeout(30)
+    .build();
+
+List<CEXResponse> results = client.batchProcess(List.of(
+    "What is the square root of 16?",
+    "Solve 2+2"
+));
 ```
-```
+
+For advanced integration patterns and enterprise features, consult our CEX 8F pipeline documentation and SDK reference.
