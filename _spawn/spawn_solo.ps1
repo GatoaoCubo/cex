@@ -5,7 +5,7 @@ param(
     [string]$nucleus,
     [string]$task = "",
     [switch]$interactive,
-    [ValidateSet('claude','gemini','codex','ollama','auto')]
+    [ValidateSet('claude','gemini','codex','ollama','litellm','auto')]
     [string]$cli = ""   # if empty, read from nucleus_models.yaml
 )
 

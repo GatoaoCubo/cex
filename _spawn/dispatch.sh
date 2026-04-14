@@ -80,6 +80,20 @@ case "$MODE" in
         export OLLAMA_MODEL="$MODEL"
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus "$NUCLEUS" -task "$TASK" -cli ollama -interactive
         ;;
+    grid-litellm)
+        # Interactive 3x2 tiled, each window runs boot/n0X_litellm.ps1 -> litellm proxy
+        # Proxy must be running: powershell -File boot/litellm_proxy.ps1
+        MISSION="${1:-DEFAULT}"
+        echo "[DISPATCH] Grid: $MISSION (cli=litellm, proxy=:4000, interactive)"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -cli litellm -interactive
+        ;;
+    solo-litellm)
+        # Interactive single window, boot/n0X_litellm.ps1 -> litellm proxy
+        NUCLEUS="${1:-n03}"
+        TASK="${2:-}"
+        echo "[DISPATCH] Solo-LiteLLM: $NUCLEUS (model alias cex-$NUCLEUS, interactive)"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus "$NUCLEUS" -task "$TASK" -cli litellm -interactive
+        ;;
     status)
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_monitor.ps1
         ;;
@@ -148,7 +162,7 @@ case "$MODE" in
         echo "[DONE] Ollama Grid complete: $MISSION"
         ;;
     *)
-        echo "Usage: bash _spawn/dispatch.sh {solo|grid|grid-gemini|grid-codex|grid-ollama|solo-ollama|ollama|ollama-grid|status|stop} [args]"
+        echo "Usage: bash _spawn/dispatch.sh {solo|grid|grid-gemini|grid-codex|grid-ollama|solo-ollama|grid-litellm|solo-litellm|ollama|ollama-grid|status|stop} [args]"
         echo ""
         echo "  solo n03 \"task\"           Spawn 1 Claude Code nucleus (interactive)"
         echo "  grid MISSION              Spawn up to 6 Claude Code nuclei (interactive 3x2)"
@@ -156,6 +170,8 @@ case "$MODE" in
         echo "  grid-codex MISSION        Spawn up to 6 Codex CLI nuclei"
         echo "  solo-ollama n04 qwen3:8b \"task\"  Spawn 1 Ollama nucleus (interactive window)"
         echo "  grid-ollama MISSION qwen3:8b     Spawn up to 6 Ollama nuclei (interactive 3x2, free)"
+        echo "  solo-litellm n04 \"task\"          Spawn 1 LiteLLM nucleus (proxy decides backend)"
+        echo "  grid-litellm MISSION             Spawn up to 6 LiteLLM nuclei (interactive 3x2, proxy)"
         echo "  ollama n03 qwen3:8b       Run 1 nucleus via Ollama headless (cex_8f_runner)"
         echo "  ollama-grid MISSION ...   Run all nuclei via Ollama headless"
         echo "  status                    Monitor running nuclei"

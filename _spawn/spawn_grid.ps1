@@ -11,7 +11,7 @@ param(
     [int]$pollSeconds = 30,
     [int]$maxMinutes = 45,
     [int]$maxSlots = 6,
-    [ValidateSet('claude','gemini','codex','ollama','auto')]
+    [ValidateSet('claude','gemini','codex','ollama','litellm','auto')]
     [string]$cli = "claude"
 )
 
@@ -175,10 +175,12 @@ function Resolve-NucleusCli($nucleus) {
 # Returns comma-separated PID list, "-" if none found.
 function Find-WorkerPids($wrapperPid, $cli) {
     $targetNames = switch ($cli) {
-        "claude" { @("claude","node") }
-        "gemini" { @("gemini","node") }
-        "codex"  { @("codex") }
-        default  { @("claude","codex","gemini","node") }
+        "claude"  { @("claude","node") }
+        "gemini"  { @("gemini","node") }
+        "codex"   { @("codex") }
+        "ollama"  { @("python") }
+        "litellm" { @("python") }
+        default   { @("claude","codex","gemini","node","python") }
     }
     $descendants = Get-DescendantPids $wrapperPid
     $workers = $descendants | Where-Object { $targetNames -contains $_.Name }
