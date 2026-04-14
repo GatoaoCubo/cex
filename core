@@ -1,29 +1,37 @@
 ---
-id: kc_fhir_agent_capability
+id: kc_nucleus_def
 kind: knowledge_card
-title: HL7 FHIR R5 AI Agent Capability Declaration
+title: Nucleus Definition (N00-N07)
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-A HL7 FHIR R5 AI Agent Capability Declaration defines clear standards for AI agents operating in healthcare systems via SMART on FHIR. It includes:
+# CEX Nucleus Definition (N00-N07)
 
-1. **SMART on FHIR Scopes** - Access permissions for reading/writing FHIR resources (e.g., Patient, Observation)
-2. **PHI Handling** - Mandatory encryption of protected health information (PHI) in transit and at rest
-3. **CDS Hooks** - Integration with systems providing clinical decision support based on evidence
-4. **AI Transparency** - Requirements to document AI model origins, bias mitigation, and decision explainability
+A CEX nucleus is a self-contained, fractal subsystem implementing 1 of 7 core functions:
 
-This declaration ensures:
-- Compliance with data protection laws like HIPAA and GDPR
-- Compatibility between different electronic health record (EHR) systems
-- Tracking of AI decisions in healthcare
-- Secure access control to sensitive patient data
+- **N00** (Genesis): Archetypal framework for creating new nuclei  
+- **N01** (Intelligence): Research/analysis with 200K token context  
+- **N02** (Marketing): Copywriting with 200K token context  
+- **N03** (Builder): Code/test/deploy with 1M token context  
+- **N04** (Knowledge): Documentation with 200K token context  
+- **N05** (Code): Code testing with 200K token context  
+- **N07** (Orchestration): Multi-nucleus coordination  
 
-Key components include:
-- CapabilityStatement assertions in FHIR
-- Security context for data access
-- API version compatibility guarantees
-- Detailed documentation about used AI models
+Each nucleus owns 12 pillars (P01-P12) and implements:
 
-This declaration enables secure AI integration in healthcare while maintaining patient data confidentiality and regulatory compliance.
+| Field | Description |
+|-------|-------------|
+| nucleus_id | N00-N07 identifier |
+| role | Core function (Genesis, Research, etc.) |
+| pillars_owned | P01-P12 implementation |
+| sin_lens | 8F pipeline compliance |
+| cli_binding | Command-line interface |
+| model_tier | Model capability tier |
+| boot_script | Startup automation |
+| agent_card_path | Subagent configuration |
+| crew_templates_exposed | Template availability |
+| domain_agents | Specialized subagents |
+
+The fractal structure mirrors N00's 12 pillars, creating a recursive architecture for scalable knowledge systems.
