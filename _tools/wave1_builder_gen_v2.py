@@ -64,11 +64,21 @@ WAVE3_KINDS = [
     "self_improvement_loop",
 ]
 
+WAVE4_KINDS = [
+    "ab_test_config", "course_module", "subscription_tier",
+    "user_journey", "compliance_checklist", "usage_report",
+    "rbac_policy", "audit_log", "onboarding_flow",
+    "pricing_page", "cohort_analysis", "referral_program",
+    "enterprise_sla", "data_residency", "sso_config",
+    "white_label_config", "usage_quota", "customer_segment",
+]
+
 WAVE_MAP = {
     "1": WAVE1_KINDS,
     "2": WAVE2_KINDS,
     "3": WAVE3_KINDS,
-    "all": WAVE1_KINDS + WAVE2_KINDS + WAVE3_KINDS,
+    "4": WAVE4_KINDS,
+    "all": WAVE1_KINDS + WAVE2_KINDS + WAVE3_KINDS + WAVE4_KINDS,
 }
 
 # ============================================================
