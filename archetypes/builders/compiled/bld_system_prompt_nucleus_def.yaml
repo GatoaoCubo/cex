@@ -1,7 +1,7 @@
 kind: system_prompt
 id: bld_system_prompt_nucleus_def
 pillar: P03
-llm_function: PRODUCE
+llm_function: BECOME
 purpose: LLM guidance for nucleus_def production
 quality: null
 title: System Prompt Nucleus Def
