@@ -1,0 +1,37 @@
+kind: examples
+id: bld_examples_ab_test_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of ab_test_config artifacts
+quality: null
+title: Examples Ab Test Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ab_test_config
+- builder
+- examples
+tldr: Golden and anti-examples of ab_test_config artifacts
+domain: ab_test_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: ab_test_config\ntitle: \"Homepage CTA Optimization\"\ndescription: \"A/B test to evaluate impact of\
+  \ CTA button color and headline text on conversion rate\"\nexperiment_name: \"HomepageCTAExperiment\"\ntool: \"Google Optimize\"\
+  \nvariables:\n  - name: primary_button_color\n    variants: [\"#FF4B5C\", \"#3498DB\", \"#2ECC71\"]\n  - name: hero_headline\n\
+  \    variants: [\"Upgrade Now\", \"Get Started Today\", \"Join Thousands\"]\naudience:\n  - segment: \"US users\"\n  - segment:\
+  \ \"Mobile Safari users\"\nmetrics:\n  - conversion_rate\n  - click_through_rate\nschedule:\n  start: \"2023-11-01\"\n \
+  \ end: \"2023-12-15\""
+anti_example_1_confusing_with_feature_flag: 'kind: feature_flag
+
+  title: "Toggle for new button color"
+
+  description: "Enable/disable blue button on checkout page"
+
+  flag_name: "checkout_button_color"
+
+  state: "off"'
+why_it_fails: 'Incomplete configuration missing essential fields: experiment name, tool integration, audience definition,
+  metrics tracking, and schedule. Cannot be implemented or measured as a valid A/B test.'
+anti_example_2_missing_critical_fields: "kind: ab_test_config\ntitle: \"CTA Experiment\"\ndescription: \"Test different CTA\
+  \ texts\"\nvariables:\n  - name: call_to_action\n    variants: [\"Sign Up\", \"Register Now\"]"

@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_ab_test_config
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for ab_test_config production
+quality: null
+title: Output Template Ab Test Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ab_test_config
+- builder
+- output_template
+tldr: Template with vars for ab_test_config production
+domain: ab_test_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
