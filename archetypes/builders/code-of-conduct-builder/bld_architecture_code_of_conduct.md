@@ -30,7 +30,7 @@ density_score: 0.87
 | bld_architecture    | This document: ISO map + dependencies         | P08    | Active |
 | bld_collaboration   | Cross-builder workflow coordination           | P12    | Active |
 | bld_config          | Naming, paths, limits, hooks                  | P09    | Active |
-| bld_memory          | Learned patterns and pitfalls (learning_record) | P10  | Active |
+| bld_memory          | Learned patterns and pitfalls (memory)          | P10  | Active |
 | bld_tools           | Production + validation tools (CEX-native)    | P04    | Active |
 
 ## Dependencies

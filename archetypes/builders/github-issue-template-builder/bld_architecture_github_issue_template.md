@@ -17,21 +17,21 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
-| ISO Name              | Role                          | Pillar | Status  |  
-|-----------------------|-------------------------------|--------|---------|  
-| bld_manifest          | Template structure definition | P05    | Active  |  
-| bld_instruction       | User guidance logic           | P05    | Active  |  
-| bld_system_prompt     | LLM interaction framework     | P05    | Active  |  
-| bld_schema            | Data validation rules         | P05    | Active  |  
-| bld_quality_gate      | Compliance verification       | P05    | Active  |  
-| bld_output_template   | Response formatting           | P05    | Active  |  
-| bld_examples          | Sample issue patterns         | P05    | Active  |  
-| bld_knowledge_card    | Contextual information hub    | P05    | Active  |  
-| bld_architecture      | System blueprint              | P05    | Active  |  
-| bld_collaboration     | Multi-stakeholder workflow    | P05    | Active  |  
-| bld_config            | Parameter management          | P05    | Active  |  
-| bld_memory            | Session state tracking        | P05    | Active  |  
-| bld_tools             | External integration hub      | P05    | Active  |  
+| ISO Name              | Role                                                        | Pillar | Status  |  
+|-----------------------|-------------------------------------------------------------|--------|---------|  
+| bld_manifest          | Builder identity, capabilities, routing                     | P05    | Active  |  
+| bld_instruction       | 3-phase production process (Research, Compose, Validate)    | P03    | Active  |  
+| bld_system_prompt     | LLM persona and ALWAYS/NEVER rules                          | P03    | Active  |  
+| bld_schema            | Frontmatter fields + body structure (SSOT)                  | P06    | Active  |  
+| bld_quality_gate      | HARD gates (H01-H09) + SOFT scoring (D01-D05)               | P11    | Active  |  
+| bld_output_template   | Production template with var guidance                       | P05    | Active  |  
+| bld_examples          | Golden + anti-examples with failure analysis                | P07    | Active  |  
+| bld_knowledge_card    | Domain knowledge: GitHub issue template standards           | P01    | Active  |  
+| bld_architecture      | This document: ISO map + dependencies                       | P08    | Active  |  
+| bld_collaboration     | Cross-builder workflow coordination                         | P12    | Active  |  
+| bld_config            | Naming, paths, limits, hooks                                | P09    | Active  |  
+| bld_memory            | Learned patterns and pitfalls (memory)                      | P10    | Active  |  
+| bld_tools             | Production + validation tools (CEX-native)                  | P04    | Active  |  
 
 ## Dependencies  
 | From              | To                  | Type         |  

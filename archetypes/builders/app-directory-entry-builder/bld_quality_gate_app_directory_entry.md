@@ -26,10 +26,10 @@ density_score: 0.85
 |---|---|---|  
 | H01 | YAML frontmatter valid | invalid YAML syntax |  
 | H02 | ID matches pattern | ID does not match ^p05_ade_[a-z][a-z0-9_]+.md$ |  
-| H03 | kind field matches 'app_directory_entry' | kind ≠ 'app_directory_entry' |  
+| H03 | kind field matches 'app_directory_entry' | kind != 'app_directory_entry' |  
 | H04 | tagline present | tagline field missing or empty |  
-| H05 | screenshots ≥3 | <3 screenshots provided |  
-| H06 | install steps ≥2 | <2 install steps listed |  
+| H05 | screenshots >= 3 | fewer than 3 screenshots provided |  
+| H06 | install steps >= 2 | fewer than 2 install steps listed |  
 | H07 | demo link functional | demo link invalid or unreachable |  
 | H08 | app name present | app name field missing |  
 
@@ -48,10 +48,10 @@ density_score: 0.85
 ## Actions  
 | Score | Action |  
 |---|---|  
-| ≥9.5 | GOLDEN: Auto-publish |  
-| ≥8.0 | PUBLISH: Approved |  
-| ≥7.0 | REVIEW: Manual check |  
-| <7.0 | REJECT: Fix required |  
+| GOLDEN (>=9.5) | Auto-publish |  
+| PUBLISH (>=8.0) | Approved |  
+| REVIEW (>=7.0) | Manual check |  
+| REJECT (<7.0) | Fix required |  
 
 ## Bypass  
 | conditions | approver | audit trail |  

@@ -46,9 +46,9 @@ density_score: 0.85
 ## Actions  
 | Score | Action |  
 |---|---|  
-| GOLDEN (≥9.5) | Auto-approve and merge |  
-| PUBLISH (≥8.0) | Review and merge |  
-| REVIEW (≥7.0) | Flag for review |  
+| GOLDEN (>=9.5) | Auto-approve and merge |  
+| PUBLISH (>=8.0) | Review and merge |  
+| REVIEW (>=7.0) | Flag for review |  
 | REJECT (<7.0) | Reject and request fixes |  
 
 ## Bypass  
