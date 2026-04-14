@@ -1,0 +1,36 @@
+kind: examples
+id: bld_examples_kubernetes_ai_requirement
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of kubernetes_ai_requirement artifacts
+quality: null
+title: Examples Kubernetes AI Requirement
+version: 1.0.0
+author: wave7_n03_dev_manifests
+tags:
+- kubernetes_ai_requirement
+- builder
+- examples
+tldr: Golden and anti-examples of kubernetes_ai_requirement artifacts
+domain: kubernetes_ai_requirement construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example_64_gpu_h100_training_cluster_with_infiniband_ndr_dra: "---\nid: p09_kar_llama3_70b_pretrain.md\nkind: kubernetes_ai_requirement\n\
+  pillar: P09\nkar_version: \"1.35\"\nworkload_class: training\nconformance_profile: cncf.k8s-ai.v1.35.multi-node-training\n\
+  quality: null\n---\n\n## GPU Topology\n- device_model: H100-SXM5\n- devices_per_node: 8\n- nodes: 8   (total = 64 GPUs)\n\
+  - nvlink_pairs: 4 per node (NVSwitch fabric)\n- pcie_affinity: same-root-complex per GPU pair\n- numa_binding: node0..node7\
+  \ (one NUMA per GPU quad)\n\n## InfiniBand Fabric\nrdma_fabric:\n  bandwidth_gbps: 400        # NDR\n  gpudirect_rdma: true\n\
+  \  nccl_all_to_all: true\n\n## DRA ResourceClaims (K8s 1.32+ GA)\ndra_claims:\n  - name: h100-claim\n    deviceClassName:\
+  \ nvidia.com/h100\n    count: 64\n\n## Checkpoint PVC\ncheckpoint_pvc:\n  csi_driver: csi.vastdata.com\n  access_mode: ReadWriteMany\n\
+  \  snapshot_class: vast-snap\n  cadence_minutes: 15\n\n## Gang Scheduling\nkueue_queue: llm-training-q\nCNCF KAR v1.35 conformance\
+  \ declared."
+anti_example_1_plain_kubernetes_deployment_not_a_kar_artifact: "---\nkind: kubernetes_ai_requirement\ntitle: My Training Deployment\n\
+  ---\napiVersion: apps/v1\nkind: Deployment\nspec:\n  replicas: 8\n  template:\n    spec:\n      containers:\n        - name:\
+  \ trainer\n          image: pytorch:2.5\n          resources:\n            limits:\n              nvidia.com/gpu: 1"
+why_it_fails: This is a Helm chart values file -- application packaging config. It does not declare InfiniBand RDMA bandwidth,
+  MIG profile tenancy, DRA ResourceClaims, checkpoint-PVC durability, or CNCF KAR v1.35 conformance profile. KAR artifacts
+  answer "what must the cluster provide?" -- not "how do I package my app?"
+anti_example_2_helm_chart_values_packaging_not_conformance: "---\nkind: kubernetes_ai_requirement\ntitle: vllm-helm-values\n\
+  ---\nimage:\n  repository: vllm/vllm-openai\n  tag: v0.6.0\nreplicaCount: 4\nresources:\n  limits:\n    nvidia.com/gpu:\
+  \ 1\nservice:\n  type: ClusterIP"

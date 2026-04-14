@@ -1,0 +1,71 @@
+kind: knowledge_card
+id: bld_knowledge_card_llm_evaluation_scenario
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for llm_evaluation_scenario production
+quality: null
+title: Knowledge Card LLM Evaluation Scenario
+version: 1.0.0
+author: n06_wave7
+tags:
+- llm_evaluation_scenario
+- builder
+- knowledge_card
+- helm
+- stanford-crfm
+tldr: Domain knowledge for llm_evaluation_scenario production
+domain: llm_evaluation_scenario construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: 'HELM (Holistic Evaluation of Language Models) is the Stanford CRFM living benchmark framework for comprehensive
+  LLM evaluation. A HELM scenario is the atomic unit of evaluation: a specific combination of subject area, capability under
+  test, task instance set, adapter configuration, and metric mapping. Scenarios are composed into benchmark suites (runs).
+  The HELM decomposition -- scenario / adapter / metric -- maps precisely to CEX kinds: llm_evaluation_scenario / prompt_template
+  / eval_metric. IBM Enterprise HELM (2024+) extends HELM with vertical domains: finance, legal, climate, cybersecurity, adding
+  40+ specialized scenarios unavailable in the public HELM leaderboard.'
+key_concepts: '| Concept | Definition | Source |
+
+  |---------|-----------|--------|
+
+  | Scenario | Atomic eval unit: capability + task_instances + adapter + metric | Stanford CRFM HELM spec |
+
+  | Subject Area | High-level domain taxonomy: knowledge, reasoning, language, code, safety | HELM taxonomy v1.4 |
+
+  | Capability | Specific testable cognitive function within a subject_area | HELM scenario registry |
+
+  | Task Instance | Single (input, expected_output) pair within a scenario | HELM data loader spec |
+
+  | Few-Shot Pool | Curated demonstration examples prepended to task input as context | Brown et al. (2020) GPT-3 |
+
+  | Adapter | Prompt formatting config: template, num_train_trials, context budget | HELM adapter module |
+
+  | Canonicalization | Normalization of raw model output before metric computation | HELM metrics.py |
+
+  | HELM Run | A scenario x adapter x metric x model execution record | HELM run spec |
+
+  | Metric Family | HELM metric categories: accuracy, calibration, robustness, fairness, efficiency | HELM leaderboard |
+
+  | IBM Extension | Vertical domain scenarios beyond HELM core: finance, legal, climate, cyber | IBM Research 2024 |'
+industry_standards:
+- 'Stanford CRFM HELM spec: `crfm.stanford.edu/helm/latest/`'
+- 'HELM Python library: `github.com/stanford-crfm/helm`'
+- 'IBM Enterprise HELM: `github.com/foundation-model-stack/fms-fmeval`'
+- 'BigBench (Google): 204 tasks, JSON schema compatible with HELM adapters'
+- 'MLCommons AILuminate: safety-focused 24K prompt eval, HELM-compatible runner'
+- 'OpenAI Evals Framework: grade function maps to HELM canonicalization + metric'
+common_patterns:
+- Start with HELM taxonomy placement before defining task instances.
+- Use temperature=0.0 for reproducibility in classification/MCQ scenarios.
+- Set num_train_trials=1 (bootstrap sampling) for reliable variance estimates.
+- few_shot_pool should be 3x the max num_few_shot to allow stratified sampling.
+- 'Canonicalization for MCQ: extract letter, uppercase, compare exactly.'
+- 'Canonicalization for generation: strip markdown fences, normalize whitespace.'
+- Always cite upstream dataset license; HELM leaderboard rejects proprietary-only data.
+pitfalls:
+- Confusing scenario (single eval) with benchmark (eval suite of many scenarios).
+- Setting num_few_shot > pool size, causing sampling failures.
+- Omitting stop_sequences for chat models, producing truncated or verbatim completions.
+- Using BLEU for factual QA -- BLEU is a surface metric; prefer exact_match or F1.
+- Forgetting IBM extension registration when using finance/legal domains.
+- Using mutable dataset splits -- scenarios require pinned split hashes for reproducibility.

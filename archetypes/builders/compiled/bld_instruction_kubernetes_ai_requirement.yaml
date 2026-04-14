@@ -1,0 +1,45 @@
+kind: instruction
+id: bld_instruction_kubernetes_ai_requirement
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for kubernetes_ai_requirement
+quality: null
+title: Instruction Kubernetes AI Requirement
+version: 1.0.0
+author: wave7_n03_dev_manifests
+tags:
+- kubernetes_ai_requirement
+- builder
+- instruction
+tldr: Step-by-step production process for kubernetes_ai_requirement
+domain: kubernetes_ai_requirement construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Identify workload class: training (multi-node), inference (disaggregated prefill/decode), fine-tuning (LoRA/QLoRA), or
+  batch.'
+- 'Survey GPU topology requirement: NVLink/NVSwitch pairs, PCIe affinity, NUMA alignment, device count per node.'
+- 'Determine InfiniBand fabric: NDR 400 Gbps, XDR 800 Gbps, GPUDirect RDMA, NCCL all-to-all patterns.'
+- 'Assess MIG partitioning need: fractional GPU profiles (1g.5gb through 7g.40gb) for multi-tenant inference.'
+- 'Evaluate DRA eligibility (K8s 1.32+ GA): ResourceClaim templates, ResourceSlices, device classes.'
+- 'Audit checkpoint durability: CSI driver support, PVC access mode, snapshot cadence, restore RTO/RPO.'
+- Cross-reference CNCF KAR v1.35 conformance matrix and Kubernetes AI Conformance Program (Nov 2025) profile.
+phase_2_compose:
+- Reference SCHEMA.md for required fields (workload_class, gpu_topology, rdma_fabric, mig_profile, dra_claims, checkpoint_pvc).
+- Populate OUTPUT_TEMPLATE.md with workload-specific values drawn from the research phase.
+- 'Encode GPU topology with NVLink/NVSwitch pair count and NUMA node binding (e.g., `numa: node0`).'
+- 'Declare RDMA fabric with explicit Gbps (e.g., `rdma_bandwidth: 400Gbps`, `gpudirect_rdma: true`).'
+- 'List MIG profiles as enumerated values: `[1g.5gb, 2g.10gb, 3g.20gb, 7g.40gb]`.'
+- 'Author DRA ResourceClaims referencing named device classes (e.g., `deviceClassName: nvidia.com/h100`).'
+- 'Specify checkpoint-PVC block: storage class, access mode (ReadWriteMany), CSI snapshot class, frequency.'
+- Add gang-scheduling directives (`schedulingGates`, Kueue ClusterQueue, Volcano PodGroup) for multi-node jobs.
+- Tag with CNCF KAR v1.35 conformance marker for platform auditors.
+phase_3_validate:
+- '[x] All required fields present (workload_class, gpu_topology, rdma_fabric, mig_profile, dra_claims, checkpoint_pvc).'
+- '[x] GPU-topology declares NVLink/NVSwitch pairs and NUMA binding consistent with node SKU.'
+- '[x] InfiniBand bandwidth matches fabric installed on target nodes (no over-subscription).'
+- '[x] MIG profile values drawn from NVIDIA valid set for the target GPU generation.'
+- '[x] DRA ResourceClaims reference existing ResourceSlices and device classes on the cluster.'
+- '[x] Checkpoint-PVC snapshot cadence meets RPO target for multi-node training checkpoint resume.'
+- '[x] CNCF KAR v1.35 conformance keys present; Kubernetes AI Conformance Program profile declared.'

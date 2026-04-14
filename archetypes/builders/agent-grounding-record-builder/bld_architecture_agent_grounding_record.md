@@ -1,0 +1,167 @@
+---
+kind: architecture
+id: bld_architecture_agent_grounding_record
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component inventory, dependency map, and system position for the agent_grounding_record builder
+quality: null
+title: "Agent Grounding Record Builder -- Architecture"
+version: "1.0.0"
+author: wave7_n05
+tags: [agent_grounding_record, builder, architecture]
+tldr: "13 ISOs, 3 external standards (OTel, C2PA, SHA-256), P10 pillar position, upstream/downstream artifact map"
+domain: "agent_grounding_record construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+# Agent Grounding Record Builder -- Architecture
+
+## Component Inventory (13 ISOs)
+
+| # | ISO File                                        | Kind            | llm_function | Primary Responsibility                                      |
+|---|-------------------------------------------------|-----------------|--------------|-------------------------------------------------------------|
+| 1 | bld_manifest_agent_grounding_record.md          | type_builder    | BECOME       | Builder identity, capabilities, routing rules               |
+| 2 | bld_instruction_agent_grounding_record.md       | instruction     | REASON       | 3-phase build protocol: RESEARCH, COMPOSE, VALIDATE         |
+| 3 | bld_system_prompt_agent_grounding_record.md     | system_prompt   | BECOME       | Provenance specialist identity and behavioral rules         |
+| 4 | bld_schema_agent_grounding_record.md            | schema          | CONSTRAIN    | Field definitions, types, constraints, JSON Schema          |
+| 5 | bld_quality_gate_agent_grounding_record.md      | quality_gate    | GOVERN       | H01-H08 hard gates + 5D soft scoring dimensions             |
+| 6 | bld_output_template_agent_grounding_record.md   | output_template | PRODUCE      | Fill-in template for complete grounding record rendering     |
+| 7 | bld_examples_agent_grounding_record.md          | examples        | GOVERN       | Golden example + 2 anti-examples with scoring analysis      |
+| 8 | bld_knowledge_card_agent_grounding_record.md    | knowledge_card  | INJECT       | OTel, C2PA, EU AI Act domain knowledge reference            |
+| 9 | bld_architecture_agent_grounding_record.md      | architecture    | CONSTRAIN    | Component map, dependencies, system position (this file)    |
+|10 | bld_collaboration_agent_grounding_record.md     | collaboration   | COLLABORATE  | Upstream/downstream artifact flows, crew role, boundaries   |
+|11 | bld_config_agent_grounding_record.md            | config          | CONSTRAIN    | Naming convention, paths, limits, post-build hooks          |
+|12 | bld_memory_agent_grounding_record.md            | learning_record | INJECT       | Operational learnings, pitfall patterns, recommendations     |
+|13 | bld_tools_agent_grounding_record.md             | tools           | CALL         | Production tools, validation tools, external references     |
+
+---
+
+## 8F Activation Map
+
+| 8F Function  | ISOs Loaded                                    | Purpose                                           |
+|--------------|------------------------------------------------|---------------------------------------------------|
+| F1 CONSTRAIN | bld_schema, bld_config, bld_architecture       | Validate naming, byte limit, required fields      |
+| F2 BECOME    | bld_manifest, bld_system_prompt                | Adopt provenance specialist identity              |
+| F3 INJECT    | bld_knowledge_card, bld_memory, bld_examples   | Load OTel/C2PA context + operational patterns     |
+| F4 REASON    | bld_instruction                                | Phase-by-phase build protocol                     |
+| F5 CALL      | bld_tools                                      | Hash verification, OTel validator, compile        |
+| F6 PRODUCE   | bld_output_template                            | Render complete grounding record                  |
+| F7 GOVERN    | bld_quality_gate, bld_examples                 | Hard gates + 5D scoring + anti-example comparison |
+| F8 COLLABORATE| bld_collaboration                             | Signal upstream/downstream, commit, archive       |
+
+---
+
+## System Position
+
+```
+[Inference Pipeline]
+      |
+      | (raw OTel spans, tool logs, RAG retriever output)
+      v
+[trace_config]  [rag_source]  [toolkit]  [model_provider]
+      |               |            |             |
+      +---------------+------------+-------------+
+                      |
+                      v
+          [agent_grounding_record builder]  <-- THIS BUILDER
+                      |
+                      v
+             [agent_grounding_record]
+             (p10_gr_{{inference_id}}.md)
+                      |
+            +---------+----------+
+            |                    |
+            v                    v
+    [audit_log]       [conformity_assessment]
+    (aggregation)     (EU AI Act evidence)
+            |
+            v
+    [c2pa_manifest]
+    (content credentials)
+```
+
+---
+
+## Dependency Map
+
+### Internal CEX Dependencies
+
+| Dependency Kind   | Artifact Path                              | How Used                                            |
+|-------------------|--------------------------------------------|-----------------------------------------------------|
+| trace_config      | P09/*/p09_tc_*.yaml                        | Provides otel_span_id via OTel instrumentation      |
+| rag_source        | P01/*/p01_rs_*.md                          | Provides chunk_id, source_url metadata per chunk    |
+| model_provider    | P02/*/p02_mp_*.md                          | Provides model.id, model.version, model.provider    |
+| toolkit           | P04/*/p04_tk_*.md                          | Provides tool_name registry for tool_calls logging  |
+| knowledge_index   | P10/*/p10_ki_*.md                          | May be queried as source for RAG chunks             |
+
+### External Standard Dependencies
+
+| Standard                    | Version  | Dependency Type | Required For                                  |
+|-----------------------------|----------|-----------------|-----------------------------------------------|
+| OTel GenAI Semantic Conventions | v1.37+ | Conceptual  | otel_span_id format, span attribute mapping   |
+| C2PA Specification          | v2.3     | Conceptual      | c2pa_manifest_ref format, binding semantics   |
+| SHA-256 (FIPS 180-4)        | FIPS 180-4 | Algorithm     | output_hash, content_hash, tool I/O hashes    |
+| ISO 8601                    | 2019     | Format standard | All timestamp fields                          |
+| W3C Trace Context           | Level 2  | Format standard | otel_span_id (16 hex char format)             |
+| RFC 4122                    | 2005     | Format standard | inference_id (UUIDv4 format)                  |
+
+---
+
+## Pillar Position
+
+| Property  | Value                    |
+|-----------|--------------------------|
+| Pillar    | P10 (Memory)             |
+| Subdir    | P10_memory/grounding/    |
+| Naming    | p10_gr_[prefix].md     |
+| Max bytes | 4096                     |
+
+P10 (Memory) is appropriate because grounding records are persistence artifacts -- they record the state of an inference run for future retrieval, audit, and analysis. They are not outputs (P05), not schemas (P06), not configurations (P09) -- they are memory artifacts that encode what happened during inference.
+
+---
+
+## Data Flow
+
+```
+INPUT SIGNALS
+  otel_span_id      <- OTel instrumentation layer
+  tool_call_logs    <- Tool execution framework
+  rag_retriever_log <- Vector store / retriever
+  model_response    <- AI provider API response
+
+PHASE 1 (RESEARCH)
+  Collect: tool_calls array, rag_chunks array, model ref, output bytes
+
+PHASE 2 (COMPOSE)
+  Compute: output_hash = sha256(raw_output_bytes)
+  Compute: tool_input_hash = sha256(serialized_tool_input) per tool
+  Compute: tool_output_hash = sha256(serialized_tool_output) per tool
+  Compute: content_hash = sha256(chunk_text) per RAG chunk
+  Compute: grounding_coverage_pct = cited_claims / total_claims
+  Assemble: full grounding record per bld_output_template
+
+PHASE 3 (VALIDATE)
+  Run: H01-H08 hard gates
+  Run: D1-D5 soft scoring
+  Gate: score >= 9.0 for production records
+
+OUTPUT ARTIFACTS
+  p10_gr_[prefix].md  -> P10_memory/grounding/
+  Signal               -> .cex/runtime/signals/
+  C2PA manifest link   -> c2pa_manifest_ref (external)
+  OTel span link       -> otel_span_id (external)
+```
+
+---
+
+## Scaling Considerations
+
+| Scenario                    | Challenge                               | Architecture Response                                   |
+|-----------------------------|-----------------------------------------|---------------------------------------------------------|
+| High-volume inference (>100 runs/min) | Grounding records per minute = artifact sprawl | Batch into audit_log daily; archive old records |
+| Large tool call counts (>20 per run) | Exceeds 4096 byte limit            | Truncate to counts + hashes; pointer to full_trace_log_ref |
+| Large RAG chunk sets (>30 chunks) | Exceeds byte limit                 | Same: truncate with full_trace_log_ref pointer          |
+| Real-time traceability needs | Latency of hash computation            | Pre-compute hashes in the inference pipeline; write record async |
+| Multi-model chained inference | Multiple model IDs per inference      | One grounding record per model call; link via session_id |

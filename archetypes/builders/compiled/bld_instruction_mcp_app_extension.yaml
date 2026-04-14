@@ -1,0 +1,43 @@
+kind: instruction
+id: bld_instruction_mcp_app_extension
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for mcp_app_extension
+quality: null
+title: Instruction MCP App Extension
+version: 1.0.0
+author: wave7_n03_dev_manifests
+tags:
+- mcp_app_extension
+- builder
+- instruction
+tldr: Step-by-step production process for mcp_app_extension
+domain: mcp_app_extension construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Read the latest SEP-1865 draft (Anthropic + OpenAI, AAIF Linux Foundation track).
+- Confirm compatibility with the MCP base spec 2025-11-25.
+- List MCP tools and resources the app needs; map each to a capability declaration.
+- Enumerate permission scopes required (file-access, network, clipboard, camera) and justify each.
+- Identify the target MCP clients (Claude Desktop, ChatGPT desktop, third-party) and their sandbox policies.
+- Audit for overlap with plain mcp_server kind -- if there is no iframe UI, this is NOT an app extension.
+phase_2_compose:
+- Reference SCHEMA.md for required manifest fields (app_id, version, entry_url, capabilities, permissions).
+- Populate OUTPUT_TEMPLATE.md using validated manifest data.
+- Set app_id using the pattern `^p04_mae_[a-z][a-z0-9_]+$` with no dots.
+- Set entry_url to an HTTPS URL that the MCP client will load inside a sandboxed iframe.
+- List capabilities as an array of MCP tool or resource names the app may invoke.
+- List permissions as explicit scope strings; NEVER request permissions the app does not use.
+- Document install, launch, and terminate handlers with postMessage payload shapes.
+- Declare a Content Security Policy (CSP) that forbids parent-frame DOM access.
+- Proofread against SEP-1865 examples (Anthropic MCP docs) for conformance.
+phase_3_validate:
+- '[ ] All required manifest fields present (app_id, version, entry_url, capabilities, permissions).'
+- '[ ] app_id matches the p04_mae_ pattern; no dots, lowercase only.'
+- '[ ] entry_url is HTTPS and reachable.'
+- '[ ] Each capability maps to a real MCP tool or resource in the server contract.'
+- '[ ] Every permission has a written justification; no unused scopes.'
+- '[ ] Install, launch, terminate flows documented with postMessage schemas.'
+- '[ ] Sandbox CSP excludes parent-frame DOM, eval, and inline scripts.'

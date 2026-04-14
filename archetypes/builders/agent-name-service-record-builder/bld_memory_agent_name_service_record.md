@@ -1,0 +1,177 @@
+---
+kind: learning_record
+id: bld_memory_agent_name_service_record
+pillar: P10
+llm_function: INJECT
+purpose: Accumulated observations, pitfalls, and recommendations for building ANS registry records
+quality: null
+title: "Agent Name Service Record Builder -- Memory"
+version: "1.0.0"
+author: wave7_n05
+tags: [agent_name_service_record, builder, memory, learning_record]
+tldr: "Pitfalls: ANS vs agent_card confusion, missing protocol-adapters, incomplete PKI chain. Evidence and fixes."
+domain: "agent_name_service_record construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+# Agent Name Service Record Builder -- Memory
+
+## Learning Record Index
+
+| Entry ID | Category | Status | Date |
+|---------|---------|--------|------|
+| L001 | Pitfall | Active | 2026-04-14 |
+| L002 | Pitfall | Active | 2026-04-14 |
+| L003 | Pitfall | Active | 2026-04-14 |
+| L004 | Pattern | Active | 2026-04-14 |
+| L005 | Pattern | Active | 2026-04-14 |
+| L006 | Recommendation | Active | 2026-04-14 |
+| L007 | Recommendation | Active | 2026-04-14 |
+
+---
+
+## L001: ANS Record vs Agent Card Confusion
+
+**Category**: Pitfall | **Frequency**: High | **Impact**: Wrong artifact produced
+
+**Observation**: Builders frequently conflate `agent_name_service_record` (P04) with
+`agent_card` (P08). Both reference agent capabilities and endpoints, but they serve
+distinct purposes in the agent lifecycle.
+
+**Evidence**:
+- Builders asked to "register my agent in the ANS" produce agent_card artifacts instead
+- Builders asked to "create an agent card" sometimes produce ANS records
+- The distinction is not obvious from field overlap alone
+
+**Root cause**: Both artifacts contain endpoint_url and capability information.
+Without clear boundary awareness, the builder defaults to whichever artifact it
+has more training examples for.
+
+**Fix**:
+| Question | ANS record | Agent card |
+|---------|-----------|-----------|
+| Who reads it? | Other agents + orchestrators at runtime | Developers + N07 at design time |
+| What does it enable? | Runtime discovery and connection | Design-time deployment decisions |
+| Where does it live? | P04_tools/ | P08_architecture/ |
+| Pillar | P04 (CALL) | P08 (Architecture) |
+
+**Recommendation**: Always check user intent first. "Register", "discover", "ANS", "AgentDNS"
+= ANS record. "Define", "spec", "deploy", "agent card" = agent_card.
+
+---
+
+## L002: Missing Protocol Adapters for Production Use
+
+**Category**: Pitfall | **Frequency**: High | **Impact**: H06 hard gate fail, record unusable
+
+**Observation**: Builders produce ANS records with only an `endpoint_url` and no
+`protocol_adapters` array. These records pass H01-H05, H07, H08 but fail H06.
+More critically, even if H06 were bypassed, no agent can connect without knowing
+the protocol.
+
+**Evidence**:
+- GoDaddy production ANS integration requires at minimum one protocol_adapter (MCP or A2A)
+- Salesforce Agent Fabric requires A2A v0.3 adapter for enterprise connections
+- CNCF AgentDNS spec mandates protocol_adapters for registry-record validity
+
+**Root cause**: Builder treats endpoint_url as sufficient (REST assumption).
+In ANS context, endpoint_url is the base -- protocol_adapters specify HOW to use it.
+
+**Fix**: Phase 1.2 of bld_instruction explicitly requires protocol resolution before
+composition. If the agent supports MCP, declare it. If it supports A2A, declare it.
+If uncertain, ask the user before proceeding.
+
+**Pattern found**: Agents built on Claude/MCP stack almost always support MCP adapter.
+Agents in enterprise/Salesforce stacks almost always support A2A adapter.
+
+---
+
+## L003: PKI Cert Chain Not Included
+
+**Category**: Pitfall | **Frequency**: Medium | **Impact**: D3 = 0.0, GoDaddy/Salesforce registration blocked
+
+**Observation**: Builders omit `pki_cert_reference` or include only a placeholder value
+like `"cert:unknown:SHA256:TBD"`. This passes H01-H08 (PKI is not a hard gate) but
+scores D3 = 0.0 for GoDaddy/Salesforce operators, blocking production registration.
+
+**Evidence**:
+- GoDaddy production ANS integration policy: PKI-cert mandatory since Feb 2026
+- Salesforce MuleSoft Agent Fabric: PKI-cert mandatory for enterprise A2A connections
+- A2A v0.3 security card signing relies on same PKI infrastructure
+
+**Root cause**: PKI cert material lives in secret_config (P09), not visible during
+ANS record construction unless explicitly loaded. Builder skips F3 INJECT for secret_config.
+
+**Fix**: bld_collaboration specifies `secret_config` as a required input. Always
+load `secret_config` before Phase 2 COMPOSE when registry_operator is `godaddy`
+or `salesforce`. If secret_config is unavailable, flag it explicitly and note
+that GoDaddy/Salesforce registration will be blocked.
+
+---
+
+## L004: Protocol Version Pinning Improves Interoperability
+
+**Category**: Pattern | **Frequency**: Medium | **Impact**: Better D2 scoring, clearer contracts
+
+**Observation**: ANS records that pin exact protocol versions (e.g., `mcp: 2024-11-05`,
+`a2a: 0.3`) experience fewer connection failures in production than records with
+vague version strings (e.g., `mcp: latest`).
+
+**Evidence**: GoDaddy production integration documentation explicitly recommends
+pinning MCP to `2024-11-05` and A2A to `0.3` for stable inter-agent communication.
+
+**Recommendation**: Always pin protocol versions in `protocol_adapters[].version`.
+Use the values from the knowledge card protocol table as defaults.
+
+---
+
+## L005: 3-Segment ANS Name Hierarchy Improves Discovery
+
+**Category**: Pattern | **Frequency**: Medium | **Impact**: D1 scoring from 0.6 to 1.0
+
+**Observation**: ANS records with 3-segment names (`{agent}.{org}.agents`) are more
+discoverable in CNCF AgentDNS and more likely to resolve uniquely across namespaces
+than 2-segment names (`{agent}.agents`).
+
+**Evidence**: CNCF draft-liang-agentdns-00 recommends the 3-segment hierarchy.
+GoDaddy uses the customer's registered domain as the org segment.
+
+**Recommendation**: Always derive the org segment from the registry_operator's domain
+or the deploying organization's domain name. Never use generic org labels like `corp`
+or `org` -- they cause collisions.
+
+---
+
+## L006: Pre-Check for Existing Records Before Building
+
+**Category**: Recommendation | **Impact**: Prevents duplicate registry entries
+
+**Recommendation**: Before Phase 2 COMPOSE, run:
+```bash
+ls P04_tools/p04_ans_*.md | grep {agent_slug}
+```
+If a record exists, determine whether to UPDATE (bump version, update `updated` date)
+or CREATE NEW (new ANS name for same agent). Never silently overwrite an existing record.
+
+---
+
+## L007: discovery_endpoint Distinct from endpoint_url
+
+**Category**: Recommendation | **Impact**: Prevents H07 false-pass, ensures runtime resolution
+
+**Recommendation**: Many builders set `discovery_endpoint` to the same value as
+`endpoint_url`. This passes H07 syntactically but violates the semantic intent:
+
+- `endpoint_url`: where the agent ACCEPTS REQUESTS (business logic endpoint)
+- `discovery_endpoint`: where the registry-record JSON is SERVED (metadata endpoint)
+
+**Correct pattern**:
+```
+endpoint_url:       https://agents.acme.com/billing
+discovery_endpoint: https://acme.com/.well-known/agent/billing-bot
+```
+
+The discovery_endpoint follows the `/.well-known/agent/{label}` convention per
+IETF well-known URI spec (RFC 8615). It MUST be distinct from endpoint_url.

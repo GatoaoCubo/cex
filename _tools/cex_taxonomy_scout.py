@@ -886,7 +886,26 @@ def main() -> None:
         dest="recheck_all",
         help="Write stale-review candidates for all kinds older than --since days",
     )
+    parser.add_argument(
+        "--harvest-first",
+        action="store_true",
+        dest="harvest_first",
+        help="Run cex_source_harvester --apply before scanning (expands sources config)",
+    )
     args = parser.parse_args()
+    if args.harvest_first:
+        import subprocess
+        harvester = CEX_ROOT / "_tools" / "cex_source_harvester.py"
+        print("[OK] Running source harvester first...")
+        result = subprocess.run(
+            [sys.executable, str(harvester), "--apply"],
+            capture_output=True, text=True
+        )
+        if result.returncode == 0:
+            print(result.stdout.strip())
+            print("[OK] Harvester complete. Proceeding with scout scan.")
+        else:
+            print("[WARN] Harvester exited non-zero:", result.stderr[:200])
     if args.report:
         report()
         return

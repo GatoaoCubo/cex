@@ -1,0 +1,78 @@
+kind: architecture
+id: bld_architecture_fhir_agent_capability
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of fhir_agent_capability -- inventory, dependencies
+quality: null
+title: Architecture FHIR Agent Capability
+version: 1.0.0
+author: n06_wave7
+tags:
+- fhir_agent_capability
+- builder
+- architecture
+- fhir
+- hl7
+tldr: Component map of fhir_agent_capability -- inventory, dependencies
+domain: fhir_agent_capability construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name                | Role                                  | Pillar | Status |
+
+  |-------------------------|---------------------------------------|--------|--------|
+
+  | bld_manifest            | Builder identity, routing             | P08    | Active |
+
+  | bld_instruction         | Production process (3-phase)          | P03    | Active |
+
+  | bld_system_prompt       | LLM persona and healthcare rules      | P03    | Active |
+
+  | bld_schema              | Frontmatter + body structure          | P06    | Active |
+
+  | bld_quality_gate        | HARD gates (HIPAA) + SOFT scoring     | P11    | Active |
+
+  | bld_output_template     | Parameterized FHIR capability template| P05    | Active |
+
+  | bld_examples            | Golden + anti-examples (compliance)   | P07    | Active |
+
+  | bld_knowledge_card      | FHIR/HL7/SMART domain knowledge       | P01    | Active |
+
+  | bld_architecture        | Component map + FHIR integration      | P08    | Active |
+
+  | bld_collaboration       | Crew workflow + EHR boundaries        | P12    | Active |
+
+  | bld_config              | Naming, paths, limits                 | P09    | Active |
+
+  | bld_memory              | Learned compliance pitfalls           | P10    | Active |
+
+  | bld_tools               | FHIR validation + compliance tools    | P04    | Active |'
+dependencies: '| From                  | To                          | Type          |
+
+  |-----------------------|-----------------------------|---------------|
+
+  | bld_output_template   | bld_schema                  | dependency    |
+
+  | bld_quality_gate      | bld_schema                  | validation    |
+
+  | bld_quality_gate      | bld_examples                | validation    |
+
+  | bld_instruction       | bld_system_prompt           | dependency    |
+
+  | bld_manifest          | bld_config                  | configuration |
+
+  | bld_collaboration     | bld_memory                  | coordination  |
+
+  | bld_tools             | agent-builder               | integration   |
+
+  | bld_tools             | handoff_protocol-builder    | integration   |
+
+  | bld_tools             | workflow-builder            | integration   |'
+architectural_position: fhir_agent_capability bridges P08 (Architecture) and the healthcare vertical. It is the FHIR-native
+  analog of agent_card (P08) specialized for EHR integration. In the HL7 Agent-as-Resource pattern, this artifact IS the FHIR
+  resource definition -- it can be serialized to FHIR JSON and submitted to a FHIR server registry.
+cex_integration_points:
+- 'Upstream: `agent-builder` (general agent definition to specialize for FHIR)'
+- 'Peer: `handoff_protocol-builder` (MCP/A2A-to-FHIR protocol adaptation)'
+- 'Downstream: `workflow-builder` (Da Vinci payer-provider workflows using this agent)'
+- 'Auth: `oauth_app_config-builder` (SMART on FHIR app registration -- different from capability declaration)'

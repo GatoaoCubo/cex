@@ -1,0 +1,78 @@
+kind: quality_gate
+id: p08_qg_fhir_agent_capability
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for fhir_agent_capability
+quality: null
+title: Quality Gate FHIR Agent Capability
+version: 1.0.0
+author: n06_wave7
+tags:
+- fhir_agent_capability
+- builder
+- quality_gate
+- fhir
+- hl7
+- hipaa
+tldr: Quality gate with HARD and SOFT scoring for fhir_agent_capability
+domain: fhir_agent_capability construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: '| Metric | Threshold | Operator | Scope |
+
+  |--------|-----------|----------|-------|
+
+  | FHIR capability compliance | 100% | equals | All EHR onboarding registrations |'
+hard_gates: '| ID  | Check | Fail Condition |
+
+  |-----|-------|----------------|
+
+  | H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+
+  | H02 | ID matches `^p08_fhir_[a-z][a-z0-9_]+\.md$` | Pattern mismatch |
+
+  | H03 | kind = "fhir_agent_capability" | Kind field incorrect or absent |
+
+  | H04 | fhir_version is R5 or R4B | Earlier version or missing |
+
+  | H05 | capability_category in HL7 taxonomy | Unrecognized or missing category |
+
+  | H06 | smart_scopes follow SMART on FHIR v2 format | Malformed scope strings |
+
+  | H07 | phi_handling declared | Missing when patient resources accessed |
+
+  | H08 | audit_log_resource present when phi_handling=full-phi | HIPAA compliance gap |'
+soft_scoring: '| Dim | Dimension | Weight | Scoring Guide |
+
+  |-----|-----------|--------|---------------|
+
+  | D01 | Schema completeness (required + recommended fields) | 0.25 | All present = 1.0, missing recommended = 0.7, missing
+  required = 0 |
+
+  | D02 | Minimum-privilege scope discipline (no over-scoped permissions) | 0.25 | Least-privilege scopes = 1.0, some over-scope
+  = 0.5, write-all = 0 |
+
+  | D03 | PHI-handling depth (retention policy, de-id standard, audit log) | 0.20 | All three = 1.0, two = 0.7, one = 0.3,
+  missing = 0 |
+
+  | D04 | CDS Hooks integration (hook IDs, context, prefetch) | 0.15 | Full spec = 1.0, partial = 0.5, absent (CDS use case)
+  = 0 |
+
+  | D05 | AI Transparency extension (model_id, training statement) | 0.15 | Complete = 1.0, partial = 0.5, missing = 0 |'
+actions: '| Label | Score | Action |
+
+  |-------|-------|--------|
+
+  | GOLDEN  | >= 9.5 | Auto-register with FHIR server registry |
+
+  | PUBLISH | >= 8.0 | Register after compliance review |
+
+  | REVIEW  | >= 7.0 | Manual review by healthcare compliance team |
+
+  | REJECT  | < 7.0  | Return to builder; HIPAA risk flagged |'
+bypass: '| Condition | Approver | Audit Trail |
+
+  |-----------|----------|-------------|
+
+  | Research/sandbox environment (no real PHI) | Healthcare AI Lead | Sandbox declaration + IRB number |'

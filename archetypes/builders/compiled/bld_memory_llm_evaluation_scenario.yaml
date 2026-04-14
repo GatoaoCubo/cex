@@ -1,0 +1,34 @@
+kind: learning_record
+id: p10_lr_llm_evaluation_scenario_builder
+pillar: P10
+llm_function: INJECT
+purpose: Learned patterns and pitfalls for llm_evaluation_scenario construction
+quality: null
+title: Learning Record LLM Evaluation Scenario
+version: 1.0.0
+author: n06_wave7
+tags:
+- llm_evaluation_scenario
+- builder
+- learning_record
+- helm
+tldr: Learned patterns and pitfalls for llm_evaluation_scenario construction
+domain: llm_evaluation_scenario construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+observation: 'HELM scenarios that omit explicit canonicalization rules produce irreproducible results across different runners.
+  The most common failure: open-ended generation tasks without stop_sequences, where model completion bleeds into the next
+  few-shot prompt, corrupting the evaluation context.'
+pattern: 'Define canonicalization as a named function (not inline lambda) before writing the scenario body. Validate the function
+  independently with 10 sample outputs before committing the scenario. For MCQ: letter extraction + uppercase. For generation:
+  markdown fence stripping + whitespace normalization. For code: execution sandbox spec + pass@k harness reference.'
+evidence: 'IBM Enterprise HELM audit (2024): 23% of submitted scenarios failed reproducibility checks due to missing or ambiguous
+  canonicalization. Scenarios with named canonicalization functions had 0% reproducibility failures.'
+recommendations:
+- Define canonicalization_fn before writing task instances (not after).
+- Pin dataset splits with SHA256 hash to prevent data drift between evaluation runs.
+- Use num_train_trials >= 3 for statistical confidence in few-shot variance estimates.
+- Validate few_shot_pool size is >= 3x num_few_shot before publishing.
+- Document token cost estimate in the scenario -- prevents budget surprises in grid runs.
+- Register every new scenario in `.cex/registry/helm_scenarios.yaml` on F8 completion.

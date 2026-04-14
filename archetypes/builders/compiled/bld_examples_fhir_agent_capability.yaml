@@ -1,0 +1,71 @@
+kind: examples
+id: bld_examples_fhir_agent_capability
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of fhir_agent_capability artifacts
+quality: null
+title: Examples FHIR Agent Capability
+version: 1.0.0
+author: n06_wave7
+tags:
+- fhir_agent_capability
+- builder
+- examples
+- fhir
+- hl7
+- smart-on-fhir
+tldr: Golden and anti-examples of fhir_agent_capability artifacts
+domain: fhir_agent_capability construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nid: p08_fhir_cds_sepsis_early_warning.md\nkind: fhir_agent_capability\npillar: P08\nfhir_version: R5\n\
+  capability_category: CDS\nsmart_scopes:\n  - \"patient/Patient.read\"\n  - \"patient/Observation.read\"\n  - \"patient/Condition.read\"\
+  \nphi_handling: full-phi\nphi_retention_policy: \"Session-only; no data retained after encounter close. HIPAA minimum necessary\
+  \ standard.\"\naudit_log_resource: \"hl7.fhir.r5.extensions#AuditEvent-AI-influence\"\nai_transparency_ref: \"hl7.fhir.uv.aiTransparency#AIObservation\"\
+  \ncds_hooks: [\"patient-view\", \"order-sign\"]\nquality: null\n---\n\n## Capability Overview\nClinical Function: Real-time\
+  \ sepsis early warning scoring for ICU patients using NEWS2 + qSOFA criteria.\nHL7 AI Office Category: CDS (Clinical Decision\
+  \ Support)\nPatient Population: Adult ICU inpatients (18+)\n\n## SMART on FHIR Authorization\n| Scope | Resource | Action\
+  \ | Justification |\n|-------|----------|--------|---------------|\n| patient/Patient.read | Patient | read | Demographics\
+  \ for age/weight-adjusted thresholds |\n| patient/Observation.read | Observation | read | Vital signs: HR, RR, SpO2, temperature,\
+  \ BP |\n| patient/Condition.read | Condition | read | Active diagnoses for comorbidity adjustment |\n\n## PHI-Handling Declaration\n\
+  - PHI Handling Level: full-phi\n- Data Retention: Session-only, HIPAA minimum necessary\n- De-identification: Not applicable\
+  \ (real-time CDS, no storage)\n- Audit Log: AuditEvent-AI-influence extension on every CDS trigger"
+anti_example_1_over_scoped_permissions: "smart_scopes:\n  - \"system/*.read\"\n  - \"system/*.write\"\n\nWhy it fails: Violates\
+  \ minimum-privilege principle (D02 = 0). SMART on FHIR v2 prohibits wildcard scopes for AI agents unless approved by the\
+  \ FHIR server administrator for specific system-level use cases. This scope grants read/write to ALL FHIR resources, exposing\
+  \ unrelated patient data."
+anti_example_2_missing_phi_declaration: '---
+
+  fhir_version: R5
+
+  capability_category: summarization
+
+  smart_scopes: ["patient/Patient.read", "patient/DocumentReference.read"]
+
+  # phi_handling: MISSING
+
+  ---
+
+  Summarizes patient discharge notes.
+
+
+  Why it fails: H07 (PHI-handling required). The agent reads Patient and DocumentReference resources containing PHI. Missing
+  phi_handling declaration means no retention policy, no audit log, and no HIPAA compliance basis. Fails HARD gate H07 and
+  HARD gate H08.'
+anti_example_3_wrong_fhir_version: '---
+
+  fhir_version: R4  <!-- INVALID: only R5 and R4B supported -->
+
+  capability_category: coding
+
+  smart_scopes: ["patient/Condition.read"]
+
+  ---
+
+  Maps diagnoses to ICD-10 codes.
+
+
+  Why it fails: H04. FHIR R4 lacks the AI agent resource extensions introduced in R4B/R5. Declaring R4 means the AI Transparency
+  and Agent-as-Resource patterns cannot be applied, making the capability declaration incompatible with HL7 AI Office 2025
+  requirements.'
