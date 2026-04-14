@@ -1,48 +1,56 @@
 ---
-id: kc_churn_prevention_playbook
+id: kc_marketplace_app_manifest
 kind: knowledge_card
-title: Churn Prevention Playbook
+title: Marketplace App Manifest Spec
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-# Churn Prevention Playbook
+# Marketplace App Manifest Spec
 
-## Signal Detection
-- Monitor usage patterns (e.g., 30% drop in activity)
-- Track support ticket volume (e.g., 2x increase in escalations)
-- Analyze payment behavior (e.g., missed payments, subscription pauses)
+## Metadata
+- **app_name**: Required string (e.g., "claude-ai-agent")
+- **description**: 140-character summary of core functionality
+- **author**: Creator/organization name
+- **version**: Semver format (e.g., "0.2.1")
+- **license**: Open source license type (MIT, Apache, etc.)
+- **keywords**: Array of 3-5 relevant tags
 
-## Intervention Triggers
-- First warning: 7-day email reminder with usage insights
-- Second warning: Personalized call from account manager
-- Final notice: Credit line reduction with exit survey
+## Permissions
+- **data_access**: 
+  - `read`: Access to user data (e.g., "read:email")
+  - `write`: Modify user data (e.g., "write:documents")
+  - `delete`: Remove user data (e.g., "delete:cache")
+- **api_usage**: 
+  - `rate_limit`: Max requests per minute
+  - `endpoint`: Specific API endpoints allowed
+- **third_party**: 
+  - `integration`: Approved third-party services
+  - `sandbox`: Isolated environment for testing
 
-## Save-the-Account Scripts
-1. **Immediate Action**: 
-   - Send personalized email with tailored benefits
-   - Offer 1:1 session with product expert
-   - Provide exclusive discount (e.g., 15% for 3 months)
+## Pricing
+- **model**: 
+  - `pay_per_use`: Based on API calls
+  - `subscription`: Monthly/yearly plans
+  - `freemium`: Free tier + premium upgrades
+- **tiers**: 
+  - `basic`: Core features (e.g., 100 API calls/month)
+  - `pro`: Advanced features (e.g., 1000 API calls/month)
+  - `enterprise`: Custom SLA and support
+- **payment**: 
+  - `stripe`: Credit card processing
+  - `paypal`: Alternative payment method
+  - `bank_transfer`: Direct bank transfer
 
-2. **Escalation Protocol**:
-   - Schedule urgent call with CSM team
-   - Present tailored renewal proposal
-   - Offer flexible payment options
-
-3. **Last Chance**:
-   - Share success stories of retained clients
-   - Provide exit interview opportunity
-   - Offer data migration assistance
-
-## Metrics to Track
-- Churn rate reduction
-- Customer retention score
-- Net promoter score (NPS)
-- Cost per retention vs. acquisition
-
-## Tools Required
-- Customer success platform
-- CRM integration
-- Analytics dashboard
-- Email automation system
+## Additional Fields
+- **dependencies**: 
+  - `libraries`: Required frameworks (e.g., "langchain@0.2.1")
+  - `models`: AI models required (e.g., "huggingface/gpt2")
+- **security**: 
+  - `encryption`: Data protection standards
+  - `auth`: Authentication methods (OAuth2, JWT)
+- **compliance**: 
+  - `gdpr`: EU data protection compliance
+  - `ccpa`: California privacy law compliance
+```
