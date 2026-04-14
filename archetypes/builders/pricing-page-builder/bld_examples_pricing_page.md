@@ -27,7 +27,7 @@ description: "Compare plans to find the right fit for your team"
 
 | Feature              | Basic ($12/user/month) | Pro ($29/user/month) | Enterprise (Custom) |
 |----------------------|------------------------|----------------------|---------------------|
-| Task Management      | ✔️                     | ✔️                   | ✔️                  |
+| Task Management      | [YES]                     | [YES]                   | [YES]                  |
 | Integrations         | 10                     | 50                   | Unlimited           |
 | Storage              | 5GB                    | 20GB                 | Unlimited           |
 | Priority Support     | Email                  | 24/7 Chat            | Dedicated Account   |
@@ -35,7 +35,7 @@ description: "Compare plans to find the right fit for your team"
 
 **Why upgrade?**  
 Pro plan users report 40% faster project completion. Enterprise customers get custom workflows and API access.  
-👉 [Start free trial](#) or [Contact sales](#)
+--> [Start free trial](#) or [Contact sales](#)
 
 ## Anti-Example 1: Missing clear CTAs
 ---

@@ -20,18 +20,18 @@ density_score: 0.85
 Designs and builds interactive pricing page UI components, ensuring alignment with brand guidelines and user experience standards. Coordinates with data and marketing teams for integration.  
 
 ## Receives From  
-| Builder              | What                  | Format      |  
-|---------------------|-----------------------|-------------|  
-| subscription_tier   | Tier data             | JSON        |  
-| design_system       | UI component specs    | Figma       |  
-| analytics           | Usage statistics      | CSV         |  
+| Builder                      | What                              | Format  |  
+|------------------------------|-----------------------------------|---------|  
+| content_monetization-builder | Tier pricing data, feature gating spec | YAML |  
+| landing_page-builder         | Hero section copy + brand context | YAML    |  
+| referral_program-builder     | Upgrade CTA copy variants (A/B)   | YAML    |  
 
 ## Produces For  
-| Builder              | What                  | Format      |  
-|---------------------|-----------------------|-------------|  
-| subscription_tier   | Configurable tier UI  | React       |  
-| marketing           | Embeddable pricing UI | HTML/CSS    |  
-| analytics           | Event tracking code   | JavaScript  |  
+| Builder                      | What                              | Format  |  
+|------------------------------|-----------------------------------|---------|  
+| landing_page-builder         | Pricing section embed (tier table + CTAs) | YAML |  
+| content_monetization-builder | Tier comparison UI spec + most-popular badge logic | YAML |  
+| onboarding_flow-builder      | Post-sign-up upgrade nudge copy   | YAML    |  
 
 ## Boundary  
-Does NOT handle subscription_tier data modeling (subscription_tier_builder), landing_page content (landing_page_builder), or payment processing (payment_gateway_builder).
+Does NOT handle subscription billing logic (content_monetization-builder), landing_page hero content (landing_page-builder), or payment gateway integration. Pricing page is UI + copy only; business logic lives in monetization layer.
