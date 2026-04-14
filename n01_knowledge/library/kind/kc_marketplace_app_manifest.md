@@ -1,7 +1,7 @@
 ---
 id: kc_marketplace_app_manifest
 kind: knowledge_card
-title: Marketplace App Manifest Specification
+title: Marketplace App Manifest Spec
 version: 1.0.0
 quality: null
 pillar: P01
@@ -9,43 +9,82 @@ pillar: P01
 
 # Marketplace App Manifest Specification
 
-This document defines the metadata structure and requirements for applications listed in Claude, LangChain, and HuggingFace marketplace platforms.
+This document defines the metadata structure for apps listed on Claude, LangChain, and HuggingFace marketplaces. The manifest enables platform-specific metadata, permission declarations, and pricing models.
 
-## Core Requirements
-1. **Metadata** - Must include app name, description, author, and version
-2. **Permissions** - Explicit declaration of data access rights (user data, system resources)
-3. **Pricing** - Transparent pricing model (free, subscription, pay-per-use)
-4. **Compatibility** - Specified supported platforms and version ranges
-5. **Security** - Encryption standards and authentication protocols
-
-## Format Structure
+## Core Structure
 ```yaml
-manifest:
-  metadata:
-    name: string
-    description: string
-    author: string
-    version: semantic-version
-  permissions:
-    data_access: [user_data, system_resources]
-    security:
-      encryption: string
-      authentication: string
-  pricing:
-    model: free | subscription | pay_per_use
-    details: object
-  compatibility:
-    platforms: [platform1, platform2]
-    min_version: string
-    max_version: string
+manifest_version: "1.0.0"
+app_id: "marketplace:app:uuid"
+name:
+  en: "App Name"
+  other_langs: {...}
+description:
+  en: "Brief functionality summary"
+  other_langs: {...}
 ```
 
-## Validation Rules
-- All required fields must be present
-- Semantic versioning format (x.x.x)
-- Security protocols must match implemented capabilities
-- Pricing model must align with platform capabilities
-```
+## Required Fields
+- `manifest_version` (string): Required format "x.y.z"
+- `app_id` (string): Unique identifier across all marketplaces
+- `name` (object): Primary language (en) and optional translations
+- `description` (object): Primary language (en) and optional translations
+
+## Optional Enhancements
+- `icon_url` (string): URL to app icon
+- `tags` (array): Keyword categories for discovery
+- `license` (string): Open source/license type
+- `dependencies` (array): Required runtime dependencies
+
+## Permissions
+```yaml
+permissions:
+  access: ["read", "write", "execute"]
+  data: ["user_data", "system_logs"]
+  network: ["public", "private"]
 ```
 
-The file contains **46 lines** (including YAML frontmatter and content), meets the English-only requirement, and adheres to the specified structure. It includes the required YAML format example and validation rules.
+## Pricing Model
+```yaml
+pricing:
+  type: "free" | "paid" | "subscription"
+  currency: "USD" | "EUR" | "GBP"
+  price: 0.99
+  discount: 0.15
+```
+
+## Platform-Specific Metadata
+```yaml
+platforms:
+  claude:
+    model: "claude-3-5-sonnet"
+    max_tokens: 2048
+  langchain:
+    framework: "langchain:0.2.1"
+    pipeline: "llm+chain"
+  huggingface:
+    model_id: "bert-base-uncased"
+    task_type: "text2text"
+```
+
+## Example
+```yaml
+manifest_version: "1.0.0"
+app_id: "marketplace:app:42"
+name:
+  en: "Text Summarizer"
+description:
+  en: "AI-powered text summarization tool"
+permissions:
+  access: ["read", "write"]
+  data: ["user_data"]
+pricing:
+  type: "paid"
+  currency: "USD"
+  price: 2.99
+platforms:
+  claude:
+    model: "claude-3-5-son00"
+  huggingface:
+    model_id: "t5-small"
+```
+```
