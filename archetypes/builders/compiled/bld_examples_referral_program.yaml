@@ -1,0 +1,34 @@
+kind: examples
+id: bld_examples_referral_program
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of referral_program artifacts
+quality: null
+title: Examples Referral Program
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- referral_program
+- builder
+- examples
+tldr: Golden and anti-examples of referral_program artifacts
+domain: referral_program construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: referral_program  \nname: \"Dropbox Referral Program\"  \nvendor: Dropbox Inc.  \ndescription: \"Incentivizes\
+  \ users to invite peers via tiered rewards and viral sharing mechanics.\"  \nspec:  \n  viral_coefficient: 2.5  \n  reward_structure:\
+  \  \n    - level: 1  \n      condition: \"Invite 1 user\"  \n      reward: \"5GB of storage\"  \n    - level: 5  \n    \
+  \  condition: \"Invite 5 users\"  \n      reward: \"100GB of storage + $10 credit\"  \n  tracking:  \n    - method: \"Unique\
+  \ referral links with UTM parameters\"  \n    - attribution: \"First-click model for credit assignment\"  \n  metrics: \
+  \ \n    - \"Referral conversion rate\"  \n    - \"Average number of referrals per user\"  "
+anti_example_1_missing_viral_coefficient: "kind: referral_program  \nname: \"FakeApp Referral Program\"  \nvendor: FakeApp\
+  \ LLC.  \ndescription: \"Users earn points for referrals, but no clear viral mechanics.\"  \nspec:  \n  reward_structure:\
+  \  \n    - level: 1  \n      condition: \"Invite 1 user\"  \n      reward: \"10 points\"  \n  tracking:  \n    - method:\
+  \ \"Email-based referral codes\"  "
+why_it_fails: Reward structure is too distant (100 invites) to motivate participation. High threshold creates friction, making
+  the program ineffective for viral growth.
+anti_example_2_unaligned_reward_structure: "kind: referral_program  \nname: \"BrokenReferral Program\"  \nvendor: BrokenCo\
+  \ Inc.  \ndescription: \"Rewards are given only after 100 referrals, deterring early engagement.\"  \nspec:  \n  viral_coefficient:\
+  \ 1.2  \n  reward_structure:  \n    - level: 100  \n      condition: \"Invite 100 users\"  \n      reward: \"Free premium\
+  \ subscription\"  "

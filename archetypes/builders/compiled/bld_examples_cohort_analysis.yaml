@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_cohort_analysis
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of cohort_analysis artifacts
+quality: null
+title: Examples Cohort Analysis
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- cohort_analysis
+- builder
+- examples
+tldr: Golden and anti-examples of cohort_analysis artifacts
+domain: cohort_analysis construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: cohort_analysis\nname: monthly_retention_by_acquisition_channel\ndescription: \"Tracks user retention\
+  \ rates and LTV by acquisition channel over time\"\nvendor: Looker\ndata_source: Snowflake\nparameters:\n  cohort_definition:\
+  \ \"Users acquired in the same calendar month\"\n  time_period: \"2023-01-01 to 2023-12-31\"\n  metrics:\n    - name: \"\
+  30_day_retention_rate\"\n      description: \"Percentage of users active 30 days post-acquisition\"\n    - name: \"customer_lifetime_value\"\
+  \n      description: \"Predicted LTV calculated using cohort spend patterns\""
+anti_example_1_mixed_with_benchmarking: "kind: cohort_analysis\nname: retention_vs_benchmark\ndescription: \"Compares cohort\
+  \ retention to industry benchmarks\"\nvendor: Google Analytics\ndata_source: BigQuery\nparameters:\n  cohort_definition:\
+  \ \"Users from Q3 2023\"\n  benchmark_data: \"Third-party retention benchmarks\"\n  metrics:\n    - name: \"Benchmark_rank\"\
+  \n      description: \"Cohort performance relative to industry peers\""
+why_it_fails_combines_cohort_analysis_with_benchmarking_model_evaluation_violating_the_boundary: ''
+anti_example_2_billing_focused: "kind: cohort_analysis\nname: usage_by_subscription_type\ndescription: \"Tracks feature usage\
+  \ by subscription plan\"\nvendor: Stripe\ndata_source: PostgreSQL\nparameters:\n  cohort_definition: \"Users with active\
+  \ subscriptions\"\n  metrics:\n    - name: \"Monthly_revenue_per_user\"\n      description: \"Average revenue per user by\
+  \ subscription tier\""
+why_it_fails_focuses_on_billing_metrics_rather_than_retention_ltv_confusing_with_usage_report_kind: ''

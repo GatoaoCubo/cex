@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_white_label_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of white_label_config artifacts
+quality: null
+title: Examples White Label Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- white_label_config
+- builder
+- examples
+tldr: Golden and anti-examples of white_label_config artifacts
+domain: white_label_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "name: white_label_config\nkind: white_label_config\ndescription: Configuration for Acme Corp's white-label\
+  \ deployment on Stripe and AWS\ntags:\n  - reseller\n  - branding\nbranding:\n  reseller_name: \"Acme Corp\"\n  reseller_logo_url:\
+  \ \"https://acme.com/logo.png\"\n  custom_domain: \"acme.stripe.com\"\napi_keys:\n  stripe_publishable_key: \"pk_live_1234567890\"\
+  \n  stripe_secret_key: \"sk_live_0987654321\"\n  aws_access_key_id: \"AKIAXXXXXXXXXXXXXXXX\"\n  aws_secret_access_key: \"\
+  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"\nreseller_settings:\n  allowed_brands: [\"Acme Corp\", \"Beta Inc\"]\n  support_email:\
+  \ \"support@acme.com\""
+anti_example_1_brand_identity_confusion: "name: white_label_config\nkind: white_label_config\nbranding:\n  company_logo: \"\
+  logo.svg\"\n  primary_color: \"#007BFF\"\n  secondary_color: \"#6C757D\""
+why_it_fails: Includes runtime environment variables that belong in env_config, not white-label configuration. White-label
+  config should handle reseller branding and deployment parameters, not runtime infrastructure settings.
+anti_example_2_runtime_environment_mixing: "name: white_label_config\nkind: white_label_config\nenv_vars:\n  DATABASE_URL:\
+  \ \"postgres://user:pass@localhost:5432/dbname\"\n  API_ENDPOINT: \"https://api.prod.example.com\""

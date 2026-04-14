@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_referral_program
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for referral_program
+quality: null
+title: Instruction Referral Program
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- referral_program
+- builder
+- instruction
+tldr: Step-by-step production process for referral_program
+domain: referral_program construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze target audience demographics and referral behavior patterns.
+- Benchmark existing referral programs for viral coefficient benchmarks (e.g., 1.5–3.0).
+- Calculate required reward thresholds to achieve desired user acquisition rates.
+- Identify legal constraints (e.g., anti-spam laws, reward tax implications).
+- Model user journey maps to identify high-impact referral touchpoints.
+- Conduct A/B testing on incentive structures (e.g., cash vs. in-game items).
+phase_2_compose:
+- 'Define schema in SCHEMA.md: `referral_program { viral_coefficient: float, reward_structure: map }`.'
+- 'Map OUTPUT_TEMPLATE.md fields: `referral_code`, `user_id`, `reward_claimed`.'
+- 'Set viral_coefficient formula: `referrals_per_user * conversion_rate`.'
+- Design tiered rewards (e.g., 10% discount for 1st referral, 20% for 5+).
+- 'Embed constraints: max 5 referrals per user, 30-day reward window.'
+- Code referral tracking logic with SQL triggers for real-time updates.
+- 'Implement anti-fraud checks: IP throttling, referral code uniqueness.'
+- Write API endpoints for reward redemption and status checks.
+- 'Document edge cases: expired codes, duplicate claims, reward caps.'
+phase_3_validate:
+- '[ ] Verify viral_coefficient ≥ 1.2 using historical data simulations.'
+- '[ ] Confirm reward_structure aligns with SCHEMA.md constraints.'
+- '[ ] Test referral code generation uniqueness (0% collisions).'
+- '[ ] Validate legal compliance with GDPR/CCPA for user data.'
+- '[ ] Stress-test system with 100k concurrent referrals (≤2s latency).'

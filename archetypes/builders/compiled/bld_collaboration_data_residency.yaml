@@ -1,0 +1,26 @@
+kind: collaboration
+id: bld_collaboration_data_residency
+pillar: P12
+llm_function: COLLABORATE
+purpose: How data_residency-builder works in crews with other builders
+quality: null
+title: Collaboration Data Residency
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- data_residency
+- builder
+- collaboration
+tldr: How data_residency-builder works in crews with other builders
+domain: data_residency construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Defines data residency rules and maps data assets to geographic regions based on regulatory requirements.
+receives_from: "| Builder         | What                  | Format  |  \n|-----------------|-----------------------|---------|\
+  \  \n| data_inventory  | List of data assets   | CSV     |  \n| compliance_officer | Regulatory requirements | JSON  | \
+  \ \n| geography_mapper | Region mappings       | YAML    |"
+produces_for: "| Builder         | What                  | Format  |  \n|-----------------|-----------------------|---------|\
+  \  \n| data_governance | Residency policies    | JSON    |  \n| infrastructure  | Region-specific configs | YAML  |  \n\
+  | compliance_team | Validation reports    | PDF     |"
+boundary: Does NOT manage credentials (secret_config) or access control (rbac_policy). These are handled by dedicated builders.

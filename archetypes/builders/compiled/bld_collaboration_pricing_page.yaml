@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_pricing_page
+pillar: P12
+llm_function: COLLABORATE
+purpose: How pricing_page-builder works in crews with other builders
+quality: null
+title: Collaboration Pricing Page
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- pricing_page
+- builder
+- collaboration
+tldr: How pricing_page-builder works in crews with other builders
+domain: pricing_page construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Designs and builds interactive pricing page UI components, ensuring alignment with brand guidelines and user experience
+  standards. Coordinates with data and marketing teams for integration.
+receives_from: "| Builder              | What                  | Format      |  \n|---------------------|-----------------------|-------------|\
+  \  \n| subscription_tier   | Tier data             | JSON        |  \n| design_system       | UI component specs    | Figma\
+  \       |  \n| analytics           | Usage statistics      | CSV         |"
+produces_for: "| Builder              | What                  | Format      |  \n|---------------------|-----------------------|-------------|\
+  \  \n| subscription_tier   | Configurable tier UI  | React       |  \n| marketing           | Embeddable pricing UI | HTML/CSS\
+  \    |  \n| analytics           | Event tracking code   | JavaScript  |"
+boundary: Does NOT handle subscription_tier data modeling (subscription_tier_builder), landing_page content (landing_page_builder),
+  or payment processing (payment_gateway_builder).

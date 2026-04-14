@@ -1,0 +1,31 @@
+kind: tools
+id: bld_tools_white_label_config
+pillar: P04
+llm_function: CALL
+purpose: Tools available for white_label_config production
+quality: null
+title: Tools White Label Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- white_label_config
+- builder
+- tools
+tldr: Tools available for white_label_config production
+domain: white_label_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles white-label config\
+  \ templates into deployable formats | During config deployment |  \n| cex_score.py | Scores config validity against compliance\
+  \ rules | Pre-deployment validation |  \n| cex_retriever.py | Fetches dynamic config data from external sources | When integrating\
+  \ real-time data |  \n| cex_doctor.py | Diagnoses config conflicts and suggests fixes | Post-deployment troubleshooting\
+  \ |  \n| cex_generator.py | Auto-generates config templates from schema definitions | Initial config setup |  \n| cex_deployer.py\
+  \ | Applies config changes to target environments | Final deployment stage |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| validation_check.py | Validates config syntax\
+  \ and structure | Pre-deployment |  \n| consistency_validator.py | Ensures cross-environment config consistency | Multi-environment\
+  \ setups |  \n| config_linter.py | Enforces naming and formatting standards | Code review phases |"
+external_references:
+- JSON Schema (for config structure validation)
+- Pydantic (for data model enforcement)
+- ConfigCat (for feature flag integration)

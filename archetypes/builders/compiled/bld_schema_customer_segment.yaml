@@ -1,0 +1,49 @@
+kind: schema
+id: bld_schema_customer_segment
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for customer_segment
+quality: null
+title: Schema Customer Segment
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- customer_segment
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for customer_segment
+domain: customer_segment construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes | null | Must match\
+  \ ID Pattern |  \n| kind | string | yes | \"customer_segment\" | Fixed value |  \n| pillar | string | yes | \"P02\" | Fixed\
+  \ value |  \n| title | string | yes | null | Descriptive name |  \n| version | string | yes | \"1.0\" | Semantic versioning\
+  \ |  \n| created | string | yes | ISO 8601 | Timestamp of creation |  \n| updated | string | yes | ISO 8601 | Timestamp\
+  \ of last update |  \n| author | string | yes | null | Owner/creator |  \n| domain | string | yes | null | Business area\
+  \ (e.g., \"retail\") |  \n| quality | null | yes | null | Never self-score; peer review assigns |  \n| tags | array | yes\
+  \ | [] | Keywords for categorization |  \n| tldr | string | yes | null | One-sentence summary |  \n| customer_type | string\
+  \ | yes | null | E.g., \"B2B\", \"B2C\" |  \n| segmentation_criteria | array | yes | [] | E.g., [\"age\", \"purchase_frequency\"\
+  ] |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| use_case | string | Primary business application |  \n| primary_metric\
+  \ | string | Key performance indicator |"
+id_pattern: ^p02_cs_[a-z][a-z0-9_]+.md$
+body_structure:
+- Overview
+- Definition and purpose of the customer segment.
+- Segmentation Criteria
+- Detailed breakdown of attributes and filters.
+- Use Cases
+- Specific applications in product, marketing, or service.
+- Key Metrics
+- Quantitative and qualitative measures for evaluation.
+- Data Sources
+- Systems or datasets used to define the segment.
+constraints:
+- ID must be unique and follow the regex pattern.
+- Pillar must be "P02" and cannot be modified.
+- All required fields must be populated before submission.
+- Dates must use ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ).
+- Quality must be reviewed by at least two peers.
+- Tags must be lowercase and relevant to the domain.

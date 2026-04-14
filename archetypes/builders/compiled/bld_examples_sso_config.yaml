@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_sso_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of sso_config artifacts
+quality: null
+title: Examples Sso Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- sso_config
+- builder
+- examples
+tldr: Golden and anti-examples of sso_config artifacts
+domain: sso_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: sso_config\nmetadata:\n  name: okta-saml-integration\n  namespace: default\nspec:\n  protocol: saml\n\
+  \  idp:\n    entity_id: \"https://idp.okta.com/app/exk3h4567890abcdef1234567890abcdef/sso/saml/metadata\"\n    metadata_url:\
+  \ \"https://idp.okta.com/app/exk3h4567890abcdef1234567890abcdef/sso/saml/metadata\"\n    acs_url: \"https://app.example.com/saml/acs\"\
+  \n    x509_certificate: \"MIID...XYZ=\"\n  sp:\n    entity_id: \"https://app.example.com/saml/sp\"\n    assertion_consumer_service_url:\
+  \ \"https://app.example.com/saml/acs\""
+anti_example_1_missing_required_fields: "kind: sso_config\nmetadata:\n  name: broken-saml\nspec:\n  protocol: saml\n  idp:\n\
+  \    entity_id: \"https://idp.example.com/metadata\""
+why_it_fails: Mixing OIDC and SAML configurations in the same artifact. The `saml` field is invalid under OIDC protocol spec.
+  Secret fields should be managed separately via secret_config.
+anti_example_2_protocol_mixing: "kind: sso_config\nmetadata:\n  name: mixed-oidc-saml\nspec:\n  protocol: oidc\n  idp:\n \
+  \   issuer: \"https://auth0.example.com/oidc\"\n    client_id: \"abcd1234\"\n    client_secret: \"s3cr3t\"\n  saml:\n  \
+  \  entity_id: \"https://idp.okta.com/metadata\""
