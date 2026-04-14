@@ -1,4 +1,4 @@
-Create: P01_knowledge/library/kind/kc_agents_md.md
-KC about agents_md. Description: AAIF/OpenAI AGENTS.md project-root manifest: setup/test/lint commands, PR format, deploy rules, coding-agent conventions
-YAML: id: kc_agents_md, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
+Create: P01_knowledge/library/kind/kc_kubernetes_ai_requirement.md
+KC about kubernetes_ai_requirement. Description: CNCF Kubernetes AI Requirement (KAR) conformance artifact: GPU topology, InfiniBand, MIG, DRA, checkpoint PVCs, multi-node training
+YAML: id: kc_kubernetes_ai_requirement, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
 English only. Under 80 lines.
