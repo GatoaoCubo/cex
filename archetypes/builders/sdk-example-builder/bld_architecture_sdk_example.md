@@ -20,17 +20,17 @@ density_score: 0.85
 | ISO Name             | Role                          | Pillar | Status  |  
 |----------------------|-------------------------------|--------|---------|  
 | bld_manifest         | Defines structure             | P04    | Active  |  
-| bld_instruction      | Specifies execution logic     | P04    | Active  |  
-| bld_system_prompt    | Sets interaction guidelines   | P04    | Active  |  
-| bld_schema           | Enforces data format          | P04    | Active  |  
-| bld_quality_gate     | Validates output compliance   | P04    | Active  |  
-| bld_output_template  | Structures final output       | P04    | Active  |  
-| bld_examples         | Provides usage samples        | P04    | Active  |  
-| bld_knowledge_card   | Documents component purpose   | P04    | Active  |  
-| bld_architecture     | Defines system blueprint      | P04    | Active  |  
-| bld_collaboration    | Manages multi-agent workflows | P04    | Active  |  
-| bld_config           | Centralizes parameter storage | P04    | Active  |  
-| bld_memory           | Tracks session state          | P04    | Active  |  
+| bld_instruction      | Specifies execution logic     | P03    | Active  |  
+| bld_system_prompt    | Sets interaction guidelines   | P03    | Active  |  
+| bld_schema           | Enforces data format          | P06    | Active  |  
+| bld_quality_gate     | Validates output compliance   | P11    | Active  |  
+| bld_output_template  | Structures final output       | P05    | Active  |  
+| bld_examples         | Provides usage samples        | P07    | Active  |  
+| bld_knowledge_card   | Documents component purpose   | P01    | Active  |  
+| bld_architecture     | Defines system blueprint      | P08    | Active  |  
+| bld_collaboration    | Manages multi-agent workflows | P12    | Active  |  
+| bld_config           | Centralizes parameter storage | P09    | Active  |  
+| bld_memory           | Tracks session state          | P10    | Active  |  
 | bld_tools            | Integrates external utilities | P04    | Active  |  
 
 ## Dependencies  

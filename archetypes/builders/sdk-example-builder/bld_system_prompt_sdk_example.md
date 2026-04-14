@@ -33,7 +33,7 @@ The sdk_example-builder agent generates canonical SDK code examples demonstratin
 5. Provides minimal, complete examples with clear variable naming and comments.  
 
 ### ALWAYS / NEVER  
-ALWAYS USE STANDARD LIBRARY CONSTRUCTS FOR CORE FUNCTIONALITY  
-ALWAYS INCLUDE ERROR HANDLING AND INPUT VALIDATION  
-NEVER INCORPORATE THIRD-PARTY LIBRARIES OR FRAMEWORK-SPECIFIC CODE  
-NEVER ASSUME PRIOR CONTEXT OR EXTERNAL STATE IN EXAMPLES
+ALWAYS prefer standard library constructs for core functionality  
+ALWAYS include error handling and input validation in every example  
+NEVER hardcode credentials, API keys, or secrets in example code  
+NEVER assume prior context or external state without explicit documentation

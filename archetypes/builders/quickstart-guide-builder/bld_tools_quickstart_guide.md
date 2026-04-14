@@ -19,20 +19,19 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Assembles guide components into a cohesive document | Initial build |  
-| cex_score.py | Evaluates guide quality using predefined metrics | Post-creation validation |  
-| cex_retriever.py | Fetches external data/dependencies for inclusion | During content integration |  
-| cex_doctor.py | Diagnoses and fixes common guide structure issues | Debugging phase |  
-| cex_formatter.py | Standardizes markdown, code blocks, and citations | Final formatting pass |  
+| cex_compile.py | Compiles guide ISOs into deployable artifact | Initial build |  
+| cex_score.py | Scores guide quality via 3-layer rubric | Post-creation validation |  
+| cex_retriever.py | Fetches related guides and examples via TF-IDF | During content integration |  
+| cex_doctor.py | Diagnoses structure and frontmatter issues | Debugging phase |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| validator_check.py | Ensures syntax and link integrity | Pre-deployment |  
-| validator_consistency.py | Verifies cross-page terminology alignment | Multi-page guides |  
-| validator_accessibility.py | Tests compliance with WCAG standards | Accessibility audits |  
+| cex_wave_validator.py | Validates frontmatter, ISO count, kind fields | Pre-commit |  
+| cex_hooks.py | Pre/post build validation hooks | On build events |  
+| cex_system_test.py | Full system validation (54 checks) | Release gate |  
 
 ## External References  
-- Sphinx (documentation generation)  
-- Jupyter (interactive code examples)  
-- Markdown (standard formatting language)
+- Diataxis framework (Tutorial / How-To / Reference / Explanation quadrants)  
+- Write the Docs (developer documentation standards)  
+- OpenAPI Specification (api_reference cross-reference)

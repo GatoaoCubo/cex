@@ -25,19 +25,19 @@ density_score: 0.85
 6. Document research findings into a requirements matrix.  
 
 ## Phase 2: COMPOSE  
-1. Create project structure per SCHEMA.md (e.g., `examples/`, `tests/`, `docs/`).  
+1. Create project structure per bld_schema_sdk_example.md (e.g., `examples/`, `tests/`, `docs/`).  
 2. Write code examples for each language, aligning with mapped use cases.  
-3. Implement authentication flow using P04-standard tokens (refer to SCHEMA.md §3.2).  
-4. Use OUTPUT_TEMPLATE.md for code formatting (indentation, comments, variable names).  
+3. Implement authentication flow using P04-standard tokens (refer to bld_schema_sdk_example.md).  
+4. Use bld_output_template_sdk_example.md for code formatting (indentation, comments, variable names).  
 5. Add error handling per language conventions (e.g., Python’s `try/except`, JS’s `try/catch`).  
 6. Write unit tests for each example (e.g., mock API responses, validate edge cases).  
 7. Generate documentation stubs in `docs/` (API references, usage examples).  
-8. Conduct code review against SCHEMA.md compliance and P04 domain rules.  
+8. Conduct code review against bld_schema_sdk_example.md compliance and P04 domain rules.  
 9. Package artifact with versioning (e.g., `sdk_example-v1.0.0.tar.gz`).  
 
 ## Phase 3: VALIDATE  
-- [ ] ✅ All code examples conform to SCHEMA.md structure and P04 function specs.  
-- [ ] ✅ Unit tests pass for all languages (coverage ≥90%).  
-- [ ] ✅ Error handling matches language-specific best practices.  
-- [ ] ✅ Documentation in `docs/` aligns with OUTPUT_TEMPLATE.md.  
-- [ ] ✅ Artifact builds successfully across target languages (CI/CD pipeline).
+- [ ] All code examples conform to bld_schema_sdk_example.md structure and P04 function specs.  
+- [ ] Unit tests pass for all languages (coverage >=90%).  
+- [ ] Error handling matches language-specific best practices.  
+- [ ] Documentation in `docs/` aligns with bld_output_template_sdk_example.md.  
+- [ ] Artifact builds successfully across target languages (CI/CD pipeline).

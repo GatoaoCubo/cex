@@ -19,20 +19,19 @@ density_score: 0.85
 ## Production Tools  
 | Tool              | Purpose                  | When                          |  
 |-------------------|--------------------------|-------------------------------|  
-| cex_compile.py    | Compiles API specs       | During reference generation   |  
-| cex_score.py      | Scores API quality       | Post-validation               |  
-| cex_retriever.py  | Fetches API endpoints    | Pre-processing                |  
-| cex_doctor.py     | Diagnoses spec issues    | On error detection            |  
-| cex_formatter.py  | Standardizes output      | Before final export           |  
+| cex_compile.py    | Compiles ISOs to deployable artifact | During reference generation |  
+| cex_score.py      | Scores quality via 3-layer rubric | Post-validation             |  
+| cex_retriever.py  | Finds related API artifacts via TF-IDF | Pre-processing            |  
+| cex_doctor.py     | Diagnoses frontmatter and structure issues | On error detection      |  
 
 ## Validation Tools  
 | Tool              | Purpose                  | When                          |  
 |-------------------|--------------------------|-------------------------------|  
-| val_checker.py    | Validates spec consistency | Post-compilation              |  
-| val_linter.py     | Enforces style rules     | During development            |  
-| val_tester.py     | Runs integration tests   | Pre-deployment                |  
+| cex_wave_validator.py | Validates frontmatter, ISO count, kind fields | Pre-commit      |  
+| cex_hooks.py      | Pre/post build validation hooks | On build events              |  
+| cex_system_test.py | Full system validation (54 checks) | Release gate              |  
 
 ## External References  
-- Swagger UI (API visualization)  
-- OpenAPI Generator (spec generation)  
-- Pydantic (data validation)
+- OpenAPI Specification 3.1 (endpoint/method/param/response structure)  
+- Swagger UI / ReDoc (interactive API documentation rendering)  
+- JSON Schema (request/response payload validation)

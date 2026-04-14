@@ -20,18 +20,18 @@ density_score: 0.85
 | ISO Name             | Role                          | Pillar | Status |  
 |----------------------|-------------------------------|--------|--------|  
 | bld_manifest         | Core structure definition     | P05    | Active |  
-| bld_instruction      | User task definition          | P05    | Active |  
-| bld_system_prompt    | LLM interaction framework     | P05    | Active |  
-| bld_schema           | Data format validation        | P05    | Active |  
-| bld_quality_gate     | Output verification logic     | P05    | Active |  
+| bld_instruction      | User task definition          | P03    | Active |  
+| bld_system_prompt    | LLM interaction framework     | P03    | Active |  
+| bld_schema           | Data format validation        | P06    | Active |  
+| bld_quality_gate     | Output verification logic     | P11    | Active |  
 | bld_output_template  | Standardized response format  | P05    | Active |  
-| bld_examples         | Training data repository      | P05    | Active |  
-| bld_knowledge_card   | Domain-specific knowledge     | P05    | Active |  
-| bld_architecture     | System design blueprint       | P05    | Active |  
-| bld_collaboration    | Multi-agent coordination      | P05    | Active |  
-| bld_config           | Runtime parameter store       | P05    | Active |  
-| bld_memory           | Session state management      | P05    | Active |  
-| bld_tools            | Utility functions             | P05    | Active |  
+| bld_examples         | Training data repository      | P07    | Active |  
+| bld_knowledge_card   | Domain-specific knowledge     | P01    | Active |  
+| bld_architecture     | System design blueprint       | P08    | Active |  
+| bld_collaboration    | Multi-agent coordination      | P12    | Active |  
+| bld_config           | Runtime parameter store       | P09    | Active |  
+| bld_memory           | Session state management      | P10    | Active |  
+| bld_tools            | Utility functions             | P04    | Active |  
 
 ## Dependencies  
 | From              | To                  | Type       |  

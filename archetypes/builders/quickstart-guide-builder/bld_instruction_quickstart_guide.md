@@ -25,19 +25,19 @@ density_score: 0.85
 6. Validate technical feasibility with engineering teams  
 
 ## Phase 2: COMPOSE  
-1. Use SCHEMA.md to define structure: title, audience, prerequisites, steps  
+1. Use bld_schema_quickstart_guide.md to define structure: title, audience, prerequisites, steps  
 2. Write intro: purpose, time estimate, success metrics  
 3. List prerequisites (software, account setup, API keys)  
 4. Step-by-step: install CLI, configure env vars, first API call  
 5. Embed code snippets (language-specific: Python/JavaScript)  
 6. Add troubleshooting: common errors, mitigation steps  
-7. Format with OUTPUT_TEMPLATE.md: bullet points, code blocks, warnings  
+7. Format with bld_output_template_quickstart_guide.md: bullet points, code blocks, warnings  
 8. Reference API docs for accuracy (version, rate limits, auth)  
 9. Proofread for conciseness: remove jargon, ensure 5-minute completion  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ All steps complete in <5 minutes with no blockers  
-[ ] ✅ Code samples execute without errors in test environments  
-[ ] ✅ Prerequisites align with current SDK/CLI versions  
-[ ] ✅ Language and terminology match target audience (e.g., "endpoint" vs "URL")  
-[ ] ✅ Schema and template compliance checked via automated linter
+[ ] All steps complete in <5 minutes with no blockers  
+[ ] Code samples execute without errors in test environments  
+[ ] Prerequisites align with current SDK/CLI versions  
+[ ] Language and terminology match target audience (e.g., "endpoint" vs "URL")  
+[ ] Schema and template compliance checked via automated linter

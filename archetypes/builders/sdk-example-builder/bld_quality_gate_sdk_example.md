@@ -37,14 +37,14 @@ density_score: 0.85
 ## SOFT Scoring  
 | Dim | Dimension | Weight | Scoring Guide |  
 |---|---|---|---|  
-| D01 | Code clarity | 0.15 | Readable, well-structured code |  
+| D01 | Code clarity | 0.20 | Readable, well-structured code |  
 | D02 | Completeness | 0.20 | All required patterns implemented |  
-| D03 | Error handling | 0.15 | Robust error handling examples |  
+| D03 | Error handling | 0.20 | Robust error handling examples |  
 | D04 | Documentation | 0.15 | Clear inline comments and README |  
-| D05 | Licensing | 0.10 | Valid license notice present |  
+| D05 | Licensing | 0.05 | Valid license notice present |  
 | D06 | Security | 0.10 | No insecure practices detected |  
-| D07 | Language support | 0.10 | Examples for all supported languages |  
-| D08 | API versioning | 0.15 | Correct API versioning used |  
+| D07 | Language support | 0.05 | Examples for all supported languages |  
+| D08 | API versioning | 0.05 | Correct API versioning used |  
 
 ## Actions  
 | Score | Action |  

@@ -22,7 +22,7 @@ density_score: 0.85
 3. Extract parameters (query, path, body) with data types and constraints.  
 4. Define response formats (JSON, XML) and error codes (4xx, 5xx).  
 5. Gather example requests/responses for each endpoint.  
-6. Validate against SCHEMA.md for structure and constraint compliance.  
+6. Validate against bld_schema_api_reference.md for structure and constraint compliance.  
 
 ## Phase 2: COMPOSE  
 1. Create table of contents with grouped endpoints (e.g., /v1/resources).  
@@ -31,13 +31,13 @@ density_score: 0.85
 4. Detail parameters (name, type, required, example) per endpoint.  
 5. Specify response codes, schemas, and example payloads.  
 6. Insert example requests/responses with cURL and JSON samples.  
-7. Cross-reference SCHEMA.md to ensure parameter/response alignment.  
-8. Use OUTPUT_TEMPLATE.md for consistent formatting (tables, code blocks).  
+7. Cross-reference bld_schema_api_reference.md to ensure parameter/response alignment.  
+8. Use bld_output_template_api_reference.md for consistent formatting (tables, code blocks).  
 9. Finalize with versioning, changelog, and API lifecycle notes.  
 
 ## Phase 3: VALIDATE  
-[ ] ✅ All endpoints listed with correct methods/paths  
-[ ] ✅ Authentication details match SCHEMA.md and spec  
-[ ] ✅ Example requests/responses pass constraint validation  
-[ ] ✅ Formatting adheres to OUTPUT_TEMPLATE.md rules  
-[ ] ✅ Peer review confirms clarity and completeness
+[ ] All endpoints listed with correct methods/paths  
+[ ] Authentication details match bld_schema_api_reference.md and spec  
+[ ] Example requests/responses pass constraint validation  
+[ ] Formatting adheres to bld_output_template_api_reference.md rules  
+[ ] Peer review confirms clarity and completeness

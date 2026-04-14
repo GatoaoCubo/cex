@@ -19,7 +19,9 @@ density_score: 0.85
 ## Definition  
 | metric | threshold | operator | scope |  
 |---|---|---|---|  
-| onboarding time | 5 minutes | less than | product/API |  
+| ID pattern | ^p05_qs_[a-z][a-z0-9_]+.md$ | matches | all artifacts |  
+| step count | 3-7 numbered steps | range | guide body |  
+| prerequisite section present | true | equals | all artifacts |  
 
 ## HARD Gates  
 | ID | Check | Fail Condition |  
