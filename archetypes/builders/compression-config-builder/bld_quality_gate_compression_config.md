@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, compression-config, context-window, token-reduction, P11]
 tldr: "Gates for compression_config artifacts: validates strategy completeness, trigger ratio range, preserve types, decay weights, and pipeline ordering."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: compression_config
 ## Definition
 | Field     | Value |

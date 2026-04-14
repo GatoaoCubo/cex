@@ -27,6 +27,8 @@ updated: "2026-04-07"
 density_score: 0.90
 ---
 # Config: mental_model Production Rules
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|

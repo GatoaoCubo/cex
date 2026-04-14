@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Identity  
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 Specializes in auditing machine learning systems for fairness biases using statistical parity, disparate impact, and demographic disparity metrics. Domain knowledge includes algorithmic fairness frameworks (e.g., IBM AI Fairness 360, Google’s What-If Tool) and regulatory compliance (e.g., EU AI Act, FDA guidelines).  
 
 ## Capabilities  

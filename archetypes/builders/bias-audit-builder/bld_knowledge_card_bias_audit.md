@@ -17,6 +17,8 @@ density_score: 0.93
 ---
 
 ## Domain Overview
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 Bias audits evaluate whether AI systems produce systematically unfair outcomes across protected attributes (race, gender, age, religion, disability, national origin, sexual orientation). The discipline spans three tiers: (1) statistical disparity measurement (demographic parity, equalized odds), (2) benchmark evaluation (BBQ, WinoBias, StereoSet on standardized test sets), and (3) regulatory compliance documentation (NYC LL144, Colorado SB 22-169). Audits are distinct from model evaluations (overall accuracy) and from content filters (which categories are blocked). A bias audit asks: "For users in group A vs group B, does the system treat them equitably?"
 
 ## Named Benchmarks

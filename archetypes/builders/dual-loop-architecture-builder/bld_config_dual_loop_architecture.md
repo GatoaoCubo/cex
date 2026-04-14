@@ -20,6 +20,8 @@ density_score: 0.88
 
 ## Naming Convention
 
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
+
 Pattern: `p08_dl_{{agent_name}}.md`
 Examples: `p08_dl_coding_agent.md`, `p08_dl_research_agent.md`, `p08_dl_customer_support.md`
 Regex: `^p08_dl_[a-z][a-z0-9_]{2,48}\.md$`

@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: "Build a unit_eval YAML that tests one agent or prompt in isolation with a concrete input, expected output, and verifiable assertions."
 density_score: 0.90
+llm_function: REASON
 ---
-
 ## Context
 The unit-eval-builder produces a `unit_eval` artifact -- a structured YAML that defines an isolated test for a single agent or prompt. Each unit_eval specifies the exact input, the expected output, the assertions that must hold, and the setup/teardown state needed to run the test independently.
 **Critical distinction**: `unit_eval` tests one component in isolation with a known expected output. It is NOT a quick sanity check (smoke_eval), a full pipeline test (e2e_eval), or a quality calibration benchmark (golden_test). Mixing these types produces tests that fail for the wrong reasons.
@@ -123,13 +123,13 @@ SOFT gates (log warnings):
 Verifiable exit: 7/7 HARD gates pass.
 ## Output Contract
 ```yaml
-id: unit_eval_{{test_name}}
+id: unit_eval_`{{test_name}}`
 kind: unit_eval
 pillar: P07
 version: 1.0.0
-target_id: {{target_id}}
-target_kind: {{target_kind}}
-test_name: {{test_name}}
-edge_case: {{edge_case}}
-input: {{input}}
-expected_output: {{expected_output}}
+target_id: `{{target_id}}`
+target_kind: `{{target_kind}}`
+test_name: `{{test_name}}`
+edge_case: `{{edge_case}}`
+input: `{{input}}`
+expected_output: `{{expected_output}}`

@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
+
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
 1. Analyze existing thinking_config templates for P09 constraints  
 2. Identify token budget thresholds from historical performance data  
 3. Map required parameters to schema constraints in SCHEMA.md  

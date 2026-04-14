@@ -18,6 +18,8 @@ density_score: 0.88
 
 ## Definition
 
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
+
 A `thinking_config` artifact defines the resource allocation parameters for extended AI
 reasoning processes: token budgets, depth limits, timeout thresholds, and fallback strategies.
 It does NOT define reasoning techniques (reasoning_strategy) or context window sizing

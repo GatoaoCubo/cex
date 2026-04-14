@@ -53,20 +53,20 @@ linked_artifacts:
   primary: "{{primary_ref_or_omit}}"
   related: [{{related_refs_or_omit}}]
 ```
-# {{AGENT_GROUP}} — {{MISSION}}: {{Title}}
-**{{Autonomy}} Autonomy** | **Quality {{quality_target}}+**
+# `{{AGENT_GROUP}}` — {{MISSION}}: `{{Title}}`
+**`{{Autonomy}}` Autonomy** | **Quality `{{quality_target}}`+**
 **REGRA: Commit and signal ANTES de qualquer pausa.**
 ## Context
-{{why_this_work_is_needed}}
-{{relevant_background}}
+`{{why_this_work_is_needed}}`
+`{{relevant_background}}`
 ## Tasks
-### Step 1: {{ACTION_VERB}}
-{{specific_actionable_instruction}}
-### Step 2: {{ACTION_VERB}}
-{{specific_actionable_instruction}}
+### Step 1: `{{ACTION_VERB}}`
+`{{specific_actionable_instruction}}`
+### Step 2: `{{ACTION_VERB}}`
+`{{specific_actionable_instruction}}`
 ## Scope Fence
-1. SOMENTE: {{allowed_paths}}
-2. NAO TOQUE: {{forbidden_paths}}
+1. SOMENTE: `{{allowed_paths}}`
+2. NAO TOQUE: `{{forbidden_paths}}`
 ## Commit
 ```bash
 git add {{paths}}

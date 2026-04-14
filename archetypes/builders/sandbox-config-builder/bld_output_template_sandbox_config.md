@@ -48,38 +48,38 @@ platform: "{{platform}}"          # e2b | modal | daytona | docker | firecracker
 
 ```
 network:
-  mode: {{network_mode}}        # none | bridge | host | custom
-  egress: {{egress_policy}}     # none | whitelist | all
-  allowed_hosts: {{allowed_hosts_list}}   # [] for air-gapped
-  allowed_ports: {{allowed_ports_list}}   # [] for no outbound
-  dns: {{dns_enabled}}          # false for air-gapped
+  mode: `{{network_mode}}`        # none | bridge | host | custom
+  egress: `{{egress_policy}}`     # none | whitelist | all
+  allowed_hosts: `{{allowed_hosts_list}}`   # [] for air-gapped
+  allowed_ports: `{{allowed_ports_list}}`   # [] for no outbound
+  dns: `{{dns_enabled}}`          # false for air-gapped
 ```
 
 ## Filesystem Scope
 
 ```
 filesystem:
-  root: {{sandbox_root}}        # e.g. /tmp/sandbox or /var/sandbox
-  read_only_root: {{ro_root}}   # true | false
-  scratch_dir: {{scratch_path}} # ephemeral writable area (tmpfs)
-  scratch_size_mb: {{scratch_mb}}
+  root: `{{sandbox_root}}`        # e.g. /tmp/sandbox or /var/sandbox
+  read_only_root: `{{ro_root}}`   # true | false
+  scratch_dir: `{{scratch_path}}` # ephemeral writable area (tmpfs)
+  scratch_size_mb: `{{scratch_mb}}`
   mounts:
-    - path: {{mount_path}}
-      source: {{host_path}}
-      read_only: {{mount_ro}}
+    - path: `{{mount_path}}`
+      source: `{{host_path}}`
+      read_only: `{{mount_ro}}`
 ```
 
 ## Isolation Mechanism
 
 ```
 isolation:
-  runtime: {{runtime}}          # runc | runsc | nsjail | firecracker | qemu
+  runtime: `{{runtime}}`          # runc | runsc | nsjail | firecracker | qemu
   namespaces: [pid, net, mnt, uts, ipc, user]
-  seccomp_profile: {{seccomp_profile}}  # default | custom | none
-  apparmor_profile: {{apparmor_profile}}  # null if not applicable
+  seccomp_profile: `{{seccomp_profile}}`  # default | custom | none
+  apparmor_profile: `{{apparmor_profile}}`  # null if not applicable
   capabilities:
     drop: [ALL]
-    add: {{required_capabilities}}  # e.g. [NET_BIND_SERVICE]
+    add: `{{required_capabilities}}`  # e.g. [NET_BIND_SERVICE]
   no_new_privs: true
 ```
 
@@ -87,9 +87,9 @@ isolation:
 
 ```
 audit:
-  syscall_logging: {{syscall_log}}  # true | false
-  log_destination: {{log_path}}     # /var/log/sandbox/ or syslog
-  log_retention_days: {{log_days}}
+  syscall_logging: `{{syscall_log}}`  # true | false
+  log_destination: `{{log_path}}`     # /var/log/sandbox/ or syslog
+  log_retention_days: `{{log_days}}`
 ```
 
 ## Platform-Specific Config
@@ -98,32 +98,32 @@ audit:
 ```toml
 # e2b.toml
 [template]
-dockerfile = "{{dockerfile_path}}"
+dockerfile = "`{{dockerfile_path}}`"
 [resources]
-vcpu = {{cpu_limit}}
-memory_mb = {{memory_mb}}
-timeout = {{timeout_seconds}}
+vcpu = `{{cpu_limit}}`
+memory_mb = `{{memory_mb}}`
+timeout = `{{timeout_seconds}}`
 ```
 
 ### Docker
 ```bash
 docker run \
-  --cpus {{cpu_limit}} \
-  --memory {{memory_mb}}m \
-  --network {{network_mode}} \
+  --cpus `{{cpu_limit}}` \
+  --memory `{{memory_mb}}`m \
+  --network `{{network_mode}}` \
   --read-only \
-  --tmpfs /tmp:size={{scratch_mb}}m \
+  --tmpfs /tmp:size=`{{scratch_mb}}`m \
   --cap-drop ALL \
-  --security-opt seccomp={{seccomp_profile}} \
-  {{image_name}}
+  --security-opt seccomp=`{{seccomp_profile}}` \
+  `{{image_name}}`
 ```
 
 ### nsjail
 ```
 # nsjail.cfg
-time_limit: {{timeout_seconds}}
-rlimit_cpu: {{cpu_limit_int}}
-rlimit_as: {{memory_bytes}}
+time_limit: `{{timeout_seconds}}`
+rlimit_cpu: `{{cpu_limit_int}}`
+rlimit_as: `{{memory_bytes}}`
 log_fd: 2
-mount { src: "{{sandbox_root}}" dst: "/" is_bind: true rw: false }
+mount { src: "`{{sandbox_root}}`" dst: "/" is_bind: true rw: false }
 ```

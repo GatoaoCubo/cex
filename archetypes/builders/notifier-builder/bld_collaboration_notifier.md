@@ -2,7 +2,7 @@
 kind: collaboration
 id: bld_collaboration_notifier
 pillar: P04
-llm_function: CONTEXT
+llm_function: COLLABORATE
 purpose: Crew roles, dependencies, and collaboration patterns for notifier-builder
 version: 1.0.0
 created: 2026-03-28

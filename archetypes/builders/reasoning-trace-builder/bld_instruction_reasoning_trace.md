@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Produce a structured YAML reasoning trace capturing step-evidence-confidence chains, rejected alternatives, and conclusion — under 8192 bytes, human-auditable, no execution instructions included.
 density_score: 0.86
+llm_function: REASON
 ---
-
 ## Context
 The reasoning-trace-builder produces `reasoning_trace` artifacts — structured YAML records
 capturing the complete chain-of-thought behind an agent's decision. A reasoning trace answers

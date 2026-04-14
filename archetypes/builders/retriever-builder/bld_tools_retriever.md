@@ -2,7 +2,7 @@
 kind: tools
 id: bld_tools_retriever
 pillar: P08
-llm_function: INJECT
+llm_function: CALL
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -10,6 +10,7 @@ author: builder_agent
 quality: 9.0
 tags: [tools, retriever, P08, RAG, vector-search]
 density_score: 1.0
+title: Tools ISO - retriever
 ---
 # Tools: retriever-builder
 
@@ -29,7 +30,7 @@ density_score: 1.0
 | Source | Content | Usage |
 |--------|---------|-------|
 | bld_schema_retriever.md | Field definitions, enums, constraints | REQUIRED — read before composing |
-| bld_output_template_retriever.md | Fillable template | REQUIRED — fill {{vars}} |
+| bld_output_template_retriever.md | Fillable template | REQUIRED — fill `{{vars}}` |
 | bld_quality_gate_retriever.md | HARD + SOFT gate definitions | REQUIRED — validate before deliver |
 | bld_knowledge_card_retriever.md | Domain patterns, metric guide, store comparison | Reference for recommendations |
 | bld_examples_retriever.md | Golden + anti-example with gate annotations | Reference when uncertain |

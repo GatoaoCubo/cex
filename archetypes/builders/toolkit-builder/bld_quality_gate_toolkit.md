@@ -16,8 +16,8 @@ tags:
   - permissions
   - p11
 tldr: "Gates ensuring toolkits enforce least-privilege with correct confirmation tiers, deny lists override allow lists, tool count stays under 15, and no implementation code leaks into the permission bundle."
+llm_function: GOVERN
 ---
-
 ## Definition
 A toolkit is a permission bundle defining which tools an agent can access and under what constraints. It passes this gate when every write tool requires confirmation, deny lists are explicit with reasons, the tool count stays under 15, no tool implementation code is present, and the least-privilege principle is demonstrably applied.
 ## HARD Gates

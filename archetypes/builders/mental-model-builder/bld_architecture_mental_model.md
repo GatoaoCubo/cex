@@ -17,6 +17,8 @@ density_score: 0.90
 ---
 
 # Architecture: mental_model in the CEX
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|

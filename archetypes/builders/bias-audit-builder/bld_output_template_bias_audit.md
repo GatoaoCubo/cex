@@ -18,6 +18,8 @@ density_score: 0.85
 
 # p07_ba_{{name}}.md
 
+This ISO drives a bias audit: measuring fairness across demographic slices.
+
 ```yaml
 ---
 title: {{title}}
@@ -33,19 +35,19 @@ status: {{status}}
 ```
 
 ## Introduction  
-{{introduction_content}}  
+`{{introduction_content}}`  
 
 ## Scope  
-{{scope_content}}  
+`{{scope_content}}`  
 
 ## Methodology  
-{{methodology_content}}  
+`{{methodology_content}}`  
 
 ## Findings  
-{{findings_content}}  
+`{{findings_content}}`  
 
 ## Recommendations  
-{{recommendations_content}}  
+`{{recommendations_content}}`  
 
 ## Conclusion  
-{{conclusion_content}}
+`{{conclusion_content}}`

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, search-tool, P04, web-search, semantic-search, provider]
 tldr: "Pass/fail gate for search_tool artifacts: provider specification, max_results, result structure, cost documentation, and API key security."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: search_tool
 ## Definition
 | Field | Value |

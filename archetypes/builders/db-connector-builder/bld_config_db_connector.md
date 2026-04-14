@@ -27,6 +27,8 @@ updated: "2026-04-07"
 density_score: 0.90
 ---
 # Config: connector Production Rules
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|

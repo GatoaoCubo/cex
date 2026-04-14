@@ -53,13 +53,13 @@ Consumed by pipeline orchestrator at startup; missing required dirs block execut
 ## Path Catalog
 | Path | Type | Platform | Default | Required | Notes |
 |------|------|----------|---------|----------|-------|
-| base_dir | dir | all | {{APP_ROOT}}/data_pipeline | yes | Root for all pipeline paths |
-| input_dir | dir | all | {{base_dir}}/input | yes | Raw data ingestion directory |
-| output_dir | dir | all | {{base_dir}}/output | yes | Processed output directory |
-| staging_dir | dir | all | {{base_dir}}/staging | no | Temp staging area, auto-created |
-| log_dir | dir | all | {{base_dir}}/logs | no | Pipeline execution logs |
-| config_dir | dir | all | {{base_dir}}/config | yes | Pipeline configuration files |
-| cache_dir | dir | all | {{base_dir}}/cache | no | Intermediate cache, purgeable |
+| base_dir | dir | all | `{{APP_ROOT}}`/data_pipeline | yes | Root for all pipeline paths |
+| input_dir | dir | all | `{{base_dir}}`/input | yes | Raw data ingestion directory |
+| output_dir | dir | all | `{{base_dir}}`/output | yes | Processed output directory |
+| staging_dir | dir | all | `{{base_dir}}`/staging | no | Temp staging area, auto-created |
+| log_dir | dir | all | `{{base_dir}}`/logs | no | Pipeline execution logs |
+| config_dir | dir | all | `{{base_dir}}`/config | yes | Pipeline configuration files |
+| cache_dir | dir | all | `{{base_dir}}`/cache | no | Intermediate cache, purgeable |
 ## Directory Hierarchy
 ```text
 {{APP_ROOT}}/data_pipeline/

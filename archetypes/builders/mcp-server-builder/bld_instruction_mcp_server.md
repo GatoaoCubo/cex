@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: Define an MCP server artifact specifying transport type, tools with JSON-Schema parameters, resources with URI templates, and auth strategy.
 density_score: 0.90
+llm_function: REASON
 ---
-
 ## Context
 The mcp-server-builder produces `mcp_server` artifacts (P04) — specification documents for Model Context Protocol servers that expose tools and resources for LLM agents to consume. An mcp_server artifact is a definition, not running code; it specifies what a server exposes and how clients connect to it.
 MCP servers differ from connectors (bidirectional integrations), clients (API consumers), skills (reusable capability sequences), and daemons (background processes without MCP protocol).

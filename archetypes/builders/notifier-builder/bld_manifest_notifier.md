@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P04
 parent: null
 domain: notifier
-llm_function: CALL
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -30,7 +30,7 @@ delivery guarantees. Produces notifier artifacts with channel, template, priorit
 
 ## Capabilities
 1. Define notification channel (email, sms, slack, discord, push, in_app, teams)
-2. Specify message templates with variable substitution ({{user_name}}, {{order_id}}, etc.)
+2. Specify message templates with variable substitution (`{{user_name}}`, `{{order_id}}`, etc.)
 3. Configure priority levels (critical, high, normal, low) with delivery timing semantics
 4. Define rate limiting and throttling rules (max_per_minute, max_per_hour)
 5. Map delivery guarantees (at_least_once with retry, best_effort fire-and-forget)

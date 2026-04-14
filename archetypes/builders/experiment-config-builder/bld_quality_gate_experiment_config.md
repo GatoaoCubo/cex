@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, experiment-config, ab-test, variants, metrics, P11]
 tldr: "Gates for experiment_config: validates variant structure, traffic splits, metric definitions, and statistical parameter completeness."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: experiment_config
 ## Definition
 | Field | Value |

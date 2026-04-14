@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 | Name | Role | Owner | Status |  
 |------|------|-------|--------|  
 | Bias Detector | Identifies biased patterns | Risk Team | In Progress |  

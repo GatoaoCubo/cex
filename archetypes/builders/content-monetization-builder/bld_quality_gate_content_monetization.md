@@ -12,8 +12,8 @@ quality: 9.1
 tags: [quality-gate, content-monetization, P11, pricing, billing, credits, governance]
 tldr: "Gates for monetization artifacts — margin enforcement, webhook idempotency, credit tracking, mock-first development, checkout security."
 density_score: 1.0
+llm_function: GOVERN
 ---
-
 # Gate: content_monetization
 
 ## Definition

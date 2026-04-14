@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
+
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
 1. Define dual-loop architecture purpose: outer loop for long-term planning, inner loop for real-time execution.  
 2. Analyze existing agent control frameworks for compatibility with P08 REASON function.  
 3. Identify key components: outer loop (goals, policies), inner loop (sensors, actuators).  

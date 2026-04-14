@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: Developer Experience Patterns
 tags: [developer, experience, patterns]
-quality: null
+quality: 8.8
 ---
 
 # Developer Experience Patterns

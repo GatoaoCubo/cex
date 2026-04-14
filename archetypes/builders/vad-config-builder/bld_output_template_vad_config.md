@@ -36,14 +36,14 @@ threshold: {{energy_threshold_db}}
 
 ## Configuration Parameters
 ```yaml
-# VAD Engine: {{engine}}  # webrtc | silero | kaldi | custom
-aggressiveness: {{aggressiveness_0_to_3}}  # WebRTC mode: 0=least, 3=most aggressive
-sensitivity: {{sensitivity_0_to_1}}         # Speech detection probability floor
-noise_floor_db: {{noise_floor_db}}          # Background noise floor (dBFS, typical: -60 to -30)
-frame_size_ms: {{frame_size_ms}}            # Analysis window (10, 20, or 30ms for WebRTC)
-min_speech_duration_ms: {{min_speech_ms}}   # Minimum speech segment length (typical: 250-500ms)
-max_silence_duration_ms: {{max_silence_ms}} # Silence before end-of-utterance (typical: 500-2000ms)
-speech_pad_ms: {{speech_pad_ms}}            # Padding around detected speech (typical: 30-100ms)
+# VAD Engine: `{{engine}}`  # webrtc | silero | kaldi | custom
+aggressiveness: `{{aggressiveness_0_to_3}}`  # WebRTC mode: 0=least, 3=most aggressive
+sensitivity: `{{sensitivity_0_to_1}}`         # Speech detection probability floor
+noise_floor_db: `{{noise_floor_db}}`          # Background noise floor (dBFS, typical: -60 to -30)
+frame_size_ms: `{{frame_size_ms}}`            # Analysis window (10, 20, or 30ms for WebRTC)
+min_speech_duration_ms: `{{min_speech_ms}}`   # Minimum speech segment length (typical: 250-500ms)
+max_silence_duration_ms: `{{max_silence_ms}}` # Silence before end-of-utterance (typical: 500-2000ms)
+speech_pad_ms: `{{speech_pad_ms}}`            # Padding around detected speech (typical: 30-100ms)
 ```
 
 ## Environment Profile

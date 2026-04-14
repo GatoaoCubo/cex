@@ -17,8 +17,8 @@ tags:
   - task-routing
   - dispatch
 tldr: "Quality gate for task routing logic: verifies route table completeness, confidence threshold, fallback reachability, and pattern uniqueness."
+llm_function: GOVERN
 ---
-
 ## Definition
 A router artifact maps incoming task patterns to destination agents or workers using a route table, a confidence threshold, and a guaranteed fallback. It specifies priority ordering when multiple routes could match, escalation behavior for low-confidence cases, and timeout policies per route. Every route must have a unique pattern — overlapping patterns produce unpredictable dispatch behavior.
 Scope: files with `kind: router`. Does not apply to dispatch rules (P02 sub-kind) or lifecycle rules (P09), which govern behavior after routing.

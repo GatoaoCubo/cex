@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Domain Overview  
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 Reasoning_strategy artifacts structure how AI systems process information to derive conclusions, often used in complex domains like healthcare diagnostics, legal analysis, and autonomous systems. These strategies define the logical flow, heuristics, and constraints guiding inference engines, ensuring alignment with domain-specific rules and objectives. They differ from generic prompt techniques by embedding domain knowledge into the reasoning process, enabling systems to handle ambiguity, prioritize evidence, and validate outputs through formal or semi-formal methods.  
 
 Industries leverage reasoning strategies to enhance transparency, reduce errors, and comply with regulations. For example, in finance, strategies may enforce risk-assessment hierarchies, while in law, they might encode precedent-based argumentation. Effective strategies balance computational efficiency with accuracy, often integrating knowledge graphs, rule-based systems, or probabilistic models.  

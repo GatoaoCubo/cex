@@ -17,6 +17,8 @@ density_score: 0.92
 ---
 
 ## Definition
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 | metric | threshold | operator | scope | scale |
 |--------|-----------|----------|-------|-------|
 | disparate_impact_ratio | 0.80 | >= | protected_group / reference_group | 0.0-1.0 (EEOC 4/5 rule) |

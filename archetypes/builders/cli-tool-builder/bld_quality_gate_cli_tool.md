@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, cli-tool, P04, command-line, exit-codes, output-format]
 tldr: "Pass/fail gate for cli_tool artifacts: command completeness, exit code semantics, output format declaration, and flag documentation."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: cli_tool
 ## Definition
 | Field | Value |

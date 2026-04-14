@@ -23,7 +23,7 @@ density_score: 0.90
 2. Choose channel: email, sms, slack, discord, push, in_app, teams
 3. Select provider matching channel (SendGrid/AWS SES for email, Twilio for SMS,
    Slack API for slack, Discord Webhooks for discord, Firebase FCM for push)
-4. Design message template with {{variable}} placeholders for dynamic content
+4. Design message template with `{{variable}}` placeholders for dynamic content
 5. Define priority levels and their delivery timing expectations:
    - critical: immediate, retry until delivered, page on-call
    - high: within 2 minutes, retry 3x
@@ -35,10 +35,10 @@ density_score: 0.90
 
 ## Phase 2: COMPOSE
 1. Read bld_schema_notifier.md — internalize all required fields
-2. Read bld_output_template_notifier.md — fill all {{vars}}
+2. Read bld_output_template_notifier.md — fill all `{{vars}}`
 3. Fill frontmatter: id matches `^p04_notify_[a-z][a-z0-9_]+$`, quality: null
 4. Write `## Overview`: channel, provider, use case in 2-3 sentences
-5. Write `## Template`: message format per priority, list all {{vars}} used
+5. Write `## Template`: message format per priority, list all `{{vars}}` used
 6. Write `## Delivery`: rate_limit object, retry_policy, delivery_guarantee
 7. Write `## Configuration`: provider endpoint, credentials reference (no secrets)
 8. Count body bytes — must stay <= 1024

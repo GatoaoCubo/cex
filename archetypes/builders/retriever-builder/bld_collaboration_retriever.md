@@ -2,7 +2,7 @@
 kind: collaboration
 id: bld_collaboration_retriever
 pillar: P13
-llm_function: INJECT
+llm_function: COLLABORATE
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -10,6 +10,7 @@ author: builder_agent
 quality: 9.1
 tags: [collaboration, retriever, P13, RAG, crew, handoff]
 density_score: 1.0
+title: Collaboration ISO - retriever
 ---
 # Collaboration: retriever-builder
 

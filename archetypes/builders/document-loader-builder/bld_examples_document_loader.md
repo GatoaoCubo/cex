@@ -7,13 +7,13 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 domain: document_loader
-llm_function: INJECT
+llm_function: GOVERN
 quality: 9.1
 tags: [examples, document_loader, ingestion, chunking, RAG, P04]
 tldr: "Golden and anti-examples for document_loader artifacts with gate annotations."
 density_score: 1.0
+title: Examples ISO - document_loader
 ---
-
 # Examples: document_loader-builder
 
 ## Golden Example

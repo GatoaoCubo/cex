@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, optimizer, P11, governance, performance, continuous-improvement]
 tldr: "Gates for optimizer artifacts — metric direction, threshold ordering, and automatable action definitions."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: optimizer
 ## Definition
 | Field     | Value                                             |

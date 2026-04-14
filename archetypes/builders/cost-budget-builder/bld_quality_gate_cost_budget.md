@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, cost-budget, token-budget, spend-tracking, cost-alerts, P11]
 tldr: "Gates for cost_budget artifacts: validates budget catalog completeness, alert thresholds, reset policy, overage action, and provider accuracy."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: cost_budget
 ## Definition
 | Field | Value |

@@ -1,5 +1,5 @@
 ---
-id: invariant-builder-tools
+id: bld_tools_invariant
 kind: tools_manifest
 pillar: P08
 parent: invariant-builder
@@ -13,8 +13,8 @@ title: "Tools Invariant"
 tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
 domain: "invariant construction"
 density_score: 0.90
+llm_function: CALL
 ---
-
 # invariant-builder — TOOLS
 ## Production Tools
 | Tool | Purpose | When | Status |

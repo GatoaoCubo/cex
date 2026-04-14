@@ -43,28 +43,28 @@ graceful_shutdown: "{{shutdown_procedure}}"
 max_restarts: "{{N_in_window}}"
 ```
 ## Overview
-{{what_daemon_does_and_why_background_1_to_2_sentences}}
-{{who_depends_on_it_and_what_triggers_it}}
+`{{what_daemon_does_and_why_background_1_to_2_sentences}}`
+`{{who_depends_on_it_and_what_triggers_it}}`
 ## Lifecycle
-Schedule: {{schedule_details}}
-Startup: {{startup_sequence}}
-Restart: {{restart_policy}} — {{restart_behavior_details}}
-Shutdown: {{graceful_shutdown_procedure}}
+Schedule: `{{schedule_details}}`
+Startup: `{{startup_sequence}}`
+Restart: `{{restart_policy}}` — `{{restart_behavior_details}}`
+Shutdown: `{{graceful_shutdown_procedure}}`
 ## Signal Handling
 | Signal | Response |
 |--------|----------|
-| SIGTERM | {{sigterm_behavior}} |
-| SIGINT | {{sigint_behavior}} |
-| SIGHUP | {{sighup_behavior}} |
-| {{costm_signal}} | {{costm_behavior}} |
+| SIGTERM | `{{sigterm_behavior}}` |
+| SIGINT | `{{sigint_behavior}}` |
+| SIGHUP | `{{sighup_behavior}}` |
+| `{{costm_signal}}` | `{{costm_behavior}}` |
 ## Monitoring
-Health: {{health_check_details}}
-Metrics: {{metrics_collected}}
-Alerting: {{alert_conditions}}
-Logging: {{log_format_and_rotation}}
+Health: `{{health_check_details}}`
+Metrics: `{{metrics_collected}}`
+Alerting: `{{alert_conditions}}`
+Logging: `{{log_format_and_rotation}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Template Standards
 

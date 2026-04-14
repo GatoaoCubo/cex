@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Examples: computer-use-builder
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## Golden Example
 INPUT: "Create computer use tool for browser automation via screenshot-based control"
 OUTPUT:

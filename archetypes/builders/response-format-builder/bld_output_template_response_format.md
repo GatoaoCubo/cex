@@ -56,8 +56,8 @@ linked_artifacts:
 | 2 | {{section_2}} | {{description}} | {{yes/no}} | {{constraints}} |
 | 3 | {{section_3}} | {{description}} | {{yes/no}} | {{constraints}} |
 ## Example Output
-```{{format_type}}
-{{complete_example_showing_expected_shape}}
+````{{format_type}}`
+`{{complete_example_showing_expected_shape}}`
 ```
 ## Injection Instructions
 1. **Point**: {{system_prompt_or_user_message}}

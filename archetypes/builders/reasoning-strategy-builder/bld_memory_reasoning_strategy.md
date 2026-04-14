@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Observation  
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 Common issues include inconsistent reasoning steps, over-reliance on vague heuristics, and failure to align strategy components with task constraints. Builders often omit validation phases, leading to fragile or incomplete strategies.  
 
 ## Pattern  

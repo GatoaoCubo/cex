@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Observation  
+
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
 Common issues include ambiguous syntax for file operations, inconsistent metadata tagging, and failure to specify conflict resolution logic. Artifacts often omit versioning details, leading to compatibility gaps during deployment.  
 
 ## Pattern  

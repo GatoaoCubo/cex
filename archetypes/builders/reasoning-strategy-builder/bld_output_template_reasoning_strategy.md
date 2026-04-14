@@ -34,6 +34,8 @@ strategy_depth: {{1-5}}           # 1=basic heuristic, 5=formal logic chain
 ```
 
 ## Overview
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 <!-- Purpose: what problem this reasoning strategy solves.
      Scope: what input types it applies to.
      Contrast: how it differs from similar strategies. -->
@@ -44,21 +46,21 @@ strategy_depth: {{1-5}}           # 1=basic heuristic, 5=formal logic chain
      Include decision points and branching conditions. -->
 | Step | Operation | Input | Output |
 |------|-----------|-------|--------|
-| 1 | {{operation}} | {{input_type}} | {{output_type}} |
+| 1 | `{{operation}}` | {{input_type}} | `{{output_type}}` |
 
 ## Validation Criteria
 <!-- Measurable checks that confirm the strategy worked correctly.
      At least 3 concrete criteria with pass/fail conditions. -->
-- PASS: {{concrete measurable condition}}
-- FAIL: {{failure indicator}}
+- PASS: `{{concrete measurable condition}}`
+- FAIL: `{{failure indicator}}`
 
 ## Application Scope
 <!-- When to use: specific trigger conditions.
      When NOT to use: boundary conditions and anti-patterns. -->
 | Use | Condition |
 |-----|-----------|
-| Apply | {{specific trigger}} |
-| Skip | {{boundary condition}} |
+| Apply | `{{specific trigger}}` |
+| Skip | `{{boundary condition}}` |
 
 ## Quality Metrics
 | Metric | Target | Method |

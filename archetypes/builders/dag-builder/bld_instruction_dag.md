@@ -28,7 +28,7 @@ density_score: 0.90
 7. Check existing DAGs for overlapping pipeline scope to avoid duplicates
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Nodes section: for each node list id, label, type, and estimated duration
 5. Write Edges section: for each dependency list source node id, target node id, and dependency type

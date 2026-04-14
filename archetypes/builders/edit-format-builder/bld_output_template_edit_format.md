@@ -18,6 +18,8 @@ density_score: 0.90
 
 ## Variant A: Whole File Format
 
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
+
 ```markdown
 ---
 id: p06_ef_{{name}}
@@ -48,8 +50,8 @@ The LLM MUST output the target file path on a line by itself, followed immediate
 a fenced code block containing the entire new file content:
 
 ```
-{{file_path}}
-```{{language}}
+`{{file_path}}`
+``{{language}}`
 {{entire_file_content}}
 ```
 ```
@@ -124,11 +126,11 @@ Best for: targeted edits without line numbers, multi-file changes, resilient app
 ## Format Specification
 
 ```
-{{file_path}}
+`{{file_path}}`
 <<<<<<< SEARCH
-{{exact_content_to_find}}
+`{{exact_content_to_find}}`
 =======
-{{new_content_to_replace_with}}
+`{{new_content_to_replace_with}}`
 >>>>>>> REPLACE
 ```
 
@@ -203,13 +205,13 @@ Best for: git workflows, code review tools, standard patch application.
 ## Format Specification
 
 ```
---- a/{{file_path}}
-+++ b/{{file_path}}
-@@ -{{start_line}},{{original_lines}} +{{start_line}},{{new_lines}} @@
- {{context_line}}
--{{removed_line}}
-+{{added_line}}
- {{context_line}}
+--- a/`{{file_path}}`
++++ b/`{{file_path}}`
+@@ -`{{start_line}}`,{{original_lines}} +{{start_line}},`{{new_lines}}` @@
+ `{{context_line}}`
+-`{{removed_line}}`
++`{{added_line}}`
+ `{{context_line}}`
 ```
 
 ## Application Rules

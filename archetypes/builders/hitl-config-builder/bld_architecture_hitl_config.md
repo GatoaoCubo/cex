@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_hitl_config
 pillar: P08
-llm_function: GOVERN
+llm_function: CONSTRAIN
 purpose: Component map of hitl_config -- inventory, dependencies, and architectural position
 quality: null
 title: "Architecture Hitl Config"
@@ -15,7 +15,6 @@ created: "2026-04-13"
 updated: "2026-04-13"
 density_score: 0.90
 ---
-
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|

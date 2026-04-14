@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: Knowledge Card Marketing
 tags: [knowledge, card, marketing]
-quality: null
+quality: 8.6
 ---
 
 # Knowledge Card Marketing

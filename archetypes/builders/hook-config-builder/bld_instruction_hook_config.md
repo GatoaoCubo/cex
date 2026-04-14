@@ -27,7 +27,7 @@ density_score: 0.90
 6. Review KNOWLEDGE.md for domain patterns and anti-patterns
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (id, kind, pillar, version, created, updated, author, name, target_builder, phases, quality, tags, tldr), quality: null
 4. Write Overview section: what hooks this config declares, which builder it targets
 5. Write Hooks section: hook declaration table with phase, event, action, and condition

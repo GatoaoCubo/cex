@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Domain Knowledge: connector
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ## Executive Summary
 Connectors are bidirectional integration bridges that both send and receive data with external services via REST+webhooks, WebSocket, gRPC, or MQTT. Unlike clients (request/response only), connectors handle inbound events, two-way sync, and data transformation between systems. They define protocol, auth, endpoints, transforms, and health checks.
 ## Spec Table

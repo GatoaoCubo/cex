@@ -20,6 +20,8 @@ density_score: 0.88
 
 ## Runtime Tools (what the produced artifact consumes)
 
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
+
 | Tool | Purpose | When | Owner loop |
 |------|---------|------|------------|
 | tick_scheduler | Drives InnerLoopRunner at fixed tick_ms cadence; also fires outer cadence_s | boot | both |

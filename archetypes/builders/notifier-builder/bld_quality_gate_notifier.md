@@ -2,7 +2,7 @@
 id: p11_qg_notifier
 kind: quality_gate
 pillar: P11
-llm_function: EVALUATE
+llm_function: GOVERN
 purpose: Hard + soft quality gates for notifier artifacts
 version: 1.0.0
 created: 2026-03-28
@@ -12,6 +12,7 @@ tags: [quality_gate, notifier, P04, P11]
 quality: 9.0
 tldr: "10 HARD gates (binary pass/fail) + 12 SOFT dims (scored 0-1). Min score 7.0 for pool."
 density_score: 1.0
+title: Quality Gate ISO - notifier
 ---
 # Gate: notifier
 

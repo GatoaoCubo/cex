@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, hook, event, lifecycle, trigger, intercept]
 tldr: "Gates ensuring hook artifacts define safe, scoped event interceptors with trigger configs, timeout, and error strategies."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: Hook
 ## Definition
 | Field     | Value |

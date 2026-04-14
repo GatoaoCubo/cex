@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, memory-summary, P10, compression, retention, freshness]
 tldr: "Pass/fail gate for memory_summary artifacts: compression method, retention policy, trigger definition, boundary vs session_state and learning_record."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: memory_summary
 ## Definition
 | Field | Value |

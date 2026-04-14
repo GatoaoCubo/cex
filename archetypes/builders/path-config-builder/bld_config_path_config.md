@@ -46,10 +46,10 @@ Rule: id MUST equal filename stem. Hyphens in id = HARD FAIL.
 ## Path Template Conventions
 | Pattern | Resolves to | Example |
 |---------|------------|---------|
-| {{HOME}} | User home directory | /home/user, C:\Users\user |
-| {{APP_ROOT}} | Application root | /opt/app, C:\app |
-| {{TEMP}} | System temp directory | /tmp, C:\Users\user\AppData\Local\Temp |
-| {{base_dir}} | Scope base directory | Defined in artifact base_dir field |
+| `{{HOME}}` | User home directory | /home/user, C:\Users\user |
+| `{{APP_ROOT}}` | Application root | /opt/app, C:\app |
+| `{{TEMP}}` | System temp directory | /tmp, C:\Users\user\AppData\Local\Temp |
+| `{{base_dir}}` | Scope base directory | Defined in artifact base_dir field |
 ## Platform Rules
 | Platform | Separator | Long paths | Case |
 |----------|-----------|------------|------|

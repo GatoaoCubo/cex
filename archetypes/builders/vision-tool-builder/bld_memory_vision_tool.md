@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Vision Tool"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Vision tools are consumed by data pipelines where low-confidence detections are indistinguishable from correct results unless filtered at the spec level. The two most common causes of vision tool integration failure are: (1) undeclared confidence_threshold producing noisy output, and (2) missing supported_formats causing callers to send incompatible image types.

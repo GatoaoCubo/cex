@@ -29,7 +29,7 @@ density_score: 0.90
 8. Confirm provider slug for id: snake_case, lowercase, no hyphens
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write Overview section: what this search does and primary use case
 5. Write Query section: parameters, syntax, filtering options

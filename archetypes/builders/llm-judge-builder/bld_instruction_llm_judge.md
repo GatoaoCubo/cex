@@ -31,7 +31,7 @@ density_score: 0.90
 10. Confirm artifact slug for id: snake_case, lowercase, no hyphens
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Set judge_model: concrete identifier (e.g. "gpt-4o", "claude-3-5-sonnet-20241022")
 5. Write criteria list in frontmatter: exact names that match ## Criteria sections in body

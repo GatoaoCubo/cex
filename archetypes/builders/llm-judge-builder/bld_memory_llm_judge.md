@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Llm Judge"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 LLM-as-Judge quality degrades via two failure modes: variance (same input, different scores) and bias (systematic score inflation). Variance comes from vague anchors — behavioral IF/THEN anchors ("Score 5: all claims traceable to context; no fabricated facts") fix this. Bias comes from judging a model with its own family; a cross-family judge eliminates self-enhancement (+0.4-0.8 points on 1-5 scale).

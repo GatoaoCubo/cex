@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Browser Tool"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Browser automation tools are consumed by agents and pipelines that cannot gracefully handle silent extraction failures. The difference between a resilient browser_tool and a brittle one comes down to two spec-time decisions: selector fallback chain and timeout declaration. Both are invisible during happy-path execution and catastrophic on failure if undefined.

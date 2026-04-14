@@ -29,7 +29,7 @@ density_score: 0.90
 8. Check existing context_docs for overlapping scope to avoid duplication
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields, id as `p01_cd_{{topic_slug}}` (quality: null — never self-score)
 4. Write Domain Scope section: restate scope sentence, list included and excluded topics explicitly
 5. Write Stakeholders section: who uses this context and why, one entry per stakeholder type

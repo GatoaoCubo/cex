@@ -16,8 +16,8 @@ tags:
   - p11
   - intent-resolution
 tldr: "Quality gate for intent resolution artifacts: verifies kind coverage, bilingual patterns, verb table, ambiguity protocol, and fallback heuristics."
+llm_function: GOVERN
 ---
-
 ## Definition
 A prompt_compiler artifact maps natural language user input to structured {kind, pillar, nucleus, verb} tuples. It covers all 124 registered kinds with bilingual patterns (PT-BR + EN), provides verb canonicalization, defines ambiguity resolution for multi-kind matches, and includes fallback heuristics for unrecognized input. It is the first function in every 8F pipeline (F1 CONSTRAIN).
 Scope: files with `kind: prompt_compiler`. Does not apply to routers (P02, provider routing), dispatch rules (P12, task-agent mapping), or prompt templates (P03, variable filling).

@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Naming Convention  
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 Pattern: `p03_rs_{{name}}.md`  
 Examples: `p03_rs_basic.md`, `p03_rs_advanced.md`  
 

@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: Define a specialized analytical perspective as a lens artifact with declared focus, filters, bias, applies_to scope, and interpretation guidance.
 density_score: 0.94
+llm_function: REASON
 ---
-
 ## Context
 The lens-builder produces `lens` artifacts (P02) — declarative filters that define how to analyze or interpret other artifacts from a specific perspective. A lens has no capabilities and takes no actions (that is an agent); it does not define routing rules (that is a mental model); it is a pure analytical perspective applied to artifacts.
 **Inputs:**
@@ -90,23 +90,23 @@ Score SOFT gates from `QUALITY_GATES.md`. If soft score < 8.0, revise in the sam
 4. Confirm `applies_to` list aligns with the `## Application` section examples.
 ## Output Contract
 ```
-id: p02_lens_{{slug}}
+id: p02_lens_`{{slug}}`
 kind: lens
 pillar: P02
 version: 1.0.0
 created: {{YYYY-MM-DD}}
 updated: {{YYYY-MM-DD}}
-author: {{author}}
+author: `{{author}}`
 domain: lens
-lens_name: "{{human_readable_name}}"
-focus: "{{primary_analytical_concern}}"
-applies_to: [{{artifact_type_list}}]
-perspective: "{{what_this_lens_sees_and_emphasizes}}"
-declared_bias: "{{bias_statement}}"
+lens_name: "`{{human_readable_name}}`"
+focus: "`{{primary_analytical_concern}}`"
+applies_to: [`{{artifact_type_list}}`]
+perspective: "`{{what_this_lens_sees_and_emphasizes}}`"
+declared_bias: "`{{bias_statement}}`"
 interpretation_weight: {{0.0-1.0}}
-filters_highlight: [{{attribute_list}}]
-filters_suppress: [{{attribute_list}}]
-limitations: "{{known_blind_spots}}"
+filters_highlight: [`{{attribute_list}}`]
+filters_suppress: [`{{attribute_list}}`]
+limitations: "`{{known_blind_spots}}`"
 status: active
 
 

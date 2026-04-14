@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, embedder-provider, embedding, P01, dimensions]
 tldr: "Quality gate for embedder_provider artifacts: enforces dimensions, normalization, max_tokens, and provider authentication fields."
 density_score: 0.87
+llm_function: GOVERN
 ---
-
 # Gate: Embedder Provider
 ## Definition
 An `embedder_provider` is a connection configuration for an embedding model: provider, model ID, dimensions, normalization, batch size, and authentication. Infrastructure artifact only — not a tutorial. Gates ensure dimension correctness, normalization explicitness, and traceability to official documentation.

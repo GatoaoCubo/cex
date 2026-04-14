@@ -41,23 +41,23 @@ total_budget: {{number_or_null}}
 overage_action: {{block|warn|log}}
 ```
 ## Overview
-{{what_scope_why_these_limits_1_to_2_sentences}}
-{{who_enforces_these_limits}}
+`{{what_scope_why_these_limits_1_to_2_sentences}}`
+`{{who_enforces_these_limits}}`
 ## Budget Catalog
 | Provider | Model | Token Limit | USD Limit | Alert % | Reset | Overage Action |
 |----------|-------|-------------|-----------|---------|-------|----------------|
-| {{provider_1}} | {{model_or_star}} | {{tokens_or_null}} | {{usd_or_null}} | {{warn_pct}}% | {{reset_policy}} | {{block|warn|log}} |
-| {{provider_2}} | {{model_or_star}} | {{tokens_or_null}} | {{usd_or_null}} | {{warn_pct}}% | {{reset_policy}} | {{block|warn|log}} |
+| `{{provider_1}}` | {{model_or_star}} | {{tokens_or_null}} | {{usd_or_null}} | {{warn_pct}}% | `{{reset_policy}}` | {{block|warn|log}} |
+| `{{provider_2}}` | {{model_or_star}} | {{tokens_or_null}} | {{usd_or_null}} | {{warn_pct}}% | `{{reset_policy}}` | {{block|warn|log}} |
 ## Alert Policy
 | Threshold | Level | Channel | Action |
 |-----------|-------|---------|--------|
-| {{warn_pct}}% | warn | {{log|email|webhook|pagerduty}} | {{action_description}} |
-| 100% | block | {{channel}} | {{action_description}} |
-Escalation: {{who_is_notified_and_how}}
+| `{{warn_pct}}`% | warn | {{log|email|webhook|pagerduty}} | `{{action_description}}` |
+| 100% | block | `{{channel}}` | `{{action_description}}` |
+Escalation: `{{who_is_notified_and_how}}`
 ## Overage Rules
-- Breach behavior: {{what_happens_on_limit_hit}}
-- Grace period: {{grace_period_or_none}}
-- Increase request: {{how_to_request_higher_limit}}
+- Breach behavior: `{{what_happens_on_limit_hit}}`
+- Grace period: `{{grace_period_or_none}}`
+- Increase request: `{{how_to_request_higher_limit}}`
 ## References
-- {{reference_1}}
-- {{reference_2}}
+- `{{reference_1}}`
+- `{{reference_2}}`

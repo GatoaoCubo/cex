@@ -1,5 +1,5 @@
 ---
-id: type-def-builder-schema
+id: bld_schema_type_def
 kind: schema
 pillar: P06
 llm_function: CONSTRAIN

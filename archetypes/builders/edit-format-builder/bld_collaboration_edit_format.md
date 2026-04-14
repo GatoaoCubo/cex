@@ -18,6 +18,8 @@ density_score: 0.88
 
 ## Crew Role
 
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
+
 Defines the wire format specification that LLMs use to express file edits. Owns the syntax
 contract between LLM output and host application tools. Receives format requirements from
 upstream orchestration; produces format specs consumed by LLM system prompts, host appliers,

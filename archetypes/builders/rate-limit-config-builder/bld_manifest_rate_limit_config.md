@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P09
 parent: null
 domain: rate_limit_config
-llm_function: CONSTRAIN
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29
@@ -20,6 +20,8 @@ tldr: "Golden and anti-examples for rate limit config construction, demonstratin
 density_score: 0.90
 ---
 # rate-limit-config-builder
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 ## Identity
 Specialist in building rate_limit_config artifacts — configurations de rate limiting
 para APIs de LLM that declaram RPM, TPM, budget mensal, tier, and politica de retry.

@@ -16,8 +16,8 @@ tags:
   - sanity-test
   - p11
 tldr: "Gates ensuring smoke eval files define a critical path, binary pass/fail assertions, a timeout under 30s, and no deep correctness testing."
+llm_function: GOVERN
 ---
-
 ## Definition
 A smoke eval is a fast sanity check (under 30 seconds) that confirms the most critical path of a system is alive and reachable. It does not verify correctness, edge cases, or performance — those belong to deeper eval types. A smoke eval passes this gate when every assertion is binary (pass or fail, no partial credit), the critical path covers the highest-impact flow, and the eval fails fast on the first hard error rather than accumulating multiple failures.
 ## HARD Gates

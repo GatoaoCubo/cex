@@ -52,34 +52,34 @@ tldr: "{{dense_summary_max_160ch}}"
 description: "{{what_tool_does_max_200ch}}"
 ```
 ## Overview
-{{what_this_search_tool_does_1_to_2_sentences}}
-{{primary_use_case_and_when_to_use}}
+`{{what_this_search_tool_does_1_to_2_sentences}}`
+`{{primary_use_case_and_when_to_use}}`
 ## Query
 ### Parameters
-1. `query` (string, required): {{query_description}}
-2. `max_results` (integer, optional, default: {{N}}): {{max_results_description}}
-3. `search_type` (enum, optional): {{search_type_options}}
+1. `query` (string, required): `{{query_description}}`
+2. `max_results` (integer, optional, default: {{N}}): `{{max_results_description}}`
+3. `search_type` (enum, optional): `{{search_type_options}}`
 ### Filtering
-1. Date range: {{date_filtering_description}}
-2. Domain filter: {{domain_filtering_description}}
-3. Language: {{language_filtering_description}}
+1. Date range: `{{date_filtering_description}}`
+2. Domain filter: `{{domain_filtering_description}}`
+3. Language: `{{language_filtering_description}}`
 ## Results
 ### Structure
 Each result contains:
-1. `title` (string): {{title_description}}
-2. `url` (string): {{url_description}}
-3. `snippet` (string): {{snippet_description}}
-4. {{additional_field}}: {{field_description}}
+1. `title` (string): `{{title_description}}`
+2. `url` (string): `{{url_description}}`
+3. `snippet` (string): `{{snippet_description}}`
+4. `{{additional_field}}`: `{{field_description}}`
 ### Ranking
-{{how_results_are_ranked}}
+`{{how_results_are_ranked}}`
 ### Pagination
-{{pagetion_support_description}}
+`{{pagetion_support_description}}`
 ## Provider
-1. API: {{api_endpoint_pattern}}
+1. API: `{{api_endpoint_pattern}}`
 2. Auth: env var `{{ENV_VAR_NAME}}` (NEVER hardcode)
-3. Rate limit: {{rate_limit_detail}}
-4. Cost: {{cost_per_query_detail}}
-5. Free tier: {{free_tier_availability}}
+3. Rate limit: `{{rate_limit_detail}}`
+4. Cost: `{{cost_per_query_detail}}`
+5. Free tier: `{{free_tier_availability}}`
 
 ## Properties
 

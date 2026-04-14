@@ -29,6 +29,7 @@ observation_types: [feedback, reference, project]
 quality: null
 title: "Memory Finetune Config"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Fine-tuning configuration failures fall into two categories: quality failures (under-specified adapters

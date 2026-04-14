@@ -18,6 +18,8 @@ density_score: 0.88
 
 # Tools -- thinking-config-builder
 
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
+
 ## Tool Registry
 
 | Tool | Status | Tag | Purpose |

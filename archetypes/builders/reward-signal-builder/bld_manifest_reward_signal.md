@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P11
 parent: null
 domain: reward_signal
-llm_function: CALL
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-29
 updated: 2026-03-29

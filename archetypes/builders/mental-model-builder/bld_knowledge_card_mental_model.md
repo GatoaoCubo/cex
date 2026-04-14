@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Domain Knowledge: mental_model
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Executive Summary
 Mental models are design-time cognitive blueprints for agents — structured YAML artifacts encoding routing rules, decision trees, priorities, heuristics, and domain boundaries. Each mental model belongs to exactly ONE agent and defines how that agent thinks, not what it does. They differ from agents (which have capabilities and tools), routers (which route tasks between components), system prompts (which define persona), and P10 runtime state (which is ephemeral) by being static, versioned cognitive maps loaded at agent boot.
 ## Spec Table

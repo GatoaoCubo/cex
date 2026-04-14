@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: component-map-builder-examples
+id: bld_examples_component_map
 kind: examples
 parent: component-map-builder
 version: 1.0.0
@@ -13,8 +13,8 @@ domain: "component map construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Examples — component-map-builder
 ## Golden Example
 INPUT: "Map the CEX brain infrastructure components and connections"

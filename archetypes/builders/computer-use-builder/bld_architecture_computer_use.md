@@ -17,6 +17,8 @@ density_score: 0.90
 ---
 
 # Architecture: computer_use
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|

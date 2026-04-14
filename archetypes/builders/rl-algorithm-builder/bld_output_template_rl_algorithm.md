@@ -51,27 +51,27 @@ hyperparameters:
 |-----------|----------|------|
 | Policy | pi(a\|s; theta) | Action selection |
 | Value function | V(s; phi) | Baseline for variance reduction |
-| {{component}} | {{notation}} | {{role}} |
+| `{{component}}` | {{notation}} | `{{role}}` |
 
 ## Training Process
-1. Initialize: {{initialization approach}}
+1. Initialize: `{{initialization approach}}`
 2. Sample: collect T timesteps of experience
 3. Update: {{update rule, e.g., compute advantage, clip ratio, backprop}}
-4. Evaluate: every {{N}} episodes, run {{M}} evaluation episodes
-5. Convergence: {{stopping criterion}}
+4. Evaluate: every `{{N}}` episodes, run `{{M}}` evaluation episodes
+5. Convergence: `{{stopping criterion}}`
 
 ## Evaluation Metrics
 | Metric | Target | Measurement |
 |--------|--------|-------------|
-| Episode reward | >= {{threshold}} | Mean over last 100 episodes |
-| Sample efficiency | {{N}} env steps | Time to reach target reward |
-| {{metric}} | {{target}} | {{method}} |
+| Episode reward | >= `{{threshold}}` | Mean over last 100 episodes |
+| Sample efficiency | `{{N}}` env steps | Time to reach target reward |
+| `{{metric}}` | {{target}} | `{{method}}` |
 
 ## Use Cases
-- APPLY when: {{specific conditions where this algorithm excels}}
-- AVOID when: {{conditions where alternatives outperform}}
+- APPLY when: `{{specific conditions where this algorithm excels}}`
+- AVOID when: `{{conditions where alternatives outperform}}`
 
 ## Constraints
 - Computational: {{GPU memory, parallelism requirements}}
 - Environment: {{required interfaces, gym compatibility}}
-- Reproducibility: fix random seeds {{seed_list}}, log all hyperparameters
+- Reproducibility: fix random seeds `{{seed_list}}`, log all hyperparameters

@@ -11,8 +11,8 @@ domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, tools, cli, mcp, sdk]
 density_score: 0.91
+llm_function: CALL
 ---
-
 # Tool Catalog
 
 ## Supabase CLI

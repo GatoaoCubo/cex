@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Golden Example
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 ```yaml
 ---
 kind: content_filter

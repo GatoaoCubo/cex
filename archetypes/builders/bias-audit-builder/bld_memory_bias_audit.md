@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Observation  
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 Common issues include inconsistent metric definitions, overlooked contextual biases, and misalignment between evaluation criteria and stakeholder priorities. Artifacts often lack transparency in how fairness trade-offs are quantified.  
 
 ## Pattern  

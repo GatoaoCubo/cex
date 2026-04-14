@@ -46,7 +46,7 @@ density_score: 0.90
 |-------|------|----------|-------|
 | target_kind | string | REC | Artifact kind that uses this format |
 | example_output | string | REC | Concrete example of expected output |
-| variable_syntax | enum: mustache, bracket | REC | tier1={{MUSTACHE}} for primary, tier2=[BRACKET] for secondary |
+| variable_syntax | enum: mustache, bracket | REC | tier1=`{{MUSTACHE}}` for primary, tier2=[BRACKET] for secondary |
 | sections | list[string] | REC | Ordered output section names |
 ## ID Pattern
 ```

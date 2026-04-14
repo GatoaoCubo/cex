@@ -18,6 +18,8 @@ density_score: 0.92
 
 ## Domain Overview
 
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
+
 Edit formats define the structured syntax LLMs use to communicate file modifications to
 host systems (code editors, CI pipelines, auto-apply tools). The format must be: unambiguous
 (the tool applies exactly what the LLM intended), resilient (handles whitespace drift, line

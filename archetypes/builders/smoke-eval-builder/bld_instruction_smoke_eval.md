@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Build a smoke_eval with a critical-path check sequence, binary assertions, 30s timeout, and fast-fail — does the component work at all?
 density_score: 0.85
+llm_function: REASON
 ---
-
 ## Context
 The smoke-eval-builder produces `smoke_eval` artifacts — fast sanity tests that verify
 whether a component's critical path is functional. A smoke_eval answers one question:
@@ -116,14 +116,14 @@ quality gates.
 ```
 INPUT: scope_profile, critical_path, prerequisites, assertions, frequency
 1. Assemble frontmatter:
-   id: smoke-eval-{{scope_slug}}  # scope_slug = scope.lower().replace(" ", "-")
+   id: smoke-eval-`{{scope_slug}}`  # scope_slug = scope.lower().replace(" ", "-")
    kind: smoke_eval
    pillar: P07
    version: 1.0.0
-   scope: {{scope}}
+   scope: `{{scope}}`
    timeout_seconds: sum(step_time_s) + 5  # buffer, hard cap at 30
    fast_fail: true
-   frequency: {{frequency}}
+   frequency: `{{frequency}}`
    checks_count: len(critical_path)
    quality: null
    ASSERT timeout_seconds <= 30

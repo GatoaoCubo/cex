@@ -17,6 +17,8 @@ density_score: 0.90
 ---
 
 # Tools: mental-model-builder
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|

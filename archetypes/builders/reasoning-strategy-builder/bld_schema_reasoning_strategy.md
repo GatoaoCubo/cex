@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Frontmatter Fields  
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 ### Required  
 | Field        | Type       | Required | Default | Notes |  
 |--------------|------------|----------|---------|-------|  

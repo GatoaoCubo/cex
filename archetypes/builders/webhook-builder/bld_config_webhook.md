@@ -21,6 +21,7 @@ hooks:
   on_quality_fail: null
 permission_scope: nucleus
 density_score: 1.0
+title: Config ISO - webhook
 ---
 # Config: webhook
 ## Naming Convention

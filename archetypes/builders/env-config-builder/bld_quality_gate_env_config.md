@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, env-config, environment-variables, secrets, configuration, P11]
 tldr: "Gates for env_config artifacts: validates variable catalog completeness, sensitive masking, default correctness, override precedence, and scope accuracy."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: env_config
 ## Definition
 | Field     | Value |

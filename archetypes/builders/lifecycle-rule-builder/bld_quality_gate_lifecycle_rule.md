@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, lifecycle-rule, governance, P11, state-machine]
 tldr: "Quality gate for lifecycle_rule artifacts: enforces state list, measurable transitions, and periodic review cycle."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: Lifecycle Rule
 ## Definition
 A `lifecycle_rule` governs how an artifact kind moves through states from creation to sunset. It defines valid states, the measurable criteria that permit transitions, and the review cadence that keeps the rule current. Gates here ensure no rule is published with vague triggers, missing ownership, or an unverifiable review cycle.

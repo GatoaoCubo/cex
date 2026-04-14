@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, learning-record, experience-capture, P10, retrospective]
 tldr: "Quality gate for learning_record artifacts: enforces outcome classification, impact score, and reproducible context."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: Learning Record
 ## Definition
 A `learning_record` captures a discrete experience — a pattern that worked or an anti-pattern that failed — with enough context to reproduce the outcome. Gates prevent vague retrospectives from entering the pool and ensure every record carries a scored, classified, reproducible finding.

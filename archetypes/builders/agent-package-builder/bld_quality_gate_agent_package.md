@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, agent-package, packaging, portable, bundle, tier, distribution]
 tldr: "Gates ensuring agent_package artifacts are self-contained, tier-compliant, portability-enforced bundles with valid manifests and correct LP file mappings."
 density_score: 0.93
+llm_function: GOVERN
 ---
-
 # Gate: ISO Package
 ## Definition
 | Field     | Value |

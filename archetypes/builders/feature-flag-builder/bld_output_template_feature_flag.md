@@ -39,14 +39,14 @@ expires: "{{YYYY-MM-DD_or_null}}"
 targeting: "{{targeting_strategy_summary}}"
 ```
 ## Flag Specification
-{{feature_description_and_current_state}}
-{{kill_switch_behavior_if_ops}}
+`{{feature_description_and_current_state}}`
+`{{kill_switch_behavior_if_ops}}`
 ## Rollout Strategy
-{{rollout_stages_with_percentages_and_timeline}}
+`{{rollout_stages_with_percentages_and_timeline}}`
 ## Lifecycle
-{{lifecycle_stages_create_test_ramp_full_retire}}
+`{{lifecycle_stages_create_test_ramp_full_retire}}`
 ## References
-- {{reference_1}}
+- `{{reference_1}}`
 ```
 
 ## Template Standards

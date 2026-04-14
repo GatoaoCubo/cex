@@ -28,8 +28,8 @@ dependencies: []
 logging: true
 tldr: "Research input format and extraction targets, compose rules with normalization and error handling, validate gates and write a parser artifact."
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 The parser-builder receives a **raw input sample** and a **list of target fields**, then produces a `parser` artifact encoding how to extract structured data from that input format.
 **Input variables**:

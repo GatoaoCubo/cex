@@ -28,8 +28,8 @@ dependencies: []
 logging: true
 tldr: "Discover recurring problem and forces, compose solution with consequences and anti-patterns, validate recurrence and gates, write a pattern artifact."
 density_score: 0.86
+llm_function: REASON
 ---
-
 ## Context
 The pattern-builder receives a **recurring problem description** and produces a `pattern` artifact that formally encodes the named, reusable solution for that problem.
 **Input variables**:

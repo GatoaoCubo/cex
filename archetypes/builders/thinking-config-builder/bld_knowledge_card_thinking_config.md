@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Domain Overview  
+
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
 Thinking_config artifacts define parameters governing AI system resource allocation during extended reasoning tasks. These configurations balance computational cost, performance, and user-defined constraints, ensuring efficient use of token budgets across complex workflows. In enterprise AI, thinking_config directly impacts system scalability, response latency, and cost predictability, particularly in multi-turn dialogues, code generation, and analytical reasoning. Budget token settings often interact with billing models, requiring alignment with cloud provider APIs and usage monitoring tools to prevent overruns.  
 
 ## Key Concepts  

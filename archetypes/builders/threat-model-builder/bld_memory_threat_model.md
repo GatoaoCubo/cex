@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Observation  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 Common issues include incomplete threat scenarios, siloed input from narrow stakeholders, and over-reliance on generic templates that ignore AI-specific attack vectors (e.g., data poisoning, model inversion).  
 
 ## Pattern  

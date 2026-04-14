@@ -38,21 +38,21 @@ supported_languages: {{language_list}}
 <!-- What this TTS provider does and when to use it.
      Example: "ElevenLabs Turbo v2.5 integration for real-time customer service voice bots.
      Optimized for <300ms TTFB with English/Spanish bilingual support." -->
-{{overview}}
+`{{overview}}`
 
 ## Provider Specifications
 
 | Property | Value |
 |---|---|
-| Provider | {{provider_name}} |
-| API Model | {{model_id}} |
-| MOS Score | {{mos_score}}/5 |
-| TTFB (latency) | {{ttfb_ms}}ms |
-| Price | {{price_per_1k_chars}} per 1K chars |
-| Voice Cloning | {{yes_or_no}} |
-| Languages | {{language_count}} |
-| Audio Formats | {{formats}} |
-| Streaming | {{streaming_support}} |
+| Provider | `{{provider_name}}` |
+| API Model | `{{model_id}}` |
+| MOS Score | `{{mos_score}}`/5 |
+| TTFB (latency) | `{{ttfb_ms}}`ms |
+| Price | `{{price_per_1k_chars}}` per 1K chars |
+| Voice Cloning | `{{yes_or_no}}` |
+| Languages | `{{language_count}}` |
+| Audio Formats | `{{formats}}` |
+| Streaming | `{{streaming_support}}` |
 
 ## API Configuration
 
@@ -88,18 +88,18 @@ chunk_size_bytes: {{chunk_size}} # Typical: 1024-4096 bytes
 
 | SSML Feature | Supported |
 |---|---|
-| `<prosody>` (rate/pitch) | {{yes_no}} |
-| `<break>` (pause injection) | {{yes_no}} |
-| `<phoneme>` (pronunciation) | {{yes_no}} |
-| `<emphasis>` | {{yes_no}} |
-| `<say-as>` (number/date formatting) | {{yes_no}} |
+| `<prosody>` (rate/pitch) | `{{yes_no}}` |
+| `<break>` (pause injection) | `{{yes_no}}` |
+| `<phoneme>` (pronunciation) | `{{yes_no}}` |
+| `<emphasis>` | `{{yes_no}}` |
+| `<say-as>` (number/date formatting) | `{{yes_no}}` |
 
 ## Voice Model Selection
 
 | Voice ID | Name | Gender | Accent | MOS | Use Case |
 |---|---|---|---|---|---|
-| {{voice_id_1}} | {{voice_name_1}} | {{gender}} | {{accent}} | {{mos}} | {{use_case}} |
-| {{voice_id_2}} | {{voice_name_2}} | {{gender}} | {{accent}} | {{mos}} | {{use_case}} |
+| `{{voice_id_1}}` | {{voice_name_1}} | {{gender}} | {{accent}} | {{mos}} | `{{use_case}}` |
+| `{{voice_id_2}}` | {{voice_name_2}} | {{gender}} | {{accent}} | {{mos}} | `{{use_case}}` |
 
 ## Latency Optimization
 

@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Production Tools
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 | Tool | Purpose | When |
 |------|---------|------|
 | cex_compile.py | Compiles reasoning strategies into executable code | During strategy deployment |

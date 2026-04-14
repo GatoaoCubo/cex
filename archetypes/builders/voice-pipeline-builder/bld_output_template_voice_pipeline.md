@@ -16,7 +16,7 @@ updated: "2026-04-13"
 density_score: 0.90
 ---
 
-## Artifact Frontmatter (emit verbatim, fill all {{placeholders}})
+## Artifact Frontmatter (emit verbatim, fill all `{{placeholders}}`)
 
 ```yaml
 ---
@@ -72,10 +72,10 @@ tldr: "{{one_line_purpose}}"  # <= 160 chars
 
 | Stage | Primary | Fallback | Error Signal |
 |-------|---------|----------|--------------|
-| STT | {{stt_primary}} (e.g. Deepgram Nova-2) | {{stt_fallback}} (e.g. OpenAI Whisper v3) | `stt.failed` event + empty transcript |
-| NLU | {{nlu_primary}} (e.g. Dialogflow CX) | {{nlu_fallback}} (e.g. rule-based intent matcher) | `nlu.failed` event + default intent |
-| Dialogue Management | {{dm_primary}} | {{dm_fallback}} (e.g. static FAQ lookup) | `dm.failed` event + scripted response |
-| TTS | {{tts_primary}} (e.g. ElevenLabs) | {{tts_fallback}} (e.g. Google Cloud TTS) | `tts.failed` event + silent fallback or text display |
+| STT | `{{stt_primary}}` (e.g. Deepgram Nova-2) | {{stt_fallback}} (e.g. OpenAI Whisper v3) | `stt.failed` event + empty transcript |
+| NLU | `{{nlu_primary}}` (e.g. Dialogflow CX) | {{nlu_fallback}} (e.g. rule-based intent matcher) | `nlu.failed` event + default intent |
+| Dialogue Management | `{{dm_primary}}` | {{dm_fallback}} (e.g. static FAQ lookup) | `dm.failed` event + scripted response |
+| TTS | `{{tts_primary}}` (e.g. ElevenLabs) | {{tts_fallback}} (e.g. Google Cloud TTS) | `tts.failed` event + silent fallback or text display |
 
 ## Error Recovery
 
@@ -106,7 +106,7 @@ tldr: "{{one_line_purpose}}"  # <= 160 chars
 
 <!-- Privacy and regulatory requirements. Remove sections not applicable. -->
 
-- **Data residency**: Audio not persisted beyond session; transcripts retained for {{retention_days}} days
+- **Data residency**: Audio not persisted beyond session; transcripts retained for `{{retention_days}}` days
 - **Encryption**: Audio in transit via TLS 1.2+; at rest via AES-256 if stored
 - **GDPR**: Users may request transcript deletion; consent logged at session start
 - **HIPAA**: PHI redaction applied before NLU if `domain: healthcare`

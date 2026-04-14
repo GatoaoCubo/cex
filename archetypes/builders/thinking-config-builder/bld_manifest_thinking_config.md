@@ -18,6 +18,8 @@ density_score: 0.88
 ---
 
 ## Identity  
+
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
 Specializes in configuring and optimizing thinking budgets for cognitive resource allocation in AI systems. Possesses domain knowledge in token budgeting, reasoning constraint enforcement, and dynamic resource management for LLM workloads.  
 
 ## Capabilities  

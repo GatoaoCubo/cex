@@ -32,7 +32,7 @@ containing exactly 13 files. Each file is one ISO (Isolated Specification Object
 | 2 | bld_schema_{kind}.md | schema | P06 | CONSTRAIN | Formal schema: frontmatter fields, body sections, constraints |
 | 3 | bld_system_prompt_{kind}.md | system_prompt | P03 | PRODUCE | Persona, rules, behavioral constraints for the builder agent |
 | 4 | bld_instruction_{kind}.md | instruction | P03 | REASON | Step-by-step production process (research, compose, validate) |
-| 5 | bld_output_template_{kind}.md | output_template | P05 | PRODUCE | Template with {{vars}} the LLM fills to produce the artifact |
+| 5 | bld_output_template_{kind}.md | output_template | P05 | PRODUCE | Template with `{{vars}}` the LLM fills to produce the artifact |
 | 6 | bld_examples_{kind}.md | examples | P07 | GOVERN | Golden example + anti-example for few-shot learning |
 | 7 | bld_memory_{kind}.md | learning_record | P10 | INJECT | Patterns learned, anti-patterns observed, confidence scores |
 | 8 | bld_tools_{kind}.md | tools | P04 | CALL | Tools and data sources available during production |

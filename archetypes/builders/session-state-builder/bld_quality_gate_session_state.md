@@ -16,8 +16,8 @@ tags:
   - ephemeral
   - p11
 tldr: "Gates ensuring session state specs define minimal checkpoint fields, realistic TTL, and a recovery protocol for partial or expired state."
+llm_function: GOVERN
 ---
-
 ## Definition
 A session state spec describes an ephemeral snapshot of an in-progress interaction: which fields to capture, how long the snapshot lives, and how to restore a session from it. A spec passes this gate when the captured fields are the minimum necessary to resume work (not a full database dump), the TTL reflects the realistic session length, and partial or expired state has a defined recovery path rather than a hard failure.
 ## HARD Gates

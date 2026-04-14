@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Definition  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 | metric                | threshold | operator | scope              |  
 |-----------------------|-----------|----------|--------------------|  
 | Pipeline Config Validity | 100%      | equals   | All content filters |  

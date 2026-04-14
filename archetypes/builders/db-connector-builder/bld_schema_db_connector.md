@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Schema: connector
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ## Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|

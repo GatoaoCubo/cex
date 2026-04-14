@@ -44,43 +44,43 @@ description: "{{what_batch_job_covers_max_200ch}}"
 ```
 
 ## Overview
-{{purpose_of_this_batch_job_1_to_2_sentences}}
-Triggered by: {{who_or_what_triggers_this_batch}}
+`{{purpose_of_this_batch_job_1_to_2_sentences}}`
+Triggered by: `{{who_or_what_triggers_this_batch}}`
 Credential env var: `{{PROVIDER_API_KEY_ENV_VAR_NAME}}`
 
 ## Job Parameters
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | provider | {{openai|anthropic|azure_openai|custom}} | API provider for batch inference |
-| model | {{model_id}} | Model to use for all requests in batch |
+| model | `{{model_id}}` | Model to use for all requests in batch |
 | endpoint | {{/v1/endpoint}} | API endpoint path for batch submission |
-| max_requests | {{N}} | Maximum requests per batch file submission |
-| completion_window | {{Nh}} | Provider SLA for batch completion |
-| concurrency | {{N}} | Max in-flight requests at one time |
+| max_requests | `{{N}}` | Maximum requests per batch file submission |
+| completion_window | `{{Nh}}` | Provider SLA for batch completion |
+| concurrency | `{{N}}` | Max in-flight requests at one time |
 
 ## Cost Controls
 | Control | Value | Notes |
 |---------|-------|-------|
-| cost_cap_usd | ${{N}} | Job halts if projected spend exceeds cap |
+| cost_cap_usd | $`{{N}}` | Job halts if projected spend exceeds cap |
 | sync_api_discount | ~50% | Batch pricing vs synchronous equivalent |
-| token_budget | {{N}} tokens | Max tokens per request (input + output) |
-| alert_threshold_usd | ${{N}} | Alert if cumulative cost exceeds this |
+| token_budget | `{{N}}` tokens | Max tokens per request (input + output) |
+| alert_threshold_usd | $`{{N}}` | Alert if cumulative cost exceeds this |
 
 ## Retry and Error Policy
 | Setting | Value | Description |
 |---------|-------|-------------|
-| max_retries | {{N}} | Retries per failed request |
+| max_retries | `{{N}}` | Retries per failed request |
 | backoff | {{exponential|fixed}} | Retry backoff strategy |
-| backoff_base_s | {{N}} | Base wait in seconds before first retry |
+| backoff_base_s | `{{N}}` | Base wait in seconds before first retry |
 | partial_failure | {{continue|halt}} | Behavior when some requests in batch fail |
-| dead_letter | {{path_or_null}} | Storage for permanently failed requests |
+| dead_letter | `{{path_or_null}}` | Storage for permanently failed requests |
 
 ## Input/Output Format
-- Input format: {{JSONL}} -- one JSON object per line, each with `custom_id`, `method`, `url`, `body`
-- Output format: {{JSONL}} -- one result per line with `id`, `custom_id`, `response`, `error`
+- Input format: `{{JSONL}}` -- one JSON object per line, each with `custom_id`, `method`, `url`, `body`
+- Output format: `{{JSONL}}` -- one result per line with `id`, `custom_id`, `response`, `error`
 - Input path: `{{storage_path_or_bucket}}`
 - Output path: `{{storage_path_or_bucket}}`
 
 ## References
-- {{provider_batch_api_docs_url}}
-- {{related_artifact_or_env_config}}
+- `{{provider_batch_api_docs_url}}`
+- `{{related_artifact_or_env_config}}`

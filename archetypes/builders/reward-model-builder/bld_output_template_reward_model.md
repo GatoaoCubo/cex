@@ -52,13 +52,13 @@ where:
 ## Reward Parameters
 | Parameter | Type | Range | Semantics |
 |-----------|------|-------|-----------|
-| {{param}} | float | [0, 1] | {{what higher values mean}} |
-| weight_{{criterion}} | float | [0, 1] | Importance of {{criterion}} |
+| `{{param}}` | float | [0, 1] | `{{what higher values mean}}` |
+| weight_`{{criterion}}` | float | [0, 1] | Importance of `{{criterion}}` |
 
 ## Eligibility Criteria
 <!-- Conditions under which the reward applies.
      Exclusions: behaviors explicitly excluded from reward. -->
-- ELIGIBLE: {{specific conditions}}
+- ELIGIBLE: `{{specific conditions}}`
 - EXCLUDED: {{adversarial patterns, out-of-scope behaviors}}
 
 ## Distribution Schedule
@@ -67,6 +67,6 @@ where:
      Normalization: z-score, clipping, scaling. -->
 
 ## Compliance and Auditing
-- Explainability: {{how reward components can be inspected}}
+- Explainability: `{{how reward components can be inspected}}`
 - Auditability: {{logging requirements, review cadence}}
-- Bias check: {{method to detect reward hacking or proxy gaming}}
+- Bias check: `{{method to detect reward hacking or proxy gaming}}`

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, bugloop, P11, correction-cycle, auto-fix, verification]
 tldr: "Pass/fail gate for bugloop artifacts: correction cycle completeness, fix strategy safety, and verification assertion coverage."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: bugloop
 ## Definition
 | Field | Value |

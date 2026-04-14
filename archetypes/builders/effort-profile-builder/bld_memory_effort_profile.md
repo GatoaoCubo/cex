@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Effort Profile"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Effort and thinking level configuration for builder execution — maps builder to model and reasoning depth.

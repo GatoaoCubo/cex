@@ -32,22 +32,24 @@ validation: {{validation_criteria}}
 ```
 
 ## Overview
-{{placeholder_content}}
 
-## Loop 1: {{loop1_name}}
-{{placeholder_content}}
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
+`{{placeholder_content}}`
 
-## Loop 2: {{loop2_name}}
-{{placeholder_content}}
+## Loop 1: `{{loop1_name}}`
+`{{placeholder_content}}`
+
+## Loop 2: `{{loop2_name}}`
+`{{placeholder_content}}`
 
 ## Integration
-{{placeholder_content}}
+`{{placeholder_content}}`
 
 ## Use Cases
-{{placeholder_content}}
+`{{placeholder_content}}`
 
 ## Validation
-{{placeholder_content}}
+`{{placeholder_content}}`
 
 ## Notes
-{{placeholder_content}}
+`{{placeholder_content}}`

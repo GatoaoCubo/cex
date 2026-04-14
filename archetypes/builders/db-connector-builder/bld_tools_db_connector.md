@@ -17,6 +17,8 @@ density_score: 0.90
 ---
 
 # Tools: db-connector-builder
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|

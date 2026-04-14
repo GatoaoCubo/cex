@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Crew Role  
+
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
 Coordinates dual-loop control systems by maintaining real-time feedback (inner loop) and strategic adaptation (outer loop), ensuring alignment between operational execution and long-term goals.  
 
 ## Receives From  

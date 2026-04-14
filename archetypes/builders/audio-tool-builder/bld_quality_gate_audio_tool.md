@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, audio-tool, P04, speech, stt, tts, direction, formats, languages]
 tldr: "Pass/fail gate for audio_tool artifacts: direction declaration, model validity, format enum compliance, BCP-47 language codes, streaming declaration."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: audio_tool
 ## Definition
 | Field | Value |

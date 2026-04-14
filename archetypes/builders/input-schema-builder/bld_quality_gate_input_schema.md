@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, input-schema, contract, fields, validation, coercion]
 tldr: "Gates ensuring input_schema artifacts define complete, typed, unambiguous entry contracts with defaults, coercion rules, and at least one example."
 density_score: 0.89
+llm_function: GOVERN
 ---
-
 # Gate: Input Schema
 ## Definition
 | Field     | Value |

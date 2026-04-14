@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_kind
 pillar: P08
-llm_function: GOVERN
+llm_function: CONSTRAIN
 purpose: Component map of kind-builder -- how builders fit in the CEX architecture
 quality: null
 title: "Architecture Kind Builder"
@@ -15,7 +15,6 @@ created: "2026-04-13"
 updated: "2026-04-13"
 density_score: 0.90
 ---
-
 # Architecture: kind-builder
 
 ## Component Inventory
@@ -28,7 +27,7 @@ density_score: 0.90
 | schema ISO | Formal schema: fields, body sections, constraints | kind-builder | required |
 | system_prompt ISO | Persona, rules, knowledge boundary | kind-builder | required |
 | instruction ISO | Step-by-step production process | kind-builder | required |
-| output_template ISO | Template with {{vars}} for artifact generation | kind-builder | required |
+| output_template ISO | Template with `{{vars}}` for artifact generation | kind-builder | required |
 | examples ISO | Golden + anti examples for calibration | kind-builder | required |
 | memory ISO | Patterns learned, anti-patterns, evidence | kind-builder | required |
 | tools ISO | Available tools and data sources | kind-builder | required |

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, agent, P11, P02, governance, identity, agent-package]
 tldr: "Gates for agent artifacts — persona + capabilities + agent_package packages ready for deploy."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: agent
 ## Definition
 | Field     | Value                                               |

@@ -22,6 +22,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.0
 title: "Memory Social Publisher"
 density_score: 0.90
+llm_function: INJECT
 ---
 # Learning: social_publisher
 

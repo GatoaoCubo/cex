@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Production Tools  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 | Tool | Purpose | When |  
 |------|---------|------|  
 | cex_compile.py | Compiles content into standardized format | Pre-processing |  

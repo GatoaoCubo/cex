@@ -29,8 +29,8 @@ agent_group: builder
 memory_scope: project
 observation_types: [feedback, project, reference]
 density_score: 0.90
+llm_function: INJECT
 ---
-
 ## Summary
 Streaming configuration failures fall into three categories: connection failures (stream
 silently dropped by proxy because no heartbeat), memory failures (server OOM because slow

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, context-doc, P01, prompt-hydration, domain-scope, constraints]
 tldr: "Pass/fail gate for context_doc artifacts: domain scope precision, constraint completeness, assumption capture, and hydration readiness."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: context_doc
 ## Definition
 | Field | Value |

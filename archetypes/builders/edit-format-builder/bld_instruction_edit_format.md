@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
+
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
 1. Analyze existing LLM-to-host communication protocols for file change syntax.  
 2. Identify constraints from P06 (e.g., security, versioning, error handling).  
 3. Survey use cases for edit_format (e.g., code patches, config updates).  

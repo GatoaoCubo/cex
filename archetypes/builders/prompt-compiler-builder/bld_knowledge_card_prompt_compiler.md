@@ -19,7 +19,7 @@ density_score: 0.90
 
 # Domain Knowledge: prompt_compiler
 ## Executive Summary
-A prompt_compiler is a dense intent resolution artifact that maps natural language user input to structured {kind, pillar, nucleus, verb} tuples. Unlike router (provider-to-provider with confidence thresholds), dispatch_rule (task-to-agent keyword map), or prompt_template (template with {{variables}}), a prompt_compiler handles the FIRST resolution step -- determining WHAT the user wants before any routing, dispatching, or template-filling occurs.
+A prompt_compiler is a dense intent resolution artifact that maps natural language user input to structured {kind, pillar, nucleus, verb} tuples. Unlike router (provider-to-provider with confidence thresholds), dispatch_rule (task-to-agent keyword map), or prompt_template (template with `{{variables}}`), a prompt_compiler handles the FIRST resolution step -- determining WHAT the user wants before any routing, dispatching, or template-filling occurs.
 ## Spec Table
 | Property | Value |
 |----------|-------|

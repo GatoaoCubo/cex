@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, prompt-version, P03]
 tldr: "Pass/fail gate for prompt_version artifacts: required fields, id pattern, body sections, parameter completeness."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: prompt_version
 ## Definition
 | Field | Value |

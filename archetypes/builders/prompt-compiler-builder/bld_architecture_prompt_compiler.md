@@ -47,7 +47,7 @@ user_input   --resolved_by-->  prompt_compiler  --produces-->  {kind, pillar, nu
 |-------------------|----------------------|
 | Intent resolution from user input to {kind, pillar, nucleus} | Provider routing with confidence thresholds (router P02) |
 | Bilingual pattern matching (PT-BR + EN) | Task-to-agent keyword mapping (dispatch_rule P12) |
-| First function in 8F pipeline (F1 CONSTRAIN) | Template with {{variables}} (prompt_template P03) |
+| First function in 8F pipeline (F1 CONSTRAIN) | Template with `{{variables}}` (prompt_template P03) |
 | Loaded as prompt layer by cex_prompt_layers.py | A runtime agent with capabilities (agent P02) |
 | Covers all 124 registered kinds | A subset of kinds for one domain |
 ## Layer Map

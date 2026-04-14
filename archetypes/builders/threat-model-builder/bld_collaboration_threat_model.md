@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Crew Role  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 Identifies potential threats, maps attack vectors, and models risk scenarios to inform security design and mitigation strategies.  
 
 ## Receives From  

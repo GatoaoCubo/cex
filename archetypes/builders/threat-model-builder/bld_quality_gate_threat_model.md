@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Definition  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 | metric | threshold | operator | scope |  
 |---|---|---|---|  
 | completeness | 90% | >= | AI system's attack surface |  

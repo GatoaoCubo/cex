@@ -30,7 +30,7 @@ density_score: 0.90
 9. Confirm slug for id: snake_case, lowercase, no hyphens, describes system + check purpose
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Set baseline_ref: use the exact resolvable reference string (experiment ID, git tag, version)
 5. Set threshold: numeric value with unit documentation (percentage or decimal)

@@ -48,28 +48,28 @@ linked_artifacts:
   related: [{{related_1}}]
 ```
 ## Rule Statement
-{{axiom_in_one_clear_sentence}}
+`{{axiom_in_one_clear_sentence}}`
 ## Rationale
-1. {{reason_1_why_immutable}}
-2. {{reason_2_why_immutable}}
-3. {{reason_3_why_immutable}}
+1. `{{reason_1_why_immutable}}`
+2. `{{reason_2_why_immutable}}`
+3. `{{reason_3_why_immutable}}`
 ## Scope
-1. Domain: {{domain_where_applies}}
-2. System: {{system_boundary}}
-3. Layer: {{architectural_layer}}
+1. Domain: `{{domain_where_applies}}`
+2. System: `{{system_boundary}}`
+3. Layer: `{{architectural_layer}}`
 ## Enforcement
-1. Detection: {{how_to_detect_violation}}
-2. Response: {{what_happens_on_violation}}
+1. Detection: `{{how_to_detect_violation}}`
+2. Response: `{{what_happens_on_violation}}`
 ## Examples
-1. {{case_where_axiom_holds_1}}
-2. {{case_where_axiom_holds_2}}
+1. `{{case_where_axiom_holds_1}}`
+2. `{{case_where_axiom_holds_2}}`
 ## Violations
-1. {{known_or_hypothetical_breach}}
-   - Impact: {{what_breaks}}
-   - Resolution: {{how_to_restore}}
+1. `{{known_or_hypothetical_breach}}`
+   - Impact: `{{what_breaks}}`
+   - Resolution: `{{how_to_restore}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

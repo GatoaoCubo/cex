@@ -12,6 +12,7 @@ author: builder_agent
 quality: 9.0
 tags: [schema, retriever, P04, P06, vector-search, RAG]
 density_score: 1.0
+title: Schema ISO - retriever
 ---
 # Schema: retriever
 

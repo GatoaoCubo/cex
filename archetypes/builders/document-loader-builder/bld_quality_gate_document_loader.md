@@ -12,8 +12,8 @@ quality: 9.1
 tags: [quality-gate, document-loader, P04, ingestion, chunking, RAG]
 tldr: "Pass/fail gate for document_loader artifacts: format coverage, chunk strategy validity, metadata preservation, and body size limit."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: document_loader
 ## Definition
 | Field | Value |

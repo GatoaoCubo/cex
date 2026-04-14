@@ -17,8 +17,8 @@ tags:
   - output-structure
   - llm
 tldr: "Quality gate for LLM output structure specs: verifies format type, injection point, section definitions, and downstream parseability."
+llm_function: GOVERN
 ---
-
 ## Definition
 A response format artifact specifies the exact output structure an LLM must produce. It declares a format type (json, yaml, markdown, csv, or plaintext), an injection point where the spec is delivered to the model (system prompt or user message), and a section structure with field-level definitions. The artifact is consumed by the LLM at generation time — it is not a post-generation validator.
 Scope: files with `kind: response_format`. Does not apply to validation schemas (P06), which check outputs after generation.

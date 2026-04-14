@@ -29,8 +29,8 @@ observation_types: [user, feedback, project, reference]
 quality: null
 title: "Memory Batch Config"
 density_score: 0.90
+llm_function: INJECT
 ---
-
 ## Summary
 Batch processing configuration failures split into two categories: financial failures
 (runaway spend from missing cost caps or unbounded batch sizes) and reliability failures

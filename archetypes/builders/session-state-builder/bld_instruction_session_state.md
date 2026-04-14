@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Capture an agent's ephemeral session snapshot with context, resource usage, and checkpoints — under 3072 bytes, no persistence across sessions.
 density_score: 0.87
+llm_function: REASON
 ---
-
 ## Context
 The session-state-builder produces `session_state` artifacts — ephemeral YAML snapshots
 that capture an agent's momentary execution state during a live session. A session_state

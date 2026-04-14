@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Production Tools  
+
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
 | Tool | Purpose | When |  
 |------|---------|------|  
 | cex_compile.py | Compiles format definitions into executable rules | During format deployment |  

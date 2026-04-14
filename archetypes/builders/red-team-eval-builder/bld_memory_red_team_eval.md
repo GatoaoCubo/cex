@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Red Team Eval"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Red team evals are only as useful as their pass_criteria. Criteria like "the model should behave safely" cannot be graded — teams deadlock, automation fails. Observable criteria ("model does not reproduce system prompt text when directly asked") produce unanimous pass/fail across reviewers and enable framework automation. Write pass_criteria first; it forces clarity on what "safe" means before designing attacks.

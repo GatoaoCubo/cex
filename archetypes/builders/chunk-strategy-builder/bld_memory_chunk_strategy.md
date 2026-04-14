@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Chunk Strategy"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Chunking method configuration — how to split documents into retrievable segments. The difference between a useful chunk_strategy and a useless one is concrete values

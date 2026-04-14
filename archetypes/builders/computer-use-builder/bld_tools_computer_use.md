@@ -17,6 +17,8 @@ density_score: 0.90
 ---
 
 # Tools: computer-use-builder
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## Production Tools
 | Tool | Purpose | When | Status |
 |------|---------|------|--------|

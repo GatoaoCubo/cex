@@ -51,7 +51,7 @@ Each ISO serves a specific role in the builder's lifecycle:
 | schema | F1 CONSTRAIN | Structure: required fields, body sections, constraints |
 | system_prompt | F2 BECOME | Persona: rules, tone, knowledge boundary |
 | instruction | F4 REASON | Process: step-by-step production phases |
-| output_template | F6 PRODUCE | Template: {{vars}} filled during generation |
+| output_template | F6 PRODUCE | Template: `{{vars}}` filled during generation |
 | examples | F3 INJECT | Calibration: golden + anti examples for few-shot |
 | memory | F3 INJECT | Learning: patterns observed, evidence, confidence |
 | tools | F5 CALL | Tooling: available tools, data sources, permissions |

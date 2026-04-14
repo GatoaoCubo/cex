@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Agent Package"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 agent packages make artifacts portable across environments and LLM providers. The two most common failures are hardcoded absolute paths (breaking portability) and tier/file-count mismatches (breaking validation). Both are detectable at authoring time with a two-step check: path scan and file count.

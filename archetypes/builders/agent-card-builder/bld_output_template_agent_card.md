@@ -57,22 +57,22 @@ tags: [agent_group, {{domain_tag}}, {{name_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
 ```
 ## Role
-{{what_the_agent_group_does_and_primary_function}}
+`{{what_the_agent_group_does_and_primary_function}}`
 ## Model & MCPs
-{{llm_model_details_and_mcp_server_specs}}
+`{{llm_model_details_and_mcp_server_specs}}`
 ## Boot Sequence
-{{ordered_initialization_steps}}
+`{{ordered_initialization_steps}}`
 ## Dispatch
-{{keywords_and_routing_rules}}
+`{{keywords_and_routing_rules}}`
 ## Constraints
-{{operational_limits_and_prohibitions}}
+`{{operational_limits_and_prohibitions}}`
 ## Dependencies
-{{external_services_and_sibling_agent_groups}}
+`{{external_services_and_sibling_agent_groups}}`
 ## Scaling & Monitoring
-{{concurrency_timeouts_health_checks}}
+`{{concurrency_timeouts_health_checks}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Template Standards
 

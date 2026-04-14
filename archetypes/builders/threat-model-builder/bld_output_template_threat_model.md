@@ -35,70 +35,72 @@ tldr: "{{one_sentence_summary}}"
 
 ## 1. Scope and System Description
 
-**System:** {{system_name}}
-**Boundaries:** {{what_is_in_scope}}
-**Out of scope:** {{what_is_excluded}}
-**Stakeholders:** {{security_team}}, {{dev_team}}, {{compliance_team}}
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
+
+**System:** `{{system_name}}`
+**Boundaries:** `{{what_is_in_scope}}`
+**Out of scope:** `{{what_is_excluded}}`
+**Stakeholders:** `{{security_team}}`, {{dev_team}}, `{{compliance_team}}`
 **Framework:** STRIDE + MITRE ATT&CK for Enterprise/AI
 
 ## 2. Asset Inventory
 
 | Asset | Type | Sensitivity | Owner |
 |-------|------|-------------|-------|
-| {{asset_1}} | Data/Model/API/Infra | Critical/High/Medium/Low | {{team}} |
-| {{asset_2}} | Data/Model/API/Infra | Critical/High/Medium/Low | {{team}} |
+| `{{asset_1}}` | Data/Model/API/Infra | Critical/High/Medium/Low | `{{team}}` |
+| `{{asset_2}}` | Data/Model/API/Infra | Critical/High/Medium/Low | `{{team}}` |
 
 ## 3. Threat Actors
 
 | Actor | Motivation | Capability | Access Level |
 |-------|-----------|-----------|--------------|
-| External Attacker | {{motivation}} | High/Medium/Low | Remote |
-| Malicious Insider | {{motivation}} | High/Medium/Low | Privileged |
-| Automated Bot | {{motivation}} | High/Medium/Low | Remote |
+| External Attacker | `{{motivation}}` | High/Medium/Low | Remote |
+| Malicious Insider | `{{motivation}}` | High/Medium/Low | Privileged |
+| Automated Bot | `{{motivation}}` | High/Medium/Low | Remote |
 
 ## 4. STRIDE Threat Analysis
 
 ### 4.1 Spoofing (S)
 | ID | Threat | Asset | Likelihood | Impact | CVSS | MITRE Technique |
 |----|--------|-------|-----------|--------|------|-----------------|
-| S01 | {{threat_desc}} | {{asset}} | H/M/L | H/M/L | {{score}} | T{{technique_id}} |
+| S01 | `{{threat_desc}}` | {{asset}} | H/M/L | H/M/L | {{score}} | T`{{technique_id}}` |
 
 ### 4.2 Tampering (T)
 | ID | Threat | Asset | Likelihood | Impact | CVSS | MITRE Technique |
 |----|--------|-------|-----------|--------|------|-----------------|
-| T01 | {{threat_desc}} | {{asset}} | H/M/L | H/M/L | {{score}} | T{{technique_id}} |
+| T01 | `{{threat_desc}}` | {{asset}} | H/M/L | H/M/L | {{score}} | T`{{technique_id}}` |
 
 ### 4.3 Repudiation (R)
 | ID | Threat | Asset | Likelihood | Impact | CVSS | MITRE Technique |
 |----|--------|-------|-----------|--------|------|-----------------|
-| R01 | {{threat_desc}} | {{asset}} | H/M/L | H/M/L | {{score}} | T{{technique_id}} |
+| R01 | `{{threat_desc}}` | {{asset}} | H/M/L | H/M/L | {{score}} | T`{{technique_id}}` |
 
 ### 4.4 Information Disclosure (I)
 | ID | Threat | Asset | Likelihood | Impact | CVSS | MITRE Technique |
 |----|--------|-------|-----------|--------|------|-----------------|
-| I01 | {{threat_desc}} | {{asset}} | H/M/L | H/M/L | {{score}} | T{{technique_id}} |
+| I01 | `{{threat_desc}}` | {{asset}} | H/M/L | H/M/L | {{score}} | T`{{technique_id}}` |
 
 ### 4.5 Denial of Service (D)
 | ID | Threat | Asset | Likelihood | Impact | CVSS | MITRE Technique |
 |----|--------|-------|-----------|--------|------|-----------------|
-| D01 | {{threat_desc}} | {{asset}} | H/M/L | H/M/L | {{score}} | T{{technique_id}} |
+| D01 | `{{threat_desc}}` | {{asset}} | H/M/L | H/M/L | {{score}} | T`{{technique_id}}` |
 
 ### 4.6 Elevation of Privilege (E)
 | ID | Threat | Asset | Likelihood | Impact | CVSS | MITRE Technique |
 |----|--------|-------|-----------|--------|------|-----------------|
-| E01 | {{threat_desc}} | {{asset}} | H/M/L | H/M/L | {{score}} | T{{technique_id}} |
+| E01 | `{{threat_desc}}` | {{asset}} | H/M/L | H/M/L | {{score}} | T`{{technique_id}}` |
 
 ## 5. Risk Priority Matrix
 
 | Threat ID | Risk Score (Likelihood x Impact) | Priority | Status |
 |-----------|----------------------------------|----------|--------|
-| S01 | {{score}} | Critical/High/Medium/Low | Open/Mitigated |
+| S01 | `{{score}}` | Critical/High/Medium/Low | Open/Mitigated |
 
 ## 6. Mitigation Strategies
 
 | Threat ID | Control | Type | Framework Reference | Owner | Due Date |
 |-----------|---------|------|---------------------|-------|----------|
-| S01 | {{control_name}} | Technical/Process/Physical | NIST CSF PR.AC-1 / ISO27001 A.9 | {{team}} | {{date}} |
+| S01 | `{{control_name}}` | Technical/Process/Physical | NIST CSF PR.AC-1 / ISO27001 A.9 | {{team}} | `{{date}}` |
 
 ## 7. AI-Specific Threat Addendum
 
@@ -106,21 +108,21 @@ _(Required when system includes ML models or AI pipelines)_
 
 | AI Threat | Description | MITRE ATLAS Technique | Mitigation |
 |-----------|-------------|----------------------|------------|
-| Data Poisoning | {{desc}} | AML.T0020 | Differential privacy, data provenance |
-| Model Inversion | {{desc}} | AML.T0024 | Output noise injection, access controls |
-| Adversarial Examples | {{desc}} | AML.T0015 | Adversarial training, input sanitization |
-| Model Extraction | {{desc}} | AML.T0005 | Rate limiting, query monitoring |
+| Data Poisoning | `{{desc}}` | AML.T0020 | Differential privacy, data provenance |
+| Model Inversion | `{{desc}}` | AML.T0024 | Output noise injection, access controls |
+| Adversarial Examples | `{{desc}}` | AML.T0015 | Adversarial training, input sanitization |
+| Model Extraction | `{{desc}}` | AML.T0005 | Rate limiting, query monitoring |
 
 ## 8. Assumptions and Limitations
 
-- {{assumption_1}}
-- {{assumption_2}}
+- `{{assumption_1}}`
+- `{{assumption_2}}`
 
 ## 9. Open Issues
 
 | Issue | Owner | Due Date | Status |
 |-------|-------|----------|--------|
-| {{issue}} | {{team}} | {{date}} | Open |
+| `{{issue}}` | {{team}} | `{{date}}` | Open |
 
 ## 10. References
 

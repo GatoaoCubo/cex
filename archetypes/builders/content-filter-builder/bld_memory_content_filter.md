@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Observation  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 Common issues include inconsistent schema definitions across filters, leading to mismatched data formats, and insufficient error handling for malformed inputs. Overly broad filters may also allow unintended content through, reducing pipeline effectiveness.  
 
 ## Pattern  

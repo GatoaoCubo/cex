@@ -12,9 +12,11 @@ quality: 9.0
 tags: [quality-gate, connector, P04, bidirectional, integration, data-transform]
 tldr: "Pass/fail gate for connector artifacts: bidirectional flow coverage, transform rules, health check, and protocol selection rationale."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: connector
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ## Definition
 | Field | Value |
 |---|---|

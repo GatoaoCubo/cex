@@ -17,8 +17,8 @@ tags:
   - indexing
   - freshness
 tldr: "Quality gate for external source pointers: verifies URL format, domain class, freshness policy, and pointer-only body constraint."
+llm_function: GOVERN
 ---
-
 ## Definition
 A RAG source artifact is a pointer to an external, indexable resource. It contains a validated URL, a domain classification, a last-checked date, and a freshness policy specifying how often the source should be re-validated. The body must remain a pointer — it must not contain extracted content from the source.
 Scope: files with `kind: rag_source`. Does not apply to knowledge cards (P04), which contain extracted and synthesized content.

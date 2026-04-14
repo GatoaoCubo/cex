@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: "Define the routing rules, priorities, heuristics, and decision tree an agent uses at runtime — the variable mental state accumulated during sessions."
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 A **runtime_state** captures the variable mental state an agent accumulates and consults during execution. It is distinct from an agent's design-time identity (mental_model) and from ephemeral in-flight snapshots (session_state). A runtime_state contains routing rules that change based on experience, priority orderings, decision heuristics for ambiguous situations, and the domain map the agent navigates.
 **Inputs**

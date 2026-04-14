@@ -22,7 +22,7 @@ density_score: 0.90
 |------|------|-------|--------|
 | frontmatter block | Metadata header (id, kind, pillar, domain, variables, syntax_tier, etc.) | prompt-template-builder | active |
 | variable_declarations | Typed variable slots with names, types, defaults, and descriptions | author | active |
-| template_body | Parameterized text with {{variable}} or [VAR] placeholders | author | active |
+| template_body | Parameterized text with `{{variable}}` or [VAR] placeholders | author | active |
 | syntax_tier | Interpolation syntax level (tier-1 Mustache, tier-2 bracket) | author | active |
 | rendering_context | Runtime context required to fill variables (data sources, APIs) | author | active |
 | example_fills | Concrete variable fills demonstrating valid template usage | author | active |
@@ -43,7 +43,7 @@ prompt_template --signals-->   render_error
 ## Boundary Table
 | prompt_template IS | prompt_template IS NOT |
 |--------------------|------------------------|
-| A reusable mold with {{variable}} slots for multiple invocations | A one-time task instruction (action_prompt P03) |
+| A reusable mold with `{{variable}}` slots for multiple invocations | A one-time task instruction (action_prompt P03) |
 | Structure separated from content via parameterization | A fixed system identity definition (system_prompt P03) |
 | Rendered by LangChain, DSPy, Mustache, or Jinja2 engines | A step-by-step recipe without variables (instruction P03) |
 | Variable-typed with defaults and validation constraints | A raw user message without structure |

@@ -47,32 +47,32 @@ compaction: {{true|false}}
 upgrade_path: "{{current_backend}} -> {{next_backend}} (when {{trigger}})"
 ```
 ## Backend Specification
-{{backend_type_description_and_rationale}}
-{{connection_details_or_path_description}}
-{{why_this_backend_fits_the_requirements}}
+`{{backend_type_description_and_rationale}}`
+`{{connection_details_or_path_description}}`
+`{{why_this_backend_fits_the_requirements}}`
 ## Session Lifecycle
-1. **Create**: {{when_and_how_sessions_are_created}}
-2. **Read**: {{how_sessions_are_loaded}}
-3. **TTL**: {{expiration_policy}}
-4. **Cleanup**: {{how_expired_sessions_are_removed}}
-5. **Compaction**: {{defragmentation_strategy}}
-6. **Max sessions**: {{eviction_policy_when_max_reached}}
+1. **Create**: `{{when_and_how_sessions_are_created}}`
+2. **Read**: `{{how_sessions_are_loaded}}`
+3. **TTL**: `{{expiration_policy}}`
+4. **Cleanup**: `{{how_expired_sessions_are_removed}}`
+5. **Compaction**: `{{defragmentation_strategy}}`
+6. **Max sessions**: `{{eviction_policy_when_max_reached}}`
 ## Serialization
-{{format_choice_and_rationale}}
-1. Trade-off: {{size_vs_speed_vs_readability}}
-2. Schema evolution: {{how_old_sessions_remain_readable}}
+`{{format_choice_and_rationale}}`
+1. Trade-off: `{{size_vs_speed_vs_readability}}`
+2. Schema evolution: `{{how_old_sessions_remain_readable}}`
 ## Security
-1. Encryption: {{encryption_level_and_rationale}}
-2. Access: {{access_control_mechanism}}
-3. Credentials: {{env_var_references_only}}
+1. Encryption: `{{encryption_level_and_rationale}}`
+2. Access: `{{access_control_mechanism}}`
+3. Credentials: `{{env_var_references_only}}`
 ## Scoping
-1. Namespace: {{key_prefix_convention}}
-2. Isolation: {{how_cross_nucleus_contamination_is_prevented}}
+1. Namespace: `{{key_prefix_convention}}`
+2. Isolation: `{{how_cross_nucleus_contamination_is_prevented}}`
 ## Upgrade Path
-{{migration_steps_from_current_to_next_tier}}
+`{{migration_steps_from_current_to_next_tier}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

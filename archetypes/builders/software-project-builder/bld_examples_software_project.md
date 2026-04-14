@@ -12,9 +12,11 @@ quality: 9.0
 tags: [builder, examples, software-project, cli, api, pipeline]
 tldr: "3 concrete project examples: CLI scoring tool (Typer+Rich), API service (FastAPI+Supabase+Stripe), Pipeline runner (stage-based like 8F). Each shows pyproject.toml + key files."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Software Project Builder — Examples
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## Example 1: CLI Scoring Tool
 

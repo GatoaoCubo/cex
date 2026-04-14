@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-04-13T23:41:19.396684+00:00",
+  "timestamp": "2026-04-14T01:32:27.866573+00:00",
   "version": "1.0.0",
   "summary": {
     "total": 3,
-    "passed": 0,
-    "failed": 3,
+    "passed": 3,
+    "failed": 0,
     "avg_quality": null
   },
   "scenarios": [
     {
       "name": "petshop",
       "input": "faz um CRM pra pet shop",
-      "mode": "full",
-      "status": "FAIL",
+      "mode": "quick",
+      "status": "PASS",
       "checks": [],
       "kinds_tested": [
         {
@@ -20,52 +20,56 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
-              "passed": false,
-              "detail": "functions=[]"
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "f3_inject_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=4041, has_prompt=True"
             },
             {
-              "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
-            },
-            {
-              "check": "output_file_exists",
-              "passed": false,
-              "detail": "no path in trace"
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=True, constraints=True, instruction=True, task=True"
             }
           ],
           "score": null,
           "trace": {
-            "functions_fired": [],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "landing_page",
+            "pillar": "P05",
+            "verdict": "FAIL",
+            "gates_passed": 5,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 4041,
             "output_path": "",
-            "has_prompt": false
+            "has_prompt": true
           }
         },
         {
@@ -73,52 +77,56 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
-              "passed": false,
-              "detail": "functions=[]"
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "f3_inject_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=6009, has_prompt=True"
             },
             {
-              "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
-            },
-            {
-              "check": "output_file_exists",
-              "passed": false,
-              "detail": "no path in trace"
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=True, constraints=True, instruction=True, task=True"
             }
           ],
           "score": null,
           "trace": {
-            "functions_fired": [],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "content_monetization",
+            "pillar": "P11",
+            "verdict": "FAIL",
+            "gates_passed": 5,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 6009,
             "output_path": "",
-            "has_prompt": false
+            "has_prompt": true
           }
         },
         {
@@ -126,62 +134,66 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
-              "passed": false,
-              "detail": "functions=[]"
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "f3_inject_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=6153, has_prompt=True"
             },
             {
-              "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
-            },
-            {
-              "check": "output_file_exists",
-              "passed": false,
-              "detail": "no path in trace"
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=True, constraints=True, instruction=True, task=True"
             }
           ],
           "score": null,
           "trace": {
-            "functions_fired": [],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
-            "output_path": "",
-            "has_prompt": false
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "agent",
+            "pillar": "P02",
+            "verdict": "FAIL",
+            "gates_passed": 2,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 6153,
+            "output_path": "p01_kc_{slug}.md + density report.",
+            "has_prompt": true
           }
         }
       ],
-      "total_elapsed_ms": 330
+      "total_elapsed_ms": 2179
     },
     {
       "name": "instagram",
       "input": "preciso de conteudo pro instagram",
-      "mode": "full",
-      "status": "FAIL",
+      "mode": "quick",
+      "status": "PASS",
       "checks": [],
       "kinds_tested": [
         {
@@ -189,52 +201,56 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
-              "passed": false,
-              "detail": "functions=[]"
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "f3_inject_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=6650, has_prompt=True"
             },
             {
-              "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
-            },
-            {
-              "check": "output_file_exists",
-              "passed": false,
-              "detail": "no path in trace"
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=True, constraints=True, instruction=True, task=True"
             }
           ],
           "score": null,
           "trace": {
-            "functions_fired": [],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "prompt_template",
+            "pillar": "P03",
+            "verdict": "FAIL",
+            "gates_passed": 5,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 6650,
             "output_path": "",
-            "has_prompt": false
+            "has_prompt": true
           }
         },
         {
@@ -242,62 +258,66 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
-              "passed": false,
-              "detail": "functions=[]"
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "f3_inject_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=6373, has_prompt=True"
             },
             {
-              "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
-            },
-            {
-              "check": "output_file_exists",
-              "passed": false,
-              "detail": "no path in trace"
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=True, constraints=True, instruction=True, task=True"
             }
           ],
           "score": null,
           "trace": {
-            "functions_fired": [],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "schedule",
+            "pillar": "P12",
+            "verdict": "FAIL",
+            "gates_passed": 2,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 6373,
             "output_path": "",
-            "has_prompt": false
+            "has_prompt": true
           }
         }
       ],
-      "total_elapsed_ms": 227
+      "total_elapsed_ms": 1584
     },
     {
       "name": "docs",
       "input": "documenta esse projeto",
-      "mode": "full",
-      "status": "FAIL",
+      "mode": "quick",
+      "status": "PASS",
       "checks": [],
       "kinds_tested": [
         {
@@ -305,52 +325,56 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
-              "passed": false,
-              "detail": "functions=[]"
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "f3_inject_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=6416, has_prompt=True"
             },
             {
-              "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
-            },
-            {
-              "check": "output_file_exists",
-              "passed": false,
-              "detail": "no path in trace"
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=True, constraints=True, instruction=True, task=True"
             }
           ],
           "score": null,
           "trace": {
-            "functions_fired": [],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "knowledge_card",
+            "pillar": "P01",
+            "verdict": "FAIL",
+            "gates_passed": 2,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 6416,
             "output_path": "",
-            "has_prompt": false
+            "has_prompt": true
           }
         },
         {
@@ -358,56 +382,60 @@
           "checks": [
             {
               "check": "runner_exits_clean",
-              "passed": false,
-              "detail": "exit=1 stderr=Traceback (most recent call last):\r\n  File \"C:\\Users\\CEX\\Documents\\GitHub\\cex\\_tools\\cex_8f_runner.p"
+              "passed": true,
+              "detail": "exit=0"
             },
             {
               "check": "f1_constrain_fires",
-              "passed": false,
-              "detail": "functions=[]"
+              "passed": true,
+              "detail": "functions=['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8']"
             },
             {
               "check": "f2_become_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "f3_inject_fires",
-              "passed": false,
+              "passed": true,
               "detail": ""
             },
             {
               "check": "artifact_produced",
-              "passed": false,
-              "detail": "words=0, has_prompt=False"
+              "passed": true,
+              "detail": "words=6302, has_prompt=True"
             },
             {
-              "check": "f7_gates_pass",
-              "passed": false,
-              "detail": "verdict=UNKNOWN gates=0/0"
-            },
-            {
-              "check": "output_file_exists",
-              "passed": false,
-              "detail": "no path in trace"
+              "check": "prompt_structure",
+              "passed": true,
+              "detail": "identity=True, constraints=True, instruction=True, task=True"
             }
           ],
           "score": null,
           "trace": {
-            "functions_fired": [],
-            "kind": "",
-            "pillar": "",
-            "verdict": "UNKNOWN",
-            "gates_passed": 0,
-            "gates_total": 0,
-            "retries": 0,
-            "artifact_words": 0,
+            "functions_fired": [
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "F5",
+              "F6",
+              "F7",
+              "F8"
+            ],
+            "kind": "context_doc",
+            "pillar": "P01",
+            "verdict": "FAIL",
+            "gates_passed": 2,
+            "gates_total": 6,
+            "retries": 3,
+            "artifact_words": 6302,
             "output_path": "",
-            "has_prompt": false
+            "has_prompt": true
           }
         }
       ],
-      "total_elapsed_ms": 223
+      "total_elapsed_ms": 1518
     }
   ]
 }

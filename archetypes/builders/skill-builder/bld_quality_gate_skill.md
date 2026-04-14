@@ -16,8 +16,8 @@ tags:
   - reusable-capability
   - p11
 tldr: "Gates ensuring skill files define a specific trigger, two or more typed workflow phases, and phase-level error handling without claiming agent identity."
+llm_function: GOVERN
 ---
-
 ## Definition
 A skill is a reusable capability: a named sequence of phases invoked by a trigger and composed with other skills. Passes when trigger is specific, each phase has typed I/O, error handling is per-phase, and the skill makes no agent identity claims.
 ## HARD Gates

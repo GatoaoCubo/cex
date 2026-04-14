@@ -52,15 +52,15 @@ accuracy_rating: {{wer_percent}}
 
 ## Configuration
 ```yaml
-provider: {{provider_name}}
-api_key: "${{{PROVIDER_API_KEY}}}"
-endpoint: "{{endpoint_url}}"
-language: "{{language_code}}"
-sample_rate: {{sample_rate_hz}}
-encoding: "{{encoding_format}}"
-streaming: {{streaming_bool}}
-diarization: {{diarization_bool}}
-max_alternatives: {{max_alternatives}}
+provider: `{{provider_name}}`
+api_key: "${`{{PROVIDER_API_KEY}}`}"
+endpoint: "`{{endpoint_url}}`"
+language: "`{{language_code}}`"
+sample_rate: `{{sample_rate_hz}}`
+encoding: "`{{encoding_format}}`"
+streaming: `{{streaming_bool}}`
+diarization: `{{diarization_bool}}`
+max_alternatives: `{{max_alternatives}}`
 ```
 
 ## Usage

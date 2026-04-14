@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Emit an atomic JSON signal payload for complete, error, or progress events — under 4096 bytes, machine-friendly, no routing logic included.
 density_score: 0.86
+llm_function: REASON
 ---
-
 ## Context
 The signal-builder produces `signal` artifacts — minimal JSON payloads representing atomic
 status events emitted between agents or agent_groups. A signal answers exactly three questions:

@@ -16,8 +16,8 @@ tags:
   - inter-agent
   - p11
 tldr: "Gates ensuring signal specs define an exhaustive status enum, emitter identity, timestamp, and minimal payload with no embedded business logic."
+llm_function: GOVERN
 ---
-
 ## Definition
 A signal is an atomic event emitted by one agent and consumed by another or a monitor. It carries a status, an emitter identity, a timestamp, and an optional minimal payload. A signal passes this gate when any consumer could parse and act on it without contacting the emitter, the status enum covers all terminal and non-terminal states, and the payload contains no business logic — only status data.
 ## HARD Gates

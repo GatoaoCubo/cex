@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Identity  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 Specializes in structured threat modeling and risk assessment for AI systems, focusing on identifying adversarial attack vectors, vulnerability surfaces, and mitigation strategies. Domain knowledge includes ISO/IEC 23894, NIST AI risk management, and adversarial machine learning taxonomies.  
 
 ## Capabilities  

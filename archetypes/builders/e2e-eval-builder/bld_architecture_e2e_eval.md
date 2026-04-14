@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_e2e_eval
 pillar: P08
-llm_function: BECOME
+llm_function: CONSTRAIN
 purpose: Component map of e2e_eval — inventory, dependencies, and architectural position
 quality: 9.1
 title: "Architecture E2E Eval"
@@ -15,7 +15,6 @@ created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
 ---
-
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|

@@ -52,22 +52,22 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
 ```
 ## Prerequisites
-1. {{prerequisite_1_verifiable_condition}}
-2. {{prerequisite_2_verifiable_condition}}
+1. `{{prerequisite_1_verifiable_condition}}`
+2. `{{prerequisite_2_verifiable_condition}}`
 ## Steps
-1. {{action_1}} — {{expected_outcome_1}}
-2. {{action_2}} — {{expected_outcome_2}}
-3. {{action_3}} — {{expected_outcome_3}}
+1. `{{action_1}}` — `{{expected_outcome_1}}`
+2. `{{action_2}}` — `{{expected_outcome_2}}`
+3. `{{action_3}}` — `{{expected_outcome_3}}`
 {{...one action per step, repeat for steps_count}}
 ## Validation
-1. [ ] {{check_1_verifiable}}
-2. [ ] {{check_2_verifiable}}
-3. [ ] Final outcome: {{expected_final_state}}
+1. [ ] `{{check_1_verifiable}}`
+2. [ ] `{{check_2_verifiable}}`
+3. [ ] Final outcome: `{{expected_final_state}}`
 ## Rollback
-{{rollback_procedure_or_na_if_idempotent}}
+`{{rollback_procedure_or_na_if_idempotent}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

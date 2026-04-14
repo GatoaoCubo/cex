@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Schema: plugin
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ## Frontmatter Fields
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|

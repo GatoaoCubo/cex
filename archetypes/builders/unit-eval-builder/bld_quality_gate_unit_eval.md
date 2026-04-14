@@ -16,8 +16,8 @@ tags:
   - testing
   - P07
 tldr: "Validates unit tests for agents and prompts: input, expected output, target component, and isolation."
+llm_function: GOVERN
 ---
-
 ## Definition
 A unit eval tests a single agent, prompt, or component in isolation. It defines an input, an expected output or assertion, the component under test, and setup and teardown steps. Unit evals must be deterministic, fast, and independent of external services. This gate ensures every unit eval is traceable, executable, and covers meaningful behavior rather than trivial cases.
 ## HARD Gates

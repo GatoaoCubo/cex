@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, session-backend, persistence, state, P11]
 tldr: "Gates for session_backend artifacts: validates backend type, TTL, serialization, encryption, scoping, and credential safety."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: session_backend
 ## Definition
 | Field     | Value |

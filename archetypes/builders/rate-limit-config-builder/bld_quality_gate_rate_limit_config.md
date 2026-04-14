@@ -12,9 +12,11 @@ quality: 9.0
 tags: [quality-gate, rate-limit-config, P09, rpm, tpm, budget, tier]
 tldr: "Pass/fail gate for rate_limit_config artifacts: numeric limit completeness, tier validity, budget cap presence, and provider identification."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: rate_limit_config
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 ## Definition
 | Field | Value |
 |---|---|

@@ -20,6 +20,8 @@ tldr: "Golden and anti-examples for mental model construction, demonstrating ide
 density_score: 0.90
 ---
 # mental-model-builder
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Identity
 Specialist in building `mental_model` (P02) artifacts — cognitive maps of design-time
 que definem routing rules, decision trees, priorities, heuristics, and domain maps de um agent.

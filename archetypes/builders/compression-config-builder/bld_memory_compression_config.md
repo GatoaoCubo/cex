@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Compression Config"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Context compression failures cluster into two categories: premature loss (trigger too early, lose useful context) and structural loss (compress system prompts or tool definitions, agent loses identity or capabilities). Tiered strategies with type-aware decay weights address both by compressing the least valuable content first and protecting structural context absolutely.

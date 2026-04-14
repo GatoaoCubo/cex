@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Prompt Version"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Prompt version — immutable snapshot of a prompt at a point in time with metrics and lineage. The difference between a useful prompt_version and a useless one is concrete values

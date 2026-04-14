@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Feature Flag"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Feature flags enable gradual rollout and emergency disable without code deployment. The builder must enforce four category types, integer rollout percentages, expiration dates, and kill switch documentation or flags become permanent liabilities that no one knows how to safely disable.

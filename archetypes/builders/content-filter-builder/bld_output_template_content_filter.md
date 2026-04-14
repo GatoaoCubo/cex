@@ -18,6 +18,8 @@ density_score: 0.92
 
 # p11_cf_{{name}}.md
 
+This ISO defines a content filter -- the moderation rules that gate output or input.
+
 ```yaml
 ---
 id: p11_cf_{{name}}
@@ -39,7 +41,7 @@ platform_tier: "{{consumer|enterprise|b2b_api}}"
 ```
 
 ## 1. Overview
-**Purpose**: {{what this filter intercepts and why}}
+**Purpose**: `{{what this filter intercepts and why}}`
 
 **Filter type**: {{pre_inference (input sanitization) | post_inference (output scan) | both}}
 

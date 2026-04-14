@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Domain Overview  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 Threat modeling for AI systems focuses on identifying, analyzing, and mitigating risks posed by malicious actors exploiting vulnerabilities in AI design, training, or deployment. Unlike safety policies, which govern acceptable behavior, threat models prioritize adversarial scenarios such as data poisoning, model inversion, and evasion attacks. The rise of AI in critical domains (e.g., healthcare, finance) has increased demand for structured risk assessments that align with standards like NIST SP 800-160 and ISO/IEC 23894.  
 
 Key challenges include mapping abstract AI risks (e.g., bias amplification) to tangible threats and ensuring models remain robust against evolving attack techniques. Effective threat models integrate technical (e.g., adversarial robustness) and operational (e.g., supply chain risks) dimensions, often requiring cross-disciplinary collaboration between security, data science, and compliance teams.  

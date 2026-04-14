@@ -28,8 +28,8 @@ agent_group: builder
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 density_score: 0.91
+llm_function: INJECT
 ---
-
 ## Summary
 Knowledge graph construction failures follow three patterns: unconstrained entity extraction
 (scope explosion), missing deduplication (entity fragmentation), and no extraction prompt

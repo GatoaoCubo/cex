@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Naming Convention  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 Pattern: `p11_cf_{{name}}.md`  
 Examples:  
 - `p11_cf_report.md`  

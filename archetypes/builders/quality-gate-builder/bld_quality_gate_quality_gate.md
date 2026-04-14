@@ -17,8 +17,8 @@ tags:
   - governance
   - recursive
 tldr: "Recursive quality gate for quality_gate artifacts: verifies HARD/SOFT structure, weight math, and bypass rules."
+llm_function: GOVERN
 ---
-
 ## Definition
 A quality gate artifact defines the acceptance criteria for one artifact kind. It contains blocking HARD gates (binary pass/fail), a weighted SOFT scoring table, a four-tier action map, and a bypass policy. This gate is self-applicable: it evaluates other quality gate files, including itself.
 Scope: files with `kind: quality_gate`. Does not apply to scoring rubrics (P08), validators (P07), or benchmark suites (P13).

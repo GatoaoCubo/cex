@@ -16,8 +16,8 @@ tags:
   - contract
   - P06
 tldr: "Validates post-generation contracts for field types, constraints, on_failure strategy, and system-only scope."
+llm_function: GOVERN
 ---
-
 ## Definition
 A validation schema is a post-generation contract applied by the system after an artifact is produced. It defines fields, types, constraints, and violation behavior (reject, warn, auto-fix). The model never sees this schema; the pipeline enforces it. This gate ensures every validation schema is machine-enforceable, clearly bounded, and safe to apply automatically.
 ## HARD Gates

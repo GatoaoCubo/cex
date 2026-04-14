@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, function-def, P04, json-schema, tool-calling, parameters]
 tldr: "Pass/fail gate for function_def artifacts: valid JSON Schema parameters, LLM-facing description, return type, and provider compatibility."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: function_def
 ## Definition
 | Field | Value |

@@ -27,6 +27,8 @@ updated: "2026-04-07"
 density_score: 0.90
 ---
 # Config: computer_use Production Rules
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|

@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Definition  
+
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
 | metric | threshold | operator | scope |  
 |---|---|---|---|  
 | File Format Compliance | 100% | equals | All host files |  

@@ -2,7 +2,7 @@
 kind: examples
 id: bld_examples_retriever
 pillar: P07
-llm_function: INJECT
+llm_function: GOVERN
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28

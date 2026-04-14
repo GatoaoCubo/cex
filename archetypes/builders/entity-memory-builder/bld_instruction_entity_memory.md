@@ -30,7 +30,7 @@ density_score: 0.90
 9. Confirm entity slug for id: snake_case, lowercase, no hyphens, <= 30 chars
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write attributes map: snake_case keys, string values, specific facts only — no inferences
 5. Write relationships list: [{entity: slug, relation: verb_noun}] — at least 1 if any links exist

@@ -45,28 +45,28 @@ priority_rules:
 feedback_loop: "{{how_review_decisions_feed_model_training_or_omit}}"
 ```
 ## Overview
-{{what_workflow_is_being_reviewed_1_to_2_sentences}}
-{{why_human_judgment_is_required_cannot_be_fully_automated}}
-{{who_or_what_system_consumes_the_approved_output}}
+`{{what_workflow_is_being_reviewed_1_to_2_sentences}}`
+`{{why_human_judgment_is_required_cannot_be_fully_automated}}`
+`{{who_or_what_system_consumes_the_approved_output}}`
 ## Review Trigger
-{{precise_condition_description}}
+`{{precise_condition_description}}`
 | Trigger | Condition | Data Source | Notes |
 |---------|-----------|-------------|-------|
-| {{trigger_name}} | {{evaluable_expression}} | {{where_value_comes_from}} | {{notes}} |
+| `{{trigger_name}}` | {{evaluable_expression}} | {{where_value_comes_from}} | `{{notes}}` |
 ## Escalation Chain
 | Level | Role | SLA (min) | Channel | Escalates When |
 |-------|------|-----------|---------|---------------|
-| L1 | {{reviewer_role}} | {{minutes}} | {{email_slack_webhook}} | {{condition_to_escalate}} |
-| L2 | {{reviewer_role}} | {{minutes}} | {{channel}} | {{condition_to_escalate}} |
+| L1 | `{{reviewer_role}}` | {{minutes}} | {{email_slack_webhook}} | `{{condition_to_escalate}}` |
+| L2 | `{{reviewer_role}}` | {{minutes}} | {{channel}} | `{{condition_to_escalate}}` |
 ## Approval Flow
 Flow type: **{{binary|edit|score}}**
 | Action | Meaning | Downstream Effect |
 |--------|---------|-------------------|
-| {{accept}} | {{what_reviewer_confirms}} | {{output_is_released_to_pipeline}} |
-| {{reject}} | {{what_reviewer_rejects}} | {{output_is_discarded_or_flagged}} |
+| `{{accept}}` | {{what_reviewer_confirms}} | `{{output_is_released_to_pipeline}}` |
+| `{{reject}}` | {{what_reviewer_rejects}} | `{{output_is_discarded_or_flagged}}` |
 ## Timeout and Fallback
-Timeout: **{{timeout_seconds}}s** (applies to each escalation level).
-Fallback: **{{reject|accept_with_flag|retry}}** -- {{justification_for_this_choice}}.
+Timeout: **`{{timeout_seconds}}`s** (applies to each escalation level).
+Fallback: **{{reject|accept_with_flag|retry}}** -- `{{justification_for_this_choice}}`.
 ## References
-- {{reference_1}}
-- {{reference_2}}
+- `{{reference_1}}`
+- `{{reference_2}}`

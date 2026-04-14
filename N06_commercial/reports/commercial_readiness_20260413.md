@@ -4,7 +4,7 @@ kind: content_monetization
 pillar: P11
 title: CEX commercial readiness assessment (post Wave 2)
 version: 1.0.0
-quality: null
+quality: 8.9
 tags: [commercial, tiers, roadmap, pricing, gtm]
 created: 2026-04-13
 nucleus: n06

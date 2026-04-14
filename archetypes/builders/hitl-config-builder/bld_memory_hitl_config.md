@@ -29,6 +29,7 @@ agent_group: builder
 memory_scope: project
 observation_types: [feedback, project, reference]
 density_score: 0.88
+llm_function: INJECT
 ---
 ## Summary
 HITL configuration failures cluster into two categories: availability failures (pipeline blocks because no human responded and there was no timeout or fallback) and routing failures (wrong outputs sent to review because trigger condition was vague or misconfigured). Both categories are preventable with precise specification.

@@ -30,22 +30,22 @@ capabilities:
 auth_method: {{auth_method}}
 ```
 
-# {{aci_name}} Interface Specification
+# `{{aci_name}}` Interface Specification
 
 ## Overview
-{{aci_summary}}
+`{{aci_summary}}`
 
 ## Protocol & Communication
-{{aci_protocol_details}}
+`{{aci_protocol_details}}`
 
 ## Functional Capabilities
-{{aci_capabilities_list}}
+`{{aci_capabilities_list}}`
 
 ## Endpoint Mapping
-{{aci_endpoint_definitions}}
+`{{aci_endpoint_definitions}}`
 
 ## Security & Authentication
-{{aci_security_implementation}}
+`{{aci_security_implementation}}`
 
 ## Error Handling
-{{aci_error_codes}}
+`{{aci_error_codes}}`

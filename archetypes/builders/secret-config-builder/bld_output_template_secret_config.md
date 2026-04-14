@@ -54,25 +54,25 @@ namespaces: [{{namespace_or_region_1}}, {{namespace_or_region_2}}]
 fallback: "{{fallback_provider_or_null}}"
 ```
 ## Overview
-{{what_credentials_this_config_governs_1_to_2_sentences}}
-{{which_system_or_agent_uses_them_and_risk_classification}}
+`{{what_credentials_this_config_governs_1_to_2_sentences}}`
+`{{which_system_or_agent_uses_them_and_risk_classification}}`
 ## Provider
-Backend: {{provider_name}} — {{auth_method}}
+Backend: `{{provider_name}}` — `{{auth_method}}`
 Paths:
-1. `{{secret_path_placeholder_1}}` — {{what_it_stores}}
-2. `{{secret_path_placeholder_2}}` — {{what_it_stores}}
-{{any_provider_specific_notes}}
+1. `{{secret_path_placeholder_1}}` — `{{what_it_stores}}`
+2. `{{secret_path_placeholder_2}}` — `{{what_it_stores}}`
+`{{any_provider_specific_notes}}`
 ## Rotation Policy
-1. Frequency: {{rotation_frequency}}
-2. Method: {{rotation_method}}
-3. Trigger: {{what_triggers_rotation}}
-4. Rollback: {{how_to_rollback_if_rotation_fails}}
+1. Frequency: `{{rotation_frequency}}`
+2. Method: `{{rotation_method}}`
+3. Trigger: `{{what_triggers_rotation}}`
+4. Rollback: `{{how_to_rollback_if_rotation_fails}}`
 ## Access Pattern
 Pattern: {{dynamic|static|injected|env}}
-{{how_agents_retrieve_at_runtime_step_by_step}}
+`{{how_agents_retrieve_at_runtime_step_by_step}}`
 Lease/TTL: {{lease_duration_or_N/A}}
 
-Fallback: {{fallback_behavior_if_provider_unavailable}}
+Fallback: `{{fallback_behavior_if_provider_unavailable}}`
 
 ## Properties
 

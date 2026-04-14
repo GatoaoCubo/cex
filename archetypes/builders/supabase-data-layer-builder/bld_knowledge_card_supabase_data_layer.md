@@ -16,8 +16,8 @@ keywords: [layer, knowledge-card, matrix, summary, data_platform]
 linked_artifacts:
   primary: null
   related: []
+llm_function: INJECT
 ---
-
 # Supabase Data Layer — Builder Knowledge
 
 ## Executive Summary

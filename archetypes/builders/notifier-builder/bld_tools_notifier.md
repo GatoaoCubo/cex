@@ -2,7 +2,7 @@
 kind: tools
 id: bld_tools_notifier
 pillar: P04
-llm_function: EXECUTE
+llm_function: CALL
 purpose: Tool registry for notifier-builder
 version: 1.0.0
 created: 2026-03-28
@@ -12,6 +12,7 @@ tags: [tools, notifier, P04, brain, validate, forge]
 quality: 9.0
 tldr: "Tools used by notifier-builder: brain_query for discovery, validate for gates, forge for artifact creation."
 density_score: 1.0
+title: Tools ISO - notifier
 ---
 # Tools: notifier-builder
 

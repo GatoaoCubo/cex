@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Crew Role  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 Filters content based on predefined criteria, ensuring compliance with policies and removing inappropriate or irrelevant material.  
 
 ## Receives From  

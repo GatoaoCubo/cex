@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Dispatch Rule"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Routing rules that match tasks to executors fail in two directions: too narrow (low recall, tasks fall through to default) or too broad (low precision, wrong executor receives tasks). A disciplined keyword set, calibrated confidence threshold, and distinct fallback executor together achieve high recall and precision with a safety net for every miss.

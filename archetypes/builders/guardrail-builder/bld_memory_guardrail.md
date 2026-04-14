@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Guardrail"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 A guardrail defines safety restrictions with concrete, matchable rules and explicit enforcement. Its value comes from being unambiguous — the enforcement layer must be able to evaluate whether a given input or output triggers the rule. Severity classification drives enforcement mode, and every guardrail must document how it can be bypassed in an emergency.

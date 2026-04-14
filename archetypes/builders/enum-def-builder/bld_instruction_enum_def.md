@@ -30,7 +30,7 @@ density_score: 0.90
 9. Confirm enum slug for id: snake_case, lowercase, no hyphens
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Write values list in frontmatter first — this forces scope decision before prose
 5. Write descriptions map in frontmatter: one line per value explaining meaning and when to use

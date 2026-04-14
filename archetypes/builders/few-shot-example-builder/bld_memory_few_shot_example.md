@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Few Shot Example"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Few-shot examples teach a model what format to produce, not what content to generate. The output field must be an actual demonstration of the target format. Difficulty must be calibrated across a set — easy examples establish the baseline, medium ones show variation, hard ones handle edge cases. The body limit is 1024 bytes, the tightest in the P01 pillar.

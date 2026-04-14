@@ -41,13 +41,13 @@ eval_metrics:
   - {{metric_2}}
 ```
 ## Overview
-{{target_task_one_sentence}}
-{{base_model_choice_rationale_one_sentence}}
-{{adapter_type_justification_one_sentence}}
+`{{target_task_one_sentence}}`
+`{{base_model_choice_rationale_one_sentence}}`
+`{{adapter_type_justification_one_sentence}}`
 ## Base Model
 | Field | Value |
 |-------|-------|
-| model_id | {{huggingface_id_or_path}} |
+| model_id | `{{huggingface_id_or_path}}` |
 | architecture | {{llama3|mistral|qwen2|phi3|gemma|other}} |
 | param_count | {{7B|13B|70B|etc}} |
 | license | {{apache-2.0|llama3|mit|other}} |
@@ -55,8 +55,8 @@ eval_metrics:
 ## Dataset
 | Field | Value |
 |-------|-------|
-| path | {{dataset_path_or_hf_identifier}} |
-| size | {{N_rows}} rows |
+| path | `{{dataset_path_or_hf_identifier}}` |
+| size | `{{N_rows}}` rows |
 | format | {{alpaca|sharegpt|custom|preference}} |
 | field_mapping | {{instruction/input/output or user/assistant}} |
 | language | {{en|pt|multilingual}} |
@@ -95,14 +95,14 @@ eval_metrics:
 | Parameter | Value |
 |-----------|-------|
 | eval_strategy | {{steps|epoch}} |
-| eval_steps | {{N or null}} |
+| eval_steps | `{{N or null}}` |
 | save_strategy | {{steps|epoch}} |
-| save_steps | {{N or null}} |
+| save_steps | `{{N or null}}` |
 | save_total_limit | {{2|3|5}} |
 | load_best_model_at_end | {{true|false}} |
 | metric_for_best_model | {{eval_loss|accuracy}} |
-| early_stopping_patience | {{N or null}} |
+| early_stopping_patience | `{{N or null}}` |
 ## References
-- {{base_model_paper_or_hf_page}}
-- {{dataset_source}}
-- {{framework_docs}}
+- `{{base_model_paper_or_hf_page}}`
+- `{{dataset_source}}`
+- `{{framework_docs}}`

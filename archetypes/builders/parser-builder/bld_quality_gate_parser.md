@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, parser, P11, P05, governance, data-extraction]
 tldr: "Gates for parser artifacts — input format defined, extraction rules tested, output schema matched to consumer."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: parser
 ## Definition
 | Field     | Value                                               |

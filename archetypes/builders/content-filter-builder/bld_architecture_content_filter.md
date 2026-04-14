@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 | Name | Role | Owner | Status |  
 |------|------|-------|--------|  
 | Parser | Processes raw content | DevTeamA | Active |  

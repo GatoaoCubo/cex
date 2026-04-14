@@ -94,7 +94,7 @@ if (inflightResponseId) {
 
 ## Checklist (fill all; no `{{placeholder}}` may remain)
 
-- [ ] `{{provider}}`, `{{model}}`, `{{transport}}`, `{{voice}}` resolved
+- [ ] `{{provider}}`, {{model}}, {{transport}}, `{{voice}}` resolved
 - [ ] `turn_detection` chosen: `server_vad` (default) | `none` (manual `response.create`) | `semantic_vad` (Gemini)
 - [ ] Codec pair set: `pcm16@24kHz` (OpenAI WS) or `opus@48kHz` (WebRTC)
 - [ ] Tool schemas inlined (JSON Schema draft-07, names unique)

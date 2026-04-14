@@ -43,34 +43,34 @@ description: "{{what_this_stream_does_max_200ch}}"
 ```
 
 ## Overview
-{{transport_protocol_and_why_1_sentence}}
-{{producer_and_consumer_description}}
+`{{transport_protocol_and_why_1_sentence}}`
+`{{producer_and_consumer_description}}`
 
 ## Protocol Settings
 
 | Parameter | Value | Notes |
 |-----------|-------|-------|
-| protocol | {{sse|websocket|chunked}} | {{rationale}} |
+| protocol | {{sse|websocket|chunked}} | `{{rationale}}` |
 | content_type | {{text/event-stream|application/octet-stream|text/plain}} | MIME for this protocol |
 | encoding | {{utf-8|binary}} | Frame encoding |
-| {{protocol_param_1}} | {{value}} | {{notes}} |
-| {{protocol_param_2}} | {{value}} | {{notes}} |
+| `{{protocol_param_1}}` | {{value}} | `{{notes}}` |
+| `{{protocol_param_2}}` | {{value}} | `{{notes}}` |
 
 ## Flow Control
 
 | Parameter | Value | Notes |
 |-----------|-------|-------|
-| buffer_bytes | {{N}} | Max bytes buffered before backpressure triggers |
-| flush_interval_ms | {{N}} | How often buffered data is flushed to client |
+| buffer_bytes | `{{N}}` | Max bytes buffered before backpressure triggers |
+| flush_interval_ms | `{{N}}` | How often buffered data is flushed to client |
 | backpressure_strategy | {{drop|block|buffer}} | Overflow behavior |
-| max_connections | {{N}} | Concurrent stream limit |
+| max_connections | `{{N}}` | Concurrent stream limit |
 
 ## Lifecycle
 
 | Parameter | Value | Notes |
 |-----------|-------|-------|
-| heartbeat_interval_ms | {{N}} | Keepalive ping interval (prevents proxy timeout) |
-| timeout_ms | {{N}} | Idle connection termination threshold |
-| reconnect_delay_ms | {{N}} | Client reconnect backoff (SSE/WS) |
+| heartbeat_interval_ms | `{{N}}` | Keepalive ping interval (prevents proxy timeout) |
+| timeout_ms | `{{N}}` | Idle connection termination threshold |
+| reconnect_delay_ms | `{{N}}` | Client reconnect backoff (SSE/WS) |
 | max_reconnect_attempts | {{N or -1}} | -1 = infinite reconnect |
 | shutdown | {{graceful|immediate}} | How stream closes on server stop |

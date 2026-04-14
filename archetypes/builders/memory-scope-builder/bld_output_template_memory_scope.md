@@ -41,13 +41,13 @@ encryption: "{{encryption}}}}"
 shared_with: "{{shared_with}}}}"
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Memory Types
-{{memory_types_content}}
+`{{memory_types_content}}`
 ## Backend Config
-{{backend_config_content}}
+`{{backend_config_content}}`
 ## Lifecycle
-{{lifecycle_content}}
+`{{lifecycle_content}}`
 
 ## Template Standards
 

@@ -45,7 +45,7 @@ golden_test (P07)    --depends-->  few_shot_example
 | few_shot_example IS | few_shot_example IS NOT |
 |---------------------|-------------------------|
 | An input/output pair that teaches format by demonstration | An artifact with a scoring rubric or quality grade (that is golden_test) |
-| Evaluated externally; quality is null in the artifact itself | A prompt template with {{variables}} for reuse |
+| Evaluated externally; quality is null in the artifact itself | A prompt template with `{{variables}}` for reuse |
 | Subject to a byte budget (max 1024 bytes) | Background domain knowledge without an input/output pair |
 | A teaching unit — shows HOW to format a response | A test assertion that checks correctness (that is unit_eval) |
 | Domain-scoped and difficulty-calibrated | An orchestration step or workflow instruction |

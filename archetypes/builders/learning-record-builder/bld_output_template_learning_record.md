@@ -51,29 +51,29 @@ linked_artifacts:
   related: [{{related_1}}]
 ```
 ## Summary
-{{dense_overview_2_3_sentences}}
+`{{dense_overview_2_3_sentences}}`
 ## Pattern
-1. {{concrete_step_that_worked_1}}
-2. {{concrete_step_that_worked_2}}
-3. {{concrete_step_that_worked_3}}
+1. `{{concrete_step_that_worked_1}}`
+2. `{{concrete_step_that_worked_2}}`
+3. `{{concrete_step_that_worked_3}}`
 ## Anti-Pattern
-1. {{specific_failure_1}}
-2. {{specific_failure_2}}
+1. `{{specific_failure_1}}`
+2. `{{specific_failure_2}}`
 ## Context
-1. Environment: {{runtime_environment}}
-2. Agent_group: {{agent_group_involved}}
-3. Timing: {{when_it_happened}}
-4. Constraints: {{relevant_constraints}}
+1. Environment: `{{runtime_environment}}`
+2. Agent_group: `{{agent_group_involved}}`
+3. Timing: `{{when_it_happened}}`
+4. Constraints: `{{relevant_constraints}}`
 ## Impact
-1. {{measurable_outcome_1}}
-2. {{measurable_outcome_2}}
+1. `{{measurable_outcome_1}}`
+2. `{{measurable_outcome_2}}`
 ## Reproducibility
-1. Conditions: {{what_must_be_true_to_repeat}}
-2. Confidence: {{HIGH_MEDIUM_LOW}}
-3. Caveats: {{edge_cases_or_limitations}}
+1. Conditions: `{{what_must_be_true_to_repeat}}`
+2. Confidence: `{{HIGH_MEDIUM_LOW}}`
+3. Caveats: `{{edge_cases_or_limitations}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

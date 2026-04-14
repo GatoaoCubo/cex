@@ -2,7 +2,7 @@
 id: p11_qg_webhook
 kind: quality_gate
 pillar: P11
-llm_function: CONSTRAIN
+llm_function: GOVERN
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -14,6 +14,7 @@ quality: 9.1
 tags: [quality_gate, webhook, P11, validation]
 tldr: "10 HARD gates (any failure = reject) + 12 SOFT dims (score 0-10, threshold 7.0)"
 density_score: 1.0
+title: Quality Gate ISO - webhook
 ---
 # Gate: webhook
 

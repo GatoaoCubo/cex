@@ -15,6 +15,7 @@ domain: "tagline construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: INJECT
 ---
 # Memory: Tagline Builder
 

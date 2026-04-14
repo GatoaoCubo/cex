@@ -30,6 +30,7 @@ observation_types: [feedback, reference, project]
 quality: null
 title: "Memory Ontology"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Ontology authoring failures cluster into four categories: missing disjointness (incorrect inference), unconstrained properties (semantic drift), absent schema.org mappings (lost web interoperability), and undeclared transitivity (broken hierarchy traversal). Each is preventable with explicit declarations at authoring time.

@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
+
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
 | Name | Role | Owner | Status |  
 |------|------|-------|--------|  
 | Config Builder | Core logic for generating configs | DevOps | In Progress |  

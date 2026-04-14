@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_ontology
 pillar: P08
-llm_function: GOVERN
+llm_function: CONSTRAIN
 purpose: Component map of ontology -- inventory, dependencies, and architectural position in P01
 quality: null
 title: "Architecture Ontology"
@@ -15,7 +15,6 @@ created: "2026-04-13"
 updated: "2026-04-13"
 density_score: 0.90
 ---
-
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|

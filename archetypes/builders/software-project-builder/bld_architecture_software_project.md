@@ -12,9 +12,11 @@ quality: 9.1
 tags: [builder, architecture, software-project, layers]
 tldr: "4-layer architecture: Domain (business logic) → Infrastructure (DB, cache, external) → Interface (API/CLI) → Deploy (Docker, CI/CD). Clean deps: domain has zero external deps."
 density_score: 1.0
+llm_function: CONSTRAIN
 ---
-
 # Architecture
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## 4-Layer Model
 

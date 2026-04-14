@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Crew Role  
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 Audits models and datasets for bias, analyzes fairness metrics, and generates actionable bias mitigation recommendations. Collaborates with data preprocessors and model evaluators to ensure equitable outcomes.  
 
 ## Receives From  

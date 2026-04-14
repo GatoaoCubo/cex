@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, memory-scope, P02]
 tldr: "Pass/fail gate for memory_scope artifacts: required fields, id pattern, body sections, parameter completeness."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: memory_scope
 ## Definition
 | Field | Value |

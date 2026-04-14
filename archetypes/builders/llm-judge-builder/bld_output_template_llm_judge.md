@@ -59,34 +59,34 @@ aggregation: {{mean|min|max|weighted_sum}}
 pass_threshold: {{threshold_value}}
 ```
 ## Overview
-{{what_the_judge_evaluates_1_to_2_sentences}}
-{{use_case_and_whether_reference_based_or_free}}
+`{{what_the_judge_evaluates_1_to_2_sentences}}`
+`{{use_case_and_whether_reference_based_or_free}}`
 ## Criteria
-### {{criterion_name_1}}
-{{definition_of_this_quality_dimension}}
-High score ({{max_value}}): {{concrete_example_of_excellent_output}}
-Low score ({{min_value}}): {{concrete_example_of_poor_output}}
-### {{criterion_name_2}}
-{{definition_of_this_quality_dimension}}
-High score ({{max_value}}): {{concrete_example_of_excellent_output}}
-Low score ({{min_value}}): {{concrete_example_of_poor_output}}
+### `{{criterion_name_1}}`
+`{{definition_of_this_quality_dimension}}`
+High score (`{{max_value}}`): `{{concrete_example_of_excellent_output}}`
+Low score (`{{min_value}}`): `{{concrete_example_of_poor_output}}`
+### `{{criterion_name_2}}`
+`{{definition_of_this_quality_dimension}}`
+High score (`{{max_value}}`): `{{concrete_example_of_excellent_output}}`
+Low score (`{{min_value}}`): `{{concrete_example_of_poor_output}}`
 ## Scale
-Type: {{scale_type}}
-Range: {{min_value}} to {{max_value}}
+Type: `{{scale_type}}`
+Range: `{{min_value}}` to `{{max_value}}`
 | Score | Label | Meaning |
 |-------|-------|---------|
-| {{min_value}} | {{anchor_low}} | {{what_this_looks_like_concretely}} |
-| {{mid_value}} | {{anchor_mid}} | {{what_this_looks_like_concretely}} |
-| {{max_value}} | {{anchor_high}} | {{what_this_looks_like_concretely}} |
-Assignment guidance: {{how_to_choose_between_adjacent_scores}}
+| `{{min_value}}` | {{anchor_low}} | `{{what_this_looks_like_concretely}}` |
+| `{{mid_value}}` | {{anchor_mid}} | `{{what_this_looks_like_concretely}}` |
+| `{{max_value}}` | {{anchor_high}} | `{{what_this_looks_like_concretely}}` |
+Assignment guidance: `{{how_to_choose_between_adjacent_scores}}`
 ## Few-Shot Examples
 ### Example 1 ({{high|low}} score)
-Input: {{prompt_or_question}}
-Output: {{model_response_being_judged}}
-Score: {{score}} / {{max_value}}
-Rationale: {{chain_of_thought_reasoning_then_score_justification}}
+Input: `{{prompt_or_question}}`
+Output: `{{model_response_being_judged}}`
+Score: `{{score}}` / `{{max_value}}`
+Rationale: `{{chain_of_thought_reasoning_then_score_justification}}`
 ### Example 2 ({{high|low}} score)
-Input: {{prompt_or_question}}
-Output: {{model_response_being_judged}}
-Score: {{score}} / {{max_value}}
-Rationale: {{chain_of_thought_reasoning_then_score_justification}}
+Input: `{{prompt_or_question}}`
+Output: `{{model_response_being_judged}}`
+Score: `{{score}}` / `{{max_value}}`
+Rationale: `{{chain_of_thought_reasoning_then_score_justification}}`

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, enum-def, P06, enumeration, finite-values, schema]
 tldr: "Pass/fail gate for enum_def artifacts: value completeness, per-value descriptions, extensibility declaration, and framework representation accuracy."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: enum_def
 ## Definition
 | Field | Value |

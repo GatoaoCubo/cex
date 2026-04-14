@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P09
 parent: null
 domain: compression_config
-llm_function: INJECT
+llm_function: BECOME
 version: 1.0.0
 created: 2026-04-06
 updated: 2026-04-06

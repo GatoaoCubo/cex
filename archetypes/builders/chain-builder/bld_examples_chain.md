@@ -49,7 +49,7 @@ narrows scope — from broad research to atomic distilled facts.
 ## Steps
 ### Step 1: Gather Sources
 - **Input**: topic name (string), domain (string)
-- **Prompt**: Search for authoritative sources on {{topic}} in {{domain}}. Return 3-5 URLs with one-line summaries.
+- **Prompt**: Search for authoritative sources on `{{topic}}` in `{{domain}}`. Return 3-5 URLs with one-line summaries.
 - **Output**: list of {url, summary} objects (JSON)
 ### Step 2: Extract Facts
 - **Input**: list of {url, summary} from Step 1

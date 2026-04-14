@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, prompt-cache, ttl, eviction, caching]
 tldr: "Gates ensuring prompt_cache artifacts have valid TTL, eviction, key method, invalidation, and storage config."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: Prompt Cache
 ## Definition
 | Field     | Value |

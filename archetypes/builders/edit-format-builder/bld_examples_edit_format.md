@@ -18,6 +18,8 @@ density_score: 0.92
 
 ## Golden Example 1: Search-Replace Format Spec
 
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
+
 ```markdown
 ---
 id: p06_ef_search_replace

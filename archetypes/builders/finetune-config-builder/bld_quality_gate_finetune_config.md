@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, finetune-config, training, lora, peft, P11]
 tldr: "Gates for finetune_config: validates adapter completeness, hyperparameter coverage, dataset spec, eval metrics, and no credentials."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: finetune_config
 ## Definition
 | Field | Value |

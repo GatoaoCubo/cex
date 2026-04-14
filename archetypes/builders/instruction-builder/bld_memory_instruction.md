@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Instruction"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Instructions describe how to execute a procedure step by step. The primary failure mode is compound steps: packaging multiple actions into one step causes partial execution that appears complete. The secondary failure is unverifiable prerequisites that agents skip silently. Both are fixed at authoring time with simple structural rules.

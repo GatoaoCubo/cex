@@ -330,6 +330,7 @@ CRYPTO_ALLOWED_KINDS: set[str] = set()
 FM_RE = re.compile(r"^---\n(.*?)\n---\s*", re.DOTALL)
 PLACEHOLDER_RE = re.compile(r"\{\{[A-Za-z_][A-Za-z0-9_ ]*\}\}")
 CODE_FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
+INLINE_CODE_RE = re.compile(r"`[^`\n]+`")
 
 ID_PATTERN_RE = re.compile(r"`(\^[^`]+\$)`")
 
@@ -345,8 +346,13 @@ def split_frontmatter(content: str) -> tuple[dict, str]:
 
 
 def strip_code_fences(body: str) -> str:
-    """Remove fenced code blocks so placeholder scans ignore examples."""
-    return CODE_FENCE_RE.sub("", body)
+    """Remove fenced AND inline code so placeholder scans ignore examples.
+
+    Placeholders wrapped in backticks (e.g. `{{vars}}`) are documentation
+    references, not unfilled template slots.
+    """
+    without_fences = CODE_FENCE_RE.sub("", body)
+    return INLINE_CODE_RE.sub("", without_fences)
 
 
 def kind_from_filename(name: str) -> str:
@@ -505,8 +511,13 @@ def check_placeholders_resolved(body: str, iso: str) -> list[str]:
         return []
     stripped = strip_code_fences(body)
     leaks = PLACEHOLDER_RE.findall(stripped)
-    allow = {"{{name}}", "{{kind}}", "{{brand}}", "{{BRAND_NAME}}"}
-    leaks = [p for p in leaks if p not in allow]
+    allow = {"{{name}}", "{{kind}}", "{{brand}}"}
+    brand_pat = re.compile(r"^\{\{BRAND_[A-Z_]+\}\}$")
+    path_allow = {"{{APP_ROOT}}", "{{USER_DIR}}", "{{base_dir}}"}
+    leaks = [p for p in leaks
+             if p not in allow
+             and p not in path_allow
+             and not brand_pat.match(p)]
     if leaks:
         unique = sorted(set(leaks))[:5]
         return [f"unresolved placeholder(s) in body: {', '.join(unique)}"]
@@ -578,7 +589,10 @@ def validate_file(path: Path) -> list[str]:
     errors += check_h02_id_pattern(fm, kind, schema_pattern)
     errors += check_domain_keywords_present(body, kind)
     errors += check_no_wrong_domain_keywords(body, kind)
-    errors += check_placeholders_resolved(body, iso)
+    # Meta-builder templates in _builder-builder/ are literal templates: their
+    # unfilled {{placeholders}} are the product, not a bug. Skip C6 for them.
+    if "_builder-builder" not in str(path).replace("\\", "/"):
+        errors += check_placeholders_resolved(body, iso)
     errors += check_frontmatter_complete(fm)
 
     return errors

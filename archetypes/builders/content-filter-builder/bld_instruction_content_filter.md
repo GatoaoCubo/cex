@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 1. Analyze input/output data formats (e.g., JSON, XML, text) for content_filter.  
 2. Identify governance policies (e.g., censorship rules, NSFW thresholds).  
 3. Evaluate existing filtering tools (e.g., regex, NLP models, keyword lists).  

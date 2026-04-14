@@ -12,8 +12,8 @@ quality: 9.1
 tags: [quality-gate, red-team-eval, P07, adversarial, safety, llm-security, owasp]
 tldr: "Pass/fail gate for red_team_eval artifacts: attack coverage, target specificity, pass_criteria observability, payload safety, and OWASP traceability."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: red_team_eval
 ## Definition
 | Field | Value |

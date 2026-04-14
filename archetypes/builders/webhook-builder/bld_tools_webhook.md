@@ -2,7 +2,7 @@
 kind: tools
 id: bld_tools_webhook
 pillar: P04
-llm_function: ACT
+llm_function: CALL
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -11,6 +11,7 @@ quality: 9.0
 tags: [tools, webhook, P04, brain_query, validate, forge]
 tldr: "Tools available to webhook-builder: brain_query for discovery, validate for gate checks, forge for artifact writing."
 density_score: 0.99
+title: Tools ISO - webhook
 ---
 # Tools: webhook-builder
 ## Available Tools

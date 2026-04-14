@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Code Executor"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Code executors are the highest-risk P04 kind because they run arbitrary code. The difference between a safe executor and a dangerous one comes down to three mandatory constraints: timeout (prevents resource exhaustion), network policy (prevents data exfiltration), and sandbox type (prevents host access). All three must be explicit in the spec.

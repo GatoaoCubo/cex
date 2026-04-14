@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Golden Example
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 ```markdown
 ---
 id: p11_tm_drone_delivery

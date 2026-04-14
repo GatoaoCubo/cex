@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, llm-judge, P07, evals, criteria, scale, few-shot]
 tldr: "Pass/fail gate for llm_judge artifacts: judge_model presence, criteria completeness, scale anchors, few-shot calibration, and boundary compliance."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: llm_judge
 ## Definition
 | Field | Value |

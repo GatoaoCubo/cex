@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Frontmatter Fields
+
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|

@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Handoff Protocol"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Handoff protocol — trigger conditions, context passed, return contract between agents. The difference between a useful handoff_protocol and a useless one is concrete values

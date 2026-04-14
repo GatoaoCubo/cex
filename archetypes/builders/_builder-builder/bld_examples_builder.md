@@ -2,7 +2,7 @@
 kind: examples
 id: bld_examples_builder
 pillar: P03
-llm_function: INJECT
+llm_function: GOVERN
 purpose: Reference examples of well-built builders
 quality: 9.0
 title: "Examples Builder"

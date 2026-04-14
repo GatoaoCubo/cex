@@ -17,6 +17,8 @@ density_score: 0.92
 ---
 
 ## Domain Overview
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 Content filter pipelines enforce organizational harm policies by intercepting text, images, audio, and structured data at ingestion (pre-LLM) and output (post-LLM) stages. They operate in sequential stages: fast rule-based triage (< 5ms) -> ML classifier scoring (< 50ms) -> optional human review queue (async). Each stage assigns a harm category and confidence score; enforcement actions (block, flag, degrade, log) are triggered by configured thresholds per category.
 
 Content filters differ from: safety policies (define WHAT is prohibited), guardrails (constrain model BEHAVIOR), and output validators (verify schema/format). Filters execute at the data-plane level; guardrails execute at the model level.

@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_diagram
 pillar: P08
-llm_function: BECOME
+llm_function: CONSTRAIN
 purpose: Component map of diagram — inventory, dependencies, and architectural position
 quality: 9.1
 title: "Architecture Diagram"
@@ -15,7 +15,6 @@ created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
 ---
-
 ## Component Inventory
 | Name | Role | Owner | Status |
 |------|------|-------|--------|

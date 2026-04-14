@@ -7,13 +7,13 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 domain: document_loader
-llm_function: GENERATE
+llm_function: PRODUCE
 quality: 9.0
 tags: [output_template, document_loader, ingestion, chunking, P04]
 tldr: "Fillable template for document_loader artifacts. Replace all {{vars}} with concrete values."
 density_score: 1.0
+title: Output Template ISO - document_loader
 ---
-
 # Output Template: document_loader
 
 ## Frontmatter Template

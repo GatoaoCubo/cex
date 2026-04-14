@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Frontmatter Fields  
+
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
 ### Required  
 | Field       | Type   | Required | Default | Notes                              |  
 |-------------|--------|----------|---------|------------------------------------|  

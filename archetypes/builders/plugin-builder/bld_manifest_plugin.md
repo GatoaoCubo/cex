@@ -20,6 +20,8 @@ tldr: "Golden and anti-examples for plugin construction, demonstrating ideal str
 density_score: 0.90
 ---
 # plugin-builder
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ## Identity
 Specialist in building `plugin` — pluggable system extensions with interface contract,
 lifecycle management, configuration, and own API surface. Produces dense plugins with contract

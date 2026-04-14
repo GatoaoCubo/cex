@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_notifier
 pillar: P04
-llm_function: CONTEXT
+llm_function: CONSTRAIN
 purpose: Internal architecture and boundary map for notifier domain
 version: 1.0.0
 created: 2026-03-28
@@ -12,6 +12,7 @@ tags: [architecture, notifier, P04, boundary, components]
 quality: 9.1
 tldr: "Notifier = push delivery. Components: channel_router, template_engine, priority_queue, rate_limiter, delivery_engine, retry_handler."
 density_score: 1.0
+title: Architecture ISO - notifier
 ---
 # Architecture: notifier
 
@@ -30,7 +31,7 @@ density_score: 1.0
 | Component        | Role                                                              |
 |------------------|-------------------------------------------------------------------|
 | channel_router   | Selects provider based on channel enum (email->SendGrid, etc.)   |
-| template_engine  | Substitutes {{vars}} into message template per channel format    |
+| template_engine  | Substitutes `{{vars}}` into message template per channel format    |
 | priority_queue   | Routes by priority: critical=immediate, low=digest batch         |
 | rate_limiter     | Enforces max_per_minute/max_per_hour, implements token bucket    |
 | delivery_engine  | Calls provider API, captures delivery receipt or error           |

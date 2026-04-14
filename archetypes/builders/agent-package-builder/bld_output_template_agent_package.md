@@ -50,8 +50,8 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
 ```
 ## Agent Identity
-{{agent_name}} is a {{domain}} specialist.
-{{one_sentence_what_this_package_enables}}
+`{{agent_name}}` is a `{{domain}}` specialist.
+`{{one_sentence_what_this_package_enables}}`
 ## File Inventory
 | File | Pillar | Tier | Status |
 |------|--------|------|--------|
@@ -68,12 +68,12 @@ density_score: {{0.80-1.00}}
 | upload_kit_whitelabel.md | P04 | whitelabel | {{present|absent}} |
 | branding_config.yaml | P09 | whitelabel | {{present|absent}} |
 ## Tier Compliance
-Declared: {{tier}}. Files present: {{files_count}}/{{tier_expected}}.
-{{gap_description_if_any}}
+Declared: `{{tier}}`. Files present: {{files_count}}/`{{tier_expected}}`.
+`{{gap_description_if_any}}`
 ## Portability Notes
 - Platform: {{platform_agnostic|platform_specific}}
 - Hardcoded paths: {{none|list_of_violations}}
-- External dependencies: {{list_or_none}}
+- External dependencies: `{{list_or_none}}`
 ## References
-- Source agent: {{agent_definition_path}}
+- Source agent: `{{agent_definition_path}}`
 - Builder: agent-package-builder v1.0.0

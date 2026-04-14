@@ -12,6 +12,7 @@ tags: [memory, retriever, P12, RAG, anti-patterns, lessons]
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 density_score: 1.0
+title: Memory ISO - retriever
 ---
 # Memory: retriever-builder
 

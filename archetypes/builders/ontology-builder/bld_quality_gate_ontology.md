@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, ontology, taxonomy, OWL, SKOS, P11]
 tldr: "Gates for ontology artifacts: validates class hierarchy completeness, property constraints, axiom declarations, and schema.org mapping."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: ontology
 ## Definition
 | Field | Value |

@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_webhook
 pillar: P04
-llm_function: CONTEXT
+llm_function: CONSTRAIN
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -11,6 +11,7 @@ quality: 9.1
 tags: [architecture, webhook, P04, components, boundary, event-driven]
 tldr: "Webhook runtime components, data flow (inbound and outbound), and boundary with api_client/notifier/mcp_server."
 density_score: 1.0
+title: Architecture ISO - webhook
 ---
 # Architecture: webhook
 

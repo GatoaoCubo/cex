@@ -41,13 +41,13 @@ score_threshold: "{{score_threshold}}}}"
 fetch_k: "{{fetch_k}}}}"
 ```
 ## Overview
-{{overview_content}}
+`{{overview_content}}`
 ## Search Strategy
-{{search_strategy_content}}
+`{{search_strategy_content}}`
 ## Parameters
-{{parameters_content}}
+`{{parameters_content}}`
 ## Integration
-{{integration_content}}
+`{{integration_content}}`
 
 ## Template Standards
 

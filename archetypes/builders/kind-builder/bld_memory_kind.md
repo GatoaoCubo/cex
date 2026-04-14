@@ -28,8 +28,8 @@ observation_types: [project, feedback, reference]
 quality: null
 title: "Memory Kind Builder"
 density_score: 0.90
+llm_function: INJECT
 ---
-
 ## Summary
 Builder package quality depends on three factors: boundary clarity (does the builder
 know what it IS NOT?), internal consistency (do schema, template, gates, and examples
@@ -54,7 +54,7 @@ wrong builder, and the builder itself cannot reject out-of-scope inputs.
 
 | Consistency check | Source ISO | Target ISO | Rule |
 |-------------------|-----------|------------|------|
-| Required fields | schema | output_template | Every required field has a {{var}} |
+| Required fields | schema | output_template | Every required field has a `{{var}}` |
 | HARD gates | schema | quality_gate | Every schema constraint has a gate |
 | Golden example | quality_gate | examples | Golden example passes all HARD gates |
 | Rules | system_prompt | instruction | Rules align with process steps |

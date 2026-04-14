@@ -12,9 +12,11 @@ quality: 9.0
 tags: [quality-gate, plugin, P11, P04, governance, extensibility, lifecycle]
 tldr: "Gates for plugin artifacts — interface contract, lifecycle hooks, API surface, and isolation level defined."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: plugin
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ## Definition
 | Field     | Value                                              |
 |-----------|----------------------------------------------------|

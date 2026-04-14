@@ -1,10 +1,12 @@
 ---
+id: bld_meta_manifest_builder
+kind: builder_meta
 meta: true
 file_position: 1/13
 pillar: P02
 llm_function: BECOME
 purpose: Meta-template for generating MANIFEST.md of any kind-builder
-quality: 9.1
+quality: null
 title: "Meta Manifest Builder"
 version: "1.0.0"
 author: n03_builder

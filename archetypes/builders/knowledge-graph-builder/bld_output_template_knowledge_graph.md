@@ -50,35 +50,35 @@ extraction_prompt: "{{prompt_reference_or_short_description}}"
 ```
 
 ## Overview
-{{what_domain_this_graph_covers_1_sentence}}
-{{why_graph_instead_of_flat_vector_1_sentence}}
-{{what_questions_this_graph_answers_1_sentence}}
+`{{what_domain_this_graph_covers_1_sentence}}`
+`{{why_graph_instead_of_flat_vector_1_sentence}}`
+`{{what_questions_this_graph_answers_1_sentence}}`
 
 ## Entity Types
 
 | Name | Description | Extraction Hint | Examples |
 |------|-------------|----------------|----------|
-| {{EntityType1}} | {{what_this_entity_represents}} | {{phrase_or_pattern_in_text}} | {{ex1}}, {{ex2}} |
-| {{EntityType2}} | {{what_this_entity_represents}} | {{phrase_or_pattern_in_text}} | {{ex1}}, {{ex2}} |
-| {{EntityType3}} | {{what_this_entity_represents}} | {{phrase_or_pattern_in_text}} | {{ex1}}, {{ex2}} |
+| `{{EntityType1}}` | {{what_this_entity_represents}} | {{phrase_or_pattern_in_text}} | {{ex1}}, `{{ex2}}` |
+| `{{EntityType2}}` | {{what_this_entity_represents}} | {{phrase_or_pattern_in_text}} | {{ex1}}, `{{ex2}}` |
+| `{{EntityType3}}` | {{what_this_entity_represents}} | {{phrase_or_pattern_in_text}} | {{ex1}}, `{{ex2}}` |
 
 ## Relation Types
 
 | Name | Source Type | Target Type | Description | Directionality |
 |------|-------------|-------------|-------------|----------------|
-| {{relation_type_1}} | {{EntityType}} | {{EntityType}} | {{what_relation_means}} | directed |
-| {{relation_type_2}} | {{EntityType}} | {{EntityType}} | {{what_relation_means}} | directed |
-| {{relation_type_3}} | {{EntityType}} | {{EntityType}} | {{what_relation_means}} | undirected |
+| `{{relation_type_1}}` | {{EntityType}} | {{EntityType}} | `{{what_relation_means}}` | directed |
+| `{{relation_type_2}}` | {{EntityType}} | {{EntityType}} | `{{what_relation_means}}` | directed |
+| `{{relation_type_3}}` | {{EntityType}} | {{EntityType}} | `{{what_relation_means}}` | undirected |
 
 ## Extraction Config
 
 | Parameter | Value |
 |-----------|-------|
 | Method | {{llm_triplet|ner|schema_constrained|pattern}} |
-| LLM model | {{model_name}} |
+| LLM model | `{{model_name}}` |
 | Temperature | {{0.0-0.3}} |
 | Output format | {{json_triplets|yaml_structured}} |
-| Extraction prompt | {{prompt_reference_or_inline}} |
+| Extraction prompt | `{{prompt_reference_or_inline}}` |
 
 Extraction prompt template:
 ```
@@ -93,23 +93,23 @@ Text: {text}
 
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
-| Storage backend | {{backend}} | {{why_this_backend}} |
-| Traversal strategy | {{local/global/hybrid}} | {{why_this_strategy}} |
-| Max depth | {{N}} | {{why_this_depth}} |
-| Query language | {{cypher|gremlin|sparql|python}} | {{why_this_query_lang}} |
-| Pruning rule | {{relevance_threshold_or_none}} | {{pruning_rationale}} |
+| Storage backend | `{{backend}}` | `{{why_this_backend}}` |
+| Traversal strategy | {{local/global/hybrid}} | `{{why_this_strategy}}` |
+| Max depth | `{{N}}` | `{{why_this_depth}}` |
+| Query language | {{cypher|gremlin|sparql|python}} | `{{why_this_query_lang}}` |
+| Pruning rule | `{{relevance_threshold_or_none}}` | `{{pruning_rationale}}` |
 
 ## Integration
 
 | Component | Value |
 |-----------|-------|
-| Embedding model | {{model_name_or_artifact_ref}} |
+| Embedding model | `{{model_name_or_artifact_ref}}` |
 | Dedup strategy | {{exact/fuzzy/llm}} |
-| Dedup threshold | {{similarity_score_0_to_1}} |
+| Dedup threshold | `{{similarity_score_0_to_1}}` |
 | Community detection | {{leiden/louvain/none}} |
 | Community granularity | {{fine/medium/coarse}} |
-| Downstream consumers | {{agent_or_pipeline_names}} |
+| Downstream consumers | `{{agent_or_pipeline_names}}` |
 
 ## References
-- {{reference_1}}
-- {{reference_2}}
+- `{{reference_1}}`
+- `{{reference_2}}`

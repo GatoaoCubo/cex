@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: "Build a director spawn_config YAML with CLI flags, MCP profile, timeout policy, and prompt sizing for solo/grid/continuous modes."
 density_score: 0.92
+llm_function: REASON
 ---
-
 ## Context
 The spawn-config-builder produces a `spawn_config` artifact — a structured YAML that defines exactly how a director process is launched. Downstream orchestration scripts consume this artifact to spawn terminals with the correct flags, model, MCP profile, timeout, and prompt strategy.
 **Input contract**:
@@ -126,16 +126,16 @@ If any HARD gate fails: fix the violation and re-validate. Do not emit until all
 Verifiable exit: checklist shows 8/8 HARD pass.
 ## Output Contract
 ```yaml
-id: spawn_{{director}}_{{mode}}
+id: spawn_`{{director}}`_`{{mode}}`
 kind: spawn_config
 pillar: P12
 version: 1.0.0
-director: {{director}}
-mode: {{mode}}
-model: {{model}}
-prompt_strategy: {{prompt_strategy}}
-inline_prompt: "{{inline_prompt}}"
-handoff_path: {{handoff_path}}
+director: `{{director}}`
+mode: `{{mode}}`
+model: `{{model}}`
+prompt_strategy: `{{prompt_strategy}}`
+inline_prompt: "`{{inline_prompt}}`"
+handoff_path: `{{handoff_path}}`
 cli_flags:
   - "--dangerously-skip-permissions"
   - "--no-chrome"

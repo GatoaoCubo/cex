@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.0
 title: "Memory Chain"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Complex tasks decomposed into prompt chains fail in one of two ways: steps that are too coarse (multiple transformations packed together, hard to debug) or steps that are too fine (one sentence per step, creating orchestration overhead without benefit). The effective middle ground is 1 step = 1 transformation with a single LLM call, explicit typed input, and explicit typed output.

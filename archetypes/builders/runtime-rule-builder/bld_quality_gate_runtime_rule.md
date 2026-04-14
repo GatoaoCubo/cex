@@ -17,8 +17,8 @@ tags:
   - reliability
   - behavior
 tldr: "Quality gate for runtime behavior specs: verifies rule type, numeric parameters with units, scope declaration, and recovery behavior."
+llm_function: GOVERN
 ---
-
 ## Definition
 A runtime rule artifact specifies how a single operation behaves under load, failure, or resource pressure. It declares a rule type (timeout, retry, rate_limit, or circuit_breaker), the numeric parameters that govern the rule with explicit units, and the scope of operations the rule applies to. Every rule must define what happens when its threshold is breached — silent failure is not acceptable.
 Scope: files with `kind: runtime_rule`. Does not apply to lifecycle rules (P09 sub-kind) or feature flags (P14), which govern activation rather than execution behavior.

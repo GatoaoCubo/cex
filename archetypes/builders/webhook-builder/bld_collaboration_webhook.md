@@ -2,7 +2,7 @@
 kind: collaboration
 id: bld_collaboration_webhook
 pillar: P04
-llm_function: CONTEXT
+llm_function: COLLABORATE
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -11,6 +11,7 @@ quality: 9.0
 tags: [collaboration, webhook, P04, crew, integration, dependency]
 tldr: "webhook-builder crew role: EVENT-DRIVEN HTTP SPECIALIST. Integration Pipeline, Event System, Dual-Direction crew patterns."
 density_score: 1.0
+title: Collaboration ISO - webhook
 ---
 # Collaboration: webhook-builder
 ## Crew Role

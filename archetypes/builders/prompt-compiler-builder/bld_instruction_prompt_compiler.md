@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: "Build intent resolution tables mapping all 124 kinds to user patterns in PT-BR+EN with verb resolution, ambiguity protocol, and fallback heuristics."
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 A **prompt_compiler** artifact defines intent-to-artifact transmutation rules: given natural language user input, which {kind, pillar, nucleus, verb} should handle it? It contains a kind resolution table (all 124 kinds), verb resolution (user verbs to canonical actions), ambiguity resolution (multi-match protocol), and fallback heuristics (unrecognized input).
 **Inputs**
@@ -41,7 +41,7 @@ A single `.md` file with YAML frontmatter + body containing: Preamble, Kind Reso
 - prompt_compiler = intent resolution rules with kind/pillar/nucleus mapping (this builder)
 - router = provider-to-provider routing with confidence thresholds (different builder)
 - dispatch_rule = task-to-agent keyword mapping (different builder)
-- prompt_template = template with {{variables}} for prompt generation (different builder)
+- prompt_template = template with `{{variables}}` for prompt generation (different builder)
 ## Phases
 ### Phase 1: Research -- Kind Inventory
 Load and analyze all 124 kinds before writing.

@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: "Build a validator YAML that encodes one binary pass/fail rule with structured conditions, severity, auto-fix policy, and bypass audit trail."
 density_score: 0.93
+llm_function: REASON
 ---
-
 ## Context
 The validator-builder produces a `validator` artifact -- a structured YAML that encodes a single binary pass/fail technical check. Validators run at defined pipeline checkpoints (pre-commit, post-generation, or on-demand) and either block, warn, or inform based on severity.
 **Critical distinction**: a `validator` is a single binary rule. It is NOT a collection of field rules in a schema (`validation_schema` -- system applies multiple rules together), NOT a quality score with thresholds (`quality_gate` -- P11, produces a score), and NOT an input contract (`input_schema` -- governs what inputs are accepted). Confusing these produces checks at the wrong granularity.

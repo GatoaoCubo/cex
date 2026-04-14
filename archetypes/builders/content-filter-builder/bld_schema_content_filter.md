@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Frontmatter Fields  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 ### Required  
 | Field      | Type   | Required | Default | Notes |  
 |------------|--------|----------|---------|-------|  

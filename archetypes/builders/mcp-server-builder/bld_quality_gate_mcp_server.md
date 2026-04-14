@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, mcp-server, protocol, P04, integration]
 tldr: "Quality gate for mcp_server artifacts: enforces tool list, transport type, auth strategy, and JSON-Schema params."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: MCP Server
 ## Definition
 A `mcp_server` artifact specifies an MCP protocol server: its tools, resources, transport mechanism, and authentication strategy. It is a specification, not an implementation. Gates here ensure every server is unambiguously identifiable, its tools carry machine-readable schemas, and auth matches transport — preventing integration failures before a line of code is written.

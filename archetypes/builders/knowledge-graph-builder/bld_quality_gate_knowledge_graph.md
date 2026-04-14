@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, knowledge-graph, GraphRAG, entities, relations, P11]
 tldr: "Gates for knowledge_graph artifacts: validates entity/relation lists, relation source/target consistency, storage and traversal enums, extraction config, and section completeness."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: knowledge_graph
 
 ## Definition

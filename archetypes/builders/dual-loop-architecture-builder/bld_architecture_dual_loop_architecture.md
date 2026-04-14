@@ -25,6 +25,8 @@ references:
 
 ## Component Inventory
 
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
+
 | Name | Role | Loop | Cadence | Model tier | Status |
 |------|------|------|---------|------------|--------|
 | InnerLoopRunner | Reactive step executor -- consumes observations, emits actions | inner | tick_ms (50-500ms) | small/fast (Haiku, Sonnet, GPT-4o-mini) | core |

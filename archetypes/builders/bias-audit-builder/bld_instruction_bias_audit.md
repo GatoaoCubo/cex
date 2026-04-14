@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 1. Define audit scope: identify systems, datasets, and decision points under evaluation.  
 2. Collect training/validation data and model outputs for analysis.  
 3. Identify sensitive attributes (e.g., race, gender) and protected groups.  

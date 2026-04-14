@@ -47,7 +47,7 @@ For each of the 13 ISOs, in this order:
 | 2 | bld_schema_{kind}.md | Frontmatter fields table, ID pattern regex, body sections, constraints |
 | 3 | bld_system_prompt_{kind}.md | Persona, 13 rules, knowledge boundary, output format |
 | 4 | bld_instruction_{kind}.md | 3-phase process (research, compose, validate) with numbered steps |
-| 5 | bld_output_template_{kind}.md | YAML frontmatter template + body sections with {{vars}} |
+| 5 | bld_output_template_{kind}.md | YAML frontmatter template + body sections with `{{vars}}` |
 | 6 | bld_examples_{kind}.md | Golden example (passes all gates) + anti-example (shows failures) |
 | 7 | bld_memory_{kind}.md | Domain patterns, anti-patterns, evidence, confidence scores |
 | 8 | bld_tools_{kind}.md | Production tools table, data sources table, tool permissions |
@@ -75,6 +75,6 @@ Then produce:
 4. Verify file naming matches `bld_{iso_type}_{kind}.md` pattern
 5. Verify `.claude/agents/{kind}-builder.md` exists
 6. Verify the golden example in bld_examples passes all HARD gates in bld_quality_gate
-7. Verify bld_output_template's {{vars}} match bld_schema's required fields
+7. Verify bld_output_template's `{{vars}}` match bld_schema's required fields
 8. Run `python _tools/cex_compile.py archetypes/builders/{kind}-builder/` if available
 9. If any check fails, fix in the same pass before signaling completion

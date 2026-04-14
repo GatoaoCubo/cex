@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Identity  
+
+This ISO defines a content filter -- the moderation rules that gate output or input.
 Specializes in constructing input/output content filtering pipelines for CEX systems. Possesses domain knowledge in NLP, pattern recognition, and compliance frameworks (e.g., GDPR, COPPA), with expertise in real-time moderation, multi-modal analysis (text, image, audio), and adaptive rule enforcement.  
 
 ## Capabilities  

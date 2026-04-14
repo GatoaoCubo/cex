@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Output Template: plugin
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ```yaml
 id: p04_plug_{{plugin_slug}}
 kind: plugin
@@ -56,36 +58,36 @@ keywords: [{{keyword_1}}, {{keyword_2}}, {{keyword_3}}]
 density_score: {{0.80_to_1.00}}
 ```
 ## Interface Contract
-Implements: {{interface_contract_name}}
-Contract: {{contract_description}}
+Implements: `{{interface_contract_name}}`
+Contract: `{{contract_description}}`
 Required methods:
-1. {{required_method_1}}: {{method_description_1}}
-2. {{required_method_2}}: {{method_description_2}}
+1. `{{required_method_1}}`: `{{method_description_1}}`
+2. `{{required_method_2}}`: `{{method_description_2}}`
 ## API Surface
 | Method | Input | Output | Description | Idempotent |
 |--------|-------|--------|-------------|------------|
-| {{method_1}} | {{input_1}} | {{output_1}} | {{desc_1}} | {{true|false}} |
-| {{method_2}} | {{input_2}} | {{output_2}} | {{desc_2}} | {{true|false}} |
+| `{{method_1}}` | {{input_1}} | {{output_1}} | `{{desc_1}}` | {{true|false}} |
+| `{{method_2}}` | {{input_2}} | {{output_2}} | `{{desc_2}}` | {{true|false}} |
 ## Configuration
 ```yaml
 {{config_field_1}}: {{default_value_1}}  # {{description_1}}
 {{config_field_2}}: {{default_value_2}}  # {{description_2}}
 ```
 ## Lifecycle Hooks
-1. **on_load**: {{on_load_behavior}}
-2. **on_enable**: {{on_enable_behavior}}
-3. **on_disable**: {{on_disable_behavior}}
-4. **on_unload**: {{on_unload_behavior}}
+1. **on_load**: `{{on_load_behavior}}`
+2. **on_enable**: `{{on_enable_behavior}}`
+3. **on_disable**: `{{on_disable_behavior}}`
+4. **on_unload**: `{{on_unload_behavior}}`
 ## Dependencies
-1. {{dependency_1}}: {{why_needed_1}} ({{version_constraint_1}})
-2. {{dependency_2}}: {{why_needed_2}} ({{version_constraint_2}})
+1. `{{dependency_1}}`: {{why_needed_1}} (`{{version_constraint_1}}`)
+2. `{{dependency_2}}`: {{why_needed_2}} (`{{version_constraint_2}}`)
 ## Testing
-1. Unit: {{unit_test_strategy}}
-2. Integration: {{integration_test_strategy}}
-3. Mock: {{mock_strategy}}
+1. Unit: `{{unit_test_strategy}}`
+2. Integration: `{{integration_test_strategy}}`
+3. Mock: `{{mock_strategy}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

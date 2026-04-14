@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, guardrail, safety, enforcement, security-boundary, P11]
 tldr: "Validates guardrail artifacts: enforcement mode specificity, concrete violation examples, severity classification, and bypass policy."
 density_score: 0.94
+llm_function: GOVERN
 ---
-
 # Gate: guardrail
 ## Definition
 | Field     | Value |

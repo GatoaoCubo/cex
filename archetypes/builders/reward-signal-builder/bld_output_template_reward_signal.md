@@ -48,26 +48,26 @@ baseline: {{float_within_scale_range}}
 description: "{{what_signal_measures_max_200ch}}"
 ```
 ## Overview
-{{what_this_reward_signal_measures_1_to_2_sentences}}
-{{who_uses_it_and_primary_improvement_loop}}
+`{{what_this_reward_signal_measures_1_to_2_sentences}}`
+`{{who_uses_it_and_primary_improvement_loop}}`
 ## Signal Design
-1. Type: {{signal_type}} — {{why_this_type_fits_the_domain}}
-2. Scale: {{scale}} — {{what_high_and_low_values_mean}}
-3. Model: {{model}} — {{why_this_model_produces_reliable_reward}}
-4. Computation: {{how_score_is_computed_step_by_step}}
-5. Frequency: {{frequency}} — {{when_evaluation_runs}}
-6. Aggregation: {{aggregation}} — {{how_multi_score_windows_combine}}
+1. Type: `{{signal_type}}` — `{{why_this_type_fits_the_domain}}`
+2. Scale: `{{scale}}` — `{{what_high_and_low_values_mean}}`
+3. Model: `{{model}}` — `{{why_this_model_produces_reliable_reward}}`
+4. Computation: `{{how_score_is_computed_step_by_step}}`
+5. Frequency: `{{frequency}}` — `{{when_evaluation_runs}}`
+6. Aggregation: `{{aggregation}}` — `{{how_multi_score_windows_combine}}`
 ## Criteria
 | Dimension | Weight | Low Score | High Score |
 |-----------|--------|-----------|------------|
-| {{dim_1}} | {{w1}} | {{low_example_1}} | {{high_example_1}} |
-| {{dim_2}} | {{w2}} | {{low_example_2}} | {{high_example_2}} |
-| {{dim_3}} | {{w3}} | {{low_example_3}} | {{high_example_3}} |
-Baseline: {{baseline}} — {{what_happens_when_score_falls_below}}
+| `{{dim_1}}` | {{w1}} | {{low_example_1}} | `{{high_example_1}}` |
+| `{{dim_2}}` | {{w2}} | {{low_example_2}} | `{{high_example_2}}` |
+| `{{dim_3}}` | {{w3}} | {{low_example_3}} | `{{high_example_3}}` |
+Baseline: `{{baseline}}` — `{{what_happens_when_score_falls_below}}`
 ## Application
-1. Loop: {{rlhf|dpo|filtering|monitoring}} — {{how_signal_feeds_improvement}}
-2. Consumer: {{who_reads_this_signal_and_what_action_they_take}}
-3. Cadence: {{how_often_scores_are_collected_and_applied}}
+1. Loop: {{rlhf|dpo|filtering|monitoring}} — `{{how_signal_feeds_improvement}}`
+2. Consumer: `{{who_reads_this_signal_and_what_action_they_take}}`
+3. Cadence: `{{how_often_scores_are_collected_and_applied}}`
 
 ## Properties
 

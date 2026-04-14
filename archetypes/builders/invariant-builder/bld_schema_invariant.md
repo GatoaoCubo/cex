@@ -1,5 +1,5 @@
 ---
-id: invariant-builder-schema
+id: bld_schema_invariant
 kind: schema
 pillar: P08
 parent: invariant-builder
@@ -13,8 +13,8 @@ title: "Schema Invariant"
 tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
 domain: "invariant construction"
 density_score: 0.90
+llm_function: CONSTRAIN
 ---
-
 # invariant-builder — SCHEMA
 SOURCE OF TRUTH. OUTPUT_TEMPLATE.md derives from this. CONFIG.md restricts this. Zero drift permitted.
 ## Required Fields (15)

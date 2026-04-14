@@ -40,7 +40,7 @@ harm_taxonomy_sources: [anthropic_hhh, openai_moderation, perspective_api]
 ```
 
 ## 1. Purpose and Scope
-**Purpose**: {{state what behaviors this policy governs and why}}
+**Purpose**: `{{state what behaviors this policy governs and why}}`
 
 **Applies to**: {{platform type, user segment, product area}}
 
@@ -51,7 +51,7 @@ Real harm taxonomies must be cited. DO NOT use placeholder category names.
 
 | Category | Source | Threshold | Product Action | Legal Basis |
 |----------|--------|-----------|----------------|-------------|
-| {{category}} | {{Perspective API / OpenAI / Anthropic}} | {{0.80}} | {{BLOCK/FLAG/DEGRADE/LOG}} | {{EU AI Act Art. X / COPPA}} |
+| `{{category}}` | {{Perspective API / OpenAI / Anthropic}} | {{0.80}} | {{BLOCK/FLAG/DEGRADE/LOG}} | {{EU AI Act Art. X / COPPA}} |
 
 Minimum required rows:
 - sexual/minors (CSAM): BLOCK unconditionally + NCMEC report (PROTECT Act 18 U.S.C. 2258A)
@@ -64,8 +64,8 @@ Minimum required rows:
 | Jurisdiction | Law | Article | Obligation | Satisfied By |
 |-------------|-----|---------|------------|--------------|
 | EU | AI Act (2024) | Art. 9 | Risk management system | This policy document |
-| EU | AI Act | Art. 13 | Transparency disclosure | {{disclosure mechanism}} |
-| {{US/CO/NYC}} | {{Colorado SB 22-169 / NYC LL144}} | {{section}} | {{obligation}} | {{deliverable}} |
+| EU | AI Act | Art. 13 | Transparency disclosure | `{{disclosure mechanism}}` |
+| {{US/CO/NYC}} | {{Colorado SB 22-169 / NYC LL144}} | `{{section}}` | {{obligation}} | `{{deliverable}}` |
 
 ## 4. Enforcement Actions
 Every harm category maps to exactly one action tier:
@@ -109,6 +109,6 @@ What does a product DO when each severity level triggers?
 
 ## 7. Review and Update Protocol
 - Review trigger: any of (a) new legal framework enacted, (b) harm category miss in production, (c) quarterly scheduled review
-- Owner: {{safety policy owner role}}
+- Owner: `{{safety policy owner role}}`
 - Approval: {{legal + CISO sign-off}}
 - Version history: maintained in git, semantic versioning

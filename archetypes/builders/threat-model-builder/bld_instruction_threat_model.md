@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 1. Identify AI system components: enumerate data flows, APIs, model endpoints, training pipelines, and interfaces.  
 2. Build asset inventory: classify each component by sensitivity (Critical/High/Medium/Low) and owner.  
 3. Enumerate threat actors: external attackers (nation-state, criminal, researcher), malicious insiders, automated bots.  

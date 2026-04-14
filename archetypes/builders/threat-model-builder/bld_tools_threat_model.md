@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## CEX Production Tools  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 | Tool | Purpose | When |  
 |------|---------|------|  
 | cex_compile.py | Compiles threat model artifact to YAML + validates frontmatter | After draft completion |  

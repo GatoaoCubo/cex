@@ -21,6 +21,7 @@ hooks:
   on_error: null
   on_quality_fail: null
 permission_scope: nucleus
+llm_function: CONSTRAIN
 ---
 # Builder Config
 

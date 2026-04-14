@@ -28,8 +28,8 @@ dependencies: []
 logging: true
 tldr: "Research the target metric and baseline, compose tripartite thresholds and trigger-action pairs, validate ordering and risk, write optimizer artifact."
 density_score: 0.87
+llm_function: REASON
 ---
-
 ## Context
 The optimizer-builder receives a **process description** and produces an `optimizer` artifact encoding the metric-to-action cycle for continuous improvement of that process.
 **Input variables**:

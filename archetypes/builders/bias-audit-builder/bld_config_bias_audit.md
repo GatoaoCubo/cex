@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Naming Convention  
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 Pattern: `p07_ba_{{name}}.md`  
 Examples:  
 - `p07_ba_model_v1.md`  

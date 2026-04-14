@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Domain Knowledge: rate_limit_config
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 ## Executive Summary
 Rate limit configs declare the quota boundaries for LLM API providers: how many requests per minute (RPM), tokens per minute (TPM), and the monthly budget cap. They are static configuration artifacts — they declare limits, not enforcement logic. Enforcement belongs in the runtime layer (runtime_rule). Rate limits are provider-tier-specific and change as providers update their pricing.
 ## Spec Table

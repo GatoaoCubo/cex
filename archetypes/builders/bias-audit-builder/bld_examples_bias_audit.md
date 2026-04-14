@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Golden Example
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 ```markdown
 ---
 title: "Gender Bias Audit in Loan Approval Model"

@@ -41,28 +41,28 @@ target_entity: "{{GPU cluster|edge node|serverless function|...}}"
 ## Objectives
 | Goal | Target | Constraint |
 |------|--------|------------|
-| Latency | p99 < {{N}}ms | Under {{load_condition}} |
-| Throughput | > {{N}} QPS | With <= {{resource_budget}} |
-| Utilization | GPU > {{N}}% | No OOM, no cold-start >{{N}}s |
+| Latency | p99 < `{{N}}`ms | Under `{{load_condition}}` |
+| Throughput | > `{{N}}` QPS | With <= `{{resource_budget}}` |
+| Utilization | GPU > `{{N}}`% | No OOM, no cold-start >`{{N}}`s |
 
 ## Methodology
 <!-- Step-by-step allocation logic.
      Decision points: what signals trigger reallocation.
      Algorithms: Pareto-frontier, bin-packing, cost-benefit. -->
-1. Classify query complexity: {{classifier approach}}
-2. Look up resource tier: {{tier table or formula}}
+1. Classify query complexity: `{{classifier approach}}`
+2. Look up resource tier: `{{tier table or formula}}`
 3. Allocate: {{allocation call, e.g. Kubernetes resource request}}
-4. Fallback: {{what happens on OOM or timeout}}
+4. Fallback: `{{what happens on OOM or timeout}}`
 
 ## Parameters
 | Parameter | Type | Default | Range | Notes |
 |-----------|------|---------|-------|-------|
-| {{param}} | float | {{default}} | [{{min}}, {{max}}] | {{tuning guidance}} |
+| `{{param}}` | float | {{default}} | [{{min}}, {{max}}] | `{{tuning guidance}}` |
 | timeout_ms | int | 500 | [50, 5000] | Hard SLA cutoff |
 
 ## Constraints
-- Resource hard limits: CPU <= {{N}} cores, RAM <= {{N}} GB
-- Latency SLA: p99 <= {{N}}ms
+- Resource hard limits: CPU <= `{{N}}` cores, RAM <= `{{N}}` GB
+- Latency SLA: p99 <= `{{N}}`ms
 - Strategy enum: must be one of static, dynamic, or adaptive
 
 ## Evaluation Metrics
@@ -70,4 +70,4 @@ target_entity: "{{GPU cluster|edge node|serverless function|...}}"
 |--------|--------|-------------------|
 | Allocation efficiency | >= 90% | Used / Allocated |
 | SLA compliance | >= 99.9% | Requests within latency target |
-| Cost per request | <= ${{N}} | Cloud billing / request count |
+| Cost per request | <= $`{{N}}` | Cloud billing / request count |

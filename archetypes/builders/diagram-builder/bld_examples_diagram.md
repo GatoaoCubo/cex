@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: diagram-builder-examples
+id: bld_examples_diagram
 kind: examples
 builder: diagram-builder
 version: 1.0.0
@@ -13,8 +13,8 @@ domain: "diagram construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # diagram-builder — EXAMPLES
 ## Golden Example
 INPUT: "Visualize the CEX agent_group orchestration architecture"

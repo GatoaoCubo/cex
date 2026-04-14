@@ -1,5 +1,5 @@
 ---
-id: invariant-builder-examples
+id: bld_examples_invariant
 kind: examples
 pillar: P08
 parent: invariant-builder
@@ -13,8 +13,8 @@ title: "Examples Invariant"
 tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
 domain: "invariant construction"
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # invariant-builder — EXAMPLES
 ## Golden Example
 INPUT: "Codify the invariant that agent_groups must never self-assign quality scores"

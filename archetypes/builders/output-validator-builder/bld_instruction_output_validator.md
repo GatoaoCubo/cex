@@ -27,7 +27,7 @@ density_score: 0.90
 6. Review KNOWLEDGE.md for domain patterns and anti-patterns
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (id, kind, pillar, version, created, updated, author, name, checks, on_fail, quality, tags, tldr), quality: null
 4. Write Overview section: what it does, who uses it
 5. Write Checks section: core definition with concrete values

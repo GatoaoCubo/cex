@@ -11,8 +11,8 @@ domain: data_platform
 quality: 9.0
 tags: [builder, supabase, data-layer, output-template, config]
 density_score: 0.87
+llm_function: PRODUCE
 ---
-
 # Output Template
 
 ## Config YAML Structure

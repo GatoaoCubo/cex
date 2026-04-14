@@ -44,29 +44,29 @@ tldr: "{{dense_summary_max_160ch}}"
 density_score: {{0.80-1.00}}
 ```
 ## Purpose
-{{why_this_chain_exists_2_to_4_sentences}}
+`{{why_this_chain_exists_2_to_4_sentences}}`
 ## Steps
-### Step 1: {{step_name}}
-1. **Input**: {{input_type_and_description}}
-2. **Prompt**: {{what_this_step_does}}
-3. **Output**: {{output_type_and_description}}
-### Step 2: {{step_name}}
-1. **Input**: {{receives_from_step_1}}
-2. **Prompt**: {{what_this_step_does}}
-3. **Output**: {{output_type_and_description}}
+### Step 1: `{{step_name}}`
+1. **Input**: `{{input_type_and_description}}`
+2. **Prompt**: `{{what_this_step_does}}`
+3. **Output**: `{{output_type_and_description}}`
+### Step 2: `{{step_name}}`
+1. **Input**: `{{receives_from_step_1}}`
+2. **Prompt**: `{{what_this_step_does}}`
+3. **Output**: `{{output_type_and_description}}`
 {{...repeat for steps_count steps}}
 ## Data Flow
 ```text
 {{step_1}} --{{data_type}}--> {{step_2}} --{{data_type}}--> {{step_N}}
 ```
-Context passing: {{context_passing_strategy_description}}
+Context passing: `{{context_passing_strategy_description}}`
 ## Error Handling
-1. **Strategy**: {{error_strategy}}
-2. **On failure at step N**: {{failure_behavior}}
-3. **Retry policy**: {{retry_details_if_applicable}}
+1. **Strategy**: `{{error_strategy}}`
+2. **On failure at step N**: `{{failure_behavior}}`
+3. **Retry policy**: `{{retry_details_if_applicable}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

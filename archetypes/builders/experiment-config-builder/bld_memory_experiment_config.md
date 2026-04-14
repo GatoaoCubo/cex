@@ -29,6 +29,7 @@ observation_types: [feedback, project, reference]
 quality: null
 title: "Memory Experiment Config"
 density_score: 0.91
+llm_function: INJECT
 ---
 ## Summary
 Experiment configuration failures fall into two categories: validity failures (results are

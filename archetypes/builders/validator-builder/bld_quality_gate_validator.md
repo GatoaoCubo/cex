@@ -16,8 +16,8 @@ tags:
   - rules
   - P06
 tldr: "Validates technical pass/fail rules for artifact checking: condition structure, severity, and target kind."
+llm_function: GOVERN
 ---
-
 ## Definition
 A validator defines one or more pass/fail rules applied to an artifact. Each rule has a condition (field, operator, value), a severity (error, warning, or info), and a target artifact kind. Validators do not score — they pass or fail. This gate ensures every validator is structurally sound, has actionable error messages, and is safe to run automatically.
 ## HARD Gates

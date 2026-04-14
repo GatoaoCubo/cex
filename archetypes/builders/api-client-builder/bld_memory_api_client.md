@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Api Client"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 An API client spec that omits retry and pagetion strategy is a spec for a demo, not a production integration. Both are invisible in happy-path testing and catastrophic at scale. Silent pagetion truncation is the most insidious: the client appears to work, returns data, but silently drops records after the first page.

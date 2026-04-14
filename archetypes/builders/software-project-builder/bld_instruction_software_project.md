@@ -12,9 +12,11 @@ quality: 9.1
 tags: [builder, instruction, software-project, pipeline]
 tldr: "9-step build pipeline: PARSE→SCAFFOLD→IMPLEMENT→TEST→LINT→DOCKER→CI→DEPLOY→REVIEW. Each step has inputs, outputs, and validation gates."
 density_score: 0.92
+llm_function: REASON
 ---
-
 # Software Project Builder — Instruction
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## Build Pipeline (9 Steps)
 

@@ -44,36 +44,36 @@ schema_org_mapping: {{true|false}}
 ```
 
 ## Overview
-{{what_domain_and_why_this_classification_1_to_2_sentences}}
-{{primary_standard_and_intended_consumers}}
+`{{what_domain_and_why_this_classification_1_to_2_sentences}}`
+`{{primary_standard_and_intended_consumers}}`
 
 ## Class Hierarchy
 | Class | Parent | Label | Description | schema.org Equivalent |
 |-------|--------|-------|-------------|----------------------|
-| {{ClassName1}} | owl:Thing | {{human_label}} | {{brief_description}} | {{schema_org_uri_or_none}} |
-| {{ClassName2}} | {{ClassName1}} | {{human_label}} | {{brief_description}} | {{schema_org_uri_or_none}} |
-| {{ClassName3}} | {{ClassName1}} | {{human_label}} | {{brief_description}} | {{schema_org_uri_or_none}} |
+| `{{ClassName1}}` | owl:Thing | {{human_label}} | {{brief_description}} | `{{schema_org_uri_or_none}}` |
+| `{{ClassName2}}` | {{ClassName1}} | {{human_label}} | {{brief_description}} | `{{schema_org_uri_or_none}}` |
+| `{{ClassName3}}` | {{ClassName1}} | {{human_label}} | {{brief_description}} | `{{schema_org_uri_or_none}}` |
 
 ## Properties
 | Property | Type | Domain | Range | Cardinality | Axiom Flags |
 |----------|------|--------|-------|-------------|-------------|
-| {{propName1}} | {{object|datatype}} | {{DomainClass}} | {{RangeClass_or_xsd:type}} | {{min..max_or_unconstrained}} | {{functional|transitive|symmetric|inverse:propName|none}} |
-| {{propName2}} | {{object|datatype}} | {{DomainClass}} | {{RangeClass_or_xsd:type}} | {{min..max_or_unconstrained}} | {{flags_or_none}} |
+| `{{propName1}}` | {{object|datatype}} | `{{DomainClass}}` | {{RangeClass_or_xsd:type}} | {{min..max_or_unconstrained}} | {{functional|transitive|symmetric|inverse:propName|none}} |
+| `{{propName2}}` | {{object|datatype}} | {{DomainClass}} | {{RangeClass_or_xsd:type}} | {{min..max_or_unconstrained}} | `{{flags_or_none}}` |
 
 ## Axioms
 {{axiom_declarations_or_"none"}}
-- DisjointClasses: {{ClassName_A}}, {{ClassName_B}} -- {{reason}}
-- FunctionalProperty: {{propName}} -- at most one value per instance
-- TransitiveProperty: {{propName}} -- if A->B and B->C then A->C
-- InverseOf: {{propName1}} / {{propName2}}
+- DisjointClasses: `{{ClassName_A}}`, {{ClassName_B}} -- `{{reason}}`
+- FunctionalProperty: `{{propName}}` -- at most one value per instance
+- TransitiveProperty: `{{propName}}` -- if A->B and B->C then A->C
+- InverseOf: `{{propName1}}` / `{{propName2}}`
 
 ## Schema.org Mapping
-{{not_applicable_or_mapping_table}}
+`{{not_applicable_or_mapping_table}}`
 | Local Class/Property | schema.org URI | Notes |
 |---------------------|----------------|-------|
-| {{ClassName1}} | schema:{{SchemaOrgClass}} | {{alignment_notes}} |
-| {{propName1}} | schema:{{schemaOrgProp}} | {{alignment_notes}} |
+| `{{ClassName1}}` | schema:{{SchemaOrgClass}} | `{{alignment_notes}}` |
+| `{{propName1}}` | schema:{{schemaOrgProp}} | `{{alignment_notes}}` |
 
 ## References
-- {{standard_spec_or_prior_art_1}}
-- {{standard_spec_or_prior_art_2}}
+- `{{standard_spec_or_prior_art_1}}`
+- `{{standard_spec_or_prior_art_2}}`

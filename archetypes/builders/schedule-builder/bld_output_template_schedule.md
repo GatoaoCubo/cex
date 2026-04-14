@@ -48,22 +48,22 @@ jitter: "{{0-30s|none}}"
 description: "{{what_this_schedule_triggers_max_200ch}}"
 ```
 ## Overview
-{{what_this_schedule_triggers_1_to_2_sentences}}
-{{frequency_and_primary_use_case}}
+`{{what_this_schedule_triggers_1_to_2_sentences}}`
+`{{frequency_and_primary_use_case}}`
 ## Trigger
-1. Expression: `{{cron_expression}}` — {{cron_plain_english_explanation}}
-2. Timezone: {{timezone}}
+1. Expression: `{{cron_expression}}` — `{{cron_plain_english_explanation}}`
+2. Timezone: `{{timezone}}`
 3. Enabled: {{true|false}}
 4. Trigger type: {{cron|interval|event|manual|one_shot}}
 ## Workflow
 1. Workflow: `{{workflow_ref}}`
-2. Expected duration: {{duration_estimate}}
-3. Dependencies: {{upstream_data_or_services_required}}
+2. Expected duration: `{{duration_estimate}}`
+3. Dependencies: `{{upstream_data_or_services_required}}`
 ## Policy
-1. Catch-up: {{true|false}} — {{catch_up_rationale}}
-2. Max concurrent: {{integer}} — {{concurrency_rationale}}
-3. Jitter: {{jitter_value}} — {{jitter_rationale}}
-4. On failure: {{retry|alert|skip}} — {{failure_handling_description}}
+1. Catch-up: {{true|false}} — `{{catch_up_rationale}}`
+2. Max concurrent: `{{integer}}` — `{{concurrency_rationale}}`
+3. Jitter: `{{jitter_value}}` — `{{jitter_rationale}}`
+4. On failure: {{retry|alert|skip}} — `{{failure_handling_description}}`
 
 ## Properties
 

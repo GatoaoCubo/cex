@@ -7,13 +7,13 @@ created: 2026-03-28
 updated: 2026-03-28
 author: builder_agent
 domain: document_loader
-llm_function: EXECUTE
+llm_function: REASON
 quality: 9.0
 tags: [instruction, document_loader, ingestion, chunking, P04]
 tldr: "3-phase pipeline to produce a valid document_loader artifact: Research formats -> Compose spec -> Validate gates."
 density_score: 0.92
+title: Instruction ISO - document_loader
 ---
-
 # Instructions: How to Produce a document_loader
 
 ## Phase 1: RESEARCH

@@ -12,8 +12,8 @@ quality: 9.1
 tags: [builder, supabase, data-layer, examples, few-shot]
 density_score: 0.88
 tldr: "Defines the few shot example specification for examples — supabase data layer builder, with structural rules, validation gates, and integration points."
+llm_function: GOVERN
 ---
-
 # Examples
 
 ## Golden Example — E-commerce (Pro Tier)

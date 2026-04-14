@@ -18,6 +18,8 @@ density_score: 0.90
 
 ## Frontmatter Fields
 
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
+
 ### Required
 
 | Field | Type | Required | Default | Notes |

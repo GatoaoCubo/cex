@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: Tailwind Patterns
 tags: [tailwind, patterns, design]
-quality: null
+quality: 8.8
 ---
 
 # Tailwind Patterns

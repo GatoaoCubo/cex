@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: diagram-builder-schema
+id: bld_schema_diagram
 kind: schema
 builder: diagram-builder
 version: 1.0.0
@@ -13,8 +13,8 @@ domain: "diagram construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: CONSTRAIN
 ---
-
 # diagram-builder — SCHEMA
 SCHEMA.md is the SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from it. CONFIG restricts it. No other file overrides SCHEMA.
 ## Required Fields (15)

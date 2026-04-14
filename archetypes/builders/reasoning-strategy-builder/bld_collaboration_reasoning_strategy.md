@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Crew Role  
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 Designs structured reasoning approaches to solve complex problems, ensuring alignment with team objectives and technical constraints.  
 
 ## Receives From  

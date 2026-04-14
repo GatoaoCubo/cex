@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, entity-memory, P10, memory, entity, attributes]
 tldr: "Pass/fail gate for entity_memory artifacts: entity_type validity, non-empty attributes, update_policy, confidence scoring, and relationship integrity."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: entity_memory
 ## Definition
 | Field | Value |

@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, model-card, llm-spec, P02, provider]
 tldr: "Quality gate for model_card artifacts: enforces provider, context window, pricing, and capabilities fields."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: Model Card
 ## Definition
 A `model_card` is a technical spec for a language model: provider, context window, pricing in $/1M tokens, and boolean capability flags. Reference artifact only — not a tutorial. Gates ensure traceability to official sources, comparable pricing, and freshness within 90 days.

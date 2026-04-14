@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, chain, P03, prompt-pipeline, sequential, data-flow]
 tldr: "Pass/fail gate for chain artifacts: step atomicity, typed data flow, error handling strategy, and pipeline completeness."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: chain
 ## Definition
 | Field | Value |

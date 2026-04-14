@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: Research and configure an embedding model's connection parameters, dimensions, normalization, and batch limits from official sources into a complete embedder_provider artifact.
 density_score: 0.90
+llm_function: REASON
 ---
-
 ## Context
 The embedder-provider-builder produces `embedder_provider` artifacts (P01) — embedding model connection configurations for RAG pipelines. Configs specify the exact provider API, model identifier, embedding dimensions, normalization behavior, batch size limits, and authentication. An embedder_provider is a connection spec, not a vector database config (vector_store), not an LLM routing rule (model_provider), and not a retrieval pipeline (retriever).
 **Inputs:**

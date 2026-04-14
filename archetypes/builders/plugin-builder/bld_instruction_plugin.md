@@ -16,9 +16,11 @@ when_to_use: "Building, reviewing, or reasoning about skill artifacts"
 keywords: [skill, phases, trigger, reusable, capability, workflow, lifecycle]
 feeds_kinds: [skill]
 density_score: null
+llm_function: REASON
 ---
-
 # Skill
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 
 ## Spec
 ```yaml

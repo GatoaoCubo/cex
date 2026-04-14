@@ -48,24 +48,24 @@ voice_id: "{{default_voice_id_for_tts_or_omit}}"
 provider: "{{primary_provider_name}}"
 ```
 ## Overview
-{{what_the_tool_does_1_to_2_sentences}}
-{{who_uses_it_and_primary_use_case}}
+`{{what_the_tool_does_1_to_2_sentences}}`
+`{{who_uses_it_and_primary_use_case}}`
 ## Direction
-{{direction_processing_flow}}
-{{input_payload_description}} -> {{model_processing_step}} -> {{output_payload_description}}
-{{streaming_note_if_applicable}}
+`{{direction_processing_flow}}`
+`{{input_payload_description}}` -> {{model_processing_step}} -> `{{output_payload_description}}`
+`{{streaming_note_if_applicable}}`
 ## Models
 | Model | Provider | Accuracy | Latency | Cost |
 |-------|----------|----------|---------|------|
-| {{model_id_1}} | {{provider_1}} | {{high|medium|low}} | {{<1s|1-5s|5-30s}} | {{$x/min}} |
-| {{model_id_2}} | {{provider_2}} | {{high|medium|low}} | {{<1s|1-5s|5-30s}} | {{$x/min}} |
+| `{{model_id_1}}` | `{{provider_1}}` | {{high|medium|low}} | {{<1s|1-5s|5-30s}} | {{$x/min}} |
+| `{{model_id_2}}` | `{{provider_2}}` | {{high|medium|low}} | {{<1s|1-5s|5-30s}} | {{$x/min}} |
 ## Formats
 | Format | Input | Output | Notes |
 |--------|-------|--------|-------|
-| {{format_1}} | {{yes|-}} | {{yes|-}} | {{format_note}} |
-| {{format_2}} | {{yes|-}} | {{yes|-}} | {{format_note}} |
+| `{{format_1}}` | {{yes|-}} | {{yes|-}} | `{{format_note}}` |
+| `{{format_2}}` | {{yes|-}} | {{yes|-}} | `{{format_note}}` |
 ## Languages
-| Code | Language | {{model_id_1}} | {{model_id_2}} |
+| Code | Language | `{{model_id_1}}` | `{{model_id_2}}` |
 |------|----------|----------------|----------------|
-| {{bcp47_1}} | {{language_name_1}} | {{high|medium|low}} | {{high|medium|low}} |
-| {{bcp47_2}} | {{language_name_2}} | {{high|medium|low}} | {{high|medium|low}} |
+| `{{bcp47_1}}` | `{{language_name_1}}` | {{high|medium|low}} | {{high|medium|low}} |
+| `{{bcp47_2}}` | `{{language_name_2}}` | {{high|medium|low}} | {{high|medium|low}} |

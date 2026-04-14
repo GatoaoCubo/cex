@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Output Template: connector
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 ```yaml
 id: p04_conn_{{service_slug}}
 kind: db_connector
@@ -52,30 +54,30 @@ logging: {{structured|plaintext|none}}
 versioning: "{{api_version_strategy}}"
 ```
 ## Overview
-{{what_service_and_integration_pattern_1_to_2_sentences}}
-{{who_uses_it_and_primary_data_flow}}
+`{{what_service_and_integration_pattern_1_to_2_sentences}}`
+`{{who_uses_it_and_primary_data_flow}}`
 ## Endpoints
-### {{endpoint_name_1}} ({{inbound|outbound}})
-{{METHOD_or_TOPIC}} {{path_or_channel}} — {{endpoint_description}}
+### `{{endpoint_name_1}}` ({{inbound|outbound}})
+`{{METHOD_or_TOPIC}}` {{path_or_channel}} — `{{endpoint_description}}`
 Data shape:
-1. `{{field_1}}` ({{type}}): {{field_description}}
-2. `{{field_2}}` ({{type}}): {{field_description}}
-### {{endpoint_name_2}} ({{inbound|outbound}})
-{{METHOD_or_TOPIC}} {{path_or_channel}} — {{endpoint_description}}
+1. `{{field_1}}` ({{type}}): `{{field_description}}`
+2. `{{field_2}}` ({{type}}): `{{field_description}}`
+### `{{endpoint_name_2}}` ({{inbound|outbound}})
+`{{METHOD_or_TOPIC}}` {{path_or_channel}} — `{{endpoint_description}}`
 Data shape:
-- `{{field_1}}` ({{type}}): {{field_description}}
+- `{{field_1}}` ({{type}}): `{{field_description}}`
 ## Data Mapping
-Inbound (external -> CEX): {{inbound_mapping_rules}}
-Outbound (CEX -> external): {{outbound_mapping_rules}}
-Idempotency: {{dedup_strategy}}
+Inbound (external -> CEX): `{{inbound_mapping_rules}}`
+Outbound (CEX -> external): `{{outbound_mapping_rules}}`
+Idempotency: `{{dedup_strategy}}`
 ## Health & Errors
-Health: {{health_check_details}}
-1. {{error_code}}: {{description}} — {{retry_behavior}}
-2. {{error_code}}: {{description}} — {{retry_behavior}}
-Circuit breaker: {{circuit_breaker_strategy}}
+Health: `{{health_check_details}}`
+1. `{{error_code}}`: {{description}} — `{{retry_behavior}}`
+2. `{{error_code}}`: {{description}} — `{{retry_behavior}}`
+Circuit breaker: `{{circuit_breaker_strategy}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Properties
 

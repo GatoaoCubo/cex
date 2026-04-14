@@ -74,10 +74,10 @@ embedder_provider IS NOT: vector_store, model_provider, retriever, chunker.
 | {{native_dim}} | {{score}}% | {{bytes}} | baseline | {{use_case}} |
 | {{reduced_dim}} | {{score}}% | {{bytes}} | {{delta}} | {{use_case}} |
 ## Integration Pattern
-```{{language}}
-{{sdk_initialization_code}}
-{{embedding_call_example}}
-{{vector_extraction}}
+````{{language}}`
+`{{sdk_initialization_code}}`
+`{{embedding_call_example}}`
+`{{vector_extraction}}`
 ```
 ## Anti-Patterns
 1. {{anti_pattern_1}} — {{consequence}}

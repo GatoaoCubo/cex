@@ -30,7 +30,7 @@ density_score: 0.90
 9. Confirm summary slug for id: snake_case, lowercase, descriptive of scope (e.g., session_onboarding, conv_debug_auth)
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill frontmatter: all required fields (quality: null — never self-score)
 4. Set source_type from enum — must exactly match what is being compressed
 5. Set compression_method from enum — justify the choice in ## Compression section

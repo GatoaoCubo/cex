@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: Define declarative lifecycle states, transitions, and review cycles for an artifact kind, with measurable triggers and clear ownership for each state change.
 density_score: 0.89
+llm_function: REASON
 ---
-
 ## Context
 The lifecycle-rule-builder produces `lifecycle_rule` artifacts (P11) — declarative governance rules that define how artifacts of a given kind move through states (creation, review, promotion, deprecation, sunset). Lifecycle rules differ from hooks (executable triggers), runtime rules (behavior at execution time), and quality gates (scoring thresholds): a lifecycle rule defines when artifact state changes and who decides, not how the system executes.
 **Inputs:**

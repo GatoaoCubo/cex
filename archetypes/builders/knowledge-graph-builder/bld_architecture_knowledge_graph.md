@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_knowledge_graph
 pillar: P08
-llm_function: GOVERN
+llm_function: CONSTRAIN
 purpose: Component map of knowledge_graph -- inventory, dependencies, and architectural position in P01
 quality: null
 title: "Architecture: knowledge_graph"
@@ -15,7 +15,6 @@ created: "2026-04-13"
 updated: "2026-04-13"
 density_score: 0.90
 ---
-
 # Architecture: knowledge_graph
 
 ## Component Inventory

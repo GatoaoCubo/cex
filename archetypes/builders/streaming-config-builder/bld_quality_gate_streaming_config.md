@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, streaming-config, SSE, WebSocket, chunked, P11]
 tldr: "Gates for streaming_config: validates protocol enum, buffer positivity, heartbeat presence, lifecycle completeness."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: streaming_config
 
 ## Definition

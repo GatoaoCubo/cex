@@ -22,6 +22,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Content Monetization"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Content monetization has two orthogonal concerns: business logic (what to charge, how

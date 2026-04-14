@@ -1,5 +1,5 @@
 ---
-id: invariant-builder-config
+id: bld_config_invariant
 kind: config
 pillar: P08
 parent: invariant-builder
@@ -23,6 +23,7 @@ title: "Config Invariant"
 tldr: "Golden and anti-examples for invariant construction, demonstrating ideal structure and common pitfalls."
 domain: "invariant construction"
 density_score: 0.90
+llm_function: CONSTRAIN
 ---
 # invariant-builder — CONFIG
 ## Naming Convention

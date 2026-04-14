@@ -3,7 +3,7 @@ id: handoff-builder
 kind: type_builder
 pillar: P12
 domain: handoff
-llm_function: COLLABORATE
+llm_function: BECOME
 version: 1.0.0
 created: 2026-03-26
 updated: 2026-03-26

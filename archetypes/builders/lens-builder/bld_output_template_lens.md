@@ -41,16 +41,16 @@ tags: [lens, {{domain_tag}}, {{perspective_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
 ```
 ## Perspective
-{{what_this_lens_sees_and_emphasizes}}
+`{{what_this_lens_sees_and_emphasizes}}`
 ## Filters
-{{specific_attributes_highlighted_or_suppressed}}
+`{{specific_attributes_highlighted_or_suppressed}}`
 ## Application
-{{how_to_apply_this_lens_to_artifacts}}
+`{{how_to_apply_this_lens_to_artifacts}}`
 ## Limitations
-{{what_this_lens_misses_or_de_emphasizes}}
+`{{what_this_lens_misses_or_de_emphasizes}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Template Standards
 

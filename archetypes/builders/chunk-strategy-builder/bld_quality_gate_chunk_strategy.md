@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, chunk-strategy, P01]
 tldr: "Pass/fail gate for chunk_strategy artifacts: required fields, id pattern, body sections, parameter completeness."
 density_score: 1.0
+llm_function: GOVERN
 ---
-
 # Gate: chunk_strategy
 ## Definition
 | Field | Value |

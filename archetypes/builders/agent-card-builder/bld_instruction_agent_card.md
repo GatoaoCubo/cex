@@ -25,8 +25,8 @@ dependencies: []
 logging: true
 tldr: Build a complete agent_card covering role, model, MCPs, boot sequence, constraints, dispatch rules, and scaling.
 density_score: 0.91
+llm_function: REASON
 ---
-
 ## Context
 The agent-card-builder produces `agent_card` artifacts — complete architectural
 specifications for an autonomous agent agent_group. A agent_card defines everything needed

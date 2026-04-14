@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Examples: plugin-builder
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ## Golden Example
 INPUT: "Create a plugin for exporting metrics to external monitoring systems"
 OUTPUT:

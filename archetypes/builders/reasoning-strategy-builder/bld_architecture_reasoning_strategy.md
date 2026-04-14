@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 | ISO | llm_function | Purpose | Status |  
 |-----|-------------|---------|--------|  
 | bld_manifest_reasoning_strategy | BECOME | Builder identity, capabilities, routing | Production |  

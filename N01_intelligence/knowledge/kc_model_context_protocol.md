@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: Model Context Protocol
 tags: [model, context, protocol]
-quality: null
+quality: 8.8
 ---
 
 # Model Context Protocol

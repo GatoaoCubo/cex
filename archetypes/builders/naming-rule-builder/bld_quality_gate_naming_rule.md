@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, naming-rule, P11, P05, governance, conventions]
 tldr: "Gates for naming_rule artifacts — pattern, scope, case style, and collision resolution for consistent identifiers."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: naming_rule
 ## Definition
 | Field     | Value                                          |

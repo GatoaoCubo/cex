@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, batch-config, async-api, cost-controls, P11]
 tldr: "Gates for batch_config artifacts: validates provider, cost cap, completion window, retry policy, credential hygiene, and body section completeness."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: batch_config
 
 ## Definition

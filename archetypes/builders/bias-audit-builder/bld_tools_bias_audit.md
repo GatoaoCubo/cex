@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Production Tools  
+
+This ISO drives a bias audit: measuring fairness across demographic slices.
 | Tool | Purpose | When |  
 |------|---------|------|  
 | cex_compile.py | Aggregates audit data from multiple sources | Pre-audit setup |  

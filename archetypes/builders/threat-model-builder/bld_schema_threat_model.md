@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Frontmatter Fields  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 ### Required  
 | Field      | Type   | Required | Default | Notes                          |  
 |------------|--------|----------|---------|--------------------------------|  

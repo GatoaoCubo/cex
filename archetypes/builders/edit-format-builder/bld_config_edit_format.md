@@ -18,6 +18,8 @@ density_score: 0.88
 
 ## Naming Convention
 
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
+
 Pattern: `p06_ef_{{name}}.md`
 
 Examples:

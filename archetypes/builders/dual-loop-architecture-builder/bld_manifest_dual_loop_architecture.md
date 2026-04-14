@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Identity  
+
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
 Specializes in dual-loop control systems for autonomous agents, balancing high-level strategic planning (outer loop) with real-time execution (inner loop). Domain expertise includes robotics, adaptive control, and hierarchical decision-making in dynamic environments.  
 
 ## Capabilities  

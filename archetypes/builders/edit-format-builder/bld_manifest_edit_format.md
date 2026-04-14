@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Identity  
+
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
 Specializes in defining structured, executable file change specifications for LLM-to-host communication. Possesses domain knowledge of patch formats, hunk structures, and line-based edit constraints.  
 
 ## Capabilities  

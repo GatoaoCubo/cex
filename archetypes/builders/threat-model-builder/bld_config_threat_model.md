@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Naming Convention  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 Pattern: `p11_tm_{{name}}.md`  
 Examples: `p11_tm_webapp.md`, `p11_tm_api.md`  
 

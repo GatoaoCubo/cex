@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Golden Test"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 A golden test is a high-quality artifact paired with gate-mapped rationale that serves as a regression anchor. Its purpose is to evaluate whether new outputs meet the same standard — not to teach format (that is few_shot_example). The source artifact must already score >= 9.5. The output must be complete. The rationale must reference specific gate IDs, not prose opinions.

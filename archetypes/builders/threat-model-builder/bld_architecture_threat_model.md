@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Component Inventory  
+
+This ISO records a threat model: the assets worth protecting and the attacker profiles that target them.
 | Name              | Role                      | Owner         | Status    |  
 |-------------------|---------------------------|---------------|-----------|  
 | Threat Database   | Stores threat data        | Security Team | Production|  

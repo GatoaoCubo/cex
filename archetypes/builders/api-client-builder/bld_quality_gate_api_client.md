@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, client, P04, api-consumer, auth-strategy, endpoint-mapping]
 tldr: "Pass/fail gate for client artifacts: endpoint coverage, auth strategy declaration, retry/rate-limit policy, and unidirectional boundary."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: client
 ## Definition
 | Field | Value |

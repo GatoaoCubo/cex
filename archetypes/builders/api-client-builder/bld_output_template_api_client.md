@@ -52,28 +52,28 @@ error_codes: [{{code_1}}, {{code_2}}]
 caching: "{{cache_strategy}}"
 ```
 ## Overview
-{{what_api_client_consumes_1_to_2_sentences}}
-{{who_consumes_it_and_primary_use_case}}
+`{{what_api_client_consumes_1_to_2_sentences}}`
+`{{who_consumes_it_and_primary_use_case}}`
 ## Endpoints
-### {{endpoint_name_1}}
-{{METHOD}} {{path}} — {{endpoint_description}}
+### `{{endpoint_name_1}}`
+`{{METHOD}}` {{path}} — `{{endpoint_description}}`
 Parameters:
-1. `{{param_1}}` ({{type}}, {{required|optional}}): {{param_description}}
-2. `{{param_2}}` ({{type}}, {{required|optional}}): {{param_description}}
-Returns: {{return_description}}
-### {{endpoint_name_2}}
-{{METHOD}} {{path}} — {{endpoint_description}}
+1. `{{param_1}}` ({{type}}, {{required|optional}}): `{{param_description}}`
+2. `{{param_2}}` ({{type}}, {{required|optional}}): `{{param_description}}`
+Returns: `{{return_description}}`
+### `{{endpoint_name_2}}`
+`{{METHOD}}` {{path}} — `{{endpoint_description}}`
 Parameters:
-- `{{param_1}}` ({{type}}, {{required|optional}}): {{param_description}}
+- `{{param_1}}` ({{type}}, {{required|optional}}): `{{param_description}}`
 
-Returns: {{return_description}}
+Returns: `{{return_description}}`
 ## Auth & Config
-Base URL: {{base_url}}
-Auth: {{auth_method_and_header_format}}
-Headers: {{required_headers}}
+Base URL: `{{base_url}}`
+Auth: `{{auth_method_and_header_format}}`
+Headers: `{{required_headers}}`
 ## Error Handling
-1. {{error_code}}: {{description}} — {{retry_behavior}}
-2. {{error_code}}: {{description}} — {{retry_behavior}}
+1. `{{error_code}}`: {{description}} — `{{retry_behavior}}`
+2. `{{error_code}}`: {{description}} — `{{retry_behavior}}`
 
 ## Properties
 

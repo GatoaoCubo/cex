@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, code-executor, P04, sandbox, isolation, timeout]
 tldr: "Pass/fail gate for code_executor artifacts: sandbox isolation, timeout policy, language listing, resource limits, and network access declaration."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: code_executor
 ## Definition
 | Field | Value |

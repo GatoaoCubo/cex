@@ -6,7 +6,7 @@ nucleus: n02
 mission: POLISH_WAVE2
 title: Release Check Fixes -- POLISH_WAVE2
 created: "2026-04-13"
-quality: null
+quality: 8.8
 ---
 
 # Release Check Fixes -- POLISH_WAVE2

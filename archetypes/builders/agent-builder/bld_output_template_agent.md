@@ -43,23 +43,23 @@ linked_artifacts:
   related: [{{related_artifact_refs}}]
 ```
 ## Overview
-{{agent_name}} is a {{agent_group}} specialist in {{domain}}.
-{{two_sentences_primary_function_and_value}}
+`{{agent_name}}` is a {{agent_group}} specialist in `{{domain}}`.
+`{{two_sentences_primary_function_and_value}}`
 ## Capabilities
-- {{capability_1}}
-- {{capability_2}}
-- {{capability_3}}
-- {{capability_4}}
+- `{{capability_1}}`
+- `{{capability_2}}`
+- `{{capability_3}}`
+- `{{capability_4}}`
 ## Tools
 | # | Tool | Purpose |
 |---|------|---------|
-| 1 | {{tool_1}} | {{tool_purpose_1}} |
-| 2 | {{tool_2}} | {{tool_purpose_2}} |
+| 1 | `{{tool_1}}` | `{{tool_purpose_1}}` |
+| 2 | `{{tool_2}}` | `{{tool_purpose_2}}` |
 ## Agent_group Position
-- Agent_group: {{agent_group_name}}
-- Peers: {{peer_agent_1}}, {{peer_agent_2}}
-- Upstream: {{upstream_agent_or_none}}
-- Downstream: {{downstream_agent_or_none}}
+- Agent_group: `{{agent_group_name}}`
+- Peers: `{{peer_agent_1}}`, `{{peer_agent_2}}`
+- Upstream: `{{upstream_agent_or_none}}`
+- Downstream: `{{downstream_agent_or_none}}`
 ## File Structure
 ```
 agents/{{agent_slug}}/
@@ -76,20 +76,20 @@ agents/{{agent_slug}}/
     SPEC_{{AGENT_UPPER}}_010_SYSTEM_INSTRUCTION.md
 ```
 ## Routing
-- Triggers: {{trigger_phrase_1}}, {{trigger_phrase_2}}
-- Keywords: {{routing_keyword_1}}, {{routing_keyword_2}}, {{routing_keyword_3}}
-- NOT when: {{exclusion_scenario_1}}, {{exclusion_scenario_2}}
+- Triggers: `{{trigger_phrase_1}}`, `{{trigger_phrase_2}}`
+- Keywords: `{{routing_keyword_1}}`, {{routing_keyword_2}}, `{{routing_keyword_3}}`
+- NOT when: `{{exclusion_scenario_1}}`, `{{exclusion_scenario_2}}`
 ## Input / Output
 ### Input
-- Required: {{required_input_1}}, {{required_input_2}}
-- Optional: {{optional_input_1}}
+- Required: `{{required_input_1}}`, `{{required_input_2}}`
+- Optional: `{{optional_input_1}}`
 ### Output
-- Primary: {{primary_output_artifact}}
-- Secondary: {{secondary_output_or_none}}
+- Primary: `{{primary_output_artifact}}`
+- Secondary: `{{secondary_output_or_none}}`
 ## Quality Gates
 HARD gates: YAML parses, id matches p02_agent_ pattern, kind == agent, quality == null,
 required fields present, agent_package >= 10 files, llm_function == BECOME.
 SOFT gates: tldr <= 160ch, tags >= 3, capabilities_count matches body,
 density >= 0.80, agent_group assigned, domain specific.
 ## Footer
-version: {{version}} | author: {{author}} | quality: null
+version: `{{version}}` | author: `{{author}}` | quality: null

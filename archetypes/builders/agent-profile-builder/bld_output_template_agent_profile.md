@@ -45,34 +45,34 @@ tldr: "{{one_line_persona_summary}}"
 ```
 
 ## Overview
-{{two_to_four_sentence_description_of_role_scope_and_primary_consumer}}
+`{{two_to_four_sentence_description_of_role_scope_and_primary_consumer}}`
 
 ## Identity Vectors
-- **Domain of authority**: {{vector_1_value}} // {{rationale}}
-- **Voice register**: {{vector_2_value}} // {{rationale}}
-- **Decision latency**: {{vector_3_value}} // {{rationale}}
+- **Domain of authority**: `{{vector_1_value}}` // `{{rationale}}`
+- **Voice register**: `{{vector_2_value}}` // `{{rationale}}`
+- **Decision latency**: `{{vector_3_value}}` // `{{rationale}}`
 
 ## Capabilities (3-7 verb phrases, present tense)
-1. {{verb_phrase_1}}
-2. {{verb_phrase_2}}
-3. {{verb_phrase_3}}
-4. {{verb_phrase_4}}
+1. `{{verb_phrase_1}}`
+2. `{{verb_phrase_2}}`
+3. `{{verb_phrase_3}}`
+4. `{{verb_phrase_4}}`
 
 ## Constraints (ALWAYS / NEVER / IF-THEN — minimum 3)
-- ALWAYS {{constraint_1}}. Source: {{policy_or_regulation}}.
-- NEVER {{constraint_2}}. Source: {{policy_or_regulation}}.
-- IF {{condition}} THEN {{action}}. Source: {{policy_or_regulation}}.
+- ALWAYS `{{constraint_1}}`. Source: `{{policy_or_regulation}}`.
+- NEVER `{{constraint_2}}`. Source: `{{policy_or_regulation}}`.
+- IF `{{condition}}` THEN {{action}}. Source: `{{policy_or_regulation}}`.
 
 ## Collaborators (reference sibling agent_profile ids, not roles)
 | Profile ID | Relationship | Hand-off artifact |
 |---|---|---|
-| p02_ap_{{peer_1}} | {{upstream|downstream|peer}} | {{kind_of_handoff}} |
-| p02_ap_{{peer_2}} | {{upstream|downstream|peer}} | {{kind_of_handoff}} |
+| p02_ap_`{{peer_1}}` | {{upstream|downstream|peer}} | `{{kind_of_handoff}}` |
+| p02_ap_`{{peer_2}}` | {{upstream|downstream|peer}} | `{{kind_of_handoff}}` |
 
 ## Compliance
 - Framework: {{ISO_IEC_23894|IEEE_7000|NIST_AI_RMF|other}}
 - Review cadence: {{monthly|quarterly|annual}}
-- Reviewer: {{role_or_nucleus}}
+- Reviewer: `{{role_or_nucleus}}`
 
 ---
 Validation: run `python _tools/cex_score.py --apply p02_ap_{{slug}}.md`

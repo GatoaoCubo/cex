@@ -29,6 +29,7 @@ observation_types: [user, feedback, project, reference]
 quality: null
 title: "Memory Cost Budget"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Cost budget failures split into two categories: financial surprises (overages discovered

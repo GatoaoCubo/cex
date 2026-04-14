@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Crew Role  
+
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
 Allocates and enforces thinking budget constraints (e.g., time, computational resources) for consistent reasoning execution.  
 
 ## Receives From  

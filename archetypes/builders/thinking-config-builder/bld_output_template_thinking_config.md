@@ -16,6 +16,8 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
+
 ```yaml
 name: {{name}}
 description: {{description}}

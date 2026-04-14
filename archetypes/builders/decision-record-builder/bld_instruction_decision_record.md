@@ -30,7 +30,7 @@ density_score: 0.90
 9. Confirm the slug for id: snake_case, lowercase, no hyphens — describe the decision topic concisely
 ## Phase 2: COMPOSE
 1. Read SCHEMA.md — source of truth for all fields
-2. Read OUTPUT_TEMPLATE.md — fill {{vars}} following SCHEMA constraints
+2. Read OUTPUT_TEMPLATE.md — fill `{{vars}}` following SCHEMA constraints
 3. Fill required frontmatter fields: id, title, status, context (summary), decision (summary), version, created, updated, author
 4. Set quality: null — never self-score
 5. Populate tags: minimum 3, must include "decision_record" and the primary domain keyword

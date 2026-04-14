@@ -17,9 +17,11 @@ keywords: [knowledge-card, project, software-engineering, rich, archetypes]
 linked_artifacts:
   primary: null
   related: []
+llm_function: INJECT
 ---
-
 # Software Project Knowledge
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## 3 Project Archetypes
 

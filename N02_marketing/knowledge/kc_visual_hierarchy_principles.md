@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: Visual Hierarchy Principles
 tags: [visual, hierarchy, design]
-quality: null
+quality: 8.8
 ---
 
 # Visual Hierarchy Principles

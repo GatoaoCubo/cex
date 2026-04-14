@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: component-map-builder-schema
+id: bld_schema_component_map
 kind: schema
 parent: component-map-builder
 version: 2.0.0
@@ -13,8 +13,8 @@ domain: "component map construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: CONSTRAIN
 ---
-
 # Schema — component-map-builder
 SOURCE OF TRUTH. OUTPUT_TEMPLATE derives from this. CONFIG restricts from this.
 ## Artifact Identity

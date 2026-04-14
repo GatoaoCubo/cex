@@ -1,6 +1,6 @@
 ---
 pillar: P00
-id: diagram-builder-config
+id: bld_config_diagram
 kind: config
 builder: diagram-builder
 version: 1.0.0
@@ -23,6 +23,7 @@ domain: "diagram construction"
 created: "2026-04-07"
 updated: "2026-04-07"
 density_score: 0.90
+llm_function: CONSTRAIN
 ---
 # diagram-builder — CONFIG
 ## Naming Conventions

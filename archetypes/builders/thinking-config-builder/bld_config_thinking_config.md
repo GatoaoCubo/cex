@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Naming Convention  
+
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
 Pattern: `p09_thk_{{name}}.yaml`  
 Examples: `p09_thk_report.yaml`, `p09_thk_analysis.yaml`  
 

@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Enum Def"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Enumerations appear simple but consumer misuse concentrates in two spec-time decisions: whether each value has a clear description, and whether the set is declared open or closed. A value named `inactive` without a description will be confused with `archived`, `deprecated`, and `disabled`. An enum without `extensible` forces consumers to guess whether exhaustive match is safe — guessing wrong causes runtime panics in strongly-typed languages.

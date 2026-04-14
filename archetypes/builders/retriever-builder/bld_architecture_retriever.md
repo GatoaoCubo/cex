@@ -2,7 +2,7 @@
 kind: architecture
 id: bld_architecture_retriever
 pillar: P10
-llm_function: INJECT
+llm_function: CONSTRAIN
 version: 1.0.0
 created: 2026-03-28
 updated: 2026-03-28
@@ -10,6 +10,7 @@ author: builder_agent
 quality: 9.1
 tags: [architecture, retriever, P10, RAG, vector-search, component-map]
 density_score: 1.0
+title: Architecture ISO - retriever
 ---
 # Architecture: retriever
 

@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Examples: mental-model-builder
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Golden Example
 INPUT: "Create mental model for a content-reviewer agent"
 OUTPUT:

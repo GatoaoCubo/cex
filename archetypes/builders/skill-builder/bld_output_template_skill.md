@@ -50,8 +50,8 @@ platforms: ["{{optional_platform_or_omit}}"]
 stack_default: "{{optional_stack_or_omit}}"
 ```
 ## Purpose
-{{what_capability_this_provides}}
-{{why_it_exists_as_a_skill_not_agent_or_prompt}}
+`{{what_capability_this_provides}}`
+`{{why_it_exists_as_a_skill_not_agent_or_prompt}}`
 ## Workflow Phases
 
 ## Template Standards

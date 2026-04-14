@@ -12,9 +12,11 @@ quality: 9.0
 tags: [quality-gate, computer-use, P04, gui, screen-control, automation]
 tldr: "Pass/fail gate for computer_use artifacts: action listing, resolution format, coordinate system, safety constraints, and screenshot policy."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: computer_use
+
+This ISO governs computer use: screen capture, mouse, and keyboard actions taken on behalf of the agent.
 ## Definition
 | Field | Value |
 |---|---|

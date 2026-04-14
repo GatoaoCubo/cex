@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, interface, contract, bilateral, integration, versioning, compatibility]
 tldr: "Gates ensuring interface artifacts define complete bilateral contracts with typed methods, versioning strategy, backward compatibility guarantees, and mock specs."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: Interface
 ## Definition
 | Field     | Value |

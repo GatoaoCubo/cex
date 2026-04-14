@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, model-provider, llm-routing, P02, fallback]
 tldr: "Quality gate for model_provider artifacts: enforces tiered models, rate limits, fallback chain, and provider authentication fields."
 density_score: 0.87
+llm_function: GOVERN
 ---
-
 # Gate: Model Provider
 ## Definition
 A `model_provider` is a connection and routing configuration for an LLM API: provider, tiered models (fast/balanced/quality), rate limits (RPM/TPM), fallback chain, and authentication. Infrastructure artifact only — not a tutorial. Gates ensure model IDs are current, rate limits are documented, and fallback chains are complete.

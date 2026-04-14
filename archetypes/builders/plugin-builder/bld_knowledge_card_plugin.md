@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Domain Knowledge: plugin
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ## Executive Summary
 Plugins are modular extension artifacts that add capabilities to a host system through a defined interface contract with lifecycle management. Each plugin declares the interface it implements, API surface with method signatures, config schema, lifecycle hooks (minimum on_load/on_unload), and isolation level. They differ from hooks (single-event interception), skills (multi-phase workflows), MCP servers (protocol-based providers), and connectors (external service integrations) by providing a complete pluggable API surface with explicit lifecycle and isolation.
 ## Spec Table

@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: Research and document an LLM's technical specifications, capabilities, pricing, and use-case guidance from official sources into a complete model card artifact.
 density_score: 0.92
+llm_function: REASON
 ---
-
 ## Context
 The model-card-builder produces `model_card` artifacts (P02) — technical specification documents for LLMs. Model cards follow the Mitchell 2019 standard, align with HuggingFace Cards conventions, and use pricing data from LiteLLM registry and official provider pages. A model card is a specification document, not a benchmark or routing rule.
 Model cards differ from boot_config (runtime configuration), agent definitions (behavioral specs), benchmarks (comparative evaluations), and routers (task dispatching logic).

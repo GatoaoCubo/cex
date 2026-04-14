@@ -43,16 +43,16 @@ tags: [embedding, {{provider_tag}}, {{model_tag}}]
 tldr: "{{dense_summary_max_160ch}}"
 ```
 ## Model
-{{model_name_provider_and_key_specs}}
+`{{model_name_provider_and_key_specs}}`
 ## Chunking
-{{chunk_size_overlap_and_tokenizer_strategy}}
+`{{chunk_size_overlap_and_tokenizer_strategy}}`
 ## Performance
-{{latency_throughput_and_cost_characteristics}}
+`{{latency_throughput_and_cost_characteristics}}`
 ## Integration
-{{how_to_use_this_config_in_rag_pipeline}}
+`{{how_to_use_this_config_in_rag_pipeline}}`
 ## References
-1. {{reference_1}}
-2. {{reference_2}}
+1. `{{reference_1}}`
+2. `{{reference_2}}`
 
 ## Template Standards
 

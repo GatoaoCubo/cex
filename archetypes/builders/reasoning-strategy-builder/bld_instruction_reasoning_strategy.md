@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Phase 1: RESEARCH  
+
+This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions under which it applies.
 1. Define problem scope and target domain for reasoning tasks.  
 2. Analyze existing structured reasoning frameworks (e.g., CoT, ReAct).  
 3. Map gaps in current strategies for the specified domain.  

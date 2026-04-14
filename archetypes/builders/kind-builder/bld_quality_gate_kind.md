@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, kind-builder, meta-builder, architecture, iso, P11]
 tldr: "Gates for builder packages: validates 13-file completeness, frontmatter consistency, quality:null, naming, sub-agent."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: kind_builder
 
 ## Definition

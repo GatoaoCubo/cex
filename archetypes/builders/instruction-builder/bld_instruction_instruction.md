@@ -33,7 +33,7 @@ density_score: 0.90
 4. Set quality: null — never self-score
 5. Write the Context section (15-20% of doc): background, input/output contracts, every $variable defined with type and required/optional status
 6. Write the Phases section (40-50% of doc): 3-5 phases following the Analyze -> Generate -> Validate pattern; each phase is atomic with one primary action; include pseudocode for complex logic
-7. Write the Output Contract section (5-10% of doc): a literal template using {{variable}} placeholders — not a prose description
+7. Write the Output Contract section (5-10% of doc): a literal template using `{{variable}}` placeholders — not a prose description
 8. Write the Validation section (8-12% of doc): quality gates with numeric thresholds, formatted as a checklist
 9. Write the Metacognition section (recommended): a Does / Does NOT block plus chaining notation showing upstream -> THIS -> downstream
 10. Verify phases_count in frontmatter matches the actual number of Phase sections in the body
@@ -47,7 +47,7 @@ density_score: 0.90
    - phases_count matches actual Phase section count in body
    - prerequisites are verifiable statements, not vague conditions
    - every $variable is defined with type and required/optional
-   - output uses a literal {{variable}} template, not prose
+   - output uses a literal `{{variable}}` template, not prose
    - quality == null
 3. SOFT gates (score each against QUALITY_GATES.md):
    - each phase contains exactly one primary action

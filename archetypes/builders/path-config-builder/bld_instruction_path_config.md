@@ -28,8 +28,8 @@ dependencies: []
 logging: true
 tldr: "Identify scope and platforms, compose path catalog with platform variants and validation sequence, validate gates and write a path_config artifact."
 density_score: 0.85
+llm_function: REASON
 ---
-
 ## Context
 The path-config-builder receives a **system scope** and produces a `path_config` artifact that formally specifies all filesystem paths used within that scope, including platform variants, resolution rules, and startup validation.
 **Input variables**:

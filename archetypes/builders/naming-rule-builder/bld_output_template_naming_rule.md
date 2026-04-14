@@ -45,28 +45,28 @@ keywords: [{{kw1}}, {{kw2}}, {{kw3}}, {{kw4}}, {{kw5}}]
 density_score: REC
 ```
 ## Scope
-{{scope_full_description}}
-Artifacts governed by this rule: {{artifact_kinds_list}}
+`{{scope_full_description}}`
+Artifacts governed by this rule: `{{artifact_kinds_list}}`
 ## Pattern Definition
 **Regex**: `{{regex_pattern}}`
-**Human-readable**: {{plain_language_pattern_description}}
+**Human-readable**: `{{plain_language_pattern_description}}`
 **Segments**:
 | Position | Segment | Required | Description |
 |----------|---------|----------|-------------|
-| 1 | `{{segment_1}}` | yes | {{segment_1_description}} |
-| 2 | `{{segment_2}}` | yes | {{segment_2_description}} |
-| 3 | `{{segment_3}}` | {{yes|no}} | {{segment_3_description}} |
+| 1 | `{{segment_1}}` | yes | `{{segment_1_description}}` |
+| 2 | `{{segment_2}}` | yes | `{{segment_2_description}}` |
+| 3 | `{{segment_3}}` | {{yes|no}} | `{{segment_3_description}}` |
 ## Examples
 **Valid**:
-1. `{{valid_example_1}}` — {{reason_1}}
-2. `{{valid_example_2}}` — {{reason_2}}
-3. `{{valid_example_3}}` — {{reason_3}}
+1. `{{valid_example_1}}` — `{{reason_1}}`
+2. `{{valid_example_2}}` — `{{reason_2}}`
+3. `{{valid_example_3}}` — `{{reason_3}}`
 **Invalid**:
-1. `{{invalid_example_1}}` — VIOLATES: {{violation_reason_1}}
-2. `{{invalid_example_2}}` — VIOLATES: {{violation_reason_2}}
+1. `{{invalid_example_1}}` — VIOLATES: `{{violation_reason_1}}`
+2. `{{invalid_example_2}}` — VIOLATES: `{{violation_reason_2}}`
 ## Collision Resolution
 Strategy: `{{collision_strategy}}`
-{{collision_resolution_description}}
+`{{collision_resolution_description}}`
 
 ## Properties
 

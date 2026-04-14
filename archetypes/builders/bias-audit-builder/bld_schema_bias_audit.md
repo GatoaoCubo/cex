@@ -18,6 +18,8 @@ density_score: 0.92
 
 ## Frontmatter Fields
 
+This ISO drives a bias audit: measuring fairness across demographic slices.
+
 ### Required
 | Field | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|

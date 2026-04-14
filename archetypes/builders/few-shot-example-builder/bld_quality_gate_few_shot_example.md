@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, few-shot-example, prompt-engineering, format-teaching, P11]
 tldr: "Validates few_shot_example artifacts: input/output completeness, format demonstration clarity, and byte-size constraint."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: few_shot_example
 ## Definition
 | Field     | Value |

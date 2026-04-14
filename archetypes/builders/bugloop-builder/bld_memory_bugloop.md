@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Bugloop"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Automated bug-fix loops fail disproportionately when a single confidence threshold drives fix application without first classifying the failure type. Deterministic failures (syntax error, missing import, missing file) are reliably auto-fixable. Probabilistic failures (logic error, assertion mismatch, intermittent failure) require either manual review or a conservative retry with distinct strategies before escalating.

@@ -18,6 +18,8 @@ density_score: 0.90
 ---
 
 # Examples: rate-limit-config-builder
+
+This ISO encodes a rate limit policy -- throttle bounds, quota windows, and backoff behavior.
 ## Golden Example
 INPUT: "Create rate limit config for Anthropic Build tier"
 OUTPUT:

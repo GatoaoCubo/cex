@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Domain Overview  
+
+This ISO applies to the dual loop pattern, coordinating an outer orchestrator with one or more inner worker loops.
 Dual-loop architecture is a control paradigm used in robotics, autonomous systems, and industrial automation to separate real-time execution (inner loop) from strategic decision-making (outer loop). The inner loop manages low-latency tasks like motor control and sensor feedback, while the outer loop handles higher-level planning, error correction, and goal adaptation. This separation ensures responsiveness and stability in dynamic environments, such as autonomous vehicle navigation or robotic manipulation.  
 
 Industry adoption is driven by the need to balance speed and adaptability. For example, in aerospace, the inner loop ensures flight stability, while the outer loop optimizes trajectory planning. Similarly, in manufacturing, dual-loop systems enable real-time adjustments to production lines while maintaining long-term process goals.  

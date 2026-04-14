@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Constraint Spec"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Constraint spec — rules that govern the LLM decoder during generation (grammar, regex, enum, schema). The difference between a useful constraint_spec and a useless one is concrete values

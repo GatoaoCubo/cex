@@ -12,9 +12,11 @@ quality: 9.0
 tags: [quality-gate, mental-model, routing, P02, cognitive-map]
 tldr: "Quality gate for mental_model artifacts: enforces routing rules, decision tree, domain map, and design-time-only scope."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: Mental Model
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Definition
 A `mental_model` is a design-time cognitive map that tells an agent how to route, prioritize, and decide. It carries no runtime state and executes no logic. Gates here enforce that routing rules have confidence thresholds, decisions have if/then/else structure, and the artifact never encodes live session data — which belongs in runtime state artifacts.
 ## HARD Gates

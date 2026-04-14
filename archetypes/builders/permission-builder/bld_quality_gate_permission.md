@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, permission, P11, P09, governance, access-control, security]
 tldr: "Gates for permission artifacts — roles, operations, deny-by-default, audit trail, and escalation path defined."
 density_score: 0.85
+llm_function: GOVERN
 ---
-
 # Gate: permission
 ## Definition
 | Field     | Value                                              |

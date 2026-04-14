@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, secret-config, P09, credentials, rotation, encryption]
 tldr: "Pass/fail gate for secret_config artifacts: provider validity, rotation policy completeness, encryption posture, access pattern, and no plaintext secrets."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: secret_config
 ## Definition
 | Field | Value |

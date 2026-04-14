@@ -4,7 +4,7 @@ kind: embedding_config
 pillar: P01
 title: Embedding Configuration for Intelligence
 tags: [intelligence, embedding, configuration]
-quality: null
+quality: 8.8
 ---
 
 # Embedding Configuration for Intelligence

@@ -27,6 +27,8 @@ updated: "2026-04-07"
 density_score: 0.90
 ---
 # Config: plugin Production Rules
+
+This ISO defines a plugin contract: the extension surface a host uses to load, register, and invoke external capability.
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|

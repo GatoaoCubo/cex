@@ -18,6 +18,8 @@ updated: "2026-04-07"
 density_score: 0.90
 ---
 # Memory: mental-model-builder
+
+This ISO operationalizes a mental model -- a compact analogy or abstraction that guides reasoning.
 ## Summary
 Mental models are design-time cognitive maps defining how an agent routes tasks, makes decisions, and prioritizes work. The most impactful production lesson is that routing rules must have confidence thresholds — rules without thresholds trigger on partial keyword matches, causing misroutes. Decision trees need explicit else/fallback branches; agents with incomplete trees silently drop tasks that match no branch.
 ## Pattern

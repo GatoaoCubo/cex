@@ -18,6 +18,8 @@ density_score: 0.88
 
 ## Component Inventory
 
+This ISO specifies an edit format: how diffs or patches are expressed and applied.
+
 | Name | Role | Owner | Status |
 |------|------|-------|--------|
 | Format Spec Registry | Catalog of valid format_type/edit_scope combinations | edit_format-builder | Active |

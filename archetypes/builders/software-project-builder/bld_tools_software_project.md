@@ -12,9 +12,11 @@ quality: 9.1
 tags: [builder, tools, software-project, python-tooling]
 tldr: "Tool inventory: 4 build tools (hatch, uv, pip, setuptools), 3 quality tools (ruff, mypy, pytest), 3 deploy tools (docker, railway, render), 3 security tools (bandit, gitleaks, pip-audit), 2 MCP tools (github, fetch)."
 density_score: 0.89
+llm_function: CALL
 ---
-
 # Tools
+
+This ISO describes a software project: its repository layout, modules, and build graph.
 
 ## Build Tools
 

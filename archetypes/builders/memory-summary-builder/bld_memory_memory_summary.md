@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Memory Summary"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Memory summaries fail silently when retention policies are implicit. The difference between preserving agent commitments across sessions and losing them comes down to two spec-time decisions: whether action items are explicitly declared as retained, and whether the compression method preserves their exact phrasing.

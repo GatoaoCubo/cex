@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P08
 parent: null
 domain: kind_builder
-llm_function: PRODUCE
+llm_function: BECOME
 version: 1.0.0
 created: 2026-04-13
 updated: 2026-04-13

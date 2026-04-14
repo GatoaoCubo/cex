@@ -51,32 +51,32 @@ env_vars: [{{VAR_1}}, {{VAR_2}}]
 platforms: [{{linux|macos|windows}}]
 ```
 ## Overview
-{{what_the_tool_does_1_to_2_sentences}}
-{{who_runs_it_and_primary_use_case}}
+`{{what_the_tool_does_1_to_2_sentences}}`
+`{{who_runs_it_and_primary_use_case}}`
 ## Commands
-### {{command_name_1}}
+### `{{command_name_1}}`
 `{{binary}} {{command}} {{args}} [{{flags}}]`
-{{command_description}}
+`{{command_description}}`
 Flags:
 
-- `--{{flag_1}}` ({{type}}, {{default}}): {{flag_description}}
+- `--`{{flag_1}} ({{type}}, {{default}}): `{{flag_description}}`
 Args:
-- `{{arg_1}}` ({{type}}, {{required|optional}}): {{arg_description}}
-Returns: {{output_description}}
-### {{command_name_2}}
+- `{{arg_1}}` ({{type}}, {{required|optional}}): `{{arg_description}}`
+Returns: `{{output_description}}`
+### `{{command_name_2}}`
 `{{binary}} {{command}} [{{flags}}]`
-{{command_description}}
+`{{command_description}}`
 Flags:
 
-- `--{{flag_1}}` ({{type}}): {{flag_description}}
-Returns: {{output_description}}
+- `--`{{flag_1}} ({{type}}): `{{flag_description}}`
+Returns: `{{output_description}}`
 ## Output
-1. stdout: {{primary_output_format_and_structure}}
-2. stderr: {{error_and_progress_output}}
-3. Exit codes: {{code_to_meaning_summary}}
+1. stdout: `{{primary_output_format_and_structure}}`
+2. stderr: `{{error_and_progress_output}}`
+3. Exit codes: `{{code_to_meaning_summary}}`
 ## Configuration
-Config file: {{config_file_path_and_format}}
-Env vars: {{env_var_list_with_purpose}}
+Config file: `{{config_file_path_and_format}}`
+Env vars: `{{env_var_list_with_purpose}}`
 
 ## Properties
 

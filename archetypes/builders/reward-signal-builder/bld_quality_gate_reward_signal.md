@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, reward-signal, P11, feedback, rlhf, scoring]
 tldr: "Pass/fail gate for reward_signal artifacts: signal_type validity, scale consistency, baseline calibration, criteria completeness, and application loop documentation."
 density_score: 0.90
+llm_function: GOVERN
 ---
-
 # Gate: reward_signal
 ## Definition
 | Field | Value |

@@ -4,7 +4,7 @@ kind: type_builder
 pillar: P03
 parent: null
 domain: prompt_compiler
-llm_function: CONSTRAIN
+llm_function: BECOME
 version: 1.0.0
 created: "2026-04-12"
 updated: "2026-04-12"

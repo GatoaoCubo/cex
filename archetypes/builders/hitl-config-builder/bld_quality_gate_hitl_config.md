@@ -12,8 +12,8 @@ quality: null
 tags: [quality-gate, hitl-config, human-review, escalation, approval, P11]
 tldr: "Gates for hitl_config: validates review trigger precision, escalation chain completeness, approval flow validity, timeout > 0, and safe fallback."
 density_score: 0.92
+llm_function: GOVERN
 ---
-
 # Gate: hitl_config
 ## Definition
 | Field | Value |

@@ -23,8 +23,11 @@ observation_types: [user, feedback, project, reference]
 quality: 9.2
 title: "Memory Db Connector"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
+
+This ISO addresses the database connector domain: connection pooling, query execution, and SQL dialect handling.
 A client makes outbound calls only. A connector makes outbound calls and receives inbound calls (webhooks, callbacks, event streams). This creates two failure modes unique to connectors: duplicate processing from webhook retries, and silent failure when the inbound endpoint goes offline. Building a client when a connector is needed forces idempotency and health monitoring to be retrofitted — consistently more expensive than specifying them upfront.
 ## Pattern
 **Use connector for bidirectional; client for outbound-only. Declare idempotency and health_check at spec time.**

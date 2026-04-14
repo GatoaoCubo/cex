@@ -12,8 +12,8 @@ quality: 9.0
 tags: [quality-gate, daemon, background-process, lifecycle, P11]
 tldr: "Gates for daemon artifacts: validates lifecycle completeness, signal handling, health checks, and restart policy correctness."
 density_score: 0.91
+llm_function: GOVERN
 ---
-
 # Gate: daemon
 ## Definition
 | Field     | Value |

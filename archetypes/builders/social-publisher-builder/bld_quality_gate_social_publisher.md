@@ -12,8 +12,8 @@ quality: 9.1
 tags: [quality-gate, social-publisher, P11, automation, governance]
 tldr: "Gates for social publisher artifacts — config completeness, pipeline coverage, security, and reusability."
 density_score: 1.0
+llm_function: GOVERN
 ---
-
 # Gate: social_publisher
 
 ## Definition

@@ -17,6 +17,8 @@ density_score: 0.85
 ---
 
 ## Golden Example
+
+This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
 ```markdown
 ---
 title: "Thinking Budget Configuration"

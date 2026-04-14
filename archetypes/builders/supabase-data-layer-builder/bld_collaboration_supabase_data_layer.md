@@ -11,8 +11,8 @@ domain: data_platform
 quality: 9.1
 tags: [builder, supabase, data-layer, collaboration, multi-nucleus]
 density_score: 1.0
+llm_function: COLLABORATE
 ---
-
 # Collaboration Map
 
 ## N04 as Superintendent

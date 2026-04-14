@@ -24,8 +24,8 @@ dependencies: []
 logging: true
 tldr: "Extract variable slots, compose a reusable mustache template with full frontmatter, validate all 8 HARD gates, then deliver."
 density_score: 0.93
+llm_function: REASON
 ---
-
 ## Context
 A **prompt_template** is a reusable mold: a prompt body where dynamic values are represented as named placeholders (`{{variable}}`). The same template produces many distinct prompts by substituting different values at invocation time. This builder operates at the prompt layer — above identity definitions (system_prompt) and below live execution.
 **Inputs**
@@ -116,7 +116,7 @@ Run all quality gates before delivering.
 HARD gates (all must pass — fix before delivering):
   H01: id matches ^p03_pt_[a-z][a-z0-9_]+$
   H02: all frontmatter required fields present (id, kind, title, variables, quality)
-  H03: no {{var}} in template body that is absent from variables list
+  H03: no `{{var}}` in template body that is absent from variables list
   H04: no variable in variables list that is absent from template body
   H05: file size <= 8192 bytes
   H06: variable_syntax is "mustache" or "bracket" (not mixed)

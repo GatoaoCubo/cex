@@ -48,33 +48,33 @@ license: "{{MIT|CC-BY-4.0|proprietary|...}}"
 refresh_cadence: "{{weekly|monthly|on-demand|frozen}}"
 ```
 ## Overview
-{{what_llm_behavior_this_dataset_evaluates_1_to_2_sentences}}
-{{who_uses_it_and_primary_use_case}}
+`{{what_llm_behavior_this_dataset_evaluates_1_to_2_sentences}}`
+`{{who_uses_it_and_primary_use_case}}`
 
 ## Schema
 ### input
 Type: {{string|dict}}
-{{description_of_what_input_contains}}
+`{{description_of_what_input_contains}}`
 Example: `"{{example_input_value}}"`
 
 ### expected_output
 Type: {{string|list|dict}}
-{{description_of_ground_truth_format}}
+`{{description_of_ground_truth_format}}`
 Example: `"{{example_expected_output_value}}"`
 
-### {{optional_metadata_field}}
+### `{{optional_metadata_field}}`
 Type: {{dict|string|enum}}
-{{description_of_optional_field}}
-Values: {{enum_values_or_schema}}
+`{{description_of_optional_field}}`
+Values: `{{enum_values_or_schema}}`
 
 ## Splits
 | Split | Percentage | Cases | Rationale |
 |-------|-----------|-------|-----------|
-| {{train}} | {{0-100}}% | {{n}} | {{why_this_split_exists}} |
-| test | {{0-100}}% | {{n}} | {{why_this_split_exists}} |
-| {{val}} | {{0-100}}% | {{n}} | {{why_this_split_exists}} |
-Total: 100% ({{total_cases}} cases)
-Split rationale: {{why_these_percentages_were_chosen}}
+| `{{train}}` | {{0-100}}% | {{n}} | `{{why_this_split_exists}}` |
+| test | {{0-100}}% | `{{n}}` | `{{why_this_split_exists}}` |
+| `{{val}}` | {{0-100}}% | {{n}} | `{{why_this_split_exists}}` |
+Total: 100% (`{{total_cases}}` cases)
+Split rationale: `{{why_these_percentages_were_chosen}}`
 
 ## Integration
 Framework: {{braintrust|langsmith|deepeval|huggingface|costm}}
@@ -82,4 +82,4 @@ Loading:
 ```python
 {{framework_loading_snippet_5_to_10_lines}}
 ```
-Version migration: {{how_to_migrate_from_v1_to_v2_if_schema_changes}}
+Version migration: `{{how_to_migrate_from_v1_to_v2_if_schema_changes}}`

@@ -23,6 +23,7 @@ observation_types: [user, feedback, project, reference]
 quality: 9.1
 title: "Memory Retriever Config"
 density_score: 0.90
+llm_function: INJECT
 ---
 ## Summary
 Retrieval parameters — how to search and rank chunks from a vector/hybrid store. The difference between a useful retriever_config and a useless one is concrete values
