@@ -1,0 +1,29 @@
+kind: tools
+id: bld_tools_edtech_vertical
+pillar: P04
+llm_function: CALL
+purpose: Tools available for edtech_vertical production
+quality: null
+title: Tools Edtech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- edtech_vertical
+- builder
+- tools
+tldr: Tools available for edtech_vertical production
+domain: edtech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Aggregates learning modules\
+  \ into course packages | Course deployment |  \n| cex_score.py | Automates grading of formative assessments | Real-time\
+  \ student feedback |  \n| cex_retriever.py | Fetches curated content from external repositories | Content curation workflows\
+  \ |  \n| cex_doctor.py | Diagnoses inconsistencies in course metadata | Pre-deployment validation |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| val_content.py | Checks alignment of learning\
+  \ objectives with activities | Curriculum design phase |  \n| val_access.py | Ensures compliance with accessibility standards\
+  \ | Pre-publishing |  \n| val_linter.py | Enforces code style in interactive elements | Development sprints |"
+external_references:
+- LMS API (e.g., Moodle, Canvas) for integration
+- OpenEdX content authoring framework
+- Khan Academy's assessment analytics library

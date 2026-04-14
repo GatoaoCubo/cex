@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_app_directory_entry
+pillar: P12
+llm_function: COLLABORATE
+purpose: How app_directory_entry-builder works in crews with other builders
+quality: null
+title: Collaboration App Directory Entry
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- app_directory_entry
+- builder
+- collaboration
+tldr: How app_directory_entry-builder works in crews with other builders
+domain: app_directory_entry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Constructs and validates app directory entries, ensuring metadata consistency, format compliance, and readiness
+  for public listing.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| App Dev       | App metadata          | JSON        |  \n| QA Team       | Validation results    | CSV         |\
+  \  \n| CMS           | Marketing content     | Markdown    |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| App Directory | Entry ready for listing | JSON        |  \n| Analytics     | Usage stats           | CSV        \
+  \ |  \n| API Gateway   | API spec              | YAML        |"
+boundary: Does NOT handle marketplace app manifests (handled by `marketplace_app_manifest-builder`) or partner listings (handled
+  by `partner_listing-builder`). Sales, pricing, and distribution are managed by the sales team, not this builder.

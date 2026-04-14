@@ -1,0 +1,37 @@
+kind: examples
+id: bld_examples_ecommerce_vertical
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of ecommerce_vertical artifacts
+quality: null
+title: Examples Ecommerce Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ecommerce_vertical
+- builder
+- examples
+tldr: Golden and anti-examples of ecommerce_vertical artifacts
+domain: ecommerce_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "title: \"Personalized Product Recommendations for Fashion E-Commerce\"  \nkind: ecommerce_vertical  \ntools:\
+  \  \n  - recommendation_engine: \"Adobe Sensei\"  \n  - cart_checkout: \"Shopify Plus\"  \n  - pci_compliance: \"Stripe\
+  \ (PCI-DSS Level 1)\"  \n  - fraud_detection: \"Sift\"  \nuse_case: \"Dynamic product recommendations on checkout page to\
+  \ reduce cart abandonment\"  \ndescription: \"A fashion retailer integrates Adobe Sensei's AI-driven recommendations with\
+  \ Shopify Plus, ensuring PCI-DSS compliance via Stripe and fraud prevention via Sift. Recommendations are displayed during\
+  \ checkout, increasing average order value by 18%.\"  "
+anti_example_1_overlooking_pci_dss_compliance: "title: \"Basic Payment Integration Without Compliance\"  \nkind: ecommerce_vertical\
+  \  \ntools:  \n  - payment_gateway: \"PayPal (non-PCI-DSS compliant)\"  \n  - cart_checkout: \"WooCommerce\"  \nuse_case:\
+  \ \"Checkout process using PayPal without encryption\"  \ndescription: \"A small retailer uses WooCommerce with PayPal,\
+  \ ignoring PCI-DSS requirements. Data breaches occur due to unencrypted payment fields, leading to legal penalties and loss\
+  \ of customer trust.\"  "
+? why_it_fails_failing_to_use_pci_compliant_tools_exposes_sensitive_data_violating_industry_standards_and_risking_legal_action
+: ''
+anti_example_2_neglecting_fraud_detection: "title: \"No Fraud Tools in High-Risk Market\"  \nkind: ecommerce_vertical  \n\
+  tools:  \n  - cart_checkout: \"BigCommerce\"  \n  - recommendation_engine: \"Algolia\"  \nuse_case: \"No fraud checks during\
+  \ checkout\"  \ndescription: \"An electronics retailer uses BigCommerce and Algolia but lacks fraud detection. Chargeback\
+  \ rates spike at 25% due to bot-driven fake orders, eroding profit margins.\"  "
+? why_it_fails_absence_of_fraud_prevention_tools_leads_to_financial_losses_and_compromised_user_experience_from_account_takeovers
+: ''

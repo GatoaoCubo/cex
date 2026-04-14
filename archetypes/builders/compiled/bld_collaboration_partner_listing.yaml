@@ -1,0 +1,27 @@
+kind: collaboration
+id: bld_collaboration_partner_listing
+pillar: P12
+llm_function: COLLABORATE
+purpose: How partner_listing-builder works in crews with other builders
+quality: null
+title: Collaboration Partner Listing
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- partner_listing
+- builder
+- collaboration
+tldr: How partner_listing-builder works in crews with other builders
+domain: partner_listing construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Curates and standardizes partner listing content, ensuring compliance with brand guidelines and data accuracy.
+receives_from: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| CRM System    | Partner data          | JSON        |  \n| Designer      | Formatting guidelines | Markdown    |\
+  \  \n| Manager       | Approval status       | Boolean     |"
+produces_for: "| Builder       | What                  | Format      |  \n|---------------|-----------------------|-------------|\
+  \  \n| Content Team  | Partner listing doc   | Markdown    |  \n| Website Team  | Summary card          | HTML        |\
+  \  \n| Database      | Structured partner data| CSV         |"
+boundary: Does NOT handle case studies (handled by `case_study-builder`) or app directory entries (handled by `app_directory_entry-builder`).
+  Legal reviews and compliance checks are managed by the Legal Team.

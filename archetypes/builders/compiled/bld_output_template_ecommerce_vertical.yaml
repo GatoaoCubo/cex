@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_ecommerce_vertical
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for ecommerce_vertical production
+quality: null
+title: Output Template Ecommerce Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ecommerce_vertical
+- builder
+- output_template
+tldr: Template with vars for ecommerce_vertical production
+domain: ecommerce_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

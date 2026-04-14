@@ -1,0 +1,26 @@
+kind: collaboration
+id: bld_collaboration_contributor_guide
+pillar: P12
+llm_function: COLLABORATE
+purpose: How contributor_guide-builder works in crews with other builders
+quality: null
+title: Collaboration Contributor Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- contributor_guide
+- builder
+- collaboration
+tldr: How contributor_guide-builder works in crews with other builders
+domain: contributor_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Drafts, maintains, and updates the contributor guide to ensure clarity, consistency, and alignment with team workflows.
+receives_from: "Builder | What | Format  \n--- | --- | ---  \nContributor Guide Team | Feedback on guide improvements | Text/Markdown\
+  \  \nCode Team | Existing contribution workflows | JSON/PlainText  \nDesign Team | Branding and style guidelines | PDF/Markdown"
+produces_for: "Builder | What | Format  \n--- | --- | ---  \nContributor Guide Team | Final contributor guide document | Markdown/HTML\
+  \  \nOnboarding Team | Templates for new contributors | Markdown/PlainText  \nDocumentation Team | Checklist for guide compliance\
+  \ | JSON/PlainText"
+boundary: Does NOT handle code reviews, integration with external tools, or enforcement of norms. Code reviews → Code Team.
+  Tool integrations → Integration Guide. Norm enforcement → Code of Conduct Team.

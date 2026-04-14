@@ -1,0 +1,58 @@
+kind: knowledge_card
+id: bld_knowledge_card_govtech_vertical
+pillar: P01
+llm_function: INJECT
+purpose: Domain knowledge for govtech_vertical production
+quality: null
+title: Knowledge Card Govtech Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- govtech_vertical
+- builder
+- knowledge_card
+tldr: Domain knowledge for govtech_vertical production
+domain: govtech_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+domain_overview: The govtech_vertical focuses on technology solutions tailored to government agencies, emphasizing security,
+  compliance, and accessibility. Key frameworks like FedRAMP and FISMA mandate rigorous cybersecurity standards for federal
+  systems, while GSA oversees procurement processes through programs like the Federal Acquisition Regulation (FAR). CJIS (Criminal
+  Justice Information Services) ensures law enforcement data is protected via strict classification policies, and Section
+  508 mandates accessibility in federal IT. Use cases include secure cloud migrations, interoperable systems for emergency
+  response, and accessible digital services for citizens. This vertical demands alignment with multi-layered regulations,
+  balancing innovation with risk mitigation. Agencies prioritize solutions that integrate compliance by design, leveraging
+  standards like NIST SP 800-53 and the Risk Management Framework (RMF) to manage threats across infrastructure, applications,
+  and data.
+key_concepts: "| Concept | Definition | Source |  \n|--------|------------|-------|  \n| FedRAMP Authorization | Government-wide\
+  \ program for securing cloud services through standardized security assessments. | FedRAMP.gov |  \n| FISMA Continuous Monitoring\
+  \ | Ongoing evaluation of security controls mandated by FISMA to ensure compliance. | FISMA (Public Law 107-347) |  \n|\
+  \ GSA System for Award Management (SAM) | Centralized platform for federal contract management and vendor registration.\
+  \ | GSA.gov/SAM |  \n| CJIS Data Classification | DOJ-mandated categorization of sensitive law enforcement data (e.g., Top\
+  \ Secret, Sensitive) | DOJ CJIS Security Policy |  \n| Section 508 Compliance | Accessibility requirements for federal IT,\
+  \ ensuring usability for people with disabilities. | 29 CFR 1800.202 |  \n| NIST SP 800-53 | Security and privacy controls\
+  \ for federal information systems and organizations. | NIST |  \n| Risk Management Framework (RMF) | NIST process for selecting,\
+  \ implementing, and assessing security controls. | NIST SP 800-37 |  \n| OMB Circular A-130 | Guidance on managing federal\
+  \ information resources, including security and privacy. | OMB |"
+industry_standards:
+- FedRAMP Authorization Requirements
+- FISMA (Public Law 107-347)
+- NIST SP 800-53 Rev. 4
+- Risk Management Framework (RMF)
+- CJIS Security Policy (DOJ)
+- Section 508 Standards (29 CFR 1800.202)
+- GSA Federal Acquisition Regulation (FAR)
+- OMB Circular A-130
+common_patterns:
+- Embed FedRAMP compliance into cloud infrastructure design.
+- Apply RMF to align security controls with NIST SP 800-53.
+- Use GSA SAM for vendor onboarding and contract management.
+- Implement Section 508 checks during UI/UX development.
+- Enforce CJIS data classification for law enforcement systems.
+pitfalls:
+- Overlooking FedRAMP authorization during cloud deployment.
+- Failing to maintain FISMA continuous monitoring, leading to audit failures.
+- Not validating Section 508 compliance, risking accessibility lawsuits.
+- Misapplying CJIS controls, exposing sensitive law enforcement data.
+- Ignoring GSA procurement guidelines, causing contract disqualifications.

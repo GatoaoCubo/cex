@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_oauth_app_config
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of oauth_app_config artifacts
+quality: null
+title: Examples Oauth App Config
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- oauth_app_config
+- builder
+- examples
+tldr: Golden and anti-examples of oauth_app_config artifacts
+domain: oauth_app_config construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: oauth_app_config\nname: github_integration\nspec:\n  client_id: \"ghp_1234567890abcdef1234567890abcdef1234\"\
+  \n  client_secret: \"supersecretclientsecret\"\n  redirect_uris:\n    - \"https://app.example.com/auth/callback\"\n  scopes:\n\
+  \    - \"repo\"\n    - \"user\"\n  token_lifetimes:\n    access_token_expires_in: 3600\n    refresh_token_expires_in: 86400\n\
+  \  refresh_policy: \"rotate\""
+anti_example_1_missing_redirect_uris: "kind: oauth_app_config\nname: bad_github_integration\nspec:\n  client_id: \"ghp_0987654321abcdef0987654321abcdef0987\"\
+  \n  client_secret: \"anothersecret\"\n  scopes:\n    - \"all\""
+why_it_fails: Uses 1-year refresh tokens (31536000s) which is excessive and increases risk of token misuse. Refresh policy
+  "reuse" allows tokens to be used indefinitely, violating security best practices.
+anti_example_2_insecure_token_lifetimes: "kind: oauth_app_config\nname: insecure_github_integration\nspec:\n  client_id: \"\
+  ghp_1122334455abcdef1122334455abcdef1122\"\n  client_secret: \"insecuresecret\"\n  redirect_uris:\n    - \"https://app.example.com/callback\"\
+  \n  scopes:\n    - \"public_repo\"\n  token_lifetimes:\n    access_token_expires_in: 86400\n    refresh_token_expires_in:\
+  \ 31536000\n  refresh_policy: \"reuse\""

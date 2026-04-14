@@ -1,0 +1,35 @@
+kind: architecture
+id: bld_architecture_ecommerce_vertical
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of ecommerce_vertical -- inventory, dependencies
+quality: null
+title: Architecture Ecommerce Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ecommerce_vertical
+- builder
+- architecture
+tldr: Component map of ecommerce_vertical -- inventory, dependencies
+domain: ecommerce_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: "| ISO Name            | Role                          | Pillar | Status  |  \n|---------------------|-------------------------------|--------|---------|\
+  \  \n| bld_manifest        | Core configuration            | P01    | Active  |  \n| bld_instruction     | Workflow definition\
+  \           | P01    | Active  |  \n| bld_system_prompt   | LLM guidance                  | P01    | Active  |  \n| bld_schema\
+  \          | Data structure definition     | P01    | Active  |  \n| bld_quality_gate    | Validation rules            \
+  \  | P01    | Active  |  \n| bld_output_template | Formatting specification      | P01    | Active  |  \n| bld_examples\
+  \        | Training data repository      | P01    | Active  |  \n| bld_knowledge_card  | Domain-specific knowledge     |\
+  \ P01    | Active  |  \n| bld_architecture    | System blueprint              | P01    | Active  |  \n| bld_collaboration\
+  \   | Team coordination             | P01    | Active  |  \n| bld_config          | Parameter storage             | P01\
+  \    | Active  |  \n| bld_memory          | Session state management      | P01    | Active  |  \n| bld_tools          \
+  \ | Utility functions             | P01    | Active  |"
+dependencies: "| From              | To                  | Type       |  \n|-------------------|---------------------|------------|\
+  \  \n| bld_manifest      | bld_config          | Config     |  \n| bld_instruction   | bld_schema          | Reference \
+  \ |  \n| bld_quality_gate  | bld_output_template | Validation |  \n| bld_tools         | bld_memory          | Utilization|\
+  \  \n| bld_collaboration | bld_knowledge_card  | Access     |"
+architectural_position: The ecommerce_vertical-builder serves as a specialized framework within the CEX P01 pillar, enabling
+  rapid deployment of vertical-specific ecommerce solutions through ISO-driven modularity, ensuring alignment with domain
+  requirements and operational constraints.

@@ -1,0 +1,39 @@
+kind: quality_gate
+id: p01_qg_ecommerce_vertical
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for ecommerce_vertical
+quality: null
+title: Quality Gate Ecommerce Vertical
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- ecommerce_vertical
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for ecommerce_vertical
+domain: ecommerce_vertical construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "(Table: metric, threshold, operator, scope)  \n| metric | threshold | operator | scope |  \n|---|---|---|---|\
+  \  \n| checkout_success_rate | 95% | >= | all |  \n| pci_compliance_status | 100% | == | all |  \n| fraud_detection_rate\
+  \ | 90% | >= | all |  \n| recommendation_accuracy | 85% | >= | all |  \n| use_case_coverage | 100% | == | all |"
+hard_gates: "(Table: ID | Check | Fail Condition)  \n| ID | Check | Fail Condition |  \n|---|---|---|  \n| H01 | YAML frontmatter\
+  \ valid | invalid YAML syntax |  \n| H02 | ID matches ^p01_ev_[a-z][a-z0-9_]+.md$ | invalid schema ID pattern |  \n| H03\
+  \ | kind field matches 'ecommerce_vertical' | kind field mismatch |  \n| H04 | PCI-DSS compliance achieved | PCI-DSS audit\
+  \ fails |  \n| H05 | checkout latency <= 2s | latency exceeds 2s |  \n| H06 | fraud detection rate >= 90% | rate below 90%\
+  \ |  \n| H07 | recommendation engine accuracy >= 85% | accuracy below 85% |  \n| H08 | use case coverage == 100% | missing\
+  \ use cases |"
+soft_scoring: "(Table: Dim | Dimension | Weight | Scoring Guide)  \n| Dim | Dimension | Weight | Scoring Guide |  \n|---|---|---|---|\
+  \  \n| D01 | Checkout experience | 0.15 | 1.0 = seamless, 0.0 = broken |  \n| D02 | Security (PCI-DSS) | 0.20 | 1.0 = fully\
+  \ compliant, 0.0 = non-compliant |  \n| D03 | Fraud prevention | 0.15 | 1.0 = 100% detection, 0.0 = 0% detection |  \n|\
+  \ D04 | Recommendation quality | 0.15 | 1.0 = 100% accuracy, 0.0 = 0% accuracy |  \n| D05 | Use case coverage | 0.10 | 1.0\
+  \ = 100% coverage, 0.0 = 0% coverage |  \n| D06 | Performance (latency) | 0.10 | 1.0 = <=2s, 0.0 = >5s |  \n| D07 | Error\
+  \ rate | 0.15 | 1.0 = 0% errors, 0.0 = >5% errors |"
+actions: "(Table: Score | Action)  \n| Score | Action |  \n|---|---|  \n| GOLDEN | >=9.5 | Auto-approve and deploy |  \n|\
+  \ PUBLISH | >=8.0 | Publish with no changes |  \n| REVIEW | >=7.0 | Manual review required |  \n| REJECT | <7.0 | Reject\
+  \ and fix |"
+bypass: "(Table: conditions, approver, audit trail)  \n| conditions | approver | audit trail |  \n|---|---|---|  \n| Critical\
+  \ bug fix | CTO | documented in JIRA |  \n| Regulatory override | CISO | signed waiver |  \n| Performance exception | CPO\
+  \ | load test report |"

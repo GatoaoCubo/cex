@@ -1,0 +1,35 @@
+kind: examples
+id: bld_examples_faq_entry
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of faq_entry artifacts
+quality: null
+title: Examples Faq Entry
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- faq_entry
+- builder
+- examples
+tldr: Golden and anti-examples of faq_entry artifacts
+domain: faq_entry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: faq_entry\ntitle: How do I update my payment method on Stripe?\nbody: |\n  To update your payment method\
+  \ on Stripe, log in to your account, navigate to the Payment Methods section under Account Settings, and select Edit next\
+  \ to the method you wish to update. Follow the prompts to enter new card details or update existing information. Changes\
+  \ are saved automatically.\nrelated_links:\n  - https://stripe.com/docs/payments/accept-a-payment\n  - https://stripe.com/docs/faq\n\
+  support_deflection_metric: 85%"
+anti_example_1_missing_support_deflection_metric: "kind: faq_entry\ntitle: How do I update my payment method on Stripe?\n\
+  body: |\n  To update your payment method on Stripe, log in to your account, navigate to the Payment Methods section under\
+  \ Account Settings, and select Edit next to the method you wish to update. Follow the prompts to enter new card details\
+  \ or update existing information. Changes are saved automatically.\nrelated_links:\n  - https://stripe.com/docs/payments/accept-a-payment\n\
+  \  - https://stripe.com/docs/faq"
+why_it_fails_explanation: The entry mimics a knowledge_card structure with bullet points and sections, which is broader and
+  less focused than a faq_entry. This makes it unsuitable for direct user queries and conflates purposes, violating the boundary
+  requirement.
+anti_example_2_using_knowledge_card_structure: "kind: faq_entry\ntitle: How do I update my payment method on Stripe?\nbody:\
+  \ |\n  Overview: Updating payment methods on Stripe is essential for maintaining accurate billing information.  \n  Steps:\
+  \  \n  1. Log in to your Stripe account.  \n  2. Go to Account Settings > Payment Methods.  \n  3. Click Edit next to the\
+  \ method you want to update.  \n  4. Save changes.  \n  Related: Stripe Docs"

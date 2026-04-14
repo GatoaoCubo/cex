@@ -1,0 +1,42 @@
+kind: collaboration
+id: bld_collaboration_code_of_conduct
+pillar: P12
+llm_function: COLLABORATE
+purpose: How code_of_conduct-builder works in crews with other builders
+quality: null
+title: Collaboration Code of Conduct
+version: 1.0.0
+author: n04_knowledge
+tags:
+- code_of_conduct
+- builder
+- collaboration
+tldr: How code_of_conduct-builder works in crews with other builders
+domain: code_of_conduct construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.87
+crew_role: Produces code of conduct documents defining behavioral standards and enforcement procedures for OSS projects. The
+  code of conduct is the community safety layer, placed before contributor_guide-builder (technical onboarding) and github_issue_template-builder
+  (issue reporting).
+receives_from: '| Builder                    | What                          | Format   |
+
+  |----------------------------|-------------------------------|----------|
+
+  | contributor_guide-builder  | Project community norms input | Markdown |
+
+  | context_doc-builder        | Project scope + team structure| Markdown |
+
+  | knowledge_card-builder     | Community governance KC       | Markdown |'
+produces_for: '| Builder                         | What                           | Format   |
+
+  |---------------------------------|--------------------------------|----------|
+
+  | github_issue_template-builder   | CoC reference for issue bodies | Markdown |
+
+  | landing_page-builder            | Community health badge signal  | Markdown |
+
+  | contributor_guide-builder       | CoC link + enforcement summary | Markdown |'
+boundary: Does NOT handle technical contribution workflows (contributor_guide-builder), governance/voting processes (governance
+  artifacts), or legal compliance documentation. Enforcement decisions remain with human maintainers; this builder produces
+  the framework, not the decisions.

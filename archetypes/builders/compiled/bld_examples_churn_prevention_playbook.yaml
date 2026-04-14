@@ -1,0 +1,33 @@
+kind: examples
+id: bld_examples_churn_prevention_playbook
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of churn_prevention_playbook artifacts
+quality: null
+title: Examples Churn Prevention Playbook
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- churn_prevention_playbook
+- builder
+- examples
+tldr: Golden and anti-examples of churn_prevention_playbook artifacts
+domain: churn_prevention_playbook construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: '--- Title: Churn Prevention Playbook for SaaS Retention Author: Customer Success Team Date: 2023-10-05 Version:
+  1.2'
+signal_detection:
+- 'Tools: Google Analytics'
+- 'Signals: 50% drop in monthly active users'
+intervention_triggers:
+- 'Rules:'
+- If "user is unhappy" → "Send email"
+save_the_account_scripts:
+- 'Script: "Send a survey via Typeform"'
+anti_example_1_vague_tool_references: '--- Title: Generic Churn Playbook Author: Unknown Date: 2023-01-01 Version: 0.1'
+why_it_fails: Omits intervention triggers entirely. Without defined rules for when to act, the playbook cannot activate interventions,
+  leading to missed opportunities to retain customers.
+anti_example_2_missing_key_sections: '--- Title: Churn Playbook (Incomplete) Author: Marketing Team Date: 2023-09-20 Version:
+  0.5'

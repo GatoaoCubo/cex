@@ -1,0 +1,46 @@
+---
+kind: architecture
+id: bld_architecture_app_directory_entry
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of app_directory_entry -- inventory, dependencies
+quality: null
+title: "Architecture App Directory Entry"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [app_directory_entry, builder, architecture]
+tldr: "Component map of app_directory_entry -- inventory, dependencies"
+domain: "app_directory_entry construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Component Inventory
+| ISO Name             | Role                              | Pillar | Status  |
+|----------------------|-----------------------------------|--------|---------|
+| bld_manifest         | Defines app structure             | P05    | Active  |
+| bld_instruction      | Specifies build process           | P05    | Active  |
+| bld_system_prompt    | Sets system behavior rules        | P05    | Active  |
+| bld_schema           | Enforces data format standards    | P05    | Active  |
+| bld_quality_gate     | Validates output compliance       | P05    | Active  |
+| bld_output_template  | Structures final deliverables     | P05    | Active  |
+| bld_examples         | Provides reference implementations| P05    | Active  |
+| bld_knowledge_card   | Documents component metadata      | P05    | Active  |
+| bld_architecture     | Maps component relationships      | P05    | Active  |
+| bld_collaboration    | Manages team coordination         | P05    | Active  |
+| bld_config           | Stores runtime parameters         | P05    | Active  |
+| bld_memory           | Tracks state across sessions      | P05    | Active  |
+| bld_tools            | Integrates external utilities     | P05    | Active  |
+
+## Dependencies
+| From               | To                   | Type         |
+|--------------------|----------------------|--------------|
+| bld_manifest       | bld_instruction      | Control Flow |
+| bld_schema         | bld_output_template  | Data Flow    |
+| bld_quality_gate   | bld_examples         | Validation   |
+| bld_config         | bld_memory           | Configuration|
+| bld_tools          | external API         | Integration  |
+
+## Architectural Position  
+app_directory_entry serves as the central registry and coordination hub for P05's builder ISOs, enabling structured application development through standardized manifests, quality gates, and cross-component dependencies, aligning with CEX's focus on modular, reusable, and auditable software constructs.

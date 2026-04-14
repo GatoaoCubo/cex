@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_contributor_guide
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for contributor_guide
+quality: null
+title: Instruction Contributor Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- contributor_guide
+- builder
+- instruction
+tldr: Step-by-step production process for contributor_guide
+domain: contributor_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Analyze existing OSS CONTRIBUTING.md files for structure and common sections.
+- Document current dev setup steps (dependencies, build tools, test environments).
+- Map PR workflow from fork → branch → commit → push → open PR.
+- Audit coding standards (linting, formatting, naming conventions).
+- Define review process (criteria, timelines, required approvals).
+- Verify CLA requirements (individual vs. corporate, signing流程).
+phase_2_compose:
+- 'Outline sections per SCHEMA.md: dev setup, PR flow, coding standards, review process, CLA.'
+- 'Write dev setup: OS, tools, installation steps, environment variables.'
+- 'Detail PR flow: branch naming, commit message format, squashing guidelines.'
+- 'Specify coding standards: language rules, file structure, API conventions.'
+- 'Describe review process: initial checks, feedback loops, merge criteria.'
+- 'Explain CLA: link to agreement, enforcement policy, exceptions.'
+- Use OUTPUT_TEMPLATE.md for section headers, bullet points, and code blocks.
+- Cross-reference schema requirements to ensure completeness.
+- 'Finalize with examples: sample PR, compliant commit message, CLA sign-off.'
+phase_3_validate:
+- '[ ] ✅ All required sections (dev setup, PR flow, etc.) present.'
+- '[ ] ✅ Compliance with SCHEMA.md structure and OUTPUT_TEMPLATE.md format.'
+- '[ ] ✅ Clear, actionable steps with no ambiguous language.'
+- '[ ] ✅ CLA section aligns with legal team’s requirements.'
+- '[ ] ✅ Review process matches actual team workflows.'

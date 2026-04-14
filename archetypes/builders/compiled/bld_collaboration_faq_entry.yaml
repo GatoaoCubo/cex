@@ -1,0 +1,28 @@
+kind: collaboration
+id: bld_collaboration_faq_entry
+pillar: P12
+llm_function: COLLABORATE
+purpose: How faq_entry-builder works in crews with other builders
+quality: null
+title: Collaboration Faq Entry
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- faq_entry
+- builder
+- collaboration
+tldr: How faq_entry-builder works in crews with other builders
+domain: faq_entry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+crew_role: Curates and structures frequently asked questions (FAQs) into standardized entries, ensuring consistency and clarity
+  for end-users.
+receives_from: "| Builder       | What               | Format   |  \n|---------------|--------------------|----------|  \n\
+  | User Research | Raw user queries   | Text     |  \n| Content Team  | Draft FAQ entries  | Markdown |  \n| Analytics  \
+  \   | Usage statistics   | JSON     |"
+produces_for: "| Builder       | What               | Format   |  \n|---------------|--------------------|----------|  \n\
+  | Knowledge Base| Structured FAQ entry | Markdown |  \n| Support Team  | Ready-to-use answers | JSON     |  \n| Content\
+  \ Team  | Entry summary      | Text     |"
+boundary: Does NOT handle knowledge_card (broader conceptual explanations) or support_macro (agent-specific canned replies).
+  Those are managed by dedicated builders.

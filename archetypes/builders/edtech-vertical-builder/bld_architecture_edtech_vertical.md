@@ -1,0 +1,46 @@
+---
+kind: architecture
+id: bld_architecture_edtech_vertical
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of edtech_vertical -- inventory, dependencies
+quality: null
+title: "Architecture Edtech Vertical"
+version: "1.0.0"
+author: wave1_builder_gen_v2
+tags: [edtech_vertical, builder, architecture]
+tldr: "Component map of edtech_vertical -- inventory, dependencies"
+domain: "edtech_vertical construction"
+created: "2026-04-14"
+updated: "2026-04-14"
+density_score: 0.85
+---
+
+## Component Inventory
+| ISO Name             | Role                          | Pillar | Status  |
+|----------------------|-------------------------------|--------|---------|
+| bld_manifest         | Core configuration            | P01    | Active  |
+| bld_instruction      | Learning task definition      | P01    | Active  |
+| bld_system_prompt    | AI behavior guidelines        | P01    | Active  |
+| bld_schema           | Data structure definitions    | P01    | Active  |
+| bld_quality_gate     | Output validation rules       | P01    | Active  |
+| bld_output_template  | Content formatting blueprint  | P01    | Active  |
+| bld_examples         | Sample learning materials     | P01    | Active  |
+| bld_knowledge_card   | Concept encapsulation         | P01    | Active  |
+| bld_architecture     | System blueprint              | P01    | Active  |
+| bld_collaboration    | Multi-user interaction        | P01    | Active  |
+| bld_config           | Runtime parameter store       | P01    | Active  |
+| bld_memory           | Session state management      | P01    | Active  |
+| bld_tools            | Utility functions             | P01    | Active  |
+
+## Dependencies
+| From              | To                  | Type       |
+|-------------------|---------------------|------------|
+| bld_config        | bld_schema          | Reference  |
+| bld_instruction   | bld_system_prompt   | Dependency |
+| bld_quality_gate  | bld_output_template | Validation |
+| bld_memory        | bld_tools           | Utilization|
+| bld_collaboration | bld_examples        | Reference  |
+
+## Architectural Position
+The edtech_vertical-builder operates as a specialized framework within the CEX P01 pillar, enabling the construction of domain-specific educational ecosystems. It focuses on modular knowledge assembly, ensuring alignment with pedagogical standards through structured ISO interactions, while maintaining isolation from cross-vertical infrastructure layers.

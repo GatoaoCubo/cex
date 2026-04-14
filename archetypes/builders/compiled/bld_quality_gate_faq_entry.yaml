@@ -1,0 +1,34 @@
+kind: quality_gate
+id: p01_qg_faq_entry
+pillar: P11
+llm_function: GOVERN
+purpose: Quality gate with HARD and SOFT scoring for faq_entry
+quality: null
+title: Quality Gate Faq Entry
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- faq_entry
+- builder
+- quality_gate
+tldr: Quality gate with HARD and SOFT scoring for faq_entry
+domain: faq_entry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+definition: "(metric | threshold | operator | scope)  \nsupport_deflection_metric | 20% | > | per entry"
+hard_gates: "(ID | Check | Fail Condition)  \nH01 | YAML frontmatter valid | invalid YAML  \nH02 | ID matches ^p01_faq_[a-z][a-z0-9_]+.md$\
+  \ | invalid pattern  \nH03 | kind field matches 'faq_entry' | incorrect kind  \nH04 | question field exists and is non-empty\
+  \ | missing or empty question  \nH05 | canonical answer exists and is non-empty | missing or empty answer  \nH06 | related_links\
+  \ are valid URLs | invalid or missing URLs  \nH07 | support_deflection_metric is numeric | non-numeric value  \nH08 | no\
+  \ duplicate questions in same document | duplicate question found"
+soft_scoring: "(Dim | Dimension | Weight | Scoring Guide)  \nClarity | Question phrasing | 0.15 | Clear, concise, user-focused\
+  \  \nCompleteness | Answer covers all aspects | 0.15 | Full resolution, no ambiguity  \nUsability | Links and formatting\
+  \ | 0.10 | Valid links, proper markdown  \nAccuracy | Factually correct | 0.15 | Aligned with policies/operations  \nConsistency\
+  \ | Tone and style | 0.10 | Matches brand guidelines  \nSupport Deflection | Metric relevance | 0.15 | Directly ties to\
+  \ support reduction  \nAccessibility | Language simplicity | 0.10 | Avoids jargon, plain English  \nFormatting | Adheres\
+  \ to schema | 0.10 | Correct structure, no errors"
+actions: "(Score | Action)  \nGOLDEN | >=9.5 | Auto-publish, no review  \nPUBLISH | >=8.0 | Publish after approval  \nREVIEW\
+  \ | >=7.0 | Require editorial review  \nREJECT | <7.0 | Reject, rework required"
+bypass: "(conditions | approver | audit trail)  \nUrgent support fix | Senior Editor | Ticket #12345  \nLegacy entry update\
+  \ | Product Manager | Change log v2.1"

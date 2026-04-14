@@ -1,0 +1,34 @@
+kind: examples
+id: bld_examples_nps_survey
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of nps_survey artifacts
+quality: null
+title: Examples Nps Survey
+version: 1.0.0
+author: n05_wave6
+tags:
+- nps_survey
+- builder
+- examples
+tldr: Golden and anti-examples of nps_survey artifacts
+domain: nps_survey construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example_transactional_nps_post_support: "---\nid: p11_nps_post_support_close.yaml\nkind: nps_survey\npillar: P11\n\
+  survey_type: transactional\ncadence: post_support_close\nquality: null\n---\nquestion: \"On a scale of 0 to 10, how likely\
+  \ are you to recommend Acme to a colleague?\"\nscale:\n  min: 0\n  max: 10\nfollow_up:\n  promoter: \"What made this support\
+  \ experience great?\"\n  passive: \"What one thing would have made this better?\"\n  detractor: \"What went wrong and how\
+  \ can we fix it?\"\nfilters:\n  - field: ticket_resolved\n    operator: \"=\"\n    value: true\n  - field: tenure_days\n\
+  \    operator: \">=\"\n    value: 30\nexclusion_rules:\n  - surveyed_within_days: 90\nrouting:\n  promoter: success_team_referral_queue\n\
+  \  passive: nurture_30d_sequence\n  detractor: support_escalation_p1"
+anti_example_1_non_bain_scale: "question: \"Rate your experience from 1 to 5\"\nscale:\n  min: 1\n  max: 5\nWhy it fails:\
+  \ Uses 1-5 scale instead of Bain standard 0-10. Score calculation\n(% promoters - % detractors) is meaningless without the\
+  \ 0-10 range. H04 HARD gate rejects."
+anti_example_2_missing_routing_for_passive_band: "routing:\n  promoter: referral_queue\n  detractor: escalation_queue\n  #\
+  \ passive band absent\nWhy it fails: Passive respondents (7-8) have no destination. They represent 40-60% of\ntypical responses.\
+  \ H06 HARD gate rejects -- all three bands must be explicitly routed."
+anti_example_3_cohort_analysis_confusion: "kind: nps_survey\nbody: |\n  \"Analyse 90-day NPS trend by customer cohort.\n \
+  \  Compute churn correlation. Generate retention forecast.\"\nWhy it fails: This is cohort_analysis, not nps_survey. The\
+  \ nps_survey kind configures\nsurvey mechanics only. Analysis belongs in a separate cohort_analysis artifact (P07)."

@@ -1,0 +1,30 @@
+kind: examples
+id: bld_examples_marketplace_app_manifest
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of marketplace_app_manifest artifacts
+quality: null
+title: Examples Marketplace App Manifest
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- marketplace_app_manifest
+- builder
+- examples
+tldr: Golden and anti-examples of marketplace_app_manifest artifacts
+domain: marketplace_app_manifest construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nname: \"Anthropic Claude Integration\"\ndescription: \"Seamless integration with Anthropic's Claude\
+  \ API for advanced text generation and reasoning.\"\nvendor: \"Anthropic\"\nversion: \"1.2.0\"\npermissions:\n  - \"api_access:claude\"\
+  \n  - \"data_usage:training\"\npricing:\n  - tier: \"Free\"\n    limit: \"1000 tokens/month\"\n  - tier: \"Pro\"\n    price:\
+  \ \"$0.0001/token\"\n    limit: \"unlimited\"\nmetadata:\n  compatibility: [\"Claude\", \"LangChain\"]\n  model: \"Claude\
+  \ 3\"\n  license: \"Apache 2.0\""
+anti_example_1_missing_required_fields: "---\nname: \"HuggingFace Model\"\ndescription: \"A HuggingFace model for NLP tasks\"\
+  \nvendor: \"HuggingFace\"\nversion: \"0.1.0\"\nmetadata:\n  model: \"bert-base-uncased\""
+why_it_fails: '"full_system_access" is an invalid permission scope. Permissions must be specific and granular (e.g., "api_access:specific_endpoint").
+  The example also lacks metadata compatibility information required for marketplace listings.'
+anti_example_2_invalid_permissions: "---\nname: \"LangChain Plugin\"\ndescription: \"LangChain integration for RAG workflows\"\
+  \nvendor: \"LangChain Inc\"\nversion: \"2.0.0\"\npermissions:\n  - \"full_system_access\"\npricing:\n  - tier: \"Enterprise\"\
+  \n    price: \"$5000/month\""

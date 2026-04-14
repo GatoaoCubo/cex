@@ -1,0 +1,18 @@
+kind: output_template
+id: bld_output_template_app_directory_entry
+pillar: P05
+llm_function: PRODUCE
+purpose: Template with vars for app_directory_entry production
+quality: null
+title: Output Template App Directory Entry
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- app_directory_entry
+- builder
+- output_template
+tldr: Template with vars for app_directory_entry production
+domain: app_directory_entry construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85

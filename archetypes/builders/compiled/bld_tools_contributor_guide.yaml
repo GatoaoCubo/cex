@@ -1,0 +1,32 @@
+kind: tools
+id: bld_tools_contributor_guide
+pillar: P04
+llm_function: CALL
+purpose: Tools available for contributor_guide production
+quality: null
+title: Tools Contributor Guide
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- contributor_guide
+- builder
+- tools
+tldr: Tools available for contributor_guide production
+domain: contributor_guide construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Generates contributor guide\
+  \ from templates | On initial build |  \n| cex_score.py | Evaluates guide quality via heuristic checks | During validation\
+  \ |  \n| cex_retriever.py | Fetches external content (e.g., licenses) | When linking to external resources |  \n| cex_doctor.py\
+  \ | Diagnoses common contributor guide issues | On demand or pre-commit |  \n| cex_formatter.py | Enforces style consistency\
+  \ (e.g., headers, lists) | Pre-commit or manual runs |  \n| cex_linter.py | Validates code examples and syntax | When adding\
+  \ code snippets |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| validate_guide.py | Checks structure and required\
+  \ sections | Pre-release |  \n| check_links.py | Verifies internal/external links | On build |  \n| syntax_validator.py\
+  \ | Ensures Markdown/HTML syntax compliance | Pre-commit |  \n| consistency_checker.py | Identifies duplicate or conflicting\
+  \ content | During updates |"
+external_references:
+- Markdownlint (https://github.com/DavidAnson/markdownlint)
+- Sphinx (https://www.sphinx-doc.org/)
+- Git (https://git-scm.com/)

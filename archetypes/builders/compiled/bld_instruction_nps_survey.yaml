@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_nps_survey
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for nps_survey
+quality: null
+title: Instruction Nps Survey
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- nps_survey
+- builder
+- instruction
+tldr: Step-by-step production process for nps_survey
+domain: nps_survey construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- 'Define survey purpose: Align with P11 governance goals (e.g., customer loyalty, product feedback).'
+- 'Identify target audience: Segment by user type, tenure, or product usage.'
+- 'Draft core question: Use standard NPS phrasing (e.g., “How likely are you to recommend [product]?”).'
+- 'Select scale: Confirm 0–10 numerical scale with verbal anchors (e.g., 0=“Not at all likely,” 10=“Extremely likely”).'
+- 'Design follow-up: Create open-ended questions for promoters/detractors (e.g., “Why?”).'
+- 'Determine cadence: Set frequency (e.g., post-interaction, quarterly) and triggers (e.g., transactional events).'
+phase_2_compose:
+- 'Reference SCHEMA.md: Define `survey_id`, `pillar`, `function`, and `version`.'
+- 'Write question text: Use concise, neutral language per OUTPUT_TEMPLATE.md.'
+- 'Configure scale: Map numerical values to verbal labels (e.g., 0–2=Detractors, 9–10=Promoters).'
+- 'Structure follow-up: Add conditional questions based on NPS score (e.g., “What could we improve?” for detractors).'
+- 'Segment respondents: Apply filters (e.g., `user_type=enterprise`, `region=APAC`).'
+- 'Set cadence rules: Define timing (e.g., `post_onboarding`, `30_days_after_sign_up`).'
+- 'Route responses: Link scores to workflows (e.g., `score<3 → support_ticket`, `score>8 → success_team`).'
+- 'Validate against OUTPUT_TEMPLATE.md: Ensure all fields (e.g., `question`, `scale`, `routing`) are present.'
+- 'Finalize artifact: Save as `nps_survey.yaml` with metadata (e.g., `created_by`, `last_modified`).'
+phase_3_validate:
+- '[ ] ✅ Schema compliance: All required fields in SCHEMA.md are populated.'
+- '[ ] ✅ Flow logic: Follow-up questions trigger correctly based on NPS score.'
+- '[ ] ✅ Segmentation: Filters match target audience definitions (Phase 1, Step 2).'
+- '[ ] ✅ Routing: Response paths align with governance workflows (e.g., `score<3 → support`).'
+- '[ ] ✅ Cadence: Timing rules match research phase (Phase 1, Step 6).'
