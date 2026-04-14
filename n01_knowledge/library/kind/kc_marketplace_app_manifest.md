@@ -1,16 +1,15 @@
 ---
 id: kc_marketplace_app_manifest
 kind: knowledge_card
-title: Marketplace App Manifest Spec
+title: Marketplace App Manifest Specification
 version: 1.0.0
 quality: null
 pillar: P01
-description: |
-  Standardized metadata format for AI apps on Claude, LangChain, and HuggingFace marketplaces. Defines required fields for visibility, security, and monetization across platforms.
 ---
+
 # Marketplace App Manifest Specification
 
-This document specifies the required metadata structure for AI applications listed on major marketplaces. The manifest enables platform-agnostic metadata, permission declarations, and pricing models.
+This document defines the standardized metadata format for AI applications listed on Claude, LangChain, and HuggingFace marketplaces. The manifest enables platform-agnostic metadata, permission declarations, and pricing models.
 
 ## Core Structure
 ```yaml
