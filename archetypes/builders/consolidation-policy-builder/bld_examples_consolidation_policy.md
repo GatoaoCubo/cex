@@ -5,71 +5,94 @@ pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of consolidation_policy artifacts
 quality: null
-title: "Examples Consolidation Policy"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+title: "Examples: consolidation_policy artifacts"
+version: "2.0.0"
+author: n06_commercial
 tags: [consolidation_policy, builder, examples]
-tldr: "Golden and anti-examples of consolidation_policy artifacts"
-domain: "consolidation_policy construction"
+tldr: "Golden example: MemGPT-style promotion + eviction + compliance. Anti-examples: OS GC (wrong domain) and missing promotion rules."
+domain: "LLM agent memory consolidation"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.90
 ---
 
-## Golden Example
+## Golden Example: Customer Support Agent (PRO tier)
+
 ```yaml
-title: "PyTorch Memory Consolidation Policy for Large Language Models"
+---
+id: p10_cp_customer_support_pro
 kind: consolidation_policy
+pillar: P10
+title: "Consolidation Policy: Customer Support Agent (PRO)"
+version: "1.0.0"
+created: "2026-04-14"
+author: n06_commercial
+domain: customer-support
+quality: null
+tags: [consolidation_policy, customer_support, pro]
+tldr: "PRO tier: session-end episodic promotion, importance-gated semantic, 90-day TTL, LRU eviction."
+tier: pro
+eviction_strategy: hybrid
+consolidation_async: true
+importance_floor: 0.3
+retention_days: 90
+promotion_threshold: 0.7
+audit_trail: false
+---
+```
+
+**Why golden**: all required frontmatter, consolidation_async: true, tier=pro,
+eviction_strategy=hybrid, importance_floor + promotion_threshold defined. Body includes
+Promotion Rules table, Eviction Rules table, importance scoring formula, async job spec,
+and FREE/PRO/ENTERPRISE tier matrix. No OS memory terminology.
+
+## Anti-Example 1: OS/GC Domain Contamination (D04)
+
+```yaml
+---
+id: p10_cp_pytorch_gc
+kind: consolidation_policy
+title: "PyTorch Memory Consolidation for LLM Inference"
 vendor: Meta
 version: 1.13.1
-description: "Memory lifecycle management for PyTorch-based LLM inference workloads"
-
+description: "Memory lifecycle for PyTorch inference with mark-and-sweep GC"
 body:
-  memory_retention:
-    - stage: "inference"
-      duration: "session_lifetime"
-      strategy: "reference_counting"
+  garbage_collection:
+    interval: "every 100ms"
+    strategy: "mark_and_sweep"
   eviction:
-    - trigger: "memory_pressure"
-      threshold: "90% GPU utilization"
-      action: "evict_low_priority_tensors"
-  garbage_collection:
-    - interval: "every 100ms"
-    - strategy: "mark_and_sweep"
-  logging:
-    - level: "debug"
-    - metrics: ["resident_memory", "cached_tensors", "eviction_rate"]
+    trigger: "90% GPU utilization"
+    action: "evict_low_priority_tensors"
+---
 ```
 
-## Anti-Example 1: Confusing with Memory Scope
+**Why it fails**:
+- Describes PyTorch tensor management and GPU memory -- NOT agent memory
+- `garbage_collection: mark_and_sweep` is OS/GC terminology, wrong domain
+- No `consolidation_async` field, no `importance_floor`, no `tier`
+- No Promotion Rules (working->episodic) or Semantic Promotion
+- Missing all required frontmatter fields (`pillar`, `quality`, `tags`, `tldr`)
+
+## Anti-Example 2: Missing Promotion Rules
+
 ```yaml
-title: "Incorrect Memory Scope Policy"
+---
+id: p10_cp_minimal
 kind: consolidation_policy
-vendor: HuggingFace
-version: 4.28.0
-description: "Access control for model parameters"
-
-body:
-  access:
-    - role: "inference"
-      permissions: ["read", "write"]
-    - role: "training"
-      permissions: ["read", "write", "modify"]
+pillar: P10
+tier: pro
+consolidation_async: true
+eviction_strategy: ttl
+retention_days: 90
+---
+## Eviction Rules
+Delete everything older than 90 days.
 ```
-## Why it fails
-Mixes memory access rules (memory_scope) with lifecycle management. Consolidation_policy should handle retention/eviction, not access permissions.
 
-## Anti-Example 2: Missing Critical Policies
-```yaml
-title: "Incomplete Memory Policy"
-kind: consolidation_policy
-vendor: Google
-version: 2.5.0
-description: "Basic memory management for TPU workloads"
-
-body:
-  garbage_collection:
-    - interval: "every 5s"
-```
-## Why it fails
-Lacks essential policies for memory retention, eviction strategies, and monitoring metrics. A complete policy must define full lifecycle management from allocation to deallocation.
+**Why it fails**:
+- Has eviction but NO promotion rules: episodic -> semantic promotion is missing
+- Eviction rule is a sentence, not a structured table
+- No importance scoring section
+- No Commercial Tier Matrix
+- Missing required frontmatter: `quality`, `tags`, `tldr`, `domain`, `author`
+- Fails H05 (Promotion Rules section absent), D2 (0.0), D3 (0.0)
