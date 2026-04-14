@@ -44,3 +44,24 @@ Storage: `P06_schema/edit_formats/p06_ef_{{name}}.md`
 - `post_build`: `python _tools/cex_compile.py {path}`
 - `on_error`: null
 - `on_quality_fail`: null
+
+## Edit Format Matrix
+| Format | Granularity | Reversible | Use Case |
+|--------|------------|-----------|----------|
+| search_replace | line-level | Yes | LLM code edits |
+| unified_diff | hunk-level | Yes | Git patches |
+| whole_file | file-level | Yes | Complete rewrites |
+| json_patch | key-level | Yes | JSON/YAML updates |
+| xml_diff | element-level | Yes | Structured docs |
+| inline_comment | token-level | Partial | Annotation |
+| semantic_diff | node-level | Yes | AST-based refactors |
+| binary_delta | byte-level | Yes | Binary files |
+| block_edit | block-level | Yes | Large sections |
+| minimal_diff | optimal | Yes | Minimal changes |
+
+## Quality Gates
+| Gate | Check |
+|------|-------|
+| format_type required | From allowed enum |
+| encoding documented | How format is encoded |
+| example provided | At least 1 apply example |

@@ -33,3 +33,5 @@ Reviewed artifacts using standardized fairness taxonomies (e.g., demographic par
 - Document assumptions and limitations of chosen metrics transparently.  
 - Use synthetic data to stress-test audit methods against edge cases.  
 - Prioritize audits that track fairness outcomes over time, not just static snapshots.
+| Common mistake: self-scoring | Always set quality: null |
+| Common mistake: single-metric audit | Add fairness-specific metrics: DP, EO, PP |

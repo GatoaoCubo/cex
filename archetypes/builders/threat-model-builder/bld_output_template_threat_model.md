@@ -132,3 +132,14 @@ _(Required when system includes ML models or AI pipelines)_
 - NIST AI RMF: https://airc.nist.gov/Home
 - ISO/IEC 23894:2021 AI Risk Management
 - NIST SP 800-160 Vol. 2 Cyber Resiliency Engineering
+
+## Validation Checklist
+| Check | Requirement |
+|-------|-------------|
+| System boundary defined | Clear in/out of scope |
+| Assets listed | All valuable data/functions cataloged |
+| STRIDE applied | All 6 categories addressed |
+| Threat severity rated | CVSS or HIGH/MED/LOW/INFO |
+| Mitigations mapped | 1:1 threat-to-mitigation |
+| Residual risk documented | After-mitigation exposure noted |
+| Assumptions listed | Explicit trust boundaries stated |

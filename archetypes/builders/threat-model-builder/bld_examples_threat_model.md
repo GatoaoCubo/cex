@@ -114,3 +114,17 @@ date: 2023-11-10
 ```
 ## Why it fails  
 Focuses on governance rules (safety policy) rather than assessing risks or threats. No hazard analysis or mitigation strategies for AI system vulnerabilities.
+
+## Threat Classification Reference
+| Category | STRIDE | Example Threat | Mitigation Pattern |
+|----------|--------|---------------|--------------------|
+| Spoofing | S | Identity spoofing via forged JWT | Verify signature + expiry |
+| Tampering | T | SQL injection via user input | Parameterized queries |
+| Repudiation | R | Denial of transaction | Signed audit log |
+| Info Disclosure | I | Stack trace in error response | Generic error messages |
+| DoS | D | Request flood to API | Rate limiting + circuit breaker |
+| Elevation | E | JWT role claim manipulation | Server-side authorization |
+| Prompt Injection | PI | Malicious instruction in context | Input sanitization + guards |
+| Data Poisoning | DP | Backdoor via training data | Dataset provenance + validation |
+| Model Inversion | MI | Extract training data via queries | Differential privacy |
+| Supply Chain | SC | Malicious dependency | Lockfile + signature verification |

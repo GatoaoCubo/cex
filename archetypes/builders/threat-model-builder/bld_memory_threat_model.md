@@ -33,3 +33,5 @@ Reviewed artifacts from healthcare and finance domains showed improved coverage 
 - Use iterative workshops to refine scenarios and validate assumptions with red-team exercises.  
 - Link threats directly to mitigation strategies (e.g., differential privacy, input validation).  
 - Document assumptions and limitations to enable model evolution as AI systems mature.
+| Common: missing STRIDE coverage | Address all 6 STRIDE categories or justify omissions |
+| Common: no mitigation for each threat | Every threat entry must have a mitigation strategy |

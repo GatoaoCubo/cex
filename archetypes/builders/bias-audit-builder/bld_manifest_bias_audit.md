@@ -33,3 +33,5 @@ Keywords: bias audit, fairness evaluation, disparate impact, algorithmic fairnes
 
 ## Crew Role  
 Acts as the fairness auditor in ML governance teams, answering questions about bias detection, impact assessment, and mitigation efficacy. Does not handle general performance benchmarking, model training, or single-metric optimization. Collaborates with data scientists, ethicists, and compliance officers to ensure systems meet fairness and regulatory standards.
+| Routing: bias detection, fairness eval, demographic parity | bias_audit |
+| NOT: benchmark (general perf), red_team (adversarial), eval_metric (single metric) | route elsewhere |

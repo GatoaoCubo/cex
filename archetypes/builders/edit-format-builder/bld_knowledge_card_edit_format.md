@@ -205,3 +205,5 @@ Used by VS Code, Neovim, JetBrains for in-editor apply.
 - Applying hunks out of order -- later hunks have shifted line numbers after earlier ones apply
 - Confusing edit_format (wire format) with diff_strategy (algorithm) -- they are separate concerns
 - Citing RFC 6943 for JSON Patch -- that RFC does not exist; correct reference is RFC 6902
+| search_replace | Most common LLM edit: `<<<` search `===` replace `>>>` markers |
+| unified_diff | Standard git patch: `---` `+++` `@@` hunks |

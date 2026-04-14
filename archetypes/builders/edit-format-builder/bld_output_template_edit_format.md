@@ -226,3 +226,19 @@ Best for: git workflows, code review tools, standard patch application.
 - Each hunk MUST start with `@@ -n,m +n,m @@`
 - At least 3 context lines around each change (unless at file start/end)
 ```
+
+## Template Validation
+| Field | Required | Constraint |
+|-------|---------|------------|
+| format_type | Y | From allowed enum |
+| encoding | Y | Must specify encoding method |
+| apply_example | Y | Show input + output |
+| reversible | Y | Boolean |
+| granularity | Y | token/line/block/file |
+| error_handling | Recommended | What happens on failure |
+| performance | Recommended | Typical apply time/cost |
+| size_impact | Recommended | Patch vs file size ratio |
+| tooling | Recommended | Which tools support this format |
+| limitations | Recommended | Known edge cases |
+| streaming_safe | Optional | Can apply while streaming |
+| parallel_safe | Optional | Can apply concurrently |

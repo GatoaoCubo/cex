@@ -75,3 +75,15 @@ kind: "bias_audit"
 ```
 ## Why it fails  
 Confuses general performance evaluation with fairness audit. Ignores required fairness-specific metrics and analysis.
+
+## Pattern Recognition
+| Pattern | Indicator | Correct Action |
+|---------|-----------|---------------|
+| Missing demographic | No protected attributes listed | Add group definitions |
+| Single metric | Only accuracy reported | Add fairness metrics |
+| No baseline | No reference model | Define comparison baseline |
+| Vague methodology | 'We checked bias' | Specify metric + method |
+| No significance test | Raw numbers only | Add statistical significance |
+| Single group only | One demographic | Audit all relevant groups |
+| No recommendations | Results only | Add actionable steps |
+| Self-scored quality | quality: 9.0 | Set to null |

@@ -183,3 +183,22 @@ to: "new code"
 `diff_strategy`, `fuzzy_threshold`, and matching parameters belong to `diff_strategy` kind.
 `edit_format` specifies the WIRE FORMAT (what the LLM emits), not how the host FINDS the
 matching location in the file. These are separate CEX kinds with separate builders.
+
+## Format Comparison
+| Format | Patch Size | Apply Time | Error Rate | Best For |
+|--------|-----------|-----------|-----------|----------|
+| search_replace | small | fast | low | LLM outputs |
+| unified_diff | small | fast | low | version control |
+| whole_file | large | fast | none | complete rewrites |
+| json_patch | tiny | fast | low | data files |
+| semantic_diff | small | slow | medium | refactoring |
+
+## Anti-Patterns
+| Anti-Pattern | Why It Fails | Correct Approach |
+|-------------|-------------|------------------|
+| Missing markers | Apply fails silently | Always include search + replace markers |
+| Overlapping patches | Conflict on apply | Sequence patches or use atomic updates |
+| No error handling | Silent corruption | Validate pre/post apply checksums |
+| Ambiguous search | Wrong replacement | Ensure search pattern is unique |
+| Large context | Token waste | Use minimal context window |
+| No fallback | Hard failure | Provide whole-file fallback |

@@ -51,3 +51,17 @@ status: {{status}}
 
 ## Conclusion  
 `{{conclusion_content}}`
+
+## Validation Checklist
+| # | Check | Pass Condition |
+|---|-------|---------------|
+| 1 | Methodology documented | At least 1 fairness metric defined |
+| 2 | Demographic groups specified | Protected attributes listed |
+| 3 | Baseline comparison present | Reference model defined |
+| 4 | Statistical significance reported | p-value or confidence interval |
+| 5 | Disparity metric computed | Demographic parity or equalized odds |
+| 6 | Recommendations present | At least 1 actionable recommendation |
+| 7 | Data source cited | Dataset name and sample size |
+| 8 | Reproducibility check | Methodology reproducible |
+| 9 | Trade-offs noted | Fairness vs accuracy addressed |
+| 10 | quality: null | Never self-scored |

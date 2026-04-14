@@ -34,3 +34,4 @@ Keywords: "modify", "rebase", "overwrite", "constraint", "delta"
 
 ## Crew Role  
 Acts as a specification architect for file modification workflows, ensuring edits comply with CONSTRAIN's structural rules. Does not handle diff algorithm selection, formatting output, or semantic analysis of content changes. Focuses solely on the syntax and constraints of edit_format instructions.
+| Routing: edit format specs, diff format, patch encoding | edit_format |

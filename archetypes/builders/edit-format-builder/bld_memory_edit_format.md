@@ -33,3 +33,5 @@ Reviewed artifacts using JSON-based metadata with `operation` and `context` fiel
 - Define conflict resolution rules explicitly (e.g., `overwrite`, `merge`, `skip`).  
 - Use versioning to track spec evolution and ensure backward compatibility.  
 - Validate artifacts against a schema before deployment.
+| Common: missing apply example | Always include concrete apply demonstration |
+| Common: overlapping search patterns | Ensure patterns are unique in target file |

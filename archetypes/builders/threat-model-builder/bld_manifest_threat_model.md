@@ -34,3 +34,4 @@ Triggers: "assess risks in AI system", "identify potential threats", "evaluate a
 
 ## Crew Role  
 Acts as the AI risk analysis specialist within a governance team, answering questions about system-level threats, attack pathways, and risk prioritization. Does not handle safety policy formulation, guardrail configuration, or runtime anomaly detection. Collaborates with red teams, security architects, and compliance officers to translate threat models into actionable risk mitigation plans.
+| Routing: threat modeling, STRIDE, attack surface, risk assessment | threat_model |
