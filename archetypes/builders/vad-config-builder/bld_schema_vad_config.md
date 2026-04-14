@@ -29,7 +29,7 @@ density_score: 0.85
 | updated    | date   | yes      | -       | Last update date |  
 | author     | string | yes      | -       | Author name |  
 | domain     | string | yes      | -       | Application domain |  
-| quality    | string | yes      | "draft" | Quality status |  
+| quality    | null   | yes      | null    | Never self-score; peer review assigns value |  
 | tags       | list   | yes      | []      | Metadata tags |  
 | tldr       | string | yes      | -       | Summary |  
 | sensitivity| float  | yes      | 0.5     | Detection sensitivity |  

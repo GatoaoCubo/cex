@@ -2,7 +2,7 @@
 kind: system_prompt
 id: p03_sp_tts_provider_builder
 pillar: P03
-llm_function: INJECT
+llm_function: BECOME
 purpose: System prompt defining tts_provider-builder persona and rules
 quality: null
 title: "System Prompt Tts Provider"

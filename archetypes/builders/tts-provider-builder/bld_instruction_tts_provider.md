@@ -36,8 +36,8 @@ density_score: 0.85
 9. Final code review against SCHEMA.md and OUTPUT_TEMPLATE.md  
 
 ## Phase 3: VALIDATE  
-[ ] [ ] Validate audio output matches OUTPUT_TEMPLATE.md format  
-[ ] [ ] Test provider API authentication and error recovery  
-[ ] [ ] Verify compatibility with all supported languages/voices  
-[ ] [ ] Confirm schema compliance for input/output parameters  
-[ ] [ ] Run end-to-end integration tests with mock and live providers
+- [ ] Validate audio output matches OUTPUT_TEMPLATE.md format  
+- [ ] Test provider API authentication and error recovery  
+- [ ] Verify compatibility with all supported languages/voices  
+- [ ] Confirm schema compliance for input/output parameters  
+- [ ] Run end-to-end integration tests with mock and live providers

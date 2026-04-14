@@ -29,7 +29,7 @@ density_score: 0.85
 | updated    | date   | yes      | -       | Last update timestamp |  
 | author     | string | yes      | -       | Owner/creator |  
 | domain     | string | yes      | -       | Operational domain (e.g., "medical") |  
-| quality    | string | yes      | -       | Quality rating (e.g., "high") |  
+| quality    | null   | yes      | null    | Never self-score; peer review assigns value |  
 | tags       | list   | yes      | []      | Keywords for categorization |  
 | tldr       | string | yes      | -       | Summary of purpose |  
 | voice_samples | list | yes | [] | Audio sample references |  

@@ -32,17 +32,17 @@ density_score: 0.85
 | H06  | no duplicate IDs       | Duplicate ID detected                 |  
 | H07  | config not empty       | Empty or whitespace-only config       |  
 
-## SOFT Scoring  
-| Dim | Dimension              | Weight | Scoring Guide                              |  
-|-----|------------------------|--------|--------------------------------------------|  
-| D1  | Voice personality      | 0.15   | 1.0=clear, 0.5=ambiguous, 0.0=missing      |  
-| D2  | Emotion settings       | 0.15   | 1.0=valid, 0.5=partial, 0.0=invalid        |  
-| D3  | Consistency            | 0.10   | 1.0=consistent, 0.5=conflicting, 0.0=invalid|  
-| D4  | Clarity                | 0.10   | 1.0=explicit, 0.5=moderate, 0.0=obscure    |  
-| D5  | Naturalness            | 0.10   | 1.0=natural, 0.5=stiff, 0.0=mechanical     |  
-| D6  | Cultural appropriateness | 0.10 | 1.0=appropriate, 0.5=neutral, 0.0=inappropriate |  
-| D7  | Technical validity     | 0.10   | 1.0=valid, 0.5=partial, 0.0=invalid        |  
-| D8  | User experience        | 0.10   | 1.0=optimal, 0.5=adequate, 0.0=poor        |  
+## SOFT Scoring (weights sum to 1.00)
+| Dim | Dimension              | Weight | Scoring Guide                              |
+|-----|------------------------|--------|--------------------------------------------|
+| D1  | Voice personality      | 0.15   | 1.0=clear emotion map, 0.5=ambiguous, 0.0=missing |
+| D2  | Emission path validity | 0.15   | 1.0=SSML or provider-native correct, 0.5=partial, 0.0=mismatch |
+| D3  | Provider coverage      | 0.15   | 1.0=target providers declared + tested, 0.5=one, 0.0=none |
+| D4  | SSML/tag syntax        | 0.10   | 1.0=valid per W3C SSML 1.1, 0.5=minor, 0.0=broken |
+| D5  | Naturalness            | 0.10   | 1.0=natural, 0.5=stiff, 0.0=mechanical     |
+| D6  | Cultural/language fit  | 0.10   | 1.0=locale-appropriate pitch/rate, 0.5=neutral, 0.0=mismatched |
+| D7  | Technical validity     | 0.10   | 1.0=valid numeric/enum, 0.5=partial, 0.0=subjective strings |
+| D8  | Boundary hygiene       | 0.15   | 1.0=no tts_provider/agent_profile bleed, 0.5=minor, 0.0=mixed |  
 
 ## Actions  
 | Score     | Action                          |  

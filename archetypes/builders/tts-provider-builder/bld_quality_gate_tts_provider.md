@@ -28,7 +28,7 @@ density_score: 0.85
 | ID   | Check               | Fail Condition                          |  
 |------|---------------------|-----------------------------------------|  
 | H01  | YAML valid          | Invalid YAML syntax                     |  
-| H02  | ID matches pattern  | ID does not match `tts-[a-z0-9]+`      |  
+| H02  | ID matches pattern  | ID does not match `^p04_tts_[a-zA-Z0-9_-]+$` |  
 | H03  | Kind matches        | Kind != `tts_provider`                  |  
 | H04  | Provider registered | Provider not in approved list           |  
 | H05  | API key present     | Missing or invalid API key              |  

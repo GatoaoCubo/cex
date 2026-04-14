@@ -16,25 +16,34 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Component Inventory  
-| Name | Role | Owner | Status |  
-|------|------|-------|--------|  
-| tts_core | Speech synthesis engine | Audio Team | Stable |  
-| voice_model | Pretrained voice generation module | ML Team | In Development |  
-| text_normalizer | Text preprocessing pipeline | NLP Team | Stable |  
-| api_gateway | REST/GraphQL endpoint handler | API Team | Stable |  
-| config_manager | Provider-specific configuration loader | DevOps | Stable |  
-| logger | Audit and error tracking service | SRE Team | Stable |  
-| dependency_resolver | External library manager | Build Team | Under Review |  
+## Builder ISO Inventory (13 ISOs)
 
-## Dependencies  
-| From | To | Type |  
-|------|----|------|  
-| api_gateway | tts_core | API |  
-| tts_core | voice_model | Data |  
-| text_normalizer | config_manager | Config |  
-| logger | tts_core | Event |  
-| dependency_resolver | voice_model | Build |  
+| ISO File | Kind | llm_function | Role |
+|---|---|---|---|
+| bld_manifest_tts_provider.md | type_builder | BECOME | Identity, capabilities, routing |
+| bld_system_prompt_tts_provider.md | system_prompt | BECOME | Builder persona and rules |
+| bld_instruction_tts_provider.md | instruction | REASON | Step-by-step production process |
+| bld_knowledge_card_tts_provider.md | knowledge_card | INJECT | Domain knowledge (providers, MOS, pricing) |
+| bld_schema_tts_provider.md | schema | CONSTRAIN | Formal schema -- single source of truth |
+| bld_quality_gate_tts_provider.md | quality_gate | GOVERN | HARD/SOFT scoring gates |
+| bld_output_template_tts_provider.md | output_template | PRODUCE | Template with vars |
+| bld_architecture_tts_provider.md | architecture | CONSTRAIN | Component map (this file) |
+| bld_examples_tts_provider.md | examples | GOVERN | Golden + anti-examples |
+| bld_collaboration_tts_provider.md | collaboration | COLLABORATE | Crew integration |
+| bld_config_tts_provider.md | config | CONSTRAIN | Naming, paths, limits |
+| bld_memory_tts_provider.md | learning_record | INJECT | Learned patterns + pitfalls |
+| bld_tools_tts_provider.md | tools | CALL | Available production tools |
 
-## Architectural Position  
-tts_provider sits within CEX's infrastructure layer, enabling voice-based user interactions by converting text to speech. It integrates with frontend services via API Gateway, relies on ML models for synthesis, and depends on configuration and logging systems for operational integrity.
+## Dependencies
+
+| From | To | Type |
+|------|----|------|
+| bld_system_prompt | bld_manifest | Identity |
+| bld_instruction | bld_schema | Validation |
+| bld_output_template | bld_schema | Constraint |
+| bld_quality_gate | bld_schema | Gate reference |
+| bld_examples | bld_output_template | Validation |
+| bld_collaboration | bld_manifest | Routing |
+
+## Architectural Position
+tts_provider sits in CEX Pillar P04 (Tools), acting as the speech synthesis output layer of voice pipelines. It consumes text from vad_config (which gates audio input) and voice_pipeline (which orchestrates the full flow), then calls commercial or self-hosted TTS engines (ElevenLabs, OpenAI, Coqui XTTS, Piper) to produce audio. Upstream: voice_pipeline_builder, prosody_config_builder. Downstream: audio file delivery, streaming endpoints.

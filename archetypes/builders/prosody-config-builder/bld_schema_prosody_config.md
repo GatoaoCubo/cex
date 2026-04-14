@@ -24,16 +24,17 @@ density_score: 0.85
 | kind       | string | yes      | "prosody_config" | CEX kind |  
 | pillar     | string | yes      | "P09"    | Pillar classification |  
 | title      | string | yes      | -       | Configuration title |  
-| version    | string | yes      | "1.0"   | Schema version |  
+| version    | string | yes      | "1.0.0" | Semver MAJOR.MINOR.PATCH |
 | created    | date   | yes      | -       | Creation timestamp |  
 | updated    | date   | yes      | -       | Last update timestamp |  
 | author     | string | yes      | -       | Author/owner |  
 | domain     | string | yes      | -       | Application domain |  
-| quality    | string | yes      | "draft" | Quality status |  
-| tags       | list   | yes      | []      | Metadata tags |  
-| tldr       | string | yes      | -       | Summary |  
-| language   | string | yes      | "en"    | Target language |  
-| intonation | string | yes      | "neutral" | Intonation profile |  
+| quality    | null   | yes      | null    | MUST be null -- peer review assigns |
+| tags       | list   | yes      | []      | Metadata tags |
+| tldr       | string | yes      | -       | Summary |
+| language   | string | yes      | "en"    | BCP-47 language tag (e.g., en-US, pt-BR) |
+| emission   | enum   | yes      | "ssml"  | ssml \| elevenlabs \| playht \| cartesia \| hume \| azure_mstts |
+| intonation | string | yes      | "neutral" | Intonation profile name |
 
 ### Recommended  
 | Field              | Type   | Notes |  
