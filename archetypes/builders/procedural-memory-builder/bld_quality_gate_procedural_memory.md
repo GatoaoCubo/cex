@@ -5,62 +5,60 @@ pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for procedural_memory
 quality: null
-title: "Quality Gate Procedural Memory"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+title: "Quality Gate: procedural_memory"
+version: "2.0.0"
+author: n06_commercial
 tags: [procedural_memory, builder, quality_gate]
-tldr: "Quality gate with HARD and SOFT scoring for procedural_memory"
-domain: "procedural_memory construction"
+tldr: "HARD gates enforce artifact structure (schema, ID, skill_format, tier). SOFT scoring weights domain accuracy, skill completeness, commercial differentiation, and verification coverage."
+domain: "LLM agent procedural memory"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.90
 ---
 
-## Definition  
-(Table: metric, threshold, operator, scope)  
-| metric | threshold | operator | scope |  
-|---|---|---|---|  
-| Accuracy | 95% | >= | system-wide |  
+## Definition
 
-## HARD Gates  
-(Table: ID | Check | Fail Condition)  
-| ID | Check | Fail Condition |  
-|---|---|---|  
-| H01 | YAML frontmatter valid | invalid YAML |  
-| H02 | ID matches ^p10_pm_[a-z][a-z0-9_]+.md$ | invalid schema ID |  
-| H03 | kind field matches 'procedural_memory' | incorrect kind |  
-| H04 | Data integrity checks pass | data corruption detected |  
-| H05 | Retrieval latency <= 200ms | latency exceeds threshold |  
-| H06 | Error rate <= 0.1% | excessive errors |  
-| H07 | Version consistency enforced | version mismatch |  
-| H08 | Access control policies enforced | unauthorized access |  
-| H09 | Audit logs complete | missing audit records |  
-| H10 | Recovery time <= 5min | recovery timeout |  
+| Metric | Threshold | Operator | Scope |
+|--------|-----------|----------|-------|
+| Required frontmatter fields | 100% | == | Artifact |
+| skill_format field present | true | == | Artifact |
+| tier field present | true | == | Artifact |
+| Skills section present | true | == | Artifact |
 
-## SOFT Scoring  
-(Table: Dim | Dimension | Weight | Scoring Guide)  
-| Dim | Dimension | Weight | Scoring Guide |  
-|---|---|---|---|  
-| D1 | Data integrity | 0.15 | 1.00 (perfect) to 0.00 (corrupted) |  
-| D2 | Retrieval efficiency | 0.12 | 1.00 (fast) to 0.00 (slow) |  
-| D3 | Error handling | 0.10 | 1.00 (robust) to 0.00 (none) |  
-| D4 | Version control | 0.10 | 1.00 (consistent) to 0.00 (chaotic) |  
-| D5 | Access security | 0.15 | 1.00 (secure) to 0.00 (exposed) |  
-| D6 | Audit completeness | 0.10 | 1.00 (full) to 0.00 (missing) |  
-| D7 | Recovery speed | 0.10 | 1.00 (fast) to 0.00 (slow) |  
-| D8 | User feedback | 0.18 | 1.00 (positive) to 0.00 (negative) |  
+## HARD Gates
 
-## Actions  
-(Table: Score | Action)  
-| Score | Action |  
-|---|---|  
-| GOLDEN | >=9.5 | Deploy immediately |  
-| PUBLISH | >=8.0 | Publish with review |  
-| REVIEW | >=7.0 | Manual review required |  
-| REJECT | <7.0 | Reject and fix |  
+| ID | Check | Fail Condition |
+|----|-------|---------------|
+| H01 | YAML frontmatter valid | Invalid YAML syntax or missing required fields |
+| H02 | ID matches `^p10_pm_[a-z][a-z0-9_]+$` | ID absent or does not match pattern |
+| H03 | kind field equals `procedural_memory` | kind field absent, wrong, or misspelled |
+| H04 | `skill_format` field present | Field absent |
+| H05 | `tier` field present | Field absent |
+| H06 | Skills section present in body | Section absent or empty |
+| H07 | Verification strategy defined or explicitly excluded | No mention of skill verification |
 
-## Bypass  
-(Table: conditions, approver, audit trail)  
-| conditions | approver | audit trail |  
-|---|---|---|  
-| Critical system failure | Senior engineer | Ticket #1234, approval 2023-10-01 |
+## SOFT Scoring
+
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|--------------|
+| D1 | Domain accuracy | 0.25 | 1.0 = LLM agent skills; 0.0 = hardware/robotics motor schemas without LLM context |
+| D2 | Skill coverage | 0.20 | 1.0 = namespace + format + storage + retrieval defined; 0.5 = partial; 0.0 = absent |
+| D3 | Commercial differentiation | 0.20 | 1.0 = FREE/PRO/ENTERPRISE matrix with 5+ features; 0.5 = partial; 0.0 = absent |
+| D4 | Verification strategy | 0.20 | 1.0 = test-case gating or CI pipeline defined; 0.5 = mentioned; 0.0 = absent |
+| D5 | Industry grounding | 0.15 | 1.0 = Voyager/ExpeL/Reflexion cited; 0.5 = 1 citation; 0.0 = none |
+
+## Actions
+
+| Score | Action |
+|-------|--------|
+| >= 9.5 | GOLDEN -- archive as gold standard example |
+| >= 8.0 | PUBLISH -- merge to main |
+| >= 7.0 | REVIEW -- surgical fix before merge |
+| < 7.0 | REJECT -- rebuild required |
+
+## Bypass
+
+| Condition | Approver | Audit Trail |
+|-----------|----------|------------|
+| Free tier artifact with no skills (correct behavior) | N06 | Tier=free annotation in frontmatter |
+| Prototype with unverified skills in dev environment | N07 | Prototype annotation + dev-only tag |
