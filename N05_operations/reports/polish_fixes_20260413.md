@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P11
 title: Polish pass fixes -- hook errors + doctor FAILs
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [polish, fixes, validation, n05]
 ---
 
