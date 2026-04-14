@@ -51,3 +51,4 @@ nul
 boot/n01-claude.cmd
 .aider*
 unsloth_compiled_cache/
+.venv_litellm/

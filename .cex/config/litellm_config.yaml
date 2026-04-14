@@ -156,7 +156,9 @@ model_list:
 # Virtual keys for per-nucleus budget tracking
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
-  database_url: os.environ/LITELLM_DB_URL  # optional: postgres for persistent tracking
+  # database_url removed -- DB is optional; without it, no prisma init / no migrations.
+  # To enable persistent tracking, uncomment and set LITELLM_DB_URL env var:
+  # database_url: os.environ/LITELLM_DB_URL
 
 # Router settings
 router_settings:

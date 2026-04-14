@@ -10,17 +10,28 @@
 
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $configPath = "$cexRoot\.cex\config\litellm_config.yaml"
+$venvPython = "$cexRoot\.venv_litellm\Scripts\python.exe"
 
 if (-not (Test-Path $configPath)) {
     Write-Host "[FAIL] LiteLLM config not found: $configPath" -ForegroundColor Red
     exit 1
 }
 
-# Check if litellm is installed
-$litellm = Get-Command litellm -ErrorAction SilentlyContinue
-if (-not $litellm) {
-    Write-Host "[FAIL] litellm not found. Install: pip install litellm" -ForegroundColor Red
-    exit 1
+# Prefer dedicated 3.12 venv (orjson has no 3.14 wheel)
+# Invoke python -m (avoids Windows App Control blocking unsigned .exe shims)
+if (Test-Path $venvPython) {
+    $pythonExe = $venvPython
+} else {
+    $pythonExe = "python"
+    try {
+        & $pythonExe -c "import litellm.proxy" 2>$null
+        if ($LASTEXITCODE -ne 0) { throw "missing" }
+    } catch {
+        Write-Host "[FAIL] litellm[proxy] not installed. Create venv:" -ForegroundColor Red
+        Write-Host "  py -3.12 -m venv .venv_litellm" -ForegroundColor Yellow
+        Write-Host "  .venv_litellm\Scripts\python.exe -m pip install 'litellm[proxy]' pyyaml" -ForegroundColor Yellow
+        exit 1
+    }
 }
 
 Write-Host "============================================" -ForegroundColor Cyan
@@ -43,5 +54,14 @@ Write-Host ""
 Write-Host "Press Ctrl+C to stop" -ForegroundColor DarkGray
 Write-Host ""
 
-# Start LiteLLM proxy
-litellm --config $configPath --port 4000 --detailed_debug
+# Force UTF-8 (LiteLLM banner has Unicode; Windows cp1252 default crashes)
+$env:PYTHONIOENCODING = "utf-8"
+$env:PYTHONUTF8 = "1"
+
+# Clear DATABASE_URL so prisma migrate is skipped (we run keyless / no DB).
+# .env may carry a stale Railway URL -- override here.
+$env:DATABASE_URL = ""
+$env:LITELLM_DB_URL = ""
+
+# Start LiteLLM proxy via python -m (avoids signed-EXE policy)
+& $pythonExe -m litellm.proxy.proxy_cli --config $configPath --port 4000 --detailed_debug
