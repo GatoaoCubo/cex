@@ -1,0 +1,35 @@
+kind: examples
+id: bld_examples_eval_metric
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of eval_metric artifacts
+quality: null
+title: Examples Eval Metric
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- eval_metric
+- builder
+- examples
+tldr: Golden and anti-examples of eval_metric artifacts
+domain: eval_metric construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "---\nmetric_name: \"BLEU Score\"\nvendor: \"Hugging Face\"\nversion: \"1.0.0\"\ndescription: \"Measures the\
+  \ quality of machine translation by comparing generated text to reference translations.\"\n---\nDefinition:  \nThe BLEU\
+  \ (Bilingual Evaluation Understudy) score evaluates generated text by computing precision at the n-gram level (typically\
+  \ 4-grams) and applying a brevity penalty for shorter outputs.  \n\nCalculation:  \n1. Compute precision for each n-gram\
+  \ (n=1 to 4).  \n2. Geometric mean of precision scores.  \n3. Apply brevity penalty if generated text is shorter than the\
+  \ reference.  \n\nUse Case:  \nAssessing machine translation models in multilingual NLP tasks.  \n\nExample:  \nGenerated:\
+  \ \"The cat is on the mat.\"  \nReference: \"The cat sits on the mat.\"  \nScore: 0.85 (high precision, minor brevity penalty).\
+  \  "
+anti_example_1_vague_metric_definition: "---\nmetric_name: \"Quality Check\"\nvendor: \"ExampleCorp\"\nversion: \"0.1\"\n\
+  description: \"Measures how good something is.\"\n---\nDefinition:  \n\"Quality Check\" evaluates outputs based on unspecified\
+  \ criteria.  \n\nCalculation:  \n\"Calculated using internal methods.\"  \n\nUse Case:  \n\"Used for everything.\"  "
+why_it_fails: Violates the boundary of being a single metric. Combines multiple metrics into a composite, making it unsuitable
+  for focused evaluation.
+anti_example_2_composite_metric: "---\nmetric_name: \"Overall Model Performance\"\nvendor: \"MLVendor\"\nversion: \"2.0\"\n\
+  description: \"Combines accuracy, F1, and BLEU into a single score.\"\n---\nDefinition:  \nWeighted average of accuracy\
+  \ (40%), F1 score (30%), and BLEU (30%).  \n\nCalculation:  \n(0.4  accuracy) + (0.3  F1) + (0.3 * BLEU).  \n\nUse Case:\
+  \  \n\"General-purpose model evaluation.\"  "
