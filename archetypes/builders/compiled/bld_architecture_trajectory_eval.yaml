@@ -1,0 +1,64 @@
+kind: architecture
+id: bld_architecture_trajectory_eval
+pillar: P08
+llm_function: CONSTRAIN
+purpose: Component map of trajectory_eval -- inventory, dependencies
+quality: null
+title: Architecture Trajectory Eval
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- trajectory_eval
+- builder
+- architecture
+tldr: Component map of trajectory_eval -- inventory, dependencies
+domain: trajectory_eval construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+component_inventory: '| ISO Name             | Role                          | Pillar | Status  |
+
+  |----------------------|-------------------------------|--------|---------|
+
+  | bld_manifest         | Defines builder structure     | P07    | Active  |
+
+  | bld_instruction      | Encodes operational logic     | P07    | Active  |
+
+  | bld_system_prompt    | Manages LLM interaction       | P07    | Active  |
+
+  | bld_schema           | Enforces data format rules    | P07    | Active  |
+
+  | bld_quality_gate     | Validates output compliance   | P07    | Active  |
+
+  | bld_output_template  | Structures final artifacts    | P07    | Active  |
+
+  | bld_examples         | Provides training samples     | P07    | Active  |
+
+  | bld_knowledge_card   | Embeds domain-specific facts  | P07    | Active  |
+
+  | bld_architecture     | Maintains builder blueprint   | P07    | Active  |
+
+  | bld_collaboration    | Coordinates multi-builder workflows | P07 | Active  |
+
+  | bld_config           | Stores runtime parameters     | P07    | Active  |
+
+  | bld_memory           | Tracks state across sessions  | P07    | Active  |
+
+  | bld_tools            | Integrates external utilities | P07    | Active  |'
+dependencies: '| From              | To                  | Type         |
+
+  |-------------------|---------------------|--------------|
+
+  | bld_manifest      | bld_schema          | Definition   |
+
+  | bld_instruction   | bld_system_prompt   | Execution    |
+
+  | bld_output_template | bld_quality_gate  | Validation   |
+
+  | bld_tools         | external LLMs       | Integration  |
+
+  | bld_memory        | bld_config          | State sync   |'
+architectural_position: trajectory_eval operates as the evaluation and feedback loop within CEX P07, ensuring builder ISOs
+  align with trajectory goals through schema validation, quality checks, and dynamic configuration. It bridges raw data processing
+  (P01) with strategic decision-making (P09) by maintaining consistent output standards and enabling iterative refinement
+  of builder logic.
