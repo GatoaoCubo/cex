@@ -5,65 +5,74 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for procedural_memory
 quality: null
-title: "Schema Procedural Memory"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+title: "Schema: procedural_memory"
+version: "2.0.0"
+author: n06_commercial
 tags: [procedural_memory, builder, schema]
-tldr: "Formal schema -- SINGLE SOURCE OF TRUTH for procedural_memory"
-domain: "procedural_memory construction"
+tldr: "Schema for LLM agent procedural memory artifacts: skill definitions, namespace, format, storage backend, verification strategy, tier matrix"
+domain: "LLM agent procedural memory"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.90
 ---
 
-## Frontmatter Fields  
-### Required  
-| Field     | Type   | Required | Default | Notes                          |  
-|-----------|--------|----------|---------|--------------------------------|  
-| id        | string | yes      | null    | Unique identifier              |  
-| kind      | string | yes      | null    | Must be "procedural_memory"    |  
-| pillar    | string | yes      | null    | Must be "P10"                  |  
-| title     | string | yes      | null    | Descriptive title              |  
-| version   | string | yes      | "1.0"   | Schema version                 |  
-| created   | date   | yes      | null    | ISO 8601 format                |  
-| updated   | date   | yes      | null    | ISO 8601 format                |  
-| author    | string | yes      | null    | Creator name                   |  
-| domain    | string | yes      | null    | Application domain             |  
-| quality   | null   | yes      | null    | Never self-score; peer review assigns |  
-| tags      | list   | yes      | []      | Keywords                       |  
-| tldr      | string | yes      | null    | Summary (max 256 chars)        |  
-| steps     | list   | yes      | []      | Ordered procedural steps       |  
-| conditions| list   | yes      | []      | Preconditions/trigger events   |  
+## Frontmatter Fields
 
-### Recommended  
-| Field       | Type   | Notes                  |  
-|-------------|--------|------------------------|  
-| outcome     | string | Expected result        |  
-| validation  | string | Verification method    |  
-| examples    | list   | Use-case illustrations |  
-| dependencies| list   | Required prerequisites |  
+### Required
 
-## ID Pattern  
-^p10_pm_[a-z][a-z0-9_]+.md$  
+| Field | Type | Required | Default | Notes |
+|---|---|---|---|---|
+| id | string | yes | null | Must match `^p10_pm_[a-z][a-z0-9_]+$` |
+| kind | string | yes | "procedural_memory" | Fixed value |
+| pillar | string | yes | "P10" | Fixed value |
+| title | string | yes | null | Descriptive name for the skill library/store |
+| version | string | yes | "1.0.0" | Semver |
+| created | string | yes | null | ISO 8601 date |
+| updated | string | yes | null | ISO 8601 date |
+| author | string | yes | null | Nucleus or person responsible |
+| domain | string | yes | null | Agent domain (e.g., "coding-assistant") |
+| quality | null | yes | null | Never self-score; peer review assigns |
+| tags | list | yes | [] | Keywords including skill domain and tier |
+| tldr | string | yes | null | One-sentence summary |
+| tier | string | yes | null | free, pro, enterprise |
+| skill_format | string | yes | null | code, yaml, natural_language, json, mixed |
+| skill_count | integer | no | null | Number of skills defined (0 for free tier) |
 
-## Body Structure  
-1. **Introduction**  
-   - Purpose and scope of the procedural memory.  
-2. **Steps**  
-   - Detailed, ordered sequence of actions.  
-3. **Conditions**  
-   - Triggers, inputs, or environmental requirements.  
-4. **Outcome**  
-   - Measurable result or state change.  
-5. **Validation**  
-   - Criteria for confirming correctness.  
-6. **Examples**  
-   - Real-world or hypothetical use cases.  
+### Recommended
 
-## Constraints  
-- Steps must be ordered and unambiguous.  
-- Conditions must be testable and specific.  
-- Outcome must align with domain goals.  
-- Validation must reference measurable metrics.  
-- File size must not exceed 4096 bytes.  
-- Tags must use lowercase alphanumeric and underscores.
+| Field | Type | Notes |
+|---|---|---|
+| verification | string | How skills are validated: test_case, unit_test, human_review, none |
+| namespace_pattern | string | Key hierarchy pattern (e.g., "domain.task.subtask") |
+| storage_backend | string | Backend: redis, postgresql, filesystem, in_memory |
+| reflexion_enabled | boolean | Whether Reflexion self-notes are stored alongside skills |
+
+## ID Pattern
+
+```
+^p10_pm_[a-z][a-z0-9_]+$
+```
+
+Example IDs:
+- `p10_pm_coding_assistant_pro`
+- `p10_pm_research_agent_enterprise`
+- `p10_pm_empty_free_tier`
+
+## Body Structure
+
+1. **Overview** -- agent type, tier, what skill domain is covered, reference system
+2. **Skill Definitions** -- table: Skill ID | Name | Format | Storage Key | Verification | Tier
+3. **Skill Namespace** -- hierarchy pattern, key examples, lookup method
+4. **Storage Backend** -- backend config, encoding, retrieval latency target
+5. **Verification Strategy** -- test-case gating, CI pipeline, human review, or none + why
+6. **Reflexion Notes** (optional) -- how failure self-notes are stored and retrieved
+7. **Commercial Tier Matrix** -- FREE/PRO/ENTERPRISE capability comparison
+
+## Constraints
+
+- `skill_format` must be one of: code, yaml, natural_language, json, mixed.
+- `tier: free` artifacts MUST have `skill_count: 0` and state "no procedural memory" in Overview.
+- `tier: enterprise` artifacts MUST include skill versioning, rollback, and access control.
+- Body MUST include Commercial Tier Matrix.
+- quality MUST be null (never self-assign a score).
+- No robotics or cognitive neuroscience terminology (motor schemas, basal ganglia, ACT-R).
