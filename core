@@ -4,12 +4,12 @@ kind: knowledge_card
 type: kind
 pillar: P04
 title: "Core — Deep Knowledge for core"
-version: 1.0.0
+version: 1.1.0
 created: 2026-04-02
 updated: 2026-04-02
 author: builder_knowledge
 domain: core
-quality: 9.0
+quality: 9.1
 tags: [core, p04, system, artifact]
 tldr: "Structured core framework with quality gates, phase analysis, and cross-framework mapping"
 when_to_use: "System refinement, quality assurance, or knowledge system enhancement"
@@ -147,3 +147,5 @@ consequences:
 
 ## Final Output
 The improved core document will meet 9.0+ quality standards with structured format, industry references, and practical examples. It will be ready for use in architecture decisions and documentation processes.
+```
+```
