@@ -26,7 +26,7 @@ density_score: 0.85
 6. Determine compute profile: FLOPs per forward pass, memory footprint, inference latency
 7. Check existing model_architecture artifacts via retriever -- avoid duplicating same family
 ## Phase 2: COMPOSE
-1. Read SCHEMA.md -- source of truth for all required fields
+1. Read bld_schema_model_architecture.md -- source of truth for all required fields
 2. Fill required frontmatter: id, kind, pillar, title, architecture_type, parameter_count, quality: null
 3. Write **Overview**: design goals, novelty vs prior work, target use cases
 4. Write **Layer Structure**: ordered table with layer type, count, hidden dim, activation

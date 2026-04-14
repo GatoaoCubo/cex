@@ -1,6 +1,6 @@
 ---
 id: p10_lr_model_architecture_builder
-kind: learning_record
+kind: memory
 pillar: P10
 version: 1.0.0
 quality: null
