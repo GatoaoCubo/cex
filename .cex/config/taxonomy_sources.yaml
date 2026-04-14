@@ -1,0 +1,317 @@
+# CEX Taxonomy Sources Configuration
+# Scout reads this file on every run.
+# Add new sources here; scout picks them up on next execution.
+# Schema: name, type, url, watch_paths, extract_patterns, cadence, priority
+
+version: "1.0"
+last_updated: "2026-04-14"
+
+# ============================================================
+# GITHUB REPOSITORIES
+# type: github
+# ============================================================
+github:
+
+  - name: google-a2a
+    type: github
+    url: https://github.com/google-a2a/A2A
+    watch_paths: [spec/, drafts/, docs/]
+    extract_patterns:
+      - "interface\\s+[A-Z][a-zA-Z]+"
+      - "type:\\s*[A-Z][a-zA-Z]+"
+      - "class\\s+[A-Z][a-zA-Z]+(Message|Protocol|Schema|Request|Response)"
+    cadence: weekly
+    priority: critical
+    tags: [a2a, agent-to-agent, protocol]
+
+  - name: mcp
+    type: github
+    url: https://github.com/modelcontextprotocol/modelcontextprotocol
+    watch_paths: [spec/, schema/, src/]
+    extract_patterns:
+      - "interface\\s+[A-Z][a-zA-Z]+"
+      - "\"\\$defs\":\\s*\\{"
+      - "components/schemas/[A-Z][a-zA-Z]+"
+    cadence: weekly
+    priority: critical
+    tags: [mcp, tool-use, context-protocol]
+
+  - name: opentelemetry-semconv
+    type: github
+    url: https://github.com/open-telemetry/semantic-conventions
+    watch_paths: [model/, docs/]
+    extract_patterns:
+      - "attribute_group:\\s*[a-z_.]+"
+      - "metric:\\s*[a-z_.]+"
+    cadence: weekly
+    priority: high
+    tags: [observability, tracing, telemetry]
+
+  - name: w3c-vc
+    type: github
+    url: https://github.com/w3c/verifiable-credentials
+    watch_paths: [drafts/, spec/]
+    extract_patterns:
+      - "\"type\":\\s*\"[A-Z][a-zA-Z]+(Credential|Presentation|Proof)\""
+      - "interface\\s+[A-Z][a-zA-Z]+"
+    cadence: biweekly
+    priority: high
+    tags: [identity, credentials, w3c]
+
+  - name: w3c-did
+    type: github
+    url: https://github.com/w3c/did-core
+    watch_paths: [spec/]
+    extract_patterns:
+      - "\"[a-z]+\":\\s*\\{\"type\":"
+    cadence: monthly
+    priority: medium
+    tags: [identity, did, w3c]
+
+  - name: sigstore
+    type: github
+    url: https://github.com/sigstore/sigstore
+    watch_paths: [docs/, spec/]
+    extract_patterns:
+      - "message\\s+[A-Z][a-zA-Z]+"
+      - "type\\s+[A-Z][a-zA-Z]+\\s+struct"
+    cadence: monthly
+    priority: medium
+    tags: [signing, provenance, supply-chain]
+
+  - name: c2pa
+    type: github
+    url: https://github.com/c2pa-org/c2pa-spec
+    watch_paths: [docs/]
+    extract_patterns:
+      - "\"[A-Z][a-zA-Z]+\":\\s*\\{"
+      - "assertion\\s+type"
+    cadence: monthly
+    priority: medium
+    tags: [provenance, content-authenticity, c2pa]
+
+  - name: anthropic-sdk
+    type: github
+    url: https://github.com/anthropic/anthropic-sdk-python
+    watch_paths: [src/anthropic/types/, docs/]
+    extract_patterns:
+      - "class\\s+[A-Z][a-zA-Z]+(Param|Response|Message|Block)"
+      - "TypedDict"
+    cadence: weekly
+    priority: critical
+    tags: [anthropic, claude, sdk]
+
+  - name: openai-agents
+    type: github
+    url: https://github.com/openai/openai-agents-python
+    watch_paths: [docs/, src/agents/]
+    extract_patterns:
+      - "class\\s+[A-Z][a-zA-Z]+(Agent|Tool|Runner|Hook)"
+      - "@dataclass"
+    cadence: weekly
+    priority: high
+    tags: [openai, agents, sdk]
+
+  - name: autogen
+    type: github
+    url: https://github.com/microsoft/autogen
+    watch_paths: [docs/, python/packages/autogen-core/src/]
+    extract_patterns:
+      - "class\\s+[A-Z][a-zA-Z]+(Agent|Message|Protocol|Runtime)"
+      - "Protocol\\):"
+    cadence: weekly
+    priority: high
+    tags: [multi-agent, microsoft, autogen]
+
+  - name: crew-ai
+    type: github
+    url: https://github.com/crewAIInc/crewAI
+    watch_paths: [docs/]
+    extract_patterns:
+      - "class\\s+[A-Z][a-zA-Z]+(Task|Crew|Agent|Tool|Flow)"
+    cadence: biweekly
+    priority: medium
+    tags: [multi-agent, crew, workflow]
+
+  - name: smolagents
+    type: github
+    url: https://github.com/huggingface/smolagents
+    watch_paths: [docs/, src/smolagents/]
+    extract_patterns:
+      - "class\\s+[A-Z][a-zA-Z]+(Agent|Tool|Memory|Step)"
+    cadence: weekly
+    priority: medium
+    tags: [huggingface, agents, lightweight]
+
+  - name: dspy
+    type: github
+    url: https://github.com/stanfordnlp/dspy
+    watch_paths: [docs/, dspy/]
+    extract_patterns:
+      - "class\\s+[A-Z][a-zA-Z]+(Module|Program|Optimizer|Signature)"
+    cadence: biweekly
+    priority: medium
+    tags: [programming, optimization, dspy]
+
+  - name: llamaindex
+    type: github
+    url: https://github.com/run-llama/llama_index
+    watch_paths: [docs/module_guides/, llama-index-core/]
+    extract_patterns:
+      - "class\\s+[A-Z][a-zA-Z]+(Index|Retriever|Query|Node|Pack)"
+    cadence: biweekly
+    priority: medium
+    tags: [rag, indexing, llamaindex]
+
+  - name: openapi-spec
+    type: github
+    url: https://github.com/OAI/OpenAPI-Specification
+    watch_paths: [versions/]
+    extract_patterns:
+      - "^### [A-Z][a-zA-Z]+ Object"
+      - "^#### [A-Z][a-zA-Z]+ Object"
+    cadence: monthly
+    priority: high
+    tags: [api, schema, openapi]
+
+  - name: json-schema
+    type: github
+    url: https://github.com/json-schema-org/json-schema-spec
+    watch_paths: [drafts/]
+    extract_patterns:
+      - "\"\\$vocabulary\":"
+      - "keyword:\\s*[a-zA-Z]+"
+    cadence: monthly
+    priority: high
+    tags: [schema, json, validation]
+
+  - name: lf-ai-data
+    type: github
+    url: https://github.com/lfai/lfai-landscape
+    watch_paths: [landscape.yml]
+    extract_patterns:
+      - "name:\\s*[A-Za-z][a-zA-Z ]+"
+      - "category:\\s*[A-Za-z]"
+    cadence: monthly
+    priority: medium
+    tags: [landscape, open-source, linux-foundation]
+
+# ============================================================
+# ARXIV FEEDS
+# type: arxiv
+# ============================================================
+arxiv:
+
+  - name: arxiv-cs-ai
+    type: arxiv
+    categories: [cs.AI, cs.MA, cs.CL]
+    keywords:
+      required_any: [protocol, schema, interoperability, agent-to-agent, multi-agent, standard]
+      boost: [novel, propose, framework, specification, benchmark]
+    since_days: 7
+    cadence: weekly
+    priority: high
+    tags: [research, papers, ai]
+
+  - name: arxiv-cs-systems
+    type: arxiv
+    categories: [cs.DC, cs.SE, cs.NI]
+    keywords:
+      required_any: [agent, LLM, protocol, schema, AI system]
+      boost: [open-source, deployed, production]
+    since_days: 7
+    cadence: weekly
+    priority: medium
+    tags: [research, systems, distributed]
+
+  - name: arxiv-neurips-systems
+    type: arxiv
+    categories: [cs.AI, cs.LG]
+    keywords:
+      required_any: [system, infrastructure, framework, pipeline]
+      boost: [NeurIPS, ICML, ICLR, deployed, production, open-source]
+    since_days: 14
+    cadence: biweekly
+    priority: medium
+    tags: [conference, systems, ml]
+
+# ============================================================
+# STANDARDS BODIES
+# type: ietf | w3c | iso | ieee | nist
+# ============================================================
+standards:
+
+  - name: ietf-ai-drafts
+    type: ietf
+    url: https://datatracker.ietf.org/wg/
+    watch_groups: [httpapi, webtrans, oauth, scitt, rats]
+    keywords: [AI, agent, LLM, protocol, schema]
+    cadence: monthly
+    priority: medium
+    tags: [ietf, standards, rfc]
+
+  - name: w3c-charters
+    type: w3c
+    url: https://w3.org/groups/
+    watch_groups: [webmachinelearning, json-ld, dcat, webnn, solid]
+    cadence: monthly
+    priority: medium
+    tags: [w3c, standards, web]
+
+  - name: iso-sc42
+    type: iso
+    url: https://iso.org/committee/6794475
+    keywords: [AI, machine learning, trustworthy, interoperability]
+    cadence: quarterly
+    priority: medium
+    tags: [iso, standards, ai]
+
+  - name: ieee-sa-ai
+    type: ieee
+    url: https://standards.ieee.org/ieee/
+    watch_projects: [P3119, P2933, P2863, P3084, P3154]
+    cadence: monthly
+    priority: medium
+    tags: [ieee, standards, ai]
+
+  - name: nist-ai
+    type: nist
+    url: https://csrc.nist.gov/projects/ai
+    keywords: [AI RMF, profile, framework, trustworthy]
+    cadence: monthly
+    priority: medium
+    tags: [nist, framework, risk]
+
+# ============================================================
+# COMMUNITY SIGNALS
+# type: hackernews | producthunt | github_trending
+# ============================================================
+community:
+
+  - name: hackernews-show-hn
+    type: hackernews
+    query: "(agent OR protocol OR schema OR MCP OR A2A) AND (AI OR LLM)"
+    min_points: 100
+    post_type: Show HN
+    cadence: daily
+    priority: medium
+    tags: [community, emerging, hackernews]
+
+  - name: producthunt-ai-tools
+    type: producthunt
+    categories: [Artificial Intelligence, Developer Tools]
+    keywords: [agent, protocol, API, schema, MCP, SDK]
+    min_upvotes: 200
+    cadence: weekly
+    priority: low
+    tags: [community, products, producthunt]
+
+  - name: github-trending-agents
+    type: github_trending
+    query_terms: [agent, mcp-, a2a-, protocol]
+    languages: [Python, TypeScript, Go]
+    since: weekly
+    min_stars_week: 50
+    cadence: weekly
+    priority: medium
+    tags: [community, trending, github]
