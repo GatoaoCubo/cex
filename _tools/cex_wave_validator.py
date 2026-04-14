@@ -395,13 +395,33 @@ def check_system_prompt_llm_function(fm: dict, iso: str) -> list[str]:
 
 
 def check_schema_quality_null(fm: dict) -> list[str]:
-    """C2: quality must be null (awaiting peer review, never self-scored)."""
+    """C2: quality must be null (unscored) OR a numeric peer-review score.
+
+    The authoring rule is 'quality: null' -- the author never self-scores.
+    Peer review (cex_score.py, AUTO cycles) then writes a numeric value.
+    So both states are valid at rest:
+      - null:           awaiting peer review (fresh artifact)
+      - float in 5..10: peer-reviewed
+
+    Real defects caught here:
+      - 'quality' field missing entirely
+      - non-numeric string ('high', 'good')
+      - out-of-range numeric (<5 or >10)
+    """
     if "quality" not in fm:
         return ["quality field missing from frontmatter"]
     q = fm["quality"]
     if q is None:
         return []
-    return [f"quality is '{q}' (expected null -- never self-score)"]
+    if isinstance(q, (int, float)):
+        try:
+            f = float(q)
+        except (TypeError, ValueError):
+            return [f"quality '{q}' is not null and not numeric"]
+        if 5.0 <= f <= 10.0:
+            return []
+        return [f"quality {f} is out of valid range [5.0, 10.0]"]
+    return [f"quality '{q}' is not null and not numeric"]
 
 
 def check_h02_id_pattern(fm: dict, kind: str, schema_pattern: str | None) -> list[str]:
