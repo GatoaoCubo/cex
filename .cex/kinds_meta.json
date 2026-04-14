@@ -1664,5 +1664,167 @@
     "naming": "p12_wp_{{primitive}}.yaml",
     "pillar": "P12",
     "sdk_module": "cex_sdk.workflow"
+  },
+  "ab_test_config": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_abt_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "A/B test experiment configuration for conversion optimization",
+    "boundary": "A/B test spec. NOT feature_flag (toggle) nor experiment_config (ML training)."
+  },
+  "course_module": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_cm_{{name}}.md",
+    "max_bytes": 8192,
+    "core": false,
+    "description": "Online course module with learning objectives and assessments",
+    "boundary": "Course content module. NOT a prompt_template nor knowledge_card."
+  },
+  "subscription_tier": {
+    "pillar": "P11",
+    "llm_function": "CONSTRAIN",
+    "naming": "p11_st_{{name}}.yaml",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "SaaS subscription tier definition with pricing and feature matrix",
+    "boundary": "Pricing tier. NOT content_monetization (strategy) nor pricing_page (UI)."
+  },
+  "user_journey": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_uj_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "End-to-end user journey map from awareness to conversion",
+    "boundary": "Journey map. NOT workflow (system) nor onboarding_flow (activation sub-journey)."
+  },
+  "compliance_checklist": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_cc_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Compliance checklist for SOC2, GDPR, HIPAA, EU AI Act audits",
+    "boundary": "Audit checklist. NOT guardrail (runtime) nor safety_policy (behavior)."
+  },
+  "usage_report": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_ur_{{name}}.yaml",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "Usage analytics report spec for billing and CFO dashboards",
+    "boundary": "Usage analytics spec. NOT cost_budget (limits) nor trace_config (telemetry)."
+  },
+  "rbac_policy": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_rbac_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Role-based access control policy for multi-tenant isolation",
+    "boundary": "RBAC spec. NOT permission (capability) nor sso_config (identity)."
+  },
+  "audit_log": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_al_{{name}}.yaml",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "Immutable audit log configuration for SOC2 Type II compliance",
+    "boundary": "Audit log spec. NOT trace_config (observability) nor regression_check (quality)."
+  },
+  "onboarding_flow": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_of_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "User onboarding flow with activation milestones and aha-moment design",
+    "boundary": "Activation flow. NOT user_journey (full path) nor workflow (system execution)."
+  },
+  "pricing_page": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_pp_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Pricing page artifact with tier comparison and conversion copy",
+    "boundary": "Pricing page UI. NOT subscription_tier (data) nor landing_page (top-of-funnel)."
+  },
+  "cohort_analysis": {
+    "pillar": "P07",
+    "llm_function": "GOVERN",
+    "naming": "p07_ca_{{name}}.yaml",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "Cohort analysis spec for retention measurement and LTV modeling",
+    "boundary": "Cohort analytics. NOT benchmark (model eval) nor usage_report (billing)."
+  },
+  "referral_program": {
+    "pillar": "P11",
+    "llm_function": "CONSTRAIN",
+    "naming": "p11_rp_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Referral program design with viral coefficient and reward structure",
+    "boundary": "Referral spec. NOT ab_test_config (experiment) nor content_monetization (pricing)."
+  },
+  "enterprise_sla": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_sla_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Enterprise SLA template with uptime, latency, support commitments",
+    "boundary": "SLA contract. NOT quality_gate (runtime) nor compliance_checklist (audit)."
+  },
+  "data_residency": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_dr_{{name}}.yaml",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "Data residency configuration for GDPR and regional compliance",
+    "boundary": "Residency spec. NOT secret_config (credentials) nor rbac_policy (access)."
+  },
+  "sso_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_sso_{{name}}.yaml",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "SSO/SAML/OIDC identity provider integration configuration",
+    "boundary": "SSO spec. NOT rbac_policy (authorization) nor secret_config (credentials)."
+  },
+  "white_label_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_wl_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "White-label/reseller configuration for branded deployments",
+    "boundary": "White-label spec. NOT brand_config (identity) nor env_config (runtime)."
+  },
+  "usage_quota": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_uq_{{name}}.yaml",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "Usage quota and fair-use enforcement configuration",
+    "boundary": "Quota spec. NOT rate_limit_config (RPM) nor cost_budget (dollars)."
+  },
+  "customer_segment": {
+    "pillar": "P02",
+    "llm_function": "CONSTRAIN",
+    "naming": "p02_cs_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Customer segment/ICP definition artifact with firmographics and needs",
+    "boundary": "ICP artifact. NOT user_journey (path) nor persona (not-a-kind)."
   }
 }
