@@ -1,0 +1,41 @@
+kind: instruction
+id: bld_instruction_usage_report
+pillar: P03
+llm_function: REASON
+purpose: Step-by-step production process for usage_report
+quality: null
+title: Instruction Usage Report
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- usage_report
+- builder
+- instruction
+tldr: Step-by-step production process for usage_report
+domain: usage_report construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+phase_1_research:
+- Identify stakeholders (billing, CFO, product teams) for requirement alignment.
+- Map data sources (e.g., API logs, database queries, usage events).
+- 'Define key metrics: active users, API calls, storage consumption, cost per feature.'
+- Audit existing reports to avoid duplication and ensure gaps are filled.
+- Document compliance requirements (data privacy, retention policies).
+- 'Create a preliminary report outline with sections: summary, trends, anomalies.'
+phase_2_compose:
+- 'Set up environment with tools: Python (pandas), SQL, and report generation libraries.'
+- 'Reference SCHEMA.md to define fields: `report_id`, `metric`, `value`, `timestamp`.'
+- Use OUTPUT_TEMPLATE.md to structure tables, charts, and narrative sections.
+- Aggregate data from sources, ensuring timestamps are normalized (UTC).
+- 'Apply schema validation rules (e.g., `metric` must be in enum: "storage", "API").'
+- Generate visualizations (bar charts for monthly trends, heatmaps for anomalies).
+- 'Write narrative analysis: highlight cost drivers, usage spikes, seasonal patterns.'
+- 'Embed metadata: author, report version, data source versions.'
+- Export artifact as PDF and CSV, adhering to OUTPUT_TEMPLATE.md formatting.
+phase_3_validate:
+- '[ ] Cross-check aggregated data against source systems (SQL queries, logs).'
+- '[ ] Ensure schema compliance using JSON schema validator (refer to SCHEMA.md).'
+- '[ ] Verify visualizations match data (e.g., bar chart axes, color coding).'
+- '[ ] Confirm all required fields in OUTPUT_TEMPLATE.md are populated.'
+- '[ ] Obtain stakeholder sign-off on accuracy and completeness.'

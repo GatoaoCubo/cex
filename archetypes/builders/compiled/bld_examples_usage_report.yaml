@@ -1,0 +1,27 @@
+kind: examples
+id: bld_examples_usage_report
+pillar: P07
+llm_function: GOVERN
+purpose: Golden and anti-examples of usage_report artifacts
+quality: null
+title: Examples Usage Report
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- usage_report
+- builder
+- examples
+tldr: Golden and anti-examples of usage_report artifacts
+domain: usage_report construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+golden_example: "kind: usage_report\nname: monthly_usage_202310\nspec:\n  provider: aws\n  service: bedrock\n  model: Claude-3\n\
+  \  period: 2023-10\nusage:\n  total_invocations: 15234\n  input_tokens: 4567890\n  output_tokens: 1234567\n  cost_usd: 1234.56\n\
+  \  peak_hour: \"14:30\"\n  user_ids: [\"user123\", \"user456\"]\ntimestamp: \"2023-11-01T08:00:00Z\""
+anti_example_1_missing_required_fields: "kind: usage_report\nname: monthly_usage_202310\nusage:\n  total_invocations: 15234"
+why_it_fails: Mixes usage analytics with cost_budget spec data. The budget_limit field belongs to a different CEX kind and
+  introduces scope contamination.
+anti_example_2_including_budget_data: "kind: usage_report\nname: monthly_usage_202310\nspec:\n  provider: google\n  service:\
+  \ aiplatform\n  model: PaLM-2\n  period: 2023-10\nusage:\n  total_invocations: 15234\n  budget_limit: 2000\n  actual_cost:\
+  \ 1234.56"
