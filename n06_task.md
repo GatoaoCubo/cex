@@ -1,4 +1,4 @@
-Create: P01_knowledge/library/kind/kc_referral_program.md
-KC about referral_program. Description: Referral program design with viral coefficient and reward structure
-YAML: id: kc_referral_program, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
+Create: P01_knowledge/library/kind/kc_audit_log.md
+KC about audit_log. Description: Immutable audit log configuration for SOC2 Type II compliance
+YAML: id: kc_audit_log, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
 English only. Under 80 lines.
