@@ -1,29 +1,46 @@
 ---
-id: kc_fhir_agent_capability
+id: kc_role_assignment
 kind: knowledge_card
-title: HL7 FHIR R5 AI Agent Capability Declaration
+title: Role Assignment in CEX Agents
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-A declaração de capacidade do agente AI HL7 FHIR R5 define padrões claros para agentes de IA que trabalham com sistemas de saúde via SMART on FHIR. Ela abrange:
+Role assignment in CEX agents follows CrewAI-style binding patterns with these core elements:
 
-1. **Escopos SMART on FHIR** - Permissões de acesso para leitura e escrita de recursos FHIR (ex: Paciente, Observação)
-2. **Tratamento de PHI** - Criptografia obrigatória de informações de saúde protegidas (PHI) em trânsito e em repouso
-3. **CDS Hooks** - Integração com sistemas que fornecem recomendações clínicas baseadas em evidências
-4. **Transparência da IA** - Requisitos para documentar origem dos modelos de IA, mitigação de viés e explicabilidade das decisões
+1. **Role Definition**  
+   - Unique identifier (e.g., "n03-builder")
+   - Functional purpose (e.g., "artifact creation")
+   - Technical constraints (e.g., "opus-4-6 model")
 
-Essa declaração garante:
-- Conformidade com leis de proteção de dados como HIPAA e GDPR
-- Compatibilidade entre diferentes sistemas de registros eletrônicos de saúde (EHR)
-- Rastreamento de decisões feitas por IA no setor de saúde
-- Controle de acesso seguro a dados sensíveis de pacientes
+2. **Agent Configuration**  
+   - Model parameters (temperature, max_tokens)
+   - Context window size
+   - Memory type (short/long term)
+   - Permission levels (control_request types)
 
-Componentes-chave incluem:
-- Afirmações de capacidade em CapabilityStatement do FHIR
-- Contexto de segurança para acesso a dados
-- Garantias de compatibilidade de APIs versão por versão
-- Documentação detalhada sobre modelos de IA utilizados
+3. **Responsibilities**  
+   - Task execution boundaries
+   - Error handling protocols
+   - Quality thresholds (e.g., 8.0+ score)
+   - Token budget allocation
 
-Essa declaração permite a integração segura de IA no setor de saúde, mantendo a confidencialidade dos dados dos pacientes e seguindo regulamentações.
+4. **Delegation Rules**  
+   - Task routing logic (e.g., N01→N03 for analysis→creation)
+   - Priority queues (high/medium/low)
+   - Parallel processing limits
+   - Chain-of-thought requirements
+
+5. **Backstory Context**  
+   - Historical task performance
+   - Previous decision patterns
+   - Brand alignment metrics
+   - Taxonomy audit scores
+
+This binding ensures autonomous operation while maintaining governance through:
+- 8F pipeline compliance
+- GDP protocol checks
+- Quality gate enforcement
+- Memory decay management
+- Taxonomy consistency
