@@ -249,7 +249,9 @@ function Launch-Nucleus($handoff) {
             if ($hwnd -ne [IntPtr]::Zero) { break }
         }
         if ($hwnd -ne [IntPtr]::Zero) {
-            [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
+            # bRepaint=$false: avoid forced WM_PAINT after Claude TUI has started
+            # rendering into alt-screen-buffer (caused visual overlap / bleed).
+            [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $false) | Out-Null
         } else {
             Write-Output "[$upper] WARN: no window handle after 5s -- window not positioned"
         }

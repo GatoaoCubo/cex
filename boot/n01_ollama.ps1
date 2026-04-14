@@ -46,29 +46,6 @@ function Set-CexTitle($status) {
 
 Set-CexTitle "BOOTING"
 
-try {
-    $Host.UI.RawUI.BackgroundColor = "DarkGreen"
-    $Host.UI.RawUI.ForegroundColor = "White"
-    if (-not $env:CEX_GRID) {
-        $bufSize = $Host.UI.RawUI.BufferSize
-        $bufSize.Width = 160; $bufSize.Height = 9999
-        $Host.UI.RawUI.BufferSize = $bufSize
-        $winSize = $Host.UI.RawUI.WindowSize
-        $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
-        $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
-        $Host.UI.RawUI.WindowSize = $winSize
-    }
-    Clear-Host
-} catch {}
-
-Write-Host ""
-Write-Host "  [*] N01 Analytical Envy - OLLAMA MODE" -ForegroundColor Green
-Write-Host "  ==================================================" -ForegroundColor DarkGray
-Write-Host "  What does the competitor do better- How do we surpass them-" -ForegroundColor DarkGray
-Write-Host "  $modelShort  |  direct API  |  LOCAL inference" -ForegroundColor DarkGray
-if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor Green }
-Write-Host ""
-
 # --- Environment ---
 $env:CEX_NUCLEUS = "N01"
 $env:CEX_ROOT = $cexRoot

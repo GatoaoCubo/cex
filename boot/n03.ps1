@@ -44,30 +44,6 @@ function Set-CexTitle($status) {
 
 Set-CexTitle "BOOTING"
 
-try {
-    $Host.UI.RawUI.BackgroundColor = "DarkBlue"
-    $Host.UI.RawUI.ForegroundColor = "White"
-    if (-not $env:CEX_GRID) {
-        # Solo mode: set buffer + window size. Grid mode: spawn_grid controls sizing.
-        $bufSize = $Host.UI.RawUI.BufferSize
-        $bufSize.Width = 160; $bufSize.Height = 9999
-        $Host.UI.RawUI.BufferSize = $bufSize
-        $winSize = $Host.UI.RawUI.WindowSize
-        $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
-        $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
-        $Host.UI.RawUI.WindowSize = $winSize
-    }
-    Clear-Host
-} catch {}
-
-Write-Host ""
-Write-Host "  [*] N03 Inventive Pride - Inventive Pride" -ForegroundColor Blue
-Write-Host "  ==================================================" -ForegroundColor DarkGray
-Write-Host "  Is this WORTHY of my signature-" -ForegroundColor DarkGray
-Write-Host "  claude-opus-4-6  |  1000K context  |  8F pipeline" -ForegroundColor DarkGray
-if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor Blue }
-Write-Host ""
-
 # --- Environment ---
 $env:CLAUDECODE = ""
 $env:CEX_NUCLEUS = "N03"

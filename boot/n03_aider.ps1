@@ -44,19 +44,6 @@ $existingFiles = $contextFiles | Where-Object { Test-Path (Join-Path $CEX_ROOT $
 $fileArgs = ($existingFiles | ForEach-Object { "--file `"$_`"" }) -join " "
 
 # --- Launch aider ---
-Write-Host ""
-Write-Host "  ============================================" -ForegroundColor Cyan
-Write-Host "  N03 Engineering -- Aider + Ollama qwen3:14b" -ForegroundColor Cyan
-Write-Host "  Model: FREE (local GPU, RTX 5070 Ti)" -ForegroundColor Green
-Write-Host "  Context files: $($existingFiles.Count)" -ForegroundColor Gray
-Write-Host "  ============================================" -ForegroundColor Cyan
-Write-Host ""
-
-$aiderCmd = "aider --model ollama_chat/qwen3:14b --no-auto-commits $fileArgs --message `"$($task -replace '"','\"')`""
-
-Write-Host "[CMD] $aiderCmd" -ForegroundColor DarkGray
-Write-Host ""
-
 # Set Ollama API base
 $env:OLLAMA_API_BASE = "http://localhost:11434"
 

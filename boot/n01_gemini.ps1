@@ -27,28 +27,6 @@ function Set-CexTitle($status) {
 
 Set-CexTitle "BOOTING"
 
-try {
-    $Host.UI.RawUI.BackgroundColor = "DarkBlue"
-    $Host.UI.RawUI.ForegroundColor = "White"
-    if (-not $env:CEX_GRID) {
-        $bufSize = $Host.UI.RawUI.BufferSize
-        $bufSize.Width = 160; $bufSize.Height = 9999
-        $Host.UI.RawUI.BufferSize = $bufSize
-        $winSize = $Host.UI.RawUI.WindowSize
-        $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
-        $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
-        $Host.UI.RawUI.WindowSize = $winSize
-    }
-    Clear-Host
-} catch {}
-
-Write-Host ""
-Write-Host "  [*] N01 RESEARCH via GEMINI" -ForegroundColor Cyan
-Write-Host "  ==================================================" -ForegroundColor DarkGray
-Write-Host "  gemini-2.5-pro  |  8F pipeline  |  handoff: ${nucleus}_task_gemini.md" -ForegroundColor DarkGray
-if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor Cyan }
-Write-Host ""
-
 $env:CEX_NUCLEUS = "N01"
 $env:CEX_ROOT = $cexRoot
 $env:CEX_CLI = "gemini"

@@ -44,30 +44,6 @@ function Set-CexTitle($status) {
 
 Set-CexTitle "BOOTING"
 
-try {
-    $Host.UI.RawUI.BackgroundColor = "DarkYellow"
-    $Host.UI.RawUI.ForegroundColor = "Black"
-    if (-not $env:CEX_GRID) {
-        # Solo mode: set buffer + window size. Grid mode: spawn_grid controls sizing.
-        $bufSize = $Host.UI.RawUI.BufferSize
-        $bufSize.Width = 160; $bufSize.Height = 9999
-        $Host.UI.RawUI.BufferSize = $bufSize
-        $winSize = $Host.UI.RawUI.WindowSize
-        $winSize.Width = [Math]::Min(160, $Host.UI.RawUI.MaxWindowSize.Width)
-        $winSize.Height = [Math]::Min(40, $Host.UI.RawUI.MaxWindowSize.Height)
-        $Host.UI.RawUI.WindowSize = $winSize
-    }
-    Clear-Host
-} catch {}
-
-Write-Host ""
-Write-Host "  $ N06 Strategic Greed - Strategic Greed" -ForegroundColor Yellow
-Write-Host "  ==================================================" -ForegroundColor DarkGray
-Write-Host "  What does each decision EARN-" -ForegroundColor DarkGray
-Write-Host "  claude-sonnet-4-6  |  200K context  |  8F pipeline" -ForegroundColor DarkGray
-if ($mission) { Write-Host "  Mission: $mission" -ForegroundColor Yellow }
-Write-Host ""
-
 # --- Environment ---
 $env:CLAUDECODE = ""
 $env:CEX_NUCLEUS = "N06"
