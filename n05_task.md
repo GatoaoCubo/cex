@@ -1,4 +1,4 @@
-Create: P01_knowledge/library/kind/kc_capability_registry.md
-KC about capability_registry. Description: Searchable catalog of all agents available to crews. Indexes 252 builder sub-agents, nucleus domain agents, and nucleus cards. Fields: capability_name, provider_agent, input/output schemas, cost, quality_baseline, availability. Enables ranked candidate discovery for crew orchestration.
-YAML: id: kc_capability_registry, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
+Create: P01_knowledge/library/kind/kc_agent_name_service_record.md
+KC about agent_name_service_record. Description: IETF ANS + CNCF AgentDNS registry record for agent discovery: name, endpoint, PKI cert, protocol adapters
+YAML: id: kc_agent_name_service_record, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
 English only. Under 80 lines.
