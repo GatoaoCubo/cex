@@ -1222,7 +1222,15 @@ Examples:
   python cex_crew_runner.py --plan /tmp/plan.json --output-dir /tmp/crew/
         """,
     )
-    parser.add_argument("--plan", required=True, help="Path to Motor 8F plan JSON")
+    parser.add_argument("--plan", help="Path to Motor 8F plan JSON")
+    parser.add_argument(
+        "--crew",
+        help="Path to crew_template.md (alternative to --plan; parses roles into plan dict)",
+    )
+    parser.add_argument(
+        "--charter",
+        help="Optional team_charter.md path -- merged as mission/deliverables into the plan",
+    )
     parser.add_argument("--output-dir", help="Output directory for prompts/outputs")
     parser.add_argument("--step", type=int, help="Execute only this step (by position 1-8)")
     parser.add_argument(
@@ -1237,14 +1245,31 @@ Examples:
 
     args = parser.parse_args()
 
-    # Load plan
-    plan_path = Path(args.plan)
-    if not plan_path.exists():
-        print(f"ERROR: Plan file not found: {plan_path}", file=sys.stderr)
+    # Load plan (either from JSON or by compiling a crew_template.md)
+    if not args.plan and not args.crew:
+        print("ERROR: provide --plan <json> OR --crew <crew_template.md>", file=sys.stderr)
         sys.exit(1)
 
-    with open(plan_path, "r", encoding="utf-8") as f:
-        plan = json.load(f)
+    if args.crew:
+        crew_path = Path(args.crew)
+        if not crew_path.exists():
+            print(f"ERROR: crew_template not found: {crew_path}", file=sys.stderr)
+            sys.exit(1)
+        charter_path = Path(args.charter) if args.charter else None
+        plan = CrewRunner.load_from_crew_template(crew_path, charter_path=charter_path)
+        print(
+            f"[CREW] loaded {crew_path.name}: "
+            f"process={plan['crew_meta']['process']}, "
+            f"roles={len(plan['crew_meta']['roles'])}, "
+            f"active_builders={plan['total_builders']}"
+        )
+    else:
+        plan_path = Path(args.plan)
+        if not plan_path.exists():
+            print(f"ERROR: Plan file not found: {plan_path}", file=sys.stderr)
+            sys.exit(1)
+        with open(plan_path, "r", encoding="utf-8") as f:
+            plan = json.load(f)
 
     # Validate plan has expected structure
     if "functions" not in plan:
