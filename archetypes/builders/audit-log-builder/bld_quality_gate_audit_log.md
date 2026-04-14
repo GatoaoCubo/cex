@@ -25,7 +25,7 @@ density_score: 0.85
 | ID | Check | Fail Condition |  
 |---|---|---|  
 | H01 | YAML frontmatter valid | Missing or invalid frontmatter |  
-| H02 | ID matches pattern ^p11_al_[a-z][a-z0-9_]+.yaml$ | ID format invalid |  
+| H02 | ID matches pattern ^p11_al_[a-z][a-z0-9_]+.md$ | ID format invalid |  
 | H03 | kind field matches 'audit_log' | kind field incorrect |  
 | H04 | Required field 'timestamp' exists | Missing 'timestamp' |  
 | H05 | Required field 'actor' exists | Missing 'actor' |  

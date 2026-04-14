@@ -42,7 +42,7 @@ density_score: 0.85
 | impacted_user | string | User affected by the event     |  
 
 ## ID Pattern  
-^p11_al_[a-z][a-z0-9_]+.yaml$  
+^p11_al_[a-z][a-z0-9_]+.md$  
 
 ## Body Structure  
 1. **Audit Trail**  
@@ -56,7 +56,7 @@ density_score: 0.85
 
 ## Constraints  
 - Max file size: 3072 bytes.  
-- ID must match `^p11_al_[a-z][a-z0-9_]+.yaml$`.  
+- ID must match `^p11_al_[a-z][a-z0-9_]+.md$`.  
 - `event_type` and `log_level` must be predefined enums.  
 - `created` and `updated` must be valid ISO 8601 timestamps.  
 - `version` must follow semantic versioning (e.g., 1.2.3).

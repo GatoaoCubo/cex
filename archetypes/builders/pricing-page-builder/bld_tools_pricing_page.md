@@ -19,22 +19,18 @@ density_score: 0.85
 ## Production Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| cex_compile.py | Compiles pricing data into structured formats | During page build |  
-| cex_score.py | Scores pricing plans for competitiveness | Pre-launch analysis |  
-| cex_retriever.py | Fetches external pricing benchmarks | Research phase |  
-| cex_doctor.py | Diagnoses pricing inconsistencies | Post-edit validation |  
-| cex_optimizer.py | Automates tiered pricing adjustments | Iterative refinement |  
-| cex_validator.py | Ensures compliance with legal/contractual rules | Final review |  
+| cex_compile.py | Compile artifact after save | F8 COLLABORATE |  
+| cex_score.py | Score artifact against 5D rubric | F7 GOVERN |  
+| cex_retriever.py | Fetch similar pricing_page artifacts for Template-First | F3 INJECT |  
+| cex_doctor.py | Validate builder health and ISO completeness | Post-edit check |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
 |------|---------|------|  
-| price_validator.py | Checks for arithmetic errors in pricing tables | Real-time editing |  
-| plan_comparator.py | Highlights overlaps between pricing tiers | Pre-launch |  
-| currency_converter.py | Normalizes prices across currencies | Global deployment |  
-| compliance_checker.py | Verifies adherence to regional regulations | Legal review |  
+| cex_wave_validator.py | Validate builder ISO set (13-file check, frontmatter gates) | Pre-commit |  
+| cex_hygiene.py | Artifact CRUD rules, naming pattern enforcement | Post-save |  
 
 ## External References  
-- Stripe Pricing API (payment integration)  
-- Price Intelligently (benchmarking)  
-- React (UI framework for dynamic pricing components)
+- Stripe Pricing Page (industry standard tier comparison)  
+- Linear Pricing (PLG-optimized, annual toggle, most-popular badge)  
+- Vercel Pricing (usage-based + tiered hybrid reference)

@@ -1,6 +1,6 @@
 ---
-kind: learning_record
-id: p10_lr_enterprise_sla_builder
+kind: memory
+id: p10_mem_enterprise_sla_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for enterprise_sla construction

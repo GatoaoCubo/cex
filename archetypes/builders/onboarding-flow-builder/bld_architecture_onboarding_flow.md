@@ -20,18 +20,18 @@ density_score: 0.85
 | ISO Name           | Role                          | Pillar | Status  |  
 |--------------------|-------------------------------|--------|---------|  
 | bld_manifest       | Defines flow structure        | P05    | Active  |  
-| bld_instruction    | Specifies user steps          | P05    | Active  |  
-| bld_system_prompt  | Sets AI behavior              | P05    | Active  |  
-| bld_schema         | Defines data structure        | P05    | Active  |  
-| bld_quality_gate   | Enforces compliance rules     | P05    | Active  |  
+| bld_instruction    | Specifies user steps          | P03    | Active  |  
+| bld_system_prompt  | Sets AI behavior              | P03    | Active  |  
+| bld_schema         | Defines data structure        | P06    | Active  |  
+| bld_quality_gate   | Enforces compliance rules     | P11    | Active  |  
 | bld_output_template| Formats final output          | P05    | Active  |  
-| bld_examples       | Provides sample interactions  | P05    | Active  |  
-| bld_knowledge_card | Stores domain-specific info   | P05    | Active  |  
-| bld_architecture   | Outlines system blueprint     | P05    | Active  |  
-| bld_collaboration  | Manages user-AI interaction   | P05    | Active  |  
-| bld_config         | Centralizes configuration     | P05    | Active  |  
-| bld_memory         | Tracks session context        | P05    | Active  |  
-| bld_tools          | Integrates external functions | P05    | Active  |  
+| bld_examples       | Provides sample interactions  | P07    | Active  |  
+| bld_knowledge_card | Stores domain-specific info   | P01    | Active  |  
+| bld_architecture   | Outlines system blueprint     | P08    | Active  |  
+| bld_collaboration  | Manages user-AI interaction   | P12    | Active  |  
+| bld_config         | Centralizes configuration     | P09    | Active  |  
+| bld_memory         | Tracks session context        | P10    | Active  |  
+| bld_tools          | Integrates external functions | P04    | Active  |  
 
 ## Dependencies  
 | From              | To                  | Type         |  

@@ -1,7 +1,7 @@
 ---
 kind: quality_gate
 id: p09_qg_data_residency
-pillar: P11
+pillar: P09
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for data_residency
 quality: null
@@ -25,7 +25,7 @@ density_score: 0.85
 | ID        | Check                          | Fail Condition                                      |  
 |-----------|--------------------------------|-----------------------------------------------------|  
 | H01       | YAML frontmatter valid         | Missing or invalid frontmatter                      |  
-| H02       | ID matches pattern             | ID does not match ^p09_dr_[a-z][a-z0-9_]+.yaml$    |  
+| H02       | ID matches pattern             | ID does not match ^p09_dr_[a-z][a-z0-9_]+.md$      |  
 | H03       | kind field matches 'data_residency' | kind field is not 'data_residency'               |  
 | H04       | Data stored in allowed regions | Data resides in regions not permitted by policy     |  
 | H05       | Encryption applied             | Data not encrypted at rest or in transit            |  

@@ -44,7 +44,7 @@ density_score: 0.85
 | audit_frequency | string | Scheduled audit intervals |  
 
 ## ID Pattern  
-^p09_dr_[a-z][a-z0-9_]+.yaml$  
+^p09_dr_[a-z][a-z0-9_]+.md$  
 
 ## Body Structure  
 1. **Data Residency Policy**  
