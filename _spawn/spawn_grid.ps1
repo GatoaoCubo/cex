@@ -276,24 +276,10 @@ if ($mode -eq "static") {
         $launched++
         Start-Sleep -Seconds 4
     }
-    # Re-enforce grid positions after all windows have settled
-    # Boot scripts may resize windows; this second pass corrects them
-    Write-Output "[GRID] Re-enforcing window positions..."
-    Start-Sleep -Seconds 6
-    foreach ($kv in $launchedProcs.GetEnumerator()) {
-        $nucleus = $kv.Key
-        $proc = $kv.Value
-        $pos = $gridPos[$nucleus]
-        if (-not $pos) { continue }
-        try {
-            $proc.Refresh()
-            $hwnd = $proc.MainWindowHandle
-            if ($hwnd -ne [IntPtr]::Zero) {
-                [Win32Grid]::MoveWindow($hwnd, $pos.x, $pos.y, $gW, $gH, $true) | Out-Null
-                Write-Output "  [$($nucleus.ToUpper())] repositioned"
-            }
-        } catch {}
-    }
+    # NOTE: Re-enforce reposition removed (2026-04-14). Previously this ran 6s
+    # after launch, yanking windows mid-TUI-render. Claude TUI boots in 2-3s and
+    # the WM_SIZE event from MoveWindow triggered full repaint glitches (alt
+    # screen buffer desync). First MoveWindow (at launch time) is final.
     # Enrich PID file: walk descendants to capture real worker PIDs
     # (Start-Process -PassThru returned the wrapper, not the worker.)
     Write-Output "[GRID] Enriching PID file with worker PIDs..."

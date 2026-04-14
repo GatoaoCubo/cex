@@ -82,11 +82,26 @@ $cliArgs = @("--dangerously-bypass-approvals-and-sandbox", "--model", "gpt-5-cod
 $cliArgs += "-C", $cexRoot
 
 Set-CexTitle "RUNNING"
-# [CEX_COLOR_RESET] Prevent RawUI color bleed into child CLI TUI
+# [CEX_TUI_HYGIENE] UTF-8 + buffer sync + color reset (prevents TUI bleed/mojibake)
 try {
+    # 1. UTF-8 codepage + encoding (Claude/Codex/Gemini emit unicode box-drawing)
+    $null = (chcp 65001 2>$null)
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+    [Console]::InputEncoding = [System.Text.Encoding]::UTF8
+    $env:PYTHONIOENCODING = "utf-8"
+    # 2. Sync BufferSize.Width to WindowSize.Width (no horizontal scroll, no clip)
+    $win = $Host.UI.RawUI.WindowSize
+    $buf = $Host.UI.RawUI.BufferSize
+    if ($buf.Width -ne $win.Width) {
+        $buf.Width = $win.Width
+        $buf.Height = [Math]::Max($win.Height, 3000)
+        $Host.UI.RawUI.BufferSize = $buf
+    }
+    # 3. Reset colors (prevents DarkGreen/RawUI bleed into child CLI TUI)
     $Host.UI.RawUI.BackgroundColor = "Black"
     $Host.UI.RawUI.ForegroundColor = "Gray"
     [Console]::ResetColor()
+    Clear-Host
 } catch {}
 & codex exec @cliArgs $initialMsg
 Set-CexTitle "DONE"
