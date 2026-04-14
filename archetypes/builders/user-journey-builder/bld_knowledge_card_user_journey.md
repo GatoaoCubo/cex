@@ -16,44 +16,61 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Domain Overview  
-User journey mapping focuses on the end-to-end experience of a customer interacting with a product, service, or brand, spanning stages from initial awareness to post-purchase advocacy. It emphasizes emotional, behavioral, and contextual touchpoints across channels, ensuring alignment with customer needs and business goals. Unlike workflows or onboarding flows, user journeys prioritize holistic, human-centered perspectives, often informed by qualitative research, analytics, and empathy mapping. Key frameworks like the Customer Journey Map (CJM) by Forrester and the Touchpoint Matrix highlight the importance of mapping stages such as awareness, consideration, conversion, retention, and advocacy.  
+## Domain Overview
+User journey mapping documents the end-to-end experience of a customer across all touchpoints from first awareness to post-purchase advocacy. Two foundational frameworks structure journey analysis: AIDA (Awareness, Interest, Desire, Action) -- a funnel model for conversion paths -- and AARRR Pirate Metrics (Acquisition, Activation, Retention, Revenue, Referral) for product/growth teams. Nielsen Norman Group (NNg) defines the gold standard for journey map artifacts: stages, touchpoints, emotional arcs, pain points, and opportunities. Unlike system workflows or onboarding flows, journey maps are human-centered and cross-channel, capturing both digital and offline interactions.
 
-## Key Concepts  
-| Concept | Definition | Source |  
-|---|---|---|  
-| Customer Lifetime Value (CLV) | Predicted net profit from a customer over their entire relationship | Reichheld & Sasser (1990) |  
-| Net Promoter Score (NPS) | Metric measuring customer loyalty and advocacy | Reichheld (2003) |  
-| Touchpoint Matrix | Framework categorizing interactions by frequency and emotional impact | Forrester (2015) |  
-| Jobs-to-be-Done (JTBD) | Theory focusing on the "jobs" customers aim to accomplish | Christensen et al. (2015) |  
-| Customer Journey Map (CJM) | Visual representation of stages, touchpoints, and pain points | Forrester (2016) |  
-| Experience Canvas | Tool for mapping emotional and functional aspects of a journey | IDEO (2012) |  
-| User Experience Honeycomb | Framework emphasizing usability, accessibility, and desirability | Garrett (2011) |  
-| Kano Model | Method for classifying customer preferences into basic, performance, and delighters | Kano (1984) |  
-| Customer Success Framework | Model aligning journey stages with retention and growth metrics | Gartner (2020) |  
-| Lean Customer Journey Map | Agile approach to mapping journeys with minimalistic, iterative techniques | Ries (2011) |  
+## Key Concepts
+| Concept | Definition | Source |
+|---------|-----------|--------|
+| AIDA Framework | Awareness, Interest, Desire, Action -- classic conversion funnel | Lewis (1898), updated by Hall (1924) |
+| AARRR Pirate Metrics | Acquisition, Activation, Retention, Revenue, Referral -- growth framework | Dave McClure (2007), 500 Startups |
+| Customer Journey Map (CJM) | Visual artifact: stages, touchpoints, emotions, pain points, opportunities | NNg (Nielsen Norman Group) |
+| Service Blueprint | Back-stage view showing processes supporting each touchpoint | Shostack (1984), NNg |
+| Touchpoint | Any interaction between user and brand (digital, physical, human) | Forrester Touchpoint Matrix |
+| Moment of Truth | Critical touchpoint that decisively shapes perception (FMOT/SMOT/ZMOT) | Procter & Gamble; Google ZMOT (2011) |
+| Emotional Arc | Mapping user sentiment (positive/negative) across journey stages | NNg Journey Mapping Guide |
+| Drop-off Rate | % of users who abandon at a given funnel stage | Standard analytics metric |
+| NPS (Net Promoter Score) | Measures advocacy: "How likely to recommend?" (0-10 scale) | Reichheld (2003), Bain & Company |
+| Jobs-to-be-Done (JTBD) | What job is the customer hiring this product to do? | Christensen et al. (2015) |
 
-## Industry Standards  
-- Customer Journey Map (CJM) Framework (Forrester)  
-- Touchpoint Matrix (Forrester)  
-- Experience Canvas (IDEO)  
-- Kano Model (Noriaki Kano)  
-- Lean Customer Journey Map (Eric Ries)  
-- Service Blueprint (Gerry McGovern)  
-- Customer Experience Map (CEM) (McKinsey)  
-- Net Promoter System (NPS) (Fred Reichheld)  
+## AIDA vs. AARRR Comparison
 
-## Common Patterns  
-1. **Awareness Stage**: First exposure through marketing, social media, or referrals.  
-2. **Consideration Stage**: Research, comparison, and evaluation of options.  
-3. **Conversion Stage**: Purchase, sign-up, or trial initiation.  
-4. **Retention Stage**: Post-purchase support, engagement, and loyalty building.  
-5. **Advocacy Stage**: Referrals, reviews, and brand promotion by satisfied users.  
-6. **Cross-Channel Touchpoints**: Seamless interactions across digital, physical, and human channels.  
+| Framework | Perspective | Stages | Best For |
+|-----------|------------|--------|---------|
+| AIDA | Marketing/advertising | Awareness -> Interest -> Desire -> Action | Top-of-funnel conversion |
+| AARRR | Product/growth | Acquisition -> Activation -> Retention -> Revenue -> Referral | Full product lifecycle |
+| NNg CJM | UX research | Discovery -> Research -> Purchase -> Use -> Loyalty | Human-centered design |
+| McKinsey CDJ | Consumer behavior | Consider -> Evaluate -> Buy -> Experience -> Advocate -> Bond | Brand loyalty |
 
-## Pitfalls  
-- Confusing journey maps with system workflows or onboarding flows.  
-- Overlooking emotional drivers and pain points in favor of functional steps.  
-- Failing to involve real users or stakeholders in co-creation.  
-- Ignoring post-conversion stages (e.g., retention, advocacy).  
-- Using vague or inconsistent touchpoint definitions.
+## Journey Stage Mapping
+
+| Stage | AIDA | AARRR | Key Metric | Touchpoints |
+|-------|------|-------|-----------|------------|
+| Discovery | Awareness | Acquisition | Reach, impressions | Ads, SEO, social |
+| Consideration | Interest + Desire | Activation | Trial rate, sign-ups | Product demos, reviews |
+| Conversion | Action | Revenue | Conversion rate, ARPU | Checkout, pricing page |
+| Retention | -- | Retention | D30/D90 retention | Onboarding, support |
+| Advocacy | -- | Referral | NPS, referral rate | Community, NPS surveys |
+
+## Industry Standards
+- AIDA framework (Lewis 1898) -- marketing funnel standard
+- AARRR Pirate Metrics (McClure 2007) -- SaaS/startup growth standard
+- NNg Journey Mapping -- UX practitioner gold standard
+- Service Blueprint (Shostack 1984, NNg updated) -- operational journey mapping
+- Google ZMOT (2011) -- Zero Moment of Truth for discovery stage
+- Forrester Customer Experience framework -- enterprise CX measurement
+
+## Common Patterns
+1. Start with AARRR to identify which stage has the highest drop-off rate.
+2. Use AIDA lens for top-of-funnel journey stages (awareness, interest).
+3. Map emotional arc at each stage -- users with positive emotion convert 3x more.
+4. Identify Moments of Truth (ZMOT, FMOT, SMOT) and design around them.
+5. Run usability tests at conversion stage to uncover hidden friction points.
+6. Close the loop: advocacy stage feeds back into acquisition (referral loops).
+
+## Pitfalls
+- Confusing journey maps with system workflows: journey maps show user perspective, not system logic.
+- Omitting emotional arc: functional steps without emotion data produce useless maps.
+- Creating maps without real user data -- assumptions skew the journey.
+- Stopping at conversion: retention and advocacy stages drive LTV, not acquisition alone.
+- Building channel-specific maps that miss cross-channel friction (e.g., mobile-to-desktop handoff).

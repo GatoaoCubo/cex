@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: HYBRID_REVIEW5 N06 Audit -- enterprise_sla + white_label_config + usage_report (39 ISOs)
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [audit, hybrid_review5, n06, enterprise_sla, white_label_config, usage_report, wave4]
 domain: commercial quality assurance
 created: "2026-04-14"

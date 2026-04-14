@@ -33,7 +33,7 @@ density_score: 0.85
 | H05 | Needs documented | No explicit customer needs or pain points |  
 | H06 | ICP alignment verified | No alignment with Ideal Customer Profile |  
 | H07 | Data sources cited | No references to data sources for segment definition |  
-| H08 | Stakeholder approval | No signed-off validation from business stakeholders |  
+| H08 | ICP scoring methodology documented | No scoring weights or ranking logic present in artifact |  
 
 ## SOFT Scoring  
 (Table: Dim | Dimension | Weight | Scoring Guide)  
