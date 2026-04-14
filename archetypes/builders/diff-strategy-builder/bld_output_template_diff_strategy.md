@@ -18,26 +18,49 @@ density_score: 0.85
 
 ```yaml
 ---
-pillar: P04
 kind: diff_strategy
-name: {{strategy_name}}
-description: {{strategy_description}}
-author: {{author}}
-date: {{date}}
-metrics: {{metrics}}
+id: p04_ds_{{name}}
+pillar: P04
+title: "{{strategy_title}}"
+version: "1.0"
+algorithm_type: "{{Myers|LCS|patience|histogram|Ratcliff-Obershelp|custom}}"
+granularity: "{{line|token|character|AST|semantic}}"
+comparison_basis: "{{edit_distance|unique_lines_LCS|gestalt}}"
+created: "{{date}}"
+updated: "{{date}}"
+author: "{{author}}"
+domain: "{{application_domain}}"
+quality: null
+tags: [diff_strategy, {{algorithm_type}}, {{granularity}}]
+tldr: "{{one-sentence summary of algorithm choice and target use case}}"
 ---
+
 ## Overview
-{{overview_content}}
+{{Purpose of this diff strategy. Which code-agent or pipeline uses it.
+Which algorithm and why it was chosen over alternatives.}}
 
-## Methodology
-{{methodology_details}}
+## Algorithm
+| Property          | Value                              |
+|:------------------|:-----------------------------------|
+| Algorithm         | {{Myers|patience|histogram|...}}   |
+| Time complexity   | {{O(ND) | O(N log N) | O(NM)}}    |
+| Space complexity  | {{O(D) | O(N)}}                    |
+| Granularity       | {{line|token|AST}}                 |
+| Patch format      | {{unified diff | context diff | custom}} |
 
-## Key Differences
-{{key_differences}}
+## Patch Application
+{{How this strategy's output is applied. Tool used (git apply / patch / difflib).
+Whether --3way fallback is enabled. Whitespace handling.}}
+
+## Edge Cases
+| Case               | Handling                                        |
+|:-------------------|:------------------------------------------------|
+| Empty diff         | {{return identity / no-op}}                     |
+| Binary file        | {{detect NUL bytes; fall back to bsdiff}}       |
+| CRLF/LF mismatch   | {{normalize before diff; restore on apply}}     |
+| Identical files    | {{short-circuit; emit empty script}}            |
+| Partial match      | {{apply clean hunks; flag conflicts}}           |
 
 ## Use Cases
-{{use_case_examples}}
-
-## Conclusion
-{{conclusion_summary}}
+{{When to choose this strategy. Comparison with alternatives.}}
 ```

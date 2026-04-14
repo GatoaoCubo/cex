@@ -17,23 +17,24 @@ density_score: 0.85
 ---
 
 ## Frontmatter Fields  
-### Required  
-| Field        | Type   | Required | Default | Notes |  
-|--------------|--------|----------|---------|-------|  
-| id           | string | yes      | -       | Unique identifier |  
-| kind         | string | yes      | "diff_strategy" | CEX type |  
-| pillar       | string | yes      | "P04"    | Pillar classification |  
-| title        | string | yes      | -       | Strategy name |  
-| version      | string | yes      | "1.0"   | Version number |  
-| created      | date   | yes      | -       | Creation date |  
-| updated      | date   | yes      | -       | Last update date |  
-| author       | string | yes      | -       | Author name |  
-| domain       | string | yes      | -       | Application domain |  
-| quality      | string | yes      | "draft" | Quality status |  
-| tags         | list   | yes      | []      | Keywords |  
-| tldr         | string | yes      | -       | Summary |  
-| strategy_type| string | yes      | -       | Strategy category |  
-| comparison_basis | string | yes | -       | Basis for comparison |  
+### Required
+| Field             | Type   | Required | Default         | Notes                                            |
+|:------------------|:-------|:---------|:----------------|:-------------------------------------------------|
+| id                | string | yes      | -               | Unique identifier                                |
+| kind              | string | yes      | "diff_strategy" | CEX type                                         |
+| pillar            | string | yes      | "P04"           | Pillar classification                            |
+| title             | string | yes      | -               | Strategy name                                    |
+| version           | string | yes      | "1.0"           | Semantic version                                 |
+| created           | date   | yes      | -               | Creation date                                    |
+| updated           | date   | yes      | -               | Last update date                                 |
+| author            | string | yes      | -               | Author name                                      |
+| domain            | string | yes      | -               | Application domain                               |
+| quality           | string | yes      | null            | Quality status (null until peer review)          |
+| tags              | list   | yes      | []              | Keywords                                         |
+| tldr              | string | yes      | -               | Summary                                          |
+| algorithm_type    | enum   | yes      | -               | Myers \| LCS \| patience \| histogram \| Ratcliff-Obershelp \| custom |
+| granularity       | enum   | yes      | "line"          | line \| token \| character \| AST \| semantic    |
+| comparison_basis  | string | yes      | -               | edit_distance \| unique_lines_LCS \| gestalt      |
 
 ### Recommended  
 | Field              | Type   | Notes |  

@@ -1,0 +1,176 @@
+id: n06_hybrid_review2_final
+kind: audit_report
+nucleus: n06
+mission: HYBRID_REVIEW2
+pillar: P11
+quality: null
+title: HYBRID_REVIEW2 N06 -- diff_strategy Builder Final Report
+version: 1.0.0
+created: '2026-04-13'
+updated: '2026-04-13'
+tags:
+- hybrid_review2
+- diff_strategy
+- n06
+- audit
+- code_diff
+- myers
+- aider
+tldr: '13 ISOs audited for diff_strategy-builder. 4 rebuilt (financial contamination), 5 fixed (missing algorithms/tools),
+  4 passed. All 13 pass post-audit. Commercial lens: diff quality maps to code-agent pricing tiers.'
+executive_summary: '| Metric                      | Value |
+
+  |:----------------------------|:------|
+
+  | Builder audited             | diff_strategy-builder |
+
+  | Total ISOs                  | 13    |
+
+  | ISOs passing pre-audit      | 4     |
+
+  | ISOs fixed                  | 5     |
+
+  | ISOs rebuilt                | 4     |
+
+  | ISOs passing post-audit     | 13    |
+
+  | Wave 1 systemic issues found| 2     |
+
+  | Fictional tools removed     | 6     |
+
+  | Real tools/algorithms added | 14    |'
+builder_identity: 'diff_strategy: Specifies the algorithm an LLM code agent uses to compute the minimal edit script between
+  two file versions. Consumers: Aider, git pipelines, difflib-based agents. NOT: financial trading strategy, order matching,
+  or quantitative analysis.'
+per_iso_scorecard: '| ISO              | Pre  | Action  | Post | Notes                                          |
+
+  |:-----------------|:-----|:--------|:-----|:-----------------------------------------------|
+
+  | manifest         | 7.5  | PASS    | 7.5  | Acceptable; LCS/Myers mentioned                |
+
+  | instruction      | 6.0  | FIX     | 8.5  | Added Myers/patience/histogram/Aider in phases |
+
+  | schema           | 7.0  | FIX     | 8.5  | Added algorithm_type, granularity required     |
+
+  | quality_gate     | 3.0  | REBUILD | 9.0  | Full rewrite; removed financial backtesting    |
+
+  | output_template  | 6.0  | FIX     | 8.5  | Added algorithm, edge-cases, patch sections    |
+
+  | examples         | 4.0  | REBUILD | 8.5  | Replaced FIFO/Pro-Rata with Myers/patience     |
+
+  | knowledge_card   | 6.5  | FIX     | 9.0  | Added 5 algorithms + 10 tool integrations      |
+
+  | architecture     | 2.5  | REBUILD | 9.0  | Full rewrite; removed trading pipeline         |
+
+  | collaboration    | 7.5  | PASS    | 7.5  | Correct pipeline boundaries                    |
+
+  | config           | 7.5  | PASS    | 7.5  | Correct naming/paths                           |
+
+  | memory           | 7.5  | PASS    | 7.5  | Correct decoupling observations                |
+
+  | system_prompt    | 5.5  | FIX     | 8.5  | Removed ACID/Raft/Paxos; added LLM code-agent |
+
+  | tools            | 2.0  | REBUILD | 9.0  | Full rewrite; removed CCXT/Backtrader          |
+
+
+  Weighted average pre-audit: 5.7 | post-audit: 8.7'
+root_cause_financial_trading_domain_contamination: The wave generator (qwen3:14b + gemma4:26b mixed) conflated "diff strategy"
+  (code edit algorithm selection) with "trading/quant strategy" (order matching, backtesting). Four ISOs were fully contaminated;
+  two match the systemic patterns from Wave 1.
+contamination_evidence: 'quality_gate pre: "Backtest loss >15%", D3=Backtesting Results
+
+  quality_gate post: H04=algorithm_type required, D2=patch correctness (0.25)
+
+
+  tools pre: CCXT, Backtrader, strat_backtest.py, strat_stress_test.py
+
+  tools post: difflib, git apply --3way, patch, Aider whole/diff/udiff-simple/diff-fenced
+
+
+  architecture pre: Market Data API, Risk Engine, Quant owner, Execution Engine downstream
+
+  architecture post: Tokenizer->Algorithm Core->Hunk Parser->Patch Applier->edit_format
+
+
+  examples pre: "Transition from FIFO to Pro-Rata matching algorithm" (order book)
+
+  examples post: Myers line diff (Aider udiff-simple), patience diff (structural code)'
+algorithm_coverage_post_audit: '| Algorithm          | Complexity  | Added To                            |
+
+  |:-------------------|:------------|:------------------------------------|
+
+  | Myers (1986)       | O(ND)       | KC, instruction, system_prompt, examples |
+
+  | LCS (DP)           | O(NM)       | KC                                  |
+
+  | patience diff      | O(N log N)  | KC, instruction, examples, system_prompt |
+
+  | histogram diff     | O(N log N)  | KC, instruction, system_prompt      |
+
+  | Ratcliff-Obershelp | O(N^2)      | KC (difflib SequenceMatcher)        |'
+real_tool_coverage_post_audit: '| Tool                | Canonical Docs         | Added To           |
+
+  |:--------------------|:-----------------------|:-------------------|
+
+  | difflib             | Python stdlib          | KC, tools          |
+
+  | git apply --3way    | git-apply(1)           | KC, tools          |
+
+  | patch -p1           | patch(1) POSIX         | KC, tools          |
+
+  | Aider whole         | Aider docs             | KC, tools          |
+
+  | Aider diff          | Aider docs             | KC, tools          |
+
+  | Aider udiff-simple  | Aider docs             | KC, tools          |
+
+  | Aider diff-fenced   | Aider docs             | KC, tools          |
+
+  | tree-sitter         | tree-sitter.github.io  | tools              |
+
+  | difftastic          | difftastic.wilfred.me  | tools              |
+
+  | diff-match-patch    | code.google.com/dmp    | tools              |'
+commercial_analysis_n06_lens: ''
+diff_quality_code_agent_tier_differentiation: '| Tier       | Diff Strategy            | Price Signal  | Why                                   |
+
+  |:-----------|:-------------------------|:--------------|:--------------------------------------|
+
+  | Basic      | Myers whole-file replace  | Base          | No context; always applies            |
+
+  | Standard   | Myers unified diff        | Base + 30%    | Context-aware; standard git workflow  |
+
+  | Pro        | patience/histogram        | Base + 80%    | Fewer merge conflicts on real code    |
+
+  | Enterprise | AST/semantic diff         | Base + 200%   | Structural refactors; multi-file safe |'
+why_this_matters_for_pricing: "1. Patch failure rate drives support costs and churn. histogram > Myers for code-heavy files.\n\
+  2. LLM token cost: Aider udiff-simple uses ~30% fewer tokens than whole-file replacement\n   on edits to large files ->\
+  \ direct cost savings -> upsell \"token-efficient\" tier.\n3. Enterprise code quality: AST diff enables structural changes\
+  \ (rename class across files)\n   that line-based diff cannot safely apply -> clear enterprise feature gate."
+competitive_signal: 'Aider exposes 4 edit formats precisely because no single diff strategy fits all models/contexts. Products
+  that abstract this choice (one format for all) leave margin on the table. Products that expose it with smart defaults command
+  premium. Recommended CEX product action: Add diff_strategy selector to code-agent configuration UI. Default: histogram for
+  Python/JS/TS (brace-heavy). Offer patience for refactor workflows, whole for non-technical users. Gate AST/semantic diff
+  to Enterprise.'
+comparison_with_wave_1_hybrid_review: '| Metric                    | Wave 1 (safety/content/bias) | Wave 2 (diff_strategy)
+  |
+
+  |:--------------------------|:-----------------------------|:-----------------------|
+
+  | Builders                  | 3                            | 1                      |
+
+  | ISOs audited              | 39                           | 13                     |
+
+  | Systemic contamination    | crypto exchange in architecture | financial trading in 4 ISOs |
+
+  | Fictional tools           | SafetyChain, PolicyForge     | CCXT, Backtrader, strat_*.py |
+
+  | Missing named standards   | No NYC LL144 / BBQ           | No patience / histogram / Ratcliff-Obershelp |
+
+  | Post-audit pass rate      | 33/39 (85%)                  | 13/13 (100%) |
+
+
+  Wave 1 pattern confirmed: architecture ISOs are the most contamination-prone because they
+
+  accept the broadest domain inference from context-free generation.'
+signal_sent: python -c "from _tools.signal_writer import write_signal; write_signal('n06', 'complete', 9.0)"
