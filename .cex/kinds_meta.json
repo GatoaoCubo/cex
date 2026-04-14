@@ -6,7 +6,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "How agents execute actions in environments",
-    "boundary": "Action execution paradigm. NOT agent_computer_interface (specific protocol) nor cli_tool (CLI wrapper)."
+    "boundary": "Action execution paradigm. NOT agent_computer_interface (specific protocol) nor cli_tool (CLI wrapper).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "action_prompt": {
     "boundary": "Tarefa especifica. O LLM EXECUTA isso.",
@@ -15,7 +20,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p03_up_{{task}}.md",
-    "pillar": "P03"
+    "pillar": "P03",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "agent": {
     "boundary": "Definicao completa de agente (persona + capabilities). NAO eh skill (P04, habilidade executavel) nem system_prompt (P03, como fala).",
@@ -24,7 +34,12 @@
     "llm_function": "BECOME",
     "max_bytes": 5120,
     "naming": "p02_agent_{{name}}.md + .yaml",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "agent_card": {
     "boundary": "Agent deployment spec. NAO eh agent (P02, persona only) nem boot_config (P02, provider startup) nem spawn_config (P12, runtime launch).",
@@ -33,7 +48,12 @@
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "p08_ac_{{agent_name}}.yaml",
-    "pillar": "P08"
+    "pillar": "P08",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "agent_computer_interface": {
     "pillar": "P08",
@@ -42,7 +62,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "GUI/terminal interaction protocol for agents",
-    "boundary": "Agent-computer interface. NOT browser_tool (web automation) nor computer_use (screen control)."
+    "boundary": "Agent-computer interface. NOT browser_tool (web automation) nor computer_use (screen control).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "agent_package": {
     "boundary": "Pacote distribuivel de agente em formato ISO. NAO eh agent (spec do agente) â€” agent_package eh o bundle portable.",
@@ -51,7 +76,12 @@
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "agents/{{agent_name}}/manifest.yaml",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "agent_profile": {
     "pillar": "P02",
@@ -60,7 +90,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Agent persona and identity construction method",
-    "boundary": "Agent persona construction. NOT agent (full agent def) nor system_prompt (how agent speaks)."
+    "boundary": "Agent persona construction. NOT agent (full agent def) nor system_prompt (how agent speaks).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "agentic_rag": {
     "pillar": "P01",
@@ -69,7 +104,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Agent-driven retrieval augmented generation pattern",
-    "boundary": "Agentic RAG pattern. NOT retriever (simple retrieval) nor agent (agent definition)."
+    "boundary": "Agentic RAG pattern. NOT retriever (simple retrieval) nor agent (agent definition).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "api_client": {
     "boundary": "Cliente unidirecional tipado. NAO eh db_connector nem mcp_server.",
@@ -78,7 +118,12 @@
     "llm_function": "CALL",
     "max_bytes": 1024,
     "naming": "p04_api_{{service}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "audio_tool": {
     "boundary": "Processa input/output de audio. NAO eh vision_tool (visual) nem notifier (delivery de mensagem).",
@@ -87,7 +132,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_audio_{{capability}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "axiom": {
     "boundary": "Regra fundamental imutavel. NAO eh law (P08, operacional ajustavel) nem instruction (P03, flexivel).",
@@ -96,7 +146,12 @@
     "llm_function": "BECOME",
     "max_bytes": 3072,
     "naming": "p02_ax_{{rule}}.md",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "batch_config": {
     "description": "Async batch processing config for bulk API operations (OpenAI Batch, Anthropic Batches)",
@@ -105,7 +160,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p09_bc_{{name}}.yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "benchmark": {
     "boundary": "Medicao de performance quantitativa. NAO eh eval (nao testa corretude) nem scoring_rubric (nao define criterios).",
@@ -114,7 +174,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_bm_{{metric}}.md + .yaml",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "benchmark_suite": {
     "pillar": "P07",
@@ -123,7 +188,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Composite benchmark definition with multiple tasks",
-    "boundary": "Benchmark suite. NOT benchmark (single benchmark) nor eval_framework (evaluation tooling)."
+    "boundary": "Benchmark suite. NOT benchmark (single benchmark) nor eval_framework (evaluation tooling).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "bias_audit": {
     "pillar": "P07",
@@ -132,7 +202,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Fairness evaluation methodology and results",
-    "boundary": "Fairness evaluation. NOT benchmark (general perf) nor eval_metric (single metric def)."
+    "boundary": "Fairness evaluation. NOT benchmark (general perf) nor eval_metric (single metric def).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "boot_config": {
     "boundary": "Bootstrap por provider (claude, cursor, codex). NAO eh env_config (P09, variaveis genericas) nem spawn_config (P12, agent_groups).",
@@ -141,7 +216,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p02_boot_{{provider}}.md",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "browser_tool": {
     "boundary": "Interage com paginas web via DOM. NAO eh computer_use (tela generica) nem search_tool (busca sem navegacao).",
@@ -150,7 +230,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_browser_{{target}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "bugloop": {
     "boundary": "Ciclo automatico detect>fix>verify. NAO eh unit_eval (P07, teste manual) nem optimizer (melhoria continua, nao correcao).",
@@ -159,7 +244,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p11_bl_{{scope}}.md + .yaml",
-    "pillar": "P11"
+    "pillar": "P11",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "chain": {
     "boundary": "Sequencia de PROMPTS. NAO eh workflow (P12, agentes+tools).",
@@ -168,7 +258,12 @@
     "llm_function": "PRODUCE",
     "max_bytes": 6144,
     "naming": "p03_ch_{{pipeline}}.md",
-    "pillar": "P03"
+    "pillar": "P03",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "checkpoint": {
     "boundary": "Estado salvo. NAO eh signal.",
@@ -177,7 +272,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p12_ckpt_{{name}}.md",
-    "pillar": "P12"
+    "pillar": "P12",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "chunk_strategy": {
     "boundary": "Metodo de split. NAO eh embedding_config.",
@@ -186,7 +286,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
     "naming": "p01_chunk_{{strategy}}.md",
-    "pillar": "P01"
+    "pillar": "P01",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "citation": {
     "description": "Structured source attribution with provenance, URL, date, and reliability metadata",
@@ -195,7 +300,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p01_cit_{{topic}}.md",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "cli_tool": {
     "boundary": "Ferramenta de linha de comando pontual. NAO eh skill (sem fases) nem daemon (nao persiste em background).",
@@ -204,7 +314,12 @@
     "llm_function": "CALL",
     "max_bytes": 1024,
     "naming": "p04_cli_{{tool}}.md",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "code_executor": {
     "boundary": "Ambiente isolado que executa codigo. NAO eh cli_tool (comando shell pontual) nem daemon (processo persistente).",
@@ -213,7 +328,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_exec_{{runtime}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "collaboration_pattern": {
     "pillar": "P12",
@@ -222,7 +342,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Multi-agent coordination topology",
-    "boundary": "Coordination pattern. NOT workflow (execution sequence) nor handoff_protocol (handoff rules)."
+    "boundary": "Coordination pattern. NOT workflow (execution sequence) nor handoff_protocol (handoff rules).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "compliance_framework": {
     "pillar": "P11",
@@ -231,7 +356,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Regulatory mapping and attestation for AI systems",
-    "boundary": "Regulatory compliance mapping. NOT safety_policy (org rules) nor threat_model (risk assessment)."
+    "boundary": "Regulatory compliance mapping. NOT safety_policy (org rules) nor threat_model (risk assessment).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "component_map": {
     "boundary": "Mapa estruturado de componentes e conexoes. NAO eh diagram (visual) nem agent_card (escopo de 1 agent_group).",
@@ -240,7 +370,12 @@
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p08_cmap_{{scope}}.yaml",
-    "pillar": "P08"
+    "pillar": "P08",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "compression_config": {
     "added_version": "10.0.0",
@@ -250,7 +385,12 @@
     "llm_function": "INJECT",
     "naming": "p10_cc_{{scope}}.yaml",
     "pillar": "P10",
-    "sdk_module": "cex_sdk.memory.compression"
+    "sdk_module": "cex_sdk.memory.compression",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "computer_use": {
     "boundary": "Interacao com interface grafica via automacao. NAO eh browser_tool (DOM) nem cli_tool (linha de comando).",
@@ -259,7 +399,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_cu_{{target}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "consolidation_policy": {
     "pillar": "P10",
@@ -268,7 +413,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Memory lifecycle management policy",
-    "boundary": "Memory lifecycle policy. NOT memory_scope (access rules) nor compression_config (token compression)."
+    "boundary": "Memory lifecycle policy. NOT memory_scope (access rules) nor compression_config (token compression).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "constraint_spec": {
     "boundary": "Governa decoder. NAO eh validation_schema.",
@@ -277,7 +427,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
     "naming": "p03_constraint_{{scope}}.md",
-    "pillar": "P03"
+    "pillar": "P03",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "content_filter": {
     "pillar": "P11",
@@ -286,7 +441,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Input/output content filtering pipeline config",
-    "boundary": "Content filtering pipeline. NOT guardrail (broad safety constraint) nor output_validator (schema check)."
+    "boundary": "Content filtering pipeline. NOT guardrail (broad safety constraint) nor output_validator (schema check).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "content_monetization": {
     "boundary": "Pipeline completo de monetizacao de conteudo: billing, credits, checkout, courses, ads, emails. NAO eh pricing_strategy (estrategia apenas) nem payment_integration (provider apenas).",
@@ -295,7 +455,12 @@
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
     "naming": "p04_cm_{{name}}.md",
-    "pillar": "P11"
+    "pillar": "P11",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "context_doc": {
     "boundary": "Contexto de dominio para hidratar prompts. NAO eh knowledge_card (sem density gate) nem glossary_entry (nao define termo).",
@@ -304,7 +469,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p01_ctx_{{topic}}.md + .yaml",
-    "pillar": "P01"
+    "pillar": "P01",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "context_window_config": {
     "description": "Token budget allocation, priority tiers, and overflow rules for prompt assembly",
@@ -313,7 +483,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
     "naming": "p03_cwc_{{model}}.yaml",
-    "core": true
+    "core": true,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "cost_budget": {
     "description": "Token budget allocation, spend tracking, cost alerts per provider/model/nucleus",
@@ -322,7 +497,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p09_cb_{{name}}.yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "daemon": {
     "boundary": "Processo background persistente. NAO eh hook (evento unico) nem cli_tool (execucao pontual e termina).",
@@ -331,7 +511,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 1024,
     "naming": "p04_daemon_{{name}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "dag": {
     "boundary": "Grafo aciclico de dependencias entre tasks. NAO eh workflow (execucao direta) nem component_map (P08, componentes).",
@@ -340,7 +525,12 @@
     "llm_function": "PRODUCE",
     "max_bytes": 3072,
     "naming": "p12_dag_{{pipeline}}.yaml",
-    "pillar": "P12"
+    "pillar": "P12",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "dataset_card": {
     "pillar": "P01",
@@ -349,7 +539,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Structured dataset documentation",
-    "boundary": "Dataset documentation. NOT eval_dataset (eval-specific data) nor knowledge_card (general knowledge)."
+    "boundary": "Dataset documentation. NOT eval_dataset (eval-specific data) nor knowledge_card (general knowledge).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "db_connector": {
     "boundary": "Acesso a dados estruturados. NAO eh api_client nem retriever.",
@@ -358,7 +553,12 @@
     "llm_function": "CALL",
     "max_bytes": 1024,
     "naming": "p04_db_{{source}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "decision_record": {
     "boundary": "Registro. NAO eh law nem pattern.",
@@ -367,7 +567,12 @@
     "llm_function": "REASON",
     "max_bytes": 4096,
     "naming": "p08_adr_{{decision}}.md",
-    "pillar": "P08"
+    "pillar": "P08",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "diagram": {
     "boundary": "Diagrama visual de arquitetura. NAO eh component_map (dados estruturados) nem pattern (sem prescricao).",
@@ -376,7 +581,12 @@
     "llm_function": "INJECT",
     "max_bytes": 4096,
     "naming": "p08_diag_{{scope}}.md",
-    "pillar": "P08"
+    "pillar": "P08",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "diff_strategy": {
     "pillar": "P04",
@@ -385,7 +595,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Change application and matching algorithm",
-    "boundary": "Diff matching strategy. NOT edit_format (format spec) nor parser (generic parsing)."
+    "boundary": "Diff matching strategy. NOT edit_format (format spec) nor parser (generic parsing).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "dispatch_rule": {
     "boundary": "Regra de despacho keyword>agent_group. NAO eh router (P02, task>model routing) nem workflow (nao executa, apenas roteia).",
@@ -394,7 +609,12 @@
     "llm_function": "REASON",
     "max_bytes": 3072,
     "naming": "p12_dr_{{scope}}.yaml",
-    "pillar": "P12"
+    "pillar": "P12",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "document_loader": {
     "boundary": "Transforma arquivo bruto em documentos chunkeados. NAO eh retriever (busca sobre chunks) nem search_tool (busca externa).",
@@ -403,7 +623,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p04_loader_{{format}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "dual_loop_architecture": {
     "pillar": "P08",
@@ -412,7 +637,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Outer/inner loop agent control architecture",
-    "boundary": "Dual-loop control. NOT workflow (linear flow) nor collaboration_pattern (multi-agent topology)."
+    "boundary": "Dual-loop control. NOT workflow (linear flow) nor collaboration_pattern (multi-agent topology).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "e2e_eval": {
     "boundary": "Teste end-to-end de pipeline completo. NAO eh unit_eval (escopo isolado) nem benchmark (nao mede performance).",
@@ -421,7 +651,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_e2e_{{pipeline}}.md + .yaml",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "edit_format": {
     "pillar": "P06",
@@ -430,7 +665,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "LLM-to-host file change format specification",
-    "boundary": "Edit format spec. NOT diff_strategy (matching algo) nor formatter (output formatting)."
+    "boundary": "Edit format spec. NOT diff_strategy (matching algo) nor formatter (output formatting).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "effort_profile": {
     "boundary": "effort_profile = QUAL modelo/thinking usar; runtime_rule = QUANDO/COMO executar",
@@ -439,7 +679,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 4096,
     "naming": "p09_effort_profile_{{topic}}.md + .yaml",
-    "pillar": "P09"
+    "pillar": "P09",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "embedder_provider": {
     "added_version": "10.0.0",
@@ -449,7 +694,12 @@
     "llm_function": "INJECT",
     "naming": "p01_ep_{{provider}}.yaml",
     "pillar": "P01",
-    "sdk_module": "cex_sdk.knowledge.embedder"
+    "sdk_module": "cex_sdk.knowledge.embedder",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "embedding_config": {
     "boundary": "Configuracao de modelo de embedding. NAO eh knowledge_index (P10) que configura o indice, apenas o modelo vetorial.",
@@ -458,7 +708,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 512,
     "naming": "p01_emb_{{model}}.yaml",
-    "pillar": "P01"
+    "pillar": "P01",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "entity_memory": {
     "boundary": "Fatos sobre X. NAO eh learning_record.",
@@ -467,7 +722,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p10_entity_{{name}}.md",
-    "pillar": "P10"
+    "pillar": "P10",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "enum_def": {
     "boundary": "Lista finita. NAO eh type_def.",
@@ -476,7 +736,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 1024,
     "naming": "p06_enum_{{name}}.md",
-    "pillar": "P06"
+    "pillar": "P06",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "env_config": {
     "boundary": "Variaveis de ambiente do sistema. NAO eh boot_config (P02, per-provider) nem feature_flag (on/off logico).",
@@ -485,7 +750,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p09_env_{{scope}}.yaml",
-    "pillar": "P09"
+    "pillar": "P09",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "eval_dataset": {
     "boundary": "Conjunto. NAO eh golden_test.",
@@ -494,7 +764,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_dataset_{{name}}.md",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "eval_framework": {
     "pillar": "P07",
@@ -503,7 +778,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "End-to-end evaluation framework integration",
-    "boundary": "Eval framework. NOT benchmark_suite (benchmark collection) nor eval_metric (single metric)."
+    "boundary": "Eval framework. NOT benchmark_suite (benchmark collection) nor eval_metric (single metric).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "eval_metric": {
     "pillar": "P07",
@@ -512,7 +792,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Individual evaluation metric definition",
-    "boundary": "Single metric def. NOT benchmark_suite (composite) nor scoring_rubric (qualitative rubric)."
+    "boundary": "Single metric def. NOT benchmark_suite (composite) nor scoring_rubric (qualitative rubric).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "experiment_config": {
     "description": "A/B test and prompt experiment configuration with variants, metrics, and statistical analysis",
@@ -521,7 +806,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p09_ec_{{name}}.yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "experiment_tracker": {
     "pillar": "P07",
@@ -530,7 +820,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Experiment configuration and results tracking",
-    "boundary": "Experiment tracking. NOT benchmark (evaluation suite) nor experiment_config (single experiment settings)."
+    "boundary": "Experiment tracking. NOT benchmark (evaluation suite) nor experiment_config (single experiment settings).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "fallback_chain": {
     "boundary": "Sequencia de fallback entre modelos LLM. NAO eh chain (P03, sequencia de prompts) nem router (task routing).",
@@ -539,7 +834,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 512,
     "naming": "p02_fb_{{chain}}.yaml",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "feature_flag": {
     "boundary": "Flag de feature on/off com rollout gradual. NAO eh permission (acesso) nem env_config (variavel generica).",
@@ -548,7 +848,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 1536,
     "naming": "p09_ff_{{feature}}.yaml",
-    "pillar": "P09"
+    "pillar": "P09",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "few_shot_example": {
     "boundary": "Par input/output para few-shot learning. NAO eh golden_test (P07) que avalia qualidade, apenas exemplifica formato.",
@@ -557,7 +862,12 @@
     "llm_function": "INJECT",
     "max_bytes": 1024,
     "naming": "p01_fse_{{topic}}.md + .yaml",
-    "pillar": "P01"
+    "pillar": "P01",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "finetune_config": {
     "description": "Fine-tuning job configuration: dataset, base model, adapter type (LoRA/PEFT), hyperparameters, eval metrics",
@@ -566,7 +876,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 4096,
     "naming": "p02_ft_{{name}}.yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "formatter": {
     "boundary": "Transformador de formato de saida. NAO eh parser (nao extrai dados) nem response_format (nao define o que o LLM ve).",
@@ -575,7 +890,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p05_fmt_{{format}}.md",
-    "pillar": "P05"
+    "pillar": "P05",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "function_def": {
     "boundary": "Schema JSON de funcao que LLM pode chamar via tool_use. NAO eh mcp_server (protocolo completo) nem api_client (implementacao do client).",
@@ -584,7 +904,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_fn_{{name}}.md + .json",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "glossary_entry": {
     "boundary": "Definicao curta de termo do dominio. NAO eh knowledge_card (sem densidade min) nem context_doc (sem escopo).",
@@ -593,7 +918,12 @@
     "llm_function": "INJECT",
     "max_bytes": 512,
     "naming": "p01_gl_{{term}}.md + .yaml",
-    "pillar": "P01"
+    "pillar": "P01",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "golden_test": {
     "boundary": "Caso de teste referencia quality 9.5+. NAO eh few_shot_example (P01, exemplifica) nem unit_eval (qualquer quality).",
@@ -602,7 +932,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_gt_{{case}}.md + .yaml",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "graph_rag_config": {
     "pillar": "P01",
@@ -611,7 +946,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Graph-based RAG architecture configuration",
-    "boundary": "Graph RAG config. NOT knowledge_graph (graph instance) nor rag_source (document source)."
+    "boundary": "Graph RAG config. NOT knowledge_graph (graph instance) nor rag_source (document source).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "guardrail": {
     "boundary": "Restricao de seguranca e safety boundary. NAO eh permission (P09, acesso) nem law (P08, operacional).",
@@ -620,7 +960,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 4096,
     "naming": "p11_gr_{{scope}}.yaml",
-    "pillar": "P11"
+    "pillar": "P11",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "handoff": {
     "boundary": "Instrucao de handoff com task+context+commit. NAO eh action_prompt (P03, prompt puro) nem signal (evento simples).",
@@ -629,7 +974,12 @@
     "llm_function": "COLLABORATE",
     "max_bytes": 4096,
     "naming": "p12_ho_{{task}}.md",
-    "pillar": "P12"
+    "pillar": "P12",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "handoff_protocol": {
     "boundary": "Handoff A2A. NAO eh dispatch_rule.",
@@ -638,7 +988,12 @@
     "llm_function": "COLLABORATE",
     "max_bytes": 2048,
     "naming": "p02_handoff_{{protocol}}.md",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "hitl_config": {
     "description": "Human-in-the-loop approval flow configuration: review triggers, escalation chains, timeout actions",
@@ -647,7 +1002,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p11_hitl_{{name}}.yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "hook": {
     "boundary": "Codigo executavel em evento pre/post. NAO eh lifecycle_rule (P11, regra declarativa) nem daemon (processo persistente).",
@@ -656,7 +1016,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 1024,
     "naming": "p04_hook_{{name}}.md",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "hook_config": {
     "boundary": "hook_config = DECLARACAO de quais hooks; hook = IMPLEMENTACAO do hook",
@@ -665,7 +1030,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 4096,
     "naming": "p04_hook_config_{{topic}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "incident_report": {
     "pillar": "P11",
@@ -674,7 +1044,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "AI incident documentation and post-mortem",
-    "boundary": "Incident post-mortem. NOT bugloop (auto-fix) nor learning_record (generic learning)."
+    "boundary": "Incident post-mortem. NOT bugloop (auto-fix) nor learning_record (generic learning).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "input_schema": {
     "boundary": "Contrato de entrada que define dados requeridos. NAO eh validation_schema (saida) nem type_def (definicao abstrata).",
@@ -683,7 +1058,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 3072,
     "naming": "p06_is_{{scope}}.yaml",
-    "pillar": "P06"
+    "pillar": "P06",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "instruction": {
     "boundary": "",
@@ -692,7 +1072,12 @@
     "llm_function": "",
     "max_bytes": 2048,
     "naming": "ex_instruction_{topic}.md",
-    "pillar": "P03"
+    "pillar": "P03",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "interface": {
     "boundary": "Contrato bilateral de integracao entre agentes. NAO eh input_schema (unilateral) nem signal (P12, evento simples).",
@@ -701,7 +1086,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 3072,
     "naming": "p06_iface_{{contract}}.yaml",
-    "pillar": "P06"
+    "pillar": "P06",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "invariant": {
     "boundary": "Lei operacional inviolavel do sistema. NAO eh instruction (P03, flexivel) nem guardrail (P11, safety-focused).",
@@ -710,7 +1100,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 3072,
     "naming": "p08_law_{{number}}.md",
-    "pillar": "P08"
+    "pillar": "P08",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "judge_config": {
     "pillar": "P07",
@@ -719,7 +1114,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "LLM judge configuration for automated evaluation",
-    "boundary": "Judge config. NOT llm_judge (judge instance) nor scoring_rubric (human rubric)."
+    "boundary": "Judge config. NOT llm_judge (judge instance) nor scoring_rubric (human rubric).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "knowledge_card": {
     "boundary": "Conhecimento destilado, estatico, versionado. NAO eh instrucao, template, ou configuracao.",
@@ -728,7 +1128,12 @@
     "llm_function": "INJECT",
     "max_bytes": 5120,
     "naming": "p01_kc_{{topic}}.md + .yaml",
-    "pillar": "P01"
+    "pillar": "P01",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "knowledge_graph": {
     "description": "Graph-based knowledge schema with entity types, relation types, and traversal strategies for GraphRAG",
@@ -737,7 +1142,12 @@
     "llm_function": "INJECT",
     "max_bytes": 8192,
     "naming": "p01_kg_{{name}}.md",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "knowledge_index": {
     "boundary": "Indice de busca semantica (BM25, FAISS). NAO eh embedding_config (P01, modelo) nem rag_source (P01, fonte).",
@@ -746,14 +1156,24 @@
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p10_bi_{{index}}.yaml",
-    "pillar": "P10"
+    "pillar": "P10",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "landing_page": {
     "pillar": "P05",
     "builder": "landing-page-builder",
     "domain": "frontend",
     "description": "Complete production-ready landing page with 12 sections, responsive, dark mode, SEO",
-    "naming": "p05_lp_{{name}}.html"
+    "naming": "p05_lp_{{name}}.html",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "learning_record": {
     "boundary": "Registro de aprendizado persistente. NAO eh session_state (efemero) nem axiom (imutavel, nao aprende).",
@@ -762,7 +1182,12 @@
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p10_lr_{{topic}}.md + .yaml",
-    "pillar": "P10"
+    "pillar": "P10",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "lens": {
     "boundary": "Perspectiva especializada sobre dominio. NAO eh agent (sem capabilities) nem mental_model (sem routing rules).",
@@ -771,7 +1196,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p02_lens_{{perspective}}.md + .yaml",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "lifecycle_rule": {
     "boundary": "Regra declarativa de ciclo de vida. NAO eh hook (P04, codigo executavel) nem runtime_rule (P09, tecnico).",
@@ -780,7 +1210,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p11_lc_{{rule}}.yaml",
-    "pillar": "P11"
+    "pillar": "P11",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "llm_judge": {
     "boundary": "Avaliador LLM. NAO eh scoring_rubric.",
@@ -789,7 +1224,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p07_judge_{{name}}.md",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "mcp_server": {
     "boundary": "Servidor MCP que expoe tools e resources. NAO eh connector (integracao simples) nem client (consumidor de API).",
@@ -798,7 +1238,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_mcp_{{server}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "memory_architecture": {
     "pillar": "P10",
@@ -807,7 +1252,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Complete memory system architecture design",
-    "boundary": "Memory system design. NOT memory_type (single type) nor memory_scope (access scope)."
+    "boundary": "Memory system design. NOT memory_type (single type) nor memory_scope (access scope).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "memory_benchmark": {
     "pillar": "P07",
@@ -816,7 +1266,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Memory system quality evaluation suite",
-    "boundary": "Memory eval suite. NOT benchmark_suite (general benchmarks) nor memory_architecture (system design)."
+    "boundary": "Memory eval suite. NOT benchmark_suite (general benchmarks) nor memory_architecture (system design).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "memory_scope": {
     "boundary": "Qual memoria usar. NAO eh session_state.",
@@ -825,7 +1280,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p02_memscope_{{agent}}.md",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "memory_summary": {
     "boundary": "Compressao. NAO eh session_state.",
@@ -834,7 +1294,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p10_summary_{{scope}}.md",
-    "pillar": "P10"
+    "pillar": "P10",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "memory_type": {
     "boundary": "Classification and policy for memory types. NAO eh entity_memory (instancia de memoria) nem memory_scope (quem acessa) nem memory_summary (resumo).",
@@ -843,7 +1308,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p10_mt_{{type_name}}.yaml",
-    "pillar": "P10"
+    "pillar": "P10",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "mental_model": {
     "boundary": "Identidade fixa do agente com routing e decisoes. NAO eh mental_model P10 (estado variavel por sessao).",
@@ -852,7 +1322,12 @@
     "llm_function": "BECOME",
     "max_bytes": 2048,
     "naming": "p02_mm_{{agent}}.yaml",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "model_architecture": {
     "pillar": "P02",
@@ -861,7 +1336,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Neural network architecture definition",
-    "boundary": "Architecture definition. NOT model_card (deployment spec) nor model_provider (API integration)."
+    "boundary": "Architecture definition. NOT model_card (deployment spec) nor model_provider (API integration).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "model_card": {
     "boundary": "Spec de LLM (pricing, context window, capabilities). NAO eh agent (P02, quem usa o modelo) nem boot_config (como inicia).",
@@ -870,7 +1350,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p02_mc_{{model}}.md + .yaml",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "model_provider": {
     "added_version": "10.0.0",
@@ -880,7 +1365,12 @@
     "llm_function": "CALL",
     "naming": "p02_mp_{{provider}}.yaml",
     "pillar": "P02",
-    "sdk_module": "cex_sdk.models.providers"
+    "sdk_module": "cex_sdk.models.providers",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "model_registry": {
     "pillar": "P10",
@@ -889,7 +1379,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Model versioning and artifact tracking",
-    "boundary": "Model registry. NOT model_card (single model spec) nor checkpoint (training snapshot)."
+    "boundary": "Model registry. NOT model_card (single model spec) nor checkpoint (training snapshot).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "multi_modal_config": {
     "description": "Input format, resolution, encoding, and routing rules for multi-modal LLM interactions",
@@ -898,7 +1393,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
     "naming": "p04_mmc_{{capability}}.yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "multimodal_prompt": {
     "pillar": "P03",
@@ -907,7 +1407,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Cross-modal prompt pattern for vision/audio/text",
-    "boundary": "Multimodal prompt. NOT prompt_technique (text-only) nor multi_modal_config (model settings)."
+    "boundary": "Multimodal prompt. NOT prompt_technique (text-only) nor multi_modal_config (model settings).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "naming_rule": {
     "boundary": "Regra de nomenclatura de artefatos. NAO eh validator (P06, valida conteudo) nem type_def (P06, define tipo).",
@@ -916,7 +1421,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p08_nr_{{scope}}.md",
-    "pillar": "P08"
+    "pillar": "P08",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "notifier": {
     "boundary": "Envia notificacao para usuario/sistema. NAO eh webhook (evento bidirecional) nem api_client (integracao completa).",
@@ -925,7 +1435,12 @@
     "llm_function": "CALL",
     "max_bytes": 1024,
     "naming": "p04_notify_{{channel}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "ontology": {
     "description": "Formal taxonomy and ontology definitions (OWL, SKOS, schema.org patterns) for knowledge organization",
@@ -934,7 +1449,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 8192,
     "naming": "p01_ont_{{name}}.md",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "optimizer": {
     "boundary": "Otimizador de processo metric>action. NAO eh bugloop (correcao pontual) nem benchmark (P07, medicao passiva).",
@@ -943,7 +1463,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p11_opt_{{target}}.md + .yaml",
-    "pillar": "P11"
+    "pillar": "P11",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "output_validator": {
     "boundary": "Valida OUTPUT. NAO eh validator P06.",
@@ -952,7 +1477,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p05_oval_{{target}}.md",
-    "pillar": "P05"
+    "pillar": "P05",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "parser": {
     "boundary": "Extrator de dados de saida bruta. NAO eh formatter (nao transforma formato) nem validator (P06, nao valida).",
@@ -961,7 +1491,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p05_parser_{{target}}.md + .yaml",
-    "pillar": "P05"
+    "pillar": "P05",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "path_config": {
     "boundary": "Caminhos do sistema de arquivos. NAO eh env_config (variaveis genericas) nem permission (controle de acesso).",
@@ -970,7 +1505,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p09_path_{{scope}}.yaml",
-    "pillar": "P09"
+    "pillar": "P09",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "pattern": {
     "boundary": "Pattern reutilizavel de arquitetura. NAO eh law (inviolavel) nem workflow (P12, sequencia executavel).",
@@ -979,7 +1519,12 @@
     "llm_function": "INJECT",
     "max_bytes": 4096,
     "naming": "p08_pat_{{name}}.md + .yaml",
-    "pillar": "P08"
+    "pillar": "P08",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "permission": {
     "boundary": "Regra de permissao de acesso. NAO eh guardrail (P11, safety boundary) nem feature_flag (on/off de feature).",
@@ -988,7 +1533,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p09_perm_{{scope}}.yaml",
-    "pillar": "P09"
+    "pillar": "P09",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "planning_strategy": {
     "pillar": "P03",
@@ -997,7 +1547,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Agent planning approach definition",
-    "boundary": "Planning approach. NOT reasoning_strategy (prompt reasoning) nor workflow (execution flow)."
+    "boundary": "Planning approach. NOT reasoning_strategy (prompt reasoning) nor workflow (execution flow).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "plugin": {
     "boundary": "Extensao plugavel ao sistema. NAO eh hook (evento especifico) nem skill (sem fases estruturadas).",
@@ -1006,7 +1561,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_plug_{{name}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "procedural_memory": {
     "pillar": "P10",
@@ -1015,7 +1575,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Skill and procedure storage/retrieval system",
-    "boundary": "Procedural memory. NOT entity_memory (entity facts) nor knowledge_card (declarative knowledge)."
+    "boundary": "Procedural memory. NOT entity_memory (entity facts) nor knowledge_card (declarative knowledge).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "prompt_cache": {
     "description": "TTL, eviction, and invalidation config for cached LLM prompt/completion pairs",
@@ -1024,7 +1589,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p10_pc_{{name}}.yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "prompt_compiler": {
     "description": "Intent-to-artifact transmutation rules. Compiles vague user input into structured {kind, pillar, nucleus, verb} resolution. The behavioral seed that makes any LLM operating CEX a prompt compiler (DSPy term).",
@@ -1033,7 +1603,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 16384,
     "naming": "p03_pc_{{name}}.md",
-    "core": true
+    "core": true,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "prompt_optimizer": {
     "pillar": "P03",
@@ -1042,7 +1617,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Automated prompt improvement and compilation tool",
-    "boundary": "Prompt optimizer. NOT prompt_compiler (CEX internal) nor optimizer (general optimization)."
+    "boundary": "Prompt optimizer. NOT prompt_compiler (CEX internal) nor optimizer (general optimization).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "prompt_technique": {
     "pillar": "P03",
@@ -1051,7 +1631,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Specific prompting method or pattern",
-    "boundary": "Prompt technique. NOT prompt_template (reusable template) nor reasoning_strategy (reasoning-specific)."
+    "boundary": "Prompt technique. NOT prompt_template (reusable template) nor reasoning_strategy (reasoning-specific).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "prompt_template": {
     "boundary": "Template com variaveis. NAO eh user_prompt (fixo) nem system_prompt (identidade).",
@@ -1060,7 +1645,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 8192,
     "naming": "p03_pt_{{topic}}.md",
-    "pillar": "P03"
+    "pillar": "P03",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "prompt_version": {
     "boundary": "Versao imutavel. NAO eh prompt_template.",
@@ -1069,7 +1659,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p03_pv_{{version}}.md",
-    "pillar": "P03"
+    "pillar": "P03",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "prosody_config": {
     "pillar": "P09",
@@ -1078,7 +1673,12 @@
     "max_bytes": 2048,
     "core": false,
     "description": "Voice personality and emotion settings",
-    "boundary": "Prosody/emotion settings. NOT tts_provider (provider integration) nor agent_profile (agent persona)."
+    "boundary": "Prosody/emotion settings. NOT tts_provider (provider integration) nor agent_profile (agent persona).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "quality_gate": {
     "boundary": "Barreira de qualidade com score numerico. NAO eh validator (P06, tecnico pass/fail) nem scoring_rubric (P07, define criterios).",
@@ -1087,7 +1687,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p11_qg_{{gate}}.yaml",
-    "pillar": "P11"
+    "pillar": "P11",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "quantization_config": {
     "pillar": "P09",
@@ -1096,7 +1701,12 @@
     "max_bytes": 2048,
     "core": false,
     "description": "Model quantization and compression settings",
-    "boundary": "Quantization settings. NOT compression_config (context compression) nor model_architecture (full arch)."
+    "boundary": "Quantization settings. NOT compression_config (context compression) nor model_architecture (full arch).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "rag_source": {
     "boundary": "Ponteiro para fonte externa indexavel. NAO eh o conteudo em si, apenas referencia com URL e freshness.",
@@ -1105,7 +1715,12 @@
     "llm_function": "INJECT",
     "max_bytes": 1024,
     "naming": "p01_rs_{{source}}.md + .yaml",
-    "pillar": "P01"
+    "pillar": "P01",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "rate_limit_config": {
     "boundary": "Limites. NAO eh runtime_rule.",
@@ -1114,7 +1729,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 1024,
     "naming": "p09_ratelimit_{{scope}}.md",
-    "pillar": "P09"
+    "pillar": "P09",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "realtime_session": {
     "pillar": "P09",
@@ -1123,7 +1743,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Live bidirectional session configuration",
-    "boundary": "Realtime session config. NOT transport_config (network layer) nor voice_pipeline (full architecture)."
+    "boundary": "Realtime session config. NOT transport_config (network layer) nor voice_pipeline (full architecture).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "reasoning_strategy": {
     "pillar": "P03",
@@ -1132,7 +1757,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Prompting technique for structured reasoning",
-    "boundary": "Reasoning technique. NOT prompt_technique (generic prompt pattern) nor thinking_config (budget settings)."
+    "boundary": "Reasoning technique. NOT prompt_technique (generic prompt pattern) nor thinking_config (budget settings).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "reasoning_trace": {
     "added_version": "10.0.0",
@@ -1142,7 +1772,12 @@
     "llm_function": "REASON",
     "naming": "p03_rt_{{topic}}.md",
     "pillar": "P03",
-    "sdk_module": "cex_sdk.reasoning.step"
+    "sdk_module": "cex_sdk.reasoning.step",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "red_team_eval": {
     "boundary": "Eval seguranca. NAO eh e2e_eval.",
@@ -1151,7 +1786,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p07_redteam_{{target}}.md",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "regression_check": {
     "boundary": "Atual vs anterior. NAO eh benchmark.",
@@ -1160,7 +1800,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p07_regcheck_{{target}}.md",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "repo_map": {
     "pillar": "P01",
@@ -1169,7 +1814,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Codebase context extraction strategy",
-    "boundary": "Repo context map. NOT component_map (system architecture) nor knowledge_index (search index)."
+    "boundary": "Repo context map. NOT component_map (system architecture) nor knowledge_index (search index).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "reranker_config": {
     "pillar": "P01",
@@ -1178,7 +1828,12 @@
     "max_bytes": 2048,
     "core": false,
     "description": "Retrieval reranking model and strategy config",
-    "boundary": "Reranker config. NOT retriever_config (first-stage retrieval) nor retriever (retrieval logic)."
+    "boundary": "Reranker config. NOT retriever_config (first-stage retrieval) nor retriever (retrieval logic).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "research_pipeline": {
     "boundary": "Pipeline de pesquisa multi-fonte STORM+CRAG+CRITIC. NAO eh retriever (busca local) nem search_tool (busca web simples).",
@@ -1187,7 +1842,12 @@
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
     "naming": "p04_rp_{{name}}.md",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "response_format": {
     "boundary": "Formato de resposta injetado no prompt do LLM. NAO eh validation_schema P06 (contrato pos-geracao aplicado pelo sistema).",
@@ -1196,7 +1856,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 4096,
     "naming": "p05_rf_{{format}}.yaml",
-    "pillar": "P05"
+    "pillar": "P05",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "retriever": {
     "boundary": "Busca sobre embedding store ou indice local. NAO eh search_tool (busca web externa) nem document_loader (ingere arquivos).",
@@ -1205,7 +1870,12 @@
     "llm_function": "INJECT",
     "max_bytes": 2048,
     "naming": "p04_retr_{{store}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "retriever_config": {
     "boundary": "Parametros de busca. NAO eh embedding_config.",
@@ -1214,7 +1884,12 @@
     "llm_function": "CONSTRAIN",
     "max_bytes": 2048,
     "naming": "p01_retr_cfg_{{store}}.md",
-    "pillar": "P01"
+    "pillar": "P01",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "reward_model": {
     "pillar": "P07",
@@ -1223,7 +1898,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Process/outcome reward model configuration",
-    "boundary": "Reward model config. NOT rl_algorithm (training algo) nor scoring_rubric (human eval rubric)."
+    "boundary": "Reward model config. NOT rl_algorithm (training algo) nor scoring_rubric (human eval rubric).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "reward_signal": {
     "boundary": "Score. NAO eh quality_gate.",
@@ -1232,7 +1912,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 2048,
     "naming": "p11_reward_{{metric}}.md",
-    "pillar": "P11"
+    "pillar": "P11",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "rl_algorithm": {
     "pillar": "P02",
@@ -1241,7 +1926,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Reinforcement learning training algorithm definition",
-    "boundary": "RL algorithm def. NOT training_method (broader training) nor reward_model (reward function)."
+    "boundary": "RL algorithm def. NOT training_method (broader training) nor reward_model (reward function).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "router": {
     "boundary": "Roteamento task-to-agent_group. NAO eh dispatch_rule (P12, keyword>agent_group) nem fallback_chain (modelo>modelo).",
@@ -1250,7 +1940,12 @@
     "llm_function": "REASON",
     "max_bytes": 1024,
     "naming": "p02_rt_{{scope}}.yaml",
-    "pillar": "P02"
+    "pillar": "P02",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "runtime_rule": {
     "boundary": "Regra de runtime tecnica (timeouts, retries). NAO eh lifecycle_rule (P11, ciclo de vida) nem law (P08, inviolavel).",
@@ -1259,7 +1954,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p09_rr_{{rule}}.yaml",
-    "pillar": "P09"
+    "pillar": "P09",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "runtime_state": {
     "boundary": "Estado mental variavel acumulado em runtime. NAO eh mental_model P02 (identidade fixa do agente, imutavel) nem session_state (efemero, snapshot).",
@@ -1268,7 +1968,12 @@
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p10_rs_{{agent}}.yaml",
-    "pillar": "P10"
+    "pillar": "P10",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "safety_policy": {
     "pillar": "P11",
@@ -1277,7 +1982,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Organizational AI safety governance rules",
-    "boundary": "Safety governance rules. NOT threat_model (risk assessment) nor compliance_framework (regulatory mapping)."
+    "boundary": "Safety governance rules. NOT threat_model (risk assessment) nor compliance_framework (regulatory mapping).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "sandbox_config": {
     "pillar": "P09",
@@ -1286,7 +1996,12 @@
     "max_bytes": 2048,
     "core": false,
     "description": "Isolated code execution environment config",
-    "boundary": "Sandbox/isolation config. NOT env_config (environment vars) nor code_executor (execution logic)."
+    "boundary": "Sandbox/isolation config. NOT env_config (environment vars) nor code_executor (execution logic).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "schedule": {
     "boundary": "QUANDO rodar. NAO eh dispatch_rule.",
@@ -1295,7 +2010,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 1024,
     "naming": "p12_sched_{{name}}.md",
-    "pillar": "P12"
+    "pillar": "P12",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "scoring_rubric": {
     "boundary": "Criterio de avaliacao com framework. NAO eh benchmark (nao mede) nem quality_gate (P11, nao bloqueia).",
@@ -1304,7 +2024,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 5120,
     "naming": "p07_sr_{{framework}}.md + .yaml",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "search_strategy": {
     "pillar": "P04",
@@ -1313,7 +2038,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Inference-time compute allocation strategy",
-    "boundary": "Search/inference strategy. NOT reasoning_strategy (prompt technique) nor retriever (document retrieval)."
+    "boundary": "Search/inference strategy. NOT reasoning_strategy (prompt technique) nor retriever (document retrieval).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "search_tool": {
     "boundary": "Busca e retorna resultados ranqueados. NAO eh retriever (vector store local) nem document_loader (ingere arquivos).",
@@ -1322,7 +2052,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_search_{{provider}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "secret_config": {
     "boundary": "Credenciais. NAO eh env_config.",
@@ -1331,7 +2066,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 1024,
     "naming": "p09_secret_{{scope}}.md",
-    "pillar": "P09"
+    "pillar": "P09",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "self_improvement_loop": {
     "pillar": "P11",
@@ -1340,7 +2080,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Agent/system self-evolution mechanism",
-    "boundary": "Self-improvement loop. NOT bugloop (bug-specific) nor learning_record (passive learning)."
+    "boundary": "Self-improvement loop. NOT bugloop (bug-specific) nor learning_record (passive learning).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "session_backend": {
     "added_version": "10.0.0",
@@ -1350,7 +2095,12 @@
     "llm_function": "INJECT",
     "naming": "p10_sb_{{backend}}.yaml",
     "pillar": "P10",
-    "sdk_module": "cex_sdk.session.base"
+    "sdk_module": "cex_sdk.session.base",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "session_state": {
     "boundary": "Estado efemero de sessao (snapshot). NAO eh runtime_state (persistente entre sessoes) nem learning_record (nao acumula).",
@@ -1359,7 +2109,12 @@
     "llm_function": "INJECT",
     "max_bytes": 3072,
     "naming": "p10_ss_{{session}}.yaml",
-    "pillar": "P10"
+    "pillar": "P10",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "signal": {
     "boundary": "Sinal simples entre agentes (complete, error). NAO eh handoff (instrucao completa) nem interface (P06, contrato).",
@@ -1368,7 +2123,12 @@
     "llm_function": "COLLABORATE",
     "max_bytes": 4096,
     "naming": "p12_sig_{{event}}.json",
-    "pillar": "P12"
+    "pillar": "P12",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "skill": {
     "boundary": "Phased reusable capability with trigger. NOT agent (P02, has identity) or workflow (P12, orchestration steps) or action_prompt (P03, single-turn).",
@@ -1382,7 +2142,12 @@
     "llm_function": "BECOME",
     "naming": "p04_skill_{{name}}.md",
     "pillar": "P04",
-    "schema_ref": "archetypes/builders/skill-builder/bld_schema_skill.md"
+    "schema_ref": "archetypes/builders/skill-builder/bld_schema_skill.md",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "smoke_eval": {
     "boundary": "Teste rapido de sanidade em <30s. NAO eh unit_eval (profundo) nem benchmark (metricas continuas).",
@@ -1391,7 +2156,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p07_se_{{scope}}.md",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "social_publisher": {
     "boundary": "Pipeline de auto-posting em redes sociais. NAO eh notifier (alertas pontuais) nem schedule (agendamento generico).",
@@ -1400,7 +2170,12 @@
     "llm_function": "PRODUCE",
     "max_bytes": 5120,
     "naming": "p04_sp_{{name}}.md",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "software_project": {
     "description": "Complete software project definition — architecture, dependencies, build, deployment, repo structure",
@@ -1409,7 +2184,12 @@
     "llm_function": "BECOME",
     "max_bytes": 8192,
     "naming": "p02_software_project_{{slug}}.md + .yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "spawn_config": {
     "boundary": "Configuracao de spawn de agent_groups. NAO eh boot_config (P02, per-provider) nem env_config (P09, variaveis).",
@@ -1418,7 +2198,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p12_spawn_{{mode}}.yaml",
-    "pillar": "P12"
+    "pillar": "P12",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "streaming_config": {
     "description": "SSE, WebSocket, and chunked response streaming configuration for real-time LLM output",
@@ -1427,7 +2212,12 @@
     "llm_function": "PRODUCE",
     "max_bytes": 2048,
     "naming": "p05_sc_{{name}}.yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "stt_provider": {
     "pillar": "P04",
@@ -1436,7 +2226,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Speech-to-text provider integration",
-    "boundary": "STT provider integration. NOT voice_pipeline (full arch) nor vad_config (detection settings)."
+    "boundary": "STT provider integration. NOT voice_pipeline (full arch) nor vad_config (detection settings).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "supabase_data_layer": {
     "description": "Supabase-specific data layer — tables, RLS policies, edge functions, storage buckets, auth rules",
@@ -1445,7 +2240,12 @@
     "llm_function": "CALL",
     "max_bytes": 8192,
     "naming": "p04_supabase_data_layer_{{slug}}.md + .yaml",
-    "core": false
+    "core": false,
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "supervisor": {
     "boundary": "",
@@ -1454,7 +2254,12 @@
     "llm_function": "",
     "max_bytes": 2048,
     "naming": "ex_director_{topic}.md",
-    "pillar": "P08"
+    "pillar": "P08",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "system_prompt": {
     "boundary": "Identidade + regras + formato. Lido PRIMEIRO pelo LLM.",
@@ -1463,14 +2268,24 @@
     "llm_function": "BECOME",
     "max_bytes": 4096,
     "naming": "p03_sp_{{agent}}.md",
-    "pillar": "P03"
+    "pillar": "P03",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "tagline": {
     "pillar": "P03",
     "builder": "tagline-builder",
     "domain": "marketing",
     "description": "Short memorable phrase capturing brand essence — taglines, slogans, headlines",
-    "naming": "p03_tl_{{topic}}.md"
+    "naming": "p03_tl_{{topic}}.md",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "thinking_config": {
     "pillar": "P09",
@@ -1479,7 +2294,12 @@
     "max_bytes": 2048,
     "core": false,
     "description": "Extended thinking and budget token settings",
-    "boundary": "Thinking budget config. NOT reasoning_strategy (technique) nor context_window_config (token limits)."
+    "boundary": "Thinking budget config. NOT reasoning_strategy (technique) nor context_window_config (token limits).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "threat_model": {
     "pillar": "P11",
@@ -1488,7 +2308,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Structured hazard/risk assessment for AI systems",
-    "boundary": "Threat/risk assessment. NOT safety_policy (governance rules) nor guardrail (runtime filter)."
+    "boundary": "Threat/risk assessment. NOT safety_policy (governance rules) nor guardrail (runtime filter).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "toolkit": {
     "added_version": "10.0.0",
@@ -1498,7 +2323,12 @@
     "llm_function": "CALL",
     "naming": "p04_tk_{{name}}.md + .yaml",
     "pillar": "P04",
-    "sdk_module": "cex_sdk.tools.toolkit"
+    "sdk_module": "cex_sdk.tools.toolkit",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "trace_config": {
     "added_version": "10.0.0",
@@ -1508,7 +2338,12 @@
     "llm_function": "GOVERN",
     "naming": "p07_tc_{{scope}}.yaml",
     "pillar": "P07",
-    "sdk_module": "cex_sdk.tracing.exporter"
+    "sdk_module": "cex_sdk.tracing.exporter",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "training_method": {
     "pillar": "P02",
@@ -1517,7 +2352,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Model training/adaptation technique definition",
-    "boundary": "Training technique. NOT rl_algorithm (RL-specific) nor finetune_config (runtime fine-tune settings)."
+    "boundary": "Training technique. NOT rl_algorithm (RL-specific) nor finetune_config (runtime fine-tune settings).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "trajectory_eval": {
     "pillar": "P07",
@@ -1526,7 +2366,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Agent trajectory evaluation methodology",
-    "boundary": "Trajectory evaluation. NOT benchmark (static eval) nor e2e_eval (end-to-end test)."
+    "boundary": "Trajectory evaluation. NOT benchmark (static eval) nor e2e_eval (end-to-end test).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "transport_config": {
     "pillar": "P09",
@@ -1535,7 +2380,12 @@
     "max_bytes": 2048,
     "core": false,
     "description": "Network transport layer for realtime communication",
-    "boundary": "Transport layer config. NOT realtime_session (session lifecycle) nor streaming_config (LLM streaming)."
+    "boundary": "Transport layer config. NOT realtime_session (session lifecycle) nor streaming_config (LLM streaming).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "tts_provider": {
     "pillar": "P04",
@@ -1544,7 +2394,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Text-to-speech provider integration",
-    "boundary": "TTS provider integration. NOT voice_pipeline (full arch) nor prosody_config (voice personality)."
+    "boundary": "TTS provider integration. NOT voice_pipeline (full arch) nor prosody_config (voice personality).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "type_def": {
     "boundary": "Definicao de tipo customizado no sistema. NAO eh input_schema (contrato de entrada) nem interface (contrato bilateral).",
@@ -1553,7 +2408,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p06_td_{{type}}.yaml",
-    "pillar": "P06"
+    "pillar": "P06",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "unit_eval": {
     "boundary": "Teste unitario de agente ou prompt individual. NAO eh smoke_eval (rapido, sem profundidade) nem e2e_eval (pipeline completo).",
@@ -1562,7 +2422,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 4096,
     "naming": "p07_ue_{{target}}.md + .yaml",
-    "pillar": "P07"
+    "pillar": "P07",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "vad_config": {
     "pillar": "P09",
@@ -1571,7 +2436,12 @@
     "max_bytes": 2048,
     "core": false,
     "description": "Voice activity detection settings",
-    "boundary": "VAD settings only. NOT voice_pipeline (full arch) nor stt_provider (transcription)."
+    "boundary": "VAD settings only. NOT voice_pipeline (full arch) nor stt_provider (transcription).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "validation_schema": {
     "boundary": "Contrato formal aplicado pelo SISTEMA apos geracao. NAO eh response_format P05 (injetado no prompt, LLM ve).",
@@ -1580,7 +2450,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p06_vs_{{scope}}.yaml",
-    "pillar": "P06"
+    "pillar": "P06",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "validator": {
     "boundary": "Regra de validacao tecnica pass/fail. NAO eh quality_gate (P11, score numerico) nem scoring_rubric (P07, criterios).",
@@ -1589,7 +2464,12 @@
     "llm_function": "GOVERN",
     "max_bytes": 3072,
     "naming": "p06_val_{{rule}}.yaml",
-    "pillar": "P06"
+    "pillar": "P06",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "vector_store": {
     "added_version": "10.0.0",
@@ -1599,7 +2479,12 @@
     "llm_function": "INJECT",
     "naming": "p01_vdb_{{backend}}.yaml",
     "pillar": "P01",
-    "sdk_module": "cex_sdk.vectordb"
+    "sdk_module": "cex_sdk.vectordb",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "vision_tool": {
     "boundary": "Processa input visual e retorna dados estruturados. NAO eh browser_tool (interacao DOM) nem computer_use (controle de tela).",
@@ -1608,7 +2493,12 @@
     "llm_function": "CALL",
     "max_bytes": 2048,
     "naming": "p04_vision_{{capability}}.md + .yaml",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "visual_workflow": {
     "pillar": "P12",
@@ -1617,7 +2507,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "GUI-based workflow editor configuration",
-    "boundary": "Visual workflow editor. NOT workflow (code-defined) nor dag (directed acyclic graph)."
+    "boundary": "Visual workflow editor. NOT workflow (code-defined) nor dag (directed acyclic graph).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "voice_pipeline": {
     "pillar": "P04",
@@ -1626,7 +2521,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "End-to-end voice agent architecture definition",
-    "boundary": "Voice pipeline architecture. NOT tts_provider (single provider) nor stt_provider (single provider)."
+    "boundary": "Voice pipeline architecture. NOT tts_provider (single provider) nor stt_provider (single provider).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "webhook": {
     "boundary": "Recebe ou envia eventos via HTTP. NAO eh api_client (request-response) nem notifier (delivery de mensagem).",
@@ -1635,7 +2535,12 @@
     "llm_function": "CALL",
     "max_bytes": 1024,
     "naming": "p04_webhook_{{event}}.md + .json",
-    "pillar": "P04"
+    "pillar": "P04",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "workflow": {
     "boundary": "Fluxo de agentes+tools sequenciais/paralelos. NAO eh chain (P03, sequencia de prompts) nem dag (grafo de deps sem execucao).",
@@ -1644,7 +2549,12 @@
     "llm_function": "PRODUCE",
     "max_bytes": 3072,
     "naming": "p12_wf_{{name}}.md + .yaml",
-    "pillar": "P12"
+    "pillar": "P12",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "workflow_node": {
     "pillar": "P12",
@@ -1653,7 +2563,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Typed node in visual/programmatic workflow",
-    "boundary": "Workflow node type. NOT workflow (full workflow) nor visual_workflow (GUI editor config)."
+    "boundary": "Workflow node type. NOT workflow (full workflow) nor visual_workflow (GUI editor config).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "workflow_primitive": {
     "added_version": "10.0.0",
@@ -1663,7 +2578,12 @@
     "llm_function": "PRODUCE",
     "naming": "p12_wp_{{primitive}}.yaml",
     "pillar": "P12",
-    "sdk_module": "cex_sdk.workflow"
+    "sdk_module": "cex_sdk.workflow",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "ab_test_config": {
     "pillar": "P11",
@@ -1672,7 +2592,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "A/B test experiment configuration for conversion optimization",
-    "boundary": "A/B test spec. NOT feature_flag (toggle) nor experiment_config (ML training)."
+    "boundary": "A/B test spec. NOT feature_flag (toggle) nor experiment_config (ML training).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "course_module": {
     "pillar": "P05",
@@ -1681,7 +2606,12 @@
     "max_bytes": 8192,
     "core": false,
     "description": "Online course module with learning objectives and assessments",
-    "boundary": "Course content module. NOT a prompt_template nor knowledge_card."
+    "boundary": "Course content module. NOT a prompt_template nor knowledge_card.",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "subscription_tier": {
     "pillar": "P11",
@@ -1690,7 +2620,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "SaaS subscription tier definition with pricing and feature matrix",
-    "boundary": "Pricing tier. NOT content_monetization (strategy) nor pricing_page (UI)."
+    "boundary": "Pricing tier. NOT content_monetization (strategy) nor pricing_page (UI).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "user_journey": {
     "pillar": "P05",
@@ -1699,7 +2634,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "End-to-end user journey map from awareness to conversion",
-    "boundary": "Journey map. NOT workflow (system) nor onboarding_flow (activation sub-journey)."
+    "boundary": "Journey map. NOT workflow (system) nor onboarding_flow (activation sub-journey).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "compliance_checklist": {
     "pillar": "P11",
@@ -1708,7 +2648,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Compliance checklist for SOC2, GDPR, HIPAA, EU AI Act audits",
-    "boundary": "Audit checklist. NOT guardrail (runtime) nor safety_policy (behavior)."
+    "boundary": "Audit checklist. NOT guardrail (runtime) nor safety_policy (behavior).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "usage_report": {
     "pillar": "P07",
@@ -1717,7 +2662,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "Usage analytics report spec for billing and CFO dashboards",
-    "boundary": "Usage analytics spec. NOT cost_budget (limits) nor trace_config (telemetry)."
+    "boundary": "Usage analytics spec. NOT cost_budget (limits) nor trace_config (telemetry).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "rbac_policy": {
     "pillar": "P09",
@@ -1726,7 +2676,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Role-based access control policy for multi-tenant isolation",
-    "boundary": "RBAC spec. NOT permission (capability) nor sso_config (identity)."
+    "boundary": "RBAC spec. NOT permission (capability) nor sso_config (identity).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "audit_log": {
     "pillar": "P11",
@@ -1735,7 +2690,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "Immutable audit log configuration for SOC2 Type II compliance",
-    "boundary": "Audit log spec. NOT trace_config (observability) nor regression_check (quality)."
+    "boundary": "Audit log spec. NOT trace_config (observability) nor regression_check (quality).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "onboarding_flow": {
     "pillar": "P05",
@@ -1744,7 +2704,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "User onboarding flow with activation milestones and aha-moment design",
-    "boundary": "Activation flow. NOT user_journey (full path) nor workflow (system execution)."
+    "boundary": "Activation flow. NOT user_journey (full path) nor workflow (system execution).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "pricing_page": {
     "pillar": "P05",
@@ -1753,7 +2718,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Pricing page artifact with tier comparison and conversion copy",
-    "boundary": "Pricing page UI. NOT subscription_tier (data) nor landing_page (top-of-funnel)."
+    "boundary": "Pricing page UI. NOT subscription_tier (data) nor landing_page (top-of-funnel).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "cohort_analysis": {
     "pillar": "P07",
@@ -1762,7 +2732,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "Cohort analysis spec for retention measurement and LTV modeling",
-    "boundary": "Cohort analytics. NOT benchmark (model eval) nor usage_report (billing)."
+    "boundary": "Cohort analytics. NOT benchmark (model eval) nor usage_report (billing).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "referral_program": {
     "pillar": "P11",
@@ -1771,7 +2746,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Referral program design with viral coefficient and reward structure",
-    "boundary": "Referral spec. NOT ab_test_config (experiment) nor content_monetization (pricing)."
+    "boundary": "Referral spec. NOT ab_test_config (experiment) nor content_monetization (pricing).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "enterprise_sla": {
     "pillar": "P11",
@@ -1780,7 +2760,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Enterprise SLA template with uptime, latency, support commitments",
-    "boundary": "SLA contract. NOT quality_gate (runtime) nor compliance_checklist (audit)."
+    "boundary": "SLA contract. NOT quality_gate (runtime) nor compliance_checklist (audit).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "data_residency": {
     "pillar": "P09",
@@ -1789,7 +2774,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "Data residency configuration for GDPR and regional compliance",
-    "boundary": "Residency spec. NOT secret_config (credentials) nor rbac_policy (access)."
+    "boundary": "Residency spec. NOT secret_config (credentials) nor rbac_policy (access).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "sso_config": {
     "pillar": "P09",
@@ -1798,7 +2788,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "SSO/SAML/OIDC identity provider integration configuration",
-    "boundary": "SSO spec. NOT rbac_policy (authorization) nor secret_config (credentials)."
+    "boundary": "SSO spec. NOT rbac_policy (authorization) nor secret_config (credentials).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "white_label_config": {
     "pillar": "P09",
@@ -1807,7 +2802,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "White-label/reseller configuration for branded deployments",
-    "boundary": "White-label spec. NOT brand_config (identity) nor env_config (runtime)."
+    "boundary": "White-label spec. NOT brand_config (identity) nor env_config (runtime).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "usage_quota": {
     "pillar": "P09",
@@ -1816,7 +2816,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "Usage quota and fair-use enforcement configuration",
-    "boundary": "Quota spec. NOT rate_limit_config (RPM) nor cost_budget (dollars)."
+    "boundary": "Quota spec. NOT rate_limit_config (RPM) nor cost_budget (dollars).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "customer_segment": {
     "pillar": "P02",
@@ -1825,7 +2830,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Customer segment/ICP definition artifact with firmographics and needs",
-    "boundary": "ICP artifact. NOT user_journey (path) nor persona (not-a-kind)."
+    "boundary": "ICP artifact. NOT user_journey (path) nor persona (not-a-kind).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "quickstart_guide": {
     "pillar": "P05",
@@ -1834,7 +2844,12 @@
     "max_bytes": 8192,
     "core": false,
     "description": "Quickstart guide artifact for product/API onboarding in under 5 minutes",
-    "boundary": "Quickstart doc. NOT integration_guide (deep) nor sdk_example (code-only)."
+    "boundary": "Quickstart doc. NOT integration_guide (deep) nor sdk_example (code-only).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "api_reference": {
     "pillar": "P06",
@@ -1843,7 +2858,12 @@
     "max_bytes": 8192,
     "core": false,
     "description": "API reference doc with endpoints, params, responses, auth, examples",
-    "boundary": "API docs. NOT schema (internal) nor sdk_example (code-only)."
+    "boundary": "API docs. NOT schema (internal) nor sdk_example (code-only).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "pitch_deck": {
     "pillar": "P05",
@@ -1852,7 +2872,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Sales pitch deck with problem/solution/traction/ask slide structure",
-    "boundary": "Pitch deck. NOT case_study (narrative) nor pricing_page (tier detail)."
+    "boundary": "Pitch deck. NOT case_study (narrative) nor pricing_page (tier detail).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "roi_calculator": {
     "pillar": "P11",
@@ -1861,7 +2886,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "ROI calculator spec with inputs, formulas, TCO comparison for economic buyers",
-    "boundary": "ROI calc. NOT cost_budget (ops) nor usage_report (actual)."
+    "boundary": "ROI calc. NOT cost_budget (ops) nor usage_report (actual).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "case_study": {
     "pillar": "P05",
@@ -1870,7 +2900,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Customer case study with challenge/solution/outcome/quote narrative",
-    "boundary": "Case study. NOT pitch_deck (all-purpose) nor testimonial (quote only)."
+    "boundary": "Case study. NOT pitch_deck (all-purpose) nor testimonial (quote only).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "playground_config": {
     "pillar": "P09",
@@ -1879,7 +2914,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Playground/sandbox config for interactive product evaluation",
-    "boundary": "Playground spec. NOT sandbox_spec (isolation) nor interactive_demo (UI)."
+    "boundary": "Playground spec. NOT sandbox_spec (isolation) nor interactive_demo (UI).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "sdk_example": {
     "pillar": "P04",
@@ -1888,7 +2928,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "SDK code example showing canonical integration patterns per language",
-    "boundary": "SDK example. NOT api_reference (schema) nor integration_guide (narrative)."
+    "boundary": "SDK example. NOT api_reference (schema) nor integration_guide (narrative).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "competitive_matrix": {
     "pillar": "P01",
@@ -1897,7 +2942,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Competitive feature matrix for sales battle cards and procurement evals",
-    "boundary": "Competitive doc. NOT customer_segment (ICP) nor pitch_deck (narrative)."
+    "boundary": "Competitive doc. NOT customer_segment (ICP) nor pitch_deck (narrative).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "interactive_demo": {
     "pillar": "P05",
@@ -1906,7 +2956,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Interactive product demo script with guided-tour steps and talk track",
-    "boundary": "Demo script. NOT playground_config (env) nor product_tour (in-app)."
+    "boundary": "Demo script. NOT playground_config (env) nor product_tour (in-app).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "integration_guide": {
     "pillar": "P05",
@@ -1915,7 +2970,12 @@
     "max_bytes": 8192,
     "core": false,
     "description": "Deep integration guide for platform partners and paid-tier onboarding",
-    "boundary": "Integration guide. NOT quickstart_guide (5min) nor api_reference (schema)."
+    "boundary": "Integration guide. NOT quickstart_guide (5min) nor api_reference (schema).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "sales_playbook": {
     "pillar": "P03",
@@ -1924,7 +2984,12 @@
     "max_bytes": 8192,
     "core": false,
     "description": "Sales playbook with personas, discovery flow, objection handling, close patterns",
-    "boundary": "Sales playbook. NOT pitch_deck (deck) nor discovery_questions (subset)."
+    "boundary": "Sales playbook. NOT pitch_deck (deck) nor discovery_questions (subset).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "changelog": {
     "pillar": "P01",
@@ -1933,7 +2998,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Product changelog entry with semver, features, fixes, breaking changes",
-    "boundary": "Changelog. NOT decision_record (rationale) nor release_notes (prose)."
+    "boundary": "Changelog. NOT decision_record (rationale) nor release_notes (prose).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "sandbox_spec": {
     "pillar": "P09",
@@ -1942,7 +3012,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Isolated sandbox environment spec for enterprise pilot procurement gates",
-    "boundary": "Sandbox spec. NOT playground_config (interactive) nor env_config (prod)."
+    "boundary": "Sandbox spec. NOT playground_config (interactive) nor env_config (prod).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "discovery_questions": {
     "pillar": "P01",
@@ -1951,7 +3026,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "MEDDIC/BANT discovery question bank per buyer persona and deal stage",
-    "boundary": "Discovery qs. NOT sales_playbook (broad) nor customer_segment (ICP)."
+    "boundary": "Discovery qs. NOT sales_playbook (broad) nor customer_segment (ICP).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "healthcare_vertical": {
     "pillar": "P01",
@@ -1960,7 +3040,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Healthcare industry vertical: HIPAA, HL7/FHIR, PHI handling, use cases",
-    "boundary": "Healthcare vertical KC. NOT compliance_checklist (audit) nor case_study (ref)."
+    "boundary": "Healthcare vertical KC. NOT compliance_checklist (audit) nor case_study (ref).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "fintech_vertical": {
     "pillar": "P01",
@@ -1969,7 +3054,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Fintech industry vertical: SOC2+PCI-DSS, KYC/AML, fraud detection, use cases",
-    "boundary": "Fintech vertical KC. NOT compliance_checklist (audit) nor case_study (ref)."
+    "boundary": "Fintech vertical KC. NOT compliance_checklist (audit) nor case_study (ref).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "legal_vertical": {
     "pillar": "P01",
@@ -1978,7 +3068,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Legal industry vertical: privilege, billable hour, contract analysis, use cases",
-    "boundary": "Legal vertical KC. NOT compliance_checklist (audit) nor case_study (ref)."
+    "boundary": "Legal vertical KC. NOT compliance_checklist (audit) nor case_study (ref).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "product_tour": {
     "pillar": "P05",
@@ -1987,7 +3082,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "In-app product tour walkthrough with step/tooltip/trigger spec",
-    "boundary": "Product tour. NOT interactive_demo (sales) nor onboarding_flow (activation)."
+    "boundary": "Product tour. NOT interactive_demo (sales) nor onboarding_flow (activation).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "ecommerce_vertical": {
     "pillar": "P01",
@@ -1996,7 +3096,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "eCommerce industry vertical: cart/checkout, PCI-DSS, recommendation engines, fraud, use cases",
-    "boundary": "eCommerce vertical KC. NOT fintech_vertical (payments-only) nor case_study (ref)."
+    "boundary": "eCommerce vertical KC. NOT fintech_vertical (payments-only) nor case_study (ref).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "govtech_vertical": {
     "pillar": "P01",
@@ -2005,7 +3110,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Government/govtech industry vertical: FedRAMP, FISMA, GSA, CJIS, accessibility (Section 508), use cases",
-    "boundary": "Govtech vertical KC. NOT compliance_checklist (audit) nor legal_vertical (private)."
+    "boundary": "Govtech vertical KC. NOT compliance_checklist (audit) nor legal_vertical (private).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "edtech_vertical": {
     "pillar": "P01",
@@ -2014,7 +3124,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Education/EdTech industry vertical: FERPA, COPPA, LMS integration (LTI), student data privacy, use cases",
-    "boundary": "EdTech vertical KC. NOT course_module (course content) nor compliance_checklist (audit)."
+    "boundary": "EdTech vertical KC. NOT course_module (course content) nor compliance_checklist (audit).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "partner_listing": {
     "pillar": "P05",
@@ -2023,7 +3138,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Partner directory listing for SI/reseller channels with tier, region, certifications, contact",
-    "boundary": "Partner listing. NOT case_study (customer ref) nor app_directory_entry (app marketplace)."
+    "boundary": "Partner listing. NOT case_study (customer ref) nor app_directory_entry (app marketplace).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "marketplace_app_manifest": {
     "pillar": "P09",
@@ -2032,7 +3152,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Marketplace app manifest spec for Claude/LangChain/HuggingFace listings (metadata, perms, pricing)",
-    "boundary": "Marketplace manifest. NOT plugin (loadable) nor app_directory_entry (descriptive)."
+    "boundary": "Marketplace manifest. NOT plugin (loadable) nor app_directory_entry (descriptive).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "oauth_app_config": {
     "pillar": "P09",
@@ -2041,7 +3166,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "OAuth2/PKCE app config for partner integrations: scopes, redirects, token lifetimes, refresh policy",
-    "boundary": "OAuth config. NOT sso_config (workforce) nor secret_config (raw creds)."
+    "boundary": "OAuth config. NOT sso_config (workforce) nor secret_config (raw creds).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "app_directory_entry": {
     "pillar": "P05",
@@ -2050,7 +3180,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "App directory entry for FREE-tier discovery: tagline, screenshots, install steps, demo link",
-    "boundary": "App directory entry. NOT marketplace_app_manifest (machine spec) nor partner_listing (sales)."
+    "boundary": "App directory entry. NOT marketplace_app_manifest (machine spec) nor partner_listing (sales).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "contributor_guide": {
     "pillar": "P05",
@@ -2059,7 +3194,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "OSS CONTRIBUTING.md spec: dev setup, PR flow, coding standards, review process, CLA",
-    "boundary": "Contributor guide. NOT integration_guide (consumer) nor code_of_conduct (norms)."
+    "boundary": "Contributor guide. NOT integration_guide (consumer) nor code_of_conduct (norms).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "code_of_conduct": {
     "pillar": "P05",
@@ -2068,7 +3208,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Community code of conduct (Contributor Covenant pattern) with reporting + enforcement",
-    "boundary": "Code of conduct. NOT contributor_guide (technical) nor governance (decision rules)."
+    "boundary": "Code of conduct. NOT contributor_guide (technical) nor governance (decision rules).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "github_issue_template": {
     "pillar": "P05",
@@ -2077,7 +3222,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "GitHub issue template (bug/feature/question) with required fields and labels",
-    "boundary": "Issue template. NOT pull_request_template (separate) nor faq_entry (answers)."
+    "boundary": "Issue template. NOT pull_request_template (separate) nor faq_entry (answers).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "faq_entry": {
     "pillar": "P01",
@@ -2086,7 +3236,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "FAQ entry with question, canonical answer, related links, support deflection metric",
-    "boundary": "FAQ entry. NOT knowledge_card (broader) nor support_macro (agent canned reply)."
+    "boundary": "FAQ entry. NOT knowledge_card (broader) nor support_macro (agent canned reply).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "nps_survey": {
     "pillar": "P11",
@@ -2095,7 +3250,12 @@
     "max_bytes": 3072,
     "core": false,
     "description": "NPS survey config: question, scale, follow-up, segmentation, cadence, response routing",
-    "boundary": "NPS survey. NOT customer_segment (target def) nor cohort_analysis (retention)."
+    "boundary": "NPS survey. NOT customer_segment (target def) nor cohort_analysis (retention).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "churn_prevention_playbook": {
     "pillar": "P03",
@@ -2104,7 +3264,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Churn prevention playbook: signal detection, intervention triggers, save-the-account scripts",
-    "boundary": "Churn playbook. NOT renewal_workflow (process) nor expansion_play (upsell)."
+    "boundary": "Churn playbook. NOT renewal_workflow (process) nor expansion_play (upsell).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "expansion_play": {
     "pillar": "P03",
@@ -2113,7 +3278,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Account expansion play: upsell triggers, cross-sell map, NRR mechanics, AE talk track",
-    "boundary": "Expansion play. NOT churn_prevention_playbook (defensive) nor sales_playbook (new logo)."
+    "boundary": "Expansion play. NOT churn_prevention_playbook (defensive) nor sales_playbook (new logo).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "renewal_workflow": {
     "pillar": "P12",
@@ -2122,7 +3292,12 @@
     "max_bytes": 5120,
     "core": false,
     "description": "Renewal workflow with stages, owners, automation, escalation, contract amendments",
-    "boundary": "Renewal workflow. NOT churn_prevention_playbook (intervention) nor workflow (generic)."
+    "boundary": "Renewal workflow. NOT churn_prevention_playbook (intervention) nor workflow (generic).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "analyst_briefing": {
     "pillar": "P05",
@@ -2131,7 +3306,12 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Gartner/Forrester/IDC analyst briefing deck with positioning, proof points, customer wins",
-    "boundary": "Analyst briefing. NOT pitch_deck (sales) nor case_study (single ref)."
+    "boundary": "Analyst briefing. NOT pitch_deck (sales) nor case_study (single ref).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "press_release": {
     "pillar": "P05",
@@ -2140,7 +3320,12 @@
     "max_bytes": 4096,
     "core": false,
     "description": "Press release with AP-style headline, dateline, lede, quotes, boilerplate, contacts",
-    "boundary": "Press release. NOT blog_post (long-form) nor pitch_deck (visual)."
+    "boundary": "Press release. NOT blog_post (long-form) nor pitch_deck (visual).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   },
   "webinar_script": {
     "pillar": "P03",
@@ -2149,6 +3334,11 @@
     "max_bytes": 6144,
     "core": false,
     "description": "Webinar script with intro/agenda/segments/Q&A/CTA + speaker notes + slide cues",
-    "boundary": "Webinar script. NOT pitch_deck (visual deck) nor sales_playbook (1:1 selling)."
+    "boundary": "Webinar script. NOT pitch_deck (visual deck) nor sales_playbook (1:1 selling).",
+    "status": "stable",
+    "upstream_source": null,
+    "spec_version": null,
+    "last_reviewed": "2026-04-14",
+    "deprecated_by": null
   }
 }

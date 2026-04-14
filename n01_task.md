@@ -1,10 +1,4 @@
----
-id: kc_marketplace_app_manifest
-kind: knowledge_card
-title: Marketplace App Manifest Specification
-version: 1.0.0
-quality: null
-pillar: P01
-description: |
-  This knowledge card defines the metadata structure for marketplace applications listing on Claude, LangChain, and HuggingFace platforms. The manifest includes permissions declarations, pricing models, and platform-specific configuration parameters required for app discovery and execution.
----
+Create: P01_knowledge/library/kind/kc_marketplace_app_manifest.md
+KC about marketplace_app_manifest. Description: Marketplace app manifest spec for Claude/LangChain/HuggingFace listings (metadata, perms, pricing)
+YAML: id: kc_marketplace_app_manifest, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
+English only. Under 80 lines.

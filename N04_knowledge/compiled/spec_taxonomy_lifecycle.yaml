@@ -1,0 +1,463 @@
+id: spec_taxonomy_lifecycle
+kind: context_doc
+title: CEX Taxonomy Non-Aging Lifecycle System
+version: 1.0.0
+pillar: P01
+nucleus: n04
+mission: AI2AI_DEEP
+quality: 9.1
+tags:
+- taxonomy
+- lifecycle
+- RAG
+- discovery
+- scout
+- deprecation
+- versioning
+created: 2026-04-14
+problem_statement: 'CEX has 238 kinds across 12 pillars. The AI2AI protocol landscape evolves at 20-30 new specs/year. Without
+  a lifecycle system, CEX taxonomy stales in 12-18 months: kinds reference dead specs, builders miss emerging protocols, and
+  the knowledge graph diverges from industry reality. This spec defines the auto-assimilation loop that keeps CEX taxonomy
+  current without manual intervention beyond a weekly N07 review gate. ---'
+architecture_overview: '[Sources]          [Scout]              [Review Gate]       [Assimilation]
+
+  GitHub  ----+      cex_taxonomy_        N07 weekly          N03 build
+
+  arXiv   ----+----> scout.py    ------>  review of       --> handoff
+
+  IETF    ----+      (weekly cron)        candidates          (auto-generated)
+
+  W3C     ----+          |
+
+  IEEE    ----+      .cex/runtime/
+
+  HN/PH   ----+      taxonomy_candidates/
+
+  Conf    ----+
+
+
+  Signal flow:
+
+  1. Scout runs weekly (cron or manual)
+
+  2. Candidates written to `.cex/runtime/taxonomy_candidates/`
+
+  3. N07 reviews: build / wait / merge / reject
+
+  4. N03 builds approved kinds via standard 8F pipeline
+
+  5. kinds_meta.json updated with new lifecycle fields
+
+  6. Deprecated kinds flagged via `deprecated_by` + migration hints
+
+
+  ---'
+a_sources_feed_auto_watchers: ''
+a_1_github_repositories: '| Name | Repo | Watch Paths | Priority | Cadence |
+
+  |------|------|-------------|----------|---------|
+
+  | google-a2a | google-a2a/A2A | spec/, drafts/ | critical | weekly |
+
+  | mcp | modelcontextprotocol/modelcontextprotocol | spec/, schema/ | critical | weekly |
+
+  | opentelemetry-semconv | open-telemetry/semantic-conventions | model/ | high | weekly |
+
+  | w3c-vc | w3c/verifiable-credentials | drafts/ | high | biweekly |
+
+  | sigstore | sigstore/sigstore | docs/, spec/ | medium | monthly |
+
+  | c2pa | c2pa-org/c2pa-spec | docs/ | medium | monthly |
+
+  | lf-ai | lfai-data projects | docs/ | medium | monthly |
+
+  | openai-agents | openai/openai-agents-python | docs/, examples/ | high | weekly |
+
+  | anthropic-sdk | anthropic/anthropic-sdk-python | src/, docs/ | critical | weekly |
+
+  | langchain | langchain-ai/langchain | docs/concepts/ | medium | biweekly |
+
+  | llama-index | run-llama/llama_index | docs/ | medium | biweekly |
+
+  | autogen | microsoft/autogen | docs/, python/packages/ | high | weekly |
+
+  | crew-ai | crewAIInc/crewAI | docs/ | medium | biweekly |
+
+  | dspy | stanfordnlp/dspy | docs/ | medium | biweekly |
+
+  | smolagents | huggingface/smolagents | docs/ | medium | weekly |
+
+  | openapi | OAI/OpenAPI-Specification | versions/ | high | monthly |
+
+  | json-schema | json-schema-org/json-schema-spec | drafts/ | high | monthly |'
+a_2_arxiv_daily_feed: 'Query: `(cs.AI OR cs.MA OR cs.CL) AND (protocol OR schema OR interoperability OR agent-to-agent OR
+  multi-agent)`
+
+
+  Tracked keywords for candidate extraction:
+
+  - "novel protocol", "propose a schema", "new standard", "interoperability framework"
+
+  - "agent communication", "tool use protocol", "context protocol", "memory protocol"
+
+  - Venue filters: NeurIPS Systems, ICML Systems, EMNLP System Demos, ACL System Papers'
+a_3_standards_bodies: '| Body | Source | Watch Target | Cadence |
+
+  |------|--------|-------------|---------|
+
+  | IETF | datatracker.ietf.org/drafts/active | AI-tagged working groups | monthly |
+
+  | W3C | w3.org/groups/wg/ | AI-adjacent charters (DCAT, VC, DID, WebNN) | monthly |
+
+  | ISO/IEC JTC 1/SC 42 | iso.org/committee/6794475 | Published work items | quarterly |
+
+  | IEEE SA | standards.ieee.org/ieee/P* | P3119 (synthetic data), P3119, P2933 | monthly |
+
+  | NIST AI | csrc.nist.gov/projects/ai | AI RMF profile updates | monthly |'
+a_4_vendor_community_signals: '| Source | Type | Signal | Cadence |
+
+  |--------|------|--------|---------|
+
+  | HackerNews | community | "Show HN" with 100+ points + AI+protocol tags | daily |
+
+  | Product Hunt | community | AI tool launches with API/protocol component | weekly |
+
+  | dev.to / Substack | blogs | Posts mentioning new AI schema/protocol | weekly |
+
+  | GitHub Trending | community | New repos: agent*, mcp-, a2a-, protocol* | weekly |'
+a_5_conference_system_papers: 'Track submission deadlines + proceedings for system papers at:
+
+  - NeurIPS (Datasets & Benchmarks, Systems)
+
+  - ICML (Systems)
+
+  - EMNLP (System Demonstrations)
+
+  - ACL (System Demonstrations)
+
+  - ICLR (TinyPapers + main)
+
+
+  ---'
+b_discovery_protocol: ''
+b_1_scout_schedule: "Weekly: Monday 02:00 UTC\n  python _tools/cex_taxonomy_scout.py --source all --since 7\n\nDaily (lightweight,\
+  \ GitHub only):\n  python _tools/cex_taxonomy_scout.py --source github --since 1 --dry-run"
+b_2_extraction_heuristics: 'Scout uses layered extraction to find candidate kind names:
+
+
+  Layer 1 — Structural patterns (high precision):
+
+  TypeScript interfaces:    interface\s+[A-Z][a-zA-Z]+
+
+  JSON Schema definitions:  "\$defs":\s*\{[^}]+\}
+
+  OpenAPI components:       components/schemas/[A-Z][a-zA-Z]+
+
+  Protobuf messages:        message\s+[A-Z][a-zA-Z]+
+
+
+  Layer 2 — Keyword extraction (medium precision):
+
+  "X protocol"   -> candidate: x_protocol
+
+  "X schema"     -> candidate: x_schema
+
+  "X format"     -> candidate: x_format
+
+  "X message"    -> candidate: x_message
+
+  "X contract"   -> candidate: x_contract
+
+
+  Layer 3 — NER patterns (lower precision, needs scoring):
+
+  Repeated PascalCase nouns appearing 3+ times in spec documents'
+b_3_deduplication: 'Before writing a candidate, scout checks against existing kinds:
+
+
+  1. Exact match: kind name already in kinds_meta.json -> skip
+
+  2. Alias match: known synonym mapping (e.g., "tool_call" == "function_def") -> skip
+
+  3. Semantic similarity: TF-IDF cosine against kind descriptions (threshold 0.85) -> flag as potential merge
+
+  4. Boundary overlap: if candidate description overlaps with existing boundary -> flag
+
+
+  Candidates passing all 4 checks are written to `.cex/runtime/taxonomy_candidates/`.'
+b_4_candidate_scoring: 'Each candidate gets a composite score (0-10):
+
+
+  | Dimension | Weight | Signal |
+
+  |-----------|--------|--------|
+
+  | adoption_signal | 0.35 | GitHub stars/forks, download counts, mentions |
+
+  | stability | 0.30 | Spec version >= 1.0, > 6 months old, 2+ implementors |
+
+  | urgency | 0.20 | CEX gap score (no existing kind covers this) |
+
+  | relevance | 0.15 | Domain overlap with CEX pillars |
+
+
+  Threshold for N07 notification: score >= 6.0
+
+  Auto-promote to review: score >= 8.0'
+b_5_candidate_file_format: ".cex/runtime/taxonomy_candidates/\n  YYYY-MM-DD_{source}_{slug}.md\n\nExample: `2026-04-21_github_tool_invocation_protocol.md`\n\
+  \n---\ncandidate_id: tool_invocation_protocol\nsource: github/modelcontextprotocol/modelcontextprotocol\ndiscovered: 2026-04-21\n\
+  score: 8.2\nscore_breakdown:\n  adoption_signal: 9.0\n  stability: 8.5\n  urgency: 7.5\n  relevance: 8.0\nsuggested_kind:\
+  \ tool_invocation_protocol\nsuggested_pillar: P04\nsuggested_boundary: \"Protocol for agent-to-tool invocation. NOT tool_use\
+  \ (generic pattern) nor mcp_server (MCP-specific server).\"\nsimilar_kinds: [mcp_server, cli_tool]\nmerge_candidate: null\n\
+  upstream_url: https://github.com/modelcontextprotocol/modelcontextprotocol\nstatus: pending_review\n---\n\n## Summary\n\n\
+  MCP defines a `ToolInvocationProtocol` as a standardized message envelope for\nall tool calls regardless of transport (stdio,\
+  \ SSE, HTTP). This is distinct from\nthe MCP server definition kind and covers the call/response schema generically.\n\n\
+  ## Evidence\n\n- 3,420 GitHub stars (spec repo)\n- v1.0 released 2025-11\n- Implemented by: Claude, Copilot, Cursor, Continue,\
+  \ Windsurf\n- Paper: \"Model Context Protocol\" arXiv 2025.xxxxx\n\n## Decision (N07 fills)\n\n- [ ] Build now\n- [ ] Wait\
+  \ for stabilization\n- [ ] Merge into existing kind: _\n- [ ] Reject — reason: _\n\n---"
+c_assimilation_protocol: ''
+c_1_weekly_review_gate: 'N07 reviews `.cex/runtime/taxonomy_candidates/` every Monday.
+
+
+  Review checklist per candidate:
+
+  1. Does a similar kind already exist with a different name? (check boundary field)
+
+  2. Is the upstream spec stable enough to base a CEX kind on?
+
+  3. Which pillar does it belong to?
+
+  4. How many builders would need updating if this kind is added?
+
+  5. Is there an existing kind that should be expanded vs creating a new one?'
+c_2_decision_outcomes: '| Decision | Action | Who |
+
+  |----------|--------|-----|
+
+  | Build now | Auto-generate N03 handoff | N07 -> N03 |
+
+  | Wait | Update candidate: `status: watching`, set `review_after` date | N07 |
+
+  | Merge into existing | Add alias to existing kind''s boundary, update description | N04 |
+
+  | Reject | Move to `.cex/runtime/taxonomy_candidates/rejected/`, add reason | N07 |'
+c_3_auto_generated_n03_handoff_template: 'When decision = "build now":
+
+
+  ---
+
+  mission: TAXONOMY_EXPAND
+
+  nucleus: n03
+
+  kind: {{candidate_id}}
+
+  created: {{date}}
+
+  ---
+
+  # N03 -- Build Kind: {{candidate_id}}
+
+
+  ## Upstream
+
+  Source: {{upstream_url}}
+
+  Spec version: {{spec_version}}
+
+
+  ## Deliverables
+
+  1. archetypes/builders/{{candidate_id}}-builder/ (13 ISOs)
+
+  2. P01_knowledge/library/kind/kc_{{candidate_id}}.md
+
+  3. Add to .cex/kinds_meta.json
+
+
+  ## Context
+
+  Candidate file: .cex/runtime/taxonomy_candidates/{{candidate_file}}
+
+
+  ## Commit
+
+  git commit -m "[N03] TAXONOMY_EXPAND: add {{candidate_id}} builder"
+
+
+  ---'
+d_deprecation_protocol: ''
+d_1_deprecation_triggers: 'A kind enters `deprecated` status when ANY of:
+
+  - Upstream spec explicitly superseded (successor published >= 6 months ago)
+
+  - CEX has a newer kind that fully covers the deprecated one
+
+  - No compiled artifacts referencing this kind in 180 days
+
+  - Upstream repo archived with no active fork'
+d_2_deprecation_workflow: "1. Set status: deprecated in kinds_meta.json\n2. Set deprecated_by: <successor_kind>\n3. Create\
+  \ migration file:\n   N04_knowledge/migrations/deprecation_{kind}_{date}.md\n4. Update all builders that reference deprecated\
+  \ kind\n5. Announce in .cex/runtime/signals/ with signal type: deprecation_notice\n6. After 90 days: status -> archived"
+d_3_migration_file_format: "---\nkind: legacy_kind_name\ndeprecated_by: new_kind_name\ndeprecated_since: 2026-04-14\narchived_after:\
+  \ 2026-07-14\nreason: \"Upstream MCP v2 superseded this with native support\"\n---\n\n## Migration Guide\n\nReplace `legacy_kind_name`\
+  \ with `new_kind_name`.\n\nField mapping:\n| Old field | New field | Notes |\n|-----------|-----------|-------|\n| foo |\
+  \ bar | Same semantics |\n| baz | qux | Renamed for clarity |\n\nAuto-migration script:\n  python _tools/cex_migrate.py\
+  \ --from legacy_kind_name --to new_kind_name"
+d_4_archived_kind_policy: 'Archived kinds are:
+
+  - Removed from `kinds_meta.json` active section -> moved to `.cex/kinds_archive.json`
+
+  - Builders preserved in `archetypes/builders/_archived/` (git history)
+
+  - Not built by scout; not available in builder sub-agents
+
+  - Accessible via `cex_query.py --include-archived`
+
+
+  ---'
+e_versioning_strategy: ''
+e_1_kind_versioning_vs_spec_versioning: 'Two orthogonal version axes:
+
+
+  | Axis | Field | Example | Meaning |
+
+  |------|-------|---------|---------|
+
+  | Kind version | `version` in frontmatter | 1.0.0 -> 1.1.0 | CEX builder improvement |
+
+  | Spec version | `spec_version` in kinds_meta.json | 0.9.0 -> 1.0.0 | Upstream protocol version |'
+e_2_coexisting_versions: "When a protocol releases a BREAKING v2:\n\n\"mcp_server\": {\n  \"spec_version\": \"1.0.0\",\n \
+  \ \"status\": \"stable\"\n},\n\"mcp_server_v2\": {\n  \"spec_version\": \"2.0.0\",\n  \"status\": \"draft\",\n  \"deprecated_by\"\
+  : null,\n  \"upstream_source\": \"https://github.com/modelcontextprotocol/modelcontextprotocol\"\n}\n\nBoth kinds coexist\
+  \ until v2 reaches `stable` (>= 6 months, 2+ implementations).\nThen v1 enters `deprecated` with `deprecated_by: mcp_server_v2`."
+e_3_semver_interpretation_for_specs: '| Spec change | CEX action | Risk |
+
+  |-------------|------------|------|
+
+  | Patch (0.0.x) | Update `spec_version`, no builder change | Low |
+
+  | Minor (0.x.0) | Review boundary fields, may need KC update | Medium |
+
+  | Major (x.0.0) | Assess: new kind vs update existing, migration needed | High |'
+e_4_spec_version_tracking: kinds_meta.json stores `spec_version` as a semver string. Scout compares against last-known version
+  at each run. Diff surfaced in candidate file under "## Version Delta" section. ---
+f_metrics_taxonomy_health: ''
+f_1_coverage_metric: 'coverage = |CEX active kinds| / |industry candidate pool|
+
+
+  Industry candidate pool = all candidates with score >= 6.0 (reviewed or not).
+
+  Target: coverage >= 85%.'
+f_2_freshness_metric: 'freshness_days = today - last_reviewed (per kind)
+
+
+  Thresholds:
+
+  - Green: < 90 days
+
+  - Yellow: 90-180 days
+
+  - Red: > 180 days (triggers auto-candidate for re-review)'
+f_3_deprecation_pipeline_depth: 'pipeline_depth = count of kinds in status: deprecated
+
+
+  Target: < 10 kinds in deprecated at any time.
+
+  If > 20: trigger N04 deprecation sweep.'
+f_4_scout_cycle_health: "Tracked per scout run in `.cex/runtime/taxonomy_candidates/scout_log.tsv`:\n\nrun_date\tsource\t\
+  candidates_found\tcandidates_new\tcandidates_merged\tcandidates_rejected\terrors\n2026-04-21\tgithub\t12\t3\t2\t1\t0\n2026-04-21\t\
+  arxiv\t8\t1\t0\t3\t0"
+f_5_health_dashboard_command: 'python _tools/cex_taxonomy_scout.py --report
+
+
+  Output:
+
+  === CEX Taxonomy Health ===
+
+  Active kinds:        238 / 280 candidates (85.0% coverage) [GREEN]
+
+  Stale kinds (>180d):   4 [YELLOW]
+
+  Deprecated kinds:      2 [GREEN]
+
+  Archived kinds:       11
+
+  Scout last run:   2026-04-21 (3 days ago) [GREEN]
+
+  Candidates pending:    3 (review recommended)
+
+  ===========================
+
+
+  ---'
+g_schema_extension_kinds_meta_json: "New fields added to every kind entry:\n\n{\n  \"action_paradigm\": {\n    \"pillar\"\
+  : \"P04\",\n    \"llm_function\": \"CALL\",\n    \"naming\": \"p04_act_{{name}}.md\",\n    \"max_bytes\": 4096,\n    \"\
+  core\": false,\n    \"description\": \"How agents execute actions in environments\",\n    \"boundary\": \"Action execution\
+  \ paradigm...\",\n\n    \"status\": \"stable\",\n    \"upstream_source\": null,\n    \"spec_version\": null,\n    \"last_reviewed\"\
+  : \"2026-04-14\",\n    \"deprecated_by\": null\n  }\n}\n\n| Field | Type | Values | Default |\n|-------|------|--------|---------|\n\
+  | status | enum | draft, stable, deprecated, archived | stable |\n| upstream_source | string (URL) or null | canonical spec\
+  \ URL | null |\n| spec_version | string (semver) or null | \"1.0.0\" | null |\n| last_reviewed | string (ISO date) | \"\
+  2026-04-14\" | today |\n| deprecated_by | string (kind name) or null | \"new_kind_name\" | null |\n\n---"
+h_integration_with_cex_runtime: ''
+h_1_file_locations: ".cex/\n  config/\n    taxonomy_sources.yaml         # source watcher config\n  runtime/\n    taxonomy_candidates/\n\
+  \      YYYY-MM-DD_*.md             # candidate files (pending review)\n      rejected/                   # rejected candidates\n\
+  \      applied/                    # assimilated candidates\n      scout_log.tsv               # run history\n  kinds_archive.json\
+  \              # archived kinds (removed from active)"
+h_2_cron_integration: "Add to `.cex/config/schedules.yaml`:\n\n- id: taxonomy_scout_weekly\n  command: \"python _tools/cex_taxonomy_scout.py\
+  \ --source all --since 7\"\n  schedule: \"0 2   1\"  # Monday 02:00 UTC\n  notify: n07\n\n- id: taxonomy_scout_daily_github\n\
+  \  command: \"python _tools/cex_taxonomy_scout.py --source github --since 1 --dry-run\"\n  schedule: \"0 6   *\"  # Daily\
+  \ 06:00 UTC\n  notify: n07"
+h_3_signal_integration: "On scout completion (score >= threshold):\n\nfrom _tools.signal_writer import write_signal\nwrite_signal('n04',\
+  \ 'taxonomy_candidate_ready', score, metadata={\n    'candidates': 3,\n    'top_score': 8.4,\n    'top_candidate': 'tool_invocation_protocol'\n\
+  })\n\nN07 polls `.cex/runtime/signals/` and sees the notification.\n\n---"
+i_operational_runbook: ''
+i_1_add_a_new_source_manually: '# 1. Add entry to .cex/config/taxonomy_sources.yaml
+
+  # 2. Run scout for that source only
+
+  python _tools/cex_taxonomy_scout.py --source github --repo new-org/new-repo --since 30
+
+
+  # 3. Review candidates
+
+  ls .cex/runtime/taxonomy_candidates/
+
+
+  # 4. N07 makes decisions'
+i_2_force_re_review_of_all_kinds: 'python _tools/cex_taxonomy_scout.py --recheck-all --since 180
+
+
+  Marks kinds with last_reviewed > 180 days as needing review.
+
+  Writes stale-review candidates for N07.'
+i_3_emergency_deprecation: '# Immediately deprecate a kind and point to successor
+
+  python _tools/cex_taxonomy_scout.py --deprecate kind_name --successor new_kind
+
+
+  Writes deprecation record, updates kinds_meta.json, creates migration file.'
+i_4_scout_dry_run_no_writes: 'python _tools/cex_taxonomy_scout.py --source all --since 7 --dry-run
+
+
+  Prints candidates to stdout without writing files. Safe for testing.
+
+
+  ---'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | context_doc |
+
+  | Pillar | P01 |
+
+  | Domain | taxonomy lifecycle |
+
+  | Pipeline | 8F (F1-F8) |
+
+  | Scorer | cex_score.py |
+
+  | Quality target | 9.0+ |
+
+  | Density target | 0.85+ |'
