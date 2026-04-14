@@ -1,0 +1,32 @@
+kind: tools
+id: bld_tools_webinar_script
+pillar: P04
+llm_function: CALL
+purpose: Tools available for webinar_script production
+quality: null
+title: Tools Webinar Script
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- webinar_script
+- builder
+- tools
+tldr: Tools available for webinar_script production
+domain: webinar_script construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+production_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| cex_compile.py | Compiles script components\
+  \ into final webinar format | Finalizing script |  \n| cex_score.py | Analyzes script for engagement and clarity metrics\
+  \ | Pre-review stage |  \n| cex_retriever.py | Fetches data/quotes for dynamic script insertion | Research phase |  \n|\
+  \ cex_doctor.py | Detects logical gaps or inconsistencies in flow | Draft review |  \n| cex_animator.py | Adds visual cues\
+  \ for slides/presentation timing | Syncing with slides |  \n| cex_translator.py | Translates script into multiple languages\
+  \ | Multilingual webinars |"
+validation_tools: "| Tool | Purpose | When |  \n|------|---------|------|  \n| script_validator.py | Checks grammar, tone,\
+  \ and compliance | Pre-publishing |  \n| engagement_checker.py | Simulates audience interaction feedback | Pre-review |\
+  \  \n| compliance_scanner.py | Ensures legal/brand guidelines are met | Final approval |  \n| timing_analyzer.py | Verifies\
+  \ script duration against webinar limits | Pre-publishing |"
+external_references:
+- Markdown (for structuring script notes)
+- WebinarPro API (for hosting integration)
+- ScriptBook (for advanced narrative analysis)
