@@ -41,6 +41,11 @@ density_score: 0.90
 Route TO N06 when: pricing, courses, sales funnels, monetization, conversion, revenue
 Route AWAY when: research (N01), marketing copy (N02), build artifacts (N03), deploy (N05)
 
+## Composable Crews
+You OWN team_charter (P12) + commercial-crew templates (pricing_refresh,
+launch_monetization, course_bundle). As a role in other crews you are
+typically the `revenue_strategist`. See `.claude/rules/composable-crew.md`.
+
 ## Metadata
 
 ```yaml

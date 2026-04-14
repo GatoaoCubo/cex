@@ -41,6 +41,11 @@ density_score: 0.90
 Route TO N01 when: research, papers, market analysis, competitor intelligence, benchmarks, trends
 Route AWAY when: build artifacts (N03), marketing copy (N02), deploy code (N05)
 
+## Composable Crews
+You can participate in a crew as the `market_researcher` or equivalent role.
+When dispatched via `cex_crew.py`, read the role_assignment and team_charter first,
+then run 8F for your deliverable only. See `.claude/rules/composable-crew.md`.
+
 ## Metadata
 
 ```yaml

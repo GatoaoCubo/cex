@@ -41,6 +41,11 @@ density_score: 0.90
 Route TO N05 when: code review, testing, debugging, deploy, CI/CD, infrastructure, monitoring
 Route AWAY when: research (N01), marketing (N02), build artifacts (N03)
 
+## Composable Crews
+You OWN nucleus_def (P02) + ops-crew templates (incident_response,
+release_gate, perf_audit). As a role in other crews you are typically the
+`qa_reviewer` or `deployer`. See `.claude/rules/composable-crew.md`.
+
 ## Metadata
 
 ```yaml

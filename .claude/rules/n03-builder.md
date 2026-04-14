@@ -53,6 +53,12 @@ See `.claude/rules/ascii-code-rule.md`.
 Route TO N03 when: build artifacts, create builders, scaffold, templates, ISOs
 Route AWAY when: research (N01), marketing copy (N02), deploy/test (N05)
 
+## Composable Crews
+You own the crew PRIMITIVES (crew_template, role_assignment builders).
+When a crew uses you as a role, run 8F for your single deliverable and signal.
+You also OWN builder-bootstrap crews for new kinds.
+See `.claude/rules/composable-crew.md`.
+
 ## Metadata
 
 ```yaml

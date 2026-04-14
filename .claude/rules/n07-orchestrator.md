@@ -185,6 +185,37 @@ powershell.exe (wrapper -- what -PassThru returns)
 | Code/test/deploy | N05 | Debug, test, CI/CD, code review |
 | Sales/pricing | N06 | Courses, pricing, funnels |
 
+## Composable Crews (WAVE8 primitives)
+
+When work needs a **package** (not one artifact, not N parallel independents),
+assemble a **crew**: `crew_template` (roles + topology) + `role_assignment`
+(agent binding per role) + `team_charter` (mission contract).
+
+```bash
+python _tools/cex_crew.py list                      # discover
+python _tools/cex_crew.py show <name>               # inspect plan
+python _tools/cex_crew.py run <name> --charter ...  # dry-run
+python _tools/cex_crew.py run <name> --execute      # real LLM
+```
+
+### Grid + Crew composition (N07 pattern)
+
+Combine the two: dispatch a **grid** where each cell is itself a **crew
+instance**. Example -- simultaneous launch of 3 products:
+
+```
+grid dispatch:
+  |-- cell 1: crew(product_launch) + charter_A    -> N02 owns
+  |-- cell 2: crew(product_launch) + charter_B    -> N02 owns
+  `-- cell 3: crew(product_launch) + charter_C    -> N02 owns
+```
+
+Each crew runs its own sequential roles; the grid parallelizes the three
+charters. Handoffs stay a2a-task signals per crew; N07 consolidates after
+all grid cells signal complete.
+
+See `.claude/rules/composable-crew.md` for full protocol.
+
 ## NEVER DO
 - Build artifacts directly (route to N03)
 - Use `start cmd` or raw `powershell -File` (use dispatch.sh)

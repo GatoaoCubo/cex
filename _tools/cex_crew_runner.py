@@ -889,7 +889,7 @@ class CrewRunner:
                 }
                 if charter_fm
                 else None,
-                "source_template": str(crew_path.relative_to(cex_root)),
+                "source_template": str(crew_path.resolve().relative_to(cex_root.resolve())),
             },
         }
         return plan

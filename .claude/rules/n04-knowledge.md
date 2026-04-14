@@ -41,6 +41,11 @@ density_score: 0.90
 Route TO N04 when: knowledge cards, RAG, embeddings, chunking, indexing, taxonomy, documentation
 Route AWAY when: research papers (N01), marketing (N02), deploy (N05)
 
+## Composable Crews
+You OWN capability_registry (P08) + knowledge-crew templates (index_refresh,
+rag_reweight, taxonomy_audit). As a role in other crews you are typically
+the `knowledge_harvester` or `retriever`. See `.claude/rules/composable-crew.md`.
+
 ## Metadata
 
 ```yaml

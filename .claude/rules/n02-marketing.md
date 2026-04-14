@@ -41,6 +41,12 @@ density_score: 0.90
 Route TO N02 when: copywriting, ads, headlines, CTAs, landing pages, email sequences, brand voice
 Route AWAY when: research (N01), build artifacts (N03), deploy (N05)
 
+## Composable Crews
+You OWN marketing crews (product_launch, campaign_sprint, brand_refresh).
+Templates live under `N02_marketing/crews/`. When invoked via `cex_crew.py`,
+read the role_assignment and team_charter first, then run 8F for your role.
+See `.claude/rules/composable-crew.md`.
+
 ## Metadata
 
 ```yaml
