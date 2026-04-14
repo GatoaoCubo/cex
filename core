@@ -1,61 +1,52 @@
 ---
-id: kc_ab_test_config
+id: kc_subscription_tier
 kind: knowledge_card
-title: A/B Test Configuration
+title: Subscription Tier
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-# A/B Test Configuration
+# Subscription Tier
 
 ## Purpose
-Define the structural framework for A/B test experiments focused on conversion optimization. This includes hypothesis formulation, variation setup, metric tracking, and statistical validation.
+Define SaaS subscription tiers with pricing models, feature matrices, and implementation guidelines. This includes tier categorization, revenue tracking, and customer segmentation.
 
 ## Structure
-1. **Hypothesis** - Clear value proposition (e.g., "Bold CTAs increase conversion by 15%")
-2. **Variations** (2-5 options)
-   - **Control** (baseline)
-   - **Variant A** (primary test)
-   - **Variant B** (secondary test)
-3. **Metrics** - Primary and secondary KPIs
-4. **Traffic Split** - Percentage allocation (e.g., 80% control, 10% A, 10% B)
-5. **Statistical Significance** - Confidence level and sample size requirements
-6. **Implementation** - Technical specifications for rollout
+1. **Pricing Models** - Tiered pricing (e.g., $9/mo, $29/mo, $99/mo)
+2. **Feature Matrix** - Core vs premium features (e.g., storage, support, integrations)
+3. **Implementation** - Technical specifications for tier rollout
+4. **Metrics** - Conversion rates, churn rates, revenue per tier
 
 ## Content Guidelines
-- Use bold headers for sections
-- Keep paragraphs under 3 lines
-- Include icons for visual hierarchy
-- Add "Most Effective" badge to top-performing variant
-- Use emojis for traffic percentages (📊)
-- Include 2-3 sample metrics
+- Use 💳 for pricing icons
+- Add 🚀 to highlight premium features
+- Include "Most Valuable" badge for top tier
+- Use 2-3 sample pricing tiers
+- Add 📊 for data visualization suggestions
 
 ## Example
 ```
-🎯 Hypothesis: Bold CTAs increase conversion by 15%
-📊 Traffic Split: 80% Control, 10% A, 10% B
+💳 Pricing Models:
+- Basic: $9/mo (Most Valuable)
+- Pro: $29/mo
+- Enterprise: $99/mo
 
-✅ Control
-💰 Variant A (Most Effective)
-🔥 Variant B
+🚀 Feature Matrix:
+Core: 10GB storage • 24/7 support • 1 integration
+Premium: 100GB storage • Priority support • 5 integrations
+Enterprise: 1TB storage • Dedicated support • 20 integrations
 
-📈 Metrics:
-- Conversion Rate
-- CTR
-- Bounce Rate
-
-🔧 Implementation:
-- Deploy via CDN
-- Use cookie-based tracking
-- Monitor in real-time
+📊 Implementation:
+- Use API-based tier switching
+- Track revenue per plan
+- Monitor churn by tier
 ```
 
 ## Optimization Tips
-- Add heatmaps for visual analysis
-- Include conversion funnels
-- Use animated charts for results
-- Add "Pause Test" CTA button
-- Include 30-day statistical validity period
-```
+- Add heatmaps for feature adoption
+- Include conversion funnels by tier
+- Use animated charts for revenue tracking
+- Add "Pause Subscription" CTA button
+- Include 30-day billing cycle validation
 ```
