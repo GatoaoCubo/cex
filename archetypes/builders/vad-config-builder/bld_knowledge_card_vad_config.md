@@ -39,15 +39,21 @@ Modern VAD systems leverage machine learning models (e.g., neural networks) or r
 | Engine | Type | Latency | CPU/GPU | Aggressiveness | WER Impact | License |
 |---|---|---|---|---|---|---|
 | WebRTC VAD | Energy-based | <5ms | CPU only | 0-3 (int mode) | Low | BSD |
-| Silero VAD | Neural (LSTM) | ~10ms | CPU/GPU | Threshold 0.0-1.0 | Very Low | MIT |
+| Silero VAD v4 | Neural (LSTM) | ~10ms | CPU/GPU | Threshold 0.0-1.0 | Very Low | MIT |
 | Kaldi VAD | GMM/Energy | ~20ms | CPU only | Configurable | Low | Apache 2.0 |
 | py-webrtcvad | Python binding | <5ms | CPU only | 0-3 | Low | MIT |
+| Picovoice Cobra | Neural | <2ms | CPU/DSP | Threshold 0.0-1.0 | Very Low | Commercial |
+| ten-vad | Neural | <5ms | CPU/GPU | Threshold 0.0-1.0 | Very Low | Apache 2.0 |
 | Auditok | Energy | <5ms | CPU only | dB threshold | Medium | MIT |
 | NVIDIA Riva VAD | Neural | <5ms (GPU) | GPU required | Threshold | Very Low | Commercial |
 
-**Silero VAD** (recommended default for 2024): JSILERO-VAD v4 model, 1MB size, ONNX runtime, 8kHz/16kHz, threshold param 0.0-1.0, false positive rate <5% on NOIZEUS. Used in production by LiveKit, daily.co.
+**Silero VAD v4** (recommended default): 1MB ONNX model, 8kHz/16kHz, threshold 0.0-1.0 (recommended 0.5), false positive rate <5% on NOIZEUS. Used in production by LiveKit, daily.co, Whisper-streaming.
 
-**WebRTC VAD** (recommended for low-latency edge): Google-authored, aggressiveness 0-3, frame sizes 10/20/30ms at 8/16/32/48kHz, well-understood tradeoffs.
+**WebRTC VAD** (recommended for low-latency edge): Google-authored, aggressiveness 0-3, frame sizes 10/20/30ms at 8/16/32/48kHz, <5ms latency, well-understood tradeoffs.
+
+**Picovoice Cobra** (recommended for on-device/IoT): Neural VAD, <2ms latency on ARM Cortex-M, threshold 0.0-1.0, runs on Raspberry Pi, iOS, Android. Commercial license required.
+
+**ten-vad** (recommended for streaming pipelines): Apache 2.0 neural VAD designed for real-time streaming, integrates with LiveKit and Daily.co WebRTC stacks, threshold 0.0-1.0.
 
 ## Industry Standards  
 - ITU-T P.501: Voice activity detection for telephony  
