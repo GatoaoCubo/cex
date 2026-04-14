@@ -1,4 +1,4 @@
-Create: P01_knowledge/library/kind/kc_customer_segment.md
-KC about customer_segment. Description: Customer segment/ICP definition artifact with firmographics and needs
-YAML: id: kc_customer_segment, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
+Create: P01_knowledge/library/kind/kc_user_journey.md
+KC about user_journey. Description: End-to-end user journey map from awareness to conversion
+YAML: id: kc_user_journey, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
 English only. Under 80 lines.
