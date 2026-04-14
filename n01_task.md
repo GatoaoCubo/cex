@@ -1,4 +1,4 @@
-Create: P01_knowledge/library/kind/kc_marketplace_app_manifest.md
-KC about marketplace_app_manifest. Description: Marketplace app manifest spec for Claude/LangChain/HuggingFace listings (metadata, perms, pricing)
-YAML: id: kc_marketplace_app_manifest, kind: knowledge_card, title, version: 1.0.0, quality: null, pillar: P01.
-English only. Under 80 lines.
+Improve this file: P01_knowledge/library/kind\kc_analyst_briefing.md
+Currently only 18 lines. Expand to at least 60 lines.
+Add more detail, tables, examples. Fix frontmatter if needed.
+English only.
