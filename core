@@ -1,99 +1,49 @@
 ---
-id: kc_integration_guide
+id: kc_api_reference
 kind: knowledge_card
-title: Integration Guide for Platform Partners and Paid-Tier Onboarding
+title: API Reference Documentation
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-# Integration Guide for Platform Partners and Paid-Tier Onboarding
+# API Reference
 
-This guide provides step-by-step instructions for integrating with our platform, tailored for platform partners and paid-tier users. It covers API setup, authentication, data formats, and best practices, incorporating structured workflows from CEX's 8F pipeline and phase-based review patterns.
+## Endpoints
+- `GET /api/v1/integrate` - Initial setup endpoint
+- `POST /api/v1/data` - Bulk operations endpoint
+- `GET /api/v1/docs` - Auto-generated API docs
+- `POST /api/v1/webhook` - Real-time update subscription
 
-## Key Concepts
-- **API Endpoints**: Core integration points for data exchange
-- **Authentication**: OAuth 2.0 with JWT tokens
-- **Data Formats**: JSON API with HAL+JSON format
-- **Rate Limits**: 100 requests/minute for free tier, 1000/minute for paid
-- **8F Pipeline**: Full execution flow for structured workflows
-- **GDP Enforcement**: Guided decision protocol for quality gates
+## Authentication
+- **OAuth 2.0** with JWT tokens
+- **Scopes**: `read`, `write`, `admin`
+- **Token Rotation**: Required every 24 hours
+- **Validation**: Enforced via GDP protocol
 
-## Integration Steps (Structured Workflow)
-1. **Account Setup**  
-   - Create API credentials in the developer console
-   - Enable required API scopes
-   - Register for CEX 8F pipeline access
+## Request/Response Examples
+```yaml
+# Sample GET request
+method: GET
+url: /api/v1/integrate
+headers:
+  Authorization: Bearer <token>
+  Content-Type: application/json
 
-2. **Authentication Flow**  
-   - Obtain client ID and secret
-   - Implement OAuth 2.0 client credentials grant
-   - Store JWT tokens securely with rotation
-   - Use CEX GDP enforcement for token validation
-
-3. **API Integration**  
-   - Use `/api/v1/integrate` endpoint for initial setup
-   - Implement webhooks for real-time updates
-   - Use `/api/v1/data` for bulk operations
-   - Apply phase-based review patterns for data validation
-
-4. **Testing & Validation**  
-   - Use sandbox environment for testing
-   - Validate responses against schema
-   - Monitor API health metrics
-   - Execute quality gates from CEX's 8F pipeline
+# Sample response
+status: 200
+body:
+  success: true
+  message: "Integration successful"
+  data:
+    api_key: "generated_key"
+    model: "claude-3-5-sonnet"
+```
 
 ## Best Practices
-- **Security**: Always use HTTPS and token rotation
-- **Performance**: Batch requests where possible
-- **Monitoring**: Implement error logging and retries
-- **Documentation**: Keep API versioning consistent
-- **Integration**: Use SDK patterns for multi-language support
-
-## Troubleshooting
-- **401 Unauthorized**: Check token validity via GDP enforcement
-- **429 Too Many Requests**: Implement rate limiting with backoff
-- **500 Internal Server Error**: Contact support with logs
-- **Connection Issues**: Verify network permissions and firewall rules
-
-## SDK Integration Patterns
-### Python
-```python
-from cex_sdk import CEXClient
-
-client = CEXClient(
-    api_key="your_api_key",
-    model="claude-3-5-sonnet",
-    timeout=30
-)
+- Use `application/json` content type
+- Implement retry logic for 5xx errors
+- Monitor rate limits via `/api/v1/metrics`
+- Always validate payloads against schema
 ```
-
-### JavaScript
-```javascript
-const client = new CEXClient({
-    apiKey: "your_api_key",
-    model: "gpt-4",
-    timeout: 30
-});
-
-const response = await client.runPrompt({
-    prompt: "What is the capital of France?",
-    temperature: 0.7
-});
 ```
-
-### Java
-```java
-CEXClient client = new CEXClient.Builder()
-    .setApiKey("your_api_key")
-    .setModel("codex-3")
-    .setTimeout(30)
-    .build();
-
-List<CEXResponse> results = client.batchProcess(List.of(
-    "What is the square root of 16?",
-    "Solve 2+2"
-));
-```
-
-For advanced integration patterns and enterprise features, consult our CEX 8F pipeline documentation and SDK reference.
