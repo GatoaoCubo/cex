@@ -74,5 +74,3 @@ discounts:
 - Must include open source license
 - All pricing models require explicit user consent
 - Rate limits must be documented in API docs
-```
-```
