@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P01
 title: "HYBRID_REVIEW7 N06 Audit: expansion_play + govtech_vertical + edtech_vertical"
 version: "1.0.0"
-quality: null
+quality: 8.8
 author: n06_commercial
 tags: [audit, hybrid_review7, expansion_play, govtech_vertical, edtech_vertical, wave6]
 domain: "N06 commercial audit"
