@@ -1,29 +1,12 @@
 ---
 id: kc_customer_segment
 kind: knowledge_card
-title: Customer Segment/ICP Definition
+title: Customer Segment / ICP Definition
 version: 1.0.0
 quality: null
 pillar: P01
-description: |
-  Defines customer segments and Ideal Customer Profiles (ICPs) using firmographics (industry, company size, revenue, location) and psychographic needs (pain points, goals, decision-makers). Includes quantitative segmentation criteria and qualitative behavioral analysis. Used for targeted marketing, product positioning, and sales strategy development.
+description: A customer segment defines a specific group of customers with shared characteristics that make them a good fit for a product or service. This artifact establishes the Ideal Customer Profile (ICP) by specifying:
+- Firmographics: Industry, company size, geographic location, revenue range, and operational structure
+- Needs: Pain points, business goals, decision-making processes, and resource constraints
+This definition enables targeted marketing, product development, and resource allocation by creating clear boundaries between viable and non-viable customer groups.
 ---
-# Customer Segment/ICP Definition Artifact
-
-A structured definition of customer segments and Ideal Customer Profiles (ICPs) that guides targeting strategies. This artifact combines firmographic data with behavioral insights to create precise market segmentation.
-
-## Key Elements
-- **Firmographics**: Industry, company size (employees), annual revenue, geographic location, technological infrastructure
-- **Behavioral Metrics**: Buying patterns, product usage, lifecycle stage, decision-making processes
-- **Needs**: Pain points, goals, challenges that define customer requirements
-- **Value Proposition**: How the product/service uniquely addresses these needs
-
-## Usage
-This artifact enables:
-1. **Market Segmentation** - Identifying distinct customer groups
-2. **Targeting Strategies** - Focusing resources on high-value profiles
-3. **Product Development** - Prioritizing features for specific segments
-4. **Marketing Personalization** - Customizing campaigns for different groups
-5. **Sales Strategy** - Developing approaches for segment-specific decision-making
-
-The definition should be regularly reviewed to maintain alignment with market dynamics and business objectives.
