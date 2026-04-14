@@ -1,25 +1,29 @@
 ---
-id: kc_mcp_app_extension
+id: kc_fhir_agent_capability
 kind: knowledge_card
-title: MCP Apps Extension (SEP-1865)
+title: HL7 FHIR R5 AI Agent Capability Declaration
 version: 1.0.0
 quality: null
 pillar: P01
 ---
 
-The MCP Apps Extension (SEP-1865) defines a standardized framework for app manifest management, lifecycle control, and secure execution. It enables:
+The HL7 FHIR R5 AI Agent Capability Declaration defines standardized requirements for AI agents interacting with healthcare systems via SMART on FHIR. It includes:
 
-1. **App Manifest**: Structured metadata describing app capabilities, permissions, and sandboxed execution environment
-2. **Lifecycle Management**: Install/launch/terminate workflow with versioned artifact tracking
-3. **Capability Isolation**: Sandboxed iframe execution with restricted API access
-4. **Permission Grants**: Fine-grained access control for system resources
-5. **Secure Execution**: Runtime sandboxing to prevent unauthorized data access
+1. **SMART on FHIR Scopes** - OAuth2 scopes for read/write access to FHIR resources (e.g., Patient, Observation)
+2. **PHI Handling** - Mandatory encryption of protected health information (PHI) in transit and at rest
+3. **CDS Hooks** - Integration with clinical decision support systems for evidence-based recommendations
+4. **AI Transparency** - Metadata requirements for model provenance, bias mitigation, and explainability
 
-This extension provides:
-- Immutable audit trail of app execution
-- Controlled access to system resources
-- Enhanced security through isolation
-- Versioned artifact tracking
-- Standardized permission management
+This declaration ensures:
+- Compliance with HIPAA and GDPR data protection standards
+- Interoperability across EHR systems
+- Audit trails for AI-driven clinical decisions
+- Secure access control for sensitive health data
 
-The manifest includes cryptographic signatures, execution context, and capability declarations to ensure secure and auditable app operations.
+Key components include:
+- Capability assertions in FHIR CapabilityStatement
+- Security context for data access
+- Versioned API compatibility guarantees
+- Evidence-based AI model documentation
+
+The declaration enables trusted AI integration in healthcare while maintaining patient data confidentiality and regulatory compliance.
