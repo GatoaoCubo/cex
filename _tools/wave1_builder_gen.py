@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL = "qwen3:14b"
+MODEL = "gemma4:26b"
 META_PATH = ".cex/kinds_meta.json"
 BUILDERS_DIR = "archetypes/builders"
 TODAY = date.today().isoformat()
@@ -97,7 +97,7 @@ def ollama_generate(prompt, max_tokens=2048):
                 "prompt": prompt + "\n/no_think",
                 "stream": False,
                 "options": {"num_predict": max_tokens, "temperature": 0.3}
-            }, timeout=180)
+            }, timeout=600)
             resp.raise_for_status()
             text = resp.json().get("response", "").strip()
             # Strip thinking tags if present
