@@ -83,13 +83,23 @@ WAVE5_KINDS = [
     "product_tour",
 ]
 
+WAVE6_KINDS = [
+    "ecommerce_vertical", "govtech_vertical", "edtech_vertical",
+    "partner_listing", "marketplace_app_manifest", "oauth_app_config",
+    "app_directory_entry", "contributor_guide", "code_of_conduct",
+    "github_issue_template", "faq_entry", "nps_survey",
+    "churn_prevention_playbook", "expansion_play", "renewal_workflow",
+    "analyst_briefing", "press_release", "webinar_script",
+]
+
 WAVE_MAP = {
     "1": WAVE1_KINDS,
     "2": WAVE2_KINDS,
     "3": WAVE3_KINDS,
     "4": WAVE4_KINDS,
     "5": WAVE5_KINDS,
-    "all": WAVE1_KINDS + WAVE2_KINDS + WAVE3_KINDS + WAVE4_KINDS + WAVE5_KINDS,
+    "6": WAVE6_KINDS,
+    "all": WAVE1_KINDS + WAVE2_KINDS + WAVE3_KINDS + WAVE4_KINDS + WAVE5_KINDS + WAVE6_KINDS,
 }
 
 # ============================================================

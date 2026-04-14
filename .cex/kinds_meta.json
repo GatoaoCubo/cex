@@ -1988,5 +1988,167 @@
     "core": false,
     "description": "In-app product tour walkthrough with step/tooltip/trigger spec",
     "boundary": "Product tour. NOT interactive_demo (sales) nor onboarding_flow (activation)."
+  },
+  "ecommerce_vertical": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_ev_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "eCommerce industry vertical: cart/checkout, PCI-DSS, recommendation engines, fraud, use cases",
+    "boundary": "eCommerce vertical KC. NOT fintech_vertical (payments-only) nor case_study (ref)."
+  },
+  "govtech_vertical": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_gv_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Government/govtech industry vertical: FedRAMP, FISMA, GSA, CJIS, accessibility (Section 508), use cases",
+    "boundary": "Govtech vertical KC. NOT compliance_checklist (audit) nor legal_vertical (private)."
+  },
+  "edtech_vertical": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_etv_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Education/EdTech industry vertical: FERPA, COPPA, LMS integration (LTI), student data privacy, use cases",
+    "boundary": "EdTech vertical KC. NOT course_module (course content) nor compliance_checklist (audit)."
+  },
+  "partner_listing": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_pl_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Partner directory listing for SI/reseller channels with tier, region, certifications, contact",
+    "boundary": "Partner listing. NOT case_study (customer ref) nor app_directory_entry (app marketplace)."
+  },
+  "marketplace_app_manifest": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_mam_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Marketplace app manifest spec for Claude/LangChain/HuggingFace listings (metadata, perms, pricing)",
+    "boundary": "Marketplace manifest. NOT plugin (loadable) nor app_directory_entry (descriptive)."
+  },
+  "oauth_app_config": {
+    "pillar": "P09",
+    "llm_function": "CONSTRAIN",
+    "naming": "p09_oauth_{{name}}.yaml",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "OAuth2/PKCE app config for partner integrations: scopes, redirects, token lifetimes, refresh policy",
+    "boundary": "OAuth config. NOT sso_config (workforce) nor secret_config (raw creds)."
+  },
+  "app_directory_entry": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_ade_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "App directory entry for FREE-tier discovery: tagline, screenshots, install steps, demo link",
+    "boundary": "App directory entry. NOT marketplace_app_manifest (machine spec) nor partner_listing (sales)."
+  },
+  "contributor_guide": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_cg_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "OSS CONTRIBUTING.md spec: dev setup, PR flow, coding standards, review process, CLA",
+    "boundary": "Contributor guide. NOT integration_guide (consumer) nor code_of_conduct (norms)."
+  },
+  "code_of_conduct": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_coc_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Community code of conduct (Contributor Covenant pattern) with reporting + enforcement",
+    "boundary": "Code of conduct. NOT contributor_guide (technical) nor governance (decision rules)."
+  },
+  "github_issue_template": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_git_{{name}}.md",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "GitHub issue template (bug/feature/question) with required fields and labels",
+    "boundary": "Issue template. NOT pull_request_template (separate) nor faq_entry (answers)."
+  },
+  "faq_entry": {
+    "pillar": "P01",
+    "llm_function": "INJECT",
+    "naming": "p01_faq_{{name}}.md",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "FAQ entry with question, canonical answer, related links, support deflection metric",
+    "boundary": "FAQ entry. NOT knowledge_card (broader) nor support_macro (agent canned reply)."
+  },
+  "nps_survey": {
+    "pillar": "P11",
+    "llm_function": "GOVERN",
+    "naming": "p11_nps_{{name}}.yaml",
+    "max_bytes": 3072,
+    "core": false,
+    "description": "NPS survey config: question, scale, follow-up, segmentation, cadence, response routing",
+    "boundary": "NPS survey. NOT customer_segment (target def) nor cohort_analysis (retention)."
+  },
+  "churn_prevention_playbook": {
+    "pillar": "P03",
+    "llm_function": "PRODUCE",
+    "naming": "p03_cpp_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Churn prevention playbook: signal detection, intervention triggers, save-the-account scripts",
+    "boundary": "Churn playbook. NOT renewal_workflow (process) nor expansion_play (upsell)."
+  },
+  "expansion_play": {
+    "pillar": "P03",
+    "llm_function": "PRODUCE",
+    "naming": "p03_ep_{{name}}.md",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Account expansion play: upsell triggers, cross-sell map, NRR mechanics, AE talk track",
+    "boundary": "Expansion play. NOT churn_prevention_playbook (defensive) nor sales_playbook (new logo)."
+  },
+  "renewal_workflow": {
+    "pillar": "P12",
+    "llm_function": "PRODUCE",
+    "naming": "p12_rw_{{name}}.yaml",
+    "max_bytes": 5120,
+    "core": false,
+    "description": "Renewal workflow with stages, owners, automation, escalation, contract amendments",
+    "boundary": "Renewal workflow. NOT churn_prevention_playbook (intervention) nor workflow (generic)."
+  },
+  "analyst_briefing": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_ab_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Gartner/Forrester/IDC analyst briefing deck with positioning, proof points, customer wins",
+    "boundary": "Analyst briefing. NOT pitch_deck (sales) nor case_study (single ref)."
+  },
+  "press_release": {
+    "pillar": "P05",
+    "llm_function": "PRODUCE",
+    "naming": "p05_pr_{{name}}.md",
+    "max_bytes": 4096,
+    "core": false,
+    "description": "Press release with AP-style headline, dateline, lede, quotes, boilerplate, contacts",
+    "boundary": "Press release. NOT blog_post (long-form) nor pitch_deck (visual)."
+  },
+  "webinar_script": {
+    "pillar": "P03",
+    "llm_function": "PRODUCE",
+    "naming": "p03_ws_{{name}}.md",
+    "max_bytes": 6144,
+    "core": false,
+    "description": "Webinar script with intro/agenda/segments/Q&A/CTA + speaker notes + slide cues",
+    "boundary": "Webinar script. NOT pitch_deck (visual deck) nor sales_playbook (1:1 selling)."
   }
 }
