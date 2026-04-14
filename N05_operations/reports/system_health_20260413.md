@@ -4,7 +4,7 @@ kind: knowledge_card
 pillar: P07
 title: CEX system health sweep 2026-04-13
 version: 1.0.0
-quality: null
+quality: 8.8
 tags: [health, diagnostics, system-test, gen-v2-hardening]
 ---
 
