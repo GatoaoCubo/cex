@@ -9,25 +9,24 @@ pillar: P01
 
 # User Journey Map
 
-The user journey represents the end-to-end experience a customer has with a product/service, from initial awareness to long-term loyalty. This map helps businesses understand customer behavior, optimize touchpoints, and improve conversion rates.
+The user journey represents the end-to-end experience a customer has with a product or service, from initial awareness to post-purchase engagement. This map helps businesses optimize touchpoints and improve conversion rates.
 
 ## Key Stages
-1. **Awareness**: Customer becomes aware of a problem or need
-2. **Consideration**: Researches solutions through content, reviews, and comparisons
-3. **Intent**: Identifies specific products/services that solve their problem
-4. **Evaluation**: Compares options, reads reviews, and considers purchase
-5. **Purchase**: Completes the transaction
-6. **Post-Purchase**: Receives product, experiences value, and may leave feedback
-7. **Loyalty**: Becomes a repeat customer and advocate
+1. **Awareness**: Customer becomes aware of a problem or need  
+2. **Consideration**: Researches solutions and evaluates options  
+3. **Decision**: Makes a purchase or commitment  
+4. **Action**: Completes the transaction or engagement  
+5. **Post-Purchase**: Experiences with the product/service  
 
-## Measurement
-- Track touchpoints across channels (website, social, email)
-- Monitor conversion rates at each stage
-- Analyze customer feedback and Net Promoter Score (NPS)
-- Use heatmaps and session recordings for behavioral insights
+## Purpose
+This framework helps businesses:  
+- Identify customer pain points  
+- Optimize marketing strategies  
+- Improve customer retention  
+- Measure conversion effectiveness  
 
-## Optimization
-- Personalize content based on journey stage
-- Streamline conversion paths
-- Improve post-purchase engagement
-- Create referral programs for loyal customers
+## Best Practices
+- Map each stage to specific touchpoints  
+- Use data analytics to track progress  
+- Continuously refine the journey based on feedback  
+- Align all departments with the customer-centric approach  
