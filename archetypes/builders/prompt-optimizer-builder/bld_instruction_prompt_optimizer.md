@@ -22,7 +22,7 @@ density_score: 0.85
 3. Study optimization techniques from NLP literature (2020-2024)  
 4. Benchmark 5+ existing prompt compilation tools for performance metrics  
 5. Collect user feedback on current prompt governance workflows  
-6. Document schema requirements from SCHEMA.md for artifact compatibility  
+6. Document schema requirements from bld_schema_prompt_optimizer.md for artifact compatibility  
 
 ## Phase 2: COMPOSE  
 1. Define input/output schema using bld_schema_prompt_optimizer.md specifications  

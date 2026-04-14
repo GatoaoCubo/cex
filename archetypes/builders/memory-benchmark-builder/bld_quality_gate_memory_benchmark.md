@@ -6,57 +6,60 @@ llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for memory_benchmark
 quality: null
 title: "Quality Gate Memory Benchmark"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+version: "1.1.0"
+author: n05_operations
 tags: [memory_benchmark, builder, quality_gate]
 tldr: "Quality gate with HARD and SOFT scoring for memory_benchmark"
 domain: "memory_benchmark construction"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.87
 ---
 
-## Definition  
-| metric         | threshold     | operator | scope        |  
-|----------------|---------------|----------|--------------|  
-| memory latency | <= 100ns      | <=       | per test case|  
-| bandwidth      | >= 50GB/s     | >=       | system wide  |  
-| error rate     | <= 0.01%      | <=       | per cycle    |  
+## Definition
 
-## HARD Gates  
-| ID           | Check                  | Fail Condition                          |  
-|--------------|------------------------|-----------------------------------------|  
-| H01          | YAML frontmatter valid | Invalid YAML syntax or missing fields   |  
-| H02          | ID matches pattern     | ID does not match ^p07_mb_[a-z][a-z0-9_]+.md$ |  
-| H03          | kind field matches     | kind != 'memory_benchmark'              |  
-| H04          | latency threshold met  | latency > 100ns for any test case       |  
-| H05          | bandwidth threshold met| bandwidth < 50GB/s system wide          |  
-| H06          | error rate threshold   | error rate > 0.01% per cycle            |  
-| H07          | allocation success     | <99% allocation success rate            |  
+| metric           | threshold | operator | scope        |
+|------------------|-----------|----------|--------------|
+| frontmatter      | valid     | ==       | artifact     |
+| section_count    | >=4       | >=       | body         |
+| metric_count     | >=2       | >=       | body         |
+| id_pattern       | matches   | ==       | frontmatter  |
 
-## SOFT Scoring  
-| Dim | Dimension        | Weight | Scoring Guide                          |  
-|-----|------------------|--------|----------------------------------------|  
-| D01 | Latency          | 0.15   | 0.0 (100ns+) to 1.0 (<=50ns)           |  
-| D02 | Bandwidth        | 0.20   | 0.0 (25GB/s) to 1.0 (>=75GB/s)         |  
-| D03 | Error Rate       | 0.15   | 0.0 (1%+) to 1.0 (<=0.001%)            |  
-| D04 | Allocation       | 0.10   | 0.0 (50%) to 1.0 (>=99.9%)             |  
-| D05 | Stability        | 0.10   | 0.0 (crash) to 1.0 (no crashes)        |  
-| D06 | Scalability      | 0.10   | 0.0 (100GB) to 1.0 (>=500GB)           |  
-| D07 | Consistency      | 0.10   | 0.0 (5% drift) to 1.0 (<=0.1% drift)   |  
-| D08 | Security         | 0.10   | 0.0 (vulnerability) to 1.0 (none)      |  
+## HARD Gates
 
-## Actions  
-| Score   | Action       |  
-|---------|--------------|  
-| >=9.5   | GOLDEN       |  
-| >=8.0   | PUBLISH      |  
-| >=7.0   | REVIEW       |  
-| <7.0    | REJECT       |  
+| ID  | Check                     | Fail Condition                                        |
+|-----|---------------------------|-------------------------------------------------------|
+| H01 | YAML frontmatter valid    | Invalid YAML syntax or missing required fields        |
+| H02 | ID matches pattern        | ID does not match ^p07_mb_[a-z][a-z0-9_]+.md$        |
+| H03 | kind field matches        | kind != 'memory_benchmark'                            |
+| H04 | At least 2 metrics        | Fewer than 2 evaluation metrics defined in body       |
+| H05 | Metric formula present    | No formula or calculation method specified per metric |
+| H06 | Real benchmark reference  | No reference to LOCOMO, LongMemEval, MemGPT, or equiv |
+| H07 | No hardware metrics       | Body contains DRAM/SRAM/bandwidth/ECC references      |
 
-## Bypass  
-| conditions                          | approver         | audit trail              |  
-|------------------------------------|------------------|--------------------------|  
-| Critical production issue          | CTO              | documented in JIRA       |  
-| Third-party hardware limitation    | Hardware Lead    | signed waiver            |  
-| Regulatory override                | Compliance Head  | legal review record      |
+## SOFT Scoring
+
+| Dim | Dimension           | Weight | Scoring Guide                                            |
+|-----|---------------------|--------|----------------------------------------------------------|
+| D01 | Metric completeness | 0.20   | retention+recall+hallucination (1.0) vs partial (0.5)    |
+| D02 | Formula precision   | 0.20   | Exact formula cited (1.0) vs vague description (0.0)     |
+| D03 | Benchmark grounding | 0.15   | 3+ real benchmarks cited (1.0) vs 1 (0.5) vs 0 (0.0)    |
+| D04 | Distance coverage   | 0.15   | Tests at 3+ turn distances (1.0) vs single depth (0.3)   |
+| D05 | Hallucination check | 0.15   | Hallucination metric required (1.0) vs absent (0.0)      |
+| D06 | Reproducibility     | 0.10   | Dataset + prompt templates specified (1.0) vs none (0.0) |
+| D07 | Domain accuracy     | 0.05   | AI memory domain only (1.0) vs hardware contamination (0)|
+
+## Actions
+
+| Score  | Action   |
+|--------|----------|
+| >=9.5  | GOLDEN   |
+| >=8.0  | PUBLISH  |
+| >=7.0  | REVIEW   |
+| <7.0   | REJECT   |
+
+## Bypass
+
+| conditions                   | approver   | audit trail                      |
+|------------------------------|------------|----------------------------------|
+| Novel benchmark not yet named | Tech Lead  | Citation pending; flag for update |

@@ -24,16 +24,16 @@ density_score: 0.85
 5. Benchmark against P07 governance standards for AI system accountability.  
 6. Interview domain experts to identify unmet evaluation needs.  
 
-## Phase 2: COMPOSE  
-1. Set up artifact structure using SCHEMA.md’s hierarchical framework.  
-2. Write introduction aligning with OUTPUT_TEMPLATE.md’s scope section.  
-3. Detail methodology: metric definitions, data sources, and evaluation workflows.  
-4. Map governance principles (P07) to evaluation stages (e.g., risk mitigation).  
-5. Embed trajectory analysis examples from Phase 1 datasets.  
-6. Reference SCHEMA.md for compliance with artifact metadata standards.  
-7. Draft validation protocols (e.g., cross-agent comparisons, edge case testing).  
-8. Format tables and figures per OUTPUT_TEMPLATE.md’s visual guidelines.  
-9. Finalize artifact with peer review and schema validation.  
+## Phase 2: COMPOSE
+1. Set up artifact structure using bld_schema_trajectory_eval.md’s field definitions.
+2. Write trajectory overview table aligned with bld_output_template_trajectory_eval.md’s structure.
+3. Log each step: observation summary, reasoning summary, action taken, outcome.
+4. Compute all evaluation metrics: task_success, path_efficiency, tool_call_accuracy, partial_credit.
+5. Score each step using LLM-as-judge pattern from bld_quality_gate_trajectory_eval.md.
+6. Reference bld_schema_trajectory_eval.md for ID pattern and required fields.
+7. Identify first failure step and classify root cause (hallucination/grounding_error/tool_misuse/reasoning_drift).
+8. Write targeted recommendations based on failure analysis.
+9. Finalize frontmatter and compile: python _tools/cex_compile.py {path}  
 
 ## Phase 3: VALIDATE  
 - [ ] Conduct peer review for clarity and governance alignment.  

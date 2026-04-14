@@ -18,23 +18,24 @@ density_score: 0.85
 
 ## Production Tools  
 | Tool | Purpose | When |  
-| --- | --- | --- |  
-| cex_compile.py | Compiles RAG components into an executable agent | During deployment |  
-| cex_score.py | Evaluates agent performance using metrics like accuracy and latency | Post-deployment testing |  
-| cex_retriever.py | Fetches relevant documents from external knowledge sources | During query processing |  
-| cex_doctor.py | Diagnoses and fixes common agent errors | Debugging sessions |  
-| cex_validator.py | Ensures compliance with data governance policies | Pre-deployment |  
-| cex_optimizer.py | Fine-tunes agent parameters for optimal resource usage | Performance tuning |  
+|------|---------|------|  
+| cex_compile.py | Compile agentic_rag artifact to .yaml | After authoring |  
+| cex_score.py | Peer-review score via 5D rubric | After compile |  
+| cex_retriever.py | Find similar existing agentic_rag artifacts | During F3 INJECT |  
+| cex_doctor.py | Validate builder ISO health | Pre-dispatch |  
+| cex_wave_validator.py | Validate all ISOs in builder directory | Post-build |  
 
 ## Validation Tools  
 | Tool | Purpose | When |  
-| --- | --- | --- |  
-| val_check.py | Validates input/output integrity and schema consistency | Pre-processing |  
-| consistency_checker.py | Ensures alignment between retrieved data and generated responses | Post-retrieval |  
-| unit_tester.py | Executes automated tests for individual agent modules | Development phase |  
-| data_integrity.py | Verifies the accuracy and completeness of training data | Pre-training |  
+|------|---------|------|  
+| cex_hooks.py | Pre-commit quality gate enforcement | Before git commit |  
+| cex_sanitize.py | Check ASCII compliance in code files | Pre-commit |  
+| cex_hygiene.py | Artifact CRUD rules (frontmatter, naming) | Periodic cleanup |  
 
 ## External References  
-- **LangChain**: Framework for building agentic workflows with LLMs  
-- **LlamaIndex**: Toolkit for integrating vector databases with RAG pipelines  
-- **AgenticRAGFramework**: Reference implementation for modular, scalable RAG agents
+- Self-RAG (Asai et al. 2023: self-reflection tokens for retrieval decisions)  
+- CRAG -- Corrective RAG (Yan et al. 2024: retrieval evaluator + web search fallback)  
+- RAG-Fusion (Rackauckas 2024: multi-query generation + RRF reranking)  
+- Adaptive RAG (Jeong et al. 2024: query complexity classifier)  
+- LangGraph agentic RAG (retrieve->grade->re-query loop via StateGraph)  
+- LlamaIndex AgentRunner (tool-calling + retrieval planning)
