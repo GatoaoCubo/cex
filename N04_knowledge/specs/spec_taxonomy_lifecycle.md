@@ -480,6 +480,146 @@ New fields added to every kind entry:
 
 ---
 
+## G2. Source Harvest System
+
+### G2.1 Overview
+
+The Source Harvest System (`cex_source_harvester.py`) is the INPUT layer
+of the taxonomy pipeline. It scans the CEX repo itself for external references
+and merges them into `taxonomy_sources.yaml` as watchable feeds.
+
+This closes the loop: as N01/N02/N04 produce research artifacts that cite
+new sources, the harvester automatically discovers those sources and adds
+them to the scout's watch list -- without any manual curation.
+
+### G2.2 What Gets Harvested
+
+The harvester scans these repo directories:
+
+| Directory | Pattern | What it finds |
+|-----------|---------|---------------|
+| `N01_intelligence/research/` | `**/*.md` | Research KC URLs, arXiv, standards refs |
+| `P01_knowledge/library/` | `**/*.md` | Knowledge card citations |
+| `_docs/specs/` | `**/*.md` | Spec upstream references |
+| `archetypes/builders/` | `**/bld_knowledge_card_*.md` | Builder KC links |
+| `.claude/rules/` | `*.md` | Industry term references |
+| `.` | `CLAUDE.md` | Root pointers |
+
+### G2.3 Reference Types Extracted
+
+| Type | Pattern | Example |
+|------|---------|---------|
+| URL | `https?://...` | `https://a2a-protocol.org/latest/specification` |
+| GitHub slug | `github.com/org/repo` | `github.com/google-a2a/A2A` |
+| W3C TR | `w3.org/TR/...` | `w3.org/TR/vc-data-model-2.0` |
+| IETF draft | `datatracker.ietf.org/doc/...` | `datatracker.ietf.org/doc/draft-narajala-ans` |
+| ISO standard | `ISO/IEC NNNNN` | `ISO/IEC 42001` |
+| IEEE standard | `IEEE PNNNN` | `IEEE P3119` |
+| NIST resource | `NIST AI/SP NNN` | `NIST AI 100-1` |
+| HuggingFace | `huggingface.co/org/repo` | `huggingface.co/huggingface/transformers` |
+
+arXiv IDs, DOIs, and RFC numbers are detected but classified as
+individual citations (not feed sources) and excluded from watch entries.
+
+URLs matching CDN/tracking/social domains are automatically skipped.
+
+### G2.4 Deduplication Strategy
+
+Before adding a new entry, the harvester:
+
+1. **Canonical URL check**: normalize URL (strip trailing `/`, fragments,
+   tracking params, lowercase domain) and check against existing entries
+2. **Fuzzy domain match**: for URLs with the same domain, compute Levenshtein
+   distance against existing entries (threshold: 10 chars)
+3. **Skip list**: CDNs, badge services, social media, package registries
+   are excluded regardless of where they appear
+
+Entries that pass all 3 checks are added to the `harvested:` section.
+
+### G2.5 Output Format (per entry)
+
+```yaml
+harvested:
+  - name: google-a2a-a2a
+    type: github
+    url: https://github.com/google-a2a/A2A
+    watch_paths: []
+    extract_patterns: []
+    cadence: weekly
+    priority: medium
+    harvested_from: N01_intelligence/research/ai2ai_exhaustive_scan_20260414.md
+    last_checked: 2026-04-14
+    status: active
+```
+
+Fields set by harvester (default values, refine manually):
+- `watch_paths: []` -- add specific paths for targeted scanning
+- `extract_patterns: []` -- add regex patterns for kind extraction
+- `cadence: weekly|biweekly|monthly` -- inferred from source type
+- `priority: critical|high|medium|low` -- inferred from source type
+
+### G2.6 CLI Reference
+
+```bash
+# Preview new entries without writing
+python _tools/cex_source_harvester.py --dry-run
+
+# Apply new entries to taxonomy_sources.yaml
+python _tools/cex_source_harvester.py --apply
+
+# Show breakdown by source type
+python _tools/cex_source_harvester.py --stats
+
+# Verbose: print each new entry as found
+python _tools/cex_source_harvester.py --apply --verbose
+
+# Called by scout (harvest-then-scan)
+python _tools/cex_source_harvester.py --harvest-first
+```
+
+### G2.7 Integration with Scout
+
+The scout accepts `--harvest-first` which runs the harvester before scanning:
+
+```bash
+python _tools/cex_taxonomy_scout.py --harvest-first --source all --since 7
+```
+
+This ensures the scout always operates on the most complete source list,
+including any sources cited in recently-added research artifacts.
+
+### G2.8 Cadence Recommendations by Source Type
+
+| Source type | Default cadence | Rationale |
+|-------------|----------------|-----------|
+| github | weekly | Spec repos ship fast; weekly catches new objects |
+| arxiv | weekly | New papers every week |
+| w3c | monthly | W3C specs move slowly through chartered WGs |
+| ietf | monthly | IETF drafts have 6-month revision cycles |
+| iso | quarterly | ISO standards take years; quarterly is sufficient |
+| ieee | monthly | IEEE SAs publish at irregular pace |
+| nist | monthly | NIST AI resources update ~quarterly |
+| website | monthly | General docs; less frequent change |
+| community | daily/weekly | HN/PH signal fast-moving trends |
+
+### G2.9 Adding Sources Manually
+
+To add a new source not discovered by the harvester:
+
+1. Edit `.cex/config/taxonomy_sources.yaml` directly
+2. Add your entry in the correct section (or in `harvested:`)
+3. Set `harvested_from: manual` and `last_checked: <today>`
+4. Re-run scout:
+   ```bash
+   python _tools/cex_taxonomy_scout.py --source github --since 30 --dry-run
+   ```
+
+The harvester will NOT overwrite manually-added entries -- it only appends
+new entries to the `harvested:` block. Existing entries in all sections
+are preserved via URL canonical-dedup.
+
+---
+
 ## H. Integration with CEX Runtime
 
 ### H.1 File Locations
