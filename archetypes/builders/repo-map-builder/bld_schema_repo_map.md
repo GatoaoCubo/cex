@@ -32,8 +32,10 @@ density_score: 0.85
 | quality    | string | yes      | "draft" | Quality status                 |  
 | tags       | list   | yes      | []      | Keywords                       |  
 | tldr       | string | yes      | -       | Summary                        |  
-| repository_url | string | yes | -       | Repository URL                 |  
-| last_commit | string | yes | -       | Last commit hash               |  
+| token_budget | int | yes | 1024 | Max tokens for this map |
+| symbol_count | int | yes | - | Total symbols extracted |
+| file_count | int | yes | - | Files included in map |
+| extraction_method | string | yes | "tree-sitter" | tree-sitter \| ctags \| hybrid |  
 
 ### Recommended  
 | Field         | Type   | Notes                  |  

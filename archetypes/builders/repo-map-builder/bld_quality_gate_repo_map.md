@@ -28,24 +28,24 @@ density_score: 0.85
 | H02 | ID matches pattern | ID does not match `^p01_rm_[a-zA-Z0-9_]+$` (schema pattern) |
 | H03 | kind matches | kind != `repo_map` |
 | H04 | Token budget defined | Missing `token_budget` field |  
-| H05 | Unique IDs | Duplicate ID detected |  
-| H06 | URL valid | `url` field invalid or unreachable |  
-| H07 | Versioning correct | Version format ≠ `vX.Y.Z` |  
-| H08 | No duplicate repos | Multiple entries for same repo |  
-| H09 | Language accurate | Language mismatch with code files |  
-| H10 | License present | Missing SPDX license identifier |  
+| H05 | Symbol table present | No function/class signatures in body |
+| H06 | Token budget defined | Missing token_budget field |
+| H07 | Tokens within budget | tokens_used > token_budget |
+| H08 | Extraction method specified | Missing extraction_method field |
+| H09 | File count matches body | file_count != actual files in symbol table |
+| H10 | No flat file tree | Body contains only paths without signatures |  
 
-## SOFT Scoring  
-| Dim | Dimension | Weight | Scoring Guide |  
-|---|---|---|---|  
-| D01 | YAML Structure | 0.15 | 1.0 for valid, 0.5 for minor issues |  
-| D02 | Completeness | 0.15 | 1.0 for ≥90% fields filled |  
-| D03 | Consistency | 0.12 | 1.0 for uniform naming/structuring |  
-| D04 | URL Validity | 0.10 | 1.0 for all URLs functional |  
-| D05 | Versioning | 0.10 | 1.0 for semver compliance |  
-| D06 | Language Accuracy | 0.12 | 1.0 for accurate language tags |  
-| D07 | License Presence | 0.10 | 1.0 for valid SPDX license |  
-| D08 | Documentation | 0.16 | 1.0 for clear repo descriptions |  
+## SOFT Scoring
+
+| Dim | Dimension | Weight | Scoring Guide |
+|-----|-----------|--------|---------------|
+| D01 | Symbol Extraction | 0.25 | tree-sitter signatures present=1.0; file paths only=0.3 |
+| D02 | Token Budget Compliance | 0.20 | tokens_used <= budget=1.0; exceeded=0.0 |
+| D03 | PageRank Ranking | 0.20 | scores shown, personalization applied=1.0; no ranking=0.3 |
+| D04 | File Selection Heuristics | 0.15 | all 4 rules documented=1.0; none documented=0.4 |
+| D05 | Structural Completeness | 0.20 | all template sections present=1.0; missing sections=0.5 |
+
+**Weight sum: 0.25+0.20+0.20+0.15+0.20 = 1.00**  
 
 ## Actions  
 | Score | Action |  
