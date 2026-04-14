@@ -3,36 +3,56 @@ kind: collaboration
 id: bld_collaboration_consolidation_policy
 pillar: P12
 llm_function: COLLABORATE
-purpose: How consolidation_policy-builder works in crews with other builders
+purpose: How consolidation_policy-builder works in crews with other CEX builders
 quality: null
-title: "Collaboration Consolidation Policy"
-version: "1.0.0"
-author: wave1_builder_gen_v2
+title: "Collaboration: consolidation_policy-builder"
+version: "2.0.0"
+author: n06_commercial
 tags: [consolidation_policy, builder, collaboration]
-tldr: "How consolidation_policy-builder works in crews with other builders"
-domain: "consolidation_policy construction"
+tldr: "consolidation_policy-builder consumes memory_architecture (parent), produces lifecycle rules for use by procedural-memory-builder and retriever-config-builder"
+domain: "LLM agent memory consolidation"
 created: "2026-04-14"
 updated: "2026-04-14"
-density_score: 0.85
+density_score: 0.90
 ---
 
-## Crew Role  
-Coordinates memory lifecycle policy consolidation across systems, ensuring alignment with retention rules, eviction priorities, and resource constraints.  
+## Crew Role
 
-## Receives From  
-| Builder         | What                  | Format  |  
-|-----------------|-----------------------|---------|  
-| memory_monitor  | Real-time usage data  | JSON    |  
-| policy_validator| Validated rules       | YAML    |  
-| config_manager  | System parameters     | TOML    |  
+Governs the memory lifecycle within a complete agent memory system. Consumes the parent
+memory_architecture artifact (which layers are active, what tier, what backends) and
+produces the promotion + eviction rules that operate on those layers. Other builders
+in the memory cluster reference consolidation_policy for TTL and retention guidance.
 
-## Produces For  
-| Builder          | What                    | Format  |  
-|------------------|-------------------------|---------|  
-| memory_allocator | Policy-ready rules      | JSON    |  
-| policy_enforcer  | Consolidated policy     | YAML    |  
-| logging_system   | Audit logs              | CSV     |  
+## Receives From
 
-## Boundary  
-Does NOT handle memory_scope (access rules) or compression_config (token compression).  
-Memory_scope handled by access_rule_builder; compression_config handled by token_compressor.
+| Builder | What | Format |
+|---------|------|--------|
+| memory-architecture-builder | Active layers, tier, backend config | memory_architecture artifact |
+| knowledge-card-builder | Domain research on MemGPT pipeline, eviction algorithms | knowledge_card artifact |
+
+## Produces For
+
+| Builder | What | Format |
+|---------|------|--------|
+| procedural-memory-builder | Skill TTL and versioning policy | consolidation_policy artifact |
+| retriever-config-builder | Episodic memory TTL + eviction triggers for index management | consolidation_policy artifact |
+| agent-builder | Memory lifecycle summary for system prompt | Tier + retention summary |
+| N06 commercial review | Enterprise compliance config for tier validation | Compliance Config section |
+
+## Boundary
+
+Does NOT produce:
+- Layer definitions or backend configs (-> memory_architecture kind)
+- Skill schemas, versioning protocols, or skill namespace (-> procedural_memory kind)
+- Retrieval configs, embedding models, or reranker settings (-> retriever_config kind)
+- Access control policies or permission scopes (-> memory_scope kind)
+- Token compression configs (-> compression_config kind)
+
+## Dispatch Pattern
+
+In a grid dispatch building a complete agent memory system:
+1. N06 (commercial) builds `memory_architecture` first (establishes layers + tier)
+2. N06 (commercial) builds `consolidation_policy` using memory_architecture as input
+3. N04 (knowledge) builds `procedural_memory` referencing consolidation_policy for TTL
+4. N01 (intelligence) builds `retriever_config` for episodic/semantic layers
+5. N07 consolidates and cross-validates all four artifacts for consistency
