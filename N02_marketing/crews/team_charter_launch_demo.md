@@ -8,6 +8,11 @@ crew_template_ref: p12_ct_product_launch.md
 mission_statement: "Ship a launch package for 'CEX Flywheel v2' targeting senior AI engineers at Series A+ SaaS companies."
 quality_gate: 9.0
 deadline: "2026-04-18T18:00:00-03:00"
+deliverables:
+  - "Positioning brief (knowledge_card P01) -- source of truth for copy + design"
+  - "Launch copy pack (tagline + headline + 3 body variants)"
+  - "Visual assets spec (hero + social + email header)"
+  - "Final verdict report (quality scores + pass/fail)"
 budget:
   tokens: 120000
   wall_clock_seconds: 1800

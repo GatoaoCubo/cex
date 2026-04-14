@@ -65,18 +65,25 @@ _FM_RE = re.compile(r"^---\n(.*?)\n---", re.DOTALL)
 
 
 def _parse_md_frontmatter(text: str) -> dict:
-    """Minimal YAML frontmatter parser (no PyYAML dep required).
+    """YAML frontmatter parser.
 
-    Supports: scalar keys, simple lists (indented "- value"), block scalars
-    of a single line. Complex nested structures fall back to raw strings.
-    Used by load_from_crew_template to read crew/role/charter metadata.
+    Prefers PyYAML when available (handles nested mappings like budget: {tokens, usd}).
+    Falls back to a minimal parser (scalar keys + simple lists only) when PyYAML
+    is missing, so callers never crash in bare environments.
     """
     m = _FM_RE.match(text)
     if not m:
         return {}
+    raw = m.group(1)
+    try:
+        import yaml  # type: ignore
+        loaded = yaml.safe_load(raw)
+        return loaded if isinstance(loaded, dict) else {}
+    except Exception:
+        pass
     fm: dict = {}
     key = None
-    for line in m.group(1).splitlines():
+    for line in raw.splitlines():
         stripped = line.strip()
         if not stripped or stripped.startswith("#"):
             continue
