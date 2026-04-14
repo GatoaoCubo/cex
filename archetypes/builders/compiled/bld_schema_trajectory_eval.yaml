@@ -1,0 +1,51 @@
+kind: schema
+id: bld_schema_trajectory_eval
+pillar: P06
+llm_function: CONSTRAIN
+purpose: Formal schema -- SINGLE SOURCE OF TRUTH for trajectory_eval
+quality: null
+title: Schema Trajectory Eval
+version: 1.0.0
+author: wave1_builder_gen_v2
+tags:
+- trajectory_eval
+- builder
+- schema
+tldr: Formal schema -- SINGLE SOURCE OF TRUTH for trajectory_eval
+domain: trajectory_eval construction
+created: '2026-04-14'
+updated: '2026-04-14'
+density_score: 0.85
+frontmatter_fields: ''
+required: "| Field | Type | Required | Default | Notes |  \n|---|---|---|---|---|  \n| id | string | yes |  | Must match ID\
+  \ Pattern |  \n| kind | string | yes |  | Fixed to 'trajectory_eval' |  \n| pillar | string | yes |  | Fixed to 'P07' |\
+  \  \n| title | string | yes |  | Human-readable name |  \n| version | string | yes |  | Semantic version (e.g., '1.0.0')\
+  \ |  \n| created | datetime | yes |  | ISO 8601 format |  \n| updated | datetime | yes |  | ISO 8601 format |  \n| author\
+  \ | string | yes |  | Owner's identifier |  \n| domain | string | yes |  | Application domain (e.g., 'robotics') |  \n|\
+  \ quality | null | yes | null | Never self-score; peer review assigns |  \n| tags | list | yes |  | Keywords for categorization\
+  \ |  \n| tldr | string | yes |  | Summary in 1–2 sentences |  \n| start_point | string | yes |  | Initial trajectory coordinate\
+  \ |  \n| end_point | string | yes |  | Final trajectory coordinate |"
+recommended: "| Field | Type | Notes |  \n|---|---|---|  \n| reference_trajectory | string | Optional baseline for comparison\
+  \ |  \n| deviation_threshold | float | Max allowable deviation (m) |  \n| evaluation_method | string | E.g., 'RMSE', 'F1-score'\
+  \ |  \n| confidence_interval | float | Statistical confidence level (e.g., 0.95) |"
+id_pattern: ^p07_te_[a-z][a-z0-9_]+.md$
+body_structure:
+- Trajectory Overview
+- Description of the evaluated path and context.
+- Evaluation Metrics
+- Quantitative results (e.g., accuracy, smoothness).
+- Path Analysis
+- Breakdown of start_point → end_point progression.
+- Deviation Analysis
+- Comparison to reference_trajectory (if provided).
+- Constraints and Limitations
+- Assumptions, data gaps, or environmental factors.
+- Conclusion
+- Summary of validity and next steps.
+constraints:
+- ID must match ^p07_te_[a-z][a-z0-9_]+.md$ exactly.
+- All required fields must be present and non-null.
+- Version must follow semantic versioning (e.g., '1.2.3').
+- Quality field must be assigned by peer review, not self-reported.
+- Domain-specific fields (start_point, end_point) must be numeric or coordinate-based.
+- Total file size must not exceed 5120 bytes.
