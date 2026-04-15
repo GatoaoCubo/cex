@@ -259,6 +259,58 @@ def parse_text_tool_call(content: str):
     return [{"function": {"name": name, "arguments": args}}]
 
 
+def auto_commit(nucleus: str, output_path: Path, mission: str) -> None:
+    """Stage output + commit with nucleus attribution."""
+    import subprocess
+    try:
+        rel = output_path.relative_to(ROOT).as_posix()
+        subprocess.run(["git", "add", rel], cwd=ROOT, check=False, capture_output=True)
+        msg = f"[{nucleus.upper()}] {mission}: agentic report via llama3.1:8b"
+        subprocess.run(["git", "commit", "-m", msg, "--no-verify"],
+                       cwd=ROOT, check=False, capture_output=True)
+        print(f"[{nucleus}] committed {rel}", flush=True)
+    except Exception as e:
+        print(f"[{nucleus}] commit skipped: {e}", flush=True)
+
+
+def interactive_repl(nucleus: str, model: str, last_result: dict, output_path: Path) -> None:
+    """Drop into REPL so user can ask follow-ups or approve commit."""
+    print("\n" + "=" * 60, flush=True)
+    print(f"  {nucleus.upper()} READY - interactive mode", flush=True)
+    print("  Commands:", flush=True)
+    print("    <type a task>  -> run another agentic loop", flush=True)
+    print("    :show          -> show last output", flush=True)
+    print("    :commit        -> git commit the output", flush=True)
+    print("    :quit          -> exit window", flush=True)
+    print("=" * 60, flush=True)
+
+    system = SYSTEM_PROMPT + f"\n\nYou are nucleus {nucleus.upper()}."
+
+    while True:
+        try:
+            user_input = input(f"\n[{nucleus}]> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nbye")
+            break
+
+        if not user_input:
+            continue
+        if user_input == ":quit":
+            break
+        if user_input == ":show":
+            print(last_result.get("final", ""))
+            continue
+        if user_input == ":commit":
+            auto_commit(nucleus, output_path, "INTERACTIVE")
+            continue
+
+        # run new agentic task
+        result = agentic_loop(model, system, user_input, max_iters=10, verbose=True)
+        output_path.write_text(result["final"], encoding="utf-8")
+        last_result = result
+        print(f"\n[{nucleus}] done: {result['reason']}, {result['iters']} iters, {result['wall']}s")
+
+
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--nucleus", required=True, help="nucleus id (n01..n06)")
@@ -267,6 +319,9 @@ def main() -> int:
     p.add_argument("--model", default="llama3.1:8b")
     p.add_argument("--max-iters", type=int, default=15)
     p.add_argument("--quiet", action="store_true")
+    p.add_argument("--interactive", action="store_true", help="drop into REPL after loop")
+    p.add_argument("--auto-commit", action="store_true", help="git commit output after loop")
+    p.add_argument("--mission", default="TASK", help="mission tag for commit messages")
     args = p.parse_args()
 
     handoff_path = Path(args.handoff)
@@ -280,7 +335,13 @@ def main() -> int:
 
     system = SYSTEM_PROMPT + f"\n\nYou are nucleus {args.nucleus.upper()}. Your directory is N0{args.nucleus[-1]}_*/"
 
-    print(f"[{args.nucleus}] starting agentic loop with {args.model}", flush=True)
+    print("=" * 60, flush=True)
+    print(f"  {args.nucleus.upper()} - {args.mission} - {args.model}", flush=True)
+    print("=" * 60, flush=True)
+    print(f"Handoff: {args.handoff}", flush=True)
+    print(f"Output:  {args.output}", flush=True)
+    print("", flush=True)
+
     result = agentic_loop(args.model, system, task,
                           max_iters=args.max_iters, verbose=not args.quiet)
 
@@ -288,9 +349,18 @@ def main() -> int:
     trace_path = output_path.with_suffix(".trace.json")
     trace_path.write_text(json.dumps(result, indent=2, default=str), encoding="utf-8")
 
-    print(f"[{args.nucleus}] done: reason={result['reason']}, iters={result['iters']}, "
-          f"wall={result['wall']}s, bytes={len(result['final'])}", flush=True)
-    print(f"[{args.nucleus}] output: {output_path}", flush=True)
+    print("\n" + "=" * 60, flush=True)
+    print(f"[{args.nucleus}] COMPLETE: {result['reason']}, {result['iters']} iters, "
+          f"{result['wall']}s, {len(result['final'])} bytes", flush=True)
+    print(f"[{args.nucleus}] Output: {output_path}", flush=True)
+    print("=" * 60, flush=True)
+
+    if args.auto_commit:
+        auto_commit(args.nucleus, output_path, args.mission)
+
+    if args.interactive:
+        interactive_repl(args.nucleus, args.model, result, output_path)
+
     return 0 if result["ok"] else 2
 
 

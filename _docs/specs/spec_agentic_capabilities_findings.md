@@ -68,29 +68,61 @@ tags: [agentic, free-models, ollama, benchmark, fine-tuning]
 | Multi-turn ReAct loop | YES | NO | YES |
 | Strict markdown format | YES | YES | YES |
 
-## Decision
+## Decision (FINAL, 2026-04-15)
 
-### FT Base Model(s)
+### Single agentic base for ALL 7 nuclei: `llama3.1:8b`
 
-- **Primary agentic base: `llama3.1:8b`**
-  - Only free model that passes the full agentic stack (native tools + multi-turn + ReAct loop + code + error recovery)
-  - Pairs with LoRA per nucleus for `cex-n0X-agentic-ft:latest`
-- **Secondary structural base: `gemma2:9b`**
-  - Keep for single-shot generation where agentic loops are not needed
-  - Stays behind `litellm_nucleus.py` (current single-shot dispatcher)
+**Rationale**: Tools are the leverage mechanism. An agent without tool calling is a text generator. gemma2:9b CANNOT emit native `tool_calls` (E1 fail, 0%). Even though gemma2:9b won the previous 7-nucleus structural bench 7/7, that bench was single-shot. Once tools enter the equation, llama3.1:8b > gemma2:9b because ReAct text parsing is fragile while native tool calls are robust.
+
+Additionally, grid proof (`LEVERAGE_MAP` mission, 2026-04-15) demonstrated llama3.1:8b running all 6 nuclei interactively with 4 tools (list_dir, read_file, grep, done) on a single RTX 5070 Ti 16GB via Ollama queue.
+
+### Why NOT gemma2:9b anymore
+
+- No native `tool_calls` emission (E1: 0/1.0)
+- ReAct text-only is fragile at scale (regex parsing breaks, no OpenAI standard)
+- Marginal structural quality advantage does NOT compensate for missing tool loop
 
 ### Why NOT qwen3:14b
 
 - `<think>` blocks consume 40-60% of `num_predict` before real output starts
 - Multi-turn state gets overwritten by thinking; E4, E11, E9, E8 all fail
-- Raising `num_predict` helps single-shot but not multi-turn (context corruption, not budget)
+- 2.7x slower than llama3.1:8b AND less capable for agentic work
 
-## Architecture Implication
+### FT strategy
 
-The agentic nucleus runner (next build) uses llama3.1:8b by default. Because gemma2:9b does not emit `tool_calls`, we do NOT build native-tool routing over gemma2 — it would fail 0% of the time. Instead:
+**v1 (first build)**: ONE shared LoRA over `llama3.1:8b` → `cex-llama3.1:8b-ft:latest`
+- Training data: combined FT logs from all 7 nuclei
+- Simpler to train, larger dataset, cheaper to serve
 
-- `litellm_nucleus.py` (existing) -> gemma2:9b for structural/single-shot
-- `cex_agentic_nucleus.py` (next) -> llama3.1:8b for ReAct loops with real tool calls
+**v2 (conditional)**: 7 per-nucleus LoRAs IF measured quality gap > 10% per sin/domain
+- N02 Luxúria (marketing voice)
+- N05 Operations (code/test precision)
+- etc.
+- Only train these if v1 LoRA underperforms on domain-specific benchmarks
+
+gemma2:9b is **archived** from roadmap — not retrained, not routed.
+
+## Architecture
+
+```
+User intent
+    |
+    v
+N07 Orchestrator (Claude opus-4-6)
+    |
+    +--> cex_agentic_nucleus.py (llama3.1:8b + LoRA)
+    |         |
+    |         +--> Tools: list_dir, read_file, grep, done
+    |         +--> (to add) cex_retriever, cex_validator, cex_web_fetch, etc.
+    |         +--> ReAct loop, max 15 iters
+    |         +--> Auto git commit on complete
+    |
+    +--> Grid dispatcher (_spawn/spawn_grid_ollama.ps1)
+              |
+              +--> 6 interactive windows, 3x2 positioned
+              +--> User can observe + correct in real-time
+              +--> Each window runs full 8F via cex_agentic_nucleus.py
+```
 
 ## Hardware Baseline
 
