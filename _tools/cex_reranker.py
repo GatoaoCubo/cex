@@ -5,8 +5,9 @@ For N04 leverage: improve retriever results with lexical reranking.
 Minimal BM25 without external deps.
 
 Usage:
-    python _tools/cex_reranker.py "query string" path1.md path2.md ...
+    python _tools/cex_reranker.py --query "query string" path1.md path2.md ...
     python _tools/cex_reranker.py --query "RAG chunking" --top-k 5
+    python _tools/cex_reranker.py --query "RAG chunking" --top-k 5 --json
 """
 from __future__ import annotations
 
