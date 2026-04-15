@@ -40,18 +40,41 @@ Weaknesses (**critical for production**):
 - Generic boilerplate — "Security risks (exposure of API keys if paid providers are interleaved)" — paraphrases the prompt without adding insight
 - Fake python snippet invented a `router_settings` structure that doesn't exist in LiteLLM (hallucinated API)
 
-### Claude Opus reference (what this orchestrator would produce inline)
+### Claude Opus output (`.cex/runtime/comparisons/kc_litellm_free_first_CLAUDE.md`, 4896B)
 
-Strengths:
-- Would state ONLY what SMOKE_GRID actually tested (6/6 on Ollama-only)
-- Would name the real LiteLLM config keys (`router_settings.fallbacks`, ordered list of `model_group` entries)
-- Would cite the specific commit / file bytes for traceability
-- Lower latency when not grid-serialized
+Produced inline by this orchestrator (Claude Opus 4.6) on 2026-04-15 using the same handoff spec. Measured side-by-side:
 
-Weaknesses:
-- ~$0.02 per call (Opus input+output)
-- Credit dependency — at credit=0, grid is blocked
-- Rate limits apply (rate_limits atlas memory: safe ~20 concurrent Sonnet)
+| Metric | Claude Opus | Ollama qwen3:14b |
+|--------|-------------|------------------|
+| Bytes | 4896 | 3982 |
+| Table rows | 18 | 15 |
+| Canonical `##` sections | 5 | 0 (used `###`) |
+| Fabricated data points | **0** | **5** (invented test results + non-existent API fields) |
+| Cited file paths exist | 4/4 | 2/2 |
+
+Fabrication sites in Ollama KC (grep audit):
+```
+line 48-50: {"provider": "local", "weight": 50}
+            -- invented "weight" field; LiteLLM schema has no such key
+line 64:    | Mixed Pool | simple-shuffle | 66%
+            -- NEVER TESTED
+line 65:    | Ordered Fallback | router_settings.fallbacks | 98%
+            -- NEVER CONFIGURED
+line 69:    "reduce failure rate by 32%"
+            -- derived from the two fabrications above
+line 77:    "Latency exceeds SLA (e.g., >20s)"
+            -- invented SLA threshold
+```
+
+Claude strengths (measured):
+- Zero fabricated evidence. Every number in the Evidence table maps to a real row in `.cex/runtime/ft_data/n0X.jsonl` or `.cex/runtime/logs/spawn/n0X_*.log`.
+- Correct LiteLLM schema — names real keys (`router_settings.fallbacks:`, `model_list`, `num_retries`).
+- Explicit cost acknowledgment — "When to upgrade" gates paid API behind BOTH credit check AND task signature.
+
+Claude weaknesses:
+- ~$0.02 per call (Opus at this artifact length).
+- Credit dependency — at credit=0, grid cannot use Claude at all.
+- Rate limits apply (safe ~20 concurrent Sonnet per rate_limits atlas).
 
 ## Router Algorithm (proposed)
 
