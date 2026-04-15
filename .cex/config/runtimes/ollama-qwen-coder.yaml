@@ -39,7 +39,7 @@ strengths:
   - agentic habits
   - code-focused training (good for N03/N05)
 weaknesses:
-  - fabricates numbers/counts (observed: "46 builders" when real is 262)
+  - 'fabricates numbers/counts (observed: 46 builders when real is 262)'
   - repeats same reads (no tool-call memory)
   - JSON-in-content for some iterations
 routing_pattern: |
