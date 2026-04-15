@@ -172,13 +172,21 @@ def call_ollama(model: str, messages: list, tools: list, timeout: int = 180) -> 
     return body.get("message", {})
 
 
-def agentic_loop(model: str, system: str, task: str, max_iters: int = 15, verbose: bool = True) -> dict:
-    messages = [
-        {"role": "system", "content": system},
-        {"role": "user", "content": task},
-    ]
+def agentic_loop(model: str, system: str, task: str, max_iters: int = 15,
+                 verbose: bool = True, min_iters: int = 4,
+                 history: list | None = None) -> dict:
+    """Run ReAct loop. If history is passed, append to it (REPL continuation)."""
+    if history is None:
+        messages = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": task},
+        ]
+    else:
+        messages = history
+        messages.append({"role": "user", "content": task})
     trace = []
     t0 = time.time()
+    nudged = False
     for i in range(max_iters):
         if verbose:
             print(f"[iter {i+1}/{max_iters}]", flush=True)
@@ -194,11 +202,23 @@ def agentic_loop(model: str, system: str, task: str, max_iters: int = 15, verbos
                     print(f"  [fallback parse] {tool_calls[0]['function']['name']}", flush=True)
 
         if not tool_calls:
+            # Stop guard: nudge once if iters too low AND done not called AND content thin
+            if not nudged and (i + 1) < min_iters and len(content) < 2000:
+                nudged = True
+                if verbose:
+                    print(f"  [GUARD] only {i+1} iters, content={len(content)}B. Nudging to continue.", flush=True)
+                messages.append({"role": "assistant", "content": content})
+                messages.append({"role": "user", "content":
+                    f"You stopped after only {i+1} tool uses with a brief {len(content)}-byte answer. "
+                    "The handoff requires deeper analysis. Use list_dir/read_file/grep to gather more "
+                    "evidence, then call done(report=<full markdown with all required sections>)."})
+                continue
             trace.append({"iter": i + 1, "type": "text_only", "content": content[:300]})
             if verbose:
                 print(f"  -> no tool_calls, stopping. Final: {content[:200]}", flush=True)
             return {"ok": True, "final": content, "iters": i + 1,
-                    "wall": round(time.time() - t0, 1), "trace": trace, "reason": "no_tool_call"}
+                    "wall": round(time.time() - t0, 1), "trace": trace,
+                    "reason": "no_tool_call", "history": messages}
 
         messages.append({"role": "assistant", "content": content, "tool_calls": tool_calls})
 
@@ -219,7 +239,8 @@ def agentic_loop(model: str, system: str, task: str, max_iters: int = 15, verbos
                 report = args.get("report", "")
                 trace.append({"iter": i + 1, "type": "done", "bytes": len(report)})
                 return {"ok": True, "final": report, "iters": i + 1,
-                        "wall": round(time.time() - t0, 1), "trace": trace, "reason": "done_called"}
+                        "wall": round(time.time() - t0, 1), "trace": trace,
+                        "reason": "done_called", "history": messages}
 
             result = execute_tool(name, args)
             trace.append({"iter": i + 1, "tool": name, "args": args, "result_bytes": len(result)})
@@ -228,19 +249,31 @@ def agentic_loop(model: str, system: str, task: str, max_iters: int = 15, verbos
             messages.append({"role": "tool", "content": result[:4000]})
 
     return {"ok": False, "final": "MAX_ITERS", "iters": max_iters,
-            "wall": round(time.time() - t0, 1), "trace": trace, "reason": "max_iters"}
+            "wall": round(time.time() - t0, 1), "trace": trace,
+            "reason": "max_iters", "history": messages}
 
 
-SYSTEM_PROMPT = """You are a CEX nucleus agent. Use the provided tools to explore files and build an analysis.
+SYSTEM_PROMPT = f"""You are a CEX nucleus agent running inside the CEX repository on Windows.
 
-Available tools: list_dir, read_file, grep, done.
+REPO ROOT: {ROOT}
+OS: Windows (but paths use forward slashes, relative to repo root)
+ALL PATHS MUST BE RELATIVE TO REPO ROOT. Examples: "_tools", "N01_intelligence", "archetypes/builders".
+DO NOT invent paths like "/home/user/..." or "/tmp/..." -- those do not exist here.
+DO NOT use absolute Windows paths like "C:\\\\Users\\\\...". Use relative paths only.
+
+Available tools (invoke via the tool_calls mechanism, NOT as JSON in text):
+- list_dir(path)      -- list files/dirs under a relative path
+- read_file(path)     -- read a file (UTF-8, capped at 8KB)
+- grep(pattern, path) -- regex search under a dir or file
+- done(report)        -- submit final markdown report (ends the loop)
 
 Workflow:
-- Call list_dir, read_file, grep to gather evidence
-- When analysis is complete, call done(report=<full markdown>) to submit
-- Max 15 tool calls total
+1. Call list_dir / read_file / grep to gather real evidence from the repo
+2. Use at least 4-6 tool calls before concluding
+3. When analysis is complete, call done(report=<full markdown with all required sections>)
 
-IMPORTANT: invoke tools via the tool_calls mechanism. Do not write tool calls as JSON in your text response."""
+If the user asks a conversational question with no file to read, answer briefly
+without inventing file paths."""
 
 
 JSON_CALL_RE = re.compile(r'\{\s*"name"\s*:\s*"([^"]+)"\s*,\s*"(?:parameters|arguments)"\s*:\s*(\{[^{}]*\})\s*\}', re.DOTALL)
@@ -285,6 +318,11 @@ def interactive_repl(nucleus: str, model: str, last_result: dict, output_path: P
     print("=" * 60, flush=True)
 
     system = SYSTEM_PROMPT + f"\n\nYou are nucleus {nucleus.upper()}."
+    # Carry history from the initial loop so REPL keeps mission context
+    history = last_result.get("history")
+    if history is None:
+        history = [{"role": "system", "content": system}]
+    repl_turn = 0
 
     while True:
         try:
@@ -303,12 +341,21 @@ def interactive_repl(nucleus: str, model: str, last_result: dict, output_path: P
         if user_input == ":commit":
             auto_commit(nucleus, output_path, "INTERACTIVE")
             continue
+        if user_input == ":reset":
+            history = [{"role": "system", "content": system}]
+            print(f"[{nucleus}] history reset", flush=True)
+            continue
 
-        # run new agentic task
-        result = agentic_loop(model, system, user_input, max_iters=10, verbose=True)
-        output_path.write_text(result["final"], encoding="utf-8")
+        # run new agentic task, preserve history, write to separate file
+        repl_turn += 1
+        result = agentic_loop(model, system, user_input, max_iters=10,
+                              verbose=True, history=history)
+        history = result.get("history", history)
+        repl_out = output_path.with_name(f"{output_path.stem}.repl{repl_turn}.md")
+        repl_out.write_text(result["final"], encoding="utf-8")
         last_result = result
-        print(f"\n[{nucleus}] done: {result['reason']}, {result['iters']} iters, {result['wall']}s")
+        print(f"\n[{nucleus}] done: {result['reason']}, {result['iters']} iters, "
+              f"{result['wall']}s, saved {repl_out.name}")
 
 
 def main() -> int:
