@@ -70,7 +70,7 @@ Follow 8F pipeline F1->F8. Save output, compile, commit, signal on complete.
 '@
 
 $initialMsg = @"
-Read .cex/runtime/handoffs/n07_task_codex.md and execute the SELF_AUDIT mission.
+Read .cex/runtime/handoffs/n07_task_codex.md and execute the task specified in the frontmatter.
 Produce the report at the path specified in the handoff frontmatter.
 Follow the 8F pipeline. Signal on complete.
 
