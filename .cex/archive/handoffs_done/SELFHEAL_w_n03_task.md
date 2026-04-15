@@ -1,11 +1,11 @@
 ﻿---
 nucleus: N03
 task: dispatch
-created: 2026-04-15 18:38:37
+created: 2026-04-15 18:47:08
 ---
 # Task for N03
 
-SELFHEAL W3 heal plan
+SELFHEAL W4 structural heals RETRY
 
 ## DECISIONS (from user -- DO NOT re-ask)
 Read: .cex/runtime/decisions/decision_manifest.yaml

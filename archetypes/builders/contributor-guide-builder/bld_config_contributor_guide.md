@@ -15,10 +15,8 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Naming Convention  
 Files: kebab-case (e.g., `contributor-guide-builder.md`). Directories: PascalCase (e.g., `Src`). Classes: PascalCase. Variables: snake_case.  
-
 ## Paths  
 Artifacts stored in: `/repo/src/p05`, `/repo/docs/p05`, `/repo/tests/p05`.  
 

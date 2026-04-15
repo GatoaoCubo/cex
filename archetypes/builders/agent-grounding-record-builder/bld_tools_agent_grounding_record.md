@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Agent Grounding Record Builder -- Tools
 
 ## Production Tools (CEX Core)
@@ -38,8 +37,6 @@ When run against an agent_grounding_record artifact, cex_compile.py performs:
 5. output_hash format check (64 hex chars)
 6. otel_span_id format check (16 hex chars)
 
----
-
 ## Validation Tools
 
 ### Hash Verification Tool
@@ -49,7 +46,6 @@ Verifies that output_hash, content_hash, and tool I/O hashes are valid SHA-256 h
 ```bash
 # Verify all hashes in a grounding record
 python _tools/cex_compile.py P10_memory/grounding/p10_gr_{{prefix}}.md --verify-hash
-
 # Compute output_hash from raw output file
 python -c "
 import hashlib
@@ -57,7 +53,6 @@ with open('raw_output.txt', 'rb') as f:
     raw = f.read()
 print(hashlib.sha256(raw).hexdigest())
 "
-
 # Verify a specific hash value
 python -c "
 import hashlib, sys
@@ -114,12 +109,9 @@ else:
     print('[FAIL] Not a valid UUIDv4: ' + uuid)
     sys.exit(1)
 " {{INFERENCE_ID}}
-
 # Generate a new UUIDv4
 python -c "import uuid; print(str(uuid.uuid4()))"
 ```
-
----
 
 ## External References
 
@@ -180,8 +172,6 @@ Note: Convert output_hash from hex to base64 for C2PA: `base64.b64encode(bytes.f
 | Python hashlib          | stdlib hashlib.sha256()          | Use this; do not use md5() or sha1()      |
 | Hash comparison         | `hmac.compare_digest(a, b)`      | Use constant-time comparison for security |
 
----
-
 ## Tool Call Sequence (F5 CALL)
 
 Execute in this order during Phase 1 RESEARCH:
@@ -189,19 +179,14 @@ Execute in this order during Phase 1 RESEARCH:
 ```bash
 # Step 1: Retrieve similar grounding records for context
 python _tools/cex_retriever.py --query "grounding provenance OTel per-inference" --limit 3
-
 # Step 2: Load builder ISOs (if not already loaded via F2 BECOME)
 # (ISOs are loaded as context, no shell command needed)
-
 # Step 3: After Phase 2 COMPOSE -- validate artifact
 python _tools/cex_compile.py P10_memory/grounding/p10_gr_{{prefix}}.md
-
 # Step 4: Score artifact
 python _tools/cex_score.py --apply P10_memory/grounding/p10_gr_{{prefix}}.md
-
 # Step 5: Signal completion
 python -c "from _tools.signal_writer import write_signal; write_signal('n04', 'complete', {{SCORE}})"
-
 # Step 6: Commit
 git add P10_memory/grounding/p10_gr_{{prefix}}.md
 git commit -m "[N04] add grounding record p10_gr_{{prefix}}: {{INFERENCE_DESCRIPTION}}"

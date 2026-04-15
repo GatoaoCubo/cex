@@ -15,17 +15,12 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Conformity Assessment Builder -- Instruction
-
 ## Overview
 
 This instruction governs the 8F production of a `conformity_assessment` artifact under the EU-AI-Act.
 Target: high-risk AI systems as defined by Annex-III, following the conformity procedure in Article-43.
 Deadline: Aug-2026 for existing high-risk systems entering the market.
-
----
-
 ## Phase 1: RESEARCH (F1-F3)
 
 ### Step 1.1 -- Identify System Type (F1 CONSTRAIN)
@@ -93,9 +88,6 @@ Post-market-monitoring plan per Article 72:
 | Serious incident reporting procedure | SIR SOP (Art. 73) |
 | Periodic review schedule | Review calendar |
 | Threshold for corrective action | Defined thresholds table |
-
----
-
 ## Phase 2: COMPOSE (F4-F6)
 
 ### Step 2.1 -- Plan Annex-IV Sections (F4 REASON)
@@ -143,9 +135,6 @@ Use bld_output_template_conformity_assessment.md.
 Populate all placeholders. Do NOT leave any [PLACEHOLDER] unfilled.
 Cite Annex-IV section numbers for every claim.
 Flag items with "AUG-2026-DEADLINE" where applicable.
-
----
-
 ## Phase 3: VALIDATE (F7 GOVERN)
 
 ### Step 3.1 -- Completeness Checklist

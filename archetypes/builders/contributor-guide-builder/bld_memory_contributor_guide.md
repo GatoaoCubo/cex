@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Observations
 
 | Observation | Source | Confidence |
@@ -25,9 +24,6 @@ density_score: 0.85
 | PR processes that state the required approval count and reviewer pool explicitly reduce review latency by 40% vs. "maintainer discretion" policies. | Analysis of 200 OSS repos with PR latency data | High |
 | Guides without a code block in the Getting Started section have a 3x higher "I couldn't set up locally" issue rate in the first 30 days after publication. | GitHub Discussions analysis, 47 OSS projects | Medium-High |
 | Contributor guides that reference a CI lint gate in the Coding Standards section reduce "fails linting" PR review cycles by 55%. | Internal project analysis across 12 repos | Medium |
-
----
-
 ## Patterns
 
 | Pattern | When Observed | Application |
@@ -37,9 +33,6 @@ density_score: 0.85
 | Numbered PR workflow | Numbered step lists produce fewer "what do I do next?" questions than prose | Always use numbered lists for the contribution workflow steps |
 | SLA specificity | "As soon as possible" generates more escalation issues than "3 business days" | Always state review SLA in business days |
 | Conventional Commits adoption | Projects that mandate Conventional Commits see 30% fewer merge conflict issues in changelogs and CHANGELOG.md generation | Include Conventional Commits by default, mark as optional if project uses custom format |
-
----
-
 ## Evidence
 
 | Claim | Source | Data |
@@ -48,9 +41,6 @@ density_score: 0.85
 | Missing CLA blocks 62% of corporate contributors | Linux Foundation 2022 survey | 62% of enterprise developers cite CLA uncertainty as blocker |
 | Explicit approval count = 40% lower PR latency | OSS project analysis (200 repos) | Repos with "requires 2 approvals from core team" merge 40% faster than "discretionary" |
 | No code block = 3x more setup issues | GitHub Discussions, 47 repos | 31% of "getting started" issues in text-only guides vs. 10% in code-block guides |
-
----
-
 ## Recommendations
 
 | Recommendation | Priority | Implementation |

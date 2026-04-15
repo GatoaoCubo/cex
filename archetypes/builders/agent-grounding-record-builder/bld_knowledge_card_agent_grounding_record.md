@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Agent Grounding Record -- Knowledge Card
 
 ## Domain Overview
@@ -28,8 +27,6 @@ Per-inference provenance is the practice of recording, for each AI inference run
 4. **Observability**: OTel GenAI semantic conventions standardize how AI inference is instrumented for distributed tracing.
 
 The grounding record is the per-inference artifact that binds these four concerns into a single, structured, machine-verifiable document.
-
----
 
 ## Key Concepts
 
@@ -48,8 +45,6 @@ The grounding record is the per-inference artifact that binds these four concern
 | downstream use        | The intended application of the inference output (production / test / eval)                            | downstream_use      |
 | grounding coverage    | The fraction of output claims that can be traced to an explicit grounding source                       | grounding_coverage_pct |
 
----
-
 ## Industry Standards
 
 | Standard                          | Version     | Relevance                                                                              |
@@ -61,8 +56,6 @@ The grounding record is the per-inference artifact that binds these four concern
 | W3C Provenance (PROV-DM)          | 2013        | Conceptual model for provenance: entities, activities, agents                          |
 | W3C Trace Context                 | Level 2     | Defines traceparent header format; otel_span_id follows W3C 16-hex-char format         |
 | EU AI Act                         | 2024/1689   | Articles 9 + 72 + 73: risk management + post-market-monitoring + incident reporting    |
-
----
 
 ## OTel GenAI Semantic Conventions -- Key Attributes
 
@@ -81,8 +74,6 @@ The grounding record maps to OTel GenAI semconv attributes. When instrumenting t
 
 The OTel span identified by `otel_span_id` SHOULD contain these attributes. The grounding record is a STRUCTURED PROVENANCE LAYER built on top of the raw OTel span -- it is not a replacement for OTel instrumentation.
 
----
-
 ## C2PA v2.3 AI-ML Guidance -- Key Concepts
 
 C2PA v2.3 introduced specific guidance for AI-generated content. A C2PA manifest contains assertions that can be bound to an AI output.
@@ -97,8 +88,6 @@ C2PA v2.3 introduced specific guidance for AI-generated content. A C2PA manifest
 
 The grounding record's `output_hash` serves as the cryptographic anchor for C2PA hard-binding. The `c2pa_manifest_ref` URI points to the full C2PA manifest that contains the broader content credential chain.
 
----
-
 ## EU AI Act -- Provenance Requirements (High-Risk Systems)
 
 | Article | Requirement                              | How Grounding Record Fulfills It                              |
@@ -110,8 +99,6 @@ The grounding record's `output_hash` serves as the cryptographic anchor for C2PA
 
 Note: EU AI Act applicability depends on system classification. Consult legal counsel for classification decisions. These grounding records provide the technical foundation for compliance -- they do not constitute legal compliance in themselves.
 
----
-
 ## Relationship to Adjacent Artifact Kinds
 
 | Kind             | Relationship                                                                                    |
@@ -122,8 +109,6 @@ Note: EU AI Act applicability depends on system classification. Consult legal co
 | audit_log        | Aggregates multiple grounding records for audit purposes -- uses this record as input           |
 | conformity_assessment | Uses grounding records as evidence for EU AI Act conformity assessment               |
 | learning_record  | Captures learnings FROM grounding records -- pattern analysis across many records              |
-
----
 
 ## Common Pitfalls
 

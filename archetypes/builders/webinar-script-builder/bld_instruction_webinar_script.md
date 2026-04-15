@@ -15,11 +15,8 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Phase 1: RESEARCH
-
 Gather all inputs before writing a single line of script. Incomplete research produces misaligned hooks and off-target CTAs.
-
 | Research Item | Questions to Answer | Source |
 |--------------|--------------------|----|
 | Audience profile | Job title, pain points, desired outcome from attending | Brief, persona docs |
@@ -29,7 +26,6 @@ Gather all inputs before writing a single line of script. Incomplete research pr
 | Demo assets | Product screens, live environment URL, fallback video | Product team |
 | Registration data | Expected attendee count, registration page URL | Event platform |
 | Competing webinars | What else is live this week in same topic area | Calendar check |
-
 **Time budget calculation**: Total duration minus 4 min (hook + agenda) minus 10 min (Q&A) minus 2 min (CTA close) = available segment minutes. Divide evenly across segments (max 3).
 
 ---

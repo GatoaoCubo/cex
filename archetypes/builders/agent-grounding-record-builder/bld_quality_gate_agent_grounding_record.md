@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Agent Grounding Record -- Quality Gate
 
 ## Scoring Overview
@@ -28,8 +27,6 @@ density_score: 0.85
 | Target      | --     | >= 9.0 overall for production-grade grounding record     |
 
 A record that fails ANY hard gate receives a score of 0.0 regardless of rubric or semantic scores.
-
----
 
 ## Hard Gates (H01-H08)
 
@@ -46,8 +43,6 @@ ALL hard gates must pass. One FAIL = record is invalid = do not publish.
 | H07  | timestamp format              | ISO 8601 parseable with timezone (Z or +/-HH:MM)                       | Reformat timestamp; epoch integers are not accepted  |
 | H08  | model.id present              | Non-empty string identifying the model                                 | Retrieve from inference session metadata             |
 
----
-
 ## Hard Gate Failure Reference
 
 | Gate | Most Common Cause                             | Prevention                                                   |
@@ -60,8 +55,6 @@ ALL hard gates must pass. One FAIL = record is invalid = do not publish.
 | H06  | OTel not instrumented for this inference path | Add OTel GenAI semconv instrumentation to the inference layer|
 | H07  | Timezone missing from timestamp               | Always use UTC (Z suffix) or explicit offset                 |
 | H08  | Model ID not captured from provider response  | Log model ID from every API response header or body          |
-
----
 
 ## Soft Scoring Dimensions (D1-D5)
 
@@ -121,8 +114,6 @@ ALL hard gates must pass. One FAIL = record is invalid = do not publish.
 | 6     | downstream_use set; grounding_coverage_pct is 0.0 (conservative but honest)                   |
 | 0-3   | downstream_use missing or grounding_coverage_pct defaulted to 1.0 without verification        |
 
----
-
 ## Score Interpretation
 
 | Score Range | Interpretation                       | Action                                     |
@@ -132,17 +123,13 @@ ALL hard gates must pass. One FAIL = record is invalid = do not publish.
 | 7.0 - 7.9   | Below standard; significant gaps     | Do not publish; return to F6 for revision  |
 | < 7.0       | Compliance failure                   | Reject; investigate data capture pipeline  |
 
----
-
 ## Scoring Commands
 
 ```bash
 # Score an artifact
 python _tools/cex_score.py --apply p10_gr_example.md
-
 # Validate schema fields before scoring
 python _tools/cex_compile.py p10_gr_example.md
-
 # Check all P10 grounding records
 python _tools/cex_doctor.py --pillar P10
 ```

@@ -17,198 +17,103 @@ domain: agent_grounding_record construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-crew_role: '| Property          | Value                                                                                      |
+crew_role: '| Property | Value |
 
-  |-------------------|--------------------------------------------------------------------------------------------|
+  |----------|-------|
 
-  | Role in crew      | Per-inference provenance recorder and traceability chain builder                           |
+  | Role | Per-inference provenance recorder and traceability chain builder |
 
-  | Primary nucleus   | N04 (Knowledge) -- grounding records are memory/knowledge artifacts                       |
+  | Primary nucleus | N04 (Knowledge) -- grounding records are memory/knowledge artifacts |
 
-  | Secondary nucleus | N05 (Operations) -- when grounding records require OTel pipeline integration work          |
+  | Secondary nucleus | N05 (Operations) -- when OTel pipeline integration work is required |
 
-  | Trigger condition | Any AI inference run that requires auditability (production) or compliance (EU AI Act)    |
+  | Trigger | Any AI inference run requiring auditability (production) or compliance (EU AI Act) |
 
-  | Output cadence    | One artifact per inference run; async post-inference, not on the critical path             |
+  | Output cadence | One artifact per inference run; async post-inference |'
+receives_from_upstream: '| Source | Path | Data | Required? |
 
+  |--------|------|------|-----------|
 
-  ---'
-receives_from_upstream: '| Source Kind      | Artifact Path Pattern          | Data Provided                                        |
-  Required? |
+  | trace_config | P09//p09_tc_.yaml | otel_span_id | YES |
 
-  |------------------|--------------------------------|------------------------------------------------------|-----------|
+  | rag_source | P01//p01_rs_.md | chunk_id, source_url, retrieval_score | When RAG used |
 
-  | trace_config     | P09//p09_tc_.yaml            | otel_span_id -- the OTel span covering this inference| YES       |
+  | model_provider | P02//p02_mp_.md | model.id, version, provider, signature | YES |
 
-  | rag_source       | P01//p01_rs_.md              | chunk_id, source_url, retrieval_score per chunk      | When RAG used
-  |
+  | toolkit | P04//p04_tk_.md | tool_name registry, invocation logs | When tools used |
 
-  | model_provider   | P02//p02_mp_.md              | model.id, model.version, model.provider, model-signature | YES   |
+  | knowledge_index | P10//p10_ki_.md | chunk_id resolution | Optional |
 
-  | toolkit          | P04//p04_tk_.md              | tool_name registry, tool invocation logs             | When tools used
-  |
 
-  | knowledge_index  | P10//p10_ki_.md              | chunk_id resolution when chunk_id alone is ambiguous | Optional  |'
-data_contract_trace_config: 'The trace_config artifact MUST configure the OTel instrumentation to emit:
+  trace_config contract: emit `gen_ai.operation.name` span, 16-hex span ID (W3C), ISO 8601 timestamps. Absent = H06 FAIL.
 
-  - A span with `gen_ai.operation.name` attribute
+  rag_source contract: log chunk_id + source_url (never null) + retrieval_score (0-1) + chunk text. Missing source_url = D2
+  collapses to 0.0.'
+produces_for_downstream: '| Consumer | Path | What It Uses | Priority |
 
-  - A 16-character hex span ID (W3C trace context format)
+  |---------|------|--------------|---------|
 
-  - Span start and end timestamps in nanoseconds (converted to ISO 8601 for grounding record)
+  | conformity_assessment | P08//p08_ca_.md | PMM evidence (EU AI Act Art. 72) | HIGH |
 
+  | audit_log | P10//p10_al_.md | Aggregated inference audit trail | HIGH |
 
-  If trace_config is absent or OTel is not instrumented, `otel_span_id` will be unavailable and Hard Gate H06 will FAIL. The
-  grounding record cannot be completed without an OTel span ID.'
-data_contract_rag_source: 'The rag_source artifact MUST configure the retriever to log:
+  | c2pa_manifest | External URI | output_hash + inference_id | MEDIUM |
 
-  - chunk_id for every returned chunk
+  | learning_record | P10//p10_lr_.md | Cross-record pattern analysis | LOW |
 
-  - source_url (document URL or internal path) -- never null
+  | regression_check | P11//p11_rc_.md | Grounding coverage trends | LOW |
 
-  - retrieval_score (normalized to 0.0-1.0)
 
-  - chunk text at retrieval time (for content_hash computation)
+  conformity_assessment contract: expects inference_id + downstream_use="production" + grounding_coverage_pct + output_hash
+  + c2pa_manifest_ref.
 
+  audit_log contract: records in P10_memory/grounding/ (p10_gr_INFERENCE_ID.md), complete, indexed by inference_id + timestamp.'
+boundary_definitions: '| IS responsible for | IS NOT responsible for |
 
-  If rag_source does not capture source_url, the grounding record will fail Hard Gate H05''s downstream effects (D2 scoring
-  dimension collapses to 0.0).
+  |-------------------|----------------------|
 
+  | Per-inference provenance (one record per run) | Training-time provenance (model_card) |
 
-  ---'
-produces_for_downstream: '| Consumer Kind          | Artifact Path Pattern          | What It Uses                                               |
-  Priority |
+  | Raw output-hash computation | Model behavior evaluation (benchmark / llm_judge) |
 
-  |------------------------|--------------------------------|------------------------------------------------------------|----------|
+  | Linking to OTel span via otel_span_id | Configuring OTel instrumentation (trace_config) |
 
-  | conformity_assessment  | P08//p08_ca_.md              | Post-market-monitoring evidence (EU AI Act Art. 72)        | HIGH     |
+  | Capturing RAG-chunk metadata | Designing the RAG pipeline (rag_source) |
 
-  | audit_log              | P10//p10_al_.md              | Aggregated inference audit trail for compliance reporting  | HIGH     |
+  | Linking to C2PA manifest | Generating the C2PA manifest (external tool) |
 
-  | c2pa_manifest          | External URI                   | output_hash as content binding anchor; inference_id as ref |
-  MEDIUM   |
+  | Recording tool invocations with hashes | Defining tool interface (toolkit / mcp_server) |
 
-  | learning_record        | P10//p10_lr_.md              | Pattern analysis across many grounding records             | LOW      |
+  | grounding_coverage_pct computation | Semantic quality scoring (scoring_rubric) |
 
-  | regression_check       | P11//p11_rc_.md              | Grounding coverage trend analysis                          | LOW      |'
-data_contract_conformity_assessment: 'The conformity_assessment artifact expects grounding records to provide:
 
-  - inference_id (for incident attribution)
-
-  - downstream_use = "production" (to filter relevant records)
-
-  - grounding_coverage_pct (for coverage trend analysis)
-
-  - output_hash (for output integrity verification)
-
-  - c2pa_manifest_ref (for content credential chain)'
-data_contract_audit_log: 'The audit_log aggregator expects grounding records to be:
-
-  - Stored in P10_memory/grounding/ with naming p10_gr_{{prefix}}.md
-
-  - Complete (all hard gates passed)
-
-  - Indexed by inference_id and timestamp
-
-
-  ---'
-boundary_definitions: 'These boundaries prevent scope confusion with adjacent artifact kinds.
-
-
-  | This builder IS responsible for:                              | This builder IS NOT responsible for:                               |
-
-  |---------------------------------------------------------------|--------------------------------------------------------------------|
-
-  | Per-inference provenance (one record per run)                 | Training-time provenance -- that is model_card territory           |
-
-  | Raw output-hash computation                                   | Model behavior evaluation -- that is benchmark / llm_judge         |
-
-  | Linking to OTel span via otel_span_id                         | Configuring OTel instrumentation -- that is trace_config           |
-
-  | Capturing RAG-chunk metadata per inference                    | Designing the RAG pipeline -- that is rag_source                   |
-
-  | Linking to C2PA manifest via c2pa_manifest_ref                | Generating the C2PA manifest -- that is an external C2PA
-  tool      |
-
-  | Recording tool invocations with hashes                        | Defining the tool interface -- that is toolkit / mcp_server        |
-
-  | grounding_coverage_pct computation                            | Semantic quality scoring of output -- that is scoring_rubric       |
-
-
-  Critical boundary -- grounding record vs. trace_config:
-
-  - trace_config: configuration artifact that tells the OTel SDK how to instrument the inference pipeline (what to capture,
-  where to export spans, sampling rates)
-
-  - agent_grounding_record: provenance artifact that records WHAT HAPPENED during one specific inference run, referencing
-  the OTel span but not duplicating it
-
-
-  The grounding record is the STRUCTURED PROVENANCE LAYER above raw OTel spans. Spans are raw telemetry. Grounding records
-  are curated, compliance-grade provenance documents.
-
-
-  ---'
-signal_protocol: 'After completing a grounding record, the builder MUST:
-
-
-  # 1. Save artifact to correct path
-
-  python tools/cex_compile.py P10_memory/grounding/p10_gr{{prefix}}.md
-
-
-  # 2. Signal completion to N07
+  grounding record = STRUCTURED PROVENANCE LAYER above raw OTel spans. trace_config configures what to capture; agent_grounding_record
+  records what happened. Spans are raw telemetry; grounding records are compliance-grade provenance.'
+signal_protocol: 'python _tools/cex_compile.py P10_memory/grounding/p10_gr_INFERENCE_ID.md
 
   python -c "from _tools.signal_writer import write_signal; write_signal(''n04'', ''complete'', 9.0)"
 
+  git add P10_memory/grounding/p10_gr_INFERENCE_ID.md
 
-  # 3. Update audit_log index (if audit_log exists)
+  git commit -m "[N04] add grounding record p10_gr_INFERENCE_ID -- per-inference provenance"'
+multi_nucleus_workflow: 'Wave 1: N04 produces grounding records -> Wave 2: N05 validates OTel + schema -> Wave 3: N04 aggregates
+  into audit_log; N06 prepares conformity_assessment evidence. Use proposal pattern for shared file modifications. See `.claude/rules/shared-file-proposal.md`.'
+collaboration_checklist: '| Check | Gate |
 
-  # Append inference_id + timestamp to P10_memory/audit/p10_al_index.md
+  |-------|------|
 
+  | All hard gates H01-H08 pass | HARD |
 
-  # 4. Commit
+  | Score >= 9.0 (or >= 8.0 with waiver) | SOFT |
 
-  git add P10_memory/grounding/p10_gr_{{prefix}}.md
+  | Artifact saved to P10_memory/grounding/ | REQUIRED |
 
-  git commit -m "[N04] add grounding record p10_gr_{{prefix}} -- inference {{inference_id_prefix}}"
+  | cex_compile.py run without errors | REQUIRED |
 
+  | Signal sent to N07 | REQUIRED |
 
-  ---'
-multi_nucleus_workflow: 'When grounding records are part of a larger compliance workflow:
+  | Git commit with tracing message | REQUIRED |
 
+  | audit_log index updated (if exists) | RECOMMENDED |
 
-  Wave 1: N04 produces grounding records for all production inferences in scope
-
-  Wave 2: N05 validates OTel instrumentation and runs schema checks
-
-  Wave 3: N04 aggregates into audit_log; N06 prepares conformity_assessment evidence package
-
-
-  N04 grounding records are input to Wave 3. Use proposal pattern for any shared file modifications during concurrent wave
-  execution. See `.claude/rules/shared-file-proposal.md`.
-
-
-  ---'
-collaboration_checklist: 'Before signaling complete:
-
-
-  | Check                                         | Gate     |
-
-  |-----------------------------------------------|----------|
-
-  | All hard gates H01-H08 pass                   | HARD     |
-
-  | Score >= 9.0 (or >= 8.0 with documented waiver) | SOFT   |
-
-  | Artifact saved to P10_memory/grounding/       | REQUIRED |
-
-  | cex_compile.py run without errors             | REQUIRED |
-
-  | Signal sent to N07                            | REQUIRED |
-
-  | Git commit created with tracing message       | REQUIRED |
-
-  | audit_log index updated (if exists)           | RECOMMENDED |
-
-  | c2pa_manifest_ref resolved (if C2PA active)   | RECOMMENDED |'
+  | c2pa_manifest_ref resolved (if C2PA active) | RECOMMENDED |'

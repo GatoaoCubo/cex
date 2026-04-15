@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Conformity Assessment Builder -- Knowledge Card
 
 ## Domain Overview
@@ -31,9 +30,6 @@ for most high-risk provisions).
 
 **This builder specializes in**: producing the Annex-IV technical documentation package
 required by Article 11, supporting the Article-43 conformity procedure.
-
----
-
 ## Key Concepts
 
 | Concept | Definition | EU AI Act Reference |
@@ -53,9 +49,6 @@ required by Article 11, supporting the Article-43 conformity procedure.
 | Provider | Natural or legal person who develops/places an AI system on the market | Art. 3(3) |
 | Deployer | Natural or legal person who uses an AI system under their authority | Art. 3(4) |
 | Substantial modification | Change that affects conformity -- triggers re-assessment | Art. 3(23) |
-
----
-
 ## Annex-III High-Risk Categories
 
 | # | Category | Examples | NB Required? |
@@ -72,9 +65,6 @@ required by Article 11, supporting the Article-43 conformity procedure.
 
 **Note**: Annex III categories are exhaustive. If the system does not fit any category,
 it is NOT high-risk under Annex III and this builder does not apply.
-
----
-
 ## Annex-IV Technical Documentation Requirements
 
 | Section | Content Required | Key Article |
@@ -86,9 +76,6 @@ it is NOT high-risk under Annex III and this builder does not apply.
 | 5 | Lifecycle changes: post-market monitoring plan, change management | Art. 72 |
 | 6 | Standards and specifications: harmonised standards applied | Art. 40-41 |
 | 7 | EU Declaration of Conformity reference | Art. 47 |
-
----
-
 ## Article-43 Conformity Procedure
 
 | Procedure | When | Process |
@@ -96,9 +83,6 @@ it is NOT high-risk under Annex III and this builder does not apply.
 | Internal conformity check (Annex VI) | All high-risk systems EXCEPT real-time remote biometric ID | Provider performs conformity check internally |
 | Notified body assessment (Annex VII) | Real-time remote biometric identification (Annex III(1)(a)) | Third-party NB reviews technical documentation |
 | Notified body (elective) | Any high-risk system if provider chooses | Provider may elect NB review for credibility |
-
----
-
 ## Industry Standards Mapping
 
 | Standard | Version | Relevance to Conformity Assessment |
@@ -111,9 +95,6 @@ it is NOT high-risk under Annex III and this builder does not apply.
 | IEEE 2857-2024 | 2024 | Privacy engineering for ML -- supports data governance |
 | ISO/IEC 25010 | 2023 | Software quality -- supports Art. 15 accuracy/robustness |
 | EN ISO 13485 | 2016 | Medical devices QMS -- relevant for healthcare AI |
-
----
-
 ## Deadline Map
 
 | Provision | Applicable Date | Who Is Affected |
@@ -124,9 +105,6 @@ it is NOT high-risk under Annex III and this builder does not apply.
 | High-risk AI (Annex III) -- existing systems | Aug 2026 [AUG-2026-DEADLINE] | Providers of already-deployed systems |
 | High-risk AI (Annex I -- product safety) | Aug 2027 | Providers of AI embedded in regulated products |
 | Full Act application | Aug 2026 | All actors |
-
----
-
 ## Common Pitfalls
 
 | Pitfall | Correct Understanding |
@@ -138,9 +116,6 @@ it is NOT high-risk under Annex III and this builder does not apply.
 | Assuming no NB needed for biometrics | Real-time remote biometric ID (Annex III(1)(a)) REQUIRES a notified body |
 | Marking system compliant in the Annex IV doc | Conformity assessment documents the evidence; the PROVIDER declares conformity via DoC (Art. 47) |
 | Ignoring Aug-2026 deadline | Existing high-risk systems must complete conformity by Aug-2026 |
-
----
-
 ## Regulatory Citation Format
 
 | Element | Format | Example |

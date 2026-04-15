@@ -1,11 +1,11 @@
 ﻿---
 nucleus: N04
 task: dispatch
-created: 2026-04-15 18:16:37
+created: 2026-04-15 18:40:36
 ---
 # Task for N04
 
-SELFHEAL W1 inventory -- read .cex/runtime/handoffs/n04_task.md
+SELFHEAL W4 content heals
 
 ## DECISIONS (from user -- DO NOT re-ask)
 Read: .cex/runtime/decisions/decision_manifest.yaml

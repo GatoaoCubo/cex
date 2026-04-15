@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Component Inventory
 
 All 13 ISOs of the webinar-script-builder with role, pillar, and status.
@@ -35,9 +34,6 @@ All 13 ISOs of the webinar-script-builder with role, pillar, and status.
 | 11 | bld_config_webinar_script.md | config | P09 | CONSTRAIN | Naming, paths, limits, hooks |
 | 12 | bld_memory_webinar_script.md | memory | P10 | INJECT | Observed patterns, evidence, and builder recommendations |
 | 13 | bld_tools_webinar_script.md | tools | P04 | CALL | Production tools, validation tools, external platform references |
-
----
-
 ## Dependency Graph
 
 Dependencies listed as: ISO -> depends on -> ISO (load order).
@@ -67,9 +63,6 @@ Dependencies listed as: ISO -> depends on -> ISO (load order).
 11. quality_gate (F7 GOVERN -- validation)
 12. collaboration (F8 COLLABORATE -- handoff routing)
 13. architecture (reference -- no pipeline stage, used for system audits)
-
----
-
 ## External Dependencies
 
 | Dependency | Type | Used By | Notes |
@@ -81,9 +74,6 @@ Dependencies listed as: ISO -> depends on -> ISO (load order).
 | Zoom Webinar API | External | tools ISO | Platform integration reference |
 | GoToWebinar API | External | tools ISO | Platform integration reference |
 | Teams Live Events API | External | tools ISO | Platform integration reference |
-
----
-
 ## Architectural Position
 
 The webinar_script builder occupies the **P03 Prompt / Live Delivery** layer of CEX. It bridges prompt engineering (structured speaker narration) with audience engagement mechanics (hook frameworks, Q&A facilitation, conversion CTAs).

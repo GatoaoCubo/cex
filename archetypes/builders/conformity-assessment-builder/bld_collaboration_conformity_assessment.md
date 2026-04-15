@@ -108,19 +108,19 @@ write_signal('n03', 'complete', 9.2)
 | EU AI Act citation | Article and annex references in all sections |
 | Aug-2026 deadline flagging | All mandatory items labeled [AUG-2026-DEADLINE] |
 
-### OUT OF SCOPE (do NOT handle -- route elsewhere)
+### OUT OF SCOPE (route elsewhere)
 
-| Out of Scope | Route To | Reason |
-|-------------|----------|--------|
-| CE marking physical affixing process | Legal team + notified body | Involves NB workflow beyond documentation |
-| EU Declaration of Conformity (DoC) document | Legal team | Separate Art. 47 document -- not the Annex IV package |
-| GDPR compliance | DPO / legal | Different regulation, separate documentation |
-| ISO 42001 certification | Quality management team | Certification standard, not EU AI Act requirement |
-| Non-high-risk AI systems | Not applicable | Conformity assessment only for Annex-III systems |
-| General-purpose AI (GPAI) | GPAI procedure | Subject to Chapter V, different rules |
-| AI systems embedded in regulated products | Annex I procedure | Different timeline (Aug 2027) and process |
-| Post-market incident investigation | N05 Operations | Operational, not documentation |
-| Financial penalty assessment | Legal / N06 | Regulatory enforcement, not documentation |
+| Out of Scope | Route To |
+|-------------|----------|
+| CE marking physical affixing | Legal + notified body |
+| EU Declaration of Conformity (Art. 47 DoC) | Legal team |
+| GDPR compliance | DPO / legal |
+| ISO 42001 certification | Quality management |
+| Non-high-risk AI systems | Not applicable |
+| General-purpose AI (GPAI, Chapter V) | GPAI procedure |
+| Annex I embedded products (Aug 2027) | Annex I procedure |
+| Post-market incident investigation | N05 Operations |
+| Financial penalty assessment | Legal / N06 |
 
 ## Escalation Protocol
 

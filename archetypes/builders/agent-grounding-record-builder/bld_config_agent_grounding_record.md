@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Agent Grounding Record Builder -- Config
 
 ## Naming Convention
@@ -39,9 +38,6 @@ density_score: 0.85
 | p10-gr-7f3a2c1b.md               | Hyphens not allowed in this pattern    |
 | grounding_record_7f3a2c1b.md     | Missing pillar prefix entirely         |
 | p10_gr_inference_7f3a2c1b.md     | Verbose -- use UUID prefix only        |
-
----
-
 ## Output Paths
 
 | Context                         | Path                                          |
@@ -51,9 +47,6 @@ density_score: 0.85
 | Compiled YAML mirror            | P10_memory/grounding/.compiled/               |
 | Proposal files (concurrent)     | .cex/runtime/proposals/                       |
 | Full trace log (overflow ref)   | P10_memory/grounding/traces/{{inference_id}}.json |
-
----
-
 ## Byte Limits
 
 | Limit Type        | Value  | Enforcement               |
@@ -74,9 +67,6 @@ density_score: 0.85
 | Integrity block       | 150          | 200      |
 | Audit Summary         | 300          | 500      |
 | Total (3 tools, 5 chunks) | ~2650   | 4096     |
-
----
-
 ## Post-Build Hooks
 
 ### Hook 1: output-hash Verification (MANDATORY)
@@ -118,9 +108,6 @@ python _tools/cex_score.py --apply P10_memory/grounding/p10_gr_{{prefix}}.md
 ```
 
 A score below 8.0 blocks publication. Score between 8.0 and 9.0 allowed with documented waiver.
-
----
-
 ## Runtime Flags
 
 | Flag                    | Type    | Default  | Description                                                   |
@@ -148,9 +135,6 @@ agent_grounding_record:
   max_tool_calls_inline: 10
   max_rag_chunks_inline: 20
 ```
-
----
-
 ## Environment Requirements
 
 | Requirement              | Value                   | Notes                                              |
@@ -160,9 +144,6 @@ agent_grounding_record:
 | C2PA library             | c2pa-python (optional)  | Only required if require_c2pa: true               |
 | Disk space per record    | ~8 KB                   | Includes MD source + compiled YAML + trace log    |
 | Write permissions        | P10_memory/grounding/   | Builder must have write access to this directory  |
-
----
-
 ## Retention Policy
 
 | Record Type              | Retention            | Archive Action                                       |

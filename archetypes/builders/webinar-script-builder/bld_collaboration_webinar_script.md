@@ -15,15 +15,11 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Crew Role
 
 Webinar content architect in the CEX multi-nucleus content pipeline. Responsible for producing complete, production-ready live session scripts with timed speaker narration, slide synchronization markers, and Q&A facilitation support. Operates within the N02 Marketing nucleus for copy and content tasks, or N03 Builder nucleus for artifact construction tasks.
 
 **Primary output artifact type**: `webinar_script` (kind), `p03_ws_*.md` (naming pattern)
-
----
-
 ## Receives From
 
 Inputs required before script production begins. Missing inputs block script construction.
@@ -49,9 +45,6 @@ Inputs required before script production begins. Missing inputs block script con
 - CTA Action: [trial | download | consultation | registration]
 - CTA URL: [URL]
 ```
-
----
-
 ## Produces For
 
 Downstream consumers of the webinar_script artifact.
@@ -63,9 +56,6 @@ Downstream consumers of the webinar_script artifact.
 | Email Team | Post-webinar follow-up hook copy (CTA close section, key outcome lines) | Extracted Markdown section | Passed to N02 email-copy-builder as input brief |
 | Recording Editor | Segment timestamps and slide transition markers | Timestamp list | Extracted from [MM:00] markers in script |
 | Marketing Analytics | Webinar metadata (title, platform, audience, CTA URL) | YAML frontmatter | Extracted by cex_compile.py |
-
----
-
 ## Collaboration Signals
 
 | Event | Signal Action | Target |
@@ -74,9 +64,6 @@ Downstream consumers of the webinar_script artifact.
 | Quality gate passed (>= 8.0) | write_signal(n02, 'webinar_script_published', score) | N07 + N05 for platform push |
 | Quality gate failed | write_signal(n02, 'webinar_script_rejected', score) | N07 for review routing |
 | Demo assets missing | write_signal(n02, 'needs_input', 'demo_assets') | N07 -> Sales team |
-
----
-
 ## Boundary
 
 The webinar_script builder handles ONLY live session scripts. Adjacent content types route to specialized builders.

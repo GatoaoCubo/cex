@@ -15,13 +15,9 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Agent Name Service Record Builder -- Instructions
-
 ## Overview
-
 Build an `agent_name_service_record` in 3 phases. Phase 1 feeds Phase 2; do not skip.
-
 ## Phase 1: RESEARCH -- Resolve Agent Identity
 
 **Goal**: Gather all facts needed before writing a single field.
@@ -75,9 +71,6 @@ Build an `agent_name_service_record` in 3 phases. Phase 1 feeds Phase 2; do not 
 | 1.5.1 | Confirm record structure matches draft-liang-agentdns-00 schema | compatible: yes/no |
 | 1.5.2 | Identify registry_operator: godaddy / salesforce / cncf / other | registry_operator |
 | 1.5.3 | Check if operator requires additional metadata fields | extra_fields[] |
-
----
-
 ## Phase 2: COMPOSE -- Populate Registry Record
 
 **Goal**: Produce a complete, well-formed agent_name_service_record artifact.
@@ -117,7 +110,6 @@ tags: [ANS, AgentDNS, IETF, CNCF, {operator}, {protocol_list}]
 
 ```markdown
 ## Protocol Adapters
-
 | Protocol | Version | Endpoint | Status |
 |----------|---------|----------|--------|
 | mcp | 2024-11-05 | https://agent.example.com/mcp | active |
@@ -134,9 +126,6 @@ lifecycle:
   renewal_policy: auto  # auto | manual | none
   last_verified: "YYYY-MM-DD"
 ```
-
----
-
 ## Phase 3: VALIDATE -- ANS/AgentDNS Compliance
 
 **Goal**: Confirm all hard gates pass before registry submission.

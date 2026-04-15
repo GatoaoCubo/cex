@@ -15,45 +15,33 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Conformity Assessment Builder -- Memory
-
 ## Learning Record Type
-
 This is a `correction` + `convention` memory artifact.
 It records lessons from prior conformity assessment build cycles to prevent recurrence.
 Injected at F3 INJECT to inform F4 REASON and F6 PRODUCE.
-
 ---
-
 ## Observations (What the Builder Has Learned)
-
 ### O-001: RMS Is the Most Common Failure Point
-
 | Attribute | Detail |
 |-----------|--------|
 | Observation | The risk-management-system section fails H04 gate more than any other section |
 | Frequency | ~40% of first-pass builds |
 | Root cause | Builders treat RMS as a narrative ("we manage risks") not a structured process with named risks, IDs, and controls |
 | Evidence | Anti-example 1 in bld_examples_conformity_assessment.md |
-
 ### O-002: DoC vs. Annex IV Confusion Is Endemic
-
 | Attribute | Detail |
 |-----------|--------|
 | Observation | ~25% of builds confuse the Declaration of Conformity (Art. 47) with the Annex-IV package |
 | Root cause | Both are "conformity" documents; the boundary is rarely explained |
 | Evidence | Anti-example 2 in bld_examples_conformity_assessment.md |
 | Rule derived | System prompt rule: "NEVER conflate the conformity assessment package with the EU Declaration of Conformity document" |
-
 ### O-003: Aug-2026 Deadline Often Not Flagged
-
 | Attribute | Detail |
 |-----------|--------|
 | Observation | When deadlines are not surfaced in output, legal teams miss them in review |
 | Root cause | Builders treat the deadline as background context, not a required output element |
 | Rule derived | Flag all mandatory Annex-IV items with [AUG-2026-DEADLINE] regardless of declaration_date |
-
 ### O-004: PMM Plans Are Frequently Omitted
 
 | Attribute | Detail |

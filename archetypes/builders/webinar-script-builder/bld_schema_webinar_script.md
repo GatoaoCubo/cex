@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## ID Pattern
 
 ```
@@ -27,8 +26,6 @@ Examples:
 - `p03_ws_onboarding_q2.md` -- valid
 - `p03_ws_ProductDemo.md` -- INVALID (uppercase)
 - `ws_product_demo.md` -- INVALID (missing pillar prefix)
-
----
 
 ## Frontmatter Fields
 
@@ -63,8 +60,6 @@ Examples:
 | cta_url | string | URL for the closing CTA action |
 | llm_function | string | Pipeline function tag |
 
----
-
 ## Body Structure
 
 Sections must appear in this order. Section headings must include timestamp markers.
@@ -79,8 +74,6 @@ Sections must appear in this order. Section headings must include timestamp mark
 | 6 | Demo Walk-through | NO | Step-by-step narration, [SCREEN] or [SLIDE] cues |
 | 7 | Q&A Facilitation | YES | Moderator intro, 3 seed questions, graceful close line |
 | 8 | CTA Close | YES | Action statement, URL, [SLIDE X: CTA] cue |
-
----
 
 ## Constraints
 

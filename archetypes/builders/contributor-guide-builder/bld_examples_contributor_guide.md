@@ -15,22 +15,17 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Golden Example
----
 **Contributing to Kubernetes**
-
 **Developer Setup**  
 1. Install [Go 1.20+](https://golang.org/dl/)  
 2. Clone repo: `git clone https://github.com/kubernetes/kubernetes.git`  
 3. Run: `make generate && make test`  
-
 **PR Flow**  
 1. Fork repo on GitHub  
 2. Create branch: `git checkout -b feature/your-fix`  
 3. Commit with [Conventional Commits](https://www.conventionalcommits.org/)  
 4. Submit PR to `main` with title prefix: `kind/`  
-
 **Coding Standards**  
 - Use GoFmt and [golint](https://github.com/golang/lint)  
 - 100% test coverage required  

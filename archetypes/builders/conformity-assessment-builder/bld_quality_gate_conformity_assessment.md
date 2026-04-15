@@ -15,13 +15,9 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Conformity Assessment Builder -- Quality Gate
-
 ## Hard Gates (H01-H08)
-
 All 8 gates MUST pass. A single FAIL blocks publication (quality stays null).
-
 | Gate | ID | Check | Pass Condition | FAIL Action |
 |------|----|-------|---------------|-------------|
 | Frontmatter complete | H01 | YAML frontmatter present with all required fields | All fields populated, quality: null | Add missing fields |

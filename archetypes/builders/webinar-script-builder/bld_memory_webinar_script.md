@@ -15,9 +15,7 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Observations
-
 | Observation | Source | Confidence |
 |------------|--------|-----------|
 | Webinars that lack a benefit-led hook in the first 60 seconds lose an average of 30% of attendees before the agenda is stated. | ON24 Webinar Benchmarks 2024, internal scoring of 47 past scripts | High |
@@ -26,11 +24,7 @@ density_score: 0.85
 | CTAs buried in the middle of a value segment convert at <1% of the rate of CTAs in a dedicated closing section with a named action and URL. | Conversion tracking across 12 SaaS webinars | High |
 | Sessions that run over the stated duration lose 40-60% of their live audience at the scheduled end time, regardless of remaining content quality. | Zoom attendance data, ON24 drop-off analysis | Medium |
 | Webinars using the Pain-Agitate-Solution hook framework retain 2.1x more attendees through the first 10 minutes than those using a feature-led or bio-led opener. | A/B test data from 8 paired webinar campaigns | Medium |
-
----
-
 ## Patterns
-
 | Pattern | When Observed | Application |
 |---------|--------------|-------------|
 | Hook-first construction | Scripts built hook-first consistently score higher on D01 (hook strength) than those built sequentially from intro to CTA | Always write the hook before any other section |
@@ -38,11 +32,7 @@ density_score: 0.85
 | Demo-sandwich placement | Placing the demo between two value segments (not at the end) increases demo engagement and reduces demo-drop-off | Default segment order: Seg1 -> Demo -> Seg2 -> Q&A -> CTA |
 | Seed question priming | Reading a seed question within 5 seconds of Q&A dead air is more effective than waiting 60 seconds | Moderator must be briefed: "Read Seed Q1 at 5 seconds of silence, not 60" |
 | CTA repetition | Stating the CTA URL twice (once with the action, once as the final line) increases click-through by 18% | Repeat URL in the last sentence of the closing section |
-
----
-
 ## Evidence
-
 | Claim | Evidence | Sample Size |
 |-------|---------|------------|
 | Hooks with benefit in sentence 1 = 2.3x completion rate | ON24 2024 Webinar Benchmarks Report, analysis of 100K+ webinars | 100K+ webinars |
@@ -50,17 +40,9 @@ density_score: 0.85
 | Structured hooks = 2.1x retention through minute 10 | A/B test, 8 paired campaigns, same audience segments | 8 campaigns |
 | Dead air in Q&A (no seed questions) = 65% occurrence rate | Moderator survey + replay analysis, 47 sessions reviewed | 47 sessions |
 | Running over time = 40-60% audience drop at stated end | Zoom attendance graph data, 22 webinars | 22 webinars |
-
----
-
 ## Recommendations
-
 1. **Hook timing is non-negotiable**: The benefit statement must be in the first 2 sentences. Any script that opens with speaker bio, company history, or housekeeping instructions must be revised before quality review.
-
 2. **Slide cue density**: Add [SLIDE X] cues at every logical transition, not just at segment boundaries. In demo sections, add [SCREEN: action] for every click or navigation. Minimum density: 1 cue per 90 seconds of scripted content.
-
 3. **Seed question ratio**: Write 5 seed questions, publish 3. The extra 2 serve as backup if the moderator exhausts the primary list before time is up. Label them Seed Q4 and Seed Q5 in the moderator copy.
-
 4. **CTA placement and repetition**: The CTA belongs in its own dedicated closing section with a [SLIDE X: CTA] cue. State the action, URL, and benefit in 3 sentences. Repeat the URL in the final sentence. Never end a webinar script with a "thank you" as the last line -- end with the URL.
-
 5. **Post-webinar email timing**: The follow-up email hook (captured in the CTA close section) performs best when the email sends within 30 minutes of session end. Coordinate with the email team to have the send queued before the webinar starts. Scripts should include a note in the CTA close: [SPEAKER NOTE: Follow-up email sends at session end. Confirm with email team before going live.]

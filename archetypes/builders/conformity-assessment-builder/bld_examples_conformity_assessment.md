@@ -15,11 +15,8 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Conformity Assessment Builder -- Examples
-
 ## Golden Example: Medical AI Triage System
-
 **System**: MedTriage-v2 Clinical Decision Support
 **Annex III Category**: essential_services (Annex III(5) -- access to essential private and public services in healthcare)
 **Article 43 Procedure**: internal_check (no real-time biometric identification)
@@ -102,9 +99,6 @@ Mitigation: Age-stratified evaluation; flagging in system transparency notice.
 
 **Why this is golden**: Named datasets, specific sizes, named license, audit methodology cited,
 known limitation quantified, mitigation described.
-
----
-
 ## Anti-Example 1: Missing RMS Section
 
 **System**: RetailScoringAI v1.0
@@ -114,7 +108,6 @@ known limitation quantified, mitigation described.
 
 ```
 ## Section 4 -- Risk Management
-
 We have identified that our system poses some risks. These have been addressed
 through our internal review process. Our team reviews the system quarterly.
 ```
@@ -144,9 +137,6 @@ Confusion between an internal risk review (any company can do) and a formal
 risk-management-system as defined by EU AI Act Art. 9. The Art. 9 RMS requires:
 identification, estimation, evaluation, mitigation, and residual risk acceptance --
 all documented, version-controlled, and continuously updated.
-
----
-
 ## Anti-Example 2: Conformity Assessment Confused with Compliance Framework
 
 **System**: HRScreening-AI v3
@@ -157,16 +147,13 @@ Annex-IV conformity assessment package.
 
 ```
 # AI Compliance Framework -- HRScreening-AI v3
-
 ## GDPR Compliance
 Data subject rights: implemented.
 Data minimization: applied.
 DPO notified: yes.
-
 ## Internal Policy
 Our AI governance policy (AI-GOV-2024) covers all AI systems.
 We review it annually.
-
 ## Conclusion
 This system complies with applicable regulations.
 ```
@@ -204,9 +191,6 @@ The builder failed to distinguish:
 The EU AI Act Annex-IV conformity assessment is a TECHNICAL DOCUMENTATION package,
 not a policy statement. It contains design records, risk tables, test results,
 and monitoring plans -- not policy assertions.
-
----
-
 ## Score Comparison
 
 | Example | H-Gates | D Score | Total | Publishable? |

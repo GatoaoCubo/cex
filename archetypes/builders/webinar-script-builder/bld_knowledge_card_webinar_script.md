@@ -15,27 +15,20 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Domain Overview
-
 Webinars are top-funnel awareness and mid-funnel conversion tools. Live interactivity -- real-time Q&A, live demos, co-presence -- is what email and video cannot replicate.
-
 **Market (2024)**:
 - 73% B2B marketers: webinars = best lead-gen format (CMI).
 - Attendance: 40-50% of registrants (ON24).
 - Structured hooks: 2.3x completion (ON24). Explicit CTAs: 3x conversion (GoToWebinar 2023).
 - Optimal duration: 45-60 min. <30 min underdelivers; >90 min loses 60% of live audience.
-
 **Platforms**:
 - Zoom Webinars: largest share, 100-10K attendees, built-in Q&A + polls.
 - GoToWebinar: enterprise analytics, automated follow-ups.
 - MS Teams Live Events: M365 integration, up to 10K attendees.
 - ON24: enterprise automation, CRM + content hub.
-
 ---
-
 ## Key Concepts
-
 | Concept | Definition | Source |
 |---------|-----------|--------|
 | Hook | Benefit statement in first 60s; commits audience to stay | Cialdini, Influence |

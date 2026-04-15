@@ -44,16 +44,13 @@ golden_example: 'Score: 9.6 / 10.0 | Kind: webinar_script | ID: p03_ws_saas_prod
 
   ## [0:00] HOOK / OPENING (60 sec)
 
-
   [SLIDE 1: Title Slide]
-
 
   Speaker: "By the end of this session, you will have a repeatable onboarding workflow
 
   that cuts new-hire ramp time by 50% -- without adding a single headcount to your ops team.
 
   I am going to show you exactly how 140 teams did it last quarter. Let''s get started."
-
 
   [SPEAKER NOTE: Deliver this from memory. No notes. High energy. Pause after "50%".]
 
@@ -63,29 +60,21 @@ golden_example: 'Score: 9.6 / 10.0 | Kind: webinar_script | ID: p03_ws_saas_prod
 
   ## [50:00] Q&A FACILITATION (10 min)
 
-
   [SLIDE 8: Q&A]
 
-
   Moderator: "We are opening Q&A now. Sarah, first question from the chat --"
-
 
   Seed Question 1: "How long does implementation typically take for a team of 20?"
 
   Suggested direction: Typical 2-week setup, highlight onboarding specialist support.
 
-
   Seed Question 2: "Does this integrate with our existing HRIS tools?"
 
   Suggested direction: Native integrations with Workday, BambooHR, ADP -- see integration page.
 
-
   Seed Question 3: "What happens to our data if we cancel?"
 
-  Suggested direction: Full data export, 30-day retention window, no lock-in.
-
-
-  ---'
+  Suggested direction: Full data export, 30-day retention window, no lock-in.'
 anti_example_1_no_hook_company_bio_opener: 'Score: 3.8 / 10.0 | Gate H04: FAIL | Why it fails
 
 
@@ -93,7 +82,6 @@ anti_example_1_no_hook_company_bio_opener: 'Score: 3.8 / 10.0 | Gate H04: FAIL |
 
 
   ## Opening
-
 
   Speaker: "Welcome everyone. My name is James Wilson and I am the VP of Customer Success
 
@@ -124,10 +112,7 @@ anti_example_1_no_hook_company_bio_opener: 'Score: 3.8 / 10.0 | Gate H04: FAIL |
 
   Fix: Replace with benefit-led hook in 2 sentences. State what attendee will know or be able to do by end of session. Add
   [SLIDE 1] cue. Reserve speaker bio for the agenda slide intro ("I am Sarah, and I have run 300 onboarding programs -- here
-  is what I have learned").
-
-
-  ---'
+  is what I have learned").'
 anti_example_2_missing_slide_cues_script_desync: 'Score: 5.1 / 10.0 | Dimension D03: 2/10 | Why it fails
 
 
@@ -135,7 +120,6 @@ anti_example_2_missing_slide_cues_script_desync: 'Score: 5.1 / 10.0 | Dimension 
 
 
   ## Segment 2: How to Set Up Your First Workflow
-
 
   Speaker: "Let me walk you through the setup process. First you go to the dashboard.
 

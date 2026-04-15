@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Definition
 
 | Property | Value |
@@ -27,8 +26,6 @@ density_score: 0.85
 | Golden threshold | 9.5 / 10.0 |
 | Scorer | cex_score.py |
 | Retry limit | 2 retries before REJECT |
-
----
 
 ## HARD Gates (all must pass -- any failure = BLOCK)
 
@@ -43,8 +40,6 @@ density_score: 0.85
 | Q&A seeds | H07 | Q&A section seed count | >= 3 seed questions numbered or labeled | Return to F6 |
 | CTA explicit | H08 | Closing section CTA | Action + URL both present in closing | Return to F6 |
 
----
-
 ## SOFT Scoring Dimensions (weighted to 10.0)
 
 | Dimension | ID | Weight | What Is Scored | Score Criteria |
@@ -57,8 +52,6 @@ density_score: 0.85
 
 **Formula**: `score = (D01 * 0.25) + (D02 * 0.20) + (D03 * 0.20) + (D04 * 0.15) + (D05 * 0.20)`
 
----
-
 ## Actions Table
 
 | Score | Label | Action |
@@ -67,8 +60,6 @@ density_score: 0.85
 | >= 8.0 | PUBLISH | Publish to artifacts directory |
 | >= 7.0 | REVIEW | Return to builder with specific feedback |
 | < 7.0 | REJECT | Block publish, mandatory rebuild |
-
----
 
 ## Bypass Table
 
@@ -84,8 +75,6 @@ Bypass is not available for webinar scripts. Live delivery stakes require all ga
 | H06 Segment | NO | Content delivery required |
 | H07 Q&A | NO | Dead air prevention critical |
 | H08 CTA | NO | Conversion goal required |
-
----
 
 ## Retry Protocol
 

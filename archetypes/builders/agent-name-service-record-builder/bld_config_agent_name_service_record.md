@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Agent Name Service Record Builder -- Config
 
 > Runtime configuration for producing IETF ANS / CNCF AgentDNS registry-records.
@@ -68,7 +67,6 @@ file id:     p04_ans_billing_bot_acme_corp
 ```bash
 # Verify output directory exists
 mkdir -p P04_tools/
-
 # Check for existing record (avoid duplicates)
 ls P04_tools/p04_ans_*.md 2>/dev/null | grep "{agent_slug}" && echo "WARNING: record exists"
 ```
@@ -78,17 +76,13 @@ ls P04_tools/p04_ans_*.md 2>/dev/null | grep "{agent_slug}" && echo "WARNING: re
 ```bash
 # Compile artifact to YAML
 python _tools/cex_compile.py P04_tools/p04_ans_{agent_slug}.md
-
 # Score the artifact
 python _tools/cex_score.py --apply P04_tools/p04_ans_{agent_slug}.md
-
 # Update search index
 python _tools/cex_index.py
-
 # Validate byte count
 wc -c P04_tools/p04_ans_{agent_slug}.md
 # if > 3072: trim capability_advertisement or lifecycle notes
-
 # Git commit
 git add P04_tools/p04_ans_{agent_slug}.md P04_tools/p04_ans_{agent_slug}.yaml
 git commit -m "[N05] ANS record: {ans_name} -- {registry_operator} registry"

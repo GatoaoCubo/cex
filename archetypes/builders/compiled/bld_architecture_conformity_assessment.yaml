@@ -98,24 +98,6 @@ dependency_graph: 'manifest ------> system_prompt (activates)
   tools ----------> quality_gate (score execution)
 
   architecture ---> collaboration (component interfaces)'
-data_flow: "User Input (system_name, category, evidence docs)\n        |\n        v\nF1 CONSTRAIN (schema + config + manifest)\n\
-  \  -- Resolve Annex III category\n  -- Determine Art. 43 procedure (internal / notified body)\n  -- Set naming: p11_ca_{system_slug}.md\n\
-  \  -- Load field constraints from schema\n        |\n        v\nF2 BECOME (system_prompt + manifest)\n  -- Activate EU AI\
-  \ Act conformity specialist identity\n  -- Apply ALWAYS/NEVER rules\n  -- Confirm scope: high-risk Annex III only\n    \
-  \    |\n        v\nF3 INJECT (knowledge_card + memory + examples)\n  -- Load Annex III category definitions\n  -- Load Annex\
-  \ IV section requirements\n  -- Load Art. 9 RMS requirements\n  -- Load Art. 10 data governance requirements\n  -- Load\
-  \ Art. 14 human-oversight requirements\n  -- Load Art. 72 PMM requirements\n  -- Load learned pitfalls from memory\n  --\
-  \ Reference golden example (MedTriage)\n        |\n        v\nF4 REASON (instruction -- Phase 1 RESEARCH)\n  -- Enumerate\
-  \ RMS evidence items\n  -- Gather data-governance documentation\n  -- Collect human-oversight records\n  -- Compile PMM\
-  \ data\n        |\n        v\nF5 CALL (tools)\n  -- Check schema validation (notified_body_id required if notified body)\n\
-  \  -- Load similar artifacts from cex_retriever\n  -- Verify all required evidence is present\n        |\n        v\nF6\
-  \ PRODUCE (output_template + instruction -- Phase 2 COMPOSE)\n  -- Populate all 7 Annex IV categories\n  -- Insert EU AI\
-  \ Act citations\n  -- Flag Aug-2026 deadline items\n  -- Generate RMS table, DGP table, HOM controls, PMM plan\n       \
-  \ |\n        v\nF7 GOVERN (quality_gate + examples -- Phase 3 VALIDATE)\n  -- H01-H08 hard gates\n  -- D01-D05 soft scoring\n\
-  \  -- Compare to MedTriage golden example\n  -- If score < 8.0: return to F6\n        |\n        v\nF8 COLLABORATE (collaboration\
-  \ + tools)\n  -- Save to P11/ directory\n  -- Compile: python _tools/cex_compile.py\n  -- Score: python _tools/cex_score.py\
-  \ --apply\n  -- Commit: git add + git commit\n  -- Signal: write_signal('n03', 'complete', score)\n  -- Deliver Annex-IV\
-  \ package to legal team"
 file_naming_architecture: '| Pattern | Example | Used For |
 
   |---------|---------|---------|

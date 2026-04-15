@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Agent Grounding Record -- Examples
 
 ## Example 1 -- GOLDEN (Score: 9.5)
@@ -40,11 +39,8 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Grounding Record -- Drug Interaction Query: Warfarin + SSRIs
-
 ## Inference Identity
-
 | Field                  | Value                                                          |
 |------------------------|----------------------------------------------------------------|
 | inference_id           | 7f3a2c1b-e8d4-4f21-b9a3-1c2d3e4f5a6b                          |
@@ -53,30 +49,22 @@ density_score: 0.85
 | downstream_use         | production                                                     |
 | grounding_coverage_pct | 0.92                                                           |
 | otel_span_id           | 4bf92f3577b34da6                                               |
-
 ## Model
-
 | Field          | Value                                                          |
 |----------------|----------------------------------------------------------------|
 | id             | claude-sonnet-4-6                                              |
 | version        | 20260412                                                       |
 | provider       | anthropic                                                      |
 | model-signature| attest:v1:sha256:9a4c1d2e3f...b7c8d9e0f1                      |
-
 ## Tool Calls
-
 3 tool invocations during this inference run.
-
 | # | tool_name       | tool_input_hash (sha256)                                         | tool_output_hash (sha256)                                        | duration_ms | timestamp              | status  |
 |---|-----------------|------------------------------------------------------------------|------------------------------------------------------------------|-------------|------------------------|---------|
 | 1 | pubmed_search   | a1b2c3d4e5f6...7890abcdef01234567890abcdef01234567890abcdef0123 | b2c3d4e5f601...234567890abcdef01234567890abcdef01234567890abc01 | 342         | 2026-04-14T09:23:48Z   | success |
 | 2 | pubmed_fetch    | c3d4e5f60123...4567890abcdef01234567890abcdef01234567890abcde02 | d4e5f6012345...67890abcdef01234567890abcdef01234567890abcdef03  | 891         | 2026-04-14T09:23:49Z   | success |
 | 3 | drug_db_lookup  | e5f601234567...890abcdef01234567890abcdef01234567890abcdef0104  | f601234567890...abcdef01234567890abcdef01234567890abcdef012305  | 156         | 2026-04-14T09:23:50Z   | success |
-
 ## RAG Chunks Retrieved
-
 5 chunks retrieved from internal clinical knowledge base.
-
 | # | chunk_id            | source_url                                                         | retrieval_score | content_hash (sha256)                                            |
 |---|---------------------|--------------------------------------------------------------------|-----------------|------------------------------------------------------------------|
 | 1 | kb_chunk_0x3f2a     | https://internal.kb/clinical/pharmacology/warfarin-interactions-01 | 0.94            | 1a2b3c4d5e6f...7890abcdef01234567890abcdef01234567890abcde01 |
@@ -84,36 +72,25 @@ density_score: 0.85
 | 3 | kb_chunk_0x3f2c     | https://internal.kb/clinical/guidelines/bleeding-risk-assessment   | 0.87            | 3c4d5e6f0123...4567890abcdef01234567890abcdef01234567890abc03  |
 | 4 | kb_chunk_0x3f2d     | https://internal.kb/clinical/pharmacology/fluoxetine-warfarin-rct  | 0.83            | 4d5e6f012345...67890abcdef01234567890abcdef01234567890abcd04   |
 | 5 | kb_chunk_0x3f2e     | https://internal.kb/clinical/dosing/inr-monitoring-protocol        | 0.79            | 5e6f01234567...890abcdef01234567890abcdef01234567890abcde05    |
-
 ## Integrity
-
 | Field             | Value                                                                            |
 |-------------------|----------------------------------------------------------------------------------|
 | output_hash       | 6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f (SHA-256)    |
 | c2pa_manifest_ref | https://c2pa.internal.kb/manifests/7f3a2c1b-e8d4-4f21-b9a3-1c2d3e4f5a6b.c2pa  |
-
 ## Audit Summary
-
 **Inference task**: Answer clinical question about warfarin + SSRI co-administration bleeding risk.
-
 **Grounding sources**:
 - 5 RAG chunks from internal clinical knowledge base (pharmacology + guidelines)
 - 3 tool calls: PubMed search, PubMed full-text fetch, drug DB lookup
-
 **Traceability chain**:
 Query -> PubMed API (3 calls) + KB retrieval (5 chunks) -> claude-sonnet-4-6 -> output (hash: 6f7a8b9c...)
-
 **Coverage note**: 0.92 -- 11 of 12 factual claims in the output are traceable to a RAG chunk or tool result.
 One general pharmacokinetic statement draws on model parametric knowledge (no external source).
-
 **OTel linkage**: This record is linked to OTel span 4bf92f3577b34da6. Full trace in Jaeger at trace ID 4bf92f3577b34da6a3c8f9e2d1b057c4.
-
 **C2PA status**: C2PA manifest registered at c2pa.internal.kb. Includes model assertion, training data assertion, and content binding to output_hash.
 ```
 
 **Why this scores 9.5**: All hard gates pass. All 5 RAG chunks have source_url + content_hash. All 3 tool calls have input/output hashes + timestamps. output_hash present. c2pa_manifest_ref is a valid URI. grounding_coverage_pct is computed and explained. Loses 0.5 for model-signature being abbreviated.
-
----
 
 ## Example 2 -- ANTI-EXAMPLE: Missing output-hash (Score: 0.0 -- Hard Gate H05 FAIL)
 
@@ -142,8 +119,6 @@ otel_span_id: a1b2c3d4e5f60718
 
 **Fix**: Recompute SHA-256 from raw model output bytes. If the raw output is no longer available, the inference run must be re-executed under proper instrumentation.
 
----
-
 ## Example 3 -- ANTI-EXAMPLE: RAG Chunks Without source_url (Score: 2.1 -- D2: 0.0)
 
 ```markdown
@@ -167,8 +142,6 @@ otel_span_id: b2c3d4e5f6071819
 **Why this fails D2**: `source_url: null` and `source_url: "unknown"` are both invalid. The entire purpose of RAG-chunk provenance is to trace the output back to a specific source document. Without source_url, the grounding record cannot satisfy EU AI Act post-market-monitoring requirements or C2PA content credential binding.
 
 **Fix**: Trace the chunk back through the vector store to its originating document. If the vector store does not record source metadata, the RAG pipeline must be updated to capture it before grounding records can be generated.
-
----
 
 ## Example Scoring Summary
 

@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 # Agent Name Service Record Builder -- Examples
 
 ## Golden Example: GoDaddy Customer-Service Agent
@@ -40,14 +39,10 @@ pki_cert_reference: "cert:digicert:SHA256:3A7F2B9C1D4E8F0A6B5C3D2E1F4A9B8C7D6E5F
 discovery_endpoint: "https://godaddy.com/.well-known/agent/customer-service"
 tags: [ANS, AgentDNS, IETF, CNCF, godaddy, mcp, a2a, customer-service]
 ---
-
 # ANS Record: customer-service.godaddy.agents
-
 > IETF ANS registry-record for GoDaddy Customer Service Agent.
 > Registry operator: GoDaddy | Protocol adapters: MCP 2024-11-05, A2A 0.3
-
 ## Agent Identity
-
 | Field | Value |
 |-------|-------|
 | ANS Name | `customer-service.godaddy.agents` |
@@ -57,50 +52,37 @@ tags: [ANS, AgentDNS, IETF, CNCF, godaddy, mcp, a2a, customer-service]
 | Discovery | https://godaddy.com/.well-known/agent/customer-service |
 | Version | 1.0.0 |
 | Spec | IETF draft-narajala-ans-00, CNCF draft-liang-agentdns-00 |
-
 ## Protocol Adapters
-
 | Protocol | Version | Endpoint | Auth | Status |
 |----------|---------|----------|------|--------|
 | mcp | 2024-11-05 | https://agents.godaddy.com/customer-service/mcp | bearer | active |
 | a2a | 0.3 | https://agents.godaddy.com/customer-service/a2a | mtls | active |
-
 ## Capability Advertisement
-
 | Capability | Description |
 |-----------|-------------|
 | account-lookup | Retrieve customer account by domain or ID |
 | billing-dispute | Accept + route billing disputes |
 | domain-transfer-status | Check status of in-progress transfers |
-
 **Concurrency**: max_concurrent = 50
-
 **Supported task types:**
 - account-query
 - billing-action
 - domain-status-check
-
 **Performance**: response_time_p95_ms = 340
-
 ## PKI Certificate
-
 | Field | Value |
 |-------|-------|
 | Reference | `cert:digicert:SHA256:3A7F2B9C...` |
 | Issuer | DigiCert Inc. |
 | Expires | 2027-04-14 |
-
 ## Discovery Endpoint
-
 | Field | Value |
 |-------|-------|
 | URL | https://godaddy.com/.well-known/agent/customer-service |
 | Resolution | HTTPS GET -> registry-record JSON |
 | TTL (s) | 3600 |
 | CNCF AgentDNS | draft-liang-agentdns-00 |
-
 ## Lifecycle
-
 | Field | Value |
 |-------|-------|
 | Registered | 2026-02-01 |
@@ -112,9 +94,6 @@ tags: [ANS, AgentDNS, IETF, CNCF, godaddy, mcp, a2a, customer-service]
 
 **Score breakdown**: D1=1.0, D2=1.0 (2 adapters), D3=1.0 (PKI-cert full), D4=1.0 (3 skills), D5=1.0
 **Final score**: 10.0/10 -- all hard gates pass, all soft dimensions maxed.
-
----
-
 ## Anti-Example 1: Invalid ANS Name Format
 
 **What went wrong**: Name uses underscores instead of hyphens. Fails H04; invalid per IETF draft-narajala-ans-00.
@@ -142,9 +121,6 @@ registry_operator: "cncf"
 **Fix**: Replace `billing_agent.acme_corp.agents` with `billing-agent.acme-corp.agents`
 
 **Lesson**: ANS names follow DNS label syntax (RFC 1035): lowercase, hyphens only. snake_case does not apply.
-
----
-
 ## Anti-Example 2: Missing Protocol Adapters
 
 **What went wrong**: Only an endpoint URL; no protocol-adapter entries. Useless -- no way to know how to connect.
@@ -162,9 +138,7 @@ discovery_endpoint: "https://example.com/.well-known/agent/support"
 lifecycle:
   registered: "2026-04-14"
 ---
-
 # ANS Record: support.example.agents
-
 The support agent is available at https://agents.example.com/support.
 Contact it for any help requests.
 ```

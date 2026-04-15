@@ -15,7 +15,6 @@ created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.85
 ---
-
 ## Production Tools
 
 CEX internal tools used during and after webinar_script artifact construction.
@@ -27,8 +26,6 @@ CEX internal tools used during and after webinar_script artifact construction.
 | cex_retriever.py | `python _tools/cex_retriever.py --query "webinar script hook demo Q&A"` | F3 INJECT -- find similar scripts | Top-N similar artifacts with similarity scores |
 | cex_doctor.py | `python _tools/cex_doctor.py` | F8 COLLABORATE -- post-build system health check | PASS/FAIL report across all builders |
 | cex_hygiene.py | `python _tools/cex_hygiene.py --check {path}` | F7 GOVERN -- frontmatter completeness check | List of missing or malformed fields |
-
----
 
 ## Validation Tools
 
@@ -42,8 +39,6 @@ Checks specific to webinar_script quality gates.
 | CTA validator | Verify CTA action + URL in closing section | Grep for http in closing section | Both action verb and URL present |
 | Speaker note checker | Verify [SPEAKER NOTE] in every segment | Grep `[SPEAKER NOTE` from each segment | Min 1 per segment |
 
----
-
 ## External References
 
 | Platform | Reference | Relevance |
@@ -53,8 +48,6 @@ Checks specific to webinar_script quality gates.
 | ON24 Platform | https://on24.com/resources/ | Enterprise webinar automation, CRM integration |
 | Teams Live Events API | https://learn.microsoft.com/en-us/microsoftteams/teams-live-events | Teams live event creation and Q&A moderation |
 | GoToWebinar REST API | https://developer.goto.com/GoToWebinarV2 | Programmatic scheduling and attendee registration |
-
----
 
 ## Tool Execution Order (F5 CALL)
 
