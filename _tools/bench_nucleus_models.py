@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -121,6 +122,41 @@ def call_ollama(model: str, prompt: str, timeout: int = 300) -> dict:
         return {"ok": False, "wall": time.time() - t0, "error": str(e)}
 
 
+def call_claude_cli(model: str, prompt: str, timeout: int = 300) -> dict:
+    """Call Claude CLI in print mode, time the subprocess."""
+    t0 = time.time()
+    try:
+        proc = subprocess.run(
+            ["claude", "--model", model, "-p", prompt],
+            capture_output=True, text=True, timeout=timeout,
+            encoding="utf-8", errors="replace",
+        )
+        wall = time.time() - t0
+        content = (proc.stdout or "").strip()
+        # Claude CLI has no thinking leak in -p mode
+        return {
+            "ok": proc.returncode == 0 and len(content) > 0,
+            "wall": wall,
+            "completion_tokens": 0,  # CLI doesn't expose
+            "prompt_tokens": 0,
+            "tps": 0.0,
+            "content_raw": content,
+            "content_clean": content,
+            "raw_bytes": len(content),
+            "clean_bytes": len(content),
+            "error": proc.stderr[:200] if proc.returncode != 0 else None,
+        }
+    except Exception as e:
+        return {"ok": False, "wall": time.time() - t0, "error": str(e)}
+
+
+def dispatch_call(model: str, prompt: str, timeout: int = 300) -> dict:
+    """Route to Ollama or Claude based on model prefix."""
+    if model.startswith("claude-") or model.startswith("sonnet") or model.startswith("opus") or model.startswith("haiku"):
+        return call_claude_cli(model, prompt, timeout)
+    return call_ollama(model, prompt, timeout)
+
+
 def score_output(nucleus: str, output: str) -> dict:
     """Heuristic scoring: section count, frontmatter presence, length, cleanness."""
     score = {
@@ -166,7 +202,7 @@ def main() -> int:
         results[nucleus] = {}
         for model in models:
             print(f"  [{model}] calling...", flush=True)
-            r = call_ollama(model, PROMPTS[nucleus]["user"])
+            r = dispatch_call(model, PROMPTS[nucleus]["user"])
             if not r["ok"]:
                 print(f"    FAIL: {r.get('error', '?')}")
                 results[nucleus][model] = {"ok": False, "error": r.get("error")}

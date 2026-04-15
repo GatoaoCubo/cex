@@ -15,10 +15,10 @@
 #   with a paired model_list entry e.g. cex-n01-free -> ollama/qwen3:14b.
 
 model_list:
-  # --- N07 Orchestrator (fast planning, llama wins on 3-wave dispatch) ---
+  # --- N07 Orchestrator (gemma2:9b 8.6s; haiku hits 22.3s for 2x volume) ---
   - model_name: cex-n07
     litellm_params:
-      model: ollama/llama3.1:8b
+      model: ollama/gemma2:9b
       api_base: http://localhost:11434
 
   # --- N01 Intelligence (gemma2:9b fastest adherent, 5.5s) ---
@@ -39,12 +39,12 @@ model_list:
       model: ollama/gemma2:9b
       api_base: http://localhost:11434
 
-  # --- N04 Knowledge (REQUIRES qwen3:14b for citation recall) ---
-  # llama3.1:8b skips citations entirely; qwen3:14b names real authors/papers
-  # (e.g. Sparck-Jones 1972 for TF-IDF). Still requires human review for KCs.
+  # --- N04 Knowledge (gemma2:9b 6.7s; qwen3:14b citation win NOT reproducible) ---
+  # Round 2 (2026-04-15): neither model cited Sparck-Jones. Use gemma2
+  # for speed; production KCs still require Claude Opus or human review.
   - model_name: cex-n04
     litellm_params:
-      model: ollama/qwen3:14b
+      model: ollama/gemma2:9b
       api_base: http://localhost:11434
 
   # --- N05 Operations (gemma2:9b 6.4s, llama close behind at 6.8s) ---
