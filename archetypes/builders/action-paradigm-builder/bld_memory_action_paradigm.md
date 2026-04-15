@@ -106,16 +106,3 @@ Execute in order to ensure reliable paradigm production:
 | PDDL action specification | Precondition/postcondition formal syntax | Deliberative planning paradigms |
 | STRIPS planning formalism | State-transition completeness theory | When building state machine |
 
-## Properties
-
-| Property | Value |
-|----------|-------|
-| Kind | `memory` |
-| Pillar | P10 |
-| Domain | action_paradigm construction |
-| Pipeline | 8F (F1-F8) |
-| Scorer | cex_score.py |
-| Compiler | cex_compile.py |
-| Retriever | cex_retriever.py |
-| Quality target | 9.0+ |
-| Density target | 0.85+ |

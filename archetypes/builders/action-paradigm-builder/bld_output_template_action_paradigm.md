@@ -220,16 +220,3 @@ P0 tamper_detection interrupts any pending P1/P2 action.
 | H07 | all postconditions are assertions | No "done" or "completed" -- must state what changed |
 | H08 | id follows naming convention | Starts with p04_act_, uses snake_case |
 
-## Properties
-
-| Property | Value |
-|----------|-------|
-| Kind | `output_template` |
-| Pillar | P05 |
-| Domain | action_paradigm construction |
-| Pipeline | 8F (F1-F8) |
-| Scorer | cex_score.py |
-| Compiler | cex_compile.py |
-| Retriever | cex_retriever.py |
-| Quality target | 9.0+ |
-| Density target | 0.85+ |

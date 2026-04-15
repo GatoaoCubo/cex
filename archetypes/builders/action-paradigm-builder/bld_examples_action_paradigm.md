@@ -231,16 +231,3 @@ description: "Agents use HTTP requests to perform actions."
 | H05: no protocol confusion | paradigm describes behavior, not transport | 15% |
 | H06: portable design | no environment-specific hardcoding | 15% |
 
-## Properties
-
-| Property | Value |
-|----------|-------|
-| Kind | `examples` |
-| Pillar | P07 |
-| Domain | action_paradigm construction |
-| Pipeline | 8F (F1-F8) |
-| Scorer | cex_score.py |
-| Compiler | cex_compile.py |
-| Retriever | cex_retriever.py |
-| Quality target | 9.0+ |
-| Density target | 0.85+ |
