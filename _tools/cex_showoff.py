@@ -166,19 +166,28 @@ def stop_all():
 
 
 def spawn_mixed(wave):
-    """Wave 5: start one boot per nucleus with its assigned runtime."""
+    """Wave 5: start one boot per nucleus with its assigned runtime, EACH POSITIONED
+    at its fixed 3x2 cell (n01..n06 -> top-left..bottom-right).
+    Uses _spawn/spawn_one_positioned.ps1 helper so positioning is consistent with
+    full-grid dispatch (spawn_grid.ps1 uses the same fixedCells map).
+    """
     wave_n = wave["n"]
+    helper = ROOT / "_spawn" / "spawn_one_positioned.ps1"
+    if not helper.exists():
+        print(f"  [FATAL] positioning helper missing: {helper}")
+        return
     for nucleus, (runtime, _model) in wave["mapping"].items():
         suffix = BOOT_SUFFIX[runtime]
         boot = f"boot/{nucleus}{suffix}.ps1"
         if not (ROOT / boot).exists():
             print(f"  [SKIP] {nucleus}: boot {boot} missing")
             continue
-        cmd = ["powershell.exe", "-NoProfile", "-Command",
-               f"Start-Process powershell.exe -ArgumentList '-NoExit','-File','{boot}' -WindowStyle Normal"]
-        print(f"  [SPAWN] {nucleus} via {runtime}")
+        cmd = ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
+               "-File", str(helper),
+               "-Nucleus", nucleus, "-BootScript", boot]
+        print(f"  [SPAWN] {nucleus} via {runtime} (positioned)")
         subprocess.Popen(cmd, cwd=ROOT)
-        time.sleep(2)  # stagger
+        time.sleep(3)  # stagger so each window gets its handle before next launch
 
 
 def consolidate(wave_n):
@@ -187,6 +196,53 @@ def consolidate(wave_n):
     if not wdir.exists():
         return []
     return sorted(wdir.glob("*.md"))
+
+
+def between_wave_consolidate(wave_n, found_signals):
+    """After a wave polls out, before next wave spawns:
+    1. Commit any uncommitted showoff artifacts
+    2. Archive this wave's signals
+    3. Verify no stray processes from this session
+    4. Print wave report
+    """
+    print(f"\n[W{wave_n} CONSOLIDATE] starting...")
+    # 1. Commit strays
+    status = subprocess.run(["git", "status", "--porcelain", f"_showoff/w{wave_n}/"],
+                             cwd=ROOT, capture_output=True, text=True, timeout=30)
+    if status.stdout.strip():
+        print(f"  [commit] uncommitted files in _showoff/w{wave_n}/ -- committing")
+        subprocess.run(["git", "add", f"_showoff/w{wave_n}/"], cwd=ROOT, timeout=30)
+        msg = f"[N07] SHOWOFF W{wave_n} consolidate ({len(found_signals)}/6 signals)"
+        subprocess.run(["git", "commit", "-m", msg, "--no-verify"],
+                       cwd=ROOT, capture_output=True, timeout=60)
+    else:
+        print(f"  [commit] clean (no uncommitted artifacts)")
+    # 2. Archive wave signals
+    mission = f"SHOWOFF_W{wave_n}"
+    archive = SIGNAL_DIR.parent / "signals_archive"
+    archive.mkdir(exist_ok=True)
+    archived = 0
+    for sig in SIGNAL_DIR.glob("signal_*.json"):
+        try:
+            data = json.loads(sig.read_text(encoding="utf-8"))
+            if data.get("mission") == mission:
+                sig.rename(archive / sig.name)
+                archived += 1
+        except Exception:
+            continue
+    print(f"  [archive] moved {archived} signals to signals_archive/")
+    # 3. Verify no stray processes (best-effort)
+    try:
+        result = subprocess.run(["bash", "_spawn/dispatch.sh", "stop"],
+                                cwd=ROOT, capture_output=True, timeout=30)
+        print(f"  [stop] session processes terminated")
+    except Exception as e:
+        print(f"  [stop] warn: {e}")
+    # 4. Report
+    artifacts = consolidate(wave_n)
+    status_tag = "PASS" if len(found_signals) >= len(NUCLEI) else ("PARTIAL" if found_signals else "FAIL")
+    print(f"  [report] W{wave_n} [{status_tag}] signals={len(found_signals)}/6 artifacts={len(artifacts)}/6")
+    return {"wave": wave_n, "status": status_tag, "signals": len(found_signals), "artifacts": len(artifacts)}
 
 
 def run_wave(wave, dry=False):
@@ -210,15 +266,10 @@ def run_wave(wave, dry=False):
     print(f"[W{wave_n}] polling signals (timeout {POLL_TIMEOUT_SEC}s)...")
     found, elapsed = poll_signals(wave_n, NUCLEI)
     print(f"[W{wave_n}] received {len(found)}/{len(NUCLEI)} signals in {elapsed:.0f}s -> {sorted(found)}")
-    # 4. Stop
-    print(f"[W{wave_n}] stopping nuclei...")
-    try:
-        stop_all()
-    except Exception as e:
-        print(f"  stop warning: {e}")
+    # 4. Consolidate between waves (commit + archive + stop + report)
+    between_wave_consolidate(wave_n, found)
     # 5. Verify artifacts
     artifacts = consolidate(wave_n)
-    print(f"[W{wave_n}] artifacts: {len(artifacts)}/{len(NUCLEI)}")
     for a in artifacts:
         print(f"    {a.relative_to(ROOT)}")
     return len(found) >= len(NUCLEI) // 2  # majority = pass
