@@ -44,6 +44,7 @@ runtime_selection:
     - codex
     - ollama-llama
     - ollama-qwen-coder
+    - ollama-hybrid
 
 commit_policy:
   auto_commit: true

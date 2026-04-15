@@ -4,13 +4,13 @@ provider: ollama
 cli: none
 models:
   default: llama3.1:8b
-  n01: qwen2.5-coder:7b
-  n02: qwen2.5-coder:7b
+  n01: llama3.1:8b
+  n02: llama3.1:8b
   n03: qwen2.5-coder:7b
-  n04: qwen2.5-coder:7b
+  n04: llama3.1:8b
   n05: llama3.1:8b
   n06: llama3.1:8b
-  n07: llama3.1:8b
+  n07: qwen2.5-coder:7b
 context_window: 32000
 effective_context: 8192
 capabilities:
@@ -35,15 +35,21 @@ runner: _tools/cex_agentic_nucleus.py
 cost_per_mtok_in: 0
 cost_per_mtok_out: 0
 routing_pattern: |
-  Derived from 2026-04-15 grid-test on LEVERAGE_MAP_V2:
-    n01 intel     -> qwen2.5-coder:7b  (6.4x better at research, 3313B vs 517B)
-    n02 marketing -> qwen2.5-coder:7b  (9.5x better at copy, 1790B vs 187B)
-    n03 builder   -> qwen2.5-coder:7b  (builder-tuned, 1393B vs 973B)
-    n04 knowledge -> qwen2.5-coder:7b  (tie, but qwen reads more)
-    n05 ops       -> llama3.1:8b       (6.8x better, 2451B vs 360B)
-    n06 commercial-> llama3.1:8b       (126x better, 1139B vs 9B -- qwen collapses)
-    n07 orch      -> llama3.1:8b       (planning > coding)
+  Derived from 3 grid-test waves on LEVERAGE_MAP_V2 (2026-04-15):
+    llama3.1:8b    = reliable base (always lands, calls done() natively)
+    qwen2.5-coder  = code-only reliable (n03 builder, n07 orchestrator)
+    qwen on content (n01/n02/n04/n06) = hits MAX_ITERS, outputs 9-byte stub.
+
+  Routing (conservative):
+    n01 intel     -> llama (qwen failed: 9B stub on MAX_ITERS)
+    n02 marketing -> llama (qwen failed: 9B stub)
+    n03 builder   -> qwen2.5-coder:7b (code-tuned, completes)
+    n04 knowledge -> llama (qwen failed: 9B stub)
+    n05 ops       -> llama (qwen inconsistent: 360B or 797B)
+    n06 commercial-> llama (qwen failed: 9B)
+    n07 orch      -> qwen2.5-coder:7b (planning w/ code awareness)
 notes: |
-  Benchmark-optimal free-tier routing. Best of both worlds for zero cost.
-  Requires anti-fabrication guard (min 3 reads before done() is accepted).
-  See project_local_model_benchmark_20260415.md for scoring methodology.
+  REVISED 2026-04-15 after hybrid-aggressive routing (qwen on n01-n04) produced
+  four 9-byte MAX_ITERS stubs. Conservative routing: llama is the base,
+  qwen only where code-shaped output wins (n03 builder, n07 orch planning).
+  See _reports/gridtest_leverage_map/ for the 3 wave reports.

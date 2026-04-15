@@ -164,7 +164,19 @@ def kill_pid_tree(pid: int) -> None:
             pass
 
 
-def dispatch_wave(mission: str, runtime: str, output_tag: str, state_log: Path) -> int:
+def dispatch_wave(mission: str, runtime: str, output_tag: str,
+                  output_dir: Path, mission_upper: str, state_log: Path) -> int:
+    # Clean stale output files so file-landing detector doesn't match pre-run state.
+    if output_dir.exists():
+        stale = list(output_dir.glob(f"{mission_upper}_n0*.md"))
+        stale += list(output_dir.glob(f"{mission_upper}_n0*.trace.json"))
+        for f in stale:
+            try:
+                f.unlink()
+            except OSError:
+                pass
+        if stale:
+            log(f"  cleaned {len(stale)} stale output(s) from {output_dir}", state_log)
     cmd = [
         sys.executable, str(ROOT / "_tools" / "cex_mission_dispatch.py"),
         "--mission", mission,
@@ -408,7 +420,7 @@ def main() -> int:
         git_start = git_head()
         log(f"  git_start_ref={git_start}", state_log)
 
-        rc = dispatch_wave(args.mission, runtime, tag, state_log)
+        rc = dispatch_wave(args.mission, runtime, tag, output_dir, mission_upper, state_log)
         if rc != 0:
             log(f"  dispatch FAILED rc={rc}", state_log)
             waves.append({

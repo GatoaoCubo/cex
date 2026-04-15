@@ -108,6 +108,7 @@ def dispatch_codex(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> int
 DISPATCHERS = {
     "ollama-llama": dispatch_ollama,
     "ollama-qwen-coder": dispatch_ollama,
+    "ollama-hybrid": dispatch_ollama,
     "claude": dispatch_claude,
     "gemini": dispatch_gemini,
     "codex": dispatch_codex,
