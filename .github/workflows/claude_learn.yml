@@ -1,0 +1,52 @@
+name: claude-learn
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  learn:
+    # Only run on PR comments that start with "@.claude learn"
+    if: |
+      github.event.issue.pull_request != null &&
+      startsWith(github.event.comment.body, '@.claude learn')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.issue.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Append lesson to CLAUDE.md
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          python _tools/cex_claude_learn.py \
+            --comment-body "$COMMENT_BODY" \
+            --author "$COMMENT_AUTHOR" \
+            --pr "$PR_NUMBER" \
+            --target CLAUDE.md
+
+      - name: Commit + push
+        run: |
+          git config user.name "claude-learn-bot"
+          git config user.email "claude-learn@users.noreply.github.com"
+          if git diff --quiet CLAUDE.md; then
+            echo "No CLAUDE.md change -- skipping commit."
+            exit 0
+          fi
+          git add CLAUDE.md
+          git commit -m "[CLAUDE_LEARN] PR #${{ github.event.issue.number }} by ${{ github.event.comment.user.login }}"
+          git push

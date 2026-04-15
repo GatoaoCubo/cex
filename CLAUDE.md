@@ -202,6 +202,42 @@ bash _spawn/dispatch.sh stop --dry-run    # preview what would die
 
 > **Preflight**: `cex_preflight.py` pre-compiles context via local Ollama (qwen3:14b) or Haiku before nucleus boot. Reduces token burn ~70%.
 
+## Boris-isms adopted (BORIS_MERGE, 2026-04-15)
+
+21 items from Boris Cherny's Claude Code workflow, assimilated and multi-runtime-capable.
+Each item was mapped to the existing CEX architecture; the ones that did not map
+cleanly were dropped (see "Out of scope" in `plan_boris_merge.md`).
+
+| # | Item | Where it landed | Multi-runtime? |
+|---|------|-----------------|----------------|
+| 1 | Native skills | `.claude/skills/{commit,simplify,btw,verify,dream}.md` + mirror `.cex/skills/` | yes (mirror) |
+| 2 | Slash commands | `.claude/commands/{simplify,loop,schedule,batch,...}.md` | yes (wraps skill) |
+| 3 | `isolation: worktree` | frontmatter on heavy builders (agent, workflow, system_prompt, landing_page, crew_template) | yes (dispatch `-w`) |
+| 4 | `settings.json` hooks | `.claude/settings.json` + `_tools/cex_hooks_native.py` | yes (single entrypoint) |
+| 5 | PostToolUse compile | `cex_hooks_native.py post-tool-use` | yes |
+| 6 | PostCompact memory decay | `cex_hooks_native.py post-compact` | yes |
+| 7 | SessionStart preflight | `cex_hooks_native.py session-start` | yes |
+| 8 | Stop auto-signal | `cex_hooks_native.py stop` | yes |
+| 9 | `.mcp.json` root | consolidated root + per-nucleus overlays still win | partial (no MCP on ollama) |
+| 10 | Permissions pattern (template) | `.claude/nucleus-settings/_template.json` (new nuclei only) | n/a |
+| 11 | `--bare` startup | `cex_run.py --bare` skips KC index + memory load | yes |
+| 12 | `/simplify` | skill + command both | yes |
+| 13 | `/loop` dynamic | ScheduleWakeup native; cron fallback for others | yes |
+| 14 | `/schedule` | CronCreate native; host cron fallback | yes |
+| 15 | `/batch` worktree | `dispatch.sh --tmux` + `-w` flag | yes |
+| 16 | `/btw` | existing, documented | claude-only (intentional) |
+| 17 | `/voice` | **out of scope** (client-side feature, not server-side) | n/a |
+| 18 | `--auto-accept` handoff | `CEX_AUTO_ACCEPT` env; all 4 boot wrappers honor | yes |
+| 19 | `swarm N kind` | `dispatch.sh swarm <kind> <N>` | yes |
+| 20 | `-w` dispatch flag | `dispatch.sh -w [id]` + worktree auto-create | yes |
+| 21 | `--add-dir` | **out of scope** (not a CEX painpoint) | n/a |
+
+Support artifacts:
+- `.claude/rules/new-nucleus-bootstrap.md` -- 9-file checklist for N08+ nuclei
+- `.claude/rules/composable-crew.md` -- updated with swarm reference
+- `_docs/specs/spec_multi_runtime_features.md` -- 4-runtime compatibility matrix
+- `.github/workflows/claude_learn.yml` + `_tools/cex_claude_learn.py` -- `@.claude learn` PR-comment learning loop
+
 ## Constraints
 
 **NEVER**: skip frontmatter · publish below 8.0 · pass task as CLI arg · overwrite without git
