@@ -1,11 +1,15 @@
 ---
-title: Agent Name Service Record (ANSR)
-kind: knowledge
-type: specification
-status: draft
-created: 2023-10-15
-updated: 2023-10-15
-author: CEX Documentation Team
+id: p04_kc_agent_name_service_record
+kind: knowledge_card
+type: kind
+pillar: P04
+title: "Agent Name Service Record -- Deep Knowledge for agent_name_service_record"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Agent Name Service Record (ANSR)

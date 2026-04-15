@@ -1,8 +1,15 @@
 ---
-title: Data Residency
-kind: kc
-description: "Comprehensive guide to data residency principles, regulatory frameworks, and implementation strategies with real-world examples and compliance checklists"
-tags: ["data governance", "compliance", "cloud security", "regulatory compliance", "data protection"]
+id: p09_kc_data_residency
+kind: knowledge_card
+type: kind
+pillar: P09
+title: "Data Residency -- Deep Knowledge for data_residency"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Data Residency: Principles, Frameworks, and Implementation

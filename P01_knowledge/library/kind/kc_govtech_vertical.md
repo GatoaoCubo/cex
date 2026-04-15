@@ -1,9 +1,15 @@
 ---
-title: Government Tech Verticals
-date: 2023-11-15
-author: CEX Team
-tags: [government, technology, verticals, public sector, digital transformation]
-description: A comprehensive guide to government technology verticals, their standards, use cases, and future trends
+id: p01_kc_govtech_vertical
+kind: knowledge_card
+type: kind
+pillar: P01
+title: "Govtech Vertical -- Deep Knowledge for govtech_vertical"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Government Tech Verticals: A Comprehensive Guide

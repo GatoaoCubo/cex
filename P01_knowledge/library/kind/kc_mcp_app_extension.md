@@ -1,8 +1,15 @@
 ---
-title: MCP App Extension
-kind: technical
-priority: 2
-tags: [mcp, app-extension, integration, customization]
+id: p04_kc_mcp_app_extension
+kind: knowledge_card
+type: kind
+pillar: P04
+title: "MCP App Extension -- Deep Knowledge for mcp_app_extension"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # MCP App Extension Guide

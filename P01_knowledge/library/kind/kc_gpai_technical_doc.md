@@ -1,10 +1,15 @@
 ---
-title: General Purpose AI (GPAI) Technical Documentation
-author: CEX Team
-date: 2023-10-15
-version: 1.2
-category: Technical
-tags: [AI, GPAI, LLM, NLP, Machine Learning, Ethics, Compliance]
+id: p11_kc_gpai_technical_doc
+kind: knowledge_card
+type: kind
+pillar: P11
+title: "GPAI Technical Doc -- Deep Knowledge for gpai_technical_doc"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # General Purpose AI (GPAI) Technical Documentation

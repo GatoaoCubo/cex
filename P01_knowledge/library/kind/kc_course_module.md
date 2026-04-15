@@ -1,8 +1,15 @@
 ---
-title: Course Module Specification
-description: Comprehensive guidelines for creating structured, effective course modules with detailed structure, examples, and best practices
-kind: knowledge
-tags: education, curriculum, instructional design, e-learning
+id: p05_kc_course_module
+kind: knowledge_card
+type: kind
+pillar: P05
+title: "Course Module -- Deep Knowledge for course_module"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Course Module Specification

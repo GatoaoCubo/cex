@@ -1,9 +1,15 @@
 ---
-title: Case Study: Implementing Knowledge Curation in a Multi-Team Project
-author: CEX Team
-date: 2023-11-15
-tags: knowledge-management, curation, collaboration
-version: 1.2
+id: p05_kc_case_study
+kind: knowledge_card
+type: kind
+pillar: P05
+title: "Case Study -- Deep Knowledge for case_study"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Case Study: Implementing Knowledge Curation in a Multi-Team Project

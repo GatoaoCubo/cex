@@ -1,10 +1,15 @@
 ---
-title: Memory Benchmarking Framework
-date: 2023-11-15
-author: CEX Team
-version: 1.2
-category: knowledge
-tags: memory, benchmarking, performance, storage, optimization
+id: p07_kc_memory_benchmark
+kind: knowledge_card
+type: kind
+pillar: P07
+title: "Memory Benchmark -- Deep Knowledge for memory_benchmark"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Memory Benchmarking Framework

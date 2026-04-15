@@ -1,12 +1,15 @@
 ---
-title: Capability Registry for P01 Knowledge Kind
-kind: knowledge
-description: >-
-  This document defines the core capabilities available for the P01 knowledge
-  kind, including their relationships, implementation patterns, and usage
-  scenarios. It provides a structured framework for organizing, discovering,
-  synthesizing, and validating knowledge across domains.
-schema_version: 1.1.0
+id: p08_kc_capability_registry
+kind: knowledge_card
+type: kind
+pillar: P08
+title: "Capability Registry -- Deep Knowledge for capability_registry"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # P01 Knowledge Kind Capability Registry

@@ -1,9 +1,15 @@
 ---
-title: Dataset Card (KC-01)
-date: 2023-11-15
-author: CEX Team
-status: draft
-version: 1.2
+id: p01_kc_dataset_card
+kind: knowledge_card
+type: kind
+pillar: P01
+title: "Dataset Card -- Deep Knowledge for dataset_card"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Dataset Card (KC-01)

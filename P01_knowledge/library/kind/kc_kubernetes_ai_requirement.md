@@ -1,9 +1,15 @@
 ---
-id: kc_kubernetes_ai_requirement
+id: p09_kc_kubernetes_ai_requirement
 kind: knowledge_card
-title: Kubernetes AI Requirements
-description: A comprehensive guide to integrating AI with Kubernetes for modern cloud-native applications
-keywords: Kubernetes, AI, machine learning, container orchestration, cloud-native
+type: kind
+pillar: P09
+title: "Kubernetes AI Requirement -- Deep Knowledge for kubernetes_ai_requirement"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Kubernetes AI Requirements

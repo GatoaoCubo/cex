@@ -1,8 +1,15 @@
 ---
-title: Prosody Configuration Guide
-date: 2023-10-15
-tags: [prosody, configuration, speech, synthesis, TTS]
-status: draft
+id: p09_kc_prosody_config
+kind: knowledge_card
+type: kind
+pillar: P09
+title: "Prosody Config -- Deep Knowledge for prosody_config"
+version: 1.0.0
+created: 2026-04-15
+updated: 2026-04-15
+author: n05_selfheal
+quality: null
+tags: []
 ---
 
 # Prosody Configuration Guide
