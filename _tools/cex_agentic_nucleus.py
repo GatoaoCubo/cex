@@ -186,7 +186,8 @@ def agentic_loop(model: str, system: str, task: str, max_iters: int = 15,
         messages.append({"role": "user", "content": task})
     trace = []
     t0 = time.time()
-    nudged = False
+    nudges_used = 0
+    MAX_NUDGES = 2
     for i in range(max_iters):
         if verbose:
             print(f"[iter {i+1}/{max_iters}]", flush=True)
@@ -202,16 +203,19 @@ def agentic_loop(model: str, system: str, task: str, max_iters: int = 15,
                     print(f"  [fallback parse] {tool_calls[0]['function']['name']}", flush=True)
 
         if not tool_calls:
-            # Stop guard: nudge once if iters too low AND done not called AND content thin
-            if not nudged and (i + 1) < min_iters and len(content) < 2000:
-                nudged = True
+            # Stop guard: nudge up to MAX_NUDGES times if shallow (iters too low OR content thin)
+            shallow = (i + 1) < min_iters or len(content) < 1500
+            if nudges_used < MAX_NUDGES and shallow:
+                nudges_used += 1
                 if verbose:
-                    print(f"  [GUARD] only {i+1} iters, content={len(content)}B. Nudging to continue.", flush=True)
+                    print(f"  [GUARD {nudges_used}/{MAX_NUDGES}] iters={i+1} content={len(content)}B. Nudging.", flush=True)
                 messages.append({"role": "assistant", "content": content})
                 messages.append({"role": "user", "content":
-                    f"You stopped after only {i+1} tool uses with a brief {len(content)}-byte answer. "
-                    "The handoff requires deeper analysis. Use list_dir/read_file/grep to gather more "
-                    "evidence, then call done(report=<full markdown with all required sections>)."})
+                    f"You stopped after {i+1} tool uses with only {len(content)} bytes of output. "
+                    "That is not enough. The handoff requires a complete report with ALL required "
+                    "sections (Verification, New Wired Tools, Still Missing, Next Iteration). "
+                    "Use list_dir/read_file/grep to gather more evidence. When ready, call "
+                    "done(report=<full markdown>) to submit."})
                 continue
             trace.append({"iter": i + 1, "type": "text_only", "content": content[:300]})
             if verbose:

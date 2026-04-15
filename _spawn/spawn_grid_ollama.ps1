@@ -57,7 +57,7 @@ $positions = @{
 }
 
 $handoffDir = Join-Path $RepoRoot ".cex\runtime\handoffs"
-$outputDir  = Join-Path $RepoRoot ".cex\runtime\out"
+$outputDir  = Join-Path $RepoRoot "_reports\$($Mission.ToLower())"
 $pidFile    = Join-Path $RepoRoot ".cex\runtime\pids\grid_ollama_$Mission.txt"
 $pidDir     = Split-Path $pidFile -Parent
 if (-not (Test-Path $pidDir)) { New-Item -ItemType Directory -Path $pidDir | Out-Null }
