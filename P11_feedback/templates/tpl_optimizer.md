@@ -7,7 +7,8 @@ id: p11_opt_{{TARGET_SLUG}}
 kind: optimizer
 pillar: P11
 title: "Optimizer: {{TARGET_NAME}}"
-quality: {{QUALITY_8_TO_10}}
+version: 1.0.0
+quality: null
 ---
 
 # Optimizer: {{TARGET_NAME}}

@@ -18,7 +18,7 @@ long_tails:
   - formula de scoring para knowledge cards AI
 axioms:
   - Nenhum artefato entra no pool sem passar pelo gate
-  - Score < 7.0 = rejeicao automatica sem excecao
+  - Score < 8.0 = rejeicao automatica sem excecao
 density_score: 0.90
 ---
 
@@ -41,7 +41,7 @@ Pre-commit gate para novos artefatos CEX — rejeita antes de entrar no pool.
 3. **Auto-check**: `validate_examples.py` size check
 
 ### C3: Density Threshold
-1. [ ] Content density >= `density_min` from schema (or 0.7 baseline)
+1. [ ] Content density >= `density_min` from schema (or 0.85 target)
 2. [ ] No empty sections, no placeholder text (Configurable, PENDING, ...)
 3. [ ] Each bullet carries actionable data (Specificity Test)
 4. **Auto-check**: `validate_examples.py` density estimation
@@ -70,9 +70,9 @@ Immediate rejection if ANY of these:
 
 | Score | Tier | Decision | Action |
 |-------|------|----------|--------|
-| < 7.0 | Rejected | REJECT | Do not merge. Author must fix and resubmit |
-| 7.0-7.9 | Learning | REVIEW | Merge with improvement notes. Flag for revisit |
-| 8.0-9.4 | Skilled | ACCEPT | Merge. Eligible for pool and learning memory |
+| < 8.0 | Rejected | REJECT | Do not merge. Author must fix and resubmit |
+| 8.0-8.9 | Skilled | ACCEPT | Merge. Eligible for pool and learning memory |
+| 9.0-9.4 | Quality | ACCEPT | Merge. Meets CEX quality target. |
 | >= 9.5 | Golden | ACCEPT+PROMOTE | Merge + copy to `archetypes/golden/` + celebrate |
 
 ## Scoring Guide
@@ -92,11 +92,13 @@ Each dimension scored 0-10. Final score = weighted sum.
 ## Integration
 
 ```bash
-# Pre-commit (run all 3 validators)
+# Pre-commit (run doctor + score)
 cd /path/to/cex
-python _tools/validate_schema.py && \
-python _tools/validate_generators.py && \
-python _tools/validate_examples.py
+python _tools/cex_doctor.py && \
+python _tools/cex_score.py --apply <artifact.md>
+
+# Compile after save
+python _tools/cex_compile.py <artifact.md>
 
 # Exit code 0 = all pass, 1 = failures found
 ```

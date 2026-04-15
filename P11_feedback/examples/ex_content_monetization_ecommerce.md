@@ -1,6 +1,6 @@
 ---
 id: p04_ex_content_monetization_ecommerce
-kind: function_def
+kind: content_monetization
 pillar: P11
 version: 1.0.0
 created: 2026-03-31

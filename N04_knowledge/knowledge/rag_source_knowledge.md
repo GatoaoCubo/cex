@@ -5,11 +5,11 @@ kind: rag_source
 pillar: P01_knowledge
 version: "2.0.0"
 created: "2024-03-30"
-updated: "2024-03-30"
+updated: "2026-04-15"
 author: "N04 Knowledge Nucleus"
 url: "file://./"
 domain: "CEX Internals"
-last_checked: "2024-03-30"
+last_checked: "2026-04-15"
 quality: 9.0
 tags: [rag-source, n04, knowledge, codebase, markdown, p01]
 tldr: "The CEX project's own codebase, specifically all Markdown files, serving as the primary source of internal knowledge."

@@ -12,7 +12,7 @@ version: 1.0.0
 created: {{ISO_DATE}}
 updated: {{ISO_DATE}}
 author: {{AGENT_GROUP_NAME}}
-quality: {{QUALITY_8_TO_10}}
+quality: null
 tags: [{{TAG1}}, {{TAG2}}, bugloop, feedback]
 tldr: "{{ONE_SENTENCE_WHAT_THIS_LOOP_FIXES}}"
 density_score: {{0.80_TO_1.00}}
