@@ -322,6 +322,23 @@ def test_e2e(quick: bool = True):
     test("e2e:report_written", results_file.exists())
 
 
+def test_boot_templates():
+    """Smoke test: every boot/n0*.ps1 must contain vt_enable (prevents TUI regression)."""
+    print("\n=== BOOT TEMPLATES ===")
+    boot_dir = CEX_ROOT / "boot"
+    ps1s = sorted(boot_dir.glob("n0*.ps1"))
+    missing = [p.name for p in ps1s if "vt_enable" not in p.read_text(encoding="utf-8", errors="ignore")]
+    test("boot:vt_enable", not missing, f"{len(ps1s)} scanned, missing: {missing or 'none'}")
+
+    # Signal writer regression: must accept w\d+ and emit mission+wave filename
+    try:
+        from _tools.signal_writer import write_signal, MISSION_PHASE_RE
+        test("signal:mission_phase_regex", bool(MISSION_PHASE_RE.match("w1")), "w1 accepted")
+        test("signal:mission_phase_reject_nXX", not MISSION_PHASE_RE.match("n99"), "n99 not a phase")
+    except Exception as e:
+        test("signal:mission_phase_regex", False, str(e)[:60])
+
+
 def test_git():
     """Test git state."""
     print("\n=== GIT ===")
@@ -363,6 +380,7 @@ def main():
     test_runner_execute(quick=args.quick)
     test_e2e(quick=args.quick)
     test_kc_library()
+    test_boot_templates()
     test_git()
 
     elapsed = time.time() - t0
