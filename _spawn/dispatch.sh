@@ -123,6 +123,20 @@ case "$MODE" in
         export OLLAMA_MODEL="$MODEL"
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus "$NUCLEUS" -task "$TASK" -cli ollama -interactive
         ;;
+    solo-codex)
+        # Interactive single window, boot/n0X_codex.ps1 -> codex CLI
+        NUCLEUS="${1:-n03}"
+        TASK="${2:-}"
+        echo "[DISPATCH] Solo-Codex: $NUCLEUS (interactive)"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus "$NUCLEUS" -task "$TASK" -cli codex -interactive
+        ;;
+    solo-gemini)
+        # Interactive single window, boot/n0X_gemini.ps1 -> gemini CLI
+        NUCLEUS="${1:-n03}"
+        TASK="${2:-}"
+        echo "[DISPATCH] Solo-Gemini: $NUCLEUS (interactive)"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus "$NUCLEUS" -task "$TASK" -cli gemini -interactive
+        ;;
     grid-litellm)
         # Interactive 3x2 tiled, each window runs boot/n0X_litellm.ps1 -> litellm proxy
         # Proxy must be running: powershell -File boot/litellm_proxy.ps1
@@ -205,7 +219,7 @@ case "$MODE" in
         echo "[DONE] Ollama Grid complete: $MISSION"
         ;;
     *)
-        echo "Usage: bash _spawn/dispatch.sh {solo|grid|grid-gemini|grid-codex|grid-ollama|solo-ollama|grid-litellm|solo-litellm|ollama|ollama-grid|status|stop} [args]"
+        echo "Usage: bash _spawn/dispatch.sh {solo|grid|grid-gemini|grid-codex|grid-ollama|solo-ollama|solo-codex|solo-gemini|grid-litellm|solo-litellm|ollama|ollama-grid|status|stop} [args]"
         echo ""
         echo "  solo n03 \"task\"           Spawn 1 Claude Code nucleus (interactive)"
         echo "  grid MISSION              Spawn up to 6 Claude Code nuclei (interactive 3x2)"
