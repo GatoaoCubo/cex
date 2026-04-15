@@ -8,8 +8,10 @@
 
 # --- UX: Window title with mission + sin + status ---
 # Auto-detect root from script location (worktree-agnostic)
+. $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n04"
+. $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
 $sinName = "Knowledge Gluttony"
 $modelShort = "claude-sonnet-4-6" -replace "claude-", ""
 
