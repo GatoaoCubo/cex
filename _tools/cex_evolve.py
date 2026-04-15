@@ -37,6 +37,7 @@ Usage:
   python _tools/cex_evolve.py report
 """
 
+import argparse
 import sys
 import os
 import re
@@ -915,19 +916,54 @@ def _parse_cli_args(argv: list, start: int = 3) -> dict:
 
 
 def main():
-    if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help"):
+    known_modes = {"agent", "auto", "single", "sweep", "report"}
+    if len(sys.argv) > 1 and not sys.argv[1].startswith("-") and sys.argv[1] not in known_modes:
+        mode = sys.argv[1]
+        print(f"Unknown mode: {mode}. Use: agent, auto, single, sweep, report")
+        print(f"\n  agent  = TRUE AutoResearch via SDK (budget-tracked)")
+        print(f"  auto   = Hybrid: heuristic (free) + agent if score < threshold")
+        print(f"  single = Heuristic only (Python, no LLM)")
+        print(f"  sweep  = Heuristic batch (all quality:null)")
+        print(f"  report = Experiment history")
+        return
+
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    subparsers = parser.add_subparsers(dest="mode")
+
+    agent_parser = subparsers.add_parser("agent", help="Run SDK-backed AutoResearch.")
+    agent_parser.add_argument("file", nargs="?", help="Target file.")
+    agent_parser.add_argument("rest", nargs=argparse.REMAINDER)
+
+    auto_parser = subparsers.add_parser("auto", help="Run heuristic mode, then agent mode if needed.")
+    auto_parser.add_argument("file", nargs="?", help="Target file.")
+    auto_parser.add_argument("rest", nargs=argparse.REMAINDER)
+
+    single_parser = subparsers.add_parser("single", help="Run heuristic evolution on one file.")
+    single_parser.add_argument("file", nargs="?", help="Target file.")
+    single_parser.add_argument("rest", nargs=argparse.REMAINDER)
+
+    sweep_parser = subparsers.add_parser("sweep", help="Run heuristic evolution on all quality:null files.")
+    sweep_parser.add_argument("rest", nargs=argparse.REMAINDER)
+
+    subparsers.add_parser("report", help="Show experiment history.")
+
+    parsed, _ = parser.parse_known_args()
+    if not parsed.mode:
         print(__doc__)
         return
 
-    mode = sys.argv[1]
+    mode = parsed.mode
 
     if mode == "agent":
         # TRUE AutoResearch via SDK -- Python controls, LLM thinks
-        if len(sys.argv) < 3:
+        if not parsed.file:
             print("Usage: cex_evolve.py agent <file> [--budget N] [--target N] [--max-rounds N]")
             return
-        filepath = Path(sys.argv[2])
-        args = _parse_cli_args(sys.argv)
+        filepath = Path(parsed.file)
+        args = _parse_cli_args([sys.argv[0], mode, parsed.file] + parsed.rest)
         evolve_agent(
             filepath,
             budget_tokens=int(args.get("budget", 50000)),
@@ -937,11 +973,11 @@ def main():
 
     elif mode == "auto":
         # Hybrid post-hook: heuristic + agent if needed
-        if len(sys.argv) < 3:
+        if not parsed.file:
             print("Usage: cex_evolve.py auto <file> [--threshold N] [--budget N] [--target N]")
             return
-        filepath = Path(sys.argv[2])
-        args = _parse_cli_args(sys.argv)
+        filepath = Path(parsed.file)
+        args = _parse_cli_args([sys.argv[0], mode, parsed.file] + parsed.rest)
         result = evolve_auto(
             filepath,
             threshold=float(args.get("threshold", 8.5)),
@@ -953,11 +989,11 @@ def main():
 
     elif mode == "single":
         # Heuristic fallback -- no LLM
-        if len(sys.argv) < 3:
+        if not parsed.file:
             print("Usage: cex_evolve.py single <file> [--target N] [--max-rounds N]")
             return
-        filepath = Path(sys.argv[2])
-        args = _parse_cli_args(sys.argv)
+        filepath = Path(parsed.file)
+        args = _parse_cli_args([sys.argv[0], mode, parsed.file] + parsed.rest)
         evolve_single(
             filepath,
             target=float(args.get("target", 9.0)),
@@ -966,7 +1002,7 @@ def main():
 
     elif mode == "sweep":
         # Heuristic batch -- no LLM
-        args = _parse_cli_args(sys.argv, start=2)
+        args = _parse_cli_args([sys.argv[0], mode] + parsed.rest, start=2)
         evolve_sweep(
             target=float(args.get("target", 8.5)),
             max_rounds=int(args.get("max_rounds", 3)),
