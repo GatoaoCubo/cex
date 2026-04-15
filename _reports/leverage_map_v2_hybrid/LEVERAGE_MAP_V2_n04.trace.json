@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "final": "The RAG tools mapped using grep are:\n\n* retriever\n* retriever_config\n* bm25\n\nNext, I will analyze the reranker quality.",
+  "final": "The RAG tools are mapped as follows:\n\n* `cex_preflight.py` uses Haiku semantic rerank for Phase 2 (CLOUD, cheap)\n* `cex_reranker.py` uses BM25 with title match for lexical reranking\n* Other tools mention \"reranker_config\" or use terms like \"retrieval\", \"ranking\", and \"BM25\"\n\nNext, I will analyze the reranker quality.",
   "iters": 6,
-  "wall": 22.1,
+  "wall": 22.5,
   "trace": [
     {
       "iter": 1,
@@ -26,16 +26,16 @@
       "iter": 5,
       "tool": "grep",
       "args": {
-        "pattern": "reranker|retriever|bm25",
+        "pattern": "cex_reranker|rerank|bm25",
         "path": "_tools"
       },
-      "result_bytes": 3445,
+      "result_bytes": 2730,
       "reads_so_far": 2
     },
     {
       "iter": 6,
       "type": "text_only",
-      "content": "The RAG tools mapped using grep are:\n\n* retriever\n* retriever_config\n* bm25\n\nNext, I will analyze the reranker quality."
+      "content": "The RAG tools are mapped as follows:\n\n* `cex_preflight.py` uses Haiku semantic rerank for Phase 2 (CLOUD, cheap)\n* `cex_reranker.py` uses BM25 with title match for lexical reranking\n* Other tools mention \"reranker_config\" or use terms like \"retrieval\", \"ranking\", and \"BM25\"\n\nNext, I will analyze the"
     }
   ],
   "reason": "no_tool_call",
@@ -50,7 +50,7 @@
     },
     {
       "role": "assistant",
-      "content": "Here is the JSON function call with its proper arguments that best answers the given prompt:\n\n```\n{\"name\": \"list_dir\", \"parameters\": {\"path\": \"_tools\"}}\n```\n\nThis function call will confirm if `cex_reranker.py` is present in the `_tools` directory.",
+      "content": "Here is the JSON function call with its proper arguments that best answers the given prompt:\n\n{\"name\": \"list_dir\", \"parameters\": {\"path\": \"_tools\"}} \n\nThis will confirm if `cex_reranker.py` is present in the `_tools` directory.",
       "tool_calls": [
         {
           "function": {
@@ -68,18 +68,18 @@
     },
     {
       "role": "assistant",
-      "content": "The `cex_reranker.py` file is present in the `_tools` directory.\n\nNext, I will call the tool to read the contents of the `cex_reranker.py` file."
+      "content": "The tool `cex_reranker.py` is present in the `_tools` directory.\n\nNext, I will call the `read_file` tool to understand the BM25 implementation."
     },
     {
       "role": "user",
-      "content": "You stopped after 2 tool uses with only 144 bytes of output. That is not enough. The handoff requires a complete report with ALL required sections (Verification, New Wired Tools, Still Missing, Next Iteration). Use list_dir/read_file/grep to gather more evidence. When ready, call done(report=<full markdown>) to submit."
+      "content": "You stopped after 2 tool uses with only 143 bytes of output. That is not enough. The handoff requires a complete report with ALL required sections (Verification, New Wired Tools, Still Missing, Next Iteration). Use list_dir/read_file/grep to gather more evidence. When ready, call done(report=<full markdown>) to submit."
     },
     {
       "role": "assistant",
       "content": "",
       "tool_calls": [
         {
-          "id": "call_z1o2937o",
+          "id": "call_5fn1k3a5",
           "function": {
             "index": 0,
             "name": "read_file",
@@ -96,23 +96,23 @@
     },
     {
       "role": "assistant",
-      "content": "The `cex_reranker.py` file is a Python script that implements BM25 reranking over candidate documents with title boost.\n\nNext, I will call the tool to map RAG tools using grep."
+      "content": "The `cex_reranker.py` tool uses BM25 with title match for reranking candidate documents.\n\nNext, I will call the `grep` tool to map RAG tools."
     },
     {
       "role": "user",
-      "content": "You stopped after 4 tool uses with only 176 bytes of output. That is not enough. The handoff requires a complete report with ALL required sections (Verification, New Wired Tools, Still Missing, Next Iteration). Use list_dir/read_file/grep to gather more evidence. When ready, call done(report=<full markdown>) to submit."
+      "content": "You stopped after 4 tool uses with only 141 bytes of output. That is not enough. The handoff requires a complete report with ALL required sections (Verification, New Wired Tools, Still Missing, Next Iteration). Use list_dir/read_file/grep to gather more evidence. When ready, call done(report=<full markdown>) to submit."
     },
     {
       "role": "assistant",
       "content": "",
       "tool_calls": [
         {
-          "id": "call_khq0lc6g",
+          "id": "call_p6aovbd1",
           "function": {
             "index": 0,
             "name": "grep",
             "arguments": {
-              "pattern": "reranker|retriever|bm25",
+              "pattern": "cex_reranker|rerank|bm25",
               "path": "_tools"
             }
           }
@@ -121,7 +121,7 @@
     },
     {
       "role": "tool",
-      "content": "_tools/cex_8f_motor.py:398:     \"retriever\": [(\"retriever\", \"P04\", \"INJECT\")],\n_tools/cex_8f_motor.py:399:     \"retriever_config\": [(\"retriever_config\", \"P01\", \"CONSTRAIN\")],\n_tools/cex_8f_motor.py:400:     \"retriever_tool\": [(\"retriever\", \"P04\", \"CALL\")],\n_tools/cex_8f_runner.py:69:     from cex_retriever import (\n_tools/cex_8f_runner.py:73:     from cex_retriever import (\n_tools/cex_8f_runner.py:74:         load_index as load_retriever_index,\n_tools/cex_8f_runner.py:76:     _RETRIEVER_AVAILABLE = True\n_tools/cex_8f_runner.py:78:     _RETRIEVER_AVAILABLE = False\n_tools/cex_8f_runner.py:482:           9. Semantic retrieval (TF-IDF via cex_retriever)\n_tools/cex_8f_runner.py:560:         if _RETRIEVER_AVAILABLE:\n_tools/cex_8f_runner.py:562:                 idx = load_retriever_index()\n_tools/cex_8f_runner.py:578:                         self._log(\"F3\", f\"retriever: {len(similar)} semantic matches\")\n_tools/cex_8f_runner.py:580:                 self._log(\"F3\", f\"retriever unavailable: {e}\")\n_tools/cex_8f_runner.py:875:         # 3a. Retriever: find similar artifacts by TF-IDF\n_tools/cex_8f_runner.py:876:         if _RETRIEVER_AVAILABLE:\n_tools/cex_8f_runner.py:878:                 idx = load_retriever_index()\n_tools/cex_8f_runner.py:882:                         tool_results[\"tool_outputs\"][\"retriever\"] = results\n_tools/cex_8f_runner.py:884:                         self._log(\"F5\", f\"retriever: {len(results)} similar artifacts found\")\n_tools/cex_8f_runner.py:886:                 self._log(\"F5\", f\"retriever failed: {e} (non-blocking)\")\n_tools/cex_8f_runner.py:944:                 if tool_name == \"retriever\" and isinstance(output, list):\n_tools/cex_8f_runner.py:1584:         k_parts.append(\"retriever\")\n_tools/cex_8f_runner.py:1623:     \"rag_source\": \"knowledge\", \"chunk_strategy\": \"knowledge\", \"retriever_config\": \"knowledge\",\n_tools/cex_crew_runner.py:380:     2. semantic search: TF-IDF similarity via cex_retriever (local index)\n_tools/cex_crew_runner.py:382:     Falls back gracefully if retriever index not built.\n_tools/cex_crew_runner.py:415:         from cex_retriever import load_index as load_retriever_index\n_tools/cex_crew_runner.py:416:         from cex_retriever import find_similar\n_tools/cex_crew_runner.py:417:         idx = load_retriever_index()\n_tools/cex_doctor.py:333:     \"retriever\",\n_tools/cex_doctor.py:334:     \"retriever_config\",\n_tools/cex_flywheel_worker.py:33:     \"N04\": [\"chunk_strategy\", \"retriever_config\", \"embedding_config\", \"rag_source\", \"scoring_rubric\"],\n_tools/cex_ft_dataset.py:60:     \"rag_source\": \"N04\", \"retriever\": \"N04\", \"retriever_config\": \"N04\",\n_tools/cex_intent_resolver.py:148:     \"retriever config\": (\"retriever_config\", \"P01\", \"N04\"),\n_tools/cex_intent_resolver.py:215:     \"retriever\": (\"retriever\", \"P04\", \"N04\"),\n_tools/cex_memory_select.py:110: # Reuse retriever's tokenizer and TF-IDF engine\n_tools/cex_memory_select.py:112:     from cex_retriever import tokenize as _tfidf_tokenize, build_tfidf, cosine_similarity as cosine_sim\n_tools/cex_nucleus_builder.py:78:     \"retriever_config\": \"knowledge\",\n_tools/cex_reranker.py:2: \"\"\"cex_reranker.py: Rerank candidate docs by BM25 + title match.\n_tools/cex_reranker.py:4: For N04 leverage: improve retriever results with lexical reranking.\n_tools/cex_reranker.py:5: Minimal BM25 without external deps.\n_tools/cex_reranker.py:8:     python _tools/cex_reranker.py \"query string\" path1.md path2.md ...\n... [capped at 40]"
+      "content": "_tools/cex_preflight.py:11:   Phase 2 (CLOUD, cheap): Haiku semantic rerank (only if local uncertain)\n_tools/cex_preflight.py:362: # Phase 2: CLOUD (Haiku semantic rerank -- only when confidence < 0.7)\n_tools/cex_preflight.py:401:     \"\"\"Call Claude Haiku for semantic reranking. Returns response text or None.\"\"\"\n_tools/cex_preflight.py:423:     \"\"\"Phase 2: Semantic rerank via Haiku (only if local confidence < 0.7).\"\"\"\n_tools/cex_preflight.py:436:     # Build reranking prompt\n_tools/cex_preflight.py:437:     rerank_prompt = (\n_tools/cex_preflight.py:449:         response = call_ollama(rerank_prompt, config)\n_tools/cex_preflight.py:452:         response = call_haiku(rerank_prompt, config)\n_tools/cex_preflight.py:459:     # Parse reranked scores\n_tools/cex_preflight.py:475:             local_result[\"confidence\"] = 0.85  # Cloud rerank boosts confidence\n_tools/cex_preflight.py:641:     # Phase 2: Cloud rerank (only if needed and not dry-run)\n_tools/cex_reranker.py:2: \"\"\"cex_reranker.py: Rerank candidate docs by BM25 + title match.\n_tools/cex_reranker.py:4: For N04 leverage: improve retriever results with lexical reranking.\n_tools/cex_reranker.py:5: Minimal BM25 without external deps.\n_tools/cex_reranker.py:8:     python _tools/cex_reranker.py \"query string\" path1.md path2.md ...\n_tools/cex_reranker.py:9:     python _tools/cex_reranker.py --query \"RAG chunking\" --top-k 5\n_tools/cex_reranker.py:28: def bm25_score(query_tokens: list[str], doc_tokens: list[str], avg_len: float,\n_tools/cex_reranker.py:48: def rerank(query: str, doc_paths: list[Path], top_k: int = 10) -> list[tuple[float, Path]]:\n_tools/cex_reranker.py:68:         s = bm25_score(q_toks, toks, avg_len, doc_freqs, len(docs))\n_tools/cex_reranker.py:97:     results = rerank(args.query, doc_paths, args.top_k)\n_tools/cex_wave_validator.py:240:     \"reranker_config\":     [\"reranker\", \"rank\", \"score\"],\n_tools/wave0_inject.py:178:     \"reranker_config\": {\n_tools/wave0_inject.py:180:         \"core\": False, \"description\": \"Retrieval reranking model and strategy config\",\n_tools/wave0_inject.py:181:         \"boundary\": \"Reranker config. NOT retriever_config (first-stage retrieval) nor retriever (retrieval logic).\"\n_tools/wave1_builder_gen.py:45:     \"reranker_config\", \"graph_rag_config\", \"agentic_rag\",\n_tools/wave1_builder_gen_v2.py:59:     \"reranker_config\", \"graph_rag_config\", \"agentic_rag\",\n_tools/wave1_builder_gen_v2.py:143:     \"search_strategy\":          r\"search|retrieval|query|index|ranking|BM25|vector|recall\",\n_tools/wave1_builder_gen_v2.py:177:     \"reranker_config\":          r\"rerank|cross.encoder|score|retrieval|relevance|biencoder|ColBERT\",\n_tools/wave_pipeline.py:46:     \"reranker_config\", \"graph_rag_config\", \"agentic_rag\","
     }
   ]
 }

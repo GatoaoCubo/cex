@@ -1,0 +1,31 @@
+runtime: claude-haiku
+tier: paid-low
+provider: anthropic
+cli: claude
+models:
+  n01: claude-haiku-4-5-20251001
+  n02: claude-haiku-4-5-20251001
+  n03: claude-haiku-4-5-20251001
+  n04: claude-haiku-4-5-20251001
+  n05: claude-haiku-4-5-20251001
+  n06: claude-haiku-4-5-20251001
+  n07: claude-haiku-4-5-20251001
+context_window: 200000
+capabilities:
+  native_tool_calls: true
+  sub_agents: true
+  task_tracking: true
+  large_context: false
+agentic_profile:
+  max_iters: 50
+  min_iters: 3
+  require_reads_before_done: 2
+  nudge_on_shallow: false
+boot_script: boot/cex.ps1
+spawn_script: _spawn/spawn_grid.ps1
+cost_per_mtok_in: 1
+cost_per_mtok_out: 5
+notes: |
+  Paid-low tier. Haiku 4.5 across all nuclei. Cheap + fast baseline
+  for testing grid-test matrix against free tier (ollama-llama).
+  Auth via existing Claude Code session (no separate OAuth needed).

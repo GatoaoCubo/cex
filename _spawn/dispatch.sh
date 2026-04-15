@@ -48,6 +48,12 @@ case "$MODE" in
         echo "[DISPATCH] Grid: $MISSION (cli=claude)"
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -cli claude -interactive
         ;;
+    grid-haiku)
+        MISSION="${1:-DEFAULT}"
+        MODEL="${2:-claude-haiku-4-5-20251001}"
+        echo "[DISPATCH] Grid: $MISSION (cli=claude, model=$MODEL)"
+        powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_grid.ps1 -mission "$MISSION" -cli claude -interactive -Model "$MODEL"
+        ;;
     grid-gemini)
         MISSION="${1:-DEFAULT}"
         echo "[DISPATCH] Grid: $MISSION (cli=gemini)"

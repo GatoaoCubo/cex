@@ -12,8 +12,16 @@ param(
     [int]$maxMinutes = 45,
     [int]$maxSlots = 6,
     [ValidateSet('claude','gemini','codex','ollama','litellm','auto')]
-    [string]$cli = "claude"
+    [string]$cli = "claude",
+    [string]$Model = ""
 )
+
+# -Model overrides hardcoded model in boot/n0X.ps1 via CEX_CLAUDE_MODEL env.
+# Used by grid-haiku to run Haiku instead of default Sonnet/Opus mix.
+if ($Model) {
+    $env:CEX_CLAUDE_MODEL = $Model
+    Write-Output "[GRID] Model override active: CEX_CLAUDE_MODEL=$Model"
+}
 
 # Multi-CLI config (3 routing levels):
 #   L1 explicit: -cli claude|gemini|codex -- operator override, global for this grid
@@ -244,7 +252,13 @@ function Launch-Nucleus($handoff) {
     $logDir = "$root\.cex\runtime\logs\spawn"
     if (-not (Test-Path $logDir)) { New-Item -ItemType Directory -Path $logDir -Force | Out-Null }
     $logFile = "$logDir\${nucleus}_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
-    $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -NoExit -File `"$bootScript`"" -WorkingDirectory $root -PassThru -RedirectStandardOutput $logFile -RedirectStandardError "${logFile}.err"
+    # Interactive mode => visible window (NO stdout redirect, Windows hides window when redirecting).
+    # Non-interactive (headless) => capture stdout/stderr for post-mortem; window hidden.
+    if ($interactive) {
+        $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -NoExit -File `"$bootScript`"" -WorkingDirectory $root -PassThru -WindowStyle Normal
+    } else {
+        $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -NoExit -File `"$bootScript`"" -WorkingDirectory $root -PassThru -RedirectStandardOutput $logFile -RedirectStandardError "${logFile}.err"
+    }
     # Retry loop: poll for window handle (up to 5s, 500ms intervals)
     if ($proc) {
         $hwnd = [IntPtr]::Zero

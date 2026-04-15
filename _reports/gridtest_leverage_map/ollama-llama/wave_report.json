@@ -3,45 +3,54 @@
   "mission": "LEVERAGE_MAP_V2",
   "expected": 6,
   "landed": 6,
-  "usable": 4,
+  "usable": 3,
+  "committed": 6,
+  "commits": {
+    "n06": "31e7a4f76",
+    "n05": "f897390f1",
+    "n03": "60186cfee",
+    "n01": "b6e1091ca",
+    "n02": "c3c89cc02",
+    "n04": "eba9d851f"
+  },
   "files": {
     "n01": {
-      "bytes": 517,
-      "usable": false,
-      "iters": 11,
-      "reads": null,
-      "done_called": null
-    },
-    "n02": {
-      "bytes": 187,
-      "usable": false,
+      "bytes": 809,
+      "usable": true,
       "iters": 6,
       "reads": null,
       "done_called": null
     },
-    "n03": {
-      "bytes": 973,
+    "n02": {
+      "bytes": 1882,
       "usable": true,
-      "iters": 12,
+      "iters": 7,
+      "reads": null,
+      "done_called": null
+    },
+    "n03": {
+      "bytes": 361,
+      "usable": false,
+      "iters": 15,
       "reads": null,
       "done_called": null
     },
     "n04": {
-      "bytes": 1422,
-      "usable": true,
+      "bytes": 125,
+      "usable": false,
       "iters": 6,
       "reads": null,
       "done_called": null
     },
     "n05": {
-      "bytes": 2451,
-      "usable": true,
-      "iters": 9,
+      "bytes": 730,
+      "usable": false,
+      "iters": 14,
       "reads": null,
       "done_called": null
     },
     "n06": {
-      "bytes": 1139,
+      "bytes": 6249,
       "usable": true,
       "iters": 7,
       "reads": null,
@@ -49,5 +58,6 @@
     }
   },
   "timed_out": false,
-  "elapsed_s": 54
+  "elapsed_s": 54,
+  "git_start_ref": "fa7ed790e"
 }

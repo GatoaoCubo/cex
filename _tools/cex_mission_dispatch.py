@@ -97,6 +97,14 @@ def dispatch_claude(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> in
     return _dispatch_via_bash("grid", mission_cfg["mission"], "claude")
 
 
+def dispatch_claude_haiku(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> int:
+    # Same claude path but forces Haiku model via spawn_grid -Model flag.
+    model = (runtime_cfg.get("models") or {}).get("n01") or "claude-haiku-4-5-20251001"
+    cmd = ["bash", "_spawn/dispatch.sh", "grid-haiku", mission_cfg["mission"], model]
+    print(f"[dispatch] claude-haiku: {' '.join(cmd)}")
+    return subprocess.call(cmd, cwd=ROOT)
+
+
 def dispatch_gemini(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> int:
     return _dispatch_via_bash("grid-gemini", mission_cfg["mission"], "gemini")
 
@@ -110,6 +118,7 @@ DISPATCHERS = {
     "ollama-qwen-coder": dispatch_ollama,
     "ollama-hybrid": dispatch_ollama,
     "claude": dispatch_claude,
+    "claude-haiku": dispatch_claude_haiku,
     "gemini": dispatch_gemini,
     "codex": dispatch_codex,
 }
