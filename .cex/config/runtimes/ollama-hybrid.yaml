@@ -1,0 +1,49 @@
+runtime: ollama-hybrid
+tier: free
+provider: ollama
+cli: none
+models:
+  default: llama3.1:8b
+  n01: qwen2.5-coder:7b
+  n02: qwen2.5-coder:7b
+  n03: qwen2.5-coder:7b
+  n04: qwen2.5-coder:7b
+  n05: llama3.1:8b
+  n06: llama3.1:8b
+  n07: llama3.1:8b
+context_window: 32000
+effective_context: 8192
+capabilities:
+  native_tool_calls: partial
+  done_native: true
+  sub_agents: false
+  task_tracking: false
+  large_context: false
+agentic_profile:
+  max_iters: 15
+  min_iters: 4
+  require_reads_before_done: 3
+  nudge_on_shallow: true
+  max_nudges: 2
+  anti_fabrication: true
+  reject_done_without_reads: true
+  temperature: 0.3
+  num_predict: 1500
+boot_script: boot/n0x_ollama.ps1
+spawn_script: _spawn/spawn_grid_ollama.ps1
+runner: _tools/cex_agentic_nucleus.py
+cost_per_mtok_in: 0
+cost_per_mtok_out: 0
+routing_pattern: |
+  Derived from 2026-04-15 grid-test on LEVERAGE_MAP_V2:
+    n01 intel     -> qwen2.5-coder:7b  (6.4x better at research, 3313B vs 517B)
+    n02 marketing -> qwen2.5-coder:7b  (9.5x better at copy, 1790B vs 187B)
+    n03 builder   -> qwen2.5-coder:7b  (builder-tuned, 1393B vs 973B)
+    n04 knowledge -> qwen2.5-coder:7b  (tie, but qwen reads more)
+    n05 ops       -> llama3.1:8b       (6.8x better, 2451B vs 360B)
+    n06 commercial-> llama3.1:8b       (126x better, 1139B vs 9B -- qwen collapses)
+    n07 orch      -> llama3.1:8b       (planning > coding)
+notes: |
+  Benchmark-optimal free-tier routing. Best of both worlds for zero cost.
+  Requires anti-fabrication guard (min 3 reads before done() is accepted).
+  See project_local_model_benchmark_20260415.md for scoring methodology.
