@@ -571,6 +571,61 @@ def check_kinds_meta_ascii(staged_files: list) -> int:
     return 0
 
 
+# Repo root whitelist -- any NEW file at repo root must match one of these.
+# Generator misfires (no pillar path resolution) and git add -A sweeps in cex_auto*.py
+# created orphan root files like `core`, `phases`, `quality_gate`, and
+# `- Keep and complete YAML frontmatter` (LLM prompt echoed as filename).
+# See _reports/polish/w2_consolidation.md for the cleanup that motivated this gate.
+ROOT_WHITELIST = {
+    "CLAUDE.md", "README.md", "QUICKSTART.md", "CONTRIBUTING.md",
+    "CHANGELOG.md", "LICENSE", "MIT_LICENSE", "CODE_OF_CONDUCT.md",
+    ".gitignore", ".gitattributes", ".editorconfig", ".env.example",
+    "requirements.txt", "requirements-llm.txt", "pyproject.toml",
+    "setup.py", "setup.cfg", "Makefile", "package.json", "package-lock.json",
+    "tsconfig.json", ".mcp.json",
+}
+
+
+def check_root_writes(staged_files: list[str]) -> int:
+    """Block NEW files being committed at repo root unless whitelisted.
+
+    Motivation: generators (mostly LLM writers without pillar-path resolution)
+    kept dropping artifacts at the repo root. cex_auto_research.py and
+    cex_auto.py do `git add -A` in their yolo cycle, sweeping those strays
+    into `[AUTO] cycle N` commits. Result: files like `core`, `phases`,
+    `quality_gate`, or even `- Keep and complete YAML frontmatter` (LLM
+    echoing a prompt instruction as filename) accumulated at front-page.
+
+    This gate only fires on ADDITIONS (A). Modifying an existing whitelisted
+    root file is fine. Nested paths (anything with `/` or `\\`) are ignored --
+    pillar dirs, _tools/, _reports/, etc. are pillar-owned and safe.
+    """
+    try:
+        result = subprocess.run(
+            ["git", "diff", "--cached", "--name-only", "--diff-filter=A"],
+            capture_output=True, text=True, timeout=10
+        )
+        added = [f.strip() for f in result.stdout.strip().split("\n")
+                 if f.strip()]
+    except Exception:
+        return 0
+
+    errors = 0
+    for f in added:
+        # Normalize separators (git on Windows may emit either)
+        norm = f.replace("\\", "/")
+        # Skip nested paths -- this check only guards the REPO ROOT
+        if "/" in norm:
+            continue
+        if norm in ROOT_WHITELIST:
+            continue
+        print(f"  [FAIL] root-write: '{norm}' is not in ROOT_WHITELIST")
+        print(f"         Generator misfire? Move to a pillar dir (P{{01-12}}_*/, N{{00-07}}_*/, _tools/, _docs/).")
+        print(f"         If intentional, add '{norm}' to ROOT_WHITELIST in _tools/cex_hooks.py.")
+        errors += 1
+    return errors
+
+
 def run_pre_commit() -> int:
     """Pre-commit hook: validate staged files.
 
@@ -581,6 +636,8 @@ def run_pre_commit() -> int:
     4. YAML validation: syntax check for staged .yaml/.yml
     5. Sanitize check: cex_sanitize.py --check on staged _tools/*.py
     6. Wave validator: 7 systemic checks on staged builder ISOs
+    7. kinds_meta.json ASCII sanitation
+    8. Root-write gate: block orphan files at repo root (whitelist-based)
     """
     try:
         result = subprocess.run(
@@ -632,6 +689,9 @@ def run_pre_commit() -> int:
 
     # 7. Auto-sanitize kinds_meta.json (cp1252-safe via ensure_ascii=True)
     errors += check_kinds_meta_ascii(all_staged)
+
+    # 8. Root-write gate -- block generator-misfire orphans at repo root
+    errors += check_root_writes(all_staged)
 
     if errors:
         print(f"\npre-commit: BLOCKED -- {errors} error(s). Fix before committing.")
