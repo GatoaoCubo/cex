@@ -59,7 +59,6 @@ $sysPrompt
 "@
 
 $cliArgs = @("--yolo", "--model", "gemini-2.5-pro")
-$cliArgs += "--include-directories", $cexRoot
 
 Set-CexTitle "RUNNING"
 # [CEX_TUI_HYGIENE] UTF-8 + buffer sync + color reset (prevents TUI bleed/mojibake)
