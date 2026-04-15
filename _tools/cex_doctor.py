@@ -7,6 +7,7 @@ Usage:
   python _tools/cex_doctor.py --fix    # diagnose + auto-fix naming issues
 """
 
+import argparse
 import sys
 import re
 
@@ -526,4 +527,11 @@ def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("--fix", action="store_true", help="Diagnose and auto-fix naming issues.")
+    args, _ = parser.parse_known_args()
+    FIX_MODE = args.fix
     main()
