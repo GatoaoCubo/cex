@@ -48,13 +48,15 @@ def dispatch_ollama(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> in
     max_iters = profile.get("max_iters", 15)
     require_reads = profile.get("require_reads_before_done", 2)
 
-    # Per-nucleus routing: if config has mixed models, we warn and use default
+    # Per-nucleus routing as PowerShell hashtable literal
     per_nucleus_models = {k: v for k, v in models.items() if k.startswith("n")}
     unique = set(per_nucleus_models.values())
+    model_map_arg = None
     if len(unique) > 1:
-        print(f"[WARN] per-nucleus routing detected ({per_nucleus_models}) but current "
-              f"spawn script is single-model. Using default: {default_model}")
-        print("       TODO: extend spawn_grid_ollama.ps1 to accept hashtable of models.")
+        # Build @{n01='llama3.1:8b'; n03='qwen2.5-coder:7b'; ...}
+        pairs = "; ".join(f"{k}='{v}'" for k, v in per_nucleus_models.items())
+        model_map_arg = "@{" + pairs + "}"
+        print(f"[route] per-nucleus: {per_nucleus_models}")
 
     cmd = [
         "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
@@ -65,6 +67,8 @@ def dispatch_ollama(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> in
         "-RequireReads", str(require_reads),
         "-OutputTag", output_tag,
     ]
+    if model_map_arg:
+        cmd += ["-ModelMap", model_map_arg]
     print(f"[dispatch] {' '.join(cmd)}")
     return subprocess.call(cmd, cwd=ROOT)
 

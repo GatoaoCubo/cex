@@ -10,7 +10,8 @@ param(
     [string[]]$Nuclei = @("n01","n02","n03","n04","n05","n06"),
     [int]$MaxIters = 15,
     [int]$RequireReads = 2,
-    [string]$OutputTag = ""
+    [string]$OutputTag = "",
+    [hashtable]$ModelMap = $null
 )
 
 $ErrorActionPreference = "Stop"
@@ -87,10 +88,16 @@ foreach ($n in $Nuclei) {
 
     $bootScript = Join-Path $RepoRoot "boot\n0x_ollama.ps1"
 
+    # Per-nucleus model (ModelMap overrides -Model)
+    $nucModel = $Model
+    if ($ModelMap -and $ModelMap.ContainsKey($n)) {
+        $nucModel = $ModelMap[$n]
+    }
+
     # Build the command for the new window
     $psArgs = "-NoExit -NoProfile -ExecutionPolicy Bypass -File `"$bootScript`" " +
               "-Nucleus $n -Handoff `"$handoffPath`" -Output `"$outputPath`" " +
-              "-Mission $Mission -Model $Model -MaxIters $MaxIters -RequireReads $RequireReads"
+              "-Mission $Mission -Model $nucModel -MaxIters $MaxIters -RequireReads $RequireReads"
 
     # Launch (Start-Process returns immediately)
     $proc = Start-Process -FilePath "powershell.exe" -ArgumentList $psArgs -PassThru -WindowStyle Normal
@@ -108,9 +115,9 @@ foreach ($n in $Nuclei) {
         $refreshed = Get-Process -Id $proc.Id -ErrorAction SilentlyContinue
         if ($refreshed -and $refreshed.MainWindowHandle -ne 0) {
             [Win32.Window]::MoveWindow($refreshed.MainWindowHandle, $x, $y, $cellW, $cellH, $true) | Out-Null
-            Write-Host "  [$n] pid=$($proc.Id) pos=($x,$y) size=${cellW}x${cellH}"
+            Write-Host "  [$n] pid=$($proc.Id) model=$nucModel pos=($x,$y) size=${cellW}x${cellH}"
         } else {
-            Write-Host "  [$n] pid=$($proc.Id) (window handle not ready; manual reposition may be needed)"
+            Write-Host "  [$n] pid=$($proc.Id) model=$nucModel (window handle not ready; manual reposition may be needed)"
         }
     } catch {
         Write-Warning "  [$n] position failed: $_"
