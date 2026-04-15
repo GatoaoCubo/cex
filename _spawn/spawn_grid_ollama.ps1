@@ -8,7 +8,9 @@ param(
     [string]$Mission = "LEVERAGE_MAP_V2",
     [string]$Model = "llama3.1:8b",
     [string[]]$Nuclei = @("n01","n02","n03","n04","n05","n06"),
-    [int]$MaxIters = 15
+    [int]$MaxIters = 15,
+    [int]$RequireReads = 2,
+    [string]$OutputTag = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -57,7 +59,9 @@ $positions = @{
 }
 
 $handoffDir = Join-Path $RepoRoot ".cex\runtime\handoffs"
-$outputDir  = Join-Path $RepoRoot "_reports\$($Mission.ToLower())"
+$outputSubdir = $Mission.ToLower()
+if ($OutputTag) { $outputSubdir = "$outputSubdir`_$OutputTag" }
+$outputDir  = Join-Path $RepoRoot "_reports\$outputSubdir"
 $pidFile    = Join-Path $RepoRoot ".cex\runtime\pids\grid_ollama_$Mission.txt"
 $pidDir     = Split-Path $pidFile -Parent
 if (-not (Test-Path $pidDir)) { New-Item -ItemType Directory -Path $pidDir | Out-Null }
@@ -86,7 +90,7 @@ foreach ($n in $Nuclei) {
     # Build the command for the new window
     $psArgs = "-NoExit -NoProfile -ExecutionPolicy Bypass -File `"$bootScript`" " +
               "-Nucleus $n -Handoff `"$handoffPath`" -Output `"$outputPath`" " +
-              "-Mission $Mission -Model $Model -MaxIters $MaxIters"
+              "-Mission $Mission -Model $Model -MaxIters $MaxIters -RequireReads $RequireReads"
 
     # Launch (Start-Process returns immediately)
     $proc = Start-Process -FilePath "powershell.exe" -ArgumentList $psArgs -PassThru -WindowStyle Normal

@@ -174,8 +174,13 @@ def call_ollama(model: str, messages: list, tools: list, timeout: int = 180) -> 
 
 def agentic_loop(model: str, system: str, task: str, max_iters: int = 15,
                  verbose: bool = True, min_iters: int = 4,
-                 history: list | None = None) -> dict:
-    """Run ReAct loop. If history is passed, append to it (REPL continuation)."""
+                 history: list | None = None,
+                 require_reads_before_done: int = 2) -> dict:
+    """Run ReAct loop. If history is passed, append to it (REPL continuation).
+
+    Anti-fabrication: done() is rejected if fewer than
+    `require_reads_before_done` read_file/grep calls happened first.
+    """
     if history is None:
         messages = [
             {"role": "system", "content": system},
@@ -188,6 +193,9 @@ def agentic_loop(model: str, system: str, task: str, max_iters: int = 15,
     t0 = time.time()
     nudges_used = 0
     MAX_NUDGES = 2
+    reads_performed = 0
+    fabrication_rejections = 0
+    MAX_FABRICATION_REJECTIONS = 2
     for i in range(max_iters):
         if verbose:
             print(f"[iter {i+1}/{max_iters}]", flush=True)
@@ -241,15 +249,36 @@ def agentic_loop(model: str, system: str, task: str, max_iters: int = 15,
 
             if name == "done":
                 report = args.get("report", "")
-                trace.append({"iter": i + 1, "type": "done", "bytes": len(report)})
+                # Anti-fabrication guard: require evidence-gathering first
+                if reads_performed < require_reads_before_done and \
+                   fabrication_rejections < MAX_FABRICATION_REJECTIONS:
+                    fabrication_rejections += 1
+                    if verbose:
+                        print(f"  [ANTI-FAB {fabrication_rejections}/{MAX_FABRICATION_REJECTIONS}] "
+                              f"done() with only {reads_performed} reads < {require_reads_before_done}. "
+                              "Rejecting.", flush=True)
+                    trace.append({"iter": i + 1, "type": "done_rejected",
+                                  "reads": reads_performed, "bytes": len(report)})
+                    messages.append({"role": "tool", "content":
+                        f"REJECTED: done() called with only {reads_performed} read_file/grep "
+                        f"call(s). You must gather evidence by reading at least "
+                        f"{require_reads_before_done} files/grep results before submitting. "
+                        "Do NOT fabricate numbers or claims. Call list_dir, read_file, or grep "
+                        "to gather real evidence from the repo, THEN call done()."})
+                    continue
+                trace.append({"iter": i + 1, "type": "done", "bytes": len(report),
+                              "reads": reads_performed})
                 return {"ok": True, "final": report, "iters": i + 1,
                         "wall": round(time.time() - t0, 1), "trace": trace,
                         "reason": "done_called", "history": messages}
 
             result = execute_tool(name, args)
-            trace.append({"iter": i + 1, "tool": name, "args": args, "result_bytes": len(result)})
+            if name in ("read_file", "grep"):
+                reads_performed += 1
+            trace.append({"iter": i + 1, "tool": name, "args": args,
+                          "result_bytes": len(result), "reads_so_far": reads_performed})
             if verbose:
-                print(f"    -> {len(result)} bytes", flush=True)
+                print(f"    -> {len(result)} bytes (reads={reads_performed})", flush=True)
             messages.append({"role": "tool", "content": result[:4000]})
 
     return {"ok": False, "final": "MAX_ITERS", "iters": max_iters,
@@ -369,6 +398,8 @@ def main() -> int:
     p.add_argument("--output", required=True, help="where to write the final report")
     p.add_argument("--model", default="llama3.1:8b")
     p.add_argument("--max-iters", type=int, default=15)
+    p.add_argument("--require-reads", type=int, default=2,
+                   help="Minimum read_file/grep calls before done() accepted (anti-fabrication)")
     p.add_argument("--quiet", action="store_true")
     p.add_argument("--interactive", action="store_true", help="drop into REPL after loop")
     p.add_argument("--auto-commit", action="store_true", help="git commit output after loop")
@@ -394,7 +425,8 @@ def main() -> int:
     print("", flush=True)
 
     result = agentic_loop(args.model, system, task,
-                          max_iters=args.max_iters, verbose=not args.quiet)
+                          max_iters=args.max_iters, verbose=not args.quiet,
+                          require_reads_before_done=args.require_reads)
 
     output_path.write_text(result["final"], encoding="utf-8")
     trace_path = output_path.with_suffix(".trace.json")

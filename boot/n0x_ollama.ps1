@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory=$true)][string]$Output,
     [string]$Mission = "TASK",
     [string]$Model = "llama3.1:8b",
-    [int]$MaxIters = 15
+    [int]$MaxIters = 15,
+    [int]$RequireReads = 2
 )
 
 # Set repo root
@@ -43,6 +44,7 @@ python _tools/cex_agentic_nucleus.py `
     --model $Model `
     --mission $Mission `
     --max-iters $MaxIters `
+    --require-reads $RequireReads `
     --auto-commit `
     --interactive
 

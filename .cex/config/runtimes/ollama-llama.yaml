@@ -1,0 +1,44 @@
+runtime: ollama-llama
+tier: free
+provider: ollama
+cli: none
+models:
+  default: llama3.1:8b
+  n01: llama3.1:8b
+  n02: llama3.1:8b
+  n03: llama3.1:8b
+  n04: llama3.1:8b
+  n05: llama3.1:8b
+  n06: llama3.1:8b
+  n07: llama3.1:8b
+context_window: 128000
+effective_context: 8192
+capabilities:
+  native_tool_calls: true
+  sub_agents: false
+  task_tracking: false
+  large_context: false
+agentic_profile:
+  max_iters: 15
+  min_iters: 4
+  require_reads_before_done: 3
+  nudge_on_shallow: true
+  max_nudges: 2
+  temperature: 0.3
+  num_predict: 1500
+boot_script: boot/n0x_ollama.ps1
+spawn_script: _spawn/spawn_grid_ollama.ps1
+runner: _tools/cex_agentic_nucleus.py
+cost_per_mtok_in: 0
+cost_per_mtok_out: 0
+strengths:
+  - grounded (does not fabricate file contents)
+  - honest (will say NO_MATCHES)
+  - 4.9GB fits alongside other work
+weaknesses:
+  - will not call done() -- relies on no-tool-call stop
+  - shallow final reports (needs stop-guard nudge)
+  - JSON-in-content fallback for some iterations
+notes: |
+  Free local inference. Use for fact-verification, cross-reference, honest analysis.
+  Pair with stop-guard to force depth. Does NOT need anti-fabrication guard.
