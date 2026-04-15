@@ -12,6 +12,7 @@ Usage:
 Reads:  .cex/config/nucleus_models.yaml
 Writes: boot/n0{1-6}.ps1 + boot/cex.ps1 (PowerShell-only stack)
 """
+import argparse
 import yaml, sys, os
 from pathlib import Path
 
@@ -521,18 +522,22 @@ def show_table(config: dict):
 
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("--dry-run", action="store_true", help="Show generated scripts without writing them.")
+    parser.add_argument("--nucleus", help="Generate only the specified nucleus.")
+    parser.add_argument("--show", action="store_true", help="Show the current config table.")
+    parser.add_argument("--cli", help="Override the configured CLI for generation.")
+    args, _ = parser.parse_known_args()
     config = load_config()
 
-    cli_override = args[args.index("--cli") + 1] if "--cli" in args else None
+    cli_override = args.cli
 
-    if "--help" in args:
-        print(__doc__)
-    elif "--show" in args:
+    if args.show:
         show_table(config)
-    elif "--dry-run" in args:
-        nucleus = args[args.index("--nucleus") + 1] if "--nucleus" in args else None
-        generate(config, only=nucleus, dry_run=True, cli_override=cli_override)
+    elif args.dry_run:
+        generate(config, only=args.nucleus, dry_run=True, cli_override=cli_override)
     else:
-        nucleus = args[args.index("--nucleus") + 1] if "--nucleus" in args else None
-        generate(config, only=nucleus, cli_override=cli_override)
+        generate(config, only=args.nucleus, cli_override=cli_override)
