@@ -73,26 +73,24 @@ def dispatch_ollama(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> in
     return subprocess.call(cmd, cwd=ROOT)
 
 
+def _dispatch_via_bash(mode: str, mission: str, runtime_label: str) -> int:
+    """Call bash _spawn/dispatch.sh {mode} {mission}. Returns exit code."""
+    cmd = ["bash", "_spawn/dispatch.sh", mode, mission]
+    print(f"[dispatch] {runtime_label}: {' '.join(cmd)}")
+    return subprocess.call(cmd, cwd=ROOT)
+
+
 def dispatch_claude(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> int:
-    # Claude path uses _spawn/spawn_grid.ps1 + handoffs from .cex/runtime/handoffs/
-    # Requires Anthropic Max auth. Left as a stub for operator to wire.
-    print("[dispatch] claude runtime")
-    print("  Use: bash _spawn/dispatch.sh grid " + mission_cfg["mission"])
-    print("  Handoffs must already exist in .cex/runtime/handoffs/")
-    print("  (Auto-dispatch for Claude not yet wired in this tool.)")
-    return 0
+    # spawn_grid.ps1 -cli claude reads handoffs from .cex/runtime/handoffs/
+    return _dispatch_via_bash("grid", mission_cfg["mission"], "claude")
 
 
 def dispatch_gemini(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> int:
-    print("[dispatch] gemini runtime -- boot script:", runtime_cfg.get("boot_script"))
-    print("  (Gemini dispatch stub. Extend when gemini CLI is wired.)")
-    return 0
+    return _dispatch_via_bash("grid-gemini", mission_cfg["mission"], "gemini")
 
 
 def dispatch_codex(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> int:
-    print("[dispatch] codex runtime -- boot script:", runtime_cfg.get("boot_script"))
-    print("  (Codex dispatch stub. Extend when codex CLI is wired.)")
-    return 0
+    return _dispatch_via_bash("grid-codex", mission_cfg["mission"], "codex")
 
 
 DISPATCHERS = {
