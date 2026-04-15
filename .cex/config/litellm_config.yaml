@@ -1,59 +1,62 @@
-# LiteLLM Proxy Configuration for CEX (OLLAMA-ONLY free mode)
-# Simple pool: all models point to Ollama. No paid/no-key providers in pool.
+# LiteLLM Proxy Configuration for CEX (FREE MODE, tuned per-nucleus)
+# 2026-04-15: picked via bench_nucleus_models.py on 7 domain prompts.
+# Summary: llama3.1:8b wins 5/7 by speed+adherence; qwen3:14b wins N03 (frontmatter
+# fidelity) and N04 (citation recall). qwen3:8b FAILS on N05 (thinking-budget
+# consumes all tokens -> 0 bytes output).
 #
-# Free-first hybrid lesson (2026-04-15):
-#   - simple-shuffle routes randomly across pool entries, NOT as fallback chain
-#   - Mixing paid + no-key + local = random picks broken providers
-#   - Pure Ollama pool = deterministic free mode
+# Benchmark data: .cex/runtime/benchmarks/summary.json
+# Decision rationale: _docs/specs/spec_claude_vs_free_routing.md
 #
-# To enable paid fallback:
-#   - Set GEMINI_API_KEY (free tier) in .env
-#   - Add back anthropic entries ONLY when credit > 0
-#   - Use router_settings.fallbacks (ordered chain) not pool duplication
-#
-# Virtual keys: per-nucleus budget tracking via master_key.
+# To enable paid fallback (ordered chain, NOT pool duplication):
+#   router_settings:
+#     fallbacks:
+#       - {cex-n01: [cex-n01-free]}
+#   with a paired model_list entry e.g. cex-n01-free -> ollama/qwen3:14b.
 
 model_list:
-  # --- N07 Orchestrator (best local reasoning) ---
+  # --- N07 Orchestrator (fast planning, llama wins on 3-wave dispatch) ---
   - model_name: cex-n07
     litellm_params:
-      model: ollama/qwen3:14b
+      model: ollama/llama3.1:8b
       api_base: http://localhost:11434
 
-  # --- N01 Intelligence ---
+  # --- N01 Intelligence (speed-sensitive research) ---
   - model_name: cex-n01
     litellm_params:
-      model: ollama/qwen3:14b
+      model: ollama/llama3.1:8b
       api_base: http://localhost:11434
 
-  # --- N02 Marketing (faster model, creative) ---
+  # --- N02 Marketing (copy output, no factual fidelity required) ---
   - model_name: cex-n02
     litellm_params:
-      model: ollama/qwen3:8b
+      model: ollama/llama3.1:8b
       api_base: http://localhost:11434
 
-  # --- N03 Builder (deep reasoning) ---
+  # --- N03 Builder (REQUIRES qwen3:14b for CEX frontmatter fidelity) ---
+  # llama3.1:8b wraps frontmatter in ```yml fences; qwen3:14b produces raw `---` blocks.
   - model_name: cex-n03
     litellm_params:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
-  # --- N04 Knowledge ---
+  # --- N04 Knowledge (REQUIRES qwen3:14b for citation recall) ---
+  # llama3.1:8b skips citations entirely; qwen3:14b names real authors/papers
+  # (e.g. Sparck-Jones 1972 for TF-IDF). Still requires human review for KCs.
   - model_name: cex-n04
     litellm_params:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
-  # --- N05 Operations (faster for code/test) ---
+  # --- N05 Operations (qwen3:8b FAILS here, thinking-budget consumes output) ---
   - model_name: cex-n05
     litellm_params:
-      model: ollama/qwen3:8b
+      model: ollama/llama3.1:8b
       api_base: http://localhost:11434
 
-  # --- N06 Commercial ---
+  # --- N06 Commercial (llama produces proper markdown tables) ---
   - model_name: cex-n06
     litellm_params:
-      model: ollama/qwen3:8b
+      model: ollama/llama3.1:8b
       api_base: http://localhost:11434
 
 general_settings:
