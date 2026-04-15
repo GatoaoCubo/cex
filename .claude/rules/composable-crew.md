@@ -101,6 +101,25 @@ Grid+crew is the highest-leverage composition CEX offers: you parallelize
 entire packages, not just individual artifacts, while keeping coherence
 within each package via the crew's handoff protocol.
 
+## Swarm mode (BORIS_MERGE D5)
+
+When you need **N parallel builders of the same kind** (not N different roles,
+not a full crew with handoffs), use swarm instead of crew. Swarm trades
+coherence for breadth:
+
+```bash
+bash _spawn/dispatch.sh swarm agent 5 "scaffold 5 niche sales agents"
+# Spawns 5 agent-builders in parallel worktrees, each produces one artifact.
+```
+
+Contrast:
+- **crew** -- 4 roles, 1 coherent deliverable, handoffs between roles
+- **swarm** -- N builders, N independent deliverables of same kind, isolated worktrees
+- **grid** -- heterogeneous nuclei, arbitrary handoffs, mission-scoped
+
+Swarm is the right tool when the goal is **coverage** (explore a kind-space by
+generating variants) rather than **integration** (roles depend on each other).
+
 ## When crews are NOT the answer
 
 - **1 artifact, 1 kind** -> solo builder, not a crew
