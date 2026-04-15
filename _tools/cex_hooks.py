@@ -20,6 +20,7 @@ Usage:
   python _tools/cex_hooks.py install
 """
 
+import argparse
 import os
 import re
 import subprocess
@@ -763,12 +764,33 @@ exit $?
 
 
 def main():
-    if len(sys.argv) < 2:
+    known_commands = {"pre-save", "post-save", "pre-commit", "validate", "validate-all", "install"}
+    if len(sys.argv) > 1 and not sys.argv[1].startswith("-") and sys.argv[1] not in known_commands:
+        print(f"Unknown command: {sys.argv[1]}")
         print(__doc__)
         sys.exit(1)
 
-    cmd = sys.argv[1]
-    args = sys.argv[2:]
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    subparsers = parser.add_subparsers(dest="cmd")
+
+    for command in ("pre-save", "post-save", "validate"):
+        subparser = subparsers.add_parser(command, help=f"Run the {command} hook.")
+        subparser.add_argument("paths", nargs="*", help="One or more artifact paths.")
+
+    subparsers.add_parser("pre-commit", help="Validate staged files.")
+    subparsers.add_parser("validate-all", help="Validate all nucleus artifacts.")
+    subparsers.add_parser("install", help="Install the git pre-commit hook.")
+
+    parsed, _ = parser.parse_known_args()
+    if not parsed.cmd:
+        print(__doc__)
+        sys.exit(1)
+
+    cmd = parsed.cmd
+    args = getattr(parsed, "paths", [])
 
     if cmd == "pre-save":
         if not args:
@@ -796,12 +818,6 @@ def main():
 
     elif cmd == "install":
         sys.exit(install_git_hook())
-
-    else:
-        print(f"Unknown command: {cmd}")
-        print(__doc__)
-        sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
