@@ -58,17 +58,29 @@ def dispatch_ollama(mission_cfg: dict, runtime_cfg: dict, output_tag: str) -> in
         model_map_arg = "@{" + pairs + "}"
         print(f"[route] per-nucleus: {per_nucleus_models}")
 
-    cmd = [
-        "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
-        "-File", spawn_script,
-        "-Mission", mission,
-        "-Model", default_model,
-        "-MaxIters", str(max_iters),
-        "-RequireReads", str(require_reads),
-        "-OutputTag", output_tag,
-    ]
     if model_map_arg:
-        cmd += ["-ModelMap", model_map_arg]
+        # PowerShell can't bind @{...} literal from argv strings -- wrap via -Command
+        # so PS parses the hashtable itself.
+        ps_expr = (
+            f"& '{spawn_script}' "
+            f"-Mission '{mission}' -Model '{default_model}' "
+            f"-MaxIters {max_iters} -RequireReads {require_reads} "
+            f"-OutputTag '{output_tag}' -ModelMap {model_map_arg}"
+        )
+        cmd = [
+            "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
+            "-Command", ps_expr,
+        ]
+    else:
+        cmd = [
+            "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
+            "-File", spawn_script,
+            "-Mission", mission,
+            "-Model", default_model,
+            "-MaxIters", str(max_iters),
+            "-RequireReads", str(require_reads),
+            "-OutputTag", output_tag,
+        ]
     print(f"[dispatch] {' '.join(cmd)}")
     return subprocess.call(cmd, cwd=ROOT)
 

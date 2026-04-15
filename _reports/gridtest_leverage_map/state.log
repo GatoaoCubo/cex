@@ -1,6 +1,18 @@
-# grid-test LEVERAGE_MAP_V2 started 2026-04-15T15:48:22Z
-[2026-04-15T15:48:22Z] === GRID TEST: LEVERAGE_MAP_V2 ===
-[2026-04-15T15:48:22Z] runtimes: ['claude', 'gemini', 'codex', 'ollama-llama', 'ollama-qwen-coder']
-[2026-04-15T15:48:22Z] archive: C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map
-[2026-04-15T15:48:22Z] wave_timeout=900s poll=30s inter_wave=15s
-[2026-04-15T15:48:22Z] DRY-RUN: exiting without dispatch
+# grid-test LEVERAGE_MAP_V2 started 2026-04-15T15:54:14Z
+[2026-04-15T15:54:14Z] === GRID TEST: LEVERAGE_MAP_V2 ===
+[2026-04-15T15:54:14Z] runtimes: ['ollama-qwen-coder']
+[2026-04-15T15:54:14Z] archive: C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map
+[2026-04-15T15:54:14Z] wave_timeout=900s poll=30s inter_wave=5s
+[2026-04-15T15:54:14Z] 
+[2026-04-15T15:54:14Z] === WAVE 1/1: ollama-qwen-coder ===
+[2026-04-15T15:54:14Z]   git_start_ref=a53cb43a
+[2026-04-15T15:54:14Z] DISPATCH wave: C:\Users\CEX\AppData\Local\Programs\Python\Python312\python.exe C:\Users\CEX\Documents\GitHub\cex\_tools\cex_mission_dispatch.py --mission leverage_map --runtime ollama-qwen-coder --output-tag qwen-coder
+[2026-04-15T15:54:25Z]   poll [ollama-qwen-coder] elapsed=0s landed=0/6 usable=0 committed=0/6 pids_alive=6/6
+[2026-04-15T15:54:57Z]   poll [ollama-qwen-coder] elapsed=32s landed=3/6 usable=2 committed=3/6 pids_alive=6/6
+[2026-04-15T15:55:18Z]   poll [ollama-qwen-coder] elapsed=53s landed=6/6 usable=4 committed=6/6 pids_alive=6/6
+[2026-04-15T15:55:20Z]   close [ollama-qwen-coder] killed 6/6 PIDs
+[2026-04-15T15:55:20Z]   archive [ollama-qwen-coder] -> C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map\ollama-qwen-coder (12 files)
+[2026-04-15T15:55:20Z] 
+[2026-04-15T15:55:20Z] === COMPLETE ===
+[2026-04-15T15:55:20Z] matrix: C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map\matrix.md
+[2026-04-15T15:55:20Z] state_log: C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map\state.log
