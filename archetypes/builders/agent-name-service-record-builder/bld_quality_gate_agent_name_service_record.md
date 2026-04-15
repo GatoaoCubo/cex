@@ -18,38 +18,24 @@ density_score: 0.85
 
 # Agent Name Service Record Builder -- Quality Gate
 
-> Governs IETF ANS / CNCF AgentDNS registry-record quality. Hard gates enforce
-> DNS-like ANS name format, protocol-adapter presence, discovery-endpoint validity.
-> Soft dimensions score PKI-cert completeness and capability richness for GoDaddy,
-> Salesforce, and CNCF registry operators.
+> Governs IETF ANS / CNCF AgentDNS registry-record quality. Hard gates enforce DNS-like name format, protocol-adapter presence, discovery-endpoint validity. Soft dimensions score PKI-cert + capability richness for GoDaddy, Salesforce, CNCF operators.
 
 ## Hard Gates (H01-H08)
 
-**All 8 must pass. Any single failure blocks publication.**
+All 8 must pass. Any failure blocks publication.
 
-| Gate | ID | Check | Pass Condition | Failure Action |
-|------|----|-------|----------------|---------------|
-| Frontmatter valid | H01 | YAML parses without error | No parse errors, all required fields present | Fix YAML syntax before proceeding |
-| ID pattern | H02 | Regex match on `id` field | `^p04_ans_[a-z0-9_]+$` | Rename to match pattern |
-| Kind correct | H03 | Exact string match | `kind == "agent_name_service_record"` | Correct kind field |
-| ANS name format | H04 | DNS-like format validation | lowercase, hyphens only, ends in `.agents`, no underscores | Reformat per schema rules |
-| Endpoint URL present | H05 | URL validity check | Valid HTTPS URL, not localhost, not empty | Add production endpoint |
-| Protocol adapters present | H06 | Array cardinality | At least 1 entry in `protocol_adapters` array | Declare MCP, A2A, or gRPC adapter |
-| Discovery endpoint present | H07 | Field existence + URL validity | `discovery_endpoint` field present, valid HTTPS URL | Add well-known discovery URL |
-| Lifecycle registered | H08 | Field existence + date format | `lifecycle.registered` present, ISO 8601 format | Add registration date |
+| ID | Gate | Check | Pass | Fix |
+|----|------|-------|------|-----|
+| H01 | Frontmatter | YAML parses | No errors, required fields present | Fix YAML |
+| H02 | ID pattern | Regex on `id` | `^p04_ans_[a-z0-9_]+$` | Rename |
+| H03 | Kind | String match | `kind=="agent_name_service_record"` | Correct |
+| H04 | ANS name | DNS-like | lowercase, hyphens, ends `.agents`, no underscores | Reformat |
+| H05 | Endpoint | URL check | HTTPS, not localhost, not empty | Add prod URL |
+| H06 | Adapters | Array size | `protocol_adapters` >=1 | Declare MCP/A2A/gRPC |
+| H07 | Discovery | Field + URL | `discovery_endpoint` present, HTTPS | Add well-known URL |
+| H08 | Lifecycle | Date format | `lifecycle.registered` ISO 8601 | Add date |
 
-## Gate Evaluation Logic
-
-```
-H01 -> H02 -> H03 -> H04 -> H05 -> H06 -> H07 -> H08
-  |      |      |      |      |      |      |      |
-FAIL   FAIL   FAIL   FAIL   FAIL   FAIL   FAIL   FAIL
-  |      |      |      |      |      |      |      |
-  +------+------+------+------+------+------+------+-> BLOCK
-                                                       (do not publish)
-
-ALL PASS -> proceed to soft scoring
-```
+**Logic**: H01 -> H08 sequential. Any FAIL -> BLOCK (do not publish). ALL PASS -> soft scoring.
 
 ## Soft Scoring Dimensions (5D)
 

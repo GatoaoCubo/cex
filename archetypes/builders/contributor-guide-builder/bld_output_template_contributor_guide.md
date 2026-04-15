@@ -18,10 +18,8 @@ density_score: 0.85
 
 ## Usage Notes
 
-Replace all `{{placeholder}}` tokens with real content before delivery.
-Remove this Usage Notes section from the final artifact.
-All code blocks are examples -- replace commands with project-specific commands.
-Sections marked REQUIRED must be present for H04-H08 gates to pass.
+Replace `{{tokens}}` before delivery; remove this section from final output.
+Code blocks are examples -- substitute project commands. Sections marked REQUIRED are H04-H08 gates.
 
 ## Template
 
@@ -43,8 +41,7 @@ tldr: "How to contribute to {{Project Name}}: setup, workflow, standards, and CL
 
 # Contributing to {{Project Name}}
 
-{{one paragraph: what the project is, why contributions matter, and who this
-guide is written for. Keep it welcoming and specific to this project.}}
+{{one paragraph: what the project is, why contributions matter, who this guide is for. Welcoming, specific.}}
 
 ---
 
@@ -59,58 +56,32 @@ guide is written for. Keep it welcoming and specific to this project.}}
 ### Installation
 
 ```bash
-# 1. Fork the repository on GitHub, then clone your fork
+# 1. Fork on GitHub, clone your fork
 git clone https://github.com/{{your-username}}/{{repo-name}}.git
 cd {{repo-name}}
-
-# 2. Add the upstream remote
+# 2. Add upstream
 git remote add upstream https://github.com/{{org}}/{{repo-name}}.git
-
-# 3. Install dependencies
-{{install_command}}    # e.g., npm install / pip install -e ".[dev]" / go mod download
-
-# 4. Verify the setup -- all tests should pass
-{{test_command}}       # e.g., npm test / pytest / go test ./...
+# 3. Install deps
+{{install_command}}    # npm install | pip install -e ".[dev]" | go mod download
+# 4. Verify -- all tests must pass
+{{test_command}}       # npm test | pytest | go test ./...
 ```
 
-If setup fails, open an issue with the output of `{{debug_command}}` and your OS version.
+If setup fails, open an issue with `{{debug_command}}` output and your OS version.
 
 ---
 
 ## Contribution Workflow  [REQUIRED -- H05]
 
-We use a **fork-and-pull-request** workflow. No contributor has direct push access
-to the main repository.
+Fork-and-PR workflow. No direct push to main.
 
-1. **Sync your fork** before starting work:
-   ```bash
-   git fetch upstream
-   git checkout main
-   git merge upstream/main
-   ```
-
-2. **Create a feature branch** from `main`:
-   ```bash
-   git checkout -b {{branch-prefix}}/{{short-description}}
-   # Example: feat/add-csv-export or fix/null-pointer-on-empty-list
-   ```
-
-3. **Make your changes** following the Coding Standards below.
-
-4. **Run tests** before committing:
-   ```bash
-   {{test_command}}
-   {{lint_command}}
-   ```
-
-5. **Commit** your changes (see Commit Messages below).
-
-6. **Push** your branch:
-   ```bash
-   git push origin {{branch-prefix}}/{{short-description}}
-   ```
-
-7. **Open a Pull Request** against `{{target_branch}}` (usually `main` or `develop`).
+1. **Sync fork**: `git fetch upstream && git checkout main && git merge upstream/main`
+2. **Branch**: `git checkout -b {{branch-prefix}}/{{short-description}}` (e.g., `feat/csv-export`, `fix/null-pointer`)
+3. **Change code** per Coding Standards below.
+4. **Test**: `{{test_command}} && {{lint_command}}`
+5. **Commit** per Commit Messages below.
+6. **Push**: `git push origin {{branch-prefix}}/{{short-description}}`
+7. **Open PR** against `{{target_branch}}` (usually `main` or `develop`).
 
 ---
 
@@ -119,11 +90,8 @@ to the main repository.
 This project uses **{{style_guide_name}}** for code style enforcement.
 
 ```bash
-# Run the linter
-{{lint_command}}    # e.g., npm run lint / flake8 . / golangci-lint run
-
-# Auto-format
-{{format_command}}  # e.g., prettier --write . / black . / gofmt -w .
+{{lint_command}}    # npm run lint | flake8 . | golangci-lint run
+{{format_command}}  # prettier --write . | black . | gofmt -w .
 ```
 
 | Standard | Tool | Config file |
@@ -192,27 +160,15 @@ Reviews assess:
 
 ## CLA / DCO  [REQUIRED -- H08]
 
-{{Choose ONE: CLA or DCO. Delete the section that does not apply.}}
+{{Pick ONE; delete the other.}}
 
-### Option A: Contributor License Agreement (CLA)
+### Option A: CLA
 
-This project requires all contributors to sign the **{{CLA Name}}**.
-Sign here: {{CLA URL}}
+Sign **{{CLA Name}}**: {{CLA URL}}. Corporate contributors: employer signs corporate CLA if contributing on company time.
 
-Corporate contributors: your employer must sign the corporate CLA if the
-contribution is made on company time or uses company resources.
+### Option B: DCO
 
-### Option B: Developer Certificate of Origin (DCO)
-
-This project uses the **Developer Certificate of Origin (DCO)**.
-You certify each commit by adding a sign-off line:
-
-```bash
-git commit -s -m "feat: add CSV export"
-# This adds: Signed-off-by: Your Name <your@email.com>
-```
-
-The DCO text is at https://developercertificate.org/
+Certify each commit with a sign-off: `git commit -s -m "feat: add CSV export"` (adds `Signed-off-by: Name <email>`). Text at https://developercertificate.org/
 ```
 
 ## Section Annotations

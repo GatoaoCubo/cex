@@ -20,8 +20,7 @@ density_score: 0.85
 
 ## Overview
 
-Build an `agent_name_service_record` in 3 phases. Each phase has explicit inputs,
-actions, and outputs. Do not skip phases -- Phase 1 data feeds Phase 2 composition.
+Build an `agent_name_service_record` in 3 phases. Phase 1 feeds Phase 2; do not skip.
 
 ## Phase 1: RESEARCH -- Resolve Agent Identity
 
@@ -31,48 +30,43 @@ actions, and outputs. Do not skip phases -- Phase 1 data feeds Phase 2 compositi
 
 | Step | Action | Output |
 |------|--------|--------|
-| 1.1.1 | Identify agent's human name or system identifier | raw_name string |
-| 1.1.2 | Convert to DNS-like format: `{agent}.{org}.agents` (lowercase, hyphens only) | ans_name string |
-| 1.1.3 | Verify no reserved words: `_dmarc`, `_well-known`, `_ans` | validation pass/fail |
-| 1.1.4 | Check CNCF AgentDNS registry for name collision | collision: yes/no |
+| 1.1.1 | Identify agent's human or system name | raw_name |
+| 1.1.2 | Convert to `{agent}.{org}.agents` (lowercase, hyphens) | ans_name |
+| 1.1.3 | Verify no reserved words (`_dmarc`, `_well-known`, `_ans`) | pass/fail |
+| 1.1.4 | Check CNCF AgentDNS for collision | yes/no |
 
-**ANS name format examples:**
-- `customer-service.acme-corp.agents` -- valid
-- `billing_agent.acme.agents` -- INVALID (underscore not allowed)
-- `SUPPORT.Acme.agents` -- INVALID (must be lowercase)
+**Examples**: `customer-service.acme-corp.agents` (valid); `billing_agent.acme.agents` (INVALID: underscore); `SUPPORT.Acme.agents` (INVALID: must be lowercase).
 
 ### 1.2 Identify Supported Protocols
 
 | Step | Action | Output |
 |------|--------|--------|
-| 1.2.1 | Check if agent exposes MCP server endpoint | mcp: yes/no + URL |
-| 1.2.2 | Check if agent supports A2A protocol (v0.3+) | a2a: yes/no + URL |
-| 1.2.3 | Check if agent exposes gRPC interface | grpc: yes/no + URL |
-| 1.2.4 | Record protocol_adapters array with at least one entry | protocol_adapters[] |
+| 1.2.1 | MCP server endpoint? | mcp:y/n+URL |
+| 1.2.2 | A2A v0.3+? | a2a:y/n+URL |
+| 1.2.3 | gRPC? | grpc:y/n+URL |
+| 1.2.4 | Record adapters array (>=1) | protocol_adapters[] |
 
-**Minimum**: at least one protocol-adapter MUST be declared. A record with no adapters
-fails H06 quality gate and cannot reach production status.
+**Minimum**: >=1 protocol-adapter required. Zero adapters = H06 fail, blocks production.
 
 ### 1.3 Gather PKI Certificate Reference
 
 | Step | Action | Output |
 |------|--------|--------|
-| 1.3.1 | Locate agent's TLS/mTLS certificate or signing key reference | cert_path or cert_id |
-| 1.3.2 | Confirm cert is from trusted CA (Let's Encrypt, DigiCert, internal PKI) | ca_name |
-| 1.3.3 | Record PKI-cert reference as `cert:{issuer}:{fingerprint}` | pki_cert_reference string |
-| 1.3.4 | Note expiry date for lifecycle block | cert_expires date |
+| 1.3.1 | Locate TLS/mTLS cert or signing-key ref | cert_path|id |
+| 1.3.2 | Confirm trusted CA (LE, DigiCert, internal) | ca_name |
+| 1.3.3 | Record ref as `cert:{issuer}:{fingerprint}` | pki_cert_reference |
+| 1.3.4 | Note expiry for lifecycle block | cert_expires |
 
-**Note**: PKI-cert is optional per draft-narajala-ans-00 but REQUIRED for GoDaddy
-and Salesforce production registration. Omitting it triggers H05 soft warning.
+**Note**: PKI-cert is optional in draft-narajala-ans-00 but REQUIRED for GoDaddy/Salesforce prod. Omission = H05 soft warning.
 
 ### 1.4 Enumerate Capability Endpoints
 
 | Step | Action | Output |
 |------|--------|--------|
-| 1.4.1 | List agent's declared skills (max 10 for readability) | skills[] |
-| 1.4.2 | Record max_concurrent tasks the agent can handle | max_concurrent int |
-| 1.4.3 | List supported_tasks (task type identifiers) | supported_tasks[] |
-| 1.4.4 | Identify primary discovery-endpoint URL | discovery_endpoint URL |
+| 1.4.1 | List declared skills (max 10) | skills[] |
+| 1.4.2 | Record max_concurrent | int |
+| 1.4.3 | List supported_tasks (type IDs) | supported_tasks[] |
+| 1.4.4 | Identify primary discovery-endpoint | URL |
 
 ### 1.5 Check CNCF AgentDNS Compatibility
 
@@ -145,20 +139,20 @@ lifecycle:
 
 ## Phase 3: VALIDATE -- ANS/AgentDNS Compliance
 
-**Goal**: Confirm all hard gates pass before the artifact is ready for registry submission.
+**Goal**: Confirm all hard gates pass before registry submission.
 
 ### 3.1 Hard Gate Checklist
 
 | Gate | Check | Pass condition |
 |------|-------|----------------|
-| H01 | Frontmatter valid YAML | All required fields present, no parse errors |
-| H02 | ID pattern | Matches `^p04_ans_[a-z0-9_]+$` |
-| H03 | kind field | Exactly `agent_name_service_record` |
-| H04 | agent_name format | DNS-like: `{label}.{label}.agents` lowercase + hyphens |
-| H05 | endpoint_url present | Valid HTTPS URL (not localhost) |
-| H06 | protocol_adapters | At least one entry in array |
-| H07 | discovery_endpoint | Present and distinct from endpoint_url |
-| H08 | lifecycle.registered | Present and ISO 8601 date format |
+| H01 | Frontmatter valid YAML | Required fields present, no parse errors |
+| H02 | ID pattern | `^p04_ans_[a-z0-9_]+$` |
+| H03 | kind | `agent_name_service_record` |
+| H04 | agent_name | DNS-like `{label}.{label}.agents` lowercase+hyphens |
+| H05 | endpoint_url | Valid HTTPS (not localhost) |
+| H06 | protocol_adapters | >=1 entry |
+| H07 | discovery_endpoint | Present, distinct from endpoint_url |
+| H08 | lifecycle.registered | ISO 8601 date |
 
 ### 3.2 Soft Quality Checks
 

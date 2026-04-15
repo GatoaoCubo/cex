@@ -17,14 +17,8 @@ created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
 golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registry-record for a GoDaddy customer-service agent
-
-  that supports both MCP and A2A protocol-adapter entries, has a valid PKI-cert reference,
-
-  exposes 3 capabilities, and registers a discovery-endpoint per CNCF AgentDNS spec.
-
-  Salesforce MuleSoft Agent Fabric follows the same pattern for its A2A-first agents.
-
-  This record passes all 8 hard gates and scores 9.5+ on soft dimensions.
+  with MCP + A2A adapters, valid PKI-cert, 3 capabilities, and a CNCF AgentDNS discovery-endpoint. Salesforce MuleSoft Agent
+  Fabric follows the same pattern. Passes all 8 hard gates; 9.5+ soft.
 
 
   ---
@@ -81,15 +75,15 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   | Registry ID | `7f3c8d2a-1b4e-4f9a-8c6d-2e5a7b9f1c3e` |
 
-  | Registry Operator | GoDaddy (production ANS integration, Feb 2026) |
+  | Operator | GoDaddy (prod ANS, Feb 2026) |
 
   | Primary Endpoint | https://agents.godaddy.com/customer-service |
 
-  | Discovery Endpoint | https://godaddy.com/.well-known/agent/customer-service |
+  | Discovery | https://godaddy.com/.well-known/agent/customer-service |
 
-  | Record Version | 1.0.0 |
+  | Version | 1.0.0 |
 
-  | Spec Reference | IETF draft-narajala-ans-00, CNCF draft-liang-agentdns-00 |
+  | Spec | IETF draft-narajala-ans-00, CNCF draft-liang-agentdns-00 |
 
 
   ## Protocol Adapters
@@ -111,11 +105,11 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   |-----------|-------------|
 
-  | account-lookup | Retrieve customer account details by domain or account ID |
+  | account-lookup | Retrieve customer account by domain or ID |
 
-  | billing-dispute | Accept and route billing dispute submissions |
+  | billing-dispute | Accept + route billing disputes |
 
-  | domain-transfer-status | Check status of in-progress domain transfer requests |
+  | domain-transfer-status | Check status of in-progress transfers |
 
 
   Concurrency: max_concurrent = 50
@@ -156,11 +150,11 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
   | URL | https://godaddy.com/.well-known/agent/customer-service |
 
-  | Resolution method | HTTPS GET -- returns registry-record JSON |
+  | Resolution | HTTPS GET -> registry-record JSON |
 
-  | TTL (seconds) | 3600 |
+  | TTL (s) | 3600 |
 
-  | CNCF AgentDNS compatible | Yes -- draft-liang-agentdns-00 |
+  | CNCF AgentDNS | draft-liang-agentdns-00 |
 
 
   ## Lifecycle
@@ -187,9 +181,8 @@ golden_example_godaddy_customer_service_agent: 'Scenario: Production ANS registr
 
 
   ---'
-anti_example_1_invalid_ans_name_format: 'What went wrong: The agent name uses underscores (Python variable style) instead
-
-  of hyphens. This fails H04 and makes the record invalid per IETF draft-narajala-ans-00.
+anti_example_1_invalid_ans_name_format: 'What went wrong: Name uses underscores instead of hyphens. Fails H04; invalid per
+  IETF draft-narajala-ans-00.
 
 
   ---
@@ -228,24 +221,20 @@ anti_example_1_invalid_ans_name_format: 'What went wrong: The agent name uses un
   Fix: Replace `billing_agent.acme_corp.agents` with `billing-agent.acme-corp.agents`
 
 
-  Lesson: ANS names follow DNS label syntax (RFC 1035): lowercase, hyphens only,
-
-  no underscores. Python variable naming habits (snake_case) do not apply here.
+  Lesson: ANS names follow DNS label syntax (RFC 1035): lowercase, hyphens only. snake_case does not apply.
 
 
   ---'
-anti_example_2_missing_protocol_adapters: "What went wrong: The record only provides an endpoint URL but declares no\nprotocol-adapter\
-  \ entries. This makes the record useless -- agents cannot connect\nwithout knowing which protocol to use.\n\n---\nkind:\
-  \ agent_name_service_record\nid: p04_ans_support_example\npillar: P04\nquality: null\nagent_name: \"support.example.agents\"\
-  \nendpoint_url: \"https://agents.example.com/support\"\nregistry_operator: \"self\"\ndiscovery_endpoint: \"https://example.com/.well-known/agent/support\"\
-  \nlifecycle:\n  registered: \"2026-04-14\"\n---\n\n# ANS Record: support.example.agents\n\nThe support agent is available\
-  \ at https://agents.example.com/support.\nContact it for any help requests.\n\nFailure analysis:\n\n| Gate | Result | Reason\
-  \ |\n|------|--------|--------|\n| H06 | FAIL | `protocol_adapters` array absent -- 0 adapters declared |\n| H08 | PASS\
-  \ | lifecycle.registered present |\n| H07 | PASS | discovery_endpoint present |\n\nScore with H06 fixed (hypothetically):\n\
-  \n| Dimension | Score | Reason |\n|-----------|-------|--------|\n| D2 Protocol coverage | 0.0 | Still 0 adapters -- H06\
-  \ was the symptom |\n| D3 PKI completeness | 0.0 | No pki_cert_reference, self-hosted operator |\n| D4 Capability richness\
-  \ | 0.0 | No capability_advertisement block |\n| Overall | < 5.0 | Well below publish threshold |\n\nFix: Add at minimum\
-  \ one protocol-adapter block (mcp or a2a), a capability_advertisement\nsection, and optionally a PKI-cert reference.\n\n\
-  Lesson: A raw endpoint URL is NOT an ANS registry-record. The record must\ndeclare HOW to connect (protocol-adapter), WHAT\
-  \ the agent can do (capability advertisement),\nand WHO is speaking (PKI-cert). Without these, the record is a dead URL,\
-  \ not a discovery entry."
+anti_example_2_missing_protocol_adapters: "What went wrong: Only an endpoint URL; no protocol-adapter entries. Useless --\
+  \ no way to know how to connect.\n\n---\nkind: agent_name_service_record\nid: p04_ans_support_example\npillar: P04\nquality:\
+  \ null\nagent_name: \"support.example.agents\"\nendpoint_url: \"https://agents.example.com/support\"\nregistry_operator:\
+  \ \"self\"\ndiscovery_endpoint: \"https://example.com/.well-known/agent/support\"\nlifecycle:\n  registered: \"2026-04-14\"\
+  \n---\n\n# ANS Record: support.example.agents\n\nThe support agent is available at https://agents.example.com/support.\n\
+  Contact it for any help requests.\n\nFailure analysis:\n\n| Gate | Result | Reason |\n|------|--------|--------|\n| H06\
+  \ | FAIL | `protocol_adapters` array absent -- 0 adapters declared |\n| H08 | PASS | lifecycle.registered present |\n| H07\
+  \ | PASS | discovery_endpoint present |\n\nScore with H06 fixed (hypothetically):\n\n| Dimension | Score | Reason |\n|-----------|-------|--------|\n\
+  | D2 Protocol coverage | 0.0 | Still 0 adapters -- H06 was the symptom |\n| D3 PKI completeness | 0.0 | No pki_cert_reference,\
+  \ self-hosted operator |\n| D4 Capability richness | 0.0 | No capability_advertisement block |\n| Overall | < 5.0 | Well\
+  \ below publish threshold |\n\nFix: Add >=1 protocol-adapter (mcp|a2a), a capability_advertisement, and optionally a PKI-cert.\n\
+  \nLesson: A raw endpoint URL is NOT an ANS record. It must declare HOW to connect (adapter), WHAT the agent does (capabilities),\
+  \ and WHO speaks (PKI-cert). Without these: dead URL."

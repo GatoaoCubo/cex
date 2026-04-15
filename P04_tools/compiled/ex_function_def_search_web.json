@@ -1,0 +1,49 @@
+{
+  "id": "p04_fn_search_web",
+  "kind": "function_def",
+  "pillar": "P04",
+  "version": "1.0.0",
+  "created": "2026-03-28",
+  "updated": "2026-03-28",
+  "author": "builder_agent",
+  "name": "search_web",
+  "description": "Search the web and return ranked results with titles, URLs, and snippets",
+  "parameters": "",
+  "returns": "Type: array of objects\nStructure: Each object contains `title` (string), `url` (string), `snippet` (string, max 200 chars), `score` (float 0-1).\nExample:\n[\n  {\"title\": \"RAG Best Practices 2026\", \"url\": \"https://example.com/rag\", \"snippet\": \"Retrieval-augmented generation...\", \"score\": 0.95}\n]",
+  "provider_compat": [
+    "openai",
+    "anthropic",
+    "gemini",
+    "bedrock"
+  ],
+  "strict": false,
+  "domain": "web-search",
+  "quality": 9.1,
+  "tags": [
+    "function_def",
+    "search",
+    "web",
+    "tool_use"
+  ],
+  "tldr": "OpenAI-compatible function def for web search with query, max_results, and search_type params",
+  "examples": "",
+  "error_types": [
+    "rate_limit_exceeded",
+    "invalid_query",
+    "timeout"
+  ],
+  "title": "Function Def Search Web",
+  "density_score": 0.9,
+  "overview": "Defines a callable function for LLM tool_use that performs web searches and returns structured results. An LLM calls this function when it needs real-time information not available in its training data.",
+  "query": "Type: string | Required: yes | Default: none\nThe user's search query. Supports natural language and quoted exact-match phrases. Max 400 characters.",
+  "max_results": "Type: number | Required: no | Default: 5\nNumber of results to return, between 1 and 20. Higher values increase latency and token usage.",
+  "search_type": "Type: string | Required: no | Default: general\nEnum: [general, news, images, academic]\nControls which index to search. `news` limits to last 7 days. `academic` prioritizes scholarly sources.",
+  "example_1_general_web_search": "Input:\n{\"query\": \"best practices for RAG pipelines\", \"max_results\": 3}\nOutput:\n[\n  {\"title\": \"Building Production RAG\", \"url\": \"https://example.com/rag-prod\", \"snippet\": \"Key patterns for reliable RAG: chunk sizing, hybrid retrieval, reranking...\", \"score\": 0.97},\n  {\"title\": \"RAG Pipeline Design\", \"url\": \"https://example.com/rag-design\", \"snippet\": \"A comprehensive guide to designing retrieval-augmented generation...\", \"score\": 0.92},\n  {\"title\": \"Evaluating RAG Systems\", \"url\": \"https://example.com/rag-eval\", \"snippet\": \"Metrics and frameworks for measuring RAG quality and relevance...\", \"score\": 0.88}\n]",
+  "cross_references": [
+    "Pillar: P04 (Tools)",
+    "Kind: `function def`",
+    "Artifact ID: `p04_fn_search_web`",
+    "Tags: [function_def, search, web, tool_use]"
+  ],
+  "integration_points": "| Component | Role |\n|-----------|------|\n| Pillar P04 | Tools domain |\n| Kind `function def` | Artifact type |\n| Pipeline | 8F (F1→F8) |"
+}

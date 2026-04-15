@@ -1,0 +1,56 @@
+{
+  "id": "p06_vs_frontmatter",
+  "kind": "validation_schema",
+  "pillar": "P06",
+  "title": "Validation Schema: YAML Frontmatter",
+  "version": "1.0.0",
+  "created": "2026-03-28",
+  "updated": "2026-03-28",
+  "author": "builder_agent",
+  "target_kind": "all",
+  "format": "yaml",
+  "fields_count": 8,
+  "on_failure": "reject",
+  "strict": true,
+  "domain": "frontmatter_validation",
+  "quality": 9.0,
+  "tags": [
+    "validation-schema",
+    "frontmatter",
+    "yaml",
+    "all-kinds"
+  ],
+  "tldr": "Validates YAML frontmatter common fields: id, kind, pillar, version, quality, tags, tldr. Rejects on parse error or missing required.",
+  "coercion": false,
+  "error_template": "{{field}} failed: {{reason}}",
+  "density_score": 0.91,
+  "linked_artifacts": {
+    "primary": "validation-schema-builder",
+    "related": [
+      "quality-gate-builder",
+      "validator-builder"
+    ]
+  },
+  "schema_overview": "Validates the common YAML frontmatter fields present in every organization artifact. Ensures structural integrity before kind-specific validation runs. Applied as first validation pass in the publish pipeline.",
+  "fields": "| Field | Type | Required | Constraints | Error message |\n|-------|------|----------|-------------|---------------|\n| id | string | yes | matches `^p\\d{2}[a-z][a-z0-9]+$` | id failed: must match pillar prefix pattern |\n| kind | string | yes | must exist in pillar's _schema.yaml kinds list | kind failed: unrecognized kind for pillar |\n| pillar | string | yes | matches `^P\\d{2}$` | pillar failed: must be P01-P12 format |\n| version | string | yes | semver format `^\\d+\\.\\d+\\.\\d+$` | version failed: must be valid semver |\n| quality | null | yes | must be literal null (not 0, not \"\", not \"null\") | quality failed: must be null for new artifacts |\n| tags | list | yes | non-empty, each tag is lowercase kebab or snake | tags failed: must be non-empty list of lowercase strings |\n| tldr | string | yes | 10-160 characters, no line breaks | tldr failed: must be 10-160 chars single line |\n| author | string | yes | non-empty string | author failed: must be non-empty |",
+  "failure_handling": [
+    "on_failure: reject — frontmatter errors are structural and cannot be auto-fixed safely",
+    "strict: true — no unknown fields allowed in common frontmatter block",
+    "coercion: false — types must match exactly (no string-to-number, no \"null\" to null)",
+    "error_template: \"{{field}} failed: {{reason}}\"",
+    "remediation: fix the specific field per error message, re-run validation"
+  ],
+  "integration": [
+    "Pipeline position: first pass, before kind-specific schema validation",
+    "Applied by: cex_doctor.py and publish pipeline validator",
+    "Input: raw YAML frontmatter block (between `---` markers)",
+    "Output: validated frontmatter dict or list of field-level errors"
+  ],
+  "cross_references": [
+    "Pillar: P06 (Schema)",
+    "Kind: `validation schema`",
+    "Artifact ID: `p06_vs_frontmatter`",
+    "Tags: [validation-schema, frontmatter, yaml, all-kinds]"
+  ],
+  "integration_points": "| Component | Role |\n|-----------|------|\n| Pillar P06 | Schema domain |\n| Kind `validation schema` | Artifact type |\n| Pipeline | 8F (F1→F8) |"
+}

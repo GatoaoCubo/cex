@@ -20,11 +20,7 @@ density_score: 0.85
 
 ## Golden Example: GoDaddy Customer-Service Agent
 
-**Scenario**: Production ANS registry-record for a GoDaddy customer-service agent
-that supports both MCP and A2A protocol-adapter entries, has a valid PKI-cert reference,
-exposes 3 capabilities, and registers a discovery-endpoint per CNCF AgentDNS spec.
-Salesforce MuleSoft Agent Fabric follows the same pattern for its A2A-first agents.
-This record passes all 8 hard gates and scores 9.5+ on soft dimensions.
+**Scenario**: Production ANS registry-record for a GoDaddy customer-service agent with MCP + A2A adapters, valid PKI-cert, 3 capabilities, and a CNCF AgentDNS discovery-endpoint. Salesforce MuleSoft Agent Fabric follows the same pattern. Passes all 8 hard gates; 9.5+ soft.
 
 ```markdown
 ---
@@ -56,11 +52,11 @@ tags: [ANS, AgentDNS, IETF, CNCF, godaddy, mcp, a2a, customer-service]
 |-------|-------|
 | ANS Name | `customer-service.godaddy.agents` |
 | Registry ID | `7f3c8d2a-1b4e-4f9a-8c6d-2e5a7b9f1c3e` |
-| Registry Operator | GoDaddy (production ANS integration, Feb 2026) |
+| Operator | GoDaddy (prod ANS, Feb 2026) |
 | Primary Endpoint | https://agents.godaddy.com/customer-service |
-| Discovery Endpoint | https://godaddy.com/.well-known/agent/customer-service |
-| Record Version | 1.0.0 |
-| Spec Reference | IETF draft-narajala-ans-00, CNCF draft-liang-agentdns-00 |
+| Discovery | https://godaddy.com/.well-known/agent/customer-service |
+| Version | 1.0.0 |
+| Spec | IETF draft-narajala-ans-00, CNCF draft-liang-agentdns-00 |
 
 ## Protocol Adapters
 
@@ -73,9 +69,9 @@ tags: [ANS, AgentDNS, IETF, CNCF, godaddy, mcp, a2a, customer-service]
 
 | Capability | Description |
 |-----------|-------------|
-| account-lookup | Retrieve customer account details by domain or account ID |
-| billing-dispute | Accept and route billing dispute submissions |
-| domain-transfer-status | Check status of in-progress domain transfer requests |
+| account-lookup | Retrieve customer account by domain or ID |
+| billing-dispute | Accept + route billing disputes |
+| domain-transfer-status | Check status of in-progress transfers |
 
 **Concurrency**: max_concurrent = 50
 
@@ -99,9 +95,9 @@ tags: [ANS, AgentDNS, IETF, CNCF, godaddy, mcp, a2a, customer-service]
 | Field | Value |
 |-------|-------|
 | URL | https://godaddy.com/.well-known/agent/customer-service |
-| Resolution method | HTTPS GET -- returns registry-record JSON |
-| TTL (seconds) | 3600 |
-| CNCF AgentDNS compatible | Yes -- draft-liang-agentdns-00 |
+| Resolution | HTTPS GET -> registry-record JSON |
+| TTL (s) | 3600 |
+| CNCF AgentDNS | draft-liang-agentdns-00 |
 
 ## Lifecycle
 
@@ -121,8 +117,7 @@ tags: [ANS, AgentDNS, IETF, CNCF, godaddy, mcp, a2a, customer-service]
 
 ## Anti-Example 1: Invalid ANS Name Format
 
-**What went wrong**: The agent name uses underscores (Python variable style) instead
-of hyphens. This fails H04 and makes the record invalid per IETF draft-narajala-ans-00.
+**What went wrong**: Name uses underscores instead of hyphens. Fails H04; invalid per IETF draft-narajala-ans-00.
 
 ```markdown
 ---
@@ -146,16 +141,13 @@ registry_operator: "cncf"
 
 **Fix**: Replace `billing_agent.acme_corp.agents` with `billing-agent.acme-corp.agents`
 
-**Lesson**: ANS names follow DNS label syntax (RFC 1035): lowercase, hyphens only,
-no underscores. Python variable naming habits (snake_case) do not apply here.
+**Lesson**: ANS names follow DNS label syntax (RFC 1035): lowercase, hyphens only. snake_case does not apply.
 
 ---
 
 ## Anti-Example 2: Missing Protocol Adapters
 
-**What went wrong**: The record only provides an endpoint URL but declares no
-protocol-adapter entries. This makes the record useless -- agents cannot connect
-without knowing which protocol to use.
+**What went wrong**: Only an endpoint URL; no protocol-adapter entries. Useless -- no way to know how to connect.
 
 ```markdown
 ---
@@ -194,9 +186,6 @@ Contact it for any help requests.
 | D4 Capability richness | 0.0 | No capability_advertisement block |
 | Overall | < 5.0 | Well below publish threshold |
 
-**Fix**: Add at minimum one protocol-adapter block (mcp or a2a), a capability_advertisement
-section, and optionally a PKI-cert reference.
+**Fix**: Add >=1 protocol-adapter (mcp|a2a), a capability_advertisement, and optionally a PKI-cert.
 
-**Lesson**: A raw endpoint URL is NOT an ANS registry-record. The record must
-declare HOW to connect (protocol-adapter), WHAT the agent can do (capability advertisement),
-and WHO is speaking (PKI-cert). Without these, the record is a dead URL, not a discovery entry.
+**Lesson**: A raw endpoint URL is NOT an ANS record. It must declare HOW to connect (adapter), WHAT the agent does (capabilities), and WHO speaks (PKI-cert). Without these: dead URL.

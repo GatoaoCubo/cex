@@ -40,14 +40,14 @@ density_score: 0.85
 
 **Format**: `{agent-label}.{org-label}.agents`
 
-| Rule | Pattern | Valid example | Invalid example |
-|------|---------|--------------|-----------------|
-| DNS-like segments | lowercase alphanumeric + hyphens | `billing-bot` | `billing_bot` |
-| Separator | `.` dot only | `billing-bot.acme.agents` | `billing-bot/acme/agents` |
-| Suffix | Must end in `.agents` | `support.corp.agents` | `support.corp.ai` |
-| Case | All lowercase | `crm.example.agents` | `CRM.Example.Agents` |
-| Length | Each label 1-63 chars | `a.b.agents` | (63+ char label) |
-| Reserved | No `_ans`, `_dmarc`, `_well-known` | any other | `_ans.corp.agents` |
+| Rule | Valid | Invalid |
+|------|-------|---------|
+| lowercase alphanumeric + hyphens | `billing-bot` | `billing_bot` |
+| `.` separator only | `billing-bot.acme.agents` | `billing-bot/acme/agents` |
+| Suffix `.agents` | `support.corp.agents` | `support.corp.ai` |
+| All lowercase | `crm.example.agents` | `CRM.Example.Agents` |
+| Each label 1-63 chars | `a.b.agents` | (63+ char label) |
+| No reserved labels | any other | `_ans.corp.agents` |
 
 ## registry_operator Enum
 
@@ -81,17 +81,11 @@ density_score: 0.85
 
 ## pki_cert_reference Field
 
-| Field | Type | Required | Format | Description |
-|-------|------|----------|--------|-------------|
-| pki_cert_reference | string | RECOMMENDED | `cert:{issuer}:{fingerprint}` | PKI-cert binding for agent authentication |
+`pki_cert_reference: string, RECOMMENDED, format `cert:{issuer}:{fingerprint}` -- PKI-cert binding.
 
-**Format examples:**
-- `cert:letsencrypt:SHA256:AB12CD34` -- Let's Encrypt issued cert
-- `cert:digicert:SHA256:EF56GH78` -- DigiCert issued cert
-- `cert:internal-pki:SHA256:IJ90KL12` -- Internal CA
+Examples: `cert:letsencrypt:SHA256:AB12CD34` | `cert:digicert:SHA256:EF56GH78` | `cert:internal-pki:SHA256:IJ90KL12`.
 
-**Omitting PKI-cert**: allowed per draft-narajala-ans-00 but blocks GoDaddy and
-Salesforce production registration. Triggers soft warning in quality gate.
+**Omitting**: allowed per draft-narajala-ans-00 but blocks GoDaddy + Salesforce prod registration. Soft warning.
 
 ## capability_advertisement Object
 
@@ -105,14 +99,9 @@ Salesforce production registration. Triggers soft warning in quality gate.
 
 ## discovery_endpoint Field
 
-| Field | Type | Required | Format | Description |
-|-------|------|----------|--------|-------------|
-| discovery_endpoint | string | YES | HTTPS URL | Well-known URL for runtime agent resolution |
+`discovery_endpoint: string, YES, HTTPS URL -- well-known URL for runtime resolution.`
 
-**Convention**: `https://{org-domain}/.well-known/agent/{agent-label}`
-
-This URL MUST differ from `endpoint_url`. It serves the registry-record JSON
-for runtime discovery by other agents and orchestrators.
+**Convention**: `https://{org-domain}/.well-known/agent/{agent-label}`. MUST differ from `endpoint_url`. Serves registry-record JSON for runtime discovery by agents + orchestrators.
 
 ## lifecycle Object
 

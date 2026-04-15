@@ -1,0 +1,37 @@
+{
+  "id": "p04_webhook_whatsapp_bridge",
+  "kind": "webhook",
+  "name": "whatsapp_bridge",
+  "protocol": "REST",
+  "direction": "bidirectional",
+  "auth": "session",
+  "pillar": "P04",
+  "version": "3.0.0",
+  "created": "2026-03-24",
+  "author": "builder_agent",
+  "quality": 9.0,
+  "tags": [
+    "connector",
+    "whatsapp",
+    "bridge",
+    "messaging"
+  ],
+  "updated": "2026-04-07",
+  "domain": "tool integration",
+  "title": "Webhook Whatsapp Bridge",
+  "density_score": 0.92,
+  "tldr": "Defines webhook for webhook whatsapp bridge, with validation gates and integration points.",
+  "service_contract": [
+    "Service: WhatsApp via whatsapp-web.js (Node.js, port 3847)",
+    "Mode: bidirectional (REST send + webhook receive)",
+    "Auth: QR code first run, LocalAuth session persistence after"
+  ],
+  "data_mapping": "| External Field | Internal Field | Rule |\n|----------------|----------------|------|\n| msg.body | text | UTF-8, max 4096 chars |\n| msg.hasMedia | audio_path | Download OGG to data/ |\n| msg.from | sender_id | number@c.us or group@g.us |",
+  "failure_handling": [
+    "Retry: 3 attempts, exponential backoff",
+    "Fallback: Queue if disconnected, flush on reconnect",
+    "Rate limit: 20 msgs/min sliding window"
+  ],
+  "metadata": "python _tools/cex_score.py --apply p04-webhook-whatsapp-bridge.md",
+  "properties": "| Property | Value |\n|----------|-------|\n| Kind | `webhook` |\n| Pillar | P04 |\n| Domain |  |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |"
+}

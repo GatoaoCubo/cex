@@ -26,7 +26,7 @@ long_tails:
 - formula de scoring para knowledge cards AI
 axioms:
 - Nenhum artefato entra no pool sem passar pelo gate
-- Score < 7.0 = rejeicao automatica sem excecao
+- Score < 8.0 = rejeicao automatica sem excecao
 density_score: 0.9
 purpose: Pre-commit gate para novos artefatos CEX — rejeita antes de entrar no pool.
 checklist_all_must_pass: ''
@@ -40,7 +40,7 @@ c2_size_constraint:
 - '[ ] If no constraint defined, max 4096 bytes default'
 - 'Auto-check: `validate_examples.py` size check'
 c3_density_threshold:
-- '[ ] Content density >= `density_min` from schema (or 0.7 baseline)'
+- '[ ] Content density >= `density_min` from schema (or 0.85 target)'
 - '[ ] No empty sections, no placeholder text (Configurable, PENDING, ...)'
 - '[ ] Each bullet carries actionable data (Specificity Test)'
 - 'Auto-check: `validate_examples.py` density estimation'
@@ -69,11 +69,11 @@ tiered_review: '| Score | Tier | Decision | Action |
 
   |-------|------|----------|--------|
 
-  | < 7.0 | Rejected | REJECT | Do not merge. Author must fix and resubmit |
+  | < 8.0 | Rejected | REJECT | Do not merge. Author must fix and resubmit |
 
-  | 7.0-7.9 | Learning | REVIEW | Merge with improvement notes. Flag for revisit |
+  | 8.0-8.9 | Skilled | ACCEPT | Merge. Eligible for pool and learning memory |
 
-  | 8.0-9.4 | Skilled | ACCEPT | Merge. Eligible for pool and learning memory |
+  | 9.0-9.4 | Quality | ACCEPT | Merge. Meets CEX quality target. |
 
   | >= 9.5 | Golden | ACCEPT+PROMOTE | Merge + copy to `archetypes/golden/` + celebrate |'
 scoring_guide: '| Dimension | Weight | What to Check |
@@ -95,15 +95,18 @@ scoring_guide: '| Dimension | Weight | What to Check |
 
 
   Each dimension scored 0-10. Final score = weighted sum.'
-integration: '# Pre-commit (run all 3 validators)
+integration: '# Pre-commit (run doctor + score)
 
   cd /path/to/cex
 
-  python _tools/validate_schema.py && \
+  python _tools/cex_doctor.py && \
 
-  python _tools/validate_generators.py && \
+  python _tools/cex_score.py --apply <artifact.md>
 
-  python _tools/validate_examples.py
+
+  # Compile after save
+
+  python _tools/cex_compile.py <artifact.md>
 
 
   # Exit code 0 = all pass, 1 = failures found'

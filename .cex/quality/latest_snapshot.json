@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-04-12T13:58:12",
+  "timestamp": "2026-04-15T18:31:20",
   "total": 1,
   "avg_score": 8.0,
   "artifacts": [
     {
-      "path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P01_knowledge\\examples\\p01_kc_system_testing_patterns.md",
-      "kind": "knowledge_card",
-      "pillar": "P01",
+      "path": "C:\\Users\\CEX\\Documents\\GitHub\\cex\\P02_model\\examples\\p02_agent_petshop_crm.md",
+      "kind": "agent",
+      "pillar": "P02",
       "score": 8.0
     }
   ]

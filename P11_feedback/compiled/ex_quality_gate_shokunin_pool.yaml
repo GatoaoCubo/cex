@@ -67,32 +67,6 @@ bypass: '1. Conditions: never (pool quality is non-negotiable)
   ---
 
   Migrated from: organization Shokunin quality philosophy (CLAUDE.md + Edison mental_model.yaml)'
-scoring_command: python _tools/cex_score.py --apply N0*/*.md
-system_context: 'This artifact participates in the CEX typed knowledge system, a fractal
+scoring_command: 'python _tools/cex_score.py --apply --verbose target.md
 
-  architecture with 12 pillars, 8 nuclei, and 125 specialized builders.
-
-  Artifacts flow through the 8F pipeline: Focus, Frame, Fetch, Filter,
-
-  Format, Forge, Furnish, and Feedback.
-
-
-  Quality is enforced via 3-layer scoring: structural (30%), rubric (30%),
-
-  and semantic (40%). All artifacts target quality >= 9.0.
-
-
-  | Layer | Weight | Method |
-
-  |-------|--------|--------|
-
-  | Structural | 30% | Automated count-based checks |
-
-  | Rubric | 30% | Quality gate dimension scoring |
-
-  | Semantic | 40% | LLM evaluation (when L1+L2 >= 8.5) |'
-gate_shokunin_pool_admission: ''
-quality_enforcement: This artifact follows the CEX 3-layer quality model. Structural scoring validates frontmatter completeness,
-  content depth, and format diversity. Rubric scoring checks dimension-specific criteria from the quality gate. Semantic scoring
-  provides LLM-based evaluation when layers one and two average 8.5 or above. All artifacts target quality 9.0 or higher.
-  Below 8.0 triggers a rebuild. Between 8.0 and 9.0, the evolve pipeline applies targeted improvements.
+  python _tools/cex_score.py --apply N0*/*.md'

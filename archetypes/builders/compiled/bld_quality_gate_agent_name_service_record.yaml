@@ -16,38 +16,31 @@ domain: agent_name_service_record construction
 created: '2026-04-14'
 updated: '2026-04-14'
 density_score: 0.85
-hard_gates_h01_h08: 'All 8 must pass. Any single failure blocks publication.
+hard_gates_h01_h08: 'All 8 must pass. Any failure blocks publication.
 
 
-  | Gate | ID | Check | Pass Condition | Failure Action |
+  | ID | Gate | Check | Pass | Fix |
 
-  |------|----|-------|----------------|---------------|
+  |----|------|-------|------|-----|
 
-  | Frontmatter valid | H01 | YAML parses without error | No parse errors, all required fields present | Fix YAML syntax before
-  proceeding |
+  | H01 | Frontmatter | YAML parses | No errors, required fields present | Fix YAML |
 
-  | ID pattern | H02 | Regex match on `id` field | `^p04_ans_[a-z0-9_]+$` | Rename to match pattern |
+  | H02 | ID pattern | Regex on `id` | `^p04_ans_[a-z0-9_]+$` | Rename |
 
-  | Kind correct | H03 | Exact string match | `kind == "agent_name_service_record"` | Correct kind field |
+  | H03 | Kind | String match | `kind=="agent_name_service_record"` | Correct |
 
-  | ANS name format | H04 | DNS-like format validation | lowercase, hyphens only, ends in `.agents`, no underscores | Reformat
-  per schema rules |
+  | H04 | ANS name | DNS-like | lowercase, hyphens, ends `.agents`, no underscores | Reformat |
 
-  | Endpoint URL present | H05 | URL validity check | Valid HTTPS URL, not localhost, not empty | Add production endpoint
-  |
+  | H05 | Endpoint | URL check | HTTPS, not localhost, not empty | Add prod URL |
 
-  | Protocol adapters present | H06 | Array cardinality | At least 1 entry in `protocol_adapters` array | Declare MCP, A2A,
-  or gRPC adapter |
+  | H06 | Adapters | Array size | `protocol_adapters` >=1 | Declare MCP/A2A/gRPC |
 
-  | Discovery endpoint present | H07 | Field existence + URL validity | `discovery_endpoint` field present, valid HTTPS URL
-  | Add well-known discovery URL |
+  | H07 | Discovery | Field + URL | `discovery_endpoint` present, HTTPS | Add well-known URL |
 
-  | Lifecycle registered | H08 | Field existence + date format | `lifecycle.registered` present, ISO 8601 format | Add registration
-  date |'
-gate_evaluation_logic: "H01 -> H02 -> H03 -> H04 -> H05 -> H06 -> H07 -> H08\n  |      |      |      |      |      |     \
-  \ |      |\nFAIL   FAIL   FAIL   FAIL   FAIL   FAIL   FAIL   FAIL\n  |      |      |      |      |      |      |      |\n\
-  \  +------+------+------+------+------+------+------+-> BLOCK\n                                                       (do\
-  \ not publish)\n\nALL PASS -> proceed to soft scoring"
+  | H08 | Lifecycle | Date format | `lifecycle.registered` ISO 8601 | Add date |
+
+
+  Logic: H01 -> H08 sequential. Any FAIL -> BLOCK (do not publish). ALL PASS -> soft scoring.'
 soft_scoring_dimensions_5d: Used when all hard gates pass. Weighted sum targets 9.0+
 d1_name_resolution_quality_weight_0_25: '| Score | Condition |
 

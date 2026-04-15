@@ -1,0 +1,30 @@
+{
+  "id": "p06_vs_signal_completion",
+  "kind": "validation_schema",
+  "pillar": "P06",
+  "description": "Output schema for agent_group completion signals",
+  "format": "json",
+  "version": "1.0.0",
+  "created": "2026-03-24",
+  "author": "builder_agent",
+  "quality": 9.0,
+  "tags": [
+    "output-schema",
+    "signal",
+    "completion",
+    "json"
+  ],
+  "updated": "2026-04-07",
+  "domain": "schema",
+  "title": "Validator Signal Completion",
+  "density_score": 0.92,
+  "tldr": "Defines validation schema for validator signal completion, with validation gates and integration points.",
+  "schema": "{\n  \"agent_group\": \"string (edison|shaka|lily|pytha|atlas|york)\",\n  \"status\": \"string (complete|error|progress)\",\n  \"quality_score\": \"number (0.0-10.0)\",\n  \"timestamp\": \"string (ISO 8601)\",\n  \"task_summary\": \"string (what was done)\",\n  \"artifacts\": [\"string (file paths created/modified)\"],\n  \"commit_hash\": \"string (git commit if applicable)\"\n}",
+  "example": "{\n  \"agent_group\": \"edison\",\n  \"status\": \"complete\",\n  \"quality_score\": 9.0,\n  \"timestamp\": \"2026-03-24T20:00:00Z\",\n  \"task_summary\": \"8 P04 examples from real artifacts\",\n  \"artifacts\": [\"P04_tools/examples/p04_mcp_organization_brain.md\"],\n  \"commit_hash\": \"e8dd58b\"\n}",
+  "consumers": [
+    "spawn_monitor.ps1: polls `.claude/signals/` for completion",
+    "orchestrator: reads signals to determine wave completion",
+    "spawn_grid.ps1 continuous mode: triggers next batch dispatch"
+  ],
+  "properties": "| Property | Value |\n|----------|-------|\n| Kind | `validation_schema` |\n| Pillar | P06 |\n| Domain |  |\n| Pipeline | 8F (F1-F8) |\n| Scorer | cex_score.py |\n| Compiler | cex_compile.py |\n| Retriever | cex_retriever.py |\n| Quality target | 9.0+ |\n| Density target | 0.85+ |"
+}

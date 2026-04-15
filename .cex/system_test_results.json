@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-04-13T22:32:08.816621",
-  "pass": 52,
-  "fail": 6,
+  "timestamp": "2026-04-15T18:31:54.284167",
+  "pass": 53,
+  "fail": 5,
   "skip": 0,
   "total": 58,
-  "elapsed_s": 307.9,
+  "elapsed_s": 235.4,
   "tests": [
     {
       "name": "tool:cex_8f_motor.py",
@@ -44,7 +44,7 @@
     {
       "name": "tool:cex_hooks.py",
       "status": "PASS",
-      "detail": "24396B"
+      "detail": "26329B"
     },
     {
       "name": "tool:cex_score.py",
@@ -64,82 +64,82 @@
     {
       "name": "doctor:pass_count",
       "status": "PASS",
-      "detail": "134/98+ PASS"
+      "detail": "189/98+ PASS"
     },
     {
       "name": "doctor:zero_warn",
       "status": "FAIL",
-      "detail": "27 WARN"
+      "detail": "64 WARN"
     },
     {
       "name": "doctor:zero_fail",
       "status": "FAIL",
-      "detail": "1 FAIL"
+      "detail": "5 FAIL"
     },
     {
       "name": "compile:all",
       "status": "PASS",
-      "detail": "379/379"
+      "detail": "382/382"
     },
     {
       "name": "builders:count",
       "status": "PASS",
-      "detail": "163 builders"
+      "detail": "259 builders"
     },
     {
       "name": "builders:13_isos",
-      "status": "FAIL",
-      "detail": "1 short: training-method-builder(3)"
+      "status": "PASS",
+      "detail": "all 13 specs"
     },
     {
       "name": "nucleus:N01_intelligence",
       "status": "PASS",
-      "detail": "118 artifacts (min 11)"
+      "detail": "130 artifacts (min 11)"
     },
     {
       "name": "nucleus:N02_marketing",
       "status": "PASS",
-      "detail": "73 artifacts (min 10)"
+      "detail": "90 artifacts (min 10)"
     },
     {
       "name": "nucleus:N03_engineering",
       "status": "PASS",
-      "detail": "66 artifacts (min 34)"
+      "detail": "77 artifacts (min 34)"
     },
     {
       "name": "nucleus:N04_knowledge",
       "status": "PASS",
-      "detail": "76 artifacts (min 12)"
+      "detail": "89 artifacts (min 12)"
     },
     {
       "name": "nucleus:N05_operations",
       "status": "PASS",
-      "detail": "70 artifacts (min 9)"
+      "detail": "79 artifacts (min 9)"
     },
     {
       "name": "nucleus:N06_commercial",
       "status": "PASS",
-      "detail": "80 artifacts (min 9)"
+      "detail": "90 artifacts (min 9)"
     },
     {
       "name": "nucleus:N07_admin",
       "status": "PASS",
-      "detail": "39 artifacts (min 13)"
+      "detail": "40 artifacts (min 13)"
     },
     {
       "name": "quality:zero_null",
-      "status": "PASS",
-      "detail": "10 quality:null (awaiting peer review)"
+      "status": "FAIL",
+      "detail": "22 quality:null (awaiting peer review)"
     },
     {
       "name": "quality:scored",
       "status": "PASS",
-      "detail": "539 artifacts with quality score"
+      "detail": "602 artifacts with quality score"
     },
     {
       "name": "subagents:count",
       "status": "PASS",
-      "detail": "186 sub-agents"
+      "detail": "259 sub-agents"
     },
     {
       "name": "subagents:materializer",
@@ -229,7 +229,7 @@
     {
       "name": "registry:kinds_meta",
       "status": "PASS",
-      "detail": "184 kinds registered"
+      "detail": "257 kinds registered"
     },
     {
       "name": "runner:dryrun_runs",
@@ -253,13 +253,13 @@
     },
     {
       "name": "runner:execute_pass",
-      "status": "FAIL",
-      "detail": "\\pythoncore-3.14-64\\\\python.exe', '_tools/cex_8f_runner.py', 'create a knowledge card about system testing patterns', '--kind', 'knowledge_card', '--execute', '--verbose']' timed out after 120 seconds"
+      "status": "PASS",
+      "detail": "PASS"
     },
     {
       "name": "runner:learning_record",
       "status": "PASS",
-      "detail": "10 records"
+      "detail": "12 records"
     },
     {
       "name": "e2e:script_exists",
@@ -274,7 +274,7 @@
     {
       "name": "e2e:runs",
       "status": "FAIL",
-      "detail": "exit=-1, output=Command '['C:\\\\Users\\\\CEX\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\python.exe', 'C:\\\\Users\\\\CEX\\\\Documents\\\\GitHub\\\\cex\\\\_tools\\\\cex_e2e_test.py',"
+      "detail": "exit=-1, output=Command '['C:\\\\Users\\\\CEX\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe', 'C:\\\\Users\\\\CEX\\\\Documents\\\\GitHub\\\\cex\\\\_tools\\\\cex_e2e_test.py'"
     },
     {
       "name": "e2e:report_written",
@@ -284,17 +284,17 @@
     {
       "name": "kc:count",
       "status": "PASS",
-      "detail": "182/98 kind KCs"
+      "detail": "263/98 kind KCs"
     },
     {
       "name": "git:clean",
       "status": "FAIL",
-      "detail": "422 dirty files"
+      "detail": "34 dirty files"
     },
     {
       "name": "git:has_commits",
       "status": "PASS",
-      "detail": "e863611e [N01] POLISH: fix action-paradigm density (3 ISOs r"
+      "detail": "9c1386f80 [8F] agent: faz um CRM pra pet shop"
     }
   ]
 }
