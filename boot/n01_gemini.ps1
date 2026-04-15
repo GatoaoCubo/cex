@@ -4,6 +4,7 @@
 
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 . $PSScriptRoot/_shared/emit_exit_signal.ps1
+. $PSScriptRoot/_shared/run_with_timeout.ps1
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n01"
 
@@ -80,6 +81,8 @@ try {
     Clear-Host
 } catch {}
 $cex_start_time = Get-Date
+$watchdog = Start-CexWatchdog
 & gemini @cliArgs $initialMsg
+$exitStatus = Stop-CexWatchdog $watchdog
 Set-CexTitle "DONE"
-Emit-ExitSignal -StartTime $cex_start_time
+Emit-ExitSignal -StartTime $cex_start_time -Status $exitStatus
