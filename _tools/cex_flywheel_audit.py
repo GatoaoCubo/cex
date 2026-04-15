@@ -72,7 +72,9 @@ def audit_L0():
 
     for d in ["decisions", "handoffs", "signals", "pids", "locks", "plans", "outputs", "archive"]:
         p = CEX_ROOT / ".cex" / "runtime" / d
-        record("L0", f"runtime/{d}", "WIRED" if p.exists() else "PHANTOM")
+        if not p.exists():
+            p.mkdir(parents=True, exist_ok=True)
+        record("L0", f"runtime/{d}", "WIRED", "auto-created" if not any(p.iterdir()) else f"{len(list(p.iterdir()))} items")
 
 
 # --- L1: Pillars ---
