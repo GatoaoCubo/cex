@@ -19,6 +19,8 @@ capabilities: >
 effort: high
 max_turns: 30
 permission_scope: nucleus
+isolation: worktree
+isolation_reason: "landing pages ship 12+ sections, assets, and A/B variants; worktree keeps conversion experiments separate from production main"
 quality: 9.1
 title: "Manifest Landing Page"
 tldr: "Golden and anti-examples for landing page construction, demonstrating ideal structure and common pitfalls."

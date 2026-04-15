@@ -18,6 +18,8 @@ quality: 9.1
 title: "Manifest System Prompt"
 tldr: "Golden and anti-examples for system prompt construction, demonstrating ideal structure and common pitfalls."
 density_score: 0.90
+isolation: worktree
+isolation_reason: "system_prompt edits propagate across every agent that cites them; worktree isolates iterative persona tuning from main until validated"
 ---
 # system-prompt-builder
 ## Identity

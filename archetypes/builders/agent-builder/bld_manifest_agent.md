@@ -18,6 +18,8 @@ quality: 9.1
 title: "Manifest Agent"
 tldr: "Golden and anti-examples for agent construction, demonstrating ideal structure and common pitfalls."
 density_score: 0.90
+isolation: worktree
+isolation_reason: "agent builds touch 10+ files across pillars (agent_package, system_prompt, KCs, memory, tools); worktree prevents main-branch churn and enables parallel agent builds"
 ---
 # agent-builder
 ## Identity

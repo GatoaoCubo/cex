@@ -18,6 +18,8 @@ quality: 9.1
 title: "Manifest Workflow"
 tldr: "Golden and anti-examples for workflow construction, demonstrating ideal structure and common pitfalls."
 density_score: 0.90
+isolation: worktree
+isolation_reason: "workflows coordinate multiple agents and touch dispatch/signal infra; worktree lets long multi-wave builds run without blocking the main branch"
 ---
 # workflow-builder
 ## Identity

@@ -14,6 +14,8 @@ domain: "crew_template construction"
 created: "2026-04-14"
 updated: "2026-04-14"
 density_score: 0.88
+isolation: worktree
+isolation_reason: "crew templates spawn N role_assignments + team_charter at once and orchestrate multi-agent handoffs; worktree lets grid-of-crews experiments run without polluting main"
 ---
 
 ## Identity
