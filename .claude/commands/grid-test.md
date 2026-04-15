@@ -140,3 +140,15 @@ N07 works on other tasks.
 5. **Matrix always has `Committed` column** alongside `Landed` and `Usable` --
    for claude-family, Committed is the source of truth; for ollama, both
    typically match (ollama nuclei auto-commit via boot wrapper).
+6. **Stale output stubs poison completion**: `dispatch_wave` cleans any
+   existing `{MISSION_UPPER}_n0*.md` (and `.trace.json`) in the output dir
+   BEFORE dispatch, so a prior failed run's 9-byte `MAX_ITERS` placeholder
+   doesn't instant-satisfy the file-land detector. Use uppercase glob.
+7. **Free-tier recommendation: `ollama-llama` (pure)**, not hybrid routing.
+   Per-nucleus qwen2.5-coder:7b on content tasks produces 9-byte stubs;
+   ollama run-to-run variance (2-6x per nucleus) dominates routing gains.
+   See memory `project_free_tier_routing_truth.md`.
+8. **Monitoring pattern** while a grid-test runs: `Bash run_in_background`
+   for the tool + `Monitor` tailing `state.log` with filter
+   `-E "=== WAVE|landed=[3-6]/|close |archive|COMPLETE|FAILED|TIMEOUT"`.
+   No polling, live progress, stays out of context until events fire.

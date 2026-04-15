@@ -2,6 +2,18 @@ runtime: ollama-hybrid
 tier: free
 provider: ollama
 cli: none
+status: deprecated
+deprecation_reason: |
+  Disproven by 4 grid-test waves on LEVERAGE_MAP_V2 (2026-04-15).
+  Per-nucleus routing to qwen2.5-coder:7b on content tasks produces
+  9-byte MAX_ITERS stubs (qwen cannot call done() on non-code work).
+  Run-to-run variance on ollama models (~2-6x per nucleus) dominates
+  any routing-derived gain.
+
+  RECOMMENDED: use runtime=ollama-llama (pure llama3.1:8b).
+  See memory project_free_tier_routing_truth.md.
+
+# Kept for historical reference only. Do NOT use.
 models:
   default: llama3.1:8b
   n01: llama3.1:8b
@@ -34,22 +46,3 @@ spawn_script: _spawn/spawn_grid_ollama.ps1
 runner: _tools/cex_agentic_nucleus.py
 cost_per_mtok_in: 0
 cost_per_mtok_out: 0
-routing_pattern: |
-  Derived from 3 grid-test waves on LEVERAGE_MAP_V2 (2026-04-15):
-    llama3.1:8b    = reliable base (always lands, calls done() natively)
-    qwen2.5-coder  = code-only reliable (n03 builder, n07 orchestrator)
-    qwen on content (n01/n02/n04/n06) = hits MAX_ITERS, outputs 9-byte stub.
-
-  Routing (conservative):
-    n01 intel     -> llama (qwen failed: 9B stub on MAX_ITERS)
-    n02 marketing -> llama (qwen failed: 9B stub)
-    n03 builder   -> qwen2.5-coder:7b (code-tuned, completes)
-    n04 knowledge -> llama (qwen failed: 9B stub)
-    n05 ops       -> llama (qwen inconsistent: 360B or 797B)
-    n06 commercial-> llama (qwen failed: 9B)
-    n07 orch      -> qwen2.5-coder:7b (planning w/ code awareness)
-notes: |
-  REVISED 2026-04-15 after hybrid-aggressive routing (qwen on n01-n04) produced
-  four 9-byte MAX_ITERS stubs. Conservative routing: llama is the base,
-  qwen only where code-shaped output wins (n03 builder, n07 orch planning).
-  See _reports/gridtest_leverage_map/ for the 3 wave reports.
