@@ -7,6 +7,7 @@ param(
     [int]$MaxIters = 15,
     [int]$RequireReads = 2
 )
+. $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 
 # Set repo root
 $RepoRoot = Resolve-Path "$PSScriptRoot\.."

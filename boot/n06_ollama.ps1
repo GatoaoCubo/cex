@@ -4,8 +4,10 @@
 # Sin: Strategic Greed (Strategic Greed)
 
 # --- UX: Window title with mission + sin + status ---
+. $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n06"
+. $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
 $sinName = "Strategic Greed"
 
 # Detect model (env override or default)
@@ -32,6 +34,7 @@ try {
     $gitBranch = (git rev-parse --abbrev-ref HEAD 2>$null)
     $gitRemote = (git remote get-url origin 2>$null)
     if ($gitRemote -match "[/:]([^/]+?)(?:\.git)?$") { $gitRepo = $Matches[1] }
+    Clear-Host
 } catch {}
 
 # Build title: N0X Sin | repo@branch [mission] -- STATUS

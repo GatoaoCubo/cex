@@ -3,8 +3,10 @@
 # Ollama directly. Model alias: cex-n02 -- proxy decides backend (Anthropic
 # -> Gemini -> Ollama gemma4:26b -> qwen3) per .cex/config/litellm_config.yaml.
 
+. $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n02"
+. $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
 $sinName = "Creative Lust"
 
 $proxyUrl = if ($env:LITELLM_BASE_URL) { $env:LITELLM_BASE_URL } else { "http://localhost:4000" }
@@ -23,6 +25,7 @@ try {
     $gitBranch = (git rev-parse --abbrev-ref HEAD 2>$null)
     $gitRemote = (git remote get-url origin 2>$null)
     if ($gitRemote -match "[/:]([^/]+?)(?:\.git)?$") { $gitRepo = $Matches[1] }
+    Clear-Host
 } catch {}
 
 function Set-CexTitle($status) {

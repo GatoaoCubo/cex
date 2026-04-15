@@ -5,8 +5,10 @@
 
 # --- UX: Window title with mission + sin + status ---
 # Auto-detect root from script location (worktree-agnostic)
+. $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n02"
+. $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
 $sinName = "Creative Lust"
 $modelShort = "claude-sonnet-4-6" -replace "claude-", ""
 
@@ -85,13 +87,9 @@ try {
     $buf = $Host.UI.RawUI.BufferSize
     if ($buf.Width -ne $win.Width) {
         $buf.Width = $win.Width
-        $buf.Height = [Math]::Max($win.Height, 3000)
+        $buf.Height = [Math]::Max($win.Height, $cexScrollback)
         $Host.UI.RawUI.BufferSize = $buf
     }
-    # 3. Reset colors (prevents DarkGreen/RawUI bleed into child CLI TUI)
-    $Host.UI.RawUI.BackgroundColor = "Black"
-    $Host.UI.RawUI.ForegroundColor = "Gray"
-    [Console]::ResetColor()
     Clear-Host
 } catch {}
 & claude @cliArgs

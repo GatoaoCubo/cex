@@ -2,6 +2,7 @@
 # Spawns aider with qwen3:14b for artifact building at $0 cost
 # Usage: boot\n03_aider.ps1  (reads n03_task.md for instructions)
 
+. $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
 $ErrorActionPreference = "SilentlyContinue"
 $CEX_ROOT = Split-Path -Parent $PSScriptRoot
 Set-Location $CEX_ROOT
