@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import os
+import argparse
 import subprocess
 import sys
 from pathlib import Path
@@ -117,13 +118,27 @@ EVENTS = {
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) < 2 or argv[1] not in EVENTS:
+    if len(argv) < 2:
         sys.stderr.write("usage: cex_hooks_native.py {post-tool-use|post-compact|session-start|stop}\n")
         return 0
+    if not argv[1].startswith("-") and argv[1] not in EVENTS:
+        sys.stderr.write("usage: cex_hooks_native.py {post-tool-use|post-compact|session-start|stop}\n")
+        return 0
+
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "event",
+        nargs="?",
+        help="Hook event to execute.",
+    )
+    parsed, _ = parser.parse_known_args(argv[1:])
     try:
-        return EVENTS[argv[1]]()
+        return EVENTS[parsed.event]()
     except Exception as e:
-        _log(argv[1], {"fatal": str(e)})
+        _log(parsed.event, {"fatal": str(e)})
         return 0
 
 
