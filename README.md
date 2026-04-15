@@ -10,8 +10,8 @@
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <img src="https://img.shields.io/badge/LLMs-Claude%20%7C%20GPT%20%7C%20Gemini%20%7C%20Ollama-8A2BE2" alt="LLMs">
   <img src="https://img.shields.io/badge/pillars-12-orange" alt="Pillars">
-  <img src="https://img.shields.io/badge/artifact%20kinds-132-red" alt="Kinds">
-  <img src="https://img.shields.io/badge/tools-83-brightgreen" alt="Tools">
+  <img src="https://img.shields.io/badge/artifact%20kinds-257-red" alt="Kinds">
+  <img src="https://img.shields.io/badge/tools-82-brightgreen" alt="Tools">
 </p>
 
 ---
@@ -24,13 +24,13 @@ You describe **intent** in 8 tokens. CEX compiles it into a **governed prompt** 
 
 ### Key capabilities
 
-- **132 artifact kinds** across 12 pillars, each with typed frontmatter and validation
+- **257 artifact kinds** across 12 pillars, each with typed frontmatter and validation
 - **8-function pipeline** (8F): CONSTRAIN > BECOME > INJECT > REASON > CALL > PRODUCE > GOVERN > COLLABORATE
-- **128 builder factories**, each with 13 ISO files (schema, prompt, examples, quality gate, ...)
+- **262 builder factories** with 3381 ISO files total (13 per kind: schema, prompt, examples, quality gate, ...)
 - **Multi-provider routing**: Claude, GPT, Gemini, Ollama -- with health checks and automatic fallback
 - **Reverse compiler**: export your knowledge base to CLAUDE.md, .cursorrules, CustomGPT JSON
 - **Self-healing**: model updater detects stale versions, flywheel audits doc-vs-practice integrity
-- **7 business nuclei**: independent AI agents that build, research, market, deploy, and govern
+- **8 business nuclei** (N00-N07): independent AI agents that build, research, market, deploy, and govern
 
 ---
 
@@ -52,7 +52,7 @@ python _tools/cex_bootstrap.py              # Answer ~6 questions about your com
 python _tools/cex_8f_runner.py "create knowledge card about product pricing" --kind knowledge_card --execute
 
 # 5. Validate system health
-python _tools/cex_doctor.py                 # Builder integrity (128 builders)
+python _tools/cex_doctor.py                 # Builder integrity (262 builders)
 python _tools/cex_hooks.py validate-all     # Frontmatter validation
 python _tools/cex_flywheel_audit.py audit   # Full system audit (109 checks)
 ```
@@ -89,12 +89,12 @@ python _tools/cex_8f_runner.py "your intent" --kind <kind> --dry-run --verbose
 ## Architecture
 
 ```
-Layer 0 — BUILDERS       111 factories x 13 ISOs = artifact construction
-Layer 1 — PILLARS        12 pillars x 115 kinds = the taxonomy
-Layer 2 — NUCLEI         7 business domains (N01-N07) = the organization
+Layer 0 — BUILDERS       262 factories x 13 ISOs = 3381 artifact constructors
+Layer 1 — PILLARS        12 pillars x 257 kinds = the taxonomy
+Layer 2 — NUCLEI         8 business domains (N00 Genesis + N01-N07) = the organization
 Layer 3 — PIPELINE       8F functions = the assembly line
 Layer 4 — GOVERNANCE     hooks + doctor + quality gates = the quality bar
-Layer 5 — TOOLS          52 Python CLI tools = the runtime
+Layer 5 — TOOLS          82 Python CLI tools = the runtime
 Layer 6 — WIRING         SDK modules + flywheel = the nervous system
 ```
 
@@ -121,15 +121,17 @@ Layer 6 — WIRING         SDK modules + flywheel = the nervous system
 
 CEX routes each nucleus to the best LLM for its job:
 
-| Nucleus | Domain | Default Provider | Context |
-|---------|--------|-----------------|---------|
-| N01 | Research | Gemini 2.5 Pro | 1M tokens |
-| N02 | Marketing | Claude Sonnet 4.6 | 1M tokens |
-| N03 | Engineering | Claude Opus 4.6 | 1M tokens |
-| N04 | Knowledge | Gemini 2.5 Pro | 1M tokens |
-| N05 | Operations | Claude Sonnet 4.6 | 1M tokens |
-| N06 | Commercial | Claude Sonnet 4.6 | 1M tokens |
-| N07 | Orchestrator | Claude Opus 4.6 | 1M tokens |
+| Nucleus | Domain | Default Provider | Context | Tier |
+|---------|--------|-----------------|---------|------|
+| N01 | Research / Intelligence | Claude Sonnet 4.6 | 200K | Sonnet |
+| N02 | Marketing / Copy | Claude Sonnet 4.6 | 200K | Sonnet |
+| N03 | Engineering / Builder | Claude Opus 4.6 | 1M | **Opus** |
+| N04 | Knowledge / RAG | Claude Sonnet 4.6 | 200K | Sonnet |
+| N05 | Operations / DevOps | Claude Sonnet 4.6 | 200K | Sonnet |
+| N06 | Commercial / Monetization | Claude Sonnet 4.6 | 200K | Sonnet |
+| N07 | Orchestrator | Claude Opus 4.6 | 1M | **Opus** |
+
+Budget-optimized: 2 Opus + 5 Sonnet. Pre-flight context compression via `cex_preflight.py` (local Ollama or Haiku) reduces token burn ~70% before nucleus boot.
 
 Configuration lives in `.cex/config/nucleus_models.yaml` (single source of truth). All boot scripts, routing, and tools read from it.
 
@@ -170,7 +172,7 @@ bash _spawn/dispatch.sh stop --all                              # Stop ALL (DANG
 
 ---
 
-## Tools (51 total)
+## Tools (82 total)
 
 ### Core Pipeline
 | Tool | Purpose |
@@ -202,7 +204,7 @@ bash _spawn/dispatch.sh stop --all                              # Stop ALL (DANG
 ### Quality & Governance
 | Tool | Purpose |
 |------|---------|
-| `cex_doctor.py` | Builder health check (128 builders) |
+| `cex_doctor.py` | Builder health check (262 builders) |
 | `cex_hooks.py` | Pre/post validation + git hooks |
 | `cex_score.py` | Peer review scoring (--apply) |
 | `cex_flywheel_audit.py` | Full system audit (109 checks) |
@@ -233,16 +235,13 @@ bash _spawn/dispatch.sh stop --all                              # Stop ALL (DANG
 
 | Metric | Count |
 |--------|-------|
-| Artifact kinds | 115 |
-| Builders (factories) | 111 |
-| Builder ISO files | 13 per kind |
-| Sub-agents | 110 |
-| Knowledge cards | 117 |
-| CLI tools | 52 |
-| Compiled artifacts | 898 |
-| Examples | 369 |
+| Artifact kinds | 257 |
+| Builders (factories) | 262 |
+| Builder ISO files | 13 per kind (3381 total) |
+| Sub-agents | 125 |
+| CLI tools | 82 |
 | Pillars | 12 |
-| Business nuclei | 7 |
+| Business nuclei | 8 (N00-N07) |
 | 8F functions | 8 |
 | Flywheel checks | 109 (100% WIRED) |
 
@@ -257,19 +256,19 @@ cex/
     brand/               Brand config + templates
     runtime/             Handoffs, signals, decisions, plans
     quality/             Audit reports, overnight logs
-  _tools/                52 Python CLI tools (cex_*.py)
-  _spawn/                Dispatch scripts (solo, grid, monitor)
-  _docs/                 Whitepaper, architecture docs
-  archetypes/            Builder templates (128 builders x 13 ISOs)
+  _tools/                82 Python CLI tools (cex_*.py)
+  _spawn/                Dispatch scripts (solo, grid, monitor, swarm)
+  _docs/                 Whitepaper, architecture docs, specs
+  archetypes/            Builder templates (262 builders x 13 ISOs)
     builders/            One directory per kind
     _shared/             Shared skills across all builders
-  boot/                  Boot scripts per nucleus (auto-generated)
-  cex_sdk/               SDK runtime (providers, models, memory)
+  boot/                  Boot scripts per nucleus (claude/codex/gemini/ollama)
+  cex_sdk/               SDK runtime (providers, models, memory, 78 modules)
   P01_knowledge/ ...     12 pillar directories
   P12_orchestration/
-  N01_intelligence/ ...  7 nucleus directories
+  N00_genesis/           Genesis archetype (template for nuclei)
+  N01_intelligence/ ...  8 nucleus directories
   N07_admin/
-  N00_genesis/           Genesis mold (template for nuclei)
   CLAUDE.md              LLM entry point
   QUICKSTART.md          5-minute getting started
   CONTRIBUTING.md        Contributor guide
