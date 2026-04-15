@@ -18,3 +18,16 @@
 [2026-04-15T16:22:18Z]   poll [claude-haiku] elapsed=96s landed=0/6 usable=0 committed=3/6 pids_alive=6/6
 [2026-04-15T16:22:47Z]   poll [claude-haiku] elapsed=223s landed=0/6 usable=0 committed=3/6 pids_alive=6/6
 [2026-04-15T16:22:50Z]   poll [claude-haiku] elapsed=128s landed=0/6 usable=0 committed=3/6 pids_alive=6/6
+[2026-04-15T16:49:21Z]   poll [claude-haiku] elapsed=303s landed=0/6 usable=0 committed=3/6 pids_alive=0/0
+[2026-04-15T16:50:21Z]   poll [claude-haiku] elapsed=363s landed=0/6 usable=0 committed=3/6 pids_alive=0/0
+[2026-04-15T16:51:21Z]   poll [claude-haiku] elapsed=423s landed=0/6 usable=0 committed=3/6 pids_alive=0/0
+[2026-04-15T16:52:21Z]   poll [claude-haiku] elapsed=483s landed=0/6 usable=0 committed=3/6 pids_alive=0/0
+[2026-04-15T16:53:21Z]   poll [claude-haiku] elapsed=543s landed=0/6 usable=0 committed=3/6 pids_alive=0/0
+[2026-04-15T16:54:21Z]   poll [claude-haiku] elapsed=603s landed=0/6 usable=0 committed=3/6 pids_alive=0/0
+[2026-04-15T16:54:21Z]   TIMEOUT after 603s (landed=0 committed=3)
+[2026-04-15T16:54:21Z]   close [claude-haiku] killed 0/0 PIDs
+[2026-04-15T16:54:21Z]   archive [claude-haiku] -> C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map\claude-haiku (0 files)
+[2026-04-15T16:54:21Z] 
+[2026-04-15T16:54:21Z] === COMPLETE ===
+[2026-04-15T16:54:21Z] matrix: C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map\matrix.md
+[2026-04-15T16:54:21Z] state_log: C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map\state.log

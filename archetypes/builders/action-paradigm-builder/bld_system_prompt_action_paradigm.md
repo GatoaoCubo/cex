@@ -1,6 +1,7 @@
 ---
 kind: system_prompt
 id: p03_sp_action_paradigm_builder
+version: 1.0.0
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining action_paradigm-builder persona and rules

@@ -1,6 +1,7 @@
 ---
 kind: system_prompt
 id: p03_sp_thinking_config_builder
+version: 1.0.0
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining thinking_config-builder persona and rules

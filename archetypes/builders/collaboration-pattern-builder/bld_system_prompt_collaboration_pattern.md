@@ -1,6 +1,7 @@
 ---
 kind: system_prompt
 id: p03_sp_collaboration_pattern_builder
+version: 1.0.0
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining collaboration_pattern-builder persona and rules
