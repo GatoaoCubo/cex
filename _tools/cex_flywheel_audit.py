@@ -24,6 +24,7 @@ Usage:
   python _tools/cex_flywheel_audit.py loop --max-rounds 3
 """
 
+import argparse
 import sys
 import os
 import json
@@ -410,11 +411,30 @@ def print_report():
 
 # --- MAIN ---
 def main():
-    mode = sys.argv[1] if len(sys.argv) > 1 else "audit"
-    max_rounds = 3
-    if "--max-rounds" in sys.argv:
-        idx = sys.argv.index("--max-rounds")
-        max_rounds = int(sys.argv[idx + 1]) if idx + 1 < len(sys.argv) else 3
+    known_modes = {"audit", "wires", "cascade", "heal", "loop"}
+    if len(sys.argv) > 1 and not sys.argv[1].startswith("-") and sys.argv[1] not in known_modes:
+        print("Usage: cex_flywheel_audit.py [audit|wires|cascade|heal|loop]")
+        return
+
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "mode",
+        nargs="?",
+        default="audit",
+        help="Audit mode to run.",
+    )
+    parser.add_argument(
+        "--max-rounds",
+        type=int,
+        default=3,
+        help="Maximum rounds for loop mode.",
+    )
+    args, _ = parser.parse_known_args()
+    mode = args.mode
+    max_rounds = args.max_rounds
 
     if mode == "audit":
         audit_L0(); audit_L1(); audit_L2(); audit_L3(); audit_L4()
