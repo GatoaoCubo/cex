@@ -10,17 +10,19 @@ tags: [leverage, tooling, n01, verification]
 
 # N01 Intelligence - Tool Leverage Verification
 
+Run date: 2026-04-15
+
 ## Verification
 
 - Was the expected tool added? **YES.** `_tools/cex_web_fetch.py` exists in `_tools/` and is a standalone CLI fetcher.
 - Evidence:
-  - `Get-ChildItem _tools` shows `cex_web_fetch.py`
+  - `Get-ChildItem _tools` shows `cex_web_fetch.py` (2115 bytes)
   - `_tools/cex_web_fetch.py` exposes `fetch()`, `html_to_text()`, and `arxiv_url()`
   - CLI surface: positional `url`, `--arxiv`, `--max-bytes`, `--raw`
 - Does its API match N01's needs? **Partially.**
   - Matches the baseline need for live HTTP fetch and simple arXiv abstract retrieval.
-  - Does not close the citation-validator gap.
-  - Does not fetch PDF full text, render JavaScript, or extract structured metadata.
+  - Does not close the citation-validator gap (validation, normalization, provenance).
+  - Does not support PDF full text, JavaScript rendering, or structured metadata extraction.
 
 `rg -n "arxiv|web_fetch" _tools` also shows adjacent arXiv-related logic in `_tools/cex_source_harvester.py` and `_tools/cex_taxonomy_scout.py`, but those are not duplicate generic fetchers. They classify or scan sources; `cex_web_fetch.py` is the only minimal fetch-and-extract utility.
 
@@ -31,13 +33,15 @@ tags: [leverage, tooling, n01, verification]
   - New capability: HTML to plain-text reduction
   - New capability: `--arxiv` shortcut via `https://export.arxiv.org/abs/{id}`
 
-This closes the "web search / ArXiv fetcher" gap only at a baseline ingestion level. It gives N01 a direct path to pull lightweight web content into research flows such as `cex_research.py`, but it does not yet turn fetched material into validated research evidence.
+This closes the "web fetch / arXiv abstract fetch" gap only at a baseline ingestion level. It gives N01 a direct path to pull lightweight web content into research flows, but it does not yet turn fetched material into validated research evidence (nor does it provide search/discovery).
 
 ## Still Missing
 
 - Citation validator
   - Still missing as a dedicated tool.
   - Current fetch output is unstructured text, so N01 still cannot check whether cited claims, authors, titles, venues, or source links are valid.
+- Web search / discovery
+  - `cex_web_fetch.py` fetches a URL you already have; it does not help N01 discover sources or build a candidate set of URLs to fetch.
 - PDF full-text extraction
   - `cex_web_fetch.py` targets HTML and arXiv abstract pages, not paper PDFs.
   - For N01, this is the main remaining blocker for paper-grade research.
@@ -54,9 +58,13 @@ This closes the "web search / ArXiv fetcher" gap only at a baseline ingestion le
 2. Build `cex_pdf_extract.py`
    - Priority: high
    - Why: arXiv support is only partial until N01 can read paper bodies instead of just abstract pages.
-3. Extend fetch output to emit structured provenance
+3. Build/standardize a search entrypoint for N01
    - Priority: medium
-   - Why: N01 research artifacts need reusable metadata, not only raw plain text.
+   - Why: to bridge from "I need sources" -> "here are candidate URLs" before fetching and validating.
+
+## Notes
+
+- Minor mismatch: `--max-bytes` truncates by Python string length (chars), not encoded byte length. The behavior is still safe, but the flag name is slightly misleading.
 
 ## 8F Trace
 
@@ -66,7 +74,7 @@ F1 CONSTRAIN: mission=LEVERAGE_MAP_V2, output=N01_intelligence/reports/LEVERAGE_
 F2 BECOME: loaded N01 agent card + N01/routing rules
 F3 INJECT: handoff, prior leverage-map report path, tool inventory, related _tools context
 F4 REASON: verify existence, inspect API, check overlaps, then write evidence-based gap report
-F5 CALL: used file reads, ripgrep, git status, compiler, signal writer
+F5 CALL: used file reads, ripgrep, compiler, git, signal writer
 F6 PRODUCE: report drafted with Verification, New Wired Tools, Still Missing, Next Iteration
 F7 GOVERN: corrected prior overclaim of "no duplicates" to "no duplicate generic fetcher"
 F8 COLLABORATE: save, compile, commit, signal
