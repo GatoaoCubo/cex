@@ -6,54 +6,55 @@ title: System Testing Patterns for Robust Software Validation
 version: "1.0.0"  
 created: "2023-10-15"  
 updated: "2023-10-15"  
-author: "QA Engineers"  
+author: P01_Team  
 domain: software_testing  
 quality: null  
-tags: [software_testing, test_strategies, quality_assurance, knowledge]  
-tldr: System testing patterns ensure software reliability through structured validation, covering integration, performance, and security checks.  
-when_to_use: Use when designing test frameworks to ensure comprehensive validation of integrated systems.  
-keywords: [system_testing, test_strategies, quality_assurance]  
+tags: [testing, patterns, software, validation, knowledge]  
+tldr: Essential system testing patterns to ensure software reliability, including unit, integration, and acceptance testing strategies.  
+when_to_use: When validating software systems for reliability and performance.  
+keywords: testing_patterns, software_validation, system_testing  
 long_tails:  
-  - how_to_design_integration_tests  
-  - best_practices_for_performance_validation  
+  - What are the key phases in system testing?  
+  - How to choose between integration and acceptance testing?  
 axioms:  
-  - ALWAYS validate integration points before deployment  
-  - NEVER skip security testing in system validation  
+  - ALWAYS start with unit testing to isolate component issues.  
+  - NEVER skip integration testing as it verifies system interactions.  
+  - IF-THEN: If requirements are ambiguous, prioritize acceptance testing.  
 linked_artifacts:  
   primary: null  
   related: []  
-density_score: 0.85  
-data_source: "https://example.com/testing-patterns"  
+density_score: 0.95  
+data_source: "https://www.testingexpert.com/system-testing-patterns"  
 ---  
 ## Quick Reference  
 `yaml  
 topic: System Testing Patterns  
-scope: Structured approaches to validate software systems through integration, performance, and security testing.  
-owner: QA Engineers  
+scope: Structured approaches to validate software reliability and performance.  
+owner: P01_Team  
 criticality: high  
 `  
 ## Key Concepts  
-- **Integration Testing**: Validate interactions between modules (e.g., API endpoints and databases).  
-- **Performance Testing**: Measure system behavior under load (e.g., 1,000 concurrent users).  
-- **Security Testing**: Identify vulnerabilities (e.g., SQL injection, XSS attacks).  
+- **Unit Testing**: Validate individual components (e.g., functions, classes) for correctness.  
+- **Integration Testing**: Ensure modules interact correctly (e.g., API endpoints, database connections).  
+- **Acceptance Testing**: Confirm system meets user requirements (e.g., UAT scenarios).  
 ## Strategy Phases  
-1. **Define Test Scope**: Identify modules, external systems, and non-functional requirements.  
-2. **Design Test Cases**: Create scenarios for edge cases (e.g., 99.9% load, invalid inputs).  
-3. **Execute and Monitor**: Use automated tools (e.g., JMeter, Selenium) to track metrics like response time and error rates.  
+1. **Plan Testing Strategies**: Align with requirements and risk levels.  
+2. **Implement Automated Tests**: Use frameworks like Selenium or JUnit for regression.  
+3. **Conduct Manual Tests**: Focus on edge cases and user workflows.  
 ## Golden Rules  
-- Always validate integration points before deployment.  
-- Never skip security testing in system validation.  
-- Use automated tools for performance metrics.  
+- Always document test cases with expected outcomes.  
+- Use automated tools for repetitive regression checks.  
+- Involve stakeholders in acceptance testing to align with business goals.  
 ## Flow  
-```text  
-[Test Requirements] -> [Test Design] -> [Execution] -> [Validation Results]  
-```  
+`text  
+[Test Requirements] -> [Plan Testing Strategies] -> [Execute Automated/Manual Tests] -> [Validate Results] -> [System Approved/Revised]  
+`  
 ## Comparativo  
-| Dimension         | Integration Testing       | System Testing           | Performance Testing      |  
-|------------------|---------------------------|--------------------------|--------------------------|  
-| Focus            | Module interactions       | End-to-end workflows     | Load and stress scenarios|  
-| Metrics          | API response time         | System uptime            | Throughput (requests/s)  |  
-| Tools            | Postman, SoapUI           | Selenium, JMeter         | JMeter, Gatling          |  
+| Dimension       | Unit Testing         | Integration Testing      | Acceptance Testing         |  
+|----------------|----------------------|--------------------------|----------------------------|  
+| Scope          | Individual components| Module interactions      | End-to-end user scenarios  |  
+| Tools          | JUnit, PyTest        | Postman, SoapUI          | Manual scripts, UAT tools  |  
+| When to Use    | Early development    | Mid-development          | Final validation           |  
 ## References  
-- Source: https://example.com/testing-patterns  
-- Related artifact: p01_kc_security_testing_framework
+- Related artifact: p01_kc_software_quality_metrics  
+- Source: https://www.testingexpert.com/system-testing-patterns
