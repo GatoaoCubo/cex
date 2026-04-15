@@ -1,0 +1,6 @@
+# grid-test LEVERAGE_MAP_V2 started 2026-04-15T15:48:22Z
+[2026-04-15T15:48:22Z] === GRID TEST: LEVERAGE_MAP_V2 ===
+[2026-04-15T15:48:22Z] runtimes: ['claude', 'gemini', 'codex', 'ollama-llama', 'ollama-qwen-coder']
+[2026-04-15T15:48:22Z] archive: C:\Users\CEX\Documents\GitHub\cex\_reports\gridtest_leverage_map
+[2026-04-15T15:48:22Z] wave_timeout=900s poll=30s inter_wave=15s
+[2026-04-15T15:48:22Z] DRY-RUN: exiting without dispatch

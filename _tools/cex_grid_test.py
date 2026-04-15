@@ -83,6 +83,38 @@ def list_output_files(output_dir: Path, mission_upper: str) -> list[Path]:
     return sorted(output_dir.glob(f"{mission_upper}_n0*.md"))
 
 
+def git_head() -> str:
+    """Returns current HEAD SHA (short). Used as wave-start ref."""
+    r = subprocess.run(
+        ["git", "rev-parse", "--short", "HEAD"],
+        cwd=ROOT, capture_output=True, text=True, timeout=10,
+    )
+    return r.stdout.strip() if r.returncode == 0 else ""
+
+
+def count_nucleus_commits_since(ref: str, mission_upper: str) -> dict:
+    """Count commits matching [N0X] MISSION: since ref. Returns {nucleus: sha}."""
+    if not ref:
+        return {}
+    r = subprocess.run(
+        ["git", "log", f"{ref}..HEAD", "--pretty=format:%h %s"],
+        cwd=ROOT, capture_output=True, text=True, timeout=15,
+    )
+    if r.returncode != 0:
+        return {}
+    found = {}
+    for line in r.stdout.splitlines():
+        parts = line.split(" ", 1)
+        if len(parts) != 2:
+            continue
+        sha, subject = parts
+        for nuc in ("n01", "n02", "n03", "n04", "n05", "n06"):
+            prefix = f"[{nuc.upper()}] {mission_upper}"
+            if subject.startswith(prefix) and nuc not in found:
+                found[nuc] = sha
+    return found
+
+
 def get_grid_pid_file(mission: str, runtime: str) -> Path:
     if runtime.startswith("ollama-"):
         return PID_DIR / f"grid_ollama_{mission}.txt"
@@ -151,8 +183,15 @@ def poll_wave(
     timeout_s: int,
     poll_interval: int,
     state_log: Path,
+    git_start_ref: str = "",
 ) -> dict:
-    """Block until all nuclei committed or timeout. Return summary dict."""
+    """Block until all nuclei committed or timeout. Return summary dict.
+
+    Dual-mode completion detection:
+      - file_landing: count output files in output_dir (ollama runtimes)
+      - git_commits: count [N0X] MISSION commits since git_start_ref (all runtimes)
+    Wave is complete when EITHER detector reports full coverage.
+    """
     mission_upper = mission_cfg["mission"]
     nuclei = mission_cfg["nuclei"]
     min_bytes = mission_cfg.get("min_bytes", 800)
@@ -166,9 +205,12 @@ def poll_wave(
         "expected": expected,
         "landed": 0,
         "usable": 0,
+        "committed": 0,
+        "commits": {},
         "files": {},
         "timed_out": False,
         "elapsed_s": 0,
+        "git_start_ref": git_start_ref,
     }
 
     while True:
@@ -177,25 +219,35 @@ def poll_wave(
         landed = len(files)
         usable = sum(1 for f in files if f.stat().st_size >= min_bytes)
 
+        commits = count_nucleus_commits_since(git_start_ref, mission_upper) if git_start_ref else {}
+        committed = len(commits)
+
         pids = parse_pid_file(pid_file)
         alive = [p for p in pids if pid_alive(p)]
 
-        if time.time() - last_report >= poll_interval or landed == expected:
+        done = (landed >= expected) or (committed >= expected)
+
+        if time.time() - last_report >= poll_interval or done:
             log(
                 f"  poll [{runtime}] elapsed={int(elapsed)}s "
                 f"landed={landed}/{expected} usable={usable} "
+                f"committed={committed}/{expected} "
                 f"pids_alive={len(alive)}/{len(pids)}",
                 state_log,
             )
             last_report = time.time()
 
-        if landed >= expected:
+        if done:
             break
         if elapsed >= timeout_s:
             result["timed_out"] = True
-            log(f"  TIMEOUT after {int(elapsed)}s", state_log)
+            log(f"  TIMEOUT after {int(elapsed)}s "
+                f"(landed={landed} committed={committed})", state_log)
             break
         time.sleep(min(poll_interval, max(5, poll_interval // 3)))
+
+    result["committed"] = committed
+    result["commits"] = commits
 
     result["landed"] = landed
     result["usable"] = usable
@@ -266,13 +318,14 @@ def write_matrix(archive_root: Path, waves: list[dict]) -> Path:
         f"",
         f"Generated: {ts()}",
         f"",
-        f"| Runtime | Landed | Usable | Timeout | Elapsed(s) |",
-        f"|---|---|---|---|---|",
+        f"| Runtime | Landed | Usable | Committed | Timeout | Elapsed(s) |",
+        f"|---|---|---|---|---|---|",
     ]
     for w in waves:
         lines.append(
             f"| {w['runtime']} | {w['landed']}/{w['expected']} "
             f"| {w['usable']}/{w['expected']} "
+            f"| {w.get('committed', 0)}/{w['expected']} "
             f"| {'yes' if w['timed_out'] else 'no'} "
             f"| {w['elapsed_s']} |"
         )
@@ -352,13 +405,18 @@ def main() -> int:
         output_dir = resolve_output_dir(mission_upper.lower(), runtime)
         pid_file = get_grid_pid_file(mission_upper, runtime)
 
+        git_start = git_head()
+        log(f"  git_start_ref={git_start}", state_log)
+
         rc = dispatch_wave(args.mission, runtime, tag, state_log)
         if rc != 0:
             log(f"  dispatch FAILED rc={rc}", state_log)
             waves.append({
                 "runtime": runtime, "mission": mission_upper,
                 "expected": len(mission_cfg["nuclei"]), "landed": 0, "usable": 0,
-                "files": {}, "timed_out": False, "elapsed_s": 0, "dispatch_rc": rc,
+                "committed": 0, "commits": {}, "files": {},
+                "timed_out": False, "elapsed_s": 0, "dispatch_rc": rc,
+                "git_start_ref": git_start,
             })
             continue
 
@@ -367,6 +425,7 @@ def main() -> int:
         result = poll_wave(
             mission_cfg, runtime, output_dir, pid_file,
             args.wave_timeout, args.poll_interval, state_log,
+            git_start_ref=git_start,
         )
         close_wave(mission_upper, runtime, pid_file, state_log)
         archive_wave(mission_upper, runtime, output_dir, archive_root, result, state_log)

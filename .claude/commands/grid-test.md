@@ -125,10 +125,10 @@ N07 works on other tasks.
 
 ## Operator Gotchas (learned 2026-04-15)
 
-1. **Claude/Gemini/Codex nuclei commit to N0x_*/ directories**, not to a
-   unified output dir like ollama does. The poll step will timeout (expected)
-   -- verify via `git log --since` instead of output-file count for those
-   runtimes. TODO: extend `resolve_output_dir` + poll heuristic per runtime.
+1. **Dual-mode completion detection**: wave finishes when EITHER (a) N output
+   files land in the ollama output dir OR (b) N `[N0X] MISSION:` commits land
+   since wave-start git ref. So claude/gemini/codex nuclei (which commit but
+   don't produce a unified output file) are detected via the commit path.
 2. **Ollama orphan REPL windows** persist after agentic_loop exits. `close_wave`
    kills them via `taskkill /F /PID {pid} /T`. Verify with
    `Get-Process powershell` after a wave.
@@ -137,3 +137,6 @@ N07 works on other tasks.
    consider reverting to minimal prompt first.
 4. **Do NOT ScheduleWakeup** during the run. The tool manages its own sleeps
    internally. N07 polls the log file.
+5. **Matrix always has `Committed` column** alongside `Landed` and `Usable` --
+   for claude-family, Committed is the source of truth; for ollama, both
+   typically match (ollama nuclei auto-commit via boot wrapper).

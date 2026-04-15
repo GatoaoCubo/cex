@@ -1,0 +1,53 @@
+{
+  "runtime": "ollama-llama",
+  "mission": "LEVERAGE_MAP_V2",
+  "expected": 6,
+  "landed": 6,
+  "usable": 4,
+  "files": {
+    "n01": {
+      "bytes": 517,
+      "usable": false,
+      "iters": 11,
+      "reads": null,
+      "done_called": null
+    },
+    "n02": {
+      "bytes": 187,
+      "usable": false,
+      "iters": 6,
+      "reads": null,
+      "done_called": null
+    },
+    "n03": {
+      "bytes": 973,
+      "usable": true,
+      "iters": 12,
+      "reads": null,
+      "done_called": null
+    },
+    "n04": {
+      "bytes": 1422,
+      "usable": true,
+      "iters": 6,
+      "reads": null,
+      "done_called": null
+    },
+    "n05": {
+      "bytes": 2451,
+      "usable": true,
+      "iters": 9,
+      "reads": null,
+      "done_called": null
+    },
+    "n06": {
+      "bytes": 1139,
+      "usable": true,
+      "iters": 7,
+      "reads": null,
+      "done_called": null
+    }
+  },
+  "timed_out": false,
+  "elapsed_s": 54
+}
