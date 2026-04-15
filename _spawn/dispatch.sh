@@ -9,6 +9,9 @@
 #   bash _spawn/dispatch.sh stop n03           # stop only N03
 #   bash _spawn/dispatch.sh stop --all         # stop ALL CEX nuclei (DANGEROUS)
 #   bash _spawn/dispatch.sh stop --dry-run     # preview what would be killed
+#   bash _spawn/dispatch.sh swarm <kind> <N> "<task>"   # N parallel worktrees
+#   bash _spawn/dispatch.sh solo n03 "task" -w <id>     # run in isolated worktree
+#   bash _spawn/dispatch.sh grid MISSION -w             # grid with worktree per cell
 
 # --- Session ID: stable identifier for this orchestrator ---
 # Each claude/N07 session sets CEX_SESSION_ID once. All dispatch calls inherit it.
@@ -29,6 +32,33 @@ export CEX_SESSION_ID
 MODE="${1:-solo}"
 shift
 
+# --- Parse -w / --worktree flag (BORIS_MERGE B8) ---
+# Scans remaining args, strips the flag, exports CEX_WORKTREE for downstream boot wrappers.
+WORKTREE_ID=""
+_new_args=()
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -w|--worktree)
+            shift
+            WORKTREE_ID="${1:-auto}"
+            [ "$WORKTREE_ID" = "auto" ] && WORKTREE_ID="wt_$(date +%s)"
+            ;;
+        *)
+            _new_args+=("$1")
+            ;;
+    esac
+    shift || true
+done
+set -- "${_new_args[@]}"
+if [ -n "$WORKTREE_ID" ]; then
+    export CEX_WORKTREE="$WORKTREE_ID"
+    export CEX_WORKTREE_DIR=".cex/worktrees/$WORKTREE_ID"
+    echo "[DISPATCH] Worktree isolation: $CEX_WORKTREE_DIR"
+    if [ ! -d "$CEX_WORKTREE_DIR" ]; then
+        git worktree add -b "worktree/$WORKTREE_ID" "$CEX_WORKTREE_DIR" HEAD >/dev/null 2>&1 || true
+    fi
+fi
+
 case "$MODE" in
     solo)
         NUCLEUS="${1:-n03}"
@@ -42,6 +72,13 @@ case "$MODE" in
             fi
         fi
         powershell -NoProfile -ExecutionPolicy Bypass -File _spawn/spawn_solo.ps1 -nucleus "$NUCLEUS" -task "$TASK" -interactive
+        ;;
+    swarm)
+        KIND="${1:-agent}"
+        N="${2:-3}"
+        TASK="${3:-build one $KIND}"
+        echo "[DISPATCH] Swarm: $N parallel $KIND (worktree per cell)"
+        bash _spawn/spawn_swarm.sh "$KIND" "$N" "$TASK"
         ;;
     grid)
         MISSION="${1:-DEFAULT}"
@@ -185,5 +222,9 @@ case "$MODE" in
         echo "  stop n03                  Stop only N03"
         echo "  stop --all                Stop ALL CEX nuclei (DANGEROUS)"
         echo "  stop --dry-run            Preview what would be killed"
+        echo "  swarm <kind> <N> \"task\"   Spawn N parallel builders of same kind in worktrees"
+        echo ""
+        echo "Flags (apply to solo/grid):"
+        echo "  -w, --worktree [id]       Run in isolated git worktree (auto-creates if missing)"
         ;;
 esac
