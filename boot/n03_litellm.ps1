@@ -4,6 +4,7 @@
 # -> Gemini -> Ollama gemma4:26b -> qwen3) per .cex/config/litellm_config.yaml.
 
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
+. $PSScriptRoot/_shared/emit_exit_signal.ps1
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n03"
 . $PSScriptRoot/_shared/theme.ps1  # Per-nucleus theme (bg color, scrollback)
@@ -65,5 +66,7 @@ Write-Host "  [>>] Launching litellm_nucleus.py with model alias cex-n03" -Foreg
 Write-Host ""
 
 Set-CexTitle "RUNNING"
+$cex_start_time = Get-Date
 & python "$cexRoot\_tools\litellm_nucleus.py" --nucleus N03 --base-url $proxyUrl
 Set-CexTitle "DONE"
+Emit-ExitSignal -StartTime $cex_start_time

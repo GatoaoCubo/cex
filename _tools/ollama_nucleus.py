@@ -115,7 +115,13 @@ def run_nucleus(nucleus: str, model: str, task_file: Path) -> int:
         print(f"[FAIL] Task file is empty: {task_file}")
         return 1
 
-    print(f"[{nuc_id}] Model: {model} | Domain: {domain}")
+    # Extract mission from frontmatter so signals match grid polling
+    mission = ""
+    m = re.search(r"^mission:\s*(.+)$", task_text, re.MULTILINE)
+    if m:
+        mission = m.group(1).strip().strip('"\'')
+
+    print(f"[{nuc_id}] Model: {model} | Domain: {domain} | Mission: {mission or '-'}")
     print(f"[{nuc_id}] Task file: {task_file} ({len(task_text)}B)")
     print(f"[{nuc_id}] Calling Ollama...")
 
@@ -161,14 +167,17 @@ def run_nucleus(nucleus: str, model: str, task_file: Path) -> int:
         except Exception as e:
             print(f"[{nuc_id}] Compile skipped: {e}")
 
-    # Signal completion
+    # Signal completion (include mission so grid polling matches)
     try:
+        sig_cmd = (
+            f"from _tools.signal_writer import write_signal; "
+            f"write_signal('{nuc_id.lower()}', 'complete', 8.5, mission='{mission}')"
+        )
         subprocess.run(
-            [sys.executable, "-c",
-             f"from _tools.signal_writer import write_signal; write_signal('{nuc_id.lower()}', 'complete', 8.5)"],
+            [sys.executable, "-c", sig_cmd],
             cwd=ROOT, capture_output=True, timeout=10,
         )
-        print(f"[{nuc_id}] Signal sent")
+        print(f"[{nuc_id}] Signal sent (mission={mission or '-'})")
     except Exception as e:
         print(f"[{nuc_id}] Signal skipped: {e}")
 

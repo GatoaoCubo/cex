@@ -3,6 +3,7 @@
 # Model: gemini-2.5-flash | Handoff suffix: _gemini
 
 . $PSScriptRoot/_shared/vt_enable.ps1  # Enable ANSI/VT for TUI (claude/gemini/codex/ollama)
+. $PSScriptRoot/_shared/emit_exit_signal.ps1
 $cexRoot = Split-Path -Parent $PSScriptRoot
 $nucleus = "n04"
 
@@ -78,5 +79,7 @@ try {
     }
     Clear-Host
 } catch {}
+$cex_start_time = Get-Date
 & gemini @cliArgs $initialMsg
 Set-CexTitle "DONE"
+Emit-ExitSignal -StartTime $cex_start_time

@@ -1,10 +1,19 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "comment": "CEX root settings. Native Claude Code hooks wired into cex_hooks_native.py. Runtime-agnostic: detects CEX_NUCLEUS env. See .claude/rules/new-nucleus-bootstrap.md for per-nucleus overlays.",
   "hooks": {
     "PostToolUse": [
       {
-        "matcher": "Write|Edit",
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python _tools/cex_hooks_native.py post-tool-use",
+            "timeout": 20
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
         "hooks": [
           {
             "type": "command",
@@ -49,7 +58,6 @@
     ]
   },
   "permissions": {
-    "comment": "N01-N07 bypass permissions. This allowlist is a template for new Nxx nuclei. See .claude/nucleus-settings/_template.json.",
     "allow": [
       "Bash(python _tools/*:*)",
       "Bash(git status:*)",

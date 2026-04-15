@@ -200,12 +200,31 @@ def consolidate(wave_n):
 
 def between_wave_consolidate(wave_n, found_signals):
     """After a wave polls out, before next wave spawns:
+    0. Safety-net signal: for each artifact file that exists without a matching
+       signal (CLI didn't exit / didn't invoke signal_writer), emit one.
     1. Commit any uncommitted showoff artifacts
     2. Archive this wave's signals
     3. Verify no stray processes from this session
     4. Print wave report
     """
     print(f"\n[W{wave_n} CONSOLIDATE] starting...")
+    # 0. Safety-net: artifact-present-but-no-signal fallback
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "_tools"))
+    from signal_writer import write_signal  # type: ignore
+    wdir = SHOWOFF_DIR / f"w{wave_n}"
+    if wdir.exists():
+        for art in wdir.glob("*.md"):
+            nuc = art.stem.split("_")[0].lower()  # n01_ollama.md -> n01
+            if nuc in found_signals:
+                continue
+            try:
+                write_signal(nuc, "exited", 7.0, mission=f"SHOWOFF_W{wave_n}",
+                             origin="showoff_safety_net", artifact=str(art.relative_to(ROOT)))
+                found_signals.add(nuc)
+                print(f"  [safety-net] {nuc} artifact present, emitted fallback signal")
+            except Exception as e:
+                print(f"  [safety-net] {nuc} skipped: {e}")
     # 1. Commit strays
     status = subprocess.run(["git", "status", "--porcelain", f"_showoff/w{wave_n}/"],
                              cwd=ROOT, capture_output=True, text=True, timeout=30)
