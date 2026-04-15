@@ -1,5 +1,6 @@
 id: leverage_map_v2_n01_tool_verification
 kind: knowledge_card
+pillar: P04
 title: LEVERAGE_MAP_V2 - N01 Tool Verification Cycle
 version: 1.0
 quality: null
@@ -8,96 +9,57 @@ tags:
 - tooling
 - n01
 - verification
-verification: ''
-expected_tool_cex_web_fetch_py: "Status: ✓ CONFIRMED PRESENT\n\nLocation: `_tools/cex_web_fetch.py` (71 lines)\n\nAPI Surface:\n\
-  - `fetch(url: str, timeout=20) → str`: Raw HTTP GET + charset-aware decode\n- `html_to_text(html: str) → str`: Strip scripts/styles,\
-  \ remove tags, normalize whitespace  \n- `arxiv_url(arxiv_id: str) → str`: Generate arXiv export URL from ID\n- CLI modes:\n\
-  \  - `python cex_web_fetch.py <URL>`: Fetch & convert HTML→text (default)\n  - `python cex_web_fetch.py --arxiv 1706.03762`:\
-  \ Shorthand for arXiv IDs\n  - `--raw`: Skip HTML→text (raw body)\n  - `--max-bytes 20000`: Truncate output (default 20KB)\n\
-  \nSufficiency for N01:\n- ✓ Handles generic URLs (web research)\n- ✓ ArXiv-specific support (academic papers)\n- ✓ Charset\
-  \ detection (international sources)\n- ✓ HTML→text pipeline (readable extraction)\n- ✗ NO PDF handling (arXiv PDFs need\
-  \ special handling)\n- ✗ NO citation parsing (extracts text, doesn't structure citations)\n- ✗ NO authentication (paywalled\
-  \ journals unreachable)\n- ✗ NO JavaScript rendering (dynamic content lost)\n\nDuplicate Detection:\n- `cex_source_harvester.py`:\
-  \ Reference extraction ≠ fetching (no overlap)\n- `cex_taxonomy_scout.py`: Schema discovery (no overlap)\n- Result: NO duplicates.\
-  \ Tool fills a real gap.\n\n---"
-new_wired_tools_leverage_map_v2: ''
-fabricated_in_this_cycle:
-- '`cex_web_fetch.py` — Generic HTTP fetch + HTML→text for N01 research baseline'
-pre_existing_tools_relevant_to_n01: '- `cex_source_harvester.py` (v1.0): Scans repo for source URLs, stores in taxonomy_sources.yaml
+verification: "- Was the expected tool added? YES. `_tools/cex_web_fetch.py` exists in `_tools/` and is a standalone CLI fetcher.\n\
+  - Evidence:\n  - `Get-ChildItem _tools` shows `cex_web_fetch.py`\n  - `_tools/cex_web_fetch.py` exposes `fetch()`, `html_to_text()`,\
+  \ and `arxiv_url()`\n  - CLI surface: positional `url`, `--arxiv`, `--max-bytes`, `--raw`\n- Does its API match N01's needs?\
+  \ Partially.\n  - Matches the baseline need for live HTTP fetch and simple arXiv abstract retrieval.\n  - Does not close\
+  \ the citation-validator gap.\n  - Does not fetch PDF full text, render JavaScript, or extract structured metadata.\n\n\
+  `rg -n \"arxiv|web_fetch\" _tools` also shows adjacent arXiv-related logic in `_tools/cex_source_harvester.py` and `_tools/cex_taxonomy_scout.py`,\
+  \ but those are not duplicate generic fetchers. They classify or scan sources; `cex_web_fetch.py` is the only minimal fetch-and-extract\
+  \ utility."
+new_wired_tools_since_v1: "- `cex_web_fetch.py`\n  - New capability: generic URL fetch with charset-aware decoding\n  - New\
+  \ capability: HTML to plain-text reduction\n  - New capability: `--arxiv` shortcut via `https://export.arxiv.org/abs/{id}`\n\
+  \nThis closes the \"web search / ArXiv fetcher\" gap only at a baseline ingestion level. It gives N01 a direct path to pull\
+  \ lightweight web content into research flows such as `cex_research.py`, but it does not yet turn fetched material into\
+  \ validated research evidence."
+still_missing:
+- Citation validator
+- Still missing as a dedicated tool.
+- Current fetch output is unstructured text, so N01 still cannot check whether cited claims, authors, titles, venues, or source
+  links are valid.
+- PDF full-text extraction
+- '`cex_web_fetch.py` targets HTML and arXiv abstract pages, not paper PDFs.'
+- For N01, this is the main remaining blocker for paper-grade research.
+- Metadata extraction
+- No structured parse of author, publish date, domain, DOI, venue, or citation list.
+- Reliability controls
+- No retries, caching, rate limiting, or source provenance record in the fetcher itself.
+next_iteration:
+- Build `cex_citation_validator.py`
+- 'Priority: highest'
+- 'Why: this is the gap explicitly left open by the previous cycle and the current fetcher does not address it.'
+- Build `cex_pdf_extract.py`
+- 'Priority: high'
+- 'Why: arXiv support is only partial until N01 can read paper bodies instead of just abstract pages.'
+- Extend fetch output to emit structured provenance
+- 'Priority: medium'
+- 'Why: N01 research artifacts need reusable metadata, not only raw plain text.'
+8f_trace: '=== 8F PIPELINE ===
 
-  - `cex_retriever.py`: TF-IDF artifact similarity (2184 docs, 12K vocab)
+  F1 CONSTRAIN: mission=LEVERAGE_MAP_V2, output=N01_intelligence/reports/LEVERAGE_MAP_V2_n01_tool_verification.md
 
-  - `cex_token_budget.py`: Token counting for context planning
+  F2 BECOME: loaded N01 agent card + N01/routing rules
 
-  - `cex_memory_select.py`: Relevant memory injection (keyword + LLM)
+  F3 INJECT: handoff, prior leverage-map report path, tool inventory, related _tools context
 
+  F4 REASON: verify existence, inspect API, check overlaps, then write evidence-based gap report
 
-  Tool count (N01-specific): 5 tools across 3 domains (fetch, harvest, retrieve)
+  F5 CALL: used file reads, ripgrep, git status, compiler, signal writer
 
+  F6 PRODUCE: report drafted with Verification, New Wired Tools, Still Missing, Next Iteration
 
-  ---'
-still_missing_leverage_gaps: ''
-critical_gaps:
-- PDF Extraction — ArXiv papers are PDFs; `cex_web_fetch.py` only handles HTML. N01 needs `pdf2text` (pdfplumber or PyPDF2
-  wrapper).
-- 'Impact: Research completeness — 40% of academic sources are PDF-only'
-- Citation Parsing — Extract structured citations from papers (authors, year, title, venue).
-- 'Impact: Dependency mapping — can''t track "who cites whom"'
-- Paywalled Content — Journals (IEEE, ACM, Nature) behind authentication.
-- 'Impact: Coverage — blocks 30% of industry research'
-secondary_gaps:
-- Dynamic Content — JavaScript rendering for blogs, Substack, Medium paywalls.
-- Rate Limiting — No retry logic, exponential backoff, or cache warming.
-- Metadata Extraction — Authors, dates, keywords from raw HTML.
-by_severity: '| Gap | Impact | Frequency | Priority |
+  F7 GOVERN: corrected prior overclaim of "no duplicates" to "no duplicate generic fetcher"
 
-  |-----|--------|-----------|----------|
+  F8 COLLABORATE: save, compile, commit, signal
 
-  | PDF extraction | High | Every arXiv fetch | CRITICAL |
-
-  | Citation parser | High | Every research brief | CRITICAL |
-
-  | Auth / paywall | Medium | Industry research | HIGH |
-
-  | JS rendering | Low | Modern SPA research | MEDIUM |
-
-  | Rate limiting | Low | Bulk harvests | MEDIUM |
-
-
-  ---'
-next_iteration_top_3_priorities: ''
-1_pdf_text_extractor_highest_priority: "Artifact kind: `browser_tool`  \nImplementation: `cex_pdf_extract.py`  \nAPI:\npython\
-  \ _tools/cex_pdf_extract.py https://arxiv.org/pdf/1706.03762.pdf\npython _tools/cex_pdf_extract.py --local /path/to/paper.pdf\n\
-  Why: 60% of arXiv content is PDF-only. Without this, N01 can only read HTML abstracts, losing paper body, results, citations.\n\
-  \nEstimated cost: 3 hours build (pdfplumber, ASCII-only output)"
-2_citation_extractor_parser_critical: "Artifact kind: `parser`  \nImplementation: `cex_citation_extractor.py`  \nAPI:\npython\
-  \ _tools/cex_citation_extractor.py --paper \"https://arxiv.org/abs/1706.03762\" --format bibtex|apa|json\nOutput: Structured\
-  \ JSON with [authors, year, title, venue, DOI]\n\nWhy: Build a \"who cites whom\" graph for the research domain. Feeds dependency\
-  \ analysis and authority ranking.\n\nEstimated cost: 2 hours build (regex + citation format parsing)"
-3_source_inventory_audit_high: "Artifact kind: `audit_log` + `quality_gate`  \nImplementation: N01 audit that scans existing\
-  \ research artifacts and flags which sources are:\n- Web (fetchable via `cex_web_fetch.py`) ✓\n- PDF (need extractor)\n\
-  - Paywalled (need auth)\n- Dead (need link validation)\n\nWhy: Catalog the research debt. Answer: \"Of our 231 knowledge\
-  \ cards, how many source references are actually accessible?\"\n\nEstimated cost: 1 hour analysis + 2 hours build\n\n---"
-assessment: 'Current leverage: 25% (basic HTTP only, no academic formats, no citation structure)
-
-
-  With priority 1+2: 85% (covers arXiv + citations, still missing paywalls)
-
-
-  With priority 1+2+3: 95% (complete audit, structured inventory, actionable roadmap)
-
-
-  Tool count trajectory:
-
-  - Today: 5 tools (fetch, harvest, retrieve, count tokens, select memory)
-
-  - After P1: 6 tools (+PDF)
-
-  - After P2: 7 tools (+citation)
-
-  - After P3: 8 tools (+audit framework)
-
-
-  ---'
-signal: 'Verification complete. N01 tool leverage for LEVERAGE_MAP_V2 assessed as sufficient baseline, critical gaps identified.
-  Quality: 8.5/10 (tool works, clear gaps, actionable roadmap)'
+  ==================='
