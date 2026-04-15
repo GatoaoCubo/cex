@@ -5,7 +5,7 @@ title: N05 Operations - LEVERAGE_MAP_V2 Verification
 nucleus: N05
 pillar: P01
 mission: LEVERAGE_MAP_V2
-version: 2.0.0
+version: 2.0.1
 quality: null
 created: 2026-04-15
 updated: 2026-04-15
@@ -22,7 +22,7 @@ F2 BECOME: N05 Operations loaded from agent card + n05 rules
 F3 INJECT: handoff, CLAUDE.md, 8F rule, n05 rule, agent card, existing report, tool sources
 F4 REASON: verify tool presence, run real commands, compare with adjacent ops tools, then rank gaps
 F5 CALL: shell used for coverage, doctor, release, grep, artifact inspection, compile, git, signal
-F6 PRODUCE: updated verification report with evidence and next-iteration priorities
+F6 PRODUCE: updated verification report with 2026-04-15 evidence and next-iteration priorities
 F7 GOVERN: checked for factual consistency against command outputs and inspected representative artifacts
 F8 COLLABORATE: saved report, compiled it, committed report artifacts, emitted completion signal
 ```
@@ -48,7 +48,7 @@ The percentage math is correct once the tool finds matches:
 
 The implementation is not sufficient as an ops-quality coverage source yet:
 
-1. It took about 78 seconds to scan the repo on a full run, which is too slow
+1. It took about 63 seconds to scan the repo on a full run, which is too slow
 for routine interactive use.
 2. It detects artifacts by filename substring, not by frontmatter `kind:`.
 3. That strategy undercounts real coverage when filenames do not mirror the
