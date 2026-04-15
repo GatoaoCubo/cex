@@ -7,6 +7,7 @@ Usage:
     python cex_release_check.py --fix     # Show fix suggestions
 """
 
+import argparse
 import json
 import os
 import re
@@ -194,4 +195,14 @@ def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Accepted for backward compatibility; behavior remains unchanged.",
+    )
+    parser.parse_known_args()
     main()
