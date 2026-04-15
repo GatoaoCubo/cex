@@ -603,8 +603,15 @@ Examples:
                        help="Generate execution plan only")
     parser.add_argument("--json", action="store_true",
                        help="Output as JSON")
+    parser.add_argument("--bare", action="store_true",
+                       help="Skip config search + heavy context load (10x startup). Use for hot-loop dispatch.")
 
     args = parser.parse_args()
+
+    if args.bare:
+        os.environ["CEX_BARE"] = "1"
+        os.environ["CEX_SKIP_KC_INDEX"] = "1"
+        os.environ["CEX_SKIP_MEMORY_LOAD"] = "1"
 
     if args.status:
         show_status()
