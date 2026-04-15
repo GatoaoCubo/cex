@@ -240,7 +240,11 @@ function Launch-Nucleus($handoff) {
     $env:CEX_GRID_H = "$gH"
 
     # ALWAYS boot interactive -- task comes from handoff, never CLI args (avoids nested-quote hell)
-    $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bootScript`"" -WorkingDirectory $root -PassThru
+    # Capture wrapper stdout+stderr to log file for post-mortem diagnostics (race conditions, crashes)
+    $logDir = "$root\.cex\runtime\logs\spawn"
+    if (-not (Test-Path $logDir)) { New-Item -ItemType Directory -Path $logDir -Force | Out-Null }
+    $logFile = "$logDir\${nucleus}_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
+    $proc = Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -NoExit -File `"$bootScript`"" -WorkingDirectory $root -PassThru -RedirectStandardOutput $logFile -RedirectStandardError "${logFile}.err"
     # Retry loop: poll for window handle (up to 5s, 500ms intervals)
     if ($proc) {
         $hwnd = [IntPtr]::Zero

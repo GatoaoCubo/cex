@@ -1,173 +1,67 @@
-# LiteLLM Proxy Configuration for CEX
-# Generated from nucleus_models.yaml
-# Start: litellm --config .cex/config/litellm_config.yaml --port 4000
+# LiteLLM Proxy Configuration for CEX (OLLAMA-ONLY free mode)
+# Simple pool: all models point to Ollama. No paid/no-key providers in pool.
 #
-# Every nucleus calls: POST http://localhost:4000/v1/chat/completions
-# with model: "cex-n0X" -- LiteLLM routes to the right provider.
+# Free-first hybrid lesson (2026-04-15):
+#   - simple-shuffle routes randomly across pool entries, NOT as fallback chain
+#   - Mixing paid + no-key + local = random picks broken providers
+#   - Pure Ollama pool = deterministic free mode
 #
-# Fallback chains: if primary fails, next model is tried automatically.
-# Virtual keys: per-nucleus budget tracking and rate limiting.
+# To enable paid fallback:
+#   - Set GEMINI_API_KEY (free tier) in .env
+#   - Add back anthropic entries ONLY when credit > 0
+#   - Use router_settings.fallbacks (ordered chain) not pool duplication
+#
+# Virtual keys: per-nucleus budget tracking via master_key.
 
 model_list:
-  # --- N07 Orchestrator (Opus -- best reasoning) ---
-  - model_name: cex-n07
-    litellm_params:
-      model: anthropic/claude-opus-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-      max_tokens: 8192
-  - model_name: cex-n07
-    litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GEMINI_API_KEY
-  - model_name: cex-n07
-    litellm_params:
-      model: ollama/gemma4:26b
-      api_base: http://localhost:11434
+  # --- N07 Orchestrator (best local reasoning) ---
   - model_name: cex-n07
     litellm_params:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
-  # --- N01 Intelligence (Sonnet -- research) ---
-  - model_name: cex-n01
-    litellm_params:
-      model: anthropic/claude-sonnet-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-      max_tokens: 8192
-  - model_name: cex-n01
-    litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GEMINI_API_KEY
-  - model_name: cex-n01
-    litellm_params:
-      model: ollama/gemma4:26b
-      api_base: http://localhost:11434
+  # --- N01 Intelligence ---
   - model_name: cex-n01
     litellm_params:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
-  # --- N02 Marketing (Sonnet -- creative) ---
-  - model_name: cex-n02
-    litellm_params:
-      model: anthropic/claude-sonnet-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-      max_tokens: 8192
-  - model_name: cex-n02
-    litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GEMINI_API_KEY
-  - model_name: cex-n02
-    litellm_params:
-      model: ollama/gemma4:26b
-      api_base: http://localhost:11434
+  # --- N02 Marketing (faster model, creative) ---
   - model_name: cex-n02
     litellm_params:
       model: ollama/qwen3:8b
       api_base: http://localhost:11434
 
-  # --- N03 Builder (Opus -- complex construction) ---
-  - model_name: cex-n03
-    litellm_params:
-      model: anthropic/claude-opus-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-      max_tokens: 8192
-  - model_name: cex-n03
-    litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GEMINI_API_KEY
-  - model_name: cex-n03
-    litellm_params:
-      model: ollama/gemma4:26b
-      api_base: http://localhost:11434
+  # --- N03 Builder (deep reasoning) ---
   - model_name: cex-n03
     litellm_params:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
-  # --- N04 Knowledge (Sonnet -- structured) ---
-  - model_name: cex-n04
-    litellm_params:
-      model: anthropic/claude-sonnet-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-      max_tokens: 8192
-  - model_name: cex-n04
-    litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GEMINI_API_KEY
-  - model_name: cex-n04
-    litellm_params:
-      model: ollama/gemma4:26b
-      api_base: http://localhost:11434
+  # --- N04 Knowledge ---
   - model_name: cex-n04
     litellm_params:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
-  # --- N05 Operations (Sonnet -- code/test/deploy) ---
-  - model_name: cex-n05
-    litellm_params:
-      model: anthropic/claude-sonnet-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-      max_tokens: 8192
-  - model_name: cex-n05
-    litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GEMINI_API_KEY
-  - model_name: cex-n05
-    litellm_params:
-      model: ollama/gemma4:26b
-      api_base: http://localhost:11434
+  # --- N05 Operations (faster for code/test) ---
   - model_name: cex-n05
     litellm_params:
       model: ollama/qwen3:8b
       api_base: http://localhost:11434
 
-  # --- N06 Commercial (Sonnet -- monetization) ---
-  - model_name: cex-n06
-    litellm_params:
-      model: anthropic/claude-sonnet-4-6
-      api_key: os.environ/ANTHROPIC_API_KEY
-      max_tokens: 8192
-  - model_name: cex-n06
-    litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GEMINI_API_KEY
-  - model_name: cex-n06
-    litellm_params:
-      model: ollama/gemma4:26b
-      api_base: http://localhost:11434
+  # --- N06 Commercial ---
   - model_name: cex-n06
     litellm_params:
       model: ollama/qwen3:8b
       api_base: http://localhost:11434
 
-  # --- Fine-Tuned Models (Phase 3 -- after QLoRA training) ---
-  # Uncomment when adapters are trained and deployed via Ollama
-  # - model_name: cex-n03-ft
-  #   litellm_params:
-  #     model: ollama/cex-n03
-  #     api_base: http://localhost:11434
-  # - model_name: cex-n05-ft
-  #   litellm_params:
-  #     model: ollama/cex-n05
-  #     api_base: http://localhost:11434
-
-# Virtual keys for per-nucleus budget tracking
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
-  # database_url removed -- DB is optional; without it, no prisma init / no migrations.
-  # To enable persistent tracking, uncomment and set LITELLM_DB_URL env var:
-  # database_url: os.environ/LITELLM_DB_URL
 
-# Router settings
 router_settings:
-  routing_strategy: simple-shuffle  # fallback on failure
+  routing_strategy: simple-shuffle
   num_retries: 2
   timeout: 120
   retry_after: 5
-  allowed_fails: 2  # switch to fallback after 2 failures
-
-# Budget limits (USD per day per virtual key)
-# Set via API: POST /key/generate with max_budget
-# Example: cex-n03 key with $5/day limit
+  allowed_fails: 2
