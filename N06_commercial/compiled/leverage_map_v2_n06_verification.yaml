@@ -18,7 +18,7 @@ tags:
 - cohort
 - verification
 tldr: Verified _tools support for N06. cex_cohort_analyzer.py exists and its core cohort counting works, but JSON emits active
-  counts rather than percentages and the ASCII table mislabels future months as 0.0% retention.
+  counts rather than percentages and the ASCII table can show unavailable future months as 0.0% retention.
 when_to_use: Use when N07 needs a grounded view of N06's wired commercial tooling and the next highest-ROI build gaps.
 verification: ''
 scope: "- Runtime handoff read from `.cex/runtime/handoffs/n06_task_codex.md`\n- Mission in handoff frontmatter: `LEVERAGE_MAP_V2`\n\
@@ -26,6 +26,9 @@ scope: "- Runtime handoff read from `.cex/runtime/handoffs/n06_task_codex.md`\n-
 tool_added: "- `_tools/cex_cohort_analyzer.py` is present\n- Size: 4041 bytes, 137 lines\n- CLI exposed by code:\n  `--input`,\
   \ `--demo`, `--horizon`, `--json`\n- Demo execution passes with:\n  `python _tools/cex_cohort_analyzer.py --demo`\n- JSON\
   \ execution passes with:\n  `python _tools/cex_cohort_analyzer.py --demo --json`"
+execution_evidence: "- Demo run output:\n  `Analyzed 200 users across 4 cohorts`\n- Custom edge case run output:\n  `Cohort\
+  \     Size  M0     M1     M2`\n- The edge case confirms month-0 and month-1 retention stay active when churn\n  lands on\
+  \ the next month boundary, which is a reasonable monthly-cohort rule."
 cohort_math_assessment: '| Check | Result | Evidence |
 
   |------|--------|----------|
@@ -42,7 +45,8 @@ cohort_math_assessment: '| Check | Result | Evidence |
 
   | JSON semantics | PARTIAL | Field named `retention` contains counts, not percentages |
 
-  | Time horizon rendering | FAIL | Future months print `0.0%`, implying churn not missing data |'
+  | Time horizon rendering | FAIL | Future months print `0.0%`, which can be mistaken for churn instead of unavailable horizon
+  data |'
 what_is_correct: "- Signup month bucketing is correct for a monthly cohort view.\n- Churn exclusion logic is directionally\
   \ correct.\n  A user churned before a checkpoint month is excluded from that month.\n- The tool is useful for first-pass\
   \ retention analysis on CSV exports.\n- The implementation is stdlib-only and easy to wire into Stripe or Hotmart\n  exports\

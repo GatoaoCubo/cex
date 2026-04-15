@@ -18,7 +18,7 @@ tags:
   - monetization
   - cohort
   - verification
-tldr: "Verified _tools support for N06. cex_cohort_analyzer.py exists and its core cohort counting works, but JSON emits active counts rather than percentages and the ASCII table mislabels future months as 0.0% retention."
+tldr: "Verified _tools support for N06. cex_cohort_analyzer.py exists and its core cohort counting works, but JSON emits active counts rather than percentages and the ASCII table can show unavailable future months as 0.0% retention."
 when_to_use: "Use when N07 needs a grounded view of N06's wired commercial tooling and the next highest-ROI build gaps."
 ---
 
@@ -45,6 +45,15 @@ when_to_use: "Use when N07 needs a grounded view of N06's wired commercial tooli
 - JSON execution passes with:
   `python _tools/cex_cohort_analyzer.py --demo --json`
 
+### Execution Evidence
+
+- Demo run output:
+  `Analyzed 200 users across 4 cohorts`
+- Custom edge case run output:
+  `Cohort     Size  M0     M1     M2`
+- The edge case confirms month-0 and month-1 retention stay active when churn
+  lands on the next month boundary, which is a reasonable monthly-cohort rule.
+
 ### Cohort Math Assessment
 
 | Check | Result | Evidence |
@@ -55,7 +64,7 @@ when_to_use: "Use when N07 needs a grounded view of N06's wired commercial tooli
 | Active user counting | PASS | Counts retained users per cohort month bucket |
 | Retention table | PARTIAL | Percentages computed from active count / cohort size |
 | JSON semantics | PARTIAL | Field named `retention` contains counts, not percentages |
-| Time horizon rendering | FAIL | Future months print `0.0%`, implying churn not missing data |
+| Time horizon rendering | FAIL | Future months print `0.0%`, which can be mistaken for churn instead of unavailable horizon data |
 
 ### What Is Correct
 
@@ -211,4 +220,3 @@ N06, but the verification result is `PARTIAL`, not `FULL PASS`.
 - Compile report
 - Commit report
 - Emit completion signal for `LEVERAGE_MAP_V2`
-
