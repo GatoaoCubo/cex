@@ -1,8 +1,9 @@
 # LiteLLM Proxy Configuration for CEX (FREE MODE, tuned per-nucleus)
-# 2026-04-15: picked via bench_nucleus_models.py on 7 domain prompts.
-# Summary: llama3.1:8b wins 5/7 by speed+adherence; qwen3:14b wins N03 (frontmatter
-# fidelity) and N04 (citation recall). qwen3:8b FAILS on N05 (thinking-budget
-# consumes all tokens -> 0 bytes output).
+# 2026-04-15 round 2: added gemma2:9b to bench. New winners:
+#   gemma2:9b wins N01/N02/N03/N05/N06 (fast + raw --- frontmatter on N03)
+#   qwen3:14b still wins N04 (only model naming real citations, e.g. Sparck-Jones 1972)
+#   llama3.1:8b still wins N07 (longer structured plans at comparable speed)
+# Disqualified: qwen3:8b (thinking-budget = 0 bytes on N05), gemma4:26b (VRAM overflow).
 #
 # Benchmark data: .cex/runtime/benchmarks/summary.json
 # Decision rationale: _docs/specs/spec_claude_vs_free_routing.md
@@ -20,23 +21,22 @@ model_list:
       model: ollama/llama3.1:8b
       api_base: http://localhost:11434
 
-  # --- N01 Intelligence (speed-sensitive research) ---
+  # --- N01 Intelligence (gemma2:9b fastest adherent, 5.5s) ---
   - model_name: cex-n01
     litellm_params:
-      model: ollama/llama3.1:8b
+      model: ollama/gemma2:9b
       api_base: http://localhost:11434
 
-  # --- N02 Marketing (copy output, no factual fidelity required) ---
+  # --- N02 Marketing (gemma2:9b 5.0s, tied with llama) ---
   - model_name: cex-n02
     litellm_params:
-      model: ollama/llama3.1:8b
+      model: ollama/gemma2:9b
       api_base: http://localhost:11434
 
-  # --- N03 Builder (REQUIRES qwen3:14b for CEX frontmatter fidelity) ---
-  # llama3.1:8b wraps frontmatter in ```yml fences; qwen3:14b produces raw `---` blocks.
+  # --- N03 Builder (gemma2:9b produces raw --- frontmatter in 5.1s vs qwen3:14b 11.6s) ---
   - model_name: cex-n03
     litellm_params:
-      model: ollama/qwen3:14b
+      model: ollama/gemma2:9b
       api_base: http://localhost:11434
 
   # --- N04 Knowledge (REQUIRES qwen3:14b for citation recall) ---
@@ -47,16 +47,16 @@ model_list:
       model: ollama/qwen3:14b
       api_base: http://localhost:11434
 
-  # --- N05 Operations (qwen3:8b FAILS here, thinking-budget consumes output) ---
+  # --- N05 Operations (gemma2:9b 6.4s, llama close behind at 6.8s) ---
   - model_name: cex-n05
     litellm_params:
-      model: ollama/llama3.1:8b
+      model: ollama/gemma2:9b
       api_base: http://localhost:11434
 
-  # --- N06 Commercial (llama produces proper markdown tables) ---
+  # --- N06 Commercial (gemma2:9b 6.1s adherent) ---
   - model_name: cex-n06
     litellm_params:
-      model: ollama/llama3.1:8b
+      model: ollama/gemma2:9b
       api_base: http://localhost:11434
 
 general_settings:
