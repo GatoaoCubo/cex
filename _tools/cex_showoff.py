@@ -1,0 +1,258 @@
+"""CEX Showoff Grid -- 4-runtime smoke validation.
+
+Runs 5 waves to prove all 4 runtimes (claude + codex + gemini + ollama) work
+in grid dispatch. Each nucleus (N01-N06) produces a tiny signature artifact.
+
+Waves:
+  W1 -- all ollama  (qwen3:8b, local, free)
+  W2 -- all gemini  (gemini-2.5-flash, cheapest cloud)
+  W3 -- all codex   (gpt-5-codex, cheapest OpenAI tier CLI)
+  W4 -- all claude  (claude-haiku-4-5-20251001, cheapest Claude)
+  W5 -- MIXED       (2 ollama + 2 gemini + 1 codex + 1 claude)
+
+Each wave: write 6 handoffs -> dispatch grid -> poll signals -> stop -> verify.
+
+Usage:
+  python _tools/cex_showoff.py              # full 5-wave run (~25-40 min)
+  python _tools/cex_showoff.py --wave 1     # single wave
+  python _tools/cex_showoff.py --dry-run    # print plan, no dispatch
+"""
+from __future__ import annotations
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+HANDOFF_DIR = ROOT / ".cex" / "runtime" / "handoffs"
+SIGNAL_DIR = ROOT / ".cex" / "runtime" / "signals"
+SHOWOFF_DIR = ROOT / "_showoff"
+NUCLEI = ["n01", "n02", "n03", "n04", "n05", "n06"]
+
+WAVES = [
+    {"n": 1, "runtime": "ollama", "model": "qwen3:8b",
+     "dispatch": ["bash", "_spawn/dispatch.sh", "grid-ollama", "SHOWOFF_W1", "qwen3:8b"],
+     "handoff_suffix": "_ollama",
+     "mapping": {n: ("ollama", "qwen3:8b") for n in NUCLEI}},
+    {"n": 2, "runtime": "gemini", "model": "gemini-2.5-flash",
+     "dispatch": ["bash", "_spawn/dispatch.sh", "grid-gemini", "SHOWOFF_W2"],
+     "handoff_suffix": "_gemini",
+     "mapping": {n: ("gemini", "gemini-2.5-flash") for n in NUCLEI}},
+    {"n": 3, "runtime": "codex", "model": "gpt-5-codex",
+     "dispatch": ["bash", "_spawn/dispatch.sh", "grid-codex", "SHOWOFF_W3"],
+     "handoff_suffix": "_codex",
+     "mapping": {n: ("codex", "gpt-5-codex") for n in NUCLEI}},
+    {"n": 4, "runtime": "claude", "model": "claude-haiku-4-5-20251001",
+     "dispatch": ["bash", "_spawn/dispatch.sh", "grid-haiku", "SHOWOFF_W4"],
+     "handoff_suffix": "",
+     "mapping": {n: ("claude", "claude-haiku-4-5-20251001") for n in NUCLEI}},
+    {"n": 5, "runtime": "mixed", "model": "mixed",
+     "dispatch": None,  # manual mixed spawn
+     "handoff_suffix": None,
+     "mapping": {
+         "n01": ("ollama", "qwen3:8b"),
+         "n02": ("gemini", "gemini-2.5-flash"),
+         "n03": ("codex",  "gpt-5-codex"),
+         "n04": ("claude", "claude-haiku-4-5-20251001"),
+         "n05": ("ollama", "qwen3:8b"),
+         "n06": ("gemini", "gemini-2.5-flash"),
+     }},
+]
+
+POLL_TIMEOUT_SEC = 300  # 5 min per wave
+POLL_INTERVAL_SEC = 15
+
+BOOT_SUFFIX = {"claude": "", "gemini": "_gemini", "codex": "_codex", "ollama": "_ollama"}
+TASK_SUFFIX = {"claude": "", "gemini": "_gemini", "codex": "_codex", "ollama": "_ollama"}
+
+
+def handoff_body(wave_n, nucleus, runtime, model):
+    """Minimal task body -- must be trivial enough for qwen3:8b to complete."""
+    out = SHOWOFF_DIR / f"w{wave_n}" / f"{nucleus}_{runtime}.md"
+    body = f"""---
+nucleus: {nucleus}
+mission: SHOWOFF_W{wave_n}
+runtime: {runtime}
+model: {model}
+---
+# {nucleus.upper()} -- SHOWOFF Wave {wave_n} ({runtime})
+
+## TASK (trivial -- do NOT run 8F, just produce the artifact)
+
+1. Create directory `_showoff/w{wave_n}/` if missing.
+2. Create file `_showoff/w{wave_n}/{nucleus}_{runtime}.md` with EXACTLY this content:
+
+```
+---
+id: showoff_w{wave_n}_{nucleus}_{runtime}
+kind: smoke_eval
+title: "SHOWOFF Wave {wave_n} -- {nucleus} via {runtime}"
+version: 1
+quality: null
+pillar: P07
+nucleus: {nucleus}
+runtime: {runtime}
+model: {model}
+wave: {wave_n}
+tags: [showoff, smoke, multi-runtime]
+---
+
+# SHOWOFF Wave {wave_n}
+
+Nucleus: {nucleus}
+Runtime: {runtime}
+Model: {model}
+Signed: alive
+```
+
+3. Run: `git add _showoff/w{wave_n}/{nucleus}_{runtime}.md && git commit -m "[{nucleus}] SHOWOFF W{wave_n} via {runtime}"`
+4. Signal:
+```
+python -c "import sys; sys.path.insert(0, '_tools'); from signal_writer import write_signal; write_signal('{nucleus}', 'complete', 9.0, mission='SHOWOFF_W{wave_n}')"
+```
+5. Exit.
+
+No 8F, no quality gate, no extra artifacts. Just the 1 file + commit + signal.
+"""
+    return body
+
+
+def write_handoffs(wave, mixed=False):
+    """Write SHOWOFF_W{n}_{nucleus}.md files the dispatcher picks up."""
+    wave_n = wave["n"]
+    written = []
+    for nucleus in NUCLEI:
+        runtime, model = wave["mapping"][nucleus]
+        body = handoff_body(wave_n, nucleus, runtime, model)
+        # For grid dispatch: spawn_grid looks up ${mission}_{nucleus}.md
+        mission_handoff = HANDOFF_DIR / f"SHOWOFF_W{wave_n}_{nucleus}.md"
+        mission_handoff.write_text(body, encoding="utf-8")
+        written.append(mission_handoff)
+        # Also copy to the runtime-specific task file for direct boot
+        suffix = TASK_SUFFIX.get(runtime, "")
+        task_file = HANDOFF_DIR / f"{nucleus}_task{suffix}.md"
+        task_file.write_text(body, encoding="utf-8")
+    return written
+
+
+def poll_signals(wave_n, expected, timeout=POLL_TIMEOUT_SEC):
+    """Poll signal dir for expected mission markers. Return (found_set, elapsed)."""
+    start = time.time()
+    found = set()
+    mission = f"SHOWOFF_W{wave_n}"
+    while time.time() - start < timeout and len(found) < len(expected):
+        for sig_file in SIGNAL_DIR.glob("signal_*.json"):
+            if sig_file.stat().st_mtime < start - 5:
+                continue
+            try:
+                data = json.loads(sig_file.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if data.get("mission") == mission:
+                found.add(data.get("nucleus", "").lower())
+        if len(found) >= len(expected):
+            break
+        time.sleep(POLL_INTERVAL_SEC)
+    return found, time.time() - start
+
+
+def stop_all():
+    """Kill this session's nuclei."""
+    subprocess.run(["bash", "_spawn/dispatch.sh", "stop"], cwd=ROOT, timeout=60)
+
+
+def spawn_mixed(wave):
+    """Wave 5: start one boot per nucleus with its assigned runtime."""
+    wave_n = wave["n"]
+    for nucleus, (runtime, _model) in wave["mapping"].items():
+        suffix = BOOT_SUFFIX[runtime]
+        boot = f"boot/{nucleus}{suffix}.ps1"
+        if not (ROOT / boot).exists():
+            print(f"  [SKIP] {nucleus}: boot {boot} missing")
+            continue
+        cmd = ["powershell.exe", "-NoProfile", "-Command",
+               f"Start-Process powershell.exe -ArgumentList '-NoExit','-File','{boot}' -WindowStyle Normal"]
+        print(f"  [SPAWN] {nucleus} via {runtime}")
+        subprocess.Popen(cmd, cwd=ROOT)
+        time.sleep(2)  # stagger
+
+
+def consolidate(wave_n):
+    """List artifacts produced this wave."""
+    wdir = SHOWOFF_DIR / f"w{wave_n}"
+    if not wdir.exists():
+        return []
+    return sorted(wdir.glob("*.md"))
+
+
+def run_wave(wave, dry=False):
+    wave_n = wave["n"]
+    print(f"\n{'='*70}\nSHOWOFF Wave {wave_n} -- {wave['runtime']} ({wave['model']})\n{'='*70}")
+    if dry:
+        for n in NUCLEI:
+            rt, m = wave["mapping"][n]
+            print(f"  plan: {n} -> {rt} ({m})")
+        return True
+    # 1. Write handoffs
+    files = write_handoffs(wave)
+    print(f"[W{wave_n}] wrote {len(files)} handoffs")
+    # 2. Dispatch
+    if wave["runtime"] == "mixed":
+        spawn_mixed(wave)
+    else:
+        print(f"[W{wave_n}] dispatch: {' '.join(wave['dispatch'])}")
+        subprocess.Popen(wave["dispatch"], cwd=ROOT)
+    # 3. Poll
+    print(f"[W{wave_n}] polling signals (timeout {POLL_TIMEOUT_SEC}s)...")
+    found, elapsed = poll_signals(wave_n, NUCLEI)
+    print(f"[W{wave_n}] received {len(found)}/{len(NUCLEI)} signals in {elapsed:.0f}s -> {sorted(found)}")
+    # 4. Stop
+    print(f"[W{wave_n}] stopping nuclei...")
+    try:
+        stop_all()
+    except Exception as e:
+        print(f"  stop warning: {e}")
+    # 5. Verify artifacts
+    artifacts = consolidate(wave_n)
+    print(f"[W{wave_n}] artifacts: {len(artifacts)}/{len(NUCLEI)}")
+    for a in artifacts:
+        print(f"    {a.relative_to(ROOT)}")
+    return len(found) >= len(NUCLEI) // 2  # majority = pass
+
+
+def final_report(results):
+    print(f"\n{'='*70}\nSHOWOFF FINAL REPORT\n{'='*70}")
+    total = 0
+    for wave_n, ok, found, artifacts in results:
+        status = "PASS" if ok else "PARTIAL"
+        print(f"  W{wave_n} [{status}] signals={len(found)}/6 artifacts={artifacts}")
+        total += artifacts
+    print(f"\n  Total artifacts: {total}/{len(results)*6}")
+    print(f"{'='*70}")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--wave", type=int, help="Run only wave N (1-5)")
+    ap.add_argument("--dry-run", action="store_true", help="Print plan only")
+    args = ap.parse_args()
+
+    SHOWOFF_DIR.mkdir(exist_ok=True)
+    results = []
+    waves = [w for w in WAVES if args.wave is None or w["n"] == args.wave]
+    for wave in waves:
+        ok = run_wave(wave, dry=args.dry_run)
+        if not args.dry_run:
+            artifacts = len(consolidate(wave["n"]))
+            results.append((wave["n"], ok, set(), artifacts))
+
+    if not args.dry_run and results:
+        final_report(results)
+
+
+if __name__ == "__main__":
+    main()
