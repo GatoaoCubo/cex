@@ -4,7 +4,7 @@ id: bld_architecture_c2pa_manifest
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of c2pa_manifest -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
