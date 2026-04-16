@@ -4,7 +4,7 @@ id: experiment-tracker-builder
 pillar: P07
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for experiment_tracker
-quality: null
+quality: 8.8
 title: "Type Builder Experiment Tracker"
 version: "1.0.0"
 author: wave1_builder_gen
