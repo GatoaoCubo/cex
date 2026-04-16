@@ -4,7 +4,7 @@ id: bld_examples_action_paradigm
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of action_paradigm artifacts
-quality: null
+quality: 9.2
 title: "Examples Action Paradigm"
 version: "1.1.0"
 author: n01_polish
