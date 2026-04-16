@@ -16,7 +16,7 @@ capabilities: >
   L1: Meta-builder that creates new builder directories with all 13 ISOs for any CEX kind.
   L2: Reads kinds_meta.json, references existing builders as structural templates, produces complete 13-ISO packages.
   L3: When user needs to add a new kind to CEX or scaffold a builder for an existing kind that lacks one.
-quality: null
+quality: 9.1
 title: "Manifest Kind Builder"
 tldr: "Meta-builder: creates complete 13-ISO builder packages for any CEX kind from kinds_meta.json metadata."
 density_score: 0.90
