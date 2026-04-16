@@ -4,7 +4,7 @@ id: bld_architecture_gpai_technical_doc
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of gpai_technical_doc -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
