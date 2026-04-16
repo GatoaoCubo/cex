@@ -4,7 +4,7 @@ id: bld_tools_procedural_memory
 pillar: P04
 llm_function: CALL
 purpose: Tools available for procedural_memory production
-quality: null
+quality: 9.0
 title: "Tools: procedural_memory-builder"
 version: "2.0.0"
 author: n06_commercial
