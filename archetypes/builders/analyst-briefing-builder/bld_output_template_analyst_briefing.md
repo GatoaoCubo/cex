@@ -4,7 +4,7 @@ id: bld_output_template_analyst_briefing
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for analyst_briefing production
-quality: null
+quality: 9.1
 title: "Output Template Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
