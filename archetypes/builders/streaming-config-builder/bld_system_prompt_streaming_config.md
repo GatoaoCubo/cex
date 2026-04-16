@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "streaming transport configuration: SSE event format, WebSocket frame protocol, chunked transfer encoding, buffer sizing, heartbeat intervals, backpressure strategies, reconnect backoff, connection lifecycle | NOT output_template (response shape), formatter (data serialization), trace_config (observability), rate_limit_config (throttling), env_config (environment variables)"
 domain: "streaming_config"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "streaming_config", "SSE", "WebSocket", "chunked", "P05"]
 safety_level: standard
 tools_listed: false
