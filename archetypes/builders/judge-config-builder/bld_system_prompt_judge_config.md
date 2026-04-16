@@ -4,7 +4,7 @@ id: p03_sp_judge_config_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining judge_config-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Judge Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
