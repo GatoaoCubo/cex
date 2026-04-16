@@ -4,7 +4,7 @@ id: p11_qg_role_assignment
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for role_assignment
-quality: null
+quality: 9.0
 title: "Quality Gate Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
