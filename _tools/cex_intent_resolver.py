@@ -28,6 +28,7 @@ import re
 import sys
 from collections import Counter
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 KINDS_META_PATH = ROOT / ".cex" / "kinds_meta.json"
@@ -60,7 +61,7 @@ STOP_WORDS = frozenset({
 })
 
 
-def normalize(text):
+def normalize(text: str) -> str:
     """Lowercase, strip accents, remove punctuation."""
     text = text.lower().strip()
     for src, dst in _ACCENT_MAP.items():
@@ -70,7 +71,7 @@ def normalize(text):
     return text
 
 
-def tokenize(text):
+def tokenize(text: str) -> list[str]:
     """Normalize, split, remove stop words."""
     words = normalize(text).split()
     return [w for w in words if w not in STOP_WORDS and len(w) >= 2]
@@ -498,7 +499,7 @@ def _tfidf_search(query_text, top_k=3):
 # Public API
 # ---------------------------------------------------------------------------
 
-def resolve_intent(text):
+def resolve_intent(text: str) -> dict[str, Any]:
     """Resolve user intent to {kind, pillar, nucleus, verb, confidence, method}.
 
     Args:
@@ -580,7 +581,7 @@ def resolve_intent(text):
 # CLI
 # ---------------------------------------------------------------------------
 
-def resolve_intent_verbose(text):
+def resolve_intent_verbose(text: str) -> dict[str, Any]:
     """Verbose wrapper -- prints resolution trace to stderr."""
     tokens = tokenize(text)
     verb = _resolve_verb(tokens)
@@ -607,7 +608,7 @@ def resolve_intent_verbose(text):
     return resolve_intent(text)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="CEX Intent Resolver -- Python-first kind resolution (0 LLM tokens)"
     )
