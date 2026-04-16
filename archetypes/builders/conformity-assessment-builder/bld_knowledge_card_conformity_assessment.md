@@ -4,7 +4,7 @@ id: bld_knowledge_card_conformity_assessment
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge reference for EU AI Act Annex-IV conformity assessment concepts
-quality: null
+quality: 9.1
 title: "Conformity Assessment Builder -- Knowledge Card"
 version: "1.0.0"
 author: wave7_n05
