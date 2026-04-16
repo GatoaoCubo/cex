@@ -4,7 +4,7 @@ id: bld_examples_trajectory_eval
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of trajectory_eval artifacts
-quality: null
+quality: 8.9
 title: "Examples Trajectory Eval"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -28,12 +28,12 @@ tags: [reinforcement_learning, trajectory_analysis, gym]
 **Methodology**:
 - **Environment**: OpenAI Gym's `MiniGrid-Maze-10x10-v0`
 - **Agent**: PPO algorithm implemented with Stable Baselines3 (version 2.0.0)
-- **Evaluation Metrics**: 
+- **Evaluation Metrics**:
   - Path efficiency (shortest path vs. taken path)
   - Collision rate
   - Time to goal
 - **Setup**: 100 episodes, 5 random seeds, 1000 steps per episode
-- **Results**: 
+- **Results**:
   - Average path efficiency: 85%
   - Collision rate: 2.3%
   - Time to goal: 120 steps (±15)
@@ -52,7 +52,7 @@ tags: [nlp, benchmark]
 - **Model**: Hugging Face's `bert-base-uncased`
 - **Tasks**: MNLI, SST-2, QQP
 - **Metrics**: Accuracy, F1 score
-- **Results**: 
+- **Results**:
   - MNLI: 87% accuracy
   - SST-2: 92% accuracy
 ```
@@ -71,10 +71,10 @@ tags: [unknown]
 **Methodology**:
 - **Agent**: [Not specified]
 - **Environment**: [Not specified]
-- **Metrics**: 
+- **Metrics**:
   - "Success rate"
   - "Reward"
-- **Results**: 
+- **Results**:
   - "Success rate: 70%"
 ```
 ## Why it fails
