@@ -4,7 +4,7 @@ id: bld_config_interactive_demo
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for interactive_demo production
-quality: null
+quality: 8.6
 title: "Config Interactive Demo"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,21 +16,21 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p05_id_{{name}}.md`  
-Examples: `p05_id_demo1.md`, `p05_id_userflow.md`  
+## Naming Convention
+Pattern: `p05_id_{{name}}.md`
+Examples: `p05_id_demo1.md`, `p05_id_userflow.md`
 
-## Paths  
-Artifacts: `/artifacts/p05/demos/{{name}}`  
-Logs: `/logs/p05/{{name}}_build.log`  
+## Paths
+Artifacts: `/artifacts/p05/demos/{{name}}`
+Logs: `/logs/p05/{{name}}_build.log`
 
-## Limits  
-max_bytes: 6144  
-max_turns: 10  
-effort_level: 3  
+## Limits
+max_bytes: 6144
+max_turns: 10
+effort_level: 3
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
