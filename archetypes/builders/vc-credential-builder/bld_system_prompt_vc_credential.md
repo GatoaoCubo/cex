@@ -4,7 +4,7 @@ id: p03_sp_vc_credential_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining vc_credential-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt VC Credential"
 version: "1.0.0"
 author: n04_wave7
