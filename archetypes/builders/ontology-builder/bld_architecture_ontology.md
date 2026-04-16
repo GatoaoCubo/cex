@@ -4,7 +4,7 @@ id: bld_architecture_ontology
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of ontology -- inventory, dependencies, and architectural position in P01
-quality: null
+quality: 9.1
 title: "Architecture Ontology"
 version: "1.0.0"
 author: n03_builder
