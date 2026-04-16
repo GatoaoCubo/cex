@@ -6,13 +6,14 @@ title: SELFHEAL W4 -- N04 Content Heals Report
 version: 1.0.0
 created: 2026-04-15
 author: n04_knowledge
-quality: null
+quality: 9.0
 mission: SELFHEAL
 wave: 4
 nucleus: n04
 files_scanned: 23
 defects_found: 9
 defects_fixed: 9
+density_score: 1.0
 ---
 
 # SELFHEAL W4 -- N04 Content Heals
