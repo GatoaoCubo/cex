@@ -4,7 +4,7 @@ id: bld_config_thinking_config
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for thinking_config production
-quality: null
+quality: 8.9
 title: "Config Thinking Config"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,24 +16,24 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Naming Convention  
+## Naming Convention
 
 This ISO configures a thinking budget: how many tokens the model may spend on internal reasoning before emitting.
-Pattern: `p09_thk_{{name}}.yaml`  
-Examples: `p09_thk_report.yaml`, `p09_thk_analysis.yaml`  
+Pattern: `p09_thk_{{name}}.yaml`
+Examples: `p09_thk_report.yaml`, `p09_thk_analysis.yaml`
 
-## Paths  
-Artifacts stored in: `/artifacts/p09/{{name}}/`  
+## Paths
+Artifacts stored in: `/artifacts/p09/{{name}}/`
 
-## Limits  
-max_bytes: 2048  
-max_turns: 5  
-effort_level: 3  
+## Limits
+max_bytes: 2048
+max_turns: 5
+effort_level: 3
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
 
 ## Properties
