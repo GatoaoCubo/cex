@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "kind_builder -- meta-builder that produces complete 13-ISO builder packages for any CEX kind"
-quality: null
+quality: 9.1
 tags: [quality-gate, kind-builder, meta-builder, architecture, iso, P11]
 tldr: "Gates for builder packages: validates 13-file completeness, frontmatter consistency, quality:null, naming, sub-agent."
 density_score: 0.92
