@@ -4,7 +4,7 @@ id: bld_architecture_renewal_workflow
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of renewal_workflow -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
