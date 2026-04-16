@@ -4,7 +4,7 @@ id: p10_lr_agent_computer_interface_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for agent_computer_interface construction
-quality: null
+quality: 8.7
 title: "Learning Record Agent Computer Interface"
 version: "1.0.0"
 author: wave1_builder_gen
