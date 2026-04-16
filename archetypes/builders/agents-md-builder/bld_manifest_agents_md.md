@@ -4,7 +4,7 @@ id: agents-md-builder
 pillar: P05
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for agents_md
-quality: null
+quality: 8.9
 title: "Type Builder Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
