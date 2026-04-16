@@ -4,7 +4,7 @@ id: bld_collaboration_incident_report
 pillar: P12
 llm_function: COLLABORATE
 purpose: How incident_report-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Incident Report"
 version: "1.0.0"
 author: wave1_builder_gen
