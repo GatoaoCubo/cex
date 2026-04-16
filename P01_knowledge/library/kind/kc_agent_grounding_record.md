@@ -3,8 +3,9 @@ id: kc_agent_grounding_record
 kind: knowledge_card
 title: Agent Grounding Record
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.92
 ---
 
 # Agent Grounding Record
