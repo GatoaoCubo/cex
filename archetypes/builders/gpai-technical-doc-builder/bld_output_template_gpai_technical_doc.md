@@ -4,7 +4,7 @@ id: bld_output_template_gpai_technical_doc
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for gpai_technical_doc production
-quality: null
+quality: 9.1
 title: "Output Template GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
