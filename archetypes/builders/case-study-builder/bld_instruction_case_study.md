@@ -4,7 +4,7 @@ id: bld_instruction_case_study
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for case_study
-quality: null
+quality: 8.9
 title: "Instruction Case Study"
 version: "1.1.0"
 author: wave1_builder_gen_v2
