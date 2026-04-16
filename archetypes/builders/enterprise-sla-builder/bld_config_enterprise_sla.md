@@ -4,7 +4,7 @@ id: bld_config_enterprise_sla
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for enterprise_sla production
-quality: null
+quality: 8.6
 title: "Config Enterprise Sla"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,20 +16,20 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p11_sla_{{name}}.md`  
-Examples: `p11_sla_annual_review.md`, `p11_sla_q4_2023.md`  
+## Naming Convention
+Pattern: `p11_sla_{{name}}.md`
+Examples: `p11_sla_annual_review.md`, `p11_sla_q4_2023.md`
 
-## Paths  
-/artifacts/enterprise/sla/P11/{{name}}  
+## Paths
+/artifacts/enterprise/sla/P11/{{name}}
 
-## Limits  
-max_bytes: 6144  
-max_turns: 5  
-effort level: medium  
+## Limits
+max_bytes: 6144
+max_turns: 5
+effort level: medium
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
