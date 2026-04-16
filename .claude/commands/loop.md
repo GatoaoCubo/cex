@@ -3,7 +3,7 @@ id: loop
 kind: instruction
 pillar: P12
 description: "Run a prompt or command on a recurring interval. Usage: /loop [interval] <command>"
-quality: null
+quality: 9.1
 title: "Loop"
 version: "1.0.0"
 author: n03_builder
