@@ -4,7 +4,7 @@ id: bld_config_cohort_analysis
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for cohort_analysis production
-quality: null
+quality: 8.6
 title: "Config Cohort Analysis"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,21 +16,21 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p07_ca_{{name}}.yaml`  
-Examples: `p07_ca_demographics.yaml`, `p07_ca_treatment.yaml`  
+## Naming Convention
+Pattern: `p07_ca_{{name}}.yaml`
+Examples: `p07_ca_demographics.yaml`, `p07_ca_treatment.yaml`
 
-## Paths  
-Artifacts: `/artifacts/p07/cohort_analysis/{{name}}/`  
-Logs: `/logs/p07/cohort_analysis/{{name}}/`  
+## Paths
+Artifacts: `/artifacts/p07/cohort_analysis/{{name}}/`
+Logs: `/logs/p07/cohort_analysis/{{name}}/`
 
-## Limits  
-max_bytes: 3072  
-max_turns: 10  
-effort_level: medium  
+## Limits
+max_bytes: 3072
+max_turns: 10
+effort_level: medium
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
