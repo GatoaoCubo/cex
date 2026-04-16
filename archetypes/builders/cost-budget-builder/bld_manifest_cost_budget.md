@@ -14,7 +14,7 @@ keywords: [token, budget, cost, spend, alert, provider, model, limit, billing, q
 triggers: ["set token budget", "track spending", "create cost alert", "define provider budget", "allocate model budget", "configure spend limit"]
 capabilities: >
   L1: Specialist in building cost_budget artifacts -- token budget allocation and spend tracking per provider/model. L2: Define budget limits, alert thresholds, and reset policies. L3: When user needs to govern LLM API costs, set spending caps, or configure provider-level quotas.
-quality: null
+quality: 9.1
 title: "Manifest Cost Budget"
 tldr: "Builder for cost_budget artifacts: token allocation, spend tracking, and cost alert configs per provider/model."
 density_score: 0.90
