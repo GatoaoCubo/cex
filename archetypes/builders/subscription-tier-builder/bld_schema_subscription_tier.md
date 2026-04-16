@@ -4,7 +4,7 @@ id: bld_schema_subscription_tier
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for subscription_tier
-quality: null
+quality: 9.2
 title: "Schema Subscription Tier"
 version: "1.0.0"
 author: n03_builder
