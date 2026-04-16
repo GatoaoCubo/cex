@@ -4,7 +4,7 @@ id: bld_output_template_safety_hazard_taxonomy
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for safety_hazard_taxonomy production
-quality: null
+quality: 9.1
 title: "Output Template Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
