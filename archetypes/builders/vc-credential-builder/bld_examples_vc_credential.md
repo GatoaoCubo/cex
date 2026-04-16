@@ -4,7 +4,7 @@ id: bld_examples_vc_credential
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of vc_credential artifacts
-quality: null
+quality: 8.9
 title: "Examples VC Credential"
 version: "1.0.0"
 author: n04_wave7
