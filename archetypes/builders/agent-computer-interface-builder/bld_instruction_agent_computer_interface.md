@@ -4,7 +4,7 @@ id: bld_instruction_agent_computer_interface
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for agent_computer_interface
-quality: null
+quality: 8.9
 title: "Instruction Agent Computer Interface"
 version: "1.0.0"
 author: wave1_builder_gen
