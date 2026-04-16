@@ -4,7 +4,7 @@ id: bld_config_reranker_config
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for reranker_config production
-quality: null
+quality: 8.6
 title: "Config Reranker Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,14 +16,14 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p01_rr_<project_name>.yaml`  
-Examples:  
-- `p01_rr_search.yaml`  
-- `p01_rr_recommend.yaml`  
+## Naming Convention
+Pattern: `p01_rr_<project_name>.yaml`
+Examples:
+- `p01_rr_search.yaml`
+- `p01_rr_recommend.yaml`
 
-## Paths  
-Artifacts stored in: `/mnt/cex/artifacts/p01/rerankers/{{name}}.yaml`  
+## Paths
+Artifacts stored in: `/mnt/cex/artifacts/p01/rerankers/{{name}}.yaml`
 
-## Limits  
+## Limits
 -
