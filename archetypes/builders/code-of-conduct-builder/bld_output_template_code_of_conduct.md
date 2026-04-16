@@ -4,7 +4,7 @@ id: bld_output_template_code_of_conduct
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for code_of_conduct production
-quality: null
+quality: 9.1
 title: "Output Template Code of Conduct"
 version: "1.0.0"
 author: n04_knowledge
