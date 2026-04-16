@@ -4,7 +4,7 @@ id: bld_schema_agents_md
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for agents_md
-quality: null
+quality: 9.1
 title: "Schema Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
