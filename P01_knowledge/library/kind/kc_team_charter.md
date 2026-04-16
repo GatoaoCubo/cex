@@ -3,8 +3,9 @@ id: kc_team_charter
 kind: knowledge_card
 title: Team Charter
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 1.0
 ---
 
 # Team Charter
