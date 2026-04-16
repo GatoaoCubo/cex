@@ -4,7 +4,7 @@ id: bld_schema_threat_model
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for threat_model
-quality: null
+quality: 9.2
 title: "Schema Threat Model"
 version: "1.1.0"
 author: n05_ops
