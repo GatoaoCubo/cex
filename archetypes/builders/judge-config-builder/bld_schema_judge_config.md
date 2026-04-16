@@ -4,7 +4,7 @@ id: bld_schema_judge_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for judge_config artifacts
-quality: null
+quality: 9.2
 title: "Schema Judge Config"
 version: "1.1.0"
 author: n03_hybrid_review4
