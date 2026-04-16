@@ -4,7 +4,7 @@ id: p05_qg_press_release
 pillar: P11
 llm_function: GOVERN
 purpose: Define hard gates and soft scoring dimensions for press_release quality enforcement
-quality: null
+quality: 9.1
 title: "Press Release Quality Gate"
 version: "1.0.0"
 author: n02_wave6
