@@ -6,7 +6,7 @@ llm_function: INJECT
 purpose: Accumulated production experience for subscription_tier artifact generation
 memory_scope: project
 observation_types: [user, feedback, project, reference]
-quality: null
+quality: 9.0
 title: "Memory Subscription Tier"
 version: "1.0.0"
 author: n03_builder
