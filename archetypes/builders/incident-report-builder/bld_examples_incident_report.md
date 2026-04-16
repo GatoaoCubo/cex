@@ -4,7 +4,7 @@ id: bld_examples_incident_report
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of incident_report artifacts
-quality: null
+quality: 8.9
 title: "Examples Incident Report"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -25,31 +25,31 @@ team: AI Infrastructure
 severity: High
 ---
 
-**Summary**  
+**Summary**
 A data corruption incident occurred during batch processing of training data, leading to 32% of models failing validation. Root cause: faulty checksum validation in data ingestion.
 
-**Timeline**  
-- 2023-10-14 10:00: Ingestion job initiated  
-- 2023-10-14 11:30: Anomalies detected in validation metrics  
-- 2023-10-14 14:00: Incident declared; rollback to previous version  
-- 2023-10-15 09:00: Root cause identified; hotfix deployed  
+**Timeline**
+- 2023-10-14 10:00: Ingestion job initiated
+- 2023-10-14 11:30: Anomalies detected in validation metrics
+- 2023-10-14 14:00: Incident declared; rollback to previous version
+- 2023-10-15 09:00: Root cause identified; hotfix deployed
 
-**Root Cause**  
+**Root Cause**
 Missing checksum validation in data ingestion code allowed corrupted files to pass undetected. Code merged without peer review due to CI/CD pipeline misconfiguration.
 
-**Impact**  
-- 12 models invalidated  
-- 48 hours of retraining required  
-- $12k in compute costs  
+**Impact**
+- 12 models invalidated
+- 48 hours of retraining required
+- $12k in compute costs
 
-**Mitigation**  
-- Implemented mandatory checksum validation  
-- Enforced peer review for critical code paths  
-- Added data integrity monitoring dashboard  
+**Mitigation**
+- Implemented mandatory checksum validation
+- Enforced peer review for critical code paths
+- Added data integrity monitoring dashboard
 
-**Lessons Learned**  
-- CI/CD pipeline requires stricter gatekeeping  
-- Data validation should be redundant across layers  
+**Lessons Learned**
+- CI/CD pipeline requires stricter gatekeeping
+- Data validation should be redundant across layers
 - Incident response plan executed successfully
 ```
 
@@ -62,21 +62,21 @@ team: AI Training
 severity: Medium
 ---
 
-**Summary**  
+**Summary**
 Training job took 2 hours longer than expected. No further details.
 
-**Timeline**  
-- 2023-10-14 10:00: Job started  
-- 2023-10-14 12:30: Job completed  
+**Timeline**
+- 2023-10-14 10:00: Job started
+- 2023-10-14 12:30: Job completed
 
-**Impact**  
-- Minor delay in model deployment  
-- No financial impact  
+**Impact**
+- Minor delay in model deployment
+- No financial impact
 
-**Mitigation**  
-- "Improved monitoring" (no specifics)  
+**Mitigation**
+- "Improved monitoring" (no specifics)
 ```
-## Why it fails  
+## Why it fails
 Lacks detailed root cause, actionable lessons, and quantified impact. Summary is vague, timeline provides no context, and mitigation is non-specific.
 
 ## Anti-Example 2: Overly Technical Without Context
@@ -88,19 +88,19 @@ team: Inference
 severity: Critical
 ---
 
-**Summary**  
+**Summary**
 Memory leak detected in PyTorch 2.1.3 when using mixed-precision training with FSDP. Leak rate: 2.3MB/epoch.
 
-**Timeline**  
-- 2023-10-14 10:00: Job started  
-- 2023-10-14 12:30: OOM error encountered  
+**Timeline**
+- 2023-10-14 10:00: Job started
+- 2023-10-14 12:30: OOM error encountered
 
-**Root Cause**  
-Incorrect tensor pinning in `torch.distributed` caused memory fragmentation.  
+**Root Cause**
+Incorrect tensor pinning in `torch.distributed` caused memory fragmentation.
 
-**Mitigation**  
-- Upgraded to PyTorch 2.2  
-- Added `torch.cuda.empty_cache()` calls  
+**Mitigation**
+- Upgraded to PyTorch 2.2
+- Added `torch.cuda.empty_cache()` calls
 ```
-## Why it fails  
+## Why it fails
 Technical details overwhelm without explaining business impact. No lessons learned, no stakeholder communication plan, and no prevention strategy beyond patching.
