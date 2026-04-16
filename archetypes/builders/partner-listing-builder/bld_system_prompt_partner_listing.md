@@ -4,7 +4,7 @@ id: p03_sp_partner_listing_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining partner_listing-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Partner Listing"
 version: "1.0.0"
 author: wave1_builder_gen_v2
