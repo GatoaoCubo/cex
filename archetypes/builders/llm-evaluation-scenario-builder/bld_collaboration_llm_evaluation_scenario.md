@@ -4,7 +4,7 @@ id: bld_collaboration_llm_evaluation_scenario
 pillar: P12
 llm_function: COLLABORATE
 purpose: How llm_evaluation_scenario-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
