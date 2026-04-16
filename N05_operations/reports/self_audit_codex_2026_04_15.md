@@ -4,11 +4,12 @@ kind: self_audit
 pillar: P07
 title: N05 Operations Self-Audit
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [audit, self_review, n05, operations, ci_cd, codex]
 created: 2026-04-15
 nucleus: n05
 density_score: 1.0
+updated: "2026-04-15"
 ---
 
 # N05 Operations Self-Audit (Codex)
