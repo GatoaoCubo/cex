@@ -4,7 +4,7 @@ id: bld_tools_reasoning_strategy
 pillar: P04
 llm_function: CALL
 purpose: Tools available for reasoning_strategy production
-quality: null
+quality: 8.9
 title: "Tools Reasoning Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -37,6 +37,6 @@ This ISO selects a reasoning strategy (e.g. chain-of-thought) and the conditions
 | val_profiler.py | Analyzes resource usage and scalability | For performance tuning |
 
 ## External References
-- PyTorch: For integrating ML components into strategies  
-- LangChain: For LLM integration and prompt management  
+- PyTorch: For integrating ML components into strategies
+- LangChain: For LLM integration and prompt management
 - pytest: For unit testing strategy components
