@@ -7,8 +7,9 @@ version: "1.0.0"
 created: "2023-10-15"
 author: "content-monetization-builder"
 domain: petshop
-quality: null
+quality: 8.7
 tags: [content-monetization, crm, petshop]
+density_score: 0.98
 ---
 # PetShop CRM
 ## Pipeline (9 stages)
