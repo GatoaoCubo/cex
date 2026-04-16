@@ -4,7 +4,7 @@ id: bld_instruction_c2pa_manifest
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for c2pa_manifest
-quality: null
+quality: 8.9
 title: "Instruction C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
