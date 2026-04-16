@@ -4,7 +4,7 @@ id: bld_knowledge_card_interactive_demo
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for interactive_demo production
-quality: null
+quality: 9.2
 title: "Knowledge Card Interactive Demo"
 version: "1.0.0"
 author: wave1_builder_gen_v2
