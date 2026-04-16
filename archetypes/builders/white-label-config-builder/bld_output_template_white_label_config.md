@@ -4,7 +4,7 @@ id: bld_output_template_white_label_config
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for white_label_config production
-quality: null
+quality: 8.8
 title: "Output Template White Label Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
