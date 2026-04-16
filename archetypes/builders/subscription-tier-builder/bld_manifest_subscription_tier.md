@@ -4,7 +4,7 @@ id: subscription-tier-builder
 pillar: P11
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for subscription_tier
-quality: null
+quality: 8.8
 title: "Type Builder Subscription Tier"
 version: "1.0.0"
 author: wave1_builder_gen_v2
