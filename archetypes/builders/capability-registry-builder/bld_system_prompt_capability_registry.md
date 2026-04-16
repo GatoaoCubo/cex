@@ -4,7 +4,7 @@ id: p03_sp_capability_registry_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining capability_registry-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Capability Registry"
 version: "1.0.0"
 author: n04_wave8
