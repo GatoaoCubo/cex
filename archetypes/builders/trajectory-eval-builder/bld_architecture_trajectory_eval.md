@@ -4,7 +4,7 @@ id: bld_architecture_trajectory_eval
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of trajectory_eval -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Trajectory Eval"
 version: "1.1.0"
 author: n01_hybrid_review4
