@@ -4,7 +4,7 @@ id: bld_instruction_bias_audit
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for bias_audit
-quality: null
+quality: 8.9
 title: "Instruction Bias Audit"
 version: "1.0.0"
 author: wave1_builder_gen
