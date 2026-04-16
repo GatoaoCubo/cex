@@ -4,7 +4,7 @@ id: bld_tools_judge_config
 pillar: P04
 llm_function: CALL
 purpose: Real tools used during judge_config production
-quality: null
+quality: 9.0
 title: "Tools Judge Config"
 version: "1.1.0"
 author: n03_hybrid_review4
