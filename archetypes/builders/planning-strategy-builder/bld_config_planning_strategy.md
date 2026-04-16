@@ -4,7 +4,7 @@ id: bld_config_planning_strategy
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for planning_strategy production
-quality: null
+quality: 8.6
 title: "Config Planning Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,21 +16,21 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Naming Convention  
-Pattern: `p03_ps_{{name}}.md`  
-Examples: `p03_ps_strategy.md`, `p03_ps_example_plan.md`  
+## Naming Convention
+Pattern: `p03_ps_{{name}}.md`
+Examples: `p03_ps_strategy.md`, `p03_ps_example_plan.md`
 
-## Paths  
-Artifacts stored in: `/artifacts/p03/ps/{{name}}/`  
-Root: `/artifacts/p03/ps/`  
+## Paths
+Artifacts stored in: `/artifacts/p03/ps/{{name}}/`
+Root: `/artifacts/p03/ps/`
 
-## Limits  
-max_bytes: 5120  
-max_turns: 10  
-effort_level: 3  
+## Limits
+max_bytes: 5120
+max_turns: 10
+effort_level: 3
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
