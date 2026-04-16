@@ -4,7 +4,7 @@ id: bld_instruction_consolidation_policy
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for consolidation_policy
-quality: null
+quality: 9.0
 title: "Instruction: consolidation_policy-builder"
 version: "2.0.0"
 author: n06_commercial
