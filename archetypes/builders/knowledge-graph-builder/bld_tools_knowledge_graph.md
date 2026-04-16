@@ -4,7 +4,7 @@ id: bld_tools_knowledge_graph
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for knowledge_graph production
-quality: null
+quality: 9.2
 title: "Tools: knowledge-graph-builder"
 version: "1.0.0"
 author: n03_builder
