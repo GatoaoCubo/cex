@@ -7,9 +7,10 @@ nucleus: n01
 mission: SELFHEAL
 wave: 2
 version: 1.0.0
-quality: null
+quality: 9.1
 created: 2026-04-15
 tags: [selfheal, quality-audit, semantic-diagnosis, w2, stale-fact, frontmatter]
+density_score: 1.0
 ---
 
 # SELFHEAL W2: Semantic Diagnosis Report
