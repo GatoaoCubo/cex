@@ -4,7 +4,7 @@ id: p11_qg_ab_test_config
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for ab_test_config
-quality: null
+quality: 9.1
 title: "Quality Gate Ab Test Config"
 version: "1.0.0"
 author: n03_builder
