@@ -4,7 +4,7 @@ id: p12_sp_renewal_workflow_builder
 pillar: P12
 llm_function: BECOME
 purpose: System prompt defining renewal_workflow-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
