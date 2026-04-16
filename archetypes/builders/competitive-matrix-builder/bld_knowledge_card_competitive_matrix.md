@@ -4,7 +4,7 @@ id: bld_knowledge_card_competitive_matrix
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for competitive_matrix production
-quality: null
+quality: 9.2
 title: "Knowledge Card Competitive Matrix"
 version: "1.1.0"
 author: wave1_builder_gen_v2
