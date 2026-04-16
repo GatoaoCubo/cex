@@ -3,8 +3,9 @@ id: kc_conformity_assessment
 kind: knowledge_card
 title: Conformity Assessment for High-Risk AI Systems (EU AI Act Annex IV)
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.84
 ---
 
 **EU AI Act Annex IV Conformity Assessment**  
