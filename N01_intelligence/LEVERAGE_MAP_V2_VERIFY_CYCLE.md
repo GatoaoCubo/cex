@@ -6,8 +6,9 @@ pillar: P01_knowledge
 nucleus: N01
 created: 2026-04-15
 version: 2.0.1
-quality: null
+quality: 9.1
 tags: [leverage, tools, gap-analysis, n01-intel]
+density_score: 1.0
 ---
 
 # N01 Intelligence — Leverage Map V2 Verification Cycle
