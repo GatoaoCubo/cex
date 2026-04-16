@@ -1,0 +1,184 @@
+id: kno_embedder_provider_n03
+kind: embedder_provider
+pillar: P01
+nucleus: N03
+title: N03 Embedder Provider
+version: 1.0.0
+created: '2026-04-16'
+updated: '2026-04-16'
+author: n03_engineering
+domain: engineering retrieval architecture
+quality: null
+tags:
+- embedder_provider
+- p01
+- n03
+- embeddings
+- retrieval
+- inventive_pride
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `embedder_provider` |
+
+  | Pillar | `P01` |
+
+  | Nucleus | `N03` |
+
+  | Lens | `Inventive Pride` |
+
+  | Provider class | hosted dense embedder with stable truncation |
+
+  | Preferred dimensions | `1024` |
+
+  | Query mode | symmetric text embeddings |
+
+  | Batch profile | medium throughput, high consistency |
+
+  | Normalization | mandatory |
+
+  | Upgrade posture | reindex on model family change |'
+role: The embedder provider turns N03 knowledge into a geometry of engineering meaning. Inventive Pride rejects cheap embeddings
+  that flatten nuanced build constraints. The provider must reward precise terminology, structural similarity, and procedural
+  intent. It is selected for retrieval dignity, not novelty.
+default_position: 'N03 should use a modern hosted embedding model with:
+
+  - native dimension control
+
+  - strong technical-text performance
+
+  - deterministic normalization expectations
+
+  - acceptable latency for batch indexing
+
+  - predictable long-term vendor support
+
+
+  The default shape is:
+
+  - provider family: enterprise hosted API
+
+  - model class: latest general-purpose text embedding family
+
+  - dimension target: `1024`
+
+  - vector normalization: `l2`
+
+  - batch size: `64`
+
+  - retry policy: exponential backoff with bounded retries'
+why_1024: '| Option | Strength | Weakness | Verdict |
+
+  |-------|----------|----------|---------|
+
+  | 256 | cheap and compact | loses structural nuance in technical docs | too compressed for N03 |
+
+  | 512 | reasonable balance | still trims distinction between adjacent builders | acceptable fallback |
+
+  | 1024 | strong semantic headroom | larger index footprint | preferred |
+
+  | 1536+ | maximal fidelity | unnecessary cost for current corpus scale | reserve for expansion |'
+text_scope: 'The provider must handle:
+
+  - builder manifests
+
+  - nucleus architecture notes
+
+  - schemas with mixed prose and keys
+
+  - markdown tables
+
+  - handoff instructions
+
+  - memory summaries and runtime state digests
+
+
+  It should not be optimized around conversational fluff.
+
+  Its center of gravity is technical instruction and architectural contrast.'
+configuration_contract: '| Field | N03 stance | Rationale |
+
+  |------|-------------|-----------|
+
+  | provider | explicit and versioned | avoid hidden vendor drift |
+
+  | model | pinned | reindexing must be intentional |
+
+  | dimensions | pinned at index time | mixed dimensions are unacceptable |
+
+  | max_input_tokens | above chunk ceiling | prevents silent truncation |
+
+  | batch_size | moderate | keeps throughput stable under rate limits |
+
+  | normalize | true | cosine search assumes normalized vectors |
+
+  | api_key_env | dedicated secret | isolate operational failure domains |'
+operational_guardrails:
+- Never mix vectors from different model families in one live collection.
+- Never change dimension without full reindex.
+- Never disable normalization when cosine ranking is used.
+- Never embed raw compiled noise if source markdown already exists.
+- Never optimize purely for cost if it degrades builder retrieval precision.
+pride_lens: 'Inventive Pride means retrieval should recognize the difference between:
+
+  - a schema boundary and a runtime heuristic
+
+  - a builder identity and a deployment concern
+
+  - a quality gate and a casual checklist
+
+  The embedder must preserve these distinctions.
+
+  If adjacent artifact kinds collapse together, the provider is unworthy.'
+fallback_stack: '| Tier | Use case | Expectation |
+
+  |------|----------|-------------|
+
+  | Tier 1 | hosted primary embedder | production indexing and query embeddings |
+
+  | Tier 2 | hosted smaller sibling | temporary budget relief with same family if possible |
+
+  | Tier 3 | local sentence transformer | offline recovery, lower recall accepted |'
+cost_discipline: N03 values quality first, but not theatrically. The corpus is finite and engineering-dense. That favors a
+  mid-high dimension model over the largest available option. The proud choice is the smallest model that still separates
+  close technical concepts.
+observability:
+- record embedding model in artifact metadata
+- track reindex timestamp
+- track vector count per collection
+- track average chunk length
+- sample nearest-neighbor quality on canonical queries
+- compare retrieval precision after any provider change
+failure_signals: '| Signal | Interpretation | Action |
+
+  |-------|----------------|--------|
+
+  | frequent irrelevant neighbors | semantic compression too weak | increase dimensions or change family |
+
+  | high latency on batch ingest | provider throttling or batch too large | reduce batch size |
+
+  | empty or malformed vectors | provider contract changed | halt indexing |
+
+  | query and corpus mismatch | asymmetric embedding path broken | audit query mode |'
+compatibility_notes: 'The provider is paired with:
+
+  - chunk sizes around `720` tokens
+
+  - hybrid retrieval with lexical backup
+
+  - metadata-aware vector store filtering
+
+  - periodic evaluation against known N03 queries
+
+
+  It must support enough input length to encode section-rich engineering chunks.
+
+  It must also behave predictably under repeated nightly reindex cycles.'
+migration_rules:
+- 'minor model revision within same family: benchmark before switch'
+- 'dimension reduction: rebuild collection and compare top-10 query sets'
+- 'provider family change: dual-index trial before cutover'
+- 'offline fallback use: mark retrieval quality as degraded in runtime state'
+final_position: N03 should embed with a stable, modern, normalized, `1024`-dimension provider. That choice respects cost,
+  but it is ultimately a quality decision. Retrieval should feel engineered, not approximate.

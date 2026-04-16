@@ -1,0 +1,1822 @@
+{
+  "generated_at": "2026-04-16T17:03:43.360007",
+  "scope": "CORE KINDS ONLY",
+  "matrix": {
+    "nuclei": {
+      "N00_genesis": {
+        "sin": "pre-sin archetype",
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "canonical_count": 6,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config",
+              "vector_store"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P02": {
+            "subdir": "agents",
+            "canonical_count": 8,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "agent",
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P03": {
+            "subdir": "prompts",
+            "canonical_count": 7,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace",
+              "system_prompt"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P04": {
+            "subdir": "tools",
+            "canonical_count": 9,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P05": {
+            "subdir": "output",
+            "canonical_count": 2,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "output_validator",
+              "response_format"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P06": {
+            "subdir": "schemas",
+            "canonical_count": 4,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P07": {
+            "subdir": "quality",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P08": {
+            "subdir": "architecture",
+            "canonical_count": 3,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "unknown_kinds": [
+              "nucleus_def"
+            ],
+            "coverage": 0.0
+          },
+          "P09": {
+            "subdir": "config",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P10": {
+            "subdir": "memory",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P11": {
+            "subdir": "feedback",
+            "canonical_count": 4,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "guardrail",
+              "lifecycle_rule",
+              "quality_gate",
+              "reward_signal"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "canonical_count": 6,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow",
+              "workflow_primitive"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          }
+        }
+      },
+      "N01_intelligence": {
+        "sin": "Analytical Envy",
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "canonical_count": 6,
+            "present_count": 1,
+            "present_kinds": [
+              "knowledge_card"
+            ],
+            "missing_kinds": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "unknown_kinds": [
+              "embedding_config",
+              "rag_source"
+            ],
+            "coverage": 0.17
+          },
+          "P02": {
+            "subdir": "agents",
+            "canonical_count": 8,
+            "present_count": 1,
+            "present_kinds": [
+              "agent"
+            ],
+            "missing_kinds": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.12
+          },
+          "P03": {
+            "subdir": "prompts",
+            "canonical_count": 7,
+            "present_count": 2,
+            "present_kinds": [
+              "prompt_template",
+              "system_prompt"
+            ],
+            "missing_kinds": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "reasoning_trace"
+            ],
+            "unknown_kinds": [
+              "chain"
+            ],
+            "coverage": 0.29
+          },
+          "P04": {
+            "subdir": "tools",
+            "canonical_count": 9,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "unknown_kinds": [
+              "cli_tool",
+              "tool_config"
+            ],
+            "coverage": 0.0
+          },
+          "P05": {
+            "subdir": "output",
+            "canonical_count": 2,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "output_validator",
+              "response_format"
+            ],
+            "unknown_kinds": [
+              "benchmark",
+              "competitive_analysis",
+              "context-doc",
+              "context_doc",
+              "knowledge_card",
+              "output",
+              "output_template",
+              "research_output"
+            ],
+            "coverage": 0.0
+          },
+          "P06": {
+            "subdir": "schemas",
+            "canonical_count": 4,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "unknown_kinds": [
+              "schema"
+            ],
+            "coverage": 0.0
+          },
+          "P07": {
+            "subdir": "quality",
+            "canonical_count": 5,
+            "present_count": 2,
+            "present_kinds": [
+              "eval_dataset",
+              "scoring_rubric"
+            ],
+            "missing_kinds": [
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "unknown_kinds": [
+              "audit_report",
+              "benchmark",
+              "knowledge_card",
+              "quality_gate"
+            ],
+            "coverage": 0.4
+          },
+          "P08": {
+            "subdir": "architecture",
+            "canonical_count": 3,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "unknown_kinds": [
+              "agent_card",
+              "nucleus_def"
+            ],
+            "coverage": 0.0
+          },
+          "P09": {
+            "subdir": "config",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P10": {
+            "subdir": "memory",
+            "canonical_count": 5,
+            "present_count": 2,
+            "present_kinds": [
+              "knowledge_index",
+              "learning_record"
+            ],
+            "missing_kinds": [
+              "entity_memory",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "unknown_kinds": [
+              "checkpoint",
+              "embedding_config",
+              "rag_source"
+            ],
+            "coverage": 0.4
+          },
+          "P11": {
+            "subdir": "feedback",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "quality_gate"
+            ],
+            "missing_kinds": [
+              "guardrail",
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.25
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "canonical_count": 6,
+            "present_count": 1,
+            "present_kinds": [
+              "workflow"
+            ],
+            "missing_kinds": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow_primitive"
+            ],
+            "unknown_kinds": [
+              "dispatch_rule"
+            ],
+            "coverage": 0.17
+          }
+        }
+      },
+      "N02_marketing": {
+        "sin": "Creative Lust",
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "canonical_count": 6,
+            "present_count": 1,
+            "present_kinds": [
+              "knowledge_card"
+            ],
+            "missing_kinds": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.17
+          },
+          "P02": {
+            "subdir": "agents",
+            "canonical_count": 8,
+            "present_count": 1,
+            "present_kinds": [
+              "agent"
+            ],
+            "missing_kinds": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.12
+          },
+          "P03": {
+            "subdir": "prompts",
+            "canonical_count": 7,
+            "present_count": 3,
+            "present_kinds": [
+              "action_prompt",
+              "prompt_template",
+              "system_prompt"
+            ],
+            "missing_kinds": [
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "reasoning_trace"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.43
+          },
+          "P04": {
+            "subdir": "tools",
+            "canonical_count": 9,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "unknown_kinds": [
+              "cli_tool"
+            ],
+            "coverage": 0.0
+          },
+          "P05": {
+            "subdir": "output",
+            "canonical_count": 2,
+            "present_count": 1,
+            "present_kinds": [
+              "output_validator"
+            ],
+            "missing_kinds": [
+              "response_format"
+            ],
+            "unknown_kinds": [
+              "audit_report",
+              "competitive_analysis",
+              "context_doc",
+              "knowledge_card",
+              "output",
+              "output_template",
+              "prompt_template",
+              "verification_report"
+            ],
+            "coverage": 0.5
+          },
+          "P06": {
+            "subdir": "schemas",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "input_schema"
+            ],
+            "missing_kinds": [
+              "enum_def",
+              "type_def",
+              "validator"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.25
+          },
+          "P07": {
+            "subdir": "quality",
+            "canonical_count": 5,
+            "present_count": 1,
+            "present_kinds": [
+              "scoring_rubric"
+            ],
+            "missing_kinds": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "unknown_kinds": [
+              "audit_report",
+              "knowledge_card"
+            ],
+            "coverage": 0.2
+          },
+          "P08": {
+            "subdir": "architecture",
+            "canonical_count": 3,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "unknown_kinds": [
+              "agent_card",
+              "nucleus_def"
+            ],
+            "coverage": 0.0
+          },
+          "P09": {
+            "subdir": "config",
+            "canonical_count": 5,
+            "present_count": 1,
+            "present_kinds": [
+              "env_config"
+            ],
+            "missing_kinds": [
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "unknown_kinds": [
+              "validation_schema"
+            ],
+            "coverage": 0.2
+          },
+          "P10": {
+            "subdir": "memory",
+            "canonical_count": 5,
+            "present_count": 2,
+            "present_kinds": [
+              "learning_record",
+              "memory_summary"
+            ],
+            "missing_kinds": [
+              "entity_memory",
+              "knowledge_index",
+              "runtime_state"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.4
+          },
+          "P11": {
+            "subdir": "feedback",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "quality_gate"
+            ],
+            "missing_kinds": [
+              "guardrail",
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.25
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "canonical_count": 6,
+            "present_count": 1,
+            "present_kinds": [
+              "workflow"
+            ],
+            "missing_kinds": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow_primitive"
+            ],
+            "unknown_kinds": [
+              "crew_template",
+              "dispatch_rule",
+              "handoff_protocol",
+              "role_assignment",
+              "team_charter"
+            ],
+            "coverage": 0.17
+          }
+        }
+      },
+      "N03_engineering": {
+        "sin": "Inventive Pride",
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "canonical_count": 6,
+            "present_count": 2,
+            "present_kinds": [
+              "few_shot_example",
+              "knowledge_card"
+            ],
+            "missing_kinds": [
+              "chunk_strategy",
+              "embedder_provider",
+              "retriever_config",
+              "vector_store"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.33
+          },
+          "P02": {
+            "subdir": "agents",
+            "canonical_count": 8,
+            "present_count": 3,
+            "present_kinds": [
+              "agent",
+              "axiom",
+              "mental_model"
+            ],
+            "missing_kinds": [
+              "agent_package",
+              "handoff_protocol",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.38
+          },
+          "P03": {
+            "subdir": "prompts",
+            "canonical_count": 7,
+            "present_count": 2,
+            "present_kinds": [
+              "prompt_template",
+              "system_prompt"
+            ],
+            "missing_kinds": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "reasoning_trace"
+            ],
+            "unknown_kinds": [
+              "chain"
+            ],
+            "coverage": 0.29
+          },
+          "P04": {
+            "subdir": "tools",
+            "canonical_count": 9,
+            "present_count": 1,
+            "present_kinds": [
+              "function_def"
+            ],
+            "missing_kinds": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "unknown_kinds": [
+              "cli_tool"
+            ],
+            "coverage": 0.11
+          },
+          "P05": {
+            "subdir": "output",
+            "canonical_count": 2,
+            "present_count": 1,
+            "present_kinds": [
+              "response_format"
+            ],
+            "missing_kinds": [
+              "output_validator"
+            ],
+            "unknown_kinds": [
+              "competitive_analysis",
+              "context_doc",
+              "decision_record",
+              "formatter",
+              "knowledge_card",
+              "output",
+              "output_template",
+              "verification_report"
+            ],
+            "coverage": 0.5
+          },
+          "P06": {
+            "subdir": "schemas",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "input_schema"
+            ],
+            "missing_kinds": [
+              "enum_def",
+              "type_def",
+              "validator"
+            ],
+            "unknown_kinds": [
+              "interface"
+            ],
+            "coverage": 0.25
+          },
+          "P07": {
+            "subdir": "quality",
+            "canonical_count": 5,
+            "present_count": 1,
+            "present_kinds": [
+              "scoring_rubric"
+            ],
+            "missing_kinds": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "unknown_kinds": [
+              "audit",
+              "audit_report",
+              "benchmark",
+              "knowledge_card",
+              "quality_gate"
+            ],
+            "coverage": 0.2
+          },
+          "P08": {
+            "subdir": "architecture",
+            "canonical_count": 3,
+            "present_count": 1,
+            "present_kinds": [
+              "pattern"
+            ],
+            "missing_kinds": [
+              "decision_record",
+              "invariant"
+            ],
+            "unknown_kinds": [
+              "agent_card",
+              "nucleus_def"
+            ],
+            "coverage": 0.33
+          },
+          "P09": {
+            "subdir": "config",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "unknown_kinds": [
+              "boot_config"
+            ],
+            "coverage": 0.0
+          },
+          "P10": {
+            "subdir": "memory",
+            "canonical_count": 5,
+            "present_count": 1,
+            "present_kinds": [
+              "learning_record"
+            ],
+            "missing_kinds": [
+              "entity_memory",
+              "knowledge_index",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.2
+          },
+          "P11": {
+            "subdir": "feedback",
+            "canonical_count": 4,
+            "present_count": 2,
+            "present_kinds": [
+              "guardrail",
+              "quality_gate"
+            ],
+            "missing_kinds": [
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.5
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "canonical_count": 6,
+            "present_count": 4,
+            "present_kinds": [
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow"
+            ],
+            "missing_kinds": [
+              "checkpoint",
+              "workflow_primitive"
+            ],
+            "unknown_kinds": [
+              "dag",
+              "dispatch_rule"
+            ],
+            "coverage": 0.67
+          }
+        }
+      },
+      "N04_knowledge": {
+        "sin": "Knowledge Gluttony",
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "canonical_count": 6,
+            "present_count": 4,
+            "present_kinds": [
+              "chunk_strategy",
+              "few_shot_example",
+              "knowledge_card",
+              "retriever_config"
+            ],
+            "missing_kinds": [
+              "embedder_provider",
+              "vector_store"
+            ],
+            "unknown_kinds": [
+              "embedding_config",
+              "glossary_entry",
+              "rag_source"
+            ],
+            "coverage": 0.67
+          },
+          "P02": {
+            "subdir": "agents",
+            "canonical_count": 8,
+            "present_count": 1,
+            "present_kinds": [
+              "agent"
+            ],
+            "missing_kinds": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.12
+          },
+          "P03": {
+            "subdir": "prompts",
+            "canonical_count": 7,
+            "present_count": 1,
+            "present_kinds": [
+              "system_prompt"
+            ],
+            "missing_kinds": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.14
+          },
+          "P04": {
+            "subdir": "tools",
+            "canonical_count": 9,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "unknown_kinds": [
+              "cli_tool"
+            ],
+            "coverage": 0.0
+          },
+          "P05": {
+            "subdir": "output",
+            "canonical_count": 2,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "output_validator",
+              "response_format"
+            ],
+            "unknown_kinds": [
+              "audit_report",
+              "competitive_analysis",
+              "context-doc",
+              "context_doc",
+              "knowledge_card",
+              "output",
+              "output_template",
+              "self_audit",
+              "verification_report"
+            ],
+            "coverage": 0.0
+          },
+          "P06": {
+            "subdir": "schemas",
+            "canonical_count": 4,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "unknown_kinds": [
+              "schema",
+              "validation_schema"
+            ],
+            "coverage": 0.0
+          },
+          "P07": {
+            "subdir": "quality",
+            "canonical_count": 5,
+            "present_count": 1,
+            "present_kinds": [
+              "scoring_rubric"
+            ],
+            "missing_kinds": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "unknown_kinds": [
+              "audit_report",
+              "knowledge_card",
+              "quality_gate"
+            ],
+            "coverage": 0.2
+          },
+          "P08": {
+            "subdir": "architecture",
+            "canonical_count": 3,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "unknown_kinds": [
+              "agent_card",
+              "context_doc",
+              "knowledge_card",
+              "nucleus_def"
+            ],
+            "coverage": 0.0
+          },
+          "P09": {
+            "subdir": "config",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P10": {
+            "subdir": "memory",
+            "canonical_count": 5,
+            "present_count": 3,
+            "present_kinds": [
+              "entity_memory",
+              "knowledge_index",
+              "memory_summary"
+            ],
+            "missing_kinds": [
+              "learning_record",
+              "runtime_state"
+            ],
+            "unknown_kinds": [
+              "memory_scope"
+            ],
+            "coverage": 0.6
+          },
+          "P11": {
+            "subdir": "feedback",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "quality_gate"
+            ],
+            "missing_kinds": [
+              "guardrail",
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "unknown_kinds": [
+              "feedback_log"
+            ],
+            "coverage": 0.25
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "canonical_count": 6,
+            "present_count": 2,
+            "present_kinds": [
+              "spawn_config",
+              "workflow"
+            ],
+            "missing_kinds": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "workflow_primitive"
+            ],
+            "unknown_kinds": [
+              "dispatch_rule"
+            ],
+            "coverage": 0.33
+          }
+        }
+      },
+      "N05_operations": {
+        "sin": "Gating Wrath",
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "canonical_count": 6,
+            "present_count": 1,
+            "present_kinds": [
+              "knowledge_card"
+            ],
+            "missing_kinds": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.17
+          },
+          "P02": {
+            "subdir": "agents",
+            "canonical_count": 8,
+            "present_count": 1,
+            "present_kinds": [
+              "agent"
+            ],
+            "missing_kinds": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.12
+          },
+          "P03": {
+            "subdir": "prompts",
+            "canonical_count": 7,
+            "present_count": 1,
+            "present_kinds": [
+              "system_prompt"
+            ],
+            "missing_kinds": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.14
+          },
+          "P04": {
+            "subdir": "tools",
+            "canonical_count": 9,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P05": {
+            "subdir": "output",
+            "canonical_count": 2,
+            "present_count": 1,
+            "present_kinds": [
+              "output_validator"
+            ],
+            "missing_kinds": [
+              "response_format"
+            ],
+            "unknown_kinds": [
+              "benchmark",
+              "competitive_analysis",
+              "context-doc",
+              "context_doc",
+              "hook_config",
+              "knowledge_card",
+              "output",
+              "output_template",
+              "red_team_eval",
+              "regression_check",
+              "self_audit",
+              "smoke_eval",
+              "trace_config"
+            ],
+            "coverage": 0.5
+          },
+          "P06": {
+            "subdir": "schemas",
+            "canonical_count": 4,
+            "present_count": 2,
+            "present_kinds": [
+              "input_schema",
+              "validator"
+            ],
+            "missing_kinds": [
+              "enum_def",
+              "type_def"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.5
+          },
+          "P07": {
+            "subdir": "quality",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "unknown_kinds": [
+              "audit_report",
+              "knowledge_card"
+            ],
+            "coverage": 0.0
+          },
+          "P08": {
+            "subdir": "architecture",
+            "canonical_count": 3,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "unknown_kinds": [
+              "agent_card",
+              "context_doc",
+              "nucleus_def"
+            ],
+            "coverage": 0.0
+          },
+          "P09": {
+            "subdir": "config",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P10": {
+            "subdir": "memory",
+            "canonical_count": 5,
+            "present_count": 1,
+            "present_kinds": [
+              "runtime_state"
+            ],
+            "missing_kinds": [
+              "entity_memory",
+              "knowledge_index",
+              "learning_record",
+              "memory_summary"
+            ],
+            "unknown_kinds": [
+              "checkpoint"
+            ],
+            "coverage": 0.2
+          },
+          "P11": {
+            "subdir": "feedback",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "quality_gate"
+            ],
+            "missing_kinds": [
+              "guardrail",
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.25
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "canonical_count": 6,
+            "present_count": 2,
+            "present_kinds": [
+              "spawn_config",
+              "workflow"
+            ],
+            "missing_kinds": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "workflow_primitive"
+            ],
+            "unknown_kinds": [
+              "dispatch_rule"
+            ],
+            "coverage": 0.33
+          }
+        }
+      },
+      "N06_commercial": {
+        "sin": "Strategic Greed",
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "canonical_count": 6,
+            "present_count": 1,
+            "present_kinds": [
+              "knowledge_card"
+            ],
+            "missing_kinds": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.17
+          },
+          "P02": {
+            "subdir": "agents",
+            "canonical_count": 8,
+            "present_count": 3,
+            "present_kinds": [
+              "agent",
+              "axiom",
+              "mental_model"
+            ],
+            "missing_kinds": [
+              "agent_package",
+              "handoff_protocol",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.38
+          },
+          "P03": {
+            "subdir": "prompts",
+            "canonical_count": 7,
+            "present_count": 2,
+            "present_kinds": [
+              "prompt_template",
+              "system_prompt"
+            ],
+            "missing_kinds": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "reasoning_trace"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.29
+          },
+          "P04": {
+            "subdir": "tools",
+            "canonical_count": 9,
+            "present_count": 1,
+            "present_kinds": [
+              "function_def"
+            ],
+            "missing_kinds": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "unknown_kinds": [
+              "tool_card"
+            ],
+            "coverage": 0.11
+          },
+          "P05": {
+            "subdir": "output",
+            "canonical_count": 2,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "output_validator",
+              "response_format"
+            ],
+            "unknown_kinds": [
+              "benchmark",
+              "content_monetization",
+              "context-doc",
+              "context_doc",
+              "formatter",
+              "knowledge_card",
+              "output_template"
+            ],
+            "coverage": 0.0
+          },
+          "P06": {
+            "subdir": "schemas",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "input_schema"
+            ],
+            "missing_kinds": [
+              "enum_def",
+              "type_def",
+              "validator"
+            ],
+            "unknown_kinds": [
+              "constraint_spec"
+            ],
+            "coverage": 0.25
+          },
+          "P07": {
+            "subdir": "quality",
+            "canonical_count": 5,
+            "present_count": 1,
+            "present_kinds": [
+              "scoring_rubric"
+            ],
+            "missing_kinds": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "unit_eval"
+            ],
+            "unknown_kinds": [
+              "audit_report",
+              "knowledge_card"
+            ],
+            "coverage": 0.2
+          },
+          "P08": {
+            "subdir": "architecture",
+            "canonical_count": 3,
+            "present_count": 1,
+            "present_kinds": [
+              "pattern"
+            ],
+            "missing_kinds": [
+              "decision_record",
+              "invariant"
+            ],
+            "unknown_kinds": [
+              "agent_card",
+              "content_monetization",
+              "nucleus_def"
+            ],
+            "coverage": 0.33
+          },
+          "P09": {
+            "subdir": "config",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P10": {
+            "subdir": "memory",
+            "canonical_count": 5,
+            "present_count": 2,
+            "present_kinds": [
+              "learning_record",
+              "memory_summary"
+            ],
+            "missing_kinds": [
+              "entity_memory",
+              "knowledge_index",
+              "runtime_state"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.4
+          },
+          "P11": {
+            "subdir": "feedback",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "quality_gate"
+            ],
+            "missing_kinds": [
+              "guardrail",
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.25
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "canonical_count": 6,
+            "present_count": 1,
+            "present_kinds": [
+              "workflow"
+            ],
+            "missing_kinds": [
+              "checkpoint",
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow_primitive"
+            ],
+            "unknown_kinds": [
+              "dispatch_rule"
+            ],
+            "coverage": 0.17
+          }
+        }
+      },
+      "N07_admin": {
+        "sin": "Orchestrating Sloth",
+        "pillars": {
+          "P01": {
+            "subdir": "knowledge",
+            "canonical_count": 6,
+            "present_count": 1,
+            "present_kinds": [
+              "knowledge_card"
+            ],
+            "missing_kinds": [
+              "chunk_strategy",
+              "embedder_provider",
+              "few_shot_example",
+              "retriever_config",
+              "vector_store"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.17
+          },
+          "P02": {
+            "subdir": "agents",
+            "canonical_count": 8,
+            "present_count": 1,
+            "present_kinds": [
+              "agent"
+            ],
+            "missing_kinds": [
+              "agent_package",
+              "axiom",
+              "handoff_protocol",
+              "mental_model",
+              "model_provider",
+              "nucleus_def",
+              "router"
+            ],
+            "unknown_kinds": [
+              "fallback_chain"
+            ],
+            "coverage": 0.12
+          },
+          "P03": {
+            "subdir": "prompts",
+            "canonical_count": 7,
+            "present_count": 1,
+            "present_kinds": [
+              "system_prompt"
+            ],
+            "missing_kinds": [
+              "action_prompt",
+              "constraint_spec",
+              "context_window_config",
+              "prompt_compiler",
+              "prompt_template",
+              "reasoning_trace"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.14
+          },
+          "P04": {
+            "subdir": "tools",
+            "canonical_count": 9,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "browser_tool",
+              "code_executor",
+              "document_loader",
+              "function_def",
+              "hook",
+              "mcp_server",
+              "retriever",
+              "search_tool",
+              "toolkit"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P05": {
+            "subdir": "output",
+            "canonical_count": 2,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "output_validator",
+              "response_format"
+            ],
+            "unknown_kinds": [
+              "output_template"
+            ],
+            "coverage": 0.0
+          },
+          "P06": {
+            "subdir": "schemas",
+            "canonical_count": 4,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "enum_def",
+              "input_schema",
+              "type_def",
+              "validator"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P07": {
+            "subdir": "quality",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "eval_dataset",
+              "golden_test",
+              "llm_judge",
+              "scoring_rubric",
+              "unit_eval"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P08": {
+            "subdir": "architecture",
+            "canonical_count": 3,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "decision_record",
+              "invariant",
+              "pattern"
+            ],
+            "unknown_kinds": [
+              "agent_card",
+              "nucleus_def"
+            ],
+            "coverage": 0.0
+          },
+          "P09": {
+            "subdir": "config",
+            "canonical_count": 5,
+            "present_count": 0,
+            "present_kinds": [],
+            "missing_kinds": [
+              "env_config",
+              "path_config",
+              "permission",
+              "rate_limit_config",
+              "secret_config"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.0
+          },
+          "P10": {
+            "subdir": "memory",
+            "canonical_count": 5,
+            "present_count": 1,
+            "present_kinds": [
+              "entity_memory"
+            ],
+            "missing_kinds": [
+              "knowledge_index",
+              "learning_record",
+              "memory_summary",
+              "runtime_state"
+            ],
+            "unknown_kinds": [
+              "memory-summary"
+            ],
+            "coverage": 0.2
+          },
+          "P11": {
+            "subdir": "feedback",
+            "canonical_count": 4,
+            "present_count": 1,
+            "present_kinds": [
+              "quality_gate"
+            ],
+            "missing_kinds": [
+              "guardrail",
+              "lifecycle_rule",
+              "reward_signal"
+            ],
+            "unknown_kinds": [],
+            "coverage": 0.25
+          },
+          "P12": {
+            "subdir": "orchestration",
+            "canonical_count": 6,
+            "present_count": 4,
+            "present_kinds": [
+              "handoff",
+              "signal",
+              "spawn_config",
+              "workflow"
+            ],
+            "missing_kinds": [
+              "checkpoint",
+              "workflow_primitive"
+            ],
+            "unknown_kinds": [
+              "dag",
+              "dispatch_rule"
+            ],
+            "coverage": 0.67
+          }
+        }
+      }
+    },
+    "totals": {
+      "P01": {
+        "canonical_per_nucleus": 6,
+        "sum_present_across_nuclei": 11,
+        "max_possible": 48
+      },
+      "P02": {
+        "canonical_per_nucleus": 8,
+        "sum_present_across_nuclei": 11,
+        "max_possible": 64
+      },
+      "P03": {
+        "canonical_per_nucleus": 7,
+        "sum_present_across_nuclei": 12,
+        "max_possible": 56
+      },
+      "P04": {
+        "canonical_per_nucleus": 9,
+        "sum_present_across_nuclei": 2,
+        "max_possible": 72
+      },
+      "P05": {
+        "canonical_per_nucleus": 2,
+        "sum_present_across_nuclei": 3,
+        "max_possible": 16
+      },
+      "P06": {
+        "canonical_per_nucleus": 4,
+        "sum_present_across_nuclei": 5,
+        "max_possible": 32
+      },
+      "P07": {
+        "canonical_per_nucleus": 5,
+        "sum_present_across_nuclei": 6,
+        "max_possible": 40
+      },
+      "P08": {
+        "canonical_per_nucleus": 3,
+        "sum_present_across_nuclei": 2,
+        "max_possible": 24
+      },
+      "P09": {
+        "canonical_per_nucleus": 5,
+        "sum_present_across_nuclei": 1,
+        "max_possible": 40
+      },
+      "P10": {
+        "canonical_per_nucleus": 5,
+        "sum_present_across_nuclei": 12,
+        "max_possible": 40
+      },
+      "P11": {
+        "canonical_per_nucleus": 4,
+        "sum_present_across_nuclei": 8,
+        "max_possible": 32
+      },
+      "P12": {
+        "canonical_per_nucleus": 6,
+        "sum_present_across_nuclei": 15,
+        "max_possible": 48
+      }
+    }
+  }
+}

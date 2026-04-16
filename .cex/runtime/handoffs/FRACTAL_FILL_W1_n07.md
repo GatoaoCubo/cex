@@ -62,12 +62,17 @@ Body: structured markdown (tables > prose). Minimum 80 lines. Density >= 0.85.
 MUST include: Purpose, Schema (if P06) or Values (if P09), Rationale, Example,
 and a Properties table. Apply the **Orchestrating Sloth** lens to every design choice.
 
-## 8F trace (show evidence at the top of each file as HTML comment)
+## 8F trace (HTML comment IMMEDIATELY BELOW the closing `---` fence, NEVER above it)
 
-```html
-<!-- 8F: F1 constrain=<pillar/kind> F2 become=<builder> F3 inject=<refs>
-     F4 reason=<approach> F5 call=<tools> F6 produce=<N bytes>
-     F7 govern=<self-check> F8 collaborate=<save path> -->
+```
+---
+<frontmatter>
+---
+
+<!-- 8F: F1=... F2=... ... -->
+
+## Purpose
+...
 ```
 
 ## ASCII rule (MANDATORY)

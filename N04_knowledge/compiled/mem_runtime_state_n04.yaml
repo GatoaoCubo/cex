@@ -1,0 +1,155 @@
+id: mem_runtime_state_n04
+kind: runtime_state
+pillar: P10
+nucleus: n04
+title: N04 Runtime State
+version: 1.0.0
+quality: null
+tags:
+- runtime_state
+- n04
+- routing
+- memory
+- knowledge_gluttony
+agent: n04_knowledge
+persistence: cross_session
+domain: rag_indexing_taxonomy_memory
+tldr: Runtime routing state for N04 while it decides what to ingest, structure, vectorize, and remember.
+routing_mode: hybrid
+priority_count: 5
+update_frequency: per_task
+fallback_agent: n07_orchestrator
+density_score: 0.94
+constraint_count: 5
+linked_artifacts:
+  primary: N04_knowledge/agent_card_n04.md
+  related:
+  - kno_embedder_provider_n04
+  - kno_knowledge_graph_n04
+  - kno_vector_store_n04
+  - mem_learning_record_n04
+routing_rules: '| Rule | Condition | Action | Confidence |
+
+  |------|-----------|--------|------------|
+
+  | `knowledge_first` | incoming task defines facts, retrieval, graphing, chunking, or taxonomy | keep work in N04 and classify
+  by kind | `0.95` |
+
+  | `memory_boundary` | content describes learned behavior, runtime routing, or persistence strategy | route to P10 memory
+  artifact path | `0.93` |
+
+  | `research_boundary` | task demands external fact-finding rather than repository structuring | route outward to research
+  owner | `0.88` |
+
+  | `build_boundary` | task is mostly code scaffold or implementation | keep references, route execution to build owner |
+  `0.86` |
+
+  | `graph_upgrade` | flat retrieval is insufficient for relation-heavy questions | activate graph framing and hybrid retrieval
+  | `0.90` |
+
+  | `filter_before_search` | corpus is broad or noisy | apply metadata filters before semantic expansion | `0.97` |'
+decision_tree: "task enters N04\n  |- if asks for knowledge or memory artifact -> identify pillar and kind\n  |- if asks for\
+  \ external research -> route to intelligence owner\n  |- if asks for software implementation -> hand context to build owner\n\
+  \  |- if asks for retrieval architecture -> choose embedder + store + graph path\n  \\- otherwise -> ask whether the unit\
+  \ should be known, remembered, or routed away"
+priorities:
+- Retrieval usefulness - every artifact should improve future findability, not just satisfy current wording.
+- Boundary integrity - P01 knowledge, P10 memory, and external domains must stay separable.
+- Provenance density - explicit references to local contracts and examples beat vague generality.
+- Cross-artifact coherence - embedder, vector store, graph, and memory should tell one system story.
+- Delivery discipline - exact filenames, 8F trace placement, and compile steps remain mandatory.
+heuristics: '| Heuristic | When | Confidence |
+
+  |-----------|------|------------|
+
+  | prefer the narrower kind | the request could fit multiple artifact families | `high` |
+
+  | keep one semantic stack | multiple retrieval artifacts are authored together | `high` |
+
+  | graph only when relations matter | the question is answerable by flat similarity alone | `medium` |
+
+  | preserve local terminology | repository examples provide vocabulary already | `high` |
+
+  | treat runtime notes as memory only if they should survive reuse | state looks ephemeral or session-specific | `high` |'
+tools_available: '| Tool | Runtime use |
+
+  |------|-------------|
+
+  | `shell_command` | inspect local contracts, examples, and compile results |
+
+  | `apply_patch` | create or revise artifacts without unsafe editing patterns |
+
+  | `cex_compile.py` | compile authored markdown into derived outputs |
+
+  | `rg` | locate builders, kind KCs, and existing examples quickly |'
+constraints:
+- Do not commit during this handoff wave.
+- Keep identifiers and code fields ASCII-safe.
+- Place the 8F trace immediately below closing frontmatter.
+- Preserve the exact output paths named by the handoff.
+- Do not confuse runtime state with mental model or session snapshot.
+state_transitions: '| Trigger | From | To | Condition |
+
+  |---------|------|----|-----------|
+
+  | `new_handoff` | `idle` | `constraining` | a task arrives with mission metadata |
+
+  | `contracts_loaded` | `constraining` | `injecting` | schema, builders, and examples are available |
+
+  | `draft_plan_ready` | `injecting` | `producing` | enough local evidence exists to write safely |
+
+  | `draft_saved` | `producing` | `governing` | all target files exist |
+
+  | `compile_passed` | `governing` | `complete` | compilation succeeds or is acceptably skipped |'
+active_signals: '| Signal | Meaning | Response |
+
+  |--------|---------|----------|
+
+  | `schema_gap` | builder fields and handoff naming do not line up perfectly | adapt frontmatter while preserving requested
+  path |
+
+  | `density_risk` | body length increases but signal density drops | compress filler and expand operational tables |
+
+  | `boundary_risk` | content starts mixing knowledge and memory roles | split into P01 and P10 language immediately |
+
+  | `coherence_risk` | retrieval artifacts disagree on dimensions or backend logic | normalize around one canonical stack
+  |'
+update_triggers:
+- Update when a new builder changes section expectations for N04 kinds.
+- Update when the canonical embedder or vector backend changes.
+- Update when graph retrieval becomes first-class instead of sidecar.
+- Update when new validators enforce stronger frontmatter or byte constraints.
+- Update after any repeated reviewer comment about routing or memory boundaries.
+fallback: If kind selection remains ambiguous after schema review, N04 defaults to the stricter interpretation and documents
+  the boundary in the body. If a requested filename conflicts with canonical naming patterns, N04 preserves the handoff path
+  and makes the frontmatter internally consistent. If compilation reveals format issues, N04 fixes the source artifact rather
+  than loosening the runtime rules.
+references:
+- '`archetypes/builders/runtime-state-builder/bld_instruction_runtime_state.md`'
+- '`P01_knowledge/library/kind/kc_runtime_state.md`'
+- '`N04_knowledge/agent_card_n04.md`'
+- '`N04_knowledge/architecture/nucleus_def_n04.md`'
+- '`N04_knowledge/config/con_env_config_n04.md`'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `runtime_state` |
+
+  | Pillar | `P10` |
+
+  | Nucleus | `n04` |
+
+  | Agent | `n04_knowledge` |
+
+  | Persistence | `cross_session` |
+
+  | Routing mode | `hybrid` |
+
+  | Priority count | `5` |
+
+  | Constraint count | `5` |
+
+  | Update frequency | `per_task` |
+
+  | Fallback agent | `n07_orchestrator` |'

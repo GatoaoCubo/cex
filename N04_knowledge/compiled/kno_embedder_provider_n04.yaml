@@ -1,0 +1,142 @@
+id: kno_embedder_provider_n04
+kind: embedder_provider
+pillar: P01
+nucleus: n04
+title: N04 Embedder Provider
+version: 1.0.0
+quality: null
+tags:
+- embedder_provider
+- n04
+- rag
+- embeddings
+- knowledge_gluttony
+provider: openai
+model: text-embedding-3-large
+dimensions: 3072
+dimensions_override: 1024
+max_tokens: 8191
+batch_size: 96
+normalize: true
+truncate: end
+distance_metric: cosine
+matryoshka: true
+sparse_support: false
+api_key_env: OPENAI_API_KEY
+api_base_url: https://api.openai.com/v1
+domain: rag_indexing
+tldr: High-fidelity dense embedder for N04 retrieval, graph augmentation, and memory recall.
+boundary: '`embedder_provider` IS the contract for text-to-vector conversion. `embedder_provider` IS NOT the vector backend,
+  retriever policy, or graph schema. N04 uses this artifact to keep chunk embeddings, entity embeddings, and memory embeddings
+  aligned under one semantic geometry.'
+configuration_matrix: '| Parameter | Value | Why it serves Knowledge Gluttony |
+
+  |-----------|-------|----------------------------------|
+
+  | Provider | `openai` | stable API and broad ecosystem coverage |
+
+  | Model | `text-embedding-3-large` | richer semantic capacity than smaller dense options |
+
+  | Native dimensions | `3072` | preserves detail for long-tail domain distinctions |
+
+  | Reduced dimensions | `1024` | supports lower-cost side indexes without model drift |
+
+  | Max tokens | `8191` | lets N04 keep semantically complete chunks |
+
+  | Batch size | `96` texts/request | balances throughput and provider headroom |
+
+  | Normalize | `true` | keeps cosine space stable across mixed corpora |
+
+  | Truncate | `end` | preserves leading taxonomy and title context |
+
+  | Distance metric | `cosine` | aligns with normalized vectors and mixed-length chunks |
+
+  | Sparse support | `false` | dense provider; lexical recall handled elsewhere |
+
+  | API key env | `OPENAI_API_KEY` | explicit auth boundary |
+
+  | Base URL | `https://api.openai.com/v1` | standard endpoint for shared tooling |'
+why_this_model: N04 indexes repository markdown, schema notes, memory summaries, runtime configs, and graph node descriptions.
+  These materials are dense, domain-heavy, and often short enough that subtle phrasing matters. A hungry knowledge nucleus
+  benefits more from semantic resolution than from absolute token thrift. The large profile is therefore the primary index
+  embedder, while dimension reduction remains available for secondary caches.
+dimension_tradeoffs: '| Dimensions | Recall posture | Storage posture | Latency posture | Recommended use |
+
+  |------------|----------------|-----------------|-----------------|-----------------|
+
+  | `3072` | maximum semantic appetite | highest footprint | baseline | canonical knowledge and memory index |
+
+  | `2048` | high recall with modest loss | lower than native | slightly faster | graph node sidecar embeddings |
+
+  | `1024` | balanced | medium | faster | experimentation, local mirrors, previews |
+
+  | `512` | selective | compact | fastest | coarse routing only, not canonical search |'
+corpus_fit: '| Corpus slice | Embedding goal | Notes |
+
+  |-------------|----------------|-------|
+
+  | knowledge artifacts | preserve domain distinctions | prioritize taxonomic and architectural nuance |
+
+  | memory artifacts | recall decisions and lessons | temporal context matters more than phrasing exactness |
+
+  | graph nodes | support hybrid graph plus vector retrieval | entity descriptions should live in same vector family |
+
+  | schema docs | cluster related constraints | helps route tasks to the right builder quickly |
+
+  | configs | identify operational adjacency | useful for cross-artifact retrieval, not exact matching |'
+integration_pattern: "from openai import OpenAI\n\nclient = OpenAI()\n\ndef embed_texts(texts, dimensions=3072):\n    response\
+  \ = client.embeddings.create(\n        model=\"text-embedding-3-large\",\n        input=texts,\n        dimensions=dimensions,\n\
+  \    )\n    return [item.embedding for item in response.data]"
+retrieval_heuristics:
+- Embed titles plus body for short artifacts where naming carries routing signal.
+- Keep chunk headers attached because N04 artifacts compress heavy meaning into section names.
+- Use `3072` for canonical storage whenever a corpus may feed memory or graph enrichment later.
+- Use `1024` only for derivative indexes, never by mixing inside the primary namespace.
+- Re-embed the entire namespace on model family change, not incrementally.
+anti_patterns:
+- Mixing `text-embedding-3-large` and unrelated legacy vectors in one collection causes false neighborhoods.
+- Downshifting dimensions per document instead of per index breaks similarity consistency.
+- Embedding raw boilerplate headings without body context inflates low-value hubs.
+- Treating embeddings as a substitute for taxonomy weakens controllability.
+- Using one giant chunk to capture "everything known" creates vague vectors and shallow recall.
+operational_notes: '| Concern | N04 stance |
+
+  |---------|------------|
+
+  | cost pressure | reduce dimensions in derivative indexes before changing model family |
+
+  | freshness | re-embed after chunking strategy changes or metadata packing changes |
+
+  | multilingual content | keep language markers in chunk metadata, not in vector families |
+
+  | graph alignment | reuse same model for entity descriptions and source chunks |
+
+  | memory alignment | runtime and learning artifacts should stay in same vector geometry |'
+references:
+- '`archetypes/builders/embedder-provider-builder/bld_instruction_embedder_provider.md`'
+- '`P01_knowledge/library/kind/kc_embedder_provider.md`'
+- '`N04_knowledge/architecture/nucleus_def_n04.md`'
+- '`N04_knowledge/config/con_env_config_n04.md`'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `embedder_provider` |
+
+  | Pillar | `P01` |
+
+  | Nucleus | `n04` |
+
+  | Model family | `text-embedding-3` |
+
+  | Canonical dimensions | `3072` |
+
+  | Reduced profile | `1024` |
+
+  | Metric | `cosine` |
+
+  | Primary optimization | recall under dense technical corpora |
+
+  | Memory compatibility | yes |
+
+  | Graph compatibility | yes |'

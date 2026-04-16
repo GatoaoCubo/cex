@@ -1,0 +1,162 @@
+id: kno_retriever_config_n01
+kind: retriever_config
+pillar: P01
+nucleus: N01
+title: N01 Retriever Config
+version: 1.0.0
+quality: null
+tags:
+- retriever_config
+- n01
+- p01
+- analytical_envy
+- hybrid_search
+purpose: The retriever config decides which evidence gets the first chance to shape synthesis. For N01, that makes it a strategic
+  artifact, not a tuning file. Analytical Envy means retrieval must favor the strongest comparative evidence, not just the
+  most semantically nearby text.
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `retriever_config` |
+
+  | Pillar | `P01` |
+
+  | Nucleus | `N01` |
+
+  | Lens | `Analytical Envy` |
+
+  | Default mode | hybrid |
+
+  | Candidate set | over-fetch then rerank |
+
+  | top_k final | 6 |
+
+  | top_k initial | 24 |
+
+  | Core filters | source tier, date, entity, axis |
+
+  | Main mission | retrieve evidence fit for comparison, not just mention overlap |'
+retrieval_thesis: 'N01 queries often ask:
+
+  - who is better and why
+
+  - what changed recently
+
+  - what is true according to the strongest source
+
+  - how one competitor differs from another on a specific axis
+
+
+  That means the retriever must combine:
+
+  - exact term recall
+
+  - semantic similarity
+
+  - metadata filtering
+
+  - citation-aware reranking'
+recommended_defaults: '| Setting | Value | Reason |
+
+  |---------|-------|--------|
+
+  | search_type | `hybrid` | balances semantic and exact lookup |
+
+  | dense_weight | `0.65` | semantic relation matters |
+
+  | sparse_weight | `0.35` | exact competitor names and plans still matter |
+
+  | top_k_initial | `24` | enough headroom for reranking |
+
+  | top_k_final | `6` | fits synthesis budgets |
+
+  | similarity_floor | `0.62` | rejects weak semantic drift |
+
+  | reranker | `cross_encoder_or_llm` | stronger final ordering |
+
+  | freshness_bias | `on_for_volatile_axes` | pricing and specs decay quickly |'
+metadata_filters: '| Filter | Why it matters |
+
+  |--------|----------------|
+
+  | source_type | official docs versus commentary |
+
+  | reliability_tier | keep weak evidence from dominating |
+
+  | entity_primary | row or vendor targeting |
+
+  | comparison_axis | price, feature, performance, trust |
+
+  | date_claim | freshness-sensitive retrieval |
+
+  | region | prevent invalid market mixing |
+
+  | contradiction_flag | surface conflict when needed |'
+retrieval_pipeline:
+- Parse the query into entity, axis, date, region, and intent.
+- Run dense search and sparse search in parallel.
+- Merge candidates with weighted fusion.
+- Apply hard metadata filters.
+- Rerank with a model that can read evidence quality cues.
+- Return final chunks with citation metadata attached.
+query_modes: '| Mode | Trigger | Retrieval behavior |
+
+  |------|---------|--------------------|
+
+  | compare | query includes two or more entities | promote chunks with direct contrast |
+
+  | verify | user asks if a claim is true | prioritize tier_1 and freshest citations |
+
+  | scan | broad market lookup | widen topic coverage, keep proof quality visible |
+
+  | gap_find | user asks what is missing | surface unresolved or low-confidence areas |'
+reranking_logic: 'Reranking in N01 should not score text on relevance alone.
+
+  It should weigh:
+
+  - claim specificity
+
+  - citation presence
+
+  - reliability tier
+
+  - freshness
+
+  - comparative usefulness
+
+
+  A chunk that says less but proves more should beat a chunk that says more but proves little.'
+fallback_chain: '| Failure mode | Fallback |
+
+  |--------------|----------|
+
+  | no results above floor | lower threshold slightly and keep filters |
+
+  | still sparse | widen date window |
+
+  | still sparse | drop to hybrid without region filter |
+
+  | still sparse | return explicit evidence gap |
+
+
+  The system should not hallucinate completeness when the corpus does not support it.'
+anti_patterns:
+- dense-only retrieval for pricing queries
+- sparse-only retrieval for conceptual method questions
+- fixed top_k without query intent awareness
+- reranking that ignores freshness and source quality
+- no way to surface contradiction cases
+evaluation_set_expectations: 'N01 should maintain test queries for:
+
+  - direct competitor battles
+
+  - pricing changes
+
+  - plan naming edge cases
+
+  - benchmark metric retrieval
+
+  - conflict and contradiction detection'
+n01_decision: The N01 retriever config exists to maximize decision-grade evidence per token. If retrieval returns generic
+  context instead of decisive comparative proof, the rest of the pipeline is already compromised.

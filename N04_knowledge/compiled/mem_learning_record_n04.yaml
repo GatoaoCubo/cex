@@ -1,0 +1,125 @@
+id: mem_learning_record_n04
+kind: learning_record
+pillar: P10
+nucleus: n04
+title: N04 Learning Record
+version: 1.0.0
+quality: null
+tags:
+- learning_record
+- n04
+- wave2
+- memory
+- knowledge_gluttony
+domain: n04_knowledge_operations
+tldr: High-value N04 output improves when builder contracts, local schemas, and examples are loaded before drafting.
+topic: template_first_knowledge_wave_execution
+outcome: SUCCESS
+score: 8.8
+context:
+- 'Environment: repository-local authoring in `C:\Users\CEX\Documents\GitHub\cex`.'
+- 'Agent_group: `n04_knowledge`, focused on RAG, indexing, taxonomy, and memory.'
+- 'Timing: Wave `W2_KNOWLEDGE`, created on `2026-04-16`, with five required artifacts.'
+- 'Constraints: exact handoff filenames, ASCII identifiers, 8F trace comment placement, no commit.'
+- 'Additional constraint: bodies needed to stay dense while also exceeding the handoff minimum length.'
+agent_group: n04_knowledge
+reproducibility:
+- 'Conditions: the builder files, kind KCs, and nucleus contracts must exist and be readable before drafting.'
+- 'Confidence: `HIGH`.'
+- 'Caveats: if a future handoff intentionally breaks builder naming or field expectations, the process still needs a local
+  adaptation pass.'
+- 'Caveats: if the repository adds stronger validators, the same sequence still works but may require tighter byte budgeting.'
+impact:
+- Builder-first loading reduced the chance of missing required sections such as properties tables and boundary statements.
+- Local schema injection kept P01 and P10 responsibilities separable, which improves future retrieval and review.
+- Shared retrieval assumptions across artifacts improved coherence for future vector, graph, and memory integration.
+- Review effort shifted from structural correction to content calibration, which is the higher-value use of time for N04.
+timestamp: '2026-04-16T00:00:00-03:00'
+dependencies:
+- nucleus_def_n04
+- kc_embedder_provider
+- kc_vector_store
+- kc_knowledge_graph
+- kc_learning_record
+- kc_runtime_state
+keywords:
+- template_first
+- builder_alignment
+- local_contracts
+- wave_execution
+linked_artifacts:
+  primary: kno_knowledge_graph_n04
+  related:
+  - kno_embedder_provider_n04
+  - kno_vector_store_n04
+  - mem_runtime_state_n04
+pattern:
+- Load the pillar schema first so kind boundaries and naming expectations are explicit before any prose appears.
+- Read the kind builder manifest and instruction before drafting so section shape follows an existing contract.
+- Pull the kind KC and local N04 examples next to anchor vocabulary in repository-native terms.
+- Tie each artifact back to N04 identity, memory posture, and retrieval goals so the Knowledge Gluttony lens stays domain-focused.
+- 'Reuse one semantic stack across artifacts: embedder, vector store, graph, runtime memory, and learning memory should point
+  at the same retrieval story.'
+- Keep 8F trace lines concrete enough that a reviewer can see which local files informed the output.
+anti_pattern:
+- Drafting from the handoff alone causes kind drift, because the requested filenames do not carry the builder field expectations
+  by themselves.
+- Treating Knowledge Gluttony as decorative language instead of retrieval strategy leads to bloated prose with weak operational
+  value.
+- Mixing memory-state content into knowledge artifacts blurs what should be searched as policy versus what should be recalled
+  as state.
+- Writing all five artifacts independently without a shared semantic stack causes contradictions in dimensions, graph usage,
+  and retrieval assumptions.
+evidence_map: '| Source class | What it contributed |
+
+  |--------------|---------------------|
+
+  | nucleus definition | identity, domain, and sin lens |
+
+  | pillar schemas | boundary and naming expectations |
+
+  | builder instructions | section structure and hard gates |
+
+  | kind KCs | purpose, anti-patterns, integration posture |
+
+  | N04 examples | voice, density, and local terminology |'
+next_use: '| Trigger | Recommended action |
+
+  |---------|--------------------|
+
+  | new N04 knowledge handoff | repeat builder-first loading sequence |
+
+  | cross-pillar memory work | confirm whether content belongs in P10 before drafting |
+
+  | graph or vector refactor | re-check all artifacts against one shared semantic stack |
+
+  | reviewer flags drift | inspect F3 sources before rewriting body text |'
+references:
+- '`archetypes/builders/learning-record-builder/bld_instruction_learning_record.md`'
+- '`P01_knowledge/library/kind/kc_learning_record.md`'
+- '`N04_knowledge/architecture/nucleus_def_n04.md`'
+- '`N04_knowledge/schemas/sch_input_schema_n04.md`'
+- '`N04_knowledge/config/con_path_config_n04.md`'
+properties: '| Property | Value |
+
+  |----------|-------|
+
+  | Kind | `learning_record` |
+
+  | Pillar | `P10` |
+
+  | Nucleus | `n04` |
+
+  | Outcome | `SUCCESS` |
+
+  | Score | `8.8` |
+
+  | Reproducibility | `HIGH` |
+
+  | Primary lesson | builder-first drafting |
+
+  | Main risk avoided | kind drift |
+
+  | Wave | `W2_KNOWLEDGE` |
+
+  | Commit performed | `no` |'
