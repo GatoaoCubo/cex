@@ -4,7 +4,7 @@ id: bld_examples_llm_evaluation_scenario
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of llm_evaluation_scenario artifacts
-quality: null
+quality: 9.1
 title: "Examples LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
