@@ -4,7 +4,7 @@ id: bld_knowledge_card_memory_architecture
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for memory_architecture production
-quality: null
+quality: 9.2
 title: "Knowledge Card: memory_architecture Builder"
 version: "2.0.0"
 author: n06_commercial
