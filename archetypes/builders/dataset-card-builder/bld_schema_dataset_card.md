@@ -4,7 +4,7 @@ id: bld_schema_dataset_card
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for dataset_card
-quality: null
+quality: 9.1
 title: "Schema Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
