@@ -4,7 +4,7 @@ id: bld_config_webinar_script
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming conventions, storage paths, limits, and hook configuration for webinar_script builder
-quality: null
+quality: 9.1
 title: "Webinar Script Builder Config"
 version: "1.0.0"
 author: n02_wave6
