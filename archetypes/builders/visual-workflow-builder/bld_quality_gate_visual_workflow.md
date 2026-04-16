@@ -4,7 +4,7 @@ id: p12_qg_visual_workflow
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for visual_workflow
-quality: null
+quality: 9.1
 title: "Quality Gate Visual Workflow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,44 +16,44 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Definition  
-| metric          | threshold | operator | scope        |  
-|-----------------|-----------|----------|--------------|  
-| Config Validity | 100%      | >=       | per workflow |  
+## Definition
+| metric          | threshold | operator | scope        |
+|-----------------|-----------|----------|--------------|
+| Config Validity | 100%      | >=       | per workflow |
 
-## HARD Gates  
-| ID        | Check                     | Fail Condition                                      |  
-|-----------|---------------------------|-----------------------------------------------------|  
-| H01       | YAML frontmatter valid    | Invalid YAML syntax or missing required fields      |  
-| H02       | ID matches pattern        | ID does not match ^p12_vw_[a-z][a-z0-9_]+.md$      |  
-| H03       | kind field matches        | kind != 'visual_workflow'                           |  
-| H04       | Required fields present   | Missing 'name' or 'description' in metadata         |  
-| H05       | Workflow steps valid      | Invalid step type or missing required attributes    |  
-| H06       | Tool compatibility        | Unsupported tool referenced in workflow             |  
-| H07       | UI responsiveness         | Workflow editor fails to render on mobile devices   |  
+## HARD Gates
+| ID        | Check                     | Fail Condition                                      |
+|-----------|---------------------------|-----------------------------------------------------|
+| H01       | YAML frontmatter valid    | Invalid YAML syntax or missing required fields      |
+| H02       | ID matches pattern        | ID does not match ^p12_vw_[a-z][a-z0-9_]+.md$      |
+| H03       | kind field matches        | kind != 'visual_workflow'                           |
+| H04       | Required fields present   | Missing 'name' or 'description' in metadata         |
+| H05       | Workflow steps valid      | Invalid step type or missing required attributes    |
+| H06       | Tool compatibility        | Unsupported tool referenced in workflow             |
+| H07       | UI responsiveness         | Workflow editor fails to render on mobile devices   |
 
-## SOFT Scoring  
-| Dim       | Dimension         | Weight | Scoring Guide                                      |  
-|-----------|-------------------|--------|----------------------------------------------------|  
-| D01       | Usability         | 0.15   | Intuitive drag-and-drop, clear error messages      |  
-| D02       | Correctness       | 0.20   | Workflow logic matches business rules              |  
-| D03       | Performance       | 0.10   | Load time < 2s, no lag during editing              |  
-| D04       | Compatibility     | 0.15   | Works across supported OS and browsers             |  
-| D05       | Error Handling    | 0.10   | Clear guidance for invalid configurations          |  
-| D06       | UI/UX             | 0.15   | Consistent with CEX design system                  |  
-| D07       | Accessibility     | 0.10   | WCAG 2.1 AA compliance                             |  
-| D08       | Data Integrity    | 0.15   | No data loss during workflow execution             |  
+## SOFT Scoring
+| Dim       | Dimension         | Weight | Scoring Guide                                      |
+|-----------|-------------------|--------|----------------------------------------------------|
+| D01       | Usability         | 0.15   | Intuitive drag-and-drop, clear error messages      |
+| D02       | Correctness       | 0.20   | Workflow logic matches business rules              |
+| D03       | Performance       | 0.10   | Load time < 2s, no lag during editing              |
+| D04       | Compatibility     | 0.15   | Works across supported OS and browsers             |
+| D05       | Error Handling    | 0.10   | Clear guidance for invalid configurations          |
+| D06       | UI/UX             | 0.15   | Consistent with CEX design system                  |
+| D07       | Accessibility     | 0.10   | WCAG 2.1 AA compliance                             |
+| D08       | Data Integrity    | 0.15   | No data loss during workflow execution             |
 
-## Actions  
-| Score  | Action                          |  
-|--------|---------------------------------|  
-| >=9.5  | GOLDEN -- automated approval    |  
-| >=8.0  | PUBLISH -- manual review        |  
-| >=7.0  | REVIEW -- QA validation needed  |  
-| <7.0   | REJECT -- fix critical issues   |  
+## Actions
+| Score  | Action                          |
+|--------|---------------------------------|
+| >=9.5  | GOLDEN -- automated approval    |
+| >=8.0  | PUBLISH -- manual review        |
+| >=7.0  | REVIEW -- QA validation needed  |
+| <7.0   | REJECT -- fix critical issues   |
 
-## Bypass  
-| conditions                          | approver   | audit trail              |  
-|------------------------------------|------------|--------------------------|  
-| Critical production fix required   | CTO        | Bypass logged with reason |  
+## Bypass
+| conditions                          | approver   | audit trail              |
+|------------------------------------|------------|--------------------------|
+| Critical production fix required   | CTO        | Bypass logged with reason |
 | Legacy workflow migration          | Architect  | Bypass logged with reason |
