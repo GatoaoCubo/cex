@@ -4,11 +4,12 @@ kind: decision_record
 pillar: P08
 title: Wave 3 dispatch plan with gen_v2
 version: 2.0.0
-quality: null
+quality: 9.1
 tags: [wave3, planning, v2, gen_v2, hardening]
 created: 2026-04-13
 nucleus: n06
 mission: GEN_V2_HARDENING
+density_score: 1.0
 ---
 
 # Wave 3 Plan (v2)
