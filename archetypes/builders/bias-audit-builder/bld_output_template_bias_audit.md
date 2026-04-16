@@ -4,7 +4,7 @@ id: bld_output_template_bias_audit
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for bias_audit production
-quality: null
+quality: 8.9
 title: "Output Template Bias Audit"
 version: "1.0.0"
 author: wave1_builder_gen
