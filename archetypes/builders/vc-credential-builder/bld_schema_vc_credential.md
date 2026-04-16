@@ -4,7 +4,7 @@ id: bld_schema_vc_credential
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for vc_credential
-quality: null
+quality: 9.1
 title: "Schema VC Credential"
 version: "1.0.0"
 author: n04_wave7
