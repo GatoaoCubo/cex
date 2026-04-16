@@ -4,7 +4,7 @@ id: bld_examples_faq_entry
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of faq_entry artifacts
-quality: null
+quality: 8.9
 title: "Examples Faq Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
