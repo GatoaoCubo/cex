@@ -4,7 +4,7 @@ id: bld_tools_crew_template
 pillar: P04
 llm_function: CALL
 purpose: Tools available for crew_template production
-quality: null
+quality: 8.9
 title: "Tools Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
