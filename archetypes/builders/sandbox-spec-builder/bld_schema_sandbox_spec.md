@@ -4,7 +4,7 @@ id: bld_schema_sandbox_spec
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for sandbox_spec
-quality: null
+quality: 9.1
 title: "Schema Sandbox Spec"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -45,19 +45,19 @@ density_score: 0.85
 ^p09_sb_[a-z][a-z0-9_]+.yaml$
 
 ## Body Structure
-1. **Overview**  
+1. **Overview**
    Brief description of the sandbox's purpose and scope.
 
-2. **Configuration**  
+2. **Configuration**
    Detailed parameters for setup (e.g., environment variables, dependencies).
 
-3. **Security**  
+3. **Security**
    Access controls, isolation mechanisms, and compliance requirements.
 
-4. **Resource Limits**  
+4. **Resource Limits**
    Maximum CPU, memory, and storage allocations.
 
-5. **Usage Examples**  
+5. **Usage Examples**
    Sample commands or workflows for common tasks.
 
 ## Constraints
