@@ -3,7 +3,7 @@ kind: architecture
 id: bld_architecture_training_method
 pillar: P08
 llm_function: CONSTRAIN
-quality: null
+quality: 9.1
 title: "Architecture Training Method"
 version: "1.0.0"
 author: n05_builder
