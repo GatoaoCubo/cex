@@ -4,7 +4,7 @@ id: bld_collaboration_gpai_technical_doc
 pillar: P12
 llm_function: COLLABORATE
 purpose: How gpai_technical_doc-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
