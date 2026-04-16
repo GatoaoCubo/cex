@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for knowledge_graph production -- graph schema design and GraphRAG patterns
 sources: Microsoft GraphRAG (2024), LlamaIndex KnowledgeGraphIndex, LightRAG (2024), Neo4j docs, FalkorDB docs
-quality: null
+quality: 9.2
 title: "Knowledge Card: knowledge_graph"
 version: "1.0.0"
 author: n03_builder
