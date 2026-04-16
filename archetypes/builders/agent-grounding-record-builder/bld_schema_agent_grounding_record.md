@@ -4,7 +4,7 @@ id: bld_schema_agent_grounding_record
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Field-level schema defining all required and optional fields for agent_grounding_record artifacts
-quality: null
+quality: 9.1
 title: "Agent Grounding Record -- Schema"
 version: "1.0.0"
 author: wave7_n05
