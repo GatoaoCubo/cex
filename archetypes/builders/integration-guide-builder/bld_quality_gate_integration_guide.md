@@ -4,7 +4,7 @@ id: p05_qg_integration_guide
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for integration_guide
-quality: null
+quality: 8.9
 title: "Quality Gate Integration Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
