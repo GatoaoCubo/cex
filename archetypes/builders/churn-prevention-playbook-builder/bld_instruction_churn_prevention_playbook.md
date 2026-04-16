@@ -4,7 +4,7 @@ id: bld_instruction_churn_prevention_playbook
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for churn_prevention_playbook
-quality: null
+quality: 8.9
 title: "Instruction Churn Prevention Playbook"
 version: "1.0.0"
 author: n05_wave6
