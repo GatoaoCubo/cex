@@ -4,7 +4,7 @@ id: bld_instruction_contributor_guide
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step construction instructions for producing contributor_guide artifacts
-quality: null
+quality: 9.1
 title: "Contributor Guide Builder Instructions"
 version: "1.1.0"
 author: n02_hybrid_review7
