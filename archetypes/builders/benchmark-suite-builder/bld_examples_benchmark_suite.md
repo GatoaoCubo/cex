@@ -4,7 +4,7 @@ id: bld_examples_benchmark_suite
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of benchmark_suite artifacts
-quality: null
+quality: 8.9
 title: "Examples Benchmark Suite"
 version: "1.0.0"
 author: wave1_builder_gen_v2
