@@ -26,6 +26,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 HANDOFF_DIR = ROOT / ".cex" / "runtime" / "handoffs"
@@ -70,7 +71,7 @@ BOOT_SUFFIX = {"claude": "", "gemini": "_gemini", "codex": "_codex", "ollama": "
 TASK_SUFFIX = {"claude": "", "gemini": "_gemini", "codex": "_codex", "ollama": "_ollama"}
 
 
-def handoff_body(wave_n, nucleus, runtime, model):
+def handoff_body(wave_n: int, nucleus: str, runtime: str, model: str) -> str:
     """Minimal task body -- must be trivial enough for qwen3:8b to complete."""
     out = SHOWOFF_DIR / f"w{wave_n}" / f"{nucleus}_{runtime}.md"
     body = f"""---
@@ -121,7 +122,7 @@ No 8F, no quality gate, no extra artifacts. Just the 1 file + commit + signal.
     return body
 
 
-def write_handoffs(wave, mixed=False):
+def write_handoffs(wave: dict[str, Any], mixed: bool = False) -> list[Path]:
     """Write SHOWOFF_W{n}_{nucleus}.md files the dispatcher picks up."""
     wave_n = wave["n"]
     written = []
@@ -139,7 +140,11 @@ def write_handoffs(wave, mixed=False):
     return written
 
 
-def poll_signals(wave_n, expected, timeout=POLL_TIMEOUT_SEC):
+def poll_signals(
+    wave_n: int,
+    expected: list[str],
+    timeout: int = POLL_TIMEOUT_SEC,
+) -> tuple[set[str], float]:
     """Poll signal dir for expected mission markers. Return (found_set, elapsed)."""
     start = time.time()
     found = set()
@@ -160,12 +165,12 @@ def poll_signals(wave_n, expected, timeout=POLL_TIMEOUT_SEC):
     return found, time.time() - start
 
 
-def stop_all():
+def stop_all() -> None:
     """Kill this session's nuclei."""
     subprocess.run(["bash", "_spawn/dispatch.sh", "stop"], cwd=ROOT, timeout=60)
 
 
-def spawn_mixed(wave):
+def spawn_mixed(wave: dict[str, Any]) -> None:
     """Wave 5: start one boot per nucleus with its assigned runtime, EACH POSITIONED
     at its fixed 3x2 cell (n01..n06 -> top-left..bottom-right).
     Uses _spawn/spawn_one_positioned.ps1 helper so positioning is consistent with
@@ -190,7 +195,7 @@ def spawn_mixed(wave):
         time.sleep(3)  # stagger so each window gets its handle before next launch
 
 
-def consolidate(wave_n):
+def consolidate(wave_n: int) -> list[Path]:
     """List artifacts produced this wave."""
     wdir = SHOWOFF_DIR / f"w{wave_n}"
     if not wdir.exists():
@@ -198,7 +203,7 @@ def consolidate(wave_n):
     return sorted(wdir.glob("*.md"))
 
 
-def between_wave_consolidate(wave_n, found_signals):
+def between_wave_consolidate(wave_n: int, found_signals: set[str]) -> dict[str, int | str]:
     """After a wave polls out, before next wave spawns:
     0. Safety-net signal: for each artifact file that exists without a matching
        signal (CLI didn't exit / didn't invoke signal_writer), emit one.
@@ -264,7 +269,7 @@ def between_wave_consolidate(wave_n, found_signals):
     return {"wave": wave_n, "status": status_tag, "signals": len(found_signals), "artifacts": len(artifacts)}
 
 
-def run_wave(wave, dry=False):
+def run_wave(wave: dict[str, Any], dry: bool = False) -> bool:
     wave_n = wave["n"]
     print(f"\n{'='*70}\nSHOWOFF Wave {wave_n} -- {wave['runtime']} ({wave['model']})\n{'='*70}")
     if dry:
@@ -294,7 +299,7 @@ def run_wave(wave, dry=False):
     return len(found) >= len(NUCLEI) // 2  # majority = pass
 
 
-def final_report(results):
+def final_report(results: list[tuple[int, bool, set[str], int]]) -> None:
     print(f"\n{'='*70}\nSHOWOFF FINAL REPORT\n{'='*70}")
     total = 0
     for wave_n, ok, found, artifacts in results:
@@ -305,7 +310,7 @@ def final_report(results):
     print(f"{'='*70}")
 
 
-def main():
+def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--wave", type=int, help="Run only wave N (1-5)")
     ap.add_argument("--dry-run", action="store_true", help="Print plan only")
