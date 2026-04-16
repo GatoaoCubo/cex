@@ -4,7 +4,7 @@ id: bld_config_bias_audit
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for bias_audit production
-quality: null
+quality: 8.6
 title: "Config Bias Audit"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,27 +16,27 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Naming Convention  
+## Naming Convention
 
 This ISO drives a bias audit: measuring fairness across demographic slices.
-Pattern: `p07_ba_{{name}}.md`  
-Examples:  
-- `p07_ba_model_v1.md`  
-- `p07_ba_dataset_2023.md`  
+Pattern: `p07_ba_{{name}}.md`
+Examples:
+- `p07_ba_model_v1.md`
+- `p07_ba_dataset_2023.md`
 
-## Paths  
-- Base: `/artifacts/p07/bias_audit/{{name}}/`  
-- Outputs: `{{base}}/outputs/`  
-- Logs: `{{base}}/logs/`  
-- Temp: `{{base}}/tmp/`  
+## Paths
+- Base: `/artifacts/p07/bias_audit/{{name}}/`
+- Outputs: `{{base}}/outputs/`
+- Logs: `{{base}}/logs/`
+- Temp: `{{base}}/tmp/`
 
-## Limits  
-- max_bytes: 5120  
-- max_turns: 10  
-- effort_level: high  
+## Limits
+- max_bytes: 5120
+- max_turns: 10
+- effort_level: high
 
-## Hooks  
-- pre_build: null  
-- post_build: null  
-- on_error: null  
+## Hooks
+- pre_build: null
+- post_build: null
+- on_error: null
 - on_quality_fail: null
