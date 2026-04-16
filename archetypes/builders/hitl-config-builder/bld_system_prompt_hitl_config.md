@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "HITL gate configuration: review trigger conditions, escalation chains, approval flows (binary/edit/score), timeout behavior, fallback actions, priority routing, feedback loops | NOT guardrail (automated safety filtering), NOT quality_gate (automated scoring), NOT permission (access control), NOT scoring_rubric (quality criteria)"
 domain: "hitl_config"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "hitl_config", "human-review", "escalation", "approval", "P11"]
 safety_level: standard
 tools_listed: false
