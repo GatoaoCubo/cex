@@ -3,9 +3,10 @@ id: kc_webinar_script
 kind: knowledge_card
 title: Webinar Script Template
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
 language: English
+density_score: 1.0
 ---
 
 # Webinar Script Format Guide
