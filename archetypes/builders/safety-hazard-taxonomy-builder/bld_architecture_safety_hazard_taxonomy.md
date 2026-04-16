@@ -4,7 +4,7 @@ id: bld_architecture_safety_hazard_taxonomy
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of safety_hazard_taxonomy -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
