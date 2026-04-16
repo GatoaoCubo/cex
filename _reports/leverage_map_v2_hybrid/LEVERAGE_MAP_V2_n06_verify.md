@@ -4,7 +4,8 @@ nucleus: n06
 model: llama3.1:8b
 phase: verify_cycle
 created: 2026-04-15
-quality: null
+quality: 8.8
+density_score: 1.0
 ---
 
 # N06 Commercial — Leverage Map V2 (Verify Cycle)
