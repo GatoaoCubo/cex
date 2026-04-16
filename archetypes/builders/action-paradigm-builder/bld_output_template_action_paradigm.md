@@ -4,7 +4,7 @@ id: bld_output_template_action_paradigm
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for action_paradigm production
-quality: null
+quality: 9.1
 title: "Output Template Action Paradigm"
 version: "1.1.0"
 author: n01_polish
