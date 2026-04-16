@@ -4,7 +4,7 @@ id: bld_architecture_reranker_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of reranker_config -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Reranker Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
