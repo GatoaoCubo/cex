@@ -4,7 +4,7 @@ id: bld_collaboration_procedural_memory
 pillar: P12
 llm_function: COLLABORATE
 purpose: How procedural_memory-builder works in crews with other CEX builders
-quality: null
+quality: 9.1
 title: "Collaboration: procedural_memory-builder"
 version: "2.0.0"
 author: n06_commercial
