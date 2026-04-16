@@ -4,7 +4,7 @@ id: p10_mem_faq_entry_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for faq_entry construction
-quality: null
+quality: 8.7
 title: "Learning Record Faq Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
