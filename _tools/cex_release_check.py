@@ -22,7 +22,7 @@ FAIL = 0
 WARN = 0
 
 
-def check(name: str, condition: bool, detail: str = ""):
+def check(name: str, condition: bool, detail: str = "") -> None:
     global PASS, FAIL
     if condition:
         PASS += 1
@@ -32,13 +32,13 @@ def check(name: str, condition: bool, detail: str = ""):
         print(f"  [FAIL] {name}: {detail}")
 
 
-def warn(name: str, detail: str):
+def warn(name: str, detail: str) -> None:
     global WARN
     WARN += 1
     print(f"  [WARN] {name}: {detail}")
 
 
-def main():
+def main() -> None:
     print("\n=== CEX RELEASE CHECK ===\n")
 
     # -- 1. Required files exist --
