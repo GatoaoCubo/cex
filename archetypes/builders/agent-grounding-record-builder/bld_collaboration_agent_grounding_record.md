@@ -4,7 +4,7 @@ id: bld_collaboration_agent_grounding_record
 pillar: P12
 llm_function: COLLABORATE
 purpose: Define crew role, upstream inputs, downstream consumers, and boundary conditions for grounding records
-quality: null
+quality: 9.1
 title: "Agent Grounding Record Builder -- Collaboration"
 version: "1.0.0"
 author: wave7_n05
