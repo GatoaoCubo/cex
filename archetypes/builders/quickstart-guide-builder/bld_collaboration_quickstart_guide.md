@@ -4,7 +4,7 @@ id: bld_collaboration_quickstart_guide
 pillar: P12
 llm_function: COLLABORATE
 purpose: How quickstart_guide-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Quickstart Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
