@@ -4,7 +4,7 @@ id: bld_schema_app_directory_entry
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for app_directory_entry
-quality: null
+quality: 9.1
 title: "Schema App Directory Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
