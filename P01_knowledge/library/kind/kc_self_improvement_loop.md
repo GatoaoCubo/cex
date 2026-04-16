@@ -3,8 +3,9 @@ id: kc_self_improvement_loop
 kind: knowledge_card
 title: Self-Improvement Loop Mechanism
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.96
 ---
 
 The self-improvement loop is an autonomous evolution mechanism enabling agents/systems to iteratively refine capabilities through continuous feedback and adaptation. This closed-loop process consists of five core phases:
