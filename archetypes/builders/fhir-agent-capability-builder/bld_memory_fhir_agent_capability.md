@@ -4,7 +4,7 @@ id: p10_lr_fhir_agent_capability_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for fhir_agent_capability construction
-quality: null
+quality: 8.8
 title: "Learning Record FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
