@@ -4,7 +4,7 @@ id: bld_instruction_usage_quota
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for usage_quota
-quality: null
+quality: 8.9
 title: "Instruction Usage Quota"
 version: "1.0.0"
 author: wave1_builder_gen_v2
