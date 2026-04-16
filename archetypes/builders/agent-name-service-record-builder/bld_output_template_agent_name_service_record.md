@@ -4,7 +4,7 @@ id: bld_output_template_agent_name_service_record
 pillar: P05
 llm_function: PRODUCE
 purpose: Canonical output template for agent_name_service_record artifacts
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Output Template"
 version: "1.0.0"
 author: wave7_n05
