@@ -4,7 +4,7 @@ id: bld_instruction_agentic_rag
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for agentic_rag
-quality: null
+quality: 8.8
 title: "Instruction Agentic Rag"
 version: "1.0.0"
 author: wave1_builder_gen_v2
