@@ -4,7 +4,7 @@ id: bld_system_prompt_nucleus_def
 pillar: P03
 llm_function: BECOME
 purpose: LLM guidance for nucleus_def production
-quality: null
+quality: 9.0
 title: "System Prompt Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
