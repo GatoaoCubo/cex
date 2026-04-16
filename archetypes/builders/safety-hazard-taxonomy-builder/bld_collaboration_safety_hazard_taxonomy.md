@@ -4,7 +4,7 @@ id: bld_collaboration_safety_hazard_taxonomy
 pillar: P12
 llm_function: COLLABORATE
 purpose: How safety_hazard_taxonomy-builder works in crews with other builders
-quality: null
+quality: 9.0
 title: "Collaboration Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
