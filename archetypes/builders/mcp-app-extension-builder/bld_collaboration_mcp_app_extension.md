@@ -4,7 +4,7 @@ id: bld_collaboration_mcp_app_extension
 pillar: P12
 llm_function: COLLABORATE
 purpose: How mcp_app_extension-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
