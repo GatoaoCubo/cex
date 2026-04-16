@@ -6,7 +6,7 @@ llm_function: INJECT
 purpose: Accumulated production experience for collaboration_pattern artifact generation
 memory_scope: project
 observation_types: [user, feedback, project, reference]
-quality: null
+quality: 9.2
 title: "Memory: collaboration-pattern-builder"
 version: "1.0.0"
 author: n02_reviewer
