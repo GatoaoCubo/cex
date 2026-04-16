@@ -4,7 +4,7 @@ id: bld_config_reward_model
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for reward_model production
-quality: null
+quality: 8.6
 title: "Config Reward Model"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,21 +16,21 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Naming Convention  
-p07_rwm_<model_name>_<timestamp> (e.g., p07_rwm_rlhf_v1_20231005)  
+## Naming Convention
+p07_rwm_<model_name>_<timestamp> (e.g., p07_rwm_rlhf_v1_20231005)
 
-## Paths  
-- Models: `/mnt/artifacts/p07/rwm/{{name}}/models/`  
-- Logs: `/mnt/artifacts/p07/rwm/{{name}}/logs/`  
-- Checkpoints: `/mnt/artifacts/p07/rwm/{{name}}/checkpoints/`  
+## Paths
+- Models: `/mnt/artifacts/p07/rwm/{{name}}/models/`
+- Logs: `/mnt/artifacts/p07/rwm/{{name}}/logs/`
+- Checkpoints: `/mnt/artifacts/p07/rwm/{{name}}/checkpoints/`
 
-## Limits  
-- max_bytes: 5120  
-- max_turns: 20  
-- effort_level: 3  
+## Limits
+- max_bytes: 5120
+- max_turns: 20
+- effort_level: 3
 
-## Hooks  
-- pre_build: null  
-- post_build: null  
-- on_error: null  
+## Hooks
+- pre_build: null
+- post_build: null
+- on_error: null
 - on_quality_fail: null
