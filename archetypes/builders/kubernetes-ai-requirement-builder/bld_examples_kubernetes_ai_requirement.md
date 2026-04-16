@@ -4,7 +4,7 @@ id: bld_examples_kubernetes_ai_requirement
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of kubernetes_ai_requirement artifacts
-quality: null
+quality: 8.9
 title: "Examples Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
