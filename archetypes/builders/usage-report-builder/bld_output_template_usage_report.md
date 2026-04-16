@@ -4,7 +4,7 @@ id: bld_output_template_usage_report
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for usage_report production
-quality: null
+quality: 8.8
 title: "Output Template Usage Report"
 version: "1.0.0"
 author: wave1_builder_gen_v2
