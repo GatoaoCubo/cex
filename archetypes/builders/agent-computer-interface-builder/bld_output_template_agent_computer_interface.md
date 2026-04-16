@@ -4,7 +4,7 @@ id: bld_output_template_agent_computer_interface
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for agent_computer_interface production
-quality: null
+quality: 9.1
 title: "Output Template Agent Computer Interface"
 version: "1.0.0"
 author: wave1_builder_gen
