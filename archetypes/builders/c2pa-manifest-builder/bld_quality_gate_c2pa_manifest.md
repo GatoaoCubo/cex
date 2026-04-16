@@ -4,7 +4,7 @@ id: p10_qg_c2pa_manifest
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for c2pa_manifest
-quality: null
+quality: 9.0
 title: "Quality Gate C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
