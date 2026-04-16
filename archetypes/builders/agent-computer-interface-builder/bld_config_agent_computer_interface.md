@@ -4,7 +4,7 @@ id: bld_config_agent_computer_interface
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for agent_computer_interface production
-quality: null
+quality: 8.6
 title: "Config Agent Computer Interface"
 version: "1.0.0"
 author: wave1_builder_gen
