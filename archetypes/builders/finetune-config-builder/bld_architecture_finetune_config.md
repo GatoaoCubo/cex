@@ -4,7 +4,7 @@ id: bld_architecture_finetune_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of finetune_config -- inventory, dependencies, and architectural position
-quality: null
+quality: 9.1
 title: "Architecture Finetune Config"
 version: "1.0.0"
 author: n03_builder
