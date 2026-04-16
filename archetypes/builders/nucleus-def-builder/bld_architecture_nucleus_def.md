@@ -4,7 +4,7 @@ id: bld_architecture_nucleus_def
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of nucleus_def -- inventory, dependencies
-quality: null
+quality: 9.1
 title: "Architecture Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
