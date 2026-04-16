@@ -4,7 +4,7 @@ id: eval-metric-builder
 pillar: P07
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for eval_metric
-quality: null
+quality: 8.8
 title: "Type Builder Eval Metric"
 version: "1.0.0"
 author: wave1_builder_gen_v2
