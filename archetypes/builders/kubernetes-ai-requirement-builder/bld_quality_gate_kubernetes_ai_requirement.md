@@ -4,7 +4,7 @@ id: p09_qg_kubernetes_ai_requirement
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for kubernetes_ai_requirement
-quality: null
+quality: 9.1
 title: "Quality Gate Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
