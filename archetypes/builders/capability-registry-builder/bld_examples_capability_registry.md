@@ -4,7 +4,7 @@ id: bld_examples_capability_registry
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of capability_registry artifacts
-quality: null
+quality: 9.1
 title: "Examples Capability Registry"
 version: "1.0.0"
 author: n04_wave8
