@@ -4,7 +4,7 @@ id: bld_tools_gpai_technical_doc
 pillar: P04
 llm_function: CALL
 purpose: Tools available for gpai_technical_doc production
-quality: null
+quality: 8.9
 title: "Tools GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
