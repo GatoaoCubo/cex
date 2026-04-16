@@ -4,7 +4,7 @@ id: bld_output_template_vc_credential
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for vc_credential production
-quality: null
+quality: 8.9
 title: "Output Template VC Credential"
 version: "1.0.0"
 author: n04_wave7
