@@ -4,7 +4,7 @@ id: bld_architecture_pricing_page
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of pricing_page -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Pricing Page"
 version: "1.0.0"
 author: wave1_builder_gen_v2
