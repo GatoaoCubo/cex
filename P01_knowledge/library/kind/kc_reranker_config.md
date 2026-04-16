@@ -3,8 +3,9 @@ id: kc_reranker_config
 kind: knowledge_card
 title: Reranker Configuration
 version: 1.0.0
-quality: null
+quality: 8.4
 pillar: P01
+density_score: 1.0
 ---
 
 ## Reranker Configuration Parameters
