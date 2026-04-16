@@ -4,7 +4,7 @@ id: bld_examples_compliance_checklist
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of compliance_checklist artifacts
-quality: null
+quality: 8.9
 title: "Examples Compliance Checklist"
 version: "1.0.0"
 author: wave1_builder_gen_v2
