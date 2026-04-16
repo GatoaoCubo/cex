@@ -1,6 +1,6 @@
 # CEX — Typed Knowledge System for LLM Agents
 
-> 257 kinds · 262 builders · 3381 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 82 tools
+> 257 kinds · 260 builders · 3381 ISOs · 12 pillars · 8 nuclei (N00-N07) · 8F pipeline · cex_sdk runtime · 82 tools
 
 ## Brand Identity
 
@@ -44,7 +44,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Terminology** | `_docs/specs/spec_metaphor_dictionary.md` + Rosetta Stone KC |
 | **N07 tech authority** | `.claude/rules/n07-technical-authority.md` |
 | **Infinite loop spec** | `_docs/specs/spec_infinite_bootstrap_loop.md` |
-| **Subagent definitions** | `.claude/agents/` (125 builder sub-agents) |
+| **Subagent definitions** | `.claude/agents/` (259 builder sub-agents) |
 | **Nucleus fractals** | `N{01-07}_*/` (13 subdirs each, mirrors N00's 12 pillars) |
 | **SDK runtime** | `cex_sdk/` (78 .py, 4504 lines) |
 | **Boot scripts** | `boot/cex.ps1` (N07) · `boot/n0{1-6}.ps1` (PowerShell-only) |
@@ -54,7 +54,7 @@ Check `CEX_NUCLEUS`. N07 = Orchestrator. N03 = Builder. Not set = read and decid
 | **Intent Resolver** | `_tools/cex_intent_resolver.py` (Python-first, 0 tokens) |
 | **Setup Validator** | `_tools/cex_setup_validator.py` (new PC readiness check) |
 | **Hygiene Tool** | `_tools/cex_hygiene.py` (artifact CRUD, 8 rules) |
-| **Prompt Cache** | `_tools/cex_prompt_cache.py` + `.cex/cache/` (125 builders pre-compiled) |
+| **Prompt Cache** | `_tools/cex_prompt_cache.py` + `.cex/cache/` (260 builders pre-compiled) |
 | **Preflight** | `_tools/cex_preflight.py` — hybrid local/cloud context pre-compiler (Ollama + Haiku) |
 | **Token Efficiency Map** | `N01_intelligence/reports/token_efficiency_gap_map.md` |
 | **Taxonomy Audit** | `N01_intelligence/reports/taxonomy_completeness_audit.md` |

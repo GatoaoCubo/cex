@@ -58,6 +58,10 @@ SAFE_DIRS = {".git", ".venv_litellm", ".aider.tags.cache.v4", "node_modules",
              ".cex/learning_records", ".cex/experiments",
              ".cex/overnight", ".cex/quality", ".cex/temp"}
 
+# Prefix patterns: any path starting with one of these is excluded.
+# Used for historical run-output dirs that capture absolute paths in traces.
+SAFE_DIR_PREFIXES = ("_reports/leverage_map", "_reports/gridtest_")
+
 # These files are EXPECTED to mention brand strings (they ARE the brand config)
 BRAND_OWNERS = {
     ".cex/brand/brand_config.yaml",
@@ -92,7 +96,9 @@ def load_inventory() -> list[dict]:
 def in_safe_dir(rel_path: str) -> bool:
     """Check if path is in a dir we exclude from scan."""
     norm = rel_path.replace("\\", "/")
-    return any(norm.startswith(d + "/") or norm == d for d in SAFE_DIRS)
+    if any(norm.startswith(d + "/") or norm == d for d in SAFE_DIRS):
+        return True
+    return any(norm.startswith(p) for p in SAFE_DIR_PREFIXES)
 
 
 def is_safe_match(pattern_name: str, snippet: str) -> bool:

@@ -1,0 +1,77 @@
+# Test Tier Manifest
+#
+# Splits the 38 test_*.py files in this repo into 3 tiers so that:
+#  - `core` runs on a fresh clone with ONLY `requirements.txt` installed
+#    and is the gate CI must pass on every PR (target: ~90 seconds wall time).
+#  - `integration` requires `requirements-llm.txt` (LLM provider clients)
+#    and may make network calls; opt-in for full validation runs.
+#  - `optional` covers experimental flows (training/RL, Ollama, LiteLLM,
+#    tmux, swarm) that need extra setup; only run when relevant area changes.
+#
+# Usage:
+#   python -m pytest $(python _tools/test_runner.py --tier core)
+#   python -m pytest $(python _tools/test_runner.py --tier integration)
+#   python -m pytest $(python _tools/test_runner.py --tier optional)
+#
+# Source of truth for B5 (test tier split). Keep in sync with conftest.py.
+
+version: 1
+generated: 2026-04-16
+total_tests_inventoried: 38
+
+tiers:
+  core:
+    description: Pure-Python tests that pass on `pip install -r requirements.txt` only.
+    runtime_target_seconds: 90
+    deps_required: [pyyaml, tiktoken]
+    files:
+      - _tools/tests/test_autodiscovery.py
+      - _tools/tests/test_compile.py
+      - _tools/tests/test_doctor.py
+      - _tools/tests/test_errors.py
+      - _tools/tests/test_feedback.py
+      - _tools/tests/test_hooks.py
+      - _tools/tests/test_index.py
+      - _tools/tests/test_intent.py
+      - _tools/tests/test_lock.py
+      - _tools/tests/test_materialize.py
+      - _tools/tests/test_memory.py
+      - _tools/tests/test_memory_update.py
+      - _tools/tests/test_mission_state.py
+      - _tools/tests/test_motor.py
+      - _tools/tests/test_score.py
+      - _tools/tests/test_signal.py
+      - _tools/tests/test_validator.py
+      - cex_sdk/tests/test_sdk_integrity.py
+      - _tools/test_cex_wave_validator.py
+
+  integration:
+    description: Tests that exercise LLM providers, brand ingest, or full pipelines.
+    runtime_target_seconds: 600
+    deps_required: [pyyaml, tiktoken, anthropic, openai, google-generativeai]
+    env_required: [ANTHROPIC_API_KEY]
+    files:
+      - _tools/tests/test_bootstrap.py
+      - _tools/tests/test_brand_ingest.py
+      - _tools/tests/test_brand_pipeline_e2e.py
+      - _tools/tests/test_brand_tools.py
+      - _tools/tests/test_continuous.py
+      - _tools/tests/test_e2e_evolution.py
+      - _tools/tests/test_evolve.py
+      - _tools/tests/test_forge.py
+      - N05_operations/scripts/test_bootstrap_dryrun.py
+
+  optional:
+    description: Experimental flows -- Ollama, LiteLLM, swarm, RL/training.
+    runtime_target_seconds: 1800
+    deps_required: [pyyaml, tiktoken, ollama, litellm]
+    env_required: []
+    files:
+      - _tools/test_agentic_capabilities_v2.py
+      - _tools/test_wave1_builder_gen_v2.py
+
+# Files NOT in any tier (intentional -- helpers, not pytest collectors):
+ignored:
+  - _tools/tests/conftest.py
+  - _tools/tests/__init__.py
+  - _tools/tests/report_evolution_integrity.py
