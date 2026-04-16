@@ -4,7 +4,7 @@ id: bld_config_team_charter
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for team_charter production
-quality: null
+quality: 8.6
 title: "Config Team Charter"
 version: "1.0.0"
 author: n06_wave8
