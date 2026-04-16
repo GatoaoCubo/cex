@@ -4,7 +4,7 @@ id: p05_qg_onboarding_flow
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for onboarding_flow
-quality: null
+quality: 9.0
 title: "Quality Gate Onboarding Flow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
