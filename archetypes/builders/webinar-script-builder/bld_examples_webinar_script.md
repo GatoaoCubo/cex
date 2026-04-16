@@ -4,7 +4,7 @@ id: bld_examples_webinar_script
 pillar: P07
 llm_function: GOVERN
 purpose: Golden example and anti-examples for webinar_script to calibrate builder output quality
-quality: null
+quality: 9.1
 title: "Webinar Script Examples"
 version: "1.0.0"
 author: n02_wave6
