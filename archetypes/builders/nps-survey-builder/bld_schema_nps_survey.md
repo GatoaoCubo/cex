@@ -4,7 +4,7 @@ id: bld_schema_nps_survey
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for nps_survey
-quality: null
+quality: 9.1
 title: "Schema Nps Survey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -47,16 +47,16 @@ density_score: 0.85
 ^p11_nps_[a-z][a-z0-9_]+.yaml$
 
 ## Body Structure
-1. **Survey Design**: Define question phrasing, scoring logic (0-10), and response options  
-2. **Distribution Plan**: Channels (email, app, website), frequency, and targeting rules  
-3. **Data Collection**: Integration endpoints, storage schema, and anonymization rules  
-4. **Analysis Framework**: Calculation of NPS, segment breakdowns, and trend tracking  
-5. **Reporting**: Output formats (CSV, JSON), visualization rules, and delivery cadence  
+1. **Survey Design**: Define question phrasing, scoring logic (0-10), and response options
+2. **Distribution Plan**: Channels (email, app, website), frequency, and targeting rules
+3. **Data Collection**: Integration endpoints, storage schema, and anonymization rules
+4. **Analysis Framework**: Calculation of NPS, segment breakdowns, and trend tracking
+5. **Reporting**: Output formats (CSV, JSON), visualization rules, and delivery cadence
 
 ## Constraints
-- File size must not exceed 3072 bytes  
-- All required fields must be present and valid  
-- ID must match exact regex pattern  
-- Quality field must be assigned by peer review only  
-- Response_rate must be numeric between 0-100  
+- File size must not exceed 3072 bytes
+- All required fields must be present and valid
+- ID must match exact regex pattern
+- Quality field must be assigned by peer review only
+- Response_rate must be numeric between 0-100
 - Survey_questions must contain at least 3 items
