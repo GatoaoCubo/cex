@@ -4,7 +4,7 @@ id: reasoning-strategy-builder
 pillar: P03
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for reasoning_strategy
-quality: null
+quality: 8.8
 title: "Type Builder Reasoning Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
