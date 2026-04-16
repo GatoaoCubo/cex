@@ -4,7 +4,7 @@ id: bld_collaboration_workflow_node
 pillar: P12
 llm_function: COLLABORATE
 purpose: How workflow_node-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Workflow Node"
 version: "1.0.0"
 author: wave1_builder_gen_v2
