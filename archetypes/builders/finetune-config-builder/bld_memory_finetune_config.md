@@ -26,7 +26,7 @@ decay_rate: 0.03
 agent_group: builder
 memory_scope: project
 observation_types: [feedback, reference, project]
-quality: null
+quality: 9.0
 title: "Memory Finetune Config"
 density_score: 0.90
 llm_function: INJECT
