@@ -21,8 +21,9 @@ keywords: [context_window, token_budget, output_reserve, overflow, priority_tier
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 llm_function: INJECT
-quality: null
+quality: 8.8
 title: Memory ISO - context_window_config
+density_score: 1.0
 ---
 ## Summary
 Context window configs allocate a model's finite context among prompt sections. The primary failure is insufficient output reserve leading to truncated responses.
