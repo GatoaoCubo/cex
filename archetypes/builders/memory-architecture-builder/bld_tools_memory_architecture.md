@@ -4,7 +4,7 @@ id: bld_tools_memory_architecture
 pillar: P04
 llm_function: CALL
 purpose: Tools available for memory_architecture production
-quality: null
+quality: 9.0
 title: "Tools: memory_architecture-builder"
 version: "2.0.0"
 author: n06_commercial
