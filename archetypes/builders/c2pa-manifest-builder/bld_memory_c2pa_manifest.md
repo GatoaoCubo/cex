@@ -4,7 +4,7 @@ id: p10_lr_c2pa_manifest_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for c2pa_manifest construction
-quality: null
+quality: 8.7
 title: "Learning Record C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
