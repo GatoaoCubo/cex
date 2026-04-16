@@ -4,7 +4,7 @@ id: bld_collaboration_agents_md
 pillar: P12
 llm_function: COLLABORATE
 purpose: How agents_md-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
