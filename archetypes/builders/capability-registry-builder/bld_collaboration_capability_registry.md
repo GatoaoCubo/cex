@@ -4,7 +4,7 @@ id: bld_collaboration_capability_registry
 pillar: P12
 llm_function: COLLABORATE
 purpose: How capability_registry-builder works in crews with other builders
-quality: null
+quality: 9.0
 title: "Collaboration Capability Registry"
 version: "1.0.0"
 author: n04_wave8
