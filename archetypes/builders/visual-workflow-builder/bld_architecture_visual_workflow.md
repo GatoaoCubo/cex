@@ -4,7 +4,7 @@ id: bld_architecture_visual_workflow
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of visual_workflow -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Visual Workflow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,31 +16,31 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Component Inventory  
-| ISO Name             | Role                          | Pillar | Status |  
-|----------------------|-------------------------------|--------|--------|  
-| bld_manifest         | Core workflow definition      | P12    | Active |  
-| bld_instruction      | Step-level task specification | P12    | Active |  
-| bld_system_prompt    | LLM interaction framework     | P12    | Active |  
-| bld_schema           | Data structure validation     | P12    | Active |  
-| bld_quality_gate     | Compliance verification       | P12    | Active |  
-| bld_output_template  | Result formatting             | P12    | Active |  
-| bld_examples         | Sample workflow repository    | P12    | Active |  
-| bld_knowledge_card   | Domain-specific guidance      | P12    | Active |  
-| bld_architecture     | System-level design blueprint   | P12    | Active |  
-| bld_collaboration    | Multi-user editing            | P12    | Active |  
-| bld_config           | Runtime parameter management  | P12    | Active |  
-| bld_memory           | Session state retention       | P12    | Active |  
-| bld_tools            | External integration hub      | P12    | Active |  
+## Component Inventory
+| ISO Name             | Role                          | Pillar | Status |
+|----------------------|-------------------------------|--------|--------|
+| bld_manifest         | Core workflow definition      | P12    | Active |
+| bld_instruction      | Step-level task specification | P12    | Active |
+| bld_system_prompt    | LLM interaction framework     | P12    | Active |
+| bld_schema           | Data structure validation     | P12    | Active |
+| bld_quality_gate     | Compliance verification       | P12    | Active |
+| bld_output_template  | Result formatting             | P12    | Active |
+| bld_examples         | Sample workflow repository    | P12    | Active |
+| bld_knowledge_card   | Domain-specific guidance      | P12    | Active |
+| bld_architecture     | System-level design blueprint   | P12    | Active |
+| bld_collaboration    | Multi-user editing            | P12    | Active |
+| bld_config           | Runtime parameter management  | P12    | Active |
+| bld_memory           | Session state retention       | P12    | Active |
+| bld_tools            | External integration hub      | P12    | Active |
 
-## Dependencies  
-| From              | To                  | Type         |  
-|-------------------|---------------------|--------------|  
-| bld_manifest      | bld_schema          | validation   |  
-| bld_instruction   | bld_tools           | execution    |  
-| bld_quality_gate  | bld_output_template | validation   |  
-| bld_collaboration | bld_memory          | state sync   |  
-| bld_config        | bld_system_prompt   | parameter    |  
+## Dependencies
+| From              | To                  | Type         |
+|-------------------|---------------------|--------------|
+| bld_manifest      | bld_schema          | validation   |
+| bld_instruction   | bld_tools           | execution    |
+| bld_quality_gate  | bld_output_template | validation   |
+| bld_collaboration | bld_memory          | state sync   |
+| bld_config        | bld_system_prompt   | parameter    |
 
-## Architectural Position  
+## Architectural Position
 Visual_workflow sits at the intersection of P12's workflow orchestration and knowledge management, enabling collaborative, configurable, and compliant workflow design through ISO-driven modularity, with explicit integration points for external systems and quality assurance.
