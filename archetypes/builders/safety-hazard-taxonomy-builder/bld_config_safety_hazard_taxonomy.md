@@ -4,7 +4,7 @@ id: bld_config_safety_hazard_taxonomy
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for safety_hazard_taxonomy production
-quality: null
+quality: 8.6
 title: "Config Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
