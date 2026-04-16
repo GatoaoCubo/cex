@@ -4,7 +4,7 @@ id: bld_instruction_nucleus_def
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for nucleus_def
-quality: null
+quality: 8.9
 title: "Instruction Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
