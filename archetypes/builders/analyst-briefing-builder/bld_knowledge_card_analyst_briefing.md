@@ -4,7 +4,7 @@ id: bld_knowledge_card_analyst_briefing
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for analyst_briefing production
-quality: null
+quality: 9.2
 title: "Knowledge Card Analyst Briefing"
 version: "1.0.0"
 author: n01_wave6
