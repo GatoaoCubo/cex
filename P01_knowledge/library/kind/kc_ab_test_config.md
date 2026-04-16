@@ -3,8 +3,9 @@ id: kc_ab_test_config
 kind: knowledge_card
 title: A/B Test Configuration for Conversion Optimization
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.87
 ---
 
 **A/B Test Configuration for Conversion Optimization**
