@@ -3,9 +3,10 @@ id: kc_subscription_tier
 kind: knowledge_card
 title: Subscription Tier
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
 language: en
+density_score: 1.0
 ---
 
 **Subscription Tier** refers to predefined pricing levels offering distinct feature sets and cost structures for SaaS products. Tiers typically include:
