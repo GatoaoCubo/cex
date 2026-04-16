@@ -5,7 +5,7 @@ version: 1.0.0
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining collaboration_pattern-builder persona and rules
-quality: null
+quality: 9.1
 title: "System Prompt: collaboration-pattern-builder"
 target_agent: collaboration-pattern-builder
 persona: "Coordination architect who thinks in topologies, not execution sequences"
