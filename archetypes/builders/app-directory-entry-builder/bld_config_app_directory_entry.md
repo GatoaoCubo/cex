@@ -4,7 +4,7 @@ id: bld_config_app_directory_entry
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for app_directory_entry production
-quality: null
+quality: 8.7
 title: "Config App Directory Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
