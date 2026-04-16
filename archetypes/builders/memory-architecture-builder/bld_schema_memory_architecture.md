@@ -4,7 +4,7 @@ id: bld_schema_memory_architecture
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for memory_architecture
-quality: null
+quality: 9.2
 title: "Schema: memory_architecture"
 version: "2.0.0"
 author: n06_commercial
