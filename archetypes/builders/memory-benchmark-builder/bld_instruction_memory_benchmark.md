@@ -4,7 +4,7 @@ id: bld_instruction_memory_benchmark
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for memory_benchmark
-quality: null
+quality: 8.9
 title: "Instruction Memory Benchmark"
 version: "1.1.0"
 author: n05_operations
