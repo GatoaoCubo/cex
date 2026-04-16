@@ -4,7 +4,7 @@ id: bld_architecture_agents_md
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of agents_md -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
