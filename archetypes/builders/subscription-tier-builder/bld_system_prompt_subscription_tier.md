@@ -4,7 +4,7 @@ id: p03_sp_subscription_tier_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining subscription_tier-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Subscription Tier"
 version: "1.0.0"
 author: n03_builder
