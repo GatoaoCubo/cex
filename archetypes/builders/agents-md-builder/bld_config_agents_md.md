@@ -4,7 +4,7 @@ id: bld_config_agents_md
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for agents_md production
-quality: null
+quality: 8.6
 title: "Config Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
