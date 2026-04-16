@@ -4,7 +4,7 @@ id: bld_collaboration_webinar_script
 pillar: P12
 llm_function: COLLABORATE
 purpose: Define crew role, handoff interfaces, and boundary for webinar_script builder in multi-nucleus workflows
-quality: null
+quality: 9.1
 title: "Webinar Script Collaboration"
 version: "1.0.0"
 author: n02_wave6
