@@ -4,7 +4,7 @@ id: p10_mem_sso_config_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for sso_config construction
-quality: null
+quality: 8.7
 title: "Memory Sso Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,18 +16,18 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Observation  
-Misconfigured entity IDs or mismatched SLO URLs often cause SAML/OIDC flows to fail. Overlooking attribute mapping rules can lead to incomplete user profile data post-authentication.  
+## Observation
+Misconfigured entity IDs or mismatched SLO URLs often cause SAML/OIDC flows to fail. Overlooking attribute mapping rules can lead to incomplete user profile data post-authentication.
 
-## Pattern  
-Using standardized templates for metadata alignment ensures compatibility across IdPs. Modular configuration blocks for protocol-specific settings (e.g., SAML vs. OIDC) improve maintainability.  
+## Pattern
+Using standardized templates for metadata alignment ensures compatibility across IdPs. Modular configuration blocks for protocol-specific settings (e.g., SAML vs. OIDC) improve maintainability.
 
-## Evidence  
-Reviewed SAML configs with correct entity ID and OIDC configs referencing well-known endpoints demonstrated successful integration.  
+## Evidence
+Reviewed SAML configs with correct entity ID and OIDC configs referencing well-known endpoints demonstrated successful integration.
 
-## Recommendations  
-- Use IdP-provided metadata to auto-populate entity IDs and endpoints.  
-- Validate attribute mappings against IdP schema during config generation.  
-- Separate protocol-specific settings into reusable configuration modules.  
-- Enforce SLO/SSO URL consistency across all service provider configs.  
+## Recommendations
+- Use IdP-provided metadata to auto-populate entity IDs and endpoints.
+- Validate attribute mappings against IdP schema during config generation.
+- Separate protocol-specific settings into reusable configuration modules.
+- Enforce SLO/SSO URL consistency across all service provider configs.
 - Document IdP-specific quirks (e.g., custom attribute formats) in config comments.
