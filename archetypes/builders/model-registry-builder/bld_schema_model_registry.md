@@ -4,7 +4,7 @@ id: bld_schema_model_registry
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for model_registry
-quality: null
+quality: 8.9
 title: "Schema Model Registry"
 version: "1.0.0"
 author: wave1_builder_gen
