@@ -3,8 +3,9 @@ id: kc_faq_entry
 kind: knowledge_card
 title: FAQ Entry
 version: 1.0.0
-quality: null
+quality: 8.4
 pillar: P01
+density_score: 0.93
 ---
 
 **Question**:  
