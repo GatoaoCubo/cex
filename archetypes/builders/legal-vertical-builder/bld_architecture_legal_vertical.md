@@ -4,7 +4,7 @@ id: bld_architecture_legal_vertical
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of legal_vertical -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Legal Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -31,16 +31,16 @@ density_score: 0.85
 | bld_collaboration    | Cross-nucleus handoff patterns            | P12    | collaboration    | Active |
 | bld_config           | Naming, paths, limits                     | P09    | config           | Active |
 | bld_memory           | Learned patterns and pitfalls             | P10    | memory           | Active |
-| bld_tools            | CEX tools + external references           | P04    | tools            | Active |  
+| bld_tools            | CEX tools + external references           | P04    | tools            | Active |
 
-## Dependencies  
-| From           | To              | Type       |  
-|----------------|-----------------|------------|  
-| bld_instruction| bld_schema      | Data       |  
-| bld_quality_gate| bld_config     | Configuration |  
-| bld_output_template| bld_schema | Data       |  
-| bld_tools      | legal_db        | External   |  
-| bld_memory     | bld_config      | Configuration |  
+## Dependencies
+| From           | To              | Type       |
+|----------------|-----------------|------------|
+| bld_instruction| bld_schema      | Data       |
+| bld_quality_gate| bld_config     | Configuration |
+| bld_output_template| bld_schema | Data       |
+| bld_tools      | legal_db        | External   |
+| bld_memory     | bld_config      | Configuration |
 
-## Architectural Position  
+## Architectural Position
 The legal_vertical-builder (P01) serves as the compliance and governance backbone of the CEX ecosystem, ensuring all legal workflows, standards, and enforcement mechanisms are rigorously encoded, validated, and integrated across the system.
