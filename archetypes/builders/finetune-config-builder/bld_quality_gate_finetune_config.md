@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "finetune_config -- LLM fine-tuning job specifications with base model, adapter, dataset, hyperparameters, and eval metrics"
-quality: null
+quality: 9.0
 tags: [quality-gate, finetune-config, training, lora, peft, P11]
 tldr: "Gates for finetune_config: validates adapter completeness, hyperparameter coverage, dataset spec, eval metrics, and no credentials."
 density_score: 0.92
