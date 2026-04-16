@@ -24,7 +24,7 @@ OLLAMA_URL = "http://localhost:11434"
 TEST_PROMPT = "What is the 8F pipeline? Answer in one sentence."
 
 
-def test_ollama_direct():
+def test_ollama_direct() -> bool:
     """Test Ollama is alive and responding."""
     import requests
     print("[TEST] Ollama direct (localhost:11434)...")
@@ -51,7 +51,7 @@ def test_ollama_direct():
         return False
 
 
-def test_litellm_direct():
+def test_litellm_direct() -> bool:
     """Test LiteLLM SDK calling Ollama directly (no proxy)."""
     print("[TEST] LiteLLM SDK -> Ollama (direct, no proxy)...")
     try:
@@ -70,7 +70,7 @@ def test_litellm_direct():
         return False
 
 
-def test_litellm_proxy(model_name):
+def test_litellm_proxy(model_name: str) -> bool:
     """Test LiteLLM proxy routing."""
     import requests
     print(f"[TEST] LiteLLM proxy -> {model_name}...")
@@ -98,7 +98,7 @@ def test_litellm_proxy(model_name):
         return False
 
 
-def test_proxy_health():
+def test_proxy_health() -> bool:
     """Check if LiteLLM proxy is running."""
     import requests
     try:
@@ -108,7 +108,7 @@ def test_proxy_health():
         return False
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX LiteLLM Integration Test")
     parser.add_argument("--local-only", action="store_true",
                         help="Test only local Ollama routing")
