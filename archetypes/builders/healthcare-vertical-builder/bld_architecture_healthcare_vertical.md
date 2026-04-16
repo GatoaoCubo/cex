@@ -4,7 +4,7 @@ id: bld_architecture_healthcare_vertical
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of healthcare_vertical -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Healthcare Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
