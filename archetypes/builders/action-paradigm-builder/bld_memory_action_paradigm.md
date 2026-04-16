@@ -6,7 +6,7 @@ llm_function: INJECT
 purpose: Accumulated production experience for action_paradigm artifact generation
 memory_scope: project
 observation_types: [user, feedback, project, reference]
-quality: null
+quality: 9.1
 title: "Memory: action-paradigm-builder"
 version: "1.1.0"
 author: n01_polish
