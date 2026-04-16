@@ -4,7 +4,7 @@ id: bld_collaboration_agent_profile
 pillar: P12
 llm_function: COLLABORATE
 purpose: How agent_profile-builder works in crews with other builders
-quality: null
+quality: 8.7
 title: "Collaboration Agent Profile"
 version: "1.0.0"
 author: wave1_builder_gen
