@@ -4,7 +4,7 @@ id: bld_knowledge_card_nucleus_def
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for nucleus_def production
-quality: null
+quality: 9.2
 title: "Knowledge Card Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
