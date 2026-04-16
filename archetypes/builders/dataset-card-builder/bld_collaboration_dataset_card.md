@@ -4,7 +4,7 @@ id: bld_collaboration_dataset_card
 pillar: P12
 llm_function: COLLABORATE
 purpose: How dataset_card-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
