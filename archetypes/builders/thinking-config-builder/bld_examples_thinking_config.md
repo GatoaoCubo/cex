@@ -4,7 +4,7 @@ id: bld_examples_thinking_config
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of thinking_config artifacts
-quality: null
+quality: 8.9
 title: "Examples Thinking Config"
 version: "1.0.0"
 author: wave1_builder_gen
