@@ -3,7 +3,7 @@ kind: config
 id: bld_config_training_method
 pillar: P09
 llm_function: CONSTRAIN
-quality: null
+quality: 9.0
 title: "Config Training Method"
 version: "1.0.0"
 author: n05_builder
