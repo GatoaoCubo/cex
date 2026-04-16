@@ -1,0 +1,615 @@
+report: inventory_gato_ao_cubo
+mission: VERTICAL_DISTILLATION_20260416
+nucleus: n01
+created: 2026-04-16 11:30:00-03:00
+kinds_used: knowledge_card,knowledge_graph,knowledge_index,prompt_template,schedule,workflow,content_monetization,cohort_analysis,sales_playbook,competitive_matrix,case_study,e2e_eval,rag_source,roi_calculator,subscription_tier
+kinds_invented: 0
+unmapped_count: 4
+summary: '| Metric | Value |
+
+  |--------|-------|
+
+  | unique_commits | 20 |
+
+  | files_added (distillable) | 107 |
+
+  | obsidian_wiki_pages | 51 |
+
+  | q2_ig_week_schedules | 13 |
+
+  | q2_ig_posts_total | 91 |
+
+  | q2_blog_templates | 26 |
+
+  | monetization_artifacts | 8 |
+
+  | marketplace_audit_artifacts | 3 |
+
+  | content_pipeline_templates | 7 |
+
+  | kinds_used | 15 |
+
+  | kinds_invented | 0 |
+
+
+  ---'
+obsidian_wiki: '> Source: `N04_knowledge/wiki/` (51 .md pages + .gitignore) > Commit: `[N04] feat: GATO3 Obsidian knowledge
+  wiki -- 51 pages, 386 wiki-links, 8 sections`'
+section_00_home_index: '| Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/00_Home.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_wiki.md` | `{{BRAND_NAME}}`,
+  `{{BRAND_TAGLINE}}` |'
+section_01_brand_5_pages: '| Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/01_Brand/Brand_Identity.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_brand_identity.md` |
+  `{{BRAND_NAME}}`, `{{BRAND_MISSION}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/01_Brand/Brand_Positioning.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_brand_positioning.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_UVP}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/01_Brand/Brand_Voice.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_brand_voice.md` | `{{BRAND_NAME}}`,
+  `{{BRAND_VOICE}}`, `{{BRAND_PERSONA}}` |
+
+  | `N04_knowledge/wiki/01_Brand/Persona_Ro.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_brand_persona.md` | `{{BRAND_PERSONA}}`,
+  `{{BRAND_VOICE}}`, `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/01_Brand/Visual_Identity.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_visual_identity.md`
+  | `{{BRAND_PRIMARY_COLOR}}`, `{{BRAND_FONT}}`, `{{BRAND_AESTHETIC}}` |'
+section_02_products_9_pages: '| Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/02_Products/Product_Index.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_products.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/02_Products/Donut_GATO3.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_hero.md` | `{{BRAND_PRODUCT_HERO}}`,
+  `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/02_Products/Cama_Suspensa_Janela.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_02.md`
+  | `{{BRAND_PRODUCT_02}}`, `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/02_Products/Bola_Inteligente.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_03.md` |
+  `{{BRAND_PRODUCT_03}}`, `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/02_Products/Escova_Autolimpante.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_04.md`
+  | `{{BRAND_PRODUCT_04}}`, `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/02_Products/Fonte_Agua_Automatica.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_05.md`
+  | `{{BRAND_PRODUCT_05}}`, `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/02_Products/Mochila_Capsula.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_06.md` |
+  `{{BRAND_PRODUCT_06}}`, `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/02_Products/Tapete_Gelado.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_07.md` | `{{BRAND_PRODUCT_07}}`,
+  `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/02_Products/Tela_Protecao.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_08.md` | `{{BRAND_PRODUCT_08}}`,
+  `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/wiki/02_Products/Toca_Feltro_Tunel.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_product_09.md`
+  | `{{BRAND_PRODUCT_09}}`, `{{BRAND_NAME}}` |'
+section_03_content_strategy_8_pages: '| Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Content_Strategy_Index.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_content_strategy.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Editorial_Calendar_Q2.md` | `schedule` | `N02_marketing/content_pipeline/editorial_calendar_q2.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}`, `{{BRAND_QUARTER}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Content_Quality_Rubric.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_quality_rubric.md`
+  | `{{BRAND_VOICE}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Format_Blog.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_format_blog.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Format_Instagram.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_format_instagram.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Hashtag_Strategy.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_hashtag_strategy.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}`, `{{BRAND_NICHE}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Pillar_Educativo.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_pillar_educational.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Pillar_Humor.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_pillar_humor.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}`, `{{BRAND_PERSONA}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Pillar_Produto.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_pillar_product.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_PRODUCT_CATALOG}}` |
+
+  | `N04_knowledge/wiki/03_Content_Strategy/Pillar_Seasonal.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_content_pillar_seasonal.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_REGION}}` |'
+section_04_cat_science_9_pages: '> Domain knowledge -- highly reusable as `{{BRAND_VERTICAL}}` = pet/cat for any cat brand
+
+
+  | Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/04_Cat_Science/Cat_Science_Index.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_vertical.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/04_Cat_Science/Body_Language.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_body_language.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/04_Cat_Science/Environmental_Enrichment.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_enrichment.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/04_Cat_Science/Kitten_Development.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_development.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/04_Cat_Science/Multi_Cat_Dynamics.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_multi_dynamics.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/04_Cat_Science/Nutrition.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_nutrition.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/04_Cat_Science/Senior_Cat_Care.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_senior_care.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/04_Cat_Science/Sleep_Patterns.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_sleep.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/04_Cat_Science/Stress_Signals.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_vertical_stress.md`
+  | `{{BRAND_VERTICAL}}` |'
+section_05_competitors_7_pages: '| Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/05_Competitors/Competitor_Index.md` | `knowledge_index` | `N01_intelligence/knowledge/knowledge_index_competitors.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_MARKET}}` |
+
+  | `N04_knowledge/wiki/05_Competitors/CatMyPet.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_01.md`
+  | `{{BRAND_COMPETITOR_01}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/05_Competitors/Catit.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_02.md`
+  | `{{BRAND_COMPETITOR_02}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/05_Competitors/Jackson_Galaxy.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_03.md`
+  | `{{BRAND_COMPETITOR_03}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/05_Competitors/Petlove.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_04.md`
+  | `{{BRAND_COMPETITOR_04}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/05_Competitors/Tuft_Paw.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_05.md`
+  | `{{BRAND_COMPETITOR_05}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/05_Competitors/ZeeDog_ZeeCat.md` | `competitive_matrix` | `N01_intelligence/knowledge/kc_competitor_06.md`
+  | `{{BRAND_COMPETITOR_06}}`, `{{BRAND_VERTICAL}}` |'
+section_06_sources_4_pages: '| Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/06_Sources/Source_Index.md` | `knowledge_index` | `N04_knowledge/memory/knowledge_index_sources.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/06_Sources/Tier_1_Academic.md` | `rag_source` | `N04_knowledge/knowledge/rag_source_tier1_academic.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/06_Sources/Tier_2_Industry.md` | `rag_source` | `N04_knowledge/knowledge/rag_source_tier2_industry.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/06_Sources/Tier_3_Creative.md` | `rag_source` | `N04_knowledge/knowledge/rag_source_tier3_creative.md`
+  | `{{BRAND_VERTICAL}}` |'
+section_07_audience_2_pages: '| Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/07_Audience/Audience_Segments.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_audience_segments.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_ICP}}`, `{{BRAND_MARKET}}` |
+
+  | `N04_knowledge/wiki/07_Audience/ICP_Profile.md` | `knowledge_card` | `N04_knowledge/knowledge/kc_icp_profile.md` | `{{BRAND_ICP}}`,
+  `{{BRAND_VERTICAL}}`, `{{BRAND_MARKET}}` |'
+section_08_templates_3_pages: '| Path on branch | Kind | Target path Wave 2 | `{{BRAND_*}}` vars |
+
+  |----------------|------|---------------------|--------------------|
+
+  | `N04_knowledge/wiki/Templates/Template_Blog_Post.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_blog_post.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_VOICE}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/Templates/Template_Instagram_Post.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_instagram_post.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_VOICE}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/wiki/Templates/Template_Content_Review.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_content_review.md`
+  | `{{BRAND_VOICE}}`, `{{BRAND_VERTICAL}}` |
+
+
+  ---'
+q2_content_pipeline: '> Source: `N02_marketing/content_pipeline/` (40 files) > Commit: `[N02] feat: complete Q2 content pipeline
+  -- 91 IG posts + 26 blog articles`'
+instagram_week_schedules_13_files: '> Each week file contains 7 posts (6 feed + 1 story). Total: 91 IG posts across 13 weeks.
+
+
+  | Path | Kind | Target path | Notes |
+
+  |------|------|-------------|-------|
+
+  | `N02_marketing/content_pipeline/instagram/week_01.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_01.md`
+  | Theme, products, CTAs parameterized |
+
+  | `N02_marketing/content_pipeline/instagram/week_02.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_02.md`
+  | `{{BRAND_PRODUCT_*}}` per post |
+
+  | `N02_marketing/content_pipeline/instagram/week_03.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_03.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_04.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_04.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_05.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_05.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_06.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_06.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_07.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_07.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_08.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_08.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_09.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_09.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_10.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_10.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_11.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_11.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_12.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_12.md`
+  | -- |
+
+  | `N02_marketing/content_pipeline/instagram/week_13.md` | `schedule` | `N02_marketing/content_pipeline/instagram/tpl_week_13.md`
+  | -- |
+
+
+  > Brand vars per week file: `{{BRAND_NAME}}`, `{{BRAND_PERSONA}}`, `{{BRAND_PRODUCT_*}}`, `{{BRAND_VOICE}}`, `{{BRAND_VERTICAL}}`,
+  `{{BRAND_DOMAIN}}`'
+blog_articles_26_files: '> Each blog is a full-length article on a cat care / product topic. In Wave 2, each becomes a `prompt_template`
+  with brand placeholders.
+
+
+  | Path | Kind | Target path | Notes |
+
+  |------|------|-------------|-------|
+
+  | `N02_marketing/content_pipeline/blog/blog_01_estresse-felino-sinais.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_stress_signals.md`
+  | Topic: stress; `{{BRAND_PRODUCT_*}}` mentions |
+
+  | `N02_marketing/content_pipeline/blog/blog_02_donut-gato3-review.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_hero_product_review.md`
+  | `{{BRAND_PRODUCT_HERO}}`, `{{BRAND_NAME}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_03_enriquecimento-ambiental-7-passos.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_enrichment_steps.md`
+  | Evergreen; low brand-specificity |
+
+  | `N02_marketing/content_pipeline/blog/blog_04_cama-suspensa-janela-beneficios.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_product_category.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_05_hidratacao-felina-guia.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_care_guide.md`
+  | Evergreen template |
+
+  | `N02_marketing/content_pipeline/blog/blog_06_comedouros-elevados.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_product_benefits.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_07_escovacao-felina-guia.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_grooming.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_08_presentes-maes-gato.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_gifting_seasonal.md`
+  | `{{BRAND_PRODUCT_CATALOG}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_09_ambientacao-vertical.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_vertical_space.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_10_tapete-gelado-review.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_product_review.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_11_brincadeiras-caca.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_play_behavior.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_12_brinquedos-interativos-vs-tradicionais.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_product_comparison.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_13_casa-prova-gato.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_home_safety.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_14_tela-protecao-guia.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_safety_product.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_15_dessensibilizacao-viagens.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_behavioral_training.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_16_mochila-vs-caixa-transporte.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_product_versus.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_17_casal-com-gato-dicas.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_lifestyle_tips.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_18_mudanca-de-casa-com-gato.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_transition_guide.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_19_cuidados-inverno-guia.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_seasonal_care.md`
+  | `{{BRAND_REGION}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_20_melhores-camas-inverno.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_seasonal_product.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_21_protocolo-anti-fogos.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_event_protocol.md`
+  | `{{BRAND_REGION}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_22_produtos-noite-fogos.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_event_product.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_23_higiene-felina-guia.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_hygiene.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_24_melhores-escovas-comparativo.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_product_roundup.md`
+  | `{{BRAND_PRODUCT_*}}` |
+
+  | `N02_marketing/content_pipeline/blog/blog_25_ciencia-sono-felino.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_science_explainer.md`
+  | Evergreen |
+
+  | `N02_marketing/content_pipeline/blog/blog_26_top-10-produtos-trimestre.md` | `prompt_template` | `N02_marketing/content_pipeline/blog/tpl_blog_product_top10.md`
+  | `{{BRAND_PRODUCT_CATALOG}}` |
+
+
+  > Brand vars per blog: `{{BRAND_NAME}}`, `{{BRAND_VERTICAL}}`, `{{BRAND_VOICE}}`, `{{BRAND_DOMAIN}}`, `{{BRAND_PRODUCT_*}}`'
+content_pipeline_support_templates_n04: '| Path | Kind | Target path | Notes |
+
+  |------|------|-------------|-------|
+
+  | `N04_knowledge/content_pipeline/editorial_calendar_template.md` | `schedule` | `N04_knowledge/content_pipeline/tpl_editorial_calendar.md`
+  | `{{BRAND_QUARTER}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/content_pipeline/rubric_content_quality.md` | `knowledge_card` | `N04_knowledge/content_pipeline/kc_content_quality_rubric.md`
+  | `{{BRAND_VOICE}}` |
+
+  | `N04_knowledge/content_pipeline/taxonomy_content_gato3.md` | `knowledge_card` | `N04_knowledge/content_pipeline/kc_content_taxonomy.md`
+  | `{{BRAND_VERTICAL}}` |
+
+  | `N04_knowledge/content_pipeline/templates/tpl_blog_howto.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_blog_howto.md`
+  | Rename `GATO3` -> `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/content_pipeline/templates/tpl_blog_listicle.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_blog_listicle.md`
+  | Rename `GATO3` -> `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/content_pipeline/templates/tpl_caption_formula.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_caption_formula.md`
+  | `{{BRAND_VOICE}}`, `{{BRAND_NAME}}` |
+
+  | `N04_knowledge/content_pipeline/templates/tpl_instagram_carrossel.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_instagram_carrossel.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_PERSONA}}` |
+
+  | `N04_knowledge/content_pipeline/templates/tpl_instagram_feed_educativo.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_instagram_feed_educativo.md`
+  | `{{BRAND_VOICE}}` |
+
+  | `N04_knowledge/content_pipeline/templates/tpl_instagram_reel_script.md` | `prompt_template` | `N04_knowledge/content_pipeline/templates/tpl_instagram_reel_script.md`
+  | `{{BRAND_PERSONA}}`, `{{BRAND_VOICE}}` |
+
+  | `N04_knowledge/content_pipeline/xref_product_content.md` | `knowledge_card` | `N04_knowledge/content_pipeline/kc_product_content_xref.md`
+  | `{{BRAND_PRODUCT_CATALOG}}` |
+
+
+  ---'
+monetization: '> Source: `N06_commercial/content_pipeline/` (5 artifacts)
+
+  > Commit: `[N06] feat: content monetization strategy -- funnel, playbook, projections, attribution, promo calendar (5 artifacts)`
+
+
+  | Path | Kind | Target path | Notes |
+
+  |------|------|-------------|-------|
+
+  | `N06_commercial/content_pipeline/funnel_content_revenue.md` | `content_monetization` | `N06_commercial/content_pipeline/tpl_funnel_content_revenue.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_PRODUCT_CATALOG}}`, `{{BRAND_UTM_SOURCE}}` |
+
+  | `N06_commercial/content_pipeline/model_content_revenue.md` | `content_monetization` | `N06_commercial/content_pipeline/tpl_model_content_revenue.md`
+  | `{{BRAND_VERTICAL}}`, `{{BRAND_MARKET}}`, `{{BRAND_CURRENCY}}` |
+
+  | `N06_commercial/content_pipeline/calendar_promo_overlay.md` | `schedule` | `N06_commercial/content_pipeline/tpl_calendar_promo_overlay.md`
+  | `{{BRAND_NAME}}`, `{{BRAND_REGION}}`, `{{BRAND_VERTICAL}}` |
+
+  | `N06_commercial/content_pipeline/framework_attribution.md` | `cohort_analysis` | `N06_commercial/content_pipeline/tpl_framework_attribution.md`
+  | `{{BRAND_DOMAIN}}`, `{{BRAND_UTM_SOURCE}}`, `{{BRAND_GA4_ID}}` |
+
+  | `N06_commercial/content_pipeline/playbook_product_integration.md` | `sales_playbook` | `N06_commercial/content_pipeline/tpl_playbook_product_integration.md`
+  | `{{BRAND_PRODUCT_CATALOG}}`, `{{BRAND_VOICE}}`, `{{BRAND_NAME}}` |
+
+
+  ---'
+promo_calendar_attribution: '> Source: N06 content_pipeline (overlaps with monetization above; listed separately per handoff
+  spec)
+
+  > The calendar_promo_overlay and framework_attribution entries above cover this feature.
+
+
+  | Path | Kind | Target path | Notes |
+
+  |------|------|-------------|-------|
+
+  | `N06_commercial/content_pipeline/calendar_promo_overlay.md` | `schedule` | `N06_commercial/content_pipeline/tpl_calendar_promo_overlay.md`
+  | Promo dates -> `{{BRAND_PROMO_DATES}}` |
+
+  | `N06_commercial/content_pipeline/framework_attribution.md` | `cohort_analysis` | `N06_commercial/content_pipeline/tpl_framework_attribution.md`
+  | GA4/UTM config -> `{{BRAND_GA4_ID}}` |
+
+
+  ---'
+marketplace_audit: '> Source: `N05_operations/` (marketplace sync audit from commit `[N05] audit: marketplace integration
+  map + sync health + MARKETPLACE_SYNC spec`)
+
+
+  | Path | Kind | Target path | Notes |
+
+  |------|------|-------------|-------|
+
+  | `N05_operations/specs/spec_marketplace_sync.md` | `e2e_eval` | `N05_operations/quality/tpl_spec_marketplace_sync.md` |
+  `{{BRAND_MARKETPLACE_A}}`, `{{BRAND_MARKETPLACE_B}}`, `{{BRAND_ERP}}` |
+
+  | `N05_operations/reports/sync_health_gato3.md` | `competitive_matrix` | `N01_intelligence/knowledge/tpl_marketplace_sync_health.md`
+  | `{{BRAND_MARKETPLACE_A/B/C}}`, `{{BRAND_ERP}}` |
+
+  | `N05_operations/output/sync_fix_report_20260410.md` | `case_study` | `N05_operations/output/tpl_sync_fix_case_study.md`
+  | `{{BRAND_ERP}}`, `{{BRAND_MARKETPLACE_*}}` |
+
+
+  > Additional N06 ROI / Pricing artifacts (from output/ directory):
+
+
+  | Path | Kind | Target path | Notes |
+
+  |------|------|-------------|-------|
+
+  | `N06_commercial/output/roi_content_factory.md` | `roi_calculator` | `N06_commercial/output/tpl_roi_content_factory.md`
+  | `{{BRAND_TEAM_SIZE}}`, `{{BRAND_HOURLY_RATE}}`, `{{BRAND_CURRENCY}}` |
+
+  | `N06_commercial/output/content_factory_pricing.md` | `subscription_tier` | `N06_commercial/output/tpl_subscription_tiers.md`
+  | `{{BRAND_CURRENCY}}`, `{{BRAND_TIER_NAMES}}` |
+
+  | `N06_commercial/output/api_access_pricing.md` | `subscription_tier` | `N06_commercial/output/tpl_api_access_tiers.md`
+  | `{{BRAND_CURRENCY}}`, `{{BRAND_RATE_LIMITS}}` |
+
+
+  ---'
+unmapped: '| Path | Why | Suggestion |
+
+  |------|-----|------------|
+
+  | `N01_research/output/data/*.json` (10 files) | Raw CRM data for GATO3-specific businesses; not a CEX template kind | Delete
+  from distilled repo; replace with `entity_memory` template stub |
+
+  | `tmp*.html/tmp*.py/tmp*.txt` (5 files) | Temporary build artifacts; no CEX kind, no frontmatter | Delete; these are session
+  scratch files |
+
+  | `.pi/agents/*.md` (6 files) | Legacy PI wrapper agent configs; superseded by Claude-native boot system | Archive to `.cex/archive/pi_legacy/`;
+  not distillable as standard kind |
+
+  | `_tmp_crm_data.json` | Root-level CRM data dump (GATO3-specific businesses) | Delete from distilled repo |
+
+
+  ---'
+kind_usage_histogram: '| kind | citations |
+
+  |------|-----------|
+
+  | `knowledge_card` | 36 |
+
+  | `prompt_template` | 37 |
+
+  | `schedule` | 17 |
+
+  | `competitive_matrix` | 7 |
+
+  | `content_monetization` | 2 |
+
+  | `rag_source` | 3 |
+
+  | `knowledge_index` | 6 |
+
+  | `knowledge_graph` | 1 |
+
+  | `cohort_analysis` | 2 |
+
+  | `sales_playbook` | 1 |
+
+  | `e2e_eval` | 2 |
+
+  | `case_study` | 1 |
+
+  | `roi_calculator` | 1 |
+
+  | `subscription_tier` | 2 |
+
+  | `workflow` | 1 |
+
+  | TOTAL | 119 |
+
+
+  ---'
+brand_variables_master_list: '> All `{{BRAND_*}}` placeholders found across distillable artifacts. Wave 2 builders must replace
+  each with a live value from `brand_config.yaml`.
+
+
+  | Placeholder | Example value (GATO3) | Description |
+
+  |-------------|----------------------|-------------|
+
+  | `{{BRAND_NAME}}` | GATO3 | Brand display name |
+
+  | `{{BRAND_SLUG}}` | gato3 | URL-safe slug |
+
+  | `{{BRAND_DOMAIN}}` | gatoaocubo3.com | Root domain |
+
+  | `{{BRAND_VERTICAL}}` | pet / cat | Industry vertical |
+
+  | `{{BRAND_MARKET}}` | Brazil / ABC region | Primary market |
+
+  | `{{BRAND_REGION}}` | Santo Andre, ABC-SP | Geographic region |
+
+  | `{{BRAND_CURRENCY}}` | BRL | Currency code |
+
+  | `{{BRAND_VOICE}}` | warm, educational, cat-coded | Voice descriptor |
+
+  | `{{BRAND_PERSONA}}` | Ro (Ronronalda) | Brand mascot / persona name |
+
+  | `{{BRAND_TAGLINE}}` | Educacao que acalma, solucoes que funcionam, casa que continua elegante | Brand tagline |
+
+  | `{{BRAND_PRIMARY_COLOR}}` | #C71585 | Primary color hex |
+
+  | `{{BRAND_AESTHETIC}}` | PB minimalista | Visual aesthetic |
+
+  | `{{BRAND_FONT}}` | (specify) | Brand font |
+
+  | `{{BRAND_UVP}}` | (specify) | Unique value proposition |
+
+  | `{{BRAND_MISSION}}` | (specify) | Brand mission |
+
+  | `{{BRAND_ICP}}` | cat owner, home-focused | Ideal customer profile |
+
+  | `{{BRAND_NICHE}}` | premium cat accessories | Niche descriptor |
+
+  | `{{BRAND_PERSONA}}` | Ro | Persona name |
+
+  | `{{BRAND_PRODUCT_HERO}}` | Donut GATO3 | Hero product name |
+
+  | `{{BRAND_PRODUCT_02..09}}` | Cama Suspensa, etc. | Product names (catalog) |
+
+  | `{{BRAND_PRODUCT_CATALOG}}` | (comma-list) | Full product catalog |
+
+  | `{{BRAND_COMPETITOR_01..06}}` | CatMyPet, Catit, etc. | Competitor names |
+
+  | `{{BRAND_QUARTER}}` | Q2 2026 | Content quarter |
+
+  | `{{BRAND_UTM_SOURCE}}` | instagram / blog | UTM source |
+
+  | `{{BRAND_GA4_ID}}` | G-XXXXXXXX | Google Analytics 4 ID |
+
+  | `{{BRAND_PROMO_DATES}}` | (comma-list of dates) | Promotional dates |
+
+  | `{{BRAND_TEAM_SIZE}}` | 2 | Content team headcount |
+
+  | `{{BRAND_HOURLY_RATE}}` | 80 | Team hourly rate (BRL) |
+
+  | `{{BRAND_TIER_NAMES}}` | Free, Pro, Enterprise | Subscription tier names |
+
+  | `{{BRAND_RATE_LIMITS}}` | 100/1000/unlimited | API rate limits per tier |
+
+  | `{{BRAND_MARKETPLACE_A}}` | Shopify | Primary marketplace |
+
+  | `{{BRAND_MARKETPLACE_B}}` | Mercado Livre | Secondary marketplace |
+
+  | `{{BRAND_ERP}}` | Bling | ERP system |
+
+
+  ---'
+validation_checks:
+- '[x] All kinds cited exist in `.cex/kinds_meta.json` (15/15 verified via Python check)'
+- '[x] `kinds_invented == 0` (no new kinds created)'
+- '[x] No brand-specific secrets copied into report (only placeholder names used)'
+- '[x] At least 15 features/artifacts mapped (119 citations across 5 sections)'
+- '[x] All 5 major feature groups covered (wiki, q2_pipeline, monetization, promo_calendar, marketplace_audit)'
