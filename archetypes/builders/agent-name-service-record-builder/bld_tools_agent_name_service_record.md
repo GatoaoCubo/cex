@@ -4,7 +4,7 @@ id: bld_tools_agent_name_service_record
 pillar: P04
 llm_function: CALL
 purpose: Tool inventory for building, validating, and publishing IETF ANS registry records
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Tools"
 version: "1.0.0"
 author: wave7_n05
