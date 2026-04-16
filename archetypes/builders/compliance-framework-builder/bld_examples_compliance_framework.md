@@ -4,7 +4,7 @@ id: bld_examples_compliance_framework
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of compliance_framework artifacts
-quality: null
+quality: 8.9
 title: "Examples Compliance Framework"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -27,15 +27,15 @@ regulatory_scope: [EU AI Act, GDPR, CCPA]
 ---
 
 ### Regulatory Mapping
-- **EU AI Act (Art. 13):** High-risk AI systems require transparency in data processing.  
-  → Mapped to: Data logging module (v1.2), user consent dashboard.  
-- **GDPR (Art. 22):** Right to object to automated decision-making.  
-  → Mapped to: Manual override switch in scoring algorithms.  
-- **CCPA (§ 999.313):** Consumer right to access data used for AI training.  
+- **EU AI Act (Art. 13):** High-risk AI systems require transparency in data processing.
+  → Mapped to: Data logging module (v1.2), user consent dashboard.
+- **GDPR (Art. 22):** Right to object to automated decision-making.
+  → Mapped to: Manual override switch in scoring algorithms.
+- **CCPA (§ 999.313):** Consumer right to access data used for AI training.
   → Mapped to: Data export API endpoint (v2.1).
 
 ### Attestation
-> This system complies with mapped regulations as of 2023-10-01.  
+> This system complies with mapped regulations as of 2023-10-01.
 > Signed by: [Compliance Officer Name], [Date]
 ```
 
@@ -49,8 +49,8 @@ date: 2023-09-15
 ---
 
 ### Regulatory Mapping
-- "Data must be encrypted": Implemented via AES-256.  
-- "User consent required": Handled by checkbox on signup.  
+- "Data must be encrypted": Implemented via AES-256.
+- "User consent required": Handled by checkbox on signup.
 ```
 ## Why it fails
 No explicit regulatory scope (e.g., GDPR, EU AI Act) is defined. The framework lacks traceability to specific laws, making it impossible to verify compliance or update with new regulations.
@@ -66,8 +66,8 @@ regulatory_scope: [Internal Safety Policy]
 ---
 
 ### Regulatory Mapping
-- "No unattended AI deployment": Requires 24/7 monitoring.  
-- "Annual risk assessment": Conducted by Q4 each year.  
+- "No unattended AI deployment": Requires 24/7 monitoring.
+- "Annual risk assessment": Conducted by Q4 each year.
 ```
 ## Why it fails
 The framework conflates regulatory compliance with internal safety policies (not laws). It violates the boundary by focusing on organizational rules rather than external regulatory requirements.
