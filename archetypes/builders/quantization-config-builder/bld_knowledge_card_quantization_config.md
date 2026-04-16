@@ -4,7 +4,7 @@ id: bld_knowledge_card_quantization_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for quantization_config production
-quality: null
+quality: 9.1
 title: "Knowledge Card Quantization Config"
 version: "1.0.0"
 author: hybrid_review3_n05
