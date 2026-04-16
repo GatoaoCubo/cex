@@ -4,7 +4,7 @@ id: bld_output_template_content_filter
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for content_filter production
-quality: null
+quality: 9.1
 title: "Output Template Content Filter"
 version: "1.1.0"
 author: n06_hybrid_review
