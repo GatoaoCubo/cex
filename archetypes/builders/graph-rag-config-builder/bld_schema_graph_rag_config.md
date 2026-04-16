@@ -4,7 +4,7 @@ id: bld_schema_graph_rag_config
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for graph_rag_config
-quality: null
+quality: 9.1
 title: "Schema Graph Rag Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
