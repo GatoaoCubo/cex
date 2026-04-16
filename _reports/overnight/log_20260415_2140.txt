@@ -94,3 +94,5 @@
 [00:10:35] Phase B cycle 39 mode=auto
 [00:10:54] Phase B cycle 39 done. Sleeping 180 s.
 [00:13:54] Phase B cycle 40 mode=evolve
+[00:13:57] Phase B cycle 40 done. Sleeping 180 s.
+[00:16:57] Phase B cycle 41 mode=auto
