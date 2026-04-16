@@ -3,8 +3,9 @@ id: kc_api_reference
 kind: knowledge_card
 title: API Reference
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # API Reference
