@@ -3,8 +3,9 @@ id: kc_graph_rag_config
 kind: knowledge_card
 title: Graph RAG Configuration
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 0.97
 ---
 
 # Graph RAG Configuration
