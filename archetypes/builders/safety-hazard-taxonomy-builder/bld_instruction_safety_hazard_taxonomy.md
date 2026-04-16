@@ -4,7 +4,7 @@ id: bld_instruction_safety_hazard_taxonomy
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for safety_hazard_taxonomy
-quality: null
+quality: 8.9
 title: "Instruction Safety Hazard Taxonomy"
 version: "1.0.0"
 author: n01_wave7
