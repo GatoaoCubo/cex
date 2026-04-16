@@ -4,7 +4,7 @@ id: p03_sp_crew_template_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining crew_template-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
