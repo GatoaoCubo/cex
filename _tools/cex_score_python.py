@@ -26,6 +26,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from typing import Any, Sequence
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "_tools"))
@@ -86,7 +87,9 @@ def _check_h07_ascii_if_code(path_str, content):
         return False
 
 
-def run_gates(path_str, content, fm_str, body):
+def run_gates(
+    path_str: str, content: str, fm_str: str | None, body: str
+) -> tuple[int, int, list[str]]:
     """Run all H01-H07 gates. Returns (pass_count, total, failed_gates)."""
     gates = [
         ("H01", _check_h01_frontmatter(content, fm_str)),
@@ -106,7 +109,7 @@ def run_gates(path_str, content, fm_str, body):
 # Fast Scorer (L1 + L2 only, zero LLM tokens)
 # ================================================================
 
-def score_fast(path, verbose=False):
+def score_fast(path: str | os.PathLike[str], verbose: bool = False) -> dict[str, Any]:
     """Score artifact using L1 (structural) + L2 (rubric) only.
 
     Returns dict:
@@ -185,7 +188,7 @@ def score_fast(path, verbose=False):
     }
 
 
-def needs_llm(result):
+def needs_llm(result: dict[str, Any]) -> bool:
     """Check if a score_fast result warrants L3 semantic scoring."""
     return result.get("needs_llm", False)
 
@@ -194,7 +197,9 @@ def needs_llm(result):
 # Batch Scorer
 # ================================================================
 
-def score_batch(paths, verbose=False):
+def score_batch(
+    paths: Sequence[str | os.PathLike[str]], verbose: bool = False
+) -> list[dict[str, Any]]:
     """Score multiple artifacts. Returns list of result dicts."""
     results = []
     for p in paths:
@@ -228,7 +233,7 @@ def _find_artifacts(targets):
     return files
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="CEX Python-Only Scorer (L1+L2, zero LLM tokens)"
     )
