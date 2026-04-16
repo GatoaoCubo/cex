@@ -4,7 +4,7 @@ id: ai-rmf-profile-builder
 pillar: P11
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for ai_rmf_profile
-quality: null
+quality: 8.9
 title: "Type Builder AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
