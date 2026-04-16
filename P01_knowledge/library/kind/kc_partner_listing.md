@@ -3,8 +3,9 @@ id: kc_partner_listing
 kind: knowledge_card
 title: Partner Directory Listing
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Partner Directory Listing Specification
