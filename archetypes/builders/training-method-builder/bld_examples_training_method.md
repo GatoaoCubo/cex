@@ -3,7 +3,7 @@ kind: examples
 id: bld_examples_training_method
 pillar: P07
 llm_function: GOVERN
-quality: null
+quality: 9.1
 title: "Examples Training Method"
 version: "1.0.0"
 author: n05_builder
