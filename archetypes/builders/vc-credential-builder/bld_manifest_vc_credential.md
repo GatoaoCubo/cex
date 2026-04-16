@@ -4,7 +4,7 @@ id: vc-credential-builder
 pillar: P10
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for vc_credential
-quality: null
+quality: 8.9
 title: "Type Builder VC Credential"
 version: "1.0.0"
 author: n04_wave7
