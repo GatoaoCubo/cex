@@ -4,7 +4,7 @@ id: bld_config_model_registry
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for model_registry production
-quality: null
+quality: 8.6
 title: "Config Model Registry"
 version: "1.0.0"
 author: wave1_builder_gen
