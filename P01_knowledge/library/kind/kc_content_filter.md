@@ -3,8 +3,9 @@ id: kc_content_filter
 kind: knowledge_card
 title: Content Filter Pipeline Configuration
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 1.0
 ---
 
 # Content Filter Pipeline Configuration
