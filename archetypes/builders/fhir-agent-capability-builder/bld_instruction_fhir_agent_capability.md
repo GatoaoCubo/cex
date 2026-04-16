@@ -4,7 +4,7 @@ id: bld_instruction_fhir_agent_capability
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for fhir_agent_capability
-quality: null
+quality: 8.9
 title: "Instruction FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
