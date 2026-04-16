@@ -13852,3 +13852,20 @@ et
 2026-04-16 02:33:56	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_quality_gate.md	2	0.0	0.00	crash	compile fail after: analyzed: add_hard_gates: quality gates need hard pass/fail checks
 2026-04-16 02:37:06	N04_knowledge\knowledge\p01_fse_kc_creation.md	0	9.1	0.96	skip	already at target
 2026-04-16 02:37:06	N06_commercial\architecture\agent_card_commercial.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\N06_commercial\architecture\agent_card_commercial.md	1	9.1	1.00	keep	tldr flagged for manual review
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_diff_strategy.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_diff_strategy.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_edtech_vertical.md	1	0.0	0.00	crash	compile fail after: added density_score: 0.94
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_edtech_vertical.md	2	0.0	0.00	crash	compile fail after: added density_score: 0.94
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_fintech_vertical.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_fintech_vertical.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_legal_vertical.md	1	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P01_knowledge\library\kind\kc_legal_vertical.md	2	0.0	0.00	crash	compile fail after: added density_score: 1.0
+2026-04-16 02:40:17	C:\Users\CEX\Documents\GitHub\cex\P09_config\p09_cb_template.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-16 02:40:18	C:\Users\CEX\Documents\GitHub\cex\P09_config\p09_cb_template.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-16 02:40:18	C:\Users\CEX\Documents\GitHub\cex\P09_config\p09_ec_template.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-16 02:40:18	C:\Users\CEX\Documents\GitHub\cex\P09_config\p09_ec_template.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-16 02:40:18	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_bugloop.md	1	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-16 02:40:18	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_bugloop.md	2	0.0	0.00	crash	compile fail after: polished formatting (whitespace cleanup)
+2026-04-16 02:40:18	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_quality_gate.md	1	0.0	0.00	crash	compile fail after: analyzed: add_hard_gates: quality gates need hard pass/fail checks
+2026-04-16 02:40:18	C:\Users\CEX\Documents\GitHub\cex\P11_feedback\templates\tpl_quality_gate.md	2	0.0	0.00	crash	compile fail after: analyzed: add_hard_gates: quality gates need hard pass/fail checks
