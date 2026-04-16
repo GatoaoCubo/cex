@@ -4,7 +4,7 @@ id: bld_knowledge_card_expansion_play
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for expansion_play production
-quality: null
+quality: 9.2
 title: "Knowledge Card Expansion Play"
 version: "1.0.0"
 author: wave6_n06
