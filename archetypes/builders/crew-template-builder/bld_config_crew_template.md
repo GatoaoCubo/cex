@@ -4,7 +4,7 @@ id: bld_config_crew_template
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for crew_template production
-quality: null
+quality: 8.7
 title: "Config Crew Template"
 version: "1.0.0"
 author: n03_wave8_builder
