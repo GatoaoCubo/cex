@@ -32,6 +32,7 @@ import importlib
 import time
 from pathlib import Path
 from datetime import datetime
+from typing import Any
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -43,14 +44,14 @@ sys.path.insert(0, str(CEX_ROOT / "_tools"))
 RESULTS = []
 
 
-def record(layer, check, status, detail=""):
+def record(layer: str, check: str, status: str, detail: str = "") -> None:
     RESULTS.append({"layer": layer, "check": check, "status": status, "detail": detail})
     sym = {"WIRED": "[OK]", "BROKEN": "[!!]", "PHANTOM": "[??]", "ORPHAN": "[~~]"}
     print(f"  {sym.get(status, '[--]')} {layer}/{check}: {status}  {detail}")
 
 
 # --- L0: Genesis & Config ---
-def audit_L0():
+def audit_L0() -> None:
     print("\n=== L0: Genesis & Config ===")
     km = CEX_ROOT / ".cex" / "kinds_meta.json"
     if km.exists():
@@ -79,7 +80,7 @@ def audit_L0():
 
 
 # --- L1: Pillars ---
-def audit_L1():
+def audit_L1() -> None:
     print("\n=== L1: Pillars (P01-P12) ===")
     for i in range(1, 13):
         pdir = None
@@ -103,7 +104,7 @@ def audit_L1():
 
 
 # --- L2: Nuclei ---
-def audit_L2():
+def audit_L2() -> None:
     print("\n=== L2: Nuclei (N01-N07) ===")
     expected = ["agents", "architecture", "compiled", "feedback", "knowledge",
                 "memory", "orchestration", "output", "prompts", "schemas"]
@@ -132,7 +133,7 @@ def audit_L2():
 
 
 # --- L3: Archetypes ---
-def audit_L3():
+def audit_L3() -> None:
     print("\n=== L3: Archetypes ===")
     builders_dir = CEX_ROOT / "archetypes" / "builders"
     bdirs = [d for d in builders_dir.iterdir() if d.is_dir() and d.name.endswith("-builder")]
@@ -153,7 +154,7 @@ def audit_L3():
 
 
 # --- L4: Knowledge Library ---
-def audit_L4():
+def audit_L4() -> None:
     print("\n=== L4: Knowledge Library ===")
     kind_dir = CEX_ROOT / "P01_knowledge" / "library" / "kind"
     domain_dir = CEX_ROOT / "P01_knowledge" / "library" / "domain"
@@ -176,7 +177,7 @@ def audit_L4():
 
 
 # --- L5: Tools ---
-def audit_L5():
+def audit_L5() -> None:
     print("\n=== L5: Tools ===")
     cex_tools = list((CEX_ROOT / "_tools").glob("cex_*.py"))
     record("L5", "cex_tools", "WIRED" if len(cex_tools) >= 45 else "BROKEN", f"{len(cex_tools)} tools")
@@ -213,7 +214,7 @@ def audit_L5():
 
 
 # --- WIRES: 7 OpenClaude Integrations ---
-def audit_wires():
+def audit_wires() -> None:
     print("\n=== WIRES: 7 OpenClaude Integrations ===")
     try:
         import cex_crew_runner as cr
@@ -296,7 +297,7 @@ def audit_wires():
 
 
 # --- CASCADES: 7 Dependency Chains ---
-def audit_cascades():
+def audit_cascades() -> None:
     print("\n=== CASCADES: 7 Dependency Chains ===")
 
     try:
@@ -340,7 +341,7 @@ def audit_cascades():
 
 
 # --- L6: Governance ---
-def audit_L6():
+def audit_L6() -> None:
     print("\n=== L6: Governance ===")
     rules = list((CEX_ROOT / ".claude" / "rules").glob("*.md"))
     record("L6", "rules", "WIRED" if len(rules) >= 9 else "BROKEN", f"{len(rules)}")
@@ -352,7 +353,7 @@ def audit_L6():
 
 
 # --- HEAL ---
-def generate_heal_plan():
+def generate_heal_plan() -> list[dict[str, Any]]:
     broken = [r for r in RESULTS if r["status"] in ("BROKEN", "PHANTOM")]
     if not broken:
         print("\n  *** Nothing to fix -- all checks passed ***")
@@ -384,7 +385,7 @@ def generate_heal_plan():
 
 
 # --- REPORT ---
-def print_report():
+def print_report() -> None:
     w = sum(1 for r in RESULTS if r["status"] == "WIRED")
     b = sum(1 for r in RESULTS if r["status"] == "BROKEN")
     p = sum(1 for r in RESULTS if r["status"] == "PHANTOM")
@@ -410,7 +411,7 @@ def print_report():
 
 
 # --- MAIN ---
-def main():
+def main() -> None:
     known_modes = {"audit", "wires", "cascade", "heal", "loop"}
     if len(sys.argv) > 1 and not sys.argv[1].startswith("-") and sys.argv[1] not in known_modes:
         print("Usage: cex_flywheel_audit.py [audit|wires|cascade|heal|loop]")
