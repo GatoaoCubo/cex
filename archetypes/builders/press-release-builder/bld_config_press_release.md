@@ -4,7 +4,7 @@ id: bld_config_press_release
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Runtime configuration for the press_release builder including naming, paths, limits, and hooks
-quality: null
+quality: 9.1
 title: "Press Release Builder Config"
 version: "1.0.0"
 author: n02_wave6
