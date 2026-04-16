@@ -4,7 +4,7 @@ id: p11_qg_model_architecture
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for model_architecture
-quality: null
+quality: 9.0
 title: "Quality Gate: model_architecture"
 version: "1.0.0"
 author: n02_hybrid_review3
