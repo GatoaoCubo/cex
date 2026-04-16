@@ -4,7 +4,7 @@ id: p03_sp_consolidation_policy_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining consolidation_policy-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt: consolidation_policy-builder"
 version: "2.0.0"
 author: n06_commercial
