@@ -4,7 +4,7 @@ id: bld_examples_pricing_page
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of pricing_page artifacts
-quality: null
+quality: 9.0
 title: "Examples Pricing Page"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -33,8 +33,8 @@ description: "Compare plans to find the right fit for your team"
 | Priority Support     | Email                  | 24/7 Chat            | Dedicated Account   |
 | Team Members         | 1                      | 10                   | Unlimited           |
 
-**Why upgrade?**  
-Pro plan users report 40% faster project completion. Enterprise customers get custom workflows and API access.  
+**Why upgrade?**
+Pro plan users report 40% faster project completion. Enterprise customers get custom workflows and API access.
 --> [Start free trial](#) or [Contact sales](#)
 
 ## Anti-Example 1: Missing clear CTAs
@@ -51,7 +51,7 @@ Pro plan users report 40% faster project completion. Enterprise customers get cu
 
 *Choose the right plan for your needs*
 
-## Why it fails  
+## Why it fails
 No clear call-to-action buttons or links. Users can't easily convert without knowing where to click.
 
 ## Anti-Example 2: Vague value propositions
@@ -69,5 +69,5 @@ No clear call-to-action buttons or links. Users can't easily convert without kno
 
 *Find the plan that matches your needs*
 
-## Why it fails  
+## Why it fails
 Features are named generically ("Feature A") without explaining their value. Users can't understand what differentiates tiers.
