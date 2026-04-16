@@ -4,7 +4,7 @@ id: bld_system_prompt_agent_name_service_record
 pillar: P03
 llm_function: BECOME
 purpose: LLM persona and behavioral rules for the ANS/AgentDNS registry record builder
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- System Prompt"
 version: "1.0.0"
 author: wave7_n05
