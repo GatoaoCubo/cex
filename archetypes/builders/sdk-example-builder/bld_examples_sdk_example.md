@@ -4,7 +4,7 @@ id: bld_examples_sdk_example
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of sdk_example artifacts
-quality: null
+quality: 8.9
 title: "Examples Sdk Example"
 version: "1.0.0"
 author: wave1_builder_gen_v2
