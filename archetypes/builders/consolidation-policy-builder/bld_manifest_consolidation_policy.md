@@ -4,7 +4,7 @@ id: consolidation-policy-builder
 pillar: P10
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for consolidation_policy
-quality: null
+quality: 8.9
 title: "Manifest: consolidation_policy-builder"
 version: "2.0.0"
 author: n06_commercial
