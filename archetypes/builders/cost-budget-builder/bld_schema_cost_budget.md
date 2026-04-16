@@ -5,7 +5,7 @@ pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for cost_budget
 pattern: TEMPLATE derives from this. CONFIG restricts this.
-quality: null
+quality: 9.0
 title: "Schema Cost Budget"
 version: "1.0.0"
 author: n03_builder
