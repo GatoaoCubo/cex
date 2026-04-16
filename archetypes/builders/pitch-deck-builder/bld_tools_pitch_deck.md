@@ -4,7 +4,7 @@ id: bld_tools_pitch_deck
 pillar: P04
 llm_function: CALL
 purpose: Tools available for pitch_deck production
-quality: null
+quality: 8.9
 title: "Tools Pitch Deck"
 version: "1.0.1"
 author: n02_marketing
