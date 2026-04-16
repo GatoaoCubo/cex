@@ -4,7 +4,7 @@ id: bld_examples_self_improvement_loop
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of self_improvement_loop artifacts
-quality: null
+quality: 8.9
 title: "Examples Self Improvement Loop"
 version: "1.0.0"
 author: wave1_builder_gen_v2
