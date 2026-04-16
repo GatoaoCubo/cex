@@ -4,7 +4,7 @@ id: bld_output_template_c2pa_manifest
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for c2pa_manifest production
-quality: null
+quality: 8.9
 title: "Output Template C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
