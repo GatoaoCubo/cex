@@ -4,7 +4,7 @@ id: bld_output_template_fhir_agent_capability
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for fhir_agent_capability production
-quality: null
+quality: 9.1
 title: "Output Template FHIR Agent Capability"
 version: "1.0.0"
 author: n06_wave7
