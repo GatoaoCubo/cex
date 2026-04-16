@@ -3,6 +3,7 @@
 """CEX Kind Register -- Add a new kind to the taxonomy in one command."""
 import argparse, json, re, sys
 from pathlib import Path
+from typing import Any
 
 CEX_ROOT = Path(__file__).resolve().parent.parent
 KINDS_META = CEX_ROOT / ".cex" / "kinds_meta.json"
@@ -14,18 +15,26 @@ PILLAR_DIRS = {}
 for _d in sorted(CEX_ROOT.glob("P[0-9][0-9]_*")):
     if _d.is_dir(): PILLAR_DIRS[_d.name[:3]] = _d.name
 
-def load_json(p):
+def load_json(p: Path) -> Any:
     with open(p, encoding="utf-8") as f: return json.load(f)
 
-def save_json(p, data):
+def save_json(p: Path, data: dict[str, Any]) -> None:
     with open(p, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(data.items())), f, indent=2, ensure_ascii=False)
         f.write(chr(10))
 
-def rd(p): return Path(p).read_text(encoding="utf-8")
-def wr(p, s): Path(p).write_text(s, encoding="utf-8")
+def rd(p: Path) -> str: return Path(p).read_text(encoding="utf-8")
+def wr(p: Path, s: str) -> None: Path(p).write_text(s, encoding="utf-8")
 
-def reg_meta(kind, pillar, fn, desc, max_b, boundary, dry):
+def reg_meta(
+    kind: str,
+    pillar: str,
+    fn: str,
+    desc: str,
+    max_b: int,
+    boundary: str,
+    dry: bool,
+) -> bool:
     meta = load_json(KINDS_META)
     if kind in meta: print(f"  [SKIP] kinds_meta: exists"); return False
     nm = pillar.lower() + "_" + kind + "_{{topic}}.md + .yaml"
@@ -35,7 +44,14 @@ def reg_meta(kind, pillar, fn, desc, max_b, boundary, dry):
     meta[kind] = entry; save_json(KINDS_META, meta)
     print("  [OK]  kinds_meta: added"); return True
 
-def reg_schema(kind, pillar, desc, max_b, boundary, dry):
+def reg_schema(
+    kind: str,
+    pillar: str,
+    desc: str,
+    max_b: int,
+    boundary: str,
+    dry: bool,
+) -> bool:
     path = CEX_ROOT / PILLAR_DIRS[pillar] / "_schema.yaml"
     content = rd(path)
     pat = r"^\s+" + kind + ":"
@@ -73,7 +89,7 @@ def reg_schema(kind, pillar, desc, max_b, boundary, dry):
 
     print("  [OK]  _schema: added"); return True
 
-def reg_ttt(kind, pillar, dry):
+def reg_ttt(kind: str, pillar: str, dry: bool) -> bool:
     content = rd(TYPE_TO_TPL)
     if re.search(rf"^{kind}:", content, re.MULTILINE):
         print("  [SKIP] TYPE_TO_TPL: exists"); return False
@@ -91,7 +107,7 @@ def reg_ttt(kind, pillar, dry):
     wr(TYPE_TO_TPL, chr(10).join(ll))
     print("  [OK]  TYPE_TO_TPL: added"); return True
 
-def reg_motor(kind, pillar, fn, dry):
+def reg_motor(kind: str, pillar: str, fn: str, dry: bool) -> bool:
     content = rd(MOTOR_PY)
     check_str = '"' + kind + '": ['
     if check_str in content:
@@ -120,7 +136,7 @@ def reg_motor(kind, pillar, fn, dry):
     wr(MOTOR_PY, chr(10).join(ll))
     print(f"  [OK]  Motor: added {len(entries)} entries"); return True
 
-def validate():
+def validate() -> int:
     meta = set(load_json(KINDS_META).keys())
     ttt = set()
     for l in rd(TYPE_TO_TPL).split(chr(10)):
@@ -139,7 +155,7 @@ def validate():
     if not g1 and not g2: print("  [OK]  All registries in sync")
     return 0 if (not g1 and not g2) else 1
 
-def list_kinds():
+def list_kinds() -> None:
     meta = load_json(KINDS_META)
     print(f"{'Kind':<30} {'Pillar':<6} {'Fn':<12} {'MaxB':<6} Description")
     print("-" * 95)
@@ -149,7 +165,7 @@ def list_kinds():
         print(f"{k:<30} {d['pillar']:<6} {d['llm_function']:<12} {d['max_bytes']:<6} {desc}")
     print(f"Total: {len(meta)} kinds")
 
-def main():
+def main() -> None:
     ap = argparse.ArgumentParser(description="CEX Kind Register")
     ap.add_argument("--kind"); ap.add_argument("--pillar", choices=VALID_PILLARS)
     ap.add_argument("--function", choices=VALID_FNS)
