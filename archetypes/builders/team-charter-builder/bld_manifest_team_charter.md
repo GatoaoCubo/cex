@@ -4,7 +4,7 @@ id: team-charter-builder
 pillar: P12
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for team_charter
-quality: null
+quality: 8.9
 title: "Type Builder Team Charter"
 version: "1.0.0"
 author: n06_wave8
