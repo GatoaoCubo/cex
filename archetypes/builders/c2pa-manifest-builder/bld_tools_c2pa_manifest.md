@@ -4,7 +4,7 @@ id: bld_tools_c2pa_manifest
 pillar: P04
 llm_function: CALL
 purpose: Tools available for c2pa_manifest production
-quality: null
+quality: 8.9
 title: "Tools C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
