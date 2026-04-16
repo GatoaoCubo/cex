@@ -4,7 +4,7 @@ id: bld_architecture_nps_survey
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of nps_survey -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Nps Survey"
 version: "1.0.0"
 author: n05_wave6
