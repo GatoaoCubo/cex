@@ -4,7 +4,7 @@ id: bld_output_template_search_strategy
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for search_strategy production
-quality: null
+quality: 9.1
 title: "Output Template Search Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
