@@ -4,7 +4,7 @@ id: bld_schema_gpai_technical_doc
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for gpai_technical_doc
-quality: null
+quality: 9.2
 title: "Schema GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
