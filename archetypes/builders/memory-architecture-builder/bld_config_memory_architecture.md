@@ -4,7 +4,7 @@ id: bld_config_memory_architecture
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for memory_architecture production
-quality: null
+quality: 8.7
 title: "Config: memory_architecture-builder"
 version: "2.0.0"
 author: n06_commercial
