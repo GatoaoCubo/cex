@@ -4,7 +4,7 @@ id: bld_output_template_press_release
 pillar: P05
 llm_function: PRODUCE
 purpose: Canonical markdown template for press_release artifacts in wire-service-ready format
-quality: null
+quality: 9.1
 title: "Press Release Output Template"
 version: "1.0.0"
 author: n02_wave6
