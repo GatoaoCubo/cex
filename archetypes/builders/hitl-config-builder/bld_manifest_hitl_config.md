@@ -14,7 +14,7 @@ keywords: [hitl, human-review, escalation, approval, confidence, threshold, time
 triggers: ["configure human review", "add approval gate", "escalation chain", "human in the loop", "review trigger"]
 capabilities: >
   L1: Specialist in building hitl_config artifacts -- human-in-the-loop approval flow configurations. L2: Define review triggers, escalation chains, approval flows, timeout behavior, and fallback actions. L3: When user needs to configure when AI outputs pause for human judgment.
-quality: null
+quality: 9.1
 title: "Manifest Hitl Config"
 tldr: "Builder for hitl_config artifacts: review triggers, escalation rules, approval thresholds, timeout/fallback for human-in-the-loop gates."
 density_score: 0.90
