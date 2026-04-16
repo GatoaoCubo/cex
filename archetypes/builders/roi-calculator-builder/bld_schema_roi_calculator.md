@@ -4,7 +4,7 @@ id: bld_schema_roi_calculator
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for roi_calculator
-quality: null
+quality: 9.1
 title: "Schema Roi Calculator"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -48,22 +48,22 @@ density_score: 0.85
 ^p11_roi_[a-z][a-z0-9_]+$
 
 ## Body Structure
-1. **Calculation Methodology**  
+1. **Calculation Methodology**
    Detailed description of ROI formula and logic
 
-2. **Input Parameters**  
+2. **Input Parameters**
    List of required variables with data types and ranges
 
-3. **Output Metrics**  
+3. **Output Metrics**
    Definition of calculated values and their units
 
-4. **Assumptions**  
+4. **Assumptions**
    Conditions and limitations of the model
 
-5. **Validation Procedures**  
+5. **Validation Procedures**
    Steps for verifying accuracy and edge cases
 
-6. **Example Use Case**  
+6. **Example Use Case**
    Practical scenario with sample input/output
 
 ## Constraints
