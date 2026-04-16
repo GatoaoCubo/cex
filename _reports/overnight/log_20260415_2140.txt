@@ -70,3 +70,5 @@
 [23:32:24] Phase B cycle 27 mode=auto
 [23:32:43] Phase B cycle 27 done. Sleeping 180 s.
 [23:35:43] Phase B cycle 28 mode=evolve
+[23:35:46] Phase B cycle 28 done. Sleeping 180 s.
+[23:38:46] Phase B cycle 29 mode=auto
