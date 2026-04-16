@@ -28,6 +28,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from typing import Any
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -50,7 +51,7 @@ sys.path.insert(0, str(ROOT / "_tools"))
 # State Management
 # ================================================================
 
-def load_state():
+def load_state() -> dict[str, Any]:
     """Load auto-research state from disk."""
     if STATE_FILE.exists():
         try:
@@ -69,7 +70,7 @@ def load_state():
     }
 
 
-def save_state(state):
+def save_state(state: dict[str, Any]) -> None:
     """Persist auto-research state."""
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     STATE_FILE.write_text(
@@ -78,7 +79,7 @@ def save_state(state):
     )
 
 
-def append_log(entry):
+def append_log(entry: dict[str, Any]) -> None:
     """Append a learning record to the JSONL log."""
     LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(str(LOG_FILE), "a", encoding="utf-8") as f:
@@ -89,7 +90,7 @@ def append_log(entry):
 # Phase 1: SCAN
 # ================================================================
 
-def phase_scan():
+def phase_scan() -> list[dict[str, Any]]:
     """Scan for improvement targets across the codebase.
 
     Returns list of target dicts sorted by priority:
@@ -173,7 +174,10 @@ def phase_scan():
 # Phase 2: JUDGE
 # ================================================================
 
-def phase_judge(targets, max_targets=DEFAULT_TARGETS_PER_CYCLE):
+def phase_judge(
+    targets: list[dict[str, Any]],
+    max_targets: int = DEFAULT_TARGETS_PER_CYCLE,
+) -> list[dict[str, Any]]:
     """Select top N targets for this cycle.
 
     Returns: list of selected target dicts.
@@ -239,7 +243,11 @@ def _score_artifact_fast(path):
         return {"score": score, "notes": [notes]}
 
 
-def phase_build_one(target, model=DEFAULT_MODEL, dry_run=False):
+def phase_build_one(
+    target: dict[str, Any],
+    model: str = DEFAULT_MODEL,
+    dry_run: bool = False,
+) -> dict[str, Any]:
     """Attempt to improve a single target.
 
     Returns: {improved: bool, old_score, new_score, action, error}
@@ -366,7 +374,11 @@ def phase_build_one(target, model=DEFAULT_MODEL, dry_run=False):
 # Phase 5: PERSIST
 # ================================================================
 
-def phase_persist(cycle_num, results, model):
+def phase_persist(
+    cycle_num: int,
+    results: list[dict[str, Any]],
+    model: str,
+) -> dict[str, Any]:
     """Write learning record for this cycle."""
     improved = [r for r in results if r.get("improved")]
     rejected = [r for r in results if not r.get("improved")]
@@ -388,7 +400,10 @@ def phase_persist(cycle_num, results, model):
 # Phase 6: VERSION
 # ================================================================
 
-def phase_version(state, cycle_results):
+def phase_version(
+    state: dict[str, Any],
+    cycle_results: list[dict[str, Any]],
+) -> dict[str, Any]:
     """Update state with cycle results."""
     improved = sum(1 for r in cycle_results if r.get("improved"))
     rejected = sum(1 for r in cycle_results if not r.get("improved"))
@@ -416,7 +431,11 @@ def phase_version(state, cycle_results):
 # Main Loop
 # ================================================================
 
-def run_cycle(mode="preflight", model=DEFAULT_MODEL, max_targets=DEFAULT_TARGETS_PER_CYCLE):
+def run_cycle(
+    mode: str = "preflight",
+    model: str = DEFAULT_MODEL,
+    max_targets: int = DEFAULT_TARGETS_PER_CYCLE,
+) -> dict[str, Any]:
     """Execute one full 6-phase cycle.
 
     Args:
@@ -520,8 +539,13 @@ def run_cycle(mode="preflight", model=DEFAULT_MODEL, max_targets=DEFAULT_TARGETS
     }
 
 
-def run_continuous(mode="yolo", model=DEFAULT_MODEL, max_cycles=100,
-                   max_targets=DEFAULT_TARGETS_PER_CYCLE, pause=30):
+def run_continuous(
+    mode: str = "yolo",
+    model: str = DEFAULT_MODEL,
+    max_cycles: int = 100,
+    max_targets: int = DEFAULT_TARGETS_PER_CYCLE,
+    pause: int = 30,
+) -> None:
     """Run cycles continuously (YOLO mode)."""
     for i in range(max_cycles):
         result = run_cycle(mode=mode, model=model, max_targets=max_targets)
@@ -539,7 +563,7 @@ def run_continuous(mode="yolo", model=DEFAULT_MODEL, max_cycles=100,
 # CLI
 # ================================================================
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="CEX Auto-Research Loop -- versioned self-improving evolution"
     )
