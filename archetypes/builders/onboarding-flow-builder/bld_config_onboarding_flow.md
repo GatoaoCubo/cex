@@ -4,7 +4,7 @@ id: bld_config_onboarding_flow
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for onboarding_flow production
-quality: null
+quality: 8.6
 title: "Config Onboarding Flow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,24 +16,24 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-p05_of_{{name}}.md  
-Pillar: P05  
+p05_of_{{name}}.md
+Pillar: P05
 
-## Naming Convention  
-Pattern: p05_of_{{name}}.md  
-Examples: p05_of_user_onboarding.md, p05_of_payment_setup.md  
+## Naming Convention
+Pattern: p05_of_{{name}}.md
+Examples: p05_of_user_onboarding.md, p05_of_payment_setup.md
 
-## Paths  
-/opt/cex/flows/p05/{{name}}  
-Example: /opt/cex/flows/p05/user_onboarding  
+## Paths
+/opt/cex/flows/p05/{{name}}
+Example: /opt/cex/flows/p05/user_onboarding
 
-## Limits  
-max_bytes: 5120  
-max_turns: 10  
-effort_level: medium  
+## Limits
+max_bytes: 5120
+max_turns: 10
+effort_level: medium
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
