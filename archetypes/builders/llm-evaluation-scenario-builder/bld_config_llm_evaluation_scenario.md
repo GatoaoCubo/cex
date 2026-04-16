@@ -4,7 +4,7 @@ id: bld_config_llm_evaluation_scenario
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for llm_evaluation_scenario production
-quality: null
+quality: 8.8
 title: "Config LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
