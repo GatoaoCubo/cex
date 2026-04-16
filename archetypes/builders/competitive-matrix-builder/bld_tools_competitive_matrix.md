@@ -4,7 +4,7 @@ id: bld_tools_competitive_matrix
 pillar: P04
 llm_function: CALL
 purpose: Tools available for competitive_matrix production
-quality: null
+quality: 8.9
 title: "Tools Competitive Matrix"
 version: "1.1.0"
 author: wave1_builder_gen_v2
