@@ -1,0 +1,164 @@
+[DISPATCH] Grid: SHOWOFF_W1 (cli=ollama, model=llama3.1:8b, interactive, cost=$0)
+[GRID] Mission: SHOWOFF_W1 | Mode: static | Handoffs: 6 | Layout: 3x2
+[GRID] Enriching PID file with worker PIDs...
+  [N01] wrapper:33576 workers:-
+  [N02] wrapper:37364 workers:-
+  [N03] wrapper:11224 workers:26504
+  [N04] wrapper:41384 workers:-
+  [N05] wrapper:37972 workers:-
+  [N06] wrapper:33640 workers:41352
+[GRID] Static: 6/6 launched
+[DISPATCH] Grid: SHOWOFF_W2 (cli=gemini)
+[GRID] Mission: SHOWOFF_W2 | Mode: static | Handoffs: 6 | Layout: 3x2
+[GRID] Enriching PID file with worker PIDs...
+  [N01] wrapper:39764 workers:41840,35236
+  [N02] wrapper:39808 workers:40660,15236
+  [N03] wrapper:4956 workers:34608,35376
+  [N04] wrapper:39828 workers:30824,32284
+  [N05] wrapper:40200 workers:38300,36980
+  [N06] wrapper:40792 workers:34148,11504
+[GRID] Static: 6/6 launched
+[DISPATCH] Grid: SHOWOFF_W3 (cli=codex)
+[GRID] Mission: SHOWOFF_W3 | Mode: static | Handoffs: 6 | Layout: 3x2
+[GRID] Enriching PID file with worker PIDs...
+  [N01] wrapper:35248 workers:-
+  [N02] wrapper:33384 workers:-
+  [N03] wrapper:39200 workers:-
+  [N04] wrapper:39984 workers:-
+  [N05] wrapper:33876 workers:-
+  [N06] wrapper:36360 workers:-
+[GRID] Static: 6/6 launched
+[DISPATCH] Grid: SHOWOFF_W4 (cli=claude, model=claude-haiku-4-5-20251001)
+[GRID] Model override active: CEX_CLAUDE_MODEL=claude-haiku-4-5-20251001
+[GRID] Mission: SHOWOFF_W4 | Mode: static | Handoffs: 6 | Layout: 3x2
+[GRID] Enriching PID file with worker PIDs...
+  [N01] wrapper:36492 workers:40320,32780,40524,9728,37036,32136,5332,36740,34832,41288,39912
+  [N02] wrapper:40980 workers:18740,36308,36656,36660,35420,12828,6044,34128,34948,34628,32640
+  [N03] wrapper:31068 workers:33140,31572,27344,33840,14312,40384,37588,36956,32552,38872,32944
+  [N04] wrapper:36536 workers:41656,38760,41832,35172,22740,3592,33308,19000,34784,31972,38216
+  [N05] wrapper:3216 workers:7552,42736,38476,42816,42560,43212,42336,42908,42936,43040,43416
+  [N06] wrapper:43552 workers:43836,42728,44152,45004,43532,42980,44624,44068,44208,44896,19460
+[GRID] Static: 6/6 launched
+[POS] n01 -> cell (0,0) at 0x0 640x516 PID:37588
+[POS] n02 -> cell (1,0) at 640x0 640x516 PID:39344
+[POS] n03 -> cell (2,0) at 1280x0 640x516 PID:36264
+[POS] n04 -> cell (0,1) at 0x516 640x516 PID:40448
+[POS] n05 -> cell (1,1) at 640x516 640x516 PID:27244
+[POS] n06 -> cell (2,1) at 1280x516 640x516 PID:39840
+
+======================================================================
+SHOWOFF Wave 1 -- ollama (llama3.1:8b)
+======================================================================
+[W1] wrote 6 handoffs
+[W1] dispatch: bash _spawn/dispatch.sh grid-ollama SHOWOFF_W1 llama3.1:8b
+[W1] polling signals (timeout 300s)...
+[W1] received 0/6 signals in 300s -> []
+
+[W1 CONSOLIDATE] starting...
+  [commit] clean (no uncommitted artifacts)
+  [archive] moved 0 signals to signals_archive/
+  [stop] session processes terminated
+  [report] W1 [FAIL] signals=0/6 artifacts=0/6
+
+======================================================================
+SHOWOFF Wave 2 -- gemini (gemini-2.5-flash)
+======================================================================
+[W2] wrote 6 handoffs
+[W2] dispatch: bash _spawn/dispatch.sh grid-gemini SHOWOFF_W2
+[W2] polling signals (timeout 300s)...
+[W2] received 0/6 signals in 300s -> []
+
+[W2 CONSOLIDATE] starting...
+[SIGNAL] nucleus=n05 -> exited (score: 7.0)
+  [safety-net] n05 artifact present, emitted fallback signal
+  [commit] clean (no uncommitted artifacts)
+  [archive] moved 1 signals to signals_archive/
+  [stop] session processes terminated
+  [report] W2 [PARTIAL] signals=1/6 artifacts=1/6
+    _showoff\w2\n05_gemini.md
+
+======================================================================
+SHOWOFF Wave 3 -- codex (gpt-5-codex)
+======================================================================
+[W3] wrote 6 handoffs
+[W3] dispatch: bash _spawn/dispatch.sh grid-codex SHOWOFF_W3
+[W3] polling signals (timeout 300s)...
+[W3] received 0/6 signals in 300s -> []
+
+[W3 CONSOLIDATE] starting...
+  [commit] clean (no uncommitted artifacts)
+  [archive] moved 0 signals to signals_archive/
+  [stop] session processes terminated
+  [report] W3 [FAIL] signals=0/6 artifacts=0/6
+
+======================================================================
+SHOWOFF Wave 4 -- claude (claude-haiku-4-5-20251001)
+======================================================================
+[W4] wrote 6 handoffs
+[W4] dispatch: bash _spawn/dispatch.sh grid-haiku SHOWOFF_W4
+[W4] polling signals (timeout 300s)...
+[W4] received 0/6 signals in 300s -> []
+
+[W4 CONSOLIDATE] starting...
+[SIGNAL] nucleus=n01 -> exited (score: 7.0)
+  [safety-net] n01 artifact present, emitted fallback signal
+[SIGNAL] nucleus=n02 -> exited (score: 7.0)
+  [safety-net] n02 artifact present, emitted fallback signal
+[SIGNAL] nucleus=n03 -> exited (score: 7.0)
+  [safety-net] n03 artifact present, emitted fallback signal
+[SIGNAL] nucleus=n04 -> exited (score: 7.0)
+  [safety-net] n04 artifact present, emitted fallback signal
+[SIGNAL] nucleus=n05 -> exited (score: 7.0)
+  [safety-net] n05 artifact present, emitted fallback signal
+[SIGNAL] nucleus=n06 -> exited (score: 7.0)
+  [safety-net] n06 artifact present, emitted fallback signal
+  [commit] clean (no uncommitted artifacts)
+  [archive] moved 6 signals to signals_archive/
+  [stop] session processes terminated
+  [report] W4 [PASS] signals=6/6 artifacts=6/6
+    _showoff\w4\n01_claude.md
+    _showoff\w4\n02_claude.md
+    _showoff\w4\n03_claude.md
+    _showoff\w4\n04_claude.md
+    _showoff\w4\n05_claude.md
+    _showoff\w4\n06_claude.md
+
+======================================================================
+SHOWOFF Wave 5 -- mixed (mixed)
+======================================================================
+[W5] wrote 6 handoffs
+  [SPAWN] n01 via ollama (positioned)
+  [SPAWN] n02 via gemini (positioned)
+  [SPAWN] n03 via codex (positioned)
+  [SPAWN] n04 via claude (positioned)
+  [SPAWN] n05 via ollama (positioned)
+  [SPAWN] n06 via gemini (positioned)
+[W5] polling signals (timeout 300s)...
+[W5] received 0/6 signals in 300s -> []
+
+[W5 CONSOLIDATE] starting...
+[SIGNAL] nucleus=n02 -> exited (score: 7.0)
+  [safety-net] n02 artifact present, emitted fallback signal
+[SIGNAL] nucleus=n04 -> exited (score: 7.0)
+  [safety-net] n04 artifact present, emitted fallback signal
+[SIGNAL] nucleus=n06 -> exited (score: 7.0)
+  [safety-net] n06 artifact present, emitted fallback signal
+  [commit] clean (no uncommitted artifacts)
+  [archive] moved 3 signals to signals_archive/
+  [stop] session processes terminated
+  [report] W5 [PARTIAL] signals=3/6 artifacts=3/6
+    _showoff\w5\n02_gemini.md
+    _showoff\w5\n04_claude.md
+    _showoff\w5\n06_gemini.md
+
+======================================================================
+SHOWOFF FINAL REPORT
+======================================================================
+  W1 [PARTIAL] signals=0/6 artifacts=0
+  W2 [PARTIAL] signals=0/6 artifacts=1
+  W3 [PARTIAL] signals=0/6 artifacts=0
+  W4 [PASS] signals=0/6 artifacts=6
+  W5 [PASS] signals=0/6 artifacts=3
+
+  Total artifacts: 10/30
+======================================================================

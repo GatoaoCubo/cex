@@ -163,9 +163,9 @@ def scan_nucleus_cards() -> list[dict]:
 
 
 def scan_role_assignments() -> list[dict]:
-    """Parse N0*/crews/p02_ra_*.md (role_assignment bindings for composable crews)."""
+    """Parse N0*/orchestration/p02_ra_*.md (role_assignment bindings for composable crews)."""
     entries: list[dict] = []
-    for p in sorted(ROOT.glob("N0*_*/crews/p02_ra_*.md")):
+    for p in sorted(ROOT.glob("N0*_*/orchestration/p02_ra_*.md")):
         text = p.read_text(encoding="utf-8", errors="replace")
         fm = parse_fm(text)
         nucleus = p.parents[1].name[:3].lower()
@@ -186,9 +186,9 @@ def scan_role_assignments() -> list[dict]:
 
 
 def scan_crew_templates() -> list[dict]:
-    """Parse N0*/crews/p12_ct_*.md (crew_template recipes)."""
+    """Parse N0*/orchestration/p12_ct_*.md (crew_template recipes)."""
     entries: list[dict] = []
-    for p in sorted(ROOT.glob("N0*_*/crews/p12_ct_*.md")):
+    for p in sorted(ROOT.glob("N0*_*/orchestration/p12_ct_*.md")):
         text = p.read_text(encoding="utf-8", errors="replace")
         fm = parse_fm(text)
         nucleus = p.parents[1].name[:3].lower()

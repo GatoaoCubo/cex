@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/nuclei-7+1-crimson" alt="Nuclei">
   <img src="https://img.shields.io/badge/kinds-257-red" alt="Kinds">
   <img src="https://img.shields.io/badge/builders-259-brightgreen" alt="Builders">
-  <img src="https://img.shields.io/badge/tools-115-informational" alt="Tools">
+  <img src="https://img.shields.io/badge/tools-116-informational" alt="Tools">
 </p>
 
 ---

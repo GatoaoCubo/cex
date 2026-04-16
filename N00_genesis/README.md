@@ -1,85 +1,43 @@
----
-title: "N00 Genesis — Universal Mold"
-type: nucleus
-id: N00
-role: genesis
-tags: [nucleus, genesis, n00]
-quality: 9.0
-version: "1.0.0"
-author: n03_builder
-tldr: "Golden and anti-examples for CEX system, demonstrating ideal structure and common pitfalls."
-domain: "CEX system"
-created: "2026-04-07"
-updated: "2026-04-07"
-density_score: 0.90
----
+# N00 Genesis -- Fractal Module
 
-# N00 Genesis
+> pre-sin archetype -- template for all nuclei
 
-The universal mold. Everything in CEX is an instance of this structure.
+Contains instances of all 12 pillars scoped to template for all nuclei. Each pillar
+subdir holds typed artifacts filtered through this nucleus's sin lens.
 
-N00 defines **what can exist**. N01-N07 fill in **what does exist**.
+## Structure (mirrors 12 pillars)
 
----
+| Subdir | Pillar | Function | Contents |
+|--------|--------|----------|----------|
+| knowledge/ | [[P01_knowledge]] | INJECT | Knowledge cards for template for all nuclei |
+| agents/ | [[P02_model]] | BECOME | Agents specialized in template for all nuclei |
+| prompts/ | [[P03_prompt]] | REASON | Prompt templates for template for all nuclei |
+| tools/ | [[P04_tools]] | CALL | Skills/tools for template for all nuclei |
+| output/ | [[P05_output]] | PRODUCE | Output formats for template for all nuclei |
+| schemas/ | [[P06_schema]] | CONSTRAIN | Validation rules for template for all nuclei |
+| quality/ | [[P07_evals]] | GOVERN | Quality gates for template for all nuclei |
+| architecture/ | [[P08_architecture]] | GOVERN | Component maps for template for all nuclei |
+| config/ | [[P09_config]] | GOVERN | Configs for template for all nuclei |
+| memory/ | [[P10_memory]] | INJECT | Learning records for template for all nuclei |
+| feedback/ | [[P11_feedback]] | GOVERN | User corrections for template for all nuclei |
+| orchestration/ | [[P12_orchestration]] | COLLABORATE | Routing rules for template for all nuclei |
 
-## The Fractal
+## Auxiliary
 
-The same 12-part structure repeats at 3 scales:
+| Subdir | Purpose |
+|--------|---------|
+| rules/ | Nucleus-scoped rules (loaded at boot) |
+| compiled/ | Auto-generated YAML from .md (do not edit) |
 
-```
-N00 (Genesis)          → 12 pillars as FOLDERS     (P01_knowledge/, P02_model/, ...)
-  N01-N07 (Nuclei)     → 12 pillars as SUBDIRS     (knowledge/, agents/, tools/, ...)
-    Builders (107)       → 12 pillars as FILES       (bld_schema_*, bld_tools_*, ...)
-```
+## Conventions
 
----
-
-## 12 Pillars
-
-| Pillar | Domain | Genesis (N00) | Nucleus subdir | Builder ISO |
-|--------|--------|---------------|----------------|-------------|
-| P01 | Knowledge | [[P01_knowledge]] | `knowledge/` | `bld_knowledge_card_*` |
-| P02 | Model | [[P02_model]] | `agents/` | `bld_manifest_*` |
-| P03 | Prompt | [[P03_prompt]] | `prompts/` | `bld_instruction_*`, `bld_system_prompt_*` |
-| P04 | Tools | [[P04_tools]] | `tools/` | `bld_tools_*` |
-| P05 | Output | [[P05_output]] | `output/` | `bld_output_template_*` |
-| P06 | Schema | [[P06_schema]] | `schemas/` | `bld_schema_*` |
-| P07 | Evals | [[P07_evals]] | `quality/` | `bld_quality_gate_*` |
-| P08 | Architecture | [[P08_architecture]] | `architecture/` | `bld_architecture_*` |
-| P09 | Config | [[P09_config]] | `config/` | `bld_config_*` |
-| P10 | Memory | [[P10_memory]] | `memory/` | `bld_memory_*` |
-| P11 | Feedback | [[P11_feedback]] | `feedback/` | `bld_collaboration_*` |
-| P12 | Orchestration | [[P12_orchestration]] | `orchestration/` | `bld_collaboration_*` |
-
----
-
-## Genesis Assets
-
-| Asset | Count | Path |
-|-------|-------|------|
-| Pillar folders | 12 | `P01_knowledge/` — `P12_orchestration/` |
-| Builder archetypes | 107 | `archetypes/builders/*/` (13 ISOs each) |
-| Kind definitions | 114 | `.cex/kinds_meta.json` |
-| Knowledge cards | 276 | `P01_knowledge/library/kind/kc_*.md` |
-| Templates | 105 | `P*/templates/tpl_*.md` |
-| Examples | 263 | `P*/examples/ex_*.md` |
-
----
-
-## Instances
-
-| Nucleus | Domain | Fills the mold for |
-|---------|--------|--------------------|
-| [[N01_intelligence]] | Research | analysis, papers, competitors |
-| [[N02_marketing]] | Marketing | copy, frontend, ads |
-| [[N03_engineering]] | Engineering | builders, pipeline, code |
-| [[N04_knowledge]] | Knowledge | docs, RAG, indexing |
-| [[N05_operations]] | Operations | deploy, infra, CI/CD |
-| [[N06_commercial]] | Commercial | brand, pricing, monetization |
-| [[N07_admin]] | Orchestration | dispatch, coordination, meta |
-
----
+- Every file has YAML frontmatter (`id`, `kind`, `pillar`, `quality: null`).
+- Kinds are variable; pillar subdirs are fixed.
+- Reading any file's path reveals its pillar: `N00_*/{pillar}/{kind}_*.md`.
+- Cross-nucleus siblings: same pillar in other nuclei lives at `../N0X_*/{pillar}/`.
 
 ## See also
 
-[[CEX_ARCHITECTURE_MAP]] · [[INDEX]] · [[CLAUDE]]
+- Nucleus definition: `architecture/nucleus_def_n00.md`
+- Nucleus rules: `rules/` (or `.claude/rules/n07-*.md` for N07)
+- Canonical pillar specs: `../P01_*/` through `../P12_*/`

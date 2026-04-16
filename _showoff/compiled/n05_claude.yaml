@@ -2,7 +2,7 @@ id: showoff_w4_n05_claude
 kind: smoke_eval
 title: SHOWOFF Wave 4 -- n05 via claude
 version: 1
-quality: 8.4
+quality: null
 pillar: P07
 nucleus: n05
 runtime: claude
@@ -12,5 +12,3 @@ tags:
 - showoff
 - smoke
 - multi-runtime
-density_score: 1.0
-updated: '2026-04-15'

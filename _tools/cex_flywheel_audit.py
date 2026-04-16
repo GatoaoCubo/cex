@@ -110,8 +110,13 @@ def audit_L1() -> None:
 def audit_L2() -> None:
     """Audit nucleus directory structure, compiled outputs, and rules."""
     print("\n=== L2: Nuclei (N01-N07) ===")
-    expected = ["agents", "architecture", "compiled", "feedback", "knowledge",
-                "memory", "orchestration", "output", "prompts", "schemas"]
+    # Canonical 12-pillar fractal: every nucleus mirrors all 12 pillars.
+    # knowledge=P01, agents=P02, prompts=P03, tools=P04, output=P05, schemas=P06,
+    # quality=P07, architecture=P08, config=P09, memory=P10, feedback=P11,
+    # orchestration=P12. Plus "compiled" (auto-gen) and "rules" (nucleus-scoped).
+    expected = ["agents", "architecture", "compiled", "config", "feedback",
+                "knowledge", "memory", "orchestration", "output", "prompts",
+                "quality", "rules", "schemas", "tools"]
     for i in range(1, 8):
         ndir = None
         for d in CEX_ROOT.iterdir():

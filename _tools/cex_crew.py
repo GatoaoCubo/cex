@@ -13,7 +13,7 @@ Usage:
   python _tools/cex_crew.py list                         # list known crews
   python _tools/cex_crew.py show product_launch          # print resolved plan
   python _tools/cex_crew.py run product_launch \
-      --charter N02_marketing/crews/team_charter_launch_demo.md
+      --charter N02_marketing/orchestration/team_charter_launch_demo.md
   python _tools/cex_crew.py run product_launch --execute # real LLM calls
 
 The crew NAME matches `crew_name` in the template frontmatter (or the file
@@ -40,7 +40,7 @@ def find_crews() -> list[dict]:
     """
     found: list[dict] = []
     seen: set[str] = set()
-    patterns = ["N0*/crews/p12_ct_*.md", "P12_*/**/p12_ct_*.md"]
+    patterns = ["N0*/orchestration/p12_ct_*.md", "P12_*/**/p12_ct_*.md"]
     for pat in patterns:
         for p in ROOT.glob(pat):
             if p.name in seen:
@@ -98,8 +98,8 @@ def resolve_crew(name: str) -> Path:
         return p
     # Known convention: p12_ct_{name}.md
     for candidate in [
-        ROOT / f"N02_marketing/crews/p12_ct_{name}.md",
-        *sorted(ROOT.glob(f"N0*/crews/p12_ct_{name}.md")),
+        ROOT / f"N02_marketing/orchestration/p12_ct_{name}.md",
+        *sorted(ROOT.glob(f"N0*/orchestration/p12_ct_{name}.md")),
         *sorted(ROOT.glob(f"P12_*/**/p12_ct_{name}.md")),
     ]:
         if candidate.exists():
@@ -113,7 +113,7 @@ def resolve_crew(name: str) -> Path:
 def cmd_list(_args) -> int:
     crews = find_crews()
     if not crews:
-        print("No crews found. Expected pattern: N0*/crews/p12_ct_*.md")
+        print("No crews found. Expected pattern: N0*/orchestration/p12_ct_*.md")
         return 0
     print(f"[{len(crews)}] composable crews discovered:\n")
     for c in crews:

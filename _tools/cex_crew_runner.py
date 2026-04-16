@@ -723,9 +723,10 @@ class CrewRunner:
           body `## Roles` table: | Role | Role Assignment ID | Reason |
 
         Each `Role Assignment ID` (e.g. `p02_ra_researcher.md`) is resolved by:
-          1. sibling dir of crew file (e.g. N02_marketing/crews/)
-          2. cex_root glob N0*/crews/<id>
-          3. cex_root glob P02_*/**/<id>
+          1. sibling dir of crew file (e.g. N02_marketing/orchestration/)
+          2. cex_root glob N0*/orchestration/<id>
+          3. cex_root glob N0*/agents/<id>
+          4. cex_root glob P02_*/**/<id>
 
         The role_assignment's frontmatter `agent_id` points to a builder
         or nucleus agent -- that becomes a builder entry in the plan.

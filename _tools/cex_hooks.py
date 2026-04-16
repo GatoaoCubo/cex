@@ -657,8 +657,12 @@ def run_pre_commit() -> int:
     errors = 0
 
     # 1. Artifact validation (existing behavior)
+    # Exclude README.md (fractal nav docs, not typed artifacts) and agent_card_*.md
+    # that live at nucleus root (they're configured to allow bare frontmatter).
     md_staged = [f for f in all_staged
-                 if f.endswith(".md") and re.match(r"N\d{2}_", f)]
+                 if f.endswith(".md") and re.match(r"N\d{2}_", f)
+                 and not f.endswith("/README.md")
+                 and not f.endswith("\\README.md")]
     if md_staged:
         print(f"pre-commit: validating {len(md_staged)} staged artifact(s)...")
         for path in md_staged:
