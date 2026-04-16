@@ -6,12 +6,13 @@ title: LEVERAGE_MAP_V2 Verification - N03 Builder Linter
 nucleus: N03
 mission: LEVERAGE_MAP_V2
 version: 2.0.0
-quality: null
+quality: 9.2
 created: 2026-04-15
 updated: 2026-04-15
 author: codex_n03
 tags: [leverage-map, verification, builder-linter, n03, 8f]
 tldr: "Verified _tools/cex_builder_linter.py is present and useful for structural builder checks, but it does not yet validate full 8F compliance or exact 13-ISO contracts."
+density_score: 0.97
 ---
 
 # LEVERAGE_MAP_V2 Verification - N03 Builder Linter
