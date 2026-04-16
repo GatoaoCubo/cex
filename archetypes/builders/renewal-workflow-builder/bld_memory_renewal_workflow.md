@@ -4,7 +4,7 @@ id: p10_lr_renewal_workflow_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for renewal_workflow construction
-quality: null
+quality: 8.8
 title: "Learning Record Renewal Workflow"
 version: "1.0.0"
 author: wave6_n06
