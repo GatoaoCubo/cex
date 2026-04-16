@@ -4,7 +4,7 @@ id: p05_qg_case_study
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for case_study
-quality: null
+quality: 9.0
 title: "Quality Gate Case Study"
 version: "1.1.0"
 author: wave1_builder_gen_v2
