@@ -5,7 +5,7 @@ pillar: P09
 parent: dual-loop-architecture-builder
 llm_function: CONSTRAIN
 purpose: Naming, paths, cadence knobs, model tiers, limits for dual_loop_architecture
-quality: null
+quality: 9.1
 title: "Config Dual Loop Architecture"
 version: "1.0.0"
 author: wave1_builder_gen
