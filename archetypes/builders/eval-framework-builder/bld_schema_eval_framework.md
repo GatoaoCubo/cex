@@ -4,7 +4,7 @@ id: bld_schema_eval_framework
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for eval_framework artifacts
-quality: null
+quality: 9.2
 title: "Schema Eval Framework"
 version: "1.1.0"
 author: n03_hybrid_review4
