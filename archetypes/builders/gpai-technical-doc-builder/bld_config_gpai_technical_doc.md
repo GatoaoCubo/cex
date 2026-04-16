@@ -4,7 +4,7 @@ id: bld_config_gpai_technical_doc
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for gpai_technical_doc production
-quality: null
+quality: 8.6
 title: "Config GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
