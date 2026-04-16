@@ -4,7 +4,7 @@ id: p12_qg_workflow_node
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for workflow_node ARTIFACTS (not runtime)
-quality: null
+quality: 9.0
 title: "Quality Gate Workflow Node"
 version: "1.1.0"
 author: n03_hybrid_review4
