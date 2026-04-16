@@ -4,7 +4,7 @@ id: bld_examples_quickstart_guide
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of quickstart_guide artifacts
-quality: null
+quality: 8.9
 title: "Examples Quickstart Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
