@@ -4,7 +4,7 @@ id: bld_architecture_conformity_assessment
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component inventory and dependency map for the conformity-assessment-builder
-quality: null
+quality: 9.1
 title: "Conformity Assessment Builder -- Architecture"
 version: "1.0.0"
 author: wave7_n05
