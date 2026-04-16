@@ -4,7 +4,7 @@ id: bld_examples_model_registry
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of model_registry artifacts
-quality: null
+quality: 8.9
 title: "Examples Model Registry"
 version: "1.0.0"
 author: wave1_builder_gen
