@@ -3,8 +3,9 @@ id: kc_oauth_app_config
 kind: knowledge_card
 title: OAuth 2.0 Application Configuration for Partner Integrations
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 1.0
 ---
 
 # OAuth 2.0 Application Configuration for Partner Integrations
