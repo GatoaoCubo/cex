@@ -4,7 +4,7 @@ id: bld_tools_memory_benchmark
 pillar: P04
 llm_function: CALL
 purpose: Tools available for memory_benchmark production
-quality: null
+quality: 8.9
 title: "Tools Memory Benchmark"
 version: "1.1.0"
 author: n05_operations
