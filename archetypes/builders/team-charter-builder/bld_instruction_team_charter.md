@@ -4,7 +4,7 @@ id: bld_instruction_team_charter
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for team_charter
-quality: null
+quality: 8.9
 title: "Instruction Team Charter"
 version: "1.0.0"
 author: n06_wave8
