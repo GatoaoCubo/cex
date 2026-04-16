@@ -3,8 +3,9 @@ id: kc_threat_model
 kind: knowledge_card
 title: Threat Model
 version: 1.0.0
-quality: null
+quality: 8.6
 pillar: P01
+density_score: 0.98
 ---
 
 # Threat Model
