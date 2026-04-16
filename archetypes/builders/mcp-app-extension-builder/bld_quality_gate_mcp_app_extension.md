@@ -4,7 +4,7 @@ id: p04_qg_mcp_app_extension
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for mcp_app_extension
-quality: null
+quality: 9.0
 title: "Quality Gate MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
