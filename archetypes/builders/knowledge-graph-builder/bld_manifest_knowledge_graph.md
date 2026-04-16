@@ -14,7 +14,7 @@ keywords: [knowledge-graph, GraphRAG, entity-extraction, neo4j, relations, trave
 triggers: ["define knowledge graph", "create knowledge graph", "graph-based knowledge schema", "entity types and relations", "GraphRAG schema", "knowledge graph artifact"]
 capabilities: >
   L1: Specialist in building knowledge_graph artifacts -- graph-based knowledge schemas with entity types, relation types, extraction logic, storage backend, and traversal patterns. L2: Define entity types, relation types, extraction prompts, deduplication strategy, storage backend, and traversal depth. L3: When user needs to model relational knowledge structure for GraphRAG, LlamaIndex KG, Neo4j, or LightRAG.
-quality: null
+quality: 9.1
 title: "Manifest: knowledge-graph-builder"
 tldr: "Builds knowledge_graph artifacts: graph-based knowledge schemas defining entity types, relation types, extraction prompts, storage backend, and traversal strategies."
 density_score: 0.90
