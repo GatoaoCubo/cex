@@ -4,7 +4,7 @@ id: bld_instruction_fintech_vertical
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for fintech_vertical
-quality: null
+quality: 8.9
 title: "Instruction Fintech Vertical"
 version: "1.0.0"
 author: wave1_builder_gen_v2
