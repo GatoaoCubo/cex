@@ -4,7 +4,7 @@ id: bld_examples_reward_model
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of reward_model artifacts
-quality: null
+quality: 8.9
 title: "Examples Reward Model"
 version: "1.0.0"
 author: wave1_builder_gen
