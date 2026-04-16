@@ -4,7 +4,7 @@ id: p03_sp_nps_survey_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining nps_survey-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Nps Survey"
 version: "1.0.0"
 author: wave1_builder_gen_v2
