@@ -4,7 +4,7 @@ id: bld_output_template_reward_model
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for reward_model production
-quality: null
+quality: 9.0
 title: "Output Template Reward Model"
 version: "1.0.0"
 author: wave1_builder_gen
