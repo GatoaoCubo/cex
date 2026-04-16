@@ -4,7 +4,7 @@ id: safety-policy-builder
 pillar: P11
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for safety_policy
-quality: null
+quality: 8.8
 title: "Type Builder Safety Policy"
 version: "1.0.0"
 author: wave1_builder_gen
