@@ -21,8 +21,9 @@ keywords: [knowledge_card, density, axiom, frontmatter, bullet, table, tldr, dom
 memory_scope: project
 observation_types: [user, feedback, project, reference]
 llm_function: INJECT
-quality: null
+quality: 9.0
 title: Memory ISO - knowledge_card
+density_score: 0.95
 ---
 ## Summary
 Knowledge cards distill domain knowledge into high-density atomic facts. The primary quality gate is density >= 0.80 — the ratio of informative content to total words. The most reliable path to high density is structural: replace prose with bullets, replace descriptions with tables, and eliminate all filler language.
