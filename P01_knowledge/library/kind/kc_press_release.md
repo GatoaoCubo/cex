@@ -3,9 +3,10 @@ id: kc_press_release
 kind: knowledge_card
 title: Press Release
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
 language: English
+density_score: 0.99
 ---
 
 # Press Release Guide
