@@ -4,7 +4,7 @@ id: bld_collaboration_safety_policy
 pillar: P12
 llm_function: COLLABORATE
 purpose: How safety_policy-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Safety Policy"
 version: "1.0.0"
 author: wave1_builder_gen
