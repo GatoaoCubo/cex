@@ -3,7 +3,7 @@ id: simplify
 kind: instruction
 pillar: P08
 description: "Review and fix changed code for reuse, quality, efficiency. Usage: /simplify [path]"
-quality: null
+quality: 8.9
 title: "Simplify"
 version: "1.0.0"
 author: n03_builder
