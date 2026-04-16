@@ -4,7 +4,7 @@ id: bld_architecture_hitl_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of hitl_config -- inventory, dependencies, and architectural position
-quality: null
+quality: 9.1
 title: "Architecture Hitl Config"
 version: "1.0.0"
 author: n03_builder
