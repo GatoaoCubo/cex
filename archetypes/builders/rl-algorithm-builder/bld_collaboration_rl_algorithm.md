@@ -4,7 +4,7 @@ id: bld_collaboration_rl_algorithm
 pillar: P12
 llm_function: COLLABORATE
 purpose: How rl_algorithm-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Rl Algorithm"
 version: "1.0.0"
 author: wave1_builder_gen
