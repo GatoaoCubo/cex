@@ -4,7 +4,7 @@ id: p03_sp_team_charter_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining team_charter-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt Team Charter"
 version: "1.0.0"
 author: n06_wave8
