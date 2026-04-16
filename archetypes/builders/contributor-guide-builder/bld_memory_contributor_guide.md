@@ -4,7 +4,7 @@ id: p10_mem_contributor_guide_builder
 pillar: P10
 llm_function: INJECT
 purpose: Accumulated learning signals and pattern observations for contributor_guide builder improvement
-quality: null
+quality: 9.1
 title: "Contributor Guide Builder Memory"
 version: "1.1.0"
 author: n02_hybrid_review7
