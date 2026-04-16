@@ -4,7 +4,7 @@ id: bld_output_template_consolidation_policy
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for consolidation_policy production
-quality: null
+quality: 9.1
 title: "Output Template: consolidation_policy"
 version: "2.0.0"
 author: n06_commercial
