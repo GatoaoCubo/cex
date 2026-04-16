@@ -4,7 +4,7 @@ id: bld_instruction_dataset_card
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for dataset_card
-quality: null
+quality: 9.0
 title: "Instruction Dataset Card"
 version: "1.1.0"
 author: n03_hybrid_review3
