@@ -4,7 +4,7 @@ id: bld_examples_mcp_app_extension
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of mcp_app_extension artifacts
-quality: null
+quality: 8.9
 title: "Examples MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
