@@ -4,7 +4,7 @@ id: bld_output_template_conformity_assessment
 pillar: P05
 llm_function: PRODUCE
 purpose: Fill-in-the-blanks template for producing a complete Annex-IV conformity assessment artifact
-quality: null
+quality: 9.1
 title: "Conformity Assessment Builder -- Output Template"
 version: "1.0.0"
 author: wave7_n05
