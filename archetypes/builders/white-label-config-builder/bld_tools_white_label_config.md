@@ -4,7 +4,7 @@ id: bld_tools_white_label_config
 pillar: P04
 llm_function: CALL
 purpose: Tools available for white_label_config production
-quality: null
+quality: 8.9
 title: "Tools White Label Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,26 +16,26 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Compile white_label_config artifact to YAML + register | After authoring |  
-| cex_score.py | Score artifact quality (5D + HARD gates) | After compile |  
-| cex_retriever.py | Find similar white-label config artifacts for reuse | During F3 INJECT |  
-| cex_doctor.py | Validate all ISOs in builder for structural health | Post-build audit |  
-| cex_wave_validator.py | Batch-validate full white-label-config-builder (39 ISOs) | CI gate |  
-| cex_hygiene.py | Enforce 8 hygiene rules (frontmatter, density, IDs) | Pre-commit |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compile white_label_config artifact to YAML + register | After authoring |
+| cex_score.py | Score artifact quality (5D + HARD gates) | After compile |
+| cex_retriever.py | Find similar white-label config artifacts for reuse | During F3 INJECT |
+| cex_doctor.py | Validate all ISOs in builder for structural health | Post-build audit |
+| cex_wave_validator.py | Batch-validate full white-label-config-builder (39 ISOs) | CI gate |
+| cex_hygiene.py | Enforce 8 hygiene rules (frontmatter, density, IDs) | Pre-commit |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_hooks.py | Pre-commit hook: block schema violations + ASCII errors | On git add |  
-| cex_sanitize.py | ASCII sanitize .py/.ps1 in builder scope | After code edits |  
-| cex_feedback.py | Track quality trends and archive low-score artifacts | After scoring |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_hooks.py | Pre-commit hook: block schema violations + ASCII errors | On git add |
+| cex_sanitize.py | ASCII sanitize .py/.ps1 in builder scope | After code edits |
+| cex_feedback.py | Track quality trends and archive low-score artifacts | After scoring |
 
-## External References  
-- Stripe Connect (sub-account and platform fee model reference)  
-- OAuth 2.0 RFC 6749 (reseller API key issuance)  
-- JSON Schema (config structure validation)  
-- SemVer (semantic versioning for config artifacts)  
+## External References
+- Stripe Connect (sub-account and platform fee model reference)
+- OAuth 2.0 RFC 6749 (reseller API key issuance)
+- JSON Schema (config structure validation)
+- SemVer (semantic versioning for config artifacts)
 - GDPR Article 28 (data processor configuration requirements)
