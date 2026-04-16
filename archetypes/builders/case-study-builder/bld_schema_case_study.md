@@ -4,7 +4,7 @@ id: bld_schema_case_study
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for case_study
-quality: null
+quality: 9.1
 title: "Schema Case Study"
 version: "1.1.0"
 author: wave1_builder_gen_v2
