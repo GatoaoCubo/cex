@@ -3,8 +3,9 @@ id: kc_healthcare_vertical
 kind: knowledge_card
 title: Healthcare Vertical Knowledge Card
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 0.8
 ---
 
 # Healthcare Industry Vertical
