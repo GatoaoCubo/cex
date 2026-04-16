@@ -3,8 +3,9 @@ id: kc_pitch_deck
 kind: knowledge_card
 title: Pitch Deck
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.9
 ---
 
 A pitch deck is a concise presentation used to communicate the value proposition of a business to potential investors, partners, or customers. It follows a structured framework to effectively convey key information:
