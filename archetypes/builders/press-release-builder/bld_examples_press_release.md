@@ -4,7 +4,7 @@ id: bld_examples_press_release
 pillar: P07
 llm_function: GOVERN
 purpose: Golden example and anti-examples for press_release quality calibration
-quality: null
+quality: 9.1
 title: "Press Release Examples"
 version: "1.0.0"
 author: n02_wave6
