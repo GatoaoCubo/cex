@@ -4,7 +4,7 @@ id: bld_examples_agent_computer_interface
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of agent_computer_interface artifacts
-quality: null
+quality: 9.1
 title: "Examples Agent Computer Interface"
 version: "1.0.0"
 author: n01_review
