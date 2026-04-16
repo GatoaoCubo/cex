@@ -4,7 +4,7 @@ id: p03_sp_c2pa_manifest_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining c2pa_manifest-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt C2PA Manifest"
 version: "1.0.0"
 author: n04_wave7
