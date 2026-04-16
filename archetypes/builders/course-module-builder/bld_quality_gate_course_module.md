@@ -4,7 +4,7 @@ id: p05_qg_course_module
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for course_module
-quality: null
+quality: 9.1
 title: "Quality Gate Course Module"
 version: "1.0.0"
 author: n03_builder
