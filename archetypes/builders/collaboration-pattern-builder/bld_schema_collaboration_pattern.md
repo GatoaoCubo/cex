@@ -4,7 +4,7 @@ id: bld_schema_collaboration_pattern
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for collaboration_pattern
-quality: null
+quality: 9.2
 title: "Schema Collaboration Pattern"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -48,22 +48,22 @@ density_score: 0.85
 ^p12_collab_[a-zA-Z0-9_]+\.md$
 
 ## Body Structure
-1. **Overview**  
+1. **Overview**
    Describe the collaboration's purpose, scope, and objectives.
 
-2. **Key Components**  
+2. **Key Components**
    List core elements (e.g., workflows, tools, roles).
 
-3. **Stakeholders**  
+3. **Stakeholders**
    Detail roles, responsibilities, and engagement levels.
 
-4. **Success Metrics**  
+4. **Success Metrics**
    Define quantifiable outcomes and KPIs.
 
-5. **Governance Model**  
+5. **Governance Model**
    Explain decision-making structure and accountability.
 
-6. **Challenges**  
+6. **Challenges**
    Identify potential barriers and mitigation strategies.
 
 ## Constraints
