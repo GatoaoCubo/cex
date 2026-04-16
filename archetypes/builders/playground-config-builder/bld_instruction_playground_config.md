@@ -4,7 +4,7 @@ id: bld_instruction_playground_config
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for playground_config
-quality: null
+quality: 8.8
 title: "Instruction Playground Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
