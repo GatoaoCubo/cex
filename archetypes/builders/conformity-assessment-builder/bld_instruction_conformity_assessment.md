@@ -4,7 +4,7 @@ id: bld_instruction_conformity_assessment
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step build instructions for producing an EU AI Act Annex-IV conformity assessment artifact
-quality: null
+quality: 9.1
 title: "Conformity Assessment Builder -- Instruction"
 version: "1.0.0"
 author: wave7_n05
