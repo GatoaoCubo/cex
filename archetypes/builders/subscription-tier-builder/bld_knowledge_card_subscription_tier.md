@@ -4,7 +4,7 @@ id: bld_knowledge_card_subscription_tier
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for subscription_tier production
-quality: null
+quality: 9.2
 title: "Knowledge Card Subscription Tier"
 version: "1.0.0"
 author: n03_builder
