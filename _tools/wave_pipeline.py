@@ -54,7 +54,7 @@ WAVE3_KINDS = [
 WAVES = {"1": WAVE1_KINDS, "2": WAVE2_KINDS, "3": WAVE3_KINDS}
 
 
-def count_isos(kind):
+def count_isos(kind: str) -> int:
     """Count existing ISOs for a kind."""
     builder_dir = BUILDERS_DIR / f"{kind.replace('_', '-')}-builder"
     if not builder_dir.exists():
@@ -62,7 +62,7 @@ def count_isos(kind):
     return len(list(builder_dir.glob("bld_*.md")))
 
 
-def wave_status(wave_num):
+def wave_status(wave_num: int) -> tuple[int, int, int, int]:
     """Check completion status of a wave."""
     kinds = WAVES[str(wave_num)]
     complete = 0
@@ -79,7 +79,7 @@ def wave_status(wave_num):
     return complete, partial, missing, len(kinds)
 
 
-def run_wave(wave_num, dry_run=False):
+def run_wave(wave_num: int, dry_run: bool = False) -> bool:
     """Run wave generator and return success."""
     comp, part, miss, total = wave_status(wave_num)
     print(f"\n[WAVE {wave_num}] Status: {comp}/{total} complete, {part} partial, {miss} missing")
@@ -110,7 +110,7 @@ def run_wave(wave_num, dry_run=False):
     return True
 
 
-def commit_wave(wave_num, dry_run=False):
+def commit_wave(wave_num: int, dry_run: bool = False) -> bool:
     """Commit all ISOs from a wave."""
     kinds = WAVES[str(wave_num)]
     files_to_add = []
@@ -156,7 +156,7 @@ def commit_wave(wave_num, dry_run=False):
         return False
 
 
-def regenerate_ft_dataset(dry_run=False):
+def regenerate_ft_dataset(dry_run: bool = False) -> bool:
     """Regenerate FT dataset after all waves."""
     if dry_run:
         print("[DRY] Would regenerate FT dataset")
@@ -180,7 +180,7 @@ def regenerate_ft_dataset(dry_run=False):
         return False
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX Wave Pipeline")
     parser.add_argument("--start-wave", type=int, default=1, help="Start from wave N")
     parser.add_argument("--dry-run", action="store_true")
