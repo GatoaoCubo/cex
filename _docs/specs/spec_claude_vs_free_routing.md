@@ -4,9 +4,10 @@ kind: decision_record
 pillar: P08
 title: Claude vs Free (Ollama) Backend Routing Decision Matrix
 version: 1.0.0
-quality: null
+quality: 9.1
 tags: [routing, cost, ollama, claude, decision]
 created: 2026-04-15
+density_score: 1.0
 ---
 
 # Claude vs Free Backend — When to Route Which
