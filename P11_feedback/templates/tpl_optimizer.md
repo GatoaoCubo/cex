@@ -8,7 +8,8 @@ kind: optimizer
 pillar: P11
 title: "Optimizer: {{TARGET_NAME}}"
 version: 1.0.0
-quality: null
+quality: 8.7
+density_score: 1.0
 ---
 
 # Optimizer: {{TARGET_NAME}}
