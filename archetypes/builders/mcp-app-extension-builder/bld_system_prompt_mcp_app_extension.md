@@ -4,7 +4,7 @@ id: p03_sp_mcp_app_extension_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining mcp_app_extension-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt MCP App Extension"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
