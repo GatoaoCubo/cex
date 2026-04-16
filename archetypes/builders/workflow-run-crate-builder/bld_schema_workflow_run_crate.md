@@ -4,7 +4,7 @@ id: bld_schema_workflow_run_crate
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for workflow_run_crate
-quality: null
+quality: 9.2
 title: "Schema Workflow Run Crate"
 version: "1.0.0"
 author: n04_wave7
