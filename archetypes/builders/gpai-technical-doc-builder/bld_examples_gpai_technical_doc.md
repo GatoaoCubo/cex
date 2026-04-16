@@ -4,7 +4,7 @@ id: bld_examples_gpai_technical_doc
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of gpai_technical_doc artifacts
-quality: null
+quality: 9.1
 title: "Examples GPAI Technical Doc"
 version: "1.0.0"
 author: n01_wave7
