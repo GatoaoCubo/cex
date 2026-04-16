@@ -4,7 +4,7 @@ id: bld_knowledge_card_marketplace_app_manifest
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for marketplace_app_manifest production
-quality: null
+quality: 9.2
 title: "Knowledge Card Marketplace App Manifest"
 version: "1.0.0"
 author: wave1_builder_gen_v2
