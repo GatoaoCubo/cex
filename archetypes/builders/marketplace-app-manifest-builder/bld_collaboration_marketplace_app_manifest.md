@@ -4,7 +4,7 @@ id: bld_collaboration_marketplace_app_manifest
 pillar: P12
 llm_function: COLLABORATE
 purpose: How marketplace_app_manifest-builder works in crews with other builders
-quality: null
+quality: 8.7
 title: "Collaboration Marketplace App Manifest"
 version: "1.0.0"
 author: wave1_builder_gen_v2
