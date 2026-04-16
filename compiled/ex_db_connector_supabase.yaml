@@ -1,0 +1,58 @@
+id: ex-db-connector-supabase
+kind: db_connector
+pillar: P09
+title: Supabase DB Connector
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_SUPABASE_URL
+- BRAND_SUPABASE_SERVICE_ROLE_KEY
+- BRAND_SUPABASE_ANON_KEY
+tags:
+- commerce
+- template
+- distillation
+- supabase
+- db_connector
+purpose: Edge-function and Node-runtime connector for Supabase Postgres. Wraps connection lifecycle, query helpers, and error
+  normalization. Co-lives with `ex_supabase_data_layer.md` but is specifically about the machinery of reading/writing, not
+  project identity.
+when_to_use:
+- Any edge function writing to tables (products, inventory, orders, etc.).
+- Cron jobs and one-shot scripts that need service-role access.
+- Typed CRUD needs in Node.js scripts (e.g. migration helpers).
+interface: "// db.ts\nimport { createClient, SupabaseClient } from \"@supabase/supabase-js\";\nimport type { Database } from\
+  \ \"./types\";\n\nexport function getDb(mode: \"anon\" | \"service\" = \"service\"): SupabaseClient<Database> {\n  const\
+  \ key = mode === \"service\"\n    ? Deno.env.get(\"{{BRAND_SUPABASE_SERVICE_ROLE_KEY}}\")!\n    : Deno.env.get(\"{{BRAND_SUPABASE_ANON_KEY}}\"\
+  )!;\n  return createClient<Database>(Deno.env.get(\"{{BRAND_SUPABASE_URL}}\")!, key, {\n    auth: { persistSession: false\
+  \ },\n    db: { schema: \"public\" },\n  });\n}"
+brand_variables_used:
+- '`{{BRAND_SUPABASE_URL}}` -- project URL.'
+- '`{{BRAND_SUPABASE_SERVICE_ROLE_KEY}}` -- server-only; never exposed.'
+- '`{{BRAND_SUPABASE_ANON_KEY}}` -- used when the connector must NOT bypass RLS (rare on server; use for end-user-context
+  queries).'
+helper_patterns: "// typed upsert with conflict target\nawait db.from(\"products\")\n  .upsert({ sku, title, updated_at: new\
+  \ Date().toISOString() }, { onConflict: \"sku\" })\n  .throwOnError();\n\n// paginated select\nconst { data, error } = await\
+  \ db.from(\"products\")\n  .select(\"id, sku, title\")\n  .range(offset, offset+limit-1)\n  .order(\"updated_at\", { ascending:\
+  \ false });\n\n// raw RPC\nconst { data } = await db.rpc(\"reconcile_inventory\", { sku_list: [...] });"
+error_normalization: 'PostgREST surfaces errors as `{ message, details, hint, code }`. Normalize at the connector edge:
+
+  - `23505` (unique_violation) -> `DbError.UniqueViolation` with `constraint` field.
+
+  - `23503` (foreign_key_violation) -> `DbError.FkViolation`.
+
+  - `PGRST116` (not found on .single()) -> `null`, not throw.
+
+  - Anything else -> `DbError.Unknown` with original code preserved.'
+connection_hygiene: 'Supabase''s JS client is stateless -- no pool to manage. However:
+
+  - Do NOT create a new client on every request; reuse a module-level singleton per scope.
+
+  - For long-running scripts, unsubscribe realtime channels before exit to avoid dangling sockets.'
+row_level_security_notes:
+- Using `service` mode bypasses RLS; never pass user input to service-mode queries without sanitization.
+- For per-user queries, use `anon` mode + pass the user's JWT via `global.headers.Authorization`.
+related_artifacts:
+- '`ex_supabase_data_layer.md` -- project-level config.'
+- '`ex_interface_supabase_tables.md` -- typed surface.'

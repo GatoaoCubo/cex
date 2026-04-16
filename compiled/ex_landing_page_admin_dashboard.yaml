@@ -1,0 +1,66 @@
+id: ex-landing-page-admin-dashboard
+kind: landing_page
+pillar: P05
+title: Admin Dashboard Landing Page
+version: 0.1.0
+quality: null
+status: template
+brand_placeholders:
+- BRAND_NAME
+- BRAND_PRIMARY_COLOR
+- BRAND_LOGO_URL
+- BRAND_SUPPORT_EMAIL
+tags:
+- commerce
+- template
+- distillation
+- admin
+- landing_page
+purpose: The entry point an operator sees after authenticating as `admin` role. Surfaces the key health metrics (orders today,
+  sync status per channel, stock anomalies) and navigation cards to every admin module (Products, Shopify Sync, Integracoes,
+  CRM, B2B Orders, Vendas, Content Schedule).
+when_to_use:
+- Brand has multi-channel sync and a human operator needs one glance to know "is anything on fire?".
+- Replacing individual admin pages with a unified hub reduces context switching.
+- Onboarding new ops staff -- this page is the first screen they see.
+when_not_to_use:
+- Brand's ops is a single person who lives in the Bling or Shopify admin directly.
+- Catalog is <50 SKUs -- a full dashboard is overkill.
+brand_variables_used:
+- '`{{BRAND_NAME}}` -- header text, window title.'
+- '`{{BRAND_PRIMARY_COLOR}}` -- accent on CTAs + active nav.'
+- '`{{BRAND_LOGO_URL}}` -- top-left brand mark.'
+- '`{{BRAND_SUPPORT_EMAIL}}` -- footer mailto for operator help.'
+page_sections_top_to_bottom: "1. Top bar\n   - Brand logo + `{{BRAND_NAME}} / Admin` label.\n   - User menu (profile, role,\
+  \ sign out).\n2. Health strip (4 tiles, `grid-cols-4`):\n   - Orders today (count + delta vs yesterday).\n   - Sync status\
+  \ (Shopify / Bling / ML) -- colored dot per channel.\n   - Stock anomalies (rows with `inventory.quantity < 0` OR reconcile\
+  \ mismatch > 5 units).\n   - Webhook queue (inbound backlog size).\n3. Navigation cards (responsive grid, minimum 3 cols\
+  \ on desktop):\n   | Card | Link | Icon |\n   |------|------|------|\n   | Products | /admin/products | box |\n   | Shopify\
+  \ Sync | /admin/shopify-sync | sync |\n   | Integracoes | /admin/integracoes | plug |\n   | CRM | /admin/crm | users |\n\
+  \   | B2B Orders | /admin/b2b-orders | clipboard |\n   | Vendas (AI) | /admin/vendas | sparkles |\n   | Content Schedule\
+  \ | /admin/content-schedule | calendar |\n4. Recent activity feed -- last 10 sync runs with outcome + runtime.\n5. Footer\
+  \ -- version + `mailto:{{BRAND_SUPPORT_EMAIL}}`."
+data_sources: '| Tile | Query |
+
+  |------|-------|
+
+  | Orders today | `select count(*) from orders where created_at >= current_date` |
+
+  | Sync status | last row per channel in `sync_runs` table |
+
+  | Stock anomalies | `select count(*) from inventory where quantity < 0 union ...` |
+
+  | Webhook queue | `select count(*) from webhook_inbox_shopify where consumed=false` |
+
+
+  Use materialized view `v_admin_dashboard` refreshed every 60s; raw queries on each tile would hammer the DB.'
+example_scaffold_tailwind_shadcn_ui: "<AdminLayout>\n  <Header brand=\"{{BRAND_NAME}}\" logo=\"{{BRAND_LOGO_URL}}\" />\n \
+  \ <HealthStrip accent=\"{{BRAND_PRIMARY_COLOR}}\" />\n  <NavGrid />\n  <ActivityFeed limit={10} />\n  <Footer supportEmail=\"\
+  {{BRAND_SUPPORT_EMAIL}}\" />\n</AdminLayout>"
+accessibility:
+- Each card is a `<button>` or `<a>` with a visible label; no icon-only navigation.
+- Color dots in health strip include a text label (`ok`, `stale`, `down`) for color-blind operators.
+- 'Keyboard: Tab order follows visual top-to-bottom, left-to-right.'
+related_artifacts:
+- '`ex_component_map_admin_dashboard.md` -- component decomposition.'
+- '`ex_supabase_data_layer.md` -- auth context + client.'
