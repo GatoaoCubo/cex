@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "formal ontology construction (OWL, SKOS, schema.org, RDF), class hierarchy design, property constraint specification, axiom declaration, controlled vocabulary management, interoperability mapping | NOT knowledge_graph (entity instance relations), glossary_entry (single-term human definitions), knowledge_card (atomic facts), embedding_config (vector representations)"
 domain: "ontology"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "ontology", "taxonomy", "OWL", "SKOS", "P01"]
 safety_level: standard
 tools_listed: false
