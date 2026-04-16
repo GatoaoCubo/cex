@@ -4,7 +4,7 @@ id: bias-audit-builder
 pillar: P07
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for bias_audit
-quality: null
+quality: 9.0
 title: "Type Builder Bias Audit"
 version: "1.0.0"
 author: wave1_builder_gen
