@@ -4,7 +4,7 @@ id: p03_sp_multimodal_prompt_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining multimodal_prompt-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Multimodal Prompt"
 version: "1.0.0"
 author: wave1_builder_gen_v2
