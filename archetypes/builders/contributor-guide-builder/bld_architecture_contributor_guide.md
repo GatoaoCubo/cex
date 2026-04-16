@@ -4,7 +4,7 @@ id: bld_architecture_contributor_guide
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component inventory, dependency map, and architectural position of the contributor_guide builder
-quality: null
+quality: 9.1
 title: "Contributor Guide Builder Architecture"
 version: "1.1.0"
 author: n02_hybrid_review7
