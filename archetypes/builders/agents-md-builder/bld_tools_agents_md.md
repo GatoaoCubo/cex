@@ -4,7 +4,7 @@ id: bld_tools_agents_md
 pillar: P04
 llm_function: CALL
 purpose: Tools available for agents_md production
-quality: null
+quality: 8.9
 title: "Tools Agents Md"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
