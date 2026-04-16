@@ -4,7 +4,7 @@ id: bld_architecture_content_filter
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of content_filter -- inventory, dependencies
-quality: null
+quality: 8.9
 title: "Architecture Content Filter"
 version: "1.0.0"
 author: wave1_builder_gen
