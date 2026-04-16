@@ -4,7 +4,7 @@ id: bld_architecture_churn_prevention_playbook
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of churn_prevention_playbook -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Churn Prevention Playbook"
 version: "1.0.0"
 author: n05_wave6
