@@ -4,7 +4,7 @@ id: bld_architecture_agent_profile
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of agent_profile -- inventory, dependencies
-quality: null
+quality: 8.9
 title: "Architecture Agent Profile"
 version: "1.0.0"
 author: wave1_builder_gen
