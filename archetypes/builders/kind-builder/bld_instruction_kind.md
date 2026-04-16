@@ -5,7 +5,7 @@ pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for scaffolding a complete builder package
 pattern: 4-phase pipeline (discover, reference, produce, validate)
-quality: null
+quality: 9.2
 title: "Instruction Kind Builder"
 version: "1.0.0"
 author: n03_builder
