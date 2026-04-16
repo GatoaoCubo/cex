@@ -4,7 +4,7 @@ id: bld_examples_consolidation_policy
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of consolidation_policy artifacts
-quality: null
+quality: 8.9
 title: "Examples: consolidation_policy artifacts"
 version: "2.0.0"
 author: n06_commercial
