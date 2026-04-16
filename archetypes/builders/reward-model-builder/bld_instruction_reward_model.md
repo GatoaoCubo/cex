@@ -4,7 +4,7 @@ id: bld_instruction_reward_model
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for reward_model
-quality: null
+quality: 8.9
 title: "Instruction Reward Model"
 version: "1.0.0"
 author: wave1_builder_gen
