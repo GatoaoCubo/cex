@@ -4,7 +4,7 @@ id: bld_schema_rl_algorithm
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for rl_algorithm
-quality: null
+quality: 9.1
 title: "Schema Rl Algorithm"
 version: "1.0.0"
 author: wave1_builder_gen
