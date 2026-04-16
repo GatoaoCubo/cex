@@ -3,8 +3,9 @@ id: kc_quantization_config
 kind: knowledge_card
 title: Quantization Configuration
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Quantization Configuration
