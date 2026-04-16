@@ -4,7 +4,7 @@ id: bld_config_agentic_rag
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for agentic_rag production
-quality: null
+quality: 8.7
 title: "Config Agentic RAG"
 version: "1.0.0"
 author: wave1_builder_gen_v2
