@@ -4,7 +4,7 @@ id: bld_knowledge_card_faq_entry
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for faq_entry production
-quality: null
+quality: 9.2
 title: "Knowledge Card Faq Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
