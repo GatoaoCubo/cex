@@ -17,6 +17,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -31,7 +32,7 @@ INFO = "INFO"
 # Helpers
 # ---------------------------------------------------------------------------
 
-def run_cmd(cmd, timeout=30):
+def run_cmd(cmd: list[str], timeout: int = 30) -> tuple[int, str, str]:
     """Run a command, return (returncode, stdout, stderr)."""
     try:
         r = subprocess.run(
@@ -46,7 +47,7 @@ def run_cmd(cmd, timeout=30):
         return -3, "", str(e)
 
 
-def run_shell(cmd_str, timeout=30):
+def run_shell(cmd_str: str, timeout: int = 30) -> tuple[int, str, str]:
     """Run a command via shell, return (returncode, stdout, stderr)."""
     try:
         r = subprocess.run(
@@ -59,7 +60,7 @@ def run_shell(cmd_str, timeout=30):
         return -3, "", str(e)
 
 
-def parse_version(text):
+def parse_version(text: str) -> tuple[tuple[int, int, int] | None, str]:
     """Extract first version-like string (x.y.z or x.y) from text."""
     m = re.search(r"(\d+)\.(\d+)(?:\.(\d+))?", text)
     if m:
@@ -69,7 +70,9 @@ def parse_version(text):
     return None, ""
 
 
-def version_gte(ver_tuple, min_tuple):
+def version_gte(
+    ver_tuple: tuple[int, int, int] | None, min_tuple: tuple[int, int, int]
+) -> bool:
     """True if ver_tuple >= min_tuple."""
     if ver_tuple is None:
         return False
@@ -81,14 +84,21 @@ def version_gte(ver_tuple, min_tuple):
 # ---------------------------------------------------------------------------
 
 class CheckResult:
-    def __init__(self, category, name, status, detail="", fix_cmd=None):
+    def __init__(
+        self,
+        category: str,
+        name: str,
+        status: str,
+        detail: str = "",
+        fix_cmd: str | None = None,
+    ) -> None:
         self.category = category
         self.name = name
         self.status = status   # OK, FAIL, INFO
         self.detail = detail
         self.fix_cmd = fix_cmd  # shell command string if auto-fixable
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, str]:
         d = {
             "category": self.category,
             "name": self.name,
@@ -99,7 +109,7 @@ class CheckResult:
             d["fix_cmd"] = self.fix_cmd
         return d
 
-    def display(self):
+    def display(self) -> str:
         tag = {"OK": "[OK]", "FAIL": "[FAIL]", "INFO": "[--]"}[self.status]
         line = "  %s %s" % (tag, self.detail if self.detail else self.name)
         return line
@@ -109,7 +119,7 @@ class CheckResult:
 # Category: RUNTIME
 # ---------------------------------------------------------------------------
 
-def check_runtime():
+def check_runtime() -> list[CheckResult]:
     results = []
 
     # Python >= 3.12
@@ -161,7 +171,7 @@ def check_runtime():
 # Category: PACKAGES
 # ---------------------------------------------------------------------------
 
-def check_packages(fix_mode=False):
+def check_packages(fix_mode: bool = False) -> list[CheckResult]:
     results = []
     pip_pkgs = [
         ("pyyaml", "yaml", "pyyaml"),
@@ -203,7 +213,7 @@ def check_packages(fix_mode=False):
 # Category: MCP_SERVERS
 # ---------------------------------------------------------------------------
 
-def check_mcp_servers():
+def check_mcp_servers() -> list[CheckResult]:
     results = []
     mcp_files = sorted(ROOT.glob(".mcp-n0*.json"))
 
@@ -296,7 +306,7 @@ ENV_VARS_SPEC = [
 ]
 
 
-def check_env_vars():
+def check_env_vars() -> list[CheckResult]:
     results = []
     for var_name, desc, required in ENV_VARS_SPEC:
         val = os.environ.get(var_name)
@@ -314,7 +324,7 @@ def check_env_vars():
 # Category: STRUCTURE
 # ---------------------------------------------------------------------------
 
-def check_structure(fix_mode=False):
+def check_structure(fix_mode: bool = False) -> list[CheckResult]:
     results = []
 
     # Nucleus dirs
@@ -370,7 +380,7 @@ def check_structure(fix_mode=False):
     return results
 
 
-def _nucleus_name(i):
+def _nucleus_name(i: int) -> str:
     names = {
         1: "intelligence", 2: "marketing", 3: "engineering",
         4: "knowledge", 5: "operations", 6: "commercial", 7: "admin"
@@ -382,7 +392,7 @@ def _nucleus_name(i):
 # Category: GIT_HOOKS
 # ---------------------------------------------------------------------------
 
-def check_git_hooks(fix_mode=False):
+def check_git_hooks(fix_mode: bool = False) -> list[CheckResult]:
     results = []
     hook_path = ROOT / ".git" / "hooks" / "pre-commit"
     if hook_path.exists():
@@ -400,7 +410,7 @@ def check_git_hooks(fix_mode=False):
 # Category: SYSTEM
 # ---------------------------------------------------------------------------
 
-def check_system():
+def check_system() -> list[CheckResult]:
     results = []
 
     # Disk space > 1GB free
@@ -477,7 +487,7 @@ OLLAMA_BINARY_PATHS = [
 ]
 
 
-def check_ollama():
+def check_ollama() -> list[CheckResult]:
     results = []
 
     # 1. Binary exists
@@ -549,7 +559,7 @@ def check_ollama():
     return results
 
 
-def _check_gpu():
+def _check_gpu() -> list[CheckResult]:
     """Check nvidia-smi for GPU availability."""
     results = []
     rc, out, err = run_cmd(["nvidia-smi", "--query-gpu=name,memory.total",
@@ -572,7 +582,7 @@ def _check_gpu():
 # Fix mode
 # ---------------------------------------------------------------------------
 
-def apply_fixes(all_results):
+def apply_fixes(all_results: list[CheckResult]) -> int:
     fixed = 0
     for r in all_results:
         if r.status != FAIL or not r.fix_cmd:
@@ -623,7 +633,7 @@ CATEGORIES_ORDER = [
 ]
 
 
-def print_human(all_results):
+def print_human(all_results: list[CheckResult]) -> None:
     print("=== CEX Setup Validator ===")
     print()
 
@@ -658,7 +668,7 @@ def print_human(all_results):
         ok_total, total, fail_total, info_total))
 
 
-def print_json(all_results):
+def print_json(all_results: list[CheckResult]) -> None:
     checks = [r.to_dict() for r in all_results]
     ok_total = sum(1 for r in all_results if r.status == OK)
     fail_total = sum(1 for r in all_results if r.status == FAIL)
@@ -679,7 +689,7 @@ def print_json(all_results):
 # Main
 # ---------------------------------------------------------------------------
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="CEX Setup Validator")
     parser.add_argument("--json", action="store_true", help="Machine-readable JSON output")
     parser.add_argument("--fix", action="store_true", help="Attempt auto-fix for FAIL items")
@@ -693,9 +703,9 @@ def main():
         print("Valid: %s" % ", ".join(c.lower() for c in CATEGORIES_ORDER))
         sys.exit(2)
 
-    all_results = []
+    all_results: list[CheckResult] = []
 
-    runners = {
+    runners: dict[str, Any] = {
         "RUNTIME": check_runtime,
         "PACKAGES": lambda: check_packages(fix_mode=args.fix),
         "MCP_SERVERS": check_mcp_servers,
