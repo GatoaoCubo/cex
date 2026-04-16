@@ -29,7 +29,7 @@ PASS = "[PASS]"
 FAIL = "[FAIL]"
 
 
-def test_system_prompt_llm_function_is_become():
+def test_system_prompt_llm_function_is_become() -> None:
     """
     Fix 1: system_prompt ISO MUST have llm_function=BECOME in both
     ISO_SPECS definition and generated frontmatter.
@@ -62,7 +62,7 @@ def test_system_prompt_llm_function_is_become():
     print(PASS + " system_prompt llm_function=BECOME (ISO_SPECS + frontmatter)")
 
 
-def test_schema_quality_field_is_null():
+def test_schema_quality_field_is_null() -> None:
     """
     Fix 2: schema ISO frontmatter must have quality: null.
     All ISOs should emit quality: null -- verify for the schema ISO specifically.
@@ -97,7 +97,7 @@ def test_schema_quality_field_is_null():
     print(PASS + " schema quality: null in frontmatter")
 
 
-def test_validator_rejects_blockchain_in_architecture():
+def test_validator_rejects_blockchain_in_architecture() -> None:
     """
     Fix 6: architecture ISO containing blockchain keywords for voice_pipeline MUST be rejected.
     Audit found architecture ISOs with trading/DeFi/Solana text for voice builders.
@@ -126,7 +126,7 @@ def test_validator_rejects_blockchain_in_architecture():
     print(PASS + " validator rejects blockchain keywords in voice_pipeline architecture ISO")
 
 
-def test_validator_rejects_bare_placeholders_in_output_template():
+def test_validator_rejects_bare_placeholders_in_output_template() -> None:
     """
     Fix 5: output_template ISO with bare {{field}} placeholders and no
     schema context (no <!-- comments -->, no 'schema' or 'frontmatter' mention) MUST be rejected.
@@ -152,7 +152,7 @@ def test_validator_rejects_bare_placeholders_in_output_template():
     print(PASS + " validator rejects bare {{field}} placeholders in output_template")
 
 
-def test_validator_accepts_good_output_template():
+def test_validator_accepts_good_output_template() -> None:
     """
     Regression: output_template WITH schema context (comments or 'frontmatter' reference)
     should pass the placeholder check.
@@ -176,7 +176,7 @@ def test_validator_accepts_good_output_template():
     print(PASS + " good output_template with comments passes validator")
 
 
-def test_domain_keywords_coverage():
+def test_domain_keywords_coverage() -> None:
     """
     Sanity check: DOMAIN_KEYWORDS covers all Wave 2 voice kinds.
     These had the worst domain mismatch issues per HYBRID_REVIEW2.
@@ -190,7 +190,7 @@ def test_domain_keywords_coverage():
     print(PASS + " DOMAIN_KEYWORDS covers all 7 voice kinds")
 
 
-def test_derive_id_pattern():
+def test_derive_id_pattern() -> None:
     """
     Verify derive_id_pattern produces sensible regex from naming templates.
     """
@@ -207,7 +207,7 @@ def test_derive_id_pattern():
     print(PASS + " derive_id_pattern produces correct regexes")
 
 
-def run_all_tests():
+def run_all_tests() -> bool:
     tests = [
         test_system_prompt_llm_function_is_become,
         test_schema_quality_field_is_null,
