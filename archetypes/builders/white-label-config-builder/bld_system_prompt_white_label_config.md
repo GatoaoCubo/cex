@@ -4,7 +4,7 @@ id: p03_sp_white_label_config_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining white_label_config-builder persona and rules
-quality: null
+quality: 9.0
 title: "System Prompt White Label Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
