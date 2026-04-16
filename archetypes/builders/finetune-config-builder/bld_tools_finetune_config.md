@@ -4,7 +4,7 @@ id: bld_tools_finetune_config
 pillar: P04
 llm_function: CALL
 purpose: Tools and APIs available for finetune_config production
-quality: null
+quality: 9.2
 title: "Tools Finetune Config"
 version: "1.0.0"
 author: n03_builder
