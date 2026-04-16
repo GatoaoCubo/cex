@@ -4,7 +4,7 @@ id: bld_collaboration_nps_survey
 pillar: P12
 llm_function: COLLABORATE
 purpose: How nps_survey-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Nps Survey"
 version: "1.0.0"
 author: n05_wave6
