@@ -4,7 +4,7 @@ id: p10_lr_workflow_node_builder
 pillar: P10
 llm_function: INJECT
 purpose: Learned patterns and pitfalls for workflow_node construction
-quality: null
+quality: 8.7
 title: "Learning Record Workflow Node"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,18 +16,18 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Observation  
-Common issues include inconsistent input/output schemas, missing metadata for visualization, and poor error propagation leading to silent failures. Nodes often lack clear validation rules, causing mismatches during workflow execution.  
+## Observation
+Common issues include inconsistent input/output schemas, missing metadata for visualization, and poor error propagation leading to silent failures. Nodes often lack clear validation rules, causing mismatches during workflow execution.
 
-## Pattern  
-Successful nodes enforce strict typing, expose metadata for UI integration, and include validation hooks. They encapsulate logic with minimal side effects and provide explicit error handling.  
+## Pattern
+Successful nodes enforce strict typing, expose metadata for UI integration, and include validation hooks. They encapsulate logic with minimal side effects and provide explicit error handling.
 
-## Evidence  
-Reviewed artifacts showed nodes with defined schemas had 30% fewer runtime errors; those without metadata caused visualization gaps in editors.  
+## Evidence
+Reviewed artifacts showed nodes with defined schemas had 30% fewer runtime errors; those without metadata caused visualization gaps in editors.
 
-## Recommendations  
-- Define explicit input/output schemas with type annotations  
-- Include metadata for UI display (e.g., node labels, color codes)  
-- Implement validation hooks for parameter checks  
-- Use standardized error formats for consistent debugging  
+## Recommendations
+- Define explicit input/output schemas with type annotations
+- Include metadata for UI display (e.g., node labels, color codes)
+- Implement validation hooks for parameter checks
+- Use standardized error formats for consistent debugging
 - Provide example configurations for common use cases
