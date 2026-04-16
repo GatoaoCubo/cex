@@ -8,7 +8,7 @@ created: "2026-04-13"
 updated: "2026-04-13"
 author: "builder_agent"
 domain: "knowledge_graph -- graph-based knowledge schemas with entity types, relation types, extraction logic, storage backend, and traversal strategies"
-quality: null
+quality: 9.1
 tags: [quality-gate, knowledge-graph, GraphRAG, entities, relations, P11]
 tldr: "Gates for knowledge_graph artifacts: validates entity/relation lists, relation source/target consistency, storage and traversal enums, extraction config, and section completeness."
 density_score: 0.92
