@@ -3,8 +3,9 @@ id: kc_agent_profile
 kind: knowledge_card
 title: Agent Profile Construction
 version: 1.0.0
-quality: null
+quality: 8.9
 pillar: P01
+density_score: 1.0
 ---
 
 # Agent Profile Construction Method
