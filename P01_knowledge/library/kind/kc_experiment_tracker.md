@@ -3,8 +3,9 @@ id: kc_experiment_tracker
 kind: knowledge_card
 title: Experiment Tracker
 version: 1.0.0
-quality: null
+quality: 8.8
 pillar: P01
+density_score: 0.99
 ---
 
 # Experiment Tracker
