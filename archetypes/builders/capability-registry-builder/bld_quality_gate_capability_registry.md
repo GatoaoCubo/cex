@@ -4,7 +4,7 @@ id: p08_qg_capability_registry
 pillar: P11
 llm_function: GOVERN
 purpose: Quality gate with HARD and SOFT scoring for capability_registry
-quality: null
+quality: 9.1
 title: "Quality Gate Capability Registry"
 version: "1.0.0"
 author: n04_wave8
