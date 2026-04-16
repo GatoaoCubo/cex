@@ -4,7 +4,7 @@ id: bld_collaboration_agent_name_service_record
 pillar: P12
 llm_function: COLLABORATE
 purpose: Crew contracts defining what this builder receives from and produces for other kinds
-quality: null
+quality: 9.1
 title: "Agent Name Service Record Builder -- Collaboration"
 version: "1.0.0"
 author: wave7_n05
