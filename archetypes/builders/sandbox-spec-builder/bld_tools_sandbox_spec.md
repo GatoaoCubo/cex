@@ -4,7 +4,7 @@ id: bld_tools_sandbox_spec
 pillar: P04
 llm_function: CALL
 purpose: Tools available for sandbox_spec production
-quality: null
+quality: 8.9
 title: "Tools Sandbox Spec"
 version: "1.0.0"
 author: wave1_builder_gen_v2
