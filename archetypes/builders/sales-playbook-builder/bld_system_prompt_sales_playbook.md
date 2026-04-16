@@ -4,7 +4,7 @@ id: p03_sp_sales_playbook_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining sales_playbook-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Sales Playbook"
 version: "1.0.0"
 author: wave1_builder_gen_v2
