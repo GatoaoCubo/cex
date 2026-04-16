@@ -4,7 +4,7 @@ id: bld_schema_course_module
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for course_module
-quality: null
+quality: 9.2
 title: "Schema Course Module"
 version: "1.0.0"
 author: n03_builder
