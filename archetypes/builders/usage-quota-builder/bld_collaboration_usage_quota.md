@@ -4,7 +4,7 @@ id: bld_collaboration_usage_quota
 pillar: P12
 llm_function: COLLABORATE
 purpose: How usage_quota-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Usage Quota"
 version: "1.0.0"
 author: wave1_builder_gen_v2
