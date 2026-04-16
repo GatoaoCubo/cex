@@ -4,7 +4,7 @@ id: bld_config_competitive_matrix
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for competitive_matrix production
-quality: null
+quality: 8.6
 title: "Config Competitive Matrix"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -17,18 +17,18 @@ density_score: 0.85
 ---
 
 ## Naming Convention (competitive matrix artifacts)
-Pattern: p01_cm_{{name}}.md (e.g., p01_cm_market_analysis.md) for competitive matrix outputs  
+Pattern: p01_cm_{{name}}.md (e.g., p01_cm_market_analysis.md) for competitive matrix outputs
 
-## Paths  
-/artifacts/p01/cm/{{name}}.md  
+## Paths
+/artifacts/p01/cm/{{name}}.md
 
-## Limits  
-max_bytes: 5120  
-max_turns: 3  
-effort_level: high  
+## Limits
+max_bytes: 5120
+max_turns: 3
+effort_level: high
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
