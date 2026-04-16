@@ -4,7 +4,7 @@ id: bld_output_template_case_study
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for case_study production
-quality: null
+quality: 9.1
 title: "Output Template Case Study"
 version: "1.1.0"
 author: wave1_builder_gen_v2
