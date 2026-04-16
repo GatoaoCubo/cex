@@ -615,7 +615,7 @@ KEYWORD_TRANSLATIONS = {
 }
 
 
-def translate_text(text):
+def translate_text(text: str) -> str:
     """Apply phrase-level then word-level PT->EN translation."""
     result = text
     for pt, en in PHRASES:
@@ -625,7 +625,7 @@ def translate_text(text):
     return result
 
 
-def translate_triggers_keywords(text):
+def translate_triggers_keywords(text: str) -> str:
     """Translate Portuguese triggers and keywords in frontmatter."""
     result = text
     for pt, en in TRIGGER_TRANSLATIONS.items():
@@ -638,7 +638,7 @@ def translate_triggers_keywords(text):
     return result
 
 
-def process_file(filepath):
+def process_file(filepath: str) -> bool:
     """Read, translate, and write back a single ISO file."""
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -680,7 +680,7 @@ def process_file(filepath):
     return False
 
 
-def main():
+def main() -> int:
     list_file = sys.argv[1] if len(sys.argv) > 1 else None
 
     if list_file and os.path.exists(list_file):
