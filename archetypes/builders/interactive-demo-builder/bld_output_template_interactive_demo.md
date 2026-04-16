@@ -4,7 +4,7 @@ id: bld_output_template_interactive_demo
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for interactive_demo production
-quality: null
+quality: 9.1
 title: "Output Template Interactive Demo"
 version: "1.0.1"
 author: n02_marketing
