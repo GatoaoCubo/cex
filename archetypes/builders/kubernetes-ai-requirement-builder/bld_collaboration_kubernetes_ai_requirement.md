@@ -4,7 +4,7 @@ id: bld_collaboration_kubernetes_ai_requirement
 pillar: P12
 llm_function: COLLABORATE
 purpose: How kubernetes_ai_requirement-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
