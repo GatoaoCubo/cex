@@ -4,7 +4,7 @@ id: bld_instruction_capability_registry
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for capability_registry
-quality: null
+quality: 8.9
 title: "Instruction Capability Registry"
 version: "1.0.0"
 author: n04_wave8
