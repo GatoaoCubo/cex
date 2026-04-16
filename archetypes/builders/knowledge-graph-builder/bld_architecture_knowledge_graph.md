@@ -4,7 +4,7 @@ id: bld_architecture_knowledge_graph
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of knowledge_graph -- inventory, dependencies, and architectural position in P01
-quality: null
+quality: 9.1
 title: "Architecture: knowledge_graph"
 version: "1.0.0"
 author: n03_builder
