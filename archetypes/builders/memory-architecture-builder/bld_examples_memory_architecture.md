@@ -4,7 +4,7 @@ id: bld_examples_memory_architecture
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of memory_architecture artifacts
-quality: null
+quality: 8.9
 title: "Examples: memory_architecture artifacts"
 version: "2.0.0"
 author: n06_commercial
