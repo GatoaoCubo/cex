@@ -115,12 +115,14 @@ def ollama_generate(prompt: str, max_tokens: int = 2048) -> str | None:
 
 
 def load_kind_meta(kind: str) -> dict[str, Any]:
+    """Load kind metadata from the shared registry."""
     with open(META_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
     return data.get(kind, {})
 
 
 def build_manifest_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the manifest-generation prompt for one kind."""
     return f"""You are generating a builder manifest for CEX kind "{kind}".
 The kind belongs to pillar {meta['pillar']} with llm_function {meta['llm_function']}.
 Description: {meta['description']}
@@ -140,6 +142,7 @@ Be specific to {kind}. Use industry terminology. ASCII only. Under 60 lines."""
 
 
 def build_instruction_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the instructions-generation prompt for one kind."""
     return f"""Generate production instructions for building a "{kind}" artifact.
 Kind: {kind}, Pillar: {meta['pillar']}, Function: {meta['llm_function']}
 Description: {meta['description']}
@@ -156,6 +159,7 @@ Be domain-specific. ASCII only. Under 70 lines."""
 
 
 def build_system_prompt_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the system-prompt-generation prompt for one kind."""
     return f"""Generate a system prompt for the {kind}-builder agent.
 Kind: {kind}, Pillar: {meta['pillar']}, Function: {meta['llm_function']}
 Description: {meta['description']}
@@ -174,6 +178,7 @@ Be specific. Use industry terms. ASCII only. Under 50 lines."""
 
 
 def build_schema_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the schema-generation prompt for one kind."""
     nm = meta.get("naming", "").replace("{{name}}", "slug")
     return f"""Generate a formal schema for CEX kind "{kind}".
 Pillar: {meta['pillar']}, Naming: {meta['naming']}, Max bytes: {meta['max_bytes']}
@@ -195,6 +200,7 @@ ASCII only. Under 80 lines."""
 
 
 def build_quality_gate_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the quality-gate-generation prompt for one kind."""
     return f"""Generate a quality gate for CEX kind "{kind}".
 Pillar: {meta['pillar']}, Description: {meta['description']}
 
@@ -214,6 +220,7 @@ ASCII only. Under 80 lines."""
 
 
 def build_output_template_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the output-template-generation prompt for one kind."""
     pfx = meta.get("naming", "").split("_")[0] + "_" + meta.get("naming", "").split("_")[1] if "_" in meta.get("naming", "") else "p00_x"
     return f"""Generate an output template for CEX kind "{kind}".
 Pillar: {meta['pillar']}, Naming: {meta['naming']}
@@ -227,6 +234,7 @@ ASCII only. Under 60 lines."""
 
 
 def build_examples_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the examples-generation prompt for one kind."""
     return f"""Generate golden and anti-examples for CEX kind "{kind}".
 Description: {meta['description']}
 Boundary: {meta['boundary']}
@@ -243,6 +251,7 @@ ASCII only. Under 120 lines."""
 
 
 def build_knowledge_card_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the knowledge-card-generation prompt for one kind."""
     return f"""Generate domain knowledge for building "{kind}" artifacts.
 Description: {meta['description']}
 Boundary: {meta['boundary']}
@@ -263,6 +272,7 @@ Use real industry terminology and references. ASCII only. Under 90 lines."""
 
 
 def build_architecture_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the architecture-generation prompt for one kind."""
     return f"""Generate an architecture document for the {kind}-builder.
 Kind: {kind}, Pillar: {meta['pillar']}
 
@@ -278,6 +288,7 @@ ASCII only. Under 50 lines."""
 
 
 def build_collaboration_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the collaboration-spec prompt for one kind."""
     return f"""Generate a collaboration spec for {kind}-builder.
 Kind: {kind}, Boundary: {meta['boundary']}
 
@@ -295,6 +306,7 @@ ASCII only. Under 45 lines."""
 
 
 def build_config_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the config-generation prompt for one kind."""
     return f"""Generate a config for {kind}-builder.
 Naming: {meta['naming']}, Max bytes: {meta['max_bytes']}, Pillar: {meta['pillar']}
 
@@ -312,6 +324,7 @@ ASCII only. Under 40 lines."""
 
 
 def build_memory_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the learning-record-generation prompt for one kind."""
     return f"""Generate a learning record (memory) for {kind}-builder.
 Description: {meta['description']}
 Boundary: {meta['boundary']}
@@ -330,6 +343,7 @@ ASCII only. Under 40 lines."""
 
 
 def build_tools_prompt(kind: str, meta: dict[str, Any]) -> str:
+    """Build the tools-inventory-generation prompt for one kind."""
     return f"""Generate a tools inventory for {kind}-builder.
 Kind: {kind}
 
@@ -445,6 +459,7 @@ def generate_iso(
 
 
 def main() -> None:
+    """Generate the requested wave, kind, or ISO set from CLI arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--kind", help="Generate for specific kind only")
     parser.add_argument("--wave", default="1", help="Wave number: 1, 2, 3, or all")
