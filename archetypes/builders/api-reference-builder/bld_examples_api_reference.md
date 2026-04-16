@@ -4,7 +4,7 @@ id: bld_examples_api_reference
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of api_reference artifacts
-quality: null
+quality: 8.9
 title: "Examples Api Reference"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -30,8 +30,8 @@ version: 2023-10-12
 ## Customers
 
 ### Create Customer
-**Method**: POST  
-**Path**: /v1/customers  
+**Method**: POST
+**Path**: /v1/customers
 **Params**:
 - `email` (required, string)
 - `name` (optional, string)
@@ -51,8 +51,8 @@ curl https://api.stripe.com/v1/customers \
 ## Repositories
 
 ### List Repos
-**Method**: GET  
-**Path**: /repos/{owner}/{repo}/branches  
+**Method**: GET
+**Path**: /repos/{owner}/{repo}/branches
 **Params**:
 - `owner` (required, string)
 - `repo` (required, string)
@@ -69,8 +69,8 @@ curl https://api.stripe.com/v1/customers \
 ## Repositories
 
 ### List Repos
-**Method**: GET  
-**Path**: /user/repos  
+**Method**: GET
+**Path**: /user/repos
 **Params**:
 - `sort` (optional, string)
 
@@ -86,8 +86,8 @@ No authentication method specified. Developers can't securely use the API withou
 
 ## Create Bucket
 
-**Method**: PUT  
-**Path**: /buckets/{bucketName}  
+**Method**: PUT
+**Path**: /buckets/{bucketName}
 **Params**:
 - `bucketName` (required, string)
 
