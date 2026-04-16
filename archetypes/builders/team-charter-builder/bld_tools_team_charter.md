@@ -4,7 +4,7 @@ id: bld_tools_team_charter
 pillar: P04
 llm_function: CALL
 purpose: Tools available for team_charter production
-quality: null
+quality: 9.0
 title: "Tools Team Charter"
 version: "1.0.0"
 author: n06_wave8
