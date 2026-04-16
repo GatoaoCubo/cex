@@ -4,7 +4,7 @@ id: bld_config_role_assignment
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for role_assignment production
-quality: null
+quality: 8.7
 title: "Config Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
