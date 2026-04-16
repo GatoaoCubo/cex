@@ -4,7 +4,7 @@ id: white-label-config-builder
 pillar: P09
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for white_label_config
-quality: null
+quality: 8.8
 title: "Type Builder White Label Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
