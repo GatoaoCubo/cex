@@ -4,7 +4,7 @@ id: bld_architecture_oauth_app_config
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of oauth_app_config -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Oauth App Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
