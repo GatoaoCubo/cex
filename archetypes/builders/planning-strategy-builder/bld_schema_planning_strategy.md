@@ -4,7 +4,7 @@ id: bld_schema_planning_strategy
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for planning_strategy
-quality: null
+quality: 9.1
 title: "Schema Planning Strategy"
 version: "1.0.0"
 author: builder_agent
