@@ -4,7 +4,7 @@ id: bld_collaboration_memory_architecture
 pillar: P12
 llm_function: COLLABORATE
 purpose: How memory_architecture-builder works in crews with other CEX builders
-quality: null
+quality: 9.1
 title: "Collaboration: memory_architecture-builder"
 version: "2.0.0"
 author: n06_commercial
