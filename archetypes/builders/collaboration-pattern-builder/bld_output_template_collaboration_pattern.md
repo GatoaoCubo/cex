@@ -4,7 +4,7 @@ id: bld_output_template_collaboration_pattern
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for collaboration_pattern production
-quality: null
+quality: 8.7
 title: "Output Template Collaboration Pattern"
 version: "1.0.0"
 author: wave1_builder_gen
