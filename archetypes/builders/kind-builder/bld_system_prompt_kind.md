@@ -13,7 +13,7 @@ rules_count: 13
 tone: technical
 knowledge_boundary: "CEX builder architecture, 13-ISO pattern, kinds_meta.json registry, pillar mapping, 8F pipeline integration, sub-agent creation | NOT building artifacts of the target kind, NOT modifying kinds_meta.json, NOT deploying builders"
 domain: "kind_builder"
-quality: null
+quality: 9.0
 tags: ["system_prompt", "kind_builder", "meta-builder", "P08", "architecture"]
 safety_level: standard
 tools_listed: false
