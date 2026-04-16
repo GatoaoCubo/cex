@@ -136,7 +136,7 @@ density_score: 0.92
 | Gap | Severity | Action | ROI |
 |-----|----------|--------|-----|
 | Stripe MCP not connected | HIGH | Set STRIPE_SECRET_KEY env var | Direct revenue visibility |
-| NotebookLM not authenticated | HIGH | Run setup_auth with financeiro@gatoaocubo3.com | Content distribution pipeline |
+| NotebookLM not authenticated | HIGH | Run setup_auth with {{BRAND_EMAIL}} | Content distribution pipeline |
 | Canva auth broken | MEDIUM | Refresh CANVA_CLIENT_ID + SECRET | Visual asset automation |
 | No golden tests for commercial outputs | MEDIUM | Create test fixtures in N06_commercial/tests/ | Quality regression detection |
 | Only 2 dedicated builders (content_monetization, tagline) | LOW | Register pricing-builder, funnel-builder in kinds_meta.json | Wider commercial artifact coverage |

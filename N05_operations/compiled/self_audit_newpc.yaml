@@ -179,7 +179,7 @@ git_configuration: '| Setting | Value |
 
   |---------|-------|
 
-  | remote.origin.url | `https://github.com/GatoaoCubo/cex.git` |
+  | remote.origin.url | `https://github.com/{{BRAND_DOMAIN}}/cex.git` |
 
   | branch.main.remote | origin |
 

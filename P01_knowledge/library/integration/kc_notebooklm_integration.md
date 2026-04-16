@@ -223,7 +223,7 @@ Spec: `_docs/specs/spec_notebooklm_pipeline.md`
 ```yaml
 # .cex/config/notebooklm_notebooks.yaml
 version: 1
-google_account: financeiro@gatoaocubo3.com
+google_account: {{BRAND_EMAIL}}
 publish_mode: auto
 browser_engine: chrome_local
 default_outputs: [flashcards, audio_summary, quiz]

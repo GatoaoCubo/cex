@@ -75,7 +75,7 @@ reversible: true | false
 ### D-2026-04-06-005: Google Account
 - **Category**: infrastructure
 - **Question**: Which Google account for NotebookLM?
-- **Answer**: financeiro@gatoaocubo3.com (already PRO)
+- **Answer**: {{BRAND_EMAIL}} (already PRO)
 - **Rationale**: Existing PRO account, no new subscription needed
 - **Impact**: All NotebookLM operations use this account
 - **Reversible**: Yes

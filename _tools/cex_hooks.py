@@ -579,7 +579,7 @@ def check_kinds_meta_ascii(staged_files: list) -> int:
 # See _reports/polish/w2_consolidation.md for the cleanup that motivated this gate.
 ROOT_WHITELIST = {
     "CLAUDE.md", "README.md", "QUICKSTART.md", "CONTRIBUTING.md",
-    "CHANGELOG.md", "LICENSE", "MIT_LICENSE", "CODE_OF_CONDUCT.md",
+    "CHANGELOG.md", "LICENSE", "MIT_LICENSE", "CODE_OF_CONDUCT.md", "SECURITY.md",
     ".gitignore", ".gitattributes", ".editorconfig", ".env.example",
     "requirements.txt", "requirements-llm.txt", "pyproject.toml",
     "setup.py", "setup.cfg", "Makefile", "package.json", "package-lock.json",

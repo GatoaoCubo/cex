@@ -47,7 +47,7 @@ User with zero subscriptions can still use CEX:
 
 ## Fine-Tuned CEX Model (codexaft)
 
-gatoaocubo/codexaft:v3 is a Qwen 3.1B fine-tuned on CEX artifacts.
+{{BRAND_DOMAIN}}/codexaft:v3 is a Qwen 3.1B fine-tuned on CEX artifacts.
 Smallest usable model for CEX-specific tasks.
 Ideal for: scaffold generation, frontmatter completion, template filling.
 Not ideal for: complex reasoning, multi-kind crews, architecture design.

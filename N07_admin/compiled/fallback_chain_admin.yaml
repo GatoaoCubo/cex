@@ -50,7 +50,7 @@ free_only_mode: 'User with zero subscriptions can still use CEX:
   - All CEX tools work (motor, doctor, compile, index are Python-only)
 
   - 8F Runner F4/F6 use local model (slower, lower quality, but functional)'
-fine_tuned_cex_model_codexaft: 'gatoaocubo/codexaft:v3 is a Qwen 3.1B fine-tuned on CEX artifacts. Smallest usable model for
+fine_tuned_cex_model_codexaft: '{{BRAND_DOMAIN}}/codexaft:v3 is a Qwen 3.1B fine-tuned on CEX artifacts. Smallest usable model for
   CEX-specific tasks. Ideal for: scaffold generation, frontmatter completion, template filling. Not ideal for: complex reasoning,
   multi-kind crews, architecture design.'
 per_nucleus_default: '| Nucleus | Primary | Fallback 1 | Fallback 2 |

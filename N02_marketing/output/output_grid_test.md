@@ -50,7 +50,7 @@ Source: `FULLGRID_20260406` — all subjective decisions pre-resolved by user vi
 
 | Domain | Key Decisions |
 |--------|--------------|
-| NotebookLM | Domain scope, auto-publish, chrome_local, `financeiro@gatoaocubo3.com` |
+| NotebookLM | Domain scope, auto-publish, chrome_local, `{{BRAND_EMAIL}}` |
 | Tech debt | Sanitize all tools, UTF-8 strict, pre-commit hooks |
 | Agent identity | Source of truth: `nucleus_sins.yaml` |
 

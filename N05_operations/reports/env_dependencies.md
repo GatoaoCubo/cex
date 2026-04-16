@@ -19,7 +19,7 @@ tags: [dependencies, environment, newpc, operations]
 
 | Runtime | Version | Path | Status |
 |---------|---------|------|--------|
-| Python | 3.14.4 | `C:\Users\CEX\AppData\Local\Python\pythoncore-3.14-64\python.exe` | Installed |
+| Python | 3.14.4 | `{{USER_HOME}}\AppData\Local\Python\pythoncore-3.14-64\python.exe` | Installed |
 | Node.js | v24.14.1 | System PATH | Installed |
 | npm | 11.11.0 | System PATH | Installed |
 | Git | 2.53.0.windows.2 | System PATH | Installed |

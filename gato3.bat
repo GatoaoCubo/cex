@@ -1,8 +1,8 @@
 @echo off
-:: GATO3 shortcut -- opens N07 on gato-ao-cubo worktree
-:: Usage: gato3 [subcommand]  (same subcommands as cex)
+:: Repo launcher -- opens N07 on the current worktree
+:: Usage: repo-launch [subcommand]
 
-set CEX_ROOT=C:\Users\PC\Documents\GitHub\cex
+set CEX_ROOT=%~dp0
 cd /d "%CEX_ROOT%"
 
 if "%~1"=="" (

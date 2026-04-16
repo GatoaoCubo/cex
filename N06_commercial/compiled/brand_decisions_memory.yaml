@@ -71,7 +71,7 @@ d_2026_04_06_005_google_account: '- Category: infrastructure
 
   - Question: Which Google account for NotebookLM?
 
-  - Answer: financeiro@gatoaocubo3.com (already PRO)
+  - Answer: {{BRAND_EMAIL}} (already PRO)
 
   - Rationale: Existing PRO account, no new subscription needed
 

@@ -20,7 +20,7 @@ density_score: 1.0
 **YES.** `_tools/cex_web_fetch.py` is present and functional.
 
 **Evidence:**
-- File exists: `C:\Users\CEX\Documents\GitHub\cex\_tools\cex_web_fetch.py` ✓
+- File exists: `{{USER_HOME}}\Documents\GitHub\cex\_tools\cex_web_fetch.py` ✓
 - Implements HTTP fetch with HTML→text conversion ✓
 - Supports both generic URLs and arXiv shortcuts ✓
 - Handles charset detection and truncation ✓

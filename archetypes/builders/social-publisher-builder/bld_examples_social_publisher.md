@@ -19,13 +19,13 @@ density_score: 0.90
 
 # Examples: social-publisher-builder
 
-## Golden Example — Pet Shop (GATO3)
-INPUT: "Create social publisher config for GATO3, a minimalist cat accessories brand on IG and FB"
+## Golden Example — Pet Shop ({{BRAND_NAME}})
+INPUT: "Create social publisher config for {{BRAND_NAME}}, a minimalist cat accessories brand on IG and FB"
 OUTPUT:
 ```yaml
 identity:
-  empresa: GATO3
-  handle: "@gatoaocubo3"
+  empresa: {{BRAND_NAME}}
+  handle: "@{{BRAND_DOMAIN}}"
   nicho: pet
   tom: casual, acolhedor
   persona: Ro
@@ -58,7 +58,7 @@ publisher:
   batch_size: 3
   retry: { max: 3, backoff: exponential, base_seconds: 30 }
 hashtags:
-  brand: ["gato3", "gatoaocubo"]
+  brand: ["{{BRAND_NAME}}", "{{BRAND_DOMAIN}}"]
   niche: ["produtosparagatos", "designminimalist", "petlovers"]
   max_per_post: 10
 notifications:
@@ -69,7 +69,7 @@ WHY GOOD: Zero hardcoded secrets, all company data in config, percentages sum to
 ## Anti-Example — Hardcoded System
 ```python
 # BAD: company name hardcoded everywhere
-COMPANY = "GATO3"
+COMPANY = "{{BRAND_NAME}}"
 API_KEY = "sk-abc123..."  # LEAKED SECRET
 def post_to_instagram():
     caption = f"Nova collection {COMPANY}! 🐱"  # hardcoded template

@@ -31,12 +31,12 @@ density_score: 0.90
 ## Naming Convention
 | Scope | Convention | Example |
 |-------|-----------|---------|
-| Config file | `social_publisher_config_{empresa_slug}.yaml` | `social_publisher_config_gato3.yaml` |
+| Config file | `social_publisher_config_{empresa_slug}.yaml` | `social_publisher_config_{{BRAND_NAME}}.yaml` |
 | Template | `tpl_social_publisher.md` | P04_tools/templates/ |
 | Examples | `ex_social_publisher_{niche}.md` | `ex_social_publisher_pet_shop.md` |
 | Compiled | `social_publisher_{slug}.yaml` | P04_tools/compiled/ |
 | Instance | `social_publisher_config.md` | _instances/{company}/N02_marketing/ |
-| Frontmatter id | `p04_cli_social_publisher_{slug}` | `p04_cli_social_publisher_gato3` |
+| Frontmatter id | `p04_cli_social_publisher_{slug}` | `p04_cli_social_publisher_{{BRAND_NAME}}` |
 
 ## Size Limits
 | Artifact | Max Size | Rationale |

@@ -194,7 +194,7 @@ tool_cex_notebooklm_py: '| Subcommand | What it does |
 
 
   Spec: `_docs/specs/spec_notebooklm_pipeline.md`'
-config_notebooklm_notebooks_yaml: "# .cex/config/notebooklm_notebooks.yaml\nversion: 1\ngoogle_account: financeiro@gatoaocubo3.com\n\
+config_notebooklm_notebooks_yaml: "# .cex/config/notebooklm_notebooks.yaml\nversion: 1\ngoogle_account: {{BRAND_EMAIL}}\n\
   publish_mode: auto\nbrowser_engine: chrome_local\ndefault_outputs: [flashcards, audio_summary, quiz]\n\ndomains:\n  meta:\n\
   \    notebook_id: \"940fd258-847f-47c1-b7e6-caca7b730681\"\n    name: \"CEX Meta Knowledge\"\n    sources: [{path: \"kc_8f_pipeline.md\"\
   , uploaded: 2026-04-06}]\n    source_count: 2\n    last_sync: 2026-04-06\n    status: active\n  brand:\n    notebook_id:\

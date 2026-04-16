@@ -17,7 +17,7 @@ budget:
   tokens: 120000
   wall_clock_seconds: 1800
   usd: 5.00
-stakeholders: [Gato3, n07_orchestrator, n02_marketing]
+stakeholders: ["{{BRAND_NAME}}", n07_orchestrator, n02_marketing]
 escalation_protocol: "If any role crosses budget ceiling, escalate to n07 via signal; do NOT silently truncate."
 termination_criteria: "ANY of: (1) qa_reviewer signals launch-approved; (2) budget exhausted; (3) deadline passed; (4) 3 consecutive QA rejects on same artifact."
 quality: 8.9
@@ -50,7 +50,7 @@ Ship a launch package for **CEX Flywheel v2** targeting senior AI engineers at S
 - USD: 5.00 at Sonnet pricing (roughly 40k input + 80k output tokens)
 
 ## Stakeholders
-- Gato3 (product owner -- decides WHAT)
+- {{BRAND_NAME}} (product owner -- decides WHAT)
 - n07_orchestrator (dispatches + monitors + consolidates)
 - n02_marketing (nucleus that owns the crew instance)
 

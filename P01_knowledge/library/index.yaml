@@ -1465,6 +1465,16 @@ platform:
     pillar: P01
     title: Supabase Vectors — pgvector, Embeddings, Semantic Search, RAG
 domains:
+  kc_ab_test_config:
+    path: P01_knowledge\library\kind\kc_ab_test_config.md
+    title: A/B Test Configuration for Conversion Optimization
+    feeds_kinds: []
+    origin: ''
+  kc_action_paradigm:
+    path: P01_knowledge\library\kind\kc_action_paradigm.md
+    title: Action Paradigm
+    feeds_kinds: []
+    origin: ''
   p01_kc_action_prompt:
     path: P01_knowledge\library\kind\kc_action_prompt.md
     title: Action Prompt — Deep Knowledge for action_prompt
@@ -1483,11 +1493,53 @@ domains:
     feeds_kinds:
     - agent_card
     origin: ''
+  kc_agent_computer_interface:
+    path: P01_knowledge\library\kind\kc_agent_computer_interface.md
+    title: Agent-Computer Interface
+    feeds_kinds: []
+    origin: ''
+  kc_agent_grounding_record:
+    path: P01_knowledge\library\kind\kc_agent_grounding_record.md
+    title: Agent Grounding Record
+    feeds_kinds: []
+    origin: ''
+  p04_kc_agent_name_service_record:
+    path: P01_knowledge\library\kind\kc_agent_name_service_record.md
+    title: Agent Name Service Record -- Deep Knowledge for agent_name_service_record
+    feeds_kinds: []
+    origin: ''
   p01_kc_agent_package:
     path: P01_knowledge\library\kind\kc_agent_package.md
     title: ISO Package — Deep Knowledge for agent_package
     feeds_kinds:
     - agent_package
+    origin: ''
+  kc_agent_profile:
+    path: P01_knowledge\library\kind\kc_agent_profile.md
+    title: Agent Profile Construction
+    feeds_kinds: []
+    origin: ''
+  kc_agentic_rag:
+    path: P01_knowledge\library\kind\kc_agentic_rag.md
+    title: Agentic RAG Pattern
+    feeds_kinds: []
+    origin: ''
+  kc_agents_md:
+    path: P01_knowledge\library\kind\kc_agents_md.md
+    title: Agents.md Project-Root Manifest
+    feeds_kinds: []
+    origin: ''
+  kc_ai_rmf_profile:
+    path: P01_knowledge\library\kind\kc_ai_rmf_profile.md
+    title: AI RMF Profile
+    feeds_kinds: []
+    origin: ''
+  kc_analyst_briefing:
+    path: P01_knowledge\library\kind\kc_analyst_briefing.md
+    title: Analyst Briefing
+    feeds_kinds:
+    - steps
+    - core
     origin: ''
   p01_kc_api_client:
     path: P01_knowledge\library\kind\kc_api_client.md
@@ -1495,11 +1547,26 @@ domains:
     feeds_kinds:
     - api_client
     origin: ''
+  kc_api_reference:
+    path: P01_knowledge\library\kind\kc_api_reference.md
+    title: API Reference
+    feeds_kinds: []
+    origin: ''
+  kc_app_directory_entry:
+    path: P01_knowledge\library\kind\kc_app_directory_entry.md
+    title: App Directory Entry Guide
+    feeds_kinds: []
+    origin: ''
   p01_kc_audio_tool:
     path: P01_knowledge\library\kind\kc_audio_tool.md
     title: Audio Tool — Deep Knowledge for audio_tool
     feeds_kinds:
     - audio_tool
+    origin: ''
+  kc_audit_log:
+    path: P01_knowledge\library\kind\kc_audit_log.md
+    title: Immutable Audit Log Configuration for SOC2 Type II Compliance
+    feeds_kinds: []
     origin: ''
   p01_kc_axiom:
     path: P01_knowledge\library\kind\kc_axiom.md
@@ -1507,11 +1574,27 @@ domains:
     feeds_kinds:
     - axiom
     origin: ''
+  p01_kc_batch_config:
+    path: P01_knowledge\library\kind\kc_batch_config.md
+    title: 'batch_config: Asynchronous Batch API Configuration'
+    feeds_kinds:
+    - batch_config
+    origin: ''
   p01_kc_benchmark:
     path: P01_knowledge\library\kind\kc_benchmark.md
     title: Benchmark — Deep Knowledge for benchmark
     feeds_kinds:
     - benchmark
+    origin: ''
+  kc_benchmark_suite:
+    path: P01_knowledge\library\kind\kc_benchmark_suite.md
+    title: Benchmark Suite Definition
+    feeds_kinds: []
+    origin: ''
+  kc_bias_audit:
+    path: P01_knowledge\library\kind\kc_bias_audit.md
+    title: Bias Audit
+    feeds_kinds: []
     origin: ''
   p01_kc_boot_config:
     path: P01_knowledge\library\kind\kc_boot_config.md
@@ -1531,11 +1614,31 @@ domains:
     feeds_kinds:
     - bugloop
     origin: ''
+  kc_c2pa_manifest:
+    path: P01_knowledge\library\kind\kc_c2pa_manifest.md
+    title: C2PA 2.3 Content Credential Manifest
+    feeds_kinds: []
+    origin: ''
+  p08_kc_capability_registry:
+    path: P01_knowledge\library\kind\kc_capability_registry.md
+    title: Capability Registry -- Deep Knowledge for capability_registry
+    feeds_kinds: []
+    origin: ''
+  p05_kc_case_study:
+    path: P01_knowledge\library\kind\kc_case_study.md
+    title: Case Study -- Deep Knowledge for case_study
+    feeds_kinds: []
+    origin: ''
   p01_kc_chain:
     path: P01_knowledge\library\kind\kc_chain.md
     title: Chain — Deep Knowledge for chain
     feeds_kinds:
     - chain
+    origin: ''
+  kc_changelog:
+    path: P01_knowledge\library\kind\kc_changelog.md
+    title: Changelog Entry
+    feeds_kinds: []
     origin: ''
   p01_kc_checkpoint:
     path: P01_knowledge\library\kind\kc_checkpoint.md
@@ -1548,6 +1651,11 @@ domains:
     title: Chunk Strategy — Deep Knowledge for chunk_strategy
     feeds_kinds:
     - chunk_strategy
+    origin: ''
+  kc_churn_prevention_playbook:
+    path: P01_knowledge\library\kind\kc_churn_prevention_playbook.md
+    title: Churn Prevention Playbook
+    feeds_kinds: []
     origin: ''
   p01_kc_citation:
     path: P01_knowledge\library\kind\kc_citation.md
@@ -1567,6 +1675,36 @@ domains:
     feeds_kinds:
     - code_executor
     origin: ''
+  kc_code_of_conduct:
+    path: P01_knowledge\library\kind\kc_code_of_conduct.md
+    title: Code of Conduct
+    feeds_kinds: []
+    origin: ''
+  kc_cohort_analysis:
+    path: P01_knowledge\library\kind\kc_cohort_analysis.md
+    title: Cohort Analysis for Retention and LTV Modeling
+    feeds_kinds: []
+    origin: ''
+  kc_collaboration_pattern:
+    path: P01_knowledge\library\kind\kc_collaboration_pattern.md
+    title: Collaboration Pattern
+    feeds_kinds: []
+    origin: ''
+  kc_competitive_matrix:
+    path: P01_knowledge\library\kind\kc_competitive_matrix.md
+    title: Competitive Matrix
+    feeds_kinds: []
+    origin: ''
+  kc_compliance_checklist:
+    path: P01_knowledge\library\kind\kc_compliance_checklist.md
+    title: Compliance Checklist
+    feeds_kinds: []
+    origin: ''
+  kc_compliance_framework:
+    path: P01_knowledge\library\kind\kc_compliance_framework.md
+    title: Compliance Framework
+    feeds_kinds: []
+    origin: ''
   p01_kc_component_map:
     path: P01_knowledge\library\kind\kc_component_map.md
     title: Component Map — Deep Knowledge for component_map
@@ -1585,11 +1723,26 @@ domains:
     feeds_kinds:
     - computer_use
     origin: ''
+  kc_conformity_assessment:
+    path: P01_knowledge\library\kind\kc_conformity_assessment.md
+    title: Conformity Assessment for High-Risk AI Systems (EU AI Act Annex IV)
+    feeds_kinds: []
+    origin: ''
+  kc_consolidation_policy:
+    path: P01_knowledge\library\kind\kc_consolidation_policy.md
+    title: Consolidation Policy
+    feeds_kinds: []
+    origin: ''
   p01_kc_constraint_spec:
     path: P01_knowledge\library\kind\kc_constraint_spec.md
     title: Constraint Spec — Deep Knowledge for constraint_spec
     feeds_kinds:
     - constraint_spec
+    origin: ''
+  kc_content_filter:
+    path: P01_knowledge\library\kind\kc_content_filter.md
+    title: Content Filter Pipeline Configuration
+    feeds_kinds: []
     origin: ''
   p01_kc_content_monetization:
     path: P01_knowledge\library\kind\kc_content_monetization.md
@@ -1609,6 +1762,32 @@ domains:
     feeds_kinds:
     - context_window_config
     origin: ''
+  kc_contributor_guide:
+    path: P01_knowledge\library\kind\kc_contributor_guide.md
+    title: Contributor Guide
+    feeds_kinds: []
+    origin: ''
+  p01_kc_cost_budget:
+    path: P01_knowledge\library\kind\kc_cost_budget.md
+    title: 'cost_budget: Token Economics and Spend Management'
+    feeds_kinds:
+    - cost_budget
+    origin: ''
+  p05_kc_course_module:
+    path: P01_knowledge\library\kind\kc_course_module.md
+    title: Course Module -- Deep Knowledge for course_module
+    feeds_kinds: []
+    origin: ''
+  kc_crew_template:
+    path: P01_knowledge\library\kind\kc_crew_template.md
+    title: Crew Template
+    feeds_kinds: []
+    origin: ''
+  kc_customer_segment:
+    path: P01_knowledge\library\kind\kc_customer_segment.md
+    title: Customer Segment Definition
+    feeds_kinds: []
+    origin: ''
   p01_kc_daemon:
     path: P01_knowledge\library\kind\kc_daemon.md
     title: Daemon — Deep Knowledge for daemon
@@ -1620,6 +1799,16 @@ domains:
     title: DAG — Deep Knowledge for dag
     feeds_kinds:
     - dag
+    origin: ''
+  p09_kc_data_residency:
+    path: P01_knowledge\library\kind\kc_data_residency.md
+    title: Data Residency -- Deep Knowledge for data_residency
+    feeds_kinds: []
+    origin: ''
+  p01_kc_dataset_card:
+    path: P01_knowledge\library\kind\kc_dataset_card.md
+    title: Dataset Card -- Deep Knowledge for dataset_card
+    feeds_kinds: []
     origin: ''
   p01_kc_db_connector:
     path: P01_knowledge\library\kind\kc_db_connector.md
@@ -1639,6 +1828,11 @@ domains:
     feeds_kinds:
     - diagram
     origin: ''
+  kc_discovery_questions:
+    path: P01_knowledge\library\kind\kc_discovery_questions.md
+    title: MEDDIC/BANT Discovery Question Bank
+    feeds_kinds: []
+    origin: ''
   p01_kc_dispatch_rule:
     path: P01_knowledge\library\kind\kc_dispatch_rule.md
     title: Dispatch Rule — Deep Knowledge for dispatch_rule
@@ -1651,11 +1845,26 @@ domains:
     feeds_kinds:
     - document_loader
     origin: ''
+  kc_dual_loop_architecture:
+    path: P01_knowledge\library\kind\kc_dual_loop_architecture.md
+    title: Dual Loop Architecture
+    feeds_kinds: []
+    origin: ''
   p01_kc_e2e_eval:
     path: P01_knowledge\library\kind\kc_e2e_eval.md
     title: E2E Eval — Deep Knowledge for e2e_eval
     feeds_kinds:
     - e2e_eval
+    origin: ''
+  kc_ecommerce_vertical:
+    path: P01_knowledge\library\kind\kc_ecommerce_vertical.md
+    title: eCommerce Vertical Knowledge Card
+    feeds_kinds: []
+    origin: ''
+  kc_edit_format:
+    path: P01_knowledge\library\kind\kc_edit_format.md
+    title: Edit Format Specification
+    feeds_kinds: []
     origin: ''
   p01_kc_effort_profile:
     path: P01_knowledge\library\kind\kc_effort_profile.md
@@ -1675,6 +1884,11 @@ domains:
     feeds_kinds:
     - embedding_config
     origin: ''
+  kc_enterprise_sla:
+    path: P01_knowledge\library\kind\kc_enterprise_sla.md
+    title: Enterprise SLA Template
+    feeds_kinds: []
+    origin: ''
   p01_kc_entity_memory:
     path: P01_knowledge\library\kind\kc_entity_memory.md
     title: Entity Memory — Deep Knowledge for entity_memory
@@ -1687,11 +1901,10 @@ domains:
     feeds_kinds:
     - enum_def
     origin: ''
-  p01_kc_env_config:
+  kc_env_config:
     path: P01_knowledge\library\kind\kc_env_config.md
-    title: Env Config — Deep Knowledge for env_config
-    feeds_kinds:
-    - env_config
+    title: Environment Configuration for LLM Systems
+    feeds_kinds: []
     origin: ''
   p01_kc_eval_dataset:
     path: P01_knowledge\library\kind\kc_eval_dataset.md
@@ -1699,11 +1912,42 @@ domains:
     feeds_kinds:
     - eval_dataset
     origin: ''
+  kc_eval_framework:
+    path: P01_knowledge\library\kind\kc_eval_framework.md
+    title: Evaluation Framework Integration
+    feeds_kinds: []
+    origin: ''
+  kc_eval_metric:
+    path: P01_knowledge\library\kind\kc_eval_metric.md
+    title: Evaluation Metric Definition
+    feeds_kinds: []
+    origin: ''
+  kc_expansion_play:
+    path: P01_knowledge\library\kind\kc_expansion_play.md
+    title: Account Expansion Play
+    feeds_kinds: []
+    origin: ''
+  p01_kc_experiment_config:
+    path: P01_knowledge\library\kind\kc_experiment_config.md
+    title: 'experiment_config: A/B Testing and Prompt Experimentation'
+    feeds_kinds:
+    - experiment_config
+    origin: ''
+  kc_experiment_tracker:
+    path: P01_knowledge\library\kind\kc_experiment_tracker.md
+    title: Experiment Tracker
+    feeds_kinds: []
+    origin: ''
   p01_kc_fallback_chain:
     path: P01_knowledge\library\kind\kc_fallback_chain.md
     title: Fallback Chain — Deep Knowledge for fallback_chain
     feeds_kinds:
     - fallback_chain
+    origin: ''
+  kc_faq_entry:
+    path: P01_knowledge\library\kind\kc_faq_entry.md
+    title: FAQ Entry
+    feeds_kinds: []
     origin: ''
   p01_kc_feature_flag:
     path: P01_knowledge\library\kind\kc_feature_flag.md
@@ -1717,6 +1961,17 @@ domains:
     feeds_kinds:
     - few_shot_example
     origin: ''
+  kc_fhir_agent_capability:
+    path: P01_knowledge\library\kind\kc_fhir_agent_capability.md
+    title: HL7 FHIR R5 AI Agent Capability Declaration
+    feeds_kinds: []
+    origin: ''
+  p01_kc_finetune_config:
+    path: P01_knowledge\library\kind\kc_finetune_config.md
+    title: 'finetune_config: Model Fine-Tuning Configuration'
+    feeds_kinds:
+    - finetune_config
+    origin: ''
   p01_kc_formatter:
     path: P01_knowledge\library\kind\kc_formatter.md
     title: Formatter — Deep Knowledge for formatter
@@ -1728,6 +1983,11 @@ domains:
     title: Function Def — Deep Knowledge for function_def
     feeds_kinds:
     - function_def
+    origin: ''
+  kc_github_issue_template:
+    path: P01_knowledge\library\kind\kc_github_issue_template.md
+    title: GitHub Issue Template
+    feeds_kinds: []
     origin: ''
   p01_kc_glossary_entry:
     path: P01_knowledge\library\kind\kc_glossary_entry.md
@@ -1741,11 +2001,25 @@ domains:
     feeds_kinds:
     - golden_test
     origin: ''
-  p01_kc_guardrail:
+  p01_kc_govtech_vertical:
+    path: P01_knowledge\library\kind\kc_govtech_vertical.md
+    title: Govtech Vertical -- Deep Knowledge for govtech_vertical
+    feeds_kinds: []
+    origin: ''
+  p11_kc_gpai_technical_doc:
+    path: P01_knowledge\library\kind\kc_gpai_technical_doc.md
+    title: GPAI Technical Doc -- Deep Knowledge for gpai_technical_doc
+    feeds_kinds: []
+    origin: ''
+  kc_graph_rag_config:
+    path: P01_knowledge\library\kind\kc_graph_rag_config.md
+    title: Graph RAG Configuration
+    feeds_kinds: []
+    origin: ''
+  kc_guardrail:
     path: P01_knowledge\library\kind\kc_guardrail.md
-    title: Guardrail — Deep Knowledge for guardrail
-    feeds_kinds:
-    - guardrail
+    title: LLM Safety Guardrails
+    feeds_kinds: []
     origin: ''
   p01_kc_handoff:
     path: P01_knowledge\library\kind\kc_handoff.md
@@ -1759,6 +2033,17 @@ domains:
     feeds_kinds:
     - handoff_protocol
     origin: ''
+  kc_healthcare_vertical:
+    path: P01_knowledge\library\kind\kc_healthcare_vertical.md
+    title: Healthcare Vertical Knowledge Card
+    feeds_kinds: []
+    origin: ''
+  p01_kc_hitl_config:
+    path: P01_knowledge\library\kind\kc_hitl_config.md
+    title: 'hitl_config: Human-in-the-Loop Review Configuration'
+    feeds_kinds:
+    - hitl_config
+    origin: ''
   p01_kc_hook:
     path: P01_knowledge\library\kind\kc_hook.md
     title: Hook — Deep Knowledge for hook
@@ -1770,6 +2055,11 @@ domains:
     title: Hook Config — Deep Knowledge for hook_config
     feeds_kinds:
     - hook_config
+    origin: ''
+  kc_incident_report:
+    path: P01_knowledge\library\kind\kc_incident_report.md
+    title: Incident Report
+    feeds_kinds: []
     origin: ''
   p01_kc_input_schema:
     path: P01_knowledge\library\kind\kc_input_schema.md
@@ -1783,6 +2073,16 @@ domains:
     feeds_kinds:
     - instruction
     origin: ''
+  kc_integration_guide:
+    path: P01_knowledge\library\kind\kc_integration_guide.md
+    title: Integration Guide for Platform Partners
+    feeds_kinds: []
+    origin: ''
+  kc_interactive_demo:
+    path: P01_knowledge\library\kind\kc_interactive_demo.md
+    title: Interactive Product Demo Script
+    feeds_kinds: []
+    origin: ''
   p01_kc_interface:
     path: P01_knowledge\library\kind\kc_interface.md
     title: Interface — Deep Knowledge for interface
@@ -1795,17 +2095,33 @@ domains:
     feeds_kinds:
     - law
     origin: ''
+  kc_judge_config:
+    path: P01_knowledge\library\kind\kc_judge_config.md
+    title: LLM Judge Configuration for Automated Evaluation
+    feeds_kinds: []
+    origin: ''
   p01_kc_knowledge_card:
     path: P01_knowledge\library\kind\kc_knowledge_card.md
     title: Knowledge Card — Deep Knowledge for knowledge_card
     feeds_kinds:
     - knowledge_card
     origin: ''
+  p01_kc_knowledge_graph:
+    path: P01_knowledge\library\kind\kc_knowledge_graph.md
+    title: 'knowledge_graph: Relational Knowledge Structure'
+    feeds_kinds:
+    - knowledge_graph
+    origin: ''
   p01_kc_knowledge_index:
     path: P01_knowledge\library\kind\kc_knowledge_index.md
     title: Brain Index — Deep Knowledge for knowledge_index
     feeds_kinds:
     - knowledge_index
+    origin: ''
+  p09_kc_kubernetes_ai_requirement:
+    path: P01_knowledge\library\kind\kc_kubernetes_ai_requirement.md
+    title: Kubernetes AI Requirement -- Deep Knowledge for kubernetes_ai_requirement
+    feeds_kinds: []
     origin: ''
   kc_landing_page:
     path: P01_knowledge\library\kind\kc_landing_page.md
@@ -1830,17 +2146,42 @@ domains:
     feeds_kinds:
     - lifecycle_rule
     origin: ''
+  kc_llm_evaluation_scenario:
+    path: P01_knowledge\library\kind\kc_llm_evaluation_scenario.md
+    title: LLM Evaluation Scenario
+    feeds_kinds: []
+    origin: ''
   p01_kc_llm_judge:
     path: P01_knowledge\library\kind\kc_llm_judge.md
     title: LLM Judge — Deep Knowledge for llm_judge
     feeds_kinds:
     - llm_judge
     origin: ''
+  kc_marketplace_app_manifest:
+    path: P01_knowledge\library\kind\kc_marketplace_app_manifest.md
+    title: Marketplace App Manifest Specification
+    feeds_kinds: []
+    origin: ''
+  p04_kc_mcp_app_extension:
+    path: P01_knowledge\library\kind\kc_mcp_app_extension.md
+    title: MCP App Extension -- Deep Knowledge for mcp_app_extension
+    feeds_kinds: []
+    origin: ''
   p01_kc_mcp_server:
     path: P01_knowledge\library\kind\kc_mcp_server.md
     title: MCP Server — Deep Knowledge for mcp_server
     feeds_kinds:
     - mcp_server
+    origin: ''
+  kc_memory_architecture:
+    path: P01_knowledge\library\kind\kc_memory_architecture.md
+    title: Memory Architecture Design
+    feeds_kinds: []
+    origin: ''
+  p07_kc_memory_benchmark:
+    path: P01_knowledge\library\kind\kc_memory_benchmark.md
+    title: Memory Benchmark -- Deep Knowledge for memory_benchmark
+    feeds_kinds: []
     origin: ''
   p01_kc_memory_scope:
     path: P01_knowledge\library\kind\kc_memory_scope.md
@@ -1869,6 +2210,11 @@ domains:
     feeds_kinds:
     - mental_model
     origin: ''
+  kc_model_architecture:
+    path: P01_knowledge\library\kind\kc_model_architecture.md
+    title: Model Architecture
+    feeds_kinds: []
+    origin: ''
   p01_kc_model_card:
     path: P01_knowledge\library\kind\kc_model_card.md
     title: Model Card — Deep Knowledge for model_card
@@ -1881,11 +2227,32 @@ domains:
     feeds_kinds:
     - model_provider
     origin: ''
+  kc_model_registry:
+    path: P01_knowledge\library\kind\kc_model_registry.md
+    title: Model Registry
+    feeds_kinds: []
+    origin: ''
   p01_kc_multi_modal_config:
     path: P01_knowledge\library\kind\kc_multi_modal_config.md
     title: Multi-Modal Config — Deep Knowledge for multi_modal_config
     feeds_kinds:
     - multi_modal_config
+    origin: ''
+  multi_model_orchestration:
+    path: P01_knowledge\library\kind\kc_multi_model_orchestration.md
+    title: Multi-Model Orchestration Patterns for LLM Agents
+    feeds_kinds: []
+    origin: ''
+  kc_multimodal_prompt:
+    path: P01_knowledge\library\kind\kc_multimodal_prompt.md
+    title: Multimodal Prompt -- Deep Knowledge for multimodal_prompt
+    feeds_kinds:
+    - multimodal_prompt
+    origin: ''
+  kc_n07_orchestrator:
+    path: P01_knowledge\library\kind\kc_n07_orchestrator.md
+    title: N07 Orchestrator — Autonomous Agent Coordination
+    feeds_kinds: []
     origin: ''
   p01_kc_naming_rule:
     path: P01_knowledge\library\kind\kc_naming_rule.md
@@ -1898,6 +2265,31 @@ domains:
     title: Notifier — Deep Knowledge for notifier
     feeds_kinds:
     - notifier
+    origin: ''
+  kc_nps_survey:
+    path: P01_knowledge\library\kind\kc_nps_survey.md
+    title: NPS Survey Configuration
+    feeds_kinds: []
+    origin: ''
+  kc_nucleus_def:
+    path: P01_knowledge\library\kind\kc_nucleus_def.md
+    title: CEX Nucleus Definition (N00-N07)
+    feeds_kinds: []
+    origin: ''
+  kc_oauth_app_config:
+    path: P01_knowledge\library\kind\kc_oauth_app_config.md
+    title: OAuth 2.0 Application Configuration for Partner Integrations
+    feeds_kinds: []
+    origin: ''
+  kc_onboarding_flow:
+    path: P01_knowledge\library\kind\kc_onboarding_flow.md
+    title: User Onboarding Flow
+    feeds_kinds: []
+    origin: ''
+  kc_ontology:
+    path: P01_knowledge\library\kind\kc_ontology.md
+    title: Ontology (P01)
+    feeds_kinds: []
     origin: ''
   p01_kc_optimizer:
     path: P01_knowledge\library\kind\kc_optimizer.md
@@ -1917,6 +2309,11 @@ domains:
     feeds_kinds:
     - parser
     origin: ''
+  kc_partner_listing:
+    path: P01_knowledge\library\kind\kc_partner_listing.md
+    title: Partner Directory Listing
+    feeds_kinds: []
+    origin: ''
   p01_kc_path_config:
     path: P01_knowledge\library\kind\kc_path_config.md
     title: Path Config — Deep Knowledge for path_config
@@ -1935,17 +2332,69 @@ domains:
     feeds_kinds:
     - permission
     origin: ''
+  kc_pitch_deck:
+    path: P01_knowledge\library\kind\kc_pitch_deck.md
+    title: Pitch Deck
+    feeds_kinds: []
+    origin: ''
+  unknown:
+    path: P01_knowledge\library\kind\kc_workflow_run_crate.md
+    title: Workflow Run Crate
+    feeds_kinds: []
+    origin: ''
+  kc_playground_config:
+    path: P01_knowledge\library\kind\kc_playground_config.md
+    title: Playground/Sandbox Configuration for Interactive Product Evaluation
+    feeds_kinds: []
+    origin: ''
   p01_kc_plugin:
     path: P01_knowledge\library\kind\kc_plugin.md
     title: Plugin — Deep Knowledge for plugin
     feeds_kinds:
     - plugin
     origin: ''
+  kc_press_release:
+    path: P01_knowledge\library\kind\kc_press_release.md
+    title: Press Release
+    feeds_kinds: []
+    origin: ''
+  kc_pricing_page:
+    path: P01_knowledge\library\kind\kc_pricing_page.md
+    title: Pricing Page
+    feeds_kinds: []
+    origin: ''
+  kc_procedural_memory:
+    path: P01_knowledge\library\kind\kc_procedural_memory.md
+    title: Procedural Memory
+    feeds_kinds: []
+    origin: ''
+  kc_product_tour:
+    path: P01_knowledge\library\kind\kc_product_tour.md
+    title: Product Tour Guide
+    feeds_kinds: []
+    origin: ''
   p01_kc_prompt_cache:
     path: P01_knowledge\library\kind\kc_prompt_cache.md
     title: Prompt Cache — Deep Knowledge for prompt_cache
     feeds_kinds:
     - prompt_cache
+    origin: ''
+  p01_kc_prompt_compiler:
+    path: P01_knowledge\library\kind\kc_prompt_compiler.md
+    title: Prompt Compiler -- Deep Knowledge
+    feeds_kinds:
+    - prompt_compiler
+    origin: ''
+  kc_prompt_optimizer:
+    path: P01_knowledge\library\kind\kc_prompt_optimizer.md
+    title: Prompt Optimizer -- Deep Knowledge
+    feeds_kinds:
+    - prompt_optimizer
+    origin: ''
+  kc_prompt_technique:
+    path: P01_knowledge\library\kind\kc_prompt_technique.md
+    title: Prompt Technique Patterns
+    feeds_kinds: []
     origin: ''
   p01_kc_prompt_template:
     path: P01_knowledge\library\kind\kc_prompt_template.md
@@ -1959,11 +2408,26 @@ domains:
     feeds_kinds:
     - prompt_version
     origin: ''
+  p09_kc_prosody_config:
+    path: P01_knowledge\library\kind\kc_prosody_config.md
+    title: Prosody Config -- Deep Knowledge for prosody_config
+    feeds_kinds: []
+    origin: ''
   p01_kc_quality_gate:
     path: P01_knowledge\library\kind\kc_quality_gate.md
     title: Quality Gate — Deep Knowledge for quality_gate
     feeds_kinds:
     - quality_gate
+    origin: ''
+  kc_quantization_config:
+    path: P01_knowledge\library\kind\kc_quantization_config.md
+    title: Quantization Configuration
+    feeds_kinds: []
+    origin: ''
+  kc_quickstart_guide:
+    path: P01_knowledge\library\kind\kc_quickstart_guide.md
+    title: Quickstart Guide
+    feeds_kinds: []
     origin: ''
   p01_kc_rag_source:
     path: P01_knowledge\library\kind\kc_rag_source.md
@@ -1977,6 +2441,21 @@ domains:
     feeds_kinds:
     - rate_limit_config
     origin: ''
+  kc_rbac_policy:
+    path: P01_knowledge\library\kind\kc_rbac_policy.md
+    title: RBAC Policy for Multi-Tenant Isolation
+    feeds_kinds: []
+    origin: ''
+  kc_realtime_session:
+    path: P01_knowledge\library\kind\kc_realtime_session.md
+    title: Realtime Session Configuration
+    feeds_kinds: []
+    origin: ''
+  kc_reasoning_strategy:
+    path: P01_knowledge\library\kind\kc_reasoning_strategy.md
+    title: Reasoning Strategy
+    feeds_kinds: []
+    origin: ''
   p01_kc_reasoning_trace:
     path: P01_knowledge\library\kind\kc_reasoning_trace.md
     title: Reasoning Trace -- Deep Knowledge for reasoning_trace
@@ -1989,11 +2468,31 @@ domains:
     feeds_kinds:
     - red_team_eval
     origin: ''
+  kc_referral_program:
+    path: P01_knowledge\library\kind\kc_referral_program.md
+    title: Referral Program Design
+    feeds_kinds: []
+    origin: ''
   p01_kc_regression_check:
     path: P01_knowledge\library\kind\kc_regression_check.md
     title: Regression Check — Deep Knowledge for regression_check
     feeds_kinds:
     - regression_check
+    origin: ''
+  kc_renewal_workflow:
+    path: P01_knowledge\library\kind\kc_renewal_workflow.md
+    title: Renewal Workflow
+    feeds_kinds: []
+    origin: ''
+  kc_repo_map:
+    path: P01_knowledge\library\kind\kc_repo_map.md
+    title: repo_map
+    feeds_kinds: []
+    origin: ''
+  kc_reranker_config:
+    path: P01_knowledge\library\kind\kc_reranker_config.md
+    title: Reranker Configuration
+    feeds_kinds: []
     origin: ''
   p01_kc_research_pipeline:
     path: P01_knowledge\library\kind\kc_research_pipeline.md
@@ -2015,7 +2514,7 @@ domains:
     origin: ''
   p01_kc_retriever_config:
     path: P01_knowledge\library\kind\kc_retriever_config.md
-    title: Retriever Config — Deep Knowledge for retriever_config
+    title: Retriever Configuration — Deep Knowledge for retriever configuration
     feeds_kinds:
     - retriever_config
     origin: ''
@@ -2024,6 +2523,21 @@ domains:
     title: Reward Signal — Deep Knowledge for reward_signal
     feeds_kinds:
     - reward_signal
+    origin: ''
+  kc_rl_algorithm:
+    path: P01_knowledge\library\kind\kc_rl_algorithm.md
+    title: Reinforcement Learning Algorithm
+    feeds_kinds: []
+    origin: ''
+  kc_roi_calculator:
+    path: P01_knowledge\library\kind\kc_roi_calculator.md
+    title: ROI Calculator Specification
+    feeds_kinds: []
+    origin: ''
+  kc_role_assignment:
+    path: P01_knowledge\library\kind\kc_role_assignment.md
+    title: Role Assignment
+    feeds_kinds: []
     origin: ''
   p01_kc_router:
     path: P01_knowledge\library\kind\kc_router.md
@@ -2043,6 +2557,31 @@ domains:
     feeds_kinds:
     - runtime_state
     origin: ''
+  kc_safety_hazard_taxonomy:
+    path: P01_knowledge\library\kind\kc_safety_hazard_taxonomy.md
+    title: Safety Hazard Taxonomy
+    feeds_kinds: []
+    origin: ''
+  kc_safety_policy:
+    path: P01_knowledge\library\kind\kc_safety_policy.md
+    title: Safety Policy
+    feeds_kinds: []
+    origin: ''
+  kc_sales_playbook:
+    path: P01_knowledge\library\kind\kc_sales_playbook.md
+    title: Sales Playbook
+    feeds_kinds: []
+    origin: ''
+  kc_sandbox_config:
+    path: P01_knowledge\library\kind\kc_sandbox_config.md
+    title: Sandbox Configuration
+    feeds_kinds: []
+    origin: ''
+  kc_sandbox_spec:
+    path: P01_knowledge\library\kind\kc_sandbox_spec.md
+    title: Sandbox Spec
+    feeds_kinds: []
+    origin: ''
   p01_kc_schedule:
     path: P01_knowledge\library\kind\kc_schedule.md
     title: Schedule — Deep Knowledge for schedule
@@ -2055,6 +2594,16 @@ domains:
     feeds_kinds:
     - scoring_rubric
     origin: ''
+  kc_sdk_example:
+    path: P01_knowledge\library\kind\kc_sdk_example.md
+    title: SDK Example Integration Patterns
+    feeds_kinds: []
+    origin: ''
+  kc_search_strategy:
+    path: P01_knowledge\library\kind\kc_search_strategy.md
+    title: Search Strategy
+    feeds_kinds: []
+    origin: ''
   p01_kc_search_tool:
     path: P01_knowledge\library\kind\kc_search_tool.md
     title: Search Tool — Deep Knowledge for search_tool
@@ -2066,6 +2615,11 @@ domains:
     title: Secret Config — Deep Knowledge for secret_config
     feeds_kinds:
     - secret_config
+    origin: ''
+  kc_self_improvement_loop:
+    path: P01_knowledge\library\kind\kc_self_improvement_loop.md
+    title: Self-Improvement Loop Mechanism
+    feeds_kinds: []
     origin: ''
   p01_kc_session_backend:
     path: P01_knowledge\library\kind\kc_session_backend.md
@@ -2115,6 +2669,21 @@ domains:
     feeds_kinds:
     - spawn_config
     origin: ''
+  kc_sso_config:
+    path: P01_knowledge\library\kind\kc_sso_config.md
+    title: SSO/SAML/OIDC Configuration Guide
+    feeds_kinds: []
+    origin: ''
+  kc_stt_provider:
+    path: P01_knowledge\library\kind\kc_stt_provider.md
+    title: Speech-to-Text Provider Integration
+    feeds_kinds: []
+    origin: ''
+  kc_subscription_tier:
+    path: P01_knowledge\library\kind\kc_subscription_tier.md
+    title: Subscription Tier
+    feeds_kinds: []
+    origin: ''
   p01_kc_supabase_data_layer:
     path: P01_knowledge\library\kind\kc_supabase_data_layer.md
     title: Supabase Data Layer — Deep Knowledge for supabase_data_layer
@@ -2127,15 +2696,29 @@ domains:
     feeds_kinds:
     - supervisor
     origin: ''
-  p01_kc_system_prompt:
+  kc_system_prompt:
     path: P01_knowledge\library\kind\kc_system_prompt.md
-    title: System Prompt — Deep Knowledge for system_prompt
-    feeds_kinds:
-    - system_prompt
+    title: System Prompt Engineering
+    feeds_kinds: []
     origin: ''
   kc_tagline:
     path: P01_knowledge\library\kind\kc_tagline.md
     title: 'KC: Tagline'
+    feeds_kinds: []
+    origin: ''
+  kc_team_charter:
+    path: P01_knowledge\library\kind\kc_team_charter.md
+    title: Team Charter
+    feeds_kinds: []
+    origin: ''
+  kc_thinking_config:
+    path: P01_knowledge\library\kind\kc_thinking_config.md
+    title: Thinking Configuration Settings
+    feeds_kinds: []
+    origin: ''
+  kc_threat_model:
+    path: P01_knowledge\library\kind\kc_threat_model.md
+    title: Threat Model
     feeds_kinds: []
     origin: ''
   p01_kc_toolkit:
@@ -2150,6 +2733,16 @@ domains:
     feeds_kinds:
     - trace_config
     origin: ''
+  kc_transport_config:
+    path: P01_knowledge\library\kind\kc_transport_config.md
+    title: Transport Configuration for Real-Time Communication
+    feeds_kinds: []
+    origin: ''
+  kc_tts_provider:
+    path: P01_knowledge\library\kind\kc_tts_provider.md
+    title: Text-to-Speech Provider Integration
+    feeds_kinds: []
+    origin: ''
   p01_kc_type_def:
     path: P01_knowledge\library\kind\kc_type_def.md
     title: Type Def — Deep Knowledge for type_def
@@ -2161,6 +2754,26 @@ domains:
     title: Unit Eval — Deep Knowledge for unit_eval
     feeds_kinds:
     - unit_eval
+    origin: ''
+  kc_usage_quota:
+    path: P01_knowledge\library\kind\kc_usage_quota.md
+    title: Usage Quota and Fair-Use Enforcement
+    feeds_kinds: []
+    origin: ''
+  kc_usage_report:
+    path: P01_knowledge\library\kind\kc_usage_report.md
+    title: Usage Analytics Report Specification
+    feeds_kinds: []
+    origin: ''
+  kc_user_journey:
+    path: P01_knowledge\library\kind\kc_user_journey.md
+    title: User Journey Map
+    feeds_kinds: []
+    origin: ''
+  kc_vad_config:
+    path: P01_knowledge\library\kind\kc_vad_config.md
+    title: Voice Activity Detection (VAD) Configuration
+    feeds_kinds: []
     origin: ''
   p01_kc_validation_schema:
     path: P01_knowledge\library\kind\kc_validation_schema.md
@@ -2174,6 +2787,11 @@ domains:
     feeds_kinds:
     - validator
     origin: ''
+  kc_vc_credential:
+    path: P01_knowledge\library\kind\kc_vc_credential.md
+    title: W3C Verifiable Credential 2.0 for AI Agents
+    feeds_kinds: []
+    origin: ''
   p01_kc_vector_store:
     path: P01_knowledge\library\kind\kc_vector_store.md
     title: VectorDB Backend -- Deep Knowledge for vector_store
@@ -2186,17 +2804,42 @@ domains:
     feeds_kinds:
     - vision_tool
     origin: ''
+  kc_visual_workflow:
+    path: P01_knowledge\library\kind\kc_visual_workflow.md
+    title: Visual Workflow Editor Configuration
+    feeds_kinds: []
+    origin: ''
+  kc_voice_pipeline:
+    path: P01_knowledge\library\kind\kc_voice_pipeline.md
+    title: Voice Pipeline Architecture
+    feeds_kinds: []
+    origin: ''
   p01_kc_webhook:
     path: P01_knowledge\library\kind\kc_webhook.md
     title: Webhook — Deep Knowledge for webhook
     feeds_kinds:
     - webhook
     origin: ''
+  kc_webinar_script:
+    path: P01_knowledge\library\kind\kc_webinar_script.md
+    title: Webinar Script Template
+    feeds_kinds: []
+    origin: ''
+  kc_white_label_config:
+    path: P01_knowledge\library\kind\kc_white_label_config.md
+    title: White-Label Configuration Guide
+    feeds_kinds: []
+    origin: ''
   p01_kc_workflow:
     path: P01_knowledge\library\kind\kc_workflow.md
     title: Workflow — Deep Knowledge for workflow
     feeds_kinds:
     - workflow
+    origin: ''
+  kc_workflow_node:
+    path: P01_knowledge\library\kind\kc_workflow_node.md
+    title: Workflow Node
+    feeds_kinds: []
     origin: ''
   p01_kc_workflow_primitive:
     path: P01_knowledge\library\kind\kc_workflow_primitive.md
@@ -2586,6 +3229,10 @@ coverage:
   agent_package:
   - p01_kc_agent_package
   - p01_kc_agent_identity
+  steps:
+  - kc_analyst_briefing
+  core:
+  - kc_analyst_briefing
   api_client:
   - p01_kc_api_client
   - p01_kc_external_integrations
@@ -2595,6 +3242,8 @@ coverage:
   axiom:
   - p01_kc_axiom
   - p01_kc_agent_identity
+  batch_config:
+  - p01_kc_batch_config
   benchmark:
   - p01_kc_benchmark
   - p01_kc_eval_testing
@@ -2650,6 +3299,8 @@ coverage:
   - p01_kc_prompt_engineering
   context_window_config:
   - p01_kc_context_window_config
+  cost_budget:
+  - p01_kc_cost_budget
   daemon:
   - p01_kc_daemon
   - p01_kc_perception_tools
@@ -2695,12 +3346,11 @@ coverage:
   enum_def:
   - p01_kc_enum_def
   - p01_kc_schema_validation
-  env_config:
-  - p01_kc_env_config
-  - p01_kc_aws_bedrock_patterns
   eval_dataset:
   - p01_kc_eval_dataset
   - p01_kc_reward_and_alignment
+  experiment_config:
+  - p01_kc_experiment_config
   fallback_chain:
   - p01_kc_fallback_chain
   - p01_kc_routing_resilience
@@ -2710,6 +3360,8 @@ coverage:
   few_shot_example:
   - p01_kc_few_shot_example
   - p01_kc_dspy_patterns
+  finetune_config:
+  - p01_kc_finetune_config
   formatter:
   - p01_kc_formatter
   - p01_kc_output_formatting
@@ -2735,10 +3387,6 @@ coverage:
   golden_test:
   - p01_kc_golden_test
   - p01_kc_reward_and_alignment
-  guardrail:
-  - p01_kc_guardrail
-  - p01_kc_aws_bedrock_patterns
-  - p01_kc_crewai_patterns
   handoff:
   - p01_kc_handoff
   - p01_kc_crewai_patterns
@@ -2746,6 +3394,8 @@ coverage:
   - p01_kc_handoff_protocol
   - p01_kc_a2a_protocol
   - p01_kc_academic_agent_patterns
+  hitl_config:
+  - p01_kc_hitl_config
   hook:
   - p01_kc_hook
   - p01_kc_crewai_patterns
@@ -2776,6 +3426,8 @@ coverage:
   - p01_kc_llamaindex_patterns
   - p01_kc_mcp_protocol
   - p01_kc_terminology_rosetta_stone
+  knowledge_graph:
+  - p01_kc_knowledge_graph
   knowledge_index:
   - p01_kc_knowledge_index
   - p01_kc_haystack_patterns
@@ -2822,6 +3474,8 @@ coverage:
   - p01_kc_model_provider
   multi_modal_config:
   - p01_kc_multi_modal_config
+  multimodal_prompt:
+  - kc_multimodal_prompt
   naming_rule:
   - p01_kc_naming_rule
   - p01_kc_output_formatting
@@ -2852,6 +3506,10 @@ coverage:
   - p01_kc_mcp_protocol
   prompt_cache:
   - p01_kc_prompt_cache
+  prompt_compiler:
+  - p01_kc_prompt_compiler
+  prompt_optimizer:
+  - kc_prompt_optimizer
   prompt_template:
   - p01_kc_prompt_template
   - p01_kc_anthropic_api_patterns
@@ -2956,15 +3614,6 @@ coverage:
   - p01_kc_supabase_data_layer
   supervisor:
   - p01_kc_supervisor
-  system_prompt:
-  - p01_kc_system_prompt
-  - p01_kc_academic_agent_patterns
-  - p01_kc_anthropic_api_patterns
-  - p01_kc_google_ai_patterns
-  - p01_kc_openai_api_patterns
-  - p01_kc_terminology_anthropic_canonical
-  - p01_kc_terminology_google_mcp_canonical
-  - p01_kc_terminology_openai_canonical
   toolkit:
   - p01_kc_toolkit
   trace_config:
@@ -2999,7 +3648,20 @@ coverage:
   - p01_kc_llamaindex_patterns
   workflow_primitive:
   - p01_kc_workflow_primitive
+  system_prompt:
+  - p01_kc_academic_agent_patterns
+  - p01_kc_anthropic_api_patterns
+  - p01_kc_google_ai_patterns
+  - p01_kc_openai_api_patterns
+  - p01_kc_terminology_anthropic_canonical
+  - p01_kc_terminology_google_mcp_canonical
+  - p01_kc_terminology_openai_canonical
   director:
   - p01_kc_academic_agent_patterns
   - p01_kc_chinese_llm_ecosystem
   - p01_kc_crewai_patterns
+  guardrail:
+  - p01_kc_aws_bedrock_patterns
+  - p01_kc_crewai_patterns
+  env_config:
+  - p01_kc_aws_bedrock_patterns

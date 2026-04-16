@@ -50,7 +50,7 @@ sources:
     - pytrends        # Google Trends
     - keepa           # Amazon price history
   rag:
-    - local_docs      # GATO3 product catalog + internal research
+    - local_docs      # {{BRAND_NAME}} product catalog + internal research
 
 storm_perspectives:
   - role: buyer

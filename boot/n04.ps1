@@ -96,8 +96,8 @@ $cliArgs = @("--dangerously-skip-permissions", "--permission-mode", "bypassPermi
 $cliArgs += "--append-system-prompt", "N04_knowledge/agent_card_n04.md"
 $cliArgs += "--append-system-prompt", ".cex/config/context_self_select.md"
 $cliArgs += "--append-system-prompt", $sysPrompt
-$args += "--mcp-config", "C:\Users\CEX\Documents\GitHub\cex\.mcp-n04.json"
-$args += "--settings", "C:\Users\CEX\Documents\GitHub\cex\.claude/nucleus-settings/n04.json"
+$cliArgs += "--mcp-config", (Join-Path $cexRoot ".mcp-n04.json")
+$cliArgs += "--settings", (Join-Path $cexRoot ".claude/nucleus-settings/n04.json")
 $cliArgs += $initialMsg
 
 Set-CexTitle "RUNNING"

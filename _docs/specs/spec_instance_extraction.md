@@ -70,7 +70,7 @@ lives in main. Private data stays in the branch.
 
 | Source (gato) | Template (main) | Variables |
 |---------------|----------------|-----------|
-| `decision_manifest_brand_gato3.yaml` | `.cex/runtime/decisions/tpl_decision_manifest_brand.yaml` | {{BRAND_NAME}}, {{DECISIONS.*}} |
+| `decision_manifest_brand_{{BRAND_NAME}}.yaml` | `.cex/runtime/decisions/tpl_decision_manifest_brand.yaml` | {{BRAND_NAME}}, {{DECISIONS.*}} |
 
 ### 7. Learning Records Pattern
 
@@ -84,7 +84,7 @@ lives in main. Private data stays in the branch.
 |----------|-------|--------|
 | Contact data | `crm_batch_*.json`, `crm_enrich_*.json` | Private customer data |
 | Brand config values | `brand_config.yaml` (filled) | Brand-specific identity |
-| GDP decisions (filled) | `decision_manifest_brand_gato3.yaml` | Brand-specific choices |
+| GDP decisions (filled) | `decision_manifest_brand_{{BRAND_NAME}}.yaml` | Brand-specific choices |
 | API keys / secrets | Any `.env`, auth tokens | Security |
 
 ## The /init Flow (how a new brand uses templates)

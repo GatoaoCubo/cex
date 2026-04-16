@@ -1,6 +1,6 @@
 @echo off
 title CEX OLLAMA FLYWHEEL -- qwen3:14b
-cd /d C:\Users\CEX\Documents\GitHub\cex
+cd /d "%~dp0.."
 
 echo ============================================================
 echo CEX OLLAMA FLYWHEEL -- Persistent Loop

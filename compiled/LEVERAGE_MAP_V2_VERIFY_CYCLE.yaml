@@ -18,7 +18,7 @@ was_the_expected_tool_added_yes_no_evidence: 'YES. `_tools/cex_web_fetch.py` is 
 
   Evidence:
 
-  - File exists: `C:\Users\CEX\Documents\GitHub\cex\_tools\cex_web_fetch.py` ✓
+  - File exists: `{{USER_HOME}}\Documents\GitHub\cex\_tools\cex_web_fetch.py` ✓
 
   - Implements HTTP fetch with HTML→text conversion ✓
 

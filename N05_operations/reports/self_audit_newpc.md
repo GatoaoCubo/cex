@@ -132,7 +132,7 @@ Claude Code itself has ANTHROPIC_API_KEY via its own configuration -- this affec
 
 | Setting | Value |
 |---------|-------|
-| remote.origin.url | `https://github.com/GatoaoCubo/cex.git` |
+| remote.origin.url | `https://github.com/{{BRAND_DOMAIN}}/cex.git` |
 | branch.main.remote | origin |
 | branch.main.merge | refs/heads/main |
 | core.symlinks | false |

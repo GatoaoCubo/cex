@@ -4,7 +4,7 @@
 # Spec: _docs/specs/spec_notebooklm_pipeline.md
 
 version: 1
-google_account: financeiro@gatoaocubo3.com   # GDP D5
+google_account: "{{BRAND_EMAIL}}"   # GDP D5
 publish_mode: auto                            # GDP D3
 browser_engine: chrome_local                  # GDP D4
 default_outputs:                              # GDP D2

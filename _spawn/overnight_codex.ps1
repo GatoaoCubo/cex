@@ -10,7 +10,7 @@ param(
 # no user prompts, no interactive blocks.
 
 $ErrorActionPreference = "Continue"
-$root = "C:\Users\CEX\Documents\GitHub\cex"
+$root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
 
 $stamp = Get-Date -Format "yyyyMMdd_HHmm"

@@ -27,7 +27,7 @@ density_score: 1.0
 
 **Tool:** `_tools/cex_social_publisher.py` (2.7 KB, 94 lines)
 
-**Location:** `/Users/CEX/Documents/GitHub/cex/_tools/cex_social_publisher.py`
+**Location:** `{{USER_HOME}}/Documents/GitHub/cex/_tools/cex_social_publisher.py`
 
 **Last modified:** 2026-04-15 11:15
 

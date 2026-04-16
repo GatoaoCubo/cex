@@ -14,7 +14,7 @@ executive_summary: 'Tool verification complete. `cex_social_publisher.py` confir
   of required leverage for autonomous marketing operation. Bottlenecks are analytics, testing, and visual asset generation.
   ---'
 verification_tool_confirmed_present: ''
-status_confirmed_operational: 'Tool: `_tools/cex_social_publisher.py` (2.7 KB, 94 lines) Location: `/Users/CEX/Documents/GitHub/cex/_tools/cex_social_publisher.py`
+status_confirmed_operational: 'Tool: `_tools/cex_social_publisher.py` (2.7 KB, 94 lines) Location: `{{USER_HOME}}/Documents/GitHub/cex/_tools/cex_social_publisher.py`
   Last modified: 2026-04-15 11:15'
 api_surface: "# Entry point\ndef format_for_platform(copy: str, platform: str) -> dict:\n    \"\"\"\n    Input: raw marketing\
   \ copy + target platform\n    Output: {\n        platform: str,\n        char_count: int,\n        limit: int,\n       \

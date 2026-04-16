@@ -42,7 +42,7 @@ artifacts_verified: '| Artifact | Path | Exists |
   | CF Actions & Dist | `N02_marketing/output/output_cf_actions_and_distribution.md` | ✅ |'
 decision_manifest_summary: 'Loaded from `FULLGRID_20260406`:
 
-  - NotebookLM: domain scope, auto-publish, chrome_local, financeiro@gatoaocubo3.com
+  - NotebookLM: domain scope, auto-publish, chrome_local, {{BRAND_EMAIL}}
 
   - Tech debt: sanitize all tools, utf8_strict, pre-commit hooks
 

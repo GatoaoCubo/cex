@@ -74,7 +74,7 @@ Extracted from: `crm_mission/MISSION_PLAN.md`, `batch_a` through `batch_f`
 
 ## Category 3: Dashboard Rendering (4 new variables)
 
-Extracted from: `N02_marketing/output/gato3_crm_dashboard.html`, `N06_commercial/output/`
+Extracted from: `N02_marketing/output/{{BRAND_NAME}}_crm_dashboard.html`, `N06_commercial/output/`
 
 | Variable | Type | Example (gato) | Template Target |
 |----------|------|-----------------|-----------------|
@@ -110,7 +110,7 @@ Extracted from: `p04_search_pet_business_discovery`, `p12_wf_crm_research_pipeli
 
 ## Category 6: Outreach / Commercial (not new — composites)
 
-Extracted from: `p12_wf_gato_strategic_outreach`, `p04_cm_gato3_revenue_strategy`
+Extracted from: `p12_wf_gato_strategic_outreach`, `p04_cm_{{BRAND_NAME}}_revenue_strategy`
 
 These are **composite** — they combine existing BRAND_* vars:
 
@@ -143,7 +143,7 @@ Template already implicit in the file-naming convention. **No variable injection
 | Contact JSONs | `crm_batch_*.json`, `crm_enrich_*.json` | Private customer data |
 | Filled brand_config | `.cex/brand/brand_config.yaml` (with real values) | Brand-specific identity |
 | Canva tokens | `.cex/brand/canva_token.json` | API secret |
-| GDP decisions (filled) | `decision_manifest_brand_gato3.yaml` | Brand-specific choices |
+| GDP decisions (filled) | `decision_manifest_brand_{{BRAND_NAME}}.yaml` | Brand-specific choices |
 | Overnight logs | `.cex/overnight/*.log` | Session-specific runtime |
 | Quality audits | `.cex/quality/audit_*.json` | Instance-specific scores |
 | Signal archives | `.cex/archive/signals_*/*.json` | Runtime state |
@@ -192,11 +192,11 @@ research:
 
 | Pattern | Occurrences | Replace With |
 |---------|-------------|-------------|
-| `GATO³` / `GATO3` / `gato3` | 40+ | `{{BRAND_NAME}}` |
+| `GATO³` / `{{BRAND_NAME}}` / `{{BRAND_NAME}}` | 40+ | `{{BRAND_NAME}}` |
 | `ABC Paulista` | 15+ | `{{BRAND_REGION}}` |
 | `pet` (as industry literal) | 30+ | `{{INDUSTRY}}` |
-| `financeiro@gatoaocubo3.com` | 2 | `{{BRAND_EMAIL}}` (new) |
-| `gato3.com.br` | 4 | `{{BRAND_DOMAIN}}` (new) |
+| `{{BRAND_EMAIL}}` | 2 | `{{BRAND_EMAIL}}` (new) |
+| `{{BRAND_DOMAIN}}` | 4 | `{{BRAND_DOMAIN}}` (new) |
 | `-23.62` / `-46.55` (coords) | 2 | `{{MAP_CENTER_LAT/LNG}}` |
 | `São Caetano do Sul` (as HQ) | 5 | `{{BRAND_HQ}}` |
 | `B-C+` (income class) | 3 | `{{BRAND_ICP_INCOME}}` |

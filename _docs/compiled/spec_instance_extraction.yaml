@@ -79,7 +79,7 @@ extraction_map_gato_ao_cubo_main_templates: ''
 
   |---------------|----------------|-----------|
 
-  | `decision_manifest_brand_gato3.yaml` | `.cex/runtime/decisions/tpl_decision_manifest_brand.yaml` | {{BRAND_NAME}}, {{DECISIONS.*}}
+  | `decision_manifest_brand_{{BRAND_NAME}}.yaml` | `.cex/runtime/decisions/tpl_decision_manifest_brand.yaml` | {{BRAND_NAME}}, {{DECISIONS.*}}
   |'
 7_learning_records_pattern: '| Source (gato) | Template (main) | Variables |
 
@@ -95,7 +95,7 @@ what_never_goes_to_main: '| Category | Files | Reason |
 
   | Brand config values | `brand_config.yaml` (filled) | Brand-specific identity |
 
-  | GDP decisions (filled) | `decision_manifest_brand_gato3.yaml` | Brand-specific choices |
+  | GDP decisions (filled) | `decision_manifest_brand_{{BRAND_NAME}}.yaml` | Brand-specific choices |
 
   | API keys / secrets | Any `.env`, auth tokens | Security |'
 the_init_flow_how_a_new_brand_uses_templates: "User runs /init\n  │\n  ├── 1. Answers ~6 questions (name, domain, audience,\

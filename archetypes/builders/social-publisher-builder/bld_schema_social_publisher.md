@@ -24,8 +24,8 @@ density_score: 0.90
 ### identity (required)
 | Field | Type | Required | Example |
 |-------|------|----------|---------|
-| empresa | string | YES | "GATO3" |
-| handle | string | YES | "@gatoaocubo3" |
+| empresa | string | YES | "{{BRAND_NAME}}" |
+| handle | string | YES | "@{{BRAND_DOMAIN}}" |
 | nicho | enum(pet,food,saas,fashion,fitness,beauty,tech,education,costm) | YES | "pet" |
 | tom | string | YES | "casual, acolhedor" |
 | persona | string | YES | "Ro" |
@@ -74,7 +74,7 @@ density_score: 0.90
 ### hashtags (required)
 | Field | Type | Required | Example |
 |-------|------|----------|---------|
-| brand | list[string] | YES | ["gato3", "gatoaocubo"] |
+| brand | list[string] | YES | ["{{BRAND_NAME}}", "{{BRAND_DOMAIN}}"] |
 | niche | list[string] | YES | ["petlovers"] |
 | max_per_post | int(1-30) | YES | 10 |
 

@@ -111,7 +111,7 @@ if exist "%~dp0CLAUDE.md" (
     ) else (
         echo  [CLONING] CEX repo...
         mkdir "%USERPROFILE%\Documents\GitHub" 2>nul
-        git clone https://github.com/GatoaoCubo/cex.git "%USERPROFILE%\Documents\GitHub\cex"
+        git clone https://github.com/{{BRAND_DOMAIN}}/cex.git "%USERPROFILE%\Documents\GitHub\cex"
         cd /d "%USERPROFILE%\Documents\GitHub\cex"
     )
 )
