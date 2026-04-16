@@ -4,7 +4,7 @@ id: bld_output_template_dataset_card
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for dataset_card production
-quality: null
+quality: 8.7
 title: "Output Template Dataset Card"
 version: "1.0.0"
 author: wave1_builder_gen
