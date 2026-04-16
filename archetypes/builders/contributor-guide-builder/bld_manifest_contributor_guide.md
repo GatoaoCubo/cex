@@ -4,7 +4,7 @@ id: contributor-guide-builder
 pillar: P05
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for contributor_guide
-quality: null
+quality: 8.8
 title: "Type Builder Contributor Guide"
 version: "1.0.0"
 author: wave1_builder_gen_v2
