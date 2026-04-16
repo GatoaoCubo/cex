@@ -4,7 +4,7 @@ id: bld_schema_visual_workflow
 pillar: P06
 llm_function: CONSTRAIN
 purpose: Formal schema -- SINGLE SOURCE OF TRUTH for visual_workflow
-quality: null
+quality: 9.1
 title: "Schema Visual Workflow"
 version: "1.0.0"
 author: wave1_builder_gen_v2
