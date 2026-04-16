@@ -4,7 +4,7 @@ id: bld_config_ai_rmf_profile
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for ai_rmf_profile production
-quality: null
+quality: 8.6
 title: "Config AI RMF Profile"
 version: "1.0.0"
 author: n01_wave7
