@@ -4,7 +4,7 @@ id: bld_architecture_agent_computer_interface
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of agent_computer_interface -- artifact structure, dependencies, 13-ISO layout
-quality: null
+quality: 9.1
 title: "Architecture Agent Computer Interface"
 version: "1.0.0"
 author: n01_review
