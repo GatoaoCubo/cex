@@ -4,7 +4,7 @@ id: bld_architecture_llm_evaluation_scenario
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of llm_evaluation_scenario -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture LLM Evaluation Scenario"
 version: "1.0.0"
 author: n06_wave7
