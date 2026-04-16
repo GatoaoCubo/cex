@@ -4,7 +4,7 @@ id: bld_tools_sales_playbook
 pillar: P04
 llm_function: CALL
 purpose: Tools available for sales_playbook production
-quality: null
+quality: 8.9
 title: "Tools Sales Playbook"
 version: "1.0.0"
 author: wave1_builder_gen_v2
