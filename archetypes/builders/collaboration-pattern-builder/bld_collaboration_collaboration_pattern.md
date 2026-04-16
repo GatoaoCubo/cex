@@ -4,7 +4,7 @@ id: bld_collaboration_collaboration_pattern
 pillar: P12
 llm_function: COLLABORATE
 purpose: How collaboration_pattern-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Collaboration Pattern"
 version: "1.0.0"
 author: wave1_builder_gen
@@ -16,24 +16,24 @@ updated: "2026-04-13"
 density_score: 0.85
 ---
 
-## Crew Role  
-Facilitates alignment, resolves conflicts, and ensures consistent communication among builders to maintain coherence in collaborative outputs.  
+## Crew Role
+Facilitates alignment, resolves conflicts, and ensures consistent communication among builders to maintain coherence in collaborative outputs.
 
-## Receives From  
-| Builder      | What               | Format     |  
-|--------------|--------------------|------------|  
-| Design Builder | Design updates     | JSON       |  
-| Content Builder| Content drafts     | Markdown   |  
-| Code Builder   | Implementation feedback | Plain text |  
+## Receives From
+| Builder      | What               | Format     |
+|--------------|--------------------|------------|
+| Design Builder | Design updates     | JSON       |
+| Content Builder| Content drafts     | Markdown   |
+| Code Builder   | Implementation feedback | Plain text |
 
-## Produces For  
-| Builder      | What                   | Format     |  
-|--------------|------------------------|------------|  
-| All Builders | Coordination plan      | JSON       |  
-| Stakeholder Manager | Conflict resolution summary | Plain text |  
-| QA Builder   | Sync validation checklist | Markdown |  
+## Produces For
+| Builder      | What                   | Format     |
+|--------------|------------------------|------------|
+| All Builders | Coordination plan      | JSON       |
+| Stakeholder Manager | Conflict resolution summary | Plain text |
+| QA Builder   | Sync validation checklist | Markdown |
 
-## Boundary  
+## Boundary
 Does NOT execute tasks, manage workflows, or define handoff rules. Execution sequence is handled
 by workflow builders; handoff rules by handoff_protocol builders; task routing by dispatch_rule
 builders.
