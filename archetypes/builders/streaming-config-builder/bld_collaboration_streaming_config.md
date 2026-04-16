@@ -5,7 +5,7 @@ pillar: P12
 llm_function: COLLABORATE
 purpose: How streaming-config-builder works in crews with other builders
 pattern: each builder knows its ROLE, what it RECEIVES and PRODUCES
-quality: null
+quality: 9.0
 title: "Collaboration Streaming Config"
 version: "1.0.0"
 author: n03_builder
