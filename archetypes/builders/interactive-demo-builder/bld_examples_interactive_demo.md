@@ -4,7 +4,7 @@ id: bld_examples_interactive_demo
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of interactive_demo artifacts
-quality: null
+quality: 8.8
 title: "Examples Interactive Demo"
 version: "1.0.0"
 author: wave1_builder_gen_v2
