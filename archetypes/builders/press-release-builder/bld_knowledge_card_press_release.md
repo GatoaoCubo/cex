@@ -4,7 +4,7 @@ id: bld_knowledge_card_press_release
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge on press release construction, AP style, and wire service distribution
-quality: null
+quality: 9.1
 title: "Press Release Knowledge Card"
 version: "1.0.0"
 author: n02_wave6
