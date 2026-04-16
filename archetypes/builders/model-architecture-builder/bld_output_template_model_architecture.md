@@ -3,7 +3,7 @@ kind: output_template
 id: bld_output_template_model_architecture
 pillar: P05
 llm_function: PRODUCE
-quality: null
+quality: 9.1
 title: "Output Template Model Architecture"
 version: "1.0.0"
 author: n05_builder
