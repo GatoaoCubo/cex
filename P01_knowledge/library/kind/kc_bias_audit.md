@@ -3,8 +3,9 @@ id: kc_bias_audit
 kind: knowledge_card
 title: Bias Audit
 version: 1.0.0
-quality: null
+quality: 8.7
 pillar: P01
+density_score: 1.0
 ---
 
 # Bias Audit Methodology and Results
