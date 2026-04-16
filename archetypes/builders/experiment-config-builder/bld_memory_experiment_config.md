@@ -26,7 +26,7 @@ decay_rate: 0.03
 agent_group: all
 memory_scope: project
 observation_types: [feedback, project, reference]
-quality: null
+quality: 9.2
 title: "Memory Experiment Config"
 density_score: 0.91
 llm_function: INJECT
