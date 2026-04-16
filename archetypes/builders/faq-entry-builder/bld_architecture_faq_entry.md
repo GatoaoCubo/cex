@@ -4,7 +4,7 @@ id: bld_architecture_faq_entry
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of faq_entry -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Faq Entry"
 version: "1.0.0"
 author: wave1_builder_gen_v2
