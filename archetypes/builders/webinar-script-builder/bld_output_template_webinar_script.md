@@ -4,7 +4,7 @@ id: bld_output_template_webinar_script
 pillar: P05
 llm_function: PRODUCE
 purpose: Canonical output template for webinar_script artifacts with all required sections and placeholders
-quality: null
+quality: 9.1
 title: "Webinar Script Output Template"
 version: "1.0.0"
 author: n02_wave6
