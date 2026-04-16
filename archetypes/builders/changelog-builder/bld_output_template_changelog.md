@@ -4,7 +4,7 @@ id: bld_output_template_changelog
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for changelog production
-quality: null
+quality: 9.0
 title: "Output Template Changelog"
 version: "1.1.0"
 author: wave1_builder_gen_v2
