@@ -25,7 +25,7 @@ decay_rate: 0.03
 agent_group: edison
 memory_scope: project
 observation_types: [project, feedback, reference]
-quality: null
+quality: 9.2
 title: "Memory Kind Builder"
 density_score: 0.90
 llm_function: INJECT
