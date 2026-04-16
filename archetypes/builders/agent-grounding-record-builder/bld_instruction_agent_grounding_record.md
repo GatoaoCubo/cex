@@ -4,7 +4,7 @@ id: bld_instruction_agent_grounding_record
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step build instructions for producing a valid agent_grounding_record artifact
-quality: null
+quality: 9.1
 title: "Agent Grounding Record Builder -- Instructions"
 version: "1.0.0"
 author: wave7_n05
