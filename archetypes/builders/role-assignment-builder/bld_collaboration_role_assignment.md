@@ -4,7 +4,7 @@ id: bld_collaboration_role_assignment
 pillar: P12
 llm_function: COLLABORATE
 purpose: How role_assignment-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Role Assignment"
 version: "1.0.0"
 author: n03_wave8_builder
