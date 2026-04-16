@@ -99,6 +99,7 @@ class CheckResult:
         self.fix_cmd = fix_cmd  # shell command string if auto-fixable
 
     def to_dict(self) -> dict[str, str]:
+        """Serialize the check result for machine-readable output."""
         d = {
             "category": self.category,
             "name": self.name,
@@ -110,6 +111,7 @@ class CheckResult:
         return d
 
     def display(self) -> str:
+        """Format the check result for human-readable output."""
         tag = {"OK": "[OK]", "FAIL": "[FAIL]", "INFO": "[--]"}[self.status]
         line = "  %s %s" % (tag, self.detail if self.detail else self.name)
         return line
@@ -120,6 +122,7 @@ class CheckResult:
 # ---------------------------------------------------------------------------
 
 def check_runtime() -> list[CheckResult]:
+    """Validate core runtime binaries and minimum supported versions."""
     results = []
 
     # Python >= 3.12
@@ -172,6 +175,7 @@ def check_runtime() -> list[CheckResult]:
 # ---------------------------------------------------------------------------
 
 def check_packages(fix_mode: bool = False) -> list[CheckResult]:
+    """Validate required Python packages and the Claude CLI."""
     results = []
     pip_pkgs = [
         ("pyyaml", "yaml", "pyyaml"),
@@ -214,6 +218,7 @@ def check_packages(fix_mode: bool = False) -> list[CheckResult]:
 # ---------------------------------------------------------------------------
 
 def check_mcp_servers() -> list[CheckResult]:
+    """Validate MCP server configs and probe their backing packages."""
     results = []
     mcp_files = sorted(ROOT.glob(".mcp-n0*.json"))
 
@@ -307,6 +312,7 @@ ENV_VARS_SPEC = [
 
 
 def check_env_vars() -> list[CheckResult]:
+    """Inspect expected environment variables and classify missing ones."""
     results = []
     for var_name, desc, required in ENV_VARS_SPEC:
         val = os.environ.get(var_name)
@@ -325,6 +331,7 @@ def check_env_vars() -> list[CheckResult]:
 # ---------------------------------------------------------------------------
 
 def check_structure(fix_mode: bool = False) -> list[CheckResult]:
+    """Validate expected repository directories and boot scripts."""
     results = []
 
     # Nucleus dirs
@@ -393,6 +400,7 @@ def _nucleus_name(i: int) -> str:
 # ---------------------------------------------------------------------------
 
 def check_git_hooks(fix_mode: bool = False) -> list[CheckResult]:
+    """Validate that the repository pre-commit hook is installed."""
     results = []
     hook_path = ROOT / ".git" / "hooks" / "pre-commit"
     if hook_path.exists():
@@ -411,6 +419,7 @@ def check_git_hooks(fix_mode: bool = False) -> list[CheckResult]:
 # ---------------------------------------------------------------------------
 
 def check_system() -> list[CheckResult]:
+    """Validate host-level prerequisites such as disk space and ASCII hygiene."""
     results = []
 
     # Disk space > 1GB free
@@ -488,6 +497,7 @@ OLLAMA_BINARY_PATHS = [
 
 
 def check_ollama() -> list[CheckResult]:
+    """Validate Ollama installation, service health, models, and GPU access."""
     results = []
 
     # 1. Binary exists
@@ -583,6 +593,7 @@ def _check_gpu() -> list[CheckResult]:
 # ---------------------------------------------------------------------------
 
 def apply_fixes(all_results: list[CheckResult]) -> int:
+    """Apply supported automatic fixes for failed checks."""
     fixed = 0
     for r in all_results:
         if r.status != FAIL or not r.fix_cmd:
@@ -634,6 +645,7 @@ CATEGORIES_ORDER = [
 
 
 def print_human(all_results: list[CheckResult]) -> None:
+    """Print grouped validator results in a human-readable format."""
     print("=== CEX Setup Validator ===")
     print()
 
@@ -669,6 +681,7 @@ def print_human(all_results: list[CheckResult]) -> None:
 
 
 def print_json(all_results: list[CheckResult]) -> None:
+    """Print validator results as a JSON document."""
     checks = [r.to_dict() for r in all_results]
     ok_total = sum(1 for r in all_results if r.status == OK)
     fail_total = sum(1 for r in all_results if r.status == FAIL)
@@ -690,6 +703,7 @@ def print_json(all_results: list[CheckResult]) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
+    """Run the requested validator categories and emit the selected output format."""
     parser = argparse.ArgumentParser(description="CEX Setup Validator")
     parser.add_argument("--json", action="store_true", help="Machine-readable JSON output")
     parser.add_argument("--fix", action="store_true", help="Attempt auto-fix for FAIL items")
