@@ -4,7 +4,7 @@ id: bld_tools_workflow_node
 pillar: P04
 llm_function: CALL
 purpose: Real tools used during workflow_node production
-quality: null
+quality: 9.0
 title: "Tools Workflow Node"
 version: "1.1.0"
 author: n03_hybrid_review4
