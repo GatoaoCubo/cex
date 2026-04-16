@@ -4,7 +4,7 @@ id: bld_collaboration_churn_prevention_playbook
 pillar: P12
 llm_function: COLLABORATE
 purpose: How churn_prevention_playbook-builder works in crews with other builders
-quality: null
+quality: 8.9
 title: "Collaboration Churn Prevention Playbook"
 version: "1.0.0"
 author: n05_wave6
