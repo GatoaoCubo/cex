@@ -4,7 +4,7 @@ id: bld_knowledge_card_kubernetes_ai_requirement
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for kubernetes_ai_requirement production
-quality: null
+quality: 9.2
 title: "Knowledge Card Kubernetes AI Requirement"
 version: "1.0.0"
 author: wave7_n03_dev_manifests
