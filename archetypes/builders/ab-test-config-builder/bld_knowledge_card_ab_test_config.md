@@ -4,7 +4,7 @@ id: bld_knowledge_card_ab_test_config
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for ab_test_config production
-quality: null
+quality: 9.2
 title: "Knowledge Card Ab Test Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
