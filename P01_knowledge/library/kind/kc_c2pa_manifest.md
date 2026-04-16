@@ -3,12 +3,13 @@ id: kc_c2pa_manifest
 kind: knowledge_card
 title: C2PA 2.3 Content Credential Manifest
 version: 1.1.0
-quality: null
+quality: 9.1
 pillar: P01
 author: CEX Documentation Team
 date: 2023-11-15
 tags: [C2PA, provenance, digital assets, authenticity, metadata]
 last_modified: 2023-11-16
+density_score: 1.0
 ---
 
 # C2PA Manifest Specification
