@@ -4,7 +4,7 @@ id: bld_examples_white_label_config
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of white_label_config artifacts
-quality: null
+quality: 8.8
 title: "Examples White Label Config"
 version: "1.0.0"
 author: wave1_builder_gen_v2
