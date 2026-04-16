@@ -3,8 +3,9 @@ id: kc_fhir_agent_capability
 kind: knowledge_card
 title: HL7 FHIR R5 AI Agent Capability Declaration
 version: 1.0.0
-quality: null
+quality: 8.5
 pillar: P01
+density_score: 0.98
 ---
 
 **HL7 FHIR R5 AI Agent Capability Declaration**
