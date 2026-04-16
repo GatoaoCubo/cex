@@ -4,7 +4,7 @@ id: bld_examples_churn_prevention_playbook
 pillar: P07
 llm_function: GOVERN
 purpose: Golden and anti-examples of churn_prevention_playbook artifacts
-quality: null
+quality: 8.9
 title: "Examples Churn Prevention Playbook"
 version: "1.0.0"
 author: wave1_builder_gen_v2
