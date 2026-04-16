@@ -4,7 +4,7 @@ id: p03_sp_search_strategy_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining search_strategy-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Search Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
