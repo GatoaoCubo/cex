@@ -4,7 +4,7 @@ id: bld_knowledge_card_webinar_script
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge injection for webinar_script builder -- benchmarks, frameworks, patterns, pitfalls
-quality: null
+quality: 9.1
 title: "Webinar Script Knowledge Card"
 version: "1.0.0"
 author: n02_wave6
