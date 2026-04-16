@@ -4,7 +4,7 @@ id: bld_tools_sdk_example
 pillar: P04
 llm_function: CALL
 purpose: Tools available for sdk_example production
-quality: null
+quality: 8.9
 title: "Tools Sdk Example"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,22 +16,22 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-## Production Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_compile.py | Compiles ISOs to deployable artifact | During build phase |  
-| cex_score.py | Scores quality via 3-layer rubric | Post-validation |  
-| cex_retriever.py | Finds related SDK artifacts via TF-IDF | Pre-runtime setup |  
-| cex_doctor.py | Diagnoses frontmatter and structure issues | On first run or deployment |  
+## Production Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_compile.py | Compiles ISOs to deployable artifact | During build phase |
+| cex_score.py | Scores quality via 3-layer rubric | Post-validation |
+| cex_retriever.py | Finds related SDK artifacts via TF-IDF | Pre-runtime setup |
+| cex_doctor.py | Diagnoses frontmatter and structure issues | On first run or deployment |
 
-## Validation Tools  
-| Tool | Purpose | When |  
-|------|---------|------|  
-| cex_wave_validator.py | Validates frontmatter, ISO count, kind fields | Pre-commit |  
-| cex_hooks.py | Pre/post build validation hooks | On build events |  
-| cex_system_test.py | Full system validation (54 checks) | Release gate |  
+## Validation Tools
+| Tool | Purpose | When |
+|------|---------|------|
+| cex_wave_validator.py | Validates frontmatter, ISO count, kind fields | Pre-commit |
+| cex_hooks.py | Pre/post build validation hooks | On build events |
+| cex_system_test.py | Full system validation (54 checks) | Release gate |
 
-## External References  
-- Twilio Quickstart SDK style (auth + retry + pagination canonical patterns)  
-- GitHub idiomatic code examples (language-specific README conventions)  
+## External References
+- Twilio Quickstart SDK style (auth + retry + pagination canonical patterns)
+- GitHub idiomatic code examples (language-specific README conventions)
 - PEP8 (Python) / Google Java Style / StandardJS (language style guides)
