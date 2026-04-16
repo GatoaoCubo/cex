@@ -5,7 +5,7 @@ pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for hitl_config production -- human-in-the-loop gate specification
 sources: LangGraph interrupt(), CrewAI human_input, AutoGen HumanProxyAgent, Anthropic Tool Use confirmation, Labelbox confidence routing
-quality: null
+quality: 9.1
 title: "Knowledge Card Hitl Config"
 version: "1.0.0"
 author: n03_builder
