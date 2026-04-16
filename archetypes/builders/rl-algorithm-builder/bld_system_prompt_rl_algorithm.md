@@ -4,7 +4,7 @@ id: p03_sp_rl_algorithm_builder
 pillar: P03
 llm_function: BECOME
 purpose: System prompt defining rl_algorithm-builder persona and rules
-quality: null
+quality: 8.8
 title: "System Prompt Rl Algorithm"
 version: "1.0.0"
 author: wave1_builder_gen
