@@ -4,7 +4,7 @@ id: bld_instruction_expansion_play
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for expansion_play
-quality: null
+quality: 8.9
 title: "Instruction Expansion Play"
 version: "1.0.0"
 author: wave6_n06
