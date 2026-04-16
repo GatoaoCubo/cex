@@ -4,7 +4,7 @@ id: bld_tools_consolidation_policy
 pillar: P04
 llm_function: CALL
 purpose: Tools available for consolidation_policy production
-quality: null
+quality: 9.0
 title: "Tools: consolidation_policy-builder"
 version: "2.0.0"
 author: n06_commercial
