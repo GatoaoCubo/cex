@@ -4,7 +4,7 @@ id: bld_knowledge_card_rl_algorithm
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for rl_algorithm production
-quality: null
+quality: 9.2
 title: "Knowledge Card Rl Algorithm"
 version: "1.0.0"
 author: wave1_builder_gen
