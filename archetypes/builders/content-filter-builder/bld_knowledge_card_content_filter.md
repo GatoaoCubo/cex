@@ -4,7 +4,7 @@ id: bld_knowledge_card_content_filter
 pillar: P01
 llm_function: INJECT
 purpose: Domain knowledge for content_filter production
-quality: null
+quality: 9.2
 title: "Knowledge Card Content Filter"
 version: "1.1.0"
 author: n06_hybrid_review
