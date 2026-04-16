@@ -4,7 +4,7 @@ id: bld_config_github_issue_template
 pillar: P09
 llm_function: CONSTRAIN
 purpose: Naming, paths, limits for github_issue_template production
-quality: null
+quality: 8.6
 title: "Config Github Issue Template"
 version: "1.0.0"
 author: wave1_builder_gen_v2
@@ -16,22 +16,22 @@ updated: "2026-04-14"
 density_score: 0.85
 ---
 
-p05_git_{{name}}.md  
-## Naming Convention  
-Pattern: p05_git_{{name}}.md  
-Examples: p05_git_feature_request.md, p05_git_bug_report.md  
+p05_git_{{name}}.md
+## Naming Convention
+Pattern: p05_git_{{name}}.md
+Examples: p05_git_feature_request.md, p05_git_bug_report.md
 
-## Paths  
-/artifacts/github_issue_templates/p05/  
-/built/issues/p05/{{name}}.md  
+## Paths
+/artifacts/github_issue_templates/p05/
+/built/issues/p05/{{name}}.md
 
-## Limits  
-max_bytes: 3072  
-max_turns: 5  
-effort_level: medium  
+## Limits
+max_bytes: 3072
+max_turns: 5
+effort_level: medium
 
-## Hooks  
-pre_build: null  
-post_build: null  
-on_error: null  
+## Hooks
+pre_build: null
+post_build: null
+on_error: null
 on_quality_fail: null
