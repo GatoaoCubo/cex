@@ -4,7 +4,7 @@ id: bld_architecture_data_residency
 pillar: P08
 llm_function: CONSTRAIN
 purpose: Component map of data_residency -- inventory, dependencies
-quality: null
+quality: 9.0
 title: "Architecture Data Residency"
 version: "1.0.0"
 author: wave1_builder_gen_v2
