@@ -28,19 +28,19 @@ config: "identity:\n  empresa: \"CODEXA\"\n  nicho: pet_ecommerce\n  idioma: pt-
   \ r/brasil\n    - reclameaqui     # Complaint analysis\n  search:\n    - serper          # Google SERP ($0.30/1K)\n    -\
   \ exa             # Neural search (papers)\n    - gemini_search   # Google grounding\n    - openai_search   # GPT web search\n\
   \  trends:\n    - pytrends        # Google Trends\n    - keepa           # Amazon price history\n  rag:\n    - local_docs\
-  \      # {{BRAND_NAME}} product catalog + internal research\n\nstorm_perspectives:\n  - role: buyer\n    focus: \"preco frete reviews\
-  \ confianca avaliacao entrega\"\n  - role: seller\n    focus: \"posicionamento pricing qualidade-listing anuncio vendas\"\
-  \n  - role: analyst\n    focus: \"tendencias volume sazonalidade crescimento market-share\"\n  - role: marketer\n    focus:\
-  \ \"keywords SEO content-gaps social-proof hashtags\"\n  - role: consumer_researcher\n    focus: \"pain-points necessidades\
-  \ sentimento reclamacoes desejos\"\n\nmulti_model:\n  extraction: gemini-2.5-flash    # structured marketplace data\n  reasoning:\
-  \ gpt-5-mini           # competitive analysis\n  social: gemini-2.5-flash        # YouTube/Reddit volume\n  trends: gemini-2.5-flash\
-  \        # numerical trend data\n  critic: o4-mini                 # thinking-hard verification\n\nbudget:\n  firecrawl_monthly:\
-  \ 3000         # $19/mo tier\n  firecrawl_per_research: 10      # ~10 credits per deep scrape\n  serper_daily: 100     \
-  \          # $0.30/1K — ~$1/day budget\n\noutput:\n  formats: [html, pptx, json]\n  idioma: pt-BR\n  template: consulting\
-  \            # navy theme, executive summary\n\nquality:\n  crag_min_score: 0.7\n  critic_max_iterations: 3\n  final_min_score:\
-  \ 8.0\n\nmarketplace_schemas:\n  mercadolivre:\n    fields: [title, price, sold_qty, rating, seller, shipping, brand, specs,\
-  \ EAN]\n  shopee:\n    fields: [title, price, sold_qty, shop_rating, flash_sale, reviews]\n  amazon_br:\n    fields: [title,\
-  \ price, BSR, reviews, review_summary, keepa_history]"
+  \      # {{BRAND_NAME}} product catalog + internal research\n\nstorm_perspectives:\n  - role: buyer\n    focus: \"preco\
+  \ frete reviews confianca avaliacao entrega\"\n  - role: seller\n    focus: \"posicionamento pricing qualidade-listing anuncio\
+  \ vendas\"\n  - role: analyst\n    focus: \"tendencias volume sazonalidade crescimento market-share\"\n  - role: marketer\n\
+  \    focus: \"keywords SEO content-gaps social-proof hashtags\"\n  - role: consumer_researcher\n    focus: \"pain-points\
+  \ necessidades sentimento reclamacoes desejos\"\n\nmulti_model:\n  extraction: gemini-2.5-flash    # structured marketplace\
+  \ data\n  reasoning: gpt-5-mini           # competitive analysis\n  social: gemini-2.5-flash        # YouTube/Reddit volume\n\
+  \  trends: gemini-2.5-flash        # numerical trend data\n  critic: o4-mini                 # thinking-hard verification\n\
+  \nbudget:\n  firecrawl_monthly: 3000         # $19/mo tier\n  firecrawl_per_research: 10      # ~10 credits per deep scrape\n\
+  \  serper_daily: 100               # $0.30/1K — ~$1/day budget\n\noutput:\n  formats: [html, pptx, json]\n  idioma: pt-BR\n\
+  \  template: consulting            # navy theme, executive summary\n\nquality:\n  crag_min_score: 0.7\n  critic_max_iterations:\
+  \ 3\n  final_min_score: 8.0\n\nmarketplace_schemas:\n  mercadolivre:\n    fields: [title, price, sold_qty, rating, seller,\
+  \ shipping, brand, specs, EAN]\n  shopee:\n    fields: [title, price, sold_qty, shop_rating, flash_sale, reviews]\n  amazon_br:\n\
+  \    fields: [title, price, BSR, reviews, review_summary, keepa_history]"
 production_stats:
 - 500+ researches executed (6 months)
 - Avg 85-120 quality results per research (after CRAG)

@@ -1,0 +1,27 @@
+id: ex_prompt_template_q2_blog
+kind: prompt_template
+pillar: P03
+title: 'Example Prompt Template: Q2 Blog Format'
+version: 1.0.0
+created: 2026-04-16
+updated: 2026-04-16
+author: n02_marketing
+domain: q2_content_pipeline
+quality: null
+brand_placeholders:
+- BRAND_NAME
+- BRAND_VOICE
+- BRAND_TONE
+- BRAND_AUDIENCE
+- BRAND_CONTENT_THEMES
+- BRAND_DOMAIN
+tags:
+- prompt_template
+- blog
+- editorial
+- q2
+- n02
+tldr: Reusable long-form prompt for weekly Q2 blog production with strong brand adaptation.
+density_score: 0.91
+new_brand_variables:
+- '`EDITORIAL_GOAL`: the conversion or education objective for the article.'
