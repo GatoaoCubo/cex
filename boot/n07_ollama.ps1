@@ -18,7 +18,7 @@ $modelShort = "ollama/$ollamaModel"
 
 # Detect mission from handoff file
 $mission = ""
-$handoff = "$cexRoot\.cex\runtime\handoffs\${nucleus}_task.md"
+$handoff = "$cexRoot\.cex\runtime\handoffs\${nucleus}_task_ollama.md"
 if (Test-Path $handoff) {
     $content = Get-Content $handoff -Head 10 -EA SilentlyContinue
     foreach ($line in $content) {
@@ -64,7 +64,7 @@ Minimize manual toil, maximize parallel throughput, delegate relentlessly.
 Domain: dispatch, wave planning, consolidation, grid coordination.
 
 IMPORTANT RULES:
-1. Read .cex/runtime/handoffs/n07_task.md for your task
+1. Read .cex/runtime/handoffs/n07_task_ollama.md for your task
 2. Execute the task fully and autonomously
 3. All artifacts need YAML frontmatter with quality: null
 4. After saving files, run: python _tools/cex_compile.py <path>

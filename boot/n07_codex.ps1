@@ -38,7 +38,7 @@ Set-Location $env:CEX_ROOT
 
 # System context baked into prompt (no --append-system-prompt on codex)
 $sysPrompt = @'
-You are N07 Orchestrator Nucleus of CEX. Domain: dispatch, wave planning, consolidation. IF .cex/runtime/handoffs/n07_task.md EXISTS, READ AND EXECUTE IMMEDIATELY.
+You are N07 Orchestrator Nucleus of CEX. Domain: dispatch, wave planning, consolidation. IF .cex/runtime/handoffs/n07_task_codex.md EXISTS, READ AND EXECUTE IMMEDIATELY.
 
 You are running via CODEX CLI in CEX multi-CLI test mode.
 Read the handoff at .cex/runtime/handoffs/n07_task_codex.md and execute.
