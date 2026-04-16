@@ -4,7 +4,7 @@ id: bld_instruction_search_strategy
 pillar: P03
 llm_function: REASON
 purpose: Step-by-step production process for search_strategy
-quality: null
+quality: 8.8
 title: "Instruction Search Strategy"
 version: "1.0.0"
 author: wave1_builder_gen
