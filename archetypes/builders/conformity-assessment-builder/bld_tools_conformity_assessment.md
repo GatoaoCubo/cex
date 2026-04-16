@@ -4,7 +4,7 @@ id: bld_tools_conformity_assessment
 pillar: P04
 llm_function: CALL
 purpose: Production, validation, and external reference tools for conformity assessment builds
-quality: null
+quality: 9.2
 title: "Conformity Assessment Builder -- Tools"
 version: "1.0.0"
 author: wave7_n05
