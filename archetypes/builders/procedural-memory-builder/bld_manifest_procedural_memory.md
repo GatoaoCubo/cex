@@ -4,7 +4,7 @@ id: procedural-memory-builder
 pillar: P10
 llm_function: BECOME
 purpose: Builder identity, capabilities, routing for procedural_memory
-quality: null
+quality: 8.9
 title: "Manifest: procedural_memory-builder"
 version: "2.0.0"
 author: n06_commercial
