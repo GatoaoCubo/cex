@@ -4,7 +4,7 @@ id: bld_output_template_nucleus_def
 pillar: P05
 llm_function: PRODUCE
 purpose: Template with vars for nucleus_def production
-quality: null
+quality: 9.1
 title: "Output Template Nucleus Def"
 version: "1.0.0"
 author: n05_wave8
